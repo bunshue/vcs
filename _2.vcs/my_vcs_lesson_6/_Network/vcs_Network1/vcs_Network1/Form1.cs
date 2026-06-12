@@ -172,14 +172,10 @@ namespace vcs_Network1
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //連線到Google，使用預設的browser
-            Process.Start("http://www.google.com/");
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //連線到Google，使用IE
-            Process.Start("IExplore.exe", "http://www.google.com");
         }
 
         //------------------------------------------------------------  # 60個
@@ -251,8 +247,6 @@ namespace vcs_Network1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //開啟網頁
-            Process.Start("https://www.google.com.tw/?gws_rd=ssl");
         }
 
         private void button5_Click(object sender, EventArgs e)

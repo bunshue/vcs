@@ -58,24 +58,14 @@ namespace vcs_Class2
             button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
             groupBox1.Size = new Size(200, 450);
-            groupBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            groupBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             groupBox2.Size = new Size(200, 310);
-            groupBox2.Location = new Point(x_st + dx * 3, y_st + dy * 6+30);
+            groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 6 + 30);
 
-            richTextBox1.Size = new Size(400, 760);
-            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            richTextBox1.Size = new Size(600, 760);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             x_st = 10;
@@ -91,7 +81,7 @@ namespace vcs_Class2
             bt_class11.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             bt_class12.Location = new Point(x_st + dx * 0, y_st + dy * 2);
 
-            this.Size = new Size(1280, 820);
+            this.Size = new Size(1270, 820);
             this.Text = "vcs_Class2";
 
             //設定執行後的表單起始位置, 正中央
@@ -102,249 +92,6 @@ namespace vcs_Class2
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button0_Click(object sender, EventArgs e)
-        {
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //class test
-            Car1 Benz1 = new Car1();
-            Benz1.SetSpeed(500);			// 速度值超過 200
-            richTextBox1.Text += "Benz1.GetSpeed() = " + Benz1.GetSpeed() + "\n";	// 顯示速度最大值200
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            Car2 Benz2 = new Car2();
-            Benz2.Speed = 199;
-            richTextBox1.Text += "現在速度 : " + Benz2.Speed + "\n";
-            richTextBox1.Text += "加速 ...\n";
-            Benz2.Accelerate();
-            richTextBox1.Text += "現在速度 : " + Benz2.Speed + "\n";
-            richTextBox1.Text += "加速 ...\n";
-            Benz2.Accelerate();
-            richTextBox1.Text += "現在速度 : " + Benz2.Speed + "\n";
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            Student1 Peter = new Student1();
-            richTextBox1.Text += " Peter的資料-->使用Student()建構式\n";
-            Peter.GetShow();
-            Student1 David = new Student1(56);
-            richTextBox1.Text += " David的資料-->使用Student(56)建構式\n";
-            David.GetShow();
-            Student1 Mary = new Student1(48, 150);
-            richTextBox1.Text += " Mary的資料 -->使用Student(48, 150)建構式\n";
-            Mary.GetShow();
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            Student2 David2 = new Student2(56);
-            richTextBox1.Text += " David2的資料-->使用Student(56)建構式\n";
-            David2.GetShow();
-            Student2 Mary2 = new Student2(48, 150);
-            richTextBox1.Text += " Mary2的資料 -->使用Student(48, 150)建構式\n";
-            Mary2.GetShow();
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            Student3 Peter3 = new Student3();
-            richTextBox1.Text += " Peter3的資料-->使用Student()建構式\n";
-            Peter3.GetShow();
-            Student3 David3 = new Student3(56);
-            richTextBox1.Text += " David3的資料-->使用Student(56)建構式\n";
-            David3.GetShow();
-            Student3 Mary3 = new Student3(48, 150);
-            richTextBox1.Text += " Mary3的資料 -->使用Student(48, 150)建構式\n";
-            Mary3.GetShow();
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        //之後 class PersonClass 在獨立成一個檔案 PersonClass.cs
-        class PersonClass
-        {
-            //自動實作屬性
-            public string Name { get; set; }
-            public byte Height { get; set; }
-
-            //定義靜態方法
-            public void showInfo(PersonClass first)
-            {
-                //指派屬性值做物件初始化
-                first = new PersonClass() { Name = "林小明", Height = 172 };
-            }
-
-            //定義靜態方法
-            public void display(ref PersonClass second)
-            {
-                //指派屬性值做物件初始化
-                second = new PersonClass { Name = "江大海", Height = 168 };
-            }
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            PersonClass pern = new PersonClass() { Name = "王小風", Height = 176 };
-
-            richTextBox1.Text += "By Value -> \n";
-            //Passing By Value - 輸出王小風
-            pern.showInfo(pern);
-
-            richTextBox1.Text += "姓名 : " + pern.Name + "\t身高 : " + pern.Height + "\n";
-
-            richTextBox1.Text += "By Reference -> \n";
-            //Passing By Reference - 輸出江大海
-            pern.display(ref pern);
-
-            richTextBox1.Text += pern.Name + "\t" + pern.Height + "\n";
-            richTextBox1.Text += "姓名 : " + pern.Name + "\t身高 : " + pern.Height + "\n";
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            //不重複之排列
-
-            int[] Choices;
-            int num_candidates = 10;
-            Choices = Extensions.RandomArrangement(num_candidates);
-
-            foreach (int i in Choices)
-            {
-                richTextBox1.Text += i.ToString() + " ";
-            }
-            richTextBox1.Text += "\n";
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        class MyImage       // 定義MyImage類別
-        {
-            // 宣告私有變數_x, _y用來表示目前車子的X, Y座標位置
-            private int _x, _y;
-            //private Bitmap bmp;
-
-            // 宣告_speed為私有變數，表示該變數只能在Car類別內使用
-            private int _speed = 0;
-
-            private int _angle = 10; // 私有_angle變數初值為10
-
-            public int Angle    	// 定義Angle唯讀屬性
-            {						// Angle屬性只有get區段沒有set區段
-                get
-                {
-                    return _angle;
-                }
-            }
-
-            // 宣告Speed為公開屬性
-            public int Speed
-            {
-                get     // get存取子可傳回屬性值
-                {
-                    return _speed;// 傳回屬性值
-                }
-                set     // set存取子可設定屬性值
-                {
-                    if (value < 0)
-                    {
-                        value = 0;// 速度不得低於 0
-                    }
-                    if (value > 200)
-                    {
-                        value = 200;// 速度不得高於 200
-                    }
-                    _speed = value;// 設定屬性值
-                }
-            }
-            // 第一種加速方法
-            public void Accelerate()
-            {
-                this.Speed++;
-            }
-
-            // 第二種加速方法
-            public void Accelerate(int addSpeed)
-            {
-                this.Speed += addSpeed;
-            }
-
-            // 第三種加速方法
-            public void Accelerate(string S)
-            {
-                if (S == "STOP")
-                {
-                    this.Speed = 0;
-                }
-            }
-
-            // 定義 ImageProcessing 方法
-            public void ImageProcessing(int vX, int vY)
-            {
-                _x = vX;
-                _y = vY;
-            }
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            //string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            //Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-
-            //MyImage Benz = new MyImage();
-            //Benz.ImageProcessing(100, 200);
-
-            MyImage Benz = new MyImage();
-
-            richTextBox1.Text += "現在速度 : " + Benz.Speed + "\n";
-
-            richTextBox1.Text += "加速 ...\n";
-            Benz.Accelerate();		// 執行第一種加速方法
-            richTextBox1.Text += "現在速度 : " + Benz.Speed + "\n";
-            richTextBox1.Text += "加速 10 ...\n";
-            Benz.Accelerate(10);		// 執行第二種加速方法
-            richTextBox1.Text += "現在速度 : " + Benz.Speed + "\n";
-            richTextBox1.Text += "停車 ...\n";
-            Benz.Accelerate("STOP");	// 執行第三種加速方法
-            richTextBox1.Text += "現在速度 : " + Benz.Speed + "\n";
-
-            //MyImage Benz = new MyImage();
-            Benz.Speed = 500;			// 速度值超過 200
-            richTextBox1.Text += "Benz.Speed = " + Benz.Speed + "\n";
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
         }
 
         //------------------------------------------------------------  # 60個
@@ -409,11 +156,10 @@ namespace vcs_Class2
             }
         }
 
-        private void button10_Click(object sender, EventArgs e)
+        private void button0_Click(object sender, EventArgs e)
         {
             //測試 MyDateTime 1
             //為年表所做的時間分析程式HDateTime.Parse
-
 
             string dd1 = "541年7月21日";
             string dd2 = "-541年17月21日";
@@ -500,7 +246,7 @@ namespace vcs_Class2
             return result;
         }
 
-        private void button11_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             //測試 MyDateTime 2
             PersonInfo av1 = new PersonInfo();
@@ -521,10 +267,11 @@ namespace vcs_Class2
             else
                 av1.Age = myAge.Years;
             richTextBox1.Text += "年齡：" + av1.Age.ToString() + "\n";
-
         }
 
-        private void button12_Click(object sender, EventArgs e)
+        //------------------------------------------------------------  # 60個
+
+        private void button2_Click(object sender, EventArgs e)
         {
             //測試 MyDateTime 3
             string txt = "2006/3/11";
@@ -542,7 +289,120 @@ namespace vcs_Class2
                 richTextBox1.Text += "得到DateTime資料： " + dt.ToString() + "\n";
             else
                 richTextBox1.Text += "DateTime.TryParse 失敗\n";
+        }
 
+        //------------------------------------------------------------  # 60個
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //class test
+            Car1 Benz1 = new Car1();
+            Benz1.SetSpeed(500);			// 速度值超過 200
+            richTextBox1.Text += "Benz1.GetSpeed() = " + Benz1.GetSpeed() + "\n";	// 顯示速度最大值200
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            Car2 Benz2 = new Car2();
+            Benz2.Speed = 199;
+            richTextBox1.Text += "現在速度 : " + Benz2.Speed + "\n";
+            richTextBox1.Text += "加速 ...\n";
+            Benz2.Accelerate();
+            richTextBox1.Text += "現在速度 : " + Benz2.Speed + "\n";
+            richTextBox1.Text += "加速 ...\n";
+            Benz2.Accelerate();
+            richTextBox1.Text += "現在速度 : " + Benz2.Speed + "\n";
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            Student1 Peter = new Student1();
+            richTextBox1.Text += " Peter的資料-->使用Student()建構式\n";
+            Peter.GetShow();
+            Student1 David = new Student1(56);
+            richTextBox1.Text += " David的資料-->使用Student(56)建構式\n";
+            David.GetShow();
+            Student1 Mary = new Student1(48, 150);
+            richTextBox1.Text += " Mary的資料 -->使用Student(48, 150)建構式\n";
+            Mary.GetShow();
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            Student2 David2 = new Student2(56);
+            richTextBox1.Text += " David2的資料-->使用Student(56)建構式\n";
+            David2.GetShow();
+            Student2 Mary2 = new Student2(48, 150);
+            richTextBox1.Text += " Mary2的資料 -->使用Student(48, 150)建構式\n";
+            Mary2.GetShow();
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            Student3 Peter3 = new Student3();
+            richTextBox1.Text += " Peter3的資料-->使用Student()建構式\n";
+            Peter3.GetShow();
+            Student3 David3 = new Student3(56);
+            richTextBox1.Text += " David3的資料-->使用Student(56)建構式\n";
+            David3.GetShow();
+            Student3 Mary3 = new Student3(48, 150);
+            richTextBox1.Text += " Mary3的資料 -->使用Student(48, 150)建構式\n";
+            Mary3.GetShow();
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //不重複之排列
+
+            int[] Choices;
+            int num_candidates = 10;
+            Choices = Extensions.RandomArrangement(num_candidates);
+
+            foreach (int i in Choices)
+            {
+                richTextBox1.Text += i.ToString() + " ";
+            }
+            richTextBox1.Text += "\n";
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -570,46 +430,6 @@ namespace vcs_Class2
         }
 
         private void button19_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button20_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button21_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button22_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button23_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button24_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button25_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button26_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button27_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button28_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button29_Click(object sender, EventArgs e)
         {
         }
 
@@ -989,7 +809,6 @@ namespace vcs_Class2
 
 
 /*
-
 測試struct與class
 
         public struct MyRectangle

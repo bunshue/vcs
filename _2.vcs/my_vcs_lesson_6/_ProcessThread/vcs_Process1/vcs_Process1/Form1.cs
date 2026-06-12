@@ -1788,3 +1788,16 @@ Process.Start(regeditstr + "\\regedit.exe");//打开注册表
             //Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Form1());
 
+
+/*
+            //連線到Google，使用預設的browser
+            Process.Start("http://www.google.com/");
+
+            //連線到Google，使用IE
+            Process.Start("IExplore.exe", "http://www.google.com");
+
+            //開啟網頁
+            Process.Start("https://www.google.com.tw/?gws_rd=ssl");
+*/
+
+

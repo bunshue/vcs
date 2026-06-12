@@ -79,7 +79,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(639, 222);
+            this.richTextBox1.Location = new System.Drawing.Point(667, 213);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 1;
@@ -87,7 +87,7 @@
             // 
             // webBrowser1
             // 
-            this.webBrowser1.Location = new System.Drawing.Point(640, 12);
+            this.webBrowser1.Location = new System.Drawing.Point(668, 3);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
             this.webBrowser1.Size = new System.Drawing.Size(100, 100);
@@ -98,7 +98,7 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.White;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(640, 118);
+            this.pictureBox1.Location = new System.Drawing.Point(668, 109);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 100);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -174,7 +174,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(652, 242);
+            this.bt_clear.Location = new System.Drawing.Point(680, 233);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 12;
@@ -200,7 +200,6 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(200, 60);
             this.button8.TabIndex = 14;
-            this.button8.Text = "WebClient test";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -233,7 +232,6 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(200, 60);
             this.button12.TabIndex = 17;
-            this.button12.Text = "下載網頁資料";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -244,7 +242,6 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(200, 60);
             this.button13.TabIndex = 18;
-            this.button13.Text = "下載網頁資料";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -266,7 +263,6 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(200, 60);
             this.button15.TabIndex = 20;
-            this.button15.Text = "WebClient 2";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -299,7 +295,6 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(200, 60);
             this.button0.TabIndex = 24;
-            this.button0.Text = "WebClient 3";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -364,6 +359,7 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(200, 60);
             this.button23.TabIndex = 30;
+            this.button23.Text = "WebClient 4";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
@@ -374,6 +370,7 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(200, 60);
             this.button24.TabIndex = 31;
+            this.button24.Text = "WebClient 5";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
@@ -384,7 +381,7 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(200, 60);
             this.button25.TabIndex = 32;
-            this.button25.Text = "t";
+            this.button25.Text = "WebClient 6";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -395,6 +392,7 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(200, 60);
             this.button26.TabIndex = 33;
+            this.button26.Text = "WebClient 7";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 

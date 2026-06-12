@@ -112,24 +112,6 @@ namespace vcs_WebClient
 
         private void button0_Click(object sender, EventArgs e)
         {
-            try
-            {
-                string url = @"https://www.google.com.tw/";
-                WebClient wc = new WebClient();
-
-                //ServicePointManager.SecurityProtocol = Protocols.protocol_Tls11 | Protocols.protocol_Tls12;
-                //richTextBox1.Text += "SecurityProtocol = " + ((int)(ServicePointManager.SecurityProtocol)).ToString() + "\n";
-                ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls;
-
-                string res = wc.DownloadString(url);
-
-                richTextBox1.Text += res + "\n";
-            }
-
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "ERROR=" + ex.ToString() + "\n";
-            }
 
         }
 
@@ -866,55 +848,12 @@ namespace vcs_WebClient
 
         private void button12_Click(object sender, EventArgs e)
         {
-            WebClient wc = new WebClient();     // 建立 WebClient
-            byte[] buffer = wc.DownloadData("http://k-db.com/?p=all&download=csv");
-            string str = Encoding.Default.GetString(buffer);
-            string[] rows = str.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
-
-            richTextBox1.Text += "len = " + rows.Length.ToString() + "\n";
-            foreach (string r in rows)
-            {
-                richTextBox1.Text += r + "\n";
-            }
-
-            // １行目をラベルに表示
-
-            richTextBox1.Text += "取得第一行資料 : " + rows[0] + "\n";
-
-            // ２行目以下はカンマ区切りから文字列の配列に変換しておく
-            List<string[]> list = new List<string[]>();
-            rows.ToList().ForEach(row => list.Add(row.Split(new char[] { ',' })));
-
-            // ヘッダの作成（データバインド用の設計）
-            list.First().Select((item, cnt) => new { Count = cnt, Item = item }).ToList().ForEach(header =>
-            {
-                /*
-                    {
-                        Header = header.Item,
-                        DisplayMemberBinding = new Binding(string.Format("[{0}]", header.Count))
-                    };
-                */
-            });
         }
 
         //------------------------------------------------------------  # 60個
 
-        public string[] GetCSVData()
-        {
-            WebClient wc = new WebClient();     // 建立 WebClient
-            byte[] buffer = wc.DownloadData("http://k-db.com/?p=all&download=csv");
-            string str = Encoding.Default.GetString(buffer);
-            return str.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-        }
-
         private void button13_Click(object sender, EventArgs e)
         {
-            string[] rows = GetCSVData();
-            richTextBox1.Text += "len = " + rows.Length.ToString() + "\n";
-            foreach (string r in rows)
-            {
-                richTextBox1.Text += r + "\n";
-            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -960,32 +899,6 @@ namespace vcs_WebClient
 
         private void button15_Click(object sender, EventArgs e)
         {
-            //WebClient 2
-            WebClient wc = new WebClient();     // 建立 WebClient
-            try
-            {
-                //wc.DownloadFile(url, fileName);
-                wc.DownloadFile("http://www.devbg.org/img/Logo-BASD.jpg", @"C:\dddddddddd\txt.jpg");
-                richTextBox1.Text += "下載完成\n";
-            }
-            catch (ArgumentException ae)
-            {
-                Console.WriteLine("{0} - {1}", ae.GetType(), ae.Message);
-            }
-            catch (WebException webEx)
-            {
-                Console.WriteLine("{0} - {1}", webEx.GetType(), webEx.Message);
-                Console.WriteLine("Destination not found!");
-            }
-            catch (NotSupportedException supportEx)
-            {
-                Console.WriteLine("{0} - {1}", supportEx.GetType(), supportEx.Message);
-                Console.WriteLine(supportEx.Message);
-            }
-            catch (Exception allExp)
-            {
-                Console.WriteLine("{0} - {1}", allExp.GetType(), allExp.Message);
-            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -1109,7 +1022,6 @@ namespace vcs_WebClient
             string str = wc.DownloadString("/");
             Console.WriteLine(str);
 
-
             //----------------------以下為OpenRead()以流的方式讀取----------------------
             wc.Headers.Add("Accept", "image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, application/x-shockwave-flash, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, */*");
             wc.Headers.Add("Accept-Language", "zh-cn");
@@ -1136,8 +1048,9 @@ namespace vcs_WebClient
             }
 
             Console.WriteLine(wc.QueryString.Count);    //輸出0
-
         }
+
+        //6060
 
         private void button21_Click(object sender, EventArgs e)
         {
@@ -1156,6 +1069,8 @@ namespace vcs_WebClient
             Console.WriteLine(sender.ToString());   //輸出 System.Net.WebClient   觸發事件的對象
             Console.WriteLine(e.Result);    //輸出頁面源代碼
         }
+
+        //6060
 
         private void button22_Click(object sender, EventArgs e)
         {
@@ -1176,13 +1091,56 @@ namespace vcs_WebClient
             Console.WriteLine("現在完成了還是沒完成呢？");
         }
 
+        //6060
+
         private void button23_Click(object sender, EventArgs e)
         {
+            WebClient wc = new WebClient();     // 建立 WebClient
+            byte[] buffer = wc.DownloadData("http://k-db.com/?p=all&download=csv");
+            string str = Encoding.Default.GetString(buffer);
 
+            string[] rows = str.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+
+            richTextBox1.Text += "len = " + rows.Length.ToString() + "\n";
+            foreach (string r in rows)
+            {
+                richTextBox1.Text += r + "\n";
+            }
         }
+
+        //6060
 
         private void button24_Click(object sender, EventArgs e)
         {
+            WebClient wc = new WebClient();     // 建立 WebClient
+            byte[] buffer = wc.DownloadData("http://k-db.com/?p=all&download=csv");
+            string str = Encoding.Default.GetString(buffer);
+            string[] rows = str.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+
+            richTextBox1.Text += "len = " + rows.Length.ToString() + "\n";
+            foreach (string r in rows)
+            {
+                richTextBox1.Text += r + "\n";
+            }
+
+            // １行目をラベルに表示
+
+            richTextBox1.Text += "取得第一行資料 : " + rows[0] + "\n";
+
+            // ２行目以下はカンマ区切りから文字列の配列に変換しておく
+            List<string[]> list = new List<string[]>();
+            rows.ToList().ForEach(row => list.Add(row.Split(new char[] { ',' })));
+
+            // ヘッダの作成（データバインド用の設計）
+            list.First().Select((item, cnt) => new { Count = cnt, Item = item }).ToList().ForEach(header =>
+            {
+                /*
+                    {
+                        Header = header.Item,
+                        DisplayMemberBinding = new Binding(string.Format("[{0}]", header.Count))
+                    };
+                */
+            });
 
         }
 
@@ -1190,7 +1148,6 @@ namespace vcs_WebClient
 
         private void button25_Click(object sender, EventArgs e)
         {
-            //test
             WebClient wc = new WebClient();
             wc.DownloadStringAsync(new Uri("http://data.taipei.gov.tw/opendata/apply/json/RjQzRThDNjUtMzU3OS00MTU5LUEwOUEtMUI2NzFDOTE5NDcz"));
             wc.DownloadStringCompleted += wc_DownloadStringCompleted333;
@@ -1221,13 +1178,59 @@ namespace vcs_WebClient
 
         private void button26_Click(object sender, EventArgs e)
         {
+            try
+            {
+                string url = @"https://www.google.com.tw/";
+                WebClient wc = new WebClient();
 
+                //ServicePointManager.SecurityProtocol = Protocols.protocol_Tls11 | Protocols.protocol_Tls12;
+                //richTextBox1.Text += "SecurityProtocol = " + ((int)(ServicePointManager.SecurityProtocol)).ToString() + "\n";
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls;
+
+                string res = wc.DownloadString(url);
+
+                richTextBox1.Text += res + "\n";
+            }
+
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "ERROR=" + ex.ToString() + "\n";
+            }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button27_Click(object sender, EventArgs e)
         {
-
+            //WebClient 2
+            WebClient wc = new WebClient();     // 建立 WebClient
+            try
+            {
+                //wc.DownloadFile(url, fileName);
+                wc.DownloadFile("http://www.devbg.org/img/Logo-BASD.jpg", @"C:\dddddddddd\txt.jpg");
+                richTextBox1.Text += "下載完成\n";
+            }
+            catch (ArgumentException ae)
+            {
+                Console.WriteLine("{0} - {1}", ae.GetType(), ae.Message);
+            }
+            catch (WebException webEx)
+            {
+                Console.WriteLine("{0} - {1}", webEx.GetType(), webEx.Message);
+                Console.WriteLine("Destination not found!");
+            }
+            catch (NotSupportedException supportEx)
+            {
+                Console.WriteLine("{0} - {1}", supportEx.GetType(), supportEx.Message);
+                Console.WriteLine(supportEx.Message);
+            }
+            catch (Exception allExp)
+            {
+                Console.WriteLine("{0} - {1}", allExp.GetType(), allExp.Message);
+            }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button28_Click(object sender, EventArgs e)
         {
@@ -1283,10 +1286,7 @@ namespace vcs_WebClient
         {
             public StarSignInfo StarSign { get; set; }
             public string Date { get; set; }
-
-
             public string Desc { get; set; }
-
 
             public System.Collections.Generic.Dictionary<string, string> Datas { get; set; }
 
@@ -1294,14 +1294,12 @@ namespace vcs_WebClient
             {
                 Datas = new System.Collections.Generic.Dictionary<string, string>();
             }
-
         }
 
         /// <summary>
         /// 星座資料
         /// </summary>
         public static System.Collections.Generic.List<StarSignInfo> Datas { get; set; }
-
 
         //Ctor
         static StarSignsUtil()
@@ -1321,7 +1319,6 @@ namespace vcs_WebClient
             Datas.Add(new StarSignInfo { Title = "雙魚座", Id = "pisces", DateRange = "02/19-03/20" });
         }
 
-
         public static FateResult GetFateToday(string title)
         {
             var sInfo = Datas.SingleOrDefault(x => x.Title == title);
@@ -1329,7 +1326,6 @@ namespace vcs_WebClient
             {
                 throw new System.Exception("此星座我沒有找到");
             }
-
 
             var result = new StarSignsUtil.FateResult();
             result.StarSign = sInfo;
