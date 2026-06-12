@@ -140,6 +140,7 @@ namespace vcs_Thread
             groupBox10.Size = new Size(W, H);
             groupBox13.Size = new Size(W, H);
             groupBox12.Size = new Size(W, H);
+            groupBox14.Size = new Size(W * 2 + 10, H);
             groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
@@ -153,10 +154,11 @@ namespace vcs_Thread
             groupBox9.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             groupBox10.Location = new Point(x_st + dx * 2, y_st + dy * 2);
             groupBox13.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            groupBox11.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            groupBox11.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            groupBox14.Location = new Point(x_st + dx * 4, y_st + dy * 1);
 
             richTextBox1.Size = new Size(400, 690 + 50);
-            richTextBox1.Location = new Point(x_st + dx * 6 - 100, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             x_st = 10;
@@ -203,7 +205,7 @@ namespace vcs_Thread
             lb_G.Location = new Point(x_st + dx * 0 + 130, y_st + dy * 1);
             lb_B.Location = new Point(x_st + dx * 0 + 130, y_st + dy * 2);
 
-            this.Size = new Size(1600, 750 + 50);
+            this.Size = new Size(1700, 750 + 50);
             this.Text = "vcs_Thread";
 
             //設定執行後的表單起始位置, 正中央
@@ -1014,6 +1016,80 @@ namespace vcs_Thread
             //狀態
 
         }
+
+        //------------------------------------------------------------  # 60個
+
+        static void f1()
+        {
+            System.Threading.Thread y = new System.Threading.Thread(new System.Threading.ThreadStart(f2));
+            y.Start();
+            y.Join();
+            Console.WriteLine("This is F1.{0}", 1);
+        }
+
+        static void f2()
+        {
+            Console.WriteLine("This is F2.{0}", 1);
+        }
+
+        private void button140_Click(object sender, EventArgs e)
+        {
+            //新進 0
+
+            //Thread.Join()用法的理解
+            //指在一線程裡面調用另一線程join方法時，表示將本線程阻塞直至另一線程終止時再執行
+
+            System.Threading.Thread x = new System.Threading.Thread(new System.Threading.ThreadStart(f1));
+            x.Start();
+            Console.WriteLine("This is Main.{0}", 1);
+
+            x.Join();  // 比較這行有無的狀況
+
+            Console.WriteLine("This is Main.{0}", 2);
+            Console.ReadLine();
+       }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button141_Click(object sender, EventArgs e)
+        {
+            //新進 1
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button142_Click(object sender, EventArgs e)
+        {
+            //新進 2
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button143_Click(object sender, EventArgs e)
+        {
+            //新進 3
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button144_Click(object sender, EventArgs e)
+        {
+            //新進 4
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button145_Click(object sender, EventArgs e)
+        {
+            //新進 5
+
+        }
+
+        //------------------------------------------------------------  # 60個
 
     }
 

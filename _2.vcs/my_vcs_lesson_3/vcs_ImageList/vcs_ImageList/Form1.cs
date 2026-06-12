@@ -9,6 +9,16 @@ using System.Windows.Forms;
 
 using System.Collections;//for Hashtable
 
+/*
+imageList1屬性/Images/集合/加入圖片
+
+ImageList 的寬高只能 1~256
+
+imageList1 = new ImageList () ;
+imageList1.ImageSize = new Size(255,255);
+imageList 的圖案最多只能到255X255
+*/
+
 namespace vcs_ImageList
 {
     public partial class Form1 : Form

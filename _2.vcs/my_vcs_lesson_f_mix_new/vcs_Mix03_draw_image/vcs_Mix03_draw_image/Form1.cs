@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
-using System.Drawing.Imaging;   //for ImageFormat, ImageLockMode, Encoder, ImageCodecInfo, ImageAttributes
+using System.Drawing.Imaging;   //for ImageFormat, ImageLockMode, Encoder, ImageCodecInfo, ImageAttributes, PixelFormat
 using System.Drawing.Drawing2D;
 using System.Reflection;    //for Assembly
 using System.Security.Cryptography; //for HashAlgorithm
@@ -485,7 +485,7 @@ namespace vcs_Mix03_draw_image
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
-            System.Drawing.StringFormat drawFormat = new System.Drawing.StringFormat();
+            StringFormat drawFormat = new StringFormat();
             drawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
             g.DrawString("畫字串畫直的", this.Font, new SolidBrush(Color.Black), 300, 100, drawFormat);
 
@@ -531,7 +531,7 @@ namespace vcs_Mix03_draw_image
 
             Graphics g = pictureBox1.CreateGraphics();
 
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
 
             int Cx = 200;
             int Cy = 70;
@@ -737,11 +737,52 @@ namespace vcs_Mix03_draw_image
 
         private void button16_Click(object sender, EventArgs e)
         {
+            //Bitmap縮放圖片大小
+
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+
+            //取得原始大小的图像
+            //Bitmap bitmap1 = new Bitmap(filename);
+
+            //得到缩放后的图像
+            //Bitmap bitmap2 = new Bitmap(bitmap1, this.pictureBox1.Width, this.pictureBox1.Height);   //縮放圖片大小
+
+
+            //以任意角度旋转显示图像
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            Bitmap bitmap1 = new Bitmap(filename);
+
+            Graphics g = this.pictureBox1.CreateGraphics();//实例化绘图对象
+            float MyAngle = 0;//旋转的角度
+            while (MyAngle < 360)
+            {
+                TextureBrush MyBrush = new TextureBrush(bitmap1);//实例化TextureBrush类
+                this.pictureBox1.Refresh();//使工作区无效
+                MyBrush.RotateTransform(MyAngle);//以指定角度旋转图像
+                g.FillRectangle(MyBrush, 0, 0, this.ClientRectangle.Width, this.ClientRectangle.Height);//绘制旋转后的图像
+                MyAngle += 0.5f;//增加旋转的角度
+                System.Threading.Thread.Sleep(50);//使线程休眠50毫秒
+            }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button17_Click(object sender, EventArgs e)
         {
+            string png_filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_angry_bird\Angry-Birds07.png";
 
+            //PNG 轉 BMP
+            Image PngImg = Image.FromFile(png_filename);
+            Bitmap myImage = new Bitmap(PngImg.Width, PngImg.Height, PixelFormat.Format32bppRgb);
+            using (Graphics g = Graphics.FromImage(myImage))
+            {
+                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                g.SmoothingMode = SmoothingMode.HighQuality;
+                g.CompositingQuality = CompositingQuality.HighQuality;
+                g.DrawImage(PngImg, 0, 0);
+            }
+            PngImg.Save(@"tmp_png2bmp.bmp", ImageFormat.Bmp);
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -794,6 +835,4 @@ namespace vcs_Mix03_draw_image
 /*  可搬出
 
 */
-
-
 

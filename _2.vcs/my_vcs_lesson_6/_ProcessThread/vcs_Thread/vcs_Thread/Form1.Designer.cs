@@ -98,6 +98,13 @@
             this.button112 = new System.Windows.Forms.Button();
             this.button111 = new System.Windows.Forms.Button();
             this.button110 = new System.Windows.Forms.Button();
+            this.groupBox14 = new System.Windows.Forms.GroupBox();
+            this.button145 = new System.Windows.Forms.Button();
+            this.button144 = new System.Windows.Forms.Button();
+            this.button143 = new System.Windows.Forms.Button();
+            this.button142 = new System.Windows.Forms.Button();
+            this.button141 = new System.Windows.Forms.Button();
+            this.button140 = new System.Windows.Forms.Button();
             this.groupBox0.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -113,12 +120,13 @@
             this.panel1.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.groupBox13.SuspendLayout();
+            this.groupBox14.SuspendLayout();
             this.SuspendLayout();
             // 
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(869, 474);
+            this.bt_clear.Location = new System.Drawing.Point(870, 648);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 27;
@@ -129,7 +137,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(849, 432);
+            this.richTextBox1.Location = new System.Drawing.Point(850, 606);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 26;
@@ -663,7 +671,7 @@
             this.groupBox11.Controls.Add(this.label2);
             this.groupBox11.Controls.Add(this.label4);
             this.groupBox11.Controls.Add(this.label3);
-            this.groupBox11.Location = new System.Drawing.Point(839, 226);
+            this.groupBox11.Location = new System.Drawing.Point(1043, 12);
             this.groupBox11.Name = "groupBox11";
             this.groupBox11.Size = new System.Drawing.Size(198, 148);
             this.groupBox11.TabIndex = 35;
@@ -870,11 +878,93 @@
             this.button110.UseVisualStyleBackColor = true;
             this.button110.Click += new System.EventHandler(this.button110_Click);
             // 
+            // groupBox14
+            // 
+            this.groupBox14.Controls.Add(this.button145);
+            this.groupBox14.Controls.Add(this.button144);
+            this.groupBox14.Controls.Add(this.button143);
+            this.groupBox14.Controls.Add(this.button142);
+            this.groupBox14.Controls.Add(this.button141);
+            this.groupBox14.Controls.Add(this.button140);
+            this.groupBox14.Location = new System.Drawing.Point(840, 218);
+            this.groupBox14.Name = "groupBox14";
+            this.groupBox14.Size = new System.Drawing.Size(410, 226);
+            this.groupBox14.TabIndex = 34;
+            this.groupBox14.TabStop = false;
+            this.groupBox14.Text = "Thread使用 新進";
+            // 
+            // button145
+            // 
+            this.button145.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button145.Location = new System.Drawing.Point(210, 145);
+            this.button145.Name = "button145";
+            this.button145.Size = new System.Drawing.Size(190, 60);
+            this.button145.TabIndex = 5;
+            this.button145.Text = "新進 5";
+            this.button145.UseVisualStyleBackColor = true;
+            this.button145.Click += new System.EventHandler(this.button145_Click);
+            // 
+            // button144
+            // 
+            this.button144.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button144.Location = new System.Drawing.Point(210, 82);
+            this.button144.Name = "button144";
+            this.button144.Size = new System.Drawing.Size(190, 60);
+            this.button144.TabIndex = 4;
+            this.button144.Text = "新進 4";
+            this.button144.UseVisualStyleBackColor = true;
+            this.button144.Click += new System.EventHandler(this.button144_Click);
+            // 
+            // button143
+            // 
+            this.button143.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button143.Location = new System.Drawing.Point(210, 19);
+            this.button143.Name = "button143";
+            this.button143.Size = new System.Drawing.Size(190, 60);
+            this.button143.TabIndex = 3;
+            this.button143.Text = "新進 3";
+            this.button143.UseVisualStyleBackColor = true;
+            this.button143.Click += new System.EventHandler(this.button143_Click);
+            // 
+            // button142
+            // 
+            this.button142.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button142.Location = new System.Drawing.Point(11, 145);
+            this.button142.Name = "button142";
+            this.button142.Size = new System.Drawing.Size(190, 60);
+            this.button142.TabIndex = 2;
+            this.button142.Text = "新進 2";
+            this.button142.UseVisualStyleBackColor = true;
+            this.button142.Click += new System.EventHandler(this.button142_Click);
+            // 
+            // button141
+            // 
+            this.button141.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button141.Location = new System.Drawing.Point(11, 82);
+            this.button141.Name = "button141";
+            this.button141.Size = new System.Drawing.Size(190, 60);
+            this.button141.TabIndex = 1;
+            this.button141.Text = "新進 1";
+            this.button141.UseVisualStyleBackColor = true;
+            this.button141.Click += new System.EventHandler(this.button141_Click);
+            // 
+            // button140
+            // 
+            this.button140.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button140.Location = new System.Drawing.Point(11, 19);
+            this.button140.Name = "button140";
+            this.button140.Size = new System.Drawing.Size(190, 60);
+            this.button140.TabIndex = 0;
+            this.button140.Text = "新進 0";
+            this.button140.UseVisualStyleBackColor = true;
+            this.button140.Click += new System.EventHandler(this.button140_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1090, 724);
+            this.ClientSize = new System.Drawing.Size(1277, 724);
+            this.Controls.Add(this.groupBox14);
             this.Controls.Add(this.groupBox13);
             this.Controls.Add(this.groupBox10);
             this.Controls.Add(this.groupBox12);
@@ -914,6 +1004,7 @@
             this.panel1.PerformLayout();
             this.groupBox10.ResumeLayout(false);
             this.groupBox13.ResumeLayout(false);
+            this.groupBox14.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -989,6 +1080,13 @@
         private System.Windows.Forms.Button button112;
         private System.Windows.Forms.Button button111;
         private System.Windows.Forms.Button button110;
+        private System.Windows.Forms.GroupBox groupBox14;
+        private System.Windows.Forms.Button button142;
+        private System.Windows.Forms.Button button141;
+        private System.Windows.Forms.Button button140;
+        private System.Windows.Forms.Button button145;
+        private System.Windows.Forms.Button button144;
+        private System.Windows.Forms.Button button143;
     }
 }
 

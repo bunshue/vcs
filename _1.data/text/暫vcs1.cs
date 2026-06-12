@@ -1,4 +1,18 @@
-﻿
+﻿private void Form1_Load(object sender, EventArgs e)
+{
+	//C# 跨 Thread 存取 UI
+	//Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效	same
+	Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
+}
+
+//------------------------------------------------------------  # 60個
+
+1.對於那種明知道跨線程調用不會帶來錯誤的，可以設置Form控件不檢查跨線程調用錯誤，這樣就不報錯了。
+在Form1構造方法中：
+C#代碼 
+CheckForIllegalCrossThreadCalls = false; 
+
+//------------------------------------------------------------  # 60個
 
 撈出一層檔案
 撈出多層檔案
@@ -26,16 +40,10 @@ this.FormBorderStyle = FormBorderStyle.None;//設定無邊框
 
 pictureBox1 能夠顯示部分圖片 然後接收空白鍵 換圖片的下一部份
 
-
-
-
-
-
-
+//------------------------------------------------------------  # 60個
 
             Tension = trkTension.Value / 10f;
             txtTension.Text = Tension.ToString("0.0");
-
 
 
             //設定ListView與設定欄位
@@ -3678,13 +3686,6 @@ voice.Speak(this.textBox1.Text, spFlags);
 
 //------------------------------------------------------------  # 60個
 
-1.對於那種明知道跨線程調用不會帶來錯誤的，可以設置Form控件不檢查跨線程調用錯誤，這樣就不報錯了。
-在Form1構造方法中：
-C#代碼 
-CheckForIllegalCrossThreadCalls = false; 
-
-//------------------------------------------------------------  # 60個
-
 2 C#圖像處理的基本方法
 
 C#處理圖像有三種方法:像素法、內存法和指針法。
@@ -3877,58 +3878,6 @@ if (thread.ThreadState = ThreadState.Suspended )
 	thread.Resume();
 } 
 
-//------------------------------------------------------------  # 60個
-
-Thread.Join()用法的理解
-
-指在一線程裡面調用另一線程join方法時，表示將本線程阻塞直至另一線程終止時再執行  
-  比如  
-
- 1using System;
- 2
- 3namespace TestThreadJoin
- 4{
- 5    class Program
- 6    {
- 7        static void Main()
- 8        {
- 9            System.Threading.Thread x = new System.Threading.Thread(new System.Threading.ThreadStart(f1));
-10            x.Start();
-11            Console.WriteLine("This is Main.{0}", 1);
-12            x.Join();
-13            Console.WriteLine("This is Main.{0}", 2);
-14            Console.ReadLine();
-15        }
-16        static void f1()
-17        {
-18            System.Threading.Thread y = new System.Threading.Thread(new System.Threading.ThreadStart(f2));
-19            y.Start();
-20            y.Join();
-21            Console.WriteLine("This is F1.{0}",1);
-22        }
-23
-24        static void f2()
-25        {
-26            Console.WriteLine("This is F2.{0}", 1);
-27        }
-28    }
-29}
-
-
-這兒有三個線程在處理(包括主線程),大家可看看執行結果.
-結果:
-This is Main.1
-This is F2.1
-This is F1.1
-This is Main.2
-
-如果: 注釋//  x.Join();
-結果:
-This is Main.1
-This is Main.2
-This is F2.1
-This is F1.1
- 
 //------------------------------------------------------------  # 60個
 
 EXIF，是英文Exchangeable Image File
@@ -6260,20 +6209,15 @@ SmallImageList
 當View屬性為SmaillIcon時,這個屬性包含了ImageList,其中ImageList包含了要使用的影象
 
 LabelWrap
-
 為True時,標籤會自動換行,以顯示所有文字
 
 LabelEdit
-
 為True時,使用者可以在Details檢視下編輯第一列的內容
 
-
 MultiSelect
-
 可以多選
 
 Scrollabel
-
 顯示滾動條
 
 
@@ -6281,15 +6225,10 @@ Scrollabel
 View
 
 列表檢視可以用4種不同的模式顯示其選項:
-
 LargeIcon:所有選項都在其旁邊顯示一個大圖示(32*32)和一個標籤
-
 SamllIcon:所有選項都在其旁邊顯示一個小圖示(32*16)和一個標籤
-
 List:只顯示一列。該列可以包含一個圖示和一個標籤
-
 Details:可以顯示任意數量的列。只有第一列可以包含圖示
-
 Tile:(只用於WindowsXp和較新的Windwos平臺)顯示一個大圖示和一個標籤,在圖示的右邊顯示子項資訊
 
 BeginUpdate
@@ -7394,23 +7333,6 @@ System.Drawing.Graphics graphics = System.Drawing.Graphics.FromImage( printscree
 graphics.CopyFromScreen( top, left, 0, 0, printscreen.Size );
 printscreen.Save( outputfile, imagetype );
 
-PNG 轉 BMP
-using System.Drawing.Imaging;   //for PixelFormat
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            System.Drawing.Image PngImg = System.Drawing.Image.FromFile(@"C:\______test_files\sample.png");
-            Bitmap myImage = new Bitmap(PngImg.Width, PngImg.Height, PixelFormat.Format32bppRgb);
-            using (Graphics g = Graphics.FromImage(myImage))
-            {
-                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-                g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
-                g.DrawImage(PngImg, 0, 0);
-            }
-            PngImg.Save(@"C:\______test_files\sample.bmp", ImageFormat.Bmp);
-        }
-
 //------------------------------------------------------------  # 60個
 
 label 之 cursor 可以改變游標指到label時，會改變的滑鼠游標。
@@ -7660,33 +7582,6 @@ Form2的元件的Modifiers要改成Internal, 預設為private
 
 //------------------------------------------------------------  # 60個
 
-//Bitmap縮放圖片大小
-            //取得原始大小的图像
-            bitmap1 = new Bitmap(filename);
-
-            //得到缩放后的图像
-            bitmap2 = new Bitmap(bitmap1, this.pictureBox1.Width, this.pictureBox1.Height);   //縮放圖片大小
-
-
-            //以任意角度旋转显示图像
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            Bitmap bitmap1 = new Bitmap(filename);
-
-            Graphics g = this.pictureBox1.CreateGraphics();//实例化绘图对象
-            float MyAngle = 0;//旋转的角度
-            while (MyAngle < 360)
-            {
-                TextureBrush MyBrush = new TextureBrush(bitmap1);//实例化TextureBrush类
-                this.panel1.Refresh();//使工作区无效
-                MyBrush.RotateTransform(MyAngle);//以指定角度旋转图像
-                g.FillRectangle(MyBrush, 0, 0, this.ClientRectangle.Width, this.ClientRectangle.Height);//绘制旋转后的图像
-                MyAngle += 0.5f;//增加旋转的角度
-                System.Threading.Thread.Sleep(50);//使线程休眠50毫秒
-            }
-
-//------------------------------------------------------------  # 60個
-
 常用圖形的繪制方法
 
 1．畫直線
@@ -7742,16 +7637,6 @@ Form2的元件的Modifiers要改成Internal, 預設為private
 畫圓球
 e.Graphics.FillEllipse(new SolidBrush(aBall.color), aBall.pt.X - 10, aBall.pt.Y - 10, 20, 20);
 e.Graphics.DrawEllipse(Pens.Black, aBall.pt.X - 10, aBall.pt.Y - 10, 20, 20);
-
-
-imageList1屬性/Images/集合/加入圖片
-
-
-ImageList 的寬高只能 1~256
-
-imageList1 = new ImageList () ;
-imageList1.ImageSize = new Size(255,255);
-imageList 的圖案最多只能到255X255
 
 //------------------------------------------------------------  # 60個
 
@@ -7999,25 +7884,25 @@ Jumony快速抓取網頁
 
 http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/188975.html
 
-6060
+//------------------------------------------------------------  # 60個
 
 vcs
 Random walk如何避走已經走過的路徑？
 如何做到完全的Random？
 可能可以由畫下所有走過的軌跡得到
 
-6060
+//------------------------------------------------------------  # 60個
 
 vcs
 Windows檔案總管，點選資料夾，按右鍵，
 出現右鍵選單，加一項 列印出資訊夾內所有檔案資訊
 	
-6060
+//------------------------------------------------------------  # 60個
 
 Click = MouseClick = Click + MouseClick
 DoubleClick = Click + MouseClick + MouseDoubleClick
 
-6060
+//------------------------------------------------------------  # 60個
 
 簡易存資料
 XXXU盤之SN
@@ -8084,7 +7969,7 @@ RW/Excel中的
 
 G: C#程序未能找到引用的組件VBIDE解決過程
 
-6060
+//------------------------------------------------------------  # 60個
 
 //剪下 = 複製到剪貼簿 + 把選取區域塗成背景色  SolidBrush br = new SolidBrush(pictureBox1.BackColor)
 
@@ -11140,13 +11025,6 @@ g.DrawString("大家好", new Font("標楷體", 20, FontStyle.Bold | FontStyle.I
 g.DrawString("大家好", new Font("標楷體", 20, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline), lgBrush, 10, 200);
 Brush blueBrush = new SolidBrush(Color.Blue);
 g.DrawString("Graphic繪制圖形的例子", new Font("宋體", 20, FontStyle.Italic),blueBrush, new PointF(300, 400));
-
-						private void Form1_Load(object sender, EventArgs e)
-						{
-							//C# 跨 Thread 存取 UI
-							//Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效	same
-							Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
-						}
 
 //依日期製作資料夾
 string foldername = @"C:\dddddddddd\_screen_capture_" + DateTime.Now.ToString("yyyy-MM-dd");

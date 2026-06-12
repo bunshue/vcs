@@ -39,7 +39,6 @@ namespace vcs_ComparePicture
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -57,7 +56,7 @@ namespace vcs_ComparePicture
             pictureBox2.Location = new Point(x_st + dx * 1, y_st + dy * 6 + 70);
 
             richTextBox1.Size = new Size(400, 800);
-            richTextBox1.Location = new Point(x_st + dx * 4+30, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 4 + 30, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1300, 1050);
@@ -72,6 +71,8 @@ namespace vcs_ComparePicture
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         // 定義 LAB 結構
         public struct LabColor
@@ -234,8 +235,7 @@ namespace vcs_ComparePicture
             compare_picture(filename2, filename3);
         }
 
-        //6060
-
+        //------------------------------------------------------------  # 60個
 
         static float Gamma(float x)
         {
@@ -531,3 +531,17 @@ namespace vcs_ComparePicture
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+
