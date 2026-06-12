@@ -117,10 +117,6 @@ namespace vcs_Draw3B
 
         void show_item_location()
         {
-            //設定執行後的表單起始位置, 指定位置
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = new System.Drawing.Point(50, 50);
-
             int W = 250;
             int H = 250;
             int x_st = 20;
@@ -166,6 +162,10 @@ namespace vcs_Draw3B
 
             this.Size = new Size(1640, 980);
             this.Text = "vcs_Draw3B";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)

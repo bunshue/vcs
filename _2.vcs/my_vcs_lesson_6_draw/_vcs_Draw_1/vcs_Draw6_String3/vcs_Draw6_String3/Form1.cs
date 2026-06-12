@@ -75,6 +75,8 @@ namespace vcs_Draw6_String3
             this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
+        //------------------------------------------------------------  # 60個
+
         // Draw justified text on the PictureBox.
         private void pictureBox3_Paint(object sender, PaintEventArgs e)
         {

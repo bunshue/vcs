@@ -1058,6 +1058,8 @@ namespace vcs_Draw2
             pictureBox1.Image = bitmap1;
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void bt_save_Click(object sender, EventArgs e)
         {
             save_image_to_drive();

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Timers;
 using System.Threading;
+using System.Reflection;    //for Assembly
 
 //方案總管/右鍵/加入/類別/預設Class1.cs改成MyClass.cs
 
@@ -26,7 +27,7 @@ using System.Threading;
 */
 
 using AnimalSpace;      //animal.cs cats.cs human.cs之namespace不一樣, 要引用
-using MyClass;    // MyClass.cs之namespace不一樣, 要引用
+using MyClass;    // MyClass.cs之namespace不一樣, 要引用, 檔名是不重要的, 加入專案就好, namespace才是重要的
 
 namespace vcs_Class1
 {
@@ -147,22 +148,22 @@ namespace vcs_Class1
             //小的groupBox
             W = 200;
             H = 180;
-            groupBox2.Size = new Size(W*3+20, H);
-            groupBox1.Size = new Size(W, H);
-            groupBox6.Size = new Size(W, H);
+
             groupBox8.Size = new Size(W, H);
             groupBox10.Size = new Size(W, H);
-            groupBox11.Size = new Size(W, H);
-            groupBox12.Size = new Size(W, H);
+            groupBox1.Size = new Size(W, H);
+            groupBox6.Size = new Size(W, H);
+            groupBox4.Size = new Size(W, H);
             groupBox13.Size = new Size(W, H);
 
             //大的groupBox
             W = 200;
             H = 300;
-            groupBox4.Size = new Size(W, H);
+            groupBox11.Size = new Size(W, H);
             groupBox7.Size = new Size(W, H);
-            groupBox9.Size = new Size(W, H);
-            groupBox14.Size = new Size(W * 2 + 10, H);
+            groupBox14.Size = new Size(W * 2 - 130, H);
+
+            groupBox2.Size = new Size(W, H * 2 + 90);
             groupBox_new.Size = new Size(W, H * 2 + 90);
 
             int x_st = 10;
@@ -170,21 +171,22 @@ namespace vcs_Class1
             int dx = W + 10;
             int dy = 180 + 10;
             groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            groupBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            groupBox6.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            groupBox8.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            groupBox10.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            groupBox11.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            groupBox12.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            groupBox_new.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+
+            groupBox8.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            groupBox10.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            groupBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+
+            groupBox6.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            groupBox4.Location = new Point(x_st + dx * 3, y_st + dy * 1);
             groupBox13.Location = new Point(x_st + dx * 4, y_st + dy * 1);
-            groupBox4.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            groupBox7.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            groupBox9.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            groupBox14.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            groupBox_new.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+
+            groupBox11.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            groupBox7.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            groupBox14.Location = new Point(x_st + dx * 4, y_st + dy * 2);
 
             richTextBox1.Size = new Size(400, 690);
-            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 5 + 80, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             x_st = 10;
@@ -192,18 +194,8 @@ namespace vcs_Class1
             dx = 180 + 10;
             dy = 60 + 10;
 
-            button6.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button5.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-
-            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button9.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-
-            button12.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button11.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-
 
             button14.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button13.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -216,27 +208,19 @@ namespace vcs_Class1
 
             button27.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button28.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-
-            button29.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button30.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 3);
 
             button31.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button32.Location = new Point(x_st + dx * 0, y_st + dy * 1);
 
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button3.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button4.Location = new Point(x_st + dx * 0, y_st + dy * 3);
 
             button15.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button16.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button17.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button18.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-
-            button21.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button22.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button23.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button24.Location = new Point(x_st + dx * 0, y_st + dy * 3);
 
             W = 305 / 3;
             H = 400 / 3;
@@ -259,6 +243,16 @@ namespace vcs_Class1
             bt_class_new_08.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             bt_class_new_09.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button10.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button12.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button11.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button21.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button22.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button23.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button24.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
             this.Size = new Size(1700, 750);
             this.Text = "vcs_Class1";
@@ -493,14 +487,6 @@ namespace vcs_Class1
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-
-        }
         //Class 範例 SP
 
         //------------------------------------------------------------  # 60個
@@ -526,8 +512,32 @@ namespace vcs_Class1
 
         //------------------------------------------------------------  # 60個
 
+        public class Classmate  //事件訂閱者
+        {
+            private string name;
+            public Classmate(string Name)
+            {
+                name = Name;
+            }
+            public void SendResponse()  //事件處理函數，要與自定義委托類型匹配
+            {
+                Console.WriteLine("來自：" + this.name + "的回復: 已經收到邀請，隨時可以開始！");
+            }
+        }
+
         private void button11_Click(object sender, EventArgs e)
         {
+            //Class 範例 0
+            //c
+            Classmate classmate1 = new Classmate("Alice");
+            Classmate classmate2 = new Classmate("Banana");
+            Classmate classmate3 = new Classmate("Cherry");
+            Classmate classmate4 = new Classmate("Daisy");
+
+            classmate1.SendResponse();
+            classmate2.SendResponse();
+            classmate3.SendResponse();
+            classmate4.SendResponse();
         }
 
         //------------------------------------------------------------  # 60個
@@ -721,21 +731,79 @@ namespace vcs_Class1
 
         //------------------------------------------------------------  # 60個
 
+        public class Person3
+        {
+            public string Name { get; set; }
+            public int Age { get; set; }
+            public int Weight { get; set; }
+            public int Height { get; set; }
+        }
+
         private void button21_Click(object sender, EventArgs e)
         {
+            //Class 範例 1
+            Person3 p = new Person3() { Name = "Hong", Age = 25, Weight = 65, Height = 170 };
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        class P
+        {
+            private string pname;
+            public string Name
+            {
+                get
+                {
+                    return "name : " + pname;
+                }
+                set
+                {
+                    pname = value;
+                }
+            }
         }
 
         private void button22_Click(object sender, EventArgs e)
         {
+            //Class 範例 4
+            P obj = new P();
+            obj.Name = "david wang";            //使用到set
+            Console.WriteLine(obj.Name);        //使用到get
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button23_Click(object sender, EventArgs e)
         {
+            //建構子和解構子
+
+            richTextBox1.Text += "建構子和解構子 class ClassExample, 看輸出畫面的log\n";
+
+            //建構子
+            richTextBox1.Text += "新增一個ClassExample物件\n";
+            ClassExample person = new ClassExample();
+
+            //解構子
+            richTextBox1.Text += "銷毀\n";
+            GC.Collect();       // Force garbage collection.
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button24_Click(object sender, EventArgs e)
         {
+            //從Class內印出資料
+            //從Class內使用Form1的控件，richTextBox改為Public ?? 不用??
 
+            richTextBox1.Text += "從Class內印出資料, 建立一個 ClassPrintDataExample 物件\n";
+            ClassPrintDataExample people;
+
+            richTextBox1.Text += "初始化\n";
+            people = new ClassPrintDataExample("David", "Wang", this);
+
+            richTextBox1.Text += "顯示物件的內容\n";
+
+            richTextBox1.Text += people.ToString() + "\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -779,6 +847,9 @@ namespace vcs_Class1
 
         private void button26_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "繼承範例\n";
+            richTextBox1.Text += "Human 和 Cats 都是繼承Animal\n";
+
             //寵物範例2
             richTextBox1.Text += "初始化 Human\n";
             Human myself = new Human("小李", "亞洲人", 64, 172);
@@ -880,37 +951,6 @@ namespace vcs_Class1
 
         //------------------------------------------------------------  # 60個
 
-        private void button29_Click(object sender, EventArgs e)
-        {
-            //從Class內印出資料
-            //從Class內使用Form1的控件，richTextBox改為Public ?? 不用??
-
-            richTextBox1.Text += "從Class內印出資料, 建立一個 ClassPrintDataExample 物件\n";
-            ClassPrintDataExample people;
-
-            richTextBox1.Text += "初始化\n";
-            people = new ClassPrintDataExample("David", "Wang", this);
-
-            richTextBox1.Text += "顯示物件的內容\n";
-
-            richTextBox1.Text += people.ToString() + "\n";
-        }
-
-        private void button30_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "建構子和解構子 class ClassExample, 看輸出畫面的log\n";
-
-            //建構子
-            richTextBox1.Text += "新增一個ClassExample物件\n";
-            ClassExample person = new ClassExample();
-
-            //解構子
-            richTextBox1.Text += "銷毀\n";
-            GC.Collect();       // Force garbage collection.
-        }
-
-        //------------------------------------------------------------  # 60個
-
         void test_picture_class()
         {
             string filename2 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
@@ -973,7 +1013,6 @@ namespace vcs_Class1
                 richTextBox1.Text += "i = " + i.ToString() + "\t" + list[i].ToString() + "\n";
             }
 
-
             richTextBox1.Text += "按類別列出一個物品清單，用GroupBy\n";
             foreach (var group in list.GroupBy(p => p.Category))
             {
@@ -992,48 +1031,20 @@ namespace vcs_Class1
 
         //------------------------------------------------------------  # 60個
 
-        public class Classmate  //事件訂閱者
-        {
-            private string name;
-            public Classmate(string Name)
-            {
-                name = Name;
-            }
-            public void SendResponse()  //事件處理函數，要與自定義委托類型匹配
-            {
-                Console.WriteLine("來自：" + this.name + "的回復: 已經收到邀請，隨時可以開始！");
-            }
-        }
-
         private void bt_class_new_00_Click(object sender, EventArgs e)
         {
-            //Class 範例 0
-            //c
-            Classmate classmate1 = new Classmate("Alice");
-            Classmate classmate2 = new Classmate("Banana");
-            Classmate classmate3 = new Classmate("Cherry");
-            Classmate classmate4 = new Classmate("Daisy");
+            List<DataStudent> students = MemberData.GetStudents();
 
-            classmate1.SendResponse();
-            classmate2.SendResponse();
-            classmate3.SendResponse();
-            classmate4.SendResponse();
+            //List to DataTable conversion
+            DataTable teacherTbl = MemberData.DbNullInt();
+            //DataTable to List conversion
+            List<DataTeacher> newTeachers = teacherTbl.ToList<DataTeacher>();
         }
 
         //------------------------------------------------------------  # 60個
 
-        public class Person3
-        {
-            public string Name { get; set; }
-            public int Age { get; set; }
-            public int Weight { get; set; }
-            public int Height { get; set; }
-        }
-
         private void bt_class_new_01_Click(object sender, EventArgs e)
         {
-            //Class 範例 1
-            Person3 p = new Person3() { Name = "Hong", Age = 25, Weight = 65, Height = 170 };
 
         }
 
@@ -1125,40 +1136,20 @@ namespace vcs_Class1
 
         //------------------------------------------------------------  # 60個
 
-        class P
-        {
-            private string pname;
-            public string Name
-            {
-                get
-                {
-                    return "name : " + pname;
-                }
-                set
-                {
-                    pname = value;
-                }
-            }
-        }
-
         private void bt_class_new_04_Click(object sender, EventArgs e)
         {
-            //Class 範例 4
-            P obj = new P();
-            obj.Name = "david wang";            //使用到set
-            Console.WriteLine(obj.Name);        //使用到get
         }
 
         //------------------------------------------------------------  # 60個
 
         /*
-理解多態。
-首先，我們先來看下怎樣用虛方法實現多態
+        理解多態。
+        首先，我們先來看下怎樣用虛方法實現多態
 
-我們都知道，喜鵲（Magpie）、老鷹（Eagle）、企鵝（Penguin）都是屬於鳥類，
-我們可以根據這三者的共有特性提取出鳥類（Bird）做為父類，
-喜鵲喜歡吃蟲子，老鷹喜歡吃肉，企鵝喜歡吃魚。
-*/
+        我們都知道，喜鵲（Magpie）、老鷹（Eagle）、企鵝（Penguin）都是屬於鳥類，
+        我們可以根據這三者的共有特性提取出鳥類（Bird）做為父類，
+        喜鵲喜歡吃蟲子，老鷹喜歡吃肉，企鵝喜歡吃魚。
+        */
 
         //創建基類Bird如下，添加一個虛方法Eat():
 
@@ -1438,6 +1429,20 @@ namespace vcs_Class1
 
         //------------------------------------------------------------  # 60個
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
     }
 
     //------------------------------------------------------------  # 60個
@@ -1632,6 +1637,129 @@ namespace vcs_Class1
             File.WriteAllText(strPath, str + sb.ToString());
         }
     }
+
+    public class DataStudent
+    {
+        public long Id { get; set; }
+        public string Name { get; set; }
+        public short Age { get; set; }
+        public DateTime DateOfCreation { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class DataTeacher
+    {
+        public long Id { get; set; }
+        public string Name { get; set; }
+        public Nullable<int> DepartmentId { get; set; }
+    }
+
+    public class MemberData
+    {
+        public static List<DataStudent> GetStudents()
+        {
+            var list = new List<DataStudent>
+            {
+                new DataStudent {Id = 1, Name = "Smith", Age = 18, DateOfCreation = DateTime.Now, IsActive = true},
+                new DataStudent {Id = 2, Name = "Hook", Age = 16, DateOfCreation = DateTime.Now.AddDays(-1), IsActive = true},
+                new DataStudent {Id = 3, Name = "Jhon", Age = 15, DateOfCreation = DateTime.Now.AddDays(-2), IsActive = true},
+                new DataStudent {Id = 4, Name = "Alan", Age = 21, DateOfCreation = DateTime.Now.AddDays(-3), IsActive = true}
+            };
+            return list;
+        }
+
+        public static List<DataTeacher> GetTeachers()
+        {
+            var list = new List<DataTeacher>
+            {
+                new DataTeacher {Id = 1, Name = "Smith", DepartmentId = 18 },
+                new DataTeacher {Id = 2, Name = "Hook", DepartmentId = 16 },
+                new DataTeacher {Id = 3, Name = "Jhon", DepartmentId = 15 },
+                new DataTeacher {Id = 4, Name = "Alan", DepartmentId = 21 }
+            };
+            return list;
+        }
+
+        public static DataTable DbNullInt()
+        {
+            DataTable table = new DataTable();
+            table.Columns.Add("Id", typeof(long));
+            table.Columns.Add("Name", typeof(string));
+
+            DataColumn column;
+            column = new DataColumn("DepartmentId", System.Type.GetType("System.Int32"));
+            column.AllowDBNull = true;
+            table.Columns.Add(column);
+
+            table.Rows.Add(1, "Smith", DBNull.Value);
+            table.Rows.Add(2, "Hook", 1);
+
+            return table;
+        }
+    }
+
+    public static class ExtensionUtility
+    {
+        /// <summary>
+        /// Converts List To DataTable
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static DataTable ToDataTable<TSource>(this IList<TSource> data)
+        {
+            DataTable dataTable = new DataTable(typeof(TSource).Name);
+            PropertyInfo[] props = typeof(TSource).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            foreach (PropertyInfo prop in props)
+            {
+                dataTable.Columns.Add(prop.Name, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
+            }
+
+            foreach (TSource item in data)
+            {
+                var values = new object[props.Length];
+                for (int i = 0; i < props.Length; i++)
+                {
+                    values[i] = props[i].GetValue(item, null);
+                }
+                dataTable.Rows.Add(values);
+            }
+            return dataTable;
+        }
+
+        /// <summary>
+        /// Converts DataTable To List
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="dataTable"></param>
+        /// <returns></returns>
+        public static List<TSource> ToList<TSource>(this DataTable dataTable) where TSource : new()
+        {
+            var dataList = new List<TSource>();
+
+            const BindingFlags flags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic;
+            var objFieldNames = (from PropertyInfo aProp in typeof(TSource).GetProperties(flags)
+                                 select new { Name = aProp.Name, Type = Nullable.GetUnderlyingType(aProp.PropertyType) ?? aProp.PropertyType }).ToList();
+            var dataTblFieldNames = (from DataColumn aHeader in dataTable.Columns
+                                     select new { Name = aHeader.ColumnName, Type = aHeader.DataType }).ToList();
+            var commonFields = objFieldNames.Intersect(dataTblFieldNames).ToList();
+
+            foreach (DataRow dataRow in dataTable.AsEnumerable().ToList())
+            {
+                var aTSource = new TSource();
+                foreach (var aField in commonFields)
+                {
+                    PropertyInfo propertyInfos = aTSource.GetType().GetProperty(aField.Name);
+                    var value = (dataRow[aField.Name] == DBNull.Value) ? null : dataRow[aField.Name]; //if database field is nullable
+                    propertyInfos.SetValue(aTSource, value, null);
+                }
+                dataList.Add(aTSource);
+            }
+            return dataList;
+        }
+    }
+
+
 }
 
 //6060

@@ -66,6 +66,8 @@ namespace vcs_Draw5_Image2
             this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
+        //------------------------------------------------------------  # 60個
+
         void pictureBox1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Space)
@@ -158,8 +160,22 @@ namespace vcs_Draw5_Image2
 
             //擷取部分圖片貼上
             //            貼上位置與大小,擷取部分圖片位置與大小,單位
-
             e.Graphics.DrawImage(img, destRect1, srcRect, units);
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+
+

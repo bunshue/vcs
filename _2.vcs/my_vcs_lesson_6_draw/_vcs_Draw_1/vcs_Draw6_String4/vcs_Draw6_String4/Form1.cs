@@ -111,6 +111,37 @@ namespace vcs_Draw6_String4
             this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+
+            /* debug
+            string text1 = "從顧客";
+            string text2 = "從顧客、競";
+            string text3 = "從顧客、競爭對";
+            string text4 = "從顧客、競爭對手、自家公";
+            string text5 = "從顧客、競爭對手、自家公司、";
+            string text6 = "從顧客、競爭對手、自家公司、通路找";
+            string text7 = "從顧客、競爭對手、自家公司、通路找出成功因素，";
+
+            string text = "從顧客、競爭對手、自家公司、通路找出成功因素，建立戰略的手法。";
+
+            //text = text2;
+            richTextBox1.Text += text + "\n";
+
+            int len = text.Length;
+            for (int i = 0; i < len; i++)
+            {
+                string tt = text.Substring(0, i + 1);
+                richTextBox1.Text += tt + "\n";
+                get_string_size(tt);
+            }
+            //richTextBox1.Text += text1(0:10);
+            */
+        }
+
+        //------------------------------------------------------------  # 60個
+
         private void setup_banner_profile(object sender, EventArgs e)
         {
             int x_st = (int)nud_x_st.Value;
@@ -461,37 +492,6 @@ namespace vcs_Draw6_String4
 
             return;
         }
-
-        private void bt_clear_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-
-            /* debug
-            string text1 = "從顧客";
-            string text2 = "從顧客、競";
-            string text3 = "從顧客、競爭對";
-            string text4 = "從顧客、競爭對手、自家公";
-            string text5 = "從顧客、競爭對手、自家公司、";
-            string text6 = "從顧客、競爭對手、自家公司、通路找";
-            string text7 = "從顧客、競爭對手、自家公司、通路找出成功因素，";
-
-            string text = "從顧客、競爭對手、自家公司、通路找出成功因素，建立戰略的手法。";
-
-            //text = text2;
-            richTextBox1.Text += text + "\n";
-
-            int len = text.Length;
-            for (int i = 0; i < len; i++)
-            {
-                string tt = text.Substring(0, i + 1);
-                richTextBox1.Text += tt + "\n";
-                get_string_size(tt);
-            }
-            //richTextBox1.Text += text1(0:10);
-            */
-        }
-
-        //------------------------------------------------------------  # 60個
 
         private void bt_background_color_Click(object sender, EventArgs e)
         {

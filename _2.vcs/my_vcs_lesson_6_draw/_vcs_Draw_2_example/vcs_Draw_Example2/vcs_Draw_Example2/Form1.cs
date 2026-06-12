@@ -71,6 +71,8 @@ namespace vcs_Draw_Example2
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             int W = pictureBox1.ClientSize.Width;
             int H = pictureBox1.ClientSize.Height;
 
@@ -87,16 +89,11 @@ namespace vcs_Draw_Example2
 
         void show_item_location()
         {
-            //設定執行後的表單起始位置, 指定位置
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = new System.Drawing.Point(0, 0);
-
             //button
             int x_st = 10;
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -179,6 +176,8 @@ namespace vcs_Draw_Example2
             g.Clear(Color.White);
             pictureBox1.Image = bitmap1;
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void bt_save_Click(object sender, EventArgs e)
         {
@@ -1128,3 +1127,17 @@ namespace vcs_Draw_Example2
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

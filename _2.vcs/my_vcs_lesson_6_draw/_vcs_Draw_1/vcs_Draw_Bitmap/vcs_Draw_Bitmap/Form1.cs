@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;//for Directory
-using System.Drawing.Imaging;   //for ImageFormat, PixelFormat
-using System.Drawing.Drawing2D; //for InterpolationMode
+using System.IO;  // for Directory
+using System.Drawing.Imaging;  // for ImageFormat, PixelFormat
+using System.Drawing.Drawing2D;  // for InterpolationMode
 
 namespace vcs_Draw_Bitmap
 {
@@ -233,7 +233,7 @@ namespace vcs_Draw_Bitmap
             Bitmap bmp = (Bitmap)bitmap2.Clone();
             g.DrawImage(bmp, 150, 150, w, h);
 
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+            //------------------------------------------------------------  # 60個
 
             //圖像截取
             filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
@@ -247,7 +247,7 @@ namespace vcs_Draw_Bitmap
             g.DrawImage(bitmap3, destination_area2, source_area, GraphicsUnit.Pixel);
             g.DrawImage(bitmap3, destination_area3, source_area, GraphicsUnit.Pixel);
 
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+            //------------------------------------------------------------  # 60個
 
             //圖像截取
             int x_st = 200;
@@ -276,7 +276,7 @@ namespace vcs_Draw_Bitmap
             rectDest = new Rectangle(500, 90, w, h);
             g.DrawImage(bitmap2, rectDest, rectSource, GraphicsUnit.Pixel);
 
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+            //------------------------------------------------------------  # 60個
 
             //在指定位置畫上一圖
             filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_貓咪\cat2.png";
@@ -290,7 +290,7 @@ namespace vcs_Draw_Bitmap
             //圖片改變比例
             g.DrawImage(image, x + 300, y + 150, image.Width / 2, image.Height * 2);
 
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+            //------------------------------------------------------------  # 60個
 
             pictureBox1.Image = bitmap1;
         }
@@ -401,7 +401,7 @@ namespace vcs_Draw_Bitmap
             g.DrawImage(bmp1c, x_st, y_st);
             g.DrawString("直接改變Bitmap的大小", new Font("Arial", 16), Brushes.Red, x_st, y_st - 30);
 
-            richTextBox1.Text += "------------------------------\n";  // 30個
+            //------------------------------------------------------------  # 60個
 
             x_st = 200;
             y_st = 200;
@@ -412,7 +412,7 @@ namespace vcs_Draw_Bitmap
             g.DrawImage(bmp, x_st + dx * 0, y_st + dy * 0, W * 3 / 10, H * 7 / 10);  //改變貼上比例
             g.DrawString("改變貼上比例", new Font("Arial", 16), Brushes.Red, x_st, y_st - 30);
 
-            richTextBox1.Text += "------------------------------\n";  // 30個
+            //------------------------------------------------------------  # 60個
 
             //決定繪製影像的縮放比例和切變
             x_st = 500;
@@ -427,7 +427,7 @@ namespace vcs_Draw_Bitmap
             g.DrawImage(bmp, destPara);
             g.DrawString("HHH", new Font("Arial", 20), Brushes.Red, x_st, y_st - 30);
 
-            richTextBox1.Text += "------------------------------\n";  // 30個
+            //------------------------------------------------------------  # 60個
 
             //改變影像位置與大小, 用DrawImage貼上影像 並改變影像位置與大小
             //使用Rectangle結構
@@ -441,7 +441,7 @@ namespace vcs_Draw_Bitmap
             g.DrawImage(bmp, destRect4);
             g.DrawString("使用Rectangle結構", new Font("Arial", 16), Brushes.Red, x_st, y_st - 30);
 
-            richTextBox1.Text += "------------------------------\n";  // 30個
+            //------------------------------------------------------------  # 60個
 
             //用DrawImage畫出不同圖片大小的圖
 
@@ -473,7 +473,7 @@ namespace vcs_Draw_Bitmap
             }
             g.DrawString("不同比例", new Font("Arial", 16), Brushes.Red, x_st, y_st - 30);
 
-            richTextBox1.Text += "------------------------------\n";  // 30個
+            //------------------------------------------------------------  # 60個
 
             //以下為部分擷取
 
@@ -499,7 +499,7 @@ namespace vcs_Draw_Bitmap
             g.DrawImage(bmp, destRect1, srcRect, units);
             g.DrawString("BBB", new Font("Arial", 20), Brushes.Red, x_st, y_st - 30);
 
-            richTextBox1.Text += "------------------------------\n";  // 30個
+            //------------------------------------------------------------  # 60個
 
             x_st = 400;
             y_st = 50;
@@ -513,7 +513,7 @@ namespace vcs_Draw_Bitmap
             g.DrawImage(bmp, destRect2, srcRect, units);
             g.DrawString("CCC", new Font("Arial", 20), Brushes.Red, x_st, y_st - 30);
 
-            richTextBox1.Text += "------------------------------\n";  // 30個
+            //------------------------------------------------------------  # 60個
 
             x_st = 550;
             y_st = 50;
@@ -531,7 +531,7 @@ namespace vcs_Draw_Bitmap
             g.DrawRectangle(Pens.Red, destRect3);
             g.DrawString("DDD", new Font("Arial", 20), Brushes.Red, x_st, y_st - 30);
 
-            richTextBox1.Text += "------------------------------\n";  // 30個
+            //------------------------------------------------------------  # 60個
 
             x_st = 750;//貼上位置
             y_st = 50;
@@ -542,7 +542,7 @@ namespace vcs_Draw_Bitmap
             g.DrawImage(bmp, x_st, y_st, srcRect2, units);
             g.DrawString("EEE", new Font("Arial", 20), Brushes.Red, x_st, y_st - 30);
 
-            richTextBox1.Text += "------------------------------\n";  // 30個
+            //------------------------------------------------------------  # 60個
 
             //使用兩個Rectangle結構
 
@@ -557,7 +557,7 @@ namespace vcs_Draw_Bitmap
             g.DrawRectangle(Pens.Green, destRect);
             g.DrawString("FFF", new Font("Arial", 20), Brushes.Red, x_st, y_st - 30);
 
-            richTextBox1.Text += "------------------------------\n";  // 30個
+            //------------------------------------------------------------  # 60個
 
             //取得圖片的一部分
 
@@ -581,7 +581,7 @@ namespace vcs_Draw_Bitmap
             g.DrawImage(image, rec2, rec1, GraphicsUnit.Pixel);
             g.DrawString("LLL", new Font("Arial", 20), Brushes.Red, x_st, y_st - 30);
 
-            richTextBox1.Text += "------------------------------\n";  // 30個
+            //------------------------------------------------------------  # 60個
 
             //clone語法, 複製部分圖片
 
@@ -601,7 +601,7 @@ namespace vcs_Draw_Bitmap
             g.DrawImage(cloneBitmap, 800, 200, w, h);
             g.DrawString("Clone語法", new Font("Arial", 16), Brushes.Red, 800, 200 - 30);
 
-            richTextBox1.Text += "------------------------------\n";  // 30個
+            //------------------------------------------------------------  # 60個
 
             //獲取圖片的指定部分
 
@@ -915,7 +915,6 @@ namespace vcs_Draw_Bitmap
             Graphics g = Graphics.FromImage(bitmap1);
             g.Clear(Color.White);
 
-
             pictureBox1.Image = (Image)bitmap1;
 
             g.Dispose();
@@ -925,10 +924,7 @@ namespace vcs_Draw_Bitmap
             Bitmap bmp = new Bitmap(filename, true);
             g.DrawImage(bmp, 0, 0, W, H);
             g.DrawImage(bmp, 0, 450, W, H / 2);
- * 
 */
-
-
 
 /*
             //img.Save(Response.OutputStream, ImageFormat.Jpeg);;
@@ -936,19 +932,17 @@ namespace vcs_Draw_Bitmap
             //bmp.Save ( Response.OutputStream , System.Drawing.Imaging.ImageFormat.Jpeg);
             //bmp.Save ( Response.OutputStream , System.Drawing.Imaging.ImageFormat.Jpeg);
             //bmp.Dispose();
- * 
+
             //該位圖對象以“GIF”格式輸出
             //objBitMap.Save(Response.OutputStream, ImageFormat.Gif);
-
 
             //Bg.Save(Response.OutputStream, ImageFormat.Gif);
 
             string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
             bitmap1.Save(filename, ImageFormat.Bmp);
 
-string filename2 = Application.StartupPath + "\\jpg_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            string filename2 = Application.StartupPath + "\\jpg_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
             bitmap1.Save(filename2, ImageFormat.Jpeg);
-
 
             //使用指定參數輸出
             //image.Save(Response.OutputStream, myImageCodecInfo, myEncoderParameters);

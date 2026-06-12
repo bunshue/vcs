@@ -87,37 +87,18 @@ namespace vcs_Draw_Brush
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-            int W = 160;
-            int H = 60;
-
             //button
-            x_st = 10;
-            y_st = 20;
-            dx = W + 10;
-            dy = H + 10;
+            int W = 200;
+            int H = 60;
+            int x_st = 10;
+            int y_st = 10;
+            int dx = W + 10;
+            int dy = H + 10;
 
-            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button10.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button11.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button12.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button20.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button21.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button22.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-
-            x_st = 10;
-            y_st = 10;
-            dx = W + 30;
-            groupBox0.Size = new Size(W + 20, H * 3 + 110);
-            groupBox1.Size = new Size(W + 20, H * 4);
-            groupBox2.Size = new Size(W + 20, H * 2 + 110);
-            groupBox3.Size = new Size(W + 20, H * 4);
+            groupBox0.Size = new Size(W, H * 3 + 110);
+            groupBox1.Size = new Size(W, H * 4);
+            groupBox2.Size = new Size(W, H * 2 + 110);
+            groupBox3.Size = new Size(W, H * 4);
             groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 5 - 50);
@@ -138,6 +119,18 @@ namespace vcs_Draw_Brush
             richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 7 - 50);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
+            y_st = 20;
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button10.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button20.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button21.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button22.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+
             x_st = 20;
             y_st = 20;
             dx = 50;
@@ -149,8 +142,12 @@ namespace vcs_Draw_Brush
             bt_draw1.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             bt_draw2.Location = new Point(x_st + dx * 0, y_st + dy * 5 + 20);
 
-            this.Size = new Size(1500, 740);
+            this.Size = new Size(1610, 740);
             this.Text = "vcs_Draw_Brush";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -649,6 +646,8 @@ namespace vcs_Draw_Brush
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         //以塗刷新增畫筆, 刮刮樂效果 ST
 
         Bitmap image;
@@ -687,6 +686,8 @@ namespace vcs_Draw_Brush
             flag_mouse_down = false;
         }
         //以塗刷新增畫筆, 刮刮樂效果 SP
+
+        //------------------------------------------------------------  # 60個
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {

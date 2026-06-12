@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Drawing2D; // for HatchBrush, Matrix, MatrixOrder
+using System.Drawing.Drawing2D;  // for HatchBrush, Matrix, MatrixOrder
 
 namespace vcs_Draw_Transform2
 {

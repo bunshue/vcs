@@ -47,14 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="animal.cs" />
-    <Compile Include="cats.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="human.cs" />
     <Compile Include="MyClass.cs" />
     <Compile Include="MyForm.cs">
       <SubType>Form</SubType>

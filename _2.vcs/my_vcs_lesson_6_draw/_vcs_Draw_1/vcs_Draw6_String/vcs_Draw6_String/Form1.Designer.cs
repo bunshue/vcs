@@ -404,6 +404,7 @@
             // 
             // pictureBox2
             // 
+            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox2.Location = new System.Drawing.Point(308, 341);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(392, 300);
@@ -413,6 +414,7 @@
             // 
             // pictureBox3
             // 
+            this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox3.Location = new System.Drawing.Point(445, 371);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(290, 126);
@@ -422,6 +424,7 @@
             // 
             // pictureBox4
             // 
+            this.pictureBox4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox4.Location = new System.Drawing.Point(12, 471);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(50, 50);
@@ -431,6 +434,7 @@
             // 
             // pictureBox5
             // 
+            this.pictureBox5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox5.Location = new System.Drawing.Point(68, 471);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(50, 50);
@@ -440,6 +444,7 @@
             // 
             // pictureBox6
             // 
+            this.pictureBox6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox6.Location = new System.Drawing.Point(124, 471);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(50, 50);
@@ -450,6 +455,7 @@
             // pictureBox7
             // 
             this.pictureBox7.BackColor = System.Drawing.Color.Gray;
+            this.pictureBox7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox7.Location = new System.Drawing.Point(12, 527);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(50, 50);
@@ -459,6 +465,7 @@
             // 
             // pictureBox8
             // 
+            this.pictureBox8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox8.Location = new System.Drawing.Point(68, 527);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(50, 50);
@@ -469,6 +476,7 @@
             // pictureBox9
             // 
             this.pictureBox9.BackColor = System.Drawing.Color.Pink;
+            this.pictureBox9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox9.Location = new System.Drawing.Point(124, 527);
             this.pictureBox9.Name = "pictureBox9";
             this.pictureBox9.Size = new System.Drawing.Size(50, 50);
@@ -479,6 +487,7 @@
             // pictureBox10
             // 
             this.pictureBox10.BackColor = System.Drawing.Color.Pink;
+            this.pictureBox10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox10.Location = new System.Drawing.Point(180, 471);
             this.pictureBox10.Name = "pictureBox10";
             this.pictureBox10.Size = new System.Drawing.Size(50, 50);
@@ -489,6 +498,7 @@
             // pictureBox11
             // 
             this.pictureBox11.BackColor = System.Drawing.Color.Pink;
+            this.pictureBox11.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox11.Location = new System.Drawing.Point(180, 527);
             this.pictureBox11.Name = "pictureBox11";
             this.pictureBox11.Size = new System.Drawing.Size(50, 50);
@@ -503,7 +513,7 @@
             // 
             // pictureBox_time
             // 
-            this.pictureBox_time.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox_time.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox_time.Location = new System.Drawing.Point(236, 471);
             this.pictureBox_time.Name = "pictureBox_time";
             this.pictureBox_time.Size = new System.Drawing.Size(50, 50);

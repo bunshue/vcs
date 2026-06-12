@@ -7,10 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Imaging;   //for ImageFormat
-using System.Drawing.Drawing2D; //for Matrix
-
-using System.Drawing.Text;      //for TextRenderingHint
+using System.Drawing.Imaging;  // for ImageFormat
+using System.Drawing.Drawing2D;  // for Matrix
+using System.Drawing.Text;  // for TextRenderingHint
 
 //方案總管/加入/現有項目/選取Rainbow.cs, 把 namespace 改成 vcs_Draw3A
 //方案總管/加入/現有項目/選取BatteryStuff.cs, 把 namespace 改成 vcs_Draw3A
@@ -77,6 +76,8 @@ namespace vcs_Draw3A
 
         //for pictureBox_stock SP
 
+        //------------------------------------------------------------  # 60個
+
         //畫任意矩形 pictureBox1
         private Random Rand = new Random();
         private Bitmap Bm;
@@ -103,6 +104,9 @@ namespace vcs_Draw3A
             InitializeComponent();
 
             show_item_location();
+
+            //6060
+
             //pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
 
             //for atom
@@ -231,6 +235,8 @@ namespace vcs_Draw3A
             pictureBox1.Image = Bm;
             //畫任意矩形 SP
 
+            //------------------------------------------------------------  # 60個
+
             //旋轉邊框 ST
             //新建圖檔, 初始化畫布
             bitmap2 = new Bitmap(pictureBox_rotate.Width, pictureBox_rotate.Height);
@@ -238,6 +244,8 @@ namespace vcs_Draw3A
             g2.Clear(Color.White);
             pictureBox_rotate.Image = bitmap2;
             //旋轉邊框 SP
+
+            //------------------------------------------------------------  # 60個
 
             //畫雷達掃瞄圖 ST
             radar_WIDTH = 270;
@@ -290,6 +298,8 @@ namespace vcs_Draw3A
             pictureBox_radar.Location = new Point(10, 10);
             richTextBox1.Text += "pictureBox_radar W = " + pictureBox_radar.Width.ToString() + ", H = " + pictureBox_radar.Height.ToString() + "\n";
             //畫雷達掃瞄圖 SP
+
+            //------------------------------------------------------------  # 60個
 
             lb_title01.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             pictureBox_random.Size = new Size(W, H);
@@ -371,6 +381,13 @@ namespace vcs_Draw3A
             this.Text = "vcs_Draw3A";
         }
 
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //6060
+
         //畫任意矩形
         private void timer_random_rectangle_Tick(object sender, EventArgs e)
         {
@@ -389,10 +406,7 @@ namespace vcs_Draw3A
             Refresh();
         }
 
-        private void bt_clear_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-        }
+        //6060
 
         int x_st = 0;
         int y_st = 0;
@@ -1468,9 +1482,9 @@ namespace vcs_Draw3A
             // Get the next price.
             SavePrice();
         }
-
         //for pictureBox_stock SP
 
+        //------------------------------------------------------------  # 60個
 
         //畫雷達掃瞄圖 ST
         private void timer_radar_Tick(object sender, EventArgs e)
@@ -1538,10 +1552,10 @@ namespace vcs_Draw3A
             {
                 u = 0;
             }
-
         }
-
         //畫雷達掃瞄圖 SP
+
+        //------------------------------------------------------------  # 60個
 
         int offset = 0;
         void draw_hex()
@@ -1603,3 +1617,17 @@ namespace vcs_Draw3A
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

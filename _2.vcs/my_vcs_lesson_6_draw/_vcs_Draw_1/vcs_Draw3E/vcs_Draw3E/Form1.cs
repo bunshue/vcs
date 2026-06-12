@@ -53,10 +53,6 @@ namespace vcs_Draw3E
 
         void show_item_location()
         {
-            //設定執行後的表單起始位置, 指定位置
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = new System.Drawing.Point(0, 0);
-
             int x_st;
             int y_st;
             int dx;
@@ -563,9 +559,9 @@ namespace vcs_Draw3E
             draw_random_pattern2();
             draw_random_pattern3();
         }
-
     }
 
+    //------------------------------------------------------------  # 60個
 
     public static class Stone
     {

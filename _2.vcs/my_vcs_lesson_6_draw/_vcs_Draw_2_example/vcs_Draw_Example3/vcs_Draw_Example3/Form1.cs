@@ -27,6 +27,7 @@ namespace vcs_Draw_Example3
         private void Form1_Load(object sender, EventArgs e)
         {
             this.Size = new Size(1600, 800);
+
             show_item_location();
 
             // 加入滾輪事件、指定事件處理函數
@@ -165,6 +166,8 @@ namespace vcs_Draw_Example3
         }
     }
 
+    //------------------------------------------------------------  # 60個
+
     class G2D_Flag_Greenland
     {
         // 畫布、中心點、寬
@@ -189,6 +192,8 @@ namespace vcs_Draw_Example3
             G.DrawRectangle(Pens.Black, x, y, w, h); // 國旗外框
         }
     }
+
+    //------------------------------------------------------------  # 60個
 
     class G2D_Flag_Turkey
     {
@@ -241,6 +246,8 @@ namespace vcs_Draw_Example3
             G.FillPath(Brushes.White, gp);
         }
     }
+
+    //------------------------------------------------------------  # 60個
 
     class G2D_Flag_USA
     {
@@ -309,6 +316,8 @@ namespace vcs_Draw_Example3
             G.FillPath(Brushes.White, gp);
         }
     }
+
+    //------------------------------------------------------------  # 60個
 
     class G2D_Flad_USA_Dynamic
     {
@@ -395,6 +404,8 @@ namespace vcs_Draw_Example3
             G.FillPath(Brushes.White, gp);
         }
     }
+
+    //------------------------------------------------------------  # 60個
 
     class G2D_Flag_Canada
     {
@@ -502,6 +513,8 @@ namespace vcs_Draw_Example3
             G.FillPath(Brushes.Red, gp);
         }
     }
+
+    //------------------------------------------------------------  # 60個
 
     class G2D_Flag_Canada_Dynamic
     {
@@ -611,3 +624,17 @@ namespace vcs_Draw_Example3
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+
