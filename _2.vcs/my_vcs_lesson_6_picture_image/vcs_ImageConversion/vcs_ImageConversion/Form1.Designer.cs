@@ -51,9 +51,10 @@
             // 
             // button1
             // 
+            this.button1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button1.Location = new System.Drawing.Point(18, 21);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 42);
+            this.button1.Size = new System.Drawing.Size(96, 36);
             this.button1.TabIndex = 0;
             this.button1.Text = "選取檔案";
             this.button1.UseVisualStyleBackColor = true;
@@ -61,9 +62,10 @@
             // 
             // button2
             // 
+            this.button2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button2.Location = new System.Drawing.Point(411, 56);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(72, 42);
+            this.button2.Size = new System.Drawing.Size(72, 36);
             this.button2.TabIndex = 1;
             this.button2.Text = "轉換";
             this.button2.UseVisualStyleBackColor = true;
@@ -81,9 +83,9 @@
             // bt_clear1
             // 
             this.bt_clear1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear1.Location = new System.Drawing.Point(444, 470);
+            this.bt_clear1.Location = new System.Drawing.Point(440, 475);
             this.bt_clear1.Name = "bt_clear1";
-            this.bt_clear1.Size = new System.Drawing.Size(68, 41);
+            this.bt_clear1.Size = new System.Drawing.Size(72, 36);
             this.bt_clear1.TabIndex = 3;
             this.bt_clear1.Text = "清除";
             this.bt_clear1.UseVisualStyleBackColor = true;
@@ -114,9 +116,10 @@
             // 
             // button4
             // 
+            this.button4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button4.Location = new System.Drawing.Point(18, 70);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 42);
+            this.button4.Size = new System.Drawing.Size(96, 36);
             this.button4.TabIndex = 4;
             this.button4.Text = "選取資料夾";
             this.button4.UseVisualStyleBackColor = true;
@@ -124,9 +127,10 @@
             // 
             // button3
             // 
+            this.button3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button3.Location = new System.Drawing.Point(310, 56);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(72, 42);
+            this.button3.Size = new System.Drawing.Size(72, 36);
             this.button3.TabIndex = 3;
             this.button3.Text = "旋轉";
             this.button3.UseVisualStyleBackColor = true;
@@ -145,9 +149,9 @@
             // bt_clear2
             // 
             this.bt_clear2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear2.Location = new System.Drawing.Point(950, 595);
+            this.bt_clear2.Location = new System.Drawing.Point(946, 600);
             this.bt_clear2.Name = "bt_clear2";
-            this.bt_clear2.Size = new System.Drawing.Size(68, 41);
+            this.bt_clear2.Size = new System.Drawing.Size(72, 36);
             this.bt_clear2.TabIndex = 6;
             this.bt_clear2.Text = "清除";
             this.bt_clear2.UseVisualStyleBackColor = true;

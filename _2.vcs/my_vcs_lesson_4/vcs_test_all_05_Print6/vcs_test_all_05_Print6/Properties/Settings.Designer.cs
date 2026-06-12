@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace howto_print_form.Properties {
+namespace vcs_test_all_05_Print6.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

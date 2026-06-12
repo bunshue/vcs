@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Timers;
 using System.Threading;
-using System.Reflection;    //for Assembly
+using System.Reflection;  // for Assembly
 
 //方案總管/右鍵/加入/類別/預設Class1.cs改成MyClass.cs
 
@@ -26,7 +26,6 @@ using System.Reflection;    //for Assembly
 把 Class1.cs 改成 MyClass.cs
 */
 
-using AnimalSpace;      //animal.cs cats.cs human.cs之namespace不一樣, 要引用
 using MyClass;    // MyClass.cs之namespace不一樣, 要引用, 檔名是不重要的, 加入專案就好, namespace才是重要的
 
 namespace vcs_Class1
@@ -58,7 +57,7 @@ namespace vcs_Class1
                 set { _FirstName = value; }
             }
 
-            public string LastName { get; set; }
+            public string LastName { get; set; }  // 有get有set簡寫, 可讀可寫
 
             public ClassPrintDataExample(string firstName, string lastName, Form1 f1)
             {
@@ -74,42 +73,7 @@ namespace vcs_Class1
             }
         }
 
-        //測試Class陣列 1
-        public class Person4
-        {
-            private string _FirstName;
-            public string FirstName
-            {
-                get { return _FirstName; }
-                set { _FirstName = value; }
-            }
-
-            public string LastName { get; set; }
-
-            public Person4(string firstName, string lastName)
-            {
-                FirstName = firstName;
-                LastName = lastName;
-            }
-
-            public override string ToString()
-            {
-                return FirstName + " " + LastName;
-            }
-        }
-
         //測試Class陣列 2
-        public class Person5
-        {
-            public string FirstName { get; set; }
-            public string LastName { get; set; }
-
-            public override string ToString()
-            {
-                return FirstName + " " + LastName;
-            }
-        }
-
         public class Product
         {
             public string Name;
@@ -271,6 +235,7 @@ namespace vcs_Class1
 
         //類別的定義在 MyClass.cs
 
+        //類別做成的串列 Sale
         List<Sale> SaleList = new List<Sale> { };    //銷售列表
 
         private void button7_Click(object sender, EventArgs e)
@@ -346,9 +311,9 @@ namespace vcs_Class1
             int age = 18;
             char gender = '男';
 
-            Person p = new Person(name, age, gender, date);
+            Person pData = new Person(name, age, gender, date);
 
-            richTextBox1.Text += p.show() + "\n";
+            richTextBox1.Text += pData.show() + "\n";
             richTextBox1.Text += "共有" + Person.counter() + "人\n";
 
             //------------------------------  # 30個
@@ -428,7 +393,7 @@ namespace vcs_Class1
 
             for (int i = 0; i < 3; i++)
             {
-                richTextBox1.Text += "物件" + i + " :\t" + tArray[i].getTime() + "\n";
+                richTextBox1.Text += "物件" + i + " : " + tArray[i].getTime() + "\n";
             }
 
             //System.GC.Collect();
@@ -622,18 +587,18 @@ namespace vcs_Class1
 
             myself.setpet(mypet);
 
-            myself.ShowMsg();
-            richTextBox1.Text += "主人資訊:\t" + myself.GetMsg() + "\n";
+            myself.ShowMsg();  // 顯示訊息在Console
 
-            Console.WriteLine("類型為:" + myself.gettype());
-            richTextBox1.Text += "類型為:\t" + myself.gettype() + "\n";
+            richTextBox1.Text += "主人資訊 : " + myself.GetMsg() + "\n";
 
-            Console.WriteLine("他的寵物是:");
-            myself.getpet().ShowMsg();
+            richTextBox1.Text += "類型為 : " + myself.gettype() + "\n";
+
+            myself.getpet().ShowMsg();  // 顯示訊息在Console
+
             mypet.print_length();
 
-            richTextBox1.Text += "他的寵物是:\t" + myself.getpet().GetMsg() + "\n";
-            richTextBox1.Text += "寵物資訊:\t" + mypet.show_length() + "\n";
+            richTextBox1.Text += "他的寵物是 : " + myself.getpet().GetMsg() + "\n";
+            richTextBox1.Text += "寵物資訊 : " + mypet.show_length() + "\n";
         }
         //寵物範例 SP
 
@@ -641,7 +606,7 @@ namespace vcs_Class1
 
         private void button27_Click(object sender, EventArgs e)
         {
-            //Class List 使用
+            //類別做成的串列 Products
             List<Product> Products = new List<Product>();
 
             // Load the data.
@@ -676,39 +641,6 @@ namespace vcs_Class1
         }
         private void button28_Click(object sender, EventArgs e)
         {
-            //Class 陣列使用
-
-            int i;
-
-            richTextBox1.Text += "建立一個Person4物件一維陣列, 長度3\n";
-            Person4[] people = new Person4[3];
-
-            richTextBox1.Text += "對第0個物件初始化\n";
-            people[0] = new Person4("David", "Wang");
-            richTextBox1.Text += "對第1個物件初始化\n";
-            people[1] = new Person4("Jerry", "Lin");
-            richTextBox1.Text += "對第2個物件初始化\n";
-            people[2] = new Person4("James P.", "Sullivan");
-
-            richTextBox1.Text += "顯示每個物件的內容\n";
-            for (i = 0; i < 3; i++)
-            {
-                richTextBox1.Text += "第 " + i.ToString() + "個\t" + people[i].ToString() + "\n";
-            }
-
-            richTextBox1.Text += "\n建立一個Person物件一維陣列, 長度3, 並初始化\n";
-            Person5[] people2 = 
-            {
-                new Person5() { FirstName="David", LastName="Wang" },
-                new Person5() { FirstName="Jerry", LastName="Lin" },
-                new Person5() { FirstName="James P.", LastName="Sullivan" },
-            };
-
-            richTextBox1.Text += "顯示每個物件的內容\n";
-            for (i = 0; i < 3; i++)
-            {
-                richTextBox1.Text += "第 " + i.ToString() + "個\t" + people2[i].ToString() + "\n";
-            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -734,10 +666,9 @@ namespace vcs_Class1
         //創建一個簡單的類來表示產品，產品有ID,類別，和價格
         public sealed class Product2
         {
-            public int Id { get; set; }
-            public string Category { get; set; }
-            public double Value { get; set; }
-
+            public int Id { get; set; }  // 有get有set簡寫, 可讀可寫
+            public string Category { get; set; }  // 有get有set簡寫, 可讀可寫
+            public double Value { get; set; }  // 有get有set簡寫, 可讀可寫
 
             public override string ToString()
             {
@@ -765,12 +696,12 @@ namespace vcs_Class1
 
         private void button31_Click(object sender, EventArgs e)
         {
+            //類別做成的串列 list
             List<Product2> list = GetList();
-
             richTextBox1.Text += "len = " + list.Count.ToString() + "\n";
+
             int cnt = list.Count;
-            int i;
-            for (i = 0; i < cnt; i++)
+            for (int i = 0; i < cnt; i++)
             {
                 richTextBox1.Text += "i = " + i.ToString() + "\t" + list[i].ToString() + "\n";
             }
@@ -778,7 +709,7 @@ namespace vcs_Class1
             richTextBox1.Text += "按類別列出一個物品清單，用GroupBy\n";
             foreach (var group in list.GroupBy(p => p.Category))
             {
-                Console.WriteLine(group.Key);
+                richTextBox1.Text += "Key : " + group.Key + "\n";
                 foreach (var item in group)
                 {
                     richTextBox1.Text += "	" + item + "\n";
@@ -808,8 +739,8 @@ namespace vcs_Class1
 
         //------------------------------------------------------------  # 60個
 
-        //建立 Animal 類別
-        public class Animal
+        //建立 AnimalB 類別
+        public class AnimalB
         {
             public int number;
             public string type;
@@ -820,7 +751,10 @@ namespace vcs_Class1
             public string Show
             {
                 // 可以透過 get 存取子，將字串進行判斷、處理.... 再返回結果
-                get { return name; }
+                get
+                {
+                    return name;
+                }
 
                 // set含有特殊的keyword: value, 當有值傳入時，都會存入value中
                 set
@@ -834,9 +768,9 @@ namespace vcs_Class1
 
         private void bt_class00_Click(object sender, EventArgs e)
         {
-            // 實例化Animal類別, 建立物件, 修改屬性, 使用方法, 2種寫法
+            // 實例化AnimalB類別, 建立物件, 修改屬性, 使用方法, 2種寫法
 
-            Animal dog1 = new Animal();
+            AnimalB dog1 = new AnimalB();
             dog1.number = 1;
             dog1.type = "Poodle";  // 貴賓犬
             dog1.name = "Peter";
@@ -844,7 +778,7 @@ namespace vcs_Class1
             richTextBox1.Text += "取出名稱 : " + dog1.Show + "\n";
             richTextBox1.Text += "取出參數 : " + dog1.recorder + "\n";
 
-            Animal dog2 = new Animal()
+            AnimalB dog2 = new AnimalB()
             {
                 number = 2,
                 type = "Maltese",  // 馬爾濟斯
@@ -861,42 +795,205 @@ namespace vcs_Class1
         {
             //圖形範例
 
+            richTextBox1.Text += "新增一個Circle物件, 沒給參數, 使用預設值\n";
+            Circle c0 = new Circle();
+            richTextBox1.Text += "圓c0的半徑 = " + c0.getRadius() + "\t" + "圓c0的面積 = " + c0.getArea() + "\n";
+            //圓c0的半徑 = 2	圓c0的面積 = 12.5663706143592
+
             richTextBox1.Text += "新增一個Circle物件, 給定參數2\n";
             Circle c1 = new Circle(2);
             richTextBox1.Text += "圓c1的半徑 = " + c1.getRadius() + "\t" + "圓c1的面積 = " + c1.getArea() + "\n";
+            //圓c1的半徑 = 2	圓c1的面積 = 12.5663706143592
 
+            // Cylinder 繼承 Circle
             richTextBox1.Text += "新增一個Cylinder物件, 給定參數5, 10\n";
             Cylinder cy1 = new Cylinder(5, 10);
             richTextBox1.Text += "圓柱體cy1的半徑 = " + cy1.getRadius() + "\t" + "圓柱體cy1的高度 = " + cy1.getLength() + "\t" + "圓柱體cy1的表面積 = " + cy1.getArea() + "\n";
+            //圓柱體cy1的半徑 = 5	圓柱體cy1的高度 = 10	圓柱體cy1的表面積 = 471.238898038469
         }
 
         //------------------------------------------------------------  # 60個
 
         private void bt_class02_Click(object sender, EventArgs e)
         {
-            //類別的定義在 MyClass.cs
-            Person2 p1 = new Person2();
+        }
 
-            richTextBox1.Text += "僅宣告物件, 還沒給值, 讀FirstName, ";
-            richTextBox1.Text += "firstname = " + p1.FirstName + "\n";
+        //------------------------------------------------------------  # 60個
 
-            p1.FirstName = "David";
-            richTextBox1.Text += "寫firstname = " + p1.FirstName + "\n";
+        private void bt_class03_Click(object sender, EventArgs e)
+        {
+        }
 
-            //p1.LastName ="Wang";
-            //由於LastName不可寫，因此此行會顯示readonly無法編譯
-            richTextBox1.Text += "讀LastName, lastname = " + p1.LastName + "\n";
-            p1.Age = 5;
-            richTextBox1.Text += "讀Age, Age = " + p1.Age + "\n";
-            p1.Age = 20;
-            richTextBox1.Text += "讀Age, Age = " + p1.Age + "\n";
+        //------------------------------------------------------------  # 60個
 
-            richTextBox1.Text += "讀Sex, Sex = " + p1.Sex + "\n";
+        private void bt_class04_Click(object sender, EventArgs e)
+        {
+        }
 
-            p1.Sex = "male";
-            richTextBox1.Text += "讀Sex, Sex = " + p1.Sex + "\n";
-            //p1.ADDR = "123"; ADDR不可寫，因此此行會顯示readonly無法編譯
+        //------------------------------------------------------------  # 60個
 
+
+        private void bt_class05_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void bt_class06_Click(object sender, EventArgs e)
+        {
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        class PersonData1
+        {
+            private string pname;
+
+            public string Name
+            {
+                get
+                {
+                    return "中文姓名 : " + pname;
+                }
+                set
+                {
+                    pname = value;
+                }
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        public class PersonData2
+        {
+            public string Name { get; set; }  // 有get有set簡寫, 可讀可寫
+            public int Age { get; set; }  // 有get有set簡寫, 可讀可寫
+            public int Weight { get; set; }  // 有get有set簡寫, 可讀可寫
+            public int Height { get; set; }  // 有get有set簡寫, 可讀可寫
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        public class PersonData3
+        {
+            public string FirstName { get; set; }  // 有get有set簡寫, 可讀可寫
+            public string LastName { get; set; }  // 有get有set簡寫, 可讀可寫
+
+            public override string ToString()
+            {
+                return FirstName + " " + LastName;
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        class PersonData4
+        {
+            //自動實作屬性
+            public string Name { get; set; }  // 有get有set簡寫, 可讀可寫
+            public byte Height { get; set; }  // 有get有set簡寫, 可讀可寫
+
+            //定義靜態方法
+            public void showInfo(PersonData4 first)
+            {
+                //指派屬性值做物件初始化
+                first = new PersonData4() { Name = "林小明", Height = 172 };
+            }
+
+            //定義靜態方法
+            public void display(ref PersonData4 second)
+            {
+                //指派屬性值做物件初始化
+                second = new PersonData4 { Name = "江大海", Height = 168 };
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        public class PersonData5
+        {
+            private string _FirstName;
+            public string FirstName
+            {
+                get { return _FirstName; }
+                set { _FirstName = value; }
+            }
+
+            public string LastName { get; set; }  // 有get有set簡寫, 可讀可寫
+
+            public PersonData5(string firstName, string lastName)
+            {
+                FirstName = firstName;
+                LastName = lastName;
+            }
+
+            public override string ToString()
+            {
+                return FirstName + " " + LastName;
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        class PersonData6
+        {
+            private string firstname = "DEFAULT";  // 預設值
+            private string lastname = "CAN NOT CHANGE";  // 預設值
+            private int age;
+
+            public string FirstName  // 有get有set, 可讀可寫
+            {
+                get
+                {
+                    return firstname;
+                }
+                set
+                {
+                    firstname = value;
+                }
+            }
+
+            public string LastName  // 只有get沒有set, 可讀不可寫(唯讀)
+            {
+                get
+                {
+                    return lastname;
+                }
+            }
+
+            public int Age  // 有get有set, 可讀可寫, set部分可加入判斷式來對傳入的值做相對應處理
+            {
+                get
+                {
+                    return age;
+                }
+                set
+                {
+                    age = (value < 10) ? 0 : 100; //if簡寫
+                    //原表示
+                    /*if(value<10)
+                    {
+                            age =0;
+                    }
+                    else
+                    {
+                            age =100;
+                    }*/
+                }
+            }
+
+            public string Sex  // 有get有set簡寫, 可讀可寫
+            {
+                get;
+                set;
+            }
+
+            public string ADDR  //get set 簡寫  可讀不可寫
+            {
+                get;
+                private set;  // 宣告為私有變數 private, 不可寫
+            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -906,35 +1003,14 @@ namespace vcs_Class1
             public int books; //宣告books為公用變數
         }
 
-        private void bt_class03_Click(object sender, EventArgs e)
-        {
-            //class book
-            Book eng = new Book();
-            eng.books = 10;
-            richTextBox1.Text += "目前英文類書籍共有 : " + eng.books + " 本\n";
-
-        }
-
         //------------------------------------------------------------  # 60個
 
         public class MyBook
         {
-            public string Id { get; set; }
-            public string BkName { get; set; }
-            public int Price { get; set; }
-            public string Img { get; set; }
-        }
-
-        private void bt_class04_Click(object sender, EventArgs e)
-        {
-            //class 範例
-            MyBook[] bk = new MyBook[]
-            {
-                new MyBook(){ Id="AEL014200", BkName="Visual C# 2012 程式設計經典", Price=650, Img="images/cs2012.jpg"},
-                new MyBook(){ Id="AEL009400", BkName="Visual C# 2012 基礎必修課", Price=520, Img="images/cs2010.jpg"},
-                new MyBook(){ Id="AEL009500", BkName="Visual Basic 2010 程式設計經典", Price=520, Img="images/vb2010.jpg"}
-            };
-
+            public string Id { get; set; }  // 有get有set簡寫, 可讀可寫
+            public string BkName { get; set; }  // 有get有set簡寫, 可讀可寫
+            public int Price { get; set; }  // 有get有set簡寫, 可讀可寫
+            public string Img { get; set; }  // 有get有set簡寫, 可讀可寫
         }
 
         //------------------------------------------------------------  # 60個
@@ -952,10 +1028,130 @@ namespace vcs_Class1
             }
         }
 
-        private void bt_class05_Click(object sender, EventArgs e)
+        //------------------------------------------------------------  # 60個
+
+        private void bt_class07_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "Class 範例 PersonData1\n";
+
+            PersonData1 pData1 = new PersonData1();
+            pData1.Name = "蘇東坡";  // 使用到set
+            richTextBox1.Text += "取得資料 : " + pData1.Name + "\n";//使用到get
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "Class 範例 PersonData2\n";
+
+            PersonData2 pData2 = new PersonData2()
+            {
+                Name = "Hong",
+                Age = 25,
+                Weight = 65,
+                Height = 170
+            };
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "Class 範例 PersonData3\n";
+
+            richTextBox1.Text += "\n建立一個Person物件一維陣列, 長度3, 並初始化\n";
+            PersonData3[] pData3 = 
+            {
+                new PersonData3() { FirstName="David", LastName="Wang" },
+                new PersonData3() { FirstName="Jerry", LastName="Lin" },
+                new PersonData3() { FirstName="James P.", LastName="Sullivan" },
+            };
+
+            richTextBox1.Text += "顯示每個物件的內容\n";
+            for (int i = 0; i < 3; i++)
+            {
+                richTextBox1.Text += "第 " + i.ToString() + "個\t" + pData3[i].ToString() + "\n";
+            }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "Class 範例 PersonData4\n";
+
+            PersonData4 pData4 = new PersonData4() { Name = "王小風", Height = 176 };
+
+            richTextBox1.Text += "By Value -> \n";
+            //Passing By Value - 輸出王小風
+            pData4.showInfo(pData4);
+
+            richTextBox1.Text += "姓名 : " + pData4.Name + "\t身高 : " + pData4.Height + "\n";
+
+            richTextBox1.Text += "By Reference -> \n";
+            //Passing By Reference - 輸出江大海
+            pData4.display(ref pData4);
+
+            richTextBox1.Text += pData4.Name + "\t" + pData4.Height + "\n";
+            richTextBox1.Text += "姓名 : " + pData4.Name + "\t身高 : " + pData4.Height + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "Class 範例 PersonData5, 類別陣列\n";
+
+            richTextBox1.Text += "建立一個PersonData5物件一維陣列, 長度3\n";
+            PersonData5[] pData5 = new PersonData5[3];
+
+            richTextBox1.Text += "對第0個物件初始化\n";
+            pData5[0] = new PersonData5("David", "Wang");
+            richTextBox1.Text += "對第1個物件初始化\n";
+            pData5[1] = new PersonData5("Jerry", "Lin");
+            richTextBox1.Text += "對第2個物件初始化\n";
+            pData5[2] = new PersonData5("James P.", "Sullivan");
+
+            richTextBox1.Text += "顯示每個物件的內容\n";
+            for (int i = 0; i < 3; i++)
+            {
+                richTextBox1.Text += "第 " + i.ToString() + "個\t" + pData5[i].ToString() + "\n";
+            }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            PersonData6 pData6 = new PersonData6();
+
+            richTextBox1.Text += "僅宣告物件, 還沒給值, 讀FirstName, ";
+            richTextBox1.Text += "firstname = " + pData6.FirstName + "\n";
+
+            pData6.FirstName = "David";
+            richTextBox1.Text += "寫firstname = " + pData6.FirstName + "\n";
+
+            //pData6.LastName ="Wang";
+            //由於LastName不可寫，因此此行會顯示readonly無法編譯
+            richTextBox1.Text += "讀LastName, lastname = " + pData6.LastName + "\n";
+            pData6.Age = 5;
+            richTextBox1.Text += "讀Age, Age = " + pData6.Age + "\n";
+            pData6.Age = 20;
+            richTextBox1.Text += "讀Age, Age = " + pData6.Age + "\n";
+
+            richTextBox1.Text += "讀Sex, Sex = " + pData6.Sex + "\n";
+
+            pData6.Sex = "male";
+            richTextBox1.Text += "讀Sex, Sex = " + pData6.Sex + "\n";
+            //pData6.ADDR = "123"; ADDR不可寫，因此此行會顯示readonly無法編譯
+
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //class book
+            Book eng = new Book();
+            eng.books = 10;
+            richTextBox1.Text += "目前英文類書籍共有 : " + eng.books + " 本\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //class 範例
+            MyBook[] bk = new MyBook[]
+            {
+                new MyBook(){ Id="AEL014200", BkName="Visual C# 2012 程式設計經典", Price=650, Img="images/cs2012.jpg"},
+                new MyBook(){ Id="AEL009400", BkName="Visual C# 2012 基礎必修課", Price=520, Img="images/cs2010.jpg"},
+                new MyBook(){ Id="AEL009500", BkName="Visual Basic 2010 程式設計經典", Price=520, Img="images/vb2010.jpg"}
+            };
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
             //Class 範例 0
-            //c
             Classmate classmate1 = new Classmate("Alice");
             Classmate classmate2 = new Classmate("Banana");
             Classmate classmate3 = new Classmate("Cherry");
@@ -965,48 +1161,8 @@ namespace vcs_Class1
             classmate2.SendResponse();
             classmate3.SendResponse();
             classmate4.SendResponse();
-        }
 
-        //------------------------------------------------------------  # 60個
-
-        public class Person3
-        {
-            public string Name { get; set; }
-            public int Age { get; set; }
-            public int Weight { get; set; }
-            public int Height { get; set; }
-        }
-
-        private void bt_class06_Click(object sender, EventArgs e)
-        {
-            //Class 範例 1
-            Person3 p = new Person3() { Name = "Hong", Age = 25, Weight = 65, Height = 170 };
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        class P
-        {
-            private string pname;
-            public string Name
-            {
-                get
-                {
-                    return "name : " + pname;
-                }
-                set
-                {
-                    pname = value;
-                }
-            }
-        }
-
-        private void bt_class07_Click(object sender, EventArgs e)
-        {
-            //Class 範例 4
-            P obj = new P();
-            obj.Name = "david wang";            //使用到set
-            Console.WriteLine(obj.Name);        //使用到get
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個            
         }
 
         //------------------------------------------------------------  # 60個
@@ -1015,7 +1171,7 @@ namespace vcs_Class1
         {
             //建構子和解構子
 
-            richTextBox1.Text += "建構子和解構子 class ClassExample, 看輸出畫面的log\n";
+            richTextBox1.Text += "建構子和解構子 class ClassExample, 看輸出畫面的log, 顯示訊息在Console\n";
 
             //建構子
             richTextBox1.Text += "新增一個ClassExample物件\n";
@@ -1060,10 +1216,10 @@ namespace vcs_Class1
 
         public class Introduction
         {
-            public string Name { get; set; }         //名稱
-            public int Age { get; set; }             //年紀
-            public bool Marry { get; set; }          //結婚
-            public List<string> Habit { get; set; }  //興趣
+            public string Name { get; set; }         //名稱  // 有get有set簡寫, 可讀可寫
+            public int Age { get; set; }             //年紀  // 有get有set簡寫, 可讀可寫
+            public bool Marry { get; set; }          //結婚  // 有get有set簡寫, 可讀可寫
+            public List<string> Habit { get; set; }  //興趣  // 有get有set簡寫, 可讀可寫
         }
 
         private void bt_class11_Click(object sender, EventArgs e)
@@ -1167,6 +1323,8 @@ namespace vcs_Class1
             dt.AcceptChanges();
             dt.Rows.Add("0003", "王五", "深圳市");
 
+
+            //類別做成的串列 Products
             //List<People> allPeople = new List<People>();
             //List<People> allPeople = new List<People>();
 
@@ -1182,45 +1340,8 @@ namespace vcs_Class1
 
         //------------------------------------------------------------  # 60個
 
-        //之後 class PersonClass 在獨立成一個檔案 PersonClass.cs
-        class PersonClass
-        {
-            //自動實作屬性
-            public string Name { get; set; }
-            public byte Height { get; set; }
-
-            //定義靜態方法
-            public void showInfo(PersonClass first)
-            {
-                //指派屬性值做物件初始化
-                first = new PersonClass() { Name = "林小明", Height = 172 };
-            }
-
-            //定義靜態方法
-            public void display(ref PersonClass second)
-            {
-                //指派屬性值做物件初始化
-                second = new PersonClass { Name = "江大海", Height = 168 };
-            }
-        }
-
         private void bt_class14_Click(object sender, EventArgs e)
         {
-            //Class 新進4
-            PersonClass pern = new PersonClass() { Name = "王小風", Height = 176 };
-
-            richTextBox1.Text += "By Value -> \n";
-            //Passing By Value - 輸出王小風
-            pern.showInfo(pern);
-
-            richTextBox1.Text += "姓名 : " + pern.Name + "\t身高 : " + pern.Height + "\n";
-
-            richTextBox1.Text += "By Reference -> \n";
-            //Passing By Reference - 輸出江大海
-            pern.display(ref pern);
-
-            richTextBox1.Text += pern.Name + "\t" + pern.Height + "\n";
-            richTextBox1.Text += "姓名 : " + pern.Name + "\t身高 : " + pern.Height + "\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -1511,7 +1632,6 @@ namespace vcs_Class1
 
         //------------------------------------------------------------  # 60個
 
-
         class MyImage       // 定義MyImage類別
         {
             // 宣告私有變數_x, _y用來表示目前車子的X, Y座標位置
@@ -1519,12 +1639,11 @@ namespace vcs_Class1
             //private Bitmap bmp;
 
             // 宣告_speed為私有變數，表示該變數只能在Car類別內使用
-            private int _speed = 0;
+            private int _speed = 0;  // 宣告_speed為私有變數, 預設值為0
+            private int _angle = 10;  // 宣告_angle為私有變數, 預設值為10
 
-            private int _angle = 10; // 私有_angle變數初值為10
-
-            public int Angle    	// 定義Angle唯讀屬性
-            {						// Angle屬性只有get區段沒有set區段
+            public int Angle  // 只有get沒有set, 可讀不可寫(唯讀)
+            {
                 get
                 {
                     return _angle;
@@ -1808,18 +1927,18 @@ namespace vcs_Class1
 
     public class DataStudent
     {
-        public long Id { get; set; }
-        public string Name { get; set; }
-        public short Age { get; set; }
-        public DateTime DateOfCreation { get; set; }
-        public bool? IsActive { get; set; }
+        public long Id { get; set; }  // 有get有set簡寫, 可讀可寫
+        public string Name { get; set; }  // 有get有set簡寫, 可讀可寫
+        public short Age { get; set; }  // 有get有set簡寫, 可讀可寫
+        public DateTime DateOfCreation { get; set; }  // 有get有set簡寫, 可讀可寫
+        public bool? IsActive { get; set; }  // 有get有set簡寫, 可讀可寫
     }
 
     public class DataTeacher
     {
-        public long Id { get; set; }
-        public string Name { get; set; }
-        public Nullable<int> DepartmentId { get; set; }
+        public long Id { get; set; }  // 有get有set簡寫, 可讀可寫
+        public string Name { get; set; }  // 有get有set簡寫, 可讀可寫
+        public Nullable<int> DepartmentId { get; set; }  // 有get有set簡寫, 可讀可寫
     }
 
     public class MemberData

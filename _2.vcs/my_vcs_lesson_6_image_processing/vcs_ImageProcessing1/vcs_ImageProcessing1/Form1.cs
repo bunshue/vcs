@@ -168,6 +168,8 @@ namespace vcs_ImageProcessing1
         }
         //各種影像處理速度比較 SP
 
+        //------------------------------------------------------------  # 60個
+
         private void button1_Click(object sender, EventArgs e)
         {
             //灰階圖片處理1_Bitmap類
@@ -209,6 +211,8 @@ namespace vcs_ImageProcessing1
             }
             return bmp;
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -287,6 +291,8 @@ namespace vcs_ImageProcessing1
             return bitmap2;
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button3_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "指針法3\n";
@@ -340,6 +346,8 @@ namespace vcs_ImageProcessing1
             bmp.UnlockBits(bmpData);
             return bmp;
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -508,6 +516,8 @@ namespace vcs_ImageProcessing1
         }
         //偽彩色圖像處理 SP
 
+        //------------------------------------------------------------  # 60個
+
         private void button5_Click(object sender, EventArgs e)
         {
             //Marshal.Copy()
@@ -553,6 +563,8 @@ namespace vcs_ImageProcessing1
             //解除綁定bmp和bmpData
             bmp.UnlockBits(bmpData);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button6_Click(object sender, EventArgs e)
         {
@@ -602,6 +614,8 @@ namespace vcs_ImageProcessing1
             bmp = new Bitmap(ms);
             pictureBox1.Image = bmp;
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button7_Click(object sender, EventArgs e)
         {
@@ -686,6 +700,8 @@ namespace vcs_ImageProcessing1
             //ms.Close();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button8_Click(object sender, EventArgs e)
         {
             //圖片 Bitmap MemoryStream 拜列 轉換
@@ -712,9 +728,13 @@ namespace vcs_ImageProcessing1
             Byte[] byte_data = ms.ToArray();//MemoryStream(ms) 轉 拜列
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button9_Click(object sender, EventArgs e)
         {
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button10_Click(object sender, EventArgs e)
         {
@@ -746,6 +766,8 @@ namespace vcs_ImageProcessing1
 
             pictureBox1.Image = bitmap1;
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button11_Click(object sender, EventArgs e)
         {
@@ -779,6 +801,8 @@ namespace vcs_ImageProcessing1
         private void button18_Click(object sender, EventArgs e)
         {
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button19_Click(object sender, EventArgs e)
         {
@@ -814,7 +838,6 @@ namespace vcs_ImageProcessing1
                 richTextBox1.Text += "位元深度\t8\n";
             else
                 richTextBox1.Text += "位元深度\tunknown, PixelFormat = " + bmp.PixelFormat.ToString() + "\n";
-
 
             int data_offset = 0;
 

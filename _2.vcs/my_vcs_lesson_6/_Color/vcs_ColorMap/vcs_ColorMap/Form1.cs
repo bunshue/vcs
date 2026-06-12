@@ -15,8 +15,6 @@ namespace vcs_ColorMap
     public partial class Form1 : Form
     {
         Graphics g;
-        Graphics g2;
-        Pen p;
         int W = 1460;
         int H = 1060;
         int w = 130;
@@ -55,6 +53,10 @@ namespace vcs_ColorMap
             }
             comboBox1.SelectedIndex = 0;
             richTextBox1.Text += "共有 " + comboBox1.Items.Count.ToString() + " 種顏色\n";
+
+            //6060
+
+            draw_minion_yellow_color();
         }
 
         private void comboBox1_DrawItem(object sender, DrawItemEventArgs e)
@@ -124,8 +126,8 @@ namespace vcs_ColorMap
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             this.WindowState = FormWindowState.Maximized;
+
             bt_exit_setup();
-            this.Size = new Size(1800, 900);
         }
 
         private void bt_exit_Click(object sender, EventArgs e)
@@ -166,6 +168,25 @@ namespace vcs_ColorMap
         }
 
         //------------------------------------------------------------  # 60個
+
+        void draw_minion_yellow_color()
+        {
+            //小小兵的顏色
+            //Minion Yellow Color
+            //HEX #FFD55E / RGB (255, 213, 94)
+            //顏色的名稱
+            //https://www.color-name.com/
+
+            Bitmap bitmap1 = new Bitmap(W, H);
+            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+            g.Clear(Color.FromArgb(255, 213, 94));
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\minion-yellow.png";
+            Image img = Image.FromFile(filename);
+            g.DrawImage(img, W - img.Width, H - img.Height, img.Width, img.Height);
+
+            pictureBox1.Image = bitmap1;
+        }
 
         void drawBox(int i, int j, int w, int h, Color clr, string text)
         {
@@ -318,8 +339,6 @@ namespace vcs_ColorMap
             int len = AllColors4.Length;
             richTextBox1.Text += "共有 " + len.ToString() + " 種顏色\n";
 
-            int x_st = 0;
-            int y_st = 0;
             for (int i = 0; i < len; i++)
             {
                 Color clr = Color.FromName(AllColors4[i].ToString());//取出顏色
@@ -385,6 +404,8 @@ namespace vcs_ColorMap
                 w = 200;
                 h = 180;
                 drawBox2(i % 6, i / 6, w, h, clr, color_name);
+                w = 130;
+                h = 56;
             }
             pictureBox1.Image = bitmap1;
         }
@@ -396,8 +417,6 @@ namespace vcs_ColorMap
             g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
             g.Clear(Color.Pink);
 
-            int y = 10;
-
             // Enumerate the SystemColors class's static Color properties.
             Type type = typeof(SystemColors);
 
@@ -405,8 +424,6 @@ namespace vcs_ColorMap
             richTextBox1.Text += "共有 " + len.ToString() + " 種顏色\n";
 
             int iii = 0;
-            int x_st = 0;
-            int y_st = 0;
             foreach (PropertyInfo field_info in type.GetProperties())
             {
                 Color clr = (Color)field_info.GetValue(null, null);//取出顏色
@@ -1010,16 +1027,6 @@ namespace vcs_ColorMap
         }
         private void button15_Click(object sender, EventArgs e)
         {
-            //小小兵的顏色
-            //Minion Yellow Color
-            //HEX #FFD55E / RGB (255, 213, 94)
-            //顏色的名稱
-            //https://www.color-name.com/
-
-            this.pictureBox1.BackColor = Color.FromArgb(255, 213, 94);
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\minion-yellow.png";
-            pictureBox1.Image = Image.FromFile(filename);
         }
 
         private void button16_Click(object sender, EventArgs e)

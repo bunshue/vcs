@@ -69,6 +69,7 @@ namespace vcs_Draw_Function2
 
             //this.Size = new Size(1273, 750);
             this.Text = "vcs_Draw_Function2";
+
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
@@ -325,6 +326,4 @@ namespace vcs_Draw_Function2
 /*  可搬出
 
 */
-
-
 

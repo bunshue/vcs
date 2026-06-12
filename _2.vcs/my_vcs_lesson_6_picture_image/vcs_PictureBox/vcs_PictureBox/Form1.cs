@@ -44,9 +44,6 @@ namespace vcs_PictureBox
             pictureBox1.Location = new Point(10, 10);
             pictureBox1.Size = new Size(640, 480);
             pictureBox2.Location = new Point(660, 10);
-            groupBox1.Location = new Point(870, 10);
-
-            rb_0.Checked = true;
 
             label2.Location = new Point(x_st + dx * 4 - 20, y_st + dy * 3);
             button6.Location = new Point(x_st + dx * 5, y_st + dy * 3);
@@ -281,50 +278,9 @@ namespace vcs_PictureBox
             flag_mouse_down = false;
         }
 
-
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
 
-        }
-
-        private void rb_picturebox_sizemode(object sender, EventArgs e)
-        {
-            if (rb_0.Checked == true)
-            {
-                richTextBox1.Text += "Normal\n";
-                pictureBox1.Size = new Size(640, 480);
-                pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
-            }
-            else if (rb_1.Checked == true)
-            {
-                richTextBox1.Text += "StretchImage\n";
-                pictureBox1.Size = new Size(640, 480);
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            }
-            else if (rb_2.Checked == true)
-            {
-                //richTextBox1.Text += pictureBox1.Size.ToString() + "\n";
-                richTextBox1.Text += "AutoSize, 會改變pictureBox的大小\n";
-                pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
-                //richTextBox1.Text += pictureBox1.Size.ToString() + "\n";
-            }
-            else if (rb_3.Checked == true)
-            {
-                richTextBox1.Text += "CenterImage\n";
-                pictureBox1.Size = new Size(640, 480);
-                pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
-            }
-            else if (rb_4.Checked == true)
-            {
-                richTextBox1.Text += "Zoom\n";
-                pictureBox1.Size = new Size(640, 480);
-                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            }
-            else
-            {
-                richTextBox1.Text += "XXXXXXX\n";
-                pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
-            }
         }
     }
 }

@@ -36,16 +36,9 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rb_4 = new System.Windows.Forms.RadioButton();
-            this.rb_3 = new System.Windows.Forms.RadioButton();
-            this.rb_2 = new System.Windows.Forms.RadioButton();
-            this.rb_1 = new System.Windows.Forms.RadioButton();
-            this.rb_0 = new System.Windows.Forms.RadioButton();
             this.bt_clear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -127,80 +120,6 @@
             this.label2.TabIndex = 19;
             this.label2.Text = "滑鼠選取區域複製在另圖";
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.rb_4);
-            this.groupBox1.Controls.Add(this.rb_3);
-            this.groupBox1.Controls.Add(this.rb_2);
-            this.groupBox1.Controls.Add(this.rb_1);
-            this.groupBox1.Controls.Add(this.rb_0);
-            this.groupBox1.Location = new System.Drawing.Point(443, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(152, 136);
-            this.groupBox1.TabIndex = 20;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "顯示模式";
-            // 
-            // rb_4
-            // 
-            this.rb_4.AutoSize = true;
-            this.rb_4.Location = new System.Drawing.Point(21, 110);
-            this.rb_4.Name = "rb_4";
-            this.rb_4.Size = new System.Drawing.Size(51, 16);
-            this.rb_4.TabIndex = 4;
-            this.rb_4.TabStop = true;
-            this.rb_4.Text = "Zoom";
-            this.rb_4.UseVisualStyleBackColor = true;
-            this.rb_4.CheckedChanged += new System.EventHandler(this.rb_picturebox_sizemode);
-            // 
-            // rb_3
-            // 
-            this.rb_3.AutoSize = true;
-            this.rb_3.Location = new System.Drawing.Point(21, 88);
-            this.rb_3.Name = "rb_3";
-            this.rb_3.Size = new System.Drawing.Size(83, 16);
-            this.rb_3.TabIndex = 3;
-            this.rb_3.TabStop = true;
-            this.rb_3.Text = "CenterImage";
-            this.rb_3.UseVisualStyleBackColor = true;
-            this.rb_3.CheckedChanged += new System.EventHandler(this.rb_picturebox_sizemode);
-            // 
-            // rb_2
-            // 
-            this.rb_2.AutoSize = true;
-            this.rb_2.Location = new System.Drawing.Point(21, 66);
-            this.rb_2.Name = "rb_2";
-            this.rb_2.Size = new System.Drawing.Size(65, 16);
-            this.rb_2.TabIndex = 2;
-            this.rb_2.TabStop = true;
-            this.rb_2.Text = "AutoSize";
-            this.rb_2.UseVisualStyleBackColor = true;
-            this.rb_2.CheckedChanged += new System.EventHandler(this.rb_picturebox_sizemode);
-            // 
-            // rb_1
-            // 
-            this.rb_1.AutoSize = true;
-            this.rb_1.Location = new System.Drawing.Point(21, 44);
-            this.rb_1.Name = "rb_1";
-            this.rb_1.Size = new System.Drawing.Size(84, 16);
-            this.rb_1.TabIndex = 1;
-            this.rb_1.TabStop = true;
-            this.rb_1.Text = "StretchImage";
-            this.rb_1.UseVisualStyleBackColor = true;
-            this.rb_1.CheckedChanged += new System.EventHandler(this.rb_picturebox_sizemode);
-            // 
-            // rb_0
-            // 
-            this.rb_0.AutoSize = true;
-            this.rb_0.Location = new System.Drawing.Point(21, 22);
-            this.rb_0.Name = "rb_0";
-            this.rb_0.Size = new System.Drawing.Size(58, 16);
-            this.rb_0.TabIndex = 0;
-            this.rb_0.TabStop = true;
-            this.rb_0.Text = "Normal";
-            this.rb_0.UseVisualStyleBackColor = true;
-            this.rb_0.CheckedChanged += new System.EventHandler(this.rb_picturebox_sizemode);
-            // 
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -218,7 +137,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(684, 411);
             this.Controls.Add(this.bt_clear);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.listBox1);
@@ -231,8 +149,6 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -248,12 +164,6 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton rb_4;
-        private System.Windows.Forms.RadioButton rb_3;
-        private System.Windows.Forms.RadioButton rb_2;
-        private System.Windows.Forms.RadioButton rb_1;
-        private System.Windows.Forms.RadioButton rb_0;
         private System.Windows.Forms.Button bt_clear;
     }
 }

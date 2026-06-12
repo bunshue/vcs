@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "howto_print_form", "howto_print_form.csproj", "{E36DBEF2-0EED-4092-A76D-1CE3EBFA6E95}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_test_all_05_Print6", "vcs_test_all_05_Print6\vcs_test_all_05_Print6.csproj", "{E36DBEF2-0EED-4092-A76D-1CE3EBFA6E95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -103,7 +103,6 @@ namespace vcs_ImageConversion
                     richTextBox1.Text += "文件名：" + openFileDialog1.FileName.Substring(index + 1) + "\n";						//顯示文件名
 
                     selected_files.Add(strFilename);
-
                 }
 
                 /*
@@ -123,26 +122,17 @@ namespace vcs_ImageConversion
 
                 if (bitmap1.Width > bitmap1.Height)
                 {
-
                     //保持寬度
-
                     pictureBox1.Width = m_width0;
-
                     pictureBox1.Height = (int)((double)bitmap1.Height * m_width0 / bitmap1.Width);
-
                 }
-
                 else
                 {
-
                     //保持高度
                     pictureBox1.Height = m_height0;
                     pictureBox1.Width = (int)((double)bitmap1.Width * m_height0 / bitmap1.Height);
                 }
                 pictureBox1.Image = bitmap1;
-
-
-
             }
             else
             {
@@ -157,14 +147,9 @@ namespace vcs_ImageConversion
                 richTextBox1.Text += "未開啟檔案\n";
                 return;
             }
-
             //轉換
-
             string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-
-
             string save_type = "*.bmp";
-
             //根據不同的選項保存為相應格式的文件
             switch (save_type)
             {
@@ -183,13 +168,8 @@ namespace vcs_ImageConversion
                 default:
                     richTextBox1.Text += "未知檔案格式 : " + save_type + "\n";
                     break;
-
             }
-
             richTextBox1.Text += "已存檔 : " + filename + "\n";
-
-
-
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -220,8 +200,6 @@ namespace vcs_ImageConversion
 /*
 
 轉成ico
-
-
             if (bitmap1 == null)
             {
                 richTextBox1.Text += "無圖片資料\n";
@@ -247,14 +225,7 @@ namespace vcs_ImageConversion
                     }
                 }
             }
-
-
-
-
 */
-
-
-
 
 /*
             //bmp2jpg

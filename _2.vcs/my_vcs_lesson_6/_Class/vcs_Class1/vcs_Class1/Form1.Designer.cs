@@ -391,7 +391,6 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(180, 60);
             this.button28.TabIndex = 8;
-            this.button28.Text = "Class 陣列使用";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
@@ -640,7 +639,7 @@
             this.bt_class07.Name = "bt_class07";
             this.bt_class07.Size = new System.Drawing.Size(190, 60);
             this.bt_class07.TabIndex = 10;
-            this.bt_class07.Text = "增加物件";
+            this.bt_class07.Text = "增加物件 PersonData";
             this.bt_class07.UseVisualStyleBackColor = true;
             this.bt_class07.Click += new System.EventHandler(this.bt_class07_Click);
             // 
@@ -684,7 +683,7 @@
             this.bt_class01.Name = "bt_class01";
             this.bt_class01.Size = new System.Drawing.Size(190, 60);
             this.bt_class01.TabIndex = 9;
-            this.bt_class01.Text = "增加物件";
+            this.bt_class01.Text = "增加物件 圖形範例";
             this.bt_class01.UseVisualStyleBackColor = true;
             this.bt_class01.Click += new System.EventHandler(this.bt_class01_Click);
             // 
@@ -725,7 +724,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1410, 720);
+            this.ClientSize = new System.Drawing.Size(1157, 720);
             this.Controls.Add(this.groupBox0);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox14);

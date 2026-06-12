@@ -201,6 +201,8 @@ namespace vcs_Draw_Function
             return bm;
         }
 
+        //------------------------------------------------------------  # 60個
+
         //畫三角函數 ST
         // The image used for the graph.
         private Bitmap GraphImage;
@@ -335,6 +337,8 @@ namespace vcs_Draw_Function
 
         //畫三角函數 SP
 
+        //------------------------------------------------------------  # 60個
+
         //#region 常態分佈
         private void btnDraw_Click(object sender, EventArgs e)
         {
@@ -464,6 +468,8 @@ namespace vcs_Draw_Function
             return (float)(one_over_2pi * Math.Exp(-(x - mean) * (x - mean) / (2 * var)));
         }
         //#endregion 常態分佈
+
+        //------------------------------------------------------------  # 60個
     }
 }
 

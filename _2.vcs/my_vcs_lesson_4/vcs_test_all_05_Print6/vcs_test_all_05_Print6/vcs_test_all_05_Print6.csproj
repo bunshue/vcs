@@ -8,8 +8,8 @@
     <ProjectGuid>{E36DBEF2-0EED-4092-A76D-1CE3EBFA6E95}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>howto_print_form</RootNamespace>
-    <AssemblyName>howto_print_form</AssemblyName>
+    <RootNamespace>vcs_test_all_05_Print6</RootNamespace>
+    <AssemblyName>vcs_test_all_05_Print6</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>

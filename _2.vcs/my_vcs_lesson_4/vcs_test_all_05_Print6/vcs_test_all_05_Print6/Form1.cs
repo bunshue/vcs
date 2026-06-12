@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Drawing.Printing;
 using System.Drawing.Drawing2D;
 
-namespace howto_print_form
+namespace vcs_test_all_05_Print6
 {
     public partial class Form1 : Form
     {

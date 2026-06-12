@@ -28,18 +28,22 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
         public Date():this(1,1,2000) { // default constructor            
         }
         */
+
         public Date(int d, int m, int y)
         {  //constructor
             day = d; month = m; year = y;
         }
+
         public void setDate(int d, int m, int y)
         {
             day = d; month = m; year = y;
         }
+
         public string show()
         {
             return month + "-" + day + "-" + year;
         }
+
         public int getDay() { return day; }
         public int getMonth() { return month; }
         public int getYear() { return year; }
@@ -163,18 +167,21 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             Chinese = Math = 0;  //預設值是0
             ctr++;
         }
+
         public Student(string n, int a, char g)
             : base(n, a, g)
         {
             Chinese = Math = 0;
             ctr++;
         }
+
         public Student(string n, int a, char g, Date d)
             : base(n, a, g, d)
         {
             Chinese = Math = 0;
             ctr++;
         }
+
         public Student(string n, int a, char g, int c, int m)
             : base(n, a, g)
         {
@@ -182,6 +189,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             Math = m;
             ctr++;
         }
+
         public Student(string n, int a, char g, Date d, int c, int m)
             : base(n, a, g, d)
         {
@@ -189,22 +197,27 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             Math = m;
             ctr++;
         }
+
         public void setChinese(int c)
         {
             Chinese = c;
         }
+
         public void setMath(int m)
         {
             Math = m;
         }
+
         public int getChinese()
         {
             return Chinese;
         }
+
         public int getMath()
         {
             return Math;
         }
+
         // 利用base.show()呼叫父類別Person的show()以取得Person的資訊
         public /*new*/ override string show()
         {
@@ -238,32 +251,38 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             Rank = "Assistant Professor";
             ctr++;
         }
+
         public Teacher(string n, int a, char g, Date d)
             : base(n, a, g, d)
         {
             Rank = "Assistant Professor";
             ctr++;
         }
+
         public Teacher(string n, int a, char g, string r)
             : base(n, a, g)
         {
             Rank = r;
             ctr++;
         }
+
         public Teacher(string n, int a, char g, Date d, string r)
             : base(n, a, g, d)
         {
             Rank = r;
             ctr++;
         }
+
         public void setRank(string r)
         {
             Rank = r;
         }
+
         public string getRank()
         {
             return Rank;
         }
+
         public override /*new*/ string show()
         {
             string str = "<<< Teacher >>>\r\n";
@@ -279,9 +298,12 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
     {
         //protected int radius; // 子類別可以直接存取 
         private int radius;
-        public Circle() { radius = 2; }
+        public Circle() { radius = 2; }  // 預設半徑為2
         public Circle(int r) { radius = r; }
-        public int getRadius() { return radius; }
+        public int getRadius()
+        {
+            return radius;
+        }
         public double getArea()
         {
             return Math.PI * radius * radius;
@@ -292,7 +314,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
     {
         int length; // private
 
-        public Cylinder() { length = 3; }
+        public Cylinder() { length = 3; }  // 預設高度為3
         /*
         public Cylinder(int r, int l)
         {
@@ -307,7 +329,10 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             length = l;
         }
 
-        public int getLength() { return length; }
+        public int getLength()
+        {
+            return length;
+        }
         /*
         public new double getArea()
         {
@@ -322,69 +347,6 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             double ca = base.getArea();
             double cl = 2 * Math.PI * getRadius(); // base.getRadius();亦可
             return 2 * ca + cl * length;
-        }
-    }
-
-    //------------------------------------------------------------  # 60個
-
-    class Person2
-    {
-        private string firstname = "DEFAULT";  // 預設值
-        private string lastname = "CAN NOT CHANGE";  // 預設值
-        private int age;
-
-        public string FirstName  //可讀可寫, 有get有set
-        {
-            get
-            {
-                return firstname;
-            }
-            set
-            {
-                firstname = value;
-            }
-        }
-
-        public string LastName  //可讀不可寫, 只有get
-        {
-            get
-            {
-                return lastname;
-            }
-        }
-
-        public int Age  //可讀可寫, 有get有set
-        //可讀可寫  set部分可加入判斷式來對傳入的值做相對應處理
-        {
-            get
-            {
-                return age;
-            }
-            set
-            {
-                age = (value < 10) ? 0 : 100; //if簡寫
-                //原表示
-                /*if(value<10)
-                {
-                        age =0;
-                }
-                else
-                {
-                        age =100;
-                }*/
-            }
-        }
-
-        public string Sex  //get set 簡寫  可讀可寫
-        {
-            get;
-            set;
-        }
-
-        public string ADDR  //get set 簡寫  可讀不可寫
-        {
-            get;
-            private set;
         }
     }
 
@@ -452,30 +414,44 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
         }
 
         // property
-        public int mHour
+        public int mHour  // 有get有set, 可讀可寫
         {
-            get { return Hour; }
+            get
+            {
+                return Hour;
+            }
             set
             {
-                if (value < 0 || value > 23) return;
+                if (value < 0 || value > 23)
+                    return;
                 Hour = value;
             }
         }
-        public int mMinute
+
+        public int mMinute  // 有get有set, 可讀可寫
         {
-            get { return Minute; }
+            get
+            {
+                return Minute;
+            }
             set
             {
-                if (value < 0 || value > 59) return;
+                if (value < 0 || value > 59)
+                    return;
                 Minute = value;
             }
         }
-        public int mSecond
+
+        public int mSecond  // 有get有set, 可讀可寫
         {
-            get { return Second; }
+            get
+            {
+                return Second;
+            }
             set
             {
-                if (value < 0 || value > 59) return;
+                if (value < 0 || value > 59)
+                    return;
                 Second = value;
             }
         }
@@ -500,9 +476,9 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             this.SaleDate = saleDate;
             this.SalePrice = salePrice;
         }
-        public string ProductName { get; set; } //貨品名稱
-        public DateTime SaleDate { get; set; }  //銷售日期
-        public double SalePrice { get; set; }   //銷售價格
+        public string ProductName { get; set; } //貨品名稱  // 有get有set簡寫, 可讀可寫
+        public DateTime SaleDate { get; set; }  //銷售日期  // 有get有set簡寫, 可讀可寫
+        public double SalePrice { get; set; }   //銷售價格  // 有get有set簡寫, 可讀可寫
     }
 
     //------------------------------------------------------------  # 60個
@@ -511,7 +487,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
     {
         public string Name;    //Name姓名欄位
         private int _Salary;   //_Salary薪水欄位
-        public int Salary      //Salary薪水介於20000~40000之間
+        public int Salary      //Salary薪水介於20000~40000之間  // 有get有set, 可讀可寫
         {
             get
             {
@@ -519,8 +495,10 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             }
             set
             {
-                if (value <= 20000) value = 20000;  //薪水最少20000
-                if (value >= 40000) value = 40000;  //薪水最多40000
+                if (value <= 20000)
+                    value = 20000;  //薪水最少20000
+                if (value >= 40000)
+                    value = 40000;  //薪水最多40000
                 _Salary = value;
             }
         }
@@ -530,7 +508,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
     public class Manager : Empolyee
     {
         private int _Bonus;		 //加入_Bonus獎金欄位
-        public int Bonus         //_Bonus獎金介於10000~50000之間
+        public int Bonus         //_Bonus獎金介於10000~50000之間  // 有get有set, 可讀可寫
         {
             get
             {
@@ -538,11 +516,14 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             }
             set
             {
-                if (value <= 10000) value = 10000;  //獎金最少10000
-                if (value >= 50000) value = 50000;  //獎金最多50000
+                if (value <= 10000)
+                    value = 10000;  //獎金最少10000
+                if (value >= 50000)
+                    value = 50000;  //獎金最多50000
                 _Bonus = value;
             }
         }
+
         public string GetTotal()   	 //定義GetTotal()方法
         {
             return "經理姓名：" + Name +
@@ -578,6 +559,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
         {
             this.type = t;
         }
+
         public string gettype()
         {
             return this.type;
@@ -587,6 +569,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
         {
             this.weight = w;
         }
+
         public int getweight()
         {
             return this.weight;
@@ -597,6 +580,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             Console.WriteLine("餵食" + this.name);
             this.weight += 1;
         }
+
         public void play()
         {
             Console.WriteLine("與" + this.name + "遊戲");
@@ -640,7 +624,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             _Total++;                 //_Total++，物件總數加1
         }
 
-        public int Score              //建立Score屬性，此屬性限制在0~100
+        public int Score  //建立Score屬性，此屬性限制在0~100  // 有get有set, 可讀可寫
         {
             get
             {
@@ -717,6 +701,117 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
 
     //------------------------------------------------------------  # 60個
 
+    class Animal
+    {
+        private string name;
+        private string type;
+        private int weight;
+
+        protected void setname(string n)
+        {
+            this.name = n;
+        }
+
+        public string getname()
+        {
+            return this.name;
+        }
+
+        protected void settype(string t)
+        {
+            this.type = t;
+        }
+
+        public string gettype()
+        {
+            return this.type;
+        }
+
+        protected void setweight(int w)
+        {
+            this.weight = w;
+        }
+
+        public int getweight()
+        {
+            return this.weight;
+        }
+
+        public virtual void ShowMsg()
+        {
+            Console.WriteLine("名字:" + this.name + " 類型:" + this.type + " 重量:" + this.weight);
+        }
+
+        public virtual string GetMsg()
+        {
+            return "名字:" + this.name + " 類型:" + this.type + " 重量:" + this.weight;
+        }
+    }
+
+    //------------------------------  # 30個
+
+    class Human : Animal
+    {
+        private int height;
+        private Animal pet;
+
+        public Human(string n, string t, int w, int h)
+        {
+            this.setname(n);
+            this.settype(t);
+            this.setweight(w);
+            this.height = h;
+        }
+
+        public void setpet(Animal a)
+        {
+            this.pet = a;
+        }
+
+        public Animal getpet()
+        {
+            return this.pet;
+        }
+
+        public override void ShowMsg()
+        {
+            Console.WriteLine("名字:" + this.getname() + " 重量:" + this.getweight() + " 身高:" + this.height);
+        }
+
+        public override string GetMsg()
+        {
+            return "名字:" + this.getname() + " 重量:" + this.getweight() + " 身高:" + this.height;
+        }
+    }
+
+    //------------------------------  # 30個
+
+    class Cats : Animal
+    {
+        private int body_length;
+        private int tail_length;
+
+        public Cats(string n, string t, int w, int b_length, int t_length)
+        {
+            this.setname(n);
+            this.settype(t);
+            this.setweight(w);
+            this.body_length = b_length;
+            this.tail_length = t_length;
+        }
+
+        public void print_length()
+        {
+            Console.WriteLine("體長:" + this.body_length + " 尾長:" + this.tail_length);
+        }
+
+        public string show_length()
+        {
+            return "體長:" + this.body_length + " 尾長:" + this.tail_length;
+        }
+    }
+
+    //------------------------------------------------------------  # 60個
 }
 
 //6060
@@ -730,4 +825,3 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
 /*  可搬出
 
 */
-
