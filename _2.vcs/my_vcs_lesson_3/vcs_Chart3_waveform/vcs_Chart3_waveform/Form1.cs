@@ -58,13 +58,15 @@ namespace vcs_Chart3_waveform
             trackBar2.Value = fs;
             label2.Text = "取樣率 : " + fs + " Hz";
 
-
-            label3.Text = "更新率 : " + fs + " Hz";
-
             // 啟動 Timer
             timer1.Interval = 20; // 每 20ms 更新一次
             //timer1.Tick += Timer1_Tick;
             timer1.Start();
+
+            trackBar3.Minimum = 10;
+            trackBar3.Maximum = 1000;
+            trackBar3.Value = timer1.Interval;
+            label3.Text = "更新間隔 : " + timer1.Interval + " 毫秒";
         }
 
         void show_item_location()
@@ -104,7 +106,7 @@ namespace vcs_Chart3_waveform
             radioButton4.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             radioButton5.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             btn_play.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            btn_pause.Location = new Point(x_st + dx * 0+50, y_st + dy * 3);
+            btn_pause.Location = new Point(x_st + dx * 0 + 50, y_st + dy * 3);
 
             this.Size = new Size(1400, 750);
             this.Text = "vcs_Chart3_waveform";
@@ -281,6 +283,12 @@ namespace vcs_Chart3_waveform
         private void btn_pause_Click(object sender, EventArgs e)
         {
             timer1.Enabled = false;
+        }
+
+        private void trackBar3_Scroll(object sender, EventArgs e)
+        {
+            timer1.Interval = trackBar3.Value;
+            label3.Text = "更新間隔 : " + timer1.Interval + " 毫秒";
         }
     }
 }

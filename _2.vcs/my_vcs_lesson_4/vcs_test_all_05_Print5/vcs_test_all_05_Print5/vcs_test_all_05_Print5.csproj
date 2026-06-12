@@ -8,8 +8,8 @@
     <ProjectGuid>{E7849C8B-B973-4396-BC6A-AB6B4914D24A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SetPrintRange</RootNamespace>
-    <AssemblyName>SetPrintRange</AssemblyName>
+    <RootNamespace>vcs_test_all_05_Print5</RootNamespace>
+    <AssemblyName>vcs_test_all_05_Print5</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>

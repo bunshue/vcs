@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace SetPrintRange
+namespace vcs_test_all_05_Print5
 {
     static class Program
     {

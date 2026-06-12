@@ -800,6 +800,14 @@ namespace vcs_test_all_01_DateTime
 
         private void button12_Click(object sender, EventArgs e)
         {
+            /*
+            String to DateTime
+            1. Parse : 將指定的日期時間字串，轉換成相對應的 DateTime 型別。若轉換失敗會產生 FormatException 。
+            2. TryParse : 將指定的日期時間字串，轉換成相對應的 DateTime 型別，回傳值表示轉換是否成功。
+            3. ParseExact : 將指定的日期時間字串，轉換成相對應的 DateTime 型別，字串表示的格式必須完全符合指定的格式，否則會擲回例外狀況。
+            4. TryParseExact : 將指定的日期時間字串，轉換成相對應的 DateTime 型別，字串表示的格式必須完全符合指定的格式，回傳值表示轉換是否成功。
+            */
+
             //Parse 大全
             //DateTime.Parse   DateTime.TryParse	在處理西元1~99年會處理成20XX年
 
@@ -1601,6 +1609,38 @@ namespace vcs_test_all_01_DateTime
 
         private void button27_Click(object sender, EventArgs e)
         {
+            //歷史時間間距, 目前欠缺換成年的部分
+
+            /*
+            //計算時間間隔
+
+            //換算成n年n月n日
+
+            //第一次世界大戰
+            //1914年7月28日－1918年11月11日（4年3個月又2周） 
+            //第二次世界大戰
+            //1939年9月1日—1945年9月2日（6年又1天）
+            //韓戰	 1950年 6月25日	~ 1953年7月27日 簽署停戰協定	4yr
+            //韓戰   1950年 6月25日 ~ 1953年7月27日（3年1個月又2天）
+            //日俄戰爭
+            //1904年2月8日－1905年9月5日
+            */
+
+            //一戰
+            //1914年7月28日－1918年11月11日（4年3個月又2周） 
+            DateTime ww1_st = new DateTime(1914, 7, 28, 8, 12, 34);
+            DateTime ww1_sp = new DateTime(1918, 11, 11, 17, 8, 17);
+            TimeSpan ww1_time = ww1_sp - ww1_st;
+            richTextBox1.Text += "一戰經歷時間 : " + ww1_time.ToString("T") + "\n";
+            show_time_span(ww1_time);
+
+            //計算兩個日期的時間間隔
+            DateTime dt1 = new DateTime(2006, 3, 11, 9, 15, 20);
+            DateTime dt2 = DateTime.Now;
+
+            TimeSpan ts = dt2 - dt1;
+            show_time_span(ts);
+
 
         }
 
@@ -1978,22 +2018,12 @@ namespace vcs_test_all_01_DateTime
 
 */
 
-
 /*
-
 "-123年4月5日"
 先自己解看看
 若是年份是負的 先反相再交DateTime.Parse()來解
 解出來的結果 再反相
                           
-//------------------------------------------------------------  # 60個
-
-String to DateTime
-1. Parse : 將指定的日期時間字串，轉換成相對應的 DateTime 型別。若轉換失敗會產生 FormatException 。
-2. TryParse : 將指定的日期時間字串，轉換成相對應的 DateTime 型別，回傳值表示轉換是否成功。
-3. ParseExact : 將指定的日期時間字串，轉換成相對應的 DateTime 型別，字串表示的格式必須完全符合指定的格式，否則會擲回例外狀況。
-4. TryParseExact : 將指定的日期時間字串，轉換成相對應的 DateTime 型別，字串表示的格式必須完全符合指定的格式，回傳值表示轉換是否成功。
-  
 //------------------------------------------------------------  # 60個
 
 string drawDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
@@ -2004,30 +2034,4 @@ string filename = "imsLink_log." + DateTime.Now.ToString("yyyy.MMdd.HHmm.ss") + 
 
 */
 
-/*
-//計算時間間隔
-
-//一戰
-//1914年7月28日－1918年11月11日（4年3個月又2周） 
-DateTime ww1_st = new DateTime(1914, 7, 28, 8, 12, 34);
-DateTime ww1_sp = new DateTime(1918, 11, 11, 17, 8, 17);
-TimeSpan ww1_time = ww1_sp - ww1_st;
-richTextBox1.Text += "一戰經歷時間 : " + ww1_time.ToString("T") + "\n";
-//換算成n年n月n日
-
-//第一次世界大戰
-//1914年7月28日－1918年11月11日（4年3個月又2周） 
-//第二次世界大戰
-//1939年9月1日—1945年9月2日（6年又1天）
-//韓戰	 1950年 6月25日	~ 1953年7月27日 簽署停戰協定	4yr
-//韓戰   1950年 6月25日 ~ 1953年7月27日（3年1個月又2天）
-//日俄戰爭
-//1904年2月8日－1905年9月5日
-*/
-
-
-
-
 //var strname=DateTime.Now.ToShortDateString().Replace("/","-")+".txt";
-
-

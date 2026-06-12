@@ -8,8 +8,8 @@
     <ProjectGuid>{5FCFBA64-61F8-48A1-B079-E0D95012E9D7}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PagesPrint</RootNamespace>
-    <AssemblyName>PagesPrint</AssemblyName>
+    <RootNamespace>vcs_test_all_05_Print4</RootNamespace>
+    <AssemblyName>vcs_test_all_05_Print4</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace PagesPrint
+namespace vcs_test_all_05_Print4
 {
     public partial class Frm_Main : Form
     {

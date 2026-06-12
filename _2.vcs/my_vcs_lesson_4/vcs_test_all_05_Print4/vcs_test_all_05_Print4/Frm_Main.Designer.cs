@@ -1,4 +1,4 @@
-﻿namespace PagesPrint
+﻿namespace vcs_test_all_05_Print4
 {
     partial class Frm_Main
     {

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 using System.Collections;
 
-namespace SetPrintRange
+namespace vcs_test_all_05_Print5
 {
     public partial class Frm_Main : Form
     {

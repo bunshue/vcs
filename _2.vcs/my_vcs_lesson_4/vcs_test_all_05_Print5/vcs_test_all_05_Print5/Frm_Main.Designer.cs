@@ -1,4 +1,4 @@
-﻿namespace SetPrintRange
+﻿namespace vcs_test_all_05_Print5
 {
     partial class Frm_Main
     {
