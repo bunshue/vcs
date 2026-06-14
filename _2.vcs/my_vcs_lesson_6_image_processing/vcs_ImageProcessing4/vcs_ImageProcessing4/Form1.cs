@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,22 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;
-using System.Drawing.Imaging;   //for BitmapData
-using System.Drawing.Drawing2D; //for InterpolationMode
-using System.Runtime.InteropServices;   //for Marshal
+using System.IO;    //for Path
+using System.Diagnostics;   //for Stopwatch
+using System.Drawing.Imaging;   //for PixelFormat
 
 namespace vcs_ImageProcessing4
 {
     public partial class Form1 : Form
     {
-        //string filename = @"D:\_git\vcs\_1.data\______test_files1\naruto.jpg";
-        //string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
-        //string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-        string filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp";
-        //string filename = @"D:\_git\vcs\_1.data\______test_files1\_image_processing\isinbaeva.jpg";
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
 
-        Bitmap bitmap1;
+        Stopwatch sw = new Stopwatch();
 
         public Form1()
         {
@@ -35,7 +30,8 @@ namespace vcs_ImageProcessing4
 
             //------------------------------------------------------------  # 60個
 
-            reset_pictureBox();
+            Bitmap bitmap1 = new Bitmap(filename);
+            pictureBox1.Image = bitmap1;
         }
 
         void show_item_location()
@@ -45,111 +41,64 @@ namespace vcs_ImageProcessing4
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
-            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            btnEmboss1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            btnEmboss2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            btnEmboss3.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            btnBlur1.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            btnBlur2.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            btnHighPass1.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            btnHighPass2.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            btnEdge1.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            btnEdge2.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            btnEdge3.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
-            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            pictureBox1.Size = new Size(600, 600);
+            btnAverage.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            btnGrayscale.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            btnRed.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            btnGreen.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            btnBlue.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            btnInvert.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            label1.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            txtRank.Location = new Point(x_st + dx * 1 + 60, y_st + dy * 6);
+            btnMaximum.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            btnMinimum.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            btnPixellate.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            btnPointellate.Location = new Point(x_st + dx * 1, y_st + dy * 10);
+            btnGrayscale2.Location = new Point(x_st + dx * 1, y_st + dy * 11);
+
+            bt_image_process_a0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_image_process_a1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_image_process_a2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            bt_image_process_a3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            bt_image_process_a4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            bt_image_process_a5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            bt_image_process_a6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            bt_image_process_a7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+
+            bt_image_process_b0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_image_process_b1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_image_process_b2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            bt_image_process_b3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+
+            groupBox1.Size = new Size(200 + 20, 220);
+            groupBox2.Size = new Size(200 + 20, 420);
+            groupBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 3 + 20);
+
+            pictureBox1.Size = new Size(800, 600);
+            pictureBox1.Location = new Point(x_st + dx * 3 + 20, y_st + dy * 0);
             bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y);
 
-            pictureBox2.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            pictureBox2.Size = new Size(600, 600);
-
-            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
-            richTextBox1.Size = new Size(300, 600);
+            richTextBox1.Size = new Size(200, 600);
+            richTextBox1.Location = new Point(x_st + dx * 7, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1700, 1000);
+            this.Size = new Size(1700, 880);
             this.Text = "vcs_ImageProcessing4";
-
-            bt_open_file_setup();
 
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
-        }
-
-        private void bt_open_file_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-
-            openFileDialog1.Title = "單選檔案";
-            //openFileDialog1.ShowHelp = true;
-            openFileDialog1.FileName = "";              //預設開啟的檔名
-            openFileDialog1.DefaultExt = "*.txt";
-            openFileDialog1.Filter = "圖片(*.bmp,*.jpg,*.png)|*.bmp;*.jpg;*.png";   //存檔類型
-            //openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
-            openFileDialog1.RestoreDirectory = true;
-            //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = @"D:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
-            openFileDialog1.Multiselect = false;    //單選
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                richTextBox1.Text += "已選取檔案: " + openFileDialog1.FileName + "\n";
-                FileInfo f = new FileInfo(openFileDialog1.FileName);
-                richTextBox1.Text += "Name: " + f.Name + "\n";
-                richTextBox1.Text += "FullName: " + f.FullName + "\n";
-                richTextBox1.Text += "Extension: " + f.Extension + "\n";
-                richTextBox1.Text += "size: " + f.Length.ToString() + "\n";
-                richTextBox1.Text += "Directory: " + f.Directory + "\n";
-                richTextBox1.Text += "DirectoryName: " + f.DirectoryName + "\n";
-
-                filename = openFileDialog1.FileName;
-                reset_pictureBox();
-            }
-            else
-            {
-                richTextBox1.Text += "未選取檔案\n";
-            }
-        }
-
-        void bt_open_file_setup()
-        {
-            int width = 5;
-            int w = 50; //設定按鈕大小 W
-            int h = 50; //設定按鈕大小 H
-
-            Button bt_open_file = new Button();  // 實例化按鈕
-            bt_open_file.Size = new Size(w, h);
-            bt_open_file.Text = "";
-            Bitmap bmp = new Bitmap(w, h);
-            Graphics g = Graphics.FromImage(bmp);
-            Pen p = new Pen(Color.Blue, width);
-            g.Clear(Color.Pink);
-            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
-            g.DrawLine(p, w / 4, 0, (w - 1) / 2, h - 1);
-            g.DrawLine(p, (w - 1) * 3 / 4, 0, (w - 1) / 2, h - 1);
-            bt_open_file.Image = bmp;
-
-            bt_open_file.Location = new Point(this.ClientSize.Width - bt_open_file.Width, 0 + h);
-            bt_open_file.Click += bt_open_file_Click;     // 加入按鈕事件
-
-            this.Controls.Add(bt_open_file); // 將按鈕加入表單
-            bt_open_file.BringToFront();     //移到最上層
-        }
-
-        void reset_pictureBox()
-        {
-            //讀取圖檔
-            pictureBox1.Image = Image.FromFile(filename);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -159,966 +108,620 @@ namespace vcs_ImageProcessing4
 
         private void bt_reset_Click(object sender, EventArgs e)
         {
-            reset_pictureBox();
+            Bitmap bitmap1 = new Bitmap(filename);
+            pictureBox1.Image = bitmap1;
         }
 
         //------------------------------------------------------------  # 60個
 
-        private void button0_Click(object sender, EventArgs e)
+        // Apply a filter.
+        private void ApplyFilter(Bitmap32.Filter filter)
         {
+            Bitmap bm = new Bitmap(filename);
+
+            this.Cursor = Cursors.WaitCursor;
+            DateTime start_time = DateTime.Now;
+
+            Bitmap32 bm32 = new Bitmap32(bm);
+
+            // Apply the filter.
+            Bitmap32 new_bm32 = bm32.ApplyFilter(filter, false);
+
+            // Display the result.
+            pictureBox1.Image = new_bm32.bitmap1;
+
+            DateTime stop_time = DateTime.Now;
+            this.Cursor = Cursors.Default;
+
+            TimeSpan elapsed_time = stop_time - start_time;
+            richTextBox1.Text += "作業時間 :" + elapsed_time.TotalSeconds.ToString("0.000000") + " 秒\n";
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        //浮雕1
+        private void btnEmboss1_Click(object sender, EventArgs e)
         {
-            //旋轉（90度/180度/270度, 3種）
+            ApplyFilter(Bitmap32.EmbossingFilter);
+        }
+
+        //浮雕2
+        private void btnEmboss2_Click(object sender, EventArgs e)
+        {
+            ApplyFilter(Bitmap32.EmbossingFilter2);
+        }
+
+        //浮雕3
+        private void btnEmboss3_Click(object sender, EventArgs e)
+        {
+            ApplyFilter(Bitmap32.EmbossingFilter3);
+        }
+
+        //高斯模糊 5X5
+        private void btnBlur1_Click(object sender, EventArgs e)
+        {
+            ApplyFilter(Bitmap32.BlurFilter5x5Gaussian);
+        }
+
+        //平均模糊 5X5
+        private void btnBlur2_Click(object sender, EventArgs e)
+        {
+            ApplyFilter(Bitmap32.BlurFilter5x5Mean);
+        }
+
+        //高通1 3X3
+        private void btnHighPass1_Click(object sender, EventArgs e)
+        {
+            ApplyFilter(Bitmap32.HighPassFilter3x3);
+        }
+
+        //高通2 5X5
+        private void btnHighPass2_Click(object sender, EventArgs e)
+        {
+            ApplyFilter(Bitmap32.HighPassFilter5x5);
+        }
+
+        //邊緣檢測 1
+        private void btnEdge1_Click(object sender, EventArgs e)
+        {
+            ApplyFilter(Bitmap32.EdgeDetectionFilterULtoLR);
+        }
+
+        //邊緣檢測 2
+        private void btnEdge2_Click(object sender, EventArgs e)
+        {
+            ApplyFilter(Bitmap32.EdgeDetectionFilterTopToBottom);
+        }
+
+        //邊緣檢測 3
+        private void btnEdge3_Click(object sender, EventArgs e)
+        {
+            ApplyFilter(Bitmap32.EdgeDetectionFilterLeftToRight);
+        }
+
+        // Average the colors.
+        private void btnAverage_Click(object sender, EventArgs e)
+        {
+            Bitmap bm = new Bitmap(filename);
+
+            this.Cursor = Cursors.WaitCursor;
+            DateTime start_time = DateTime.Now;
+
+            Bitmap32 bm32 = new Bitmap32(bm);
+
+            // Average the colors.
+            bm32.Average();
+
+            // Display the result.
+            pictureBox1.Image = bm;
+
+            DateTime stop_time = DateTime.Now;
+            this.Cursor = Cursors.Default;
+
+            TimeSpan elapsed_time = stop_time - start_time;
+            richTextBox1.Text += "作業時間 :" + elapsed_time.TotalSeconds.ToString("0.000000") + " 秒\n";
+        }
+
+        // Convert to grayscale.
+        private void btnGrayscale_Click(object sender, EventArgs e)
+        {
+            Bitmap bm = new Bitmap(filename);
+
+            this.Cursor = Cursors.WaitCursor;
+            DateTime start_time = DateTime.Now;
+
+            Bitmap32 bm32 = new Bitmap32(bm);
+
+            // Convert to grayscale.
+            bm32.Grayscale();
+
+            // Display the result.
+            pictureBox1.Image = bm;
+
+            DateTime stop_time = DateTime.Now;
+            this.Cursor = Cursors.Default;
+
+            TimeSpan elapsed_time = stop_time - start_time;
+            richTextBox1.Text += "作業時間 :" + elapsed_time.TotalSeconds.ToString("0.000000") + " 秒\n";
+        }
+
+        // Convert to a red scale.
+        private void btnRed_Click(object sender, EventArgs e)
+        {
+            Bitmap bm = new Bitmap(filename);
+
+            this.Cursor = Cursors.WaitCursor;
+            DateTime start_time = DateTime.Now;
+
+            Bitmap32 bm32 = new Bitmap32(bm);
+
+            // Convert to red.
+            bm32.ClearGreen();
+            bm32.ClearBlue();
+
+            // Display the result.
+            pictureBox1.Image = bm;
+
+            DateTime stop_time = DateTime.Now;
+            this.Cursor = Cursors.Default;
+
+            TimeSpan elapsed_time = stop_time - start_time;
+            richTextBox1.Text += "作業時間 :" + elapsed_time.TotalSeconds.ToString("0.000000") + " 秒\n";
+        }
+
+        // Convert to a green scale.
+        private void btnGreen_Click(object sender, EventArgs e)
+        {
+            Bitmap bm = new Bitmap(filename);
+
+            this.Cursor = Cursors.WaitCursor;
+            DateTime start_time = DateTime.Now;
+
+            Bitmap32 bm32 = new Bitmap32(bm);
+
+            // Convert to green.
+            bm32.ClearRed();
+            bm32.ClearBlue();
+
+            // Display the result.
+            pictureBox1.Image = bm;
+
+            DateTime stop_time = DateTime.Now;
+            this.Cursor = Cursors.Default;
+
+            TimeSpan elapsed_time = stop_time - start_time;
+            richTextBox1.Text += "作業時間 :" + elapsed_time.TotalSeconds.ToString("0.000000") + " 秒\n";
+        }
+
+        // Convert to a blue scale.
+        private void btnBlue_Click(object sender, EventArgs e)
+        {
+            Bitmap bm = new Bitmap(filename);
+
+            this.Cursor = Cursors.WaitCursor;
+            DateTime start_time = DateTime.Now;
+
+            Bitmap32 bm32 = new Bitmap32(bm);
+
+            // Convert to blue.
+            bm32.ClearRed();
+            bm32.ClearGreen();
+
+            // Display the result.
+            pictureBox1.Image = bm;
+
+            DateTime stop_time = DateTime.Now;
+            this.Cursor = Cursors.Default;
+
+            TimeSpan elapsed_time = stop_time - start_time;
+            richTextBox1.Text += "作業時間 :" + elapsed_time.TotalSeconds.ToString("0.000000") + " 秒\n";
+        }
+
+        // Invert the image.
+        private void btnInvert_Click(object sender, EventArgs e)
+        {
+            Bitmap bm = new Bitmap(filename);
+
+            this.Cursor = Cursors.WaitCursor;
+            DateTime start_time = DateTime.Now;
+
+            Bitmap32 bm32 = new Bitmap32(bm);
+
+            // Convert to blue.
+            bm32.Invert();
+
+            // Display the result.
+            pictureBox1.Image = bm;
+
+            DateTime stop_time = DateTime.Now;
+            this.Cursor = Cursors.Default;
+
+            TimeSpan elapsed_time = stop_time - start_time;
+            richTextBox1.Text += "作業時間 :" + elapsed_time.TotalSeconds.ToString("0.000000") + " 秒\n";
+        }
+
+        // Pick the maximum brightness for pixels in areas.
+        private void btnMaximum_Click(object sender, EventArgs e)
+        {
+            Bitmap bm = new Bitmap(filename);
+
+            this.Cursor = Cursors.WaitCursor;
+            DateTime start_time = DateTime.Now;
+
+            Bitmap32 bm32 = new Bitmap32(bm);
+
+            // Pick the maximum brightness colors.
+            Bitmap32 new_bm32 = bm32.RankMaximum(int.Parse(txtRank.Text), false);
+
+            // Display the result.
+            pictureBox1.Image = new_bm32.bitmap1;
+
+            DateTime stop_time = DateTime.Now;
+            this.Cursor = Cursors.Default;
+
+            TimeSpan elapsed_time = stop_time - start_time;
+            richTextBox1.Text += "作業時間 :" + elapsed_time.TotalSeconds.ToString("0.000000") + " 秒\n";
+        }
+
+        // Pick the minimum brightness for pixels in areas.
+        private void btnMinimum_Click(object sender, EventArgs e)
+        {
+            Bitmap bm = new Bitmap(filename);
+
+            this.Cursor = Cursors.WaitCursor;
+            DateTime start_time = DateTime.Now;
+
+            Bitmap32 bm32 = new Bitmap32(bm);
+
+            // Pick the minimum brightness colors.
+            Bitmap32 new_bm32 = bm32.RankMinimum(int.Parse(txtRank.Text), false);
+
+            // Display the result.
+            pictureBox1.Image = new_bm32.bitmap1;
+
+            DateTime stop_time = DateTime.Now;
+            this.Cursor = Cursors.Default;
+
+            TimeSpan elapsed_time = stop_time - start_time;
+            richTextBox1.Text += "作業時間 :" + elapsed_time.TotalSeconds.ToString("0.000000") + " 秒\n";
+        }
+
+        // Pixellate the image.
+        private void btnPixellate_Click(object sender, EventArgs e)
+        {
+            Bitmap bm = new Bitmap(filename);
+
+            this.Cursor = Cursors.WaitCursor;
+            DateTime start_time = DateTime.Now;
+
+            Bitmap32 bm32 = new Bitmap32(bm);
+
+            // Pixellate.
+            bm32.Pixellate(int.Parse(txtRank.Text), false);
+
+            // Display the result.
+            pictureBox1.Image = bm;
+
+            DateTime stop_time = DateTime.Now;
+            this.Cursor = Cursors.Default;
+
+            TimeSpan elapsed_time = stop_time - start_time;
+            richTextBox1.Text += "作業時間 :" + elapsed_time.TotalSeconds.ToString("0.000000") + " 秒\n";
+        }
+
+        // Pointellate the image.
+        private void btnPointellate_Click(object sender, EventArgs e)
+        {
+            Bitmap bm = new Bitmap(filename);
+
+            this.Cursor = Cursors.WaitCursor;
+            DateTime start_time = DateTime.Now;
+
+            Bitmap32 bm32 = new Bitmap32(bm);
+
+            // Pixellate.
+            int rank = int.Parse(txtRank.Text);
+            Bitmap new_bm = bm32.Pointellate(rank, rank, false);
+
+            // Display the result.
+            pictureBox1.Image = new_bm;
+
+            DateTime stop_time = DateTime.Now;
+            this.Cursor = Cursors.Default;
+
+            TimeSpan elapsed_time = stop_time - start_time;
+            richTextBox1.Text += "作業時間 :" + elapsed_time.TotalSeconds.ToString("0.000000") + " 秒\n";
+        }
+
+        private void btnGrayscale2_Click(object sender, EventArgs e)
+        {
+            //用Bitmap32做灰階
+
             Bitmap bitmap1 = new Bitmap(filename);
-            Bitmap bitmap2 = RotateImage(bitmap1, 90);
-            pictureBox1.Image = bitmap2;
-        }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //重設大小
-            Bitmap bitmap1 = new Bitmap(filename);
-            Bitmap bitmap2 = ResizeImage(bitmap1, new Size(bitmap1.Width / 2, bitmap1.Height / 2));
-            pictureBox1.Image = bitmap2;
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
-
-            //水平Mirror
-            int xx;
-            int yy;
-            int ww;
-            int hh;
-
-            richTextBox1.Text += "水平Mirror處理中~~~~~~\n";
-
-            Bitmap bitmap1 = new Bitmap(filename);
-            //g = Graphics.FromImage(bitmap1);
-
-            ww = bitmap1.Width / 2;
-            hh = bitmap1.Height / 1;
-
-            for (yy = 0; yy < hh; yy++)
-            {
-                for (xx = 0; xx < ww; xx++)
-                {
-                    Color pp = bitmap1.GetPixel(bitmap1.Width - xx - 1, yy);
-                    bitmap1.SetPixel(bitmap1.Width - xx - 1, yy, bitmap1.GetPixel(xx, yy));
-                    bitmap1.SetPixel(xx, yy, pp);
-                }
-            }
-            pictureBox1.Image = bitmap1;
-            richTextBox1.Text += "處理完成\n";
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
-
-            //垂直Mirror
-            int xx;
-            int yy;
-            int ww;
-            int hh;
-
-            richTextBox1.Text += "垂直Mirror處理中~~~~~~\n";
-
-            Bitmap bitmap1 = new Bitmap(filename);
-            //g = Graphics.FromImage(bitmap1);
-
-            ww = bitmap1.Width / 1;
-            hh = bitmap1.Height / 2;
-
-            for (xx = 0; xx < ww; xx++)
-            {
-                for (yy = 0; yy < hh; yy++)
-                {
-                    Color pp = bitmap1.GetPixel(xx, bitmap1.Height - yy - 1);
-                    bitmap1.SetPixel(xx, bitmap1.Height - yy - 1, bitmap1.GetPixel(xx, yy));
-                    bitmap1.SetPixel(xx, yy, pp);
-                }
-            }
-            pictureBox1.Image = bitmap1;
-            richTextBox1.Text += "處理完成\n";
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            //找過亮
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\ims_image.bmp";
-
-            richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
-
-            pictureBox1.Image = Image.FromFile(filename);
-
-            Bitmap bitmap1 = new Bitmap(filename);
-            pictureBox1.Image = bitmap1;
-
-            int xx;
-            int yy;
-            Color p;
-
-            for (yy = 0; yy < bitmap1.Height; yy++)
-            {
-                for (xx = 0; xx < bitmap1.Width; xx++)
-                {
-                    p = bitmap1.GetPixel(xx, yy);
-
-                    RGB pp = new RGB(p.R, p.G, p.B);
-                    YUV yyy = new YUV();
-                    yyy = RGBToYUV(pp);
-
-                    if (yyy.Y > 252)
-                    {
-                        //bitmap1.SetPixel(xx, yy, Color.FromArgb((int)yyy.Y, (int)yyy.Y, (int)yyy.Y));
-                        bitmap1.SetPixel(xx, yy, Color.Red);
-                    }
-                    else
-                    {
-                    }
-                }
-            }
-            pictureBox1.Image = bitmap1;
-        }
-
-        public struct RGB
-        {
-            private byte _r;
-            private byte _g;
-            private byte _b;
-
-            public RGB(byte r, byte g, byte b)
-            {
-                this._r = r;
-                this._g = g;
-                this._b = b;
-            }
-
-            public byte R
-            {
-                get { return this._r; }
-                set { this._r = value; }
-            }
-
-            public byte G
-            {
-                get { return this._g; }
-                set { this._g = value; }
-            }
-
-            public byte B
-            {
-                get { return this._b; }
-                set { this._b = value; }
-            }
-
-            public bool Equals(RGB rgb)
-            {
-                return (this.R == rgb.R) && (this.G == rgb.G) && (this.B == rgb.B);
-            }
-        }
-
-        public struct YUV
-        {
-            private double _y;
-            private double _u;
-            private double _v;
-
-            public YUV(double y, double u, double v)
-            {
-                this._y = y;
-                this._u = u;
-                this._v = v;
-            }
-
-            public double Y
-            {
-                get { return this._y; }
-                set { this._y = value; }
-            }
-
-            public double U
-            {
-                get { return this._u; }
-                set { this._u = value; }
-            }
-
-            public double V
-            {
-                get { return this._v; }
-                set { this._v = value; }
-            }
-
-            public bool Equals(YUV yuv)
-            {
-                return (this.Y == yuv.Y) && (this.U == yuv.U) && (this.V == yuv.V);
-            }
-        }
-
-        public static YUV RGBToYUV(RGB rgb)
-        {
-            double y = rgb.R * .299000 + rgb.G * .587000 + rgb.B * .114000;
-            double u = rgb.R * -.168736 + rgb.G * -.331264 + rgb.B * .500000 + 128;
-            double v = rgb.R * .500000 + rgb.G * -.418688 + rgb.B * -.081312 + 128;
-
-            return new YUV(y, u, v);
-        }
-
-        /* old
-        public static RGB YUVToRGB(YUV yuv)
-        {
-            byte r = (byte)(yuv.Y + 1.4075 * (yuv.V - 128));
-            byte g = (byte)(yuv.Y - 0.3455 * (yuv.U - 128) - (0.7169 * (yuv.V - 128)));
-            byte b = (byte)(yuv.Y + 1.7790 * (yuv.U - 128));
-
-            return new RGB(r, g, b);
-        }
-        */
-
-        public static RGB YUVToRGB(YUV yuv)
-        {
-            double r = yuv.Y + 1.4075 * (yuv.V - 128);
-            double g = yuv.Y - 0.3455 * (yuv.U - 128) - (0.7169 * (yuv.V - 128));
-            double b = yuv.Y + 1.7790 * (yuv.U - 128);
-            if (r > 255)
-                r = 255;
-            if (g > 255)
-                g = 255;
-            if (b > 255)
-                b = 255;
-            if (r < 0)
-                r = 0;
-            if (g < 0)
-                g = 0;
-            if (b < 0)
-                b = 0;
-
-            return new RGB((byte)r, (byte)g, (byte)b);
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            //降亮度
-
-            //string filename = @"D:\_git\vcs\_1.data\______test_files1\ims_image.bmp";
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp";
-
-            richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
-
-            pictureBox1.Image = Image.FromFile(filename);
-
-            Bitmap bitmap1 = new Bitmap(filename);
-            pictureBox1.Image = bitmap1;
-
-            int xx;
-            int yy;
-            Color p;
-
-            for (yy = 0; yy < bitmap1.Height; yy++)
-            {
-                for (xx = 0; xx < bitmap1.Width; xx++)
-                {
-                    p = bitmap1.GetPixel(xx, yy);
-
-                    RGB pp = new RGB(p.R, p.G, p.B);
-                    YUV yyy = new YUV();
-                    RGB rrr = new RGB();
-                    yyy = RGBToYUV(pp);
-
-                    if (yyy.Y > 50)
-                    {
-                        yyy.Y -= 10;
-                    }
-                    else
-                    {
-                        yyy.Y = 50;
-                    }
-
-                    rrr = YUVToRGB(yyy);
-                    bitmap1.SetPixel(xx, yy, Color.FromArgb(rrr.R, rrr.G, rrr.B));
-                }
-            }
-            pictureBox1.Image = bitmap1;
-        }
-
-        public void bitSlicing()
-        {
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp"; //stomach
-
-            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-
-            int xx;
-            int yy;
-
-            for (yy = 0; yy < bitmap1.Height; yy++)
-            {
-                for (xx = 0; xx < bitmap1.Width; xx++)
-                {
-                    byte rrr = bitmap1.GetPixel(xx, yy).R;
-                    byte ggg = bitmap1.GetPixel(xx, yy).G;
-                    byte bbb = bitmap1.GetPixel(xx, yy).B;
-
-                    int Gray = (rrr * 299 + ggg * 587 + bbb * 114 + 500) / 1000;
-                    Color zz = Color.FromArgb(255, Gray, Gray, Gray);
-
-                    bitmap1.SetPixel(xx, yy, zz);
-                }
-            }
-            pictureBox1.Image = bitmap1;
-
-            //Bitmap GrayImg = imop.getGrayImage8(Image);
-
-            int width = bitmap1.Width;
-            int height = bitmap1.Height;
-
-            Bitmap level1 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
-            Bitmap level2 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
-            Bitmap level3 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
-            Bitmap level4 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
-            Bitmap level5 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
-            Bitmap level6 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
-            Bitmap level7 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
-            Bitmap level8 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
-
-            BitmapData level1Data = level1.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-            BitmapData level2Data = level2.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-            BitmapData level3Data = level3.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-            BitmapData level4Data = level4.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-            BitmapData level5Data = level5.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-            BitmapData level6Data = level6.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-            BitmapData level7Data = level7.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-            BitmapData level8Data = level8.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-            BitmapData GrayImgData = bitmap1.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-
-            int size = GrayImgData.Stride * GrayImgData.Height;
-
-            IntPtr intPtr = GrayImgData.Scan0;
-            IntPtr intPtr1 = level1Data.Scan0;
-            IntPtr intPtr2 = level2Data.Scan0;
-            IntPtr intPtr3 = level3Data.Scan0;
-            IntPtr intPtr4 = level4Data.Scan0;
-            IntPtr intPtr5 = level5Data.Scan0;
-            IntPtr intPtr6 = level6Data.Scan0;
-            IntPtr intPtr7 = level7Data.Scan0;
-            IntPtr intPtr8 = level8Data.Scan0;
-
-            byte[] GrayImgBytes = new byte[size];
-            byte[] level1Bytes = new byte[size];
-            byte[] level2Bytes = new byte[size];
-            byte[] level3Bytes = new byte[size];
-            byte[] level4Bytes = new byte[size];
-            byte[] level5Bytes = new byte[size];
-            byte[] level6Bytes = new byte[size];
-            byte[] level7Bytes = new byte[size];
-            byte[] level8Bytes = new byte[size];
-
-            Marshal.Copy(intPtr, GrayImgBytes, 0, size);
-            Marshal.Copy(intPtr1, level1Bytes, 0, size);
-            Marshal.Copy(intPtr2, level2Bytes, 0, size);
-            Marshal.Copy(intPtr3, level3Bytes, 0, size);
-            Marshal.Copy(intPtr4, level4Bytes, 0, size);
-            Marshal.Copy(intPtr5, level5Bytes, 0, size);
-            Marshal.Copy(intPtr6, level6Bytes, 0, size);
-            Marshal.Copy(intPtr7, level7Bytes, 0, size);
-            Marshal.Copy(intPtr8, level8Bytes, 0, size);
-
-            int k = 3;
-            for (int i = 0; i < height; i++)
-            {
-                for (int j = 0; j < width; j++)
-                {
-                    byte R = GrayImgBytes[i * GrayImgData.Stride + j * k];
-                    int L1 = R & 1;
-                    if (L1 != 0) { L1 = 255; }
-                    int L2 = R & 2;
-                    if (L2 != 0) { L2 = 255; }
-                    int L3 = R & 4;
-                    if (L3 != 0) { L3 = 255; }
-                    int L4 = R & 8;
-                    if (L4 != 0) { L4 = 255; }
-                    int L5 = R & 16;
-                    if (L5 != 0) { L5 = 255; }
-                    int L6 = R & 32;
-                    if (L6 != 0) { L6 = 255; }
-                    int L7 = R & 64;
-                    if (L7 != 0) { L7 = 255; }
-                    int L8 = R & 128;
-                    if (L8 != 0) { L8 = 255; }
-                    level1Bytes[i * GrayImgData.Stride + j * k] = (byte)L1;
-                    level1Bytes[i * GrayImgData.Stride + j * k + 1] = (byte)L1;
-                    level1Bytes[i * GrayImgData.Stride + j * k + 2] = (byte)L1;
-                    level2Bytes[i * GrayImgData.Stride + j * k] = (byte)L2;
-                    level2Bytes[i * GrayImgData.Stride + j * k + 1] = (byte)L2;
-                    level2Bytes[i * GrayImgData.Stride + j * k + 2] = (byte)L2;
-                    level3Bytes[i * GrayImgData.Stride + j * k] = (byte)L3;
-                    level3Bytes[i * GrayImgData.Stride + j * k + 1] = (byte)L3;
-                    level3Bytes[i * GrayImgData.Stride + j * k + 2] = (byte)L3;
-                    level4Bytes[i * GrayImgData.Stride + j * k] = (byte)L4;
-                    level4Bytes[i * GrayImgData.Stride + j * k + 1] = (byte)L4;
-                    level4Bytes[i * GrayImgData.Stride + j * k + 2] = (byte)L4;
-                    level5Bytes[i * GrayImgData.Stride + j * k] = (byte)L5;
-                    level5Bytes[i * GrayImgData.Stride + j * k + 1] = (byte)L5;
-                    level5Bytes[i * GrayImgData.Stride + j * k + 2] = (byte)L5;
-                    level6Bytes[i * GrayImgData.Stride + j * k] = (byte)L6;
-                    level6Bytes[i * GrayImgData.Stride + j * k + 1] = (byte)L6;
-                    level6Bytes[i * GrayImgData.Stride + j * k + 2] = (byte)L6;
-                    level7Bytes[i * GrayImgData.Stride + j * k] = (byte)L7;
-                    level7Bytes[i * GrayImgData.Stride + j * k + 1] = (byte)L7;
-                    level7Bytes[i * GrayImgData.Stride + j * k + 2] = (byte)L7;
-                    level8Bytes[i * GrayImgData.Stride + j * k] = (byte)L8;
-                    level8Bytes[i * GrayImgData.Stride + j * k + 1] = (byte)L8;
-                    level8Bytes[i * GrayImgData.Stride + j * k + 2] = (byte)L8;
-                }
-            }
-            Marshal.Copy(level1Bytes, 0, intPtr1, level1Bytes.Length);
-            Marshal.Copy(level2Bytes, 0, intPtr2, level2Bytes.Length);
-            Marshal.Copy(level3Bytes, 0, intPtr3, level3Bytes.Length);
-            Marshal.Copy(level4Bytes, 0, intPtr4, level4Bytes.Length);
-            Marshal.Copy(level5Bytes, 0, intPtr5, level5Bytes.Length);
-            Marshal.Copy(level6Bytes, 0, intPtr6, level6Bytes.Length);
-            Marshal.Copy(level7Bytes, 0, intPtr7, level7Bytes.Length);
-            Marshal.Copy(level8Bytes, 0, intPtr8, level8Bytes.Length);
-
-            level1.UnlockBits(level1Data);
-            level2.UnlockBits(level2Data);
-            level3.UnlockBits(level3Data);
-            level4.UnlockBits(level4Data);
-            level5.UnlockBits(level5Data);
-            level6.UnlockBits(level6Data);
-            level7.UnlockBits(level7Data);
-            level8.UnlockBits(level8Data);
-            bitmap1.UnlockBits(GrayImgData);
-
-            int W = pictureBox1.Size.Width;
-            int H = pictureBox1.Size.Height;
-            Bitmap bmp = new Bitmap(W - 50, H - 50);
-
-            Graphics g = Graphics.FromImage(bmp);
-            //g.DrawRectangle(Pens.Red, 100, 100, 100, 100);
-
-            int w = 640 * 3 / 8;
-            int h = 480 * 3 / 9;
-            int x_st = 20;
-            int y_st = 20;
-            int dx = w + 20;
-            int dy = h + 20;
-
-            g.DrawImage(level1, x_st + dx * 0, y_st + dy * 0, w, h);
-            g.DrawImage(level2, x_st + dx * 0, y_st + dy * 1, w, h);
-            g.DrawImage(level3, x_st + dx * 0, y_st + dy * 2, w, h);
-            g.DrawImage(level4, x_st + dx * 0, y_st + dy * 3, w, h);
-            g.DrawImage(level5, x_st + dx * 1, y_st + dy * 0, w, h);
-            g.DrawImage(level6, x_st + dx * 1, y_st + dy * 1, w, h);
-            g.DrawImage(level7, x_st + dx * 1, y_st + dy * 2, w, h);
-            g.DrawImage(level8, x_st + dx * 1, y_st + dy * 3, w, h);
-
-            pictureBox1.Image = bmp;
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            //灰階位圖分割 (bit-plane slicing)
-            //自然二進位分割
-
-            pictureBox1.BackColor = Color.Pink;
-            pictureBox1.Size = new Size(512 * 2 - 250, 800);
-
-            bitSlicing();
-        }
-
-        //public void grayCodeSlicing(Bitmap Image)
-        public void grayCodeSlicing()
-        {
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp"; //stomach
-
-            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-
-            int xx;
-            int yy;
-
-            for (yy = 0; yy < bitmap1.Height; yy++)
-            {
-                for (xx = 0; xx < bitmap1.Width; xx++)
-                {
-                    byte rrr = bitmap1.GetPixel(xx, yy).R;
-                    byte ggg = bitmap1.GetPixel(xx, yy).G;
-                    byte bbb = bitmap1.GetPixel(xx, yy).B;
-
-                    int Gray = (rrr * 299 + ggg * 587 + bbb * 114 + 500) / 1000;
-                    Color zz = Color.FromArgb(255, Gray, Gray, Gray);
-
-                    bitmap1.SetPixel(xx, yy, zz);
-                }
-            }
-            pictureBox1.Image = bitmap1;
-
-            //Bitmap GrayImg = imop.getGrayImage8(Image);
-
-            int width = bitmap1.Width;
-            int height = bitmap1.Height;
-
-            Bitmap level1 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
-            Bitmap level2 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
-            Bitmap level3 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
-            Bitmap level4 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
-            Bitmap level5 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
-            Bitmap level6 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
-            Bitmap level7 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
-            Bitmap level8 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
-
-            BitmapData level1Data = level1.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-            BitmapData level2Data = level2.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-            BitmapData level3Data = level3.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-            BitmapData level4Data = level4.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-            BitmapData level5Data = level5.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-            BitmapData level6Data = level6.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-            BitmapData level7Data = level7.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-            BitmapData level8Data = level8.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-            BitmapData GrayImgData = bitmap1.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-
-            int size = GrayImgData.Stride * GrayImgData.Height;
-
-            IntPtr intPtr = GrayImgData.Scan0;
-            IntPtr intPtr1 = level1Data.Scan0;
-            IntPtr intPtr2 = level2Data.Scan0;
-            IntPtr intPtr3 = level3Data.Scan0;
-            IntPtr intPtr4 = level4Data.Scan0;
-            IntPtr intPtr5 = level5Data.Scan0;
-            IntPtr intPtr6 = level6Data.Scan0;
-            IntPtr intPtr7 = level7Data.Scan0;
-            IntPtr intPtr8 = level8Data.Scan0;
-
-            byte[] GrayImgBytes = new byte[size];
-            byte[] level1Bytes = new byte[size];
-            byte[] level2Bytes = new byte[size];
-            byte[] level3Bytes = new byte[size];
-            byte[] level4Bytes = new byte[size];
-            byte[] level5Bytes = new byte[size];
-            byte[] level6Bytes = new byte[size];
-            byte[] level7Bytes = new byte[size];
-            byte[] level8Bytes = new byte[size];
-
-            Marshal.Copy(intPtr, GrayImgBytes, 0, size);
-            Marshal.Copy(intPtr1, level1Bytes, 0, size);
-            Marshal.Copy(intPtr2, level2Bytes, 0, size);
-            Marshal.Copy(intPtr3, level3Bytes, 0, size);
-            Marshal.Copy(intPtr4, level4Bytes, 0, size);
-            Marshal.Copy(intPtr5, level5Bytes, 0, size);
-            Marshal.Copy(intPtr6, level6Bytes, 0, size);
-            Marshal.Copy(intPtr7, level7Bytes, 0, size);
-            Marshal.Copy(intPtr8, level8Bytes, 0, size);
-
-            int k = 3;
-            for (int i = 0; i < height; i++)
-            {
-                for (int j = 0; j < width; j++)
-                {
-                    byte R = GrayImgBytes[i * GrayImgData.Stride + j * k];
-                    int L1 = R & 1;
-                    if (L1 != 0) { L1 = 1; }
-                    int L2 = R & 2;
-                    if (L2 != 0) { L2 = 1; }
-                    int L3 = R & 4;
-                    if (L3 != 0) { L3 = 1; }
-                    int L4 = R & 8;
-                    if (L4 != 0) { L4 = 1; }
-                    int L5 = R & 16;
-                    if (L5 != 0) { L5 = 1; }
-                    int L6 = R & 32;
-                    if (L6 != 0) { L6 = 1; }
-                    int L7 = R & 64;
-                    if (L7 != 0) { L7 = 1; }
-                    int L8 = R & 128;
-                    if (L8 != 0) { L8 = 1; }
-
-                    int G8 = L8;
-                    if (G8 != 0) { G8 = 255; }
-                    int G7 = L8 ^ L7;
-                    if (G7 != 0) { G7 = 255; }
-                    int G6 = L7 ^ L6;
-                    if (G6 != 0) { G6 = 255; }
-                    int G5 = L6 ^ L5;
-                    if (G5 != 0) { G5 = 255; }
-                    int G4 = L5 ^ L4;
-                    if (G4 != 0) { G4 = 255; }
-                    int G3 = L4 ^ L3;
-                    if (G3 != 0) { G3 = 255; }
-                    int G2 = L3 ^ L2;
-                    if (G2 != 0) { G2 = 255; }
-                    int G1 = L2 ^ L1;
-                    if (G1 != 0) { G1 = 255; }
-
-                    level1Bytes[i * GrayImgData.Stride + j * k] = (byte)G1;
-                    level1Bytes[i * GrayImgData.Stride + j * k + 1] = (byte)G1;
-                    level1Bytes[i * GrayImgData.Stride + j * k + 2] = (byte)G1;
-                    level2Bytes[i * GrayImgData.Stride + j * k] = (byte)G2;
-                    level2Bytes[i * GrayImgData.Stride + j * k + 1] = (byte)G2;
-                    level2Bytes[i * GrayImgData.Stride + j * k + 2] = (byte)G2;
-                    level3Bytes[i * GrayImgData.Stride + j * k] = (byte)G3;
-                    level3Bytes[i * GrayImgData.Stride + j * k + 1] = (byte)G3;
-                    level3Bytes[i * GrayImgData.Stride + j * k + 2] = (byte)G3;
-                    level4Bytes[i * GrayImgData.Stride + j * k] = (byte)G4;
-                    level4Bytes[i * GrayImgData.Stride + j * k + 1] = (byte)G4;
-                    level4Bytes[i * GrayImgData.Stride + j * k + 2] = (byte)G4;
-                    level5Bytes[i * GrayImgData.Stride + j * k] = (byte)G5;
-                    level5Bytes[i * GrayImgData.Stride + j * k + 1] = (byte)G5;
-                    level5Bytes[i * GrayImgData.Stride + j * k + 2] = (byte)G5;
-                    level6Bytes[i * GrayImgData.Stride + j * k] = (byte)G6;
-                    level6Bytes[i * GrayImgData.Stride + j * k + 1] = (byte)G6;
-                    level6Bytes[i * GrayImgData.Stride + j * k + 2] = (byte)G6;
-                    level7Bytes[i * GrayImgData.Stride + j * k] = (byte)G7;
-                    level7Bytes[i * GrayImgData.Stride + j * k + 1] = (byte)G7;
-                    level7Bytes[i * GrayImgData.Stride + j * k + 2] = (byte)G7;
-                    level8Bytes[i * GrayImgData.Stride + j * k] = (byte)G8;
-                    level8Bytes[i * GrayImgData.Stride + j * k + 1] = (byte)G8;
-                    level8Bytes[i * GrayImgData.Stride + j * k + 2] = (byte)G8;
-                }
-            }
-            Marshal.Copy(level1Bytes, 0, intPtr1, level1Bytes.Length);
-            Marshal.Copy(level2Bytes, 0, intPtr2, level2Bytes.Length);
-            Marshal.Copy(level3Bytes, 0, intPtr3, level3Bytes.Length);
-            Marshal.Copy(level4Bytes, 0, intPtr4, level4Bytes.Length);
-            Marshal.Copy(level5Bytes, 0, intPtr5, level5Bytes.Length);
-            Marshal.Copy(level6Bytes, 0, intPtr6, level6Bytes.Length);
-            Marshal.Copy(level7Bytes, 0, intPtr7, level7Bytes.Length);
-            Marshal.Copy(level8Bytes, 0, intPtr8, level8Bytes.Length);
-
-            level1.UnlockBits(level1Data);
-            level2.UnlockBits(level2Data);
-            level3.UnlockBits(level3Data);
-            level4.UnlockBits(level4Data);
-            level5.UnlockBits(level5Data);
-            level6.UnlockBits(level6Data);
-            level7.UnlockBits(level7Data);
-            level8.UnlockBits(level8Data);
-            bitmap1.UnlockBits(GrayImgData);
-
-            int W = pictureBox1.Size.Width;
-            int H = pictureBox1.Size.Height;
-            Bitmap bmp = new Bitmap(W - 50, H - 50);
-
-            Graphics g = Graphics.FromImage(bmp);
-            //g.DrawRectangle(Pens.Red, 100, 100, 100, 100);
-
-            int w = 640 * 3 / 8;
-            int h = 480 * 3 / 9;
-            int x_st = 20;
-            int y_st = 20;
-            int dx = w + 20;
-            int dy = h + 20;
-
-            g.DrawImage(level1, x_st + dx * 0, y_st + dy * 0, w, h);
-            g.DrawImage(level2, x_st + dx * 0, y_st + dy * 1, w, h);
-            g.DrawImage(level3, x_st + dx * 0, y_st + dy * 2, w, h);
-            g.DrawImage(level4, x_st + dx * 0, y_st + dy * 3, w, h);
-            g.DrawImage(level5, x_st + dx * 1, y_st + dy * 0, w, h);
-            g.DrawImage(level6, x_st + dx * 1, y_st + dy * 1, w, h);
-            g.DrawImage(level7, x_st + dx * 1, y_st + dy * 2, w, h);
-            g.DrawImage(level8, x_st + dx * 1, y_st + dy * 3, w, h);
-
-            pictureBox1.Image = bmp;
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            //格雷碼風格
-
-            pictureBox1.BackColor = Color.Pink;
-            pictureBox1.Size = new Size(512 * 2 - 250, 800);
-
-            grayCodeSlicing();
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-        }
-
-        //旋轉 90, 180, 270 度
-        public Bitmap RotateImage(Bitmap bmp, int angle)
-        {
-            if (angle != 90 && angle != 180 && angle != 270)
-            {
-                return null;
-            }
-            int W = bmp.Width;
-            int H = bmp.Height;
-
-            if (angle == 90)
-            {
-                Bitmap newbmp = new Bitmap(H, W);
-                using (Graphics g = Graphics.FromImage(newbmp))
-                {
-                    Point[] destinationPoints =
-                    {
-                        new Point(H, 0),  // 左上角 destination for upper-left point of original
-                        new Point(H, W),  // 右上角 destination for upper-right point of original
-                        new Point(0, 0)   // 左下角 destination for lower-left point of original
-                    };
-                    g.DrawImage(bmp, destinationPoints);
-                }
-                return newbmp;
-            }
-
-            if (angle == 180)
-            {
-                Bitmap newbmp = new Bitmap(W, H);
-                using (Graphics g = Graphics.FromImage(newbmp))
-                {
-                    Point[] destinationPoints =
-                    {
-                        new Point(W, H),  // 左上角 destination for upper-left point of original
-                        new Point(0, H),  // 右上角 destination for upper-right point of original
-                        new Point(W, 0)   // 左下角 destination for lower-left point of original
-                    };
-                    g.DrawImage(bmp, destinationPoints);
-                }
-                return newbmp;
-            }
-
-            if (angle == 270)
-            {
-                Bitmap newbmp = new Bitmap(H, W);
-                using (Graphics g = Graphics.FromImage(newbmp))
-                {
-                    Point[] destinationPoints = 
-                    {
-                        new Point(0, W),  // 左上角 destination for upper-left point of original
-                        new Point(0, 0),  // 右上角 destination for upper-right point of original
-                        new Point(H, W)   // 左下角 destination for lower-left point of original
-                    };
-                    g.DrawImage(bmp, destinationPoints);
-                }
-                return newbmp;
-            }
-            return null;
-        }
-
-        //重設大小
-        public Bitmap ResizeImage(Bitmap bmp, Size size)
-        {
-            Bitmap newbmp = new Bitmap(size.Width, size.Height);
-            using (Graphics g = Graphics.FromImage(newbmp))
-            {
-                g.DrawImage(bmp, new Rectangle(Point.Empty, size));
-            }
-            return newbmp;
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-            //向右旋轉圖像90°
-            Graphics g = this.pictureBox1.CreateGraphics();
-            Bitmap bitmap1 = new Bitmap(filename);
-            //g.FillRectangle(Brushes.White, this.pictureBox1.ClientRectangle);//填充窗體背景爲白色, 清空pictureBox
-            Point[] destinationPoints =
-            {
-                new Point(400, 0),    // 左上角 destination for upper-left point of original
-                new Point(400, 305),  // 右上角 destination for upper-right point of original
-                new Point(0, 0)       // 左下角 destination for lower-left point of original
-            };
-            g.DrawImage(bitmap1, destinationPoints);
-        }
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-            //旋轉圖像180°
-            Graphics g = this.pictureBox1.CreateGraphics();
-            Bitmap bitmap1 = new Bitmap(filename);
-            //g.FillRectangle(Brushes.White, this.pictureBox1.ClientRectangle);//填充窗體背景爲白色, 清空pictureBox
-            Point[] destinationPoints =
-            {
-                new Point(0, 400),    // 左上角 destination for upper-left point of original
-                new Point(305, 400),  // 右上角 destination for upper-right point of original
-                new Point(0, 0)       // 左下角 destination for lower-left point of original
-            };
-            g.DrawImage(bitmap1, destinationPoints);
-        }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-            //圖像切變
-            Graphics g = this.pictureBox1.CreateGraphics();
-            Bitmap bitmap1 = new Bitmap(filename);
-            //g.FillRectangle(Brushes.White, this.pictureBox1.ClientRectangle);//填充窗體背景爲白色, 清空pictureBox
-            Point[] destinationPoints =
-            {
-                new Point(0, 0),     // 左上角 destination for upper-left point of original
-                new Point(305, 0),   // 右上角 destination for upper-right point of original
-                new Point(100, 400)  // 左下角 destination for lower-left point of original
-            };
-            g.DrawImage(bitmap1, destinationPoints);
-        }
-
-        private void button13_Click(object sender, EventArgs e)
-        {
-            //圖像截取
-
-            Graphics g = this.pictureBox1.CreateGraphics();
-            Bitmap bitmap1 = new Bitmap(filename);
-            //g.FillRectangle(Brushes.White, this.pictureBox1.ClientRectangle);//填充窗體背景爲白色, 清空pictureBox
-            Rectangle sr = new Rectangle(80, 60, 400, 400);//要截取的矩形區域
-            Rectangle dr = new Rectangle(0, 0, 200, 200);//要顯示到Form的矩形區域
-            g.DrawImage(bitmap1, dr, sr, GraphicsUnit.Pixel);
-        }
-
-        private void button14_Click(object sender, EventArgs e)
-        {
-            //改變圖像大小
-
-            Graphics g = this.pictureBox1.CreateGraphics();
-            Bitmap bitmap1 = new Bitmap(filename);
-            //g.FillRectangle(Brushes.White, this.pictureBox1.ClientRectangle);//填充窗體背景爲白色, 清空pictureBox
             int W = bitmap1.Width;
             int H = bitmap1.Height;
 
-            // 改變圖像大小使用低質量的模式
-            g.InterpolationMode = InterpolationMode.NearestNeighbor;
+            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
 
-            g.DrawImage(bitmap1, new Rectangle(10, 10, 120, 120), // source rectangle
-            new Rectangle(0, 0, W, H), // destination rectangle
-            GraphicsUnit.Pixel);
+            // Make a Bitmap32 object.
+            Bitmap32 bm32 = new Bitmap32(bitmap1);
 
-            // 使用高質量模式
-            //g.CompositingQuality = CompositingQuality.HighSpeed;
-            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            // Lock the bitmap.
+            bm32.LockBitmap();
 
-            g.DrawImage(bitmap1, new Rectangle(130, 10, 120, 120), new Rectangle(0, 0, W, H), GraphicsUnit.Pixel);
-        }
-
-        private void button15_Click(object sender, EventArgs e)
-        {
-            reset_pictureBox();
-
-            //轉成灰階
-            pictureBox1.Image = ConvertToGrayscale(filename);
-        }
-
-        private void button16_Click(object sender, EventArgs e)
-        {
-            reset_pictureBox();
-
-            //擷取其中一塊
-            int xx;
-            int yy;
-            int ww;
-            int hh;
-
-            richTextBox1.Text += "擷取其中一塊處理中~~~~~~, 九宮格之正中央\n";
-
-            bitmap1 = new Bitmap(filename);
-            //g = Graphics.FromImage(bitmap1);
-
-            ww = bitmap1.Width / 3;
-            hh = bitmap1.Height / 3;
-
-            Bitmap bitmap2 = new Bitmap(ww, hh);
-
-            int x_st = ww;
-            int y_st = hh;
-
-            for (yy = 0; yy < hh; yy++)
+            // Process the pixels.
+            for (int x = 0; x < W; x++)
             {
-                for (xx = 0; xx < ww; xx++)
+                for (int y = 0; y < H; y++)
                 {
-                    bitmap2.SetPixel(xx, yy, bitmap1.GetPixel(x_st + xx, y_st + yy));
+                    byte r = bm32.GetRed(x, y);
+                    byte g = bm32.GetGreen(x, y);
+                    byte b = bm32.GetBlue(x, y);
+                    byte gray = (byte)(0.3 * r + 0.5 * g + 0.2 * b);
+                    bm32.SetPixel(x, y, gray, gray, gray, 255);
                 }
             }
-            pictureBox2.Image = bitmap2;
-            pictureBox2.SizeMode = PictureBoxSizeMode.Normal;   //圖片Zoom的方法
-            richTextBox1.Text += "處理完成\n";
+            bm32.UnlockBitmap();
+
+            pictureBox1.Image = bitmap1;
         }
 
-        private void button17_Click(object sender, EventArgs e)
+        private void DisplayWarpedImage(Bitmap32.WarpOperations warp_op)
         {
-            reset_pictureBox();
-            //縮圖成一半
-            int xx;
-            int yy;
-            int ww;
-            int hh;
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            //Bitmap bitmap1 = new Bitmap(filename);
 
-            richTextBox1.Text += "縮圖成一半\n";
+            Bitmap bm = new Bitmap(filename);
+            pictureBox1.Image = bm;
 
-            bitmap1 = new Bitmap(filename);
-            //g = Graphics.FromImage(bitmap1);
+            this.Cursor = Cursors.WaitCursor;
+            DateTime start_time = DateTime.Now;
 
-            ww = bitmap1.Width / 2;
-            hh = bitmap1.Height / 2;
+            // Make a Bitmap32 object.
+            Bitmap32 bm32 = new Bitmap32(bm);
 
-            Bitmap bitmap2 = new Bitmap(ww, hh);
+            // Apply the warping operation.
+            Bitmap32 new_bm32 = bm32.Warp(warp_op, false);
 
-            int x_st = 0;
-            int y_st = 0;
+            // Display the result.
+            pictureBox1.Image = new_bm32.bitmap1;
 
-            for (yy = 0; yy < hh; yy++)
+            DateTime stop_time = DateTime.Now;
+            this.Cursor = Cursors.Default;
+
+            //TimeSpan elapsed_time = stop_time - start_time;
+            //lb_elapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
+        }
+
+        private void bt_image_process_a0_Click(object sender, EventArgs e)
+        {
+            //Fish Eye
+            DisplayWarpedImage(Bitmap32.WarpOperations.FishEye);
+        }
+
+        private void bt_image_process_a1_Click(object sender, EventArgs e)
+        {
+            //Twist
+            DisplayWarpedImage(Bitmap32.WarpOperations.Twist);
+        }
+
+        private void bt_image_process_a2_Click(object sender, EventArgs e)
+        {
+            //Wave
+            DisplayWarpedImage(Bitmap32.WarpOperations.Wave);
+        }
+
+        private void bt_image_process_a3_Click(object sender, EventArgs e)
+        {
+            //Small Top
+            DisplayWarpedImage(Bitmap32.WarpOperations.SmallTop);
+        }
+
+        private void bt_image_process_a4_Click(object sender, EventArgs e)
+        {
+            //Wiggles
+            DisplayWarpedImage(Bitmap32.WarpOperations.Wiggles);
+        }
+
+        private void bt_image_process_a5_Click(object sender, EventArgs e)
+        {
+            //Double Wave
+            DisplayWarpedImage(Bitmap32.WarpOperations.DoubleWave);
+        }
+
+        private void bt_image_process_a6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_image_process_a7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private const int NUM_TRIALS = 5;
+        // Invert the image without Lockbits.
+        private void bt_image_process_b0_Click(object sender, EventArgs e)
+        {
+            //No Lock Bits
+            const byte BYTE_255 = 255;
+            Cursor = Cursors.WaitCursor;
+
+            sw.Reset();
+            sw.Start();
+
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+
+            for (int trial = 0; trial < NUM_TRIALS; trial++)
             {
-                for (xx = 0; xx < ww; xx++)
+                // Invert the pixels.
+                byte red, green, blue;
+                for (int y = 0; y < bitmap1.Height; y++)
                 {
-                    bitmap2.SetPixel(xx, yy, bitmap1.GetPixel(x_st + xx * 2 + 1, y_st + yy * 2 + 1));
+                    for (int x = 0; x < bitmap1.Width; x++)
+                    {
+                        Color clr = bitmap1.GetPixel(x, y);
+                        red = (byte)(BYTE_255 - clr.R);
+                        green = (byte)(BYTE_255 - clr.G);
+                        blue = (byte)(BYTE_255 - clr.B);
+                        clr = Color.FromArgb(255 - clr.R, 255 - clr.G, 255 - clr.B);
+                        bitmap1.SetPixel(x, y, Color.FromArgb(red, green, blue));
+                    }
+                }
+            }
+            pictureBox1.Image = bitmap1;
+            Cursor = Cursors.Default;
+            sw.Stop();
+            richTextBox1.Text += "耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
+
+            richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalSeconds.ToString("0.000000") + " 秒\n";
+        }
+
+        // Invert the image using Lockbits.
+        private void bt_image_process_b1_Click(object sender, EventArgs e)
+        {
+            //Lock Bits
+            const byte BYTE_255 = 255;
+
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+
+            Cursor = Cursors.WaitCursor;
+
+            sw.Reset();
+            sw.Start();
+
+            for (int trial = 0; trial < NUM_TRIALS; trial++)
+            {
+                // Make a Bitmap32 object.
+                Bitmap32 bm32 = new Bitmap32(bitmap1);
+
+                // Lock the bitmap.
+                bm32.LockBitmap();
+
+                // Invert the pixels.
+                byte red, green, blue, alpha;
+                for (int y = 0; y < bm32.Height; y++)
+                {
+                    for (int x = 0; x < bm32.Width; x++)
+                    {
+                        bm32.GetPixel(x, y, out red, out green, out blue, out alpha);
+                        red = (byte)(BYTE_255 - red);
+                        green = (byte)(BYTE_255 - green);
+                        blue = (byte)(BYTE_255 - blue);
+                        bm32.SetPixel(x, y, red, green, blue, alpha);
+                    }
+                }
+
+                /*
+                //same but slower
+                // Invert the pixels.
+                for (int i = 0; i < bm.Height * bm32.RowSizeBytes; i++)
+                {
+                    // bm32.ImageBytes[i] = Convert.ToByte(BYTE_255 - bm32.ImageBytes[i]);
+                    bm32.ImageBytes[i] = (byte)(BYTE_255 - bm32.ImageBytes[i]);
+                }
+                */
+
+                // Unlock the bitmap.
+                bm32.UnlockBitmap();
+            }
+            pictureBox1.Image = bitmap1;
+
+            Cursor = Cursors.Default;
+            sw.Stop();
+            richTextBox1.Text += "耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
+            richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalSeconds.ToString("0.000000") + " 秒\n";
+        }
+
+        private void bt_image_process_b2_Click(object sender, EventArgs e)
+        {
+            //Quarter
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+
+            Cursor = Cursors.WaitCursor;
+
+            sw.Reset();
+            sw.Start();
+
+            // Make a Bitmap32 object.
+            Bitmap32 bm32 = new Bitmap32(bitmap1);
+
+            // Lock the bitmap.
+            bm32.LockBitmap();
+
+            // Invert the pixels.
+            int xmid = bm32.Width / 2;
+            int ymid = bm32.Height / 2;
+            for (int y = 0; y < ymid; y++)
+            {
+                for (int x = 0; x < xmid; x++)
+                {
+                    bm32.SetGreen(x, y, 0);
+                    bm32.SetBlue(x, y, 0);
+                    bm32.SetAlpha(x, y, 220);
+                }
+            }
+            for (int y = ymid; y < bm32.Height; y++)
+            {
+                for (int x = 0; x < xmid; x++)
+                {
+                    bm32.SetRed(x, y, 0);
+                    bm32.SetGreen(x, y, 0);
+                    bm32.SetAlpha(x, y, 220);
+                }
+            }
+            for (int y = 0; y < ymid; y++)
+            {
+                for (int x = xmid; x < bm32.Width; x++)
+                {
+                    bm32.SetRed(x, y, 0);
+                    bm32.SetBlue(x, y, 0);
+                    bm32.SetAlpha(x, y, 220);
+                }
+            }
+            byte red, green, blue, alpha;
+            for (int y = ymid; y < bm32.Height; y++)
+            {
+                for (int x = xmid; x < bm32.Width; x++)
+                {
+                    red = (byte)(255 - bm32.GetRed(x, y));
+                    green = (byte)(255 - bm32.GetGreen(x, y));
+                    blue = (byte)(255 - bm32.GetBlue(x, y));
+                    alpha = 220;
+                    bm32.SetPixel(x, y, red, green, blue, alpha);
                 }
             }
 
-            pictureBox2.Image = bitmap2;
-            pictureBox2.SizeMode = PictureBoxSizeMode.Normal;   //圖片Zoom的方法
-            richTextBox1.Text += "處理完成\n";
-        }
+            // Unlock the bitmap.
+            bm32.UnlockBitmap();
+            pictureBox1.Image = bitmap1;
+            Cursor = Cursors.Default;
 
-        private void button18_Click(object sender, EventArgs e)
-        {
-            reset_pictureBox();
-        }
-
-        private void button19_Click(object sender, EventArgs e)
-        {
-            //轉成藍色系
-            // Retrieve the image.
-            Bitmap image1 = new Bitmap(filename, true);
-
-            int x, y;
-
-            // Loop through the images pixels to reset color.
-            for (x = 0; x < image1.Width; x++)
+            /*
+            // Make a new bitmap.
+            Bitmap final_bm = new Bitmap(pictureBox0.Image);
+            using (Graphics gr = Graphics.FromImage(final_bm))
             {
-                for (y = 0; y < image1.Height; y++)
-                {
-                    Color pixelColor = image1.GetPixel(x, y);
-                    //Color newColor = Color.FromArgb(pixelColor.R, 0, 0);
-                    //Color newColor = Color.FromArgb(0, pixelColor.G, 0);
-                    Color newColor = Color.FromArgb(0, 0, pixelColor.B);
-                    image1.SetPixel(x, y, newColor);
-                }
+                // Draw an ellispe in the center.
+                gr.Clear(Color.Black);
+                gr.FillEllipse(Brushes.White, new Rectangle((int)(bm.Width * 0.2), (int)(bm.Height * 0.2), (int)(bm.Width * 0.6), (int)(bm.Height * 0.6)));
+
+                // Copy the quartered bitmap onto this one.
+                gr.DrawImage(bm, 0, 0);
             }
 
-            // Set the PictureBox to display the image.
-            pictureBox1.Image = image1;
+            // Display the result.
+            pictureBox1.Image = final_bm;
+            */
+            sw.Stop();
+            Cursor = Cursors.Default;
 
-            richTextBox1.Text += "圖片大小 " + image1.Width.ToString() + " X " + image1.Height.ToString() + "\n";
-
-            // Display the pixel format in Label1.
-            richTextBox1.Text += "Pixel format: " + image1.PixelFormat.ToString() + "\n";
+            richTextBox1.Text += "耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
+            richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalSeconds.ToString("0.000000") + " 秒\n";
         }
 
-        public Bitmap ConvertToGrayscale(string filename)
+        private void bt_image_process_b3_Click(object sender, EventArgs e)
         {
-            Bitmap bitmap1 = new Bitmap(filename);
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-            Bitmap bitmap2 = new Bitmap(W, H);
 
-            for (int y = 0; y < H; y++)
-            {
-                for (int x = 0; x < W; x++)
-                {
-                    Color c = bitmap1.GetPixel(x, y); // 得到 原始像素 的 Color
-                    int luma = (int)(c.R * 0.3 + c.G * 0.6 + c.B * 0.1);  // 以 3:6:1 的比例得到設定值
-                    bitmap2.SetPixel(x, y, Color.FromArgb(luma, luma, luma)); // 寫入 像素値
-                }
-            }
-            return bitmap2;
         }
     }
 }

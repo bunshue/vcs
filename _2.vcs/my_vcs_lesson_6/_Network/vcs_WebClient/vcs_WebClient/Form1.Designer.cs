@@ -62,6 +62,16 @@
             this.button27 = new System.Windows.Forms.Button();
             this.button28 = new System.Windows.Forms.Button();
             this.button29 = new System.Windows.Forms.Button();
+            this.button30 = new System.Windows.Forms.Button();
+            this.button31 = new System.Windows.Forms.Button();
+            this.button32 = new System.Windows.Forms.Button();
+            this.button33 = new System.Windows.Forms.Button();
+            this.button34 = new System.Windows.Forms.Button();
+            this.button35 = new System.Windows.Forms.Button();
+            this.button36 = new System.Windows.Forms.Button();
+            this.button37 = new System.Windows.Forms.Button();
+            this.button38 = new System.Windows.Forms.Button();
+            this.button39 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -79,7 +89,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(667, 213);
+            this.richTextBox1.Location = new System.Drawing.Point(835, 213);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 1;
@@ -87,7 +97,7 @@
             // 
             // webBrowser1
             // 
-            this.webBrowser1.Location = new System.Drawing.Point(668, 3);
+            this.webBrowser1.Location = new System.Drawing.Point(836, 3);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
             this.webBrowser1.Size = new System.Drawing.Size(100, 100);
@@ -98,7 +108,7 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.White;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(668, 109);
+            this.pictureBox1.Location = new System.Drawing.Point(836, 109);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 100);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -174,7 +184,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(680, 233);
+            this.bt_clear.Location = new System.Drawing.Point(848, 233);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 12;
@@ -252,7 +262,6 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(200, 60);
             this.button14.TabIndex = 19;
-            this.button14.Text = "WebClient 1";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -263,6 +272,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(200, 60);
             this.button15.TabIndex = 20;
+            this.button15.Text = "下載NASA網頁的圖片";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -316,6 +326,7 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(200, 60);
             this.button19.TabIndex = 26;
+            this.button19.Text = "異步下載頁面的例子";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -326,7 +337,7 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(200, 60);
             this.button20.TabIndex = 27;
-            this.button20.Text = "WebClient 1";
+            this.button20.Text = "WebClient 20";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
@@ -337,7 +348,7 @@
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(200, 60);
             this.button21.TabIndex = 28;
-            this.button21.Text = "WebClient 2";
+            this.button21.Text = "WebClient 21";
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
@@ -348,7 +359,7 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(200, 60);
             this.button22.TabIndex = 29;
-            this.button22.Text = "WebClient 3";
+            this.button22.Text = "WebClient 22";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
@@ -359,7 +370,7 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(200, 60);
             this.button23.TabIndex = 30;
-            this.button23.Text = "WebClient 4";
+            this.button23.Text = "WebClient 23";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
@@ -370,7 +381,7 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(200, 60);
             this.button24.TabIndex = 31;
-            this.button24.Text = "WebClient 5";
+            this.button24.Text = "WebClient 24";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
@@ -381,7 +392,7 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(200, 60);
             this.button25.TabIndex = 32;
-            this.button25.Text = "WebClient 6";
+            this.button25.Text = "WebClient 25";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -392,7 +403,7 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(200, 60);
             this.button26.TabIndex = 33;
-            this.button26.Text = "WebClient 7";
+            this.button26.Text = "WebClient 26";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
@@ -403,6 +414,7 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(200, 60);
             this.button27.TabIndex = 34;
+            this.button27.Text = "WebClient 27";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
@@ -413,7 +425,7 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(200, 60);
             this.button28.TabIndex = 35;
-            this.button28.Text = "ipify";
+            this.button28.Text = "WebClient 28 ipify";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
@@ -424,15 +436,135 @@
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(200, 60);
             this.button29.TabIndex = 36;
-            this.button29.Text = "取得 SecurityProtocol";
+            this.button29.Text = "WebClient 29";
             this.button29.UseVisualStyleBackColor = true;
             this.button29.Click += new System.EventHandler(this.button29_Click);
+            // 
+            // button30
+            // 
+            this.button30.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button30.Location = new System.Drawing.Point(630, 3);
+            this.button30.Name = "button30";
+            this.button30.Size = new System.Drawing.Size(200, 60);
+            this.button30.TabIndex = 37;
+            this.button30.Text = "WebClient 30";
+            this.button30.UseVisualStyleBackColor = true;
+            this.button30.Click += new System.EventHandler(this.button30_Click);
+            // 
+            // button31
+            // 
+            this.button31.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button31.Location = new System.Drawing.Point(630, 64);
+            this.button31.Name = "button31";
+            this.button31.Size = new System.Drawing.Size(200, 60);
+            this.button31.TabIndex = 38;
+            this.button31.Text = "WebClient 31";
+            this.button31.UseVisualStyleBackColor = true;
+            this.button31.Click += new System.EventHandler(this.button31_Click);
+            // 
+            // button32
+            // 
+            this.button32.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button32.Location = new System.Drawing.Point(630, 125);
+            this.button32.Name = "button32";
+            this.button32.Size = new System.Drawing.Size(200, 60);
+            this.button32.TabIndex = 39;
+            this.button32.Text = "WebClient 32";
+            this.button32.UseVisualStyleBackColor = true;
+            this.button32.Click += new System.EventHandler(this.button32_Click);
+            // 
+            // button33
+            // 
+            this.button33.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button33.Location = new System.Drawing.Point(630, 187);
+            this.button33.Name = "button33";
+            this.button33.Size = new System.Drawing.Size(200, 60);
+            this.button33.TabIndex = 40;
+            this.button33.Text = "WebClient 33";
+            this.button33.UseVisualStyleBackColor = true;
+            this.button33.Click += new System.EventHandler(this.button33_Click);
+            // 
+            // button34
+            // 
+            this.button34.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button34.Location = new System.Drawing.Point(630, 250);
+            this.button34.Name = "button34";
+            this.button34.Size = new System.Drawing.Size(200, 60);
+            this.button34.TabIndex = 41;
+            this.button34.Text = "WebClient 34";
+            this.button34.UseVisualStyleBackColor = true;
+            this.button34.Click += new System.EventHandler(this.button34_Click);
+            // 
+            // button35
+            // 
+            this.button35.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button35.Location = new System.Drawing.Point(630, 310);
+            this.button35.Name = "button35";
+            this.button35.Size = new System.Drawing.Size(200, 60);
+            this.button35.TabIndex = 42;
+            this.button35.Text = "WebClient 35";
+            this.button35.UseVisualStyleBackColor = true;
+            this.button35.Click += new System.EventHandler(this.button35_Click);
+            // 
+            // button36
+            // 
+            this.button36.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button36.Location = new System.Drawing.Point(630, 370);
+            this.button36.Name = "button36";
+            this.button36.Size = new System.Drawing.Size(200, 60);
+            this.button36.TabIndex = 43;
+            this.button36.Text = "WebClient 36";
+            this.button36.UseVisualStyleBackColor = true;
+            this.button36.Click += new System.EventHandler(this.button36_Click);
+            // 
+            // button37
+            // 
+            this.button37.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button37.Location = new System.Drawing.Point(630, 431);
+            this.button37.Name = "button37";
+            this.button37.Size = new System.Drawing.Size(200, 60);
+            this.button37.TabIndex = 44;
+            this.button37.Text = "WebClient 37";
+            this.button37.UseVisualStyleBackColor = true;
+            this.button37.Click += new System.EventHandler(this.button37_Click);
+            // 
+            // button38
+            // 
+            this.button38.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button38.Location = new System.Drawing.Point(630, 492);
+            this.button38.Name = "button38";
+            this.button38.Size = new System.Drawing.Size(200, 60);
+            this.button38.TabIndex = 45;
+            this.button38.Text = "WebClient 38";
+            this.button38.UseVisualStyleBackColor = true;
+            this.button38.Click += new System.EventHandler(this.button38_Click);
+            // 
+            // button39
+            // 
+            this.button39.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button39.Location = new System.Drawing.Point(630, 553);
+            this.button39.Name = "button39";
+            this.button39.Size = new System.Drawing.Size(200, 60);
+            this.button39.TabIndex = 46;
+            this.button39.Text = "取得 SecurityProtocol";
+            this.button39.UseVisualStyleBackColor = true;
+            this.button39.Click += new System.EventHandler(this.button39_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(893, 625);
+            this.ClientSize = new System.Drawing.Size(955, 625);
+            this.Controls.Add(this.button39);
+            this.Controls.Add(this.button38);
+            this.Controls.Add(this.button37);
+            this.Controls.Add(this.button36);
+            this.Controls.Add(this.button35);
+            this.Controls.Add(this.button34);
+            this.Controls.Add(this.button33);
+            this.Controls.Add(this.button32);
+            this.Controls.Add(this.button31);
+            this.Controls.Add(this.button30);
             this.Controls.Add(this.button29);
             this.Controls.Add(this.button28);
             this.Controls.Add(this.button27);
@@ -511,6 +643,16 @@
         private System.Windows.Forms.Button button27;
         private System.Windows.Forms.Button button28;
         private System.Windows.Forms.Button button29;
+        private System.Windows.Forms.Button button30;
+        private System.Windows.Forms.Button button31;
+        private System.Windows.Forms.Button button32;
+        private System.Windows.Forms.Button button33;
+        private System.Windows.Forms.Button button34;
+        private System.Windows.Forms.Button button35;
+        private System.Windows.Forms.Button button36;
+        private System.Windows.Forms.Button button37;
+        private System.Windows.Forms.Button button38;
+        private System.Windows.Forms.Button button39;
     }
 }
 

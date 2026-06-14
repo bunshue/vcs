@@ -152,9 +152,6 @@ namespace vcs_Network1
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 7 - 70);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            webBrowser1.Size = new Size(410, 130);
-            webBrowser1.Location = new Point(x_st + dx * 1, y_st + dy * 10);
-
             this.Size = new Size(1470, 890);
             this.Text = "vcs_Network1";
 
@@ -544,15 +541,9 @@ namespace vcs_Network1
 
         private void button14_Click(object sender, EventArgs e)
         {
-            //讀取局域網路由的IP地址
-            WebClient wc = new WebClient(); // 建立 WebClient
-            wc.Encoding = Encoding.Default; // 指定 WebClient 的編碼
-            string lip = wc.DownloadString("http://www.ip138.com/ip2city.asp");
-            //string sip = reply.Substring(reply.IndexOf("您的IP地址是"), reply.IndexOf("</center>") - reply.IndexOf("您的IP地址是"));
-            //MessageBox.Show(sip);
-
-            //TBD
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button15_Click(object sender, EventArgs e)
         {
@@ -565,6 +556,8 @@ namespace vcs_Network1
                 MessageBox.Show("ok");
             }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button16_Click(object sender, EventArgs e)
         {
@@ -590,15 +583,13 @@ namespace vcs_Network1
             richTextBox1.Text += "完成\n";
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button17_Click(object sender, EventArgs e)
         {
-            //抓取網頁資料 2
-            WebClient wc = new WebClient();
-            wc.Encoding = Encoding.UTF8;
-            string html = wc.DownloadString("http://www.lagou.com/");
-
-            richTextBox1.Text += html + "\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button18_Click(object sender, EventArgs e)
         {
@@ -742,16 +733,6 @@ namespace vcs_Network1
 
         private void button22_Click(object sender, EventArgs e)
         {
-            //網頁存檔
-            //網頁存檔
-            string url = "https://www.google.com.tw/";
-
-            string filename = "tmp_html_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".html";
-
-            WebClient wc = new WebClient();
-            wc.DownloadFile(url, filename);
-
-            MessageBox.Show("保存成功");
         }
 
         //------------------------------------------------------------  # 60個
@@ -812,98 +793,6 @@ namespace vcs_Network1
 
         private void button24_Click(object sender, EventArgs e)
         {
-            //下載NASA網頁的圖片
-            Cursor = Cursors.WaitCursor;
-            get_nasa_picture();
-            Cursor = Cursors.Default;
-        }
-
-        void get_nasa_picture()
-        {
-            string url = "http://antwrp.gsfc.nasa.gov/apod/";
-            try
-            {
-                richTextBox1.Text += "開啟 NASA 圖片網址 : " + url + "\n";
-                webBrowser1.Navigate(url);  // Load the web page.
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "*** Error navigating to " + url + "\n";
-                richTextBox1.Text += "*** " + ex.Message + "\n";
-            }
-        }
-
-        // The web page has loaded. Get the APOTD image.
-        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
-            richTextBox1.Text += "NASA 圖片網站主頁下載完畢, 從網頁資料擷取圖片所在網址\n";
-            // Get the image's URL.
-            HtmlDocument doc = webBrowser1.Document;
-            string img_src_url = doc.Images[0].GetAttribute("src");
-
-            richTextBox1.Text += "圖片所在網址 : " + img_src_url + "\n";
-
-            try
-            {
-                //圖片下載並存檔
-                DownloadImage(img_src_url);
-                richTextBox1.Text += "圖片下載並存檔完成\n";
-
-                //圖片下來並顯示
-                Image img = GetPicture(img_src_url);
-                pictureBox1.Image = img;
-                richTextBox1.Text += "圖片下來並顯示完成\n";
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "*** Download Error" + "\n";
-                richTextBox1.Text += "*** " + ex.Message + "\n";
-            }
-        }
-
-        // Download the indicated file.
-        private void DownloadImage(string url)
-        {
-            //richTextBox1.Text += "下載圖片 : " + url + "\n";
-
-            // Make a WebClient.
-            WebClient wc = new WebClient();
-
-            int pos = url.LastIndexOf('/');
-            string filename = url.Substring(pos + 1);
-            richTextBox1.Text += "下載圖片, 本地圖片檔名 : " + filename + "\n";
-
-            // Use one of the following.
-            // For .NET Framework 4.5 and later:
-            //ServicePointManager.SecurityProtocol =
-            //    SecurityProtocolType.Tls12;
-            // For .NET Framework 4.0 through 4.4:
-            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
-
-            // Download the file.
-            wc.DownloadFile(url, filename);
-        }
-
-        // Download a file from the internet.
-        // Get the picture at a given URL.
-        private Image GetPicture(string url)
-        {
-            try
-            {
-                WebClient wc = new WebClient();
-
-                // Use one of the following.
-                //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-                ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
-
-                MemoryStream image_stream = new MemoryStream(wc.DownloadData(url));
-                return Image.FromStream(image_stream);
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "Error downloading picture " + url + '\n' + ex.Message + "\n";
-                return null;
-            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -959,35 +848,3 @@ namespace vcs_Network1
 /*  可搬出
 
 */
-
-
-
-/*
-
-WebClient不能處理特定於任何協議的任何特性，例如Cookie等。如果需要使用這些特性，需要使用.net中的HttpWebRequest類。
-
-//------------------------------------------------------------  # 60個
-
-vcs抓網路上的檔案
-
-            try
-            {
-                //抓現在時間
-                DateTime dt = DateTime.Now;
-                string filetime = dt.ToString("yyyy-MM-dd-HHmm");  //將檔案寫入現在時間
-
-                WebClient wc = new WebClient();
-                wc.DownloadFile("http://data.taipei/bus/PathDetail",    //抓取檔案網址
-                "C:\\TEMP\\1_PathDetail\\PathDetail_" + filetime + ".gz");    //寫入本機的路徑
-            }
-            catch
-            {
-                Environment.Exit(0);    //如果抓不到檔案就離開程式，沒這行程式會一直卡在這如果沒抓到檔案的話…
-            }
-        
-//------------------------------------------------------------  # 60個
-
-
-*/
-
-

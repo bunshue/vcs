@@ -8,7 +8,7 @@ namespace vcs_ImageProcessing4
     static class Program
     {
         /// <summary>
-        /// 應用程式的主要進入點。
+        /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()

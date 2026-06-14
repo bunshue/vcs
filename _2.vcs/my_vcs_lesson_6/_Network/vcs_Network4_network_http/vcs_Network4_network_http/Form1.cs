@@ -285,24 +285,21 @@ namespace vcs_Network4_network_http
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button5_Click(object sender, EventArgs e)
         {
-            //取得網頁資料
-            string url = @"http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/188537.html";
-
-            WebClient wc = new WebClient();     // 建立 WebClient
-            wc.Encoding = Encoding.UTF8;        // 指定 WebClient 的編碼
-
-            string str = wc.DownloadString(url);
-
-            richTextBox1.Text += str + "\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button6_Click(object sender, EventArgs e)
         {
             //取得網頁資料, 尋找資料
             //C#獲取網頁源碼，自動判斷網頁字符集編碼
         }
+
+        //------------------------------------------------------------  # 60個
 
         private string getHtml(string url, string charSet)  //url是要訪問的網站地址，charSet是目標網頁的編碼，如果傳入的是null或者""，那就自動分析網頁的編碼
         {
@@ -332,6 +329,8 @@ namespace vcs_Network4_network_http
                 strWebData = Encoding.GetEncoding(charSet).GetString(myDataBuffer);
             return strWebData;
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button7_Click(object sender, EventArgs e)
         {
@@ -626,38 +625,19 @@ namespace vcs_Network4_network_http
             response.Close();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button17_Click(object sender, EventArgs e)
         {
-            //獲取網頁內容 2
-
-            string url = @"http://www.hao123.com/";
-
-            WebClient wc = new WebClient();     // 建立 WebClient
-
-            // Add a user agent header in case the
-            // requested URI contains a query.
-
-            wc.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
-
-            Stream data = wc.OpenRead(url);
-            StreamReader reader = new StreamReader(data, Encoding.Default); // 注：漢字需要轉為UTF8格式
-            string s = reader.ReadToEnd();
-            //Response.Write(s);
-            richTextBox1.Text += s + "\n";
-            data.Close();
-            reader.Close();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button18_Click(object sender, EventArgs e)
         {
-            //獲取網頁內容 3
-            string url = @"http://www.hao123.com/";
-
-            WebClient wc = new WebClient();     // 建立 WebClient
-            wc.Encoding = Encoding.UTF8;        // 指定 WebClient 的編碼
-            string str = wc.DownloadString(url);
-            richTextBox1.Text += str + "\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button19_Click(object sender, EventArgs e)
         {
@@ -685,6 +665,8 @@ namespace vcs_Network4_network_http
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button20_Click(object sender, EventArgs e)
         {
             //獲取遠程網頁中的所有鏈接URL（網絡蜘蛛實現原理）
@@ -706,6 +688,8 @@ namespace vcs_Network4_network_http
                 richTextBox1.Text += match.Value + "\n";
             }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button21_Click(object sender, EventArgs e)
         {
@@ -783,6 +767,8 @@ namespace vcs_Network4_network_http
             return list;
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button22_Click(object sender, EventArgs e)
         {
             //獲取百度首頁生成靜態文件
@@ -851,6 +837,8 @@ namespace vcs_Network4_network_http
         }
         */
 
+        //------------------------------------------------------------  # 60個
+
         private void button23_Click(object sender, EventArgs e)
         {
             //HttpWebRequest
@@ -884,6 +872,8 @@ namespace vcs_Network4_network_http
             }
             return "";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button24_Click(object sender, EventArgs e)
         {
@@ -925,47 +915,19 @@ namespace vcs_Network4_network_http
             return Regex.IsMatch(input, "http(s)?://([\\w-]+\\.)+[\\w-]+(//[\\w- .//?%&=]*)?");
         }
 
-        static void download_file(string url, string filename)
-        {
-            using (WebClient wc = new WebClient())  // 建立 WebClient
-            {
-                wc.DownloadFile(new Uri(url), filename);
-            }
-        }
+        //------------------------------------------------------------  # 60個
 
         private void button25_Click(object sender, EventArgs e)
         {
-            //下載檔案
-            string url = @"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Breathe-face-smile.svg/1200px-Breathe-face-smile.svg.png";
-            string filename = "Image.png";
-
-            try
-            {
-                download_file(url, filename);
-            }
-            catch (ExternalException ex)
-            {
-                Console.WriteLine(ex.Message);
-
-            }
-            catch (ArgumentNullException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-
-
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button26_Click(object sender, EventArgs e)
         {
-            //在 C# 中使用 DownloadFile() 方法從一個 URL 下載檔案
-
-            string url = @"https://wiki.linuxfoundation.org/_media/wiki/logo.png";
-
-            WebClient wc = new WebClient();     // 建立 WebClient
-            wc.DownloadFile(url, "aaaaa.png");
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button27_Click(object sender, EventArgs e)
         {
@@ -996,6 +958,8 @@ namespace vcs_Network4_network_http
             string url = @"https://www.moi.gov.tw/";
             getUrlResponse(url);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button29_Click(object sender, EventArgs e)
         {
@@ -1079,6 +1043,8 @@ namespace vcs_Network4_network_http
             return result;
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button30_Click(object sender, EventArgs e)
         {
             //網頁截圖
@@ -1121,6 +1087,8 @@ namespace vcs_Network4_network_http
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button31_Click(object sender, EventArgs e)
         {
             Image image = null;
@@ -1159,6 +1127,8 @@ namespace vcs_Network4_network_http
                 }
             }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button32_Click(object sender, EventArgs e)
         {
@@ -1200,26 +1170,13 @@ namespace vcs_Network4_network_http
             return sRslt;
         }
 
+        //------------------------------------------------------------  # 60個
 
         private void button33_Click(object sender, EventArgs e)
         {
-            //c# 獲取網頁源碼 by WebClient
-            string url = @"http://www.google.com/webhp?hl=zh-TW";
-            string result = GetWebClient(url);
-            richTextBox1.Text += result + "\n";
         }
 
-        private string GetWebClient(string url)
-        {
-            string strHTML = "";
-            WebClient wc = new WebClient();     // 建立 WebClient
-            Stream myStream = wc.OpenRead(url);
-            StreamReader sr = new StreamReader(myStream, Encoding.GetEncoding("utf-8"));
-            strHTML = sr.ReadToEnd();
-            myStream.Close();
-            return strHTML;
-        }
-
+        //------------------------------------------------------------  # 60個
 
         private void button34_Click(object sender, EventArgs e)
         {
@@ -1243,6 +1200,7 @@ namespace vcs_Network4_network_http
             return strHTML;
         }
 
+        //------------------------------------------------------------  # 60個
 
         private void button35_Click(object sender, EventArgs e)
         {
@@ -1276,6 +1234,7 @@ namespace vcs_Network4_network_http
         //有的網站檢測客戶端的UserAgent！如163.com，你如果使用WebClient WebRequest方式獲取時，將獲取到的是錯誤提示頁面內容。
         //而通過HttpWebRequest 就沒問題。
 
+        //------------------------------------------------------------  # 60個
 
         private void button36_Click(object sender, EventArgs e)
         {
@@ -1301,18 +1260,13 @@ namespace vcs_Network4_network_http
             richTextBox1.Text += "完成\n";
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button37_Click(object sender, EventArgs e)
         {
-            //抓取網頁資料 2
-            string url = @"http://www.lagou.com/";
-
-            WebClient wc = new WebClient();     // 建立 WebClient
-            wc.Encoding = Encoding.UTF8;        // 指定 WebClient 的編碼
-
-            string str = wc.DownloadString(url);
-
-            richTextBox1.Text += str + "\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         //過濾html標簽 ST
         private void button38_Click(object sender, EventArgs e)
@@ -1341,6 +1295,8 @@ namespace vcs_Network4_network_http
         }
 
         //過濾html標簽 SP
+
+        //------------------------------------------------------------  # 60個
 
         private void button39_Click(object sender, EventArgs e)
         {
@@ -1395,27 +1351,13 @@ namespace vcs_Network4_network_http
             }
         }
 
+        //------------------------------------------------------------  # 60個
 
         private void button40_Click(object sender, EventArgs e)
         {
-            //根據url獲取遠程html源碼
-            string url = @"http://www.aspphp.online/bianchen/dnet/cxiapu/gycxp/201701/10747.html";
-            string str = GetSearchHtml(url);
-            richTextBox1.Text += str + "\n";
         }
 
-        /// <summary>
-        /// 根據url獲取遠程html源碼
-        /// </summary>
-        /// <param name="url">搜索url</param>
-        /// <returns>返回DownloadData</returns>
-        public static string GetSearchHtml(string url)
-        {
-            WebClient wc = new WebClient();     // 建立 WebClient
-            wc.Credentials = CredentialCache.DefaultCredentials;   //獲取或設置用於對向Internet資源的請求進行身份驗證的網絡憑據。
-            Byte[] pageData = wc.DownloadData(url);                //從指定url下載數據
-            return Encoding.UTF8.GetString(pageData);                       //獲取網站頁面采用的是UTF-8
-        }
+        //------------------------------------------------------------  # 60個
 
         private void button41_Click(object sender, EventArgs e)
         {
@@ -1460,6 +1402,8 @@ namespace vcs_Network4_network_http
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button42_Click(object sender, EventArgs e)
         {
             //檢查URL鏈接是否有效
@@ -1491,27 +1435,13 @@ namespace vcs_Network4_network_http
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button43_Click(object sender, EventArgs e)
         {
-            //根據url獲取遠程html源碼
-            string url = @"http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/190697.html";
-            string result = GetSearchHtmlsss(url);
-            richTextBox1.Text += result + "\n";
-
         }
 
-        /// <summary>
-        /// 根據url獲取遠程html源碼
-        /// </summary>
-        /// <param name="url">搜索url</param>
-        /// <returns>返回DownloadData</returns>
-        public static string GetSearchHtmlsss(string url)
-        {
-            WebClient MyWebClient = new WebClient();
-            MyWebClient.Credentials = CredentialCache.DefaultCredentials;   //獲取或設置用於對向Internet資源的請求進行身份驗證的網絡憑據。
-            Byte[] pageData = MyWebClient.DownloadData(url);                //從指定url下載數據
-            return Encoding.UTF8.GetString(pageData);                       //獲取網站頁面采用的是UTF-8
-        }
+        //------------------------------------------------------------  # 60個
 
         private void button44_Click(object sender, EventArgs e)
         {
@@ -1544,9 +1474,9 @@ namespace vcs_Network4_network_http
         }
     }
 
+    //------------------------------------------------------------  # 60個
 
     //C#下載網頁HTML源碼
-
 
     public static class DownLoad_HTML
     {
