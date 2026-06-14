@@ -117,13 +117,10 @@ namespace vcs_Class1
             groupBox10.Size = new Size(W, H);
             groupBox1.Size = new Size(W, H);
             groupBox6.Size = new Size(W, H);
-            groupBox4.Size = new Size(W, H);
-            groupBox13.Size = new Size(W, H);
 
             //大的groupBox
             W = 200;
             H = 300;
-            groupBox11.Size = new Size(W, H);
             groupBox7.Size = new Size(W, H);
             groupBox14.Size = new Size(W * 2 - 130, H);
 
@@ -137,18 +134,14 @@ namespace vcs_Class1
 
             groupBox8.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             groupBox10.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            groupBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            groupBox1.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            groupBox6.Location = new Point(x_st + dx * 3, y_st + dy * 1);
 
-            groupBox6.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            groupBox4.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            groupBox13.Location = new Point(x_st + dx * 4, y_st + dy * 1);
-
-            groupBox11.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            groupBox7.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            groupBox14.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+            groupBox7.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            groupBox14.Location = new Point(x_st + dx * 3, y_st + dy * 2);
 
             richTextBox1.Size = new Size(400, 690);
-            richTextBox1.Location = new Point(x_st + dx * 5 + 80, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 4 + 80, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             x_st = 10;
@@ -167,17 +160,6 @@ namespace vcs_Class1
 
             button25.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button26.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-
-            button27.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button28.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button3.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button4.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-
-            button31.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button32.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-
-            button1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
 
             button15.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button16.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -216,7 +198,7 @@ namespace vcs_Class1
             bt_class18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             bt_class19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            this.Size = new Size(1600, 750);
+            this.Size = new Size(1360, 750);
             this.Text = "vcs_Class1";
 
             //設定執行後的表單起始位置, 正中央
@@ -288,62 +270,6 @@ namespace vcs_Class1
             }
         }
         //Sale範例 SP
-
-        //------------------------------------------------------------  # 60個
-
-        //Class 範例 ST
-        //類別的定義在 MyClass.cs
-        private void button1_Click(object sender, EventArgs e)
-        {
-            int y = 2006;
-            int m = 3;
-            int d = 11;
-
-            Date date = new Date();
-            date.setDate(d, m, y);
-
-            //the same
-            //Date date = new Date(d, m, y);
-
-            richTextBox1.Text += date.show() + "\n";
-
-            string name = "david";
-            int age = 18;
-            char gender = '男';
-
-            Person pData = new Person(name, age, gender, date);
-
-            richTextBox1.Text += pData.show() + "\n";
-            richTextBox1.Text += "共有" + Person.counter() + "人\n";
-
-            //------------------------------  # 30個
-
-            int c = 95;
-            int ma = 87;
-
-            Student s = new Student(name, age, gender, date, c, ma);
-            richTextBox1.Text += s.show() + "\n";
-
-            String str = "共" + Person.counter() + "人, 學生: " + Student.counter() + "人\n";
-            richTextBox1.Text += str + "\n";
-
-            //------------------------------  # 30個
-
-            string r = "senior";
-
-            Teacher t = new Teacher(name, age, gender, date, r);
-
-            str = "共" + Person.counter() + "人, 學生: " + Student.counter() + "人, 老師: " + Teacher.counter() + "人\n";
-
-            richTextBox1.Text += str + "\n";
-            richTextBox1.Text += t.show() + "\n";
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-        //Class 範例 SP
 
         //------------------------------------------------------------  # 60個
 
@@ -604,47 +530,6 @@ namespace vcs_Class1
 
         //------------------------------------------------------------  # 60個
 
-        private void button27_Click(object sender, EventArgs e)
-        {
-            //類別做成的串列 Products
-            List<Product> Products = new List<Product>();
-
-            // Load the data.
-            // Cake slices.
-            string[] cakes =
-            {
-                "Black Forest Cake",
-                "Strawberry Chocolate Mousse Cake",
-                "Chocolate Mousse Cake",
-                "Jiggly Cheesecake",
-                "Tiramisu",
-                "Matcha Tiramisu",
-            };
-            foreach (string cake in cakes)
-            {
-                Products.Add(new Product(cake, 5.49m));
-            }
-
-            int len = Products.Count;
-            richTextBox1.Text += "len = " + len.ToString() + "\n";
-            int i;
-            for (i = 0; i < len; i++)
-            {
-                //使用Override的ToString
-                richTextBox1.Text += i.ToString() + "\t" + Products[i].ToString() + "\n";
-            }
-            for (i = 0; i < len; i++)
-            {
-                //使用Class內的參數
-                richTextBox1.Text += i.ToString() + "\t" + Products[i].Name + "\t" + Products[i].Price.ToString("c") + "\n";
-            }
-        }
-        private void button28_Click(object sender, EventArgs e)
-        {
-        }
-
-        //------------------------------------------------------------  # 60個
-
         void test_picture_class()
         {
             string filename2 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
@@ -660,82 +545,6 @@ namespace vcs_Class1
             c2g.Draw();
             pictureBox2.Image = c2g.bitmap3;
         }
-
-        //------------------------------------------------------------  # 60個
-
-        //創建一個簡單的類來表示產品，產品有ID,類別，和價格
-        public sealed class Product2
-        {
-            public int Id { get; set; }  // 有get有set簡寫, 可讀可寫
-            public string Category { get; set; }  // 有get有set簡寫, 可讀可寫
-            public double Value { get; set; }  // 有get有set簡寫, 可讀可寫
-
-            public override string ToString()
-            {
-                return string.Format("[{0}: {1} - {2}]", Id, Category, Value);
-            }
-        }
-
-        public static List<Product2> GetList()
-        {
-            var products = new List<Product2>
-            {
-            new Product2 {Id = 1, Category = "Electronics", Value = 15.0},
-            new Product2 {Id = 2, Category = "Groceries", Value = 40.0},
-            new Product2 {Id = 3, Category = "Garden", Value = 210.3},
-            new Product2 {Id = 4, Category = "Pets", Value = 2.1},
-            new Product2 {Id = 5, Category = "Electronics", Value = 19.95},
-            new Product2 {Id = 6, Category = "Pets", Value = 21.25},
-            new Product2 {Id = 7, Category = "Pets", Value = 5.50},
-            new Product2 {Id = 8, Category = "Garden", Value = 13.0},
-            new Product2 {Id = 9, Category = "Automotive", Value = 10.0},
-            new Product2 {Id = 10, Category = "Electronics", Value = 250.0},
-            };
-            return products;
-        }
-
-        private void button31_Click(object sender, EventArgs e)
-        {
-            //類別做成的串列 list
-            List<Product2> list = GetList();
-            richTextBox1.Text += "len = " + list.Count.ToString() + "\n";
-
-            int cnt = list.Count;
-            for (int i = 0; i < cnt; i++)
-            {
-                richTextBox1.Text += "i = " + i.ToString() + "\t" + list[i].ToString() + "\n";
-            }
-
-            richTextBox1.Text += "按類別列出一個物品清單，用GroupBy\n";
-            foreach (var group in list.GroupBy(p => p.Category))
-            {
-                richTextBox1.Text += "Key : " + group.Key + "\n";
-                foreach (var item in group)
-                {
-                    richTextBox1.Text += "	" + item + "\n";
-                }
-            }
-        }
-
-        private void button32_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-
-        }
-
 
         //------------------------------------------------------------  # 60個
 
@@ -814,14 +623,98 @@ namespace vcs_Class1
 
         //------------------------------------------------------------  # 60個
 
+        //創建一個簡單的類來表示產品，產品有ID,類別，和價格
+        public sealed class Product2
+        {
+            public int Id { get; set; }  // 有get有set簡寫, 可讀可寫
+            public string Category { get; set; }  // 有get有set簡寫, 可讀可寫
+            public double Value { get; set; }  // 有get有set簡寫, 可讀可寫
+
+            public override string ToString()
+            {
+                return string.Format("[{0}: {1} - {2}]", Id, Category, Value);
+            }
+        }
+
+        public static List<Product2> GetList()
+        {
+            var products = new List<Product2>
+            {
+            new Product2 {Id = 1, Category = "Electronics", Value = 15.0},
+            new Product2 {Id = 2, Category = "Groceries", Value = 40.0},
+            new Product2 {Id = 3, Category = "Garden", Value = 210.3},
+            new Product2 {Id = 4, Category = "Pets", Value = 2.1},
+            new Product2 {Id = 5, Category = "Electronics", Value = 19.95},
+            new Product2 {Id = 6, Category = "Pets", Value = 21.25},
+            new Product2 {Id = 7, Category = "Pets", Value = 5.50},
+            new Product2 {Id = 8, Category = "Garden", Value = 13.0},
+            new Product2 {Id = 9, Category = "Automotive", Value = 10.0},
+            new Product2 {Id = 10, Category = "Electronics", Value = 250.0},
+            };
+            return products;
+        }
+
         private void bt_class02_Click(object sender, EventArgs e)
         {
+            //類別做成的串列 list
+            List<Product2> list = GetList();
+            richTextBox1.Text += "len = " + list.Count.ToString() + "\n";
+
+            int cnt = list.Count;
+            for (int i = 0; i < cnt; i++)
+            {
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + list[i].ToString() + "\n";
+            }
+
+            richTextBox1.Text += "按類別列出一個物品清單，用GroupBy\n";
+            foreach (var group in list.GroupBy(p => p.Category))
+            {
+                richTextBox1.Text += "Key : " + group.Key + "\n";
+                foreach (var item in group)
+                {
+                    richTextBox1.Text += "	" + item + "\n";
+                }
+            }
         }
 
         //------------------------------------------------------------  # 60個
 
         private void bt_class03_Click(object sender, EventArgs e)
         {
+            //Class List 使用
+
+            //類別做成的串列 Products
+            List<Product> Products = new List<Product>();
+
+            // Load the data.
+            // Cake slices.
+            string[] cakes =
+            {
+                "Black Forest Cake",
+                "Strawberry Chocolate Mousse Cake",
+                "Chocolate Mousse Cake",
+                "Jiggly Cheesecake",
+                "Tiramisu",
+                "Matcha Tiramisu",
+            };
+            foreach (string cake in cakes)
+            {
+                Products.Add(new Product(cake, 5.49m));
+            }
+
+            int len = Products.Count;
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                //使用Override的ToString
+                richTextBox1.Text += i.ToString() + "\t" + Products[i].ToString() + "\n";
+            }
+            for (i = 0; i < len; i++)
+            {
+                //使用Class內的參數
+                richTextBox1.Text += i.ToString() + "\t" + Products[i].Name + "\t" + Products[i].Price.ToString("c") + "\n";
+            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -1342,6 +1235,50 @@ namespace vcs_Class1
 
         private void bt_class14_Click(object sender, EventArgs e)
         {
+            //類別的定義在 MyClass.cs
+
+            int y = 2006;
+            int m = 3;
+            int d = 11;
+
+            Date date = new Date();
+            date.setDate(d, m, y);
+
+            //the same
+            //Date date = new Date(d, m, y);
+
+            richTextBox1.Text += date.show() + "\n";
+
+            string name = "david";
+            int age = 18;
+            char gender = '男';
+
+            Person pData = new Person(name, age, gender, date);
+
+            richTextBox1.Text += pData.show() + "\n";
+            richTextBox1.Text += "共有" + Person.counter() + "人\n";
+
+            //------------------------------  # 30個
+
+            int c = 95;
+            int ma = 87;
+
+            Student s = new Student(name, age, gender, date, c, ma);
+            richTextBox1.Text += s.show() + "\n";
+
+            String str = "共" + Person.counter() + "人, 學生: " + Student.counter() + "人\n";
+            richTextBox1.Text += str + "\n";
+
+            //------------------------------  # 30個
+
+            string r = "senior";
+
+            Teacher t = new Teacher(name, age, gender, date, r);
+
+            str = "共" + Person.counter() + "人, 學生: " + Student.counter() + "人, 老師: " + Teacher.counter() + "人\n";
+
+            richTextBox1.Text += str + "\n";
+            richTextBox1.Text += t.show() + "\n";
         }
 
         //------------------------------------------------------------  # 60個
