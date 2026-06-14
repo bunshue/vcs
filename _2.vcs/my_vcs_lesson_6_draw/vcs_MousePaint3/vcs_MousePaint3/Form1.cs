@@ -32,14 +32,6 @@ namespace vcs_MousePaint3
         HatchBrush myBrush1 = new HatchBrush(HatchStyle.Cross, Color.Red);
         float theta = 0; // 旋轉角度
 
-        int EPSILON = 100; // 滑鼠 是否 點選到點 的距離 判斷 (避免 開根號)
-
-        //pictureBox5 拖曳圖片框中的紅點 ST
-        //Point一維陣列
-        Point[] pts5 = new Point[6];    //一維陣列內有6個Point
-        int find_point_index = -1;
-        //pictureBox5 拖曳圖片框中的紅點 SP
-
         public Form1()
         {
             InitializeComponent();
@@ -49,23 +41,12 @@ namespace vcs_MousePaint3
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             this.DoubleBuffered = true;
 
             pictureBox0.BackColor = Color.Black;
             bitmap1 = (Bitmap)Bitmap.FromFile(filename);
-
-
-            //pictureBox5 拖曳圖片框中的紅點 ST
-            int x_st = 100;
-            int y_st = 80;
-            int dy = 50;
-            pts5[0] = new Point(x_st + 0, y_st + dy * 0);
-            pts5[1] = new Point(x_st + 0, y_st + dy * 1);
-            pts5[2] = new Point(x_st + 0, y_st + dy * 2);
-            pts5[3] = new Point(x_st + 0, y_st + dy * 3);
-            pts5[4] = new Point(x_st + 0, y_st + dy * 4);
-            pts5[5] = new Point(x_st + 0, y_st + dy * 5);
-            //pictureBox5 拖曳圖片框中的紅點 SP
         }
 
         void show_item_location()
@@ -158,6 +139,8 @@ namespace vcs_MousePaint3
             e.Graphics.FillEllipse(Brushes.PaleGreen, -5, -5, 10, 10);
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -194,6 +177,8 @@ namespace vcs_MousePaint3
 
             e.Graphics.DrawImage(bitmap1, pt); // 呈現原圖
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void pictureBox2_MouseClick(object sender, MouseEventArgs e)
         {
@@ -235,6 +220,8 @@ namespace vcs_MousePaint3
             e.Graphics.DrawEllipse(Pens.Red, 0 - D, 0 - D, 2 * D, 2 * D); //畫出縮放後的圓
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void pictureBox3_MouseDown(object sender, MouseEventArgs e)
         {
         }
@@ -266,6 +253,8 @@ namespace vcs_MousePaint3
             e.Graphics.FillEllipse(myBrush1, 0 - D, 0 - D, 2 * D, 2 * D); //畫出旋轉的圓點 
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void pictureBox4_MouseDown(object sender, MouseEventArgs e)
         {
         }
@@ -282,86 +271,25 @@ namespace vcs_MousePaint3
         {
         }
 
-        bool flag_pictureBox5_mouse_down = false;
+        //------------------------------------------------------------  # 60個
+
         private void pictureBox5_MouseDown(object sender, MouseEventArgs e)
         {
-            Point pt = FindPointAt(e.X, e.Y);
-            if (pt == new Point(9999, 9999))
-            {
-                richTextBox1.Text += "找不到\n";
-            }
-            else
-            {
-                flag_pictureBox5_mouse_down = true;
-                richTextBox1.Text += "找到 : (" + pt.X.ToString() + ", " + pt.Y.ToString() + ")\t";
-                int index = get_index(pt);
-                richTextBox1.Text += "索引 : " + index.ToString() + "\n";
-                find_point_index = index;
-            }
-        }
-
-        private Point FindPointAt(int X, int Y)
-        {
-            foreach (Point pt in pts5)
-            {
-                float dx = pt.X - X;
-                float dy = pt.Y - Y;
-                if (dx * dx + dy * dy <= EPSILON)
-                {
-                    return pt;
-                }
-            }
-            return new Point(9999, 9999);
-        }
-
-        int get_index(Point point)
-        {
-            int len = pts5.Length;
-            for (int index = 0; index < len; index++)
-            {
-                if (point == pts5[index])
-                {
-                    return index;
-                }
-            }
-            return -1;
         }
 
         private void pictureBox5_MouseMove(object sender, MouseEventArgs e)
         {
-            if (flag_pictureBox5_mouse_down == true)
-            {
-                update_pts(find_point_index, e.Location);
-                this.pictureBox5.Invalidate();
-            }
         }
 
         private void pictureBox5_MouseUp(object sender, MouseEventArgs e)
         {
-            flag_pictureBox5_mouse_down = false;
         }
 
         private void pictureBox5_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawString("拖曳圖片框中的紅點", new Font("標楷體", 16), new SolidBrush(Color.Black), 20, 20);
-            //e.Graphics.DrawRectangle(Pens.Red, 100, 100, 300, 300);
-            foreach (Point pt in pts5)
-            {
-                e.Graphics.FillEllipse(Brushes.Red, pt.X - 10, pt.Y - 10, 20, 20);
-            }
         }
 
-        void update_pts(int index, Point point)
-        {
-            int len = pts5.Length;
-            if ((index < 0) || index >= len)
-            {
-                richTextBox1.Text += index.ToString();
-                //richTextBox1.Text += "XXXXXXX\n";
-                return;
-            }
-            pts5[index] = point;
-        }
+        //6060
 
         private void timer0_Tick(object sender, EventArgs e)
         {

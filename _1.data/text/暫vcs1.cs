@@ -1,4 +1,26 @@
-﻿private void Form1_Load(object sender, EventArgs e)
+﻿
+
+// Start selecting a rectangle.
+// Continue selecting a rectangle.
+// Finish selecting a rectangle.
+
+/*
+Bitmap bmp = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\BMW.jfif");
+e.Graphics.DrawImage(bmp, pt[i].X, pt[i].Y, 100, 100);
+*/
+
+
+
+小圖貼到大pictureBox裏，目前只能貼在左上角
+要怎麼貼在其他位置
+
+
+
+
+
+
+
+private void Form1_Load(object sender, EventArgs e)
 {
 	//C# 跨 Thread 存取 UI
 	//Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效	same

@@ -88,6 +88,8 @@ namespace vcs_MousePaint2
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             this.DoubleBuffered = true;
 
             //pictureBox3 畫直線與圓的交點 ST

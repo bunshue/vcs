@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Drawing2D; //for SmoothingMode
+using System.Drawing.Drawing2D;  // for SmoothingMode, DashStyle
 
 // 滑鼠操作畫圖相關
 
@@ -16,6 +16,7 @@ namespace vcs_MousePaint1
     public partial class Form1 : Form
     {
         Pen penRed = new Pen(Color.Red, 3);
+        int EPSILON = 100; // 滑鼠 是否 點選到點 的距離 判斷 (避免 開根號)
 
         //pictureBox0 拖曳圓點 ST
         private const int N = 6;   //total_points
@@ -24,8 +25,9 @@ namespace vcs_MousePaint1
         Pen p1 = new Pen(Color.Green, 1);
         Pen p2 = new Pen(Color.Blue, 1);
         Point[] pts = new Point[N];
-        int EPSILON = 100; // 滑鼠 是否 點選到點 的距離 判斷 (避免 開根號)
         //pictureBox0 拖曳圓點 SP
+
+        //------------------------------------------------------------  # 60個
 
         //pictureBox1 左鍵畫一橢圓, 右鍵畫一橢圓 ST
         private const float small = 0.1f;
@@ -50,8 +52,9 @@ namespace vcs_MousePaint1
         private int EndY;
         //pictureBox1 左鍵畫一橢圓, 右鍵畫一橢圓 SP
 
-        //pictureBox2 累計畫矩形 ST
+        //------------------------------------------------------------  # 60個
 
+        //pictureBox2 累計畫矩形 ST
         // Parameters for drawing the dashed rectangle.
         private float Offset = 0;
         private float OffsetDelta = 2;
@@ -81,26 +84,42 @@ namespace vcs_MousePaint1
             Brushes.LightBlue,
             Brushes.Cyan,
         };
-
         //pictureBox2 累計畫矩形 SP
 
-        //pictureBox3 貝茲線與控制點 ST
-        List<MovingPoint> mpList3 = new List<MovingPoint>(); // 可移動點的動態陣列
-        int mp_Selected3 = -1;  // 動態陣列 的第幾個 被選到
-        bool dragging3 = false; // 是否拖拉中
-        //pictureBox3 貝茲線與控制點 SP
+        //pictureBox3 拖曳圖片框中的紅點 ST
+        //Point一維陣列
+        Point[] pts3 = new Point[6];    //一維陣列內有6個Point
+        int find_point_index = -1;
+        //pictureBox3 拖曳圖片框中的紅點 SP
 
-        //pictureBox4 連續貝茲線與控制點 ST
-        List<MovingPoint> mpList4 = new List<MovingPoint>(); // 可移動點的動態陣列
-        int mp_Selected4 = -1;  // 動態陣列 的第幾個 被選到
-        bool dragging4 = false; // 是否拖拉中
-        //pictureBox4 連續貝茲線與控制點 SP
+        //------------------------------------------------------------  # 60個
+
+        //pictureBox4 ST
+        // A rectangle that define the circle.
+        private bool GotCircle = false;
+        private Rectangle Circle;
+
+        // Used while drawing circles.
+        private bool DrawingCircle = false;
+        private int StartX4, StartY4, EndX4, EndY4;
+
+        // The circle's equation.
+        private float Dx, Dy, R;
+        //pictureBox4 SP
+
+        //------------------------------------------------------------  # 60個
 
         //pictureBox5 ST
-        List<MovingPoint> mpList5 = new List<MovingPoint>(); // 可移動點的動態陣列
-        int mp_Selected5 = -1;  // 動態陣列 的第幾個 被選到
-        bool dragging5 = false; // 是否拖拉中
+        // The ellipses to draw.
+        private List<Rectangle> Ellipses = new List<Rectangle>();
+
+        // The points for the new ellipse we are drawing.
+        private Point StartPoint, EndPoint;
+        private bool DrawingNew = false;
+
         //pictureBox5 SP
+
+        //------------------------------------------------------------  # 60個
 
         public Form1()
         {
@@ -111,7 +130,11 @@ namespace vcs_MousePaint1
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             this.DoubleBuffered = true;
+
+            //------------------------------------------------------------  # 60個
 
             //pictureBox0 拖曳圓點 ST
             int w = 400;
@@ -130,59 +153,26 @@ namespace vcs_MousePaint1
             }
             //pictureBox0 拖曳圓點 SP
 
+            //------------------------------------------------------------  # 60個
 
-            //pictureBox3 貝茲線與控制點 ST
-            MovingPoint mp3;
-            mp3 = new MovingPoint(new Point(100, 200));
-            mpList3.Add(mp3); // 第一個控制點
+            //pictureBox3 拖曳圖片框中的紅點 ST
+            int x_st = 100;
+            int y_st = 80;
+            int dy = 50;
+            pts3[0] = new Point(x_st + 0, y_st + dy * 0);
+            pts3[1] = new Point(x_st + 0, y_st + dy * 1);
+            pts3[2] = new Point(x_st + 0, y_st + dy * 2);
+            pts3[3] = new Point(x_st + 0, y_st + dy * 3);
+            pts3[4] = new Point(x_st + 0, y_st + dy * 4);
+            pts3[5] = new Point(x_st + 0, y_st + dy * 5);
+            //pictureBox3 拖曳圖片框中的紅點 SP
 
-            mp3 = new MovingPoint(new Point(200, 100));
-            mpList3.Add(mp3); // 第二個控制點
-
-            mp3 = new MovingPoint(new Point(300, 300));
-            mpList3.Add(mp3); // 第三個控制點
-
-            mp3 = new MovingPoint(new Point(400, 200));
-            mpList3.Add(mp3); // 第四個控制點
-            //pictureBox3 貝茲線與控制點 SP
-
-            //pictureBox4 連續貝茲線與控制點 ST
-            MovingPoint mp4;
-            mp4 = new MovingPoint(new Point(50, 200));
-            mpList4.Add(mp4); // 第一個控制點
-
-            mp4 = new MovingPoint(new Point(100, 100));
-            mpList4.Add(mp4); // 第二個控制點
-
-            mp4 = new MovingPoint(new Point(150, 300));
-            mpList4.Add(mp4); // 第三個控制點
-
-            mp4 = new MovingPoint(new Point(200, 200));
-            mpList4.Add(mp4); // 第四個控制點
-
-            mp4 = new MovingPoint(new Point(250, 100));
-            mpList4.Add(mp4); // 第五個控制點
-
-            mp4 = new MovingPoint(new Point(300, 300));
-            mpList4.Add(mp4); // 第六個控制點
-
-            mp4 = new MovingPoint(new Point(350, 200));
-            mpList4.Add(mp4); // 第七個控制點
-            //pictureBox4 連續貝茲線與控制點 SP
+            //------------------------------------------------------------  # 60個
 
             //pictureBox5 ST
-            MovingPoint mp5;
-            mp5 = new MovingPoint(new Point(100, 200));
-            mpList5.Add(mp5); // 第一個控制點
-
-            mp5 = new MovingPoint(new Point(200, 100));
-            mpList5.Add(mp5); // 第二個控制點
-
-            mp5 = new MovingPoint(new Point(300, 300));
-            mpList5.Add(mp5); // 第三個控制點
-
-            mp5 = new MovingPoint(new Point(400, 200));
-            mpList5.Add(mp5); // 第四個控制點
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);
+            pictureBox5.Image = bitmap1;
             //pictureBox5 SP
         }
 
@@ -216,12 +206,13 @@ namespace vcs_MousePaint1
             label0.Text = "拖曳正六邊形的頂點 / 拖曳圓點";
             label1.Text = "左鍵畫一橢圓, 右鍵畫一橢圓";
             label2.Text = "累計畫矩形";
-            label3.Text = "貝茲線與控制點";
-            label4.Text = "連續貝茲線與控制點";
-            label5.Text = "Region - 貝茲曲線與控制點 (Region and GraphicsPath)";
+            label3.Text = "";
+            label4.Text = "";
+            label5.Text = "";
             richTextBox1.Size = new Size(W - 200, H * 2 + 60);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+            bt_reset5.Location = new Point(pictureBox5.Location.X, pictureBox5.Location.Y);
 
             this.Size = new Size(1740, 940);
             this.Text = "vcs_MousePaint1";
@@ -464,6 +455,8 @@ namespace vcs_MousePaint1
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         //pictureBox2 累計畫矩形 ST
         private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
         {
@@ -474,11 +467,7 @@ namespace vcs_MousePaint1
             EndY2 = e.Y;
 
             // Make a new selection rectangle.
-            NewRectangle = new Rectangle(
-                Math.Min(StartX2, EndX2),
-                Math.Min(StartY2, EndY2),
-                Math.Abs(StartX2 - EndX2),
-                Math.Abs(StartY2 - EndY2));
+            NewRectangle = new Rectangle(Math.Min(StartX2, EndX2), Math.Min(StartY2, EndY2), Math.Abs(StartX2 - EndX2), Math.Abs(StartY2 - EndY2));
 
             // Start marching.
             SelectingRectangle = true;
@@ -497,11 +486,7 @@ namespace vcs_MousePaint1
             EndY2 = e.Y;
 
             // Make a new selection rectangle.
-            NewRectangle = new Rectangle(
-                Math.Min(StartX2, EndX2),
-                Math.Min(StartY2, EndY2),
-                Math.Abs(StartX2 - EndX2),
-                Math.Abs(StartY2 - EndY2));
+            NewRectangle = new Rectangle(Math.Min(StartX2, EndX2), Math.Min(StartY2, EndY2), Math.Abs(StartX2 - EndX2), Math.Abs(StartY2 - EndY2));
 
             // Redraw.
             Refresh();
@@ -521,11 +506,7 @@ namespace vcs_MousePaint1
             }
 
             // Save the newly selected rectangle.
-            Rectangles.Add(new Rectangle(
-                Math.Min(StartX2, EndX2),
-                Math.Min(StartY2, EndY2),
-                Math.Abs(StartX2 - EndX2),
-                Math.Abs(StartY2 - EndY2)));
+            Rectangles.Add(new Rectangle(Math.Min(StartX2, EndX2), Math.Min(StartY2, EndY2), Math.Abs(StartX2 - EndX2), Math.Abs(StartY2 - EndY2)));
 
             // Redraw.
             Refresh();
@@ -538,17 +519,14 @@ namespace vcs_MousePaint1
             // Draw previously selected rectangles.
             for (int i = 0; i < Rectangles.Count; i++)
             {
-                e.Graphics.FillRectangle(
-                    RectangleBrushes[i % RectangleBrushes.Length],
-                    Rectangles[i]);
+                e.Graphics.FillRectangle(RectangleBrushes[i % RectangleBrushes.Length], Rectangles[i]);
                 e.Graphics.DrawRectangle(Pens.Black, Rectangles[i]);
             }
 
             // Draw the new rectangle.
             if (SelectingRectangle)
             {
-                e.Graphics.DrawRectangle(NewRectangle, Color.Yellow,
-                    Color.Red, 2f, Offset, DashPattern);
+                e.Graphics.DrawRectangle(NewRectangle, Color.Yellow, Color.Red, 2f, Offset, DashPattern);
             }
         }
 
@@ -558,165 +536,287 @@ namespace vcs_MousePaint1
         }
         //pictureBox2 累計畫矩形 SP
 
+        //6060
+
+        bool flag_pictureBox3_mouse_down = false;
         private void pictureBox3_MouseDown(object sender, MouseEventArgs e)
         {
-            // 端點或控制點 是否被點選到
-            for (int i = 0; i <= mpList3.Count - 1; i++)
+            Point pt = FindPointAt(e.X, e.Y);
+            if (pt == new Point(9999, 9999))
             {
-                if (mpList3[i].CheckSelected(e.X, e.Y))
+                richTextBox1.Text += "找不到\n";
+            }
+            else
+            {
+                flag_pictureBox3_mouse_down = true;
+                richTextBox1.Text += "找到 : (" + pt.X.ToString() + ", " + pt.Y.ToString() + ")\t";
+                int index = get_index(pt);
+                richTextBox1.Text += "索引 : " + index.ToString() + "\n";
+                find_point_index = index;
+            }
+        }
+
+        private Point FindPointAt(int X, int Y)
+        {
+            foreach (Point pt in pts3)
+            {
+                float dx = pt.X - X;
+                float dy = pt.Y - Y;
+                if (dx * dx + dy * dy <= EPSILON)
                 {
-                    mp_Selected3 = i;
-                    dragging3 = true;
-                    break;
+                    return pt;
                 }
             }
+            return new Point(9999, 9999);
+        }
+
+        int get_index(Point point)
+        {
+            int len = pts3.Length;
+            for (int index = 0; index < len; index++)
+            {
+                if (point == pts3[index])
+                {
+                    return index;
+                }
+            }
+            return -1;
         }
 
         private void pictureBox3_MouseMove(object sender, MouseEventArgs e)
         {
-            if (dragging3) // 移動端點或控制點
+            if (flag_pictureBox3_mouse_down == true)
             {
-                mpList3[mp_Selected3].Move(e.X, e.Y);
+                update_pts(find_point_index, e.Location);
                 this.pictureBox3.Invalidate();
             }
         }
 
         private void pictureBox3_MouseUp(object sender, MouseEventArgs e)
         {
-            // 解除 端點或控制點 的點選狀況
-            mp_Selected3 = -1;
-            dragging3 = false;
+            flag_pictureBox3_mouse_down = false;
         }
 
         private void pictureBox3_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawBezier(penRed, mpList3[0].p, mpList3[1].p, mpList3[2].p, mpList3[3].p);
-
-            //繪出切線
-            e.Graphics.DrawLine(Pens.Black, mpList3[0].p, mpList3[1].p);
-            e.Graphics.DrawLine(Pens.Black, mpList3[2].p, mpList3[3].p);
-
-            //繪出 端點和控制點
-            e.Graphics.DrawEllipse(Pens.Black, mpList3[0].p.X - 10, mpList3[0].p.Y - 10, 20, 20);
-            e.Graphics.DrawRectangle(Pens.Black, mpList3[1].p.X - 10, mpList3[1].p.Y - 10, 20, 20);
-            e.Graphics.DrawRectangle(Pens.Black, mpList3[2].p.X - 10, mpList3[2].p.Y - 10, 20, 20);
-            e.Graphics.DrawEllipse(Pens.Black, mpList3[3].p.X - 10, mpList3[3].p.Y - 10, 20, 20);
+            e.Graphics.DrawString("拖曳圖片框中的紅點", new Font("標楷體", 16), new SolidBrush(Color.Black), 20, 20);
+            //e.Graphics.DrawRectangle(Pens.Red, 100, 100, 300, 300);
+            foreach (Point pt in pts3)
+            {
+                e.Graphics.FillEllipse(Brushes.Red, pt.X - 10, pt.Y - 10, 20, 20);
+            }
         }
 
+        void update_pts(int index, Point point)
+        {
+            int len = pts3.Length;
+            if ((index < 0) || index >= len)
+            {
+                richTextBox1.Text += index.ToString();
+                //richTextBox1.Text += "XXXXXXX\n";
+                return;
+            }
+            pts3[index] = point;
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+
+        // Let the user click and drag to select a circle.
         private void pictureBox4_MouseDown(object sender, MouseEventArgs e)
         {
-            // 端點或控制點 是否被點選到
-            for (int i = 0; i <= mpList4.Count - 1; i++)
-            {
-                if (mpList4[i].CheckSelected(e.X, e.Y))
-                {
-                    mp_Selected4 = i;
-                    dragging4 = true;
-                    break;
-                }
-            }
+            DrawingCircle = true;
+            GotCircle = false;
+
+            StartX4 = e.X;
+            StartY4 = e.Y;
+            EndX4 = e.X;
+            EndY4 = e.Y;
         }
 
         private void pictureBox4_MouseMove(object sender, MouseEventArgs e)
         {
-            if (dragging4) // 移動端點或控制點
+            //this.Text = e.X.ToString() + ", " + e.Y.ToString();
+
+            // Do nothing if we are not drawing.
+            if (!DrawingCircle)
             {
-                mpList4[mp_Selected4].Move(e.X, e.Y);
-                this.pictureBox4.Invalidate();
+                return;
             }
+
+            EndX4 = e.X;
+            EndY4 = e.Y;
+
+            // Redraw.
+            this.pictureBox4.Refresh();
         }
 
         private void pictureBox4_MouseUp(object sender, MouseEventArgs e)
         {
-            // 解除 端點或控制點 的點選狀況
-            mp_Selected4 = -1;
-            dragging4 = false;
+            // Do nothing if we are not drawing.
+            if (!DrawingCircle) return;
+
+            EndX4 = e.X;
+            EndY4 = e.Y;
+
+            // Make sure the circle has non-zero width and height.
+            if ((StartX4 != EndX4) && (StartY4 != EndY4))
+            {
+                richTextBox1.Text += "Down : \t(" + StartX4.ToString() + ", " + StartY4.ToString() + ")\n";
+                richTextBox1.Text += "Up :   \t(" + EndX4.ToString() + ", " + EndY4.ToString() + ")\n";
+
+                // Make it a circle.
+                int circle_radius = Math.Max(Math.Abs(StartX4 - EndX4), Math.Abs(StartY4 - EndY4));
+                Circle = new Rectangle(Math.Min(StartX4, EndX4), Math.Min(StartY4, EndY4), circle_radius, circle_radius);
+                GotCircle = true;
+
+                // Find and display the circle's formula.
+                richTextBox1.Text += "矩形 (" + Circle.X.ToString() + ", " + Circle.Y.ToString() + ", " + Circle.Size.Width.ToString() + ", " + Circle.Size.Height.ToString() + "\n";
+                GetCircleFormula(Circle, out Dx, out Dy, out R);
+                richTextBox1.Text += "圓心 (" + Dx.ToString() + ", " + Dy.ToString() + "), 半徑 = " + R.ToString() + "\n";
+            }
+            // We are no longer drawing a new circle.
+            DrawingCircle = false;
+
+            this.pictureBox4.Refresh();
         }
 
+        // Get the equation for this circle.
+        private void GetCircleFormula(RectangleF rect, out float dx, out float dy, out float r)
+        {
+            dx = rect.X + rect.Width / 2f;
+            dy = rect.Y + rect.Height / 2f;
+            r = rect.Width / 2f;
+        }
+
+        // Draw the circle.
         private void pictureBox4_Paint(object sender, PaintEventArgs e)
         {
-            Point[] mpArray = new Point[7];
-            for (int i = 0; i <= mpList4.Count - 1; i++)
+            e.Graphics.Clear(this.pictureBox4.BackColor);
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+            // Draw the circle if we have one.
+            if (GotCircle)
             {
-                mpArray[i] = mpList4[i].p;
+                // Fill the circle.
+                e.Graphics.FillEllipse(Brushes.LightBlue, Circle);
+
+                // Plot the circle's equation.
+                List<PointF> points = new List<PointF>();
+                for (float x = Dx - R; x <= Dx + R; x++)
+                {
+                    float radicand = x - Dx;
+                    radicand = R * R - radicand * radicand;
+                    if (radicand >= 0f)
+                    {
+                        points.Add(new PointF(x, (float)(Dy + Math.Sqrt(radicand))));
+                    }
+                }
+                for (float x = Dx + R; x >= Dx - R; x--)
+                {
+                    float radicand = x - Dx;
+                    radicand = R * R - radicand * radicand;
+                    if (radicand > 0f)
+                    {
+                        points.Add(new PointF(x, (float)(Dy - Math.Sqrt(radicand))));
+                    }
+                }
+                e.Graphics.DrawPolygon(Pens.Blue, points.ToArray());
             }
-            e.Graphics.DrawBeziers(penRed, mpArray);
 
-            //繪出切線
-            e.Graphics.DrawLine(Pens.Black, mpList4[0].p, mpList4[1].p);
-            e.Graphics.DrawLine(Pens.Black, mpList4[2].p, mpList4[3].p);
-
-            e.Graphics.DrawLine(Pens.Black, mpList4[3].p, mpList4[4].p);
-            e.Graphics.DrawLine(Pens.Black, mpList4[5].p, mpList4[6].p);
-
-            //繪出 端點和控制點
-            e.Graphics.DrawEllipse(Pens.Black, mpList4[0].p.X - 10, mpList4[0].p.Y - 10, 20, 20);
-            e.Graphics.DrawRectangle(Pens.Black, mpList4[1].p.X - 10, mpList4[1].p.Y - 10, 20, 20);
-            e.Graphics.DrawRectangle(Pens.Black, mpList4[2].p.X - 10, mpList4[2].p.Y - 10, 20, 20);
-            e.Graphics.DrawEllipse(Pens.Black, mpList4[3].p.X - 10, mpList4[3].p.Y - 10, 20, 20);
-            e.Graphics.DrawRectangle(Pens.Black, mpList4[4].p.X - 10, mpList4[4].p.Y - 10, 20, 20);
-            e.Graphics.DrawRectangle(Pens.Black, mpList4[5].p.X - 10, mpList4[5].p.Y - 10, 20, 20);
-            e.Graphics.DrawEllipse(Pens.Black, mpList4[6].p.X - 10, mpList4[6].p.Y - 10, 20, 20);
+            // Draw the new circle if we are drawing one.
+            if (DrawingCircle)
+            {
+                // Make it a circle.
+                int diameter = Math.Max(Math.Abs(StartX4 - EndX4), Math.Abs(StartY4 - EndY4));
+                e.Graphics.DrawEllipse(Pens.Red, Math.Min(StartX4, EndX4), Math.Min(StartY4, EndY4), diameter, diameter);
+                e.Graphics.DrawRectangle(Pens.Red, Math.Min(StartX4, EndX4), Math.Min(StartY4, EndY4), diameter, diameter);
+            }
         }
 
+        //------------------------------------------------------------  # 60個
+
+        // Start selecting an ellipse.
         private void pictureBox5_MouseDown(object sender, MouseEventArgs e)
         {
-            // 端點或控制點 是否被點選到
-            for (int i = 0; i <= mpList5.Count - 1; i++)
-            {
-                if (mpList5[i].CheckSelected(e.X, e.Y))
-                {
-                    mp_Selected5 = i;
-                    dragging5 = true;
-                    break;
-                }
-            }
+            DrawingNew = true;
+            StartPoint = e.Location;
+            EndPoint = e.Location;
         }
 
+        // Continue drawing the new ellipse.
         private void pictureBox5_MouseMove(object sender, MouseEventArgs e)
         {
-            if (dragging5) // 移動端點或控制點
+            if (!DrawingNew)
             {
-                mpList5[mp_Selected5].Move(e.X, e.Y);
-                this.pictureBox5.Invalidate();
+                return;
             }
+            EndPoint = e.Location;
+            pictureBox5.Refresh();
         }
 
+        // Finish drawing the new ellipse.
         private void pictureBox5_MouseUp(object sender, MouseEventArgs e)
         {
-            // 解除 端點或控制點 的點選狀況
-            mp_Selected5 = -1;
-            dragging5 = false;
+            if (!DrawingNew)
+            {
+                return;
+            }
+            DrawingNew = false;
+
+            // If the start and end points are different,
+            // save the new ellipse.
+            if (StartPoint.X != EndPoint.X && StartPoint.Y != EndPoint.Y)
+            {
+                Rectangle rect = new Rectangle(
+                    Math.Min(StartPoint.X, EndPoint.X),
+                    Math.Min(StartPoint.Y, EndPoint.Y),
+                    Math.Abs(StartPoint.X - EndPoint.X),
+                    Math.Abs(StartPoint.Y - EndPoint.Y));
+                Ellipses.Add(rect);
+            }
+            pictureBox5.Refresh();
         }
 
+        // Draw the current ellipses.
         private void pictureBox5_Paint(object sender, PaintEventArgs e)
         {
-            GraphicsPath gp = new GraphicsPath(); // 圖形軌跡物件
+            //e.Graphics.Clear(this.BackColor);
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
-            //加入 兩條切線
-            gp.AddLine(mpList5[0].p, mpList5[1].p);
-            gp.CloseFigure(); // 關閉目前的圖形
+            //之前畫的
+            // Draw the existing ellipses.
+            foreach (Rectangle rect in Ellipses)
+            {
+                //e.Graphics.FillEllipse(Brushes.LightBlue, rect);
+                e.Graphics.DrawEllipse(Pens.Red, rect);
+                //e.Graphics.DrawRectangle(Pens.Black, rect);
+            }
 
-            gp.AddLine(mpList5[2].p, mpList5[3].p);
-            gp.CloseFigure(); // 關閉目前的圖形
+            // If we are creating a new ellipse, draw it.
+            if (DrawingNew)//新畫的
+            {
+                using (Pen dashed_pen = new Pen(Color.Red, 3))
+                {
+                    dashed_pen.DashStyle = DashStyle.Custom;
+                    dashed_pen.DashPattern = new float[] { 5, 5 };
+                    Rectangle rect = new Rectangle(
+                        Math.Min(StartPoint.X, EndPoint.X),
+                        Math.Min(StartPoint.Y, EndPoint.Y),
+                        Math.Abs(StartPoint.X - EndPoint.X),
+                        Math.Abs(StartPoint.Y - EndPoint.Y));
+                    e.Graphics.DrawEllipse(dashed_pen, rect);
+                    e.Graphics.DrawRectangle(dashed_pen, rect);
+                }
+            }
+            this.Text = Ellipses.Count.ToString();
+        }
 
-            //加入 兩個端點 和 兩個控制點
-            gp.AddEllipse(mpList5[0].p.X - 10, mpList5[0].p.Y - 10, 20, 20);
-            Rectangle rect1, rect2;
-            rect1 = new Rectangle(mpList5[1].p.X - 10, mpList5[1].p.Y - 10, 20, 20);
-            rect2 = new Rectangle(mpList5[2].p.X - 10, mpList5[2].p.Y - 10, 20, 20);
-            gp.AddRectangle(rect1);
-            gp.AddRectangle(rect2);
-            gp.AddEllipse(mpList5[3].p.X - 10, mpList5[3].p.Y - 10, 20, 20);
-
-            // 只含貝茲曲線 的 GraphicsPath圖形軌跡物件
-            GraphicsPath gp2 = new GraphicsPath(); // 圖形軌跡物件
-            gp2.AddBezier(mpList5[0].p, mpList5[1].p, mpList5[2].p, mpList5[3].p);
-            Region r1 = new Region(gp2); // 新增 區域表面 物件
-            e.Graphics.FillRegion(Brushes.Yellow, r1); // 區域表面 繪出
-
-            gp.AddPath(gp2, false); // 將 gp2 加入 gp 中
-            e.Graphics.DrawPath(Pens.Black, gp); // 圖形軌跡 繪出
+        private void bt_reset5_Click(object sender, EventArgs e)
+        {
+            Ellipses = new List<Rectangle>();
+            this.pictureBox5.Refresh();
         }
     }
 }
@@ -732,13 +832,3 @@ namespace vcs_MousePaint1
 /*  可搬出
 
 */
-
-// Start selecting a rectangle.
-// Continue selecting a rectangle.
-// Finish selecting a rectangle.
-
-/*
-Bitmap bmp = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\BMW.jfif");
-e.Graphics.DrawImage(bmp, pt[i].X, pt[i].Y, 100, 100);
-*/
-
