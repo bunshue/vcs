@@ -179,10 +179,16 @@ namespace vcs_Class4
             red = Math.Min(red, 255);
 
             int green = trackBar_color1g.Value + trackBar_color2g.Value;
-            if (green > 255) green = 255;
+            if (green > 255)
+            {
+                green = 255;
+            }
 
             int blue = trackBar_color1b.Value + trackBar_color2b.Value;
-            if (blue > 255) blue = 255;
+            if (blue > 255)
+            {
+                blue = 255;
+            }
 
             this.Text = "( " + red.ToString() + ", " + green.ToString() + ", " + blue.ToString() + " )";
             SolidBrush myBrush = new SolidBrush(Color.FromArgb(red, green, blue));
@@ -199,16 +205,9 @@ namespace vcs_Class4
         private void trackBar_color1_Scroll(object sender, EventArgs e)
         {
             Color color;
-
-            color = Color.FromArgb(trackBar_color1r.Value,
-                                   trackBar_color1g.Value,
-                                   trackBar_color1b.Value);
-
+            color = Color.FromArgb(trackBar_color1r.Value, trackBar_color1g.Value, trackBar_color1b.Value);
             rect01.color = color;
-
-            groupBox1.Text = "( " + trackBar_color1r.Value.ToString() + ", " +
-                                    trackBar_color1g.Value.ToString() + ", " +
-                                    trackBar_color1b.Value.ToString() + " )";
+            groupBox1.Text = "( " + trackBar_color1r.Value.ToString() + ", " + trackBar_color1g.Value.ToString() + ", " + trackBar_color1b.Value.ToString() + " )";
             this.Invalidate();
         }
 
@@ -216,18 +215,11 @@ namespace vcs_Class4
         private void trackBar_color2_Scroll(object sender, EventArgs e)
         {
             Color color;
-
-            color = Color.FromArgb(trackBar_color2r.Value,
-                                   trackBar_color2g.Value,
-                                   trackBar_color2b.Value);
-
+            color = Color.FromArgb(trackBar_color2r.Value, trackBar_color2g.Value, trackBar_color2b.Value);
             rect02.color = color;
             groupBox2.Text = "( " + trackBar_color2r.Value.ToString() + ", " + trackBar_color2g.Value.ToString() + ", " + trackBar_color2b.Value.ToString() + " )";
-
             this.Invalidate();
         }
-
-
     }
 }
 

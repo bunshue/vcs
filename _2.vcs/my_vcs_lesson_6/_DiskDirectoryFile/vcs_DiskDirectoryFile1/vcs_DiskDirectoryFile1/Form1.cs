@@ -1301,54 +1301,41 @@ namespace vcs_DiskDirectoryFile1
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void bt_dir07_Click(object sender, EventArgs e)
         {
+            //DirectoryInfo
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\_case1\";
+
+            DirectoryInfo temp3 = new DirectoryInfo(foldername);
+
+            DirectoryInfo[] idr = temp3.GetDirectories();//獲取當前目錄下的所有子目錄.
+            foreach (DirectoryInfo dir in idr)
+            {
+                richTextBox1.Text += "取得資料夾 : " + dir.FullName + "\n";
+
+                FileInfo[] files1 = dir.GetFiles();
+
+                foreach (FileInfo file in files1)
+                {
+                    richTextBox1.Text += "取得檔案 : " + file.FullName + "\n";
+                }
+            }
+
+            richTextBox1.Text += "目錄 : " + foldername + " 下\n";
+            FileInfo[] files2 = temp3.GetFiles();
+
+            foreach (FileInfo file in files2)
+            {
+                richTextBox1.Text += "取得檔案 : " + file.FullName + "\n";
+            }
         }
 
         //------------------------------------------------------------  # 60個
 
         private void bt_dir08_Click(object sender, EventArgs e)
         {
-            //搜尋檔案內的文字
-
-            string txtDirectory = @"D:\_git\vcs\_1.data\______test_files1\_case1";
-            string type = "*.*";
-            string pattern = "";
-
-            richTextBox1.Clear();
-            DirectoryInfo dir_info = new DirectoryInfo(txtDirectory);
-
-            ListFiles(type, dir_info, pattern);
-        }
-
-        // Add the files in this directory's subtree 
-        // that match the pattern to the ListBox.
-        private void ListFiles(string pattern, DirectoryInfo dir_info, string target)
-        {
-            // Get the files in this directory.
-            FileInfo[] fs_infos = dir_info.GetFiles(pattern);
-            foreach (FileInfo fs_info in fs_infos)
-            {
-                if (target.Length == 0)
-                {
-                    richTextBox1.Text += fs_info.FullName + "\n";
-                }
-                else
-                {
-                    string txt = File.ReadAllText(fs_info.FullName);
-                    if (txt.IndexOf(target, StringComparison.OrdinalIgnoreCase) >= 0)
-                    {
-                        richTextBox1.Text += fs_info.FullName + "\n";
-                    }
-                }
-            }
-
-            // Search subdirectories.
-            DirectoryInfo[] subdirs = dir_info.GetDirectories();
-            foreach (DirectoryInfo subdir in subdirs)
-            {
-                ListFiles(pattern, subdir, target);
-            }
         }
 
         //------------------------------------------------------------  # 60個

@@ -812,6 +812,134 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
     }
 
     //------------------------------------------------------------  # 60個
+
+    class Car1
+    {
+        // 宣告_speed為私有變數，表示該變數只能在Car類別內使用
+        private int _speed;
+        // 定義GetSpeed()方法用來傳回_speed
+        public int GetSpeed()
+        {
+            return _speed;
+        }
+        // 定義SetSpeed()方法用來設定_speed
+        public void SetSpeed(int vSpeed)
+        {
+            if (vSpeed < 0) vSpeed = 0;		// 設定速度不得低於 0
+            if (vSpeed > 200) vSpeed = 200;	// 設定速度不得高於 200
+            _speed = vSpeed;
+        }
+    }
+
+    class Car2   // 定義Car類別
+    {
+        // 宣告_speed私有變數用來存放車子的速度值
+        private int _speed = 0;
+        // 定義Speed速度屬性
+        public int Speed
+        {
+            get
+            {
+                return _speed;  // 傳回目前的速度
+            }
+            set
+            {
+                if (value < 0) value = 0;       // 速度不可小於0
+                if (value > 200) value = 200;   // 速度不可大於200
+                _speed = value;                 // 設定速度
+            }
+        }
+        // 定義Accelerate()方法，用來指定目前車子速度+1 
+        public void Accelerate()
+        {
+            _speed++;					// 速度 + 1
+            if (_speed > 200) _speed = 200;	// 檢查速度不可超過 200
+        }
+    }
+
+    class Student1
+    {
+        private int _Height, _Weight;
+        public Student1()
+        {
+            _Weight = 48;
+            _Height = 160;
+        }
+        // Student類別的建構式，須設定一個引數
+        public Student1(int w)
+        {
+            _Weight = w;  		// 初始化_Weight欄位
+            _Height = 160;	      	// 初始化_Height欄位的值為160
+        }
+        // Student類別的建構式，須設定兩個引數
+        public Student1(int w, int h)
+        {
+            _Weight = w;
+            _Height = h;
+        }
+        // Student類別的GetShow()方法，可顯示學生的身高和體重
+        public void GetShow()
+        {
+            //richTextBox1.Text +=string.Format(" 身高是: {0} ", _Height);
+            //richTextBox1.Text += string.Format(" 體重是: {0} \n", _Weight);
+        }
+    }
+
+    class Student2
+    {
+        private int _Height, _Weight;
+        //public Student()
+        //{
+        //    _Weight = 48;
+        //    _Height = 160;
+        // }
+        // Student類別的建構式，須設定一個引數
+        public Student2(int w)
+        {
+            _Weight = w;  		// 初始化_Weight欄位
+            _Height = 160;	      	// 初始化_Height欄位的值為160
+        }
+        // Student類別的建構式，須設定兩個引數
+        public Student2(int w, int h)
+        {
+            _Weight = w;
+            _Height = h;
+        }
+        // Student類別的GetShow()方法，可顯示學生的身高和體重
+        public void GetShow()
+        {
+            //richTextBox1.Text +=string.Format(" 身高是: {0} ", _Height);
+            //richTextBox1.Text += string.Format(" 體重是: {0} \n", _Weight);
+        }
+    }
+
+    class Student3
+    {
+        private int _Height, _Weight;
+        public Student3()
+        {
+            //_Weight = 48;
+            //_Height = 160;
+        }
+        // Student類別的建構式，須設定一個引數
+        public Student3(int w)
+        {
+            _Weight = w;  		// 初始化_Weight欄位
+            _Height = 160;	      	// 初始化_Height欄位的值為160
+        }
+        // Student類別的建構式，須設定兩個引數
+        public Student3(int w, int h)
+        {
+            _Weight = w;
+            _Height = h;
+        }
+        // Student類別的GetShow()方法，可顯示學生的身高和體重
+        public void GetShow()
+        {
+            //richTextBox1.Text +=" 身高是: {0} "+ _Height+ "\n";
+            //richTextBox1.Text +=" 體重是: {0} \n"+ _Weight+ "\n";
+        }
+    }
 }
 
 //6060
