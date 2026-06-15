@@ -90,50 +90,55 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.txtString);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(218, 350);
+            this.groupBox1.Location = new System.Drawing.Point(232, 401);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(243, 138);
+            this.groupBox1.Size = new System.Drawing.Size(200, 200);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "英數分離";
             // 
             // txtDigits
             // 
-            this.txtDigits.Location = new System.Drawing.Point(54, 100);
+            this.txtDigits.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtDigits.Location = new System.Drawing.Point(6, 152);
             this.txtDigits.Name = "txtDigits";
-            this.txtDigits.Size = new System.Drawing.Size(171, 22);
+            this.txtDigits.Size = new System.Drawing.Size(180, 30);
             this.txtDigits.TabIndex = 19;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 103);
+            this.label3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label3.Location = new System.Drawing.Point(11, 128);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(23, 12);
+            this.label3.Size = new System.Drawing.Size(38, 19);
             this.label3.TabIndex = 18;
             this.label3.Text = "數 :";
             // 
             // txtLetters
             // 
-            this.txtLetters.Location = new System.Drawing.Point(54, 76);
+            this.txtLetters.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtLetters.Location = new System.Drawing.Point(8, 92);
             this.txtLetters.Name = "txtLetters";
-            this.txtLetters.Size = new System.Drawing.Size(171, 22);
+            this.txtLetters.Size = new System.Drawing.Size(180, 30);
             this.txtLetters.TabIndex = 17;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 79);
+            this.label2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label2.Location = new System.Drawing.Point(11, 71);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(23, 12);
+            this.label2.Size = new System.Drawing.Size(38, 19);
             this.label2.TabIndex = 16;
             this.label2.Text = "英 :";
             // 
             // txtString
             // 
-            this.txtString.Location = new System.Drawing.Point(54, 25);
+            this.txtString.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtString.Location = new System.Drawing.Point(8, 38);
             this.txtString.Name = "txtString";
-            this.txtString.Size = new System.Drawing.Size(171, 22);
+            this.txtString.Size = new System.Drawing.Size(180, 30);
             this.txtString.TabIndex = 15;
             this.txtString.Text = "COVID-19 2020 Dec";
             this.txtString.TextChanged += new System.EventHandler(this.txtString_TextChanged);
@@ -141,9 +146,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 28);
+            this.label1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label1.Location = new System.Drawing.Point(6, 16);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 12);
+            this.label1.Size = new System.Drawing.Size(57, 19);
             this.label1.TabIndex = 14;
             this.label1.Text = "字串 :";
             // 
@@ -159,16 +165,17 @@
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Location = new System.Drawing.Point(485, 15);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(319, 183);
+            this.groupBox2.Size = new System.Drawing.Size(407, 282);
             this.groupBox2.TabIndex = 20;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "置換";
             // 
             // txtTestString
             // 
-            this.txtTestString.Location = new System.Drawing.Point(6, 114);
+            this.txtTestString.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtTestString.Location = new System.Drawing.Point(6, 149);
             this.txtTestString.Name = "txtTestString";
-            this.txtTestString.Size = new System.Drawing.Size(290, 22);
+            this.txtTestString.Size = new System.Drawing.Size(380, 30);
             this.txtTestString.TabIndex = 38;
             this.txtTestString.Text = "The QUICK BROWN fox jumps over the LAZY dog.";
             this.txtTestString.TextChanged += new System.EventHandler(this.txtTestString_TextChanged);
@@ -176,60 +183,67 @@
             // Label4
             // 
             this.Label4.AutoSize = true;
-            this.Label4.Location = new System.Drawing.Point(6, 99);
+            this.Label4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.Label4.Location = new System.Drawing.Point(6, 126);
             this.Label4.Name = "Label4";
-            this.Label4.Size = new System.Drawing.Size(55, 12);
+            this.Label4.Size = new System.Drawing.Size(89, 19);
             this.Label4.TabIndex = 43;
             this.Label4.Text = "Test String";
             // 
             // lblResult
             // 
             this.lblResult.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblResult.Location = new System.Drawing.Point(9, 153);
+            this.lblResult.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lblResult.Location = new System.Drawing.Point(9, 189);
             this.lblResult.Name = "lblResult";
-            this.lblResult.Size = new System.Drawing.Size(290, 15);
+            this.lblResult.Size = new System.Drawing.Size(380, 40);
             this.lblResult.TabIndex = 42;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 139);
+            this.label5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label5.Location = new System.Drawing.Point(9, 153);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(34, 12);
+            this.label5.Size = new System.Drawing.Size(55, 19);
             this.label5.TabIndex = 41;
             this.label5.Text = "Result";
             // 
             // txtReplacementPattern
             // 
-            this.txtReplacementPattern.Location = new System.Drawing.Point(6, 77);
+            this.txtReplacementPattern.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtReplacementPattern.Location = new System.Drawing.Point(6, 91);
             this.txtReplacementPattern.Name = "txtReplacementPattern";
-            this.txtReplacementPattern.Size = new System.Drawing.Size(290, 22);
+            this.txtReplacementPattern.Size = new System.Drawing.Size(380, 30);
             this.txtReplacementPattern.TabIndex = 36;
             this.txtReplacementPattern.Text = ".";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 62);
+            this.label6.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label6.Location = new System.Drawing.Point(6, 73);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(100, 12);
+            this.label6.Size = new System.Drawing.Size(159, 19);
             this.label6.TabIndex = 39;
             this.label6.Text = "Replacement Pattern";
             // 
             // txtPattern
             // 
-            this.txtPattern.Location = new System.Drawing.Point(6, 32);
+            this.txtPattern.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtPattern.Location = new System.Drawing.Point(6, 41);
             this.txtPattern.Name = "txtPattern";
-            this.txtPattern.Size = new System.Drawing.Size(290, 22);
+            this.txtPattern.Size = new System.Drawing.Size(380, 30);
             this.txtPattern.TabIndex = 40;
             this.txtPattern.Text = "[aeiouAEIOU]";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label7.Location = new System.Drawing.Point(6, 18);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(37, 12);
+            this.label7.Size = new System.Drawing.Size(60, 19);
             this.label7.TabIndex = 37;
             this.label7.Text = "Pattern";
             // 
@@ -243,9 +257,9 @@
             this.groupBox3.Controls.Add(this.txtReplacementPattern2);
             this.groupBox3.Controls.Add(this.label12);
             this.groupBox3.Controls.Add(this.txtPattern2);
-            this.groupBox3.Location = new System.Drawing.Point(485, 213);
+            this.groupBox3.Location = new System.Drawing.Point(485, 303);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(310, 287);
+            this.groupBox3.Size = new System.Drawing.Size(407, 364);
             this.groupBox3.TabIndex = 20;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "英數分離";
@@ -253,37 +267,41 @@
             // lblResult2
             // 
             this.lblResult2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblResult2.Location = new System.Drawing.Point(11, 201);
+            this.lblResult2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lblResult2.Location = new System.Drawing.Point(11, 258);
             this.lblResult2.Name = "lblResult2";
-            this.lblResult2.Size = new System.Drawing.Size(273, 74);
+            this.lblResult2.Size = new System.Drawing.Size(380, 60);
             this.lblResult2.TabIndex = 26;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(11, 186);
+            this.label9.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label9.Location = new System.Drawing.Point(11, 234);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(34, 12);
+            this.label9.Size = new System.Drawing.Size(55, 19);
             this.label9.TabIndex = 25;
             this.label9.Text = "Result";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(11, 99);
+            this.label10.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label10.Location = new System.Drawing.Point(11, 131);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(26, 12);
+            this.label10.Size = new System.Drawing.Size(42, 19);
             this.label10.TabIndex = 24;
             this.label10.Text = "Text";
             // 
             // txtInput
             // 
             this.txtInput.AcceptsReturn = true;
-            this.txtInput.Location = new System.Drawing.Point(11, 114);
+            this.txtInput.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtInput.Location = new System.Drawing.Point(11, 156);
             this.txtInput.Multiline = true;
             this.txtInput.Name = "txtInput";
             this.txtInput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtInput.Size = new System.Drawing.Size(273, 74);
+            this.txtInput.Size = new System.Drawing.Size(380, 60);
             this.txtInput.TabIndex = 23;
             this.txtInput.Text = "Archer, Ann\r\nBaker, Bob\r\nCarter, Cindy\r\nDeevers, Dan";
             this.txtInput.TextChanged += new System.EventHandler(this.do_regular_expression);
@@ -291,17 +309,19 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(11, 54);
+            this.label11.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label11.Location = new System.Drawing.Point(11, 76);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(100, 12);
+            this.label11.Size = new System.Drawing.Size(159, 19);
             this.label11.TabIndex = 22;
             this.label11.Text = "Replacement Pattern";
             // 
             // txtReplacementPattern2
             // 
-            this.txtReplacementPattern2.Location = new System.Drawing.Point(11, 69);
+            this.txtReplacementPattern2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtReplacementPattern2.Location = new System.Drawing.Point(11, 98);
             this.txtReplacementPattern2.Name = "txtReplacementPattern2";
-            this.txtReplacementPattern2.Size = new System.Drawing.Size(273, 22);
+            this.txtReplacementPattern2.Size = new System.Drawing.Size(380, 30);
             this.txtReplacementPattern2.TabIndex = 21;
             this.txtReplacementPattern2.Text = "$2 $1";
             this.txtReplacementPattern2.TextChanged += new System.EventHandler(this.do_regular_expression);
@@ -309,17 +329,19 @@
             // label12
             // 
             this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label12.Location = new System.Drawing.Point(11, 18);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(37, 12);
+            this.label12.Size = new System.Drawing.Size(60, 19);
             this.label12.TabIndex = 20;
             this.label12.Text = "Pattern";
             // 
             // txtPattern2
             // 
-            this.txtPattern2.Location = new System.Drawing.Point(11, 32);
+            this.txtPattern2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtPattern2.Location = new System.Drawing.Point(11, 40);
             this.txtPattern2.Name = "txtPattern2";
-            this.txtPattern2.Size = new System.Drawing.Size(273, 22);
+            this.txtPattern2.Size = new System.Drawing.Size(380, 30);
             this.txtPattern2.TabIndex = 19;
             this.txtPattern2.Text = "(?m)^([^,]*), ([^\\r]*)\\r?$";
             this.txtPattern2.TextChanged += new System.EventHandler(this.do_regular_expression);
@@ -327,7 +349,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(1001, 13);
+            this.richTextBox1.Location = new System.Drawing.Point(1184, 7);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 21;
@@ -335,27 +357,30 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(18, 27);
+            this.textBox2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.textBox2.Location = new System.Drawing.Point(8, 19);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(160, 22);
+            this.textBox2.Size = new System.Drawing.Size(180, 30);
             this.textBox2.TabIndex = 23;
             this.textBox2.Text = "25";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tb_email
             // 
-            this.tb_email.Location = new System.Drawing.Point(18, 120);
+            this.tb_email.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_email.Location = new System.Drawing.Point(8, 112);
             this.tb_email.Name = "tb_email";
-            this.tb_email.Size = new System.Drawing.Size(160, 22);
+            this.tb_email.Size = new System.Drawing.Size(180, 30);
             this.tb_email.TabIndex = 30;
             this.tb_email.Text = "david@yahoo.com.tw";
             this.tb_email.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tb_rul
             // 
-            this.tb_rul.Location = new System.Drawing.Point(18, 208);
+            this.tb_rul.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_rul.Location = new System.Drawing.Point(8, 200);
             this.tb_rul.Name = "tb_rul";
-            this.tb_rul.Size = new System.Drawing.Size(160, 22);
+            this.tb_rul.Size = new System.Drawing.Size(180, 30);
             this.tb_rul.TabIndex = 31;
             this.tb_rul.Text = "http://www.yahoo.com.tw";
             this.tb_rul.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -363,7 +388,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(1017, 39);
+            this.bt_clear.Location = new System.Drawing.Point(1200, 33);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 65;
@@ -432,15 +457,16 @@
             this.groupBox0.Controls.Add(this.bt_re1);
             this.groupBox0.Location = new System.Drawing.Point(232, 12);
             this.groupBox0.Name = "groupBox0";
-            this.groupBox0.Size = new System.Drawing.Size(229, 307);
+            this.groupBox0.Size = new System.Drawing.Size(200, 300);
             this.groupBox0.TabIndex = 71;
             this.groupBox0.TabStop = false;
             // 
             // bt_re3
             // 
-            this.bt_re3.Location = new System.Drawing.Point(18, 241);
+            this.bt_re3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_re3.Location = new System.Drawing.Point(8, 233);
             this.bt_re3.Name = "bt_re3";
-            this.bt_re3.Size = new System.Drawing.Size(160, 40);
+            this.bt_re3.Size = new System.Drawing.Size(180, 60);
             this.bt_re3.TabIndex = 34;
             this.bt_re3.Text = "驗證URl網址格式";
             this.bt_re3.UseVisualStyleBackColor = true;
@@ -448,9 +474,10 @@
             // 
             // bt_re2
             // 
-            this.bt_re2.Location = new System.Drawing.Point(18, 156);
+            this.bt_re2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_re2.Location = new System.Drawing.Point(8, 148);
             this.bt_re2.Name = "bt_re2";
-            this.bt_re2.Size = new System.Drawing.Size(160, 40);
+            this.bt_re2.Size = new System.Drawing.Size(180, 60);
             this.bt_re2.TabIndex = 34;
             this.bt_re2.Text = "驗證Email格式";
             this.bt_re2.UseVisualStyleBackColor = true;
@@ -458,9 +485,10 @@
             // 
             // bt_re1
             // 
-            this.bt_re1.Location = new System.Drawing.Point(18, 65);
+            this.bt_re1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_re1.Location = new System.Drawing.Point(8, 57);
             this.bt_re1.Name = "bt_re1";
-            this.bt_re1.Size = new System.Drawing.Size(160, 40);
+            this.bt_re1.Size = new System.Drawing.Size(180, 60);
             this.bt_re1.TabIndex = 34;
             this.bt_re1.Text = "驗證每個月的天數";
             this.bt_re1.UseVisualStyleBackColor = true;
@@ -502,19 +530,19 @@
             this.groupBox4.Controls.Add(this.bt_re5);
             this.groupBox4.Controls.Add(this.txtInput2);
             this.groupBox4.Controls.Add(this.bt_re4);
-            this.groupBox4.Location = new System.Drawing.Point(825, 17);
+            this.groupBox4.Location = new System.Drawing.Point(960, 17);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(154, 232);
+            this.groupBox4.Size = new System.Drawing.Size(200, 262);
             this.groupBox4.TabIndex = 75;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "正則表達式";
             // 
             // bt_re6
             // 
-            this.bt_re6.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_re6.Location = new System.Drawing.Point(6, 168);
+            this.bt_re6.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_re6.Location = new System.Drawing.Point(6, 192);
             this.bt_re6.Name = "bt_re6";
-            this.bt_re6.Size = new System.Drawing.Size(142, 42);
+            this.bt_re6.Size = new System.Drawing.Size(180, 60);
             this.bt_re6.TabIndex = 59;
             this.bt_re6.Text = "驗證身份證字號";
             this.bt_re6.UseVisualStyleBackColor = true;
@@ -522,10 +550,10 @@
             // 
             // bt_re5
             // 
-            this.bt_re5.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_re5.Location = new System.Drawing.Point(6, 120);
+            this.bt_re5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_re5.Location = new System.Drawing.Point(6, 128);
             this.bt_re5.Name = "bt_re5";
-            this.bt_re5.Size = new System.Drawing.Size(142, 42);
+            this.bt_re5.Size = new System.Drawing.Size(180, 60);
             this.bt_re5.TabIndex = 58;
             this.bt_re5.Text = "檢查身分證格式";
             this.bt_re5.UseVisualStyleBackColor = true;
@@ -536,16 +564,16 @@
             this.txtInput2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.txtInput2.Location = new System.Drawing.Point(6, 25);
             this.txtInput2.Name = "txtInput2";
-            this.txtInput2.Size = new System.Drawing.Size(142, 30);
+            this.txtInput2.Size = new System.Drawing.Size(180, 30);
             this.txtInput2.TabIndex = 46;
             this.txtInput2.Text = "P123456789";
             // 
             // bt_re4
             // 
-            this.bt_re4.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_re4.Location = new System.Drawing.Point(6, 70);
+            this.bt_re4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_re4.Location = new System.Drawing.Point(6, 66);
             this.bt_re4.Name = "bt_re4";
-            this.bt_re4.Size = new System.Drawing.Size(142, 42);
+            this.bt_re4.Size = new System.Drawing.Size(180, 60);
             this.bt_re4.TabIndex = 57;
             this.bt_re4.Text = "檢查手機號碼格式";
             this.bt_re4.UseVisualStyleBackColor = true;

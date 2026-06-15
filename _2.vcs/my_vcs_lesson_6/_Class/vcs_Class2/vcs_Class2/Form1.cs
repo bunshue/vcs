@@ -13,6 +13,13 @@ namespace vcs_Class2
 {
     public partial class Form1 : Form
     {
+        Random rd = new Random(); // 亂數
+        List<ClassBall> ballList = new List<ClassBall>();  // ClassBall 物件的動態陣列
+        bool dragging = false; // 是否拖拉中
+        ClassBall Selected_Ball; // 被選到的球
+
+        //------------------------------------------------------------  # 60個
+
         Person[] person_data = new Person[100];  //統一管理物件
         ShapeCollection ShapeManager = new ShapeCollection();
 
@@ -44,8 +51,15 @@ namespace vcs_Class2
             groupBox2.Size = new Size(200, 310);
             groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 6 + 30);
 
-            richTextBox1.Size = new Size(600, 760);
-            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            pictureBox1.Size = new Size(600, 300);
+            pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            bt_class20.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_class20.Size.Width, 10);
+            bt_class21.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_class21.Size.Width, 10 + 50);
+            bt_class22.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_class22.Size.Width, 10 + 50 * 2);
+            bt_class23.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_class23.Size.Width, 10 + 50 * 3);
+
+            richTextBox1.Size = new Size(600, 360);
+            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 5);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             x_st = 10;
@@ -277,8 +291,102 @@ namespace vcs_Class2
         }
 
         //------------------------------------------------------------  # 60個
-    }
 
+        private void bt_class20_Click(object sender, EventArgs e)
+        {
+            //加入紅球
+            Button button = (Button)sender; // 三個按鈕共用一個事件
+
+            Color color = Color.Red;  // 三個按鈕 的顏色 各不相同
+
+            ClassBall aBall;  // 新增 一個 ClassBall 物件
+            aBall = new ClassBall(new Point(rd.Next(20, this.pictureBox1.ClientSize.Width - 20), rd.Next(40, this.pictureBox1.ClientSize.Height - 20)), color);
+            ballList.Add(aBall); // 新增 一個 ClassBall 物件到 動態陣列
+
+            this.pictureBox1.Invalidate();
+        }
+
+        private void bt_class21_Click(object sender, EventArgs e)
+        {
+            //加入綠球
+            Button button = (Button)sender; // 三個按鈕共用一個事件
+
+            Color color = Color.Green;  // 三個按鈕 的顏色 各不相同
+
+            ClassBall aBall;  // 新增 一個 ClassBall 物件
+            aBall = new ClassBall(new Point(rd.Next(20, this.pictureBox1.ClientSize.Width - 20), rd.Next(40, this.pictureBox1.ClientSize.Height - 20)), color);
+            ballList.Add(aBall); // 新增 一個 ClassBall 物件到 動態陣列
+
+            this.pictureBox1.Invalidate();
+        }
+
+        private void bt_class22_Click(object sender, EventArgs e)
+        {
+            //加入藍球
+
+            Button button = (Button)sender; // 三個按鈕共用一個事件
+            Color color = Color.Blue;  // 三個按鈕 的顏色 各不相同
+
+            ClassBall aBall;  // 新增 一個 ClassBall 物件
+            aBall = new ClassBall(new Point(rd.Next(20, this.pictureBox1.ClientSize.Width - 20), rd.Next(40, this.pictureBox1.ClientSize.Height - 20)), color);
+            ballList.Add(aBall); // 新增 一個 ClassBall 物件到 動態陣列
+
+            this.pictureBox1.Invalidate();
+        }
+
+        private void bt_class23_Click(object sender, EventArgs e)
+        {
+            //info
+            int cnt = ballList.Count;
+            richTextBox1.Text += "\n目前共有 : " + cnt.ToString() + " 球\n";
+            if (cnt > 0)
+            {
+                for (int i = 0; i < cnt; i++)
+                {
+                    richTextBox1.Text += ballList[i].color + ballList[i].pt.ToString() + "\n";
+                }
+            }
+        }
+
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            // 測試 哪一顆球 被選到
+            foreach (ClassBall aBall in ballList)
+            {
+                if (aBall.CheckSelected(e.X, e.Y))
+                {
+                    Selected_Ball = aBall; // 這一顆球 被選到
+                    dragging = true;
+                    break;
+                }
+            }
+        }
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (dragging)
+            {
+                Selected_Ball.Move(e.X, e.Y); // 移動 被選到的球
+                this.pictureBox1.Invalidate();
+            }
+        }
+
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            dragging = false;
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            foreach (ClassBall aBall in ballList) // 繪出全部的球
+            {
+                e.Graphics.FillEllipse(new SolidBrush(aBall.color), aBall.pt.X - 10, aBall.pt.Y - 10, 20, 20);
+                e.Graphics.DrawEllipse(Pens.Black, aBall.pt.X - 10, aBall.pt.Y - 10, 20, 20);
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
+    }
 }
 
 //6060

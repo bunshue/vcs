@@ -42,14 +42,20 @@
             this.bt_class12 = new System.Windows.Forms.Button();
             this.bt_class11 = new System.Windows.Forms.Button();
             this.bt_class10 = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.bt_class23 = new System.Windows.Forms.Button();
+            this.bt_class22 = new System.Windows.Forms.Button();
+            this.bt_class21 = new System.Windows.Forms.Button();
+            this.bt_class20 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(448, 48);
+            this.bt_clear.Location = new System.Drawing.Point(441, 155);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 131;
@@ -60,7 +66,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(428, 14);
+            this.richTextBox1.Location = new System.Drawing.Point(421, 121);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 122;
@@ -202,11 +208,75 @@
             this.bt_class10.UseVisualStyleBackColor = true;
             this.bt_class10.Click += new System.EventHandler(this.bt_class10_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Location = new System.Drawing.Point(424, 14);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox1.TabIndex = 158;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
+            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
+            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
+            // 
+            // bt_class23
+            // 
+            this.bt_class23.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_class23.Location = new System.Drawing.Point(424, 358);
+            this.bt_class23.Name = "bt_class23";
+            this.bt_class23.Size = new System.Drawing.Size(100, 36);
+            this.bt_class23.TabIndex = 162;
+            this.bt_class23.Text = "info";
+            this.bt_class23.UseVisualStyleBackColor = true;
+            this.bt_class23.Click += new System.EventHandler(this.bt_class23_Click);
+            // 
+            // bt_class22
+            // 
+            this.bt_class22.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_class22.Location = new System.Drawing.Point(424, 316);
+            this.bt_class22.Name = "bt_class22";
+            this.bt_class22.Size = new System.Drawing.Size(100, 36);
+            this.bt_class22.TabIndex = 161;
+            this.bt_class22.Text = "加入藍球";
+            this.bt_class22.UseVisualStyleBackColor = true;
+            this.bt_class22.Click += new System.EventHandler(this.bt_class22_Click);
+            // 
+            // bt_class21
+            // 
+            this.bt_class21.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_class21.Location = new System.Drawing.Point(424, 278);
+            this.bt_class21.Name = "bt_class21";
+            this.bt_class21.Size = new System.Drawing.Size(100, 36);
+            this.bt_class21.TabIndex = 160;
+            this.bt_class21.Tag = "";
+            this.bt_class21.Text = "加入綠球";
+            this.bt_class21.UseVisualStyleBackColor = true;
+            this.bt_class21.Click += new System.EventHandler(this.bt_class21_Click);
+            // 
+            // bt_class20
+            // 
+            this.bt_class20.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_class20.Location = new System.Drawing.Point(424, 236);
+            this.bt_class20.Name = "bt_class20";
+            this.bt_class20.Size = new System.Drawing.Size(100, 36);
+            this.bt_class20.TabIndex = 159;
+            this.bt_class20.Tag = "";
+            this.bt_class20.Text = "加入紅球";
+            this.bt_class20.UseVisualStyleBackColor = true;
+            this.bt_class20.Click += new System.EventHandler(this.bt_class20_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(774, 581);
+            this.Controls.Add(this.bt_class23);
+            this.Controls.Add(this.bt_class22);
+            this.Controls.Add(this.bt_class21);
+            this.Controls.Add(this.bt_class20);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.bt_clear);
@@ -218,6 +288,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -238,6 +309,11 @@
         private System.Windows.Forms.Button bt_class12;
         private System.Windows.Forms.Button bt_class11;
         private System.Windows.Forms.Button bt_class10;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button bt_class23;
+        private System.Windows.Forms.Button bt_class22;
+        private System.Windows.Forms.Button bt_class21;
+        private System.Windows.Forms.Button bt_class20;
     }
 }
 

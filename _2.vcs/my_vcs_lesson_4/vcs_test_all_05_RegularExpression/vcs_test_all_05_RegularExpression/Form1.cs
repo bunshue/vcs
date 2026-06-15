@@ -49,15 +49,35 @@ namespace vcs_test_all_05_RegularExpression
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
 
+            groupBox0.Size = new Size(200, 350);
+            groupBox4.Size = new Size(200, 270);
+            groupBox2.Size = new Size(410, 270);
+            groupBox3.Size = new Size(410, 340);
             groupBox0.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            groupBox2.Location = new Point(x_st + dx * 2 + 50, y_st + dy * 0);
-            groupBox3.Location = new Point(x_st + dx * 2 + 50, y_st + dy * 5);
-            groupBox4.Location = new Point(x_st + dx * 4 + 0, y_st + dy * 0);
+            groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            groupBox3.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            groupBox4.Location = new Point(x_st + dx * 4, y_st + dy * 0);
 
             richTextBox1.Size = new Size(310, 700);
             richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            x_st = 10;
+            y_st = 20;
+            dx = 180 + 10;
+            dy = 60 + 10;
+            txtInput2.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_re4.Location = new Point(x_st + dx * 0, y_st + dy * 1 - 30);
+            bt_re5.Location = new Point(x_st + dx * 0, y_st + dy * 2 - 30);
+            bt_re6.Location = new Point(x_st + dx * 0, y_st + dy * 3 - 30);
+
+            textBox2.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_re1.Location = new Point(x_st + dx * 0, y_st + dy * 1 - 30);
+            tb_email.Location = new Point(x_st + dx * 0, y_st + dy * 2 - 30);
+            bt_re2.Location = new Point(x_st + dx * 0, y_st + dy * 3 - 30 - 30);
+            tb_rul.Location = new Point(x_st + dx * 0, y_st + dy * 4 - 30 - 30);
+            bt_re3.Location = new Point(x_st + dx * 0, y_st + dy * 5 - 30 - 30 - 30);
 
             this.Size = new Size(1400, 760);
             this.Text = "vcs_test_all_05_RegularExpression";
