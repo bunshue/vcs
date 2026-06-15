@@ -12,6 +12,13 @@ using System.Drawing.Imaging;  // for PropertyItem
 
 //方案總管/加入/現有項目/選取ExifStuff.cs, 把 namespace 改成 vcs_Exif
 
+//EXIF : Exchangeable Image File
+/*
+目前大部分數碼相機都將所拍照的圖像保存成JPG格式，
+而像拍照日期這樣的 信息統稱為EXIF信息。
+EXIF是英文ExchangeableImageFile(可交換圖像文件)的 縮寫
+*/
+
 namespace vcs_Exif
 {
     public partial class Form1 : Form

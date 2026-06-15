@@ -115,6 +115,29 @@ namespace vcs_Mix03_draw_image
         private void button0_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //字體做陰影效果
+
+            //字體做陰影效果 同樣字往右下寫一遍 顏色不同
+
+            string test_string = "金陵圖";
+            Bitmap bmp = new Bitmap(500, 500);     //initial W, H
+            g = Graphics.FromImage(bmp);
+
+            string font_type = "標楷體";
+
+            int font_size_default = 200;
+            Font f = new Font(font_type, font_size_default);
+            g.DrawString(test_string, f, new SolidBrush(Color.Pink), new PointF(0, 0));
+
+            font_size_default = 200;
+            f = new Font(font_type, font_size_default);
+            g.DrawString(test_string, f, new SolidBrush(Color.Red), new PointF(5, 5));
+
+
+            pictureBox1.Image = bmp;
+
+
         }
 
         List<String> filenames = new List<String>();

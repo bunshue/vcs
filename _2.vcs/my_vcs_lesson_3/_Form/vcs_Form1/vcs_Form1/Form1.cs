@@ -336,10 +336,34 @@ namespace vcs_Form1
             this.TransparencyKey = Color.Black;
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button16_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "xxx\n";
+            richTextBox1.Text += "震動視窗\n";
+
+            nudgeWindow();
         }
+
+        private void nudgeWindow()
+        {
+            // 記錄視窗舊位置
+            int oldLeft = Left;
+            int oldTop = Top;
+            // 變動位置
+            Random r = new Random();
+            for (int i = 0; i <= 500; i++)
+            {
+                int left = r.Next(Left - 20, Left + 20);
+                Left = left;
+                int top = r.Next(Top - 20, Top + 20);
+                Top = top;
+                Left = oldLeft;
+                Top = oldTop;
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void button17_Click(object sender, EventArgs e)
         {

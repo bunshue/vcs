@@ -43,9 +43,12 @@ namespace vcs_PictureCrop5
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             pictureBox1.Image = bitmap1;
 
+            //------------------------------------------------------------  # 60個
 
             int pbox_w = pictureBox1.ClientSize.Width;
             int pbox_h = pictureBox1.ClientSize.Height;
@@ -79,12 +82,39 @@ namespace vcs_PictureCrop5
 
         void show_item_location()
         {
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+
+            pictureBox1.Size = new Size(600, 600);
+            pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+
+            richTextBox1.Size = new Size(300, 600);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1000, 750);
+            this.Text = "vcs_PictureCrop5";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+
             //跟隨鼠標在 pictureBox 的圖片上畫矩形
             pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
             pictureBox1.MouseMove += new MouseEventHandler(pictureBox1_MouseMove);
             pictureBox1.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
             pictureBox1.Cursor = Cursors.Cross;
         }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
 
         // Return a Rectangle with these points as corners.
         private Rectangle MakeRectangle(int x0, int y0, int x1, int y1)
@@ -164,3 +194,17 @@ namespace vcs_PictureCrop5
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

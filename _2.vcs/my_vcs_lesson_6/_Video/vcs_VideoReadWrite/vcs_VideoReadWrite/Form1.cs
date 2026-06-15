@@ -7,15 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Runtime.InteropServices;   //for dll
+using System.Runtime.InteropServices;  // for dll
 
 using System.IO;
 using System.Threading;
-using System.Diagnostics;   //for Stopwatch
+using System.Diagnostics;  // for Stopwatch
 using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;   //for PixelFormat
+using System.Drawing.Imaging;  // for PixelFormat
 
-using AForge.Video.FFMPEG;      //for VideoFileWriter
+using AForge.Video.FFMPEG;  // for VideoFileWriter
 
 using AviFile;
 
@@ -23,8 +23,6 @@ namespace vcs_VideoReadWrite
 {
     public partial class Form1 : Form
     {
-        private const int BORDER = 10;
-
         public Form1()
         {
             InitializeComponent();
@@ -37,11 +35,11 @@ namespace vcs_VideoReadWrite
 
         void show_item_location()
         {
-            int x_st = BORDER;
-            int y_st = BORDER;
-            int dx = 120 + BORDER;
-            int dy = 60 + BORDER;
-
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -55,9 +53,15 @@ namespace vcs_VideoReadWrite
             pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
 
             richTextBox1.Size = new Size(400, 560 - 300);
-            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0 + 300 + BORDER);
+            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0 + 300 + 10);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-            this.Size = new Size(600, 620);
+
+            this.Size = new Size(700, 680);
+            this.Text = "vcs_VideoReadWrite";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -321,8 +325,8 @@ namespace vcs_VideoReadWrite
         }
 
         /* 引入 Win32 API 中的 User32.DLL
- * 需要加上 using System.Runtime.InteropServices;
- */
+         * 需要加上 using System.Runtime.InteropServices;
+         */
         [DllImport("user32.dll")]
         public static extern Boolean GetWindowRect(IntPtr hWnd, ref Rectangle bounds);
 
@@ -330,8 +334,9 @@ namespace vcs_VideoReadWrite
         {
             //抓取指定視窗的畫面截圖
             /* 取得目標視窗的 Handle
- * 需要加上 using System.Diagnostics;
- */
+             * 需要加上 using System.Diagnostics;
+             */
+
             Process[] process = Process.GetProcessesByName("notepad");
 
             /* 取得該視窗的大小與位置 */
@@ -351,26 +356,6 @@ namespace vcs_VideoReadWrite
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //全螢幕截圖
-            Rectangle rect = Screen.GetBounds(Point.Empty);
-            using (Bitmap bitmap = new Bitmap(rect.Width, rect.Height))
-            {
-                using (Graphics g = Graphics.FromImage(bitmap))
-                    g.CopyFromScreen(Point.Empty, Point.Empty, rect.Size);
-
-                bitmap.Save("tmp_full_screen.jpg", ImageFormat.Jpeg);
-            }
-
-            /*
-            //another
-
-            Bitmap myImage = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-            Graphics g = Graphics.FromImage(myImage);
-            g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height));
-            IntPtr dc1 = g.GetHdc();
-            g.ReleaseHdc(dc1);
-            myImage.Save(@"c:\screen0.jpg");
-            */
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -413,3 +398,20 @@ namespace vcs_VideoReadWrite
         }
     }
 }
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+
+
+

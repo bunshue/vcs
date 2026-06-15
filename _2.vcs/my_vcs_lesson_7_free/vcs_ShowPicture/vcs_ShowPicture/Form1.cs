@@ -136,7 +136,6 @@ namespace vcs_ShowPicture
             this.KeyDown += Form1_KeyDown;
 
             //this.BackColor = Color.Black;   //背景為黑
-            //this.BackgroundImage = GetNoCursor(); //複製目前桌面當背景
 
             if (debug_mode == true)
             {
@@ -183,14 +182,7 @@ namespace vcs_ShowPicture
             }
         }
 
-        private Bitmap GetNoCursor()    //複製目前桌面當背景
-        {
-            Bitmap Source = new Bitmap(bounds.Width, bounds.Height);    //根据屏幕大小创建Bitmap对象
-            Graphics g = Graphics.FromImage(Source);
-            g.CopyFromScreen(0, 0, 0, 0, Source.Size);  //获取没有鼠标的屏幕截图
-            g.Dispose();    //释放资源
-            return Source;
-        }
+        //------------------------------------------------------------  # 60個
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -313,3 +305,20 @@ namespace vcs_ShowPicture
         }
     }
 }
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+
+
+

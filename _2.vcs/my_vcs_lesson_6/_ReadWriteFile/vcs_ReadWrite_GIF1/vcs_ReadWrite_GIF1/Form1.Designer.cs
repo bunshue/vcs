@@ -31,9 +31,6 @@
             this.bt_clear = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button0 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -48,9 +45,11 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.bt_stop3 = new System.Windows.Forms.Button();
             this.bt_start3 = new System.Windows.Forms.Button();
+            this.pictureBox0 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox0)).BeginInit();
             this.SuspendLayout();
             // 
             // bt_clear
@@ -83,36 +82,6 @@
             this.button0.Text = "讀GIF 做成PNG";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
-            // 
-            // button9
-            // 
-            this.button9.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button9.Location = new System.Drawing.Point(218, 498);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(200, 60);
-            this.button9.TabIndex = 162;
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
-            // 
-            // button8
-            // 
-            this.button8.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button8.Location = new System.Drawing.Point(218, 438);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(200, 60);
-            this.button8.TabIndex = 161;
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
-            // 
-            // button7
-            // 
-            this.button7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button7.Location = new System.Drawing.Point(218, 377);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(200, 60);
-            this.button7.TabIndex = 160;
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button6
             // 
@@ -263,11 +232,22 @@
             this.bt_start3.UseVisualStyleBackColor = true;
             this.bt_start3.Click += new System.EventHandler(this.bt_start3_Click);
             // 
+            // pictureBox0
+            // 
+            this.pictureBox0.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox0.Location = new System.Drawing.Point(340, 12);
+            this.pictureBox0.Name = "pictureBox0";
+            this.pictureBox0.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox0.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox0.TabIndex = 214;
+            this.pictureBox0.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(589, 579);
+            this.Controls.Add(this.pictureBox0);
             this.Controls.Add(this.bt_start3);
             this.Controls.Add(this.bt_stop3);
             this.Controls.Add(this.pictureBox3);
@@ -279,9 +259,6 @@
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button0);
-            this.Controls.Add(this.button9);
-            this.Controls.Add(this.button8);
-            this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
@@ -295,6 +272,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox0)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -304,9 +282,6 @@
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button button0;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
@@ -321,6 +296,7 @@
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Button bt_stop3;
         private System.Windows.Forms.Button bt_start3;
+        private System.Windows.Forms.PictureBox pictureBox0;
     }
 }
 

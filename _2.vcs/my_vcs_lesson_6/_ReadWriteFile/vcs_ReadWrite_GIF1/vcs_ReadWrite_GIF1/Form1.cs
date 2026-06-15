@@ -75,6 +75,13 @@ namespace vcs_ReadWrite_GIF1
             image2.OnFrameChanged += new EventHandler<EventArgs>(image_OnFrameChanged2);
             SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
             image2.Play();
+
+            //------------------------------------------------------------  # 60個
+
+            // 讓視窗背景顯示GIF動畫
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_gif\派大星.gif";
+            Bitmap bit = new Bitmap(filename);
+            this.pictureBox0.Image = bit;
         }
 
         void show_item_location()
@@ -95,9 +102,10 @@ namespace vcs_ReadWrite_GIF1
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 9);
             button5.Location = new Point(x_st + dx * 1, y_st + dy * 5);
             button6.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button7.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button8.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button9.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+
+            pictureBox0.Size = new Size(200, 200);
+            pictureBox0.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            pictureBox0.BackColor = Color.Pink;
 
             pictureBox1.Size = new Size(pbx_w, pbx_h);
             pictureBox1.Location = new Point(x_st + dx_pbx * 0, y_st + dy * 0);
