@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using System.IO;    //for Stream
 using System.Net;
+using System.Net.Sockets;
 using System.Collections;
 using System.Drawing.Text;
 using System.Drawing.Imaging;   //for ColorAdjustType
@@ -1517,6 +1518,38 @@ namespace vcs_Mix00
 
         private void button33_Click(object sender, EventArgs e)
         {
+            //取得機器名稱
+            richTextBox1.Text += "Host name : "+ Dns.GetHostName()+"\n";
+            try
+            {
+                // 取得Local主機的識別名稱
+                string localHostName = Dns.GetHostName();
+                richTextBox1.Text += "localHostName : " + localHostName + "\n";
+
+                //TextBox1.Text = localHostName;
+            }
+            catch (SocketException ex)
+            {
+                richTextBox1.Text += ex.StackTrace.ToString() + "\n";
+            }
+
+
+            /*
+            //取得IP地址
+            IPHostEntry ipEntry = Dns.GetHostByName(localhost);
+            IPAddress[] IpAddr = ipEntry.AddressList;
+            for (int i = 0; i < IpAddr.Length; i++)
+            {
+                //Console.WriteLine(IP Address {0}: {1} , i, IpAddr.ToString ());
+                richTextBox1.Text += "第 " + i.ToString() + " 項 : " + IpAddr.ToString() + "\n";
+            }
+            */
+
+            /*
+            //根據IP地址得出機器名稱
+            IPHostEntry ipEntr.Resolve("172.29.9.9");
+            richTextBox1.Text += "Host name : "+ ipEntry.HostName+"\n";
+            */
         }
 
         private void CallOut(out int x, out int y)

@@ -1,4 +1,18 @@
-﻿
+﻿// 引用System.Windows.Forms命名空間
+// 如此才能使用較簡潔的物件名稱來使用Form, Button, TextBox, Label...等類別
+using System.Windows.Forms;
+
+   // 定義Form1繼承System.Windows.Forms命名空間下的Form類別
+   class Form1 : Form
+   {
+	   //xxxx
+   }
+
+
+Tango
+C:\Program Files\Git\bin
+
+
 
 // Start selecting a rectangle.
 // Continue selecting a rectangle.
@@ -257,16 +271,6 @@ Windows 的 文字轉語音 (Text-to-Speech) 功能，或使用螢幕閱讀器 (
 - 你可以在 設定 → 輔助工具 → Narrator 裡調整語音、速度與音量。
 
 這裡給你一個完整的 Visual C# 範例程式，可以直接把文字透過電腦喇叭播放出來。它使用 System.Speech.Synthesis 命名空間，這是 .NET Framework 內建的文字轉語音 (TTS) 功能。
-
-namespace CopilotTTSExample
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-        }
-    }
-}
 
 //------------------------------------------------------------  # 60個
 
@@ -821,16 +825,6 @@ AllSystemSources、AllUrl、FileSystem、
 HistoryList、RecentlyUsedList、
 CustomSource 和 None。 預設為 None。
 
-
- // 引用System.Windows.Forms命名空間
- // 如此才能使用較簡潔的物件名稱來使用Form, Button, TextBox, Label...等類別
- using System.Windows.Forms;
-
-    // 定義Form1繼承System.Windows.Forms命名空間下的Form類別
-    class Form1 : Form
-    {
-    //xxxx
-    }
 
 printPreviewDialog1     .ShowDialog();
 printPreviewDialog_image.ShowDialog();
@@ -1926,9 +1920,6 @@ C#
     在方案總管中，以滑鼠右鍵按一下 [ ctlClock]，然後按一下 [視圖程式碼]。
 
     控制項的程式 代碼編輯器 隨即開啟。
-
-    尋找 public partial class ctlClock 陳述式。 在左大括號 ({) 底下，輸入下列程式碼。
-    C#
 
 private Color colFColor;
 private Color colBColor;
@@ -3780,36 +3771,6 @@ private PlayState _palystate = PlayState.Closed;
      
 //------------------------------------------------------------  # 60個
 
-public class User  
-{  
-    private int userID = 0;  
-  
-    private string userName = string.Empty;  
-  
-    public int UserID  
-    {  
-        get  
-        {  
-            return this.userID;  
-        }  
-    }  
-  
-    public string UserName  
-    {  
-        get  
-        {  
-            return this.userName;  
-        }  
-    }  
-  
-    public User(int userID, string userName)  
-    {  
-        this.userID = userID;  
-  
-        this.userName = userName;  
-    }  
-}  
-
 P2P，英文Peer-to-Peer的縮寫，中譯為對等互聯或點對點技術。
 
 //------------------------------------------------------------  # 60個
@@ -4336,55 +4297,6 @@ class TestADO
 
 //------------------------------------------------------------  # 60個
 
-網絡方面的：
-十八、取得IP地址：
-using System;
-using System.Net;
-
-class GetIP
-{
-     public static void Main()
-     {
-         IPHostEntry ipEntry = Dns.GetHostByName (localhost);
-         IPAddress [] IpAddr = ipEntry.AddressList;
-         for (int i = 0; i < IpAddr.Length; i++)
-         { 
-             Console.WriteLine (IP Address {0}: {1} , i, IpAddr.ToString ());
-         }
-    }
-}
-
-//------------------------------------------------------------  # 60個
-
-十九、取得機器名稱：
-using System;
-using System.Net;
-
-class GetIP
-{
-    public static void Main()
-    {
-          Console.WriteLine (Host name : {0}, Dns.GetHostName());
-    }
-}
-
-//------------------------------------------------------------  # 60個
-
-十一、根據IP地址得出機器名稱：
-using System;
-using System.Net;
-
-class ResolveIP
-{
-     public static void Main()
-     {
-         IPHostEntry ipEntr.Resolve(172.29.9.9);
-         Console.WriteLine (Host name : {0}, ipEntry.HostName);         
-     }
-}
-
-//------------------------------------------------------------  # 60個
-
 Web Service方面的：
 二十五、一個Web Service的小例子：
 <% @WebService Language=C# Class=TestWS %>
@@ -4411,7 +4323,7 @@ ed2k://|file|[www.ed2k.online][C#%E5%85%A8%E8%83%BD%E9%80%9F%E6%9F%A5%E5%AE%9D%E
 
 fullscreenfullscreen
 
-    2. 接下來為了方便在這之上進行截圖，有一個很重要的設計實現方式：用全屏幕窗體代替現有真實屏幕，這樣就可以把截圖過程的所有操作都在那個窗體上實現（該窗體設置成無邊框，高寬等於屏幕大小即可），另外為了顯示掩蔽效果（只能正常顯示選擇的部分屏幕內容，而其實部分用一個如半透明層覆蓋），就添加一層半透明位置位圖。具體代碼如下：
+接下來為了方便在這之上進行截圖，有一個很重要的設計實現方式：用全屏幕窗體代替現有真實屏幕，這樣就可以把截圖過程的所有操作都在那個窗體上實現（該窗體設置成無邊框，高寬等於屏幕大小即可），另外為了顯示掩蔽效果（只能正常顯示選擇的部分屏幕內容，而其實部分用一個如半透明層覆蓋），就添加一層半透明位置位圖。具體代碼如下：
 
     public partial class FullScreenForm : Form
     {
@@ -5715,7 +5627,6 @@ richTextBox1.Text += "add " + str + "\n";
 C# WindowsMediaPlayer 的一些用法
 
 播放單首歌曲
-
                 player.URL = 
 
 添加多首歌曲到播放列表
@@ -5750,7 +5661,6 @@ IWMPMedia m;
 c = new WindowsMediaPlayerClass();
 m = c.newMedia(mp3_filename);
 richTextBox1.Text += "歌手名:\t" + m.getItemInfo("Author") + "\n" + "歌  名:\t" + m.getItemInfo("Title") + "\n";
-
 
 getItemInfo Author Title
 
@@ -10339,24 +10249,7 @@ using System.Net.Sockets;
         Console.WriteLine(ex.Message);
       }
 
-
-
-
-// 命名空間
-using System.Net;
-using System.Net.Sockets;
-
-      try
-      {
-        // 取得Local主機的識別名稱
-        string localHostName = Dns.GetHostName();
-
-        TextBox1.Text = localHostName;
-      }
-      catch (SocketException ex)
-      {
-        Console.WriteLine(ex.StackTrace.ToString());
-      }
+6060
       
 
 讀取一WORD檔案並將其純文字部分顯示出來

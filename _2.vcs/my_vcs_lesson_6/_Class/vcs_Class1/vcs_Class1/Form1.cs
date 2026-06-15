@@ -476,37 +476,37 @@ namespace vcs_Class1
         private void button25_Click(object sender, EventArgs e)
         {
             //寵物範例1
-            richTextBox1.Text += "初始化 Cat 1\n";
+            richTextBox1.Text += "初始化 Cat 1 多型1\n";
             Cat kitty = new Cat();
             kitty.name = "凱蒂";
 
-            richTextBox1.Text += "初始化 Cat 2\n";
+            richTextBox1.Text += "初始化 Cat 2 多型2\n";
             Cat doraemon = new Cat("多啦A夢", "機器貓");
-            doraemon.setweight(129);
+            doraemon.setweight(129);  // 設定為129公斤
 
             richTextBox1.Text += "初始化 Cat 3\n";
             Cat garfield = new Cat("加菲", "虎斑貓");
-            garfield.setweight(5);
+            garfield.setweight(5);  // 設定為5公斤
 
             richTextBox1.Text += "訊息\n";
-            kitty.ShowMsg();
-            doraemon.ShowMsg();
-            garfield.ShowMsg();
-            richTextBox1.Text += kitty.GetMsg() + "\n";
-            richTextBox1.Text += doraemon.GetMsg() + "\n";
-            richTextBox1.Text += garfield.GetMsg() + "\n";
+            kitty.ShowMsg();  // 取得訊息, 顯示在 Console
+            doraemon.ShowMsg();  // 取得訊息, 顯示在 Console
+            garfield.ShowMsg();  // 取得訊息, 顯示在 Console
+            richTextBox1.Text += kitty.GetMsg() + "\n";  // 取得資料字串
+            richTextBox1.Text += doraemon.GetMsg() + "\n";  // 取得資料字串
+            richTextBox1.Text += garfield.GetMsg() + "\n";  // 取得資料字串
 
             richTextBox1.Text += "進行動作\n";
-            garfield.feed();
-            doraemon.play();
+            garfield.feed();  // 餵食, 體重+1
+            doraemon.play();  // 遊戲, 體重-1
 
             richTextBox1.Text += "訊息\n";
-            kitty.ShowMsg();
-            doraemon.ShowMsg();
-            garfield.ShowMsg();
-            richTextBox1.Text += kitty.GetMsg() + "\n";
-            richTextBox1.Text += doraemon.GetMsg() + "\n";
-            richTextBox1.Text += garfield.GetMsg() + "\n";
+            kitty.ShowMsg();  // 取得訊息, 顯示在 Console
+            doraemon.ShowMsg();  // 取得訊息, 顯示在 Console
+            garfield.ShowMsg();  // 取得訊息, 顯示在 Console
+            richTextBox1.Text += kitty.GetMsg() + "\n";  // 取得資料字串
+            richTextBox1.Text += doraemon.GetMsg() + "\n";  // 取得資料字串
+            richTextBox1.Text += garfield.GetMsg() + "\n";  // 取得資料字串
         }
 
         private void button26_Click(object sender, EventArgs e)
@@ -545,14 +545,15 @@ namespace vcs_Class1
             string filename2 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Bitmap bitmap1 = new Bitmap(filename2);
 
-            Color2Gray c2g = new Color2Gray(bitmap1);// 宣告一個物件
-            pictureBox0.Image = c2g.bitmap1;
+            Color2Gray c2g = new Color2Gray(bitmap1);  // 宣告一個物件, 同時設定初始值, 寫在 bitmap1裏
+
+            pictureBox0.Image = c2g.bitmap1;  // 取出c2g物件內的資料bitmap1
 
             c2g.do_Color2Gray();
-            pictureBox1.Image = c2g.bitmap2;
+            pictureBox1.Image = c2g.bitmap2;  // 取出c2g物件內的資料bitmap2
 
             c2g.Draw();
-            pictureBox2.Image = c2g.bitmap3;
+            pictureBox2.Image = c2g.bitmap3;  // 取出c2g物件內的資料bitmap3
         }
 
         //------------------------------------------------------------  # 60個
