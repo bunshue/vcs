@@ -24,8 +24,50 @@ namespace vcs_WebRequest
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
             label1.Text = "當前下載進度 " + 0.ToString("00.00") + " %";
         }
+
+        void show_item_location()
+        {
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+
+            pictureBox1.Size = new Size(620, 410);
+            pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+
+            richTextBox1.Size = new Size(400, 690);
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1273, 750);
+            this.Text = "vcs_test_all_00_Usually";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -327,9 +369,149 @@ namespace vcs_WebRequest
             }
         }
         //下載http文件 並顯示進度條 SP
-
-
-
-
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+
+
+/*
+在不設置Cookie、PostData的情況下要獲得一個頁面 的HTML的方法很簡單：
+
+public static string GetHtml(string URL)
+　 　　　{
+　　　　　　WebRequest wrt;
+　　　　　　wrt = WebRequest.Create(URL);
+　　　　　　wrt.Credentials = CredentialCache.DefaultCredentials;
+　　　　　　WebResponse wrp;
+　　　 　　　wrp = wrt.GetResponse();
+　　　　　　return new StreamReader (wrp.GetResponseStream(), Encoding.Default).ReadToEnd();
+　　　　} 
+
+//------------------------------------------------------------  # 60個
+
+            richTextBox1.Text += "取得網頁資料\n";
+            string strUrl = "https://www.google.com.tw/"; //獲得IP的網址了
+
+            Uri uri = new Uri(strUrl);
+            System.Net.WebRequest wr = System.Net.WebRequest.Create(uri);
+            Stream s = wr.GetResponse().GetResponseStream();
+            StreamReader sr = new StreamReader(s, Encoding.Default);
+            string all = sr.ReadToEnd(); //讀取網站的數據
+            richTextBox1.Text += all + "\n";
+
+//------------------------------------------------------------  # 60個
+
+//如何取得網路上的圖片並顯示 
+            string url = @"https://upload.wikimedia.org/wikipedia/commons/0/0f/Ic-photo-intel-D4004.png";
+            this.pictureBox1.Image = ReadImageFromUrl(url);
+
+        private Image ReadImageFromUrl(string urlImagePath)
+        {
+            Uri uri = new Uri(urlImagePath);
+            WebRequest webRequest = WebRequest.Create(uri);
+            Stream stream = webRequest.GetResponse().GetResponseStream();
+            Image res = Image.FromStream(stream);
+            return res;
+
+        }
+
+//------------------------------------------------------------  # 60個
+
+
+
+C# 網頁抓取類
+
+//--需要引用 using System.Net 以及 using System.IO;
+private string GetContentFromUrll(string _requestUrl)
+        {
+            string _StrResponse ="";
+            HttpWebRequest _WebRequest = ( HttpWebRequest )WebRequest.Create( _requestUrl );
+            _WebRequest.Method = "GET";
+            WebResponse _WebResponse = _WebRequest.GetResponse();
+            StreamReader _ResponseStream = new StreamReader( _WebResponse.GetResponseStream(), Encoding.GetEncoding("gb2312"));
+            _StrResponse = _ResponseStream.ReadToEnd();
+            _WebResponse.Close(); 
+            _ResponseStream.Close();
+            return _StrResponse;        
+        }
+
+//------------------------------------------------------------  # 60個
+
+//C#檢查url鏈接是否有效
+//檢查url地址是否能訪問,代碼如下:   
+
+     /// <summary>
+    /// 檢查url鏈接是否有效
+     /// </summary>
+    /// <param name="strUri"></param>
+    /// <returns></returns>
+    public static bool CheckUri(string strUri)
+    {
+        try
+        {
+            System.Net.HttpWebRequest.Create(strUri).GetResponse();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+    
+//------------------------------------------------------------  # 60個
+
+
+
+            //抓網頁
+            string url = @"https://tw.dictionary.search.yahoo.com/";
+            HttpWebRequest httpWebRequest = (HttpWebRequest)HttpWebRequest.Create(url);
+            httpWebRequest.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
+            httpWebRequest.Method = "POST";
+            var data = Encoding.UTF8.GetBytes(string.Format("{0}", "tiger"));
+
+            using (Stream stream = httpWebRequest.GetRequestStream())
+            {
+                stream.Write(data, 0, data.Length);
+                stream.Close();
+            }
+            data = null;
+            //Result result = new Result();
+            string result;
+
+            try
+            {
+                HttpWebResponse webResponse = httpWebRequest.GetResponse() as HttpWebResponse;
+                using (StreamReader stream = new StreamReader(webResponse.GetResponseStream()))
+                {
+                    //result = Newtonsoft.Json.JsonConvert.DeserializeObject<Result>(stream.ReadToEnd());
+                    richTextBox1.Text += stream.ReadToEnd();
+                }
+                httpWebRequest = null;
+                webResponse.Close();
+                webResponse = null;
+            }
+            catch { }
+            //result.billInfo.consNo = consNo.ToString();
+            //Write(result);
+
+//------------------------------------------------------------  # 60個
+
+
+*/
+
+
+
+
+

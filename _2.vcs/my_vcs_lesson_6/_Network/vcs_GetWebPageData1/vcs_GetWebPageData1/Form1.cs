@@ -144,3 +144,4 @@ namespace vcs_GetWebPageData1
             protocol_Tls12 = (SecurityProtocolType)3072;
     }
 }
+

@@ -1,4 +1,5 @@
-﻿/*
+﻿
+/*
 Bitmap bmp = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\BMW.jfif");
 e.Graphics.DrawImage(bmp, pt[i].X, pt[i].Y, 100, 100);
 */
@@ -25,7 +26,6 @@ e.Graphics.DrawImage(bmp, pt[i].X, pt[i].Y, 100, 100);
             e.Graphics.DrawImage(bitmap1, 0, 0); // 繪出圖形
             //e.Graphics.DrawImage(bitmap1, pos); // 繪出圖形
         }
-
 
 //------------------------------------------------------------  # 60個
 
@@ -2469,34 +2469,6 @@ Bitmap/Image存檔
         				
 //------------------------------------------------------------  # 60個
 
-            richTextBox1.Text += "取得網頁資料\n";
-            string strUrl = "https://www.google.com.tw/"; //獲得IP的網址了
-
-            Uri uri = new Uri(strUrl);
-            System.Net.WebRequest wr = System.Net.WebRequest.Create(uri);
-            Stream s = wr.GetResponse().GetResponseStream();
-            StreamReader sr = new StreamReader(s, Encoding.Default);
-            string all = sr.ReadToEnd(); //讀取網站的數據
-            richTextBox1.Text += all + "\n";
-
-//------------------------------------------------------------  # 60個
-
-//如何取得網路上的圖片並顯示 
-            string url = @"https://upload.wikimedia.org/wikipedia/commons/0/0f/Ic-photo-intel-D4004.png";
-            this.pictureBox1.Image = ReadImageFromUrl(url);
-
-        private Image ReadImageFromUrl(string urlImagePath)
-        {
-            Uri uri = new Uri(urlImagePath);
-            WebRequest webRequest = WebRequest.Create(uri);
-            Stream stream = webRequest.GetResponse().GetResponseStream();
-            Image res = Image.FromStream(stream);
-            return res;
-
-        }
-
-//------------------------------------------------------------  # 60個
-
 //提取HTML代碼中文字的C#函數
 
 /// <summary>
@@ -2600,44 +2572,6 @@ properties.save
 表單大小位置 
 
 //Properties Save SP
-
-//------------------------------------------------------------  # 60個
-
-byte[] input = Encoding.Default.GetBytes(str);	//字串轉拜列  111
-byte[] input = Encoding.UTF8.GetBytes(key + str); //字串轉拜列
-byte[] input = Encoding.UTF8.GetBytes(str); //字串轉拜列
-byte[] input = Encoding.UTF8.GetBytes(str); //字串轉拜列   222
-byte[] input = Encoding.Unicode.GetBytes(str);  //字串轉拜列
-byte[] input = Encoding.ASCII.GetBytes(str);
-byte[] input = Encoding.Unicode.GetBytes(str);
-byte[] input = Encoding.UTF8.GetBytes(key + str); //字串轉拜列
-byte[] input = Encoding.Unicode.GetBytes(str);  //字串轉拜列
-byte[] input = Encoding.UTF8.GetBytes(str); //字串轉拜列
-byte[] input = Encoding.Unicode.GetBytes(str);  //字串轉拜列
-byte[] input = Encoding.UTF8.GetBytes(str); //字串轉拜列
-byte[] input = Encoding.UTF8.GetBytes(str); //字串轉拜列
-byte[] input = Encoding.UTF8.GetBytes(str); //字串轉拜列
-byte[] input = Encoding.Unicode.GetBytes(str); //字串轉拜列
-
-byte[] input = ASCIIEncoding.ASCII.GetBytes(str); //字串轉拜列
-byte[] input = ASCIIEncoding.ASCII.GetBytes(str);
-byte[] input = new UnicodeEncoding().GetBytes(str);   //字串轉拜列
-byte[] input = Encoding.Unicode.GetBytes(str); //字串轉拜列
-byte[] input = UTF8Encoding.UTF8.GetBytes(str); //字串轉拜列
-byte[] input = UTF8Encoding.UTF8.GetBytes(str); //字串轉拜列
-
-
-UTF8Encoding.Default.GetBytes(str)
-
-
-        private byte[] GetKeyByteArray(string str)
-        {
-            int tmpStrLen = str.Length;
-            byte[] input = input = new ASCIIEncoding().GetBytes(str);
-            return input;
-        }
-
-        //byte[] input = Encoding.Default.GetBytes(str);  //字串轉拜列
 
 //------------------------------------------------------------  # 60個
 
@@ -3083,42 +3017,6 @@ Beep
 
 
 https://www.zhangshengrong.com/p/yOXD5ejR1B/
-
-
-
-
-
-            //抓網頁
-            string url = @"https://tw.dictionary.search.yahoo.com/";
-            HttpWebRequest httpWebRequest = (HttpWebRequest)HttpWebRequest.Create(url);
-            httpWebRequest.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
-            httpWebRequest.Method = "POST";
-            var data = Encoding.UTF8.GetBytes(string.Format("{0}", "tiger"));
-
-            using (Stream stream = httpWebRequest.GetRequestStream())
-            {
-                stream.Write(data, 0, data.Length);
-                stream.Close();
-            }
-            data = null;
-            //Result result = new Result();
-            string result;
-
-            try
-            {
-                HttpWebResponse webResponse = httpWebRequest.GetResponse() as HttpWebResponse;
-                using (StreamReader stream = new StreamReader(webResponse.GetResponseStream()))
-                {
-                    //result = Newtonsoft.Json.JsonConvert.DeserializeObject<Result>(stream.ReadToEnd());
-                    richTextBox1.Text += stream.ReadToEnd();
-                }
-                httpWebRequest = null;
-                webResponse.Close();
-                webResponse = null;
-            }
-            catch { }
-            //result.billInfo.consNo = consNo.ToString();
-            //Write(result);
 
 //------------------------------------------------------------  # 60個
 
@@ -3948,24 +3846,7 @@ http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/185924.html
 
  <link rel="SHORTCUT ICON" href="/xxx/xx.ico"/>
 
-
-
-C# 網頁抓取類
-
-//--需要引用 using System.Net 以及 using System.IO;
-private string GetContentFromUrll(string _requestUrl)
-        {
-            string _StrResponse ="";
-            HttpWebRequest _WebRequest = ( HttpWebRequest )WebRequest.Create( _requestUrl );
-            _WebRequest.Method = "GET";
-            WebResponse _WebResponse = _WebRequest.GetResponse();
-            StreamReader _ResponseStream = new StreamReader( _WebResponse.GetResponseStream(), Encoding.GetEncoding("gb2312"));
-            _StrResponse = _ResponseStream.ReadToEnd();
-            _WebResponse.Close(); 
-            _ResponseStream.Close();
-            return _StrResponse;        
-        }
-        
+//------------------------------------------------------------  # 60個
 
 systemsystem
 //獲取文件的版本信息:
@@ -4443,7 +4324,7 @@ public byte[] ConvertImage(Image image)
      return ms.ToArray();
 }
 
-6060
+//------------------------------------------------------------  # 60個
 
 C# GUID介紹和的使用，
 
@@ -4587,20 +4468,6 @@ this.label1.Font = new Font(label1.Font.FontFamily,10f);
 
 //------------------------------------------------------------  # 60個
 
-在不設置Cookie、PostData的情況下要獲得一個頁面 的HTML的方法很簡單：
-
-public static string GetHtml(string URL)
-　 　　　{
-　　　　　　WebRequest wrt;
-　　　　　　wrt = WebRequest.Create(URL);
-　　　　　　wrt.Credentials = CredentialCache.DefaultCredentials;
-　　　　　　WebResponse wrp;
-　　　 　　　wrp = wrt.GetResponse();
-　　　　　　return new StreamReader (wrp.GetResponseStream(), Encoding.Default).ReadToEnd();
-　　　　} 
-
-//------------------------------------------------------------  # 60個
-
 地支時間與現在時間的對應關系：
 【子時】夜半，又名子夜、中夜：十二時辰的第一個時辰。（23時至次日01時）。
 【丑時】雞鳴，又名荒雞：十二時辰的第二個時辰。（01時至03時）。
@@ -4615,11 +4482,11 @@ public static string GetHtml(string URL)
 【戌時】黃昏，又名日夕、日暮、日晚等：此時太陽已經落山，天將黑未黑。天地昏黃，萬物朦胧 ，故稱黃昏。（19時至21時）。
 【亥時】人定，又名定昏等：此時夜色已深，人們也已經停止活動，安歇睡眠了。人定也就是人靜 。（21時至23時）。
 
+//------------------------------------------------------------  # 60個
+
 開關檔案 使用指定的編碼
 StreamWriter outStream = new StreamWriter(filepath, false, Encoding.GetEncoding(950));
 using (StreamReader sr = new StreamReader(filepath, Encoding.GetEncoding(936)))
-
-用C＃實現在客戶區拖動窗體
 
 //------------------------------------------------------------  # 60個
 
@@ -4944,7 +4811,7 @@ for(i=0; i<360;i++)
             Transform = new Matrix(rect, pts);
             e.Graphics.Transform = Transform;
 
-6060
+//------------------------------------------------------------  # 60個
 
         string drap_setup_filename = "drap_setup.ini";
 
@@ -5547,29 +5414,6 @@ openGL
 有視窗之範例
 有讀寫檔案之範例
 
-//------------------------------------------------------------  # 60個
-
-//C#檢查url鏈接是否有效
-//檢查url地址是否能訪問,代碼如下:   
-
-     /// <summary>
-    /// 檢查url鏈接是否有效
-     /// </summary>
-    /// <param name="strUri"></param>
-    /// <returns></returns>
-    public static bool CheckUri(string strUri)
-    {
-        try
-        {
-            System.Net.HttpWebRequest.Create(strUri).GetResponse();
-            return true;
-        }
-        catch
-        {
-            return false;
-        }
-    }
-    
 //------------------------------------------------------------  # 60個
 
 .net(C#)從html中提取中文字（正則表達式）
@@ -6210,25 +6054,6 @@ this.richTextBox1.SelectionFont = MyFont;
 
 //------------------------------------------------------------  # 60個
 
-33. String 轉為 Byte 序列與 Byte 序列轉為 String。
-
-使用 System.Text.Encoding 類別中的這兩個方法，須注意編碼方式 :
-
-Encoding.GetBytes 方法 : 將字元集編碼成位元組序列。
-
-Encoding.GetString 方法 : 將位元組序列解碼成字串。
-
-程式碼
-
-	String strOrg = "12345";
-            // Encoding.GetBytes方法，將 String 轉為 Byte 序列
-            byte[] stringConvByte = Encoding.Default.GetBytes(strOrg);
-            // Encoding.GetString方法，將 Byte 序列 轉為 String
-            string byteConvStrig = Encoding.Default.GetString(stringConvByte);
-            
-
-//------------------------------------------------------------  # 60個
-
  C# byte 轉 文字
 byte轉char或 byte轉string
 
@@ -6295,86 +6120,6 @@ richTextBox1.Text += receive_buffer_tmp[i].ToString("X2") + " ";
                         richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
                     }
 48 65 78 20 6D 6F 64 65 986F 793A 5167 5BB9 0A 
-
-//------------------------------------------------------------  # 60個
-
-字串 和 拜列 的轉換
-
-string和byte[]的轉換 (C#)
-
-string類型轉成byte[]：
-byte[] byteArray = System.Text.Encoding.Default.GetBytes ( str );
-
-反過來，byte[]轉成string：
-string str = System.Text.Encoding.Default.GetString ( byteArray );
-
-其它編碼方式的，如System.Text.UTF8Encoding，System.Text.UnicodeEncoding class等；例如：
-
-string類型轉成ASCII byte[]：（"01" 轉成 byte[] = new byte[]{ 0x30, 0x31}）
-
-byte[] byteArray = System.Text.Encoding.ASCII.GetBytes ( str );
-
-ASCII byte[] 轉成string：（byte[] = new byte[]{ 0x30, 0x31} 轉成 "01"）
-
-string str = System.Text.Encoding.ASCII.GetString(byteArray);
-
-string text = "是不是漢字，ABC，keleyi.com";
-for (int i = 0; i < text.Length; i++)
-{
-	if (Regex.IsMatch(text[i].ToString(), @"[\u4e00-\u9fbb]+{1}quot;))
-	{
-		Console.WriteLine("是漢字");
-	}
-	else
-	{
-		Console.WriteLine("不是漢字");
-	}
-}
-
-3400～4DFFh：中日韓認同表意文字擴充A區，總計收容6,582個中日韓漢字。
-	4E00～9FFFh：中日韓認同表意文字區，總計收容20,902個中日韓漢字。
-A000～A4FFh：彝族文字區，收容中國南方彝族文字和字根。
-AC00～D7FFh：韓文拼音組合字區，收容以韓文音符拼成的文字。
-F900～FAFFh：中日韓兼容表意文字區，總計收容302個中日韓漢字。
-FB00～FFFDh：文字表現形式區，收容組合拉丁文字、希伯來文、阿拉伯文、中日韓直式標點、小符號、半角符號、全角符號等。
-
-Hexadecimal value of 基 is 57FA
-Hexadecimal value of 本 is 672C
-Hexadecimal value of 運 is 904B
-Hexadecimal value of 算 is 7B97
-Hexadecimal value of 制 is 5236
-Hexadecimal value of 作 is 4F5C
-Hexadecimal value of U is 0055
-Hexadecimal value of S is 0053
-Hexadecimal value of B is 0042
-Hexadecimal value of ? is 542F
-Hexadecimal value of ? is 52A8
-Hexadecimal value of ? is 76D8
-Hexadecimal value of ? is 30A6
-Hexadecimal value of ? is 30A3
-Hexadecimal value of ? is 30AD
-Hexadecimal value of ? is 30DA
-Hexadecimal value of ? is 30C7
-Hexadecimal value of ? is 30A3
-Hexadecimal value of ? is 30A2
-Hexadecimal value of ? is 003F
-Hexadecimal value of ? is 003F
-Hexadecimal value of ? is 003F
-Hexadecimal value of 世 is 4E16
-Hexadecimal value of ? is 003F
-Hexadecimal value of 生 is 751F
-Hexadecimal value of ? is 003F
-Hexadecimal value of ? is 003F
-Hexadecimal value of ? is 003F
-Hexadecimal value of ? is 003F
-Hexadecimal value of ? is 003F
-Hexadecimal value of 概 is 6982
-Hexadecimal value of ? is 003F
-Hexadecimal value of 表 is 8868
-Hexadecimal value of ? is 003F
-Hexadecimal value of ? is 003F
-Hexadecimal value of ? is 003F
-Hexadecimal value of ? is 003F
 
 //------------------------------------------------------------  # 60個
 
@@ -7283,7 +7028,7 @@ blackPen.StartCap=LineCap.ArrowAnchor;
 vcs
 Form2的元件的Modifiers要改成Internal, 預設為private
 
-6060
+//------------------------------------------------------------  # 60個
 
 //char * wday[] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
 在預設的情況下，C# 不能使用指標，若要用指標的話，要在編譯器設定中啟用 unsafe 模式才行。
@@ -9279,7 +9024,7 @@ for (int i = 0; i < strings.Length; i++)
 	values[i] = int.Parse(strings[i]);
 }
 
-6060
+//------------------------------------------------------------  # 60個
 
 pictureCard
 
@@ -10868,7 +10613,6 @@ syntax
 StreamReader sr = new StreamReader(filename, Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
 
 //使用默認編碼格式, 作業系統目前 ANSI 字碼頁的編碼方式
-
 
 //直接指定編碼
 sr = new StreamReader(filename, Encoding.Default);    	//Windows預設，就是big5

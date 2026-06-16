@@ -471,3 +471,155 @@ namespace vcs_Encoding
 
 */
 
+
+
+
+/*
+
+
+33. String 轉為 Byte 序列與 Byte 序列轉為 String。
+
+使用 System.Text.Encoding 類別中的這兩個方法，須注意編碼方式 :
+
+Encoding.GetBytes 方法 : 將字元集編碼成位元組序列。
+
+Encoding.GetString 方法 : 將位元組序列解碼成字串。
+
+程式碼
+
+	String strOrg = "12345";
+            // Encoding.GetBytes方法，將 String 轉為 Byte 序列
+            byte[] stringConvByte = Encoding.Default.GetBytes(strOrg);
+            // Encoding.GetString方法，將 Byte 序列 轉為 String
+            string byteConvStrig = Encoding.Default.GetString(stringConvByte);
+            
+
+//------------------------------------------------------------  # 60個
+
+字串 和 拜列 的轉換
+
+string和byte[]的轉換 (C#)
+
+string類型轉成byte[]：
+byte[] byteArray = System.Text.Encoding.Default.GetBytes ( str );
+
+反過來，byte[]轉成string：
+string str = System.Text.Encoding.Default.GetString ( byteArray );
+
+其它編碼方式的，如System.Text.UTF8Encoding，System.Text.UnicodeEncoding class等；例如：
+
+string類型轉成ASCII byte[]：（"01" 轉成 byte[] = new byte[]{ 0x30, 0x31}）
+
+byte[] byteArray = System.Text.Encoding.ASCII.GetBytes ( str );
+
+ASCII byte[] 轉成string：（byte[] = new byte[]{ 0x30, 0x31} 轉成 "01"）
+
+string str = System.Text.Encoding.ASCII.GetString(byteArray);
+
+string text = "是不是漢字，ABC，keleyi.com";
+for (int i = 0; i < text.Length; i++)
+{
+	if (Regex.IsMatch(text[i].ToString(), @"[\u4e00-\u9fbb]+{1}quot;))
+	{
+		Console.WriteLine("是漢字");
+	}
+	else
+	{
+		Console.WriteLine("不是漢字");
+	}
+}
+
+3400～4DFFh：中日韓認同表意文字擴充A區，總計收容6,582個中日韓漢字。
+	4E00～9FFFh：中日韓認同表意文字區，總計收容20,902個中日韓漢字。
+A000～A4FFh：彝族文字區，收容中國南方彝族文字和字根。
+AC00～D7FFh：韓文拼音組合字區，收容以韓文音符拼成的文字。
+F900～FAFFh：中日韓兼容表意文字區，總計收容302個中日韓漢字。
+FB00～FFFDh：文字表現形式區，收容組合拉丁文字、希伯來文、阿拉伯文、中日韓直式標點、小符號、半角符號、全角符號等。
+
+Hexadecimal value of 基 is 57FA
+Hexadecimal value of 本 is 672C
+Hexadecimal value of 運 is 904B
+Hexadecimal value of 算 is 7B97
+Hexadecimal value of 制 is 5236
+Hexadecimal value of 作 is 4F5C
+Hexadecimal value of U is 0055
+Hexadecimal value of S is 0053
+Hexadecimal value of B is 0042
+Hexadecimal value of ? is 542F
+Hexadecimal value of ? is 52A8
+Hexadecimal value of ? is 76D8
+Hexadecimal value of ? is 30A6
+Hexadecimal value of ? is 30A3
+Hexadecimal value of ? is 30AD
+Hexadecimal value of ? is 30DA
+Hexadecimal value of ? is 30C7
+Hexadecimal value of ? is 30A3
+Hexadecimal value of ? is 30A2
+Hexadecimal value of ? is 003F
+Hexadecimal value of ? is 003F
+Hexadecimal value of ? is 003F
+Hexadecimal value of 世 is 4E16
+Hexadecimal value of ? is 003F
+Hexadecimal value of 生 is 751F
+Hexadecimal value of ? is 003F
+Hexadecimal value of ? is 003F
+Hexadecimal value of ? is 003F
+Hexadecimal value of ? is 003F
+Hexadecimal value of ? is 003F
+Hexadecimal value of 概 is 6982
+Hexadecimal value of ? is 003F
+Hexadecimal value of 表 is 8868
+Hexadecimal value of ? is 003F
+Hexadecimal value of ? is 003F
+Hexadecimal value of ? is 003F
+Hexadecimal value of ? is 003F
+
+//------------------------------------------------------------  # 60個
+
+
+byte[] input = Encoding.Default.GetBytes(str);	//字串轉拜列  111
+byte[] input = Encoding.UTF8.GetBytes(key + str); //字串轉拜列
+byte[] input = Encoding.UTF8.GetBytes(str); //字串轉拜列
+byte[] input = Encoding.UTF8.GetBytes(str); //字串轉拜列   222
+byte[] input = Encoding.Unicode.GetBytes(str);  //字串轉拜列
+byte[] input = Encoding.ASCII.GetBytes(str);
+byte[] input = Encoding.Unicode.GetBytes(str);
+byte[] input = Encoding.UTF8.GetBytes(key + str); //字串轉拜列
+byte[] input = Encoding.Unicode.GetBytes(str);  //字串轉拜列
+byte[] input = Encoding.UTF8.GetBytes(str); //字串轉拜列
+byte[] input = Encoding.Unicode.GetBytes(str);  //字串轉拜列
+byte[] input = Encoding.UTF8.GetBytes(str); //字串轉拜列
+byte[] input = Encoding.UTF8.GetBytes(str); //字串轉拜列
+byte[] input = Encoding.UTF8.GetBytes(str); //字串轉拜列
+byte[] input = Encoding.Unicode.GetBytes(str); //字串轉拜列
+
+byte[] input = ASCIIEncoding.ASCII.GetBytes(str); //字串轉拜列
+byte[] input = ASCIIEncoding.ASCII.GetBytes(str);
+byte[] input = new UnicodeEncoding().GetBytes(str);   //字串轉拜列
+byte[] input = Encoding.Unicode.GetBytes(str); //字串轉拜列
+byte[] input = UTF8Encoding.UTF8.GetBytes(str); //字串轉拜列
+byte[] input = UTF8Encoding.UTF8.GetBytes(str); //字串轉拜列
+
+
+UTF8Encoding.Default.GetBytes(str)
+
+
+        private byte[] GetKeyByteArray(string str)
+        {
+            int tmpStrLen = str.Length;
+            byte[] input = input = new ASCIIEncoding().GetBytes(str);
+            return input;
+        }
+
+        //byte[] input = Encoding.Default.GetBytes(str);  //字串轉拜列
+
+//------------------------------------------------------------  # 60個
+
+
+
+*/
+
+
+
+
+

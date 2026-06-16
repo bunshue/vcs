@@ -261,6 +261,8 @@ namespace vcs_DiskDirectoryFile2
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         const Int64 TB = (Int64)GB * 1024;//定義TB的計算常量
         const int GB = 1024 * 1024 * 1024;//定義GB的計算常量
         const int MB = 1024 * 1024;//定義MB的計算常量
@@ -429,11 +431,14 @@ namespace vcs_DiskDirectoryFile2
         {
             //string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic";
             //string foldername = @"D:\vcs\astro\_DATA2\_________整理_mp3\_mp3_台語\_陳一郎\";
-            string foldername = @"C:\dddddddddd\_music_from_yt";
+            //string foldername = @"C:\dddddddddd\_music_from_yt";
+
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\_case1\";
 
             export_filenames(foldername);
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button10_Click(object sender, EventArgs e)
         {

@@ -150,6 +150,16 @@ namespace vcs_SendTo_All
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            /* debug
+            string sendto_folder = Environment.GetFolderPath(Environment.SpecialFolder.SendTo);
+            richTextBox1.Text += "[傳送到]資料夾位置:\n" + sendto_folder + "\n";
+            richTextBox1.Text += "檔案總管 右鍵 傳送到 XXX, 可用XXX開啟檔案\n\n拉一個捷徑到\n%APPDATA%\\Microsoft\\Windows\\SendTo\n或\n" + sendto_folder;
+            */
+
+            show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
             if (flag_operation_mode == MODE0)
             {
                 this.Text = "顯示檔案名稱";
@@ -186,15 +196,9 @@ namespace vcs_SendTo_All
                 richTextBox1.Text += "檔案界限 : " + Properties.Settings.Default.file_size_limit.ToString() + " MB\n\n";
             }
             else
+            {
                 this.Text = "未定義";
-
-            show_item_location();
-
-            /* debug
-            string sendto_folder = Environment.GetFolderPath(Environment.SpecialFolder.SendTo);
-            richTextBox1.Text += "[傳送到]資料夾位置:\n" + sendto_folder + "\n";
-            richTextBox1.Text += "檔案總管 右鍵 傳送到 XXX, 可用XXX開啟檔案\n\n拉一個捷徑到\n%APPDATA%\\Microsoft\\Windows\\SendTo\n或\n" + sendto_folder;
-            */
+            }
 
             int len = System.Environment.GetCommandLineArgs().Length;
             int i;

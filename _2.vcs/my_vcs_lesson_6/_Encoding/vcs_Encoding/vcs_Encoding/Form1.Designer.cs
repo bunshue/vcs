@@ -185,7 +185,7 @@
             this.richTextBox_string1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox_string1.TabIndex = 122;
             this.richTextBox_string1.Text = "蒹葭\n\n蒹葭蒼蒼  白露為霜\n所謂伊人  在水一方\n遫洄從之  道阻且長\n遫游從之  宛在水中央\n\n蒹葭淒淒  白露未晞\n所謂伊人  在水之湄\n遫洄從之  道阻且" +
-    "躋\n遫游從之  宛在水中坻\n\n蒹葭采采  白露未已\n所謂伊人  在水之涘\n遫洄從之  道阻且右\n遫游從之  宛在水中沚";
+                "躋\n遫游從之  宛在水中坻\n\n蒹葭采采  白露未已\n所謂伊人  在水之涘\n遫洄從之  道阻且右\n遫游從之  宛在水中沚";
             // 
             // richTextBox_hex
             // 
@@ -207,7 +207,7 @@
             // 
             // bt_string2hex
             // 
-            this.bt_string2hex.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_string2hex.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_string2hex.Location = new System.Drawing.Point(322, 122);
             this.bt_string2hex.Name = "bt_string2hex";
             this.bt_string2hex.Size = new System.Drawing.Size(80, 80);
@@ -218,7 +218,7 @@
             // 
             // bt_hex2string
             // 
-            this.bt_hex2string.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_hex2string.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_hex2string.Location = new System.Drawing.Point(408, 122);
             this.bt_hex2string.Name = "bt_hex2string";
             this.bt_hex2string.Size = new System.Drawing.Size(80, 80);

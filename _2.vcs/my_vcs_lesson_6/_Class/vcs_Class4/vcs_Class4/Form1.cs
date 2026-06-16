@@ -13,7 +13,6 @@ namespace vcs_Class4
     {
         G2D_ColorRect rect01, rect02;  // 兩個顏色矩形物件
 
-
         public Form1()
         {
             InitializeComponent();
