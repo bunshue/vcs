@@ -285,8 +285,8 @@
             // 
             // bt_clear
             // 
-            this.bt_clear.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(684, 61);
+            this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear.Location = new System.Drawing.Point(676, 35);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 46;
@@ -418,10 +418,10 @@
             // 
             // bt_parse1
             // 
-            this.bt_parse1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_parse1.Location = new System.Drawing.Point(464, 72);
+            this.bt_parse1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_parse1.Location = new System.Drawing.Point(446, 36);
             this.bt_parse1.Name = "bt_parse1";
-            this.bt_parse1.Size = new System.Drawing.Size(60, 32);
+            this.bt_parse1.Size = new System.Drawing.Size(72, 36);
             this.bt_parse1.TabIndex = 75;
             this.bt_parse1.Text = "解讀";
             this.bt_parse1.UseVisualStyleBackColor = true;
@@ -429,10 +429,10 @@
             // 
             // bt_parse2
             // 
-            this.bt_parse2.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_parse2.Location = new System.Drawing.Point(561, 73);
+            this.bt_parse2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_parse2.Location = new System.Drawing.Point(550, 37);
             this.bt_parse2.Name = "bt_parse2";
-            this.bt_parse2.Size = new System.Drawing.Size(60, 32);
+            this.bt_parse2.Size = new System.Drawing.Size(72, 36);
             this.bt_parse2.TabIndex = 76;
             this.bt_parse2.Text = "解讀";
             this.bt_parse2.UseVisualStyleBackColor = true;

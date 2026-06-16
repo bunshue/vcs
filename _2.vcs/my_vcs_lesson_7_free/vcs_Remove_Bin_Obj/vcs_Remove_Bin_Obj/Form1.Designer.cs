@@ -49,7 +49,9 @@
             this.rb_remove_cuda = new System.Windows.Forms.RadioButton();
             this.rb_remove_vcs = new System.Windows.Forms.RadioButton();
             this.listView1 = new System.Windows.Forms.ListView();
+            this.bt_setup = new System.Windows.Forms.Button();
             this.bt_open_dir2 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             this.groupBox_remove.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -285,6 +287,18 @@
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             // 
+            // bt_setup
+            // 
+            this.bt_setup.BackgroundImage = global::vcs_Remove_Bin_Obj.Properties.Resources.setup;
+            this.bt_setup.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_setup.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_setup.Location = new System.Drawing.Point(258, 267);
+            this.bt_setup.Name = "bt_setup";
+            this.bt_setup.Size = new System.Drawing.Size(50, 50);
+            this.bt_setup.TabIndex = 148;
+            this.bt_setup.UseVisualStyleBackColor = true;
+            this.bt_setup.Click += new System.EventHandler(this.bt_setup_Click);
+            // 
             // bt_open_dir2
             // 
             this.bt_open_dir2.BackgroundImage = global::vcs_Remove_Bin_Obj.Properties.Resources.open_folder;
@@ -297,11 +311,24 @@
             this.bt_open_dir2.UseVisualStyleBackColor = true;
             this.bt_open_dir2.Click += new System.EventHandler(this.bt_open_dir2_Click);
             // 
+            // button5
+            // 
+            this.button5.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button5.Location = new System.Drawing.Point(12, 389);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(104, 39);
+            this.button5.TabIndex = 149;
+            this.button5.Text = "刪除+git";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(759, 678);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.bt_setup);
             this.Controls.Add(this.bt_open_dir2);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.groupBox_remove);
@@ -354,6 +381,8 @@
         private System.Windows.Forms.RadioButton rb_remove_vcs;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Button bt_open_dir2;
+        private System.Windows.Forms.Button bt_setup;
+        private System.Windows.Forms.Button button5;
     }
 }
 

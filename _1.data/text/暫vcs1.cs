@@ -1,4 +1,77 @@
-﻿// 引用System.Windows.Forms命名空間
+﻿/*
+Bitmap bmp = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\BMW.jfif");
+e.Graphics.DrawImage(bmp, pt[i].X, pt[i].Y, 100, 100);
+*/
+
+//------------------------------------------------------------  # 60個
+
+畫布轉換矩陣的平移設定 (↑↓←→按鍵)
+
+        Bitmap bitmap1 = new Bitmap(Properties.Resources.Butterfly);
+        Point pos = new Point(); // 圖形的位置
+                // 向上
+                pos = new Point(pos.X, pos.Y - 10);
+                // 向下
+                pos = new Point(pos.X, pos.Y + 10);
+                // 向左
+                pos = new Point(pos.X - 10, pos.Y);
+                // 向右
+                pos = new Point(pos.X + 10, pos.Y);
+
+        // 表單重畫事件
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.TranslateTransform(pos.X, pos.Y);
+            e.Graphics.DrawImage(bitmap1, 0, 0); // 繪出圖形
+            //e.Graphics.DrawImage(bitmap1, pos); // 繪出圖形
+        }
+
+
+//------------------------------------------------------------  # 60個
+
+各種 DrawImage
+            richTextBox1.Text += "第1項 PictureBox\n";
+            Rectangle rectDest = new Rectangle(0, 0, bitmap1.Width, bitmap1.Height);
+            Rectangle rectSrc = new Rectangle(0, 0, bitmap1.Width, bitmap1.Height);
+            e.Graphics.DrawImage(bitmap1, rectDest, rectSrc, GraphicsUnit.Pixel); // 呈現原圖
+
+            /*
+            richTextBox1.Text += "第2項 PictureBox\n";
+            Rectangle rectDest = new Rectangle(0, 0, bitmap1.Width, bitmap1.Height);
+            e.Graphics.DrawImage(bitmap1, rectDest); // 呈現原圖
+
+            richTextBox1.Text += "第3項 PictureBox\n";
+            Rectangle rectDest = new Rectangle(0, 0, bitmap1.Width * 2, bitmap1.Height / 2);
+            e.Graphics.DrawImage(bitmap1, rectDest); // 呈現原圖
+            */
+            richTextBox1.Text += "第4項 PictureBox\n";
+            Point dest = new Point(0, 0); // 目的地左上角座標
+            e.Graphics.DrawImage(bitmap1, dest); // 呈現原圖
+
+            richTextBox1.Text += "第5項 PictureBox\n";
+            e.Graphics.DrawImage(bitmap1, 0, 0); // 呈現原圖
+
+//------------------------------------------------------------  # 60個
+
+StartPiont = (200, 100)
+CutArea = (0,0,300,300)
+
+private Image CutImage(Image SourceImage, Point StartPoint, Rectangle CutArea)
+{
+    Bitmap NewBitmap = new Bitmap(CutArea.Width, CutArea.Height);
+    Graphics tmpGraph = Graphics.FromImage(NewBitmap);
+    tmpGraph.DrawImage(SourceImage, CutArea, StartPoint.X, StartPoint.Y, CutArea.Width, CutArea.Height, GraphicsUnit.Pixel);
+    tmpGraph.Dispose();
+    return NewBitmap;
+}
+
+//------------------------------------------------------------  # 60個
+
+
+
+
+
+// 引用System.Windows.Forms命名空間
 // 如此才能使用較簡潔的物件名稱來使用Form, Button, TextBox, Label...等類別
 using System.Windows.Forms;
 
@@ -11,17 +84,6 @@ using System.Windows.Forms;
 
 Tango
 C:\Program Files\Git\bin
-
-
-
-// Start selecting a rectangle.
-// Continue selecting a rectangle.
-// Finish selecting a rectangle.
-
-/*
-Bitmap bmp = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\BMW.jfif");
-e.Graphics.DrawImage(bmp, pt[i].X, pt[i].Y, 100, 100);
-*/
 
 
 
@@ -143,11 +205,6 @@ vcs待尋找
             toolStripProgressBar1.Value = 30;
 
 //------------------------------------------------------------  # 60個
-
-陣列 一維陣列 二維陣列
-
-//string[] names = new string[] { "張三", "李四", "王五" };
-//string[] items = new string[] { "螢幕", "滑鼠", "鍵盤" };
 
 可以累計點數，緩慢畫出的方法
 
@@ -470,29 +527,6 @@ richTextBox1.Text += p.A.ToString("X2") + p.R.ToString("X2") + p.G.ToString("X2"
 
 //------------------------------------------------------------  # 60個
 
-畫布轉換矩陣的平移設定 (↑↓←→按鍵)
-
-        Bitmap bitmap1 = new Bitmap(Properties.Resources.Butterfly);
-        Point pos = new Point(); // 圖形的位置
-                // 向上
-                pos = new Point(pos.X, pos.Y - 10);
-                // 向下
-                pos = new Point(pos.X, pos.Y + 10);
-                // 向左
-                pos = new Point(pos.X - 10, pos.Y);
-                // 向右
-                pos = new Point(pos.X + 10, pos.Y);
-
-        // 表單重畫事件
-        private void Form1_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.TranslateTransform(pos.X, pos.Y);
-            e.Graphics.DrawImage(bitmap1, 0, 0); // 繪出圖形
-            //e.Graphics.DrawImage(bitmap1, pos); // 繪出圖形
-        }
-
-
-//------------------------------------------------------------  # 60個
 cccc
             numericUpDown1.Maximum = new System.Decimal(new int[] { 150, 0, 0, 0 });
 
@@ -585,28 +619,6 @@ radioButton1屬性
 北風.accdb
 
 //------------------------------------------------------------  # 60個
-
-各種 DrawImage
-            richTextBox1.Text += "第1項 PictureBox\n";
-            Rectangle rectDest = new Rectangle(0, 0, bitmap1.Width, bitmap1.Height);
-            Rectangle rectSrc = new Rectangle(0, 0, bitmap1.Width, bitmap1.Height);
-            e.Graphics.DrawImage(bitmap1, rectDest, rectSrc, GraphicsUnit.Pixel); // 呈現原圖
-
-            /*
-            richTextBox1.Text += "第2項 PictureBox\n";
-            Rectangle rectDest = new Rectangle(0, 0, bitmap1.Width, bitmap1.Height);
-            e.Graphics.DrawImage(bitmap1, rectDest); // 呈現原圖
-
-            richTextBox1.Text += "第3項 PictureBox\n";
-            Rectangle rectDest = new Rectangle(0, 0, bitmap1.Width * 2, bitmap1.Height / 2);
-            e.Graphics.DrawImage(bitmap1, rectDest); // 呈現原圖
-            */
-            richTextBox1.Text += "第4項 PictureBox\n";
-            Point dest = new Point(0, 0); // 目的地左上角座標
-            e.Graphics.DrawImage(bitmap1, dest); // 呈現原圖
-
-            richTextBox1.Text += "第5項 PictureBox\n";
-            e.Graphics.DrawImage(bitmap1, 0, 0); // 呈現原圖
 
 label
             //將兩個標籤的文字對齊以垂直置中，水平置中
@@ -1059,7 +1071,6 @@ Binary格式讀出一個檔案到拜列
             br.Close();
             fs.Close();
 
-
 /*
 記住目前的設定值，下次程式開啟時，可以拿來用。
 
@@ -1093,22 +1104,6 @@ private void Form1_Load(object sender, EventArgs e)
     this.BackColor = Color.White;
     this.TransparencyKey = Color.White;
     this.FormBorderStyle = FormBorderStyle.None;
-}
-
-//------------------------------------------------------------  # 60個
-
-StartPiont = (200, 100)
-CutArea = (0,0,300,300)
-
-&lt;pre class="c" name="code">
-
-private Image CutImage(Image SourceImage, Point StartPoint, Rectangle CutArea)
-{
-    Bitmap NewBitmap = new Bitmap(CutArea.Width, CutArea.Height);
-    Graphics tmpGraph = Graphics.FromImage(NewBitmap);
-    tmpGraph.DrawImage(SourceImage, CutArea, StartPoint.X, StartPoint.Y, CutArea.Width, CutArea.Height, GraphicsUnit.Pixel);
-    tmpGraph.Dispose();
-    return NewBitmap;
 }
 
 //------------------------------------------------------------  # 60個
@@ -1260,7 +1255,6 @@ richTextBox1.Text += byte_data[i].ToString("D03");
         public int Depth { get; private set; }
         public int Width { get; private set; }
         public int Height { get; private set; }
-
 
         /// <summary>
         /// Get the color of the specified pixel
@@ -2380,17 +2374,6 @@ if (frames.Count > 0)
 
 //------------------------------------------------------------  # 60個
 
-        private string[] DirName()
-        {
-            int j = 0;
-            string[] str = new string[26];
-            for (int i = 65; i <91;i++ )
-            {
-                str [j]= Convert.ToChar(i).ToString()+":";
-                j++;
-            }
-            return str;
-        }
 
 //------------------------------------------------------------  # 60個
 
@@ -4445,6 +4428,7 @@ public Image ReadImage(byte[] bytes)
 　　ms.Close();
 　　return (Image)obj;
 }
+
 /// <summary>
 /// 將Image轉換為byte[]
 /// </summary>
@@ -4458,6 +4442,8 @@ public byte[] ConvertImage(Image image)
      ms.Close();
      return ms.ToArray();
 }
+
+6060
 
 C# GUID介紹和的使用，
 
@@ -4549,19 +4535,6 @@ pntArr[2] = new Point(x - len / 2, (int)(len * Math.Sqrt(3) / 2 + y));
         {
             //不進行背景的繪制
         }
-
-//------------------------------------------------------------  # 60個
-
-//字串轉拜列
-string mystring="this is a string"
-char[] mychars=mystring.ToCharArray();
-
-//foreach循環處理char數組
-foreach(char mychar in mystring)
-{
-	Console.WriteLine(mychar);
-}
-mystring.Length //獲取元素的個數 
 
 //------------------------------------------------------------  # 60個
 
@@ -4758,7 +4731,7 @@ console mode讀取字串
 #include <stdio.h>
 int main(int argc,char* argv[])
 {
-    /*
+/*
 	int i;
 	time_t time_ptr;
 	printf("david: This is a c template.\n");
@@ -4766,7 +4739,6 @@ int main(int argc,char* argv[])
 	time(&time_ptr);
 	printf("現在時間 : %s\n", asctime(localtime(&time_ptr)));
 */
-
 
     time_t t1 = time(NULL);
     struct tm *nPtr = localtime(&t1);
@@ -4972,8 +4944,7 @@ for(i=0; i<360;i++)
             Transform = new Matrix(rect, pts);
             e.Graphics.Transform = Transform;
 
-
-
+6060
 
         string drap_setup_filename = "drap_setup.ini";
 
@@ -5630,29 +5601,21 @@ C# WindowsMediaPlayer 的一些用法
                 player.URL = 
 
 添加多首歌曲到播放列表
-
             IWMPPlaylist playList = player.playlistCollection.newPlaylist(); 
  (DataRow drItem = player.newMedia(drItem[].ToString()); 
 =
 
  或者直接在當前列表上添加
-
  (DataRow drItem = player.newMedia(drItem[].ToString()); 
 
-
 設置播放器音量
-
  player.settings.volume=;
 
-
  設置循環播放
-
 player.settings.setMode(, );
 
 設置隨機播放
-
   player.settings.setMode(, );
-
 
 richTextBox1.Text += "測試使用WindowsMediaPlayerClass\n";
 WindowsMediaPlayerClass c;
@@ -6023,12 +5986,10 @@ Encoding.GetEncoding big5 gb2312 shift_jis UTF-8 unicode
 test write
 StreamWriter swAcqflg = new StreamWriter(strFilePath + strFileName, false, System.Text.Encoding.GetEncoding("big5"));
 
-
 StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("utf-8"));   //指名編碼格式 the same
 StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("UTF-8"));    //指名編碼格式
 StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("unicode"));   //指名編碼格式
 StreamWriter sw = new StreamWriter(fs, Encoding.UTF8);    //指名編碼格式
-
 
 byte[] unknow = Encoding.GetEncoding("Big5").GetBytes(strBig5);  // 繁體中文 (Big5) 
 return Encoding.GetEncoding("gb2312").GetString(unknow); // 簡體中文 (GB2312) 
@@ -6342,11 +6303,9 @@ richTextBox1.Text += receive_buffer_tmp[i].ToString("X2") + " ";
 string和byte[]的轉換 (C#)
 
 string類型轉成byte[]：
-
 byte[] byteArray = System.Text.Encoding.Default.GetBytes ( str );
 
 反過來，byte[]轉成string：
-
 string str = System.Text.Encoding.Default.GetString ( byteArray );
 
 其它編碼方式的，如System.Text.UTF8Encoding，System.Text.UnicodeEncoding class等；例如：
@@ -6510,19 +6469,7 @@ icon.ico要放在bin之下
 不用製作游標檔的做法:
 this.Cursor = new Cursor(new Bitmap(@"C:\______test_files\reuse.bmp").GetHicon());
 
-
 [C#] webBrowser如何判斷網頁是否讀取完成
-
-
-在Windows Mobile 6 上用C# 讀取圖片(如jpg)貼在畫面上 	畫上一圖
-Graphics g = this.CreateGraphics();
-
-//選擇您要貼的畫面的圖片位置
-Bitmap br = new Bitmap("My Documents\\我的圖片\\Waterfall.jpg");
-
-//放置您所指定的圖片
-//並指定圖片要放置的位置，(X,Y) = (0,0)
-g.DrawImage(br, 0, 0);
 
 //------------------------------------------------------------  # 60個
 
@@ -6548,7 +6495,7 @@ g.DrawImage(br, 0, 0);
 
 方法一：(用圖片填滿圓圈)
       Graphics g = this.CreateGraphics();
-      TextureBrush tb = new TextureBrush(new Bitmap(@"Program Files\\drawImage\\point.jpg"));
+      TextureBrush tb = new TextureBrush(new Bitmap(@"pic_point.jpg"));
      
       //20, 20 為座標位置，10, 10 為圓的大小
       g.FillEllipse(tb, 20, 20, 10, 10);
@@ -7186,8 +7133,9 @@ openFileDialog1.Filter = "*.jpg,*.jpeg,*.bmp,*.gif,*.ico,*.png,*.wmf|*.jpg;*.jpe
 //------------------------------------------------------------  # 60個
 
 Pen blackPen = new Pen(Color.FromArgb(255, 0, 0, 0), 5);
-DrawImage(bmp, 0, 0);
-DrawImage(bmp, 0, 0); // 在表單上顯示 bmp 記憶體圖像
+
+//------------------------------------------------------------  # 60個
+
 this.Refresh() ; //執行 Form1_Paint()
 
 //------------------------------------------------------------  # 60個
@@ -7232,10 +7180,7 @@ XML 註解	<!-- --> 的內容。
 
 Pen blackPen = new Pen(Color.FromArgb(255, 0, 0, 0), 5);
 
-
-
-DrawImage(bmp, 0, 0);
-DrawImage(bmp, 0, 0); // 在表單上顯示 bmp 記憶體圖像
+//------------------------------------------------------------  # 60個
 
 this.Refresh() ; //執行 Form1_Paint()
 
@@ -7338,6 +7283,8 @@ blackPen.StartCap=LineCap.ArrowAnchor;
 vcs
 Form2的元件的Modifiers要改成Internal, 預設為private
 
+6060
+
 //char * wday[] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
 在預設的情況下，C# 不能使用指標，若要用指標的話，要在編譯器設定中啟用 unsafe 模式才行。
 
@@ -7384,7 +7331,7 @@ Form2的元件的Modifiers要改成Internal, 預設為private
 [格式2]：public void FillEllipse(Brush brush,int x,int y,int width, int height);
 
 7．畫多邊形
-[格式1]：public void DrawPolygon(Pen pen,  Point[] points);
+[格式1]：public void DrawPolygon(Pen pen, Point[] points);
 [格式2]：public void DrawPolygon(Pen pen, PointF[] points);
 
 9．繪制非閉合曲線
@@ -8091,42 +8038,11 @@ Windows使用的換行符號為0x0D與0x0A，也就是使用了CR(carriage retur
 
 Linux使用的換行符號為0x0A，也就是只用了LF(new line feed)為換行符號。
 
-
-控件陣列 宣告
-PictureBox[] DisplayReference = new PictureBox[4];
-GroupBox[] camOptions = new GroupBox[4];
-
-控件陣列 使用
-this.DisplayReference[0] = this.pictureBox1;
-this.DisplayReference[1] = this.pictureBox2;
-this.DisplayReference[2] = this.pictureBox3;
-this.DisplayReference[3] = this.pictureBox4;
-
-this.camOptions[0] = this.groupBox5;
-this.camOptions[1] = this.groupBox6;
-this.camOptions[2] = this.groupBox7;
-this.camOptions[3] = this.groupBox8;
-
-物件陣列 宣告
-CameraMonitor[] CamMonitor = new CameraMonitor[4];
-
-物件陣列 使用
-this.CamMonitor[0] = new CameraMonitor(xxxx, yyyy, zzzz);
-this.CamMonitor[1] = new CameraMonitor(xxxx, yyyy, zzzz);
-this.CamMonitor[2] = new CameraMonitor(xxxx, yyyy, zzzz);
-this.CamMonitor[3] = new CameraMonitor(xxxx, yyyy, zzzz);
-
 //------------------------------------------------------------  # 60個
 
 "C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\vcsexpress.exe"
 
 "C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\vcsexpress.exe"
-
-
-string[] engNum = new string[] { "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten" };
-
-
-lblShow.Text = "英文：" + engNum[n];  
 
 Image<Bgr, byte> image1 = new Image<Bgr, byte>(480, 320, new Bgr(0, 255, 0));
 
@@ -8139,7 +8055,6 @@ Image<Bgr, byte> image1 = new Image<Bgr, byte>(480, 320, new Bgr(0, 255, 0));
         Byte blue = image1.Data[100, 100, 0];
         Byte green = image1.Data[100, 100, 1];
         Byte red = image1.Data[100, 100, 2];
-		
 		
             //簡單圖像處理
 
@@ -9080,7 +8995,6 @@ textbox把資料拉到最下方
             c = '\u0041'; //16進位,2個Bytes
             richTextBox1.Text += "UniCode 0041的字元是" + c + "\n";
 
-
         void MaxMinArray(int[] a, out int max, out int min)
         {
             max = a[0];
@@ -9365,8 +9279,7 @@ for (int i = 0; i < strings.Length; i++)
 	values[i] = int.Parse(strings[i]);
 }
 
-
-
+6060
 
 pictureCard
 
@@ -9752,21 +9665,7 @@ g = pictureBox1.CreateGraphics();		//取得畫布物件
 
 Bitmap bitmap1 = new Bitmap(@"C:\_git\vcs\_1.data\______test_files1\picture1.jpg");
 
-g.DrawImage(bitmap1, 10, 10);	//將bitmap1貼至畫布上
-
 g.DrawEllipse(new Pen(Color.Red, 1), 10, 10, 100, 100);		//作畫於其上
-
-
-        private void DrawPicture(float x, float y)
-        {
-            //在指定位置畫上一圖
-            // Create image.
-            Image newImage = ....
-
-            // Draw image to screen.
-            g.DrawImage(newImage, x, y);
-        }
-
 
             PenStyle = new Pen(foreColor);
             PenStyle.Width = (int)numericUpDown1.Value;
@@ -9835,28 +9734,6 @@ Marshal.StructureToPtr方法簡介
 
 //------------------------------------------------------------  # 60個
 
-List如同Array一樣,可以建立許多陣列元素,但是卻比Array來的靈活.
-
-例如要建立一陣列元素,Array需要先宣告陣列長度,而List不需要.
-
-Array->
-
-int[] myArray = new int[5] ;
-
-int[] myArray = { 1, 2, 3, 4, 5 };
-
-List->
-
-List<int> myLists = new List<int>();
-
-另外List如同一張資料表,你可以對它編輯,如加入某一列或刪除某一列.
-
-
-
-
-
-
-
                 richTextBox1.Text += "aaaa1 len = " + tb_reason_stage1.Text.Length.ToString() + "\n";
                 tb_reason_stage1.Text.Replace("\n", "");
                 richTextBox1.Text += "aaaa2 len = " + tb_reason_stage1.Text.Length.ToString() + "\n";
@@ -9867,7 +9744,6 @@ List<int> myLists = new List<int>();
             tb_reason_stage1.Text = tb_reason_stage1.Text.Replace("\r", "");
 
             richTextBox1.Text += "len = " + textBox1.Text.Length.ToString() + "\n";
-
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -10249,8 +10125,7 @@ using System.Net.Sockets;
         Console.WriteLine(ex.Message);
       }
 
-6060
-      
+//------------------------------------------------------------  # 60個      
 
 讀取一WORD檔案並將其純文字部分顯示出來
 , 可讀doc檔和docx檔
@@ -11413,10 +11288,8 @@ https://www.cnblogs.com/procoder/archive/2009/05/14/1456243.html
 https://blog.csdn.net/IFuWantMe/article/details/110658115
 http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201707/243833.html
 
-
 客戶端實現藍牙接收(C#)知識總結
 http://www.aspphp.online/bianchen/dnet/cxiapu/cxpjc/201701/123346.html
-
 
 C# 超高速高性能写日志 代码开源
 https://www.cnblogs.com/emrys5/p/flashlog.html

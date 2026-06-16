@@ -33,27 +33,27 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.button13 = new System.Windows.Forms.Button();
-            this.button14 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.button15 = new System.Windows.Forms.Button();
-            this.button16 = new System.Windows.Forms.Button();
-            this.button17 = new System.Windows.Forms.Button();
-            this.button18 = new System.Windows.Forms.Button();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.button26 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
             this.button20 = new System.Windows.Forms.Button();
-            this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.button25 = new System.Windows.Forms.Button();
-            this.button26 = new System.Windows.Forms.Button();
             this.groupBox14 = new System.Windows.Forms.GroupBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox0 = new System.Windows.Forms.PictureBox();
             this.timer6 = new System.Windows.Forms.Timer(this.components);
             this.groupBox0 = new System.Windows.Forms.GroupBox();
+            this.bt_class29 = new System.Windows.Forms.Button();
+            this.bt_class28 = new System.Windows.Forms.Button();
+            this.bt_class27 = new System.Windows.Forms.Button();
+            this.bt_class26 = new System.Windows.Forms.Button();
+            this.bt_class25 = new System.Windows.Forms.Button();
+            this.bt_class23 = new System.Windows.Forms.Button();
+            this.bt_class21 = new System.Windows.Forms.Button();
+            this.bt_class24 = new System.Windows.Forms.Button();
+            this.bt_class22 = new System.Windows.Forms.Button();
+            this.bt_class20 = new System.Windows.Forms.Button();
             this.bt_class19 = new System.Windows.Forms.Button();
             this.bt_class18 = new System.Windows.Forms.Button();
             this.bt_class17 = new System.Windows.Forms.Button();
@@ -74,21 +74,8 @@
             this.bt_class04 = new System.Windows.Forms.Button();
             this.bt_class02 = new System.Windows.Forms.Button();
             this.bt_class00 = new System.Windows.Forms.Button();
-            this.bt_class29 = new System.Windows.Forms.Button();
-            this.bt_class28 = new System.Windows.Forms.Button();
-            this.bt_class27 = new System.Windows.Forms.Button();
-            this.bt_class26 = new System.Windows.Forms.Button();
-            this.bt_class25 = new System.Windows.Forms.Button();
-            this.bt_class23 = new System.Windows.Forms.Button();
-            this.bt_class21 = new System.Windows.Forms.Button();
-            this.bt_class24 = new System.Windows.Forms.Button();
-            this.bt_class22 = new System.Windows.Forms.Button();
-            this.bt_class20 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
-            this.groupBox6.SuspendLayout();
-            this.groupBox7.SuspendLayout();
             this.groupBox8.SuspendLayout();
-            this.groupBox10.SuspendLayout();
             this.groupBox14.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -109,7 +96,7 @@
             // 
             this.groupBox1.Controls.Add(this.button8);
             this.groupBox1.Controls.Add(this.button7);
-            this.groupBox1.Location = new System.Drawing.Point(619, 188);
+            this.groupBox1.Location = new System.Drawing.Point(824, 10);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(200, 168);
             this.groupBox1.TabIndex = 8;
@@ -138,38 +125,6 @@
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.button13);
-            this.groupBox6.Controls.Add(this.button14);
-            this.groupBox6.Location = new System.Drawing.Point(825, 191);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(200, 165);
-            this.groupBox6.TabIndex = 12;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "MyTime範例";
-            // 
-            // button13
-            // 
-            this.button13.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button13.Location = new System.Drawing.Point(15, 81);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(180, 60);
-            this.button13.TabIndex = 9;
-            this.button13.UseVisualStyleBackColor = true;
-            this.button13.Click += new System.EventHandler(this.button13_Click);
-            // 
-            // button14
-            // 
-            this.button14.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button14.Location = new System.Drawing.Point(15, 21);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(180, 60);
-            this.button14.TabIndex = 8;
-            this.button14.Text = "增加物件";
-            this.button14.UseVisualStyleBackColor = true;
-            this.button14.Click += new System.EventHandler(this.button14_Click);
-            // 
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -181,73 +136,28 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
-            // groupBox7
-            // 
-            this.groupBox7.Controls.Add(this.button15);
-            this.groupBox7.Controls.Add(this.button16);
-            this.groupBox7.Controls.Add(this.button17);
-            this.groupBox7.Controls.Add(this.button18);
-            this.groupBox7.Location = new System.Drawing.Point(619, 362);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(200, 300);
-            this.groupBox7.TabIndex = 12;
-            this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "Student範例";
-            // 
-            // button15
-            // 
-            this.button15.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button15.Location = new System.Drawing.Point(15, 21);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(180, 60);
-            this.button15.TabIndex = 11;
-            this.button15.Text = "類別範例";
-            this.button15.UseVisualStyleBackColor = true;
-            this.button15.Click += new System.EventHandler(this.button15_Click);
-            // 
-            // button16
-            // 
-            this.button16.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button16.Location = new System.Drawing.Point(14, 85);
-            this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(180, 60);
-            this.button16.TabIndex = 10;
-            this.button16.Text = "建構式範例";
-            this.button16.UseVisualStyleBackColor = true;
-            this.button16.Click += new System.EventHandler(this.button16_Click);
-            // 
-            // button17
-            // 
-            this.button17.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button17.Location = new System.Drawing.Point(15, 147);
-            this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(180, 60);
-            this.button17.TabIndex = 9;
-            this.button17.Text = "物件檢查參數";
-            this.button17.UseVisualStyleBackColor = true;
-            this.button17.Click += new System.EventHandler(this.button17_Click);
-            // 
-            // button18
-            // 
-            this.button18.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button18.Location = new System.Drawing.Point(15, 211);
-            this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(180, 60);
-            this.button18.TabIndex = 8;
-            this.button18.Text = "使用靜態成員";
-            this.button18.UseVisualStyleBackColor = true;
-            this.button18.Click += new System.EventHandler(this.button18_Click);
-            // 
             // groupBox8
             // 
+            this.groupBox8.Controls.Add(this.button26);
             this.groupBox8.Controls.Add(this.button19);
             this.groupBox8.Controls.Add(this.button20);
             this.groupBox8.Location = new System.Drawing.Point(618, 10);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(200, 175);
+            this.groupBox8.Size = new System.Drawing.Size(200, 238);
             this.groupBox8.TabIndex = 13;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "繼承範例";
+            // 
+            // button26
+            // 
+            this.button26.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button26.Location = new System.Drawing.Point(14, 147);
+            this.button26.Name = "button26";
+            this.button26.Size = new System.Drawing.Size(180, 60);
+            this.button26.TabIndex = 8;
+            this.button26.Text = "繼承範例3";
+            this.button26.UseVisualStyleBackColor = true;
+            this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
             // button19
             // 
@@ -271,47 +181,14 @@
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
-            // groupBox10
-            // 
-            this.groupBox10.Controls.Add(this.button25);
-            this.groupBox10.Controls.Add(this.button26);
-            this.groupBox10.Location = new System.Drawing.Point(821, 17);
-            this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(200, 168);
-            this.groupBox10.TabIndex = 14;
-            this.groupBox10.TabStop = false;
-            this.groupBox10.Text = "寵物範例";
-            // 
-            // button25
-            // 
-            this.button25.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button25.Location = new System.Drawing.Point(15, 21);
-            this.button25.Name = "button25";
-            this.button25.Size = new System.Drawing.Size(180, 60);
-            this.button25.TabIndex = 9;
-            this.button25.Text = "寵物範例1";
-            this.button25.UseVisualStyleBackColor = true;
-            this.button25.Click += new System.EventHandler(this.button25_Click);
-            // 
-            // button26
-            // 
-            this.button26.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button26.Location = new System.Drawing.Point(15, 81);
-            this.button26.Name = "button26";
-            this.button26.Size = new System.Drawing.Size(180, 60);
-            this.button26.TabIndex = 8;
-            this.button26.Text = "寵物範例2";
-            this.button26.UseVisualStyleBackColor = true;
-            this.button26.Click += new System.EventHandler(this.button26_Click);
-            // 
             // groupBox14
             // 
             this.groupBox14.Controls.Add(this.pictureBox2);
             this.groupBox14.Controls.Add(this.pictureBox1);
             this.groupBox14.Controls.Add(this.pictureBox0);
-            this.groupBox14.Location = new System.Drawing.Point(829, 362);
+            this.groupBox14.Location = new System.Drawing.Point(618, 274);
             this.groupBox14.Name = "groupBox14";
-            this.groupBox14.Size = new System.Drawing.Size(200, 300);
+            this.groupBox14.Size = new System.Drawing.Size(406, 271);
             this.groupBox14.TabIndex = 14;
             this.groupBox14.TabStop = false;
             this.groupBox14.Text = "圖片範例";
@@ -389,6 +266,112 @@
             this.groupBox0.TabIndex = 12;
             this.groupBox0.TabStop = false;
             this.groupBox0.Text = "簡單使用類別";
+            // 
+            // bt_class29
+            // 
+            this.bt_class29.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_class29.Location = new System.Drawing.Point(404, 577);
+            this.bt_class29.Name = "bt_class29";
+            this.bt_class29.Size = new System.Drawing.Size(193, 60);
+            this.bt_class29.TabIndex = 25;
+            this.bt_class29.UseVisualStyleBackColor = true;
+            this.bt_class29.Click += new System.EventHandler(this.bt_class29_Click);
+            // 
+            // bt_class28
+            // 
+            this.bt_class28.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_class28.Location = new System.Drawing.Point(404, 515);
+            this.bt_class28.Name = "bt_class28";
+            this.bt_class28.Size = new System.Drawing.Size(193, 60);
+            this.bt_class28.TabIndex = 27;
+            this.bt_class28.UseVisualStyleBackColor = true;
+            this.bt_class28.Click += new System.EventHandler(this.bt_class28_Click);
+            // 
+            // bt_class27
+            // 
+            this.bt_class27.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_class27.Location = new System.Drawing.Point(404, 452);
+            this.bt_class27.Name = "bt_class27";
+            this.bt_class27.Size = new System.Drawing.Size(193, 60);
+            this.bt_class27.TabIndex = 30;
+            this.bt_class27.UseVisualStyleBackColor = true;
+            this.bt_class27.Click += new System.EventHandler(this.bt_class27_Click);
+            // 
+            // bt_class26
+            // 
+            this.bt_class26.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_class26.Location = new System.Drawing.Point(404, 386);
+            this.bt_class26.Name = "bt_class26";
+            this.bt_class26.Size = new System.Drawing.Size(193, 60);
+            this.bt_class26.TabIndex = 31;
+            this.bt_class26.UseVisualStyleBackColor = true;
+            this.bt_class26.Click += new System.EventHandler(this.bt_class26_Click);
+            // 
+            // bt_class25
+            // 
+            this.bt_class25.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_class25.Location = new System.Drawing.Point(404, 324);
+            this.bt_class25.Name = "bt_class25";
+            this.bt_class25.Size = new System.Drawing.Size(193, 60);
+            this.bt_class25.TabIndex = 26;
+            this.bt_class25.Text = "MyTime";
+            this.bt_class25.UseVisualStyleBackColor = true;
+            this.bt_class25.Click += new System.EventHandler(this.bt_class25_Click);
+            // 
+            // bt_class23
+            // 
+            this.bt_class23.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_class23.Location = new System.Drawing.Point(404, 202);
+            this.bt_class23.Name = "bt_class23";
+            this.bt_class23.Size = new System.Drawing.Size(193, 60);
+            this.bt_class23.TabIndex = 29;
+            this.bt_class23.Text = "class test";
+            this.bt_class23.UseVisualStyleBackColor = true;
+            this.bt_class23.Click += new System.EventHandler(this.bt_class23_Click);
+            // 
+            // bt_class21
+            // 
+            this.bt_class21.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_class21.Location = new System.Drawing.Point(404, 81);
+            this.bt_class21.Name = "bt_class21";
+            this.bt_class21.Size = new System.Drawing.Size(193, 60);
+            this.bt_class21.TabIndex = 28;
+            this.bt_class21.Text = "測試 MyDateTime 1";
+            this.bt_class21.UseVisualStyleBackColor = true;
+            this.bt_class21.Click += new System.EventHandler(this.bt_class21_Click);
+            // 
+            // bt_class24
+            // 
+            this.bt_class24.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_class24.Location = new System.Drawing.Point(404, 264);
+            this.bt_class24.Name = "bt_class24";
+            this.bt_class24.Size = new System.Drawing.Size(193, 60);
+            this.bt_class24.TabIndex = 23;
+            this.bt_class24.Text = "範例";
+            this.bt_class24.UseVisualStyleBackColor = true;
+            this.bt_class24.Click += new System.EventHandler(this.bt_class24_Click);
+            // 
+            // bt_class22
+            // 
+            this.bt_class22.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_class22.Location = new System.Drawing.Point(404, 142);
+            this.bt_class22.Name = "bt_class22";
+            this.bt_class22.Size = new System.Drawing.Size(193, 60);
+            this.bt_class22.TabIndex = 24;
+            this.bt_class22.Text = "測試 MyDateTime 2";
+            this.bt_class22.UseVisualStyleBackColor = true;
+            this.bt_class22.Click += new System.EventHandler(this.bt_class22_Click);
+            // 
+            // bt_class20
+            // 
+            this.bt_class20.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_class20.Location = new System.Drawing.Point(404, 21);
+            this.bt_class20.Name = "bt_class20";
+            this.bt_class20.Size = new System.Drawing.Size(193, 60);
+            this.bt_class20.TabIndex = 22;
+            this.bt_class20.Text = "測試 MyDateTime 0";
+            this.bt_class20.UseVisualStyleBackColor = true;
+            this.bt_class20.Click += new System.EventHandler(this.bt_class20_Click);
             // 
             // bt_class19
             // 
@@ -560,7 +543,7 @@
             this.bt_class03.Name = "bt_class03";
             this.bt_class03.Size = new System.Drawing.Size(193, 60);
             this.bt_class03.TabIndex = 9;
-            this.bt_class03.Text = "增加物件";
+            this.bt_class03.Text = "類別做成的串列";
             this.bt_class03.UseVisualStyleBackColor = true;
             this.bt_class03.Click += new System.EventHandler(this.bt_class03_Click);
             // 
@@ -593,7 +576,7 @@
             this.bt_class02.Name = "bt_class02";
             this.bt_class02.Size = new System.Drawing.Size(193, 60);
             this.bt_class02.TabIndex = 8;
-            this.bt_class02.Text = "增加物件";
+            this.bt_class02.Text = "類別做成的串列";
             this.bt_class02.UseVisualStyleBackColor = true;
             this.bt_class02.Click += new System.EventHandler(this.bt_class02_Click);
             // 
@@ -608,121 +591,14 @@
             this.bt_class00.UseVisualStyleBackColor = true;
             this.bt_class00.Click += new System.EventHandler(this.bt_class00_Click);
             // 
-            // bt_class29
-            // 
-            this.bt_class29.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_class29.Location = new System.Drawing.Point(404, 577);
-            this.bt_class29.Name = "bt_class29";
-            this.bt_class29.Size = new System.Drawing.Size(193, 60);
-            this.bt_class29.TabIndex = 25;
-            this.bt_class29.UseVisualStyleBackColor = true;
-            this.bt_class29.Click += new System.EventHandler(this.bt_class29_Click);
-            // 
-            // bt_class28
-            // 
-            this.bt_class28.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_class28.Location = new System.Drawing.Point(404, 515);
-            this.bt_class28.Name = "bt_class28";
-            this.bt_class28.Size = new System.Drawing.Size(193, 60);
-            this.bt_class28.TabIndex = 27;
-            this.bt_class28.UseVisualStyleBackColor = true;
-            this.bt_class28.Click += new System.EventHandler(this.bt_class28_Click);
-            // 
-            // bt_class27
-            // 
-            this.bt_class27.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_class27.Location = new System.Drawing.Point(404, 452);
-            this.bt_class27.Name = "bt_class27";
-            this.bt_class27.Size = new System.Drawing.Size(193, 60);
-            this.bt_class27.TabIndex = 30;
-            this.bt_class27.UseVisualStyleBackColor = true;
-            this.bt_class27.Click += new System.EventHandler(this.bt_class27_Click);
-            // 
-            // bt_class26
-            // 
-            this.bt_class26.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_class26.Location = new System.Drawing.Point(404, 386);
-            this.bt_class26.Name = "bt_class26";
-            this.bt_class26.Size = new System.Drawing.Size(193, 60);
-            this.bt_class26.TabIndex = 31;
-            this.bt_class26.UseVisualStyleBackColor = true;
-            this.bt_class26.Click += new System.EventHandler(this.bt_class26_Click);
-            // 
-            // bt_class25
-            // 
-            this.bt_class25.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_class25.Location = new System.Drawing.Point(404, 324);
-            this.bt_class25.Name = "bt_class25";
-            this.bt_class25.Size = new System.Drawing.Size(193, 60);
-            this.bt_class25.TabIndex = 26;
-            this.bt_class25.UseVisualStyleBackColor = true;
-            this.bt_class25.Click += new System.EventHandler(this.bt_class25_Click);
-            // 
-            // bt_class23
-            // 
-            this.bt_class23.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_class23.Location = new System.Drawing.Point(404, 202);
-            this.bt_class23.Name = "bt_class23";
-            this.bt_class23.Size = new System.Drawing.Size(193, 60);
-            this.bt_class23.TabIndex = 29;
-            this.bt_class23.Text = "class test";
-            this.bt_class23.UseVisualStyleBackColor = true;
-            this.bt_class23.Click += new System.EventHandler(this.bt_class23_Click);
-            // 
-            // bt_class21
-            // 
-            this.bt_class21.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_class21.Location = new System.Drawing.Point(404, 81);
-            this.bt_class21.Name = "bt_class21";
-            this.bt_class21.Size = new System.Drawing.Size(193, 60);
-            this.bt_class21.TabIndex = 28;
-            this.bt_class21.Text = "測試 MyDateTime 1";
-            this.bt_class21.UseVisualStyleBackColor = true;
-            this.bt_class21.Click += new System.EventHandler(this.bt_class21_Click);
-            // 
-            // bt_class24
-            // 
-            this.bt_class24.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_class24.Location = new System.Drawing.Point(404, 264);
-            this.bt_class24.Name = "bt_class24";
-            this.bt_class24.Size = new System.Drawing.Size(193, 60);
-            this.bt_class24.TabIndex = 23;
-            this.bt_class24.UseVisualStyleBackColor = true;
-            this.bt_class24.Click += new System.EventHandler(this.bt_class24_Click);
-            // 
-            // bt_class22
-            // 
-            this.bt_class22.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_class22.Location = new System.Drawing.Point(404, 142);
-            this.bt_class22.Name = "bt_class22";
-            this.bt_class22.Size = new System.Drawing.Size(193, 60);
-            this.bt_class22.TabIndex = 24;
-            this.bt_class22.Text = "測試 MyDateTime 2";
-            this.bt_class22.UseVisualStyleBackColor = true;
-            this.bt_class22.Click += new System.EventHandler(this.bt_class22_Click);
-            // 
-            // bt_class20
-            // 
-            this.bt_class20.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_class20.Location = new System.Drawing.Point(404, 21);
-            this.bt_class20.Name = "bt_class20";
-            this.bt_class20.Size = new System.Drawing.Size(193, 60);
-            this.bt_class20.TabIndex = 22;
-            this.bt_class20.Text = "測試 MyDateTime 0";
-            this.bt_class20.UseVisualStyleBackColor = true;
-            this.bt_class20.Click += new System.EventHandler(this.bt_class20_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1146, 679);
             this.Controls.Add(this.groupBox0);
-            this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox14);
-            this.Controls.Add(this.groupBox10);
             this.Controls.Add(this.groupBox8);
-            this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.richTextBox1);
@@ -730,10 +606,7 @@
             this.Text = "Class Test";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox7.ResumeLayout(false);
             this.groupBox8.ResumeLayout(false);
-            this.groupBox10.ResumeLayout(false);
             this.groupBox14.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -749,20 +622,10 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.Button button13;
-        private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Button bt_clear;
-        private System.Windows.Forms.GroupBox groupBox7;
-        private System.Windows.Forms.Button button15;
-        private System.Windows.Forms.Button button16;
-        private System.Windows.Forms.Button button17;
-        private System.Windows.Forms.Button button18;
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.Button button19;
         private System.Windows.Forms.Button button20;
-        private System.Windows.Forms.GroupBox groupBox10;
-        private System.Windows.Forms.Button button25;
         private System.Windows.Forms.Button button26;
         private System.Windows.Forms.GroupBox groupBox14;
         private System.Windows.Forms.PictureBox pictureBox0;

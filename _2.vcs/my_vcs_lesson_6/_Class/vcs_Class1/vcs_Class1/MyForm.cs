@@ -54,5 +54,23 @@ namespace vcs_Class1
             //顯示對話方塊
             MessageBox.Show(txtName.Text + " 您好");
         }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // MyForm
+            // 
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Name = "MyForm";
+            this.Load += new System.EventHandler(this.MyForm_Load);
+            this.ResumeLayout(false);
+
+        }
+
+        private void MyForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

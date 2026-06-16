@@ -358,53 +358,60 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
         private int Minute;
         private int Second;
 
-        // constructor
-        public MyTime(int h, int m, int s)
+        // 預設建構子
+        public MyTime()
         {
-            setTime(h, m, s);
         }
 
-        public MyTime(int h, int m)
+        // 建構子
+        public MyTime(int hh, int mm)
         {
-            setTime(h, m);
+            setTime(hh, mm);
         }
 
-        // default constructor
-        public MyTime() { }
+        // 建構子
+        public MyTime(int hh, int mm, int ss)
+        {
+            setTime(hh, mm, ss);
+        }
 
-        public void setTime(int h, int m, int s)
+        public void setTime(int hh, int mm, int ss)
         {
             // 假設超出範圍，則不處理 
             /*
-            if (h < 0 || h > 23) return;
-            if (m < 0 || m > 59) return;
-            if (s < 0 || s > 59) return;
-            Hour = h; Minute = m; Second = s;
+            if (hh < 0 || hh > 23) return;
+            if (mm < 0 || mm > 59) return;
+            if (ss < 0 || ss > 59) return;
+            Hour = hh; Minute = mm; Second = ss;
             */
-            if (validTime(h, m, s))
+            if (validTime(hh, mm, ss))
             {
-                Hour = h; Minute = m; Second = s;
+                Hour = hh;
+                Minute = mm;
+                Second = ss;
             }
         }
 
-        public void setTime(int h, int m)
+        public void setTime(int hh, int mm)
         {
             /*
-            if (h < 0 || h > 23) return;
-            if (m < 0 || m > 59) return;
-            Hour = h; Minute = m; Second = 0;
+            if (hh < 0 || hh > 23) return;
+            if (mm < 0 || mm > 59) return;
+            Hour = hh; Minute = mm; Second = 0;
             */
-            if (validTime(h, m, 0))
+            if (validTime(hh, mm, 0))
             {
-                Hour = h; Minute = m; Second = 0;
+                Hour = hh;
+                Minute = mm;
+                Second = 0;
             }
         }
 
-        private bool validTime(int h, int m, int s)
+        private bool validTime(int hh, int mm, int ss)
         {
-            if (h < 0 || h > 23) return false;
-            if (m < 0 || m > 59) return false;
-            if (s < 0 || s > 59) return false;
+            if (hh < 0 || hh > 23) return false;
+            if (mm < 0 || mm > 59) return false;
+            if (ss < 0 || ss > 59) return false;
             return true;  // 合法資料 
         }
 
@@ -456,6 +463,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             }
         }
 
+        //解構子
         ~MyTime()
         { //不可加上public
             //MessageBox.Show("*** 物件已釋放 ***"); //測試用
@@ -600,64 +608,6 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
 
     //------------------------------------------------------------  # 60個
 
-    public class StudentA           //定義StudentA類別
-    {
-        public string Name;        //Name姓名欄位宣告為public
-        private int _Score;        //_Score成績欄位宣告為private
-        private static int _Total = 0;  //_Total用來計算共產生多少個物件，宣告為static和private
-
-        public StudentA()                //建構式1, 無參數, 不做任何事
-        {
-            _Total++;                 //_Total++，物件總數加1
-        }
-
-        public StudentA(string _vName)  //建構式2, 可設定姓名
-        {
-            Name = _vName;
-            _Total++;                 //_Total++，物件總數加1
-        }
-
-        public StudentA(string _vName, int _vScore) //建構式3, 可設定姓名和分數
-        {
-            Name = _vName;
-            Score = _vScore;
-            _Total++;                 //_Total++，物件總數加1
-        }
-
-        public int Score  //建立Score屬性，此屬性限制在0~100  // 有get有set, 可讀可寫
-        {
-            get
-            {
-                return _Score;
-            }
-            set
-            {
-                if (value > 100)
-                    value = 100;   //Score屬性最大值為100
-                if (value < 0)
-                    value = 0;       //Score屬性最小值為0
-                _Score = value;
-            }
-        }
-
-        public void ShowMsg()      //ShowMsg顯示姓名與成績的方法
-        {
-            MessageBox.Show(Name + "同學的分數是 " + Convert.ToString(Score));
-        }
-
-        public string GetMsg()   //GetMsg傳回姓名與成績的方法
-        {
-            return Name + "同學的分數是 " + Convert.ToString(Score);
-        }
-
-        public static string GetTotalStudent()   //傳回共產生多少學生物件
-        {
-            return "本班共有 " + Convert.ToString(_Total) + " 位同學";
-        }
-    }
-
-    //------------------------------------------------------------  # 60個
-
     class Color2Gray
     {
         public Bitmap bitmap1; // 原圖形
@@ -668,7 +618,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
         {
             this.bitmap1 = bmp;
             bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
-            bitmap3 = bmp;
+            bitmap3 = (Bitmap)bmp.Clone();
         }
 
         public void do_Color2Gray()
@@ -696,6 +646,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
         {
             Graphics g = Graphics.FromImage(bitmap3);
             g.DrawRectangle(Pens.Red, 10, 10, 100, 100);
+            g.DrawRectangle(Pens.Red, 0, 0, bitmap3.Width, bitmap3.Height);
         }
     }
 
@@ -817,16 +768,24 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
     {
         // 宣告_speed為私有變數，表示該變數只能在Car類別內使用
         private int _speed;
+
         // 定義GetSpeed()方法用來傳回_speed
         public int GetSpeed()
         {
             return _speed;
         }
+
         // 定義SetSpeed()方法用來設定_speed
         public void SetSpeed(int vSpeed)
         {
-            if (vSpeed < 0) vSpeed = 0;		// 設定速度不得低於 0
-            if (vSpeed > 200) vSpeed = 200;	// 設定速度不得高於 200
+            if (vSpeed < 0)
+            {
+                vSpeed = 0;		// 設定速度不得低於 0
+            }
+            if (vSpeed > 200)
+            {
+                vSpeed = 200;	// 設定速度不得高於 200
+            }
             _speed = vSpeed;
         }
     }
@@ -835,8 +794,9 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
     {
         // 宣告_speed私有變數用來存放車子的速度值
         private int _speed = 0;
+
         // 定義Speed速度屬性
-        public int Speed
+        public int Speed  // 寫入有條件, 讀出無條件
         {
             get
             {
@@ -844,95 +804,55 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             }
             set
             {
-                if (value < 0) value = 0;       // 速度不可小於0
-                if (value > 200) value = 200;   // 速度不可大於200
+                if (value < 0)
+                {
+                    value = 0;       // 速度不可小於0
+                }
+                if (value > 200)
+                {
+                    value = 200;   // 速度不可大於200
+                }
                 _speed = value;                 // 設定速度
             }
         }
+
         // 定義Accelerate()方法，用來指定目前車子速度+1 
         public void Accelerate()
         {
             _speed++;					// 速度 + 1
-            if (_speed > 200) _speed = 200;	// 檢查速度不可超過 200
+            if (_speed > 200)
+            {
+                _speed = 200;	// 檢查速度不可超過 200
+            }
         }
     }
+
+    //------------------------------------------------------------  # 60個
 
     class Student1
     {
         private int _Height, _Weight;
+
         public Student1()
         {
             _Weight = 48;
             _Height = 160;
         }
+
         // Student類別的建構式，須設定一個引數
         public Student1(int w)
         {
             _Weight = w;  		// 初始化_Weight欄位
             _Height = 160;	      	// 初始化_Height欄位的值為160
         }
+
         // Student類別的建構式，須設定兩個引數
         public Student1(int w, int h)
         {
             _Weight = w;
             _Height = h;
         }
-        // Student類別的GetShow()方法，可顯示學生的身高和體重
-        public void GetShow()
-        {
-            //richTextBox1.Text +=string.Format(" 身高是: {0} ", _Height);
-            //richTextBox1.Text += string.Format(" 體重是: {0} \n", _Weight);
-        }
-    }
 
-    class Student2
-    {
-        private int _Height, _Weight;
-        //public Student()
-        //{
-        //    _Weight = 48;
-        //    _Height = 160;
-        // }
-        // Student類別的建構式，須設定一個引數
-        public Student2(int w)
-        {
-            _Weight = w;  		// 初始化_Weight欄位
-            _Height = 160;	      	// 初始化_Height欄位的值為160
-        }
-        // Student類別的建構式，須設定兩個引數
-        public Student2(int w, int h)
-        {
-            _Weight = w;
-            _Height = h;
-        }
-        // Student類別的GetShow()方法，可顯示學生的身高和體重
-        public void GetShow()
-        {
-            //richTextBox1.Text +=string.Format(" 身高是: {0} ", _Height);
-            //richTextBox1.Text += string.Format(" 體重是: {0} \n", _Weight);
-        }
-    }
-
-    class Student3
-    {
-        private int _Height, _Weight;
-        public Student3()
-        {
-            //_Weight = 48;
-            //_Height = 160;
-        }
-        // Student類別的建構式，須設定一個引數
-        public Student3(int w)
-        {
-            _Weight = w;  		// 初始化_Weight欄位
-            _Height = 160;	      	// 初始化_Height欄位的值為160
-        }
-        // Student類別的建構式，須設定兩個引數
-        public Student3(int w, int h)
-        {
-            _Weight = w;
-            _Height = h;
-        }
         // Student類別的GetShow()方法，可顯示學生的身高和體重
         public void GetShow()
         {

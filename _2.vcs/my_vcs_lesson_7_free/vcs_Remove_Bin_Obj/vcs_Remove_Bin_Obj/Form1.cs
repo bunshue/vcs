@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;  // for Directory
+using System.Diagnostics;   //for Process
 
 namespace vcs_Remove_Bin_Obj
 {
@@ -34,6 +35,12 @@ namespace vcs_Remove_Bin_Obj
 
             //------------------------------------------------------------  # 60個
 
+            //C# 跨 Thread 存取 UI
+            //Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效	same
+            Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
+
+            //------------------------------------------------------------  # 60個
+
             //取得目前所在路徑
             string currentPath = Directory.GetCurrentDirectory();
             search_path = currentPath;
@@ -57,11 +64,13 @@ namespace vcs_Remove_Bin_Obj
             checkBox9.Location = new Point(x_st, y_st + dy * 6);
             checkBox10.Location = new Point(x_st, y_st + dy * 7);
             button1.Location = new Point(x_st, y_st + dy * 8);
+            button5.Location = new Point(x_st, y_st + dy * 9 + 10);
 
-            button2.Location = new Point(x_st, y_st + dy * 10);
-            button3.Location = new Point(x_st, y_st + dy * 11 + 30);
-            button4.Location = new Point(x_st + 115, y_st + dy * 10);
-            bt_open_dir2.Location = new Point(x_st + 115 + 50, y_st + dy * 10 - 60);
+            button2.Location = new Point(x_st, y_st + dy * 11);
+            button3.Location = new Point(x_st, y_st + dy * 12 + 30);
+            bt_setup.Location = new Point(x_st + 120, y_st + dy * 12 + 30);
+            button4.Location = new Point(x_st + 115, y_st + dy * 11);
+            bt_open_dir2.Location = new Point(x_st + 115 + 50, y_st + dy * 11 - 60);
             groupBox_remove.Location = new Point(x_st + 170, y_st + dy * 0);
 
             lb_main_mesg.Location = new Point(x_st + dx * 1 + 50, y_st + dy * 0);
@@ -874,6 +883,96 @@ namespace vcs_Remove_Bin_Obj
                 result_str += "尚未選擇\n";
             }
         }
+
+        private void bt_setup_Click(object sender, EventArgs e)
+        {
+            Form_Setup frm = new Form_Setup();    //實體化 Form_Setup 視窗物件
+            frm.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
+            frm.ShowDialog();   //顯示 frm 視窗
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            button1_Click(sender, e);
+
+            //------------------------------------------------------------  # 60個
+
+            string git_path = Properties.Settings.Default.git_path;
+            richTextBox1.Text += git_path + "\n";
+            if (git_path == "")
+            {
+                richTextBox1.Text += "無 git 路徑\n";
+                return;
+            }
+            else if (File.Exists(git_path) == false)  // 確認檔案是否存在
+            {
+                richTextBox1.Text += "git 程式路徑錯誤\n";
+                return;
+            }
+
+            string exe_filename = "cmd";
+            //string parameters = @" /C C:\Xilinx\SDK\2019.1\bin\bootgen -image C:\_git\ims1\iMS_Video\iMS_Video.sdk\output.bif -arch zynq -o C:\_git\ims1\iMS_Video\iMS_Video.sdk\BOOT.bin";
+            //string parameters = @" /C C:\Xilinx\SDK\2019.1\bin\bootgen -image C:\_git\ims1\iMS_Video\iMS_Video.sdk\output.bif -arch zynq -o " + filename;
+            string parameters = " /C C:/Users/070601/AppData/Local/Programs/Git/bin/git.exe pull --progress -v --no-rebase \"origin\"";
+
+            string git_command = " /C " + git_path + " pull --progress -v --no-rebase \"origin\"";
+            //string parameters = " /C C:/Users/070601/AppData/Local/Programs/Git/bin/git.exe pull --progress -v --no-rebase \"origin\"";
+            richTextBox1.Text += git_command + "\n";
+
+            parameters = git_command;
+            run_command_line_process_async(exe_filename, parameters);
+        }
+
+        //非同步 Process使用
+        void run_command_line_process_async(string exe_filename, string command)
+        {
+            Process process_async = new Process();    //創建一個進程用於調用外部程序
+
+            process_async.StartInfo.FileName = exe_filename;  //設定要啟動的程式
+            //process_async.StartInfo.Arguments = "/c " + command; //設定程式執行參數, 也可直接把command寫在這裡, 就不用後面的 StandardInput.WriteLine 了, 要加/c
+            //process_async.StartInfo.Arguments = "/c systeminfo";  //可, 要加/c
+            process_async.StartInfo.Arguments = command;
+            //process_async.StandardInput.AutoFlush = true;
+
+            process_async.StartInfo.UseShellExecute = false;  //false, 關閉Shell的使用, 是否指定操作系統外殼進程啟動程序, 可能接受來自調用程序的輸入信息
+            process_async.StartInfo.RedirectStandardInput = true; //重定向標準輸入, 可能接受來自調用程序的輸入信息
+            process_async.StartInfo.RedirectStandardOutput = true; //重定向標準輸出, 由調用程序獲取輸出信息
+            process_async.StartInfo.RedirectStandardError = true; //重定向錯誤輸出
+            process_async.StartInfo.CreateNoWindow = true; //true: 設置不顯示程式窗口, false: 出現cmd的黑窗體
+            process_async.StartInfo.ErrorDialog = false;
+            //process_async.StartInfo.WindowStyle = ProcessWindowStyle.Normal;  //測不出來
+            //process_async.StartInfo.WindowStyle = ProcessWindowStyle.Hidden,
+
+            process_async.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+
+            //設定非同步資料處理 output and error handlers
+            process_async.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
+            process_async.ErrorDataReceived += new DataReceivedEventHandler(OutputHandler);
+
+            process_async.Start();    //啟動程式
+
+            //啟動讀取資料輸出與錯誤輸出
+            process_async.BeginOutputReadLine();
+            process_async.BeginErrorReadLine();
+
+            richTextBox1.Text += "等待程式結束.......\n";
+            process_async.WaitForExit();	//等待退出
+            richTextBox1.Text += "程式結束\n";
+        }
+
+        void OutputHandler(object sendingProcess, DataReceivedEventArgs outLine)
+        {
+            //目前無法做到換行, 也不能操作richTextBox的內容
+            richTextBox1.Text += outLine.Data;
+
+            //跳至最後面 fail
+            //richTextBox1.Focus();
+            //richTextBox1.Select(richTextBox1.Text.Length, 0);
+        }
+
+        //------------------------------------------------------------  # 60個
     }
 }
 

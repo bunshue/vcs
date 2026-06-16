@@ -1563,3 +1563,96 @@ Console.WriteLine(array2D.GetUpperBound(1) + 1);	//10
 */
 
 
+/*
+
+
+陣列 一維陣列 二維陣列
+
+//string[] names = new string[] { "張三", "李四", "王五" };
+//string[] items = new string[] { "螢幕", "滑鼠", "鍵盤" };
+
+
+
+        private string[] DirName()
+        {
+            int j = 0;
+            string[] str = new string[26];
+            for (int i = 65; i <91;i++ )
+            {
+                str [j]= Convert.ToChar(i).ToString()+":";
+                j++;
+            }
+            return str;
+        }
+
+
+//字串轉拜列
+string mystring="this is a string"
+char[] mychars=mystring.ToCharArray();
+
+//foreach循環處理char數組
+foreach(char mychar in mystring)
+{
+	Console.WriteLine(mychar);
+}
+mystring.Length //獲取元素的個數 
+
+//------------------------------------------------------------  # 60個
+
+
+控件陣列 宣告
+PictureBox[] DisplayReference = new PictureBox[4];
+GroupBox[] camOptions = new GroupBox[4];
+
+控件陣列 使用
+this.DisplayReference[0] = this.pictureBox1;
+this.DisplayReference[1] = this.pictureBox2;
+this.DisplayReference[2] = this.pictureBox3;
+this.DisplayReference[3] = this.pictureBox4;
+
+this.camOptions[0] = this.groupBox5;
+this.camOptions[1] = this.groupBox6;
+this.camOptions[2] = this.groupBox7;
+this.camOptions[3] = this.groupBox8;
+
+物件陣列 宣告
+CameraMonitor[] CamMonitor = new CameraMonitor[4];
+
+物件陣列 使用
+this.CamMonitor[0] = new CameraMonitor(xxxx, yyyy, zzzz);
+this.CamMonitor[1] = new CameraMonitor(xxxx, yyyy, zzzz);
+this.CamMonitor[2] = new CameraMonitor(xxxx, yyyy, zzzz);
+this.CamMonitor[3] = new CameraMonitor(xxxx, yyyy, zzzz);
+
+6060
+
+string[] engNum = new string[] { "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten" };
+lblShow.Text = "英文：" + engNum[n];  
+
+6060
+//製作一個PictureBox Array
+            // Make an array holding the PictureBoxes.
+            PictureBox[] pics = { PictureBox1, PictureBox2, PictureBox3, PictureBox4 };
+
+6060
+
+List如同Array一樣,可以建立許多陣列元素,但是卻比Array來的靈活.
+
+例如要建立一陣列元素,Array需要先宣告陣列長度,而List不需要.
+
+Array->
+
+int[] myArray = new int[5] ;
+
+int[] myArray = { 1, 2, 3, 4, 5 };
+
+List->
+
+List<int> myLists = new List<int>();
+
+另外List如同一張資料表,你可以對它編輯,如加入某一列或刪除某一列.
+
+6060
+
+*/
+
