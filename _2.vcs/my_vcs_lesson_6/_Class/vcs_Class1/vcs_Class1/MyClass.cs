@@ -161,7 +161,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             return ctr;
         }
 
-        // 利用base(~)呼叫父類別Person的建構子
+        // 利用base(~)呼叫父類別Person的建構式
         public Student()
         {
             Chinese = Math = 0;  //預設值是0
@@ -235,11 +235,13 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
         private string Rank; //新增私有的資料成員
         // 靜態成員static members
         private static int ctr = 0;
+
         public static new int counter()
         {
             return ctr;
         }
-        // 建構子
+
+        // 建構式
         public Teacher()
         {
             Rank = "Assistant Professor";
@@ -297,16 +299,67 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
     class Circle
     {
         //protected int radius; // 子類別可以直接存取 
-        private int radius;
-        public Circle() { radius = 2; }  // 預設半徑為2
-        public Circle(int r) { radius = r; }
+        //private string pname;
+        //private int radius;
+        private static int _Total = 0;  //_Total用來計算共產生多少個物件，宣告為static和private
+        private static int _radius;
+
+        //public int radius { get; set; }  // 有get有set簡寫, 可讀可寫, same
+        public int radius
+        {
+            get
+            {
+                return _radius;
+            }
+            set
+            {
+                _radius = value;
+            }
+        }
+
+        public Circle()
+        {
+            radius = 2;  // 預設半徑為2
+            _Total++;                 //_Total++，物件總數加1
+        }
+
+        public Circle(int r)
+        {
+            radius = r;
+            _Total++;                 //_Total++，物件總數加1
+        }
+
         public int getRadius()
         {
             return radius;
         }
+
         public double getArea()
         {
             return Math.PI * radius * radius;
+        }
+
+        //類別內取出資料的方法 override string ToString()
+        public override string ToString()
+        {
+            return string.Format("圓形 資料 : 半徑 : {0}, 面積 : {1}", radius, getArea());
+            //return "圓形 資料 : 半徑 : " + radius.ToString() + ", 面積 : " + getArea();
+        }
+
+        public void ShowMsg111()     //ShowMsg顯示姓名與成績的方法
+        {
+            MessageBox.Show("圓形 資料 : 半徑 : " + radius.ToString() + ", 面積 : " + getArea());
+        }
+
+        public string GetMsg()   //GetMsg傳回訊息的方法
+        {
+            return "圓形 資料 : 半徑 : " + radius.ToString() + ", 面積 : " + getArea();
+        }
+
+        //public static string GetTotalStudent()   //傳回共產生多少學生物件
+        public static string GetTotalObject()   //傳回共產生多少物件
+        {
+            return "共使用 : " + Convert.ToString(_Total) + " 個物件";
         }
     }
 
@@ -314,7 +367,10 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
     {
         int length; // private
 
-        public Cylinder() { length = 3; }  // 預設高度為3
+        public Cylinder()
+        {
+            length = 3;  // 預設高度為3
+        }
         /*
         public Cylinder(int r, int l)
         {
@@ -333,6 +389,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
         {
             return length;
         }
+
         /*
         public new double getArea()
         {
@@ -348,6 +405,13 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             double cl = 2 * Math.PI * getRadius(); // base.getRadius();亦可
             return 2 * ca + cl * length;
         }
+
+        //類別內取出資料的方法 override string ToString()
+        public override string ToString()
+        {
+            return string.Format("圓柱體 資料 : 半徑 : {0}, 底面積 : {1}, 高度 : {2}, 表面積 : {3}",
+                getRadius(), base.getArea(), length, getArea());
+        }
     }
 
     //------------------------------------------------------------  # 60個
@@ -358,18 +422,18 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
         private int Minute;
         private int Second;
 
-        // 預設建構子
+        // 預設建構式
         public MyTime()
         {
         }
 
-        // 建構子
+        // 建構式
         public MyTime(int hh, int mm)
         {
             setTime(hh, mm);
         }
 
-        // 建構子
+        // 建構式
         public MyTime(int hh, int mm, int ss)
         {
             setTime(hh, mm, ss);
@@ -463,7 +527,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             }
         }
 
-        //解構子
+        //解構式
         ~MyTime()
         { //不可加上public
             //MessageBox.Show("*** 物件已釋放 ***"); //測試用
@@ -595,7 +659,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             this.weight -= 1;
         }
 
-        public void ShowMsg()
+        public void ShowMsg222()
         {
             Console.WriteLine("名稱:" + this.name + " 品種:" + this.type + " 體重:" + this.weight);
         }
@@ -642,7 +706,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             }
         }
 
-        public void Draw()
+        public void do_Draw()
         {
             Graphics g = Graphics.FromImage(bitmap3);
             g.DrawRectangle(Pens.Red, 10, 10, 100, 100);
@@ -688,7 +752,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             return this.weight;
         }
 
-        public virtual void ShowMsg()
+        public virtual void ShowMsg444()
         {
             Console.WriteLine("名字:" + this.name + " 類型:" + this.type + " 重量:" + this.weight);
         }
@@ -724,7 +788,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             return this.pet;
         }
 
-        public override void ShowMsg()
+        public override void ShowMsg444()
         {
             Console.WriteLine("名字:" + this.getname() + " 重量:" + this.getweight() + " 身高:" + this.height);
         }
@@ -833,22 +897,26 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
     {
         private int _Height, _Weight;
 
+        // 無參數建構式, 使用2個預設值
         public Student1()
         {
+            Console.WriteLine("建立一個Student1的物件a");
             _Weight = 48;
             _Height = 160;
         }
 
-        // Student類別的建構式，須設定一個引數
+        // 1參數建構式, 使用1個預設值
         public Student1(int w)
         {
-            _Weight = w;  		// 初始化_Weight欄位
-            _Height = 160;	      	// 初始化_Height欄位的值為160
+            Console.WriteLine("建立一個Student1的物件b");
+            _Weight = w;  // 初始化_Weight欄位
+            _Height = 160;  // 初始化_Height欄位的值為160
         }
 
-        // Student類別的建構式，須設定兩個引數
+        // 2參數建構式
         public Student1(int w, int h)
         {
+            Console.WriteLine("建立一個Student1的物件c");
             _Weight = w;
             _Height = h;
         }
@@ -858,6 +926,12 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
         {
             //richTextBox1.Text +=" 身高是: {0} "+ _Height+ "\n";
             //richTextBox1.Text +=" 體重是: {0} \n"+ _Weight+ "\n";
+        }
+
+        //解構式
+        ~Student1()
+        {
+            Console.WriteLine("銷毀一個Student1的物件");
         }
     }
 }
@@ -873,3 +947,21 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
 /*  可搬出
 
 */
+
+/*
+建構式 = 建構子, 使用 前者
+解構式 = 解構子, 使用 前者
+*/
+
+/*
+解構式為同類別名稱的無參數無回傳的成員函式前加上波浪號~，
+用途為清除物件佔用的資源，例如new配置的動態記憶體成員。
+
+解構式為同類別名稱的無參數無回傳的成員函式前加上波浪號~，
+用途為清除物件佔用的資源，例如new配置的動態記憶體成員。
+
+由於解構式只能是無參數函式，所以一個類別只會有一個解構式。
+若未定義解構式則編譯器會自動產生一個無實作的解構式。
+在物件生命週期結束時，即離開執行程式範圍時解構式會自動被呼叫。
+*/
+

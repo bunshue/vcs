@@ -325,7 +325,6 @@
             this.bt_class23.Name = "bt_class23";
             this.bt_class23.Size = new System.Drawing.Size(193, 60);
             this.bt_class23.TabIndex = 29;
-            this.bt_class23.Text = "class test";
             this.bt_class23.UseVisualStyleBackColor = true;
             this.bt_class23.Click += new System.EventHandler(this.bt_class23_Click);
             // 
@@ -380,6 +379,7 @@
             this.bt_class19.Name = "bt_class19";
             this.bt_class19.Size = new System.Drawing.Size(193, 60);
             this.bt_class19.TabIndex = 15;
+            this.bt_class19.Text = "ClassCar";
             this.bt_class19.UseVisualStyleBackColor = true;
             this.bt_class19.Click += new System.EventHandler(this.bt_class19_Click);
             // 
@@ -390,7 +390,6 @@
             this.bt_class18.Name = "bt_class18";
             this.bt_class18.Size = new System.Drawing.Size(193, 60);
             this.bt_class18.TabIndex = 17;
-            this.bt_class18.Text = "使用類別的靜態方法";
             this.bt_class18.UseVisualStyleBackColor = true;
             this.bt_class18.Click += new System.EventHandler(this.bt_class18_Click);
             // 
@@ -401,7 +400,7 @@
             this.bt_class17.Name = "bt_class17";
             this.bt_class17.Size = new System.Drawing.Size(193, 60);
             this.bt_class17.TabIndex = 20;
-            this.bt_class17.Text = "使用 類別方法 Logger";
+            this.bt_class17.Text = "使用 類別方法";
             this.bt_class17.UseVisualStyleBackColor = true;
             this.bt_class17.Click += new System.EventHandler(this.bt_class17_Click);
             // 
@@ -499,7 +498,6 @@
             this.bt_class08.Name = "bt_class08";
             this.bt_class08.Size = new System.Drawing.Size(193, 60);
             this.bt_class08.TabIndex = 9;
-            this.bt_class08.Text = "建構子和解構子";
             this.bt_class08.UseVisualStyleBackColor = true;
             this.bt_class08.Click += new System.EventHandler(this.bt_class08_Click);
             // 
@@ -543,7 +541,7 @@
             this.bt_class03.Name = "bt_class03";
             this.bt_class03.Size = new System.Drawing.Size(193, 60);
             this.bt_class03.TabIndex = 9;
-            this.bt_class03.Text = "類別做成的串列";
+            this.bt_class03.Text = "進行記憶體回收工作";
             this.bt_class03.UseVisualStyleBackColor = true;
             this.bt_class03.Click += new System.EventHandler(this.bt_class03_Click);
             // 
@@ -565,7 +563,6 @@
             this.bt_class04.Name = "bt_class04";
             this.bt_class04.Size = new System.Drawing.Size(193, 60);
             this.bt_class04.TabIndex = 8;
-            this.bt_class04.Text = "增加物件";
             this.bt_class04.UseVisualStyleBackColor = true;
             this.bt_class04.Click += new System.EventHandler(this.bt_class04_Click);
             // 
@@ -576,7 +573,7 @@
             this.bt_class02.Name = "bt_class02";
             this.bt_class02.Size = new System.Drawing.Size(193, 60);
             this.bt_class02.TabIndex = 8;
-            this.bt_class02.Text = "類別做成的串列";
+            this.bt_class02.Text = "建構式和解構式";
             this.bt_class02.UseVisualStyleBackColor = true;
             this.bt_class02.Click += new System.EventHandler(this.bt_class02_Click);
             // 

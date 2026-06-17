@@ -1,4 +1,39 @@
 ﻿
+
+DT 範例
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Id", typeof(string));
+            dt.Columns.Add("Name", typeof(string));
+            dt.Columns.Add("Address", typeof(string));
+            dt.PrimaryKey = new DataColumn[] { dt.Columns[0] };
+
+            dt.Rows.Add("0001", "張三", "武漢市");
+            dt.Rows.Add("0002", "李四", "北京市");
+            dt.AcceptChanges();
+            dt.Rows.Add("0003", "王五", "深圳市");
+
+
+
+        public static DataTable DbNullInt()
+        {
+
+            return table;
+        }
+
+            DataTable table = new DataTable();
+            table.Columns.Add("Id", typeof(long));
+            table.Columns.Add("Name", typeof(string));
+
+            DataColumn column;
+            column = new DataColumn("DepartmentId", System.Type.GetType("System.Int32"));
+            column.AllowDBNull = true;
+            table.Columns.Add(column);
+
+            table.Rows.Add(1, "Smith", DBNull.Value);
+            table.Rows.Add(2, "Hook", 1);
+
+
+
 /*
 Bitmap bmp = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\BMW.jfif");
 e.Graphics.DrawImage(bmp, pt[i].X, pt[i].Y, 100, 100);
