@@ -323,7 +323,7 @@ namespace vcs_Class1
 
             myself.ShowMsg444();  // 顯示訊息在Console
 
-            richTextBox1.Text += "主人資訊 : " + myself.GetMsg() + "\n";
+            richTextBox1.Text += "主人資訊 : " + myself.GetMsg444() + "\n";
 
             richTextBox1.Text += "類型為 : " + myself.gettype() + "\n";
 
@@ -331,7 +331,7 @@ namespace vcs_Class1
 
             mypet.print_length();
 
-            richTextBox1.Text += "他的寵物是 : " + myself.getpet().GetMsg() + "\n";
+            richTextBox1.Text += "他的寵物是 : " + myself.getpet().GetMsg444() + "\n";
             richTextBox1.Text += "寵物資訊 : " + mypet.show_length() + "\n";
         }
 
@@ -390,6 +390,8 @@ namespace vcs_Class1
 
         private void bt_class00_Click(object sender, EventArgs e)
         {
+            //簡易的類別使用
+
             // 實例化AnimalB類別, 建立物件, 修改屬性, 使用方法, 2種寫法
 
             AnimalB dog1 = new AnimalB();
@@ -411,6 +413,11 @@ namespace vcs_Class1
             richTextBox1.Text += "取出名稱 : " + dog2.nickname + "\n";
             richTextBox1.Text += "取出參數 : " + dog2.recorder + "\n";
             richTextBox1.Text += dog2.ToString() + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+
+
         }
 
         //------------------------------------------------------------  # 60個
@@ -435,14 +442,13 @@ namespace vcs_Class1
             richTextBox1.Text += "圓柱體cy1的半徑 = " + cy1.getRadius() + "\t" + "圓柱體cy1的高度 = " + cy1.getLength() + "\t" + "圓柱體cy1的表面積 = " + cy1.getArea() + "\n";
             //圓柱體cy1的半徑 = 5	圓柱體cy1的高度 = 10	圓柱體cy1的表面積 = 471.238898038469
 
-
             richTextBox1.Text += c0.ToString() + "\n";
             richTextBox1.Text += c1.ToString() + "\n";
             richTextBox1.Text += cy1.ToString() + "\n";
 
             // 呼叫類別內的方法
-            richTextBox1.Text += "GetMsg()\n";
-            richTextBox1.Text += c0.GetMsg() + "\n";
+            richTextBox1.Text += "GetMsg111()\n";
+            richTextBox1.Text += c0.GetMsg111() + "\n";
 
             richTextBox1.Text += "Class 範例 PersonData2\n";
 
@@ -460,7 +466,17 @@ namespace vcs_Class1
                 new Circle {radius = 5},
                 new Circle {radius = 5}
             };
+
             list.Add(new Circle(8));
+
+            richTextBox1.Text += "\n建立一個Circle物件一維陣列, 長度3, 並初始化\n";
+            //類別Circle做成的物件一維陣列 list2
+            Circle[] list2 = new Circle[]
+            {
+                new Circle() { radius = 10 },
+                new Circle() { radius = 11 },
+                new Circle() { radius = 12 },
+            };
 
             richTextBox1.Text += "len = " + list.Count.ToString() + "\n";
             for (int i = 0; i < list.Count; i++)
@@ -514,6 +530,39 @@ namespace vcs_Class1
 
         private void bt_class04_Click(object sender, EventArgs e)
         {
+            //寵物範例1
+            richTextBox1.Text += "初始化 Cat 1 多型1\n";
+            Cat kitty = new Cat();
+            kitty.name = "凱蒂";
+
+            richTextBox1.Text += "初始化 Cat 2 多型2\n";
+            Cat doraemon = new Cat("多啦A夢", "機器貓");
+            doraemon.setweight(129);  // 設定為129公斤
+
+            richTextBox1.Text += "初始化 Cat 3\n";
+            Cat garfield = new Cat("加菲", "虎斑貓");
+            garfield.setweight(5);  // 設定為5公斤
+
+            richTextBox1.Text += "訊息\n";
+            kitty.ShowMsg222();  // 取得訊息, 顯示在 Console
+            doraemon.ShowMsg222();  // 取得訊息, 顯示在 Console
+            garfield.ShowMsg222();  // 取得訊息, 顯示在 Console
+            richTextBox1.Text += kitty.GetMsg222() + "\n";  // 取得資料字串
+            richTextBox1.Text += doraemon.GetMsg222() + "\n";  // 取得資料字串
+            richTextBox1.Text += garfield.GetMsg222() + "\n";  // 取得資料字串
+
+            richTextBox1.Text += "進行動作\n";
+            garfield.feed();  // 餵食, 體重+1
+            doraemon.play();  // 遊戲, 體重-1
+
+            richTextBox1.Text += "訊息\n";
+            kitty.ShowMsg222();  // 取得訊息, 顯示在 Console
+            doraemon.ShowMsg222();  // 取得訊息, 顯示在 Console
+            garfield.ShowMsg222();  // 取得訊息, 顯示在 Console
+            richTextBox1.Text += kitty.GetMsg222() + "\n";  // 取得資料字串
+            richTextBox1.Text += doraemon.GetMsg222() + "\n";  // 取得資料字串
+            richTextBox1.Text += garfield.GetMsg222() + "\n";  // 取得資料字串
+
         }
 
         //------------------------------------------------------------  # 60個
@@ -522,24 +571,23 @@ namespace vcs_Class1
         {
             public string Name;        //Name姓名欄位宣告為public
             private int _Score;        //_Score成績欄位宣告為private
-            private static int _Total = 0;  //_Total用來計算共產生多少個物件，宣告為static和private
 
-            public StudentA()                //建構式1, 無參數, 不做任何事
+            // 建構式1, 無參數, 不做任何事
+            public StudentA()
             {
-                _Total++;                 //_Total++，物件總數加1
             }
 
-            public StudentA(string _vName)  //建構式2, 可設定姓名
+            // 建構式2, 可設定姓名
+            public StudentA(string _vName)
             {
                 Name = _vName;
-                _Total++;                 //_Total++，物件總數加1
             }
 
-            public StudentA(string _vName, int _vScore) //建構式3, 可設定姓名和分數
+            // 建構式3, 可設定姓名和分數
+            public StudentA(string _vName, int _vScore)
             {
                 Name = _vName;
                 Score = _vScore;
-                _Total++;                 //_Total++，物件總數加1
             }
 
             public int Score  //建立Score屬性，此屬性限制在0~100  // 有get有set, 可讀可寫
@@ -567,7 +615,7 @@ namespace vcs_Class1
                 MessageBox.Show(Name + "同學的分數是 " + Convert.ToString(Score));
             }
 
-            public string GetMsg()   //GetMsg傳回姓名與成績的方法
+            public string GetMsg333()   //GetMsg傳回姓名與成績的方法
             {
                 return Name + "同學的分數是 " + Convert.ToString(Score);
             }
@@ -581,16 +629,16 @@ namespace vcs_Class1
             StudentA Anita1 = new StudentA();
             Anita1.Name = "愛妮達";
             Anita1.Score = 88;
-            richTextBox1.Text += Anita1.GetMsg() + "\n";
+            richTextBox1.Text += Anita1.GetMsg333() + "\n";
 
             //傳一個參數的建構式
             StudentA Jasper1 = new StudentA("賈思伯");
             Jasper1.Score = 77;
-            richTextBox1.Text += Jasper1.GetMsg() + "\n";
+            richTextBox1.Text += Jasper1.GetMsg333() + "\n";
 
             //傳兩個參數的建構式
             StudentA Aliya1 = new StudentA("愛麗雅", 99);
-            richTextBox1.Text += Aliya1.GetMsg() + "\n";
+            richTextBox1.Text += Aliya1.GetMsg333() + "\n";
 
             //------------------------------  # 30個
 
@@ -612,9 +660,9 @@ namespace vcs_Class1
             StudentA Jasper3 = new StudentA("賈思伯", 56);
             StudentA Aliya3 = new StudentA("愛麗雅", 99);
 
-            richTextBox1.Text += Anita3.GetMsg() + "\n";
-            richTextBox1.Text += Jasper3.GetMsg() + "\n";
-            richTextBox1.Text += Aliya3.GetMsg() + "\n";
+            richTextBox1.Text += Anita3.GetMsg333() + "\n";
+            richTextBox1.Text += Jasper3.GetMsg333() + "\n";
+            richTextBox1.Text += Aliya3.GetMsg333() + "\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -636,19 +684,6 @@ namespace vcs_Class1
 
         //------------------------------------------------------------  # 60個
 
-        //------------------------------------------------------------  # 60個
-
-        public class PersonData3
-        {
-            public string FirstName { get; set; }  // 有get有set簡寫, 可讀可寫
-            public string LastName { get; set; }  // 有get有set簡寫, 可讀可寫
-
-            //類別內取出資料的方法 override string ToString()
-            public override string ToString()
-            {
-                return FirstName + " " + LastName;
-            }
-        }
 
         //------------------------------------------------------------  # 60個
 
@@ -763,64 +798,8 @@ namespace vcs_Class1
 
         //------------------------------------------------------------  # 60個
 
-        class Book
-        {
-            public int books; //宣告books為公用變數
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        public class MyBook
-        {
-            public string Id { get; set; }  // 有get有set簡寫, 可讀可寫
-            public string BkName { get; set; }  // 有get有set簡寫, 可讀可寫
-            public int Price { get; set; }  // 有get有set簡寫, 可讀可寫
-            public string Img { get; set; }  // 有get有set簡寫, 可讀可寫
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        public class Classmate  //事件訂閱者
-        {
-            private string name;
-
-            public Classmate(string Name)
-            {
-                name = Name;
-            }
-
-            public void SendResponse()  //事件處理函數，要與自定義委托類型匹配
-            {
-                Console.WriteLine("來自：" + this.name + "的回復: 已經收到邀請，隨時可以開始！");
-            }
-        }
-
-        //------------------------------------------------------------  # 60個
-
         private void bt_class07_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            richTextBox1.Text += "Class 範例 PersonData3\n";
-
-            richTextBox1.Text += "\n建立一個Person物件一維陣列, 長度3, 並初始化\n";
-
-            //類別做成的物件一維陣列 pData3
-            PersonData3[] pData3 = 
-            {
-                new PersonData3() { FirstName="David", LastName="Wang" },
-                new PersonData3() { FirstName="Jerry", LastName="Lin" },
-                new PersonData3() { FirstName="James P.", LastName="Sullivan" },
-            };
-
-            richTextBox1.Text += "顯示每個物件的內容\n";
-            for (int i = 0; i < 3; i++)
-            {
-                richTextBox1.Text += "第 " + i.ToString() + "個\t" + pData3[i].ToString() + "\n";
-            }
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
             richTextBox1.Text += "Class 範例 PersonData4\n";
 
             PersonData4 pData4 = new PersonData4() { Name = "王小風", Height = 176 };
@@ -844,7 +823,7 @@ namespace vcs_Class1
 
             richTextBox1.Text += "建立一個PersonData5物件一維陣列, 長度3\n";
 
-            //類別做成的物件一維陣列 pData5
+            //類別PersonData5做成的物件一維陣列 pData5
             PersonData5[] pData5 = new PersonData5[3];
 
             richTextBox1.Text += "對第0個物件初始化\n";
@@ -883,38 +862,6 @@ namespace vcs_Class1
             pData6.Sex = "male";
             richTextBox1.Text += "讀Sex, Sex = " + pData6.Sex + "\n";
             //pData6.ADDR = "123"; ADDR不可寫，因此此行會顯示readonly無法編譯
-
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            //class book
-            Book eng = new Book();
-            eng.books = 10;
-            richTextBox1.Text += "目前英文類書籍共有 : " + eng.books + " 本\n";
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            //class 範例
-            //類別做成的物件一維陣列 bk
-            MyBook[] bk = new MyBook[]
-            {
-                new MyBook(){ Id="AEL014200", BkName="Visual C# 2012 程式設計經典", Price=650, Img="images/cs2012.jpg"},
-                new MyBook(){ Id="AEL009400", BkName="Visual C# 2012 基礎必修課", Price=520, Img="images/cs2010.jpg"},
-                new MyBook(){ Id="AEL009500", BkName="Visual Basic 2010 程式設計經典", Price=520, Img="images/vb2010.jpg"}
-            };
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            //Class 範例 0
-            Classmate classmate1 = new Classmate("Alice");
-            Classmate classmate2 = new Classmate("Banana");
-            Classmate classmate3 = new Classmate("Cherry");
-            Classmate classmate4 = new Classmate("Daisy");
-
-            classmate1.SendResponse();
-            classmate2.SendResponse();
-            classmate3.SendResponse();
-            classmate4.SendResponse();
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個            
         }
@@ -975,7 +922,6 @@ namespace vcs_Class1
             richTextBox1.Text += "加速 ...\n";
             Benz2.Accelerate();
             richTextBox1.Text += "現在速度 : " + Benz2.Speed + "\n";
-
         }
 
         //------------------------------------------------------------  # 60個
@@ -1206,7 +1152,7 @@ namespace vcs_Class1
 
             //創建一個Bird基類數組，添加基類Bird對象，Magpie對象，Eagle對象，Penguin對象
 
-            //類別做成的物件一維陣列 birds
+            //類別Bird做成的物件一維陣列 birds
             Bird[] birds =
             { 
                 //new Bird(),    用Abstract, Bird就不能創建對象了
@@ -1611,48 +1557,6 @@ namespace vcs_Class1
 
         private void bt_class23_Click(object sender, EventArgs e)
         {
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void bt_class24_Click(object sender, EventArgs e)
-        {
-            //寵物範例1
-            richTextBox1.Text += "初始化 Cat 1 多型1\n";
-            Cat kitty = new Cat();
-            kitty.name = "凱蒂";
-
-            richTextBox1.Text += "初始化 Cat 2 多型2\n";
-            Cat doraemon = new Cat("多啦A夢", "機器貓");
-            doraemon.setweight(129);  // 設定為129公斤
-
-            richTextBox1.Text += "初始化 Cat 3\n";
-            Cat garfield = new Cat("加菲", "虎斑貓");
-            garfield.setweight(5);  // 設定為5公斤
-
-            richTextBox1.Text += "訊息\n";
-            kitty.ShowMsg222();  // 取得訊息, 顯示在 Console
-            doraemon.ShowMsg222();  // 取得訊息, 顯示在 Console
-            garfield.ShowMsg222();  // 取得訊息, 顯示在 Console
-            richTextBox1.Text += kitty.GetMsg() + "\n";  // 取得資料字串
-            richTextBox1.Text += doraemon.GetMsg() + "\n";  // 取得資料字串
-            richTextBox1.Text += garfield.GetMsg() + "\n";  // 取得資料字串
-
-            richTextBox1.Text += "進行動作\n";
-            garfield.feed();  // 餵食, 體重+1
-            doraemon.play();  // 遊戲, 體重-1
-
-            richTextBox1.Text += "訊息\n";
-            kitty.ShowMsg222();  // 取得訊息, 顯示在 Console
-            doraemon.ShowMsg222();  // 取得訊息, 顯示在 Console
-            garfield.ShowMsg222();  // 取得訊息, 顯示在 Console
-            richTextBox1.Text += kitty.GetMsg() + "\n";  // 取得資料字串
-            richTextBox1.Text += doraemon.GetMsg() + "\n";  // 取得資料字串
-            richTextBox1.Text += garfield.GetMsg() + "\n";  // 取得資料字串
-        }
-
-        private void bt_class25_Click(object sender, EventArgs e)
-        {
             MyTime now = new MyTime();
             //now.Hour = 30;
             //now.Minute = 30;
@@ -1685,7 +1589,7 @@ namespace vcs_Class1
 
             // 物件陣列
 
-            //類別做成的物件一維陣列 tArray
+            //類別MyTime做成的物件一維陣列 tArray
             MyTime[] tArray = new MyTime[3];
             tArray[0] = new MyTime();
             tArray[0].setTime(21, 40);
@@ -1698,6 +1602,16 @@ namespace vcs_Class1
             }
 
             //System.GC.Collect();
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void bt_class24_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void bt_class25_Click(object sender, EventArgs e)
+        {
         }
 
         private void bt_class26_Click(object sender, EventArgs e)

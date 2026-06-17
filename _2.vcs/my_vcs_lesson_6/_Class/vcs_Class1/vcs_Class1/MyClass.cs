@@ -89,40 +89,49 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             date = d;
             ctr++;
         }
+
         // setter methods
         public void setName(string n)
         {
             name = n;
         }
+
         public void setAge(int a)
         {
             age = a;
         }
+
         public void setGender(char g)
         {
             gender = g;
         }
+
         public void setDate(Date d)
         {
             date = d;
         }
+
         // getter methods
         public string getName()
         {
             return name;
         }
+
         public int getAge()
         {
             return age;
         }
+
         public char getGender()
         {
             return gender;
         }
+
         public Date getDate()
         {
             return date;
         }
+
         public virtual string show()
         {
             string str = "名字 = " + name + "\r\n";
@@ -132,6 +141,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
 
             return str;
         }
+
         /*
         // operator overloading
         
@@ -154,8 +164,10 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
     {
         private int Chinese;  //新增私有的資料成員
         private int Math;
+
         // 靜態成員static members
         private static int ctr = 0;
+
         public static new int counter()
         {
             return ctr;
@@ -233,6 +245,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
     class Teacher : Person
     {
         private string Rank; //新增私有的資料成員
+
         // 靜態成員static members
         private static int ctr = 0;
 
@@ -247,6 +260,8 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             Rank = "Assistant Professor";
             ctr++;
         }
+
+        // 建構式
         public Teacher(string n, int a, char g)
             : base(n, a, g)
         {
@@ -304,6 +319,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
         private static int _Total = 0;  //_Total用來計算共產生多少個物件，宣告為static和private
         private static int _radius;
 
+        public string Color { get; set; }  // 有get有set簡寫, 可讀可寫
         //public int radius { get; set; }  // 有get有set簡寫, 可讀可寫, same
         public int radius
         {
@@ -351,7 +367,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             MessageBox.Show("圓形 資料 : 半徑 : " + radius.ToString() + ", 面積 : " + getArea());
         }
 
-        public string GetMsg()   //GetMsg傳回訊息的方法
+        public string GetMsg111()   //GetMsg傳回訊息的方法
         {
             return "圓形 資料 : 半徑 : " + radius.ToString() + ", 面積 : " + getArea();
         }
@@ -422,7 +438,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
         private int Minute;
         private int Second;
 
-        // 預設建構式
+        // 建構式
         public MyTime()
         {
         }
@@ -664,7 +680,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             Console.WriteLine("名稱:" + this.name + " 品種:" + this.type + " 體重:" + this.weight);
         }
 
-        public string GetMsg()
+        public string GetMsg222()
         {
             return "名稱:" + this.name + " 品種:" + this.type + " 體重:" + this.weight;
         }
@@ -716,7 +732,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
 
     //------------------------------------------------------------  # 60個
 
-    class Animal
+    class AnimalA
     {
         private string name;
         private string type;
@@ -757,7 +773,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             Console.WriteLine("名字:" + this.name + " 類型:" + this.type + " 重量:" + this.weight);
         }
 
-        public virtual string GetMsg()
+        public virtual string GetMsg444()
         {
             return "名字:" + this.name + " 類型:" + this.type + " 重量:" + this.weight;
         }
@@ -765,10 +781,10 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
 
     //------------------------------  # 30個
 
-    class Human : Animal
+    class Human : AnimalA
     {
         private int height;
-        private Animal pet;
+        private AnimalA pet;
 
         public Human(string n, string t, int w, int h)
         {
@@ -778,12 +794,12 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             this.height = h;
         }
 
-        public void setpet(Animal a)
+        public void setpet(AnimalA a)
         {
             this.pet = a;
         }
 
-        public Animal getpet()
+        public AnimalA getpet()
         {
             return this.pet;
         }
@@ -793,7 +809,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             Console.WriteLine("名字:" + this.getname() + " 重量:" + this.getweight() + " 身高:" + this.height);
         }
 
-        public override string GetMsg()
+        public override string GetMsg444()
         {
             return "名字:" + this.getname() + " 重量:" + this.getweight() + " 身高:" + this.height;
         }
@@ -801,7 +817,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
 
     //------------------------------  # 30個
 
-    class Cats : Animal
+    class Cats : AnimalA
     {
         private int body_length;
         private int tail_length;
@@ -897,7 +913,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
     {
         private int _Height, _Weight;
 
-        // 無參數建構式, 使用2個預設值
+        // 建構式1, 無參數, 使用2個預設值
         public Student1()
         {
             Console.WriteLine("建立一個Student1的物件a");
@@ -905,7 +921,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             _Height = 160;
         }
 
-        // 1參數建構式, 使用1個預設值
+        // 建構式2, 1參數, 使用1個預設值
         public Student1(int w)
         {
             Console.WriteLine("建立一個Student1的物件b");
@@ -913,7 +929,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             _Height = 160;  // 初始化_Height欄位的值為160
         }
 
-        // 2參數建構式
+        // 建構式3, 2參數
         public Student1(int w, int h)
         {
             Console.WriteLine("建立一個Student1的物件c");

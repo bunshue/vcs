@@ -1,4 +1,37 @@
 ﻿
+        public class Classmate  //事件訂閱者
+        {
+            private string name;
+
+            public Classmate(string Name)
+            {
+                name = Name;
+            }
+
+            public void SendResponse()  //事件處理函數，要與自定義委托類型匹配
+            {
+                Console.WriteLine("來自：" + this.name + "的回復: 已經收到邀請，隨時可以開始！");
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
+
+
+            //Class 範例 0
+            Classmate classmate1 = new Classmate("Alice");
+            Classmate classmate2 = new Classmate("Banana");
+            Classmate classmate3 = new Classmate("Cherry");
+            Classmate classmate4 = new Classmate("Daisy");
+
+            classmate1.SendResponse();
+            classmate2.SendResponse();
+            classmate3.SendResponse();
+            classmate4.SendResponse();
+
+
+
+
+
 
 DT 範例
             DataTable dt = new DataTable();

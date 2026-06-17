@@ -86,7 +86,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(1033, 16);
+            this.richTextBox1.Location = new System.Drawing.Point(917, 192);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 1;
@@ -128,7 +128,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(1053, 48);
+            this.bt_clear.Location = new System.Drawing.Point(937, 224);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 12;
@@ -188,7 +188,7 @@
             this.groupBox14.Controls.Add(this.pictureBox0);
             this.groupBox14.Location = new System.Drawing.Point(618, 274);
             this.groupBox14.Name = "groupBox14";
-            this.groupBox14.Size = new System.Drawing.Size(406, 271);
+            this.groupBox14.Size = new System.Drawing.Size(200, 271);
             this.groupBox14.TabIndex = 14;
             this.groupBox14.TabStop = false;
             this.groupBox14.Text = "圖片範例";
@@ -314,7 +314,6 @@
             this.bt_class25.Name = "bt_class25";
             this.bt_class25.Size = new System.Drawing.Size(193, 60);
             this.bt_class25.TabIndex = 26;
-            this.bt_class25.Text = "MyTime";
             this.bt_class25.UseVisualStyleBackColor = true;
             this.bt_class25.Click += new System.EventHandler(this.bt_class25_Click);
             // 
@@ -325,6 +324,7 @@
             this.bt_class23.Name = "bt_class23";
             this.bt_class23.Size = new System.Drawing.Size(193, 60);
             this.bt_class23.TabIndex = 29;
+            this.bt_class23.Text = "MyTime";
             this.bt_class23.UseVisualStyleBackColor = true;
             this.bt_class23.Click += new System.EventHandler(this.bt_class23_Click);
             // 
@@ -346,7 +346,6 @@
             this.bt_class24.Name = "bt_class24";
             this.bt_class24.Size = new System.Drawing.Size(193, 60);
             this.bt_class24.TabIndex = 23;
-            this.bt_class24.Text = "範例";
             this.bt_class24.UseVisualStyleBackColor = true;
             this.bt_class24.Click += new System.EventHandler(this.bt_class24_Click);
             // 
@@ -592,7 +591,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1146, 679);
+            this.ClientSize = new System.Drawing.Size(1046, 679);
             this.Controls.Add(this.groupBox0);
             this.Controls.Add(this.groupBox14);
             this.Controls.Add(this.groupBox8);
