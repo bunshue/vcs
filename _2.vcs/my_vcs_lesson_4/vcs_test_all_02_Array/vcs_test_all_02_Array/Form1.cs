@@ -1624,17 +1624,18 @@ this.CamMonitor[1] = new CameraMonitor(xxxx, yyyy, zzzz);
 this.CamMonitor[2] = new CameraMonitor(xxxx, yyyy, zzzz);
 this.CamMonitor[3] = new CameraMonitor(xxxx, yyyy, zzzz);
 
-6060
+//------------------------------------------------------------  # 60個
 
 string[] engNum = new string[] { "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten" };
 lblShow.Text = "英文：" + engNum[n];  
 
-6060
+//------------------------------------------------------------  # 60個
+
 //製作一個PictureBox Array
             // Make an array holding the PictureBoxes.
             PictureBox[] pics = { PictureBox1, PictureBox2, PictureBox3, PictureBox4 };
 
-6060
+//------------------------------------------------------------  # 60個
 
 List如同Array一樣,可以建立許多陣列元素,但是卻比Array來的靈活.
 
@@ -1652,7 +1653,7 @@ List<int> myLists = new List<int>();
 
 另外List如同一張資料表,你可以對它編輯,如加入某一列或刪除某一列.
 
-6060
+//------------------------------------------------------------  # 60個
 
 */
 

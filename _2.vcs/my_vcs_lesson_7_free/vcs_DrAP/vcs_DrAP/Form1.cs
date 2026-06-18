@@ -225,14 +225,13 @@ namespace vcs_DrAP
             bt_save_data.Location = new Point(x_st, y_st + dy * 0);
 
             x_st += bt_save_data.Size.Width + dx;
-            bt_search_all_files.Location = new Point(x_st, y_st + dy * 0);
 
             bt_find_same_files.Location = new Point(x_st, y_st + dy * 1);
 
-            x_st += bt_search_all_files.Size.Width + dx;
-            bt_search_one_layer_files.Location = new Point(x_st, y_st + dy * 0);
+            x_st += 75 + dx;
 
-            x_st += bt_search_one_layer_files.Size.Width + dx;
+            x_st += 75 + dx;
+
             bt_clear_data.Location = new Point(x_st, y_st + dy * 0);
 
             x_st += bt_clear_data.Size.Width + dx;
@@ -415,96 +414,6 @@ namespace vcs_DrAP
 
         //------------------------------------------------------------  # 60個
 
-        private void bt_search_one_layer_files_Click(object sender, EventArgs e)
-        {
-            //轉出一層
-            result_str += "開始計時\n";
-            this.Text = "DrAP";
-
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-
-            flag_search_mode = 0;
-            flag_search_done = 0;
-            flag_search_vcs_pattern = 0;
-
-            fileinfos.Clear();
-            if (path != String.Empty)
-            {
-                //只撈一層的所有檔案
-                foreach (string fname in System.IO.Directory.GetFileSystemEntries(path))
-                {
-                    richTextBox1.Text += fname + "\n";
-                }
-            }
-
-            //只撈一層的檔案
-            total_size = 0;
-            total_files = 0;
-
-            if (path == String.Empty)
-                path = search_path;
-            //path = @"D:\vcs\astro\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案";
-
-            FolederName = path;
-            richTextBox1.Text += path + "\n\n";
-
-            if (System.IO.File.Exists(path) == true)
-            {
-                // This path is a file
-                richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
-                ProcessFile(path, 0);
-                richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
-            }
-            else if (Directory.Exists(path) == true)
-            {
-                // This path is a directory
-                //ProcessDirectory(path);
-
-                try
-                {
-                    //richTextBox1.Text += targetDirectory + "\n\n";
-                    //DirectoryInfo di = new DirectoryInfo(targetDirectory);
-                    //richTextBox1.Text += di.Name + "\n\n";
-
-                    // Process the list of files found in the directory.
-                    try
-                    {
-                        string[] fileEntries = Directory.GetFiles(path);
-                        Array.Sort(fileEntries);
-                        foreach (string fileName in fileEntries)
-                        {
-                            ProcessFile(fileName, step);
-                        }
-                        step = 0;
-                    }
-                    catch (UnauthorizedAccessException ex)
-                    {
-                        richTextBox1.Text += ex.Message + "\n";
-                    }
-                }
-                catch (IOException ex)
-                {
-                    richTextBox1.Text += "IOException, " + ex.GetType().Name + "\n";
-                }
-
-                richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
-                show_file_info1();
-                flag_search_done = 1;
-            }
-            else
-            {
-                richTextBox1.Text += "非合法路徑或檔案a\n";
-                flag_search_done = 0;
-            }
-
-            stopwatch.Stop();
-            result_str += "停止計時\t";
-            result_str += "總時間: " + stopwatch.ElapsedMilliseconds.ToString() + " msec\n";
-            lb_search_result2.Text = ((float)stopwatch.ElapsedMilliseconds / 1000).ToString("F2") + " 秒";
-            this.Text = "DrAP (轉出時間 : " + (stopwatch.ElapsedMilliseconds / 1000).ToString() + " 秒)";
-        }
-
         private void bt_open_dir_Click(object sender, EventArgs e)
         {
             folderBrowserDialog1.SelectedPath = search_path;  //預設開啟的路徑
@@ -682,6 +591,8 @@ namespace vcs_DrAP
                 fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
             }
         }
+
+        //------------------------------------------------------------  # 60個
 
         void show_file_info1()  //轉出一層
         {
@@ -874,6 +785,8 @@ namespace vcs_DrAP
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         void show_file_info2()  //目前像是都不會用到
         {
             listView1.View = View.Details;  //定義列表顯示的方式
@@ -946,6 +859,8 @@ namespace vcs_DrAP
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         void show_file_info3()
         {
             listView1.View = View.Details;  //定義列表顯示的方式
@@ -998,6 +913,8 @@ namespace vcs_DrAP
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         void show_file_info6()
         {
             //找小資料夾
@@ -1048,76 +965,7 @@ namespace vcs_DrAP
             }
         }
 
-        private void bt_search_all_files_Click(object sender, EventArgs e)
-        {
-            //轉出
-            result_str += "開始計時\n";
-            this.Text = "DrAP";
-            // Create stopwatch
-            Stopwatch stopwatch = new Stopwatch();
-            // Begin timing
-            stopwatch.Start();
-
-            flag_search_mode = 0;
-            flag_search_done = 0;
-            flag_search_vcs_pattern = 0;
-
-            fileinfos.Clear();
-            total_size = 0;
-            total_files = 0;
-
-            if (listBox1.Items.Count == 0)
-            {
-                result_str += "未選擇資料夾\n";
-                return;
-            }
-
-            result_str += "listbox 共有 " + listBox1.Items.Count.ToString() + " 個項目\n";
-            for (int i = 0; i < listBox1.Items.Count; i++)
-            {
-                path = listBox1.Items[i].ToString();
-
-                result_str += "\n搜尋路徑" + path + "\n";
-
-                if (System.IO.File.Exists(path) == true)
-                {
-                    // This path is a file
-                    richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
-                    ProcessFile(path, 0);
-                    richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
-                    flag_search_done = 1;
-                }
-                else if (Directory.Exists(path) == true)
-                {
-                    // This path is a directory
-                    FolederName = path;
-                    ProcessDirectory(path);
-                    richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
-                    if (flag_search_mode == 1)  //不會為1
-                    {
-                        show_file_info2();  //目前像是都不會用到
-                    }
-                    else
-                    {
-                        show_file_info1();
-                    }
-                    flag_search_done = 1;
-                }
-                else
-                {
-                    richTextBox1.Text += "非合法路徑或檔案b\n";
-                    flag_search_done = 0;
-                }
-            }
-
-            // Stop timing
-            stopwatch.Stop();
-            // Write result
-            result_str += "停止計時\t";
-            result_str += "總時間: " + stopwatch.ElapsedMilliseconds.ToString() + " msec\n";
-            lb_search_result2.Text = ((float)stopwatch.ElapsedMilliseconds / 1000).ToString("F2") + " 秒";
-            this.Text = "DrAP (轉出時間 : " + (stopwatch.ElapsedMilliseconds / 1000).ToString() + " 秒)";
-        }
+        //------------------------------------------------------------  # 60個
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1178,7 +1026,6 @@ namespace vcs_DrAP
             string fullname;
 
             selNdx = listView1.SelectedIndices[0];
-
 
             result_str += "aaa:\t" + listView1.Items[selNdx].Text + "\n";
             result_str += "bbb:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
@@ -2078,9 +1925,7 @@ namespace vcs_DrAP
         {
             /*
             //result_str += "flag_function = " + flag_function.ToString() + "\n";
-
             Properties.Settings.Default.search_path = "";
-
             Properties.Settings.Default.Save();
             */
 
@@ -2483,7 +2328,7 @@ namespace vcs_DrAP
 
             if (System.IO.File.Exists(path) == true)
             {
-                // This path is a file
+                // path 是個 檔案
                 richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
                 ProcessFile2(path, 0);
                 richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
@@ -2491,7 +2336,7 @@ namespace vcs_DrAP
             }
             else if (Directory.Exists(path) == true)
             {
-                // This path is a directory
+                // path 是個 資料夾
                 FolederName = path;
                 ProcessDirectory2(path);
 
@@ -2648,12 +2493,12 @@ namespace vcs_DrAP
 
                     if (System.IO.File.Exists(path) == true)
                     {
-                        // This path is a file
+                        // path 是個 檔案
                         richTextBox1.Text += "是個檔案\n";
                     }
                     else if (Directory.Exists(path) == true)
                     {
-                        // This path is a directory
+                        // path 是個 資料夾
                         DirectoryInfo d = new DirectoryInfo(path);//輸入檔案夾
                         /*
                         richTextBox1.Text += "Name : " + d.Name + "\n";
@@ -2711,14 +2556,14 @@ namespace vcs_DrAP
 
                 if (System.IO.File.Exists(path) == true)
                 {
-                    // This path is a file
+                    // path 是個 檔案
                     richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
                     ProcessFile(path, 0);
                     richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
                 }
                 else if (Directory.Exists(path) == true)
                 {
-                    // This path is a directory
+                    // path 是個 資料夾
                     FolederName = path;
                     ProcessDirectory(path);
                     richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
@@ -2754,12 +2599,12 @@ namespace vcs_DrAP
 
                     if (System.IO.File.Exists(path) == true)
                     {
-                        // This path is a file
+                        // path 是個 檔案
                         richTextBox1.Text += "是個檔案\n";
                     }
                     else if (Directory.Exists(path) == true)
                     {
-                        // This path is a directory
+                        // path 是個 資料夾
                         DirectoryInfo d = new DirectoryInfo(path);//輸入檔案夾
                         /*
                         richTextBox1.Text += "Name : " + d.Name + "\n";
@@ -3050,13 +2895,13 @@ namespace vcs_DrAP
             richTextBox1.Text += "搜尋資料夾: " + path + "\n\n";
             if (System.IO.File.Exists(path) == true)
             {
-                // This path is a file
+                // path 是個 檔案
                 richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
                 ProcessFileS(path);
             }
             else if (Directory.Exists(path) == true)
             {
-                // This path is a directory
+                // path 是個 資料夾
                 ProcessDirectoryS(path);
             }
             show_file_info3();
@@ -3167,6 +3012,7 @@ namespace vcs_DrAP
                     //check existency
                     if (Directory.Exists(p) == true)
                     {
+                        // path 是個 資料夾
                         //result_str += "len = " + p.Length.ToString() + "\t" + p + "\n";
                         result_str += "加入路徑 : " + p + "\n";
                         old_search_path.Add(p);       //目前只能 儲存/加入 一個路徑
@@ -3251,19 +3097,6 @@ namespace vcs_DrAP
             total_show_empty_folder_cnt = 0;
             total_delete_empty_folder_cnt = 0;
 
-            /*
-            //取得目前所在路徑
-            string currentPath = Directory.GetCurrentDirectory();
-            richTextBox1.Text += "目前所在路徑: " + currentPath + "\n";
-
-            //確認資料夾是否存在
-            string Path = @"D:/_git/vcs/_1.data/______test_files1/aaaa/bbbb";
-            if (Directory.Exists(Path) == false)    //確認資料夾是否存在
-                richTextBox1.Text += "搜尋資料夾: " + Path + " 不存在\n";
-            else
-                richTextBox1.Text += "搜尋資料夾: " + Path + " 存在\n";
-            */
-
             //string path = default_vcs_path;
             string path = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6_draw";
             //string path = search_path;
@@ -3273,7 +3106,7 @@ namespace vcs_DrAP
             //richTextBox1.Text += "搜尋資料夾: " + path + "\n\n";
             if (Directory.Exists(path) == true)
             {
-                // This path is a directory
+                // path 是個 資料夾
                 ProcessDirectory3(path);
             }
 
@@ -3410,7 +3243,7 @@ namespace vcs_DrAP
             }
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void bt_open_with_vcs_Click(object sender, EventArgs e)
         {
@@ -3463,7 +3296,7 @@ namespace vcs_DrAP
             }
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void bt_clear3_Click(object sender, EventArgs e)
         {
@@ -3507,5 +3340,4 @@ namespace vcs_DrAP
 /*  可搬出
 
 */
-
 

@@ -2107,3 +2107,31 @@ File.Create("tmp_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".txt");//創建�
             }
 */
 
+/*
+                //只撈一層的所有檔案
+                foreach (string fname in System.IO.Directory.GetFileSystemEntries(path))
+                {
+                    richTextBox1.Text += fname + "\n";
+                }
+
+                        string[] fileEntries = Directory.GetFiles(path);
+                        Array.Sort(fileEntries);
+                        foreach (string fileName in fileEntries)
+                        {
+                        }
+*/
+
+/*
+//取得目前所在路徑
+string currentPath = Directory.GetCurrentDirectory();
+richTextBox1.Text += "目前所在路徑: " + currentPath + "\n";
+
+//確認資料夾是否存在
+string Path = @"D:/_git/vcs/_1.data/______test_files1/aaaa/bbbb";
+if (Directory.Exists(Path) == false)    //確認資料夾是否存在
+    richTextBox1.Text += "搜尋資料夾: " + Path + " 不存在\n";
+else
+    richTextBox1.Text += "搜尋資料夾: " + Path + " 存在\n";
+*/
+
+

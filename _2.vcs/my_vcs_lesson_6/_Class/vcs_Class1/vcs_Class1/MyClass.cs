@@ -316,7 +316,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
         //protected int radius; // 子類別可以直接存取 
         //private string pname;
         //private int radius;
-        private static int _Total = 0;  //_Total用來計算共產生多少個物件，宣告為static和private
+        private static int _Total = 0;  // _Total用來計算共產生多少個物件，宣告為static和private
         private static int _radius;
 
         public string Color { get; set; }  // 有get有set簡寫, 可讀可寫
@@ -333,16 +333,20 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             }
         }
 
+        // 建構式1, 無參數, 使用1個預設值
         public Circle()
         {
             radius = 2;  // 預設半徑為2
-            _Total++;                 //_Total++，物件總數加1
+            _Total++;  // _Total++，物件總數加1
+            Console.WriteLine("建立一個Circle()的物件1, 目前物件總數 : " + _Total.ToString());
         }
 
+        // 建構式2, 1參數
         public Circle(int r)
         {
             radius = r;
-            _Total++;                 //_Total++，物件總數加1
+            _Total++;  // _Total++，物件總數加1
+            Console.WriteLine("建立一個Circle()的物件2, 目前物件總數 : " + _Total.ToString());
         }
 
         public int getRadius()
@@ -377,6 +381,13 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
         {
             return "共使用 : " + Convert.ToString(_Total) + " 個物件";
         }
+
+        //解構式
+        ~Circle()
+        {
+            _Total--;  // _Total--，物件總數減1
+            Console.WriteLine("銷毀一個Circle()的物件, 目前物件總數 : " + _Total.ToString());
+        }
     }
 
     class Cylinder : Circle
@@ -385,6 +396,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
 
         public Cylinder()
         {
+            Console.WriteLine("Cylinder() 建構式1");
             length = 3;  // 預設高度為3
         }
         /*
@@ -398,6 +410,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
         public Cylinder(int r, int l)
             : base(r)
         {
+            Console.WriteLine("Cylinder() 建構式2");
             length = l;
         }
 
@@ -427,6 +440,12 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
         {
             return string.Format("圓柱體 資料 : 半徑 : {0}, 底面積 : {1}, 高度 : {2}, 表面積 : {3}",
                 getRadius(), base.getArea(), length, getArea());
+        }
+
+        //解構式
+        ~Cylinder()
+        {
+            Console.WriteLine("銷毀一個Cylinder()的物件");
         }
     }
 
@@ -860,19 +879,19 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
         {
             if (vSpeed < 0)
             {
-                vSpeed = 0;		// 設定速度不得低於 0
+                vSpeed = 0;  // 速度不可低於0
             }
             if (vSpeed > 200)
             {
-                vSpeed = 200;	// 設定速度不得高於 200
+                vSpeed = 200;  // 速度不可超過200
             }
             _speed = vSpeed;
         }
     }
 
-    class Car2   // 定義Car類別
+    class Car2
     {
-        // 宣告_speed私有變數用來存放車子的速度值
+        // 宣告_speed為私有變數，表示該變數只能在Car類別內使用
         private int _speed = 0;
 
         // 定義Speed速度屬性
@@ -886,70 +905,28 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             {
                 if (value < 0)
                 {
-                    value = 0;       // 速度不可小於0
+                    value = 0;  // 速度不可低於0
                 }
                 if (value > 200)
                 {
-                    value = 200;   // 速度不可大於200
+                    value = 200;  // 速度不可超過200
                 }
-                _speed = value;                 // 設定速度
+                _speed = value;  // 設定速度
             }
         }
 
         // 定義Accelerate()方法，用來指定目前車子速度+1 
         public void Accelerate()
         {
-            _speed++;					// 速度 + 1
+            _speed++;  // 速度 + 1
             if (_speed > 200)
             {
-                _speed = 200;	// 檢查速度不可超過 200
+                _speed = 200;  // 速度不可超過200
             }
         }
     }
 
     //------------------------------------------------------------  # 60個
-
-    class Student1
-    {
-        private int _Height, _Weight;
-
-        // 建構式1, 無參數, 使用2個預設值
-        public Student1()
-        {
-            Console.WriteLine("建立一個Student1的物件a");
-            _Weight = 48;
-            _Height = 160;
-        }
-
-        // 建構式2, 1參數, 使用1個預設值
-        public Student1(int w)
-        {
-            Console.WriteLine("建立一個Student1的物件b");
-            _Weight = w;  // 初始化_Weight欄位
-            _Height = 160;  // 初始化_Height欄位的值為160
-        }
-
-        // 建構式3, 2參數
-        public Student1(int w, int h)
-        {
-            Console.WriteLine("建立一個Student1的物件c");
-            _Weight = w;
-            _Height = h;
-        }
-
-        // Student類別的GetShow()方法，可顯示學生的身高和體重
-        public void GetShow()
-        {
-            //richTextBox1.Text +=" 身高是: {0} "+ _Height+ "\n";
-            //richTextBox1.Text +=" 體重是: {0} \n"+ _Weight+ "\n";
-        }
-
-        //解構式
-        ~Student1()
-        {
-            Console.WriteLine("銷毀一個Student1的物件");
-        }
-    }
 }
 
 //6060

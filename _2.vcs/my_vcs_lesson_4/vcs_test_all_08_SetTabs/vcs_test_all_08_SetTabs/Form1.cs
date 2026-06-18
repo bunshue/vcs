@@ -22,6 +22,8 @@ namespace vcs_test_all_08_SetTabs
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             // Set the ListBox tabs.
             SetListBoxTabs(listBox1, new int[] { 120, 170, 220 });
             SetListBoxTabs(listBox1, new int[] { 120, 170, 220 });
@@ -45,14 +47,12 @@ namespace vcs_test_all_08_SetTabs
             AddData("Lamborghini Murcielago LP640", 211, 640, 430000);
             AddData("Porsche Carrera GT", 205, 612, 440000);
 
-
             /*
             for (int i = 0; i < 10; i++)
             {
                 string txt = "";
                 txt = i.ToString() + "\t" + (i * i).ToString() + "\t" + (i * i * i).ToString();
                 richTextBox1.Text += txt + "\n";
-
             }
             */
         }
@@ -87,12 +87,13 @@ namespace vcs_test_all_08_SetTabs
             this.Text = "vcs_test_all_08_SetTabs";
         }
 
+        //------------------------------------------------------------  # 60個
+
         // Add some data to all three controls.
         private void AddData(string name, int mph, int hp, decimal price)
         {
             // Build a tab-delimited string.
-            string txt = name + "\t" + mph.ToString() + " mph\t" +
-                hp.ToString() + " hp\t" + price.ToString("C");
+            string txt = name + "\t" + mph.ToString() + " mph\t" + hp.ToString() + " hp\t" + price.ToString("C");
 
             // Display in the ListBox and first TextBox.
             listBox1.Items.Add(txt);
@@ -101,17 +102,12 @@ namespace vcs_test_all_08_SetTabs
             richTextBox1.Text += txt + "\r\n";
 
             // Display formatted.
-            textBox2.Text +=
-                string.Format("{0,-30}{1,7} mph{2,7} hp{3,15:C}\r\n",
-                name, mph, hp, price);
+            textBox2.Text += string.Format("{0,-30}{1,7} mph{2,7} hp{3,15:C}\r\n", name, mph, hp, price);
 
-            /*
-            richTextBox1.Text +=
-                string.Format("{0,-30}{1,7} mph{2,7} hp{3,15:C}\r\n",
-                name, mph, hp, price);
-            */
-
+            //richTextBox1.Text += string.Format("{0,-30}{1,7} mph{2,7} hp{3,15:C}\r\n", name, mph, hp, price);
         }
+
+        //------------------------------------------------------------  # 60個
 
         // Set tab stops inside a ListBox.
         private void SetListBoxTabs(ListBox lst, IEnumerable<int> tabs)
@@ -130,6 +126,8 @@ namespace vcs_test_all_08_SetTabs
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, Int32 wParam, int[] lParam);
         private const uint EM_SETTABSTOPS = 0xCB;
@@ -147,3 +145,16 @@ namespace vcs_test_all_08_SetTabs
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+

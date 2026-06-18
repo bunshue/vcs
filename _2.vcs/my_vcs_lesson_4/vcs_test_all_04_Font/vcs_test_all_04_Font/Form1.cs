@@ -211,6 +211,8 @@ namespace vcs_test_all_04_Font
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button1_Click(object sender, EventArgs e)
         {
             WordSize = 10;
@@ -254,6 +256,8 @@ namespace vcs_test_all_04_Font
             SelectFont = 2;
             label1.Font = new Font("新細明體", WordSize);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {

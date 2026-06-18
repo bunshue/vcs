@@ -31,8 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.bt_search_all_files = new System.Windows.Forms.Button();
-            this.bt_search_one_layer_files = new System.Windows.Forms.Button();
             this.bt_clear_data = new System.Windows.Forms.Button();
             this.bt_help = new System.Windows.Forms.Button();
             this.bt_copy_data = new System.Windows.Forms.Button();
@@ -82,14 +80,14 @@
             this.cb_option3 = new System.Windows.Forms.CheckBox();
             this.groupbox_python = new System.Windows.Forms.GroupBox();
             this.rb_python_search1 = new System.Windows.Forms.RadioButton();
+            this.bt_edit_python_files = new System.Windows.Forms.Button();
             this.rb_python_search0 = new System.Windows.Forms.RadioButton();
+            this.bt_search_pattern_python = new System.Windows.Forms.Button();
             this.groupbox_result = new System.Windows.Forms.GroupBox();
             this.lb_search_result2 = new System.Windows.Forms.Label();
             this.lb_search_result1 = new System.Windows.Forms.Label();
             this.bt_replace = new System.Windows.Forms.Button();
             this.bt_compare = new System.Windows.Forms.Button();
-            this.bt_edit_python_files = new System.Windows.Forms.Button();
-            this.bt_search_pattern_python = new System.Windows.Forms.Button();
             this.bt_search_pattern_opengl = new System.Windows.Forms.Button();
             this.bt_open_dir2 = new System.Windows.Forms.Button();
             this.bt_search_pattern_cuda = new System.Windows.Forms.Button();
@@ -131,28 +129,6 @@
             this.comboBox1.Size = new System.Drawing.Size(88, 21);
             this.comboBox1.TabIndex = 1;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
-            // bt_search_all_files
-            // 
-            this.bt_search_all_files.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_search_all_files.Location = new System.Drawing.Point(537, 7);
-            this.bt_search_all_files.Name = "bt_search_all_files";
-            this.bt_search_all_files.Size = new System.Drawing.Size(75, 23);
-            this.bt_search_all_files.TabIndex = 2;
-            this.bt_search_all_files.Text = "轉出";
-            this.bt_search_all_files.UseVisualStyleBackColor = true;
-            this.bt_search_all_files.Click += new System.EventHandler(this.bt_search_all_files_Click);
-            // 
-            // bt_search_one_layer_files
-            // 
-            this.bt_search_one_layer_files.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_search_one_layer_files.Location = new System.Drawing.Point(618, 7);
-            this.bt_search_one_layer_files.Name = "bt_search_one_layer_files";
-            this.bt_search_one_layer_files.Size = new System.Drawing.Size(75, 23);
-            this.bt_search_one_layer_files.TabIndex = 3;
-            this.bt_search_one_layer_files.Text = "轉出一層";
-            this.bt_search_one_layer_files.UseVisualStyleBackColor = true;
-            this.bt_search_one_layer_files.Click += new System.EventHandler(this.bt_search_one_layer_files_Click);
             // 
             // bt_clear_data
             // 
@@ -702,6 +678,18 @@
             this.rb_python_search1.Text = "python all";
             this.rb_python_search1.UseVisualStyleBackColor = true;
             // 
+            // bt_edit_python_files
+            // 
+            this.bt_edit_python_files.BackgroundImage = global::vcs_DrAP.Properties.Resources.python2;
+            this.bt_edit_python_files.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_edit_python_files.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_edit_python_files.Location = new System.Drawing.Point(71, 70);
+            this.bt_edit_python_files.Name = "bt_edit_python_files";
+            this.bt_edit_python_files.Size = new System.Drawing.Size(50, 50);
+            this.bt_edit_python_files.TabIndex = 62;
+            this.bt_edit_python_files.UseVisualStyleBackColor = true;
+            this.bt_edit_python_files.Click += new System.EventHandler(this.bt_edit_python_files_Click);
+            // 
             // rb_python_search0
             // 
             this.rb_python_search0.AutoSize = true;
@@ -713,6 +701,18 @@
             this.rb_python_search0.TabStop = true;
             this.rb_python_search0.Text = "python only";
             this.rb_python_search0.UseVisualStyleBackColor = true;
+            // 
+            // bt_search_pattern_python
+            // 
+            this.bt_search_pattern_python.BackgroundImage = global::vcs_DrAP.Properties.Resources.python;
+            this.bt_search_pattern_python.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_search_pattern_python.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_search_pattern_python.Location = new System.Drawing.Point(13, 70);
+            this.bt_search_pattern_python.Name = "bt_search_pattern_python";
+            this.bt_search_pattern_python.Size = new System.Drawing.Size(50, 50);
+            this.bt_search_pattern_python.TabIndex = 39;
+            this.bt_search_pattern_python.UseVisualStyleBackColor = true;
+            this.bt_search_pattern_python.Click += new System.EventHandler(this.bt_search_pattern_python_Click);
             // 
             // groupbox_result
             // 
@@ -772,30 +772,6 @@
             this.bt_compare.TabIndex = 66;
             this.bt_compare.UseVisualStyleBackColor = false;
             this.bt_compare.Click += new System.EventHandler(this.bt_compare_Click);
-            // 
-            // bt_edit_python_files
-            // 
-            this.bt_edit_python_files.BackgroundImage = global::vcs_DrAP.Properties.Resources.python2;
-            this.bt_edit_python_files.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_edit_python_files.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_edit_python_files.Location = new System.Drawing.Point(71, 70);
-            this.bt_edit_python_files.Name = "bt_edit_python_files";
-            this.bt_edit_python_files.Size = new System.Drawing.Size(50, 50);
-            this.bt_edit_python_files.TabIndex = 62;
-            this.bt_edit_python_files.UseVisualStyleBackColor = true;
-            this.bt_edit_python_files.Click += new System.EventHandler(this.bt_edit_python_files_Click);
-            // 
-            // bt_search_pattern_python
-            // 
-            this.bt_search_pattern_python.BackgroundImage = global::vcs_DrAP.Properties.Resources.python;
-            this.bt_search_pattern_python.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_search_pattern_python.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_search_pattern_python.Location = new System.Drawing.Point(13, 70);
-            this.bt_search_pattern_python.Name = "bt_search_pattern_python";
-            this.bt_search_pattern_python.Size = new System.Drawing.Size(50, 50);
-            this.bt_search_pattern_python.TabIndex = 39;
-            this.bt_search_pattern_python.UseVisualStyleBackColor = true;
-            this.bt_search_pattern_python.Click += new System.EventHandler(this.bt_search_pattern_python_Click);
             // 
             // bt_search_pattern_opengl
             // 
@@ -999,8 +975,6 @@
             this.Controls.Add(this.bt_save_data);
             this.Controls.Add(this.bt_copy_data);
             this.Controls.Add(this.bt_clear_data);
-            this.Controls.Add(this.bt_search_one_layer_files);
-            this.Controls.Add(this.bt_search_all_files);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1025,8 +999,6 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button bt_search_all_files;
-        private System.Windows.Forms.Button bt_search_one_layer_files;
         private System.Windows.Forms.Button bt_clear_data;
         private System.Windows.Forms.Button bt_help;
         private System.Windows.Forms.Button bt_save_data;

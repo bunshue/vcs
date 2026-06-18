@@ -1267,3 +1267,24 @@ var str = $"我的名字叫{"张三"}，我今年{23}岁。";
 Console.WriteLine(str);
 
 */
+
+
+
+/*
+ToString 的用法
+
+ToString("D2")
+ToString("D3")
+ToString("X2")
+ToString("X4")
+ToString("F1")
+ToString("F2")
+ToString("F3")
+ToString("F4")
+ToString("0.00")
+ToString("#0.00")
+ToString("#0.00")
+ToString("00")
+ToString("0000")
+*/
+

@@ -144,7 +144,7 @@ namespace vcs_Remove_Bin_Obj
             result_str += "資料夾: " + path + "\n\n";
             if (Directory.Exists(path))
             {
-                // This path is a directory
+                // 搜尋路徑 是個 資料夾
                 ProcessDirectory(path);
             }
 

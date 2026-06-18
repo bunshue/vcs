@@ -1,4 +1,5 @@
 ﻿
+
         public class Classmate  //事件訂閱者
         {
             private string name;

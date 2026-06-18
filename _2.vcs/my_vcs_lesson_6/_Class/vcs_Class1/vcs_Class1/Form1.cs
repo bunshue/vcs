@@ -77,10 +77,11 @@ namespace vcs_Class1
                 f1.richTextBox1.Text += "ClassPrintDataExample初始化，從Class印出, FirstName = " + firstName + ", LastName = " + lastName + "\n";
             }
 
-            //類別內取出資料的方法 override string ToString()
-            public override string ToString()
+            public void do_something()
             {
-                return FirstName + " " + LastName;
+                this.form1.richTextBox1.Text += "從Class內印出資料到RichTextBox\n";
+                this.form1.richTextBox1.Text += "資料是 : " + FirstName + " " + LastName + "\n";
+
             }
         }
 
@@ -114,7 +115,7 @@ namespace vcs_Class1
             W = 200;
             H = 300;
             groupBox14.Size = new Size(W * 2 + 80, H + 150);
-            groupBox0.Size = new Size(W * 3 + 20, H * 2 + 90);
+            groupBox0.Size = new Size(W * 2 + 10, H * 2 + 90);
 
             int x_st = 10;
             int y_st = 10;
@@ -122,12 +123,12 @@ namespace vcs_Class1
             int dy = 180 + 10;
             groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
 
-            groupBox8.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            groupBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            groupBox14.Location = new Point(x_st + dx * 3, y_st + dy * 1 + 50);
+            groupBox8.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            groupBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            groupBox14.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 50);
 
             richTextBox1.Size = new Size(400, 690);
-            richTextBox1.Location = new Point(x_st + dx * 5 + 80, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 4+200, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             x_st = 10;
@@ -151,7 +152,7 @@ namespace vcs_Class1
             pictureBox1.Location = new Point(x_st + dx * 0 + 70 + 50, y_st + dy * 0 + 70);
             pictureBox2.Location = new Point(x_st + dx * 0 + 140 + 100, y_st + dy * 0 + 140);
 
-            dx = 193 + 10;
+            dx = 190 + 10;
             dy = 60 + 6;
             bt_class00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_class01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -173,18 +174,8 @@ namespace vcs_Class1
             bt_class17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
             bt_class18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             bt_class19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            bt_class20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            bt_class21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            bt_class22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            bt_class23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            bt_class24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            bt_class25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            bt_class26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            bt_class27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            bt_class28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            bt_class29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            this.Size = new Size(1570, 750);
+            this.Size = new Size(1480, 750);
             this.Text = "vcs_Class1";
 
             //設定執行後的表單起始位置, 正中央
@@ -502,20 +493,6 @@ namespace vcs_Class1
             //解構式
             richTextBox1.Text += "銷毀\n";
             GC.Collect();       // Force garbage collection.
-
-            //------------------------------------------------------------  # 60個
-
-            Student1 Peter = new Student1();
-            richTextBox1.Text += " Peter的資料-->使用Student()建構式\n";
-            Peter.GetShow();
-
-            Student1 David = new Student1(56);
-            richTextBox1.Text += " David的資料-->使用Student(56)建構式\n";
-            David.GetShow();
-
-            Student1 Mary = new Student1(48, 150);
-            richTextBox1.Text += " Mary的資料 -->使用Student(48, 150)建構式\n";
-            Mary.GetShow();
         }
 
         //------------------------------------------------------------  # 60個
@@ -562,7 +539,6 @@ namespace vcs_Class1
             richTextBox1.Text += kitty.GetMsg222() + "\n";  // 取得資料字串
             richTextBox1.Text += doraemon.GetMsg222() + "\n";  // 取得資料字串
             richTextBox1.Text += garfield.GetMsg222() + "\n";  // 取得資料字串
-
         }
 
         //------------------------------------------------------------  # 60個
@@ -669,21 +645,7 @@ namespace vcs_Class1
 
         private void bt_class06_Click(object sender, EventArgs e)
         {
-            //不重複之排列
-
-            int[] Choices;
-            int num_candidates = 10;
-            Choices = Extensions.RandomArrangement(num_candidates);
-
-            foreach (int i in Choices)
-            {
-                richTextBox1.Text += i.ToString() + " ";
-            }
-            richTextBox1.Text += "\n";
         }
-
-        //------------------------------------------------------------  # 60個
-
 
         //------------------------------------------------------------  # 60個
 
@@ -870,43 +832,141 @@ namespace vcs_Class1
 
         private void bt_class08_Click(object sender, EventArgs e)
         {
+            //使用 類別方法
+
+            richTextBox1.AppendText("使用 類別方法 Logger\n");
+
+            Logger.WriteLog("偵測不到PLC訊號, timeout, 清除信號, 等待使用者確認1");
+            Logger.WriteLog("使用者確認, 回到原點, 開始偵測PLC訊號1");
+
+            Logger.WriteLog("偵測不到PLC訊號, timeout, 清除信號, 等待使用者確認2");
+            Logger.WriteLog("使用者確認, 回到原點, 開始偵測PLC訊號2");
+
+            //------------------------------------------------------------  # 60個
+
+            //使用類別的靜態方法
+
+            //使用[類別的靜態方法], 外人可以直接使用
+            string name = "david";
+            uint math = 90;
+            uint eng = 80;
+            uint chin = 70;
+
+            //直接以類別來呼叫靜態方法Total()、Average()
+            uint score = StudentScore.Total(math, eng, chin);
+            float avg = StudentScore.Average("平均分數", score);
+
+            richTextBox1.Text += "姓名 : " + name + "\t總分 : " + score + "\t平均 : " + avg + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            //不重複之排列
+
+            int N = 10;
+            int[] Choices = Extensions.RandomArrangement(N);
+
+            foreach (int i in Choices)
+            {
+                richTextBox1.Text += i.ToString() + " ";
+            }
+            richTextBox1.Text += "\n";
         }
 
         //------------------------------------------------------------  # 60個
 
         private void bt_class09_Click(object sender, EventArgs e)
         {
-            //從Class內印出資料
-            //從Class內使用Form1的控件，richTextBox改為Public ?? 不用??
+            //從Class內印出資料到RichTextBox
 
-            richTextBox1.Text += "從Class內印出資料, 建立一個 ClassPrintDataExample 物件\n";
-            ClassPrintDataExample people;
+            richTextBox1.Text += "從Class內印出資料到RichTextBox\n";
+            ClassPrintDataExample people = new ClassPrintDataExample("David", "Wang", this);
 
-            richTextBox1.Text += "初始化\n";
-            people = new ClassPrintDataExample("David", "Wang", this);
-
-            richTextBox1.Text += "顯示物件的內容\n";
-            richTextBox1.Text += people.ToString() + "\n";
+            people.do_something();
         }
 
         //------------------------------------------------------------  # 60個
 
         private void bt_class10_Click(object sender, EventArgs e)
         {
-            //Class 新進0
+            //Class 新進0, 直接從類別內取出/建造資料
 
-            //類別DataStudent做成的物件一維陣列 students
-            List<DataStudent> students = MemberData.GetStudents();
+            //類別ClassStudent做成的物件一維陣列 students
+            List<ClassStudent> students = MemberData.GetStudents();
 
-            //類別DataTeacher做成的物件一維陣列 teachers
-            List<DataTeacher> teachers = MemberData.GetTeachers();
+            //類別ClassTeacher做成的物件一維陣列 teachers
+            List<ClassTeacher> teachers = MemberData.GetTeachers();
         }
 
         //------------------------------------------------------------  # 60個
 
+        class ClassCar       // 定義ClassCar類別
+        {
+            // 宣告私有變數_x, _y用來表示目前車子的X, Y座標位置
+            private int _x, _y;
+            // 宣告_speed為私有變數，表示該變數只能在Car類別內使用
+            private int _speed = 0;  // 宣告_speed為私有變數, 預設值為0
+            private int _angle = 10;  // 宣告_angle為私有變數, 預設值為10
+
+            public int Angle  // 只有get沒有set, 可讀不可寫(唯讀)
+            {
+                get
+                {
+                    return _angle;
+                }
+            }
+
+            // 宣告Speed為公開屬性
+            public int Speed  // 寫入有條件, 讀出無條件
+            {
+                get     // get存取子可傳回屬性值
+                {
+                    return _speed;// 傳回屬性值
+                }
+                set     // set存取子可設定屬性值
+                {
+                    if (value < 0)
+                    {
+                        value = 0;// 速度不得低於 0
+                    }
+                    if (value > 200)
+                    {
+                        value = 200;// 速度不得高於 200
+                    }
+                    _speed = value;// 設定屬性值
+                }
+            }
+
+            // 第一種加速方法
+            public void Accelerate()
+            {
+                this.Speed++;
+            }
+
+            // 第二種加速方法
+            public void Accelerate(int addSpeed)
+            {
+                this.Speed += addSpeed;
+            }
+
+            // 第三種加速方法
+            public void Accelerate(string S)
+            {
+                if (S == "STOP")
+                {
+                    this.Speed = 0;
+                }
+            }
+
+            // 定義 SetPosition 方法
+            public void SetPosition(int vX, int vY)
+            {
+                _x = vX;
+                _y = vY;
+            }
+        }
+
         private void bt_class11_Click(object sender, EventArgs e)
         {
-            //class test
             Car1 Benz1 = new Car1();
             Benz1.SetSpeed(500);			// 速度值超過 200
             richTextBox1.Text += "Benz1.GetSpeed() = " + Benz1.GetSpeed() + "\n";	// 顯示速度最大值200
@@ -922,12 +982,44 @@ namespace vcs_Class1
             richTextBox1.Text += "加速 ...\n";
             Benz2.Accelerate();
             richTextBox1.Text += "現在速度 : " + Benz2.Speed + "\n";
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            ClassCar Benz = new ClassCar();
+            Benz.SetPosition(100, 200);
+
+            richTextBox1.Text += "現在速度 : " + Benz.Speed + "\n";
+
+            richTextBox1.Text += "加速 ...\n";
+            Benz.Accelerate();		// 執行第一種加速方法
+            richTextBox1.Text += "現在速度 : " + Benz.Speed + "\n";
+            richTextBox1.Text += "加速 10 ...\n";
+            Benz.Accelerate(10);		// 執行第二種加速方法
+            richTextBox1.Text += "現在速度 : " + Benz.Speed + "\n";
+            richTextBox1.Text += "停車 ...\n";
+            Benz.Accelerate("STOP");	// 執行第三種加速方法
+            richTextBox1.Text += "現在速度 : " + Benz.Speed + "\n";
+
+            Benz.Speed = 500;			// 速度值超過 200
+            richTextBox1.Text += "Benz.Speed = " + Benz.Speed + "\n";
         }
 
         //------------------------------------------------------------  # 60個
 
         private void bt_class12_Click(object sender, EventArgs e)
         {
+            //Class 範例 2 TimerAlarm
+
+            timeAlarm = new TimerAlarm();
+            timeAlarm.AlarmTime = FormatConvert.inputToSeconds("12:34:56");
+
+            timeAlarm.Message = "AAAAAAAAA";
+
+            if (timeAlarm.Countdown > 0)
+            {
+                this.timer6.Enabled = true;
+            }
+
         }
 
         //------------------------------------------------------------  # 60個
@@ -1211,150 +1303,6 @@ namespace vcs_Class1
             }
         }
 
-        private void bt_class16_Click(object sender, EventArgs e)
-        {
-            //Class 新進6
-
-            //Class 範例 6 TimerAlarm
-
-            timeAlarm = new TimerAlarm();
-            timeAlarm.AlarmTime = FormatConvert.inputToSeconds("12:34:56");
-
-            timeAlarm.Message = "AAAAAAAAA";
-
-            if (timeAlarm.Countdown > 0)
-            {
-                this.timer6.Enabled = true;
-            }
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void bt_class17_Click(object sender, EventArgs e)
-        {
-            //Class 新進7
-            richTextBox1.AppendText("使用 類別方法 Logger\n");
-
-            Logger.WriteLog("偵測不到PLC訊號, timeout, 清除信號, 等待使用者確認1");
-            Logger.WriteLog("使用者確認, 回到原點, 開始偵測PLC訊號1");
-
-            Logger.WriteLog("偵測不到PLC訊號, timeout, 清除信號, 等待使用者確認2");
-            Logger.WriteLog("使用者確認, 回到原點, 開始偵測PLC訊號2");
-
-            //------------------------------------------------------------  # 60個
-
-            //使用類別的靜態方法
-
-            //使用[類別的靜態方法], 外人可以直接使用
-            string name = "david";
-            uint math = 90;
-            uint eng = 80;
-            uint chin = 70;
-
-            //直接以類別來呼叫靜態方法Total()、Average()
-            uint score = StudentScore.Total(math, eng, chin);
-            float avg = StudentScore.Average("平均分數", score);
-
-            richTextBox1.Text += "姓名 : " + name + "\t總分 : " + score + "\t平均 : " + avg + "\n";
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void bt_class18_Click(object sender, EventArgs e)
-        {
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        class ClassCar       // 定義ClassCar類別
-        {
-            // 宣告私有變數_x, _y用來表示目前車子的X, Y座標位置
-            private int _x, _y;
-            // 宣告_speed為私有變數，表示該變數只能在Car類別內使用
-            private int _speed = 0;  // 宣告_speed為私有變數, 預設值為0
-            private int _angle = 10;  // 宣告_angle為私有變數, 預設值為10
-
-            public int Angle  // 只有get沒有set, 可讀不可寫(唯讀)
-            {
-                get
-                {
-                    return _angle;
-                }
-            }
-
-            // 宣告Speed為公開屬性
-            public int Speed  // 寫入有條件, 讀出無條件
-            {
-                get     // get存取子可傳回屬性值
-                {
-                    return _speed;// 傳回屬性值
-                }
-                set     // set存取子可設定屬性值
-                {
-                    if (value < 0)
-                    {
-                        value = 0;// 速度不得低於 0
-                    }
-                    if (value > 200)
-                    {
-                        value = 200;// 速度不得高於 200
-                    }
-                    _speed = value;// 設定屬性值
-                }
-            }
-
-            // 第一種加速方法
-            public void Accelerate()
-            {
-                this.Speed++;
-            }
-
-            // 第二種加速方法
-            public void Accelerate(int addSpeed)
-            {
-                this.Speed += addSpeed;
-            }
-
-            // 第三種加速方法
-            public void Accelerate(string S)
-            {
-                if (S == "STOP")
-                {
-                    this.Speed = 0;
-                }
-            }
-
-            // 定義 SetPosition 方法
-            public void SetPosition(int vX, int vY)
-            {
-                _x = vX;
-                _y = vY;
-            }
-        }
-
-        private void bt_class19_Click(object sender, EventArgs e)
-        {
-            //Class 新進9
-
-            ClassCar Benz = new ClassCar();
-            Benz.SetPosition(100, 200);
-
-            richTextBox1.Text += "現在速度 : " + Benz.Speed + "\n";
-
-            richTextBox1.Text += "加速 ...\n";
-            Benz.Accelerate();		// 執行第一種加速方法
-            richTextBox1.Text += "現在速度 : " + Benz.Speed + "\n";
-            richTextBox1.Text += "加速 10 ...\n";
-            Benz.Accelerate(10);		// 執行第二種加速方法
-            richTextBox1.Text += "現在速度 : " + Benz.Speed + "\n";
-            richTextBox1.Text += "停車 ...\n";
-            Benz.Accelerate("STOP");	// 執行第三種加速方法
-            richTextBox1.Text += "現在速度 : " + Benz.Speed + "\n";
-
-            Benz.Speed = 500;			// 速度值超過 200
-            richTextBox1.Text += "Benz.Speed = " + Benz.Speed + "\n";
-        }
-
         //------------------------------------------------------------  # 60個
 
         //建立 HDateTime 類別
@@ -1417,7 +1365,7 @@ namespace vcs_Class1
             }
         }
 
-        private void bt_class20_Click(object sender, EventArgs e)
+        private void bt_class16_Click(object sender, EventArgs e)
         {
             //測試 MyDateTime 0
             //為年表所做的時間分析程式HDateTime.Parse
@@ -1507,7 +1455,7 @@ namespace vcs_Class1
             return result;
         }
 
-        private void bt_class21_Click(object sender, EventArgs e)
+        private void bt_class17_Click(object sender, EventArgs e)
         {
             //測試 MyDateTime 1
             PersonInfo av1 = new PersonInfo();
@@ -1532,7 +1480,7 @@ namespace vcs_Class1
 
         //------------------------------------------------------------  # 60個
 
-        private void bt_class22_Click(object sender, EventArgs e)
+        private void bt_class18_Click(object sender, EventArgs e)
         {
             //測試 MyDateTime 2
             string txt = "2006/3/11";
@@ -1555,7 +1503,7 @@ namespace vcs_Class1
 
         //------------------------------------------------------------  # 60個
 
-        private void bt_class23_Click(object sender, EventArgs e)
+        private void bt_class19_Click(object sender, EventArgs e)
         {
             MyTime now = new MyTime();
             //now.Hour = 30;
@@ -1605,37 +1553,6 @@ namespace vcs_Class1
         }
 
         //------------------------------------------------------------  # 60個
-
-        private void bt_class24_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void bt_class25_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void bt_class26_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bt_class27_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bt_class28_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bt_class29_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        //------------------------------------------------------------  # 60個
-
 
     }
 
@@ -1853,44 +1770,43 @@ namespace vcs_Class1
 
     //------------------------------------------------------------  # 60個
 
-    public class DataStudent
+    public class ClassStudent
     {
         public long Id { get; set; }  // 有get有set簡寫, 可讀可寫
         public string Name { get; set; }  // 有get有set簡寫, 可讀可寫
         public short Age { get; set; }  // 有get有set簡寫, 可讀可寫
         public DateTime DateOfCreation { get; set; }  // 有get有set簡寫, 可讀可寫
-        public bool? IsActive { get; set; }  // 有get有set簡寫, 可讀可寫
     }
 
-    public class DataTeacher
+    public class ClassTeacher
     {
         public long Id { get; set; }  // 有get有set簡寫, 可讀可寫
         public string Name { get; set; }  // 有get有set簡寫, 可讀可寫
-        public Nullable<int> DepartmentId { get; set; }  // 有get有set簡寫, 可讀可寫
+        public int DepartmentId { get; set; }  // 有get有set簡寫, 可讀可寫
     }
 
     public class MemberData
     {
-        public static List<DataStudent> GetStudents()
+        public static List<ClassStudent> GetStudents()
         {
-            var list = new List<DataStudent>
+            var list = new List<ClassStudent>
             {
-                new DataStudent {Id = 1, Name = "Smith", Age = 18, DateOfCreation = DateTime.Now, IsActive = true},
-                new DataStudent {Id = 2, Name = "Hook", Age = 16, DateOfCreation = DateTime.Now.AddDays(-1), IsActive = true},
-                new DataStudent {Id = 3, Name = "Jhon", Age = 15, DateOfCreation = DateTime.Now.AddDays(-2), IsActive = true},
-                new DataStudent {Id = 4, Name = "Alan", Age = 21, DateOfCreation = DateTime.Now.AddDays(-3), IsActive = true}
+                new ClassStudent {Id = 1, Name = "Mary", Age = 18, DateOfCreation = DateTime.Now},
+                new ClassStudent {Id = 2, Name = "Hook", Age = 16, DateOfCreation = DateTime.Now.AddDays(-1)},
+                new ClassStudent {Id = 3, Name = "Jhon", Age = 15, DateOfCreation = DateTime.Now.AddDays(-2)},
+                new ClassStudent {Id = 4, Name = "Alan", Age = 21, DateOfCreation = DateTime.Now.AddDays(-3)}
             };
             return list;
         }
 
-        public static List<DataTeacher> GetTeachers()
+        public static List<ClassTeacher> GetTeachers()
         {
-            var list = new List<DataTeacher>
+            var list = new List<ClassTeacher>
             {
-                new DataTeacher {Id = 1, Name = "Smith", DepartmentId = 18 },
-                new DataTeacher {Id = 2, Name = "Hook", DepartmentId = 16 },
-                new DataTeacher {Id = 3, Name = "Jhon", DepartmentId = 15 },
-                new DataTeacher {Id = 4, Name = "Alan", DepartmentId = 21 }
+                new ClassTeacher {Id = 1, Name = "Mary", DepartmentId = 11 },
+                new ClassTeacher {Id = 2, Name = "Hook", DepartmentId = 22 },
+                new ClassTeacher {Id = 3, Name = "Jhon", DepartmentId = 33 },
+                new ClassTeacher {Id = 4, Name = "Alan", DepartmentId = 44 }
             };
             return list;
         }
