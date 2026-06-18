@@ -40,8 +40,6 @@ namespace vcs_Class1
 {
     public partial class Form1 : Form
     {
-        TimerAlarm timeAlarm = new TimerAlarm();
-
         class ClassExample
         {
             // 建構式
@@ -109,7 +107,6 @@ namespace vcs_Class1
             H = 180;
 
             groupBox8.Size = new Size(W, H + 50);
-            groupBox1.Size = new Size(W, H);
 
             //大的groupBox
             W = 200;
@@ -124,20 +121,16 @@ namespace vcs_Class1
             groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
 
             groupBox8.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            groupBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             groupBox14.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 50);
 
             richTextBox1.Size = new Size(400, 690);
-            richTextBox1.Location = new Point(x_st + dx * 4+200, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 4 + 200, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             x_st = 10;
             y_st = 20;
             dx = 180 + 10;
             dy = 60 + 10;
-
-            button7.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button8.Location = new Point(x_st + dx * 0, y_st + dy * 1);
 
             button19.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button20.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -187,66 +180,6 @@ namespace vcs_Class1
         {
             richTextBox1.Clear();
         }
-
-        //------------------------------------------------------------  # 60個
-
-        //Sale範例 ST
-
-        //類別的定義在 MyClass.cs
-
-        //類別Sale做成的物件一維陣列 SaleList
-        List<Sale> SaleList = new List<Sale> { };    //銷售列表
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "重建一個銷售列表\n";
-
-            SaleList = new List<Sale>
-            {
-                new Sale("洗衣機",Convert.ToDateTime("2010-3-3"),600),
-                new Sale("電冰箱",Convert.ToDateTime("2010-12-12"),1900),
-                new Sale("洗衣機",Convert.ToDateTime("2010-2-2"),550),
-                new Sale("洗衣機",Convert.ToDateTime("2010-1-1"),500)
-            };
-
-            Sale refeg1 = new Sale();
-            refeg1.ProductName = "電冰箱";
-            refeg1.SaleDate = Convert.ToDateTime("2006-3-11");
-            refeg1.SalePrice = 456;
-            richTextBox1.Text += "增加一個銷售物件\t電冰箱\n";
-            SaleList.Add(refeg1);
-
-            richTextBox1.Text += "增加一個銷售物件\t洗衣機\n";
-            SaleList.Add(new Sale("洗衣機", Convert.ToDateTime("2010-3-3"), 600));
-
-            richTextBox1.Text += "增加一個銷售物件\t洗衣機\n";
-            SaleList.Add(new Sale("洗衣機", Convert.ToDateTime("2010-3-3"), 600));
-
-            richTextBox1.Text += "增加一個銷售物件\t洗衣機\n";
-            SaleList.Add(new Sale("洗衣機", Convert.ToDateTime("2010-3-3"), 523));
-
-            int cnt = SaleList.Count;
-            richTextBox1.Text += "目前共有銷售個數 : " + cnt.ToString() + " 個\n";
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            int cnt = SaleList.Count;
-            richTextBox1.Text += "目前共有銷售個數 : " + cnt.ToString() + " 個\n";
-            if (cnt > 0)
-            {
-                richTextBox1.Text += "銷售列表\n";
-                for (int i = 0; i < cnt; i++)
-                {
-                    richTextBox1.Text += SaleList[i].ProductName + "\t" + SaleList[i].SaleDate.ToString() + "\t" + SaleList[i].SalePrice.ToString() + "\n";
-                }
-
-                richTextBox1.Text += "查詢最後一次洗衣機的銷售價格\n";
-                Sale sa = SaleList.Where(itm => itm.ProductName == "洗衣機").OrderBy(itm => itm.SaleDate).Last();
-                richTextBox1.Text += "查詢結果：" + sa.SalePrice.ToString() + "\n";
-            }
-        }
-        //Sale範例 SP
 
         //------------------------------------------------------------  # 60個
 
@@ -543,108 +476,64 @@ namespace vcs_Class1
 
         //------------------------------------------------------------  # 60個
 
-        public class StudentA           //定義StudentA類別
-        {
-            public string Name;        //Name姓名欄位宣告為public
-            private int _Score;        //_Score成績欄位宣告為private
-
-            // 建構式1, 無參數, 不做任何事
-            public StudentA()
-            {
-            }
-
-            // 建構式2, 可設定姓名
-            public StudentA(string _vName)
-            {
-                Name = _vName;
-            }
-
-            // 建構式3, 可設定姓名和分數
-            public StudentA(string _vName, int _vScore)
-            {
-                Name = _vName;
-                Score = _vScore;
-            }
-
-            public int Score  //建立Score屬性，此屬性限制在0~100  // 有get有set, 可讀可寫
-            {
-                get
-                {
-                    return _Score;
-                }
-                set
-                {
-                    if (value > 100)
-                    {
-                        value = 100;   //Score屬性最大值為100
-                    }
-                    if (value < 0)
-                    {
-                        value = 0;       //Score屬性最小值為0
-                    }
-                    _Score = value;
-                }
-            }
-
-            public void ShowMsg333()      //ShowMsg顯示姓名與成績的方法
-            {
-                MessageBox.Show(Name + "同學的分數是 " + Convert.ToString(Score));
-            }
-
-            public string GetMsg333()   //GetMsg傳回姓名與成績的方法
-            {
-                return Name + "同學的分數是 " + Convert.ToString(Score);
-            }
-        }
-
         private void bt_class05_Click(object sender, EventArgs e)
         {
-            //建構式範例
-
-            //無參數的建構式
-            StudentA Anita1 = new StudentA();
-            Anita1.Name = "愛妮達";
-            Anita1.Score = 88;
-            richTextBox1.Text += Anita1.GetMsg333() + "\n";
-
-            //傳一個參數的建構式
-            StudentA Jasper1 = new StudentA("賈思伯");
-            Jasper1.Score = 77;
-            richTextBox1.Text += Jasper1.GetMsg333() + "\n";
-
-            //傳兩個參數的建構式
-            StudentA Aliya1 = new StudentA("愛麗雅", 99);
-            richTextBox1.Text += Aliya1.GetMsg333() + "\n";
-
-            //------------------------------  # 30個
-
-            //物件檢查參數
-            //給錯誤參數, 讓系統自動訂正
-            StudentA Jasper2 = new StudentA();
-            Jasper2.Name = "賈思伯";
-            Jasper2.Score = 5000;
-            Jasper2.ShowMsg333();
-            StudentA Anita2 = new StudentA();
-            Anita2.Name = "愛妮達";
-            Anita2.Score = -100;
-            Anita2.ShowMsg333();
-
-            //------------------------------  # 30個
-
-            //使用靜態成員
-            StudentA Anita3 = new StudentA("愛妮達", 100);
-            StudentA Jasper3 = new StudentA("賈思伯", 56);
-            StudentA Aliya3 = new StudentA("愛麗雅", 99);
-
-            richTextBox1.Text += Anita3.GetMsg333() + "\n";
-            richTextBox1.Text += Jasper3.GetMsg333() + "\n";
-            richTextBox1.Text += Aliya3.GetMsg333() + "\n";
         }
 
         //------------------------------------------------------------  # 60個
 
         private void bt_class06_Click(object sender, EventArgs e)
         {
+            //Sale範例
+
+            //類別的定義在 MyClass.cs
+
+            richTextBox1.Text += "重建一個銷售列表\n";
+
+            //類別Sale做成的物件一維陣列 SaleList
+            List<Sale> SaleList = new List<Sale> { };    //銷售列表
+
+            SaleList = new List<Sale>
+            {
+                new Sale("洗衣機",Convert.ToDateTime("2010-3-3"),600),
+                new Sale("電冰箱",Convert.ToDateTime("2010-12-12"),1900),
+                new Sale("洗衣機",Convert.ToDateTime("2010-2-2"),550),
+                new Sale("洗衣機",Convert.ToDateTime("2010-1-1"),500)
+            };
+
+            Sale refeg1 = new Sale();
+            refeg1.ProductName = "電冰箱";
+            refeg1.SaleDate = Convert.ToDateTime("2006-3-11");
+            refeg1.SalePrice = 456;
+            richTextBox1.Text += "增加一個銷售物件\t電冰箱\n";
+            SaleList.Add(refeg1);
+
+            richTextBox1.Text += "增加一個銷售物件\t洗衣機\n";
+            SaleList.Add(new Sale("洗衣機", Convert.ToDateTime("2010-3-3"), 600));
+
+            richTextBox1.Text += "增加一個銷售物件\t洗衣機\n";
+            SaleList.Add(new Sale("洗衣機", Convert.ToDateTime("2010-3-3"), 600));
+
+            richTextBox1.Text += "增加一個銷售物件\t洗衣機\n";
+            SaleList.Add(new Sale("洗衣機", Convert.ToDateTime("2010-3-3"), 523));
+
+            int cnt = SaleList.Count;
+            richTextBox1.Text += "目前共有銷售個數 : " + cnt.ToString() + " 個\n";
+
+
+            richTextBox1.Text += "目前共有銷售個數 : " + cnt.ToString() + " 個\n";
+            if (cnt > 0)
+            {
+                richTextBox1.Text += "銷售列表\n";
+                for (int i = 0; i < cnt; i++)
+                {
+                    richTextBox1.Text += SaleList[i].ProductName + "\t" + SaleList[i].SaleDate.ToString() + "\t" + SaleList[i].SalePrice.ToString() + "\n";
+                }
+
+                richTextBox1.Text += "查詢最後一次洗衣機的銷售價格\n";
+                Sale sa = SaleList.Where(itm => itm.ProductName == "洗衣機").OrderBy(itm => itm.SaleDate).Last();
+                richTextBox1.Text += "查詢結果：" + sa.SalePrice.ToString() + "\n";
+            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -836,15 +725,12 @@ namespace vcs_Class1
 
             richTextBox1.AppendText("使用 類別方法 Logger\n");
 
-            Logger.WriteLog("偵測不到PLC訊號, timeout, 清除信號, 等待使用者確認1");
-            Logger.WriteLog("使用者確認, 回到原點, 開始偵測PLC訊號1");
-
-            Logger.WriteLog("偵測不到PLC訊號, timeout, 清除信號, 等待使用者確認2");
-            Logger.WriteLog("使用者確認, 回到原點, 開始偵測PLC訊號2");
+            Logger.WriteLog("訊息1");
+            Logger.WriteLog("訊息2");
+            Logger.WriteLog("訊息3");
+            Logger.WriteLog("訊息4");
 
             //------------------------------------------------------------  # 60個
-
-            //使用類別的靜態方法
 
             //使用[類別的靜態方法], 外人可以直接使用
             string name = "david";
@@ -899,7 +785,7 @@ namespace vcs_Class1
 
         //------------------------------------------------------------  # 60個
 
-        class ClassCar       // 定義ClassCar類別
+        class ClassCar
         {
             // 宣告私有變數_x, _y用來表示目前車子的X, Y座標位置
             private int _x, _y;
@@ -928,7 +814,7 @@ namespace vcs_Class1
                     {
                         value = 0;// 速度不得低於 0
                     }
-                    if (value > 200)
+                    else if (value > 200)
                     {
                         value = 200;// 速度不得高於 200
                     }
@@ -1008,17 +894,6 @@ namespace vcs_Class1
 
         private void bt_class12_Click(object sender, EventArgs e)
         {
-            //Class 範例 2 TimerAlarm
-
-            timeAlarm = new TimerAlarm();
-            timeAlarm.AlarmTime = FormatConvert.inputToSeconds("12:34:56");
-
-            timeAlarm.Message = "AAAAAAAAA";
-
-            if (timeAlarm.Countdown > 0)
-            {
-                this.timer6.Enabled = true;
-            }
 
         }
 
@@ -1289,22 +1164,6 @@ namespace vcs_Class1
 
         //------------------------------------------------------------  # 60個
 
-        private void timer6_Tick(object sender, EventArgs e)
-        {
-            //動態顯示剩下的時間
-            if (timeAlarm.Countdown >= 0)
-            {
-                richTextBox1.Text += FormatConvert.secondsToTime(timeAlarm.Countdown) + " ";
-            }
-            else
-            {
-
-                this.timer6.Enabled = false;
-            }
-        }
-
-        //------------------------------------------------------------  # 60個
-
         //建立 HDateTime 類別
         public class HDateTime
         {
@@ -1498,7 +1357,6 @@ namespace vcs_Class1
                 richTextBox1.Text += "得到DateTime資料： " + dt.ToString() + "\n";
             else
                 richTextBox1.Text += "DateTime.TryParse 失敗\n";
-
         }
 
         //------------------------------------------------------------  # 60個
@@ -1558,114 +1416,8 @@ namespace vcs_Class1
 
     //------------------------------------------------------------  # 60個
 
-    public class TimerAlarm
-    {
-        private int clockTime = 0;
-        private int alarmTime = 0;
-        private string message = "时间到了";
-        private System.Timers.Timer timerClock = new System.Timers.Timer();
-
-        public int AlarmTime
-        {
-            set
-            {
-                alarmTime = value;
-            }
-        }
-
-        public int ClockTime
-        {
-            set
-            {
-                clockTime = value;
-            }
-        }
-
-        public string Message
-        {
-            set
-            {
-                message = value;
-            }
-        }
-
-        public int Countdown
-        {
-            get
-            {
-                return alarmTime - clockTime;
-            }
-        }
-
-        public TimerAlarm()
-        {
-            //MessageBox.Show("TimeAlarm start.");
-            timerClock.Elapsed += new ElapsedEventHandler(OnTimer);
-            timerClock.Interval = 1000;
-            timerClock.Enabled = true;
-        }
-
-        public void OnTimer(Object source, ElapsedEventArgs e)
-        {
-            try
-            {
-                clockTime++;
-                if (clockTime == alarmTime)
-                {
-                    MessageBox.Show(message, "时间到了", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
-
-            catch (Exception ex)
-            {
-                MessageBox.Show("OnTimer(): " + ex.Message);
-            }
-        }
-
-        public void StopTimer()
-        {
-            timerClock.Enabled = false;
-        }
-    }
-
-    //------------------------------------------------------------  # 60個
-
     public class FormatConvert
     {
-        //inputToSeconds()将一个string型的时间字串转换成一共有多少秒。
-        public static int inputToSeconds(string timerInput)
-        {
-            //字串一維陣列
-            string[] timeArray = new string[3];
-            int minutes = 0;
-            int hours = 0;
-            int seconds = 0;
-            int occurence = 0;
-            int length = 0;
-            int totalTime = 0;
-
-            occurence = timerInput.LastIndexOf(":");
-            length = timerInput.Length;
-
-            //Check for invalid input
-            if (occurence == -1 || length != 8)
-            {
-                MessageBox.Show("Invalid Time Format.");
-            }
-            else
-            {
-                timeArray = timerInput.Split(':');
-                seconds = Convert.ToInt32(timeArray[2]);
-                minutes = Convert.ToInt32(timeArray[1]);
-                hours = Convert.ToInt32(timeArray[0]);
-
-                totalTime += seconds;
-                totalTime += minutes * 60;
-                totalTime += (hours * 60) * 60;
-            }
-            return totalTime;
-        }
-
         //secondsToTime方法是把秒转换一个时间格式的字串返回。
         public static string secondsToTime(int seconds)
         {

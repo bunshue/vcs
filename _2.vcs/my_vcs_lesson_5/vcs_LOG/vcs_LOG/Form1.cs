@@ -65,7 +65,6 @@ namespace vcs_LOG
             groupBox5.Size = new Size(W, H);
             groupBox6.Size = new Size(W, H * 2);
             groupBox7.Size = new Size(W, H);
-            groupBox8.Size = new Size(W, H);
             groupBox9.Size = new Size(W, H * 2);
 
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -75,7 +74,6 @@ namespace vcs_LOG
             groupBox5.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             groupBox6.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             groupBox7.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            groupBox8.Location = new Point(x_st + dx * 1, y_st + dy * 4);
             groupBox9.Location = new Point(x_st + dx * 1, y_st + dy * 5);
 
             richTextBox1.Size = new Size(400, 690);
@@ -100,7 +98,6 @@ namespace vcs_LOG
             button10.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button12.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button13.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button14.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button15.Location = new Point(x_st + dx * 0, y_st + dy * 1);
 
@@ -527,12 +524,6 @@ namespace vcs_LOG
 
         //------------------------------------------------------------  # 60個
 
-        int i6 = 0;
-        private void button13_Click(object sender, EventArgs e)
-        {
-            Logger.WriteLog("寫log的方法6 " + (i6++).ToString());
-        }
-
         public static List<string> Logs = new List<string>();
 
         private void button14_Click(object sender, EventArgs e)
@@ -629,47 +620,6 @@ namespace vcs_LOG
             sw.Flush();
             sw.Close();
             fs.Close();
-        }
-    }
-
-    //------------------------------------------------------------  # 60個
-
-    public class Logger
-    {
-        // 寫入日志.
-        public static void WriteLog(params object[] strList)
-        {
-            if (strList.Count() == 0) return;
-            string strDicPath = "";
-            string strPath = "";
-            try
-            {
-                //LogFileName = Application.StartupPath + "\\log_" + DateTime.Now.ToString("yyyyMMdd") + ".txt";
-                strDicPath = Application.StartupPath + "//";
-                strPath = strDicPath + string.Format("{0:yyyy年-MM月-dd日}", DateTime.Now) + "日志記錄.txt";
-            }
-            catch (Exception e)
-            {
-                strDicPath = "C:/temp/log/";
-                strPath = strDicPath + string.Format("{0:yyyy年-MM月-dd日}", DateTime.Now) + "日志記錄.txt";
-            }
-
-            if (!Directory.Exists(strDicPath))
-            {
-                Directory.CreateDirectory(strDicPath);
-            }
-            if (!File.Exists(strPath))
-            {
-                using (FileStream fs = File.Create(strPath))
-                { }
-            }
-            string str = File.ReadAllText(strPath);
-            StringBuilder sb = new StringBuilder();
-            foreach (var item in strList)
-            {
-                sb.Append("\r\n" + DateTime.Now.ToString() + "-----" + item + "");
-            }
-            File.WriteAllText(strPath, sb.ToString() + "\r\n-----z-----\r\n" + str);
         }
     }
 }

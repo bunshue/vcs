@@ -51,8 +51,6 @@
             this.button10 = new System.Windows.Forms.Button();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.button12 = new System.Windows.Forms.Button();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.button13 = new System.Windows.Forms.Button();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.button15 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
@@ -63,7 +61,6 @@
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
-            this.groupBox8.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -313,28 +310,6 @@
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
-            // groupBox8
-            // 
-            this.groupBox8.Controls.Add(this.button13);
-            this.groupBox8.Location = new System.Drawing.Point(234, 372);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(200, 80);
-            this.groupBox8.TabIndex = 15;
-            this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "寫log";
-            // 
-            // button13
-            // 
-            this.button13.Font = new System.Drawing.Font("新細明體", 14.25F);
-            this.button13.ForeColor = System.Drawing.Color.Black;
-            this.button13.Location = new System.Drawing.Point(14, 14);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(180, 60);
-            this.button13.TabIndex = 0;
-            this.button13.Text = "加入LOG";
-            this.button13.UseVisualStyleBackColor = true;
-            this.button13.Click += new System.EventHandler(this.button13_Click);
-            // 
             // groupBox9
             // 
             this.groupBox9.Controls.Add(this.button15);
@@ -376,7 +351,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(829, 672);
             this.Controls.Add(this.groupBox9);
-            this.Controls.Add(this.groupBox8);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);
@@ -397,7 +371,6 @@
             this.groupBox5.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
-            this.groupBox8.ResumeLayout(false);
             this.groupBox9.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -427,8 +400,6 @@
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.Button button12;
-        private System.Windows.Forms.GroupBox groupBox8;
-        private System.Windows.Forms.Button button13;
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.Button button15;
         private System.Windows.Forms.Button button14;

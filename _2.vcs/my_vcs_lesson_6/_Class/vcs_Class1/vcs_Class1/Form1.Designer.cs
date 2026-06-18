@@ -28,11 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.button26 = new System.Windows.Forms.Button();
@@ -42,7 +38,6 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox0 = new System.Windows.Forms.PictureBox();
-            this.timer6 = new System.Windows.Forms.Timer(this.components);
             this.groupBox0 = new System.Windows.Forms.GroupBox();
             this.bt_class19 = new System.Windows.Forms.Button();
             this.bt_class18 = new System.Windows.Forms.Button();
@@ -64,7 +59,6 @@
             this.bt_class04 = new System.Windows.Forms.Button();
             this.bt_class02 = new System.Windows.Forms.Button();
             this.bt_class00 = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.groupBox14.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -81,39 +75,6 @@
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.button8);
-            this.groupBox1.Controls.Add(this.button7);
-            this.groupBox1.Location = new System.Drawing.Point(630, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 168);
-            this.groupBox1.TabIndex = 8;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Sale範例";
-            // 
-            // button8
-            // 
-            this.button8.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button8.Location = new System.Drawing.Point(15, 81);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(180, 60);
-            this.button8.TabIndex = 9;
-            this.button8.Text = "搜尋物件";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
-            // 
-            // button7
-            // 
-            this.button7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button7.Location = new System.Drawing.Point(15, 21);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(180, 60);
-            this.button7.TabIndex = 8;
-            this.button7.Text = "增加物件";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // bt_clear
             // 
@@ -213,11 +174,6 @@
             this.pictureBox0.TabIndex = 17;
             this.pictureBox0.TabStop = false;
             // 
-            // timer6
-            // 
-            this.timer6.Interval = 1000;
-            this.timer6.Tick += new System.EventHandler(this.timer6_Tick);
-            // 
             // groupBox0
             // 
             this.groupBox0.Controls.Add(this.bt_class19);
@@ -309,7 +265,6 @@
             this.bt_class13.Name = "bt_class13";
             this.bt_class13.Size = new System.Drawing.Size(190, 60);
             this.bt_class13.TabIndex = 19;
-            this.bt_class13.Text = "Class 新進3";
             this.bt_class13.UseVisualStyleBackColor = true;
             this.bt_class13.Click += new System.EventHandler(this.bt_class13_Click);
             // 
@@ -342,7 +297,6 @@
             this.bt_class12.Name = "bt_class12";
             this.bt_class12.Size = new System.Drawing.Size(190, 60);
             this.bt_class12.TabIndex = 14;
-            this.bt_class12.Text = "Class 範例 2 TimerAlarm";
             this.bt_class12.UseVisualStyleBackColor = true;
             this.bt_class12.Click += new System.EventHandler(this.bt_class12_Click);
             // 
@@ -397,6 +351,7 @@
             this.bt_class06.Name = "bt_class06";
             this.bt_class06.Size = new System.Drawing.Size(190, 60);
             this.bt_class06.TabIndex = 11;
+            this.bt_class06.Text = "Sale範例";
             this.bt_class06.UseVisualStyleBackColor = true;
             this.bt_class06.Click += new System.EventHandler(this.bt_class06_Click);
             // 
@@ -407,7 +362,6 @@
             this.bt_class05.Name = "bt_class05";
             this.bt_class05.Size = new System.Drawing.Size(190, 60);
             this.bt_class05.TabIndex = 9;
-            this.bt_class05.Text = "增加物件";
             this.bt_class05.UseVisualStyleBackColor = true;
             this.bt_class05.Click += new System.EventHandler(this.bt_class05_Click);
             // 
@@ -440,6 +394,7 @@
             this.bt_class04.Name = "bt_class04";
             this.bt_class04.Size = new System.Drawing.Size(190, 60);
             this.bt_class04.TabIndex = 8;
+            this.bt_class04.Text = "寵物範例";
             this.bt_class04.UseVisualStyleBackColor = true;
             this.bt_class04.Click += new System.EventHandler(this.bt_class04_Click);
             // 
@@ -474,12 +429,10 @@
             this.Controls.Add(this.groupBox14);
             this.Controls.Add(this.groupBox8);
             this.Controls.Add(this.bt_clear);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.richTextBox1);
             this.Name = "Form1";
             this.Text = "Class Test";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.groupBox1.ResumeLayout(false);
             this.groupBox8.ResumeLayout(false);
             this.groupBox14.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -493,9 +446,6 @@
         #endregion
 
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.Button button19;
@@ -505,7 +455,6 @@
         private System.Windows.Forms.PictureBox pictureBox0;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Timer timer6;
         private System.Windows.Forms.GroupBox groupBox0;
         private System.Windows.Forms.Button bt_class09;
         private System.Windows.Forms.Button bt_class08;
