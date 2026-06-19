@@ -30,7 +30,7 @@ namespace vcs_LOG
 
             //------------------------------------------------------------  # 60個
 
-            LogFileName = "tmp_logA_" + DateTime.Now.ToString("yyyyMMdd") + ".txt";
+            LogFileName = "timer1_logA_" + DateTime.Now.ToString("yyyyMMdd") + ".txt";
             richTextBox1.Text += "用Timer1自動存Log中.....\n";
 
             Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
@@ -39,8 +39,6 @@ namespace vcs_LOG
             _mre = new ManualResetEvent(false);
 
             Register();
-
-            LogAPI.InitLogAPI(Application.StartupPath, "aaaaaaa.log");
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -62,19 +60,15 @@ namespace vcs_LOG
             groupBox2.Size = new Size(W, H);
             groupBox3.Size = new Size(W, H);
             groupBox4.Size = new Size(W, H * 4);
-            groupBox5.Size = new Size(W, H);
             groupBox6.Size = new Size(W, H * 2);
-            groupBox7.Size = new Size(W, H);
             groupBox9.Size = new Size(W, H * 2);
 
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             groupBox3.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             groupBox4.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            groupBox5.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            groupBox6.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            groupBox7.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            groupBox9.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            groupBox6.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            groupBox9.Location = new Point(x_st + dx * 1, y_st + dy * 2);
 
             richTextBox1.Size = new Size(400, 690);
             richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
@@ -94,10 +88,8 @@ namespace vcs_LOG
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button9.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button10.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button12.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button14.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button15.Location = new Point(x_st + dx * 0, y_st + dy * 1);
 
@@ -184,7 +176,7 @@ namespace vcs_LOG
                     FilePath = Directory.GetCurrentDirectory();
                 }
 
-                string filename = FilePath + string.Format("\\{0:yyyy}-{0:MM}\\LOG_{0:yyyy-MM-dd}.txt", DateTime.Now);
+                string filename = FilePath + string.Format("\\LogFiles3\\{0:yyyy}-{0:MM}\\LOG_{0:yyyy-MM-dd}.txt", DateTime.Now);
                 FileInfo finfo = new FileInfo(filename);
                 if (finfo.Directory.Exists == false)
                 {
@@ -196,6 +188,8 @@ namespace vcs_LOG
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         int i2 = 0;
         private void button2_Click(object sender, EventArgs e)
         {
@@ -206,7 +200,7 @@ namespace vcs_LOG
         private void WriteLog(string text)
         {
             string path = AppDomain.CurrentDomain.BaseDirectory;
-            path = Path.Combine(path, "OutputStreamLogs\\" + DateTime.Now.ToString("yy-MM-dd"));
+            path = Path.Combine(path, "LogFiles2\\" + DateTime.Now.ToString("yy-MM-dd"));
 
             if (!Directory.Exists(path))
             {
@@ -243,13 +237,13 @@ namespace vcs_LOG
             string Day = DateTime.Now.Day.ToString().PadLeft(2, '0');
 
             //年月日文件夾是否存在，不存在則建立
-            if (!Directory.Exists(myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day))
+            if (!Directory.Exists(myPath + "\\LogFiles1\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day))
             {
-                Directory.CreateDirectory(myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day);
+                Directory.CreateDirectory(myPath + "\\LogFiles1\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day);
             }
 
             //寫入日志UNDO,Exception has not been handle
-            string LogFile = myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day + "\\" + myName;
+            string LogFile = myPath + "\\LogFiles1\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day + "\\" + myName;
             if (!File.Exists(LogFile))
             {
                 StreamWriter myFile;
@@ -268,7 +262,7 @@ namespace vcs_LOG
                 }
                 catch (Exception e)
                 {
-                    System.Threading.Thread.Sleep(50);
+                    Thread.Sleep(50);
                     continue;
                 }
             }
@@ -470,22 +464,18 @@ namespace vcs_LOG
 
         //------------------------------------------------------------  # 60個
 
-        int i4 = 0;
-        private void button9_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "寫log的方法4\n";
-            LogConsole.Log("寫log的方法4 " + (i4++).ToString());
-        }
-
-
         public List<string> Log = new List<string>();
         int iii = 0;
         private void AddLog(string logtext)
         {
             if (Log.Count < 1000)
-                Log.Add(System.DateTime.Now.ToString() + "\t" + logtext);
+            {
+                Log.Add(DateTime.Now.ToString() + "\t" + logtext);
+            }
             else if (Log.Count == 1000)
-                Log.Add(System.DateTime.Now.ToString() + " 達到日志上限,不再追加");
+            {
+                Log.Add(DateTime.Now.ToString() + " 達到日志上限,不再追加");
+            }
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -516,14 +506,6 @@ namespace vcs_LOG
 
         //------------------------------------------------------------  # 60個
 
-        int i5 = 0;
-        private void button12_Click(object sender, EventArgs e)
-        {
-            LogAPI.WriteLog("寫log的方法5 " + (i5++).ToString());
-        }
-
-        //------------------------------------------------------------  # 60個
-
         public static List<string> Logs = new List<string>();
 
         private void button14_Click(object sender, EventArgs e)
@@ -548,80 +530,6 @@ namespace vcs_LOG
     }
 
     //------------------------------------------------------------  # 60個
-
-    public class LogAPI
-    {
-        private static string myPath = "";
-        private static string myName = "";
-
-        /// 初始化日志文件
-        public static void InitLogAPI(string logPath, string logName)
-        {
-            myPath = logPath;
-            myName = logName;
-        }
-
-        // 寫入日志
-        public static void WriteLog(string ex)
-        {
-            if (myPath == "" || myName == "")
-                return;
-
-            string Year = DateTime.Now.Year.ToString();
-            string Month = DateTime.Now.Month.ToString().PadLeft(2, '0');
-            string Day = DateTime.Now.Day.ToString().PadLeft(2, '0');
-
-            //年月日文件夾是否存在，不存在則建立
-            if (!Directory.Exists(myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day))
-            {
-                Directory.CreateDirectory(myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day);
-            }
-
-            //寫入日志UNDO,Exception has not been handle
-            string LogFile = myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day + "\\" + myName;
-            if (!File.Exists(LogFile))
-            {
-                StreamWriter myFile;
-                myFile = File.AppendText(LogFile);
-                myFile.Close();
-            }
-
-            while (true)
-            {
-                try
-                {
-                    StreamWriter sr = File.AppendText(LogFile);
-                    sr.WriteLine(DateTime.Now.ToString("HH:mm:ss") + "  " + ex);
-                    sr.Close();
-                    break;
-                }
-                catch (Exception e)
-                {
-                    System.Threading.Thread.Sleep(50);
-                    continue;
-                }
-            }
-        }
-    }
-
-    //------------------------------------------------------------  # 60個
-
-    public class LogConsole
-    {
-        static string logFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "vcs_log.txt");
-
-        public static void Log(string msg)
-        {
-            byte[] data = Encoding.UTF8.GetBytes(msg);
-            FileStream fs = new FileStream(logFileName, FileMode.OpenOrCreate);
-            fs.Position = fs.Length;
-            StreamWriter sw = new StreamWriter(fs, Encoding.UTF8);
-            sw.WriteLine(string.Format("{0}-{1}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), msg));
-            sw.Flush();
-            sw.Close();
-            fs.Close();
-        }
-    }
 }
 
 //6060

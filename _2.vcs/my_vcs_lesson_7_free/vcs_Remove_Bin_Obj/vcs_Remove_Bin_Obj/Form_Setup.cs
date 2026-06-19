@@ -25,19 +25,14 @@ namespace vcs_Remove_Bin_Obj
         {
             lb_main_mesg.Text = "";
 
-            lb_setup0.Text = "Git程式路徑";
-            tb_setup0.Text = Properties.Settings.Default.git_path;
+            lb_setup0.Text = "Git命令";
+            tb_setup0.Text = Properties.Settings.Default.git_command;
 
             show_item_location();
         }
 
         void show_item_location()
         {
-            //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
-            //this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            //this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
-
             int x_st = 20;
             int y_st = 50;
             int dx = 170;
@@ -49,10 +44,13 @@ namespace vcs_Remove_Bin_Obj
             tb_setup0.Location = new Point(x_st + dx * 1, y_st + dy * 0);
 
             int dxx = 80;
-            bt_setup0.Location = new Point(x_st + dx * 4 + dxx, y_st + dy * 0);
             bt_setup_save.Location = new Point(x_st + dx * 4 + dxx, y_st + dy * 7);
 
             bt_exit_setup();
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_exit_Click(object sender, EventArgs e)
@@ -86,24 +84,10 @@ namespace vcs_Remove_Bin_Obj
             bt_exit.BringToFront();     //移到最上層
         }
 
-        private void bt_setup0_Click(object sender, EventArgs e)
-        {
-            openFileDialog1.Title = "選取播放影片程式";
-            openFileDialog1.FileName = "";
-            openFileDialog1.Filter = "程式|*.exe|所有檔|*.*";   //限定檔案格式
-            openFileDialog1.FilterIndex = 1;
-            openFileDialog1.RestoreDirectory = true;
-            openFileDialog1.InitialDirectory = "C:\\";         //從目前目錄開始尋找檔案
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                tb_setup0.Text = openFileDialog1.FileName;
-            }
-        }
-
         private void bt_setup_save_Click(object sender, EventArgs e)
         {
             //儲存
-            Properties.Settings.Default.git_path = tb_setup0.Text;
+            Properties.Settings.Default.git_command = tb_setup0.Text;
             Properties.Settings.Default.Save();
 
             show_main_message("儲存設定完成", S_OK, 30);

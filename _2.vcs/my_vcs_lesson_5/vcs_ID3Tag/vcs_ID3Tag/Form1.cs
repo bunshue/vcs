@@ -1874,6 +1874,8 @@ namespace vcs_ID3Tag
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button12_Click(object sender, EventArgs e)
         {
             string filename = @"D:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";       //一定要有@
@@ -1990,6 +1992,8 @@ namespace vcs_ID3Tag
                 richTextBox1.Text += "無ID3 v1 v2資料可移除\n";
             }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void cb_id3v11_CheckedChanged(object sender, EventArgs e)
         {

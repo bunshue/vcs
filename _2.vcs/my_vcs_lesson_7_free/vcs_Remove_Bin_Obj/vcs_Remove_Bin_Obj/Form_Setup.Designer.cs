@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.lb_setup0 = new System.Windows.Forms.Label();
             this.tb_setup0 = new System.Windows.Forms.TextBox();
-            this.bt_setup0 = new System.Windows.Forms.Button();
             this.bt_setup_save = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
@@ -56,17 +55,6 @@
             this.tb_setup0.Name = "tb_setup0";
             this.tb_setup0.Size = new System.Drawing.Size(574, 30);
             this.tb_setup0.TabIndex = 1;
-            // 
-            // bt_setup0
-            // 
-            this.bt_setup0.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_setup0.Location = new System.Drawing.Point(689, 21);
-            this.bt_setup0.Name = "bt_setup0";
-            this.bt_setup0.Size = new System.Drawing.Size(94, 32);
-            this.bt_setup0.TabIndex = 17;
-            this.bt_setup0.Text = "修改";
-            this.bt_setup0.UseVisualStyleBackColor = true;
-            this.bt_setup0.Click += new System.EventHandler(this.bt_setup0_Click);
             // 
             // bt_setup_save
             // 
@@ -105,7 +93,6 @@
             this.ClientSize = new System.Drawing.Size(903, 515);
             this.Controls.Add(this.lb_main_mesg);
             this.Controls.Add(this.bt_setup_save);
-            this.Controls.Add(this.bt_setup0);
             this.Controls.Add(this.tb_setup0);
             this.Controls.Add(this.lb_setup0);
             this.Name = "Form_Setup";
@@ -120,7 +107,6 @@
 
         private System.Windows.Forms.Label lb_setup0;
         private System.Windows.Forms.TextBox tb_setup0;
-        private System.Windows.Forms.Button bt_setup0;
         private System.Windows.Forms.Button bt_setup_save;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;

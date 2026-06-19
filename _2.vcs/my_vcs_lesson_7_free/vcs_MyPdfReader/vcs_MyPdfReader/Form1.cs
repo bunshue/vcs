@@ -98,10 +98,10 @@ namespace vcs_MyPdfReader
             }
 
             if (index < len)
+            {
                 tttt.RemoveAt(index);
+            }
             //richTextBox1.Text += index.ToString() + "\n";
-
-
         }
 
         private string form_list_data;
@@ -324,6 +324,8 @@ namespace vcs_MyPdfReader
         {
             this.WindowState = FormWindowState.Minimized;   //設定表單最小化
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void bt_open_pdf_Click(object sender, EventArgs e)
         {
@@ -627,7 +629,7 @@ namespace vcs_MyPdfReader
                 //webBrowser1.Navigate(pdf_filename);
 
                 //指名頁數
-                    webBrowser1.Navigate(pdf_filename + "?#initZoom=fitToPage&view=fit&navpanes=0&toolbar=0&page=" + pdf_page.ToString());
+                webBrowser1.Navigate(pdf_filename + "?#initZoom=fitToPage&view=fit&navpanes=0&toolbar=0&page=" + pdf_page.ToString());
 
                 pdf_total_page = GetPDFofPageCount(pdf_filename);
                 richTextBox1.Text += "檔案 : " + pdf_filename + "\n";
@@ -923,3 +925,16 @@ namespace vcs_MyPdfReader
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+

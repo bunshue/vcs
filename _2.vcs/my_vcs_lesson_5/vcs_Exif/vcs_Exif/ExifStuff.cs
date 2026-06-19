@@ -6,7 +6,7 @@ using System.Text;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
-using System.Drawing.Text;  //for TextRenderingHint
+using System.Drawing.Text;  // for TextRenderingHint
 
 namespace vcs_Exif
 {
@@ -89,7 +89,10 @@ namespace vcs_Exif
             int orientation_index = Array.IndexOf(img.PropertyIdList, OrientationId);
 
             // If there is no such property, do nothing.
-            if (orientation_index < 0) return;
+            if (orientation_index < 0)
+            {
+                return;
+            }
 
             // Set the orientation value.
             PropertyItem item = img.GetPropertyItem(OrientationId);
@@ -677,7 +680,6 @@ namespace vcs_Exif
             {
                 result.Add(GetExifPropertyData(img, index));
             }
-
             return result;
         }
     }

@@ -48,7 +48,7 @@ namespace vcs_Process1
 
             //------------------------------------------------------------  # 60個
 
-            process = Process.Start("NotePad.exe");  // 啟動程式
+            process = Process.Start("notepad.exe");  // 啟動程式
 
             //------------------------------------------------------------  # 60個
 
@@ -370,7 +370,7 @@ namespace vcs_Process1
 
             try
             {
-                using (Process process = Process.Start("Notepad.exe"))  // 啟動程式
+                using (Process process = Process.Start("notepad.exe"))  // 啟動程式
                 {
                     // Display physical memory usage 5 times at intervals of 2 seconds.
                     for (int i = 0; i < 10; i++)
@@ -802,7 +802,7 @@ namespace vcs_Process1
 
             /*
             //2. 單一程式的記憶體資訊, 記事本
-            Process[] processes = Process.GetProcessesByName("NotePad");  // 根據[process名稱]取得process
+            Process[] processes = Process.GetProcessesByName("notepad");  // 根據[process名稱]取得process
             foreach (Process process in processes)
             {
                 show_process_info(process);
@@ -930,7 +930,7 @@ namespace vcs_Process1
 
         private void button13_Click(object sender, EventArgs e)
         {
-            Process process = Process.Start("Notepad.exe");  // 啟動程式
+            Process process = Process.Start("notepad.exe");  // 啟動程式
 
             for (int i = 0; i < 5; i++)
             {
@@ -954,13 +954,13 @@ namespace vcs_Process1
             //------------------------------------------------------------  # 60個
 
             /*
-            //開啟Notepad程序
+            //開啟notepad程序
             Process process1 = new Process();
             process1.StartInfo.FileName = "notepad.exe";
             process1.Start();
 
-            //關閉Notepad程序
-            Process[] processes = Process.GetProcessesByName("Notepad");
+            //關閉notepad程序
+            Process[] processes = Process.GetProcessesByName("notepad");
             foreach (Process process in processes)
             {
                 process.CloseMainWindow();
@@ -1399,7 +1399,7 @@ namespace vcs_Process1
 
         private void bt_open_process_Click(object sender, EventArgs e)
         {
-            Process.Start("NotePad.exe");  // 啟動程式
+            Process.Start("notepad.exe");  // 啟動程式
         }
 
         private void bt_kill_process_Click(object sender, EventArgs e)
@@ -1489,7 +1489,7 @@ namespace vcs_Process1
         //string program_name = "MegaDownloader";
         //string program_path = @"C:\____backup\MegaDownloaderNoinstall_1.8_azo\MegaDownloaderNoinstall\MegaDownloader.exe";
         string program_name = "notepad";
-        string program_path = @"NotePad.exe";
+        string program_path = @"notepad.exe";
 
         bool flag_program_running = false;
 

@@ -11,6 +11,9 @@ using System.IO;
 using System.Timers;
 using System.Threading;
 using System.Reflection;  // for Assembly
+using System.Collections;  // for Stack
+using System.Drawing.Text;  // for TextRenderingHint
+using System.Drawing.Drawing2D;  // for GraphicsPath
 
 //方案總管/右鍵/加入/類別/預設Class1.cs改成MyClass.cs
 
@@ -95,6 +98,8 @@ namespace vcs_Class1
             //------------------------------------------------------------  # 60個
 
             test_picture_class();
+
+            LogAPI.InitLogAPI(Application.StartupPath, "aaaaaaa.log");
         }
 
         void show_item_location()
@@ -106,13 +111,13 @@ namespace vcs_Class1
             W = 200;
             H = 180;
 
-            groupBox8.Size = new Size(W, H + 50);
+            groupBox8.Size = new Size(W*2+10, H + 50);
 
             //大的groupBox
             W = 200;
             H = 300;
             groupBox14.Size = new Size(W * 2 + 80, H + 150);
-            groupBox0.Size = new Size(W * 2 + 10, H * 2 + 90);
+            groupBox0.Size = new Size(W * 3 + 20, H * 2 + 90);
 
             int x_st = 10;
             int y_st = 10;
@@ -120,11 +125,11 @@ namespace vcs_Class1
             int dy = 180 + 10;
             groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
 
-            groupBox8.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            groupBox14.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 50);
+            groupBox8.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            groupBox14.Location = new Point(x_st + dx * 3, y_st + dy * 1 + 50);
 
             richTextBox1.Size = new Size(400, 690);
-            richTextBox1.Location = new Point(x_st + dx * 4 + 200, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 5 + 100, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             x_st = 10;
@@ -135,6 +140,9 @@ namespace vcs_Class1
             button19.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button20.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button26.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button2.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button3.Location = new Point(x_st + dx * 1, y_st + dy * 2);
 
             W = 305 * 2 / 3;
             H = 400 * 2 / 3;
@@ -167,8 +175,18 @@ namespace vcs_Class1
             bt_class17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
             bt_class18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             bt_class19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            bt_class20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            bt_class21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            bt_class22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            bt_class23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            bt_class24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            bt_class25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            bt_class26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            bt_class27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            bt_class28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            bt_class29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            this.Size = new Size(1480, 750);
+            this.Size = new Size(1580, 750);
             this.Text = "vcs_Class1";
 
             //設定執行後的表單起始位置, 正中央
@@ -257,6 +275,27 @@ namespace vcs_Class1
 
             richTextBox1.Text += "他的寵物是 : " + myself.getpet().GetMsg444() + "\n";
             richTextBox1.Text += "寵物資訊 : " + mypet.show_length() + "\n";
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //繼承範例4
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //繼承範例5
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //繼承範例6
         }
 
         //繼承範例 SP
@@ -478,6 +517,25 @@ namespace vcs_Class1
 
         private void bt_class05_Click(object sender, EventArgs e)
         {
+            //感知哈希算法 獲取圖片的Hashcode
+
+            //谷歌百度以圖搜圖 感知哈希算法
+            //感知哈希算法 獲取圖片的Hashcode
+
+            string filename = string.Empty;
+            string result = string.Empty;
+
+            filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            result = ImageComparer.GetImageHashCode(filename);
+            richTextBox1.Text += result + "\n";
+
+            filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            result = ImageComparer.GetImageHashCode(filename);
+            richTextBox1.Text += result + "\n";
+
+            filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.bmp";
+            result = ImageComparer.GetImageHashCode(filename);
+            richTextBox1.Text += result + "\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -728,9 +786,22 @@ namespace vcs_Class1
             Logger.WriteLog("訊息1");
             Logger.WriteLog("訊息2");
             Logger.WriteLog("訊息3");
-            Logger.WriteLog("訊息4");
 
             //------------------------------------------------------------  # 60個
+
+
+            richTextBox1.Text += "寫log的方法\n";
+            LogConsole.Log("寫log的方法 LogConsole 1");
+            LogConsole.Log("寫log的方法 LogConsole 2");
+            LogConsole.Log("寫log的方法 LogConsole 3");
+
+            LogAPI.WriteLog("寫log的方法 LogAPI 1");
+            LogAPI.WriteLog("寫log的方法 LogAPI 2");
+            LogAPI.WriteLog("寫log的方法 LogAPI 3");
+
+            //------------------------------------------------------------  # 60個
+
+            return;
 
             //使用[類別的靜態方法], 外人可以直接使用
             string name = "david";
@@ -894,7 +965,6 @@ namespace vcs_Class1
 
         private void bt_class12_Click(object sender, EventArgs e)
         {
-
         }
 
         //------------------------------------------------------------  # 60個
@@ -1412,6 +1482,76 @@ namespace vcs_Class1
 
         //------------------------------------------------------------  # 60個
 
+        private void bt_class20_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void bt_class21_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void bt_class22_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void bt_class23_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void bt_class24_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void bt_class25_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void bt_class26_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void bt_class27_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void bt_class28_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void bt_class29_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
     }
 
     //------------------------------------------------------------  # 60個
@@ -1499,6 +1639,78 @@ namespace vcs_Class1
             }
 
             File.WriteAllText(strPath, str + sb.ToString());
+        }
+    }
+
+    public class LogConsole
+    {
+        static string logFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "vcs_log.txt");
+
+        public static void Log(string msg)
+        {
+            byte[] data = Encoding.UTF8.GetBytes(msg);
+            FileStream fs = new FileStream(logFileName, FileMode.OpenOrCreate);
+            fs.Position = fs.Length;
+            StreamWriter sw = new StreamWriter(fs, Encoding.UTF8);
+            sw.WriteLine(string.Format("{0}-{1}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), msg));
+            sw.Flush();
+            sw.Close();
+            fs.Close();
+        }
+    }
+
+    public class LogAPI
+    {
+        private static string myPath = "";
+        private static string myName = "";
+
+        /// 初始化日志文件
+        public static void InitLogAPI(string logPath, string logName)
+        {
+            myPath = logPath;
+            myName = logName;
+        }
+
+        // 寫入日志
+        public static void WriteLog(string ex)
+        {
+            if (myPath == "" || myName == "")
+                return;
+
+            string Year = DateTime.Now.Year.ToString();
+            string Month = DateTime.Now.Month.ToString().PadLeft(2, '0');
+            string Day = DateTime.Now.Day.ToString().PadLeft(2, '0');
+
+            //年月日文件夾是否存在，不存在則建立
+            if (!Directory.Exists(myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day))
+            {
+                Directory.CreateDirectory(myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day);
+            }
+
+            //寫入日志UNDO,Exception has not been handle
+            string LogFile = myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day + "\\" + myName;
+            if (!File.Exists(LogFile))
+            {
+                StreamWriter myFile;
+                myFile = File.AppendText(LogFile);
+                myFile.Close();
+            }
+
+            while (true)
+            {
+                try
+                {
+                    StreamWriter sr = File.AppendText(LogFile);
+                    sr.WriteLine(DateTime.Now.ToString("HH:mm:ss") + "  " + ex);
+                    sr.Close();
+                    break;
+                }
+                catch (Exception e)
+                {
+                    Thread.Sleep(50);
+                    continue;
+                }
+            }
         }
     }
 
@@ -1653,6 +1865,173 @@ namespace vcs_Class1
             return items;
         }
     }
+
+    //------------------------------------------------------------  # 60個
+
+    // 感知哈希算法 
+    public class ImageComparer
+    {
+        // 獲取圖片的Hashcode
+        public static string GetImageHashCode(string imageName)
+        {
+            int width = 8;
+            int height = 8;
+
+            //  第一步 
+            //  將圖片縮小到8x8的尺寸，總共64個像素。這一步的作用是去除圖片的細節， 
+            //  只保留結構、明暗等基本信息，摒棄不同尺寸、比例帶來的圖片差異。 
+            Bitmap bmp = new Bitmap(Thumb(imageName));
+            int[] pixels = new int[width * height];
+
+            //  第二步 
+            //  將縮小後的圖片，轉為64級灰度。也就是說，所有像素點總共只有64種顏色。 
+            for (int i = 0; i < width; i++)
+            {
+                for (int j = 0; j < height; j++)
+                {
+                    Color color = bmp.GetPixel(i, j);
+                    pixels[i * height + j] = RGBToGray(color.ToArgb());
+                }
+            }
+
+            //  第三步 
+            //  計算所有64個像素的灰度平均值。 
+            int avgPixel = Average(pixels);
+
+            //  第四步 
+            //  將每個像素的灰度，與平均值進行比較。大於或等於平均值，記為1；小於平均值，記為0。 
+            int[] comps = new int[width * height];
+            for (int i = 0; i < comps.Length; i++)
+            {
+                if (pixels[i] >= avgPixel)
+                {
+                    comps[i] = 1;
+                }
+                else
+                {
+                    comps[i] = 0;
+                }
+            }
+
+            //  第五步 
+            //  將上一步的比較結果，組合在一起，就構成了一個64位的整數，這就是這張圖片的指紋。組合的次序並不重要，只要保證所有圖片都采用同樣次序就行了。 
+            StringBuilder hashCode = new StringBuilder();
+            for (int i = 0; i < comps.Length; i += 4)
+            {
+                int result = comps[i] * (int)Math.Pow(2, 3) + comps[i + 1] * (int)Math.Pow(2, 2) + comps[i + 2] * (int)Math.Pow(2, 1) + comps[i + 2];
+                hashCode.Append(BinaryToHex(result));
+            }
+            bmp.Dispose();
+            return hashCode.ToString();
+        }
+
+        // 計算"漢明距離"（Hamming distance）。 
+        // 如果不相同的數據位不超過5，就說明兩張圖片很相似；如果大於10，就說明這是兩張不同的圖片。 
+        public static int HammingDistance(String sourceHashCode, String hashCode)
+        {
+            int difference = 0;
+            int len = sourceHashCode.Length;
+
+            for (int i = 0; i < len; i++)
+            {
+                if (sourceHashCode[i] != hashCode[i])
+                {
+                    difference++;
+                }
+            }
+            return difference;
+        }
+
+        // 縮放圖片
+        private static Image Thumb(string imageName)
+        {
+            return Image.FromFile(imageName).GetThumbnailImage(8, 8, () => { return false; }, IntPtr.Zero);
+        }
+
+        // 轉為64級灰度 
+        private static int RGBToGray(int pixels)
+        {
+            int _red = (pixels >> 16) & 0xFF;
+            int _green = (pixels >> 8) & 0xFF;
+            int _blue = (pixels) & 0xFF;
+            return (int)(0.3 * _red + 0.59 * _green + 0.11 * _blue);
+        }
+
+        // 計算平均值 
+        private static int Average(int[] pixels)
+        {
+            float m = 0;
+            for (int i = 0; i < pixels.Length; ++i)
+            {
+                m += pixels[i];
+            }
+            m = m / pixels.Length;
+            return (int)m;
+        }
+
+        private static char BinaryToHex(int binary)
+        {
+            char ch = ' ';
+            switch (binary)
+            {
+                case 0:
+                    ch = '0';
+                    break;
+                case 1:
+                    ch = '1';
+                    break;
+                case 2:
+                    ch = '2';
+                    break;
+                case 3:
+                    ch = '3';
+                    break;
+                case 4:
+                    ch = '4';
+                    break;
+                case 5:
+                    ch = '5';
+                    break;
+                case 6:
+                    ch = '6';
+                    break;
+                case 7:
+                    ch = '7';
+                    break;
+                case 8:
+                    ch = '8';
+                    break;
+                case 9:
+                    ch = '9';
+                    break;
+                case 10:
+                    ch = 'a';
+                    break;
+                case 11:
+                    ch = 'b';
+                    break;
+                case 12:
+                    ch = 'c';
+                    break;
+                case 13:
+                    ch = 'd';
+                    break;
+                case 14:
+                    ch = 'e';
+                    break;
+                case 15:
+                    ch = 'f';
+                    break;
+                default:
+                    ch = ' ';
+                    break;
+            }
+            return ch;
+        }
+    }
+
+    //------------------------------------------------------------  # 60個
+
 }
 
 //6060

@@ -1,5 +1,123 @@
 ﻿
 
+    //6060 maybe
+
+    public class PartyLogoA : System.ComponentModel.Component
+    {
+        private Color _color = Color.Black;
+        private Color _borderColor = Color.Transparent;
+        private float _borderWidth = 1f;
+
+        private GraphicsPath _graphicsPath = null;
+
+        private float _width = 100f;
+        private float _height = 100f;
+        private PointF _location = new PointF(0, 0);
+
+        public Color Color
+        {
+            get { return this._color; }
+            set { this._color = value; }
+        }
+
+        public Color BorderColor
+        {
+            get { return this._borderColor; }
+            set { this._borderColor = value; }
+        }
+    }
+
+
+//6060
+
+            Stack post2 = ConvertExprBack(expr);
+            Stack post = new Stack();
+            while (post2.Count > 0)
+                post.Push(post2.Pop());
+
+            Stack stack = new Stack();
+            while (post.Count > 0)
+            {
+                string tmpstr = post.Pop().ToString();
+                char c = tmpstr[0];
+                    stack.Push(tmpstr);
+                    double d1 = double.Parse(stack.Pop().ToString());
+                    double d2 = double.Parse(stack.Pop().ToString());
+                    stack.Push(r);
+                            stack.Push(Math.Asin(d).ToString());
+                            stack.Push(Math.Acos(d).ToString());
+                            stack.Push(Math.Atan(d).ToString());
+                            stack.Push((1 / Math.Atan(d)).ToString());
+                            stack.Push(Math.Sin(d).ToString());
+                            stack.Push(Math.Cos(d).ToString());
+                            stack.Push(Math.Tan(d).ToString());
+                            stack.Push((1 / Math.Tan(d)).ToString());
+                            stack.Push(Math.Log(d1, d2).ToString());
+                            stack.Push(Math.Log(d, Math.E).ToString());
+                            stack.Push(Math.Abs(d).ToString());
+
+            object obj = stack.Pop();
+
+
+
+
+            /*
+            Stack post = new Stack();
+            Stack stack = new Stack();
+            string tmpstr = "12345";
+                    post.Push(tmpstr);
+
+            stack.Push(c);
+
+            while (stack.Count > 0)
+                            stack.Pop();
+                            post.Push(stack.Pop());
+                    if (stack.Count == 0)
+                        stack.Push(c);
+                            stack.Push(c);
+                                stack.Push(c);
+                                while (stack.Count > 0)
+                                            post.Push(stack.Pop());
+                                stack.Push(c);
+                    post.Push(tmpstr);
+            while (stack.Count > 0)
+                post.Push(stack.Pop());
+
+            */
+
+
+
+6060
+
+C:\Program Files\Git\bin\git.exe pull --progress -v --no-rebase "origin"
+
+6060
+
+            string number = "123456";
+            Queue numberQueue = new Queue();
+            //循環字符串中的所有字符並賦值給numberQueue隊列 
+            foreach (char c in number)
+            {
+                numberQueue.Enqueue(c);
+            }
+
+            richTextBox1.Text += numberQueue.Count.ToString() + "\n";
+            richTextBox1.Text += numberQueue.Count.ToString() + "\n";
+            richTextBox1.Text += numberQueue.Count.ToString() + "\n";
+            richTextBox1.Text += numberQueue.Count.ToString() + "\n";
+
+            var cc = numberQueue.Dequeue();
+            richTextBox1.Text += "cc = " + cc + "\n";
+            cc = numberQueue.Dequeue();
+            richTextBox1.Text += "cc = " + cc + "\n";
+            cc = numberQueue.Dequeue();
+            richTextBox1.Text += "cc = " + cc + "\n";
+
+            richTextBox1.Text += numberQueue.Count.ToString() + "\n";
+
+
+6060
+
         public class Classmate  //事件訂閱者
         {
             private string name;

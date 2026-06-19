@@ -284,6 +284,7 @@ namespace vcs_List
 
             // 宣告stringList3 為List
             // 以下List 裡為string 型態
+
             //建立 一維字串串列
             List<string> stringList3 = new List<string>();
 
@@ -445,11 +446,13 @@ namespace vcs_List
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //二維字串串列
+            //建立 二維字串串列
             List<List<string>> list4 = new List<List<string>>();
+
             list4.Add(new List<string>() { "A001", "David" });
             list4.Add(new List<string>() { "A002", "John" });
             list4.Add(new List<string>() { "A003", "Tom" });
+
             richTextBox1.Text += "學號\t->\t姓名\n";
             foreach (var showlist in list4)
             {
@@ -458,8 +461,9 @@ namespace vcs_List
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
-            //二維字串串列
+            //建立 二維字串串列
             List<List<string>> list8 = new List<List<string>>();
+
             list8.Add(new List<string>() { "0,0 : Mike", "0, 1: Jane" });
             list8.Add(new List<string>() { "1,0 : Jack", "1, 1: John" });
 

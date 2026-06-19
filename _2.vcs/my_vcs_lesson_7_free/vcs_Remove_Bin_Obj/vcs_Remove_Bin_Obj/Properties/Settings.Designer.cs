@@ -26,12 +26,12 @@ namespace vcs_Remove_Bin_Obj.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string git_path {
+        public string git_command {
             get {
-                return ((string)(this["git_path"]));
+                return ((string)(this["git_command"]));
             }
             set {
-                this["git_path"] = value;
+                this["git_command"] = value;
             }
         }
     }

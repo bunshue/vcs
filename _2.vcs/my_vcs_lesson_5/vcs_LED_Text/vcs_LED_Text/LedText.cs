@@ -9,14 +9,16 @@ namespace vcs_LED_Text
 {
     class LedText
     {
-        public float CellWidth, CellHeight, LedThickness, Gap;
+        public float CellWidth;
+        public float CellHeight;
+        public float LedThickness;
+        public float Gap;
         public Dictionary<char, bool[]> LetterLeds = null;
 
-        public LedText(float cell_width, float cell_height,
-            float led_thickness, float gap)
+        public LedText(float W, float H, float led_thickness, float gap)
         {
-            CellWidth = cell_width;
-            CellHeight = cell_height;
+            CellWidth = W;
+            CellHeight = H;
             LedThickness = led_thickness;
             Gap = gap;
 
@@ -30,7 +32,10 @@ namespace vcs_LED_Text
         // Define the LED methods used to draw letters.
         public void DefineLetters()
         {
-            if (LetterLeds != null) return;
+            if (LetterLeds != null)
+            {
+                return;
+            }
             LetterLeds = new Dictionary<char, bool[]>();
 
             LetterLeds.Add((char)0, StringToBool("11111111111111"));
@@ -98,7 +103,9 @@ namespace vcs_LED_Text
         {
             bool[] result = new bool[values.Length];
             for (int i = 0; i < values.Length; i++)
+            {
                 result[i] = (values[i] == '1');
+            }
             return result;
         }
 
@@ -127,47 +134,35 @@ namespace vcs_LED_Text
             };
         }
 
-        #region Led polygon functions
+        //#region Led polygon functions
         public PointF[] MakeLed0(PointF position)
         {
-            PointF p1 = new PointF(
-                position.X + LedThickness / 2f + Gap,
-                position.Y + LedThickness / 2f);
-            PointF p2 = new PointF(
-                position.X + CellWidth - LedThickness / 2f - Gap,
-                p1.Y);
+            PointF p1 = new PointF(position.X + LedThickness / 2f + Gap, position.Y + LedThickness / 2f);
+            PointF p2 = new PointF(position.X + CellWidth - LedThickness / 2f - Gap, p1.Y);
             return MakeHLed(p1, p2);
         }
+
         public PointF[] MakeLed13(PointF position)
         {
-            PointF p1 = new PointF(
-                position.X + LedThickness / 2f + Gap,
-                position.Y + CellHeight - LedThickness / 2f);
-            PointF p2 = new PointF(
-                position.X + CellWidth - LedThickness / 2f - Gap,
-                p1.Y);
+            PointF p1 = new PointF(position.X + LedThickness / 2f + Gap, position.Y + CellHeight - LedThickness / 2f);
+            PointF p2 = new PointF(position.X + CellWidth - LedThickness / 2f - Gap, p1.Y);
             return MakeHLed(p1, p2);
         }
+
         public PointF[] MakeLed6(PointF position)
         {
-            PointF p1 = new PointF(
-                position.X + LedThickness / 2f + Gap,
-                position.Y + CellHeight / 2f);
-            PointF p2 = new PointF(
-                position.X + CellWidth / 2f - Gap,
-                p1.Y);
+            PointF p1 = new PointF(position.X + LedThickness / 2f + Gap, position.Y + CellHeight / 2f);
+            PointF p2 = new PointF(position.X + CellWidth / 2f - Gap, p1.Y);
             return MakeHLed(p1, p2);
         }
+
         public PointF[] MakeLed7(PointF position)
         {
-            PointF p1 = new PointF(
-                position.X + CellWidth / 2f + Gap,
-                position.Y + CellHeight / 2f);
-            PointF p2 = new PointF(
-                position.X + CellWidth - LedThickness / 2f - Gap,
-                p1.Y);
+            PointF p1 = new PointF(position.X + CellWidth / 2f + Gap, position.Y + CellHeight / 2f);
+            PointF p2 = new PointF(position.X + CellWidth - LedThickness / 2f - Gap, p1.Y);
             return MakeHLed(p1, p2);
         }
+
         public PointF[] MakeHLed(PointF p1, PointF p2)
         {
             PointF[] points =
@@ -184,44 +179,32 @@ namespace vcs_LED_Text
 
         public PointF[] MakeLed1(PointF position)
         {
-            PointF p1 = new PointF(
-                position.X + LedThickness / 2f,
-                position.Y + LedThickness / 2f + Gap);
-            PointF p2 = new PointF(
-                p1.X,
-                position.Y + CellHeight / 2f - Gap);
+            PointF p1 = new PointF(position.X + LedThickness / 2f, position.Y + LedThickness / 2f + Gap);
+            PointF p2 = new PointF(p1.X, position.Y + CellHeight / 2f - Gap);
             return MakeVLed(p1, p2);
         }
+
         public PointF[] MakeLed8(PointF position)
         {
-            PointF p1 = new PointF(
-                position.X + LedThickness / 2f,
-                position.Y + CellHeight / 2f + Gap);
-            PointF p2 = new PointF(
-                p1.X,
-                position.Y + CellHeight - LedThickness / 2f - Gap);
+            PointF p1 = new PointF(position.X + LedThickness / 2f, position.Y + CellHeight / 2f + Gap);
+            PointF p2 = new PointF(p1.X, position.Y + CellHeight - LedThickness / 2f - Gap);
             return MakeVLed(p1, p2);
         }
+
         public PointF[] MakeLed5(PointF position)
         {
-            PointF p1 = new PointF(
-                position.X + CellWidth - LedThickness / 2f,
-                position.Y + LedThickness / 2f + Gap);
-            PointF p2 = new PointF(
-                p1.X,
-                position.Y + CellHeight / 2f - Gap);
+            PointF p1 = new PointF(position.X + CellWidth - LedThickness / 2f, position.Y + LedThickness / 2f + Gap);
+            PointF p2 = new PointF(p1.X, position.Y + CellHeight / 2f - Gap);
             return MakeVLed(p1, p2);
         }
+
         public PointF[] MakeLed12(PointF position)
         {
-            PointF p1 = new PointF(
-                position.X + CellWidth - LedThickness / 2f,
-                position.Y + CellHeight / 2f + Gap);
-            PointF p2 = new PointF(
-                p1.X,
-                position.Y + CellHeight - LedThickness / 2f - Gap);
+            PointF p1 = new PointF(position.X + CellWidth - LedThickness / 2f, position.Y + CellHeight / 2f + Gap);
+            PointF p2 = new PointF(p1.X, position.Y + CellHeight - LedThickness / 2f - Gap);
             return MakeVLed(p1, p2);
         }
+
         public PointF[] MakeVLed(PointF p1, PointF p2)
         {
             PointF[] points =
@@ -238,14 +221,11 @@ namespace vcs_LED_Text
 
         public PointF[] MakeLed3(PointF position)
         {
-            PointF p1 = new PointF(
-                position.X + CellWidth / 2f,
-                position.Y + LedThickness + Gap);
-            PointF p2 = new PointF(
-                p1.X,
-                position.Y + CellHeight / 2f - Gap);
+            PointF p1 = new PointF(position.X + CellWidth / 2f, position.Y + LedThickness + Gap);
+            PointF p2 = new PointF(p1.X, position.Y + CellHeight / 2f - Gap);
             return MakeCtLed(p1, p2);
         }
+
         public PointF[] MakeCtLed(PointF p1, PointF p2)
         {
             PointF[] points =
@@ -261,14 +241,11 @@ namespace vcs_LED_Text
 
         public PointF[] MakeLed10(PointF position)
         {
-            PointF p1 = new PointF(
-                position.X + CellWidth / 2f,
-                position.Y + CellHeight / 2f + Gap);
-            PointF p2 = new PointF(
-                p1.X,
-                position.Y + CellHeight - LedThickness - Gap);
+            PointF p1 = new PointF(position.X + CellWidth / 2f, position.Y + CellHeight / 2f + Gap);
+            PointF p2 = new PointF(p1.X, position.Y + CellHeight - LedThickness - Gap);
             return MakeCbLed(p1, p2);
         }
+
         public PointF[] MakeCbLed(PointF p1, PointF p2)
         {
             PointF[] points =
@@ -288,47 +265,23 @@ namespace vcs_LED_Text
             float dx = LedThickness / sqrt2;
             float dy = dx;
 
-            PointF u_diag_pt1 = new PointF(
-                position.X + dx,
-                position.Y);
-            PointF u_diag_pt2 = new PointF(
-                position.X + CellWidth,
-                position.Y + CellHeight - dy);
+            PointF u_diag_pt1 = new PointF(position.X + dx, position.Y);
+            PointF u_diag_pt2 = new PointF(position.X + CellWidth, position.Y + CellHeight - dy);
 
-            PointF l_diag_pt1 = new PointF(
-                position.X,
-                position.Y + dy);
-            PointF l_diag_pt2 = new PointF(
-                position.X + CellWidth - dx,
-                position.Y + CellHeight);
+            PointF l_diag_pt1 = new PointF(position.X, position.Y + dy);
+            PointF l_diag_pt2 = new PointF(position.X + CellWidth - dx, position.Y + CellHeight);
 
-            PointF u_horz_pt1 = new PointF(
-                position.X,
-                position.Y + LedThickness + Gap);
-            PointF u_horz_pt2 = new PointF(
-                position.X + CellWidth,
-                position.Y + LedThickness + Gap);
+            PointF u_horz_pt1 = new PointF(position.X, position.Y + LedThickness + Gap);
+            PointF u_horz_pt2 = new PointF(position.X + CellWidth, position.Y + LedThickness + Gap);
 
-            PointF l_horz_pt1 = new PointF(
-                position.X,
-                position.Y + CellHeight / 2f - LedThickness / 2f - Gap);
-            PointF l_horz_pt2 = new PointF(
-                position.X + CellWidth,
-                position.Y + CellHeight / 2f - LedThickness / 2f - Gap);
+            PointF l_horz_pt1 = new PointF(position.X, position.Y + CellHeight / 2f - LedThickness / 2f - Gap);
+            PointF l_horz_pt2 = new PointF(position.X + CellWidth, position.Y + CellHeight / 2f - LedThickness / 2f - Gap);
 
-            PointF l_vert_pt1 = new PointF(
-                position.X + LedThickness + Gap,
-                position.Y);
-            PointF l_vert_pt2 = new PointF(
-                position.X + LedThickness + Gap,
-                position.Y + CellHeight);
+            PointF l_vert_pt1 = new PointF(position.X + LedThickness + Gap, position.Y);
+            PointF l_vert_pt2 = new PointF(position.X + LedThickness + Gap, position.Y + CellHeight);
 
-            PointF r_vert_pt1 = new PointF(
-                position.X + CellWidth / 2f - LedThickness / 2f - Gap,
-                position.Y);
-            PointF r_vert_pt2 = new PointF(
-                position.X + CellWidth / 2f - LedThickness / 2f - Gap,
-                position.Y + CellHeight);
+            PointF r_vert_pt1 = new PointF(position.X + CellWidth / 2f - LedThickness / 2f - Gap, position.Y);
+            PointF r_vert_pt2 = new PointF(position.X + CellWidth / 2f - LedThickness / 2f - Gap, position.Y + CellHeight);
 
             PointF[][] segs =
             {
@@ -341,53 +294,30 @@ namespace vcs_LED_Text
             };
             return MakeIntersectionLed(segs);
         }
+
         public PointF[] MakeLed4(PointF position)
         {
             float sqrt2 = (float)Math.Sqrt(2.0);
             float dx = LedThickness / sqrt2;
             float dy = dx;
 
-            PointF u_diag_pt1 = new PointF(
-                position.X + CellWidth - dx,
-                position.Y);
-            PointF u_diag_pt2 = new PointF(
-                position.X,
-                position.Y + CellHeight - dy);
+            PointF u_diag_pt1 = new PointF(position.X + CellWidth - dx, position.Y);
+            PointF u_diag_pt2 = new PointF(position.X, position.Y + CellHeight - dy);
 
-            PointF l_diag_pt1 = new PointF(
-                position.X + CellWidth,
-                position.Y + dy);
-            PointF l_diag_pt2 = new PointF(
-                position.X + dx,
-                position.Y + CellHeight);
+            PointF l_diag_pt1 = new PointF(position.X + CellWidth, position.Y + dy);
+            PointF l_diag_pt2 = new PointF(position.X + dx, position.Y + CellHeight);
 
-            PointF u_horz_pt1 = new PointF(
-                position.X,
-                position.Y + LedThickness + Gap);
-            PointF u_horz_pt2 = new PointF(
-                position.X + CellWidth,
-                position.Y + LedThickness + Gap);
+            PointF u_horz_pt1 = new PointF(position.X, position.Y + LedThickness + Gap);
+            PointF u_horz_pt2 = new PointF(position.X + CellWidth, position.Y + LedThickness + Gap);
 
-            PointF l_horz_pt1 = new PointF(
-                position.X,
-                position.Y + CellHeight / 2f - LedThickness / 2f - Gap);
-            PointF l_horz_pt2 = new PointF(
-                position.X + CellWidth,
-                position.Y + CellHeight / 2f - LedThickness / 2f - Gap);
+            PointF l_horz_pt1 = new PointF(position.X, position.Y + CellHeight / 2f - LedThickness / 2f - Gap);
+            PointF l_horz_pt2 = new PointF(position.X + CellWidth, position.Y + CellHeight / 2f - LedThickness / 2f - Gap);
 
-            PointF l_vert_pt1 = new PointF(
-                position.X + CellWidth / 2f + LedThickness / 2f + Gap,
-                position.Y);
-            PointF l_vert_pt2 = new PointF(
-                position.X + CellWidth / 2f + LedThickness / 2f + Gap,
-                position.Y + CellHeight);
+            PointF l_vert_pt1 = new PointF(position.X + CellWidth / 2f + LedThickness / 2f + Gap, position.Y);
+            PointF l_vert_pt2 = new PointF(position.X + CellWidth / 2f + LedThickness / 2f + Gap, position.Y + CellHeight);
 
-            PointF r_vert_pt1 = new PointF(
-                position.X + CellWidth - LedThickness - Gap,
-                position.Y);
-            PointF r_vert_pt2 = new PointF(
-                position.X + CellWidth - LedThickness - Gap,
-                position.Y + CellHeight);
+            PointF r_vert_pt1 = new PointF(position.X + CellWidth - LedThickness - Gap, position.Y);
+            PointF r_vert_pt2 = new PointF(position.X + CellWidth - LedThickness - Gap, position.Y + CellHeight);
 
             PointF[][] segs =
             {
@@ -400,53 +330,30 @@ namespace vcs_LED_Text
             };
             return MakeIntersectionLed(segs);
         }
+
         public PointF[] MakeLed9(PointF position)
         {
             float sqrt2 = (float)Math.Sqrt(2.0);
             float dx = LedThickness / sqrt2;
             float dy = dx;
 
-            PointF u_diag_pt1 = new PointF(
-                position.X,
-                position.Y + CellHeight - dy);
-            PointF u_diag_pt2 = new PointF(
-                position.X + CellWidth - dx,
-                position.Y);
+            PointF u_diag_pt1 = new PointF(position.X, position.Y + CellHeight - dy);
+            PointF u_diag_pt2 = new PointF(position.X + CellWidth - dx, position.Y);
 
-            PointF l_diag_pt1 = new PointF(
-                position.X + dx,
-                position.Y + CellHeight);
-            PointF l_diag_pt2 = new PointF(
-                position.X + CellWidth,
-                position.Y + dy);
+            PointF l_diag_pt1 = new PointF(position.X + dx, position.Y + CellHeight);
+            PointF l_diag_pt2 = new PointF(position.X + CellWidth, position.Y + dy);
 
-            PointF u_horz_pt1 = new PointF(
-                position.X,
-                position.Y + CellHeight / 2f + LedThickness / 2f + Gap);
-            PointF u_horz_pt2 = new PointF(
-                position.X + CellWidth,
-                position.Y + CellHeight / 2f + LedThickness / 2f + Gap);
+            PointF u_horz_pt1 = new PointF(position.X, position.Y + CellHeight / 2f + LedThickness / 2f + Gap);
+            PointF u_horz_pt2 = new PointF(position.X + CellWidth, position.Y + CellHeight / 2f + LedThickness / 2f + Gap);
 
-            PointF l_horz_pt1 = new PointF(
-                position.X,
-                position.Y + CellHeight - LedThickness - Gap);
-            PointF l_horz_pt2 = new PointF(
-                position.X + CellWidth,
-                position.Y + CellHeight - LedThickness - Gap);
+            PointF l_horz_pt1 = new PointF(position.X, position.Y + CellHeight - LedThickness - Gap);
+            PointF l_horz_pt2 = new PointF(position.X + CellWidth, position.Y + CellHeight - LedThickness - Gap);
 
-            PointF l_vert_pt1 = new PointF(
-                position.X + LedThickness + Gap,
-                position.Y);
-            PointF l_vert_pt2 = new PointF(
-                position.X + LedThickness + Gap,
-                position.Y + CellHeight);
+            PointF l_vert_pt1 = new PointF(position.X + LedThickness + Gap, position.Y);
+            PointF l_vert_pt2 = new PointF(position.X + LedThickness + Gap, position.Y + CellHeight);
 
-            PointF r_vert_pt1 = new PointF(
-                position.X + CellWidth / 2f - LedThickness / 2f - Gap,
-                position.Y);
-            PointF r_vert_pt2 = new PointF(
-                position.X + CellWidth / 2f - LedThickness / 2f - Gap,
-                position.Y + CellHeight);
+            PointF r_vert_pt1 = new PointF(position.X + CellWidth / 2f - LedThickness / 2f - Gap, position.Y);
+            PointF r_vert_pt2 = new PointF(position.X + CellWidth / 2f - LedThickness / 2f - Gap, position.Y + CellHeight);
 
             PointF[][] segs =
             {
@@ -459,53 +366,30 @@ namespace vcs_LED_Text
             };
             return MakeIntersectionLed(segs);
         }
+
         public PointF[] MakeLed11(PointF position)
         {
             float sqrt2 = (float)Math.Sqrt(2.0);
             float dx = LedThickness / sqrt2;
             float dy = dx;
 
-            PointF u_diag_pt1 = new PointF(
-                position.X + dx,
-                position.Y);
-            PointF u_diag_pt2 = new PointF(
-                position.X + CellWidth,
-                position.Y + CellHeight - dy);
+            PointF u_diag_pt1 = new PointF(position.X + dx, position.Y);
+            PointF u_diag_pt2 = new PointF(position.X + CellWidth, position.Y + CellHeight - dy);
 
-            PointF l_diag_pt1 = new PointF(
-                position.X,
-                position.Y + dy);
-            PointF l_diag_pt2 = new PointF(
-                position.X + CellWidth - dx,
-                position.Y + CellHeight);
+            PointF l_diag_pt1 = new PointF(position.X, position.Y + dy);
+            PointF l_diag_pt2 = new PointF(position.X + CellWidth - dx, position.Y + CellHeight);
 
-            PointF u_horz_pt1 = new PointF(
-                position.X,
-                position.Y + CellHeight / 2f + LedThickness / 2f + Gap);
-            PointF u_horz_pt2 = new PointF(
-                position.X + CellWidth,
-                position.Y + CellHeight / 2f + LedThickness / 2f + Gap);
+            PointF u_horz_pt1 = new PointF(position.X, position.Y + CellHeight / 2f + LedThickness / 2f + Gap);
+            PointF u_horz_pt2 = new PointF(position.X + CellWidth, position.Y + CellHeight / 2f + LedThickness / 2f + Gap);
 
-            PointF l_horz_pt1 = new PointF(
-                position.X,
-                position.Y + CellHeight - LedThickness - Gap);
-            PointF l_horz_pt2 = new PointF(
-                position.X + CellWidth,
-                position.Y + CellHeight - LedThickness - Gap);
+            PointF l_horz_pt1 = new PointF(position.X, position.Y + CellHeight - LedThickness - Gap);
+            PointF l_horz_pt2 = new PointF(position.X + CellWidth, position.Y + CellHeight - LedThickness - Gap);
 
-            PointF l_vert_pt1 = new PointF(
-                position.X + CellWidth / 2f + LedThickness / 2f + Gap,
-                position.Y);
-            PointF l_vert_pt2 = new PointF(
-                position.X + CellWidth / 2f + LedThickness / 2f + Gap,
-                position.Y + CellHeight);
+            PointF l_vert_pt1 = new PointF(position.X + CellWidth / 2f + LedThickness / 2f + Gap, position.Y);
+            PointF l_vert_pt2 = new PointF(position.X + CellWidth / 2f + LedThickness / 2f + Gap, position.Y + CellHeight);
 
-            PointF r_vert_pt1 = new PointF(
-                position.X + CellWidth - LedThickness - Gap,
-                position.Y);
-            PointF r_vert_pt2 = new PointF(
-                position.X + CellWidth - LedThickness - Gap,
-                position.Y + CellHeight);
+            PointF r_vert_pt1 = new PointF(position.X + CellWidth - LedThickness - Gap, position.Y);
+            PointF r_vert_pt2 = new PointF(position.X + CellWidth - LedThickness - Gap, position.Y + CellHeight);
 
             PointF[][] segs =
             {
@@ -531,46 +415,48 @@ namespace vcs_LED_Text
                 PointF b2 = seg[3];
                 bool lines_intersect, segs_intersect;
                 PointF intersection, close_pt1, close_pt2;
-                FindIntersection(a1, a2, b1, b2,
-                    out lines_intersect, out segs_intersect,
-                    out intersection, out close_pt1, out close_pt2);
+                FindIntersection(a1, a2, b1, b2, out lines_intersect, out segs_intersect, out intersection, out close_pt1, out close_pt2);
                 points.Add(intersection);
             }
 
             return points.ToArray();
         }
-        #endregion Led polygon functions
+        //#endregion Led polygon functions
 
         // Make the polygons that represent a letter.
-        public void MakeLetterPgons(char letter, PointF position,
-            out List<PointF[]> used_pgons, out List<PointF[]> unused_pgons)
+        public void MakeLetterPgons(char letter, PointF position, out List<PointF[]> used_pgons, out List<PointF[]> unused_pgons)
         {
             used_pgons = new List<PointF[]>();
             unused_pgons = new List<PointF[]>();
 
             bool[] used;
-            if (LetterLeds.ContainsKey(letter)) used = LetterLeds[letter];
-            else used = LetterLeds[(char)0];
+            if (LetterLeds.ContainsKey(letter))
+            {
+                used = LetterLeds[letter];
+            }
+            else
+            {
+                used = LetterLeds[(char)0];
+            }
 
             for (int i = 0; i < used.Length; i++)
             {
                 if (used[i])
+                {
                     used_pgons.Add(LedFuncs[i](position));
+                }
                 else
+                {
                     unused_pgons.Add(LedFuncs[i](position));
+                }
             }
         }
 
         // Draw a letter.
-        public void DrawLetter(Graphics gr, Brush bg_brush,
-            Brush used_brush, Pen used_pen,
-            Brush unused_brush, Pen unused_pen,
-            PointF position, char letter)
+        public void DrawLetter(Graphics gr, Brush bg_brush, Brush used_brush, Pen used_pen, Brush unused_brush, Pen unused_pen, PointF position, char letter)
         {
             // Clear the background.
-            gr.FillRectangle(bg_brush,
-                position.X, position.Y,
-                CellWidth, CellHeight);
+            gr.FillRectangle(bg_brush, position.X, position.Y, CellWidth, CellHeight);
 
             // Draw the polygons.
             List<PointF[]> used_pgons, unused_pgons;
@@ -588,26 +474,18 @@ namespace vcs_LED_Text
         }
 
         // Draw a sequence of letters.
-        public void DrawText(Graphics gr, Brush bg_brush,
-            Brush used_brush, Pen used_pen,
-            Brush unused_brush, Pen unused_pen,
-            PointF position, float h_spacing, string text)
+        public void DrawText(Graphics gr, Brush bg_brush, Brush used_brush, Pen used_pen, Brush unused_brush, Pen unused_pen, PointF position, float h_spacing, string text)
         {
             foreach (char ch in text)
             {
-                DrawLetter(gr, bg_brush, used_brush, used_pen,
-                    unused_brush, unused_pen, position, ch);
+                DrawLetter(gr, bg_brush, used_brush, used_pen, unused_brush, unused_pen, position, ch);
                 position.X += CellWidth * h_spacing;
             }
         }
 
         // Find the point of intersection between
         // the lines p1 --> p2 and p3 --> p4.
-        private void FindIntersection(
-            PointF p1, PointF p2, PointF p3, PointF p4,
-            out bool lines_intersect, out bool segments_intersect,
-            out PointF intersection,
-            out PointF close_p1, out PointF close_p2)
+        private void FindIntersection(PointF p1, PointF p2, PointF p3, PointF p4, out bool lines_intersect, out bool segments_intersect, out PointF intersection, out PointF close_p1, out PointF close_p2)
         {
             // Get the segments' parameters.
             float dx12 = p2.X - p1.X;
@@ -618,9 +496,7 @@ namespace vcs_LED_Text
             // Solve for t1 and t2
             float denominator = (dy12 * dx34 - dx12 * dy34);
 
-            float t1 =
-                ((p1.X - p3.X) * dy34 + (p3.Y - p1.Y) * dx34)
-                    / denominator;
+            float t1 = ((p1.X - p3.X) * dy34 + (p3.Y - p1.Y) * dx34) / denominator;
             if (float.IsInfinity(t1))
             {
                 // The lines are parallel (or close enough to it).
@@ -633,17 +509,13 @@ namespace vcs_LED_Text
             }
             lines_intersect = true;
 
-            float t2 =
-                ((p3.X - p1.X) * dy12 + (p1.Y - p3.Y) * dx12)
-                    / -denominator;
+            float t2 = ((p3.X - p1.X) * dy12 + (p1.Y - p3.Y) * dx12) / -denominator;
 
             // Find the point of intersection.
             intersection = new PointF(p1.X + dx12 * t1, p1.Y + dy12 * t1);
 
             // The segments intersect if t1 and t2 are between 0 and 1.
-            segments_intersect =
-                ((t1 >= 0) && (t1 <= 1) &&
-                 (t2 >= 0) && (t2 <= 1));
+            segments_intersect = ((t1 >= 0) && (t1 <= 1) && (t2 >= 0) && (t2 <= 1));
 
             // Find the closest points on the segments.
             if (t1 < 0)

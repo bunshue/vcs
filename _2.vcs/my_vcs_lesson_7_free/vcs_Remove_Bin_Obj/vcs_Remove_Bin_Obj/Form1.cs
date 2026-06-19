@@ -14,8 +14,11 @@ namespace vcs_Remove_Bin_Obj
 {
     public partial class Form1 : Form
     {
-        List<string> folder_name = new List<string>();      //宣告string型態的List
-        List<string> filename_rename = new List<string>();  //宣告string型態的List
+        //建立 一維字串串列
+        List<string> folder_name = new List<string>();
+        //建立 一維字串串列
+        List<string> filename_rename = new List<string>();
+
         string search_path = string.Empty;
         //string search_path = @"D:\_git\vcs\_2.vcs";
         string specified_search_path = String.Empty;
@@ -895,20 +898,16 @@ namespace vcs_Remove_Bin_Obj
 
         private void button5_Click(object sender, EventArgs e)
         {
-            button1_Click(sender, e);
+            //button1_Click(sender, e);
 
             //------------------------------------------------------------  # 60個
 
-            string git_path = Properties.Settings.Default.git_path;
-            richTextBox1.Text += git_path + "\n";
-            if (git_path == "")
+            string git_command = Properties.Settings.Default.git_command;
+            richTextBox1.Text += git_command + "\n";
+
+            if (git_command == "")
             {
-                richTextBox1.Text += "無 git 路徑\n";
-                return;
-            }
-            else if (File.Exists(git_path) == false)  // 確認檔案是否存在
-            {
-                richTextBox1.Text += "git 程式路徑錯誤\n";
+                richTextBox1.Text += "無 git 指令\n";
                 return;
             }
 
@@ -917,12 +916,12 @@ namespace vcs_Remove_Bin_Obj
             //string parameters = @" /C C:\Xilinx\SDK\2019.1\bin\bootgen -image C:\_git\ims1\iMS_Video\iMS_Video.sdk\output.bif -arch zynq -o " + filename;
             string parameters = " /C C:/Users/070601/AppData/Local/Programs/Git/bin/git.exe pull --progress -v --no-rebase \"origin\"";
 
-            string git_command = " /C " + git_path + " pull --progress -v --no-rebase \"origin\"";
+            //string git_command = " /C " + git_command + " pull --progress -v --no-rebase \"origin\"";
             //string parameters = " /C C:/Users/070601/AppData/Local/Programs/Git/bin/git.exe pull --progress -v --no-rebase \"origin\"";
             richTextBox1.Text += git_command + "\n";
 
-            parameters = git_command;
-            run_command_line_process_async(exe_filename, parameters);
+            //parameters = git_command;
+            run_command_line_process_async(exe_filename, git_command);
         }
 
         //非同步 Process使用

@@ -808,10 +808,150 @@ namespace vcs_Mix03_draw_image
             PngImg.Save(@"tmp_png2bmp.bmp", ImageFormat.Bmp);
         }
 
+        //6060
+
         private void button18_Click(object sender, EventArgs e)
         {
+            //1111
+            GraphicsPath gp2 = RetrieveGraphicsPath();
+
+
+            Pen p = new Pen(Color.Blue, 1);
+            g.DrawPath(p, gp2);
+
+
+            pictureBox1.Image = bitmap1;
+
 
         }
+
+        GraphicsPath RetrieveGraphicsPath()
+        {
+            GraphicsPath cCP = new GraphicsPath(
+ new PointF[] {
+        new PointF(365F, 6F),
+        new PointF(531F, 54F),
+        new PointF(596F, 133F),
+        new PointF(622F, 250F),
+        new PointF(637F, 336F),
+        new PointF(627F, 412F),
+        new PointF(573F, 486F),
+        new PointF(323F, 234F),
+        new PointF(416F, 140F),
+        new PointF(376F, 100F),
+        new PointF(358F, 101F),
+        new PointF(343F, 118F),
+        new PointF(258F, 118F),
+        new PointF(88F, 288F),
+        new PointF(183F, 384F),
+        new PointF(248F, 320F),
+        new PointF(490F, 563F),
+        new PointF(408F, 629F),
+        new PointF(317F, 629F),
+        new PointF(210F, 583F),
+        new PointF(165F, 560F),
+        new PointF(134F, 537F),
+        new PointF(93F, 484F),
+        new PointF(37F, 539F),
+        new PointF(76F, 578F),
+        new PointF(67F, 591F),
+        new PointF(26F, 585F),
+        new PointF(-9F, 620F),
+        new PointF(11F, 676F),
+        new PointF(27F, 704F),
+        new PointF(42F, 718F),
+        new PointF(81F, 713F),
+        new PointF(105F, 709F),
+        new PointF(125F, 676F),
+        new PointF(126F, 640F),
+        new PointF(137F, 631F),
+        new PointF(199F, 685F),
+        new PointF(246F, 713F),
+        new PointF(342F, 720F),
+        new PointF(431F, 724F),
+        new PointF(492F, 711F),
+        new PointF(576F, 651F),
+        new PointF(649F, 725F),
+        new PointF(731F, 640F),
+        new PointF(655F, 566F),
+        new PointF(703F, 491F),
+        new PointF(718F, 451F),
+        new PointF(719F, 354F),
+        new PointF(720F, 243F),
+        new PointF(635F, 22F),
+        new PointF(379F, 6F)
+       },
+ new System.Byte[] {
+          0,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          1,
+          1,
+          1,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          1,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          1,
+          1,
+          1,
+          3,
+          3,
+          3,
+          3,
+          3,
+          131});
+
+            GraphicsPath gp = new GraphicsPath();
+            gp.FillMode = FillMode.Alternate;
+            gp.AddPath(cCP, false);
+
+            //LogoHelper lh = new LogoHelper();
+            //lh.DestRectF = new RectangleF(this._location, new SizeF(this._width, this._height));
+            //lh.SrcGP = gp;
+            //GraphicsPath gpResult = lh.RetrievePath();
+            gp.Dispose();
+
+            //return gpResult;
+
+            return cCP;
+        }
+
+
+
+        //6060
 
         private void button19_Click(object sender, EventArgs e)
         {

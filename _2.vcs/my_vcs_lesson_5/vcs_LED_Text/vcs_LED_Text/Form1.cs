@@ -25,31 +25,22 @@ namespace vcs_LED_Text
 
         void show_item_location()
         {
-            int W = 600;
+            int W = 240;
             int H = 400;
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
-            //button
-            x_st = 10;
-            y_st = 10;
-            dx = W + 10;
-            dy = H + 10;
+            int x_st = 10;
+            int y_st = 10;
+            int dx = W + 10;
+            int dy = H + 10;
             pictureBox0.Size = new Size(W, H);
-            pictureBox1.Size = new Size(W, H);
+            pictureBox1.Size = new Size(W * 4, H);
             pictureBox2.Size = new Size(W, H);
-            pictureBox3.Size = new Size(W, H);
-
+            pictureBox3.Size = new Size(W * 4, H);
             pictureBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            pictureBox2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            pictureBox2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             pictureBox3.Location = new Point(x_st + dx * 1, y_st + dy * 1);
 
-            //this.ClientSize = new Size(W * 2 + 10 * 3, H * 3 + 10 * 1);
-
-            this.Size = new Size(1280, 900);
+            this.Size = new Size(1380, 870);
             this.Text = "vcs_LED_Text";
 
             //設定執行後的表單起始位置, 正中央
@@ -59,36 +50,46 @@ namespace vcs_LED_Text
 
         private void pictureBox0_Paint(object sender, PaintEventArgs e)
         {
+            //左上
             TestLeds(e.Graphics);
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
+            //右上
             TestColorful(e.Graphics);
         }
 
         private void pictureBox2_Paint(object sender, PaintEventArgs e)
         {
+            //左下
             TestSplat(e.Graphics);
         }
 
         private void pictureBox3_Paint(object sender, PaintEventArgs e)
         {
+            //右下
             TestLetters(e.Graphics);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void TestSplat(Graphics gr)
         {
             gr.Clear(Color.Black);
             gr.SmoothingMode = SmoothingMode.AntiAlias;
 
-            const float margin = 10;
-            const float cell_width = 200;
-            const float cell_height = 320;
+            const float W = 200;
+            const float H = 320;
             const float led_thickness = 28;
             const float gap = 1.5f;
+            int dx = (int)W + 5;
+            int dy = (int)H + 5;
+            int x_st = 10;
+            int y_st = 10;
+            PointF position = new PointF(x_st + dx * 0, y_st + dy * 0);
 
-            LedText letter = new LedText(cell_width, cell_height, led_thickness, gap);
+            LedText letter = new LedText(W, H, led_thickness, gap);
 
             Brush bg_brush = Brushes.Black;
             Brush used_brush = Brushes.Lime;
@@ -96,53 +97,70 @@ namespace vcs_LED_Text
             Brush unused_brush = new SolidBrush(Color.FromArgb(0, 40, 0));
             Pen unused_pen = Pens.Transparent;
 
-            PointF position = new PointF(margin, margin);
+            position = new PointF(x_st + dx * 0, y_st + dy * 0);
             letter.DrawText(gr, bg_brush, used_brush, used_pen, unused_brush, unused_pen, position, 1.2f, "!");
         }
+
+        //------------------------------------------------------------  # 60個
+
         private void TestColorful(Graphics gr)
         {
             gr.Clear(Color.Black);
             gr.SmoothingMode = SmoothingMode.AntiAlias;
 
-            const float margin = 10;
-            const float cell_width = 200;
-            const float cell_height = 320;
-            const float led_thickness = 28;
-            const float gap = 5f;
+            const float W = 200 / 2;
+            const float H = 320 / 2;
+            const float led_thickness = 28 / 2;
+            const float gap = 5f / 2.0f;
+            int dx = (int)W + 5;
+            int dy = (int)H + 5;
+            int x_st = 10;
+            int y_st = 10;
+            PointF position = new PointF(x_st + dx * 0, y_st + dy * 0);
 
-            LedText letter = new LedText(cell_width, cell_height, led_thickness, gap);
+            LedText letter = new LedText(W, H, led_thickness, gap);
 
             Brush bg_brush1 = Brushes.Black;
             Brush used_brush1 = Brushes.Yellow;
             Pen used_pen1 = new Pen(Color.DarkRed, 3);
             Brush unused_brush1 = new SolidBrush(Color.FromArgb(0, 40, 0));
             Pen unused_pen1 = used_pen1;
-
-            PointF position = new PointF(margin, margin);
+            position = new PointF(x_st + dx * 0, y_st + dy * 0);
             letter.DrawText(gr, bg_brush1, used_brush1, used_pen1, unused_brush1, unused_pen1, position, 1.2f, "3");
+            position = new PointF(x_st + dx * 1, y_st + dy * 0);
+            letter.DrawText(gr, bg_brush1, used_brush1, used_pen1, unused_brush1, unused_pen1, position, 1.2f, "5");
+
+            //------------------------------  # 30個
 
             Brush bg_brush2 = Brushes.Black;
             Brush used_brush2 = new HatchBrush(HatchStyle.HorizontalBrick, Color.Lime, Color.Green);
             Pen used_pen2 = new Pen(Color.LightGreen, 3);
             Brush unused_brush2 = new SolidBrush(Color.FromArgb(0, 40, 0));
             Pen unused_pen2 = Pens.Transparent;
-
-            position.X += letter.CellWidth * 1.2f;
+            position = new PointF(x_st + dx * 0, y_st + dy * 1);
+            letter.DrawText(gr, bg_brush2, used_brush2, used_pen2, unused_brush2, unused_pen2, position, 1.2f, "3");
+            position = new PointF(x_st + dx * 1, y_st + dy * 1);
             letter.DrawText(gr, bg_brush2, used_brush2, used_pen2, unused_brush2, unused_pen2, position, 1.2f, "5");
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void TestLetters(Graphics gr)
         {
             gr.Clear(Color.Black);
             gr.SmoothingMode = SmoothingMode.AntiAlias;
 
-            const float margin = 10;
-            const float cell_width = 50;
-            const float cell_height = 80;
+            const float W = 50;
+            const float H = 80;
             const float led_thickness = 7;
             const float gap = 1.5f;
+            int dx = (int)W + 5;
+            int dy = (int)H + 5;
+            int x_st = 10;
+            int y_st = 10;
+            PointF position = new PointF(x_st + dx * 0, y_st + dy * 0);
 
-            LedText letter = new LedText(cell_width, cell_height, led_thickness, gap);
+            LedText letter = new LedText(W, H, led_thickness, gap);
 
             Brush bg_brush = Brushes.Black;
             Brush used_brush = Brushes.Lime;
@@ -150,7 +168,7 @@ namespace vcs_LED_Text
             Brush unused_brush = new SolidBrush(Color.FromArgb(0, 40, 0));
             Pen unused_pen = Pens.Transparent;
 
-            PointF position = new PointF(margin, margin);
+            position = new PointF(x_st + dx * 0, y_st + dy * 0);
             letter.DrawText(gr, bg_brush, used_brush, used_pen, unused_brush, unused_pen, position, 1.2f, "ABCDEFGHI");
 
             position.Y += letter.CellHeight * 1.2f;
@@ -163,67 +181,72 @@ namespace vcs_LED_Text
             letter.DrawText(gr, bg_brush, used_brush, used_pen, unused_brush, unused_pen, position, 1.2f, "123456789");
         }
 
-        private void TestLeds(Graphics gr)
-        {
-            gr.Clear(pictureBox1.BackColor);
-            gr.SmoothingMode = SmoothingMode.AntiAlias;
-            //gr.DrawRectangle(Pens.Green, margin, margin, cell_width, cell_height);
+        //------------------------------------------------------------  # 60個
 
-            const float margin = 10;
-            const float cell_width = 100;
-            const float cell_height = 160;
+        private void TestLeds(Graphics g)
+        {
+            g.Clear(pictureBox1.BackColor);
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
+            const float W = 100;
+            const float H = 160;
             const float led_thickness = 15;
             const float gap = 3;
+            int dx = (int)W + 5;
+            int dy = (int)H + 5;
+            int x_st = 10;
+            int y_st = 10;
+            PointF position = new PointF(x_st + dx * 0, y_st + dy * 0);
 
-            LedText letter = new LedText(cell_width, cell_height, led_thickness, gap);
-            PointF position = new PointF(margin, margin);
+            LedText letter = new LedText(W, H, led_thickness, gap);
+            position = new PointF(x_st + dx * 0, y_st + dy * 0);
 
             PointF[] top = letter.MakeLed0(position);
-            gr.DrawPolygon(Pens.Red, top);
+            g.DrawPolygon(Pens.Red, top);
 
             PointF[] bottom = letter.MakeLed13(position);
-            gr.DrawPolygon(Pens.Red, bottom);
+            g.DrawPolygon(Pens.Red, bottom);
 
             PointF[] uleft = letter.MakeLed1(position);
-            gr.DrawPolygon(Pens.Red, uleft);
+            g.DrawPolygon(Pens.Red, uleft);
 
             PointF[] lleft = letter.MakeLed8(position);
-            gr.DrawPolygon(Pens.Red, lleft);
+            g.DrawPolygon(Pens.Red, lleft);
 
             PointF[] uright = letter.MakeLed5(position);
-            gr.DrawPolygon(Pens.Red, uright);
+            g.DrawPolygon(Pens.Red, uright);
 
             PointF[] lright = letter.MakeLed12(position);
-            gr.DrawPolygon(Pens.Red, lright);
+            g.DrawPolygon(Pens.Red, lright);
 
             PointF[] cl = letter.MakeLed6(position);
-            gr.DrawPolygon(Pens.Red, cl);
+            g.DrawPolygon(Pens.Red, cl);
 
             PointF[] cr = letter.MakeLed7(position);
-            gr.DrawPolygon(Pens.Red, cr);
+            g.DrawPolygon(Pens.Red, cr);
 
             PointF[] ct = letter.MakeLed3(position);
-            gr.DrawPolygon(Pens.Red, ct);
+            g.DrawPolygon(Pens.Red, ct);
 
             PointF[] cb = letter.MakeLed10(position);
-            gr.DrawPolygon(Pens.Red, cb);
+            g.DrawPolygon(Pens.Red, cb);
 
             PointF[] ul_d = letter.MakeLed2(position);
-            gr.DrawPolygon(Pens.Red, ul_d);
+            g.DrawPolygon(Pens.Red, ul_d);
 
             PointF[] ur_d = letter.MakeLed4(position);
-            gr.DrawPolygon(Pens.Red, ur_d);
+            g.DrawPolygon(Pens.Red, ur_d);
 
             PointF[] ll_d = letter.MakeLed9(position);
-            gr.DrawPolygon(Pens.Red, ll_d);
+            g.DrawPolygon(Pens.Red, ll_d);
 
             PointF[] lr_d = letter.MakeLed11(position);
-            gr.DrawPolygon(Pens.Red, lr_d);
+            g.DrawPolygon(Pens.Red, lr_d);
 
             PointF[] pts = lr_d;
-            //gr.DrawEllipse(Pens.Red, pts[0].X - 2, pts[0].Y - 2, 4, 4);
-            //gr.DrawEllipse(Pens.Green, pts[1].X - 2, pts[1].Y - 2, 4, 4);
-            //gr.DrawEllipse(Pens.Blue, pts[2].X - 2, pts[2].Y - 2, 4, 4);
+            //g.DrawEllipse(Pens.Red, pts[0].X - 2, pts[0].Y - 2, 4, 4);
+            //g.DrawEllipse(Pens.Green, pts[1].X - 2, pts[1].Y - 2, 4, 4);
+            //g.DrawEllipse(Pens.Blue, pts[2].X - 2, pts[2].Y - 2, 4, 4);
         }
     }
 }
