@@ -1,119 +1,26 @@
 ﻿
 
-    //6060 maybe
 
-    public class PartyLogoA : System.ComponentModel.Component
-    {
-        private Color _color = Color.Black;
-        private Color _borderColor = Color.Transparent;
-        private float _borderWidth = 1f;
+3字
+Tom
+Sue
 
-        private GraphicsPath _graphicsPath = null;
+4字
+John
+Mary
+Jack
+Lisa
 
-        private float _width = 100f;
-        private float _height = 100f;
-        private PointF _location = new PointF(0, 0);
 
-        public Color Color
-        {
-            get { return this._color; }
-            set { this._color = value; }
-        }
+5字
+David
+Jerry
 
-        public Color BorderColor
-        {
-            get { return this._borderColor; }
-            set { this._borderColor = value; }
-        }
-    }
 
 
 //6060
 
-            Stack post2 = ConvertExprBack(expr);
-            Stack post = new Stack();
-            while (post2.Count > 0)
-                post.Push(post2.Pop());
-
-            Stack stack = new Stack();
-            while (post.Count > 0)
-            {
-                string tmpstr = post.Pop().ToString();
-                char c = tmpstr[0];
-                    stack.Push(tmpstr);
-                    double d1 = double.Parse(stack.Pop().ToString());
-                    double d2 = double.Parse(stack.Pop().ToString());
-                    stack.Push(r);
-                            stack.Push(Math.Asin(d).ToString());
-                            stack.Push(Math.Acos(d).ToString());
-                            stack.Push(Math.Atan(d).ToString());
-                            stack.Push((1 / Math.Atan(d)).ToString());
-                            stack.Push(Math.Sin(d).ToString());
-                            stack.Push(Math.Cos(d).ToString());
-                            stack.Push(Math.Tan(d).ToString());
-                            stack.Push((1 / Math.Tan(d)).ToString());
-                            stack.Push(Math.Log(d1, d2).ToString());
-                            stack.Push(Math.Log(d, Math.E).ToString());
-                            stack.Push(Math.Abs(d).ToString());
-
-            object obj = stack.Pop();
-
-
-
-
-            /*
-            Stack post = new Stack();
-            Stack stack = new Stack();
-            string tmpstr = "12345";
-                    post.Push(tmpstr);
-
-            stack.Push(c);
-
-            while (stack.Count > 0)
-                            stack.Pop();
-                            post.Push(stack.Pop());
-                    if (stack.Count == 0)
-                        stack.Push(c);
-                            stack.Push(c);
-                                stack.Push(c);
-                                while (stack.Count > 0)
-                                            post.Push(stack.Pop());
-                                stack.Push(c);
-                    post.Push(tmpstr);
-            while (stack.Count > 0)
-                post.Push(stack.Pop());
-
-            */
-
-
-
-6060
-
 C:\Program Files\Git\bin\git.exe pull --progress -v --no-rebase "origin"
-
-6060
-
-            string number = "123456";
-            Queue numberQueue = new Queue();
-            //循環字符串中的所有字符並賦值給numberQueue隊列 
-            foreach (char c in number)
-            {
-                numberQueue.Enqueue(c);
-            }
-
-            richTextBox1.Text += numberQueue.Count.ToString() + "\n";
-            richTextBox1.Text += numberQueue.Count.ToString() + "\n";
-            richTextBox1.Text += numberQueue.Count.ToString() + "\n";
-            richTextBox1.Text += numberQueue.Count.ToString() + "\n";
-
-            var cc = numberQueue.Dequeue();
-            richTextBox1.Text += "cc = " + cc + "\n";
-            cc = numberQueue.Dequeue();
-            richTextBox1.Text += "cc = " + cc + "\n";
-            cc = numberQueue.Dequeue();
-            richTextBox1.Text += "cc = " + cc + "\n";
-
-            richTextBox1.Text += numberQueue.Count.ToString() + "\n";
 
 
 6060
@@ -2522,17 +2429,14 @@ VideoFileWriter writer = new VideoFileWriter();
 //關閉檔案
 writer.Close();
 
-
         private void DoRecord()
         {
             VideoFileWriter writer = new VideoFileWriter();
 
             writer.Open(RecordingFilename, this.Width, this.Height, 30);
 
-
                         Bitmap bitmap1 = frames.Dequeue();
                         writer.WriteVideoFrame(bitmap1);
-
 
             writer.Close();
         }
@@ -2561,6 +2465,36 @@ if (frames.Count > 0)
 
 //------------------------------------------------------------  # 60個
 
+string thumb = fpath + fn.Replace(CodecExtension, ".jpg");
+
+
+                /*
+                Supported Formats:
+                    Raw	        Raw (uncompressed) video.
+	                MPEG2	    MPEG-2 part 2.
+	                FLV1	    Flash Video (FLV) / Sorenson Spark / Sorenson H.263.
+	                H263P	    H.263+ / H.263-1998 / H.263 version 2.
+	                MSMPEG4v3	MPEG-4 part 2 Microsoft variant version 3.
+	                MSMPEG4v2	MPEG-4 part 2 Microsoft variant version 2.
+	                WMV2	    Windows Media Video 8.
+	                WMV1	    Windows Media Video 7.
+	                MPEG4	    MPEG-4 part 2.
+	                Default	    Default video codec, which FFmpeg library selects for the specified file format.
+                    missing : H264        
+                */
+
+            // as long as we're recording
+            // we dequeue the BitMaps waiting in the Queue and write them to the file
+            while (IsRecording)
+            {
+                if (frames.Count > 0)
+                {
+                    Bitmap bmp = frames.Dequeue();
+                    writer.WriteVideoFrame(bmp);
+                    bmp.Dispose();
+                }
+            }
+            writer.Close();
 
 //------------------------------------------------------------  # 60個
 
@@ -2644,8 +2578,6 @@ clone語法
             pictureBox1.Image = bitmap3;
 
 Bitmap/Image存檔
-
-//------------------------------------------------------------  # 60個
 
 //------------------------------------------------------------  # 60個
 
@@ -2882,6 +2814,7 @@ pictureBox1.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
 private int intStartX = 0;
 private int intStartY = 0;
 private bool isMouseDraw = false;
+
 private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
 {
 	isMouseDraw = true;
@@ -2933,7 +2866,6 @@ private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
 \S：  非空白字元
 \w：  單詞字元(a-z,A-Z,0-9,_)
 \W：  非單詞字元
-
 
 無法嵌入互操作類型“Microsoft.Office.Interop.Excel.ApplicationClass”。請改用適用的接口，interop.excel
 把Microsoft.Office.Interop.Excel.DLL的嵌入互操作類型改為ture就可以了
@@ -3466,39 +3398,6 @@ bool isContains = ValidateEmailAccount("pop3.163.com", 110, "wise_sandy@XXX.com"
 Console.WriteLine(isContains ? "用戶存在" : errorMessage); 
 
 //------------------------------------------------------------  # 60個
-
-string thumb = fpath + fn.Replace(CodecExtension, ".jpg");
-
-
-                /*
-                Supported Formats:
-                    Raw	        Raw (uncompressed) video.
-	                MPEG2	    MPEG-2 part 2.
-	                FLV1	    Flash Video (FLV) / Sorenson Spark / Sorenson H.263.
-	                H263P	    H.263+ / H.263-1998 / H.263 version 2.
-	                MSMPEG4v3	MPEG-4 part 2 Microsoft variant version 3.
-	                MSMPEG4v2	MPEG-4 part 2 Microsoft variant version 2.
-	                WMV2	    Windows Media Video 8.
-	                WMV1	    Windows Media Video 7.
-	                MPEG4	    MPEG-4 part 2.
-	                Default	    Default video codec, which FFmpeg library selects for the specified file format.
-                    missing : H264        
-                */
-
-
-
-            // as long as we're recording
-            // we dequeue the BitMaps waiting in the Queue and write them to the file
-            while (IsRecording)
-            {
-                if (frames.Count > 0)
-                {
-                    Bitmap bmp = frames.Dequeue();
-                    writer.WriteVideoFrame(bmp);
-                    bmp.Dispose();
-                }
-            }
-            writer.Close();
 
 //------------------------------------------------------------  # 60個
 

@@ -321,9 +321,9 @@ namespace vcs_Queue
             //Queue測試2
             Queue m = new Queue();   // 非泛型           
 
-            m.Enqueue(new Member() { Name = "David", Select = true, Score = 70 });
+            m.Enqueue(new Member() { Name = "John", Select = true, Score = 70 });
             m.Enqueue(new Member() { Name = "Mary", Select = false, Score = 65 });
-            m.Enqueue(new Member() { Name = "Tom", Select = true, Score = 85 });
+            m.Enqueue(new Member() { Name = "Lisa", Select = true, Score = 85 });
             m.Enqueue(new Member() { Name = "Jack", Select = true, Score = 95 });
 
             Console.WriteLine("=== 非泛型 Queue 操作 需強制轉換 .... \n");
@@ -333,15 +333,17 @@ namespace vcs_Queue
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button9_Click(object sender, EventArgs e)
         {
             //Queue測試3
 
             Queue<Member> m = new Queue<Member>();   // 泛型           
 
-            m.Enqueue(new Member() { Name = "David", Select = true, Score = 70 });
+            m.Enqueue(new Member() { Name = "John", Select = true, Score = 70 });
             m.Enqueue(new Member() { Name = "Mary", Select = false, Score = 65 });
-            m.Enqueue(new Member() { Name = "Tom", Select = true, Score = 85 });
+            m.Enqueue(new Member() { Name = "Lisa", Select = true, Score = 85 });
             m.Enqueue(new Member() { Name = "Jack", Select = true, Score = 95 });
 
             Console.WriteLine("=== 泛型 Queue 操作不需強制轉換 .... \n");
@@ -351,6 +353,54 @@ namespace vcs_Queue
                 Console.WriteLine("{0} ", (m.Dequeue().ToString()));
             }
         }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //Queue測試4
+
+            string number = "123456";
+            Queue numberQueue = new Queue();
+            //循環字符串中的所有字符並賦值給numberQueue隊列 
+            foreach (char c in number)
+            {
+                numberQueue.Enqueue(c);
+            }
+
+            richTextBox1.Text += numberQueue.Count.ToString() + "\n";
+            richTextBox1.Text += numberQueue.Count.ToString() + "\n";
+            richTextBox1.Text += numberQueue.Count.ToString() + "\n";
+            richTextBox1.Text += numberQueue.Count.ToString() + "\n";
+
+            var cc = numberQueue.Dequeue();
+            richTextBox1.Text += "cc = " + cc + "\n";
+            cc = numberQueue.Dequeue();
+            richTextBox1.Text += "cc = " + cc + "\n";
+            cc = numberQueue.Dequeue();
+            richTextBox1.Text += "cc = " + cc + "\n";
+
+            richTextBox1.Text += numberQueue.Count.ToString() + "\n";
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            //Queue測試5
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            //Queue測試6
+        }
+
+
+
+
     }
 
     //------------------------------------------------------------  # 60個

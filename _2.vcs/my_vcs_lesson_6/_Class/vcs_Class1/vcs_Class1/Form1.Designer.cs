@@ -319,6 +319,7 @@
             this.bt_class23.Name = "bt_class23";
             this.bt_class23.Size = new System.Drawing.Size(190, 60);
             this.bt_class23.TabIndex = 29;
+            this.bt_class23.Text = "MyTime";
             this.bt_class23.UseVisualStyleBackColor = true;
             this.bt_class23.Click += new System.EventHandler(this.bt_class23_Click);
             // 
@@ -329,6 +330,7 @@
             this.bt_class21.Name = "bt_class21";
             this.bt_class21.Size = new System.Drawing.Size(190, 60);
             this.bt_class21.TabIndex = 28;
+            this.bt_class21.Text = "測試 MyDateTime 1";
             this.bt_class21.UseVisualStyleBackColor = true;
             this.bt_class21.Click += new System.EventHandler(this.bt_class21_Click);
             // 
@@ -349,6 +351,7 @@
             this.bt_class22.Name = "bt_class22";
             this.bt_class22.Size = new System.Drawing.Size(190, 60);
             this.bt_class22.TabIndex = 24;
+            this.bt_class22.Text = "測試 MyDateTime 2";
             this.bt_class22.UseVisualStyleBackColor = true;
             this.bt_class22.Click += new System.EventHandler(this.bt_class22_Click);
             // 
@@ -359,6 +362,7 @@
             this.bt_class20.Name = "bt_class20";
             this.bt_class20.Size = new System.Drawing.Size(190, 60);
             this.bt_class20.TabIndex = 22;
+            this.bt_class20.Text = "測試 MyDateTime 0";
             this.bt_class20.UseVisualStyleBackColor = true;
             this.bt_class20.Click += new System.EventHandler(this.bt_class20_Click);
             // 
@@ -369,7 +373,6 @@
             this.bt_class19.Name = "bt_class19";
             this.bt_class19.Size = new System.Drawing.Size(190, 60);
             this.bt_class19.TabIndex = 15;
-            this.bt_class19.Text = "MyTime";
             this.bt_class19.UseVisualStyleBackColor = true;
             this.bt_class19.Click += new System.EventHandler(this.bt_class19_Click);
             // 
@@ -380,7 +383,6 @@
             this.bt_class18.Name = "bt_class18";
             this.bt_class18.Size = new System.Drawing.Size(190, 60);
             this.bt_class18.TabIndex = 17;
-            this.bt_class18.Text = "測試 MyDateTime 2";
             this.bt_class18.UseVisualStyleBackColor = true;
             this.bt_class18.Click += new System.EventHandler(this.bt_class18_Click);
             // 
@@ -391,7 +393,6 @@
             this.bt_class17.Name = "bt_class17";
             this.bt_class17.Size = new System.Drawing.Size(190, 60);
             this.bt_class17.TabIndex = 20;
-            this.bt_class17.Text = "測試 MyDateTime 1";
             this.bt_class17.UseVisualStyleBackColor = true;
             this.bt_class17.Click += new System.EventHandler(this.bt_class17_Click);
             // 
@@ -402,7 +403,6 @@
             this.bt_class16.Name = "bt_class16";
             this.bt_class16.Size = new System.Drawing.Size(190, 60);
             this.bt_class16.TabIndex = 21;
-            this.bt_class16.Text = "測試 MyDateTime 0";
             this.bt_class16.UseVisualStyleBackColor = true;
             this.bt_class16.Click += new System.EventHandler(this.bt_class16_Click);
             // 

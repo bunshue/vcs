@@ -316,10 +316,11 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
         //protected int radius; // 子類別可以直接存取 
         //private string pname;
         //private int radius;
+        private Color _color = Color.Black;
+        private Color _borderColor = Color.Transparent;
         private static int _Total = 0;  // _Total用來計算共產生多少個物件，宣告為static和private
         private static int _radius;
 
-        public string Color { get; set; }  // 有get有set簡寫, 可讀可寫
         //public int radius { get; set; }  // 有get有set簡寫, 可讀可寫, same
         public int radius
         {
@@ -331,6 +332,19 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             {
                 _radius = value;
             }
+        }
+
+        //public string Color { get; set; }  // 有get有set簡寫, 可讀可寫
+        public Color Color
+        {
+            get { return this._color; }
+            set { this._color = value; }
+        }
+
+        public Color BorderColor
+        {
+            get { return this._borderColor; }
+            set { this._borderColor = value; }
         }
 
         // 建構式1, 無參數, 使用1個預設值

@@ -89,7 +89,27 @@ namespace vcs_Stack
 
         private void button0_Click(object sender, EventArgs e)
         {
+            //Stack 使用範例0
 
+            Stack stack = new Stack();
+            stack.Push("AAA");
+            stack.Push("BBB");
+            stack.Push("CCC");
+            stack.Push("DDD");
+
+            richTextBox1.Text += "cnt = " + stack.Count.ToString() + "\n";
+
+            //倒一個出來
+            //object obj = stack.Pop();
+
+            //全部倒出來
+            while (stack.Count > 0)
+            {
+                string cc = stack.Pop().ToString();
+                richTextBox1.Text += "pop : " + cc + "\n";
+            }
+
+            richTextBox1.Text += "cnt = " + stack.Count.ToString() + "\n";
         }
 
         private void button1_Click(object sender, EventArgs e)

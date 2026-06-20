@@ -578,8 +578,6 @@ namespace vcs_Class1
             int cnt = SaleList.Count;
             richTextBox1.Text += "目前共有銷售個數 : " + cnt.ToString() + " 個\n";
 
-
-            richTextBox1.Text += "目前共有銷售個數 : " + cnt.ToString() + " 個\n";
             if (cnt > 0)
             {
                 richTextBox1.Text += "銷售列表\n";
@@ -601,20 +599,6 @@ namespace vcs_Class1
             //自動實作屬性
             public string Name { get; set; }  // 有get有set簡寫, 可讀可寫
             public byte Height { get; set; }  // 有get有set簡寫, 可讀可寫
-
-            //定義靜態方法
-            public void showInfo(PersonData4 first)
-            {
-                //指派屬性值做物件初始化
-                first = new PersonData4() { Name = "林小明", Height = 172 };
-            }
-
-            //定義靜態方法
-            public void display(ref PersonData4 second)
-            {
-                //指派屬性值做物件初始化
-                second = new PersonData4 { Name = "江大海", Height = 168 };
-            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -711,19 +695,12 @@ namespace vcs_Class1
         {
             richTextBox1.Text += "Class 範例 PersonData4\n";
 
-            PersonData4 pData4 = new PersonData4() { Name = "王小風", Height = 176 };
+            PersonData4 pData4 = new PersonData4()
+            {
+                Name = "王小風",
+                Height = 176
+            };
 
-            richTextBox1.Text += "By Value -> \n";
-            //Passing By Value - 輸出王小風
-            pData4.showInfo(pData4);
-
-            richTextBox1.Text += "姓名 : " + pData4.Name + "\t身高 : " + pData4.Height + "\n";
-
-            richTextBox1.Text += "By Reference -> \n";
-            //Passing By Reference - 輸出江大海
-            pData4.display(ref pData4);
-
-            richTextBox1.Text += pData4.Name + "\t" + pData4.Height + "\n";
             richTextBox1.Text += "姓名 : " + pData4.Name + "\t身高 : " + pData4.Height + "\n";
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
@@ -747,6 +724,8 @@ namespace vcs_Class1
             {
                 richTextBox1.Text += "第 " + i.ToString() + "個\t" + pData5[i].ToString() + "\n";
             }
+
+            return;
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -924,6 +903,8 @@ namespace vcs_Class1
 
         private void bt_class11_Click(object sender, EventArgs e)
         {
+            //Class 新進1
+
             Car1 Benz1 = new Car1();
             Benz1.SetSpeed(500);			// 速度值超過 200
             richTextBox1.Text += "Benz1.GetSpeed() = " + Benz1.GetSpeed() + "\n";	// 顯示速度最大值200
@@ -965,18 +946,22 @@ namespace vcs_Class1
 
         private void bt_class12_Click(object sender, EventArgs e)
         {
+            //Class 新進2
         }
 
         //------------------------------------------------------------  # 60個
 
         private void bt_class13_Click(object sender, EventArgs e)
         {
+            //Class 新進3
         }
 
         //------------------------------------------------------------  # 60個
 
         private void bt_class14_Click(object sender, EventArgs e)
         {
+            //Class 新進4
+
             //類別的定義在 MyClass.cs
 
             int y = 2006;
@@ -1185,7 +1170,6 @@ namespace vcs_Class1
         private void bt_class15_Click(object sender, EventArgs e)
         {
             //Class 新進5
-            //Class 範例 5
 
             //創建一個Bird基類數組，添加基類Bird對象，Magpie對象，Eagle對象，Penguin對象
 
@@ -1294,7 +1278,40 @@ namespace vcs_Class1
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void bt_class16_Click(object sender, EventArgs e)
+        {
+            //Class 新進6
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void bt_class17_Click(object sender, EventArgs e)
+        {
+            //Class 新進7
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void bt_class18_Click(object sender, EventArgs e)
+        {
+            //Class 新進8
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void bt_class19_Click(object sender, EventArgs e)
+        {
+            //Class 新進9
+
+        }
+
+
+        private void bt_class20_Click(object sender, EventArgs e)
         {
             //測試 MyDateTime 0
             //為年表所做的時間分析程式HDateTime.Parse
@@ -1384,7 +1401,7 @@ namespace vcs_Class1
             return result;
         }
 
-        private void bt_class17_Click(object sender, EventArgs e)
+        private void bt_class21_Click(object sender, EventArgs e)
         {
             //測試 MyDateTime 1
             PersonInfo av1 = new PersonInfo();
@@ -1409,7 +1426,7 @@ namespace vcs_Class1
 
         //------------------------------------------------------------  # 60個
 
-        private void bt_class18_Click(object sender, EventArgs e)
+        private void bt_class22_Click(object sender, EventArgs e)
         {
             //測試 MyDateTime 2
             string txt = "2006/3/11";
@@ -1431,7 +1448,7 @@ namespace vcs_Class1
 
         //------------------------------------------------------------  # 60個
 
-        private void bt_class19_Click(object sender, EventArgs e)
+        private void bt_class23_Click(object sender, EventArgs e)
         {
             MyTime now = new MyTime();
             //now.Hour = 30;
@@ -1478,34 +1495,6 @@ namespace vcs_Class1
             }
 
             //System.GC.Collect();
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void bt_class20_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void bt_class21_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void bt_class22_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void bt_class23_Click(object sender, EventArgs e)
-        {
-
         }
 
         //------------------------------------------------------------  # 60個
