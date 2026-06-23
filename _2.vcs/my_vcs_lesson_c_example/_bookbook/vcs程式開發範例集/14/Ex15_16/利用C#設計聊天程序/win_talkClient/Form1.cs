@@ -16,24 +16,22 @@ namespace win_talkClient
 {
     public partial class Form1 : Form
     {
-        #region//聲名變數
+        //#region//聲名變數
         IPAddress HostIP = IPAddress.Parse("127.0.0.1");
         IPEndPoint point;
         Socket socket;
         bool flag = true;
-        #endregion
+        //#endregion
 
-
-
-        #region//聲名委託
+        //#region//聲名委託
         delegate void SetTextCallback(string text);
         private void SetText(string text)
         {
             textBox2.AppendText(text + "\r\n");
         }
-        #endregion
+        //#endregion
 
-        #region//程序
+        //#region//程序
         private void Proccess()
         {
             if (socket.Connected)
@@ -47,7 +45,7 @@ namespace win_talkClient
                 }
             }
         }
-        #endregion
+        //#endregion
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -57,8 +55,6 @@ namespace win_talkClient
                 string sendStr = this.textBox1.Text + "：" + this.textBox3.Text + "\r\n";
                 sendByte = Encoding.BigEndianUnicode.GetBytes(sendStr.ToCharArray());
                 socket.Send(sendByte, sendByte.Length, 0);
-
-
             }
             catch { }
         }

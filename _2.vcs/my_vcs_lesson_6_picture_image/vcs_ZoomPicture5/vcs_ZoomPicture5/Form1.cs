@@ -15,20 +15,19 @@ namespace vcs_ZoomPicture5
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         // The loaded image.
         private Bitmap LoadedImage = null;
 
         // True if we should ignore change events.
         private bool IgnoreChanges = false;
 
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Load an image file.
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             try
@@ -58,14 +57,16 @@ namespace vcs_ZoomPicture5
         {
             int width = (int)(LoadedImage.Width * scale);
             int height = (int)(LoadedImage.Height * scale);
-            if ((width < 1) || (height < 1)) return;
+            if ((width < 1) || (height < 1))
+            {
+                return;
+            }
 
             Bitmap scaled_image = new Bitmap(width, height);
             using (Graphics gr = Graphics.FromImage(scaled_image))
             {
                 gr.InterpolationMode = InterpolationMode.HighQualityBilinear;
-                Rectangle source = new Rectangle(
-                    0, 0, LoadedImage.Width, LoadedImage.Height);
+                Rectangle source = new Rectangle(0, 0, LoadedImage.Width, LoadedImage.Height);
                 Point[] dest =
                 {
                     new Point(0, 0),
@@ -77,8 +78,14 @@ namespace vcs_ZoomPicture5
             pictureBox1.Image = scaled_image;
 
             IgnoreChanges = true;
-            if (show_width) txtWidth.Text = width.ToString("0");
-            if (show_height) txtHeight.Text = height.ToString("0");
+            if (show_width)
+            {
+                txtWidth.Text = width.ToString("0");
+            }
+            if (show_height)
+            {
+                txtHeight.Text = height.ToString("0");
+            }
             if (show_percent)
             {
                 int percent = (int)(scale * 100);
@@ -89,7 +96,10 @@ namespace vcs_ZoomPicture5
 
         private void txtWidth_TextChanged(object sender, EventArgs e)
         {
-            if (IgnoreChanges) return;
+            if (IgnoreChanges)
+            {
+                return;
+            }
 
             double width;
             if (double.TryParse(txtWidth.Text, out width))
@@ -100,7 +110,10 @@ namespace vcs_ZoomPicture5
 
         private void txtHeight_TextChanged(object sender, EventArgs e)
         {
-            if (IgnoreChanges) return;
+            if (IgnoreChanges)
+            {
+                return;
+            }
 
             double height;
             if (double.TryParse(txtHeight.Text, out height))
@@ -111,7 +124,10 @@ namespace vcs_ZoomPicture5
 
         private void txtPercent_TextChanged(object sender, EventArgs e)
         {
-            if (IgnoreChanges) return;
+            if (IgnoreChanges)
+            {
+                return;
+            }
 
             double percent;
             if (double.TryParse(txtPercent.Text, out percent))
@@ -133,9 +149,18 @@ namespace vcs_ZoomPicture5
             {
                 richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
             }
-
         }
-
-
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/

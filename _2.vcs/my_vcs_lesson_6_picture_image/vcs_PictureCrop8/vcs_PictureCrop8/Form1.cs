@@ -135,4 +135,3 @@ namespace vcs_PictureCrop8
         }
     }
 }
-

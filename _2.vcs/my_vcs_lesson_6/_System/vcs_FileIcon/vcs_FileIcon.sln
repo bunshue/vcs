@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileIco", "FileIco\FileIco.csproj", "{7E7514BB-272F-4CC9-8E03-5A22C2C5110B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_FileIcon", "vcs_FileIcon\vcs_FileIcon.csproj", "{7E7514BB-272F-4CC9-8E03-5A22C2C5110B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

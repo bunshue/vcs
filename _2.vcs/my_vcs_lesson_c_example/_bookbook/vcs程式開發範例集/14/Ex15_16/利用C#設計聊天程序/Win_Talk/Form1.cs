@@ -19,6 +19,7 @@ namespace Win_Talk
         {
             InitializeComponent();
         }
+
         private void Form1_Load(object sender, EventArgs e)
         {
         }
@@ -50,7 +51,6 @@ namespace Win_Talk
                     acceptedSocket.Receive(receiveByte, receiveByte.Length, 0);
                     string strInfo = Encoding.BigEndianUnicode.GetString(receiveByte);
                     this.Invoke(new SetTextCallback(SetText), new object[] { strInfo });
-
                 }
             }
         }
@@ -94,4 +94,3 @@ namespace Win_Talk
         }
     }
 }
-

@@ -70,9 +70,9 @@ namespace vcs_PictureSlideShow3
             }
             else
                 timer1.Enabled = false;
-            
+
             //if (cnt >= 20)
-              //  cnt = 0;
+            //  cnt = 0;
             /*
             pictureBox1.Width = pictureBox1.Image.Width / 8;
             pictureBox1.Height = pictureBox1.Image.Height / 8;
@@ -88,7 +88,6 @@ namespace vcs_PictureSlideShow3
             Bitmap bmpImage = new Bitmap(img);
             return bmpImage.Clone(cropArea, bmpImage.PixelFormat);
         }
-
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {

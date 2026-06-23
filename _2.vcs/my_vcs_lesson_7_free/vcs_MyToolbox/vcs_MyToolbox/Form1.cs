@@ -179,6 +179,8 @@ namespace vcs_MyToolbox
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             /*
             //檢查存圖的資料夾
             if (Directory.Exists(foldername) == false)     //確認資料夾是否存在
@@ -495,7 +497,7 @@ namespace vcs_MyToolbox
             btn_stopwatch.Width = w * 6 / 10;
             btn_stopwatch.Height = h * 5 / 10;
             btn_stopwatch.Text = "碼表";
-            btn_stopwatch.Location = new Point(x_st + dx * 2, y_st + dy * 3+45);
+            btn_stopwatch.Location = new Point(x_st + dx * 2, y_st + dy * 3 + 45);
             btn_stopwatch.Click += btn_click_function;	// 加入事件
             this.Controls.Add(btn_stopwatch);	// 將控件加入表單
 
@@ -505,7 +507,6 @@ namespace vcs_MyToolbox
             btn_countdown.Location = new Point(x_st + dx * 2, y_st + dy * 3 + 90);
             btn_countdown.Click += btn_click_function;	// 加入事件
             this.Controls.Add(btn_countdown);	// 將控件加入表單
-
 
             //groupBox1 ST
             groupBox1.Width = w * 2 - 20;
@@ -619,6 +620,8 @@ namespace vcs_MyToolbox
 
             Application.Exit();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void timer_clock_Tick(object sender, EventArgs e)
         {
@@ -1673,4 +1676,17 @@ namespace vcs_MyToolbox
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
 

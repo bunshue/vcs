@@ -516,28 +516,7 @@ namespace vcs_Clipboard
 
         private void button15_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "Clipboard內的影像顯示存檔\t部分\t九宮格之正中\n";
 
-            bool flag = Clipboard.ContainsImage();  //判斷剪貼簿中是否包含圖片資料
-            richTextBox1.Text += "Clipboard 是否包含圖片資料 : " + flag.ToString() + "\n";
-
-            if (flag == true)
-            {
-                Image image1 = Clipboard.GetImage();
-
-                int W = image1.Width;
-                int H = image1.Height;
-                int x_st = W / 3;
-                int y_st = H / 3;
-                int w = W / 3;
-                int h = H / 3;
-
-                RectangleF rect = new RectangleF(x_st, y_st, w, h);
-
-                // 擷取部份影像，顯示於pictureBox2，區域為(起點x座標, 起點y座標, 寬度, 高度)
-                Bitmap bitmap1 = ((Bitmap)image1).Clone(rect, PixelFormat.Format32bppArgb);
-                pictureBox_clipboard.Image = bitmap1;
-            }
         }
 
         private void button16_Click(object sender, EventArgs e)

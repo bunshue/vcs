@@ -97,6 +97,7 @@
             // pictureBox_Chrysanthemum1
             // 
             this.pictureBox_Chrysanthemum1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox_Chrysanthemum1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox_Chrysanthemum1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox_Chrysanthemum1.Name = "pictureBox_Chrysanthemum1";
             this.pictureBox_Chrysanthemum1.Size = new System.Drawing.Size(100, 100);
@@ -118,7 +119,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(1030, 67);
+            this.bt_clear.Location = new System.Drawing.Point(946, 157);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(63, 40);
             this.bt_clear.TabIndex = 57;
@@ -128,15 +129,17 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(934, 204);
+            this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.richTextBox1.Location = new System.Drawing.Point(934, 136);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(159, 297);
+            this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 59;
             this.richTextBox1.Text = "";
             // 
             // pictureBox_Chrysanthemum2
             // 
             this.pictureBox_Chrysanthemum2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox_Chrysanthemum2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox_Chrysanthemum2.Location = new System.Drawing.Point(133, 12);
             this.pictureBox_Chrysanthemum2.Name = "pictureBox_Chrysanthemum2";
             this.pictureBox_Chrysanthemum2.Size = new System.Drawing.Size(100, 100);
@@ -147,6 +150,7 @@
             // pictureBox_butterfly
             // 
             this.pictureBox_butterfly.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox_butterfly.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox_butterfly.Location = new System.Drawing.Point(258, 12);
             this.pictureBox_butterfly.Name = "pictureBox_butterfly";
             this.pictureBox_butterfly.Size = new System.Drawing.Size(100, 100);
@@ -157,6 +161,7 @@
             // pictureBox_polar
             // 
             this.pictureBox_polar.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox_polar.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox_polar.Location = new System.Drawing.Point(380, 12);
             this.pictureBox_polar.Name = "pictureBox_polar";
             this.pictureBox_polar.Size = new System.Drawing.Size(100, 100);
@@ -167,6 +172,7 @@
             // pictureBox_hex
             // 
             this.pictureBox_hex.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox_hex.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox_hex.Location = new System.Drawing.Point(504, 12);
             this.pictureBox_hex.Name = "pictureBox_hex";
             this.pictureBox_hex.Size = new System.Drawing.Size(100, 100);
@@ -180,6 +186,7 @@
             // pictureBox_tri
             // 
             this.pictureBox_tri.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox_tri.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox_tri.Location = new System.Drawing.Point(12, 131);
             this.pictureBox_tri.Name = "pictureBox_tri";
             this.pictureBox_tri.Size = new System.Drawing.Size(100, 100);
@@ -193,6 +200,7 @@
             // pictureBox_circle
             // 
             this.pictureBox_circle.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox_circle.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox_circle.Location = new System.Drawing.Point(133, 131);
             this.pictureBox_circle.Name = "pictureBox_circle";
             this.pictureBox_circle.Size = new System.Drawing.Size(100, 100);
@@ -202,6 +210,7 @@
             // pictureBox_star1
             // 
             this.pictureBox_star1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox_star1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox_star1.Location = new System.Drawing.Point(258, 131);
             this.pictureBox_star1.Name = "pictureBox_star1";
             this.pictureBox_star1.Size = new System.Drawing.Size(100, 100);
@@ -212,6 +221,7 @@
             // pictureBox_star2
             // 
             this.pictureBox_star2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox_star2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox_star2.Location = new System.Drawing.Point(380, 131);
             this.pictureBox_star2.Name = "pictureBox_star2";
             this.pictureBox_star2.Size = new System.Drawing.Size(100, 100);
@@ -222,6 +232,7 @@
             // pictureBox_star3
             // 
             this.pictureBox_star3.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox_star3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox_star3.Location = new System.Drawing.Point(504, 131);
             this.pictureBox_star3.Name = "pictureBox_star3";
             this.pictureBox_star3.Size = new System.Drawing.Size(100, 100);
@@ -232,6 +243,7 @@
             // pictureBox_floodfill
             // 
             this.pictureBox_floodfill.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox_floodfill.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox_floodfill.Location = new System.Drawing.Point(12, 249);
             this.pictureBox_floodfill.Name = "pictureBox_floodfill";
             this.pictureBox_floodfill.Size = new System.Drawing.Size(100, 100);
@@ -242,6 +254,7 @@
             // pictureBox12
             // 
             this.pictureBox12.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox12.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox12.Location = new System.Drawing.Point(133, 249);
             this.pictureBox12.Name = "pictureBox12";
             this.pictureBox12.Size = new System.Drawing.Size(100, 100);
@@ -251,6 +264,7 @@
             // pictureBox13
             // 
             this.pictureBox13.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox13.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox13.Location = new System.Drawing.Point(258, 249);
             this.pictureBox13.Name = "pictureBox13";
             this.pictureBox13.Size = new System.Drawing.Size(100, 100);
@@ -260,6 +274,7 @@
             // pictureBox14
             // 
             this.pictureBox14.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox14.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox14.Location = new System.Drawing.Point(380, 249);
             this.pictureBox14.Name = "pictureBox14";
             this.pictureBox14.Size = new System.Drawing.Size(100, 100);
@@ -269,6 +284,7 @@
             // pictureBox15
             // 
             this.pictureBox15.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox15.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox15.Location = new System.Drawing.Point(504, 249);
             this.pictureBox15.Name = "pictureBox15";
             this.pictureBox15.Size = new System.Drawing.Size(100, 100);
@@ -350,6 +366,7 @@
             // pictureBox_triangle_puzzle_solution
             // 
             this.pictureBox_triangle_puzzle_solution.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox_triangle_puzzle_solution.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox_triangle_puzzle_solution.Location = new System.Drawing.Point(12, 355);
             this.pictureBox_triangle_puzzle_solution.Name = "pictureBox_triangle_puzzle_solution";
             this.pictureBox_triangle_puzzle_solution.Size = new System.Drawing.Size(100, 100);
@@ -360,7 +377,7 @@
             // pictureBox_find_squares_colored
             // 
             this.pictureBox_find_squares_colored.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox_find_squares_colored.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox_find_squares_colored.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox_find_squares_colored.Location = new System.Drawing.Point(133, 355);
             this.pictureBox_find_squares_colored.Name = "pictureBox_find_squares_colored";
             this.pictureBox_find_squares_colored.Size = new System.Drawing.Size(100, 100);
@@ -371,6 +388,7 @@
             // pictureBox18
             // 
             this.pictureBox18.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox18.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox18.Location = new System.Drawing.Point(258, 355);
             this.pictureBox18.Name = "pictureBox18";
             this.pictureBox18.Size = new System.Drawing.Size(100, 100);
@@ -380,6 +398,7 @@
             // pictureBox19
             // 
             this.pictureBox19.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox19.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox19.Location = new System.Drawing.Point(380, 355);
             this.pictureBox19.Name = "pictureBox19";
             this.pictureBox19.Size = new System.Drawing.Size(100, 100);
@@ -389,6 +408,7 @@
             // pictureBox20
             // 
             this.pictureBox20.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox20.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox20.Location = new System.Drawing.Point(504, 355);
             this.pictureBox20.Name = "pictureBox20";
             this.pictureBox20.Size = new System.Drawing.Size(100, 100);
@@ -500,6 +520,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1105, 594);
+            this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label17);
@@ -531,7 +552,6 @@
             this.Controls.Add(this.pictureBox_Chrysanthemum2);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.bt_save);
-            this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.pictureBox_Chrysanthemum1);
             this.Name = "Form1";
             this.Text = "Form1";

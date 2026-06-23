@@ -68,9 +68,13 @@ namespace vcs_ListView5_Drag
                     return;
                 }
                 if (dragItem.Index < itemIndex)
+                {
                     itemIndex++;
+                }
                 else
+                {
                     itemIndex = dragIndex + i;
+                }
                 ListViewItem insertItem = (ListViewItem)dragItem.Clone();
                 listView1.Items.Insert(itemIndex, insertItem);
                 listView1.Items.Remove(dragItem);
@@ -78,5 +82,4 @@ namespace vcs_ListView5_Drag
         }
     }
 }
-
 

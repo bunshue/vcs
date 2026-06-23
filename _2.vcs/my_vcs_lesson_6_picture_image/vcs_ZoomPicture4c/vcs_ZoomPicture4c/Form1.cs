@@ -8,7 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Drawing.Imaging;   //for ImageFormat
-
 using System.Drawing.Drawing2D;   //for PixelOffsetMode, InterpolationMode
 
 namespace vcs_ZoomPicture4c
@@ -61,7 +60,6 @@ namespace vcs_ZoomPicture4c
             }
         }
 
-
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             int value = trackBar1.Value;
@@ -91,14 +89,10 @@ namespace vcs_ZoomPicture4c
                 // Copy the original image onto the new bitmap.
                 using (Graphics gr = Graphics.FromImage(bitmap1))
                 {
-                    Rectangle source_rect = new Rectangle(
-                        0, 0, pictureBox1.Image.Width, pictureBox1.Image.Height);
-                    Rectangle dest_rect = new Rectangle(
-                        0, 0, bitmap1.Width, bitmap1.Height);
-                    gr.DrawImage(pictureBox1.Image,
-                        dest_rect, source_rect, GraphicsUnit.Pixel);
+                    Rectangle source_rect = new Rectangle(0, 0, pictureBox1.Image.Width, pictureBox1.Image.Height);
+                    Rectangle dest_rect = new Rectangle(0, 0, bitmap1.Width, bitmap1.Height);
+                    gr.DrawImage(pictureBox1.Image, dest_rect, source_rect, GraphicsUnit.Pixel);
                 }
-
                 bitmap1.Save(filename, ImageFormat.Bmp);
                 //richTextBox1.Text += "已存檔 : " + filename + "\n";
             }
@@ -119,17 +113,18 @@ namespace vcs_ZoomPicture4c
             ScaledImage = new Bitmap(wid, hgt);
             using (Graphics gr = Graphics.FromImage(ScaledImage))
             {
-                Rectangle src_rect = new Rectangle(0, 0,
-                    CroppedImage.Width, CroppedImage.Height);
+                Rectangle src_rect = new Rectangle(0, 0, CroppedImage.Width, CroppedImage.Height);
                 Rectangle dest_rect = new Rectangle(0, 0, wid, hgt);
                 gr.PixelOffsetMode = PixelOffsetMode.Half;
                 gr.InterpolationMode = InterpolationMode.NearestNeighbor;
-                gr.DrawImage(CroppedImage, dest_rect, src_rect,
-                    GraphicsUnit.Pixel);
+                gr.DrawImage(CroppedImage, dest_rect, src_rect, GraphicsUnit.Pixel);
             }
 
             DisplayImage = ScaledImage.Clone() as Bitmap;
-            if (DisplayGraphics != null) DisplayGraphics.Dispose();
+            if (DisplayGraphics != null)
+            {
+                DisplayGraphics.Dispose();
+            }
             DisplayGraphics = Graphics.FromImage(DisplayImage);
 
             pictureBox1.Image = DisplayImage;
@@ -150,7 +145,10 @@ namespace vcs_ZoomPicture4c
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!Drawing) return;
+            if (!Drawing)
+            {
+                return;
+            }
 
             // Draw the area selected.
             DrawSelectionBox(RoundPoint(e.Location));
@@ -158,7 +156,11 @@ namespace vcs_ZoomPicture4c
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            if (!Drawing) return;
+            if (!Drawing)
+            {
+                return;
+            }
+
             Drawing = false;
 
             // Crop.
@@ -181,8 +183,7 @@ namespace vcs_ZoomPicture4c
             Bitmap new_image = new Bitmap(width, height);
             using (Graphics gr = Graphics.FromImage(new_image))
             {
-                gr.DrawImage(CroppedImage, dest_rect, source_rect,
-                    GraphicsUnit.Pixel);
+                gr.DrawImage(CroppedImage, dest_rect, source_rect, GraphicsUnit.Pixel);
             }
             CroppedImage = new_image;
 
@@ -203,10 +204,22 @@ namespace vcs_ZoomPicture4c
         {
             // Save the end point.
             EndPoint = end_point;
-            if (EndPoint.X < 0) EndPoint.X = 0;
-            if (EndPoint.X >= ScaledImage.Width) EndPoint.X = ScaledImage.Width - 1;
-            if (EndPoint.Y < 0) EndPoint.Y = 0;
-            if (EndPoint.Y >= ScaledImage.Height) EndPoint.Y = ScaledImage.Height - 1;
+            if (EndPoint.X < 0)
+            {
+                EndPoint.X = 0;
+            }
+            if (EndPoint.X >= ScaledImage.Width)
+            {
+                EndPoint.X = ScaledImage.Width - 1;
+            }
+            if (EndPoint.Y < 0)
+            {
+                EndPoint.Y = 0;
+            }
+            if (EndPoint.Y >= ScaledImage.Height)
+            {
+                EndPoint.Y = ScaledImage.Height - 1;
+            }
 
             // Reset the image.
             DisplayGraphics.DrawImageUnscaled(ScaledImage, 0, 0);
@@ -224,9 +237,18 @@ namespace vcs_ZoomPicture4c
         {
 
         }
-
-    
-    
-    
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+

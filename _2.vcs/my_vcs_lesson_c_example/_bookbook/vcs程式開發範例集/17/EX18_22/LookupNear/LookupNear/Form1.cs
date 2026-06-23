@@ -27,8 +27,10 @@ namespace LookupNear
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
-
+            richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         public string LOCATE(int[] XX, int N, int X)//N數值的個數，M尋找的數值
         {

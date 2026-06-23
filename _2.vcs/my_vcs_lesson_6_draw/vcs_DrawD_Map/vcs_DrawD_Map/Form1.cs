@@ -165,7 +165,6 @@ namespace vcs_DrawD_Map
                     return i;
                 }
             }
-
             // We didn't find a hotspot that contains the point.
             return -1;
         }

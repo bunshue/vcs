@@ -4111,6 +4111,7 @@ namespace vcs_Draw_Captcha1
 
             //先取樣將水波紋座標跟RGB取出
             for (int x = 0; x < nWidth; ++x)
+            {
                 for (int y = 0; y < nHeight; ++y)
                 {
                     xo = ((double)nWave * Math.Sin(2.0 * 3.1415 * (float)y / 128.0));
@@ -4142,16 +4143,14 @@ namespace vcs_Draw_Captcha1
                         pt[x, y].Y = 0;
                     }
                 }
-
+            }
 
             //進行合成
             Bitmap bSrc = (Bitmap)src.Clone();
 
             // 依照 Format24bppRgb 每三個表示一 Pixel 0: 藍 1: 綠 2: 紅
-            BitmapData bitmapData = src.LockBits(new Rectangle(0, 0, src.Width, src.Height), ImageLockMode.ReadWrite,
-                                           PixelFormat.Format24bppRgb);
-            BitmapData bmSrc = bSrc.LockBits(new Rectangle(0, 0, bSrc.Width, bSrc.Height), ImageLockMode.ReadWrite,
-                                             PixelFormat.Format24bppRgb);
+            BitmapData bitmapData = src.LockBits(new Rectangle(0, 0, src.Width, src.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            BitmapData bmSrc = bSrc.LockBits(new Rectangle(0, 0, bSrc.Width, bSrc.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
 
             int scanline = bitmapData.Stride;
 
@@ -4229,7 +4228,6 @@ namespace vcs_Draw_Captcha1
                         p[1] = (byte)Math.Min(255, (int)((255.0 * Math.Pow(p[1] / 255.0, 1.0 / g)) + 0.5));
                         p[0] = (byte)Math.Min(255, (int)((255.0 * Math.Pow(p[0] / 255.0, 1.0 / b)) + 0.5));
 
-
                         // 跳去下一個 Pixel
                         p += 3;
 
@@ -4240,7 +4238,6 @@ namespace vcs_Draw_Captcha1
             }
             src.UnlockBits(bitmapData);
             return src;
-
         }
         //#endregion
 
@@ -4253,7 +4250,6 @@ namespace vcs_Draw_Captcha1
         /// <returns></returns>
         public Bitmap Contrast(Bitmap src, float effectThreshold)
         {
-
             // 依照 Format24bppRgb 每三個表示一 Pixel 0: 藍 1: 綠 2: 紅
             BitmapData bitmapData = src.LockBits(new Rectangle(0, 0, src.Width, src.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
 
@@ -4272,14 +4268,11 @@ namespace vcs_Draw_Captcha1
                 // 跨步值 - 寬度 *3 可以算出畸零地 之後跳到下一行
                 int nOffset = bitmapData.Stride - src.Width * 3;
 
-
-
                 for (int y = 0; y < src.Height; y++)
                 {
                     for (int x = 0; x < src.Width; x++)
                     {
                         double buffer = 0;
-
 
                         // 公式  (Red/255)-0.5= 偏離中間值程度
                         // ((偏離中間值程度 * 影響範圍)+0.4 ) * 255
@@ -4293,18 +4286,13 @@ namespace vcs_Draw_Captcha1
                         buffer = buffer < 0 ? 0 : buffer;
                         p[1] = (byte)buffer;
 
-
                         buffer = ((((p[0] / 255.0) - 0.5) * effectThreshold) + 0.5) * 255.0;
                         buffer = buffer > 255 ? 255 : buffer;
                         buffer = buffer < 0 ? 0 : buffer;
                         p[0] = (byte)buffer;
 
-
-
-
                         // 跳去下一個 Pixel
                         p += 3;
-
                     }
                     // 跨越畸零地
                     p += nOffset;
@@ -4312,8 +4300,6 @@ namespace vcs_Draw_Captcha1
             }
             src.UnlockBits(bitmapData);
             return src;
-
-
         }
         //#endregion
 
@@ -4325,7 +4311,6 @@ namespace vcs_Draw_Captcha1
         /// <returns></returns>
         public Bitmap Atomization(Bitmap bmp)
         {
-
             int Height = bmp.Height;
             int Width = bmp.Width;
             Bitmap newBitmap = new Bitmap(Width, Height);
@@ -4351,7 +4336,6 @@ namespace vcs_Draw_Captcha1
             return newBitmap;
         }
         //#endregion
-
     } //END Class DrawValidationCode
 
     //高斯模糊算法
@@ -4388,14 +4372,18 @@ namespace vcs_Draw_Captcha1
             for (int i = 0; i < ret.GetLength(0); i++)
             {
                 for (int j = 0; j < ret.GetLength(1); j++)
+                {
                     sum += matrix[i, j];
+                }
             }
             if (sum != 0)
             {
                 for (int i = 0; i < ret.GetLength(0); i++)
                 {
                     for (int j = 0; j < ret.GetLength(1); j++)
+                    {
                         ret[i, j] = matrix[i, j] / sum;
+                    }
                 }
             }
             return ret;
@@ -4405,17 +4393,23 @@ namespace vcs_Draw_Captcha1
             double[,] kernel = CalculateNormalized1DSampleKernel(deviation);
             double[,] res1 = new double[matrix.GetLength(0), matrix.GetLength(1)];
             double[,] res2 = new double[matrix.GetLength(0), matrix.GetLength(1)];
+
             //x-direction
             for (int i = 0; i < matrix.GetLength(0); i++)
             {
                 for (int j = 0; j < matrix.GetLength(1); j++)
+                {
                     res1[i, j] = processPoint(matrix, i, j, kernel, 0);
+                }
             }
+
             //y-direction
             for (int i = 0; i < matrix.GetLength(0); i++)
             {
                 for (int j = 0; j < matrix.GetLength(1); j++)
+                {
                     res2[i, j] = processPoint(res1, i, j, kernel, 1);
+                }
             }
             return res2;
         }
@@ -4442,8 +4436,7 @@ namespace vcs_Draw_Captcha1
         /// <returns></returns>
         private Color grayscale(Color cr)
         {
-            return Color.FromArgb(cr.A, (int)(cr.R * .3 + cr.G * .59 + cr.B * 0.11),
-               (int)(cr.R * .3 + cr.G * .59 + cr.B * 0.11),
+            return Color.FromArgb(cr.A, (int)(cr.R * .3 + cr.G * .59 + cr.B * 0.11), (int)(cr.R * .3 + cr.G * .59 + cr.B * 0.11),
               (int)(cr.R * .3 + cr.G * .59 + cr.B * 0.11));
         }
 

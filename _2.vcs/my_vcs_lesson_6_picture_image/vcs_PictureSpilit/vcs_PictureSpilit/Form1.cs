@@ -16,7 +16,6 @@ namespace vcs_PictureSpilit
     {
         string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
-
         PictureBox[,] pbox = new PictureBox[3, 3];
         List<PictureBox> pbox_list = new List<PictureBox>();    //把所有pbox集合起來
         Stopwatch stopwatch = new Stopwatch();
@@ -37,19 +36,13 @@ namespace vcs_PictureSpilit
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            x_st = border_x;
-            y_st = border_y;
-
             show_item_location();
+
+            lb_time.Text = "";
 
             Bitmap bitmap1 = new Bitmap(filename);
             W = bitmap1.Width;
             H = bitmap1.Height;
-
-            //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
-            bt_exit_setup();
 
             RemoveAllPictureBox();
             SpilitPicture();
@@ -57,23 +50,21 @@ namespace vcs_PictureSpilit
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 20;
-            y_st = 30;
-            dx = 130;
-            dy = 70;
+            int x_st = 20;
+            int y_st = 30;
+            int dx = 130;
+            int dy = 70;
 
             x_st = 1300;
-
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st);
+            richTextBox1.Size = new Size(250, 500);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            lb_time.Text = "";
+            //最大化螢幕
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
+            bt_exit_setup();
         }
 
         void bt_exit_setup()
@@ -111,6 +102,8 @@ namespace vcs_PictureSpilit
             richTextBox1.Clear();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             Bitmap bitmap1 = new Bitmap(filename);
@@ -132,16 +125,13 @@ namespace vcs_PictureSpilit
             {
                 e.Graphics.DrawLine(p, x_st + 0, y_st + y, x_st + W, y_st + y);
             }
-
             e.Graphics.DrawRectangle(p, x_st + W + 100, y_st + 200, W / 2, H / 2);
-
         }
 
         void RemoveAllPictureBox()
         {
             //richTextBox1.Text += "遍歷所有控件\n";
-            int i;
-            for (i = 0; i < 10; i++)
+            for (int i = 0; i < 10; i++)
             {
                 foreach (Control con in this.Controls)
                 {
@@ -230,7 +220,6 @@ namespace vcs_PictureSpilit
             }
             richTextBox1.Text += "\n";
 
-
             int tmp;
 
             for (i = 0; i < sequence.Length; i++)
@@ -297,7 +286,6 @@ namespace vcs_PictureSpilit
                 pbox[sequence[index] % COLUMN, sequence[index] / COLUMN].Location = new Point(xx, yy);
                 pbox[sequence[index] % COLUMN, sequence[index] / COLUMN].BringToFront();
             }
-
             timer1.Enabled = true;
 
             stopwatch = new Stopwatch();
@@ -330,6 +318,8 @@ namespace vcs_PictureSpilit
                 }
             }
         }
+
+        //------------------------------------------------------------  # 60個
 
         bool flag_pictureBox_mouse_down = false;
         int pictureBox_position_x_old = 0;
@@ -371,7 +361,6 @@ namespace vcs_PictureSpilit
                 //richTextBox1.Text += "dx, dy : (" + dx.ToString() + ", " + dy.ToString() + ")\n";
                 ((PictureBox)sender).Location = new Point(((PictureBox)sender).Location.X + dx, ((PictureBox)sender).Location.Y + dy);
 
-
                 check_picture_close_position((PictureBox)sender);
 
                 bool check_ok = check_picture_position();
@@ -391,10 +380,9 @@ namespace vcs_PictureSpilit
         private void timer1_Tick(object sender, EventArgs e)
         {
             long msec = stopwatch.ElapsedMilliseconds;
-            lb_time.Text = (msec/1000).ToString() + "."+(msec%1000).ToString("D3") + " 秒\n";
+            lb_time.Text = (msec / 1000).ToString() + "." + (msec % 1000).ToString("D3") + " 秒\n";
 
             //richTextBox1.Text += "燒錄驗證完成時間: " + stopwatch.ElapsedMilliseconds.ToString() + " msec\n";
-
         }
 
         void check_picture_close_position(PictureBox pbx)
@@ -435,18 +423,16 @@ namespace vcs_PictureSpilit
                 yyy = (pbx.Location.Y / h + 1) * h;
             }
             pbx.Location = new Point(border_x + xxx, border_y + yyy);
-
         }
 
         bool check_picture_position()
         {
             bool check_picture_position_correct = true;
 
-
             //與右邊的那個相比
             for (int y = 0; y < ROW; y++) //ROW
             {
-                for (int x = 0; x < (COLUMN-1); x++)     //COLUMN
+                for (int x = 0; x < (COLUMN - 1); x++)     //COLUMN
                 {
                     if (pbox[x, y].Location.X > pbox[x + 1, y].Location.X)
                     {
@@ -455,7 +441,9 @@ namespace vcs_PictureSpilit
                     }
                 }
                 if (check_picture_position_correct == false)
+                {
                     break;
+                }
             }
 
             //與下面的那個相比
@@ -463,18 +451,32 @@ namespace vcs_PictureSpilit
             {
                 for (int y = 0; y < (ROW - 1); y++) //ROW
                 {
-                    if (pbox[x, y+1].Location.Y > pbox[x, y+1].Location.Y)
+                    if (pbox[x, y + 1].Location.Y > pbox[x, y + 1].Location.Y)
                     {
                         check_picture_position_correct = false;
                         break;
                     }
                 }
                 if (check_picture_position_correct == false)
+                {
                     break;
+                }
             }
             return check_picture_position_correct;
         }
-
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
 

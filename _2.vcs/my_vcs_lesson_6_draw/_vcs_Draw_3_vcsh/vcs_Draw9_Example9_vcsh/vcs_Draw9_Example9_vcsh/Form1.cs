@@ -97,6 +97,8 @@ namespace vcs_Draw9_Example9_vcsh
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             draw_circle_connection();       //pictureBox_circle
             draw_some_random_circles();     //pictureBox_floodfill
 
@@ -141,27 +143,6 @@ namespace vcs_Draw9_Example9_vcsh
             pictureBox18.Size = new Size(W, H);
             pictureBox19.Size = new Size(W, H);
             pictureBox20.Size = new Size(W, H);
-
-            pictureBox_Chrysanthemum1.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox_Chrysanthemum2.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox_butterfly.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox_polar.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox_hex.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox_tri.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox_circle.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox_star1.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox_star2.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox_star3.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox_floodfill.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox12.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox13.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox14.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox15.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox_triangle_puzzle_solution.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox_find_squares_colored.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox18.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox19.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox20.BorderStyle = BorderStyle.Fixed3D;
 
             pictureBox_Chrysanthemum1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox_Chrysanthemum2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
@@ -208,12 +189,10 @@ namespace vcs_Draw9_Example9_vcsh
 
             bt_save.Location = new Point(x_st + dx * 6 + 225, y_st + dy * 0 + 50);
 
-            richTextBox1.Location = new Point(x_st + dx * 6 + 225 - 100, y_st + dy * 0 + 50 + 50);
+            richTextBox1.Size = new Size(280, 400);
+            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0 + 50 + 50);
 
-            //richTextBox1.Size = new Size(bt_exit.Right - richTextBox1.Location.X, this.Height - richTextBox1.Location.Y - 25);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-
-            //ClientSize = new Size(bt_exit.Right + 10, richTextBox1.Bottom + 80);    //自動表單邊界
 
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;
@@ -257,6 +236,8 @@ namespace vcs_Draw9_Example9_vcsh
             richTextBox1.Clear();
         }
 
+        //------------------------------------------------------------  # 60個
+
         void save_image_to_drive()
         {
             if (bitmap1 != null)
@@ -296,6 +277,8 @@ namespace vcs_Draw9_Example9_vcsh
         {
             Environment.Exit(0);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void pictureBox_Chrysanthemum1_Paint(object sender, PaintEventArgs e)
         {
@@ -1713,16 +1696,19 @@ namespace vcs_Draw9_Example9_vcsh
                 }
             }
         }
-
-
-
-
         //畫find_squares_colored SP
-
-
-
-
-
-
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+

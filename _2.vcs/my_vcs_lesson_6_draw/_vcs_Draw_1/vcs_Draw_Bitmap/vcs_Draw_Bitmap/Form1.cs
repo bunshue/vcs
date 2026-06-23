@@ -583,26 +583,6 @@ namespace vcs_Draw_Bitmap
 
             //------------------------------------------------------------  # 60個
 
-            //clone語法, 複製部分圖片
-
-            x_st = 100;
-            y_st = 100;
-            w = 150;
-            h = 150;
-            RectangleF rect = new RectangleF(x_st, y_st, w, h);
-
-            //Bitmap cloneBitmap = bitmap1.Clone(rect, PixelFormat.DontCare);//PixelFormat.Format32bppArgb
-            Bitmap cloneBitmap = bmp.Clone(rect, bitmap1.PixelFormat);//PixelFormat.Format32bppArgb
-
-            //Bitmap bitmap2 = new Bitmap(W, H);
-            //Graphics g = Graphics.FromImage(bitmap2);
-            //g.Clear(Color.Pink);
-
-            g.DrawImage(cloneBitmap, 800, 200, w, h);
-            g.DrawString("Clone語法", new Font("Arial", 16), Brushes.Red, 800, 200 - 30);
-
-            //------------------------------------------------------------  # 60個
-
             //獲取圖片的指定部分
 
             x_st = 550;
@@ -951,5 +931,51 @@ namespace vcs_Draw_Bitmap
             bitmap1.Save(filename, ImageFormat.Bmp);
             string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png";
             bitmap1.Save(filename, ImageFormat.Png);
-*/
 
+//------------------------------------------------------------  # 60個
+
+.MakeTransparent(bmp.GetPixel(10, 10));  // 設定邊角點的顏色為透明色
+
+//------------------------------------------------------------  # 60個
+
+bitmap.maketransparent
+bmp.MakeTransparent(Color.Magenta);
+
+[C#]WinForm利用Bitmap的MakeTransparent將圖片某些顏色透明化
+            Bitmap bmp2 = new Bitmap(asm.GetManifestResourceStream(name + ".puma.bmp"));//載入圖片資源
+            bmp2.MakeTransparent(Color.White);//將圖片白色部分透明化;
+            this.pictureBox2.Image = bmp2;
+            
+            bit = new Bitmap("picture1.jpg");  //圖片放在debug內
+            bit.MakeTransparent(Color.White);  //將視窗中白色的部份變為透明
+
+//------------------------------------------------------------  # 60個
+
+
+
+//------------------------------------------------------------  # 60個
+
+g.Clear(BackColor);     //清除整個繪圖介面，並使用指定的背景色彩填滿它。
+
+可以填滿透明的顏色~~~~~~
+
+DrawDiamond(gr, bounds, diamond_pen, Brushes.Transparent);
+
+g.Clear(Color.Transparent);
+
+//表單全填滿特定顏色
+g.FillRectangle(Brushes.Wheat, ClientRectangle);
+
+//清空畫布並用透明色填充
+g.Clear(Color.Transparent);
+
+//擷取部分圖片貼上
+//            貼上位置與大小,擷取部分圖片位置與大小,單位
+g.DrawImage(img, destRect1, srcRect, units);
+
+//------------------------------------------------------------  # 60個
+
+
+
+
+*/

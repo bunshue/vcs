@@ -217,8 +217,7 @@ namespace vcs_Draw_ToolTip2
                     float cx = 0;
                     float cy = (GraphYmin + GraphYmax) / 2;
                     g.TranslateTransform(cx, cy, MatrixOrder.Append);
-                    g.DrawString("Debt ($ billions)", axis_font,
-                        Brushes.Green, 0, 0, ylabel_format);
+                    g.DrawString("Debt ($ billions)", axis_font, Brushes.Green, 0, 0, ylabel_format);
                     g.ResetTransform();
                 }
 
@@ -284,6 +283,11 @@ namespace vcs_Draw_ToolTip2
             {
                 toolTip1.SetToolTip(pictureBox1, tip);
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -10,11 +10,10 @@ using System.Windows.Forms;
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace FileIco
+namespace vcs_FileIcon
 {
     public partial class Form1 : Form
     {
-
         string foldername = @"D:\_git\vcs\_1.data\______test_files1";
 
         public Form1()
@@ -68,7 +67,7 @@ namespace FileIco
                     if (!(dir.Name == "RECYCLER" || dir.Name == "RECYCLED" || dir.Name == "Recycled" || dir.Name == "System Volume Information"))
                     {
                         SHGetFileInfo(dirs[i], (uint)0x80, ref shfi, (uint)System.Runtime.InteropServices.Marshal.SizeOf(shfi), (uint)(0x100 | 0x400)); //取得文件夾的圖標及類型
-                        imglist.Images.Add(dir.Name, (Icon)Icon.FromHandle(shfi.hIcon).Clone());//新增圖標
+                        imglist.Images.Add(dir.Name, (Icon)Icon.FromHandle(shfi.hIcon).Clone());  // 新增圖標
                         info[0] = dir.Name;//取得文件夾的名稱
                         info[1] = "";//取得文件夾的大小
                         info[2] = "文件夾";//取得類型
@@ -87,7 +86,7 @@ namespace FileIco
                     if (!(newtype == "sys" || newtype == "ini" || newtype == "bin" || newtype == "log" || newtype == "com" || newtype == "bat" || newtype == "db"))
                     {
                         SHGetFileInfo(files[i], (uint)0x80, ref shfi, (uint)System.Runtime.InteropServices.Marshal.SizeOf(shfi), (uint)(0x100 | 0x400)); //取得文件的圖標及類型
-                        imglist.Images.Add(fi.Name, (Icon)Icon.FromHandle(shfi.hIcon).Clone());//新增圖標
+                        imglist.Images.Add(fi.Name, (Icon)Icon.FromHandle(shfi.hIcon).Clone());  // 新增圖標
                         info[0] = fi.Name;//取得文件的名稱
                         info[1] = fi.Length.ToString();//取得文件的大小
                         info[2] = fi.Extension.ToString();//取得文件的類型

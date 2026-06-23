@@ -711,6 +711,93 @@ namespace vcs_ImageProcessing2_CCRR
 
         private void button12_Click(object sender, EventArgs e)
         {
+            //.clone()
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            pictureBox1.Image = Image.FromFile(filename);
+
+            /*
+            //九宮格之正中
+            int W = image1.Width;
+            int H = image1.Height;
+            int x_st = W / 3;
+            int y_st = H / 3;
+            int w = W / 3;
+            int h = H / 3;
+
+            RectangleF rect = new RectangleF(x_st, y_st, w, h);
+
+            // 擷取部份影像，顯示於pictureBox2，區域為(起點x座標, 起點y座標, 寬度, 高度)
+            Bitmap bitmap1 = ((Bitmap)image1).Clone(rect, PixelFormat.Format32bppArgb);
+            */
+
+            //clone語法, 複製部分圖片
+
+            filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp";  // Format32bppRgb
+            filename = @"D:\_git\vcs\_1.data\______test_files1\pic_256X100.bmp";  // Format32bppRgb
+
+            filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";  // Format24bppRgb
+            filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_哆啦A夢\doraemon1.jpg";  // Format24bppRgb
+            filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";  // Format24bppRgb
+
+            filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_map_city/global.c.gif";  // Format8bppIndexed
+
+            Bitmap bmp = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);
+            PixelFormat format = bmp.PixelFormat;
+
+            richTextBox1.Text += "aaaaaaa " + format.ToString() + "\n";
+
+            return;
+
+            int x_st = 100;
+            int y_st = 100;
+            int w = 150;
+            int h = 150;
+            RectangleF rect = new RectangleF(x_st, y_st, w, h);
+
+            //Bitmap cloneBitmap = bitmap1.Clone(rect, PixelFormat.DontCare);//PixelFormat.Format32bppArgb
+            Bitmap cloneBitmap = bmp.Clone(rect, bitmap1.PixelFormat);//PixelFormat.Format32bppArgb
+
+            //Bitmap bitmap2 = new Bitmap(W, H);
+            //Graphics g = Graphics.FromImage(bitmap2);
+            //g.Clear(Color.Pink);
+
+            //g.DrawImage(cloneBitmap, 800, 200, w, h);
+            //g.DrawString("Clone語法", new Font("Arial", 16), Brushes.Red, 800, 200 - 30);
+
+            //------------------------------------------------------------  # 60個
+
+            //clone語法
+            //clone範例
+            /*
+            在Bitmap中可以找到
+
+            Clone（）方法，該方法有三個重載方法。
+            Clone（）
+            Clone（Rectangle， PixelFormat）
+            Clone（RectangleF， PixelFormat）
+            */
+            /*
+            string filename = @"C:\______test_files\picture1.jpg";
+            Bitmap bitmap1 = new Bitmap(filename);
+
+            Bitmap bitmap2 = (Bitmap)bitmap1.Clone();
+
+            int w = bitmap1.Width;
+            int h = bitmap1.Height;
+            Rectangle rect = new Rectangle(w / 2, h / 2, w / 2, h / 2);
+
+            //Bitmap bitmap3 = (Bitmap)bitmap1.Clone(rect, PixelFormat.Format32bppArgb);    //same
+            Bitmap bitmap3 = (Bitmap)bitmap1.Clone(rect, bitmap1.PixelFormat);
+
+            pictureBox1.Image = bitmap3;
+
+            Bitmap/Image存檔
+                */
+
+
+
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -936,3 +1023,34 @@ namespace vcs_ImageProcessing2_CCRR
 
 */
 
+
+
+/*
+            //擷取部分圖形
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            Image image = Image.FromFile(filename);
+            pictureBox1.Image = image;
+
+            int x_st = 0;
+            int y_st = 0;
+            int W = 150;
+            int H = 150;
+
+            Graphics g = this.CreateGraphics();
+            Bitmap bitmap = new Bitmap(filename);
+            Rectangle rectangle = new Rectangle(x_st, y_st, W, H);
+            Bitmap cloneBitmap = bitmap.Clone(rectangle, PixelFormat.DontCare);
+            pictureBox2.Image = cloneBitmap;
+            pictureBox2.Visible = true;
+
+            richTextBox1.Text += "從(" + x_st.ToString() + ", " + y_st.ToString() + ") 擷取 W = " + W.ToString() + ", H = " + H.ToString() + " 區域\n";
+*/
+
+/*
+        private Image cropImage(Image img, Rectangle cropArea)
+        {
+            Bitmap bmpImage = new Bitmap(img);
+            return bmpImage.Clone(cropArea, bmpImage.PixelFormat);
+        }
+
+*/

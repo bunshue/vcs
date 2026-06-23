@@ -105,7 +105,7 @@ namespace vcs_Draw3A
 
             show_item_location();
 
-            //6060
+            //------------------------------------------------------------  # 60個
 
             //pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
 
@@ -386,7 +386,7 @@ namespace vcs_Draw3A
             richTextBox1.Clear();
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         //畫任意矩形
         private void timer_random_rectangle_Tick(object sender, EventArgs e)
@@ -406,7 +406,7 @@ namespace vcs_Draw3A
             Refresh();
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         int x_st = 0;
         int y_st = 0;
@@ -842,10 +842,7 @@ namespace vcs_Draw3A
             {
                 gr.Transform = Transform;
                 gr.SmoothingMode = SmoothingMode.AntiAlias;
-                gr.FillEllipse(Brushes.Green,
-                    Points[AtomPoint].X - 0.075f,
-                    Points[AtomPoint].Y - 0.075f,
-                    0.15f, 0.15f);
+                gr.FillEllipse(Brushes.Green, Points[AtomPoint].X - 0.075f, Points[AtomPoint].Y - 0.075f, 0.15f, 0.15f);
             }
 
             // Display the result.
@@ -1364,11 +1361,11 @@ namespace vcs_Draw3A
                 gr.DrawLine(Pens.Black, x_points[0], x_points[1]);
 
                 // Draw the Y axis.
-                PointF[] y_points = 
-                    {
-                        new PointF(Wxmin, Wymin),
-                        new PointF(Wxmin, Wymax),
-                    };
+                PointF[] y_points =
+                {
+                    new PointF(Wxmin, Wymin),
+                    new PointF(Wxmin, Wymax),
+                };
                 graph_matrix.TransformPoints(y_points);
                 gr.DrawLine(Pens.Black, y_points[0], y_points[1]);
 
@@ -1383,10 +1380,8 @@ namespace vcs_Draw3A
                 // Draw the points.
                 foreach (PointF pt in TransformedValues)
                 {
-                    gr.FillEllipse(Brushes.Lime,
-                        pt.X - Radius, pt.Y - Radius, 2 * Radius, 2 * Radius);
-                    gr.DrawEllipse(Pens.Black,
-                        pt.X - Radius, pt.Y - Radius, 2 * Radius, 2 * Radius);
+                    gr.FillEllipse(Brushes.Lime, pt.X - Radius, pt.Y - Radius, 2 * Radius, 2 * Radius);
+                    gr.DrawEllipse(Pens.Black, pt.X - Radius, pt.Y - Radius, 2 * Radius, 2 * Radius);
                 }
             }
 
@@ -1403,8 +1398,7 @@ namespace vcs_Draw3A
                     float cx = 0;
                     float cy = (GraphYmin + GraphYmax) / 2;
                     gr.TranslateTransform(cx, cy, MatrixOrder.Append);
-                    gr.DrawString("Price", axis_font,
-                        Brushes.Green, 0, 0, ylabel_format);
+                    gr.DrawString("Price", axis_font, Brushes.Green, 0, 0, ylabel_format);
                     gr.ResetTransform();
                 }
 
@@ -1413,12 +1407,8 @@ namespace vcs_Draw3A
                 {
                     xlabel_format.Alignment = StringAlignment.Center;
                     xlabel_format.LineAlignment = StringAlignment.Far;
-                    RectangleF xlabel_rect = new RectangleF(
-                        GraphXmin, GraphYmax,
-                        GraphXmax - GraphXmin,
-                        pictureBox_stock.ClientSize.Height - GraphYmax);
-                    gr.DrawString("Time", axis_font,
-                        Brushes.Green, xlabel_rect, xlabel_format);
+                    RectangleF xlabel_rect = new RectangleF(GraphXmin, GraphYmax, GraphXmax - GraphXmin, pictureBox_stock.ClientSize.Height - GraphYmax);
+                    gr.DrawString("Time", axis_font, Brushes.Green, xlabel_rect, xlabel_format);
                 }
             }
         }
@@ -1462,8 +1452,7 @@ namespace vcs_Draw3A
             string tip = "";
             for (int i = 0; i < TransformedValues.Length; i++)
             {
-                if ((Math.Abs(e.X - TransformedValues[i].X) < Radius) &&
-                    (Math.Abs(e.Y - TransformedValues[i].Y) < Radius))
+                if ((Math.Abs(e.X - TransformedValues[i].X) < Radius) && (Math.Abs(e.Y - TransformedValues[i].Y) < Radius))
                 {
                     tip = Prices[i].Y.ToString("C3");
                     break;

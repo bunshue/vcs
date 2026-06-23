@@ -1,27 +1,11 @@
-﻿//======================================================================
-//
-//        Copyright (C) 2008 stg609    
-//        All rights reserved 
-//       
-//        命名空间:  绘图程序
-//        CLR版本:   2.0.50727.42
-//        创建年份:  2008
-// 
-//        created by stg609 at  03/29/2008 22:02:01
-//        本人博客：http://stg609.cnblogs.com
-//        由于水平有限，所写代码若有不足，欢迎大家到我博客交流
-//        
-//        注:转载请保留此信息
-//
-//======================================================================
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Drawing.Imaging;
 using System.IO;
 using System.Threading;
@@ -102,7 +86,7 @@ namespace vcs_Paint9
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 Bitmap bmpformfile = new Bitmap(ofd.FileName);//获取打开的文件
-                panel2.AutoScrollPosition = new Point(0,0);//将滚动条复位
+                panel2.AutoScrollPosition = new Point(0, 0);//将滚动条复位
                 pbImg.Size = bmpformfile.Size;//调整绘图区大小为图片大小
 
                 reSize.Location = new Point(bmpformfile.Width, bmpformfile.Height);//reSize为我用来实现手动调节画布大小用的
@@ -112,7 +96,7 @@ namespace vcs_Paint9
                 Bitmap bmp = new Bitmap(pbImg.Width, pbImg.Height);
                 Graphics g = Graphics.FromImage(bmp);
                 g.FillRectangle(new SolidBrush(pbImg.BackColor), new Rectangle(0, 0, pbImg.Width, pbImg.Height));//不使用这句话，那么这个bmp的背景就是透明的
-                g.DrawImage(bmpformfile, 0, 0,bmpformfile.Width,bmpformfile.Height);//将图片画到画板上
+                g.DrawImage(bmpformfile, 0, 0, bmpformfile.Width, bmpformfile.Height);//将图片画到画板上
                 g.Dispose();//释放画板所占资源
                 //不直接使用pbImg.Image = Image.FormFile(ofd.FileName)是因为这样会让图片一直处于打开状态，也就无法保存修改后的图片；详见http://www.wanxin.org/redirect.php?tid=3&goto=lastpost
                 bmpformfile.Dispose();//释放图片所占资源
@@ -148,7 +132,6 @@ namespace vcs_Paint9
                     sFileName = sfd.FileName;
                 }
             }
-
         }
 
         //窗体移动最小化等造成的pbimg＂重画＂事件处理方法
@@ -157,7 +140,6 @@ namespace vcs_Paint9
             Graphics g = e.Graphics;
             g.DrawImage(dt.OrginalImg, 0, 0);
             //g.Dispose();切不可使用,这个Graphics是系统传入的变量，不是我们自己创建的，如果dispose就会出错
-
         }
 
         //＂绘图工具选用＂事件处理方法
@@ -218,7 +200,6 @@ namespace vcs_Paint9
             dt.DrawColor = e.GetColor;
         }
 
-
         private void reSize_MouseDown(object sender, MouseEventArgs e)
         {
             bReSize = true;//当鼠标按下时，说明要开始调节大小
@@ -229,7 +210,6 @@ namespace vcs_Paint9
             if (bReSize)
             {
                 reSize.Location = new Point(reSize.Location.X + e.X, reSize.Location.Y + e.Y);
-
             }
         }
 
@@ -261,7 +241,6 @@ namespace vcs_Paint9
 
         private void BuildNewPic_Click(object sender, EventArgs e)
         {
-
             pbImg.Size = DefaultPicSize;
             this.panel2.AutoScrollPosition = new Point(0, 0);
             Bitmap bmp = new Bitmap(DefaultPicSize.Width, DefaultPicSize.Height);
@@ -278,8 +257,20 @@ namespace vcs_Paint9
 
         private void AttributePic_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("图像高:" + pbImg.Height + " px ,图像宽:" + pbImg.Width+" px", "图像属性");
+            MessageBox.Show("图像高:" + pbImg.Height + " px ,图像宽:" + pbImg.Width + " px", "图像属性");
         }
-
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+

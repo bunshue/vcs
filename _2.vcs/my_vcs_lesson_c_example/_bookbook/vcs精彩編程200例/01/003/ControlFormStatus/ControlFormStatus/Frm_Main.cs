@@ -30,6 +30,8 @@ namespace ControlFormStatus
             pictureBox_Close.Image = Properties.Resources.关闭按钮;//显示关闭按钮的图片
         }
 
+        //------------------------------------------------------------  # 60個
+
         //#region  设置窗体的最大化、最小化和关闭按钮的单击事件
         /// <summary>
         /// 设置窗体的最大化、最小化和关闭按钮的单击事件
@@ -106,13 +108,32 @@ namespace ControlFormStatus
         {
             FrmClickMeans(this, Convert.ToInt16(((PictureBox)sender).Tag.ToString()));//设置鼠标单击时按钮的图片
         }
+
         private void pictureBox_Close_MouseEnter(object sender, EventArgs e)//鼠标移入事件
         {
             ImageSwitch(sender, Convert.ToInt16(((PictureBox)sender).Tag.ToString()), 0);//设置鼠标移入后按钮的图片
         }
+
         private void pictureBox_Close_MouseLeave(object sender, EventArgs e)//鼠标移出事件
         {
             ImageSwitch(sender, Convert.ToInt16(((PictureBox)sender).Tag.ToString()), 1);//设置鼠标移出后按钮的图片
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+
+
+
+

@@ -29,7 +29,6 @@ namespace vcs_Draw_Example1
 
         private List<Point> Points = new List<Point>();
 
-
         public Form1()
         {
             InitializeComponent();
@@ -240,6 +239,8 @@ namespace vcs_Draw_Example1
                 richTextBox1.Text += "無圖可存\n";
         }
 
+        //------------------------------------------------------------  # 60個
+
         //沒用到????
         void open_new_file()
         {
@@ -254,6 +255,8 @@ namespace vcs_Draw_Example1
             pictureBox1.Image = bitmap1;
             return;
         }
+
+        //------------------------------------------------------------  # 60個
 
         bool isDrawing = false;
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
@@ -7438,27 +7441,6 @@ namespace vcs_Draw_Example1
             g.DrawString("三杯祝福歌", font, brBlack, 250, 30, format);
             g.DrawString("一曲迎春調", font, brBlack, 20, 30, format);
             g.DrawString("迎春祝福", font, brBlack, 100, 0);
-*/
-
-/*
-            //擷取部分圖形
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            Image image = Image.FromFile(filename);
-            pictureBox1.Image = image;
-
-            int x_st = 0;
-            int y_st = 0;
-            int W = 150;
-            int H = 150;
-
-            Graphics g = this.CreateGraphics();
-            Bitmap bitmap = new Bitmap(filename);
-            Rectangle rectangle = new Rectangle(x_st, y_st, W, H);
-            Bitmap cloneBitmap = bitmap.Clone(rectangle, PixelFormat.DontCare);
-            pictureBox2.Image = cloneBitmap;
-            pictureBox2.Visible = true;
-
-            richTextBox1.Text += "從(" + x_st.ToString() + ", " + y_st.ToString() + ") 擷取 W = " + W.ToString() + ", H = " + H.ToString() + " 區域\n";
 */
 
 /*

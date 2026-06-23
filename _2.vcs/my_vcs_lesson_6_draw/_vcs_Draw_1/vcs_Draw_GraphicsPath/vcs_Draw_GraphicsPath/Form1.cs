@@ -633,9 +633,33 @@ namespace vcs_Draw_GraphicsPath
             start_point = new PointF(start_point.X + dx * text_width, start_point.Y + dy * text_width);
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button5_Click(object sender, EventArgs e)
         {
+            //做一個圓形的pictureBox
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_computer\burn1.jpg";
+            pictureBox1.Image = Image.FromFile(filename);
+            pictureBox1.BackColor = Color.Pink;
+
+            pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
+
+            //做一個圓形的pictureBox
+            // Make a Rectangle that defines the circular area.
+            Rectangle rect = new Rectangle(15, 15, 200, 200);
+
+            // Make a GraphicsPath and add the circle.
+            GraphicsPath path = new GraphicsPath();
+            path.AddEllipse(rect);
+
+            // Convert the GraphicsPath into a Region.
+            Region region = new Region(path);
+
+            // Restrict the PictureBoxes to the Region.
+            pictureBox1.Region = region;
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button6_Click(object sender, EventArgs e)
         {

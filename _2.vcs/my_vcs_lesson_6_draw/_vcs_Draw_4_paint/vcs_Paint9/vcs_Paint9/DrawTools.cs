@@ -1,25 +1,9 @@
-﻿//======================================================================
-//
-//        Copyright (C) 2008 stg609    
-//        All rights reserved 
-//       
-//        命名空间:  绘图程序
-//        CLR版本:   2.0.50727.42
-//        创建年份:  2008
-// 
-//        created by stg609 at  03/29/2008 22:02:01
-//        本人博客：http://stg609.cnblogs.com
-//        由于水平有限，所写代码若有不足，欢迎大家到我博客交流
-//        
-//        注:转载请保留此信息
-//
-//======================================================================
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
+
 using System.Drawing.Drawing2D;
 
 namespace vcs_Paint9
@@ -214,6 +198,5 @@ namespace vcs_Paint9
             orginalImg.Dispose();
             p.Dispose();
         }
-
     }
 }

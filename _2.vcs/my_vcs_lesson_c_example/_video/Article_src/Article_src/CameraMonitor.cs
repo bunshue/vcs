@@ -99,6 +99,7 @@ namespace WebcamSecurity
                     this.isResolutionSet = true;
                 }
                 this.display.Image = (Bitmap)bitmap1.Clone(); // displays the current frame on the main form
+
                 if (this.MotionDetection && !this.motionDetected)
                 {
                     // if motion detection is enabled and there werent any previous motion detected

@@ -1,4 +1,4 @@
-﻿namespace FileIco
+﻿namespace vcs_FileIcon
 {
     partial class Form1
     {
