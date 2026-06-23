@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace 鍵盤掛鉤屏蔽熱鍵
+namespace vcs_System_Hook2
 {
     static class Program
     {

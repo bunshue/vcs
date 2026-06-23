@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
-using System.Drawing.Imaging;   //for PixelFormat
+using System.Drawing.Imaging;  // for PixelFormat
 using System.Drawing.Drawing2D;
 
 namespace vcs_ImageProcessing2_CCRR
@@ -144,6 +144,8 @@ namespace vcs_ImageProcessing2_CCRR
             g.DrawImage(bitmap1, new Rectangle(130, 10, 120, 120), new Rectangle(0, 0, W, H), GraphicsUnit.Pixel);
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button2_Click(object sender, EventArgs e)
         {
             //重設大小
@@ -163,6 +165,8 @@ namespace vcs_ImageProcessing2_CCRR
             }
             return newbmp;
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -313,6 +317,8 @@ namespace vcs_ImageProcessing2_CCRR
             richTextBox1.Text += "圖片剪下一塊存檔 : " + filename2 + "\n";
         }
 
+        //------------------------------------------------------------  # 60個
+
         public static Image CutForCustomx(string imgPath, int top, int height)
         {
             FileStream fs = new FileStream(imgPath, FileMode.Open, FileAccess.Read);
@@ -347,6 +353,8 @@ namespace vcs_ImageProcessing2_CCRR
             pictureBox1.Image = CutForCustomx(filename1, 150, 150);
             pictureBox1.Image.Save(filename2);
         }
+
+        //------------------------------------------------------------  # 60個
 
         //圖片質量壓縮(不改變尺寸) ST
         /// <summary>
@@ -430,13 +438,12 @@ namespace vcs_ImageProcessing2_CCRR
         }
         //圖片質量壓縮(不改變尺寸) SP
 
+        //------------------------------------------------------------  # 60個
+
         //圖片壓縮、縮略圖生成代碼
 
         //#region imageCompress
-        /**/
-        /// <summary>
         /// 圖片壓縮函數
-        /// </summary>
         /// <param name="sourceFile">原始圖片文件</param>
         /// <param name="quality">質量壓縮比</param>
         /// <param name="ouputFile">輸出文件名,請用 .jpg 后綴 </param>
@@ -455,13 +462,11 @@ namespace vcs_ImageProcessing2_CCRR
 
                 sourceImage.Save(outputFile, myImageCodecInfo, myEncoderParameters);
                 return true;
-
             }
             catch
             {
                 return false;
             }
-
         }
         //#endregion
 
@@ -474,7 +479,6 @@ namespace vcs_ImageProcessing2_CCRR
         private void button7_Click(object sender, EventArgs e)
         {
             //圖片壓縮
-            //圖片壓縮
             string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             string filename2 = "tmp_compress_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
             bool result = imageCompress(filename1, 30, filename2);
@@ -483,6 +487,8 @@ namespace vcs_ImageProcessing2_CCRR
             else
                 richTextBox1.Text += "FAIL\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button8_Click(object sender, EventArgs e)
         {
@@ -505,7 +511,6 @@ namespace vcs_ImageProcessing2_CCRR
 
             return null;
         }
-
 
         private void VaryQualityLevel()
         {
@@ -543,6 +548,7 @@ namespace vcs_ImageProcessing2_CCRR
             richTextBox1.Text += "完成\n";
         }
 
+        //------------------------------------------------------------  # 60個
 
         private void button9_Click(object sender, EventArgs e)
         {
@@ -646,8 +652,8 @@ namespace vcs_ImageProcessing2_CCRR
             }
         }
 
-        /**/
-        /// <summary>
+        //------------------------------------------------------------  # 60個
+
         /// 保存JPG時用
         /// </summary>
         /// <param name="mimeType"></param>
@@ -678,7 +684,6 @@ namespace vcs_ImageProcessing2_CCRR
             richTextBox1.Text += "H res : " + bmp.HorizontalResolution.ToString() + "\n";
             richTextBox1.Text += "V res : " + bmp.VerticalResolution.ToString() + "\n";
 
-
             g.DrawImage(bmp, 0, 0);
 
             bmp.SetResolution(75f, 75f);
@@ -696,8 +701,9 @@ namespace vcs_ImageProcessing2_CCRR
             */
 
             pictureBox1.Image = bitmap1;
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button11_Click(object sender, EventArgs e)
         {
@@ -706,98 +712,67 @@ namespace vcs_ImageProcessing2_CCRR
             //TBD
 
             //使用 class
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button12_Click(object sender, EventArgs e)
         {
-            //.clone()
+            /*
+            在Bitmap中可以找到
+
+            Clone()方法, 該方法有三個重載方法
+            Clone()
+            Clone(Rectangle, PixelFormat)
+            Clone(RectangleF, PixelFormat)
+            */
 
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             pictureBox1.Image = Image.FromFile(filename);
 
-            /*
-            //九宮格之正中
-            int W = image1.Width;
-            int H = image1.Height;
-            int x_st = W / 3;
-            int y_st = H / 3;
-            int w = W / 3;
-            int h = H / 3;
-
-            RectangleF rect = new RectangleF(x_st, y_st, w, h);
-
-            // 擷取部份影像，顯示於pictureBox2，區域為(起點x座標, 起點y座標, 寬度, 高度)
-            Bitmap bitmap1 = ((Bitmap)image1).Clone(rect, PixelFormat.Format32bppArgb);
-            */
-
             //clone語法, 複製部分圖片
 
             filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp";  // Format32bppRgb
-            filename = @"D:\_git\vcs\_1.data\______test_files1\pic_256X100.bmp";  // Format32bppRgb
-
-            filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";  // Format24bppRgb
             filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_哆啦A夢\doraemon1.jpg";  // Format24bppRgb
             filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";  // Format24bppRgb
-
+            filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";  // Format24bppRgb
             filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_map_city/global.c.gif";  // Format8bppIndexed
 
+            filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp";  // Format32bppRgb
+
             Bitmap bmp = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);
             PixelFormat format = bmp.PixelFormat;
+            richTextBox1.Text += "PixelFormat : " + format.ToString() + "\n";
 
-            richTextBox1.Text += "aaaaaaa " + format.ToString() + "\n";
-
-            return;
-
-            int x_st = 100;
-            int y_st = 100;
+            int x_st = 00;
+            int y_st = 00;
             int w = 150;
             int h = 150;
+
+            // 擷取部份影像
             RectangleF rect = new RectangleF(x_st, y_st, w, h);
+            Bitmap bitmap2a = bmp.Clone(rect, PixelFormat.Format32bppArgb);
+            Bitmap bitmap2b = bmp.Clone(rect, PixelFormat.Format24bppRgb);
+            Bitmap bitmap2c = bmp.Clone(rect, PixelFormat.Format8bppIndexed);
+            Bitmap bitmap2d = bmp.Clone(rect, PixelFormat.DontCare);
+            Bitmap bitmap2e = bmp.Clone(rect, bmp.PixelFormat);
 
-            //Bitmap cloneBitmap = bitmap1.Clone(rect, PixelFormat.DontCare);//PixelFormat.Format32bppArgb
-            Bitmap cloneBitmap = bmp.Clone(rect, bitmap1.PixelFormat);//PixelFormat.Format32bppArgb
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+            Bitmap bitmap2 = new Bitmap(W, H);
 
-            //Bitmap bitmap2 = new Bitmap(W, H);
-            //Graphics g = Graphics.FromImage(bitmap2);
-            //g.Clear(Color.Pink);
+            Graphics g = Graphics.FromImage(bitmap2);
+            g.Clear(Color.Pink);
 
-            //g.DrawImage(cloneBitmap, 800, 200, w, h);
-            //g.DrawString("Clone語法", new Font("Arial", 16), Brushes.Red, 800, 200 - 30);
+            g.DrawImage(bitmap2a, 0, 0, w, h);
+            g.DrawImage(bitmap2b, w, h, w, h);
+            g.DrawImage(bitmap2c, w * 2, h * 2, w, h);
+            g.DrawImage(bitmap2d, w * 3, h * 3, w, h);
+            g.DrawImage(bitmap2e, w * 4, h * 4, w, h);
 
-            //------------------------------------------------------------  # 60個
+            g.DrawString("Clone語法", new Font("Arial", 24), Brushes.Red, 300, 20);
 
-            //clone語法
-            //clone範例
-            /*
-            在Bitmap中可以找到
-
-            Clone（）方法，該方法有三個重載方法。
-            Clone（）
-            Clone（Rectangle， PixelFormat）
-            Clone（RectangleF， PixelFormat）
-            */
-            /*
-            string filename = @"C:\______test_files\picture1.jpg";
-            Bitmap bitmap1 = new Bitmap(filename);
-
-            Bitmap bitmap2 = (Bitmap)bitmap1.Clone();
-
-            int w = bitmap1.Width;
-            int h = bitmap1.Height;
-            Rectangle rect = new Rectangle(w / 2, h / 2, w / 2, h / 2);
-
-            //Bitmap bitmap3 = (Bitmap)bitmap1.Clone(rect, PixelFormat.Format32bppArgb);    //same
-            Bitmap bitmap3 = (Bitmap)bitmap1.Clone(rect, bitmap1.PixelFormat);
-
-            pictureBox1.Image = bitmap3;
-
-            Bitmap/Image存檔
-                */
-
-
-
+            pictureBox1.Image = bitmap2;
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -1020,37 +995,5 @@ namespace vcs_ImageProcessing2_CCRR
 //------------------------------  # 30個
 
 /*  可搬出
-
-*/
-
-
-
-/*
-            //擷取部分圖形
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            Image image = Image.FromFile(filename);
-            pictureBox1.Image = image;
-
-            int x_st = 0;
-            int y_st = 0;
-            int W = 150;
-            int H = 150;
-
-            Graphics g = this.CreateGraphics();
-            Bitmap bitmap = new Bitmap(filename);
-            Rectangle rectangle = new Rectangle(x_st, y_st, W, H);
-            Bitmap cloneBitmap = bitmap.Clone(rectangle, PixelFormat.DontCare);
-            pictureBox2.Image = cloneBitmap;
-            pictureBox2.Visible = true;
-
-            richTextBox1.Text += "從(" + x_st.ToString() + ", " + y_st.ToString() + ") 擷取 W = " + W.ToString() + ", H = " + H.ToString() + " 區域\n";
-*/
-
-/*
-        private Image cropImage(Image img, Rectangle cropArea)
-        {
-            Bitmap bmpImage = new Bitmap(img);
-            return bmpImage.Clone(cropArea, bmpImage.PixelFormat);
-        }
 
 */

@@ -1,4 +1,4 @@
-﻿namespace 鍵盤掛鉤屏蔽熱鍵
+﻿namespace vcs_System_Hook2
 {
     partial class Form1
     {
@@ -71,7 +71,7 @@
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "鍵盤掛鉤屏蔽熱鍵";
+            this.Text = "vcs_System_Hook2";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 

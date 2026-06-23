@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有關程序集的常規訊息透過下列屬性集
 // 控制。修改這些屬性值可修改
 // 與程序集相關的訊息。
-[assembly: AssemblyTitle("鍵盤掛鉤屏蔽熱鍵")]
+[assembly: AssemblyTitle("vcs_System_Hook2")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("鍵盤掛鉤屏蔽熱鍵")]
+[assembly: AssemblyProduct("vcs_System_Hook2")]
 [assembly: AssemblyCopyright("Copyright c  2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

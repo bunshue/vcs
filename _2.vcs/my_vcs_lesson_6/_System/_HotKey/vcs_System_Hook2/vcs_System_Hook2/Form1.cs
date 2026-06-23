@@ -9,19 +9,23 @@ using System.Windows.Forms;
 
 using System.Runtime.InteropServices;
 
-namespace 鍵盤掛鉤屏蔽熱鍵
+namespace vcs_System_Hook2
 {
     public partial class Form1 : Form
     {
         private IntPtr pKeyboardHook = IntPtr.Zero;//鍵盤掛鉤句柄
         public delegate int HookProc(int nCode, Int32 wParam, IntPtr lParam);// 掛鉤委託宣告
+
         //鍵盤掛鉤委託實例不能省略變數
         private HookProc KeyboardHookProcedure;
+
         //底層鍵盤掛鉤
         public const int idHook = 13;
+
         //安裝掛鉤
         [DllImport("user32.dll", CallingConvention = CallingConvention.StdCall)]
         public static extern IntPtr SetWindowsHookEx(int idHook, HookProc lpfn, IntPtr pInstance, int threadId);
+
         //卸載掛鉤
         [DllImport("user32.dll", CallingConvention = CallingConvention.StdCall)]
         public static extern bool UnhookWindowsHookEx(IntPtr pHookHandle);
@@ -103,6 +107,8 @@ namespace 鍵盤掛鉤屏蔽熱鍵
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button1_Click(object sender, EventArgs e)
         {
             //安裝掛勾, 鍵盤掛鉤屏蔽系統熱鍵
@@ -116,3 +122,16 @@ namespace 鍵盤掛鉤屏蔽熱鍵
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+

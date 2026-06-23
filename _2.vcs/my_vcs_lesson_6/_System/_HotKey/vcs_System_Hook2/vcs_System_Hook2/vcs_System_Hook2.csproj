@@ -8,8 +8,8 @@
     <ProjectGuid>{CB9EBA11-BC1C-4B97-82FF-B24F18F998CF}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>鍵盤掛鉤屏蔽熱鍵</RootNamespace>
-    <AssemblyName>鍵盤掛鉤屏蔽熱鍵</AssemblyName>
+    <RootNamespace>vcs_System_Hook2</RootNamespace>
+    <AssemblyName>vcs_System_Hook2</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>

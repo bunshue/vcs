@@ -4,6 +4,7 @@
 3字
 Tom
 Sue
+Amy
 
 4字
 John
@@ -13,8 +14,12 @@ Lisa
 
 
 5字
+Alice
+Julia
 David
+Peter
 Jerry
+Nancy
 
 
 
@@ -11362,22 +11367,6 @@ public void SaveBitmapUsingExtension(Bitmap bitmap1, string filename)
                 richTextBox1.Text += "無圖可存\n";
             }
         }
-
-//------------------------------------------------------------  # 60個
-
-//由pictureBox1建立繪圖物件
-
-//新建圖檔, 初始化畫布
-Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-Graphics g = Graphics.FromImage(bitmap1);
-g.Clear(Color.White);
-pictureBox1.Image = bitmap1;
-
-//新建圖檔, 初始化畫布
-string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-Bitmap bitmap1 = new Bitmap(filename);
-Graphics g = Graphics.FromImage(bitmap1);
-pictureBox1.Image = bitmap1;
 
 //------------------------------------------------------------  # 60個
 

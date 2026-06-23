@@ -61,11 +61,11 @@ namespace vcs_Cryptography1_MD5
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            richTextBox1.Size = new Size(840, 690);
+            richTextBox1.Size = new Size(1040, 690);
             richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1300, 750);
+            this.Size = new Size(1500, 750);
             this.Text = "vcs_Cryptography1_MD5";
 
             //設定執行後的表單起始位置, 正中央
@@ -260,53 +260,26 @@ namespace vcs_Cryptography1_MD5
         {
         }
 
+        //------------------------------------------------------------  # 60個
 
         private void button10_Click(object sender, EventArgs e)
         {
-        }
+            // 計算一個檔案的MD5值
 
-        private void button11_Click(object sender, EventArgs e)
-        {
-            //用MD5比較兩個檔案
-
-            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\compare\aaaa.txt";
-            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\compare\bbbb.txt";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             string FileMD5_1 = string.Empty;    //第1個檔案的MD5碼
-            string FileMD5_2 = string.Empty;    //第2個檔案的MD5碼
 
             MD5 md5 = MD5.Create();  // 創建MD5對象
+
             //取得第一個檔案MD5演算後的陣列
-            byte[] input1 = File.ReadAllBytes(filename1);
+            byte[] input1 = File.ReadAllBytes(filename);
             byte[] md5Hash1 = md5.ComputeHash(input1);  // 算拜列之Hash值
 
             //建立第一個檔案的MD5碼
             FileMD5_1 = BytesToString(md5Hash1);    //Hash轉字串
+            richTextBox1.Text += "檔案 : " + filename + "\tMD5 : " + FileMD5_1 + "\n";
 
-            //取得第二個檔案MD5演算後的陣列
-            byte[] input2 = File.ReadAllBytes(filename2);
-            byte[] md5Hash2 = md5.ComputeHash(input2);  // 算拜列之Hash值
-
-            //建立第二個檔案的MD5碼
-            FileMD5_2 = BytesToString(md5Hash2);    //Hash轉字串
-
-            richTextBox1.Text += "檔案 : " + filename1 + ",\tMD5 : " + FileMD5_1 + "\n";
-            richTextBox1.Text += "檔案 : " + filename2 + ",\tMD5 : " + FileMD5_2 + "\n";
-
-            if (FileMD5_1.ToLower() == FileMD5_2.ToLower())
-            {
-                richTextBox1.Text += "兩個檔案\t完全相同\n";
-            }
-            else
-            {
-                richTextBox1.Text += "兩個檔案\t不相同\n";
-            }
-        }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-            // 計算一個檔案的MD5值
-
-            MD5 md5 = MD5.Create();  // 創建MD5對象
+            //------------------------------------------------------------  # 60個
 
             FileStream fs = new FileStream(filename, FileMode.Open);
             byte[] md5Hash = md5.ComputeHash(fs);  // 算拜列之Hash值
@@ -320,19 +293,19 @@ namespace vcs_Cryptography1_MD5
             }
             str_encrypted_text = sb.ToString();
 
-            richTextBox1.Text += "檔案 : " + filename + "\tMD5密碼 : " + str_encrypted_text + "\n";
+            richTextBox1.Text += "檔案 : " + filename + "\tMD5 : " + str_encrypted_text + "\n";
 
             // 計算一個檔案的MD5值
             str_encrypted_text = BytesToString(GetHashMD5(filename));
-            richTextBox1.Text += "檔案 : " + filename + "\tMD5密碼 : " + str_encrypted_text + "\n";
+            richTextBox1.Text += "檔案 : " + filename + "\tMD5 : " + str_encrypted_text + "\n";
 
             // 計算一個檔案的MD5值
             str_encrypted_text = HashHelper.MD5File(filename);
-            richTextBox1.Text += "檔案 : " + filename + "\tMD5密碼 : " + str_encrypted_text + "\n";
+            richTextBox1.Text += "檔案 : " + filename + "\tMD5 : " + str_encrypted_text + "\n";
 
             // 計算一個檔案的MD5值
             str_encrypted_text = ValidHelper.GetFileMD5(filename);
-            richTextBox1.Text += "檔案 : " + filename + "\tMD5密碼 : " + str_encrypted_text + "\n";
+            richTextBox1.Text += "檔案 : " + filename + "\tMD5 : " + str_encrypted_text + "\n";
 
             // 計算一個檔案的MD5值
             //檔案轉拜列轉Hash值
@@ -341,6 +314,35 @@ namespace vcs_Cryptography1_MD5
 
             //Hash轉字串
             str_encrypted_text = Convert.ToBase64String(md5Hash);
+            richTextBox1.Text += "檔案 : " + filename + "\tMD5 : " + str_encrypted_text + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            //取得第一個檔案MD5演算後的陣列
+            byte[] input = File.ReadAllBytes(filename);
+            //byte[] md5Hash = md5.ComputeHash(input);  // 算拜列之Hash值
+            md5Hash = md5.ComputeHash(input);  // 算拜列之Hash值
+
+            //建立第一個檔案的MD5碼
+            str_encrypted_text = BytesToString(md5Hash);    //Hash轉字串
+
+            richTextBox1.Text += "檔案 : " + filename + "\tMD5 : " + str_encrypted_text + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            //FileStream
+            fs = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read);
+            //byte[]
+            md5Hash = md5.ComputeHash(fs);  // 算拜列之Hash值
+            fs.Close();
+            //StringBuilder
+            sb = new StringBuilder(32);
+            for (int i = 0; i < md5Hash.Length; i++)
+            {
+                sb.Append(md5Hash[i].ToString("X2"));  // 轉2位的16進制字串
+            }
+            str_encrypted_text = sb.ToString();
+
             richTextBox1.Text += "檔案 : " + filename + "\tMD5密碼 : " + str_encrypted_text + "\n";
         }
 
@@ -358,29 +360,22 @@ namespace vcs_Cryptography1_MD5
 
         //------------------------------------------------------------  # 60個
 
+        private void button11_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+        }
+
+        //------------------------------------------------------------  # 60個
+
         private void button13_Click(object sender, EventArgs e)
         {
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
-            // 計算一個檔案的MD5值
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-
-            //加密後的結果
-            string str_encrypted_text = string.Empty;
-
-            //建立MD5的演算法
-            MD5 md5 = MD5.Create();  // 創建MD5對象
-
-            //取得第一個檔案MD5演算後的陣列
-            byte[] input = File.ReadAllBytes(filename);
-            byte[] md5Hash = md5.ComputeHash(input);  // 算拜列之Hash值
-
-            //建立第一個檔案的MD5碼
-            str_encrypted_text = BytesToString(md5Hash);    //Hash轉字串
-
-            richTextBox1.Text += "檔案 : " + filename + "\tMD5密碼 : " + str_encrypted_text + "\n";
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -391,24 +386,6 @@ namespace vcs_Cryptography1_MD5
 
         private void button16_Click(object sender, EventArgs e)
         {
-            // 計算一個檔案的MD5值
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-
-            //加密後的結果
-            string str_encrypted_text = string.Empty;
-
-            MD5 md5 = MD5.Create();  // 創建MD5對象
-            FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read);
-            byte[] md5Hash = md5.ComputeHash(fs);  // 算拜列之Hash值
-            fs.Close();
-            StringBuilder sb = new StringBuilder(32);
-            for (int i = 0; i < md5Hash.Length; i++)
-            {
-                sb.Append(md5Hash[i].ToString("X2"));  // 轉2位的16進制字串
-            }
-            str_encrypted_text = sb.ToString();
-
-            richTextBox1.Text += "檔案 : " + filename + "\tMD5密碼 : " + str_encrypted_text + "\n";
         }
 
         //------------------------------------------------------------  # 60個

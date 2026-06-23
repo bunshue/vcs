@@ -214,7 +214,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(200, 60);
             this.button12.TabIndex = 15;
-            this.button12.Text = ".clone()";
+            this.button12.Text = "clone() 語法";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -322,7 +322,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1005, 686);
+            this.ClientSize = new System.Drawing.Size(756, 686);
             this.Controls.Add(this.bt_reset);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.bt_clear);

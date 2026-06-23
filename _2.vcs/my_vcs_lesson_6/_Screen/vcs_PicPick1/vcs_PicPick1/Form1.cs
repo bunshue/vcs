@@ -56,8 +56,9 @@ namespace vcs_PicPick1
             KeyHookHandler.Hook();
             timer1.Enabled = true;
             this.WindowState = FormWindowState.Minimized;
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
