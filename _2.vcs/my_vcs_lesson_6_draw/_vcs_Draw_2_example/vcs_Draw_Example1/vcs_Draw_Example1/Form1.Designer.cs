@@ -275,6 +275,7 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(160, 45);
             this.button13.TabIndex = 31;
+            this.button13.Text = "直書橫書";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
