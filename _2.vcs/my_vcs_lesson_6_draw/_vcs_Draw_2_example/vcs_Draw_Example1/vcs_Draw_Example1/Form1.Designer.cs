@@ -200,7 +200,6 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(160, 45);
             this.button6.TabIndex = 22;
-            this.button6.Text = "開圖檔、寫字";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -341,7 +340,6 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(160, 45);
             this.button25.TabIndex = 41;
-            this.button25.Text = "餅圖";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -471,7 +469,6 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(160, 45);
             this.button28.TabIndex = 58;
-            this.button28.Text = "柱狀圖";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
@@ -504,7 +501,6 @@
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(160, 45);
             this.button31.TabIndex = 61;
-            this.button31.Text = "折線圖";
             this.button31.UseVisualStyleBackColor = true;
             this.button31.Click += new System.EventHandler(this.button31_Click);
             // 

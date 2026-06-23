@@ -13,8 +13,10 @@ namespace vcs_Alphanumeric
     {
         Graphics g1;
         Graphics g2;
+        Graphics g3;
         Bitmap bitmap1;
         Bitmap bitmap2;
+        Bitmap bitmap3;
         Pen p;
         SolidBrush sb;
 
@@ -391,17 +393,25 @@ namespace vcs_Alphanumeric
 
             //新建圖檔, 初始化畫布
             bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            g1 = Graphics.FromImage(bitmap1);
-            g1.Clear(BackColor);
-            pictureBox1.Image = bitmap1;
-            //richTextBox1.Text += "已新建圖檔\n";
-            //richTextBox1.Text += "畫布大小 : W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
-
-            //新建圖檔, 初始化畫布
             bitmap2 = new Bitmap(pictureBox2.Width, pictureBox2.Height);
+            bitmap3 = new Bitmap(pictureBox3.Width, pictureBox3.Height);
+            g1 = Graphics.FromImage(bitmap1);
             g2 = Graphics.FromImage(bitmap2);
+            g3 = Graphics.FromImage(bitmap3);
+            g1.Clear(BackColor);
             g2.Clear(BackColor);
+            g3.Clear(BackColor);
+            pictureBox1.Image = bitmap1;
             pictureBox2.Image = bitmap2;
+            pictureBox3.Image = bitmap3;
+
+            //------------------------------------------------------------  # 60個
+
+            draw_all();
+
+            //------------------------------------------------------------  # 60個
+
+            draw_ABCD();
         }
 
         void show_item_location()
@@ -411,17 +421,18 @@ namespace vcs_Alphanumeric
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
+            pictureBox1.Size = new Size(830, 960);
+            pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            pictureBox2.Size = new Size(500, 200);
+            pictureBox2.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            pictureBox3.Size = new Size(500, 200);
+            pictureBox3.Location = new Point(x_st + dx * 4, y_st + dy * 3);
 
-            pictureBox1.Size = new Size(830, 980);
-            pictureBox1.Location = new Point(10, 10);
-            pictureBox2.Size = new Size(480, 150);
-            pictureBox2.Location = new Point(840, 10);
-
-            richTextBox1.Size = new Size(400, 500);
-            richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 6);
+            richTextBox1.Size = new Size(500, 300);
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 9);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1400, 1040);
+            this.Size = new Size(1400, 1020);
             this.Text = "vcs_test_all_00_Usually";
 
             //設定執行後的表單起始位置, 正中央
@@ -528,7 +539,7 @@ namespace vcs_Alphanumeric
                 }
                 //richTextBox1.Text += "\n";
             }
-            richTextBox1.Text += "\n";
+            //richTextBox1.Text += "\n";
             pictureBox1.Image = bitmap1;
             //Application.DoEvents();
         }
@@ -587,13 +598,9 @@ namespace vcs_Alphanumeric
             return word;
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            g1.Clear(BackColor);
-            pictureBox1.Image = bitmap1;
-        }
+        //------------------------------------------------------------  # 60個
 
-        private void button1_Click(object sender, EventArgs e)
+        void draw_all()
         {
             g1.Clear(BackColor);
 
@@ -653,21 +660,13 @@ namespace vcs_Alphanumeric
             draw_alphanumeric0(g1, sX, size, forecolor, backcolor, x_st + dx * 2, y_st + dy * 5);
             draw_alphanumeric0(g1, sY, size, forecolor, backcolor, x_st + dx * 3, y_st + dy * 5);
             draw_alphanumeric0(g1, sZ, size, forecolor, backcolor, x_st + dx * 4, y_st + dy * 5);
+
+            pictureBox1.Image = bitmap1;
         }
 
-        void draw_string(Graphics g, string str, int size, Color forecolor, Color backcolor, int x_st, int y_st, int dx)
-        {
-            int len = str.Length;
-            richTextBox1.Text += "len = " + len.ToString() + "\n";
-            int i;
-            for (i = 0; i < len; i++)
-            {
-                richTextBox1.Text += "i = " + i.ToString() + "\t" + str[i] + "\n";
-                draw_alphanumeric(g, str[i], size, forecolor, backcolor, x_st + dx * i, y_st);
-            }
-        }
+        //------------------------------------------------------------  # 60個
 
-        private void button3_Click(object sender, EventArgs e)
+        void draw_ABCD()
         {
             string str = "ABCD";
             int size = 15;
@@ -677,8 +676,25 @@ namespace vcs_Alphanumeric
             int y_st = 20;
             int dx = size * 7 + 10;
 
-            draw_string(g1, str, size, forecolor, backcolor, x_st, y_st, dx);
+            draw_string(g3, str, size, forecolor, backcolor, x_st, y_st, dx);
+
+            pictureBox3.Image = bitmap3;
         }
+
+        //------------------------------------------------------------  # 60個
+
+        void draw_string(Graphics g, string str, int size, Color forecolor, Color backcolor, int x_st, int y_st, int dx)
+        {
+            int len = str.Length;
+            //richTextBox1.Text += "len = " + len.ToString() + "\n";
+            for (int i = 0; i < len; i++)
+            {
+                //richTextBox1.Text += "i = " + i.ToString() + "\t" + str[i] + "\n";
+                draw_alphanumeric(g, str[i], size, forecolor, backcolor, x_st + dx * i, y_st);
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void timer1_Tick(object sender, EventArgs e)
         {

@@ -246,6 +246,7 @@ namespace vcs_MousePaint2
             {
                 e.Graphics.FillEllipse(Brushes.Black, point.X - 3, point.Y - 3, 5, 5);
             }
+
             if (Points.Count < 2)
             {
                 return;
@@ -263,9 +264,7 @@ namespace vcs_MousePaint2
             foreach (Point pt in Points)
             {
                 richTextBox1.Text += pt.ToString() + "\n";
-
             }
-
 
             // Start a new point list.
             Points = new List<Point>();
@@ -526,7 +525,6 @@ namespace vcs_MousePaint2
             e.Graphics.DrawLine(Pens.Red, 0, currentY, W, currentY);  //橫線
             e.Graphics.DrawLine(Pens.Red, currentX, 0, currentX, H);  //直線
 
-
             // Find the intersection of all circles.
             Region intersection = FindCircleIntersections(Centers, Radii);
 
@@ -551,14 +549,16 @@ namespace vcs_MousePaint2
             }
 
             //e.Graphics.DrawLines(Pens.Pink, MarkPoint);
-
             //richTextBox1.Text += "i = " + i.ToString() + ", cx = " + MarkPoint[i].X + ", cy = " + MarkPoint[i].Y + "\n";
         }
 
         // Find the intersection of all of the circles.
         private Region FindCircleIntersections(List<PointF> centers, List<float> radii)
         {
-            if (centers.Count < 1) return null;
+            if (centers.Count < 1)
+            {
+                return null;
+            }
 
             // Make a region.
             Region result_region = new Region();
@@ -568,9 +568,7 @@ namespace vcs_MousePaint2
             {
                 using (GraphicsPath circle_path = new GraphicsPath())
                 {
-                    circle_path.AddEllipse(
-                        centers[i].X - radii[i], centers[i].Y - radii[i],
-                        2 * radii[i], 2 * radii[i]);
+                    circle_path.AddEllipse(centers[i].X - radii[i], centers[i].Y - radii[i], 2 * radii[i], 2 * radii[i]);
                     result_region.Intersect(circle_path);
                 }
                 //richTextBox1.Text += "i = " + i.ToString() + "cx=" + centers[i].X.ToString() + ", cy = " + centers[i].Y.ToString() + ", R = " + radii[i].ToString() + "\n";
@@ -681,6 +679,7 @@ namespace vcs_MousePaint2
                 e.Graphics.FillEllipse(Brushes.White, rect);
                 e.Graphics.DrawEllipse(Pens.Black, rect);
             }
+
             foreach (Point pt in Pt2)
             {
                 Rectangle rect = new Rectangle(pt.X - object_radius, pt.Y - object_radius, 2 * object_radius + 1, 2 * object_radius + 1);
@@ -761,9 +760,13 @@ namespace vcs_MousePaint2
             SnapToGrid(ref x, ref y);
 
             if (MovingStartEndPoint)
+            {
                 Pt1[MovingSegment] = new Point(x, y);
+            }
             else
+            {
                 Pt2[MovingSegment] = new Point(x, y);
+            }
 
             // Redraw.
             pictureBox5.Invalidate();
@@ -796,13 +799,14 @@ namespace vcs_MousePaint2
             int dx = x - Pt1[MovingSegment].X;
             int dy = y - Pt1[MovingSegment].Y;
 
-            if (dx == 0 && dy == 0) return;
+            if (dx == 0 && dy == 0)
+            {
+                return;
+            }
 
             // Move the segment to its new location.
             Pt1[MovingSegment] = new Point(x, y);
-            Pt2[MovingSegment] = new Point(
-                Pt2[MovingSegment].X + dx,
-                Pt2[MovingSegment].Y + dy);
+            Pt2[MovingSegment] = new Point(Pt2[MovingSegment].X + dx, Pt2[MovingSegment].Y + dy);
 
             // Redraw.
             pictureBox5.Invalidate();
@@ -967,7 +971,6 @@ namespace vcs_MousePaint2
             for (i = 0; i < len; i++)
             {
                 richTextBox1.Text += "i = " + i.ToString() + ", cx = " + Centers[i].X + ", cy = " + Centers[i].Y + ", r = " + Radii[i].ToString() + "\n";
-
             }
 
             len = MarkPoint.Count;
