@@ -8,8 +8,8 @@
     <ProjectGuid>{2F343E82-01D4-43FD-8460-499BB249023F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>設定螢幕分辨率</RootNamespace>
-    <AssemblyName>設定螢幕分辨率</AssemblyName>
+    <RootNamespace>vcs_VideoResolution2</RootNamespace>
+    <AssemblyName>vcs_VideoResolution2</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>

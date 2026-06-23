@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace 設定螢幕分辨率
+namespace vcs_VideoResolution2
 {
     static class Program
     {

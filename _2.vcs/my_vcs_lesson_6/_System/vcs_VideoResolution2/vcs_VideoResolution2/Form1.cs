@@ -6,9 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Runtime.InteropServices;
 
-namespace 設定螢幕分辨率
+namespace vcs_VideoResolution2
 {
     public partial class Form1 : Form
     {
@@ -91,6 +92,7 @@ namespace 設定螢幕分辨率
             GetDis();
             ChangeDis(1);
         }
+
         private void ChangeDis(int i)  // 變換分辨率
         {
             int dValue;
@@ -137,6 +139,7 @@ namespace 設定螢幕分辨率
                 }
             }
         }
+
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             ChangeDis(0);
@@ -152,6 +155,58 @@ namespace 設定螢幕分辨率
             dm.dmDisplayFrequency = 85;//更新率
             dm.dmFields = DEVMODE.DM_PELSWIDTH | DEVMODE.DM_PELSHEIGHT | DEVMODE.DM_DISPLAYFREQUENCY | DEVMODE.DM_BITSPERPEL;
             RetVal = ChangeDisplaySettings(ref dm, 0);
+            richTextBox1.Text += "RetVal = " + RetVal.ToString() + "\n";
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //設定 800 X 600 @ 60Hz
+
+            dWidth = 800;
+            dHeight = 600;
+
+            long RetVal = 0;
+            DEVMODE dm = new DEVMODE();
+            dm.dmSize = (short)Marshal.SizeOf(typeof(DEVMODE));
+            dm.dmPelsWidth = dWidth;//寬
+            dm.dmPelsHeight = dHeight;//高
+            dm.dmDisplayFrequency = 60;//更新率
+            dm.dmFields = DEVMODE.DM_PELSWIDTH | DEVMODE.DM_PELSHEIGHT | DEVMODE.DM_DISPLAYFREQUENCY | DEVMODE.DM_BITSPERPEL;
+            RetVal = ChangeDisplaySettings(ref dm, 0);
+            richTextBox1.Text += "RetVal = " + RetVal.ToString() + "\n";
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //設定 1080p
+            //設定 1920 X 1080 @ 60Hz
+
+            dWidth = 1920;
+            dHeight = 1080;
+
+            long RetVal = 0;
+            DEVMODE dm = new DEVMODE();
+            dm.dmSize = (short)Marshal.SizeOf(typeof(DEVMODE));
+            dm.dmPelsWidth = dWidth;//寬
+            dm.dmPelsHeight = dHeight;//高
+            dm.dmDisplayFrequency = 60;//更新率
+            dm.dmFields = DEVMODE.DM_PELSWIDTH | DEVMODE.DM_PELSHEIGHT | DEVMODE.DM_DISPLAYFREQUENCY | DEVMODE.DM_BITSPERPEL;
+            RetVal = ChangeDisplaySettings(ref dm, 0);
+            richTextBox1.Text += "RetVal = " + RetVal.ToString() + "\n";
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

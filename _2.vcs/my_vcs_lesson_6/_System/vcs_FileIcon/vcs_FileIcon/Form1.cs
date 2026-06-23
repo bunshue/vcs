@@ -28,11 +28,16 @@ namespace vcs_FileIcon
 
         private void button1_Click(object sender, EventArgs e)
         {
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1";
+            GetListViewItem(foldername, imageList1, listView1);
+
             if (textBox1.Text.Length > 0)
             {
-                GetListViewItem(textBox1.Text, imageList1, listView1);
+                //GetListViewItem(textBox1.Text, imageList1, listView1);
             }
         }
+
+        //6060
 
         [DllImport("shell32.dll", EntryPoint = "SHGetFileInfo")]
         public static extern IntPtr SHGetFileInfo(string pszPath, uint dwFileAttribute, ref SHFILEINFO psfi, uint cbSizeFileInfo, uint Flags);

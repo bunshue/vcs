@@ -94,13 +94,14 @@ namespace vcs_VideoResolution
 
         }
 
+        //6060
+
         private void button1_Click(object sender, EventArgs e)
         {
             //取得目前的螢幕解析度
             int W = Screen.PrimaryScreen.Bounds.Width;
             int H = Screen.PrimaryScreen.Bounds.Height;
             richTextBox1.AppendText("目前螢幕解析度 : " + W.ToString() + " X " + H.ToString() + "\n");
-
         }
 
         // 轉變分辯率
@@ -167,3 +168,17 @@ namespace vcs_VideoResolution
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+
