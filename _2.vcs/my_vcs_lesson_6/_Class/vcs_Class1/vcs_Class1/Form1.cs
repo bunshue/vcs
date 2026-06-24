@@ -15,6 +15,9 @@ using System.Collections;  // for Stack
 using System.Drawing.Text;  // for TextRenderingHint
 using System.Drawing.Drawing2D;  // for GraphicsPath
 
+using System.Diagnostics;  // for Debug
+
+
 //方案總管/右鍵/加入/類別/預設Class1.cs改成MyClass.cs
 
 //方案總管/右鍵/加入/Windows Form/預設Form2.cs改成MyForm.cs
@@ -111,7 +114,7 @@ namespace vcs_Class1
             W = 200;
             H = 180;
 
-            groupBox8.Size = new Size(W*2+10, H + 50);
+            groupBox8.Size = new Size(W * 2 + 10, H + 50);
 
             //大的groupBox
             W = 200;
@@ -944,9 +947,72 @@ namespace vcs_Class1
 
         //------------------------------------------------------------  # 60個
 
+        // Return a random color.
+        private Random rand = new Random();
+        private Color[] color =
+        {
+            Color.Red,
+            Color.Green,
+            Color.Blue,
+            Color.Lime,
+            Color.Orange,
+            Color.Fuchsia,
+            Color.Yellow,
+            Color.LightGreen,
+            Color.LightBlue,
+            Color.Cyan,
+        };
+
+        private Color RandomColor()
+        {
+            return color[rand.Next(0, color.Length)];
+        }
+
         private void bt_class12_Click(object sender, EventArgs e)
         {
             //Class 新進2
+            //使用Circle2類別畫圖
+
+            Graphics g;
+            Bitmap bitmap1;
+
+            int W = pictureBox1.ClientSize.Width;
+            int H = pictureBox1.ClientSize.Height;
+
+            //----開新的Bitmap----
+            bitmap1 = new Bitmap(W, H);
+            //----使用上面的Bitmap畫圖----
+            g = Graphics.FromImage(bitmap1);
+
+            g.Clear(Color.White);
+            pictureBox1.Image = bitmap1;
+
+            float x = 100;
+            float y = 100;
+            float r = 50;
+            Circle2 circle0 = new Circle2(x, y, r);
+
+            for (int i = 50; i < 300; i += 50)
+            {
+                x = i;
+                y = i;
+                r = i / 2;
+
+                using (Brush the_brush = new SolidBrush(RandomColor()))
+                {
+                    circle0 = new Circle2(x, y, r);
+                    circle0.Draw(g, the_brush);    //畫實心
+                    richTextBox1.Text += "circle info : " + circle0.ToString() + "\n";
+                }
+
+                circle0 = new Circle2(x, y, r + 10);
+                Pen p = new Pen(Color.Red, 5);
+
+                //circle0.Draw(g, Pens.Red); //畫空心, 未設定筆寬, 即筆寬為1
+                circle0.Draw(g, p); //畫空心
+                richTextBox1.Text += "circle info : " + circle0.ToString() + "\n";
+            }
+            pictureBox1.Image = bitmap1;
         }
 
         //------------------------------------------------------------  # 60個
@@ -2021,6 +2087,60 @@ namespace vcs_Class1
 
     //------------------------------------------------------------  # 60個
 
+    // Represents a circle.
+    class Circle2
+    {
+        public PointF Center;
+        public float Radius;
+        public Circle2()
+            : this(0, 0, 0)
+        {
+        }
+
+        public Circle2(float new_x, float new_y, float new_radius)
+        {
+            Center = new PointF(new_x, new_y);
+            Radius = Math.Abs(new_radius);
+            Debug.Assert((Radius > 0.000001) && (Radius < 1000), "Cannot create a circle with radius " + Radius + ".");
+        }
+
+        // Return the circle's bounds.
+        public RectangleF GetBounds()
+        {
+            //由圓心半徑取得此圓的範圍
+            return new RectangleF(Center.X - Radius, Center.Y - Radius, 2 * Radius, 2 * Radius);
+        }
+
+        // Draw the circle.
+        public void Draw(Graphics gr, Pen pen)
+        {
+            if (Radius > 0)
+            {
+                gr.DrawEllipse(pen, GetBounds());
+            }
+        }
+
+        public void Draw(Graphics gr, Brush brush)
+        {
+            if (Radius > 0)
+            {
+                gr.FillEllipse(brush, GetBounds());
+            }
+        }
+
+        public void Draw(Graphics gr, Brush brush, Pen pen)
+        {
+            Draw(gr, brush);
+            Draw(gr, pen);
+        }
+
+        // 類別內取出資料的方法 override string ToString()
+        // Return a textual representation.
+        public override string ToString()
+        {
+            return String.Format("({0}, {1}), {2}", Center.X, Center.Y, Radius);
+        }
+    }
 }
 
 //6060

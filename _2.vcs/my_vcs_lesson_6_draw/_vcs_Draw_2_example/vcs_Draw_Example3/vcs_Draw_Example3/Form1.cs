@@ -26,24 +26,14 @@ namespace vcs_Draw_Example3
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.Size = new Size(1600, 800);
+            this.Size = new Size(1600, 800);  // 要放在這裡
 
             show_item_location();
+
+            //------------------------------------------------------------  # 60個
 
             // 加入滾輪事件、指定事件處理函數
             this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseWheel);
-        }
-
-        private void Form1_Resize(object sender, EventArgs e)
-        {
-            //this.Invalidate(); // 要求表單重畫
-            show_item_location();
-            this.pictureBox0.Invalidate();
-            this.pictureBox1.Invalidate();
-            this.pictureBox2.Invalidate();
-            this.pictureBox3.Invalidate();
-            this.pictureBox4.Invalidate();
-            this.pictureBox5.Invalidate();
         }
 
         void show_item_location()
@@ -79,6 +69,20 @@ namespace vcs_Draw_Example3
             pictureBox3.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             pictureBox4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             pictureBox5.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            //this.Invalidate(); // 要求表單重畫
+            show_item_location();
+            this.pictureBox0.Invalidate();
+            this.pictureBox1.Invalidate();
+            this.pictureBox2.Invalidate();
+            this.pictureBox3.Invalidate();
+            this.pictureBox4.Invalidate();
+            this.pictureBox5.Invalidate();
         }
 
         // 滾輪事件處理函數

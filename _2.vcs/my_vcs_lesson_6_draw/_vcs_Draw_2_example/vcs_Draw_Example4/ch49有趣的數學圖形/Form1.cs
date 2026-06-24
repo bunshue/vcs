@@ -27,8 +27,8 @@ namespace WindowsFormsApplication1
         private void Form1_Load(object sender, EventArgs e)
         {
             label1.Text = "";
-            this.ClientSize = new Size(800, 600);
-            G = this.CreateGraphics();
+            //this.ClientSize = new Size(800, 600);
+            G = this.pictureBox1.CreateGraphics();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -48,21 +48,22 @@ namespace WindowsFormsApplication1
                     timer1.Enabled = false;
                     label1.Text = "";
                 }
-                r = this.ClientSize.Height / 4;
-                x2 = this.ClientSize.Width / 2 + (int)(r * Math.Cos(theta));
-                y2 = this.ClientSize.Height / 2 + (int)(r * Math.Sin(theta));
+                r = pictureBox1.Height / 4;
+                x2 = pictureBox1.Width / 2 + (int)(r * Math.Cos(theta));
+                y2 = pictureBox1.Height / 2 + (int)(r * Math.Sin(theta));
             }
-            else if (comboBox1.Text == "Limacon")
+            else if (comboBox1.Text == "Limacon")  // 帕斯卡蝸線
             {
                 if (theta >= Math.PI * 2)
                 {
                     timer1.Enabled = false;
                     label1.Text = "";
                 }
-                a = 200; b = 100;
+                a = 200;
+                b = 100;
                 r = a * Math.Cos(theta - Math.PI / 2) + b;
-                x2 = this.ClientSize.Width / 2 + (int)(r * Math.Cos(theta));
-                y2 = this.ClientSize.Height / 4 + (int)(r * Math.Sin(theta));
+                x2 = pictureBox1.Width / 2 + (int)(r * Math.Cos(theta));
+                y2 = pictureBox1.Height / 4 + (int)(r * Math.Sin(theta));
             }
             else if (comboBox1.Text == "Cardiod")
             {
@@ -73,8 +74,8 @@ namespace WindowsFormsApplication1
                 }
                 a = 200;// b = 50;
                 r = a * Math.Cos(theta - Math.PI / 2) + a;
-                x2 = this.ClientSize.Width / 2 + (int)(r * Math.Cos(theta));
-                y2 = this.ClientSize.Height / 4 + (int)(r * Math.Sin(theta));
+                x2 = pictureBox1.Width / 2 + (int)(r * Math.Cos(theta));
+                y2 = pictureBox1.Height / 4 + (int)(r * Math.Sin(theta));
             }
             else if (comboBox1.Text == "Three Left")
             {
@@ -85,8 +86,8 @@ namespace WindowsFormsApplication1
                 }
                 a = 275;
                 r = a * Math.Cos(3.0 * theta);
-                x2 = this.ClientSize.Width / 2 + (int)(r * Math.Cos(theta));
-                y2 = this.ClientSize.Height / 2 + (int)(r * Math.Sin(theta));
+                x2 = pictureBox1.Width / 2 + (int)(r * Math.Cos(theta));
+                y2 = pictureBox1.Height / 2 + (int)(r * Math.Sin(theta));
             }
             else if (comboBox1.Text == "Four Left")
             {
@@ -97,8 +98,8 @@ namespace WindowsFormsApplication1
                 }
                 a = 275;
                 r = a * Math.Cos(2.0 * theta);
-                x2 = this.ClientSize.Width / 2 + (int)(r * Math.Cos(theta));
-                y2 = this.ClientSize.Height / 2 + (int)(r * Math.Sin(theta));
+                x2 = pictureBox1.Width / 2 + (int)(r * Math.Cos(theta));
+                y2 = pictureBox1.Height / 2 + (int)(r * Math.Sin(theta));
             }
             else if (comboBox1.Text == "Spiral")
             {
@@ -109,8 +110,8 @@ namespace WindowsFormsApplication1
                 }
                 a = 175;
                 r = a / 40.0 * theta;
-                x2 = this.ClientSize.Width / 2 + (int)(r * Math.Cos(theta));
-                y2 = this.ClientSize.Height / 2 + (int)(r * Math.Sin(theta));
+                x2 = pictureBox1.Width / 2 + (int)(r * Math.Cos(theta));
+                y2 = pictureBox1.Height / 2 + (int)(r * Math.Sin(theta));
             }
 
             if (First)
@@ -129,9 +130,24 @@ namespace WindowsFormsApplication1
         {
             label1.Text = comboBox1.Text.ToString();
             this.Invalidate();
+            this.pictureBox1.Invalidate();
             timer1.Enabled = true;
             theta = 0;
             First = true;
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

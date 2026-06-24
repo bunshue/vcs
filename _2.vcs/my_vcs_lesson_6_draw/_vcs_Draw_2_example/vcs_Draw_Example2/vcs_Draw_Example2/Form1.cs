@@ -35,27 +35,6 @@ namespace vcs_Draw_Example2
         string xlabel = "x";
         string ylabel = "y";
 
-        // Return a random color.
-        private Random rand = new Random();
-        private Color[] color =
-        {
-            Color.Red,
-            Color.Green,
-            Color.Blue,
-            Color.Lime,
-            Color.Orange,
-            Color.Fuchsia,
-            Color.Yellow,
-            Color.LightGreen,
-            Color.LightBlue,
-            Color.Cyan,
-        };
-
-        private Color RandomColor()
-        {
-            return color[rand.Next(0, color.Length)];
-        }
-
         public Form1()
         {
             InitializeComponent();
@@ -228,40 +207,13 @@ namespace vcs_Draw_Example2
                 richTextBox1.Text += "無圖可存\n";
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button0_Click(object sender, EventArgs e)
         {
-            //使用Circle類別畫圖
-
-            float x = 100;
-            float y = 100;
-            float r = 50;
-            Circle circle0 = new Circle(x, y, r);
-
-            int i;
-            for (i = 50; i < 300; i += 50)
-            {
-                x = i;
-                y = i;
-                r = i / 2;
-
-
-                using (Brush the_brush = new SolidBrush(RandomColor()))
-                {
-                    circle0 = new Circle(x, y, r);
-                    circle0.Draw(g, the_brush);    //畫實心
-                    richTextBox1.Text += "circle info : " + circle0.ToString() + "\n";
-                }
-
-                circle0 = new Circle(x, y, r + 10);
-                Pen p = new Pen(Color.Red, 5);
-
-                //circle0.Draw(g, Pens.Red); //畫空心, 未設定筆寬, 即筆寬為1
-                circle0.Draw(g, p); //畫空心
-                richTextBox1.Text += "circle info : " + circle0.ToString() + "\n";
-            }
-
-            pictureBox1.Image = bitmap1;
         }
+
+        //------------------------------------------------------------  # 60個
 
         //畫多項式 ST
         private void button1_Click(object sender, EventArgs e)
@@ -369,6 +321,7 @@ namespace vcs_Draw_Example2
         }
         //畫多項式 SP
 
+        //------------------------------------------------------------  # 60個
 
         //畫XY平面 ST
         private void button2_Click(object sender, EventArgs e)
@@ -459,10 +412,13 @@ namespace vcs_Draw_Example2
         }
         //畫XY平面 SP
 
+        //------------------------------------------------------------  # 60個
+
         private void button3_Click(object sender, EventArgs e)
         {
         }
 
+        //------------------------------------------------------------  # 60個
 
         //畫愛心 ST
         private void button4_Click(object sender, EventArgs e)
@@ -540,6 +496,8 @@ namespace vcs_Draw_Example2
             return (float)(13 * Math.Cos(t) - 5 * Math.Cos(2 * t) - 2 * Math.Cos(3 * t) - Math.Cos(4 * t));
         }
         //畫愛心 SP
+
+        //------------------------------------------------------------  # 60個
 
         private void button5_Click(object sender, EventArgs e)
         {
@@ -797,6 +755,8 @@ namespace vcs_Draw_Example2
             return retValue;
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button13_Click(object sender, EventArgs e)
         {
             //顯示wave 1
@@ -871,6 +831,8 @@ namespace vcs_Draw_Example2
             }
         }
         //實現wav波形圖 SP
+
+        //------------------------------------------------------------  # 60個
 
         private void button15_Click(object sender, EventArgs e)
         {
@@ -1027,7 +989,7 @@ namespace vcs_Draw_Example2
             {
                 using (BinaryReader br = new BinaryReader(fs, Encoding.UTF8))
                 {
-                    #region  RIFF WAVE Chunk
+                    //#region  RIFF WAVE Chunk
                     br.Read(id, 0, 4);
                     br.Read(size, 0, 4);
                     br.Read(type, 0, 4);
@@ -1035,8 +997,8 @@ namespace vcs_Draw_Example2
                     long longsize = bytArray2Int(size);//十六進制轉爲十進制
                     Size = longsize * 1.0;
                     Type = getString(type, 4);
-                    #endregion
-                    #region Format Chunk
+                    //#endregion
+                    //#region Format Chunk
                     br.Read(formatid, 0, 4);
                     br.Read(formatsize, 0, 4);
                     br.Read(formattag, 0, 2);
@@ -1062,8 +1024,8 @@ namespace vcs_Draw_Example2
                     BlockAlign = bytArray2Int(tmpblockalign);              //數據塊對齊單位(每個採樣需要的字節數)
                     byte[] tmpbitspersample = composeByteArray(bitspersample);
                     BitsPerSample = bytArray2Int(tmpbitspersample);        // 每個採樣需要的bit數     
-                    #endregion
-                    #region Data Chunk
+                    //#endregion
+                    //#region Data Chunk
                     byte[] d_flag = new byte[1];
                     while (true)
                     {
@@ -1096,17 +1058,17 @@ namespace vcs_Draw_Example2
                             wavdata.Add(wavdt);
                         }
                     }
-                    #endregion
+                    //#endregion
                 }
             } //wavdata
-
-
         }
+
         // 數字節數組轉換爲int
         private int bytArray2Int(byte[] bytArray)
         {
             return bytArray[0] | (bytArray[1] << 8) | (bytArray[2] << 16) | (bytArray[3] << 24);
         }
+
         // 將字節數組轉換爲字符串
         private string getString(byte[] bts, int len)
         {
@@ -1117,6 +1079,7 @@ namespace vcs_Draw_Example2
             }
             return new string(tmp);
         }
+
         // 組成4個元素的字節數組
         private byte[] composeByteArray(byte[] bt)
         {
@@ -1139,5 +1102,4 @@ namespace vcs_Draw_Example2
 /*  可搬出
 
 */
-
 

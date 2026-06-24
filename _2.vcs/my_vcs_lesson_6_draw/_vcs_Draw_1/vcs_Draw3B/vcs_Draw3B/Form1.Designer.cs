@@ -94,6 +94,7 @@
             // 
             // pictureBox_ellipse
             // 
+            this.pictureBox_ellipse.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox_ellipse.Location = new System.Drawing.Point(329, 87);
             this.pictureBox_ellipse.Name = "pictureBox_ellipse";
             this.pictureBox_ellipse.Size = new System.Drawing.Size(50, 50);
@@ -109,6 +110,7 @@
             // pictureBox_star
             // 
             this.pictureBox_star.BackColor = System.Drawing.Color.White;
+            this.pictureBox_star.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox_star.Location = new System.Drawing.Point(91, 12);
             this.pictureBox_star.Name = "pictureBox_star";
             this.pictureBox_star.Size = new System.Drawing.Size(50, 50);
@@ -124,6 +126,7 @@
             // pictureBox_polygon
             // 
             this.pictureBox_polygon.BackColor = System.Drawing.Color.White;
+            this.pictureBox_polygon.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox_polygon.Location = new System.Drawing.Point(166, 12);
             this.pictureBox_polygon.Name = "pictureBox_polygon";
             this.pictureBox_polygon.Size = new System.Drawing.Size(50, 50);
@@ -138,6 +141,7 @@
             // 
             // pictureBox_rectangle
             // 
+            this.pictureBox_rectangle.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox_rectangle.Location = new System.Drawing.Point(12, 199);
             this.pictureBox_rectangle.Name = "pictureBox_rectangle";
             this.pictureBox_rectangle.Size = new System.Drawing.Size(50, 50);
@@ -152,6 +156,7 @@
             // 
             // pictureBox_progressbar
             // 
+            this.pictureBox_progressbar.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox_progressbar.Location = new System.Drawing.Point(12, 143);
             this.pictureBox_progressbar.Name = "pictureBox_progressbar";
             this.pictureBox_progressbar.Size = new System.Drawing.Size(50, 50);
@@ -226,6 +231,7 @@
             // pictureBox_round
             // 
             this.pictureBox_round.BackColor = System.Drawing.Color.LightGray;
+            this.pictureBox_round.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox_round.Location = new System.Drawing.Point(329, 12);
             this.pictureBox_round.Name = "pictureBox_round";
             this.pictureBox_round.Size = new System.Drawing.Size(50, 50);
@@ -240,6 +246,7 @@
             // 
             // pictureBox_circular
             // 
+            this.pictureBox_circular.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox_circular.Location = new System.Drawing.Point(12, 87);
             this.pictureBox_circular.Name = "pictureBox_circular";
             this.pictureBox_circular.Size = new System.Drawing.Size(50, 50);
@@ -255,6 +262,7 @@
             // pictureBox_ball
             // 
             this.pictureBox_ball.BackColor = System.Drawing.Color.White;
+            this.pictureBox_ball.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox_ball.Location = new System.Drawing.Point(91, 87);
             this.pictureBox_ball.Name = "pictureBox_ball";
             this.pictureBox_ball.Size = new System.Drawing.Size(50, 50);
@@ -271,6 +279,7 @@
             // pictureBox_ball_in_box
             // 
             this.pictureBox_ball_in_box.BackColor = System.Drawing.Color.White;
+            this.pictureBox_ball_in_box.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox_ball_in_box.Location = new System.Drawing.Point(166, 87);
             this.pictureBox_ball_in_box.Name = "pictureBox_ball_in_box";
             this.pictureBox_ball_in_box.Size = new System.Drawing.Size(50, 50);
@@ -287,6 +296,7 @@
             // pictureBox_double_circle
             // 
             this.pictureBox_double_circle.BackColor = System.Drawing.Color.White;
+            this.pictureBox_double_circle.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox_double_circle.Location = new System.Drawing.Point(244, 87);
             this.pictureBox_double_circle.Name = "pictureBox_double_circle";
             this.pictureBox_double_circle.Size = new System.Drawing.Size(50, 50);
@@ -304,7 +314,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(958, 577);
+            this.ClientSize = new System.Drawing.Size(752, 458);
             this.Controls.Add(this.pictureBox_double_circle);
             this.Controls.Add(this.pictureBox_ball_in_box);
             this.Controls.Add(this.pictureBox_ball);

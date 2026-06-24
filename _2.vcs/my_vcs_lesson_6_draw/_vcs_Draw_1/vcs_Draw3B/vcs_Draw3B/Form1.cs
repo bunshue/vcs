@@ -63,6 +63,8 @@ namespace vcs_Draw3B
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             //自製ProgressBar
             W_progressbar = pictureBox_progressbar.Width;
             H_progressbar = pictureBox_progressbar.Height;

@@ -32,6 +32,22 @@ namespace vcs_MousePaint3
         HatchBrush myBrush1 = new HatchBrush(HatchStyle.Cross, Color.Red);
         float theta = 0; // 旋轉角度
 
+        // 圓形轉盤調控器 (以顏色為例) ST
+        // 以滑鼠位置連到中心點的角度 來帶動 小圓的角度
+
+        float Cx, Cy;  // 視窗中心點
+        float D_Big, D_Small; // 大小圓的 半徑
+
+        double theta4 = 0;  // 小圓的角度
+        float Sx, Sy;  // 小圓的 圓心座標
+
+        bool drag = false;
+        double theta_Mouse = 0; // 滑鼠位置的角度
+        double theta_Delta = 0; // theta  -  theta_Mouse
+
+        int Gap = 2;
+        // 圓形轉盤調控器 (以顏色為例) SP
+
         public Form1()
         {
             InitializeComponent();
@@ -47,6 +63,16 @@ namespace vcs_MousePaint3
 
             pictureBox0.BackColor = Color.Black;
             bitmap1 = (Bitmap)Bitmap.FromFile(filename);
+
+            //------------------------------------------------------------  # 60個
+
+            // 圓形轉盤調控器 (以顏色為例) ST
+            Cx = pictureBox4.Width / 2;
+            Cy = pictureBox4.Height / 2;
+
+            D_Big = Math.Min(pictureBox4.Width, pictureBox4.Height) * 0.3f;
+            D_Small = D_Big * 0.1f; // 小圓的 半徑
+            // 圓形轉盤調控器 (以顏色為例) SP
         }
 
         void show_item_location()
@@ -257,18 +283,82 @@ namespace vcs_MousePaint3
 
         private void pictureBox4_MouseDown(object sender, MouseEventArgs e)
         {
+            Sx = (float)(Cx + D_Big * Math.Cos(theta4));
+            Sy = (float)(Cy + D_Big * Math.Sin(theta4));
+
+            double dis = Math.Sqrt((Sx - e.X) * (Sx - e.X) + (Sy - e.Y) * (Sy - e.Y));
+            if (dis <= D_Small)  //  確定有點到小圓球
+            {
+                drag = true;
+                theta_Mouse = Math.Atan2(e.Y - Cy, e.X - Cx);
+                theta_Delta = theta4 - theta_Mouse;
+            }
         }
 
         private void pictureBox4_MouseMove(object sender, MouseEventArgs e)
         {
+            //  轉動時以 滑鼠位置連到中心點的角度 來帶動 小圓的角度
+            if (drag)
+            {
+                theta_Mouse = Math.Atan2(e.Y - Cy, e.X - Cx);
+                theta4 = theta_Mouse + theta_Delta;
+                this.pictureBox4.Invalidate();
+            }
         }
 
         private void pictureBox4_MouseUp(object sender, MouseEventArgs e)
         {
+            drag = false;
         }
 
         private void pictureBox4_Paint(object sender, PaintEventArgs e)
         {
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            byte R = 0, G = 0, B = 0;
+
+            // R 在 0 度、G 在 120 度、B 在 240 度
+            R = GetColor(theta4, 0);
+            G = GetColor(theta4, Math.PI * 2 / 3);
+            B = GetColor(theta4, -Math.PI * 2 / 3);
+            label4.Text = "(" + R.ToString() + ", " + G.ToString() + ", " + B.ToString() + ")";
+
+            this.pictureBox4.BackColor = Color.FromArgb(R, G, B);
+            SolidBrush myBrush = new SolidBrush(Color.FromArgb(R, G, B));
+            e.Graphics.FillEllipse(Brushes.White, Cx - (D_Big + D_Small / 2) - Gap, Cy - (D_Big + D_Small / 2) - Gap, 2 * D_Big + D_Small + 2 * Gap, 2 * D_Big + D_Small + 2 * Gap);
+            e.Graphics.FillEllipse(myBrush, Cx - (D_Big - D_Small / 2) + Gap, Cy - (D_Big - D_Small / 2) + Gap, 2 * D_Big - D_Small - 2 * Gap, 2 * D_Big - D_Small - 2 * Gap);   // 內圓
+
+            Sx = (float)(Cx + D_Big * Math.Cos(theta4));
+            Sy = (float)(Cy + D_Big * Math.Sin(theta4));
+            e.Graphics.FillEllipse(Brushes.Tomato, Sx - D_Small / 2, Sy - D_Small / 2, D_Small, D_Small);
+        }
+
+        // 以 小圓的角度  得到 單一個 顏色元素的 值
+        byte GetColor(double t, double offset)
+        {
+            t = t - offset;
+            if (t < 0)
+            {
+                t = Math.PI * 2 + t;
+            }
+
+            if (t >= 2 * Math.PI / 3 && t <= 4 * Math.PI / 3)
+            {
+                return 0;
+            }
+            else if (t < 2 * Math.PI / 3)
+            {
+                return (byte)(255 - 255 * t / (2 * Math.PI / 3));
+            }
+            else if (t > 4 * Math.PI / 3)
+            {
+                t = Math.PI * 2 - t;
+                return (byte)(255 - 255 * t / (2 * Math.PI / 3));
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         //------------------------------------------------------------  # 60個

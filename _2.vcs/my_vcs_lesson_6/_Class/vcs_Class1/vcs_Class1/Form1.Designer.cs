@@ -456,6 +456,7 @@
             this.bt_class12.Name = "bt_class12";
             this.bt_class12.Size = new System.Drawing.Size(190, 60);
             this.bt_class12.TabIndex = 14;
+            this.bt_class12.Text = "使用Circle2類別畫圖";
             this.bt_class12.UseVisualStyleBackColor = true;
             this.bt_class12.Click += new System.EventHandler(this.bt_class12_Click);
             // 
