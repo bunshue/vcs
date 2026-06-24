@@ -147,18 +147,37 @@ namespace vcs_Cryptography2_SHA1
 
             str_encrypted_text = SHA512Encrypt(str_clear_text);
             richTextBox1.Text += "明碼 : " + str_clear_text + "\t密碼 : " + str_encrypted_text + "\tSHA512\t長度 : " + str_encrypted_text.Length + " 拜\n";
-        }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
             //SHA1
-            str_encrypted_text = str_clear_text.Sha1();
+            str_encrypted_text = SHA1_Ecnrypt05(str_clear_text);
             richTextBox1.Text += "明碼 : " + str_clear_text + "\t密碼 : " + str_encrypted_text + "\tSHA1\t長度 : " + str_encrypted_text.Length + " 拜\n";
 
             //作為密碼方式加密
             //需要改用.NetFramework4.0 且 參考/加入參考 .NET /System.Web
             str_encrypted_text = System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(str_clear_text, "SHA1");
             richTextBox1.Text += "明碼 : " + str_clear_text + "\t密碼 : " + str_encrypted_text + "\tSHA1\tSHA1加密長度是 : " + str_encrypted_text.Length + "\n";
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+        }
+
+        /// <summary>
+        /// 基于Sha1的自定义加密字符串方法 : 输入一个字符串，返回一个由40个字符组成的十六进制的哈希散列（字符串）。
+        /// </summary>
+        /// <param name="str">要加密的字符串</param>
+        /// <returns>加密后的十六进制的哈希散列（字符串）</returns>
+        public static string SHA1_Ecnrypt05(string str)
+        {
+            var buffer = Encoding.UTF8.GetBytes(str);
+            var data = SHA1.Create().ComputeHash(buffer);  // 創建SHA1對象
+
+            var sb = new StringBuilder();
+            foreach (var t in data)
+            {
+                sb.Append(t.ToString("X2"));
+            }
+            return sb.ToString();
         }
 
         /// <summary>
@@ -390,19 +409,7 @@ namespace vcs_Cryptography2_SHA1
 
         private void button10_Click(object sender, EventArgs e)
         {
-
-
-        }
-
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-            //算一個檔案的SHA1, SHA256值
-
-
             //算一個檔案的 SHA1, SHA256值
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-
 
             //SHA1
             var tragetFile = new FileStream(filename, FileMode.Open);
@@ -420,6 +427,7 @@ namespace vcs_Cryptography2_SHA1
             richTextBox1.Text += "SHA1\n";
             richTextBox1.Text += sb.ToString() + "\n";
 
+            //6060
 
             //SHA256
             tragetFile = new FileStream(filename, FileMode.Open);
@@ -436,6 +444,10 @@ namespace vcs_Cryptography2_SHA1
             }
             richTextBox1.Text += "SHA256\n";
             richTextBox1.Text += sb.ToString() + "\n";
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -559,29 +571,6 @@ namespace vcs_Cryptography2_SHA1
         private void button19_Click(object sender, EventArgs e)
         {
 
-        }
-    }
-
-    //------------------------------------------------------------  # 60個
-
-    public static class EncryptHelper
-    {
-        /// <summary>
-        /// 基于Sha1的自定义加密字符串方法 : 输入一个字符串，返回一个由40个字符组成的十六进制的哈希散列（字符串）。
-        /// </summary>
-        /// <param name="str">要加密的字符串</param>
-        /// <returns>加密后的十六进制的哈希散列（字符串）</returns>
-        public static string Sha1(this string str)
-        {
-            var buffer = Encoding.UTF8.GetBytes(str);
-            var data = SHA1.Create().ComputeHash(buffer);  // 創建SHA1對象
-
-            var sb = new StringBuilder();
-            foreach (var t in data)
-            {
-                sb.Append(t.ToString("X2"));
-            }
-            return sb.ToString();
         }
     }
 }

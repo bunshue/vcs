@@ -70,15 +70,11 @@ namespace vcs_Draw_Example1
 
         void show_item_location()
         {
-            //設定執行後的表單起始位置, 指定位置
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = new Point(10, 10);
-
+            //button
             int x_st = 10;
             int y_st = 10;
-            int dx = 160 + 10;
+            int dx = 180 + 10;
             int dy = 45 + 10;
-
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -89,7 +85,6 @@ namespace vcs_Draw_Example1
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-
             button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
@@ -100,7 +95,6 @@ namespace vcs_Draw_Example1
             button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-
             button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
@@ -111,7 +105,6 @@ namespace vcs_Draw_Example1
             button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
-
             button30.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             button31.Location = new Point(x_st + dx * 3, y_st + dy * 1);
             button32.Location = new Point(x_st + dx * 3, y_st + dy * 2);
@@ -122,9 +115,19 @@ namespace vcs_Draw_Example1
             button37.Location = new Point(x_st + dx * 3, y_st + dy * 7);
             button38.Location = new Point(x_st + dx * 3, y_st + dy * 8);
             button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
+            button40.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            button41.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            button42.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+            button43.Location = new Point(x_st + dx * 4, y_st + dy * 3);
+            button44.Location = new Point(x_st + dx * 4, y_st + dy * 4);
+            button45.Location = new Point(x_st + dx * 4, y_st + dy * 5);
+            button46.Location = new Point(x_st + dx * 4, y_st + dy * 6);
+            button47.Location = new Point(x_st + dx * 4, y_st + dy * 7);
+            button48.Location = new Point(x_st + dx * 4, y_st + dy * 8);
+            button49.Location = new Point(x_st + dx * 4, y_st + dy * 9);
 
-            groupBox3.Size = new Size(670, 80);
-            groupBox1.Size = new Size(670, 130);
+            groupBox3.Size = new Size(670 + 100, 80);
+            groupBox1.Size = new Size(670 + 100, 130);
 
             groupBox3.Location = new Point(x_st + dx * 0, y_st + dy * 10 + 10);
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 12);
@@ -134,8 +137,8 @@ namespace vcs_Draw_Example1
             cb_snake.Location = new Point(x_st + dx * 2, y_st + dy * 14 + 30);
             cb_magnifying.Location = new Point(x_st + dx * 2, y_st + dy * 14 + dy / 2 + 30);
 
-            pictureBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            pictureBox1.Size = new Size(1060, 640);
+            pictureBox1.Size = new Size(800, 640);
+            pictureBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
             pictureBox1.BackColor = Color.White;
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
             bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y);
@@ -144,12 +147,12 @@ namespace vcs_Draw_Example1
 
             pictureBox2.Size = new Size(360, 250);
             pictureBox2.BackColor = Color.Pink;
-            pictureBox2.Location = new Point(x_st + dx * 4, y_st + dy * 11 + 40);
+            pictureBox2.Location = new Point(x_st + dx * 4 + 50, y_st + dy * 11 + 40);
             pictureBox2.SizeMode = PictureBoxSizeMode.Normal;
             //pictureBox2.Visible = false;
 
             richTextBox1.Size = new Size(480, 250);
-            richTextBox1.Location = new Point(x_st + dx * 7, y_st + dy * 11 + 40);
+            richTextBox1.Location = new Point(x_st + dx * 7 - 100, y_st + dy * 11 + 40);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             y_st += 10;
@@ -185,10 +188,10 @@ namespace vcs_Draw_Example1
         {
             int x_st = 10;
             int y_st = 10;
-            int dx = 140;
-            int dy = 50;
+            int dx = 180 + 10;
+            int dy = 45 + 10;
             pictureBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
-            pictureBox1.Size = new Size(1060, 600);
+            pictureBox1.Size = new Size(800, 640);
             pictureBox1.BackColor = Color.White;
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
 
@@ -1416,9 +1419,185 @@ namespace vcs_Draw_Example1
             //#endregion
         }
 
+        //------------------------------------------------------------  # 60個
+
+        //畫 sin ST
+
+        bool flag_grid_on = true;
+
+        private float function(float x)
+        {
+            //return (float)(x * x + 2 * x + 1);
+            return (float)(sind(3 * x) * 100);
+        }
+
+        void plot_figure(List<PointF> points)
+        {
+            int i;
+            int j;
+            int W = pictureBox1.ClientSize.Width;
+            int H = pictureBox1.ClientSize.Height;
+            int border_w = 50;
+            int border_h = 50;
+            int offset_x = 0;
+            int offset_y = 0;
+            int w = W - border_w * 2;
+            int h = H - border_h * 2;
+
+            offset_x = border_w;
+            offset_y = border_h;
+
+            Bitmap bitmap1 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap1);
+
+            richTextBox1.Text += "W = " + W.ToString() + "\n";
+            richTextBox1.Text += "H = " + H.ToString() + "\n";
+            richTextBox1.Text += "w = " + w.ToString() + "\n";
+            richTextBox1.Text += "h = " + h.ToString() + "\n";
+
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
+            if (flag_grid_on == true)
+            {
+                for (i = 0; i <= W; i += 50)
+                {
+                    //直線
+                    g.DrawLine(Pens.LightGray, i, 0, i, H);
+
+                }
+                for (j = 0; j <= H; j += 50)
+                {
+                    //橫線
+                    g.DrawLine(Pens.LightGray, 0, j, W, j);
+                }
+            }
+
+            //處理數據
+            int len = points.Count();
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += points[i].ToString() + " ";
+
+            }
+            richTextBox1.Text += "\n\n";
+
+            float x_max = -10000;
+            float x_min = 10000;
+            float y_max = -10000;
+            float y_min = 10000;
+
+            for (i = 0; i < len; i++)
+            {
+                if (x_max < points[i].X)
+                    x_max = points[i].X;
+                if (x_min > points[i].X)
+                    x_min = points[i].X;
+
+                if (y_max < points[i].Y)
+                    y_max = points[i].Y;
+                if (y_min > points[i].Y)
+                    y_min = points[i].Y;
+
+            }
+            richTextBox1.Text += "x_max = " + x_max.ToString() + "\n";
+            richTextBox1.Text += "x_min = " + x_min.ToString() + "\n";
+            richTextBox1.Text += "y_max = " + y_max.ToString() + "\n";
+            richTextBox1.Text += "y_min = " + y_min.ToString() + "\n";
+
+            //if (x_min < 0)
+            {
+                offset_x = -(int)x_min;
+            }
+            //if (y_min <= 0)
+            {
+                offset_y = -(int)y_min;
+            }
+
+            float ratio_x = 0;
+            float ratio_y = 0;
+
+            ratio_x = w / (x_max - x_min);
+            ratio_y = h / (y_max - y_min);
+
+            richTextBox1.Text += "ratio_x = " + ratio_x.ToString() + "\n";
+            richTextBox1.Text += "ratio_y = " + ratio_y.ToString() + "\n";
+
+            richTextBox1.Text += "offset_x = " + offset_x.ToString() + "\n";
+            richTextBox1.Text += "offset_y = " + offset_y.ToString() + "\n";
+
+            List<PointF> points_new = new List<PointF>();
+
+            for (i = 0; i < len; i++)
+            {
+                //ratio_y = 1;
+                //points_new.Add(new PointF(offset_x + points[i].X * ratio_x, h - (offset_y + points[i].Y * ratio_y)));
+                points_new.Add(new PointF(border_w + (offset_x + points[i].X) * ratio_x, h + border_h - (offset_y + points[i].Y) * ratio_y));
+            }
+
+            Pen p = new Pen(Color.Red, 0);
+            g.DrawLines(p, points_new.ToArray());
+
+            Point p1;
+            Point p2;
+
+            if ((y_max > 0) && (y_min < 0))
+            {
+                p1 = new Point(border_w + 0, h + border_h - (int)((offset_y + 0) * ratio_y));
+                p2 = new Point(border_w + w, h + border_h - (int)((offset_y + 0) * ratio_y));
+                g.DrawLine(Pens.Black, p1, p2);  //X軸
+                richTextBox1.Text += "可以畫X軸\n";
+                richTextBox1.Text += "p1 : " + p1.ToString() + "\n";
+                richTextBox1.Text += "p2 : " + p2.ToString() + "\n";
+
+                g.DrawString(x_min.ToString(), new Font("標楷體", 10), new SolidBrush(Color.Black), p1.X - 15, p1.Y + 5);
+                g.DrawString(x_max.ToString(), new Font("標楷體", 10), new SolidBrush(Color.Black), p2.X - 15, p2.Y + 5);
+
+                //要畫 0
+
+            }
+
+            if ((x_max > 0) && (x_min < 0))
+            {
+                p1 = new Point(border_w + (int)((0 - x_min) * ratio_x), border_h + 0);
+                p2 = new Point(border_w + (int)((0 - x_min) * ratio_x), border_h + h);
+                g.DrawLine(Pens.Black, p1, p2);    //Y軸
+                richTextBox1.Text += "可以畫Y軸\n";
+                richTextBox1.Text += "p1 : " + p1.ToString() + "\n";
+                richTextBox1.Text += "p2 : " + p2.ToString() + "\n";
+
+                g.DrawString(y_max.ToString(), new Font("標楷體", 10), new SolidBrush(Color.Black), p1.X - 15, p1.Y + 5);
+                g.DrawString(y_min.ToString(), new Font("標楷體", 10), new SolidBrush(Color.Black), p2.X - 15, p2.Y + 5);
+            }
+
+            g.DrawRectangle(Pens.Red, border_w, border_h, w, h);
+            richTextBox1.Text += "w = " + w.ToString() + "\n";
+            richTextBox1.Text += "h = " + h.ToString() + "\n";
+            pictureBox1.Image = bitmap1;
+        }
+
         private void button6_Click(object sender, EventArgs e)
         {
+            //畫 sin
+
+            float dx = 10.0f;
+            List<PointF> points = new List<PointF>();
+            //for (float x = -5; x <= 5; x += dx)
+            for (float x = -200; x <= 200; x += dx)
+            {
+                float y = function(x);
+                points.Add(new PointF(x, y));
+            }
+
+            richTextBox1.Text += "len = " + points.Count.ToString() + "\n";
+
+            plot_figure(points);
         }
+
+        //畫 sin SP
+
+        //------------------------------------------------------------  # 60個
 
         private void button7_Click(object sender, EventArgs e)
         {
@@ -2403,10 +2582,85 @@ namespace vcs_Draw_Example1
             pictureBox1.Image = bitmap1;
         }
 
+        //------------------------------------------------------------  # 60個
+
+        //畫愛心 ST
         private void button12_Click(object sender, EventArgs e)
         {
+            //畫愛心
+            g.SmoothingMode = SmoothingMode.AntiAlias;
 
+            // Generate the points.
+            const int num_points = 100;
+            List<PointF> points = new List<PointF>();
+            float dt = (float)(2 * Math.PI / num_points);
+            for (float t = 0; t <= 2 * Math.PI; t += dt)
+            {
+                points.Add(new PointF(X(t) * 5 + 200, Y(t) * 5 + 200));
+            }
+
+            // Get the coordinate bounds.
+            float wxmin = points[0].X;
+            float wxmax = wxmin;
+            float wymin = points[0].Y;
+            float wymax = wymin;
+            foreach (PointF point in points)
+            {
+                if (wxmin > point.X) wxmin = point.X;
+                if (wxmax < point.X) wxmax = point.X;
+                if (wymin > point.Y) wymin = point.Y;
+                if (wymax < point.Y) wymax = point.Y;
+            }
+
+            // Make the world coordinate rectangle.
+            RectangleF world_rect = new RectangleF(wxmin, wymin, wxmax - wxmin, wymax - wymin);
+
+            // Make the device coordinate rectangle with a margin.
+            const int margin = 5;
+            Rectangle device_rect = new Rectangle(margin, margin, pictureBox1.ClientSize.Width - 2 * margin, pictureBox1.ClientSize.Height - 2 * margin);
+
+            // Map world to device coordinates without distortion.
+            // Flip vertically so Y increases downward.
+            //SetTransformationWithoutDisortion(gr, world_rect, device_rect, false, true);
+
+            // Draw the curve.
+            g.FillPolygon(Brushes.Pink, points.ToArray());
+            Pen pen = new Pen(Color.Red, 0);
+
+            g.DrawPolygon(pen, points.ToArray());
+
+            // Draw a rectangle around the coordinate bounds.
+            pen.Color = Color.Red;
+            g.DrawRectangle(pen, Rectangle.Round(world_rect));
+
+            int ratio = 20;
+            // Draw the X and Y axes.
+            pen.Color = Color.Green;
+            g.DrawLine(pen, -20 * ratio, 0, 20 * ratio, 0);
+            g.DrawLine(pen, 0, -20 * ratio, 0, 20 * ratio);
+            for (int x = -20; x <= 20; x++)
+            {
+                g.DrawLine(pen, x * ratio, -0.3f * ratio, x * ratio, 0.3f * ratio);
+            }
+            for (int y = -20; y <= 20; y++)
+            {
+                g.DrawLine(pen, -0.3f * ratio, y * ratio, 0.3f * ratio, y * ratio);
+            }
+            pictureBox1.Image = bitmap1;
         }
+
+        // The curve's parametric equations.
+        private float X(float t)
+        {
+            double sin_t = Math.Sin(t);
+            return (float)(16 * sin_t * sin_t * sin_t);
+        }
+
+        private float Y(float t)
+        {
+            return (float)(13 * Math.Cos(t) - 5 * Math.Cos(2 * t) - 2 * Math.Cos(3 * t) - Math.Cos(4 * t));
+        }
+        //畫愛心 SP
 
         //------------------------------------------------------------  # 60個
 
@@ -3014,8 +3268,37 @@ namespace vcs_Draw_Example1
             pictureBox1.Image = bitmap1;
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button19_Click(object sender, EventArgs e)
         {
+            //sinc
+            g.DrawRectangle(Pens.Red, 0, 0, 600, 600);
+            g.DrawLine(Pens.Red, 300, 0, 300, 600);
+            g.DrawLine(Pens.Red, 0, 300, 600, 300);
+
+            Pen pen = new Pen(Color.Blue, 2);
+
+            int centerX = 600 / 2;
+            int centerY = 600 / 2;
+            double scaleX = 20; // 每單位 x 對應像素
+            double scaleY = 200; // 每單位 y 對應像素
+
+            PointF? prevPoint = null;
+            for (double x = -10; x <= 10; x += 0.01)
+            {
+                double y = (x == 0) ? 1.0 : Math.Sin(x) / x;
+                float px = (float)(centerX + x * scaleX);
+                float py = (float)(centerY - y * scaleY);
+
+                PointF point = new PointF(px, py);
+                if (prevPoint != null)
+                    g.DrawLine(pen, prevPoint.Value, point);
+
+                prevPoint = point;
+            }
+
+            pictureBox1.Image = bitmap1;
         }
 
         //------------------------------------------------------------  # 60個
@@ -3060,7 +3343,7 @@ namespace vcs_Draw_Example1
             int x_st = 10;
             int y_st = 10;
             int W = 400;
-            int H = 400;
+            //int H = 400;
             Rectangle rect = new Rectangle(x_st, y_st, W - 20, W - 20);
 
             DrawLabeledPieChart(g, rect, -90, SliceBrushes, SlicePens, Values, "0.0", Font, Brushes.Black);
@@ -3308,9 +3591,8 @@ namespace vcs_Draw_Example1
         private void button22_Click(object sender, EventArgs e)
         {
             //Pie Chart 3
-            int W = 230;
-            int H = 230;
-
+            //int W = 230;
+            //int H = 230;
             //pictureBox1.Size = new Size(W * 2, H * 2);
 
             // Brushes used to fill pie slices.
@@ -3746,6 +4028,84 @@ namespace vcs_Draw_Example1
 
         private void button28_Click(object sender, EventArgs e)
         {
+            //交集聯集互斥
+            //交集聯集互斥
+
+            Graphics g = pictureBox1.CreateGraphics();
+
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
+            int Cx = 200;
+            int Cy = 70;
+            int R = 60;
+            int dd = 30;
+
+            g.DrawString("聯集", new Font("標楷體", 24), new SolidBrush(Color.Blue), new PointF(5, Cy));
+
+            GraphicsPath gp1 = new GraphicsPath(); // 圖形軌跡
+            gp1.AddEllipse(Cx - dd - R, Cy - R, R * 2, R * 2);
+
+            GraphicsPath gp2 = new GraphicsPath(); // 圖形軌跡
+            gp2.AddEllipse(Cx + dd - R, Cy - R, R * 2, R * 2);
+
+            Region r1 = new Region(gp1); // Region 區域表面 物件
+            Region r2 = new Region(gp2); // Region 區域表面 物件
+
+            r1.Union(r2);  // r1 = r1 + r2  聯集
+
+            g.FillRegion(Brushes.Silver, r1); // r1 區域表面 繪出
+            g.DrawPath(Pens.Black, gp1); // 圖形軌跡 繪出
+            g.DrawPath(Pens.Black, gp2); // 圖形軌跡 繪出
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            Cx = 200;
+            Cy = 200;
+
+            g.DrawString("交集\n排除", new Font("標楷體", 24), new SolidBrush(Color.Blue), new PointF(5, Cy));
+
+            gp1 = new GraphicsPath(); // 圖形軌跡
+            gp1.AddEllipse(Cx - dd - R, Cy - R, R * 2, R * 2);
+
+            gp2 = new GraphicsPath(); // 圖形軌跡
+            gp2.AddEllipse(Cx + dd - R, Cy - R, R * 2, R * 2);
+
+            r1 = new Region(gp1); // Region 區域表面 物件
+            r2 = new Region(gp2); // Region 區域表面 物件
+            Region r3 = new Region(gp1); // Region 區域表面 物件
+
+            r3.Intersect(r2);  // r3 = r1 - r2   交集
+            r1.Exclude(r3);    // r1 = r1 - r3   排除
+            r2.Exclude(r3);    // r2 = r2 - r3   排除
+
+            g.FillRegion(Brushes.Red, r1);  // r1 區域表面  繪出
+            g.FillRegion(Brushes.Blue, r2); // r2 區域表面 繪出
+            g.FillRegion(Brushes.Yellow, r3); // r3 區域表面 繪出
+
+            g.DrawPath(Pens.Black, gp1); // 圖形軌跡 繪出
+            g.DrawPath(Pens.Black, gp2); // 圖形軌跡 繪出
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            Cx = 200;
+            Cy = 330;
+
+            g.DrawString("互斥或", new Font("標楷體", 24), new SolidBrush(Color.Blue), new PointF(5, Cy));
+
+            gp1 = new GraphicsPath(); // 圖形軌跡
+            gp1.AddEllipse(Cx - dd - R, Cy - R, R * 2, R * 2);
+
+            gp2 = new GraphicsPath(); // 圖形軌跡
+            gp2.AddEllipse(Cx + dd - R, Cy - R, R * 2, R * 2);
+
+            r1 = new Region(gp1); // Region 區域表面 物件
+            r2 = new Region(gp2); // Region 區域表面 物件
+
+            r1.Xor(r2);  // r1 = r1 + r2 - (r1 Intersect r2)  互斥
+
+            g.FillRegion(Brushes.Silver, r1); // r1 區域表面  繪出
+            g.DrawPath(Pens.Black, gp1); // 圖形軌跡 繪出
+            g.DrawPath(Pens.Black, gp2); // 圖形軌跡 繪出
         }
 
         //------------------------------------------------------------  # 60個
@@ -4222,6 +4582,58 @@ namespace vcs_Draw_Example1
         private void button39_Click(object sender, EventArgs e)
         {
         }
+
+        private void button40_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button41_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button42_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button43_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button44_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button45_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button46_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button47_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button48_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button49_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
 
         //delay 10000 約 10秒
         //C# 不lag的延遲時間

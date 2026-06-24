@@ -116,29 +116,9 @@ namespace vcs_Mix03_draw_image
         {
             show_button_text(sender);
 
-            //字體做陰影效果
-
-            //字體做陰影效果 同樣字往右下寫一遍 顏色不同
-
-            string test_string = "金陵圖";
-            Bitmap bmp = new Bitmap(500, 500);     //initial W, H
-            g = Graphics.FromImage(bmp);
-
-            string font_type = "標楷體";
-
-            int font_size_default = 200;
-            Font f = new Font(font_type, font_size_default);
-            g.DrawString(test_string, f, new SolidBrush(Color.Pink), new PointF(0, 0));
-
-            font_size_default = 200;
-            f = new Font(font_type, font_size_default);
-            g.DrawString(test_string, f, new SolidBrush(Color.Red), new PointF(5, 5));
-
-
-            pictureBox1.Image = bmp;
-
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         List<String> filenames = new List<String>();
         //多層 且指明副檔名
@@ -307,35 +287,6 @@ namespace vcs_Mix03_draw_image
         {
             show_button_text(sender);
 
-            //sinc
-            g.DrawRectangle(Pens.Red, 0, 0, 600, 600);
-            g.DrawLine(Pens.Red, 300, 0, 300, 600);
-            g.DrawLine(Pens.Red, 0, 300, 600, 300);
-
-            Pen pen = new Pen(Color.Blue, 2);
-
-            int centerX = 600 / 2;
-            int centerY = 600 / 2;
-            double scaleX = 20; // 每單位 x 對應像素
-            double scaleY = 200; // 每單位 y 對應像素
-
-            PointF? prevPoint = null;
-            for (double x = -10; x <= 10; x += 0.01)
-            {
-                double y = (x == 0) ? 1.0 : Math.Sin(x) / x;
-                float px = (float)(centerX + x * scaleX);
-                float py = (float)(centerY - y * scaleY);
-
-                PointF point = new PointF(px, py);
-                if (prevPoint != null)
-                    g.DrawLine(pen, prevPoint.Value, point);
-
-                prevPoint = point;
-            }
-
-
-
-            pictureBox1.Image = bitmap1;
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -550,83 +501,6 @@ namespace vcs_Mix03_draw_image
 
         private void button12_Click(object sender, EventArgs e)
         {
-            //交集聯集互斥
-
-            Graphics g = pictureBox1.CreateGraphics();
-
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-
-            int Cx = 200;
-            int Cy = 70;
-            int R = 60;
-            int dd = 30;
-
-            g.DrawString("聯集", new Font("標楷體", 24), new SolidBrush(Color.Blue), new PointF(5, Cy));
-
-            GraphicsPath gp1 = new GraphicsPath(); // 圖形軌跡
-            gp1.AddEllipse(Cx - dd - R, Cy - R, R * 2, R * 2);
-
-            GraphicsPath gp2 = new GraphicsPath(); // 圖形軌跡
-            gp2.AddEllipse(Cx + dd - R, Cy - R, R * 2, R * 2);
-
-            Region r1 = new Region(gp1); // Region 區域表面 物件
-            Region r2 = new Region(gp2); // Region 區域表面 物件
-
-            r1.Union(r2);  // r1 = r1 + r2  聯集
-
-            g.FillRegion(Brushes.Silver, r1); // r1 區域表面 繪出
-            g.DrawPath(Pens.Black, gp1); // 圖形軌跡 繪出
-            g.DrawPath(Pens.Black, gp2); // 圖形軌跡 繪出
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            Cx = 200;
-            Cy = 200;
-
-            g.DrawString("交集\n排除", new Font("標楷體", 24), new SolidBrush(Color.Blue), new PointF(5, Cy));
-
-            gp1 = new GraphicsPath(); // 圖形軌跡
-            gp1.AddEllipse(Cx - dd - R, Cy - R, R * 2, R * 2);
-
-            gp2 = new GraphicsPath(); // 圖形軌跡
-            gp2.AddEllipse(Cx + dd - R, Cy - R, R * 2, R * 2);
-
-            r1 = new Region(gp1); // Region 區域表面 物件
-            r2 = new Region(gp2); // Region 區域表面 物件
-            Region r3 = new Region(gp1); // Region 區域表面 物件
-
-            r3.Intersect(r2);  // r3 = r1 - r2   交集
-            r1.Exclude(r3);    // r1 = r1 - r3   排除
-            r2.Exclude(r3);    // r2 = r2 - r3   排除
-
-            g.FillRegion(Brushes.Red, r1);  // r1 區域表面  繪出
-            g.FillRegion(Brushes.Blue, r2); // r2 區域表面 繪出
-            g.FillRegion(Brushes.Yellow, r3); // r3 區域表面 繪出
-
-            g.DrawPath(Pens.Black, gp1); // 圖形軌跡 繪出
-            g.DrawPath(Pens.Black, gp2); // 圖形軌跡 繪出
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            Cx = 200;
-            Cy = 330;
-
-            g.DrawString("互斥或", new Font("標楷體", 24), new SolidBrush(Color.Blue), new PointF(5, Cy));
-
-            gp1 = new GraphicsPath(); // 圖形軌跡
-            gp1.AddEllipse(Cx - dd - R, Cy - R, R * 2, R * 2);
-
-            gp2 = new GraphicsPath(); // 圖形軌跡
-            gp2.AddEllipse(Cx + dd - R, Cy - R, R * 2, R * 2);
-
-            r1 = new Region(gp1); // Region 區域表面 物件
-            r2 = new Region(gp2); // Region 區域表面 物件
-
-            r1.Xor(r2);  // r1 = r1 + r2 - (r1 Intersect r2)  互斥
-
-            g.FillRegion(Brushes.Silver, r1); // r1 區域表面  繪出
-            g.DrawPath(Pens.Black, gp1); // 圖形軌跡 繪出
-            g.DrawPath(Pens.Black, gp2); // 圖形軌跡 繪出
         }
 
         //------------------------------------------------------------  # 60個

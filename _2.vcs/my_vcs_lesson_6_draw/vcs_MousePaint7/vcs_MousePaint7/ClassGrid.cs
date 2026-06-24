@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 
-namespace WindowsFormsApplication1
+namespace vcs_MousePaint7
 {
     class ClassGrid
     {

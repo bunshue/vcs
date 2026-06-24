@@ -453,6 +453,35 @@ namespace vcs_Class1
 
             //呼叫Circle類別的GetTotalObject靜態方法取得目前有多少個物件
             richTextBox1.Text += Circle.GetTotalObject() + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            //使用Circle2類別畫圖
+
+            Bitmap bitmap1 = new Bitmap(pictureBox2.Width, pictureBox2.Height);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+
+            float x = 100;
+            float y = 100;
+            float r = 50;
+
+            Circle2 circle1 = new Circle2(x, y, r);
+            Brush the_brush = new SolidBrush(Color.Blue);
+            circle1.Draw(g, the_brush);  // 畫實心
+            richTextBox1.Text += "circle info : " + circle1.ToString() + "\n";
+
+            Circle2 circle2 = new Circle2(x, y, r + 10);
+            Pen p = new Pen(Color.Red, 5);
+            //circle2.Draw(g, Pens.Red);  // 畫空心, 未設定筆寬, 即筆寬為1
+            circle2.Draw(g, p);  // 畫空心
+            richTextBox1.Text += "circle info : " + circle2.ToString() + "\n";
+
+            pictureBox2.Image = bitmap1;
+
+
+
+
         }
 
         //------------------------------------------------------------  # 60個
@@ -947,72 +976,10 @@ namespace vcs_Class1
 
         //------------------------------------------------------------  # 60個
 
-        // Return a random color.
-        private Random rand = new Random();
-        private Color[] color =
-        {
-            Color.Red,
-            Color.Green,
-            Color.Blue,
-            Color.Lime,
-            Color.Orange,
-            Color.Fuchsia,
-            Color.Yellow,
-            Color.LightGreen,
-            Color.LightBlue,
-            Color.Cyan,
-        };
-
-        private Color RandomColor()
-        {
-            return color[rand.Next(0, color.Length)];
-        }
-
         private void bt_class12_Click(object sender, EventArgs e)
         {
             //Class 新進2
-            //使用Circle2類別畫圖
 
-            Graphics g;
-            Bitmap bitmap1;
-
-            int W = pictureBox1.ClientSize.Width;
-            int H = pictureBox1.ClientSize.Height;
-
-            //----開新的Bitmap----
-            bitmap1 = new Bitmap(W, H);
-            //----使用上面的Bitmap畫圖----
-            g = Graphics.FromImage(bitmap1);
-
-            g.Clear(Color.White);
-            pictureBox1.Image = bitmap1;
-
-            float x = 100;
-            float y = 100;
-            float r = 50;
-            Circle2 circle0 = new Circle2(x, y, r);
-
-            for (int i = 50; i < 300; i += 50)
-            {
-                x = i;
-                y = i;
-                r = i / 2;
-
-                using (Brush the_brush = new SolidBrush(RandomColor()))
-                {
-                    circle0 = new Circle2(x, y, r);
-                    circle0.Draw(g, the_brush);    //畫實心
-                    richTextBox1.Text += "circle info : " + circle0.ToString() + "\n";
-                }
-
-                circle0 = new Circle2(x, y, r + 10);
-                Pen p = new Pen(Color.Red, 5);
-
-                //circle0.Draw(g, Pens.Red); //畫空心, 未設定筆寬, 即筆寬為1
-                circle0.Draw(g, p); //畫空心
-                richTextBox1.Text += "circle info : " + circle0.ToString() + "\n";
-            }
-            pictureBox1.Image = bitmap1;
         }
 
         //------------------------------------------------------------  # 60個

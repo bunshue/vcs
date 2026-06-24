@@ -36,8 +36,6 @@ namespace vcs_Draw1
 
             this.ResizeRedraw = true;
 
-            comboBox1.SelectedIndex = 1;
-            pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
             p = new Pen(Color.Red, 3);
 
             pictureBox_uac.Image = UacStuff.GetUacShieldImage();
@@ -119,7 +117,6 @@ namespace vcs_Draw1
             button38.Location = new Point(x_st + dx * 3, y_st + dy * 8);
             button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
 
-            comboBox1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
             bt_eraser.Location = new Point(x_st + dx * 2 - dd * 2, y_st + dy * 10);
             bt_reset.Location = new Point(x_st + dx * 3 - dd * 3, y_st + dy * 10);
             bt_save.Location = new Point(x_st + dx * 4 - dd * 4, y_st + dy * 10);
@@ -1118,35 +1115,7 @@ namespace vcs_Draw1
             pictureBox1.Image = bitmap1;
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch (comboBox1.SelectedIndex)
-            {
-                case 0:
-                    richTextBox1.Text += "Normal\n";
-                    pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
-                    break;
-                case 1:
-                    richTextBox1.Text += "AutoSize\n";
-                    pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
-                    break;
-                case 2:
-                    richTextBox1.Text += "CenterImage\n";
-                    pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
-                    break;
-                case 3:
-                    richTextBox1.Text += "StretchImage\n";
-                    pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                    break;
-                case 4:
-                    richTextBox1.Text += "Zoom\n";
-                    pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-                    break;
-                default:
-                    richTextBox1.Text += "xxxxxxxxxx\n";
-                    break;
-            }
-        }
+        //------------------------------------------------------------  # 60個
 
         private void button5_Click(object sender, EventArgs e)
         {
@@ -1474,186 +1443,13 @@ namespace vcs_Draw1
                 g.DrawEllipse(Pens.Blue, rect);
                 g.DrawRectangle(Pens.Red, rect);
             }
-
         }
 
-        //畫 sin ST
-
-        bool flag_grid_on = true;
-
-        private double sind(double d)
-        {
-            return Math.Sin(d * Math.PI / 180.0);
-        }
-
-        private float function(float x)
-        {
-            //return (float)(x * x + 2 * x + 1);
-            return (float)(sind(3 * x) * 100);
-        }
-
-        void plot_figure(List<PointF> points)
-        {
-            int i;
-            int j;
-            int W = pictureBox1.ClientSize.Width;
-            int H = pictureBox1.ClientSize.Height;
-            int border_w = 50;
-            int border_h = 50;
-            int offset_x = 0;
-            int offset_y = 0;
-            int w = W - border_w * 2;
-            int h = H - border_h * 2;
-
-            offset_x = border_w;
-            offset_y = border_h;
-
-            Bitmap bitmap1 = new Bitmap(W, H);
-            Graphics g = Graphics.FromImage(bitmap1);
-
-            richTextBox1.Text += "W = " + W.ToString() + "\n";
-            richTextBox1.Text += "H = " + H.ToString() + "\n";
-            richTextBox1.Text += "w = " + w.ToString() + "\n";
-            richTextBox1.Text += "h = " + h.ToString() + "\n";
-
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-
-            if (flag_grid_on == true)
-            {
-                for (i = 0; i <= W; i += 50)
-                {
-                    //直線
-                    g.DrawLine(Pens.LightGray, i, 0, i, H);
-
-                }
-                for (j = 0; j <= H; j += 50)
-                {
-                    //橫線
-                    g.DrawLine(Pens.LightGray, 0, j, W, j);
-                }
-            }
-
-            //處理數據
-            int len = points.Count();
-            richTextBox1.Text += "len = " + len.ToString() + "\n";
-
-            for (i = 0; i < len; i++)
-            {
-                richTextBox1.Text += points[i].ToString() + " ";
-
-            }
-            richTextBox1.Text += "\n\n";
-
-            float x_max = -10000;
-            float x_min = 10000;
-            float y_max = -10000;
-            float y_min = 10000;
-
-            for (i = 0; i < len; i++)
-            {
-                if (x_max < points[i].X)
-                    x_max = points[i].X;
-                if (x_min > points[i].X)
-                    x_min = points[i].X;
-
-                if (y_max < points[i].Y)
-                    y_max = points[i].Y;
-                if (y_min > points[i].Y)
-                    y_min = points[i].Y;
-
-            }
-            richTextBox1.Text += "x_max = " + x_max.ToString() + "\n";
-            richTextBox1.Text += "x_min = " + x_min.ToString() + "\n";
-            richTextBox1.Text += "y_max = " + y_max.ToString() + "\n";
-            richTextBox1.Text += "y_min = " + y_min.ToString() + "\n";
-
-            //if (x_min < 0)
-            {
-                offset_x = -(int)x_min;
-            }
-            //if (y_min <= 0)
-            {
-                offset_y = -(int)y_min;
-            }
-
-            float ratio_x = 0;
-            float ratio_y = 0;
-
-            ratio_x = w / (x_max - x_min);
-            ratio_y = h / (y_max - y_min);
-
-            richTextBox1.Text += "ratio_x = " + ratio_x.ToString() + "\n";
-            richTextBox1.Text += "ratio_y = " + ratio_y.ToString() + "\n";
-
-            richTextBox1.Text += "offset_x = " + offset_x.ToString() + "\n";
-            richTextBox1.Text += "offset_y = " + offset_y.ToString() + "\n";
-
-            List<PointF> points_new = new List<PointF>();
-
-            for (i = 0; i < len; i++)
-            {
-                //ratio_y = 1;
-                //points_new.Add(new PointF(offset_x + points[i].X * ratio_x, h - (offset_y + points[i].Y * ratio_y)));
-                points_new.Add(new PointF(border_w + (offset_x + points[i].X) * ratio_x, h + border_h - (offset_y + points[i].Y) * ratio_y));
-            }
-
-            Pen p = new Pen(Color.Red, 0);
-            g.DrawLines(p, points_new.ToArray());
-
-            Point p1;
-            Point p2;
-
-            if ((y_max > 0) && (y_min < 0))
-            {
-                p1 = new Point(border_w + 0, h + border_h - (int)((offset_y + 0) * ratio_y));
-                p2 = new Point(border_w + w, h + border_h - (int)((offset_y + 0) * ratio_y));
-                g.DrawLine(Pens.Black, p1, p2);  //X軸
-                richTextBox1.Text += "可以畫X軸\n";
-                richTextBox1.Text += "p1 : " + p1.ToString() + "\n";
-                richTextBox1.Text += "p2 : " + p2.ToString() + "\n";
-
-                g.DrawString(x_min.ToString(), new Font("標楷體", 10), new SolidBrush(Color.Black), p1.X - 15, p1.Y + 5);
-                g.DrawString(x_max.ToString(), new Font("標楷體", 10), new SolidBrush(Color.Black), p2.X - 15, p2.Y + 5);
-
-                //要畫 0
-
-            }
-
-            if ((x_max > 0) && (x_min < 0))
-            {
-                p1 = new Point(border_w + (int)((0 - x_min) * ratio_x), border_h + 0);
-                p2 = new Point(border_w + (int)((0 - x_min) * ratio_x), border_h + h);
-                g.DrawLine(Pens.Black, p1, p2);    //Y軸
-                richTextBox1.Text += "可以畫Y軸\n";
-                richTextBox1.Text += "p1 : " + p1.ToString() + "\n";
-                richTextBox1.Text += "p2 : " + p2.ToString() + "\n";
-
-                g.DrawString(y_max.ToString(), new Font("標楷體", 10), new SolidBrush(Color.Black), p1.X - 15, p1.Y + 5);
-                g.DrawString(y_min.ToString(), new Font("標楷體", 10), new SolidBrush(Color.Black), p2.X - 15, p2.Y + 5);
-            }
-
-            g.DrawRectangle(Pens.Red, border_w, border_h, w, h);
-            richTextBox1.Text += "w = " + w.ToString() + "\n";
-            richTextBox1.Text += "h = " + h.ToString() + "\n";
-            pictureBox1.Image = bitmap1;
-        }
+        //------------------------------------------------------------  # 60個
 
         private void button14_Click(object sender, EventArgs e)
         {
-            float dx = 10.0f;
-            List<PointF> points = new List<PointF>();
-            //for (float x = -5; x <= 5; x += dx)
-            for (float x = -200; x <= 200; x += dx)
-            {
-                float y = function(x);
-                points.Add(new PointF(x, y));
-            }
-
-            richTextBox1.Text += "len = " + points.Count.ToString() + "\n";
-
-            plot_figure(points);
         }
-        //畫 sin SP
 
         //------------------------------------------------------------  # 60個
 
@@ -1986,8 +1782,7 @@ namespace vcs_Draw1
                 //製作圖面的標記文字
                 bitmap1 = new Bitmap(filename);
                 g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
-                pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
-                pictureBox1.Image = bitmap1; //顯示在 pictureBox1 圖片控制項中
+                pictureBox1.Image = bitmap1;
             }
 
             Font f = new Font("標楷體", 24, FontStyle.Bold);

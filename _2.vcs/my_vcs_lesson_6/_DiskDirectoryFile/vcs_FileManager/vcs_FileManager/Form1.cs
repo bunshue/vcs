@@ -377,8 +377,6 @@ namespace vcs_FileManager
 
         //------------------------------------------------------------  # 60個
 
-        // Process all files in the directory passed in, recurse on any directories 
-        // that are found, and process the files they contain.
         public void ProcessDirectory(string targetDirectory)
         {
             //richTextBox1.Text += "處理Directory " + targetDirectory + "\n";
@@ -413,8 +411,7 @@ namespace vcs_FileManager
                     foreach (string subdirectory in subdirectoryEntries)
                     {
                         DirectoryInfo di = new DirectoryInfo(subdirectory);
-                        //richTextBox1.Text += "\n";
-                        //richTextBox1.Text += di.Name + "\n";
+                        //richTextBox1.Text += "搜尋子目錄\t" + di.Name + "\n";
                         FolederName = subdirectory;
                         ProcessDirectory(subdirectory);
                     }
@@ -430,7 +427,6 @@ namespace vcs_FileManager
             }
         }
 
-        // Insert logic for processing found files here.
         public void ProcessFile(string path)
         {
             //richTextBox1.Text += "處理File " + path + "\n";
@@ -450,6 +446,9 @@ namespace vcs_FileManager
             {
                 //一定會被執行的程式區段
             }
+
+            //在這裡做處理檔案的事情
+            //get_fileinfo(fi);
 
             //richTextBox2.Text += "folder = " + FolederName + ",  name = " + fi.Name + "\n";
 

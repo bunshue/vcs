@@ -189,6 +189,8 @@ namespace vcs_Draw_Histogram
             pic.Image = bitmap1;
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             //右下小圖
@@ -364,6 +366,4 @@ namespace vcs_Draw_Histogram
 /*  可搬出
 
 */
-
-
 

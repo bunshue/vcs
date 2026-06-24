@@ -1,6 +1,8 @@
 ﻿
 
 
+
+
 3字
 Tom
 Sue
@@ -27,6 +29,32 @@ Nancy
 
 C:\Program Files\Git\bin\git.exe pull --progress -v --no-rebase "origin"
 
+
+6060
+
+
+        // Return a random color.
+        private Random rand = new Random();
+        private Color[] color =
+        {
+            Color.Red,
+            Color.Green,
+            Color.Blue,
+            Color.Lime,
+            Color.Orange,
+            Color.Fuchsia,
+            Color.Yellow,
+            Color.LightGreen,
+            Color.LightBlue,
+            Color.Cyan,
+        };
+
+        private Color RandomColor()
+        {
+            return color[rand.Next(0, color.Length)];
+        }
+
+//RandomColor()
 
 6060
 

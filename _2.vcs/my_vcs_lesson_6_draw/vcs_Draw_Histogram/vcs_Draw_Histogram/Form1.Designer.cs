@@ -45,9 +45,6 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.BackColor = System.Drawing.Color.LightGray;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.Location = new System.Drawing.Point(12, 25);
@@ -58,9 +55,6 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.richTextBox1.Location = new System.Drawing.Point(633, 465);
             this.richTextBox1.Name = "richTextBox1";
@@ -70,7 +64,6 @@
             // 
             // bt_clear
             // 
-            this.bt_clear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_clear.Location = new System.Drawing.Point(647, 475);
             this.bt_clear.Name = "bt_clear";
@@ -82,11 +75,10 @@
             // 
             // button5
             // 
-            this.button5.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.button5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button5.Location = new System.Drawing.Point(848, 25);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(150, 60);
+            this.button5.Size = new System.Drawing.Size(200, 60);
             this.button5.TabIndex = 7;
             this.button5.Text = "my int   數字很小";
             this.button5.UseVisualStyleBackColor = true;
@@ -94,7 +86,6 @@
             // 
             // pictureBox_histogram
             // 
-            this.pictureBox_histogram.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.pictureBox_histogram.BackColor = System.Drawing.Color.LightGray;
             this.pictureBox_histogram.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox_histogram.Location = new System.Drawing.Point(860, 333);
@@ -111,11 +102,10 @@
             // 
             // button6
             // 
-            this.button6.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.button6.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button6.Location = new System.Drawing.Point(848, 140);
+            this.button6.Location = new System.Drawing.Point(848, 155);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(150, 60);
+            this.button6.Size = new System.Drawing.Size(200, 60);
             this.button6.TabIndex = 9;
             this.button6.Text = "my float";
             this.button6.UseVisualStyleBackColor = true;
@@ -123,9 +113,6 @@
             // 
             // pictureBox_old
             // 
-            this.pictureBox_old.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox_old.BackColor = System.Drawing.Color.LightGray;
             this.pictureBox_old.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox_old.Location = new System.Drawing.Point(12, 465);
@@ -136,11 +123,10 @@
             // 
             // button1
             // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.button1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button1.Location = new System.Drawing.Point(848, 85);
+            this.button1.Location = new System.Drawing.Point(848, 90);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(150, 60);
+            this.button1.Size = new System.Drawing.Size(200, 60);
             this.button1.TabIndex = 11;
             this.button1.Text = "my int   數字很大";
             this.button1.UseVisualStyleBackColor = true;
@@ -150,7 +136,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1007, 644);
+            this.ClientSize = new System.Drawing.Size(1119, 644);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox_old);
             this.Controls.Add(this.button6);

@@ -27,12 +27,17 @@ namespace vcs_Draw_Word
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             pt_st = new Point(100, 100);
 
             int W = this.Width;
             int H = this.Height;
             //this.Width / 2, this.Height / 2);
             richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+
+            //------------------------------------------------------------  # 60個
+
         }
 
         void show_item_location()
@@ -42,7 +47,7 @@ namespace vcs_Draw_Word
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
+
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -70,62 +75,93 @@ namespace vcs_Draw_Word
             richTextBox1.Clear();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button0_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "1投影文字\n";
             do_word_effect1();
+            richTextBox1.Text += "2浮雕效果\n";
             do_word_effect2();
+            richTextBox1.Text += "3印版效果\n";
             do_word_effect3();
+            richTextBox1.Text += "4倒影文字\n";
             do_word_effect4();
+            richTextBox1.Text += "5陰影文字\n";
             do_word_effect5();
+            richTextBox1.Text += "6紋理效果\n";
             do_word_effect6();
+            richTextBox1.Text += "7傾斜效果\n";
             do_word_effect7();
+            richTextBox1.Text += "8漸層色文字\n";
             do_word_effect8();
+            richTextBox1.Text += "9旋轉效果\n";
             do_word_effect9();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button1_Click(object sender, EventArgs e)
         {
-            do_word_effect1();
+            //字體做陰影效果 同樣字往右下寫一遍 顏色不同
+
+            string test_string = "世界大同";
+            Bitmap bmp = new Bitmap(800, 720);     //initial W, H
+            Graphics g = Graphics.FromImage(bmp);
+
+            string font_type = "標楷體";
+
+            int font_size_default = 130;
+            Font f = new Font(font_type, font_size_default);
+            g.DrawString(test_string, f, new SolidBrush(Color.Pink), new PointF(0, 0));
+
+            font_size_default = 130;
+            f = new Font(font_type, font_size_default);
+            g.DrawString(test_string, f, new SolidBrush(Color.Red), new PointF(5, 5));
+
+            pictureBox1.Image = bmp;
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button2_Click(object sender, EventArgs e)
         {
-            do_word_effect2();
+
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            do_word_effect3();
+
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            do_word_effect4();
+
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            do_word_effect5();
+
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            do_word_effect6();
+
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            do_word_effect7();
+
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            do_word_effect8();
+
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            do_word_effect9();
+
         }
 
         void do_word_effect1()
@@ -325,3 +361,16 @@ namespace vcs_Draw_Word
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
