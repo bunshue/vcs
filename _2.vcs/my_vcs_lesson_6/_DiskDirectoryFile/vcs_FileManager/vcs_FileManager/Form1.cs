@@ -448,7 +448,7 @@ namespace vcs_FileManager
             }
 
             //在這裡做處理檔案的事情
-            //get_fileinfo(fi);
+            get_fileinfo(fi, 0);
 
             //richTextBox2.Text += "folder = " + FolederName + ",  name = " + fi.Name + "\n";
 
@@ -1913,6 +1913,22 @@ namespace vcs_FileManager
                 button5_Click(sender, e);
             }
         }
+
+        //------------------------------------------------------------  # 60個
+
+        void get_fileinfo(FileInfo fi, int type)
+        {
+            /*
+            richTextBox1.Text += fi.Name + "\t" + fi.Length.ToString() + "\n";
+
+            total_size += fi.Length;
+            total_files++;
+            folder_size += fi.Length;
+            folder_files++;
+            */
+        }
+
+        //------------------------------------------------------------  # 60個
     }
 }
 
