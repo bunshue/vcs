@@ -4198,6 +4198,9 @@ namespace vcs_Draw_Example1
 
         private void button32_Click(object sender, EventArgs e)
         {
+            int x_st = 20;
+            int y_st = 300;
+
             //折線圖
             //測試數據
             DataTable table = new DataTable("Data");
@@ -4219,15 +4222,16 @@ namespace vcs_Draw_Example1
             }
 
             //畫圖參數
-            int W = 450;
-            int H = 180;
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+
             //int Pic_Width = 450;
             //int Pic_Height = 180;
             int pic_X = 6;
             int pic_H = 1;
             int pic_tr = 5;
             int pic_td = 12;
-            Rectangle rec = new Rectangle(50, 15, 360, 150);
+            Rectangle rec = new Rectangle(x_st + 50, y_st + 15, 360, 150);
             Pen Pic_Bolder = new Pen(Color.Black, 1);
             Pen Pic_line = new Pen(Color.Gray, 1);
             Pen Pic_Data = new Pen(Color.Red, 2);
@@ -4245,7 +4249,7 @@ namespace vcs_Draw_Example1
 
             Bitmap bitmap1 = new Bitmap(W, H, PixelFormat.Format24bppRgb);
             Graphics g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.White);
+            g.Clear(Color.Pink);
             g.DrawRectangle(Pic_Bolder, rec);
             //畫折線
             g.DrawCurve(Pic_Data, DataPt);
@@ -4278,7 +4282,7 @@ namespace vcs_Draw_Example1
             //畫標題
             string Title = "畫折線測試";
             SolidBrush brush = new SolidBrush(Color.RoyalBlue);
-            g.DrawString(Title, new Font("Franklin Gothic Demi", 12, FontStyle.Italic), brush, new Point(200, 0));
+            g.DrawString(Title, new Font("Franklin Gothic Demi", 12, FontStyle.Italic), brush, new Point(x_st + 200, y_st + 0));
             pictureBox1.Image = bitmap1;
         }
 
@@ -7461,9 +7465,10 @@ namespace vcs_Draw_Example1
         private void InitializeGraph()
         {
             //根據給定的高度和寬度創建一個位圖圖像
-            bitmap1 = new Bitmap((int)Width, (int)Height);
+            bitmap1 = new Bitmap((int)Width + 10, (int)Height + 10);
             //從指定的 bitmap1 對像創建 g 對像 (即在bitmap1對像中畫圖)
             g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.Lime);
             //根據給定顏色(LightGray)填充圖像的矩形區域 (背景)
             g.DrawRectangle(new Pen(BorderColor, 1), 0, 0, Width - 1, Height - 1); //畫邊框
             g.FillRectangle(new SolidBrush(BgColor), 1, 1, Width - 2, Height - 2); //填充邊框

@@ -46,7 +46,6 @@ namespace vcs_DrAP
         int min_size_mb = 0;
         int step = 0;
         int flag_search_mode = 0;
-        int flag_search_done = 0;
         int flag_search_vcs_pattern = 0;
         string FolederName;
 
@@ -426,7 +425,6 @@ namespace vcs_DrAP
             {
                 richTextBox1.Text = "未選取資料夾\n";
             }
-            flag_search_done = 0;
         }
 
         //------------------------------------------------------------  # 60個
@@ -435,13 +433,13 @@ namespace vcs_DrAP
         {
             try
             {
-                //richTextBox1.Text += targetDirectory + "\n\n";
                 //DirectoryInfo di = new DirectoryInfo(targetDirectory);
                 //richTextBox1.Text += di.Name + "\n\n";
 
-                // Process the list of files found in the directory.
                 try
                 {
+                    richTextBox1.Text += "\n開始處理資料夾4 : " + targetDirectory + "\n";
+
                     string[] fileEntries = Directory.GetFiles(targetDirectory);
                     Array.Sort(fileEntries);
                     folder_size = 0;
@@ -518,6 +516,8 @@ namespace vcs_DrAP
 
         void show_file_info1()  //轉出一層
         {
+            richTextBox1.Text += "show_file_info1 ST 轉出一層\n";
+
             if (cb_video_only.Checked == false)
                 return;
 
@@ -711,6 +711,8 @@ namespace vcs_DrAP
 
         void show_file_info3()
         {
+            richTextBox1.Text += "show_file_info3 ST 搜尋檔案內容\n";
+
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.FullRowSelect = true; //整行一起選取
             listView1.Clear();
@@ -765,9 +767,7 @@ namespace vcs_DrAP
 
         void show_file_info6()
         {
-            //找小資料夾
-
-            richTextBox1.Text += "show_file_info6 ST\n";
+            richTextBox1.Text += "show_file_info6 ST 找小資料夾\n";
 
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.FullRowSelect = true; //整行一起選取
@@ -1324,7 +1324,8 @@ namespace vcs_DrAP
 
         private void bt_find_big_files_Click(object sender, EventArgs e)
         {
-            //搜尋大檔
+            richTextBox1.Text += "搜尋大檔 ST\n";
+            
             bt_start_files.BackgroundImage = vcs_DrAP.Properties.Resources.potplayer;
             bt_find_big_files.BackColor = Color.Red;
 
@@ -1345,6 +1346,8 @@ namespace vcs_DrAP
             flag_function = FUNCTION_FIND_BIG_FILES;
             find_and_show_big_files();
             bt_find_big_files.BackColor = System.Drawing.SystemColors.ControlLight;
+
+            richTextBox1.Text += "搜尋大檔 SP\n";
         }
 
         private void bt_delete_file_Click(object sender, EventArgs e)
@@ -1377,72 +1380,33 @@ namespace vcs_DrAP
         {
             try
             {
-                // Process the list of files found in the directory.
-                try
+                //richTextBox1.Text += "\n開始處理資料夾S : " + targetDirectory + "\n";
+
+                string[] fileEntries = Directory.GetFiles(targetDirectory);
+                Array.Sort(fileEntries);
+                foreach (string fileName in fileEntries)
                 {
-                    string[] fileEntries = Directory.GetFiles(targetDirectory);
-                    Array.Sort(fileEntries);
-                    foreach (string fileName in fileEntries)
+                    ProcessFileS(fileName);
+                }
+
+                // Recurse into subdirectories of this directory.
+                string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
+                Array.Sort(subdirectoryEntries);
+                foreach (string subdirectory in subdirectoryEntries)
+                {
+                    DirectoryInfo di = new DirectoryInfo(subdirectory);
+                    //result_str += subdirectory + "\n";
+
+                    if (search_mode == SEARCH_MODE_PYTHON)
                     {
-                        ProcessFileS(fileName);
-                    }
+                        string search_folder1 = @"D:\_git\vcs\_4.python\__code";    //書附光碟
 
-                    // Recurse into subdirectories of this directory.
-                    string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
-                    Array.Sort(subdirectoryEntries);
-                    foreach (string subdirectory in subdirectoryEntries)
-                    {
-                        DirectoryInfo di = new DirectoryInfo(subdirectory);
-                        //result_str += subdirectory + "\n";
-
-                        if (search_mode == SEARCH_MODE_PYTHON)
+                        if (rb_python_search0.Checked == true)
                         {
-                            string search_folder1 = @"D:\_git\vcs\_4.python\__code";    //書附光碟
-
-                            if (rb_python_search0.Checked == true)
+                            //python only 不包含 書附光碟
+                            if (subdirectory.Contains(search_folder1))
                             {
-                                //python only 不包含 書附光碟
-                                if (subdirectory.Contains(search_folder1))
-                                {
-                                    //跳過 書附光碟
-                                    result_str += "跳過 " + subdirectory + "\n";
-                                    continue;
-                                }
-                                else
-                                {
-                                    ProcessDirectoryS(subdirectory);
-                                }
-                            }
-                            else if (rb_python_search1.Checked == true)
-                            {
-                                //全部
-                                ProcessDirectoryS(subdirectory);
-                            }
-                            else
-                            {
-                                //impossible
-                                result_str += "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n";
-                                //python only 不包含新進檔案 與 書附光碟
-                            }
-                        }
-                        else if ((search_mode == SEARCH_MODE_VCS) && (cb_option3.Checked == true))
-                        {
-                            string search_folder = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example";
-                            if (subdirectory.Contains(search_folder))
-                            {
-                                ProcessDirectoryS(subdirectory);
-                            }
-                            else
-                            {
-                                result_str += "跳過 " + subdirectory + "\n";
-                                continue;
-                            }
-                        }
-                        else if ((search_mode == SEARCH_MODE_VCS) && (cb_option3.Checked == false))
-                        {
-                            string skip_folder = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example";
-                            if (subdirectory.Contains(skip_folder))
-                            {
+                                //跳過 書附光碟
                                 result_str += "跳過 " + subdirectory + "\n";
                                 continue;
                             }
@@ -1450,22 +1414,55 @@ namespace vcs_DrAP
                             {
                                 ProcessDirectoryS(subdirectory);
                             }
+                        }
+                        else if (rb_python_search1.Checked == true)
+                        {
+                            //全部
+                            ProcessDirectoryS(subdirectory);
                         }
                         else
                         {
-                            //除了python 與 vcs, 全部搜尋
+                            //impossible
+                            result_str += "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n";
+                            //python only 不包含新進檔案 與 書附光碟
+                        }
+                    }
+                    else if ((search_mode == SEARCH_MODE_VCS) && (cb_option3.Checked == true))
+                    {
+                        string search_folder = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example";
+                        if (subdirectory.Contains(search_folder))
+                        {
+                            ProcessDirectoryS(subdirectory);
+                        }
+                        else
+                        {
+                            result_str += "跳過 " + subdirectory + "\n";
+                            continue;
+                        }
+                    }
+                    else if ((search_mode == SEARCH_MODE_VCS) && (cb_option3.Checked == false))
+                    {
+                        string skip_folder = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example";
+                        if (subdirectory.Contains(skip_folder))
+                        {
+                            result_str += "跳過 " + subdirectory + "\n";
+                            continue;
+                        }
+                        else
+                        {
                             ProcessDirectoryS(subdirectory);
                         }
                     }
-                }
-                catch (UnauthorizedAccessException ex)
-                {
-                    result_str += ex.Message + "\n";
+                    else
+                    {
+                        //除了python 與 vcs, 全部搜尋
+                        ProcessDirectoryS(subdirectory);
+                    }
                 }
             }
-            catch (IOException e)
+            catch (UnauthorizedAccessException ex)
             {
-                result_str += "IOException, " + e.GetType().Name + "\n";
+                result_str += ex.Message + "\n";
             }
         }
 
@@ -1543,7 +1540,8 @@ namespace vcs_DrAP
 
         void show_file_info4()
         {
-            //找同檔
+            richTextBox1.Text += "show_file_info4 ST 找同檔\n";
+
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.FullRowSelect = true; //整行一起選取
             listView1.Clear();
@@ -1648,7 +1646,6 @@ namespace vcs_DrAP
             {
                 richTextBox2.Text = "未選取資料夾\n";
             }
-            flag_search_done = 0;
         }
 
         private void bt_remove_dir_Click(object sender, EventArgs e)
@@ -1687,7 +1684,6 @@ namespace vcs_DrAP
             stopwatch.Start();
 
             flag_search_mode = 0;
-            flag_search_done = 0;
             flag_search_vcs_pattern = 0;
 
             fileinfos.Clear();
@@ -1700,8 +1696,6 @@ namespace vcs_DrAP
             ProcessDirectory4(path);
             richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
             show_file_info1();
-
-            flag_search_done = 1;
 
             // Stop timing
             stopwatch.Stop();
@@ -1767,6 +1761,8 @@ namespace vcs_DrAP
 
         void show_file_info5()
         {
+            richTextBox1.Text += "show_file_info5 ST\n";
+
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.FullRowSelect = true; //整行一起選取
             listView1.Clear();
@@ -1883,7 +1879,8 @@ namespace vcs_DrAP
 
         private void bt_find_small_folders_Click(object sender, EventArgs e)
         {
-            //找小資料夾
+            richTextBox1.Text += "找小資料夾\n";
+
             min_size_mb = 0;
             bool conversionSuccessful = int.TryParse(textBox4.Text, out min_size_mb);    //out為必須
             if (conversionSuccessful == true)
@@ -1916,13 +1913,14 @@ namespace vcs_DrAP
                 richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
                 ProcessFile2(path, 0);
                 richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
-                flag_search_done = 1;
             }
             else if (Directory.Exists(path) == true)
             {
                 // path 是個 資料夾
                 FolederName = path;
                 ProcessDirectory2(path);
+
+                richTextBox1.Text += "尋找結果 :\n";
 
                 richTextBox1.Text += "\n類型:\t\t檔案資料夾\n";
                 richTextBox1.Text += "位置:\t\t" + Directory.GetParent(path) + "\n";
@@ -1937,7 +1935,6 @@ namespace vcs_DrAP
             else
             {
                 richTextBox1.Text += "非合法路徑或檔案c\n";
-                flag_search_done = 0;
             }
         }
 
@@ -1947,15 +1944,13 @@ namespace vcs_DrAP
         {
             try
             {
-                //richTextBox1.Text += targetDirectory + "\n\n";
                 //DirectoryInfo di = new DirectoryInfo(targetDirectory);
                 //richTextBox1.Text += di.Name + "\n\n";
 
-                // Process the list of files found in the directory.
                 try
                 {
                     total_folders++;
-                    richTextBox1.Text += "\n開始處理資料夾 : " + targetDirectory + "\n";
+                    richTextBox1.Text += "\n開始處理資料夾2 : " + targetDirectory + "\n";
 
                     string[] fileEntries = Directory.GetFiles(targetDirectory);
                     Array.Sort(fileEntries);
@@ -2495,7 +2490,9 @@ namespace vcs_DrAP
                 // path 是個 資料夾
                 ProcessDirectoryS(path);
             }
+
             show_file_info3();
+
             flag_search_vcs_pattern = 1;
             if (mode == SEARCH_MODE_VCS)
             {
@@ -2720,9 +2717,10 @@ namespace vcs_DrAP
                 int file_cnt = 0;
                 int dir_cnt = 0;
 
-                // Process the list of files found in the directory.
                 try
                 {
+                    richTextBox1.Text += "\n開始處理資料夾3 : " + targetDirectory + "\n";
+
                     string[] fileEntries = Directory.GetFiles(targetDirectory);
                     file_cnt = fileEntries.Length;
                     Array.Sort(fileEntries);
@@ -3170,15 +3168,3 @@ namespace vcs_DrAP
 
 */
 
-
-/*
-bool res;
-res = fileinfos[i].filename.ToLower().Replace(" ", "").Contains(tb_search_text_pattern.Text.ToLower().Replace("-", ""));
-if (res == false)
-    continue;
-else
-{
-    result_str += "get file : " + fileinfos[i].filename + "\n";
-}
-
-*/
