@@ -304,10 +304,6 @@ namespace vcs_Exif
             richTextBox1.Text += "\n\n\nTakePicDateTime = " + TakePicDateTime + "\n";
 
             //ex: 2019:11:16 20:07:23 => 2019-11-16 20:07:23
-
-
-
-
         }
 
         //獲取圖像文件的所有元數據屬性，以PropertyItem數組的格式保存
@@ -335,6 +331,8 @@ namespace vcs_Exif
             //若沒有相關的EXIF信息則返回N/A
             return "N/A";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button5_Click(object sender, EventArgs e)
         {
@@ -365,6 +363,8 @@ namespace vcs_Exif
             richTextBox1.Text += "aaaaa : " + shutter + "\n\n";
             richTextBox1.Text += "aaaaa : " + sensitive + "\n\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button6_Click(object sender, EventArgs e)
         {

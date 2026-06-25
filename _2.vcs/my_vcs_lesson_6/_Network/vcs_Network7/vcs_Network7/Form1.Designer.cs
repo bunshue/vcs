@@ -188,6 +188,7 @@
             // 
             // richTextBox_html1
             // 
+            this.richTextBox_html1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.richTextBox_html1.Location = new System.Drawing.Point(17, 378);
             this.richTextBox_html1.Name = "richTextBox_html1";
             this.richTextBox_html1.Size = new System.Drawing.Size(512, 437);
@@ -218,6 +219,7 @@
             // 
             // richTextBox_html2
             // 
+            this.richTextBox_html2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.richTextBox_html2.Location = new System.Drawing.Point(547, 378);
             this.richTextBox_html2.Name = "richTextBox_html2";
             this.richTextBox_html2.Size = new System.Drawing.Size(512, 437);
@@ -237,9 +239,10 @@
             // 
             // bt_clear_html1
             // 
+            this.bt_clear_html1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_clear_html1.Location = new System.Drawing.Point(449, 766);
             this.bt_clear_html1.Name = "bt_clear_html1";
-            this.bt_clear_html1.Size = new System.Drawing.Size(62, 32);
+            this.bt_clear_html1.Size = new System.Drawing.Size(72, 36);
             this.bt_clear_html1.TabIndex = 58;
             this.bt_clear_html1.Text = "Clear";
             this.bt_clear_html1.UseVisualStyleBackColor = true;
@@ -247,9 +250,10 @@
             // 
             // bt_clear_html2
             // 
+            this.bt_clear_html2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_clear_html2.Location = new System.Drawing.Point(979, 766);
             this.bt_clear_html2.Name = "bt_clear_html2";
-            this.bt_clear_html2.Size = new System.Drawing.Size(62, 32);
+            this.bt_clear_html2.Size = new System.Drawing.Size(72, 36);
             this.bt_clear_html2.TabIndex = 59;
             this.bt_clear_html2.Text = "Clear";
             this.bt_clear_html2.UseVisualStyleBackColor = true;

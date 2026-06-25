@@ -26,21 +26,19 @@ namespace vcs_LED_Text
         void show_item_location()
         {
             int W = 240;
-            int H = 400;
+            int H = 440;
             int x_st = 10;
             int y_st = 10;
             int dx = W + 10;
             int dy = H + 10;
             pictureBox0.Size = new Size(W, H);
-            pictureBox1.Size = new Size(W * 4, H);
+            pictureBox1.Size = new Size(W * 7, H * 2 + 10);
             pictureBox2.Size = new Size(W, H);
-            pictureBox3.Size = new Size(W * 4, H);
             pictureBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             pictureBox2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            pictureBox3.Location = new Point(x_st + dx * 1, y_st + dy * 1);
 
-            this.Size = new Size(1380, 870);
+            this.Size = new Size(1900, 950);
             this.Text = "vcs_LED_Text";
 
             //設定執行後的表單起始位置, 正中央
@@ -56,7 +54,7 @@ namespace vcs_LED_Text
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            //右上
+            //右
             TestColorful(e.Graphics);
         }
 
@@ -64,12 +62,6 @@ namespace vcs_LED_Text
         {
             //左下
             TestSplat(e.Graphics);
-        }
-
-        private void pictureBox3_Paint(object sender, PaintEventArgs e)
-        {
-            //右下
-            TestLetters(e.Graphics);
         }
 
         //------------------------------------------------------------  # 60個
@@ -105,13 +97,15 @@ namespace vcs_LED_Text
 
         private void TestColorful(Graphics gr)
         {
+            const float ratio = 2.7f;
+
             gr.Clear(Color.Black);
             gr.SmoothingMode = SmoothingMode.AntiAlias;
 
-            const float W = 200 / 2;
-            const float H = 320 / 2;
-            const float led_thickness = 28 / 2;
-            const float gap = 5f / 2.0f;
+            const float W = 200 / ratio;
+            const float H = 320 / ratio;
+            const float led_thickness = 28 / ratio;
+            const float gap = 5f / ratio;
             int dx = (int)W + 5;
             int dy = (int)H + 5;
             int x_st = 10;
@@ -125,10 +119,11 @@ namespace vcs_LED_Text
             Pen used_pen1 = new Pen(Color.DarkRed, 3);
             Brush unused_brush1 = new SolidBrush(Color.FromArgb(0, 40, 0));
             Pen unused_pen1 = used_pen1;
+
             position = new PointF(x_st + dx * 0, y_st + dy * 0);
-            letter.DrawText(gr, bg_brush1, used_brush1, used_pen1, unused_brush1, unused_pen1, position, 1.2f, "3");
-            position = new PointF(x_st + dx * 1, y_st + dy * 0);
-            letter.DrawText(gr, bg_brush1, used_brush1, used_pen1, unused_brush1, unused_pen1, position, 1.2f, "5");
+            letter.DrawText(gr, bg_brush1, used_brush1, used_pen1, unused_brush1, unused_pen1, position, 1.2f, "0123456789ABCDEFGH");
+            position = new PointF(x_st + dx * 0, y_st + dy * 1);
+            letter.DrawText(gr, bg_brush1, used_brush1, used_pen1, unused_brush1, unused_pen1, position, 1.2f, "IJKLMNOPQRSTUVWXYZ");
 
             //------------------------------  # 30個
 
@@ -137,30 +132,13 @@ namespace vcs_LED_Text
             Pen used_pen2 = new Pen(Color.LightGreen, 3);
             Brush unused_brush2 = new SolidBrush(Color.FromArgb(0, 40, 0));
             Pen unused_pen2 = Pens.Transparent;
-            position = new PointF(x_st + dx * 0, y_st + dy * 1);
-            letter.DrawText(gr, bg_brush2, used_brush2, used_pen2, unused_brush2, unused_pen2, position, 1.2f, "3");
-            position = new PointF(x_st + dx * 1, y_st + dy * 1);
-            letter.DrawText(gr, bg_brush2, used_brush2, used_pen2, unused_brush2, unused_pen2, position, 1.2f, "5");
-        }
 
-        //------------------------------------------------------------  # 60個
+            position = new PointF(x_st + dx * 0, y_st + dy * 2);
+            letter.DrawText(gr, bg_brush2, used_brush2, used_pen2, unused_brush2, unused_pen2, position, 1.2f, "0123456789ABCDEFGH");
+            position = new PointF(x_st + dx * 0, y_st + dy * 3);
+            letter.DrawText(gr, bg_brush2, used_brush2, used_pen2, unused_brush2, unused_pen2, position, 1.2f, "IJKLMNOPQRSTUVWXYZ");
 
-        private void TestLetters(Graphics gr)
-        {
-            gr.Clear(Color.Black);
-            gr.SmoothingMode = SmoothingMode.AntiAlias;
 
-            const float W = 50;
-            const float H = 80;
-            const float led_thickness = 7;
-            const float gap = 1.5f;
-            int dx = (int)W + 5;
-            int dy = (int)H + 5;
-            int x_st = 10;
-            int y_st = 10;
-            PointF position = new PointF(x_st + dx * 0, y_st + dy * 0);
-
-            LedText letter = new LedText(W, H, led_thickness, gap);
 
             Brush bg_brush = Brushes.Black;
             Brush used_brush = Brushes.Lime;
@@ -168,17 +146,13 @@ namespace vcs_LED_Text
             Brush unused_brush = new SolidBrush(Color.FromArgb(0, 40, 0));
             Pen unused_pen = Pens.Transparent;
 
-            position = new PointF(x_st + dx * 0, y_st + dy * 0);
-            letter.DrawText(gr, bg_brush, used_brush, used_pen, unused_brush, unused_pen, position, 1.2f, "ABCDEFGHI");
+            position = new PointF(x_st + dx * 0, y_st + dy * 4);
+            letter.DrawText(gr, bg_brush, used_brush, used_pen, unused_brush, unused_pen, position, 1.2f, "0123456789ABCDEFGH");
 
             position.Y += letter.CellHeight * 1.2f;
-            letter.DrawText(gr, bg_brush, used_brush, used_pen, unused_brush, unused_pen, position, 1.2f, "JKLMNOPQR");
+            letter.DrawText(gr, bg_brush, used_brush, used_pen, unused_brush, unused_pen, position, 1.2f, "IJKLMNOPQRSTUVWXYZ");
 
-            position.Y += letter.CellHeight * 1.2f;
-            letter.DrawText(gr, bg_brush, used_brush, used_pen, unused_brush, unused_pen, position, 1.2f, "STUVWXYZ0");
 
-            position.Y += letter.CellHeight * 1.2f;
-            letter.DrawText(gr, bg_brush, used_brush, used_pen, unused_brush, unused_pen, position, 1.2f, "123456789");
         }
 
         //------------------------------------------------------------  # 60個

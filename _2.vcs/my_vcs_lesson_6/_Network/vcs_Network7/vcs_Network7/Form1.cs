@@ -15,8 +15,6 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using System.Collections;   //for ArrayList
-using System.Xml;
-using System.Xml.Linq;
 
 namespace vcs_Network7
 {
@@ -135,7 +133,7 @@ namespace vcs_Network7
                         if (page == 100)
                         {
                             bt_start.Invoke(new Action(delegate() { bt_start.Enabled = true; }));
-                            MessageBox.Show("完成！");
+                            richTextBox1.Text += "完成！\n";
                         }
                     }
                 }));
@@ -298,6 +296,7 @@ namespace vcs_Network7
             }
         }
 
+        //------------------------------------------------------------  # 60個
 
         string strCode;
         ArrayList alLinks;
@@ -310,12 +309,17 @@ namespace vcs_Network7
             {
                 url = @"http://" + url;
             }
-            MessageBox.Show("正在獲取頁面代碼，請稍後...");
+
+            richTextBox1.Text +=
+            richTextBox1.Text += "正在獲取頁面代碼，請稍後...\n";
             strCode = GetPageSource(url);
-            MessageBox.Show("正在提取超鏈接，請稍侯...");
+
+            richTextBox1.Text += "正在提取超鏈接，請稍侯...\n";
             alLinks = GetHyperLinks(strCode);
-            MessageBox.Show("正在寫入文件，請稍侯...");
-            WriteToXml(url, alLinks);
+            foreach (string link in alLinks)
+            {
+                richTextBox1.Text += link + "\n";
+            }
         }
 
         // 獲取指定網頁的HTML代碼
@@ -362,63 +366,12 @@ namespace vcs_Network7
 
                 if (!rep) al.Add(strNew);
             }
-
             al.Sort();
-
             return al;
         }
-
-        // 把網址寫入xml文件
-        static void WriteToXml(string strURL, ArrayList alHyperLinks)
-        {
-            XmlTextWriter writer = new XmlTextWriter("HyperLinks.xml", Encoding.UTF8);
-
-            writer.Formatting = Formatting.Indented;
-            writer.WriteStartDocument(false);
-            writer.WriteDocType("HyperLinks", null, "urls.dtd", null);
-            writer.WriteComment("提取自" + strURL + "的超鏈接");
-            writer.WriteStartElement("HyperLinks");
-            writer.WriteStartElement("HyperLinks", null);
-            writer.WriteAttributeString("DateTime", DateTime.Now.ToString());
-
-
-            foreach (string str in alHyperLinks)
-            {
-                string title = GetDomain(str);
-                string body = str;
-                writer.WriteElementString(title, null, body);
-            }
-
-            writer.WriteEndElement();
-            writer.WriteEndElement();
-
-            writer.Flush();
-            writer.Close();
-        }
-
-        // 獲取網址的域名後綴
-        static string GetDomain(string strURL)
-        {
-            string retVal;
-
-            string strRegex = @"(\.com/|\.net/|\.cn/|\.org/|\.gov/)";
-
-            Regex r = new Regex(strRegex, RegexOptions.IgnoreCase);
-            Match m = r.Match(strURL);
-            retVal = m.ToString();
-
-            strRegex = @"\.|/$";
-            retVal = Regex.Replace(retVal, strRegex, "").ToString();
-
-            if (retVal == "")
-                retVal = "other";
-
-            return retVal;
-        }
-
-
-
     }
+
+    //------------------------------------------------------------  # 60個
 
     /// <summary>
     /// HTTP要求對象類

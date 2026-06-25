@@ -315,7 +315,35 @@ namespace vcs_ReadWrite_XML0_mix
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //建立XML
+
+            string strURL = "url";
+
+            XmlTextWriter writer = new XmlTextWriter("tmp_HyperLinks222.xml", Encoding.UTF8);
+
+            writer.Formatting = Formatting.Indented;
+            writer.WriteStartDocument(false);
+            writer.WriteDocType("HyperLinks", null, "urls.dtd", null);
+            writer.WriteComment("提取自" + strURL + "的超鏈接");
+            writer.WriteStartElement("HyperLinks");
+            writer.WriteStartElement("HyperLinks", null);
+            writer.WriteAttributeString("DateTime", DateTime.Now.ToString());
+
+            string title = "TTTT";
+            string body = "BBBB";
+            writer.WriteElementString(title, null, body);
+            writer.WriteElementString(title, null, body);
+            writer.WriteElementString(title, null, body);
+            writer.WriteElementString(title, null, body);
+
+            writer.WriteEndElement();
+            writer.WriteEndElement();
+
+            writer.Flush();
+            writer.Close();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button4_Click(object sender, EventArgs e)
         {
