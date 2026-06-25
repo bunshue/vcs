@@ -383,6 +383,7 @@
             this.bt_class18.Name = "bt_class18";
             this.bt_class18.Size = new System.Drawing.Size(190, 60);
             this.bt_class18.TabIndex = 17;
+            this.bt_class18.Text = "MyCalculation";
             this.bt_class18.UseVisualStyleBackColor = true;
             this.bt_class18.Click += new System.EventHandler(this.bt_class18_Click);
             // 
@@ -434,7 +435,7 @@
             this.bt_class11.Name = "bt_class11";
             this.bt_class11.Size = new System.Drawing.Size(190, 60);
             this.bt_class11.TabIndex = 18;
-            this.bt_class11.Text = "Class 新進1 Car";
+            this.bt_class11.Text = "Car";
             this.bt_class11.UseVisualStyleBackColor = true;
             this.bt_class11.Click += new System.EventHandler(this.bt_class11_Click);
             // 
@@ -466,7 +467,6 @@
             this.bt_class10.Name = "bt_class10";
             this.bt_class10.Size = new System.Drawing.Size(190, 60);
             this.bt_class10.TabIndex = 12;
-            this.bt_class10.Text = "Class 新進0";
             this.bt_class10.UseVisualStyleBackColor = true;
             this.bt_class10.Click += new System.EventHandler(this.bt_class10_Click);
             // 

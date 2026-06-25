@@ -7,28 +7,33 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using System.IO;
 
 namespace vcs_PictureMontageHex
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         // The height of a hexagon.
         private float HexHeight = 200;
         private float BorderThickness = 5;
- 
+
         // Selected hexagons.
         private List<Hexagon> Hexagons = new List<Hexagon>();
 
         private int NumRows = 1, NumCols = 1;
         private Bitmap GridImage = null;
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
 
         // Draw the grid and its images.
         private void DrawGrid(Graphics gr, int xmax, int ymax)
@@ -40,23 +45,18 @@ namespace vcs_PictureMontageHex
             float xmin = BorderThickness / 2f;
             foreach (Hexagon hexagon in Hexagons)
             {
-                PointF[] points = Hex.HexToPoints(HexHeight,
-                    hexagon.Row, hexagon.Column, xmin, xmin);
+                PointF[] points = Hex.HexToPoints(HexHeight, hexagon.Row, hexagon.Column, xmin, xmin);
 
                 if (points[3].X > xmax) continue;
                 if (points[4].Y > ymax) continue;
 
-                Hex.DrawImageInPolygon(gr,
-                    Hex.HexToPoints(HexHeight,
-                        hexagon.Row, hexagon.Column, xmin, xmin),
-                        hexagon.Picture);
+                Hex.DrawImageInPolygon(gr, Hex.HexToPoints(HexHeight, hexagon.Row, hexagon.Column, xmin, xmin), hexagon.Picture);
             }
 
             // Draw the grid.
             using (Pen pen = new Pen(picBorderColor.BackColor, BorderThickness))
             {
-                Hex.DrawHexGrid(gr, pen,
-                    xmin, xmax, xmin, ymax, HexHeight);
+                Hex.DrawHexGrid(gr, pen, xmin, xmax, xmin, ymax, HexHeight);
             }
         }
 
@@ -67,7 +67,9 @@ namespace vcs_PictureMontageHex
             Hex.PointToHex(e.X, e.Y, HexHeight, out row, out col);
             int index = FindHexagon(row, col);
             if (index < 0)
+            {
                 this.Text = "vcs_PictureMontageHex";
+            }
             else
             {
                 string name = Hexagons[index].FileName;
@@ -100,8 +102,11 @@ namespace vcs_PictureMontageHex
         // Remove the Hexagon at this position if there is one.
         private void RemoveHexagon(int row, int col)
         {
-            int index = FindHexagon(row,col);
-            if (index >= 0) Hexagons.RemoveAt(index);
+            int index = FindHexagon(row, col);
+            if (index >= 0)
+            {
+                Hexagons.RemoveAt(index);
+            }
         }
 
         // Find the Hexagon at this position if there is one.
@@ -109,9 +114,10 @@ namespace vcs_PictureMontageHex
         {
             for (int i = Hexagons.Count - 1; i >= 0; i--)
             {
-                if ((Hexagons[i].Row == row) &&
-                    (Hexagons[i].Column == col))
-                        return i;
+                if ((Hexagons[i].Row == row) && (Hexagons[i].Column == col))
+                {
+                    return i;
+                }
             }
             return -1;
         }
@@ -120,11 +126,14 @@ namespace vcs_PictureMontageHex
         private void txt_TextChanged(object sender, EventArgs e)
         {
             float height, thickness;
-            if (!float.TryParse(txtHexHeight.Text, out height) ||
-                height < 10)
+            if (!float.TryParse(txtHexHeight.Text, out height) || height < 10)
+            {
                 return;
+            }
             if (!float.TryParse(txtBorderThickness.Text, out thickness))
+            {
                 return;
+            }
 
             HexHeight = height;
             BorderThickness = thickness;
@@ -204,14 +213,25 @@ namespace vcs_PictureMontageHex
             PointF[] points;
             points = Hex.HexToPoints(HexHeight,
                 NumRows - 1, NumCols - 1, xmin, xmin);
-            if (xmax < points[3].X) xmax = points[3].X;
-            if (ymax < points[4].Y) ymax = points[4].Y;
+            if (xmax < points[3].X)
+            {
+                xmax = points[3].X;
+            }
+            if (ymax < points[4].Y)
+            {
+                ymax = points[4].Y;
+            }
 
             // Check hex (NumRows - 1, NumCols - 2).
-            points = Hex.HexToPoints(HexHeight,
-                NumRows - 1, NumCols - 1, xmin, xmin);
-            if (xmax < points[3].X) xmax = points[3].X;
-            if (ymax < points[4].Y) ymax = points[4].Y;
+            points = Hex.HexToPoints(HexHeight, NumRows - 1, NumCols - 1, xmin, xmin);
+            if (xmax < points[3].X)
+            {
+                xmax = points[3].X;
+            }
+            if (ymax < points[4].Y)
+            {
+                ymax = points[4].Y;
+            }
 
             // Add room for the border thickness.
             xmax += xmin;
@@ -222,8 +242,14 @@ namespace vcs_PictureMontageHex
         private void MakeGrid()
         {
             // Get the number of rows and columns.
-            if (!int.TryParse(txtNumRows.Text, out NumRows)) return;
-            if (!int.TryParse(txtNumCols.Text, out NumCols)) return;
+            if (!int.TryParse(txtNumRows.Text, out NumRows))
+            {
+                return;
+            }
+            if (!int.TryParse(txtNumCols.Text, out NumCols))
+            {
+                return;
+            }
 
             // See how big the image must be.
             float xmax, ymax;
@@ -246,7 +272,7 @@ namespace vcs_PictureMontageHex
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_MU";
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU";
 
             // Get a list of the files in the directory.
             DirectoryInfo dir_info = new DirectoryInfo(foldername);
@@ -255,9 +281,7 @@ namespace vcs_PictureMontageHex
             foreach (FileInfo file_info in dir_info.GetFiles())
             {
                 string ext = file_info.Extension.ToLower().Replace(".", "");
-                if ((ext == "bmp") || (ext == "png") ||
-                    (ext == "jpg") || (ext == "jpeg") ||
-                    (ext == "gif") || (ext == "tiff"))
+                if ((ext == "bmp") || (ext == "png") || (ext == "jpg") || (ext == "jpeg") || (ext == "gif") || (ext == "tiff"))
                 {
                     file_infos.Add(file_info);
                 }
@@ -267,9 +291,13 @@ namespace vcs_PictureMontageHex
             int num_rows = (int)Math.Sqrt(file_infos.Count);
             int num_cols = num_rows;
             if (num_rows * num_cols < file_infos.Count)
+            {
                 num_cols++;
+            }
             if (num_rows * num_cols < file_infos.Count)
+            {
                 num_rows++;
+            }
 
             // Load the files.
             Hexagons = new List<Hexagon>();
@@ -284,21 +312,24 @@ namespace vcs_PictureMontageHex
                     Hexagons.Add(new Hexagon(row, col, bm, name));
 
                     index++;
-                    if (index >= file_infos.Count) break;
+                    if (index >= file_infos.Count)
+                    {
+                        break;
+                    }
                 }
-                if (index >= file_infos.Count) break;
+                if (index >= file_infos.Count)
+                {
+                    break;
+                }
             }
-
             MakeGrid();
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             // Load the files from a directory.
 
-            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_MU";
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU";
 
             DirectoryInfo dir_info = new DirectoryInfo(foldername);
             List<FileInfo> file_infos = new List<FileInfo>();
@@ -317,9 +348,13 @@ namespace vcs_PictureMontageHex
             int num_rows = (int)Math.Sqrt(file_infos.Count);
             int num_cols = num_rows;
             if (num_rows * num_cols < file_infos.Count)
+            {
                 num_cols++;
+            }
             if (num_rows * num_cols < file_infos.Count)
+            {
                 num_rows++;
+            }
 
             // Load the files.
             Hexagons = new List<Hexagon>();
@@ -334,19 +369,21 @@ namespace vcs_PictureMontageHex
                     Hexagons.Add(new Hexagon(row, col, bm, name));
 
                     index++;
-                    if (index >= file_infos.Count) break;
+                    if (index >= file_infos.Count)
+                    {
+                        break;
+                    }
                 }
-                if (index >= file_infos.Count) break;
+                if (index >= file_infos.Count)
+                {
+                    break;
+                }
             }
-
             MakeGrid();
-
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-
-
             string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
 
             try
@@ -365,14 +402,6 @@ namespace vcs_PictureMontageHex
             {
                 richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
             }
-
-
-
-
-
         }
-
-
-
     }
 }

@@ -126,7 +126,7 @@ namespace vcs_PictureMontage
                             // Too tall and thin. Make wider.
                             new_wid = (int)(new_hgt * orig_aspect);
                         }
-        }
+                    }
 
                     // Update the destination rectangle.
                     int right = MouseImage.DestRect.Right;
@@ -292,6 +292,5 @@ namespace vcs_PictureMontage
             }
             pictureBox1.Refresh();
         }
-
     }
 }

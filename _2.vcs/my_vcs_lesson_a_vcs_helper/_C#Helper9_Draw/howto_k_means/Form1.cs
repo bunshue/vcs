@@ -277,5 +277,3 @@ namespace howto_k_means
         }
     }
 }
-
-//System.Media.SystemSounds.Beep.Play();

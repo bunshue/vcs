@@ -742,8 +742,6 @@ namespace vcs_Class1
                 richTextBox1.Text += "第 " + i.ToString() + "個\t" + pData5[i].ToString() + "\n";
             }
 
-            return;
-
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             PersonData6 pData6 = new PersonData6();
@@ -785,7 +783,6 @@ namespace vcs_Class1
 
             //------------------------------------------------------------  # 60個
 
-
             richTextBox1.Text += "寫log的方法\n";
             LogConsole.Log("寫log的方法 LogConsole 1");
             LogConsole.Log("寫log的方法 LogConsole 2");
@@ -797,32 +794,6 @@ namespace vcs_Class1
 
             //------------------------------------------------------------  # 60個
 
-            return;
-
-            //使用[類別的靜態方法], 外人可以直接使用
-            string name = "david";
-            uint math = 90;
-            uint eng = 80;
-            uint chin = 70;
-
-            //直接以類別來呼叫靜態方法Total()、Average()
-            uint score = StudentScore.Total(math, eng, chin);
-            float avg = StudentScore.Average("平均分數", score);
-
-            richTextBox1.Text += "姓名 : " + name + "\t總分 : " + score + "\t平均 : " + avg + "\n";
-
-            //------------------------------------------------------------  # 60個
-
-            //不重複之排列
-
-            int N = 10;
-            int[] Choices = Extensions.RandomArrangement(N);
-
-            foreach (int i in Choices)
-            {
-                richTextBox1.Text += i.ToString() + " ";
-            }
-            richTextBox1.Text += "\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -841,13 +812,6 @@ namespace vcs_Class1
 
         private void bt_class10_Click(object sender, EventArgs e)
         {
-            //Class 新進0, 直接從類別內取出/建造資料
-
-            //類別ClassStudent做成的物件一維陣列 students
-            List<ClassStudent> students = MemberData.GetStudents();
-
-            //類別ClassTeacher做成的物件一維陣列 teachers
-            List<ClassTeacher> teachers = MemberData.GetTeachers();
         }
 
         //------------------------------------------------------------  # 60個
@@ -1317,6 +1281,44 @@ namespace vcs_Class1
         private void bt_class18_Click(object sender, EventArgs e)
         {
             //Class 新進8
+            //MyCalculation
+
+            //使用[類別的靜態方法], 外人可以直接使用
+
+            richTextBox1.Text += "不重複之排列\t";
+
+            //回傳 0~N 的不重複之陣列
+            int N = 10;
+            int[] Choices = MyCalculation.RandomArrangement(N);
+
+            foreach (int i in Choices)
+            {
+                richTextBox1.Text += i.ToString() + " ";
+            }
+            richTextBox1.Text += "\n";
+
+            //------------------------------  # 30個
+
+            string name = "david";
+            uint math = 90;
+            uint eng = 80;
+            uint chin = 70;
+
+            //直接以類別來呼叫靜態方法Total()、Average()
+            uint score = MyCalculation.Total(math, eng, chin);
+            float avg = MyCalculation.Average("平均分數", score);
+
+            richTextBox1.Text += "姓名 : " + name + "\t總分 : " + score + "\t平均 : " + avg + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            //Class 新進0, 直接從類別內取出/建造資料
+
+            //類別ClassStudent做成的物件一維陣列 students
+            List<ClassStudent> students = MemberData.GetStudents();
+
+            //類別ClassTeacher做成的物件一維陣列 teachers
+            List<ClassTeacher> teachers = MemberData.GetTeachers();
 
         }
 
@@ -1712,8 +1714,9 @@ namespace vcs_Class1
                     sr.Close();
                     break;
                 }
-                catch (Exception e)
+                catch (Exception ex2)
                 {
+                    Console.WriteLine(ex2.Message);
                     Thread.Sleep(50);
                     continue;
                 }
@@ -1723,15 +1726,35 @@ namespace vcs_Class1
 
     //------------------------------------------------------------  # 60個
 
-    class StudentScore
+    public class MyCalculation
     {
-        //第一個靜態方法-計算總分
+        //回傳 0~N 的不重複之陣列
+        public static int[] RandomArrangement(int num_items)
+        {
+            int[] items = Enumerable.Range(0, num_items).ToArray();
+
+            Random Rand = new Random();
+
+            for (int i = 0; i < items.Length - 1; i++)
+            {
+                int j = Rand.Next(i, items.Length);
+                int temp = items[i];
+                items[i] = items[j];
+                items[j] = temp;
+            }
+            return items;
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        //靜態方法-計算總分
         public static uint Total(uint a, uint b, uint c)
         {
             uint sum = a + b + c;//總分
             return sum;//回傳加總結果         
         }
-        //第二個靜態方法-算平均分數
+
+        //靜態方法-算平均分數
         public static float Average(string word, uint number)
         {
             float result = number / 3.0F;//平均
@@ -1739,22 +1762,6 @@ namespace vcs_Class1
         }
     }
 
-    //------------------------------------------------------------  # 60個
-
-    public class ClassStudent
-    {
-        public long Id { get; set; }  // 有get有set簡寫, 可讀可寫
-        public string Name { get; set; }  // 有get有set簡寫, 可讀可寫
-        public short Age { get; set; }  // 有get有set簡寫, 可讀可寫
-        public DateTime DateOfCreation { get; set; }  // 有get有set簡寫, 可讀可寫
-    }
-
-    public class ClassTeacher
-    {
-        public long Id { get; set; }  // 有get有set簡寫, 可讀可寫
-        public string Name { get; set; }  // 有get有set簡寫, 可讀可寫
-        public int DepartmentId { get; set; }  // 有get有set簡寫, 可讀可寫
-    }
 
     public class MemberData
     {
@@ -1782,6 +1789,25 @@ namespace vcs_Class1
             return list;
         }
     }
+
+    //------------------------------------------------------------  # 60個
+
+    public class ClassStudent
+    {
+        public long Id { get; set; }  // 有get有set簡寫, 可讀可寫
+        public string Name { get; set; }  // 有get有set簡寫, 可讀可寫
+        public short Age { get; set; }  // 有get有set簡寫, 可讀可寫
+        public DateTime DateOfCreation { get; set; }  // 有get有set簡寫, 可讀可寫
+    }
+
+    public class ClassTeacher
+    {
+        public long Id { get; set; }  // 有get有set簡寫, 可讀可寫
+        public string Name { get; set; }  // 有get有set簡寫, 可讀可寫
+        public int DepartmentId { get; set; }  // 有get有set簡寫, 可讀可寫
+    }
+
+    //------------------------------------------------------------  # 60個
 
     public static class ExtensionUtility
     {
@@ -1846,36 +1872,6 @@ namespace vcs_Class1
 
     //------------------------------------------------------------  # 60個
 
-    //不重複之陣列
-    public static class Extensions
-    {
-        private static Random Rand = new Random();
-
-        // Randomize an array.
-        public static void Randomize<T>(this T[] items)
-        {
-            // For each spot in the array, pick
-            // a random item to swap into that spot.
-            for (int i = 0; i < items.Length - 1; i++)
-            {
-                int j = Rand.Next(i, items.Length);
-                T temp = items[i];
-                items[i] = items[j];
-                items[j] = temp;
-            }
-        }
-
-        public static int[] RandomArrangement(int num_items)
-        {
-            int[] items = Enumerable.Range(0, num_items).ToArray();
-            items.Randomize();
-            return items;
-        }
-    }
-
-    //------------------------------------------------------------  # 60個
-
-    // Represents a circle.
     class Circle2
     {
         public PointF Center;

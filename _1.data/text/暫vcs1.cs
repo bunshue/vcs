@@ -1,5 +1,11 @@
 ﻿
 
+
+//System.Media.SystemSounds.Beep.Play();
+
+
+
+
         //重定義基類OnPaint()方法
         protected override void OnPaint(PaintEventArgs e)
         {
