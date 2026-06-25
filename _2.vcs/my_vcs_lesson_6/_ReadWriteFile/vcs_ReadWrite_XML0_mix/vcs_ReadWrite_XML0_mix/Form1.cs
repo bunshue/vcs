@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;
 using System.Xml;
 using System.Xml.Linq;  //for XNamespace, XElement
-using System.IO;
 
 //作為一個小型的數據存儲傳遞的工具——XML
 
@@ -131,6 +131,7 @@ namespace vcs_ReadWrite_XML0_mix
             }
         }
 
+        //------------------------------------------------------------  # 60個
 
         class Student
         {
@@ -152,7 +153,6 @@ namespace vcs_ReadWrite_XML0_mix
             string workDir = Directory.GetCurrentDirectory();
 
             List<Student> stuList = new List<Student>();
-
 
             //定義一個元素
             XmlElement xmlEle;
@@ -204,11 +204,9 @@ namespace vcs_ReadWrite_XML0_mix
                 //以上為手動添加XML文件的方法，用於創建並書寫XML文件
                 //還可以使用XmlTextWriter對象輸出數據流
 
-
                 //生成並保存XML文件
                 xmlDoc.Save(workDir + "\\StudentGrade.xml");
             }
-
 
             public void DataIn(string fileName)
             {
@@ -601,11 +599,122 @@ namespace vcs_ReadWrite_XML0_mix
             richTextBox1.Text += "存檔完成\n";
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button16_Click(object sender, EventArgs e)
         {
-            XML_RW xmlrw = new XML_RW();
-            xmlrw.ShowXml();
+            string xml_filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\bookshop.xml";
+
+            //顯示xml數據
+
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(xml_filename); //加載xml文件
+            XmlNode xn = xmlDoc.SelectSingleNode("bookshop");
+
+            XmlNodeList xnl = xn.ChildNodes;
+
+            foreach (XmlNode xnf in xnl)
+            {
+                XmlElement xe = (XmlElement)xnf;
+                Console.WriteLine(xe.GetAttribute("genre"));//顯示屬性值
+                Console.WriteLine(xe.GetAttribute("ISBN"));
+
+                XmlNodeList xnf1 = xe.ChildNodes;
+                foreach (XmlNode xn2 in xnf1)
+                {
+                    Console.WriteLine(xn2.InnerText);//顯示子節點點文本
+                }
+            }
+
+            //------------------------------------------------------------  # 60個
+
+            /// 插入節點
+            xmlDoc = new XmlDocument();
+            xmlDoc.Load(xml_filename); //加載xml文件
+
+            /*從指定的字符創加載xml文件 例如：
+            xmlDoc.LoadXml("(<Book bookID='B001'><BookName>jeff</BookName><price>45.6</price></Book>)");
+            */
+            XmlNode root = xmlDoc.SelectSingleNode("bookshop");//查找﹤bookstore﹥
+            XmlElement xe1 = xmlDoc.CreateElement("book");//創建一個﹤book﹥節點
+
+            xe1.SetAttribute("genre", "Sky_Kwolf");//設置該節點genre屬性
+            xe1.SetAttribute("ISBN", "2-3631-4");//設置該節點ISBN屬性
+
+            XmlElement xesub1 = xmlDoc.CreateElement("title");
+            xesub1.InnerText = "CSS禅意花園";//設置節點的文本值
+            xe1.AppendChild(xesub1);//添加到﹤book﹥節點中
+            XmlElement xesub2 = xmlDoc.CreateElement("author");
+            xesub2.InnerText = "Jeff";
+            xe1.AppendChild(xesub2);
+            XmlElement xesub3 = xmlDoc.CreateElement("price");
+            xesub3.InnerText = "58.3";
+            xe1.AppendChild(xesub3);
+
+            root.AppendChild(xe1);//添加到﹤bookshop﹥節點中
+
+            string xml_filename2 = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\bookshop222.xml";
+
+            xmlDoc.Save(xml_filename2); //保存其更改
+
+            //------------------------------------------------------------  # 60個
+
+            // 修改節點
+            xmlDoc = new XmlDocument();
+            xmlDoc.Load(xml_filename); //加載xml文件
+            //獲取bookshop節點的所有子節點
+            XmlNodeList nodeList = xmlDoc.SelectSingleNode("bookshop").ChildNodes;
+
+            //遍歷所有子節點
+            foreach (XmlNode xn3 in nodeList)
+            {
+                XmlElement xe = (XmlElement)xn3; //將子節點類型轉換為XmlElement類型
+
+                if (xe.GetAttribute("genre") == "Sky_Kwolf")//如果genre屬性值為“Sky_Kwolf”
+                {
+                    xe.SetAttribute("genre", "update Sky_Kwolf"); //則修改該屬性為“update Sky_Kwolf”
+                    XmlNodeList nls = xe.ChildNodes;//繼續獲取xe子節點的所有子節點
+
+                    foreach (XmlNode xn1 in nls)//遍歷
+                    {
+                        XmlElement xe2 = (XmlElement)xn1; //轉換類型
+                        if (xe2.Name == "author")//如果找到
+                        {
+                            xe2.InnerText = "jason";//則修改
+                            break;//找到退出
+                        }
+                    }
+                    break;
+                }
+            }
+            string xml_filename3 = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\bookshop333.xml";
+            xmlDoc.Save(xml_filename3);//保存。
+
+            //------------------------------------------------------------  # 60個
+
+            /// 刪除節點
+            xmlDoc = new XmlDocument();
+            xmlDoc.Load(xml_filename); //加載xml文件
+            XmlNodeList xnld = xmlDoc.SelectSingleNode("bookshop").ChildNodes;
+
+            foreach (XmlNode xnd in xnld)
+            {
+                XmlElement xe = (XmlElement)xnd;
+
+                if (xe.GetAttribute("genre") == "fantasy")
+                {
+                    xe.RemoveAttribute("genre");//刪除genre屬性
+                }
+                else if (xe.GetAttribute("genre") == "update Sky_Kwolf")
+                {
+                    xe.RemoveAll();//刪除該節點的全部內容
+                }
+            }
+            string xml_filename4 = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\bookshop444.xml";
+            xmlDoc.Save(xml_filename4);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button17_Click(object sender, EventArgs e)
         {
@@ -631,8 +740,9 @@ namespace vcs_ReadWrite_XML0_mix
             DeleteXmlInformation(myXMLFilePath);
 
             richTextBox1.Text += "done\n";
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void GenerateXMLFile(string xmlFilePath)
         {
@@ -810,8 +920,7 @@ namespace vcs_ReadWrite_XML0_mix
             }
         }
 
-
-
+        //------------------------------------------------------------  # 60個
 
         private void button18_Click(object sender, EventArgs e)
         {
@@ -850,6 +959,7 @@ namespace vcs_ReadWrite_XML0_mix
             xml.Save(filename);
             */
 
+            //------------------------------------------------------------  # 60個
 
             /*
             C#操作XML方法详解
@@ -897,6 +1007,8 @@ namespace vcs_ReadWrite_XML0_mix
             */
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button19_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "XML各種操作\n";
@@ -924,8 +1036,7 @@ namespace vcs_ReadWrite_XML0_mix
             root.AppendChild(xe1);//添加到<bookstore>節點中
             xmlDoc.Save(filename1b);
 
-
-
+            //------------------------------------------------------------  # 60個
 
             string filename2a = @"../../bookstore2.xml";
             string filename2b = @"../../bookstore2_modify.xml";
@@ -956,7 +1067,9 @@ namespace vcs_ReadWrite_XML0_mix
                     break;
                 }
             }
-            xmlDoc.Save(filename2b);//保存。
+            xmlDoc.Save(filename2b);  // 保存
+
+            //------------------------------------------------------------  # 60個
 
 
             string filename3a = @"../../bookstore3.xml";
@@ -984,7 +1097,7 @@ namespace vcs_ReadWrite_XML0_mix
             }
             xmlDoc.Save(filename3b);
 
-
+            //------------------------------------------------------------  # 60個
 
             string filename4 = @"../../bookstore2.xml";
 
@@ -1012,6 +1125,8 @@ namespace vcs_ReadWrite_XML0_mix
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button20_Click(object sender, EventArgs e)
         {
             //XML轉DGV
@@ -1034,8 +1149,9 @@ namespace vcs_ReadWrite_XML0_mix
                 richTextBox1.Text += "Sex : " + dataGridView1.Rows[i].Cells[1].Value.ToString() + "\n";
                 richTextBox1.Text += "Salary : " + Convert.ToInt32(dataGridView1.Rows[i].Cells[2].Value) + "\n";
             }
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button21_Click(object sender, EventArgs e)
         {
@@ -1043,17 +1159,158 @@ namespace vcs_ReadWrite_XML0_mix
             //class已OK
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button22_Click(object sender, EventArgs e)
         {
         }
 
-        //XML創建和解析
+        //------------------------------------------------------------  # 60個
+
         private void button23_Click(object sender, EventArgs e)
         {
-            XMLApply xml = new XMLApply();
-            richTextBox1.Text += "建立XML\n";
-            xml.CreateXML();
+            richTextBox1.Text += "XML創建和解析\n";
+
+            string fileName = "tmp_books.xml";
+
+            // 創建XML文件
+            string filename = Application.StartupPath + "//" + fileName;
+
+            if (!File.Exists(filename))
+            {
+                XmlDocument BooksXML = new XmlDocument();
+
+                XmlElement myFavoriteBooks = BooksXML.CreateElement("MyFavoriteBooks");
+                XmlElement history = BooksXML.CreateElement("History");
+                history.SetAttribute("year", "2013");
+                XmlElement item_empireOfQing = BooksXML.CreateElement("item");
+                item_empireOfQing.SetAttribute("name", "大秦帝國");
+                item_empireOfQing.SetAttribute("price", "100");
+                item_empireOfQing.InnerText = "Sara";
+
+                XmlElement item_theLastMan = BooksXML.CreateElement("item");
+                item_theLastMan.SetAttribute("name", "麥田的守望者");
+                item_theLastMan.SetAttribute("price", "70");
+                item_theLastMan.InnerText = "Lisa";
+
+                XmlElement item_worldHistory = BooksXML.CreateElement("item");
+                item_worldHistory.SetAttribute("name", "世界歷史");
+                item_worldHistory.SetAttribute("price", "40");
+                item_worldHistory.InnerText = "Michael";
+
+                XmlElement software = BooksXML.CreateElement("SOftware");
+                XmlElement item_php = BooksXML.CreateElement("PHP");
+                item_php.SetAttribute("name", "php");
+                item_php.SetAttribute("price", "35");
+                item_php.InnerText = "KD";
+
+                history.AppendChild(item_empireOfQing);
+                history.AppendChild(item_theLastMan);
+                history.AppendChild(item_worldHistory);
+                software.AppendChild(item_php);
+                myFavoriteBooks.AppendChild(history);
+                myFavoriteBooks.AppendChild(software);
+                BooksXML.AppendChild(myFavoriteBooks);
+
+                BooksXML.Save(filename);
+                Console.WriteLine("已存檔 : " + filename);
+            }
+
+            //------------------------------------------------------------  # 60個
+
+            // 更新xml文件內容
+
+            if (File.Exists(filename))
+            {
+                //create a xml reference
+                XmlDocument BooksXML = new XmlDocument();
+                //read exists file into BooksXML
+                BooksXML.Load(filename);
+
+                XmlNodeList nodeList = BooksXML.SelectSingleNode("MyFavoriteBooks").ChildNodes;
+
+                foreach (XmlElement node in nodeList)
+                {
+                    if (node.GetAttribute("year") == "2013")
+                    {
+                        node.SetAttribute("year", "2014");
+
+                        XmlNodeList subNodeList = node.ChildNodes;
+
+                        foreach (XmlElement subNode in subNodeList)
+                        {
+                            subNode.InnerText += "Updated...";
+                        }
+
+                        break;
+                    }
+                }
+                BooksXML.Save(filename);
+                Console.WriteLine("已存檔 : " + filename);
+            }
+
+            //------------------------------------------------------------  # 60個
+
+            // 在現有xml文件中，增加一個節點
+
+            if (File.Exists(filename))
+            {
+                XmlDocument BooksXML = new XmlDocument();
+                BooksXML.Load(filename);
+
+                XmlNode root = BooksXML.SelectSingleNode("MyFavoriteBooks");
+                XmlElement culture = BooksXML.CreateElement("Culture");
+                culture.SetAttribute("year", "2012");
+
+                XmlElement item_China = BooksXML.CreateElement("item");
+                item_China.SetAttribute("name", "中國文化");
+                item_China.SetAttribute("price", "30");
+                item_China.InnerText = "rechard";
+
+                culture.AppendChild(item_China);
+                root.AppendChild(culture);
+                BooksXML.AppendChild(root);
+                BooksXML.Save(filename);
+
+                //Debug.Log("Add node success...");
+            }
+
+            //------------------------------------------------------------  # 60個
+
+            // 解析xml文件
+
+            StringBuilder booksInfo = new StringBuilder("");
+
+            XmlDocument BooksXML2 = new XmlDocument();
+            BooksXML2.Load(filename);
+
+            XmlNode rootNode = BooksXML2.FirstChild;
+
+            if (rootNode.Name == "MyFavoriteBooks")
+            {
+                XmlNodeList nodeList = rootNode.ChildNodes;
+
+                foreach (XmlElement node in nodeList)
+                {
+                    booksInfo.Append(node.Name + "\n");
+
+                    foreach (XmlElement subNode in node.SelectNodes("item"))
+                    {
+                        booksInfo.Append("\t " + subNode.GetAttribute("name") + "   , price:" + subNode.GetAttribute("price") + "\n");
+                    }
+
+                    booksInfo.Append("\n");
+                }
+
+                //Debug.Log(booksInfo.ToString());
+            }
+            else
+            {
+                //Debug.Log("YOU LOAD WRONG FILE....");
+            }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button24_Click(object sender, EventArgs e)
         {
@@ -1077,6 +1334,8 @@ namespace vcs_ReadWrite_XML0_mix
             xdoc.Save(filename);
             richTextBox1.Text += "已存檔 : " + filename + "\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button25_Click(object sender, EventArgs e)
         {
@@ -1124,6 +1383,8 @@ namespace vcs_ReadWrite_XML0_mix
             {
             }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button26_Click(object sender, EventArgs e)
         {
@@ -1175,299 +1436,7 @@ namespace vcs_ReadWrite_XML0_mix
         }
     }
 
-    //class XML_RW
-    public class XMLApply
-    {
-        public string fileName = "Books.xml";
-
-        private void Start()
-        {
-            CreateXML();
-            //UpdateXml();
-            //AddXml();
-            //ParseXML();
-        }
-
-        /// 
-        /// 創建XML文件
-        /// 
-        public void CreateXML()
-        {
-            string filename = Application.StartupPath + "//" + fileName;
-
-            if (!File.Exists(filename))
-            {
-                XmlDocument BooksXML = new XmlDocument();
-
-                XmlElement myFavoriteBooks = BooksXML.CreateElement("MyFavoriteBooks");
-                XmlElement history = BooksXML.CreateElement("History");
-                history.SetAttribute("year", "2013");
-                XmlElement item_empireOfQing = BooksXML.CreateElement("item");
-                item_empireOfQing.SetAttribute("name", "大秦帝國");
-                item_empireOfQing.SetAttribute("price", "100");
-                item_empireOfQing.InnerText = "Sara";
-
-                XmlElement item_theLastMan = BooksXML.CreateElement("item");
-                item_theLastMan.SetAttribute("name", "麥田的守望者");
-                item_theLastMan.SetAttribute("price", "70");
-                item_theLastMan.InnerText = "Lisa";
-
-                XmlElement item_worldHistory = BooksXML.CreateElement("item");
-                item_worldHistory.SetAttribute("name", "世界歷史");
-                item_worldHistory.SetAttribute("price", "40");
-                item_worldHistory.InnerText = "Michael";
-
-                XmlElement software = BooksXML.CreateElement("SOftware");
-                XmlElement item_php = BooksXML.CreateElement("PHP");
-                item_php.SetAttribute("name", "php");
-                item_php.SetAttribute("price", "35");
-                item_php.InnerText = "KD";
-
-                history.AppendChild(item_empireOfQing);
-                history.AppendChild(item_theLastMan);
-                history.AppendChild(item_worldHistory);
-                software.AppendChild(item_php);
-                myFavoriteBooks.AppendChild(history);
-                myFavoriteBooks.AppendChild(software);
-                BooksXML.AppendChild(myFavoriteBooks);
-
-                BooksXML.Save(filename);
-                Console.WriteLine("已存檔 : " + filename);
-            }
-        }
-
-        /// 
-        /// 更新xml文件內容
-        /// 
-        public void UpdateXml()
-        {
-            string filename = Application.StartupPath + "//" + fileName;
-
-            if (File.Exists(filename))
-            {
-                //create a xml reference
-                XmlDocument BooksXML = new XmlDocument();
-                //read exists file into BooksXML
-                BooksXML.Load(filename);
-
-                XmlNodeList nodeList = BooksXML.SelectSingleNode("MyFavoriteBooks").ChildNodes;
-
-                foreach (XmlElement node in nodeList)
-                {
-                    if (node.GetAttribute("year") == "2013")
-                    {
-                        node.SetAttribute("year", "2014");
-
-                        XmlNodeList subNodeList = node.ChildNodes;
-
-                        foreach (XmlElement subNode in subNodeList)
-                        {
-                            subNode.InnerText += "Updated...";
-                        }
-
-                        break;
-                    }
-                }
-                BooksXML.Save(filename);
-                Console.WriteLine("已存檔 : " + filename);
-            }
-        }
-
-        /// 
-        /// 在現有xml文件中，增加一個節點
-        /// 
-
-        public void AddXml()
-        {
-            string filePath = Application.StartupPath + "//" + fileName;
-
-            if (File.Exists(filePath))
-            {
-                XmlDocument BooksXML = new XmlDocument();
-                BooksXML.Load(filePath);
-
-                XmlNode root = BooksXML.SelectSingleNode("MyFavoriteBooks");
-                XmlElement culture = BooksXML.CreateElement("Culture");
-                culture.SetAttribute("year", "2012");
-
-                XmlElement item_China = BooksXML.CreateElement("item");
-                item_China.SetAttribute("name", "中國文化");
-                item_China.SetAttribute("price", "30");
-                item_China.InnerText = "rechard";
-
-                culture.AppendChild(item_China);
-                root.AppendChild(culture);
-                BooksXML.AppendChild(root);
-                BooksXML.Save(filePath);
-
-                //Debug.Log("Add node success...");
-            }
-        }
-
-
-        /// 
-
-        /// 解析xml文件
-        /// 
-
-        public void ParseXML()
-        {
-            string filePath = Application.StartupPath + "//" + fileName;
-            StringBuilder booksInfo = new StringBuilder("");
-
-            XmlDocument BooksXML = new XmlDocument();
-            BooksXML.Load(filePath);
-
-            XmlNode rootNode = BooksXML.FirstChild;
-
-            if (rootNode.Name == "MyFavoriteBooks")
-            {
-                XmlNodeList nodeList = rootNode.ChildNodes;
-
-                foreach (XmlElement node in nodeList)
-                {
-                    booksInfo.Append(node.Name + "\n");
-
-                    foreach (XmlElement subNode in node.SelectNodes("item"))
-                    {
-                        booksInfo.Append("\t " + subNode.GetAttribute("name") + "   , price:" + subNode.GetAttribute("price") + "\n");
-                    }
-
-                    booksInfo.Append("\n");
-                }
-
-                //Debug.Log(booksInfo.ToString());
-            }
-            else
-            {
-                //Debug.Log("YOU LOAD WRONG FILE....");
-            }
-
-        }
-    }
-
-    class XML_RW
-    {
-        string xml_filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\bookshop.xml";
-
-
-        XmlDocument xmlDoc;
-        ///<summary>
-        /// 插入節點
-        ///</summary>
-        public void InsertNode()
-        {
-            xmlDoc = new XmlDocument();
-            xmlDoc.Load(xml_filename); //加載xml文件
-
-            /*從指定的字符創加載xml文件 例如：
-            xmlDoc.LoadXml("(<Book bookID='B001'><BookName>jeff</BookName><price>45.6</price></Book>)");
-            */
-            XmlNode root = xmlDoc.SelectSingleNode("bookshop");//查找﹤bookstore﹥
-            XmlElement xe1 = xmlDoc.CreateElement("book");//創建一個﹤book﹥節點
-
-            xe1.SetAttribute("genre", "Sky_Kwolf");//設置該節點genre屬性
-            xe1.SetAttribute("ISBN", "2-3631-4");//設置該節點ISBN屬性
-
-            XmlElement xesub1 = xmlDoc.CreateElement("title");
-            xesub1.InnerText = "CSS禅意花園";//設置節點的文本值
-            xe1.AppendChild(xesub1);//添加到﹤book﹥節點中
-            XmlElement xesub2 = xmlDoc.CreateElement("author");
-            xesub2.InnerText = "Jeff";
-            xe1.AppendChild(xesub2);
-            XmlElement xesub3 = xmlDoc.CreateElement("price");
-            xesub3.InnerText = "58.3";
-            xe1.AppendChild(xesub3);
-
-            root.AppendChild(xe1);//添加到﹤bookshop﹥節點中
-            xmlDoc.Save(xml_filename); //保存其更改
-        }
-
-        ///<summary>
-        /// 修改節點
-        ///</summary>
-        public void UpdateNode()
-        {
-            xmlDoc = new XmlDocument();
-            xmlDoc.Load(xml_filename); //加載xml文件
-            //獲取bookshop節點的所有子節點
-            XmlNodeList nodeList = xmlDoc.SelectSingleNode("bookshop").ChildNodes;
-
-            //遍歷所有子節點
-            foreach (XmlNode xn in nodeList)
-            {
-                XmlElement xe = (XmlElement)xn; //將子節點類型轉換為XmlElement類型
-
-                if (xe.GetAttribute("genre") == "Sky_Kwolf")//如果genre屬性值為“Sky_Kwolf”
-                {
-                    xe.SetAttribute("genre", "update Sky_Kwolf"); //則修改該屬性為“update Sky_Kwolf”
-                    XmlNodeList nls = xe.ChildNodes;//繼續獲取xe子節點的所有子節點
-
-                    foreach (XmlNode xn1 in nls)//遍歷
-                    {
-                        XmlElement xe2 = (XmlElement)xn1; //轉換類型
-                        if (xe2.Name == "author")//如果找到
-                        {
-                            xe2.InnerText = "jason";//則修改
-                            break;//找到退出
-                        }
-                    }
-                    break;
-                }
-            }
-
-            xmlDoc.Save(xml_filename);//保存。
-        }
-
-        //顯示xml數據
-        public void ShowXml()
-        {
-            xmlDoc = new XmlDocument();
-            xmlDoc.Load(xml_filename); //加載xml文件
-            XmlNode xn = xmlDoc.SelectSingleNode("bookshop");
-
-            XmlNodeList xnl = xn.ChildNodes;
-
-            foreach (XmlNode xnf in xnl)
-            {
-                XmlElement xe = (XmlElement)xnf;
-                Console.WriteLine(xe.GetAttribute("genre"));//顯示屬性值
-                Console.WriteLine(xe.GetAttribute("ISBN"));
-
-                XmlNodeList xnf1 = xe.ChildNodes;
-                foreach (XmlNode xn2 in xnf1)
-                {
-                    Console.WriteLine(xn2.InnerText);//顯示子節點點文本
-                }
-            }
-        }
-
-
-        ///<summary>
-        /// 刪除節點
-        ///</summary>
-        public void DeleteNode()
-        {
-            xmlDoc = new XmlDocument();
-            xmlDoc.Load(xml_filename); //加載xml文件
-            XmlNodeList xnl = xmlDoc.SelectSingleNode("bookshop").ChildNodes;
-
-            foreach (XmlNode xn in xnl)
-            {
-                XmlElement xe = (XmlElement)xn;
-
-                if (xe.GetAttribute("genre") == "fantasy")
-                {
-                    xe.RemoveAttribute("genre");//刪除genre屬性
-                }
-                else if (xe.GetAttribute("genre") == "update Sky_Kwolf")
-                {
-                    xe.RemoveAll();//刪除該節點的全部內容
-                }
-            }
-            xmlDoc.Save(xml_filename);
-        }
-    }
+    //------------------------------------------------------------  # 60個
 
     ///<summary>
     /// XMLHelper XML文檔操作管理器

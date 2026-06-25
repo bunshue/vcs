@@ -20,12 +20,14 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
         private int day;
         private int month;
         private int year;
+
         public Date()
         { // default constructor
             day = 1; month = 1; year = 2000;
         }
+
         /*
-        public Date():this(1,1,2000) { // default constructor            
+        public Date():this(1,1,2000) { // default constructor  // 預設值
         }
         */
 

@@ -521,7 +521,6 @@
             this.bt_class05.Name = "bt_class05";
             this.bt_class05.Size = new System.Drawing.Size(190, 60);
             this.bt_class05.TabIndex = 9;
-            this.bt_class05.Text = "感知哈希算法 獲取圖片的Hashcode";
             this.bt_class05.UseVisualStyleBackColor = true;
             this.bt_class05.Click += new System.EventHandler(this.bt_class05_Click);
             // 

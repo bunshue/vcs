@@ -469,18 +469,22 @@ namespace vcs_Class1
             Circle2 circle1 = new Circle2(x, y, r);
             Brush the_brush = new SolidBrush(Color.Blue);
             circle1.Draw(g, the_brush);  // 畫實心
-            richTextBox1.Text += "circle info : " + circle1.ToString() + "\n";
+            richTextBox1.Text += "circle1 info : " + circle1.ToString() + "\n";
 
             Circle2 circle2 = new Circle2(x, y, r + 10);
             Pen p = new Pen(Color.Red, 5);
             //circle2.Draw(g, Pens.Red);  // 畫空心, 未設定筆寬, 即筆寬為1
             circle2.Draw(g, p);  // 畫空心
-            richTextBox1.Text += "circle info : " + circle2.ToString() + "\n";
+            richTextBox1.Text += "circle2 info : " + circle2.ToString() + "\n";
 
             pictureBox2.Image = bitmap1;
 
 
+            //------------------------------------------------------------  # 60個
 
+            //使用預設參數
+            Circle2 circle3 = new Circle2();
+            richTextBox1.Text += "circle3 info : " + circle3.ToString() + "\n";
 
         }
 
@@ -549,25 +553,6 @@ namespace vcs_Class1
 
         private void bt_class05_Click(object sender, EventArgs e)
         {
-            //感知哈希算法 獲取圖片的Hashcode
-
-            //谷歌百度以圖搜圖 感知哈希算法
-            //感知哈希算法 獲取圖片的Hashcode
-
-            string filename = string.Empty;
-            string result = string.Empty;
-
-            filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            result = ImageComparer.GetImageHashCode(filename);
-            richTextBox1.Text += result + "\n";
-
-            filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
-            result = ImageComparer.GetImageHashCode(filename);
-            richTextBox1.Text += result + "\n";
-
-            filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.bmp";
-            result = ImageComparer.GetImageHashCode(filename);
-            richTextBox1.Text += result + "\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -1890,177 +1875,13 @@ namespace vcs_Class1
 
     //------------------------------------------------------------  # 60個
 
-    // 感知哈希算法 
-    public class ImageComparer
-    {
-        // 獲取圖片的Hashcode
-        public static string GetImageHashCode(string imageName)
-        {
-            int width = 8;
-            int height = 8;
-
-            //  第一步 
-            //  將圖片縮小到8x8的尺寸，總共64個像素。這一步的作用是去除圖片的細節， 
-            //  只保留結構、明暗等基本信息，摒棄不同尺寸、比例帶來的圖片差異。 
-            Bitmap bmp = new Bitmap(Thumb(imageName));
-            int[] pixels = new int[width * height];
-
-            //  第二步 
-            //  將縮小後的圖片，轉為64級灰度。也就是說，所有像素點總共只有64種顏色。 
-            for (int i = 0; i < width; i++)
-            {
-                for (int j = 0; j < height; j++)
-                {
-                    Color color = bmp.GetPixel(i, j);
-                    pixels[i * height + j] = RGBToGray(color.ToArgb());
-                }
-            }
-
-            //  第三步 
-            //  計算所有64個像素的灰度平均值。 
-            int avgPixel = Average(pixels);
-
-            //  第四步 
-            //  將每個像素的灰度，與平均值進行比較。大於或等於平均值，記為1；小於平均值，記為0。 
-            int[] comps = new int[width * height];
-            for (int i = 0; i < comps.Length; i++)
-            {
-                if (pixels[i] >= avgPixel)
-                {
-                    comps[i] = 1;
-                }
-                else
-                {
-                    comps[i] = 0;
-                }
-            }
-
-            //  第五步 
-            //  將上一步的比較結果，組合在一起，就構成了一個64位的整數，這就是這張圖片的指紋。組合的次序並不重要，只要保證所有圖片都采用同樣次序就行了。 
-            StringBuilder hashCode = new StringBuilder();
-            for (int i = 0; i < comps.Length; i += 4)
-            {
-                int result = comps[i] * (int)Math.Pow(2, 3) + comps[i + 1] * (int)Math.Pow(2, 2) + comps[i + 2] * (int)Math.Pow(2, 1) + comps[i + 2];
-                hashCode.Append(BinaryToHex(result));
-            }
-            bmp.Dispose();
-            return hashCode.ToString();
-        }
-
-        // 計算"漢明距離"（Hamming distance）。 
-        // 如果不相同的數據位不超過5，就說明兩張圖片很相似；如果大於10，就說明這是兩張不同的圖片。 
-        public static int HammingDistance(String sourceHashCode, String hashCode)
-        {
-            int difference = 0;
-            int len = sourceHashCode.Length;
-
-            for (int i = 0; i < len; i++)
-            {
-                if (sourceHashCode[i] != hashCode[i])
-                {
-                    difference++;
-                }
-            }
-            return difference;
-        }
-
-        // 縮放圖片
-        private static Image Thumb(string imageName)
-        {
-            return Image.FromFile(imageName).GetThumbnailImage(8, 8, () => { return false; }, IntPtr.Zero);
-        }
-
-        // 轉為64級灰度 
-        private static int RGBToGray(int pixels)
-        {
-            int _red = (pixels >> 16) & 0xFF;
-            int _green = (pixels >> 8) & 0xFF;
-            int _blue = (pixels) & 0xFF;
-            return (int)(0.3 * _red + 0.59 * _green + 0.11 * _blue);
-        }
-
-        // 計算平均值 
-        private static int Average(int[] pixels)
-        {
-            float m = 0;
-            for (int i = 0; i < pixels.Length; ++i)
-            {
-                m += pixels[i];
-            }
-            m = m / pixels.Length;
-            return (int)m;
-        }
-
-        private static char BinaryToHex(int binary)
-        {
-            char ch = ' ';
-            switch (binary)
-            {
-                case 0:
-                    ch = '0';
-                    break;
-                case 1:
-                    ch = '1';
-                    break;
-                case 2:
-                    ch = '2';
-                    break;
-                case 3:
-                    ch = '3';
-                    break;
-                case 4:
-                    ch = '4';
-                    break;
-                case 5:
-                    ch = '5';
-                    break;
-                case 6:
-                    ch = '6';
-                    break;
-                case 7:
-                    ch = '7';
-                    break;
-                case 8:
-                    ch = '8';
-                    break;
-                case 9:
-                    ch = '9';
-                    break;
-                case 10:
-                    ch = 'a';
-                    break;
-                case 11:
-                    ch = 'b';
-                    break;
-                case 12:
-                    ch = 'c';
-                    break;
-                case 13:
-                    ch = 'd';
-                    break;
-                case 14:
-                    ch = 'e';
-                    break;
-                case 15:
-                    ch = 'f';
-                    break;
-                default:
-                    ch = ' ';
-                    break;
-            }
-            return ch;
-        }
-    }
-
-    //------------------------------------------------------------  # 60個
-
     // Represents a circle.
     class Circle2
     {
         public PointF Center;
         public float Radius;
         public Circle2()
-            : this(0, 0, 0)
+            : this(10, 20, 5)  // 預設值
         {
         }
 
@@ -2078,7 +1899,7 @@ namespace vcs_Class1
             return new RectangleF(Center.X - Radius, Center.Y - Radius, 2 * Radius, 2 * Radius);
         }
 
-        // Draw the circle.
+        // 傳入Pen的畫圖函數
         public void Draw(Graphics gr, Pen pen)
         {
             if (Radius > 0)
@@ -2087,6 +1908,7 @@ namespace vcs_Class1
             }
         }
 
+        // 傳入Brush的畫圖函數
         public void Draw(Graphics gr, Brush brush)
         {
             if (Radius > 0)
@@ -2095,6 +1917,7 @@ namespace vcs_Class1
             }
         }
 
+        // 傳入Brush和Pen的畫圖函數
         public void Draw(Graphics gr, Brush brush, Pen pen)
         {
             Draw(gr, brush);
