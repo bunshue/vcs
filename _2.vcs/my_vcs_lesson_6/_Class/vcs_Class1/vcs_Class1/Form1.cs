@@ -1312,6 +1312,13 @@ namespace vcs_Class1
 
             //------------------------------------------------------------  # 60個
 
+            MyCalculation mc = new MyCalculation();
+            string code = "12345";
+            Bitmap bitmap1 = mc.CreateImage(code);
+            pictureBox2.Image = bitmap1;
+
+            //------------------------------------------------------------  # 60個
+
             //Class 新進0, 直接從類別內取出/建造資料
 
             //類別ClassStudent做成的物件一維陣列 students
@@ -1319,6 +1326,8 @@ namespace vcs_Class1
 
             //類別ClassTeacher做成的物件一維陣列 teachers
             List<ClassTeacher> teachers = MemberData.GetTeachers();
+
+            //------------------------------------------------------------  # 60個
 
         }
 
@@ -1330,6 +1339,7 @@ namespace vcs_Class1
 
         }
 
+        //------------------------------------------------------------  # 60個
 
         private void bt_class20_Click(object sender, EventArgs e)
         {
@@ -1760,8 +1770,30 @@ namespace vcs_Class1
             float result = number / 3.0F;//平均
             return result;
         }
+
+        //------------------------------------------------------------  # 60個
+
+        public Bitmap CreateImage(string code)
+        {
+            Bitmap bitmap1 = new Bitmap(150, 200);
+
+            Graphics g = Graphics.FromImage(bitmap1);
+
+            g.Clear(Color.Pink);
+
+            g.DrawRectangle(Pens.Red, 10, 10, 80, 80);
+            g.DrawRectangle(new Pen(Color.Gainsboro, 0), 5, 5, bitmap1.Width - 10, bitmap1.Height - 10);
+
+            Font font = new Font("楷體", 16, (FontStyle.Bold));
+            g.DrawString(code, font, new SolidBrush(Color.Red), 10, 10);
+
+            g.Dispose();
+
+            return bitmap1;
+        }
     }
 
+    //------------------------------------------------------------  # 60個
 
     public class MemberData
     {

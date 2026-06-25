@@ -3148,3 +3148,31 @@ namespace vcs_DrAP
 
 //private void bt_test1_Click(object sender, EventArgs e)
 //private void bt_test2_Click(object sender, EventArgs e)
+
+
+/*
+
+            //指定應用程式路徑
+            //string target = @"C:\Program Files\DAUM\PotPlayer\PotPlayerMini.exe";
+            string target = player_path;
+
+            //方法一
+            //Process.Start(target, "參數");
+            //Process.Start(target, all_filename);
+
+            //方法二
+            ProcessStartInfo pInfo = new ProcessStartInfo(target);
+            pInfo.Arguments = all_filename;
+
+            result_str += "target : " + target + "\n";
+            result_str += "all_filename : " + all_filename + "\n";
+
+            using (Process process = new Process())
+            {
+                process.StartInfo = pInfo;
+                process.Start();
+            }
+
+*/
+
+

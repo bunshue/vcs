@@ -67,6 +67,9 @@ namespace vcs_ImageProcessing_Example1
             pArr2a[0] = new Point(0, 0);
             pArr2a[1] = new Point(300 - 100, 600);
             pArr2a[2] = new Point(300 + 100, 600);
+
+            richTextBox1.Text += "P0, W = " + bitmap0.Width.ToString() + ", H = " + bitmap0.Height.ToString() + "\n";
+
             //pictureBox0 SP
 
             //------------------------------------------------------------  # 60個
@@ -89,6 +92,8 @@ namespace vcs_ImageProcessing_Example1
             pArr2b[1] = new Point(300 - 100, 600);
             pArr2b[2] = new Point(300 + 100, 600);
 
+            richTextBox1.Text += "P1, W = " + bitmap1.Width.ToString() + ", H = " + bitmap1.Height.ToString() + "\n";
+
             //pictureBox1 SP
 
             //------------------------------------------------------------  # 60個
@@ -98,16 +103,16 @@ namespace vcs_ImageProcessing_Example1
 
         void show_item_location()
         {
-            int W = 640;
-            int H = 400;
+            int W = 620;
+            int H = 620;
             int x_st = 10;
             int y_st = 30;
             int dx = W + 20;
             int dy = H + 50;
             pictureBox0.Size = new Size(W, H);
             pictureBox1.Size = new Size(W, H);
-            pictureBox2.Size = new Size(W, H);
-            pictureBox3.Size = new Size(W, H);
+            pictureBox2.Size = new Size(W, H/3);
+            pictureBox3.Size = new Size(W, H/3);
             pictureBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             pictureBox2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -126,7 +131,7 @@ namespace vcs_ImageProcessing_Example1
             richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1840, 940);
+            this.Size = new Size(1840, 960);
             this.Text = "vcs_MousePaint7";
 
             //設定執行後的表單起始位置, 正中央

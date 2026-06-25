@@ -25,13 +25,8 @@ namespace vcs_PictureResize
 
         int W_old = 0;
         int H_old = 0;
-        float dpix_old = 0;
-        float dpiy_old = 0;
-
         int W_new = 0;
         int H_new = 0;
-        float dpix_new = 0;
-        float dpiy_new = 0;
 
         public Form1()
         {
@@ -58,13 +53,8 @@ namespace vcs_PictureResize
             richTextBox1.Text += "寬度\t\t" + W_old.ToString() + " 個像素\n";
             richTextBox1.Text += "高度\t\t" + H_old.ToString() + " 個像素\n";
 
-            using (Graphics g = Graphics.FromImage(bitmap1))
-            {
-                dpix_old = g.DpiX;
-                dpiy_old = g.DpiY;
-                richTextBox1.Text += "水平解析度\t" + dpix_old.ToString() + " dpi\n";
-                richTextBox1.Text += "垂直解析度\t" + dpiy_old.ToString() + " dpi\n";
-            }
+            Graphics g = Graphics.FromImage(bitmap1);
+
             bt_open_file_setup();
             bt_exit_setup();
 
@@ -211,16 +201,16 @@ namespace vcs_PictureResize
             using (Bitmap bm = new Bitmap(W_new, H_new))
             {
                 Point[] points =
-                    {
-                        new Point(0, 0),
-                        new Point(W_new, 0),
-                        new Point(0, H_new),
-                    };
+                {
+                    new Point(0, 0),
+                    new Point(W_new, 0),
+                    new Point(0, H_new),
+                };
+
                 using (Graphics g = Graphics.FromImage(bm))
                 {
                     g.DrawImage(bitmap1, points);
                 }
-                bm.SetResolution(dpix_new, dpiy_new);  // 設定Bitmap解析度
 
                 if (bm != null)
                 {
@@ -246,14 +236,10 @@ namespace vcs_PictureResize
                     }
                 }
                 else
+                {
                     richTextBox1.Text += "無圖可存\n";
-
+                }
             }
-
-
-
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -261,9 +247,6 @@ namespace vcs_PictureResize
             //放大2成
             W_new = W_old * 6 / 5;
             H_new = H_old * 6 / 5;
-
-            dpix_new = dpix_old;
-            dpiy_new = dpiy_old;
 
             save_image_to_drive();
         }
@@ -277,23 +260,7 @@ namespace vcs_PictureResize
 
             richTextBox1.Text += "new, W = " + W_new.ToString() + ", H = " + H_new.ToString() + "\n";
 
-            dpix_new = dpix_old;
-            dpiy_new = dpiy_old;
-
             save_image_to_drive();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            //解析度變半
-            W_new = W_old;
-            H_new = H_old;
-
-            dpix_new = dpix_old / 2;
-            dpiy_new = dpiy_old / 2;
-
-            save_image_to_drive();
-
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -455,7 +422,6 @@ namespace vcs_PictureResize
 
             Size new_size = new Size(W2, H2);
             pictureBox2.Image = ResizeImage(image, new_size);
-
         }
     }
 }

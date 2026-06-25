@@ -48,97 +48,7 @@ namespace vcs_FolderFileName
             comboBox1.SelectedIndex = 0;
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            if (path != String.Empty)
-            {
-                //只撈一層的所有檔案
-                foreach (string fname in System.IO.Directory.GetFileSystemEntries(path))
-                {
-                    richTextBox1.Text += fname + "\n";
-                }
-            }
-
-            //只撈一層的檔案
-            total_size = 0;
-            total_files = 0;
-
-            if (path == String.Empty)
-            {
-                //path = @"D:\_git\vcs\_1.data\______test_files1";
-                path = @"D:\vcs\astro\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案";
-            }
-
-            richTextBox1.Text += path + "\n\n";
-
-            if (File.Exists(path))
-            {
-                // This path is a file
-                richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
-                ProcessFile(path, 0);
-                richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t容量 : " + ByteConversionGBMBKB(Convert.ToInt64(total_size)) + "\n";
-            }
-            else if (Directory.Exists(path))
-            {
-                // This path is a directory
-                //ProcessDirectory(path);
-
-
-                try
-                {
-                    //richTextBox1.Text += targetDirectory + "\n\n";
-                    //DirectoryInfo di = new DirectoryInfo(targetDirectory);
-                    //richTextBox1.Text += di.Name + "\n\n";
-
-                    // Process the list of files found in the directory.
-                    try
-                    {
-                        string[] fileEntries = Directory.GetFiles(path);
-                        Array.Sort(fileEntries);
-                        foreach (string fileName in fileEntries)
-                        {
-                            ProcessFile(fileName, step);
-                        }
-                        step = 0;
-                    }
-                    catch (UnauthorizedAccessException ex)
-                    {
-                        richTextBox1.Text += ex.Message + "\n";
-                        //MessageBox.Show(ex.Message);
-                        /*
-                        FileAttributes attr = (new FileInfo(filePath)).Attributes;
-                        Console.Write("UnAuthorizedAccessException: Unable to access file. ");
-                        if ((attr & FileAttributes.ReadOnly) > 0)
-                            Console.Write("The file is read-only.");
-                        */
-                    }
-                }
-                catch (IOException ex)
-                {
-                    richTextBox1.Text += "IOException, " + ex.GetType().Name + "\n";
-                    /*
-                    Console.WriteLine(
-                        "{0}: The write operation could not " +
-                        "be performed because the specified " +
-                        "part of the file is locked.",
-                        e.GetType().Name);
-                    */
-                }
-
-
-
-
-                richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t容量 : " + ByteConversionGBMBKB(Convert.ToInt64(total_size)) + "\n";
-                show_file_info();
-            }
-            else
-            {
-                //Console.WriteLine("{0} is not a valid file or directory.", path);
-                richTextBox1.Text += "非合法路徑或檔案\n";
-            }
-
-
-        }
+        //------------------------------------------------------------  # 60個
 
         private void button8_Click(object sender, EventArgs e)
         {
@@ -265,8 +175,6 @@ namespace vcs_FolderFileName
                     fileinfos.Add(new MyFileInfo(fi.FullName, fi.Length));
                     //fileinfos.Add(new MyFileInfo(fi.FullName.ToString(), fi.Length));
                     //fileinfos.Add(new MyFileInfo("aaaaaaa", 12345));
-
-
                 }
             }
             else
@@ -278,6 +186,8 @@ namespace vcs_FolderFileName
                 richTextBox1.Text += fi.Name + "\n";
             }
         }
+
+        //------------------------------------------------------------  # 60個
 
         void show_file_info()
         {
@@ -319,26 +229,12 @@ namespace vcs_FolderFileName
                 //設置ListView最後一行可見
                 listView1.Items[listView1.Items.Count - 1].EnsureVisible();
             }
-
         }
 
+        //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
-            /*  無法依子目錄排序 廢棄
-            if (path == String.Empty)
-                path = @"D:\_git\vcs\_1.data\______test_files1";
-
-            //C# 取得資料夾下的所有檔案(包括子目錄)
-            string[] files = System.IO.Directory.GetFiles(path, filetype2, System.IO.SearchOption.AllDirectories);
-            foreach (string filename in files)
-            {
-                //richTextBox1.Text += filename + "\n";
-                FileInfo fi = new FileInfo(filename);
-                richTextBox1.Text += fi.Name + "\n";
-            }
-            */
-
             total_size = 0;
             total_files = 0;
 
@@ -397,6 +293,8 @@ namespace vcs_FolderFileName
             listView1.Clear();
         }
 
+        //------------------------------------------------------------  # 60個
+
         const Int64 TB = (Int64)GB * 1024;//定義TB的計算常量
         const int GB = 1024 * 1024 * 1024;//定義GB的計算常量
         const int MB = 1024 * 1024;//定義MB的計算常量
@@ -424,58 +322,7 @@ namespace vcs_FolderFileName
             System.Diagnostics.Process.Start(listView1.Items[selNdx].Text);
         }
 
-        private void button9_Click(object sender, EventArgs e)
-        {
-            /*
-            richTextBox1.Text += "你選擇了 : " + listView1.SelectedIndices.Count.ToString() + " 個檔案, 分別是\n";
-            for (int i = 0; i < listView1.SelectedIndices.Count; i++)
-            {
-                richTextBox1.Text += listView1.SelectedItems[i] + "\n";
-            }
-
-            richTextBox1.Text += "播放\n";
-            */
-
-            int selNdx;
-            string all_filename = string.Empty;
-            string player_path = @"C:\Program Files (x86)\DAUM\PotPlayer\PotPlayerMini.exe";
-            if (this.listView1.SelectedIndices.Count <= 0)  //總共選擇的個數
-            {
-                richTextBox1.Text += "無檔可播\n";
-                return;
-            }
-
-            //richTextBox1.Text += "總共選了 : " + listView1.SelectedItems.Count.ToString() + " 個檔案，分別是 : \n";
-            //for (int i = 0; i < listView1.SelectedIndices.Count; i++)
-            for (int i = 0; i < listView1.SelectedItems.Count; i++)
-            {
-                selNdx = listView1.SelectedIndices[i];
-                listView1.Items[selNdx].Selected = true;    //選到的項目
-                //richTextBox1.Text += listView1.Items[selNdx].Text + "\n";
-                all_filename += " \"" + listView1.Items[selNdx].Text + "\"";
-            }
-
-            //指定應用程式路徑
-            //string target = @"C:\Program Files\DAUM\PotPlayer\PotPlayerMini.exe";
-            string target = player_path;
-
-            //方法一
-            //Process.Start(target, "參數");
-            //Process.Start(target, all_filename);
-
-            //方法二
-            ProcessStartInfo pInfo = new ProcessStartInfo(target);
-            pInfo.Arguments = all_filename;
-
-            richTextBox1.Text += "target : " + target + "\n";
-            richTextBox1.Text += "all_filename : " + all_filename + "\n";
-
-            using (Process process = new Process())
-            {
-                process.StartInfo = pInfo;
-                process.Start();
-            }
-        }
+        //------------------------------------------------------------  # 60個
 
         private void listView1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -552,10 +399,7 @@ namespace vcs_FolderFileName
             }
         }
 
-        private void button6_Click(object sender, EventArgs e)
-        {
-
-        }
+        //------------------------------------------------------------  # 60個
 
         private void button7_Click(object sender, EventArgs e)
         {
@@ -599,3 +443,4 @@ namespace vcs_FolderFileName
 /*  可搬出
 
 */
+

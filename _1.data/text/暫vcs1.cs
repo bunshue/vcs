@@ -1,10 +1,96 @@
 ﻿
 
 
+            Bitmap bitmap1 = VerifyCodeHelper.CreateVerifyCodeBmp(out code);
+            Bitmap bitmap2 = new Bitmap(bitmap1, 300, 200);  //改變大小
+
+
+
+
+
+//------------------------------------------------------------  # 60個
+
+            /// 生成隨機字符碼
+            int codeLen = 10;
+
+            char[] chs = new char[codeLen];
+
+            for (int i = 0; i < codeLen; i++)
+            {
+                if (chs[i] == '\0')
+                {
+                    chs[i] = CreateEnOrNumChar();
+                }
+            }
+
+            string code = new string(chs, 0, chs.Length);
+            richTextBox1.Text += code + "\n";
+
+//3030
+
+        // 隨機數生成器
+        Random rnd = new Random(unchecked((int)DateTime.Now.Ticks));
+        // 英文與數字串
+        string EnglishOrNumChars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+
+        // 生成英文或數字字符
+        protected char CreateEnOrNumChar()
+        {
+            return EnglishOrNumChars[rnd.Next(0, EnglishOrNumChars.Length)];
+        }
+
+//------------------------------------------------------------  # 60個
+
+
+//------------------------------------------------------------  # 60個
+
+                        FileAttributes attr = (new FileInfo(filePath)).Attributes;
+                        Console.Write("UnAuthorizedAccessException: Unable to access file. ");
+                        if ((attr & FileAttributes.ReadOnly) > 0)
+                            Console.Write("The file is read-only.");
+
+//------------------------------------------------------------  # 60個
+
+                        string[] fileEntries = Directory.GetFiles(path);
+                        Array.Sort(fileEntries);
+                        foreach (string fileName in fileEntries)
+                        {
+                            ProcessFile(fileName, step);
+                        }
+
+//------------------------------------------------------------  # 60個
+
+            if (path != String.Empty)
+            {
+                //只撈一層的所有檔案
+                foreach (string fname in System.IO.Directory.GetFileSystemEntries(path))
+                {
+                    richTextBox1.Text += fname + "\n";
+                }
+            }
+
+//------------------------------------------------------------  # 60個
+
+            if (path == String.Empty)
+                path = @"D:\_git\vcs\_1.data\______test_files1";
+
+            //C# 取得資料夾下的所有檔案(包括子目錄)
+            string[] files = System.IO.Directory.GetFiles(path, filetype2, System.IO.SearchOption.AllDirectories);
+            foreach (string filename in files)
+            {
+                //richTextBox1.Text += filename + "\n";
+                FileInfo fi = new FileInfo(filename);
+                richTextBox1.Text += fi.Name + "\n";
+            }
+
+//------------------------------------------------------------  # 60個
+
+
 //System.Media.SystemSounds.Beep.Play();
 
 
-
+//------------------------------------------------------------  # 60個
 
         //重定義基類OnPaint()方法
         protected override void OnPaint(PaintEventArgs e)

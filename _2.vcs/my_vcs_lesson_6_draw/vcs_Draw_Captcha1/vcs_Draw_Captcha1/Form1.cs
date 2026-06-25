@@ -8,9 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;    //for MemoryStream
+using System.Drawing.Text;      //for TextRenderingHint
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D; //for LinearGradientBrush
-using System.Drawing.Text;      //for TextRenderingHint
 using System.Security.Cryptography; //for RNGCryptoServiceProvider
 
 // 全自動區分電腦和人類的公開圖靈測試
@@ -194,11 +194,10 @@ namespace vcs_Draw_Captcha1
         //Captcha 00 ST
         private void draw_captcha00()
         {
-            VryImgGen captcha = new VryImgGen();
+            CaptchaCode00 captcha = new CaptchaCode00();
             captcha.Length = 10;
             string code = captcha.CreateVerifyCode();
             //richTextBox1.Text += code + "\n";
-
             Bitmap bitmap1 = captcha.CreateImage(code);
             pictureBox00.Image = bitmap1;
         }
@@ -210,15 +209,9 @@ namespace vcs_Draw_Captcha1
         private void draw_captcha01()
         {
             //CreateCheckCodeImage01(GenerateCheckCodes01(10));
-            GetCheckCode01();
-        }
-
-        void GetCheckCode01()
-        {
             int len = 10;
             string code = GenerateCheckCodes01(len);
             byte[] bytes = CreateCheckCodeImage01(code);
-            return;
         }
 
         private string GenerateCheckCodes01(int iCount)
@@ -1927,6 +1920,8 @@ namespace vcs_Draw_Captcha1
         //------------------------------------------------------------  # 60個
     }
 
+    //------------------------------------------------------------  # 60個
+
     /// <summary>
     /// 驗證碼
     /// </summary>
@@ -2119,9 +2114,9 @@ namespace vcs_Draw_Captcha1
     //------------------------------------------------------------  # 60個
 
     /// <summary>
-    /// VryImgGen 的摘要說明
+    /// CaptchaCode00 的摘要說明
     /// </summary>
-    public class VryImgGen
+    public class CaptchaCode00
     {
         public static string ChineseChars = String.Empty;
 
@@ -2130,7 +2125,7 @@ namespace vcs_Draw_Captcha1
         /// </summary>
         protected static readonly string EnglishOrNumChars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-        public VryImgGen()
+        public CaptchaCode00()
         {
             rnd = new Random(unchecked((int)DateTime.Now.Ticks));
         }
@@ -2577,7 +2572,7 @@ namespace vcs_Draw_Captcha1
             }
             //定義一個含10種字體的數組
             String[] fontFamily ={ "Arial", "Verdana", "Comic Sans MS", "Impact", "Haettenschweiler",
-"Lucida Sans Unicode", "Garamond", "Courier New", "Book Antiqua", "Arial Narrow" };
+                                     "Lucida Sans Unicode", "Garamond", "Courier New", "Book Antiqua", "Arial Narrow" };
 
             SolidBrush sb = new SolidBrush(GetControllableColor(0));
             //通過循環,繪制每個字符,
@@ -2682,6 +2677,8 @@ namespace vcs_Draw_Captcha1
             }
         }
     }
+
+    //------------------------------------------------------------  # 60個
 
     /// <summary>
     /// 驗證碼生成類
@@ -2892,7 +2889,6 @@ namespace vcs_Draw_Captcha1
             set;
         }
         private Point[] strPoint = null;
-
 
         private Double gaussianDeviation = 0;
         /// <summary>
@@ -3179,6 +3175,7 @@ namespace vcs_Draw_Captcha1
                 g.DrawPath(p, gPath1);
                 p.Dispose();
             }
+
             for (int i = 0; i < lineRandNum; i++)
             {
                 Pen p = new Pen(GetRandomDeepColor());
@@ -3220,7 +3217,6 @@ namespace vcs_Draw_Captcha1
                 g.DrawLine(p, pt1, pt2);
                 p.Dispose();
             }
-
             return bitmap1;
         }
         //#endregion
@@ -4019,7 +4015,6 @@ namespace vcs_Draw_Captcha1
                     Color newColor = Color.FromArgb(pixel.A, pR, pG, pB);
 
                     bitmap.SetPixel(x, y, newColor);
-
                 }
             }
             // 回傳結果
@@ -4071,7 +4066,6 @@ namespace vcs_Draw_Captcha1
 
                         // 跳去下一個 Pixel
                         p += 3;
-
                     }
                     // 跨越畸零地
                     p += nOffset;
@@ -4092,7 +4086,6 @@ namespace vcs_Draw_Captcha1
         /// <returns></returns>
         public Bitmap AdjustRippleEffect(Bitmap src, short nWave)
         {
-
             int nWidth = src.Width;
             int nHeight = src.Height;
 
@@ -4130,7 +4123,6 @@ namespace vcs_Draw_Captcha1
                         fp[x, y].X = (float)0.0;
                         pt[x, y].X = 0;
                     }
-
 
                     if (newY > 0 && newY < nHeight)
                     {
@@ -4230,7 +4222,6 @@ namespace vcs_Draw_Captcha1
 
                         // 跳去下一個 Pixel
                         p += 3;
-
                     }
                     // 跨越畸零地
                     p += nOffset;
@@ -4337,6 +4328,8 @@ namespace vcs_Draw_Captcha1
         }
         //#endregion
     } //END Class DrawValidationCode
+
+    //------------------------------------------------------------  # 60個
 
     //高斯模糊算法
     /// <summary>
