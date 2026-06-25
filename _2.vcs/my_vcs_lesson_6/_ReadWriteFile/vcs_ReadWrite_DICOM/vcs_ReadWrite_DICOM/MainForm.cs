@@ -424,5 +424,3 @@ namespace vcs_ReadWrite_DICOM
 
 */
 
-
-

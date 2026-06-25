@@ -693,7 +693,7 @@ namespace vcs_Draw_Example1
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //Bitmap bitmap1 = new Bitmap(W, W);
-            //bitmap1.SetResolution(300, 300);
+            //bitmap1.SetResolution(300, 300);  // 設定Bitmap解析度
 
             //Graphics g = Graphics.FromImage(bitmap1);
 

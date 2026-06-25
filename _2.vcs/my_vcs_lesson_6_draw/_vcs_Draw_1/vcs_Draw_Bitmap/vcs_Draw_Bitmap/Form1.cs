@@ -669,20 +669,36 @@ namespace vcs_Draw_Bitmap
 
         private void button11_Click(object sender, EventArgs e)
         {
-            //設置圖像的分辨率
+            // 設定Bitmap解析度
+            /*
             Graphics g = this.pictureBox1.CreateGraphics();
             Bitmap bitmap1 = new Bitmap(filename);
 
-            bitmap1.SetResolution(300f, 300f);
+            bitmap1.SetResolution(300f, 300f);  // 設定Bitmap解析度
             bitmap1.Save("圖片0300.bmp", ImageFormat.Bmp);
             g.DrawImage(bitmap1, 0, 0, bitmap1.Width, bitmap1.Height);
 
-            bitmap1.SetResolution(1200f, 1200f);
+            bitmap1.SetResolution(1200f, 1200f);  // 設定Bitmap解析度
             g.DrawImage(bitmap1, 310, 0, bitmap1.Width, bitmap1.Height);
             bitmap1.Save("圖片1200.bmp", ImageFormat.Bmp);
 
-            bitmap1.SetResolution(3f, 3f);
+            bitmap1.SetResolution(3f, 3f);  // 設定Bitmap解析度
             bitmap1.Save("圖片0003.bmp", ImageFormat.Bmp);
+
+            pictureBox1.Image = bitmap1;
+            */
+
+            //------------------------------------------------------------  # 60個
+
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            Image image = Image.FromFile(filename1);
+            //pictureBox1.Image = image;
+
+            Bitmap bitmap1 = new Bitmap(filename1);
+            //bitmap1.SetResolution(3, 3);  // 設定Bitmap解析度
+
+            Graphics g = Graphics.FromImage(bitmap1);
+            //g.Clear(Color.FromName("white"));
 
             pictureBox1.Image = bitmap1;
         }
@@ -904,9 +920,9 @@ namespace vcs_Draw_Bitmap
             Bitmap bmp = new Bitmap(filename, true);
             g.DrawImage(bmp, 0, 0, W, H);
             g.DrawImage(bmp, 0, 450, W, H / 2);
-*/
 
-/*
+//------------------------------------------------------------  # 60個
+
             //img.Save(Response.OutputStream, ImageFormat.Jpeg);;
 
             //bmp.Save ( Response.OutputStream , System.Drawing.Imaging.ImageFormat.Jpeg);
@@ -951,10 +967,6 @@ bmp.MakeTransparent(Color.Magenta);
 
 //------------------------------------------------------------  # 60個
 
-
-
-//------------------------------------------------------------  # 60個
-
 g.Clear(BackColor);     //清除整個繪圖介面，並使用指定的背景色彩填滿它。
 
 可以填滿透明的顏色~~~~~~
@@ -975,7 +987,31 @@ g.DrawImage(img, destRect1, srcRect, units);
 
 //------------------------------------------------------------  # 60個
 
+            Bitmap bitmap1 = new Bitmap(w, h);
+            Graphics g = Graphics.FromImage(bitmap1);
 
+            g.SmoothingMode = SmoothingMode.AntiAlias;//消除鋸齒
+            g.CompositingQuality = CompositingQuality.HighQuality;
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
+//------------------------------------------------------------  # 60個
+
+Graphics g = Graphics.FromImage(ThumbNail);
+
+// 設置畫布的描繪質量
+g.CompositingQuality = CompositingQuality.HighSpeed;
+g.CompositingQuality = CompositingQuality.HighQuality;
+g.SmoothingMode = SmoothingMode.HighQuality;
+g.SmoothingMode = SmoothingMode.HighSpeed;
+g.SmoothingMode = SmoothingMode.AntiAlias;	//反鋸齒
+g.SmoothingMode = SmoothingMode.HighQuality;
+g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+g.InterpolationMode = InterpolationMode.HighQualityBilinear;
+g.InterpolationMode = InterpolationMode.High;
+
+绘制圆润指针、曲线
+g.SmoothingMode = SmoothingMode.HighQuality;//使画出的指针、线条更平滑、高质量
+
+//------------------------------------------------------------  # 60個
 
 */

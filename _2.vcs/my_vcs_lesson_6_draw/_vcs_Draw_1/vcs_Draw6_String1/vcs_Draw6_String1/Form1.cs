@@ -11,7 +11,7 @@ using System.Drawing.Imaging;   //for ImageFormat
 using System.Drawing.Drawing2D; //for LinearGradientBrush
 using System.Drawing.Text;      //for TextRenderingHint
 
-namespace vcs_Draw6_String
+namespace vcs_Draw6_String1
 {
     public partial class Form1 : Form
     {

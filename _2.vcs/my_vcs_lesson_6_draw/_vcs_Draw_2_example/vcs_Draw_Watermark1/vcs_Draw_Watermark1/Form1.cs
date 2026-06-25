@@ -228,18 +228,4 @@ namespace vcs_Draw_Watermark1
 
 /*  可搬出
 
-            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
-            Image image = Image.FromFile(filename1);
-            //pictureBox1.Image = image;
-
-            Bitmap bitmap1 = new Bitmap(filename1);
-            //bitmap1.SetResolution(3, 3);
-
-            Graphics g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.FromName("white"));
-
-            g.InterpolationMode = InterpolationMode.High;
-            g.SmoothingMode = SmoothingMode.HighQuality;
-
-            pictureBox1.Image = bitmap1;
 */

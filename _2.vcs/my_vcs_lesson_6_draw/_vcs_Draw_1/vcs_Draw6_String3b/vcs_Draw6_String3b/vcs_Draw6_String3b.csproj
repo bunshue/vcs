@@ -8,8 +8,8 @@
     <ProjectGuid>{B7F57C42-3B27-46C3-A668-114ECB58B8E3}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_Draw6_String2</RootNamespace>
-    <AssemblyName>vcs_Draw6_String2</AssemblyName>
+    <RootNamespace>vcs_Draw6_String3b</RootNamespace>
+    <AssemblyName>vcs_Draw6_String3b</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

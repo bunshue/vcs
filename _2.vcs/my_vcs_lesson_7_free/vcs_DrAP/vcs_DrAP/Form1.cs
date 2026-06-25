@@ -259,7 +259,6 @@ namespace vcs_DrAP
             dy = 35;
             cb_option1.Location = new Point(x_st + 100 + 100 + dx * 1 - 100, y_st + dy + 5);
             cb_option2.Location = new Point(x_st + 100 + 100 + dx * 1 - 100, y_st + dy + 5 + 17);
-            cb_option3.Location = new Point(x_st + 100 + 100 + dx * 1 - 100, y_st + dy + 5 + 34);
 
             x_st = 1200 + 100 - 30;
             y_st = 10;
@@ -1427,31 +1426,9 @@ namespace vcs_DrAP
                             //python only 不包含新進檔案 與 書附光碟
                         }
                     }
-                    else if ((search_mode == SEARCH_MODE_VCS) && (cb_option3.Checked == true))
+                    else if (search_mode == SEARCH_MODE_VCS)
                     {
-                        string search_folder = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example";
-                        if (subdirectory.Contains(search_folder))
-                        {
                             ProcessDirectoryS(subdirectory);
-                        }
-                        else
-                        {
-                            result_str += "跳過 " + subdirectory + "\n";
-                            continue;
-                        }
-                    }
-                    else if ((search_mode == SEARCH_MODE_VCS) && (cb_option3.Checked == false))
-                    {
-                        string skip_folder = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example";
-                        if (subdirectory.Contains(skip_folder))
-                        {
-                            result_str += "跳過 " + subdirectory + "\n";
-                            continue;
-                        }
-                        else
-                        {
-                            ProcessDirectoryS(subdirectory);
-                        }
                     }
                     else
                     {
@@ -3168,3 +3145,6 @@ namespace vcs_DrAP
 
 */
 
+
+//private void bt_test1_Click(object sender, EventArgs e)
+//private void bt_test2_Click(object sender, EventArgs e)

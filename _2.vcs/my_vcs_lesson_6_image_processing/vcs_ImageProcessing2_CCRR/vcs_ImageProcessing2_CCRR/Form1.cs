@@ -686,7 +686,7 @@ namespace vcs_ImageProcessing2_CCRR
 
             g.DrawImage(bmp, 0, 0);
 
-            bmp.SetResolution(75f, 75f);
+            bmp.SetResolution(75f, 75f);  // 設定Bitmap解析度
 
             g.DrawImage(bmp, 350, 0);
 
@@ -694,9 +694,9 @@ namespace vcs_ImageProcessing2_CCRR
             richTextBox1.Text += "V res : " + bmp.VerticalResolution.ToString() + "\n";
 
             /*
-            bmp.SetResolution(300f, 300f);
+            bmp.SetResolution(300f, 300f);  // 設定Bitmap解析度
             g.DrawImage(bmp, 0, 0);
-            bmp.SetResolution(1200f, 1200f);
+            bmp.SetResolution(1200f, 1200f);  // 設定Bitmap解析度
             g.DrawImage(bmp, 350, 0);
             */
 

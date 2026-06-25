@@ -215,7 +215,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(200, 60);
             this.button11.TabIndex = 136;
-            this.button11.Text = "設置圖像的分辨率";
+            this.button11.Text = "設定Bitmap解析度";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 

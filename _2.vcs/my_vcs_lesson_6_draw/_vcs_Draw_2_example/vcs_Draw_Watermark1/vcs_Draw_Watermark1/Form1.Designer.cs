@@ -102,9 +102,10 @@
             // 
             // bt_reset
             // 
+            this.bt_reset.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_reset.Location = new System.Drawing.Point(241, 222);
             this.bt_reset.Name = "bt_reset";
-            this.bt_reset.Size = new System.Drawing.Size(66, 40);
+            this.bt_reset.Size = new System.Drawing.Size(72, 36);
             this.bt_reset.TabIndex = 9;
             this.bt_reset.Text = "Reset";
             this.bt_reset.UseVisualStyleBackColor = true;

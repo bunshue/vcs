@@ -418,6 +418,7 @@ namespace vcs_ImageProcessing7
 
         private void button15_Click(object sender, EventArgs e)
         {
+            // 設定Bitmap解析度
             //十三、以不同分辨率顯示圖像
             //原理：bitmap 類的 setresolution 方法。
             //以不同的分辨率顯示圖像
@@ -425,7 +426,7 @@ namespace vcs_ImageProcessing7
             for (int i = 10; i < this.panel1.Height; i += 2)
             {
                 g.Clear(Color.Gray);
-                MyBitmap.SetResolution(i, i);
+                MyBitmap.SetResolution(i, i);  // 設定Bitmap解析度
                 g.DrawImage(MyBitmap, 0, 0);
                 System.Threading.Thread.Sleep(100);
             }

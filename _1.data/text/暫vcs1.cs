@@ -1,4 +1,5 @@
 ﻿
+
         //重定義基類OnPaint()方法
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -1238,9 +1239,6 @@ Graphics g = e.Graphics;      //定义g为该窗体控件的画布　
 
 // Graphics g = this.CreateGraphics(); //避免使用此方法，会出现闪烁
 // Graphics g = this.CreateGraphics(); //避免使用此方法，会出现闪烁
-
-绘制圆润指针、曲线
-g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;//使画出的指针、线条更平滑、高质量
 
 //------------------------------------------------------------  # 60個
 
@@ -3316,15 +3314,6 @@ https://www.zhangshengrong.com/p/yOXD5ejR1B/
 
 //------------------------------------------------------------  # 60個
 
-            Bitmap bitmap1 = new Bitmap(w, h);
-            Graphics g = Graphics.FromImage(bitmap1);
-
-            g.SmoothingMode = SmoothingMode.AntiAlias;//消除鋸齒
-            g.CompositingQuality = CompositingQuality.HighQuality;
-            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-
-//------------------------------------------------------------  # 60個
-
 Image<Bgr, byte> image1 = capture.QueryFrame();
 image1 = capture.QueryFrame();
 ImageViewer viewer = new ImageViewer();
@@ -4029,20 +4018,6 @@ using System.Runtime.InteropServices;
 
 關於MCI Command String多媒體設備的程序接口的詳細資料，可以參看http://blog.csdn.net/psongchao/article/details/1487788
         				
-//------------------------------------------------------------  # 60個
-
-Graphics g = Graphics.FromImage(ThumbNail);
-
-// 設置畫布的描繪質量
-g.CompositingQuality = CompositingQuality.HighSpeed;
-g.CompositingQuality = CompositingQuality.HighQuality;
-g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-g.SmoothingMode = SmoothingMode.HighSpeed;
-g.SmoothingMode = SmoothingMode.AntiAlias;	//反鋸齒
-g.SmoothingMode = SmoothingMode.HighQuality;
-g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-g.InterpolationMode = InterpolationMode.HighQualityBilinear;
-
 //------------------------------------------------------------  # 60個
 
 drawdraw
@@ -6353,25 +6328,6 @@ this.Cursor = new Cursor(new Bitmap(@"C:\______test_files\reuse.bmp").GetHicon()
 
       g.DrawLines(pen, points);
 
-
-//------------------------------------------------------------  # 60個
-
-//畫實心圓圈，就是把圈圈填滿，方法有二!
-
-方法一：(用圖片填滿圓圈)
-      Graphics g = this.CreateGraphics();
-      TextureBrush tb = new TextureBrush(new Bitmap(@"pic_point.jpg"));
-     
-      //20, 20 為座標位置，10, 10 為圓的大小
-      g.FillEllipse(tb, 20, 20, 10, 10);
-
-方法二：(用筆刷填滿圓圈)
-      Graphics g = this.CreateGraphics();
-      SolidBrush sb = new SolidBrush(Color.Blue);
-      
-      //20, 20 為座標位置，10, 10 為圓的大小
-      g.FillEllipse(sb, 20, 20, 10, 10);
-
 //------------------------------------------------------------  # 60個
 
 記得在((TextBox)sender).SelectAll();後邊加上一句e.SuppressKeyPress = true;
@@ -7075,31 +7031,7 @@ Pen p = new Pen(Color.Blue, 5);
 p.Color = Color.Red;
 p.Width = 2;
 
-筆刷物件（單色S、圖案T、花紋H、漸層L）
-
-筆刷類別
-SolidBrush		建立單一顏色的筆刷
-	SolidBrush sb = new SolidBrush(Color.Red);
-	Pen p = new Pen(sb, 2);
-TextureBrush		建立以圖形物件當作圖案的筆刷
-	TextureBrush tb = new TextureBrush("bmp1.bmp");
-	Pen p = new Pen(tb, 2);
-HatchBrush		建立花紋筆刷
-	HatchBrush 花紋筆刷變數 = new HatchBrush(花紋筆刷, 前景顏色, 背景顏色);
-	HatchBrush hb = new HatchBrush(HatchStyle.Wave, Color.Blue, Color.Red);
-	Pen p = new Pen(hb, 10);
-	(要先加入：using System.Drawing.Drawing2D;)
-LinearGradienBrush	建立漸層筆刷
-	LinearGradientBrush 漸層筆刷變數 = new LinearGradientBrush(漸層矩形區域, 前景顏色, 背景顏色, 漸層傾斜角度);
-	
-	Rectangle rect1 = new Rectangle(0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
-	LinearGradientBrush lgb = new LinearGradientBrush(rect1, Color.Blue, Color.Red, 90);
-	Pen p = new Pen(lgb, 10);
-	(要先加入：using System.Drawing.Drawing2D;)
-
-
 Pen 畫筆 = new Pen(畫筆顏色, 畫筆粗細);
-
 
 設定顏色的方法	呼叫靜態函式：Color.FromArgb()
 
@@ -7203,10 +7135,6 @@ Form2的元件的Modifiers要改成Internal, 預設為private
 6．畫Bezier曲線
 [格式1]：public void DrawBezier(Pen pen,Point pt1,Point pt2,Point pt3,Point pt4);
 [格式2]：public void DrawBezier(Pen pen,float x1,float y1,float x2,float y2,float x3,float y3,float x4,float y4);
-
-10．繪制路徑
-[格式]：public void DrawPath(Pen pen，GraphicsPath path)；
-
 
 畫圓球
 e.Graphics.FillEllipse(new SolidBrush(aBall.color), aBall.pt.X - 10, aBall.pt.Y - 10, 20, 20);
@@ -7537,15 +7465,12 @@ vcs_ReadWrite_WORD1
 string filename = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..")) + @"\vcs_ReadWrite_WORD1.docx";
 vcs_ReadWrite_WORD1.docx
 
-
 RW/Excel中的
 參考/加入參考的VBIDE是怎麼弄出來的?
 
 G: C#程序未能找到引用的組件VBIDE解決過程
 
 //------------------------------------------------------------  # 60個
-
-//剪下 = 複製到剪貼簿 + 把選取區域塗成背景色  SolidBrush br = new SolidBrush(pictureBox1.BackColor)
 
 淺談抓取網頁數據（奉上Demo）
 

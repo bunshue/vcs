@@ -1,4 +1,4 @@
-﻿namespace vcs_Draw6_String
+﻿namespace vcs_Draw6_String1
 {
     partial class Form1
     {

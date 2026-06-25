@@ -52,7 +52,7 @@
             // bnOpen1
             // 
             this.bnOpen1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bnOpen1.Location = new System.Drawing.Point(24, 8);
+            this.bnOpen1.Location = new System.Drawing.Point(10, 6);
             this.bnOpen1.Name = "bnOpen1";
             this.bnOpen1.Size = new System.Drawing.Size(200, 60);
             this.bnOpen1.TabIndex = 0;
@@ -63,7 +63,7 @@
             // bnSave
             // 
             this.bnSave.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bnSave.Location = new System.Drawing.Point(24, 174);
+            this.bnSave.Location = new System.Drawing.Point(10, 193);
             this.bnSave.Name = "bnSave";
             this.bnSave.Size = new System.Drawing.Size(200, 60);
             this.bnSave.TabIndex = 2;
@@ -74,7 +74,7 @@
             // bnTags
             // 
             this.bnTags.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bnTags.Location = new System.Drawing.Point(24, 118);
+            this.bnTags.Location = new System.Drawing.Point(10, 130);
             this.bnTags.Name = "bnTags";
             this.bnTags.Size = new System.Drawing.Size(200, 60);
             this.bnTags.TabIndex = 1;
@@ -85,7 +85,7 @@
             // bnResetWL
             // 
             this.bnResetWL.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bnResetWL.Location = new System.Drawing.Point(24, 231);
+            this.bnResetWL.Location = new System.Drawing.Point(10, 256);
             this.bnResetWL.Name = "bnResetWL";
             this.bnResetWL.Size = new System.Drawing.Size(200, 60);
             this.bnResetWL.TabIndex = 3;
@@ -212,7 +212,7 @@
             // bnOpen2
             // 
             this.bnOpen2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bnOpen2.Location = new System.Drawing.Point(24, 63);
+            this.bnOpen2.Location = new System.Drawing.Point(10, 68);
             this.bnOpen2.Name = "bnOpen2";
             this.bnOpen2.Size = new System.Drawing.Size(200, 60);
             this.bnOpen2.TabIndex = 16;

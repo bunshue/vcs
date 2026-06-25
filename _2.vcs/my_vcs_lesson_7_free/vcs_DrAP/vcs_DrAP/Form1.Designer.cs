@@ -77,7 +77,6 @@
             this.bt_save_file_data = new System.Windows.Forms.Button();
             this.bt_clear3 = new System.Windows.Forms.Button();
             this.cb_option2 = new System.Windows.Forms.CheckBox();
-            this.cb_option3 = new System.Windows.Forms.CheckBox();
             this.groupbox_python = new System.Windows.Forms.GroupBox();
             this.rb_python_search1 = new System.Windows.Forms.RadioButton();
             this.bt_edit_python_files = new System.Windows.Forms.Button();
@@ -645,16 +644,6 @@
             this.cb_option2.UseVisualStyleBackColor = true;
             this.cb_option2.CheckedChanged += new System.EventHandler(this.cb_option2_CheckedChanged);
             // 
-            // cb_option3
-            // 
-            this.cb_option3.AutoSize = true;
-            this.cb_option3.Location = new System.Drawing.Point(1271, 75);
-            this.cb_option3.Name = "cb_option3";
-            this.cb_option3.Size = new System.Drawing.Size(72, 16);
-            this.cb_option3.TabIndex = 63;
-            this.cb_option3.Text = "只找範例";
-            this.cb_option3.UseVisualStyleBackColor = true;
-            // 
             // groupbox_python
             // 
             this.groupbox_python.Controls.Add(this.rb_python_search1);
@@ -928,7 +917,6 @@
             this.Controls.Add(this.bt_compare);
             this.Controls.Add(this.groupbox_result);
             this.Controls.Add(this.groupbox_python);
-            this.Controls.Add(this.cb_option3);
             this.Controls.Add(this.cb_option2);
             this.Controls.Add(this.bt_search_pattern_opengl);
             this.Controls.Add(this.bt_open_dir2);
@@ -1058,7 +1046,6 @@
         private System.Windows.Forms.Button bt_search_pattern_opengl;
         private System.Windows.Forms.CheckBox cb_option2;
         private System.Windows.Forms.Button bt_edit_python_files;
-        private System.Windows.Forms.CheckBox cb_option3;
         private System.Windows.Forms.GroupBox groupbox_python;
         private System.Windows.Forms.RadioButton rb_python_search1;
         private System.Windows.Forms.RadioButton rb_python_search0;

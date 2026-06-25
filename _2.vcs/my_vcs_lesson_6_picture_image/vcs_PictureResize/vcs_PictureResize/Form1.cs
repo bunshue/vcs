@@ -220,8 +220,7 @@ namespace vcs_PictureResize
                 {
                     g.DrawImage(bitmap1, points);
                 }
-                bm.SetResolution(dpix_new, dpiy_new);
-
+                bm.SetResolution(dpix_new, dpiy_new);  // 設定Bitmap解析度
 
                 if (bm != null)
                 {
@@ -460,3 +459,15 @@ namespace vcs_PictureResize
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/

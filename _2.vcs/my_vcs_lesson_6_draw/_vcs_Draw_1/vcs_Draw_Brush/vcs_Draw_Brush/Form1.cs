@@ -789,11 +789,62 @@ namespace vcs_Draw_Brush
                 LinearGradientMode temp = (LinearGradientMode)obj.GetValue(x);
                 richTextBox1.Text += temp.ToString() + "\n";
             }
-*/
+
+//------------------------------------------------------------  # 60個
 
 //LinearGradientBrush：使用沿漸變混合的兩種顏色進行繪制
 
 //Graphics g = pictureBox1.CreateGraphics();
 
 //                    Brush menu_brush = new LinearGradientBrush(e.Bounds, Color.Red, Color.Black, 90);
+
+//------------------------------------------------------------  # 60個
+
+//畫實心圓圈，就是把圈圈填滿，方法有二!
+
+方法一：(用圖片填滿圓圈)
+      Graphics g = this.CreateGraphics();
+      TextureBrush tb = new TextureBrush(new Bitmap(@"pic_point.jpg"));
+     
+      //20, 20 為座標位置，10, 10 為圓的大小
+      g.FillEllipse(tb, 20, 20, 10, 10);
+
+方法二：(用筆刷填滿圓圈)
+      Graphics g = this.CreateGraphics();
+      SolidBrush sb = new SolidBrush(Color.Blue);
+      
+      //20, 20 為座標位置，10, 10 為圓的大小
+      g.FillEllipse(sb, 20, 20, 10, 10);
+
+//------------------------------------------------------------  # 60個
+
+筆刷物件（單色S、圖案T、花紋H、漸層L）
+
+筆刷類別
+SolidBrush		建立單一顏色的筆刷
+	SolidBrush sb = new SolidBrush(Color.Red);
+	Pen p = new Pen(sb, 2);
+TextureBrush		建立以圖形物件當作圖案的筆刷
+	TextureBrush tb = new TextureBrush("bmp1.bmp");
+	Pen p = new Pen(tb, 2);
+HatchBrush		建立花紋筆刷
+	HatchBrush 花紋筆刷變數 = new HatchBrush(花紋筆刷, 前景顏色, 背景顏色);
+	HatchBrush hb = new HatchBrush(HatchStyle.Wave, Color.Blue, Color.Red);
+	Pen p = new Pen(hb, 10);
+LinearGradienBrush	建立漸層筆刷
+	LinearGradientBrush 漸層筆刷變數 = new LinearGradientBrush(漸層矩形區域, 前景顏色, 背景顏色, 漸層傾斜角度);
+	
+	Rectangle rect1 = new Rectangle(0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
+	LinearGradientBrush lgb = new LinearGradientBrush(rect1, Color.Blue, Color.Red, 90);
+	Pen p = new Pen(lgb, 10);
+
+//------------------------------------------------------------  # 60個
+
+//剪下 = 複製到剪貼簿 + 把選取區域塗成背景色  SolidBrush br = new SolidBrush(pictureBox1.BackColor)
+
+//------------------------------------------------------------  # 60個
+
+*/
+
+
 

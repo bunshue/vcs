@@ -264,7 +264,7 @@ namespace vcs_ReadWrite_Barcode
         public CSharpCode39()
         {
             this.initData();
-            
+
         }
         public CSharpCode39(string dataToEncode)
         {
@@ -283,8 +283,8 @@ namespace vcs_ReadWrite_Barcode
             this._moduleHeight = 15f;//模块高度毫米
             this._moduleWidth = 0.35f;//模块宽度毫米
             this._ratio = 3f;
-            this._marginX =2;
-            this._marginY =2;
+            this._marginX = 2;
+            this._marginY = 2;
             this._checksum = true;
             this._isDisplayCheckCode = false;
             this._isDisplayStartStopSign = false;
@@ -318,7 +318,6 @@ namespace vcs_ReadWrite_Barcode
             return this.getPattern_c39(buffer2);
         }
 
-
         /// <summary>
         /// 计算效验值
         /// </summary>
@@ -349,9 +348,9 @@ namespace vcs_ReadWrite_Barcode
         /// <returns></returns>
         public Bitmap getBitmapImage(float resolution)
         {
-           return Code39_createCode(resolution);
+            return Code39_createCode(resolution);
         }
-       
+
         private Bitmap Code39_createCode(float resolution)
         {
             int num6;
@@ -361,6 +360,7 @@ namespace vcs_ReadWrite_Barcode
             {
                 return null;
             }
+
             float fontsize = this._humanReadable ? (0.3527778f * this._humanReadableSize) : 0f;
             // float num3 = (7f * ModuleWidth) + ((3f * Ratio) * ModuleWidth);
             float num3 = (7f * this._moduleWidth) + ((3f * this._ratio) * this._moduleWidth);
@@ -369,8 +369,8 @@ namespace vcs_ReadWrite_Barcode
             width *= resolution / 25.4f;
             height *= resolution / 25.4f;
             Bitmap image = new Bitmap((int)width, (int)height, PixelFormat.Format32bppPArgb);
-            image.SetResolution(resolution, resolution);
-            //image.SetResolution(300, 300);
+            image.SetResolution(resolution, resolution);  // 設定Bitmap解析度
+            //image.SetResolution(300, 300);  // 設定Bitmap解析度
             Graphics g = Graphics.FromImage(image);
             g.Clear(Color.White);
             g.PageUnit = GraphicsUnit.Millimeter; //以毫米为度量单位
@@ -433,10 +433,11 @@ namespace vcs_ReadWrite_Barcode
                 index = arr.Count;
                 
                 //string text = new ASCIIEncoding().GetString(bytes, 0, index);
-                 */ 
+                 */
                 #endregion
                 string text = this._dataToEncode;
-                if (this._isDisplayCheckCode&&!string.IsNullOrEmpty(this._checkData)) {
+                if (this._isDisplayCheckCode && !string.IsNullOrEmpty(this._checkData))
+                {
                     text += this._checkData;
                 }
                 if (this._isDisplayStartStopSign)
@@ -469,7 +470,7 @@ namespace vcs_ReadWrite_Barcode
         /// <param name="reduction"></param>
         private void MakeBar(Graphics g, RectangleF rect, float reduction)
         {
-            MakeBar(g, rect, reduction,this._codeBarColor);
+            MakeBar(g, rect, reduction, this._codeBarColor);
         }
 
         /// <summary>
