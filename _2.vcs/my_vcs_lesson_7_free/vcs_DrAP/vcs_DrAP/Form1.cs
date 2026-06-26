@@ -56,7 +56,6 @@ namespace vcs_DrAP
         string python_editor_path = String.Empty;
         string winmerge_path = String.Empty;
         string search_path = @"D:\_git\vcs\_2.vcs";
-        string specified_search_path = @"D:\_git\vcs\_4.python\__code";
         string default_vcs_path = @"D:\_git\vcs\_2.vcs";
         string default_python_path = @"D:\_git\vcs\_4.python";
         string default_cuda_path = @"D:\_git\vcs\_3.cuda";
@@ -182,22 +181,6 @@ namespace vcs_DrAP
 
         void show_item_location()
         {
-            //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
-            //this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            //this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
-
-            //設定執行後的表單大小
-            this.Size = new Size(1920, 1040);
-
-            //設定執行後的表單起始位置, 指定位置
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = new System.Drawing.Point(0, 0);
-
-            this.listBox1.BorderStyle = BorderStyle.Fixed3D;
-            this.listView1.Size = new System.Drawing.Size(1900, 500);
-            this.richTextBox2.Size = new System.Drawing.Size(594, 388);
-
             int x_st = 12;
             int y_st = 12;
 
@@ -228,43 +211,31 @@ namespace vcs_DrAP
             bt_find_same_files.Location = new Point(x_st, y_st + dy * 1);
 
             x_st += 75 + dx;
-
             x_st += 75 + dx;
-
-            bt_clear_data.Location = new Point(x_st, y_st + dy * 0);
-
-            x_st += bt_clear_data.Size.Width + dx;
-            bt_copy_data.Location = new Point(x_st, y_st + dy * 0);
-
-            x_st += bt_copy_data.Size.Width + dx;
-            bt_help.Location = new Point(x_st, y_st + dy * 0);
-
-            x_st += bt_help.Size.Width + dx;
+            x_st += 75 + dx;
+            x_st += 75 + dx;
+            x_st += 75 + dx;
             bt_delete_file.Location = new Point(x_st - 8, y_st + dy * 0);
 
             x_st = 1000;
             y_st = 15;
 
-            textBox4.Location = new Point(x_st - 10, y_st);
-            label3.Location = new Point(x_st + 35, y_st + 8);
+            textBox4.Location = new Point(x_st - 10 - 120, y_st);
+            label3.Location = new Point(x_st + 35 - 120, y_st + 8);
 
             bt_find_empty_folders.Location = new Point(x_st + 55, y_st);
             bt_find_small_folders.Location = new Point(x_st + 55, y_st + 30);
             bt_find_same_files2.Location = new Point(x_st + 55, y_st + 60);
 
-            checkBox7.Location = new Point(x_st + 100 + 100 - 26, y_st + 0 + 6 - 20);
-            bt_test1.Location = new Point(x_st + 100 + 100 - 26, y_st + 0 + 10);
-            bt_test2.Location = new Point(x_st + 100 + 100 + 40 - 10 - 26, y_st + 0 + 10);
             dx = 85;
             dy = 35;
             cb_option1.Location = new Point(x_st + 100 + 100 + dx * 1 - 100, y_st + dy + 5);
-            cb_option2.Location = new Point(x_st + 100 + 100 + dx * 1 - 100, y_st + dy + 5 + 17);
 
-            x_st = 1200 + 100 - 30;
+            x_st = 1180;
             y_st = 10;
             tb_search.Location = new Point(x_st, y_st);
 
-            x_st = 1440;
+            x_st = 1440 - 100;
             y_st = 6;
             dx = 55;
             dy = 55;
@@ -279,13 +250,22 @@ namespace vcs_DrAP
             bt_compare.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             bt_replace.Location = new Point(x_st + dx * 2, y_st + dy * 1);
 
-            bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Width - bt_clear2.Width, richTextBox2.Location.Y);
-            bt_copy_rtb_data.Location = new Point(bt_clear2.Location.X, bt_copy_rtb_data.Location.Y);
-
-            bt_setup.Location = new Point(this.ClientSize.Width - bt_setup.Width, 55);
+            listView1.Size = new Size(1900, 500);
+            listView1.Location = new Point(12, 113);
             bt_clear3.Location = new Point(listView1.Location.X + listView1.Size.Width - bt_clear3.Size.Width, listView1.Location.Y + listView1.Size.Height - bt_clear3.Size.Height);
 
-            x_st = 1610;
+            richTextBox1.Size = new Size(1300, 388);
+            richTextBox1.Location = new Point(12, 620);
+            bt_clear1.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - bt_clear1.Width, richTextBox1.Location.Y);
+            bt_save_rtb_data.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - bt_clear1.Width, richTextBox1.Location.Y + bt_clear1.Height);
+
+            richTextBox2.Size = new Size(594, 388);
+            richTextBox2.Location = new Point(1318, 620);
+
+            bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Width - bt_clear2.Width, richTextBox2.Location.Y);
+            bt_copy_rtb_data.Location = new Point(richTextBox2.Location.X + richTextBox2.Width - bt_clear2.Width, richTextBox2.Location.Y + bt_clear2.Height);
+
+            x_st = 1510;
             y_st = 4;
             groupbox_python.Location = new Point(x_st, y_st);
             groupbox_python.Size = new Size(112, 106);
@@ -295,6 +275,9 @@ namespace vcs_DrAP
             lb_search_result2.Location = new Point(10, 60);
             lb_search_result1.Text = "";
             lb_search_result2.Text = "";
+
+            //bt_setup.Location = new Point(this.ClientSize.Width - bt_setup.Width, 55);
+            bt_setup.Location = new Point(groupbox_result.Location.X + groupbox_result.Width + 10, groupbox_result.Location.Y + groupbox_result.Height / 2);
 
             x_st = 10;
             y_st = 15;
@@ -316,12 +299,6 @@ namespace vcs_DrAP
             //this.richTextBox2.Location = new Point(1600, 600);
             */
 
-            if (checkBox7.Checked == false)
-            {
-                richTextBox2.Visible = false;
-                bt_clear2.Visible = false;
-            }
-
             if (cb_video_only.Checked == true)
                 groupBox_video.Enabled = true;
             else
@@ -330,6 +307,18 @@ namespace vcs_DrAP
                 groupBox_file.Enabled = true;
             else
                 groupBox_file.Enabled = false;
+
+            //最大化螢幕
+            this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
+            //this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            //this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
+
+            //設定執行後的表單大小
+            this.Size = new Size(1920, 1040);
+
+            //設定執行後的表單起始位置, 指定位置
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point(0, 0);
 
             bt_minimize_setup();
             bt_exit_setup();
@@ -626,13 +615,13 @@ namespace vcs_DrAP
                             sub_i1c.Text = itemc;
                             i1.SubItems.Add(sub_i1c);
 
-                            sub_i1a.ForeColor = System.Drawing.Color.Blue;
-                            sub_i1b.ForeColor = System.Drawing.Color.Blue;
-                            sub_i1c.ForeColor = System.Drawing.Color.Blue;
+                            sub_i1a.ForeColor = Color.Blue;
+                            sub_i1b.ForeColor = Color.Blue;
+                            sub_i1c.ForeColor = Color.Blue;
 
-                            sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
-                            sub_i1b.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
-                            sub_i1c.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                            sub_i1a.Font = new Font("Times New Roman", 10, FontStyle.Bold);
+                            sub_i1b.Font = new Font("Times New Roman", 10, FontStyle.Bold);
+                            sub_i1c.Font = new Font("Times New Roman", 10, FontStyle.Bold);
                         }
                         else
                             continue;
@@ -640,9 +629,6 @@ namespace vcs_DrAP
                     else
                     {
                         if (cb_video_only.Checked == true)
-                            continue;
-
-                        if (cb_generate_text.Checked == false)
                             continue;
 
                         i1 = new ListViewItem(fileinfos[i].filename);
@@ -656,19 +642,16 @@ namespace vcs_DrAP
                         sub_i1b.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
                         i1.SubItems.Add(sub_i1b);
 
-                        sub_i1a.ForeColor = System.Drawing.Color.Blue;
-                        sub_i1b.ForeColor = System.Drawing.Color.Blue;
+                        sub_i1a.ForeColor = Color.Blue;
+                        sub_i1b.ForeColor = Color.Blue;
 
-                        sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
-                        sub_i1b.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                        sub_i1a.Font = new Font("Times New Roman", 10, FontStyle.Bold);
+                        sub_i1b.Font = new Font("Times New Roman", 10, FontStyle.Bold);
                     }
                 }
                 else
                 {
                     if (cb_video_only.Checked == true)
-                        continue;
-
-                    if (cb_generate_text.Checked == false)
                         continue;
 
                     i1 = new ListViewItem(fileinfos[i].filename);
@@ -681,11 +664,11 @@ namespace vcs_DrAP
                     sub_i1b.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
                     i1.SubItems.Add(sub_i1b);
 
-                    sub_i1a.ForeColor = System.Drawing.Color.Blue;
-                    sub_i1b.ForeColor = System.Drawing.Color.Blue;
+                    sub_i1a.ForeColor = Color.Blue;
+                    sub_i1b.ForeColor = Color.Blue;
 
-                    sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
-                    sub_i1b.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                    sub_i1a.Font = new Font("Times New Roman", 10, FontStyle.Bold);
+                    sub_i1b.Font = new Font("Times New Roman", 10, FontStyle.Bold);
                 }
 
                 if (flag_search_mode == 1)
@@ -750,11 +733,11 @@ namespace vcs_DrAP
                 //sub_i1a.Text = fi.Length.ToString();
                 sub_i1b.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
                 i1.SubItems.Add(sub_i1b);
-                sub_i1a.ForeColor = System.Drawing.Color.Blue;
-                sub_i1b.ForeColor = System.Drawing.Color.Blue;
+                sub_i1a.ForeColor = Color.Blue;
+                sub_i1b.ForeColor = Color.Blue;
 
-                sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
-                sub_i1b.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                sub_i1a.Font = new Font("Times New Roman", 10, FontStyle.Bold);
+                sub_i1b.Font = new Font("Times New Roman", 10, FontStyle.Bold);
 
                 listView1.Items.Add(i1);
                 //設置ListView最後一行可見
@@ -800,8 +783,8 @@ namespace vcs_DrAP
 
                 sub_i1a.Text = ByteConversionTBGBMBKB(Convert.ToInt64(folderinfos[i].foldersize));
                 i1.SubItems.Add(sub_i1a);
-                sub_i1a.ForeColor = System.Drawing.Color.Blue;
-                sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                sub_i1a.ForeColor = Color.Blue;
+                sub_i1a.Font = new Font("Times New Roman", 10, FontStyle.Bold);
 
                 sub_i1b.Text = folderinfos[i].foldercreationtime.ToString();
                 i1.SubItems.Add(sub_i1b);
@@ -835,14 +818,7 @@ namespace vcs_DrAP
             //result_str += "change file type to " + filetype2 + "\n";
         }
 
-        private void bt_clear_data_Click(object sender, EventArgs e)
-        {
-            fileinfos.Clear();
-            listView1.Clear();
-            richTextBox1.Clear();
-            richTextBox2.Clear();
-            flag_search_vcs_pattern = 0;
-        }
+        //------------------------------------------------------------  # 60個
 
         const Int64 TB = (Int64)GB * 1024;//定義TB的計算常量
         const int GB = 1024 * 1024 * 1024;//定義GB的計算常量
@@ -1275,25 +1251,7 @@ namespace vcs_DrAP
             result_str += "儲存資料成檔案\tTBD\n";
         }
 
-        private void bt_copy_data_Click(object sender, EventArgs e)
-        {
-            if (this.listView1.Items.Count <= 0)
-            {
-                result_str += "無內容可複製\n";
-                return;
-            }
-
-            //C# – 複製資料到剪貼簿
-            Clipboard.Clear();
-
-            for (int i = 0; i < listView1.Items.Count; i++)
-            {
-                //result_str += listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\n";
-
-                //C# – 複製資料到剪貼簿 累計
-                Clipboard.SetDataObject(Clipboard.GetText() + listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\n");      //建議用此
-            }
-        }
+        //------------------------------------------------------------  # 60個
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -1324,7 +1282,7 @@ namespace vcs_DrAP
         private void bt_find_big_files_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "搜尋大檔 ST\n";
-            
+
             bt_start_files.BackgroundImage = vcs_DrAP.Properties.Resources.potplayer;
             bt_find_big_files.BackColor = Color.Red;
 
@@ -1344,10 +1302,12 @@ namespace vcs_DrAP
             }
             flag_function = FUNCTION_FIND_BIG_FILES;
             find_and_show_big_files();
-            bt_find_big_files.BackColor = System.Drawing.SystemColors.ControlLight;
+            bt_find_big_files.BackColor = SystemColors.ControlLight;
 
             richTextBox1.Text += "搜尋大檔 SP\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void bt_delete_file_Click(object sender, EventArgs e)
         {
@@ -1428,7 +1388,7 @@ namespace vcs_DrAP
                     }
                     else if (search_mode == SEARCH_MODE_VCS)
                     {
-                            ProcessDirectoryS(subdirectory);
+                        ProcessDirectoryS(subdirectory);
                     }
                     else
                     {
@@ -1468,7 +1428,7 @@ namespace vcs_DrAP
             //在這裡做處理檔案的事情
             get_fileinfo(fi, 1);
 
-            //6060
+            //------------------------------------------------------------  # 60個
 
             if (cb_option1.Checked == true)
             {
@@ -1563,8 +1523,8 @@ namespace vcs_DrAP
                         sub_i1a.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
                         i1.SubItems.Add(sub_i1a);
                         i1.SubItems.Add(fileinfos[i].fileextension);
-                        sub_i1a.ForeColor = System.Drawing.Color.Blue;
-                        sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                        sub_i1a.ForeColor = Color.Blue;
+                        sub_i1a.Font = new Font("Times New Roman", 10, FontStyle.Bold);
 
                         listView1.Items.Add(i1);
 
@@ -1576,8 +1536,8 @@ namespace vcs_DrAP
                         sub_i2a.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[j].filesize));
                         i2.SubItems.Add(sub_i2a);
                         i2.SubItems.Add(fileinfos[j].fileextension);
-                        sub_i2a.ForeColor = System.Drawing.Color.Blue;
-                        sub_i2a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                        sub_i2a.ForeColor = Color.Blue;
+                        sub_i2a.Font = new Font("Times New Roman", 10, FontStyle.Bold);
 
                         listView1.Items.Add(i2);
 
@@ -1596,9 +1556,9 @@ namespace vcs_DrAP
                 //sub_i1a.Text = fi.Length.ToString();
                 sub_i1a.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
                 i1.SubItems.Add(sub_i1a);
-                sub_i1a.ForeColor = System.Drawing.Color.Blue;
+                sub_i1a.ForeColor = Color.Blue;
 
-                sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                sub_i1a.Font = new Font("Times New Roman", 10, FontStyle.Bold);
                 */
             }
         }
@@ -1636,84 +1596,6 @@ namespace vcs_DrAP
         {
             listBox1.Items.Clear();
             old_search_path.Clear();
-        }
-
-        int total_number_files = 0;
-        private void bt_test1_Click(object sender, EventArgs e)
-        {
-            /*
-            //result_str += "flag_function = " + flag_function.ToString() + "\n";
-            Properties.Settings.Default.search_path = "";
-            Properties.Settings.Default.Save();
-            */
-
-            string foldername = @"D:\_git\vcs\_1.data\______test_files1\_case1\";
-            richTextBox1.Text += "讀出一資料夾內所有檔案 -r, 資料夾\t" + foldername + "\n";
-
-            //get_all_files(foldername);
-
-            //轉出
-            result_str += "開始計時\n";
-            this.Text = "DrAP";
-            // Create stopwatch
-            Stopwatch stopwatch = new Stopwatch();
-            // Begin timing
-            stopwatch.Start();
-
-            flag_search_mode = 0;
-            flag_search_vcs_pattern = 0;
-
-            fileinfos.Clear();
-            total_size = 0;
-            total_files = 0;
-
-            path = foldername;
-            result_str += "\n搜尋路徑" + path + "\n";
-            FolederName = path;
-            ProcessDirectory4(path);
-            richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
-            show_file_info1();
-
-            // Stop timing
-            stopwatch.Stop();
-            // Write result
-            result_str += "停止計時\t";
-            result_str += "總時間: " + stopwatch.ElapsedMilliseconds.ToString() + " msec\n";
-            lb_search_result2.Text = ((float)stopwatch.ElapsedMilliseconds / 1000).ToString("F2") + " 秒";
-            this.Text = "DrAP (轉出時間 : " + (stopwatch.ElapsedMilliseconds / 1000).ToString() + " 秒)";
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        void get_all_files(string foldername)
-        {
-            total_number_files = 0;
-            DirectoryInfo temp3 = new DirectoryInfo(foldername);
-
-            DirectoryInfo[] idr = temp3.GetDirectories();//獲取當前目錄下的所有子目錄.
-            foreach (DirectoryInfo dir in idr)
-            {
-                richTextBox1.Text += "取得資料夾 : " + dir.FullName + "\n";
-
-
-                FileInfo[] files1 = dir.GetFiles();
-
-                foreach (FileInfo file in files1)
-                {
-                    richTextBox1.Text += "取得檔案 : " + file.FullName + "\n";
-                    total_number_files++;
-                }
-            }
-
-            richTextBox1.Text += "目錄 : " + foldername + " 下\n";
-            FileInfo[] files2 = temp3.GetFiles();
-
-            foreach (FileInfo file in files2)
-            {
-                richTextBox1.Text += "取得檔案 : " + file.FullName + "\n";
-                total_number_files++;
-            }
-            richTextBox1.Text += "共取得檔案 " + total_number_files.ToString() + " 個\n";
         }
 
         private void tb_search_KeyDown(object sender, KeyEventArgs e)
@@ -1807,8 +1689,8 @@ namespace vcs_DrAP
                         sub_i1a.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
                         i1.SubItems.Add(sub_i1a);
                         i1.SubItems.Add(fileinfos[i].extension);
-                        sub_i1a.ForeColor = System.Drawing.Color.Blue;
-                        sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                        sub_i1a.ForeColor = Color.Blue;
+                        sub_i1a.Font = new Font("Times New Roman", 10, FontStyle.Bold);
 
                         listView1.Items.Add(i1);
 
@@ -1820,8 +1702,8 @@ namespace vcs_DrAP
                         sub_i2a.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[j].filesize));
                         i2.SubItems.Add(sub_i2a);
                         i2.SubItems.Add(fileinfos[j].extension);
-                        sub_i2a.ForeColor = System.Drawing.Color.Blue;
-                        sub_i2a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                        sub_i2a.ForeColor = Color.Blue;
+                        sub_i2a.Font = new Font("Times New Roman", 10, FontStyle.Bold);
 
                         listView1.Items.Add(i2);
                         */
@@ -1841,9 +1723,9 @@ namespace vcs_DrAP
                 //sub_i1a.Text = fi.Length.ToString();
                 sub_i1a.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
                 i1.SubItems.Add(sub_i1a);
-                sub_i1a.ForeColor = System.Drawing.Color.Blue;
+                sub_i1a.ForeColor = Color.Blue;
 
-                sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                sub_i1a.Font = new Font("Times New Roman", 10, FontStyle.Bold);
                 */
             }
         }
@@ -2234,7 +2116,7 @@ namespace vcs_DrAP
             g = pnl.CreateGraphics();
             /*  debug
             Pen p = new Pen(Color.Black, 1);
-            p.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            p.DashStyle = Drawing2D.DashStyle.Dash;
             g.DrawRectangle(p, WIDTH / 10, WIDTH / 10, WIDTH * 80 / 100, WIDTH * 80 / 100);
             */
 
@@ -2278,35 +2160,6 @@ namespace vcs_DrAP
             }
         }
 
-        private void checkBox7_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox7.Checked == true)
-            {
-                richTextBox2.Visible = true;
-                bt_clear2.Visible = true;
-                if (cb_generate_text.Checked == true)
-                {
-                    richTextBox1.Size = new Size(1300, 430);
-
-                    bt_clear1.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - bt_clear1.Width, bt_clear1.Location.Y);
-                    bt_save_rtb_data.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - bt_save_rtb_data.Width, bt_save_rtb_data.Location.Y);
-                }
-            }
-            else
-            {
-                richTextBox2.Visible = false;
-                bt_clear2.Visible = false;
-
-                if (cb_generate_text.Checked == true)
-                {
-                    richTextBox1.Size = new Size(listView1.Width, 430);
-
-                    bt_clear1.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - bt_clear1.Width, bt_clear1.Location.Y);
-                    bt_save_rtb_data.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - bt_save_rtb_data.Width, bt_save_rtb_data.Location.Y);
-                }
-            }
-        }
-
         private void cb_video_only_CheckedChanged(object sender, EventArgs e)
         {
             if (cb_video_only.Checked == true)
@@ -2321,10 +2174,6 @@ namespace vcs_DrAP
                 groupBox_file.Enabled = true;
             else
                 groupBox_file.Enabled = false;
-        }
-
-        private void cb_generate_text_CheckedChanged(object sender, EventArgs e)
-        {
         }
 
         private void cb_video_l_CheckedChanged(object sender, EventArgs e)
@@ -2452,9 +2301,6 @@ namespace vcs_DrAP
             if (path == String.Empty)
                 path = search_path;
 
-            if (cb_option2.Checked == true)
-                path = specified_search_path;
-
             richTextBox1.Text += "搜尋資料夾: " + path + "\n\n";
             if (System.IO.File.Exists(path) == true)
             {
@@ -2473,27 +2319,27 @@ namespace vcs_DrAP
             flag_search_vcs_pattern = 1;
             if (mode == SEARCH_MODE_VCS)
             {
-                bt_search_pattern_vcs.BackColor = System.Drawing.SystemColors.ControlLight;
+                bt_search_pattern_vcs.BackColor = SystemColors.ControlLight;
                 bt_search_pattern_vcs.BackgroundImage = vcs_DrAP.Properties.Resources.vcs;
             }
             else if (mode == SEARCH_MODE_PYTHON)
             {
-                bt_search_pattern_python.BackColor = System.Drawing.SystemColors.ControlLight;
+                bt_search_pattern_python.BackColor = SystemColors.ControlLight;
                 bt_search_pattern_python.BackgroundImage = vcs_DrAP.Properties.Resources.python;
             }
             else if (mode == SEARCH_MODE_CUDA)
             {
-                bt_search_pattern_cuda.BackColor = System.Drawing.SystemColors.ControlLight;
+                bt_search_pattern_cuda.BackColor = SystemColors.ControlLight;
                 bt_search_pattern_cuda.BackgroundImage = vcs_DrAP.Properties.Resources.cuda;
             }
             else if (mode == SEARCH_MODE_OPENGL)
             {
-                bt_search_pattern_opengl.BackColor = System.Drawing.SystemColors.ControlLight;
+                bt_search_pattern_opengl.BackColor = SystemColors.ControlLight;
                 bt_search_pattern_opengl.BackgroundImage = vcs_DrAP.Properties.Resources.opengl;
             }
             else
             {
-                bt_search_pattern_vcs.BackColor = System.Drawing.SystemColors.ControlLight;
+                bt_search_pattern_vcs.BackColor = SystemColors.ControlLight;
                 bt_search_pattern_vcs.BackgroundImage = vcs_DrAP.Properties.Resources.vcs;
             }
 
@@ -2744,45 +2590,22 @@ namespace vcs_DrAP
             }
         }
 
-        private void bt_help_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bt_test2_Click(object sender, EventArgs e)
-        {
-            if (fileinfos.Count == 0)
-            {
-                result_str += "找不到資料a\n";
-                lb_search_result1.Text = "0";
-            }
-            else
-            {
-                result_str += "找到 " + fileinfos.Count.ToString() + " 筆資料a\n";
-                lb_search_result1.Text = fileinfos.Count.ToString();
-            }
-
-            //排序 由小到大
-            //fileinfos.Sort((x, y) => { return x.filesize.CompareTo(y.filesize); });
-
-            //排序 由大到小  在return的地方多個負號
-            fileinfos.Sort((x, y) => { return -x.filesize.CompareTo(y.filesize); });
-
-            for (int i = 0; i < fileinfos.Count; i++)
-            {
-                result_str += "i = " + i.ToString() + ", filename : " + fileinfos[i].filepath + "\\" + fileinfos[i].filename + "\n";
-            }
-        }
+        //------------------------------------------------------------  # 60個
 
         private void tb_search_Click(object sender, EventArgs e)
         {
             tb_search.SelectAll();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void bt_save_file_data_Click(object sender, EventArgs e)
         {
 
+
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void bt_open_dir2_Click(object sender, EventArgs e)
         {
@@ -2869,30 +2692,6 @@ namespace vcs_DrAP
             listView1.Clear();
         }
 
-        private void cb_option2_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cb_option2.Checked == true)
-            {
-                richTextBox1.Text += "search_path = " + specified_search_path + "\n";
-                folderBrowserDialog1.SelectedPath = specified_search_path;  //預設開啟的路徑
-                if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-                {
-                    specified_search_path = folderBrowserDialog1.SelectedPath;
-                    richTextBox1.Text += "選取資料夾: " + folderBrowserDialog1.SelectedPath + "\n";
-                }
-                else
-                {
-                    richTextBox1.Text = "未選取資料夾\n";
-                    specified_search_path = String.Empty;
-                    cb_option2.Checked = false;
-                }
-            }
-            else
-            {
-                specified_search_path = String.Empty;
-            }
-        }
-
         //------------------------------------------------------------  # 60個
 
         void get_fileinfo(FileInfo fi, int type)
@@ -2940,18 +2739,12 @@ namespace vcs_DrAP
                         int h = f.Video[0].Height;
                         //richTextBox1.Text += "  輸入大小: " + w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\n";
                         //richTextBox1.Text += "  FPS: " + f.Video[0].FrameRate.ToString() + "\n";
-                        if (cb_generate_text.Checked == true)
-                        {
-                            richTextBox1.Text += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
-                                fi.FullName, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
-                        }
+                        richTextBox1.Text += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
+                            fi.FullName, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
                     }
                     else
                     {
-                        if (cb_generate_text.Checked == true)
-                        {
-                            richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
-                        }
+                        richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
                     }
 
                     //richTextBox1.Text += fi.Directory + "\n";
@@ -2967,9 +2760,9 @@ namespace vcs_DrAP
                     //sub_i1a.Text = fi.Length.ToString();
                     sub_i1a.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length));
                     i1.SubItems.Add(sub_i1a);
-                    sub_i1a.ForeColor = System.Drawing.Color.Blue;
+                    sub_i1a.ForeColor = Color.Blue;
 
-                    sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                    sub_i1a.Font = new Font("Times New Roman", 10, FontStyle.Bold);
 
                     listView1.Items.Add(i1);
                     //設置ListView最後一行可見
@@ -3145,33 +2938,42 @@ namespace vcs_DrAP
 
 */
 
-
-//private void bt_test1_Click(object sender, EventArgs e)
-//private void bt_test2_Click(object sender, EventArgs e)
+            /*
+            //result_str += "flag_function = " + flag_function.ToString() + "\n";
+            Properties.Settings.Default.search_path = "";
+            Properties.Settings.Default.Save();
+            */
 
 
 /*
+        private void bt_clear_data_Click(object sender, EventArgs e)
+        {
+            fileinfos.Clear();
+            listView1.Clear();
+            richTextBox1.Clear();
+            richTextBox2.Clear();
+            flag_search_vcs_pattern = 0;
+        }
 
-            //指定應用程式路徑
-            //string target = @"C:\Program Files\DAUM\PotPlayer\PotPlayerMini.exe";
-            string target = player_path;
-
-            //方法一
-            //Process.Start(target, "參數");
-            //Process.Start(target, all_filename);
-
-            //方法二
-            ProcessStartInfo pInfo = new ProcessStartInfo(target);
-            pInfo.Arguments = all_filename;
-
-            result_str += "target : " + target + "\n";
-            result_str += "all_filename : " + all_filename + "\n";
-
-            using (Process process = new Process())
+        private void bt_copy_data_Click(object sender, EventArgs e)
+        {
+            if (this.listView1.Items.Count <= 0)
             {
-                process.StartInfo = pInfo;
-                process.Start();
+                result_str += "無內容可複製\n";
+                return;
             }
+
+            //C# – 複製資料到剪貼簿
+            Clipboard.Clear();
+
+            for (int i = 0; i < listView1.Items.Count; i++)
+            {
+                //result_str += listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\n";
+
+                //C# – 複製資料到剪貼簿 累計
+                Clipboard.SetDataObject(Clipboard.GetText() + listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\n");      //建議用此
+            }
+        }
 
 */
 

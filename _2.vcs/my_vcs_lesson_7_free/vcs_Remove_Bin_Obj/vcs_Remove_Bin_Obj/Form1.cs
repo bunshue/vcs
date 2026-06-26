@@ -69,10 +69,8 @@ namespace vcs_Remove_Bin_Obj
             button1.Location = new Point(x_st, y_st + dy * 8);
             button5.Location = new Point(x_st, y_st + dy * 9 + 10);
 
-            button2.Location = new Point(x_st, y_st + dy * 11);
             button3.Location = new Point(x_st, y_st + dy * 12 + 30);
             bt_setup.Location = new Point(x_st + 120, y_st + dy * 12 + 30);
-            button4.Location = new Point(x_st + 115, y_st + dy * 11);
             bt_open_dir2.Location = new Point(x_st + 115 + 50, y_st + dy * 11 - 60);
             groupBox_remove.Location = new Point(x_st + 170, y_st + dy * 0);
 
@@ -419,19 +417,10 @@ namespace vcs_Remove_Bin_Obj
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button3_Click(object sender, EventArgs e)
         {
             result_str = "";
             result_str += "檔名簡中轉正中\nTBD";
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
         }
 
         void RemoveNeedlessFiles()

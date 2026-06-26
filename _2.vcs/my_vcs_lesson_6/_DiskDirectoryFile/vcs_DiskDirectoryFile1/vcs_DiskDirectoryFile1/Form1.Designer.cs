@@ -396,6 +396,7 @@
             this.bt_files09.Name = "bt_files09";
             this.bt_files09.Size = new System.Drawing.Size(200, 60);
             this.bt_files09.TabIndex = 5;
+            this.bt_files09.Text = "GetDirectories";
             this.bt_files09.UseVisualStyleBackColor = true;
             this.bt_files09.Click += new System.EventHandler(this.bt_files09_Click);
             // 
@@ -417,6 +418,7 @@
             this.bt_files08.Name = "bt_files08";
             this.bt_files08.Size = new System.Drawing.Size(200, 60);
             this.bt_files08.TabIndex = 50;
+            this.bt_files08.Text = "撈出資料夾內特定類型的檔案";
             this.bt_files08.UseVisualStyleBackColor = true;
             this.bt_files08.Click += new System.EventHandler(this.bt_files08_Click);
             // 

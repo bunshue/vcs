@@ -45,48 +45,6 @@
 
 //------------------------------------------------------------  # 60個
 
-                        FileAttributes attr = (new FileInfo(filePath)).Attributes;
-                        Console.Write("UnAuthorizedAccessException: Unable to access file. ");
-                        if ((attr & FileAttributes.ReadOnly) > 0)
-                            Console.Write("The file is read-only.");
-
-//------------------------------------------------------------  # 60個
-
-                        string[] fileEntries = Directory.GetFiles(path);
-                        Array.Sort(fileEntries);
-                        foreach (string fileName in fileEntries)
-                        {
-                            ProcessFile(fileName, step);
-                        }
-
-//------------------------------------------------------------  # 60個
-
-            if (path != String.Empty)
-            {
-                //只撈一層的所有檔案
-                foreach (string fname in System.IO.Directory.GetFileSystemEntries(path))
-                {
-                    richTextBox1.Text += fname + "\n";
-                }
-            }
-
-//------------------------------------------------------------  # 60個
-
-            if (path == String.Empty)
-                path = @"D:\_git\vcs\_1.data\______test_files1";
-
-            //C# 取得資料夾下的所有檔案(包括子目錄)
-            string[] files = System.IO.Directory.GetFiles(path, filetype2, System.IO.SearchOption.AllDirectories);
-            foreach (string filename in files)
-            {
-                //richTextBox1.Text += filename + "\n";
-                FileInfo fi = new FileInfo(filename);
-                richTextBox1.Text += fi.Name + "\n";
-            }
-
-//------------------------------------------------------------  # 60個
-
-
 //System.Media.SystemSounds.Beep.Play();
 
 
@@ -938,16 +896,16 @@ label
                     e.Graphics.FillRectangle(Brushes.Pink, e.Bounds);
 
                     // Draw the text.
-                    e.Graphics.DrawString(MENU_CAPTION, menu_font, System.Drawing.Brushes.AliceBlue, e.Bounds.X, e.Bounds.Y);
+                    e.Graphics.DrawString(MENU_CAPTION, menu_font, Brushes.AliceBlue, e.Bounds.X, e.Bounds.Y);
                 }
                 else
                 {
                     // The mouse is not over the item.
                     // Erase the background.
-                    e.Graphics.FillRectangle(System.Drawing.Brushes.LightGray, e.Bounds.X, e.Bounds.Y, e.Bounds.Width, e.Bounds.Height);
+                    e.Graphics.FillRectangle(Brushes.LightGray, e.Bounds.X, e.Bounds.Y, e.Bounds.Width, e.Bounds.Height);
 
                     // Draw the text.
-                    e.Graphics.DrawString(MENU_CAPTION, menu_font, System.Drawing.Brushes.Black, e.Bounds.X, e.Bounds.Y);
+                    e.Graphics.DrawString(MENU_CAPTION, menu_font, Brushes.Black, e.Bounds.X, e.Bounds.Y);
                 }
 
 PasswordChar
@@ -2740,48 +2698,6 @@ Bitmap內部資料的排列 及 使用
 
 //------------------------------------------------------------  # 60個
 
-//Properties Save ST
-
-            this.SetBounds(
-                Properties.Settings.Default.Left,
-                Properties.Settings.Default.Top,
-                Properties.Settings.Default.Width,
-                Properties.Settings.Default.Height);
-
-            txtScale.Text = Properties.Settings.Default.Scale;
-
-        // Save parameters.
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Properties.Settings.Default.Left = this.Left;
-            Properties.Settings.Default.Top = this.Top;
-            Properties.Settings.Default.Width = this.Width;
-            Properties.Settings.Default.Height = this.Height;
-
-            Properties.Settings.Default.Directory = txtDirectory.Text;
-            Properties.Settings.Default.Scale = txtScale.Text;
-
-            Properties.Settings.Default.Save();
-        }
-
-//------------------------------------------------------------  # 60個
-
-有需要存檔的資料
-1. 最後存取的路徑
-2. 視窗大小
-3. 最後選取的設定項目
-
-
-若是我的筆記本
-
-properties.save
-還要儲存字型 大小 前景色背景色
-表單大小位置 
-
-//Properties Save SP
-
-//------------------------------------------------------------  # 60個
-
 MD5 File 線上工具
 HTML5 File Hash Online Calculator
 https://md5file.com/calculator
@@ -3337,10 +3253,11 @@ https://www.zhangshengrong.com/p/yOXD5ejR1B/
 
 \\圖片格式轉換
 
-
-        public void ImageFormatter(string sourcePath, string filename, string format) {
-            System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(sourcePath);
-            switch (format.ToLower()) {
+        public void ImageFormatter(string sourcePath, string filename, string format)
+        {
+            Bitmap bitmap = new Bitmap(sourcePath);
+            switch (format.ToLower())
+            {
                 case "bmp":
                     bitmap.Save(filename, ImageFormat.Bmp);
                     break;
@@ -3371,38 +3288,6 @@ https://www.zhangshengrong.com/p/yOXD5ejR1B/
 
 //------------------------------------------------------------  # 60個
  
-\\圖片格式轉換
-
-        public void ImageFormatter(string sourcePath, string distationPath, string format) {
-            System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(sourcePath);
-            switch (format.ToLower()) {
-                case "bmp":
-                    bitmap.Save(distationPath, System.Drawing.Imaging.ImageFormat.Bmp);
-                    break;
-                case "emf":
-                    bitmap.Save(distationPath, System.Drawing.Imaging.ImageFormat.Emf);
-                    break;
-                case "gif":
-                    bitmap.Save(distationPath, System.Drawing.Imaging.ImageFormat.Gif);
-                    break;
-                case "ico":
-                    bitmap.Save(distationPath, System.Drawing.Imaging.ImageFormat.Icon);
-                    break;
-                case "jpg":
-                    bitmap.Save(distationPath, System.Drawing.Imaging.ImageFormat.Jpeg);
-                    break;
-                case "png":
-                    bitmap.Save(distationPath, System.Drawing.Imaging.ImageFormat.Png);
-                    break;
-                case "tif":
-                    bitmap.Save(distationPath, System.Drawing.Imaging.ImageFormat.Tiff);
-                    break;
-                case "wmf":
-                    bitmap.Save(distationPath, System.Drawing.Imaging.ImageFormat.Wmf);
-                    break;
-                default: throw new Exception("無法轉換此格式！");
-            }
-        }
 
 //------------------------------------------------------------  # 60個
 
@@ -3611,19 +3496,14 @@ Name = htmlNode.InnerText
 
 Url = htmlNode.GetAttributeValue("href", "")
 
-
-
-
-
-
-
+6060
 
 十六、運行時顯示自己定義的圖標：
 //load icon and set to form
 System.Drawing.Icon ico = new System.Drawing.Icon(@c: empapp.ico);
 this.Icon = ico;
 
-
+6060
 
 
 
@@ -6670,6 +6550,35 @@ mute & un-mute
         }
 
 
+vcs_WMP
+richTextBox1.Text += " 歌曲名称：" + axWindowsMediaPlayer1.currentMedia.getItemInfo("Title");
+
+mute & un-mute
+        private void pictureBox7_Click(object sender, EventArgs e)//静音
+        {
+            if (MM)
+            {
+                pictureBox7.Image = (Image)Properties.Resources.音量按钮变色;
+                axWindowsMediaPlayer1.settings.mute = true;
+                MM = false;
+            }
+            else
+            {
+                pictureBox7.Image = (Image)Properties.Resources.音量按钮;
+                axWindowsMediaPlayer1.settings.mute = false;
+                MM = true;
+            }
+        }
+
+
+
+
+string與String有何不同？
+
+vcs抓螢幕畫面，如何區分全螢幕和active畫面？
+
+//------------------------------------------------------------  # 60個
+
 參考
 063_使用C#操作INI文件
 給vcs_WMP 設定常用的mp3資料夾
@@ -6856,45 +6765,8 @@ caputure
         
 
 
-
-
-
 2011/5/8(SUN)
 2011/5/8(日) 20:28 著信
-
-
-string與String有何不同？
-
-
-
-vcs抓螢幕畫面，如何區分全螢幕和active畫面？
-
-vcs_WMP
-richTextBox1.Text += " 歌曲名称：" + axWindowsMediaPlayer1.currentMedia.getItemInfo("Title");
-
-mute & un-mute
-        private void pictureBox7_Click(object sender, EventArgs e)//静音
-        {
-            if (MM)
-            {
-                pictureBox7.Image = (Image)Properties.Resources.音量按钮变色;
-                axWindowsMediaPlayer1.settings.mute = true;
-                MM = false;
-            }
-            else
-            {
-                pictureBox7.Image = (Image)Properties.Resources.音量按钮;
-                axWindowsMediaPlayer1.settings.mute = false;
-                MM = true;
-            }
-        }
-
-
-參考
-063_使用C#操作INI文件
-給vcs_WMP 設定常用的mp3資料夾
-
-vcs_WMP要改成可以多選檔案  或選整個或多個資料夾 一起播放
 
 //------------------------------------------------------------  # 60個
 
@@ -9496,37 +9368,6 @@ FileSystem.DeleteFile("D:\\test.txt", UIOption.OnlyErrorDialogs, RecycleOption.S
 
 //------------------------------------------------------------  # 60個
 
-new 一個 bitmap
-
-Bitmap bitmap1;
-
-1. 新建一個指名大小的bitmap
-
-bitmap1 = new Bitmap(600, 400);
-pictureBox1.Image = bitmap1;
-
-2. 開啟圖檔 以此圖檔之大小為此bitmap之大小
-bitmap1 = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg");
-pictureBox1.Image = bitmap1;
-
-
-開啟一圖 畫在pictureBox上
-Graphics g;
-g = pictureBox1.CreateGraphics();		//取得畫布物件
-
-Bitmap bitmap1 = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg");
-
-g.DrawEllipse(new Pen(Color.Red, 1), 10, 10, 100, 100);		//作畫於其上
-
-            PenStyle = new Pen(foreColor);
-            PenStyle.Width = (int)numericUpDown1.Value;
-            PenStyle.StartCap = System.Drawing.Drawing2D.LineCap.Round;
-            PenStyle.EndCap = System.Drawing.Drawing2D.LineCap.Round;
-            PenStyle.Color = foreColor;
-
-            //PenStyle.LineJoin = System.Drawing.Drawing2D.LineJoin.Bevel;
-            PenStyle.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
-
 改變鼠標
         private void panel1_MouseLeave(object sender, EventArgs e)
         {
@@ -9540,6 +9381,8 @@ g.DrawEllipse(new Pen(Color.Red, 1), 10, 10, 100, 100);		//作畫於其上
             //label2.Text = "(" + Cursor.Position.X.ToString() + ", " + Cursor.Position.Y.ToString() + ")";
         }
 
+6060
+
 google map api key
 AIzaSyCEU4vCIYtilSvu-UicMv9JNEDBi9bax1c
 AIzaSyCEU4vCIYtilSvu-UicMv9JNEDBi9bax1c
@@ -9552,26 +9395,6 @@ https://maps.googleapis.com/maps/api/staticmap?parameters
 https://maps.googleapis.com/maps/api/staticmap?center=25.052019,121.513987&zoom=15&size=320x240&language=zh-TW&maptype=roadmap&markers=color:red|label:A|25.052019,121.513987&key=AIzaSyCEU4vCIYtilSvu-UicMv9JNEDBi9bax1c
 
 https://maps.googleapis.com/maps/api/staticmap?center=25.052019,121.513987&zoom=15&size=320x240&language=zh-TW&maptype=roadmap&markers=color:red|label:A|25.052019,121.513987&key=AIzaSyCEU4vCIYtilSvu-UicMv9JNEDBi9bax1c
-
-//------------------------------------------------------------  # 60個
-
-或者用try catch包围它以避免异常。
-
-只需添加：
-namespace System.IO
-{
-    public static class ExtendedMethod
-    {
-        public static void Rename(this FileInfo fileInfo, string newName)
-        {
-            fileInfo.MoveTo(fileInfo.Directory.FullName + "\\" + newName);
-        }
-    }
-}
-然后...
-
-FileInfo file = new FileInfo("c:\test.txt");
-file.Rename("test2.txt");
 
 //------------------------------------------------------------  # 60個
 
@@ -11393,87 +11216,37 @@ this.StartPosition = FormStartPosition.CenterScreen;  // 單獨寫致中，看�
                                                         g.DrawLines(gammaPen, curvePoints);   //畫直線
             */
 
-
-//另存新檔
-SaveBitmapUsingExtension(RotatedBitmap, sfdFile.FileName);
-
-vcs helper的  根據副檔名 決定檔案儲存格式
-
-public void SaveBitmapUsingExtension(Bitmap bitmap1, string filename)
-{
-    string extension = Path.GetExtension(filename);
-    switch (extension.ToLower())
-    {
-        case ".bmp":
-            bitmap1.Save(filename, ImageFormat.Bmp);
-            break;
-        case ".exif":
-            bitmap1.Save(filename, ImageFormat.Exif);
-            break;
-        case ".gif":
-            bitmap1.Save(filename, ImageFormat.Gif);
-            break;
-        case ".jpg":
-        case ".jpeg":
-            bitmap1.Save(filename, ImageFormat.Jpeg);
-            break;
-        case ".png":
-            bitmap1.Save(filename, ImageFormat.Png);
-            break;
-        case ".tif":
-        case ".tiff":
-            bitmap1.Save(filename, ImageFormat.Tiff);
-            break;
-        default:
-            throw new NotSupportedException(
-                "Unknown file extension " + extension);
-    }
-}
+6060
 
         private void bt_save_Click(object sender, EventArgs e)
         {
             // Make a copy of the result image.
             using (Bitmap bmp = (Bitmap)pictureBox0.Image.Clone())
             {
-                save_image_to_drive(bmp);
-            }
-        }
-
-        void save_image_to_drive(Bitmap bitmap1)
-        {
-            if (bitmap1 != null)
-            {
-                string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png";
-                bitmap1.Save(@filename, ImageFormat.Png);
-
-                richTextBox1.Text += "已存檔 : " + filename + "\n";
-            }
-            else
-            {
-                richTextBox1.Text += "無圖可存\n";
+                //存圖
             }
         }
 
 //------------------------------------------------------------  # 60個
 
-file.
-directory.
+// 取得附檔名包含點
+    string extension = Path.GetExtension(filename);
 
-建立臨時檔案
+6060
 
-	            if(!Directory.Exists(dirPath))  
-	            {  
-	                Directory.CreateDirectory(dirPath);  
-	            }  
+            bitmap1.Save(filename, ImageFormat.Bmp);
+            bitmap1.Save(filename, ImageFormat.Exif);
+            bitmap1.Save(filename, ImageFormat.Gif);
+            bitmap1.Save(filename, ImageFormat.Jpeg);
+            bitmap1.Save(filename, ImageFormat.Png);
+            bitmap1.Save(filename, ImageFormat.Tiff);
 
-		String retval = "";
-		
-		// Delete all the files
-		String[] filenames = Directory.GetFiles(pPath);
-		foreach (String filename in filenames)
-			File.Delete(filename);
-		// Delete the directory
-		Directory.Delete(pPath, true);
-		return retval;
+//------------------------------------------------------------  # 60個
+
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------  # 60個
+
+
+
 
 

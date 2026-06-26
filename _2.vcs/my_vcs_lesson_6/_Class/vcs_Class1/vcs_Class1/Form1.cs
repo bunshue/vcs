@@ -71,6 +71,7 @@ namespace vcs_Class1
                 set { _FirstName = value; }
             }
 
+            //自動實作屬性
             public string LastName { get; set; }  // 有get有set簡寫, 可讀可寫
 
             public ClassPrintDataExample(string firstName, string lastName, Form1 f1)
@@ -611,41 +612,6 @@ namespace vcs_Class1
 
         //------------------------------------------------------------  # 60個
 
-        class PersonData4
-        {
-            //自動實作屬性
-            public string Name { get; set; }  // 有get有set簡寫, 可讀可寫
-            public byte Height { get; set; }  // 有get有set簡寫, 可讀可寫
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        public class PersonData5
-        {
-            private string _FirstName;
-            public string FirstName
-            {
-                get { return _FirstName; }
-                set { _FirstName = value; }
-            }
-
-            public string LastName { get; set; }  // 有get有set簡寫, 可讀可寫
-
-            public PersonData5(string firstName, string lastName)
-            {
-                FirstName = firstName;
-                LastName = lastName;
-            }
-
-            //類別內取出資料的方法 override string ToString()
-            public override string ToString()
-            {
-                return FirstName + " " + LastName;
-            }
-        }
-
-        //------------------------------------------------------------  # 60個
-
         class PersonData6
         {
             private string firstname = "DEFAULT";  // 預設值
@@ -706,44 +672,8 @@ namespace vcs_Class1
             }
         }
 
-        //------------------------------------------------------------  # 60個
-
         private void bt_class07_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "Class 範例 PersonData4\n";
-
-            PersonData4 pData4 = new PersonData4()
-            {
-                Name = "王小風",
-                Height = 176
-            };
-
-            richTextBox1.Text += "姓名 : " + pData4.Name + "\t身高 : " + pData4.Height + "\n";
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            richTextBox1.Text += "Class 範例 PersonData5, 類別陣列\n";
-
-            richTextBox1.Text += "建立一個PersonData5物件一維陣列, 長度3\n";
-
-            //類別PersonData5做成的物件一維陣列 pData5
-            PersonData5[] pData5 = new PersonData5[3];
-
-            richTextBox1.Text += "對第0個物件初始化\n";
-            pData5[0] = new PersonData5("David", "Wang");
-            richTextBox1.Text += "對第1個物件初始化\n";
-            pData5[1] = new PersonData5("Jerry", "Lin");
-            richTextBox1.Text += "對第2個物件初始化\n";
-            pData5[2] = new PersonData5("James P.", "Sullivan");
-
-            richTextBox1.Text += "顯示每個物件的內容\n";
-            for (int i = 0; i < 3; i++)
-            {
-                richTextBox1.Text += "第 " + i.ToString() + "個\t" + pData5[i].ToString() + "\n";
-            }
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
             PersonData6 pData6 = new PersonData6();
 
             richTextBox1.Text += "僅宣告物件, 還沒給值, 讀FirstName, ";
@@ -1826,6 +1756,7 @@ namespace vcs_Class1
 
     public class ClassStudent
     {
+        //自動實作屬性
         public long Id { get; set; }  // 有get有set簡寫, 可讀可寫
         public string Name { get; set; }  // 有get有set簡寫, 可讀可寫
         public short Age { get; set; }  // 有get有set簡寫, 可讀可寫
@@ -1834,6 +1765,7 @@ namespace vcs_Class1
 
     public class ClassTeacher
     {
+        //自動實作屬性
         public long Id { get; set; }  // 有get有set簡寫, 可讀可寫
         public string Name { get; set; }  // 有get有set簡寫, 可讀可寫
         public int DepartmentId { get; set; }  // 有get有set簡寫, 可讀可寫
@@ -1974,3 +1906,8 @@ namespace vcs_Class1
 */
 
 
+
+//richTextBox1.Text += "Class 範例 PersonData5, 類別陣列\n";
+//類別陣列的寫法
+//類別PersonData5做成的物件一維陣列 pData5
+//PersonData5[] pData5 = new PersonData5[3];

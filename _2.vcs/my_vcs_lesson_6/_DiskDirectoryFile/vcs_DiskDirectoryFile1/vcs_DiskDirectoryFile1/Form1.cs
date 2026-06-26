@@ -1641,7 +1641,45 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_files09_Click(object sender, EventArgs e)
         {
+            //GetDirectories
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\_case1\";
+            richTextBox1.Text += "讀出一資料夾內所有檔案 -r, 資料夾\t" + foldername + "\n";
+
+            get_all_files(foldername);
         }
+
+        int total_number_files = 0;
+        void get_all_files(string foldername)
+        {
+            total_number_files = 0;
+            DirectoryInfo temp3 = new DirectoryInfo(foldername);
+
+            DirectoryInfo[] idr = temp3.GetDirectories();//獲取當前目錄下的所有子目錄.
+            foreach (DirectoryInfo dir in idr)
+            {
+                richTextBox1.Text += "取得資料夾 : " + dir.FullName + "\n";
+
+
+                FileInfo[] files1 = dir.GetFiles();
+
+                foreach (FileInfo file in files1)
+                {
+                    richTextBox1.Text += "取得檔案 : " + file.FullName + "\n";
+                    total_number_files++;
+                }
+            }
+
+            richTextBox1.Text += "目錄 : " + foldername + " 下\n";
+            FileInfo[] files2 = temp3.GetFiles();
+
+            foreach (FileInfo file in files2)
+            {
+                richTextBox1.Text += "取得檔案 : " + file.FullName + "\n";
+                total_number_files++;
+            }
+            richTextBox1.Text += "共取得檔案 " + total_number_files.ToString() + " 個\n";
+        }
+
 
         //------------------------------------------------------------  # 60個
 
@@ -2108,12 +2146,6 @@ File.Create("tmp_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".txt");//創建�
 */
 
 /*
-                //只撈一層的所有檔案
-                foreach (string fname in System.IO.Directory.GetFileSystemEntries(path))
-                {
-                    richTextBox1.Text += fname + "\n";
-                }
-
                         string[] fileEntries = Directory.GetFiles(path);
                         Array.Sort(fileEntries);
                         foreach (string fileName in fileEntries)
@@ -2134,4 +2166,68 @@ else
     richTextBox1.Text += "搜尋資料夾: " + Path + " 存在\n";
 */
 
+//------------------------------------------------------------  # 60個
+
+/*
+	            if(!Directory.Exists(dirPath))  
+	            {  
+	                Directory.CreateDirectory(dirPath);  
+	            }  
+
+		String retval = "";
+		
+		// Delete all the files
+		String[] filenames = Directory.GetFiles(pPath);
+		foreach (String filename in filenames)
+			File.Delete(filename);
+		// Delete the directory
+		Directory.Delete(pPath, true);
+		return retval;
+
+//------------------------------------------------------------  # 60個
+
+            if (path == String.Empty)
+                path = @"D:\_git\vcs\_1.data\______test_files1";
+
+            //C# 取得資料夾下的所有檔案(包括子目錄)
+            string[] files = System.IO.Directory.GetFiles(path, filetype2, System.IO.SearchOption.AllDirectories);
+            foreach (string filename in files)
+            {
+                //richTextBox1.Text += filename + "\n";
+                FileInfo fi = new FileInfo(filename);
+                richTextBox1.Text += fi.Name + "\n";
+            }
+
+//------------------------------------------------------------  # 60個
+
+        public static void Rename(this FileInfo fileInfo, string newName)
+        {
+            fileInfo.MoveTo(fileInfo.Directory.FullName + "\\" + newName);
+        }
+
+FileInfo file = new FileInfo("c:\test.txt");
+file.Rename("test2.txt");
+
+//------------------------------------------------------------  # 60個
+
+
+                        FileAttributes attr = (new FileInfo(filePath)).Attributes;
+                        Console.Write("UnAuthorizedAccessException: Unable to access file. ");
+                        if ((attr & FileAttributes.ReadOnly) > 0)
+                            Console.Write("The file is read-only.");
+
+//------------------------------------------------------------  # 60個
+
+//一般文件名按顺序排
+string[] pngfiles = Directory.GetFileSystemEntries(directory, "*.png");
+
+for (int i = 0, count = pngfiles.Length; i < count; i++)
+{
+    e.AddFrame(Image.FromFile(pngfiles[i]));
+}
+
+//------------------------------------------------------------  # 60個
+
+
+*/
 

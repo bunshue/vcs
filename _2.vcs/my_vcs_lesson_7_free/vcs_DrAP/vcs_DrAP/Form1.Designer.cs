@@ -31,9 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.bt_clear_data = new System.Windows.Forms.Button();
-            this.bt_help = new System.Windows.Forms.Button();
-            this.bt_copy_data = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
@@ -53,15 +50,12 @@
             this.bt_find_small_folders = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
-            this.bt_test1 = new System.Windows.Forms.Button();
             this.bt_clear1 = new System.Windows.Forms.Button();
             this.bt_clear2 = new System.Windows.Forms.Button();
             this.bt_find_same_files2 = new System.Windows.Forms.Button();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.cb_video_only = new System.Windows.Forms.CheckBox();
             this.cb_video_s = new System.Windows.Forms.CheckBox();
-            this.cb_generate_text = new System.Windows.Forms.CheckBox();
-            this.checkBox7 = new System.Windows.Forms.CheckBox();
             this.groupBox_video = new System.Windows.Forms.GroupBox();
             this.cb_video_l = new System.Windows.Forms.CheckBox();
             this.cb_video_m = new System.Windows.Forms.CheckBox();
@@ -73,10 +67,8 @@
             this.cb_file_size = new System.Windows.Forms.CheckBox();
             this.cb_option1 = new System.Windows.Forms.CheckBox();
             this.bt_find_empty_folders = new System.Windows.Forms.Button();
-            this.bt_test2 = new System.Windows.Forms.Button();
             this.bt_save_file_data = new System.Windows.Forms.Button();
             this.bt_clear3 = new System.Windows.Forms.Button();
-            this.cb_option2 = new System.Windows.Forms.CheckBox();
             this.groupbox_python = new System.Windows.Forms.GroupBox();
             this.rb_python_search1 = new System.Windows.Forms.RadioButton();
             this.bt_edit_python_files = new System.Windows.Forms.Button();
@@ -129,45 +121,12 @@
             this.comboBox1.TabIndex = 1;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
-            // bt_clear_data
-            // 
-            this.bt_clear_data.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear_data.Location = new System.Drawing.Point(699, 5);
-            this.bt_clear_data.Name = "bt_clear_data";
-            this.bt_clear_data.Size = new System.Drawing.Size(60, 23);
-            this.bt_clear_data.TabIndex = 5;
-            this.bt_clear_data.Text = "清除";
-            this.bt_clear_data.UseVisualStyleBackColor = true;
-            this.bt_clear_data.Click += new System.EventHandler(this.bt_clear_data_Click);
-            // 
-            // bt_help
-            // 
-            this.bt_help.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_help.Location = new System.Drawing.Point(846, 4);
-            this.bt_help.Name = "bt_help";
-            this.bt_help.Size = new System.Drawing.Size(75, 23);
-            this.bt_help.TabIndex = 8;
-            this.bt_help.Text = "Help";
-            this.bt_help.UseVisualStyleBackColor = true;
-            this.bt_help.Click += new System.EventHandler(this.bt_help_Click);
-            // 
-            // bt_copy_data
-            // 
-            this.bt_copy_data.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_copy_data.Location = new System.Drawing.Point(765, 5);
-            this.bt_copy_data.Name = "bt_copy_data";
-            this.bt_copy_data.Size = new System.Drawing.Size(75, 23);
-            this.bt_copy_data.TabIndex = 6;
-            this.bt_copy_data.Text = "複製全部";
-            this.bt_copy_data.UseVisualStyleBackColor = true;
-            this.bt_copy_data.Click += new System.EventHandler(this.bt_copy_data_Click);
-            // 
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(12, 619);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 223);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(1300, 388);
+            this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 10;
             this.richTextBox1.Text = "";
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
@@ -175,9 +134,9 @@
             // listView1
             // 
             this.listView1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.listView1.Location = new System.Drawing.Point(12, 113);
+            this.listView1.Location = new System.Drawing.Point(12, 120);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(221, 217);
+            this.listView1.Size = new System.Drawing.Size(100, 100);
             this.listView1.TabIndex = 14;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -220,9 +179,9 @@
             // richTextBox2
             // 
             this.richTextBox2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox2.Location = new System.Drawing.Point(1318, 619);
+            this.richTextBox2.Location = new System.Drawing.Point(12, 329);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(347, 388);
+            this.richTextBox2.Size = new System.Drawing.Size(100, 100);
             this.richTextBox2.TabIndex = 19;
             this.richTextBox2.Text = "";
             this.richTextBox2.TextChanged += new System.EventHandler(this.richTextBox2_TextChanged);
@@ -251,7 +210,7 @@
             // tb_search
             // 
             this.tb_search.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_search.Location = new System.Drawing.Point(630, 120);
+            this.tb_search.Location = new System.Drawing.Point(118, 273);
             this.tb_search.Name = "tb_search";
             this.tb_search.Size = new System.Drawing.Size(150, 30);
             this.tb_search.TabIndex = 24;
@@ -331,7 +290,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1044, 17);
+            this.label3.Location = new System.Drawing.Point(907, 18);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(23, 12);
             this.label3.TabIndex = 34;
@@ -340,28 +299,17 @@
             // textBox4
             // 
             this.textBox4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox4.Location = new System.Drawing.Point(996, 9);
+            this.textBox4.Location = new System.Drawing.Point(859, 10);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(42, 30);
             this.textBox4.TabIndex = 33;
             this.textBox4.Text = "10";
             this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // bt_test1
-            // 
-            this.bt_test1.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_test1.Location = new System.Drawing.Point(1194, 71);
-            this.bt_test1.Name = "bt_test1";
-            this.bt_test1.Size = new System.Drawing.Size(30, 25);
-            this.bt_test1.TabIndex = 35;
-            this.bt_test1.Text = "T1";
-            this.bt_test1.UseVisualStyleBackColor = true;
-            this.bt_test1.Click += new System.EventHandler(this.bt_test1_Click);
-            // 
             // bt_clear1
             // 
             this.bt_clear1.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear1.Location = new System.Drawing.Point(1248, 620);
+            this.bt_clear1.Location = new System.Drawing.Point(32, 237);
             this.bt_clear1.Name = "bt_clear1";
             this.bt_clear1.Size = new System.Drawing.Size(63, 30);
             this.bt_clear1.TabIndex = 36;
@@ -372,7 +320,7 @@
             // bt_clear2
             // 
             this.bt_clear2.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear2.Location = new System.Drawing.Point(1605, 620);
+            this.bt_clear2.Location = new System.Drawing.Point(32, 350);
             this.bt_clear2.Name = "bt_clear2";
             this.bt_clear2.Size = new System.Drawing.Size(63, 30);
             this.bt_clear2.TabIndex = 37;
@@ -429,32 +377,6 @@
             this.cb_video_s.Text = "小";
             this.cb_video_s.UseVisualStyleBackColor = true;
             this.cb_video_s.CheckedChanged += new System.EventHandler(this.cb_video_s_CheckedChanged);
-            // 
-            // cb_generate_text
-            // 
-            this.cb_generate_text.AutoSize = true;
-            this.cb_generate_text.Checked = true;
-            this.cb_generate_text.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_generate_text.Location = new System.Drawing.Point(310, 87);
-            this.cb_generate_text.Name = "cb_generate_text";
-            this.cb_generate_text.Size = new System.Drawing.Size(144, 16);
-            this.cb_generate_text.TabIndex = 44;
-            this.cb_generate_text.Text = "目錄下檔名轉出純文字";
-            this.cb_generate_text.UseVisualStyleBackColor = true;
-            this.cb_generate_text.CheckedChanged += new System.EventHandler(this.cb_generate_text_CheckedChanged);
-            // 
-            // checkBox7
-            // 
-            this.checkBox7.AutoSize = true;
-            this.checkBox7.Checked = true;
-            this.checkBox7.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox7.Location = new System.Drawing.Point(1194, 43);
-            this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(62, 16);
-            this.checkBox7.TabIndex = 45;
-            this.checkBox7.Text = "message";
-            this.checkBox7.UseVisualStyleBackColor = true;
-            this.checkBox7.CheckedChanged += new System.EventHandler(this.checkBox7_CheckedChanged);
             // 
             // groupBox_video
             // 
@@ -599,17 +521,6 @@
             this.bt_find_empty_folders.UseVisualStyleBackColor = true;
             this.bt_find_empty_folders.Click += new System.EventHandler(this.bt_find_empty_folders_Click);
             // 
-            // bt_test2
-            // 
-            this.bt_test2.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_test2.Location = new System.Drawing.Point(1235, 71);
-            this.bt_test2.Name = "bt_test2";
-            this.bt_test2.Size = new System.Drawing.Size(30, 25);
-            this.bt_test2.TabIndex = 55;
-            this.bt_test2.Text = "T2";
-            this.bt_test2.UseVisualStyleBackColor = true;
-            this.bt_test2.Click += new System.EventHandler(this.bt_test2_Click);
-            // 
             // bt_save_file_data
             // 
             this.bt_save_file_data.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
@@ -625,7 +536,7 @@
             // bt_clear3
             // 
             this.bt_clear3.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear3.Location = new System.Drawing.Point(239, 300);
+            this.bt_clear3.Location = new System.Drawing.Point(32, 145);
             this.bt_clear3.Name = "bt_clear3";
             this.bt_clear3.Size = new System.Drawing.Size(63, 30);
             this.bt_clear3.TabIndex = 57;
@@ -633,24 +544,13 @@
             this.bt_clear3.UseVisualStyleBackColor = true;
             this.bt_clear3.Click += new System.EventHandler(this.bt_clear3_Click);
             // 
-            // cb_option2
-            // 
-            this.cb_option2.AutoSize = true;
-            this.cb_option2.Location = new System.Drawing.Point(1271, 60);
-            this.cb_option2.Name = "cb_option2";
-            this.cb_option2.Size = new System.Drawing.Size(84, 16);
-            this.cb_option2.TabIndex = 61;
-            this.cb_option2.Text = "指定資料夾";
-            this.cb_option2.UseVisualStyleBackColor = true;
-            this.cb_option2.CheckedChanged += new System.EventHandler(this.cb_option2_CheckedChanged);
-            // 
             // groupbox_python
             // 
             this.groupbox_python.Controls.Add(this.rb_python_search1);
             this.groupbox_python.Controls.Add(this.bt_edit_python_files);
             this.groupbox_python.Controls.Add(this.rb_python_search0);
             this.groupbox_python.Controls.Add(this.bt_search_pattern_python);
-            this.groupbox_python.Location = new System.Drawing.Point(239, 113);
+            this.groupbox_python.Location = new System.Drawing.Point(118, 120);
             this.groupbox_python.Name = "groupbox_python";
             this.groupbox_python.Size = new System.Drawing.Size(131, 132);
             this.groupbox_python.TabIndex = 64;
@@ -707,7 +607,7 @@
             // 
             this.groupbox_result.Controls.Add(this.lb_search_result2);
             this.groupbox_result.Controls.Add(this.lb_search_result1);
-            this.groupbox_result.Location = new System.Drawing.Point(439, 115);
+            this.groupbox_result.Location = new System.Drawing.Point(263, 120);
             this.groupbox_result.Name = "groupbox_result";
             this.groupbox_result.Size = new System.Drawing.Size(173, 132);
             this.groupbox_result.TabIndex = 65;
@@ -804,7 +704,7 @@
             this.bt_copy_rtb_data.BackgroundImage = global::vcs_DrAP.Properties.Resources.clipboard;
             this.bt_copy_rtb_data.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_copy_rtb_data.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_copy_rtb_data.Location = new System.Drawing.Point(1605, 649);
+            this.bt_copy_rtb_data.Location = new System.Drawing.Point(32, 379);
             this.bt_copy_rtb_data.Name = "bt_copy_rtb_data";
             this.bt_copy_rtb_data.Size = new System.Drawing.Size(45, 45);
             this.bt_copy_rtb_data.TabIndex = 53;
@@ -828,7 +728,7 @@
             this.bt_save_rtb_data.BackgroundImage = global::vcs_DrAP.Properties.Resources.save_file;
             this.bt_save_rtb_data.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_save_rtb_data.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_save_rtb_data.Location = new System.Drawing.Point(1248, 649);
+            this.bt_save_rtb_data.Location = new System.Drawing.Point(32, 273);
             this.bt_save_rtb_data.Name = "bt_save_rtb_data";
             this.bt_save_rtb_data.Size = new System.Drawing.Size(45, 45);
             this.bt_save_rtb_data.TabIndex = 40;
@@ -911,19 +811,18 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1886, 1008);
+            this.ClientSize = new System.Drawing.Size(1654, 588);
+            this.Controls.Add(this.bt_delete_file);
             this.Controls.Add(this.bt_open_with_vcs);
             this.Controls.Add(this.bt_replace);
             this.Controls.Add(this.bt_compare);
             this.Controls.Add(this.groupbox_result);
             this.Controls.Add(this.groupbox_python);
-            this.Controls.Add(this.cb_option2);
             this.Controls.Add(this.bt_search_pattern_opengl);
             this.Controls.Add(this.bt_open_dir2);
             this.Controls.Add(this.bt_search_pattern_cuda);
             this.Controls.Add(this.bt_clear3);
             this.Controls.Add(this.bt_save_file_data);
-            this.Controls.Add(this.bt_test2);
             this.Controls.Add(this.bt_find_empty_folders);
             this.Controls.Add(this.bt_copy_rtb_data);
             this.Controls.Add(this.bt_setup);
@@ -931,15 +830,12 @@
             this.Controls.Add(this.cb_file_size);
             this.Controls.Add(this.groupBox_file);
             this.Controls.Add(this.groupBox_video);
-            this.Controls.Add(this.checkBox7);
-            this.Controls.Add(this.cb_generate_text);
             this.Controls.Add(this.cb_video_only);
             this.Controls.Add(this.checkBox3);
             this.Controls.Add(this.bt_save_rtb_data);
             this.Controls.Add(this.bt_find_same_files2);
             this.Controls.Add(this.bt_clear2);
             this.Controls.Add(this.bt_clear1);
-            this.Controls.Add(this.bt_test1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.bt_find_small_folders);
@@ -950,7 +846,6 @@
             this.Controls.Add(this.bt_find_same_files);
             this.Controls.Add(this.bt_search_pattern_vcs);
             this.Controls.Add(this.tb_search);
-            this.Controls.Add(this.bt_delete_file);
             this.Controls.Add(this.bt_find_big_files);
             this.Controls.Add(this.tb_search_text_pattern);
             this.Controls.Add(this.richTextBox2);
@@ -959,10 +854,7 @@
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.bt_open_dir);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.bt_help);
             this.Controls.Add(this.bt_save_data);
-            this.Controls.Add(this.bt_copy_data);
-            this.Controls.Add(this.bt_clear_data);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -987,10 +879,7 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button bt_clear_data;
-        private System.Windows.Forms.Button bt_help;
         private System.Windows.Forms.Button bt_save_data;
-        private System.Windows.Forms.Button bt_copy_data;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button bt_open_dir;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
@@ -1014,7 +903,6 @@
         private System.Windows.Forms.Button bt_find_small_folders;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Button bt_test1;
         private System.Windows.Forms.Button bt_clear1;
         private System.Windows.Forms.Button bt_clear2;
         private System.Windows.Forms.Button bt_find_same_files2;
@@ -1023,8 +911,6 @@
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.CheckBox cb_video_only;
         private System.Windows.Forms.CheckBox cb_video_s;
-        private System.Windows.Forms.CheckBox cb_generate_text;
-        private System.Windows.Forms.CheckBox checkBox7;
         private System.Windows.Forms.GroupBox groupBox_video;
         private System.Windows.Forms.CheckBox cb_video_l;
         private System.Windows.Forms.CheckBox cb_video_m;
@@ -1038,13 +924,11 @@
         private System.Windows.Forms.Button bt_setup;
         private System.Windows.Forms.Button bt_copy_rtb_data;
         private System.Windows.Forms.Button bt_find_empty_folders;
-        private System.Windows.Forms.Button bt_test2;
         private System.Windows.Forms.Button bt_save_file_data;
         private System.Windows.Forms.Button bt_clear3;
         private System.Windows.Forms.Button bt_search_pattern_cuda;
         private System.Windows.Forms.Button bt_open_dir2;
         private System.Windows.Forms.Button bt_search_pattern_opengl;
-        private System.Windows.Forms.CheckBox cb_option2;
         private System.Windows.Forms.Button bt_edit_python_files;
         private System.Windows.Forms.GroupBox groupbox_python;
         private System.Windows.Forms.RadioButton rb_python_search1;

@@ -50,16 +50,29 @@ namespace vcs_GetFileInfo
         void show_item_location()
         {
             //button
+            int W = 200;
+            int H = 60;
             int x_st = 10;
             int y_st = 10;
-            int dx = 200 + 10;
-            int dy = 60 + 10;
+            int dx = W + 10;
+            int dy = H + 10;
+
+            listView1.Size = new Size(W * 3 + 20, H * 11 + 10);
+            pictureBox1.Size = new Size(W * 2, H * 5);
+            richTextBox_fileinfo.Size = new Size(W * 2, H * 3);
+            richTextBox1.Size = new Size(W * 2, H * 4);
+
+            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            listView1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            richTextBox_fileinfo.Location = new Point(x_st + dx * 3, y_st + dy * 5 - 40);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 8 - 60);
 
             //richTextBox1.Size = new Size(300, 690);
             //richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(950, 750);
+            this.Size = new Size(W * 5 + 70, 800);
             this.Text = "vcs_GetFileInfo";
 
             //設定執行後的表單起始位置, 正中央
@@ -101,8 +114,11 @@ namespace vcs_GetFileInfo
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            richTextBox1.Text += listView1.SelectedItems.Count.ToString() + "\n";
+
             if (listView1.SelectedItems.Count != 0)
             {
+                richTextBox1.Text += listView1.SelectedItems[0].Text + "\n";
                 FileInfo fi = new FileInfo(listView1.SelectedItems[0].Text);
                 string[] strAttribute = new string[] { fi.Name, Convert.ToDouble(fi.Length / 1024).ToString(), fi.Extension, fi.CreationTime.ToString(), fi.IsReadOnly.ToString(), fi.LastWriteTime.ToString() };
                 var values = from str in strAttribute

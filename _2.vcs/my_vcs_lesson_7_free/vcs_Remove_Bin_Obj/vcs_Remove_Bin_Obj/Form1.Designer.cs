@@ -42,8 +42,6 @@
             this.checkBox8 = new System.Windows.Forms.CheckBox();
             this.checkBox9 = new System.Windows.Forms.CheckBox();
             this.checkBox10 = new System.Windows.Forms.CheckBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             this.groupBox_remove = new System.Windows.Forms.GroupBox();
             this.rb_remove_opengl = new System.Windows.Forms.RadioButton();
             this.rb_remove_cuda = new System.Windows.Forms.RadioButton();
@@ -212,26 +210,6 @@
             this.checkBox10.Text = "刪除空資料夾";
             this.checkBox10.UseVisualStyleBackColor = true;
             // 
-            // button2
-            // 
-            this.button2.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button2.Location = new System.Drawing.Point(12, 538);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(104, 52);
-            this.button2.TabIndex = 140;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button4
-            // 
-            this.button4.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button4.Location = new System.Drawing.Point(132, 538);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(104, 52);
-            this.button4.TabIndex = 141;
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
             // groupBox_remove
             // 
             this.groupBox_remove.Controls.Add(this.rb_remove_opengl);
@@ -332,8 +310,6 @@
             this.Controls.Add(this.bt_open_dir2);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.groupBox_remove);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.checkBox10);
             this.Controls.Add(this.checkBox9);
             this.Controls.Add(this.checkBox8);
@@ -373,8 +349,6 @@
         private System.Windows.Forms.CheckBox checkBox8;
         private System.Windows.Forms.CheckBox checkBox9;
         private System.Windows.Forms.CheckBox checkBox10;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.GroupBox groupBox_remove;
         private System.Windows.Forms.RadioButton rb_remove_opengl;
         private System.Windows.Forms.RadioButton rb_remove_cuda;

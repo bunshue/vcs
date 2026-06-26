@@ -27,6 +27,10 @@ namespace vcs_PropertiesSettingsDefault
         //在程式開啟時把資料讀出來
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
             label1.Text = "記住表單的大小和位置,\n程式關閉時記住,\n程式開啟時讀出並套用";
 
             richTextBox1.Text += "取得預設資料 :\n";
@@ -52,6 +56,20 @@ namespace vcs_PropertiesSettingsDefault
 
             Properties.Settings.Default.Save();
         }
+
+        void show_item_location()
+        {
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Text = "vcs_PropertiesSettingsDefault";
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
 
         void show_form_information()
         {
@@ -109,3 +127,60 @@ namespace vcs_PropertiesSettingsDefault
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+
+
+/*
+//Properties Save ST
+
+            this.SetBounds(
+                Properties.Settings.Default.Left,
+                Properties.Settings.Default.Top,
+                Properties.Settings.Default.Width,
+                Properties.Settings.Default.Height);
+
+            txtScale.Text = Properties.Settings.Default.Scale;
+
+        // Save parameters.
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.Left = this.Left;
+            Properties.Settings.Default.Top = this.Top;
+            Properties.Settings.Default.Width = this.Width;
+            Properties.Settings.Default.Height = this.Height;
+
+            Properties.Settings.Default.Directory = txtDirectory.Text;
+            Properties.Settings.Default.Scale = txtScale.Text;
+
+            Properties.Settings.Default.Save();
+        }
+
+有需要存檔的資料
+1. 最後存取的路徑
+2. 視窗大小
+3. 最後選取的設定項目
+
+
+若是我的筆記本
+
+properties.save
+還要儲存字型 大小 前景色背景色
+表單大小位置 
+
+//Properties Save SP
+*/
+//------------------------------------------------------------  # 60個
+
+
