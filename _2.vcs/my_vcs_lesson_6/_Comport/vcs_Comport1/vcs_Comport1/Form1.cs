@@ -34,6 +34,7 @@ namespace vcs_Comport1
         ShowString AA;
         // 接收字符串存储
         string ReadStr = "";
+
         public Form1()
         {
             InitializeComponent();
@@ -81,3 +82,4 @@ namespace vcs_Comport1
         }
     }
 }
+

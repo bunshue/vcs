@@ -1,4 +1,4 @@
-namespace SerialPortTerminal
+namespace vcs_About
 {
   partial class frmAbout
   {

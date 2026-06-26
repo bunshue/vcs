@@ -49,7 +49,6 @@ namespace SerialPortTerminal
         this.cmbStopBits = new System.Windows.Forms.ComboBox();
         this.btnOpenPort = new System.Windows.Forms.Button();
         this.gbPortSettings = new System.Windows.Forms.GroupBox();
-        this.lnkAbout = new System.Windows.Forms.LinkLabel();
         this.groupBox1 = new System.Windows.Forms.GroupBox();
         this.chkRTS = new System.Windows.Forms.CheckBox();
         this.chkCD = new System.Windows.Forms.CheckBox();
@@ -62,6 +61,7 @@ namespace SerialPortTerminal
         this.tmrCheckComPorts = new System.Windows.Forms.Timer(this.components);
         this.toolTip = new System.Windows.Forms.ToolTip(this.components);
         this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+        this.bt_clear = new System.Windows.Forms.Button();
         this.gbMode.SuspendLayout();
         this.gbPortSettings.SuspendLayout();
         this.groupBox1.SuspendLayout();
@@ -279,17 +279,6 @@ namespace SerialPortTerminal
         this.gbPortSettings.TabStop = false;
         this.gbPortSettings.Text = "COM Serial Port Settings";
         // 
-        // lnkAbout
-        // 
-        this.lnkAbout.AutoSize = true;
-        this.lnkAbout.Location = new System.Drawing.Point(679, 537);
-        this.lnkAbout.Name = "lnkAbout";
-        this.lnkAbout.Size = new System.Drawing.Size(34, 12);
-        this.lnkAbout.TabIndex = 8;
-        this.lnkAbout.TabStop = true;
-        this.lnkAbout.Text = "&About";
-        this.lnkAbout.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkAbout_LinkClicked);
-        // 
         // groupBox1
         // 
         this.groupBox1.Controls.Add(this.chkRTS);
@@ -407,17 +396,28 @@ namespace SerialPortTerminal
         this.richTextBox1.TabIndex = 12;
         this.richTextBox1.Text = "";
         // 
+        // bt_clear
+        // 
+        this.bt_clear.Font = new System.Drawing.Font("·s²Ó©úÅé", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+        this.bt_clear.Location = new System.Drawing.Point(767, 23);
+        this.bt_clear.Name = "bt_clear";
+        this.bt_clear.Size = new System.Drawing.Size(72, 36);
+        this.bt_clear.TabIndex = 13;
+        this.bt_clear.Text = "Clear";
+        this.bt_clear.UseVisualStyleBackColor = true;
+        this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+        // 
         // frmTerminal
         // 
         this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         this.ClientSize = new System.Drawing.Size(1105, 594);
+        this.Controls.Add(this.bt_clear);
         this.Controls.Add(this.richTextBox1);
         this.Controls.Add(this.chkClearWithDTR);
         this.Controls.Add(this.chkClearOnOpen);
         this.Controls.Add(this.btnClear);
         this.Controls.Add(this.groupBox1);
-        this.Controls.Add(this.lnkAbout);
         this.Controls.Add(this.gbPortSettings);
         this.Controls.Add(this.btnOpenPort);
         this.Controls.Add(this.gbMode);
@@ -430,6 +430,7 @@ namespace SerialPortTerminal
         this.Name = "frmTerminal";
         this.Text = "SerialPort Terminal";
         this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmTerminal_FormClosing);
+        this.Load += new System.EventHandler(this.frmTerminal_Load);
         this.Shown += new System.EventHandler(this.frmTerminal_Shown);
         this.gbMode.ResumeLayout(false);
         this.gbMode.PerformLayout();
@@ -463,7 +464,6 @@ namespace SerialPortTerminal
     private System.Windows.Forms.ComboBox cmbStopBits;
     private System.Windows.Forms.Button btnOpenPort;
     private System.Windows.Forms.GroupBox gbPortSettings;
-		private System.Windows.Forms.LinkLabel lnkAbout;
 		private System.Windows.Forms.GroupBox groupBox1;
 		private System.Windows.Forms.CheckBox chkCD;
 		private System.Windows.Forms.CheckBox chkDSR;
@@ -476,6 +476,7 @@ namespace SerialPortTerminal
 		private System.Windows.Forms.Timer tmrCheckComPorts;
 		private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button bt_clear;
   }
 }
 

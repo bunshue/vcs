@@ -6,8 +6,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using SerialPortListener.Serial;
+
 using System.IO;
+using SerialPortListener.Serial;
 
 namespace SerialPortListener
 {
@@ -23,8 +24,43 @@ namespace SerialPortListener
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
+            portNameComboBox.SelectedIndex = 1;
+            baudRateComboBox.SelectedIndex = 10;
         }
+
+        void show_item_location()
+        {
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+
+            tbData.Size = new Size(500, 460);
+            tbData.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+
+            richTextBox1.Size = new Size(600, 690);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1273, 750);
+            this.Text = "SerialPortListener";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void UserInitialization()
         {
@@ -70,6 +106,8 @@ namespace SerialPortListener
             richTextBox1.Text += str;
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void btnStart_Click(object sender, EventArgs e)
         {
             _spManager.StartListening();
@@ -84,3 +122,14 @@ namespace SerialPortListener
     }
 }
 
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/

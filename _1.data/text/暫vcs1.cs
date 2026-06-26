@@ -1,12 +1,46 @@
 ﻿
+string strMinute = "";
+if(DateTime.Now.Minute > 30) strMinute="30";
+else strMinute = "00";
 
+string mapURL = String.Format(
+   "http://www.cwb.gov.tw/V7/observe/satellite/Data/s3p/s3p-{0}-{2}-{3}-{4}.jpg";
+   DateTime.Now.Year,
+   DateTime.Now.Month.ToString("00");
+   DataTime.Now.Day.ToString("00");
+   DateTime.Now.Hour.ToString("00");
+   strMinute);
+pictureBox1.ImageLocation = mapURL;
+pictureBox1.ClientSize = new Size(400,430);
+
+
+//------------------------------------------------------------  # 60個
+
+            //指定應用程式路徑
+            //string target = @"C:\Program Files\DAUM\PotPlayer\PotPlayerMini.exe";
+            string target = player_path;
+
+            //方法一
+            //Process.Start(target, "參數");
+            //Process.Start(target, all_filename);
+
+            //方法二
+            ProcessStartInfo pInfo = new ProcessStartInfo(target);
+            pInfo.Arguments = all_filename;
+
+            result_str += "target : " + target + "\n";
+            result_str += "all_filename : " + all_filename + "\n";
+
+            using (Process process = new Process())
+            {
+                process.StartInfo = pInfo;
+                process.Start();
+            }
+
+//------------------------------------------------------------  # 60個
 
             Bitmap bitmap1 = VerifyCodeHelper.CreateVerifyCodeBmp(out code);
             Bitmap bitmap2 = new Bitmap(bitmap1, 300, 200);  //改變大小
-
-
-
-
 
 //------------------------------------------------------------  # 60個
 
@@ -3496,15 +3530,14 @@ Name = htmlNode.InnerText
 
 Url = htmlNode.GetAttributeValue("href", "")
 
-6060
+//------------------------------------------------------------  # 60個
 
 十六、運行時顯示自己定義的圖標：
 //load icon and set to form
 System.Drawing.Icon ico = new System.Drawing.Icon(@c: empapp.ico);
 this.Icon = ico;
 
-6060
-
+//------------------------------------------------------------  # 60個
 
 
 ----------------vcs +++ ST----------------
@@ -9381,7 +9414,7 @@ FileSystem.DeleteFile("D:\\test.txt", UIOption.OnlyErrorDialogs, RecycleOption.S
             //label2.Text = "(" + Cursor.Position.X.ToString() + ", " + Cursor.Position.Y.ToString() + ")";
         }
 
-6060
+//------------------------------------------------------------  # 60個
 
 google map api key
 AIzaSyCEU4vCIYtilSvu-UicMv9JNEDBi9bax1c
@@ -11216,7 +11249,7 @@ this.StartPosition = FormStartPosition.CenterScreen;  // 單獨寫致中，看�
                                                         g.DrawLines(gammaPen, curvePoints);   //畫直線
             */
 
-6060
+//------------------------------------------------------------  # 60個
 
         private void bt_save_Click(object sender, EventArgs e)
         {
@@ -11232,7 +11265,7 @@ this.StartPosition = FormStartPosition.CenterScreen;  // 單獨寫致中，看�
 // 取得附檔名包含點
     string extension = Path.GetExtension(filename);
 
-6060
+//------------------------------------------------------------  # 60個
 
             bitmap1.Save(filename, ImageFormat.Bmp);
             bitmap1.Save(filename, ImageFormat.Exif);

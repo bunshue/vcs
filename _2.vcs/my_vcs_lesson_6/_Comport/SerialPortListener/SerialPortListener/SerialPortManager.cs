@@ -26,22 +26,22 @@ namespace SerialPortListener.Serial
                 _currentSerialSettings.PortName = _currentSerialSettings.PortNameCollection[0];
         }
 
-        
+
         ~SerialPortManager()
         {
             Dispose(false);
         }
 
 
-        #region Fields
+        //#region Fields
         private SerialPort _serialPort;
         private SerialSettings _currentSerialSettings = new SerialSettings();
         private string _latestRecieved = String.Empty;
-        public event EventHandler<SerialDataEventArgs> NewSerialDataRecieved; 
+        public event EventHandler<SerialDataEventArgs> NewSerialDataRecieved;
 
-        #endregion
+        //#endregion
 
-        #region Properties
+        //#region Properties
         /// <summary>
         /// Gets or sets the current serial port settings
         /// </summary>
@@ -51,9 +51,9 @@ namespace SerialPortListener.Serial
             set { _currentSerialSettings = value; }
         }
 
-        #endregion
+        //#endregion
 
-        #region Event handlers
+        //#region Event handlers
 
         void _currentSerialSettings_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
@@ -62,7 +62,7 @@ namespace SerialPortListener.Serial
                 UpdateBaudRateCollection();
         }
 
-        
+
         void _serialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             int dataLength = _serialPort.BytesToRead;
@@ -70,15 +70,15 @@ namespace SerialPortListener.Serial
             int nbrDataRead = _serialPort.Read(data, 0, dataLength);
             if (nbrDataRead == 0)
                 return;
-            
+
             // Send data to whom ever interested
             if (NewSerialDataRecieved != null)
                 NewSerialDataRecieved(this, new SerialDataEventArgs(data));
         }
 
-        #endregion
+        //#endregion
 
-        #region Methods
+        //#region Methods
 
         /// <summary>
         /// Connects to a serial port defined through the current settings
@@ -87,7 +87,7 @@ namespace SerialPortListener.Serial
         {
             // Closing serial port if it is open
             if (_serialPort != null && _serialPort.IsOpen)
-                    _serialPort.Close();
+                _serialPort.Close();
 
             // Setting serial port settings
             _serialPort = new SerialPort(
@@ -148,9 +148,7 @@ namespace SerialPortListener.Serial
             }
         }
 
-
-        #endregion
-
+        //#endregion
     }
 
     /// <summary>

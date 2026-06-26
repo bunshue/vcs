@@ -22,7 +22,7 @@ namespace SerialPortListener.Serial
         int[] _dataBitsCollection = new int[] { 5, 6, 7, 8 };
         StopBits _stopBits = StopBits.One;
 
-        #region Properties
+        //#region Properties
         /// <summary>
         /// The port to use (for example, COM1).
         /// </summary>
@@ -44,7 +44,7 @@ namespace SerialPortListener.Serial
         public int BaudRate
         {
             get { return _baudRate; }
-            set 
+            set
             {
                 if (_baudRate != value)
                 {
@@ -60,7 +60,7 @@ namespace SerialPortListener.Serial
         public Parity Parity
         {
             get { return _parity; }
-            set 
+            set
             {
                 if (_parity != value)
                 {
@@ -126,9 +126,9 @@ namespace SerialPortListener.Serial
             set { _dataBitsCollection = value; }
         }
 
-        #endregion
+        //#endregion
 
-        #region Methods
+        //#region Methods
         /// <summary>
         /// Updates the range of possible baud rates for device
         /// </summary>
@@ -207,6 +207,6 @@ namespace SerialPortListener.Serial
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        #endregion
+        //#endregion
     }
 }

@@ -13,7 +13,7 @@
  *             Search for "comport" to see how I'm using the SerialPort control.
  */
 
-#region Namespace Inclusions
+//#region Namespace Inclusions
 using System;
 using System.Linq;
 using System.Data;
@@ -27,18 +27,18 @@ using System.Collections.Generic;
 using SerialPortTerminal.Properties;
 using System.Threading;
 using System.IO;
-#endregion
+//#endregion
 
 namespace SerialPortTerminal
 {
-    #region Public Enumerations
+    //#region Public Enumerations
     public enum DataMode { Text, Hex }
     public enum LogMsgType { Incoming, Outgoing, Normal, Warning, Error };
-    #endregion
+    //#endregion
 
     public partial class frmTerminal : Form
     {
-        #region Local Variables
+        //#region Local Variables
 
         // The main control for communicating through the RS-232 port
         private SerialPort comport = new SerialPort();
@@ -50,9 +50,9 @@ namespace SerialPortTerminal
         private bool KeyHandled = false;
 
         private Settings settings = Settings.Default;
-        #endregion
+        //#endregion
 
-        #region Constructor
+        //#region Constructor
         public frmTerminal()
         {
             // Load user settings
@@ -72,6 +72,38 @@ namespace SerialPortTerminal
             comport.PinChanged += new SerialPinChangedEventHandler(comport_PinChanged);
         }
 
+        private void frmTerminal_Load(object sender, EventArgs e)
+        {
+            show_item_location();
+        }
+
+        void show_item_location()
+        {
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+
+            richTextBox1.Size = new Size(500, 690);
+            richTextBox1.Location = new Point(x_st + dx * 3 + 150, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1320, 750);
+            this.Text = "SerialPortTerminal";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
+
         void comport_PinChanged(object sender, SerialPinChangedEventArgs e)
         {
             // Show the state of the pins
@@ -88,9 +120,9 @@ namespace SerialPortTerminal
                 chkDSR.Checked = comport.DsrHolding;
             }));
         }
-        #endregion
+        //#endregion
 
-        #region Local Methods
+        //#region Local Methods
 
         /// <summary> Save the user's settings. </summary>
         private void SaveSettings()
@@ -217,9 +249,9 @@ namespace SerialPortTerminal
                 sb.Append(Convert.ToString(b, 16).PadLeft(2, '0').PadRight(3, ' '));
             return sb.ToString().ToUpper();
         }
-        #endregion
+        //#endregion
 
-        #region Local Properties
+        //#region Local Properties
         private DataMode CurrentDataMode
         {
             get
@@ -233,20 +265,16 @@ namespace SerialPortTerminal
                 else rbHex.Checked = true;
             }
         }
-        #endregion
+        //#endregion
 
-        #region Event Handlers
-        private void lnkAbout_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            // Show the user the about dialog
-            (new frmAbout()).ShowDialog(this);
-        }
+        //#region Event Handlers
 
         private void frmTerminal_Shown(object sender, EventArgs e)
         {
             Log(LogMsgType.Normal, String.Format("Application Started at {0}\n", DateTime.Now));
             richTextBox1.Text += String.Format("Application Started at {0}\n", DateTime.Now) + "\n";
         }
+
         private void frmTerminal_FormClosing(object sender, FormClosingEventArgs e)
         {
             // The form is closing, save the user's preferences
@@ -351,7 +379,7 @@ namespace SerialPortTerminal
         }
         private void txtSendData_KeyPress(object sender, KeyPressEventArgs e)
         { e.Handled = KeyHandled; }
-        #endregion
+        //#endregion
 
         private void chkDTR_CheckedChanged(object sender, EventArgs e)
         {
@@ -445,5 +473,16 @@ namespace SerialPortTerminal
     }
 }
 
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
 
 
