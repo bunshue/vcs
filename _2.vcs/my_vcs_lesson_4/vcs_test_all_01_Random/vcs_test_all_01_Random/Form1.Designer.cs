@@ -254,6 +254,7 @@
             this.bt_random11.Name = "bt_random11";
             this.bt_random11.Size = new System.Drawing.Size(190, 60);
             this.bt_random11.TabIndex = 32;
+            this.bt_random11.Text = "生成隨機字符碼";
             this.bt_random11.UseVisualStyleBackColor = true;
             this.bt_random11.Click += new System.EventHandler(this.bt_random11_Click);
             // 
@@ -679,16 +680,16 @@
             // 
             // txtNames
             // 
-            this.txtNames.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtNames.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.txtNames.Location = new System.Drawing.Point(16, 27);
             this.txtNames.Multiline = true;
             this.txtNames.Name = "txtNames";
             this.txtNames.Size = new System.Drawing.Size(100, 124);
             this.txtNames.TabIndex = 4;
             this.txtNames.Text = "Ann\r\nBob\r\nCindy\r\nDan\r\nEdwina\r\nFrank\r\nGina\r\nHarry\r\nIvy\r\nJack\r\nKlaudia\r\nLeonard\r\nMa" +
-                "rcie\r\nNate\r\nOlivia\r\nPaul\r\nQueenie\r\nRussell\r\nSally\r\nTim\r\nUma\r\nVern\r\nWendy\r\nXavier" +
-                "\r\nYoko\r\nZack";
+    "rcie\r\nNate\r\nOlivia\r\nPaul\r\nQueenie\r\nRussell\r\nSally\r\nTim\r\nUma\r\nVern\r\nWendy\r\nXavier" +
+    "\r\nYoko\r\nZack";
             // 
             // bt_clear
             // 

@@ -585,9 +585,81 @@ namespace vcs_test_all_01_DateTime
             */
         }
 
+        //------------------------------------------------------------  # 60個
+
+        public struct Age
+        {
+            public int Years;
+            public int Months;
+            public int Days;
+        }
+        public static Age CalculateAge(DateTime birthDate, DateTime endDate)
+        {
+            if (birthDate.Date > endDate.Date)
+            {
+                throw new ArgumentException("birthDate cannot be higher then endDate", "birthDate");
+            }
+
+            int years = endDate.Year - birthDate.Year;
+            int months = 0;
+            int days = 0;
+
+            // Check if the last year, was a full year.
+            if (endDate < birthDate.AddYears(years) && years != 0)
+            {
+                years--;
+            }
+
+            // Calculate the number of months.
+            birthDate = birthDate.AddYears(years);
+
+            if (birthDate.Year == endDate.Year)
+            {
+                months = endDate.Month - birthDate.Month;
+            }
+            else
+            {
+                months = (12 - birthDate.Month) + endDate.Month;
+            }
+
+            // Check if last month was a complete month.
+            if (endDate < birthDate.AddMonths(months) && months != 0)
+            {
+                months--;
+            }
+
+            // Calculate the number of days.
+            birthDate = birthDate.AddMonths(months);
+
+            days = (endDate - birthDate).Days;
+            Age result;
+            result.Years = years;
+            result.Months = months;
+            result.Days = days;
+            return result;
+        }
+
         private void button5_Click(object sender, EventArgs e)
         {
+            //CalculateAge
+            DateTime birthday = DateTime.Parse("1982年11月07日");
+            richTextBox1.Text += "生日：" + birthday.ToShortDateString() + "\n";
+
+            DateTime flakNow = DateTime.Now;
+            Age myAge = CalculateAge(birthday, flakNow);
+
+            richTextBox1.Text += "年 : " + myAge.Years.ToString() + "\n";
+            richTextBox1.Text += "月 : " + myAge.Months.ToString() + "\n";
+            richTextBox1.Text += "日 : " + myAge.Days.ToString() + "\n";
+            int age = myAge.Years;
+            if ((myAge.Months != 0) && (myAge.Days != 0))
+            {
+                age = myAge.Years + 1;
+            }
+            richTextBox1.Text += "年齡：" + age.ToString() + "\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button6_Click(object sender, EventArgs e)
         {
@@ -973,6 +1045,30 @@ namespace vcs_test_all_01_DateTime
             dt1 = new DateTime(2008, 12, 31, 23, 59, 59, DateTimeKind.Local);
             dt2 = new DateTime(2003, 11, 13, 23, 59, 59, DateTimeKind.Local);
 
+            //------------------------------------------------------------  # 60個
+
+            txt = "2006/3/11";
+            dt = DateTime.Now;
+            bool conversionSuccessful = DateTime.TryParse(txt, out dt);    //out為必須     //public static bool TryParse(string s, out DateTime result);
+            if (conversionSuccessful == true)
+            {
+                richTextBox1.Text += "得到DateTime資料： " + dt.ToString() + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "DateTime.TryParse 失敗\n";
+            }
+
+            txt = "123年3月11";
+            conversionSuccessful = DateTime.TryParse(txt, out dt);    //out為必須     //public static bool TryParse(string s, out DateTime result);
+            if (conversionSuccessful == true)
+            {
+                richTextBox1.Text += "得到DateTime資料： " + dt.ToString() + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "DateTime.TryParse 失敗\n";
+            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -2035,3 +2131,4 @@ string filename = "imsLink_log." + DateTime.Now.ToString("yyyy.MMdd.HHmm.ss") + 
 */
 
 //var strname=DateTime.Now.ToShortDateString().Replace("/","-")+".txt";
+

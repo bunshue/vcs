@@ -319,7 +319,6 @@
             this.bt_class23.Name = "bt_class23";
             this.bt_class23.Size = new System.Drawing.Size(190, 60);
             this.bt_class23.TabIndex = 29;
-            this.bt_class23.Text = "MyTime";
             this.bt_class23.UseVisualStyleBackColor = true;
             this.bt_class23.Click += new System.EventHandler(this.bt_class23_Click);
             // 
@@ -330,7 +329,7 @@
             this.bt_class21.Name = "bt_class21";
             this.bt_class21.Size = new System.Drawing.Size(190, 60);
             this.bt_class21.TabIndex = 28;
-            this.bt_class21.Text = "測試 MyDateTime 1";
+            this.bt_class21.Text = "MyTime";
             this.bt_class21.UseVisualStyleBackColor = true;
             this.bt_class21.Click += new System.EventHandler(this.bt_class21_Click);
             // 
@@ -351,7 +350,6 @@
             this.bt_class22.Name = "bt_class22";
             this.bt_class22.Size = new System.Drawing.Size(190, 60);
             this.bt_class22.TabIndex = 24;
-            this.bt_class22.Text = "測試 MyDateTime 2";
             this.bt_class22.UseVisualStyleBackColor = true;
             this.bt_class22.Click += new System.EventHandler(this.bt_class22_Click);
             // 
@@ -362,7 +360,7 @@
             this.bt_class20.Name = "bt_class20";
             this.bt_class20.Size = new System.Drawing.Size(190, 60);
             this.bt_class20.TabIndex = 22;
-            this.bt_class20.Text = "測試 MyDateTime 0";
+            this.bt_class20.Text = "測試 MyDateTime";
             this.bt_class20.UseVisualStyleBackColor = true;
             this.bt_class20.Click += new System.EventHandler(this.bt_class20_Click);
             // 
@@ -510,7 +508,6 @@
             this.bt_class06.Name = "bt_class06";
             this.bt_class06.Size = new System.Drawing.Size(190, 60);
             this.bt_class06.TabIndex = 11;
-            this.bt_class06.Text = "Sale範例";
             this.bt_class06.UseVisualStyleBackColor = true;
             this.bt_class06.Click += new System.EventHandler(this.bt_class06_Click);
             // 

@@ -79,7 +79,7 @@ namespace iMS_Link
         bool flag_use_real_plc = AUTOMATION_USE_PLC;    //是否使用真的PLC, true: 真上位PLC, false: 假上位, 偽裝PLC上位來下命令
         bool flag_use_real_ims = AUTOMATION_USE_IMS;    //是否使用真的 IMS 執行 燒錄 或 色調, true: 真下位, false: 假下位
 
-        bool flag_auto_connect_comport = true;  //啟動時自動連線comport mode0 mode2
+        bool flag_auto_connect_comport = false;  //啟動時自動連線comport mode0 mode2
         int flag_auto_connect_comport_round = 0;  //自動連線comport次數
         int flag_automation_check_connection_retry_count = AUTOMATION_CONNECTION_RETRY_COUNT;  //自動連線 webcam/comport 重試次數
         bool flag_automation_check_break = false;

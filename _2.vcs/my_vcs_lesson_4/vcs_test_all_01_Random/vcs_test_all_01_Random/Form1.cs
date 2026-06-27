@@ -561,9 +561,39 @@ namespace vcs_test_all_01_Random
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
+        // 隨機數生成器
+        Random rnd = new Random(unchecked((int)DateTime.Now.Ticks));
+        // 英文與數字串
+        string EnglishOrNumChars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+        // 生成英文或數字字符
+        protected char CreateEnOrNumChar()
+        {
+            return EnglishOrNumChars[rnd.Next(0, EnglishOrNumChars.Length)];
+        }
+
         private void bt_random11_Click(object sender, EventArgs e)
         {
+            // 生成隨機字符碼
+            int codeLen = 10;
+
+            char[] chs = new char[codeLen];
+
+            for (int i = 0; i < codeLen; i++)
+            {
+                if (chs[i] == '\0')
+                {
+                    chs[i] = CreateEnOrNumChar();
+                }
+            }
+
+            string code = new string(chs, 0, chs.Length);
+            richTextBox1.Text += code + "\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         //亂數方法比較 ST
         private void bt_random12_Click(object sender, EventArgs e)
@@ -1941,7 +1971,7 @@ namespace vcs_test_all_01_Random
             richTextBox1.Text += "\n";
         }
 
-6060
+//------------------------------------------------------------  # 60個
 
 使用 Random 方法產生不重複亂數 
 

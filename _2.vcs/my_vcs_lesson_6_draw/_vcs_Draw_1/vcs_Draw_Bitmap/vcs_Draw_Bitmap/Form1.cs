@@ -723,9 +723,36 @@ namespace vcs_Draw_Bitmap
             */
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button12_Click(object sender, EventArgs e)
         {
+            //改變bitmap大小
+
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+            Bitmap bmp = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bmp);
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);
+
+            W = bitmap1.Width;
+            H = bitmap1.Height;
+            richTextBox1.Text += "原圖大小 : " + W.ToString() + " X " + H.ToString() + "\n";
+
+            Bitmap bitmap2 = new Bitmap(bitmap1, H, W);  //改變大小
+
+            g.DrawImage(bitmap1, 0, 0, W, H);
+            g.DrawImage(bitmap2, 0 + 310, 0, H, W);
+
+            g.DrawImage(bitmap1, 0, 0 + 410, W / 2, H / 2);
+            g.DrawImage(bitmap2, 0 + 310, 0 + 410, H / 2, W / 2);
+
+            pictureBox1.Image = bmp;
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button13_Click(object sender, EventArgs e)
         {

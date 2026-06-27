@@ -15,23 +15,23 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
 
     //------------------------------------------------------------  # 60個
 
-    class Date
+    class MyDate
     {
         private int day;
         private int month;
         private int year;
 
-        public Date()
+        public MyDate()
         { // default constructor
             day = 1; month = 1; year = 2000;
         }
 
         /*
-        public Date():this(1,1,2000) { // default constructor  // 預設值
+        public MyDate():this(1,1,2000) { // default constructor  // 預設值
         }
         */
 
-        public Date(int d, int m, int y)
+        public MyDate(int d, int m, int y)
         {  //constructor
             day = d; month = m; year = y;
         }
@@ -46,50 +46,57 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             return month + "-" + day + "-" + year;
         }
 
+        //類別內取出資料的方法 override string ToString()
+        public override string ToString()
+        {
+            return month + "-" + day + "-" + year;
+        }
+
         public int getDay() { return day; }
         public int getMonth() { return month; }
         public int getYear() { return year; }
     }
 
-    class Person
+    class MyPerson
     {
         private string name;
         private int age;
         private char gender;
-        private Date date;
+        private MyDate date;
 
-        private static int ctr = 0;
+        private static int total_objects = 0;  // 統計物件個數
 
-        public static int counter()
+        public static int counter()  // 取得物件個數
         {
-            return ctr;
+            return total_objects;
         }
+
         // constructors
-        public Person()
+        public MyPerson()
         {
             name = "unknown";
             age = 19;
             gender = 'M';
-            date = new Date();
-            ctr++;
+            date = new MyDate();
+            total_objects++;
         }
 
-        public Person(string n, int a, char g)
+        public MyPerson(string n, int a, char g)
         {
             name = n;
             age = a;
             gender = g;
-            date = new Date();
-            ctr++;
+            date = new MyDate();
+            total_objects++;
         }
 
-        public Person(string n, int a, char g, Date d)
+        public MyPerson(string n, int a, char g, MyDate d)
         {
             name = n;
             age = a;
             gender = g;
             date = d;
-            ctr++;
+            total_objects++;
         }
 
         // setter methods
@@ -108,7 +115,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             gender = g;
         }
 
-        public void setDate(Date d)
+        public void setDate(MyDate d)
         {
             date = d;
         }
@@ -129,7 +136,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             return gender;
         }
 
-        public Date getDate()
+        public MyDate getDate()
         {
             return date;
         }
@@ -140,76 +147,83 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             str += "年齡 = " + age + "\r\n";
             str += "性別 = " + gender + "\r\n";
             str += "生日 = " + date.show();
+            return str;
+        }
 
+        //類別內取出資料的方法 override string ToString()
+        public override string ToString()
+        {
+            string str = "名字 = " + name + "\r\n";
+            str += "年齡 = " + age + "\r\n";
+            str += "性別 = " + gender + "\r\n";
+            str += "生日 = " + date.show();
             return str;
         }
 
         /*
         // operator overloading
         
-        public static bool operator>=(Person p1, Person p2){
+        public static bool operator>=(MyPerson p1, MyPerson p2){
             if(p1.age >= p2.age) return true;
             else return false;
         }
 
-        public static bool operator <=(Person p1, Person p2)
+        public static bool operator <=(MyPerson p1, MyPerson p2)
         {
             if (p1.age <= p2.age) return true;
             else return false;
         }
         */
+    }
 
-    } // class Person
-
-
-    class Student : Person
+    class MyStudent : MyPerson
     {
         private int Chinese;  //新增私有的資料成員
         private int Math;
 
         // 靜態成員static members
-        private static int ctr = 0;
+        private static int total_objects = 0;  // 統計物件個數
 
         public static new int counter()
         {
-            return ctr;
+            return total_objects;
         }
 
-        // 利用base(~)呼叫父類別Person的建構式
-        public Student()
+        // 利用base(~)呼叫父類別MyPerson的建構式
+        public MyStudent()
         {
             Chinese = Math = 0;  //預設值是0
-            ctr++;
+            total_objects++;
         }
 
-        public Student(string n, int a, char g)
+        public MyStudent(string n, int a, char g)
             : base(n, a, g)
         {
             Chinese = Math = 0;
-            ctr++;
+            total_objects++;
         }
 
-        public Student(string n, int a, char g, Date d)
+        public MyStudent(string n, int a, char g, MyDate d)
             : base(n, a, g, d)
         {
             Chinese = Math = 0;
-            ctr++;
+            total_objects++;
         }
 
-        public Student(string n, int a, char g, int c, int m)
+        public MyStudent(string n, int a, char g, int c, int m)
             : base(n, a, g)
         {
             Chinese = c;
             Math = m;
-            ctr++;
+            total_objects++;
         }
 
-        public Student(string n, int a, char g, Date d, int c, int m)
+        public MyStudent(string n, int a, char g, MyDate d, int c, int m)
             : base(n, a, g, d)
         {
             Chinese = c;
             Math = m;
-            ctr++;
+            total_objects++;
         }
 
         public void setChinese(int c)
@@ -232,10 +246,10 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             return Math;
         }
 
-        // 利用base.show()呼叫父類別Person的show()以取得Person的資訊
+        // 利用base.show()呼叫父類別MyPerson的show()以取得MyPerson的資訊
         public /*new*/ override string show()
         {
-            string str = "<<< Student >>>\r\n";
+            string str = "<<< MyStudent >>>\r\n";
             str += base.show() + "\r\n";
             str += "Chinese = " + Chinese + "\r\n";
             str += "Math = " + Math + "\r\n";
@@ -244,52 +258,52 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
         }
     }
 
-    class Teacher : Person
+    class MyTeacher : MyPerson
     {
         private string Rank; //新增私有的資料成員
 
         // 靜態成員static members
-        private static int ctr = 0;
+        private static int total_objects = 0;  // 統計物件個數
 
         public static new int counter()
         {
-            return ctr;
+            return total_objects;
         }
 
         // 建構式
-        public Teacher()
+        public MyTeacher()
         {
             Rank = "Assistant Professor";
-            ctr++;
+            total_objects++;
         }
 
         // 建構式
-        public Teacher(string n, int a, char g)
+        public MyTeacher(string n, int a, char g)
             : base(n, a, g)
         {
             Rank = "Assistant Professor";
-            ctr++;
+            total_objects++;
         }
 
-        public Teacher(string n, int a, char g, Date d)
+        public MyTeacher(string n, int a, char g, MyDate d)
             : base(n, a, g, d)
         {
             Rank = "Assistant Professor";
-            ctr++;
+            total_objects++;
         }
 
-        public Teacher(string n, int a, char g, string r)
+        public MyTeacher(string n, int a, char g, string r)
             : base(n, a, g)
         {
             Rank = r;
-            ctr++;
+            total_objects++;
         }
 
-        public Teacher(string n, int a, char g, Date d, string r)
+        public MyTeacher(string n, int a, char g, MyDate d, string r)
             : base(n, a, g, d)
         {
             Rank = r;
-            ctr++;
+            total_objects++;
         }
 
         public void setRank(string r)
@@ -304,7 +318,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
 
         public override /*new*/ string show()
         {
-            string str = "<<< Teacher >>>\r\n";
+            string str = "<<< MyTeacher >>>\r\n";
             str += base.show() + "\r\n";
             str += "Rank = " + Rank + "\r\n";
             return str;
@@ -320,7 +334,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
         //private int radius;
         private Color _color = Color.Black;
         private Color _borderColor = Color.Transparent;
-        private static int _Total = 0;  // _Total用來計算共產生多少個物件，宣告為static和private
+        private static int total_objects = 0;  // 統計物件個數, 宣告為static和private
         private static int _radius;
 
         //public int radius { get; set; }  // 有get有set簡寫, 可讀可寫, same
@@ -353,16 +367,16 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
         public Circle()
         {
             radius = 2;  // 預設半徑為2
-            _Total++;  // _Total++，物件總數加1
-            Console.WriteLine("建立一個Circle()的物件1, 目前物件總數 : " + _Total.ToString());
+            total_objects++;  // total_objects++，物件總數加1
+            Console.WriteLine("建立一個Circle()的物件1, 目前物件總數 : " + total_objects.ToString());
         }
 
         // 建構式2, 1參數
         public Circle(int r)
         {
             radius = r;
-            _Total++;  // _Total++，物件總數加1
-            Console.WriteLine("建立一個Circle()的物件2, 目前物件總數 : " + _Total.ToString());
+            total_objects++;  // total_objects++，物件總數加1
+            Console.WriteLine("建立一個Circle()的物件2, 目前物件總數 : " + total_objects.ToString());
         }
 
         public int getRadius()
@@ -395,14 +409,14 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
         //public static string GetTotalStudent()   //傳回共產生多少學生物件
         public static string GetTotalObject()   //傳回共產生多少物件
         {
-            return "共使用 : " + Convert.ToString(_Total) + " 個物件";
+            return "共使用 : " + Convert.ToString(total_objects) + " 個物件";
         }
 
         //解構式
         ~Circle()
         {
-            _Total--;  // _Total--，物件總數減1
-            Console.WriteLine("銷毀一個Circle()的物件, 目前物件總數 : " + _Total.ToString());
+            total_objects--;  // total_objects--，物件總數減1
+            Console.WriteLine("銷毀一個Circle()的物件, 目前物件總數 : " + total_objects.ToString());
         }
     }
 
@@ -973,4 +987,5 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
 若未定義解構式則編譯器會自動產生一個無實作的解構式。
 在物件生命週期結束時，即離開執行程式範圍時解構式會自動被呼叫。
 */
+
 

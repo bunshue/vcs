@@ -17,7 +17,6 @@ using System.Drawing.Drawing2D;  // for GraphicsPath
 
 using System.Diagnostics;  // for Debug
 
-
 //方案總管/右鍵/加入/類別/預設Class1.cs改成MyClass.cs
 
 //方案總管/右鍵/加入/Windows Form/預設Form2.cs改成MyForm.cs
@@ -34,9 +33,10 @@ using System.Diagnostics;  // for Debug
 
 using MyClass;    // MyClass.cs之namespace不一樣, 要引用, 檔名是不重要的, 加入專案就好, namespace才是重要的
 
-//類別範例
+//類別的定義在 MyClass.cs
 
 /*
+類別使用方法
 1. 建立類別物件
 2. 設定類別屬性
 3. 呼叫類別方法
@@ -103,7 +103,7 @@ namespace vcs_Class1
 
             test_picture_class();
 
-            LogAPI.InitLogAPI(Application.StartupPath, "aaaaaaa.log");
+            Logger3.InitLogAPI(Application.StartupPath, "aaaaaaa.log");
         }
 
         void show_item_location()
@@ -381,10 +381,55 @@ namespace vcs_Class1
             richTextBox1.Text += "取出參數 : " + dog2.recorder + "\n";
             richTextBox1.Text += dog2.ToString() + "\n";
 
-            //------------------------------------------------------------  # 60個
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
+            richTextBox1.Text += "類別做成的物件一維陣列\n";
 
+            //類別Sale做成的物件一維陣列 SaleList
+            List<Sale> SaleList = new List<Sale> { };    //銷售列表
 
+            //4個物件
+            SaleList = new List<Sale>
+            {
+                new Sale("洗衣機",Convert.ToDateTime("2010-3-3"),600),
+                new Sale("電冰箱",Convert.ToDateTime("2010-12-12"),1900),
+                new Sale("洗衣機",Convert.ToDateTime("2010-2-2"),550),
+                new Sale("洗衣機",Convert.ToDateTime("2010-1-1"),500)
+            };
+
+            //加1個物件
+            Sale refeg1 = new Sale();
+            refeg1.ProductName = "電冰箱";
+            refeg1.SaleDate = Convert.ToDateTime("2006-3-11");
+            refeg1.SalePrice = 456;
+            richTextBox1.Text += "增加一個銷售物件\t電冰箱\n";
+            SaleList.Add(refeg1);
+
+            //加1個物件
+            richTextBox1.Text += "增加一個銷售物件\t洗衣機\n";
+            SaleList.Add(new Sale("洗衣機", Convert.ToDateTime("2010-3-3"), 600));
+
+            //加1個物件
+            richTextBox1.Text += "增加一個銷售物件\t洗衣機\n";
+            SaleList.Add(new Sale("洗衣機", Convert.ToDateTime("2010-3-3"), 600));
+
+            //加1個物件
+            richTextBox1.Text += "增加一個銷售物件\t洗衣機\n";
+            SaleList.Add(new Sale("洗衣機", Convert.ToDateTime("2010-3-3"), 523));
+
+            int cnt = SaleList.Count;
+            richTextBox1.Text += "目前共有銷售個數 : " + cnt.ToString() + " 個\n";
+
+            if (cnt > 0)
+            {
+                richTextBox1.Text += "銷售列表\n";
+                for (int i = 0; i < cnt; i++)
+                {
+                    richTextBox1.Text += SaleList[i].ProductName + "\t" + SaleList[i].SaleDate.ToString() + "\t" + SaleList[i].SalePrice.ToString() + "\n";
+                }
+            }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
         }
 
         //------------------------------------------------------------  # 60個
@@ -560,54 +605,6 @@ namespace vcs_Class1
 
         private void bt_class06_Click(object sender, EventArgs e)
         {
-            //Sale範例
-
-            //類別的定義在 MyClass.cs
-
-            richTextBox1.Text += "重建一個銷售列表\n";
-
-            //類別Sale做成的物件一維陣列 SaleList
-            List<Sale> SaleList = new List<Sale> { };    //銷售列表
-
-            SaleList = new List<Sale>
-            {
-                new Sale("洗衣機",Convert.ToDateTime("2010-3-3"),600),
-                new Sale("電冰箱",Convert.ToDateTime("2010-12-12"),1900),
-                new Sale("洗衣機",Convert.ToDateTime("2010-2-2"),550),
-                new Sale("洗衣機",Convert.ToDateTime("2010-1-1"),500)
-            };
-
-            Sale refeg1 = new Sale();
-            refeg1.ProductName = "電冰箱";
-            refeg1.SaleDate = Convert.ToDateTime("2006-3-11");
-            refeg1.SalePrice = 456;
-            richTextBox1.Text += "增加一個銷售物件\t電冰箱\n";
-            SaleList.Add(refeg1);
-
-            richTextBox1.Text += "增加一個銷售物件\t洗衣機\n";
-            SaleList.Add(new Sale("洗衣機", Convert.ToDateTime("2010-3-3"), 600));
-
-            richTextBox1.Text += "增加一個銷售物件\t洗衣機\n";
-            SaleList.Add(new Sale("洗衣機", Convert.ToDateTime("2010-3-3"), 600));
-
-            richTextBox1.Text += "增加一個銷售物件\t洗衣機\n";
-            SaleList.Add(new Sale("洗衣機", Convert.ToDateTime("2010-3-3"), 523));
-
-            int cnt = SaleList.Count;
-            richTextBox1.Text += "目前共有銷售個數 : " + cnt.ToString() + " 個\n";
-
-            if (cnt > 0)
-            {
-                richTextBox1.Text += "銷售列表\n";
-                for (int i = 0; i < cnt; i++)
-                {
-                    richTextBox1.Text += SaleList[i].ProductName + "\t" + SaleList[i].SaleDate.ToString() + "\t" + SaleList[i].SalePrice.ToString() + "\n";
-                }
-
-                richTextBox1.Text += "查詢最後一次洗衣機的銷售價格\n";
-                Sale sa = SaleList.Where(itm => itm.ProductName == "洗衣機").OrderBy(itm => itm.SaleDate).Last();
-                richTextBox1.Text += "查詢結果：" + sa.SalePrice.ToString() + "\n";
-            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -695,8 +692,6 @@ namespace vcs_Class1
             pData6.Sex = "male";
             richTextBox1.Text += "讀Sex, Sex = " + pData6.Sex + "\n";
             //pData6.ADDR = "123"; ADDR不可寫，因此此行會顯示readonly無法編譯
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個            
         }
 
         //------------------------------------------------------------  # 60個
@@ -705,22 +700,27 @@ namespace vcs_Class1
         {
             //使用 類別方法
 
-            richTextBox1.AppendText("使用 類別方法 Logger\n");
+            richTextBox1.AppendText("使用 類別方法 Logger1\n");
 
-            Logger.WriteLog("訊息1");
-            Logger.WriteLog("訊息2");
-            Logger.WriteLog("訊息3");
+            Logger1.WriteLog("寫log的方法 Logger1 1");
+            Logger1.WriteLog("寫log的方法 Logger1 2");
+            Logger1.WriteLog("寫log的方法 Logger1 3");
 
             //------------------------------------------------------------  # 60個
 
-            richTextBox1.Text += "寫log的方法\n";
-            LogConsole.Log("寫log的方法 LogConsole 1");
-            LogConsole.Log("寫log的方法 LogConsole 2");
-            LogConsole.Log("寫log的方法 LogConsole 3");
+            richTextBox1.AppendText("使用 類別方法 Logger2\n");
 
-            LogAPI.WriteLog("寫log的方法 LogAPI 1");
-            LogAPI.WriteLog("寫log的方法 LogAPI 2");
-            LogAPI.WriteLog("寫log的方法 LogAPI 3");
+            Logger2.WriteLog("寫log的方法 Logger2 1");
+            Logger2.WriteLog("寫log的方法 Logger2 2");
+            Logger2.WriteLog("寫log的方法 Logger2 3");
+
+            //------------------------------------------------------------  # 60個
+
+            richTextBox1.AppendText("使用 類別方法 Logger3\n");
+
+            Logger3.WriteLog("寫log的方法 Logger3 1");
+            Logger3.WriteLog("寫log的方法 Logger3 2");
+            Logger3.WriteLog("寫log的方法 Logger3 3");
 
             //------------------------------------------------------------  # 60個
 
@@ -874,47 +874,46 @@ namespace vcs_Class1
         {
             //Class 新進4
 
-            //類別的定義在 MyClass.cs
-
             int y = 2006;
             int m = 3;
             int d = 11;
 
-            Date date = new Date();
+            MyDate date = new MyDate();
             date.setDate(d, m, y);
 
-            //the same
-            //Date date = new Date(d, m, y);
+            //MyDate date = new MyDate(d, m, y); same
 
-            richTextBox1.Text += date.show() + "\n";
+            richTextBox1.Text += "生日 : " + date.show() + "\n";
+            richTextBox1.Text += "生日 : " + date.ToString() + "\n";
 
             string name = "david";
             int age = 18;
             char gender = '男';
 
-            Person pData = new Person(name, age, gender, date);
+            MyPerson pData = new MyPerson(name, age, gender, date);
+            richTextBox1.Text += "資料 :\n" + pData.show() + "\n";
+            richTextBox1.Text += "資料 :\n" + pData.ToString() + "\n";
 
-            richTextBox1.Text += pData.show() + "\n";
-            richTextBox1.Text += "共有" + Person.counter() + "人\n";
+            richTextBox1.Text += "共有 : " + MyPerson.counter() + " 人\n";
 
             //------------------------------  # 30個
 
             int c = 95;
             int ma = 87;
 
-            Student s = new Student(name, age, gender, date, c, ma);
+            MyStudent s = new MyStudent(name, age, gender, date, c, ma);
             richTextBox1.Text += s.show() + "\n";
 
-            String str = "共" + Person.counter() + "人, 學生: " + Student.counter() + "人\n";
+            String str = "共" + MyPerson.counter() + "人, 學生: " + MyStudent.counter() + "人\n";
             richTextBox1.Text += str + "\n";
 
             //------------------------------  # 30個
 
             string r = "senior";
 
-            Teacher t = new Teacher(name, age, gender, date, r);
+            MyTeacher t = new MyTeacher(name, age, gender, date, r);
 
-            str = "共" + Person.counter() + "人, 學生: " + Student.counter() + "人, 老師: " + Teacher.counter() + "人\n";
+            str = "共" + MyPerson.counter() + "人, 學生: " + MyStudent.counter() + "人, 老師: " + MyTeacher.counter() + "人\n";
 
             richTextBox1.Text += str + "\n";
             richTextBox1.Text += t.show() + "\n";
@@ -1136,20 +1135,6 @@ namespace vcs_Class1
             public int year;
             public int month;
             public int day;
-            //public string name;
-            //A class被實例化時，會立即執行建構式內容，並且可以傳入參數
-            public string Show
-            {
-                // 可以透過 get 存取子，將字串進行判斷、處理.... 再返回結果
-                //get { return name; }
-
-                // set含有特殊的keyword: value, 當有值傳入時，都會存入value中
-                set
-                {
-                    //name = type;
-                    //Console.WriteLine("I am " + value);
-                }
-            }
 
             public HDateTime Parse(string dd)
             {
@@ -1179,14 +1164,23 @@ namespace vcs_Class1
                     //return new DateTime(year, month, day);
                 }
                 if ((month < 1) || (month > 12))
+                {
                     month = -1;
+                }
                 if ((day < 1) || (day > 31))
+                {
                     day = -1;
-
+                }
                 mdt.year = year;
                 mdt.month = month;
                 mdt.day = day;
                 return mdt;
+            }
+
+            // 類別內取出資料的方法 override string ToString()
+            public override string ToString()
+            {
+                return String.Format("{0} 年 {1} 月 {2} 日\n", year, month, day);
             }
         }
 
@@ -1285,130 +1279,29 @@ namespace vcs_Class1
 
             richTextBox1.Text += "原字串\t" + dd1 + "\n";
             hdt = hdt.Parse(dd1);
-            richTextBox1.Text += "解讀後, yy = " + hdt.year.ToString() + ", mm = " + hdt.month.ToString() + ", dd = " + hdt.day.ToString() + "\n";
+            richTextBox1.Text += "取得資料 : " + hdt.year.ToString() + " 年 " + hdt.month.ToString() + " 月 " + hdt.day.ToString() + " 日\n";
+            richTextBox1.Text += "取得資料 : " + hdt.ToString() + "\n";
 
             richTextBox1.Text += "原字串\t" + dd2 + "\n";
             hdt = hdt.Parse(dd2);
-            richTextBox1.Text += "解讀後, yy = " + hdt.year.ToString() + ", mm = " + hdt.month.ToString() + ", dd = " + hdt.day.ToString() + "\n";
+            richTextBox1.Text += "取得資料 : " + hdt.year.ToString() + " 年 " + hdt.month.ToString() + " 月 " + hdt.day.ToString() + " 日\n";
+            richTextBox1.Text += "取得資料 : " + hdt.ToString() + "\n";
 
             richTextBox1.Text += "原字串\t" + dd3 + "\n";
             hdt = hdt.Parse(dd3);
-            richTextBox1.Text += "解讀後, yy = " + hdt.year.ToString() + ", mm = " + hdt.month.ToString() + ", dd = " + hdt.day.ToString() + "\n";
+            richTextBox1.Text += "取得資料 : " + hdt.year.ToString() + " 年 " + hdt.month.ToString() + " 月 " + hdt.day.ToString() + " 日\n";
+            richTextBox1.Text += "取得資料 : " + hdt.ToString() + "\n";
 
             richTextBox1.Text += "包含空白 原字串\t" + dd4 + "\n";
             hdt = hdt.Parse(dd4);
-            richTextBox1.Text += "解讀後, yy = " + hdt.year.ToString() + ", mm = " + hdt.month.ToString() + ", dd = " + hdt.day.ToString() + "\n";
+            richTextBox1.Text += "取得資料 : " + hdt.year.ToString() + " 年 " + hdt.month.ToString() + " 月 " + hdt.day.ToString() + " 日\n";
+            richTextBox1.Text += "取得資料 : " + hdt.ToString() + "\n";
         }
 
         //------------------------------------------------------------  # 60個
 
-        public class PersonInfo
-        {
-            public string Name;
-            public int Age;
-            public DateTime birthday;
-        }
-
-        public struct Age
-        {
-            public int Years;
-            public int Months;
-            public int Days;
-        }
-        public static Age CalculateAge(DateTime birthDate, DateTime endDate)
-        {
-            if (birthDate.Date > endDate.Date)
-            {
-                throw new ArgumentException("birthDate cannot be higher then endDate", "birthDate");
-            }
-
-            int years = endDate.Year - birthDate.Year;
-            int months = 0;
-            int days = 0;
-
-            // Check if the last year, was a full year.
-            if (endDate < birthDate.AddYears(years) && years != 0)
-            {
-                years--;
-            }
-
-            // Calculate the number of months.
-            birthDate = birthDate.AddYears(years);
-
-            if (birthDate.Year == endDate.Year)
-            {
-                months = endDate.Month - birthDate.Month;
-            }
-            else
-            {
-                months = (12 - birthDate.Month) + endDate.Month;
-            }
-
-            // Check if last month was a complete month.
-            if (endDate < birthDate.AddMonths(months) && months != 0)
-            {
-                months--;
-            }
-
-            // Calculate the number of days.
-            birthDate = birthDate.AddMonths(months);
-
-            days = (endDate - birthDate).Days;
-            Age result;
-            result.Years = years;
-            result.Months = months;
-            result.Days = days;
-            return result;
-        }
 
         private void bt_class21_Click(object sender, EventArgs e)
-        {
-            //測試 MyDateTime 1
-            PersonInfo av1 = new PersonInfo();
-            av1.Name = "松島かえで";
-            av1.birthday = DateTime.Parse("1982年11月07日");
-            av1.Age = 18;
-            richTextBox1.Text += "姓名：" + av1.Name + "\n";
-            //richTextBox1.Text += "年齡：" + av1.Age.ToString() + "\n";
-            richTextBox1.Text += "生日：" + av1.birthday.ToShortDateString() + "\n";
-
-            DateTime flakNow = DateTime.Now;
-            Age myAge = CalculateAge(av1.birthday, flakNow);
-            richTextBox1.Text += "年 : " + myAge.Years.ToString() + "\n";
-            richTextBox1.Text += "月 : " + myAge.Months.ToString() + "\n";
-            richTextBox1.Text += "日 : " + myAge.Days.ToString() + "\n";
-            if ((myAge.Months != 0) && (myAge.Days != 0))
-                av1.Age = myAge.Years + 1;
-            else
-                av1.Age = myAge.Years;
-            richTextBox1.Text += "年齡：" + av1.Age.ToString() + "\n";
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void bt_class22_Click(object sender, EventArgs e)
-        {
-            //測試 MyDateTime 2
-            string txt = "2006/3/11";
-
-            DateTime dt = DateTime.Now;
-            bool conversionSuccessful = DateTime.TryParse(txt, out dt);    //out為必須     //public static bool TryParse(string s, out DateTime result);
-            if (conversionSuccessful == true)
-                richTextBox1.Text += "得到DateTime資料： " + dt.ToString() + "\n";
-            else
-                richTextBox1.Text += "DateTime.TryParse 失敗\n";
-
-            txt = "123年3月11";
-            conversionSuccessful = DateTime.TryParse(txt, out dt);    //out為必須     //public static bool TryParse(string s, out DateTime result);
-            if (conversionSuccessful == true)
-                richTextBox1.Text += "得到DateTime資料： " + dt.ToString() + "\n";
-            else
-                richTextBox1.Text += "DateTime.TryParse 失敗\n";
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void bt_class23_Click(object sender, EventArgs e)
         {
             MyTime now = new MyTime();
             //now.Hour = 30;
@@ -1455,6 +1348,19 @@ namespace vcs_Class1
             }
 
             //System.GC.Collect();
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void bt_class22_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void bt_class23_Click(object sender, EventArgs e)
+        {
         }
 
         //------------------------------------------------------------  # 60個
@@ -1543,7 +1449,7 @@ namespace vcs_Class1
 
     //------------------------------------------------------------  # 60個
 
-    public class Logger
+    public class Logger1
     {
         /// <summary>
         /// 寫入日志.
@@ -1591,11 +1497,11 @@ namespace vcs_Class1
         }
     }
 
-    public class LogConsole
+    public class Logger2
     {
         static string logFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "vcs_log.txt");
 
-        public static void Log(string msg)
+        public static void WriteLog(string msg)
         {
             byte[] data = Encoding.UTF8.GetBytes(msg);
             FileStream fs = new FileStream(logFileName, FileMode.OpenOrCreate);
@@ -1608,7 +1514,7 @@ namespace vcs_Class1
         }
     }
 
-    public class LogAPI
+    public class Logger3
     {
         private static string myPath = "";
         private static string myName = "";
@@ -1905,9 +1811,8 @@ namespace vcs_Class1
 
 */
 
-
-
 //richTextBox1.Text += "Class 範例 PersonData5, 類別陣列\n";
 //類別陣列的寫法
 //類別PersonData5做成的物件一維陣列 pData5
 //PersonData5[] pData5 = new PersonData5[3];
+

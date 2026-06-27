@@ -13,7 +13,6 @@ string mapURL = String.Format(
 pictureBox1.ImageLocation = mapURL;
 pictureBox1.ClientSize = new Size(400,430);
 
-
 //------------------------------------------------------------  # 60個
 
             //指定應用程式路徑
@@ -36,51 +35,6 @@ pictureBox1.ClientSize = new Size(400,430);
                 process.StartInfo = pInfo;
                 process.Start();
             }
-
-//------------------------------------------------------------  # 60個
-
-            Bitmap bitmap1 = VerifyCodeHelper.CreateVerifyCodeBmp(out code);
-            Bitmap bitmap2 = new Bitmap(bitmap1, 300, 200);  //改變大小
-
-//------------------------------------------------------------  # 60個
-
-            /// 生成隨機字符碼
-            int codeLen = 10;
-
-            char[] chs = new char[codeLen];
-
-            for (int i = 0; i < codeLen; i++)
-            {
-                if (chs[i] == '\0')
-                {
-                    chs[i] = CreateEnOrNumChar();
-                }
-            }
-
-            string code = new string(chs, 0, chs.Length);
-            richTextBox1.Text += code + "\n";
-
-//3030
-
-        // 隨機數生成器
-        Random rnd = new Random(unchecked((int)DateTime.Now.Ticks));
-        // 英文與數字串
-        string EnglishOrNumChars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-
-        // 生成英文或數字字符
-        protected char CreateEnOrNumChar()
-        {
-            return EnglishOrNumChars[rnd.Next(0, EnglishOrNumChars.Length)];
-        }
-
-//------------------------------------------------------------  # 60個
-
-
-//------------------------------------------------------------  # 60個
-
-//System.Media.SystemSounds.Beep.Play();
-
 
 //------------------------------------------------------------  # 60個
 
@@ -134,7 +88,6 @@ Nancy
 //------------------------------------------------------------  # 60個
 
 C:\Program Files\Git\bin\git.exe pull --progress -v --no-rebase "origin"
-
 
 //------------------------------------------------------------  # 60個
 
@@ -3962,6 +3915,8 @@ sealed用來修飾類為密封類，阻止該類被繼承。同時對一個類�
 //------------------------------------------------------------  # 60個
 
 //C# 播放聲音﻿﻿
+
+//System.Media.SystemSounds.Beep.Play();
 
 1.播放系統事件聲音
 　　 System.Media.SystemSounds.Asterisk.Play();
