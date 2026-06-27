@@ -8,7 +8,7 @@ using System.Drawing;
 using System.Data;
 using System.Collections;
 
-namespace vcs_test_all_05_Print
+namespace vcs_test_all_05_Print1
 {
     class PrintClass
     {

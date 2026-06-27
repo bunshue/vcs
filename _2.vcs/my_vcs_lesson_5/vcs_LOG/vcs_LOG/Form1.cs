@@ -56,17 +56,15 @@ namespace vcs_LOG
             int dx = W + 10;
             int dy = H + 10;
 
-            groupBox1.Size = new Size(W, H);
             groupBox2.Size = new Size(W, H);
             groupBox3.Size = new Size(W, H);
             groupBox4.Size = new Size(W, H * 4);
             groupBox6.Size = new Size(W, H * 2);
             groupBox9.Size = new Size(W, H * 2);
 
-            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            groupBox3.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            groupBox4.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            groupBox3.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            groupBox4.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             groupBox6.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             groupBox9.Location = new Point(x_st + dx * 1, y_st + dy * 2);
 
@@ -80,7 +78,6 @@ namespace vcs_LOG
             H = 60;
             dx = W + 10;
             dy = H + 10;
-            button1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button3.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -104,88 +101,6 @@ namespace vcs_LOG
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        int aa = 0;
-        private void button1_Click(object sender, EventArgs e)
-        {
-            aa++;
-            string str = "加入LOG aa = " + aa.ToString();
-            EventLog.Write(str);
-            richTextBox1.Text += str + "\n";
-        }
-
-        // If the file exceeds max_size bytes, move it to a new file
-        // with .1 appended to the name and bump down older versions.
-        // (E.g. log.txt.1, log.txt.2, etc.)
-        // Then write the text into the main log file. 
-        private void WriteToLog(string new_text, string file_name, long max_size, int num_backups)
-        {
-            // See if the file is too big.
-            FileInfo file_info = new FileInfo(file_name);
-            if (file_info.Exists && file_info.Length > max_size)
-            {
-                // Remove the oldest version if it exists.
-                if (File.Exists(file_name + "." + num_backups.ToString()))
-                {
-                    File.Delete(file_name + "." + num_backups.ToString());
-                    richTextBox1.Text += "delete\t" + file_name + "\n";
-                }
-
-                // Bump down earlier backups.
-                //richTextBox1.Text += "\n一個一個改名\n";
-                for (int i = num_backups - 1; i > 0; i--)
-                {
-                    if (File.Exists(file_name + "." + i.ToString("D4")))
-                    {
-                        // Move file i to file i + 1.
-                        File.Move(file_name + "." + i.ToString("D4"), file_name + "." + (i + 1).ToString("D4"));
-                        //richTextBox1.Text += "i = " + i.ToString() + " rename\told = " + file_name + "." + i.ToString() + "\tnew = " + file_name + "." + (i + 1).ToString() + "\n";
-                    }
-                }
-                // Move the main log file.
-                File.Move(file_name, file_name + ".0001");
-            }
-            // Write the text.
-            File.AppendAllText(file_name, new_text + '\n');
-        }
-
-        int i = 0;
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            i++;
-            string ttt = i.ToString() + " " + DateTime.Now.ToString();
-            richTextBox1.Text += i.ToString() + " ";
-            WriteToLog(ttt, LogFileName, 100, 300);  // 資料, 檔案, 最大, 備份
-        }
-
-        public static class EventLog
-        {
-            public static string FilePath { get; set; }
-            public static void Write(string format, params object[] arg)
-            {
-                Write(string.Format(format, arg));
-            }
-
-            public static void Write(string message)
-            {
-                if (string.IsNullOrEmpty(FilePath))
-                {
-                    FilePath = Directory.GetCurrentDirectory();
-                }
-
-                string filename = FilePath + string.Format("\\LogFiles3\\{0:yyyy}-{0:MM}\\LOG_{0:yyyy-MM-dd}.txt", DateTime.Now);
-                FileInfo finfo = new FileInfo(filename);
-                if (finfo.Directory.Exists == false)
-                {
-                    finfo.Directory.Create();
-                }
-                string writeString = string.Format("{0:yyyy/MM/dd HH:mm:ss} {1}", DateTime.Now, message) + "\n";
-
-                File.AppendAllText(filename, writeString, Encoding.Unicode);
-            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -527,6 +442,55 @@ namespace vcs_LOG
             }
             Logs.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
+
+        // If the file exceeds max_size bytes, move it to a new file
+        // with .1 appended to the name and bump down older versions.
+        // (E.g. log.txt.1, log.txt.2, etc.)
+        // Then write the text into the main log file. 
+        private void WriteToLog(string new_text, string file_name, long max_size, int num_backups)
+        {
+            // See if the file is too big.
+            FileInfo file_info = new FileInfo(file_name);
+            if (file_info.Exists && file_info.Length > max_size)
+            {
+                // Remove the oldest version if it exists.
+                if (File.Exists(file_name + "." + num_backups.ToString()))
+                {
+                    File.Delete(file_name + "." + num_backups.ToString());
+                    richTextBox1.Text += "delete\t" + file_name + "\n";
+                }
+
+                // Bump down earlier backups.
+                //richTextBox1.Text += "\n一個一個改名\n";
+                for (int i = num_backups - 1; i > 0; i--)
+                {
+                    if (File.Exists(file_name + "." + i.ToString("D4")))
+                    {
+                        // Move file i to file i + 1.
+                        File.Move(file_name + "." + i.ToString("D4"), file_name + "." + (i + 1).ToString("D4"));
+                        //richTextBox1.Text += "i = " + i.ToString() + " rename\told = " + file_name + "." + i.ToString() + "\tnew = " + file_name + "." + (i + 1).ToString() + "\n";
+                    }
+                }
+                // Move the main log file.
+                File.Move(file_name, file_name + ".0001");
+            }
+            // Write the text.
+            File.AppendAllText(file_name, new_text + '\n');
+        }
+
+        int i = 0;
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            i++;
+            string ttt = i.ToString() + " " + DateTime.Now.ToString();
+            richTextBox1.Text += i.ToString() + " ";
+            WriteToLog(ttt, LogFileName, 100, 300);  // 資料, 檔案, 最大, 備份
+        }
+
+        //------------------------------------------------------------  # 60個
+
     }
 
     //------------------------------------------------------------  # 60個

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_test_all_05_Print
+namespace vcs_test_all_05_Print1
 {
     static class Program
     {

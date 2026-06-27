@@ -724,6 +724,11 @@ namespace vcs_Class1
 
             //------------------------------------------------------------  # 60個
 
+            richTextBox1.AppendText("使用 類別方法 Logger4\n");
+
+            Logger4.Write("寫log的方法 Logger4 1");
+            Logger4.Write("寫log的方法 Logger4 2");
+            Logger4.Write("寫log的方法 Logger4 3");
         }
 
         //------------------------------------------------------------  # 60個
@@ -1567,6 +1572,35 @@ namespace vcs_Class1
                     continue;
                 }
             }
+        }
+    }
+
+    //------------------------------------------------------------  # 60個
+
+    public static class Logger4
+    {
+        public static string FilePath { get; set; }
+        public static void Write(string format, params object[] arg)
+        {
+            Write(string.Format(format, arg));
+        }
+
+        public static void Write(string message)
+        {
+            if (string.IsNullOrEmpty(FilePath))
+            {
+                FilePath = Directory.GetCurrentDirectory();
+            }
+
+            string filename = FilePath + string.Format("\\LogFiles3\\{0:yyyy}-{0:MM}\\LOG_{0:yyyy-MM-dd}.txt", DateTime.Now);
+            FileInfo finfo = new FileInfo(filename);
+            if (finfo.Directory.Exists == false)
+            {
+                finfo.Directory.Create();
+            }
+            string writeString = string.Format("{0:yyyy/MM/dd HH:mm:ss} {1}", DateTime.Now, message) + "\n";
+
+            File.AppendAllText(filename, writeString, Encoding.Unicode);
         }
     }
 

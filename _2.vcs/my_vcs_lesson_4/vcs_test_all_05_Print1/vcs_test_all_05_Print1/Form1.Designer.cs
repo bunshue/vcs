@@ -1,4 +1,4 @@
-﻿namespace vcs_test_all_05_Print
+﻿namespace vcs_test_all_05_Print1
 {
     partial class Form1
     {

@@ -125,9 +125,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(599, 196);
+            this.richTextBox1.Location = new System.Drawing.Point(599, 335);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(377, 417);
+            this.richTextBox1.Size = new System.Drawing.Size(377, 278);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -142,7 +142,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(686, 98);
+            this.button1.Location = new System.Drawing.Point(599, 232);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(82, 53);
             this.button1.TabIndex = 4;

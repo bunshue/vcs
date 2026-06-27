@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_test_all_05_Print", "vcs_test_all_05_Print\vcs_test_all_05_Print.csproj", "{2373CF23-FF08-4263-B6CE-40FB724AE237}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_test_all_05_Print1", "vcs_test_all_05_Print1\vcs_test_all_05_Print1.csproj", "{2373CF23-FF08-4263-B6CE-40FB724AE237}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

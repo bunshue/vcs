@@ -14,7 +14,7 @@ using System.Drawing.Drawing2D; //for SmoothingMode
 
 using System.Management;        //參考/加入參考/.NET/System Management
 
-namespace vcs_test_all_05_Print
+namespace vcs_test_all_05_Print1
 {
     public partial class Form1 : Form
     {
@@ -99,7 +99,7 @@ namespace vcs_test_all_05_Print
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1500, 910);
-            this.Text = "vcs_test_all_05_Print";
+            this.Text = "vcs_test_all_05_Print1";
 
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;
