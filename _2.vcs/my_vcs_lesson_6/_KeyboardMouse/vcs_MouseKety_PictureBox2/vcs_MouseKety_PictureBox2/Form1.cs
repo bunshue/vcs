@@ -7,8 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Runtime.InteropServices;   //for DllImport
-
 namespace vcs_MouseKety_PictureBox2
 {
     public partial class Form1 : Form
@@ -27,6 +25,8 @@ namespace vcs_MouseKety_PictureBox2
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
             g = this.pictureBox1.CreateGraphics();
 
             label1.Text = "";
@@ -42,6 +42,13 @@ namespace vcs_MouseKety_PictureBox2
 
             this.pictureBox1.MouseWheel += new MouseEventHandler(pictureBox1_MouseWheel);
         }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //6060
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -176,116 +183,6 @@ namespace vcs_MouseKety_PictureBox2
             //下同
             //label13.Text = "目前滑鼠在整個桌面的位置: " + Control.MousePosition.X + " : " + Control.MousePosition.Y;
         }
-
-        private void delay(int delay)
-        {
-            Application.DoEvents();         //執行某一事件，以達到延遲效果。
-            for (int j = 0; j < delay; j++)
-            {
-                System.Threading.Thread.Sleep(1);
-            }
-        }
-
-        //移動滑鼠鼠標
-        [DllImport("user32")]
-        static extern bool SetCursorPos(int X, int Y);
-
-        int screenWidth = Screen.PrimaryScreen.Bounds.Width;
-        int screenHeight = Screen.PrimaryScreen.Bounds.Height;
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //移動滑鼠鼠標
-            int xx = screenWidth / 2;
-            int yy = screenHeight / 2;
-            SetCursorPos(xx, yy);  //把滑鼠移到 (xx,yy) 的位置
-            delay(300);
-            SetCursorPos(xx - 100, yy);  //把滑鼠移到 (xx,yy) 的位置
-            delay(300);
-            SetCursorPos(xx - 100, yy - 100);  //把滑鼠移到 (xx,yy) 的位置
-            delay(300);
-            SetCursorPos(xx, yy - 100);  //把滑鼠移到 (xx,yy) 的位置
-            delay(300);
-            SetCursorPos(xx + 100, yy - 100);  //把滑鼠移到 (xx,yy) 的位置
-            delay(300);
-            SetCursorPos(xx + 100, yy);  //把滑鼠移到 (xx,yy) 的位置
-            delay(300);
-            SetCursorPos(xx + 100, yy + 100);  //把滑鼠移到 (xx,yy) 的位置
-            delay(300);
-            SetCursorPos(xx, yy + 100);  //把滑鼠移到 (xx,yy) 的位置
-            delay(300);
-            SetCursorPos(xx - 100, yy + 100);  //把滑鼠移到 (xx,yy) 的位置
-            delay(300);
-            SetCursorPos(xx - 100, yy);  //把滑鼠移到 (xx,yy) 的位置
-            delay(300);
-            SetCursorPos(xx, yy);  //把滑鼠移到 (xx,yy) 的位置
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (SystemInformation.MousePresent)  // 是否安裝滑鼠
-            {
-                richTextBox1.Text += "是否安裝滑鼠 : 是\n";
-            }
-            else
-            {
-                richTextBox1.Text += "是否安裝滑鼠 : 否\n";
-            }
-
-            // 滑鼠按鈕的數目
-            richTextBox1.Text += "滑鼠按鈕的數目 : " + SystemInformation.MouseButtons.ToString() + "\n";
-
-            if (SystemInformation.MouseWheelPresent) // 滑鼠是否有滾輪
-            {
-                richTextBox1.Text += "滑鼠是否有滾輪 : 是\n";
-            }
-            else
-            {
-                richTextBox1.Text += "滑鼠是否有滾輪 : 否\n";
-            }
-            // 滑鼠速度 (1 ~ 20)
-            richTextBox1.Text += "滑鼠速度 (1 ~ 20) : " + SystemInformation.MouseSpeed.ToString() + "\n";
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch (comboBox1.SelectedIndex)
-            {
-                case 0: this.Cursor = Cursors.Default; break;
-                case 1: this.Cursor = Cursors.Arrow; break;
-                case 2: this.Cursor = Cursors.Cross; break;
-                case 3: this.Cursor = Cursors.No; break;
-                case 4: this.Cursor = Cursors.WaitCursor; break;
-                case 5: this.Cursor = Cursors.Hand; break;
-                case 6: this.Cursor = Cursors.Help; break;
-                case 7: this.Cursor = Cursors.HSplit; break;
-                case 8: this.Cursor = Cursors.AppStarting; break;
-                case 9: this.Cursor = Cursors.IBeam; break;
-                case 10: this.Cursor = Cursors.NoMove2D; break;
-                case 11: this.Cursor = Cursors.NoMoveHoriz; break;
-                case 12: this.Cursor = Cursors.NoMoveVert; break;
-                case 13: this.Cursor = Cursors.PanEast; break;
-                case 14: this.Cursor = Cursors.PanNE; break;
-                case 15: this.Cursor = Cursors.PanNorth; break;
-                case 16: this.Cursor = Cursors.PanNW; break;
-                case 17: this.Cursor = Cursors.PanSE; break;
-                case 18: this.Cursor = Cursors.PanSouth; break;
-                case 19: this.Cursor = Cursors.PanSW; break;
-                case 20: this.Cursor = Cursors.PanWest; break;
-                case 21: this.Cursor = Cursors.SizeAll; break;
-                case 22: this.Cursor = Cursors.SizeNESW; break;
-                case 23: this.Cursor = Cursors.SizeNS; break;
-                case 24: this.Cursor = Cursors.SizeNWSE; break;
-                case 25: this.Cursor = Cursors.SizeWE; break;
-                case 26: this.Cursor = Cursors.UpArrow; break;
-                case 27: this.Cursor = Cursors.VSplit; break;
-                default: break;
-            }
-        }
     }
 }
+

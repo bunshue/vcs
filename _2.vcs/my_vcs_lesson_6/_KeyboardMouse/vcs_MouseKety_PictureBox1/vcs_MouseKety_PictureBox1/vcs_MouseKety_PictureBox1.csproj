@@ -8,8 +8,8 @@
     <ProjectGuid>{F4D4724E-CDD2-41F2-A9AD-93A618219A44}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_MouseKety_PictureBox</RootNamespace>
-    <AssemblyName>vcs_MouseKety_PictureBox</AssemblyName>
+    <RootNamespace>vcs_MouseKety_PictureBox1</RootNamespace>
+    <AssemblyName>vcs_MouseKety_PictureBox1</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

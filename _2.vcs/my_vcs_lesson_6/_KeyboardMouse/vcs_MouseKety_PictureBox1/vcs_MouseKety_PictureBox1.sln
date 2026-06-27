@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_MouseKety_PictureBox", "vcs_MouseKety_PictureBox\vcs_MouseKety_PictureBox.csproj", "{F4D4724E-CDD2-41F2-A9AD-93A618219A44}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_MouseKety_PictureBox1", "vcs_MouseKety_PictureBox1\vcs_MouseKety_PictureBox1.csproj", "{F4D4724E-CDD2-41F2-A9AD-93A618219A44}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

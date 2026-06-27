@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_MouseKety_PictureBox
+namespace vcs_MouseCursor1
 {
     static class Program
     {

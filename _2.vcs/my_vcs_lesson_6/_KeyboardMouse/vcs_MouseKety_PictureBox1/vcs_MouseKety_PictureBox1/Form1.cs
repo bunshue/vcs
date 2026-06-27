@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace vcs_MouseKety_PictureBox
+namespace vcs_MouseKety_PictureBox1
 {
     public partial class Form1 : Form
     {
@@ -176,7 +176,6 @@ namespace vcs_MouseKety_PictureBox
             else
             {
                 label1.Text = "pictureBox1_KeyDown你按了" + e.KeyCode.ToString() + "";
-
             }
         }
 
@@ -187,4 +186,3 @@ namespace vcs_MouseKety_PictureBox
         }
     }
 }
-
