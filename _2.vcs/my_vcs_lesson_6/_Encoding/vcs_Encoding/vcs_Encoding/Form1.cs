@@ -42,28 +42,38 @@ namespace vcs_Encoding
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
             richTextBox1.Size = new Size(500, 690 - 70 * 4);
-            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 4);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             tb_unicode.Size = new Size(500, 690 - 70 * 4);
-            tb_unicode.Location = new Point(x_st + dx * 3 + 90, y_st + dy * 4);
-            lb_unicode.Location = new Point(x_st + dx * 3 + 360, y_st + dy * 4 - 60);
+            tb_unicode.Location = new Point(x_st + dx * 4 + 90, y_st + dy * 4);
+            lb_unicode.Location = new Point(x_st + dx * 4 + 360, y_st + dy * 4 - 60);
 
             richTextBox_string1.Size = new Size(250, 270);
             richTextBox_string2.Size = new Size(250, 270);
             richTextBox_hex.Size = new Size(250, 270);
-            richTextBox_string1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            richTextBox_hex.Location = new Point(x_st + dx * 2 + 50, y_st + dy * 0);
-            richTextBox_string2.Location = new Point(x_st + dx * 3 + 100, y_st + dy * 0);
+            richTextBox_string1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            richTextBox_hex.Location = new Point(x_st + dx * 3 + 50, y_st + dy * 0);
+            richTextBox_string2.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
 
-            bt_string2hex.Location = new Point(x_st + dx * 1 + 250 - 35, y_st + dy * 0 + 270 - 80);
-            bt_hex2string.Location = new Point(x_st + dx * 2 + 50 + 250 - 35, y_st + dy * 0 + 270 - 80);
+            bt_string2hex.Location = new Point(x_st + dx * 2 + 250 - 35, y_st + dy * 0 + 270 - 80);
+            bt_hex2string.Location = new Point(x_st + dx * 3 + 50 + 250 - 35, y_st + dy * 0 + 270 - 80);
             bt_string2hex.Text = "字串\n轉\n十六進位";
             bt_hex2string.Text = "十六進位\n轉\n字串";
 
-            this.Size = new Size(1260, 750);
+            this.Size = new Size(1470, 750);
             this.Text = "vcs_Encoding";
 
             //設定執行後的表單起始位置, 正中央
@@ -337,10 +347,10 @@ namespace vcs_Encoding
             richTextBox1.Text += hexString + "\n";
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button6_Click(object sender, EventArgs e)
         {
-            //特殊的字串解碼
-
             //特殊的字串解碼
 
             /*三組字串
@@ -359,8 +369,9 @@ namespace vcs_Encoding
             richTextBox1.Text += "strParser1 = " + strParser1 + "\n";
             richTextBox1.Text += "strParser2 = " + strParser2 + "\n";
             richTextBox1.Text += "strParser3 = " + strParser3 + "\n";
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         //C#兩種方法判斷字符是否為漢字
         //一、用漢字的 UNICODE 編碼范圍判斷
@@ -385,9 +396,28 @@ namespace vcs_Encoding
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button8_Click(object sender, EventArgs e)
         {
+            //全形ASCII
 
+            /*
+            實際上，全角字符的第一個字節總是被置為163，
+            而第二個字節則是相同半角字符碼加上128（不包括空格）。
+            如半角A為65，則全角A則是163（第一個字節）、193（第二個字節，128+65）。
+            */
+
+            richTextBox1.Text += "全形ASCII\n";
+            for (byte k = 0x00; k < 0x7f; k++)
+            {
+                byte[] ch = new byte[2];
+                ch[0] = 163;
+                ch[1] = (byte)(128 + k);
+                Console.Write(Encoding.GetEncoding("GB2312").GetString(ch));
+                richTextBox1.Text += Encoding.GetEncoding("GB2312").GetString(ch);
+            }
+            richTextBox1.Text += "\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -517,6 +547,76 @@ namespace vcs_Encoding
             char ch = tb_unicode.GetCharFromPosition(e.Location);
 
             lb_unicode.Text = ch.ToString() + "\t" + ((int)ch).ToString();
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+
         }
 
         //------------------------------------------------------------  # 60個

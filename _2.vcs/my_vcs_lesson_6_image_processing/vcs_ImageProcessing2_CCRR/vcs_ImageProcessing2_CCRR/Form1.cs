@@ -775,9 +775,41 @@ namespace vcs_ImageProcessing2_CCRR
             pictureBox1.Image = bitmap2;
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button13_Click(object sender, EventArgs e)
         {
+            //旋轉圖像
+            //Bitmap縮放圖片大小
+
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+
+            //取得原始大小的图像
+            //Bitmap bitmap1 = new Bitmap(filename);
+
+            //得到缩放后的图像
+            //Bitmap bitmap2 = new Bitmap(bitmap1, this.pictureBox1.Width, this.pictureBox1.Height);   //縮放圖片大小
+
+
+            //以任意角度旋转显示图像
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            Bitmap bitmap1 = new Bitmap(filename);
+
+            Graphics g = this.pictureBox1.CreateGraphics();//实例化绘图对象
+            float MyAngle = 0;//旋转的角度
+            while (MyAngle < 360)
+            {
+                TextureBrush MyBrush = new TextureBrush(bitmap1);//实例化TextureBrush类
+                this.pictureBox1.Refresh();//使工作区无效
+                MyBrush.RotateTransform(MyAngle);//以指定角度旋转图像
+                g.FillRectangle(MyBrush, 0, 0, this.ClientRectangle.Width, this.ClientRectangle.Height);//绘制旋转后的图像
+                MyAngle += 0.5f;//增加旋转的角度
+                System.Threading.Thread.Sleep(50);//使线程休眠50毫秒
+            }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button14_Click(object sender, EventArgs e)
         {

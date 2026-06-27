@@ -321,44 +321,9 @@ namespace vcs_Mix03_draw_image
 
         //------------------------------------------------------------  # 60個
 
-        //聲明一個API函數
-        [System.Runtime.InteropServices.DllImportAttribute("gdi32.dll")]
-        private static extern bool BitBlt(IntPtr hdcDest, int nXDest, int nYDest, int nWidth, int nHeight, IntPtr hdcSrc, int nXSrc, int nYSrc, System.Int32 dwRop);
-
-        public void SnatchScreen(Form Frm, string FilePath)
-        {
-            Point Var_Loc = Frm.Location;//取得目前視窗的位置
-
-            richTextBox1.Text += "aaaa : " + Var_Loc.ToString() + "\n";
-            richTextBox1.Text += "bbbb : " + this.Location.ToString() + "\n";
-
-            int Frm_left = -Var_Loc.X;
-            int Frm_right = -Var_Loc.Y;
-
-            Rectangle Var_rect = new Rectangle();//實例化Rectangle類
-            Var_rect = Screen.GetWorkingArea(Frm);//獲得目前螢幕的大小
-            Graphics g = Frm.CreateGraphics();//建立一個以目前螢幕為模板的圖片
-            Image Var_Image = new Bitmap(Var_rect.Width, Var_rect.Height, g);//建立以螢幕大小為標準的位圖 
-            Graphics Var_G_Image = Graphics.FromImage(Var_Image);//根據圖片實例化Graphics類
-            IntPtr Screen_dc = g.GetHdc();//得到螢幕的句柄
-            IntPtr Bitmap_dc = Var_G_Image.GetHdc();//得到Bitmap的句柄
-            BitBlt(Bitmap_dc, 0, 0, Var_rect.Width, Var_rect.Height, Screen_dc, Frm_left, Frm_right, 13369376);//呼叫此API函數，完成螢幕擷取
-            g.ReleaseHdc(Screen_dc);//釋放掉螢幕的句柄
-            Var_G_Image.ReleaseHdc(Bitmap_dc);//釋放掉Bitmap的句柄
-            ImageFormat ImageF = ImageFormat.Jpeg;//實例化ImageFormat類
-
-            ImageF = ImageFormat.Jpeg;
-            Var_Image.Save(FilePath, ImageF);//以指定的文件格式來保存
-        }
-
         private void button6_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //本程式截圖
-            //執行螢幕截圖的操作
-
-            SnatchScreen(this, "tmp_aaaaaaa.jpg");
         }
 
         //------------------------------------------------------------  # 60個
@@ -429,23 +394,12 @@ namespace vcs_Mix03_draw_image
             show_button_text(sender);
         }
 
+        //6060
         private void button10_Click(object sender, EventArgs e)
         {
-            //Rectangle 的 Union
-            Graphics g = this.pictureBox1.CreateGraphics();
-
-            Rectangle rec1 = new Rectangle(100, 10, 200, 200);
-            Rectangle rec2 = new Rectangle(150, 100, 200, 200);
-            Rectangle rec3 = new Rectangle(30, 150, 200, 200);
-            g.DrawRectangle(Pens.Red, rec1);
-            g.DrawRectangle(Pens.Green, rec2);
-            g.DrawRectangle(Pens.Blue, rec3);
-
-            Rectangle new_rect = Rectangle.Union(rec1, rec2);
-            new_rect = Rectangle.Union(new_rect, rec3);
-            g.DrawRectangle(Pens.Magenta, new_rect);
-
         }
+
+        //6060
 
         private void button11_Click(object sender, EventArgs e)
         {
@@ -634,33 +588,6 @@ namespace vcs_Mix03_draw_image
 
         private void button16_Click(object sender, EventArgs e)
         {
-            //Bitmap縮放圖片大小
-
-            //string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-
-            //取得原始大小的图像
-            //Bitmap bitmap1 = new Bitmap(filename);
-
-            //得到缩放后的图像
-            //Bitmap bitmap2 = new Bitmap(bitmap1, this.pictureBox1.Width, this.pictureBox1.Height);   //縮放圖片大小
-
-
-            //以任意角度旋转显示图像
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            Bitmap bitmap1 = new Bitmap(filename);
-
-            Graphics g = this.pictureBox1.CreateGraphics();//实例化绘图对象
-            float MyAngle = 0;//旋转的角度
-            while (MyAngle < 360)
-            {
-                TextureBrush MyBrush = new TextureBrush(bitmap1);//实例化TextureBrush类
-                this.pictureBox1.Refresh();//使工作区无效
-                MyBrush.RotateTransform(MyAngle);//以指定角度旋转图像
-                g.FillRectangle(MyBrush, 0, 0, this.ClientRectangle.Width, this.ClientRectangle.Height);//绘制旋转后的图像
-                MyAngle += 0.5f;//增加旋转的角度
-                System.Threading.Thread.Sleep(50);//使线程休眠50毫秒
-            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -682,7 +609,7 @@ namespace vcs_Mix03_draw_image
             PngImg.Save(@"tmp_png2bmp.bmp", ImageFormat.Bmp);
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button18_Click(object sender, EventArgs e)
         {
@@ -823,9 +750,7 @@ namespace vcs_Mix03_draw_image
             return cCP;
         }
 
-
-
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button19_Click(object sender, EventArgs e)
         {

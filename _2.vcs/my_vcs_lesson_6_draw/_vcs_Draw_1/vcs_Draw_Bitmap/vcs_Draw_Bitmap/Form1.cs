@@ -1047,7 +1047,6 @@ pictureBox1.Image = bitmap1;
 bitmap1 = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg");
 pictureBox1.Image = bitmap1;
 
-
 開啟一圖 畫在pictureBox上
 Graphics g;
 g = pictureBox1.CreateGraphics();		//取得畫布物件
@@ -1055,16 +1054,6 @@ g = pictureBox1.CreateGraphics();		//取得畫布物件
 Bitmap bitmap1 = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg");
 
 g.DrawEllipse(new Pen(Color.Red, 1), 10, 10, 100, 100);		//作畫於其上
-
-            PenStyle = new Pen(foreColor);
-            PenStyle.Width = (int)numericUpDown1.Value;
-            PenStyle.StartCap = System.Drawing.Drawing2D.LineCap.Round;
-            PenStyle.EndCap = System.Drawing.Drawing2D.LineCap.Round;
-            PenStyle.Color = foreColor;
-
-            //PenStyle.LineJoin = System.Drawing.Drawing2D.LineJoin.Bevel;
-            PenStyle.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
-
 
 */
 

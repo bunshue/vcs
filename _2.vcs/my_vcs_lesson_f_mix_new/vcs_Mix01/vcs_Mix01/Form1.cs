@@ -282,23 +282,6 @@ namespace vcs_Mix01
         {
             show_button_text(sender);
 
-            /*
-            實際上，全角字符的第一個字節總是被置為163，
-            而第二個字節則是相同半角字符碼加上128（不包括空格）。
-            如半角A為65，則全角A則是163（第一個字節）、193（第二個字節，128+65）。
-            */
-
-            richTextBox1.Text += "全形ASCII\n";
-            for (byte k = 0x00; k < 0x7f; k++)
-            {
-                byte[] ch = new byte[2];
-                ch[0] = 163;
-                ch[1] = (byte)(128 + k);
-                Console.Write(Encoding.GetEncoding("GB2312").GetString(ch));
-                richTextBox1.Text += Encoding.GetEncoding("GB2312").GetString(ch);
-            }
-            richTextBox1.Text += "\n";
-
         }
 
         private void button8_Click(object sender, EventArgs e)
