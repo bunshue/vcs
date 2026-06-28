@@ -353,6 +353,7 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(180, 45);
             this.button25.TabIndex = 41;
+            this.button25.Text = "蝴蝶";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 

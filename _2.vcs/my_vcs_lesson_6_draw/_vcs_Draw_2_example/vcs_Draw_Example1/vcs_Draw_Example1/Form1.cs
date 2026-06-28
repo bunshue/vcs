@@ -46,6 +46,9 @@ namespace vcs_Draw_Example1
 
             //------------------------------------------------------------  # 60個
 
+            this.DoubleBuffered = true;
+            this.ResizeRedraw = true;
+
             int W = pictureBox1.ClientSize.Width;
             int H = pictureBox1.ClientSize.Height;
 
@@ -66,6 +69,37 @@ namespace vcs_Draw_Example1
 
             //繪製螞蟻線
             draw_ant_line();
+
+            //6060
+
+            Colors = new Color[] 
+            {
+                Color.Pink,
+                Color.Red,
+                Color.Orange,
+                Color.Yellow,
+                Color.Lime,
+                Color.Cyan,
+                Color.Blue,
+                Color.Violet,
+                Color.Pink,
+                Color.Red,
+                Color.Orange,
+                Color.Yellow,
+                Color.Lime,
+                Color.Cyan,
+                Color.Blue,
+                Color.Violet,
+                Color.Pink,
+                Color.Red,
+                Color.Orange,
+                Color.Yellow,
+                Color.Lime,
+                Color.Cyan,
+                Color.Blue,
+                Color.Violet
+            };
+
         }
 
         void show_item_location()
@@ -3744,6 +3778,63 @@ namespace vcs_Draw_Example1
 
         private void button25_Click(object sender, EventArgs e)
         {
+            draw_butterfly();
+        }
+
+        private const int period = 24;
+        private Color[] Colors;
+
+        // Return an appropriate color for this segment.
+        private Color GetColor(double t)
+        {
+            return Colors[(int)(t / Math.PI)];
+        }
+
+        void draw_butterfly()
+        {
+            int W = 500;
+            int H = 500;
+
+            Bitmap bitmap1 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            g.Clear(Color.Black);
+
+            // Scale and translate.
+            RectangleF world_rect = new RectangleF(-4.0f, -4.4f, 8.0f, 7.3f);
+            float cx = (world_rect.Left + world_rect.Right) / 2;
+            float cy = (world_rect.Top + world_rect.Bottom) / 2;
+
+            // Center the world coordinates at origin.
+            g.TranslateTransform(-cx, -cy);
+
+            // Scale to fill the form.
+            float scale = Math.Min(W / world_rect.Width, H / world_rect.Height);
+            g.ScaleTransform(scale, scale, MatrixOrder.Append);
+
+            // Move the result to center on the form.
+            g.TranslateTransform(W / 2, H / 2, MatrixOrder.Append);
+
+            // Generate the points.
+            PointF pt0, pt1;
+            double t = 0;
+            double expr = Math.Exp(Math.Cos(t)) - 2 * Math.Cos(4 * t) - Math.Pow(Math.Sin(t / 12), 5);
+            pt1 = new PointF((float)(Math.Sin(t) * expr), (float)(-Math.Cos(t) * expr));
+            using (Pen the_pen = new Pen(Color.Blue, 0))
+            {
+                const long num_lines = 5000;
+                for (long i = 0; i < num_lines; i++)
+                {
+                    t = i * period * Math.PI / num_lines;
+                    expr = Math.Exp(Math.Cos(t)) - 2 * Math.Cos(4 * t) - Math.Pow(Math.Sin(t / 12), 5);
+                    pt0 = pt1;
+                    pt1 = new PointF((float)(Math.Sin(t) * expr), (float)(-Math.Cos(t) * expr));
+                    the_pen.Color = GetColor(t);
+                    g.DrawLine(the_pen, pt0, pt1);
+                }
+            }
+            pictureBox1.Image = bitmap1;
         }
 
         //------------------------------------------------------------  # 60個

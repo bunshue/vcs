@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
-namespace howto_outline_graphics
+namespace vcs_Draw_Bitmap
 {
     public class Bitmap32
     {
@@ -59,6 +59,7 @@ namespace howto_outline_graphics
             red = ImageBytes[i++];
             alpha = ImageBytes[i];
         }
+
         public void SetPixel(int x, int y, byte red, byte green, byte blue, byte alpha)
         {
             int i = y * m_BitmapData.Stride + x * 4;
@@ -115,11 +116,8 @@ namespace howto_outline_graphics
             if (IsLocked) return;
 
             // Lock the bitmap data.
-            Rectangle bounds = new Rectangle(
-                0, 0, Bitmap.Width, Bitmap.Height);
-            m_BitmapData = Bitmap.LockBits(bounds,
-                ImageLockMode.ReadWrite,
-                PixelFormat.Format32bppArgb);
+            Rectangle bounds = new Rectangle(0, 0, Bitmap.Width, Bitmap.Height);
+            m_BitmapData = Bitmap.LockBits(bounds, ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
             RowSizeBytes = m_BitmapData.Stride;
 
             // Allocate room for the data.
@@ -138,7 +136,10 @@ namespace howto_outline_graphics
         public void UnlockBitmap()
         {
             // If it's already unlocked, do nothing.
-            if (!IsLocked) return;
+            if (!IsLocked)
+            {
+                return;
+            }
 
             // Copy the data back into the bitmap.
             int total_size = m_BitmapData.Stride * m_BitmapData.Height;
@@ -176,7 +177,10 @@ namespace howto_outline_graphics
             }
 
             // Unlock if appropriate.
-            if (!was_locked) UnlockBitmap();
+            if (!was_locked)
+            {
+                UnlockBitmap();
+            }
         }
 
         // Convert to grayscale.
@@ -199,7 +203,10 @@ namespace howto_outline_graphics
             }
 
             // Unlock if appropriate.
-            if (!was_locked) UnlockBitmap();
+            if (!was_locked)
+            {
+                UnlockBitmap();
+            }
         }
 
         // Clear the red color components.
@@ -218,7 +225,10 @@ namespace howto_outline_graphics
             }
 
             // Unlock if appropriate.
-            if (!was_locked) UnlockBitmap();
+            if (!was_locked)
+            {
+                UnlockBitmap();
+            }
         }
 
         // Clear the green color components.
@@ -237,7 +247,10 @@ namespace howto_outline_graphics
             }
 
             // Unlock if appropriate.
-            if (!was_locked) UnlockBitmap();
+            if (!was_locked)
+            {
+                UnlockBitmap();
+            }
         }
 
         // Clear the blue color components.
@@ -256,7 +269,10 @@ namespace howto_outline_graphics
             }
 
             // Unlock if appropriate.
-            if (!was_locked) UnlockBitmap();
+            if (!was_locked)
+            {
+                UnlockBitmap();
+            }
         }
 
         // Invert the pixel values.
@@ -279,10 +295,13 @@ namespace howto_outline_graphics
             }
 
             // Unlock if appropriate.
-            if (!was_locked) UnlockBitmap();
+            if (!was_locked)
+            {
+                UnlockBitmap();
+            }
         }
 
-        #region "FilterStuff"
+        //#region "FilterStuff"
 
         // A public class to represent filters.
         public class Filter
@@ -617,9 +636,9 @@ namespace howto_outline_graphics
             return result;
         }
 
-        #endregion // FilterStuff
+        //#endregion // FilterStuff
 
-        #region Warping Methods
+        //#region Warping Methods
 
         // Warping types.
         public enum WarpOperations
@@ -797,8 +816,6 @@ namespace howto_outline_graphics
                     break;
             }
         }
-
-        #endregion Warping Methods
-
+        //#endregion Warping Methods
     }
 }

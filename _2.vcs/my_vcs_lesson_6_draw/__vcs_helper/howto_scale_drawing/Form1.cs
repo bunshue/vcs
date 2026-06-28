@@ -32,18 +32,19 @@ namespace howto_scale_drawing
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
             RectangleF smiley_rect = new RectangleF(-1, -1, 2, 2);
+
             float wid = (W - 1) / 2;
             float hgt = (H - 1) / 2;
 
-            // Draw in the upper left quarter.
+            // 左上
             MapDrawing(e.Graphics, smiley_rect, new RectangleF(0, 0, wid, hgt), false);
             DrawSmiley(e.Graphics);
 
-            // Draw in the lower left quarter.
+            // 左下
             MapDrawing(e.Graphics, smiley_rect, new RectangleF(0, hgt, wid, hgt), false);
             DrawSmiley(e.Graphics);
 
-            // Draw in the right side.
+            // 右
             MapDrawing(e.Graphics, smiley_rect, new RectangleF(wid, 0, wid, 2 * hgt), true);
             DrawSmiley(e.Graphics);
         }
@@ -51,7 +52,7 @@ namespace howto_scale_drawing
         // Map a drawing coordinate rectangle to a graphics object rectangle.
         private void MapDrawing(Graphics gr, RectangleF drawing_rect, RectangleF target_rect, bool stretch)
         {
-            if ((target_rect.Width < 1) ||(target_rect.Height < 1))
+            if ((target_rect.Width < 1) || (target_rect.Height < 1))
             {
                 return;
             }
@@ -84,6 +85,8 @@ namespace howto_scale_drawing
         // Draw a smiley face in the area (-1, -1)-(1, 1).
         private void DrawSmiley(Graphics gr)
         {
+            gr.DrawRectangle(new Pen(Color.Red, 0), -1, -1, 2, 2);
+
             using (Pen thin_pen = new Pen(Color.Black, 0))
             {
                 gr.FillEllipse(Brushes.Yellow, -1, -1, 2, 2);

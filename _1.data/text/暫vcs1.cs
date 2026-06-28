@@ -1,4 +1,11 @@
 ﻿
+填上透明色
+g.Clear(Color.Transparent);
+
+
+6060
+
+
 string strMinute = "";
 if(DateTime.Now.Minute > 30) strMinute="30";
 else strMinute = "00";

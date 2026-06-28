@@ -37,8 +37,6 @@
             this.timer_draw_star = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_polygon = new System.Windows.Forms.PictureBox();
             this.timer_draw_polygon = new System.Windows.Forms.Timer(this.components);
-            this.pictureBox_rectangle = new System.Windows.Forms.PictureBox();
-            this.timer_draw_rectangle = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_progressbar = new System.Windows.Forms.PictureBox();
             this.timer_progressbar = new System.Windows.Forms.Timer(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -60,7 +58,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ellipse)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_polygon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rectangle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_progressbar)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_compass1)).BeginInit();
@@ -138,21 +135,6 @@
             this.timer_draw_polygon.Enabled = true;
             this.timer_draw_polygon.Interval = 1000;
             this.timer_draw_polygon.Tick += new System.EventHandler(this.timer_draw_polygon_Tick);
-            // 
-            // pictureBox_rectangle
-            // 
-            this.pictureBox_rectangle.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox_rectangle.Location = new System.Drawing.Point(12, 199);
-            this.pictureBox_rectangle.Name = "pictureBox_rectangle";
-            this.pictureBox_rectangle.Size = new System.Drawing.Size(50, 50);
-            this.pictureBox_rectangle.TabIndex = 62;
-            this.pictureBox_rectangle.TabStop = false;
-            // 
-            // timer_draw_rectangle
-            // 
-            this.timer_draw_rectangle.Enabled = true;
-            this.timer_draw_rectangle.Interval = 1000;
-            this.timer_draw_rectangle.Tick += new System.EventHandler(this.timer_draw_rectangle_Tick);
             // 
             // pictureBox_progressbar
             // 
@@ -322,7 +304,6 @@
             this.Controls.Add(this.pictureBox_round);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pictureBox_progressbar);
-            this.Controls.Add(this.pictureBox_rectangle);
             this.Controls.Add(this.pictureBox_polygon);
             this.Controls.Add(this.pictureBox_star);
             this.Controls.Add(this.pictureBox_ellipse);
@@ -335,7 +316,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ellipse)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_polygon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rectangle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_progressbar)).EndInit();
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_compass1)).EndInit();
@@ -359,8 +339,6 @@
         private System.Windows.Forms.Timer timer_draw_star;
         private System.Windows.Forms.PictureBox pictureBox_polygon;
         private System.Windows.Forms.Timer timer_draw_polygon;
-        private System.Windows.Forms.PictureBox pictureBox_rectangle;
-        private System.Windows.Forms.Timer timer_draw_rectangle;
         private System.Windows.Forms.PictureBox pictureBox_progressbar;
         private System.Windows.Forms.Timer timer_progressbar;
         private System.Windows.Forms.GroupBox groupBox1;

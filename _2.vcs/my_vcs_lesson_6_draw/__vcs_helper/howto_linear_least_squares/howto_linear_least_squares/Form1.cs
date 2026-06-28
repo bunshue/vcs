@@ -13,11 +13,6 @@ namespace howto_linear_least_squares
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         // Drawing constants.
         private const float Xmin = -10.0f;
         private const float Xmax = 10.0f;
@@ -29,6 +24,11 @@ namespace howto_linear_least_squares
         private bool HasSolution = false;
         private double BestM, BestB;
         private List<PointF> Points = new List<PointF>();
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
 
         // Make a drawing transformation.
         private void Form1_Load(object sender, EventArgs e)
@@ -125,6 +125,8 @@ namespace howto_linear_least_squares
         // Find parameters for a weibull curve fit.
         private void btnFit_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "資料點數 : " + Points.Count.ToString() + "\n";
+
             if (Points.Count <= 0)
                 return;
 
@@ -144,13 +146,14 @@ namespace howto_linear_least_squares
 
             txtM.Text = BestM.ToString();
             txtB.Text = BestB.ToString();
+            richTextBox1.Text += "BestM = " + BestM.ToString() + "\n";
+            richTextBox1.Text += "BestB = " + BestB.ToString() + "\n";
 
-            // Display the error.
             ShowError();
 
-            // We have a solution.
-            HasSolution = true;
             picGraph.Refresh();
+
+            HasSolution = true;
         }
 
         // Regraph with the given parameters.
@@ -161,21 +164,29 @@ namespace howto_linear_least_squares
 
             BestM = double.Parse(txtM.Text);
             BestB = double.Parse(txtB.Text);
+            richTextBox1.Text += "BestM = " + BestM.ToString() + "\n";
+            richTextBox1.Text += "BestB = " + BestB.ToString() + "\n";
+
             ShowError();
+
             picGraph.Refresh();
         }
 
         // Display the error.
         private void ShowError()
         {
+            richTextBox1.Text += "ShowError()\n";
+
             // Get the error.
             double error = Math.Sqrt(CurveFunctions.ErrorSquared(Points, BestM, BestB));
             txtError.Text = error.ToString();
+
+            richTextBox1.Text += "Error : " + error.ToString() + "\n";
         }
 
         private void bt_info_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "points = " + Points.Count.ToString() + "\n";
+            richTextBox1.Text += "資料點數 : " + Points.Count.ToString() + "\n";
         }
     }
 }

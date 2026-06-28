@@ -756,7 +756,31 @@ namespace vcs_Draw_Bitmap
 
         private void button13_Click(object sender, EventArgs e)
         {
+            //使用Bitmap32
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);
+
+            Bitmap32 bm32 = new Bitmap32(bitmap1);
+
+            bm32.LockBitmap();
+
+            for (int x = 0; x < bm32.Width; x++)
+            {
+                for (int y = 0; y < bm32.Height; y++)
+                {
+                    byte r, g, b, a;
+                    bm32.GetPixel(x, y, out r, out g, out b, out a);
+                    byte gray = (byte)((r + g + b) / 3);
+                    //                   R      G    B    A
+                    bm32.SetPixel(x, y, gray, gray, gray, a);
+                }
+            }
+            bm32.UnlockBitmap();
+            pictureBox1.Image = bitmap1;
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button14_Click(object sender, EventArgs e)
         {
