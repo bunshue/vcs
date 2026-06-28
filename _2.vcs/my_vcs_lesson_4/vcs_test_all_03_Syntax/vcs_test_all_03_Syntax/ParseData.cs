@@ -29,6 +29,8 @@ namespace vcs_test_all_03_Syntax
             richTextBox1.Clear();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button1_Click(object sender, EventArgs e)
         {
             try
@@ -190,8 +192,6 @@ namespace vcs_test_all_03_Syntax
 
             richTextBox1.Text += "Value: " + value2.ToString() + "\n";
             richTextBox1.Text += "Currency: " + currency.ToString() + "\n";
-
-
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -215,7 +215,6 @@ namespace vcs_test_all_03_Syntax
         {
             //get
             richTextBox1.Text += "從dateTimePicker裏讀取時間\n";
-
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -223,8 +222,6 @@ namespace vcs_test_all_03_Syntax
             //set
             richTextBox1.Text += "設定時間到dateTimePicker裏\n";
             dateTimePicker1.Value = DateTime.Parse("12:34:56");
-
         }
-
     }
 }

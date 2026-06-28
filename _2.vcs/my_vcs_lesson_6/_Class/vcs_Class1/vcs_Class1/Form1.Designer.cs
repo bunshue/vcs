@@ -83,7 +83,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(860, 301);
+            this.richTextBox1.Location = new System.Drawing.Point(731, 287);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 1;
@@ -92,7 +92,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(870, 334);
+            this.bt_clear.Location = new System.Drawing.Point(741, 320);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 12;
@@ -188,7 +188,7 @@
             this.groupBox14.Controls.Add(this.pictureBox0);
             this.groupBox14.Location = new System.Drawing.Point(627, 276);
             this.groupBox14.Name = "groupBox14";
-            this.groupBox14.Size = new System.Drawing.Size(200, 271);
+            this.groupBox14.Size = new System.Drawing.Size(87, 197);
             this.groupBox14.TabIndex = 14;
             this.groupBox14.TabStop = false;
             this.groupBox14.Text = "圖片範例";
@@ -486,7 +486,7 @@
             this.bt_class08.Name = "bt_class08";
             this.bt_class08.Size = new System.Drawing.Size(190, 60);
             this.bt_class08.TabIndex = 9;
-            this.bt_class08.Text = "使用 類別方法";
+            this.bt_class08.Text = "使用 類別方法 LOG";
             this.bt_class08.UseVisualStyleBackColor = true;
             this.bt_class08.Click += new System.EventHandler(this.bt_class08_Click);
             // 
@@ -580,7 +580,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1033, 679);
+            this.ClientSize = new System.Drawing.Size(1033, 661);
             this.Controls.Add(this.groupBox0);
             this.Controls.Add(this.groupBox14);
             this.Controls.Add(this.groupBox8);

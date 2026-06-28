@@ -1189,22 +1189,21 @@ namespace vcs_test_all_02_Array
             };
 
             richTextBox1.Text += "原陣列\n";
-            // Display the people unsorted.
             for (int i = 0; i < people.Length; i++)
             {
-                //lstPeople.Items.Add(people[i]);
                 richTextBox1.Text += people[i] + "\n";
             }
 
             richTextBox1.Text += "依名排序\n";
-            // Sort the people.
             Array.Sort(people);
+
             for (int i = 0; i < people.Length; i++)
             {
-                //lstSortedPeople.Items.Add(people[i]);
                 richTextBox1.Text += people[i] + "\n";
             }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button16_Click(object sender, EventArgs e)
         {
@@ -1253,6 +1252,8 @@ namespace vcs_test_all_02_Array
             }
             richTextBox1.Text += "\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button17_Click(object sender, EventArgs e)
         {
@@ -1328,12 +1329,10 @@ namespace vcs_test_all_02_Array
 
         private void PrintArray<T>(T[, ,] arr)
         {
-            int i;
             int rank = arr.Rank;
-
             richTextBox1.Text += "維度 rank = " + rank.ToString() + "\n";
 
-            for (i = 0; i < rank; i++)
+            for (int i = 0; i < rank; i++)
             {
                 richTextBox1.Text += "第 " + i.ToString() + " 維的長度 : " + arr.GetLength(i).ToString() + "\n";
                 richTextBox1.Text += "第 " + i.ToString() + " 維的長度 : " + (arr.GetUpperBound(i) + 1).ToString() + "\n";
@@ -1560,11 +1559,8 @@ Console.WriteLine(array2D.GetLength(1));	//10
 array2D = new int[5, 10];
 Console.WriteLine(array2D.GetUpperBound(0) + 1);	//5
 Console.WriteLine(array2D.GetUpperBound(1) + 1);	//10
-*/
 
-
-/*
-
+//------------------------------------------------------------  # 60個
 
 陣列 一維陣列 二維陣列
 
@@ -1585,7 +1581,6 @@ Console.WriteLine(array2D.GetUpperBound(1) + 1);	//10
             return str;
         }
 
-
 //字串轉拜列
 string mystring="this is a string"
 char[] mychars=mystring.ToCharArray();
@@ -1598,7 +1593,6 @@ foreach(char mychar in mystring)
 mystring.Length //獲取元素的個數 
 
 //------------------------------------------------------------  # 60個
-
 
 控件陣列 宣告
 PictureBox[] DisplayReference = new PictureBox[4];
@@ -1638,19 +1632,16 @@ lblShow.Text = "英文：" + engNum[n];
 //------------------------------------------------------------  # 60個
 
 List如同Array一樣,可以建立許多陣列元素,但是卻比Array來的靈活.
-
 例如要建立一陣列元素,Array需要先宣告陣列長度,而List不需要.
 
 Array->
 
 int[] myArray = new int[5] ;
-
 int[] myArray = { 1, 2, 3, 4, 5 };
 
 List->
 
 List<int> myLists = new List<int>();
-
 另外List如同一張資料表,你可以對它編輯,如加入某一列或刪除某一列.
 
 //------------------------------------------------------------  # 60個

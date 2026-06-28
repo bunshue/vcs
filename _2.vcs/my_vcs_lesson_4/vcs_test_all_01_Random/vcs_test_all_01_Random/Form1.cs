@@ -321,6 +321,8 @@ namespace vcs_test_all_01_Random
         {
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void bt_random4_Click(object sender, EventArgs e)
         {
             //C# 產生亂數的方式(Random)
@@ -336,13 +338,11 @@ namespace vcs_test_all_01_Random
         {
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void bt_random6_Click(object sender, EventArgs e)
         {
             Random Rnd = new Random(); //加入Random，產生的數字不會重覆
-            string name_string;
-            int score_chi;
-            int score_eng;
-            int score_math;
 
             for (int i = 0; i < 20; i++)
             {
@@ -355,15 +355,16 @@ namespace vcs_test_all_01_Random
                 {
                     builder.Append(str[Rnd.Next(0, str.Length)]);
                 }
-                name_string = builder.ToString();
-
-                score_chi = Rnd.Next(80, 100) + 1;
-                score_eng = Rnd.Next(70, 100) + 1;
-                score_math = Rnd.Next(60, 100) + 1;
+                string name_string = builder.ToString();
+                int score_chi = Rnd.Next(80, 100) + 1;
+                int score_eng = Rnd.Next(70, 100) + 1;
+                int score_math = Rnd.Next(60, 100) + 1;
 
                 richTextBox1.Text += "Name : " + name_string + "\t" + score_chi.ToString() + "\t" + score_eng.ToString() + "\t" + score_math.ToString() + "\n";
             }
         }
+
+        //------------------------------------------------------------  # 60個
 
         public static string GetRandomString3(int length)
         {

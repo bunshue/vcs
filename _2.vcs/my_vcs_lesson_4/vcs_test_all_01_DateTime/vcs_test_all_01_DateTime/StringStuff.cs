@@ -40,9 +40,7 @@ namespace vcs_test_all_01_DateTime
         // Format a date as in "August 20th, 2020."
         public static string ToOrdinal(this DateTime value)
         {
-            return value.ToString("MMMM") + " " +
-                value.Day + value.Day.ToOrdinal() +
-                ", " + value.Year;
+            return value.ToString("MMMM") + " " + value.Day + value.Day.ToOrdinal() + ", " + value.Year;
         }
     }
 }

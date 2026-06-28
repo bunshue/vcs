@@ -18,6 +18,27 @@ namespace vcs_MouseCursor1
         private const int Hgt = 70;
         private const int BmWid = 32;
 
+        //------------------------------------------------------------  # 60個
+
+        // 取得滑鼠座標 ST
+        [DllImport("user32.dll")]
+        public static extern bool GetCursorPos(out POINT lpPoint);
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct POINT
+        {
+            public int X;
+            public int Y;
+            public POINT(int x, int y)
+            {
+                this.X = x;
+                this.Y = y;
+            }
+        }
+        // 取得滑鼠座標 SP
+
+        //------------------------------------------------------------  # 60個
+
         public Form1()
         {
             InitializeComponent();
@@ -504,6 +525,17 @@ namespace vcs_MouseCursor1
         }
 
         //------------------------------------------------------------  # 60個
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            //用GetCursorPos取得滑鼠座標
+            POINT pt = new POINT();
+            GetCursorPos(out pt);
+            //this.Text = "滑鼠位置 : (" + pt.X.ToString() + ", " + pt.Y.ToString() + ")";    same
+            this.Text = "滑鼠位置 : (" + string.Format("X:{0}, Y:{1}", pt.X, pt.Y) + ")";
+        }
+
+        //------------------------------------------------------------  # 60個
     }
 }
 
@@ -518,7 +550,6 @@ namespace vcs_MouseCursor1
 /*  可搬出
 
 */
-
 
 
 //測試滑鼠移動

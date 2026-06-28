@@ -1,4 +1,4 @@
-﻿namespace vcs_MousePosition
+﻿namespace vcs_MouseCursor4
 {
     partial class Form1
     {

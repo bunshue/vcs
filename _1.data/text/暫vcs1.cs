@@ -76,13 +76,14 @@ pictureBox1.ClientSize = new Size(400,430);
 Tom
 Sue
 Amy
+Ben
 
 4字
 John
 Mary
 Jack
 Lisa
-
+Jeff
 
 5字
 Alice
@@ -91,6 +92,7 @@ David
 Peter
 Jerry
 Nancy
+Cindy
 
 //------------------------------------------------------------  # 60個
 

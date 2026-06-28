@@ -145,7 +145,6 @@ namespace vcs_test_all_04_Dialog2
     }
 }
 
-
 /*屬性設定
 openFileDialog1.ShowHelp = checkBox1.Checked;
 openFileDialog1.ShowReadOnly = checkBox2.Checked;

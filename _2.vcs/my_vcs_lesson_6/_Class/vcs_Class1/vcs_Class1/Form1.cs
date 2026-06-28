@@ -103,7 +103,7 @@ namespace vcs_Class1
 
             test_picture_class();
 
-            Logger3.InitLogAPI(Application.StartupPath, "aaaaaaa.log");
+            Logger3.InitLogAPI(Application.StartupPath, "Logger3_" + string.Format("{0:yyyy年-MM月-dd日}", DateTime.Now) + "日誌記錄.txt");
         }
 
         void show_item_location()
@@ -1456,13 +1456,7 @@ namespace vcs_Class1
 
     public class Logger1
     {
-        /// <summary>
-        /// 寫入日志.
-        /// </summary>
-        /// <param name="strList">The STR list.</param>
-        /// <remarks> </remarks>
-        /// <Description></Description>
-        //public static void WriteLog(string ex)
+        // 寫入日志.
         public static void WriteLog(params object[] strList)
         {
             if (strList.Count() == 0) return;
@@ -1472,12 +1466,12 @@ namespace vcs_Class1
             {
                 //LogFileName = Application.StartupPath + "\\log_" + DateTime.Now.ToString("yyyyMMdd") + ".txt";
                 strDicPath = Application.StartupPath + "//";
-                strPath = strDicPath + string.Format("{0:yyyy年-MM月-dd日}", DateTime.Now) + "日誌記錄.txt";
+                strPath = strDicPath + "Logger1_" + string.Format("{0:yyyy年-MM月-dd日}", DateTime.Now) + "日誌記錄.txt";
             }
             catch (Exception ex)
             {
                 strDicPath = "C:/temp/log/";
-                strPath = strDicPath + string.Format("{0:yyyy年-MM月-dd日}", DateTime.Now) + "日誌記錄.txt";
+                strPath = strDicPath + "Logger1_" + string.Format("{0:yyyy年-MM月-dd日}", DateTime.Now) + "日誌記錄.txt";
                 Console.WriteLine(ex.Message);
             }
 
@@ -1497,14 +1491,13 @@ namespace vcs_Class1
             {
                 sb.Append(DateTime.Now.ToString() + "-----" + item + "\n");
             }
-
             File.WriteAllText(strPath, str + sb.ToString());
         }
     }
 
     public class Logger2
     {
-        static string logFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "vcs_log.txt");
+        static string logFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logger2_" + string.Format("{0:yyyy年-MM月-dd日}", DateTime.Now) + "日誌記錄.txt");
 
         public static void WriteLog(string msg)
         {
@@ -1524,7 +1517,7 @@ namespace vcs_Class1
         private static string myPath = "";
         private static string myName = "";
 
-        /// 初始化日志文件
+        // 初始化日志文件
         public static void InitLogAPI(string logPath, string logName)
         {
             myPath = logPath;
@@ -1541,14 +1534,8 @@ namespace vcs_Class1
             string Month = DateTime.Now.Month.ToString().PadLeft(2, '0');
             string Day = DateTime.Now.Day.ToString().PadLeft(2, '0');
 
-            //年月日文件夾是否存在，不存在則建立
-            if (!Directory.Exists(myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day))
-            {
-                Directory.CreateDirectory(myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day);
-            }
-
             //寫入日志UNDO,Exception has not been handle
-            string LogFile = myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day + "\\" + myName;
+            string LogFile = myName;
             if (!File.Exists(LogFile))
             {
                 StreamWriter myFile;
@@ -1592,7 +1579,8 @@ namespace vcs_Class1
                 FilePath = Directory.GetCurrentDirectory();
             }
 
-            string filename = FilePath + string.Format("\\LogFiles3\\{0:yyyy}-{0:MM}\\LOG_{0:yyyy-MM-dd}.txt", DateTime.Now);
+            string filename = FilePath + "\\Logger4_" + string.Format("{0:yyyy年-MM月-dd日}", DateTime.Now) + "日誌記錄.txt";
+
             FileInfo finfo = new FileInfo(filename);
             if (finfo.Directory.Exists == false)
             {

@@ -1633,37 +1633,28 @@ namespace vcs_test_all_01_DateTime
 
             //------------------------------------------------------------  # 60個
 
-            //量測時間
-            int start = 0;
-            start = Environment.TickCount;
-            // Do stuff
-            int duration = Environment.TickCount - start;
-            richTextBox1.Text += "耗時 : " + (duration / 1000).ToString() + "." + (duration % 1000).ToString("D3") + " 秒\n";
+            //量測時間, 計算程式執行的時間
 
-            //------------------------------------------------------------  # 60個
-
-            //計算程式執行的時間
-
-            int URms = System.Environment.TickCount;
+            int start = Environment.TickCount;
 
             //XXXXXXXXX
 
-            richTextBox1.Text += "花費 : " + (Environment.TickCount - URms).ToString() + " ms 完成\n";
+            int duration = Environment.TickCount - start;
+            richTextBox1.Text += "耗時 : " + (duration / 1000).ToString() + "." + (duration % 1000).ToString("D3") + " 秒\n";
+            richTextBox1.Text += "耗時 : " + (duration).ToString() + " msec\n";
 
             //------------------------------------------------------------  # 60個
-
-            DateTime LoginTime, LogoffTime;
 
             //取得停留時間
             TimeSpan ts = new TimeSpan();
 
             //取得目前登入的時間
-            LoginTime = DateTime.Now;
+            DateTime LoginTime = DateTime.Now;
             richTextBox1.Text += "登入時間 : " + LoginTime + "\n";
 
             // do something
 
-            LogoffTime = DateTime.Now;
+            DateTime LogoffTime = DateTime.Now;
             richTextBox1.Text += "登出時間 : " + LogoffTime + "\n";
 
             //------------------------------------------------------------  # 60個

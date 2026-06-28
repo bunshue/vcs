@@ -497,6 +497,7 @@
             // pictureBox5
             // 
             this.pictureBox5.BackColor = System.Drawing.Color.LightGray;
+            this.pictureBox5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox5.Location = new System.Drawing.Point(843, 124);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(50, 50);
@@ -522,6 +523,7 @@
             // pictureBox4
             // 
             this.pictureBox4.BackColor = System.Drawing.Color.LightGray;
+            this.pictureBox4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox4.Location = new System.Drawing.Point(787, 124);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(50, 50);
@@ -531,6 +533,7 @@
             // pictureBox3
             // 
             this.pictureBox3.BackColor = System.Drawing.Color.LightGray;
+            this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox3.Location = new System.Drawing.Point(843, 68);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(50, 50);
@@ -556,6 +559,7 @@
             // pictureBox2
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.LightGray;
+            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox2.Location = new System.Drawing.Point(787, 68);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(50, 50);
@@ -565,6 +569,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.LightGray;
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.Location = new System.Drawing.Point(787, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(50, 50);

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 using System.Runtime.InteropServices;  //StructLayout
 
-namespace vcs_MousePosition
+namespace vcs_MouseCursor4
 {
     public partial class Form1 : Form
     {
