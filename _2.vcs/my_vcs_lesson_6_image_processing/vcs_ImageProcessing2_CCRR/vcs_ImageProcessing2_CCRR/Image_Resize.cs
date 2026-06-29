@@ -5,15 +5,15 @@ using System.Text;
 
 using System.IO;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;
 
 namespace vcs_ImageProcessing2_CCRR
 {
     /// 图片处理
     public class Image_Resize
     {
-        #region 正方型裁剪并缩放
+        //#region 正方型裁剪并缩放
 
         /// 正方型裁剪
         /// 以图片中心为轴心，截取正方型，然后等比缩放
@@ -24,11 +24,6 @@ namespace vcs_ImageProcessing2_CCRR
         /// <param name="quality">质量（范围0-100）</param>
         public static void CutForSquare(System.IO.Stream fromFile, string fileSaveUrl, int side, int quality)
         {
-            //创建目录
-            string dir = Path.GetDirectoryName(fileSaveUrl);
-            if (!Directory.Exists(dir))
-                Directory.CreateDirectory(dir);
-
             //原始图片（获取原始图片创建对象，并使用流中嵌入的颜色管理信息）
             System.Drawing.Image initImage = System.Drawing.Image.FromStream(fromFile, true);
 
@@ -132,9 +127,9 @@ namespace vcs_ImageProcessing2_CCRR
             }
         }
 
-        #endregion
+        //#endregion
 
-        #region 自定义裁剪并缩放
+        //#region 自定义裁剪并缩放
 
         /// 指定长宽裁剪
         /// 按模版比例最大范围的裁剪图片并缩放至模版尺寸
@@ -264,9 +259,9 @@ namespace vcs_ImageProcessing2_CCRR
             //释放资源
             initImage.Dispose();
         }
-        #endregion
+        //#endregion
 
-        #region 等比缩放
+        //#region 等比缩放
 
         /// 图片等比缩放
         /// <param name="fromFile">原图Stream对象</param>
@@ -277,11 +272,6 @@ namespace vcs_ImageProcessing2_CCRR
         /// <param name="watermarkImage">水印图片路径(为""表示不使用水印)</param>
         public static void ZoomAuto(System.IO.Stream fromFile, string savePath, System.Double targetWidth, System.Double targetHeight, string watermarkText, string watermarkImage)
         {
-            //创建目录
-            string dir = Path.GetDirectoryName(savePath);
-            if (!Directory.Exists(dir))
-                Directory.CreateDirectory(dir);
-
             //原始图片（获取原始图片创建对象，并使用流中嵌入的颜色管理信息）
             System.Drawing.Image initImage = System.Drawing.Image.FromStream(fromFile, true);
 
@@ -448,9 +438,9 @@ namespace vcs_ImageProcessing2_CCRR
             }
         }
 
-        #endregion
+        //#endregion
 
-        #region 其它
+        //#region 其它
 
         /// <summary>
         /// 判断文件类型是否为WEB格式图片
@@ -470,7 +460,17 @@ namespace vcs_ImageProcessing2_CCRR
             }
         }
 
-        #endregion
+        //#endregion
 
     }//end class
 }
+
+
+/*
+//创建目录
+string dir = Path.GetDirectoryName(fileSaveUrl);
+if (!Directory.Exists(dir))
+    Directory.CreateDirectory(dir);
+*/
+
+

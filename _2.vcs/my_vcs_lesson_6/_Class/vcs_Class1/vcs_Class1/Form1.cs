@@ -726,9 +726,9 @@ namespace vcs_Class1
 
             richTextBox1.AppendText("使用 類別方法 Logger4\n");
 
-            Logger4.Write("寫log的方法 Logger4 1");
-            Logger4.Write("寫log的方法 Logger4 2");
-            Logger4.Write("寫log的方法 Logger4 3");
+            Logger4.WriteLog("寫log的方法 Logger4 1");
+            Logger4.WriteLog("寫log的方法 Logger4 2");
+            Logger4.WriteLog("寫log的方法 Logger4 3");
         }
 
         //------------------------------------------------------------  # 60個
@@ -1407,6 +1407,8 @@ namespace vcs_Class1
 
         private void bt_class29_Click(object sender, EventArgs e)
         {
+            string logFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logger2_" + string.Format("{0:yyyy年-MM月-dd日}", DateTime.Now) + "日誌記錄.txt");
+
 
         }
 
@@ -1464,7 +1466,6 @@ namespace vcs_Class1
             string strPath = "";
             try
             {
-                //LogFileName = Application.StartupPath + "\\log_" + DateTime.Now.ToString("yyyyMMdd") + ".txt";
                 strDicPath = Application.StartupPath + "//";
                 strPath = strDicPath + "Logger1_" + string.Format("{0:yyyy年-MM月-dd日}", DateTime.Now) + "日誌記錄.txt";
             }
@@ -1564,15 +1565,16 @@ namespace vcs_Class1
 
     //------------------------------------------------------------  # 60個
 
-    public static class Logger4
+    public class Logger4
     {
         public static string FilePath { get; set; }
-        public static void Write(string format, params object[] arg)
+
+        public static void WriteLog(string format, params object[] arg)
         {
-            Write(string.Format(format, arg));
+            WriteLog(string.Format(format, arg));
         }
 
-        public static void Write(string message)
+        public static void WriteLog(string message)
         {
             if (string.IsNullOrEmpty(FilePath))
             {

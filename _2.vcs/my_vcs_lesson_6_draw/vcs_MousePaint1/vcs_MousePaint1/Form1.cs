@@ -100,7 +100,6 @@ namespace vcs_MousePaint1
         private Rectangle Circle;
 
         // Used while drawing circles.
-        private bool DrawingCircle = false;
         private int StartX4, StartY4, EndX4, EndY4;
 
         // The circle's equation.
@@ -115,7 +114,7 @@ namespace vcs_MousePaint1
 
         // The points for the new ellipse we are drawing.
         private Point StartPoint, EndPoint;
-        private bool DrawingNew = false;
+        private bool flag_pictureBox5_MouseDown = false;
 
         //pictureBox5 SP
 
@@ -498,6 +497,7 @@ namespace vcs_MousePaint1
             {
                 return;
             }
+
             SelectingRectangle = false;
             timer2.Enabled = false;
             if ((StartX2 == EndX2) || (StartY2 == EndY2))
@@ -617,16 +617,14 @@ namespace vcs_MousePaint1
                 return;
             }
             pts3[index] = point;
-
         }
 
         //------------------------------------------------------------  # 60個
 
-
-        // Let the user click and drag to select a circle.
+        private bool flag_pictureBox4_MouseDown = false;
         private void pictureBox4_MouseDown(object sender, MouseEventArgs e)
         {
-            DrawingCircle = true;
+            flag_pictureBox4_MouseDown = true;
             GotCircle = false;
 
             StartX4 = e.X;
@@ -637,10 +635,7 @@ namespace vcs_MousePaint1
 
         private void pictureBox4_MouseMove(object sender, MouseEventArgs e)
         {
-            //this.Text = e.X.ToString() + ", " + e.Y.ToString();
-
-            // Do nothing if we are not drawing.
-            if (!DrawingCircle)
+            if (flag_pictureBox4_MouseDown == false)
             {
                 return;
             }
@@ -655,7 +650,10 @@ namespace vcs_MousePaint1
         private void pictureBox4_MouseUp(object sender, MouseEventArgs e)
         {
             // Do nothing if we are not drawing.
-            if (!DrawingCircle) return;
+            if (flag_pictureBox4_MouseDown == false)
+            {
+                return;
+            }
 
             EndX4 = e.X;
             EndY4 = e.Y;
@@ -676,8 +674,8 @@ namespace vcs_MousePaint1
                 GetCircleFormula(Circle, out Dx, out Dy, out R);
                 richTextBox1.Text += "圓心 (" + Dx.ToString() + ", " + Dy.ToString() + "), 半徑 = " + R.ToString() + "\n";
             }
-            // We are no longer drawing a new circle.
-            DrawingCircle = false;
+
+            flag_pictureBox4_MouseDown = false;
 
             this.pictureBox4.Refresh();
         }
@@ -726,7 +724,7 @@ namespace vcs_MousePaint1
             }
 
             // Draw the new circle if we are drawing one.
-            if (DrawingCircle)
+            if (flag_pictureBox4_MouseDown == true)
             {
                 // Make it a circle.
                 int diameter = Math.Max(Math.Abs(StartX4 - EndX4), Math.Abs(StartY4 - EndY4));
@@ -740,7 +738,7 @@ namespace vcs_MousePaint1
         // Start selecting an ellipse.
         private void pictureBox5_MouseDown(object sender, MouseEventArgs e)
         {
-            DrawingNew = true;
+            flag_pictureBox5_MouseDown = true;
             StartPoint = e.Location;
             EndPoint = e.Location;
         }
@@ -748,7 +746,7 @@ namespace vcs_MousePaint1
         // Continue drawing the new ellipse.
         private void pictureBox5_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!DrawingNew)
+            if (flag_pictureBox5_MouseDown==false)
             {
                 return;
             }
@@ -759,11 +757,11 @@ namespace vcs_MousePaint1
         // Finish drawing the new ellipse.
         private void pictureBox5_MouseUp(object sender, MouseEventArgs e)
         {
-            if (!DrawingNew)
+            if (flag_pictureBox5_MouseDown==false)
             {
                 return;
             }
-            DrawingNew = false;
+            flag_pictureBox5_MouseDown = false;
 
             // If the start and end points are different,
             // save the new ellipse.
@@ -795,7 +793,7 @@ namespace vcs_MousePaint1
             }
 
             // If we are creating a new ellipse, draw it.
-            if (DrawingNew)//新畫的
+            if (flag_pictureBox5_MouseDown==true)//新畫的
             {
                 using (Pen dashed_pen = new Pen(Color.Red, 3))
                 {
@@ -832,3 +830,4 @@ namespace vcs_MousePaint1
 /*  可搬出
 
 */
+

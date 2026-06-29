@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace vcs_MousePaint4
+namespace vcs_MousePaint8b
 {
     public partial class Form1 : Form
     {
@@ -40,7 +40,7 @@ namespace vcs_MousePaint4
             pictureBox1.MouseMove += new MouseEventHandler(pictureBox1_MouseMove);
             pictureBox1.Paint += new PaintEventHandler(pictureBox1_Paint);
 
-            this.Text = "vcs_MousePaint4";
+            this.Text = "vcs_MousePaint8b";
 
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;

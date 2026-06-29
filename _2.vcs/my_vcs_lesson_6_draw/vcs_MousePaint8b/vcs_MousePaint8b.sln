@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_MousePaint4", "vcs_MousePaint4\vcs_MousePaint4.csproj", "{DB3147A4-BC65-4D1A-B9E9-D10C33FCE2BE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_MousePaint8b", "vcs_MousePaint8b\vcs_MousePaint8b.csproj", "{DB3147A4-BC65-4D1A-B9E9-D10C33FCE2BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

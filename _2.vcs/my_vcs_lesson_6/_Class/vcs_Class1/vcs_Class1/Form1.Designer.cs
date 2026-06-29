@@ -269,6 +269,7 @@
             this.bt_class29.Name = "bt_class29";
             this.bt_class29.Size = new System.Drawing.Size(190, 60);
             this.bt_class29.TabIndex = 25;
+            this.bt_class29.Text = "test";
             this.bt_class29.UseVisualStyleBackColor = true;
             this.bt_class29.Click += new System.EventHandler(this.bt_class29_Click);
             // 

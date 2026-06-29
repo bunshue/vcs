@@ -1,4 +1,4 @@
-﻿namespace vcs_MousePaint4
+﻿namespace vcs_MousePaint8b
 {
     partial class Form1
     {
