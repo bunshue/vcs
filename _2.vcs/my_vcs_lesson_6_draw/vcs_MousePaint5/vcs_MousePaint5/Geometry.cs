@@ -5,7 +5,7 @@ using System.Text;
 
 using System.Drawing;
 
-namespace howto_convex_hull
+namespace vcs_MousePaint5
 {
     static class Geometry
     {
@@ -33,7 +33,7 @@ namespace howto_convex_hull
                 if (pt.X + pt.Y > lr.X + lr.Y) lr = pt;
             }
 
-            g_MinMaxCorners = new Point[] {ul, ur, lr, ll}; // For debugging.
+            g_MinMaxCorners = new Point[] { ul, ur, lr, ll }; // For debugging.
         }
 
         // Find a box that fits inside the MinMax quadrilateral.
@@ -86,7 +86,7 @@ namespace howto_convex_hull
                     results.Add(pt);
                 }
             }
-            
+
             g_NonCulledPoints = new Point[results.Count];   // For debugging.
             results.CopyTo(g_NonCulledPoints);              // For debugging.
             return results;
@@ -118,7 +118,7 @@ namespace howto_convex_hull
 
             // Start wrapping up the other points.
             float sweep_angle = 0;
-            for (;;)
+            for (; ; )
             {
                 // Find the point with smallest AngleValue
                 // from the last point.

@@ -52,6 +52,18 @@
     <Compile Include="About.designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="AboutBox2a.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutBox2a.Designer.cs">
+      <DependentUpon>AboutBox2a.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AboutBox2b.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutBox2b.designer.cs">
+      <DependentUpon>AboutBox2b.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,6 +72,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AboutBox2a.resx">
+      <DependentUpon>AboutBox2a.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
       <SubType>Designer</SubType>

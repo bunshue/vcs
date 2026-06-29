@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.bt_clear = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -44,6 +45,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
             this.hScrollBar2 = new System.Windows.Forms.HScrollBar();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.bt_clear4 = new System.Windows.Forms.Button();
+            this.timer5 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -227,11 +231,39 @@
             this.hScrollBar2.Size = new System.Drawing.Size(149, 15);
             this.hScrollBar2.TabIndex = 92;
             // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(286, 146);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(60, 16);
+            this.checkBox3.TabIndex = 93;
+            this.checkBox3.Text = "反鋸齒";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
+            // 
+            // bt_clear4
+            // 
+            this.bt_clear4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear4.Location = new System.Drawing.Point(11, 270);
+            this.bt_clear4.Name = "bt_clear4";
+            this.bt_clear4.Size = new System.Drawing.Size(72, 36);
+            this.bt_clear4.TabIndex = 94;
+            this.bt_clear4.Text = "Clear";
+            this.bt_clear4.UseVisualStyleBackColor = true;
+            this.bt_clear4.Click += new System.EventHandler(this.bt_clear4_Click);
+            // 
+            // timer5
+            // 
+            this.timer5.Tick += new System.EventHandler(this.timer5_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(444, 361);
+            this.Controls.Add(this.bt_clear4);
+            this.Controls.Add(this.checkBox3);
             this.Controls.Add(this.hScrollBar2);
             this.Controls.Add(this.hScrollBar1);
             this.Controls.Add(this.label5);
@@ -281,6 +313,9 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.HScrollBar hScrollBar1;
         private System.Windows.Forms.HScrollBar hScrollBar2;
+        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.Button bt_clear4;
+        private System.Windows.Forms.Timer timer5;
     }
 }
 

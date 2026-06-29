@@ -553,14 +553,53 @@ namespace vcs_Encoding
 
         private void button10_Click(object sender, EventArgs e)
         {
+            //列印出所有的編碼方式
+            StringBuilder sb = new StringBuilder();
+            foreach (EncodingInfo ei in Encoding.GetEncodings())
+            {
+                sb.Append(ei.CodePage).Append("\t").Append(ei.Name).Append("\t").Append(ei.DisplayName).Append("\r\n");
+            }
 
+            richTextBox1.Text += sb.ToString() + "\n";
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button11_Click(object sender, EventArgs e)
         {
+            //顯示Windows內所有編碼
+            // Print the header.
+            //richTextBox1.Text += 
+            richTextBox1.Text += "Info.CodePage      ";
+            richTextBox1.Text += "Info.Name                    ";
+            richTextBox1.Text += "Info.DisplayName";
+            richTextBox1.Text += "\n";
 
+            // Display the EncodingInfo names for every encoding, and compare with the equivalent Encoding names.
+            foreach (EncodingInfo ei in Encoding.GetEncodings())
+            {
+                Encoding enc = ei.GetEncoding();
+
+                richTextBox1.Text += ei.CodePage;
+                if (ei.CodePage == enc.CodePage)
+                    richTextBox1.Text += "    ";
+                else
+                    richTextBox1.Text += "*** ";
+
+                richTextBox1.Text += ei.Name;
+                if (ei.CodePage == enc.CodePage)
+                    richTextBox1.Text += "    ";
+                else
+                    richTextBox1.Text += "*** ";
+
+                richTextBox1.Text += ei.DisplayName;
+                if (ei.CodePage == enc.CodePage)
+                    richTextBox1.Text += "    ";
+                else
+                    richTextBox1.Text += "*** ";
+
+                richTextBox1.Text += "\n";
+            }
         }
 
         //------------------------------------------------------------  # 60個

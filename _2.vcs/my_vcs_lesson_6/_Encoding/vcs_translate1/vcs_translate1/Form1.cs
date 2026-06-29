@@ -32,12 +32,23 @@ namespace vcs_translate1
             int dx = 200 + 10;
             int dy = 60 + 10;
 
+            richTextBox7.Size = new Size(300, 840);
+            bt_clear.Location = new Point(richTextBox7.Location.X + richTextBox7.Size.Width - bt_clear.Size.Width, richTextBox7.Location.Y + richTextBox7.Size.Height - bt_clear.Size.Height);
+
             this.Size = new Size(1500, 980);
             this.Text = "簡體亂碼轉換";
 
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox4.Clear();
+            richTextBox5.Clear();
+            richTextBox6.Clear();
+            richTextBox7.Clear();
         }
 
         //------------------------------------------------------------  # 60個
@@ -90,14 +101,6 @@ namespace vcs_translate1
         private void button2_Click(object sender, EventArgs e)
         {
             richTextBox6.Text = GB2312translateBig5(this.richTextBox2.Text);
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            richTextBox4.Clear();
-            richTextBox5.Clear();
-            richTextBox6.Clear();
-            richTextBox7.Clear();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -328,45 +331,9 @@ namespace vcs_translate1
             translate_code(byteArray);
              * 
              * */
-
         }
 
-        private void button13_Click(object sender, EventArgs e)
-        {
-            // Print the header.
-            //richTextBox1.Text += 
-            richTextBox7.Text += "Info.CodePage      ";
-            richTextBox7.Text += "Info.Name                    ";
-            richTextBox7.Text += "Info.DisplayName";
-            richTextBox7.Text += "\n";
-
-            // Display the EncodingInfo names for every encoding, and compare with the equivalent Encoding names.
-            foreach (EncodingInfo ei in Encoding.GetEncodings())
-            {
-                Encoding enc = ei.GetEncoding();
-
-                richTextBox7.Text += ei.CodePage;
-                if (ei.CodePage == enc.CodePage)
-                    richTextBox7.Text += "    ";
-                else
-                    richTextBox7.Text += "*** ";
-
-                richTextBox7.Text += ei.Name;
-                if (ei.CodePage == enc.CodePage)
-                    richTextBox7.Text += "    ";
-                else
-                    richTextBox7.Text += "*** ";
-
-                richTextBox7.Text += ei.DisplayName;
-                if (ei.CodePage == enc.CodePage)
-                    richTextBox7.Text += "    ";
-                else
-                    richTextBox7.Text += "*** ";
-
-                richTextBox7.Text += "\n";
-            }
-
-        }
+        //------------------------------------------------------------  # 60個
 
         string transform_encoding(string string_old, string enc_old, string enc_new)
         {
@@ -419,6 +386,8 @@ namespace vcs_translate1
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button15_Click(object sender, EventArgs e)
         {
             string string_old = "都はるみ全曲集２ Disc 2";
@@ -430,6 +399,8 @@ namespace vcs_translate1
             richTextBox7.Text += "new string: " + string_new + "\n";
 
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button16_Click(object sender, EventArgs e)
         {
@@ -886,3 +857,4 @@ namespace vcs_translate1
 /*  可搬出
 
 */
+

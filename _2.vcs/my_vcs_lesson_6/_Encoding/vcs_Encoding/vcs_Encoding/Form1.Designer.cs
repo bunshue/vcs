@@ -197,7 +197,7 @@
             this.richTextBox_string1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox_string1.TabIndex = 122;
             this.richTextBox_string1.Text = "蒹葭\n\n蒹葭蒼蒼  白露為霜\n所謂伊人  在水一方\n遫洄從之  道阻且長\n遫游從之  宛在水中央\n\n蒹葭淒淒  白露未晞\n所謂伊人  在水之湄\n遫洄從之  道阻且" +
-    "躋\n遫游從之  宛在水中坻\n\n蒹葭采采  白露未已\n所謂伊人  在水之涘\n遫洄從之  道阻且右\n遫游從之  宛在水中沚";
+                "躋\n遫游從之  宛在水中坻\n\n蒹葭采采  白露未已\n所謂伊人  在水之涘\n遫洄從之  道阻且右\n遫游從之  宛在水中沚";
             // 
             // richTextBox_hex
             // 
@@ -273,6 +273,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(200, 60);
             this.button10.TabIndex = 137;
+            this.button10.Text = "列印出所有的編碼方式";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -283,6 +284,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(200, 60);
             this.button11.TabIndex = 138;
+            this.button11.Text = "顯示Windows內所有編碼";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 

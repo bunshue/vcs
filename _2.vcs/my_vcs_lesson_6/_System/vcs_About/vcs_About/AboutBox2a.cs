@@ -6,11 +6,11 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace vcs_System1
+namespace vcs_About
 {
-    partial class AboutBox1 : Form
+    partial class AboutBox2a : Form
     {
-        public AboutBox1()
+        public AboutBox2a()
         {
             InitializeComponent();
             this.Text = String.Format("關於 {0}", AssemblyTitle);
@@ -21,7 +21,7 @@ namespace vcs_System1
             this.textBoxDescription.Text = AssemblyDescription;
         }
 
-        #region 組件屬性存取子
+        //#region 組件屬性存取子
 
         public string AssemblyTitle
         {
@@ -99,6 +99,6 @@ namespace vcs_System1
                 return ((AssemblyCompanyAttribute)attributes[0]).Company;
             }
         }
-        #endregion
+        //#endregion
     }
 }

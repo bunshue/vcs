@@ -70,11 +70,35 @@ namespace vcs_About
 
         private void button0_Click(object sender, EventArgs e)
         {
+            //(A)關於 2a
+            //方案總管/vcs_System1/右鍵/加入/Windows Form/關於對話方塊/新增
+            //開啟 關於 表單
+
+            richTextBox1.Text += "開啟 關於 表單\n";
+
+            AboutBox2a ab = new AboutBox2a();
+            ab.ShowDialog();
+
+            //方案總管空白處按右鍵/屬性/組件資訊, 修改要顯示的程式資訊
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //(A)關於 2b
+            //方案總管/vcs_System1/右鍵/加入/Windows Form/關於對話方塊/新增
+            //開啟 關於 表單
+
+            richTextBox1.Text += "開啟 關於 表單\n";
+
+            AboutBox2b ab = new AboutBox2b();
+            ab.ShowDialog();
+
+            //方案總管空白處按右鍵/屬性/組件資訊, 修改要顯示的程式資訊
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button2_Click(object sender, EventArgs e)
         {

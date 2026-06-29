@@ -1084,28 +1084,10 @@ namespace vcs_System1
 
         private void button25_Click(object sender, EventArgs e)
         {
-            //列印出所有的編碼方式
-            StringBuilder sb = new StringBuilder();
-            foreach (EncodingInfo ei in Encoding.GetEncodings())
-            {
-                sb.Append(ei.CodePage).Append("\t").Append(ei.Name).Append("\t").Append(ei.DisplayName).Append("\r\n");
-            }
-
-            richTextBox1.Text += sb.ToString() + "\n";
         }
 
         private void button26_Click(object sender, EventArgs e)
         {
-            //(A)關於
-            //方案總管/vcs_System1/右鍵/加入/Windows Form/關於對話方塊/新增
-            //開啟 關於 表單
-
-            richTextBox1.Text += "開啟 關於 表單\n";
-
-            AboutBox1 ab = new AboutBox1();
-            ab.ShowDialog();
-
-            //方案總管空白處按右鍵/屬性/組件資訊, 修改要顯示的程式資訊
         }
 
         private void button27_Click(object sender, EventArgs e)
