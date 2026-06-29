@@ -66,6 +66,24 @@ namespace vcs_ImageProcessing4
             btnPointellate.Location = new Point(x_st + dx * 1, y_st + dy * 10);
             btnGrayscale2.Location = new Point(x_st + dx * 1, y_st + dy * 11);
 
+            groupBox1.Size = new Size(200, 300);
+            groupBox2.Size = new Size(200, 580);
+            groupBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 4 + 20);
+
+            pictureBox1.Size = new Size(830, 600);
+            pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y);
+
+            richTextBox1.Size = new Size(200, 600);
+            richTextBox1.Location = new Point(x_st + dx * 7, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            x_st = 10;
+            y_st = 20;
+            dx = 180 + 10;
+            dy = 60 + 10;
+
             bt_image_process_a0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_image_process_a1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             bt_image_process_a2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -74,26 +92,12 @@ namespace vcs_ImageProcessing4
             bt_image_process_a5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             bt_image_process_a6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             bt_image_process_a7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-
             bt_image_process_b0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_image_process_b1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             bt_image_process_b2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             bt_image_process_b3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
 
-            groupBox1.Size = new Size(200 + 20, 220);
-            groupBox2.Size = new Size(200 + 20, 420);
-            groupBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 3 + 20);
-
-            pictureBox1.Size = new Size(800, 600);
-            pictureBox1.Location = new Point(x_st + dx * 3 + 20, y_st + dy * 0);
-            bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y);
-
-            richTextBox1.Size = new Size(200, 600);
-            richTextBox1.Location = new Point(x_st + dx * 7, y_st + dy * 0);
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-
-            this.Size = new Size(1700, 880);
+            this.Size = new Size(1700, 890 + 50);
             this.Text = "vcs_ImageProcessing4";
 
             //設定執行後的表單起始位置, 正中央
@@ -465,6 +469,8 @@ namespace vcs_ImageProcessing4
             pictureBox1.Image = bitmap1;
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void DisplayWarpedImage(Bitmap32.WarpOperations warp_op)
         {
             string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
@@ -537,6 +543,8 @@ namespace vcs_ImageProcessing4
         {
 
         }
+
+        //------------------------------------------------------------  # 60個
 
         private const int NUM_TRIALS = 5;
         // Invert the image without Lockbits.
@@ -723,6 +731,8 @@ namespace vcs_ImageProcessing4
         {
 
         }
+
+        //------------------------------------------------------------  # 60個
     }
 }
 

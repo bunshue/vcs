@@ -69,9 +69,7 @@
             this.bt_image_process_p4 = new System.Windows.Forms.Button();
             this.bt_image_process_p3 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.bt_image_process_m7 = new System.Windows.Forms.Button();
             this.bt_image_process_m0 = new System.Windows.Forms.Button();
-            this.bt_image_process_m6 = new System.Windows.Forms.Button();
             this.bt_image_process_m1 = new System.Windows.Forms.Button();
             this.bt_image_process_m5 = new System.Windows.Forms.Button();
             this.bt_image_process_m2 = new System.Windows.Forms.Button();
@@ -100,7 +98,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(1003, 115);
+            this.pictureBox1.Location = new System.Drawing.Point(555, 328);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 100);
             this.pictureBox1.TabIndex = 6;
@@ -109,7 +107,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(1003, 221);
+            this.richTextBox1.Location = new System.Drawing.Point(672, 327);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 7;
@@ -132,9 +130,9 @@
             this.groupBox2.Controls.Add(this.bt_edge_detection2);
             this.groupBox2.Controls.Add(this.bt_edge_detection4);
             this.groupBox2.Controls.Add(this.bt_edge_detection3);
-            this.groupBox2.Location = new System.Drawing.Point(612, 9);
+            this.groupBox2.Location = new System.Drawing.Point(1033, 9);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(193, 424);
+            this.groupBox2.Size = new System.Drawing.Size(201, 526);
             this.groupBox2.TabIndex = 35;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "圖像邊緣檢測";
@@ -142,9 +140,9 @@
             // bt_edge_detection9
             // 
             this.bt_edge_detection9.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_edge_detection9.Location = new System.Drawing.Point(8, 379);
+            this.bt_edge_detection9.Location = new System.Drawing.Point(8, 466);
             this.bt_edge_detection9.Name = "bt_edge_detection9";
-            this.bt_edge_detection9.Size = new System.Drawing.Size(180, 40);
+            this.bt_edge_detection9.Size = new System.Drawing.Size(180, 50);
             this.bt_edge_detection9.TabIndex = 45;
             this.bt_edge_detection9.Text = "圖像邊緣提取2";
             this.bt_edge_detection9.UseVisualStyleBackColor = true;
@@ -153,9 +151,9 @@
             // bt_edge_detection8
             // 
             this.bt_edge_detection8.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_edge_detection8.Location = new System.Drawing.Point(8, 339);
+            this.bt_edge_detection8.Location = new System.Drawing.Point(8, 416);
             this.bt_edge_detection8.Name = "bt_edge_detection8";
-            this.bt_edge_detection8.Size = new System.Drawing.Size(180, 40);
+            this.bt_edge_detection8.Size = new System.Drawing.Size(180, 50);
             this.bt_edge_detection8.TabIndex = 44;
             this.bt_edge_detection8.Text = "圖像邊緣提取1";
             this.bt_edge_detection8.UseVisualStyleBackColor = true;
@@ -164,9 +162,9 @@
             // bt_edge_detection7
             // 
             this.bt_edge_detection7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_edge_detection7.Location = new System.Drawing.Point(8, 300);
+            this.bt_edge_detection7.Location = new System.Drawing.Point(8, 367);
             this.bt_edge_detection7.Name = "bt_edge_detection7";
-            this.bt_edge_detection7.Size = new System.Drawing.Size(180, 40);
+            this.bt_edge_detection7.Size = new System.Drawing.Size(180, 50);
             this.bt_edge_detection7.TabIndex = 43;
             this.bt_edge_detection7.Text = "Smoothed算子";
             this.bt_edge_detection7.UseVisualStyleBackColor = true;
@@ -177,7 +175,7 @@
             this.bt_edge_detection0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_edge_detection0.Location = new System.Drawing.Point(8, 21);
             this.bt_edge_detection0.Name = "bt_edge_detection0";
-            this.bt_edge_detection0.Size = new System.Drawing.Size(180, 40);
+            this.bt_edge_detection0.Size = new System.Drawing.Size(180, 50);
             this.bt_edge_detection0.TabIndex = 36;
             this.bt_edge_detection0.Text = "Robert算子";
             this.bt_edge_detection0.UseVisualStyleBackColor = true;
@@ -186,9 +184,9 @@
             // bt_edge_detection6
             // 
             this.bt_edge_detection6.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_edge_detection6.Location = new System.Drawing.Point(8, 260);
+            this.bt_edge_detection6.Location = new System.Drawing.Point(8, 317);
             this.bt_edge_detection6.Name = "bt_edge_detection6";
-            this.bt_edge_detection6.Size = new System.Drawing.Size(180, 40);
+            this.bt_edge_detection6.Size = new System.Drawing.Size(180, 50);
             this.bt_edge_detection6.TabIndex = 42;
             this.bt_edge_detection6.Text = "Kirsch算子";
             this.bt_edge_detection6.UseVisualStyleBackColor = true;
@@ -197,9 +195,9 @@
             // bt_edge_detection1
             // 
             this.bt_edge_detection1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_edge_detection1.Location = new System.Drawing.Point(8, 60);
+            this.bt_edge_detection1.Location = new System.Drawing.Point(8, 70);
             this.bt_edge_detection1.Name = "bt_edge_detection1";
-            this.bt_edge_detection1.Size = new System.Drawing.Size(180, 40);
+            this.bt_edge_detection1.Size = new System.Drawing.Size(180, 50);
             this.bt_edge_detection1.TabIndex = 37;
             this.bt_edge_detection1.Text = "Sobel算子";
             this.bt_edge_detection1.UseVisualStyleBackColor = true;
@@ -208,9 +206,9 @@
             // bt_edge_detection5
             // 
             this.bt_edge_detection5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_edge_detection5.Location = new System.Drawing.Point(8, 220);
+            this.bt_edge_detection5.Location = new System.Drawing.Point(8, 267);
             this.bt_edge_detection5.Name = "bt_edge_detection5";
-            this.bt_edge_detection5.Size = new System.Drawing.Size(180, 40);
+            this.bt_edge_detection5.Size = new System.Drawing.Size(180, 50);
             this.bt_edge_detection5.TabIndex = 41;
             this.bt_edge_detection5.Text = "Robinson算子";
             this.bt_edge_detection5.UseVisualStyleBackColor = true;
@@ -219,9 +217,9 @@
             // bt_edge_detection2
             // 
             this.bt_edge_detection2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_edge_detection2.Location = new System.Drawing.Point(8, 99);
+            this.bt_edge_detection2.Location = new System.Drawing.Point(8, 119);
             this.bt_edge_detection2.Name = "bt_edge_detection2";
-            this.bt_edge_detection2.Size = new System.Drawing.Size(180, 40);
+            this.bt_edge_detection2.Size = new System.Drawing.Size(180, 50);
             this.bt_edge_detection2.TabIndex = 38;
             this.bt_edge_detection2.Text = "Laplace算子";
             this.bt_edge_detection2.UseVisualStyleBackColor = true;
@@ -230,9 +228,9 @@
             // bt_edge_detection4
             // 
             this.bt_edge_detection4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_edge_detection4.Location = new System.Drawing.Point(8, 180);
+            this.bt_edge_detection4.Location = new System.Drawing.Point(8, 217);
             this.bt_edge_detection4.Name = "bt_edge_detection4";
-            this.bt_edge_detection4.Size = new System.Drawing.Size(180, 40);
+            this.bt_edge_detection4.Size = new System.Drawing.Size(180, 50);
             this.bt_edge_detection4.TabIndex = 40;
             this.bt_edge_detection4.Text = "Prewitt算子";
             this.bt_edge_detection4.UseVisualStyleBackColor = true;
@@ -241,9 +239,9 @@
             // bt_edge_detection3
             // 
             this.bt_edge_detection3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_edge_detection3.Location = new System.Drawing.Point(8, 139);
+            this.bt_edge_detection3.Location = new System.Drawing.Point(8, 168);
             this.bt_edge_detection3.Name = "bt_edge_detection3";
-            this.bt_edge_detection3.Size = new System.Drawing.Size(180, 40);
+            this.bt_edge_detection3.Size = new System.Drawing.Size(180, 50);
             this.bt_edge_detection3.TabIndex = 39;
             this.bt_edge_detection3.Text = "右下邊緣抽出算法";
             this.bt_edge_detection3.UseVisualStyleBackColor = true;
@@ -275,9 +273,9 @@
             this.groupBox0.Controls.Add(this.bt_image_process_p2);
             this.groupBox0.Controls.Add(this.bt_image_process_p4);
             this.groupBox0.Controls.Add(this.bt_image_process_p3);
-            this.groupBox0.Location = new System.Drawing.Point(7, 6);
+            this.groupBox0.Location = new System.Drawing.Point(10, 10);
             this.groupBox0.Name = "groupBox0";
-            this.groupBox0.Size = new System.Drawing.Size(402, 592);
+            this.groupBox0.Size = new System.Drawing.Size(402, 619);
             this.groupBox0.TabIndex = 44;
             this.groupBox0.TabStop = false;
             this.groupBox0.Text = "影像處理 像素法";
@@ -285,9 +283,9 @@
             // bt_image_process_p23
             // 
             this.bt_image_process_p23.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_image_process_p23.Location = new System.Drawing.Point(203, 462);
+            this.bt_image_process_p23.Location = new System.Drawing.Point(203, 564);
             this.bt_image_process_p23.Name = "bt_image_process_p23";
-            this.bt_image_process_p23.Size = new System.Drawing.Size(190, 40);
+            this.bt_image_process_p23.Size = new System.Drawing.Size(190, 50);
             this.bt_image_process_p23.TabIndex = 59;
             this.bt_image_process_p23.Text = "依序顯示各項功能";
             this.bt_image_process_p23.UseVisualStyleBackColor = true;
@@ -296,9 +294,9 @@
             // bt_image_process_p22
             // 
             this.bt_image_process_p22.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_image_process_p22.Location = new System.Drawing.Point(203, 422);
+            this.bt_image_process_p22.Location = new System.Drawing.Point(203, 511);
             this.bt_image_process_p22.Name = "bt_image_process_p22";
-            this.bt_image_process_p22.Size = new System.Drawing.Size(190, 40);
+            this.bt_image_process_p22.Size = new System.Drawing.Size(190, 50);
             this.bt_image_process_p22.TabIndex = 58;
             this.bt_image_process_p22.Text = "單色圖片2 31";
             this.bt_image_process_p22.UseVisualStyleBackColor = true;
@@ -307,9 +305,9 @@
             // bt_image_process_p21
             // 
             this.bt_image_process_p21.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_image_process_p21.Location = new System.Drawing.Point(203, 381);
+            this.bt_image_process_p21.Location = new System.Drawing.Point(203, 458);
             this.bt_image_process_p21.Name = "bt_image_process_p21";
-            this.bt_image_process_p21.Size = new System.Drawing.Size(190, 40);
+            this.bt_image_process_p21.Size = new System.Drawing.Size(190, 50);
             this.bt_image_process_p21.TabIndex = 57;
             this.bt_image_process_p21.Text = "鏡像圖片27";
             this.bt_image_process_p21.UseVisualStyleBackColor = true;
@@ -318,9 +316,9 @@
             // bt_image_process_p20
             // 
             this.bt_image_process_p20.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_image_process_p20.Location = new System.Drawing.Point(203, 342);
+            this.bt_image_process_p20.Location = new System.Drawing.Point(203, 409);
             this.bt_image_process_p20.Name = "bt_image_process_p20";
-            this.bt_image_process_p20.Size = new System.Drawing.Size(190, 40);
+            this.bt_image_process_p20.Size = new System.Drawing.Size(190, 50);
             this.bt_image_process_p20.TabIndex = 56;
             this.bt_image_process_p20.Text = "白色轉為透明20";
             this.bt_image_process_p20.UseVisualStyleBackColor = true;
@@ -329,9 +327,9 @@
             // bt_image_process_p19
             // 
             this.bt_image_process_p19.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_image_process_p19.Location = new System.Drawing.Point(203, 302);
+            this.bt_image_process_p19.Location = new System.Drawing.Point(203, 359);
             this.bt_image_process_p19.Name = "bt_image_process_p19";
-            this.bt_image_process_p19.Size = new System.Drawing.Size(190, 40);
+            this.bt_image_process_p19.Size = new System.Drawing.Size(190, 50);
             this.bt_image_process_p19.TabIndex = 55;
             this.bt_image_process_p19.Text = "光暈效果19";
             this.bt_image_process_p19.UseVisualStyleBackColor = true;
@@ -340,9 +338,9 @@
             // bt_image_process_p18
             // 
             this.bt_image_process_p18.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_image_process_p18.Location = new System.Drawing.Point(203, 263);
+            this.bt_image_process_p18.Location = new System.Drawing.Point(203, 310);
             this.bt_image_process_p18.Name = "bt_image_process_p18";
-            this.bt_image_process_p18.Size = new System.Drawing.Size(190, 40);
+            this.bt_image_process_p18.Size = new System.Drawing.Size(190, 50);
             this.bt_image_process_p18.TabIndex = 54;
             this.bt_image_process_p18.Text = "降低解析度18";
             this.bt_image_process_p18.UseVisualStyleBackColor = true;
@@ -351,9 +349,9 @@
             // bt_image_process_p17
             // 
             this.bt_image_process_p17.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_image_process_p17.Location = new System.Drawing.Point(203, 222);
+            this.bt_image_process_p17.Location = new System.Drawing.Point(203, 261);
             this.bt_image_process_p17.Name = "bt_image_process_p17";
-            this.bt_image_process_p17.Size = new System.Drawing.Size(190, 40);
+            this.bt_image_process_p17.Size = new System.Drawing.Size(190, 50);
             this.bt_image_process_p17.TabIndex = 53;
             this.bt_image_process_p17.Text = "馬賽克效果17";
             this.bt_image_process_p17.UseVisualStyleBackColor = true;
@@ -362,9 +360,9 @@
             // bt_image_process_p16
             // 
             this.bt_image_process_p16.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_image_process_p16.Location = new System.Drawing.Point(203, 181);
+            this.bt_image_process_p16.Location = new System.Drawing.Point(203, 211);
             this.bt_image_process_p16.Name = "bt_image_process_p16";
-            this.bt_image_process_p16.Size = new System.Drawing.Size(190, 40);
+            this.bt_image_process_p16.Size = new System.Drawing.Size(190, 50);
             this.bt_image_process_p16.TabIndex = 52;
             this.bt_image_process_p16.Text = "馬賽克效果16";
             this.bt_image_process_p16.UseVisualStyleBackColor = true;
@@ -373,9 +371,9 @@
             // bt_image_process_p15
             // 
             this.bt_image_process_p15.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_image_process_p15.Location = new System.Drawing.Point(203, 142);
+            this.bt_image_process_p15.Location = new System.Drawing.Point(203, 163);
             this.bt_image_process_p15.Name = "bt_image_process_p15";
-            this.bt_image_process_p15.Size = new System.Drawing.Size(190, 40);
+            this.bt_image_process_p15.Size = new System.Drawing.Size(190, 50);
             this.bt_image_process_p15.TabIndex = 51;
             this.bt_image_process_p15.Text = "模糊處理26";
             this.bt_image_process_p15.UseVisualStyleBackColor = true;
@@ -384,9 +382,9 @@
             // bt_image_process_p14
             // 
             this.bt_image_process_p14.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_image_process_p14.Location = new System.Drawing.Point(203, 101);
+            this.bt_image_process_p14.Location = new System.Drawing.Point(203, 114);
             this.bt_image_process_p14.Name = "bt_image_process_p14";
-            this.bt_image_process_p14.Size = new System.Drawing.Size(190, 40);
+            this.bt_image_process_p14.Size = new System.Drawing.Size(190, 50);
             this.bt_image_process_p14.TabIndex = 50;
             this.bt_image_process_p14.Text = "色階調整15";
             this.bt_image_process_p14.UseVisualStyleBackColor = true;
@@ -395,9 +393,9 @@
             // bt_image_process_p13
             // 
             this.bt_image_process_p13.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_image_process_p13.Location = new System.Drawing.Point(203, 59);
+            this.bt_image_process_p13.Location = new System.Drawing.Point(203, 63);
             this.bt_image_process_p13.Name = "bt_image_process_p13";
-            this.bt_image_process_p13.Size = new System.Drawing.Size(190, 40);
+            this.bt_image_process_p13.Size = new System.Drawing.Size(190, 50);
             this.bt_image_process_p13.TabIndex = 49;
             this.bt_image_process_p13.Text = "扭曲效果14 波浪";
             this.bt_image_process_p13.UseVisualStyleBackColor = true;
@@ -406,9 +404,9 @@
             // bt_image_process_p12
             // 
             this.bt_image_process_p12.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_image_process_p12.Location = new System.Drawing.Point(203, 17);
+            this.bt_image_process_p12.Location = new System.Drawing.Point(203, 12);
             this.bt_image_process_p12.Name = "bt_image_process_p12";
-            this.bt_image_process_p12.Size = new System.Drawing.Size(190, 40);
+            this.bt_image_process_p12.Size = new System.Drawing.Size(190, 50);
             this.bt_image_process_p12.TabIndex = 48;
             this.bt_image_process_p12.UseVisualStyleBackColor = true;
             this.bt_image_process_p12.Click += new System.EventHandler(this.bt_image_process_p12_Click);
@@ -416,9 +414,9 @@
             // bt_image_process_p11
             // 
             this.bt_image_process_p11.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_image_process_p11.Location = new System.Drawing.Point(9, 462);
+            this.bt_image_process_p11.Location = new System.Drawing.Point(9, 564);
             this.bt_image_process_p11.Name = "bt_image_process_p11";
-            this.bt_image_process_p11.Size = new System.Drawing.Size(190, 40);
+            this.bt_image_process_p11.Size = new System.Drawing.Size(190, 50);
             this.bt_image_process_p11.TabIndex = 47;
             this.bt_image_process_p11.Text = "積木效果12";
             this.bt_image_process_p11.UseVisualStyleBackColor = true;
@@ -427,9 +425,9 @@
             // bt_image_process_p10
             // 
             this.bt_image_process_p10.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_image_process_p10.Location = new System.Drawing.Point(9, 423);
+            this.bt_image_process_p10.Location = new System.Drawing.Point(9, 512);
             this.bt_image_process_p10.Name = "bt_image_process_p10";
-            this.bt_image_process_p10.Size = new System.Drawing.Size(190, 40);
+            this.bt_image_process_p10.Size = new System.Drawing.Size(190, 50);
             this.bt_image_process_p10.TabIndex = 46;
             this.bt_image_process_p10.Text = "扭曲效果11 平行四邊形";
             this.bt_image_process_p10.UseVisualStyleBackColor = true;
@@ -438,9 +436,9 @@
             // bt_image_process_p9
             // 
             this.bt_image_process_p9.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_image_process_p9.Location = new System.Drawing.Point(9, 384);
+            this.bt_image_process_p9.Location = new System.Drawing.Point(9, 461);
             this.bt_image_process_p9.Name = "bt_image_process_p9";
-            this.bt_image_process_p9.Size = new System.Drawing.Size(190, 40);
+            this.bt_image_process_p9.Size = new System.Drawing.Size(190, 50);
             this.bt_image_process_p9.TabIndex = 45;
             this.bt_image_process_p9.Text = "Sepia 2";
             this.bt_image_process_p9.UseVisualStyleBackColor = true;
@@ -449,9 +447,9 @@
             // bt_image_process_p8
             // 
             this.bt_image_process_p8.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_image_process_p8.Location = new System.Drawing.Point(9, 344);
+            this.bt_image_process_p8.Location = new System.Drawing.Point(9, 411);
             this.bt_image_process_p8.Name = "bt_image_process_p8";
-            this.bt_image_process_p8.Size = new System.Drawing.Size(190, 40);
+            this.bt_image_process_p8.Size = new System.Drawing.Size(190, 50);
             this.bt_image_process_p8.TabIndex = 44;
             this.bt_image_process_p8.UseVisualStyleBackColor = true;
             this.bt_image_process_p8.Click += new System.EventHandler(this.bt_image_process_p8_Click);
@@ -459,9 +457,9 @@
             // bt_image_process_p7
             // 
             this.bt_image_process_p7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_image_process_p7.Location = new System.Drawing.Point(9, 303);
+            this.bt_image_process_p7.Location = new System.Drawing.Point(9, 360);
             this.bt_image_process_p7.Name = "bt_image_process_p7";
-            this.bt_image_process_p7.Size = new System.Drawing.Size(190, 40);
+            this.bt_image_process_p7.Size = new System.Drawing.Size(190, 50);
             this.bt_image_process_p7.TabIndex = 43;
             this.bt_image_process_p7.Text = "油畫效果10";
             this.bt_image_process_p7.UseVisualStyleBackColor = true;
@@ -470,9 +468,9 @@
             // bt_image_process_p0
             // 
             this.bt_image_process_p0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_image_process_p0.Location = new System.Drawing.Point(9, 18);
+            this.bt_image_process_p0.Location = new System.Drawing.Point(9, 13);
             this.bt_image_process_p0.Name = "bt_image_process_p0";
-            this.bt_image_process_p0.Size = new System.Drawing.Size(190, 40);
+            this.bt_image_process_p0.Size = new System.Drawing.Size(190, 50);
             this.bt_image_process_p0.TabIndex = 36;
             this.bt_image_process_p0.Text = "黑白效果3";
             this.bt_image_process_p0.UseVisualStyleBackColor = true;
@@ -481,9 +479,9 @@
             // bt_image_process_p6
             // 
             this.bt_image_process_p6.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_image_process_p6.Location = new System.Drawing.Point(9, 263);
+            this.bt_image_process_p6.Location = new System.Drawing.Point(9, 310);
             this.bt_image_process_p6.Name = "bt_image_process_p6";
-            this.bt_image_process_p6.Size = new System.Drawing.Size(190, 40);
+            this.bt_image_process_p6.Size = new System.Drawing.Size(190, 50);
             this.bt_image_process_p6.TabIndex = 42;
             this.bt_image_process_p6.UseVisualStyleBackColor = true;
             this.bt_image_process_p6.Click += new System.EventHandler(this.bt_image_process_p6_Click);
@@ -491,9 +489,9 @@
             // bt_image_process_p1
             // 
             this.bt_image_process_p1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_image_process_p1.Location = new System.Drawing.Point(9, 57);
+            this.bt_image_process_p1.Location = new System.Drawing.Point(9, 61);
             this.bt_image_process_p1.Name = "bt_image_process_p1";
-            this.bt_image_process_p1.Size = new System.Drawing.Size(190, 40);
+            this.bt_image_process_p1.Size = new System.Drawing.Size(190, 50);
             this.bt_image_process_p1.TabIndex = 37;
             this.bt_image_process_p1.Text = "底片效果(反相)1";
             this.bt_image_process_p1.UseVisualStyleBackColor = true;
@@ -502,9 +500,9 @@
             // bt_image_process_p5
             // 
             this.bt_image_process_p5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_image_process_p5.Location = new System.Drawing.Point(9, 222);
+            this.bt_image_process_p5.Location = new System.Drawing.Point(9, 261);
             this.bt_image_process_p5.Name = "bt_image_process_p5";
-            this.bt_image_process_p5.Size = new System.Drawing.Size(190, 40);
+            this.bt_image_process_p5.Size = new System.Drawing.Size(190, 50);
             this.bt_image_process_p5.TabIndex = 41;
             this.bt_image_process_p5.Text = "霧化";
             this.bt_image_process_p5.UseVisualStyleBackColor = true;
@@ -513,9 +511,9 @@
             // bt_image_process_p2
             // 
             this.bt_image_process_p2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_image_process_p2.Location = new System.Drawing.Point(9, 97);
+            this.bt_image_process_p2.Location = new System.Drawing.Point(9, 110);
             this.bt_image_process_p2.Name = "bt_image_process_p2";
-            this.bt_image_process_p2.Size = new System.Drawing.Size(190, 40);
+            this.bt_image_process_p2.Size = new System.Drawing.Size(190, 50);
             this.bt_image_process_p2.TabIndex = 38;
             this.bt_image_process_p2.Text = "浮雕2";
             this.bt_image_process_p2.UseVisualStyleBackColor = true;
@@ -524,9 +522,9 @@
             // bt_image_process_p4
             // 
             this.bt_image_process_p4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_image_process_p4.Location = new System.Drawing.Point(9, 181);
+            this.bt_image_process_p4.Location = new System.Drawing.Point(9, 211);
             this.bt_image_process_p4.Name = "bt_image_process_p4";
-            this.bt_image_process_p4.Size = new System.Drawing.Size(190, 40);
+            this.bt_image_process_p4.Size = new System.Drawing.Size(190, 50);
             this.bt_image_process_p4.TabIndex = 40;
             this.bt_image_process_p4.Text = "銳化5";
             this.bt_image_process_p4.UseVisualStyleBackColor = true;
@@ -535,9 +533,9 @@
             // bt_image_process_p3
             // 
             this.bt_image_process_p3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_image_process_p3.Location = new System.Drawing.Point(9, 139);
+            this.bt_image_process_p3.Location = new System.Drawing.Point(9, 160);
             this.bt_image_process_p3.Name = "bt_image_process_p3";
-            this.bt_image_process_p3.Size = new System.Drawing.Size(190, 40);
+            this.bt_image_process_p3.Size = new System.Drawing.Size(190, 50);
             this.bt_image_process_p3.TabIndex = 39;
             this.bt_image_process_p3.Text = "柔化4";
             this.bt_image_process_p3.UseVisualStyleBackColor = true;
@@ -545,58 +543,36 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.bt_image_process_m7);
             this.groupBox1.Controls.Add(this.bt_image_process_m0);
-            this.groupBox1.Controls.Add(this.bt_image_process_m6);
             this.groupBox1.Controls.Add(this.bt_image_process_m1);
             this.groupBox1.Controls.Add(this.bt_image_process_m5);
             this.groupBox1.Controls.Add(this.bt_image_process_m2);
             this.groupBox1.Controls.Add(this.bt_image_process_m4);
             this.groupBox1.Controls.Add(this.bt_image_process_m3);
-            this.groupBox1.Location = new System.Drawing.Point(413, 9);
+            this.groupBox1.Location = new System.Drawing.Point(818, 9);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(196, 424);
+            this.groupBox1.Size = new System.Drawing.Size(194, 324);
             this.groupBox1.TabIndex = 45;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "影像處理 內存法";
-            // 
-            // bt_image_process_m7
-            // 
-            this.bt_image_process_m7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_image_process_m7.Location = new System.Drawing.Point(6, 296);
-            this.bt_image_process_m7.Name = "bt_image_process_m7";
-            this.bt_image_process_m7.Size = new System.Drawing.Size(180, 40);
-            this.bt_image_process_m7.TabIndex = 43;
-            this.bt_image_process_m7.UseVisualStyleBackColor = true;
-            this.bt_image_process_m7.Click += new System.EventHandler(this.bt_image_process_m7_Click);
             // 
             // bt_image_process_m0
             // 
             this.bt_image_process_m0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_m0.Location = new System.Drawing.Point(6, 21);
             this.bt_image_process_m0.Name = "bt_image_process_m0";
-            this.bt_image_process_m0.Size = new System.Drawing.Size(180, 40);
+            this.bt_image_process_m0.Size = new System.Drawing.Size(180, 50);
             this.bt_image_process_m0.TabIndex = 36;
             this.bt_image_process_m0.Text = "黑白效果";
             this.bt_image_process_m0.UseVisualStyleBackColor = true;
             this.bt_image_process_m0.Click += new System.EventHandler(this.bt_image_process_m0_Click);
             // 
-            // bt_image_process_m6
-            // 
-            this.bt_image_process_m6.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_image_process_m6.Location = new System.Drawing.Point(6, 257);
-            this.bt_image_process_m6.Name = "bt_image_process_m6";
-            this.bt_image_process_m6.Size = new System.Drawing.Size(180, 40);
-            this.bt_image_process_m6.TabIndex = 42;
-            this.bt_image_process_m6.UseVisualStyleBackColor = true;
-            this.bt_image_process_m6.Click += new System.EventHandler(this.bt_image_process_m6_Click);
-            // 
             // bt_image_process_m1
             // 
             this.bt_image_process_m1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_image_process_m1.Location = new System.Drawing.Point(6, 60);
+            this.bt_image_process_m1.Location = new System.Drawing.Point(6, 70);
             this.bt_image_process_m1.Name = "bt_image_process_m1";
-            this.bt_image_process_m1.Size = new System.Drawing.Size(180, 40);
+            this.bt_image_process_m1.Size = new System.Drawing.Size(180, 50);
             this.bt_image_process_m1.TabIndex = 37;
             this.bt_image_process_m1.Text = "底片效果(反相)";
             this.bt_image_process_m1.UseVisualStyleBackColor = true;
@@ -605,9 +581,9 @@
             // bt_image_process_m5
             // 
             this.bt_image_process_m5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_image_process_m5.Location = new System.Drawing.Point(6, 218);
+            this.bt_image_process_m5.Location = new System.Drawing.Point(6, 266);
             this.bt_image_process_m5.Name = "bt_image_process_m5";
-            this.bt_image_process_m5.Size = new System.Drawing.Size(180, 40);
+            this.bt_image_process_m5.Size = new System.Drawing.Size(180, 50);
             this.bt_image_process_m5.TabIndex = 41;
             this.bt_image_process_m5.Text = "霧化";
             this.bt_image_process_m5.UseVisualStyleBackColor = true;
@@ -616,9 +592,9 @@
             // bt_image_process_m2
             // 
             this.bt_image_process_m2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_image_process_m2.Location = new System.Drawing.Point(6, 99);
+            this.bt_image_process_m2.Location = new System.Drawing.Point(6, 119);
             this.bt_image_process_m2.Name = "bt_image_process_m2";
-            this.bt_image_process_m2.Size = new System.Drawing.Size(180, 40);
+            this.bt_image_process_m2.Size = new System.Drawing.Size(180, 50);
             this.bt_image_process_m2.TabIndex = 38;
             this.bt_image_process_m2.Text = "浮雕";
             this.bt_image_process_m2.UseVisualStyleBackColor = true;
@@ -627,9 +603,9 @@
             // bt_image_process_m4
             // 
             this.bt_image_process_m4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_image_process_m4.Location = new System.Drawing.Point(6, 179);
+            this.bt_image_process_m4.Location = new System.Drawing.Point(6, 217);
             this.bt_image_process_m4.Name = "bt_image_process_m4";
-            this.bt_image_process_m4.Size = new System.Drawing.Size(180, 40);
+            this.bt_image_process_m4.Size = new System.Drawing.Size(180, 50);
             this.bt_image_process_m4.TabIndex = 40;
             this.bt_image_process_m4.Text = "銳化";
             this.bt_image_process_m4.UseVisualStyleBackColor = true;
@@ -638,9 +614,9 @@
             // bt_image_process_m3
             // 
             this.bt_image_process_m3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_image_process_m3.Location = new System.Drawing.Point(6, 139);
+            this.bt_image_process_m3.Location = new System.Drawing.Point(6, 168);
             this.bt_image_process_m3.Name = "bt_image_process_m3";
-            this.bt_image_process_m3.Size = new System.Drawing.Size(180, 40);
+            this.bt_image_process_m3.Size = new System.Drawing.Size(180, 50);
             this.bt_image_process_m3.TabIndex = 39;
             this.bt_image_process_m3.Text = "柔化";
             this.bt_image_process_m3.UseVisualStyleBackColor = true;
@@ -649,7 +625,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(1024, 251);
+            this.bt_clear.Location = new System.Drawing.Point(684, 362);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 48;
@@ -660,7 +636,7 @@
             // pictureBox0
             // 
             this.pictureBox0.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox0.Location = new System.Drawing.Point(1003, 9);
+            this.pictureBox0.Location = new System.Drawing.Point(436, 327);
             this.pictureBox0.Name = "pictureBox0";
             this.pictureBox0.Size = new System.Drawing.Size(100, 100);
             this.pictureBox0.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -677,9 +653,9 @@
             this.groupBox3.Controls.Add(this.bt_animate2);
             this.groupBox3.Controls.Add(this.bt_animate4);
             this.groupBox3.Controls.Add(this.bt_animate3);
-            this.groupBox3.Location = new System.Drawing.Point(413, 433);
+            this.groupBox3.Location = new System.Drawing.Point(420, 10);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(392, 201);
+            this.groupBox3.Size = new System.Drawing.Size(392, 234);
             this.groupBox3.TabIndex = 46;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "動畫效果";
@@ -687,9 +663,9 @@
             // bt_animate7
             // 
             this.bt_animate7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_animate7.Location = new System.Drawing.Point(196, 155);
+            this.bt_animate7.Location = new System.Drawing.Point(196, 167);
             this.bt_animate7.Name = "bt_animate7";
-            this.bt_animate7.Size = new System.Drawing.Size(190, 40);
+            this.bt_animate7.Size = new System.Drawing.Size(190, 50);
             this.bt_animate7.TabIndex = 43;
             this.bt_animate7.UseVisualStyleBackColor = true;
             this.bt_animate7.Click += new System.EventHandler(this.bt_animate7_Click);
@@ -697,9 +673,9 @@
             // bt_animate0
             // 
             this.bt_animate0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_animate0.Location = new System.Drawing.Point(6, 21);
+            this.bt_animate0.Location = new System.Drawing.Point(6, 14);
             this.bt_animate0.Name = "bt_animate0";
-            this.bt_animate0.Size = new System.Drawing.Size(190, 40);
+            this.bt_animate0.Size = new System.Drawing.Size(190, 50);
             this.bt_animate0.TabIndex = 36;
             this.bt_animate0.Text = "百葉窗效果 垂直";
             this.bt_animate0.UseVisualStyleBackColor = true;
@@ -710,7 +686,7 @@
             this.bt_animate6.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_animate6.Location = new System.Drawing.Point(196, 113);
             this.bt_animate6.Name = "bt_animate6";
-            this.bt_animate6.Size = new System.Drawing.Size(190, 40);
+            this.bt_animate6.Size = new System.Drawing.Size(190, 50);
             this.bt_animate6.TabIndex = 42;
             this.bt_animate6.Text = "光照效果7";
             this.bt_animate6.UseVisualStyleBackColor = true;
@@ -719,9 +695,9 @@
             // bt_animate1
             // 
             this.bt_animate1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_animate1.Location = new System.Drawing.Point(6, 67);
+            this.bt_animate1.Location = new System.Drawing.Point(6, 63);
             this.bt_animate1.Name = "bt_animate1";
-            this.bt_animate1.Size = new System.Drawing.Size(190, 40);
+            this.bt_animate1.Size = new System.Drawing.Size(190, 50);
             this.bt_animate1.TabIndex = 37;
             this.bt_animate1.Text = "百葉窗效果 水平";
             this.bt_animate1.UseVisualStyleBackColor = true;
@@ -730,9 +706,9 @@
             // bt_animate5
             // 
             this.bt_animate5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_animate5.Location = new System.Drawing.Point(196, 67);
+            this.bt_animate5.Location = new System.Drawing.Point(196, 63);
             this.bt_animate5.Name = "bt_animate5";
-            this.bt_animate5.Size = new System.Drawing.Size(190, 40);
+            this.bt_animate5.Size = new System.Drawing.Size(190, 50);
             this.bt_animate5.TabIndex = 41;
             this.bt_animate5.Text = "馬賽克效果";
             this.bt_animate5.UseVisualStyleBackColor = true;
@@ -743,7 +719,7 @@
             this.bt_animate2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_animate2.Location = new System.Drawing.Point(6, 113);
             this.bt_animate2.Name = "bt_animate2";
-            this.bt_animate2.Size = new System.Drawing.Size(190, 40);
+            this.bt_animate2.Size = new System.Drawing.Size(190, 50);
             this.bt_animate2.TabIndex = 38;
             this.bt_animate2.Text = "垂直交錯效果";
             this.bt_animate2.UseVisualStyleBackColor = true;
@@ -752,9 +728,9 @@
             // bt_animate4
             // 
             this.bt_animate4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_animate4.Location = new System.Drawing.Point(196, 21);
+            this.bt_animate4.Location = new System.Drawing.Point(196, 14);
             this.bt_animate4.Name = "bt_animate4";
-            this.bt_animate4.Size = new System.Drawing.Size(190, 40);
+            this.bt_animate4.Size = new System.Drawing.Size(190, 50);
             this.bt_animate4.TabIndex = 40;
             this.bt_animate4.Text = "推拉效果";
             this.bt_animate4.UseVisualStyleBackColor = true;
@@ -763,9 +739,9 @@
             // bt_animate3
             // 
             this.bt_animate3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_animate3.Location = new System.Drawing.Point(6, 155);
+            this.bt_animate3.Location = new System.Drawing.Point(6, 167);
             this.bt_animate3.Name = "bt_animate3";
-            this.bt_animate3.Size = new System.Drawing.Size(190, 40);
+            this.bt_animate3.Size = new System.Drawing.Size(190, 50);
             this.bt_animate3.TabIndex = 39;
             this.bt_animate3.Text = "水平交錯效果";
             this.bt_animate3.UseVisualStyleBackColor = true;
@@ -774,7 +750,7 @@
             // bt_reset
             // 
             this.bt_reset.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_reset.Location = new System.Drawing.Point(1024, 153);
+            this.bt_reset.Location = new System.Drawing.Point(574, 362);
             this.bt_reset.Name = "bt_reset";
             this.bt_reset.Size = new System.Drawing.Size(72, 36);
             this.bt_reset.TabIndex = 229;
@@ -786,7 +762,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1120, 665);
+            this.ClientSize = new System.Drawing.Size(1276, 631);
             this.Controls.Add(this.bt_reset);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.pictureBox0);
@@ -833,9 +809,7 @@
         private System.Windows.Forms.Button bt_image_process_p4;
         private System.Windows.Forms.Button bt_image_process_p3;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button bt_image_process_m7;
         private System.Windows.Forms.Button bt_image_process_m0;
-        private System.Windows.Forms.Button bt_image_process_m6;
         private System.Windows.Forms.Button bt_image_process_m1;
         private System.Windows.Forms.Button bt_image_process_m5;
         private System.Windows.Forms.Button bt_image_process_m2;

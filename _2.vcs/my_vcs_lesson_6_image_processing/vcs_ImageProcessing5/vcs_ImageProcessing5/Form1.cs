@@ -67,11 +67,12 @@ namespace vcs_ImageProcessing5
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            pictureBox1.Size = new Size(600, 600);
+            pictureBox1.Size = new Size(640, 600);
             bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y);
 
-            pictureBox2.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            pictureBox2.Size = new Size(600, 600);
+            pictureBox2.Location = new Point(x_st + dx * 2, y_st + dy * 9 - 10);
+            pictureBox2.Size = new Size(640, 320);
+            pictureBox2.BackColor = Color.Pink;
 
             richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
             richTextBox1.Size = new Size(300, 600);

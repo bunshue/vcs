@@ -226,13 +226,19 @@ namespace vcs_ImageProcessing7
             g.DrawImage(MyBitmapBlack[2], 0, height / 2);
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button5_Click(object sender, EventArgs e)
         {
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button6_Click(object sender, EventArgs e)
         {
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button7_Click(object sender, EventArgs e)
         {
@@ -380,24 +386,26 @@ namespace vcs_ImageProcessing7
             float myangle = 0;//旋轉的角度
             while (myangle < 360)
             {
+                richTextBox1.Text += "角度 : " + myangle.ToString() + "\n";
+                Application.DoEvents();
+
                 TextureBrush mybrush = new TextureBrush(MyBitmap);
                 this.panel1.Refresh();
                 mybrush.RotateTransform(myangle);
                 g.FillRectangle(mybrush, 0, 0, this.ClientRectangle.Width, this.ClientRectangle.Height);
-                myangle += 0.5f;
-                System.Threading.Thread.Sleep(50);
+                myangle += 15.5f;
+                System.Threading.Thread.Sleep(500);
             }
+            richTextBox1.Text += "完成\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button13_Click(object sender, EventArgs e)
         {
-            //原理：主要使用了 graphics 類提供的 fillellipse() 方法和 texturebrush() 方法。
-            //橢圓顯示圖像
-            this.panel1.Refresh();
-            Graphics g = this.panel1.CreateGraphics();
-            TextureBrush mybrush = new TextureBrush(MyBitmap);
-            g.FillEllipse(mybrush, this.panel1.ClientRectangle);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button14_Click(object sender, EventArgs e)
         {
@@ -408,35 +416,47 @@ namespace vcs_ImageProcessing7
             g.SmoothingMode = SmoothingMode.AntiAlias;
             TextureBrush mybrush = new TextureBrush(MyBitmap);
             g.FillRectangle(mybrush, this.panel1.ClientRectangle);
-            for (int i = 0; i < 255; i++)
+            for (int i = 0; i < 255; i += 13)
             {
+                richTextBox1.Text += "透明度 : " + i.ToString() + "\n";
+                Application.DoEvents();
+
                 //由透明變為不透明
                 g.FillRectangle(new SolidBrush(Color.FromArgb(i, Color.DarkSlateGray)), this.panel1.ClientRectangle);
                 System.Threading.Thread.Sleep(100);
             }
+            richTextBox1.Text += "完成\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button15_Click(object sender, EventArgs e)
         {
             // 設定Bitmap解析度
             //十三、以不同分辨率顯示圖像
             //原理：bitmap 類的 setresolution 方法。
-            //以不同的分辨率顯示圖像
+
             Graphics g = this.panel1.CreateGraphics();
-            for (int i = 10; i < this.panel1.Height; i += 2)
+            for (int i = 10; i < this.panel1.Height; i += 20)
             {
+                richTextBox1.Text += "解析度 : " + i.ToString() + "\n";
+                Application.DoEvents();
+
                 g.Clear(Color.Gray);
                 MyBitmap.SetResolution(i, i);  // 設定Bitmap解析度
                 g.DrawImage(MyBitmap, 0, 0);
                 System.Threading.Thread.Sleep(100);
             }
+            richTextBox1.Text += "完成\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button16_Click(object sender, EventArgs e)
         {
             //十四、以不同翻轉方式顯示圖像
             //原理：bitmap 類的 rotatefip()方法。
-            //以不同翻轉方式顯示圖像
+
             Graphics g = this.panel1.CreateGraphics();
             for (int i = 0; i < 17; i++)
             {
@@ -467,6 +487,8 @@ namespace vcs_ImageProcessing7
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button17_Click(object sender, EventArgs e)
         {
 
@@ -483,6 +505,7 @@ namespace vcs_ImageProcessing7
         }
     }
 }
+
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個

@@ -49,21 +49,20 @@ namespace vcs_ImageProcessing3
         {
             //button
             int W = 200;
-            int H = 380;
+            //int H = 380;
             int x_st = 10;
             int y_st = 10;
             int dx = W + 10;
-            //int dy = 60 + 10;
             int dy = 40 + 10;
 
-            groupBox0.Size = new Size(W * 2 + 10, H * 2 - 180);//影像處理 像素法
-            groupBox1.Size = new Size(W, H + 20);//影像處理 內存法
-            groupBox2.Size = new Size(W, H + 110);//圖像邊緣檢測
-            groupBox3.Size = new Size(W * 2 + 10, 220);//動畫效果
+            groupBox0.Size = new Size(W * 2 + 10, 690);//影像處理 像素法
+            groupBox1.Size = new Size(W, 360);//影像處理 內存法
+            groupBox2.Size = new Size(W, 580);//圖像邊緣檢測
+            groupBox3.Size = new Size(W * 2 + 10, 250);//動畫效果
             groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            groupBox3.Location = new Point(x_st + dx * 0, y_st + dy * 12);
+            groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 7 + 20);
+            groupBox3.Location = new Point(x_st + dx * 0, y_st + dy * 14);
 
             pictureBox1.Size = new Size(900, 900);
             pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
@@ -87,7 +86,8 @@ namespace vcs_ImageProcessing3
             x_st = 10;
             y_st = 20;
             dx = 190 + 10;
-            dy = 40 + 5;
+            dy = 50 + 5;
+
             bt_image_process_p0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_image_process_p1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             bt_image_process_p2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -120,8 +120,6 @@ namespace vcs_ImageProcessing3
             bt_image_process_m3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             bt_image_process_m4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             bt_image_process_m5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            bt_image_process_m6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            bt_image_process_m7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
 
             bt_edge_detection0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_edge_detection1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -143,7 +141,7 @@ namespace vcs_ImageProcessing3
             bt_animate6.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             bt_animate7.Location = new Point(x_st + dx * 1, y_st + dy * 3);
 
-            this.Size = new Size(1900, 960);
+            this.Size = new Size(1900, 1010);
             this.Text = "vcs_ImageProcessing3";
 
             //設定執行後的表單起始位置, 正中央
@@ -2426,15 +2424,7 @@ namespace vcs_ImageProcessing3
             pictureBox1.Image = bmp;
         }
 
-        private void bt_image_process_m6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bt_image_process_m7_Click(object sender, EventArgs e)
-        {
-
-        }
+        //6060
 
         //黑白效果
         public Bitmap GrayImage(string filename)

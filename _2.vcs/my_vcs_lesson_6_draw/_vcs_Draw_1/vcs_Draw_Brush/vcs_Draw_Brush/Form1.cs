@@ -298,10 +298,24 @@ namespace vcs_Draw_Brush
             g.DrawString("陰影刷3", new Font("標楷體", 20), new SolidBrush(Color.Purple), new PointF(x_st + w + 10, y_st + dy * 10));
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button3_Click(object sender, EventArgs e)
         {
+            //橢圓顯示圖像
+            //原理：主要使用了 graphics 類提供的 fillellipse() 方法和 texturebrush() 方法。
 
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+
+            Graphics g = this.pictureBox1.CreateGraphics();
+            TextureBrush mybrush = new TextureBrush(bitmap1);
+            g.FillEllipse(mybrush, 0, 0, W, H);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button4_Click(object sender, EventArgs e)
         {

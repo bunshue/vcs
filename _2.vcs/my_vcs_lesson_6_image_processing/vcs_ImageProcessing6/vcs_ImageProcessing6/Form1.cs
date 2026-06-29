@@ -120,8 +120,8 @@ namespace vcs_ImageProcessing6
             pictureBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0 + dd2);
             pictureBox3.Location = new Point(x_st + dx * 0, y_st + dy * 1 + dd2);
 
-            richTextBox1.Size = new Size(W, H);
-            richTextBox1.Location = new Point(x_st + dx * 2 + 150, y_st + dy * 1 + dd2);
+            richTextBox1.Size = new Size(300, H);
+            richTextBox1.Location = new Point(x_st + dx * 2 + 300, y_st + dy * 1 + dd2);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //最大化螢幕
