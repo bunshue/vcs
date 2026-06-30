@@ -726,6 +726,15 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_file09_Click(object sender, EventArgs e)
         {
+            //取得檔案建立時間
+
+            DateTime dt = File.GetLastWriteTime("aaaa.exe");
+            string s1 = dt.ToString("yyyy/MM/dd hh:mm:ss");
+
+            DateTime dt1 = File.GetLastWriteTime("bbbb.exe");
+            string s2 = dt1.ToString("yyyy/MM/dd hh:mm:ss");
+
+            richTextBox1.Text += string.Format("Version:{0}, DLL:{1}", s1, s2) + "\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -2261,6 +2270,12 @@ for (int i = 0, count = pngfiles.Length; i < count; i++)
 }
 
 //------------------------------------------------------------  # 60個
+
+targetExe = Path.Combine(Path.GetDirectoryName(currentExe), "BBBB.exe");
+
+if (!currentExe.Equals(targetExe, StringComparison.OrdinalIgnoreCase))
+
+File.Copy(currentExe, targetExe, true);
 
 
 */

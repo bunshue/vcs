@@ -319,9 +319,22 @@ namespace vcs_Process1
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button1_Click(object sender, EventArgs e)
         {
+            // Process.GetCurrentProcess()
+
+            // 取得目前執行檔的完整路徑
+            string currentExe = Process.GetCurrentProcess().MainModule.FileName;
+
+            richTextBox1.Text += currentExe + "\n";
+
+            string targetExe = Path.Combine(Path.GetDirectoryName(currentExe), "AAAA.exe");
+            richTextBox1.Text += targetExe + "\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -422,7 +435,7 @@ namespace vcs_Process1
             process = Process.GetProcessById(process_id);  // 根據[process id]取得process
             richTextBox1.Text += "處理序名稱 : " + process.ProcessName + "\n";
 
-            //6060
+            //------------------------------------------------------------  # 60個
 
             string exe_filename = "notepad.exe";
             //Process

@@ -27,18 +27,12 @@
             classmate3.SendResponse();
             classmate4.SendResponse();
 
-//6060
-
-
-
-
+//------------------------------------------------------------  # 60個
 
 填上透明色
 g.Clear(Color.Transparent);
 
-
-6060
-
+//------------------------------------------------------------  # 60個
 
 string strMinute = "";
 if(DateTime.Now.Minute > 30) strMinute="30";
@@ -8252,7 +8246,7 @@ Application.DoEvents();	//作用：处理当前在消息队列中的所有 Windo
 			
 this.ShowInTaskbar = false;//不在任务栏显现
 
-6060
+//------------------------------------------------------------  # 60個
 
 做了甚麼事後 要Refresh 這樣才能看得到
 this.Refresh();
@@ -8278,8 +8272,7 @@ https://kiang.github.io/covid19/
 
 https://github.com/kiang/covid19
 
-
-6060
+//------------------------------------------------------------  # 60個
 
 //設定滑鼠座標到視窗客戶區正中心
             Point pt = new Point(this.ClientSize.Width / 2, this.ClientSize.Height / 2);
@@ -11208,7 +11201,7 @@ icon.ico要放在bin之下
 不用製作游標檔的做法:
 this.Cursor = new Cursor(new Bitmap(@"C:\______test_files\reuse.bmp").GetHicon());
 
-6060
+//------------------------------------------------------------  # 60個
 
 this.Cursor = Cursors.Hand;
 
