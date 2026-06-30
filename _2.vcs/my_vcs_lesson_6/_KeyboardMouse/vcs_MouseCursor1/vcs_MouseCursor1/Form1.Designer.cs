@@ -58,6 +58,10 @@
             this.lb_cursor = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer_atom = new System.Windows.Forms.Timer(this.components);
+            this.timer_set_cursor_pos = new System.Windows.Forms.Timer(this.components);
+            this.timer_set_mouse_pos = new System.Windows.Forms.Timer(this.components);
+            this.timer_mouse_position = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -122,6 +126,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(200, 60);
             this.button6.TabIndex = 128;
+            this.button6.Text = "原子鼠標";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -196,6 +201,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(200, 60);
             this.button10.TabIndex = 135;
+            this.button10.Text = "從中心起任意移動";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -206,6 +212,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(200, 60);
             this.button11.TabIndex = 136;
+            this.button11.Text = "設定鼠標位置";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -216,6 +223,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(200, 60);
             this.button12.TabIndex = 137;
+            this.button12.Text = "強制移動鼠標至特定位置";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -393,6 +401,24 @@
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // timer_atom
+            // 
+            this.timer_atom.Tick += new System.EventHandler(this.timer_atom_Tick);
+            // 
+            // timer_set_cursor_pos
+            // 
+            this.timer_set_cursor_pos.Tick += new System.EventHandler(this.timer_set_cursor_pos_Tick);
+            // 
+            // timer_set_mouse_pos
+            // 
+            this.timer_set_mouse_pos.Interval = 50;
+            this.timer_set_mouse_pos.Tick += new System.EventHandler(this.timer_set_mouse_pos_Tick);
+            // 
+            // timer_mouse_position
+            // 
+            this.timer_mouse_position.Enabled = true;
+            this.timer_mouse_position.Tick += new System.EventHandler(this.timer_mouse_position_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -466,6 +492,10 @@
         private System.Windows.Forms.Label lb_cursor;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timer_atom;
+        private System.Windows.Forms.Timer timer_set_cursor_pos;
+        private System.Windows.Forms.Timer timer_set_mouse_pos;
+        private System.Windows.Forms.Timer timer_mouse_position;
     }
 }
 

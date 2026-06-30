@@ -90,7 +90,7 @@
             this.groupBox2.Size = new System.Drawing.Size(200, 80);
             this.groupBox2.TabIndex = 14;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "寫log";
+            this.groupBox2.Text = "寫log2";
             // 
             // button2
             // 
@@ -112,7 +112,7 @@
             this.groupBox3.Size = new System.Drawing.Size(200, 94);
             this.groupBox3.TabIndex = 14;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "寫log";
+            this.groupBox3.Text = "寫log3";
             // 
             // button3
             // 
@@ -138,7 +138,7 @@
             this.groupBox4.Size = new System.Drawing.Size(200, 333);
             this.groupBox4.TabIndex = 14;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "用隊列寫log";
+            this.groupBox4.Text = "用隊列寫log4";
             // 
             // button8
             // 
@@ -209,7 +209,7 @@
             this.groupBox6.Size = new System.Drawing.Size(200, 157);
             this.groupBox6.TabIndex = 15;
             this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "寫log";
+            this.groupBox6.Text = "寫log6";
             // 
             // button11
             // 
@@ -244,7 +244,7 @@
             this.groupBox9.Size = new System.Drawing.Size(200, 157);
             this.groupBox9.TabIndex = 16;
             this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "寫log";
+            this.groupBox9.Text = "寫log9";
             // 
             // button15
             // 

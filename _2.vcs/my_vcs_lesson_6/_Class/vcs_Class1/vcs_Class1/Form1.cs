@@ -778,19 +778,19 @@ namespace vcs_Class1
             {
                 get     // get存取子可傳回屬性值
                 {
-                    return _speed;// 傳回屬性值
+                    return _speed;  // 傳回屬性值
                 }
                 set     // set存取子可設定屬性值
                 {
                     if (value < 0)
                     {
-                        value = 0;// 速度不得低於 0
+                        value = 0;  // 速度不得低於 0
                     }
                     else if (value > 200)
                     {
-                        value = 200;// 速度不得高於 200
+                        value = 200;  // 速度不得高於 200
                     }
-                    _speed = value;// 設定屬性值
+                    _speed = value;  // 設定屬性值
                 }
             }
 
@@ -944,14 +944,10 @@ namespace vcs_Class1
         //創建基類Bird如下，添加一個虛方法Eat():
 
         /*
-        /// <summary>
-        /// 鳥類：父類
-        /// </summary>
+        // 鳥類：父類
         public class Bird
         {
-            /// <summary>
-            /// 吃：虛方法
-            /// </summary>
+            // 吃：虛方法
             public virtual void Eat()
             {
                 Console.WriteLine("我是一只小小鳥，我喜歡吃蟲子~");
@@ -959,36 +955,26 @@ namespace vcs_Class1
         }
         */
 
-        /// <summary>
-        /// 鳥類：基類
-        /// </summary>
+        // 鳥類：基類
         public abstract class Bird
         {
-            /// <summary>
-            /// 吃：抽象方法
-            /// </summary>
+            // 吃：抽象方法
             public abstract void Eat(); //抽象類Bird內添加一個Eat()抽象方法，沒有方法體。也不能實例化。
         }
 
         //創建子類Magpie如下，繼承父類Bird，重寫父類Bird中的虛方法Eat()：
 
-        /// <summary>
-        /// 飛 接口
-        /// </summary>
+        // 飛 接口
         public interface IFlyable
         {
             void Fly();
         }
 
         /*
-        /// <summary>
-        /// 喜鵲：子類
-        /// </summary>
+        // 喜鵲：子類
         public class Magpie : Bird
         {
-            /// <summary>
-            /// 重寫父類中Eat方法
-            /// </summary>
+            // 重寫父類Bird中的Eat方法
             public override void Eat()
             {
                 Console.WriteLine("我是一只喜鵲，我喜歡吃蟲子~");
@@ -997,14 +983,10 @@ namespace vcs_Class1
 
         //創建一個子類Eagle如下，繼承父類Bird，重寫父類Bird中的虛方法Eat()：
 
-        /// <summary>
-        /// 老鷹：子類
-        /// </summary>
+        // 老鷹：子類
         public class Eagle : Bird
         {
-            /// <summary>
-            /// 重寫父類中Eat方法
-            /// </summary>
+            // 重寫父類Bird中的Eat方法
             public override void Eat()
             {
                 Console.WriteLine("我是一只老鷹，我喜歡吃肉~");
@@ -1014,21 +996,16 @@ namespace vcs_Class1
 
         //喜鵲Magpie實現IFlyable接口，代碼如下：
 
-        /// <summary>
-        /// 喜鵲：子類，實現IFlyable接口
-        /// </summary>
+        // 喜鵲：子類，實現IFlyable接口
         public class Magpie : Bird, IFlyable
         {
-            /// <summary>
-            /// 重寫父類Bird中Eat方法
-            /// </summary>
+            // 重寫父類Bird中的Eat方法
             public override void Eat()
             {
                 Console.WriteLine("我是一只喜鵲，我喜歡吃蟲子~");
             }
-            /// <summary>
-            /// 實現 IFlyable接口方法
-            /// </summary>
+
+            // 實現 IFlyable接口方法
             public void Fly()
             {
                 Console.WriteLine("我是一只喜鵲，我可以飛哦~~");
@@ -1037,22 +1014,16 @@ namespace vcs_Class1
 
         //老鷹Eagle實現IFlyable接口，代碼如下：
 
-        /// <summary>
-        /// 老鷹：子類實現飛接口
-        /// </summary>
+        // 老鷹：子類實現飛接口
         public class Eagle : Bird, IFlyable
         {
-            /// <summary>
-            /// 重寫父類Bird中Eat方法
-            /// </summary>
+            // 重寫父類Bird中的Eat方法
             public override void Eat()
             {
                 Console.WriteLine("我是一只老鷹，我喜歡吃肉~");
             }
 
-            /// <summary>
-            /// 實現 IFlyable接口方法
-            /// </summary>
+            // 實現 IFlyable接口方法
             public void Fly()
             {
                 Console.WriteLine("我是一只老鷹，我可以飛哦~~");
@@ -1061,28 +1032,20 @@ namespace vcs_Class1
 
         //創建一個子類Penguin如下，繼承父類Bird，重寫父類Bird中的虛方法Eat()：
 
-        /// <summary>
-        /// 企鵝：子類
-        /// </summary>
+        // 企鵝：子類
         public class Penguin : Bird
         {
-            /// <summary>
-            /// 重寫父類中Eat方法
-            /// </summary>
+            // 重寫父類Bird中的Eat方法
             public override void Eat()
             {
                 Console.WriteLine("我是一只小企鵝，我喜歡吃魚~");
             }
         }
 
-        /// <summary>
-        /// 飛機類，實現IFlyable接口
-        /// </summary>
+        // 飛機類，實現IFlyable接口
         public class Plane : IFlyable
         {
-            /// <summary>
-            /// 實現接口方法
-            /// </summary>
+            // 實現接口方法
             public void Fly()
             {
                 Console.WriteLine("我是一架飛機，我也能飛~~");
@@ -1424,37 +1387,37 @@ namespace vcs_Class1
         private void bt_interface0_Click(object sender, EventArgs e)
         {
             //richTextBox1.Text += "USB Interface(接口) 使用範例\n";
-            usb = new UDisk();//插入U盤
-            usb.OutputFile();//從U盤讀出文件
-            usb.InputFile();//往U盤寫入文件
-            usb.Dispose();//拔出U盤
+            usb = new UDisk();  // 插入U盤
+            usb.OutputFile();  // 從U盤讀出文件
+            usb.InputFile();  // 往U盤寫入文件
+            usb.Dispose();  // 拔出U盤
         }
 
         //------------------------------------------------------------  # 60個
 
         private void bt_interface1_Click(object sender, EventArgs e)
         {
-            usb = new MDisk();//插入移動硬盤
-            usb.OutputFile();//從移動硬盤讀出文件
-            usb.InputFile();//往移動硬盤寫入文件
-            usb.Dispose();//拔出移動硬盤
+            usb = new MDisk();  // 插入移動硬盤
+            usb.OutputFile();  // 從移動硬盤讀出文件
+            usb.InputFile();  // 往移動硬盤寫入文件
+            usb.Dispose();  // 拔出移動硬盤
         }
 
         //------------------------------------------------------------  # 60個
 
         private void bt_interface2_Click(object sender, EventArgs e)
         {
-            usb = new MP4();//插入MP4
-            usb.OutputFile();//從MP4讀出文件
-            usb.InputFile();//往MP4寫入文件
-            usb.Dispose();//拔出MP4
+            usb = new MP4();  // 插入MP4
+            usb.OutputFile();  // 從MP4讀出文件
+            usb.InputFile();  // 往MP4寫入文件
+            usb.Dispose();  // 拔出MP4
         }
 
         //USB接口
         public interface USB : IDisposable
         {
-            void OutputFile();//讀出文件
-            void InputFile();//寫入文件
+            void OutputFile();  // 讀出文件
+            void InputFile();  // 寫入文件
         }
 
         //U盤
@@ -1462,7 +1425,7 @@ namespace vcs_Class1
         {
             public UDisk()
             {
-                Console.WriteLine("U盤准備就緒...");
+                Console.WriteLine("\nU盤準備就緒...");
             }
             public void OutputFile()
             {
@@ -1483,7 +1446,7 @@ namespace vcs_Class1
         {
             public MDisk()
             {
-                Console.WriteLine("移動硬盤准備就緒...");
+                Console.WriteLine("\n移動硬盤準備就緒...");
             }
             public void OutputFile()
             {
@@ -1504,7 +1467,7 @@ namespace vcs_Class1
         {
             public MP4()
             {
-                Console.WriteLine("MP4准備就緒...");
+                Console.WriteLine("\nMP4準備就緒...");
             }
             public void OutputFile()
             {
@@ -1520,13 +1483,13 @@ namespace vcs_Class1
             }
         }
 
-
         //------------------------------------------------------------  # 60個
 
     }
 
     //------------------------------------------------------------  # 60個
 
+    /* 沒用到
     public class FormatConvert
     {
         //secondsToTime方法是把秒转换一个时间格式的字串返回。
@@ -1562,6 +1525,7 @@ namespace vcs_Class1
             return strHours + ":" + strMinutes + ":" + strSeconds;
         }
     }
+    */
 
     //------------------------------------------------------------  # 60個
 
@@ -1570,7 +1534,11 @@ namespace vcs_Class1
         // 寫入日志.
         public static void WriteLog(params object[] strList)
         {
-            if (strList.Count() == 0) return;
+            if (strList.Count() == 0)
+            {
+                return;
+            }
+
             string strDicPath = "";
             string strPath = "";
             try
@@ -1638,7 +1606,9 @@ namespace vcs_Class1
         public static void WriteLog(string ex)
         {
             if (myPath == "" || myName == "")
+            {
                 return;
+            }
 
             string Year = DateTime.Now.Year.ToString();
             string Month = DateTime.Now.Month.ToString().PadLeft(2, '0');
@@ -1729,14 +1699,14 @@ namespace vcs_Class1
         //靜態方法-計算總分
         public static uint Total(uint a, uint b, uint c)
         {
-            uint sum = a + b + c;//總分
-            return sum;//回傳加總結果         
+            uint sum = a + b + c;  // 總分
+            return sum;  // 回傳加總結果         
         }
 
         //靜態方法-算平均分數
         public static float Average(string word, uint number)
         {
-            float result = number / 3.0F;//平均
+            float result = number / 3.0F;  // 平均
             return result;
         }
 
@@ -1814,12 +1784,7 @@ namespace vcs_Class1
 
     public static class ExtensionUtility
     {
-        /// <summary>
-        /// Converts List To DataTable
-        /// </summary>
-        /// <typeparam name="TSource"></typeparam>
-        /// <param name="data"></param>
-        /// <returns></returns>
+        // Converts List To DataTable
         public static DataTable ToDataTable<TSource>(this IList<TSource> data)
         {
             DataTable dataTable = new DataTable(typeof(TSource).Name);
@@ -1841,12 +1806,7 @@ namespace vcs_Class1
             return dataTable;
         }
 
-        /// <summary>
-        /// Converts DataTable To List
-        /// </summary>
-        /// <typeparam name="TSource"></typeparam>
-        /// <param name="dataTable"></param>
-        /// <returns></returns>
+        // Converts DataTable To List
         public static List<TSource> ToList<TSource>(this DataTable dataTable) where TSource : new()
         {
             var dataList = new List<TSource>();

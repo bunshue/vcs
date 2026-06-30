@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using System.Reflection;
 using System.Runtime.InteropServices;   //for DllImport
+using System.Drawing.Drawing2D; //for MatrixOrder
 
 namespace vcs_MouseCursor1
 {
@@ -36,6 +37,40 @@ namespace vcs_MouseCursor1
             }
         }
         // 取得滑鼠座標 SP
+
+        //原子鼠標 ST
+
+        // Cursors.
+        private Cursor[] Cursors_atom;
+        private const int NumCursors_atom = 18;
+
+        //原子鼠標 SP
+
+        //定義變量
+        const int diff = 30;
+
+        //將枚舉作為位域處理
+        [Flags]
+        enum MouseEventFlag : uint //設置鼠標動作的鍵值
+        {
+            Move = 0x0001,               //發生移動
+            LeftDown = 0x0002,           //鼠標按下左鍵
+            LeftUp = 0x0004,             //鼠標松開左鍵
+            RightDown = 0x0008,          //鼠標按下右鍵
+            RightUp = 0x0010,            //鼠標松開右鍵
+            MiddleDown = 0x0020,         //鼠標按下中鍵
+            MiddleUp = 0x0040,           //鼠標松開中鍵
+            XDown = 0x0080,
+            XUp = 0x0100,
+            Wheel = 0x0800,              //鼠標輪被移動
+            VirtualDesk = 0x4000,        //虛擬桌面
+            Absolute = 0x8000
+        }
+
+        //設置鼠標按鍵和動作
+        [DllImport("user32.dll")]
+        static extern void mouse_event(MouseEventFlag flags, int dx, int dy,
+            uint data, UIntPtr extraInfo); //UIntPtr指針多句柄類型
 
         //------------------------------------------------------------  # 60個
 
@@ -170,15 +205,19 @@ namespace vcs_MouseCursor1
             richTextBox1.Clear();
         }
 
-        private void delay(int delay)
+
+        //delay 10000 約 10秒
+        //C# 不lag的延遲時間
+        private void delay(int delay_milliseconds)
         {
-            Application.DoEvents();         //執行某一事件，以達到延遲效果。
-            for (int j = 0; j < delay; j++)
+            delay_milliseconds *= 2;
+            DateTime time_before = DateTime.Now;
+            while (((TimeSpan)(DateTime.Now - time_before)).TotalMilliseconds < delay_milliseconds)
             {
-                System.Threading.Thread.Sleep(1);
+                Application.DoEvents();         //執行某一事件，以達到延遲效果。
             }
         }
-
+            
         //------------------------------------------------------------  # 60個
 
         //移動滑鼠鼠標
@@ -328,8 +367,115 @@ namespace vcs_MouseCursor1
 
         //------------------------------------------------------------  # 60個
 
+        bool flag_atom_cursor = false;
         private void button6_Click(object sender, EventArgs e)
         {
+            if (flag_atom_cursor == false)
+            {
+                // Geometry.
+                const int cursor_wid = 32;
+                const int cursor_hgt = 32;
+                float cx = cursor_wid / 2f;
+                float cy = cursor_hgt / 2f;
+                float rx = cx * 0.9f;
+                float ry = cx * 0.4f;
+                RectangleF rect = new RectangleF(-rx, -ry, 2 * rx, 2 * ry);
+                float radius = cx * 0.15f;
+
+                // Make the transformations we will use.
+                Matrix transform1 = new Matrix();
+                transform1.Rotate(60f, MatrixOrder.Append);
+                transform1.Translate(cx, cy, MatrixOrder.Append);
+                Matrix transform2 = new Matrix();
+                transform2.Rotate(-60f, MatrixOrder.Append);
+                transform2.Translate(cx, cy, MatrixOrder.Append);
+                Matrix transform3 = new Matrix();
+                transform3.Translate(cx, cy, MatrixOrder.Append);
+
+                // Make an orbital image.
+                Bitmap orbital_bm = new Bitmap(cursor_wid, cursor_hgt);
+                using (Graphics gr = Graphics.FromImage(orbital_bm))
+                {
+                    // Use a transparent background.
+                    gr.SmoothingMode = SmoothingMode.AntiAlias;
+                    gr.Clear(Color.Transparent);
+
+                    // Draw the orbitals.
+                    gr.Transform = transform1;
+                    gr.DrawEllipse(Pens.Red, rect);
+
+                    gr.Transform = transform2;
+                    gr.DrawEllipse(Pens.Red, rect);
+
+                    gr.Transform = transform3;
+                    gr.DrawEllipse(Pens.Red, rect);
+
+                    // Draw the nucleus.
+                    gr.FillEllipse(Brushes.Black,
+                        -radius, -radius, 2 * radius, 2 * radius);
+                }
+
+                // Make the cursors.
+                Cursors_atom = new Cursor[NumCursors_atom];
+                double theta1 = 0;
+                double dtheta1 = 2 * Math.PI / NumCursors_atom;
+                double theta2 = 0;
+                double dtheta2 = 2 * Math.PI / NumCursors_atom * 2;
+                double theta3 = 0;
+                double dtheta3 = 2 * Math.PI / NumCursors_atom * 3;
+                for (int i = 0; i < NumCursors_atom; i++)
+                {
+                    Bitmap cursor_bm = new Bitmap(cursor_wid, cursor_hgt);
+                    using (Graphics gr = Graphics.FromImage(cursor_bm))
+                    {
+                        // Copy the background orbitals.
+                        gr.SmoothingMode = SmoothingMode.AntiAlias;
+                        gr.DrawImage(orbital_bm, 0, 0);
+
+                        // Draw the electrons.
+                        gr.Transform = transform1;
+                        double x1 = rx * Math.Cos(theta1);
+                        double y1 = ry * Math.Sin(theta1);
+                        gr.FillEllipse(Brushes.Red,
+                            (int)(x1 - radius), (int)(y1 - radius),
+                            2 * radius, 2 * radius);
+                        theta1 += dtheta1;
+
+                        gr.Transform = transform2;
+                        double x2 = rx * Math.Cos(theta2);
+                        double y2 = ry * Math.Sin(theta2);
+                        gr.FillEllipse(Brushes.Green,
+                            (int)(x2 - radius), (int)(y2 - radius),
+                            2 * radius, 2 * radius);
+                        theta2 += dtheta2;
+
+                        gr.Transform = transform3;
+                        double x3 = rx * Math.Cos(theta3);
+                        double y3 = ry * Math.Sin(theta3);
+                        gr.FillEllipse(Brushes.Blue,
+                            (int)(x3 - radius), (int)(y3 - radius),
+                            2 * radius, 2 * radius);
+                        theta3 += dtheta3;
+                    }
+
+                    // Turn the bitmap into a cursor.
+                    Cursors_atom[i] = new Cursor(cursor_bm.GetHicon());
+
+                    // Increment theta.
+                    theta1 += dtheta1;
+                }
+
+                flag_atom_cursor = true;
+                button6.Text = "取消原子鼠標";
+                timer_atom.Enabled = true;
+            }
+            else
+            {
+                flag_atom_cursor = false;
+                button6.Text = "原子鼠標";
+                timer_atom.Enabled = false;
+                this.Cursor = Cursors.Default;
+            }
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -386,18 +532,159 @@ namespace vcs_MouseCursor1
 
         //------------------------------------------------------------  # 60個
 
+        int cnt = 0;
         private void button10_Click(object sender, EventArgs e)
         {
-
+            //從中心起任意移動
+            SetCursorPos(1920 / 2, 1080 / 2);
+            cnt = 0;
+            timer_set_cursor_pos.Enabled = true;
         }
+
+        private void timer_set_cursor_pos_Tick(object sender, EventArgs e)
+        {
+            cnt++;
+            if (cnt > 50)
+            {
+                timer_set_cursor_pos.Enabled = false;
+            }
+            Random r = new Random();
+            int dx = r.Next(-diff, diff);
+            int dy = r.Next(-diff, diff);
+            //richTextBox1.Text += "(" + dx.ToString() + ", " + dy.ToString() + ") ";
+
+            mouse_event(MouseEventFlag.Move, dx, dy, 0, UIntPtr.Zero);
+
+            //mouse_event(MouseEventFlag.LeftDown, dx, dy, 0, UIntPtr.Zero);
+            //mouse_event(MouseEventFlag.LeftUp, dx, dy, 0, UIntPtr.Zero);
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void button11_Click(object sender, EventArgs e)
         {
+            //設定鼠標位置
+            int cx = 1920 / 2;
+            int cy = 1080 / 2;
+            int dx = 0;
+            int dy = 0;
+            richTextBox1.Text += "正中心 + dx = " + dx.ToString() + ", dy = " + dy.ToString() + "\n";
+            SetCursorPos(cx + dx, cy + dy);
+            delay(200);
+
+            dx = 100;
+            dy = 0;
+            richTextBox1.Text += "正中心 + dx = " + dx.ToString() + ", dy = " + dy.ToString() + "\n";
+            SetCursorPos(cx + dx, cy + dy);
+            delay(200);
+
+            dx = 100;
+            dy = 100;
+            richTextBox1.Text += "正中心 + dx = " + dx.ToString() + ", dy = " + dy.ToString() + "\n";
+            SetCursorPos(cx + dx, cy + dy);
+            delay(200);
+
+            dx = 0;
+            dy = 100;
+            richTextBox1.Text += "正中心 + dx = " + dx.ToString() + ", dy = " + dy.ToString() + "\n";
+            SetCursorPos(cx + dx, cy + dy);
+            delay(200);
+
+            dx = -100;
+            dy = 100;
+            richTextBox1.Text += "正中心 + dx = " + dx.ToString() + ", dy = " + dy.ToString() + "\n";
+            SetCursorPos(cx + dx, cy + dy);
+            delay(200);
+
+            dx = -100;
+            dy = 0;
+            richTextBox1.Text += "正中心 + dx = " + dx.ToString() + ", dy = " + dy.ToString() + "\n";
+            SetCursorPos(cx + dx, cy + dy);
+            delay(200);
+
+            dx = -100;
+            dy = -100;
+            richTextBox1.Text += "正中心 + dx = " + dx.ToString() + ", dy = " + dy.ToString() + "\n";
+            SetCursorPos(cx + dx, cy + dy);
+            delay(200);
+
+            dx = 0;
+            dy = -100;
+            richTextBox1.Text += "正中心 + dx = " + dx.ToString() + ", dy = " + dy.ToString() + "\n";
+            SetCursorPos(cx + dx, cy + dy);
+            delay(200);
+
+            dx = 100;
+            dy = -100;
+            richTextBox1.Text += "正中心 + dx = " + dx.ToString() + ", dy = " + dy.ToString() + "\n";
+            SetCursorPos(cx + dx, cy + dy);
+            delay(200);
+
+            dx = 100;
+            dy = 0;
+            richTextBox1.Text += "正中心 + dx = " + dx.ToString() + ", dy = " + dy.ToString() + "\n";
+            SetCursorPos(cx + dx, cy + dy);
+            delay(200);
+
+            dx = 00;
+            dy = 0;
+            richTextBox1.Text += "正中心 + dx = " + dx.ToString() + ", dy = " + dy.ToString() + "\n";
+            SetCursorPos(cx + dx, cy + dy);
+            delay(200);
+
         }
 
+        //------------------------------------------------------------  # 60個
+
+        int x_st = 0;
+        int y_st = 0;
+        int angle = 0;
         private void button12_Click(object sender, EventArgs e)
         {
+            //強制移動鼠標至特定位置
+            //強制移動鼠標至特定位置
+            //richTextBox1.Text += MousePosition.X.ToString() + ", " + MousePosition.Y.ToString() + "\n";
+
+            x_st = MousePosition.X;
+            y_st = MousePosition.Y;
+            angle = 0;
+            timer_set_mouse_pos.Enabled = true;
         }
+
+        private double rad(double d)
+        {
+            return d * Math.PI / 180.0;
+        }
+
+        private double sind(double d)
+        {
+            return Math.Sin(d * Math.PI / 180.0);
+        }
+
+        private double cosd(double d)
+        {
+            return Math.Cos(d * Math.PI / 180.0);
+        }
+
+        private void timer_set_mouse_pos_Tick(object sender, EventArgs e)
+        {
+            int r = 50;
+            int dx = (int)(r * cosd(angle));
+            int dy = (int)(r * sind(angle));
+            int x_st2 = x_st + dx;
+            int y_st2 = y_st + dy;
+
+            SetCursorPos(x_st2, y_st2);
+
+            angle += 10;
+
+            if (angle > 360)
+            {
+                timer_set_mouse_pos.Enabled = false;
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void button13_Click(object sender, EventArgs e)
         {
@@ -536,6 +823,24 @@ namespace vcs_MouseCursor1
         }
 
         //------------------------------------------------------------  # 60個
+
+        //原子鼠標
+        // Display the next cursor.
+        private int CursorNumber = 0;
+        private void timer_atom_Tick(object sender, EventArgs e)
+        {
+            CursorNumber = (CursorNumber + 1) % NumCursors_atom;
+            this.Cursor = Cursors_atom[CursorNumber];
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void timer_mouse_position_Tick(object sender, EventArgs e)
+        {
+            this.Text = "相較於視窗原點的鼠標位置 : " + String.Format("{0},{1}", MousePosition.X, MousePosition.Y);
+        }
+
+        //------------------------------------------------------------  # 60個
     }
 }
 
@@ -559,6 +864,46 @@ namespace vcs_MouseCursor1
                 mouse_event(MOUSEEVENTF_MOVE, 0, 20, 0, 0);
             else
                 mouse_event(MOUSEEVENTF_MOVE, 0, -20, 0, 0);
+
+*/
+
+
+
+/*
+
+using System.Runtime.InteropServices;  //StructLayout
+
+        //結構體布局 本機位置
+        [StructLayout(LayoutKind.Sequential)]
+        struct NativeRECT
+        {
+            public int left;
+            public int top;
+            public int right;
+            public int bottom;
+        }
+
+
+        //設置鼠標位置
+        [DllImport("user32.dll")]
+        static extern bool SetCursorPos(int X, int Y);
+
+
+        [DllImport("user32.dll")]
+        static extern IntPtr FindWindow(string strClass, string strWindow);
+
+        //該函數獲取一個窗口句柄,該窗口雷鳴和窗口名與給定字符串匹配 hwnParent=Null從桌面窗口查找
+        [DllImport("user32.dll")]
+        static extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter,
+            string strClass, string strWindow);
+
+        [DllImport("user32.dll")]
+        static extern bool GetWindowRect(HandleRef hwnd, out NativeRECT rect);
+
+
+        //private Point pt_st;
+        //private Point pt_sp;
+        //private int count;
 
 */
 

@@ -19,16 +19,16 @@ namespace vcs_CopyFromScreen
         [DllImportAttribute("gdi32.dll")]
 
         private static extern bool BitBlt(
-        IntPtr hdcDest, //目的DC的句柄
-        int nXDest, //目的圖形的左上角的x坐標
-        int nYDest, //目的圖形的左上角的y坐標
-        int nWidth, //目的圖形的矩形寬度
-        int nHeight, //目的圖形的矩形高度
-        IntPtr hdcSrc, //源DC的句柄
-        int nXSrc, //源圖形的左上角的x坐標
-        int nYSrc, //源圖形的左上角的x坐標
-        System.Int32 dwRop //光柵操作代碼
-        );
+            IntPtr hdcDest, //目的DC的句柄
+            int nXDest, //目的圖形的左上角的x坐標
+            int nYDest, //目的圖形的左上角的y坐標
+            int nWidth, //目的圖形的矩形寬度
+            int nHeight, //目的圖形的矩形高度
+            IntPtr hdcSrc, //源DC的句柄
+            int nXSrc, //源圖形的左上角的x坐標
+            int nYSrc, //源圖形的左上角的x坐標
+            System.Int32 dwRop //光柵操作代碼\
+            );
         //本程式截圖 SP
 
         public Form1()
@@ -68,15 +68,25 @@ namespace vcs_CopyFromScreen
             button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
             pictureBox1.Size = new Size(600, 600);
-            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
             richTextBox1.Size = new Size(300, 600);
-            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1400, 750);
+            this.Size = new Size(1610, 750);
             this.Text = "vcs_CopyFromScreen";
 
             //設定執行後的表單起始位置, 正中央
@@ -553,30 +563,165 @@ namespace vcs_CopyFromScreen
             {
                 richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
             }
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button15_Click(object sender, EventArgs e)
         {
+            //全螢幕截圖1
+            //全螢幕截圖
+            //CopyFromScreen
+            //全螢幕截圖
+
+            Bitmap myImage = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+            Graphics g = Graphics.FromImage(myImage);
+            g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height));
+            IntPtr dc1 = g.GetHdc();
+            g.ReleaseHdc(dc1);
+            myImage.Save(@"aaaaa.jpg");
 
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button16_Click(object sender, EventArgs e)
         {
+            //全螢幕截圖2
+            //全螢幕截圖
+            //全螢幕截圖
+            Rectangle rect = Screen.GetBounds(Point.Empty);
+            using (Bitmap bitmap = new Bitmap(rect.Width, rect.Height))
+            {
+                using (Graphics g = Graphics.FromImage(bitmap))
+                    g.CopyFromScreen(Point.Empty, Point.Empty, rect.Size);
+
+                bitmap.Save("tmp_full_screen.jpg", ImageFormat.Jpeg);
+            }
+
+            /*
+            //another
+
+            Bitmap myImage = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+            Graphics g = Graphics.FromImage(myImage);
+            g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height));
+            IntPtr dc1 = g.GetHdc();
+            g.ReleaseHdc(dc1);
+            myImage.Save(@"c:\screen0.jpg");
+            */
 
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button17_Click(object sender, EventArgs e)
         {
-
+            //複製目前桌面當背景
+            this.BackgroundImage = GetNoCursor(); //複製目前桌面當背景
         }
+
+        private Bitmap GetNoCursor()    //複製目前桌面當背景
+        {
+            Bitmap Source = new Bitmap(this.Bounds.Width, this.Bounds.Height);    //根据屏幕大小创建Bitmap对象
+            Graphics g = Graphics.FromImage(Source);
+            g.CopyFromScreen(0, 0, 0, 0, Source.Size);  //获取没有鼠标的屏幕截图
+            g.Dispose();    //释放资源
+            return Source;
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void button18_Click(object sender, EventArgs e)
         {
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button19_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        public void SnatchScreen(Form Frm, string FilePath)
+        {
+            Point Var_Loc = Frm.Location;//取得目前視窗的位置
+
+            richTextBox1.Text += "aaaa : " + Var_Loc.ToString() + "\n";
+            richTextBox1.Text += "bbbb : " + this.Location.ToString() + "\n";
+
+            int Frm_left = -Var_Loc.X;
+            int Frm_right = -Var_Loc.Y;
+
+            Rectangle Var_rect = new Rectangle();//實例化Rectangle類
+            Var_rect = Screen.GetWorkingArea(Frm);//獲得目前螢幕的大小
+            Graphics g = Frm.CreateGraphics();//建立一個以目前螢幕為模板的圖片
+            Image Var_Image = new Bitmap(Var_rect.Width, Var_rect.Height, g);//建立以螢幕大小為標準的位圖 
+            Graphics Var_G_Image = Graphics.FromImage(Var_Image);//根據圖片實例化Graphics類
+            IntPtr Screen_dc = g.GetHdc();//得到螢幕的句柄
+            IntPtr Bitmap_dc = Var_G_Image.GetHdc();//得到Bitmap的句柄
+            BitBlt(Bitmap_dc, 0, 0, Var_rect.Width, Var_rect.Height, Screen_dc, Frm_left, Frm_right, 13369376);//呼叫此API函數，完成螢幕擷取
+            g.ReleaseHdc(Screen_dc);//釋放掉螢幕的句柄
+            Var_G_Image.ReleaseHdc(Bitmap_dc);//釋放掉Bitmap的句柄
+            ImageFormat ImageF = ImageFormat.Jpeg;//實例化ImageFormat類
+
+            ImageF = ImageFormat.Jpeg;
+            Var_Image.Save(FilePath, ImageF);//以指定的文件格式來保存
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            //本程式截圖
+
+            //執行螢幕截圖的操作
+            SnatchScreen(this, "tmp_aaaaaaa.jpg");
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button29_Click(object sender, EventArgs e)
         {
 
         }
@@ -594,5 +739,39 @@ namespace vcs_CopyFromScreen
 /*  可搬出
 
 */
+
+
+
+
+
+
+
+
+/*
+            //                    來源位置             目的位置      要傳輸的區域大小  判斷在像素複製作業中來源色彩如何與目的色彩結合以產生最後的色彩
+            //g.CopyFromScreen(new Point(x_st, y_st), new Point(0, 0), new Size(w, h), CopyPixelOperation.SourceInvert);
+            //g.CopyFromScreen(new Point(x_st, y_st), new Point(0, 0), new Size(w, h));
+            g.CopyFromScreen(new Point(pt.X - w / 2, pt.Y - h / 2), new Point(0, 0), new Size(w, h));
+
+*/
+
+/*
+// Take a screenshot 
+// Take a screenshot
+// By Ali Hamdar (http://alihamdar.com/)
+// http://social.msdn.microsoft.com/Forums/en/csharpgeneral/thread/79efecc4-fa6d-4078-afe4-bb1379bb968b
+
+// Default values for full screen
+int width = Screen.PrimaryScreen.Bounds.Width;
+int height = Screen.PrimaryScreen.Bounds.Height;
+int top = 0;
+int left = 0;
+
+System.Drawing.Bitmap printscreen = new System.Drawing.Bitmap( width, height );
+System.Drawing.Graphics graphics = System.Drawing.Graphics.FromImage( printscreen as Image );
+graphics.CopyFromScreen( top, left, 0, 0, printscreen.Size );
+printscreen.Save( outputfile, imagetype );
+*/
+
 
 
