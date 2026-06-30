@@ -708,62 +708,33 @@ namespace vcs_ImageProcessing2_CCRR
         private void button11_Click(object sender, EventArgs e)
         {
             //圖片裁剪與縮放
-
             //TBD
-
             //使用 class
 
-            //#region 正方型裁剪并缩放
-
-            /// 正方型裁剪
-            /// 以图片中心为轴心，截取正方型，然后等比缩放
-            /// 用于头像处理
-            /// <param name="fromFile">原图Stream对象</param>
-            /// <param name="fileSaveUrl">缩略图存放地址</param>
-            /// <param name="side">指定的边长（正方型）</param>
-           /// <param name="quality">质量（范围0-100）</param>
-            // CutForSquare(System.IO.Stream fromFile, string fileSaveUrl, int side, int quality)
-
-            //Image_Resize image = 
-
-
-            //System.IO.Stream fromFile, string fileSaveUrl, int side, int quality)
-
-            
             //目前只能使用 png 檔
-            //string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_png\vcs_ReadWrite_PNG.png";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
             filename = @"D:\_git\vcs\_1.data\______test_files1\_image_processing\sample.png";
+            filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_png\lantern.png";
 
-            //顯示圖片
-            var fs = File.OpenRead(filename); //OpenRead[二進位讀檔]
-            System.Drawing.Image result = System.Drawing.Image.FromStream(fs);
+            //檔案 轉 FileStream
+            FileStream fs = File.OpenRead(filename); //OpenRead[二進位讀檔]
+            //FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            //    Stream fs = new     Stream(filename, FileMode.Open, FileAccess.Read);
+
+            //FileStream 轉 Image
+            //Image result = Image.FromStream(fs);
+            Image result = Image.FromStream(fs, true);
+
             pictureBox1.Image = result;
 
-            //var fileStream = new FileStream(filename, FileMode.Open, FileAccess.Read);
-            //System.IO.Stream fs = new Stream(filename, FileMode.Open, FileAccess.Read);
 
-            string filename2 = @"aaaaa.jpg";
-            int side = 1080/2;
-            int quality = 100;
 
-            Image_Resize.CutForSquare(fs, filename2, side, quality);
+
+
 
             fs.Close();
 
-
-            //System.Drawing.Image initImage = System.Drawing.Image.FromStream(fromFile, true);
-            //Image initImage = System.Drawing.Image.FromStream(fileStream);
-            //pictureBox1.Image = initImage;
-
-            //pictureBox1.Image = System.Drawing.Image.FromStream(fileStream);
-
-
-            //fileStream.Close();
-
-
             richTextBox1.Text += "done\n";
-
         }
 
         //------------------------------------------------------------  # 60個
@@ -1081,3 +1052,5 @@ namespace vcs_ImageProcessing2_CCRR
 /*  可搬出
 
 */
+
+//image.Save(fileSaveUrl, System.Drawing.Imaging.ImageFormat.Jpeg);

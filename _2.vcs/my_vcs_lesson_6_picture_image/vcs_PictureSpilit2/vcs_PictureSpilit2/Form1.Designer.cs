@@ -50,9 +50,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 12);
+            this.button1.Location = new System.Drawing.Point(10, 10);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(158, 78);
+            this.button1.Size = new System.Drawing.Size(200, 60);
             this.button1.TabIndex = 0;
             this.button1.Text = "將一圖拆成 3X2 共六圖, 像素法";
             this.button1.UseVisualStyleBackColor = true;
@@ -60,9 +60,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(197, 12);
+            this.button2.Location = new System.Drawing.Point(10, 160);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(158, 78);
+            this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 1;
             this.button2.Text = "將一圖拆成 3X2 共六圖, Clone法";
             this.button2.UseVisualStyleBackColor = true;
@@ -70,7 +70,8 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(406, 12);
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Location = new System.Drawing.Point(449, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(333, 448);
             this.pictureBox1.TabIndex = 2;
@@ -78,7 +79,8 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(745, 12);
+            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox2.Location = new System.Drawing.Point(788, 12);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(333, 448);
             this.pictureBox2.TabIndex = 3;
@@ -86,7 +88,8 @@
             // 
             // pictureBox3
             // 
-            this.pictureBox3.Location = new System.Drawing.Point(1084, 12);
+            this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox3.Location = new System.Drawing.Point(1127, 12);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(333, 448);
             this.pictureBox3.TabIndex = 4;
@@ -94,7 +97,8 @@
             // 
             // pictureBox0
             // 
-            this.pictureBox0.Location = new System.Drawing.Point(12, 208);
+            this.pictureBox0.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox0.Location = new System.Drawing.Point(12, 248);
             this.pictureBox0.Name = "pictureBox0";
             this.pictureBox0.Size = new System.Drawing.Size(388, 550);
             this.pictureBox0.TabIndex = 5;
@@ -102,7 +106,8 @@
             // 
             // pictureBox4
             // 
-            this.pictureBox4.Location = new System.Drawing.Point(406, 466);
+            this.pictureBox4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox4.Location = new System.Drawing.Point(449, 466);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(333, 448);
             this.pictureBox4.TabIndex = 6;
@@ -110,7 +115,8 @@
             // 
             // pictureBox5
             // 
-            this.pictureBox5.Location = new System.Drawing.Point(745, 466);
+            this.pictureBox5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox5.Location = new System.Drawing.Point(788, 466);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(333, 448);
             this.pictureBox5.TabIndex = 7;
@@ -118,7 +124,8 @@
             // 
             // pictureBox6
             // 
-            this.pictureBox6.Location = new System.Drawing.Point(1084, 466);
+            this.pictureBox6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox6.Location = new System.Drawing.Point(1127, 466);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(333, 448);
             this.pictureBox6.TabIndex = 8;
@@ -126,9 +133,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(12, 114);
+            this.button3.Location = new System.Drawing.Point(10, 85);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(158, 78);
+            this.button3.Size = new System.Drawing.Size(200, 60);
             this.button3.TabIndex = 9;
             this.button3.Text = "圖片切割, 切成 M X N 個";
             this.button3.UseVisualStyleBackColor = true;
@@ -136,9 +143,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(197, 96);
+            this.richTextBox1.Location = new System.Drawing.Point(216, 10);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(203, 106);
+            this.richTextBox1.Size = new System.Drawing.Size(227, 232);
             this.richTextBox1.TabIndex = 10;
             this.richTextBox1.Text = "";
             // 
@@ -146,7 +153,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1426, 928);
+            this.ClientSize = new System.Drawing.Size(1484, 921);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.pictureBox6);

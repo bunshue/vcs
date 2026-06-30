@@ -24,6 +24,8 @@ namespace vcs_PictureSpilit2
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button1_Click(object sender, EventArgs e)
         {
             //將一圖拆成 3X2 共六圖, 像素法
@@ -87,6 +89,8 @@ namespace vcs_PictureSpilit2
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button2_Click(object sender, EventArgs e)
         {
             //將一圖拆成 3X2 共六圖, Clone法, 運用Clone函數局部複製
@@ -143,6 +147,8 @@ namespace vcs_PictureSpilit2
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button3_Click(object sender, EventArgs e)
         {
             //圖片切割, 切成 M X N 個
@@ -156,7 +162,7 @@ namespace vcs_PictureSpilit2
                 richTextBox1.Text += "FAIL\n";
         }
 
-        #region imageCut
+        //#region imageCut
         /// 圖片切割函數
         /// </summary>
         /// <param name="sourceFile">原始圖片文件</param>
@@ -196,7 +202,6 @@ namespace vcs_PictureSpilit2
             {
                 return false;
             }
-
         }
 
         /// <summary>
@@ -214,9 +219,21 @@ namespace vcs_PictureSpilit2
             }
             return null;
         }
+        //#endregion
 
-        #endregion
-
-
+        //------------------------------------------------------------  # 60個
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+

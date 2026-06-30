@@ -544,11 +544,12 @@ namespace vcs_ColorHistogram
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp"; //stomach
-            tb_filename.Text = filename;
-
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
+            filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp"; //stomach
+            tb_filename.Text = filename;
             bitmap0 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             pictureBox0.Image = bitmap0;
 
@@ -623,171 +624,7 @@ namespace vcs_ColorHistogram
             }
         }
 
-        public Bitmap bm = null;
-        //自定義函數, 捕獲每一幀圖像並顯示
-        Graphics g;
-
-        void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
-        {
-            try
-            {
-                //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
-                bm = (Bitmap)eventArgs.Frame.Clone();
-                //bm.RotateFlip(RotateFlipType.RotateNoneFlipX);
-                //pictureBox1.Image = bm;
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "xxx錯誤訊息e06 : " + ex.Message + "\n";
-                GC.Collect();       //回收資源
-                return;
-            }
-
-            try
-            {
-                bm = draw_selectionArea(bm, SelectionRectangle);    //畫紅框
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "xxx錯誤訊息e07 : " + ex.Message + "\n";
-                GC.Collect();       //回收資源
-                return;
-            }
-
-            pictureBox0.Image = bm;
-
-            GC.Collect();       //回收資源
-        }
-
-        void Start_Webcam()
-        {
-            if (Cam != null)
-            {
-                Cam.Start();   // WebCam starts capturing images.
-            }
-        }
-
-        void Stop_Webcam()
-        {
-            if (Cam != null)
-            {
-                //show_main_message("停止", S_OK, 20);
-                Cam.Stop();  // WebCam stops capturing images.
-                Cam.SignalToStop();
-                Cam.WaitForStop();
-                while (Cam.IsRunning)
-                {
-                }
-                Cam = null;
-            }
-        }
-
-        private Rectangle SelectionRectangle = new Rectangle(new Point(0, 0), new Size(0, 0));    //用來保存截圖的矩形
-
-        // Return a Rectangle with these points as corners.
-        private Rectangle MakeRectangle(int x0, int y0, int x1, int y1)
-        {
-            return new Rectangle(Math.Min(x0, x1), Math.Min(y0, y1), Math.Abs(x0 - x1), Math.Abs(y0 - y1));
-        }
-
-        private Rectangle MakeRectangle(Point pt1, Point pt2)
-        {
-            return new Rectangle(Math.Min(pt1.X, pt2.X), Math.Min(pt1.Y, pt2.Y), Math.Abs(pt1.X - pt2.X), Math.Abs(pt1.Y - pt2.Y));
-        }
-
-        private void select_crop_area(object sender, EventArgs e)
-        {
-            int x_st = (int)nud_x_st.Value;
-            int y_st = (int)nud_y_st.Value;
-            int w = (int)nud_w.Value;
-            int h = (int)nud_h.Value;
-
-            /*
-            measure_x_st = x_st;
-            measure_y_st = y_st;
-            measure_w = w;
-            measure_h = h;
-            */
-
-            SelectionRectangle = MakeRectangle(x_st, y_st, x_st + w, y_st + h);
-
-            if ((SelectionRectangle.X < 0) || (SelectionRectangle.X >= W))
-                return;
-            if ((SelectionRectangle.Y < 0) || (SelectionRectangle.Y >= H))
-                return;
-            if ((SelectionRectangle.Width <= 0) || (SelectionRectangle.Width > W))
-                return;
-            if ((SelectionRectangle.Height <= 0) || (SelectionRectangle.Height > H))
-                return;
-            if (((SelectionRectangle.X + SelectionRectangle.Width) > W) || ((SelectionRectangle.Y + SelectionRectangle.Height) > H))
-                return;
-
-            if (flag_webcam_mode == false)
-            {
-                draw_selectionBox();
-            }
-        }
-
-        private void rb_selection_CheckedChanged(object sender, EventArgs e)
-        {
-            //量測範圍
-
-            if (rb_selection1.Checked == true)
-            {
-                richTextBox1.Text += "大\n";
-                measure_x_st = 50;
-                measure_y_st = 50;
-                measure_w = W - measure_x_st * 2;
-                measure_h = H - measure_y_st * 2;
-            }
-            else if (rb_selection2.Checked == true)
-            {
-                richTextBox1.Text += "中\n";
-                measure_w = 180;
-                measure_h = 180;
-                measure_x_st = (int)((W - measure_w) / 2);
-                measure_y_st = (int)((H - measure_h) / 2);
-            }
-            else if (rb_selection3.Checked == true)
-            {
-                richTextBox1.Text += "小\n";
-                measure_w = 100;
-                measure_h = 100;
-                measure_x_st = (int)((W - measure_w) / 2);
-                measure_y_st = (int)((H - measure_h) / 2);
-            }
-            else
-            {
-                richTextBox1.Text += "XXXXXXXXXXXXXXXXXXXXXXX\n";
-
-            }
-            nud_x_st.Value = measure_x_st;
-            nud_y_st.Value = measure_y_st;
-            nud_w.Value = measure_w;
-            nud_h.Value = measure_h;
-        }
-
-        void draw_selectionBox()
-        {
-            //畫紅框 需要重新讀取圖片
-            filename = tb_filename.Text;
-            bitmap0 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-
-            //畫紅框
-            bitmap0 = draw_selectionArea(bitmap0, SelectionRectangle);  //畫紅框
-
-            pictureBox0.Image = bitmap0;
-        }
-
-        Bitmap draw_selectionArea(Bitmap bmp, Rectangle rectangle)
-        {
-            Graphics g = Graphics.FromImage(bmp);
-            Pen pen = new Pen(Color.Red, 3);
-            pen.DashStyle = DashStyle.Dash;
-            g.DrawRectangle(pen, rectangle.X - 4, rectangle.Y - 4, rectangle.Width + 8, rectangle.Height + 8);
-            g.Dispose();
-            return bmp;
-        }
+        //------------------------------------------------------------  # 60個
 
         void show_item_location()
         {
@@ -904,6 +741,176 @@ namespace vcs_ColorHistogram
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        public Bitmap bm = null;
+        //自定義函數, 捕獲每一幀圖像並顯示
+        Graphics g;
+
+        void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        {
+            try
+            {
+                //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
+                bm = (Bitmap)eventArgs.Frame.Clone();
+                //bm.RotateFlip(RotateFlipType.RotateNoneFlipX);
+                //pictureBox1.Image = bm;
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息e06 : " + ex.Message + "\n";
+                GC.Collect();       //回收資源
+                return;
+            }
+
+            try
+            {
+                bm = draw_selectionArea(bm, SelectionRectangle);    //畫紅框
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息e07 : " + ex.Message + "\n";
+                GC.Collect();       //回收資源
+                return;
+            }
+
+            pictureBox0.Image = bm;
+
+            GC.Collect();       //回收資源
+        }
+
+        void Start_Webcam()
+        {
+            if (Cam != null)
+            {
+                Cam.Start();   // WebCam starts capturing images.
+            }
+        }
+
+        void Stop_Webcam()
+        {
+            if (Cam != null)
+            {
+                //show_main_message("停止", S_OK, 20);
+                Cam.Stop();  // WebCam stops capturing images.
+                Cam.SignalToStop();
+                Cam.WaitForStop();
+                while (Cam.IsRunning)
+                {
+                }
+                Cam = null;
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private Rectangle SelectionRectangle = new Rectangle(new Point(0, 0), new Size(0, 0));    //用來保存截圖的矩形
+
+        // Return a Rectangle with these points as corners.
+        private Rectangle MakeRectangle(int x0, int y0, int x1, int y1)
+        {
+            return new Rectangle(Math.Min(x0, x1), Math.Min(y0, y1), Math.Abs(x0 - x1), Math.Abs(y0 - y1));
+        }
+
+        private Rectangle MakeRectangle(Point pt1, Point pt2)
+        {
+            return new Rectangle(Math.Min(pt1.X, pt2.X), Math.Min(pt1.Y, pt2.Y), Math.Abs(pt1.X - pt2.X), Math.Abs(pt1.Y - pt2.Y));
+        }
+
+        private void select_crop_area(object sender, EventArgs e)
+        {
+            int x_st = (int)nud_x_st.Value;
+            int y_st = (int)nud_y_st.Value;
+            int w = (int)nud_w.Value;
+            int h = (int)nud_h.Value;
+
+            /*
+            measure_x_st = x_st;
+            measure_y_st = y_st;
+            measure_w = w;
+            measure_h = h;
+            */
+
+            SelectionRectangle = MakeRectangle(x_st, y_st, x_st + w, y_st + h);
+
+            if ((SelectionRectangle.X < 0) || (SelectionRectangle.X >= W))
+                return;
+            if ((SelectionRectangle.Y < 0) || (SelectionRectangle.Y >= H))
+                return;
+            if ((SelectionRectangle.Width <= 0) || (SelectionRectangle.Width > W))
+                return;
+            if ((SelectionRectangle.Height <= 0) || (SelectionRectangle.Height > H))
+                return;
+            if (((SelectionRectangle.X + SelectionRectangle.Width) > W) || ((SelectionRectangle.Y + SelectionRectangle.Height) > H))
+                return;
+
+            if (flag_webcam_mode == false)
+            {
+                draw_selectionBox();
+            }
+        }
+
+        private void rb_selection_CheckedChanged(object sender, EventArgs e)
+        {
+            //量測範圍
+
+            if (rb_selection1.Checked == true)
+            {
+                richTextBox1.Text += "大\n";
+                measure_x_st = 50;
+                measure_y_st = 50;
+                measure_w = W - measure_x_st * 2;
+                measure_h = H - measure_y_st * 2;
+            }
+            else if (rb_selection2.Checked == true)
+            {
+                richTextBox1.Text += "中\n";
+                measure_w = 180;
+                measure_h = 180;
+                measure_x_st = (int)((W - measure_w) / 2);
+                measure_y_st = (int)((H - measure_h) / 2);
+            }
+            else if (rb_selection3.Checked == true)
+            {
+                richTextBox1.Text += "小\n";
+                measure_w = 100;
+                measure_h = 100;
+                measure_x_st = (int)((W - measure_w) / 2);
+                measure_y_st = (int)((H - measure_h) / 2);
+            }
+            else
+            {
+                richTextBox1.Text += "XXXXXXXXXXXXXXXXXXXXXXX\n";
+
+            }
+            nud_x_st.Value = measure_x_st;
+            nud_y_st.Value = measure_y_st;
+            nud_w.Value = measure_w;
+            nud_h.Value = measure_h;
+        }
+
+        void draw_selectionBox()
+        {
+            //畫紅框 需要重新讀取圖片
+            filename = tb_filename.Text;
+            bitmap0 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+
+            //畫紅框
+            bitmap0 = draw_selectionArea(bitmap0, SelectionRectangle);  //畫紅框
+
+            pictureBox0.Image = bitmap0;
+        }
+
+        Bitmap draw_selectionArea(Bitmap bmp, Rectangle rectangle)
+        {
+            Graphics g = Graphics.FromImage(bmp);
+            Pen pen = new Pen(Color.Red, 3);
+            pen.DashStyle = DashStyle.Dash;
+            g.DrawRectangle(pen, rectangle.X - 4, rectangle.Y - 4, rectangle.Width + 8, rectangle.Height + 8);
+            g.Dispose();
+            return bmp;
         }
 
         //------------------------------------------------------------  # 60個

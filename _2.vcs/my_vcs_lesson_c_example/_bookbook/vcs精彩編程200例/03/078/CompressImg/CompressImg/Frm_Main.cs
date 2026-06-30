@@ -66,15 +66,18 @@ namespace CompressImg
                 sW = tem_size.Width;
                 sH = tem_size.Height;
             }
+
             Bitmap oB = new Bitmap(dWidth, dHeight);
             Graphics g = Graphics.FromImage(oB);
             g.Clear(Color.WhiteSmoke);
+
             // 设置画布的描绘质量
             g.CompositingQuality = CompositingQuality.HighQuality;
             g.SmoothingMode = SmoothingMode.HighQuality;
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
             g.DrawImage(iSource, new Rectangle((dWidth - sW) / 2, (dHeight - sH) / 2, sW, sH), 0, 0, iSource.Width, iSource.Height, GraphicsUnit.Pixel);
             g.Dispose();
+
             // 以下代码为保存图片时，设置压缩质量
             EncoderParameters eP = new EncoderParameters();
             long[] qy = new long[1];
