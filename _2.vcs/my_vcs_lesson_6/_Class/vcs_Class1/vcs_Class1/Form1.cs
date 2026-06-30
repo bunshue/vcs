@@ -108,19 +108,15 @@ namespace vcs_Class1
 
         void show_item_location()
         {
-            int W;
-            int H;
-
             //小的groupBox
-            W = 200;
-            H = 180;
-
+            int W = 200;
+            int H = 180;
+            groupBox1.Size = new Size(W * 1, H + 50);
             groupBox8.Size = new Size(W * 2 + 10, H + 50);
 
             //大的groupBox
-            W = 200;
             H = 300;
-            groupBox14.Size = new Size(W * 2 + 80, H + 150);
+            groupBox14.Size = new Size(W * 3 + 20, H + 150);
             groupBox0.Size = new Size(W * 3 + 20, H * 2 + 90);
 
             int x_st = 10;
@@ -128,19 +124,28 @@ namespace vcs_Class1
             int dx = W + 10;
             int dy = 180 + 10;
             groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-
             groupBox8.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            groupBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
             groupBox14.Location = new Point(x_st + dx * 3, y_st + dy * 1 + 50);
 
             richTextBox1.Size = new Size(400, 690);
-            richTextBox1.Location = new Point(x_st + dx * 5 + 100, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
+            //一欄GBX 寬200 內 180X60 y0=20
             x_st = 10;
             y_st = 20;
             dx = 180 + 10;
             dy = 60 + 10;
+            bt_interface0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_interface1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_interface2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
 
+            //二欄GBX 寬410 內 190X60 y0=20
+            x_st = 10;
+            y_st = 20;
+            dx = 190 + 10;
+            dy = 60 + 10;
             button19.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button20.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button26.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -157,7 +162,8 @@ namespace vcs_Class1
             pictureBox1.Location = new Point(x_st + dx * 0 + 70 + 50, y_st + dy * 0 + 70);
             pictureBox2.Location = new Point(x_st + dx * 0 + 140 + 100, y_st + dy * 0 + 140);
 
-            dx = 190 + 10;
+            //三欄GBX 寬620 內 193X60 y0=20
+            dx = 193 + 10;
             dy = 60 + 6;
             bt_class00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_class01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -190,7 +196,7 @@ namespace vcs_Class1
             bt_class28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             bt_class29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            this.Size = new Size(1580, 750);
+            this.Size = new Size(1700, 750);
             this.Text = "vcs_Class1";
 
             //設定執行後的表單起始位置, 正中央
@@ -1409,8 +1415,111 @@ namespace vcs_Class1
         {
             string logFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logger2_" + string.Format("{0:yyyy年-MM月-dd日}", DateTime.Now) + "日誌記錄.txt");
 
-
         }
+
+        //------------------------------------------------------------  # 60個
+
+        USB usb;
+
+        private void bt_interface0_Click(object sender, EventArgs e)
+        {
+            //richTextBox1.Text += "USB Interface(接口) 使用範例\n";
+            usb = new UDisk();//插入U盤
+            usb.OutputFile();//從U盤讀出文件
+            usb.InputFile();//往U盤寫入文件
+            usb.Dispose();//拔出U盤
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void bt_interface1_Click(object sender, EventArgs e)
+        {
+            usb = new MDisk();//插入移動硬盤
+            usb.OutputFile();//從移動硬盤讀出文件
+            usb.InputFile();//往移動硬盤寫入文件
+            usb.Dispose();//拔出移動硬盤
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void bt_interface2_Click(object sender, EventArgs e)
+        {
+            usb = new MP4();//插入MP4
+            usb.OutputFile();//從MP4讀出文件
+            usb.InputFile();//往MP4寫入文件
+            usb.Dispose();//拔出MP4
+        }
+
+        //USB接口
+        public interface USB : IDisposable
+        {
+            void OutputFile();//讀出文件
+            void InputFile();//寫入文件
+        }
+
+        //U盤
+        public class UDisk : USB
+        {
+            public UDisk()
+            {
+                Console.WriteLine("U盤准備就緒...");
+            }
+            public void OutputFile()
+            {
+                Console.WriteLine("從U盤讀出文件");
+            }
+            public void InputFile()
+            {
+                Console.WriteLine("往U盤寫入文件");
+            }
+            public void Dispose()
+            {
+                Console.WriteLine("U盤已被拔出");
+            }
+        }
+
+        //移動硬盤
+        public class MDisk : USB
+        {
+            public MDisk()
+            {
+                Console.WriteLine("移動硬盤准備就緒...");
+            }
+            public void OutputFile()
+            {
+                Console.WriteLine("從移動硬盤讀出文件");
+            }
+            public void InputFile()
+            {
+                Console.WriteLine("往移動硬盤寫入文件");
+            }
+            public void Dispose()
+            {
+                Console.WriteLine("移動硬盤已被拔出");
+            }
+        }
+
+        //MP4
+        public class MP4 : USB
+        {
+            public MP4()
+            {
+                Console.WriteLine("MP4准備就緒...");
+            }
+            public void OutputFile()
+            {
+                Console.WriteLine("從MP4讀出文件");
+            }
+            public void InputFile()
+            {
+                Console.WriteLine("往MP4寫入文件");
+            }
+            public void Dispose()
+            {
+                Console.WriteLine("MP4已被拔出");
+            }
+        }
+
 
         //------------------------------------------------------------  # 60個
 

@@ -1,4 +1,38 @@
-﻿
+﻿        public class Classmate  //事件訂閱者
+        {
+            private string name;
+
+            public Classmate(string Name)
+            {
+                name = Name;
+            }
+
+            public void SendResponse()  //事件處理函數，要與自定義委托類型匹配
+            {
+                Console.WriteLine("來自：" + this.name + "的回復: 已經收到邀請，隨時可以開始！");
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
+
+
+            //Class 範例 0
+            Classmate classmate1 = new Classmate("Alice");
+            Classmate classmate2 = new Classmate("Banana");
+            Classmate classmate3 = new Classmate("Cherry");
+            Classmate classmate4 = new Classmate("Daisy");
+
+            classmate1.SendResponse();
+            classmate2.SendResponse();
+            classmate3.SendResponse();
+            classmate4.SendResponse();
+
+//6060
+
+
+
+
+
 填上透明色
 g.Clear(Color.Transparent);
 
@@ -125,37 +159,6 @@ C:\Program Files\Git\bin\git.exe pull --progress -v --no-rebase "origin"
 
 //------------------------------------------------------------  # 60個
 
-        public class Classmate  //事件訂閱者
-        {
-            private string name;
-
-            public Classmate(string Name)
-            {
-                name = Name;
-            }
-
-            public void SendResponse()  //事件處理函數，要與自定義委托類型匹配
-            {
-                Console.WriteLine("來自：" + this.name + "的回復: 已經收到邀請，隨時可以開始！");
-            }
-        }
-
-        //------------------------------------------------------------  # 60個
-
-
-            //Class 範例 0
-            Classmate classmate1 = new Classmate("Alice");
-            Classmate classmate2 = new Classmate("Banana");
-            Classmate classmate3 = new Classmate("Cherry");
-            Classmate classmate4 = new Classmate("Daisy");
-
-            classmate1.SendResponse();
-            classmate2.SendResponse();
-            classmate3.SendResponse();
-            classmate4.SendResponse();
-
-
-
 
 
 
@@ -261,10 +264,6 @@ private Image CutImage(Image SourceImage, Point StartPoint, Rectangle CutArea)
 
 //------------------------------------------------------------  # 60個
 
-
-
-
-
 // 引用System.Windows.Forms命名空間
 // 如此才能使用較簡潔的物件名稱來使用Form, Button, TextBox, Label...等類別
 using System.Windows.Forms;
@@ -275,15 +274,10 @@ using System.Windows.Forms;
 	   //xxxx
    }
 
-
-Tango
-C:\Program Files\Git\bin
-
-
+//------------------------------------------------------------  # 60個
 
 小圖貼到大pictureBox裏，目前只能貼在左上角
 要怎麼貼在其他位置
-
 
 private void Form1_Load(object sender, EventArgs e)
 {
@@ -4207,7 +4201,6 @@ class TestADO
 
 Web Service方面的：
 二十五、一個Web Service的小例子：
-<% @WebService Language=C# Class=TestWS %>
 
 using System.Web.Services;
 

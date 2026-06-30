@@ -714,7 +714,7 @@ namespace vcs_ImageProcessing2_CCRR
             //目前只能使用 png 檔
             string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
             filename = @"D:\_git\vcs\_1.data\______test_files1\_image_processing\sample.png";
-            filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_png\lantern.png";
+            //filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_png\lantern.png";
 
             //檔案 轉 FileStream
             FileStream fs = File.OpenRead(filename); //OpenRead[二進位讀檔]
@@ -728,14 +728,193 @@ namespace vcs_ImageProcessing2_CCRR
             pictureBox1.Image = result;
 
 
+            //圖片等比縮放
+            //public static void ZoomAuto(System.IO.Stream fromFile, string savePath,
+            //System.Double targetWidth, System.Double targetHeight,
+            //string watermarkText, string watermarkImage)
 
+            string filename2 = @"aaaaabbbbccccdddd.jpg";
+            int w = 600;
+            int h = 200;
+            string text = "ABCDEFG";
+            string watermark_path = @"D:\_git\vcs\_1.data\______test_files1\__RW\_png\vcs_ReadWrite_PNG.png";            
 
+            ZoomAuto(fs, filename2, w, h, text, watermark_path);
 
 
             fs.Close();
 
             richTextBox1.Text += "done\n";
         }
+
+        public static void ZoomAuto(System.IO.Stream fromFile, string savePath, System.Double targetWidth, System.Double targetHeight, string watermarkText, string watermarkImage)
+        {
+            //原始图片（获取原始图片创建对象，并使用流中嵌入的颜色管理信息）
+            System.Drawing.Image initImage = System.Drawing.Image.FromStream(fromFile, true);
+
+            //原图宽高均小于模版，不作处理，直接保存
+            if (initImage.Width <= targetWidth && initImage.Height <= targetHeight)
+            {
+                //文字水印
+                if (watermarkText != "")
+                {
+                    using (System.Drawing.Graphics gWater = System.Drawing.Graphics.FromImage(initImage))
+                    {
+                        System.Drawing.Font fontWater = new Font("黑体", 10);
+                        System.Drawing.Brush brushWater = new SolidBrush(Color.White);
+                        gWater.DrawString(watermarkText, fontWater, brushWater, 10, 10);
+                        gWater.Dispose();
+                    }
+                }
+
+                //透明图片水印
+                if (watermarkImage != "")
+                {
+                    if (File.Exists(watermarkImage))
+                    {
+                        //获取水印图片
+                        using (System.Drawing.Image wrImage = System.Drawing.Image.FromFile(watermarkImage))
+                        {
+                            //水印绘制条件：原始图片宽高均大于或等于水印图片
+                            if (initImage.Width >= wrImage.Width && initImage.Height >= wrImage.Height)
+                            {
+                                Graphics gWater = Graphics.FromImage(initImage);
+
+                                //透明属性
+                                ImageAttributes imgAttributes = new ImageAttributes();
+                                ColorMap colorMap = new ColorMap();
+                                colorMap.OldColor = Color.FromArgb(255, 0, 255, 0);
+                                colorMap.NewColor = Color.FromArgb(0, 0, 0, 0);
+                                ColorMap[] remapTable = { colorMap };
+                                imgAttributes.SetRemapTable(remapTable, ColorAdjustType.Bitmap);
+
+                                float[][] colorMatrixElements = { 
+                                   new float[] {1.0f,  0.0f,  0.0f,  0.0f, 0.0f},
+                                   new float[] {0.0f,  1.0f,  0.0f,  0.0f, 0.0f},
+                                   new float[] {0.0f,  0.0f,  1.0f,  0.0f, 0.0f},
+                                   new float[] {0.0f,  0.0f,  0.0f,  0.5f, 0.0f},//透明度:0.5
+                                   new float[] {0.0f,  0.0f,  0.0f,  0.0f, 1.0f}
+                                };
+
+                                ColorMatrix wmColorMatrix = new ColorMatrix(colorMatrixElements);
+                                imgAttributes.SetColorMatrix(wmColorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+                                gWater.DrawImage(wrImage, new Rectangle(initImage.Width - wrImage.Width, initImage.Height - wrImage.Height, wrImage.Width, wrImage.Height), 0, 0, wrImage.Width, wrImage.Height, GraphicsUnit.Pixel, imgAttributes);
+
+                                gWater.Dispose();
+                            }
+                            wrImage.Dispose();
+                        }
+                    }
+                }
+
+                //保存
+                initImage.Save(savePath, System.Drawing.Imaging.ImageFormat.Jpeg);
+            }
+            else
+            {
+                //缩略图宽、高计算
+                double newWidth = initImage.Width;
+                double newHeight = initImage.Height;
+
+                //宽大于高或宽等于高（横图或正方）
+                if (initImage.Width > initImage.Height || initImage.Width == initImage.Height)
+                {
+                    //如果宽大于模版
+                    if (initImage.Width > targetWidth)
+                    {
+                        //宽按模版，高按比例缩放
+                        newWidth = targetWidth;
+                        newHeight = initImage.Height * (targetWidth / initImage.Width);
+                    }
+                }
+                //高大于宽（竖图）
+                else
+                {
+                    //如果高大于模版
+                    if (initImage.Height > targetHeight)
+                    {
+                        //高按模版，宽按比例缩放
+                        newHeight = targetHeight;
+                        newWidth = initImage.Width * (targetHeight / initImage.Height);
+                    }
+                }
+
+                //生成新图
+                //新建一个bmp图片
+                System.Drawing.Image newImage = new System.Drawing.Bitmap((int)newWidth, (int)newHeight);
+                //新建一个画板
+                System.Drawing.Graphics newG = System.Drawing.Graphics.FromImage(newImage);
+
+                //设置质量
+                newG.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                newG.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+
+                //置背景色
+                newG.Clear(Color.White);
+                //画图
+                newG.DrawImage(initImage, new System.Drawing.Rectangle(0, 0, newImage.Width, newImage.Height), new System.Drawing.Rectangle(0, 0, initImage.Width, initImage.Height), System.Drawing.GraphicsUnit.Pixel);
+
+                //文字水印
+                if (watermarkText != "")
+                {
+                    using (System.Drawing.Graphics gWater = System.Drawing.Graphics.FromImage(newImage))
+                    {
+                        System.Drawing.Font fontWater = new Font("宋体", 10);
+                        System.Drawing.Brush brushWater = new SolidBrush(Color.White);
+                        gWater.DrawString(watermarkText, fontWater, brushWater, 10, 10);
+                        gWater.Dispose();
+                    }
+                }
+
+                //透明图片水印
+                if (watermarkImage != "")
+                {
+                    if (File.Exists(watermarkImage))
+                    {
+                        //获取水印图片
+                        using (System.Drawing.Image wrImage = System.Drawing.Image.FromFile(watermarkImage))
+                        {
+                            //水印绘制条件：原始图片宽高均大于或等于水印图片
+                            if (newImage.Width >= wrImage.Width && newImage.Height >= wrImage.Height)
+                            {
+                                Graphics gWater = Graphics.FromImage(newImage);
+
+                                //透明属性
+                                ImageAttributes imgAttributes = new ImageAttributes();
+                                ColorMap colorMap = new ColorMap();
+                                colorMap.OldColor = Color.FromArgb(255, 0, 255, 0);
+                                colorMap.NewColor = Color.FromArgb(0, 0, 0, 0);
+                                ColorMap[] remapTable = { colorMap };
+                                imgAttributes.SetRemapTable(remapTable, ColorAdjustType.Bitmap);
+
+                                float[][] colorMatrixElements = { 
+                                   new float[] {1.0f,  0.0f,  0.0f,  0.0f, 0.0f},
+                                   new float[] {0.0f,  1.0f,  0.0f,  0.0f, 0.0f},
+                                   new float[] {0.0f,  0.0f,  1.0f,  0.0f, 0.0f},
+                                   new float[] {0.0f,  0.0f,  0.0f,  0.5f, 0.0f},//透明度:0.5
+                                   new float[] {0.0f,  0.0f,  0.0f,  0.0f, 1.0f}
+                                };
+
+                                ColorMatrix wmColorMatrix = new ColorMatrix(colorMatrixElements);
+                                imgAttributes.SetColorMatrix(wmColorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+                                gWater.DrawImage(wrImage, new Rectangle(newImage.Width - wrImage.Width, newImage.Height - wrImage.Height, wrImage.Width, wrImage.Height), 0, 0, wrImage.Width, wrImage.Height, GraphicsUnit.Pixel, imgAttributes);
+                                gWater.Dispose();
+                            }
+                            wrImage.Dispose();
+                        }
+                    }
+                }
+
+                //保存缩略图
+                newImage.Save(savePath, System.Drawing.Imaging.ImageFormat.Jpeg);
+
+                //释放资源
+                newG.Dispose();
+                newImage.Dispose();
+                initImage.Dispose();
+            }
+        }
+
 
         //------------------------------------------------------------  # 60個
 
@@ -1054,3 +1233,14 @@ namespace vcs_ImageProcessing2_CCRR
 */
 
 //image.Save(fileSaveUrl, System.Drawing.Imaging.ImageFormat.Jpeg);
+
+
+
+/*
+//创建目录
+string dir = Path.GetDirectoryName(fileSaveUrl);
+if (!Directory.Exists(dir))
+    Directory.CreateDirectory(dir);
+*/
+
+

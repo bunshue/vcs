@@ -237,7 +237,7 @@
             this.bt_dir01.Name = "bt_dir01";
             this.bt_dir01.Size = new System.Drawing.Size(200, 60);
             this.bt_dir01.TabIndex = 2;
-            this.bt_dir01.Text = "DirectoryInfo的方法";
+            this.bt_dir01.Text = "DirectoryInfo的方法1";
             this.bt_dir01.UseVisualStyleBackColor = true;
             this.bt_dir01.Click += new System.EventHandler(this.bt_dir01_Click);
             // 
@@ -259,6 +259,7 @@
             this.bt_dir04.Name = "bt_dir04";
             this.bt_dir04.Size = new System.Drawing.Size(200, 60);
             this.bt_dir04.TabIndex = 3;
+            this.bt_dir04.Text = "DirectoryInfo的方法2";
             this.bt_dir04.UseVisualStyleBackColor = true;
             this.bt_dir04.Click += new System.EventHandler(this.bt_dir04_Click);
             // 
@@ -269,7 +270,6 @@
             this.bt_dir07.Name = "bt_dir07";
             this.bt_dir07.Size = new System.Drawing.Size(200, 60);
             this.bt_dir07.TabIndex = 4;
-            this.bt_dir07.Text = "DirectoryInfo";
             this.bt_dir07.UseVisualStyleBackColor = true;
             this.bt_dir07.Click += new System.EventHandler(this.bt_dir07_Click);
             // 
@@ -280,7 +280,6 @@
             this.bt_dir06.Name = "bt_dir06";
             this.bt_dir06.Size = new System.Drawing.Size(200, 60);
             this.bt_dir06.TabIndex = 14;
-            this.bt_dir06.Text = "DirectoryInfo";
             this.bt_dir06.UseVisualStyleBackColor = true;
             this.bt_dir06.Click += new System.EventHandler(this.bt_dir06_Click);
             // 
@@ -385,7 +384,6 @@
             this.bt_files04.Name = "bt_files04";
             this.bt_files04.Size = new System.Drawing.Size(200, 60);
             this.bt_files04.TabIndex = 51;
-            this.bt_files04.Text = "取得磁碟檔案資料";
             this.bt_files04.UseVisualStyleBackColor = true;
             this.bt_files04.Click += new System.EventHandler(this.bt_files04_Click);
             // 
@@ -524,7 +522,6 @@
             this.bt_files16.Name = "bt_files16";
             this.bt_files16.Size = new System.Drawing.Size(200, 60);
             this.bt_files16.TabIndex = 69;
-            this.bt_files16.Text = "遍歷文件夾實例1";
             this.bt_files16.UseVisualStyleBackColor = true;
             this.bt_files16.Click += new System.EventHandler(this.bt_files16_Click);
             // 
@@ -535,7 +532,6 @@
             this.bt_files17.Name = "bt_files17";
             this.bt_files17.Size = new System.Drawing.Size(200, 60);
             this.bt_files17.TabIndex = 70;
-            this.bt_files17.Text = "遍歷文件夾實例2";
             this.bt_files17.UseVisualStyleBackColor = true;
             this.bt_files17.Click += new System.EventHandler(this.bt_files17_Click);
             // 
@@ -546,7 +542,6 @@
             this.bt_files18.Name = "bt_files18";
             this.bt_files18.Size = new System.Drawing.Size(200, 60);
             this.bt_files18.TabIndex = 71;
-            this.bt_files18.Text = "遍歷文件夾實例3";
             this.bt_files18.UseVisualStyleBackColor = true;
             this.bt_files18.Click += new System.EventHandler(this.bt_files18_Click);
             // 
