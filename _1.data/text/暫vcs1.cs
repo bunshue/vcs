@@ -1,4 +1,25 @@
-﻿
+﻿            //取得副檔名
+                        FileInfo file_info = new FileInfo(sfdImage.FileName);
+                        switch (file_info.Extension)
+
+
+                                EncodedImage.Save(sfdImage.FileName, ImageFormat.Png);
+                                EncodedImage.Save(sfdImage.FileName, ImageFormat.Bmp);
+                                EncodedImage.Save(sfdImage.FileName, ImageFormat.Gif);
+                                EncodedImage.Save(sfdImage.FileName, ImageFormat.Tiff);
+                                EncodedImage.Save(sfdImage.FileName, ImageFormat.Jpeg);
+
+
+
+
+/*
+            Random rr = new Random();
+            Brush db = new SolidBrush(Color.FromArgb(rr.Next(256), rr.Next(256), rr.Next(256)));
+                //Color.FromArgb() 可以設定3原色，這裡3原色的代碼是亂數產生的
+*/
+
+
+
 //------------------------------------------------------------  # 60個
 
 填上透明色

@@ -54,6 +54,28 @@ namespace vcs_Draw3B
         int outerNo = 1; // 外圓 的小圓球數目
         //雙圓旋轉 SP
 
+        //------------------------------------------------------------  # 60個
+
+        //瓢蟲 漫遊演算法 ST
+        GC_2D_Wander gc; // 宣告一個物件
+        //GC_2D_MovableCircle cir;
+        //瓢蟲 漫遊演算法 SP
+
+        //------------------------------------------------------------  # 60個
+
+        Bitmap bitmap1; // 圖形
+
+        public PointF pos = new Point(300, 200);  // 座標
+        public double Angle_Offset = 90; //-Math.PI / 2;  // 開始的旋轉矯正徑度
+        public PointF Wander_Center = new Point(400, 400); // 漫遊的中心點
+        public double Wander_Radius = 200; // 漫遊的半徑距離
+        public int Speed = 5; // 漫遊的速度
+
+        double Angle = 0; // 目前的旋轉角度
+        Random r = new Random(); // 亂數
+
+        //------------------------------------------------------------  # 60個
+
         public Form1()
         {
             InitializeComponent();
@@ -115,6 +137,21 @@ namespace vcs_Draw3B
             pen02.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
             this.pictureBox_double_circle.KeyDown += new KeyEventHandler(pictureBox_double_circle_KeyDown);
             //雙圓旋轉 SP
+
+            //------------------------------------------------------------  # 60個
+
+            //瓢蟲 漫遊演算法 ST
+            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\__RW\_png\ladybug.png";
+            gc = new GC_2D_Wander(new Bitmap(filename2));
+            //cir = new GC_2D_MovableCircle(20, new Point(this.pictureBox2.ClientSize.Width / 2, this.pictureBox2.ClientSize.Height / 2));
+            gc.Update();
+            //瓢蟲 漫遊演算法 SP
+
+            //6060
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_png\ladybug.png";
+            bitmap1 = new Bitmap(filename);
+            Run_Ladybug();
         }
 
         void show_item_location()
@@ -137,6 +174,8 @@ namespace vcs_Draw3B
             pictureBox_ball_in_box.Size = new Size(W, H);
             pictureBox_double_circle.Size = new Size(W, H);
             pictureBox_progressbar.Size = new Size(280, 60);
+            pictureBox_ladybug.Size = new Size(W * 2 + 70, H + 80);
+            pictureBox_ladybug2.Size = new Size(W * 2 + 70, H + 80);
 
             x_st = 10;
             y_st = 10;
@@ -154,6 +193,8 @@ namespace vcs_Draw3B
             pictureBox_ball.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             pictureBox_ball_in_box.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             pictureBox_ellipse.Location = new Point(x_st + dx * 3 - 20, y_st + dy * 1);
+            pictureBox_ladybug.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            pictureBox_ladybug2.Location = new Point(x_st + dx * 2, y_st + dy * 2);
 
             richTextBox1.Size = new Size(300, 300);
             richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 2);
@@ -980,7 +1021,109 @@ namespace vcs_Draw3B
             angle2 = angle2 - angleDelta;
             this.pictureBox_double_circle.Invalidate();
         }
+
         //雙圓旋轉 SP
+
+        //------------------------------------------------------------  # 60個
+
+        //瓢蟲 漫遊演算法 ST
+
+        private void pictureBox_ladybug_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.ResetTransform();
+            //cir.Draw(e.Graphics);
+            gc.Draw(e.Graphics);
+        }
+
+        private void timer_ladybug_Tick(object sender, EventArgs e)
+        {
+            //gc.Wander_Center = new PointF(1920 / 4, 1080 / 4);
+            gc.Update();
+            this.pictureBox_ladybug.Invalidate();
+        }
+
+        //瓢蟲 漫遊演算法 SP
+
+        private void pictureBox_ladybug2_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.ResetTransform();
+            Draw(e.Graphics);
+        }
+
+        private void timer_ladybug2_Tick(object sender, EventArgs e)
+        {
+            //Wander_Center = new PointF(1920 / 4, 1080 / 4);
+            Run_Ladybug();
+            this.pictureBox_ladybug2.Invalidate();
+        }
+
+        void Run_Ladybug()
+        {
+            // NPC 和 漫遊中心點 的 夾角向量
+            PointF vectorToCenter = new PointF(Wander_Center.X - pos.X, Wander_Center.Y - pos.Y);
+            // NPC 和 漫遊中心點 的距離
+            double len = Math.Sqrt((Wander_Center.X - pos.X) * (Wander_Center.X - pos.X) + (Wander_Center.Y - pos.Y) * (Wander_Center.Y - pos.Y));
+
+            if (len > 5 * Wander_Radius) // 在 5 倍 的漫遊半徑距離 外
+            {
+                // NPC 和 漫遊中心點 的角度
+                double Yaw2 = Math.Atan2(vectorToCenter.Y, vectorToCenter.X);
+
+                // Yaw2 和 NPC 角度 的 角度差
+                double diff = Yaw2 - Angle;
+
+                Angle = Angle + diff; // 一次就 矯正 回來
+            }
+            else if (len > Wander_Radius) // 在 漫遊的半徑距離 外
+            {
+                // NPC 和 漫遊中心點 的角度
+                double Yaw2 = Math.Atan2(vectorToCenter.Y, vectorToCenter.X);
+
+                // Yaw2 和 NPC 角度 的 角度差
+                double diff = Yaw2 - Angle;
+
+                // 欲矯正的角度
+                double radius;
+                radius = 0.01 * Math.PI * len / Wander_Radius; // NPC 和 漫遊中心點 距離愈遠 矯正的角度愈大
+
+                if (diff < -radius)
+                {
+                    diff = -radius; // 慢慢把 角度差 矯正回來
+                }
+                else if (diff > radius)
+                {
+                    diff = radius;
+                }
+
+                Angle = Angle + (diff + (r.NextDouble() * 0.001)); // 再加一點點 亂數
+            }
+            else // 在 漫遊的半徑距離 內
+            {
+                double rate = r.NextDouble() * 0.06 - 0.03; // 一些 亂數 改變 角度
+                Angle += rate;
+            }
+
+            while (Angle < -Math.PI)
+            {
+                Angle += Math.PI * 2; // 確定  Angle 是在 -Math.PI ~ Math.PI 之間
+            }
+            while (Angle > Math.PI)
+            {
+                Angle -= Math.PI * 2;
+            }
+
+            pos.X += (float)(Speed * Math.Cos(Angle)); // NPC 新的座標
+            pos.Y += (float)(Speed * Math.Sin(Angle));
+        }
+
+        public void Draw(Graphics G)
+        {
+            G.ResetTransform();  // 重設 畫布的轉換矩陣
+            G.TranslateTransform(pos.X, pos.Y); // 平移 畫布 的中心點
+            G.RotateTransform((float)(Angle_Offset + (Angle * 180.0 / Math.PI))); // 旋轉 畫布 
+            G.DrawImage(bitmap1, 0 - bitmap1.Width / 2, 0 - bitmap1.Height / 2, bitmap1.Width, bitmap1.Height); //繪出 圖形
+            G.ResetTransform(); // 重設 畫布的轉換矩陣
+        }
     }
 }
 
@@ -997,9 +1140,3 @@ namespace vcs_Draw3B
 */
 
 
-
-/*
-            Random rr = new Random();
-            Brush db = new SolidBrush(Color.FromArgb(rr.Next(256), rr.Next(256), rr.Next(256)));
-                //Color.FromArgb() 可以設定3原色，這裡3原色的代碼是亂數產生的
-*/

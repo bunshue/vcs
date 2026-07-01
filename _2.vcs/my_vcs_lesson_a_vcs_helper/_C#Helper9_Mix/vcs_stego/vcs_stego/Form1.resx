@@ -117,43 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="timer_draw_ellipse.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>21, 14</value>
-  </metadata>
-  <metadata name="timer_draw_star.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>185, 15</value>
-  </metadata>
-  <metadata name="timer_draw_polygon.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>312, 12</value>
-  </metadata>
-  <metadata name="timer_progressbar.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1350, 21</value>
-  </metadata>
-  <metadata name="timer_compass.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>636, 20</value>
-  </metadata>
-  <metadata name="timer_round.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>758, 19</value>
-  </metadata>
-  <metadata name="timer_circular.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>949, 18</value>
-  </metadata>
-  <metadata name="timer_ball.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>861, 18</value>
-  </metadata>
-  <metadata name="timer_ball_in_box.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1064, 20</value>
-  </metadata>
-  <metadata name="timer_double_circle.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1198, 19</value>
-  </metadata>
-  <metadata name="timer_ladybug.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>28, 44</value>
-  </metadata>
-  <metadata name="timer_ladybug2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>163, 44</value>
-  </metadata>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>93</value>
-  </metadata>
+  <data name="textBox1.Text" xml:space="preserve">
+    <value>用USB碟重灌系統有兩個關鍵步驟：
+1. 將光碟檔案先製作成一個iso檔
+2. 透過軟體（如：Rufus, isotousb, ...）將此iso檔放入USB碟；重開機後設定以USB開機, 以ASUS筆電是按Esc鍵（不是進BIOS）, 選USB碟開機, 就可以重灌了 
+
+Rufus這個軟體工具滿好用的，他可以燒出MBR與GPT(硬碟2TB以上)模式，個人經驗是Win7與Win10 32/64都適用！
+
+【步驟一】接好必接的鍵盤、滑鼠、USB重灌碟後→進入主機板BIOS→Boot(選擇開機預設硬體→找到USB裝置型號→Enter確認→F10儲存變更重開)
+
+【步驟二】進入重灌程序→分割硬碟(C/D......，並依序格式化)→選擇版本→跳過金鑰(Win10)→讀取、複製、安裝USB中的作業系統→安裝更新→10秒後重開機→重開後再進BIOS→調整Boot選項(選擇開機預設硬體→剛才安裝作業系統的硬碟機型號→Enter確認→F10儲存變更重開)
+
+【步驟三】重開→安裝結尾，成功進入作業系統→退出重灌碟
+
+
+安裝作業系統後的幾個重要安裝
+
+【步驟一】安裝主機板晶片組、I/O埠驅動
+
+【步驟二】安裝顯示卡驅動
+
+【步驟三】安裝介面卡驅動
+
+有些驅動安裝後須重開
+
+【步驟四】點選主機→右鍵【內容】→點入【裝置管理員】→確認各裝置都正常運作且沒有出現！驚嘆號或？問號圖示
+
+【步驟五】開CPU-Z、GPU-Z、SIV等確認電腦各項基本數值
+
+要注意新型的主機板用usb安裝要先載入驅動才找得到硬碟，除非是裝win10</value>
+  </data>
 </root>

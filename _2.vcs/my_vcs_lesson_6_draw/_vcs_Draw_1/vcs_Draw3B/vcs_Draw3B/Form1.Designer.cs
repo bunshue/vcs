@@ -55,6 +55,10 @@
             this.timer_ball_in_box = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_double_circle = new System.Windows.Forms.PictureBox();
             this.timer_double_circle = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox_ladybug = new System.Windows.Forms.PictureBox();
+            this.timer_ladybug = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox_ladybug2 = new System.Windows.Forms.PictureBox();
+            this.timer_ladybug2 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ellipse)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_polygon)).BeginInit();
@@ -67,6 +71,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ball)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ball_in_box)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_double_circle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ladybug)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ladybug2)).BeginInit();
             this.SuspendLayout();
             // 
             // bt_clear
@@ -292,11 +298,45 @@
             this.timer_double_circle.Enabled = true;
             this.timer_double_circle.Tick += new System.EventHandler(this.timer_double_circle_Tick);
             // 
+            // pictureBox_ladybug
+            // 
+            this.pictureBox_ladybug.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox_ladybug.Location = new System.Drawing.Point(12, 199);
+            this.pictureBox_ladybug.Name = "pictureBox_ladybug";
+            this.pictureBox_ladybug.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox_ladybug.TabIndex = 73;
+            this.pictureBox_ladybug.TabStop = false;
+            this.pictureBox_ladybug.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_ladybug_Paint);
+            // 
+            // timer_ladybug
+            // 
+            this.timer_ladybug.Enabled = true;
+            this.timer_ladybug.Interval = 10;
+            this.timer_ladybug.Tick += new System.EventHandler(this.timer_ladybug_Tick);
+            // 
+            // pictureBox_ladybug2
+            // 
+            this.pictureBox_ladybug2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox_ladybug2.Location = new System.Drawing.Point(12, 255);
+            this.pictureBox_ladybug2.Name = "pictureBox_ladybug2";
+            this.pictureBox_ladybug2.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox_ladybug2.TabIndex = 74;
+            this.pictureBox_ladybug2.TabStop = false;
+            this.pictureBox_ladybug2.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_ladybug2_Paint);
+            // 
+            // timer_ladybug2
+            // 
+            this.timer_ladybug2.Enabled = true;
+            this.timer_ladybug2.Interval = 10;
+            this.timer_ladybug2.Tick += new System.EventHandler(this.timer_ladybug2_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(752, 458);
+            this.Controls.Add(this.pictureBox_ladybug2);
+            this.Controls.Add(this.pictureBox_ladybug);
             this.Controls.Add(this.pictureBox_double_circle);
             this.Controls.Add(this.pictureBox_ball_in_box);
             this.Controls.Add(this.pictureBox_ball);
@@ -325,6 +365,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ball)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ball_in_box)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_double_circle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ladybug)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ladybug2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -357,6 +399,10 @@
         private System.Windows.Forms.Timer timer_ball_in_box;
         private System.Windows.Forms.PictureBox pictureBox_double_circle;
         private System.Windows.Forms.Timer timer_double_circle;
+        private System.Windows.Forms.PictureBox pictureBox_ladybug;
+        private System.Windows.Forms.Timer timer_ladybug;
+        private System.Windows.Forms.PictureBox pictureBox_ladybug2;
+        private System.Windows.Forms.Timer timer_ladybug2;
     }
 }
 

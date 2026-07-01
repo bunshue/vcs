@@ -15,10 +15,6 @@ namespace vcs_Ladybug
         int W = 250;
         int H = 250;
 
-        //漫遊演算法 ST
-        GC_2D_Wander gc; // 宣告一個物件
-        //GC_2D_MovableCircle cir;
-        //漫遊演算法 SP
 
         public Form1()
         {
@@ -27,20 +23,10 @@ namespace vcs_Ladybug
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //漫遊演算法 ST
-            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\__RW\_png\ladybug.png";
-            gc = new GC_2D_Wander(new Bitmap(filename2));
-            //cir = new GC_2D_MovableCircle(20, new Point(this.pictureBox2.ClientSize.Width / 2, this.pictureBox2.ClientSize.Height / 2));
-            gc.Update();
-            //漫遊演算法 SP
 
+            //pictureBox2.Size = new Size(1920 / 2, 1080 / 2);
+            //pictureBox2.Location = new Point(0, 0);
 
-            pictureBox2.Size = new Size(1920 / 2, 1080 / 2);
-            pictureBox2.Location = new Point(0, 0);
-
-            //最大化螢幕
-            //this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
-            //this.WindowState = FormWindowState.Maximized;
         }
 
         //漫遊演算法 ST
@@ -61,32 +47,14 @@ namespace vcs_Ladybug
 
         private void pictureBox2_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.ResetTransform();
-            //cir.Draw(e.Graphics);
-            gc.Draw(e.Graphics);
         }
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            //gc.Wander_Center = new PointF(1920 / 4, 1080 / 4);
-            gc.Update();
-            this.pictureBox2.Invalidate();
         }
 
         //漫遊演算法 SP
     }
 }
-
-//6060
-//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-//------------------------------------------------------------  # 60個
-
-//3030
-//richTextBox1.Text += "------------------------------\n";  // 30個
-//------------------------------  # 30個
-
-/*  可搬出
-
-*/
 
 

@@ -1383,11 +1383,14 @@ namespace vcs_Class1
 
             public Bitmap GetBitmap()
             {
-                //WebPageBitmap Shot = new WebPageBitmap(this.ImagePath, this.ImageWidth, this.ImageHeight);
-                //Shot.GetIt();
-                //Bitmap Pic = Shot.DrawBitmap(this.ImageHeight, this.ImageWidth);
-                //return Pic;
-                return null;
+                Bitmap bitmap1 = new Bitmap(this.ImageHeight, this.ImageWidth);
+                return bitmap1;
+            }
+
+            //類別內取出資料的方法 override string ToString()
+            public override string ToString()
+            {
+                return string.Format("[{0} : {1} X {2}]", image_path, image_width, image_height);
             }
         }
 
@@ -1397,18 +1400,20 @@ namespace vcs_Class1
             string filename2 = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
             string filename3 = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
 
-            //ImageInfo
+            //類別ImageInfo做成的物件一維陣列 Images
             List<ImageInfo> Images = new List<ImageInfo>();
 
-            /*
-            ImageInfo image1 = new ImageInfo(filename1);
-            ImageInfo image2 = new ImageInfo(filename2);
-            ImageInfo image3 = new ImageInfo(filename3);
+            ImageInfo image1 = new ImageInfo(filename1, 100, 100);
+            ImageInfo image2 = new ImageInfo(filename2, 100, 100);
+            ImageInfo image3 = new ImageInfo(filename3, 100, 100);
 
             Images.Add(image1);
             Images.Add(image2);
             Images.Add(image3);
-            */
+
+            richTextBox1.Text += "info1 : " + image1.ToString() + "\n";
+            richTextBox1.Text += "info2 : " + image2.ToString() + "\n";
+            richTextBox1.Text += "info3 : " + image3.ToString() + "\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -1611,7 +1616,6 @@ namespace vcs_Class1
 
     public class Logger1
     {
-        // 寫入日志.
         public static void WriteLog(params object[] strList)
         {
             if (strList.Count() == 0)
@@ -1619,30 +1623,21 @@ namespace vcs_Class1
                 return;
             }
 
-            string strDicPath = "";
-            string strPath = "";
-            try
-            {
-                strDicPath = Application.StartupPath + "//";
-                strPath = strDicPath + "Logger1_" + string.Format("{0:yyyy年-MM月-dd日}", DateTime.Now) + "日誌記錄.txt";
-            }
-            catch (Exception ex)
-            {
-                strDicPath = "C:/temp/log/";
-                strPath = strDicPath + "Logger1_" + string.Format("{0:yyyy年-MM月-dd日}", DateTime.Now) + "日誌記錄.txt";
-                Console.WriteLine(ex.Message);
-            }
+            string strDicPath = Application.StartupPath + "//";
+            string strPath = strDicPath + "Logger1_" + string.Format("{0:yyyy年-MM月-dd日}", DateTime.Now) + "日誌記錄.txt";
 
             if (!Directory.Exists(strDicPath))
             {
                 Directory.CreateDirectory(strDicPath);
             }
+
             if (!File.Exists(strPath))
             {
                 using (FileStream fs = File.Create(strPath))
                 {
                 }
             }
+
             string str = File.ReadAllText(strPath);
             StringBuilder sb = new StringBuilder();
             foreach (var item in strList)
