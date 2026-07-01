@@ -8958,7 +8958,7 @@ this.ClientSize = new Size(btnClickMe.Right, btnClickMe.Bottom);
             mnuFileFormatHardDrive.ImageScaling = ToolStripItemImageScaling.None;
             mnuFileFormatHardDrive.Image = UacStuff.GetUacShieldImage();
 
-6060
+//------------------------------------------------------------  # 60個
 
 Form的設定
         // Initialize.
@@ -8967,12 +8967,11 @@ Form的設定
             this.ResizeRedraw = true;
             this.DoubleBuffered = true;
             
-6060
+//------------------------------------------------------------  # 60個
 
 //停駐於父容器中
 預設			Dock屬性 None
 停駐於父容器中	Dock屬性 Fill
-
 
             // Maximize.
             this.Bounds = Screen.PrimaryScreen.Bounds;
@@ -8988,7 +8987,7 @@ Form的設定
             return (float)(Math.Sqrt(dx * dx + dy * dy));
         }
       
-6060
+//------------------------------------------------------------  # 60個
 
 【Url編碼問題】名稱空間“System.Web”中不存在型別或名稱空間名稱“HttpUtility”。是否缺少程式集引用?
  vs2010下解決方案：
@@ -8996,6 +8995,7 @@ Form的設定
 2、右擊專案中的引用，新增引用，在.net下選擇System.Web,確定OK。
  framework 4 client profile 為 framework 4的簡化版，去掉了好多功能。web.dll就是其中，所以，引用原版即可，即為.net FrameWork 4
  
+//------------------------------------------------------------  # 60個
 
         /*
         // Display the name of the clicked PictureBox.
@@ -9055,7 +9055,7 @@ Form的設定
             return (float)Math.Sqrt(dist2);
         }
 
-
+//------------------------------------------------------------  # 60個
 
 畫直角座標系的刻度
                 // Draw axes.

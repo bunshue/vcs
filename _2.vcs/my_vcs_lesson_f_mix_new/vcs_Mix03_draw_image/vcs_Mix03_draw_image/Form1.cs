@@ -392,14 +392,42 @@ namespace vcs_Mix03_draw_image
         private void button9_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //Font drawFont4 = new Font("Arial", 4, FontStyle.Bold, GraphicsUnit.Millimeter);
+
+            Font f = new Font("標楷體", 60, GraphicsUnit.Point);
+            int tmp_width = 0;
+            int tmp_height = 0;
+            string str = "驗證中驗證中";
+
+            tmp_width = g.MeasureString(str, f).ToSize().Width;
+            tmp_height = g.MeasureString(str, f).ToSize().Height;
+
+            richTextBox1.Text += "tmp_width = " + tmp_width.ToString() + "  tmp_height = " + tmp_height.ToString() + "\n";
+            //richTextBox1.Text += "W = " + panel9.Width.ToString() + "  H = " + panel9.Height.ToString() + "\n";
+
+            int x_st = 100;
+            int y_st = 100;
+            g.DrawString(str, f, new SolidBrush(Color.Blue), new PointF(x_st, y_st));
+
+            g.DrawRectangle(Pens.Red, x_st, y_st, tmp_width, tmp_height);
+
+            pictureBox1.Image = bitmap1;
+
+
+
+
+
+
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
+
         private void button10_Click(object sender, EventArgs e)
         {
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button11_Click(object sender, EventArgs e)
         {

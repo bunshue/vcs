@@ -75,7 +75,28 @@ namespace vcs_test_all_04_Font
             richTextBox1.Location = new Point(x_st + dx * 5 + 30, y_st + dy * 9);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1600, 920);
+            x_st = 830;
+            y_st = 720;
+            dx = 100;
+            dy = 40;
+            lb_font0.Location = new Point(x_st + dx * 0, y_st + dy * 0 - 20);
+            lb_font1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            lb_font2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            lb_font3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            lb_font4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            lb_font0.Font = new Font("標楷體", 16.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            lb_font1.Font = new Font("標楷體", 16.75F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0)));
+            lb_font2.Font = new Font("標楷體", 16.75F, FontStyle.Italic, GraphicsUnit.Point, ((byte)(0)));
+            lb_font3.Font = new Font("標楷體", 16.75F, FontStyle.Underline, GraphicsUnit.Point, ((byte)(0)));
+            lb_font4.Font = new Font("標楷體", 16.75F, FontStyle.Strikeout, GraphicsUnit.Point, ((byte)(0)));
+
+            lb_font0.Text = "FontStyle\n0 Regular一般文字";
+            lb_font1.Text = "1 Bold粗體文字";
+            lb_font2.Text = "2 Italic斜體文字";
+            lb_font3.Text = "4 Underline加上底線的文字";
+            lb_font4.Text = "8 Strikeout中間有線條經過的文字";
+
+            this.Size = new Size(1600, 960);
             this.Text = "vcs_test_all_04_Font";
 
             //設定執行後的表單起始位置, 正中央

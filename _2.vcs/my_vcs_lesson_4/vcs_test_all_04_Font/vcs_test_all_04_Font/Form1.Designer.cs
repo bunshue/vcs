@@ -76,6 +76,11 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.listView1 = new System.Windows.Forms.ListView();
             this.bt_show_font = new System.Windows.Forms.Button();
+            this.lb_font0 = new System.Windows.Forms.Label();
+            this.lb_font1 = new System.Windows.Forms.Label();
+            this.lb_font2 = new System.Windows.Forms.Label();
+            this.lb_font4 = new System.Windows.Forms.Label();
+            this.lb_font3 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -396,12 +401,12 @@
             this.richTextBox2.Size = new System.Drawing.Size(219, 304);
             this.richTextBox2.TabIndex = 52;
             this.richTextBox2.Text = "流水落花春去也，天上人間。ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%^" +
-    "&*()-=_+[]\\{}|;\':\",./<>?`~\n\n";
+                "&*()-=_+[]\\{}|;\':\",./<>?`~\n\n";
             // 
             // groupBox3
             // 
-            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox3.Controls.Add(this.chkStrikeout);
             this.groupBox3.Controls.Add(this.chkUnderline);
             this.groupBox3.Controls.Add(this.chkItalic);
@@ -597,11 +602,71 @@
             this.bt_show_font.UseVisualStyleBackColor = true;
             this.bt_show_font.Click += new System.EventHandler(this.bt_show_font_Click);
             // 
+            // lb_font0
+            // 
+            this.lb_font0.AutoSize = true;
+            this.lb_font0.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_font0.ForeColor = System.Drawing.Color.Black;
+            this.lb_font0.Location = new System.Drawing.Point(498, 385);
+            this.lb_font0.Name = "lb_font0";
+            this.lb_font0.Size = new System.Drawing.Size(62, 24);
+            this.lb_font0.TabIndex = 134;
+            this.lb_font0.Text = "font0";
+            // 
+            // lb_font1
+            // 
+            this.lb_font1.AutoSize = true;
+            this.lb_font1.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_font1.ForeColor = System.Drawing.Color.Black;
+            this.lb_font1.Location = new System.Drawing.Point(498, 419);
+            this.lb_font1.Name = "lb_font1";
+            this.lb_font1.Size = new System.Drawing.Size(62, 24);
+            this.lb_font1.TabIndex = 135;
+            this.lb_font1.Text = "font0";
+            // 
+            // lb_font2
+            // 
+            this.lb_font2.AutoSize = true;
+            this.lb_font2.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_font2.ForeColor = System.Drawing.Color.Black;
+            this.lb_font2.Location = new System.Drawing.Point(498, 452);
+            this.lb_font2.Name = "lb_font2";
+            this.lb_font2.Size = new System.Drawing.Size(62, 24);
+            this.lb_font2.TabIndex = 136;
+            this.lb_font2.Text = "font0";
+            // 
+            // lb_font4
+            // 
+            this.lb_font4.AutoSize = true;
+            this.lb_font4.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_font4.ForeColor = System.Drawing.Color.Black;
+            this.lb_font4.Location = new System.Drawing.Point(557, 418);
+            this.lb_font4.Name = "lb_font4";
+            this.lb_font4.Size = new System.Drawing.Size(62, 24);
+            this.lb_font4.TabIndex = 138;
+            this.lb_font4.Text = "font0";
+            // 
+            // lb_font3
+            // 
+            this.lb_font3.AutoSize = true;
+            this.lb_font3.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_font3.ForeColor = System.Drawing.Color.Black;
+            this.lb_font3.Location = new System.Drawing.Point(557, 385);
+            this.lb_font3.Name = "lb_font3";
+            this.lb_font3.Size = new System.Drawing.Size(62, 24);
+            this.lb_font3.TabIndex = 137;
+            this.lb_font3.Text = "font0";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1584, 741);
+            this.Controls.Add(this.lb_font4);
+            this.Controls.Add(this.lb_font3);
+            this.Controls.Add(this.lb_font2);
+            this.Controls.Add(this.lb_font1);
+            this.Controls.Add(this.lb_font0);
             this.Controls.Add(this.groupBox_show_font);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.label7);
@@ -688,6 +753,11 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Button bt_show_font;
+        private System.Windows.Forms.Label lb_font0;
+        private System.Windows.Forms.Label lb_font1;
+        private System.Windows.Forms.Label lb_font2;
+        private System.Windows.Forms.Label lb_font4;
+        private System.Windows.Forms.Label lb_font3;
     }
 }
 

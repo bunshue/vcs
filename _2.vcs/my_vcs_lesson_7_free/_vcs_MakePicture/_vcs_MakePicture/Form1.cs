@@ -49,12 +49,12 @@ namespace _vcs_MakePicture
 
         void show_item_location()
         {
-            int x_st = 850;
+            int x_st = 10;
             int y_st = 10;
             int dx = 65;
             int dy = 65;
 
-            groupBox1.Location = new Point(x_st - 10, y_st);
+            groupBox1.Location = new Point(x_st, y_st);
             groupBox1.ClientSize = new Size(65 * 9 + 12, 80);
 
             x_st = 10;
@@ -71,7 +71,7 @@ namespace _vcs_MakePicture
             bt8.Location = new Point(x_st + dx * 8, y_st + dy * 0);
 
             //button
-            x_st = 850;
+            x_st = 10;
             y_st = 100;
             dx = 64;
             dy = 64;
@@ -174,19 +174,18 @@ namespace _vcs_MakePicture
 
             button9.Text = word;
 
+            x_st = 10;
+            y_st = 10;
             pictureBox1.Size = new Size(800, 600);
-            pictureBox1.Location = new Point(10, 10);
+            pictureBox1.Location = new Point(x_st + dx * 13, y_st + dy * 0);
+            pictureBox1.BackColor = Color.Pink;
 
-            this.Size = new Size(1640, 900);
-            this.Text = "_vcs_MakePicture";
-
-            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 8);
-            richTextBox1.Size = new Size(this.Width - richTextBox1.Location.X - 30, this.Height - richTextBox1.Location.Y - 50);
+            richTextBox1.Size = new Size(800, 240);
+            richTextBox1.Location = new Point(x_st + dx * 13, y_st + dy * 9 + 30);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            //最大化螢幕
-            //this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
-            //this.WindowState = FormWindowState.Maximized;
+            this.Size = new Size(1670, 900);
+            this.Text = "_vcs_MakePicture";
 
             //離開按鈕的寫法
             bt_exit_setup();
