@@ -1527,6 +1527,7 @@ namespace vcs_System1
             this.Text = point.x.ToString() + ", " + point.y.ToString();
         }
 
+        //------------------------------------------------------------  # 60個
 
         //#region Windows 開關機
         [DllImport("user32")]
@@ -1534,28 +1535,6 @@ namespace vcs_System1
 
         [DllImport("user32")]
         public static extern void LockWorkStation();
-
-        // Shutdown.
-        private void btnShutdown_Click(object sender, EventArgs e)
-        {
-            var psi = new ProcessStartInfo("shutdown", "/s /t 0");
-            psi.CreateNoWindow = true;
-            psi.UseShellExecute = false;
-
-            //偽執行
-            //Process.Start(psi);
-        }
-
-        // Reboot.
-        private void btnReboot_Click(object sender, EventArgs e)
-        {
-            var psi = new ProcessStartInfo("shutdown", "/r /t 0");
-            psi.CreateNoWindow = true;
-            psi.UseShellExecute = false;
-
-            //偽執行
-            //Process.Start(psi);
-        }
 
         // Log off.
         private void btnLogOff_Click(object sender, EventArgs e)

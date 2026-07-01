@@ -142,7 +142,6 @@
             this.bt_file09.Name = "bt_file09";
             this.bt_file09.Size = new System.Drawing.Size(200, 60);
             this.bt_file09.TabIndex = 53;
-            this.bt_file09.Text = "取得檔案建立時間";
             this.bt_file09.UseVisualStyleBackColor = true;
             this.bt_file09.Click += new System.EventHandler(this.bt_file09_Click);
             // 

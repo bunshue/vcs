@@ -356,6 +356,7 @@
             this.bt_class22.Name = "bt_class22";
             this.bt_class22.Size = new System.Drawing.Size(193, 60);
             this.bt_class22.TabIndex = 24;
+            this.bt_class22.Text = "ImageInfo";
             this.bt_class22.UseVisualStyleBackColor = true;
             this.bt_class22.Click += new System.EventHandler(this.bt_class22_Click);
             // 
@@ -471,6 +472,7 @@
             this.bt_class10.Name = "bt_class10";
             this.bt_class10.Size = new System.Drawing.Size(193, 60);
             this.bt_class10.TabIndex = 12;
+            this.bt_class10.Text = "new 1";
             this.bt_class10.UseVisualStyleBackColor = true;
             this.bt_class10.Click += new System.EventHandler(this.bt_class10_Click);
             // 

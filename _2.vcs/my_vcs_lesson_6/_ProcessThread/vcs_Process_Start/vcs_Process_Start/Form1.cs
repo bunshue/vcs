@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;
 using System.Diagnostics;       //for Process
 using System.Runtime.InteropServices;   //for DllImport
 
@@ -86,17 +87,17 @@ namespace vcs_Process_Start
             int y_st = 10;
             int dx = W + 10;
             int dy = H + 10;
-            groupBox5.Size = new Size(W, H);
+            groupBox5.Size = new Size(W*2+10, H);
             groupBox6.Size = new Size(W, 200 - 40);
             groupBox5.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            groupBox6.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            groupBox6.Location = new Point(x_st + dx * 2, y_st + dy * 0);
 
             richTextBox1.Size = new Size(500, 690);
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             y_st = 20;
-            dx = 180 + 10;
+            dx = 190 + 10;
             dy = 60 + 10;
             button20.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button21.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -106,9 +107,23 @@ namespace vcs_Process_Start
             button25.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             button26.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             button27.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button0.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 1, y_st + dy * 7);
 
+            y_st = 20;
+            dx = 180 + 10;
+            dy = 60 + 10;
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+
+
+
 
             this.Size = new Size(1400, 750);
             this.Text = "vcs_Process_Start";
@@ -314,16 +329,32 @@ namespace vcs_Process_Start
             {
                 Console.WriteLine(ex.Message);
             }
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button26_Click(object sender, EventArgs e)
         {
+            // Shutdown
+            var psi = new ProcessStartInfo("shutdown", "/s /t 0");
+            psi.CreateNoWindow = true;
+            psi.UseShellExecute = false;
+
+            //偽執行
+            //Process.Start(psi);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button27_Click(object sender, EventArgs e)
         {
+            // Reboot
+            var psi = new ProcessStartInfo("shutdown", "/r /t 0");
+            psi.CreateNoWindow = true;
+            psi.UseShellExecute = false;
 
+            //偽執行
+            //Process.Start(psi);
         }
 
         //------------------------------------------------------------  # 60個
@@ -361,6 +392,178 @@ namespace vcs_Process_Start
             //string sPath = Environment.GetEnvironmentVariable("windir");//獲取系統變量 windir(windows)    
             //InsertWindow insertwin = new InsertWindow(panel1, exe_filename + " " + filename);
             InsertWindow insertwin = new InsertWindow(panel1, exe_filename);
+        }
+
+        //6060
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+            //ProcessStartInfo
+            //Process
+
+            /* 創建一個進程，並為進程傳入需要的參數
+             * 或者說是啟動一個外部程序，並為其傳入參數
+             * 等待退出或者強制關閉
+             */
+
+            //啟動一個外部程序
+            //聲明一個程序信息類，指定啟動進程是的參數信息
+
+            ProcessStartInfo psi1 = new ProcessStartInfo();
+            //設置外部程序名
+            psi1.FileName = "notepad.exe";
+            //設置外部程序的啟動參數（命令行參數）為test.txt                   
+            psi1.Arguments = "test.txt";
+            //設置外部程序工作目錄為  D:\                   
+            psi1.WorkingDirectory = "D:\\";
+            //聲明一個程序類,也就是創建一個進程
+
+            Process process;
+            try
+            {
+                process = Process.Start(psi1);  // 啟動外部程序
+            }
+            catch (System.ComponentModel.Win32Exception ex)
+            {
+                richTextBox1.Text += "系統找不到指定的程序文件。\t" + ex + "\n";
+                return;
+            }
+
+            richTextBox1.Text += "外部程序的開始執行時間 : " + process.StartTime + "\n";
+
+            process.WaitForExit(3000);  // 等待3秒鐘
+
+            //如果這個外部程序沒有結束運行則對其強行終止                   
+            if (process.HasExited == false)
+            {
+                richTextBox1.Text += "由主程序強行終止外部程序的運行！\n";
+                process.Kill();  // 指名刪除這個process
+            }
+            else
+            {
+                richTextBox1.Text += "由外部程序正常退出！\n";
+            }
+            richTextBox1.Text += "外部程序的結束運行時間 : " + process.ExitTime + "\n";
+            richTextBox1.Text += "外部程序在結束運行時的返回值 : " + process.ExitCode + "\n";
+
+            richTextBox1.Text += "退出碼 : " + process.ExitCode.ToString() + "\n";
+            richTextBox1.Text += "退出時間 : " + process.ExitTime + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            //用WordPad編輯rtf檔
+            // Allow the user to edit the file with WordPad.
+
+            string rtf_filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_rtf\text.rtf";
+
+            // Hide.
+            this.ShowInTaskbar = false;
+            this.Hide();
+
+            // We will open rtf_filename with wordpad.exe.
+            ProcessStartInfo psi2 = new ProcessStartInfo("wordpad.exe", rtf_filename);
+            psi2.WindowStyle = ProcessWindowStyle.Maximized;
+
+            // Open wordpad.
+            process = new Process();
+            process.StartInfo = psi2;
+            process.Start();  // 啟動程式
+
+            // Wait for wordpad to finish.
+            process.WaitForExit();  // 會等到這個程式結束為止
+
+            // Unhide.
+            this.ShowInTaskbar = true;
+            this.Show();
+
+            //------------------------------------------------------------  # 60個
+
+            string fileName = @"D:\_git\vcs\_1.data\______test_files1\__RW\_word\bmp_format.docx";
+            ProcessStartInfo psi3 = new ProcessStartInfo(fileName);
+
+            if (File.Exists(fileName))
+            {
+                foreach (String verb in psi3.Verbs)
+                {
+                    richTextBox1.Text += "取得 Verb : " + verb + "\n";
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "檔案不存在\n";
+            }
+
+            //------------------------------------------------------------  # 60個
+
+            //在局域網內發送訊息
+            //NG
+            // send message to another computer
+            // 在局域網內發送訊息
+            // NG
+
+            string strIP = "192.168.1.106";
+            string strInfo = "send message to another computer";
+
+            ProcessStartInfo psi4 = new ProcessStartInfo();
+            psi4.FileName = @"cmd.exe";
+            psi4.Arguments = @"/c net send " + strIP + " " + strInfo + "";
+            psi4.WindowStyle = ProcessWindowStyle.Hidden;
+            Process.Start(psi4);  // 啟動外部程序
+
+            richTextBox1.Text += "done\n";
+
+            //------------------------------------------------------------  # 60個
+
+            //指定應用程式路徑
+            string target = @"C:\Program Files\DAUM\PotPlayer\PotPlayerMini.exe";
+            string all_filename = "aaaaaaaaaaaaaaa";
+            ProcessStartInfo psi5 = new ProcessStartInfo(target);
+            psi5.Arguments = all_filename;
+
+            richTextBox1.Text += "target : " + target + "\n";
+            richTextBox1.Text += "all_filename : " + all_filename + "\n";
+            /*
+            Process process = new Process();
+            process.StartInfo = psi5;
+            process.Start();  // 啟動程式
+            */
+            //------------------------------------------------------------  # 60個
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
         }
 
         //------------------------------------------------------------  # 60個

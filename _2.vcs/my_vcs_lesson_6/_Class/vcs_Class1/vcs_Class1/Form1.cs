@@ -531,13 +531,11 @@ namespace vcs_Class1
 
             pictureBox2.Image = bitmap1;
 
-
             //------------------------------------------------------------  # 60個
 
             //使用預設參數
             Circle2 circle3 = new Circle2();
             richTextBox1.Text += "circle3 info : " + circle3.ToString() + "\n";
-
         }
 
         //------------------------------------------------------------  # 60個
@@ -751,8 +749,34 @@ namespace vcs_Class1
 
         //------------------------------------------------------------  # 60個
 
+        public class Classmate  //事件訂閱者
+        {
+            private string name;
+
+            public Classmate(string Name)
+            {
+                name = Name;
+            }
+
+            public void SendResponse()  //事件處理函數，要與自定義委托類型匹配
+            {
+                Console.WriteLine("來自：" + this.name + "的回復: 已經收到邀請，隨時可以開始！");
+            }
+        }
+
         private void bt_class10_Click(object sender, EventArgs e)
         {
+            //Class 範例 0
+            Classmate classmate1 = new Classmate("Alice");
+            Classmate classmate2 = new Classmate("Banana");
+            Classmate classmate3 = new Classmate("Cherry");
+            Classmate classmate4 = new Classmate("Daisy");
+
+            classmate1.SendResponse();
+            classmate2.SendResponse();
+            classmate3.SendResponse();
+            classmate4.SendResponse();
+
         }
 
         //------------------------------------------------------------  # 60個
@@ -1326,9 +1350,65 @@ namespace vcs_Class1
 
         //------------------------------------------------------------  # 60個
 
+        public class ImageInfo
+        {
+            private string image_path;
+            private int image_width;
+            private int image_height;
+
+            public string ImagePath
+            {
+                get { return image_path; }
+                set { image_path = value; }
+            }
+
+            public int ImageWidth
+            {
+                get { return image_width; }
+                set { image_width = value; }
+            }
+
+            public int ImageHeight
+            {
+                get { return image_height; }
+                set { image_height = value; }
+            }
+
+            public ImageInfo(string ImagePath, int ImageWidth, int ImageHeight)
+            {
+                this.ImagePath = ImagePath;
+                this.ImageWidth = ImageWidth;
+                this.ImageHeight = ImageHeight;
+            }
+
+            public Bitmap GetBitmap()
+            {
+                //WebPageBitmap Shot = new WebPageBitmap(this.ImagePath, this.ImageWidth, this.ImageHeight);
+                //Shot.GetIt();
+                //Bitmap Pic = Shot.DrawBitmap(this.ImageHeight, this.ImageWidth);
+                //return Pic;
+                return null;
+            }
+        }
+
         private void bt_class22_Click(object sender, EventArgs e)
         {
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            string filename3 = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
 
+            //ImageInfo
+            List<ImageInfo> Images = new List<ImageInfo>();
+
+            /*
+            ImageInfo image1 = new ImageInfo(filename1);
+            ImageInfo image2 = new ImageInfo(filename2);
+            ImageInfo image3 = new ImageInfo(filename3);
+
+            Images.Add(image1);
+            Images.Add(image2);
+            Images.Add(image3);
+            */
         }
 
         //------------------------------------------------------------  # 60個

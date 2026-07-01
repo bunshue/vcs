@@ -67,8 +67,6 @@
             this.btnHibernate = new System.Windows.Forms.Button();
             this.btnLock = new System.Windows.Forms.Button();
             this.btnLogOff = new System.Windows.Forms.Button();
-            this.btnReboot = new System.Windows.Forms.Button();
-            this.btnShutdown = new System.Windows.Forms.Button();
             this.button30 = new System.Windows.Forms.Button();
             this.button31 = new System.Windows.Forms.Button();
             this.button32 = new System.Windows.Forms.Button();
@@ -442,8 +440,6 @@
             this.groupBox1.Controls.Add(this.btnHibernate);
             this.groupBox1.Controls.Add(this.btnLock);
             this.groupBox1.Controls.Add(this.btnLogOff);
-            this.groupBox1.Controls.Add(this.btnReboot);
-            this.groupBox1.Controls.Add(this.btnShutdown);
             this.groupBox1.Location = new System.Drawing.Point(1034, 6);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(191, 151);
@@ -453,9 +449,9 @@
             // 
             // btnSleep
             // 
-            this.btnSleep.Location = new System.Drawing.Point(98, 103);
+            this.btnSleep.Location = new System.Drawing.Point(98, 87);
             this.btnSleep.Name = "btnSleep";
-            this.btnSleep.Size = new System.Drawing.Size(80, 35);
+            this.btnSleep.Size = new System.Drawing.Size(80, 45);
             this.btnSleep.TabIndex = 11;
             this.btnSleep.Text = "Sleep";
             this.btnSleep.UseVisualStyleBackColor = true;
@@ -463,9 +459,9 @@
             // 
             // btnHibernate
             // 
-            this.btnHibernate.Location = new System.Drawing.Point(12, 103);
+            this.btnHibernate.Location = new System.Drawing.Point(12, 87);
             this.btnHibernate.Name = "btnHibernate";
-            this.btnHibernate.Size = new System.Drawing.Size(80, 35);
+            this.btnHibernate.Size = new System.Drawing.Size(80, 45);
             this.btnHibernate.TabIndex = 10;
             this.btnHibernate.Text = "Hibernate";
             this.btnHibernate.UseVisualStyleBackColor = true;
@@ -473,9 +469,9 @@
             // 
             // btnLock
             // 
-            this.btnLock.Location = new System.Drawing.Point(98, 62);
+            this.btnLock.Location = new System.Drawing.Point(98, 30);
             this.btnLock.Name = "btnLock";
-            this.btnLock.Size = new System.Drawing.Size(80, 35);
+            this.btnLock.Size = new System.Drawing.Size(80, 45);
             this.btnLock.TabIndex = 9;
             this.btnLock.Text = "Lock";
             this.btnLock.UseVisualStyleBackColor = true;
@@ -483,33 +479,13 @@
             // 
             // btnLogOff
             // 
-            this.btnLogOff.Location = new System.Drawing.Point(12, 62);
+            this.btnLogOff.Location = new System.Drawing.Point(12, 30);
             this.btnLogOff.Name = "btnLogOff";
-            this.btnLogOff.Size = new System.Drawing.Size(80, 35);
+            this.btnLogOff.Size = new System.Drawing.Size(80, 45);
             this.btnLogOff.TabIndex = 8;
             this.btnLogOff.Text = "Log Off";
             this.btnLogOff.UseVisualStyleBackColor = true;
             this.btnLogOff.Click += new System.EventHandler(this.btnLogOff_Click);
-            // 
-            // btnReboot
-            // 
-            this.btnReboot.Location = new System.Drawing.Point(98, 21);
-            this.btnReboot.Name = "btnReboot";
-            this.btnReboot.Size = new System.Drawing.Size(80, 35);
-            this.btnReboot.TabIndex = 7;
-            this.btnReboot.Text = "Reboot";
-            this.btnReboot.UseVisualStyleBackColor = true;
-            this.btnReboot.Click += new System.EventHandler(this.btnReboot_Click);
-            // 
-            // btnShutdown
-            // 
-            this.btnShutdown.Location = new System.Drawing.Point(12, 21);
-            this.btnShutdown.Name = "btnShutdown";
-            this.btnShutdown.Size = new System.Drawing.Size(80, 35);
-            this.btnShutdown.TabIndex = 6;
-            this.btnShutdown.Text = "Shutdown";
-            this.btnShutdown.UseVisualStyleBackColor = true;
-            this.btnShutdown.Click += new System.EventHandler(this.btnShutdown_Click);
             // 
             // button30
             // 
@@ -829,8 +805,6 @@
         private System.Windows.Forms.Button btnHibernate;
         private System.Windows.Forms.Button btnLock;
         private System.Windows.Forms.Button btnLogOff;
-        private System.Windows.Forms.Button btnReboot;
-        private System.Windows.Forms.Button btnShutdown;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button button30;
         private System.Windows.Forms.Button button31;

@@ -42,6 +42,14 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button0 = new System.Windows.Forms.Button();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.SuspendLayout();
@@ -49,9 +57,9 @@
             // button20
             // 
             this.button20.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button20.Location = new System.Drawing.Point(15, 23);
+            this.button20.Location = new System.Drawing.Point(10, 23);
             this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(180, 60);
+            this.button20.Size = new System.Drawing.Size(190, 60);
             this.button20.TabIndex = 19;
             this.button20.Text = "ProcessStartInfo 0";
             this.button20.UseVisualStyleBackColor = true;
@@ -60,9 +68,9 @@
             // button21
             // 
             this.button21.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button21.Location = new System.Drawing.Point(15, 86);
+            this.button21.Location = new System.Drawing.Point(10, 86);
             this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(180, 60);
+            this.button21.Size = new System.Drawing.Size(190, 60);
             this.button21.TabIndex = 18;
             this.button21.Text = "ProcessStartInfo 1";
             this.button21.UseVisualStyleBackColor = true;
@@ -71,9 +79,9 @@
             // button22
             // 
             this.button22.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button22.Location = new System.Drawing.Point(15, 149);
+            this.button22.Location = new System.Drawing.Point(10, 149);
             this.button22.Name = "button22";
-            this.button22.Size = new System.Drawing.Size(180, 60);
+            this.button22.Size = new System.Drawing.Size(190, 60);
             this.button22.TabIndex = 17;
             this.button22.Text = "ProcessStartInfo 2";
             this.button22.UseVisualStyleBackColor = true;
@@ -82,9 +90,9 @@
             // button23
             // 
             this.button23.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button23.Location = new System.Drawing.Point(15, 210);
+            this.button23.Location = new System.Drawing.Point(10, 210);
             this.button23.Name = "button23";
-            this.button23.Size = new System.Drawing.Size(180, 60);
+            this.button23.Size = new System.Drawing.Size(190, 60);
             this.button23.TabIndex = 16;
             this.button23.Text = "ProcessStartInfo 3";
             this.button23.UseVisualStyleBackColor = true;
@@ -93,9 +101,9 @@
             // button24
             // 
             this.button24.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button24.Location = new System.Drawing.Point(15, 272);
+            this.button24.Location = new System.Drawing.Point(10, 272);
             this.button24.Name = "button24";
-            this.button24.Size = new System.Drawing.Size(180, 60);
+            this.button24.Size = new System.Drawing.Size(190, 60);
             this.button24.TabIndex = 15;
             this.button24.Text = "ProcessStartInfo 4";
             this.button24.UseVisualStyleBackColor = true;
@@ -104,9 +112,9 @@
             // button25
             // 
             this.button25.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button25.Location = new System.Drawing.Point(15, 337);
+            this.button25.Location = new System.Drawing.Point(10, 337);
             this.button25.Name = "button25";
-            this.button25.Size = new System.Drawing.Size(180, 60);
+            this.button25.Size = new System.Drawing.Size(190, 60);
             this.button25.TabIndex = 14;
             this.button25.Text = "ProcessStartInfo 5";
             this.button25.UseVisualStyleBackColor = true;
@@ -115,27 +123,29 @@
             // button26
             // 
             this.button26.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button26.Location = new System.Drawing.Point(15, 404);
+            this.button26.Location = new System.Drawing.Point(10, 404);
             this.button26.Name = "button26";
-            this.button26.Size = new System.Drawing.Size(180, 60);
+            this.button26.Size = new System.Drawing.Size(190, 60);
             this.button26.TabIndex = 13;
+            this.button26.Text = "Shutdown";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
             // button27
             // 
             this.button27.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button27.Location = new System.Drawing.Point(15, 467);
+            this.button27.Location = new System.Drawing.Point(10, 467);
             this.button27.Name = "button27";
-            this.button27.Size = new System.Drawing.Size(180, 60);
+            this.button27.Size = new System.Drawing.Size(190, 60);
             this.button27.TabIndex = 12;
+            this.button27.Text = "Reboot";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(434, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(709, 12);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 2;
@@ -143,6 +153,14 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.button0);
+            this.groupBox5.Controls.Add(this.button7);
+            this.groupBox5.Controls.Add(this.button6);
+            this.groupBox5.Controls.Add(this.button5);
+            this.groupBox5.Controls.Add(this.button4);
+            this.groupBox5.Controls.Add(this.button3);
+            this.groupBox5.Controls.Add(this.button2);
+            this.groupBox5.Controls.Add(this.button1);
             this.groupBox5.Controls.Add(this.button20);
             this.groupBox5.Controls.Add(this.button21);
             this.groupBox5.Controls.Add(this.button22);
@@ -153,7 +171,7 @@
             this.groupBox5.Controls.Add(this.button27);
             this.groupBox5.Location = new System.Drawing.Point(12, 12);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(200, 600);
+            this.groupBox5.Size = new System.Drawing.Size(453, 600);
             this.groupBox5.TabIndex = 5;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "使用ProcessStartInfo";
@@ -161,7 +179,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(453, 49);
+            this.bt_clear.Location = new System.Drawing.Point(728, 49);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 108;
@@ -173,7 +191,7 @@
             // 
             this.groupBox6.Controls.Add(this.button8);
             this.groupBox6.Controls.Add(this.button9);
-            this.groupBox6.Location = new System.Drawing.Point(228, 12);
+            this.groupBox6.Location = new System.Drawing.Point(503, 12);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(200, 200);
             this.groupBox6.TabIndex = 20;
@@ -202,11 +220,99 @@
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button1.Location = new System.Drawing.Point(206, 86);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(190, 60);
+            this.button1.TabIndex = 20;
+            this.button1.Text = "ProcessStartInfo 1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button2.Location = new System.Drawing.Point(206, 149);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(190, 60);
+            this.button2.TabIndex = 21;
+            this.button2.Text = "ProcessStartInfo 2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button3.Location = new System.Drawing.Point(206, 212);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(190, 60);
+            this.button3.TabIndex = 22;
+            this.button3.Text = "ProcessStartInfo 3";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button4
+            // 
+            this.button4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button4.Location = new System.Drawing.Point(206, 273);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(190, 60);
+            this.button4.TabIndex = 23;
+            this.button4.Text = "ProcessStartInfo 4";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button5
+            // 
+            this.button5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button5.Location = new System.Drawing.Point(206, 335);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(190, 60);
+            this.button5.TabIndex = 24;
+            this.button5.Text = "ProcessStartInfo 5";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button6
+            // 
+            this.button6.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button6.Location = new System.Drawing.Point(206, 400);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(190, 60);
+            this.button6.TabIndex = 25;
+            this.button6.Text = "ProcessStartInfo 6";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button7
+            // 
+            this.button7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button7.Location = new System.Drawing.Point(206, 467);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(190, 60);
+            this.button7.TabIndex = 26;
+            this.button7.Text = "ProcessStartInfo 7";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button0
+            // 
+            this.button0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button0.Location = new System.Drawing.Point(206, 23);
+            this.button0.Name = "button0";
+            this.button0.Size = new System.Drawing.Size(190, 60);
+            this.button0.TabIndex = 27;
+            this.button0.Text = "ProcessStartInfo 0";
+            this.button0.UseVisualStyleBackColor = true;
+            this.button0.Click += new System.EventHandler(this.button0_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(685, 681);
+            this.ClientSize = new System.Drawing.Size(851, 681);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.groupBox5);
@@ -236,6 +342,14 @@
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button button0;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
     }
 }
 
