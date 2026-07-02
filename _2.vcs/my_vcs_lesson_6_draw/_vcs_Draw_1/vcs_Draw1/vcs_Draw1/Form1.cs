@@ -815,7 +815,27 @@ namespace vcs_Draw1
                 R[i] = new Rectangle(x_st + i * 10, y_st + i * 5, i * 30, i * 15);
             }
             g.DrawRectangles(new Pen(Brushes.Red, 2), R);
+
+
+            //一次畫一群長方形
+            int hwidth = 50;
+            int x_center = 150;
+            int y_center = 400;
+            //Pen pen = new Pen(Pens.Red);
+            Pen pen = new Pen(Color.Blue, 1);
+            Rectangle[] R1 = new Rectangle[25];
+            for (int i = 0; i <= 24; i++)
+            {
+                R1[i] = new Rectangle(x_center - hwidth, y_center - hwidth, 2 * hwidth, 2 * hwidth);
+                y_center += 4;
+                hwidth += 2;
+            }
+            g.DrawRectangles(pen, R1);
+
+            //pictureBox1.Image = bitmap1;
         }
+
+        //6060
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -1277,7 +1297,55 @@ namespace vcs_Draw1
 
         private void button9_Click(object sender, EventArgs e)
         {
+            //亂畫一通
+            Graphics g = pictureBox1.CreateGraphics();
+
+            //畫箭頭
+            Pen myPen2 = new Pen(Color.Blue, 20);
+            myPen2.EndCap = LineCap.ArrowAnchor;
+            g.DrawLine(myPen2, 20, 100, 300, 100); // 繪製箭形直線
+
+            //畫字串畫直的
+            StringFormat drawFormat = new StringFormat();
+            drawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
+            g.DrawString("畫字串畫直的", this.Font, new SolidBrush(Color.Black), 300, 100, drawFormat);
+
+            g.DrawRectangle(Pens.Red, 100, 100, 200, 200);
+
+            //c#畫三角形、並填充顏色
+            //目前知道有兩種方法：畫多邊形、GraphicsPath。但是用畫多邊形的方式畫三角形不太好。老畫不正的，截圖放大就明顯了。
+
+            Point point1 = new Point(0, 0);
+            Point point2 = new Point(110, 0);
+            Point point3 = new Point(50, 80);
+            Point[] pntArr = { point1, point2, point3 };
+
+            g.FillPolygon(Brushes.Red, pntArr);
+
+            //6060
+
+            PaintImage(g);
         }
+
+        private void PaintImage(Graphics g)
+        {
+            //绘图
+            GraphicsPath path = new GraphicsPath(new Point[]{ new Point(100,60),new Point(350,200),new Point(105,225),new Point(190,ClientRectangle.Bottom),
+                new Point(50,ClientRectangle.Bottom),new Point(50,180)}, new byte[]{
+                    (byte)PathPointType.Start,
+                    (byte)PathPointType.Bezier,
+                    (byte)PathPointType.Bezier,
+                    (byte)PathPointType.Bezier,
+                    (byte)PathPointType.Line,
+                    (byte)PathPointType.Line});
+            PathGradientBrush pgb = new PathGradientBrush(path);
+            pgb.SurroundColors = new Color[] { Color.Green, Color.Yellow, Color.Red, Color.Blue, Color.Orange, Color.LightBlue };
+            g.FillPath(pgb, path);
+            g.DrawBeziers(new Pen(new SolidBrush(Color.Green), 2), new Point[] { new Point(220, 100), new Point(250, 180), new Point(300, 70), new Point(350, 150) });
+            g.DrawArc(new Pen(new SolidBrush(Color.Blue), 5), new Rectangle(new Point(250, 170), new Size(60, 60)), 0, 235);
+        }
+
+        //6060
 
         private void button10_Click(object sender, EventArgs e)
         {

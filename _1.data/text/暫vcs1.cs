@@ -1,4 +1,9 @@
-﻿            //取得副檔名
+﻿
+//                    // 顯示檔名（不含副檔名）
+//                    string name = Path.GetFileNameWithoutExtension(files[i]);
+
+
+            //取得副檔名
                         FileInfo file_info = new FileInfo(sfdImage.FileName);
                         switch (file_info.Extension)
 

@@ -393,264 +393,53 @@ namespace vcs_Mix03_draw_image
         {
             show_button_text(sender);
 
-            //Font drawFont4 = new Font("Arial", 4, FontStyle.Bold, GraphicsUnit.Millimeter);
+            string str = "天階夜色涼如水";
 
-            Font f = new Font("標楷體", 60, GraphicsUnit.Point);
-            int tmp_width = 0;
-            int tmp_height = 0;
-            string str = "驗證中驗證中";
+            Font f = new Font("標楷體", 48, GraphicsUnit.Point);  // 預設為 Point
+            int W = g.MeasureString(str, f).ToSize().Width;
+            int H = g.MeasureString(str, f).ToSize().Height;
+            richTextBox1.Text += "GraphicsUnit : " + f.Unit.ToString() + "\n";
+            richTextBox1.Text += "W = " + W.ToString() + "  H = " + H.ToString() + "\n";
 
-            tmp_width = g.MeasureString(str, f).ToSize().Width;
-            tmp_height = g.MeasureString(str, f).ToSize().Height;
-
-            richTextBox1.Text += "tmp_width = " + tmp_width.ToString() + "  tmp_height = " + tmp_height.ToString() + "\n";
-            //richTextBox1.Text += "W = " + panel9.Width.ToString() + "  H = " + panel9.Height.ToString() + "\n";
-
-            int x_st = 100;
-            int y_st = 100;
+            int x_st = 50;
+            int y_st = 50;
             g.DrawString(str, f, new SolidBrush(Color.Blue), new PointF(x_st, y_st));
-
-            g.DrawRectangle(Pens.Red, x_st, y_st, tmp_width, tmp_height);
+            g.DrawRectangle(Pens.Red, x_st, y_st, W, H);
 
             pictureBox1.Image = bitmap1;
-
-
-
-
-
-
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button10_Click(object sender, EventArgs e)
         {
-            //合併圖
-
-            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_animals\z01.jpg";
-            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_animals\z02.jpg";
-            string filename3 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_animals\z03.jpg";
-            string filename4 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_animals\z04.jpg";
-            string filename5 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_animals\z05.jpg";
-            string filename6 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_animals\z06.jpg";
-            string filename7 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_animals\z07.jpg";
-            string filename8 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_animals\z08.jpg";
-            string filename9 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_animals\z09.jpg";
-            string filename10 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_animals\z10.jpg";
-            string filename11 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_animals\z11.jpg";
-            string filename12 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_animals\z12.jpg";
-
-            // 假設有公司 logo 與名稱
-            //string[] logos = { "samsung.png", "google.png", "apple.png" };
-            //string[] names = { "Samsung 三星", "Google 谷歌", "Apple 蘋果" };
-
-            string[] names = { "鼠", "牛", "虎", "兔", "龍", "蛇", "馬", "羊", "猴", "雞", "狗", "豬" };
-
-            //string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_animals"; // logo 圖片所在資料夾
-            //string[] files = Directory.GetFiles(foldername, "*.png");
-            string[] files = {
-                                 filename1, filename2, filename3, filename4,
-                                 filename5, filename6, filename7, filename8,
-                                 filename9, filename10, filename11, filename12
-                             };
-
-            int cols = 4;
-            int rows = (int)Math.Ceiling(files.Length / (double)cols);
-            int cellWidth = 200, cellHeight = 150;
-            int width = cols * cellWidth;
-            int height = rows * cellHeight;
-
-            using (Bitmap bmp = new Bitmap(width, height))
-            using (Graphics g = Graphics.FromImage(bmp))
-            {
-                g.Clear(Color.White);
-                g.SmoothingMode = SmoothingMode.AntiAlias;
-                Font font = new Font("Segoe UI", 16, FontStyle.Bold);
-                StringFormat sf = new StringFormat { Alignment = StringAlignment.Center };
-
-                for (int i = 0; i < files.Length; i++)
-                {
-                    int col = i % cols;
-                    int row = i / cols;
-                    int x = col * cellWidth;
-                    int y = row * cellHeight;
-
-                    // 背景格
-                    using (Brush b = new SolidBrush(Color.FromArgb(240, 240, 240)))
-                        g.FillRoundedRectangle(b, new Rectangle(x + 10, y + 10, cellWidth - 20, cellHeight - 20), 20);
-
-                    // 載入 logo
-                    using (Image logo = Image.FromFile(files[i]))
-                    {
-                        g.DrawImage(logo, x + 30, y + 20, 140, 80);
-                    }
-
-                    // 顯示檔名（不含副檔名）
-                    //string name = Path.GetFileNameWithoutExtension(files[i]);
-                    g.DrawString(names[i], font, Brushes.Black, new RectangleF(x, y + cellHeight - 40, cellWidth, 40), sf);
-                }
-
-                bmp.Save("tmp_組合圖.png");
-            }
         }
-
-        /*
-        static GraphicsPath RoundedRect(Rectangle bounds, int radius)
-        {
-            GraphicsPath path = new GraphicsPath();
-            int d = radius * 2;
-            path.AddArc(bounds.X, bounds.Y, d, d, 180, 90);
-            path.AddArc(bounds.Right - d, bounds.Y, d, d, 270, 90);
-            path.AddArc(bounds.Right - d, bounds.Bottom - d, d, d, 0, 90);
-            path.AddArc(bounds.X, bounds.Bottom - d, d, d, 90, 90);
-            path.CloseFigure();
-            return path;
-        }
-        */
 
         //------------------------------------------------------------  # 60個
 
         private void button11_Click(object sender, EventArgs e)
         {
-            //亂畫一通
-            Graphics g = pictureBox1.CreateGraphics();
-
-            //畫箭頭
-            Pen myPen2 = new Pen(Color.Blue, 20);
-            myPen2.EndCap = LineCap.ArrowAnchor;
-            g.DrawLine(myPen2, 20, 100, 300, 100); // 繪製箭形直線
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            StringFormat drawFormat = new StringFormat();
-            drawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
-            g.DrawString("畫字串畫直的", this.Font, new SolidBrush(Color.Black), 300, 100, drawFormat);
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            Pen p = new Pen(Color.Red);  // 建立一支紅色的筆
-
-            g.DrawEllipse(p, 90, 30, 90, 90);      // 畫圓
-            g.DrawLine(p, 90, 50, 180, 100);       // 畫線
-            g.DrawArc(p, 90, 30, 90, 90, 0, 250);  // 畫弧形
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //從pictureBox開始畫圖
-
-            //Graphics g = pictureBox1.CreateGraphics();				//實例化pictureBox1控件的Graphics類
-
-            //g.Clear(Color.White);
-
-            g.DrawRectangle(Pens.Red, 0, 0, 440, 256);
-
-            Point[] curvePoints = new Point[220];    //一維陣列內有 8 個Point
-
-            int i;
-            for (i = 0; i < 220; i++)
-            {
-                curvePoints[i].X = i * 2;
-                curvePoints[i].Y = i * 2;
-            }
-
-            // Draw lines between original points to screen.
-            g.DrawLines(Pens.Red, curvePoints);   //畫直線
-            // Draw curve to screen.
-            //gc.DrawCurve(redPen, curvePoints); //畫曲線
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button12_Click(object sender, EventArgs e)
         {
-            //載入資料夾下的所有圖檔，垂直合併成一圖
-
-            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_scenery";
-            string[] files = Directory.GetFiles(foldername, "*.jpg");
-
-            richTextBox1.Text += "共找到 : " + files.Length.ToString() + " 個檔案\n";
-
-            int N = files.Length;
-
-            int cellWidth = 200;
-            int cellHeight = 150;
-            int width = cellWidth * 1;
-            int height = cellHeight * N;
-
-            using (Bitmap bmp = new Bitmap(width, height))
-            using (Graphics g = Graphics.FromImage(bmp))
-            {
-                g.Clear(Color.White);
-                g.SmoothingMode = SmoothingMode.AntiAlias;
-                Font font = new Font("Segoe UI", 16, FontStyle.Bold);
-                StringFormat sf = new StringFormat { Alignment = StringAlignment.Center };
-
-                for (int i = 0; i < files.Length; i++)
-                {
-                    int row = i;
-                    int x = 0;
-                    int y = row * cellHeight;
-
-                    using (Image logo = Image.FromFile(files[i]))
-                    {
-                        //g.DrawImage(logo, x + 30, y + 20, 140, 80);
-                        g.DrawImage(logo, x, y, cellWidth, cellHeight);
-                    }
-                }
-                bmp.Save("tmp_組合圖.png");
-            }
         }
 
         //------------------------------------------------------------  # 60個
 
-        private void PaintImage(Graphics g)
-        {
-            //绘图
-            GraphicsPath path = new GraphicsPath(new Point[]{ new Point(100,60),new Point(350,200),new Point(105,225),new Point(190,ClientRectangle.Bottom),
-                new Point(50,ClientRectangle.Bottom),new Point(50,180)}, new byte[]{
-                    (byte)PathPointType.Start,
-                    (byte)PathPointType.Bezier,
-                    (byte)PathPointType.Bezier,
-                    (byte)PathPointType.Bezier,
-                    (byte)PathPointType.Line,
-                    (byte)PathPointType.Line});
-            PathGradientBrush pgb = new PathGradientBrush(path);
-            pgb.SurroundColors = new Color[] { Color.Green, Color.Yellow, Color.Red, Color.Blue, Color.Orange, Color.LightBlue };
-            g.FillPath(pgb, path);
-            g.DrawString("明日科技欢迎您", new Font("宋体", 18, FontStyle.Bold), new SolidBrush(Color.Red), new PointF(110, 20));
-            g.DrawBeziers(new Pen(new SolidBrush(Color.Green), 2), new Point[] { new Point(220, 100), new Point(250, 180), new Point(300, 70), new Point(350, 150) });
-            g.DrawArc(new Pen(new SolidBrush(Color.Blue), 5), new Rectangle(new Point(250, 170), new Size(60, 60)), 0, 360);
-            g.DrawRectangle(new Pen(new SolidBrush(Color.Orange), 3), new Rectangle(new Point(240, 260), new Size(90, 50)));
-        }
-
         private void button13_Click(object sender, EventArgs e)
         {
-            //畫圖 mix
-            Bitmap localBitmap = new Bitmap(this.pictureBox1.Width, this.pictureBox1.Height);
-            //创建位图实例
-            Graphics bitmapGraphics = Graphics.FromImage(localBitmap);
-            bitmapGraphics.Clear(BackColor);
-            bitmapGraphics.SmoothingMode = SmoothingMode.AntiAlias;
-            PaintImage(bitmapGraphics);
-            Graphics g = Graphics.FromImage(localBitmap);
-            g.DrawImage(localBitmap, 0, 0); //在窗体的画布中绘画出内存中的图像
-            //bitmapGraphics.Dispose();
-            //localBitmap.Dispose();
-            //g.Dispose();
-
-            pictureBox1.Image = localBitmap;
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button14_Click(object sender, EventArgs e)
         {
-            //test
             // Make the large image.
             //AddImageToImageList(imlLargeIcons, bm, reader[0].ToString(), imlLargeIcons.ImageSize.Width, imlLargeIcons.ImageSize.Height);
+
             // Make the small image.
             //AddImageToImageList(imlSmallIcons, bm, reader[0].ToString(), imlLargeIcons.ImageSize.Width, imlLargeIcons.ImageSize.Height);
         }
@@ -710,25 +499,6 @@ namespace vcs_Mix03_draw_image
 
         private void button15_Click(object sender, EventArgs e)
         {
-            //一次畫一群長方形
-
-            g.Clear(Color.White);
-
-            int hwidth = 50;
-            int x_center = 100;
-            int y_center = 100;
-            //Pen pen = new Pen(Pens.Red);
-            Pen pen = new Pen(Color.Blue, 1);
-            Rectangle[] R1 = new Rectangle[25];
-            for (int i = 0; i <= 24; i++)
-            {
-                R1[i] = new Rectangle(x_center - hwidth, y_center - hwidth, 2 * hwidth, 2 * hwidth);
-                y_center += 4;
-                hwidth += 2;
-            }
-            g.DrawRectangles(pen, R1);
-
-            pictureBox1.Image = bitmap1;
         }
 
         //------------------------------------------------------------  # 60個
@@ -760,192 +530,12 @@ namespace vcs_Mix03_draw_image
 
         private void button18_Click(object sender, EventArgs e)
         {
-            //1111
-            GraphicsPath gp2 = RetrieveGraphicsPath();
-
-
-            Pen p = new Pen(Color.Blue, 1);
-            g.DrawPath(p, gp2);
-
-
-            pictureBox1.Image = bitmap1;
-
-
-        }
-
-        GraphicsPath RetrieveGraphicsPath()
-        {
-            GraphicsPath cCP = new GraphicsPath(
- new PointF[] {
-        new PointF(365F, 6F),
-        new PointF(531F, 54F),
-        new PointF(596F, 133F),
-        new PointF(622F, 250F),
-        new PointF(637F, 336F),
-        new PointF(627F, 412F),
-        new PointF(573F, 486F),
-        new PointF(323F, 234F),
-        new PointF(416F, 140F),
-        new PointF(376F, 100F),
-        new PointF(358F, 101F),
-        new PointF(343F, 118F),
-        new PointF(258F, 118F),
-        new PointF(88F, 288F),
-        new PointF(183F, 384F),
-        new PointF(248F, 320F),
-        new PointF(490F, 563F),
-        new PointF(408F, 629F),
-        new PointF(317F, 629F),
-        new PointF(210F, 583F),
-        new PointF(165F, 560F),
-        new PointF(134F, 537F),
-        new PointF(93F, 484F),
-        new PointF(37F, 539F),
-        new PointF(76F, 578F),
-        new PointF(67F, 591F),
-        new PointF(26F, 585F),
-        new PointF(-9F, 620F),
-        new PointF(11F, 676F),
-        new PointF(27F, 704F),
-        new PointF(42F, 718F),
-        new PointF(81F, 713F),
-        new PointF(105F, 709F),
-        new PointF(125F, 676F),
-        new PointF(126F, 640F),
-        new PointF(137F, 631F),
-        new PointF(199F, 685F),
-        new PointF(246F, 713F),
-        new PointF(342F, 720F),
-        new PointF(431F, 724F),
-        new PointF(492F, 711F),
-        new PointF(576F, 651F),
-        new PointF(649F, 725F),
-        new PointF(731F, 640F),
-        new PointF(655F, 566F),
-        new PointF(703F, 491F),
-        new PointF(718F, 451F),
-        new PointF(719F, 354F),
-        new PointF(720F, 243F),
-        new PointF(635F, 22F),
-        new PointF(379F, 6F)
-       },
- new System.Byte[] {
-          0,
-          3,
-          3,
-          3,
-          3,
-          3,
-          3,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          3,
-          3,
-          3,
-          3,
-          3,
-          3,
-          1,
-          1,
-          1,
-          3,
-          3,
-          3,
-          3,
-          3,
-          3,
-          3,
-          3,
-          3,
-          1,
-          3,
-          3,
-          3,
-          3,
-          3,
-          3,
-          1,
-          1,
-          1,
-          3,
-          3,
-          3,
-          3,
-          3,
-          131});
-
-            GraphicsPath gp = new GraphicsPath();
-            gp.FillMode = FillMode.Alternate;
-            gp.AddPath(cCP, false);
-
-            //LogoHelper lh = new LogoHelper();
-            //lh.DestRectF = new RectangleF(this._location, new SizeF(this._width, this._height));
-            //lh.SrcGP = gp;
-            //GraphicsPath gpResult = lh.RetrievePath();
-            gp.Dispose();
-
-            //return gpResult;
-
-            return cCP;
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button19_Click(object sender, EventArgs e)
         {
-            /*
-            //本程式截圖
-            Graphics g = this.CreateGraphics();
-            Size s = this.Size;
-            Bitmap bitmap1 = new Bitmap(s.Width, s.Height, g);
-            Graphics memoryGraphics = Graphics.FromImage(bitmap1);
-            memoryGraphics.CopyFromScreen(this.Location.X, this.Location.Y, 0, 0, s);
-
-            pictureBox1.Image = bitmap1;
-
-            //e.Graphics.DrawImage(memoryImage, 0, 0);
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-            */
-
-            g.DrawRectangle(Pens.Red, 100, 100, 200, 200);
-
-            //c#畫三角形、並填充顏色
-            //目前知道有兩種方法：畫多邊形、GraphicsPath。但是用畫多邊形的方式畫三角形不太好。老畫不正的，截圖放大就明顯了。
-
-            Point point1 = new Point(0, 0);
-            Point point2 = new Point(110, 0);
-            Point point3 = new Point(50, 80);
-            Point[] pntArr = { point1, point2, point3 };
-
-            g.FillPolygon(Brushes.Red, pntArr);
-
-            pictureBox1.Image = bitmap1;
-        }
-    }
-
-
-    public static class GraphicsExtensions
-    {
-        public static void FillRoundedRectangle(this Graphics g, Brush brush, Rectangle rect, int radius)
-        {
-            using (GraphicsPath path = new GraphicsPath())
-            {
-                path.AddArc(rect.X, rect.Y, radius, radius, 180, 90);
-                path.AddArc(rect.Right - radius, rect.Y, radius, radius, 270, 90);
-                path.AddArc(rect.Right - radius, rect.Bottom - radius, radius, radius, 0, 90);
-                path.AddArc(rect.X, rect.Bottom - radius, radius, radius, 90, 90);
-                path.CloseFigure();
-                g.FillPath(brush, path);
-            }
         }
     }
 }
@@ -961,7 +551,4 @@ namespace vcs_Mix03_draw_image
 /*  可搬出
 
 */
-
-//                    // 顯示檔名（不含副檔名）
-//                    string name = Path.GetFileNameWithoutExtension(files[i]);
 

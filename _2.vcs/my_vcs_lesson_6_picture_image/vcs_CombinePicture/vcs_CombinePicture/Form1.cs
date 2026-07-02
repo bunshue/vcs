@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using System.IO;  // for Directory
 using System.Drawing.Imaging;  // for ImageFormat
+using System.Drawing.Drawing2D;  // for GraphicsPath
 
 namespace vcs_CombinePicture
 {
@@ -285,15 +286,138 @@ namespace vcs_CombinePicture
             CombineImages(images, ImageMergeOrientation.Vertical);
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button5_Click(object sender, EventArgs e)
         {
+            //合併圖
+            //合併圖
 
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_animals\z01.jpg";
+            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_animals\z02.jpg";
+            string filename3 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_animals\z03.jpg";
+            string filename4 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_animals\z04.jpg";
+            string filename5 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_animals\z05.jpg";
+            string filename6 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_animals\z06.jpg";
+            string filename7 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_animals\z07.jpg";
+            string filename8 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_animals\z08.jpg";
+            string filename9 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_animals\z09.jpg";
+            string filename10 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_animals\z10.jpg";
+            string filename11 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_animals\z11.jpg";
+            string filename12 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_animals\z12.jpg";
+
+            // 假設有公司 logo 與名稱
+            //string[] logos = { "samsung.png", "google.png", "apple.png" };
+            //string[] names = { "Samsung 三星", "Google 谷歌", "Apple 蘋果" };
+
+            string[] names = { "鼠", "牛", "虎", "兔", "龍", "蛇", "馬", "羊", "猴", "雞", "狗", "豬" };
+
+            //string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_animals"; // logo 圖片所在資料夾
+            //string[] files = Directory.GetFiles(foldername, "*.png");
+            string[] files = {
+                                 filename1, filename2, filename3, filename4,
+                                 filename5, filename6, filename7, filename8,
+                                 filename9, filename10, filename11, filename12
+                             };
+
+            int cols = 4;
+            int rows = (int)Math.Ceiling(files.Length / (double)cols);
+            int cellWidth = 200, cellHeight = 150;
+            int width = cols * cellWidth;
+            int height = rows * cellHeight;
+
+            using (Bitmap bmp = new Bitmap(width, height))
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                g.Clear(Color.White);
+                g.SmoothingMode = SmoothingMode.AntiAlias;
+                Font font = new Font("Segoe UI", 16, FontStyle.Bold);
+                StringFormat sf = new StringFormat { Alignment = StringAlignment.Center };
+
+                for (int i = 0; i < files.Length; i++)
+                {
+                    int col = i % cols;
+                    int row = i / cols;
+                    int x = col * cellWidth;
+                    int y = row * cellHeight;
+
+                    // 背景格
+                    using (Brush b = new SolidBrush(Color.FromArgb(240, 240, 240)))
+                        g.FillRoundedRectangle(b, new Rectangle(x + 10, y + 10, cellWidth - 20, cellHeight - 20), 20);
+
+                    // 載入 logo
+                    using (Image logo = Image.FromFile(files[i]))
+                    {
+                        g.DrawImage(logo, x + 30, y + 20, 140, 80);
+                    }
+
+                    // 顯示檔名（不含副檔名）
+                    //string name = Path.GetFileNameWithoutExtension(files[i]);
+                    g.DrawString(names[i], font, Brushes.Black, new RectangleF(x, y + cellHeight - 40, cellWidth, 40), sf);
+                }
+
+                bmp.Save("tmp_組合圖1.png");
+            }
         }
+
+        /*
+        static GraphicsPath RoundedRect(Rectangle bounds, int radius)
+        {
+            GraphicsPath path = new GraphicsPath();
+            int d = radius * 2;
+            path.AddArc(bounds.X, bounds.Y, d, d, 180, 90);
+            path.AddArc(bounds.Right - d, bounds.Y, d, d, 270, 90);
+            path.AddArc(bounds.Right - d, bounds.Bottom - d, d, d, 0, 90);
+            path.AddArc(bounds.X, bounds.Bottom - d, d, d, 90, 90);
+            path.CloseFigure();
+            return path;
+        }
+        */
+
+        //------------------------------------------------------------  # 60個
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //載入資料夾下的所有圖檔，垂直合併成一圖
+            //載入資料夾下的所有圖檔，垂直合併成一圖
 
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_scenery";
+            string[] files = Directory.GetFiles(foldername, "*.jpg");
+
+            richTextBox1.Text += "共找到 : " + files.Length.ToString() + " 個檔案\n";
+
+            int N = files.Length;
+
+            int cellWidth = 200;
+            int cellHeight = 150;
+            int width = cellWidth * 1;
+            int height = cellHeight * N;
+
+            using (Bitmap bmp = new Bitmap(width, height))
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                g.Clear(Color.White);
+                g.SmoothingMode = SmoothingMode.AntiAlias;
+                Font font = new Font("Segoe UI", 16, FontStyle.Bold);
+                StringFormat sf = new StringFormat { Alignment = StringAlignment.Center };
+
+                for (int i = 0; i < files.Length; i++)
+                {
+                    int row = i;
+                    int x = 0;
+                    int y = row * cellHeight;
+
+                    using (Image logo = Image.FromFile(files[i]))
+                    {
+                        //g.DrawImage(logo, x + 30, y + 20, 140, 80);
+                        g.DrawImage(logo, x, y, cellWidth, cellHeight);
+                    }
+                }
+                bmp.Save("tmp_組合圖2.png");
+            }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button7_Click(object sender, EventArgs e)
         {
@@ -308,6 +432,22 @@ namespace vcs_CombinePicture
         private void button9_Click(object sender, EventArgs e)
         {
 
+        }
+    }
+
+    public static class GraphicsExtensions
+    {
+        public static void FillRoundedRectangle(this Graphics g, Brush brush, Rectangle rect, int radius)
+        {
+            using (GraphicsPath path = new GraphicsPath())
+            {
+                path.AddArc(rect.X, rect.Y, radius, radius, 180, 90);
+                path.AddArc(rect.Right - radius, rect.Y, radius, radius, 270, 90);
+                path.AddArc(rect.Right - radius, rect.Bottom - radius, radius, radius, 0, 90);
+                path.AddArc(rect.X, rect.Bottom - radius, radius, radius, 90, 90);
+                path.CloseFigure();
+                g.FillPath(brush, path);
+            }
         }
     }
 }
