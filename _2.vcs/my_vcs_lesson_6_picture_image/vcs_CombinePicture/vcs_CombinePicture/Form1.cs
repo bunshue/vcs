@@ -32,11 +32,27 @@ namespace vcs_CombinePicture
             int dx = 200 + 10;
             int dy = 60 + 10;
 
-            //richTextBox1.Size = new Size(300, 690);
-            //richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
+            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+
+
+            pictureBox1.Size = new Size(830, 690);
+            pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+
+
+
+
+
+            richTextBox1.Size = new Size(300, 690);
+            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            //this.Size = new Size(1273, 750);
+            this.Size = new Size(1390, 750);
             this.Text = "vcs_CombinePicture";
 
             //設定執行後的表單起始位置, 正中央
@@ -267,6 +283,31 @@ namespace vcs_CombinePicture
 
             CombineImages(images, ImageMergeOrientation.Horizontal);
             CombineImages(images, ImageMergeOrientation.Vertical);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

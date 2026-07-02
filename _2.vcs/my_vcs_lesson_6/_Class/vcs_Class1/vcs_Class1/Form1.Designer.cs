@@ -325,6 +325,7 @@
             this.bt_class23.Name = "bt_class23";
             this.bt_class23.Size = new System.Drawing.Size(193, 60);
             this.bt_class23.TabIndex = 29;
+            this.bt_class23.Text = "PersonInfo";
             this.bt_class23.UseVisualStyleBackColor = true;
             this.bt_class23.Click += new System.EventHandler(this.bt_class23_Click);
             // 

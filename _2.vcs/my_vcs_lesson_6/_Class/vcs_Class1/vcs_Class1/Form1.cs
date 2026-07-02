@@ -1418,8 +1418,54 @@ namespace vcs_Class1
 
         //------------------------------------------------------------  # 60個
 
+        public class PersonInfo
+        {
+            private string name;
+            private int sex;
+            private int age;
+
+            public string PersonName
+            {
+                get { return name; }
+                set { name = value; }
+            }
+
+            public int PersonSex
+            {
+                get { return sex; }
+                set { sex = value; }
+            }
+
+            public int PersonAge
+            {
+                get { return age; }
+                set { age = value; }
+            }
+
+            public PersonInfo(string PersonName, int PersonSex, int PersonAge)
+            {
+                this.PersonName = PersonName;
+                this.PersonSex = PersonSex;
+                this.PersonAge = PersonAge;
+            }
+
+            public Bitmap GetBitmap()
+            {
+                Bitmap bitmap1 = new Bitmap(this.PersonAge, this.PersonSex);
+                return bitmap1;
+            }
+
+            //類別內取出資料的方法 override string ToString()
+            public override string ToString()
+            {
+                return string.Format("[{0} : {1} X {2}]", name, sex, age);
+            }
+        }
+
         private void bt_class23_Click(object sender, EventArgs e)
         {
+            //PersonInfo
+
         }
 
         //------------------------------------------------------------  # 60個
@@ -1461,7 +1507,7 @@ namespace vcs_Class1
 
         private void bt_class29_Click(object sender, EventArgs e)
         {
-            string logFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logger2_" + string.Format("{0:yyyy年-MM月-dd日}", DateTime.Now) + "日誌記錄.txt");
+            string log_filename2 = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logger2_" + string.Format("{0:yyyy年-MM月-dd日}", DateTime.Now) + "日誌記錄.txt");
 
         }
 
@@ -1624,38 +1670,33 @@ namespace vcs_Class1
             }
 
             string strDicPath = Application.StartupPath + "//";
-            string strPath = strDicPath + "Logger1_" + string.Format("{0:yyyy年-MM月-dd日}", DateTime.Now) + "日誌記錄.txt";
+            string log_filename1 = strDicPath + "Logger1_" + string.Format("{0:yyyy年-MM月-dd日}", DateTime.Now) + "日誌記錄.txt";
 
-            if (!Directory.Exists(strDicPath))
+            if (!File.Exists(log_filename1))
             {
-                Directory.CreateDirectory(strDicPath);
-            }
-
-            if (!File.Exists(strPath))
-            {
-                using (FileStream fs = File.Create(strPath))
+                using (FileStream fs = File.Create(log_filename1))
                 {
                 }
             }
 
-            string str = File.ReadAllText(strPath);
+            string str = File.ReadAllText(log_filename1);
             StringBuilder sb = new StringBuilder();
             foreach (var item in strList)
             {
                 sb.Append(DateTime.Now.ToString() + "-----" + item + "\n");
             }
-            File.WriteAllText(strPath, str + sb.ToString());
+            File.WriteAllText(log_filename1, str + sb.ToString());
         }
     }
 
     public class Logger2
     {
-        static string logFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logger2_" + string.Format("{0:yyyy年-MM月-dd日}", DateTime.Now) + "日誌記錄.txt");
+        static string log_filename2 = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logger2_" + string.Format("{0:yyyy年-MM月-dd日}", DateTime.Now) + "日誌記錄.txt");
 
         public static void WriteLog(string msg)
         {
             byte[] data = Encoding.UTF8.GetBytes(msg);
-            FileStream fs = new FileStream(logFileName, FileMode.OpenOrCreate);
+            FileStream fs = new FileStream(log_filename2, FileMode.OpenOrCreate);
             fs.Position = fs.Length;
             StreamWriter sw = new StreamWriter(fs, Encoding.UTF8);
             sw.WriteLine(string.Format("{0}-{1}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), msg));
@@ -1735,16 +1776,16 @@ namespace vcs_Class1
                 FilePath = Directory.GetCurrentDirectory();
             }
 
-            string filename = FilePath + "\\Logger4_" + string.Format("{0:yyyy年-MM月-dd日}", DateTime.Now) + "日誌記錄.txt";
+            string log_filename4 = FilePath + "\\Logger4_" + string.Format("{0:yyyy年-MM月-dd日}", DateTime.Now) + "日誌記錄.txt";
 
-            FileInfo finfo = new FileInfo(filename);
+            FileInfo finfo = new FileInfo(log_filename4);
             if (finfo.Directory.Exists == false)
             {
                 finfo.Directory.Create();
             }
             string writeString = string.Format("{0:yyyy/MM/dd HH:mm:ss} {1}", DateTime.Now, message) + "\n";
 
-            File.AppendAllText(filename, writeString, Encoding.Unicode);
+            File.AppendAllText(log_filename4, writeString, Encoding.Unicode);
         }
     }
 
