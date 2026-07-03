@@ -113,16 +113,15 @@ namespace vcs_CopyFromScreen
 
         private void button0_Click(object sender, EventArgs e)
         {
+            //全螢幕截圖
             int W = Screen.PrimaryScreen.Bounds.Width;  // 主螢幕寬度
             int H = Screen.PrimaryScreen.Bounds.Height;  // 主螢幕高度
-            Bitmap bitmap1 = new Bitmap(W, H);
+            Bitmap bitmap1 = new Bitmap(W, H);  // 建立空白畫布
             Graphics g = Graphics.FromImage(bitmap1);
             g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(W, H));
             //IntPtr dc1 = g.GetHdc();      //此處這兩句多餘，具體看最後GetHdc()定義
             //g.ReleaseHdc(dc1);
             g.Dispose();
-            this.pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            this.pictureBox1.Image = bitmap1;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -130,21 +129,14 @@ namespace vcs_CopyFromScreen
             //全螢幕截圖
             int W = Screen.PrimaryScreen.Bounds.Width;  // 主螢幕寬度
             int H = Screen.PrimaryScreen.Bounds.Height;  // 主螢幕高度
+            Bitmap bitmap1 = new Bitmap(W, H);  // 建立空白畫布
+            Graphics g = Graphics.FromImage(bitmap1);
+            //取得畫布的繪圖物件用以繪圖
+            g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(W, H));
+            IntPtr dc1 = g.GetHdc();
+            g.ReleaseHdc(dc1);
 
-            using (Bitmap bitmap1 = new Bitmap(W, H))   //建立空白畫布
-            {
-                using (Graphics g = Graphics.FromImage(bitmap1))
-                {
-                    //取得畫布的繪圖物件用以繪圖
-                    g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(W, H));
-                    //richTextBox1.Text += "W = " + W.ToString() + "\n";
-                    //richTextBox1.Text += "H = " + H.ToString() + "\n";
-                    IntPtr dc1 = g.GetHdc();
-                    g.ReleaseHdc(dc1);
-                }
-
-                save_bitmap_file(bitmap1);  // 存檔
-            }
+            save_bitmap_file(bitmap1);  // 存檔
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -157,21 +149,12 @@ namespace vcs_CopyFromScreen
             //本程式截圖
             int W = this.Width;
             int H = this.Height;
-
-            using (Bitmap bitmap1 = new Bitmap(W, H))
-            {
-                using (Graphics g = Graphics.FromImage(bitmap1))
-                {
-                    //public void CopyFromScreen(int sourceX, int sourceY, int destinationX, int destinationY, Size blockRegionSize);
-                    g.CopyFromScreen(this.Location, new Point(0, 0), new Size(W, H));
-                    //richTextBox1.Text += "W = " + W.ToString() + "\n";
-                    //richTextBox1.Text += "H = " + H.ToString() + "\n";
-                    IntPtr dc1 = g.GetHdc();
-                    g.ReleaseHdc(dc1);
-                }
-
-                save_bitmap_file(bitmap1);  // 存檔
-            }
+            Bitmap bitmap1 = new Bitmap(W, H);  // 建立空白畫布
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.CopyFromScreen(this.Location, new Point(0, 0), new Size(W, H));
+            IntPtr dc1 = g.GetHdc();
+            g.ReleaseHdc(dc1);
+            save_bitmap_file(bitmap1);  // 存檔
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -182,15 +165,12 @@ namespace vcs_CopyFromScreen
             int W = 1000;
             int H = 200;
 
-            using (Bitmap bitmap1 = new Bitmap(W, H))
+            using (Bitmap bitmap1 = new Bitmap(W, H))  // 建立空白畫布
             {
                 using (Graphics g = Graphics.FromImage(bitmap1))
                 {
                     //                   擷取螢幕位置起點    自建bmp的位置起點     擷取大小
                     g.CopyFromScreen(new Point(x_st, y_st), new Point(0, 0), new Size(W, H));
-                    //richTextBox1.Text += "W = " + W.ToString() + "\n";
-                    //richTextBox1.Text += "H = " + H.ToString() + "\n";
-
                     //pictureBox1.Image = bitmap1;   //若有picturebox 可以貼上
                 }
                 save_bitmap_file(bitmap1);  // 存檔
@@ -265,15 +245,15 @@ namespace vcs_CopyFromScreen
 
                     richTextBox1.Text += "擷取此應用程式的畫面\n";
 
-                    int width = rect.Right - rect.Left;
-                    int height = rect.Bottom - rect.Top;
-                    Bitmap bitmap1 = new Bitmap(width, height, PixelFormat.Format32bppArgb);
+                    int W = rect.Right - rect.Left;
+                    int H = rect.Bottom - rect.Top;
+                    Bitmap bitmap1 = new Bitmap(W, H, PixelFormat.Format32bppArgb);
 
                     Graphics.FromImage(bitmap1).CopyFromScreen(rect.Left,
                                                            rect.Top,
                                                            0,
                                                            0,
-                                                           new Size(width, height),
+                                                           new Size(W, H),
                                                            CopyPixelOperation.SourceCopy);
 
                     save_bitmap_file(bitmap1);  // 存檔
@@ -288,14 +268,14 @@ namespace vcs_CopyFromScreen
 
         void save_current_program_to_local_drive2()
         {
-            //imsLink的方法
             //本程式截圖
-            Bitmap bitmap1 = new Bitmap(this.Width, this.Height);
+
+            int W = this.Width;
+            int H = this.Height;
+            Bitmap bitmap1 = new Bitmap(W, H);
             Graphics g = Graphics.FromImage(bitmap1);
             //public void CopyFromScreen(int sourceX, int sourceY, int destinationX, int destinationY, Size blockRegionSize);
-            g.CopyFromScreen(this.Location, new Point(0, 0), new Size(this.Width, this.Height));
-            //richTextBox1.Text += "W = " + this.Width.ToString() + "\n";
-            //richTextBox1.Text += "H = " + this.Height.ToString() + "\n";
+            g.CopyFromScreen(this.Location, new Point(0, 0), new Size(W, H));
             IntPtr dc1 = g.GetHdc();
             g.ReleaseHdc(dc1);
 
@@ -332,27 +312,18 @@ namespace vcs_CopyFromScreen
 
         private void button8_Click(object sender, EventArgs e)
         {
-            //全螢幕截圖
-            int W = Screen.PrimaryScreen.Bounds.Width;  // 主螢幕寬度
-            int H = Screen.PrimaryScreen.Bounds.Height;  // 主螢幕高度
-            Bitmap bitmap1 = new Bitmap(W, H);
-            Graphics g = Graphics.FromImage(bitmap1);
-            g.CopyFromScreen(0, 0, 0, 0, new Size(W, H));
-            this.pictureBox1.Image = bitmap1;
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
             //抓取指定螢幕的一部分存檔
-            Point source_point = new Point(0, 0);
-            Point destination_point = new Point(0, 0);
             Rectangle rect = new Rectangle(0, 0, 300, 300);
 
             using (Bitmap bitmap1 = new Bitmap(rect.Width, rect.Height))
             {
                 using (Graphics g = Graphics.FromImage(bitmap1))
                 {
-                    g.CopyFromScreen(source_point, destination_point, rect.Size);
+                    g.CopyFromScreen(new Point(0, 0), new Point(0, 0), rect.Size);
                 }
 
                 save_bitmap_file(bitmap1);  // 存檔
@@ -366,101 +337,24 @@ namespace vcs_CopyFromScreen
 
         //------------------------------------------------------------  # 60個
 
-        public void Snap(int x, int y, int width, int height)
-        {
-            try
-            {
-                //這段代碼也可以實現截圖
-                //Bitmap bitmap1 = new Bitmap(width, height);
-                //Graphics g = Graphics.FromImage(bitmap1);
-                //g.CopyFromScreen(x, y, 0, 0, new Size(width, height));
-                //save_bitmap_file(bitmap1);  // 存檔
-
-                Bitmap bitmap1 = new Bitmap(640, 480);
-                using (Graphics g = Graphics.FromImage(bitmap1))
-                {
-                    g.CopyFromScreen(0, 0, 0, 0, bitmap1.Size);
-                    g.Dispose();
-                    save_bitmap_file(bitmap1);  // 存檔
-                }
-            }
-            catch
-            {
-            }
-        }
-
         private void button11_Click(object sender, EventArgs e)
         {
-            //實現全屏截圖
-            //上面的Snap
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button12_Click(object sender, EventArgs e)
         {
-            //抓屏將生成的圖片顯示在pictureBox
-
-            int W = Screen.PrimaryScreen.Bounds.Width;  // 主螢幕寬度
-            int H = Screen.PrimaryScreen.Bounds.Height;  // 主螢幕高度
-
-            Bitmap bitmap1 = new Bitmap(W, H);
-            Graphics g = Graphics.FromImage(bitmap1);
-            g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(W, H));
-            //IntPtr dc1 = g.GetHdc();      //此處這兩句多餘，具體看最後GetHdc()定義
-            //g.ReleaseHdc(dc1);           
-            g.Dispose();
-            this.pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.Image = bitmap1;
-
-            save_bitmap_file(bitmap1);  // 存檔
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button13_Click(object sender, EventArgs e)
         {
-            //全屏幕截圖 3種
 
-            int W = Screen.PrimaryScreen.Bounds.Width;  // 主螢幕寬度
-            int H = Screen.PrimaryScreen.Bounds.Height;  // 主螢幕高度
-
-            //全屏幕截圖 1
-
-            Bitmap bitmap1 = new Bitmap(W, H); //創建一個與屏幕大小一樣的位圖
-
-            using (Graphics g = Graphics.FromImage(bitmap1))
-            {
-                g.CopyFromScreen(0, 0, 0, 0, new Size(W, H));  //用Graphics.CopyFromScreen()把屏幕位圖拷貝到該位圖上
-            }
-            pictureBox1.Image = bitmap1;
-
-            save_bitmap_file(bitmap1);  // 存檔
-
-            //bitmap1.Dispose();
-
-            //顯示
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.Image = bitmap1;
-
-
-            /*
-            //全屏幕截圖 2
-            //獲得當前屏幕的分辨率
-            Screen scr = Screen.PrimaryScreen;
-            Rectangle rc = scr.Bounds;
-            int w = rc.Width;
-            int h = rc.Height;
-            //創建一個和屏幕一樣大的Bitmap
-            Bitmap bitmap1 = new Bitmap(w, h);
-            //從一個繼承自Image類的對象中創建Graphics對象
-            Graphics g2 = Graphics.FromImage(bitmap1);
-            //抓屏並拷貝到myimage裡
-            g2.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(w, h));
-
-            save_bitmap_file(bitmap1);  // 存檔
-            */
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button14_Click(object sender, EventArgs e)
         {
@@ -485,41 +379,12 @@ namespace vcs_CopyFromScreen
 
         private void button15_Click(object sender, EventArgs e)
         {
-            //全螢幕截圖1
-            //全螢幕截圖
-            //CopyFromScreen
-            //全螢幕截圖
-
-            int W = Screen.PrimaryScreen.Bounds.Width;  // 主螢幕寬度
-            int H = Screen.PrimaryScreen.Bounds.Height;  // 主螢幕高度
-
-            Bitmap bitmap1 = new Bitmap(W, H);
-            Graphics g = Graphics.FromImage(bitmap1);
-            g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(W, H));
-            IntPtr dc1 = g.GetHdc();
-            g.ReleaseHdc(dc1);
-
-            save_bitmap_file(bitmap1);  // 存檔
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button16_Click(object sender, EventArgs e)
         {
-            //全螢幕截圖2
-
-            /*
-            //another
-            int W = Screen.PrimaryScreen.Bounds.Width;  // 主螢幕寬度
-            int H = Screen.PrimaryScreen.Bounds.Height;  // 主螢幕高度
-
-            Bitmap bitmap1 = new Bitmap(W, H);
-            Graphics g = Graphics.FromImage(bitmap1);
-            g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(W, H));
-            IntPtr dc1 = g.GetHdc();
-            g.ReleaseHdc(dc1);
-            save_bitmap_file(bitmap1);  // 存檔
-            */
         }
 
         //------------------------------------------------------------  # 60個
@@ -532,11 +397,13 @@ namespace vcs_CopyFromScreen
 
         private Bitmap GetNoCursor()    //複製目前桌面當背景
         {
-            Bitmap Source = new Bitmap(this.Bounds.Width, this.Bounds.Height);    //根据屏幕大小创建Bitmap对象
-            Graphics g = Graphics.FromImage(Source);
-            g.CopyFromScreen(0, 0, 0, 0, Source.Size);  //获取没有鼠标的屏幕截图
+            int W = this.Bounds.Width;
+            int H = this.Bounds.Height;
+            Bitmap bitmap1 = new Bitmap(W, H);    //根据屏幕大小创建Bitmap对象
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(W, H));  //获取没有鼠标的屏幕截图
             g.Dispose();    //释放资源
-            return Source;
+            return bitmap1;
         }
 
         //------------------------------------------------------------  # 60個
@@ -569,15 +436,15 @@ namespace vcs_CopyFromScreen
             int Frm_left = -Var_Loc.X;
             int Frm_right = -Var_Loc.Y;
 
-            Rectangle Var_rect = new Rectangle();//實例化Rectangle類
-            Var_rect = Screen.GetWorkingArea(this);//獲得目前螢幕的大小
+            Rectangle rect = new Rectangle();//實例化Rectangle類
+            rect = Screen.GetWorkingArea(this);//獲得目前螢幕的大小
             Graphics g = this.CreateGraphics();//建立一個以目前螢幕為模板的圖片
-            Bitmap bitmap1 = new Bitmap(Var_rect.Width, Var_rect.Height, g);//建立以螢幕大小為標準的位圖 
+            Bitmap bitmap1 = new Bitmap(rect.Width, rect.Height, g);//建立以螢幕大小為標準的位圖 
             Graphics Var_G_Image = Graphics.FromImage(bitmap1);//根據圖片實例化Graphics類
 
             IntPtr Screen_dc = g.GetHdc();//得到螢幕的句柄
             IntPtr Bitmap_dc = Var_G_Image.GetHdc();//得到Bitmap的句柄
-            BitBlt(Bitmap_dc, 0, 0, Var_rect.Width, Var_rect.Height, Screen_dc, Frm_left, Frm_right, 13369376);//呼叫此API函數，完成螢幕擷取
+            BitBlt(Bitmap_dc, 0, 0, rect.Width, rect.Height, Screen_dc, Frm_left, Frm_right, 13369376);//呼叫此API函數，完成螢幕擷取
 
             g.ReleaseHdc(Screen_dc);//釋放掉螢幕的句柄
             Var_G_Image.ReleaseHdc(Bitmap_dc);//釋放掉Bitmap的句柄
@@ -590,6 +457,9 @@ namespace vcs_CopyFromScreen
         private void button21_Click(object sender, EventArgs e)
         {
             //本程式截圖
+            int W = this.Size.Width;
+            int H = this.Size.Height;
+
             Graphics g = this.CreateGraphics();
             Size s = this.Size;
             Bitmap bitmap1 = new Bitmap(s.Width, s.Height, g);
@@ -643,30 +513,23 @@ namespace vcs_CopyFromScreen
             //參數
             int W = Screen.PrimaryScreen.Bounds.Width;  // 主螢幕寬度
             int H = Screen.PrimaryScreen.Bounds.Height;  // 主螢幕高度
-
             richTextBox1.Text += "W = " + W.ToString() + "\n";
             richTextBox1.Text += "H = " + H.ToString() + "\n";
 
             Rectangle rect = Screen.GetBounds(Point.Empty);
 
             richTextBox1.Text += "rect = " + rect.ToString() + "\n";
-
-
             richTextBox1.Text += "x = " + Screen.PrimaryScreen.Bounds.X.ToString() + "\n";
             richTextBox1.Text += "y = " + Screen.PrimaryScreen.Bounds.Y.ToString() + "\n";
             richTextBox1.Text += "size = " + Screen.PrimaryScreen.Bounds.Size.ToString() + "\n";
 
-            Rectangle Var_rect = new Rectangle();//實例化Rectangle類
-            Var_rect = Screen.GetWorkingArea(this);//獲得目前螢幕的大小
-
-            richTextBox1.Text += "Var_rect : " + Var_rect.ToString() + "\n";
-
-
-
-
+            Rectangle rect2 = new Rectangle();//實例化Rectangle類
+            rect2 = Screen.GetWorkingArea(this);//獲得目前螢幕的大小
+            richTextBox1.Text += "rect2 : " + rect2.ToString() + "\n";
         }
     }
 }
+
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
@@ -687,28 +550,9 @@ namespace vcs_CopyFromScreen
 //g.CopyFromScreen(new Point(x_st, y_st), new Point(0, 0), new Size(w, h));
 g.CopyFromScreen(new Point(pt.X - w / 2, pt.Y - h / 2), new Point(0, 0), new Size(w, h));
 
-//------------------------------------------------------------  # 60個
-
-// Take a screenshot 
-// By Ali Hamdar (http://alihamdar.com/)
-// http://social.msdn.microsoft.com/Forums/en/csharpgeneral/thread/79efecc4-fa6d-4078-afe4-bb1379bb968b
-
-// Default values for full screen
-int W = Screen.PrimaryScreen.Bounds.Width;  // 主螢幕寬度
-int H = Screen.PrimaryScreen.Bounds.Height;  // 主螢幕高度
-int top = 0;
-int left = 0;
-
-Bitmap bitmap1 = new Bitmap(W, H);
-Graphics g = Graphics.FromImage(bitmap1 as Image);
-g.CopyFromScreen(top, left, 0, 0, bitmap1.Size);
-save_bitmap_file(bitmap1);  // 存檔
 */
 
-
-
-
-
-
-
+//用Graphics.CopyFromScreen()把屏幕位圖拷貝到該位圖上
+//g.CopyFromScreen(0, 0, 0, 0, new Size(W, H));
+//public void CopyFromScreen(int sourceX, int sourceY, int destinationX, int destinationY, Size blockRegionSize);
 

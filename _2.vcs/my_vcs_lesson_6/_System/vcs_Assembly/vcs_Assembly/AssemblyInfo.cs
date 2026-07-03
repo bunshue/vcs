@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Resources;
 
-namespace vcs_AssemblyInfo
+namespace vcs_Assembly
 {
     public class AssemblyInfo
     {

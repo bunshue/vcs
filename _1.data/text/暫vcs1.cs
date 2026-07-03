@@ -86,30 +86,6 @@ pictureBox1.ClientSize = new Size(400,430);
 
 //------------------------------------------------------------  # 60個
 
-        //重定義基類OnPaint()方法
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            Graphics g = e.Graphics;
-            int y = 0;
-            g.FillRectangle(Brushes.Wheat, ClientRectangle);    //繪制窗體背景色
-
-            //g.FillRectangle(Brushes.Blue, rect);//墳充一個矩形
-
-            Font f = new Font("微軟正黑體", 50, FontStyle.Bold);//建立字體物件
-            Rectangle rect = new Rectangle(0, y, 400, f.Height);
-            g.DrawString(cnt.ToString(), f, Brushes.Black, rect);
-            f.Dispose();
-
-            using (Pen pen = new Pen(Color.Red, 1))
-            {
-                for (y = 0; y <= ClientRectangle.Height; y += ClientRectangle.Height / 12)
-                {
-
-                    g.DrawLine(pen, new Point(0, 0), new Point(ClientRectangle.Width, y));
-                }
-            }
-            g.FillEllipse(Brushes.Red, new Rectangle(100, 100, 50, 50));
-        }
 
 //------------------------------------------------------------  # 60個
 
@@ -1289,14 +1265,6 @@ gr.DrawString(txt, this.Font, text_brush, node.Location.X - txt_size.Width / 2, 
             richTextBox1.Text += pic.Name + " ";
             //MessageBox.Show(pic.Name);
         }
-       
-
-        //重寫表單的OnPaint範例 直接寫在此即可
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            e.Graphics.DrawRectangle(Pens.Red, 5, 5, this.Width - 10, this.Height - 10);
-        }
-
 
 //------------------------------------------------------------  # 60個
 

@@ -321,4 +321,3 @@ namespace vcs_ScreenCapture4
         }
     }
 }
-

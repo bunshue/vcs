@@ -1070,6 +1070,23 @@ namespace vcs_Draw1
                 g.DrawLine(dash_pen, 100, 300, 300, 100);
             }
 
+            //畫箭頭
+            Pen myPen2 = new Pen(Color.Blue, 20);
+            myPen2.EndCap = LineCap.ArrowAnchor;
+            g.DrawLine(myPen2, 20, 400, 300, 400); // 繪製箭形直線
+
+
+            /*
+            PenStyle = new Pen(foreColor);
+            PenStyle.Width = (int)numericUpDown1.Value;
+            PenStyle.StartCap = System.Drawing.Drawing2D.LineCap.Round;
+            PenStyle.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+            PenStyle.Color = foreColor;
+
+            //PenStyle.LineJoin = System.Drawing.Drawing2D.LineJoin.Bevel;
+            PenStyle.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
+            */
+
             pictureBox1.Image = bitmap1;
         }
 
@@ -2804,34 +2821,4 @@ bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0, 0, 0));
                         //richTextBox1.Text += p.ToString() + " ";
                         richTextBox1.Text += p.A.ToString("X2") + p.R.ToString("X2") + p.G.ToString("X2") + p.B.ToString("X2") + " ";
 
-//------------------------------------------------------------  # 60個
-            PenStyle = new Pen(foreColor);
-            PenStyle.Width = (int)numericUpDown1.Value;
-            PenStyle.StartCap = System.Drawing.Drawing2D.LineCap.Round;
-            PenStyle.EndCap = System.Drawing.Drawing2D.LineCap.Round;
-            PenStyle.Color = foreColor;
-
-            //PenStyle.LineJoin = System.Drawing.Drawing2D.LineJoin.Bevel;
-            PenStyle.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
-
-//------------------------------------------------------------  # 60個
-
-            //畫箭頭
-            Pen myPen2 = new Pen(Color.Blue, 20);
-            myPen2.EndCap = LineCap.ArrowAnchor;
-            g.DrawLine(myPen2, 20, 100, 300, 100); // 繪製箭形直線
-
-
 */
-
-
-
-//image.Save(fileSaveUrl, System.Drawing.Imaging.ImageFormat.Jpeg);
-
-
-
-
-
-
-
-

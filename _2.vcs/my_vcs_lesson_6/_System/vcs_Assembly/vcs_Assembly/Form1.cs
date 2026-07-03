@@ -41,12 +41,22 @@ namespace vcs_Assembly
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
             richTextBox1.Size = new Size(600, 690);
-            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(850, 750);
+            this.Size = new Size(1060, 750);
             this.Text = "vcs_Assembly";
 
             //設定執行後的表單起始位置, 正中央
@@ -299,6 +309,98 @@ namespace vcs_Assembly
             Assembly asm = Assembly.GetExecutingAssembly();
             string name = asm.GetName().Name;
             richTextBox1.Text += "name : " + name + "\n";
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //取得 AssemblyInfo
+            // Get the AssemblyInfo class.
+            AssemblyInfo info = new AssemblyInfo();
+
+            // Display the values.
+            richTextBox1.Text += "Title : " + info.Title + "\n";
+            richTextBox1.Text += "Description : " + info.Description + "\n";
+            richTextBox1.Text += "Company : " + info.Company + "\n";
+            richTextBox1.Text += "Product : " + info.Product + "\n";
+            richTextBox1.Text += "Copyright : " + info.Copyright + "\n";
+            richTextBox1.Text += "Trademark : " + info.Trademark + "\n";
+            richTextBox1.Text += "Assembly Version : " + info.AssemblyVersion + "\n";
+            richTextBox1.Text += "File Version : " + info.FileVersion + "\n";
+            richTextBox1.Text += "GUID : " + info.Guid + "\n";
+            richTextBox1.Text += "Neutral Language : " + info.NeutralLanguage + "\n";
+            richTextBox1.Text += "COM Visible : " + info.IsComVisible.ToString() + "\n";
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            //組件資訊  Assembly Info
+
+            //方案總管/專案屬性/應用程式/組件資訊 內 修改組件資訊
+
+            //方案總管/加入/現有項目/選取AssemblyInfo.cs, 把 namespace 改成 vcs_System1
+            // Get the AssemblyInfo class.
+            AssemblyInfo info = new AssemblyInfo();
+
+            // Display the values.
+            richTextBox1.Text += "Title\t" + info.Title + "\n";
+            richTextBox1.Text += "Description\t" + info.Description + "\n";
+            richTextBox1.Text += "Company\t" + info.Company + "\n";
+            richTextBox1.Text += "Product\t" + info.Product + "\n";
+            richTextBox1.Text += "Copyright\t" + info.Copyright + "\n";
+            richTextBox1.Text += "Trademark\t" + info.Trademark + "\n";
+            richTextBox1.Text += "Assembly Version\t" + info.AssemblyVersion + "\n";
+            richTextBox1.Text += "File Version\t" + info.FileVersion + "\n";
+            richTextBox1.Text += "GUID\t" + info.Guid + "\n";
+            richTextBox1.Text += "Neutral Language\t" + info.NeutralLanguage + "\n";
+            richTextBox1.Text += "COM Visible\t" + info.IsComVisible.ToString() + "\n";
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
