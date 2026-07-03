@@ -1,7 +1,24 @@
 ﻿
-//                    // 顯示檔名（不含副檔名）
-//                    string name = Path.GetFileNameWithoutExtension(files[i]);
+同一個控件，不能重複加入到不同容器
+但是可以移動加入到不同容器
 
+richTextBox1.Location = new Point(10, 20);
+groupBox1.Controls.Add(richTextBox1);
+
+richTextBox1.Location = new Point(10, 100);
+groupBox2.Controls.Add(richTextBox1);
+
+richTextBox1.Location = new Point(10, 50);
+groupBox3.Controls.Add(richTextBox1);
+
+this.panel_plc.Controls.Add(richTextBox1);
+
+//------------------------------------------------------------  # 60個
+
+填上透明色
+g.Clear(Color.Transparent);
+
+//------------------------------------------------------------  # 60個
 
             //取得副檔名
                         FileInfo file_info = new FileInfo(sfdImage.FileName);
@@ -27,8 +44,6 @@
 
 //------------------------------------------------------------  # 60個
 
-填上透明色
-g.Clear(Color.Transparent);
 
 //------------------------------------------------------------  # 60個
 
@@ -242,20 +257,6 @@ e.Graphics.DrawImage(bmp, pt[i].X, pt[i].Y, 100, 100);
 
 //------------------------------------------------------------  # 60個
 
-StartPiont = (200, 100)
-CutArea = (0,0,300,300)
-
-private Image CutImage(Image SourceImage, Point StartPoint, Rectangle CutArea)
-{
-    Bitmap NewBitmap = new Bitmap(CutArea.Width, CutArea.Height);
-    Graphics tmpGraph = Graphics.FromImage(NewBitmap);
-    tmpGraph.DrawImage(SourceImage, CutArea, StartPoint.X, StartPoint.Y, CutArea.Width, CutArea.Height, GraphicsUnit.Pixel);
-    tmpGraph.Dispose();
-    return NewBitmap;
-}
-
-//------------------------------------------------------------  # 60個
-
 // 引用System.Windows.Forms命名空間
 // 如此才能使用較簡潔的物件名稱來使用Form, Button, TextBox, Label...等類別
 using System.Windows.Forms;
@@ -383,45 +384,6 @@ vcs待尋找
             toolStripProgressBar1.Style = ProgressBarStyle.Marquee;  //進度條一直重複跑
             toolStripProgressBar1.Style = ProgressBarStyle.Blocks;  //依Value顯示進度
             toolStripProgressBar1.Value = 30;
-
-//------------------------------------------------------------  # 60個
-
-可以累計點數，緩慢畫出的方法
-
-Points1 為 已知點數
-
-        //公用變數
-        List<PointF> Points1 = new List<PointF>();
-        List<PointF> Points2 = new List<PointF>();
-
-                Points1.Add(e.Location);
-
-使用timer
-
-        private void timer2_Tick(object sender, EventArgs e)
-        {
-            int len = Points1.Count;
-            Points2.Add(Points1[cnt]);
-            pictureBox2.Invalidate();
-
-            cnt++;
-            if (cnt >= len)
-            {
-                timer2.Enabled = false;
-
-            }
-        }
-        
-呼叫pictureBox2重畫
-
-        private void pictureBox2_Paint(object sender, PaintEventArgs e)
-        {
-            if (Points2.Count > 1)
-            {
-                e.Graphics.DrawCurve(Pens.Red, Points2.ToArray());
-            }
-
-        }
 
 //------------------------------------------------------------  # 60個
 
@@ -2538,8 +2500,6 @@ Font設定字型及樣式
             //Graphics.DrawImage (Image, Rectangle, Rectangle, GraphicsUnit)
             //四個參數分別是     來源影像 目標區域  來源區域      單位
 
-txtFile.Text = Application.ExecutablePath;
-
             //表單預設參數
             richTextBox1.Text += "AAA = " + SystemInformation.FrameBorderSize.Width.ToString() + "\n";  //8
             richTextBox1.Text += "BBB = " + SystemInformation.FrameBorderSize.Height.ToString() + "\n"; //8
@@ -2753,55 +2713,6 @@ http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/184114.html
 https://www.cnblogs.com/Scl891004X/p/6242805.html
 
 ProgressBar類是密封(sealed)的，不能再被繼承。
-
-//------------------------------------------------------------  # 60個
-
-//跟隨鼠標在 pictureBox 的圖片上畫矩形
-pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
-pictureBox1.MouseMove += new MouseEventHandler(pictureBox1_MouseMove);
-pictureBox1.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
-
-private int intStartX = 0;
-private int intStartY = 0;
-private bool isMouseDraw = false;
-
-private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
-{
-	isMouseDraw = true;
-	intStartX = e.X;
-	intStartY = e.Y;
-}
-
-        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (isMouseDraw)
-            {
-                try
-                {
-                    //Image tmp = Image.FromFile("1.png");
-                    Graphics g = this.pictureBox1.CreateGraphics();
-                    //清空上次畫下的痕跡
-                    g.Clear(this.pictureBox1.BackColor);
-                    Brush brush = new SolidBrush(Color.Red);
-                    Pen pen = new Pen(brush, 1);
-                    pen.DashStyle = DashStyle.Solid;
-                    g.DrawRectangle(pen, new Rectangle(intStartX > e.X ? e.X : intStartX, intStartY > e.Y ? e.Y : intStartY, Math.Abs(e.X - intStartX), Math.Abs(e.Y - intStartY)));
-                    g.Dispose();
-                    //this.pictureBox_Src.Image = tmp;
-                }
-                catch (Exception ex)
-                {
-                    ex.ToString();
-                }
-            }
-        }
-
-        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
-        {
-            isMouseDraw = false;
-            intStartX = 0;
-            intStartY = 0;
-        }
 
 //------------------------------------------------------------  # 60個
 
@@ -3350,15 +3261,12 @@ File: Camera.cs Project: alienwow/CSharpProjects
 
             g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
             
-            if (!Directory.Exists(videoPath))
-                Directory.CreateDirectory(videoPath);
-
             //开始录像
             if (createNewFile)
             {
                 //videoFileName = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".flv";
                 videoFileName = "wuwh.flv";
-                videoFileFullPath = videoPath + "/" + videoFileName;
+                videoFileFullPath = videoFileName;
                 createNewFile = false;
                 if (videoWriter != null)
                 {
@@ -3654,7 +3562,6 @@ vcs_test_all_04_Dialog
 
 //------------------------------------------------------------  # 60個
 
-mmmm
 鼠標相關的事件大致有六種，分別是 ：
 "MouseHover"、"MouseLeave"、"MouseEnter"、"MouseMove"、"MouseDown"和"MouseUp"。
 
@@ -3831,12 +3738,6 @@ http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/185924.html
 
 //------------------------------------------------------------  # 60個
 
-systemsystem
-//獲取文件的版本信息:
-FileVersionInfo myFileVersionInfo1 = FileVersionInfo.GetVersionInfo("D:\\TEST.DLL");
-textBox1.Text="版本號: " + myFileVersionInfo1.FileVersion;
-
-
 首先准備一個畫板:
 創建一個畫板主要有3種方式:
 A: 在窗體或控件的Paint事件中直接引用Graphics對象
@@ -3902,7 +3803,7 @@ sealed用來修飾類為密封類，阻止該類被繼承。同時對一個類�
 
 2.使用System.Media.SoundPlayer播放.wav格式聲音
 　　 SoundPlayer player = new SoundPlayer();
-player.SoundLocation = Application.StartupPath + "\\" + "sounds/WallHit.wav";
+player.SoundLocation = "sounds/WallHit.wav";
 player.Load(); //同步加載聲音
 player.Play(); //啟用新線程播放
 //player.PlayLooping(); //循環播放模式
@@ -4287,10 +4188,12 @@ fullscreenfullscreen
 	    using (Graphics g = Graphics.FromImage(coverLayer))
 	    {
 		    g.Clear(coverColor);
+		    
 		    GraphicsPath path = new GraphicsPath();
 		    path.AddRectangle(this.Bounds);
 		    path.AddRectangle(rectSelected);
 		    g.FillPath(rectBrush, path);
+		    
 		    g.DrawRectangle(Pens.Blue, rectSelected);
 	    }
     }
@@ -4536,10 +4439,6 @@ form1.CancelButton = button1;
 
 设置窗体的ShowIntaskbar属性为False
 
-9. 如何获取应用程序当前执行的路径？（How to get the path to my running EXE?）
-
-string appPath = Application.ExecutablePath; 
-
 23. 如何使Windows Form上的Panel或者Label控件半透明？（How to make a Panel or Label semi-transparent on a Windows Form? ）
 
 通过设置控件背景色的alpha值
@@ -4667,7 +4566,7 @@ Display_Cam1
 										g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
 
             ////创建文件路径
-            string fileFullPath = videoPath + "V1" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+            string fileFullPath = "V1" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
 
             if (stopREC)
             {
@@ -6280,12 +6179,6 @@ C#語言下路徑指定方式有兩種:
 ssss
 richTextBox1.Text += "你的計算機名稱 : " + Environment.MachineName.ToString() + "\n";
 
-ssss
-C# 取得檔案版本資訊
-using System.Diagnostics;
-            richTextBox1.Text += "data : " + FileVersionInfo.GetVersionInfo(@"C:\WINDOWS\NOTEPAD.EXE").FileVersion.ToString() + "\n"; 
-data : 10.0.17134.220 (WinBuild.160101.0800)
-
 //------------------------------------------------------------  # 60個
 
 C#初體驗，畫圖的讀、寫、顯示 
@@ -6750,10 +6643,6 @@ Pen blackPen = new Pen(Color.FromArgb(255, 0, 0, 0), 5);
 
 //------------------------------------------------------------  # 60個
 
-this.Refresh() ; //執行 Form1_Paint()
-
-//------------------------------------------------------------  # 60個
-
 // bmp 的大小和pictureBox1 相同
 Bitmap bmp = new Bitmap(this.PictureBox1.Width,
 this.PictureBox1.Height);
@@ -7054,16 +6943,13 @@ PDF viewer
 可儲存最近讀取紀錄
 可以刪除紀錄
 
+//------------------------------------------------------------  # 60個
         
 調用cmd.exe程序加入參數 "/c " 要執行的命令來執行一個DOS命令
 
 （/c代表執行參數指定的命令後關閉cmd.exe /k參數則不關閉cmd.exe）
 
-
-
-
-
-vcs
+//------------------------------------------------------------  # 60個
 
 新增/載入 增 刪 改 查
 
@@ -7261,11 +7147,6 @@ SetStyle(ControlStyles.ResizeRedraw, true);
 this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
 this.UpdateStyles();
 //以上兩句是為了設置控件樣式為雙緩沖，這可以有效減少圖片閃爍的問題
-
-//------------------------------------------------------------  # 60個
-
-            txtFile.Text = Application.StartupPath + "\\Test.docx";
-            txtFile.Select(txtFile.Text.Length, 0);
 
 //------------------------------------------------------------  # 60個
 
@@ -7704,7 +7585,8 @@ vcs_MyLibrary的屬性, 輸出類型 改為 類別庫
 
 專案(vcs_Project)/參考/加入參考, 選取vcs_MyLibrary.dll
 
-//Registry.LocalMachine.CreateSubKey(@"SOFTWARE\MICROSOFT\WINDOWS\CURRENTVERSION\RUN").SetValue("MyAngel", Application.StartupPath + "\\Ex05_13.exe", RegistryValueKind.String);
+//Registry.LocalMachine.CreateSubKey(@"SOFTWARE\MICROSOFT\WINDOWS\CURRENTVERSION\RUN").SetValue("MyAngel",
+"\\Ex05_13.exe", RegistryValueKind.String);
 
 //------------------------------------------------------------  # 60個
 
@@ -8056,14 +7938,6 @@ Ctrl+Alt+i鍵：進入「即時運算視窗」。要用到三個鍵
 
 //------------------------------------------------------------  # 60個
 
-系統預設路徑與名稱
-
-目前執行檔的檔案的名稱  XXXX.exe
-Application.ExecutablePath
-
-目前執行檔的檔案的所在路徑
-Application.StartupPath
-
 kilo sugar 使用網路 參考 D:\_git\vcs\_2.vcs\my_vcs_lesson_5\vcs_SatelliteImages
 這個範例 看起來 kilo 和 romeo 都不能用
 
@@ -8317,8 +8191,6 @@ g.DrawImage(image, 10, 50, image.Width, image.Height);
 int w = 100;	//預縮放的圖的寬度
 Image imgThumbnail = image1.GetThumbnailImage(w, (int)(w * image1.Height / image1.Width), null, (IntPtr)0);
 
-imgName = Path.GetFileNameWithoutExtension(openFileDialogImg.FileName);
-
 var desktop1 = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 			
 統一改名
@@ -8491,9 +8363,6 @@ label1.Text = "(" + Control.MousePosition.X.ToString() + ", " + Control.MousePos
 ????
 
 //------------------------------------------------------------  # 60個
-
-textBox2.Text = Path.GetDirectoryName(saveFileDialog1.FileName) + @"\" + Path.GetFileName(saveFileDialog1.FileName);//获取文件路径
-textBox2.Text = Path.GetDirectoryName(saveFileDialog1.FileName) + @"\" + Path.GetFileName(saveFileDialog1.FileName);//获取文件路径
 
 vcs_PicPick	還要能夠用鼠標移動表單		目前有些問題
 
@@ -9150,21 +9019,6 @@ FileSystem.DeleteFile("D:\\test.txt", UIOption.OnlyErrorDialogs, RecycleOption.S
 
 //------------------------------------------------------------  # 60個
 
-改變鼠標
-        private void panel1_MouseLeave(object sender, EventArgs e)
-        {
-            this.Cursor = Cursors.Default;
-        }
-
-        private void panel1_MouseHover(object sender, EventArgs e)
-        {
-            this.Cursor = Cursors.VSplit;
-            //label2.Text = "(" + MousePosition.X.ToString() + ", " + MousePosition.Y.ToString();
-            //label2.Text = "(" + Cursor.Position.X.ToString() + ", " + Cursor.Position.Y.ToString() + ")";
-        }
-
-//------------------------------------------------------------  # 60個
-
 google map api key
 AIzaSyCEU4vCIYtilSvu-UicMv9JNEDBi9bax1c
 AIzaSyCEU4vCIYtilSvu-UicMv9JNEDBi9bax1c
@@ -9583,57 +9437,9 @@ using System.Net.Sockets;
 
 //------------------------------------------------------------  # 60個      
 
-讀取一WORD檔案並將其純文字部分顯示出來
-, 可讀doc檔和docx檔
+讀取一WORD檔案並將其純文字部分顯示出來, 可讀doc檔和docx檔
 
-Paint
-        Graphics g;                 // 繪圖區
-        Pen pen;                    // 畫筆
-        bool isMouseDown = false;   // 紀錄滑鼠是否被按下
-        List<Point> points = new List<Point>(); // 紀錄滑鼠軌跡的陣列。
-
-        public Form1()
-        {
-            InitializeComponent();
-
-            g = this.CreateGraphics(); // 取得繪圖區物件
-            pen = new Pen(Color.Black, 3); // 設定畫筆為黑色、粗細為 3 點。
-        }
-
-        private void Form1_MouseDown(object sender, MouseEventArgs e)
-        {
-            isMouseDown = true; // 滑鼠被按下後設定旗標值。
-            points.Add(e.Location); // 將點加入到 points 陣列當中。
-        }
-
-        private void Form1_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (isMouseDown) // 如果滑鼠被按下
-            {
-                points.Add(e.Location); // 將點加入到 points 陣列當中。
-                // 畫出上一點到此點的線段。
-                g.DrawLine(pen, points[points.Count - 2], points[points.Count - 1]);
-            }
-        }
-
-        private void Form1_MouseUp(object sender, MouseEventArgs e)
-        {
-            points.Add(new Point(-1, -1)); // 滑鼠放開時，插入一個斷點 (-1,-1)，以代表前後兩點之間有斷開。
-            isMouseDown = false; // 滑鼠已經沒有被按下了。
-        }
-
-
-        //禁止使用 Alt + F4 關閉表單
-        //需表單上沒有其他控件才能使用
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Alt && e.KeyValue == 115)//如果按下的Alt和F4
-            {
-                e.Handled = true;//不執行操作
-            }
-        }
-
-
+//------------------------------------------------------------  # 60個      
 
 ----------------tmptmp ST----------------
 
@@ -9709,22 +9515,6 @@ openFileDialog1.Filter = "jpg (*.jpg)|*.jpg|bmp (*.bmp)|*.bmp|png (*.png)|*.png"
 
             saveFileDialog1.Title = "另存新檔";                 //將顯示在對話方塊標題列中的字元
             saveFileDialog1.FileName = "SetPoint Report.txt";   //預設檔名
-
-            if(saveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                //MessageBox.Show("Got filename : " + saveFileDialog1.FileName);
-                string strFilePath = "";
-                string FilePath = "";
-                string fileNameExt = "";
-                //獲得路徑檔名
-                strFilePath = saveFileDialog1.FileName.ToString();
-                //獲取檔路徑，不帶檔案名
-                FilePath = strFilePath.Substring(0, strFilePath.LastIndexOf("\\"));
-                //獲取檔案名，不帶路徑
-                fileNameExt = strFilePath.Substring(strFilePath.LastIndexOf("\\") + 1);
-                MessageBox.Show("路徑檔名: " + strFilePath + "\n" + "路徑: " + FilePath + "\n" + "檔名: " + fileNameExt + "\n");
-            }
-
 
 ----------------Dialog語法 SP----------------
 
@@ -9974,9 +9764,6 @@ this.WindowState = FormWindowState.Maximized;
 this.WindowState = FormWindowState.Minimized;
 this.ShowInTaskbar = false;
 
-
-
-//控件名稱	pictureBox1		Application.StartupPath
 //預設背景色	this.BackColor = SystemColors.ControlLight;
 
 //檔案 資料夾 名稱
@@ -10002,10 +9789,6 @@ folderBrowserDialog1.SelectedPath = @"C:\_git\vcs\_1.data\______test_files1";
 //根據系统日期建立文件
 string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
 string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyy年MM月dd日_HH時mm分ss秒fff毫秒") + ".bmp";
-
-string dir = Application.StartupPath + "\\";
-
-File.Create(Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt");
 
 //------------------------------------------------------------  # 60個
 
@@ -10105,10 +9888,6 @@ ClientSize = new Size(button2.Right + 20, richTextBox1.Bottom + 20);    //自動
 
             string filename2 = url.Substring(pos1 + 1, url.Length - pos1 - 1);
             richTextBox1.Text += "原始檔名 : " + filename2 + "\n";
-
-//Cursor
-            this.Cursor = Cursors.WaitCursor;
-            this.Cursor = Cursors.Default;
 
 //WebBrowser 關閉 指令碼偵錯視窗
 webBrowser1.ScriptErrorsSuppressed = true;
@@ -10211,6 +9990,8 @@ Cursor.Show(); // 顯示滑鼠游標
 
 //------------------------------------------------------------  # 60個
 
+全選與部分選取
+
 RichTextBox 和 TextBox 需要在Focus的狀態下才可以反白
 
 //全部反白
@@ -10225,6 +10006,8 @@ RichTextBox 和 TextBox 需要在Focus的狀態下才可以反白
 	richTextBox1.Focus();
 	richTextBox1.Select(0, 0);
 
+            txtFile.Text = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+            txtFile.Select(txtFile.Text.Length, 0);  // 全選
 
 ----------------準備進範例程式的 SP----------------
 
@@ -10936,10 +10719,6 @@ draw dddd
             //int[] gray = new int[220];
             //g.DrawLines(Pens.Red, gray.ToArray());
 
-//------------------------------------------------------------  # 60個
-// 欲刪除關鍵字
-//------------------------------------------------------------  # 60個
-
 表單相關 ffff
 
 this.FormBorderStyle = FormBorderStyle.None;
@@ -11011,9 +10790,6 @@ this.StartPosition = FormStartPosition.CenterScreen;  // 單獨寫致中，看�
 
 //------------------------------------------------------------  # 60個
 
-// 取得附檔名包含點
-    string extension = Path.GetExtension(filename);
-
 //------------------------------------------------------------  # 60個
 
             bitmap1.Save(filename, ImageFormat.Bmp);
@@ -11025,8 +10801,48 @@ this.StartPosition = FormStartPosition.CenterScreen;  // 單獨寫致中，看�
 
 //------------------------------------------------------------  # 60個
 
-//------------------------------------------------------------  # 60個
-//------------------------------------------------------------  # 60個
+改變各種滑鼠屬標
+
+            pictureBox1.Cursor = Cursors.Cross;  //移到控件上，改變鼠標
+            pictureBox1.Cursor = Cursors.Help;
+            pictureBox1.Cursor = Cursors.HSplit;
+            pictureBox1.Cursor = Cursors.No;
+            
+            this.Cursor = Cursors.Help;
+            this.Cursor = Cursors.WaitCursor;	//等待標記
+            this.Cursor = Cursors.Default;	//預設
+
+自定義滑鼠屬標
+this.Cursor = new Cursor("icon.ico");
+icon.ico要放在bin之下
+
+不用製作游標檔的做法:
+this.Cursor = new Cursor(new Bitmap(@"C:\______test_files\reuse.bmp").GetHicon());
+
+label 之 cursor 可以改變游標指到label時，會改變的滑鼠游標。
+
+系統內建的滑鼠游標圖形 Cursors
+        Cursor[] cursorList = new Cursor[] {  // 系統內建的全部滑鼠游標圖形 
+               Cursors.AppStarting, Cursors.Arrow, Cursors.Cross,
+               Cursors.Default, Cursors.Hand, Cursors.Help,
+               Cursors.HSplit, Cursors.IBeam, Cursors.No,
+               Cursors.NoMove2D, Cursors.NoMoveHoriz, Cursors.NoMoveVert,
+               Cursors.PanEast, Cursors.PanNE, Cursors.PanNorth,
+               Cursors.PanNW, Cursors.PanSE, Cursors.PanSouth,
+               Cursors.PanSW, Cursors.PanWest, Cursors.SizeAll,
+               Cursors.SizeNESW, Cursors.SizeNS, Cursors.SizeNWSE,
+               Cursors.SizeWE, Cursors.UpArrow, Cursors.VSplit, Cursors.WaitCursor};
+			   
+        int i = 0;
+            this.Cursor = cursorList[i];
+            this.Text = this.Cursor.ToString();
+            i++;
+            if (i >= cursorList.Length)
+			{
+                i = 0;
+			}
+
+
 
 
 
@@ -11058,11 +10874,7 @@ this.StartPosition = FormStartPosition.CenterScreen;  // 單獨寫致中，看�
 使用鼠標
 this.Cursor = new Cursor(xxxxxx);
 
-
-
-
-
-
+//------------------------------------------------------------  # 60個
 
 變更滑鼠鼠標圖案 ( 有效範圍在Form內 )。
 this.Cursor = new Cursor("C:\\test.ico"); // "C:\\test.ico" 改成您的圖檔，接受的影像格式為cur與ico
@@ -11073,27 +10885,16 @@ this.Cursor = new Cursor("C:\\test.ico"); // "C:\\test.ico" 改成您的圖檔�
 
 //------------------------------------------------------------  # 60個
 
+改變鼠標
+        private void panel1_MouseLeave(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.Default;
+        }
 
-改變各種滑鼠屬標
-
-            pictureBox1.Cursor = Cursors.Cross;  //移到控件上，改變鼠標
-            pictureBox1.Cursor = Cursors.Help;
-            pictureBox1.Cursor = Cursors.HSplit;
-            pictureBox1.Cursor = Cursors.No;
-            
-            this.Cursor = Cursors.Help;
-            this.Cursor = Cursors.Help; 
-            
-            this.Cursor = Cursors.WaitCursor;	//等待標記
-            this.Cursor = Cursors.Default;	//預設
-            
-
-自定義滑鼠屬標
-this.Cursor = new Cursor("icon.ico");
-icon.ico要放在bin之下
-
-不用製作游標檔的做法:
-this.Cursor = new Cursor(new Bitmap(@"C:\______test_files\reuse.bmp").GetHicon());
+        private void panel1_MouseHover(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.VSplit;
+        }
 
 //------------------------------------------------------------  # 60個
 
@@ -11116,35 +10917,87 @@ this.Cursor = Cursors.Hand;
         
 //------------------------------------------------------------  # 60個
 
+//------------------------------------------------------------  # 60個
 
-
-this.Cursor = Cursors.WaitCursor;
-this.Cursor = Cursors.WaitCursor;
-
-label 之 cursor 可以改變游標指到label時，會改變的滑鼠游標。
-
-系統內建的滑鼠游標圖形 Cursors
-        Cursor[] cursorList = new Cursor[] {  // 系統內建的全部滑鼠游標圖形 
-               Cursors.AppStarting, Cursors.Arrow, Cursors.Cross,
-               Cursors.Default, Cursors.Hand, Cursors.Help,
-               Cursors.HSplit, Cursors.IBeam, Cursors.No,
-               Cursors.NoMove2D, Cursors.NoMoveHoriz, Cursors.NoMoveVert,
-               Cursors.PanEast, Cursors.PanNE, Cursors.PanNorth,
-               Cursors.PanNW, Cursors.PanSE, Cursors.PanSouth,
-               Cursors.PanSW, Cursors.PanWest, Cursors.SizeAll,
-               Cursors.SizeNESW, Cursors.SizeNS, Cursors.SizeNWSE,
-               Cursors.SizeWE, Cursors.UpArrow, Cursors.VSplit, Cursors.WaitCursor};
-			   
-        int i = 0;
-            this.Cursor = cursorList[i];
-            this.Text = this.Cursor.ToString();
-            i++;
-            if (i >= cursorList.Length)
-			{
-                i = 0;
-			}
 
 //------------------------------------------------------------  # 60個
+
+//------------------------------------------------------------  # 60個
+// 欲刪除關鍵字 d10d dddddddddd
+//------------------------------------------------------------  # 60個
+
+Paint
+        Graphics g;                 // 繪圖區
+        Pen pen;                    // 畫筆
+        bool isMouseDown = false;   // 紀錄滑鼠是否被按下
+        List<Point> points = new List<Point>(); // 紀錄滑鼠軌跡的陣列。
+
+        public Form1()
+        {
+            InitializeComponent();
+
+            g = this.CreateGraphics(); // 取得繪圖區物件
+            pen = new Pen(Color.Black, 3); // 設定畫筆為黑色、粗細為 3 點。
+        }
+
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        {
+            isMouseDown = true; // 滑鼠被按下後設定旗標值。
+            points.Add(e.Location); // 將點加入到 points 陣列當中。
+        }
+
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isMouseDown) // 如果滑鼠被按下
+            {
+                points.Add(e.Location); // 將點加入到 points 陣列當中。
+                // 畫出上一點到此點的線段。
+                g.DrawLine(pen, points[points.Count - 2], points[points.Count - 1]);
+            }
+        }
+
+        private void Form1_MouseUp(object sender, MouseEventArgs e)
+        {
+            points.Add(new Point(-1, -1)); // 滑鼠放開時，插入一個斷點 (-1,-1)，以代表前後兩點之間有斷開。
+            isMouseDown = false; // 滑鼠已經沒有被按下了。
+        }
+
+//------------------------------------------------------------  # 60個      
+
+        //禁止使用 Alt + F4 關閉表單
+        //需表單上沒有其他控件才能使用
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Alt && e.KeyValue == 115)//如果按下的Alt和F4
+            {
+                e.Handled = true;//不執行操作
+            }
+        }
+
+//------------------------------------------------------------  # 60個      
+
+/*
+//创建目录
+string dir = Path.GetDirectoryName(fileSaveUrl);
+if (!Directory.Exists(dir))
+    Directory.CreateDirectory(dir);
+*/
+
+//------------------------------------------------------------  # 60個
+
+系統預設路徑與名稱
+
+目前執行檔的檔案的名稱  XXXX.exe
+Application.ExecutablePath
+
+9. 如何获取应用程序当前执行的路径？（How to get the path to my running EXE?）
+string appPath = Application.ExecutablePath; 
+
+目前執行檔的檔案的所在路徑
+Application.StartupPath
+
+string dir = Application.StartupPath + "\\";
+File.Create(Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt");
 
 
 

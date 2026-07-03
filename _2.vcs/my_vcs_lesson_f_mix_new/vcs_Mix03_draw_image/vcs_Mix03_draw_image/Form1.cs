@@ -23,6 +23,10 @@ namespace vcs_Mix03_draw_image
         Bitmap bitmap1;
         Graphics g;
 
+        //公用變數
+        List<PointF> Points1 = new List<PointF>();
+        List<PointF> Points2 = new List<PointF>();
+
         public Form1()
         {
             InitializeComponent();
@@ -47,6 +51,19 @@ namespace vcs_Mix03_draw_image
             this.Width = Convert.ToInt32(DeskWidth * 0.8);
             this.Height = Convert.ToInt32(DeskHeight * 0.8);
             */
+
+            //6060
+
+            Random r = new Random();
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+            for (int i = 0; i < 10; i++)
+            {
+                int x = r.Next(W);
+                int y = r.Next(H);
+                Points1.Add(new Point(x, y));
+            }
+            timer1.Enabled = true;
         }
 
         /*
@@ -537,6 +554,34 @@ namespace vcs_Mix03_draw_image
         private void button19_Click(object sender, EventArgs e)
         {
         }
+
+        //------------------------------------------------------------  # 60個
+
+        //可以累計點數，緩慢畫出的方法
+        int cnt = 0;
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            int len = Points1.Count;
+            Points2.Add(Points1[cnt]);
+            pictureBox1.Invalidate();
+
+            cnt++;
+            if (cnt >= len)
+            {
+                timer1.Enabled = false;
+            }
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            if (Points2.Count > 1)
+            {
+                //e.Graphics.DrawCurve(Pens.Red, Points2.ToArray());
+                e.Graphics.DrawLines(Pens.Red, Points2.ToArray());
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
     }
 }
 

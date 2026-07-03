@@ -2283,4 +2283,15 @@ if (!currentExe.Equals(targetExe, StringComparison.OrdinalIgnoreCase))
 
 File.Copy(currentExe, targetExe, true);
 
+//------------------------------------------------------------  # 60個
+
+textBox2.Text = Path.GetDirectoryName(saveFileDialog1.FileName) + @"\" + Path.GetFileName(saveFileDialog1.FileName);//获取文件路径
+textBox2.Text = Path.GetDirectoryName(saveFileDialog1.FileName) + @"\" + Path.GetFileName(saveFileDialog1.FileName);//获取文件路径
+
+// 取得附檔名包含點
+    string extension = Path.GetExtension(filename);
+
+
 */
+
+

@@ -835,7 +835,7 @@ namespace vcs_Draw1
             //pictureBox1.Image = bitmap1;
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -1295,16 +1295,13 @@ namespace vcs_Draw1
         {
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button9_Click(object sender, EventArgs e)
         {
             //亂畫一通
             Graphics g = pictureBox1.CreateGraphics();
-
-            //畫箭頭
-            Pen myPen2 = new Pen(Color.Blue, 20);
-            myPen2.EndCap = LineCap.ArrowAnchor;
-            g.DrawLine(myPen2, 20, 100, 300, 100); // 繪製箭形直線
-
+            /*
             //畫字串畫直的
             StringFormat drawFormat = new StringFormat();
             drawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
@@ -1321,8 +1318,8 @@ namespace vcs_Draw1
             Point[] pntArr = { point1, point2, point3 };
 
             g.FillPolygon(Brushes.Red, pntArr);
-
-            //6060
+            */
+            //------------------------------------------------------------  # 60個
 
             PaintImage(g);
         }
@@ -1330,22 +1327,43 @@ namespace vcs_Draw1
         private void PaintImage(Graphics g)
         {
             //绘图
-            GraphicsPath path = new GraphicsPath(new Point[]{ new Point(100,60),new Point(350,200),new Point(105,225),new Point(190,ClientRectangle.Bottom),
-                new Point(50,ClientRectangle.Bottom),new Point(50,180)}, new byte[]{
+            GraphicsPath path = new GraphicsPath(
+                new Point[]
+                {
+                    new Point(100,60),new Point(350,200),new Point(105,225),new Point(190,ClientRectangle.Bottom),
+                    new Point(50,ClientRectangle.Bottom),new Point(50,180)
+                },
+                new byte[]
+                {
                     (byte)PathPointType.Start,
                     (byte)PathPointType.Bezier,
                     (byte)PathPointType.Bezier,
                     (byte)PathPointType.Bezier,
                     (byte)PathPointType.Line,
-                    (byte)PathPointType.Line});
+                    (byte)PathPointType.Line
+                }
+                );
             PathGradientBrush pgb = new PathGradientBrush(path);
-            pgb.SurroundColors = new Color[] { Color.Green, Color.Yellow, Color.Red, Color.Blue, Color.Orange, Color.LightBlue };
+
+            pgb.SurroundColors = new Color[]
+            {
+                Color.Green, Color.Yellow, Color.Red, Color.Blue, Color.Orange, Color.LightBlue
+            };
             g.FillPath(pgb, path);
-            g.DrawBeziers(new Pen(new SolidBrush(Color.Green), 2), new Point[] { new Point(220, 100), new Point(250, 180), new Point(300, 70), new Point(350, 150) });
+            g.DrawBeziers(
+                new Pen(new SolidBrush(Color.Green), 2),
+                new Point[]
+                {
+                    new Point(220, 100),
+                    new Point(250, 180),
+                    new Point(300, 70),
+                    new Point(350, 150)
+                }
+                );
             g.DrawArc(new Pen(new SolidBrush(Color.Blue), 5), new Rectangle(new Point(250, 170), new Size(60, 60)), 0, 235);
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button10_Click(object sender, EventArgs e)
         {
@@ -2796,5 +2814,24 @@ bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0, 0, 0));
             //PenStyle.LineJoin = System.Drawing.Drawing2D.LineJoin.Bevel;
             PenStyle.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
 
+//------------------------------------------------------------  # 60個
+
+            //畫箭頭
+            Pen myPen2 = new Pen(Color.Blue, 20);
+            myPen2.EndCap = LineCap.ArrowAnchor;
+            g.DrawLine(myPen2, 20, 100, 300, 100); // 繪製箭形直線
+
+
 */
+
+
+
+//image.Save(fileSaveUrl, System.Drawing.Imaging.ImageFormat.Jpeg);
+
+
+
+
+
+
+
 

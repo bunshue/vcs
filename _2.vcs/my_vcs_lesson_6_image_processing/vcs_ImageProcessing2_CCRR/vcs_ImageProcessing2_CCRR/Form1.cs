@@ -60,25 +60,28 @@ namespace vcs_ImageProcessing2_CCRR
             button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
             button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-
-            //button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
             groupBox1.Size = new Size(200, 300);
-            groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            groupBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             bt_lanczos0.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 10);
             bt_lanczos1.Location = new Point(x_st + dx * 0, y_st + dy * 1 + 10);
             bt_lanczos2.Location = new Point(x_st + dx * 0, y_st + dy * 2 + 10);
             bt_lanczos3.Location = new Point(x_st + dx * 0, y_st + dy * 3 + 10);
 
             pictureBox1.Size = new Size(800, 800);
-            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y);
 
             richTextBox1.Size = new Size(300, 800);
-            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 7, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1600, 870);
+            this.Size = new Size(1810, 870);
             this.Text = "vcs_ImageProcessing2_CCRR";
 
             //設定執行後的表單起始位置, 正中央
@@ -737,7 +740,7 @@ namespace vcs_ImageProcessing2_CCRR
             int w = 600;
             int h = 200;
             string text = "ABCDEFG";
-            string watermark_path = @"D:\_git\vcs\_1.data\______test_files1\__RW\_png\vcs_ReadWrite_PNG.png";            
+            string watermark_path = @"D:\_git\vcs\_1.data\______test_files1\__RW\_png\vcs_ReadWrite_PNG.png";
 
             ZoomAuto(fs, filename2, w, h, text, watermark_path);
 
@@ -1017,6 +1020,43 @@ namespace vcs_ImageProcessing2_CCRR
         {
         }
 
+        //------------------------------------------------------------  # 60個
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
         private void bt_lanczos0_Click(object sender, EventArgs e)
         {
             //原圖
@@ -1156,6 +1196,8 @@ namespace vcs_ImageProcessing2_CCRR
             return dst;
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void bt_lanczos1_Click(object sender, EventArgs e)
         {
             //Lanczos 2倍
@@ -1207,6 +1249,8 @@ namespace vcs_ImageProcessing2_CCRR
             pictureBox1.Image = bitmap2;
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void bt_lanczos3_Click(object sender, EventArgs e)
         {
             //StretchImage 拉大兩倍
@@ -1232,15 +1276,20 @@ namespace vcs_ImageProcessing2_CCRR
 
 */
 
-//image.Save(fileSaveUrl, System.Drawing.Imaging.ImageFormat.Jpeg);
-
 
 
 /*
-//创建目录
-string dir = Path.GetDirectoryName(fileSaveUrl);
-if (!Directory.Exists(dir))
-    Directory.CreateDirectory(dir);
+StartPiont = (200, 100)
+CutArea = (0,0,300,300)
+
+private Image CutImage(Image SourceImage, Point StartPoint, Rectangle CutArea)
+{
+    Bitmap NewBitmap = new Bitmap(CutArea.Width, CutArea.Height);
+    Graphics tmpGraph = Graphics.FromImage(NewBitmap);
+    tmpGraph.DrawImage(SourceImage, CutArea, StartPoint.X, StartPoint.Y, CutArea.Width, CutArea.Height, GraphicsUnit.Pixel);
+    tmpGraph.Dispose();
+    return NewBitmap;
+}
 */
 
 

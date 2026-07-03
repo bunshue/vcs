@@ -9,7 +9,6 @@ using System.Windows.Forms;
 
 using System.IO;
 using System.Reflection;  // for Assembly
-using System.Diagnostics;  // for FileVersionInfo
 
 namespace vcs_Assembly
 {
@@ -83,35 +82,14 @@ namespace vcs_Assembly
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //通過exe文件獲得版本
-
-            //string path = @"C:\Program Files (x86)\ArcGIS\Desktop10.8\bin\ArcMap.exe";
-            string path = @"vcs_Assembly.exe";
-
-            richTextBox1.Text += "版本 : " + GetVersion(path) + "\n";
-        }
-
-        public string GetVersion(string path)
-        {
-            string version = string.Empty;
-            FileVersionInfo file = FileVersionInfo.GetVersionInfo(path);
-            //版本号显示为“主版本号.次版本号.内部版本号.专用部件号”。
-            //version = String.Format("{0}.{1}.{2}.{3}", file.FileMajorPart, file.FileMinorPart, file.FileBuildPart, file.FilePrivatePart);
-            //使用文件版本信息
-            version = file.FileVersion;
-            return version;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //取得目前應用程式版本
-            richTextBox1.Text += "本程式版本資訊 : " + "Ver：" + FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString() + "\n";
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //取得NOTEPAD版本資訊
-            richTextBox1.Text += "取得NOTEPAD版本資訊 : " + FileVersionInfo.GetVersionInfo(@"C:\WINDOWS\NOTEPAD.EXE").FileVersion.ToString() + "\n";
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -410,3 +388,4 @@ label版本.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             var RootDirectory = AppDomain.CurrentDomain.BaseDirectory ?? System.Reflection.Assembly.GetExecutingAssembly().Location;
             richTextBox1.Text += "RootDirectory = " + RootDirectory + "\n";
 */
+

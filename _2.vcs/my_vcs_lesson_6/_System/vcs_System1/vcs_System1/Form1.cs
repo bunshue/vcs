@@ -13,7 +13,7 @@ using System.IO.Ports;  //for serial ports
 using System.Collections;   //for DictionaryEntry
 using System.Globalization;
 using System.Runtime.InteropServices;   //for DllImport, StructLayout
-using System.Diagnostics;       //for Process, Debug
+using System.Diagnostics;       //for Process, Debug, FileVersionInfo
 using System.Reflection;        //for Assembly
 using System.Drawing.Imaging;   //for ImageFormat
 using System.Threading;
@@ -526,7 +526,7 @@ namespace vcs_System1
 
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         //是否安裝音效卡 ST
         [DllImport("winmm.dll", EntryPoint = "waveOutGetNumDevs")]
@@ -544,7 +544,7 @@ namespace vcs_System1
         }
         //是否安裝音效卡 SP
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -677,9 +677,45 @@ namespace vcs_System1
             richTextBox1.Text += "找個地方加入WndProc()即可\n";
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button7_Click(object sender, EventArgs e)
         {
+            //FileVersionInfo
+
+            //通過exe文件獲得版本
+
+            //string path = @"C:\Program Files (x86)\ArcGIS\Desktop10.8\bin\ArcMap.exe";
+            string path = @"vcs_System1.vshost.exe";
+            richTextBox1.Text += "版本 : " + GetVersion(path) + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            //取得目前應用程式版本
+            richTextBox1.Text += "本程式版本資訊 : " + "Ver：" + FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString() + "\n";
+
+            //取得NOTEPAD版本資訊
+            richTextBox1.Text += "取得NOTEPAD版本資訊 : " + FileVersionInfo.GetVersionInfo(@"C:\WINDOWS\NOTEPAD.EXE").FileVersion.ToString() + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            //獲取文件的版本信息:
+            //FileVersionInfo myFileVersionInfo1 = FileVersionInfo.GetVersionInfo("D:\\TEST.DLL");
+            //textBox1.Text = "版本號: " + myFileVersionInfo1.FileVersion;
         }
+
+        public string GetVersion(string path)
+        {
+            string version = string.Empty;
+            FileVersionInfo file = FileVersionInfo.GetVersionInfo(path);
+            //版本号显示为“主版本号.次版本号.内部版本号.专用部件号”。
+            //version = String.Format("{0}.{1}.{2}.{3}", file.FileMajorPart, file.FileMinorPart, file.FileBuildPart, file.FilePrivatePart);
+            //使用文件版本信息
+            version = file.FileVersion;
+            return version;
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void button8_Click(object sender, EventArgs e)
         {
@@ -788,9 +824,6 @@ namespace vcs_System1
 
             // Print the file name and version number.
             richTextBox1.Text += "File: " + myFileVersionInfo.FileDescription + '\n' + "Version number: " + myFileVersionInfo.FileVersion + "\n";
-
-            richTextBox1.Text += "取得NOTEPAD版本資訊\n";
-            richTextBox1.Text += "VersionInfo: " + FileVersionInfo.GetVersionInfo(@"C:\WINDOWS\NOTEPAD.EXE").FileVersion.ToString() + "\n";
         }
 
         [DllImport("user32.dll", EntryPoint = "GetSystemMetrics")]
