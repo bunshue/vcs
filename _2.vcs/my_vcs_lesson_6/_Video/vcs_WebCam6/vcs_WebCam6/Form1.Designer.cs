@@ -34,6 +34,9 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button0 = new System.Windows.Forms.Button();
+            this.bt_plus = new System.Windows.Forms.Button();
+            this.bt_minus = new System.Windows.Forms.Button();
+            this.lb_zoom = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -101,11 +104,46 @@
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
+            // bt_plus
+            // 
+            this.bt_plus.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_plus.Location = new System.Drawing.Point(218, 134);
+            this.bt_plus.Name = "bt_plus";
+            this.bt_plus.Size = new System.Drawing.Size(60, 60);
+            this.bt_plus.TabIndex = 15;
+            this.bt_plus.UseVisualStyleBackColor = true;
+            this.bt_plus.Click += new System.EventHandler(this.bt_plus_Click);
+            // 
+            // bt_minus
+            // 
+            this.bt_minus.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_minus.Location = new System.Drawing.Point(218, 199);
+            this.bt_minus.Name = "bt_minus";
+            this.bt_minus.Size = new System.Drawing.Size(60, 60);
+            this.bt_minus.TabIndex = 16;
+            this.bt_minus.UseVisualStyleBackColor = true;
+            this.bt_minus.Click += new System.EventHandler(this.bt_minus_Click);
+            // 
+            // lb_zoom
+            // 
+            this.lb_zoom.AutoSize = true;
+            this.lb_zoom.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_zoom.ForeColor = System.Drawing.Color.Red;
+            this.lb_zoom.Location = new System.Drawing.Point(12, 273);
+            this.lb_zoom.Name = "lb_zoom";
+            this.lb_zoom.Size = new System.Drawing.Size(77, 24);
+            this.lb_zoom.TabIndex = 209;
+            this.lb_zoom.Text = "1.00 X";
+            this.lb_zoom.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(636, 345);
+            this.Controls.Add(this.lb_zoom);
+            this.Controls.Add(this.bt_minus);
+            this.Controls.Add(this.bt_plus);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button0);
             this.Controls.Add(this.pictureBox2);
@@ -119,6 +157,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -130,6 +169,9 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button0;
+        private System.Windows.Forms.Button bt_plus;
+        private System.Windows.Forms.Button bt_minus;
+        private System.Windows.Forms.Label lb_zoom;
     }
 }
 

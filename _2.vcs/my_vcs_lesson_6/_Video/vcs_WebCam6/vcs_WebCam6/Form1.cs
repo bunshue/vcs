@@ -27,6 +27,8 @@ namespace vcs_WebCam6
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
         void show_item_location()
@@ -40,6 +42,13 @@ namespace vcs_WebCam6
             int dy = H + 10;
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1 + 70);
+            lb_zoom.Location = new Point(x_st + dx * 0, y_st + dy * 1 + 140);
+            bt_plus.Location = new Point(x_st + dx * 0 + 210, y_st + dy * 1);
+            bt_minus.Location = new Point(x_st + dx * 0 + 210, y_st + dy * 1 + 70);
+            bt_plus.BackgroundImageLayout = ImageLayout.Zoom;
+            bt_minus.BackgroundImageLayout = ImageLayout.Zoom;
+            bt_plus.BackgroundImage = Properties.Resources.plus;
+            bt_minus.BackgroundImage = Properties.Resources.minus;
 
             pictureBox1.Size = new Size(W, H);
             pictureBox2.Size = new Size(W, H);
@@ -136,11 +145,10 @@ namespace vcs_WebCam6
         {
             try
             {
-                //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
-                bm = (Bitmap)eventArgs.Frame.Clone();
-                //bm.RotateFlip(RotateFlipType.RotateNoneFlipY);    //反轉
-                pictureBox1.Image = bm;
+                pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
+                //pictureBox1.Image = bm;
 
+                /*
                 if (flag_pictureBox1_MouseHover == true)
                 {
                     pictureBox2.BackColor = Color.Red;
@@ -152,6 +160,33 @@ namespace vcs_WebCam6
                 {
                     pictureBox2.BackColor = Color.Green;
                 }
+                */
+
+                int w = 640;
+                int h = 480;
+
+                //設定要抓取的區域
+                //RectangleF rect = new RectangleF(zoom_step * zoom_cnt / 2, zoom_step * zoom_cnt * 3 / 4 / 2, w - zoom_step * zoom_cnt, h - zoom_step * zoom_cnt * 3 / 4);
+                //RectangleF rect = new RectangleF(zoom_step * zoom_cnt / 2 + zoom_step * (btn_right_cnt - btn_left_cnt) / 2, zoom_step * zoom_cnt * 3 / 4 / 2, w - zoom_step * zoom_cnt, h - zoom_step * zoom_cnt * 3 / 4);
+                RectangleF rect = new RectangleF(zoom_step * zoom_cnt / 2 + zoom_step * btn_right_left_cnt / 2,
+                                                 (zoom_step * zoom_cnt / 2 + zoom_step * btn_down_up_cnt / 2) * 3 / 4,
+                                                 w - zoom_step * zoom_cnt, h - zoom_step * zoom_cnt * 3 / 4);
+
+                try
+                {
+                    bm = (Bitmap)eventArgs.Frame.Clone();
+                    //bm.RotateFlip(RotateFlipType.RotateNoneFlipY);    //反轉
+
+                    //將處理之後的圖片貼出來
+                    pictureBox2.Image = bm.Clone(rect, PixelFormat.Format32bppArgb);
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "xxx錯誤訊息e12 : " + ex.Message + "\n";
+                }
+                GC.Collect();       //回收資源
+
+
             }
             catch (Exception ex)
             {
@@ -189,6 +224,114 @@ namespace vcs_WebCam6
             //this.Text = "(" + e.X.ToString() + ", " + e.Y.ToString() + ")";  // 相對於pictureBox1原點的位置
             //this.Text += "(" + MousePosition.X.ToString() + ", " + MousePosition.Y.ToString() + ")";  // 相對於視窗原點的位置
             //this.Text += "(" + Cursor.Position.X.ToString() + ", " + Cursor.Position.Y.ToString() + ")";  // 相對於視窗原點的位置
+        }
+
+        int zoom_cnt = 0;
+        int zoom_cnt_max = 15;
+        int zoom_step = 40;
+        int usb_camera_width = 640;
+        int usb_camera_height = 480;
+
+        int btn_down_up_cnt = 0;
+        int btn_right_left_cnt = 0;
+        int flag_right_left_cnt = 0;
+        int flag_down_up_cnt = 0;
+        int flag_right_left_point_cnt = 0;
+        int flag_down_up_point_cnt = 0;
+
+        private void bt_plus_Click(object sender, EventArgs e)
+        {
+            if (zoom_cnt < zoom_cnt_max)
+            {
+                zoom_cnt++;
+                //pictureBox1.Size = new Size(pictureBox1.Size.Width + zoom_step, pictureBox1.Size.Height + zoom_step * 3 / 4);
+                //pictureBox1.Size = new Size(pictureBox1.Size.Width, pictureBox1.Size.Height);
+                //pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                int w = usb_camera_width;
+                int h = usb_camera_height;
+                richTextBox1.Text += "zoom_cnt = " + zoom_cnt.ToString() + "\tx_st = " + (zoom_step * zoom_cnt / 2).ToString() + "\ty_st = " + (zoom_step * zoom_cnt / 2 * 3 / 4).ToString()
+                    + "\tW = " + (w - zoom_step * zoom_cnt).ToString() + "\tH = " + (h - zoom_step * zoom_cnt * 3 / 4).ToString() + "\n";
+
+                float ratio;
+                ratio = 640 / (float)(w - zoom_step * zoom_cnt);
+                lb_zoom.Text = ratio.ToString("#0.00") + " X";
+            }
+            else
+            {
+                richTextBox1.Text += "已達最大放大倍率\n";
+            }
+        }
+
+        private void bt_minus_Click(object sender, EventArgs e)
+        {
+            if (zoom_cnt > 0)
+            {
+                int w = usb_camera_width;
+                int h = usb_camera_height;
+                int x_st = zoom_step * zoom_cnt / 2 + zoom_step * btn_right_left_cnt / 2;
+                int y_st = (zoom_step * zoom_cnt / 2 + zoom_step * btn_down_up_cnt / 2) * 3 / 4;
+                int W = w - zoom_step * zoom_cnt;
+                int H = h - zoom_step * zoom_cnt * 3 / 4;
+                //richTextBox1.Text += "原抓取位置 x_st = " + x_st.ToString() + " y_st = " + y_st.ToString() + " W = " + W.ToString() + " H = " + H.ToString() + "\n";
+
+                int x_st_next = zoom_step * (zoom_cnt - 1) / 2 + zoom_step * btn_right_left_cnt / 2;
+                int y_st_next = (zoom_step * (zoom_cnt - 1) / 2 + zoom_step * btn_down_up_cnt / 2) * 3 / 4;
+                int W2 = w - zoom_step * (zoom_cnt - 1) + x_st_next;
+                int H2 = h - zoom_step * (zoom_cnt - 1) * 3 / 4 + y_st_next;
+
+                //richTextBox1.Text += "x_st_next = " + x_st_next.ToString() + " y_st_next = " + y_st_next.ToString() + "\n";
+                if (x_st_next < 0)
+                {
+                    richTextBox1.Text += "已到左邊界, 不動作left, 回走, 向右一步\n";
+                    btn_right_left_cnt++;
+                }
+                if (y_st_next < 0)
+                {
+                    richTextBox1.Text += "已到上邊界, 不動作up, 回走, 向下一步\n";
+                    btn_down_up_cnt++;
+                }
+                if (W2 > 640)
+                {
+                    richTextBox1.Text += "已到右邊界, 不動作right, 回走, 向左一步\n";
+                    btn_right_left_cnt--;
+                }
+                if (H2 > 480)
+                {
+                    richTextBox1.Text += "已到下邊界, 不動作down, 回走, 向上一步\n";
+                    btn_down_up_cnt--;
+                }
+
+                {
+                    zoom_cnt--;
+                    x_st = zoom_step * zoom_cnt / 2 + zoom_step * btn_right_left_cnt / 2;
+                    y_st = (zoom_step * zoom_cnt / 2 + zoom_step * btn_down_up_cnt / 2) * 3 / 4;
+                    W = w - zoom_step * zoom_cnt;
+                    H = h - zoom_step * zoom_cnt * 3 / 4;
+                    //richTextBox1.Text += "後抓取位置 x_st = " + x_st.ToString() + " y_st = " + y_st.ToString() + " W = " + W.ToString() + " H = " + H.ToString() + "\n";
+                }
+
+                //pictureBox1.Size = new Size(pictureBox1.Size.Width - zoom_step, pictureBox1.Size.Height - zoom_step * 3 / 4);
+                //pictureBox1.Size = new Size(pictureBox1.Size.Width, pictureBox1.Size.Height);
+                //pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                //int w = usb_camera_width;
+                //int h = usb_camera_height;
+
+                /*
+                richTextBox1.Text += "zoom_cnt = " + zoom_cnt.ToString() + "\tx_st = " + (zoom_step * zoom_cnt / 2).ToString() + "\ty_st = " + (zoom_step * zoom_cnt / 2 * 3 / 4).ToString()
+                    + "\tW = " + (w - zoom_step * zoom_cnt).ToString() + "\tH = " + (h - zoom_step * zoom_cnt * 3 / 4).ToString() + "\n";
+                */
+                float ratio;
+                ratio = 640 / (float)(w - zoom_step * zoom_cnt);
+                lb_zoom.Text = ratio.ToString("#0.00") + " X";
+            }
+            else
+            {
+                richTextBox1.Text += "已達最小放大倍率\n";
+            }
+
+
         }
 
     }
