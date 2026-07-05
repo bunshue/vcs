@@ -30,7 +30,6 @@ namespace vcs_Mix00
 {
     public partial class Form1 : Form
     {
-        Cursor myCursor = new Cursor(@"C:\WINDOWS\Cursors\cross_r.cur"); //自定義鼠標 
         Bitmap bitmap1;
 
         bool lastStatus = false;
@@ -363,61 +362,6 @@ namespace vcs_Mix00
         {
             show_button_text(sender);
 
-            //Image Cut
-
-            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            string filename2 = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-            string mesg = "lion-mouse";
-
-            Cut(filename1, filename2, 200, 200, mesg);
-        }
-
-        /// <summary>
-        /// 圖像切割
-        /// </summary>
-        /// <param name="filename1">原圖片路徑</param>
-        /// <param name="filename2">切割後圖片路徑</param>
-        /// <param name="width">切割後圖像寬度</param>
-        /// <param name="height">切割後圖像高度</param>
-        public void Cut(string filename1, string filename2, int width, int height, string message)
-        {
-            Bitmap bitmap = new Bitmap(filename1);
-            Decimal MaxRow = Math.Ceiling((Decimal)bitmap.Height / height);
-            Decimal MaxColumn = Math.Ceiling((decimal)bitmap.Width / width);
-            for (decimal i = 0; i < MaxRow; i++)
-            {
-                for (decimal j = 0; j < MaxColumn; j++)
-                {
-                    Bitmap bitmap1 = new Bitmap(width, height);
-                    for (int offsetX = 0; offsetX < width; offsetX++)
-                    {
-                        for (int offsetY = 0; offsetY < height; offsetY++)
-                        {
-                            if (((j * width + offsetX) < bitmap.Width) && ((i * height + offsetY) < bitmap.Height))
-                            {
-                                bitmap1.SetPixel(offsetX, offsetY, bitmap.GetPixel((int)(j * width + offsetX), (int)(i * height + offsetY)));
-                            }
-                        }
-                    }
-                    Graphics g = Graphics.FromImage(bitmap1);
-                    g.DrawString(message, new Font("黑體", 20), new SolidBrush(Color.FromArgb(70, Color.WhiteSmoke)), 0, 0);//加水印
-
-                    try
-                    {
-                        //bitmap1.Save(@file1, ImageFormat.Jpeg);
-                        bitmap1.Save(filename2, ImageFormat.Bmp);
-                        //bitmap1.Save(@file3, ImageFormat.Png);
-
-                        //richTextBox1.Text += "已存檔 : " + file1 + "\n";
-                        //richTextBox1.Text += "已存檔 : " + filename + "\n";
-                        //richTextBox1.Text += "已存檔 : " + file3 + "\n";
-                    }
-                    catch (Exception ex)
-                    {
-                        richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-                    }
-                }
-            }
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -531,8 +475,7 @@ namespace vcs_Mix00
             int ratio = 2;
             try
             {
-                //局部圖像放大
-                Cursor.Current = myCursor;								//定義鼠標
+                //局部圖像放大                
                 Graphics g = pictureBox1.CreateGraphics();				//實例化pictureBox1控件的Graphics類
                 //聲明兩個Rectangle對象，分別用來指定要放大的區域和放大后的區域
                 Rectangle sourceRectangle = new Rectangle(e.X - r, e.Y - r, r * 2, r * 2);	//要放大的區域 
@@ -584,32 +527,8 @@ namespace vcs_Mix00
 
         private void button13_Click(object sender, EventArgs e)
         {
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            richTextBox1.Text += "檔案 : " + filename + "\n";
-
-            string strOne = System.IO.Path.GetFileNameWithoutExtension(filename);
-            richTextBox1.Text += "取得前檔名\n";
-            richTextBox1.Text += strOne + "\n";
-
-            byte[] buffer = new byte[100];
-            for (int i = 0; i < 26; i++)
-            {
-                buffer[i] = (byte)(65 + i);
-            }
-            richTextBox1.Text += buffer + "\n";
-            richTextBox1.Text += "len = " + buffer.Length.ToString() + "\n";
-
-            string ssss1 = System.Text.UTF8Encoding.Default.GetString(buffer);
-            richTextBox1.Text += ssss1 + "\n";
-            richTextBox1.Text += "len = " + ssss1.Length.ToString() + "\n";
-
-            int length = 26;
-            string ssss2 = System.Text.UTF8Encoding.Default.GetString(buffer, 0, length);
-            richTextBox1.Text += ssss2 + "\n";
-            richTextBox1.Text += "len = " + ssss2.Length.ToString() + "\n";
-
             //往上兩層的檔案
-            filename = Application.StartupPath.ToString();
+            string filename = Application.StartupPath.ToString();
             filename = filename.Substring(0, filename.LastIndexOf("\\"));
             filename = filename.Substring(0, filename.LastIndexOf("\\"));
             filename += @"\SystemSet.ini";
@@ -875,17 +794,8 @@ namespace vcs_Mix00
 
         //------------------------------------------------------------  # 60個
 
-        // 設定滑鼠
-        [DllImport("user32.dll")]
-        static extern void SetCursorPos(int x, int y);
-
         private void button20_Click(object sender, EventArgs e)
         {
-            //移動滑鼠位置
-            int x_st = this.Location.X + button21.Location.X + 100;
-            int y_st = this.Location.Y + button21.Location.Y + 60;
-
-            SetCursorPos(x_st, y_st);
         }
 
         //------------------------------------------------------------  # 60個

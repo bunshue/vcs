@@ -15,9 +15,9 @@ namespace vcs_MouseCursor1
 {
     public partial class Form1 : Form
     {
-        private const int Wid = 75;
-        private const int Hgt = 70;
-        private const int BmWid = 32;
+        private const int Wid = 75 + 25;
+        private const int Hgt = 70 + 30;
+        private const int BmWid = 32 + 30 + 8;
 
         //------------------------------------------------------------  # 60個
 
@@ -121,6 +121,7 @@ namespace vcs_MouseCursor1
             // Make a Panel to hold the Label and PictureBox.
             Panel pan = new Panel();
             pan.Size = new Size(Wid, Hgt);
+            pan.BackColor = Color.Pink;
             pan.Cursor = the_cursor;
             flowLayoutPanel1.Controls.Add(pan);
 
@@ -177,9 +178,9 @@ namespace vcs_MouseCursor1
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            label2.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 390 - 30);
-            flowLayoutPanel1.Size = new Size(620, 690 - 390);
-            flowLayoutPanel1.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 390);
+            label2.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 390 - 30 - 150);
+            flowLayoutPanel1.Size = new Size(750, 690 - 250);
+            flowLayoutPanel1.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 390 - 150);
 
             label1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
             comboBox1.Size = new Size(400, 80);
@@ -188,8 +189,8 @@ namespace vcs_MouseCursor1
             numericUpDown1.Location = new Point(x_st + dx * 5, y_st + dy * 0 + 80);
             lb_cursor.Location = new Point(x_st + dx * 5, y_st + dy * 0 + 80 + 40);
 
-            richTextBox1.Size = new Size(400, 690 - 390);
-            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0 + 390);
+            richTextBox1.Size = new Size(260, 690 - 200);
+            richTextBox1.Location = new Point(x_st + dx * 5 + 140, y_st + dy * 0 + 200);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1490, 750);
@@ -203,8 +204,8 @@ namespace vcs_MouseCursor1
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+            this.Cursor = Cursors.Default;
         }
-
 
         //delay 10000 約 10秒
         //C# 不lag的延遲時間
@@ -217,12 +218,14 @@ namespace vcs_MouseCursor1
                 Application.DoEvents();         //執行某一事件，以達到延遲效果。
             }
         }
-            
+
         //------------------------------------------------------------  # 60個
 
-        //移動滑鼠鼠標
+        //移動滑鼠鼠標, 設定滑鼠位置
         [DllImport("user32")]
+        //[DllImport("user32.dll")]
         static extern bool SetCursorPos(int X, int Y);
+        //static extern void SetCursorPos(int x, int y);
 
         int screenWidth = Screen.PrimaryScreen.Bounds.Width;
         int screenHeight = Screen.PrimaryScreen.Bounds.Height;
@@ -631,7 +634,6 @@ namespace vcs_MouseCursor1
             richTextBox1.Text += "正中心 + dx = " + dx.ToString() + ", dy = " + dy.ToString() + "\n";
             SetCursorPos(cx + dx, cy + dy);
             delay(200);
-
         }
 
         //------------------------------------------------------------  # 60個
@@ -688,11 +690,23 @@ namespace vcs_MouseCursor1
 
         private void button13_Click(object sender, EventArgs e)
         {
+            //設定鼠標
+            Cursor myCursor = new Cursor(@"C:\WINDOWS\Cursors\cross_r.cur");  // 自定義鼠標 
+            Cursor.Current = myCursor;  // 定義鼠標
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button14_Click(object sender, EventArgs e)
         {
+            //移動滑鼠位置
+            int x_st = this.Location.X + button14.Location.X + 100;
+            int y_st = this.Location.Y + button14.Location.Y + 60;
+
+            SetCursorPos(x_st, y_st);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button15_Click(object sender, EventArgs e)
         {

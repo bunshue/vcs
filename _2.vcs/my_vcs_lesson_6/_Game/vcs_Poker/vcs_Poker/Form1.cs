@@ -350,6 +350,5 @@ namespace vcs_Poker
                     MessageBox.Show("平手" + Convert.ToString(sum1) + " : " + Convert.ToString(sum2));
             }
         }
-
     }
 }

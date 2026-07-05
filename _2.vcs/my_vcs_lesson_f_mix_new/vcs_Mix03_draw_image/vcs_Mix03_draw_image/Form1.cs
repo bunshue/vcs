@@ -57,7 +57,7 @@ namespace vcs_Mix03_draw_image
             Random r = new Random();
             int W = pictureBox1.Width;
             int H = pictureBox1.Height;
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 1000; i++)
             {
                 int x = r.Next(W);
                 int y = r.Next(H);
@@ -66,13 +66,11 @@ namespace vcs_Mix03_draw_image
             timer1.Enabled = true;
         }
 
-        /*
         //直接寫一個OnPaint在此, 取代Form1_Paint
         protected override void OnPaint(PaintEventArgs e)
         {
             e.Graphics.DrawRectangle(Pens.Red, 5, 5, this.ClientSize.Width - 10, this.ClientSize.Height - 10);
         }
-        */
 
         void show_item_location()
         {
@@ -576,8 +574,12 @@ namespace vcs_Mix03_draw_image
         {
             if (Points2.Count > 1)
             {
-                //e.Graphics.DrawCurve(Pens.Red, Points2.ToArray());
                 e.Graphics.DrawLines(Pens.Red, Points2.ToArray());
+                foreach (PointF pt in Points2)
+                {
+                    e.Graphics.FillEllipse(Brushes.Red, pt.X - 5, pt.Y - 5, 10, 10);
+
+                }
             }
         }
 

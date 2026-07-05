@@ -77,4 +77,3 @@ namespace vcs_Puzzle2
         public event childclose closefather;
     }
 }
-

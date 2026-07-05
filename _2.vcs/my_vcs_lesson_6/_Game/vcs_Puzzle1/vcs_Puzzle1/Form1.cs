@@ -33,6 +33,11 @@ namespace vcs_Puzzle1
             Cut(); // 切成 許多小圖
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         // 切成 許多小圖
         void Cut()
         {

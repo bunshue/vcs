@@ -606,6 +606,23 @@ namespace vcs_Encoding
 
         private void button12_Click(object sender, EventArgs e)
         {
+            byte[] buffer = new byte[100];
+            for (int i = 0; i < 26; i++)
+            {
+                buffer[i] = (byte)(65 + i);
+            }
+            richTextBox1.Text += buffer + "\n";
+            richTextBox1.Text += "len = " + buffer.Length.ToString() + "\n";
+
+            string ssss1 = System.Text.UTF8Encoding.Default.GetString(buffer);
+            richTextBox1.Text += ssss1 + "\n";
+            richTextBox1.Text += "len = " + ssss1.Length.ToString() + "\n";
+
+            int length = 26;
+            string ssss2 = System.Text.UTF8Encoding.Default.GetString(buffer, 0, length);
+            richTextBox1.Text += ssss2 + "\n";
+            richTextBox1.Text += "len = " + ssss2.Length.ToString() + "\n";
+
 
         }
 

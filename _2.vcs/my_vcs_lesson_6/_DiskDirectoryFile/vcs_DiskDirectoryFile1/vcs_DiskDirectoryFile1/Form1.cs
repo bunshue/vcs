@@ -679,6 +679,12 @@ namespace vcs_DiskDirectoryFile1
 
             //------------------------------------------------------------  # 60個
 
+            filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            richTextBox1.Text += "檔案 : " + filename + "\n";
+
+            string strOne = System.IO.Path.GetFileNameWithoutExtension(filename);
+            richTextBox1.Text += "取得前檔名\n";
+            richTextBox1.Text += strOne + "\n";
         }
 
         private void bt_file07_Click(object sender, EventArgs e)

@@ -11,7 +11,7 @@ namespace vcs_Puzzle3
 {
     public partial class Form1 : Form
     {
-        #region 定義字段
+        //#region 定義字段
         List<Image> imagelist;
         /// <summary>
         /// 定義屬性
@@ -30,7 +30,7 @@ namespace vcs_Puzzle3
                 imagelist.Add(pictureBox6.BackgroundImage);
             }
         }
-        #endregion
+        //#endregion
 
         public Form1()
         {
@@ -81,7 +81,7 @@ namespace vcs_Puzzle3
 
         }
 
-        #region 玩家操作
+        //#region 玩家操作
         //定義匹配變量
         int match = 0;
         //存儲上一張圖片
@@ -118,8 +118,9 @@ namespace vcs_Puzzle3
             }
 
         }
-        #endregion
-        #region 計時功能
+        //#endregion
+
+        //#region 計時功能
         int time = 5;
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -142,6 +143,6 @@ namespace vcs_Puzzle3
                 MessageBox.Show("很遺憾，游戲失敗！");
             }
         }
-        #endregion
+        //#endregion
     }
 }
