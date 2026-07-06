@@ -1274,9 +1274,9 @@ Console.WriteLine(str);
 ToString 的用法
 
 ToString("D2")
-ToString("D3")
+ToString("D3")  // 不足位元補零 十進位
 ToString("X2")
-ToString("X4")
+ToString("X4")  // 不足位元補零 十六進位
 ToString("F1")
 ToString("F2")
 ToString("F3")
@@ -1292,29 +1292,8 @@ ToString("0000")
 //if (!currentExe.Equals(targetExe, StringComparison.OrdinalIgnoreCase))
 
 /*
-ssss
-不足位元補零 十進位及十六進位
-
-byte byteValue = 254;
-
-// Display integer values by calling the ToString method.
-richTextBox1.Text += byteValue.ToString("D8").ToString() + "\t" + byteValue.ToString("X8") + "\n";
-
-
-
-
             string sign = new string('*', 30);
             Console.WriteLine(sign);
-
-
-pppp
-        //Random r = new Random();
-            string new_string = "string" + r.Next(100).ToString("D3");
-
-//------------------------------------------------------------  # 60個
-
-richTextBox1.Text += p.A.ToString("X2") + p.R.ToString("X2") + p.G.ToString("X2") + p.B.ToString("X2") + "  ";
-
 //------------------------------------------------------------  # 60個
 
 C# 提供了許多方法給string使用
@@ -1327,7 +1306,6 @@ Remove(索引)			清除索引位置之後的字串			x.Remove(2)
 Replace('原字串', '新字串')	將原字串取代為新字串			x.Replace("Hi","Hello")
 Substring(索引, 長度)		從指定索引位置取得指定長度的字串	x.Substring(3,10)
 Contains('關鍵字')		判斷是否包含該關鍵字			x.Contains("Build")
-
 
             string x = "My name is Tom";
 
@@ -1361,7 +1339,6 @@ Contains('關鍵字')		判斷是否包含該關鍵字			x.Contains("Build")
 另外，string跟array一樣，索引的起始值也是0
 因此，可以直接操作索引來取得字元
 範例
-
 string x = "Hello world";
 Console.WriteLine(x[4]); //o
 

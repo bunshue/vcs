@@ -114,16 +114,9 @@ namespace vcs_LOG
 
         private void WriteLog(string text)
         {
-            string path = AppDomain.CurrentDomain.BaseDirectory;
-            path = Path.Combine(path, "LogFiles2\\" + DateTime.Now.ToString("yy-MM-dd"));
+            string filename = "Logger4_" + DateTime.Now.ToString("yyMMdd-HHmmss") + ".log";
 
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-            string fileFullName = Path.Combine(path, string.Format("{0}.log", DateTime.Now.ToString("yyMMdd-HHmmss")));
-
-            using (StreamWriter output = File.AppendText(fileFullName))
+            using (StreamWriter output = File.AppendText(filename))
             {
                 output.WriteLine(text);
                 output.Close();
@@ -141,28 +134,13 @@ namespace vcs_LOG
 
         public static void WriteLog2(string text)
         {
-            string myPath = Application.StartupPath;
-            string myName = "david_log";
+            string strDicPath = Application.StartupPath + "//";
+            string log_filename1 = strDicPath + "aaaLogger1_" + string.Format("{0:yyyy年-MM月-dd日}", DateTime.Now) + "日誌記錄.txt";
 
-            if (myPath == "" || myName == "")
-                return;
-
-            string Year = DateTime.Now.Year.ToString();
-            string Month = DateTime.Now.Month.ToString().PadLeft(2, '0');
-            string Day = DateTime.Now.Day.ToString().PadLeft(2, '0');
-
-            //年月日文件夾是否存在，不存在則建立
-            if (!Directory.Exists(myPath + "\\LogFiles1\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day))
-            {
-                Directory.CreateDirectory(myPath + "\\LogFiles1\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day);
-            }
-
-            //寫入日志UNDO,Exception has not been handle
-            string LogFile = myPath + "\\LogFiles1\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day + "\\" + myName;
-            if (!File.Exists(LogFile))
+            if (!File.Exists(log_filename1))
             {
                 StreamWriter myFile;
-                myFile = File.AppendText(LogFile);
+                myFile = File.AppendText(log_filename1);
                 myFile.Close();
             }
 
@@ -170,7 +148,7 @@ namespace vcs_LOG
             {
                 try
                 {
-                    StreamWriter sr = File.AppendText(LogFile);
+                    StreamWriter sr = File.AppendText(log_filename1);
                     sr.WriteLine(DateTime.Now.ToString("HH:mm:ss") + "  " + text);
                     sr.Close();
                     break;

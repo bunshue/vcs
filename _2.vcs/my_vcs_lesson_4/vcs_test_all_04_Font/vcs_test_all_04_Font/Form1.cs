@@ -430,6 +430,14 @@ namespace vcs_test_all_04_Font
             {
                 richTextBox1.Text += (i + 1).ToString() + "\t" + FontFamily.Families[i].Name + "\n";
             }
+
+
+            richTextBox1.Text += "aaa: " + FontFamily.Families.Length.ToString() + "\n";
+            for (int i = 0; i < FontFamily.Families.Length; i++)
+            {
+                richTextBox1.Text += "aaa: " + FontFamily.Families[i].Name + "\n";
+            }
+
         }
 
         private void button37_Click(object sender, EventArgs e)
@@ -593,28 +601,13 @@ namespace vcs_test_all_04_Font
 */
 
 /*
-
-cccc
-textBox 屬性設定
-            // txtShow 字型大小11
             txtShow.Font = new Font(txtShow.Font.FontFamily, 11, FontStyle.Regular);
-            txtShow.ReadOnly = true;
-            txtShow.Multiline = true;
-*/
 
-//------------------------------------------------------------  # 60個
-
-             /* info
-            richTextBox1.Text += "aaa: " + pfc.Families.Length.ToString() + "\n";
-            for (int i = 0; i < pfc.Families.Length; i++)
-            {
-                richTextBox1.Text += "aaa: " + pfc.Families[i].Name + "\n";
-            }
-
-            richTextBox1.Text += "\n";
             richTextBox1.Text += f.FontFamily.ToString() + "\n";
             richTextBox1.Text += "字型名稱: " + f.FontFamily.Name + "\n";
             //richTextBox1.Text += "字型名稱: " + f.Name + "\n";    same
-            */
 
 //------------------------------------------------------------  # 60個
+
+*/
+

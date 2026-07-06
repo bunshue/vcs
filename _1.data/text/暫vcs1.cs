@@ -1,4 +1,35 @@
-﻿            Console.WriteLine("測試多型（Polymorphism）");
+﻿            string path = AppDomain.CurrentDomain.BaseDirectory;
+            path = Path.Combine(path, "Logger3_\\" + DateTime.Now.ToString("yy-MM-dd"));
+
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            string fileFullName = Path.Combine(path, string.Format("{0}.log", DateTime.Now.ToString("yyMMdd-HHmmss")));
+
+
+            string myPath = Application.StartupPath;
+            string myName = "david_log";
+
+            if (myPath == "" || myName == "")
+                return;
+
+            string Year = DateTime.Now.Year.ToString();
+            string Month = DateTime.Now.Month.ToString().PadLeft(2, '0');
+            string Day = DateTime.Now.Day.ToString().PadLeft(2, '0');
+
+            //年月日文件夾是否存在，不存在則建立
+            if (!Directory.Exists(myPath + "\\LogFiles1\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day))
+            {
+                Directory.CreateDirectory(myPath + "\\LogFiles1\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day);
+            }
+
+            //寫入日志UNDO,Exception has not been handle
+            string log_filename1 = myPath + "\\LogFiles1\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day + "\\" + myName;
+
+//------------------------------------------------------------  # 60個
+
+            Console.WriteLine("測試多型（Polymorphism）");
             hi();
             hi("lion-mouse");
 
@@ -27,7 +58,7 @@ g.Clear(Color.Transparent);
 //------------------------------------------------------------  # 60個
 
             //取得副檔名
-                        FileInfo file_info = new FileInfo(sfdImage.FileName);
+                        FileInfo file_info = new FileInfo(filename);
                         switch (file_info.Extension)
 
 
@@ -5403,11 +5434,6 @@ Microsoft Visual Studio (2008版本以上)
 
 Microsoft Chart Controls (For .Net FrameWork3.5，若專案使用.Net FrameWork 4.0 以上不須安裝，專案設定引用反而會出錯，原因是後續的版本已經內含了，額外引用會造成抓取元件衝突)
 
-.Net 讀取、修改、複製 照片資訊 EXIF 使用 ExifLibrary
-https://www.ez2o.com/Blog/Post/csharp-Read-Image-EXIF-ExifLibrary
-
-參考/加入參考/ExifLibrary.dll
-
 //------------------------------------------------------------  # 60個
 
 C# 呼叫 Matlab Function
@@ -10185,12 +10211,6 @@ Paint
 
 //------------------------------------------------------------  # 60個      
 
-/*
-//创建目录
-string dir = Path.GetDirectoryName(fileSaveUrl);
-if (!Directory.Exists(dir))
-    Directory.CreateDirectory(dir);
-*/
 
 //------------------------------------------------------------  # 60個
 
@@ -10242,49 +10262,24 @@ Application.Run(new Form1());
 
 
 
-
-EncodedImage.Save(sfdImage.FileName, ImageFormat.Png);
-EncodedImage.Save(sfdImage.FileName, ImageFormat.Bmp);
-EncodedImage.Save(sfdImage.FileName, ImageFormat.Gif);
-EncodedImage.Save(sfdImage.FileName, ImageFormat.Tiff);
-EncodedImage.Save(sfdImage.FileName, ImageFormat.Jpeg);
-
 bitmap1.Save(filename, ImageFormat.Bmp);
-bitmap1.Save(filename, ImageFormat.Exif);
-bitmap1.Save(filename, ImageFormat.Gif);
 bitmap1.Save(filename, ImageFormat.Jpeg);
 bitmap1.Save(filename, ImageFormat.Png);
+bitmap1.Save(filename, ImageFormat.Gif);
 bitmap1.Save(filename, ImageFormat.Tiff);
+bitmap1.Save(filename, ImageFormat.Exif);
+bitmap1.Save(filename, ImageFormat.Emf);
+bitmap1.Save(filename, ImageFormat.Icon);
+bitmap1.Save(filename, ImageFormat.Wmf);
+bitmap1.Save(filename);
 
-
-bitmap.Save(filename, ImageFormat.Bmp);
-bitmap.Save(filename, ImageFormat.Emf);
-bitmap.Save(filename, ImageFormat.Gif);
-bitmap.Save(filename, ImageFormat.Icon);
-bitmap.Save(filename, ImageFormat.Jpeg);
-bitmap.Save(filename, ImageFormat.Png);
-bitmap.Save(filename, ImageFormat.Tiff);
-bitmap.Save(filename, ImageFormat.Wmf);
-
-//bitmap1.Save(@file1, ImageFormat.Jpeg);
-bitmap1.Save(filename, ImageFormat.Bmp);
-//bitmap1.Save(@file3, ImageFormat.Png);
-
-
-//bitmap2.Save("ims02.duplicate.bmp", ImageFormat.Bmp);
-bmp.Save(@"D:\ssss.jpg");
 
 
 
 /*
-//儲存新的影像
-string filename = Application.StartupPath + "\\rotate_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
-rotateImage.Save(@filename, ImageFormat.Jpeg);
+//创建目录
+string dir = Path.GetDirectoryName(fileSaveUrl);
+if (!Directory.Exists(dir))
+    Directory.CreateDirectory(dir);
 */
-
-//------------------------------------------------------------  # 60個
-
-            //write image
-           bitmap1.Save("C:\\Output.png");
-
 

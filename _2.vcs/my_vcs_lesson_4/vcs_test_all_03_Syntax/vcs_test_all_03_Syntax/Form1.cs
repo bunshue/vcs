@@ -399,12 +399,12 @@ namespace vcs_test_all_03_Syntax
 
             Debug.Assert(!string.IsNullOrEmpty(name), "参数name不可为空。");
 
-            //6060
+            //------------------------------------------------------------  # 60個
 
 
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button13_Click(object sender, EventArgs e)
         {

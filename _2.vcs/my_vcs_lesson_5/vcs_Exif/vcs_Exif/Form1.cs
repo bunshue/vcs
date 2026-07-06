@@ -975,3 +975,13 @@ namespace vcs_Exif
 
 */
 
+
+/*
+.Net 讀取、修改、複製 照片資訊 EXIF 使用 ExifLibrary
+https://www.ez2o.com/Blog/Post/csharp-Read-Image-EXIF-ExifLibrary
+
+參考/加入參考/ExifLibrary.dll
+
+
+*/
+
