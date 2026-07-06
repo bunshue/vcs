@@ -355,6 +355,28 @@ namespace vcs_DiskDirectoryFile1
             File.Copy(oldName, newName, true);  // 檔案拷貝
             File.Copy(temp, strPathMdb, true);  // 檔案拷貝 //拷貝臨時數據庫到目標數據庫(覆蓋)
             */
+
+            //------------------------------------------------------------  # 60個
+
+            //檔案已存在的FileCopy/Move
+
+            string filename_source = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
+            string filename_destination = @"D:\_git\vcs\_1.data\______test_files1\_cpfile\ccc.jpg";   //要寫完整檔名
+
+            richTextBox1.Text += "檔案已存在的FileCopy/Move\n";
+            try
+            {
+                //File.Copy(filename_source, filename_destination);     //若檔案已存在, 會出現IOException
+                //File.Move(filename_source, filename_destination);     //若檔案已存在, 會出現IOException
+                File.Copy(filename_source, filename_destination, true); //覆蓋檔案
+                //File.Move(filename_source, filename_destination, true); //覆蓋檔案
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息m : " + ex.Message + "\n";
+            }
+
+            //File.Copy(currentExe, targetExe, true);
         }
 
         //------------------------------------------------------------  # 60個
@@ -774,15 +796,18 @@ namespace vcs_DiskDirectoryFile1
             Directory.Delete()
             Directory.GetDirectories()  // 由資料夾取出資料夾名稱串列
             Directory.GetFiles()  // 由資料夾取出檔案名稱串列
-            Directory.GetCurrentDirectory()  // 目前所在路徑, 目前的工作目錄
+            Directory.GetCurrentDirectory()  // 目前所在路徑, 目前工作目錄
             Directory.SetCurrentDirectory()  // 設定工作目錄
             Directory.GetLastWriteTime()  // 資料夾最後修改時間
             Directory.SetLastWriteTime()
             */
 
-            //取得目前所在路徑
-            string currentPath = Directory.GetCurrentDirectory();  // 目前的工作目錄
-            richTextBox1.Text += "目前所在路徑 : " + currentPath + "\n";
+            //取得目前工作目錄
+
+            richTextBox1.Text += "目前工作目錄 : " + Environment.CurrentDirectory + "\n";
+
+            string currentPath = Directory.GetCurrentDirectory();  // 目前工作目錄
+            richTextBox1.Text += "目前工作目錄 : " + currentPath + "\n";
 
             //Directory.SetCurrentDirectory("D:\\");  // 設定工作目錄
 
@@ -843,6 +868,20 @@ namespace vcs_DiskDirectoryFile1
             {
                 richTextBox1.Text += "資料夾: " + Path + " 不存在，不能刪除\n";
             }
+
+            //------------------------------------------------------------  # 60個
+
+            /* new
+            String retval = "";
+
+            // Delete all the files
+            String[] filenames = Directory.GetFiles(pPath);
+            foreach (String filename in filenames)
+                File.Delete(filename);
+            // Delete the directory
+            Directory.Delete(pPath, true);
+            return retval;
+            */
 
             //------------------------------------------------------------  # 60個
 
@@ -1233,19 +1272,6 @@ namespace vcs_DiskDirectoryFile1
             foreach (string fileName in fileEntries)
             {
             }
-
-            //------------------------------------------------------------  # 60個
-
-
-            String retval = "";
-
-            // Delete all the files
-            String[] filenames = Directory.GetFiles(pPath);
-            foreach (String filename in filenames)
-                File.Delete(filename);
-            // Delete the directory
-            Directory.Delete(pPath, true);
-            return retval;
 
             //------------------------------------------------------------  # 60個
 
@@ -1840,30 +1866,12 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_files10_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "CurrentDir1 : " + Environment.CurrentDirectory + "\n";
-            richTextBox1.Text += "CurrentDir2 : " + new DirectoryInfo(Environment.CurrentDirectory).Parent + "\n";
-            richTextBox1.Text += "CurrentDir3 : " + new DirectoryInfo(Environment.CurrentDirectory).Parent.Parent + "\n";
-            richTextBox1.Text += "CurrentDir4 : " + new DirectoryInfo(Environment.CurrentDirectory).Parent.Parent.FullName + "\n";
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic";
 
-            //------------------------------------------------------------  # 60個
-
-            //檔案已存在的FileCopy/Move
-
-            string filename_source = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
-            string filename_destination = @"D:\_git\vcs\_1.data\______test_files1\_cpfile\ccc.jpg";   //要寫完整檔名
-
-            richTextBox1.Text += "檔案已存在的FileCopy/Move\n";
-            try
-            {
-                //File.Copy(filename_source, filename_destination);     //若檔案已存在, 會出現IOException
-                //File.Move(filename_source, filename_destination);     //若檔案已存在, 會出現IOException
-                File.Copy(filename_source, filename_destination, true); //覆蓋檔案
-                //File.Move(filename_source, filename_destination, true); //覆蓋檔案
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "xxx錯誤訊息m : " + ex.Message + "\n";
-            }
+            richTextBox1.Text += "全目錄 : " + foldername + "\n";
+            richTextBox1.Text += "上層目錄 : " + new DirectoryInfo(foldername).Parent + "\n";
+            richTextBox1.Text += "上上層目錄 : " + new DirectoryInfo(foldername).Parent.Parent + "\n";
+            richTextBox1.Text += "上上層目錄的全目錄 : " + new DirectoryInfo(foldername).Parent.Parent.FullName + "\n";
 
             //------------------------------------------------------------  # 60個
 
@@ -2218,9 +2226,7 @@ for (int i = 0, count = pngfiles.Length; i < count; i++)
 
 //------------------------------------------------------------  # 60個
 
-if (!currentExe.Equals(targetExe, StringComparison.OrdinalIgnoreCase))
 
-File.Copy(currentExe, targetExe, true);
 
 */
 

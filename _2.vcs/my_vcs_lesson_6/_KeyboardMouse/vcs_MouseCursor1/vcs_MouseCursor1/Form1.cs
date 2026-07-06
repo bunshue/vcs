@@ -879,11 +879,7 @@ namespace vcs_MouseCursor1
             else
                 mouse_event(MOUSEEVENTF_MOVE, 0, -20, 0, 0);
 
-*/
-
-
-
-/*
+//------------------------------------------------------------  # 60個
 
 using System.Runtime.InteropServices;  //StructLayout
 
@@ -918,6 +914,237 @@ using System.Runtime.InteropServices;  //StructLayout
         //private Point pt_st;
         //private Point pt_sp;
         //private int count;
+//------------------------------------------------------------  # 60個
+ C# 透過Win32取得滑鼠位置 GetCursorPos
+
+        [DllImport("User32")]
+        internal extern static bool GetCursorPos(out MousePoint point);
+
+        internal struct MousePoint {
+            public int x;
+            public int y;
+        };
+
+        public Form1()
+        {
+            InitializeComponent();
+            
+            MousePoint point;
+            GetCursorPos(out point);
+            Console.WriteLine(point.x + "," + point.y);
+        }
+    }
+}
+
+//------------------------------------------------------------  # 60個
+
+移動鼠標
+
+        [DllImport("User32")]
+        public static extern void mouse_event(
+            int dwFlags,
+            int dx,
+            int dy,
+            int dwData,
+            int dwExtraInfo
+        );
+
+        const int MOUSEEVENTF_ABSOLUTE = 0x8000;
+        const int MOUSEEVENTF_LEFTDOWN = 0x0002;
+        const int MOUSEEVENTF_LEFTUP = 0x0004;
+        const int MOUSEEVENTF_MIDDLEDOWN = 0x0020;
+        const int MOUSEEVENTF_MIDDLEUP = 0x0040;
+        const int MOUSEEVENTF_MOVE = 0x0001;
+        const int MOUSEEVENTF_RIGHTDOWN = 0x0008;
+        const int MOUSEEVENTF_RIGHTUP = 0x0010;
+        const int MOUSEEVENTF_WHEEL = 0x0800;
+        const int MOUSEEVENTF_XDOWN = 0x0080;
+        const int MOUSEEVENTF_XUP = 0x1000;
+        const int MOUSEEVENTF_HWHEEL = 0x01000;
+
+            int dx = 100;
+            int dy = 100;
+            mouse_event(MOUSEEVENTF_MOVE, dx, dy, 0, 0);
+
+//------------------------------------------------------------  # 60個
+
+/// <summary>
+/// 顯示和隱藏鼠標指針.
+/// </summary>
+[DllImport("user32.dll", EntryPoint="ShowCursor", CharSet=CharSet.Auto)]
+public static extern int ShowCursor(int bShow);
+
+//在應用程序窗體中顯示鼠標指針：
+ApiCalls.ShowCursor(1);
+//在應用程序窗體中隱藏鼠標指針：
+ApiCalls.ShowCursor(0);
+
+//設定滑鼠座標到視窗客戶區正中心
+            Point pt = new Point(this.ClientSize.Width / 2, this.ClientSize.Height / 2);
+            Cursor.Position = this.PointToScreen(pt); // 設定滑鼠座標
+
+								Point pt = Cursor.Position; // 滑鼠座標
+								pt = this.PointToClient(pt); // 螢幕座標 -> 視窗客戶區座標
+								label1.Text = pt.X.ToString() + ", " + pt.Y.ToString();
+
+								Point pt = Cursor.Position; // 滑鼠座標
+								pt = this.PointToClient(pt); // 螢幕座標 -> 視窗客戶區座標
+								label1.Text = pt.X.ToString() + ", " + pt.Y.ToString();
+
+
+            Point pt1 = Control.MousePosition; // 取得滑鼠游標在螢幕座標中的位置。
+            Point pt2 = this.PointToClient(pt1); // 螢幕座標 -> 視窗客戶區座標
+            Point pt3 = this.pictureBox1.PointToClient(pt1); // 螢幕座標 -> 圖框客戶區座標
+
+            label1.Text = "絕對位置 : " + pt1.ToString() + ", Form位置 : " + pt2.ToString() + ", Pbx位置 : " + pt3.ToString();
+            label2.Text = "Pbx位置 : " + e.Location.ToString();
+
+            // 哪一個滑鼠按鍵處於按下狀態的值。
+            if (Control.MouseButtons == MouseButtons.Left) // 滑鼠按鍵
+                label3.Text = "滑鼠左鍵";
+            else if (Control.MouseButtons == MouseButtons.Right)
+                label3.Text = "滑鼠右鍵";
+            else if (Control.MouseButtons == MouseButtons.Middle)
+                label3.Text = "滑鼠中鍵";
+            else if (Control.MouseButtons == MouseButtons.XButton1)
+                label3.Text = "滑鼠XButton1鍵";
+            else if (Control.MouseButtons == MouseButtons.XButton2)
+                label3.Text = "滑鼠XButton2鍵";
+            else
+                label3.Text = "滑鼠其他鍵 " + Control.MouseButtons.ToString();
+
+            // 哪一個輔助按鍵(SHIFT、CTRL 和 ALT) 處於按下的狀態。
+            if (Control.ModifierKeys == Keys.Control)
+                label4.Text = "Control 鍵";
+            else if (Control.ModifierKeys == Keys.Shift)
+                label4.Text = "Shift 鍵";
+            else if (Control.ModifierKeys == Keys.Alt)
+                label4.Text = "Alt 鍵";
+            else
+                label4.Text = "";
+//------------------------------------------------------------  # 60個
+
+Cursor.Hide(); // 隱藏滑鼠游標
+Cursor.Show(); // 顯示滑鼠游標
+
+//------------------------------------------------------------  # 60個
+
+改變各種滑鼠屬標
+
+            pictureBox1.Cursor = Cursors.Cross;  //移到控件上，改變鼠標
+            pictureBox1.Cursor = Cursors.Help;
+            pictureBox1.Cursor = Cursors.HSplit;
+            pictureBox1.Cursor = Cursors.No;
+            
+            this.Cursor = Cursors.Help;
+            this.Cursor = Cursors.WaitCursor;	//等待標記
+            this.Cursor = Cursors.Default;	//預設
+
+自定義滑鼠屬標
+this.Cursor = new Cursor("icon.ico");
+icon.ico要放在bin之下
+
+不用製作游標檔的做法:
+this.Cursor = new Cursor(new Bitmap(@"C:\______test_files\reuse.bmp").GetHicon());
+
+label 之 cursor 可以改變游標指到label時，會改變的滑鼠游標。
+
+系統內建的滑鼠游標圖形 Cursors
+        Cursor[] cursorList = new Cursor[] {  // 系統內建的全部滑鼠游標圖形 
+               Cursors.AppStarting, Cursors.Arrow, Cursors.Cross,
+               Cursors.Default, Cursors.Hand, Cursors.Help,
+               Cursors.HSplit, Cursors.IBeam, Cursors.No,
+               Cursors.NoMove2D, Cursors.NoMoveHoriz, Cursors.NoMoveVert,
+               Cursors.PanEast, Cursors.PanNE, Cursors.PanNorth,
+               Cursors.PanNW, Cursors.PanSE, Cursors.PanSouth,
+               Cursors.PanSW, Cursors.PanWest, Cursors.SizeAll,
+               Cursors.SizeNESW, Cursors.SizeNS, Cursors.SizeNWSE,
+               Cursors.SizeWE, Cursors.UpArrow, Cursors.VSplit, Cursors.WaitCursor};
+			   
+        int i = 0;
+            this.Cursor = cursorList[i];
+            this.Text = this.Cursor.ToString();
+            i++;
+            if (i >= cursorList.Length)
+			{
+                i = 0;
+			}
+
+
+
+
+
+//Cursor myCursor = new Cursor(@"C:\WINDOWS\Cursors\cross_r.cur"); //自定義鼠標 
+
+//------------------------------------------------------------  # 60個
+
+
+        Cursor myCursor = new Cursor(@"C:\WINDOWS\Cursors\cross_r.cur"); //自定義鼠標 
+                //Cursor.Current = myCursor;
+
+
+
+
+            // 修改滑鼠停留在Label時的滑鼠游標的長相
+            label1.Cursor = Cursors.Hand;
+
+
+
+
+        //將屬標限制在表單內
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            Cursor.Clip = new Rectangle(this.Location, this.Size); //控制鼠標在窗口範圍內
+        }
+
+
+
+使用鼠標
+this.Cursor = new Cursor(xxxxxx);
+
+//------------------------------------------------------------  # 60個
+
+變更滑鼠鼠標圖案 ( 有效範圍在Form內 )。
+this.Cursor = new Cursor("C:\\test.ico"); // "C:\\test.ico" 改成您的圖檔，接受的影像格式為cur與ico
+
+
+            Cursor.Hide();  //隱藏光標
+            Cursor.Show();  //顯示光標
+
+//------------------------------------------------------------  # 60個
+
+改變鼠標
+        private void panel1_MouseLeave(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.Default;
+        }
+
+        private void panel1_MouseHover(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.VSplit;
+        }
+
+//------------------------------------------------------------  # 60個
+
+this.Cursor = Cursors.Hand;
+
+改變鼠標
+
+        private void panel1_MouseHover(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.VSplit;
+        }
+
+        private void panel1_MouseLeave(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.Default;
+        }
+        
+21. 變更滑鼠鼠標圖案 ( 有效範圍在Form內 )。
+1             this.Cursor = new Cursor("C:\\test.ico"); // "C:\\test.ico" 改成您的圖檔，接受的影像格式為cur與ico
+        
+//------------------------------------------------------------  # 60個
+
 
 */
 

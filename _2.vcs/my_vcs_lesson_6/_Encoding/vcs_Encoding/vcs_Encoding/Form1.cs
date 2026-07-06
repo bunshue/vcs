@@ -622,21 +622,149 @@ namespace vcs_Encoding
             string ssss2 = System.Text.UTF8Encoding.Default.GetString(buffer, 0, length);
             richTextBox1.Text += ssss2 + "\n";
             richTextBox1.Text += "len = " + ssss2.Length.ToString() + "\n";
-
-
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button13_Click(object sender, EventArgs e)
         {
+            //new
+            richTextBox1.Text += "GetBytes GetString 使用範例 1\n";
 
+            string str = "ABCDE\n";
+
+            richTextBox1.Text += "原字串 : " + str + "\n";
+
+            int len = str.Length;
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+
+            byte[] B = Encoding.Default.GetBytes(str);  //翻譯字串Str為Byte陣列B   //GetBytes : 把字串翻譯成Byte陣列
+            len = B.Length;
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+
+            PrintHexBytes(B);
+
+            B[1] += 5;
+            B[3] += 7;
+
+            str = Encoding.Default.GetString(B); //翻譯B陣列為字串A        //接收到的byte轉為文字
+            richTextBox1.Text += "轉回來字串 : " + str + "\n";
+
+            /*
+            richTextBox1.Text += "byte[] 轉 char[]\n";
+
+            byte[] byteData = new byte[5] { 0x01, 0x02, 0x03, 0x04, 0x05 };
+            char[] cChar = Encoding.ASCII.GetChars(byteData);
+
+            richTextBox1.Text += "char[] 轉 二進位碼的文字型態\n";
+            char[] cChar = new char[5] { 'a', 'b', 'c', 'd', 'e' };
+            byte[] byteData = Encoding.Default.GetBytes(cChar);
+            */
+        }
+
+        public void PrintHexBytes(byte[] bytes)
+        {
+            if ((bytes == null) || (bytes.Length == 0))
+            {
+                richTextBox1.Text += "<none>";
+            }
+            else
+            {
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    richTextBox1.Text += bytes[i].ToString("X2") + "\n";
+                }
+            }
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button14_Click(object sender, EventArgs e)
         {
+            //new
+            richTextBox1.Text += "GetBytes GetString 使用範例 2\n";
+
+            string str;
+            //char[] cChar = new char[5] { 'a', 'b', 'c', 'd', 'e' };
+            str = "中間路線";
+            richTextBox1.Text += "\n原字串:\t" + str + "\n";
+            byte[] byteData = Encoding.Default.GetBytes(str);
+            richTextBox1.Text += "使用GetBytes轉成拜列\t";
+            foreach (byte b in byteData)
+            {
+                richTextBox1.Text += b.ToString("X2") + " ";
+            }
+            richTextBox1.Text += "\n";
+
+            string nn = string.Empty;
+            nn = Encoding.Default.GetString(byteData);
+            richTextBox1.Text += "將此拜列使用GetString轉成字串, 新字串:\t" + nn + "\n";
+
+            byteData[1] = (byte)(byteData[1] + 2);
+            nn = Encoding.Default.GetString(byteData);
+            richTextBox1.Text += "修改拜列, 將此拜列使用GetString轉成字串, 新字串:\t" + nn + "\n";
+
+            str = "ABCDE";
+            // Encoding.GetBytes方法，將 String 轉為 Byte 序列
+            byte[] stringConvByte = Encoding.Default.GetBytes(str);
+            // Encoding.GetString方法，將 Byte 序列 轉為 String
+            string byteConvStrig = Encoding.Default.GetString(stringConvByte);
+
+            int i;
+            richTextBox1.Text += "\n原字串:\t" + str + "\t長度:\t" + str.Length.ToString() + "\t內容:\t";
+            for (i = 0; i < str.Length; i++)
+            {
+                richTextBox1.Text += str[i] + " ";
+            }
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "轉成拜列\t長度:\t" + stringConvByte.Length.ToString() + "\t內容:\t";
+            for (i = 0; i < stringConvByte.Length; i++)
+            {
+                richTextBox1.Text += stringConvByte[i].ToString("X2") + " ";
+            }
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "轉成字串\t長度:\t" + byteConvStrig.Length.ToString() + "\n";
+
+            byte[] byteArray = new byte[5] { 0x41, 0x42, 0x43, 0x44, 0x45 };
+
+            str = Encoding.Default.GetString(byteArray);
+
+            richTextBox1.Text += "使用GetString將拜列轉成字串:\t" + str + "\n";
+
+            str = "this is a lion-mouse";
+            richTextBox1.Text += "\n原字串:\t" + str + "\n";
+
+            byteArray = Encoding.Default.GetBytes(str);
+            richTextBox1.Text += "使用GetBytes將字串轉成拜列\t內容:\t";
+            for (i = 0; i < byteArray.Length; i++)
+            {
+                richTextBox1.Text += (char)byteArray[i] + " ";  //多了(char)變成%c
+            }
+            richTextBox1.Text += "\n";
+
+            //Byte型態的陣列轉換為字串
+            int bytes = 0;
+            Byte[] byte_array = new Byte[256];
+            String new_string = "";
+            byte_array[0] = (byte)'A';
+            byte_array[1] = (byte)'B';
+            byte_array[2] = (byte)'C';
+            bytes = 3;
+            // 將Byte型態的陣列轉換為字串
+            new_string = Encoding.ASCII.GetString(byte_array, 0, bytes);
+            richTextBox1.Text += "使用GetString將拜列轉成字串\t" + new_string + "\n";
+
+            //字串轉換為Byte型態的陣列
+            str = "this is a lion-mouse";
+            Byte[] byte_array2 = Encoding.ASCII.GetBytes(str);
+            richTextBox1.Text += "使用GetBytes將字串轉成拜列\t內容:\t";
+            foreach (char c in byte_array2)
+            {
+                richTextBox1.Text += c.ToString() + " ";
+            }
+            richTextBox1.Text += "\n";
 
         }
 
@@ -830,7 +958,65 @@ UTF8Encoding.Default.GetBytes(str)
 //------------------------------------------------------------  # 60個
 
 
+            char c = 'A';
+            int i = 'A';
+
+            richTextBox1.Text += "字元變數c是" + c + "\n";
+            richTextBox1.Text += "字元A的內碼是" + i + "\n";
+
+            i = 'B';
+            richTextBox1.Text += "字元B的內碼是" + i + "\n";
+
+            c = '\u0041'; //16進位,2個Bytes
+            richTextBox1.Text += "UniCode 0041的字元是" + c + "\n";
+
+//------------------------------------------------------------  # 60個
+
+Encoding.GetEncoding big5 gb2312 shift_jis UTF-8 unicode
+
+test write
+StreamWriter swAcqflg = new StreamWriter(strFilePath + strFileName, false, System.Text.Encoding.GetEncoding("big5"));
+
+StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("utf-8"));   //指名編碼格式 the same
+StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("UTF-8"));    //指名編碼格式
+StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("unicode"));   //指名編碼格式
+StreamWriter sw = new StreamWriter(fs, Encoding.UTF8);    //指名編碼格式
+
+byte[] unknow = Encoding.GetEncoding("Big5").GetBytes(strBig5);  // 繁體中文 (Big5) 
+return Encoding.GetEncoding("gb2312").GetString(unknow); // 簡體中文 (GB2312) 
+StreamReader(fs, Encoding.GetEncoding("gb2312"));	    //
+
+byte[] unknow = Encoding.GetEncoding("Big5").GetBytes(strBig5);  // 繁體中文 (Big5) 
+return Encoding.GetEncoding("gb2312").GetString(unknow); // 簡體中文 (GB2312) 
+byte[] bytes = Encoding.GetEncoding("GB2312").GetBytes(word);
+
+Encoding enc = Encoding.GetEncoding("BIG5");
+Encoding enc = Encoding.GetEncoding("GB2312");
+
+
+大小寫不拘
+
+//StreamWriter sw = new StreamWriter(File.Open(filename, FileMode.Create), Encoding.GetEncoding("UTF-8"));    //指名編碼格式
+            var hopefullyRecovered = Encoding.GetEncoding(1252).GetBytes(badstringFromDatabase);
+            StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.GetEncoding("unicode"));   //指名編碼格式
+
+打印字串的編碼值
+
+            int i;
+            for (i = 0; i < Info.Length; i++)
+            {
+                //richTextBox1.Text += Info[i].ToString() + "\n";
+                //richTextBox1.Text += ((int)Info[i]).ToString("X2") + " ";
+            }
+
+                string filename = "02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3";
+                for (i = 0; i < filename.Length; i++)
+                {
+                    //richTextBox1.Text += filename[i].ToString() + "\n";
+                    richTextBox1.Text += ((int)filename[i]).ToString("X2") + " ";
+                }
 
 */
+
 
 

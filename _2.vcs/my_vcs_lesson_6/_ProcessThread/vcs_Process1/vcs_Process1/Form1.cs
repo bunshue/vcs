@@ -17,7 +17,7 @@ using System.Drawing.Imaging;  // for PixelFormat
 /*
 Start 啟動進程資源將其與process類關聯
 Kill立即關閉進程
-waitforExit 在等待關聯進程的退出   // 會等到這個程式結束為止
+WaitForExit() 在等待關聯進程的退出   // 會等到這個程式結束為止
 Close 釋放與此關聯的所有進程 
 */
 
@@ -300,20 +300,11 @@ namespace vcs_Process1
                     richTextBox1.Text += "Height = " + (rect.Bottom - rect.Top).ToString() + "\n";
 
                     richTextBox1.Text += "擷取此應用程式的畫面\n";
-
-                    int width = rect.Right - rect.Left;
-                    int height = rect.Bottom - rect.Top;
-                    Bitmap bmp = new Bitmap(width, height, PixelFormat.Format32bppArgb);
-
-                    Graphics.FromImage(bmp).CopyFromScreen(rect.Left,
-                                                           rect.Top,
-                                                           0,
-                                                           0,
-                                                           new Size(width, height),
-                                                           CopyPixelOperation.SourceCopy);
+                    int W = rect.Right - rect.Left;
+                    int H = rect.Bottom - rect.Top;
+                    Bitmap bmp = new Bitmap(W, H, PixelFormat.Format32bppArgb);
+                    Graphics.FromImage(bmp).CopyFromScreen(rect.Left, rect.Top, 0, 0, new Size(W, H), CopyPixelOperation.SourceCopy);
                     string filename = Application.StartupPath + "\\capture_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
-                    //string path = DateTime.Now.ToString("yyyyMMdd HHmmss") + ".jpg";
-                    //bmp.Save(path);
                     bmp.Save(filename, ImageFormat.Jpeg);
                 }
             }
@@ -323,12 +314,22 @@ namespace vcs_Process1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // Process.GetCurrentProcess()
+            // Process.GetCurrentProcess()  // 取得目前的process
+
+            Process currentProcess = Process.GetCurrentProcess();  // 取得目前的process
 
             // 取得目前執行檔的完整路徑
-            string currentExe = Process.GetCurrentProcess().MainModule.FileName;
-
+            string currentExe = currentProcess.MainModule.FileName;
             richTextBox1.Text += currentExe + "\n";
+
+            richTextBox1.Text += "MainModule.FileVersionInfo :\n";
+            richTextBox1.Text += currentProcess.MainModule.FileVersionInfo.ToString() + "\n";
+
+            richTextBox1.Text += "MainModule : " + currentProcess.MainModule + "\n";
+
+            IntPtr baseAddress = currentProcess.MainModule.BaseAddress;
+            richTextBox1.Text += "BaseAddress : " + baseAddress.ToString() + "\n";
+            richTextBox1.Text += "MainModule.BaseAddress : " + baseAddress + "\n";
 
             string targetExe = Path.Combine(Path.GetDirectoryName(currentExe), "AAAA.exe");
             richTextBox1.Text += targetExe + "\n";
@@ -554,11 +555,12 @@ namespace vcs_Process1
 
             //取得系統處理器數目
             int cnt = Environment.ProcessorCount;
-            richTextBox1.Text += "cnt = " + cnt.ToString() + "\n";
+            richTextBox1.Text += "系統處理器數目 : " + cnt.ToString() + "\n";
 
             //通過C#還可以指定當前線程的運行在哪個CPU上。
-            //Process process = Process.GetCurrentProcess();  // 取得目前的process
-            //process.ProcessorAffinity = (IntPtr)0x0001;
+            //Process currentProcess = Process.GetCurrentProcess();  // 取得目前的process
+            //currentProcess.ProcessorAffinity = (IntPtr)0x0001;
+
             //Process.ProcessorAffinity 設置當前CPU的屏蔽字，0x0001表示選用一號CPU，0x0002表示選用2號CPU。
 
             //------------------------------------------------------------  # 60個
@@ -808,8 +810,8 @@ namespace vcs_Process1
         {
             //取得Process資訊
             //1. 當前進程資料, 取得目前的Process
-            //Process process = Process.GetCurrentProcess();  // 取得目前的process
-            //show_process_info(process);
+            //Process currentProcess = Process.GetCurrentProcess();  // 取得目前的process
+            //show_process_info(currentProcess);
 
             //------------------------------  # 30個
 
@@ -990,7 +992,7 @@ namespace vcs_Process1
             //取得Process資訊
 
             //當前進程資料, 取得目前的Process
-            Process current_process = Process.GetCurrentProcess();  // 取得目前的process
+            Process currentProcess = Process.GetCurrentProcess();  // 取得目前的process
 
             //------------------------------------------------------------  # 60個
 
@@ -1037,11 +1039,9 @@ namespace vcs_Process1
 
             foreach (Process process in processes)
             {
-                richTextBox1.Text += "ProcessName : " + process.ProcessName + "\n";
-                richTextBox1.Text += "Id : " + process.Id + "\n";
-
-                IntPtr baseAddress = process.MainModule.BaseAddress;
-                richTextBox1.Text += "BaseAddress : " + baseAddress.ToString() + "\n";
+                richTextBox1.Text += "名稱 : " + process.ProcessName + "\n";
+                richTextBox1.Text += "PID : " + process.Id + "\n";
+                richTextBox1.Text += "開啟時間 : " + process.StartTime + "\n";
             }
 
             //------------------------------------------------------------  # 60個
@@ -1187,13 +1187,12 @@ namespace vcs_Process1
             // 在 Program.cs 裡面先檢查, 若 processes.Length > 1 , 即重複執行, 警示完離開程式
 
             string MName = Process.GetCurrentProcess().MainModule.ModuleName;
-            string PName = Path.GetFileNameWithoutExtension(MName);
-
             richTextBox1.Text += "MName : " + MName + "\n";
+
+            string PName = Path.GetFileNameWithoutExtension(MName);
             richTextBox1.Text += "PName : " + PName + "\n";
 
             Process[] processes = Process.GetProcessesByName(PName);
-
             richTextBox1.Text += "本程式執行次數 : " + processes.Length.ToString() + "\n";
 
             if (processes.Length > 1)
@@ -1216,8 +1215,6 @@ namespace vcs_Process1
 
         private void button25_Click(object sender, EventArgs e)
         {
-
-
         }
 
         private void button26_Click(object sender, EventArgs e)

@@ -1318,3 +1318,27 @@ fs.Close();
 */
 
 
+
+
+/*
+
+            	//讀取一檔
+                FileStream fs = new FileStream(targetPath, FileMode.Open, FileAccess.Read);
+                BinaryReader br = new BinaryReader(fs);
+                br.BaseStream.Seek(0, SeekOrigin.Begin); //將指針設到開頭
+                while (br.BaseStream.Position < br.BaseStream.Length)
+                {
+                    try
+                    {
+                        Console.WriteLine(br.ReadString());
+                    }
+                    catch (EndOfStreamException e)
+                    {
+                        Console.WriteLine("已經到了結尾");
+                    }
+                }
+                br.Close();
+                fs.Close();
+
+*/
+

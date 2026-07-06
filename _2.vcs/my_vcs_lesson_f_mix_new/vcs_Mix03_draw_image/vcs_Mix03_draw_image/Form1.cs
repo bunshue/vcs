@@ -67,9 +67,35 @@ namespace vcs_Mix03_draw_image
         }
 
         //直接寫一個OnPaint在此, 取代Form1_Paint
+
+        private const string FONT_NAME = "Times New Roman";
+        private const float FONT_SIZE = 12;
+        private const FontStyle FONT_STYLE = FontStyle.Bold;
+        private const string MENU_CAPTION = "Say Hi";
         protected override void OnPaint(PaintEventArgs e)
         {
             e.Graphics.DrawRectangle(Pens.Red, 5, 5, this.ClientSize.Width - 10, this.ClientSize.Height - 10);
+            // Create the font we will use to draw the text.
+            using (Font menu_font = new Font(FONT_NAME, FONT_SIZE, FONT_STYLE))
+            {
+                // See how big the text will be.
+                SizeF text_size = e.Graphics.MeasureString(MENU_CAPTION, menu_font);
+            }
+
+            // Create the font we will use to draw the text.
+            using (Font menu_font = new Font(FONT_NAME, FONT_SIZE, FONT_STYLE))
+            {
+                //e.Graphics.FillRectangle(Brushes.Pink, e.Bounds);
+
+                // Draw the text.
+                //e.Graphics.DrawString(MENU_CAPTION, menu_font, Brushes.AliceBlue, e.Bounds.X, e.Bounds.Y);
+                // The mouse is not over the item.
+                // Erase the background.
+                //e.Graphics.FillRectangle(Brushes.LightGray, e.Bounds.X, e.Bounds.Y, e.Bounds.Width, e.Bounds.Height);
+
+                // Draw the text.
+                //e.Graphics.DrawString(MENU_CAPTION, menu_font, Brushes.Black, e.Bounds.X, e.Bounds.Y);
+            }
         }
 
         void show_item_location()
@@ -407,7 +433,7 @@ namespace vcs_Mix03_draw_image
         private void button9_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
+            /*
             string str = "天階夜色涼如水";
 
             Font f = new Font("標楷體", 48, GraphicsUnit.Point);  // 預設為 Point
@@ -422,7 +448,40 @@ namespace vcs_Mix03_draw_image
             g.DrawRectangle(Pens.Red, x_st, y_st, W, H);
 
             pictureBox1.Image = bitmap1;
+            */
+
+            //6060
+            /*
+            string tmp_string = "春花秋月何時了";
+            richTextBox1.Text += button18.Text + "\n";
+            richTextBox1.Text += tmp_string + "\n";
+            Graphics g2 = richTextBox1.CreateGraphics();
+            Size sss = g2.MeasureString(tmp_string, richTextBox1.Font).ToSize();
+            richTextBox1.Text += "size W = " + sss.Width.ToString() + "\n";
+            richTextBox1.Text += "size H = " + sss.Height.ToString() + "\n";
+
+            Font f = new Font("Arial", 128);
+            SolidBrush sb = new SolidBrush(Color.Red);
+            g.DrawString("A", f, sb, new PointF(0, 0));
+
+            //Graphics g2 = richTextBox1.CreateGraphics();
+            sss = g.MeasureString("A", f).ToSize();
+            richTextBox1.Text += "size f = " + f.Size.ToString() + "\t";
+            richTextBox1.Text += "size W = " + sss.Width.ToString() + "\t";
+            richTextBox1.Text += "size H = " + sss.Height.ToString() + "\n";
+            */
+
+
+            //6060
+
+            //量測字體大小
+            Font f = new Font("標楷體", 40);
+            string str = "放大縮小";
+            int w = g.MeasureString(str, f).ToSize().Width;
+            int h = g.MeasureString(str, f).ToSize().Height;
+
         }
+
 
         //------------------------------------------------------------  # 60個
 

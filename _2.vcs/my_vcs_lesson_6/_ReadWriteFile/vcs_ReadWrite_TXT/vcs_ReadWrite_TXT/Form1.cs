@@ -792,11 +792,13 @@ namespace vcs_ReadWrite_TXT
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-
+            //製作.inf檔
+            //StreamWriter
+            sw = new StreamWriter("tmp_AutoRun.inf", false);
+            sw.WriteLine("[autorun]");
+            sw.WriteLine("OPEN=AUTORUN.EXE");
+            sw.WriteLine("ICON=run.ICO");
+            sw.Close();
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -1660,4 +1662,114 @@ _C	|份|	4EFD	20221	_X	|，|	FF0C	65292	_C	|以|	4EE5	20197	_C	|及|	53CA	21450	
 _C	|本|	672C	26412	_C	|的|	7684	30340	_C	|假|	5047	20551	_C	|名|	540D	21517	_C	|組|	7D44	32068	
 _C	|合|	5408	21512	_A	|、|	3001	12289	_C	|單|	55AE	21934	_C	|位|	4F4D	20301	_A	|、|	3001	12289	
 */
+
+//------------------------------------------------------------  # 60個
+
+/*
+objStreamWriter = new StreamWriter(objFileStream, Encoding.Unicode); 
+
+開關檔案 使用指定的編碼
+StreamWriter outStream = new StreamWriter(filepath, false, Encoding.GetEncoding(950));
+using (StreamReader sr = new StreamReader(filepath, Encoding.GetEncoding(936)))
+
+//------------------------------------------------------------  # 60個
+
+            string filename = @"../../net/net1.net";
+            using (TextReader reader = new StreamReader(filename))
+            {
+                string line = reader.ReadLine();
+                while (line != null)
+                {
+                    richTextBox1.Text += line + "\n";
+
+                    line = reader.ReadLine();
+                }
+            }
+
+string txt = link.Cost.ToString();
+SizeF txt_size = gr.MeasureString(txt, this.Font);
+gr.DrawString(txt, this.Font, Brushes.Black, x1 - txt_size.Width / 2, y1 - txt_size.Height / 2);
+
+string txt = node.Id.ToString();
+SizeF txt_size = gr.MeasureString(txt, this.Font);
+gr.DrawString(txt, this.Font, text_brush, node.Location.X - txt_size.Width / 2, node.Location.Y - txt_size.Height / 2);
+
+//------------------------------------------------------------  # 60個
+
+第一種方法是運用讀取現在的環境編碼，來達到正確編碼。
+
+//使用現在的環境編碼
+StreamReader sr = new StreamReader(filename, Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
+
+//使用默認編碼格式, 作業系統目前 ANSI 字碼頁的編碼方式
+
+//直接指定編碼
+sr = new StreamReader(filename, Encoding.Default);    	//Windows預設，就是big5
+sr = new StreamReader(filename, Encoding.GetEncoding("big5"));
+sr = new StreamReader(filename, Encoding.GetEncoding(950)); //same
+sr = new StreamReader(filename, Encoding.GetEncoding("gb2312"));    //以gb2312編碼讀取文字檔案中的漢字, same
+
+StreamReader sr = new StreamReader(openFileDialog1.FileName, Encoding.GetEncoding("gb2312"));	    //解決讀取一般編碼檔案中文字錯亂的問題
+
+StreamReader sr;
+//sr = new StreamReader(filename, Encoding.Default);    //Windows預設，就是big5
+//sr = new StreamReader(filename, Encoding.GetEncoding("big5"));
+sr = new StreamReader(filename, Encoding.GetEncoding(950)); //same
+//sr = new StreamReader(filename, Encoding.GetEncoding("gb2312"));    //以gb2312編碼讀取文字檔案中的漢字, same
+sr = new StreamReader(filename, Encoding.GetEncoding("gb2312"), true);
+sr = new StreamReader(filename, Encoding.GetEncoding("shift_jis"));
+
+sr = new StreamReader(filename, Encoding.GetEncoding("big5"), true);
+sr = new StreamReader(filename, Encoding.GetEncoding("gb2312"), true);
+
+//sr = new StreamReader(filename, Encoding.UTF8);       //同
+sr = new StreamReader(filename, Encoding.Unicode);      //同
+
+StreamReader sr = new StreamReader(fi.FullName, Encoding.UTF8);
+StreamReader sr = new StreamReader(WResp.GetResponseStream(), Encoding.ASCII);//從數據流中讀取數據
+
+以下兩種寫法是一樣的喔，可以參考 CodePage : http://www.lingoes.net/en/translator/codepage.htm
+Encoding.GetEncoding("big5")
+Encoding.GetEncoding(950)
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //程式碼加入行號
+            //設定檔案的路徑
+            string path = @"../../data/Program.cs";
+            string append = @"tmp_final.txt";
+            string str;
+            int index = 1;
+
+            StreamReader sr = File.OpenText(path);
+            StreamWriter sw = File.AppendText(append);
+
+            while ((str = sr.ReadLine()) != null)
+            {
+                richTextBox1.Text += str + "\n";
+                //WriteLine($"{index:D5} {str}");
+                //sw.WriteLine($"{index++:D5} {str}");
+            }
+            sr.Close();
+            sw.Close();
+
+            //程式碼加入行號
+            string str;
+            int index = 1;
+
+            StreamReader sr = File.OpenText("Program.cs");
+            StreamWriter sw = File.AppendText("final.txt");
+
+            while ((str = sr.ReadLine()) != null)
+            {
+                Console.WriteLine("{0:D5} {1}", index, str);
+                sw.WriteLine("{0:D5} {1}", index++, str);
+            }
+            sr.Close();
+            sw.Close();
+
+
+
+*/
+
 

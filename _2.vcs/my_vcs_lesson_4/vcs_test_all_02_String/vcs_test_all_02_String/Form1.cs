@@ -1288,3 +1288,90 @@ ToString("00")
 ToString("0000")
 */
 
+
+//if (!currentExe.Equals(targetExe, StringComparison.OrdinalIgnoreCase))
+
+/*
+ssss
+不足位元補零 十進位及十六進位
+
+byte byteValue = 254;
+
+// Display integer values by calling the ToString method.
+richTextBox1.Text += byteValue.ToString("D8").ToString() + "\t" + byteValue.ToString("X8") + "\n";
+
+
+
+
+            string sign = new string('*', 30);
+            Console.WriteLine(sign);
+
+
+pppp
+        //Random r = new Random();
+            string new_string = "string" + r.Next(100).ToString("D3");
+
+//------------------------------------------------------------  # 60個
+
+richTextBox1.Text += p.A.ToString("X2") + p.R.ToString("X2") + p.G.ToString("X2") + p.B.ToString("X2") + "  ";
+
+//------------------------------------------------------------  # 60個
+
+C# 提供了許多方法給string使用
+
+方法				說明 					格式
+Length				取得字串長度長度			x.Length
+IndexOf('關鍵字')		搜尋該關鍵字所在起始位置的索引值	x.IndexOf("H")
+Insert(索引, '關鍵字')		將關鍵字插入指定索引位置		x.Insert(3,"Hello")
+Remove(索引)			清除索引位置之後的字串			x.Remove(2)
+Replace('原字串', '新字串')	將原字串取代為新字串			x.Replace("Hi","Hello")
+Substring(索引, 長度)		從指定索引位置取得指定長度的字串	x.Substring(3,10)
+Contains('關鍵字')		判斷是否包含該關鍵字			x.Contains("Build")
+
+
+            string x = "My name is Tom";
+
+            int j = x.Length;
+            Console.WriteLine(j);//14
+
+            int p = x.IndexOf("me");
+            Console.WriteLine(p);//5
+
+            string k = x.Insert(0, "Hello! ");
+            Console.WriteLine(k);//Hello! My name is Tom
+
+            string l = x.Remove(10);
+            Console.WriteLine(l);//My name is
+
+            string m = x.Replace("Tom", "John");
+            Console.WriteLine(m);//My name is John
+
+            string i = x.Substring(3, 7);
+            Console.WriteLine(i);//name is
+
+            if (x.Contains("Tom"))
+            {
+                Console.WriteLine("Yes! You are Tom");
+            }else
+            {
+                Console.WriteLine("Who are you?");
+            }//Yes! You are Tom
+            
+
+另外，string跟array一樣，索引的起始值也是0
+因此，可以直接操作索引來取得字元
+範例
+
+string x = "Hello world";
+Console.WriteLine(x[4]); //o
+
+//------------------------------------------------------------  # 60個
+
+
+*/
+
+
+
+
+
+
