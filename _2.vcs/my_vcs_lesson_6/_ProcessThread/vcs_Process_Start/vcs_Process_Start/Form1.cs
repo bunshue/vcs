@@ -87,7 +87,7 @@ namespace vcs_Process_Start
             int y_st = 10;
             int dx = W + 10;
             int dy = H + 10;
-            groupBox5.Size = new Size(W*2+10, H);
+            groupBox5.Size = new Size(W * 2 + 10, H);
             groupBox6.Size = new Size(W, 200 - 40);
             groupBox5.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox6.Location = new Point(x_st + dx * 2, y_st + dy * 0);
@@ -370,7 +370,6 @@ namespace vcs_Process_Start
 
             //通過 WIN32 API 實現嵌入程序窗體，win32api
 
-            //string sPath = Environment.GetEnvironmentVariable("windir");//獲取系統變量 windir(windows)    
             const string exe_filename = "C:\\Program Files\\Windows NT\\Accessories\\wordpad.exe";
             InsertWindow insertwin = new InsertWindow(panel1, exe_filename);
         }
@@ -389,12 +388,11 @@ namespace vcs_Process_Start
 
             //通過 WIN32 API 實現嵌入程序窗體，win32api
 
-            //string sPath = Environment.GetEnvironmentVariable("windir");//獲取系統變量 windir(windows)    
             //InsertWindow insertwin = new InsertWindow(panel1, exe_filename + " " + filename);
             InsertWindow insertwin = new InsertWindow(panel1, exe_filename);
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -619,12 +617,10 @@ namespace vcs_Process_Start
         const Int32 GWL_STYLE = -16;
         const Int32 WS_BORDER = (Int32)0x00800000L;
         const Int32 WS_THICKFRAME = (Int32)0x00040000L;
-
         const Int32 SWP_NOMOVE = 0x0002;
         const Int32 SWP_NOSIZE = 0x0001;
         const Int32 SWP_NOZORDER = 0x0004;
         const Int32 SWP_FRAMECHANGED = 0x0020;
-
         const Int32 SW_MAXIMIZE = 3;
         IntPtr HWND_NOTOPMOST = new IntPtr(-2);
 

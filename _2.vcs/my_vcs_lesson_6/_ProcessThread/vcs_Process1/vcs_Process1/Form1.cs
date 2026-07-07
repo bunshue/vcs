@@ -504,14 +504,24 @@ namespace vcs_Process1
             */
 
             Process.Start("IExplore.exe", "tw.yahoo.com");  // 啟動程式 + 參數
+
             Process.Start("chrome.exe", "C:\\Read_Cht.htm");  // 啟動程式 + 參數
 
             //開啟IE, 指名網址
             //Process.Start("IExplore.exe", "www.google.com.tw");   //same
             Process.Start("iexplore.exe", "www.google.com.tw");
 
+            //連線到Google，使用IE
+            Process.Start("IExplore.exe", "http://www.google.com");
+
             //開啟FireFox, 指名網址
             Process.Start("Firefox.exe", "www.google.com.tw");
+
+            //連線到Google，使用預設的browser
+            Process.Start("http://www.google.com/");
+
+            //開啟網頁
+            Process.Start("https://www.google.com.tw/?gws_rd=ssl");
 
             //用Adobe開啟pdf檔案
             string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_pdf\note_Linux_workstation.pdf";
@@ -613,6 +623,18 @@ namespace vcs_Process1
 
             richTextBox1.Text += "開啟 顯示器 設定\n";
             Process.Start("desk.cpl");
+
+            //打開控制面板中的程序_桌面設定
+            Process.Start("desk.cpl");
+
+            //打開控制面板中的程序_滑鼠游標設定
+            Process.Start("main.cpl");
+
+            //打開控制面板中的程序_網路連接
+            Process.Start("ncpa.cpl");
+
+            //打開控制面板中的程序_聲音設定
+            Process.Start("mmsys.cpl");
 
             richTextBox1.Text += "開啟 滑鼠 設定\n";
             //Process.Start("main.cpl");
@@ -1618,7 +1640,6 @@ namespace vcs_Process1
 
 
 /*
-
 C#調用默認浏覽器打開網頁的幾種方法
 
 方法一 : 從注冊表中讀取默認浏覽器可執行文件路徑
@@ -1652,12 +1673,6 @@ C#調用默認浏覽器打開網頁的幾種方法
 
 //------------------------------------------------------------  # 60個
 
-//打开注册表
-string regeditstr = Environment.GetEnvironmentVariable("WinDir");//WinDir系统环境变量的名称
-Process.Start(regeditstr + "\\regedit.exe");//打开注册表
-
-//------------------------------------------------------------  # 60個
-
 */
 
 //richTextBox1.Text += "本程式名稱 : " + Application.CompanyName + "\n";
@@ -1667,17 +1682,3 @@ Process.Start(regeditstr + "\\regedit.exe");//打开注册表
             //Application.EnableVisualStyles();
             //Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Form1());
-
-
-/*
-            //連線到Google，使用預設的browser
-            Process.Start("http://www.google.com/");
-
-            //連線到Google，使用IE
-            Process.Start("IExplore.exe", "http://www.google.com");
-
-            //開啟網頁
-            Process.Start("https://www.google.com.tw/?gws_rd=ssl");
-*/
-
-

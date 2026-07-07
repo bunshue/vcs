@@ -195,10 +195,47 @@ namespace vcs_Clock
                 show_seconds = 0;
             }
 
+            //吃飯了
+            if ((dt.Hour == 11) && (dt.Minute == 50) && (dt.Second < 2))
+            {
+                this.WindowState = FormWindowState.Normal;
+                this.ShowInTaskbar = true;
+                this.TopMost = true;
+                show_seconds = 0;
+
+                show_message("吃飯了");
+            }
+
+            //下午茶
+            if ((dt.Hour == 16) && (dt.Minute == 00) && (dt.Second < 2))
+            {
+                this.WindowState = FormWindowState.Normal;
+                this.ShowInTaskbar = true;
+                this.TopMost = true;
+                show_seconds = 0;
+
+                show_message("下午茶");
+            }
+
             if (clock_type == 1)
             {
                 digitalDisplayControl1.DigitText = DateTime.Now.ToString("HH:mm:ss");
             }
+        }
+
+        void show_message(string message)
+        {
+            this.WindowState = FormWindowState.Maximized;
+
+            Graphics g = this.CreateGraphics();
+            //g.DrawRectangle(Pens.Red, 200, 200, 300, 300);
+
+            Font f = new Font("標楷體", 300);
+            SolidBrush sb = new SolidBrush(Color.Blue);
+            int x_st = 380;
+            int y_st = 400;
+
+            g.DrawString(message, f, sb, x_st, y_st);
         }
 
         private void pictureBox1_DoubleClick(object sender, EventArgs e)
@@ -320,3 +357,16 @@ namespace vcs_Clock
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+

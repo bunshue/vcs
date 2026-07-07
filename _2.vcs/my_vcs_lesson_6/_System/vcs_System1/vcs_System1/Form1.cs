@@ -155,6 +155,32 @@ namespace vcs_System1
             richTextBox1.Text += "電腦名稱 : " + Environment.MachineName + "\n";
             richTextBox1.Text += "電腦名稱 : " + Environment.GetEnvironmentVariable("COMPUTERNAME") + "\n";
 
+            // Change the directory to %WINDIR%
+            Environment.CurrentDirectory = Environment.GetEnvironmentVariable("windir");
+            DirectoryInfo info = new DirectoryInfo(".");
+
+            Console.WriteLine("Directory Info:   " + info.FullName);
+
+            //------------------------------------------------------------  # 60個
+
+            //string sPath = Environment.GetEnvironmentVariable("windir");//獲取系統變量 windir(windows)    
+            //string sPath = Environment.GetEnvironmentVariable("windir");//獲取系統變量 windir(windows)    
+
+            //test Environment.GetEnvironmentVariable
+
+            //打開regedit 登錄編輯程式
+            //打开注册表
+            string regeditstr = Environment.GetEnvironmentVariable("windir");//windir系统环境变量的名称
+            richTextBox1.Text += "windir : " + regeditstr + "\n";
+            Process.Start(regeditstr + "\\regedit.exe");//打开注册表
+
+            //------------------------------------------------------------  # 60個
+
+            //Environment.GetLogicalDrives  取得這台電腦邏輯磁碟的名稱
+
+            String[] drives = Environment.GetLogicalDrives();
+            Console.WriteLine("GetLogicalDrives: {0}", String.Join(", ", drives));
+
             //------------------------------------------------------------  # 60個
 
             richTextBox1.Text += "處理序的命令列：" + Environment.CommandLine + "\n";
@@ -819,114 +845,13 @@ namespace vcs_System1
             richTextBox1.Text += FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString() + "\n";
 
             richTextBox1.Text += "提供磁碟上實體檔案的版本資訊\n";
-            // Get the file version for the notepad.
             FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo(Environment.SystemDirectory + "\\Notepad.exe");
-
-            // Print the file name and version number.
-            richTextBox1.Text += "File: " + myFileVersionInfo.FileDescription + '\n' + "Version number: " + myFileVersionInfo.FileVersion + "\n";
+            richTextBox1.Text += "File: " + myFileVersionInfo.FileDescription + "\n";
+            richTextBox1.Text += "Version number: " + myFileVersionInfo.FileVersion + "\n";
         }
-
-        [DllImport("user32.dll", EntryPoint = "GetSystemMetrics")]
-        private static extern int GetSystemMetrics(int mVal);
 
         private void button13_Click(object sender, EventArgs e)
         {
-            //取得螢幕大小
-
-            richTextBox1.Text += "使用 Screen.PrimaryScreen.Bounds\n";
-            int W = Screen.PrimaryScreen.Bounds.Width;
-            int H = Screen.PrimaryScreen.Bounds.Height;
-
-            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
-
-            //------------------------------------------------------------  # 60個
-
-            richTextBox1.Text += "使用 GetSystemMetrics\n";
-            W = GetSystemMetrics(0);
-            H = GetSystemMetrics(1);
-            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
-
-            //------------------------------------------------------------  # 60個
-
-            //獲取屏幕的分辨率，也就是顯示器屏幕的大小。
-            W = SystemInformation.PrimaryMonitorSize.Width;
-            H = SystemInformation.PrimaryMonitorSize.Height;
-
-            richTextBox1.Text += "W = " + W.ToString() + " H = " + H.ToString() + "\n";
-
-            richTextBox1.Text += "取得桌面大小\n";
-            richTextBox1.Text += "桌面寬度 : \t" + Screen.PrimaryScreen.WorkingArea.Width.ToString() + "\n";
-            richTextBox1.Text += "桌面高度 : \t" + Screen.PrimaryScreen.WorkingArea.Height.ToString() + "\n";
-
-            //------------------------------------------------------------  # 60個
-
-            //取得螢幕解析度資料
-            System.Windows.Forms.Screen scr = System.Windows.Forms.Screen.PrimaryScreen;//PrimaryScreen 属性：获取主显示设备
-            richTextBox1.Text += "Bounds:\t\t" + scr.Bounds.ToString() + "\n"; //获取屏幕的边界。属性值是一个Rectangle结构的值
-            richTextBox1.Text += "DeviceName:\t" + scr.DeviceName.ToString() + "\n"; //获取与显示关联的设备名称
-            richTextBox1.Text += "Primary:\t\t" + scr.Primary.ToString() + "\n";   //该值指示某个显示是否为主设备
-            richTextBox1.Text += "WorkingArea:\t" + scr.WorkingArea.ToString() + "\n";   //获取显示器的工作区, 属性值是一个Rectangle结构的值
-            richTextBox1.Text += "BitsPerPixel:\t" + scr.BitsPerPixel.ToString() + "\n"; //获取与数据的一个像素相关联的内存位数
-
-            //------------------------------------------------------------  # 60個
-
-            //螢幕解析度 與 可工作區域
-            //取得螢幕解析度
-            int ScreenWidth = Screen.PrimaryScreen.Bounds.Width;
-            int ScreenHeight = Screen.PrimaryScreen.Bounds.Height;
-
-            richTextBox1.Text += "螢幕解析度 : " + ScreenWidth.ToString() + " X " + ScreenHeight.ToString() + "\n";
-
-            //取得可工作區域大小
-            int WorkingAreaWidth = Screen.PrimaryScreen.WorkingArea.Width;
-            int WorkingAreaHeight = Screen.PrimaryScreen.WorkingArea.Height;
-
-            richTextBox1.Text += "可工作區域大小 : " + WorkingAreaWidth.ToString() + " X " + WorkingAreaHeight.ToString() + "\n";
-
-            foreach (Screen screen in System.Windows.Forms.Screen.AllScreens)
-            {
-                richTextBox1.Text += "Screen " + screen.DeviceName + "\n";
-                richTextBox1.Text += "\tPrimary " + screen.Primary + "\n";
-                richTextBox1.Text += "\tBounds: " + screen.Bounds + "\n";
-                richTextBox1.Text += "\tWorking Area: " + screen.WorkingArea + "\n";
-                richTextBox1.Text += "\tBitsPerPixel: " + screen.BitsPerPixel + "\n";
-            }
-
-            //------------------------------------------------------------  # 60個
-
-            //螢幕資訊
-            richTextBox1.Text += "AllScreens.Length = " + Screen.AllScreens.Length.ToString() + "\n";
-
-            richTextBox1.Text += "W = " + Screen.AllScreens[0].Bounds.Width.ToString() + ", H = " + Screen.AllScreens[0].Bounds.Height.ToString() + "\n";
-            richTextBox1.Text += "Bounds = " + Screen.AllScreens[0].Bounds.Size.ToString() + "\n";
-            richTextBox1.Text += "Rank = " + Screen.AllScreens.Rank.ToString() + "\n";
-
-            richTextBox1.Text += "DeviceName = " + Screen.PrimaryScreen.DeviceName + "\n";
-            richTextBox1.Text += "BitsPerPixel = " + Screen.PrimaryScreen.BitsPerPixel.ToString() + "\n";
-            richTextBox1.Text += "Bounds = " + Screen.PrimaryScreen.Bounds.ToString() + "\n";
-            richTextBox1.Text += "WorkingArea = " + Screen.PrimaryScreen.WorkingArea.ToString() + "\n";
-
-            //------------------------------------------------------------  # 60個
-
-            Rectangle WorkArea = Screen.GetWorkingArea(this);//屏幕顯示區域
-            W = WorkArea.Width; //屏幕寬度
-            H = WorkArea.Height; //屏幕高度
-            richTextBox1.Text += "W = " + W.ToString() + "\n";
-            richTextBox1.Text += "H = " + H.ToString() + "\n";
-
-            //------------------------------------------------------------  # 60個
-
-            // 根據桌面大小調整視窗大小 
-            int DeskWidth = Screen.PrimaryScreen.WorkingArea.Width; //PrimaryScreen為取得主顯示器，WorkingArea可取得顯示器的工作區(不包含工作列…等)
-            int DeskHeight = Screen.PrimaryScreen.WorkingArea.Height;
-            this.Width = Convert.ToInt32(DeskWidth * 0.8);
-            this.Height = Convert.ToInt32(DeskHeight * 0.8);
-
-            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
-            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
-            richTextBox1.AppendText("螢幕解析度 : " + screenWidth.ToString() + "*" + screenHeight.ToString() + "\n");
-
-            //------------------------------------------------------------  # 60個
 
         }
 
@@ -936,7 +861,6 @@ namespace vcs_System1
 
         private void button15_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "C# 透過Win32取得滑鼠位置 GetCursorPos\n";
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -1145,27 +1069,61 @@ namespace vcs_System1
 
         private void button29_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "讀取語系區域\n";
+            richTextBox1.Text += "讀取語系區域 CultureInfo\n";
 
             string systemName1 = CultureInfo.CurrentCulture.Name;
             string systemName2 = CultureInfo.CurrentCulture.NativeName;
             richTextBox1.Text += "Name : " + systemName1 + "\n";
             richTextBox1.Text += "NativeName : " + systemName2 + "\n";
+
+
+            string msg1 = "Name : \"{0}\",\tKind \"{1}\".\n";
+            string str = string.Empty;
+
+            str = string.Format(msg1, "lion", "mouse");
+            richTextBox1.Text += "str1 = " + str + "\n";
+
+            string msg2 = "Using the {0} - \"{1}\" culture:";
+
+            //各國語言(語系)代碼表(zh-tw, zh-cn,en-us...) json 格式 [繁中/簡中/英文格式] 
+            CultureInfo ci;
+
+            ci = new CultureInfo("en-US");
+            str = string.Format(msg2, ci.DisplayName, ci.Name);
+            richTextBox1.Text += "str = " + str + "\n";
+
+            ci = new CultureInfo("zh-TW");
+            str = string.Format(msg2, ci.DisplayName, ci.Name);
+            richTextBox1.Text += "str = " + str + "\n";
+
+            ci = new CultureInfo("zh-CN");
+            str = string.Format(msg2, ci.DisplayName, ci.Name);
+            richTextBox1.Text += "str = " + str + "\n";
+
+            ci = new CultureInfo("zh-HK");
+            str = string.Format(msg2, ci.DisplayName, ci.Name);
+            richTextBox1.Text += "str = " + str + "\n";
+
+            ci = new CultureInfo("zh-SG");
+            str = string.Format(msg2, ci.DisplayName, ci.Name);
+            richTextBox1.Text += "str = " + str + "\n";
+
+            ci = new CultureInfo("zh-CHS");
+            str = string.Format(msg2, ci.DisplayName, ci.Name);
+            richTextBox1.Text += "str = " + str + "\n";
+
+            ci = new CultureInfo("zh-CHT");
+            str = string.Format(msg2, ci.DisplayName, ci.Name);
+            richTextBox1.Text += "str = " + str + "\n";
+
+            ci = new CultureInfo("ja-JP");
+            str = string.Format(msg2, ci.DisplayName, ci.Name);
+            richTextBox1.Text += "str = " + str + "\n";
+
         }
 
         private void button30_Click(object sender, EventArgs e)
         {
-            //打開控制面板中的程序_桌面設定
-            Process.Start("desk.cpl");
-
-            //打開控制面板中的程序_滑鼠游標設定
-            Process.Start("main.cpl");
-
-            //打開控制面板中的程序_網路連接
-            Process.Start("ncpa.cpl");
-
-            //打開控制面板中的程序_聲音設定
-            Process.Start("mmsys.cpl");
         }
 
         //光碟機開關 ST
@@ -1544,23 +1502,6 @@ namespace vcs_System1
 
         //------------------------------------------------------------  # 60個
 
-        [DllImport("User32")]
-        internal extern static bool GetCursorPos(out MousePoint point);
-
-        internal struct MousePoint
-        {
-            public int x;
-            public int y;
-        };
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            MousePoint point;
-            GetCursorPos(out point);
-            this.Text = point.x.ToString() + ", " + point.y.ToString();
-        }
-
-        //------------------------------------------------------------  # 60個
 
         //#region Windows 開關機
         [DllImport("user32")]

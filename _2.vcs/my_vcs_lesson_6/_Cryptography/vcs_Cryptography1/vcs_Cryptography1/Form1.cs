@@ -1445,7 +1445,7 @@ string md5Result = Encoding.UTF8.GetString(md5Hash);  // 拜列轉字串
             StringBuilder sb = new StringBuilder(16);
             for (int i = 0; i < md5Hash.Length; i++)
             {
-                sb.Append((md5Hash[i]).ToString("X2", System.Globalization.CultureInfo.InvariantCulture));  // 轉2位的16進制字串
+                sb.Append((md5Hash[i]).ToString("X2"));  // 轉2位的16進制字串
             }
             md5Result = sb.ToString();
 

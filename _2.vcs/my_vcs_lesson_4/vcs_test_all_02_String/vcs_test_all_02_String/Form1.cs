@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Globalization;//for CultureInfo
+using System.Globalization;  // for CultureInfo
 
 namespace vcs_test_all_02_String
 {
@@ -350,7 +350,7 @@ namespace vcs_test_all_02_String
 
         private void button9_Click(object sender, EventArgs e)
         {
-            //各種進位轉換
+            //各種進位轉換 Convert.ToString
 
             //十六進位顯示
             int value1 = 65535;
@@ -618,21 +618,6 @@ namespace vcs_test_all_02_String
                 richTextBox1.Text += string.Format("{0:C2}", rnd.NextDouble() * 100) + "\n";
             }
 
-            double aa = 123456789012345.456789;
-            richTextBox1.Text += aa.ToString("N0", CultureInfo.InvariantCulture) + "\n";
-
-            int bb = 1234567890;
-            richTextBox1.Text += bb.ToString("N0", CultureInfo.InvariantCulture) + "\n";
-
-            double used = 197594525696;
-            double used2 = 184.02;
-
-            //已使用空間 :	197,593,485,312 個位元組	184.02 GB
-            richTextBox1.Text += string.Format("{0,-15}{1,20}{2,-10}{3,-10}",
-                "已使用空間 :", used.ToString("N0", CultureInfo.InvariantCulture), " 個位元組", used2.ToString() + " GB") + "\n";
-
-            //richTextBox1.Text += "已使用空間 :\t" + (drive.TotalSize - drive.AvailableFreeSpace).ToString("N0", CultureInfo.InvariantCulture) + " 個位元組\t" + ByteConversionGBMBKB(Convert.ToInt64(drive.TotalSize - drive.AvailableFreeSpace)) + "\n";
-
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //格式化列印
@@ -692,9 +677,55 @@ namespace vcs_test_all_02_String
             richTextBox1.Text += string2 + "\n";
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button13_Click(object sender, EventArgs e)
         {
+            /*
+            數字 ToString 的用法
+
+            ToString("D2")
+            ToString("D3")  // 不足位元補零 十進位
+            ToString("X2")
+            ToString("X4")  // 不足位元補零 十六進位
+            ToString("F1")
+            ToString("F2")
+            ToString("F3")
+            ToString("F4")
+            ToString("0.00")
+            ToString("#0.00")
+            ToString("#0.00")
+            ToString("00")
+            ToString("0000")
+            */
+
+
+            //數字顯示
+
+            /*
+            保留兩位小數
+            ToString("0.00");
+
+            ToString("0.00");
+            */
+
+            /*
+            double dis1 = 150000000000.0 / 340.0 / 60.0 / 60.0 / 24.0;
+            //label4.Text = dis.ToString("#,###,###,###.##") + " 天";
+
+            double dis2 = 150000000000.0 / 299792458.0;
+            //label5.Text = dis.ToString() + " 秒";
+            //label5.Text = dis.ToString("#,###,###,###.##") + " 秒";
+
+            //txtValue.Text = pi.ToString("F15");		//小數點以下15位
+            //txtError.Text = error.ToString("E");		//科學符號
+            */
+
+
+
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button14_Click(object sender, EventArgs e)
         {
@@ -1069,21 +1100,6 @@ namespace vcs_test_all_02_String
 
         private void button20_Click(object sender, EventArgs e)
         {
-            //貨幣單位
-            double money = 1234.567;
-            richTextBox1.Text += "\n";
-            richTextBox1.Text += money.ToString("C") + "\n";
-            richTextBox1.Text += "新台幣：" + money.ToString("C0") + "元\n"; //到整數
-            richTextBox1.Text += money.ToString("C", CultureInfo.CurrentCulture) + "\n";
-            richTextBox1.Text += money.ToString("C", CultureInfo.CreateSpecificCulture("da-DK")) + "\n";
-            richTextBox1.Text += money.ToString("C", CultureInfo.CreateSpecificCulture("en-US")) + "\n";
-            richTextBox1.Text += money.ToString("C", CultureInfo.CreateSpecificCulture("ja-JP")) + "\n";
-            richTextBox1.Text += money.ToString("C", CultureInfo.CreateSpecificCulture("fr-FR")) + "\n";
-
-
-            //表示錢號的方法
-            int n = 12345;
-            richTextBox1.Text += "新台幣 " + n.ToString("C") + " 元\n";
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -1133,26 +1149,6 @@ namespace vcs_test_all_02_String
 
         private void button24_Click(object sender, EventArgs e)
         {
-            //數字顯示
-
-            /*
-            保留兩位小數
-            ToString("0.00");
-
-            ToString("0.00");
-            */
-
-            /*
-            double dis1 = 150000000000.0 / 340.0 / 60.0 / 60.0 / 24.0;
-            //label4.Text = dis.ToString("#,###,###,###.##") + " 天";
-
-            double dis2 = 150000000000.0 / 299792458.0;
-            //label5.Text = dis.ToString() + " 秒";
-            //label5.Text = dis.ToString("#,###,###,###.##") + " 秒";
-
-            //txtValue.Text = pi.ToString("F15");		//小數點以下15位
-            //txtError.Text = error.ToString("E");		//科學符號
-            */
         }
 
         private void button25_Click(object sender, EventArgs e)
@@ -1161,12 +1157,45 @@ namespace vcs_test_all_02_String
             double num = 123.123456789;
             //根據nudPoint.Value來格式化顯示的數值
             richTextBox1.Text += num.ToString("F" + nudPoint.ToString()) + "\n";
+            richTextBox1.Text += num.ToString("F3") + "\n";
 
 
             //在 C# 中使用 String.Format() 方法將字串轉換為十六進位制
             string decString = "0123456789";
             var hexString = string.Join("", decString.Select(c => String.Format("{0:X2}", Convert.ToInt32(c))));
             richTextBox1.Text += "hexString :" + hexString + "\n";
+
+
+            //string filename = string.Format("{0}bmp_{1}{2}", dir, DateTime.Now.ToString("yyyyMMdd_HHmmss"), ".bmp");
+
+            //string filename = string.Format("bmp_{0:yyyyMMdd_HHmmss}.bmp", DateTime.Now);	//不含啟動路徑
+
+            //格式化列印
+
+            //this.Text                    = String.Format("關於 {0}", AssemblyTitle);
+            //this.labelVersion.Text       = String.Format("版本 {0}", AssemblyVersion);
+            /*
+            Console.WriteLine("{0}  {1}   {2}", bcc[i].No, bcc[i].Name, bcc[i].Score);
+            Console.WriteLine("{0}, {1},  {2},    {3},   {4}", stu_No[i], stu_Name[i], stu_Chin[i], stu_Eng[i], stu_Math[i]);
+
+            Console.WriteLine("例外處理類型   :{0}", ex.GetType().ToString());
+            Console.WriteLine("錯誤訊息       :{0}", ex.Message);
+            Console.WriteLine("程式或物件名稱 :{0}", ex.Source);
+            Console.WriteLine("產生錯誤程序   :{0}", ex.TargetSite.Name);
+            Console.WriteLine("錯誤之處       :{0}", ex.StackTrace);
+            */
+            //var str = string.Format("我的名字叫{1}，我今年{1}岁。", "张三", 23);
+            //Console.WriteLine(str);
+
+            //var str = $"我的名字叫{"张三"}，我今年{23}岁。";
+            //Console.WriteLine(str);
+
+
+
+            //if (!currentExe.Equals(targetExe, StringComparison.OrdinalIgnoreCase))
+            string sign = new string('*', 30);
+            Console.WriteLine(sign);
+
         }
 
         private void button26_Click(object sender, EventArgs e)
@@ -1182,9 +1211,28 @@ namespace vcs_test_all_02_String
         {
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button29_Click(object sender, EventArgs e)
         {
             //CultureInfo
+
+            //貨幣單位
+            double money = 1234.567;
+            richTextBox1.Text += "\n";
+            richTextBox1.Text += money.ToString("C") + "\n";
+            richTextBox1.Text += "新台幣：" + money.ToString("C0") + "元\n"; //到整數
+            richTextBox1.Text += money.ToString("C", CultureInfo.CurrentCulture) + "\n";
+            richTextBox1.Text += money.ToString("C", CultureInfo.CreateSpecificCulture("da-DK")) + "\n";
+            richTextBox1.Text += money.ToString("C", CultureInfo.CreateSpecificCulture("en-US")) + "\n";
+            richTextBox1.Text += money.ToString("C", CultureInfo.CreateSpecificCulture("ja-JP")) + "\n";
+            richTextBox1.Text += money.ToString("C", CultureInfo.CreateSpecificCulture("fr-FR")) + "\n";
+
+            //表示錢號的方法
+            int n = 12345;
+            richTextBox1.Text += "新台幣 " + n.ToString("C") + " 元\n";
+
+            //------------------------------------------------------------  # 60個
 
             //顯示百分比 錢號的方法
             //要using System.Globalization; //for CultureInfo
@@ -1193,7 +1241,27 @@ namespace vcs_test_all_02_String
             richTextBox1.Text += "顯示一位小數的百分比 :\t\t" + ((double)a / (double)b).ToString("P1", CultureInfo.InvariantCulture) + "\n";
             richTextBox1.Text += "顯示兩位小數的百分比 :\t\t" + ((double)a / (double)b).ToString("P", CultureInfo.InvariantCulture) + "\n";
             richTextBox1.Text += "顯示十位小數的百分比 :\t\t" + ((double)a / (double)b).ToString("P10", CultureInfo.InvariantCulture) + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            double aa = 123456789012345.456789;
+            richTextBox1.Text += aa.ToString("N0", CultureInfo.InvariantCulture) + "\n";
+
+            int bb = 1234567890;
+            richTextBox1.Text += bb.ToString("N0", CultureInfo.InvariantCulture) + "\n";
+
+            double used = 197594525696;
+            double used2 = 184.02;
+
+            //已使用空間 :	197,593,485,312 個位元組	184.02 GB
+            richTextBox1.Text += string.Format("{0,-15}{1,20}{2,-10}{3,-10}",
+                "已使用空間 :", used.ToString("N0", CultureInfo.InvariantCulture), " 個位元組", used2.ToString() + " GB") + "\n";
+
+            //richTextBox1.Text += "已使用空間 :\t" + (drive.TotalSize - drive.AvailableFreeSpace).ToString("N0", CultureInfo.InvariantCulture) + " 個位元組\t" + ByteConversionGBMBKB(Convert.ToInt64(drive.TotalSize - drive.AvailableFreeSpace)) + "\n";
+
         }
+
+        //------------------------------------------------------------  # 60個
 
         void show_numbers()
         {
@@ -1242,70 +1310,23 @@ namespace vcs_test_all_02_String
 */
 
 /*
-string filename = string.Format("{0}bmp_{1}{2}", dir, DateTime.Now.ToString("yyyyMMdd_HHmmss"), ".bmp");
-
-string filename = string.Format("bmp_{0:yyyyMMdd_HHmmss}.bmp", DateTime.Now);	//不含啟動路徑
-
-格式化列印
-
-this.Text                    = String.Format("關於 {0}", AssemblyTitle);
-this.labelVersion.Text       = String.Format("版本 {0}", AssemblyVersion);
-
-Console.WriteLine("{0}  {1}   {2}", bcc[i].No, bcc[i].Name, bcc[i].Score);
-Console.WriteLine("{0}, {1},  {2},    {3},   {4}", stu_No[i], stu_Name[i], stu_Chin[i], stu_Eng[i], stu_Math[i]);
-
-Console.WriteLine("例外處理類型   :{0}", ex.GetType().ToString());
-Console.WriteLine("錯誤訊息       :{0}", ex.Message);
-Console.WriteLine("程式或物件名稱 :{0}", ex.Source);
-Console.WriteLine("產生錯誤程序   :{0}", ex.TargetSite.Name);
-Console.WriteLine("錯誤之處       :{0}", ex.StackTrace);
-
-//var str = string.Format("我的名字叫{1}，我今年{1}岁。", "张三", 23);
-//Console.WriteLine(str);
-
-var str = $"我的名字叫{"张三"}，我今年{23}岁。";
-Console.WriteLine(str);
 
 */
 
 
-
 /*
-ToString 的用法
-
-ToString("D2")
-ToString("D3")  // 不足位元補零 十進位
-ToString("X2")
-ToString("X4")  // 不足位元補零 十六進位
-ToString("F1")
-ToString("F2")
-ToString("F3")
-ToString("F4")
-ToString("0.00")
-ToString("#0.00")
-ToString("#0.00")
-ToString("00")
-ToString("0000")
-*/
-
-
-//if (!currentExe.Equals(targetExe, StringComparison.OrdinalIgnoreCase))
-
-/*
-            string sign = new string('*', 30);
-            Console.WriteLine(sign);
 //------------------------------------------------------------  # 60個
 
 C# 提供了許多方法給string使用
 
-方法				說明 					格式
-Length				取得字串長度長度			x.Length
-IndexOf('關鍵字')		搜尋該關鍵字所在起始位置的索引值	x.IndexOf("H")
-Insert(索引, '關鍵字')		將關鍵字插入指定索引位置		x.Insert(3,"Hello")
-Remove(索引)			清除索引位置之後的字串			x.Remove(2)
-Replace('原字串', '新字串')	將原字串取代為新字串			x.Replace("Hi","Hello")
+方法				        說明 					            格式
+Length				        取得字串長度長度			        x.Length
+IndexOf('關鍵字')		    搜尋該關鍵字所在起始位置的索引值	x.IndexOf("H")
+Insert(索引, '關鍵字')	    將關鍵字插入指定索引位置		    x.Insert(3,"Hello")
+Remove(索引)			    清除索引位置之後的字串			    x.Remove(2)
+Replace('原字串', '新字串')	將原字串取代為新字串			    x.Replace("Hi","Hello")
 Substring(索引, 長度)		從指定索引位置取得指定長度的字串	x.Substring(3,10)
-Contains('關鍵字')		判斷是否包含該關鍵字			x.Contains("Build")
+Contains('關鍵字')		    判斷是否包含該關鍵字			    x.Contains("Build")
 
             string x = "My name is Tom";
 
@@ -1346,9 +1367,5 @@ Console.WriteLine(x[4]); //o
 
 
 */
-
-
-
-
 
 

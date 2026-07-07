@@ -10,7 +10,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Globalization;  // for CultureInfo
 using System.Threading;
 using System.Diagnostics;  // for StackTrace
 using System.Reflection;  // for MethodInfo
@@ -140,53 +139,11 @@ namespace vcs_test_all_03_Syntax
             richTextBox1.Text += "information1 : " + information + "\n";
             richTextBox1.Text += "information2 : " + string.Format("ID = {0}, Name = {1}", number.ToString(), name) + "\n";
 
-            string msg1 = "Name : \"{0}\",\tKind \"{1}\".\n";
-            string str = string.Empty;
-
-            str = string.Format(msg1, "lion", "mouse");
-            richTextBox1.Text += "str1 = " + str + "\n";
-
-            string msg2 = "Using the {0} - \"{1}\" culture:";
-
-            //各國語言(語系)代碼表(zh-tw, zh-cn,en-us...) json 格式 [繁中/簡中/英文格式] 
-            CultureInfo ci;
-
-            ci = new CultureInfo("en-US");
-            str = string.Format(msg2, ci.DisplayName, ci.Name);
-            richTextBox1.Text += "str = " + str + "\n";
-
-            ci = new CultureInfo("zh-TW");
-            str = string.Format(msg2, ci.DisplayName, ci.Name);
-            richTextBox1.Text += "str = " + str + "\n";
-
-            ci = new CultureInfo("zh-CN");
-            str = string.Format(msg2, ci.DisplayName, ci.Name);
-            richTextBox1.Text += "str = " + str + "\n";
-
-            ci = new CultureInfo("zh-HK");
-            str = string.Format(msg2, ci.DisplayName, ci.Name);
-            richTextBox1.Text += "str = " + str + "\n";
-
-            ci = new CultureInfo("zh-SG");
-            str = string.Format(msg2, ci.DisplayName, ci.Name);
-            richTextBox1.Text += "str = " + str + "\n";
-
-            ci = new CultureInfo("zh-CHS");
-            str = string.Format(msg2, ci.DisplayName, ci.Name);
-            richTextBox1.Text += "str = " + str + "\n";
-
-            ci = new CultureInfo("zh-CHT");
-            str = string.Format(msg2, ci.DisplayName, ci.Name);
-            richTextBox1.Text += "str = " + str + "\n";
-
-            ci = new CultureInfo("ja-JP");
-            str = string.Format(msg2, ci.DisplayName, ci.Name);
-            richTextBox1.Text += "str = " + str + "\n";
-
             for (int i = 0; i < 10; i++)
             {
                 string message = string.Format("{0} {1: yyyy/MM/dd HH:mm:ss.fff }", "現在時間 : ", DateTime.Now);
                 richTextBox1.Text += message + "\n";
+                Application.DoEvents();
                 Thread.Sleep(1234); //delay 1.234 秒
             }
         }

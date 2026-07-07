@@ -15,7 +15,6 @@ using System.Security.Cryptography;
 using System.Diagnostics;   //for Process
 using System.Threading;
 using System.Web;   //for HttpUtility, 需改用.Net Framework4, 然後參考/加入參考/.Net/System.Web
-using System.Globalization; //for CultureInfo
 using System.Runtime.InteropServices;
 
 using Shell32;  //需/參考/加入參考/COM/Microsoft Shell Controls And Automation 並把 Shell32屬性的內嵌Interop型別改成False
@@ -121,7 +120,6 @@ namespace vcs_Mix01
         private void button0_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -146,6 +144,7 @@ namespace vcs_Mix01
         private void button2_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
             //計算字數
             string[] words = {
                 "Alabama",
@@ -273,6 +272,7 @@ namespace vcs_Mix01
         private void button6_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
             //測試toolTip
             richTextBox1.Text += "加入toolTip物件\n";
             richTextBox1.Text += "在Form1()的InitializeComponent()後加入訊息\n";
@@ -281,12 +281,12 @@ namespace vcs_Mix01
         private void button7_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
             //char可以存放中文字
             char[] gender = new char[5];
             gender[0] = '男';
@@ -329,6 +329,7 @@ namespace vcs_Mix01
         private void button10_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
             //最短路徑分析
 
             int dist1 = getShortedPath(G, 0, 1, path1);
@@ -485,6 +486,7 @@ namespace vcs_Mix01
         private void button11_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
             //把這個檔案的註解抓出來
             string filename = Path.Combine(Application.StartupPath, @"..\..\Form1.cs");
 

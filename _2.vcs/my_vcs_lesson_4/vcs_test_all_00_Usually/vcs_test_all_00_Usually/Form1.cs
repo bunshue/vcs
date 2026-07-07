@@ -899,8 +899,30 @@ namespace vcs_test_all_00_Usually
                 flag_mouse_down = false;
             }
         }
+
         //移動無邊框窗體4 SP
 
+        //------------------------------------------------------------  # 60個
+
+        [DllImport("User32")]
+        internal extern static bool GetCursorPos(out MousePoint point);
+
+        internal struct MousePoint
+        {
+            public int x;
+            public int y;
+        };
+
+        //透過Win32取得滑鼠位置 GetCursorPos
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            //richTextBox1.Text += "透過Win32取得滑鼠位置 GetCursorPos\n";
+            MousePoint point;
+            GetCursorPos(out point);
+            this.Text = point.x.ToString() + ", " + point.y.ToString();
+        }
+
+        //------------------------------------------------------------  # 60個
     }
 
     //3Form1之外

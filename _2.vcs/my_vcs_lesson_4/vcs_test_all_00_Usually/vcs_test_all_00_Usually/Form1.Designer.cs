@@ -70,6 +70,7 @@
             this.btn_stop = new System.Windows.Forms.Button();
             this.btn_pause = new System.Windows.Forms.Button();
             this.btn_play = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox_player.SuspendLayout();
             this.SuspendLayout();
@@ -486,6 +487,11 @@
             this.btn_play.TabIndex = 0;
             this.btn_play.UseVisualStyleBackColor = true;
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -580,6 +586,7 @@
         private System.Windows.Forms.Button btn_stop;
         private System.Windows.Forms.Button btn_pause;
         private System.Windows.Forms.Button btn_play;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

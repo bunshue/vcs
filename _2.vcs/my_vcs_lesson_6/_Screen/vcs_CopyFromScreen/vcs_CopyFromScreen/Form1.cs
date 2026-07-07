@@ -508,8 +508,12 @@ namespace vcs_CopyFromScreen
 
         }
 
+        [DllImport("user32.dll", EntryPoint = "GetSystemMetrics")]
+        private static extern int GetSystemMetrics(int mVal);
+
         private void button29_Click(object sender, EventArgs e)
         {
+            /*
             //參數
             int W = Screen.PrimaryScreen.Bounds.Width;  // 主螢幕寬度
             int H = Screen.PrimaryScreen.Bounds.Height;  // 主螢幕高度
@@ -526,6 +530,108 @@ namespace vcs_CopyFromScreen
             Rectangle rect2 = new Rectangle();//實例化Rectangle類
             rect2 = Screen.GetWorkingArea(this);//獲得目前螢幕的大小
             richTextBox1.Text += "rect2 : " + rect2.ToString() + "\n";
+            */
+
+
+            //取得螢幕大小
+
+            richTextBox1.Text += "使用 Screen.PrimaryScreen.Bounds\n";
+            int W = Screen.PrimaryScreen.Bounds.Width;
+            int H = Screen.PrimaryScreen.Bounds.Height;
+
+            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            richTextBox1.Text += "使用 GetSystemMetrics\n";
+            W = GetSystemMetrics(0);
+            H = GetSystemMetrics(1);
+            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            //獲取屏幕的分辨率，也就是顯示器屏幕的大小。
+            W = SystemInformation.PrimaryMonitorSize.Width;
+            H = SystemInformation.PrimaryMonitorSize.Height;
+
+            richTextBox1.Text += "W = " + W.ToString() + " H = " + H.ToString() + "\n";
+
+            richTextBox1.Text += "取得桌面大小\n";
+            richTextBox1.Text += "桌面寬度 : \t" + Screen.PrimaryScreen.WorkingArea.Width.ToString() + "\n";
+            richTextBox1.Text += "桌面高度 : \t" + Screen.PrimaryScreen.WorkingArea.Height.ToString() + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            //取得螢幕解析度資料
+            System.Windows.Forms.Screen scr = System.Windows.Forms.Screen.PrimaryScreen;//PrimaryScreen 属性：获取主显示设备
+            richTextBox1.Text += "Bounds:\t\t" + scr.Bounds.ToString() + "\n"; //获取屏幕的边界。属性值是一个Rectangle结构的值
+            richTextBox1.Text += "DeviceName:\t" + scr.DeviceName.ToString() + "\n"; //获取与显示关联的设备名称
+            richTextBox1.Text += "Primary:\t\t" + scr.Primary.ToString() + "\n";   //该值指示某个显示是否为主设备
+            richTextBox1.Text += "WorkingArea:\t" + scr.WorkingArea.ToString() + "\n";   //获取显示器的工作区, 属性值是一个Rectangle结构的值
+            richTextBox1.Text += "BitsPerPixel:\t" + scr.BitsPerPixel.ToString() + "\n"; //获取与数据的一个像素相关联的内存位数
+
+            //------------------------------------------------------------  # 60個
+
+            //螢幕解析度 與 可工作區域
+            //取得螢幕解析度
+            int ScreenWidth = Screen.PrimaryScreen.Bounds.Width;
+            int ScreenHeight = Screen.PrimaryScreen.Bounds.Height;
+
+            richTextBox1.Text += "螢幕解析度 : " + ScreenWidth.ToString() + " X " + ScreenHeight.ToString() + "\n";
+
+            //取得可工作區域大小
+            int WorkingAreaWidth = Screen.PrimaryScreen.WorkingArea.Width;
+            int WorkingAreaHeight = Screen.PrimaryScreen.WorkingArea.Height;
+
+            richTextBox1.Text += "可工作區域大小 : " + WorkingAreaWidth.ToString() + " X " + WorkingAreaHeight.ToString() + "\n";
+
+            foreach (Screen screen in System.Windows.Forms.Screen.AllScreens)
+            {
+                richTextBox1.Text += "Screen " + screen.DeviceName + "\n";
+                richTextBox1.Text += "\tPrimary " + screen.Primary + "\n";
+                richTextBox1.Text += "\tBounds: " + screen.Bounds + "\n";
+                richTextBox1.Text += "\tWorking Area: " + screen.WorkingArea + "\n";
+                richTextBox1.Text += "\tBitsPerPixel: " + screen.BitsPerPixel + "\n";
+            }
+
+            //------------------------------------------------------------  # 60個
+
+            //螢幕資訊
+            richTextBox1.Text += "AllScreens.Length = " + Screen.AllScreens.Length.ToString() + "\n";
+
+            richTextBox1.Text += "W = " + Screen.AllScreens[0].Bounds.Width.ToString() + ", H = " + Screen.AllScreens[0].Bounds.Height.ToString() + "\n";
+            richTextBox1.Text += "Bounds = " + Screen.AllScreens[0].Bounds.Size.ToString() + "\n";
+            richTextBox1.Text += "Rank = " + Screen.AllScreens.Rank.ToString() + "\n";
+
+            richTextBox1.Text += "DeviceName = " + Screen.PrimaryScreen.DeviceName + "\n";
+            richTextBox1.Text += "BitsPerPixel = " + Screen.PrimaryScreen.BitsPerPixel.ToString() + "\n";
+            richTextBox1.Text += "Bounds = " + Screen.PrimaryScreen.Bounds.ToString() + "\n";
+            richTextBox1.Text += "WorkingArea = " + Screen.PrimaryScreen.WorkingArea.ToString() + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            Rectangle WorkArea = Screen.GetWorkingArea(this);//屏幕顯示區域
+            W = WorkArea.Width; //屏幕寬度
+            H = WorkArea.Height; //屏幕高度
+            richTextBox1.Text += "W = " + W.ToString() + "\n";
+            richTextBox1.Text += "H = " + H.ToString() + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            // 根據桌面大小調整視窗大小 
+            int DeskWidth = Screen.PrimaryScreen.WorkingArea.Width; //PrimaryScreen為取得主顯示器，WorkingArea可取得顯示器的工作區(不包含工作列…等)
+            int DeskHeight = Screen.PrimaryScreen.WorkingArea.Height;
+            this.Width = Convert.ToInt32(DeskWidth * 0.8);
+            this.Height = Convert.ToInt32(DeskHeight * 0.8);
+
+            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
+            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
+            richTextBox1.AppendText("螢幕解析度 : " + screenWidth.ToString() + "*" + screenHeight.ToString() + "\n");
+
+            //------------------------------------------------------------  # 60個
+
+
+
         }
     }
 }
