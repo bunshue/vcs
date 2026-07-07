@@ -12,21 +12,26 @@ using AviFile;
 
 #endregion
 
-namespace AviDemo {
-    public partial class EditControl : UserControl {
+namespace AviDemo
+{
+    public partial class EditControl : UserControl
+    {
 
         private delegate void SimpleDelegate();
 
         private AviPlayer player;
         private EditableVideoStream editableStream;
 
-        public EditControl() {
+        public EditControl()
+        {
             InitializeComponent();
             panelEditor.Enabled = false;
         }
 
-        private void btnOpen_Click(object sender, EventArgs e) {
-            if (editableStream != null) {
+        private void btnOpen_Click(object sender, EventArgs e)
+        {
+            if (editableStream != null)
+            {
                 editableStream.Close();
             }
 
@@ -44,7 +49,8 @@ namespace AviDemo {
             numLast.Maximum = editableStream.CountFrames - 1;
             numLast.Value = editableStream.CountFrames - 1;
 
-            if (numFrameRate.Maximum < (decimal)editableStream.FrameRate) {
+            if (numFrameRate.Maximum < (decimal)editableStream.FrameRate)
+            {
                 numFrameRate.Maximum = (decimal)editableStream.FrameRate;
             }
             numFrameRate.Value = (decimal)editableStream.FrameRate;
@@ -52,48 +58,60 @@ namespace AviDemo {
             panelEditor.Enabled = true;
         }
 
-        private String GetFileName(String filter) {
+        private String GetFileName(String filter)
+        {
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.Filter = filter;
             dlg.RestoreDirectory = true;
-            if (txtAviFileName.Text.Length > 0) {
+            if (txtAviFileName.Text.Length > 0)
+            {
                 dlg.InitialDirectory = txtAviFileName.Text.Substring(0, txtAviFileName.Text.LastIndexOf("\\") + 1);
             }
-            if (dlg.ShowDialog(this) == DialogResult.OK) {
+            if (dlg.ShowDialog(this) == DialogResult.OK)
+            {
                 return dlg.FileName;
-            } else {
+            }
+            else
+            {
                 return null;
             }
         }
 
-        private void btnSelectFile_Click(object sender, EventArgs e) {
+        private void btnSelectFile_Click(object sender, EventArgs e)
+        {
             String fileName = GetFileName("Videos (*.avi)|*.avi;*.mpe;*.mpeg");
-            if (fileName != null) {
+            if (fileName != null)
+            {
                 txtAviFileName.Text = fileName;
             }
         }
 
-        private void btnPlay_Click(object sender, EventArgs e) {
+        private void btnPlay_Click(object sender, EventArgs e)
+        {
             player = new AviPlayer(editableStream, picPreview, lblFrameIndex);
             player.Stopped += new System.EventHandler(player_Stopped);
             player.Start();
             SetPreviewButtonsState();
         }
 
-        private void player_Stopped(object sender, EventArgs e) {
+        private void player_Stopped(object sender, EventArgs e)
+        {
             btnPlay.Invoke(new SimpleDelegate(SetPreviewButtonsState));
         }
 
-        private void SetPreviewButtonsState() {
-            btnPlay.Enabled = ! player.IsRunning;
+        private void SetPreviewButtonsState()
+        {
+            btnPlay.Enabled = !player.IsRunning;
             btnStop.Enabled = player.IsRunning;
         }
 
-        private void btnStop_Click(object sender, EventArgs e) {
+        private void btnStop_Click(object sender, EventArgs e)
+        {
             player.Stop();
         }
 
-        private void btnCopy_Click(object sender, EventArgs e) {
+        private void btnCopy_Click(object sender, EventArgs e)
+        {
             int start = (int)numFirst.Value;
             int length = 1 + (int)numLast.Value - start;
             int position = (int)numPastePositionStream.Value;
@@ -105,7 +123,8 @@ namespace AviDemo {
             editableStream.Paste(copiedData, 0, position, length);
         }
 
-        private void btnCut_Click(object sender, EventArgs e) {
+        private void btnCut_Click(object sender, EventArgs e)
+        {
             int start = (int)numFirst.Value;
             int length = 1 + (int)numLast.Value - start;
             int position = (int)numPastePositionStream.Value;
@@ -117,7 +136,8 @@ namespace AviDemo {
             editableStream.Paste(copiedData, 0, position, length);
         }
 
-        private void btnDelete_Click(object sender, EventArgs e) {
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
             int start = (int)numFirst.Value;
             int length = 1 + (int)numLast.Value - start;
 
@@ -125,7 +145,8 @@ namespace AviDemo {
             IntPtr copiedData = editableStream.Cut(start, length);
         }
 
-        private void btnAddFrame_Click(object sender, EventArgs e) {
+        private void btnAddFrame_Click(object sender, EventArgs e)
+        {
             String tempFileName = System.IO.Path.GetTempFileName() + ".avi";
             AviManager tempFile = new AviManager(tempFileName, false);
 
@@ -133,8 +154,10 @@ namespace AviDemo {
             tempFile.AddVideoStream(false, 1, bitmap);
             VideoStream stream = tempFile.GetVideoStream();
 
-            for (int n = 1; n < txtNewFrameFileName.Lines.Length; n++) {
-                if (txtNewFrameFileName.Lines[n].Trim().Length > 0) {
+            for (int n = 1; n < txtNewFrameFileName.Lines.Length; n++)
+            {
+                if (txtNewFrameFileName.Lines[n].Trim().Length > 0)
+                {
                     stream.AddFrame((Bitmap)Image.FromFile(txtNewFrameFileName.Lines[n]));
                 }
             }
@@ -142,20 +165,25 @@ namespace AviDemo {
             editableStream.Paste(stream, 0, (int)numPastePositionBitmap.Value, stream.CountFrames);
 
             tempFile.Close();
-            try { File.Delete(tempFileName); } catch (IOException) { }
+            try { File.Delete(tempFileName); }
+            catch (IOException) { }
         }
 
-        private void btnSelectBitmap_Click(object sender, EventArgs e) {
+        private void btnSelectBitmap_Click(object sender, EventArgs e)
+        {
             String fileName = GetFileName("Images (*.bmp; *.jpg; *.tif; *.png; *.gif)|*.bmp;*.jpg;*.tif;*.png;*.gif");
-            if (fileName != null) {
+            if (fileName != null)
+            {
                 txtNewFrameFileName.Text += fileName + "\r\n";
             }
         }
 
-        private void btnSave_Click(object sender, EventArgs e) {
+        private void btnSave_Click(object sender, EventArgs e)
+        {
             SaveFileDialog dlg = new SaveFileDialog();
             dlg.Filter = "Videos (*.avi)|*.avi;";
-            if (dlg.ShowDialog() == DialogResult.OK) {
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
                 AviManager.MakeFileFromStream(dlg.FileName, editableStream);
                 editableStream.Close();
                 editableStream = null;
@@ -163,7 +191,8 @@ namespace AviDemo {
             }
         }
 
-        private void btnSetStreamInfo_Click(object sender, EventArgs e) {
+        private void btnSetStreamInfo_Click(object sender, EventArgs e)
+        {
             Avi.AVISTREAMINFO info = editableStream.StreamInfo;
             info.dwRate = (int)(numFrameRate.Value * 10000);
             info.dwScale = 10000;

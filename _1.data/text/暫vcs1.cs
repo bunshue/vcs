@@ -167,37 +167,6 @@ C:\Program Files\Git\bin\git.exe pull --progress -v --no-rebase "origin"
 
 //------------------------------------------------------------  # 60個
 
-DT 範例
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Id", typeof(string));
-            dt.Columns.Add("Name", typeof(string));
-            dt.Columns.Add("Address", typeof(string));
-            dt.PrimaryKey = new DataColumn[] { dt.Columns[0] };
-
-            dt.Rows.Add("0001", "張三", "武漢市");
-            dt.Rows.Add("0002", "李四", "北京市");
-            dt.AcceptChanges();
-            dt.Rows.Add("0003", "王五", "深圳市");
-
-        public static DataTable DbNullInt()
-        {
-            return table;
-        }
-
-            DataTable table = new DataTable();
-            table.Columns.Add("Id", typeof(long));
-            table.Columns.Add("Name", typeof(string));
-
-            DataColumn column;
-            column = new DataColumn("DepartmentId", System.Type.GetType("System.Int32"));
-            column.AllowDBNull = true;
-            table.Columns.Add(column);
-
-            table.Rows.Add(1, "Smith", DBNull.Value);
-            table.Rows.Add(2, "Hook", 1);
-
-//------------------------------------------------------------  # 60個
-
 畫布轉換矩陣的平移設定 (↑↓←→按鍵)
 
         Bitmap bitmap1 = new Bitmap(Properties.Resources.Butterfly);
@@ -249,11 +218,11 @@ DT 範例
 // 如此才能使用較簡潔的物件名稱來使用Form, Button, TextBox, Label...等類別
 using System.Windows.Forms;
 
-   // 定義Form1繼承System.Windows.Forms命名空間下的Form類別
-   class Form1 : Form
-   {
-	   //xxxx
-   }
+// 定義Form1繼承System.Windows.Forms命名空間下的Form類別
+class Form1 : Form
+{
+	//xxxx
+}
 
 //------------------------------------------------------------  # 60個
 
@@ -283,12 +252,6 @@ CheckForIllegalCrossThreadCalls = false;
 
 命令行 msinfo32
 
-DataTable
-1. 建立DataTable物件
-2. 建立DataTable頁面
-3. 加入DataTable欄位
-4. 加入DataTable資料
-
 this.FormBorderStyle = FormBorderStyle.None;//設定無邊框
 this.FormBorderStyle = FormBorderStyle.None;//設定無邊框
 
@@ -301,21 +264,7 @@ pictureBox1 能夠顯示部分圖片 然後接收空白鍵 換圖片的下一部
             Tension = trkTension.Value / 10f;
             txtTension.Text = Tension.ToString("0.0");
 
-
-            //設定ListView與設定欄位
-            listView1.View = View.Details;  //定義列表顯示的方式
-            listView1.FullRowSelect = true; //整行一起選取
-            listView1.GridLines = true; //顯示格線
-
-            listView1.GridLines = true;
-            listView1.View = View.Details;
-            //listView1.Columns.Add(new ColumnHeader("aaaa"));
-
-            //設定欄位
-            ColumnHeader ch1 = new ColumnHeader();
-            ch1.Text = "檔案名稱";
-            ch1.Width = 500;
-            listView1.Columns.Add(ch1);
+//------------------------------------------------------------  # 60個
             
 搜尋
 ProcessDirectory
@@ -363,23 +312,6 @@ vcs待尋找
             toolStripProgressBar1.Style = ProgressBarStyle.Marquee;  //進度條一直重複跑
             toolStripProgressBar1.Style = ProgressBarStyle.Blocks;  //依Value顯示進度
             toolStripProgressBar1.Value = 30;
-
-//------------------------------------------------------------  # 60個
-
-        void apply_listView02()
-        {
-            /* 自動格式化listView
-            // Size the columns to fit the data and colummn headers.
-            listView1.SizeColumns(-2);
-
-            // Make the form big enough to show the ListView.
-            Rectangle item_rect = listView1.GetItemRect(listView1.Items.Count - 1);
-
-            this.ClientSize = new Size(
-                item_rect.Left + item_rect.Width + 25,
-                item_rect.Top + item_rect.Height + 75);
-            */
-        }
 
 //------------------------------------------------------------  # 60個
 
@@ -493,10 +425,6 @@ poem+一頁模式
 
 //------------------------------------------------------------  # 60個
 
-cccc
-this.acceptButton = btn.....
-
-//------------------------------------------------------------  # 60個
 cccc
 TextBox設定星號
             toolStripTextBox3.TextBox.PasswordChar = '*';
@@ -643,7 +571,6 @@ radioButton1屬性
                 radioButton3.CheckAlign = ContentAlignment.MiddleLeft;
             }
 
-
             if (radioButton4.CheckAlign == ContentAlignment.MiddleLeft)
             {
                 radioButton4.CheckAlign = ContentAlignment.MiddleRight;
@@ -661,10 +588,6 @@ radioButton1屬性
             {
                 radioButton5.CheckAlign = ContentAlignment.MiddleLeft;
             }
-
-//------------------------------------------------------------  # 60個
-
-北風.accdb
 
 //------------------------------------------------------------  # 60個
 
@@ -765,7 +688,6 @@ pictureBox 顯示圖片的方法(4)
             button1.Text = "衛星雲圖";
             pictureBox1.ImageLocation = "http://www.cwb.gov.tw/V7/observe/satellite/Data/s3p/s3p-2013-01-20-01-00.jpg";
 
-
             image1 = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\_case1\pic1.jpg");
             pictureBox1.Image = image1;
 
@@ -788,7 +710,6 @@ pictureBox 顯示圖片的方法(4)
             //NG
             pictureBox1.ImageLocation = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Taipei_101_2009_amk-EditMylius.jpg/500px-Taipei_101_2009_amk-EditMylius.jpg";
 
-
             //錯誤的寫法, 可能會出現"記憶體不足"
             //pictureBox1.Image = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\bear.bmp");
 
@@ -796,7 +717,6 @@ pictureBox 顯示圖片的方法(4)
             FileStream fs = File.OpenRead(@"D:\_git\vcs\_1.data\______test_files1\bear.jpg");
             pictureBox1.Image = Image.FromStream(fs);
             fs.Close();
-
 
 //清除
             pictureBox1.Image = null;
@@ -922,11 +842,6 @@ if (MessageBox.Show("是否要刪除？", "小心", MessageBoxButtons.YesNo, Mes
 
 //------------------------------------------------------------  # 60個
 
-//取得Click事件的訊息
-button1.PerformClick();
-
-//------------------------------------------------------------  # 60個
-
         int kind, ticket;  //車票種類(kind)和票數(ticket)
         string msg, msg2;  //取得RadioButton的Text屬性值
 
@@ -966,14 +881,6 @@ button1.PerformClick();
 
 //------------------------------------------------------------  # 60個
 
-Form.AcceptButton和Form.CancelButton属性的用法，
-这两个属性分别用于指定窗口上回车键和ESC键对应的默认按钮。
-
-在某些不依赖鼠标操作的场景下，这两个属性能提供便捷的键盘交互体验。
-通过示例代码展示了如何设置这两个属性，以实现键盘触发按钮的点击事件。
-
-//------------------------------------------------------------  # 60個
-
 C# 6.0 是隨 Visual Studio 2015 發布的 C# 版本，專注於提升開發效率、代碼簡潔性及可讀性，
 引入了自動屬性初始化器、字串插補 ($"")、Null 傳遞運算子 (?.)、Nameof 運算子等重要特性，顯著減少了樣板代碼。
 C# 6.0 旨在讓代碼更精簡，是 .NET 開發中一個重要的生產力提升版本。
@@ -995,20 +902,6 @@ C# 7.0 引入 具名 Tuple 語法
 
             pictureBox1.Height = Convert.ToInt32(myImage.Height * Convert.ToSingle(textBox1.Text.Trim()));
             pictureBox1.Width = Convert.ToInt32(myImage.Width * Convert.ToSingle(textBox1.Text.Trim()) * 4 / 3);
-
-//------------------------------------------------------------  # 60個
-
-private void Form1_Load(object sender, EventArgs e)
-{
-    //按Enter連動到button1
-    this.AcceptButton = button1;	//在表單按Enter, 等於按了button1
-    this.AcceptButton = button5;            //在表單按enter就執行button5按鈕的動作
-    //按ESC連動到button1
-    this.CancelButton = button2;
-
-    //不再TaskBar上顯示程式
-    this.ShowInTaskbar = false;
-}
 
 //------------------------------------------------------------  # 60個
 
@@ -1092,10 +985,6 @@ this.DoubleBuffered = true;//避免闪烁
 
 //------------------------------------------------------------  # 60個
 
-button1.PerformClick();	把按鍵按一下
-
-//------------------------------------------------------------  # 60個
-
             pictureBox1.Image = bitmap1; //顯示在 pictureBox1 圖片控制項中
             this.BackgroundImage = bitmap1;//顯示在 表單中
         
@@ -1116,16 +1005,6 @@ splitContainer1
 
 splitContainer1 預設兩個Panel, Panel1 和 Panel2，Dock 選 DockStyle.Fill
 放控件至Panel中，Dock 選 DockStyle.Fill
-
-//------------------------------------------------------------  # 60個
-
-listView1 屬性 的 ContextMenuStrip 加 contextMenuStrip1
-
-vcs_ListView3_ContextMenuStrip
-
-點選contextMenuStrip1, 在這裡輸入, 項目名稱, 例如 : 取消選擇
-
-使ListView控制元件中的選擇項目以高亮度方式顯示
 
 //------------------------------------------------------------  # 60個
 
@@ -1427,61 +1306,6 @@ PixelFormat.Format48bppRgb 或 PixelFormat.Format64bppArgb:
 
 //------------------------------------------------------------  # 60個
 
-vcs 使用 macro
-
-#define Use_IndexOf
-#define Use_HitTest
-
-        // Display the row and column under the mouse.
-        private void listView1_MouseMove(object sender, MouseEventArgs e)
-        {
-            txtRow.Clear();
-            txtColumn.Clear();
-
-#if Use_IndexOf
-            // Method 3: Use HitTest and IndexOf.
-            ListViewHitTestInfo hti = listView1.HitTest(e.Location);
-            if (hti.Item == null) return;
-            ListViewItem item = hti.Item;
-            txtRow.Text = item.Index.ToString();
-
-            // See which sub-item this is.
-            txtColumn.Text = item.SubItems.IndexOf(hti.SubItem).ToString();
-#elif Use_HitTest
-            // Method 2: Use HitTest.
-            ListViewHitTestInfo hti = listView1.HitTest(e.Location);
-            if (hti.Item == null) return;
-            ListViewItem item = hti.Item;
-            txtRow.Text = item.Index.ToString();
-
-            // See which sub-item this is.
-            ListViewItem.ListViewSubItem subitem = hti.SubItem;
-            for (int i = 0; i < item.SubItems.Count; i++)
-            {
-                if (item.SubItems[i] == subitem)
-                {
-                    txtColumn.Text = i.ToString();
-                }
-            }
-#else
-            // Method 1: Use the FindListViewRowColumn method.
-            int row, column;
-            if (listView1.FindListViewRowColumn(e.X, e.Y, out row, out column))
-            {
-                txtRow.Text = row.ToString();
-                txtColumn.Text = column.ToString();
-            }
-#endif
-
-
-//------------------------------------------------------------  # 60個
-
-            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\excel_20210602_131921.xls";
-
-            richTextBox1.Text += filename + "\n";
-
-//------------------------------------------------------------  # 60個
-
 	axWindowsMediaPlayer1.Ctlcontrols.playItem(playListDict[path]);		playItem ??
 
 指名播放某項
@@ -1592,25 +1416,24 @@ http://maps.google.com/mapdata?latitude_e6=51600117&longitude_e6=
 2.加notifyicon控件notifyIcon1，為控件notifyIcon1的屬性Icon添加一個icon圖標。
 3.添加窗體最小化事件(首先需要添加事件引用)：
 
-
 this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
 //上面一行是主窗體InitializeComponent()方法中需要添加的引用
 private void Form1_SizeChanged(object sender, EventArgs e)
 {
-if(this.WindowState == FormWindowState.Minimized)
-{
-this.Hide();
-this.notifyIcon1.Visible=true;
-}
+	if(this.WindowState == FormWindowState.Minimized)
+	{
+		this.Hide();
+		this.notifyIcon1.Visible=true;
+	}
 }
 
 4.添加點擊圖標事件(首先需要添加事件引用)：
 
 private void notifyIcon1_Click(object sender, EventArgs e)
 {
-this.Visible = true;
-this.WindowState = FormWindowState.Normal;
-this.notifyIcon1.Visible = false;
+	this.Visible = true;
+	this.WindowState = FormWindowState.Normal;
+	this.notifyIcon1.Visible = false;
 }
 
 5.可以給notifyIcon添加右鍵菜單：
@@ -3346,7 +3169,6 @@ Form1隱藏Form2   f2.Hide();
 可以取得回應
 if(f3.DialogResult == DialogREsult.OK)
   ....
-  
 
         private void button12_Click(object sender, EventArgs e)
         {
@@ -3771,9 +3593,11 @@ fullscreenfullscreen
 	    private Color coverColor;
 	    private Brush rectBrush = null;
 	    private Bitmap resultBmp = null;
+	    
 	    public FullScreenForm(Bitmap screen)
 	    {
 		    InitializeComponent();
+		    
 		    int width = Screen.PrimaryScreen.Bounds.Width;
 		    int height = Screen.PrimaryScreen.Bounds.Height;
 		    coverLayer = new Bitmap(width, height);
@@ -4081,20 +3905,10 @@ using System.Reflection;
 網際網路時間伺服器，
 從原來的 time.windows.com 改為 time.nist.gov，
 
-3. 如何为一个窗体设置一个默认按钮？（How to set the default button for a form?）
-
-form1.AcceptButton = button1;
-
-4. 如何为一个窗体设置一个取消按钮？（How to set the Cancel button for a form?）
-
-form1.CancelButton = button1;
-
 5. 如何阻止一个窗体标题显示在任务栏上？（How to prevent a form from being shown in the taskbar?）
-
 设置窗体的ShowIntaskbar属性为False
 
 23. 如何使Windows Form上的Panel或者Label控件半透明？（How to make a Panel or Label semi-transparent on a Windows Form? ）
-
 通过设置控件背景色的alpha值
 panel1.BackColor = Color.FromA#41ccd4;
 注意：在设计时手动输入这些值，不要用颜色选取
@@ -4747,7 +4561,6 @@ typedef unsigned char      BOOLEAN;
 #define false              (0 == 1)
 #define OK                 true
 #define NG                 false
-// macro definition
 #define READ_REG_INT32U(Addr)        *((INT32U*)(Addr))
 #define WRITE_REG_INT32U(Addr,Value) *((INT32U*)(Addr))=Value
 #define READ_REG_INT8U(Addr)         *((INT8U*)(Addr))
@@ -5228,6 +5041,7 @@ ffmpeg64.exe -i null.ape -ar 44100 -ac 2 -ab 16k -vol 50 -f mp3 null.mp3
 //------------------------------------------------------------  # 60個
 
 old 暫存一下
+
         private void button5_Click(object sender, EventArgs e)
         {
             //广东省深圳市福田区华强北路1002号
@@ -6179,32 +5993,21 @@ Pen blackPen = new Pen(Color.FromArgb(255, 0, 0, 0), 5);
 //------------------------------------------------------------  # 60個
 
 // bmp 的大小和pictureBox1 相同
+Bitmap bmp = new Bitmap(this.PictureBox1.Width, this.PictureBox1.Height);
+// 以記憶體圖像 bmp 建立 g 記憶體畫布
+Graphics g = Graphics.FromImage(bmp);
+g.Clear(this.pictureBox1.BackColor); //畫布背景色
+g.DrawLine(new pen(Color.Red,2),x,y,e.X,e.Y); //可
+
+//------------------------------------------------------------  # 60個
+
+// bmp 的大小和pictureBox1 相同
 Bitmap bmp = new Bitmap(this.PictureBox1.Width,
 this.PictureBox1.Height);
-// 以記憶體圖像 bmp 建立 myDraw 記憶體畫布
-Graphics myDraw = Graphics.FromImage(bmp);
-MyDraw.Clear(this.pictureBox1.BackColor); //畫布背景色
-MyDraw.DrawLine(new pen(Color.Red,2),x,y,e.X,e.Y); //可
-
-王濬樓船下益州，金陵王氣黯然收。
-千尋鐵鎖沉江底，一片降幡出石頭。
-人世幾回傷往事，山形依舊枕寒流。
-今逢四海為家日，故壘蕭蕭蘆荻秋。
-朱雀橋邊野草花，烏衣巷口夕陽斜。
-舊時王謝堂前燕，飛入尋常百姓家。
-吾愛孟夫子，風流天下聞。紅顏棄軒冕，白首臥鬆雲。
-醉月頻中聖，迷花不事君。高山安可仰，徒此揖清芬。
-寥落古行宮，宮花寂寞紅。
-白頭宮女在，閒坐說玄宗。
-功蓋三分國，名成八陣圖。
-江流石不轉，遺恨失吞吳。
-
-//------------------------------------------------------------  # 60個
-
-
-
-//------------------------------------------------------------  # 60個
-
+// 以記憶體圖像 bmp 建立 g 記憶體畫布
+Graphics g = Graphics.FromImage(bmp);
+g.Clear(this.pictureBox1.BackColor); //畫布背景色
+g.DrawLine(new pen(Color.Red,2),x,y,e.X,e.Y); //可以繪圖了
 
 //------------------------------------------------------------  # 60個
 
@@ -6213,7 +6016,6 @@ MyDraw.DrawLine(new pen(Color.Red,2),x,y,e.X,e.Y); //可
 
 XML 註解	<!-- --> 的內容。
 
-
 @"C:\______test_files\cat\cat2.png"
 
 Pen blackPen = new Pen(Color.FromArgb(255, 0, 0, 0), 5);
@@ -6221,16 +6023,6 @@ Pen blackPen = new Pen(Color.FromArgb(255, 0, 0, 0), 5);
 //------------------------------------------------------------  # 60個
 
 this.Refresh() ; //執行 Form1_Paint()
-
-//------------------------------------------------------------  # 60個
-
-// bmp 的大小和pictureBox1 相同
-Bitmap bmp = new Bitmap(this.PictureBox1.Width,
-this.PictureBox1.Height);
-// 以記憶體圖像 bmp 建立 myDraw 記憶體畫布
-Graphics myDraw = Graphics.FromImage(bmp);
-MyDraw.Clear(this.pictureBox1.BackColor); //畫布背景色
-MyDraw.DrawLine(new pen(Color.Red,2),x,y,e.X,e.Y); //可以繪圖了
 
 //------------------------------------------------------------  # 60個
 
@@ -7524,19 +7316,15 @@ Timer timer_stage4;
 Panel panel1;
 Label lb_a;
 
-
 NumericUpDown numericUpDown_G;
 NumericUpDown numericUpDown_R;
 NumericUpDown numericUpDown_gain;
 
 richTextBox1
 
-
 僅限全白背景的才可以做到透明功能
 或者指名顏色為透明?
 若圖片中間有白色 會如何?
-
-
 
 將
 
@@ -7945,13 +7733,10 @@ Transform需要做到
             InitializeComponent(); 
             this.DoubleBuffered = true;//避免闪烁  方法一
         }
-
           
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.AcceptButton = button5;            //在表單按enter就執行button1按鈕的動作
         }
-
 
 編碼 = 明碼.Encrypt(密碼).ToHex();
 
@@ -8259,14 +8044,9 @@ this.CenterToScreen();       //將表單置中顯示
     
 //------------------------------------------------------------  # 60個
 
-將某觸發事件加到某按鍵
-// Add this event handler to the button.
-btn.Click += btnCreateButton_Click;
-
 讓表單大小正好是某控件的邊緣
 // Make the form just big enough to hold the button.
 this.ClientSize = new Size(btnClickMe.Right, btnClickMe.Bottom);
-
 
 新建一個按鍵
             Button btn = new Button();
@@ -9244,8 +9024,6 @@ string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yy
 //把Form大小設定跟圖片大小一樣
 //ClientSize = new Size(pictureBox1.Right + pictureBox1.Left, pictureBox1.Bottom + pictureBox1.Left);
 
-ClientSize = new Size(button2.Right + 20, richTextBox1.Bottom + 20);    //自動表單邊界
-
 							//離開按鈕的寫法
 							            //最大化螢幕
 							            this.FormBorderStyle = FormBorderStyle.None;
@@ -9681,6 +9459,8 @@ Shift+F11跳出
 RSS是一種網頁內容聯合格式（web content sydication format）。它的名字是Really Simple Syndication的縮寫。
 RSS是XML的一種。所有的RSS文檔都遵循XML 1.0規范。
 
+//------------------------------------------------------------  # 60個
+
 private void button1_Click(object sender, EventArgs e)
  ///sender即表示事件源，e表示通過事件傳遞過來的消息     
  
@@ -10101,9 +9881,6 @@ this.StartPosition = FormStartPosition.CenterScreen;  // 單獨寫致中，看�
 
 //------------------------------------------------------------  # 60個
 
-
-//------------------------------------------------------------  # 60個
-
             Graphics g;
 
             //新建圖檔, 初始化畫布
@@ -10209,9 +9986,6 @@ Paint
             }
         }
 
-//------------------------------------------------------------  # 60個      
-
-
 //------------------------------------------------------------  # 60個
 
 系統預設路徑與名稱
@@ -10282,4 +10056,49 @@ string dir = Path.GetDirectoryName(fileSaveUrl);
 if (!Directory.Exists(dir))
     Directory.CreateDirectory(dir);
 */
+
+
+//------------------------------------------------------------  # 60個
+
+Form.AcceptButton和Form.CancelButton属性的用法，
+这两个属性分别用于指定窗口上回车键和ESC键对应的默认按钮。
+
+在某些不依赖鼠标操作的场景下，这两个属性能提供便捷的键盘交互体验。
+通过示例代码展示了如何设置这两个属性，以实现键盘触发按钮的点击事件。
+
+
+//------------------------------------------------------------  # 60個
+
+private void Form1_Load(object sender, EventArgs e)
+{
+    //按Enter連動到button1
+    this.AcceptButton = button1;	//在表單按Enter, 等於按了button1
+    this.AcceptButton = button5;            //在表單按enter就執行button5按鈕的動作
+    //按ESC連動到button1
+    this.CancelButton = button2;
+
+    //不再TaskBar上顯示程式
+    this.ShowInTaskbar = false;
+}
+
+//------------------------------------------------------------  # 60個
+3. 如何为一个窗体设置一个默认按钮？（How to set the default button for a form?）
+form1.AcceptButton = button1;
+
+4. 如何为一个窗体设置一个取消按钮？（How to set the Cancel button for a form?）
+form1.CancelButton = button1;
+
+//------------------------------------------------------------  # 60個
+
+            this.AcceptButton = button5;            //在表單按enter就執行button1按鈕的動作
+
+//------------------------------------------------------------  # 60個
+
+
+cccc
+this.acceptButton = btn.....
+
+
+//------------------------------------------------------------  # 60個
+
 

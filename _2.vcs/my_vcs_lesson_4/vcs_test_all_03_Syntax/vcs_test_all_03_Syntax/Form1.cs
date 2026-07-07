@@ -1,5 +1,5 @@
-﻿#define TYPE1
-//#define TYPE2
+﻿#define USE_MACRO1
+//#define USE_MACRO2
 
 using System;
 using System.Collections.Generic;
@@ -480,10 +480,10 @@ namespace vcs_test_all_03_Syntax
 
         private void button21_Click(object sender, EventArgs e)
         {
-#if TYPE1
-            richTextBox1.Text += "你使用了 #define TYPE1\n";
-#elif TYPE2
-            richTextBox1.Text += "你使用了 #define TYPE2\n";
+#if USE_MACRO1
+            richTextBox1.Text += "你使用了 #define USE_MACRO1\n";
+#elif USE_MACRO2
+            richTextBox1.Text += "你使用了 #define USE_MACRO2\n";
 #else
             richTextBox1.Text += "你沒有使用 #define\n";
 #endif
@@ -700,15 +700,11 @@ namespace vcs_test_all_03_Syntax
 
         private void button27_Click(object sender, EventArgs e)
         {
-            int i;
-            int j;
-            int k;
-            for (j = 0; j < 32; j++)
+            for (int j = 0; j < 32; j++)
             {
-                for (i = 0; i < 128; i += 32)
+                for (int i = 0; i < 128; i += 32)
                 {
-                    k = j + i;
-
+                    int k = j + i;
                     richTextBox1.Text += k.ToString().PadLeft(3) + "  " + TenToBinary(k) + "  0x" + k.ToString("X2");
                     if (char.IsControl((char)k) == true)
                     {
@@ -727,15 +723,12 @@ namespace vcs_test_all_03_Syntax
 
         private void button28_Click(object sender, EventArgs e)
         {
-            int i;
-            int j;
-            int k;
-            for (j = 0; j < 32; j++)
+            for (int j = 0; j < 32; j++)
             {
                 richTextBox1.Text += "<tr align=\"center\" bgcolor=\"#FFFFF0\">";
-                for (i = 0; i < 128; i += 32)
+                for (int i = 0; i < 128; i += 32)
                 {
-                    k = j + i;
+                    int k = j + i;
 
                     richTextBox1.Text += "<td>" + k.ToString() + "</td><td>" + TenToBinary(k) + "</td><td>0x" + k.ToString("X2");
                     if (char.IsControl((char)k) == true)
@@ -1098,5 +1091,31 @@ namespace vcs_test_all_03_Syntax
 
 */
 
+
+
+
+
+
+
+/*
+
+ vcs 使用 macro
+
+#define Use_IndexOf
+#define Use_HitTest
+
+#if Use_IndexOf
+		// Method 3: Use HitTest and IndexOf.
+
+
+#elif Use_HitTest
+		// Method 2: Use HitTest.
+
+#else
+		// Method 1: Use the  method.
+
+#endif
+
+*/
 
 

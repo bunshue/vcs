@@ -71,8 +71,8 @@ namespace vcs_test_all_04_Font
             textBox1.Text = "2026 Happy New Year";
             listView1.Size = new Size(760, 270);
 
-            richTextBox1.Size = new Size(460, 200);
-            richTextBox1.Location = new Point(x_st + dx * 5 + 30, y_st + dy * 9);
+            richTextBox1.Size = new Size(460, 260);
+            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 9);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             x_st = 830;
@@ -96,7 +96,7 @@ namespace vcs_test_all_04_Font
             lb_font3.Text = "4 Underline加上底線的文字";
             lb_font4.Text = "8 Strikeout中間有線條經過的文字";
 
-            this.Size = new Size(1600, 960);
+            this.Size = new Size(1800, 960);
             this.Text = "vcs_test_all_04_Font";
 
             //設定執行後的表單起始位置, 正中央
@@ -416,12 +416,9 @@ namespace vcs_test_all_04_Font
             //列出所有已安裝字型
 
             //一樣
-            //this.listBox1.Items.AddRange(FontFamily.Families);
-
-            //一樣
             foreach (FontFamily oneFontFamily in FontFamily.Families)
             {
-                listBox1.Items.Add(oneFontFamily.Name);
+                richTextBox1.Text += oneFontFamily.Name + "\n";
             }
 
             //顯示於RichTextBox裏
@@ -536,17 +533,11 @@ namespace vcs_test_all_04_Font
         // Draw a sample of the indicated text.
         private void DrawSample(Graphics gr, float font_size, int x, ref int y)
         {
-            try
+            using (Font font = new Font(comboBox1.Text, font_size))
             {
-                using (Font font = new Font(comboBox1.Text, font_size))
-                {
-                    string text = comboBox1.Text + ", " + font_size.ToString();
-                    gr.DrawString(text, font, Brushes.Black, x, y);
-                    y = (int)(y + font_size) + 10;
-                }
-            }
-            catch
-            {
+                string text = comboBox1.Text + ", " + font_size.ToString();
+                gr.DrawString(text, font, Brushes.Black, x, y);
+                y = (int)(y + font_size) + 10;
             }
         }
 

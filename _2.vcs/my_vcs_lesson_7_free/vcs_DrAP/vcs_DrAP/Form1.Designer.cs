@@ -52,7 +52,6 @@
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.bt_clear1 = new System.Windows.Forms.Button();
             this.bt_clear2 = new System.Windows.Forms.Button();
-            this.bt_find_same_files2 = new System.Windows.Forms.Button();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.cb_video_only = new System.Windows.Forms.CheckBox();
             this.cb_video_s = new System.Windows.Forms.CheckBox();
@@ -79,9 +78,7 @@
             this.lb_search_result1 = new System.Windows.Forms.Label();
             this.bt_replace = new System.Windows.Forms.Button();
             this.bt_compare = new System.Windows.Forms.Button();
-            this.bt_search_pattern_opengl = new System.Windows.Forms.Button();
             this.bt_open_dir2 = new System.Windows.Forms.Button();
-            this.bt_search_pattern_cuda = new System.Windows.Forms.Button();
             this.bt_copy_rtb_data = new System.Windows.Forms.Button();
             this.bt_setup = new System.Windows.Forms.Button();
             this.bt_save_rtb_data = new System.Windows.Forms.Button();
@@ -279,7 +276,7 @@
             // bt_find_small_folders
             // 
             this.bt_find_small_folders.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_find_small_folders.Location = new System.Drawing.Point(1073, 41);
+            this.bt_find_small_folders.Location = new System.Drawing.Point(492, 174);
             this.bt_find_small_folders.Name = "bt_find_small_folders";
             this.bt_find_small_folders.Size = new System.Drawing.Size(115, 26);
             this.bt_find_small_folders.TabIndex = 32;
@@ -327,17 +324,6 @@
             this.bt_clear2.Text = "清除";
             this.bt_clear2.UseVisualStyleBackColor = true;
             this.bt_clear2.Click += new System.EventHandler(this.bt_clear2_Click);
-            // 
-            // bt_find_same_files2
-            // 
-            this.bt_find_same_files2.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_find_same_files2.Location = new System.Drawing.Point(1073, 73);
-            this.bt_find_same_files2.Name = "bt_find_same_files2";
-            this.bt_find_same_files2.Size = new System.Drawing.Size(115, 26);
-            this.bt_find_same_files2.TabIndex = 38;
-            this.bt_find_same_files2.Text = "找可能相同檔案";
-            this.bt_find_same_files2.UseVisualStyleBackColor = true;
-            this.bt_find_same_files2.Click += new System.EventHandler(this.bt_find_same_files2_Click);
             // 
             // checkBox3
             // 
@@ -503,7 +489,7 @@
             this.cb_option1.AutoSize = true;
             this.cb_option1.Checked = true;
             this.cb_option1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_option1.Location = new System.Drawing.Point(1271, 44);
+            this.cb_option1.Location = new System.Drawing.Point(690, 177);
             this.cb_option1.Name = "cb_option1";
             this.cb_option1.Size = new System.Drawing.Size(72, 16);
             this.cb_option1.TabIndex = 51;
@@ -513,7 +499,7 @@
             // bt_find_empty_folders
             // 
             this.bt_find_empty_folders.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_find_empty_folders.Location = new System.Drawing.Point(1073, 8);
+            this.bt_find_empty_folders.Location = new System.Drawing.Point(492, 141);
             this.bt_find_empty_folders.Name = "bt_find_empty_folders";
             this.bt_find_empty_folders.Size = new System.Drawing.Size(115, 26);
             this.bt_find_empty_folders.TabIndex = 54;
@@ -525,7 +511,7 @@
             // 
             this.bt_save_file_data.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_save_file_data.Font = new System.Drawing.Font("細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_save_file_data.Location = new System.Drawing.Point(1462, 61);
+            this.bt_save_file_data.Location = new System.Drawing.Point(881, 194);
             this.bt_save_file_data.Name = "bt_save_file_data";
             this.bt_save_file_data.Size = new System.Drawing.Size(50, 50);
             this.bt_save_file_data.TabIndex = 56;
@@ -641,7 +627,7 @@
             this.bt_replace.BackColor = System.Drawing.Color.White;
             this.bt_replace.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_replace.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_replace.Location = new System.Drawing.Point(1573, 2);
+            this.bt_replace.Location = new System.Drawing.Point(992, 135);
             this.bt_replace.Name = "bt_replace";
             this.bt_replace.Size = new System.Drawing.Size(50, 50);
             this.bt_replace.TabIndex = 69;
@@ -655,49 +641,24 @@
             this.bt_compare.BackgroundImage = global::vcs_DrAP.Properties.Resources.winmerge;
             this.bt_compare.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_compare.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_compare.Location = new System.Drawing.Point(1517, 63);
+            this.bt_compare.Location = new System.Drawing.Point(936, 196);
             this.bt_compare.Name = "bt_compare";
             this.bt_compare.Size = new System.Drawing.Size(50, 50);
             this.bt_compare.TabIndex = 66;
             this.bt_compare.UseVisualStyleBackColor = false;
             this.bt_compare.Click += new System.EventHandler(this.bt_compare_Click);
             // 
-            // bt_search_pattern_opengl
-            // 
-            this.bt_search_pattern_opengl.BackgroundImage = global::vcs_DrAP.Properties.Resources.opengl;
-            this.bt_search_pattern_opengl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_search_pattern_opengl.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_search_pattern_opengl.Location = new System.Drawing.Point(1406, 60);
-            this.bt_search_pattern_opengl.Name = "bt_search_pattern_opengl";
-            this.bt_search_pattern_opengl.Size = new System.Drawing.Size(50, 50);
-            this.bt_search_pattern_opengl.TabIndex = 60;
-            this.bt_search_pattern_opengl.UseVisualStyleBackColor = true;
-            this.bt_search_pattern_opengl.Click += new System.EventHandler(this.bt_search_pattern_opengl_Click);
-            // 
             // bt_open_dir2
             // 
             this.bt_open_dir2.BackgroundImage = global::vcs_DrAP.Properties.Resources.open_folder;
             this.bt_open_dir2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_open_dir2.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_open_dir2.Location = new System.Drawing.Point(1461, 2);
+            this.bt_open_dir2.Location = new System.Drawing.Point(880, 135);
             this.bt_open_dir2.Name = "bt_open_dir2";
             this.bt_open_dir2.Size = new System.Drawing.Size(50, 50);
             this.bt_open_dir2.TabIndex = 59;
             this.bt_open_dir2.UseVisualStyleBackColor = true;
             this.bt_open_dir2.Click += new System.EventHandler(this.bt_open_dir2_Click);
-            // 
-            // bt_search_pattern_cuda
-            // 
-            this.bt_search_pattern_cuda.BackColor = System.Drawing.Color.White;
-            this.bt_search_pattern_cuda.BackgroundImage = global::vcs_DrAP.Properties.Resources.cuda;
-            this.bt_search_pattern_cuda.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_search_pattern_cuda.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_search_pattern_cuda.Location = new System.Drawing.Point(1350, 59);
-            this.bt_search_pattern_cuda.Name = "bt_search_pattern_cuda";
-            this.bt_search_pattern_cuda.Size = new System.Drawing.Size(50, 50);
-            this.bt_search_pattern_cuda.TabIndex = 58;
-            this.bt_search_pattern_cuda.UseVisualStyleBackColor = false;
-            this.bt_search_pattern_cuda.Click += new System.EventHandler(this.bt_search_pattern_cuda_Click);
             // 
             // bt_copy_rtb_data
             // 
@@ -716,7 +677,7 @@
             this.bt_setup.BackgroundImage = global::vcs_DrAP.Properties.Resources.setup;
             this.bt_setup.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_setup.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_setup.Location = new System.Drawing.Point(1517, 2);
+            this.bt_setup.Location = new System.Drawing.Point(936, 135);
             this.bt_setup.Name = "bt_setup";
             this.bt_setup.Size = new System.Drawing.Size(50, 50);
             this.bt_setup.TabIndex = 52;
@@ -740,7 +701,7 @@
             this.bt_search_pattern_vcs.BackgroundImage = global::vcs_DrAP.Properties.Resources.vcs;
             this.bt_search_pattern_vcs.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_search_pattern_vcs.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_search_pattern_vcs.Location = new System.Drawing.Point(1349, 6);
+            this.bt_search_pattern_vcs.Location = new System.Drawing.Point(768, 139);
             this.bt_search_pattern_vcs.Name = "bt_search_pattern_vcs";
             this.bt_search_pattern_vcs.Size = new System.Drawing.Size(50, 50);
             this.bt_search_pattern_vcs.TabIndex = 26;
@@ -800,7 +761,7 @@
             this.bt_open_with_vcs.BackgroundImage = global::vcs_DrAP.Properties.Resources.vcs2;
             this.bt_open_with_vcs.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_open_with_vcs.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_open_with_vcs.Location = new System.Drawing.Point(1573, 63);
+            this.bt_open_with_vcs.Location = new System.Drawing.Point(992, 196);
             this.bt_open_with_vcs.Name = "bt_open_with_vcs";
             this.bt_open_with_vcs.Size = new System.Drawing.Size(50, 50);
             this.bt_open_with_vcs.TabIndex = 70;
@@ -811,16 +772,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1654, 588);
+            this.ClientSize = new System.Drawing.Size(1083, 474);
             this.Controls.Add(this.bt_delete_file);
             this.Controls.Add(this.bt_open_with_vcs);
             this.Controls.Add(this.bt_replace);
             this.Controls.Add(this.bt_compare);
             this.Controls.Add(this.groupbox_result);
             this.Controls.Add(this.groupbox_python);
-            this.Controls.Add(this.bt_search_pattern_opengl);
             this.Controls.Add(this.bt_open_dir2);
-            this.Controls.Add(this.bt_search_pattern_cuda);
             this.Controls.Add(this.bt_clear3);
             this.Controls.Add(this.bt_save_file_data);
             this.Controls.Add(this.bt_find_empty_folders);
@@ -833,7 +792,6 @@
             this.Controls.Add(this.cb_video_only);
             this.Controls.Add(this.checkBox3);
             this.Controls.Add(this.bt_save_rtb_data);
-            this.Controls.Add(this.bt_find_same_files2);
             this.Controls.Add(this.bt_clear2);
             this.Controls.Add(this.bt_clear1);
             this.Controls.Add(this.label3);
@@ -905,7 +863,6 @@
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Button bt_clear1;
         private System.Windows.Forms.Button bt_clear2;
-        private System.Windows.Forms.Button bt_find_same_files2;
         private System.Windows.Forms.Button bt_search_pattern_python;
         private System.Windows.Forms.Button bt_save_rtb_data;
         private System.Windows.Forms.CheckBox checkBox3;
@@ -926,9 +883,7 @@
         private System.Windows.Forms.Button bt_find_empty_folders;
         private System.Windows.Forms.Button bt_save_file_data;
         private System.Windows.Forms.Button bt_clear3;
-        private System.Windows.Forms.Button bt_search_pattern_cuda;
         private System.Windows.Forms.Button bt_open_dir2;
-        private System.Windows.Forms.Button bt_search_pattern_opengl;
         private System.Windows.Forms.Button bt_edit_python_files;
         private System.Windows.Forms.GroupBox groupbox_python;
         private System.Windows.Forms.RadioButton rb_python_search1;

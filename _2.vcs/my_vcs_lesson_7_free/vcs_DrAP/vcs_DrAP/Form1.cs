@@ -25,7 +25,7 @@ namespace vcs_DrAP
         private const int FUNCTION_FIND_SMALL_FOLDERS = 0x05;        //找小資料夾
         private const int FUNCTION_FIND_EMPTY_FOLDERS = 0x06;       //找空資料夾
         private const int FUNCTION_FIND_BIG_FILES = 0x07;           //找大檔案
-        private const int FUNCTION_SEARCH_TEXT = 0x08;  //搜尋關鍵字, vcs, python, cuda...
+        private const int FUNCTION_SEARCH_TEXT = 0x08;  //搜尋關鍵字, vcs, python, ...
         private const int FUNCTION_TEST = 0xFF;         //測試
 
         private const int FILETYPE_VIDEO = 0x00;        //影片
@@ -58,13 +58,9 @@ namespace vcs_DrAP
         string search_path = @"D:\_git\vcs\_2.vcs";
         string default_vcs_path = @"D:\_git\vcs\_2.vcs";
         string default_python_path = @"D:\_git\vcs\_4.python";
-        string default_cuda_path = @"D:\_git\vcs\_3.cuda";
-        string default_opengl_path = @"D:\_git\vcs\_6.opengl";
 
         private const int SEARCH_MODE_VCS = 0x00;	    //search vcs code, 搜尋vcs內的關鍵字
         private const int SEARCH_MODE_PYTHON = 0x01;	//search python code, 搜尋python內的關鍵字
-        private const int SEARCH_MODE_CUDA = 0x03;	//search cuda code, 搜尋cuda內的關鍵字
-        private const int SEARCH_MODE_OPENGL = 0x04;	//search opengl code, 搜尋opengl內的關鍵字
 
         string result_str = string.Empty;
 
@@ -225,7 +221,6 @@ namespace vcs_DrAP
 
             bt_find_empty_folders.Location = new Point(x_st + 55, y_st);
             bt_find_small_folders.Location = new Point(x_st + 55, y_st + 30);
-            bt_find_same_files2.Location = new Point(x_st + 55, y_st + 60);
 
             dx = 85;
             dy = 35;
@@ -240,8 +235,6 @@ namespace vcs_DrAP
             dx = 55;
             dy = 55;
             bt_search_pattern_vcs.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            bt_search_pattern_cuda.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            bt_search_pattern_opengl.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             bt_open_with_vcs.Location = new Point(x_st + dx * -1, y_st + dy * 1);
 
             bt_open_dir2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
@@ -1618,123 +1611,7 @@ namespace vcs_DrAP
             richTextBox2.Clear();
         }
 
-        void show_file_info5()
-        {
-            richTextBox1.Text += "show_file_info5 ST\n";
-
-            listView1.View = View.Details;  //定義列表顯示的方式
-            listView1.FullRowSelect = true; //整行一起選取
-            listView1.Clear();
-
-            //設置列名稱
-            if (cb_video_only.Checked == true)
-            {
-                listView1.Columns.Add("影片5", 100, HorizontalAlignment.Left);
-            }
-            listView1.Columns.Add("檔名5", 300, HorizontalAlignment.Left);
-            listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
-            listView1.Columns.Add("大小", 150, HorizontalAlignment.Left);
-            listView1.Columns.Add("副檔名", 100, HorizontalAlignment.Left);
-            listView1.Columns.Add("修改日期", 100, HorizontalAlignment.Left);
-            listView1.Visible = true;
-
-            if (fileinfos.Count == 0)
-            {
-                result_str += "找不到資料e\n";
-                lb_search_result1.Text = "0";
-            }
-            else
-            {
-                result_str += "找到 " + fileinfos.Count.ToString() + " 筆資料e\n";
-                lb_search_result1.Text = fileinfos.Count.ToString();
-            }
-
-            for (int i = 0; i < (fileinfos.Count - 1); i++)
-            {
-                string filename1 = fileinfos[i].filename;
-                //richTextBox1.Text += "filename1 : " + fileinfos[i].filename + "\n";
-
-                for (int j = i + 1; j < fileinfos.Count; j++)
-                {
-                    string filename2 = fileinfos[j].filename;
-                    richTextBox1.Text += "filename2 : " + fileinfos[j].filename + "\n";
-
-                    richTextBox1.Text += "str1 = " + filename1.ToLower().Replace(" ", "").Replace("-", "") + "\n";
-                    richTextBox1.Text += "str2 = " + filename2.ToLower().Replace(" ", "").Replace("-", "").Substring(0, 6) + "\n";
-
-
-                    bool ret;
-
-                    ret = filename1.ToLower().Replace(" ", "").Replace("-", "").Contains(filename2.ToLower().Replace(" ", "").Replace("-", "").Substring(0, 6));
-                    if (ret == true)
-                    {
-                        richTextBox1.Text += "YYYYYYYY\n";
-                    }
-                    else
-                    {
-                        richTextBox1.Text += "NNNNNNNNN\n";
-                    }
-
-                    if (fileinfos[i].filesize == fileinfos[j].filesize)
-                    {
-                        /*
-                        result_str += "檔案大小相同 " + fileinfos[i].filename + " 容量 " + ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize)) + "\n";
-                        result_str += "檔案大小相同 " + fileinfos[j].filename + " 容量 " + ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[j].filesize)) + "\n";
-
-                        ListViewItem i1 = new ListViewItem(fileinfos[i].filename);
-                        i1.UseItemStyleForSubItems = false;
-
-                        ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
-                        i1.SubItems.Add(fileinfos[i].filepath);
-                        sub_i1a.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
-                        i1.SubItems.Add(sub_i1a);
-                        i1.SubItems.Add(fileinfos[i].extension);
-                        sub_i1a.ForeColor = Color.Blue;
-                        sub_i1a.Font = new Font("Times New Roman", 10, FontStyle.Bold);
-
-                        listView1.Items.Add(i1);
-
-                        ListViewItem i2 = new ListViewItem(fileinfos[j].filename);
-                        i2.UseItemStyleForSubItems = false;
-
-                        ListViewItem.ListViewSubItem sub_i2a = new ListViewItem.ListViewSubItem();
-                        i2.SubItems.Add(fileinfos[j].filepath);
-                        sub_i2a.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[j].filesize));
-                        i2.SubItems.Add(sub_i2a);
-                        i2.SubItems.Add(fileinfos[j].extension);
-                        sub_i2a.ForeColor = Color.Blue;
-                        sub_i2a.Font = new Font("Times New Roman", 10, FontStyle.Bold);
-
-                        listView1.Items.Add(i2);
-                        */
-
-                        //設置ListView最後一行可見
-                        //listView1.Items[listView1.Items.Count - 1].EnsureVisible();
-                    }
-                }
-
-                /*
-                ListViewItem i1 = new ListViewItem(fileinfos[i].filename);
-
-                i1.UseItemStyleForSubItems = false;
-
-                ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
-
-                //sub_i1a.Text = fi.Length.ToString();
-                sub_i1a.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
-                i1.SubItems.Add(sub_i1a);
-                sub_i1a.ForeColor = Color.Blue;
-
-                sub_i1a.Font = new Font("Times New Roman", 10, FontStyle.Bold);
-                */
-            }
-        }
-
-        private void bt_find_same_files2_Click(object sender, EventArgs e)
-        {
-            //找可能相同檔案
-            show_file_info5();
-        }
+        //------------------------------------------------------------  # 60個
 
         private void bt_find_small_folders_Click(object sender, EventArgs e)
         {
@@ -2200,18 +2077,6 @@ namespace vcs_DrAP
         {
         }
 
-        private void bt_search_pattern_cuda_Click(object sender, EventArgs e)
-        {
-            do_search_mode(SEARCH_MODE_CUDA);
-            return;
-        }
-
-        private void bt_search_pattern_opengl_Click(object sender, EventArgs e)
-        {
-            do_search_mode(SEARCH_MODE_OPENGL);
-            return;
-        }
-
         void do_search_mode(int mode)
         {
             //開始計時
@@ -2251,26 +2116,6 @@ namespace vcs_DrAP
                 bt_search_pattern_python.BackgroundImage = null;
                 bt_search_pattern_python.BackColor = Color.Red;
                 path = default_python_path;
-            }
-            else if (mode == SEARCH_MODE_CUDA)
-            {
-                search_mode = SEARCH_MODE_CUDA;
-                richTextBox1.Text += "cuda\t";
-                result_str += "cuda\t";
-
-                bt_search_pattern_cuda.BackgroundImage = null;
-                bt_search_pattern_cuda.BackColor = Color.Red;
-                path = default_cuda_path;
-            }
-            else if (mode == SEARCH_MODE_OPENGL)
-            {
-                search_mode = SEARCH_MODE_OPENGL;
-                richTextBox1.Text += "opengl\t";
-                result_str += "opengl\t";
-
-                bt_search_pattern_opengl.BackgroundImage = null;
-                bt_search_pattern_opengl.BackColor = Color.Red;
-                path = default_opengl_path;
             }
             else
             {
@@ -2326,16 +2171,6 @@ namespace vcs_DrAP
             {
                 bt_search_pattern_python.BackColor = SystemColors.ControlLight;
                 bt_search_pattern_python.BackgroundImage = vcs_DrAP.Properties.Resources.python;
-            }
-            else if (mode == SEARCH_MODE_CUDA)
-            {
-                bt_search_pattern_cuda.BackColor = SystemColors.ControlLight;
-                bt_search_pattern_cuda.BackgroundImage = vcs_DrAP.Properties.Resources.cuda;
-            }
-            else if (mode == SEARCH_MODE_OPENGL)
-            {
-                bt_search_pattern_opengl.BackColor = SystemColors.ControlLight;
-                bt_search_pattern_opengl.BackgroundImage = vcs_DrAP.Properties.Resources.opengl;
             }
             else
             {
@@ -2785,10 +2620,6 @@ namespace vcs_DrAP
                     pattern = ".cs";
                 else if (search_mode == SEARCH_MODE_PYTHON)
                     pattern = "py";
-                else if (search_mode == SEARCH_MODE_CUDA)
-                    pattern = ".cu";
-                else if (search_mode == SEARCH_MODE_OPENGL)
-                    pattern = ".cpp";
                 else
                     pattern = ".cs";
 
@@ -2799,46 +2630,6 @@ namespace vcs_DrAP
                     if (search_mode == SEARCH_MODE_VCS) //vcs 加搜尋 .txt
                     {
                         res = fi.FullName.ToLower().Replace(" ", "").Contains("____txt");
-                    }
-                }
-
-                if (res == false)   //cuda加搜尋 .cpp 檔案
-                {
-                    if (search_mode == SEARCH_MODE_CUDA) //cuda 加搜尋 .cpp
-                    {
-                        res = fi.FullName.ToLower().Replace(" ", "").EndsWith(".cpp");
-                    }
-                }
-
-                if (res == false)   //cuda加搜尋 .c 檔案
-                {
-                    if (search_mode == SEARCH_MODE_CUDA) //cuda 加搜尋 .c
-                    {
-                        res = fi.FullName.ToLower().Replace(" ", "").EndsWith(".c");
-                    }
-                }
-
-                if (res == false)   //cuda加搜尋 .h 檔案
-                {
-                    if (search_mode == SEARCH_MODE_CUDA) //cuda 加搜尋 .h
-                    {
-                        res = fi.FullName.ToLower().Replace(" ", "").EndsWith(".h");
-                    }
-                }
-
-                if (res == false)   //opengl加搜尋 .c 檔案
-                {
-                    if (search_mode == SEARCH_MODE_OPENGL) //opengl 加搜尋 .c
-                    {
-                        res = fi.FullName.ToLower().Replace(" ", "").EndsWith(".c");
-                    }
-                }
-
-                if (res == false)   //opengl加搜尋 .h 檔案
-                {
-                    if (search_mode == SEARCH_MODE_OPENGL) //opengl 加搜尋 .h
-                    {
-                        res = fi.FullName.ToLower().Replace(" ", "").EndsWith(".h");
                     }
                 }
 
@@ -2943,8 +2734,7 @@ namespace vcs_DrAP
             Properties.Settings.Default.search_path = "";
             Properties.Settings.Default.Save();
             */
-
-
+//------------------------------------------------------------  # 60個
 /*
         private void bt_clear_data_Click(object sender, EventArgs e)
         {
@@ -2974,7 +2764,6 @@ namespace vcs_DrAP
                 Clipboard.SetDataObject(Clipboard.GetText() + listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\n");      //建議用此
             }
         }
-
 */
 
 

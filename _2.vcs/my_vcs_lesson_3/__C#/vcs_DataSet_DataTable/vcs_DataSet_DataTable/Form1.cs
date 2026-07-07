@@ -10,6 +10,14 @@ using System.Windows.Forms;
 using System.IO;  // for FileStream
 using System.Collections;  // for ArrayList
 
+/*
+DataTable
+1. 建立DataTable物件
+2. 建立DataTable頁面
+3. 加入DataTable欄位
+4. 加入DataTable資料
+*/
+
 namespace vcs_DataSet_DataTable
 {
     public partial class Form1 : Form
@@ -172,6 +180,32 @@ namespace vcs_DataSet_DataTable
         private void button1_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "DataTable 1\n";
+
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Id", typeof(string));
+            dt.Columns.Add("Name", typeof(string));
+            dt.Columns.Add("Address", typeof(string));
+            dt.PrimaryKey = new DataColumn[] { dt.Columns[0] };
+
+            dt.Rows.Add("0001", "張三", "武漢市");
+            dt.Rows.Add("0002", "李四", "北京市");
+            dt.AcceptChanges();
+            dt.Rows.Add("0003", "王五", "深圳市");
+
+
+            DataTable table = new DataTable();
+            table.Columns.Add("Id", typeof(long));
+            table.Columns.Add("Name", typeof(string));
+
+            DataColumn column;
+            column = new DataColumn("DepartmentId", System.Type.GetType("System.Int32"));
+            column.AllowDBNull = true;
+            table.Columns.Add(column);
+
+            table.Rows.Add(1, "Smith", DBNull.Value);
+            table.Rows.Add(2, "Hook", 1);
+
+
 
         }
 

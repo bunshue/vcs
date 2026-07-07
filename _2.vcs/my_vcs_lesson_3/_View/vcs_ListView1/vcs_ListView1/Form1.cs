@@ -188,13 +188,36 @@ namespace vcs_ListView1
             richTextBox1.Text += "建立listView 0 標準簡易\n";
             //listView1.Clear();
 
+            //設定欄位, 欄名, 欄寬, 對齊方式
+            listView1.Columns.Add("中文名", 100, HorizontalAlignment.Left);
+            listView1.Columns.Add("英文名", 100, HorizontalAlignment.Left);
+            listView1.Columns.Add("體重", 60, HorizontalAlignment.Left);
+
             //加入項目(列資料)
             apply_data();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button1_Click(object sender, EventArgs e)
         {
+            //設定ListView與設定欄位
+            listView1.View = View.Details;  //定義列表顯示的方式
+            listView1.FullRowSelect = true; //整行一起選取
+            listView1.GridLines = true; //顯示格線
+
+            listView1.GridLines = true;
+            listView1.View = View.Details;
+            //listView1.Columns.Add(new ColumnHeader("aaaa"));
+
+            //設定欄位
+            ColumnHeader ch1 = new ColumnHeader();
+            ch1.Text = "檔案名稱";
+            ch1.Width = 500;
+            listView1.Columns.Add(ch1);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -1572,4 +1595,39 @@ C# listview中顯示imagelist中的圖片
 https://www.itread01.com/content/1546725619.html
 
 */
+
+
+
+/*
+
+
+        void apply_listView02()
+        {
+            //自動格式化listView
+            // Size the columns to fit the data and colummn headers.
+            listView1.SizeColumns(-2);
+
+            // Make the form big enough to show the ListView.
+            Rectangle item_rect = listView1.GetItemRect(listView1.Items.Count - 1);
+
+            this.ClientSize = new Size(
+                item_rect.Left + item_rect.Width + 25,
+                item_rect.Top + item_rect.Height + 75);
+        }
+
+//------------------------------------------------------------  # 60個
+
+listView1 屬性 的 ContextMenuStrip 加 contextMenuStrip1
+
+vcs_ListView3_ContextMenuStrip
+
+點選contextMenuStrip1, 在這裡輸入, 項目名稱, 例如 : 取消選擇
+
+使ListView控制元件中的選擇項目以高亮度方式顯示
+
+//------------------------------------------------------------  # 60個
+
+
+*/
+
 

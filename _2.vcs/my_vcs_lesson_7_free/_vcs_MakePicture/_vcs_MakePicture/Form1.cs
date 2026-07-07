@@ -367,6 +367,7 @@ namespace _vcs_MakePicture
 
             g.FillRectangle(sb, new Rectangle(width / 2, height * 2 / 8, width / 8, height / 2));
             g.FillRectangle(sb, new Rectangle(width / 2 + width * 2 / 8, height * 2 / 8, width / 8, height / 2));
+
             pictureBox1.Image = bitmap1;
         }
 
@@ -687,6 +688,7 @@ namespace _vcs_MakePicture
             g.FillPolygon(sb, points);
 
             g.FillRectangle(sb, new Rectangle(width / 2 + width / 8, height * 2 / 8, width / 8, height / 2));
+
             pictureBox1.Image = bitmap1;
         }
 
@@ -722,6 +724,7 @@ namespace _vcs_MakePicture
             g.FillPolygon(sb, points);
 
             g.FillRectangle(sb, new Rectangle(width / 8 + width / 8, height * 2 / 8, width / 8, height / 2));
+
             pictureBox1.Image = bitmap1;
         }
 
@@ -757,8 +760,8 @@ namespace _vcs_MakePicture
             g.FillPolygon(sb, points);
 
             g.FillRectangle(sb, new Rectangle(width / 8, height * 5 / 8 + height / 16, width * 6 / 8, height / 8));
-            pictureBox1.Image = bitmap1;
 
+            pictureBox1.Image = bitmap1;
         }
 
         private void button24_Click(object sender, EventArgs e)
@@ -4061,7 +4064,6 @@ namespace _vcs_MakePicture
             g.FillPolygon(sb, pt3);
         }
 
-
         private void button10_Click(object sender, EventArgs e)
         {
             int i;
@@ -4457,7 +4459,6 @@ namespace _vcs_MakePicture
                 points[1] = new Point(x_st + width * 6 / 8, y_st + height * 2 / 8);
                 points[2] = new Point(x_st + width * 2 / 8, y_st + height * 2 / 8);
                 g.FillPolygon(sb, points);
-
             }
             else if (type == ICON_LEFT)    //左
             {

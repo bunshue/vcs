@@ -882,3 +882,18 @@ namespace vcs_Button1
 /*  可搬出
 
  */
+
+
+
+/*
+//取得Click事件的訊息
+button1.PerformClick();
+
+button1.PerformClick();	把按鍵按一下
+*/
+
+//------------------------------------------------------------  # 60個
+
+
+
+

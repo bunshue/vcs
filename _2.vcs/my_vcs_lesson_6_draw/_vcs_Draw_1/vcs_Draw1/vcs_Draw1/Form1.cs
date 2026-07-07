@@ -1556,6 +1556,33 @@ namespace vcs_Draw1
 
         private void button14_Click(object sender, EventArgs e)
         {
+            //星級饗宴創意台菜
+
+            int W = 1100;
+            int H = 750;
+            reset_bitmap1(W, H);  // 初始化畫布
+
+            Color c1 = Color.FromArgb(255, 1, 85, 69);
+            g.Clear(c1);
+
+            Pen p = new Pen(Color.FromArgb(255, 227, 194, 149), 7);
+
+            int dd = 180 * 2 / 3;
+            //for (int y = (int)(120 * 1.732 * 1 / 4); y <= H; y += (int)(120 * 1.732 * 2 / 3))
+            for (int y = (int)(20 * 1.732) + 20; y <= H; y += (int)(60 * 1.732))
+            {
+                g.DrawLine(p, 0, y, W, y);
+            }
+
+            for (int x = -dd * 5; x <= W + dd * 5; x += dd)
+            {
+                Point px1 = new Point(x, 0);
+                Point px2 = new Point(x + (int)(H / 1.732), H);
+                g.DrawLine(p, px1, px2);
+
+                px2 = new Point(x - (int)(H / 1.732), H);
+                g.DrawLine(p, px1, px2);
+            }
         }
 
         //------------------------------------------------------------  # 60個

@@ -1,5 +1,5 @@
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual C# Express 2005
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AviDemo", "AviDemo.csproj", "{282C8D7D-4B01-43B2-AEE9-3394C5426C83}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AviFile", "..\AviFile\AviFile.csproj", "{ABB32A29-AF50-47FA-B243-5FD75A5ABA54}"

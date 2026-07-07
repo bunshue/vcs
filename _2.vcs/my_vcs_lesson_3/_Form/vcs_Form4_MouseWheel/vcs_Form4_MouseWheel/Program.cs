@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_PictureBox3
+namespace vcs_Form4_MouseWheel
 {
     static class Program
     {

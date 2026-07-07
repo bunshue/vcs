@@ -43,7 +43,6 @@
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.button10 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -247,22 +246,14 @@
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(502, 51);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(219, 316);
-            this.listBox1.TabIndex = 15;
-            // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(502, 12);
+            this.button10.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button10.Location = new System.Drawing.Point(283, 327);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(219, 23);
+            this.button10.Size = new System.Drawing.Size(200, 40);
             this.button10.TabIndex = 16;
-            this.button10.Text = "取得目前可用字型，顯示於ListBox";
+            this.button10.Text = "取得目前可用字型";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -332,8 +323,8 @@
             // 
             // button37
             // 
-            this.button37.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button37.Location = new System.Drawing.Point(283, 325);
+            this.button37.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button37.Location = new System.Drawing.Point(283, 369);
             this.button37.Name = "button37";
             this.button37.Size = new System.Drawing.Size(200, 40);
             this.button37.TabIndex = 37;
@@ -343,11 +334,11 @@
             // 
             // comboBox_font
             // 
-            this.comboBox_font.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.comboBox_font.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.comboBox_font.FormattingEnabled = true;
             this.comboBox_font.Location = new System.Drawing.Point(283, 415);
             this.comboBox_font.Name = "comboBox_font";
-            this.comboBox_font.Size = new System.Drawing.Size(200, 32);
+            this.comboBox_font.Size = new System.Drawing.Size(200, 27);
             this.comboBox_font.TabIndex = 48;
             this.comboBox_font.Text = "搜尋本機字型";
             // 
@@ -388,7 +379,7 @@
             // 
             this.listBox2.FormattingEnabled = true;
             this.listBox2.ItemHeight = 12;
-            this.listBox2.Location = new System.Drawing.Point(848, 51);
+            this.listBox2.Location = new System.Drawing.Point(620, 58);
             this.listBox2.Name = "listBox2";
             this.listBox2.Size = new System.Drawing.Size(219, 316);
             this.listBox2.TabIndex = 51;
@@ -396,7 +387,7 @@
             // 
             // richTextBox2
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(848, 383);
+            this.richTextBox2.Location = new System.Drawing.Point(845, 63);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.Size = new System.Drawing.Size(219, 304);
             this.richTextBox2.TabIndex = 52;
@@ -413,11 +404,11 @@
             this.groupBox3.Controls.Add(this.chkBold);
             this.groupBox3.Controls.Add(this.txtSize);
             this.groupBox3.Controls.Add(this.label6);
-            this.groupBox3.Location = new System.Drawing.Point(739, 51);
+            this.groupBox3.Location = new System.Drawing.Point(511, 58);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox3.Size = new System.Drawing.Size(103, 358);
+            this.groupBox3.Size = new System.Drawing.Size(103, 174);
             this.groupBox3.TabIndex = 53;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Properties";
@@ -482,9 +473,10 @@
             // 
             // button13
             // 
-            this.button13.Location = new System.Drawing.Point(739, 383);
+            this.button13.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button13.Location = new System.Drawing.Point(848, 3);
             this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(103, 65);
+            this.button13.Size = new System.Drawing.Size(200, 40);
             this.button13.TabIndex = 54;
             this.button13.Text = "指明使用特定字型檔";
             this.button13.UseVisualStyleBackColor = true;
@@ -523,7 +515,7 @@
             // 
             this.cb_chinese.Checked = true;
             this.cb_chinese.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_chinese.Location = new System.Drawing.Point(964, 11);
+            this.cb_chinese.Location = new System.Drawing.Point(736, 18);
             this.cb_chinese.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cb_chinese.Name = "cb_chinese";
             this.cb_chinese.Size = new System.Drawing.Size(63, 14);
@@ -533,7 +525,7 @@
             // button15
             // 
             this.button15.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button15.Location = new System.Drawing.Point(848, 5);
+            this.button15.Location = new System.Drawing.Point(620, 12);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(100, 40);
             this.button15.TabIndex = 15;
@@ -544,7 +536,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(964, 31);
+            this.label7.Location = new System.Drawing.Point(736, 38);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(77, 12);
             this.label7.TabIndex = 57;
@@ -661,7 +653,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1584, 741);
+            this.ClientSize = new System.Drawing.Size(1259, 741);
             this.Controls.Add(this.lb_font4);
             this.Controls.Add(this.lb_font3);
             this.Controls.Add(this.lb_font2);
@@ -683,7 +675,6 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button10);
-            this.Controls.Add(this.listBox1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -720,7 +711,6 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button11;
-        private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.GroupBox groupBox1;
