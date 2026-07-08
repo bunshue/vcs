@@ -12,10 +12,16 @@ namespace vcs_Assembly
     public class AssemblyInfo
     {
         // The assembly information values.
-        public string Title = "", Description = "", Company = "",
-            Product = "", Copyright = "", Trademark = "",
-            AssemblyVersion = "", FileVersion = "", Guid = "",
-            NeutralLanguage = "";
+        public string Title = "";
+        public string Description = "";
+        public string Company = "";
+        public string Product = "";
+        public string Copyright = "";
+        public string Trademark = "";
+        public string AssemblyVersion = "";
+        public string FileVersion = "";
+        public string Guid = "";
+        public string NeutralLanguage = "";
         public bool IsComVisible = false;
 
         // Constructors.
@@ -27,46 +33,67 @@ namespace vcs_Assembly
         public AssemblyInfo(Assembly assembly)
         {
             // Get values from the assembly.
-            AssemblyTitleAttribute titleAttr =
-                GetAssemblyAttribute<AssemblyTitleAttribute>(assembly);
-            if (titleAttr != null) Title = titleAttr.Title;
+            AssemblyTitleAttribute titleAttr = GetAssemblyAttribute<AssemblyTitleAttribute>(assembly);
+            if (titleAttr != null)
+            {
+                Title = titleAttr.Title;
+            }
 
-            AssemblyDescriptionAttribute assemblyAttr =
-                GetAssemblyAttribute<AssemblyDescriptionAttribute>(assembly);
-            if (assemblyAttr != null) Description = assemblyAttr.Description;
+            AssemblyDescriptionAttribute assemblyAttr = GetAssemblyAttribute<AssemblyDescriptionAttribute>(assembly);
+            if (assemblyAttr != null)
+            {
+                Description = assemblyAttr.Description;
+            }
 
-            AssemblyCompanyAttribute companyAttr =
-                GetAssemblyAttribute<AssemblyCompanyAttribute>(assembly);
-            if (companyAttr != null) Company = companyAttr.Company;
+            AssemblyCompanyAttribute companyAttr = GetAssemblyAttribute<AssemblyCompanyAttribute>(assembly);
+            if (companyAttr != null)
+            {
+                Company = companyAttr.Company;
+            }
 
-            AssemblyProductAttribute productAttr =
-                GetAssemblyAttribute<AssemblyProductAttribute>(assembly);
-            if (productAttr != null) Product = productAttr.Product;
+            AssemblyProductAttribute productAttr = GetAssemblyAttribute<AssemblyProductAttribute>(assembly);
+            if (productAttr != null)
+            {
+                Product = productAttr.Product;
+            }
 
-            AssemblyCopyrightAttribute copyrightAttr =
-                GetAssemblyAttribute<AssemblyCopyrightAttribute>(assembly);
-            if (copyrightAttr != null) Copyright = copyrightAttr.Copyright;
+            AssemblyCopyrightAttribute copyrightAttr = GetAssemblyAttribute<AssemblyCopyrightAttribute>(assembly);
+            if (copyrightAttr != null)
+            {
+                Copyright = copyrightAttr.Copyright;
+            }
 
-            AssemblyTrademarkAttribute trademarkAttr =
-                GetAssemblyAttribute<AssemblyTrademarkAttribute>(assembly);
-            if (trademarkAttr != null) Trademark = trademarkAttr.Trademark;
+            AssemblyTrademarkAttribute trademarkAttr = GetAssemblyAttribute<AssemblyTrademarkAttribute>(assembly);
+            if (trademarkAttr != null)
+            {
+                Trademark = trademarkAttr.Trademark;
+            }
 
             AssemblyVersion = assembly.GetName().Version.ToString();
 
-            AssemblyFileVersionAttribute fileVersionAttr =
-                GetAssemblyAttribute<AssemblyFileVersionAttribute>(assembly);
-            if (fileVersionAttr != null) FileVersion = fileVersionAttr.Version;
+            AssemblyFileVersionAttribute fileVersionAttr = GetAssemblyAttribute<AssemblyFileVersionAttribute>(assembly);
+            if (fileVersionAttr != null)
+            {
+                FileVersion = fileVersionAttr.Version;
+            }
 
             GuidAttribute guidAttr = GetAssemblyAttribute<GuidAttribute>(assembly);
-            if (guidAttr != null) Guid = guidAttr.Value;
+            if (guidAttr != null)
+            {
+                Guid = guidAttr.Value;
+            }
 
-            NeutralResourcesLanguageAttribute languageAttr =
-                GetAssemblyAttribute<NeutralResourcesLanguageAttribute>(assembly);
-            if (languageAttr != null) NeutralLanguage = languageAttr.CultureName;
+            NeutralResourcesLanguageAttribute languageAttr = GetAssemblyAttribute<NeutralResourcesLanguageAttribute>(assembly);
+            if (languageAttr != null)
+            {
+                NeutralLanguage = languageAttr.CultureName;
+            }
 
-            ComVisibleAttribute comAttr =
-                GetAssemblyAttribute<ComVisibleAttribute>(assembly);
-            if (comAttr != null) IsComVisible = comAttr.Value;
+            ComVisibleAttribute comAttr = GetAssemblyAttribute<ComVisibleAttribute>(assembly);
+            if (comAttr != null)
+            {
+                IsComVisible = comAttr.Value;
+            }
         }
 
         // Return a particular assembly attribute value.
@@ -76,8 +103,10 @@ namespace vcs_Assembly
             object[] attributes = assembly.GetCustomAttributes(typeof(T), true);
 
             // If we didn't get anything, return null.
-            if ((attributes == null) || (attributes.Length == 0)) return null;
-
+            if ((attributes == null) || (attributes.Length == 0))
+            {
+                return null;
+            }
             // Convert the first attribute value into the desired type and return it.
             return (T)attributes[0];
         }

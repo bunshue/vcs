@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Diagnostics;
 using System.Media;
+using System.Diagnostics;
 
 namespace vcs_EatBall
 {
@@ -71,15 +71,22 @@ namespace vcs_EatBall
             BallPos.Y = BallPos.Y + (MousePos.Y - BallPos.Y) / 10;
 
             // 更新 小圓點 的位置
-            int X, Y;
+            int X;
+            int Y;
             for (int i = 0; i <= Obstacles.Count - 1; i++)
             {
                 X = Obstacles[i].X + rd.Next(11) - 5;
                 Y = Obstacles[i].Y + rd.Next(11) - 5;
 
                 // 如果跑出邊界就不要更新
-                if (X < 10 || X > this.ClientSize.Width - 10) X = Obstacles[i].X;
-                if (Y < 10 || Y > this.ClientSize.Height - 10) Y = Obstacles[i].Y;
+                if (X < 10 || X > this.ClientSize.Width - 10)
+                {
+                    X = Obstacles[i].X;
+                }
+                if (Y < 10 || Y > this.ClientSize.Height - 10)
+                {
+                    Y = Obstacles[i].Y;
+                }
 
                 Obstacles[i] = new Point(X, Y);
             }
@@ -109,8 +116,12 @@ namespace vcs_EatBall
 
                 // 依序加入小圓點
                 for (int i = 100; i <= 700; i = i + 200)
+                {
                     for (int j = 100; j <= 500; j = j + 200)
+                    {
                         Obstacles.Add(new Point(i, j));
+                    }
+                }
 
                 // 主圓球放置 於 視窗客戶區中心點
                 BallPos = new Point(this.ClientSize.Width / 2,
@@ -135,6 +146,4 @@ namespace vcs_EatBall
 /*  可搬出
 
 */
-
-
 

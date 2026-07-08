@@ -753,6 +753,14 @@ namespace vcs_System1
         {
             //Application, Path, 物件
 
+            richTextBox1.Text += "本程式名稱 : " + Application.CompanyName + "\n";
+            richTextBox1.Text += "本程式語言 : " + Application.CurrentCulture + "\n";
+            richTextBox1.Text += "本程式輸入法 : " + Application.CurrentInputLanguage + "\n";
+            richTextBox1.Text += "本程式路徑 : " + Application.ExecutablePath + "\n";
+            richTextBox1.Text += "本程式產品名稱 : " + Application.ProductName + "\n";
+            richTextBox1.Text += "本程式產品版本 : " + Application.ProductVersion + "\n";
+            richTextBox1.Text += "本程式啟動位置 : " + Application.StartupPath + "\n";
+
             //------------------------------------------------------------  # 60個
 
             richTextBox1.Text += "目前應用程式路徑: \t" + Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\n";
@@ -796,11 +804,21 @@ namespace vcs_System1
             //------------------------------------------------------------  # 60個
 
             //系統路徑
+            /*
+            系統預設路徑與名稱
 
-            richTextBox1.Text += "臨時文件目錄 : " + Path.GetTempPath() + "\n";
+            目前執行檔的檔案的名稱  XXXX.exe
+            Application.ExecutablePath
 
-            richTextBox1.Text += "臨時文件目錄 : " + Path.GetTempFileName() + "\n";
+            9. 如何获取应用程序当前执行的路径？（How to get the path to my running EXE?）
+            string appPath = Application.ExecutablePath; 
 
+            目前執行檔的檔案的所在路徑
+            Application.StartupPath
+
+            string dir = Application.StartupPath + "\\";
+            File.Create(Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt");
+            */
 
             //------------------------------------------------------------  # 60個
         }
@@ -1857,4 +1875,13 @@ namespace vcs_System1
 /*  可搬出
 
 */
+
+/*
+
+var desktop1 = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+richTextBox1.Text += "你的計算機名稱 : " + Environment.MachineName.ToString() + "\n";
+
+*/
+
+
 

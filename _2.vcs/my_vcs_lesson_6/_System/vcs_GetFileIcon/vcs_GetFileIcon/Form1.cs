@@ -150,6 +150,7 @@ namespace vcs_GetFileIcon
                     //銷毀圖標
                     Win32.DestroyIcon(shfi.hIcon);
                 }
+
                 for (int i = 0; i < files.Length; i++)
                 {
                     string[] info = new string[4];
@@ -173,17 +174,15 @@ namespace vcs_GetFileIcon
                     Win32.DestroyIcon(shfi.hIcon);
                 }
                 return itemarr;
-
             }
             catch
             {
                 return null;
             }
         }
-
     }
 
-    //6060
+    //------------------------------------------------------------  # 60個
 
     public class Win32
     {
@@ -210,6 +209,20 @@ namespace vcs_GetFileIcon
     }
 }
 
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+
+
 /*
 SHGetFileInfo 的最後一個參數 Flags
 uFlags常數：
@@ -230,4 +243,7 @@ uFlags常數：
   SHGFI_PIDL                                 =   0x8,            
   SHGFI_USEFILEATTRIBUTES      =   0x10
 */
+
+
+
 

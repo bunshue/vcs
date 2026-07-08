@@ -68,11 +68,6 @@ g.Clear(Color.Transparent);
                 //Color.FromArgb() 可以設定3原色，這裡3原色的代碼是亂數產生的
 */
 
-
-
-//------------------------------------------------------------  # 60個
-
-
 //------------------------------------------------------------  # 60個
 
 string strMinute = "";
@@ -285,7 +280,6 @@ cccc 控件使用類 要搬到 my_vcs_lesson_3 單項控件使用介紹與應用
 cscs vcs語法類 要搬到 my_vcs_lesson_3 / __C# 的
 
 ssss 字串相關 打印格式
-
 ssss 系統相關
 
 pppp 打印相關
@@ -359,11 +353,6 @@ Windows 的 文字轉語音 (Text-to-Speech) 功能，或使用螢幕閱讀器 (
 - 你可以在 設定 → 輔助工具 → Narrator 裡調整語音、速度與音量。
 
 這裡給你一個完整的 Visual C# 範例程式，可以直接把文字透過電腦喇叭播放出來。它使用 System.Speech.Synthesis 命名空間，這是 .NET Framework 內建的文字轉語音 (TTS) 功能。
-
-//------------------------------------------------------------  # 60個
-
-我在Visual C#下使用Console.Beep()可以讓電腦發出聲音
-要如何將這個聲音存成wave檔呢?
 
 //------------------------------------------------------------  # 60個
 
@@ -652,63 +641,6 @@ string normalOrNot = (nowHeight >= min & nowHeight <= max ? "標準" : "要注�
 
 //------------------------------------------------------------  # 60個
 
-pictureBox 顯示圖片的方法(4)
-
-            Image image1 = Image.FromFile("c:\\MyImages\\一頁書.jpg");
-            pictureBox1.Image = image1;
-
-            Image image1 = new Bitmap(@"C:\MyImages\南宮恨.jpg", true);
-            pictureBox1.Image = image1;
-
-            pictureBox1.ImageLocation = "file:///c:/MyImages/素還真.png";
-
-            pictureBox1.Load("file:///c:/MyImages/妙築玄華.jpg");
-
-            button1.Text = "衛星雲圖";
-            pictureBox1.ImageLocation = "http://www.cwb.gov.tw/V7/observe/satellite/Data/s3p/s3p-2013-01-20-01-00.jpg";
-
-            image1 = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\_case1\pic1.jpg");
-            pictureBox1.Image = image1;
-
-            image1 = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\_case1\\pic2.jpg", true);
-            pictureBox1.Image = image1;
-
-            //法一
-            //ImageLocation	取得或設定路徑或影像 URL 中顯示 PictureBox
-            //pictureBox1.ImageLocation = @"D:\_git\vcs\_1.data\______test_files1\_case1\pic3.jpg";
-
-            //法二
-            //Load()		顯示所指定的影像 ImageLocation 屬性 PictureBox。
-            //string ImageLocation = @"D:\_git\vcs\_1.data\______test_files1\_case1\pic3.jpg";
-            //pictureBox1.Load(ImageLocation);
-
-            //法三
-            //Load(String)	設定 ImageLocation 到指定的 URL，並顯示所指出的影像。
-            pictureBox1.Load(@"D:\_git\vcs\_1.data\______test_files1\_case1\pic3.jpg");
-
-            //NG
-            pictureBox1.ImageLocation = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Taipei_101_2009_amk-EditMylius.jpg/500px-Taipei_101_2009_amk-EditMylius.jpg";
-
-            //錯誤的寫法, 可能會出現"記憶體不足"
-            //pictureBox1.Image = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\bear.bmp");
-
-            //正確的寫法
-            FileStream fs = File.OpenRead(@"D:\_git\vcs\_1.data\______test_files1\bear.jpg");
-            pictureBox1.Image = Image.FromStream(fs);
-            fs.Close();
-
-//清除
-            pictureBox1.Image = null;
-
-                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-                pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
-                pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
-                pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-
-//------------------------------------------------------------  # 60個
-
 TextBox 之 自動完成字串
 
 AutoCompleteSource
@@ -716,7 +648,6 @@ AutoCompleteSource
 AllSystemSources、AllUrl、FileSystem、
 HistoryList、RecentlyUsedList、
 CustomSource 和 None。 預設為 None。
-
 
 printPreviewDialog1     .ShowDialog();
 printPreviewDialog_image.ShowDialog();
@@ -806,21 +737,6 @@ KPI: 關鍵 績效 指標
 
 //------------------------------------------------------------  # 60個
 
-對應方法
-
-員工BindingSource.Sort = "識別碼 ASC"; // ASC，即為ascending表示升冪
-員工BindingSource.Sort = "識別碼 DESC";// DESC，即為descening表示降冪
-
-if (MessageBox.Show("是否刪除？", "小心", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-{
-}
-if (MessageBox.Show("是否要刪除？", "小心", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-{
-	員工BindingSource.RemoveCurrent();
-}
-
-//------------------------------------------------------------  # 60個
-
         int kind, ticket;  //車票種類(kind)和票數(ticket)
         string msg, msg2;  //取得RadioButton的Text屬性值
 
@@ -880,7 +796,7 @@ C# 7.0 引入 具名 Tuple 語法
 //pbox的SizeMode要用Zoom
 
             pictureBox1.Height = Convert.ToInt32(myImage.Height * Convert.ToSingle(textBox1.Text.Trim()));
-            pictureBox1.Width = Convert.ToInt32(myImage.Width * Convert.ToSingle(textBox1.Text.Trim()) * 4 / 3);
+            pictureBox1.Width  = Convert.ToInt32(myImage.Width  * Convert.ToSingle(textBox1.Text.Trim()) * 4 / 3);
 
 //------------------------------------------------------------  # 60個
 
@@ -961,7 +877,6 @@ this.DoubleBuffered = true;//避免闪烁
 
             PictureBox pic = sender as PictureBox;
             richTextBox1.Text += pic.Name + " ";
-            //MessageBox.Show(pic.Name);
         }
 
 //------------------------------------------------------------  # 60個
@@ -1161,43 +1076,6 @@ do_grayscale1_pixel()
 
 //------------------------------------------------------------  # 60個
 
-            //int i;
-            for (i = 0; i < 100; i++)
-            {
-                richTextBox1.Text += data[i].ToString() + " ";
-            }
-            richTextBox1.Text += "\n\n";
-
-
-                    richTextBox1.Text += "aaa" + data[lineIndex + x + 2].ToString() + " " +
-    data[lineIndex + x + 1].ToString() + " " +
-    data[lineIndex + x + 0].ToString() + "\n";
-
-                    richTextBox1.Text += "bbb" + data[lineIndex + x + 2].ToString() + " " +
-    data[lineIndex + x + 1].ToString() + " " +
-    data[lineIndex + x + 0].ToString() + "\n";
-
-
-            Bitmap bmp = new Bitmap(@"C:/_git/vcs/_1.data/______test_files1/pic_256X10.bmp");
-
-            pictureBox1.Image = bmp;
-
-            W = bmp.Width;
-            H = bmp.Height;
-
-            BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
-
-            w = bmpData.Width;
-            h = bmpData.Height;
-
-            //拷貝出來
-            byte[] data = new byte[bmpData.Width * bmpData.Height * 3];
-            Marshal.Copy(bmpData.Scan0, data, 0, data.Length); //複製記憶體區塊
-
-            bmp.UnlockBits(bmpData);
-
-//------------------------------------------------------------  # 60個
-
         public class EMAFilterRGB2
         {
             private Bitmap emaFrame; // [高度, 寬度, 3]
@@ -1213,9 +1091,6 @@ do_grayscale1_pixel()
 
             public Bitmap Apply(Bitmap currentFrame)
             {
-                //int height = currentFrame.GetLength(0);
-                //int width = currentFrame.GetLength(1);
-                //int channels = currentFrame.GetLength(2);
                 int height = currentFrame.Height;
                 int width = currentFrame.Width;
 
@@ -1252,7 +1127,6 @@ do_grayscale1_pixel()
                 return output;
             }
         }
-        
 
 PixelFormat.Format8bppIndexed:
 每像素使用 1 个字节（8 位）表示颜色，通常用于索引颜色表的灰度或调色板图像。
@@ -1392,6 +1266,8 @@ private void Form1_SizeChanged(object sender, EventArgs e)
 	}
 }
 
+//------------------------------------------------------------  # 60個
+
 4.添加點擊圖標事件(首先需要添加事件引用)：
 
 private void notifyIcon1_Click(object sender, EventArgs e)
@@ -1401,10 +1277,12 @@ private void notifyIcon1_Click(object sender, EventArgs e)
 	this.notifyIcon1.Visible = false;
 }
 
+//------------------------------------------------------------  # 60個
+
 5.可以給notifyIcon添加右鍵菜單：
 主窗體中拖入一個ContextMenu控件NicontextMenu，點中控件，在上下文菜單中添加菜單，notifyIcon1的ContextMenu行為中選中NicontextMenu 作為上下文菜單。
-代碼如下：
 
+代碼如下：
 this.notifyIcon1 = new NotifyIcon(this.components);
 this.NicontextMenu = new ContextMenu();
 this.menuItem_Hide = new MenuItem();
@@ -1451,18 +1329,21 @@ this.menuItem_Aubot.Click += new System.EventHandler(this.menuItem_Aubot_Click);
 this.menuItem_Exit.Index = 3;
 this.menuItem_Exit.Text = "退出 ";
 this.menuItem_Exit.Click += new System.EventHandler(this.menuItem_Exit_Click);
+
 protected override void OnClosing(CancelEventArgs e)
 {
-this.ShowInTaskbar = false;
-this.WindowState = FormWindowState.Minimized;
-e.Cancel = true;
+	this.ShowInTaskbar = false;
+	this.WindowState = FormWindowState.Minimized;
+	e.Cancel = true;
 }
+
 protected override void OnClosing(CancelEventArgs e)
 {
-//this.ShowInTaskbar = false;
-this.WindowState = FormWindowState.Minimized;
-e.Cancel = true;
+	//this.ShowInTaskbar = false;
+	this.WindowState = FormWindowState.Minimized;
+	e.Cancel = true;
 }
+
 private void CloseCtiServer()
 {
 	timer.Enabled = false;
@@ -1472,45 +1353,54 @@ private void CloseCtiServer()
 	this.Dispose();
 	Application.Exit();
 }
+
 private void HideCtiServer()
 {
 	this.Hide();
 }
+
 private void ShowCtiServer()
 {
-this.Show();
-this.WindowState = FormWindowState.Normal;
-this.Activate();
+	this.Show();
+	this.WindowState = FormWindowState.Normal;
+	this.Activate();
 }
+
 private void CtiManiForm_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 {
-this.CloseCtiServer();
+	this.CloseCtiServer();
 }
+
 private void menuItem_Show_Click(object sender, System.EventArgs e)
 {
-this.ShowCtiServer();
+	this.ShowCtiServer();
 }
+
 private void menuItem_Aubot_Click(object sender, System.EventArgs e)
 {
 }
+
 private void menuItem_Exit_Click(object sender, System.EventArgs e)
 {
-this.CloseCtiServer();
+	this.CloseCtiServer();
 }
+
 private void menuItem_Hide_Click(object sender, System.EventArgs e)
 {
-this.HideCtiServer();
+	this.HideCtiServer();
 }
+
 private void CtiManiForm_SizeChanged(object sender, System.EventArgs e)
 {
-if(this.WindowState == FormWindowState.Minimized)
-{
-this.HideCtiServer();
+	if(this.WindowState == FormWindowState.Minimized)
+	{
+		this.HideCtiServer();
+	}
 }
-}
+
 private void notifyIcon1_DoubleClick(object sender,System.EventArgs e)
 {
-this.ShowCtiServer();
+	this.ShowCtiServer();
 }
 
 //------------------------------------------------------------  # 60個
@@ -1530,9 +1420,6 @@ this.ShowCtiServer();
     專案名稱，ctlClockLib，預設也會指派給根命名空間。 根命名空間是用來限定組件中的元件名稱。 例如，如果兩個組件提供元件，名為 ctlClock，您可以使用 ctlClockLib.ctlClock. 指定您的 ctlClock 元件
 
     在方案總管中，以滑鼠右鍵按一下 [ UserControl1]，然後按一下 [重新命名]。 將檔案名稱變更為 ctlClock.cs。 當系統詢問您是否要重新命名程式碼元素 "UserControl1" 的所有參考時，請按一下 [ 是] 按鈕。
-
-
-
 
     注意
 
@@ -1579,7 +1466,6 @@ protected void timer1_Tick(object sender, System.EventArgs e)
 此程式碼會造成目前時間在 lblDisplay 中顯示。 因為 timer1 的間隔設為 1000，每一千毫秒便會發生此事件，因此每秒會更新目前時間。
 
 修改方法為可使用 virtual關鍵字覆寫。 如需詳細資訊，請參閱以下的「從使用者控制項繼承」一節。
-C#
 
     protected virtual void timer1_Tick(object sender, System.EventArgs e)
 
@@ -2016,14 +1902,14 @@ writer.Close();
 
         private void DoRecord()
         {
-            VideoFileWriter writer = new VideoFileWriter();
-
-            writer.Open(RecordingFilename, this.Width, this.Height, 30);
-
-                        Bitmap bitmap1 = frames.Dequeue();
-                        writer.WriteVideoFrame(bitmap1);
-
-            writer.Close();
+		VideoFileWriter writer = new VideoFileWriter();
+		
+		writer.Open(RecordingFilename, this.Width, this.Height, 30);
+		
+		Bitmap bitmap1 = frames.Dequeue();
+		writer.WriteVideoFrame(bitmap1);
+		
+		writer.Close();
         }
 
 宣告QUEUE
@@ -2032,7 +1918,6 @@ Queue<Bitmap> frames = new Queue<Bitmap>(); // Queue that stores frames to be wr
 
 加入資料
 frames.Enqueue((Bitmap)bitmap1.Clone());
-
 
 取出資料
 if (frames.Count > 0)
@@ -2111,25 +1996,6 @@ ScreenSaver最簡版
 只要能顯示一張圖 或用label顯示時間
 
 移動滑鼠 或 鍵盤按鍵 離開螢幕保護程式
-
-//------------------------------------------------------------  # 60個
-
-vcs_bitmap_tmp
-
-0 建立Bitmap
-  空白Bitmap
-  從圖片建立Bitmap
-
-Bitmap基本特性 Width Height
-Setpixel
-Getpixel
-
-或許需要一個 Bitmap 與 Image 特性大整理
-Bitmap內部資料的排列 及 使用
-1. 自建空白 Bitmap
-2. 直接從圖片建立Bitmap
-3. 自建空白打Bitmap 裡面加入一個小Bitmap
-4. 改變Bitmap/Image大小
 
 //------------------------------------------------------------  # 60個
 
@@ -2331,9 +2197,6 @@ ProgressBar類是密封(sealed)的，不能再被繼承。
 無法嵌入互操作類型“Microsoft.Office.Interop.Excel.ApplicationClass”。請改用適用的接口，interop.excel
 把Microsoft.Office.Interop.Excel.DLL的嵌入互操作類型改為ture就可以了
 
-如何把一個大Bitmap直接縮成一個小Bitmap
-例如原本300X300的Bitmap要如何變成一個100X100的Bitmap?
-
 非1080p的，要標注出來
 
 標準版轉出程式：
@@ -2462,7 +2325,6 @@ C:\______test_files\_exe\ffmpeg>
 D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Player\vcs_MP3Cutter
 應改成 AudioVideo 轉換程式
 
-
 目前是 mp3 切割程式
 
 改成
@@ -2474,7 +2336,6 @@ D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Player\vcs_MP3Cutter
  除切割程式外 簡單就好 做成範例就好
  做成FFMPEG全部應用
 
-
 vcs_mp3cutter
 應該為vcs_FFMPEG大集合
 
@@ -2485,7 +2346,7 @@ ContextMenuStrip 選取項目 按右鍵 編輯DropDownItems(E)
 
 //------------------------------------------------------------  # 60個
 
-//是否在圓心
+//是否在圓內
         bool IsInELP(Point Cusorpostion, Point ElpCenter, int radius)
         {
             int elpX = ElpCenter.X;
@@ -2585,21 +2446,6 @@ https://www.twblogs.net/a/5f02b56e9644181341a1b6e0
 · “private” 只可以被本類中的代碼訪問。
 缺省狀態是“private”。
 
-//------------------------------------------------------------  # 60個
-
-Beep
-
-        [DllImport("kernel32.dll")]
-        public static extern bool Beep(int freq, int duration);
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Beep(800, 3000);
-
-        }
-
-
-https://www.zhangshengrong.com/p/yOXD5ejR1B/
-        
 //------------------------------------------------------------  # 60個
 
     .NET 4.6 內建支援且預設使用 TLS 1.2
@@ -2787,7 +2633,6 @@ writer.Open(filename, width, height, this.Videofps, VideoCodec.MPEG4);
         {
             byte value = 0;
             double dec_value = 0;
-            //MessageBox.Show("data = " + hex_data);
             for (int i = 0; i < hex_data.Length; i++)
             {
                 if ((hex_data[i] >= (Char)48 && hex_data[i] <= (Char)57))
@@ -2804,7 +2649,6 @@ writer.Open(filename, width, height, this.Videofps, VideoCodec.MPEG4);
                     value = (byte)(hex_data[i] - 'a' + 10);
                 }
                 dec_value = dec_value * 16 + value;
-                //MessageBox.Show("data : " + hex_data[i] + " value : " + value);
             }
             return dec_value;
         }
@@ -2830,25 +2674,14 @@ Url = htmlNode.GetAttributeValue("href", "")
 
 //------------------------------------------------------------  # 60個
 
-十六、運行時顯示自己定義的圖標：
-//load icon and set to form
-System.Drawing.Icon ico = new System.Drawing.Icon(@c: empapp.ico);
-this.Icon = ico;
 
 //------------------------------------------------------------  # 60個
 
 
 ----------------vcs +++ ST----------------
 
-找一些標準icon  放在vcs裏
-開啟檔案 儲存檔案 新增檔案 關閉檔案........
-
-
 vcs_test_all_00_Usually +
 開新表單範例
-
-usually + 繪圖基本範例
-bitmap -> graphics -> pictureBox1
 
 vcs_MyToolbox+
 日曆功能
@@ -3120,7 +2953,7 @@ if (thread.ThreadState = ThreadState.Suspended )
 我的時鐘、倒數計時鐘、
 Drap
 
-
+//------------------------------------------------------------  # 60個
 
 vcs
 非強制回應 Modeless
@@ -3169,24 +3002,19 @@ if(f3.DialogResult == DialogREsult.OK)
 讀取網頁 回傳資料 看看是甚麼樣子 xml? html?
 http://lbsyun.baidu.com/index.php?title=webapi/guide/webservice-geocoding
                      
-
-使用icon
-this.Icon = new Icon(@"D:\_git\vcs\_1.data\______test_files1\_icon\唐.ico");
-
+//------------------------------------------------------------  # 60個
 
 try by sugar
 C#如何獲取遠程磁盤上的剩余空間
 http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/191690.html
 
-
+//------------------------------------------------------------  # 60個
 
 C# 條形碼操作【源碼下載】
 
 http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/185924.html
 
-
 網站的標識圖片怎麼修改？
-
 
 放favicon.ico在網站更目錄或者單獨頁面用link標簽指定圖標也行
 
@@ -3247,15 +3075,6 @@ sealed用來修飾類為密封類，阻止該類被繼承。同時對一個類�
 //------------------------------------------------------------  # 60個
 
 //C# 播放聲音﻿﻿
-
-//System.Media.SystemSounds.Beep.Play();
-
-1.播放系統事件聲音
-　　 System.Media.SystemSounds.Asterisk.Play();
-　　 System.Media.SystemSounds.Beep.Play();
-　　 System.Media.SystemSounds.Exclamation.Play();
-　　 System.Media.SystemSounds.Hand.Play();
-　　 System.Media.SystemSounds.Question.Play();
 
 2.使用System.Media.SoundPlayer播放.wav格式聲音
 　　 SoundPlayer player = new SoundPlayer();
@@ -3377,80 +3196,12 @@ MemoryStream 可以seek
 		
 		return utf.GetString(arr).Trim();
 		
-		/// <summary>
-		/// 實現bitmap到ico的轉換
-		/// </summary>
-		/// <param name="bitmap">原圖</param>
-		/// <returns>轉換後的指定大小的圖標</returns>
-		private Icon ConvertBitmap2Ico(Bitmap bitmap)
-		{
-			Bitmap icoBitmap = new Bitmap(bitmap, size);//創建制定大小的原位圖
-			
-			//獲得原位圖的圖標句柄
-			IntPtr hIco = icoBitmap.GetHicon();
-			//從圖標的指定WINDOWS句柄創建Icon
-			Icon icon = Icon.FromHandle(hIco);
-			
-			return icon;
-		}
-
 //------------------------------------------------------------  # 60個
 
 先使用無符號字節數組存放數據庫對應的數據集中表的image類型字段的值。例如：
 
 byte[] bytes= (byte[]) image類型字段值
 
-//------------------------------------------------------------  # 60個
-
-//在C#中調用windows API函數
-
-using System.Runtime.InteropServices;
-
-/// <summary>
-/// 打開和關閉CD托盤.
-/// </summary>
-[DllImport("winmm.dll" , EntryPoint="mciSendString", CharSet=CharSet.Auto)]
-public static extern int mciSendString (string lpstrCommand,string lpstrReturnstring ,int uReturnLength,int hwndCallback);
-
-/// <summary>
-/// 清空回收站.
-/// </summary>
-[DllImport("shell32.dll", EntryPoint="SHEmptyRecycleBin", CharSet=CharSet.Auto)]
-public static extern long SHEmptyRecycleBin(IntPtr hwnd, string pszRootPath, long dwFlags);
-
-/// <summary>
-/// 打開浏覽器
-/// </summary>
-[DllImport("shell32.dll", EntryPoint="ShellExecute", CharSet=CharSet.Auto)]
-public static extern int ShellExecute(IntPtr hwnd,string lpOperation,string lpFile,string lpParameters,string lpDirectory,int nShowCmd);
-
-/// <summary>
-/// 最大化窗口，最小化窗口，正常大小窗口；
-/// </summary>
-[DllImport("user32.dll", EntryPoint="ShowWindow", CharSet=CharSet.Auto)]
-public static extern int ShowWindow(IntPtr hwnd,int nCmdShow);
-
-//打開CD托盤：
-long lngReturn = ApiCalls.mciSendString("set CDAudio door open", strReturn, 127, 0);
-
-//關閉CD托盤：
-long lngReturn = ApiCalls.mciSendString("set CDAudio door closed", strReturn, 127, 0);
-
-//清空回收站：
-ApiCalls.SHEmptyRecycleBin(Form.ActiveForm.Handle,"",0x00000000);
-
-//打開浏覽器窗口，textBox1.Text中表示要訪問的URL地址：
-Long lngReturn= ApiCalls.ShellExecute(Form.ActiveForm.Handle,"Open",textBox1.Text,"","",1);
-
-//最大化窗口：
-ApiCalls.ShowWindow(Form.ActiveForm.Handle,3);
-
-//最小化窗口：
-ApiCalls.ShowWindow(Form.ActiveForm.Handle,2);
-
-//恢復正常大小窗口：
-ApiCalls.ShowWindow(Form.ActiveForm.Handle,1);
- 
 //------------------------------------------------------------  # 60個
 
 Web Service方面的：
@@ -3682,7 +3433,7 @@ private void USBPort_USBDeviceRemoved(objectsender, USBClass.USBDeviceEventArgs 
 	}
 }
 
-
+//------------------------------------------------------------  # 60個
 
 C# TabControl標簽的隱藏
 	當你想要隱藏的時候
@@ -4007,9 +3758,7 @@ Display_Cam1
 
         public override string show()
         {
-            return base.show() +
-                   ": 寬 = " + width +
-                   ", 高 = " + height;
+            return base.show() + ": 寬 = " + width + ", 高 = " + height;
         }
 		
         public string listing()
@@ -4019,8 +3768,7 @@ Display_Cam1
             for (int i = 0; i < count; i++)
             {   // polymorphism
                 Shape s = shapeArray[i];
-                res += s.show() + ", 面積 = " + s.area() +
-                       "\r\n-----------------------\r\n";
+                res += s.show() + ", 面積 = " + s.area() + "\r\n-----------------------\r\n";
             }
             return res;
         }
@@ -4056,8 +3804,8 @@ y=sind(x);
 
 for(i=0; i<360;i++)
 {
- x_new = x_old*2;
- y_new = y_old*180;
+	x_new = x_old*2;
+	y_new = y_old*180;
 }
 
 //------------------------------------------------------------  # 60個
@@ -4088,7 +3836,6 @@ for(i=0; i<360;i++)
         {
             richTextBox2.Text += "update_setup_file ST\n";
             richTextBox2.Text += "length of old_search_path = " + old_search_path.Count.ToString() + "\n";
-
             {
                 StreamWriter sw = File.CreateText(drap_setup_filename);
                 string content = "";
@@ -4379,11 +4126,11 @@ point v[] =
 };
 
     point v1, v2, v3;
-        normal(v1);
+        normalize(v1);
 
 
 /* normalize a vector */
-void normal(point p)
+void normalize(point p)
 {
     double d = 0.0;
     int i;
@@ -4402,11 +4149,9 @@ void normal(point p)
 }
 
 //------------------------------------------------------------  # 60個
-
+cuda
 //以下未預設值, 寫不寫都一樣
 //gluOrtho2D(-1.0, 1.0, -1.0, 1.0);   //窗口座標範圍2D, 顯示範圍 : X軸(-1.0 ~ 1.0) Y軸(-1.0 ~ 1.0), 左下為原點
-
-
 
 /* Address in MSF format */
 struct cdrom_msf0
@@ -4550,7 +4295,7 @@ void runAutoTest(int argc, char** argv, const char* filename, int kernel_param)
 }
 
 //------------------------------------------------------------  # 60個
-
+cuda
     glDeleteTextures(1, &texture);
     if (imgBuf)
     {
@@ -4643,6 +4388,7 @@ int main()
 #endif
 
 //------------------------------------------------------------  # 60個
+cuda
 
 gluLookAt
 
@@ -4867,12 +4613,6 @@ currentPlaylist.Item[integer]; 獲取或設置指定項目媒體信息，其子�
 
 //------------------------------------------------------------  # 60個
 
-            int[,] pbox = new int[9, 2];    //[Col,Row]
-            richTextBox1.Text += "COLUMN = " + pbox.GetLength(0).ToString() + "\n";    //9
-            richTextBox1.Text += "ROW = " + pbox.GetLength(1).ToString() + "\n";    //2
-
-//------------------------------------------------------------  # 60個
-
 ffmpeg的用法
 
 //從開始分割600秒視頻命令如下：
@@ -5048,9 +4788,6 @@ PNG 檔案：開頭 Byte 為 89 50 4E 47 0D 0A 1A 0A
         
 //------------------------------------------------------------  # 60個
 
-
-//------------------------------------------------------------  # 60個
-
 vcs
 https://www.itread01.com/content/1549838013.html
 
@@ -5157,18 +4894,6 @@ this.tcResult.MouseWheel += new MouseEventHandler(tcResult_MouseWheel);
 
 //------------------------------------------------------------  # 60個
 
-[C#]將指定的檔案刪除並送到資源回收桶
-
-參考/加入參考/.NET/Microsoft.VisualBasic
-
-FileSystem.DeleteFile(openFileDialog1.FileName,
-		UIOption.OnlyErrorDialogs,
-		RecycleOption.SendToRecycleBin);
-
-.Dll加入參考。
-
-//------------------------------------------------------------  # 60個
-
 windows media player
 // 播放歌曲
             axWMP.URL = @"D:\Music\02.AVRIL LAVIGNE 酷到骨子裡 MY HAPPY ENDING.mp3";
@@ -5235,7 +4960,7 @@ byte[] b = new byte[2] { 0x03,0x04 };
 string s= Convert.ToString(b[1], 16);
 if (s.Length == 1) //不滿2位要補一個零
 {
-s= "0"+s;
+	s= "0"+s;
 }
 ===> s="03";
 
@@ -5271,6 +4996,7 @@ richTextBox1.Text += receive_buffer_tmp[i].ToString("X2") + " ";
                         richTextBox1.AppendText(input);     //打印一般文字訊息
                         richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
                     }
+
 48 65 78 20 6D 6F 64 65 986F 793A 5167 5BB9 0A 
 
 //------------------------------------------------------------  # 60個
@@ -5300,7 +5026,7 @@ http://www.lingoes.net/en/translator/codepage.htm
 [C#] webBrowser如何判斷網頁是否讀取完成
 
 //------------------------------------------------------------  # 60個
-
+ddddddddd
 //多點之間的線段
       Graphics g = this.CreateGraphics();
       Pen pen = new Pen(Color.Blue, 2);      
@@ -5426,11 +5152,6 @@ C#語言下路徑指定方式有兩種:
 
 //------------------------------------------------------------  # 60個
 
-ssss
-richTextBox1.Text += "你的計算機名稱 : " + Environment.MachineName.ToString() + "\n";
-
-//------------------------------------------------------------  # 60個
-
 C#初體驗，畫圖的讀、寫、顯示 
 https://darkblack01.blogspot.com/2014/03/c.html
 
@@ -5466,20 +5187,6 @@ private void axAxAltairU1_OnSurfaceDraw(object sender, AxAxAltairUDrv.IAxAltairU
 //------------------------------------------------------------  # 60個
 
 vcs抓螢幕畫面，如何區分全螢幕和active畫面？
-
-//------------------------------------------------------------  # 60個
-
-檔案：D://Xilinx_SDK_2018.3_1207_2324_Win64.exe,	
-
-
-MD5：			0E83E8251D76B51B5D311EEA2B2FB8FC
-MD5 SUM Value : 	0e83e8251d76b51b5d311eea2b2fb8fc    
-			0E83E8251D76B51B5D311EEA2B2FB8FC
-
-vcs_MD5
-
-D:\Xilinx_SDK_2018.3_1207_2324_Win64.exe :   0E83E8251D76B51B5D311EEA2B2FB8FC
-D:\Xilinx_SDK_2018.3_1207_2324_Win64.exe :   0E83E8251D76B51B5D311EEA2B2FB8FC
 
 //------------------------------------------------------------  # 60個
 
@@ -5593,11 +5300,12 @@ vcs的QR code編碼解碼
 先下載一個開放的函示庫(DLL) "Zxing"
 http://zxingnet.codeplex.com/
 
+//------------------------------------------------------------  # 60個
+
 C#中使用SendMessage進行進程通信的實例
 https://blog.csdn.net/yl2isoft/article/details/20227421
 
 (C#)WinAPI的SendMessage傳送
-
 [DllImport("user32.dll")]
 
 public static extern long SendMessage(int hWnd, uint msg, uint wparam, string text);
@@ -5629,7 +5337,6 @@ SendMessage(按鈕的Handle, WM_LBUTTONUP, 0, null);
 #define COLOR_BITS		16
 #define COLOR_TYPE		uint16_t
 #define COLOR_TYPE_BITS		16
-
 
 		
 /**
@@ -5725,8 +5432,7 @@ void Application_Idle(object sender, EventArgs e)
      pictureBox1.Image = frame.ToBitmap(); // 把畫面轉換成bitmap型態，再餵給pictureBox元件
 }
 
-        
-
+//------------------------------------------------------------  # 60個
 
 加入四個參考 
 Emgu.CV.dll
@@ -5735,8 +5441,7 @@ Emgu.CV.UI.dll
 Emgu.Util.dll
  (該dll放於EmguCV安裝完的bin底下)
 
-
-
+//------------------------------------------------------------  # 60個
 
 3.2 常用接口说明
 caputure
@@ -5744,7 +5449,7 @@ caputure
         public Capture(int camIndex);		//对应摄像头的缩影, 从0开始
         public Capture(string fileName);	//The name of a file, or an url pointed to a stream.
         
-
+//------------------------------------------------------------  # 60個
 
 2011/5/8(SUN)
 2011/5/8(日) 20:28 著信
@@ -5844,7 +5549,6 @@ JPEG Image (.jpeg)|*.jpeg|
 Png Image (.png)|*.png|
 Tiff Image (.tiff)|*.tiff|
 Wmf Image (.wmf)|*.wmf
-
 ";
 
 vcs開啟一個純文字檔到richtextbox裡面
@@ -5898,9 +5602,6 @@ this.PictureBox1.Height);
 Graphics g = Graphics.FromImage(bmp);
 g.Clear(this.pictureBox1.BackColor); //畫布背景色
 g.DrawLine(new pen(Color.Red,2),x,y,e.X,e.Y); //可以繪圖了
-
-//------------------------------------------------------------  # 60個
-
 
 //------------------------------------------------------------  # 60個
 
@@ -6187,7 +5888,7 @@ UE新增純文字檔 為unicode格式
 
 "格式"並不是存在純文字檔案裏，檔案裏直接是內容
 
-
+//------------------------------------------------------------  # 60個
 
 vcs如何做兩色或多色相加
 
@@ -6314,14 +6015,14 @@ DoubleClick = Click + MouseClick + MouseDoubleClick
 XXXU盤之SN
 只存大檔與Size
 
-
 Drap要加+
 搜尋特大檔 > 1080p的
 
 搜尋小檔 < 720p的
 搜尋特小檔 < 720p的
 
-
+//------------------------------------------------------------  # 60個
+eeee
 file_size	//Snake Case
  FileSize	//Pascal Case
  fileSize	//Camel Case
@@ -6329,9 +6030,7 @@ iFileSize	//Hungarian Notation
 
 PCSH
 
-
-region可否轉成陣列?
-
+//------------------------------------------------------------  # 60個
 
 離線安裝NuGet套件nupkg和自製安裝檔
 
@@ -6350,7 +6049,6 @@ https://www.nuget.org/
 ABCDEFG用各種不同編碼存檔 (要不要中文?)
 
 SetStyle(ControlStyles.ResizeRedraw, true);
-
 
 this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
 this.UpdateStyles();
@@ -6446,12 +6144,6 @@ https://www.twblogs.net/a/5e52ff9cbd9eee2117c354ce
 C#對HTML文檔的解析
 http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/189767.html
 
-
-LockBits(Rectangle, ImageLockMode, PixelFormat)	將 Bitmap 鎖定在系統記憶體內。
-UnlockBits(BitmapData)				從系統記憶體解除鎖定這個 Bitmap。
-BitmapData，指定鎖定作業的相關資訊。
-
-
 VisibleCount 獲取樹視圖控件黃總完全可見的樹節點數目 
 CollapseAll 折疊所有的樹節點 
 ExpandAll 展開所有的樹節點 
@@ -6472,11 +6164,12 @@ fullname simplename size path ext
 
 合併純文字檔  依檔名排序
 
+//------------------------------------------------------------  # 60個
 
 搜圖網
 https://www.aisoutu.com/
 
- 
+//------------------------------------------------------------  # 60個 
 
 方案總管/建置/(勾選)容許 Unsafe 程式碼 
 
@@ -6490,7 +6183,6 @@ https://www.open-open.com/lib/view/open1385008631375.html
 
 bookbook
 http://www.tsnien.idv.tw/Internet_WebBook/
-
 
 Git操作指南，git權威指南
 請訪問以下網址，很詳細，今天偷個懶記錄一下，之後有時間再來補全吧！
@@ -6570,11 +6262,11 @@ http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/191286.html
 2602 最短路徑問題Dihstra算法，2602dihstra
 http://www.aspphp.online/bianchen/cyuyan/cjj/cjjrm/201704/231818.html
 
-
+//------------------------------------------------------------  # 60個
 
 C#網絡編程：http://wenku.baidu.com/view/819b150931126edb6f1a10cb.html
 
-
+//------------------------------------------------------------  # 60個
 
 其他網站
 https://sample.diary.tw/lucky-draw/
@@ -6636,7 +6328,7 @@ http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/192046.html
 C# 實現調用Matlab函數（Visual Studio：2008, Matlab：R2009a）
 http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/189689.html
 
-
+//------------------------------------------------------------  # 60個
 
 C#操縱Excel，此工作薄包含嵌入對象，Office 2007的設定方法
 http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/191344.html
@@ -6699,10 +6391,8 @@ https://pydoing.blogspot.com/2012/10/csharp-tutorial.html
 
 https://openhome.cc/Gossip/index.html
 
-
 Author Image 開放原始碼技術文件網
 https://opensourcedoc.com/
-
 
 Windows使用的換行符號為0x0D與0x0A，也就是使用了CR(carriage return)與LF(new line feed)為換行符號。
 
@@ -6807,10 +6497,13 @@ int height = 240;
 
 // create instance of video writer
 VideoFileWriter writer = new VideoFileWriter( );
+
 // create new video file
 writer.Open( "test.avi", width, height, 25, VideoCodec.MPEG4 );
+
 // create a bitmap to save into the video file
 Bitmap image = new Bitmap( width, height, PixelFormat.Format24bppRgb );
+
 // write 1000 video frames
 for ( int i = 0; i < 1000; i++ )
 {
@@ -6822,12 +6515,11 @@ writer.Close( );
 core highgui imgproc video
 
 //------------------------------------------------------------  # 60個
-
+eeee
 Convex Hull 凸面 殼體
 Left/Right Edges 左右邊緣
 Top/Bottom Edges 上下邊緣
 Quadrilateral 四邊形的
-
 
 //------------------------------------------------------------  # 60個
 
@@ -7097,8 +6789,6 @@ Ctrl + Shift + P
 
 //------------------------------------------------------------  # 60個
 
-tmp
-
 撈出一個資料夾內所有檔案的範例
 
 mp3類 按照檔名排序  資料夾先照明稱排序 資料夾內再照檔名排序
@@ -7235,7 +6925,6 @@ Remotion.Data.Linq.dll
             }
             catch(Exception ey)
             {
-                MessageBox.Show("請輸入正確幀數，本程序將關閉！！！");
                 Application.Exit();
             } 
 
@@ -7277,22 +6966,12 @@ https://www.ctbcinvestments.com/act/202104_TWETF/index.html
 btn_Tag.Tag = "本技巧是Tag属性应用";//为按钮的数据对象赋值
 
 string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-this.BackgroundImage = Image.FromFile(filename);	//設置表單的背景圖片, Image.FromFile出來的是Image格式
+this.BackgroundImage = Image.FromFile(filename);	//設置表單的背景圖片, Image.FromFile 出來的是Image格式
 this.BackgroundImage = Bitmap.FromFile(filename);	//設置表單的背景圖片, Bitmap.FromFile出來的是Image格式
 
 https://kiang.github.io/covid19/
 
 https://github.com/kiang/covid19
-
-//------------------------------------------------------------  # 60個
-
-滑鼠右鍵選單
-
-cccc
-                if (textBox1.Text != "") // 如果不是第一行 就加入 新行字串
-                {
-                    textBox1.Text = textBox1.Text + Environment.NewLine;  // "\r\n"
-                }
 
 //------------------------------------------------------------  # 60個
 
@@ -7352,8 +7031,8 @@ g.DrawImage(image, 10, 50, image.Width, image.Height);
 int w = 100;	//預縮放的圖的寬度
 Image imgThumbnail = image1.GetThumbnailImage(w, (int)(w * image1.Height / image1.Width), null, (IntPtr)0);
 
-var desktop1 = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-			
+//------------------------------------------------------------  # 60個
+
 統一改名
 
         private bool flag_select_area = false;  //開始選取的旗標
@@ -7363,13 +7042,11 @@ var desktop1 = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         private Bitmap bitmap2 = null;  //擷取部分位圖Bitmap
         private Rectangle select_rectangle;//用來保存截圖的矩形
 
-
 原圖 位圖Bitmap		=> Bitmap bitmap1	使用pictureBox1
 擷取部分 位圖Bitmap	=> Bitmap bitmap2	使用pictureBox2
 
 save_image_to_drive();	=>	save_crop_picture_to_drive();
 存檔bitmap1			存檔bitmap2
-
 
         private Bitmap bitmap1 = null;
         private Bitmap bitmap2 = null;
@@ -7433,33 +7110,6 @@ hypotrochoid 長短輻圓內旋輪線；次內擺線
 
 //------------------------------------------------------------  # 60個
 
-需要為每個構建配置設置不同的ApplicationIcon
-
-//用程式內容改變表單icon(this.Icon), 但還沒辦法改變程式icon(PropertyGroup/ApplicationIcon)
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\_icon\尺.ico";
-            //取得 Icon 物件
-            Icon myIcon = Icon.FromHandle(new Bitmap(Image.FromFile(filename)).GetHicon());
-            //設定表單 Icon
-            this.Icon = myIcon;
-或
-			string filename = @"D:\_git\vcs\_1.data\______test_files1\_icon\尺.ico";
-            try
-            {
-                //取得 Icon 物件                    
-                using (Icon oIcon = new Icon(filename))
-                {
-                    //建立副本
-                    Icon myIcon = (Icon)oIcon.Clone();
-                    this.Icon = myIcon;
-                }
-            }
-            catch (Exception ex)
-            {
-                //AppFunc.HandleException2(ex, "遺失圖檔!");
-            }
-
-
 Application.Idle功能函數	 ==>  當應用程式處於空閒狀態時執行相應代碼
 
 
@@ -7479,17 +7129,15 @@ C:\WINDOWS\system32\drivers\etc
 http://127.0.0.1/
 http://localhost
 
-
+//------------------------------------------------------------  # 60個
 
 Visual Studio的建置組態中, 把平台改成X64
 
-	
-			
+//------------------------------------------------------------  # 60個
 
 scribble
 
-
-
+//------------------------------------------------------------  # 60個
 
 每筆畫都存暫存檔 看起來沒甚麼需要
 應該是關閉程式時 問一下是否 要存檔 要保留 要放棄
@@ -7584,6 +7232,7 @@ Transform需要做到
 若是無法做到理想的Transform 則需要自己做Transform
 
 //一般開啟圖檔 vs 不鎖定開啟圖檔
+
         string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
         // Load the image normally.
         private void btnLoadNormally_Click(object sender, EventArgs e)
@@ -7623,9 +7272,6 @@ Transform需要做到
 編碼 = 明碼.Encrypt(密碼).ToHex();
 
 //------------------------------------------------
-
-
-
 
 不鎖定檔案地讀取一檔
 
@@ -7743,6 +7389,7 @@ pictureBox1.Image = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\pictu
 或
 pictureBox1.Image = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg");
 
+//------------------------------------------------------------  # 60個
 
 收集滑鼠點數
 
@@ -7833,56 +7480,6 @@ for (int i = 0; i < strings.Length; i++)
 }
 
 //------------------------------------------------------------  # 60個
-
-pictureCard
-
-可以給定牌號找出牌面
-
-
-Normal  = 0,
-StretchImage = 1,
-AutoSize = 2,
-CenterImage = 3,
-Zoom = 4,
-
-Normal StretchImage AutoSize CenterImage Zoom
-
-
-e
-    {
-        // 摘要:
-        //     影像放置在 PictureBox 的左上角。如果影像大於包含它的 PictureBox，就會裁剪影像。
-        Normal = 0,
-
-        //
-        // 摘要:
-        //     PictureBox 內的影像會延伸或縮小，以調整成最適合 PictureBox
-        //     的大小。
-        StretchImage = 1,
-
-        //
-        // 摘要:
-        //     將 PictureBox 的大小調整成與其所包含影像的大小相等。
-        AutoSize = 2,
-        //
-        // 摘要:
-        //     如果 PictureBox 大於影像，影像即置中顯示。如果影像大於 PictureBox，圖片即放在
-        //     PictureBox 的中央，而外緣被裁剪。
-
-        CenterImage = 3,
-        //
-        // 摘要:
-        //     不論是增大或縮小，影像大小都維持大小比例。
-        Zoom = 4,
-    }
-}
-
-Normal = 0,
-StretchImage = 1,
-AutoSize = 2,
-CenterImage = 3,
-Zoom = 4,
-
 
 方案總管/屬性/目標Framework改為.NET Framework4
 
@@ -8027,7 +7624,7 @@ Form的設定
  
 //------------------------------------------------------------  # 60個
 
-        /*
+        /*  多個pbx共用click事件，區分是哪個pbx
         // Display the name of the clicked PictureBox.
         private void PictureBox_Click(object sender, EventArgs e)
         {
@@ -8130,27 +7727,6 @@ void ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
         {
             timer1.Enabled = !timer1.Enabled;
         }
-
-//------------------------------------------------------------  # 60個
-
-參考/加入參考/.NET/Microsoft.VisualBasic
-
-不過要引入VB的組件，C#一樣能用
-加入參考Microsoft.VisualBasic.dll
-引用命名空間
-
-using Microsoft.VisualBasic.FileIO;
-
-刪除範例，刪除D槽的test.txt
-
-FileSystem.DeleteFile("D:\\test.txt", UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
-
-                        補充說明一下：UIOption.OnlyErrorDialogs會自動選取要丟入回收桶，只在錯誤時顯示錯誤方塊，
-                                                   如果是 FileIO.RecycleOption.SendToRecycleBin則是會跳窗問要不要丟入回收桶
-
-	//使用資源回收筒刪除檔案
-	FileSystem.DeleteFile("C:\\______test_files\\237.html", UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
-	richTextBox1.Text += "已將檔案移至資源回收筒\n";
 
 //------------------------------------------------------------  # 60個
 
@@ -8509,13 +8085,9 @@ XOR
 
 e8edf79325ae8948a635efd0e076a8bc
 
-
-
 ----------------準備加到vcs範例裏 ST vcs vcs----------------
 
-
-
-		 又被問到如何判斷數值( Check Numeric ) 這個問題了...
+又被問到如何判斷數值( Check Numeric ) 這個問題了...
 1.「double.TryParse」
 
 Code：
@@ -8610,7 +8182,6 @@ openFileDialog1.Filter = "*.jpg,*.jpeg,*.bmp|*.jpg;*.jpeg;*.bmp";		//设置文�
 openFileDialog1.Filter = "图像文件(JPeg, Gif, Bmp, etc.)|*.jpg;*.jpeg;*.gif;*.bmp;*.tif; *.tiff; *.png| JPeg 图像文件(*.jpg;*.jpeg)|*.jpg;*.jpeg |GIF 图像文件(*.gif)|*.gif |BMP图像文件(*.bmp)|*.bmp|Tiff图像文件(*.tif;*.tiff)|*.tif;*.tiff|Png图像文件(*.png)| *.png |所有文件(*.*)|*.*";
 
 openFileDialog1.Filter = "*.jpg,*.jpeg,*.bmp,*.gif,*.ico,*.png,*.tif,*.wmf|*.jpg;*.jpeg;*.bmp;*.gif;*.ico;*.png;*.tif;*.wmf";
-
 
 openFileDialog1.Filter = "Bitmaps|*.bmp|PNG files|*.png|JPEG files|*.jpg|Picture files|*.bmp;*.jpg;*.gif;*." +
                 "png;*.tif|CS files|*.cs|Project files|*.csproj|Program files|*.cs;*.csproj;*.sln" +
@@ -8799,15 +8370,7 @@ EMGU check
 
 2.更改 專案名稱右鍵->屬性->建置->平台 改為x64
 
-
-
 opencv-4.5.2	有python但無vcs
-
-
-
-
-
-
 
 ----------------版本相關 SP EMGU, OpenCV----------------
 
@@ -9625,9 +9188,7 @@ csc/?	查看編譯選項
                         //保存到磁盤文件
                         bmp.Save(@pictureName, pictureBox1.Image.RawFormat);
                         bmp.Dispose();
-                        MessageBox.Show("照片另存成功！","系統提示");
                     }
-                    ////********************照片另存*********************************
                 }
 
 //------------------------------------------------------------  # 60個
@@ -9856,7 +9417,7 @@ Application.Run(new Form1());
 　{
 　　if(==1)
 　　　{
-　　　　MessageBox.Show("沒有設置項功能","C# Screen Saver");
+　　　　//沒有設置項功能
 　　　　Application.Exit();
 　　　}
 　　　else if(args[0]=="/s")
@@ -9900,8 +9461,7 @@ Form.AcceptButton和Form.CancelButton属性的用法，
 在某些不依赖鼠标操作的场景下，这两个属性能提供便捷的键盘交互体验。
 通过示例代码展示了如何设置这两个属性，以实现键盘触发按钮的点击事件。
 
-
-//------------------------------------------------------------  # 60個
+//------------------------------  # 30個
 
 private void Form1_Load(object sender, EventArgs e)
 {
@@ -9915,45 +9475,22 @@ private void Form1_Load(object sender, EventArgs e)
     this.ShowInTaskbar = false;
 }
 
-//------------------------------------------------------------  # 60個
+//------------------------------  # 30個
+
 3. 如何为一个窗体设置一个默认按钮？（How to set the default button for a form?）
 form1.AcceptButton = button1;
 
 4. 如何为一个窗体设置一个取消按钮？（How to set the Cancel button for a form?）
 form1.CancelButton = button1;
 
-//------------------------------------------------------------  # 60個
+//------------------------------  # 30個
 
             this.AcceptButton = button5;            //在表單按enter就執行button1按鈕的動作
 
 //------------------------------------------------------------  # 60個
-
-cccc
-this.acceptButton = btn.....
-
 //------------------------------------------------------------  # 60個
 
-            richTextBox1.Text += "本程式名稱 : " + Application.CompanyName + "\n";
-            richTextBox1.Text += "本程式語言 : " + Application.CurrentCulture + "\n";
-            richTextBox1.Text += "本程式輸入法 : " + Application.CurrentInputLanguage + "\n";
-            richTextBox1.Text += "本程式路徑 : " + Application.ExecutablePath + "\n";
-            richTextBox1.Text += "本程式產品名稱 : " + Application.ProductName + "\n";
-            richTextBox1.Text += "本程式產品版本 : " + Application.ProductVersion + "\n";
-            richTextBox1.Text += "本程式啟動位置 : " + Application.StartupPath + "\n";
 
-系統預設路徑與名稱
-
-目前執行檔的檔案的名稱  XXXX.exe
-Application.ExecutablePath
-
-9. 如何获取应用程序当前执行的路径？（How to get the path to my running EXE?）
-string appPath = Application.ExecutablePath; 
-
-目前執行檔的檔案的所在路徑
-Application.StartupPath
-
-string dir = Application.StartupPath + "\\";
-File.Create(Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt");
 
 //------------------------------------------------------------  # 60個
 
@@ -9975,5 +9512,279 @@ rtb
             Console.ReadKey(false); 
 
 //------------------------------------------------------------  # 60個
+
+// ASC，即為ascending表示升冪
+// DESC，即為descening表示降冪
+
+if (MessageBox.Show("是否刪除？", "小心", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+if (MessageBox.Show("是否刪除？", "小心", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+
+
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------  # 60個
+
+/// <summary>
+/// 實現bitmap到ico的轉換
+/// </summary>
+/// <param name="bitmap">原圖</param>
+/// <returns>轉換後的指定大小的圖標</returns>
+private Icon ConvertBitmap2Ico(Bitmap bitmap)
+{
+	Bitmap icoBitmap = new Bitmap(bitmap, size);//創建制定大小的原位圖
+	
+	//獲得原位圖的圖標句柄
+	IntPtr hIco = icoBitmap.GetHicon();
+	//從圖標的指定WINDOWS句柄創建Icon
+	Icon icon = Icon.FromHandle(hIco);
+	
+	return icon;
+}
+
+//------------------------------  # 30個
+
+使用程式圖標 icon  運行時顯示自己定義的圖標
+this.Icon = new Icon(@"D:\_git\vcs\_1.data\______test_files1\_icon\唐.ico");
+
+Icon ico = new Icon(@"D:/_git/vcs/_1.data/______test_files1/_icon/快.ico");
+this.Icon = ico;
+
+//------------------------------  # 30個
+
+需要為每個構建配置設置不同的ApplicationIcon
+
+//用程式內容改變表單icon(this.Icon), 但還沒辦法改變程式icon(PropertyGroup/ApplicationIcon)
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\_icon\尺.ico";
+            //取得 Icon 物件
+            Icon myIcon = Icon.FromHandle(new Bitmap(Image.FromFile(filename)).GetHicon());
+            //設定表單 Icon
+            this.Icon = myIcon;
+或
+			string filename = @"D:\_git\vcs\_1.data\______test_files1\_icon\尺.ico";
+            try
+            {
+                //取得 Icon 物件                    
+                using (Icon oIcon = new Icon(filename))
+                {
+                    //建立副本
+                    Icon myIcon = (Icon)oIcon.Clone();
+                    this.Icon = myIcon;
+                }
+            }
+            catch (Exception ex)
+            {
+                //AppFunc.HandleException2(ex, "遺失圖檔!");
+            }
+
+
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------  # 60個
+
+[C#]將指定的檔案刪除並送到資源回收桶
+
+參考/加入參考/.NET/Microsoft.VisualBasic
+
+FileSystem.DeleteFile(openFileDialog1.FileName,
+		UIOption.OnlyErrorDialogs,
+		RecycleOption.SendToRecycleBin);
+
+.Dll加入參考。
+
+//------------------------------  # 30個
+
+參考/加入參考/.NET/Microsoft.VisualBasic
+
+不過要引入VB的組件，C#一樣能用
+加入參考Microsoft.VisualBasic.dll
+引用命名空間
+
+using Microsoft.VisualBasic.FileIO;
+
+刪除範例，刪除D槽的test.txt
+
+FileSystem.DeleteFile("D:\\test.txt", UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+
+                        補充說明一下：UIOption.OnlyErrorDialogs會自動選取要丟入回收桶，只在錯誤時顯示錯誤方塊，
+                                                   如果是 FileIO.RecycleOption.SendToRecycleBin則是會跳窗問要不要丟入回收桶
+
+	//使用資源回收筒刪除檔案
+	FileSystem.DeleteFile("C:\\______test_files\\237.html", UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+	richTextBox1.Text += "已將檔案移至資源回收筒\n";
+
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------  # 60個
+
+Beep
+
+        [DllImport("kernel32.dll")]
+        public static extern bool Beep(int freq, int duration);
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Beep(800, 3000);
+
+        }
+
+https://www.zhangshengrong.com/p/yOXD5ejR1B/
+        
+//------------------------------------------------------------  # 60個
+
+
+
+            /*
+            //result_str += "flag_function = " + flag_function.ToString() + "\n";
+            Properties.Settings.Default.search_path = "";
+            Properties.Settings.Default.Save();
+            */
+//------------------------------------------------------------  # 60個
+/*
+        private void bt_clear_data_Click(object sender, EventArgs e)
+        {
+            fileinfos.Clear();
+            listView1.Clear();
+            richTextBox1.Clear();
+            richTextBox2.Clear();
+            flag_search_vcs_pattern = 0;
+        }
+
+        private void bt_copy_data_Click(object sender, EventArgs e)
+        {
+            if (this.listView1.Items.Count <= 0)
+            {
+                result_str += "無內容可複製\n";
+                return;
+            }
+
+            //C# – 複製資料到剪貼簿
+            Clipboard.Clear();
+
+            for (int i = 0; i < listView1.Items.Count; i++)
+            {
+                //result_str += listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\n";
+
+                //C# – 複製資料到剪貼簿 累計
+                Clipboard.SetDataObject(Clipboard.GetText() + listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\n");      //建議用此
+            }
+        }
+*/
+
+//------------------------------------------------------------  # 60個
+
+pictureCard
+可以給定牌號找出牌面
+
+//------------------------------------------------------------  # 60個
+
+pictureBox 顯示圖片的方法(4)
+
+            Image image1 = Image.FromFile("c:\\MyImages\\一頁書.jpg");
+            pictureBox1.Image = image1;
+
+            Image image1 = new Bitmap(@"C:\MyImages\南宮恨.jpg", true);
+            pictureBox1.Image = image1;
+
+            pictureBox1.ImageLocation = "file:///c:/MyImages/素還真.png";
+
+            pictureBox1.Load("file:///c:/MyImages/妙築玄華.jpg");
+
+            button1.Text = "衛星雲圖";
+            pictureBox1.ImageLocation = "http://www.cwb.gov.tw/V7/observe/satellite/Data/s3p/s3p-2013-01-20-01-00.jpg";
+
+            image1 = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\_case1\pic1.jpg");
+            pictureBox1.Image = image1;
+
+            image1 = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\_case1\\pic2.jpg", true);
+            pictureBox1.Image = image1;
+
+            //法一
+            //ImageLocation	取得或設定路徑或影像 URL 中顯示 PictureBox
+            //pictureBox1.ImageLocation = @"D:\_git\vcs\_1.data\______test_files1\_case1\pic3.jpg";
+
+            //法二
+            //Load()		顯示所指定的影像 ImageLocation 屬性 PictureBox。
+            //string ImageLocation = @"D:\_git\vcs\_1.data\______test_files1\_case1\pic3.jpg";
+            //pictureBox1.Load(ImageLocation);
+
+            //法三
+            //Load(String)	設定 ImageLocation 到指定的 URL，並顯示所指出的影像。
+            pictureBox1.Load(@"D:\_git\vcs\_1.data\______test_files1\_case1\pic3.jpg");
+
+            //NG
+            pictureBox1.ImageLocation = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Taipei_101_2009_amk-EditMylius.jpg/500px-Taipei_101_2009_amk-EditMylius.jpg";
+
+            //錯誤的寫法, 可能會出現"記憶體不足"
+            //pictureBox1.Image = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\bear.bmp");
+
+            //正確的寫法
+            FileStream fs = File.OpenRead(@"D:\_git\vcs\_1.data\______test_files1\bear.jpg");
+            pictureBox1.Image = Image.FromStream(fs);
+            fs.Close();
+
+//清除
+            pictureBox1.Image = null;
+
+                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+                pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
+                pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
+                pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
+                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+
+//------------------------------  # 30個
+
+Normal  = 0,
+StretchImage = 1,
+AutoSize = 2,
+CenterImage = 3,
+Zoom = 4,
+
+Normal StretchImage AutoSize CenterImage Zoom
+
+
+e
+    {
+        // 摘要:
+        //     影像放置在 PictureBox 的左上角。如果影像大於包含它的 PictureBox，就會裁剪影像。
+        Normal = 0,
+
+        //
+        // 摘要:
+        //     PictureBox 內的影像會延伸或縮小，以調整成最適合 PictureBox
+        //     的大小。
+        StretchImage = 1,
+
+        //
+        // 摘要:
+        //     將 PictureBox 的大小調整成與其所包含影像的大小相等。
+        AutoSize = 2,
+        //
+        // 摘要:
+        //     如果 PictureBox 大於影像，影像即置中顯示。如果影像大於 PictureBox，圖片即放在
+        //     PictureBox 的中央，而外緣被裁剪。
+
+        CenterImage = 3,
+        //
+        // 摘要:
+        //     不論是增大或縮小，影像大小都維持大小比例。
+        Zoom = 4,
+    }
+}
+
+Normal = 0,
+StretchImage = 1,
+AutoSize = 2,
+CenterImage = 3,
+Zoom = 4,
+
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------  # 60個
+
+array
+整數二維陣列
+            int[,] pbox = new int[9, 2];    //[Col,Row]
+            richTextBox1.Text += "COLUMN = " + pbox.GetLength(0).ToString() + "\n";    //9
+            richTextBox1.Text += "ROW = " + pbox.GetLength(1).ToString() + "\n";    //2
+
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------  # 60個
+
 
 

@@ -215,7 +215,6 @@ namespace howto_password_tracker
                 // Copy to clipboard.
                 Clipboard.Clear();
                 Clipboard.SetText(dgvPasswords.Rows[e.RowIndex].Cells["colPassword"].Value.ToString());
-                System.Media.SystemSounds.Beep.Play();
             }
             if (dgvPasswords.Columns[e.ColumnIndex].Name == "colNew")
             {
@@ -255,7 +254,6 @@ namespace howto_password_tracker
                     {
                         Clipboard.Clear();
                         Clipboard.SetText(text);
-                        System.Media.SystemSounds.Beep.Play();
                     }
                 }
                 else if (e.KeyCode == Keys.V)
@@ -263,7 +261,6 @@ namespace howto_password_tracker
                     // Paste into the current cell.
                     if (!Clipboard.ContainsText())
                     {
-                        System.Media.SystemSounds.Beep.Play();
                     }
                     else
                     {

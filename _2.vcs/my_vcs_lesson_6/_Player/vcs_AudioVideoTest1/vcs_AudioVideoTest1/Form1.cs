@@ -41,7 +41,7 @@ namespace vcs_AudioVideoTest1
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
+
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -1404,3 +1404,19 @@ namespace vcs_AudioVideoTest1
         }
     }
 }
+
+
+
+
+
+/*
+
+1.播放系統事件聲音
+　　 System.Media.SystemSounds.Asterisk.Play();
+　　 System.Media.SystemSounds.Beep.Play();
+　　 System.Media.SystemSounds.Exclamation.Play();
+　　 System.Media.SystemSounds.Hand.Play();
+　　 System.Media.SystemSounds.Question.Play();
+
+*/
+

@@ -2239,3 +2239,13 @@ for (int i = 0, count = pngfiles.Length; i < count; i++)
 
 */
 
+
+
+
+
+//            richTextBox1.Text += "臨時文件目錄 : " + Path.GetTempPath() + "\n";
+//richTextBox1.Text += "臨時文件目錄 : " + Path.GetTempFileName() + "\n";
+
+
+
+

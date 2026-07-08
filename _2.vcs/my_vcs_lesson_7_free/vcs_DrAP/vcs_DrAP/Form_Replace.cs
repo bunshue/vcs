@@ -172,12 +172,10 @@ namespace vcs_DrAP
             int len = filenames.Count;
             richTextBox1.Text += "找到檔案個數 : " + len.ToString() + "\n";
 
-            //private Icon icon1 = new Icon(@"D:/_git/vcs/_1.data/______test_files1/_icon/快.ico");
             string pattern1 = string_old;
             string pattern2 = string_new;
 
-            int i;
-            for (i = 0; i < len; i++)
+            for (int i = 0; i < len; i++)
             {
                 richTextBox1.Text += filenames[i] + "\n";
 
@@ -285,4 +283,3 @@ namespace vcs_DrAP
         }
     }
 }
-

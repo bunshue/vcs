@@ -784,6 +784,24 @@ namespace vcs_Draw_Bitmap
 
         private void button14_Click(object sender, EventArgs e)
         {
+            Bitmap bmp = new Bitmap(@"D:/_git/vcs/_1.data/______test_files1/pic_256X10.bmp");
+
+            pictureBox1.Image = bmp;
+
+            int W = bmp.Width;
+            int H = bmp.Height;
+
+            BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+
+            int w = bmpData.Width;
+            int h = bmpData.Height;
+
+            //拷貝出來
+            byte[] data = new byte[bmpData.Width * bmpData.Height * 3];
+            //Marshal.Copy(bmpData.Scan0, data, 0, data.Length); //複製記憶體區塊
+
+            bmp.UnlockBits(bmpData);
+
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -798,9 +816,27 @@ namespace vcs_Draw_Bitmap
         {
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button18_Click(object sender, EventArgs e)
         {
+            // 測試 Bitmap 的 GetBounds
+            bitmap1 = (Bitmap)Bitmap.FromFile(filename);
+
+            GraphicsUnit units = GraphicsUnit.Pixel;
+
+            // Get the bounding dimensions 
+            RectangleF boundsF = bitmap1.GetBounds(ref units);
+
+            // Convert floating points to whole integers if necessary
+            Rectangle bounds = Rectangle.Round(boundsF);
+
+            richTextBox1.Text += "A : " + bounds.ToString() + "\n";
+            richTextBox1.Text += "W : " + bounds.Width.ToString() + "\n";
+            richTextBox1.Text += "H : " + bounds.Height.ToString() + "\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button19_Click(object sender, EventArgs e)
         {
@@ -1106,5 +1142,42 @@ Bitmap bitmap1 = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg
 
 g.DrawEllipse(new Pen(Color.Red, 1), 10, 10, 100, 100);		//作畫於其上
 
+//------------------------------------------------------------  # 60個
+
+0 建立Bitmap
+  空白Bitmap
+  從圖片建立Bitmap
+
+Bitmap基本特性 Width Height
+Setpixel
+Getpixel
+
+或許需要一個 Bitmap 與 Image 特性大整理
+Bitmap內部資料的排列 及 使用
+1. 自建空白 Bitmap
+2. 直接從圖片建立Bitmap
+3. 自建空白打Bitmap 裡面加入一個小Bitmap
+4. 改變Bitmap/Image大小
+
+//------------------------------------------------------------  # 60個
+
+如何把一個大Bitmap直接縮成一個小Bitmap
+例如原本300X300的Bitmap要如何變成一個100X100的Bitmap?
+
+//------------------------------------------------------------  # 60個
+
+LockBits(Rectangle, ImageLockMode, PixelFormat)	將 Bitmap 鎖定在系統記憶體內。
+UnlockBits(BitmapData)				從系統記憶體解除鎖定這個 Bitmap。
+BitmapData，指定鎖定作業的相關資訊。
+
+//------------------------------------------------------------  # 60個
+
+
+
+
 */
+
+
+
+
 

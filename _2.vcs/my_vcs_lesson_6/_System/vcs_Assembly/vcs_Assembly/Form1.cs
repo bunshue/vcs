@@ -77,17 +77,42 @@ namespace vcs_Assembly
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //讀取exe版本號
+            //讀取exe版本號 決定要不要更新(複製檔案)
 
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\_material\_dll\AForge.Video.dll";
+            //原檔
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\_material\_dll\AForge.Video.dll";
+            //新檔
+            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\_material\_dll\AForge.Video.dll";
 
-            Assembly currentAssembly = Assembly.LoadFile(filename);
-            //Assembly updatedAssembly = Assembly.LoadFile(updatedAssemblyPath);
+            Assembly asm1 = Assembly.LoadFile(filename1);
+            Assembly asm2 = Assembly.LoadFile(filename2);
 
-            AssemblyName currentAssemblyName = currentAssembly.GetName();
-            //AssemblyName updatedAssemblyName = updatedAssembly.GetName();
+            AssemblyName asm_Name1 = asm1.GetName();
+            AssemblyName asm_Name2 = asm2.GetName();
 
-            richTextBox1.Text += currentAssembly.GetName() + "\n";
+            richTextBox1.Text += asm1.GetName() + "\n";
+
+        // 比較版本號
+            if (asm_Name2.Version.CompareTo(asm_Name1.Version) <= 0)
+            {
+                // 不需要更新
+                return;
+            }
+
+            //AssemblyName asm_Name1 = AssemblyName.GetAssemblyName(filename1);
+            //AssemblyName asm_Name2 = AssemblyName.GetAssemblyName(filename2);
+
+            // 比較版本
+            if (asm_Name2.Version.CompareTo(asm_Name1.Version) <= 0)
+            {
+                // 不需要更新
+                return;
+            }
+            else
+            {
+                // 更新
+                // File.Copy(filename2, filename1, true);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -109,15 +134,15 @@ namespace vcs_Assembly
             //reflecting reflect=new reflecting();//定義一個新的自身類
             //調用一個reflecting.exe程序集
 
-            Assembly myAssembly = Assembly.LoadFrom("vcs_Assembly.exe");
-            getreflectioninfo(myAssembly);
-            //reflect.getreflectioninfo(myAssembly);//獲取反射信息
+            Assembly asm = Assembly.LoadFrom("vcs_Assembly.exe");
+            getreflectioninfo(asm);
+            //reflect.getreflectioninfo(asm);//獲取反射信息
         }
 
         //定義一個獲取反射內容的方法
-        void getreflectioninfo(Assembly myassembly)
+        void getreflectioninfo(Assembly asm)
         {
-            Type[] typearr = myassembly.GetTypes();//獲取類型
+            Type[] typearr = asm.GetTypes();//獲取類型
 
             foreach (Type type in typearr)//針對每個類型獲取詳細信息
             {
@@ -148,14 +173,12 @@ namespace vcs_Assembly
             //獲取反射信息2
             string fname = "vcs_Assembly.exe";
 
-            Assembly assembly = null;
+            Assembly asm = null;
             try
             {
-                // try to load assembly
-                assembly = Assembly.LoadFrom(fname);
+                asm = Assembly.LoadFrom(fname);
 
-                // get types of the assembly
-                Type[] types = assembly.GetTypes();
+                Type[] types = asm.GetTypes();
 
                 // check all types
                 foreach (Type type in types)
@@ -181,8 +204,8 @@ namespace vcs_Assembly
             richTextBox1.Text += "Company\t" + AssemblyCompany + "\n";
             richTextBox1.Text += "Description\t" + AssemblyDescription + "\n";
 
-            Assembly assembly = this.GetType().Assembly;
-            richTextBox1.Text += "取得專案名稱 : " + assembly.GetName().Name + "\n";
+            Assembly asm = this.GetType().Assembly;
+            richTextBox1.Text += "取得專案名稱 : " + asm.GetName().Name + "\n";
 
             //取得目前執行程式的名字 與所在的資料夾
             string sPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
@@ -274,17 +297,17 @@ namespace vcs_Assembly
         {
             //取得專案內所有表單名稱
 
-            Assembly a = Assembly.GetExecutingAssembly();       //取得目前組件
+            Assembly asm = Assembly.GetExecutingAssembly();       //取得目前組件
 
-            richTextBox1.Text += "目前組件 : " + a.ToString() + "\n";
-            richTextBox1.Text += "CodeBase : " + a.CodeBase.ToString() + "\n";
-            richTextBox1.Text += "FullName : " + a.FullName.ToString() + "\n";
-            richTextBox1.Text += "Location : " + a.Location.ToString() + "\n";
-            richTextBox1.Text += "GetType : " + a.GetType().ToString() + "\n";
-            richTextBox1.Text += "GetName : " + a.GetName() + "\n";
-            richTextBox1.Text += "ImageRuntimeVersion : " + a.ImageRuntimeVersion + "\n";
+            richTextBox1.Text += "目前組件 : " + asm.ToString() + "\n";
+            richTextBox1.Text += "CodeBase : " + asm.CodeBase.ToString() + "\n";
+            richTextBox1.Text += "FullName : " + asm.FullName.ToString() + "\n";
+            richTextBox1.Text += "Location : " + asm.Location.ToString() + "\n";
+            richTextBox1.Text += "GetType : " + asm.GetType().ToString() + "\n";
+            richTextBox1.Text += "GetName : " + asm.GetName() + "\n";
+            richTextBox1.Text += "ImageRuntimeVersion : " + asm.ImageRuntimeVersion + "\n";
 
-            foreach (Type t in a.GetTypes())                    //找尋組件內所有類別型態
+            foreach (Type t in asm.GetTypes())                    //找尋組件內所有類別型態
             {
                 richTextBox1.Text += t.ToString() + "\n";
 
@@ -421,13 +444,12 @@ namespace vcs_Assembly
 /*
 private void AboutBox_Load(object sender, EventArgs e)
 {
-	AssemblyInfoClass myAssembly = new AssemblyInfoClass();
-	labelProductName.Text = "產品名稱：" + myAssembly.Product;
-	labelVersion.Text = "版本：" + myAssembly.Version;
-	labelCopyright.Text = "版權宣告：" + myAssembly.Copyright;
-	labelCompanyName.Text = "公司名稱：" + myAssembly.Company;
-	textBoxDescription.Text = "細部描述：" +
-	myAssembly.Description;
+	AssemblyInfoClass asmi = new AssemblyInfoClass();
+	labelProductName.Text = "產品名稱：" + asmi.Product;
+	labelVersion.Text = "版本：" + asmi.Version;
+	labelCopyright.Text = "版權宣告：" + asmi.Copyright;
+	labelCompanyName.Text = "公司名稱：" + asmi.Company;
+	textBoxDescription.Text = "細部描述：" + asmi.Description;
 }
 
                 string location = Assembly.GetExecutingAssembly().Location;
@@ -439,34 +461,7 @@ label版本.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             //獲取本代碼所在的文件作為臨時文件，用於獲取屬性列表
             string tempFile = Assembly.GetExecutingAssembly().FullName;
 
-C#讀取exe版本號
 
-	Assembly currentAssembly = Assembly.LoadFile(currentAssemblyPath);
-	Assembly updatedAssembly = Assembly.LoadFile(updatedAssemblyPath);
-	
-	AssemblyName currentAssemblyName = currentAssembly.GetName();
-	AssemblyName updatedAssemblyName = updatedAssembly.GetName();
-	
-	// 比較版本號
-	if (updatedAssemblyName.Version.CompareTo(currentAssemblyName.Version) <= 0)
-	{
-	    // 不需要更新
-	    return;
-	}
-	
-	AssemblyName currentAssemblyName = AssemblyName.GetAssemblyName(currentAssemblyPath);
-	AssemblyName updatedAssemblyName = AssemblyName.GetAssemblyName(updatedAssemblyPath);
-	
-	// 比較版本
-	if (updatedAssemblyName.Version.CompareTo(currentAssemblyName.Version) <= 0)
-	{
-	    // 不需要更新
-	    return;
-	}
-	
-	// 更新
-	File.Copy(updatedAssemblyPath, currentAssemblyPath, true);
-	
             //取得 namespaceName
             string namespaceName = Assembly.GetExecutingAssembly().GetName().Name.ToString();
             richTextBox1.Text += namespaceName + "\n";
