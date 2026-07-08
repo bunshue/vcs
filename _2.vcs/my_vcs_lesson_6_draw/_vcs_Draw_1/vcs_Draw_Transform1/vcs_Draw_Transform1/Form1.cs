@@ -8,10 +8,18 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Drawing.Imaging;
-using System.Drawing.Drawing2D; //SmoothingMode, InterpolationMode, Matrix
+using System.Drawing.Drawing2D;  // SmoothingMode, InterpolationMode, Matrix
 
 //使用 Matrix
 //平移縮放旋轉
+
+/* Transform 的方法
+g.ResetTransform();  // 重置轉換, 恢復
+g.TranslateTransform(100, 150);  // 平移, 右移, 下移
+g.RotateTransform(30);  // 順時針旋轉指定的角度, 累計旋轉
+g.ScaleTransform(1.4f, 1.4f);  // 縮放, 水平縮放, 垂直縮放
+g.Transform = mtx;  // 設定仿射矩陣, 矩陣轉置
+*/
 
 namespace vcs_Draw_Transform1
 {
@@ -202,7 +210,6 @@ namespace vcs_Draw_Transform1
             g.DrawRectangle(p, rect);   //用綠色筆畫平移後的圖形
             g.DrawString("平移, 紅色是原本的, 綠色是平移後的", new Font("標楷體", 16), new SolidBrush(Color.Blue), new PointF(0, 0));
 
-
             g.ResetTransform();  // 重置轉換, 恢復
 
             pictureBox1.Image = bitmap1;
@@ -308,8 +315,6 @@ namespace vcs_Draw_Transform1
                 g.RotateTransform(30);  // 順時針旋轉指定的角度, 累計旋轉
                 g.DrawLine(p, 0, 0, 50, 0);
             }
-
-
 
             pictureBox1.Image = bitmap1;
         }
@@ -984,7 +989,6 @@ namespace vcs_Draw_Transform1
             angle11 += 15;
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Image image = Image.FromFile(filename);
-
             Image image_rotated = image.GetRotateImage(angle11);
 
             pictureBox1.Image = image_rotated;
@@ -1559,7 +1563,7 @@ namespace vcs_Draw_Transform1
 
             //目標位圖
             Image dsImage = new Bitmap(W, H, img.PixelFormat);
-            using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(dsImage))
+            using (Graphics g = Graphics.FromImage(dsImage))
             {
                 g.InterpolationMode = InterpolationMode.Bilinear;
                 g.SmoothingMode = SmoothingMode.HighQuality;

@@ -4652,16 +4652,37 @@ namespace vcs_Draw_Example1
 
         private void button41_Click(object sender, EventArgs e)
         {
-            //PieChart pc = new PieChart();
-            //pc.Render(title, subTitle, W, H, ds);
-            //PieChart_Render
-        }
+            string title = "AAAAA";
+            string subTitle = "BBBBB";
+            int W = 400;
+            int H = 400;
 
-        public void PieChart_Render(string title, string subTitle, int W, int H, DataSet chartData)
-        {
             const int SIDE_LENGTH = 400;
             const int PIE_DIAMETER = 200;
-            DataTable dt = chartData.Tables[0];
+
+            // 建立DataTable
+            DataTable dt = new DataTable();
+
+            // 建立資料表結構, 並設定格式
+            dt.Columns.Add("第一欄", typeof(string));
+            dt.Columns.Add("第二欄", typeof(int));
+
+            DataRow dr1 = dt.NewRow();
+            dr1["第一欄"] = "鼠";
+            dr1["第二欄"] = 3;
+            dt.Rows.Add(dr1);
+
+            DataRow dr2 = dt.NewRow();
+            dr2["第一欄"] = "牛";
+            dr2["第二欄"] = 48;
+            dt.Rows.Add(dr2);
+
+            DataRow dr3 = dt.NewRow();
+            dr3["第一欄"] = "虎";
+            dr3["第二欄"] = 33;
+            dt.Rows.Add(dr3);
+
+            dt.Rows.Add("兔", 8);
 
             //通過輸入參數，取得餅圖中的總基數
             float sumData = 0;
@@ -4713,7 +4734,7 @@ namespace vcs_Draw_Example1
                 textOrigin.Y += 15;
             }
 
-            bitmap1.Save("tmp_aaa.gif", ImageFormat.Gif);
+            bitmap1.Save("tmp_aaaa.gif", ImageFormat.Gif);
             bitmap1.Dispose();
         }
 
@@ -4721,26 +4742,42 @@ namespace vcs_Draw_Example1
 
         private void button42_Click(object sender, EventArgs e)
         {
-            //BarChart
-            //BarChart bc = new BarChart();
-            //BarChart_Render(title, subTitle, W, H, ds);
-        }
+            //畫條形圖
+            string title = "AAAAA";
+            string subTitle = "BBBBB";
+            int W = 400;
+            int H = 400;
 
-        //畫條形圖
-        /// 画条形图方法
-        /// <param name="title">大标题</param>
-        /// <param name="subTitle">小标题</param>
-        /// <param name="W">宽度</param>
-        /// <param name="H">高度</param>
-        /// <param name="chartData">DataSet数据源</param>
-        public void BarChart_Render(string title, string subTitle, int W, int H, DataSet chartData)
-        {
             const int SIDE_LENGTH = 400;
             const int CHART_TOP = 75;
             const int CHART_HEIGHT = 200;
             const int CHART_LEFT = 50;
             const int CHART_WIDTH = 300;
-            DataTable dt = chartData.Tables[0];
+
+            //DataTable dt = chartData.Tables[0];
+            // 建立DataTable
+            DataTable dt = new DataTable();
+
+            // 建立資料表結構, 並設定格式
+            dt.Columns.Add("第一欄", typeof(string));
+            dt.Columns.Add("第二欄", typeof(int));
+
+            DataRow dr1 = dt.NewRow();
+            dr1["第一欄"] = "鼠";
+            dr1["第二欄"] = 3;
+            dt.Rows.Add(dr1);
+
+            DataRow dr2 = dt.NewRow();
+            dr2["第一欄"] = "牛";
+            dr2["第二欄"] = 48;
+            dt.Rows.Add(dr2);
+
+            DataRow dr3 = dt.NewRow();
+            dr3["第一欄"] = "虎";
+            dr3["第二欄"] = 33;
+            dt.Rows.Add(dr3);
+
+            dt.Rows.Add("兔", 8);
 
             //計算最高的點
             float highPoint = 0;
@@ -4797,7 +4834,7 @@ namespace vcs_Draw_Example1
                 textOrigin.Y += 15;
             }
 
-            bitmap1.Save("tmp_bbb.gif", ImageFormat.Gif);
+            bitmap1.Save("tmp_bbbb.gif", ImageFormat.Gif);
             bitmap1.Dispose();
         }
 
