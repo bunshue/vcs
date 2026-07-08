@@ -91,19 +91,29 @@ namespace vcs_Draw_Transform1
             button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
             pictureBox1.Size = new Size(820, 880);
-            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y);
 
             pictureBox2.Size = new Size(410, 230);
             pictureBox2.Location = new Point(x_st + dx * 0, y_st + dy * 10);
 
             richTextBox1.Size = new Size(300, 880);
-            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 7, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1600, 940);
+            this.Size = new Size(1810, 940);
             this.Text = "vcs_Draw_Transform1";
 
             //設定執行後的表單起始位置, 正中央
@@ -126,7 +136,10 @@ namespace vcs_Draw_Transform1
         void reset_pictureBox()
         {
             pictureBox1.Size = new Size(820, 880);
-            bitmap1 = new Bitmap(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height);
+
+            int W = pictureBox1.ClientSize.Width;
+            int H = pictureBox1.ClientSize.Height;
+            bitmap1 = new Bitmap(W, H);
             g = Graphics.FromImage(bitmap1);
             g.ResetTransform();  // 重置轉換, 恢復
             g.SmoothingMode = SmoothingMode.AntiAlias;
@@ -1366,13 +1379,114 @@ namespace vcs_Draw_Transform1
             pictureBox1.Image = bitmap1;
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button19_Click(object sender, EventArgs e)
         {
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button29_Click(object sender, EventArgs e)
+        {
+            //new
+
+            PointF[] curvePoints = new PointF[141];
+
+            for (int i = 0; i < curvePoints.Length; i++)
+            {
+                curvePoints[i].X = i / 10f;
+                curvePoints[i].Y = (float)sind(i / 10f);
+            }
+
+            Pen redPen = new Pen(Color.Red, 3);
+            //g.DrawLines(redPen, curvePoints);   //畫直線
+
+            //這樣畫出來，只會在 x=0~14, y=-1~+1
+
+            int W = pictureBox1.ClientSize.Width-10;
+            int H = pictureBox1.ClientSize.Height-10;
+
+            //原始資料範圍
+            float xmin = 0f;
+            float xmax = 1.5f;
+            float ymax = 1.5f;
+            float ymin = -1.5f;
+            RectangleF src_rect = new RectangleF(xmin, ymin, xmax - xmin, ymax - ymin);
+
+            //目標資料範圍
+            PointF[] dst_points1 =
+            {
+                new PointF(0, H),
+                new PointF(W, H),
+                new PointF(0, 0),
+            };
+
+
+            RectangleF dest_rect = new RectangleF(0, 0, W, H);
+
+            g.DrawRectangle(Pens.Red, 0, 0, W, H);
+
+
+            /*
+
+            // 轉置矩陣 mtx, 矩形範圍 轉 平行四邊形範圍
+            Matrix mtx = new Matrix(src_rect, dst_points1);
+            g.Transform = mtx;  // 設定仿射矩陣, 矩陣轉置
+
+            Pen p = new Pen(Color.Red, 0);
+            g.DrawLines(p, curvePoints);   //畫直線
+            */
+
+            pictureBox1.Image = bitmap1;
+        }
+
+        //------------------------------------------------------------  # 60個
 
         float angle1 = 0;
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
@@ -1526,4 +1640,58 @@ namespace vcs_Draw_Transform1
 
 
 */
+
+
+/*
+做一個我的 Transform範例
+
+角度-180~+180
+正弦值 -1~+1
+
+xmin = -180;
+xmax = 180;
+ymin = -1;
+ymax = 1;
+xmargin = 10;
+ymargin = 0.2;
+
+顯示區域寬度W  if 720
+顯示區域高度H  if 360
+
+xratio = W/(xmax-xmin+xmargin*2);     //2 倍
+yratio = H/(ymax-ymin+ymargin*2);     //180 倍
+
+x=xmin:1:xmax;
+y=sind(x);
+
+先不考慮margin  把圖畫在中間
+
+畫x時 每點相距 2 pixel
+
+畫y時 要放大180倍
+
+for(i=0; i<360;i++)
+{
+	x_new = x_old*2;
+	y_new = y_old*180;
+}
+
+//------------------------------------------------------------  # 60個
+
+
+目前似乎無法做到 DrawString 的 理想的 Transform
+
+Transform需要做到
+1. 曲線
+2. 文字
+轉換後要完整 才有用
+
+直線、曲線、矩形框、橢圓框之寬度必須為0，也就是說，失去了彈性，不能畫粗線
+文字應該不可能做到完整轉換
+
+若是無法做到理想的Transform 則需要自己做Transform
+
+*/
+
+
 

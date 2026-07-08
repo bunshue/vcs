@@ -353,7 +353,6 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(180, 45);
             this.button25.TabIndex = 41;
-            this.button25.Text = "蝴蝶";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -943,6 +942,7 @@
             this.button42.Name = "button42";
             this.button42.Size = new System.Drawing.Size(180, 45);
             this.button42.TabIndex = 112;
+            this.button42.Text = "BarChart";
             this.button42.UseVisualStyleBackColor = true;
             this.button42.Click += new System.EventHandler(this.button42_Click);
             // 
@@ -953,6 +953,7 @@
             this.button41.Name = "button41";
             this.button41.Size = new System.Drawing.Size(180, 45);
             this.button41.TabIndex = 111;
+            this.button41.Text = "PieChart";
             this.button41.UseVisualStyleBackColor = true;
             this.button41.Click += new System.EventHandler(this.button41_Click);
             // 
@@ -963,6 +964,7 @@
             this.button40.Name = "button40";
             this.button40.Size = new System.Drawing.Size(180, 45);
             this.button40.TabIndex = 110;
+            this.button40.Text = "test";
             this.button40.UseVisualStyleBackColor = true;
             this.button40.Click += new System.EventHandler(this.button40_Click);
             // 

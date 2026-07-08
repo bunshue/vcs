@@ -3582,61 +3582,6 @@ Display_Cam1
 
 //------------------------------------------------------------  # 60個
 
-做一個我的 Transform範例
-
-角度-180~+180
-正弦值 -1~+1
-
-xmin = -180;
-xmax = 180;
-ymin = -1;
-ymax = 1;
-xmargin = 10;
-ymargin = 0.2;
-
-顯示區域寬度W  if 720
-顯示區域高度H  if 360
-
-xratio = W/(xmax-xmin+xmargin*2);     //2 倍
-yratio = H/(ymax-ymin+ymargin*2);     //180 倍
-
-x=xmin:1:xmax;
-y=sind(x);
-
-先不考慮margin  把圖畫在中間
-
-畫x時 每點相距 2 pixel
-
-畫y時 要放大180倍
-
-for(i=0; i<360;i++)
-{
-	x_new = x_old*2;
-	y_new = y_old*180;
-}
-
-//------------------------------------------------------------  # 60個
-
-            e.Graphics.Clear(picGraph.BackColor);
-            if (Balance.Count < 2) return;
-
-            // Scale to make the data fit.
-            float xmin = -1;
-            float xmax = Contributions.Count + 1;
-            float ymax = Balance.Max(pt => pt.Y);
-            float ymin = -ymax * 0.05f;
-            RectangleF rect = new RectangleF(xmin, ymin, xmax - xmin, ymax - ymin);
-            PointF[] pts =
-            {
-                new PointF(0, picGraph.ClientSize.Height),
-                new PointF(picGraph.ClientSize.Width, picGraph.ClientSize.Height),
-                new PointF(0, 0),
-            };
-            Transform = new Matrix(rect, pts);
-            e.Graphics.Transform = Transform;
-
-//------------------------------------------------------------  # 60個
-
         string drap_setup_filename = "drap_setup.ini";
 
         void update_setup_file()
@@ -5500,10 +5445,6 @@ Form2的元件的Modifiers要改成Internal, 預設為private
 [格式1]：public void DrawBezier(Pen pen,Point pt1,Point pt2,Point pt3,Point pt4);
 [格式2]：public void DrawBezier(Pen pen,float x1,float y1,float x2,float y2,float x3,float y3,float x4,float y4);
 
-畫圓球
-e.Graphics.FillEllipse(new SolidBrush(aBall.color), aBall.pt.X - 10, aBall.pt.Y - 10, 20, 20);
-e.Graphics.DrawEllipse(Pens.Black, aBall.pt.X - 10, aBall.pt.Y - 10, 20, 20);
-
 //------------------------------------------------------------  # 60個
 
 GC.Collect();  // 強制執行記憶體回收機制
@@ -5769,13 +5710,6 @@ Drap要加+
 搜尋特小檔 < 720p的
 
 //------------------------------------------------------------  # 60個
-eeee
-file_size	//Snake Case
- FileSize	//Pascal Case
- fileSize	//Camel Case
-iFileSize	//Hungarian Notation
-
-PCSH
 
 //------------------------------------------------------------  # 60個
 
@@ -6953,30 +6887,7 @@ textbox把資料拉到最下方
 C# 無法解析遠端名稱
 http://jerryyang-wxy.blogspot.com/2014/08/blog-post.html
 
-目前似乎無法做到 DrawString 的 理想的 Transform
-
-Transform需要做到
-1. 曲線
-2. 文字
-轉換後要完整 才有用
-
-直線、曲線、矩形框、橢圓框之寬度必須為0，也就是說，失去了彈性，不能畫粗線
-文字應該不可能做到完整轉換
-
-若是無法做到理想的Transform 則需要自己做Transform
-
-//一般開啟圖檔 vs 不鎖定開啟圖檔
-
-        string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-        // Load the image normally.
-        private void btnLoadNormally_Click(object sender, EventArgs e)
-        {
-            if (pictureBox1.Image != null)
-                pictureBox1.Image.Dispose();
-            pictureBox1.Image = new Bitmap(filename);
-        }
-
-//------------------------------------------------
+//------------------------------------------------------------  # 60個
 
         // The selected points that determine the conic section.
         private List<PointF> Points = new List<PointF>();
@@ -7176,7 +7087,6 @@ for (int i = 0; i < strings.Length; i++)
 
 參考/加入參考/.NET/有System.Web可選
 
-
 搜尋資料夾內的檔案
 
 1. 檔名符合關鍵字
@@ -7184,7 +7094,6 @@ for (int i = 0; i < strings.Length; i++)
 3. 列出所有檔案
 
 把所有字型都畫出來，畫成一張很長的圖
-
 
 複製到輸出目錄	有更新時才複製
 // Set the "Copy to Output Directory" property for
@@ -7202,6 +7111,13 @@ this.CenterToScreen();       //將表單置中顯示
 如何在程式忙碌時還可以停掉這個程式
 
 //------------------------------------------------------------  # 60個
+
+PCSH
+
+file_size	//Snake Case
+ FileSize	//Pascal Case
+ fileSize	//Camel Case
+iFileSize	//Hungarian Notation
 
 駝峰式大小寫（Camel-Case，Camel Case，camel case）
 單字之間不以空格斷開（例：camel case）或連接號（-，例：camel-case）、底線（_，例：camel_case）連結，有兩種格式：
@@ -7332,7 +7248,8 @@ Form的設定
         }
         */
 
-6060
+//------------------------------------------------------------  # 60個
+
             for (int x = 0; x < mask_bm32.Width; x++)
             {
                 for (int y = 0; y < mask_bm32.Height; y++)
@@ -7350,7 +7267,6 @@ Form的設定
                     }
                 }
             }
-
 
 	//找出半徑內非白色點的最近距離
         // Return the distance to the nearest non-white pixel within the radius.
@@ -9399,51 +9315,11 @@ pictureBox 顯示圖片的方法(4)
                 pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
                 pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 
-//------------------------------  # 30個
-
-Normal  = 0,
-StretchImage = 1,
+Normal  = 0,  //從左上角開始放
+StretchImage = 1,  //縮放圖片以符合pbx
 AutoSize = 2,
-CenterImage = 3,
-Zoom = 4,
-
-Normal StretchImage AutoSize CenterImage Zoom
-
-
-e
-    {
-        // 摘要:
-        //     影像放置在 PictureBox 的左上角。如果影像大於包含它的 PictureBox，就會裁剪影像。
-        Normal = 0,
-
-        //
-        // 摘要:
-        //     PictureBox 內的影像會延伸或縮小，以調整成最適合 PictureBox
-        //     的大小。
-        StretchImage = 1,
-
-        //
-        // 摘要:
-        //     將 PictureBox 的大小調整成與其所包含影像的大小相等。
-        AutoSize = 2,
-        //
-        // 摘要:
-        //     如果 PictureBox 大於影像，影像即置中顯示。如果影像大於 PictureBox，圖片即放在
-        //     PictureBox 的中央，而外緣被裁剪。
-
-        CenterImage = 3,
-        //
-        // 摘要:
-        //     不論是增大或縮小，影像大小都維持大小比例。
-        Zoom = 4,
-    }
-}
-
-Normal = 0,
-StretchImage = 1,
-AutoSize = 2,
-CenterImage = 3,
-Zoom = 4,
+CenterImage = 3,置中顯示
+Zoom = 4, 縮放 維持比例
 
 //------------------------------------------------------------  # 60個
 //------------------------------------------------------------  # 60個
@@ -9461,13 +9337,6 @@ this.DoubleBuffered = true;//避免闪烁
 this.DoubleBuffered = true;//避免闪烁
 this.DoubleBuffered = true;
 this.DoubleBuffered = true;
-
-//------------------------------------------------------------  # 60個
-
-
-編碼 = 明碼.Encrypt(密碼).ToHex();
-
-
 
 //------------------------------------------------------------  # 60個
 
@@ -9503,8 +9372,42 @@ this.DoubleBuffered = true;
 //------------------------------------------------------------  # 60個
 
 
+//------------------------------------------------------------  # 60個
+
+
 
 //------------------------------------------------------------  # 60個
+
+
+        private Color[] Colors;
+
+            Colors = new Color[] 
+            {
+                Color.Pink,
+                Color.Red,
+                Color.Orange,
+                Color.Yellow,
+                Color.Lime,
+                Color.Cyan,
+                Color.Blue,
+                Color.Violet,
+                Color.Pink,
+                Color.Red,
+                Color.Orange,
+                Color.Yellow,
+                Color.Lime,
+                Color.Cyan,
+                Color.Blue,
+                Color.Violet,
+                Color.Pink,
+                Color.Red,
+                Color.Orange,
+                Color.Yellow,
+                Color.Lime,
+                Color.Cyan,
+                Color.Blue,
+                Color.Violet
+            };
 
 
 
