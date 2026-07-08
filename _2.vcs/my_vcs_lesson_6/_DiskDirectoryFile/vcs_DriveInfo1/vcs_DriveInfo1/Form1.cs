@@ -1001,19 +1001,16 @@ namespace vcs_DriveInfo1
             {
                 return "";
             }
+
             GETVERSIONOUTPARAMS verPara = new GETVERSIONOUTPARAMS();
             uint bytRv = 0;
-
-            if (0 != DeviceIoControl(device, DFP_GET_VERSION,
-            0, 0, ref verPara, Marshal.SizeOf(verPara),
-            ref bytRv, 0))
+            if (0 != DeviceIoControl(device, DFP_GET_VERSION, 0, 0, ref verPara, Marshal.SizeOf(verPara), ref bytRv, 0))
             {
                 if (verPara.bIDEDeviceMap > 0)
                 {
                     byte bIDCmd = (byte)(((verPara.bIDEDeviceMap >> drive & 0x10) != 0) ? IDE_ATAPI_IDENTIFY : IDE_ATA_IDENTIFY);
                     SENDCMDINPARAMS scip = new SENDCMDINPARAMS();
                     SENDCMDOUTPARAMS scop = new SENDCMDOUTPARAMS();
-
                     scip.cBufferSize = IDENTIFY_BUFFER_SIZE;
                     scip.irDriveRegs.bFeaturesReg = 0;
                     scip.irDriveRegs.bSectorCountReg = 1;

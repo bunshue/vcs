@@ -2141,8 +2141,7 @@ namespace vcs_Draw1
             Graphics g = Graphics.FromImage(bm);
             g.SmoothingMode = SmoothingMode.AntiAlias;  //反鋸齒
 
-            // Draw the graph.
-            Pen graph_pen = new Pen(Color.Blue, 1);
+            Pen p = new Pen(Color.Blue, 1);
 
             // Loop over x values to generate points.
             for (float x = 0; x < W; x += 5)
@@ -2153,16 +2152,13 @@ namespace vcs_Draw1
 
             if (points.Count > 1)
             {
-                //transform
                 for (int i = 0; i < points.Count; i++)
                 {
                     points[i] = new PointF(points[i].X, H - points[i].Y);
                 }
-                g.DrawLines(graph_pen, points.ToArray());
+                g.DrawLines(p, points.ToArray());
             }
-            // Display the result.
             pictureBox1.Image = bm;
-
         }
 
         //------------------------------------------------------------  # 60個
@@ -2848,4 +2844,134 @@ bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0, 0, 0));
                         //richTextBox1.Text += p.ToString() + " ";
                         richTextBox1.Text += p.A.ToString("X2") + p.R.ToString("X2") + p.G.ToString("X2") + p.B.ToString("X2") + " ";
 
+
+//------------------------------------------------------------  # 60個
+
+Font設定字型及樣式
+                new Font(this.Font, FontStyle.Italic),
+                
+            //Graphics.DrawImage (Image, Rectangle, Rectangle, GraphicsUnit)
+            //四個參數分別是     來源影像 目標區域  來源區域      單位
+
+
+
+string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+//讀檔 至 Image 影像
+Image image = Image.FromFile(filename); // 產生一個Image物件
+//旋轉
+image.RotateFlip(RotateFlipType.Rotate90FlipNone); // 影像旋轉90度
+//畫出來
+g.DrawImage(image, 10, 50, image.Width, image.Height);
+//              貼上的位置      貼上的大小 放大縮小用
+
+//製作縮圖
+int w = 100;	//預縮放的圖的寬度
+Image imgThumbnail = image1.GetThumbnailImage(w, (int)(w * image1.Height / image1.Width), null, (IntPtr)0);
+
+//------------------------------------------------------------  # 60個
+
+Pen的屬性主要有: Color(顏色),DashCap(短劃線終點形狀),DashStyle(虛線樣式),EndCap(線尾形狀), StartCap(線頭形狀),Width(粗細)等.
+
+void ctx.drawImage(image, dx, dy);
+void ctx.drawImage(image, dx, dy, dWidth, dHeight);
+void ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+
+//------------------------------------------------------------  # 60個
+
+繪製圖形物件的方法
+
+Graphics類別GDI+提供下列方法來繪製上述清單中的項目： 
+
+DrawLines
+DrawCurve
+DrawClosedCurve
+
+//------------------------------------------------------------  # 60個
+
+建立畫布
+
+Graphics 畫布物件變數;
+畫布物件變數 = 控制項名稱.CreateGraphics();
+
+例如：在表單上建立畫布g：
+Graphics g;
+g = this.CreateGraphics();
+
+
+例如：在圖片方塊pictureBox1上建立畫布g：
+Graphics g;
+g = pictureBox1.CreateGraphics();
+
+畫筆Pen物件
+
+Pen 畫筆 = new Pen(畫筆顏色, 畫筆粗細);
+Pen p = new Pen(Color.Blue, 5);
+p.Color = Color.Red;
+p.Width = 2;
+
+Pen 畫筆 = new Pen(畫筆顏色, 畫筆粗細);
+
+設定顏色的方法	呼叫靜態函式：Color.FromArgb()
+
+ex:
+Color red= Color.FromArgb(255,0,0)
+this.BackColor=Color.White;
+
+//------------------------------------------------------------  # 60個
+
+Pen只有一類
+Brush有四類
+
+Pen用於告訴Graphics如何繪製線條
+Brush用於填充區域
+
+Point的用法
+Point b=new Point(20,10);
+Point a=new Point();
+a.X=20;
+a.Y=10;
+
+//------------------------------------------------------------  # 60個
+
+繪製虛線，可設定Pen的DashStyle屬性為Dash,Dot,DashDot或者DashDotDot等
+改變直線端點的形狀，可以設定StartCap和EndCap屬性
+
+blackPen.StartCap=LineCap.ArrowAnchor;
+
+//------------------------------------------------------------  # 60個
+
+箭頭的畫法
+
+            Pen p = new Pen(Color.Red, 0);
+            p.EndCap = LineCap.ArrowAnchor;
+
+//------------------------------------------------------------  # 60個
+
+各種 DrawImage
+            richTextBox1.Text += "第1項 PictureBox\n";
+            Rectangle rectDest = new Rectangle(0, 0, bitmap1.Width, bitmap1.Height);
+            Rectangle rectSrc = new Rectangle(0, 0, bitmap1.Width, bitmap1.Height);
+            e.Graphics.DrawImage(bitmap1, rectDest, rectSrc, GraphicsUnit.Pixel); // 呈現原圖
+
+            richTextBox1.Text += "第2項 PictureBox\n";
+            Rectangle rectDest = new Rectangle(0, 0, bitmap1.Width, bitmap1.Height);
+            e.Graphics.DrawImage(bitmap1, rectDest); // 呈現原圖
+
+            richTextBox1.Text += "第3項 PictureBox\n";
+            Rectangle rectDest = new Rectangle(0, 0, bitmap1.Width * 2, bitmap1.Height / 2);
+            e.Graphics.DrawImage(bitmap1, rectDest); // 呈現原圖
+            richTextBox1.Text += "第4項 PictureBox\n";
+            Point dest = new Point(0, 0); // 目的地左上角座標
+            e.Graphics.DrawImage(bitmap1, dest); // 呈現原圖
+
+            richTextBox1.Text += "第5項 PictureBox\n";
+            e.Graphics.DrawImage(bitmap1, 0, 0); // 呈現原圖
+
 */
+
+
+
+
+
+
+

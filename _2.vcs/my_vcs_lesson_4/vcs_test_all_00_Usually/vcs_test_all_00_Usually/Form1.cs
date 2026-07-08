@@ -62,7 +62,7 @@ namespace vcs_test_all_00_Usually
 
         //------------------------------------------------------------  # 60個
 
-        //移動無邊框窗體2 ST
+        //移動無邊框窗體2 ST, 加在三Form之間即可
         private const int WM_NCHITTEST = 0x84;
         private const int HTCLIENT = 0x1;
         //private const int HTCAPTION = 0x2;

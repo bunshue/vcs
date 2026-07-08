@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;//该命名空间提供各种各样支持 C
 
 namespace vcs_RichTextBox9
 {
-    class RichTextBoxEx:RichTextBox 
+    class RichTextBoxEx : RichTextBox
     {
-        #region
+        //#region
         public RichTextBoxEx()
         {
             this.Top = 13;//设置自定义控件与其容器工作区上边缘之间的距离
@@ -29,9 +29,8 @@ namespace vcs_RichTextBox9
             public int dxRightIndent;//标识文本的右缩进
             public int dxOffset; //标识项目编号的偏移量
             public short wAlignment;//标识文本的对齐方式
-            [MarshalAs(UnmanagedType.ByValArray,SizeConst = 0x20)]
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 0x20)]
             public int[] rgxTabs;//定义一个整型数组
-
             public int dySpaceBefore;//用来表示编号前的纵向间隔
             public int dySpaceAfter;//用来表示编号后的纵向间隔
             public int dyLineSpacing;//按指定的规则编号后的行间隔
@@ -47,14 +46,13 @@ namespace vcs_RichTextBox9
 
             public PARAFORMAT2()
             {
-                this.cbSize = Marshal.SizeOf(typeof(PARAFORMAT2));//
+                this.cbSize = Marshal.SizeOf(typeof(PARAFORMAT2));
             }
         }
 
-        #region PARAFORMAT MASK VALUES
+        //#region PARAFORMAT MASK VALUES
         private const uint PFM_OFFSET = 0x00000004;//设置项目符号的偏移量
         private const uint PFM_NUMBERING = 0x00000020;//设置编号方式
-
         private const uint PFM_NUMBERINGSTYLE = 0x00002000;//设置项目编号的样式
         private const uint PFM_NUMBERINGTAB = 0x00004000;//设置项目编号按下Tab键的信息
         private const uint PFM_NUMBERINGSTART = 0x00008000;//设置项目编号的开始标识
@@ -77,16 +75,13 @@ namespace vcs_RichTextBox9
             Plain = 0x300,//设置文本为无格式
             NoNumber = 0x400//设置样式为无数字
         }
-        #endregion
+        //#endregion
 
         [DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
-        private static extern IntPtr SendMessage(HandleRef hWnd, int msg, int wParam,
-           [In,Out,MarshalAs(UnmanagedType.LPStruct)] PARAFORMAT2 lParam);//定义一个向窗口进程发送消息的API函数
-
+        private static extern IntPtr SendMessage(HandleRef hWnd, int msg, int wParam, [In, Out, MarshalAs(UnmanagedType.LPStruct)] PARAFORMAT2 lParam);//定义一个向窗口进程发送消息的API函数
         private AdvRichTextBulletType _BulletType = AdvRichTextBulletType.Number;//设定项目编号的起始类型
         private AdvRichTextBulletStyle _BulletStyle = AdvRichTextBulletStyle.Period;//设定项目编号的起始样式
         private short _BulletNumberStart = 1;//设定项目编号的起始数字为1
-
 
         public AdvRichTextBulletType BulletType
         {
@@ -109,9 +104,8 @@ namespace vcs_RichTextBox9
         public void NumberedBullet(bool TurnOn)
         {
             PARAFORMAT2 paraformat1 = new PARAFORMAT2();//初始化类PARAFORMAT2的一个新实例
-            paraformat1.dwMask = (int)(PFM_NUMBERING | PFM_OFFSET | PFM_NUMBERINGSTART |
-                PFM_NUMBERINGSTYLE | PFM_NUMBERINGTAB);//设置实例的dwMask属性
-            if(!TurnOn)//当和TurnOn的初始值相反时
+            paraformat1.dwMask = (int)(PFM_NUMBERING | PFM_OFFSET | PFM_NUMBERINGSTART | PFM_NUMBERINGSTYLE | PFM_NUMBERINGTAB);//设置实例的dwMask属性
+            if (!TurnOn)//当和TurnOn的初始值相反时
             {
                 paraformat1.wNumbering = 0;//设置wNumbering属性为0
                 paraformat1.dxOffset = 0;//设置dxOffset属性为0
@@ -124,9 +118,8 @@ namespace vcs_RichTextBox9
                 paraformat1.wNumberingStart = _BulletNumberStart;//设置项目编号的起始位置
                 paraformat1.wNumberingTab = 500;//设置按Tab键文本移动的距离
             }
-            SendMessage(new System.Runtime.InteropServices.HandleRef(this, this.Handle),
-                0x447,0,paraformat1);//发送指定的消息
+            SendMessage(new System.Runtime.InteropServices.HandleRef(this, this.Handle), 0x447, 0, paraformat1);//发送指定的消息
         }
-        #endregion
+        //#endregion
     }
 }

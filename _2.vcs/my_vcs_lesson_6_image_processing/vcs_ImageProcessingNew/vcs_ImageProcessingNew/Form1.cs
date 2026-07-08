@@ -668,9 +668,52 @@ namespace vcs_ImageProcessingNew
             timer1.Enabled = true;
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button3_Click(object sender, EventArgs e)
         {
+            //alpha test
+
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp";
+            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\ims_image.bmp";
+
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename1);	//Image.FromFile出來的是Image格式
+            Bitmap bitmap2 = (Bitmap)Image.FromFile(filename2);	//Image.FromFile出來的是Image格式
+
+            float alpha = 0.5f;
+
+            int height = bitmap1.Height;
+            int width = bitmap1.Width;
+
+            Bitmap output = new Bitmap(width, height);
+            Color pt1;
+            Color pt2;
+            Color pt3;
+
+            int total_R = 0;
+            int total_G = 0;
+            int total_B = 0;
+
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    pt1 = bitmap1.GetPixel(x, y);
+                    pt2 = bitmap2.GetPixel(x, y);
+                    total_R = (int)(alpha * pt1.R + (1 - alpha) * pt2.R);
+                    total_G = (int)(alpha * pt1.G + (1 - alpha) * pt2.G);
+                    total_B = (int)(alpha * pt1.B + (1 - alpha) * pt2.B);
+
+                    pt3 = Color.FromArgb(total_R, total_G, total_B);
+
+                    output.SetPixel(x, y, pt3);
+                }
+            }
+
+            pictureBox1.Image = output;
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button4_Click(object sender, EventArgs e)
         {

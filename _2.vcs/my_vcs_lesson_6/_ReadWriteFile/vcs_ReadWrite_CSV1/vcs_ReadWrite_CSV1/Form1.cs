@@ -741,15 +741,11 @@ namespace vcs_ReadWrite_CSV1
 
         private void DrawGraph()
         {
-            this.Cursor = Cursors.WaitCursor;
-
             // Load the data.
             List<PriceData> price_data = GetDjiPrices();
 
             // Graph it.
             DrawGraph(price_data);
-
-            this.Cursor = Cursors.Default;
         }
 
         // Get the historical prices.
@@ -789,9 +785,7 @@ namespace vcs_ReadWrite_CSV1
         private void DrawGraph(List<PriceData> price_data)
         {
             // Make the bitmap.
-            Bitmap bm = new Bitmap(
-                pictureBox1.ClientSize.Width,
-                pictureBox1.ClientSize.Height);
+            Bitmap bm = new Bitmap(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height);
             using (Graphics gr = Graphics.FromImage(bm))
             {
                 gr.Clear(Color.White);
@@ -805,10 +799,7 @@ namespace vcs_ReadWrite_CSV1
                 float scale_x = pictureBox1.ClientSize.Width / (float)price_data.Count;
                 float scale_y = -pictureBox1.ClientSize.Height / max_price;
                 gr.ScaleTransform(scale_x, scale_y);
-                gr.TranslateTransform(
-                    0,
-                    pictureBox1.ClientSize.Height,
-                    System.Drawing.Drawing2D.MatrixOrder.Append);
+                gr.TranslateTransform(0, pictureBox1.ClientSize.Height, System.Drawing.Drawing2D.MatrixOrder.Append);
 
                 using (Pen thin_pen = new Pen(Color.Gray, 0))
                 {
@@ -820,8 +811,9 @@ namespace vcs_ReadWrite_CSV1
 
                         // Draw the value.
                         if (y > 0)
-                            DrawTextAt(gr, y.ToString("C"), 10, y, Color.Blue,
-                                StringAlignment.Near, StringAlignment.Far);
+                        {
+                            DrawTextAt(gr, y.ToString("C"), 10, y, Color.Blue, StringAlignment.Near, StringAlignment.Far);
+                        }
                     }
 
                     // Draw the vertical grid lines.
@@ -841,8 +833,7 @@ namespace vcs_ReadWrite_CSV1
                                 gr.DrawLine(thin_pen, i, 0, i, 750);
 
                                 // Draw the year number.
-                                DrawTextAt(gr, last_year.ToString(), i, 0, Color.Blue,
-                                    StringAlignment.Center, StringAlignment.Far);
+                                DrawTextAt(gr, last_year.ToString(), i, 0, Color.Blue, StringAlignment.Center, StringAlignment.Far);
                             }
                         }
                     }
@@ -907,21 +898,15 @@ namespace vcs_ReadWrite_CSV1
 
         private void DrawGraph2()
         {
-            this.Cursor = Cursors.WaitCursor;
-
             // Graph it.
             DrawGraph2(Prices);
-
-            this.Cursor = Cursors.Default;
         }
 
         // Draw the graph.
         private void DrawGraph2(List<PriceData> price_data)
         {
             // Make the bitmap.
-            Bitmap bm = new Bitmap(
-                pictureBox1.ClientSize.Width,
-                pictureBox1.ClientSize.Height);
+            Bitmap bm = new Bitmap(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height);
             using (Graphics gr = Graphics.FromImage(bm))
             {
                 gr.Clear(Color.White);
@@ -934,7 +919,10 @@ namespace vcs_ReadWrite_CSV1
                 {
                     var test_query = from PointF pt in Investments[i] select pt.Y;
                     float test_max = test_query.Max() + 500;
-                    if (max_price < test_max) max_price = test_max;
+                    if (max_price < test_max)
+                    {
+                        max_price = test_max;
+                    }
                 }
 
 
@@ -942,10 +930,7 @@ namespace vcs_ReadWrite_CSV1
                 float scale_x = pictureBox1.ClientSize.Width / (float)price_data.Count;
                 float scale_y = -pictureBox1.ClientSize.Height / max_price;
                 gr.ScaleTransform(scale_x, scale_y);
-                gr.TranslateTransform(
-                    0,
-                    pictureBox1.ClientSize.Height,
-                    System.Drawing.Drawing2D.MatrixOrder.Append);
+                gr.TranslateTransform(0, pictureBox1.ClientSize.Height, System.Drawing.Drawing2D.MatrixOrder.Append);
 
                 using (Pen thin_pen = new Pen(Color.Gray, 0))
                 {
@@ -957,8 +942,9 @@ namespace vcs_ReadWrite_CSV1
 
                         // Draw the value.
                         if (y > 0)
-                            DrawTextAt(gr, y.ToString("C"), 10, y, Color.Blue,
-                                StringAlignment.Near, StringAlignment.Far);
+                        {
+                            DrawTextAt(gr, y.ToString("C"), 10, y, Color.Blue, StringAlignment.Near, StringAlignment.Far);
+                        }
                     }
 
                     // Draw the vertical grid lines.
@@ -978,8 +964,7 @@ namespace vcs_ReadWrite_CSV1
                                 gr.DrawLine(thin_pen, i, 0, i, 750);
 
                                 // Draw the year number.
-                                DrawTextAt(gr, last_year.ToString(), i, 0, Color.Blue,
-                                    StringAlignment.Center, StringAlignment.Far);
+                                DrawTextAt(gr, last_year.ToString(), i, 0, Color.Blue, StringAlignment.Center, StringAlignment.Far);
                             }
                         }
                     }
@@ -1010,14 +995,10 @@ namespace vcs_ReadWrite_CSV1
                         gr.DrawLines(thin_pen, Investments[i]);
 
                         // Draw the investment's name and return.
-                        DrawTextAt(gr, InvestmentNames[i], 500,
-                            label_y, InvestmentColors[i],
-                            StringAlignment.Near, StringAlignment.Far);
+                        DrawTextAt(gr, InvestmentNames[i], 500, label_y, InvestmentColors[i], StringAlignment.Near, StringAlignment.Far);
                         float end_balance = Investments[i][num_periods - 1].Y;
                         float pct = 100 * (end_balance - InitialInvestment) / InitialInvestment;
-                        DrawTextAt(gr, pct.ToString("0.00") + "%", 1700,
-                            label_y, InvestmentColors[i],
-                            StringAlignment.Near, StringAlignment.Far);
+                        DrawTextAt(gr, pct.ToString("0.00") + "%", 1700, label_y, InvestmentColors[i], StringAlignment.Near, StringAlignment.Far);
                         label_y -= 1000;
                     }
                 }
@@ -1445,7 +1426,6 @@ namespace vcs_ReadWrite_CSV1
     {
         private ArrayList rowAL;        //行鏈表,CSV文件的每一行就是一個鏈
         private string fileName;       //文件名
-
         private Encoding encoding;       //編碼
 
         public CsvStreamReader()
@@ -1536,12 +1516,9 @@ namespace vcs_ReadWrite_CSV1
             }
         }
 
-
         /// <summary>
         /// 獲取某行某列的數據
-
         /// row:行,row = 1代表第一行
-
         /// col:列,col = 1代表第一列  
         /// </summary>
         public string this[int row, int col]
@@ -1565,14 +1542,10 @@ namespace vcs_ReadWrite_CSV1
             }
         }
 
-
         /// <summary>
         /// 根據最小行，最大行，最小列，最大列，來生成一個DataTable類型的數據
-
         /// 行等於1代表第一行
-
         /// 列等於1代表第一列
-
         /// maxrow: -1代表最大行
         /// maxcol: -1代表最大列
         /// </summary>
@@ -1630,10 +1603,8 @@ namespace vcs_ReadWrite_CSV1
             }
         }
 
-
         /// <summary>
         /// 檢查行數是否是有效的
-
         /// </summary>
         /// <param name="col"></param>  
         private void CheckRowValid(int row)
@@ -1650,7 +1621,6 @@ namespace vcs_ReadWrite_CSV1
 
         /// <summary>
         /// 檢查最大行數是否是有效的
-
         /// </summary>
         /// <param name="col"></param>  
         private void CheckMaxRowValid(int maxRow)
@@ -1667,7 +1637,6 @@ namespace vcs_ReadWrite_CSV1
 
         /// <summary>
         /// 檢查列數是否是有效的
-
         /// </summary>
         /// <param name="col"></param>  
         private void CheckColValid(int col)
@@ -1684,7 +1653,6 @@ namespace vcs_ReadWrite_CSV1
 
         /// <summary>
         /// 檢查檢查最大列數是否是有效的
-
         /// </summary>
         /// <param name="col"></param>  
         private void CheckMaxColValid(int maxCol)
@@ -1723,9 +1691,8 @@ namespace vcs_ReadWrite_CSV1
             }
 
             StreamReader sr = new StreamReader(this.fileName, this.encoding);
-            string csvDataLine;
+            string csvDataLine = "";
 
-            csvDataLine = "";
             while (true)
             {
                 string fileDataLine;
@@ -1775,10 +1742,9 @@ namespace vcs_ReadWrite_CSV1
         /// <returns>為奇數時，返回為真；否則返回為假</returns>
         private bool IfOddQuota(string dataLine)
         {
-            int quotaCount;
-            bool oddQuota;
+            int quotaCount = 0;
+            bool oddQuota = false;
 
-            quotaCount = 0;
             for (int i = 0; i < dataLine.Length; i++)
             {
                 if (dataLine[i] == '\"')
@@ -1787,7 +1753,6 @@ namespace vcs_ReadWrite_CSV1
                 }
             }
 
-            oddQuota = false;
             if (quotaCount % 2 == 1)
             {
                 oddQuota = true;
@@ -1798,16 +1763,14 @@ namespace vcs_ReadWrite_CSV1
 
         /// <summary>
         /// 判斷是否以奇數個引號開始
-
         /// </summary>
         /// <param name="dataCell"></param>
         /// <returns></returns>
         private bool IfOddStartQuota(string dataCell)
         {
-            int quotaCount;
-            bool oddQuota;
+            int quotaCount = 0;
+            bool oddQuota = false;
 
-            quotaCount = 0;
             for (int i = 0; i < dataCell.Length; i++)
             {
                 if (dataCell[i] == '\"')
@@ -1820,7 +1783,6 @@ namespace vcs_ReadWrite_CSV1
                 }
             }
 
-            oddQuota = false;
             if (quotaCount % 2 == 1)
             {
                 oddQuota = true;
@@ -1836,10 +1798,9 @@ namespace vcs_ReadWrite_CSV1
         /// <returns></returns>
         private bool IfOddEndQuota(string dataCell)
         {
-            int quotaCount;
-            bool oddQuota;
+            int quotaCount = 0;
+            bool oddQuota = false;
 
-            quotaCount = 0;
             for (int i = dataCell.Length - 1; i >= 0; i--)
             {
                 if (dataCell[i] == '\"')
@@ -1852,7 +1813,6 @@ namespace vcs_ReadWrite_CSV1
                 }
             }
 
-            oddQuota = false;
             if (quotaCount % 2 == 1)
             {
                 oddQuota = true;
@@ -1874,12 +1834,9 @@ namespace vcs_ReadWrite_CSV1
 
             ArrayList colAL = new ArrayList();
             string[] dataArray = newDataLine.Split(',');
-            bool oddStartQuota;       //是否以奇數個引號開始
+            bool oddStartQuota = false;       //是否以奇數個引號開始
+            string cellData = "";
 
-            string cellData;
-
-            oddStartQuota = false;
-            cellData = "";
             for (int i = 0; i < dataArray.Length; i++)
             {
                 if (oddStartQuota)

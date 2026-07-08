@@ -118,7 +118,6 @@ namespace vcs_Picasa
             {
                 //僅需平移
                 g.TranslateTransform(x_st, y_st);   //平移原點 再右移 再下移 然後再進行畫圖
-
             }
             else
             {

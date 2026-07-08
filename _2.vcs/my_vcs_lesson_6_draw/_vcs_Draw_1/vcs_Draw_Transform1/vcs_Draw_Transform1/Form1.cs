@@ -1366,9 +1366,13 @@ namespace vcs_Draw_Transform1
             pictureBox1.Image = bitmap1;
         }
 
+        //6060
+
         private void button19_Click(object sender, EventArgs e)
         {
         }
+
+        //6060
 
         float angle1 = 0;
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
@@ -1487,11 +1491,39 @@ namespace vcs_Draw_Transform1
     g.ScaleTransform(3.0f, 3);  // 縮放, 水平縮放, 垂直縮放  //x軸比例再放大, y軸比例再放大
 */
 
-
+//------------------------------------------------------------  # 60個
 /*
     g.ScaleTransform(100, 100, MatrixOrder.Append);
     g.RotateTransform(5, MatrixOrder.Append);
 */
 
 
+//------------------------------------------------------------  # 60個
+
+
+/*
+
+            畫布轉換矩陣的平移設定 (↑↓←→按鍵)
+
+        Bitmap bitmap1 = new Bitmap(Properties.Resources.Butterfly);
+        Point pos = new Point(); // 圖形的位置
+                // 向上
+                pos = new Point(pos.X, pos.Y - 10);
+                // 向下
+                pos = new Point(pos.X, pos.Y + 10);
+                // 向左
+                pos = new Point(pos.X - 10, pos.Y);
+                // 向右
+                pos = new Point(pos.X + 10, pos.Y);
+
+        // 表單重畫事件
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.TranslateTransform(pos.X, pos.Y);
+            e.Graphics.DrawImage(bitmap1, 0, 0); // 繪出圖形
+            //e.Graphics.DrawImage(bitmap1, pos); // 繪出圖形
+        }
+
+
+*/
 

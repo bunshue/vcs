@@ -132,9 +132,9 @@ namespace vcs_Label
                 string_format.LineAlignment = StringAlignment.Center;
 
                 e.Graphics.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-                DrawSidewaysText(e.Graphics, Font, Brushes.Black, lblRotated1.Bounds, string_format, "Row 1");
-                DrawSidewaysText(e.Graphics, Font, Brushes.Black, lblRotated2.Bounds, string_format, "Row 2");
-                DrawSidewaysText(e.Graphics, Font, Brushes.Black, lblRotated3.Bounds, string_format, "Row 3");
+                DrawSidewaysText(e.Graphics, Font, Brushes.Black, lblRotated1.Bounds, string_format, "第一列");
+                DrawSidewaysText(e.Graphics, Font, Brushes.Black, lblRotated2.Bounds, string_format, "第二列");
+                DrawSidewaysText(e.Graphics, Font, Brushes.Black, lblRotated3.Bounds, string_format, "第三列");
             }
         }
 
@@ -154,6 +154,8 @@ namespace vcs_Label
             // Draw the text.
             gr.DrawString(txt, font, brush, rotated_bounds, string_format);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -200,10 +202,14 @@ namespace vcs_Label
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void timer2_Tick(object sender, EventArgs e)
         {
             lb_moving2.Text = lb_moving2.Text.Substring(1) + lb_moving2.Text.Substring(0, 1);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -313,6 +319,8 @@ namespace vcs_Label
                 cnt_use_top_left = 0;
             }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void label_move_MouseEnter(object sender, EventArgs e)
         {

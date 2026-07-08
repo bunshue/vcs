@@ -784,24 +784,6 @@ namespace vcs_Draw_Bitmap
 
         private void button14_Click(object sender, EventArgs e)
         {
-            Bitmap bmp = new Bitmap(@"D:/_git/vcs/_1.data/______test_files1/pic_256X10.bmp");
-
-            pictureBox1.Image = bmp;
-
-            int W = bmp.Width;
-            int H = bmp.Height;
-
-            BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
-
-            int w = bmpData.Width;
-            int h = bmpData.Height;
-
-            //拷貝出來
-            byte[] data = new byte[bmpData.Width * bmpData.Height * 3];
-            //Marshal.Copy(bmpData.Scan0, data, 0, data.Length); //複製記憶體區塊
-
-            bmp.UnlockBits(bmpData);
-
         }
 
         private void button15_Click(object sender, EventArgs e)

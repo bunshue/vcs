@@ -35,7 +35,6 @@
 
 //------------------------------------------------------------  # 60個
 
-
 同一個控件，不能重複加入到不同容器
 但是可以移動加入到不同容器
 
@@ -52,6 +51,8 @@ this.panel_plc.Controls.Add(richTextBox1);
 
 //------------------------------------------------------------  # 60個
 
+drawdraw
+
 填上透明色
 g.Clear(Color.Transparent);
 
@@ -60,13 +61,6 @@ g.Clear(Color.Transparent);
             //取得副檔名
                         FileInfo file_info = new FileInfo(filename);
                         switch (file_info.Extension)
-
-
-/*
-            Random rr = new Random();
-            Brush db = new SolidBrush(Color.FromArgb(rr.Next(256), rr.Next(256), rr.Next(256)));
-                //Color.FromArgb() 可以設定3原色，這裡3原色的代碼是亂數產生的
-*/
 
 //------------------------------------------------------------  # 60個
 
@@ -136,76 +130,6 @@ Cindy
 C:\Program Files\Git\bin\git.exe pull --progress -v --no-rebase "origin"
 
 //------------------------------------------------------------  # 60個
-
-        // Return a random color.
-        private Random rand = new Random();
-        private Color[] color =
-        {
-            Color.Red,
-            Color.Green,
-            Color.Blue,
-            Color.Lime,
-            Color.Orange,
-            Color.Fuchsia,
-            Color.Yellow,
-            Color.LightGreen,
-            Color.LightBlue,
-            Color.Cyan,
-        };
-
-        private Color RandomColor()
-        {
-            return color[rand.Next(0, color.Length)];
-        }
-
-//RandomColor()
-
-//------------------------------------------------------------  # 60個
-
-畫布轉換矩陣的平移設定 (↑↓←→按鍵)
-
-        Bitmap bitmap1 = new Bitmap(Properties.Resources.Butterfly);
-        Point pos = new Point(); // 圖形的位置
-                // 向上
-                pos = new Point(pos.X, pos.Y - 10);
-                // 向下
-                pos = new Point(pos.X, pos.Y + 10);
-                // 向左
-                pos = new Point(pos.X - 10, pos.Y);
-                // 向右
-                pos = new Point(pos.X + 10, pos.Y);
-
-        // 表單重畫事件
-        private void Form1_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.TranslateTransform(pos.X, pos.Y);
-            e.Graphics.DrawImage(bitmap1, 0, 0); // 繪出圖形
-            //e.Graphics.DrawImage(bitmap1, pos); // 繪出圖形
-        }
-
-//------------------------------------------------------------  # 60個
-
-各種 DrawImage
-            richTextBox1.Text += "第1項 PictureBox\n";
-            Rectangle rectDest = new Rectangle(0, 0, bitmap1.Width, bitmap1.Height);
-            Rectangle rectSrc = new Rectangle(0, 0, bitmap1.Width, bitmap1.Height);
-            e.Graphics.DrawImage(bitmap1, rectDest, rectSrc, GraphicsUnit.Pixel); // 呈現原圖
-
-            /*
-            richTextBox1.Text += "第2項 PictureBox\n";
-            Rectangle rectDest = new Rectangle(0, 0, bitmap1.Width, bitmap1.Height);
-            e.Graphics.DrawImage(bitmap1, rectDest); // 呈現原圖
-
-            richTextBox1.Text += "第3項 PictureBox\n";
-            Rectangle rectDest = new Rectangle(0, 0, bitmap1.Width * 2, bitmap1.Height / 2);
-            e.Graphics.DrawImage(bitmap1, rectDest); // 呈現原圖
-            */
-            richTextBox1.Text += "第4項 PictureBox\n";
-            Point dest = new Point(0, 0); // 目的地左上角座標
-            e.Graphics.DrawImage(bitmap1, dest); // 呈現原圖
-
-            richTextBox1.Text += "第5項 PictureBox\n";
-            e.Graphics.DrawImage(bitmap1, 0, 0); // 呈現原圖
 
 //------------------------------------------------------------  # 60個
 
@@ -667,29 +591,6 @@ printDocument_pascal
 
 //------------------------------------------------------------  # 60個
 
-加在三Form之間
-
-        //移動無邊框窗體 ST
-        private const int WM_NCHITTEST = 0x84;
-        private const int HTCLIENT = 0x1;
-        private const int HTCAPTION = 0x2;
-
-        protected override void WndProc(ref Message m)
-        {
-            switch (m.Msg)
-            {
-                case WM_NCHITTEST:
-                    base.WndProc(ref m);
-                    if ((int)m.Result == HTCLIENT)
-                        m.Result = (IntPtr)HTCAPTION;
-                    return;
-                    break;
-            }
-            base.WndProc(ref m);
-        }
-        //移動無邊框窗體 SP
-
-
             //變數以float, double,decimal為型別
             float a; double b; decimal c;
             a = 3.22222222222222222222222F;
@@ -800,13 +701,6 @@ C# 7.0 引入 具名 Tuple 語法
 
 //------------------------------------------------------------  # 60個
 
-箭頭的畫法
-
-            Pen p = new Pen(Color.Red, 0);
-            p.EndCap = LineCap.ArrowAnchor;
-
-//------------------------------------------------------------  # 60個
-
 /*
 記住目前的設定值，下次程式開啟時，可以拿來用。
 
@@ -843,10 +737,6 @@ https://c.biancheng.net/view/ply3egf.html
 
 //------------------------------------------------------------  # 60個
 
-this.DoubleBuffered = true;//避免闪烁
-
-//------------------------------------------------------------  # 60個
-
 單一圖片模式
 
             button1.Visible = false;
@@ -869,16 +759,6 @@ this.DoubleBuffered = true;//避免闪烁
             pictureBox1.Image = bitmap1; //顯示在 pictureBox1 圖片控制項中
             this.BackgroundImage = bitmap1;//顯示在 表單中
         
-//------------------------------------------------------------  # 60個
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "pictureBox1 ";
-
-            PictureBox pic = sender as PictureBox;
-            richTextBox1.Text += pic.Name + " ";
-        }
-
 //------------------------------------------------------------  # 60個
 
 splitContainer1
@@ -1075,58 +955,6 @@ do_grayscale1_pixel()
 函數包起來，這樣要做做1000次量測時間用
 
 //------------------------------------------------------------  # 60個
-
-        public class EMAFilterRGB2
-        {
-            private Bitmap emaFrame; // [高度, 寬度, 3]
-            private bool initialized = false;
-            private readonly float alpha;
-
-            public EMAFilterRGB2(float alpha)
-            {
-                if (alpha < 0 || alpha > 1)
-                    throw new ArgumentException("Alpha 必須介於 0 和 1 之間。");
-                this.alpha = alpha;
-            }
-
-            public Bitmap Apply(Bitmap currentFrame)
-            {
-                int height = currentFrame.Height;
-                int width = currentFrame.Width;
-
-                if (!initialized)
-                {
-                    emaFrame = (Bitmap)currentFrame.Clone();
-                }
-
-                Bitmap output = new Bitmap(width, height);
-                Color pt1;
-                Color pt2;
-                Color pt3;
-
-                int total_R = 0;
-                int total_G = 0;
-                int total_B = 0;
-
-                for (int y = 0; y < height; y++)
-                {
-                    for (int x = 0; x < width; x++)
-                    {
-                        pt1 = currentFrame.GetPixel(x, y);
-                        pt2 = emaFrame.GetPixel(x, y);
-                        total_R = (int)(alpha * pt1.R + (1 - alpha) * pt2.R);
-                        total_G = (int)(alpha * pt1.G + (1 - alpha) * pt2.G);
-                        total_B = (int)(alpha * pt1.B + (1 - alpha) * pt2.B);
-                        
-                        pt3 = Color.FromArgb(total_R, total_G, total_B);
-
-                        emaFrame.SetPixel(x, y, pt3);
-                    }
-                }
-
-                return output;
-            }
-        }
 
 PixelFormat.Format8bppIndexed:
 每像素使用 1 个字节（8 位）表示颜色，通常用于索引颜色表的灰度或调色板图像。
@@ -1978,13 +1806,6 @@ string thumb = fpath + fn.Replace(CodecExtension, ".jpg");
 //------------------------------------------------------------  # 60個
 注意：Image用后请手动释放pictureBox.Image.Dispose();否则图片大些的话，转转下内存就猛升了（一点经验，敬请笑纳）。
 
-
-Font設定字型及樣式
-                new Font(this.Font, FontStyle.Italic),
-                
-            //Graphics.DrawImage (Image, Rectangle, Rectangle, GraphicsUnit)
-            //四個參數分別是     來源影像 目標區域  來源區域      單位
-
             //表單預設參數
             richTextBox1.Text += "AAA = " + SystemInformation.FrameBorderSize.Width.ToString() + "\n";  //8
             richTextBox1.Text += "BBB = " + SystemInformation.FrameBorderSize.Height.ToString() + "\n"; //8
@@ -2227,7 +2048,6 @@ PictureBox 好像不能旋轉方向～～～～～～～～～～～～
 參考
 C:\_git\vcs\_2.vcs\my_vcs_lesson_5\vcs_StackOrder
 D:\_git\vcs\_2.vcs\my_vcs_lesson_5\vcs_StackOrder
-
 
 讀一個資料夾內的圖片檔
 用controls add 造出幾個 picturebox 顯示這些圖 zoom模式
@@ -2609,18 +2429,6 @@ File: Camera.cs Project: alienwow/CSharpProjects
                 videoWriter.WriteVideoFrame(image);
             }
         }
-
-//------------------------------------------------------------  # 60個
-
-Image ImgOrnek = (Image.FromFile(pic_filename) as Bitmap).Clone() as Image;
-int width = ImgOrnek.Width;
-int height = ImgOrnek.Height;
-ImgOrnek.Dispose();
-VideoFileWriter writer = new VideoFileWriter();
-writer.Open(filename, width, height, this.Videofps, VideoCodec.MPEG4);
-
-                image = (Bitmap)Image.FromFile("C:\\Users\\Halil\\Desktop\\newframes\\image" + i + ".jpg");
-                writer.WriteVideoFrame(image);
 
 //------------------------------------------------------------  # 60個
 
@@ -3255,7 +3063,6 @@ fullscreenfullscreen
 	    }
 	    this.Bounds = new Rectangle(0, 0, width, height);
 	    this.screen = screen;
-	    this.DoubleBuffered = true;
     }
 
     protected override void OnMouseDown(MouseEventArgs e)
@@ -5617,66 +5424,6 @@ this.Refresh() ; //執行 Form1_Paint()
 
 //------------------------------------------------------------  # 60個
 
-繪製圖形物件的方法
-
-Graphics類別GDI+提供下列方法來繪製上述清單中的項目： 
-
-DrawLines
-DrawCurve
-DrawClosedCurve
-
-//------------------------------------------------------------  # 60個
-
-建立畫布
-
-Graphics 畫布物件變數;
-畫布物件變數 = 控制項名稱.CreateGraphics();
-
-例如：在表單上建立畫布g：
-Graphics g;
-g = this.CreateGraphics();
-
-
-例如：在圖片方塊pictureBox1上建立畫布g：
-Graphics g;
-g = pictureBox1.CreateGraphics();
-
-畫筆Pen物件
-
-Pen 畫筆 = new Pen(畫筆顏色, 畫筆粗細);
-Pen p = new Pen(Color.Blue, 5);
-p.Color = Color.Red;
-p.Width = 2;
-
-Pen 畫筆 = new Pen(畫筆顏色, 畫筆粗細);
-
-設定顏色的方法	呼叫靜態函式：Color.FromArgb()
-
-ex:
-Color red= Color.FromArgb(255,0,0)
-this.BackColor=Color.White;
-
-
-Pen只有一類
-Brush有四類
-
-Pen用於告訴Graphics如何繪製線條
-Brush用於填充區域
-
-Point的用法
-Point b=new Point(20,10);
-Point a=new Point();
-a.X=20;
-a.Y=10;
-
-
-繪製虛線，可設定Pen的DashStyle屬性為Dash,Dot,DashDot或者DashDotDot等
-改變直線端點的形狀，可以設定StartCap和EndCap屬性
-
-blackPen.StartCap=LineCap.ArrowAnchor;
-
-//------------------------------------------------------------  # 60個
-
 vcs
 Form2的元件的Modifiers要改成Internal, 預設為private
 
@@ -7018,19 +6765,6 @@ MessageBox.Show("輸入的ASCII碼為" + Convert.ToByte(e.KeyChar).ToString());
             // 以Form類別的ShowDialog方法顯示視窗表單
             Form2.ShowDialog();
 
-string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-//讀檔 至 Image 影像
-Image image = Image.FromFile(filename); // 產生一個Image物件
-//旋轉
-image.RotateFlip(RotateFlipType.Rotate90FlipNone); // 影像旋轉90度
-//畫出來
-g.DrawImage(image, 10, 50, image.Width, image.Height);
-//              貼上的位置      貼上的大小 放大縮小用
-
-//製作縮圖
-int w = 100;	//預縮放的圖的寬度
-Image imgThumbnail = image1.GetThumbnailImage(w, (int)(w * image1.Height / image1.Width), null, (IntPtr)0);
-
 //------------------------------------------------------------  # 60個
 
 統一改名
@@ -7242,50 +6976,7 @@ Transform需要做到
             pictureBox1.Image = new Bitmap(filename);
         }
 
-        // Load the bitmap without locking it.
-        private void btnLoadUnlocked_Click(object sender, EventArgs e)
-        {
-            if (pictureBox1.Image != null)
-                pictureBox1.Image.Dispose();
-            pictureBox1.Image = LoadBitmapUnlocked(filename);
-        }
-
-        // Load a bitmap without locking it.
-        private Bitmap LoadBitmapUnlocked(string filename)
-        {
-            using (Bitmap bm = new Bitmap(filename))
-            {
-                return new Bitmap(bm);
-            }
-        }
-
-        public Form1()
-        {
-            InitializeComponent(); 
-            this.DoubleBuffered = true;//避免闪烁  方法一
-        }
-          
-        private void Form1_Load(object sender, EventArgs e)
-        {
-        }
-
-編碼 = 明碼.Encrypt(密碼).ToHex();
-
 //------------------------------------------------
-
-不鎖定檔案地讀取一檔
-
-                // Load the file
-                pictureBox1.Image = LoadBitmapUnlocked(ofdImage.FileName);
-
-        // Load a bitmap without locking it.
-        private Bitmap LoadBitmapUnlocked(string filename)
-        {
-            using (Bitmap bm = new Bitmap(filename))
-            {
-                return new Bitmap(bm);
-            }
-        }
 
         // The selected points that determine the conic section.
         private List<PointF> Points = new List<PointF>();
@@ -7592,7 +7283,6 @@ Form的設定
         private void Form1_Load(object sender, EventArgs e)
         {
             this.ResizeRedraw = true;
-            this.DoubleBuffered = true;
             
 //------------------------------------------------------------  # 60個
 
@@ -7625,6 +7315,15 @@ Form的設定
 //------------------------------------------------------------  # 60個
 
         /*  多個pbx共用click事件，區分是哪個pbx
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "pictureBox1 ";
+
+            PictureBox pic = sender as PictureBox;
+            richTextBox1.Text += pic.Name + " ";
+        }
+
+        /*  多個pbx共用click事件，區分是哪個pbx
         // Display the name of the clicked PictureBox.
         private void PictureBox_Click(object sender, EventArgs e)
         {
@@ -7633,6 +7332,7 @@ Form的設定
         }
         */
 
+6060
             for (int x = 0; x < mask_bm32.Width; x++)
             {
                 for (int y = 0; y < mask_bm32.Height; y++)
@@ -7711,14 +7411,6 @@ B.我們對代碼進行編輯：
             this.UpdateStyles();
             //以上兩句是為了設置控件樣式為雙緩沖，這可以有效減少圖片閃爍的問題，關於這個大家可以自己去搜索下
         }
-
-//------------------------------------------------------------  # 60個
-
-Pen的屬性主要有: Color(顏色),DashCap(短劃線終點形狀),DashStyle(虛線樣式),EndCap(線尾形狀), StartCap(線頭形狀),Width(粗細)等.
-
-void ctx.drawImage(image, dx, dy);
-void ctx.drawImage(image, dx, dy, dWidth, dHeight);
-void ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
 
 //------------------------------------------------------------  # 60個
 
@@ -9431,8 +9123,6 @@ Application.Run(new Form1());
 　}
 　　最後運行該程序，把screen_saver.exe改為screen_saver.scr，拷入Windows系統目錄中，這樣就可以運行該屏幕保護程序。
 
-
-
 bitmap1.Save(filename, ImageFormat.Bmp);
 bitmap1.Save(filename, ImageFormat.Jpeg);
 bitmap1.Save(filename, ImageFormat.Png);
@@ -9444,14 +9134,12 @@ bitmap1.Save(filename, ImageFormat.Icon);
 bitmap1.Save(filename, ImageFormat.Wmf);
 bitmap1.Save(filename);
 
-
 /*
 //创建目录
 string dir = Path.GetDirectoryName(fileSaveUrl);
 if (!Directory.Exists(dir))
     Directory.CreateDirectory(dir);
 */
-
 
 //------------------------------------------------------------  # 60個
 
@@ -9627,24 +9315,7 @@ Beep
 https://www.zhangshengrong.com/p/yOXD5ejR1B/
         
 //------------------------------------------------------------  # 60個
-
-
-
-            /*
-            //result_str += "flag_function = " + flag_function.ToString() + "\n";
-            Properties.Settings.Default.search_path = "";
-            Properties.Settings.Default.Save();
-            */
-//------------------------------------------------------------  # 60個
 /*
-        private void bt_clear_data_Click(object sender, EventArgs e)
-        {
-            fileinfos.Clear();
-            listView1.Clear();
-            richTextBox1.Clear();
-            richTextBox2.Clear();
-            flag_search_vcs_pattern = 0;
-        }
 
         private void bt_copy_data_Click(object sender, EventArgs e)
         {
@@ -9784,6 +9455,55 @@ array
             richTextBox1.Text += "ROW = " + pbox.GetLength(1).ToString() + "\n";    //2
 
 //------------------------------------------------------------  # 60個
+//------------------------------------------------------------  # 60個
+
+this.DoubleBuffered = true;//避免闪烁
+this.DoubleBuffered = true;//避免闪烁
+this.DoubleBuffered = true;
+this.DoubleBuffered = true;
+
+//------------------------------------------------------------  # 60個
+
+
+編碼 = 明碼.Encrypt(密碼).ToHex();
+
+
+
+//------------------------------------------------------------  # 60個
+
+            Random rr = new Random();
+            Brush db = new SolidBrush(Color.FromArgb(rr.Next(256), rr.Next(256), rr.Next(256)));
+                //Color.FromArgb() 可以設定3原色，這裡3原色的代碼是亂數產生的
+
+//------------------------------------------------------------  # 60個
+
+        // Return a random color.
+        private Random rand = new Random();
+        private Color[] color =
+        {
+            Color.Red,
+            Color.Green,
+            Color.Blue,
+            Color.Lime,
+            Color.Orange,
+            Color.Fuchsia,
+            Color.Yellow,
+            Color.LightGreen,
+            Color.LightBlue,
+            Color.Cyan,
+        };
+
+        private Color RandomColor()
+        {
+            return color[rand.Next(0, color.Length)];
+        }
+
+//RandomColor()
+
+//------------------------------------------------------------  # 60個
+
+
+
 //------------------------------------------------------------  # 60個
 
 

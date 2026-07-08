@@ -104,10 +104,14 @@ public class RemoteControl : System.MarshalByRefObject
         mouseinput.mi.time = 0;
         mouseinput.mi.dwExtraInfo = 0;
 
-        if (left)  /* 滑鼠左鍵 */
+        if (left)  // 滑鼠左鍵
+        {
             mouseinput.mi.dwFlags = mouse_press ? MOUSEEVENTF_LEFTDOWN : MOUSEEVENTF_LEFTUP;
-        else       /* 滑鼠右鍵 */
+        }
+        else  // 滑鼠右鍵
+        {
             mouseinput.mi.dwFlags = mouse_press ? MOUSEEVENTF_RIGHTDOWN : MOUSEEVENTF_RIGHTUP;
+        }
 
         // 定義傳入SendInput之結構數目
         uint nInputs = 1;
