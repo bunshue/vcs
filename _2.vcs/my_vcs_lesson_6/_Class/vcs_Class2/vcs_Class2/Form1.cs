@@ -196,8 +196,8 @@ namespace vcs_Class2
 
         private void bt_class04_Click(object sender, EventArgs e)
         {
-            FileStream fs = new FileStream("../../SchoolMemberDataFile.dat", FileMode.Open);
-
+            string filename = @"../../SchoolMemberDataFile.dat";
+            FileStream fs = new FileStream(filename, FileMode.Open);
             BinaryReader br = new BinaryReader(fs);
 
             int i = Person.counter(); //以附加的方式匯入

@@ -1090,9 +1090,9 @@ namespace vcs_Cryptography1
             return GetHash(sourceString, sha512);
         }
 
-        public static string GetFileBase64String(string filePath)
+        public static string GetFileBase64String(string filename)
         {
-            using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+            using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
                 using (BinaryReader reader = new BinaryReader(fs))
                 {
@@ -1203,9 +1203,9 @@ namespace vcs_Cryptography1
 
     public static class ValidHelper
     {
-        public static string GetFileHash(string filePath, HashAlgorithm algorithm)
+        public static string GetFileHash(string filename, HashAlgorithm algorithm)
         {
-            FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+            FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read);
             byte[] md5Hash = algorithm.ComputeHash(fs);
             fs.Close();
             algorithm.Clear();
@@ -1217,34 +1217,34 @@ namespace vcs_Cryptography1
             return sb.ToString();
         }
 
-        public static string GetFileMD5(string filePath)
+        public static string GetFileMD5(string filename)
         {
             MD5 md5 = MD5.Create();  // 創建MD5對象
-            return GetFileHash(filePath, md5);
+            return GetFileHash(filename, md5);
         }
 
-        public static string GetFileSHA1(string filePath)
+        public static string GetFileSHA1(string filename)
         {
             SHA1 sha1 = new SHA1CryptoServiceProvider();
-            return GetFileHash(filePath, sha1);
+            return GetFileHash(filename, sha1);
         }
 
-        public static string GetFileSHA256(string filePath)
+        public static string GetFileSHA256(string filename)
         {
             SHA256 sha256 = SHA256.Create();  // 創建SHA256對象
-            return GetFileHash(filePath, sha256);
+            return GetFileHash(filename, sha256);
         }
 
-        public static string GetFileSHA384(string filePath)
+        public static string GetFileSHA384(string filename)
         {
             SHA384 sha384 = SHA384.Create();  // 創建SHA384對象
-            return GetFileHash(filePath, sha384);
+            return GetFileHash(filename, sha384);
         }
 
-        public static string GetFileSHA512(string filePath)
+        public static string GetFileSHA512(string filename)
         {
             SHA512 sha512 = SHA512.Create();  // 創建SHA512對象
-            return GetFileHash(filePath, sha512);
+            return GetFileHash(filename, sha512);
         }
     }
 }
@@ -1585,5 +1585,3 @@ byte[] input = Encoding.UTF8.GetBytes(str);  // 字串轉拜列, 中文字要先
 //byte[] input = encode.GetBytes(str); //字串轉拜列
 
 //
-
-

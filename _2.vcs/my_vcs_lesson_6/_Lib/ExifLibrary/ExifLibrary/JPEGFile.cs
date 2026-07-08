@@ -191,17 +191,21 @@ namespace ExifLibrary
                             int nextbyte = 0;
                             do
                             {
-                                nextbyte = stream.ReadByte();
+                                nextbyte = stream.ReadByte();  // 讀一拜
                                 if (nextbyte == -1)
+                                {
                                     throw new NotValidJPEGFileException();
+                                }
                             } while ((byte)nextbyte != 0xFF);
 
                             // Skip filler bytes (0xFF)
                             do
                             {
-                                nextbyte = stream.ReadByte();
+                                nextbyte = stream.ReadByte();  // 讀一拜
                                 if (nextbyte == -1)
+                                {
                                     throw new NotValidJPEGFileException();
+                                }
                             } while ((byte)nextbyte == 0xFF);
 
                             // Looks like a section marker. The next byte must not be 0x00.

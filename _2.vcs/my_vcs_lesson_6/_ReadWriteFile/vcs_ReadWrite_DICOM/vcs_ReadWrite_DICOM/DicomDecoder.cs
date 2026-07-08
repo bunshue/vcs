@@ -29,32 +29,32 @@ namespace vcs_ReadWrite_DICOM
 
     class DicomDecoder
     {
-        const uint PIXEL_REPRESENTATION       = 0x00280103;
-        const uint TRANSFER_SYNTAX_UID        = 0x00020010;
-        const uint MODALITY                   = 0x00080060;
-        const uint SLICE_THICKNESS            = 0x00180050;
-        const uint SLICE_SPACING              = 0x00180088;
-        const uint SAMPLES_PER_PIXEL          = 0x00280002;
+        const uint PIXEL_REPRESENTATION = 0x00280103;
+        const uint TRANSFER_SYNTAX_UID = 0x00020010;
+        const uint MODALITY = 0x00080060;
+        const uint SLICE_THICKNESS = 0x00180050;
+        const uint SLICE_SPACING = 0x00180088;
+        const uint SAMPLES_PER_PIXEL = 0x00280002;
         const uint PHOTOMETRIC_INTERPRETATION = 0x00280004;
-        const uint PLANAR_CONFIGURATION       = 0x00280006;
-        const uint NUMBER_OF_FRAMES           = 0x00280008;
-        const uint ROWS                       = 0x00280010;
-        const uint COLUMNS                    = 0x00280011;
-        const uint PIXEL_SPACING              = 0x00280030;
-        const uint BITS_ALLOCATED             = 0x00280100;
-        const uint WINDOW_CENTER              = 0x00281050;
-        const uint WINDOW_WIDTH               = 0x00281051;
-        const uint RESCALE_INTERCEPT          = 0x00281052;
-        const uint RESCALE_SLOPE              = 0x00281053;
-        const uint RED_PALETTE                = 0x00281201;
-        const uint GREEN_PALETTE              = 0x00281202;
-        const uint BLUE_PALETTE               = 0x00281203;
-        const uint ICON_IMAGE_SEQUENCE        = 0x00880200;
-        const uint PIXEL_DATA                 = 0x7FE00010;
+        const uint PLANAR_CONFIGURATION = 0x00280006;
+        const uint NUMBER_OF_FRAMES = 0x00280008;
+        const uint ROWS = 0x00280010;
+        const uint COLUMNS = 0x00280011;
+        const uint PIXEL_SPACING = 0x00280030;
+        const uint BITS_ALLOCATED = 0x00280100;
+        const uint WINDOW_CENTER = 0x00281050;
+        const uint WINDOW_WIDTH = 0x00281051;
+        const uint RESCALE_INTERCEPT = 0x00281052;
+        const uint RESCALE_SLOPE = 0x00281053;
+        const uint RED_PALETTE = 0x00281201;
+        const uint GREEN_PALETTE = 0x00281202;
+        const uint BLUE_PALETTE = 0x00281203;
+        const uint ICON_IMAGE_SEQUENCE = 0x00880200;
+        const uint PIXEL_DATA = 0x7FE00010;
 
-        const string ITEM                     = "FFFEE000";
-        const string ITEM_DELIMITATION        = "FFFEE00D";
-        const string SEQUENCE_DELIMITATION    = "FFFEE0DD";
+        const string ITEM = "FFFEE000";
+        const string ITEM_DELIMITATION = "FFFEE00D";
+        const string SEQUENCE_DELIMITATION = "FFFEE0DD";
 
         const int
             AE = 0x4145,
@@ -87,7 +87,7 @@ namespace vcs_ReadWrite_DICOM
             RT = 0x5254;
         const int ID_OFFSET = 128;  //location of "DICM"
         const int IMPLICIT_VR = 0x2D2D; // '--' 
-        const String DICM   = "DICM";
+        const String DICM = "DICM";
 
         public int bitsAllocated;
         public int width;
@@ -190,7 +190,7 @@ namespace vcs_ReadWrite_DICOM
                             typeofDicomFile = TypeOfDicomFile.DicomOldTypeFile;
                     }
                 }
-                catch 
+                catch
                 {
                     // Nothing here
                 }
@@ -229,7 +229,7 @@ namespace vcs_ReadWrite_DICOM
         byte GetByte() // Changed return type to byte
         {
             file.BaseStream.Position = location;
-            byte b = file.ReadByte();
+            byte b = file.ReadByte();  // 讀一拜
             ++location;
             return b;
         }
@@ -369,7 +369,7 @@ namespace vcs_ReadWrite_DICOM
                         return ((b3 << 24) + (b2 << 16) + (b1 << 8) + b0);
                     else
                         return ((b0 << 24) + (b1 << 16) + (b2 << 8) + b3);
-                    // break; // Not necessary
+                // break; // Not necessary
                 case AE:
                 case AS:
                 case AT:
@@ -418,7 +418,7 @@ namespace vcs_ReadWrite_DICOM
             }
             int elementWord = GetShort();
             int tag = groupWord << 16 | elementWord;
-            
+
             elementLength = GetLength();
 
             // Hack to read some GE files
@@ -445,7 +445,7 @@ namespace vcs_ReadWrite_DICOM
             }
 
             string id = null;
-            
+
             if (dic.dict.ContainsKey(str))
             {
                 id = dic.dict[str];
@@ -608,10 +608,10 @@ namespace vcs_ReadWrite_DICOM
                 int tag = GetNextTag();
                 if ((location & 1) != 0)
                     oddLocations = true;
-                
+
                 if (inSequence)
-                {   
-                    AddInfo(tag, null);                     
+                {
+                    AddInfo(tag, null);
                     continue;
                 }
 
@@ -674,7 +674,7 @@ namespace vcs_ReadWrite_DICOM
                     case (int)(SLICE_THICKNESS):
                     case (int)(SLICE_SPACING):
                         String spacing = GetString(elementLength);
-                        if( spacing != "") 
+                        if (spacing != "")
                             pixelDepth = Convert.ToDouble(spacing, new CultureInfo("en-US"));
                         else
                             spacing = "";
@@ -746,7 +746,7 @@ namespace vcs_ReadWrite_DICOM
 
         void ReadPixels()
         {
-            if (samplesPerPixel == 1 &&  bitsAllocated == 8)
+            if (samplesPerPixel == 1 && bitsAllocated == 8)
             {
                 if (pixels8 != null)
                     pixels8.Clear();
@@ -769,7 +769,7 @@ namespace vcs_ReadWrite_DICOM
                 }
             }
 
-            if (samplesPerPixel == 1 &&  bitsAllocated == 16)
+            if (samplesPerPixel == 1 && bitsAllocated == 16)
             {
                 if (pixels16 != null)
                     pixels16.Clear();
@@ -785,7 +785,7 @@ namespace vcs_ReadWrite_DICOM
                 file.Read(bufByte, 0, numPixels * 2);
                 ushort unsignedS;
                 int i, i1, pixVal;
-                byte b0, b1;               
+                byte b0, b1;
 
                 for (i = 0; i < numPixels; ++i)
                 {
@@ -800,7 +800,7 @@ namespace vcs_ReadWrite_DICOM
                             pixVal = max16 - pixVal;
                     }
                     else  // Pixel representation is 1, indicating a 2s complement image
-                    {                        
+                    {
                         signedData[0] = b0;
                         signedData[1] = b1;
                         short sVal = System.BitConverter.ToInt16(signedData, 0);
@@ -829,7 +829,7 @@ namespace vcs_ReadWrite_DICOM
 
                 pixels16Int.Clear();
             }
-            
+
             // 30 July 2010 - to account for Ultrasound images
             if (samplesPerPixel == 3 && bitsAllocated == 8)
             {
@@ -851,3 +851,16 @@ namespace vcs_ReadWrite_DICOM
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+

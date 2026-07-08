@@ -760,7 +760,7 @@ namespace vcs_ReadWrite_BIN1
                 // Read and verify the data.
                 for (i = 0; i < fileStream.Length; i++)
                 {
-                    data2[i] = (byte)fileStream.ReadByte();
+                    data2[i] = (byte)fileStream.ReadByte();  // 讀一拜
                 }
                 //打印資料
                 print_data(data2, data2.Length);
@@ -879,7 +879,7 @@ namespace vcs_ReadWrite_BIN1
                     do
                     {
                         //以位元組為單位讀取檔案內容，16進位方式顯示
-                        richTextBox1.Text += readBit.ReadByte().ToString() + " ";
+                        richTextBox1.Text += readBit.ReadByte().ToString() + " ";  // 讀一拜
                         count += 1;
                         //'** 換行
                         if (count == 10)
@@ -1340,5 +1340,15 @@ fs.Close();
                 br.Close();
                 fs.Close();
 
-*/
+6060
 
+
+Binary格式讀出一個檔案到拜列
+
+            FileStream fs = new FileStream(oldpath, FileMode.Open);
+            BinaryReader br = new BinaryReader(fs);
+            byte[] bytes = br.ReadBytes((int)fs.Length);
+            br.Close();
+            fs.Close();
+
+*/

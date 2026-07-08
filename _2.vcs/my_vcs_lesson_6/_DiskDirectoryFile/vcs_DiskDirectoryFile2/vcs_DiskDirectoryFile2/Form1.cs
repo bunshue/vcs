@@ -518,7 +518,7 @@ namespace vcs_DiskDirectoryFile2
                 if (mode == MODE1)
                 {
                     int bb = -1;
-                    while ((bb = sourceFile.ReadByte()) != -1)
+                    while ((bb = sourceFile.ReadByte()) != -1)  // 讀一拜
                     {
                         //一次1 byte的讀
                         targetFile.WriteByte((byte)bb);
@@ -593,14 +593,14 @@ namespace vcs_DiskDirectoryFile2
             try
             {
                 FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-                BinaryReader reader = new BinaryReader(fs);
+                BinaryReader br = new BinaryReader(fs);
                 string fileClass;
                 byte buffer;
-                buffer = reader.ReadByte();
+                buffer = br.ReadByte();  // 讀一拜
                 fileClass = buffer.ToString();
-                buffer = reader.ReadByte();
+                buffer = br.ReadByte();  // 讀一拜
                 fileClass += buffer.ToString();
-                reader.Close();
+                br.Close();
                 fs.Close();
 
                 //richTextBox1.Text += "fileClass == " + fileClass + "\t";
@@ -843,10 +843,10 @@ namespace vcs_DiskDirectoryFile2
             {
                 for (int i = 0; i < 10; i++)
                 {
-                    data[i] = S.ReadByte();
+                    data[i] = S.ReadByte();  // 讀一拜
                     builtHex += data[i].ToString("X2") + " ";
 
-                    //builtHex += S.ReadByte().ToString("X2");
+                    //builtHex += S.ReadByte().ToString("X2");  // 讀一拜
 
                     /*
                     if (ImageTypes.ContainsKey(builtHex))

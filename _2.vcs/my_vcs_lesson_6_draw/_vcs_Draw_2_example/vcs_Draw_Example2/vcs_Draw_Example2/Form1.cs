@@ -892,9 +892,12 @@ namespace vcs_Draw_Example2
         private string dataId;
         private int dataSize;
         public List<double> wavdata = new List<double>();
-        public void ReadWAVFile(string filePath)  //讀取波形文件並顯示
+        public void ReadWAVFile(string filename)  //讀取波形文件並顯示
         {
-            if (filePath == "") return;
+            if (filename == "")
+            {
+                return;
+            }
             byte[] id = new byte[4];
             byte[] size = new byte[4];
             byte[] type = new byte[4];
@@ -912,7 +915,7 @@ namespace vcs_Draw_Example2
             byte[] factdata = new byte[4];
             byte[] dataid = new byte[4];
             byte[] datasize = new byte[4];
-            using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
             {
                 using (BinaryReader br = new BinaryReader(fs, Encoding.UTF8))
                 {
@@ -973,7 +976,7 @@ namespace vcs_Draw_Example2
                     {
                         for (int i = 0; i < dataSize; i++)
                         {
-                            byte wavdt = br.ReadByte();
+                            byte wavdt = br.ReadByte();  // 讀一拜
                             wavdata.Add(wavdt);
                         }
                     }

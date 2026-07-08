@@ -315,27 +315,6 @@ vcs待尋找
 
 //------------------------------------------------------------  # 60個
 
-'Microsoft.ACE.OLEDB.12.0' 提供者並未登錄於本機電腦上。
-使用触发器删除相关联的两表间的数据
---判断是否存在名为‘tri_delete_laborage’的触发器
-select name from sysobjects where name='tri_delete_laborage' and type='TR')
-drop trigger tri_delete_laborage--删除已经存在的触发器
-
-select name from sysobjects where name='proc_TransInProc'and type='p'
-
-drop proc proc_TransInProc  --删除存储过程
-
-            // Access數據庫 *.mdb
-            string db_filename = @"D:\_git\vcs\Northwind.mdb";
-            textBox1.Text = db_filename;
-            strPathMdb = db_filename;
-
-            //定義臨時數據庫的連接字串
-            string temp2 = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + temp;
-            string sMdb2 = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + strPathMdb;
-
-//------------------------------------------------------------  # 60個
-
 我在Visual C# 看到一個宣告
 public Point? GetIntersectionWith(Line secondLine);
 為什麼Point後面還多一個?呢?
@@ -912,14 +891,6 @@ C# 7.0 引入 具名 Tuple 語法
 
 //------------------------------------------------------------  # 60個
 
-Binary格式讀出一個檔案到拜列
-
-            FileStream fs = new FileStream(oldpath, FileMode.Open);
-            BinaryReader br = new BinaryReader(fs);
-            byte[] bytes = br.ReadBytes((int)fs.Length);
-            br.Close();
-            fs.Close();
-
 /*
 記住目前的設定值，下次程式開啟時，可以拿來用。
 
@@ -931,13 +902,7 @@ Binary格式讀出一個檔案到拜列
 
 目前找不到設定型態的位置，只好到Settings settings檔案改成以下：
 <Setting Name="Argbs" Type="System.Int32[]" Scope="User">
-
 */
-
-//------------------------------------------------------------  # 60個
-
-Array.Copy(array_data, 0, array_data, offset, array_data.Length - offset);
-Array.Copy(array_data, offset, array_data, 0, array_data.Length - offset);
 
 //------------------------------------------------------------  # 60個
 
@@ -1500,16 +1465,16 @@ e.Cancel = true;
 }
 private void CloseCtiServer()
 {
-timer.Enabled = false;
-DJ160API.DisableCard();
-this.NotifyIcon.Visible = false;
-this.Close();
-this.Dispose();
-Application.Exit();
+	timer.Enabled = false;
+	DJ160API.DisableCard();
+	this.NotifyIcon.Visible = false;
+	this.Close();
+	this.Dispose();
+	Application.Exit();
 }
 private void HideCtiServer()
 {
-this.Hide();
+	this.Hide();
 }
 private void ShowCtiServer()
 {
@@ -2846,7 +2811,8 @@ writer.Open(filename, width, height, this.Videofps, VideoCodec.MPEG4);
 
 //------------------------------------------------------------  # 60個
 
-有一點注意事項就是在你關閉From2的時候一定要在關閉窗體前把主程序終止,也就是在Form2_FormClosed事件中執行Application.Exit();
+有一點注意事項就是在你關閉From2的時候一定要在關閉窗體前把主程序終止,
+也就是在Form2_FormClosed事件中執行Application.Exit();
 
 //------------------------------------------------------------  # 60個
 
@@ -3007,37 +2973,38 @@ Image.FromFile可開啟影像檔:
 
 用法
 // 讀取cs文件內容
-                List<String> rcq = ReaderLine(e.FullName);
+List<String> rcq = ReaderLine(e.FullName);
+
  // 遍歷cs文件代碼行
-                foreach (String q in rcq)
-                {
-                    if (!StringHandle.isNote(q)) continue;// 判斷是否是注釋
+foreach (String q in rcq)
+{
+    if (!StringHandle.isNote(q)) continue;// 判斷是否是注釋
 
-                    string note = StringHandle.GetNoteValue(q);// 獲取注釋內容
+    string note = StringHandle.GetNoteValue(q);// 獲取注釋內容
 
-                    if (string.IsNullOrWhiteSpace(note)) continue;
-                    :
-                    :
+    if (string.IsNullOrWhiteSpace(note)) continue;
+    :
+    :
 
-		}                
+}
                 
 /// <summary>
-        /// 讀取文件
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        public List<String> ReaderLine(string path)
-        {
-            StreamReader sr = new StreamReader(path, Encoding.Default);
-            List<String> lines = new List<string>();
-            string line;
-            while ((line = sr.ReadLine()) != null)
-            {
-                lines.Add(line);
-            }
-            sr.Close();
-            return lines;
-        }
+/// 讀取文件
+/// </summary>
+/// <param name="path"></param>
+/// <returns></returns>
+public List<String> ReaderLine(string path)
+{
+	StreamReader sr = new StreamReader(path, Encoding.Default);
+	List<String> lines = new List<string>();
+	string line;
+	while ((line = sr.ReadLine()) != null)
+	{
+		lines.Add(line);
+	}
+	sr.Close();
+	return lines;
+}
         
 //------------------------------------------------------------  # 60個
 
@@ -3197,7 +3164,7 @@ if(f3.DialogResult == DialogREsult.OK)
             return htmlStr.Trim();
         }
 
-6060
+//------------------------------------------------------------  # 60個
 　　
 讀取網頁 回傳資料 看看是甚麼樣子 xml? html?
 http://lbsyun.baidu.com/index.php?title=webapi/guide/webservice-geocoding
@@ -3484,77 +3451,6 @@ ApiCalls.ShowWindow(Form.ActiveForm.Handle,2);
 //恢復正常大小窗口：
 ApiCalls.ShowWindow(Form.ActiveForm.Handle,1);
  
-//------------------------------------------------------------  # 60個
-
-ADO.Net方面的：
-八、連接Access數據庫：
-using System;
-using System.Data;
-using System.Data.OleDb;
-
-class TestADO
-{
-    static void Main(string[] args)
-    {
-        string strDSN = Provider=Microsoft.Jet.OLEDB.4.0;Data Source=c:\test.mdb;
-        string strSQL = SELECT * FROM employees ;
-
-        OleDbConnection conn = new OleDbConnection(strDSN);
-        OleDbCommand cmd = new OleDbCommand( strSQL, conn );
-        OleDbDataReader reader = null;
-        try
-        {
-            conn.Open();
-            reader = cmd.ExecuteReader();
-            while (reader.Read() )
-            {
-                Console.WriteLine(First Name:{0}, Last Name:{1}, reader[FirstName], reader[LastName]);
-            }
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e.Message);
-        }
-        finally
-        {
-            conn.Close();
-        }
-    }
-} 
-
-//------------------------------------------------------------  # 60個
-
-十一、用ADO添加數據到數據庫中：
-using System;
-using System.Data;   
-using System.Data.OleDb;   
-
-class TestADO
-{  
-    static void Main(string[] args)  
-{  
-        string strDSN = Provider=Microsoft.Jet.OLEDB.4.0;DataSource=c: est.mdb;  
-        string strSQL = INSERT INTO Employee(FirstName, LastName) VALUES(''FirstName'', ''LastName'') ;  
-                   
-        // create Objects of ADOConnection and ADOCommand   
-        OleDbConnection conn = new OleDbConnection(strDSN);  
-        OleDbCommand cmd = new OleDbCommand( strSQL, conn );  
-        try  
-        {  
-            conn.Open();  
-            cmd.ExecuteNonQuery();  
-        }  
-        catch (Exception e)  
-        {  
-            Console.WriteLine(Oooops. I did it again: {0}, e.Message);  
-        }  
-        finally  
-        {  
-            conn.Close();  
-        }          
-    } 
-}  
-
 //------------------------------------------------------------  # 60個
 
 Web Service方面的：
@@ -3881,6 +3777,7 @@ this.label1.Font = new Font(label1.Font.FontFamily, 10f);
 //------------------------------------------------------------  # 60個
 
 三、添加office相關引用
+
 Microsoft.Office.Interop.Word 12.0.0.0
 
 using System.Data.OleDb;
@@ -3890,16 +3787,9 @@ using Microsoft.Office.Core;
 using Word=Microsoft.Office.Interop.Word;
 using System.Reflection;
 
-求取字母的ASCII值
-
-            Console.Write("輸入一個字符："); 
-            char c = Console.ReadKey().KeyChar; 
-            Console.WriteLine("\r\n字符{0}的ASCII值是：{1}", c, (int)c); 
-            Console.ReadKey(false); 
-
 //------------------------------------------------------------  # 60個
     
- C# 修改啟始Form [複製鏈接]
+ C# 修改啟始Form
 打開program.cs，修改Application.Run(new Form1());，將Form1改為要啟始的頁面即可!
 
 網際網路時間伺服器，
@@ -3969,7 +3859,7 @@ console mode讀取字串
             // 宣告Ans字串變數用來存放使用者由鍵盤輸入的答案
             string Ans = Console.ReadLine();
                         
-6060
+//------------------------------------------------------------  # 60個
 
 #include <stdio.h>
 int main(int argc,char* argv[])
@@ -6310,9 +6200,6 @@ kilo OK
 sugar OK
 
 using Excel = Microsoft.Office.Interop.Excel;	//for excel write
-using System.Data.OleDb;                        //for excel read
-
-
 
 vcs_ReadWrite_EXCEL3
 kilo 不可用
@@ -6326,9 +6213,6 @@ kilo 不可用
 
 using Excel = Microsoft.Office.Interop.Excel;	//kilo 不可用
 
-using System.Data.OleDb;    //for OleDbConnection, 表示資料來源的開啟連接
-
-
 
 vcs_ReadWrite_EXCEL5
 kilo 不可用
@@ -6336,15 +6220,12 @@ sugar Ok 搬至 3 搬移中
 
 using Excel = Microsoft.Office.Interop.Excel;	//kilo 不可用
 
-using System.Data.OleDb;    //for OleDbConnection, 表示資料來源的開啟連接
-
 
 vcs_ReadWrite_EXCEL6
 kilo 不可用
 sugar OK
 
 using Excel = Microsoft.Office.Interop.Excel;	//kilo 不可用
-using System.Data.OleDb;    //for OleDbConnection, 表示資料來源的開啟連接
 
 
 vcs_ReadWrite_WORD1
@@ -7358,6 +7239,7 @@ Remotion.Data.Linq.dll
                 Application.Exit();
             } 
 
+//------------------------------------------------------------  # 60個
 
 棋盤	Chessboard
 
@@ -8814,30 +8696,6 @@ git 如何做到只看看有無新的check in，而不先去update?
 2. 參考/加入參考/COM/Microsoft Word 11.0 Object Library 和 Microsoft Office 11.0 Object Library
 3. 參考/Word屬性/內嵌Interop類型 由True改為False
 
-
-
-vcs使用access資料庫
-把
-Provider=Microsoft.Jet.OLEDB.4.0
-改成
-Provider=Microsoft.ACE.OLEDB.12.0
-
-
-kilo用
-Provider=Microsoft.Jet.OLEDB.4.0
-
-sugar用
-Provider=Microsoft.ACE.OLEDB.12.0
-
-
-
-ex:
-            //string ConStr = "Provider=Microsoft.Jet.OLEDB.4.0;Data source='" + filename + "'";     old
-            string ConStr = "Provider=Microsoft.ACE.OLEDB.12.0;Data source=" + filename;
-
-			//string strOdbcCon = @"Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;
-			string strOdbcCon = @"Provider=Microsoft.ACE.OLEDB.12.0;Persist Security Info=False;
-
 ----------------版本相關 SP----------------
 
 
@@ -9056,11 +8914,7 @@ string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yy
 							            bt_exit.BringToFront();     //移到最上層
 							        }
 							
-							        private void bt_exit_Click(object sender, EventArgs e)
-							        {
-							            Application.Exit();
-							        }
-
+//------------------------------------------------------------  # 60個
 
 //最小化按鈕的寫法
             bt_minimize_setup();
@@ -9297,8 +9151,6 @@ https://id.ifreesite.com/
 
 中國身份證在線產生器
 https://id.ifreesite.com/chinaid.html
-
-syntax
 
 張自忠（1891年8月11日－1940年5月16日
 張治中（1890年10月27日－1969年4月10日）
@@ -9988,22 +9840,6 @@ Paint
 
 //------------------------------------------------------------  # 60個
 
-系統預設路徑與名稱
-
-目前執行檔的檔案的名稱  XXXX.exe
-Application.ExecutablePath
-
-9. 如何获取应用程序当前执行的路径？（How to get the path to my running EXE?）
-string appPath = Application.ExecutablePath; 
-
-目前執行檔的檔案的所在路徑
-Application.StartupPath
-
-string dir = Application.StartupPath + "\\";
-File.Create(Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt");
-
-//------------------------------------------------------------  # 60個
-
 命令列參數長度
 args.Length
 　　　if(args[0].Substring(0,2).Equals("/c"))
@@ -10046,8 +9882,6 @@ bitmap1.Save(filename, ImageFormat.Emf);
 bitmap1.Save(filename, ImageFormat.Icon);
 bitmap1.Save(filename, ImageFormat.Wmf);
 bitmap1.Save(filename);
-
-
 
 
 /*
@@ -10094,10 +9928,51 @@ form1.CancelButton = button1;
 
 //------------------------------------------------------------  # 60個
 
-
 cccc
 this.acceptButton = btn.....
 
+//------------------------------------------------------------  # 60個
+
+            richTextBox1.Text += "本程式名稱 : " + Application.CompanyName + "\n";
+            richTextBox1.Text += "本程式語言 : " + Application.CurrentCulture + "\n";
+            richTextBox1.Text += "本程式輸入法 : " + Application.CurrentInputLanguage + "\n";
+            richTextBox1.Text += "本程式路徑 : " + Application.ExecutablePath + "\n";
+            richTextBox1.Text += "本程式產品名稱 : " + Application.ProductName + "\n";
+            richTextBox1.Text += "本程式產品版本 : " + Application.ProductVersion + "\n";
+            richTextBox1.Text += "本程式啟動位置 : " + Application.StartupPath + "\n";
+
+系統預設路徑與名稱
+
+目前執行檔的檔案的名稱  XXXX.exe
+Application.ExecutablePath
+
+9. 如何获取应用程序当前执行的路径？（How to get the path to my running EXE?）
+string appPath = Application.ExecutablePath; 
+
+目前執行檔的檔案的所在路徑
+Application.StartupPath
+
+string dir = Application.StartupPath + "\\";
+File.Create(Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt");
+
+//------------------------------------------------------------  # 60個
+
+rtb
+            int len = richTextBox1.Lines.Length;
+            //richTextBox1.Text += "lines = " + len.ToString() + "\n";
+            for (i = 0; i < len; i++)
+            {
+                //richTextBox1.Text += "i = " + i.ToString() + " : " + richTextBox1.Lines[i] + "\n";
+                sw.WriteLine(richTextBox1.Lines[i]); // 寫入一行
+            }
+
+//------------------------------------------------------------  # 60個
+
+求取字母的ASCII值
+            Console.Write("輸入一個字符："); 
+            char c = Console.ReadKey().KeyChar; 
+            Console.WriteLine("\r\n字符{0}的ASCII值是：{1}", c, (int)c); 
+            Console.ReadKey(false); 
 
 //------------------------------------------------------------  # 60個
 

@@ -199,10 +199,7 @@ namespace vcs_DrAP
             x_st += bt_find_big_files.Size.Width + dx;
             bt_start_files.Location = new Point(x_st, y_st + dy * 0);
 
-            x_st += bt_start_files.Size.Width + dx;
-            bt_save_data.Location = new Point(x_st, y_st + dy * 0);
-
-            x_st += bt_save_data.Size.Width + dx;
+            x_st += bt_start_files.Size.Width*2 + dx;
 
             bt_find_same_files.Location = new Point(x_st, y_st + dy * 1);
 
@@ -238,7 +235,6 @@ namespace vcs_DrAP
             bt_open_with_vcs.Location = new Point(x_st + dx * -1, y_st + dy * 1);
 
             bt_open_dir2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            bt_save_file_data.Location = new Point(x_st + dx * 1, y_st + dy * 1);
 
             bt_compare.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             bt_replace.Location = new Point(x_st + dx * 2, y_st + dy * 1);
@@ -519,14 +515,11 @@ namespace vcs_DrAP
             listView1.Columns.Add("修改日期", 100, HorizontalAlignment.Left);
             listView1.Visible = true;
 
-            if (checkBox2.Checked == true)
-            {
                 //排序 由小到大
                 //fileinfos.Sort((x, y) => { return x.filesize.CompareTo(y.filesize); });
 
                 //排序 由大到小  在return的地方多個負號
                 fileinfos.Sort((x, y) => { return -x.filesize.CompareTo(y.filesize); });
-            }
 
             if (fileinfos.Count == 0)
             {
@@ -754,14 +747,11 @@ namespace vcs_DrAP
             listView1.Columns.Add("修改日期", 250, HorizontalAlignment.Left);
             listView1.Visible = true;
 
-            if (checkBox2.Checked == true)
-            {
                 //排序 由小到大
                 //fileinfos.Sort((x, y) => { return x.filesize.CompareTo(y.filesize); });
 
                 //排序 由大到小  在return的地方多個負號       先不排序
                 //fileinfos.Sort((x, y) => { return -x.filesize.CompareTo(y.filesize); });
-            }
 
             for (int i = 0; i < folderinfos.Count; i++)
             {
@@ -1237,11 +1227,6 @@ namespace vcs_DrAP
                 //richTextBox1.Text += t.Text + "\t" + t.SubItems[1].Text + "\t" + t.SubItems[2].Text + "\n";
                 result_str += listView1.Items[selNdx].Text + "\t" + listView1.Items[selNdx].SubItems[1].Text + "\t" + listView1.Items[selNdx].SubItems[2].Text + "\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
             }
-        }
-
-        private void bt_save_data_Click(object sender, EventArgs e)
-        {
-            result_str += "儲存資料成檔案\tTBD\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -1803,8 +1788,7 @@ namespace vcs_DrAP
                 return;
             }
 
-            if (checkBox3.Checked == true)
-            {
+            //儲存磁碟資訊
                 result_str += "listbox 共有 " + listBox1.Items.Count.ToString() + " 個項目\n";
                 for (int i = 0; i < listBox1.Items.Count; i++)
                 {
@@ -1866,7 +1850,6 @@ namespace vcs_DrAP
                         richTextBox1.Text += "非合法路徑或檔案d\n";
                     }
                 }
-            }
             richTextBox1.Text += "\n";
 
             result_str += "listbox 共有 " + listBox1.Items.Count.ToString() + " 個項目\n";
@@ -1906,8 +1889,7 @@ namespace vcs_DrAP
         {
             string filename = string.Empty;
 
-            if (checkBox3.Checked == true)
-            {
+                //磁碟資訊
                 string hddname = string.Empty;
 
                 result_str += "listbox 共有 " + listBox1.Items.Count.ToString() + " 個項目\n";
@@ -1953,11 +1935,8 @@ namespace vcs_DrAP
                     }
                 }
                 filename = "AP." + hddname + DateTime.Now.ToString(".yyyy.MMdd.HHmm") + ".txt";
-            }
-            else
-            {
-                filename = "AP." + DateTime.Now.ToString("yyyy.MMdd.HHmm") + ".txt";
-            }
+                //不儲存磁碟資訊
+                //filename = "AP." + DateTime.Now.ToString("yyyy.MMdd.HHmm") + ".txt";
 
             //建立一個檔案
             //StreamWriter sw = System.IO.File.CreateText(filename);
@@ -2281,16 +2260,16 @@ namespace vcs_DrAP
 
         private void bt_compare_Click(object sender, EventArgs e)
         {
+            if (listView1.SelectedIndices.Count != 2)
+            {
+                richTextBox1.Text += "必須要選取2個檔案才能比較\n";
+                return;
+            }
+
             result_str += "你選擇了 : " + listView1.SelectedIndices.Count.ToString() + " 個檔案, 分別是\n";
             for (int i = 0; i < listView1.SelectedIndices.Count; i++)
             {
                 result_str += listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
-            }
-
-            if (listView1.SelectedIndices.Count != 2)
-            {
-                result_str += "必須要選取2個檔案才能比較\n";
-                return;
             }
 
             int selNdx;
@@ -2326,6 +2305,9 @@ namespace vcs_DrAP
             Process.Start(winmerge_path, all_filename);
             return;
         }
+
+        //------------------------------------------------------------  # 60個
+
         //檢查空資料夾 ST
 
         private void bt_replace_Click(object sender, EventArgs e)
@@ -2430,14 +2412,6 @@ namespace vcs_DrAP
         private void tb_search_Click(object sender, EventArgs e)
         {
             tb_search.SelectAll();
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void bt_save_file_data_Click(object sender, EventArgs e)
-        {
-
-
         }
 
         //------------------------------------------------------------  # 60個

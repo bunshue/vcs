@@ -1790,5 +1790,139 @@ IMEX=1 通知驅動程序始終將「互混」數據列作為文本讀取(;結�
                 return dsRead;  
             }                                      
         } 
+
+//------------------------------------------------------------  # 60個
+
+'Microsoft.ACE.OLEDB.12.0' 提供者並未登錄於本機電腦上。
+使用触发器删除相关联的两表间的数据
+--判断是否存在名为‘tri_delete_laborage’的触发器
+select name from sysobjects where name='tri_delete_laborage' and type='TR')
+drop trigger tri_delete_laborage--删除已经存在的触发器
+
+select name from sysobjects where name='proc_TransInProc'and type='p'
+
+drop proc proc_TransInProc  --删除存储过程
+
+            // Access數據庫 *.mdb
+            string db_filename = @"D:\_git\vcs\Northwind.mdb";
+            textBox1.Text = db_filename;
+            strPathMdb = db_filename;
+
+            //定義臨時數據庫的連接字串
+            string temp2 = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + temp;
+            string sMdb2 = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + strPathMdb;
+
+//------------------------------------------------------------  # 60個
+
+ADO.Net方面的：
+八、連接Access數據庫：
+using System;
+using System.Data;
+using System.Data.OleDb;
+
+class TestADO
+{
+    static void Main(string[] args)
+    {
+        string strDSN = Provider=Microsoft.Jet.OLEDB.4.0;Data Source=c:\test.mdb;
+        string strSQL = SELECT * FROM employees ;
+
+        OleDbConnection conn = new OleDbConnection(strDSN);
+        OleDbCommand cmd = new OleDbCommand( strSQL, conn );
+        OleDbDataReader reader = null;
+        try
+        {
+            conn.Open();
+            reader = cmd.ExecuteReader();
+            while (reader.Read() )
+            {
+                Console.WriteLine(First Name:{0}, Last Name:{1}, reader[FirstName], reader[LastName]);
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+        finally
+        {
+            conn.Close();
+        }
+    }
+} 
+
+//------------------------------------------------------------  # 60個
+
+十一、用ADO添加數據到數據庫中：
+using System;
+using System.Data;   
+using System.Data.OleDb;   
+
+class TestADO
+{  
+    static void Main(string[] args)  
+{  
+        string strDSN = Provider=Microsoft.Jet.OLEDB.4.0;DataSource=c: est.mdb;  
+        string strSQL = INSERT INTO Employee(FirstName, LastName) VALUES(''FirstName'', ''LastName'') ;  
+                   
+        // create Objects of ADOConnection and ADOCommand   
+        OleDbConnection conn = new OleDbConnection(strDSN);  
+        OleDbCommand cmd = new OleDbCommand( strSQL, conn );  
+        try  
+        {  
+            conn.Open();  
+            cmd.ExecuteNonQuery();  
+        }  
+        catch (Exception e)  
+        {  
+            Console.WriteLine(Oooops. I did it again: {0}, e.Message);  
+        }  
+        finally  
+        {  
+            conn.Close();  
+        }          
+    } 
+}  
+
+//------------------------------------------------------------  # 60個
+
+using System.Data.OleDb;                        //for excel read
+using System.Data.OleDb;    //for OleDbConnection, 表示資料來源的開啟連接
+using System.Data.OleDb;    //for OleDbConnection, 表示資料來源的開啟連接
+using System.Data.OleDb;    //for OleDbConnection, 表示資料來源的開啟連接
+
+vcs使用access資料庫
+把
+Provider=Microsoft.Jet.OLEDB.4.0
+改成
+Provider=Microsoft.ACE.OLEDB.12.0
+
+
+kilo用
+Provider=Microsoft.Jet.OLEDB.4.0
+
+sugar用
+Provider=Microsoft.ACE.OLEDB.12.0
+
+
+
+ex:
+            //string ConStr = "Provider=Microsoft.Jet.OLEDB.4.0;Data source='" + filename + "'";     old
+            string ConStr = "Provider=Microsoft.ACE.OLEDB.12.0;Data source=" + filename;
+
+			//string strOdbcCon = @"Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;
+			string strOdbcCon = @"Provider=Microsoft.ACE.OLEDB.12.0;Persist Security Info=False;
+
+
+
+
+
+
+
 */
+
+
+
+
+
+
 

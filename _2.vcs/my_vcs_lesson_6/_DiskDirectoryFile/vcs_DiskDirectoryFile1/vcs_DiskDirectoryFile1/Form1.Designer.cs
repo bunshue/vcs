@@ -248,7 +248,7 @@
             this.bt_dir02.Name = "bt_dir02";
             this.bt_dir02.Size = new System.Drawing.Size(200, 60);
             this.bt_dir02.TabIndex = 3;
-            this.bt_dir02.Text = "Directory.GetFiles()";
+            this.bt_dir02.Text = "DirectoryInfo的方法2";
             this.bt_dir02.UseVisualStyleBackColor = true;
             this.bt_dir02.Click += new System.EventHandler(this.bt_dir02_Click);
             // 
@@ -259,7 +259,7 @@
             this.bt_dir04.Name = "bt_dir04";
             this.bt_dir04.Size = new System.Drawing.Size(200, 60);
             this.bt_dir04.TabIndex = 3;
-            this.bt_dir04.Text = "DirectoryInfo的方法2";
+            this.bt_dir04.Text = "GetDirectories(), GetFiles()";
             this.bt_dir04.UseVisualStyleBackColor = true;
             this.bt_dir04.Click += new System.EventHandler(this.bt_dir04_Click);
             // 
@@ -290,6 +290,7 @@
             this.bt_dir05.Name = "bt_dir05";
             this.bt_dir05.Size = new System.Drawing.Size(200, 60);
             this.bt_dir05.TabIndex = 15;
+            this.bt_dir05.Text = "刪除資料夾";
             this.bt_dir05.UseVisualStyleBackColor = true;
             this.bt_dir05.Click += new System.EventHandler(this.bt_dir05_Click);
             // 
@@ -300,7 +301,7 @@
             this.bt_dir03.Name = "bt_dir03";
             this.bt_dir03.Size = new System.Drawing.Size(200, 60);
             this.bt_dir03.TabIndex = 47;
-            this.bt_dir03.Text = "刪除資料夾";
+            this.bt_dir03.Text = "Directory.GetFiles()";
             this.bt_dir03.UseVisualStyleBackColor = true;
             this.bt_dir03.Click += new System.EventHandler(this.bt_dir03_Click);
             // 
@@ -394,7 +395,6 @@
             this.bt_files09.Name = "bt_files09";
             this.bt_files09.Size = new System.Drawing.Size(200, 60);
             this.bt_files09.TabIndex = 5;
-            this.bt_files09.Text = "GetDirectories";
             this.bt_files09.UseVisualStyleBackColor = true;
             this.bt_files09.Click += new System.EventHandler(this.bt_files09_Click);
             // 

@@ -79,7 +79,7 @@ namespace vcs_ReadWrite_TXT
             richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             bt_clear1.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear1.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear1.Size.Height);
 
-            this.Size = new Size(1100 + 210, 750);
+            this.Size = new Size(1320, 750);
             this.Text = "vcs_ReadWrite_TXT";
 
             //設定執行後的表單起始位置, 正中央
@@ -465,9 +465,13 @@ namespace vcs_ReadWrite_TXT
             richTextBox1.Text += "已存檔 : " + filename + "\n";
         }
 
+        //6060
+
         private void button12_Click(object sender, EventArgs e)
         {
         }
+
+        //6060
 
         private void button13_Click(object sender, EventArgs e)
         {
@@ -756,7 +760,7 @@ namespace vcs_ReadWrite_TXT
 
             filename = "tmp_poem.txt";
 
-            //sr = new StreamReader(filename, Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
+            //sr = new StreamReader(filename, Encoding.Default);
             sr = new StreamReader(filename);
 
             i = 0;
@@ -885,8 +889,8 @@ namespace vcs_ReadWrite_TXT
                 do
                 {
                     // 從每一個文件讀取一個字節。
-                    file1byte = fs1.ReadByte();
-                    file2byte = fs2.ReadByte();
+                    file1byte = fs1.ReadByte();  // 讀一拜
+                    file2byte = fs2.ReadByte();  // 讀一拜
                 }
                 while ((file1byte == file2byte) && (file1byte != -1));
                 // 關閉文件。
@@ -1633,13 +1637,6 @@ sr.ReadToEnd()  //讀取所有文字內容
 
 //------------------------------------------------------------  # 60個
 
-            int len = richTextBox1.Lines.Length;
-            //richTextBox1.Text += "lines = " + len.ToString() + "\n";
-            for (i = 0; i < len; i++)
-            {
-                //richTextBox1.Text += "i = " + i.ToString() + " : " + richTextBox1.Lines[i] + "\n";
-                sw.WriteLine(richTextBox1.Lines[i]); // 寫入一行
-            }
 */
 
 
@@ -1666,11 +1663,6 @@ _C	|合|	5408	21512	_A	|、|	3001	12289	_C	|單|	55AE	21934	_C	|位|	4F4D	20301	
 //------------------------------------------------------------  # 60個
 
 /*
-objStreamWriter = new StreamWriter(objFileStream, Encoding.Unicode); 
-
-開關檔案 使用指定的編碼
-StreamWriter outStream = new StreamWriter(filepath, false, Encoding.GetEncoding(950));
-using (StreamReader sr = new StreamReader(filepath, Encoding.GetEncoding(936)))
 
 //------------------------------------------------------------  # 60個
 
@@ -1695,6 +1687,14 @@ SizeF txt_size = gr.MeasureString(txt, this.Font);
 gr.DrawString(txt, this.Font, text_brush, node.Location.X - txt_size.Width / 2, node.Location.Y - txt_size.Height / 2);
 
 //------------------------------------------------------------  # 60個
+
+編碼相關
+//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
+objStreamWriter = new StreamWriter(objFileStream, Encoding.Unicode); 
+
+開關檔案 使用指定的編碼
+StreamWriter outStream = new StreamWriter(filepath, false, Encoding.GetEncoding(950));
+using (StreamReader sr = new StreamReader(filepath, Encoding.GetEncoding(936)))
 
 第一種方法是運用讀取現在的環境編碼，來達到正確編碼。
 
@@ -1767,7 +1767,6 @@ Encoding.GetEncoding(950)
             }
             sr.Close();
             sw.Close();
-
 
 
 */

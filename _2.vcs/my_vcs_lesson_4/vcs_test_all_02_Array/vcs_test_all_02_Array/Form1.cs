@@ -1257,7 +1257,15 @@ namespace vcs_test_all_02_Array
 
         private void button17_Click(object sender, EventArgs e)
         {
+            //Array方法
+            //Array 方法
+            //Array.Resize(ref score, score.Length + 1);    //陣列大小+1
+            //Array.Copy(array_data, 0, array_data, offset, array_data.Length - offset);
+            //Array.Copy(array_data, offset, array_data, 0, array_data.Length - offset);
+
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button18_Click(object sender, EventArgs e)
         {
@@ -1566,8 +1574,6 @@ Console.WriteLine(array2D.GetUpperBound(1) + 1);	//10
 
 //string[] names = new string[] { "張三", "李四", "王五" };
 //string[] items = new string[] { "螢幕", "滑鼠", "鍵盤" };
-
-
 
         private string[] DirName()
         {

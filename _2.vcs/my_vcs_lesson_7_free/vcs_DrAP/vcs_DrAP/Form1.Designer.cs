@@ -35,7 +35,6 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.tb_file_l = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
@@ -52,7 +51,6 @@
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.bt_clear1 = new System.Windows.Forms.Button();
             this.bt_clear2 = new System.Windows.Forms.Button();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.cb_video_only = new System.Windows.Forms.CheckBox();
             this.cb_video_s = new System.Windows.Forms.CheckBox();
             this.groupBox_video = new System.Windows.Forms.GroupBox();
@@ -66,7 +64,6 @@
             this.cb_file_size = new System.Windows.Forms.CheckBox();
             this.cb_option1 = new System.Windows.Forms.CheckBox();
             this.bt_find_empty_folders = new System.Windows.Forms.Button();
-            this.bt_save_file_data = new System.Windows.Forms.Button();
             this.bt_clear3 = new System.Windows.Forms.Button();
             this.groupbox_python = new System.Windows.Forms.GroupBox();
             this.rb_python_search1 = new System.Windows.Forms.RadioButton();
@@ -86,7 +83,6 @@
             this.bt_delete_file = new System.Windows.Forms.Button();
             this.bt_start_files = new System.Windows.Forms.Button();
             this.bt_open_dir = new System.Windows.Forms.Button();
-            this.bt_save_data = new System.Windows.Forms.Button();
             this.bt_open_with_vcs = new System.Windows.Forms.Button();
             this.groupBox_video.SuspendLayout();
             this.groupBox_file.SuspendLayout();
@@ -140,18 +136,6 @@
             this.listView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listView1_KeyDown);
             this.listView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseClick);
             this.listView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseDoubleClick);
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Checked = true;
-            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox2.Location = new System.Drawing.Point(388, 65);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(48, 16);
-            this.checkBox2.TabIndex = 16;
-            this.checkBox2.Text = "排序";
-            this.checkBox2.UseVisualStyleBackColor = true;
             // 
             // tb_file_l
             // 
@@ -325,18 +309,6 @@
             this.bt_clear2.UseVisualStyleBackColor = true;
             this.bt_clear2.Click += new System.EventHandler(this.bt_clear2_Click);
             // 
-            // checkBox3
-            // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Checked = true;
-            this.checkBox3.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox3.Location = new System.Drawing.Point(310, 65);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(72, 16);
-            this.checkBox3.TabIndex = 41;
-            this.checkBox3.Text = "磁碟資訊";
-            this.checkBox3.UseVisualStyleBackColor = true;
-            // 
             // cb_video_only
             // 
             this.cb_video_only.AutoSize = true;
@@ -506,18 +478,6 @@
             this.bt_find_empty_folders.Text = "找空資料夾";
             this.bt_find_empty_folders.UseVisualStyleBackColor = true;
             this.bt_find_empty_folders.Click += new System.EventHandler(this.bt_find_empty_folders_Click);
-            // 
-            // bt_save_file_data
-            // 
-            this.bt_save_file_data.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_save_file_data.Font = new System.Drawing.Font("細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_save_file_data.Location = new System.Drawing.Point(881, 194);
-            this.bt_save_file_data.Name = "bt_save_file_data";
-            this.bt_save_file_data.Size = new System.Drawing.Size(50, 50);
-            this.bt_save_file_data.TabIndex = 56;
-            this.bt_save_file_data.Text = "累存大檔";
-            this.bt_save_file_data.UseVisualStyleBackColor = true;
-            this.bt_save_file_data.Click += new System.EventHandler(this.bt_save_file_data_Click);
             // 
             // bt_clear3
             // 
@@ -744,18 +704,6 @@
             this.bt_open_dir.UseVisualStyleBackColor = true;
             this.bt_open_dir.Click += new System.EventHandler(this.bt_open_dir_Click);
             // 
-            // bt_save_data
-            // 
-            this.bt_save_data.BackgroundImage = global::vcs_DrAP.Properties.Resources.save_file;
-            this.bt_save_data.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_save_data.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_save_data.Location = new System.Drawing.Point(480, 6);
-            this.bt_save_data.Name = "bt_save_data";
-            this.bt_save_data.Size = new System.Drawing.Size(50, 50);
-            this.bt_save_data.TabIndex = 7;
-            this.bt_save_data.UseVisualStyleBackColor = true;
-            this.bt_save_data.Click += new System.EventHandler(this.bt_save_data_Click);
-            // 
             // bt_open_with_vcs
             // 
             this.bt_open_with_vcs.BackgroundImage = global::vcs_DrAP.Properties.Resources.vcs2;
@@ -781,7 +729,6 @@
             this.Controls.Add(this.groupbox_python);
             this.Controls.Add(this.bt_open_dir2);
             this.Controls.Add(this.bt_clear3);
-            this.Controls.Add(this.bt_save_file_data);
             this.Controls.Add(this.bt_find_empty_folders);
             this.Controls.Add(this.bt_copy_rtb_data);
             this.Controls.Add(this.bt_setup);
@@ -790,7 +737,6 @@
             this.Controls.Add(this.groupBox_file);
             this.Controls.Add(this.groupBox_video);
             this.Controls.Add(this.cb_video_only);
-            this.Controls.Add(this.checkBox3);
             this.Controls.Add(this.bt_save_rtb_data);
             this.Controls.Add(this.bt_clear2);
             this.Controls.Add(this.bt_clear1);
@@ -807,12 +753,10 @@
             this.Controls.Add(this.bt_find_big_files);
             this.Controls.Add(this.tb_search_text_pattern);
             this.Controls.Add(this.richTextBox2);
-            this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.bt_start_files);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.bt_open_dir);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.bt_save_data);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -837,14 +781,12 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button bt_save_data;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button bt_open_dir;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Button bt_start_files;
-        private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.TextBox tb_file_l;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RichTextBox richTextBox2;
@@ -865,7 +807,6 @@
         private System.Windows.Forms.Button bt_clear2;
         private System.Windows.Forms.Button bt_search_pattern_python;
         private System.Windows.Forms.Button bt_save_rtb_data;
-        private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.CheckBox cb_video_only;
         private System.Windows.Forms.CheckBox cb_video_s;
         private System.Windows.Forms.GroupBox groupBox_video;
@@ -881,7 +822,6 @@
         private System.Windows.Forms.Button bt_setup;
         private System.Windows.Forms.Button bt_copy_rtb_data;
         private System.Windows.Forms.Button bt_find_empty_folders;
-        private System.Windows.Forms.Button bt_save_file_data;
         private System.Windows.Forms.Button bt_clear3;
         private System.Windows.Forms.Button bt_open_dir2;
         private System.Windows.Forms.Button bt_edit_python_files;

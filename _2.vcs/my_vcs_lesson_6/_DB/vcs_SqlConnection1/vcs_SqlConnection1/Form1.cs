@@ -1290,8 +1290,8 @@ namespace vcs_SqlConnection1
                 if (ds.Tables[0].Rows.Count <= 0)
                 {
                     FileStream fs1 = new FileStream(pic_filename, FileMode.Open, FileAccess.Read);
-                    BinaryReader BReader = new BinaryReader(fs1);
-                    byte[] byteImage = BReader.ReadBytes((int)fs1.Length);  // 二進制流
+                    BinaryReader br1 = new BinaryReader(fs1);
+                    byte[] byteImage = br1.ReadBytes((int)fs1.Length);  // 二進制流
                     // 查詢字串, 新增資料, 使用 Parameters
                     sqlstr = "INSERT INTO tb_Image(name,photo) VALUES (@name,@photo)";
                     SqlCommand cmd = new SqlCommand(sqlstr, cn);
@@ -1327,8 +1327,8 @@ namespace vcs_SqlConnection1
             pic_filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             //pictureBox1.Image = Image.FromFile(pic_filename);
             FileStream fs2 = new FileStream(pic_filename, FileMode.Open, FileAccess.Read);
-            BinaryReader br = new BinaryReader(fs2);
-            byte[] imgBytesIn = br.ReadBytes((int)fs2.Length);
+            BinaryReader br2 = new BinaryReader(fs2);
+            byte[] imgBytesIn = br2.ReadBytes((int)fs2.Length);
 
             string new_num_id = "A12aaa";  // 員工編號
             string new_name = "david wang4";  // 姓名
@@ -2666,3 +2666,4 @@ INSERT INTO animals3_table (user_id, shop_name, product_name, amount, quantity, 
 (1006, '女装旗舰店', '基础打底衫', 89.00,   9, '已支付', '2025-06-05 09:00:00'),
 (1007, '男装专营店', 'Polo衫',     259.00,  1, '已支付', '2025-06-05 14:00:00')";
 */
+

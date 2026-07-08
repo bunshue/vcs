@@ -36,7 +36,6 @@
             this.listView1 = new System.Windows.Forms.ListView();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox_fileinfo = new System.Windows.Forms.RichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.bt_clear = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
@@ -103,20 +102,11 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(588, 224);
+            this.richTextBox1.Location = new System.Drawing.Point(588, 118);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 6;
             this.richTextBox1.Text = "";
-            // 
-            // richTextBox_fileinfo
-            // 
-            this.richTextBox_fileinfo.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox_fileinfo.Location = new System.Drawing.Point(588, 118);
-            this.richTextBox_fileinfo.Name = "richTextBox_fileinfo";
-            this.richTextBox_fileinfo.Size = new System.Drawing.Size(100, 100);
-            this.richTextBox_fileinfo.TabIndex = 7;
-            this.richTextBox_fileinfo.Text = "";
             // 
             // pictureBox1
             // 
@@ -131,7 +121,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(607, 248);
+            this.bt_clear.Location = new System.Drawing.Point(607, 161);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 9;
@@ -146,7 +136,6 @@
             this.ClientSize = new System.Drawing.Size(744, 473);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.richTextBox_fileinfo);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.listView1);
@@ -171,7 +160,6 @@
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.RichTextBox richTextBox_fileinfo;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button bt_clear;
     }

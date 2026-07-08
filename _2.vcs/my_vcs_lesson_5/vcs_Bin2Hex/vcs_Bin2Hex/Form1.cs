@@ -54,14 +54,12 @@ namespace vcs_Bin2Hex
 
         //------------------------------------------------------------  # 60個
 
-        void print_data(byte[] data)
+        void print_data(byte[] byteArray)
         {
-            int i;
-            int len;
-            len = data.Length;
-            for (i = 0; i < len; i++)
+            int len = byteArray.Length;
+            for (int i = 0; i < len; i++)
             {
-                richTextBox1.Text += data[i].ToString("X2");
+                richTextBox1.Text += byteArray[i].ToString("X2");
                 if ((i % new_line) == (new_line - 1))
                     richTextBox1.Text += "\n";
                 else
@@ -100,25 +98,25 @@ namespace vcs_Bin2Hex
                 richTextBox1.Text += "已選取檔案個數: " + openFileDialog1.FileNames.Length.ToString() + "\n\n";
                 foreach (var filename in openFileDialog1.FileNames)
                 {
-                    byte[] data;
+                    byte[] byteArray;
                     long len;
                     int i;
 
                     if (mode == MODE_0)
                     {
                         //全部binary讀取
-                        data = File.ReadAllBytes(filename);
-                        len = data.Length;
+                        byteArray = File.ReadAllBytes(filename);
+                        len = byteArray.Length;
 
                         richTextBox1.Text += "檔案名稱 : " + filename + "\n";
                         richTextBox1.Text += "檔案長度 : " + len.ToString() + "\n";
-                        //print_data(data, len);
+                        //print_data(byteArray, len);
                     }
                     else
                     {
                         //前/後部分binary讀取
-                        data = File.ReadAllBytes(filename); //有全讀否? 如果檔案很大 但只要讀一點 會不會太浪費?
-                        long len_file = data.Length;
+                        byteArray = File.ReadAllBytes(filename); //有全讀否? 如果檔案很大 但只要讀一點 會不會太浪費?
+                        long len_file = byteArray.Length;
 
                         FileStream fs = File.Open(filename, FileMode.OpenOrCreate, FileAccess.ReadWrite);
                         //len = System.Convert.ToDouble(fs.Length);
@@ -137,7 +135,7 @@ namespace vcs_Bin2Hex
                             BinaryReader br = new BinaryReader(fs);
 
                             //讀取位元陣列
-                            data = br.ReadBytes((int)len);    //用ReadBytes讀取檔案的前幾拜(循序)
+                            byteArray = br.ReadBytes((int)len);    //用ReadBytes讀取檔案的前幾拜(循序)
 
                             //釋放資源
                             br.Close();
@@ -149,8 +147,8 @@ namespace vcs_Bin2Hex
                             Stream stream = fs;
                             stream.Seek(-len, SeekOrigin.End);
                             int result = 0;
-                            data = new byte[len];
-                            result = stream.Read(data, 0, (int)len);
+                            byteArray = new byte[len];
+                            result = stream.Read(byteArray, 0, (int)len);
                             fs.Close();
                             stream.Close();
                         }
@@ -159,8 +157,8 @@ namespace vcs_Bin2Hex
                     if (radioButton8.Checked == true)
                     {
                         //顯示only
-                        richTextBox1.Text += "印出資料內容, 長度 " + data.Length.ToString() + " 拜\n";
-                        print_data(data);
+                        richTextBox1.Text += "印出資料內容, 長度 " + byteArray.Length.ToString() + " 拜\n";
+                        print_data(byteArray);
                     }
                     else
                     {
@@ -175,11 +173,11 @@ namespace vcs_Bin2Hex
 
                         for (i = 0; i < len; i++)
                         {
-                            sw.Write(data[i].ToString("X2"));
+                            sw.Write(byteArray[i].ToString("X2"));
                             if ((i % new_line) == (new_line - 1))
-                                sw.Write(data[i].ToString("\n"));
+                                sw.Write(byteArray[i].ToString("\n"));
                             else
-                                sw.Write(data[i].ToString(" "));
+                                sw.Write(byteArray[i].ToString(" "));
                         }
 
                         sw.Close();
@@ -203,12 +201,11 @@ namespace vcs_Bin2Hex
             do_bin2hex(MODE_1);
         }
 
-        void print_data(byte[] data, int len)
+        void print_data(byte[] byteArray, int len)
         {
-            int i;
-            for (i = 0; i < len; i++)
+            for (int i = 0; i < len; i++)
             {
-                richTextBox1.Text += data[i].ToString("X2");
+                richTextBox1.Text += byteArray[i].ToString("X2");
                 if ((i % 32) == 31)
                     richTextBox1.Text += "\n";
                 else

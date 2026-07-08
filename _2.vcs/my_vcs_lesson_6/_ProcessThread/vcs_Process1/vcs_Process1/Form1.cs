@@ -116,27 +116,37 @@ namespace vcs_Process1
             button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            button30.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button31.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button32.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button33.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            button34.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button35.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            button36.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            button37.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+            button38.Location = new Point(x_st + dx * 3, y_st + dy * 8);
+            button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
 
-            label1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            bt_list_process.Location = new Point(x_st + dx * 5 - 80 - 80 - 80, y_st + dy * 0 - 10);
-            bt_open_process.Location = new Point(x_st + dx * 5 - 80 - 80, y_st + dy * 0 - 10);
-            bt_kill_process.Location = new Point(x_st + dx * 5 - 80, y_st + dy * 0 - 10);
+            label1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            bt_list_process.Location = new Point(x_st + dx * 6 - 80 - 80 - 80, y_st + dy * 0 - 10);
+            bt_open_process.Location = new Point(x_st + dx * 6 - 80 - 80, y_st + dy * 0 - 10);
+            bt_kill_process.Location = new Point(x_st + dx * 6 - 80, y_st + dy * 0 - 10);
             listView2.Size = new Size(410, 300);
-            listView2.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 40);
+            listView2.Location = new Point(x_st + dx * 4, y_st + dy * 0 + 40);
 
-            listView1.Size = new Size(560, 290);
-            listView1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
-            richTextBox1.Size = new Size(560, 690 - 300);
-            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0 + 300);
+            listView1.Size = new Size(460, 290);
+            listView1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
+            richTextBox1.Size = new Size(460, 690 - 300);
+            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0 + 300);
             bt_clear1.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear1.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear1.Size.Height);
 
             lb_monitor_process.Text = "監控外部程序運行狀態";
-            lb_monitor_process.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            lb_monitor_process.Location = new Point(x_st + dx * 4, y_st + dy * 5);
             richTextBox2.Size = new Size(410, 310);
-            richTextBox2.Location = new Point(x_st + dx * 3, y_st + dy * 5 + 30);
+            richTextBox2.Location = new Point(x_st + dx * 4, y_st + dy * 5 + 30);
             bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Size.Width - bt_clear2.Size.Width, richTextBox2.Location.Y + richTextBox2.Size.Height - bt_clear2.Size.Height);
 
-            this.Size = new Size(1650, 750);
+            this.Size = new Size(1760, 750);
             this.Text = "vcs_Process1";
 
             //設定執行後的表單起始位置, 正中央
@@ -699,7 +709,6 @@ namespace vcs_Process1
             //NG
             //Process.Start("ntbackup.exe");
 
-
             /*
             //開啟Office程式   (偽)
             Process.Start("EXCEL.exe");  //啟動Excel
@@ -1247,6 +1256,8 @@ namespace vcs_Process1
         {
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button28_Click(object sender, EventArgs e)
         {
         }
@@ -1255,7 +1266,59 @@ namespace vcs_Process1
 
         private void button29_Click(object sender, EventArgs e)
         {
+
+        }
+
+
+        private void button30_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button31_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button32_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button33_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button34_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button35_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button36_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button37_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button38_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button39_Click(object sender, EventArgs e)
+        {
             //關閉所有記事本
+
 
         }
 
@@ -1675,7 +1738,7 @@ C#調用默認浏覽器打開網頁的幾種方法
 
 */
 
-//richTextBox1.Text += "本程式名稱 : " + Application.CompanyName + "\n";
+
 
             //Thread.Sleep(1000);
             //System.Environment.Exit(1);
