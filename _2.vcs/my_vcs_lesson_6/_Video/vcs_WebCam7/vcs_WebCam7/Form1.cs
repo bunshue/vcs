@@ -40,6 +40,10 @@ namespace vcs_WebCam7
             int dy = H + 10;
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1 + 70);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 1 + 140);
+            button3.Location = new Point(x_st + dx * 0+210, y_st + dy * 1);
+            button4.Location = new Point(x_st + dx * 0 + 210, y_st + dy * 1 + 70);
+            button5.Location = new Point(x_st + dx * 0 + 210, y_st + dy * 1 + 140);
 
             pictureBox1.Size = new Size(W, H);
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -153,6 +157,64 @@ namespace vcs_WebCam7
         {
             Stop_Webcam();
         }
+
+        //------------------------------------------------------------  # 60個
+
+        //宣告QUEUE
+        Queue<Bitmap> frames = new Queue<Bitmap>(); // Queue that stores frames to be written by the recorder thread
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //測試QUEUE
+
+            richTextBox1.Text += "加入一張\n";
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);
+
+            frames.Enqueue(bitmap1);  // 加入資料
+        }
+
+
+        private void DoRecord()
+        {
+            /*
+            VideoFileWriter writer = new VideoFileWriter();
+
+            writer.Open(RecordingFilename, this.Width, this.Height, 30);
+
+            Bitmap bitmap1 = frames.Dequeue();
+            writer.WriteVideoFrame(bitmap1);
+
+            writer.Close();
+            */
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "frame 個數 : " + frames.Count.ToString() + "\n";
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                richTextBox1.Text += "取出一張\n";
+                Bitmap bitmap1 = frames.Dequeue();
+                bitmap1.Dispose();
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "沒有資料了, " + ex.Message + "\n";
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
     }
 }
 

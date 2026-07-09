@@ -126,8 +126,9 @@ namespace vcs_Draw9_Example5c_vcsh
             Environment.Exit(0);
         }
 
+        //------------------------------------------------------------  # 60個
 
-        #region queue_breadth_first_tree
+        //#region queue_breadth_first_tree
         // Hold branch information.
         private class BranchInfo
         {
@@ -144,9 +145,7 @@ namespace vcs_Draw9_Example5c_vcsh
         }
 
         // Draw a binary tree.
-        private void DrawTree(Graphics gr, Pen pen,
-            int max_depth, float x, float y, float max_length,
-            float initial_theta, float length_scale, float dtheta)
+        private void DrawTree(Graphics gr, Pen pen, int max_depth, float x, float y, float max_length, float initial_theta, float length_scale, float dtheta)
         {
             // Add the trunk to a queue.
             Queue<BranchInfo> branches = new Queue<BranchInfo>();
@@ -159,19 +158,28 @@ namespace vcs_Draw9_Example5c_vcsh
                 BranchInfo branch = branches.Dequeue();
 
                 // Set the pen's color depending on the depth.
-                if (branch.Depth == 1) pen.Color = Color.Red;
+                if (branch.Depth == 1)
+                {
+                    pen.Color = Color.Red;
+                }
                 else
                 {
                     int g = 255 * (max_depth - branch.Depth) / max_depth;
                     int r = 139 * (branch.Depth - 3) / max_depth;
-                    if (r < 0) r = 0;
+                    if (r < 0)
+                    {
+                        r = 0;
+                    }
                     int b = 0;
                     pen.Color = Color.FromArgb(r, g, b);
                 }
 
                 // Set the pen's thickness depending on the depth.
                 int thickness = 10 * branch.Depth / max_depth;
-                if (thickness < 0) thickness = 0;
+                if (thickness < 0)
+                {
+                    thickness = 0;
+                }
                 pen.Width = thickness;
 
                 // See where this branch should end.
@@ -184,10 +192,8 @@ namespace vcs_Draw9_Example5c_vcsh
                 // If branch.depth > 1, add child branches to the queue.
                 if (branch.Depth > 1)
                 {
-                    branches.Enqueue(new BranchInfo(x1, y1,
-                        branch.Theta + dtheta, branch.Length * length_scale, branch.Depth - 1));
-                    branches.Enqueue(new BranchInfo(x1, y1,
-                        branch.Theta - dtheta, branch.Length * length_scale, branch.Depth - 1));
+                    branches.Enqueue(new BranchInfo(x1, y1, branch.Theta + dtheta, branch.Length * length_scale, branch.Depth - 1));
+                    branches.Enqueue(new BranchInfo(x1, y1, branch.Theta - dtheta, branch.Length * length_scale, branch.Depth - 1));
                 }
             }
         }
@@ -206,10 +212,7 @@ namespace vcs_Draw9_Example5c_vcsh
                 float dtheta = (float)(Math.PI / 180.0 * (double)nudDtheta.Value);
                 using (Pen the_pen = new Pen(Color.Black))
                 {
-                    DrawTree(e.Graphics, the_pen,
-                        (int)nudDepth.Value, root_x, root_y,
-                        (int)nudLength.Value, (float)(-Math.PI / 2), length_scale,
-                        dtheta);
+                    DrawTree(e.Graphics, the_pen, (int)nudDepth.Value, root_x, root_y, (int)nudLength.Value, (float)(-Math.PI / 2), length_scale, dtheta);
                 }
             }
             catch
@@ -226,7 +229,10 @@ namespace vcs_Draw9_Example5c_vcsh
             float y1 = (float)(y + length * Math.Sin(theta));
 
             // Set the pen's color depending on the depth.
-            if (depth == 1) pen.Color = Color.Red;
+            if (depth == 1)
+            {
+                pen.Color = Color.Red;
+            }
             else
             {
                 int g = 255 * (max_depth - depth) / max_depth;
@@ -238,7 +244,10 @@ namespace vcs_Draw9_Example5c_vcsh
 
             // Set the pen's thickness depending on the depth.
             int thickness = 10 * depth / max_depth;
-            if (thickness < 0) thickness = 0;
+            if (thickness < 0)
+            {
+                thickness = 0;
+            }
             pen.Width = thickness;
 
             // Draw the branch.
@@ -247,12 +256,8 @@ namespace vcs_Draw9_Example5c_vcsh
             // If depth > 1, draw the attached branches.
             if (depth > 1)
             {
-                DrawBranch(gr, pen, depth - 1, max_depth, x1, y1,
-                    length * length_scale, theta + dtheta, length_scale,
-                    dtheta);
-                DrawBranch(gr, pen, depth - 1, max_depth, x1, y1,
-                    length * length_scale, theta - dtheta, length_scale,
-                    dtheta);
+                DrawBranch(gr, pen, depth - 1, max_depth, x1, y1, length * length_scale, theta + dtheta, length_scale, dtheta);
+                DrawBranch(gr, pen, depth - 1, max_depth, x1, y1, length * length_scale, theta - dtheta, length_scale, dtheta);
             }
         }
 
@@ -306,9 +311,20 @@ namespace vcs_Draw9_Example5c_vcsh
             pictureBox0.Refresh();
             pictureBox1.Refresh();
         }
-        #endregion queue_breadth_first_tree
-
-
+        //#endregion queue_breadth_first_tree
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
 

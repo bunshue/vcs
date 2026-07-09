@@ -269,38 +269,38 @@ namespace vcs_Queue
         private void button7_Click(object sender, EventArgs e)
         {
             //Queue測試1
-            Queue myQueue = new Queue();
+            Queue myQueue7 = new Queue();
             string[] ary = { "Jack", "Ford", "David" };
             //將陣列置入佇列
             foreach (string name in ary)
             {
-                myQueue.Enqueue(name);
+                myQueue7.Enqueue(name);
             }
             Console.WriteLine(" 1.目前佇列的資料 : ");
-            PrintOut(myQueue);
-            Console.WriteLine(" 1.目前堆疊佇列內資料的個數: {0} ", myQueue.Count);
+            PrintOut(myQueue7);
+            Console.WriteLine(" 1.目前堆疊佇列內資料的個數: {0} ", myQueue7.Count);
             Console.WriteLine(" --------------------------------------------");
 
             // 將 Mary 置入堆疊佇列(最上面)
-            myQueue.Enqueue("Mary");
+            myQueue7.Enqueue("Mary");
             Console.WriteLine(" 2.目前佇列內的資料 : ");
-            PrintOut(myQueue);
+            PrintOut(myQueue7);
 
             // 取得堆疊最上面的資料
-            //myQueue.Peek();
-            Console.WriteLine(" 3.查詢佇列最上面資料 : {0} ", myQueue.Peek());
+            //myQueue7.Peek();
+            Console.WriteLine(" 3.查詢佇列最上面資料 : {0} ", myQueue7.Peek());
             Console.WriteLine(" 3.目前佇列內的資料 :");
-            PrintOut(myQueue);
+            PrintOut(myQueue7);
             Console.WriteLine(" --------------------------------------------");
 
             // 由堆疊最上面取出資料
-            Console.WriteLine(" 4.取出佇列最上面的資料 : {0} ", myQueue.Dequeue());
+            Console.WriteLine(" 4.取出佇列最上面的資料 : {0} ", myQueue7.Dequeue());
             Console.WriteLine(" 4.目前佇列內的資料 : ");
-            PrintOut(myQueue);
+            PrintOut(myQueue7);
             Console.WriteLine(" --------------------------------------------");
 
             // 檢查 "David" 是否在佇列中
-            if (!myQueue.Contains("David"))
+            if (!myQueue7.Contains("David"))
             {
                 Console.WriteLine(" 5.佇列內無 David 資料!");
             }
@@ -310,26 +310,26 @@ namespace vcs_Queue
             }
 
             // 清除佇列
-            myQueue.Clear();
-            Console.WriteLine("\n 6.清除佇列後資料的個數: {0}", myQueue.Count);
-            PrintOut(myQueue);
+            myQueue7.Clear();
+            Console.WriteLine("\n 6.清除佇列後資料的個數: {0}", myQueue7.Count);
+            PrintOut(myQueue7);
             Console.WriteLine(" --------------------------------------------");
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
             //Queue測試2
-            Queue m = new Queue();   // 非泛型           
 
-            m.Enqueue(new Member() { Name = "John", Select = true, Score = 70 });
-            m.Enqueue(new Member() { Name = "Mary", Select = false, Score = 65 });
-            m.Enqueue(new Member() { Name = "Lisa", Select = true, Score = 85 });
-            m.Enqueue(new Member() { Name = "Jack", Select = true, Score = 95 });
+            Queue<Member> myQueue8 = new Queue<Member>();   // 泛型
 
-            Console.WriteLine("=== 非泛型 Queue 操作 需強制轉換 .... \n");
-            while (m.Count > 0)
+            myQueue8.Enqueue(new Member() { Name = "John", Select = true, Score = 70 });
+            myQueue8.Enqueue(new Member() { Name = "Mary", Select = false, Score = 65 });
+            myQueue8.Enqueue(new Member() { Name = "Lisa", Select = true, Score = 85 });
+            myQueue8.Enqueue(new Member() { Name = "Jack", Select = true, Score = 95 });
+
+            while (myQueue8.Count > 0)
             {
-                Console.WriteLine("{0} ", ((Member)m.Dequeue()).ToString());
+                Console.WriteLine("{0} ", (myQueue8.Dequeue().ToString()));
             }
         }
 
@@ -339,19 +339,8 @@ namespace vcs_Queue
         {
             //Queue測試3
 
-            Queue<Member> m = new Queue<Member>();   // 泛型           
 
-            m.Enqueue(new Member() { Name = "John", Select = true, Score = 70 });
-            m.Enqueue(new Member() { Name = "Mary", Select = false, Score = 65 });
-            m.Enqueue(new Member() { Name = "Lisa", Select = true, Score = 85 });
-            m.Enqueue(new Member() { Name = "Jack", Select = true, Score = 95 });
 
-            Console.WriteLine("=== 泛型 Queue 操作不需強制轉換 .... \n");
-
-            while (m.Count > 0)
-            {
-                Console.WriteLine("{0} ", (m.Dequeue().ToString()));
-            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -361,26 +350,25 @@ namespace vcs_Queue
             //Queue測試4
 
             string number = "123456";
-            Queue numberQueue = new Queue();
-            //循環字符串中的所有字符並賦值給numberQueue隊列 
+            Queue myQueue10 = new Queue();
+            //循環字符串中的所有字符並賦值給myQueue10隊列 
             foreach (char c in number)
             {
-                numberQueue.Enqueue(c);
+                myQueue10.Enqueue(c);
             }
 
-            richTextBox1.Text += numberQueue.Count.ToString() + "\n";
-            richTextBox1.Text += numberQueue.Count.ToString() + "\n";
-            richTextBox1.Text += numberQueue.Count.ToString() + "\n";
-            richTextBox1.Text += numberQueue.Count.ToString() + "\n";
+            richTextBox1.Text += "總個數 : " + myQueue10.Count.ToString() + "\n";
 
-            var cc = numberQueue.Dequeue();
-            richTextBox1.Text += "cc = " + cc + "\n";
-            cc = numberQueue.Dequeue();
-            richTextBox1.Text += "cc = " + cc + "\n";
-            cc = numberQueue.Dequeue();
-            richTextBox1.Text += "cc = " + cc + "\n";
+            var cc = myQueue10.Dequeue();
+            richTextBox1.Text += "取出 : " + cc + "\n";
 
-            richTextBox1.Text += numberQueue.Count.ToString() + "\n";
+            cc = myQueue10.Dequeue();
+            richTextBox1.Text += "取出 : " + cc + "\n";
+
+            cc = myQueue10.Dequeue();
+            richTextBox1.Text += "取出 : " + cc + "\n";
+
+            richTextBox1.Text += "總個數 : " + myQueue10.Count.ToString() + "\n";
         }
 
         //------------------------------------------------------------  # 60個

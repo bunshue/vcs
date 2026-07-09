@@ -1630,88 +1630,6 @@ this.toggleOption(0, 2, false);
 
 //------------------------------------------------------------  # 60個
 
-//vcs最小化錄影
-
-//公用變數
-VideoFileWriter writer = new VideoFileWriter();
-
-//開啟檔案
-//writer.Open(filename, W, H, fps);
-
-//寫入影格
-//writer.WriteVideoFrame(bitmap1);
-
-//關閉檔案
-writer.Close();
-
-        private void DoRecord()
-        {
-		VideoFileWriter writer = new VideoFileWriter();
-		
-		writer.Open(RecordingFilename, this.Width, this.Height, 30);
-		
-		Bitmap bitmap1 = frames.Dequeue();
-		writer.WriteVideoFrame(bitmap1);
-		
-		writer.Close();
-        }
-
-宣告QUEUE
-
-Queue<Bitmap> frames = new Queue<Bitmap>(); // Queue that stores frames to be written by the recorder thread
-
-加入資料
-frames.Enqueue((Bitmap)bitmap1.Clone());
-
-取出資料
-if (frames.Count > 0)
-{
-    try
-    {
-        Bitmap bitmap1 = frames.Dequeue();
-        writer.WriteVideoFrame(bitmap1);
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine("xxx錯誤訊息e03 : " + ex.Message);
-    }
-}
-
-//------------------------------------------------------------  # 60個
-
-string thumb = fpath + fn.Replace(CodecExtension, ".jpg");
-
-
-                /*
-                Supported Formats:
-                    Raw	        Raw (uncompressed) video.
-	                MPEG2	    MPEG-2 part 2.
-	                FLV1	    Flash Video (FLV) / Sorenson Spark / Sorenson H.263.
-	                H263P	    H.263+ / H.263-1998 / H.263 version 2.
-	                MSMPEG4v3	MPEG-4 part 2 Microsoft variant version 3.
-	                MSMPEG4v2	MPEG-4 part 2 Microsoft variant version 2.
-	                WMV2	    Windows Media Video 8.
-	                WMV1	    Windows Media Video 7.
-	                MPEG4	    MPEG-4 part 2.
-	                Default	    Default video codec, which FFmpeg library selects for the specified file format.
-                    missing : H264        
-                */
-
-            // as long as we're recording
-            // we dequeue the BitMaps waiting in the Queue and write them to the file
-            while (IsRecording)
-            {
-                if (frames.Count > 0)
-                {
-                    Bitmap bmp = frames.Dequeue();
-                    writer.WriteVideoFrame(bmp);
-                    bmp.Dispose();
-                }
-            }
-            writer.Close();
-
-//------------------------------------------------------------  # 60個
-
             //checkedListBox1
             // 將chkListLot核取清單方塊所有項目設為不勾選
             for (int i = 0; i < checkedListBox1.Items.Count; i++)
@@ -5679,11 +5597,10 @@ vcs_MyLibrary的屬性, 輸出類型 改為 類別庫
 int width  = 320;
 int height = 240;
 
-// create instance of video writer
 VideoFileWriter writer = new VideoFileWriter( );
 
-// create new video file
-writer.Open( "test.avi", width, height, 25, VideoCodec.MPEG4 );
+// 建立錄影檔案
+writer.Open("test.avi", width, height, 25, VideoCodec.MPEG4 );
 
 // create a bitmap to save into the video file
 Bitmap image = new Bitmap( width, height, PixelFormat.Format24bppRgb );
@@ -5695,8 +5612,6 @@ for ( int i = 0; i < 1000; i++ )
     writer.WriteVideoFrame( image );
 }
 writer.Close( );
-
-core highgui imgproc video
 
 //------------------------------------------------------------  # 60個
 eeee
@@ -5843,7 +5758,7 @@ AForge
 namespace AForge.Video.FFMPEG.VideoWriter
 videoWriter = new VideoFileWriter();
 不可用
-	  
+
 //------------------------------------------------------------  # 60個
 
 有沒有AForge的專案有用到 opencv_core231.dll opencv_highgui231.dll opencv_ffmpeg_64.dll 的?
@@ -7682,6 +7597,7 @@ ControlBox = false;//不在窗体标题栏中显示控件
 
 //------------------------------------------------------------  # 60個
 
+rtb
 全選與部分選取
 
 RichTextBox 和 TextBox 需要在Focus的狀態下才可以反白
@@ -8053,7 +7969,6 @@ D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_video\Article_src.zip
 記得sugar似乎也曾經可使用其錄影功能
 
 目前無法 在x64上 使用VideoFileWriter錄影
-
 
 用kilo測一下
 
@@ -8772,8 +8687,6 @@ array
                 Color.Violet
             };
 
-
-
 //------------------------------------------------------------  # 60個
 
 
@@ -8785,18 +8698,12 @@ array
 
 this.DoubleBuffered = true;//避免闪烁
 	
-//最大化螢幕
-this.FormBorderStyle = FormBorderStyle.None;
-this.WindowState = FormWindowState.Maximized;
+this.WindowState = FormWindowState.Maximized;//最大化螢幕
+this.WindowState = FormWindowState.Normal;
+this.WindowState = FormWindowState.Minimized;//最小最小化
 
 this.FormBorderStyle = FormBorderStyle.None;//設定無邊框
-this.FormBorderStyle = FormBorderStyle.None;//設定無邊框
-this.FormBorderStyle = FormBorderStyle.None;
 
-//最小化螢幕
-
-//最小最小化
-this.WindowState = FormWindowState.Minimized;
 this.ShowInTaskbar = false;//不在TaskBar上顯示程式
 this.ShowInTaskbar = false;//不在任务栏显现
 
@@ -8804,36 +8711,18 @@ this.ShowInTaskbar = false;//不在任务栏显现
 //預設背景色	
 this.BackColor = SystemColors.ControlLight;
 
-button1.Visible = false;
-richTextBox1.Visible = false;
 this.AutoSize = true;
 this.AutoSizeMode = AutoSizeMode.GrowAndShrink;     //讓表單大小可以自動隨著圖片大小變化。
 this.TransparencyKey = SystemColors.ControlLight;   //將表單的TransparencyKey設為Control，這樣可以去掉桌面小玩意外圍多餘的部份
 
-this.FormBorderStyle = FormBorderStyle.None;
 this.BackColor = Color.Black;
 
-this.FormBorderStyle = FormBorderStyle.None;
 this.FormBorderStyle = FormBorderStyle.FixedSingle;
-this.FormBorderStyle = FormBorderStyle.None;
-this.WindowState = FormWindowState.Maximized;
-this.WindowState = FormWindowState.Normal;
-this.WindowState = FormWindowState.Maximized;//最大化螢幕
-this.WindowState = FormWindowState.Maximized;
-
 
 this.StartPosition = FormStartPosition.Manual;
-this.StartPosition = FormStartPosition.CenterScreen;
-this.StartPosition = FormStartPosition.CenterScreen;  // 單獨寫致中，看似無效
 this.StartPosition = FormStartPosition.CenterScreen;  // 單獨寫致中，看似無效
 
 this.MaximizeBox = false;
-
-this.pictureBox1.Focus();
-
-//最大化螢幕
-this.FormBorderStyle = FormBorderStyle.None;
-this.WindowState = FormWindowState.Maximized;
 
 //------------------------------------------------------------  # 60個
 //------------------------------------------------------------  # 60個
@@ -8855,10 +8744,73 @@ if (Directory.Exists(foldername) == false)
 	Directory.CreateDirectory(foldername);
 }
 
-
 //------------------------------------------------------------  # 60個
 //------------------------------------------------------------  # 60個
 
+測試QUEUE
 
+//vcs最小化錄影
+
+//公用變數
+VideoFileWriter writer = new VideoFileWriter();
+
+//開啟檔案
+//writer.Open(filename, W, H, fps);
+
+//寫入影格
+//writer.WriteVideoFrame(bitmap1);
+
+//關閉檔案
+writer.Close();
+
+取出資料
+if (frames.Count > 0)
+{
+    try
+    {
+        Bitmap bitmap1 = frames.Dequeue();
+        
+        writer.WriteVideoFrame(bitmap1);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("xxx錯誤訊息e03 : " + ex.Message);
+    }
+}
+
+//------------------------------------------------------------  # 60個
+                /*
+                Supported Formats:
+                    Raw	        Raw (uncompressed) video.
+	                MPEG2	    MPEG-2 part 2.
+	                FLV1	    Flash Video (FLV) / Sorenson Spark / Sorenson H.263.
+	                H263P	    H.263+ / H.263-1998 / H.263 version 2.
+	                MSMPEG4v3	MPEG-4 part 2 Microsoft variant version 3.
+	                MSMPEG4v2	MPEG-4 part 2 Microsoft variant version 2.
+	                WMV2	    Windows Media Video 8.
+	                WMV1	    Windows Media Video 7.
+	                MPEG4	    MPEG-4 part 2.
+	                Default	    Default video codec, which FFmpeg library selects for the specified file format.
+                    missing : H264        
+                */
+
+            // as long as we're recording
+            // we dequeue the BitMaps waiting in the Queue and write them to the file
+            while (IsRecording)
+            {
+                if (frames.Count > 0)
+                {
+                    Bitmap bmp = frames.Dequeue();
+                    writer.WriteVideoFrame(bmp);
+                    bmp.Dispose();
+                }
+            }
+            writer.Close();
+
+//------------------------------------------------------------  # 60個
+
+string thumb = fpath + fn.Replace(CodecExtension, ".jpg");
+
+//------------------------------------------------------------  # 60個
 
 
