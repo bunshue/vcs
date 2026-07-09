@@ -199,40 +199,35 @@ namespace vcs_DrAP
             x_st += bt_find_big_files.Size.Width + dx;
             bt_start_files.Location = new Point(x_st, y_st + dy * 0);
 
-            x_st += bt_start_files.Size.Width*2 + dx;
-
-            bt_find_same_files.Location = new Point(x_st, y_st + dy * 1);
+            x_st += bt_start_files.Size.Width * 2 + dx;
 
             x_st += 75 + dx;
             x_st += 75 + dx;
             x_st += 75 + dx;
             x_st += 75 + dx;
             x_st += 75 + dx;
-            bt_delete_file.Location = new Point(x_st - 8, y_st + dy * 0);
+            bt_delete_file.Location = new Point(x_st - 120, y_st + dy * 1+20);
 
-            x_st = 1000;
+            x_st = 960;
             y_st = 15;
 
             textBox4.Location = new Point(x_st - 10 - 120, y_st);
             label3.Location = new Point(x_st + 35 - 120, y_st + 8);
 
-            bt_find_empty_folders.Location = new Point(x_st + 55, y_st);
-            bt_find_small_folders.Location = new Point(x_st + 55, y_st + 30);
+            bt_find_empty_folders.Location = new Point(x_st - 55, y_st);
+            bt_find_small_folders.Location = new Point(x_st - 55, y_st + 30);
+            cb_option1.Location = new Point(x_st - 55, y_st + 60);  // 滿30結束
 
-            dx = 85;
-            dy = 35;
-            cb_option1.Location = new Point(x_st + 100 + 100 + dx * 1 - 100, y_st + dy + 5);
-
-            x_st = 1180;
+            x_st = 1050;
             y_st = 10;
             tb_search.Location = new Point(x_st, y_st);
 
-            x_st = 1440 - 100;
+            x_st = 1220;
             y_st = 6;
             dx = 55;
             dy = 55;
             bt_search_pattern_vcs.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            bt_open_with_vcs.Location = new Point(x_st + dx * -1, y_st + dy * 1);
+            bt_open_with_vcs.Location = new Point(x_st + dx * 0, y_st + dy * 1);
 
             bt_open_dir2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
 
@@ -254,7 +249,7 @@ namespace vcs_DrAP
             bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Width - bt_clear2.Width, richTextBox2.Location.Y);
             bt_copy_rtb_data.Location = new Point(richTextBox2.Location.X + richTextBox2.Width - bt_clear2.Width, richTextBox2.Location.Y + bt_clear2.Height);
 
-            x_st = 1510;
+            x_st = 1420;
             y_st = 4;
             groupbox_python.Location = new Point(x_st, y_st);
             groupbox_python.Size = new Size(112, 106);
@@ -515,11 +510,11 @@ namespace vcs_DrAP
             listView1.Columns.Add("修改日期", 100, HorizontalAlignment.Left);
             listView1.Visible = true;
 
-                //排序 由小到大
-                //fileinfos.Sort((x, y) => { return x.filesize.CompareTo(y.filesize); });
+            //排序 由小到大
+            //fileinfos.Sort((x, y) => { return x.filesize.CompareTo(y.filesize); });
 
-                //排序 由大到小  在return的地方多個負號
-                fileinfos.Sort((x, y) => { return -x.filesize.CompareTo(y.filesize); });
+            //排序 由大到小  在return的地方多個負號
+            fileinfos.Sort((x, y) => { return -x.filesize.CompareTo(y.filesize); });
 
             if (fileinfos.Count == 0)
             {
@@ -747,11 +742,11 @@ namespace vcs_DrAP
             listView1.Columns.Add("修改日期", 250, HorizontalAlignment.Left);
             listView1.Visible = true;
 
-                //排序 由小到大
-                //fileinfos.Sort((x, y) => { return x.filesize.CompareTo(y.filesize); });
+            //排序 由小到大
+            //fileinfos.Sort((x, y) => { return x.filesize.CompareTo(y.filesize); });
 
-                //排序 由大到小  在return的地方多個負號       先不排序
-                //fileinfos.Sort((x, y) => { return -x.filesize.CompareTo(y.filesize); });
+            //排序 由大到小  在return的地方多個負號       先不排序
+            //fileinfos.Sort((x, y) => { return -x.filesize.CompareTo(y.filesize); });
 
             for (int i = 0; i < folderinfos.Count; i++)
             {
@@ -1453,100 +1448,6 @@ namespace vcs_DrAP
             richTextBox1.ScrollToCaret();
         }
 
-        void show_file_info4()
-        {
-            richTextBox1.Text += "show_file_info4 ST 找同檔\n";
-
-            listView1.View = View.Details;  //定義列表顯示的方式
-            listView1.FullRowSelect = true; //整行一起選取
-            listView1.Clear();
-
-            //設置列名稱
-            if (cb_video_only.Checked == true)
-            {
-                listView1.Columns.Add("影片4", 100, HorizontalAlignment.Left);
-            }
-            listView1.Columns.Add("檔名4", 300, HorizontalAlignment.Left);
-            listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
-            listView1.Columns.Add("大小", 150, HorizontalAlignment.Left);
-            listView1.Columns.Add("副檔名", 100, HorizontalAlignment.Left);
-            listView1.Columns.Add("修改日期", 100, HorizontalAlignment.Left);
-            listView1.Visible = true;
-
-            if (fileinfos.Count == 0)
-            {
-                result_str += "找不到資料d\n";
-                lb_search_result1.Text = "0";
-            }
-            else
-            {
-                result_str += "找到 " + fileinfos.Count.ToString() + " 筆資料d\n";
-                lb_search_result1.Text = fileinfos.Count.ToString();
-            }
-
-            for (int i = 0; i < (fileinfos.Count - 1); i++)
-            {
-                for (int j = i + 1; j < fileinfos.Count; j++)
-                {
-                    if (fileinfos[i].filesize == fileinfos[j].filesize)
-                    {
-                        result_str += "檔案大小相同 " + fileinfos[i].filename + " 容量 " + ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize)) + "\n";
-                        result_str += "檔案大小相同 " + fileinfos[j].filename + " 容量 " + ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[j].filesize)) + "\n";
-
-                        ListViewItem i1 = new ListViewItem(fileinfos[i].filename);
-                        i1.UseItemStyleForSubItems = false;
-
-                        ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
-                        i1.SubItems.Add(fileinfos[i].filepath);
-                        sub_i1a.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
-                        i1.SubItems.Add(sub_i1a);
-                        i1.SubItems.Add(fileinfos[i].fileextension);
-                        sub_i1a.ForeColor = Color.Blue;
-                        sub_i1a.Font = new Font("Times New Roman", 10, FontStyle.Bold);
-
-                        listView1.Items.Add(i1);
-
-                        ListViewItem i2 = new ListViewItem(fileinfos[j].filename);
-                        i2.UseItemStyleForSubItems = false;
-
-                        ListViewItem.ListViewSubItem sub_i2a = new ListViewItem.ListViewSubItem();
-                        i2.SubItems.Add(fileinfos[j].filepath);
-                        sub_i2a.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[j].filesize));
-                        i2.SubItems.Add(sub_i2a);
-                        i2.SubItems.Add(fileinfos[j].fileextension);
-                        sub_i2a.ForeColor = Color.Blue;
-                        sub_i2a.Font = new Font("Times New Roman", 10, FontStyle.Bold);
-
-                        listView1.Items.Add(i2);
-
-                        //設置ListView最後一行可見
-                        //listView1.Items[listView1.Items.Count - 1].EnsureVisible();
-                    }
-                }
-
-                /*
-                ListViewItem i1 = new ListViewItem(fileinfos[i].filename);
-
-                i1.UseItemStyleForSubItems = false;
-
-                ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
-
-                //sub_i1a.Text = fi.Length.ToString();
-                sub_i1a.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
-                i1.SubItems.Add(sub_i1a);
-                sub_i1a.ForeColor = Color.Blue;
-
-                sub_i1a.Font = new Font("Times New Roman", 10, FontStyle.Bold);
-                */
-            }
-        }
-
-        private void bt_find_same_files_Click(object sender, EventArgs e)
-        {
-            //找同檔
-            show_file_info4();
-        }
-
         private void bt_add_dir_Click(object sender, EventArgs e)
         {
             //folderBrowserDialog1.SelectedPath = search_path;  //預設開啟的路徑
@@ -1789,67 +1690,67 @@ namespace vcs_DrAP
             }
 
             //儲存磁碟資訊
-                result_str += "listbox 共有 " + listBox1.Items.Count.ToString() + " 個項目\n";
-                for (int i = 0; i < listBox1.Items.Count; i++)
+            result_str += "listbox 共有 " + listBox1.Items.Count.ToString() + " 個項目\n";
+            for (int i = 0; i < listBox1.Items.Count; i++)
+            {
+                path = listBox1.Items[i].ToString();
+
+                //找資料夾所在的硬碟的標籤
+                //richTextBox1.Text += "\n資料夾路徑" + path + "\n";
+
+                if (System.IO.File.Exists(path) == true)
                 {
-                    path = listBox1.Items[i].ToString();
+                    // path 是個 檔案
+                    richTextBox1.Text += "是個檔案\n";
+                }
+                else if (Directory.Exists(path) == true)
+                {
+                    // path 是個 資料夾
+                    DirectoryInfo d = new DirectoryInfo(path);//輸入檔案夾
+                    /*
+                    richTextBox1.Text += "Name : " + d.Name + "\n";
+                    richTextBox1.Text += "FullName : " + d.FullName + "\n";
+                    richTextBox1.Text += "Parent : " + d.Parent + "\n";
+                    richTextBox1.Text += "Root : " + d.Root + "\n";
+                    */
 
-                    //找資料夾所在的硬碟的標籤
-                    //richTextBox1.Text += "\n資料夾路徑" + path + "\n";
+                    DriveInfo drive = new DriveInfo(d.Root.ToString());
 
-                    if (System.IO.File.Exists(path) == true)
+                    if (drive.IsReady == true)
                     {
-                        // path 是個 檔案
-                        richTextBox1.Text += "是個檔案\n";
-                    }
-                    else if (Directory.Exists(path) == true)
-                    {
-                        // path 是個 資料夾
-                        DirectoryInfo d = new DirectoryInfo(path);//輸入檔案夾
+                        richTextBox1.Text += "\nAP." + drive.VolumeLabel + DateTime.Now.ToString(".yyyy.MMdd.HHmm") + "\n\n";
+
+                        richTextBox1.Text += string.Format("{0,-10}{1,-15}", "磁碟 :", drive.ToString()) + "\n";
+                        richTextBox1.Text += string.Format("{0,-10}{1,-15}", "標籤 :", drive.VolumeLabel) + "\n";
+                        //richTextBox1.Text += string.Format("{0,-12}{1,-25}", "名稱 :", drive.Name) + "\n";
+                        richTextBox1.Text += string.Format("{0,-12}{1,17}{2,-7}{3,10}",
+                            "使用空間 :", (drive.TotalSize - drive.AvailableFreeSpace).ToString("N0", CultureInfo.InvariantCulture), " 個位元組", ByteConversionTBGBMBKB(Convert.ToInt64(drive.TotalSize - drive.AvailableFreeSpace))) + "\n";
+                        double percentage = (double)drive.AvailableFreeSpace / (double)drive.TotalSize;
+                        richTextBox1.Text += string.Format("{0,-12}{1,17}{2,-7}{3,10}{4,-10}",
+                            "可用空間 :", drive.AvailableFreeSpace.ToString("N0", CultureInfo.InvariantCulture), " 個位元組",
+                            ByteConversionTBGBMBKB(Convert.ToInt64(drive.AvailableFreeSpace)),
+                            " ( " + percentage.ToString("P", CultureInfo.InvariantCulture) + " )")
+                            + "\n";
+                        richTextBox1.Text += string.Format("{0,-12}{1,17}{2,-7}{3,10}",
+                            "磁碟容量 :", drive.TotalSize.ToString("N0", CultureInfo.InvariantCulture), " 個位元組", ByteConversionTBGBMBKB(Convert.ToInt64(drive.TotalSize))) + "\n";
+
                         /*
-                        richTextBox1.Text += "Name : " + d.Name + "\n";
-                        richTextBox1.Text += "FullName : " + d.FullName + "\n";
-                        richTextBox1.Text += "Parent : " + d.Parent + "\n";
-                        richTextBox1.Text += "Root : " + d.Root + "\n";
+                        richTextBox1.Text += "格式 : " + drive.DriveFormat + "\n";
+                        richTextBox1.Text += "型態 : " + drive.DriveType + "\n";
+                        richTextBox1.Text += "根目錄 : " + drive.RootDirectory + "\n";
                         */
-
-                        DriveInfo drive = new DriveInfo(d.Root.ToString());
-
-                        if (drive.IsReady == true)
-                        {
-                            richTextBox1.Text += "\nAP." + drive.VolumeLabel + DateTime.Now.ToString(".yyyy.MMdd.HHmm") + "\n\n";
-
-                            richTextBox1.Text += string.Format("{0,-10}{1,-15}", "磁碟 :", drive.ToString()) + "\n";
-                            richTextBox1.Text += string.Format("{0,-10}{1,-15}", "標籤 :", drive.VolumeLabel) + "\n";
-                            //richTextBox1.Text += string.Format("{0,-12}{1,-25}", "名稱 :", drive.Name) + "\n";
-                            richTextBox1.Text += string.Format("{0,-12}{1,17}{2,-7}{3,10}",
-                                "使用空間 :", (drive.TotalSize - drive.AvailableFreeSpace).ToString("N0", CultureInfo.InvariantCulture), " 個位元組", ByteConversionTBGBMBKB(Convert.ToInt64(drive.TotalSize - drive.AvailableFreeSpace))) + "\n";
-                            double percentage = (double)drive.AvailableFreeSpace / (double)drive.TotalSize;
-                            richTextBox1.Text += string.Format("{0,-12}{1,17}{2,-7}{3,10}{4,-10}",
-                                "可用空間 :", drive.AvailableFreeSpace.ToString("N0", CultureInfo.InvariantCulture), " 個位元組",
-                                ByteConversionTBGBMBKB(Convert.ToInt64(drive.AvailableFreeSpace)),
-                                " ( " + percentage.ToString("P", CultureInfo.InvariantCulture) + " )")
-                                + "\n";
-                            richTextBox1.Text += string.Format("{0,-12}{1,17}{2,-7}{3,10}",
-                                "磁碟容量 :", drive.TotalSize.ToString("N0", CultureInfo.InvariantCulture), " 個位元組", ByteConversionTBGBMBKB(Convert.ToInt64(drive.TotalSize))) + "\n";
-
-                            /*
-                            richTextBox1.Text += "格式 : " + drive.DriveFormat + "\n";
-                            richTextBox1.Text += "型態 : " + drive.DriveType + "\n";
-                            richTextBox1.Text += "根目錄 : " + drive.RootDirectory + "\n";
-                            */
-                            drawDiskSpace(drive.AvailableFreeSpace, drive.TotalSize);
-                        }
-                        else
-                        {
-                            richTextBox1.Text += "磁碟 " + drive.ToString() + "未就緒\n";
-                        }
+                        drawDiskSpace(drive.AvailableFreeSpace, drive.TotalSize);
                     }
                     else
                     {
-                        richTextBox1.Text += "非合法路徑或檔案d\n";
+                        richTextBox1.Text += "磁碟 " + drive.ToString() + "未就緒\n";
                     }
                 }
+                else
+                {
+                    richTextBox1.Text += "非合法路徑或檔案d\n";
+                }
+            }
             richTextBox1.Text += "\n";
 
             result_str += "listbox 共有 " + listBox1.Items.Count.ToString() + " 個項目\n";
@@ -1889,54 +1790,54 @@ namespace vcs_DrAP
         {
             string filename = string.Empty;
 
-                //磁碟資訊
-                string hddname = string.Empty;
+            //磁碟資訊
+            string hddname = string.Empty;
 
-                result_str += "listbox 共有 " + listBox1.Items.Count.ToString() + " 個項目\n";
-                for (int i = 0; i < listBox1.Items.Count; i++)
+            result_str += "listbox 共有 " + listBox1.Items.Count.ToString() + " 個項目\n";
+            for (int i = 0; i < listBox1.Items.Count; i++)
+            {
+                path = listBox1.Items[i].ToString();
+
+                //找資料夾所在的硬碟的標籤
+
+                //richTextBox1.Text += "\n資料夾路徑" + path + "\n";
+
+                if (System.IO.File.Exists(path) == true)
                 {
-                    path = listBox1.Items[i].ToString();
+                    // path 是個 檔案
+                    richTextBox1.Text += "是個檔案\n";
+                }
+                else if (Directory.Exists(path) == true)
+                {
+                    // path 是個 資料夾
+                    DirectoryInfo d = new DirectoryInfo(path);//輸入檔案夾
+                    /*
+                    richTextBox1.Text += "Name : " + d.Name + "\n";
+                    richTextBox1.Text += "FullName : " + d.FullName + "\n";
+                    richTextBox1.Text += "Parent : " + d.Parent + "\n";
+                    richTextBox1.Text += "Root : " + d.Root + "\n";
+                    */
 
-                    //找資料夾所在的硬碟的標籤
+                    DriveInfo drive = new DriveInfo(d.Root.ToString());
 
-                    //richTextBox1.Text += "\n資料夾路徑" + path + "\n";
-
-                    if (System.IO.File.Exists(path) == true)
+                    if (drive.IsReady == true)
                     {
-                        // path 是個 檔案
-                        richTextBox1.Text += "是個檔案\n";
-                    }
-                    else if (Directory.Exists(path) == true)
-                    {
-                        // path 是個 資料夾
-                        DirectoryInfo d = new DirectoryInfo(path);//輸入檔案夾
-                        /*
-                        richTextBox1.Text += "Name : " + d.Name + "\n";
-                        richTextBox1.Text += "FullName : " + d.FullName + "\n";
-                        richTextBox1.Text += "Parent : " + d.Parent + "\n";
-                        richTextBox1.Text += "Root : " + d.Root + "\n";
-                        */
-
-                        DriveInfo drive = new DriveInfo(d.Root.ToString());
-
-                        if (drive.IsReady == true)
-                        {
-                            hddname = drive.VolumeLabel;
-                        }
-                        else
-                        {
-                            richTextBox1.Text += "磁碟 " + drive.ToString() + "未就緒" + "\n";
-                            hddname = "NotReady";
-                        }
+                        hddname = drive.VolumeLabel;
                     }
                     else
                     {
-                        richTextBox1.Text += "非合法路徑或檔案f\n";
+                        richTextBox1.Text += "磁碟 " + drive.ToString() + "未就緒" + "\n";
+                        hddname = "NotReady";
                     }
                 }
-                filename = "AP." + hddname + DateTime.Now.ToString(".yyyy.MMdd.HHmm") + ".txt";
-                //不儲存磁碟資訊
-                //filename = "AP." + DateTime.Now.ToString("yyyy.MMdd.HHmm") + ".txt";
+                else
+                {
+                    richTextBox1.Text += "非合法路徑或檔案f\n";
+                }
+            }
+            filename = "AP." + hddname + DateTime.Now.ToString(".yyyy.MMdd.HHmm") + ".txt";
+            //不儲存磁碟資訊
+            //filename = "AP." + DateTime.Now.ToString("yyyy.MMdd.HHmm") + ".txt";
 
             //建立一個檔案
             //StreamWriter sw = System.IO.File.CreateText(filename);
@@ -2255,7 +2156,7 @@ namespace vcs_DrAP
             //C# – 複製資料到剪貼簿
             //Clipboard.SetData(DataFormats.Text, richTextBox1.Text + "\n");
             Clipboard.SetDataObject(richTextBox2.Text + "\n");      //建議用此
-            result_str += "已複製資料到系統剪貼簿\n";
+            richTextBox2.Text += "已複製資料到系統剪貼簿\n";
         }
 
         private void bt_compare_Click(object sender, EventArgs e)
@@ -2702,4 +2603,5 @@ namespace vcs_DrAP
 /*  可搬出
 
 */
+
 

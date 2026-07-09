@@ -41,7 +41,6 @@
             this.tb_search_text_pattern = new System.Windows.Forms.TextBox();
             this.bt_find_big_files = new System.Windows.Forms.Button();
             this.tb_search = new System.Windows.Forms.TextBox();
-            this.bt_find_same_files = new System.Windows.Forms.Button();
             this.bt_add_dir = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.bt_remove_dir = new System.Windows.Forms.Button();
@@ -94,7 +93,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(724, 37);
+            this.label1.Location = new System.Drawing.Point(695, 31);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 0;
@@ -108,7 +107,7 @@
             "影片",
             "全部檔案",
             "音樂"});
-            this.comboBox1.Location = new System.Drawing.Point(765, 34);
+            this.comboBox1.Location = new System.Drawing.Point(736, 28);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(88, 21);
             this.comboBox1.TabIndex = 1;
@@ -201,17 +200,6 @@
             this.tb_search.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_search_KeyDown);
             this.tb_search.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_search_KeyPress);
             // 
-            // bt_find_same_files
-            // 
-            this.bt_find_same_files.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_find_same_files.Location = new System.Drawing.Point(537, 30);
-            this.bt_find_same_files.Name = "bt_find_same_files";
-            this.bt_find_same_files.Size = new System.Drawing.Size(156, 23);
-            this.bt_find_same_files.TabIndex = 27;
-            this.bt_find_same_files.Text = "找同檔";
-            this.bt_find_same_files.UseVisualStyleBackColor = true;
-            this.bt_find_same_files.Click += new System.EventHandler(this.bt_find_same_files_Click);
-            // 
             // bt_add_dir
             // 
             this.bt_add_dir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
@@ -271,7 +259,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(907, 18);
+            this.label3.Location = new System.Drawing.Point(879, 18);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(23, 12);
             this.label3.TabIndex = 34;
@@ -280,7 +268,7 @@
             // textBox4
             // 
             this.textBox4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox4.Location = new System.Drawing.Point(859, 10);
+            this.textBox4.Location = new System.Drawing.Point(831, 10);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(42, 30);
             this.textBox4.TabIndex = 33;
@@ -314,7 +302,7 @@
             this.cb_video_only.AutoSize = true;
             this.cb_video_only.Checked = true;
             this.cb_video_only.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_video_only.Location = new System.Drawing.Point(461, 65);
+            this.cb_video_only.Location = new System.Drawing.Point(471, 12);
             this.cb_video_only.Name = "cb_video_only";
             this.cb_video_only.Size = new System.Drawing.Size(60, 16);
             this.cb_video_only.TabIndex = 42;
@@ -341,7 +329,7 @@
             this.groupBox_video.Controls.Add(this.cb_video_l);
             this.groupBox_video.Controls.Add(this.cb_video_m);
             this.groupBox_video.Controls.Add(this.cb_video_s);
-            this.groupBox_video.Location = new System.Drawing.Point(521, 59);
+            this.groupBox_video.Location = new System.Drawing.Point(531, 6);
             this.groupBox_video.Name = "groupBox_video";
             this.groupBox_video.Size = new System.Drawing.Size(160, 50);
             this.groupBox_video.TabIndex = 46;
@@ -384,7 +372,7 @@
             this.groupBox_file.Controls.Add(this.cb_file_s);
             this.groupBox_file.Controls.Add(this.tb_file_l);
             this.groupBox_file.Controls.Add(this.label2);
-            this.groupBox_file.Location = new System.Drawing.Point(760, 59);
+            this.groupBox_file.Location = new System.Drawing.Point(532, 57);
             this.groupBox_file.Name = "groupBox_file";
             this.groupBox_file.Size = new System.Drawing.Size(292, 50);
             this.groupBox_file.TabIndex = 47;
@@ -448,7 +436,7 @@
             this.cb_file_size.AutoSize = true;
             this.cb_file_size.Checked = true;
             this.cb_file_size.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_file_size.Location = new System.Drawing.Point(684, 65);
+            this.cb_file_size.Location = new System.Drawing.Point(462, 63);
             this.cb_file_size.Name = "cb_file_size";
             this.cb_file_size.Size = new System.Drawing.Size(72, 16);
             this.cb_file_size.TabIndex = 49;
@@ -673,7 +661,7 @@
             this.bt_delete_file.BackgroundImage = global::vcs_DrAP.Properties.Resources.delete;
             this.bt_delete_file.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_delete_file.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_delete_file.Location = new System.Drawing.Point(940, 6);
+            this.bt_delete_file.Location = new System.Drawing.Point(912, 6);
             this.bt_delete_file.Name = "bt_delete_file";
             this.bt_delete_file.Size = new System.Drawing.Size(50, 50);
             this.bt_delete_file.TabIndex = 22;
@@ -733,7 +721,6 @@
             this.Controls.Add(this.bt_copy_rtb_data);
             this.Controls.Add(this.bt_setup);
             this.Controls.Add(this.cb_option1);
-            this.Controls.Add(this.cb_file_size);
             this.Controls.Add(this.groupBox_file);
             this.Controls.Add(this.groupBox_video);
             this.Controls.Add(this.cb_video_only);
@@ -747,7 +734,6 @@
             this.Controls.Add(this.bt_remove_dir);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.bt_add_dir);
-            this.Controls.Add(this.bt_find_same_files);
             this.Controls.Add(this.bt_search_pattern_vcs);
             this.Controls.Add(this.tb_search);
             this.Controls.Add(this.bt_find_big_files);
@@ -759,6 +745,7 @@
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.cb_file_size);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "DrAP";
@@ -795,7 +782,6 @@
         private System.Windows.Forms.Button bt_delete_file;
         private System.Windows.Forms.TextBox tb_search;
         private System.Windows.Forms.Button bt_search_pattern_vcs;
-        private System.Windows.Forms.Button bt_find_same_files;
         private System.Windows.Forms.Button bt_add_dir;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button bt_remove_dir;

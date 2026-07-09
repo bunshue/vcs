@@ -15,6 +15,9 @@ namespace vcs_DiskDirectoryFile1
 {
     public partial class Form1 : Form
     {
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+        string foldername = @"D:\_git\vcs\_1.data\______test_files1\";
+
         public Form1()
         {
             InitializeComponent();
@@ -386,7 +389,7 @@ namespace vcs_DiskDirectoryFile1
             //FileInfo 的方法
 
             //取得檔案資訊
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             FileInfo fi = new FileInfo(filename);
             if (fi.Exists == false)      //確認檔案是否存在
@@ -839,6 +842,18 @@ namespace vcs_DiskDirectoryFile1
 
             //------------------------------------------------------------  # 60個
 
+            //一般文件名按顺序排
+            foldername = @"D:\_git\vcs\_1.data\______test_files1\";
+
+            string[] filenames = Directory.GetFileSystemEntries(foldername, "*.png");
+
+            for (int i = 0, count = filenames.Length; i < count; i++)
+            {
+                richTextBox1.Text += filenames[i] + "\n";
+            }
+
+            //------------------------------------------------------------  # 60個
+
             //刪除資料夾
             Path = @"D:/_git/vcs/_1.data/______test_files_file_name2";
             /*
@@ -881,16 +896,6 @@ namespace vcs_DiskDirectoryFile1
             Directory.Delete(pPath, true);
             return retval;
             */
-
-            //------------------------------------------------------------  # 60個
-
-            string foldername = @"D:\_git\vcs\_1.data\______test_files1\";
-
-            if (Directory.Exists(foldername) == false)
-            {
-                richTextBox1.Text += "路徑不存在, 建立之。\n";
-                Directory.CreateDirectory(foldername);
-            }
 
             //------------------------------------------------------------  # 60個
 
@@ -1912,7 +1917,7 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_files10_Click(object sender, EventArgs e)
         {
-            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic";
+            foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic";
 
             richTextBox1.Text += "全目錄 : " + foldername + "\n";
             richTextBox1.Text += "上層目錄 : " + new DirectoryInfo(foldername).Parent + "\n";
@@ -1920,6 +1925,8 @@ namespace vcs_DiskDirectoryFile1
             richTextBox1.Text += "上上層目錄的全目錄 : " + new DirectoryInfo(foldername).Parent.Parent.FullName + "\n";
 
             //------------------------------------------------------------  # 60個
+
+
 
         }
 
@@ -2225,26 +2232,12 @@ fi.Rename("test2.txt");
 
 //------------------------------------------------------------  # 60個
 
-//一般文件名按顺序排
-string[] pngfiles = Directory.GetFileSystemEntries(directory, "*.png");
-
-for (int i = 0, count = pngfiles.Length; i < count; i++)
-{
-    e.AddFrame(Image.FromFile(pngfiles[i]));
-}
-
-//------------------------------------------------------------  # 60個
-
 
 
 */
 
 
 
-
-
-//            richTextBox1.Text += "臨時文件目錄 : " + Path.GetTempPath() + "\n";
-//richTextBox1.Text += "臨時文件目錄 : " + Path.GetTempFileName() + "\n";
 
 
 

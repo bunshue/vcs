@@ -112,7 +112,7 @@ namespace vcs_Mix00
             pictureBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y);
 
-            richTextBox1.Size = new Size(320, 680);
+            richTextBox1.Size = new Size(320, 690);
             richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -795,13 +795,60 @@ namespace vcs_Mix00
 
         private void button20_Click(object sender, EventArgs e)
         {
+            //由檔頭資料找出檔案的真實格式
+            richTextBox1.Text += "由檔頭資料找出檔案的真實格式\n";
+
+            Dictionary<string, string> ImageTypes = new Dictionary<string, string>()
+            {
+            { "FFD8", ".jpg" },
+            { "424D", ".bmp" },
+            { "474946", ".gif" },
+            { "89504E470D0A1A0A", ".png" }
+            };
+
+            richTextBox1.Text += "len = " + ImageTypes.Count.ToString() + "\n";
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+
+            string builtHex = string.Empty;
+            string ext = string.Empty;
+            using (Stream S = File.OpenRead(filename))
+            {
+                for (int i = 0; i < 8; i++)
+                {
+                    builtHex += S.ReadByte().ToString("X2");
+                    if (ImageTypes.ContainsKey(builtHex))
+                    {
+                        ext = ImageTypes[builtHex];
+                        break;
+                    }
+                }
+            }
+            richTextBox1.Text += "取得真實副檔名 : " + ext + "\n";
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button21_Click(object sender, EventArgs e)
         {
+            //避免在 UI 執行緒做耗時工作
+            //把長時間運算或 IO 操作放到 Task.Run 或 BackgroundWorker。
+            //UI 執行緒只負責更新介面、處理事件。
+            // 錯誤做法：直接在按鈕事件跑耗時計算
+            for (int i = 0; i < 1000000000; i++)
+            {
+                /* heavy work */
+            }
+
+            richTextBox1.Text += "完成\n";
+
+
+            // 正確做法：丟到背景執行緒
+
+
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button22_Click(object sender, EventArgs e)
         {

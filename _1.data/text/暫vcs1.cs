@@ -1,4 +1,5 @@
-﻿            string path = AppDomain.CurrentDomain.BaseDirectory;
+﻿
+            string path = AppDomain.CurrentDomain.BaseDirectory;
             path = Path.Combine(path, "Logger3_\\" + DateTime.Now.ToString("yy-MM-dd"));
 
             if (!Directory.Exists(path))
@@ -773,13 +774,6 @@ cccc
 vcs 之 radioButton 可以用Image, Text設為空
 
 //------------------------------------------------------------  # 60個
-
-/*
-//圖片檔案 => Image => MemoryStream(ms) => 拜列
-//拜列 => MemoryStream(ms) => Image => 圖片檔案
-// bmp/png 資料長度 4*W*H + 檔頭54拜
-// jpg     資料長度 3*W*H + 檔頭54拜
-*/
 
 richTextBox1.Text += byte_data[i].ToString("D03");
 
@@ -2323,26 +2317,29 @@ C#通過POP3協議驗證 Email 賬號
 
 static bool ValidateEmailAccount(string server, int port, string userName, string password, out string ErrorMessage) 
         { 
-            ErrorMessage = ""; 
-            //create a tcp connection 
-            TcpClient _server = new TcpClient(server, port); 
-            //prepare  
-            NetworkStream netStream = _server.GetStream(); 
-            StreamReader reader = new StreamReader(_server.GetStream()); 
-            if (!reader.ReadLine().Contains("+OK")) 
+            ErrorMessage = "";
+            //create a tcp connection
+            TcpClient _server = new TcpClient(server, port);
+            
+            //prepare
+            NetworkStream netStream = _server.GetStream();
+            
+            StreamReader sr = new StreamReader(_server.GetStream());
+            if (!sr.ReadLine().Contains("+OK"))
            { 
-                //失敗 
-                ErrorMessage = "server鏈接失敗"; 
-                return false; 
+                //失敗
+                ErrorMessage = "server鏈接失敗";
+                return false;
             } 
-            string data; 
-            byte[] charData; 
-            string CRLF = "\r\n"; 
-            //login 
-            data = "USER " + userName + CRLF; 
-            charData = Encoding.ASCII.GetBytes(data); 
+            string data;
+            byte[] charData;
+            string CRLF = "\r\n";
+            //login
+            data = "USER " + userName + CRLF;
+            charData = Encoding.ASCII.GetBytes(data);
+            
             netStream.Write(charData, 0, charData.Length); 
-            if (!reader.ReadLine().Contains("+OK")) 
+            if (!sr.ReadLine().Contains("+OK")) 
             { 
                 //賬戶錯誤 
                 ErrorMessage = "賬戶錯誤"; 
@@ -2351,7 +2348,7 @@ static bool ValidateEmailAccount(string server, int port, string userName, strin
             data = "PASS " + password + CRLF; 
             charData = Encoding.ASCII.GetBytes(data); 
             netStream.Write(charData, 0, charData.Length); 
-            if (!reader.ReadLine().Contains("+OK")) 
+            if (!sr.ReadLine().Contains("+OK")) 
             { 
                 //密碼錯誤 
                 ErrorMessage = "密碼錯誤"; 
@@ -2367,26 +2364,6 @@ bool isContains = ValidateEmailAccount("pop3.163.com", 110, "wise_sandy@XXX.com"
 
 //------------------------------------------------------------  # 60個
 
-                                using (MemoryStream ms = new MemoryStream(solImage.ImageData))
-                                using (Bitmap bitmap = (Bitmap)Image.FromStream(ms))
-                                {
-                                    if (bitmap.Width == videoWriter.Width && bitmap.Height == videoWriter.Height)
-                                    {
-                                        using (Bitmap newBitmap = new Bitmap(bitmap.Width, bitmap.Height))
-                                        using (Graphics g = Graphics.FromImage(newBitmap))
-                                        {
-                                            g.DrawImage(bitmap, 0, 0);
-                                            g.DrawString(String.Format("{0} - Sol: {1}", solImage.Cam, solImage.Sol), new Font(FontFamily.GenericSansSerif, 30, FontStyle.Bold), Brushes.White, new PointF(10, 10));
-
-                                            for (int i = 0; i < 4; i++)
-                                            {
-                                                videoWriter.WriteVideoFrame(newBitmap);
-                                            }
-
-//------------------------------------------------------------  # 60個
-
-Example #25
-0
 File: Camera.cs Project: alienwow/CSharpProjects
 
         private void Video_Player_NewFrame(object sender, ref Bitmap image)
@@ -2608,45 +2585,6 @@ C#處理圖像有三種方法:像素法、內存法和指針法。
 Image.FromFile可開啟影像檔:
  "*.jpg,*.jpeg,*.bmp,*.gif,*.ico,*.png,*.tif,*.wmf|*.jpg;*.jpeg;*.bmp;*.gif;*.ico;*.png;*.tif;*.wmf";
 
-//------------------------------------------------------------  # 60個
-
-讀取文件到一個List
-
-用法
-// 讀取cs文件內容
-List<String> rcq = ReaderLine(e.FullName);
-
- // 遍歷cs文件代碼行
-foreach (String q in rcq)
-{
-    if (!StringHandle.isNote(q)) continue;// 判斷是否是注釋
-
-    string note = StringHandle.GetNoteValue(q);// 獲取注釋內容
-
-    if (string.IsNullOrWhiteSpace(note)) continue;
-    :
-    :
-
-}
-                
-/// <summary>
-/// 讀取文件
-/// </summary>
-/// <param name="path"></param>
-/// <returns></returns>
-public List<String> ReaderLine(string path)
-{
-	StreamReader sr = new StreamReader(path, Encoding.Default);
-	List<String> lines = new List<string>();
-	string line;
-	while ((line = sr.ReadLine()) != null)
-	{
-		lines.Add(line);
-	}
-	sr.Close();
-	return lines;
-}
-        
 //------------------------------------------------------------  # 60個
 
 微軟 SAPI.SpVoice C# 使用方法 + 實例
@@ -2970,42 +2908,6 @@ body : http://www.google.com/custom?hl=en&amp
 
 //------------------------------------------------------------  # 60個
 
-MemoryStream 可以seek
-
-	MemoryStream ms = new MemoryStream();
-	
-	XmlWt = new XmlTextWriter(ms, Encoding.Unicode);
-	//獲取ds中的數據
-	dt.WriteXml(XmlWt);
-	
-	int count = (int)ms.Length;
-	byte[] temp = new byte[count];
-	ms.Seek(0, SeekOrigin.Begin);
-	ms.Read(temp, 0, count);
-	//返回Unicode編碼的文本
-	
-	ms.Close();
-	ms.Dispose();
-                        
-	MemoryStream stream = null;
-	XmlTextWriter writer = null;
-	try
-	{
-		stream = new MemoryStream();
-		writer = new XmlTextWriter(stream, Encoding.Default);
-		
-		xmlDS.WriteXml(writer);
-		
-		int count = (int)stream.Length;
-		byte[] arr = new byte[count];
-		stream.Seek(0, SeekOrigin.Begin);
-		stream.Read(arr, 0, count);
-		UTF8Encoding utf = new UTF8Encoding();
-		
-		return utf.GetString(arr).Trim();
-		
-//------------------------------------------------------------  # 60個
-
 先使用無符號字節數組存放數據庫對應的數據集中表的image類型字段的值。例如：
 
 byte[] bytes= (byte[]) image類型字段值
@@ -3143,38 +3045,6 @@ fullscreenfullscreen
     {
     	get { return resultBmp; }
     }
-}
-
-
-
-byte[]與Image Image與 byte[] 之間的轉換
-
-/// <summary>
-/// 將byte[]轉換為Image
-/// </summary>
-/// <param name="bytes">字節數組</param>
-/// <returns>Image</returns>
-public Image ReadImage(byte[] bytes)
-{
-     MemoryStream ms=new MemoryStream(bytes,0,bytes.Length);
-     BinaryFormatter bf = new BinaryFormatter();
-     object obj=bf.Deserialize(ms);  
-　　ms.Close();
-　　return (Image)obj;
-}
-
-/// <summary>
-/// 將Image轉換為byte[]
-/// </summary>
-/// <param name="image">Image</param>
-/// <returns>byte[]</returns>
-public byte[] ConvertImage(Image image)
-{
-     MemoryStream ms=new MemoryStream();
-     BinaryFormatter bf = new BinaryFormatter();
-     bf.Serialize(ms,(object)image);
-     ms.Close();
-     return ms.ToArray();
 }
 
 //------------------------------------------------------------  # 60個
@@ -3579,242 +3449,7 @@ Display_Cam1
             }
             return res;
         }
-
-//------------------------------------------------------------  # 60個
-
-        string drap_setup_filename = "drap_setup.ini";
-
-        void update_setup_file()
-        {
-            richTextBox2.Text += "update_setup_file ST\n";
-            richTextBox2.Text += "length of old_search_path = " + old_search_path.Count.ToString() + "\n";
-            {
-                StreamWriter sw = File.CreateText(drap_setup_filename);
-                string content = "";
-                //定義系統版本
-                Version ver = Environment.OSVersion.Version;
-                //Major主版本號,Minor副版本號
-                if (ver.Major == 6 && ver.Minor == 1)
-                {
-                    //Windows7
-                    content += "\"C:\\Program Files\\DAUM\\PotPlayer\\PotPlayerMini.exe\"\n";
-                }
-                else
-                {
-                    //Windows10
-                    content += "\"C:\\Program Files (x86)\\DAUM\\PotPlayer\\PotPlayerMini.exe\"\n";
-                }
-                content += "\"C:\\Program Files (x86)\\AIMP\\AIMP.exe\"\n";
-                content += "\"C:\\Program Files (x86)\\ACDSee32\\ACDSee32.exe\"\n";
-                content += "\"C:\\Program Files (x86)\\IDM Computer Solutions\\UltraEdit-32\\uedit32.exe\"\n";
-                content += SelectedLanguage.ToString() + "\n";
-                content += comboBox1.SelectedIndex.ToString() + "\n";
-                if (cb_video_only.Checked == true)
-                    content += "1\n";
-                else
-                    content += "0\n";
-                if (cb_video_l.Checked == true)
-                    content += "1\n";
-                else
-                    content += "0\n";
-                if (cb_video_m.Checked == true)
-                    content += "1\n";
-                else
-                    content += "0\n";
-                if (cb_video_s.Checked == true)
-                    content += "1\n";
-                else
-                    content += "0\n";
-                if (cb_file_size.Checked == true)
-                    content += "1\n";
-                else
-                    content += "0\n";
-                if (cb_file_l.Checked == true)
-                    content += "1\n";
-                else
-                    content += "0\n";
-                if (cb_file_m.Checked == true)
-                    content += "1\n";
-                else
-                    content += "0\n";
-                if (cb_file_s.Checked == true)
-                    content += "1\n";
-                else
-                    content += "0\n";
-                if (cb_generate_text.Checked == true)
-                    content += "1\n";
-                else
-                    content += "0\n";
-
-                /*
-                //Major主版本號,Minor副版本號
-                if (ver.Major == 6 && ver.Minor == 1)
-                {
-                    //Windows7
-                    video_player_path = @"C:\Program Files\DAUM\PotPlayer\PotPlayerMini.exe";
-                }
-                else
-                {
-                    //Windows10
-                    video_player_path = @"C:\Program Files (x86)\DAUM\PotPlayer\PotPlayerMini.exe";
-                }
-                audio_player_path = @"C:\Program Files (x86)\AIMP\AIMP.exe";
-                picture_viewer_path = @"C:\Program Files (x86)\ACDSee32\ACDSee32.exe";
-                text_editor_path = @"C:\Program Files (x86)\IDM Computer Solutions\UltraEdit-32\uedit32.exe";
-                */
-
-                richTextBox2.Text += "目前共有 " + listBox1.Items.Count.ToString() + " 條搜尋路徑\n";
-
-                if (listBox1.Items.Count == 0)
-                {
-                    content += "C:\\______test_files\n";
-                    old_search_path.Add("C:\\______test_files");
-                }
-                else
-                {
-                    for (int i = 0; i < listBox1.Items.Count; i++)
-                    {
-                        richTextBox2.Text += listBox1.Items[i] + "\n";
-                        content += listBox1.Items[i] + "\n";
-                    }
-                }
-                content += "\n";
-
-                sw.WriteLine(content, Encoding.UTF8);
-                sw.Close();
-            }
-        }
-
-        void Read_Setup_File()
-        {
-            int i;
-            int tmp;
-            if (File.Exists(drap_setup_filename) == false)
-            {
-                richTextBox2.Text += "檔案 " + drap_setup_filename + " 不存在，製作一個。\n";
-                update_setup_file();
-            }
-            else
-            {
-                richTextBox2.Text += "檔案 " + drap_setup_filename + " 存在, 開啟，並讀入設定\n";
-                string line;
-                StreamReader sr = new StreamReader(drap_setup_filename, Encoding.UTF8);
-                i = 0;
-                while (!sr.EndOfStream)
-                {               // 每次讀取一行，直到檔尾
-                    line = sr.ReadLine().Trim();            // 讀取文字到 line 變數
-                    richTextBox2.Text += "第 " + i.ToString() + " 行資料 : " + line + "\n";
-                    switch (i)
-                    {
-                        case 0:
-                            video_player_path = line;
-                            break;
-                        case 1:
-                            audio_player_path = line;
-                            break;
-                        case 2:
-                            picture_viewer_path = line;
-                            break;
-                        case 3:
-                            text_editor_path = line;
-                            break;
-                        case 4:
-                            SelectedLanguage = int.Parse(line);
-                            break;
-                        case 5:
-                            tmp = int.Parse(line);
-                            comboBox1.SelectedIndex = tmp;
-                            break;
-                        case 6:
-                            tmp = int.Parse(line);
-                            if (tmp == 1)
-                                cb_video_only.Checked = true;
-                            else
-                                cb_video_only.Checked = false;
-                            break;
-                        case 7:
-                            tmp = int.Parse(line);
-                            if (tmp == 1)
-                                cb_video_l.Checked = true;
-                            else
-                                cb_video_l.Checked = false;
-                            break;
-                        case 8:
-                            tmp = int.Parse(line);
-                            if (tmp == 1)
-                                cb_video_m.Checked = true;
-                            else
-                                cb_video_m.Checked = false;
-                            break;
-                        case 9:
-                            tmp = int.Parse(line);
-                            if (tmp == 1)
-                                cb_video_s.Checked = true;
-                            else
-                                cb_video_s.Checked = false;
-                            break;
-                        case 10:
-                            tmp = int.Parse(line);
-                            if (tmp == 1)
-                                cb_file_size.Checked = true;
-                            else
-                                cb_file_size.Checked = false;
-                            break;
-                        case 11:
-                            tmp = int.Parse(line);
-                            if (tmp == 1)
-                                cb_file_l.Checked = true;
-                            else
-                                cb_file_l.Checked = false;
-                            break;
-                        case 12:
-                            tmp = int.Parse(line);
-                            if (tmp == 1)
-                                cb_file_m.Checked = true;
-                            else
-                                cb_file_m.Checked = false;
-                            break;
-                        case 13:
-                            tmp = int.Parse(line);
-                            if (tmp == 1)
-                                cb_file_s.Checked = true;
-                            else
-                                cb_file_s.Checked = false;
-                            break;
-                        case 14:
-                            tmp = int.Parse(line);
-                            if (tmp == 1)
-                                cb_generate_text.Checked = true;
-                            else
-                                cb_generate_text.Checked = false;
-                            break;
-                        case 15:
-                            search_path = line;
-                            break;
-                        default:
-                            break;
-                    }
-                    if (i >= 15)
-                    {
-                        if (line.Length > 0)
-                        {
-                            richTextBox2.Text += "加入路徑 : " + line + "\n";
-                            old_search_path.Add(line);
-                        }
-                        else
-                        {
-                            richTextBox2.Text += "空行\n";
-                        }
-                    }
-                    i++;
-                }
-                sr.Close();
-            }
-        }
         				
-//------------------------------------------------------------  # 60個
-
-
 //------------------------------------------------------------  # 60個
 //較完整 可一段一段貼上範例程式
 //------------------------------------------------------------  # 60個
@@ -5451,39 +5086,6 @@ GC.Collect();  // 強制執行記憶體回收機制
 
 //------------------------------------------------------------  # 60個
 
-            richTextBox1.Text += "由檔頭資料找出檔案的真實格式\n";
-
-            Dictionary<string, string> ImageTypes = new Dictionary<string, string>()
-            {
-            { "FFD8", ".jpg" },
-            { "424D", ".bmp" },
-            { "474946", ".gif" },
-            { "89504E470D0A1A0A", ".png" }
-            };
-
-            richTextBox1.Text += "len = " + ImageTypes.Count.ToString() + "\n";
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-
-            string builtHex = string.Empty;
-            string ext = string.Empty;
-            using (Stream S = File.OpenRead(filename))
-            {
-                for (int i = 0; i < 8; i++)
-                {
-                    builtHex += S.ReadByte().ToString("X2");
-                    if (ImageTypes.ContainsKey(builtHex))
-                    {
-                        ext = ImageTypes[builtHex];
-                        break;
-                    }
-                }
-            }
-            richTextBox1.Text += "取得真實副檔名 : " + ext + "\n";
-
-
-/*
-
 記住目前的設定值，下次程式開啟時，可以拿來用。
 
 方案總管/Properties/Settings settings/
@@ -5495,8 +5097,7 @@ GC.Collect();  // 強制執行記憶體回收機制
 目前找不到設定型態的位置，只好到Settings settings檔案改成以下：
 <Setting Name="Argbs" Type="System.Int32[]" Scope="User">
 
-*/
-
+//------------------------------------------------------------  # 60個
 
 直接從檔案設定系統參數
 
@@ -8004,13 +7605,7 @@ opencv-4.5.2	有python但無vcs
 		
 		//複製其他圖片資料
 		pictureBox1.Image = pictureBox2.Image.Clone() as Image;
-		
-		
-		string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-		FileStream fs = new FileStream(filename, FileMode.Open,FileAccess.Read);
-		pictureBox1.Image = Image.FromStream(fs);
-		fs.Close();
-
+	
 //最大化螢幕
 this.FormBorderStyle = FormBorderStyle.None;
 this.WindowState = FormWindowState.Maximized;
@@ -8783,24 +8378,6 @@ csc/?	查看編譯選項
 
 //------------------------------------------------------------  # 60個
 
-實現pictureBox的內容令存新檔
-
-                if (pictureBox1.Image != null)
-                {
-                    using (MemoryStream mem = new MemoryStream())
-                    {
-                        //這句很重要，不然不能正確保存圖片或出錯（關鍵就這一句）
-                        Bitmap bmp = new Bitmap(pictureBox1.Image);
-                        //保存到內存
-                        //bmp.Save(mem, pictureBox1.Image.RawFormat );
-                        //保存到磁盤文件
-                        bmp.Save(@pictureName, pictureBox1.Image.RawFormat);
-                        bmp.Dispose();
-                    }
-                }
-
-//------------------------------------------------------------  # 60個
-
 JSON 实例
 {
     "sites": [
@@ -9050,13 +8627,6 @@ bitmap1.Save(filename, ImageFormat.Icon);
 bitmap1.Save(filename, ImageFormat.Wmf);
 bitmap1.Save(filename);
 
-/*
-//创建目录
-string dir = Path.GetDirectoryName(fileSaveUrl);
-if (!Directory.Exists(dir))
-    Directory.CreateDirectory(dir);
-*/
-
 //------------------------------------------------------------  # 60個
 
 Form.AcceptButton和Form.CancelButton属性的用法，
@@ -9298,14 +8868,6 @@ pictureBox 顯示圖片的方法(4)
             //NG
             pictureBox1.ImageLocation = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Taipei_101_2009_amk-EditMylius.jpg/500px-Taipei_101_2009_amk-EditMylius.jpg";
 
-            //錯誤的寫法, 可能會出現"記憶體不足"
-            //pictureBox1.Image = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\bear.bmp");
-
-            //正確的寫法
-            FileStream fs = File.OpenRead(@"D:\_git\vcs\_1.data\______test_files1\bear.jpg");
-            pictureBox1.Image = Image.FromStream(fs);
-            fs.Close();
-
 //清除
             pictureBox1.Image = null;
 
@@ -9408,6 +8970,27 @@ this.DoubleBuffered = true;
                 Color.Blue,
                 Color.Violet
             };
+
+
+
+//------------------------------------------------------------  # 60個
+
+
+
+/*
+//创建目录
+string dir = Path.GetDirectoryName(fileSaveUrl);
+
+if (!Directory.Exists(dir))
+	Directory.CreateDirectory(dir);
+*/
+
+if (Directory.Exists(foldername) == false)
+{
+	Directory.CreateDirectory(foldername);
+}
+
+//------------------------------------------------------------  # 60個
 
 
 

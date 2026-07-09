@@ -896,6 +896,14 @@ namespace vcs_ImageProcessing1
 
 
 /*
+//圖片檔案 => Image => MemoryStream(ms) => 拜列
+//拜列 => MemoryStream(ms) => Image => 圖片檔案
+// bmp/png 資料長度 4*W*H + 檔頭54拜
+// jpg     資料長度 3*W*H + 檔頭54拜
+*/
+
+
+/*
 IntPtr ptr = bmpData.Scan0;　 // 獲取bmpData的內存起始位置
 // Get the address of the first line.
 //IntPtr ptr = bmpData.Scan0; //得到首地址
@@ -1078,4 +1086,129 @@ ImageLockMode.ReadWrite
 // 其中BitmapData類的Stride屬性爲每行像素所佔的字節。
 // int offset = stride - W * 3;
 // ptr += offset;//指針加上填充的空白空間
+
+/*
+                                using (MemoryStream ms = new MemoryStream(solImage.ImageData))
+                                using (Bitmap bitmap = (Bitmap)Image.FromStream(ms))
+                                {
+                                    if (bitmap.Width == videoWriter.Width && bitmap.Height == videoWriter.Height)
+                                    {
+                                        using (Bitmap newBitmap = new Bitmap(bitmap.Width, bitmap.Height))
+                                        using (Graphics g = Graphics.FromImage(newBitmap))
+                                        {
+                                            g.DrawImage(bitmap, 0, 0);
+                                            g.DrawString(String.Format("{0} - Sol: {1}", solImage.Cam, solImage.Sol), new Font(FontFamily.GenericSansSerif, 30, FontStyle.Bold), Brushes.White, new PointF(10, 10));
+
+                                            for (int i = 0; i < 4; i++)
+                                            {
+                                                videoWriter.WriteVideoFrame(newBitmap);
+                                            }
+
+//------------------------------------------------------------  # 60個
+
+MemoryStream 可以seek
+
+	MemoryStream ms = new MemoryStream();
+	
+	XmlWt = new XmlTextWriter(ms, Encoding.Unicode);
+	//獲取ds中的數據
+	dt.WriteXml(XmlWt);
+	
+	int count = (int)ms.Length;
+	byte[] temp = new byte[count];
+	ms.Seek(0, SeekOrigin.Begin);
+	ms.Read(temp, 0, count);
+	//返回Unicode編碼的文本
+	
+	ms.Close();
+	ms.Dispose();
+                        
+	MemoryStream stream = null;
+	XmlTextWriter writer = null;
+	try
+	{
+		stream = new MemoryStream();
+		writer = new XmlTextWriter(stream, Encoding.Default);
+		
+		xmlDS.WriteXml(writer);
+		
+		int count = (int)stream.Length;
+		byte[] arr = new byte[count];
+		stream.Seek(0, SeekOrigin.Begin);
+		stream.Read(arr, 0, count);
+		UTF8Encoding utf = new UTF8Encoding();
+		
+		return utf.GetString(arr).Trim();
+		
+//------------------------------------------------------------  # 60個
+
+
+
+
+byte[]與Image Image與 byte[] 之間的轉換
+
+/// <summary>
+/// 將byte[]轉換為Image
+/// </summary>
+/// <param name="bytes">字節數組</param>
+/// <returns>Image</returns>
+public Image ReadImage(byte[] bytes)
+{
+     MemoryStream ms=new MemoryStream(bytes,0,bytes.Length);
+     BinaryFormatter bf = new BinaryFormatter();
+     object obj=bf.Deserialize(ms);  
+　　ms.Close();
+　　return (Image)obj;
+}
+
+/// <summary>
+/// 將Image轉換為byte[]
+/// </summary>
+/// <param name="image">Image</param>
+/// <returns>byte[]</returns>
+public byte[] ConvertImage(Image image)
+{
+     MemoryStream ms=new MemoryStream();
+     BinaryFormatter bf = new BinaryFormatter();
+     bf.Serialize(ms,(object)image);
+     ms.Close();
+     return ms.ToArray();
+}
+
+//------------------------------------------------------------  # 60個
+
+實現pictureBox的內容令存新檔
+
+                if (pictureBox1.Image != null)
+                {
+                    using (MemoryStream mem = new MemoryStream())
+                    {
+                        //這句很重要，不然不能正確保存圖片或出錯（關鍵就這一句）
+                        Bitmap bmp = new Bitmap(pictureBox1.Image);
+                        //保存到內存
+                        //bmp.Save(mem, pictureBox1.Image.RawFormat );
+                        //保存到磁盤文件
+                        bmp.Save(@pictureName, pictureBox1.Image.RawFormat);
+                        bmp.Dispose();
+                    }
+                }
+
+//------------------------------------------------------------  # 60個
+
+		string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+		FileStream fs = new FileStream(filename, FileMode.Open,FileAccess.Read);
+		pictureBox1.Image = Image.FromStream(fs);
+		fs.Close();
+
+
+            //錯誤的寫法, 可能會出現"記憶體不足"
+            //pictureBox1.Image = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\bear.bmp");
+
+            //正確的寫法
+            FileStream fs = File.OpenRead(@"D:\_git\vcs\_1.data\______test_files1\bear.jpg");
+            pictureBox1.Image = Image.FromStream(fs);
+            fs.Close();
+
+//------------------------------------------------------------  # 60個
+*/
 

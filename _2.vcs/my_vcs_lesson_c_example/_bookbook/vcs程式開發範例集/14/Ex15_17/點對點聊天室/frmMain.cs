@@ -45,10 +45,10 @@ namespace 點對點聊天室
                 string message = " " + txtName.Text + "(" + ip[0].ToString() + ") " + DateTime.Now.ToLongTimeString() + "\n" + "  " + this.rtbSend.Text + "\n";
                 TcpClient client = new TcpClient(txtIP.Text, 888);
                 NetworkStream netstream = client.GetStream();
-                StreamWriter wstream = new StreamWriter(netstream, Encoding.Default);
-                wstream.Write(message);
-                wstream.Flush();
-                wstream.Close();
+                StreamWriter sw = new StreamWriter(netstream, Encoding.Default);
+                sw.Write(message);
+                sw.Flush();
+                sw.Close();
                 client.Close();
                 rtbContent.AppendText(message);
                 rtbContent.ScrollToCaret();

@@ -65,13 +65,13 @@ namespace DynamicTaskStock
             try
             {
                 IPAddress[] ip = Dns.GetHostAddresses(Dns.GetHostName());//獲取本機地址
-                string message = "你好兄弟";//傳輸的內容
+                string message = "你好, 兄弟";  // 傳輸的內容
                 TcpClient client = new TcpClient(txtAdd.Text, 888);//創建TcpClient實例
                 NetworkStream netstream = client.GetStream();//創建NetworkStream實例
-                StreamWriter wstream = new StreamWriter(netstream, Encoding.Default);//創建StreamWriter實例
-                wstream.Write(message);//將信息寫入流
-                wstream.Flush();
-                wstream.Close();//關閉流
+                StreamWriter sw = new StreamWriter(netstream, Encoding.Default);//創建StreamWriter實例
+                sw.Write(message);//將信息寫入流
+                sw.Flush();
+                sw.Close();//關閉流
                 client.Close();//關閉TcpClient對象
             }
             catch (Exception ex)
