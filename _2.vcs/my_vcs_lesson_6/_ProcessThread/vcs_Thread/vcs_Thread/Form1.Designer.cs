@@ -944,7 +944,7 @@
             this.button141.Name = "button141";
             this.button141.Size = new System.Drawing.Size(190, 60);
             this.button141.TabIndex = 1;
-            this.button141.Text = "新進 1";
+            this.button141.Text = "新進 1, 使用ThreadPool";
             this.button141.UseVisualStyleBackColor = true;
             this.button141.Click += new System.EventHandler(this.button141_Click);
             // 

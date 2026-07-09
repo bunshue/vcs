@@ -1,4 +1,4 @@
-﻿namespace vcs_test_all_03_Syntax
+﻿namespace vcs_test_all_03_Syntax1
 {
     partial class ParseData
     {

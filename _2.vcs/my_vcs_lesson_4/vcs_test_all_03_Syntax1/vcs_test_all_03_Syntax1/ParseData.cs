@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Net;   //for IPAddress
 using System.Globalization; //for NumberStyles
 
-namespace vcs_test_all_03_Syntax
+namespace vcs_test_all_03_Syntax1
 {
     public partial class ParseData : Form
     {

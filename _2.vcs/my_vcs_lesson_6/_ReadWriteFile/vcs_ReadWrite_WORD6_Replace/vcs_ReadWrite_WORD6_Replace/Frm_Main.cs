@@ -74,6 +74,7 @@ namespace vcs_ReadWrite_WORD6_Replace
         private void btn_Begin_Click(object sender, EventArgs e)
         {
             btn_Begin.Enabled = false;//停用替換按鈕
+
             ThreadPool.QueueUserWorkItem(//開始線程池
                 (o) =>//使用Lambda表達式
                 {

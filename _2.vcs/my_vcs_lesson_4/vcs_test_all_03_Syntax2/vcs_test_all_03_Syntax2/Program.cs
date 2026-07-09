@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_BackgroundWorker3
+namespace vcs_test_all_03_Syntax2
 {
     static class Program
     {

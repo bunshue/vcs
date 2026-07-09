@@ -566,6 +566,8 @@ namespace vcs_Mix00
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button14_Click(object sender, EventArgs e)
         {
             int i;
@@ -831,20 +833,6 @@ namespace vcs_Mix00
 
         private void button21_Click(object sender, EventArgs e)
         {
-            //避免在 UI 執行緒做耗時工作
-            //把長時間運算或 IO 操作放到 Task.Run 或 BackgroundWorker。
-            //UI 執行緒只負責更新介面、處理事件。
-            // 錯誤做法：直接在按鈕事件跑耗時計算
-            for (int i = 0; i < 1000000000; i++)
-            {
-                /* heavy work */
-            }
-
-            richTextBox1.Text += "完成\n";
-
-
-            // 正確做法：丟到背景執行緒
-
 
         }
 
@@ -1167,117 +1155,25 @@ namespace vcs_Mix00
             }
         }
 
-        //靜態方法
-        static void Lotto(ref byte[] anyArr)
-        {
-            //以Random類別呼叫NextBytes()方法產生隨機數
-            Random rand = new Random();
-            //建立能存放6個元素的陣列
-            anyArr = new byte[6];
-            rand.NextBytes(anyArr);
-        }
+        //6060
 
         private void button29_Click(object sender, EventArgs e)
         {
-            //使用 ref
-            byte[] number = new byte[6];
-            //呼叫靜態方法，以陣列為引數
-            Lotto(ref number);
-            Console.WriteLine("今天的樂透--");
-            //讀取陣列元素
-            foreach (byte item in number)
-            {
-                Console.Write("{item}, 3");
-            }
         }
 
-        private static void CallValue(int x, int y)
-        {
-            int z;
-            x = 20;
-            y = 30;
-            //richTextBox1.Text +=string.Format("\n方法內 交換前\t\t\t：x= {0}   y={1} ", x, y);
-            z = x;   //透過第三個變數來做x,y值作互換
-            x = y;
-            y = z;
-            //richTextBox1.Text += string.Format("\n方法內 交換後\t\t\t：x= {0}   y={1}", x, y);
-        }
-
-        private static void CallRef(ref int x, ref int y)
-        {
-            int z;
-            x = 20;
-            y = 30;
-            //richTextBox1.Text +=string.Format("\n方法內 交換前\t\t：x= {0}   y={1} ", x, y);
-            z = x;  //透過第三個變數來做x,y值作互換
-            x = y;
-            y = z;
-            //richTextBox1.Text += string.Format("\n方法內 交換後\t\t：x= {0}   y={1} ", x, y);
-        }
+        //6060
 
         private void button30_Click(object sender, EventArgs e)
         {
-            //傳值
-            //Call by Value vs Call by Reference
-            //value
-
-            richTextBox1.Text += string.Format("\n  **** Call By Value 傳值呼叫 **** \n");
-            int a = 10;
-            int b = 12;
-            richTextBox1.Text += string.Format("\n呼叫敘述 未進入方法前\t\t：a= {0} b={1}", a, b);
-            CallValue(a, b);
-            richTextBox1.Text += string.Format("\n呼叫敘述 離開方法回原處時\t：a={0}  b={1}", a, b);
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            //傳址
-            //reference
-
-            richTextBox1.Text += string.Format("\n  **** Call By Reference 參考呼叫 **** \n");
-            a = 10;
-            b = 12;
-            richTextBox1.Text += string.Format("\n呼叫敘述 未進入方法前\t：a= {0}  b={1}", a, b);
-            CallRef(ref a, ref b);
-            richTextBox1.Text += string.Format("\n呼叫敘述 離開方法回原處\t：a= {0}  b={1}", a, b);
         }
 
-
-        //以傳值方式呼叫PassValue方法
-        private void PassValue(int x, int y)
-        {
-            //label1.Text += "2.方法中:變數計算前: x = " + x.ToString() + "  y = " + y.ToString() + "\n\n";
-            x += 3; //虛引數x加3
-            y += 2; //虛引數y加2
-            //label1.Text += "3.方法中:變數計算後: x = " + x.ToString() + "  y = " + y.ToString() + "\n\n";
-        }
-
-        //以參考呼叫PassRef方法
-        private void PassRef(ref int x, ref int y)
-        {
-            //label1.Text += "2.方法中:變數計算前: x = " + x.ToString() + "  y = " + y.ToString() + "\n\n";
-            x += 3; //虛引數x加3
-            y += 2; //虛引數y加2
-            //label1.Text += "3.方法中:變數計算後: x = " + x.ToString() + "  y = " + y.ToString() + "\n\n";
-        }
+        //6060
 
         private void button31_Click(object sender, EventArgs e)
         {
-            //傳值 vs 傳址
-            //傳值
-
-            int a = 10, b = 15;
-            //label1.Text = "1.主程式:呼叫方法前: a = " + a.ToString() + "  b = " + b.ToString() + "\n\n";
-            PassValue(a, b);
-            //label1.Text += "4.主程式:呼叫方法後: a = " + a.ToString() + "  b = " + b.ToString() + "\n\n";
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //傳址
-
-            //label1.Text = "1.主程式:呼叫方法前: a = " + a.ToString() + "  b = " + b.ToString() + "\n\n";
-            PassRef(ref a, ref b);
-            //label1.Text += "4.主程式:呼叫方法後: a = " + a.ToString() + "  b = " + b.ToString() + "\n\n";
         }
+
+        //6060
 
         private void button32_Click(object sender, EventArgs e)
         {

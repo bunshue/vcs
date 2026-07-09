@@ -15,15 +15,19 @@ namespace vcs_Word2HTML
 {
     public partial class Frm_Main : Form
     {
+        private Word.Application G_wa;//定义Word应用程序字段
+        private object G_missing = System.Reflection.Missing.Value; //定义G_missing字段并添加引用
+        private object G_FilePath;//定义文档路径字段
+
         public Frm_Main()
         {
             InitializeComponent();
         }
 
-        private Word.Application G_wa;//定义Word应用程序字段
-        private object G_missing = //定义G_missing字段并添加引用
-            System.Reflection.Missing.Value;
-        private object G_FilePath;//定义文档路径字段
+        private void Frm_Main_Load(object sender, EventArgs e)
+        {
+
+        }
 
         private void btn_Open_Click(object sender, EventArgs e)
         {
@@ -32,6 +36,7 @@ namespace vcs_Word2HTML
             btn_New.Enabled = false;//停用新建按钮
             btn_Open.Enabled = false;//停用打开按钮
             G_FilePath = filename;
+
             ThreadPool.QueueUserWorkItem(//开始线程池
                 (pp) =>//使用Lambda表达式
                 {
@@ -49,8 +54,6 @@ namespace vcs_Word2HTML
                             btn_SaveAs.Enabled = true;//启用转换按钮
                         }));
                 });
-
-
         }
 
         private void btn_New_Click(object sender, EventArgs e)

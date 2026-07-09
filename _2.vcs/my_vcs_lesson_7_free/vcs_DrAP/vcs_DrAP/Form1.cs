@@ -206,7 +206,7 @@ namespace vcs_DrAP
             x_st += 75 + dx;
             x_st += 75 + dx;
             x_st += 75 + dx;
-            bt_delete_file.Location = new Point(x_st - 120, y_st + dy * 1+20);
+            bt_delete_file.Location = new Point(x_st - 120, y_st + dy * 1 + 20);
 
             x_st = 960;
             y_st = 15;

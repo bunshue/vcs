@@ -1054,7 +1054,24 @@ namespace vcs_Thread
         private void button141_Click(object sender, EventArgs e)
         {
             //新進 1
+            //使用 ThreadPool
 
+            Console.WriteLine("主執行緒開始工作...");
+
+            // 把耗時工作丟到 ThreadPool
+            ThreadPool.QueueUserWorkItem(HeavyWork);
+
+            Console.WriteLine("主執行緒繼續執行，不會被阻塞。");
+        }
+
+        static void HeavyWork(object state)
+        {
+            long sum = 0;
+            for (int i = 0; i < 100000000; i++)
+            {
+                sum += i;
+            }
+            Console.WriteLine("背景工作完成! 結果 = " + sum);
         }
 
         //------------------------------------------------------------  # 60個
@@ -1455,6 +1472,76 @@ System.Threading.Thread.Sleep(2000);當前休眠2秒，
 
 System.Threading.Thread.Sleep(5000);當前休眠5秒，
 
+
+//------------------------------------------------------------  # 60個
+
+//Wait
+System.Threading.Thread.Sleep(5000); // wait 5 seconds (5000 milliseconds)
+
+//------------------------------------------------------------  # 60個
+
+進程 :
+我們可以把計算機中每一個運行的應用程序當作是一個進程
+
+線程 :
+每一個進程是由多個線程組成的。
+單線程：讓程序做多件事時，會引發卡死 假死狀態。
+多線程：讓一個程序同時處理多個事情，後台運行程序，提高程序的運行效率。
+前台線程：只有所有的前台線程都關閉才能完成程序關閉。(winform多窗口時)
+後台線程：只要所有的前台線程結束，後台線程自動結束。
+
+ 1 //實例化Thread類，並傳入一個指向線程所要運行的方法。（這時線程已經產生，但還沒有運行）
+ 2 //調用Thread類的Start方法，標記線程可以被CPU執行了，但具體執行事件由CPU決定。
+ 3 Thread th = new Thread(Test); //創建一個線程去執行這個方法。
+ 4 th.IsBackground = true; //將線程設置為後台線程，前台關閉後 線程結束。
+ 5 th.Start(); //標記准備就緒，可以隨意被執行，具體什麼時候執行由CPU決定。
+ 6 //在.net下是不允許跨線程訪問的。
+ 7 //有時候需要手動釋放線程 關閉時 判斷線程是否關閉 
+ 8 if (th != null)
+ 9 {
+10     th.Abort(); //結束這個線程 不能再Start()
+11 }
+12 Thread.Sleep(3000); //睡眠3秒後執行
+13 //線程執行帶參數方法
+14 Thread.Start("123")； object類型參數 在start後括號寫參數
+
+//多用於大量數據時，多分一個線程去搜索數據，然後存儲到緩存裡，頁面再用異步獲取緩存中的數據。
+
+//------------------------------------------------------------  # 60個
+
+停止一個線程
+
+Thread.Sleep 方法能夠在一個固定周期類停止一個線程
+
+thread.Sleep(); 
+ 
+設定線程優先級
+線程類中的ThreadPriority 屬性是用來設定一個ThreadPriority的優先級別。線程優先級別包括Normal, AboveNormal, BelowNormal, Highest, and Lowest幾種。
+	
+thread.Priority = ThreadPriority.Highest; 
+
+掛起一個線程
+調用線程類的Suspend()方法將掛起一個線程直到使用Resume()方法喚起她。在掛起一個線程起前應該判斷線程是否在活動期間。
+
+if (thread.ThreadState = ThreadState.Running )
+{
+	thread.Suspend();
+} 
+
+喚起一個線程
+
+通過使用Resume()方法可以喚起一個被掛起線程。在掛起一個線程起前應該判斷線程是否在掛起期間，如果
+線程未被掛起則方法不起作用。
+
+
+if (thread.ThreadState = ThreadState.Suspended )
+{
+	thread.Resume();
+} 
+
+//------------------------------------------------------------  # 60個
+
 */
+
 
 

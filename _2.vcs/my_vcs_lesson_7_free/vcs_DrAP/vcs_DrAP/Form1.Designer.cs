@@ -190,7 +190,7 @@
             // tb_search
             // 
             this.tb_search.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_search.Location = new System.Drawing.Point(118, 273);
+            this.tb_search.Location = new System.Drawing.Point(462, 127);
             this.tb_search.Name = "tb_search";
             this.tb_search.Size = new System.Drawing.Size(150, 30);
             this.tb_search.TabIndex = 24;
@@ -248,7 +248,7 @@
             // bt_find_small_folders
             // 
             this.bt_find_small_folders.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_find_small_folders.Location = new System.Drawing.Point(492, 174);
+            this.bt_find_small_folders.Location = new System.Drawing.Point(462, 210);
             this.bt_find_small_folders.Name = "bt_find_small_folders";
             this.bt_find_small_folders.Size = new System.Drawing.Size(115, 26);
             this.bt_find_small_folders.TabIndex = 32;
@@ -449,7 +449,7 @@
             this.cb_option1.AutoSize = true;
             this.cb_option1.Checked = true;
             this.cb_option1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_option1.Location = new System.Drawing.Point(690, 177);
+            this.cb_option1.Location = new System.Drawing.Point(602, 165);
             this.cb_option1.Name = "cb_option1";
             this.cb_option1.Size = new System.Drawing.Size(72, 16);
             this.cb_option1.TabIndex = 51;
@@ -459,7 +459,7 @@
             // bt_find_empty_folders
             // 
             this.bt_find_empty_folders.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_find_empty_folders.Location = new System.Drawing.Point(492, 141);
+            this.bt_find_empty_folders.Location = new System.Drawing.Point(462, 177);
             this.bt_find_empty_folders.Name = "bt_find_empty_folders";
             this.bt_find_empty_folders.Size = new System.Drawing.Size(115, 26);
             this.bt_find_empty_folders.TabIndex = 54;
@@ -575,7 +575,7 @@
             this.bt_replace.BackColor = System.Drawing.Color.White;
             this.bt_replace.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_replace.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_replace.Location = new System.Drawing.Point(992, 135);
+            this.bt_replace.Location = new System.Drawing.Point(792, 184);
             this.bt_replace.Name = "bt_replace";
             this.bt_replace.Size = new System.Drawing.Size(50, 50);
             this.bt_replace.TabIndex = 69;
@@ -589,7 +589,7 @@
             this.bt_compare.BackgroundImage = global::vcs_DrAP.Properties.Resources.winmerge;
             this.bt_compare.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_compare.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_compare.Location = new System.Drawing.Point(936, 196);
+            this.bt_compare.Location = new System.Drawing.Point(792, 127);
             this.bt_compare.Name = "bt_compare";
             this.bt_compare.Size = new System.Drawing.Size(50, 50);
             this.bt_compare.TabIndex = 66;
@@ -601,7 +601,7 @@
             this.bt_open_dir2.BackgroundImage = global::vcs_DrAP.Properties.Resources.open_folder;
             this.bt_open_dir2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_open_dir2.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_open_dir2.Location = new System.Drawing.Point(880, 135);
+            this.bt_open_dir2.Location = new System.Drawing.Point(736, 127);
             this.bt_open_dir2.Name = "bt_open_dir2";
             this.bt_open_dir2.Size = new System.Drawing.Size(50, 50);
             this.bt_open_dir2.TabIndex = 59;
@@ -625,7 +625,7 @@
             this.bt_setup.BackgroundImage = global::vcs_DrAP.Properties.Resources.setup;
             this.bt_setup.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_setup.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_setup.Location = new System.Drawing.Point(936, 135);
+            this.bt_setup.Location = new System.Drawing.Point(908, 7);
             this.bt_setup.Name = "bt_setup";
             this.bt_setup.Size = new System.Drawing.Size(50, 50);
             this.bt_setup.TabIndex = 52;
@@ -649,7 +649,7 @@
             this.bt_search_pattern_vcs.BackgroundImage = global::vcs_DrAP.Properties.Resources.vcs;
             this.bt_search_pattern_vcs.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_search_pattern_vcs.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_search_pattern_vcs.Location = new System.Drawing.Point(768, 139);
+            this.bt_search_pattern_vcs.Location = new System.Drawing.Point(680, 127);
             this.bt_search_pattern_vcs.Name = "bt_search_pattern_vcs";
             this.bt_search_pattern_vcs.Size = new System.Drawing.Size(50, 50);
             this.bt_search_pattern_vcs.TabIndex = 26;
@@ -661,7 +661,7 @@
             this.bt_delete_file.BackgroundImage = global::vcs_DrAP.Properties.Resources.delete;
             this.bt_delete_file.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_delete_file.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_delete_file.Location = new System.Drawing.Point(912, 6);
+            this.bt_delete_file.Location = new System.Drawing.Point(831, 48);
             this.bt_delete_file.Name = "bt_delete_file";
             this.bt_delete_file.Size = new System.Drawing.Size(50, 50);
             this.bt_delete_file.TabIndex = 22;
@@ -697,7 +697,7 @@
             this.bt_open_with_vcs.BackgroundImage = global::vcs_DrAP.Properties.Resources.vcs2;
             this.bt_open_with_vcs.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_open_with_vcs.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_open_with_vcs.Location = new System.Drawing.Point(992, 196);
+            this.bt_open_with_vcs.Location = new System.Drawing.Point(680, 184);
             this.bt_open_with_vcs.Name = "bt_open_with_vcs";
             this.bt_open_with_vcs.Size = new System.Drawing.Size(50, 50);
             this.bt_open_with_vcs.TabIndex = 70;
@@ -708,7 +708,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1083, 474);
+            this.ClientSize = new System.Drawing.Size(1036, 449);
             this.Controls.Add(this.bt_delete_file);
             this.Controls.Add(this.bt_open_with_vcs);
             this.Controls.Add(this.bt_replace);

@@ -14,7 +14,7 @@ using System.Threading;
 using System.Diagnostics;  // for StackTrace
 using System.Reflection;  // for MethodInfo
 
-namespace vcs_test_all_03_Syntax
+namespace vcs_test_all_03_Syntax1
 {
     public partial class Form1 : Form
     {
@@ -108,7 +108,7 @@ namespace vcs_test_all_03_Syntax
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1380, 750);
-            this.Text = "vcs_test_all_03_Syntax";
+            this.Text = "vcs_test_all_03_Syntax1";
 
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;

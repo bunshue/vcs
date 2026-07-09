@@ -149,19 +149,17 @@ class Form1 : Form
 小圖貼到大pictureBox裏，目前只能貼在左上角
 要怎麼貼在其他位置
 
-private void Form1_Load(object sender, EventArgs e)
-{
-	//C# 跨 Thread 存取 UI
-	//Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效	same
-	Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
-}
-
 //------------------------------------------------------------  # 60個
 
 1.對於那種明知道跨線程調用不會帶來錯誤的，可以設置Form控件不檢查跨線程調用錯誤，這樣就不報錯了。
-在Form1構造方法中：
-C#代碼 
-CheckForIllegalCrossThreadCalls = false; 
+
+private void Form1_Load(object sender, EventArgs e)
+{
+	//C# 跨 Thread 存取 UI
+	//Form1.CheckForIllegalCrossThreadCalls = false;  // 解決跨執行緒控制無效
+	Control.CheckForIllegalCrossThreadCalls = false;  // 忽略跨執行緒錯誤
+	CheckForIllegalCrossThreadCalls = false;
+}
 
 //------------------------------------------------------------  # 60個
 
@@ -180,7 +178,7 @@ this.FormBorderStyle = FormBorderStyle.None;//設定無邊框
 pictureBox1 能夠顯示部分圖片 然後接收空白鍵 換圖片的下一部份
 
 //------------------------------------------------------------  # 60個
-
+pppp
             Tension = trkTension.Value / 10f;
             txtTension.Text = Tension.ToString("0.0");
 
@@ -769,7 +767,7 @@ splitContainer1 預設兩個Panel, Panel1 和 Panel2，Dock 選 DockStyle.Fill
 
 //------------------------------------------------------------  # 60個
 
-cccc    
+cccc
 
 vcs 之 radioButton 可以用Image, Text設為空
 
@@ -1318,6 +1316,7 @@ C#
         {
             return colBColor;
         }
+        
         // Stores the selected value in the private variable colBColor, and
         // updates the background color of the label control lblDisplay.
         set
@@ -1608,35 +1607,6 @@ private bool blnColorTicker;
 
     學習如何使用 FlowLayoutPanel 控制項和 TableLayoutPanel 控制項，以提供直覺的方式來排列 Windows Forms 專案中的控制項。
     AutoSize 在 TableLayoutPanel 控制項中的行為 - Windows Forms .NET Framework
-
-//------------------------------------------------------------  # 60個
-
-進程 :
-我們可以把計算機中每一個運行的應用程序當作是一個進程
-
-線程 :
-每一個進程是由多個線程組成的。
-單線程：讓程序做多件事時，會引發卡死 假死狀態。
-多線程：讓一個程序同時處理多個事情，後台運行程序，提高程序的運行效率。
-前台線程：只有所有的前台線程都關閉才能完成程序關閉。(winform多窗口時)
-後台線程：只要所有的前台線程結束，後台線程自動結束。
-
- 1 //實例化Thread類，並傳入一個指向線程所要運行的方法。（這時線程已經產生，但還沒有運行）
- 2 //調用Thread類的Start方法，標記線程可以被CPU執行了，但具體執行事件由CPU決定。
- 3 Thread th = new Thread(Test); //創建一個線程去執行這個方法。
- 4 th.IsBackground = true; //將線程設置為後台線程，前台關閉後 線程結束。
- 5 th.Start(); //標記准備就緒，可以隨意被執行，具體什麼時候執行由CPU決定。
- 6 //在.net下是不允許跨線程訪問的。
- 7 //有時候需要手動釋放線程 關閉時 判斷線程是否關閉 
- 8 if (th != null)
- 9 {
-10     th.Abort(); //結束這個線程 不能再Start()
-11 }
-12 Thread.Sleep(3000); //睡眠3秒後執行
-13 //線程執行帶參數方法
-14 Thread.Start("123")； object類型參數 在start後括號寫參數
-
-//多用於大量數據時，多分一個線程去搜索數據，然後存儲到緩存裡，頁面再用異步獲取緩存中的數據。
 
 //------------------------------------------------------------  # 60個
 
@@ -2661,38 +2631,6 @@ button1.MouseLeave += new Syetem.EvenHandler（button1_MLeave）；
 
 //------------------------------------------------------------  # 60個
 
-停止一個線程
-
-Thread.Sleep 方法能夠在一個固定周期類停止一個線程
-
-thread.Sleep(); 
- 
-設定線程優先級
-線程類中的ThreadPriority 屬性是用來設定一個ThreadPriority的優先級別。線程優先級別包括Normal, AboveNormal, BelowNormal, Highest, and Lowest幾種。
-	
-thread.Priority = ThreadPriority.Highest; 
-
-掛起一個線程
-調用線程類的Suspend()方法將掛起一個線程直到使用Resume()方法喚起她。在掛起一個線程起前應該判斷線程是否在活動期間。
-
-if (thread.ThreadState = ThreadState.Running )
-{
-	thread.Suspend();
-} 
-
-喚起一個線程
-
-通過使用Resume()方法可以喚起一個被掛起線程。在掛起一個線程起前應該判斷線程是否在掛起期間，如果
-線程未被掛起則方法不起作用。
-
-
-if (thread.ThreadState = ThreadState.Suspended )
-{
-	thread.Resume();
-} 
-
-//------------------------------------------------------------  # 60個
-
 哪些事需要快捷鍵??
 全螢幕截圖
 計算機
@@ -3065,21 +3003,22 @@ GUID永遠是方便的; 對於程序開發的各個方面，.NET Framework簡化
 
 //------------------------------------------------------------  # 60個
 
-GUID（全局統一標識符）是指在一台機器上生成的數字，它保證對在同一時空中的所有機器都是唯一的。GUID的唯一缺陷在於生成的結果串會比較大。
+GUID（全局統一標識符）是指在一台機器上生成的數字，它保證對在同一時空中的所有機器都是唯一的。
+GUID的唯一缺陷在於生成的結果串會比較大。
 
-      對於程序開發的各個方面，.NET Framework簡化了建立和處理GUID數值的過程。在.NET程序需要的地方，這一功能很容易地生成唯一的數值。
+對於程序開發的各個方面，.NET Framework簡化了建立和處理GUID數值的過程。
+在.NET程序需要的地方，這一功能很容易地生成唯一的數值。
 
 1、Guid.NewGuid().ToString("N") 結果為：
-         38bddf48f43c48588e0d78761eaa1ce6
+	38bddf48f43c48588e0d78761eaa1ce6
 2、Guid.NewGuid().ToString("D") 結果為：
-            57d99d89-caab-482a-a0e9-a0a803eed3ba
+	57d99d89-caab-482a-a0e9-a0a803eed3ba
 3、Guid.NewGuid().ToString("B") 結果為：
-            {09f140d5-af72-44ba-a763-c861304b46f8}
+	{09f140d5-af72-44ba-a763-c861304b46f8}
 4、Guid.NewGuid().ToString("P") 結果為：
-            (778406c2-efff-4262-ab03-70a77d09c2b5)
+	(778406c2-efff-4262-ab03-70a77d09c2b5)
             
 可見默認的為第2種效果
-
         其中：N、D、B、P分別代表一種輸出格式
 
 小注：在個人使用中，主要是在數據中某列在沒有輸入值的情況下，用於生成內碼（NOT NULL PRIMARY KEY）。
@@ -4324,6 +4263,8 @@ this.richTextBox1.SelectionFont = MyFont;
 
 //------------------------------------------------------------  # 60個
 
+拜列轉字串
+
  C# byte 轉 文字
 byte轉char或 byte轉string
 
@@ -4367,6 +4308,7 @@ richTextBox1.Text += "wday = " + wday.ToString() + "\n";
 richTextBox1.Text += "hour = " + hour.ToString("00") + "\n";
 richTextBox1.Text += "minutes = " + minutes.ToString("00") + "\n";
 richTextBox1.Text += "seconds = " + seconds.ToString("00") + "\n";
+
 richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
 
 richTextBox1.Text += receive_buffer_tmp[i].ToString("X2") + " ";
@@ -4896,9 +4838,6 @@ windows media player
              axWindowsMediaPlayer1.Height = intHeight + 2;
          }
 
-//Wait
-System.Threading.Thread.Sleep(5000); // wait 5 seconds (5000 milliseconds)
-
 //------------------------------------------------------------  # 60個
 
 vcs人物分類
@@ -5135,6 +5074,21 @@ GC.Collect();  // 強制執行記憶體回收機制
 
 	var msg = $"new Notepad started!";
 	Logs.Add($"{DateTime.Now:HH:mm:ss} {msg}");
+
+//------------------------------------------------------------  # 60個
+
+private async void button1_Click(object sender, EventArgs e)
+{
+// 正確做法：丟到背景執行緒
+    await Task.Run(() =>
+    {
+        for (int i = 0; i < 1000000000; i++) { /* heavy work */ }
+    });
+    MessageBox.Show("完成!");
+}
+
+在 .NET Framework 4.0 的環境裡，
+沒有 async/await，所以不能用 await Task.Run(...)。
 
 //------------------------------------------------------------  # 60個
 
@@ -8975,8 +8929,6 @@ this.DoubleBuffered = true;
 
 //------------------------------------------------------------  # 60個
 
-
-
 /*
 //创建目录
 string dir = Path.GetDirectoryName(fileSaveUrl);
@@ -8989,8 +8941,5 @@ if (Directory.Exists(foldername) == false)
 {
 	Directory.CreateDirectory(foldername);
 }
-
-//------------------------------------------------------------  # 60個
-
 
 
