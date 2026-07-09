@@ -59,10 +59,6 @@ g.Clear(Color.Transparent);
 
 //------------------------------------------------------------  # 60個
 
-            //取得副檔名
-                        FileInfo file_info = new FileInfo(filename);
-                        switch (file_info.Extension)
-
 //------------------------------------------------------------  # 60個
 
 string strMinute = "";
@@ -78,29 +74,6 @@ string mapURL = String.Format(
    strMinute);
 pictureBox1.ImageLocation = mapURL;
 pictureBox1.ClientSize = new Size(400,430);
-
-//------------------------------------------------------------  # 60個
-
-            //指定應用程式路徑
-            //string target = @"C:\Program Files\DAUM\PotPlayer\PotPlayerMini.exe";
-            string target = player_path;
-
-            //方法一
-            //Process.Start(target, "參數");
-            //Process.Start(target, all_filename);
-
-            //方法二
-            ProcessStartInfo pInfo = new ProcessStartInfo(target);
-            pInfo.Arguments = all_filename;
-
-            result_str += "target : " + target + "\n";
-            result_str += "all_filename : " + all_filename + "\n";
-
-            using (Process process = new Process())
-            {
-                process.StartInfo = pInfo;
-                process.Start();
-            }
 
 //------------------------------------------------------------  # 60個
 
@@ -169,9 +142,6 @@ private void Form1_Load(object sender, EventArgs e)
 撈出多層檔案 標準版 僅顯示檔名
 
 命令行 msinfo32
-
-this.FormBorderStyle = FormBorderStyle.None;//設定無邊框
-this.FormBorderStyle = FormBorderStyle.None;//設定無邊框
 
 測試Thread，使用thread播放聲音，這樣就不會占用主程序
 
@@ -736,23 +706,6 @@ https://c.biancheng.net/view/ply3egf.html
 
 //------------------------------------------------------------  # 60個
 
-單一圖片模式
-
-            button1.Visible = false;
-            richTextBox1.Visible = false;
-            //this.FormBorderStyle = FormBorderStyle.None;
-            this.AutoSize = true;
-            this.AutoSizeMode = AutoSizeMode.GrowAndShrink;     //讓表單大小可以自動隨著圖片大小變化。
-            this.TransparencyKey = SystemColors.ControlLight;   //將表單的TransparencyKey設為Control，這樣可以去掉桌面小玩意外圍多餘的部份
-            this.ShowInTaskbar = false;
-
-            //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
-            this.BackColor = Color.Black;
-
-            pictureBox1.Location = new Point((this.Width - pictureBox1.Image.Width) / 2, (this.Height - pictureBox1.Image.Height) / 2);
-
 //------------------------------------------------------------  # 60個
 
             pictureBox1.Image = bitmap1; //顯示在 pictureBox1 圖片控制項中
@@ -1106,7 +1059,6 @@ private void notifyIcon1_Click(object sender, EventArgs e)
 this.notifyIcon1 = new NotifyIcon(this.components);
 this.NicontextMenu = new ContextMenu();
 this.menuItem_Hide = new MenuItem();
-
 this.menuItem_Show = new MenuItem();
 this.menuItem_Aubot = new MenuItem();
 this.menuItem_Exit = new MenuItem();
@@ -2170,13 +2122,8 @@ namespace GMapDrawTools
     }
 }
 
-
-
             this.MapControl.CanDragMap = false;
-        }
 
-        private void Deactive()
-        {
             this.MapControl.CanDragMap = true;
 
 //------------------------------------------------------------  # 60個
@@ -4431,6 +4378,7 @@ richTextBox1.Text += "result = " + res.ToString() + "\n";
 在Windows上，[路徑]必須<248拜，[檔名加路徑]名必須<260拜
 
 	List<Point> points = new List<Point>(); // 紀錄滑鼠軌跡的陣列。	
+
 	List<MyFileInfo> fileinfos = new List<MyFileInfo>();             
 
 1維list宣告
@@ -6168,21 +6116,13 @@ Remotion.Data.Linq.dll
 
 棋盤	Chessboard
 
-用滑鼠滾輪改變選取區域大小
-雙擊代表exit
-如何 增大/縮小 放大倍率
-
-雙擊滑鼠左鍵 放大
-雙擊滑鼠右鍵 縮小
-
 //------------------------------------------------------------  # 60個
 
 vcs特有的寫法與解釋
+
 Application.DoEvents();	//是讓程式在跑迴圈時還能去傾聽其他的事件
 Application.DoEvents();	//作用：处理当前在消息队列中的所有 Windows 消息。 
 			
-this.ShowInTaskbar = false;//不在任务栏显现
-
 //------------------------------------------------------------  # 60個
 
 做了甚麼事後 要Refresh 這樣才能看得到
@@ -6225,6 +6165,7 @@ MessageBox.Show("輸入的ASCII碼為" + Convert.ToByte(e.KeyChar).ToString());
                     score[score.Length - 1] = Convert.ToInt32(s); //存入最後元素中
                 }
             } while (s != "");      //s不是空字串就繼續迴圈
+            
             int sum = 0;           //預設總和sum = 0
             foreach (int x in score) //用foreach迴圈逐一讀取陣列元素值
             {
@@ -7559,19 +7500,6 @@ opencv-4.5.2	有python但無vcs
 		
 		//複製其他圖片資料
 		pictureBox1.Image = pictureBox2.Image.Clone() as Image;
-	
-//最大化螢幕
-this.FormBorderStyle = FormBorderStyle.None;
-this.WindowState = FormWindowState.Maximized;
-
-//最小化螢幕
-
-
-//最小最小化
-this.WindowState = FormWindowState.Minimized;
-this.ShowInTaskbar = false;
-
-//預設背景色	this.BackColor = SystemColors.ControlLight;
 
 //檔案 資料夾 名稱
 string foldername = @"C:\_git\vcs\_1.data\______test_files1";
@@ -7602,38 +7530,6 @@ string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yy
 //把Form大小設定跟圖片大小一樣
 //ClientSize = new Size(pictureBox1.Right + pictureBox1.Left, pictureBox1.Bottom + pictureBox1.Left);
 
-							//離開按鈕的寫法
-							            //最大化螢幕
-							            this.FormBorderStyle = FormBorderStyle.None;
-							            this.WindowState = FormWindowState.Maximized;
-							            bt_exit_setup();
-							        }
-							
-							        void bt_exit_setup()
-							        {
-							            int width = 5;
-							            int w = 50; //設定按鈕大小 W
-							            int h = 50; //設定按鈕大小 H
-							
-							            Button bt_exit = new Button();  // 實例化按鈕
-							            bt_exit.Size = new Size(w, h);
-							            bt_exit.Text = "";
-							            Bitmap bmp = new Bitmap(w, h);
-							            Graphics g = Graphics.FromImage(bmp);
-							            Pen p = new Pen(Color.Red, width);
-							            g.Clear(Color.Pink);
-							            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
-							            g.DrawLine(p, 0, 0, w - 1, h - 1);
-							            g.DrawLine(p, w - 1, 0, 0, h - 1);
-							            bt_exit.Image = bmp;
-							
-							            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
-							            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
-							
-							            this.Controls.Add(bt_exit); // 將按鈕加入表單
-							            bt_exit.BringToFront();     //移到最上層
-							        }
-							
 //------------------------------------------------------------  # 60個
 
 //最小化按鈕的寫法
@@ -8410,27 +8306,6 @@ draw dddd
             //int[] gray = new int[220];
             //g.DrawLines(Pens.Red, gray.ToArray());
 
-表單相關 ffff
-
-this.FormBorderStyle = FormBorderStyle.None;
-this.WindowState = FormWindowState.Maximized;
-this.FormBorderStyle = FormBorderStyle.FixedSingle;
-this.WindowState = FormWindowState.Normal;
-
-this.StartPosition = FormStartPosition.Manual;
-
-//this.StartPosition = FormStartPosition.CenterScreen;
-this.StartPosition = FormStartPosition.CenterScreen;  // 單獨寫致中，看似無效
-
-pikasa
-this.ShowInTaskbar = false;
-this.MaximizeBox = false;
-this.StartPosition = FormStartPosition.CenterScreen;  // 單獨寫致中，看似無效
-
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
-            this.pictureBox1.Focus();
-
 //------------------------------------------------------------  # 60個
 
             Graphics g;
@@ -8550,8 +8425,6 @@ Console模式下 依據不同指令開啟不同表單
 Application.Run(new Form1());
 
 　/// 應用程序的主入口點。
-　///
-　[STAThread]
 　static void Main(string[] args)
 　{
 　　if(==1)
@@ -8598,9 +8471,6 @@ private void Form1_Load(object sender, EventArgs e)
     this.AcceptButton = button5;            //在表單按enter就執行button5按鈕的動作
     //按ESC連動到button1
     this.CancelButton = button2;
-
-    //不再TaskBar上顯示程式
-    this.ShowInTaskbar = false;
 }
 
 //------------------------------  # 30個
@@ -8732,8 +8602,8 @@ using Microsoft.VisualBasic.FileIO;
 
 FileSystem.DeleteFile("D:\\test.txt", UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
 
-                        補充說明一下：UIOption.OnlyErrorDialogs會自動選取要丟入回收桶，只在錯誤時顯示錯誤方塊，
-                                                   如果是 FileIO.RecycleOption.SendToRecycleBin則是會跳窗問要不要丟入回收桶
+補充說明一下：UIOption.OnlyErrorDialogs會自動選取要丟入回收桶，只在錯誤時顯示錯誤方塊，
+如果是 FileIO.RecycleOption.SendToRecycleBin則是會跳窗問要不要丟入回收桶
 
 	//使用資源回收筒刪除檔案
 	FileSystem.DeleteFile("C:\\______test_files\\237.html", UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
@@ -8755,28 +8625,12 @@ Beep
 https://www.zhangshengrong.com/p/yOXD5ejR1B/
         
 //------------------------------------------------------------  # 60個
-/*
 
-        private void bt_copy_data_Click(object sender, EventArgs e)
-        {
-            if (this.listView1.Items.Count <= 0)
-            {
-                result_str += "無內容可複製\n";
-                return;
-            }
+//C# – 複製資料到剪貼簿
+Clipboard.Clear();
 
-            //C# – 複製資料到剪貼簿
-            Clipboard.Clear();
-
-            for (int i = 0; i < listView1.Items.Count; i++)
-            {
-                //result_str += listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\n";
-
-                //C# – 複製資料到剪貼簿 累計
-                Clipboard.SetDataObject(Clipboard.GetText() + listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\n");      //建議用此
-            }
-        }
-*/
+//C# – 複製資料到剪貼簿 累計
+Clipboard.SetDataObject(Clipboard.GetText() + "aaaaa");  // 建議用此
 
 //------------------------------------------------------------  # 60個
 
@@ -8847,13 +8701,6 @@ array
             richTextBox1.Text += "ROW = " + pbox.GetLength(1).ToString() + "\n";    //2
 
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------  # 60個
-
-this.DoubleBuffered = true;//避免闪烁
-this.DoubleBuffered = true;//避免闪烁
-this.DoubleBuffered = true;
-this.DoubleBuffered = true;
-
 //------------------------------------------------------------  # 60個
 
             Random rr = new Random();
@@ -8929,6 +8776,72 @@ this.DoubleBuffered = true;
 
 //------------------------------------------------------------  # 60個
 
+
+
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------  # 60個
+
+//this的設定
+
+this.DoubleBuffered = true;//避免闪烁
+	
+//最大化螢幕
+this.FormBorderStyle = FormBorderStyle.None;
+this.WindowState = FormWindowState.Maximized;
+
+this.FormBorderStyle = FormBorderStyle.None;//設定無邊框
+this.FormBorderStyle = FormBorderStyle.None;//設定無邊框
+this.FormBorderStyle = FormBorderStyle.None;
+
+//最小化螢幕
+
+//最小最小化
+this.WindowState = FormWindowState.Minimized;
+this.ShowInTaskbar = false;//不在TaskBar上顯示程式
+this.ShowInTaskbar = false;//不在任务栏显现
+
+
+//預設背景色	
+this.BackColor = SystemColors.ControlLight;
+
+button1.Visible = false;
+richTextBox1.Visible = false;
+this.AutoSize = true;
+this.AutoSizeMode = AutoSizeMode.GrowAndShrink;     //讓表單大小可以自動隨著圖片大小變化。
+this.TransparencyKey = SystemColors.ControlLight;   //將表單的TransparencyKey設為Control，這樣可以去掉桌面小玩意外圍多餘的部份
+
+this.FormBorderStyle = FormBorderStyle.None;
+this.BackColor = Color.Black;
+
+this.FormBorderStyle = FormBorderStyle.None;
+this.FormBorderStyle = FormBorderStyle.FixedSingle;
+this.FormBorderStyle = FormBorderStyle.None;
+this.WindowState = FormWindowState.Maximized;
+this.WindowState = FormWindowState.Normal;
+this.WindowState = FormWindowState.Maximized;//最大化螢幕
+this.WindowState = FormWindowState.Maximized;
+
+
+this.StartPosition = FormStartPosition.Manual;
+this.StartPosition = FormStartPosition.CenterScreen;
+this.StartPosition = FormStartPosition.CenterScreen;  // 單獨寫致中，看似無效
+this.StartPosition = FormStartPosition.CenterScreen;  // 單獨寫致中，看似無效
+
+this.MaximizeBox = false;
+
+this.pictureBox1.Focus();
+
+//最大化螢幕
+this.FormBorderStyle = FormBorderStyle.None;
+this.WindowState = FormWindowState.Maximized;
+
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------  # 60個
+
+            //取得副檔名
+                        FileInfo file_info = new FileInfo(filename);
+                        switch (file_info.Extension)
+
 /*
 //创建目录
 string dir = Path.GetDirectoryName(fileSaveUrl);
@@ -8941,5 +8854,11 @@ if (Directory.Exists(foldername) == false)
 {
 	Directory.CreateDirectory(foldername);
 }
+
+
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------  # 60個
+
+
 
 

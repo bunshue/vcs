@@ -427,6 +427,7 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(200, 60);
             this.button28.TabIndex = 29;
+            this.button28.Text = "開啟外部程式並內嵌至表單中";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
@@ -437,6 +438,7 @@
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(200, 60);
             this.button29.TabIndex = 30;
+            this.button29.Text = "開啟外部程式並內嵌至表單中";
             this.button29.UseVisualStyleBackColor = true;
             this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
@@ -668,6 +670,7 @@
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(200, 60);
             this.button30.TabIndex = 120;
+            this.button30.Text = "ProcessStartInfo 0";
             this.button30.UseVisualStyleBackColor = true;
             this.button30.Click += new System.EventHandler(this.button30_Click);
             // 
@@ -678,6 +681,7 @@
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(200, 60);
             this.button31.TabIndex = 121;
+            this.button31.Text = "ProcessStartInfo 1";
             this.button31.UseVisualStyleBackColor = true;
             this.button31.Click += new System.EventHandler(this.button31_Click);
             // 
@@ -688,6 +692,7 @@
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(200, 60);
             this.button32.TabIndex = 122;
+            this.button32.Text = "ProcessStartInfo 2";
             this.button32.UseVisualStyleBackColor = true;
             this.button32.Click += new System.EventHandler(this.button32_Click);
             // 
@@ -698,6 +703,7 @@
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(200, 60);
             this.button33.TabIndex = 123;
+            this.button33.Text = "ProcessStartInfo 3";
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
@@ -708,6 +714,7 @@
             this.button34.Name = "button34";
             this.button34.Size = new System.Drawing.Size(200, 60);
             this.button34.TabIndex = 124;
+            this.button34.Text = "ProcessStartInfo 4";
             this.button34.UseVisualStyleBackColor = true;
             this.button34.Click += new System.EventHandler(this.button34_Click);
             // 
@@ -718,6 +725,7 @@
             this.button35.Name = "button35";
             this.button35.Size = new System.Drawing.Size(200, 60);
             this.button35.TabIndex = 125;
+            this.button35.Text = "ProcessStartInfo 5";
             this.button35.UseVisualStyleBackColor = true;
             this.button35.Click += new System.EventHandler(this.button35_Click);
             // 
@@ -728,6 +736,7 @@
             this.button36.Name = "button36";
             this.button36.Size = new System.Drawing.Size(200, 60);
             this.button36.TabIndex = 126;
+            this.button36.Text = "Shutdown/Reboot";
             this.button36.UseVisualStyleBackColor = true;
             this.button36.Click += new System.EventHandler(this.button36_Click);
             // 
@@ -738,6 +747,7 @@
             this.button37.Name = "button37";
             this.button37.Size = new System.Drawing.Size(200, 60);
             this.button37.TabIndex = 127;
+            this.button37.Text = "ProcessStartInfo";
             this.button37.UseVisualStyleBackColor = true;
             this.button37.Click += new System.EventHandler(this.button37_Click);
             // 
