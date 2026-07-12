@@ -59,8 +59,6 @@ g.Clear(Color.Transparent);
 
 //------------------------------------------------------------  # 60個
 
-//------------------------------------------------------------  # 60個
-
 string strMinute = "";
 if(DateTime.Now.Minute > 30) strMinute="30";
 else strMinute = "00";
@@ -102,8 +100,6 @@ Cindy
 //------------------------------------------------------------  # 60個
 
 C:\Program Files\Git\bin\git.exe pull --progress -v --no-rebase "origin"
-
-//------------------------------------------------------------  # 60個
 
 //------------------------------------------------------------  # 60個
 
@@ -821,8 +817,8 @@ richTextBox1.Text += byte_data[i].ToString("D03");
         }
     }
 
-
 #-----------------------------
+
     //指針法
     public class PointBitmap
     {
@@ -2714,22 +2710,6 @@ body : http://www.google.com/custom?hl=en&amp
 先使用無符號字節數組存放數據庫對應的數據集中表的image類型字段的值。例如：
 
 byte[] bytes= (byte[]) image類型字段值
-
-//------------------------------------------------------------  # 60個
-
-Web Service方面的：
-二十五、一個Web Service的小例子：
-
-using System.Web.Services;
-
-public class TestWS : System.Web.Services.WebService
-{
-    [WebMethod()]
-    public string StringFromWebService()
-    {
-        return This is a string from web service.;
-    }
-} 
 
 //------------------------------------------------------------  # 60個
 
@@ -6824,10 +6804,7 @@ Length : 75040
 未定義:	APIC
 APIC	附圖	image/jpeg??JFIF?髟CC_PROFILE懸pplmntrRGB XYZ ?	
 
-
-
-
-
+//------------------------------------------------------------  # 60個
 
 在大圖上畫上小圖
 在大圖上畫上文字
@@ -7598,6 +7575,36 @@ ControlBox = false;//不在窗体标题栏中显示控件
 //------------------------------------------------------------  # 60個
 
 rtb
+
+設定部分字型顏色
+
+            //設定部分字型顏色
+            fontDialog1.ShowApply = true;
+            fontDialog1.ShowColor = true;
+            fontDialog1.ShowEffects = true;
+            fontDialog1.ShowHelp = true;
+            if (fontDialog1.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox1.SelectionFont = fontDialog1.Font;
+                richTextBox1.SelectionColor = fontDialog1.Color;
+                //richTextBox1.SelectionBackColor
+            }
+
+設定字型 使用Apply
+
+                richTextBox1.Font = fontDialog1.Font;
+                richTextBox1.ForeColor = fontDialog1.Color;
+                richTextBox1.Text += "已完成設定";
+
+
+                //改變文字方塊的字型
+                richTextBox1.Font = fontDialog1.Font;
+                //改變文字方塊的前景顏色
+                richTextBox1.ForeColor = fontDialog1.Color;
+
+
+
+
 全選與部分選取
 
 RichTextBox 和 TextBox 需要在Focus的狀態下才可以反白
@@ -8539,14 +8546,6 @@ Beep
 
 https://www.zhangshengrong.com/p/yOXD5ejR1B/
         
-//------------------------------------------------------------  # 60個
-
-//C# – 複製資料到剪貼簿
-Clipboard.Clear();
-
-//C# – 複製資料到剪貼簿 累計
-Clipboard.SetDataObject(Clipboard.GetText() + "aaaaa");  // 建議用此
-
 //------------------------------------------------------------  # 60個
 
 pictureCard

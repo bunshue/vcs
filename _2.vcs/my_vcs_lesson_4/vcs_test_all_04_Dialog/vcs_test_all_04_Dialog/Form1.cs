@@ -17,10 +17,11 @@ namespace vcs_test_all_04_Dialog
         FontFamily old_font_name;
 
         // The size used for each color patch.
-        const int PatchWidth = 50, PatchHeight = 50;
+        const int PatchWidth = 50;
+        const int PatchHeight = 50;
         const int PatchMargin = 2;
-        const int NumRows = 6, NumCols = 8;
-
+        const int NumRows = 6;
+        const int NumCols = 8;
         int[] argbs = new int[48];
 
         public Form1()
@@ -46,18 +47,21 @@ namespace vcs_test_all_04_Dialog
 
             //設定前景色, 使用自定義色彩
             // Use dark custom colors for the foreground dialog.
-            int[] fg_colors = {
+            int[] fg_colors =
+            {
                 0x808080, 0xFF0000, 0xFF8000, 0xFFFF00, 0x00FF00,
                 0x00FFFF, 0x0000FF, 0xFF00FF, 0x000000, 0xC00000,
                 0x804000, 0xC0C000, 0x008000, 0x00C0C0, 0x0000C0,
-                0x800080 };
+                0x800080
+            };
             colorDialog_forecolor.CustomColors = fg_colors;
             // Make the background dialog open with the custom colors displayed.
             colorDialog_forecolor.FullOpen = false;
 
             //設定背景色, 使用自定義色彩
             // Use light custom colors for the background dialog.
-            int[] bg_colors = {
+            int[] bg_colors =
+            {
                 0xFFFFFF, 0xFFC0C0, 0xFFE0C0, 0xFFFFC0, 0xC0FFC0,
                 0xC0FFFF, 0xC0C0FF, 0xFFC0FF, 0xE0E0E0, 0xFF8080,
                 0xFFC080, 0xFFFF80, 0x80FF80, 0x80FFFF, 0x8080FF,
@@ -68,12 +72,6 @@ namespace vcs_test_all_04_Dialog
             colorDialog_backcolor.FullOpen = true;
 
             //------------------------------------------------------------  # 60個
-
-            // Make the PictureBox the right size.
-            pictureBox1.ClientSize =
-                new Size(
-                    NumCols * PatchWidth + (NumCols - 1) * PatchMargin,
-                    NumRows * PatchHeight + (NumRows - 1) * PatchMargin);
 
             Color[] colors =
             {
@@ -132,6 +130,7 @@ namespace vcs_test_all_04_Dialog
                 Color.FromArgb(255, 64, 0, 64),
             };
 
+            richTextBox1.Text += "len = " + colors.Length.ToString() + "\n";
             for (int i = 0; i < colors.Length; i++)
             {
                 argbs[i] = colors[i].ToArgb();
@@ -150,25 +149,21 @@ namespace vcs_test_all_04_Dialog
             groupBox1.Size = new Size(W, H);
             groupBox2.Size = new Size(W, H);
             groupBox3.Size = new Size(W, H);
-            groupBox4.Size = new Size(W, H);
-            pictureBox1.Size = new Size(460, 300);
+            pictureBox1.Size = new Size(460, 360);
+            richTextBox1.Size = new Size(300, 320);
             groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             groupBox3.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            groupBox4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            richTextBox1.Size = new Size(300, 320);
+            pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 1);
 
             groupBox0.Font = new Font("Arial", 11);
             groupBox1.Font = new Font("Arial", 11);
             groupBox2.Font = new Font("Arial", 11);
             groupBox3.Font = new Font("Arial", 11);
-            groupBox4.Font = new Font("Arial", 9);
 
             label1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
             bt_open_folder.Location = new Point(x_st + dx * 3, y_st + dy * 1 - 105);
             bt_open_folder.BackgroundImage = Properties.Resources.open_folder;
@@ -208,11 +203,6 @@ namespace vcs_test_all_04_Dialog
             button32.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button33.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button34.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button40.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button41.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button42.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button43.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button44.Location = new Point(x_st + dx * 0, y_st + dy * 4);
 
             this.Size = new Size(1400, 830);
             this.Text = "vcs_test_all_04_Dialog";
@@ -616,85 +606,7 @@ namespace vcs_test_all_04_Dialog
             }
         }
 
-        private void button40_Click(object sender, EventArgs e)
-        {
-            //設定字型
-            fontDialog1.AllowVerticalFonts = true;//指示對話框既顯示垂直字體又顯示水平字體
-            fontDialog1.FixedPitchOnly = true; 			//只允許選擇固定間距字體
-            fontDialog1.ShowApply = true;      		//包含應用按鈕
-            fontDialog1.ShowEffects = true;    //允許指定刪除線、下畫線和文本顏色選項的控件
-            fontDialog1.ShowColor = true;
-            fontDialog1.ShowHelp = true;
-
-            fontDialog1.Font = label1.Font;           //字型對話框的預設字型
-            fontDialog1.Color = label1.ForeColor;     //字型對話框的預設顏色
-
-            if (fontDialog1.ShowDialog() == DialogResult.OK)    //開啟字型對話方塊
-            {
-                label1.Font = fontDialog1.Font;       //以在字型對話方塊內所指定的字型來指定給label1
-                label1.ForeColor = fontDialog1.Color; //以在字型對話方塊內所指定的顏色來指定給label1
-                richTextBox1.Font = fontDialog1.Font;       //以在字型對話方塊內所指定的字型來指定給richTextBox1
-                richTextBox1.ForeColor = fontDialog1.Color; //以在字型對話方塊內所指定的顏色來指定給richTextBox1
-            }
-        }
-
-        private void button41_Click(object sender, EventArgs e)
-        {
-            //設定部分字型顏色
-            fontDialog1.ShowApply = true;
-            fontDialog1.ShowColor = true;
-            fontDialog1.ShowEffects = true;
-            fontDialog1.ShowHelp = true;
-            if (fontDialog1.ShowDialog() == DialogResult.OK)
-            {
-                richTextBox1.SelectionFont = fontDialog1.Font;
-                richTextBox1.SelectionColor = fontDialog1.Color;
-                //richTextBox1.SelectionBackColor
-            }
-        }
-
-        private void button42_Click(object sender, EventArgs e)
-        {
-            //設定字型, 使用Apply
-            fontDialog1.AllowScriptChange = false;
-            fontDialog1.AllowVectorFonts = false;
-            fontDialog1.AllowVerticalFonts = false;
-            fontDialog1.ShowApply = false;
-            fontDialog1.ShowColor = false;
-            fontDialog1.ShowEffects = false;
-            fontDialog1.ShowHelp = false;
-            fontDialog1.FixedPitchOnly = false;
-
-            fontDialog1.MaxSize = 40;
-            fontDialog1.MinSize = 10;
-
-            if (fontDialog1.ShowDialog() != DialogResult.Cancel)
-            {
-                richTextBox1.Font = fontDialog1.Font;
-                richTextBox1.ForeColor = fontDialog1.Color;
-                richTextBox1.Text += "已完成設定";
-            }
-        }
-
-        private void button43_Click(object sender, EventArgs e)
-        {
-            //設定字型
-            //fontDialog1
-            fontDialog1.ShowColor = true; //顯示色彩選擇
-            fontDialog1.Font = richTextBox1.Font; //取得Windows系統字型
-            fontDialog1.Color = richTextBox1.ForeColor;//取得前景色彩
-            if (fontDialog1.ShowDialog() != DialogResult.Cancel)
-            {
-                //改變文字方塊的字型
-                richTextBox1.Font = fontDialog1.Font;
-                //改變文字方塊的前景顏色
-                richTextBox1.ForeColor = fontDialog1.Color;
-            }
-        }
-
-        private void button44_Click(object sender, EventArgs e)
-        {
-        }
+        //------------------------------------------------------------  # 60個
 
         private void bt_open_folder_Click(object sender, EventArgs e)
         {
@@ -812,6 +724,12 @@ namespace vcs_test_all_04_Dialog
             int row = (int)(e.Y / (PatchHeight + PatchMargin));
             int col = (int)(e.X / (PatchWidth + PatchMargin));
             int index = row * NumCols + col;
+
+            //richTextBox1.Text += "(" + row.ToString() + ", " + col.ToString() + ") ";
+            if (row >= NumRows)
+                return;
+            if (col >= NumCols)
+                return;
 
             // Let the user pick a color.
             colorDialog1.Color = Color.FromArgb(argbs[index]);
@@ -932,7 +850,7 @@ richTextBox1.Text += "----------------------------------------------------------
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
 openFileDialog1.Filter = "點陣圖 (*.bmp)|*.bmp|JPEG (*.JPG)|*.JPG|" + "GIF(*.GIF)|*.GIF|All File (*.*)|*.*";
-saveFileDialog1.Filter = "點陣圖 (*.bmp)|*.bmp|JPEG (*.JPG)|*.JPG|" + "GIF(*.GIF)| *. GIF|All File (*.*)|*.*";
+saveFileDialog1.Filter = "點陣圖 (*.bmp)|*.bmp|JPEG (*.JPG)|*.JPG|" + "GIF(*.GIF)|*.GIF|All File (*.*)|*.*";
 
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -992,4 +910,55 @@ richTextBox1.Text += "----------------------------------------------------------
 
 //saveFileDialog1.InitialDirectory = Application.StartupPath; //從目前目錄開始尋找檔案
 
+//------------------------------------------------------------  # 60個
+
+            //設定字型, 使用Apply
+            fontDialog1.AllowScriptChange = false;
+            fontDialog1.AllowVectorFonts = false;
+            fontDialog1.AllowVerticalFonts = false;
+            fontDialog1.ShowApply = false;
+            fontDialog1.ShowColor = false;
+            fontDialog1.ShowEffects = false;
+            fontDialog1.ShowHelp = false;
+            fontDialog1.FixedPitchOnly = false;
+
+            fontDialog1.MaxSize = 40;
+            fontDialog1.MinSize = 10;
+
+            if (fontDialog1.ShowDialog() != DialogResult.Cancel)
+            {
+            }
+
+
+            //設定字型
+            //fontDialog1
+            fontDialog1.ShowColor = true; //顯示色彩選擇
+            fontDialog1.Font = richTextBox1.Font; //取得Windows系統字型
+            fontDialog1.Color = richTextBox1.ForeColor;//取得前景色彩
+            if (fontDialog1.ShowDialog() != DialogResult.Cancel)
+            {
+            }
+
+//------------------------------------------------------------  # 60個
+
+            //設定字型
+            fontDialog1.AllowVerticalFonts = true;//指示對話框既顯示垂直字體又顯示水平字體
+            fontDialog1.FixedPitchOnly = true; 			//只允許選擇固定間距字體
+            fontDialog1.ShowApply = true;      		//包含應用按鈕
+            fontDialog1.ShowEffects = true;    //允許指定刪除線、下畫線和文本顏色選項的控件
+            fontDialog1.ShowColor = true;
+            fontDialog1.ShowHelp = true;
+
+            fontDialog1.Font = label1.Font;           //字型對話框的預設字型
+            fontDialog1.Color = label1.ForeColor;     //字型對話框的預設顏色
+
+            if (fontDialog1.ShowDialog() == DialogResult.OK)    //開啟字型對話方塊
+            {
+                label1.Font = fontDialog1.Font;       //以在字型對話方塊內所指定的字型來指定給label1
+                label1.ForeColor = fontDialog1.Color; //以在字型對話方塊內所指定的顏色來指定給label1
+                richTextBox1.Font = fontDialog1.Font;       //以在字型對話方塊內所指定的字型來指定給richTextBox1
+                richTextBox1.ForeColor = fontDialog1.Color; //以在字型對話方塊內所指定的顏色來指定給richTextBox1
+            }
+
 */
+

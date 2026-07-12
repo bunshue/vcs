@@ -22,6 +22,10 @@ using PdfSharp;
 using PdfSharp.Pdf;
 using PdfSharp.Drawing;
 
+
+
+// backgroundWorker1 已搬出
+
 namespace vcs_ReadWrite_PDF1
 {
     public partial class Form1 : Form

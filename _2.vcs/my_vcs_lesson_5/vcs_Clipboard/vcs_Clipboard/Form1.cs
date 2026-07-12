@@ -497,7 +497,7 @@ namespace vcs_Clipboard
 
         private void button13_Click(object sender, EventArgs e)
         {
-            Clipboard.Clear();  //清除剪貼簿中的對象
+            Clipboard.Clear();  // 清除剪貼簿中的對象
         }
 
         private void button14_Click(object sender, EventArgs e)

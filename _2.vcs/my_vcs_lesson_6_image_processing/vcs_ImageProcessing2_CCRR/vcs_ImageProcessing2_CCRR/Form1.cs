@@ -1018,25 +1018,15 @@ namespace vcs_ImageProcessing2_CCRR
 
         private void button14_Click(object sender, EventArgs e)
         {
-            //Image Cut
-            //Image Cut
+            //Image Cut 圖像切割
 
             string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             string filename2 = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-            string mesg = "lion-mouse";
+            string message = "lion-mouse";
 
-            Cut(filename1, filename2, 200, 200, mesg);
-        }
+            int width = 200;  // 切割後圖像寬度
+            int height = 200;  // 切割後圖像高度
 
-        /// <summary>
-        /// 圖像切割
-        /// </summary>
-        /// <param name="filename1">原圖片路徑</param>
-        /// <param name="filename2">切割後圖片路徑</param>
-        /// <param name="width">切割後圖像寬度</param>
-        /// <param name="height">切割後圖像高度</param>
-        public void Cut(string filename1, string filename2, int width, int height, string message)
-        {
             Bitmap bitmap = new Bitmap(filename1);
             Decimal MaxRow = Math.Ceiling((Decimal)bitmap.Height / height);
             Decimal MaxColumn = Math.Ceiling((decimal)bitmap.Width / width);
@@ -1314,7 +1304,6 @@ namespace vcs_ImageProcessing2_CCRR
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-            //Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
             pictureBox1.Image = bitmap1;
         }
     }

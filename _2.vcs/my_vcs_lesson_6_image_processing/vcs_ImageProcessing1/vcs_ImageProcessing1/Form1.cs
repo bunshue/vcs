@@ -915,12 +915,10 @@ IntPtr ptr = bmpData.Scan0;　 // 獲取bmpData的內存起始位置
 IntPtr srcPtr = bmpData1.Scan0;
 IntPtr dstPtr = bmpData2.Scan0;
 
-//Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+//------------------------------------------------------------  # 60個
 
 首先用 BitmapData.Scan0找到第0個像素的第0個分量的地址。這個地址指向的是個byte類型，所以當時定義為byte* pIn。
-
 為使用了unsafe，所以編譯的時候需要設置“允許不安全的代碼”。
-
 直接用 Marshal 操作
                     r = Marshal.ReadByte(bmpData.Scan0, stride * y + x + 2);
                     g = Marshal.ReadByte(bmpData.Scan0, stride * y + x + 1);
@@ -945,7 +943,6 @@ IntPtr dstPtr = bmpData2.Scan0;
 
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);  //使用Image.FromFile創建圖形對象 same
             Bitmap bitmap1 = new Bitmap(filename);
-
  
              //解除綁定bitmap1和bmpData   same  // 解鎖內存區域
             bitmap1.UnlockBits(bmpData);　 
@@ -982,17 +979,13 @@ Bitmap bmp = new Bitmap(W, H, PixelFormat.Format8bppIndexed);//指定8位格式�
 
             //解除綁定bitmap1和bmpData
             bitmap2.UnlockBits(dt);
- 各種影像處理速度比較
- * 
- * 
- * 
-*/
 
 
-/*
+各種影像處理速度比較
 
- * Bitmap bm = BytesToImage((byte[])reader.GetValue(6));
+//------------------------------------------------------------  # 60個
 
+Bitmap bm = BytesToImage((byte[])reader.GetValue(6));
 
         // Convert a byte array into an image.
         private Bitmap BytesToImage(byte[] bytes)
@@ -1065,29 +1058,26 @@ Bitmap bmp = new Bitmap(W, H, PixelFormat.Format8bppIndexed);//指定8位格式�
 
             //pictureBox2.Image = bitmap;       //將圖片顯示於 PictureBox 中
 
-*/
+//------------------------------------------------------------  # 60個
 
-/*
 long elapsed = sw.ElapsedMilliseconds;
 richTextBox1.Text += "耗時 : " + string.Format("{0,10}", elapsed.ToString()) + "\tmsec\n";
 richTextBox1.Text += "耗時 : " + (elapsed / 1000).ToString() + "." + (elapsed % 1000).ToString("D3") + " 秒\n";
-*/
 
 //使用原本的像素格式
 //BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, bmp.PixelFormat);
 
-/*
 ImageLockMode 三種模式, 都使用 ReadWrite
 ImageLockMode.ReadWrite
 ImageLockMode.ReadOnly
 ImageLockMode.ReadWrite
-*/
 
 // 其中BitmapData類的Stride屬性爲每行像素所佔的字節。
 // int offset = stride - W * 3;
 // ptr += offset;//指針加上填充的空白空間
 
-/*
+//------------------------------------------------------------  # 60個
+
                                 using (MemoryStream ms = new MemoryStream(solImage.ImageData))
                                 using (Bitmap bitmap = (Bitmap)Image.FromStream(ms))
                                 {
@@ -1141,9 +1131,6 @@ MemoryStream 可以seek
 		return utf.GetString(arr).Trim();
 		
 //------------------------------------------------------------  # 60個
-
-
-
 
 byte[]與Image Image與 byte[] 之間的轉換
 
@@ -1199,7 +1186,6 @@ public byte[] ConvertImage(Image image)
 		FileStream fs = new FileStream(filename, FileMode.Open,FileAccess.Read);
 		pictureBox1.Image = Image.FromStream(fs);
 		fs.Close();
-
 
             //錯誤的寫法, 可能會出現"記憶體不足"
             //pictureBox1.Image = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\bear.bmp");
