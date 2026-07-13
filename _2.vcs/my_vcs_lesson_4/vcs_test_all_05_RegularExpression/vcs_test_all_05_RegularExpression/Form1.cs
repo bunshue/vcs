@@ -443,8 +443,25 @@ namespace vcs_test_all_05_RegularExpression
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-/*  可搬出
+/*
+
+.net(C#)從html中提取中文字（正則表達式）
+用正則表達式提取html中的純文本,代碼實現如下: 
+
+using System.Text.RegularExpressions;      
+
+ private string StripHT(string strHtml)  //從html中提取純文本
+        {
+            Regex regex = new Regex("<.+?>", RegexOptions.IgnoreCase);
+            string strOutput = regex.Replace(strHtml, "");//替換掉"<"和">"之間的內容
+            strOutput = strOutput.Replace("<", "");
+            strOutput = strOutput.Replace(">", "");
+            strOutput = strOutput.Replace("&nbsp;", "");
+            return strOutput;
+        }
+
+
+
 
 */
-
 

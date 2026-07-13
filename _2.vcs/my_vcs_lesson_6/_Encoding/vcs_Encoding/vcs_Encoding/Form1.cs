@@ -917,14 +917,25 @@ Encoding.GetBytes方法，將 String 轉為 Byte 序列  // 字串轉拜列
 Encoding.GetString方法 : 將位元組序列解碼成字串。
 Encoding.GetString方法，將 Byte 序列 轉為 String, 拜列轉字串
 
-byte[] input = Encoding.Default.GetBytes(str);  // 字串轉拜列
-byte[] input = Encoding.UTF8.GetBytes(str);  // 字串轉拜列
-byte[] input = Encoding.Unicode.GetBytes(str);  // 字串轉拜列
-byte[] input = Encoding.ASCII.GetBytes(str);  // 字串轉拜列
-byte[] input = ASCIIEncoding.ASCII.GetBytes(str);  // 字串轉拜列
-byte[] input = UTF8Encoding.UTF8.GetBytes(str); //字串轉拜列
-byte[] input = new UnicodeEncoding().GetBytes(str);  // 字串轉拜列
-byte[] input = new ASCIIEncoding().GetBytes(str);  // 字串轉拜列
+// 字串轉拜列
+byte[] byteArray = Encoding.Default.GetBytes(str);
+byte[] byteArray = Encoding.ASCII.GetBytes(str);
+byte[] byteArray = Encoding.UTF8.GetBytes(str);
+byte[] byteArray = Encoding.Unicode.GetBytes(str);
+byte[] byteArray = ASCIIEncoding.ASCII.GetBytes(str);
+byte[] byteArray = UTF8Encoding.UTF8.GetBytes(str);
+byte[] byteArray = Encoding.GetEncoding("Big5").GetBytes(strBig5);  // 繁體中文 (Big5) 
+byte[] byteArray = Encoding.GetEncoding("GB2312").GetBytes(word);
+byte[] byteArray = Encoding.GetEncoding(1252).GetBytes(badstringFromDatabase);
+byte[] byteArray = new UnicodeEncoding().GetBytes(str);
+byte[] byteArray = new ASCIIEncoding().GetBytes(str);
+
+Encoding.GetEncoding("gb2312").GetString(byteArray); // 簡體中文 (GB2312)   // 拜列轉字串
+Encoding.GetEncoding("gb2312").GetString(byteArray); // 簡體中文 (GB2312)   // 拜列轉字串
+
+Encoding enc = Encoding.GetEncoding("BIG5");
+Encoding enc = Encoding.GetEncoding("GB2312");
+
 
 // 拜列轉字串
 string byteConvStrig = Encoding.Default.GetString(byteArray);  // 拜列轉字串
@@ -947,29 +958,7 @@ string byteConvStrig = Encoding.Default.GetString(byteArray);  // 拜列轉字�
 
 Encoding.GetEncoding big5 gb2312 shift_jis UTF-8 unicode
 
-test write
-StreamWriter sw = new StreamWriter(strFilePath + strFileName, false, Encoding.GetEncoding("big5"));
-
-StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("utf-8"));   //指名編碼格式 the same
-StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("UTF-8"));    //指名編碼格式
-StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("unicode"));   //指名編碼格式
-StreamWriter sw = new StreamWriter(fs, Encoding.UTF8);    //指名編碼格式
-                      StreamReader(fs, Encoding.GetEncoding("gb2312"));	    //
-//StreamWriter sw = new StreamWriter(File.Open(filename, FileMode.Create), Encoding.GetEncoding("UTF-8"));    //指名編碼格式
-            StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("unicode"));   //指名編碼格式
-
-byte[] unknow = Encoding.GetEncoding("Big5").GetBytes(strBig5);  // 繁體中文 (Big5) 
-byte[] unknow = Encoding.GetEncoding("Big5").GetBytes(strBig5);  // 繁體中文 (Big5) 
-byte[] byteArray = Encoding.GetEncoding("GB2312").GetBytes(word);
-var hopefullyRecovered = Encoding.GetEncoding(1252).GetBytes(badstringFromDatabase);
-
-Encoding.GetEncoding("gb2312").GetString(unknow); // 簡體中文 (GB2312)   // 拜列轉字串
-Encoding.GetEncoding("gb2312").GetString(unknow); // 簡體中文 (GB2312)   // 拜列轉字串
-
-Encoding enc = Encoding.GetEncoding("BIG5");
-Encoding enc = Encoding.GetEncoding("GB2312");
-
-大小寫不拘
+大小寫不分
 
 打印字串的編碼值
 

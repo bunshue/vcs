@@ -99,6 +99,7 @@
             this.lb_status0 = new System.Windows.Forms.Label();
             this.bt_stop = new System.Windows.Forms.Button();
             this.bt_start = new System.Windows.Forms.Button();
+            this.groupBox_pbx = new System.Windows.Forms.GroupBox();
             this.groupBox_radiobutton3.SuspendLayout();
             this.groupBox_radiobutton2.SuspendLayout();
             this.groupBox_radiobutton1.SuspendLayout();
@@ -115,12 +116,13 @@
             this.groupBox_trackbar.SuspendLayout();
             this.groupBox_checkedlistbox.SuspendLayout();
             this.groupBox_progress.SuspendLayout();
+            this.groupBox_pbx.SuspendLayout();
             this.SuspendLayout();
             // 
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(714, 457);
+            this.bt_clear.Location = new System.Drawing.Point(849, 47);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 10;
@@ -131,7 +133,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(709, 421);
+            this.richTextBox1.Location = new System.Drawing.Point(844, 11);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 9;
@@ -440,7 +442,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 509);
+            this.label1.Location = new System.Drawing.Point(26, 243);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(33, 12);
@@ -449,7 +451,7 @@
             // 
             // hScrollBar1
             // 
-            this.hScrollBar1.Location = new System.Drawing.Point(12, 466);
+            this.hScrollBar1.Location = new System.Drawing.Point(21, 207);
             this.hScrollBar1.Name = "hScrollBar1";
             this.hScrollBar1.Size = new System.Drawing.Size(240, 21);
             this.hScrollBar1.TabIndex = 71;
@@ -457,7 +459,7 @@
             // 
             // vScrollBar1
             // 
-            this.vScrollBar1.Location = new System.Drawing.Point(254, 286);
+            this.vScrollBar1.Location = new System.Drawing.Point(263, 27);
             this.vScrollBar1.Name = "vScrollBar1";
             this.vScrollBar1.Size = new System.Drawing.Size(21, 180);
             this.vScrollBar1.TabIndex = 70;
@@ -465,7 +467,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(12, 286);
+            this.pictureBox1.Location = new System.Drawing.Point(21, 27);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(240, 180);
@@ -562,7 +564,7 @@
             this.groupBox_dtp2.Controls.Add(this.dateTimePicker3);
             this.groupBox_dtp2.Controls.Add(this.bt1);
             this.groupBox_dtp2.Controls.Add(this.bt2);
-            this.groupBox_dtp2.Location = new System.Drawing.Point(298, 389);
+            this.groupBox_dtp2.Location = new System.Drawing.Point(349, 403);
             this.groupBox_dtp2.Name = "groupBox_dtp2";
             this.groupBox_dtp2.Size = new System.Drawing.Size(220, 140);
             this.groupBox_dtp2.TabIndex = 95;
@@ -625,7 +627,7 @@
             this.groupBox_dtp3.Controls.Add(this.bt_dtp_get);
             this.groupBox_dtp3.Controls.Add(this.bt_dtp_set);
             this.groupBox_dtp3.Controls.Add(this.dateTimePicker4);
-            this.groupBox_dtp3.Location = new System.Drawing.Point(535, 389);
+            this.groupBox_dtp3.Location = new System.Drawing.Point(583, 405);
             this.groupBox_dtp3.Name = "groupBox_dtp3";
             this.groupBox_dtp3.Size = new System.Drawing.Size(160, 140);
             this.groupBox_dtp3.TabIndex = 94;
@@ -716,7 +718,7 @@
             this.groupBox_rgb.Controls.Add(this.tb_r);
             this.groupBox_rgb.Controls.Add(this.tb_g);
             this.groupBox_rgb.Controls.Add(this.tb_b);
-            this.groupBox_rgb.Location = new System.Drawing.Point(12, 539);
+            this.groupBox_rgb.Location = new System.Drawing.Point(12, 518);
             this.groupBox_rgb.Name = "groupBox_rgb";
             this.groupBox_rgb.Size = new System.Drawing.Size(310, 160);
             this.groupBox_rgb.TabIndex = 96;
@@ -729,7 +731,7 @@
             this.groupBox_dtp1.Controls.Add(this.dateTimePicker1);
             this.groupBox_dtp1.Controls.Add(this.dateTimePicker2);
             this.groupBox_dtp1.Controls.Add(this.label2);
-            this.groupBox_dtp1.Location = new System.Drawing.Point(298, 234);
+            this.groupBox_dtp1.Location = new System.Drawing.Point(346, 250);
             this.groupBox_dtp1.Name = "groupBox_dtp1";
             this.groupBox_dtp1.Size = new System.Drawing.Size(289, 149);
             this.groupBox_dtp1.TabIndex = 97;
@@ -753,7 +755,7 @@
             this.groupBox_checkedlistbox.Controls.Add(this.checkedListBox1);
             this.groupBox_checkedlistbox.Controls.Add(this.bt_clb1);
             this.groupBox_checkedlistbox.Controls.Add(this.bt_clb0);
-            this.groupBox_checkedlistbox.Location = new System.Drawing.Point(328, 539);
+            this.groupBox_checkedlistbox.Location = new System.Drawing.Point(349, 553);
             this.groupBox_checkedlistbox.Name = "groupBox_checkedlistbox";
             this.groupBox_checkedlistbox.Size = new System.Drawing.Size(450, 161);
             this.groupBox_checkedlistbox.TabIndex = 99;
@@ -853,11 +855,24 @@
             this.bt_start.UseVisualStyleBackColor = true;
             this.bt_start.Click += new System.EventHandler(this.bt_start_Click);
             // 
+            // groupBox_pbx
+            // 
+            this.groupBox_pbx.Controls.Add(this.pictureBox1);
+            this.groupBox_pbx.Controls.Add(this.vScrollBar1);
+            this.groupBox_pbx.Controls.Add(this.hScrollBar1);
+            this.groupBox_pbx.Controls.Add(this.label1);
+            this.groupBox_pbx.Location = new System.Drawing.Point(12, 232);
+            this.groupBox_pbx.Name = "groupBox_pbx";
+            this.groupBox_pbx.Size = new System.Drawing.Size(322, 271);
+            this.groupBox_pbx.TabIndex = 101;
+            this.groupBox_pbx.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1000, 742);
+            this.Controls.Add(this.groupBox_pbx);
             this.Controls.Add(this.groupBox_progress);
             this.Controls.Add(this.groupBox_checkedlistbox);
             this.Controls.Add(this.groupBox_trackbar);
@@ -867,10 +882,6 @@
             this.Controls.Add(this.groupBox_dtp3);
             this.Controls.Add(this.groupBox_domainupdown);
             this.Controls.Add(this.groupBox_numericupdown);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.hScrollBar1);
-            this.Controls.Add(this.vScrollBar1);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox_radiobutton1);
             this.Controls.Add(this.groupBox_radiobutton0);
             this.Controls.Add(this.groupBox_radiobutton3);
@@ -905,8 +916,9 @@
             this.groupBox_checkedlistbox.ResumeLayout(false);
             this.groupBox_progress.ResumeLayout(false);
             this.groupBox_progress.PerformLayout();
+            this.groupBox_pbx.ResumeLayout(false);
+            this.groupBox_pbx.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -982,6 +994,7 @@
         private System.Windows.Forms.Label lb_status0;
         private System.Windows.Forms.Button bt_stop;
         private System.Windows.Forms.Button bt_start;
+        private System.Windows.Forms.GroupBox groupBox_pbx;
     }
 }
 

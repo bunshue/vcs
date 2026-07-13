@@ -153,8 +153,8 @@ namespace vcs__small
             int H = 100;
             int x_st = 20;
             int y_st = 20;
-            int dx = W + 10;
-            int dy = H + 10;
+            int dx = 100;
+            int dy = 100;
 
             groupBox_radiobutton0.Size = new Size(W, H);
             groupBox_radiobutton1.Size = new Size(W, H);
@@ -163,25 +163,30 @@ namespace vcs__small
             groupBox_numericupdown.Size = new Size(W * 2, H);
             groupBox_trackbar.Size = new Size(W * 2, H);
             groupBox_domainupdown.Size = new Size(W * 2, H);
+
             groupBox_radiobutton0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            groupBox_radiobutton1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            groupBox_radiobutton2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            groupBox_radiobutton3.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            groupBox_numericupdown.Location = new Point(x_st + dx * 2 + 20, y_st + dy * 0);
-            groupBox_trackbar.Location = new Point(x_st + dx * 2 + 20, y_st + dy * 1);
-            groupBox_domainupdown.Location = new Point(x_st + dx * 4 + 60, y_st + dy * 0);
+            groupBox_radiobutton1.Location = new Point(x_st + dx * 0, y_st + dy * 1 + 20);
+            groupBox_radiobutton2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            groupBox_radiobutton3.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 20);
+            groupBox_pbx.Size = new Size(360, 260);
+            groupBox_pbx.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            groupBox_rgb.Size = new Size(360, 260);
+            groupBox_rgb.Location = new Point(x_st + dx * 0, y_st + dy * 6);
 
-            groupBox_dtp1.Location = new Point(x_st + dx * 2 + 20, y_st + dy * 2);
-            groupBox_dtp2.Location = new Point(x_st + dx * 2 + 20, y_st + dy * 3 + 50);
-            groupBox_dtp3.Location = new Point(x_st + dx * 4 - 70, y_st + dy * 3 + 50);
-            groupBox_checkedlistbox.Location = new Point(x_st + dx * 2 + 20, y_st + dy * 5 - 20);
-            groupBox_progress.Location = new Point(x_st + dx * 4 + 60, y_st + dy * 1);
+            groupBox_numericupdown.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            groupBox_trackbar.Location = new Point(x_st + dx * 4, y_st + dy * 1 + 20);
+            groupBox_dtp1.Location = new Point(x_st + dx * 4, y_st + dy * 3);
+            groupBox_dtp2.Location = new Point(x_st + dx * 4, y_st + dy * 4 + 70);
+            groupBox_dtp3.Location = new Point(x_st + dx * 6 + 50, y_st + dy * 4 + 70);
+            groupBox_checkedlistbox.Location = new Point(x_st + dx * 4, y_st + dy * 6 + 40);
+            groupBox_domainupdown.Location = new Point(x_st + dx * 8, y_st + dy * 0);
+            groupBox_progress.Location = new Point(x_st + dx * 8, y_st + dy * 1 + 20);
 
-            richTextBox1.Size = new Size(300, 690);
-            richTextBox1.Location = new Point(1100, 10);
+            richTextBox1.Size = new Size(360, 860);
+            richTextBox1.Location = new Point(x_st + dx * 12, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1400, 850);
+            this.ClientSize = new Size(1600, 900);
             this.Text = "vcs__small";
 
             //設定執行後的表單起始位置, 正中央
@@ -221,6 +226,17 @@ namespace vcs__small
             //e.Graphics.DrawString(str, f, Brushes.Black, rect);
             //e.Graphics.DrawString("使用Resize()方法", f, Brushes.Black, 100, 150);
             f.Dispose();
+
+            for (int xx = 0; xx < W; xx += 100)
+            {
+                e.Graphics.DrawLine(Pens.Red, xx, 0, xx, 20);  // 直線
+                e.Graphics.DrawLine(Pens.Red, xx, H - 20, xx, H);  // 直線
+            }
+            for (int yy = 0; yy < H; yy += 100)
+            {
+                e.Graphics.DrawLine(Pens.Red, 0, yy, 20, yy);  // 橫線
+                e.Graphics.DrawLine(Pens.Red, W - 20, yy, W, yy);  // 橫線
+            }
         }
 
         //------------------------------------------------------------  # 60個

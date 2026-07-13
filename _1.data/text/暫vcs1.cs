@@ -582,11 +582,9 @@ printDocument_pascal
             char key = '\u0308';
             WriteLine($"字元 {key}");
 
-//------------------------------------------------------------  # 60個
 
-0x16 : 最大垂直圖形尺寸 (單位為公分)。
-0x42 : 水平圖像尺寸 (單位為公釐)
-0x43 : 垂直圖像尺寸 (單位為公釐)
+
+MessageBox.Show("輸入的ASCII碼為" + Convert.ToByte(e.KeyChar).ToString());
 
 //------------------------------------------------------------  # 60個
 
@@ -2156,6 +2154,7 @@ static bool ValidateEmailAccount(string server, int port, string userName, strin
             NetworkStream netStream = _server.GetStream();
             
             StreamReader sr = new StreamReader(_server.GetStream());
+            
             if (!sr.ReadLine().Contains("+OK"))
            { 
                 //失敗
@@ -2654,28 +2653,6 @@ using System.Runtime.InteropServices;
 
 關於MCI Command String多媒體設備的程序接口的詳細資料，可以參看http://blog.csdn.net/psongchao/article/details/1487788
         				
-//------------------------------------------------------------  # 60個
-
-drawdraw
-
-本文將介紹在．Net中如何使用代碼畫圖表，就像用MS Excel產生的圖表一樣。也可以畫像DataGrid一樣的表格。
-在．Net中，微軟給我們提供了畫圖類（System.Drawing.Imaging），在該類中畫圖的準系統都有。
-比如：直線、折線、矩形、多邊形、橢圓形、扇形、曲線等等，因此一般的圖形都可以直接通過代碼畫出來。
-接下來介紹一些畫圖函數：
-
-Bitmap bMap=new Bitmap(500,500)　//定義映像大小；
-bMap.Save(Stream,ImageCodecInfo) //將映像儲存到指定的輸出資料流；
-Graphics gph //定義或建立GDI繪圖對像；
-PointF cPt　//定義二維平面中x,y座標；
-DrawString(string,Font,Brush,PonitF) //用指定的Brush和Font對像在指定的矩形或點繪製指定的字串；
-DrawLine(Pen,Ponit,Ponit) //用指定的筆(Pen)對像繪製指定兩點之間直線；
-DrawPolygon(Pen,Ponit[]) //用指定的筆(Pen)對像繪製指定多邊形，比如三角形，四邊形等等；
-FillPolygon(Brush,Ponit[]) //用指定的刷子(Brush)對像填充指定的多邊形；
-DrawEllipse(Pen,x,y,Width,Height) //用指定的筆繪製一個邊框定義的橢圓；
-FillEllipse(Brush,x,y,Width,Height) //用指定的刷子填充一個邊框定義的橢圓；
-DrawRectangle(Pen,x,y,Width,Height) //用指定的筆繪製一個指定座標點、寬度、高度的矩形；
-DrawPie(Pen,x,y,Width,Height,startAngle,sweepAngle) //用指定的筆繪製一個指定座標點、寬度、高度以及兩條射線組成的扇形；
-
 //------------------------------------------------------------  # 60個
 
 title : net
@@ -3188,7 +3165,7 @@ Display_Cam1
         }		
 
 //------------------------------------------------------------  # 60個
-
+ssss
         private void button1_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "檢查IP合法性\n";
@@ -3208,6 +3185,22 @@ Display_Cam1
             }
             richTextBox1.Text += "合法\n";
         }
+
+
+ssss
+                string[] strArray = line.Split('\t');
+                for (int i = 0; i < strArray.Length; i++)
+                {
+                    richTextBox1.Text += strArray[i] + "\n";
+                }
+
+ssss
+
+string my_string = "   歡迎來到Myson Century!   ";
+
+string str2 = "ON-C";
+bool res = my_string.ToLower().Replace(" ", "").Contains(str2.ToLower().Replace("-", ""));
+richTextBox1.Text += "result = " + res.ToString() + "\n";
 
 //------------------------------------------------------------  # 60個
 
@@ -3601,20 +3594,6 @@ openGL
 
 //------------------------------------------------------------  # 60個
 
-.net(C#)從html中提取中文字（正則表達式）
-用正則表達式提取html中的純文本,代碼實現如下: 
-
-using System.Text.RegularExpressions;      
-
- private string StripHT(string strHtml)  //從html中提取純文本
-        {
-            Regex regex = new Regex("<.+?>", RegexOptions.IgnoreCase);
-            string strOutput = regex.Replace(strHtml, "");//替換掉"<"和">"之間的內容
-            strOutput = strOutput.Replace("<", "");
-            strOutput = strOutput.Replace(">", "");
-            strOutput = strOutput.Replace("&nbsp;", "");
-            return strOutput;
-        }
 
 //-----wmp----------------------------------------------------  # 60個        				
 
@@ -4264,13 +4243,6 @@ using System.Windows.Media.Imaging要引用PresentationCore
 
 只需要在引用-->程序集-->框架-->PresentationCore
 
-string my_string = "   歡迎來到Myson Century!   ";
-
-string str2 = "ON-C";
-bool res;
-res = my_string.ToLower().Replace(" ", "").Contains(str2.ToLower().Replace("-", ""));
-richTextBox1.Text += "result = " + res.ToString() + "\n";
-
 //------------------------------------------------------------  # 60個
 
 在Windows上，[路徑]必須<248拜，[檔名加路徑]名必須<260拜
@@ -4763,17 +4735,16 @@ Bitmap bmp = new Bitmap(this.PictureBox1.Width, this.PictureBox1.Height);
 // 以記憶體圖像 bmp 建立 g 記憶體畫布
 Graphics g = Graphics.FromImage(bmp);
 g.Clear(this.pictureBox1.BackColor); //畫布背景色
-g.DrawLine(new pen(Color.Red,2),x,y,e.X,e.Y); //可
+g.DrawLine(new pen(Color.Red, 2), x, y, e.X, e.Y); //可
 
 //------------------------------------------------------------  # 60個
 
 // bmp 的大小和pictureBox1 相同
-Bitmap bmp = new Bitmap(this.PictureBox1.Width,
-this.PictureBox1.Height);
+Bitmap bmp = new Bitmap(this.PictureBox1.Width, this.PictureBox1.Height);
 // 以記憶體圖像 bmp 建立 g 記憶體畫布
 Graphics g = Graphics.FromImage(bmp);
 g.Clear(this.pictureBox1.BackColor); //畫布背景色
-g.DrawLine(new pen(Color.Red,2),x,y,e.X,e.Y); //可以繪圖了
+g.DrawLine(new pen(Color.Red, 2), x, y, e.X, e.Y); //可以繪圖了
 
 //------------------------------------------------------------  # 60個
 
@@ -4814,56 +4785,6 @@ Form2的元件的Modifiers要改成Internal, 預設為private
             Color cc = Color.FromArgb(Alpha, Red, Green, Blue);
             panel1.BackColor = cc;
             richTextBox1.Text += cl.R.ToString() + "," + cl.G.ToString() + "," + cl.B.ToString() + "\n";
-
-//------------------------------------------------------------  # 60個
-
-常用圖形的繪制方法
-
-1．畫直線
-[格式1]：public void DrawLine(Pen pen,int x1,int y1,int x2,int y2);
-[格式2]：public void DrawLine(Pen pen,Point pt1,Point pt2);
-
-5．畫矩形
-[格式1]: public void DrawRectangle(Pen pen, Rectangle rect);
-[格式2]：public void DrawRectangle(Pen pen,int x,int y,int width,int height);
-
-12．填充矩形
-[格式1]: public void FillRectangle(Brush brush, Rectangle rect);
-[格式2]：public void FillRectangle(Brush brush,int x,int y,int width,int height);
-
-2．畫橢圓
-[格式1]：public void DrawEllipse(Pen pen, Rectangle rect);
-[格式2]：public void DrawEllipse(Pen pen,int x,int y,int width, int height);
-
-11．填充橢圓
-[格式1]：public void FillEllipse(Brush brush, Rectangle rect);
-[格式2]：public void FillEllipse(Brush brush,int x,int y,int width, int height);
-
-7．畫多邊形
-[格式1]：public void DrawPolygon(Pen pen, Point[] points);
-[格式2]：public void DrawPolygon(Pen pen, PointF[] points);
-
-9．繪制非閉合曲線
-[格式]：public void DrawCurve(Pen pen,Point[] points);
-
-8．繪制閉合曲線
-[格式1]：public void DrawClosedCurve(Pen pen,Point[] points);
-[格式2]：public void DrawClosedCurve(Pen pen,Point[] points,float tension,FillMode fillmode);
-
-3．繪制圓弧
-[格式1]:public void DrawArc(Pen pen,Rectangle rect,float startAngle,float sweepAngle);
-[格式2]：public void DrawArc(Pen pen,int x,int y,int width,int height,int startAngle,int sweepAngle);
-
-13．填充餅圖
-[格式1]：public void FillPie(Brush brush,Rectangle rect,float startAngle,float sweepAngle)
-[格式2]：public void FillPie(Brush brush,int x,int y,int width,int height,int startAngle,int sweepAngle);
-
-4．畫扇形圖
-使用Graphics對象的DrawPie方法可以繪制扇形圖，所謂扇形圖其實就是把一段圓弧的兩個端點與圓心相連。DrawPie方法的格式與DrawArc方法基本一致。
-
-6．畫Bezier曲線
-[格式1]：public void DrawBezier(Pen pen,Point pt1,Point pt2,Point pt3,Point pt4);
-[格式2]：public void DrawBezier(Pen pen,float x1,float y1,float x2,float y2,float x3,float y3,float x4,float y4);
 
 //------------------------------------------------------------  # 60個
 
@@ -4984,75 +4905,10 @@ vcs如何做兩色或多色相加
 如何區分兩個KB MS in vcs
 例如用兩個踏板比賽搶答
 
-
-vcs_ReadWrite_EXCEL1
-kilo OK
-sugar OK
-
-using Excel = Microsoft.Office.Interop.Excel;	//for excel write
-
-vcs_ReadWrite_EXCEL3
-kilo 不可用
-sugar Ok
-
-using Excel = Microsoft.Office.Interop.Excel;	//kilo 不可用
+我使用Visual C#做一個遊戲的程式，我在一台電腦讓接上2個滑鼠讓兩個人來比賽，
+程式要如何分辨滑鼠按鍵是由哪個滑鼠發出的呢?
 
 
-vcs_ReadWrite_EXCEL4
-kilo 不可用
-
-using Excel = Microsoft.Office.Interop.Excel;	//kilo 不可用
-
-
-vcs_ReadWrite_EXCEL5
-kilo 不可用
-sugar Ok 搬至 3 搬移中
-
-using Excel = Microsoft.Office.Interop.Excel;	//kilo 不可用
-
-
-vcs_ReadWrite_EXCEL6
-kilo 不可用
-sugar OK
-
-using Excel = Microsoft.Office.Interop.Excel;	//kilo 不可用
-
-
-vcs_ReadWrite_WORD1
-kilo 不可用
-sugar OK
-using Word = Microsoft.Office.Interop.Word;	//kilo 不可用
-
-
-
-vcs_ReadWrite_WORD2
-kilo 不可用
-sugar OK
-using Word = Microsoft.Office.Interop.Word;
-using Core = Microsoft.Office.Core;
-
-
-
-vcs_ReadWrite_WORD3
-kilo 不可用
-sugar OK
-using Word = Microsoft.Office.Interop.Word;	//kilo 不可用
-
-
-vcs_ReadWrite_WORD4
-kilo OK
-sugar OK
-using Word = Microsoft.Office.Interop.Word;
-
-
-vcs_ReadWrite_WORD5
-kilo OK
-sugar OK
-using Word = Microsoft.Office.Interop.Word;
-
-vcs_ReadWrite_WORD6_Replace
-kilo 不可用
-sugar OK
 
 contextMenuStrip1/Items 展開集合/加入 MenuItem 或 Seperator
 MenuItem 加入 ToolStripMenuItem，修改Text，修改觸發事件
@@ -5111,7 +4967,6 @@ Drap要加+
 搜尋特小檔 < 720p的
 
 //------------------------------------------------------------  # 60個
-
 //------------------------------------------------------------  # 60個
 
 離線安裝NuGet套件nupkg和自製安裝檔
@@ -6046,29 +5901,6 @@ https://github.com/kiang/covid19
 
 //------------------------------------------------------------  # 60個
 
-MessageBox.Show("輸入的ASCII碼為" + Convert.ToByte(e.KeyChar).ToString());
-
-//resize
-            int[] score = new int[0];
-            string s = "";
-            do
-            {
-                s = Microsoft.VisualBasic.Interaction.InputBox("請輸入成績");
-                if (s != "")   //若s不是空字串
-                {
-                    Array.Resize(ref score, score.Length + 1);    //陣列大小+1
-                    score[score.Length - 1] = Convert.ToInt32(s); //存入最後元素中
-                }
-            } while (s != "");      //s不是空字串就繼續迴圈
-            
-            int sum = 0;           //預設總和sum = 0
-            foreach (int x in score) //用foreach迴圈逐一讀取陣列元素值
-            {
-                sum += x;        //總和加陣列元素值
-            }
-            MessageBox.Show("平均分數=" + (sum / score.Length).ToString());
-			
-
             richTextBox1.Text += "繼承Form類別產生新的視窗表單\n";
 
             Form Form2 = new Form();
@@ -6208,7 +6040,6 @@ scribble
                  //就用迴圈去跑，當網頁讀進來完成之後，便會觸發到下面的Navigated事件
                  //(DocumentCompleted事件的話常常會有問題，因為如果網頁下載不完全就會當在那邊)
                  webBrowser1.Navigate("http://www.google.com?Hello="+ Convert.ToChar(65 + I));
-
 	
 
 http://www.kindomhill.com.tw/images/sec2-pic-06.jpg
@@ -6280,42 +6111,6 @@ http://jerryyang-wxy.blogspot.com/2014/08/blog-post.html
 
 //------------------------------------------------------------  # 60個
 
-        // The selected points that determine the conic section.
-        private List<PointF> Points = new List<PointF>();
-
-        // The conic section's parameters.
-        private float A, B, C, D, E, F;
-
-        // Save a point.
-        private void picGraph_MouseClick(object sender, MouseEventArgs e)
-        {
-            // If we already had 5 points, start a new list.
-            if (Points.Count == 5) Points = new List<PointF>();
-
-            // Save the point.
-            Points.Add(e.Location);
-
-            // If we now have 5 points, find the conic section.
-            if (Points.Count == 5)
-            {
-
-
-	// Draw the points.
-	const float radius = 3;
-	foreach (PointF pt in Points)
-	{
-		g.DrawEllipse(Pens.Blue, pt.X - radius, pt.Y - radius,radius * 2, radius * 2);
-	}
-
-            // Draw the curves.
-            using (Pen thick_pen = new Pen(Color.Red, 2))
-            {
-                thick_pen.Color = Color.Red;
-                if (ln_points.Count > 1)
-                    g.DrawLines(thick_pen, ln_points.ToArray());
-
-//------------------------------------------------------------  # 60個
-
 拉一個command line的捷徑至  C:\_git\ims2\_doc\_pic\PNG 給 file2c.exe 用
 
 using (Pen thick_pen = new Pen(Color.Red, 3))
@@ -6363,17 +6158,6 @@ string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 pictureBox1.Image = Image.FromFile(filename);
 pictureBox1.ImageLocation = filename;	//也可
 
-	string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-	//讀圖片檔案至記憶體
-	//read image
-	Bitmap bitmap1 = new Bitmap(filename);	//new Bitmap()出來的是Bitmap格式
-
-	//顯示圖片至圖片框
-	//load image in picturebox
-	pictureBox1.Image = bitmap1;
-			
-	pictureBox1.Image = Image.FromFile(filename);
-
 直接讀檔案到圖片框
 string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 pictureBox1.Image = Image.FromFile(filename);
@@ -6381,44 +6165,6 @@ pictureBox1.Image = Image.FromFile(filename);
 pictureBox1.Image = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg");
 或
 pictureBox1.Image = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg");
-
-//------------------------------------------------------------  # 60個
-
-收集滑鼠點數
-
-公用變數
-// The points.
-List<PointF> Points = new List<PointF>();
-or
-private List<Point> Points = new List<Point>();
-
-private void Form1_MouseClick(object sender, MouseEventArgs e)
-{
-	// Save the new point.
-	Points.Add(e.Location);
-	
-	or
-	
-	Points.Add(new PointF(e.X, e.Y));
-}
-
-reset滑鼠點數
-if (Points.Count == 3)
-	Points = new List<Point>();
-
-畫出所有滑鼠點數
-// Draw the points.
-const int radius = 3;
-foreach (Point point in Points)
-{
-	e.Graphics.DrawEllipse(Pens.Blue, point.X - radius, point.Y - radius, radius * 2, radius * 2);
-}
-
-           // Draw the points.
-            foreach (PointF pt in Points)
-            {
-                DrawPoint(e.Graphics, pt, Brushes.White, Pens.Black);
-            }
 
 //------------------------------------------------------------  # 60個
 
@@ -8232,12 +7978,6 @@ draw dddd
 
             Graphics g;
 
-            //新建圖檔, 初始化畫布
-            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.White);
-            pictureBox1.Image = bitmap1;
-
             int i;
             double gamma;
 
@@ -8247,17 +7987,17 @@ draw dddd
 
             Pen gammaPen = new Pen(Color.Red, 2);
             /*
-                                                        gamma = 2.2;
-                                                        //畫出真正的Gamma 2.2曲線
-                                                        for (i = 0; i < 256; i++)
-                                                        {
-                                                            data_in[i] = i;
-                                                            data_out[i] = (int)(Math.Pow(((double)data_in[i]) / 255, 1 / gamma) * 255);
-
-                                                            curvePoints[i].X = data_in[i] * 3;
-                                                            curvePoints[i].Y = 256 * 2 - 1 - data_out[i] * 2;
-                                                        }
-                                                        g.DrawLines(gammaPen, curvePoints);   //畫直線
+		gamma = 2.2;
+		//畫出真正的Gamma 2.2曲線
+		for (i = 0; i < 256; i++)
+		{
+		    data_in[i] = i;
+		    data_out[i] = (int)(Math.Pow(((double)data_in[i]) / 255, 1 / gamma) * 255);
+		
+		    curvePoints[i].X = data_in[i] * 3;
+		    curvePoints[i].Y = 256 * 2 - 1 - data_out[i] * 2;
+		}
+		g.DrawLines(gammaPen, curvePoints);   //畫直線
             */
 
 //------------------------------------------------------------  # 60個
@@ -8496,42 +8236,6 @@ this.Icon = ico;
                 //AppFunc.HandleException2(ex, "遺失圖檔!");
             }
 
-
-//------------------------------------------------------------  # 60個
-//------------------------------------------------------------  # 60個
-
-[C#]將指定的檔案刪除並送到資源回收桶
-
-參考/加入參考/.NET/Microsoft.VisualBasic
-
-FileSystem.DeleteFile(openFileDialog1.FileName,
-		UIOption.OnlyErrorDialogs,
-		RecycleOption.SendToRecycleBin);
-
-.Dll加入參考。
-
-//------------------------------  # 30個
-
-參考/加入參考/.NET/Microsoft.VisualBasic
-
-不過要引入VB的組件，C#一樣能用
-加入參考Microsoft.VisualBasic.dll
-引用命名空間
-
-using Microsoft.VisualBasic.FileIO;
-
-刪除範例，刪除D槽的test.txt
-
-FileSystem.DeleteFile("D:\\test.txt", UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
-
-補充說明一下：UIOption.OnlyErrorDialogs會自動選取要丟入回收桶，只在錯誤時顯示錯誤方塊，
-如果是 FileIO.RecycleOption.SendToRecycleBin則是會跳窗問要不要丟入回收桶
-
-	//使用資源回收筒刪除檔案
-	FileSystem.DeleteFile("C:\\______test_files\\237.html", UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
-	richTextBox1.Text += "已將檔案移至資源回收筒\n";
-
-//------------------------------------------------------------  # 60個
 //------------------------------------------------------------  # 60個
 
 Beep
@@ -8812,4 +8516,134 @@ string thumb = fpath + fn.Replace(CodecExtension, ".jpg");
 
 //------------------------------------------------------------  # 60個
 
+
+
+
+//------------------------------------------------------------  # 60個
+
+常用圖形的繪制方法
+
+1．畫直線
+[格式1]：public void DrawLine(Pen pen,int x1,int y1,int x2,int y2);
+[格式2]：public void DrawLine(Pen pen,Point pt1,Point pt2);
+
+5．畫矩形
+[格式1]：public void DrawRectangle(Pen pen, Rectangle rect);
+[格式2]：public void DrawRectangle(Pen pen,int x,int y,int width,int height);
+
+12．填充矩形
+[格式1]：public void FillRectangle(Brush brush, Rectangle rect);
+[格式2]：public void FillRectangle(Brush brush,int x,int y,int width,int height);
+
+2．畫橢圓
+[格式1]：public void DrawEllipse(Pen pen, Rectangle rect);
+[格式2]：public void DrawEllipse(Pen pen,int x,int y,int width, int height);
+
+11．填充橢圓
+[格式1]：public void FillEllipse(Brush brush, Rectangle rect);
+[格式2]：public void FillEllipse(Brush brush,int x,int y,int width, int height);
+
+7．畫多邊形
+[格式1]：public void DrawPolygon(Pen pen, Point[] points);
+[格式2]：public void DrawPolygon(Pen pen, PointF[] points);
+
+9．繪制非閉合曲線
+[格式]：public void DrawCurve(Pen pen,Point[] points);
+
+8．繪制閉合曲線
+[格式1]：public void DrawClosedCurve(Pen pen,Point[] points);
+[格式2]：public void DrawClosedCurve(Pen pen,Point[] points,float tension,FillMode fillmode);
+
+3．繪制圓弧
+[格式1]：public void DrawArc(Pen pen,Rectangle rect,float startAngle,float sweepAngle);
+[格式2]：public void DrawArc(Pen pen,int x,int y,int width,int height,int startAngle,int sweepAngle);
+
+13．填充餅圖
+[格式1]：public void FillPie(Brush brush,Rectangle rect,float startAngle,float sweepAngle)
+[格式2]：public void FillPie(Brush brush,int x,int y,int width,int height,int startAngle,int sweepAngle);
+
+4．畫扇形圖
+使用Graphics對象的DrawPie方法可以繪制扇形圖，所謂扇形圖其實就是把一段圓弧的兩個端點與圓心相連。DrawPie方法的格式與DrawArc方法基本一致。
+
+6．畫Bezier曲線
+[格式1]：public void DrawBezier(Pen pen,Point pt1,Point pt2,Point pt3,Point pt4);
+[格式2]：public void DrawBezier(Pen pen,float x1,float y1,float x2,float y2,float x3,float y3,float x4,float y4);
+
+//------------------------------------------------------------  # 60個
+
+drawdraw
+
+本文將介紹在．Net中如何使用代碼畫圖表，就像用MS Excel產生的圖表一樣。也可以畫像DataGrid一樣的表格。
+在．Net中，微軟給我們提供了畫圖類（System.Drawing.Imaging），在該類中畫圖的準系統都有。
+比如：直線、折線、矩形、多邊形、橢圓形、扇形、曲線等等，因此一般的圖形都可以直接通過代碼畫出來。
+接下來介紹一些畫圖函數：
+
+Bitmap bMap=new Bitmap(500,500)　//定義映像大小；
+bMap.Save(Stream,ImageCodecInfo) //將映像儲存到指定的輸出資料流；
+Graphics gph //定義或建立GDI繪圖對像；
+PointF cPt　//定義二維平面中x,y座標；
+DrawString(string,Font,Brush,PonitF) //用指定的Brush和Font對像在指定的矩形或點繪製指定的字串；
+DrawLine(Pen,Ponit,Ponit) //用指定的筆(Pen)對像繪製指定兩點之間直線；
+DrawPolygon(Pen,Ponit[]) //用指定的筆(Pen)對像繪製指定多邊形，比如三角形，四邊形等等；
+FillPolygon(Brush,Ponit[]) //用指定的刷子(Brush)對像填充指定的多邊形；
+DrawEllipse(Pen,x,y,Width,Height) //用指定的筆繪製一個邊框定義的橢圓；
+FillEllipse(Brush,x,y,Width,Height) //用指定的刷子填充一個邊框定義的橢圓；
+DrawRectangle(Pen,x,y,Width,Height) //用指定的筆繪製一個指定座標點、寬度、高度的矩形；
+DrawPie(Pen,x,y,Width,Height,startAngle,sweepAngle) //用指定的筆繪製一個指定座標點、寬度、高度以及兩條射線組成的扇形；
+
+//------------------------------------------------------------  # 60個
+
+        private List<PointF> Points = new List<PointF>();
+            Points.Add(e.Location);
+                   g.DrawLines(thick_pen, ln_points.ToArray());
+
+//------------------------------------------------------------  # 60個
+
+收集滑鼠點數
+
+公用變數
+// The points.
+List<PointF> Points = new List<PointF>();
+or
+private List<Point> Points = new List<Point>();
+
+private void Form1_MouseClick(object sender, MouseEventArgs e)
+{
+	// Save the new point.
+	Points.Add(e.Location);
+	
+	or
+	
+	Points.Add(new PointF(e.X, e.Y));
+}
+
+reset滑鼠點數
+if (Points.Count == 3)
+	Points = new List<Point>();
+
+畫出所有滑鼠點數
+// Draw the points.
+const int radius = 3;
+foreach (Point point in Points)
+{
+	e.Graphics.DrawEllipse(Pens.Blue, point.X - radius, point.Y - radius, radius * 2, radius * 2);
+}
+
+           // Draw the points.
+            foreach (PointF pt in Points)
+            {
+                DrawPoint(e.Graphics, pt, Brushes.White, Pens.Black);
+            }
+
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------  # 60個
+
+
+string txt = link.Cost.ToString();
+SizeF txt_size = gr.MeasureString(txt, this.Font);
+gr.DrawString(txt, this.Font, Brushes.Black, x1 - txt_size.Width / 2, y1 - txt_size.Height / 2);
+
+string txt = node.Id.ToString();
+SizeF txt_size = gr.MeasureString(txt, this.Font);
+gr.DrawString(txt, this.Font, text_brush, node.Location.X - txt_size.Width / 2, node.Location.Y - txt_size.Height / 2);
 

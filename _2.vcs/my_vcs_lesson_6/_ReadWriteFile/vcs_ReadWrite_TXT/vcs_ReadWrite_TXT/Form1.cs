@@ -10,6 +10,19 @@ using System.Windows.Forms;
 using System.IO;  // for File
 using System.Text.RegularExpressions;
 
+/*
+sr的方法
+
+sr.Read()
+sr.ReadLine()  // 讀出一行
+sr.ReadToEnd()  // 讀取所有文字內容
+sr.Peek()
+sr.EndOfStream
+
+sw.Write(string2)  // 寫入文字資料
+sw.WriteLine(string1);  // 寫入一行
+*/
+
 namespace vcs_ReadWrite_TXT
 {
     public partial class Form1 : Form
@@ -202,30 +215,10 @@ namespace vcs_ReadWrite_TXT
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //ReadLine 1
-            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\琵琶行.txt";
-
-            FileStream fs = File.Open(filename, FileMode.Open);
-            StreamReader sr = new StreamReader(fs);
-
-            //read
-
-            sr.Dispose();
-            fs.Close();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "sr.Read, 一次讀一拜\n";
-
-            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\vcs_test.txt";
-            FileInfo fi = new FileInfo(filename);
-            StreamReader sr = fi.OpenText();
-            while (sr.Peek() > 0)
-            {
-                richTextBox1.Text += (char)sr.Read();
-            }
-            sr.Close();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -637,12 +630,75 @@ namespace vcs_ReadWrite_TXT
             /*
             StreamReader sr 的方法
             sr.ReadLine()   // 讀出一行
-            sr.ReadToEnd()  //讀取所有文字內容
+            sr.ReadToEnd()  // 讀取所有文字內容
             */
 
-            int i;
+            richTextBox1.Text += "StreamReader ReadLine() 一次讀一行至字串串列\n";
+
+            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\琵琶行.txt";
+            List<string> all_lines = new List<string>();
+            string line = string.Empty;
+
+            FileStream fs = File.Open(filename, FileMode.Open);
+
+            //StreamReader sr = new StreamReader(fs);  // 未指明編碼
+            StreamReader sr = new StreamReader(fs, Encoding.GetEncoding(950));  // 指明編碼
+
+            //while (sr.Peek() != -1) // 傳回下一個可供使用的字元, 但不消耗它
+            while (!sr.EndOfStream)
+            {
+                //line = sr.ReadLine();// 讀出一行
+                //richTextBox1.Text += line + "\n";
+
+                richTextBox1.Text += (char)sr.Read() + "|";  // 讀一字
+            }
+
+            sr.Dispose();
+            fs.Close();
+
+
+            //StreamReader
+            sr = new StreamReader(filename, Encoding.UTF8);
+            int i = 0;
+            while (!sr.EndOfStream)
+            {               // 每次讀取一行，直到檔尾
+                line = sr.ReadLine().Trim();            // 讀取文字到 line 變數
+                richTextBox1.Text += "第 " + i.ToString() + " 行資料 : " + line + "\n";
+
+                i++;
+            }
+            sr.Close();
+
+
+            //StreamReader
+            sr = new StreamReader(filename, Encoding.Default);
+            List<String> lines = new List<string>();
+            //string line;
+            while ((line = sr.ReadLine()) != null)
+            {
+                lines.Add(line);
+            }
+            sr.Close();
+
+            //------------------------------------------------------------  # 60個
+
+            richTextBox1.Text += "sr.Read, 一次讀一拜\n";
+
+            filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\vcs_test.txt";
+            FileInfo fi = new FileInfo(filename);
+            //StreamReader
+            sr = fi.OpenText();
+            while (sr.Peek() > 0)
+            {
+                richTextBox1.Text += (char)sr.Read();  // 讀一字
+            }
+            sr.Close();
+
+            return;
+
+            //int i;
             int N = 5;
-            string filename = "tmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
+            filename = "tmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
             /*
             FileInfo fi1 = new FileInfo(filename);
             StreamWriter sw = fi1.CreateText();
@@ -668,6 +724,7 @@ namespace vcs_ReadWrite_TXT
                 richTextBox1.Text += "第3筆資料 : " + sr.ReadLine() + "\n";
                 i++;
             }
+
             sr.Close();
             richTextBox1.Text += "共取得了 " + i.ToString() + " 筆資料\n";
 
@@ -737,13 +794,13 @@ namespace vcs_ReadWrite_TXT
 
             filename = "tmp_poem.txt";
             //FileInfo fi = new FileInfo(filename); same
-            //sr = fi.OpenText();//StreamReader  same
+            //sr = fi.OpenText();  //StreamReader  same
             sr = new StreamReader(filename);
 
             //while (sr.Peek() > 0) same
-            while (sr.Peek() != -1) // 傳回下一個可供使用的字元, 但不消耗它
+            while (sr.Peek() != -1)  // 傳回下一個可供使用的字元, 但不消耗它
             {
-                line = sr.ReadLine();// 讀出一行
+                line = sr.ReadLine();  // 讀出一行
                 richTextBox1.Text += line + "\n";
             }
             sr.Close();
@@ -814,8 +871,8 @@ namespace vcs_ReadWrite_TXT
             //filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\琵琶行.txt";
             filename = @"D:\_git\vcs\_1.data\______test_files1\my_2d_array.txt";
             filename = @"my_2d_array.txt";
-            String line;
-            StreamReader sr;
+            //String line;
+            //StreamReader sr;
 
             //sr = new StreamReader(filename, Encoding.GetEncoding("gb2312"), true);
             sr = new StreamReader(filename, Encoding.GetEncoding("big5"), true);
@@ -1549,7 +1606,7 @@ namespace vcs_ReadWrite_TXT
             }
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button33_Click(object sender, EventArgs e)
         {
@@ -1565,7 +1622,7 @@ namespace vcs_ReadWrite_TXT
             }
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         //統計每個單詞在文章中出現的次數
         private void button34_Click(object sender, EventArgs e)
@@ -1654,11 +1711,6 @@ namespace vcs_ReadWrite_TXT
 */
 
 /*
-                string[] strArray = line.Split('\t');
-                for (int i = 0; i < strArray.Length; i++)
-                {
-                    richTextBox1.Text += strArray[i] + "\n";
-                }
 */
 
 
@@ -1680,18 +1732,6 @@ _C	|文|	6587	25991	_C	|數|	6578	25976	_C	|字|	5B57	23383	_A	|、|	3001	12289	
 _C	|份|	4EFD	20221	_X	|，|	FF0C	65292	_C	|以|	4EE5	20197	_C	|及|	53CA	21450	_C	|日|	65E5	26085	
 _C	|本|	672C	26412	_C	|的|	7684	30340	_C	|假|	5047	20551	_C	|名|	540D	21517	_C	|組|	7D44	32068	
 _C	|合|	5408	21512	_A	|、|	3001	12289	_C	|單|	55AE	21934	_C	|位|	4F4D	20301	_A	|、|	3001	12289	
-*/
-
-//------------------------------------------------------------  # 60個
-
-/*
-string txt = link.Cost.ToString();
-SizeF txt_size = gr.MeasureString(txt, this.Font);
-gr.DrawString(txt, this.Font, Brushes.Black, x1 - txt_size.Width / 2, y1 - txt_size.Height / 2);
-
-string txt = node.Id.ToString();
-SizeF txt_size = gr.MeasureString(txt, this.Font);
-gr.DrawString(txt, this.Font, text_brush, node.Location.X - txt_size.Width / 2, node.Location.Y - txt_size.Height / 2);
 
 //------------------------------------------------------------  # 60個
 
@@ -1732,6 +1772,7 @@ gr.DrawString(txt, this.Font, text_brush, node.Location.X - txt_size.Width / 2, 
 //編碼相關 使用指定的編碼
 sw = new StreamWriter(filename, Encoding.Unicode);
 sw = new StreamWriter(filename, false, Encoding.GetEncoding(950));
+
 sr = new StreamReader(filename, Encoding.Default);
 sr = new StreamReader(filename, Encoding.UTF8);
 sr = new StreamReader(filename, Encoding.Unicode);
@@ -1766,68 +1807,40 @@ foreach (String q in rcq)
     if (string.IsNullOrWhiteSpace(note)) continue;
     :
     :
-
 }
                 
-/// <summary>
-/// 讀取文件
-/// </summary>
-/// <param name="path"></param>
-/// <returns></returns>
-public List<String> ReaderLine(string path)
-{
-	StreamReader sr = new StreamReader(path, Encoding.Default);
-	List<String> lines = new List<string>();
-	string line;
-	while ((line = sr.ReadLine()) != null)
-	{
-		lines.Add(line);
-	}
-	sr.Close();
-	return lines;
-}
-
-
 //------------------------------------------------------------  # 60個
 
 StreamWriter
+       
+StreamWriter sw = File.CreateText(filename);
 
-        string drap_setup_filename = "drap_setup.ini";
-        
-                StreamWriter sw = File.CreateText(drap_setup_filename);
-                string content = "";
-                    content += "\"C:\\Program Files\\DAUM\\PotPlayer\\PotPlayerMini.exe\"\n";
-                    content += "\"C:\\Program Files (x86)\\DAUM\\PotPlayer\\PotPlayerMini.exe\"\n";
-                content += "\"C:\\Program Files (x86)\\AIMP\\AIMP.exe\"\n";
-                content += "\"C:\\Program Files (x86)\\ACDSee32\\ACDSee32.exe\"\n";
-                content += "\"C:\\Program Files (x86)\\IDM Computer Solutions\\UltraEdit-32\\uedit32.exe\"\n";
-                content += SelectedLanguage.ToString() + "\n";
-                content += comboBox1.SelectedIndex.ToString() + "\n";
-                audio_player_path = @"C:\Program Files (x86)\AIMP\AIMP.exe";
-                picture_viewer_path = @"C:\Program Files (x86)\ACDSee32\ACDSee32.exe";
-                text_editor_path = @"C:\Program Files (x86)\IDM Computer Solutions\UltraEdit-32\uedit32.exe";
+string content = "";
+content += "\"C:\\Program Files\\DAUM\\PotPlayer\\PotPlayerMini.exe\"\n";
+content += "\"C:\\Program Files (x86)\\DAUM\\PotPlayer\\PotPlayerMini.exe\"\n";
+content += "\"C:\\Program Files (x86)\\AIMP\\AIMP.exe\"\n";
+content += "\"C:\\Program Files (x86)\\ACDSee32\\ACDSee32.exe\"\n";
+content += "\"C:\\Program Files (x86)\\IDM Computer Solutions\\UltraEdit-32\\uedit32.exe\"\n";
+content += SelectedLanguage.ToString() + "\n";
+content += comboBox1.SelectedIndex.ToString() + "\n";
+audio_player_path = @"C:\Program Files (x86)\AIMP\AIMP.exe";
+picture_viewer_path = @"C:\Program Files (x86)\ACDSee32\ACDSee32.exe";
+text_editor_path = @"C:\Program Files (x86)\IDM Computer Solutions\UltraEdit-32\uedit32.exe";
 
-                sw.WriteLine(content, Encoding.UTF8);
-                sw.Close();
+sw.WriteLine(content, Encoding.UTF8);
+sw.Close();
 
-StreamReader
-            
-                string line;
-                StreamReader sr = new StreamReader(drap_setup_filename, Encoding.UTF8);
-                i = 0;
-                while (!sr.EndOfStream)
-                {               // 每次讀取一行，直到檔尾
-                    line = sr.ReadLine().Trim();            // 讀取文字到 line 變數
-                    richTextBox2.Text += "第 " + i.ToString() + " 行資料 : " + line + "\n";
-                    
-                    i++;
-                }
-                sr.Close();
-        
 //------------------------------------------------------------  # 60個
 
+
+test write
+StreamWriter sw = new StreamWriter(strFilePath + strFileName, false, Encoding.GetEncoding("big5"));
+
+StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("UTF-8"));  // 指名編碼格式
+StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("unicode"));  // 指名編碼格式
+StreamWriter sw = new StreamReader(fs, Encoding.GetEncoding("gb2312"));	    //
+StreamWriter sw = new StreamWriter(fs, Encoding.UTF8);  // 指名編碼格式
+StreamWriter sw = new StreamWriter(File.Open(filename, FileMode.Create), Encoding.GetEncoding("UTF-8"));    //指名編碼格式
+
 */
-
-
-
 
