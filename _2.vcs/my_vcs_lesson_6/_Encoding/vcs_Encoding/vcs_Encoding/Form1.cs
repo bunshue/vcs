@@ -836,7 +836,7 @@ namespace vcs_Encoding
 string和byte[]的轉換 (C#)
 
 string類型轉成byte[]：
-byte[] byteArray = Encoding.Default.GetBytes(str);
+byte[] byteArray = Encoding.Default.GetBytes(str);  // 字串轉拜列
 
 反過來，byte[]轉成string：
 string str = Encoding.Default.GetString(byteArray);
@@ -845,7 +845,7 @@ string str = Encoding.Default.GetString(byteArray);
 
 string類型轉成ASCII byte[]：（"01" 轉成 byte[] = new byte[]{ 0x30, 0x31}）
 
-byte[] byteArray = Encoding.ASCII.GetBytes(str);
+byte[] byteArray = Encoding.ASCII.GetBytes(str);  // 字串轉拜列
 
 ASCII byte[] 轉成string：（byte[] = new byte[]{ 0x30, 0x31} 轉成 "01"）
 
@@ -908,21 +908,14 @@ Hexadecimal value of ? is 003F
 Hexadecimal value of ? is 003F
 
 //------------------------------------------------------------  # 60個
-33. String 轉為 Byte 序列與 Byte 序列轉為 String。
 
 使用 Encoding 類別中的這兩個方法，須注意編碼方式 :
-Encoding.GetBytes 方法 : 將字元集編碼成位元組序列。
-Encoding.GetString 方法 : 將位元組序列解碼成字串。
+字串轉拜列 與 拜列轉字串
 
-程式碼
-String strOrg = "12345";
-// Encoding.GetBytes方法，將 String 轉為 Byte 序列
-byte[] byteArray = Encoding.Default.GetBytes(strOrg);  // 字串轉拜列
-// Encoding.GetString方法，將 Byte 序列 轉為 String
-string byteConvStrig = Encoding.Default.GetString(byteArray);  // 拜列轉字串
-
-// Encoding.GetBytes方法，將 String 轉為 Byte 序列, 字串轉拜列
-// Encoding.GetString方法，將 Byte 序列 轉為 String, 拜列轉字串
+Encoding.GetBytes方法 : 將字元集編碼成位元組序列。  // 字串轉拜列
+Encoding.GetBytes方法，將 String 轉為 Byte 序列  // 字串轉拜列
+Encoding.GetString方法 : 將位元組序列解碼成字串。
+Encoding.GetString方法，將 Byte 序列 轉為 String, 拜列轉字串
 
 byte[] input = Encoding.Default.GetBytes(str);  // 字串轉拜列
 byte[] input = Encoding.UTF8.GetBytes(str);  // 字串轉拜列
@@ -934,6 +927,7 @@ byte[] input = new UnicodeEncoding().GetBytes(str);  // 字串轉拜列
 byte[] input = new ASCIIEncoding().GetBytes(str);  // 字串轉拜列
 
 // 拜列轉字串
+string byteConvStrig = Encoding.Default.GetString(byteArray);  // 拜列轉字串
 
 //------------------------------------------------------------  # 60個
 
@@ -954,29 +948,28 @@ byte[] input = new ASCIIEncoding().GetBytes(str);  // 字串轉拜列
 Encoding.GetEncoding big5 gb2312 shift_jis UTF-8 unicode
 
 test write
-StreamWriter swAcqflg = new StreamWriter(strFilePath + strFileName, false, Encoding.GetEncoding("big5"));
+StreamWriter sw = new StreamWriter(strFilePath + strFileName, false, Encoding.GetEncoding("big5"));
 
 StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("utf-8"));   //指名編碼格式 the same
 StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("UTF-8"));    //指名編碼格式
 StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("unicode"));   //指名編碼格式
 StreamWriter sw = new StreamWriter(fs, Encoding.UTF8);    //指名編碼格式
+                      StreamReader(fs, Encoding.GetEncoding("gb2312"));	    //
+//StreamWriter sw = new StreamWriter(File.Open(filename, FileMode.Create), Encoding.GetEncoding("UTF-8"));    //指名編碼格式
+            StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("unicode"));   //指名編碼格式
 
 byte[] unknow = Encoding.GetEncoding("Big5").GetBytes(strBig5);  // 繁體中文 (Big5) 
-return Encoding.GetEncoding("gb2312").GetString(unknow); // 簡體中文 (GB2312)   // 拜列轉字串
-StreamReader(fs, Encoding.GetEncoding("gb2312"));	    //
-
 byte[] unknow = Encoding.GetEncoding("Big5").GetBytes(strBig5);  // 繁體中文 (Big5) 
-return Encoding.GetEncoding("gb2312").GetString(unknow); // 簡體中文 (GB2312)   // 拜列轉字串
 byte[] byteArray = Encoding.GetEncoding("GB2312").GetBytes(word);
+var hopefullyRecovered = Encoding.GetEncoding(1252).GetBytes(badstringFromDatabase);
+
+Encoding.GetEncoding("gb2312").GetString(unknow); // 簡體中文 (GB2312)   // 拜列轉字串
+Encoding.GetEncoding("gb2312").GetString(unknow); // 簡體中文 (GB2312)   // 拜列轉字串
 
 Encoding enc = Encoding.GetEncoding("BIG5");
 Encoding enc = Encoding.GetEncoding("GB2312");
 
 大小寫不拘
-
-//StreamWriter sw = new StreamWriter(File.Open(filename, FileMode.Create), Encoding.GetEncoding("UTF-8"));    //指名編碼格式
-            var hopefullyRecovered = Encoding.GetEncoding(1252).GetBytes(badstringFromDatabase);
-            StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("unicode"));   //指名編碼格式
 
 打印字串的編碼值
 
@@ -995,3 +988,5 @@ Encoding enc = Encoding.GetEncoding("GB2312");
                 }
 
 */
+
+

@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{82D8BC63-C9C2-46DC-9E14-897973C6E1F4}</ProjectGuid>
+    <ProjectGuid>{32603340-FEB5-4B0D-9A72-60459A9DBFD4}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_WebBrowser3</RootNamespace>
-    <AssemblyName>vcs_WebBrowser3</AssemblyName>
+    <RootNamespace>vcs_HtmlViewer</RootNamespace>
+    <AssemblyName>vcs_HtmlViewer</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

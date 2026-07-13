@@ -17,7 +17,7 @@ using System.Runtime.InteropServices;  // ExternalException
 /*
 WebClient的方法
 wc.DownloadString()
-wc.DownloadStringAsync()
+wc.DownloadStringAsync()  // 異步下載頁面
 wc.DownloadFile()  // 從URL下載檔案
 wc.DownloadData()
 */
@@ -140,20 +140,11 @@ namespace vcs_WebClient
             //string url_file = @"http://antwrp.gsfc.nasa.gov/apod/";
 
             WebClient wc1 = new WebClient();  // 建立 WebClient
-            try  // Get the response string from the URL.
-            {
-                string str = wc1.DownloadString(url_file1);          //抓網頁資料到記憶體
-                //richTextBox1.Text += str + "\n";
-                richTextBox1.Text += "抓網頁資料到記憶體\tOK\n";
-            }
-            catch (WebException ex)
-            {
-                richTextBox1.Text += "WebException\t" + ex.Message + "\n";
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "Error\t" + ex.Message + "\n";
-            }
+
+            // Get the response string from the URL.
+            string str = wc1.DownloadString(url_file1);          //抓網頁資料到記憶體
+            //richTextBox1.Text += str + "\n";
+            richTextBox1.Text += "抓網頁資料到記憶體\tOK\n";
 
             richTextBox1.Text += "\nWebClient DownloadString 2\t抓網頁查詢資料到記憶體......\n";
             Application.DoEvents();
@@ -161,41 +152,21 @@ namespace vcs_WebClient
             string url_weather = @"http://api.openweathermap.org/data/2.5/weather?q=Hsinchu&mode=xml&units=imperial&APPID=e8edf79325ae8948a635efd0e076a8bc";
 
             WebClient wc3 = new WebClient();  // 建立 WebClient
-            try  // Get the response string from the URL.
-            {
-                // Get the response string from the URL.
-                string str2 = wc3.DownloadString(url_weather);        //抓資料
-                //richTextBox1.Text += "data\n" + str2 + "\n";
-                richTextBox1.Text += "抓網頁查詢資料到記憶體\tOK\n";
-            }
-            catch (WebException ex)
-            {
-                richTextBox1.Text += "WebException\t" + ex.Message + "\n";
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "Error\t" + ex.Message + "\n";
-            }
+
+            // Get the response string from the URL.
+            string str2 = wc3.DownloadString(url_weather);        //抓資料
+            //richTextBox1.Text += "data\n" + str2 + "\n";
+            richTextBox1.Text += "抓網頁查詢資料到記憶體\tOK\n";
 
             richTextBox1.Text += "\nWebClient DownloadString 3\t網路下載純文字檔案......\n";
 
             WebClient wc = new WebClient();  // 建立 WebClient
-            try
-            {
-                string url1 = @"http://snowball.tartarus.org/otherlangs/english_cpp.txt";
-                //下載純文字
-                string str = wc.DownloadString(url1);
-                //richTextBox1.Text += str;  //skip
-                richTextBox1.Text += "網路下載純文字檔案\tOK\n";
-            }
-            catch (WebException ex)
-            {
-                richTextBox1.Text += "WebException\t" + ex.Message + "\n";
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "Error\t" + ex.Message + "\n";
-            }
+
+            string url1 = @"http://snowball.tartarus.org/otherlangs/english_cpp.txt";
+            //下載純文字
+            str = wc.DownloadString(url1);
+            //richTextBox1.Text += str;  //skip
+            richTextBox1.Text += "網路下載純文字檔案\tOK\n";
 
             richTextBox1.Text += "\nWebClient DownloadString 4\t網路下載純文字檔案......\n";
 
@@ -217,31 +188,7 @@ namespace vcs_WebClient
         private void DownloadFile(string url, string filename)
         {
             WebClient wc = new WebClient();  // 建立 WebClient
-            try
-            {
-                wc.DownloadFile(url, filename);  // 從URL下載檔案
-            }
-            catch (WebException ex)
-            {
-                richTextBox1.Text += "WebException\t" + ex.Message + "\n";
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "Error\t" + ex.Message + "\n";
-            }
-            /*
-            finally
-            {
-                if (!File.Exists(filename))
-                {
-                    richTextBox1.Text += "下載 : " + filename + "\tNG\n";
-                }
-                else
-                {
-                    richTextBox1.Text += "下載 : " + filename + "\tOK\n";
-                }
-            }
-            */
+            wc.DownloadFile(url, filename);  // 從URL下載檔案
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -298,43 +245,25 @@ namespace vcs_WebClient
             //Datetime.Now.ToFileTime.ToString()用于区别下载时间
             // string Path = Dir +DateTime.Now.ToFileTime().ToString() + fileName  ;
 
-            try
-            {
-                Stream stream = wc.OpenRead(url);
-                StreamReader reader = new StreamReader(stream);
+            Stream stream = wc.OpenRead(url);
+            StreamReader reader = new StreamReader(stream);
 
-                FileStream outputStream = new FileStream(Path, FileMode.OpenOrCreate);
-                try
-                {
-                    int bufferSize = 100; // 网络速度快的话可以设置大一点，慢的话可以小一点
-                    int nRealCount;
-                    byte[] bBuffer = new byte[bufferSize];
-                    nRealCount = stream.Read(bBuffer, 0, bufferSize);
+            FileStream outputStream = new FileStream(Path, FileMode.OpenOrCreate);
+            int bufferSize = 100; // 网络速度快的话可以设置大一点，慢的话可以小一点
+            int nRealCount;
+            byte[] bBuffer = new byte[bufferSize];
+            nRealCount = stream.Read(bBuffer, 0, bufferSize);
 
-                    // 下载，一面读一面下载是最好的方式。这样就不用声明多大的数组了
-                    while (nRealCount > 0)
-                    {
-                        outputStream.Write(bBuffer, 0, nRealCount);
-                        nRealCount = stream.Read(bBuffer, 0, bBuffer.Length);
-                    }
-                    richTextBox1.Text += "下載完成, 檔案 : " + Path + "\n";
-                }
-                catch (WebException ex)
-                {
-                    richTextBox1.Text += "下載錯誤, 原因 : " + ex.Message + "\n";
-                }
-                finally
-                {
-                    stream.Close();
-                    reader.Close();
-                    outputStream.Close();
-                }
-                //Application.Exit();
-            }
-            catch (Exception ex)
+            // 下载，一面读一面下载是最好的方式。这样就不用声明多大的数组了
+            while (nRealCount > 0)
             {
-                richTextBox1.Text += ex.Message + "\n";
+                outputStream.Write(bBuffer, 0, nRealCount);
+                nRealCount = stream.Read(bBuffer, 0, bBuffer.Length);
             }
+            richTextBox1.Text += "下載完成, 檔案 : " + Path + "\n";
+            stream.Close();
+            reader.Close();
+            outputStream.Close();
         }
 
         //------------------------------------------------------------  # 60個
@@ -351,20 +280,9 @@ namespace vcs_WebClient
 
             WebClient wc1 = new WebClient();  // 建立 WebClient
             wc1.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705; Combat;)");
-            try
-            {
-                byte[] byteArray = wc1.DownloadData(url);
-                web_data = (Encoding.Default.GetString(byteArray));
-                richTextBox1.Text += "抓取網頁成功\n";
-            }
-            catch (WebException ex)
-            {
-                richTextBox1.Text += "WebException\t" + ex.Message + "\n";
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "Error\t" + ex.Message + "\n";
-            }
+            byte[] byteArray = wc1.DownloadData(url);
+            web_data = (Encoding.Default.GetString(byteArray));
+            richTextBox1.Text += "抓取網頁成功\n";
 
             richTextBox1.Text += "\nWebClient DownloadData 2\t取得網頁純文字檔......\n";
             Application.DoEvents();
@@ -372,27 +290,17 @@ namespace vcs_WebClient
             url = "http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP950.TXT";
             string result = "";
             WebClient wc2 = new WebClient();  // 建立 WebClient
-            try
+            url = url.Trim();
+            if (!url.ToLower().StartsWith("http"))
             {
-                url = url.Trim();
-                if (!url.ToLower().StartsWith("http"))
-                {
-                    url = "http://" + url;
-                }
+                url = "http://" + url;
+            }
 
-                MemoryStream image_stream = new MemoryStream(wc2.DownloadData(url));
-                StreamReader reader = new StreamReader(image_stream);
-                result = reader.ReadToEnd();
-                reader.Close();
-            }
-            catch (WebException ex)
-            {
-                richTextBox1.Text += "WebException\t" + ex.Message + "\n";
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "Error\t" + ex.Message + "\n";
-            }
+            MemoryStream image_stream = new MemoryStream(wc2.DownloadData(url));
+            StreamReader reader = new StreamReader(image_stream);
+            result = reader.ReadToEnd();
+            reader.Close();
+
             if (result != "")
             {
                 //richTextBox1.Text += result + "\n";
@@ -405,44 +313,23 @@ namespace vcs_WebClient
             richTextBox1.Text += "圖片所在網址 : " + url + "\n";
 
             WebClient wc3 = new WebClient();  // 建立 WebClient
-            try
+            //圖片下載並顯示
+            Image img = null;
+
+            //MemoryStream
+            image_stream = new MemoryStream(wc3.DownloadData(url));
+            img = Image.FromStream(image_stream);
+
+            if (img == null)
             {
-                //圖片下載並顯示
-                Image img = null;
+                richTextBox1.Text += "圖片下載\t失敗\n";
 
-                try
-                {
-                    MemoryStream image_stream = new MemoryStream(wc3.DownloadData(url));
-                    img = Image.FromStream(image_stream);
-                }
-                catch (WebException ex)
-                {
-                    richTextBox1.Text += "WebException\t" + ex.Message + "\n";
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text += "Error\t" + ex.Message + "\n";
-                }
-
-                if (img == null)
-                {
-                    richTextBox1.Text += "圖片下載\t失敗\n";
-
-                }
-                else
-                {
-                    pictureBox1.Image = img;
-                    richTextBox1.Text += "圖片下載並顯示\tOK\n";
-                    Application.DoEvents();
-                }
             }
-            catch (WebException ex)
+            else
             {
-                richTextBox1.Text += "WebException\t" + ex.Message + "\n";
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "Error\t" + ex.Message + "\n";
+                pictureBox1.Image = img;
+                richTextBox1.Text += "圖片下載並顯示\tOK\n";
+                Application.DoEvents();
             }
 
             richTextBox1.Text += "\nWebClient DownloadData 4\t網頁資料下載並顯示......\n";
@@ -475,46 +362,34 @@ namespace vcs_WebClient
             //string url = "https://www.google.com.tw/";
 
             WebClient wc = new WebClient();  // 建立 WebClient
-            try
+            Stream response = wc.OpenRead(url); // Get the indicated URL.
+            richTextBox1.Text += "取得網頁資料並存成檔案, len = " + response.Length.ToString() + "\n";
+            richTextBox1.Text += "CanSeek = " + response.CanSeek.ToString() + "\n";
+
+            // Read the result.
+            using (StreamReader stream_reader = new StreamReader(response))
             {
-                Stream response = wc.OpenRead(url); // Get the indicated URL.
-                richTextBox1.Text += "取得網頁資料並存成檔案, len = " + response.Length.ToString() + "\n";
-                richTextBox1.Text += "CanSeek = " + response.CanSeek.ToString() + "\n";
+                // Get the results.
+                string result = stream_reader.ReadToEnd();
 
-                // Read the result.
-                using (StreamReader stream_reader = new StreamReader(response))
+                // Close the stream reader and its underlying stream.
+                stream_reader.Close();
+
+                //richTextBox1.Text += result + "\n";
+
+                int pos1 = url.LastIndexOf('/');
+                int pos2 = url.LastIndexOf('.');
+
+                if (pos2 > pos1)
                 {
-                    // Get the results.
-                    string result = stream_reader.ReadToEnd();
+                    string filename = Application.StartupPath + "\\" + url.Substring(pos1 + 1, pos2 - pos1 - 1) + DateTime.Now.ToString("_yyyyMMdd_HHmmss") + url.Substring(pos2);
+                    richTextBox1.Text += "存檔檔名 : " + filename + "\n";
 
-                    // Close the stream reader and its underlying stream.
-                    stream_reader.Close();
-
-                    //richTextBox1.Text += result + "\n";
-
-                    int pos1 = url.LastIndexOf('/');
-                    int pos2 = url.LastIndexOf('.');
-
-                    if (pos2 > pos1)
-                    {
-                        string filename = Application.StartupPath + "\\" + url.Substring(pos1 + 1, pos2 - pos1 - 1) + DateTime.Now.ToString("_yyyyMMdd_HHmmss") + url.Substring(pos2);
-                        richTextBox1.Text += "存檔檔名 : " + filename + "\n";
-
-                        StreamWriter sw = File.CreateText(filename);
-                        sw.Write(result);
-                        sw.Close();
-                    }
+                    StreamWriter sw = File.CreateText(filename);
+                    sw.Write(result);
+                    sw.Close();
                 }
             }
-            catch (WebException ex)
-            {
-                richTextBox1.Text += "WebException\t" + ex.Message + "\n";
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "Error\t" + ex.Message + "\n";
-            }
-
 
             richTextBox1.Text += "WebClient OpenRead\t取得網頁資料並存成檔案......2\n";
 
@@ -584,15 +459,8 @@ namespace vcs_WebClient
             myStringWebResource = url2 + filename2;
             richTextBox1.Text += "Downloading File " + filename2 + " from " + myStringWebResource + "\n";
             // Download the Web resource and save it into the current filesystem folder.
-            try
-            {
-                wc.DownloadFile(myStringWebResource, filename2);  // 從URL下載檔案
-                richTextBox1.Text += "OK\n";
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += ex.Message + "\n";
-            }
+            wc.DownloadFile(myStringWebResource, filename2);  // 從URL下載檔案
+            richTextBox1.Text += "OK\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -630,16 +498,8 @@ namespace vcs_WebClient
             //目前Sugar/Tango可用
 
             string url = "http://antwrp.gsfc.nasa.gov/apod/";
-            try
-            {
-                richTextBox1.Text += "開啟 NASA 圖片網址 : " + url + "\n";
-                webBrowser1.Navigate(url);  // Load the web page.
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "*** Error navigating to " + url + "\n";
-                richTextBox1.Text += "*** " + ex.Message + "\n";
-            }
+            richTextBox1.Text += "開啟 NASA 圖片網址 : " + url + "\n";
+            webBrowser1.Navigate(url);  // Load the web page.
         }
 
         // The web page has loaded. Get the APOTD image.
@@ -652,22 +512,14 @@ namespace vcs_WebClient
 
             richTextBox1.Text += "圖片所在網址 : " + img_src_url + "\n";
 
-            try
-            {
-                //圖片下載並存檔
-                DownloadImage(img_src_url);
-                richTextBox1.Text += "圖片下載並存檔完成\n";
+            //圖片下載並存檔
+            DownloadImage(img_src_url);
+            richTextBox1.Text += "圖片下載並存檔完成\n";
 
-                //圖片下來並顯示
-                Image img = GetPicture(img_src_url);
-                pictureBox1.Image = img;
-                richTextBox1.Text += "圖片下來並顯示完成\n";
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "*** Download Error" + "\n";
-                richTextBox1.Text += "*** " + ex.Message + "\n";
-            }
+            //圖片下來並顯示
+            Image img = GetPicture(img_src_url);
+            pictureBox1.Image = img;
+            richTextBox1.Text += "圖片下來並顯示完成\n";
         }
 
         // Download the indicated file.
@@ -689,16 +541,8 @@ namespace vcs_WebClient
         private Image GetPicture(string url)
         {
             WebClient wc = new WebClient();  // 建立 WebClient
-            try
-            {
-                MemoryStream image_stream = new MemoryStream(wc.DownloadData(url));
-                return Image.FromStream(image_stream);
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "Error downloading picture " + url + '\n' + ex.Message + "\n";
-                return null;
-            }
+            MemoryStream image_stream = new MemoryStream(wc.DownloadData(url));
+            return Image.FromStream(image_stream);
         }
 
         //下載NASA網頁的圖片 SP
@@ -830,47 +674,29 @@ namespace vcs_WebClient
         void get_nasa_picture()
         {
             string url = "http://antwrp.gsfc.nasa.gov/apod/";
-            try
-            {
-                richTextBox1.Text += "開啟 NASA 圖片網址 : " + url + "\n";
-                webBrowser1.Navigate(url);  // Load the web page.
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "*** Error navigating to " + url + "\n";
-                richTextBox1.Text += "*** " + ex.Message + "\n";
-            }
+            richTextBox1.Text += "開啟 NASA 圖片網址 : " + url + "\n";
+            webBrowser1.Navigate(url);  // Load the web page.
         }
 
         //------------------------------------------------------------  # 60個
 
         public string SendSms(List<string> mobiles)
         {
-            using (WebClient wc = new WebClient())  // 建立 WebClient
+            WebClient wc = new WebClient();  // 建立 WebClient
+            string langCode = "1";
+            if (Regex.IsMatch("lion-mouse", @"\p{IsArabic}+") == true)
             {
-                try
-                {
-                    string langCode = "1";
-                    if (Regex.IsMatch("lion-mouse", @"\p{IsArabic}+") == true)
-                    {
-                        langCode = "2";
-                    }
-
-                    wc.Headers.Add("content-type", "text/plain");
-                    string mobile = String.Join(",", mobiles.ToArray());
-                    string str = wc.DownloadString(String.Format("http://brazilboxtech.com/api/send.aspx?username=smartksa&password=ksasmrt95647&language={0}&sender=NCSS&mobile={1}&message={2}", langCode, mobile, "lion-mouse"));
-                    if (str.StartsWith("OK"))
-                    {
-                        return String.Empty;
-                    }
-                    return str;
-                }
-                catch (Exception ex)
-                {
-
-                    return ex.Message;
-                }
+                langCode = "2";
             }
+
+            wc.Headers.Add("content-type", "text/plain");
+            string mobile = String.Join(",", mobiles.ToArray());
+            string str = wc.DownloadString(String.Format("http://brazilboxtech.com/api/send.aspx?username=smartksa&password=ksasmrt95647&language={0}&sender=NCSS&mobile={1}&message={2}", langCode, mobile, "lion-mouse"));
+            if (str.StartsWith("OK"))
+            {
+                return String.Empty;
+            }
+            return str;
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -895,36 +721,28 @@ namespace vcs_WebClient
             //URL 未定
 
             //分析一個網頁回傳的XML資料
-            try
+            WebClient wc = new WebClient();  // 建立 WebClient
+            string str = wc.DownloadString("url" + "/main.xml");
+
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.LoadXml(str);
+            XmlNodeList elementsByTagName = xmlDocument.GetElementsByTagName("repofile");
+            XmlNodeList elementsByTagName2 = ((XmlElement)elementsByTagName[0]).GetElementsByTagName("information");
+            foreach (XmlElement xmlElement in elementsByTagName2)
             {
-                string str;
-                using (WebClient wc = new WebClient())  // 建立 WebClient
-                {
-                    str = wc.DownloadString("url" + "/main.xml");
-                }
-                XmlDocument xmlDocument = new XmlDocument();
-                xmlDocument.LoadXml(str);
-                XmlNodeList elementsByTagName = xmlDocument.GetElementsByTagName("repofile");
-                XmlNodeList elementsByTagName2 = ((XmlElement)elementsByTagName[0]).GetElementsByTagName("information");
-                foreach (XmlElement xmlElement in elementsByTagName2)
-                {
-                    XmlNodeList elementsByTagName3 = xmlElement.GetElementsByTagName("id");
-                    XmlNodeList elementsByTagName4 = xmlElement.GetElementsByTagName("name");
-                    string s0 = elementsByTagName4[0].InnerText;
-                    string s1 = elementsByTagName3[0].InnerText;
-                }
-                XmlNodeList elementsByTagName5 = ((XmlElement)elementsByTagName[0]).GetElementsByTagName("category");
-                foreach (XmlElement xmlElement2 in elementsByTagName5)
-                {
-                    XmlNodeList elementsByTagName3 = xmlElement2.GetElementsByTagName("id");
-                    XmlNodeList elementsByTagName4 = xmlElement2.GetElementsByTagName("name");
-                    //GClass2 gClass = new GClass2();
-                    string s2 = elementsByTagName4[0].InnerText;
-                    string s3 = elementsByTagName3[0].InnerText;
-                }
+                XmlNodeList elementsByTagName3 = xmlElement.GetElementsByTagName("id");
+                XmlNodeList elementsByTagName4 = xmlElement.GetElementsByTagName("name");
+                string s0 = elementsByTagName4[0].InnerText;
+                string s1 = elementsByTagName3[0].InnerText;
             }
-            catch
+            XmlNodeList elementsByTagName5 = ((XmlElement)elementsByTagName[0]).GetElementsByTagName("category");
+            foreach (XmlElement xmlElement2 in elementsByTagName5)
             {
+                XmlNodeList elementsByTagName3 = xmlElement2.GetElementsByTagName("id");
+                XmlNodeList elementsByTagName4 = xmlElement2.GetElementsByTagName("name");
+                //GClass2 gClass = new GClass2();
+                string s2 = elementsByTagName4[0].InnerText;
+                string s3 = elementsByTagName3[0].InnerText;
             }
         }
 
@@ -938,19 +756,18 @@ namespace vcs_WebClient
 
         private void button19_Click(object sender, EventArgs e)
         {
-            //異步下載頁面的例子, DownloadStringAsync
+            // DownloadStringAsync  // 異步下載頁面
             WebClient wc = new WebClient();  // 建立 WebClient
             wc.DownloadStringCompleted += new DownloadStringCompletedEventHandler(wc_DownloadStringCompleted1);
             wc.DownloadStringAsync(new Uri("http://data.taipei.gov.tw/opendata/apply/json/RjQzRThDNjUtMzU3OS00MTU5LUEwOUEtMUI2NzFDOTE5NDcz"));
 
             //------------------------------------------------------------  # 60個
 
-            //異步下載頁面的例子, DownloadStringAsync
+            //DownloadStringAsync  // 異步下載頁面
             wc = new WebClient();  // 建立 WebClient
             wc.Encoding = Encoding.UTF8;  // 指定 WebClient 的編碼, 設置按照何種編碼訪問，如果不加此行，獲取到的字符串中文將是亂碼
             wc.DownloadStringCompleted += new DownloadStringCompletedEventHandler(wc_DownloadStringCompleted2);
             wc.DownloadStringAsync(new Uri("http://www.juedui100.com/"));
-            richTextBox1.Text += "下載!\n";
         }
 
         void wc_DownloadStringCompleted1(object sender, DownloadStringCompletedEventArgs e)
@@ -1015,31 +832,12 @@ namespace vcs_WebClient
             //string sourceResource = "http://blogs.telerik.com/images/default-source/miroslav-miroslav/super_ninja.png?sfvrsn=2";
             string sourceResource = @"https://www.telerik.com/sfimages/default-source/blogs/super_ninja-png";
             string localFileName = Path.GetFileName(sourceResource);
-            using (WebClient wc = new WebClient())  // 建立 WebClient
-            {
-                try
-                {
-                    richTextBox1.Text += "開始下載: " + sourceResource + "\n";
-                    wc.DownloadFile(sourceResource, localFileName);  // 從URL下載檔案
-                    richTextBox1.Text += "下載完成, 在 bin/Debug\n";
-                }
-                catch (WebException ex)
-                {
-                    richTextBox1.Text += ex.Message + "\n";
-                    if (ex.InnerException != null)
-                    {
-                        richTextBox1.Text += "下載失敗1, 原因 :\t" + ex.InnerException.Message + "\n";
-                    }
-                    else
-                    {
-                        richTextBox1.Text += "下載失敗3\n";
-                    }
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text += "下載失敗2, 原因 :\t" + ex.Message + "\n";
-                }
-            }
+
+            WebClient wc = new WebClient();  // 建立 WebClient
+
+            richTextBox1.Text += "開始下載: " + sourceResource + "\n";
+            wc.DownloadFile(sourceResource, localFileName);  // 從URL下載檔案
+            richTextBox1.Text += "下載完成, 在 bin/Debug\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -1265,14 +1063,6 @@ namespace vcs_WebClient
 
         //------------------------------------------------------------  # 60個
 
-        static void download_file(string url, string filename)
-        {
-            using (WebClient wc = new WebClient())  // 建立 WebClient
-            {
-                wc.DownloadFile(new Uri(url), filename);  // 從URL下載檔案
-            }
-        }
-
         private void button32_Click(object sender, EventArgs e)
         {
             //WebClient 32
@@ -1283,7 +1073,8 @@ namespace vcs_WebClient
 
             try
             {
-                download_file(url, filename);
+                WebClient wc = new WebClient();  // 建立 WebClient
+                wc.DownloadFile(new Uri(url), filename);  // 從URL下載檔案
             }
             catch (ExternalException ex)
             {
@@ -1305,7 +1096,6 @@ namespace vcs_WebClient
             string url = @"https://wiki.linuxfoundation.org/_media/wiki/logo.png";
 
             WebClient wc = new WebClient();  // 建立 WebClient
-
             wc.DownloadFile(url, "aaaaa.png");  // 從URL下載檔案
         }
 
@@ -1553,11 +1343,9 @@ namespace vcs_WebClient
 /*
         private void SendGETRequest(string url)
         {
-            using (WebClient wc = new WebClient())  // 建立 WebClient
-            {
-                //異步下載頁面的例子, DownloadStringAsync
+            WebClient wc = new WebClient();  // 建立 WebClient
+                // DownloadStringAsync  // 異步下載頁面
                 wc.DownloadStringAsync(new Uri(url));
-            }
         }
 */
 
@@ -1600,29 +1388,15 @@ client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 
             string url_file1 = @"http://snowball.tartarus.org/otherlangs/english_cpp.txt";
             //string url_file = @"http://antwrp.gsfc.nasa.gov/apod/";
 
-            using(WebClient wc = new WebClient())  // 建立 WebClient
-            {
-                try  // Get the response string from the URL.
-                {
+            WebClient wc = new WebClient();  // 建立 WebClient
+                    // Get the response string from the URL.
                     //richTextBox1.Text += str + "\n";
                     richTextBox1.Text += "抓網頁資料到記憶體\tOK\n";
-                }
-                catch (WebException ex)
-                {
-                    richTextBox1.Text += "WebException\t" + ex.Message + "\n";
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text += "Unknown error\t" + ex.Message + "\n";
-                }
-            }
             
             string url_file2 = @"http://snowball.tartarus.org/otherlangs/english_cpp.txt";
             //string url_file2 = @"https://apod.nasa.gov/apod/image/2103/VolcanoStars_Vella_1080.jpg";
-            using(WebClient wc = new WebClient())  // 建立 WebClient
-            {
-                try  // Get the response string from the URL.
-                {
+            WebClient wc = new WebClient();  // 建立 WebClient
+                    // Get the response string from the URL.
                     //string filename_local = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
                     int pos1 = url_file2.LastIndexOf('/');
                     int pos2 = url_file2.LastIndexOf('.');
@@ -1630,40 +1404,17 @@ client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 
                     richTextBox1.Text += "下載檔案, 本地檔案檔名 : " + filename_local + "\n";
 
                     richTextBox1.Text += "抓網頁資料到本地檔案\tOK\n";
-                }
-                catch (WebException ex)
-                {
-                    richTextBox1.Text += "WebException\t" + ex.Message + "\n";
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text += "Unknown error\t" + ex.Message + "\n";
-                }
-            }
             
             string url_weather = @"http://api.openweathermap.org/data/2.5/weather?q=Hsinchu&mode=xml&units=imperial&APPID=e8edf79325ae8948a635efd0e076a8bc";
-            using(WebClient wc = new WebClient())  // 建立 WebClient
-            {
-                try  // Get the response string from the URL.
-                {
+            WebClient wc = new WebClient();  // 建立 WebClient
                     // Get the response string from the URL.
                     //richTextBox1.Text += "data\n" + str + "\n";
                     richTextBox1.Text += "抓網頁查詢資料到記憶體\tOK\n";
-                }
-                catch (WebException ex)
-                {
-                    richTextBox1.Text += "WebException\t" + ex.Message + "\n";
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text += "Unknown error\t" + ex.Message + "\n";
-                }
-            }
+
+//------------------------------------------------------------  # 60個
             
             string img_src_url = @"https://apod.nasa.gov/apod/image/2103/VolcanoStars_Vella_1080.jpg";
             richTextBox1.Text += "圖片所在網址 : " + img_src_url + "\n";
-            try
-            {
                 //圖片下載並存檔
                 DownloadImage(img_src_url);
                 richTextBox1.Text += "圖片下載並存檔\tOK\n";
@@ -1672,13 +1423,6 @@ client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 
                 Image img = GetPicture(img_src_url);
                 pictureBox1.Image = img;
                 richTextBox1.Text += "圖片下來並顯示\tOK\n";
-                            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "*** Download Error" + "\n";
-                richTextBox1.Text += "*** " + ex.Message + "\n";
-            }
-            
         }
 
         // Download the indicated file
@@ -1703,19 +1447,10 @@ client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 
         // Get the picture at a given URL.
         private Image GetPicture(string url)
         {
-            try
-            {
                  WebClient wc = new WebClient();  // 建立 WebClient
                 MemoryStream image_stream = new MemoryStream(wc.DownloadData(url));
                 return Image.FromStream(image_stream);
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "Error downloading picture " + url + '\n' + ex.Message + "\n";
-                return null;
-            }
         }
-
     }
 }
 
@@ -1729,70 +1464,33 @@ private void button1_Click(object sender, EventArgs e)
 	string url_file1 = @"http://snowball.tartarus.org/otherlangs/english_cpp.txt";
 	//string url_file = @"http://antwrp.gsfc.nasa.gov/apod/";
 	
-	using(WebClient wc = new WebClient())  // 建立 WebClient
-	{
-	try  // Get the response string from the URL.
-	{
+	WebClient wc = new WebClient();  // 建立 WebClient
+	// Get the response string from the URL.
 	//richTextBox1.Text += data + "\n";
 	richTextBox1.Text += "抓網頁資料到記憶體\tOK\n";
-	}
-	catch (WebException ex)
-	{
-	richTextBox1.Text += "WebException\t" + ex.Message + "\n";
-	}
-	catch (Exception ex)
-	{
-	richTextBox1.Text += "Unknown error\t" + ex.Message + "\n";
-	}
 }
 
 string url_file2 = @"http://snowball.tartarus.org/otherlangs/english_cpp.txt";
 //string url_file2 = @"https://apod.nasa.gov/apod/image/2103/VolcanoStars_Vella_1080.jpg";
-using(WebClient wc = new WebClient())  // 建立 WebClient
-{
-	try  // Get the response string from the URL.
-{
+WebClient wc = new WebClient();  // 建立 WebClient
+// Get the response string from the URL.
 //string filename_local = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
 int pos1 = url_file2.LastIndexOf('/');
 int pos2 = url_file2.LastIndexOf('.');
 string filename_local = url_file2.Substring(pos1 + 1, pos2 - pos1 - 1) + DateTime.Now.ToString("_yyyyMMdd_HHmmss") + url_file2.Substring(pos2);
 richTextBox1.Text += "下載檔案, 本地檔案檔名 : " + filename_local + "\n";
-
 richTextBox1.Text += "抓網頁資料到本地檔案\tOK\n";
-}
-catch (WebException ex)
-{
-	richTextBox1.Text += "WebException\t" + ex.Message + "\n";
-}
-catch (Exception ex)
-{
-	richTextBox1.Text += "Unknown error\t" + ex.Message + "\n";
-}
-}
+
+//------------------------------------------------------------  # 60個
 
 string url_weather = @"http://api.openweathermap.org/data/2.5/weather?q=Hsinchu&mode=xml&units=imperial&APPID=e8edf79325ae8948a635efd0e076a8bc";
-using(WebClient wc = new WebClient())  // 建立 WebClient
-{
-	try  // Get the response string from the URL.
-	{
+WebClient wc = new WebClient();  // 建立 WebClient
 		// Get the response string from the URL.
 		//richTextBox1.Text += "data\n" + str + "\n";
 		richTextBox1.Text += "抓網頁查詢資料到記憶體\tOK\n";
-	}
-	catch (WebException ex)
-	{
-		richTextBox1.Text += "WebException\t" + ex.Message + "\n";
-	}
-	catch (Exception ex)
-	{
-		richTextBox1.Text += "Unknown error\t" + ex.Message + "\n";
-	}
-}
 	
 string img_src_url = @"https://apod.nasa.gov/apod/image/2103/VolcanoStars_Vella_1080.jpg";
 richTextBox1.Text += "圖片所在網址 : " + img_src_url + "\n";
-try
-{
 	//圖片下載並存檔
 	DownloadImage(img_src_url);
 	richTextBox1.Text += "圖片下載並存檔\tOK\n";
@@ -1801,13 +1499,6 @@ try
 	Image img = GetPicture(img_src_url);
 	pictureBox1.Image = img;
 	richTextBox1.Text += "圖片下來並顯示\tOK\n";
-}
-catch (Exception ex)
-{
-	richTextBox1.Text += "*** Download Error" + "\n";
-	richTextBox1.Text += "*** " + ex.Message + "\n";
-}
-
 }
 
 // Download the indicated file
@@ -1831,17 +1522,8 @@ richTextBox1.Text += "下載圖片, 本地圖片檔名 : " + filename + "\n";
 // Get the picture at a given URL.
 private Image GetPicture(string url)
 {
-    try
-    {
 	    WebClient wc = new WebClient();  // 建立 WebClient
-
         return Image.FromStream(image_stream);
-    }
-    catch (Exception ex)
-    {
-        richTextBox1.Text += "Error downloading picture " + url + '\n' + ex.Message + "\n";
-        return null;
-    }
 }
 
 //------------------------------------------------------------  # 60個
@@ -2080,15 +1762,12 @@ HtmlAgilityPack 訊息
 // For .NET Framework 4.5 以後
 // ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
-
 /*
-
 WebClient不能處理特定於任何協議的任何特性，例如Cookie等。如果需要使用這些特性，需要使用.net中的HttpWebRequest類。
 
 //------------------------------------------------------------  # 60個
 
 vcs抓網路上的檔案
-
             try
             {
                 //抓現在時間
@@ -2107,4 +1786,26 @@ vcs抓網路上的檔案
 //------------------------------------------------------------  # 60個
 
 */
+
+/*
+//保留
+            catch (WebException ex)
+            {
+                richTextBox1.Text += "WebException\t" + ex.Message + "\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "Error\t" + ex.Message + "\n";
+            }
+                if (ex.InnerException != null)
+                {
+                    richTextBox1.Text += "下載失敗1, 原因 :\t" + ex.InnerException.Message + "\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "下載失敗3\n";
+                }
+
+*/
+
 

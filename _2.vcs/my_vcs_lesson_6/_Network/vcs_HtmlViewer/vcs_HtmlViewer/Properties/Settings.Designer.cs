@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_WebBrowser3.Properties
+namespace vcs_HtmlViewer.Properties
 {
 
 

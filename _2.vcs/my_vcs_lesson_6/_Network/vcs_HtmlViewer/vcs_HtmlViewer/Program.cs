@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_WebBrowser5
+namespace vcs_HtmlViewer
 {
     static class Program
     {
