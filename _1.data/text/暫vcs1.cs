@@ -2208,7 +2208,6 @@ File: Camera.cs Project: alienwow/CSharpProjects
             int yPos = 10;
             //写到屏幕上的时间
             drawDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
             g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
             
             //开始录像
@@ -3102,15 +3101,15 @@ Display_Cam1
             Graphics g = Graphics.FromImage(image);
 
 			
-										SolidBrush drawBrush = new SolidBrush(Color.Yellow);
+						SolidBrush drawBrush = new SolidBrush(Color.Yellow);
 
-										Font drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
-										int xPos = image.Width - (image.Width - 15);
-										int yPos = 10;
-										//写到屏幕上的时间
-										string drawDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+						Font drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+						int xPos = image.Width - (image.Width - 15);
+						int yPos = 10;
+						//写到屏幕上的时间
+						string drawDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
-										g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
+						g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
 
             ////创建文件路径
             string fileFullPath = "V1" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
@@ -3125,27 +3124,27 @@ Display_Cam1
             }
             else
             {
-										//开始录像
-										if (createNewFile)
-										{
+					//开始录像
+					if (createNewFile)
+					{
 
-											createNewFile = false;
-											if (videoWriter != null)
-											{
-												videoWriter.Close();
-												videoWriter.Dispose();
-											}
-											richTextBox1.Text += "開啟檔案 : " + fileFullPath + "\n";
+						createNewFile = false;
+						if (videoWriter != null)
+						{
+							videoWriter.Close();
+							videoWriter.Dispose();
+						}
+						richTextBox1.Text += "開啟檔案 : " + fileFullPath + "\n";
 
-											videoWriter = new VideoFileWriter();
-											//这里必须是全路径，否则会默认保存到程序运行根据录下了
-											videoWriter.Open(fileFullPath, image.Width, image.Height, 30, VideoCodec.MPEG4);
-											videoWriter.WriteVideoFrame(image);
-										}
-										else
-										{
-											videoWriter.WriteVideoFrame(image);
-										}
+						videoWriter = new VideoFileWriter();
+						//这里必须是全路径，否则会默认保存到程序运行根据录下了
+						videoWriter.Open(fileFullPath, image.Width, image.Height, 30, VideoCodec.MPEG4);
+						videoWriter.WriteVideoFrame(image);
+					}
+					else
+					{
+						videoWriter.WriteVideoFrame(image);
+					}
             }
 
 
@@ -7227,11 +7226,11 @@ string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yy
 //WebBrowser 關閉 指令碼偵錯視窗
 webBrowser1.ScriptErrorsSuppressed = true;
 
-g.DrawString("DrawString把字寫在指定的格子裏", new Font("黑體", 15), new SolidBrush(Color.Red), new Rectangle(20, 20, 100, 100));
+g.DrawString("大家好", new Font("標楷體", 20), new SolidBrush(Color.Red), new Rectangle(20, 20, 100, 100));
 g.DrawString("大家好", new Font("標楷體", 20, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline), Brushes.Red, 10, 200);
 g.DrawString("大家好", new Font("標楷體", 20, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline), lgBrush, 10, 200);
 Brush blueBrush = new SolidBrush(Color.Blue);
-g.DrawString("Graphic繪制圖形的例子", new Font("宋體", 20, FontStyle.Italic),blueBrush, new PointF(300, 400));
+g.DrawString("大家好", new Font("標楷體", 20, FontStyle.Italic),blueBrush, new PointF(300, 400));
 
 //依日期製作資料夾
 string foldername = @"C:\dddddddddd\_screen_capture_" + DateTime.Now.ToString("yyyy-MM-dd");
