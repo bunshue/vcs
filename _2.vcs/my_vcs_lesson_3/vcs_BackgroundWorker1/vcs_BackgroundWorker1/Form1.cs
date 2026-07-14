@@ -152,8 +152,6 @@ namespace vcs_BackgroundWorker1
             {
                 sum += i;
                 progressBar0.Value = i / 10000000;
-                label0.Text = progressBar0.Value.ToString() + " %";
-                Application.DoEvents();
                 if ((i % 100000000) == 0)
                 {
                     if (worker.CancellationPending == true)  // 檢查是否有收到取消命令
@@ -174,7 +172,6 @@ namespace vcs_BackgroundWorker1
 
             //e.ProgressPercentage  獲取非同步作業進度的百分比
             progressBar0.Value = e.ProgressPercentage;
-            label0.Text = progressBar0.Value.ToString() + " %";
             Application.DoEvents();
         }
 

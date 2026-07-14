@@ -143,26 +143,26 @@ namespace vcs_Clipboard
             richTextBoxp_clipboard.Clear();
             //webBrowser_clipboard.Navigate("about:blank");
 
-            // Image.
+            // 檢查剪貼簿中 有無 影像資料
             if (Clipboard.ContainsImage() == true)
             {
                 pictureBox_clipboard.Image = Clipboard.GetImage();
             }
 
-            // Text.
+            // 檢查剪貼簿中 有無 文字資料
             if (Clipboard.ContainsText(TextDataFormat.UnicodeText) == true)
             {
                 textBox_clipboard.Text = Clipboard.GetText(TextDataFormat.UnicodeText);
             }
 
-            // HTML.
+            // 檢查剪貼簿中 有無 HTML資料
             if (Clipboard.ContainsText(TextDataFormat.Html) == true)
             {
                 HtmlDocument doc = webBrowser_clipboard.Document;
                 doc.Body.InnerHtml = Clipboard.GetText(TextDataFormat.Html);
             }
 
-            // Rich Text.
+            // 檢查剪貼簿中 有無 RTF資料
             if (Clipboard.ContainsText(TextDataFormat.Rtf) == true)
             {
                 richTextBoxp_clipboard.Rtf = Clipboard.GetText(TextDataFormat.Rtf);
@@ -183,25 +183,29 @@ namespace vcs_Clipboard
                 richTextBox1.Text += "取得 : " + format + "\n";
             }
 
+            // 檢查剪貼簿中 有無 Bitmap資料
             if (Clipboard.ContainsData(DataFormats.Bitmap) == true)
             {
                 richTextBox1.Text += "Bitmap\n";
             }
+
+            // 檢查剪貼簿中 有無 Text資料
             if (Clipboard.ContainsData(DataFormats.Text) == true)
             {
                 richTextBox1.Text += "Text\n";
             }
+
+            // 檢查剪貼簿中 有無 Unicode資料
             if (Clipboard.ContainsData(DataFormats.UnicodeText) == true)
             {
                 richTextBox1.Text += "UnicodeText\n";
             }
+
+            // 檢查剪貼簿中 有無 FileDrop資料
             if (Clipboard.ContainsData(DataFormats.FileDrop) == true)
             {
                 richTextBox1.Text += "FileDrop\n";
             }
-
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -210,6 +214,7 @@ namespace vcs_Clipboard
             IDataObject dataObject1 = Clipboard.GetDataObject();    //讀取數據
 
             //根據指定的DataFormat獲取數據對象 
+            // 檢查剪貼簿中 有無 UnicodeText資料
             if (Clipboard.ContainsData(DataFormats.UnicodeText) == true)
             {
                 richTextBox1.Text += "取得 UnicodeText\n";
@@ -220,6 +225,8 @@ namespace vcs_Clipboard
 
             richTextBox1.Text += "\n把系統剪貼簿裏的資料拿出來, 區分資料類型:\n";
             IDataObject dataObject3 = Clipboard.GetDataObject();   //GetDataObject() 讀取當前剪貼簿中的數據內容
+
+            // 檢查剪貼簿中 有無 Text資料
             if (dataObject3.GetDataPresent(DataFormats.Text))  //GetDataPresent()檢測剪貼簿存放的資料類型   //Text純文字類
             {
                 richTextBox1.Text += "取得文字, 內容：\n";
@@ -230,6 +237,7 @@ namespace vcs_Clipboard
                 richTextBox1.Text += str + "\n";
             }
 
+            // 檢查剪貼簿中 有無 Bitmap資料
             if (dataObject3.GetDataPresent(DataFormats.Bitmap))  //圖片類
             {
                 richTextBox1.Text += "取得圖片\n";
@@ -265,6 +273,7 @@ namespace vcs_Clipboard
                     richTextBox1.Text += "無圖可存\n";
             }
 
+            // 檢查剪貼簿中 有無 RTF資料
             if (dataObject3.GetDataPresent(DataFormats.Rtf))  //RTF類
             {
                 richTextBox1.Text += "取得RTF, 內容：\n";
@@ -273,6 +282,7 @@ namespace vcs_Clipboard
                 richTextBox2.Rtf = Clipboard.GetText(TextDataFormat.Rtf);
             }
 
+            // 檢查剪貼簿中 有無 HTML資料
             if (dataObject3.GetDataPresent(DataFormats.Html))  //HTML類
             {
                 richTextBox1.Text += "取得HTML, 內容：\n";
@@ -337,7 +347,7 @@ namespace vcs_Clipboard
                 }
             }
 
-            // Try to paste bitmap data.
+            // 檢查剪貼簿中 有無 影像資料
             if (Clipboard.ContainsImage() == true)
             {
                 return Clipboard.GetImage();
@@ -503,7 +513,7 @@ namespace vcs_Clipboard
         private void button14_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "Clipboard內的影像顯示存檔\t全部\n";
-            bool flag = Clipboard.ContainsImage();  //判斷剪貼簿中是否包含圖片資料
+            bool flag = Clipboard.ContainsImage();  // 檢查剪貼簿中 有無 影像資料
             richTextBox1.Text += "Clipboard 是否包含圖片資料 : " + flag.ToString() + "\n";
 
             if (flag == true)
@@ -557,8 +567,9 @@ namespace vcs_Clipboard
 
         private void button17_Click(object sender, EventArgs e)
         {
-            //取得剪貼簿中的影像資料
+            // 取得剪貼簿中的影像資料
 
+            // 檢查剪貼簿中 有無 影像資料
             if (Clipboard.ContainsImage() == true)
             {
                 richTextBox1.Text += "剪貼簿中 有 影像資料\n";
@@ -582,6 +593,7 @@ namespace vcs_Clipboard
                 Application.DoEvents();
                 dataObject = Clipboard.GetDataObject();
 
+                // 檢查剪貼簿中 有無 影像資料
                 if (Clipboard.ContainsImage() == true)
                 {
                     bitmap1 = (Bitmap)(Clipboard.GetImage().Clone());

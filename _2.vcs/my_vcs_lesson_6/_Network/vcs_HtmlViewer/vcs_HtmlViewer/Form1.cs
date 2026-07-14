@@ -115,6 +115,8 @@ namespace vcs_HtmlViewer
             //HTML網頁顯示
             HtmlDocument doc = webBrowser1.Document;
             doc.Body.InnerHtml = richTextBox_html.Text;
+
+
         }
 
         //------------------------------------------------------------  # 60個
@@ -202,7 +204,6 @@ namespace vcs_HtmlViewer
 
             for (int i = 0; i < doc.All.Count; i++)
             {
-
                 //去抓標籤名字有a的，像是連結<a href=xx>這種
 
                 //奇怪的是這個方法如果要抓一些標籤都抓不到，像是<td><tr>那些=.=
@@ -210,7 +211,6 @@ namespace vcs_HtmlViewer
                 //所以那些我是用另外的方法抓的，等下會講
                 if (doc.All[i].TagName.ToLower().Equals("a"))
                 {
-
                     //GetAttribute就是去取得標籤的屬性的內容，例：
 
                     //<a href ="我是屬性的內容" target=_blank>，不過有些屬性取不到，像是class
