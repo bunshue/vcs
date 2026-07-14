@@ -91,9 +91,13 @@ namespace vcs_BackgroundWorker1
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
-            pictureBox1.Size = new Size(620, 500);
-            pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            progressBar0.Size = new Size(410, 40);
+            progressBar0.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            label0.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            label6.Location = new Point(x_st + dx * 1, y_st + dy * 1);
 
+            pictureBox1.Size = new Size(620, 550);
+            pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 2);
 
             richTextBox1.Size = new Size(500, 690);
             richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
@@ -138,6 +142,15 @@ namespace vcs_BackgroundWorker1
             return sum;
         }
 
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            int r = 50;
+            int cx = 770;
+            int cy = 80;
+
+            e.Graphics.DrawEllipse(Pens.Red, cx - r, cy - r, r * 2, r * 2);
+        }
+
         //------------------------------------------------------------  # 60個
 
         private void backgroundWorker0_DoWork(object sender, DoWorkEventArgs e)
@@ -151,9 +164,11 @@ namespace vcs_BackgroundWorker1
             for (int i = 0; i < 1000000000; i++)
             {
                 sum += i;
-                progressBar0.Value = i / 10000000;
                 if ((i % 100000000) == 0)
                 {
+                    progressBar0.Value = i / 10000000;
+                    label0.Text = progressBar0.Value.ToString() + " %";
+                    Application.DoEvents();
                     if (worker.CancellationPending == true)  // 檢查是否有收到取消命令
                     {
                         // 回傳取消
@@ -187,6 +202,9 @@ namespace vcs_BackgroundWorker1
             else
             {
                 result = "完成\n";
+                progressBar0.Value = 100;
+                label0.Text = progressBar0.Value.ToString() + " %";
+                Application.DoEvents();
             }
             if (e.Error != null)
             {
@@ -221,7 +239,7 @@ namespace vcs_BackgroundWorker1
                 button0.Text = "啟動BackgroundWorker0";
 
                 // 停止BackgroundWorker
-                richTextBox1.Text += "停止BackgroundWorker\n";
+                richTextBox1.Text += "停止BackgroundWorker0\n";
                 backgroundWorker0.CancelAsync();  // 取消非同步背景執行緒
             }
         }
@@ -291,6 +309,9 @@ namespace vcs_BackgroundWorker1
                 // e.Result是個Object, 表示非同步作業的結果。
                 Console.WriteLine("執行結果：{e.Result.ToString()}！");
             }
+            //richTextBox1.Text += "BGW0 結束, 結果 : " + result + "\n";
+            //flag_bgw1_RunWorkerAsync = false;
+            button1.Text = "使用 BackgroundWorker1";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -376,10 +397,12 @@ namespace vcs_BackgroundWorker1
             {
                 richTextBox1.Text += "錯誤： " + e.Error.Message + "\n";
             }
-            richTextBox1.Text += "BGW0 結束, 結果 : " + result + "\n";
-            button0.Text = "使用 backgroundWorker2";
+            richTextBox1.Text += "BGW2 結束, 結果 : " + result + "\n";
+            flag_bgw2_RunWorkerAsync = false;
+            button2.Text = "使用 BackgroundWorker0";
         }
 
+        bool flag_bgw2_RunWorkerAsync = false;
         private void button2_Click(object sender, EventArgs e)
         {
             //不使用BackgroundWorker
@@ -391,12 +414,29 @@ namespace vcs_BackgroundWorker1
             pictureBox1.Image = bmp;
             */
 
-            //使用BackgroundWorker
-            if (backgroundWorker2.IsBusy == false)
+            if (flag_bgw2_RunWorkerAsync == false)
             {
-                // 啟動BackgroundWorker
-                richTextBox1.Text += "啟動BackgroundWorker2\n";
-                backgroundWorker2.RunWorkerAsync();  // 啟動非同步背景執行緒, 將觸發BackgroundWorker.DoWork事件
+                flag_bgw2_RunWorkerAsync = true;
+                button0.Text = "停止BackgroundWorker0";
+
+                progressBar0.Value = 0;
+                label0.Text = progressBar0.Value.ToString() + " %";
+                Application.DoEvents();
+                if (backgroundWorker2.IsBusy == false)
+                {
+                    // 啟動BackgroundWorker
+                    richTextBox1.Text += "啟動BackgroundWorker2\n";
+                    backgroundWorker2.RunWorkerAsync();  // 啟動非同步背景執行緒, 將觸發BackgroundWorker.DoWork事件
+                }
+            }
+            else
+            {
+                flag_bgw2_RunWorkerAsync = false;
+                button0.Text = "啟動BackgroundWorker2";
+
+                // 停止BackgroundWorker
+                richTextBox1.Text += "停止BackgroundWorker2\n";
+                backgroundWorker2.CancelAsync();  // 取消非同步背景執行緒
             }
 
         }

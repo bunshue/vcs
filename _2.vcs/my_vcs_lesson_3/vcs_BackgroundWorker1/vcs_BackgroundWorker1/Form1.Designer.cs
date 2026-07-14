@@ -179,14 +179,14 @@
             // 
             this.progressBar0.Location = new System.Drawing.Point(229, 51);
             this.progressBar0.Name = "progressBar0";
-            this.progressBar0.Size = new System.Drawing.Size(437, 23);
+            this.progressBar0.Size = new System.Drawing.Size(400, 40);
             this.progressBar0.TabIndex = 132;
             // 
             // label0
             // 
             this.label0.AutoSize = true;
             this.label0.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label0.Location = new System.Drawing.Point(672, 51);
+            this.label0.Location = new System.Drawing.Point(637, 58);
             this.label0.Name = "label0";
             this.label0.Size = new System.Drawing.Size(64, 24);
             this.label0.TabIndex = 133;
@@ -242,6 +242,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
