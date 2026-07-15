@@ -61,6 +61,8 @@ namespace vcs_BackgroundWorker1
             backgroundWorker6.WorkerReportsProgress = true;  // 是否報告進度
 
             //------------------------------------------------------------  # 60個
+
+            label6.Text = "";
         }
 
         void show_item_location()
@@ -135,6 +137,8 @@ namespace vcs_BackgroundWorker1
         private const int WIDTH = 100;
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
+            this.DoubleBuffered = true;  // 差異很大
+
             int r = 50;
             int cx = 770;
             int cy = 80;
@@ -143,20 +147,18 @@ namespace vcs_BackgroundWorker1
 
             //e.Graphics.DrawEllipse(Pens.Red, cx - r, cy - r, r * 2, r * 2);
 
-            Brush b;
-
-            int used = 123;
-            int total = 360;
+            int used = progressBar0.Value;
+            int total = 100;
             int used_angle = (int)(used * 360 / total);
 
-            b = new SolidBrush(Color.LightGreen);
-            e.Graphics.FillEllipse(b, x_st + WIDTH / 10, y_st + WIDTH / 10, WIDTH * 80 / 100, WIDTH * 80 / 100);
+            SolidBrush sb = new SolidBrush(Color.Gray);
+            e.Graphics.FillEllipse(sb, x_st + WIDTH / 10, y_st + WIDTH / 10, WIDTH * 80 / 100, WIDTH * 80 / 100);
 
-            b = new SolidBrush(Color.Red);
-            e.Graphics.FillPie(b, x_st + WIDTH / 10, y_st + WIDTH / 10, WIDTH * 80 / 100, WIDTH * 80 / 100, -180, used_angle);
+            sb = new SolidBrush(Color.Lime);
+            e.Graphics.FillPie(sb, x_st + WIDTH / 10, y_st + WIDTH / 10, WIDTH * 80 / 100, WIDTH * 80 / 100, -90, used_angle);
 
-            b = new SolidBrush(Color.White);
-            e.Graphics.FillEllipse(b, x_st + WIDTH / 4, y_st + WIDTH / 4, WIDTH / 2, WIDTH / 2);
+            sb = new SolidBrush(Color.White);
+            e.Graphics.FillEllipse(sb, x_st + WIDTH / 4, y_st + WIDTH / 4, WIDTH / 2, WIDTH / 2);
 
         }
 
@@ -198,6 +200,10 @@ namespace vcs_BackgroundWorker1
                     gray = (byte)(r * 0.299 + g * 0.587 + b * 0.114);
                     bmp.SetPixel(x, y, Color.FromArgb(gray, gray, gray));//設定像素值
                     sum++;
+                    if ((sum % (W * H * 1 / 100)) == 0)
+                    {
+                        this.Invalidate();
+                    }
                 }
                 if (worker.CancellationPending == true)  // 檢查是否有收到取消命令
                 {
@@ -263,6 +269,7 @@ namespace vcs_BackgroundWorker1
                 progressBar0.Value = 100;
                 label0.Text = progressBar0.Value.ToString() + " %";
                 Application.DoEvents();
+                this.Invalidate();
                 //新增正常結束之後的收尾動作，並在標籤控制元件中進行提示
                 // e.Result是個Object, 表示非同步作業的結果
                 Console.WriteLine("執行結果：{e.Result.ToString()}！");
@@ -369,7 +376,6 @@ namespace vcs_BackgroundWorker1
         {
         }
 
-        bool flag_bgw2_RunWorkerAsync = false;
         private void button2_Click(object sender, EventArgs e)
         {
         }

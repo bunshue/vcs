@@ -12,6 +12,17 @@ using System.Diagnostics;       //for Process, PerformanceCounter
 
 //CPU 與記憶體使用率
 
+/*
+使用PerformanceCounter監控並顯示CPU狀態訊息
+
+Performance Counter控件屬性
+
+CategoryName 填 Processor
+CounterName  填 % Processor Time
+InstanceName 填 _Total
+//如果要監控單個處理器的狀態，屬性InstanceName需設為指向某個特定的處理器(比如說0或1)
+*/
+
 namespace vcs_PerformanceCounter2
 {
     public partial class Form1 : Form
@@ -26,38 +37,69 @@ namespace vcs_PerformanceCounter2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            show_item_location();
         }
+
+        void show_item_location()
+        {
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            lb_cpu_usage.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            lb_memory_usage.Location = new Point(x_st + dx * 1, y_st + dy * 0 + 40);
+            label1.Location = new Point(x_st + dx * 1, y_st + dy * 0 + 40 * 2);
+            progressBar1.Location = new Point(x_st + dx * 1, y_st + dy * 0 + 40 * 3);
+
+            richTextBox1.Size = new Size(300, 690);
+            richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1273, 750);
+            this.Text = "vcs_test_all_00_Usually";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //PerformanceCounter pc = new PerformanceCounter(); 若未給參數 要在使用時給參數
+            PerformanceCounter pc = new PerformanceCounter();  // 若未給參數 要在使用時給參數
             //PerformanceCounter pc = new PerformanceCounter("Processor", "% Processor Time", "_Total");
 
-
-            PerformanceCounter pc = new PerformanceCounter();   //若未給參數 要在使用時給參數
-            //static PerformanceCounter pc = new PerformanceCounter("Processor", "% Processor Time", "_Total");
-
             pc = new PerformanceCounter("Processor", "% Processor Time", "_Total");
-
-
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
-
             //CPU 與記憶體使用率
-            //建一個 PerformanceCounter 物件，指定分類、計數器名稱、執行個體，接著用 NextValue() 取值，輕鬆搞定。
+            //建一個 PerformanceCounter 物件，指定分類、計數器名稱、執行個體，接著用 NextValue() 取值
+
             Console.WriteLine("CPU: {0:n1}%", cpu.NextValue());
             Console.WriteLine("Memory: {0:n0}%", memory.NextValue());
 
             richTextBox1.Text += "CPU: " + cpu.NextValue() + "\n";
             richTextBox1.Text += "Memory: " + memory.NextValue() + "\n";
-
-
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         //C＃實時獲取CPU利用率
         // constants used to select the performance counter.
@@ -101,8 +143,9 @@ namespace vcs_PerformanceCounter2
                 float cpuLoad = pc.NextValue();
                 Say("CPU load = " + cpuLoad + " %.");
             }
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -119,24 +162,25 @@ namespace vcs_PerformanceCounter2
 
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        //------------------------------------------------------------  # 60個
+
+        private void timer0_Tick(object sender, EventArgs e)
         {
             //double cpu_usage = pc.NextValue();
             //label5.Text = "CPU使用率 " + cpu_usage.ToString() + " %";
             //richTextBox1.Text += "CPU使用率 " + cpu_usage.ToString() + " %\n";
 
-
-
-
             // CPU 與記憶體使用率
-            Console.WriteLine("CPU: {0:n1}%", cpu.NextValue());
-            Console.WriteLine("Memory: {0:n0}%", memory.NextValue());
+            //Console.WriteLine("CPU: {0:n1}%", cpu.NextValue());
+            //Console.WriteLine("Memory: {0:n0}%", memory.NextValue());
 
-            richTextBox1.Text += "CPU: " + cpu.NextValue() + " %\n";
-            richTextBox1.Text += "Memory: " + memory.NextValue() + " %\n";
+            string mesg1 = string.Format("CPU: {0:n1}%", cpu.NextValue());
+            string mesg2 = string.Format("Memory: {0:n0}%", memory.NextValue());
 
-
-
+            //lb_cpu_usage.Text = "CPU 使用率 : " + cpu.NextValue() + " %";
+            //lb_memory_usage.Text = "記憶體 使用率 : " + memory.NextValue() + " %";
+            lb_cpu_usage.Text = mesg1;
+            lb_memory_usage.Text = mesg2;
 
             //double cpu_usage = pc.NextValue();
             //label5.Text = "CPU使用率 " + cpu_usage.ToString() + " %";
@@ -147,11 +191,25 @@ namespace vcs_PerformanceCounter2
             pc.CounterName = "% Processor Time";
             pc.InstanceName = "_Total";
             */
-
-
-
-
-
         }
+
+        //------------------------------------------------------------  # 60個
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            progressBar1.Value = (int)(performanceCounter1.NextValue());
+            label1.Text = "Processor Time: " + progressBar1.Value.ToString() + "%";
+        }
+
+        //------------------------------------------------------------  # 60個
+
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
