@@ -114,40 +114,52 @@ namespace vcs_WebClient
         {
             //簡易wc.DownloadFile()
 
+            WebClient wc = new WebClient();  // 建立 WebClient
+
+            richTextBox1.Text += "wc.DownloadFile 00\n";
+
             //string url = "http://blogs.telerik.com/images/default-source/miroslav-miroslav/super_ninja.png?sfvrsn=2";
             string url = @"https://www.telerik.com/sfimages/default-source/blogs/super_ninja-png";
-            string filename = Path.GetFileName(url);
+            string filename = Path.GetFileName(url);  // 取得網址上的檔案名, 存檔用
 
-            WebClient wc = new WebClient();  // 建立 WebClient
-            richTextBox1.Text += "開始下載: " + url + "\n";
             wc.DownloadFile(url, filename);  // 從URL下載檔案
-            richTextBox1.Text += "下載完成, 在 bin/Debug\n";
+            //------------------------------  # 30個
+
+            richTextBox1.Text += "wc.DownloadFile 01\n";
+
+            url = @"http://www.devbg.org/img/Logo-BASD.jpg";
+            filename = Path.GetFileName(url);  // 取得網址上的檔案名, 存檔用
+            wc.DownloadFile(url, filename);  // 從URL下載檔案
 
             //------------------------------  # 30個
 
-            //wc.DownloadFile(url, fileName);  // 從URL下載檔案
-            wc.DownloadFile("http://www.devbg.org/img/Logo-BASD.jpg", @"C:\dddddddddd\txt.jpg");  // 從URL下載檔案
-            richTextBox1.Text += "下載完成\n";
-
-            //------------------------------  # 30個
+            richTextBox1.Text += "wc.DownloadFile 02\n";
 
             url = "https://www.google.com.tw/";
             filename = "tmp_html_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".html";
             wc.DownloadFile(url, filename);  // 從URL下載檔案
-            richTextBox1.Text += "保存成功\n";
+
 
             //------------------------------  # 30個
 
-            url = @"https://wiki.linuxfoundation.org/_media/wiki/logo.png";
-            wc.DownloadFile(url, "aaaaa.png");  // 從URL下載檔案
+            richTextBox1.Text += "wc.DownloadFile 04\n";
 
-            //------------------------------  # 30個
-
-            url = @"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Breathe-face-smile.svg/1200px-Breathe-face-smile.svg.png";
-            filename = "Image.png";
+            url = @"https://www.aspphp.online/bianchen/UploadFiles_4619/201701/2017010416252406.jpg";
+            filename = Path.GetFileName(url);  // 取得網址上的檔案名, 存檔用
             wc.DownloadFile(new Uri(url), filename);  // 從URL下載檔案
 
             //------------------------------  # 30個
+
+
+
+            //ddddddddddddddddddddddddddddddd
+
+
+
+
+
+
+            richTextBox1.Text += "wc.DownloadFile 05\n";
 
             //WebClient Download Covid-19 Data
 
@@ -576,6 +588,7 @@ namespace vcs_WebClient
             richTextBox1.Text += "圖片所在網址 : " + img_src_url + "\n";
 
             //圖片下載並存檔
+
             DownloadImage(img_src_url);
             richTextBox1.Text += "圖片下載並存檔完成\n";
 
@@ -583,9 +596,23 @@ namespace vcs_WebClient
             Image img = GetPicture(img_src_url);
             pictureBox1.Image = img;
             richTextBox1.Text += "圖片下來並顯示完成\n";
+
+            /*
+            string img_src_url = @"https://apod.nasa.gov/apod/image/2103/VolcanoStars_Vella_1080.jpg";
+            string img_src_url = @"https://apod.nasa.gov/apod/image/2103/VolcanoStars_Vella_1080.jpg";
+
+            richTextBox1.Text += "圖片所在網址 : " + img_src_url + "\n";
+            //圖片下載並存檔
+            DownloadImage(img_src_url);
+            richTextBox1.Text += "圖片下載並存檔\tOK\n";
+
+            //圖片下來並顯示
+            Image img = GetPicture(img_src_url);
+            pictureBox1.Image = img;
+            richTextBox1.Text += "圖片下來並顯示\tOK\n";
+            */
         }
 
-        // Download the indicated file.
         private void DownloadImage(string url)
         {
             //richTextBox1.Text += "下載圖片 : " + url + "\n";
@@ -605,6 +632,34 @@ namespace vcs_WebClient
             MemoryStream image_stream = new MemoryStream(wc.DownloadData(url));
             return Image.FromStream(image_stream);
         }
+
+        /*
+        // Download the indicated file
+        private void DownloadImage(string url)
+        {
+            //richTextBox1.Text += "下載圖片 : " + url + "\n";
+
+            WebClient wc = new WebClient();  // 建立 WebClient
+
+            //int pos = url.LastIndexOf('/');
+            //string filename = url.Substring(pos + 1);
+
+            int pos1 = url.LastIndexOf('/');
+            int pos2 = url.LastIndexOf('.');
+            string filename = url.Substring(pos1 + 1, pos2 - pos1 - 1) + DateTime.Now.ToString("_yyyyMMdd_HHmmss") + url.Substring(pos2);
+            richTextBox1.Text += "下載圖片, 本地圖片檔名 : " + filename + "\n";
+            wc.DownloadFile(url, filename);  // 從URL下載檔案
+        }
+
+        // Download a file from the internet.
+        // Get the picture at a given URL.
+        private Image GetPicture(string url)
+        {
+            WebClient wc = new WebClient();  // 建立 WebClient
+            MemoryStream image_stream = new MemoryStream(wc.DownloadData(url));
+            return Image.FromStream(image_stream);
+        }
+        */
 
         //下載NASA網頁的圖片 SP
 
@@ -653,9 +708,9 @@ namespace vcs_WebClient
 
             string url = @"http://www.google.com";
 
-
             string strS;//存取網頁內容
             string strAddress = url.Trim();//輸入網址
+
             if (ValidateDate1(strAddress))//檢查輸入網址是否合法
             {
                 strAddress = strAddress.ToLower();
@@ -867,9 +922,12 @@ namespace vcs_WebClient
 
             //------------------------DownloadFile下載文件-------------------------------
             wc.DownloadFile("http://www.baidu.com/img/shouye_b5486898c692066bd2cbaeda86d74448.gif", @"D:\123.gif");  // 從URL下載檔案
+
             //------------------------DownloadFile下載到字節數組-------------------------------
+
+            //wc.DownloadData 下載資料成拜列
             byte[] byteArray = wc.DownloadData("http://www.baidu.com/img/shouye_b5486898c692066bd2cbaeda86d74448.gif");
-            FileStream fs = new FileStream(@"E:\123.gif", FileMode.Create);
+            FileStream fs = new FileStream(@"D:\tmp_123.gif", FileMode.Create);
             fs.Write(byteArray, 0, byteArray.Length);
             fs.Flush();
 
@@ -912,13 +970,12 @@ namespace vcs_WebClient
         {
             //WebClient 22
 
-            //將數據下載到字節數組：
             WebClient wc = new WebClient();  // 建立 WebClient
-            //直接下載
+
             wc.DownloadFile("http://24.duote.com.cn/kugou.zip", @"ku.zip");  // 從URL下載檔案
             richTextBox1.Text += "下載完成了嗎？\n";  // 下載完成後輸出 下載完成了嗎？
 
-            //將數據下載到字節數組
+            //wc.DownloadData 下載資料成拜列
             byte[] byteArray = wc.DownloadData("http://24.duote.com.cn/kugou.zip");
             FileStream fs = new FileStream(@"D:\kugo.zip", FileMode.OpenOrCreate, FileAccess.ReadWrite);
             fs.Write(byteArray, 0, byteArray.Length);
@@ -951,7 +1008,10 @@ namespace vcs_WebClient
             //WebClient 24
 
             WebClient wc = new WebClient();  // 建立 WebClient
+
+            //wc.DownloadData 下載資料成拜列
             byte[] byteArray = wc.DownloadData("http://k-db.com/?p=all&download=csv");
+
             string str = Encoding.Default.GetString(byteArray);
             // 比較之 string[] rows = str.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
             string[] rows = str.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
@@ -993,7 +1053,9 @@ namespace vcs_WebClient
             string url = @"http://www.aspphp.online/bianchen/dnet/cxiapu/gycxp/201701/10747.html";
             WebClient wc = new WebClient();  // 建立 WebClient
             wc.Credentials = CredentialCache.DefaultCredentials;   //獲取或設置用於對向Internet資源的請求進行身份驗證的網絡憑據。
-            Byte[] byteArray = wc.DownloadData(url);                //從指定url下載數據
+
+            //wc.DownloadData 下載資料成拜列
+            byte[] byteArray = wc.DownloadData(url);                //從指定url下載數據
             string str = Encoding.UTF8.GetString(byteArray);                       //獲取網站頁面采用的是UTF-8
             richTextBox1.Text += str + "\n";
         }
@@ -1200,16 +1262,8 @@ namespace vcs_WebClient
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-/*  可搬出
-
-*/
-
 /*
-wc.DownloadFile(url_file2, filename_local);          //抓網頁資料到本地檔案  // 從URL下載檔案
-
 MemoryStream image_stream = new MemoryStream(wc.DownloadData(url));
-
-byte[] byteArray = wc.DownloadData(sURL);
 
 //------------------------------------------------------------  # 60個
 
@@ -1250,48 +1304,6 @@ client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 
 
 //------------------------------------------------------------  # 60個
             
-            string img_src_url = @"https://apod.nasa.gov/apod/image/2103/VolcanoStars_Vella_1080.jpg";
-            richTextBox1.Text += "圖片所在網址 : " + img_src_url + "\n";
-                //圖片下載並存檔
-                DownloadImage(img_src_url);
-                richTextBox1.Text += "圖片下載並存檔\tOK\n";
-                
-                //圖片下來並顯示
-                Image img = GetPicture(img_src_url);
-                pictureBox1.Image = img;
-                richTextBox1.Text += "圖片下來並顯示\tOK\n";
-        }
-
-        // Download the indicated file
-        private void DownloadImage(string url)
-        {
-            //richTextBox1.Text += "下載圖片 : " + url + "\n";
-
-             WebClient wc = new WebClient();  // 建立 WebClient
-
-            //int pos = url.LastIndexOf('/');
-            //string filename = url.Substring(pos + 1);
-
-            int pos1 = url.LastIndexOf('/');
-            int pos2 = url.LastIndexOf('.');
-            string filename = url.Substring(pos1 + 1, pos2 - pos1 - 1) + DateTime.Now.ToString("_yyyyMMdd_HHmmss") + url.Substring(pos2);
-            richTextBox1.Text += "下載圖片, 本地圖片檔名 : " + filename + "\n";
-            wc.DownloadFile(url, filename);  // 從URL下載檔案
-        }
-
-        // Download a file from the internet.
-        // Get the picture at a given URL.
-        private Image GetPicture(string url)
-        {
-                 WebClient wc = new WebClient();  // 建立 WebClient
-                MemoryStream image_stream = new MemoryStream(wc.DownloadData(url));
-                return Image.FromStream(image_stream);
-        }
-    }
-}
-
-//------------------------------------------------------------  # 60個
-
 private void button1_Click(object sender, EventArgs e)
 {
 	//加入這段語法忽略憑證
@@ -1321,46 +1333,9 @@ richTextBox1.Text += "抓網頁資料到本地檔案\tOK\n";
 
 string url_weather = @"http://api.openweathermap.org/data/2.5/weather?q=Hsinchu&mode=xml&units=imperial&APPID=e8edf79325ae8948a635efd0e076a8bc";
 WebClient wc = new WebClient();  // 建立 WebClient
-		// Get the response string from the URL.
-		//richTextBox1.Text += "data\n" + str + "\n";
-		richTextBox1.Text += "抓網頁查詢資料到記憶體\tOK\n";
-	
-string img_src_url = @"https://apod.nasa.gov/apod/image/2103/VolcanoStars_Vella_1080.jpg";
-richTextBox1.Text += "圖片所在網址 : " + img_src_url + "\n";
-	//圖片下載並存檔
-	DownloadImage(img_src_url);
-	richTextBox1.Text += "圖片下載並存檔\tOK\n";
-	
-	//圖片下來並顯示
-	Image img = GetPicture(img_src_url);
-	pictureBox1.Image = img;
-	richTextBox1.Text += "圖片下來並顯示\tOK\n";
-}
-
-// Download the indicated file
-private void DownloadImage(string url)
-{
-//richTextBox1.Text += "下載圖片 : " + url + "\n";
-
- WebClient wc = new WebClient();  // 建立 WebClient
-
-//int pos = url.LastIndexOf('/');
-//string filename = url.Substring(pos + 1);
-
-int pos1 = url.LastIndexOf('/');
-int pos2 = url.LastIndexOf('.');
-string filename = url.Substring(pos1 + 1, pos2 - pos1 - 1) + DateTime.Now.ToString("_yyyyMMdd_HHmmss") + url.Substring(pos2);
-richTextBox1.Text += "下載圖片, 本地圖片檔名 : " + filename + "\n";
-
-}
-
-// Download a file from the internet.
-// Get the picture at a given URL.
-private Image GetPicture(string url)
-{
-	    WebClient wc = new WebClient();  // 建立 WebClient
-        return Image.FromStream(image_stream);
-}
+// Get the response string from the URL.
+//richTextBox1.Text += "data\n" + str + "\n";
+richTextBox1.Text += "抓網頁查詢資料到記憶體\tOK\n";
 
 //------------------------------------------------------------  # 60個
 
@@ -1389,6 +1364,7 @@ namespace RegexPractice
         {
             string url = "http://top.baidu.com/buzz.php?p=top_keyword";
             WebClient wc = new WebClient();  // 建立 WebClient
+            //wc.DownloadData 下載資料成拜列
             byte[] byteArray = wc.DownloadData(new Uri(url));
             string pageSource = Encoding.GetEncoding("gb2312").GetString(byteArray);
 
@@ -1485,6 +1461,7 @@ Download specified number of pictures from “ http://browse.deviantart.com/cust
 	        public static byte[] GetPageSourceBytes(string url)  
 	        {  
 	            WebClient wc = new WebClient();  // 建立 WebClient
+                //wc.DownloadData 下載資料成拜列
 	            byte[] byteArray = wc.DownloadData(new Uri(url));  
 	            return byteArray;  
 	        }  
@@ -1598,11 +1575,11 @@ HtmlAgilityPack 訊息
 // For .NET Framework 4.5 以後
 // ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
-/*
-WebClient不能處理特定於任何協議的任何特性，例如Cookie等。如果需要使用這些特性，需要使用.net中的HttpWebRequest類。
+//WebClient不能處理特定於任何協議的任何特性，例如Cookie等。如果需要使用這些特性，需要使用.net中的HttpWebRequest類。
 
 //------------------------------------------------------------  # 60個
 
+/*
 vcs抓網路上的檔案
             try
             {
@@ -1618,8 +1595,7 @@ vcs抓網路上的檔案
             {
                 Environment.Exit(0);    //如果抓不到檔案就離開程式，沒這行程式會一直卡在這如果沒抓到檔案的話…
             }
-        
-//------------------------------------------------------------  # 60個
+wc.DownloadFile(url_file2, filename_local);          //抓網頁資料到本地檔案  // 從URL下載檔案
 
 */
 
@@ -1643,5 +1619,6 @@ vcs抓網路上的檔案
                 }
 
 */
+
 
 

@@ -121,16 +121,16 @@ namespace vcs_RichTextBox1
             richTextBox_matrix.Location = new Point(x_st + dx * 6, y_st + dy * 0 + dd * 0 + 340 + 190);
 
             lb_richtextbox1.Location = new Point(x_st + dx * 2, y_st + dy * 0 + dd * 4);
-            richTextBox1.Size = new Size(700, 290);
+            richTextBox1.Size = new Size(820, 460);
             richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0 + dd * 5);
 
-            lb_richtextbox2.Location = new Point(x_st + dx * 2, y_st + dy * 6 + 40);
+            lb_richtextbox2.Location = new Point(x_st + dx * 2, y_st + dy * 8 + 86);
             richTextBox2.Size = new Size(350, 160);
-            richTextBox2.Location = new Point(x_st + dx * 2, y_st + dy * 6 + 40 + dd);
+            richTextBox2.Location = new Point(x_st + dx * 2, y_st + dy * 8 + 86 + dd);
 
-            lb_richtextbox_lines.Location = new Point(x_st + dx * 2, y_st + dy * 8 + 86);
+            lb_richtextbox_lines.Location = new Point(x_st + dx * 4, y_st + dy * 8 + 86);
             richTextBox_lines.Size = new Size(350, 160);
-            richTextBox_lines.Location = new Point(x_st + dx * 2, y_st + dy * 8 + 86 + dd);
+            richTextBox_lines.Location = new Point(x_st + dx * 4, y_st + dy * 8 + 86 + dd);
 
             dd = 60;
             bt_analyze.Location = new Point(richTextBox1.Location.X + dd * 0, richTextBox1.Location.Y + richTextBox1.Size.Height);
@@ -1253,15 +1253,9 @@ namespace vcs_RichTextBox1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
 
 /*
 /// <summary>获取 Form_Mxdr.RichTextBox<para>　<para>

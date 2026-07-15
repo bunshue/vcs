@@ -1144,16 +1144,17 @@ namespace vcs_DrawPoem
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string Path;
             //檢查存data的資料夾
-            Path = Application.StartupPath + "\\data";
+            string Path = Application.StartupPath + "\\data";
             if (Directory.Exists(Path) == false)     //確認資料夾是否存在
             {
                 Directory.CreateDirectory(Path);
                 richTextBox1.Text += "已建立一個新資料夾: " + Path + "\n";
             }
             else
+            {
                 richTextBox1.Text += "資料夾: " + Path + " 已存在，不用再建立\n";
+            }
 
             //檢查存setup的資料夾
             Path = Application.StartupPath + "\\setup";
@@ -1163,14 +1164,15 @@ namespace vcs_DrawPoem
                 richTextBox1.Text += "已建立一個新資料夾: " + Path + "\n";
             }
             else
+            {
                 richTextBox1.Text += "資料夾: " + Path + " 已存在，不用再建立\n";
+            }
 
-            bool result;
-
-            result = loadTextSetup();
-
+            bool result = loadTextSetup();
             if (result == false)
+            {
                 return;
+            }
 
             if (flag_operation_mode == MODE_NORMAL)
                 filepath_poetry = filepath_poetry_normal;       //一般
@@ -1280,7 +1282,6 @@ namespace vcs_DrawPoem
                 button5.Visible = false;
                 button6.Visible = false;
                 button7.Visible = false;
-                button8.Visible = false;
             }
             else
             {
@@ -1292,7 +1293,6 @@ namespace vcs_DrawPoem
                 button5.Visible = true;
                 button6.Visible = true;
                 button7.Visible = true;
-                button8.Visible = true;
             }
         }
 
@@ -1767,7 +1767,6 @@ namespace vcs_DrawPoem
                 button5.Location = new Point(W * 1 + 10, 170);
                 button6.Location = new Point(W * 1 + 10, 210);
                 button7.Location = new Point(W * 1 + 10, 250);
-                button8.Location = new Point(W * 1 + 10, 290);
 
                 this.Size = new Size(W * 4 + 120, H);
             }
@@ -2447,15 +2446,6 @@ namespace vcs_DrawPoem
                     richTextBox1.Text += index.ToString() + "\t" + all_strings[i].Remove(0, 1) + "\n";
                 }
             }
-
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            //C# – 複製資料到剪貼簿
-            //Clipboard.SetData(DataFormats.Text, richTextBox1.Text + "\n");
-            Clipboard.SetDataObject(richTextBox1.Text + "\n");      //建議用此
-            richTextBox1.Text += "已複製資料到系統剪貼簿\n";
         }
 
         void show_long_poem(int item)
@@ -2498,13 +2488,8 @@ namespace vcs_DrawPoem
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
 
 

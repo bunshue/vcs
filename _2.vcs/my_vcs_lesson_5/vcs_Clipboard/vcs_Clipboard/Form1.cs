@@ -524,10 +524,44 @@ namespace vcs_Clipboard
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button15_Click(object sender, EventArgs e)
         {
+            //剪貼簿 + re
 
+            richTextBox1.Text += "剪貼簿 + re\n";
+
+            //監視剪貼板是否有數據
+            string data = Clipboard.GetData(DataFormats.Text).ToString();
+            richTextBox1.Text += data + "\n";
+
+            /*
+            strName = strPath.Substring(strPath.LastIndexOf("/") + 1);
+            textBox3.Text = textBox1.Text.Substring(textBox1.Text.LastIndexOf("/") + 1);
+            */
+
+            string url = "https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg";
+
+            if (url.Contains("/"))
+            {
+                string filename = url.Substring(url.LastIndexOf("/") + 1);
+                richTextBox1.Text += filename + "\n";
+            }
+
+            /*
+            //监视剪贴板是否有数据
+            string strPath = Clipboard.GetData(DataFormats.Text).ToString();
+            //验证网址格式
+            if (Regex.IsMatch(strPath, @"http(s)?://([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?"))
+            {
+                textBox1.Text = strPath;
+                strName = strPath.Substring(strPath.LastIndexOf("/") + 1);
+            }
+            */
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button16_Click(object sender, EventArgs e)
         {
@@ -670,12 +704,72 @@ namespace vcs_Clipboard
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-/*  可搬出
+
+
+
+
+
+//clipboardData.setData('text',clipboardData.getData('text').)" />
+
+
+
+
+/*
+將Bitmap的資料放到剪貼簿裏
+            richTextBox1.Text += "將Bitmap的資料放到剪貼簿裏\n";
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+            pictureBox1.Image = bitmap1;
+
+            //從pictureBox取得Bitmap
+            //Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+
+            //複製到剪貼簿
+            Clipboard.SetImage(bitmap1);
+*/
+
+/*
+將Bitmap的資料放到剪貼簿裏
+            richTextBox1.Text += "將Bitmap的資料放到剪貼簿裏\n";
+
+            Rectangle select_rectangle = new Rectangle(new Point(100, 100), new Size(150, 150));    //用來保存截圖的矩形
+
+            CopyToClipboard(select_rectangle);
+
+
+        private void CopyToClipboard(Rectangle src_rect)
+        {
+            // Make a bitmap for the selected area's image.
+            Bitmap bm = new Bitmap(src_rect.Width, src_rect.Height);
+
+            // Copy the selected area into the bitmap.
+            using (Graphics g = Graphics.FromImage(bm))
+            {
+                Rectangle dst_rect = new Rectangle(0, 0, src_rect.Width, src_rect.Height);
+                g.DrawImage(bitmap1, dst_rect, src_rect, GraphicsUnit.Pixel);
+            }
+
+            Clipboard.SetImage(bm);
+        }
 
 */
 
+/*
+            richTextBox1.Text += "將圖片資料放置到Clipboard中\n";
+            Clipboard.SetImage(bitmap2);
+*/
+
+
+
+
+/*
+            //C# – 複製資料到剪貼簿
+            //Clipboard.SetData(DataFormats.Text, richTextBox1.Text + "\n");
+            Clipboard.SetDataObject(richTextBox1.Text + "\n");      //建議用此
+            richTextBox1.Text += "已複製資料到系統剪貼簿\n";
+*/

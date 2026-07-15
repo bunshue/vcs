@@ -409,21 +409,21 @@ namespace vcs_FolderFileName
                 return;
             }
 
-            //C# – 複製資料到剪貼簿
+            // 複製資料到剪貼簿
             Clipboard.Clear();
 
             for (int i = 0; i < listView1.Items.Count; i++)
             {
                 richTextBox2.Text += listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\n";
 
-                //C# – 複製資料到剪貼簿 累計
+                // 複製資料到剪貼簿 累計
                 Clipboard.SetDataObject(Clipboard.GetText() + listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\n");      //建議用此
             }
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //C# 限制textbox只能輸入數字
+            // 限制textbox只能輸入數字
             if (e.KeyChar.CompareTo('0') < 0 || e.KeyChar.CompareTo('9') > 0) //比較輸入值的範圍是否超出數字
             {
                 e.Handled = true;// Handled 為是否鎖住輸入
@@ -439,8 +439,4 @@ namespace vcs_FolderFileName
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
 

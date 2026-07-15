@@ -350,10 +350,7 @@ namespace vcs_ReadWrite_EXCEL1
             // Call to AutoFormat in Visual C# 2010.
             workSheet.Range["A1", "B3"].AutoFormat(Excel.XlRangeAutoFormat.xlRangeAutoFormatClassic2);
 
-            //Copy 方法會將工作表加入剪貼簿
-            // Put the spreadsheet contents on the clipboard. The Copy method has one
-            // optional parameter for specifying a destination. Because no argument  
-            // is sent, the destination is the Clipboard.
+            // Copy 方法會將工作表加入剪貼簿
             workSheet.Range["A1:B3"].Copy();
 
             string filename = Application.StartupPath + "\\excel_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xlsx";
@@ -837,11 +834,6 @@ namespace vcs_ReadWrite_EXCEL1
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
 
 /*
                 //保存Excel文件

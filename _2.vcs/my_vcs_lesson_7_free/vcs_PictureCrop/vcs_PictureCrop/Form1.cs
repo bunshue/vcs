@@ -479,9 +479,6 @@ namespace vcs_PictureCrop
 
             richTextBox1.Text += "存截圖，存檔檔名：" + filename + "\n";
 
-            richTextBox1.Text += "將圖片資料放置到Clipboard中\n";
-            Clipboard.SetImage(bitmap2);
-
             richTextBox1.Text += "rect = " + SelectionRectangle.ToString() + "\n";
             richTextBox1.Text += "x_st = " + x_st.ToString() + ", y_st = " + y_st.ToString() + "\n";
             richTextBox1.Text += "w = " + w.ToString() + ", h = " + h.ToString() + "\n";
@@ -787,13 +784,8 @@ namespace vcs_PictureCrop
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
 
 

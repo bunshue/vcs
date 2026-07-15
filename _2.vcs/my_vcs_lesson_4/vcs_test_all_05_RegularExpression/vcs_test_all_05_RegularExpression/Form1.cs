@@ -634,16 +634,11 @@ $ 匹配一行的結束。 例如正則表達式 food$ 能夠匹配到 “he's  
 匹配中文字符的正則表達式： [\u4e00-\u9fa5]
 
 限制網頁表單裡的文本框輸入內容：
-
-只能輸入中文：<input type="text" onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))" />
-
-只能輸入數字：<input type="text" onkeyup="value=value.replace(/[^\d]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" />
-
-只能輸入數字和英文：<input type="text" onkeyup="value=value.replace(/[\W]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text).replace(/[^\d]/g,''))" />
+只能輸入中文：       value=value.replace(/[^\u4E00-\u9FA5]/g,'')   'text').replace(/[^\u4E00-\u9FA5]/g,''))" />
+只能輸入數字：       value=value.replace(/[^\d]/g,'')              'text').replace(/[^\d]/g,''))" />
+只能輸入數字和英文： value=value.replace(/[\W]/g,'')               'text).replace(/[^\d]/g,''))" />
 
 //------------------------------------------------------------  # 60個
-
-
 
 
 
