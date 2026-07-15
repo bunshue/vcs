@@ -225,11 +225,26 @@ namespace vcs_MessageBox
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-//1515
-//---------------  # 15個
+/*
 
+            MessageBox.Show("1您是合法的使用者！！");
+            MessageBox.Show("2訊息內容_回覆按鈕OK", "標題", MessageBoxButtons.OK);
+            MessageBox.Show("3訊息內容_回覆按鈕OKCancel", "標題", MessageBoxButtons.OKCancel);
+            MessageBox.Show("4訊息內容_回覆按鈕AbortRetryIgnore", "標題", MessageBoxButtons.AbortRetryIgnore);
+            MessageBox.Show("5訊息內容_回覆按鈕YesNoCancel", "標題", MessageBoxButtons.YesNoCancel);
+            MessageBox.Show("6訊息內容_回覆按鈕YesNo", "標題", MessageBoxButtons.YesNo);
+            MessageBox.Show("7訊息內容_回覆按鈕RetryCancel", "標題", MessageBoxButtons.RetryCancel);
 
-/*  可搬出
+            MessageBox.Show(" 8Question圖示", "圖示設定", MessageBoxButtons.OK, MessageBoxIcon.Question);
+            MessageBox.Show(" 9Question圖示", "圖示設定", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("10Question圖示", "圖示設定", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("11Question圖示", "圖示設定", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show("12Question圖示", "圖示設定", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            MessageBox.Show("13Question圖示", "圖示設定", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+
+//------------------------------------------------------------  # 60個
+
+if (MessageBox.Show("是否刪除？", "小心", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+if (MessageBox.Show("是否刪除？", "小心", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
 
 */
-

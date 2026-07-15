@@ -163,7 +163,7 @@ namespace vcs_test_all_03_Syntax2
         private void button2_Click(object sender, EventArgs e)
         {
             //傳值 vs 傳址
-            //傳值 vs 傳址
+
             //傳值
 
             int a = 10, b = 15;
@@ -201,27 +201,9 @@ namespace vcs_test_all_03_Syntax2
 
         //------------------------------------------------------------  # 60個
 
-        private void CallOut(out int x, out int y)
-        {
-            int z;
-            x = 20;
-            y = 30;
-            richTextBox1.Text += string.Format("\n方法內 交換前\t\t\t: x= {0}  y={1} ", x, y);
-            z = x;
-            x = y;
-            y = z;
-            richTextBox1.Text += string.Format("\n方法內 交換後\t\t\t: x= {0}  y={1} ", x, y);
-        }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //測試out
-
-            richTextBox1.Text += "\n  **** Call Out 傳出參數 **** \n";
-            int a, b;
-            richTextBox1.Text += "\n呼叫敘述 未進入方法前  a 和 b 未設定初值\n";
-            CallOut(out a, out b);
-            richTextBox1.Text += string.Format("\n呼叫敘述 離開方法回主程式\t: a= {0}  b={1}", a, b) + "\n";
         }
 
         //------------------------------------------------------------  # 60個

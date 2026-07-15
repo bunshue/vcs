@@ -41,16 +41,11 @@ namespace vcs_test_all_05_Print2
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             printPreviewDialog0.Document = printDocument0;
             printDialog0.Document = printDocument0;
             pageSetupDialog0.Document = printDocument0;
-            textBox1.ScrollBars = ScrollBars.Both;
-            textBox1.Font = new Font("標楷體", 24, FontStyle.Regular);
-            textBox1.Text =
-                "老來多驚夢，" + Environment.NewLine +
-                "似有獻刀人，" + Environment.NewLine +
-                "醒來懼銅鏡，" + Environment.NewLine +
-                "怕顯董賊身。";
 
             button20.Enabled = false;
             button21.Enabled = false;
@@ -80,9 +75,6 @@ namespace vcs_test_all_05_Print2
             groupBox4.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             groupBox5.Location = new Point(x_st + dx * 1, y_st + dy * 1);
 
-            dy = 60 + 10;
-            textBox1.Size = new Size(240, 180);
-            textBox1.Location = new Point(x_st + dx * 3 - 50, y_st + dy * 4 + 20);
             printPreviewControl1.Size = new Size(240, 180);
             printPreviewControl1.Location = new Point(x_st + dx * 3 - 50, y_st + dy * 7);
 
@@ -146,25 +138,10 @@ namespace vcs_test_all_05_Print2
 
         private void printDocument0_PrintPage(object sender, PrintPageEventArgs e)
         {
-            Graphics g = e.Graphics;
-            Font prnFont = new Font(textBox1.Font.Name, textBox1.Font.Size, textBox1.Font.Style);
-            SolidBrush prnBrush = new SolidBrush(textBox1.ForeColor);
-            Single left = printDocument0.DefaultPageSettings.Margins.Left - 10;
-            Single top = printDocument0.DefaultPageSettings.Margins.Top - 20;
-            g.DrawString(textBox1.Text, prnFont, prnBrush, left, top);
-            g.DrawRectangle(Pens.Red, 50, 50, 300, 200);
-            int W = printDocument0.DefaultPageSettings.Bounds.Width;
-            int H = printDocument0.DefaultPageSettings.Bounds.Height;
-            g.DrawRectangle(Pens.Red, 20, 20, W - 40, H - 40);
         }
 
         private void button00_Click(object sender, EventArgs e)
         {
-            //版面設定
-            if (pageSetupDialog0.ShowDialog() == DialogResult.OK)
-            {
-                printDocument0.DefaultPageSettings = pageSetupDialog0.PageSettings;
-            }
         }
 
         private void button01_Click(object sender, EventArgs e)
@@ -174,25 +151,10 @@ namespace vcs_test_all_05_Print2
 
         private void button02_Click(object sender, EventArgs e)
         {
-            //預覽列印
-            //加入PrintDocument 和 PrintPreviewDialog
-            //printPreviewDialog1屬性之Document選printDocument1
-            //編輯 printDocument1_PrintPage
-
-            //無印表機也可以預覽列印
-
-            printPreviewDialog0.ClientSize = new Size(500, 600);
-            printPreviewDialog0.ShowDialog();
         }
 
         private void button03_Click(object sender, EventArgs e)
         {
-            //列印
-            if (printDialog0.ShowDialog() == DialogResult.OK)
-            {
-                //Print()方法會觸動PrintDocument控制項的PrintPage事件
-                printDocument0.Print();
-            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -574,6 +536,3 @@ namespace vcs_test_all_05_Print2
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-/*  可搬出
-
- */

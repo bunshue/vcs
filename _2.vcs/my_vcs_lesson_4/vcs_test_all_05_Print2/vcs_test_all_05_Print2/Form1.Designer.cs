@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.bt_clear = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.pageSetupDialog0 = new System.Windows.Forms.PageSetupDialog();
             this.printDialog0 = new System.Windows.Forms.PrintDialog();
             this.printDocument0 = new System.Drawing.Printing.PrintDocument();
@@ -112,15 +111,6 @@
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 122;
             this.richTextBox1.Text = "";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(667, 343);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 100);
-            this.textBox1.TabIndex = 145;
             // 
             // printDialog0
             // 
@@ -627,7 +617,6 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox0);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
             this.Name = "Form1";
@@ -640,7 +629,6 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -648,7 +636,6 @@
 
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.PageSetupDialog pageSetupDialog0;
         private System.Windows.Forms.PrintDialog printDialog0;
         private System.Drawing.Printing.PrintDocument printDocument0;

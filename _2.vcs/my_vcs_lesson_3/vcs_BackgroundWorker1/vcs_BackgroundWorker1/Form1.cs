@@ -132,13 +132,32 @@ namespace vcs_BackgroundWorker1
             return sum;
         }
 
+        private const int WIDTH = 100;
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             int r = 50;
             int cx = 770;
             int cy = 80;
+            int x_st = cx - r;
+            int y_st = cy - r;
 
-            e.Graphics.DrawEllipse(Pens.Red, cx - r, cy - r, r * 2, r * 2);
+            //e.Graphics.DrawEllipse(Pens.Red, cx - r, cy - r, r * 2, r * 2);
+
+            Brush b;
+
+            int used = 123;
+            int total = 360;
+            int used_angle = (int)(used * 360 / total);
+
+            b = new SolidBrush(Color.LightGreen);
+            e.Graphics.FillEllipse(b, x_st + WIDTH / 10, y_st + WIDTH / 10, WIDTH * 80 / 100, WIDTH * 80 / 100);
+
+            b = new SolidBrush(Color.Red);
+            e.Graphics.FillPie(b, x_st + WIDTH / 10, y_st + WIDTH / 10, WIDTH * 80 / 100, WIDTH * 80 / 100, -180, used_angle);
+
+            b = new SolidBrush(Color.White);
+            e.Graphics.FillEllipse(b, x_st + WIDTH / 4, y_st + WIDTH / 4, WIDTH / 2, WIDTH / 2);
+
         }
 
         //------------------------------------------------------------  # 60個

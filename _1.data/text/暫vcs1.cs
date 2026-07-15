@@ -546,7 +546,6 @@ printDocument_pascal
             WriteLine($"字元 {key}");
 
 
-
 MessageBox.Show("輸入的ASCII碼為" + Convert.ToByte(e.KeyChar).ToString());
 
 //------------------------------------------------------------  # 60個
@@ -6629,9 +6628,9 @@ Code：
 double i;
 
 if (double.TryParse(textBox1.Text, out i))
- MessageBox.Show("為數值!!");
+	MessageBox.Show("為數值!!");
 else
- MessageBox.Show("非數值!!");
+	MessageBox.Show("非數值!!");
 
 ----------------準備加到vcs範例裏 SP vcs vcs----------------
 
@@ -6657,20 +6656,20 @@ using System.Net.Sockets;
 
         // 判斷IP位址是為否回送位址
         if (IPAddress.IsLoopback(address) && address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-          // 為IPv4及回送位址
-          MessageBox.Show(address.ToString() + " is a IPv4 loopback address.", "IP Address",
-            MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+		// 為IPv4及回送位址
+		MessageBox.Show(address.ToString() + " is a IPv4 loopback address.", "IP Address",
+		MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
         else if (IPAddress.IsLoopback(address) && address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6)
-          // 為IPv6及回送位址
-          MessageBox.Show(address.ToString() + " is a IPv6 loopback address.", "IP Address",
-            MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+		// 為IPv6及回送位址
+		MessageBox.Show(address.ToString() + " is a IPv6 loopback address.", "IP Address",
+		MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
         else
-          MessageBox.Show(address.ToString() + " is not a loopback address.", "IP Address",
-            MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+		MessageBox.Show(address.ToString() + " is not a loopback address.", "IP Address",
+		MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
       }
       catch (Exception ex)
       {
-        Console.WriteLine(ex.Message);
+		Console.WriteLine(ex.Message);
       }
 
 //------------------------------------------------------------  # 60個      
@@ -7960,10 +7959,6 @@ rtb
 // ASC，即為ascending表示升冪
 // DESC，即為descening表示降冪
 
-if (MessageBox.Show("是否刪除？", "小心", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-if (MessageBox.Show("是否刪除？", "小心", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-
-
 //------------------------------------------------------------  # 60個
 //------------------------------------------------------------  # 60個
 
@@ -8297,3 +8292,9 @@ string txt = node.Id.ToString();
 SizeF txt_size = gr.MeasureString(txt, this.Font);
 gr.DrawString(txt, this.Font, text_brush, node.Location.X - txt_size.Width / 2, node.Location.Y - txt_size.Height / 2);
 
+
+
+this.Bounds = new Rectangle(0, 0, width, height);
+
+
+sender as

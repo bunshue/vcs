@@ -162,7 +162,25 @@ namespace vcs_test_all_03_Syntax1
             {
                 MessageBox.Show("取得字串：" + name);
             }
+
+            //------------------------------------------------------------  # 60個
+
+            string[] names = { "John", "Mary", "Emily", "Peppa", "Candy", "Eric" };
+            int[] score = { 85, 90, 78, 94, 72, 88 };
+
+            richTextBox1.Text += "所有名字\n";
+            foreach (string nn in names)
+            {
+                richTextBox1.Text += nn + "\n";
+            }
+            richTextBox1.Text += "所有成績\n";
+            foreach (int ss in score)
+            {
+                richTextBox1.Text += ss.ToString() + "\n";
+            }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -183,19 +201,6 @@ namespace vcs_test_all_03_Syntax1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string[] name = { "John", "Mary", "Emily", "Peppa", "Candy", "Eric" };
-            int[] score = { 85, 90, 78, 94, 72, 88 };
-
-            richTextBox1.Text += "所有名字\n";
-            foreach (string nn in name)
-            {
-                richTextBox1.Text += nn + "\n";
-            }
-            richTextBox1.Text += "所有成績\n";
-            foreach (int ss in score)
-            {
-                richTextBox1.Text += ss.ToString() + "\n";
-            }
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -255,20 +260,6 @@ namespace vcs_test_all_03_Syntax1
 
         private void button7_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("1您是合法的使用者！！");
-            MessageBox.Show("2訊息內容_回覆按鈕OK", "標題", MessageBoxButtons.OK);
-            MessageBox.Show("3訊息內容_回覆按鈕OKCancel", "標題", MessageBoxButtons.OKCancel);
-            MessageBox.Show("4訊息內容_回覆按鈕AbortRetryIgnore", "標題", MessageBoxButtons.AbortRetryIgnore);
-            MessageBox.Show("5訊息內容_回覆按鈕YesNoCancel", "標題", MessageBoxButtons.YesNoCancel);
-            MessageBox.Show("6訊息內容_回覆按鈕YesNo", "標題", MessageBoxButtons.YesNo);
-            MessageBox.Show("7訊息內容_回覆按鈕RetryCancel", "標題", MessageBoxButtons.RetryCancel);
-
-            MessageBox.Show(" 8Question圖示", "圖示設定", MessageBoxButtons.OK, MessageBoxIcon.Question);
-            MessageBox.Show(" 9Question圖示", "圖示設定", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            MessageBox.Show("10Question圖示", "圖示設定", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            MessageBox.Show("11Question圖示", "圖示設定", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            MessageBox.Show("12Question圖示", "圖示設定", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-            MessageBox.Show("13Question圖示", "圖示設定", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -388,6 +379,9 @@ namespace vcs_test_all_03_Syntax1
 
         private void button15_Click(object sender, EventArgs e)
         {
+
+
+
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -635,6 +629,12 @@ namespace vcs_test_all_03_Syntax1
             richTextBox1.Text += "y_min = " + y_min.ToString() + "\t" + "y_max = " + y_max.ToString() + "\n";
 
             //------------------------------------------------------------  # 60個
+
+            richTextBox1.Text += "\n  **** Call Out 傳出參數 **** \n";
+            //int a, b;
+            richTextBox1.Text += "\n呼叫敘述 未進入方法前  a 和 b 未設定初值\n";
+            CallOut(out a, out b);
+            richTextBox1.Text += string.Format("\n呼叫敘述 離開方法回主程式\t: a= {0}  b={1}", a, b) + "\n";
         }
 
         private void GetAverageProduct(int a, int b, int c, out float average, out int product)
@@ -661,6 +661,18 @@ namespace vcs_test_all_03_Syntax1
                     y_max = array[i];
                 }
             }
+        }
+
+        private void CallOut(out int x, out int y)
+        {
+            int z;
+            x = 20;
+            y = 30;
+            richTextBox1.Text += string.Format("\n方法內 交換前\t\t\t: x= {0}  y={1} ", x, y);
+            z = x;
+            x = y;
+            y = z;
+            richTextBox1.Text += string.Format("\n方法內 交換後\t\t\t: x= {0}  y={1} ", x, y);
         }
 
         //------------------------------------------------------------  # 60個
@@ -721,6 +733,8 @@ namespace vcs_test_all_03_Syntax1
         }
         //ASCII Table SP
 
+        //------------------------------------------------------------  # 60個
+
         private void button28_Click(object sender, EventArgs e)
         {
             for (int j = 0; j < 32; j++)
@@ -744,6 +758,8 @@ namespace vcs_test_all_03_Syntax1
                 richTextBox1.Text += "</tr>\n";
             }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button29_Click(object sender, EventArgs e)
         {
@@ -1085,16 +1101,6 @@ namespace vcs_test_all_03_Syntax1
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-
-*/
-
-
-
-
-
 
 
 /*
