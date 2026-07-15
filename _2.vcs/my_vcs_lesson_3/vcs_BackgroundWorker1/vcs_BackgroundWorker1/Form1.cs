@@ -16,7 +16,6 @@ namespace vcs_BackgroundWorker1
     public partial class Form1 : Form
     {
         private BackgroundWorker backgroundWorker0 = new BackgroundWorker();
-        private BackgroundWorker backgroundWorker1 = new BackgroundWorker();
         private BackgroundWorker backgroundWorker2 = new BackgroundWorker();
         private BackgroundWorker backgroundWorker4 = new BackgroundWorker();
         private BackgroundWorker backgroundWorker6 = new BackgroundWorker();//多線程顯示運行狀態
@@ -38,22 +37,13 @@ namespace vcs_BackgroundWorker1
 
             //------------------------------------------------------------  # 60個
 
+            //繫結事件
             backgroundWorker0.DoWork += backgroundWorker0_DoWork;
-            backgroundWorker0.RunWorkerCompleted += backgroundWorker0_RunWorkerCompleted;
             backgroundWorker0.ProgressChanged += backgroundWorker0_ProgressChanged;
+            backgroundWorker0.RunWorkerCompleted += backgroundWorker0_RunWorkerCompleted;
 
             backgroundWorker0.WorkerSupportsCancellation = true;  // 是否支援非同步取消
             backgroundWorker0.WorkerReportsProgress = true;  // 是否報告進度
-
-            //------------------------------------------------------------  # 60個
-
-            //繫結事件
-            backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker1_DoWork);
-            backgroundWorker1.ProgressChanged += new ProgressChangedEventHandler(backgroundWorker1_ProgressChanged);
-            backgroundWorker1.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundWorker1_RunWorkerCompleted);
-
-            backgroundWorker1.WorkerSupportsCancellation = true;  // 是否支援非同步取消
-            backgroundWorker1.WorkerReportsProgress = true;  // 是否報告進度
 
             //------------------------------------------------------------  # 60個
 
@@ -153,6 +143,10 @@ namespace vcs_BackgroundWorker1
 
         //------------------------------------------------------------  # 60個
 
+        // 控制代碼sender指向的就是該BackgroundWorker
+        // e.Cancel 是否應該取消事件
+        // e.Result  獲取或設定非同步作業結果的值(在RunWorkerCompleted事件可能會使用到)
+        // e.Result是個Object, 表示非同步作業的結果
         private void backgroundWorker0_DoWork(object sender, DoWorkEventArgs e)
         {
             richTextBox1.Text += "backgroundWorker0_DoWork\n";
@@ -161,182 +155,11 @@ namespace vcs_BackgroundWorker1
 
             // 模擬耗時工作
             long sum = 0;
-            for (int i = 0; i < 1000000000; i++)
-            {
-                sum += i;
-                if ((i % 100000000) == 0)
-                {
-                    progressBar0.Value = i / 10000000;
-                    label0.Text = progressBar0.Value.ToString() + " %";
-                    Application.DoEvents();
-                    if (worker.CancellationPending == true)  // 檢查是否有收到取消命令
-                    {
-                        // 回傳取消
-                        e.Cancel = true;
-                        break;
-                    }
-                    worker.ReportProgress(i / 10000000);  // 向ProgressChanged報告進度
-                }
-            }
-            e.Result = sum;  // e.Result是個Object, 表示非同步作業的結果。
-        }
-
-        private void backgroundWorker0_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            richTextBox1.Text += "BGW0 執行 ProgressChanged() " + e.ProgressPercentage.ToString() + " %\n";
-
-            //e.ProgressPercentage  獲取非同步作業進度的百分比
-            progressBar0.Value = e.ProgressPercentage;
-            Application.DoEvents();
-        }
-
-        private void backgroundWorker0_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            richTextBox1.Text += "BGW0 執行 RunWorkerCompleted()\t完成\n";
-
-            string result = string.Empty;
-            if (e.Cancelled == true)
-            {
-                result = "取消";
-            }
-            else
-            {
-                result = "完成\n";
-                progressBar0.Value = 100;
-                label0.Text = progressBar0.Value.ToString() + " %";
-                Application.DoEvents();
-            }
-            if (e.Error != null)
-            {
-                richTextBox1.Text += "錯誤： " + e.Error.Message + "\n";
-            }
-            richTextBox1.Text += "BGW0 結束, 結果 : " + result + "\n";
-            flag_bgw0_RunWorkerAsync = false;
-            button0.Text = "使用 BackgroundWorker0";
-        }
-
-        bool flag_bgw0_RunWorkerAsync = false;
-        private void button0_Click(object sender, EventArgs e)
-        {
-            if (flag_bgw0_RunWorkerAsync == false)
-            {
-                flag_bgw0_RunWorkerAsync = true;
-                button0.Text = "停止BackgroundWorker0";
-
-                progressBar0.Value = 0;
-                label0.Text = progressBar0.Value.ToString() + " %";
-                Application.DoEvents();
-                if (backgroundWorker0.IsBusy == false)
-                {
-                    // 啟動BackgroundWorker
-                    richTextBox1.Text += "啟動BackgroundWorker0\n";
-                    backgroundWorker0.RunWorkerAsync();  // 啟動非同步背景執行緒, 將觸發BackgroundWorker.DoWork事件
-                }
-            }
-            else
-            {
-                flag_bgw0_RunWorkerAsync = false;
-                button0.Text = "啟動BackgroundWorker0";
-
-                // 停止BackgroundWorker
-                richTextBox1.Text += "停止BackgroundWorker0\n";
-                backgroundWorker0.CancelAsync();  // 取消非同步背景執行緒
-            }
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        /// 控制代碼sender指向的就是該BackgroundWorker。
-        /// e.Cancel 是否應該取消事件
-        /// e.Result  獲取或設定非同步作業結果的值(在RunWorkerCompleted事件可能會使用到)
-        /// e.Result是個Object, 表示非同步作業的結果。
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {
-            BackgroundWorker worker = sender as BackgroundWorker;
-
-            // 模擬耗時工作
-            for (int i = 1; i <= 10; i++)
-            {
-                if (worker.CancellationPending == true)  // 檢查是否有收到取消命令
-                {
-                    // 回傳取消
-                    e.Cancel = true;
-                    break;
-                }
-                else
-                {
-                    Thread.Sleep(1000);  // 執行耗時作業
-                    string userState = "進行中";  // 狀態物件
-                    worker.ReportProgress(i * 10, userState);  // 向ProgressChanged報告進度
-                }
-            }
-            e.Result = "結束";  // e.Result是個Object, 表示非同步作業的結果。
-        }
-
-        // 進度重新整理
-        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            //接收ReportProgress方法傳遞過來的userState
-            string state = (string)e.UserState;
-            Console.WriteLine("狀態 : " + state);
-
-            //e.ProgressPercentage  獲取非同步作業進度的百分比
-            Console.WriteLine("進度 : " + e.ProgressPercentage.ToString() + " %");
-        }
-
-        /// e.Cancelled指示非同步作業是否已被取消
-        /// e.Error 指示非同步作業期間發生的錯誤
-        /// e.Result 獲取非同步作業結果的值,即DoWork事件中，Result設定的值。    
-        /// e.Result是個Object, 表示非同步作業的結果。
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            //判斷是否使用者手動取消，若程式要支援此處功能，需要程式中有cancel的動作，並在該動作中將e.cancel置為true
-            if (e.Cancelled == true)
-            {
-                //新增使用者手動取消的動作，並在標籤控制元件中進行提示  
-                Console.WriteLine("作業已經被取消！");
-            }
-            //判斷是否由錯誤造成意外中止
-            else if (e.Error != null)
-            {
-                //若發生錯誤，在標籤控制元件中顯示錯誤資訊
-                Console.WriteLine("作業發生錯誤！");
-            }
-            //判斷是否正常結束
-            else
-            {
-                //新增正常結束之後的收尾動作，並在標籤控制元件中進行提示
-                // e.Result是個Object, 表示非同步作業的結果。
-                Console.WriteLine("執行結果：{e.Result.ToString()}！");
-            }
-            //richTextBox1.Text += "BGW0 結束, 結果 : " + result + "\n";
-            //flag_bgw1_RunWorkerAsync = false;
-            button1.Text = "使用 BackgroundWorker1";
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (backgroundWorker1.IsBusy == false)  // 判斷BackgroundWorker 是否正在執行非同步作業。
-            {
-                richTextBox1.Text += "啟動BackgroundWorker1\n";
-                backgroundWorker1.RunWorkerAsync("object argument");  // 啟動非同步背景執行緒, 將觸發BackgroundWorker.DoWork事件, 有參數
-            }
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
-        {
-            richTextBox1.Text += "backgroundWorker2_DoWork\n";
-
-            BackgroundWorker worker = sender as BackgroundWorker;
 
             string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_哆啦A夢\doraemon1.jpg";
-
             Bitmap bmp = new Bitmap(filename);
             int W = bmp.Width;
             int H = bmp.Height;
-
             Color pixel;
             byte r = 0;
             byte g = 0;
@@ -355,6 +178,7 @@ namespace vcs_BackgroundWorker1
                     //灰階
                     gray = (byte)(r * 0.299 + g * 0.587 + b * 0.114);
                     bmp.SetPixel(x, y, Color.FromArgb(gray, gray, gray));//設定像素值
+                    sum++;
                 }
                 if (worker.CancellationPending == true)  // 檢查是否有收到取消命令
                 {
@@ -362,15 +186,19 @@ namespace vcs_BackgroundWorker1
                     e.Cancel = true;
                     break;
                 }
-                //worker.ReportProgress((int)(y * 100 / H) + 1);  // 向ProgressChanged報告進度
+                //string userState = "進行中";  // 狀態物件
+                //worker.ReportProgress((int)(y * 100 / H) + 1, userState);  // 向ProgressChanged報告進度
                 progressBar0.Value = (int)(y * 100 / H) + 1;
                 label0.Text = progressBar0.Value.ToString() + " %";
                 Application.DoEvents();
             }
             pictureBox1.Image = bmp;
+            e.Result = sum;  // e.Result是個Object, 表示非同步作業的結果
+            //e.Result = "結束";  // e.Result是個Object, 表示非同步作業的結果
         }
 
-        private void backgroundWorker2_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        // 進度重新整理
+        private void backgroundWorker0_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             richTextBox1.Text += "BGW0 執行 ProgressChanged() " + e.ProgressPercentage.ToString() + " %\n";
 
@@ -378,32 +206,60 @@ namespace vcs_BackgroundWorker1
             progressBar0.Value = e.ProgressPercentage;
             label0.Text = progressBar0.Value.ToString() + " %";
             Application.DoEvents();
+
+            //接收ReportProgress方法傳遞過來的userState
+            string state = (string)e.UserState;
+            Console.WriteLine("狀態 : " + state);
+
+            //e.ProgressPercentage  獲取非同步作業進度的百分比
+            Console.WriteLine("進度 : " + e.ProgressPercentage.ToString() + " %");
         }
 
-        private void backgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        // e.Cancelled指示非同步作業是否已被取消
+        // e.Error 指示非同步作業期間發生的錯誤
+        // e.Result 獲取非同步作業結果的值,即DoWork事件中，Result設定的值
+        // e.Result是個Object, 表示非同步作業的結果
+        private void backgroundWorker0_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             richTextBox1.Text += "BGW0 執行 RunWorkerCompleted()\t完成\n";
 
             string result = string.Empty;
+            //判斷是否使用者手動取消，若程式要支援此處功能，需要程式中有cancel的動作，並在該動作中將e.cancel置為true
             if (e.Cancelled == true)
             {
+                //新增使用者手動取消的動作，並在標籤控制元件中進行提示  
+                Console.WriteLine("作業已經被取消！");
                 result = "取消";
             }
+            //判斷是否由錯誤造成意外中止
+            else if (e.Error != null)
+            {
+                //若發生錯誤，在標籤控制元件中顯示錯誤資訊
+                Console.WriteLine("作業發生錯誤！");
+            }
+            //判斷是否正常結束
             else
             {
-                result = "完成\n";
+                result = "完成";
+                progressBar0.Value = 100;
+                label0.Text = progressBar0.Value.ToString() + " %";
+                Application.DoEvents();
+                //新增正常結束之後的收尾動作，並在標籤控制元件中進行提示
+                // e.Result是個Object, 表示非同步作業的結果
+                Console.WriteLine("執行結果：{e.Result.ToString()}！");
             }
             if (e.Error != null)
             {
                 richTextBox1.Text += "錯誤： " + e.Error.Message + "\n";
             }
-            richTextBox1.Text += "BGW2 結束, 結果 : " + result + "\n";
-            flag_bgw2_RunWorkerAsync = false;
-            button2.Text = "使用 BackgroundWorker0";
+            richTextBox1.Text += "BGW0 結束, 結果 : " + result + "\n";
+            //richTextBox1.Text += "BGW0 結束, 結果 : " + e.Result.ToString() + "\n";
+            flag_bgw0_RunWorkerAsync = false;
+            button0.Text = "使用 BackgroundWorker0";
         }
 
-        bool flag_bgw2_RunWorkerAsync = false;
-        private void button2_Click(object sender, EventArgs e)
+        bool flag_bgw0_RunWorkerAsync = false;
+        private void button0_Click(object sender, EventArgs e)
         {
             //不使用BackgroundWorker
             /*
@@ -414,31 +270,35 @@ namespace vcs_BackgroundWorker1
             pictureBox1.Image = bmp;
             */
 
-            if (flag_bgw2_RunWorkerAsync == false)
+            pictureBox1.Image = null;
+
+            if (flag_bgw0_RunWorkerAsync == false)
             {
-                flag_bgw2_RunWorkerAsync = true;
+                flag_bgw0_RunWorkerAsync = true;
                 button0.Text = "停止BackgroundWorker0";
 
                 progressBar0.Value = 0;
                 label0.Text = progressBar0.Value.ToString() + " %";
                 Application.DoEvents();
-                if (backgroundWorker2.IsBusy == false)
+
+                // 判斷BackgroundWorker 是否正在執行非同步作業
+                if (backgroundWorker0.IsBusy == false)
                 {
                     // 啟動BackgroundWorker
-                    richTextBox1.Text += "啟動BackgroundWorker2\n";
-                    backgroundWorker2.RunWorkerAsync();  // 啟動非同步背景執行緒, 將觸發BackgroundWorker.DoWork事件
+                    richTextBox1.Text += "啟動BackgroundWorker0\n";
+                    backgroundWorker0.RunWorkerAsync();  // 啟動非同步背景執行緒, 將觸發BackgroundWorker.DoWork事件
+                    //backgroundWorker0.RunWorkerAsync("object argument");  // 啟動非同步背景執行緒, 將觸發BackgroundWorker.DoWork事件, 有參數
                 }
             }
             else
             {
-                flag_bgw2_RunWorkerAsync = false;
-                button0.Text = "啟動BackgroundWorker2";
+                flag_bgw0_RunWorkerAsync = false;
+                button0.Text = "啟動BackgroundWorker0";
 
                 // 停止BackgroundWorker
-                richTextBox1.Text += "停止BackgroundWorker2\n";
-                backgroundWorker2.CancelAsync();  // 取消非同步背景執行緒
+                richTextBox1.Text += "停止BackgroundWorker0\n";
+                backgroundWorker0.CancelAsync();  // 取消非同步背景執行緒
             }
-
         }
 
         Bitmap image_process_pixel1(string filename)
@@ -468,6 +328,31 @@ namespace vcs_BackgroundWorker1
                 }
             }
             return bmp;
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
+        {
+        }
+
+        private void backgroundWorker2_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+        }
+
+        private void backgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+        }
+
+        bool flag_bgw2_RunWorkerAsync = false;
+        private void button2_Click(object sender, EventArgs e)
+        {
         }
 
         //------------------------------------------------------------  # 60個
@@ -513,7 +398,6 @@ namespace vcs_BackgroundWorker1
 
             richTextBox1.Text += "啟動BackgroundWorker3\n";
             backgroundWorker3.RunWorkerAsync(new string[3] { message0, message1, message2 });
-
         }
 
         //------------------------------------------------------------  # 60個
@@ -608,9 +492,3 @@ namespace vcs_BackgroundWorker1
 /*  可搬出
 
 */
-
-//label6.Text = "使用BackgroundWorker 完成";
-//richTextBox1.Text += "BG6 完成! 結果 = " + e.Result.ToString() + "\n";
-// e.Result是個Object, 表示非同步作業的結果。
-// e.Result = sum;  // e.Result是個Object, 表示非同步作業的結果。
-

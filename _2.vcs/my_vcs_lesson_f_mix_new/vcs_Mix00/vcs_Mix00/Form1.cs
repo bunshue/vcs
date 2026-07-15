@@ -1379,28 +1379,13 @@ namespace vcs_Mix00
             */
         }
 
-        private void CallOut(out int x, out int y)
-        {
-            int z;
-            x = 20;
-            y = 30;
-            richTextBox1.Text += string.Format("\n方法內 交換前\t\t\t: x= {0}  y={1} ", x, y);
-            z = x;
-            x = y;
-            y = z;
-            richTextBox1.Text += string.Format("\n方法內 交換後\t\t\t: x= {0}  y={1} ", x, y);
-        }
+        //------------------------------------------------------------  # 60個
 
         private void button34_Click(object sender, EventArgs e)
         {
-            //測試out
-
-            richTextBox1.Text += "\n  **** Call Out 傳出參數 **** \n";
-            int a, b;
-            richTextBox1.Text += "\n呼叫敘述 未進入方法前  a 和 b 未設定初值\n";
-            CallOut(out a, out b);
-            richTextBox1.Text += string.Format("\n呼叫敘述 離開方法回主程式\t: a= {0}  b={1}", a, b) + "\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button35_Click(object sender, EventArgs e)
         {

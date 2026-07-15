@@ -1549,10 +1549,6 @@ namespace vcs_test_all_02_Array
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-/*  可搬出
-
-*/
-
 /*
 //獲取二維陣列的長度
 
@@ -1652,5 +1648,33 @@ List<int> myLists = new List<int>();
 
 //------------------------------------------------------------  # 60個
 
+//製作一個PictureBox Array
+            // Make an array holding the PictureBoxes.
+            PictureBox[] pics = { PictureBox1, PictureBox2, PictureBox3, PictureBox4 };
+
+//製作一個CheckBox Array
+        // Arrays of controls.
+        private CheckBox[] BreakfastControls, LunchControls, DinnerControls;
+
+        // Initialize the arrays of controls.
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            BreakfastControls = new CheckBox[] { chkCereal, chkToast, chkOrangeJuice };
+            LunchControls = new CheckBox[] { chkSandwhich, chkChips, chkSoda };
+            DinnerControls = new CheckBox[] { chkSalad, chkTofuburger, chkWine };
+        }
+
+
+
+array
+整數二維陣列
+            int[,] pbox = new int[9, 2];    //[Col,Row]
+            richTextBox1.Text += "COLUMN = " + pbox.GetLength(0).ToString() + "\n";    //9
+            richTextBox1.Text += "ROW = " + pbox.GetLength(1).ToString() + "\n";    //2
+
+
 */
+
+
+
 

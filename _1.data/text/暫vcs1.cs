@@ -288,39 +288,6 @@ TextBox設定星號
 
 //------------------------------------------------------------  # 60個
 
-TrackBar範例
-
-            trackBar1.Minimum = 0;
-            trackBar1.Maximum = 255;
-            trackBar1.TickFrequency = 30;
-            trackBar1.LargeChange = 30;
-            trackBar1.SmallChange = 10;
-
-            trackBar2.Minimum = 0;
-            trackBar2.Maximum = 255;
-            trackBar2.TickFrequency = 30;
-            trackBar2.LargeChange = 30;
-            trackBar2.SmallChange = 10;
-
-            trackBar3.Minimum = 0;
-            trackBar3.Maximum = 255;
-            trackBar3.TickFrequency = 30;
-            trackBar3.LargeChange = 30;
-            trackBar3.SmallChange = 10;
-
-            label1.Text = "R";
-            label2.Text = "G";
-            label3.Text = "B";
-            label7.Text = "示範：";
-
-//scroll方法
-            label4.Text = trackBar1.Value.ToString();
-            label5.Text = trackBar2.Value.ToString();
-            label6.Text = trackBar3.Value.ToString();
-            textBox1.BackColor = Color.FromArgb(trackBar1.Value, trackBar2.Value, trackBar3.Value);
-
-//------------------------------------------------------------  # 60個
-
 XeSS: Intel
 nVidia : DLSS
 AMD : FSR super sampling
@@ -359,10 +326,6 @@ plt.suptitle(
 )
 
 //------------------------------------------------------------  # 60個
-
-cccc
-            numericUpDown1.Maximum = new System.Decimal(new int[] { 150, 0, 0, 0 });
-
 //------------------------------------------------------------  # 60個
 
 vcs_test_all_04_Dialog
@@ -700,23 +663,19 @@ https://c.biancheng.net/view/ply3egf.html
 
 //------------------------------------------------------------  # 60個
 
-//------------------------------------------------------------  # 60個
-
-            pictureBox1.Image = bitmap1; //顯示在 pictureBox1 圖片控制項中
-            this.BackgroundImage = bitmap1;//顯示在 表單中
+pictureBox1.Image = bitmap1; //顯示在 pictureBox1 圖片控制項中
+this.BackgroundImage = bitmap1;//顯示在 表單中
         
+string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+this.BackgroundImage = Image.FromFile(filename);	//設置表單的背景圖片, Image.FromFile 出來的是Image格式
+this.BackgroundImage = Bitmap.FromFile(filename);	//設置表單的背景圖片, Bitmap.FromFile出來的是Image格式
+
 //------------------------------------------------------------  # 60個
 
 splitContainer1
 
 splitContainer1 預設兩個Panel, Panel1 和 Panel2，Dock 選 DockStyle.Fill
 放控件至Panel中，Dock 選 DockStyle.Fill
-
-//------------------------------------------------------------  # 60個
-
-cccc
-
-vcs 之 radioButton 可以用Image, Text設為空
 
 //------------------------------------------------------------  # 60個
 
@@ -1572,8 +1531,6 @@ private bool blnColorTicker;
             }
         }
 
-//------------------------------------------------------------  # 60個
-
 MotionDetection1_CheckedChanged(object sender, EventArgs e)
 this.toggleOption(0, 0, true);
 this.toggleOption(0, 0, false);
@@ -1624,6 +1581,7 @@ this.toggleOption(0, 2, false);
 
 //------------------------------------------------------------  # 60個
 
+cccc
             //checkedListBox1
             // 將chkListLot核取清單方塊所有項目設為不勾選
             for (int i = 0; i < checkedListBox1.Items.Count; i++)
@@ -1633,11 +1591,6 @@ this.toggleOption(0, 2, false);
 
 //------------------------------------------------------------  # 60個
 注意：Image用后请手动释放pictureBox.Image.Dispose();否则图片大些的话，转转下内存就猛升了（一点经验，敬请笑纳）。
-
-            //表單預設參數
-            richTextBox1.Text += "AAA = " + SystemInformation.FrameBorderSize.Width.ToString() + "\n";  //8
-            richTextBox1.Text += "BBB = " + SystemInformation.FrameBorderSize.Height.ToString() + "\n"; //8
-            richTextBox1.Text += "CCC = " + SystemInformation.CaptionHeight.ToString() + "\n";          //23
 
 //------------------------------------------------------------  # 60個
 
@@ -1653,70 +1606,6 @@ ScreenSaver最簡版
                      return(char.IsDigit(input));   //检查是否为数字
               }
         				
-//------------------------------------------------------------  # 60個
-
-//提取HTML代碼中文字的C#函數
-
-/// <summary>
-  /// 去除HTML標記
-  /// </summary>
-  /// <param name="strHtml">包括HTML的源碼 </param>
-  /// <returns>已經去除後的文字</returns>
-  public static string StripHTML(string strHtml)
-  {
-   string [] aryReg ={
-          @"<script[^>]*?>.*?</script>",
-
-          @"<(\/\s*)?!?((\w+:)?\w+)(\w+(\s*=?\s*(([""'])(\\[""'tbnr]|[^\7])*?\7|\w+)|.{0})|\s)*?(\/\s*)?>",
-          @"([\r\n])[\s]+",
-          @"&(quot|#34);",
-          @"&(amp|#38);",
-          @"&(lt|#60);",
-          @"&(gt|#62);", 
-          @"&(nbsp|#160);", 
-          @"&(iexcl|#161);",
-          @"&(cent|#162);",
-          @"&(pound|#163);",
-          @"&(copy|#169);",
-          @"&#(\d+);",
-          @"-->",
-          @"<!--.*\n"
-
-         };
-
-   string [] aryRep = {
-           "",
-           "",
-           "",
-           "\"",
-           "&",
-           "<",
-           ">",
-           " ",
-           "\xa1",//chr(161),
-           "\xa2",//chr(162),
-           "\xa3",//chr(163),
-           "\xa9",//chr(169),
-           "",
-           "\r\n",
-           ""
-          };
-
-   string newReg =aryReg[0];
-   string strOutput=strHtml;
-   for(int i = 0;i<aryReg.Length;i++)
-   {
-    Regex regex = new Regex(aryReg[i],RegexOptions.IgnoreCase );
-    strOutput = regex.Replace(strOutput,aryRep[i]);
-   }
-
-   strOutput.Replace("<","");
-   strOutput.Replace(">","");
-   strOutput.Replace("\r\n","");
-
-   return strOutput;
-  }
-
 //------------------------------------------------------------  # 60個
 
 MD5 File 線上工具
@@ -1758,6 +1647,11 @@ MD5具有很好的安全性(因為它具有不可逆的特征,加過密的密文
 
 //C# MD5 校驗32位的字符串
 
+//MD5   32位
+//MD5驗證 32 位元
+//使用Md5Sum算出32位的校驗碼字符串
+//MD5 校驗默認為32位的字符串， 而C#默認的是16位的字節數組，需要略加修改，轉為32個字節的字符串，
+
 //------------------------------------------------------------  # 60個
 
 C#計算文件的MD5值實例
@@ -1771,10 +1665,6 @@ C#計算文件的MD5值實例
 
 //------------------------------------------------------------  # 60個
 
-//MD5   32位
-//MD5驗證 32 位元
-//使用Md5Sum算出32位的校驗碼字符串
-//MD5 校驗默認為32位的字符串， 而C#默認的是16位的字節數組，需要略加修改，轉為32個字節的字符串，
 
 //------------------------------------------------------------  # 60個
 
@@ -1831,20 +1721,8 @@ ProgressBar類是密封(sealed)的，不能再被繼承。
 
 //------------------------------------------------------------  # 60個
 
-[C#] 使用 Regex.Match 從 String 中提出英文或數字
-正規表示式
-
-[abc]： 字元集合
-[^a-z]： 非a-z
-\d ：  數字
-\D ：  非數字
-\s ： 一個空白字元
-\S：  非空白字元
-\w：  單詞字元(a-z,A-Z,0-9,_)
-\W：  非單詞字元
-
-無法嵌入互操作類型“Microsoft.Office.Interop.Excel.ApplicationClass”。請改用適用的接口，interop.excel
-把Microsoft.Office.Interop.Excel.DLL的嵌入互操作類型改為ture就可以了
+無法嵌入互操作類型“Microsoft.Office.Interop.Excel.ApplicationClass”。
+請改用適用的接口，interop.excel，把Microsoft.Office.Interop.Excel.DLL的嵌入互操作類型改為ture就可以了
 
 非1080p的，要標注出來
 
@@ -1852,7 +1730,6 @@ ProgressBar類是密封(sealed)的，不能再被繼承。
 用一個結構陣列List儲存最終資料
 
 richtextbox 直接貼上簡中 會出現亂碼  why?
-
 別人的vcs程式也會這樣嗎？
 
 從一個資料夾中撈出所有檔案 標準版
@@ -2367,13 +2244,15 @@ c# - C#htmlagilitypack Node.InnerHTML不正确区分大小写，如何拉正确�
 
 //------------------------------------------------------------  # 60個
 
-  var response1 = await http.GetByteArrayAsync("http://www.nsfund.ir/news?"+link);
-                String source1 = Encoding.GetEncoding("utf-8").GetString(response1, 0, response1.Length - 1);
-                source1 = WebUtility.HtmlDecode(source1);
-                HtmlDocument resultat1 = new HtmlDocument();
-                resultat1.LoadHtml(source1);
-               var val = resultat1.DocumentNode.SelectSingleNode("//div[@class='news_content_container']").InnerText;
+var response1 = await http.GetByteArrayAsync("http://www.nsfund.ir/news?"+link);
+
+String source1 = Encoding.GetEncoding("utf-8").GetString(response1, 0, response1.Length - 1);
+source1 = WebUtility.HtmlDecode(source1);
+HtmlDocument resultat1 = new HtmlDocument();
+resultat1.LoadHtml(source1);
+var val = resultat1.DocumentNode.SelectSingleNode("//div[@class='news_content_container']").InnerText;
                
+//------------------------------------------------------------  # 60個
 
 dll檔案選sapi.dll
 
@@ -2511,34 +2390,7 @@ Form1隱藏Form2   f2.Hide();
 強制回應表單	Form2 f2 = new Form2();	f2.ShowDialog();
 可以取得回應
 if(f3.DialogResult == DialogREsult.OK)
-  ....
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-            //html轉txt
-            //http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/184774.html
-        }
-
-        /// C#過濾html標簽
-        /// 用正則表達式來做html轉txt
-        public static string Html2Text(string htmlStr)
-        {
-            if (String.IsNullOrEmpty(htmlStr))
-            {
-                return "";
-            }
-            string regEx_style = "<style[^>]*?>[\\s\\S]*?<\\/style>"; //定義style的正則表達式
-            string regEx_script = "<script[^>]*?>[\\s\\S]*?<\\/script>"; //定義script的正則表達式
-            string regEx_html = "<[^>]+>"; //定義HTML標簽的正則表達式
-            htmlStr = Regex.Replace(htmlStr, regEx_style, "");//刪除css
-            htmlStr = Regex.Replace(htmlStr, regEx_script, "");//刪除js
-            htmlStr = Regex.Replace(htmlStr, regEx_html, "");//刪除html標記
-            htmlStr = Regex.Replace(htmlStr, "\\s*|\t|\r|\n", "");//去除tab、空格、空行
-            htmlStr = htmlStr.Replace(" ", "");
-            htmlStr = htmlStr.Replace("\"", ""); //去除異常的引號" " "
-            htmlStr = htmlStr.Replace("\"", ""); //去除異常的引號" " "
-            return htmlStr.Trim();
-        }
+	....
 
 //------------------------------------------------------------  # 60個
 　　
@@ -2620,67 +2472,37 @@ sealed用來修飾類為密封類，阻止該類被繼承。同時對一個類�
 //C# 播放聲音﻿﻿
 
 2.使用System.Media.SoundPlayer播放.wav格式聲音
-　　 SoundPlayer player = new SoundPlayer();
-player.SoundLocation = "sounds/WallHit.wav";
-player.Load(); //同步加載聲音
-player.Play(); //啟用新線程播放
-//player.PlayLooping(); //循環播放模式
-//player.PlaySync(); //UI線程播放
+
+	SoundPlayer player = new SoundPlayer();
+	player.SoundLocation = "sounds/WallHit.wav";
+	player.Load(); //同步加載聲音
+	player.Play(); //啟用新線程播放
+	//player.PlayLooping(); //循環播放模式
+	//player.PlaySync(); //UI線程播放
 
 3.利用Windows Media Player
 
-加載COM組件:ToolBox->Choose Items->COM Components->Windows Media Player
-
-把Windows Media Player控件拖放到Winform窗體中，把axWindowsMediaPlayer1中URL屬性設置為MP3或是AVI的文件路徑。
-
+	加載COM組件:ToolBox->Choose Items->COM Components->Windows Media Player
+	把Windows Media Player控件拖放到Winform窗體中，把axWindowsMediaPlayer1中URL屬性設置為MP3或是AVI的文件路徑。
 
 4.MCI Command String多媒體設備的程序接口
 
-using System.Runtime.InteropServices;
-
-　　public static uint SND_ASYNC = 0x0001;
-　　public static uint SND_FILENAME = 0x00020000;
-　　[DllImport("winmm.dll")]
-　　public static extern uint mciSendString(string lpstrCommand,
-　　string lpstrReturnString, uint uReturnLength, uint hWndCallback);
-　　public void Play()
-　　{
-　　　　mciSendString(@"close temp_alias", null, 0, 0);
-　　　　mciSendString(@"open " "路徑.mp3"" alias temp_alias", null, 0, 0);
-　　　　mciSendString("play temp_alias repeat", null, 0, 0);
-　　}
+	using System.Runtime.InteropServices;
+	
+	public static uint SND_ASYNC = 0x0001;
+	public static uint SND_FILENAME = 0x00020000;
+	[DllImport("winmm.dll")]
+	public static extern uint mciSendString(string lpstrCommand,
+	string lpstrReturnString, uint uReturnLength, uint hWndCallback);
+	public void Play()
+	{
+		mciSendString(@"close temp_alias", null, 0, 0);
+		mciSendString(@"open " "路徑.mp3"" alias temp_alias", null, 0, 0);
+		mciSendString("play temp_alias repeat", null, 0, 0);
+	}
 
 關於MCI Command String多媒體設備的程序接口的詳細資料，可以參看http://blog.csdn.net/psongchao/article/details/1487788
         				
-//------------------------------------------------------------  # 60個
-
-title : net
-body : http://blog.csdn.net/hean/archive/2008/03/03/2142689.aspx
-title : com
-body : http://www.google.com/custom?
-title : com
-body : http://www.google.com/custom?hl=en&amp
-
-        // 獲取網址的域名後綴
-        static string GetDomain(string strURL)
-        {
-            string retVal;
-
-            string strRegex = @"(\.com/|\.net/|\.cn/|\.org/|\.gov/)";
-
-            Regex r = new Regex(strRegex, RegexOptions.IgnoreCase);
-            Match m = r.Match(strURL);
-            retVal = m.ToString();
-
-            strRegex = @"\.|/$";
-            retVal = Regex.Replace(retVal, strRegex, "").ToString();
-
-            if (retVal == "")
-                retVal = "other";
-
-            return retVal;
-        }
-
 //------------------------------------------------------------  # 60個
 
 先使用無符號字節數組存放數據庫對應的數據集中表的image類型字段的值。例如：
@@ -2921,9 +2743,8 @@ DoubleBuffer
 如果為 true，則繪制在緩沖區中進行，完成後將結果輸出到屏幕上。雙重緩沖區可防止由控件重繪引起的閃爍。要完全啟用雙重緩沖，還必須將 UserPaint 和 AllPaintingInWmPaint 樣式位設置為 true。
 
 //初始化加載皮膚 
-            skinEngine1.SkinFile = "MacOS.ssk"; 
-
- skinEngine1.SkinFile = "PageColor.ssk"; 
+skinEngine1.SkinFile = "MacOS.ssk"; 
+skinEngine1.SkinFile = "PageColor.ssk"; 
 
 //------------------------------------------------------------  # 60個
 
@@ -3185,7 +3006,6 @@ ssss
             richTextBox1.Text += "合法\n";
         }
 
-
 ssss
                 string[] strArray = line.Split('\t');
                 for (int i = 0; i < strArray.Length; i++)
@@ -3227,55 +3047,6 @@ richTextBox1.Text += "result = " + res.ToString() + "\n";
         }
         				
 //------------------------------------------------------------  # 60個
-//較完整 可一段一段貼上範例程式
-//------------------------------------------------------------  # 60個
-
-
-//------------------------------------------------------------  # 60個
-
-正則表達式
-
-用於字符串處理、表單驗證等。
-var regx = "^[a-zA-Z0-9]{6,20}$";
-if ( ! Regex.IsMatch("abcdef;sd123",regex)
-{
-    //長度必須6-20，字母和數字
-}
-^  匹配一行的開始 例如正則表達式 ^when 能夠匹配到 ”when in the“ 的開始，但不能匹配到 ”what and when in the“ 
-$ 匹配一行的結束。 例如正則表達式 food$ 能夠匹配到 “he's  food” 的末尾 
-.點 匹配任何單個字符，例如正則表達式 r.t 能夠匹配 “rat、rut、r t”，但是不能匹配root 
-*  匹配0或多個正好在它之前的那個字符，例如 .* 能夠匹配任意數量的任何字符。 
-[] 匹配匹配一個出現在[]中的字符 
-|  或 敏感詞 ab|cd|ed|df
-() 提高優先級 a(bc) 實現分組
-+ 緊跟在+前面的字符出現任意次，至少1次
-? 緊跟在?前面的字符出現或不出現
-{n} {n,} {n,m} 匹配一定范圍個數 {1,} 相當與+ {0,} 相當於*
-\d 代表 [0-9] \D 代表 [^0-9] 非0-9
-\i 代表 [a-z]
-\u 代表 [A-Z]
-\a 代表 [A-Za-z]
-\w 代表 [a-zA-Z0-9] 
-常用表達式
-匹配身份證：\d{15}|\d{18}
-匹配中國郵政編碼：[1-9]\d{5}(?!\d)
-匹配騰訊QQ號：[1-9][0-9]{4,}
-匹配國內電話號碼：\d{3}-\d{8}|\d{4}-\d{7}
-匹配帳號是否合法(字母開頭，允許5-16字節，允許字母數字下劃線)：^[a-zA-Z][a-zA-Z0-9_]{4,15}$
-匹配網址URL的正則表達式：[a-zA-z]+://[^\s]*
-匹配Email地址的正則表達式：\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*
-匹配首尾空白字符的正則表達式：^\s*|\s*$
-匹配HTML標記的正則表達式：<(\S*?)[^>]*>.*?</\1>|<.*? />
-匹配中文字符的正則表達式： [\u4e00-\u9fa5]
-
-限制網頁表單裡的文本框輸入內容：
-
-只能輸入中文：<input type="text" onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))" />
-
-只能輸入數字：<input type="text" onkeyup="value=value.replace(/[^\d]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" />
-
-只能輸入數字和英文：<input type="text" onkeyup="value=value.replace(/[\W]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text).replace(/[^\d]/g,''))" />
-
 //------------------------------------------------------------  # 60個
 
 typedef double point[3];
@@ -4725,10 +4496,6 @@ openFileDialog1.Filter = "*.jpg,*.jpeg,*.bmp,*.gif,*.ico,*.png,*.wmf|*.jpg;*.jpe
 
 //------------------------------------------------------------  # 60個
 
-Pen blackPen = new Pen(Color.FromArgb(255, 0, 0, 0), 5);
-
-//------------------------------------------------------------  # 60個
-
 // bmp 的大小和pictureBox1 相同
 Bitmap bmp = new Bitmap(this.PictureBox1.Width, this.PictureBox1.Height);
 // 以記憶體圖像 bmp 建立 g 記憶體畫布
@@ -4750,8 +4517,6 @@ g.DrawLine(new pen(Color.Red, 2), x, y, e.X, e.Y); //可以繪圖了
 XML 註解	<!-- --> 的內容。
 
 @"C:\______test_files\cat\cat2.png"
-
-Pen blackPen = new Pen(Color.FromArgb(255, 0, 0, 0), 5);
 
 //------------------------------------------------------------  # 60個
 
@@ -5399,9 +5164,6 @@ List<String> DuplicateList = new List();
 DuplicateList = DuplicateList.Distinct().ToList();
 //利用 Distinct 去除 List 中重複的資料
 
-Color的另一種寫法
-this.BackColor = Color.FromKnownColor(KnownColor.GrayText);
-
 //------------------------------------------------------------  # 60個
 
 建立一方案多專案的做法	TBD
@@ -5890,9 +5652,6 @@ https://www.ctbcinvestments.com/act/202104_TWETF/index.html
 使用控件的Tag属性传递信息
 btn_Tag.Tag = "本技巧是Tag属性应用";//为按钮的数据对象赋值
 
-string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-this.BackgroundImage = Image.FromFile(filename);	//設置表單的背景圖片, Image.FromFile 出來的是Image格式
-this.BackgroundImage = Bitmap.FromFile(filename);	//設置表單的背景圖片, Bitmap.FromFile出來的是Image格式
 
 https://kiang.github.io/covid19/
 
@@ -6120,12 +5879,62 @@ List<PointF> points = new List<PointF>();
 List<PointF> points = new List<PointF>();
   :
   :
-		points.Add(new PointF(x, y));
+points.Add(new PointF(x, y));
   
-e.Graphics.DrawLines(Pens.Black, points.ToArray());
+g.DrawLines(Pens.Black, points.ToArray());
 
-                    thick_pen.Color = Color.Red;
-                    g.DrawLines(thick_pen, points.ToArray());
+thick_pen.Color = Color.Red;
+g.DrawLines(thick_pen, points.ToArray());
+
+            //int[] gray = new int[220];
+            //g.DrawLines(Pens.Red, gray.ToArray());
+
+
+private List<PointF> Points = new List<PointF>();
+
+Points.Add(e.Location);
+g.DrawLines(thick_pen, ln_points.ToArray());
+
+//------------------------------------------------------------  # 60個
+
+收集滑鼠點數
+
+公用變數
+// The points.
+List<PointF> Points = new List<PointF>();
+or
+private List<Point> Points = new List<Point>();
+
+private void Form1_MouseClick(object sender, MouseEventArgs e)
+{
+	// Save the new point.
+	Points.Add(e.Location);
+	
+	or
+	
+	Points.Add(new PointF(e.X, e.Y));
+}
+
+reset滑鼠點數
+if (Points.Count == 3)
+	Points = new List<Point>();
+
+畫出所有滑鼠點數
+// Draw the points.
+const int radius = 3;
+foreach (Point point in Points)
+{
+	e.Graphics.DrawEllipse(Pens.Blue, point.X - radius, point.Y - radius, radius * 2, radius * 2);
+}
+
+           // Draw the points.
+            foreach (PointF pt in Points)
+            {
+                DrawPoint(e.Graphics, pt, Brushes.White, Pens.Black);
+            }
+
+//------------------------------------------------------------  # 60個
+
 
 //------------------------------------------------------------  # 60個
 
@@ -6285,22 +6094,6 @@ this.ClientSize = new Size(btnClickMe.Right, btnClickMe.Bottom);
             // Place the button inside the GroupBox.
             btn.Parent = groupBox1;
             
-//製作一個PictureBox Array
-            // Make an array holding the PictureBoxes.
-            PictureBox[] pics = { PictureBox1, PictureBox2, PictureBox3, PictureBox4 };
-
-//製作一個CheckBox Array
-        // Arrays of controls.
-        private CheckBox[] BreakfastControls, LunchControls, DinnerControls;
-
-        // Initialize the arrays of controls.
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            BreakfastControls = new CheckBox[] { chkCereal, chkToast, chkOrangeJuice };
-            LunchControls = new CheckBox[] { chkSandwhich, chkChips, chkSoda };
-            DinnerControls = new CheckBox[] { chkSalad, chkTofuburger, chkWine };
-        }
-
 //使用
             foreach (CheckBox chk in BreakfastControls)
             {
@@ -7229,6 +7022,7 @@ webBrowser1.ScriptErrorsSuppressed = true;
 g.DrawString("大家好", new Font("標楷體", 20), new SolidBrush(Color.Red), new Rectangle(20, 20, 100, 100));
 g.DrawString("大家好", new Font("標楷體", 20, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline), Brushes.Red, 10, 200);
 g.DrawString("大家好", new Font("標楷體", 20, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline), lgBrush, 10, 200);
+
 Brush blueBrush = new SolidBrush(Color.Blue);
 g.DrawString("大家好", new Font("標楷體", 20, FontStyle.Italic),blueBrush, new PointF(300, 400));
 
@@ -7933,16 +7727,13 @@ XML
    <price>800000</price>
 </car>
 
-
 //------------------------------------------------------------  # 60個
 
 
 //------------------------------------------------------------  # 60個
-
 
 
 ----------------常用的程式片段 ST cccc----------------
-
 
 string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 string filename = @"D:\_git\vcs\_1.data\______test_files1\__text\war_and_peace.txt";
@@ -7966,12 +7757,6 @@ pictureBox圖像直接存檔
 pictureBox1.Image.Save(@"D:\bbbbb.jpg");
 pictureBox1.Image.Save(filename);
 pictureBox1.Image.Save(filename);
-
-//------------------------------------------------------------  # 60個
-
-draw dddd
-            //int[] gray = new int[220];
-            //g.DrawLines(Pens.Red, gray.ToArray());
 
 //------------------------------------------------------------  # 60個
 
@@ -8237,16 +8022,7 @@ this.Icon = ico;
 
 //------------------------------------------------------------  # 60個
 
-Beep
-
-        [DllImport("kernel32.dll")]
-        public static extern bool Beep(int freq, int duration);
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Beep(800, 3000);
-
-        }
-
+C#制作简易的屏保
 https://www.zhangshengrong.com/p/yOXD5ejR1B/
         
 //------------------------------------------------------------  # 60個
@@ -8294,13 +8070,13 @@ pictureBox 顯示圖片的方法(4)
             pictureBox1.ImageLocation = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Taipei_101_2009_amk-EditMylius.jpg/500px-Taipei_101_2009_amk-EditMylius.jpg";
 
 //清除
-            pictureBox1.Image = null;
+pictureBox1.Image = null;
 
-                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-                pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
-                pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
-                pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
+pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
+pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
+pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 
 Normal  = 0,  //從左上角開始放
 StretchImage = 1,  //縮放圖片以符合pbx
@@ -8311,90 +8087,10 @@ Zoom = 4, 縮放 維持比例
 //------------------------------------------------------------  # 60個
 //------------------------------------------------------------  # 60個
 
-array
-整數二維陣列
-            int[,] pbox = new int[9, 2];    //[Col,Row]
-            richTextBox1.Text += "COLUMN = " + pbox.GetLength(0).ToString() + "\n";    //9
-            richTextBox1.Text += "ROW = " + pbox.GetLength(1).ToString() + "\n";    //2
-
-//------------------------------------------------------------  # 60個
-//------------------------------------------------------------  # 60個
-
-            Random rr = new Random();
-            Brush db = new SolidBrush(Color.FromArgb(rr.Next(256), rr.Next(256), rr.Next(256)));
-                //Color.FromArgb() 可以設定3原色，這裡3原色的代碼是亂數產生的
-
-//------------------------------------------------------------  # 60個
-
-        // Return a random color.
-        private Random rand = new Random();
-        private Color[] color =
-        {
-            Color.Red,
-            Color.Green,
-            Color.Blue,
-            Color.Lime,
-            Color.Orange,
-            Color.Fuchsia,
-            Color.Yellow,
-            Color.LightGreen,
-            Color.LightBlue,
-            Color.Cyan,
-        };
-
-        private Color RandomColor()
-        {
-            return color[rand.Next(0, color.Length)];
-        }
-
-//RandomColor()
-
-//------------------------------------------------------------  # 60個
-
-
-//------------------------------------------------------------  # 60個
-
-
-
-//------------------------------------------------------------  # 60個
-
-
-        private Color[] Colors;
-
-            Colors = new Color[] 
-            {
-                Color.Pink,
-                Color.Red,
-                Color.Orange,
-                Color.Yellow,
-                Color.Lime,
-                Color.Cyan,
-                Color.Blue,
-                Color.Violet,
-                Color.Pink,
-                Color.Red,
-                Color.Orange,
-                Color.Yellow,
-                Color.Lime,
-                Color.Cyan,
-                Color.Blue,
-                Color.Violet,
-                Color.Pink,
-                Color.Red,
-                Color.Orange,
-                Color.Yellow,
-                Color.Lime,
-                Color.Cyan,
-                Color.Blue,
-                Color.Violet
-            };
-
-//------------------------------------------------------------  # 60個
-
-
-
-//------------------------------------------------------------  # 60個
-//------------------------------------------------------------  # 60個
+//表單預設參數
+richTextBox1.Text += "AAA = " + SystemInformation.FrameBorderSize.Width.ToString() + "\n";  //8
+richTextBox1.Text += "BBB = " + SystemInformation.FrameBorderSize.Height.ToString() + "\n"; //8
+richTextBox1.Text += "CCC = " + SystemInformation.CaptionHeight.ToString() + "\n";          //23
 
 //this的設定
 
@@ -8409,15 +8105,13 @@ this.FormBorderStyle = FormBorderStyle.None;//設定無邊框
 this.ShowInTaskbar = false;//不在TaskBar上顯示程式
 this.ShowInTaskbar = false;//不在任务栏显现
 
-
 //預設背景色	
 this.BackColor = SystemColors.ControlLight;
+this.BackColor = Color.Black;
 
 this.AutoSize = true;
 this.AutoSizeMode = AutoSizeMode.GrowAndShrink;     //讓表單大小可以自動隨著圖片大小變化。
 this.TransparencyKey = SystemColors.ControlLight;   //將表單的TransparencyKey設為Control，這樣可以去掉桌面小玩意外圍多餘的部份
-
-this.BackColor = Color.Black;
 
 this.FormBorderStyle = FormBorderStyle.FixedSingle;
 
@@ -8429,9 +8123,9 @@ this.MaximizeBox = false;
 //------------------------------------------------------------  # 60個
 //------------------------------------------------------------  # 60個
 
-            //取得副檔名
-                        FileInfo file_info = new FileInfo(filename);
-                        switch (file_info.Extension)
+//取得副檔名
+FileInfo file_info = new FileInfo(filename);
+switch (file_info.Extension)
 
 /*
 //创建目录
@@ -8468,46 +8162,46 @@ writer.Close();
 取出資料
 if (frames.Count > 0)
 {
-    try
-    {
-        Bitmap bitmap1 = frames.Dequeue();
-        
-        writer.WriteVideoFrame(bitmap1);
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine("xxx錯誤訊息e03 : " + ex.Message);
-    }
+	try
+	{
+		Bitmap bitmap1 = frames.Dequeue();
+		writer.WriteVideoFrame(bitmap1);
+	}
+	catch (Exception ex)
+	{
+		Console.WriteLine("xxx錯誤訊息e03 : " + ex.Message);
+	}
 }
 
 //------------------------------------------------------------  # 60個
-                /*
-                Supported Formats:
-                    Raw	        Raw (uncompressed) video.
-	                MPEG2	    MPEG-2 part 2.
-	                FLV1	    Flash Video (FLV) / Sorenson Spark / Sorenson H.263.
-	                H263P	    H.263+ / H.263-1998 / H.263 version 2.
-	                MSMPEG4v3	MPEG-4 part 2 Microsoft variant version 3.
-	                MSMPEG4v2	MPEG-4 part 2 Microsoft variant version 2.
-	                WMV2	    Windows Media Video 8.
-	                WMV1	    Windows Media Video 7.
-	                MPEG4	    MPEG-4 part 2.
-	                Default	    Default video codec, which FFmpeg library selects for the specified file format.
-                    missing : H264        
-                */
 
-            // as long as we're recording
-            // we dequeue the BitMaps waiting in the Queue and write them to the file
-            while (IsRecording)
-            {
-                if (frames.Count > 0)
-                {
-                    Bitmap bmp = frames.Dequeue();
-                    writer.WriteVideoFrame(bmp);
-                    bmp.Dispose();
-                }
-            }
-            writer.Close();
+/*
+Supported Formats:
+Raw		Raw (uncompressed) video.
+MPEG2		MPEG-2 part 2.
+FLV1		Flash Video (FLV) / Sorenson Spark / Sorenson H.263.
+H263P		H.263+ / H.263-1998 / H.263 version 2.
+MSMPEG4v3	MPEG-4 part 2 Microsoft variant version 3.
+MSMPEG4v2	MPEG-4 part 2 Microsoft variant version 2.
+WMV2		Windows Media Video 8.
+WMV1		Windows Media Video 7.
+MPEG4		MPEG-4 part 2.
+Default		Default video codec, which FFmpeg library selects for the specified file format.
+missing : H264        
+*/
+
+// as long as we're recording
+// we dequeue the BitMaps waiting in the Queue and write them to the file
+while (IsRecording)
+{
+	if (frames.Count > 0)
+	{
+		Bitmap bmp = frames.Dequeue();
+		writer.WriteVideoFrame(bmp);
+		bmp.Dispose();
+	}
+}
+writer.Close();
 
 //------------------------------------------------------------  # 60個
 
@@ -8592,49 +8286,6 @@ DrawPie(Pen,x,y,Width,Height,startAngle,sweepAngle) //用指定的筆繪製一�
 
 //------------------------------------------------------------  # 60個
 
-        private List<PointF> Points = new List<PointF>();
-            Points.Add(e.Location);
-                   g.DrawLines(thick_pen, ln_points.ToArray());
-
-//------------------------------------------------------------  # 60個
-
-收集滑鼠點數
-
-公用變數
-// The points.
-List<PointF> Points = new List<PointF>();
-or
-private List<Point> Points = new List<Point>();
-
-private void Form1_MouseClick(object sender, MouseEventArgs e)
-{
-	// Save the new point.
-	Points.Add(e.Location);
-	
-	or
-	
-	Points.Add(new PointF(e.X, e.Y));
-}
-
-reset滑鼠點數
-if (Points.Count == 3)
-	Points = new List<Point>();
-
-畫出所有滑鼠點數
-// Draw the points.
-const int radius = 3;
-foreach (Point point in Points)
-{
-	e.Graphics.DrawEllipse(Pens.Blue, point.X - radius, point.Y - radius, radius * 2, radius * 2);
-}
-
-           // Draw the points.
-            foreach (PointF pt in Points)
-            {
-                DrawPoint(e.Graphics, pt, Brushes.White, Pens.Black);
-            }
-
-//------------------------------------------------------------  # 60個
 //------------------------------------------------------------  # 60個
 
 

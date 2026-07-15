@@ -68,8 +68,6 @@
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.bt_plus = new System.Windows.Forms.Button();
             this.bt_minus = new System.Windows.Forms.Button();
-            this.lb_trackber = new System.Windows.Forms.Label();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.groupBox_dtp2 = new System.Windows.Forms.GroupBox();
             this.lb_time_interval = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -87,7 +85,6 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox_rgb = new System.Windows.Forms.GroupBox();
             this.groupBox_dtp1 = new System.Windows.Forms.GroupBox();
-            this.groupBox_trackbar = new System.Windows.Forms.GroupBox();
             this.groupBox_checkedlistbox = new System.Windows.Forms.GroupBox();
             this.bt_clb2 = new System.Windows.Forms.Button();
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
@@ -108,12 +105,10 @@
             this.groupBox_domainupdown.SuspendLayout();
             this.groupBox_numericupdown.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.groupBox_dtp2.SuspendLayout();
             this.groupBox_dtp3.SuspendLayout();
             this.groupBox_rgb.SuspendLayout();
             this.groupBox_dtp1.SuspendLayout();
-            this.groupBox_trackbar.SuspendLayout();
             this.groupBox_checkedlistbox.SuspendLayout();
             this.groupBox_progress.SuspendLayout();
             this.groupBox_pbx.SuspendLayout();
@@ -535,28 +530,6 @@
             this.bt_minus.UseVisualStyleBackColor = true;
             this.bt_minus.Click += new System.EventHandler(this.bt_minus_Click);
             // 
-            // lb_trackber
-            // 
-            this.lb_trackber.AutoSize = true;
-            this.lb_trackber.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_trackber.Location = new System.Drawing.Point(19, 62);
-            this.lb_trackber.Name = "lb_trackber";
-            this.lb_trackber.Size = new System.Drawing.Size(64, 24);
-            this.lb_trackber.TabIndex = 89;
-            this.lb_trackber.Text = "label2";
-            // 
-            // trackBar1
-            // 
-            this.trackBar1.Location = new System.Drawing.Point(12, 25);
-            this.trackBar1.Maximum = 100;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.trackBar1.Size = new System.Drawing.Size(259, 45);
-            this.trackBar1.TabIndex = 88;
-            this.trackBar1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBar1_MouseDown);
-            this.trackBar1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.trackBar1_MouseMove);
-            this.trackBar1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBar1_MouseUp);
-            // 
             // groupBox_dtp2
             // 
             this.groupBox_dtp2.Controls.Add(this.lb_time_interval);
@@ -720,7 +693,7 @@
             this.groupBox_rgb.Controls.Add(this.tb_b);
             this.groupBox_rgb.Location = new System.Drawing.Point(12, 518);
             this.groupBox_rgb.Name = "groupBox_rgb";
-            this.groupBox_rgb.Size = new System.Drawing.Size(310, 160);
+            this.groupBox_rgb.Size = new System.Drawing.Size(310, 221);
             this.groupBox_rgb.TabIndex = 96;
             this.groupBox_rgb.TabStop = false;
             this.groupBox_rgb.Text = "RGB";
@@ -737,17 +710,6 @@
             this.groupBox_dtp1.TabIndex = 97;
             this.groupBox_dtp1.TabStop = false;
             this.groupBox_dtp1.Text = "DateTimePicker";
-            // 
-            // groupBox_trackbar
-            // 
-            this.groupBox_trackbar.Controls.Add(this.lb_trackber);
-            this.groupBox_trackbar.Controls.Add(this.trackBar1);
-            this.groupBox_trackbar.Location = new System.Drawing.Point(274, 122);
-            this.groupBox_trackbar.Name = "groupBox_trackbar";
-            this.groupBox_trackbar.Size = new System.Drawing.Size(277, 100);
-            this.groupBox_trackbar.TabIndex = 98;
-            this.groupBox_trackbar.TabStop = false;
-            this.groupBox_trackbar.Text = "Trackbar";
             // 
             // groupBox_checkedlistbox
             // 
@@ -875,7 +837,6 @@
             this.Controls.Add(this.groupBox_pbx);
             this.Controls.Add(this.groupBox_progress);
             this.Controls.Add(this.groupBox_checkedlistbox);
-            this.Controls.Add(this.groupBox_trackbar);
             this.Controls.Add(this.groupBox_dtp1);
             this.Controls.Add(this.groupBox_rgb);
             this.Controls.Add(this.groupBox_dtp2);
@@ -903,7 +864,6 @@
             this.groupBox_domainupdown.ResumeLayout(false);
             this.groupBox_numericupdown.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.groupBox_dtp2.ResumeLayout(false);
             this.groupBox_dtp2.PerformLayout();
             this.groupBox_dtp3.ResumeLayout(false);
@@ -911,8 +871,6 @@
             this.groupBox_rgb.PerformLayout();
             this.groupBox_dtp1.ResumeLayout(false);
             this.groupBox_dtp1.PerformLayout();
-            this.groupBox_trackbar.ResumeLayout(false);
-            this.groupBox_trackbar.PerformLayout();
             this.groupBox_checkedlistbox.ResumeLayout(false);
             this.groupBox_progress.ResumeLayout(false);
             this.groupBox_progress.PerformLayout();
@@ -963,8 +921,6 @@
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Button bt_plus;
         private System.Windows.Forms.Button bt_minus;
-        private System.Windows.Forms.Label lb_trackber;
-        private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.GroupBox groupBox_dtp2;
         private System.Windows.Forms.Label lb_time_interval;
         private System.Windows.Forms.TextBox textBox2;
@@ -982,7 +938,6 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.GroupBox groupBox_rgb;
         private System.Windows.Forms.GroupBox groupBox_dtp1;
-        private System.Windows.Forms.GroupBox groupBox_trackbar;
         private System.Windows.Forms.GroupBox groupBox_checkedlistbox;
         private System.Windows.Forms.Button bt_clb2;
         private System.Windows.Forms.CheckedListBox checkedListBox1;

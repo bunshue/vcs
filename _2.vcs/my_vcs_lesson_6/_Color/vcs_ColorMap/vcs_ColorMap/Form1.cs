@@ -1780,7 +1780,72 @@ namespace vcs_ColorMap
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-/*  可搬出
+/*
 
+Color的另一種寫法
+this.BackColor = Color.FromKnownColor(KnownColor.GrayText);
+
+
+            Random rr = new Random();
+            Brush db = new SolidBrush(Color.FromArgb(rr.Next(256), rr.Next(256), rr.Next(256)));
+                //Color.FromArgb() 可以設定3原色，這裡3原色的代碼是亂數產生的
+
+//------------------------------------------------------------  # 60個
+
+        // Return a random color.
+        private Random rand = new Random();
+        private Color[] color =
+        {
+            Color.Red,
+            Color.Green,
+            Color.Blue,
+            Color.Lime,
+            Color.Orange,
+            Color.Fuchsia,
+            Color.Yellow,
+            Color.LightGreen,
+            Color.LightBlue,
+            Color.Cyan,
+        };
+
+        private Color RandomColor()
+        {
+            return color[rand.Next(0, color.Length)];
+        }
+
+//RandomColor()
+
+//------------------------------------------------------------  # 60個
+
+        private Color[] Colors;
+
+            Colors = new Color[] 
+            {
+                Color.Pink,
+                Color.Red,
+                Color.Orange,
+                Color.Yellow,
+                Color.Lime,
+                Color.Cyan,
+                Color.Blue,
+                Color.Violet,
+                Color.Pink,
+                Color.Red,
+                Color.Orange,
+                Color.Yellow,
+                Color.Lime,
+                Color.Cyan,
+                Color.Blue,
+                Color.Violet,
+                Color.Pink,
+                Color.Red,
+                Color.Orange,
+                Color.Yellow,
+                Color.Lime,
+                Color.Cyan,
+                Color.Blue,
+                Color.Violet
+            };
 */
+
 

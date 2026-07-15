@@ -1406,8 +1406,13 @@ namespace vcs_AudioVideoTest1
 }
 
 
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
 
-
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
 
 /*
 
@@ -1419,4 +1424,17 @@ namespace vcs_AudioVideoTest1
 　　 System.Media.SystemSounds.Question.Play();
 
 */
+
+
+/*
+        [DllImport("kernel32.dll")]
+        public static extern bool Beep(int freq, int duration);
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Beep(800, 3000);
+        }
+*/
+
+
+
 

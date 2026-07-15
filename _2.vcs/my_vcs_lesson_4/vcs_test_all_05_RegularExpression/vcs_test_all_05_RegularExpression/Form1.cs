@@ -450,18 +450,204 @@ namespace vcs_test_all_05_RegularExpression
 
 using System.Text.RegularExpressions;      
 
- private string StripHT(string strHtml)  //從html中提取純文本
+private string StripHT(string strHtml)  //從html中提取純文本
+{
+    Regex regex = new Regex("<.+?>", RegexOptions.IgnoreCase);
+    string strOutput = regex.Replace(strHtml, "");//替換掉"<"和">"之間的內容
+    strOutput = strOutput.Replace("<", "");
+    strOutput = strOutput.Replace(">", "");
+    strOutput = strOutput.Replace("&nbsp;", "");
+    return strOutput;
+}
+
+//------------------------------------------------------------  # 60個
+
+//提取HTML代碼中文字的C#函數
+
+/// <summary>
+  /// 去除HTML標記
+  /// </summary>
+  /// <param name="strHtml">包括HTML的源碼 </param>
+  /// <returns>已經去除後的文字</returns>
+  public static string StripHTML(string strHtml)
+  {
+   string [] aryReg ={
+          @"<script[^>]*?>.*?</script>",
+
+          @"<(\/\s*)?!?((\w+:)?\w+)(\w+(\s*=?\s*(([""'])(\\[""'tbnr]|[^\7])*?\7|\w+)|.{0})|\s)*?(\/\s*)?>",
+          @"([\r\n])[\s]+",
+          @"&(quot|#34);",
+          @"&(amp|#38);",
+          @"&(lt|#60);",
+          @"&(gt|#62);", 
+          @"&(nbsp|#160);", 
+          @"&(iexcl|#161);",
+          @"&(cent|#162);",
+          @"&(pound|#163);",
+          @"&(copy|#169);",
+          @"&#(\d+);",
+          @"-->",
+          @"<!--.*\n"
+
+         };
+
+   string [] aryRep = {
+           "",
+           "",
+           "",
+           "\"",
+           "&",
+           "<",
+           ">",
+           " ",
+           "\xa1",//chr(161),
+           "\xa2",//chr(162),
+           "\xa3",//chr(163),
+           "\xa9",//chr(169),
+           "",
+           "\r\n",
+           ""
+          };
+
+   string newReg =aryReg[0];
+   string strOutput=strHtml;
+   for(int i = 0;i<aryReg.Length;i++)
+   {
+    Regex regex = new Regex(aryReg[i],RegexOptions.IgnoreCase );
+    strOutput = regex.Replace(strOutput,aryRep[i]);
+   }
+
+   strOutput.Replace("<","");
+   strOutput.Replace(">","");
+   strOutput.Replace("\r\n","");
+
+   return strOutput;
+  }
+
+//------------------------------------------------------------  # 60個
+
+[C#] 使用 Regex.Match 從 String 中提出英文或數字
+正規表示式
+
+[abc]： 字元集合
+[^a-z]： 非a-z
+\d ：  數字
+\D ：  非數字
+\s ： 一個空白字元
+\S：  非空白字元
+\w：  單詞字元(a-z,A-Z,0-9,_)
+\W：  非單詞字元
+
+//------------------------------------------------------------  # 60個
+
+        /// C#過濾html標簽
+        /// 用正則表達式來做html轉txt
+        public static string Html2Text(string htmlStr)
         {
-            Regex regex = new Regex("<.+?>", RegexOptions.IgnoreCase);
-            string strOutput = regex.Replace(strHtml, "");//替換掉"<"和">"之間的內容
-            strOutput = strOutput.Replace("<", "");
-            strOutput = strOutput.Replace(">", "");
-            strOutput = strOutput.Replace("&nbsp;", "");
-            return strOutput;
+            if (String.IsNullOrEmpty(htmlStr))
+            {
+                return "";
+            }
+            string regEx_style = "<style[^>]*?>[\\s\\S]*?<\\/style>"; //定義style的正則表達式
+            string regEx_script = "<script[^>]*?>[\\s\\S]*?<\\/script>"; //定義script的正則表達式
+            string regEx_html = "<[^>]+>"; //定義HTML標簽的正則表達式
+            htmlStr = Regex.Replace(htmlStr, regEx_style, "");//刪除css
+            htmlStr = Regex.Replace(htmlStr, regEx_script, "");//刪除js
+            htmlStr = Regex.Replace(htmlStr, regEx_html, "");//刪除html標記
+            htmlStr = Regex.Replace(htmlStr, "\\s*|\t|\r|\n", "");//去除tab、空格、空行
+            htmlStr = htmlStr.Replace(" ", "");
+            htmlStr = htmlStr.Replace("\"", ""); //去除異常的引號" " "
+            htmlStr = htmlStr.Replace("\"", ""); //去除異常的引號" " "
+            return htmlStr.Trim();
         }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            //html轉txt
+            //http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/184774.html
+        }
+
+//------------------------------------------------------------  # 60個
+
+title : net
+body : http://blog.csdn.net/hean/archive/2008/03/03/2142689.aspx
+title : com
+body : http://www.google.com/custom?
+title : com
+body : http://www.google.com/custom?hl=en&amp
+
+        // 獲取網址的域名後綴
+        static string GetDomain(string strURL)
+        {
+            string retVal;
+
+            string strRegex = @"(\.com/|\.net/|\.cn/|\.org/|\.gov/)";
+
+            Regex r = new Regex(strRegex, RegexOptions.IgnoreCase);
+            Match m = r.Match(strURL);
+            retVal = m.ToString();
+
+            strRegex = @"\.|/$";
+            retVal = Regex.Replace(retVal, strRegex, "").ToString();
+
+            if (retVal == "")
+                retVal = "other";
+
+            return retVal;
+        }
+
+//------------------------------------------------------------  # 60個
+
+正則表達式
+
+用於字符串處理、表單驗證等。
+var regx = "^[a-zA-Z0-9]{6,20}$";
+if ( ! Regex.IsMatch("abcdef;sd123",regex)
+{
+    //長度必須6-20，字母和數字
+}
+^  匹配一行的開始 例如正則表達式 ^when 能夠匹配到 ”when in the“ 的開始，但不能匹配到 ”what and when in the“ 
+$ 匹配一行的結束。 例如正則表達式 food$ 能夠匹配到 “he's  food” 的末尾 
+.點 匹配任何單個字符，例如正則表達式 r.t 能夠匹配 “rat、rut、r t”，但是不能匹配root 
+*  匹配0或多個正好在它之前的那個字符，例如 .* 能夠匹配任意數量的任何字符。 
+[] 匹配匹配一個出現在[]中的字符 
+|  或 敏感詞 ab|cd|ed|df
+() 提高優先級 a(bc) 實現分組
++ 緊跟在+前面的字符出現任意次，至少1次
+? 緊跟在?前面的字符出現或不出現
+{n} {n,} {n,m} 匹配一定范圍個數 {1,} 相當與+ {0,} 相當於*
+\d 代表 [0-9] \D 代表 [^0-9] 非0-9
+\i 代表 [a-z]
+\u 代表 [A-Z]
+\a 代表 [A-Za-z]
+\w 代表 [a-zA-Z0-9] 
+常用表達式
+匹配身份證：\d{15}|\d{18}
+匹配中國郵政編碼：[1-9]\d{5}(?!\d)
+匹配騰訊QQ號：[1-9][0-9]{4,}
+匹配國內電話號碼：\d{3}-\d{8}|\d{4}-\d{7}
+匹配帳號是否合法(字母開頭，允許5-16字節，允許字母數字下劃線)：^[a-zA-Z][a-zA-Z0-9_]{4,15}$
+匹配網址URL的正則表達式：[a-zA-z]+://[^\s]*
+匹配Email地址的正則表達式：\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*
+匹配首尾空白字符的正則表達式：^\s*|\s*$
+匹配HTML標記的正則表達式：<(\S*?)[^>]*>.*?</\1>|<.*? />
+匹配中文字符的正則表達式： [\u4e00-\u9fa5]
+
+限制網頁表單裡的文本框輸入內容：
+
+只能輸入中文：<input type="text" onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))" />
+
+只能輸入數字：<input type="text" onkeyup="value=value.replace(/[^\d]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" />
+
+只能輸入數字和英文：<input type="text" onkeyup="value=value.replace(/[\W]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text).replace(/[^\d]/g,''))" />
+
+//------------------------------------------------------------  # 60個
+
+
 
 
 
 
 */
+
 

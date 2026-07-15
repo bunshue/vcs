@@ -82,8 +82,7 @@ namespace vcs__small
 
             //------------------------------------------------------------  # 60個
 
-            trackBar1.Value = 50;
-            lb_trackber.Text = "取得 : " + trackBar1.Value.ToString();
+
 
             //------------------------------------------------------------  # 60個
 
@@ -161,7 +160,6 @@ namespace vcs__small
             groupBox_radiobutton2.Size = new Size(W, H);
             groupBox_radiobutton3.Size = new Size(W, H);
             groupBox_numericupdown.Size = new Size(W * 2, H);
-            groupBox_trackbar.Size = new Size(W * 2, H);
             groupBox_domainupdown.Size = new Size(W * 2, H);
 
             groupBox_radiobutton0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -174,7 +172,6 @@ namespace vcs__small
             groupBox_rgb.Location = new Point(x_st + dx * 0, y_st + dy * 6);
 
             groupBox_numericupdown.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            groupBox_trackbar.Location = new Point(x_st + dx * 4, y_st + dy * 1 + 20);
             groupBox_dtp1.Location = new Point(x_st + dx * 4, y_st + dy * 3);
             groupBox_dtp2.Location = new Point(x_st + dx * 4, y_st + dy * 4 + 70);
             groupBox_dtp3.Location = new Point(x_st + dx * 6 + 50, y_st + dy * 4 + 70);
@@ -357,29 +354,6 @@ namespace vcs__small
             richTextBox1.Text += "Index : " + domainUpDown1.SelectedIndex.ToString() + "\t" + "內容 : " + domainUpDown1.SelectedItem.ToString() + "\n";
             richTextBox1.Text += "目前選到的是：" + domainUpDown1.Text + "\n";
             richTextBox1.Text += "目前選到的是：" + (string)domainUpDown1.SelectedItem + "\n";
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        bool flag_mouse_down = false;
-        private void trackBar1_MouseDown(object sender, MouseEventArgs e)
-        {
-            flag_mouse_down = true;
-            richTextBox1.Text += "MouseDown :" + trackBar1.Value.ToString() + "\n";
-        }
-
-        private void trackBar1_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (flag_mouse_down == true)
-            {
-                lb_trackber.Text = "取得 : " + trackBar1.Value.ToString();
-            }
-        }
-
-        private void trackBar1_MouseUp(object sender, MouseEventArgs e)
-        {
-            flag_mouse_down = false;
-            richTextBox1.Text += "MouseUp :" + trackBar1.Value.ToString() + "\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -609,16 +583,84 @@ namespace vcs__small
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-/*  可搬出
-
-*/
-
-
-
 /*
 
             richTextBox1.Text += dateTimePicker1.Value.ToString() + "\n";
             richTextBox1.Text += dateTimePicker1.Value.ToShortDateString() + "\n";
 
+
+
+cccc
+
+vcs 之 radioButton 可以用Image, Text設為空
+
+
+cccc
+            numericUpDown1.Maximum = new System.Decimal(new int[] { 150, 0, 0, 0 });
+
+
 */
+
+
+/*
+        bool flag_mouse_down = false;
+        private void trackBar1_MouseDown(object sender, MouseEventArgs e)
+        {
+            flag_mouse_down = true;
+            richTextBox1.Text += "MouseDown :" + trackBar1.Value.ToString() + "\n";
+        }
+
+        private void trackBar1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (flag_mouse_down == true)
+            {
+                lb_trackber.Text = "取得 : " + trackBar1.Value.ToString();
+            }
+        }
+
+        private void trackBar1_MouseUp(object sender, MouseEventArgs e)
+        {
+            flag_mouse_down = false;
+            richTextBox1.Text += "MouseUp :" + trackBar1.Value.ToString() + "\n";
+        }
+
+//------------------------------------------------------------  # 60個
+
+
+TrackBar範例
+
+            trackBar1.Minimum = 0;
+            trackBar1.Maximum = 255;
+            trackBar1.TickFrequency = 30;
+            trackBar1.LargeChange = 30;
+            trackBar1.SmallChange = 10;
+
+            trackBar2.Minimum = 0;
+            trackBar2.Maximum = 255;
+            trackBar2.TickFrequency = 30;
+            trackBar2.LargeChange = 30;
+            trackBar2.SmallChange = 10;
+
+            trackBar3.Minimum = 0;
+            trackBar3.Maximum = 255;
+            trackBar3.TickFrequency = 30;
+            trackBar3.LargeChange = 30;
+            trackBar3.SmallChange = 10;
+
+            label1.Text = "R";
+            label2.Text = "G";
+            label3.Text = "B";
+            label7.Text = "示範：";
+
+//scroll方法
+            label4.Text = trackBar1.Value.ToString();
+            label5.Text = trackBar2.Value.ToString();
+            label6.Text = trackBar3.Value.ToString();
+            textBox1.BackColor = Color.FromArgb(trackBar1.Value, trackBar2.Value, trackBar3.Value);
+
+//------------------------------------------------------------  # 60個
+
+*/
+
+
 
