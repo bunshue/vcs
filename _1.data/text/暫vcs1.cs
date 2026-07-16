@@ -1,4 +1,19 @@
 ﻿
+
+            Debug.Print("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！ " + number.ToString());
+
+
+        private void SetValue(string str, object obj)
+        {
+            //lock裡面的代碼同一個時刻，只能被一個線程使用。其它的後面排隊。這樣防止數據混亂。
+            lock (obj)
+            {
+                richTextBox1.Text += "Thread名稱 : " + str + " 做事 " + DateTime.Now.ToString() + "\n";
+            }
+        }
+
+//------------------------------------------------------------  # 60個
+
             string path = AppDomain.CurrentDomain.BaseDirectory;
             path = Path.Combine(path, "Logger3_\\" + DateTime.Now.ToString("yy-MM-dd"));
 
@@ -7112,56 +7127,6 @@ ControlBox = false;//不在窗体标题栏中显示控件
 
 //------------------------------------------------------------  # 60個
 
-rtb
-
-設定部分字型顏色
-
-            //設定部分字型顏色
-            fontDialog1.ShowApply = true;
-            fontDialog1.ShowColor = true;
-            fontDialog1.ShowEffects = true;
-            fontDialog1.ShowHelp = true;
-            if (fontDialog1.ShowDialog() == DialogResult.OK)
-            {
-                richTextBox1.SelectionFont = fontDialog1.Font;
-                richTextBox1.SelectionColor = fontDialog1.Color;
-                //richTextBox1.SelectionBackColor
-            }
-
-設定字型 使用Apply
-
-                richTextBox1.Font = fontDialog1.Font;
-                richTextBox1.ForeColor = fontDialog1.Color;
-                richTextBox1.Text += "已完成設定";
-
-
-                //改變文字方塊的字型
-                richTextBox1.Font = fontDialog1.Font;
-                //改變文字方塊的前景顏色
-                richTextBox1.ForeColor = fontDialog1.Color;
-
-
-
-
-全選與部分選取
-
-RichTextBox 和 TextBox 需要在Focus的狀態下才可以反白
-
-//全部反白
-	richTextBox1.Focus();
-	richTextBox1.Select(0, richTextBox1.Text.Length);
-
-//從位置40開始反白15拜
-	richTextBox1.Focus();
-	richTextBox1.Select(40, 15);
-
-//游標跳至RichTextBox之最前面
-	richTextBox1.Focus();
-	richTextBox1.Select(0, 0);
-
-            txtFile.Text = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-            txtFile.Select(txtFile.Text.Length, 0);  // 全選
-
 ----------------準備進範例程式的 SP----------------
 
 
@@ -7931,21 +7896,6 @@ form1.CancelButton = button1;
             this.AcceptButton = button5;            //在表單按enter就執行button1按鈕的動作
 
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------  # 60個
-
-
-
-//------------------------------------------------------------  # 60個
-
-rtb
-            int len = richTextBox1.Lines.Length;
-            //richTextBox1.Text += "lines = " + len.ToString() + "\n";
-            for (i = 0; i < len; i++)
-            {
-                //richTextBox1.Text += "i = " + i.ToString() + " : " + richTextBox1.Lines[i] + "\n";
-                sw.WriteLine(richTextBox1.Lines[i]); // 寫入一行
-            }
-
 //------------------------------------------------------------  # 60個
 
 求取字母的ASCII值

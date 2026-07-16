@@ -50,17 +50,6 @@
             this.printPreviewDialog_Calendar = new System.Windows.Forms.PrintPreviewDialog();
             this.printPreviewDialog_grid = new System.Windows.Forms.PrintPreviewDialog();
             this.printDocument_grid = new System.Drawing.Printing.PrintDocument();
-            this.printPreviewDialog_star = new System.Windows.Forms.PrintPreviewDialog();
-            this.printDocument_star = new System.Drawing.Printing.PrintDocument();
-            this.txtRadius = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.nudSkip = new System.Windows.Forms.NumericUpDown();
-            this.nudPoints = new System.Windows.Forms.NumericUpDown();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.bt_print_star = new System.Windows.Forms.Button();
-            this.pictureBox_star = new System.Windows.Forms.PictureBox();
             this.button10 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
@@ -72,8 +61,6 @@
             this.printPreviewDialog_pages = new System.Windows.Forms.PrintPreviewDialog();
             this.printDocument_grid2 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog_grid2 = new System.Windows.Forms.PrintPreviewDialog();
-            this.printPreviewDialog_pascal = new System.Windows.Forms.PrintPreviewDialog();
-            this.printDocument_pascal = new System.Drawing.Printing.PrintDocument();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lstPaperSizes = new System.Windows.Forms.ListBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -121,10 +108,6 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.comboBox_PageSize = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSkip)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudPoints)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox_control.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -232,7 +215,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(1114, 154);
+            this.bt_clear.Location = new System.Drawing.Point(461, 409);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(54, 35);
             this.bt_clear.TabIndex = 47;
@@ -243,7 +226,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(1089, 144);
+            this.richTextBox1.Location = new System.Drawing.Point(436, 399);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 46;
@@ -326,143 +309,6 @@
             // 
             this.printDocument_grid.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_grid_PrintPage);
             // 
-            // printPreviewDialog_star
-            // 
-            this.printPreviewDialog_star.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog_star.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog_star.ClientSize = new System.Drawing.Size(400, 300);
-            this.printPreviewDialog_star.Document = this.printDocument_star;
-            this.printPreviewDialog_star.Enabled = true;
-            this.printPreviewDialog_star.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog_star.Icon")));
-            this.printPreviewDialog_star.Name = "printPreviewDialog_star";
-            this.printPreviewDialog_star.Visible = false;
-            // 
-            // printDocument_star
-            // 
-            this.printDocument_star.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_star_PrintPage);
-            // 
-            // txtRadius
-            // 
-            this.txtRadius.Location = new System.Drawing.Point(100, 67);
-            this.txtRadius.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtRadius.Name = "txtRadius";
-            this.txtRadius.Size = new System.Drawing.Size(60, 22);
-            this.txtRadius.TabIndex = 54;
-            this.txtRadius.Text = "100";
-            this.txtRadius.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(43, 70);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(50, 12);
-            this.label3.TabIndex = 53;
-            this.label3.Text = "Diameter:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(43, 46);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 12);
-            this.label2.TabIndex = 52;
-            this.label2.Text = "Skip:";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(43, 22);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(45, 12);
-            this.label1.TabIndex = 51;
-            this.label1.Text = "# Points:";
-            // 
-            // nudSkip
-            // 
-            this.nudSkip.Location = new System.Drawing.Point(100, 44);
-            this.nudSkip.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.nudSkip.Maximum = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            this.nudSkip.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudSkip.Name = "nudSkip";
-            this.nudSkip.Size = new System.Drawing.Size(60, 22);
-            this.nudSkip.TabIndex = 50;
-            this.nudSkip.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.nudSkip.Value = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.nudSkip.ValueChanged += new System.EventHandler(this.nudSkip_ValueChanged);
-            // 
-            // nudPoints
-            // 
-            this.nudPoints.Location = new System.Drawing.Point(100, 20);
-            this.nudPoints.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.nudPoints.Minimum = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.nudPoints.Name = "nudPoints";
-            this.nudPoints.Size = new System.Drawing.Size(60, 22);
-            this.nudPoints.TabIndex = 49;
-            this.nudPoints.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.nudPoints.Value = new decimal(new int[] {
-            7,
-            0,
-            0,
-            0});
-            this.nudPoints.ValueChanged += new System.EventHandler(this.nudPoints_ValueChanged);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.bt_print_star);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.txtRadius);
-            this.groupBox1.Controls.Add(this.nudPoints);
-            this.groupBox1.Controls.Add(this.nudSkip);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(563, 223);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(194, 142);
-            this.groupBox1.TabIndex = 55;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "預覽列印 Star";
-            // 
-            // bt_print_star
-            // 
-            this.bt_print_star.Location = new System.Drawing.Point(35, 95);
-            this.bt_print_star.Name = "bt_print_star";
-            this.bt_print_star.Size = new System.Drawing.Size(104, 36);
-            this.bt_print_star.TabIndex = 55;
-            this.bt_print_star.Text = "預覽列印 star";
-            this.bt_print_star.UseVisualStyleBackColor = true;
-            this.bt_print_star.Click += new System.EventHandler(this.bt_print_star_Click);
-            // 
-            // pictureBox_star
-            // 
-            this.pictureBox_star.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox_star.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox_star.Location = new System.Drawing.Point(867, 370);
-            this.pictureBox_star.Margin = new System.Windows.Forms.Padding(2);
-            this.pictureBox_star.Name = "pictureBox_star";
-            this.pictureBox_star.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox_star.TabIndex = 56;
-            this.pictureBox_star.TabStop = false;
-            this.pictureBox_star.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_star_Paint);
-            // 
             // button10
             // 
             this.button10.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -503,7 +349,6 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(200, 60);
             this.button13.TabIndex = 60;
-            this.button13.Text = "預覽列印巴斯卡三角形";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -567,21 +412,6 @@
             this.printPreviewDialog_grid2.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog_grid2.Icon")));
             this.printPreviewDialog_grid2.Name = "printPreviewDialog_grid2";
             this.printPreviewDialog_grid2.Visible = false;
-            // 
-            // printPreviewDialog_pascal
-            // 
-            this.printPreviewDialog_pascal.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog_pascal.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog_pascal.ClientSize = new System.Drawing.Size(400, 300);
-            this.printPreviewDialog_pascal.Document = this.printDocument_pascal;
-            this.printPreviewDialog_pascal.Enabled = true;
-            this.printPreviewDialog_pascal.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog_pascal.Icon")));
-            this.printPreviewDialog_pascal.Name = "printPreviewDialog_pascal";
-            this.printPreviewDialog_pascal.Visible = false;
-            // 
-            // printDocument_pascal
-            // 
-            this.printDocument_pascal.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_pascal_PrintPage);
             // 
             // groupBox2
             // 
@@ -799,7 +629,7 @@
             this.groupBox_control.Controls.Add(this.chkZoom100);
             this.groupBox_control.Controls.Add(this.chkMaximized);
             this.groupBox_control.Controls.Add(this.bt_print_control);
-            this.groupBox_control.Location = new System.Drawing.Point(563, 370);
+            this.groupBox_control.Location = new System.Drawing.Point(445, 11);
             this.groupBox_control.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox_control.Name = "groupBox_control";
             this.groupBox_control.Padding = new System.Windows.Forms.Padding(2);
@@ -852,7 +682,7 @@
             // 
             this.printPreviewControl1.AutoZoom = false;
             this.printPreviewControl1.Document = this.printDocument_preview;
-            this.printPreviewControl1.Location = new System.Drawing.Point(1088, 12);
+            this.printPreviewControl1.Location = new System.Drawing.Point(435, 267);
             this.printPreviewControl1.Name = "printPreviewControl1";
             this.printPreviewControl1.Size = new System.Drawing.Size(223, 124);
             this.printPreviewControl1.TabIndex = 66;
@@ -865,7 +695,7 @@
             // bt_print
             // 
             this.bt_print.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_print.Location = new System.Drawing.Point(1211, 144);
+            this.bt_print.Location = new System.Drawing.Point(558, 399);
             this.bt_print.Name = "bt_print";
             this.bt_print.Size = new System.Drawing.Size(100, 40);
             this.bt_print.TabIndex = 67;
@@ -883,7 +713,7 @@
             this.groupBox3.Controls.Add(this.textBox1);
             this.groupBox3.Controls.Add(this.textBox2);
             this.groupBox3.Controls.Add(this.label15);
-            this.groupBox3.Location = new System.Drawing.Point(1089, 255);
+            this.groupBox3.Location = new System.Drawing.Point(677, 383);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(206, 157);
             this.groupBox3.TabIndex = 68;
@@ -979,7 +809,7 @@
             // bt_print3
             // 
             this.bt_print3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_print3.Location = new System.Drawing.Point(1211, 195);
+            this.bt_print3.Location = new System.Drawing.Point(558, 450);
             this.bt_print3.Name = "bt_print3";
             this.bt_print3.Size = new System.Drawing.Size(100, 40);
             this.bt_print3.TabIndex = 69;
@@ -991,7 +821,7 @@
             // 
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(979, 371);
+            this.dataGridView1.Location = new System.Drawing.Point(445, 158);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(100, 100);
@@ -1045,8 +875,6 @@
             this.Controls.Add(this.button12);
             this.Controls.Add(this.button11);
             this.Controls.Add(this.button10);
-            this.Controls.Add(this.pictureBox_star);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
@@ -1063,11 +891,6 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSkip)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudPoints)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox_control.ResumeLayout(false);
@@ -1102,16 +925,6 @@
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog_Calendar;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog_grid;
         private System.Drawing.Printing.PrintDocument printDocument_grid;
-        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog_star;
-        private System.Drawing.Printing.PrintDocument printDocument_star;
-        private System.Windows.Forms.TextBox txtRadius;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.NumericUpDown nudSkip;
-        private System.Windows.Forms.NumericUpDown nudPoints;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.PictureBox pictureBox_star;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button12;
@@ -1123,8 +936,6 @@
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog_pages;
         private System.Drawing.Printing.PrintDocument printDocument_grid2;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog_grid2;
-        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog_pascal;
-        private System.Drawing.Printing.PrintDocument printDocument_pascal;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ListBox lstPaperSizes;
         private System.Windows.Forms.Label label9;
@@ -1145,7 +956,6 @@
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox cboPrinters;
-        private System.Windows.Forms.Button bt_print_star;
         private System.Windows.Forms.Button button7;
         private System.Drawing.Printing.PrintDocument printDocument_control;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog_control;

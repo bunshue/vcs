@@ -49,12 +49,9 @@
             this.rb_color1 = new System.Windows.Forms.RadioButton();
             this.rb_color3 = new System.Windows.Forms.RadioButton();
             this.rb_color2 = new System.Windows.Forms.RadioButton();
-            this.tb_b = new System.Windows.Forms.TextBox();
-            this.tb_g = new System.Windows.Forms.TextBox();
-            this.tb_r = new System.Windows.Forms.TextBox();
-            this.lb_b = new System.Windows.Forms.Label();
-            this.lb_g = new System.Windows.Forms.Label();
-            this.lb_r = new System.Windows.Forms.Label();
+            this.lb_b1 = new System.Windows.Forms.Label();
+            this.lb_g1 = new System.Windows.Forms.Label();
+            this.lb_r1 = new System.Windows.Forms.Label();
             this.hScrollBar_b = new System.Windows.Forms.HScrollBar();
             this.hScrollBar_g = new System.Windows.Forms.HScrollBar();
             this.hScrollBar_r = new System.Windows.Forms.HScrollBar();
@@ -84,6 +81,19 @@
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox_rgb = new System.Windows.Forms.GroupBox();
+            this.lb_r = new System.Windows.Forms.Label();
+            this.lb_g = new System.Windows.Forms.Label();
+            this.lb_b = new System.Windows.Forms.Label();
+            this.panel_b = new System.Windows.Forms.Panel();
+            this.panel_g = new System.Windows.Forms.Panel();
+            this.panel_r = new System.Windows.Forms.Panel();
+            this.trackBar_b = new System.Windows.Forms.TrackBar();
+            this.trackBar_g = new System.Windows.Forms.TrackBar();
+            this.trackBar_r = new System.Windows.Forms.TrackBar();
+            this.lb_r2 = new System.Windows.Forms.Label();
+            this.lb_g2 = new System.Windows.Forms.Label();
+            this.lb_b2 = new System.Windows.Forms.Label();
+            this.panel_rgb = new System.Windows.Forms.Panel();
             this.groupBox_dtp1 = new System.Windows.Forms.GroupBox();
             this.groupBox_checkedlistbox = new System.Windows.Forms.GroupBox();
             this.bt_clb2 = new System.Windows.Forms.Button();
@@ -108,6 +118,9 @@
             this.groupBox_dtp2.SuspendLayout();
             this.groupBox_dtp3.SuspendLayout();
             this.groupBox_rgb.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_b)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_g)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_r)).BeginInit();
             this.groupBox_dtp1.SuspendLayout();
             this.groupBox_checkedlistbox.SuspendLayout();
             this.groupBox_progress.SuspendLayout();
@@ -347,67 +360,40 @@
             this.rb_color2.UseVisualStyleBackColor = true;
             this.rb_color2.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
-            // tb_b
+            // lb_b1
             // 
-            this.tb_b.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_b.Location = new System.Drawing.Point(244, 104);
-            this.tb_b.Name = "tb_b";
-            this.tb_b.Size = new System.Drawing.Size(58, 32);
-            this.tb_b.TabIndex = 81;
-            this.tb_b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.lb_b1.AutoSize = true;
+            this.lb_b1.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_b1.Location = new System.Drawing.Point(6, 154);
+            this.lb_b1.Name = "lb_b1";
+            this.lb_b1.Size = new System.Drawing.Size(22, 24);
+            this.lb_b1.TabIndex = 78;
+            this.lb_b1.Text = "B";
             // 
-            // tb_g
+            // lb_g1
             // 
-            this.tb_g.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_g.Location = new System.Drawing.Point(244, 68);
-            this.tb_g.Name = "tb_g";
-            this.tb_g.Size = new System.Drawing.Size(58, 32);
-            this.tb_g.TabIndex = 80;
-            this.tb_g.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.lb_g1.AutoSize = true;
+            this.lb_g1.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_g1.Location = new System.Drawing.Point(6, 117);
+            this.lb_g1.Name = "lb_g1";
+            this.lb_g1.Size = new System.Drawing.Size(22, 24);
+            this.lb_g1.TabIndex = 77;
+            this.lb_g1.Text = "G";
             // 
-            // tb_r
+            // lb_r1
             // 
-            this.tb_r.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_r.Location = new System.Drawing.Point(244, 32);
-            this.tb_r.Name = "tb_r";
-            this.tb_r.Size = new System.Drawing.Size(58, 32);
-            this.tb_r.TabIndex = 79;
-            this.tb_r.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // lb_b
-            // 
-            this.lb_b.AutoSize = true;
-            this.lb_b.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_b.Location = new System.Drawing.Point(6, 106);
-            this.lb_b.Name = "lb_b";
-            this.lb_b.Size = new System.Drawing.Size(22, 24);
-            this.lb_b.TabIndex = 78;
-            this.lb_b.Text = "B";
-            // 
-            // lb_g
-            // 
-            this.lb_g.AutoSize = true;
-            this.lb_g.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_g.Location = new System.Drawing.Point(6, 69);
-            this.lb_g.Name = "lb_g";
-            this.lb_g.Size = new System.Drawing.Size(22, 24);
-            this.lb_g.TabIndex = 77;
-            this.lb_g.Text = "G";
-            // 
-            // lb_r
-            // 
-            this.lb_r.AutoSize = true;
-            this.lb_r.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_r.Location = new System.Drawing.Point(6, 34);
-            this.lb_r.Name = "lb_r";
-            this.lb_r.Size = new System.Drawing.Size(22, 24);
-            this.lb_r.TabIndex = 76;
-            this.lb_r.Text = "R";
+            this.lb_r1.AutoSize = true;
+            this.lb_r1.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_r1.Location = new System.Drawing.Point(6, 82);
+            this.lb_r1.Name = "lb_r1";
+            this.lb_r1.Size = new System.Drawing.Size(22, 24);
+            this.lb_r1.TabIndex = 76;
+            this.lb_r1.Text = "R";
             // 
             // hScrollBar_b
             // 
             this.hScrollBar_b.LargeChange = 1;
-            this.hScrollBar_b.Location = new System.Drawing.Point(30, 107);
+            this.hScrollBar_b.Location = new System.Drawing.Point(30, 155);
             this.hScrollBar_b.Maximum = 255;
             this.hScrollBar_b.Name = "hScrollBar_b";
             this.hScrollBar_b.Size = new System.Drawing.Size(200, 20);
@@ -417,7 +403,7 @@
             // hScrollBar_g
             // 
             this.hScrollBar_g.LargeChange = 1;
-            this.hScrollBar_g.Location = new System.Drawing.Point(30, 70);
+            this.hScrollBar_g.Location = new System.Drawing.Point(30, 118);
             this.hScrollBar_g.Maximum = 255;
             this.hScrollBar_g.Name = "hScrollBar_g";
             this.hScrollBar_g.Size = new System.Drawing.Size(200, 20);
@@ -427,7 +413,7 @@
             // hScrollBar_r
             // 
             this.hScrollBar_r.LargeChange = 1;
-            this.hScrollBar_r.Location = new System.Drawing.Point(30, 35);
+            this.hScrollBar_r.Location = new System.Drawing.Point(30, 83);
             this.hScrollBar_r.Maximum = 255;
             this.hScrollBar_r.Name = "hScrollBar_r";
             this.hScrollBar_r.Size = new System.Drawing.Size(200, 20);
@@ -537,9 +523,9 @@
             this.groupBox_dtp2.Controls.Add(this.dateTimePicker3);
             this.groupBox_dtp2.Controls.Add(this.bt1);
             this.groupBox_dtp2.Controls.Add(this.bt2);
-            this.groupBox_dtp2.Location = new System.Drawing.Point(349, 403);
+            this.groupBox_dtp2.Location = new System.Drawing.Point(644, 250);
             this.groupBox_dtp2.Name = "groupBox_dtp2";
-            this.groupBox_dtp2.Size = new System.Drawing.Size(220, 140);
+            this.groupBox_dtp2.Size = new System.Drawing.Size(238, 149);
             this.groupBox_dtp2.TabIndex = 95;
             this.groupBox_dtp2.TabStop = false;
             this.groupBox_dtp2.Text = "DateTimePicker";
@@ -600,9 +586,9 @@
             this.groupBox_dtp3.Controls.Add(this.bt_dtp_get);
             this.groupBox_dtp3.Controls.Add(this.bt_dtp_set);
             this.groupBox_dtp3.Controls.Add(this.dateTimePicker4);
-            this.groupBox_dtp3.Location = new System.Drawing.Point(583, 405);
+            this.groupBox_dtp3.Location = new System.Drawing.Point(898, 250);
             this.groupBox_dtp3.Name = "groupBox_dtp3";
-            this.groupBox_dtp3.Size = new System.Drawing.Size(160, 140);
+            this.groupBox_dtp3.Size = new System.Drawing.Size(194, 149);
             this.groupBox_dtp3.TabIndex = 94;
             this.groupBox_dtp3.TabStop = false;
             this.groupBox_dtp3.Text = "DateTimePicker";
@@ -683,20 +669,143 @@
             // groupBox_rgb
             // 
             this.groupBox_rgb.Controls.Add(this.lb_r);
+            this.groupBox_rgb.Controls.Add(this.lb_g);
+            this.groupBox_rgb.Controls.Add(this.lb_b);
+            this.groupBox_rgb.Controls.Add(this.panel_b);
+            this.groupBox_rgb.Controls.Add(this.panel_g);
+            this.groupBox_rgb.Controls.Add(this.panel_r);
+            this.groupBox_rgb.Controls.Add(this.trackBar_b);
+            this.groupBox_rgb.Controls.Add(this.trackBar_g);
+            this.groupBox_rgb.Controls.Add(this.trackBar_r);
+            this.groupBox_rgb.Controls.Add(this.lb_r2);
+            this.groupBox_rgb.Controls.Add(this.lb_g2);
+            this.groupBox_rgb.Controls.Add(this.lb_b2);
+            this.groupBox_rgb.Controls.Add(this.panel_rgb);
+            this.groupBox_rgb.Controls.Add(this.lb_r1);
             this.groupBox_rgb.Controls.Add(this.hScrollBar_r);
             this.groupBox_rgb.Controls.Add(this.hScrollBar_g);
             this.groupBox_rgb.Controls.Add(this.hScrollBar_b);
-            this.groupBox_rgb.Controls.Add(this.lb_g);
-            this.groupBox_rgb.Controls.Add(this.lb_b);
-            this.groupBox_rgb.Controls.Add(this.tb_r);
-            this.groupBox_rgb.Controls.Add(this.tb_g);
-            this.groupBox_rgb.Controls.Add(this.tb_b);
-            this.groupBox_rgb.Location = new System.Drawing.Point(12, 518);
+            this.groupBox_rgb.Controls.Add(this.lb_g1);
+            this.groupBox_rgb.Controls.Add(this.lb_b1);
+            this.groupBox_rgb.Location = new System.Drawing.Point(12, 519);
             this.groupBox_rgb.Name = "groupBox_rgb";
-            this.groupBox_rgb.Size = new System.Drawing.Size(310, 221);
+            this.groupBox_rgb.Size = new System.Drawing.Size(227, 195);
             this.groupBox_rgb.TabIndex = 96;
             this.groupBox_rgb.TabStop = false;
             this.groupBox_rgb.Text = "RGB";
+            // 
+            // lb_r
+            // 
+            this.lb_r.AutoSize = true;
+            this.lb_r.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_r.Location = new System.Drawing.Point(233, 82);
+            this.lb_r.Name = "lb_r";
+            this.lb_r.Size = new System.Drawing.Size(22, 24);
+            this.lb_r.TabIndex = 89;
+            this.lb_r.Text = "R";
+            // 
+            // lb_g
+            // 
+            this.lb_g.AutoSize = true;
+            this.lb_g.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_g.Location = new System.Drawing.Point(233, 117);
+            this.lb_g.Name = "lb_g";
+            this.lb_g.Size = new System.Drawing.Size(22, 24);
+            this.lb_g.TabIndex = 90;
+            this.lb_g.Text = "G";
+            // 
+            // lb_b
+            // 
+            this.lb_b.AutoSize = true;
+            this.lb_b.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_b.Location = new System.Drawing.Point(233, 154);
+            this.lb_b.Name = "lb_b";
+            this.lb_b.Size = new System.Drawing.Size(22, 24);
+            this.lb_b.TabIndex = 91;
+            this.lb_b.Text = "B";
+            // 
+            // panel_b
+            // 
+            this.panel_b.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel_b.Location = new System.Drawing.Point(255, 196);
+            this.panel_b.Name = "panel_b";
+            this.panel_b.Size = new System.Drawing.Size(50, 50);
+            this.panel_b.TabIndex = 84;
+            // 
+            // panel_g
+            // 
+            this.panel_g.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel_g.Location = new System.Drawing.Point(255, 143);
+            this.panel_g.Name = "panel_g";
+            this.panel_g.Size = new System.Drawing.Size(50, 50);
+            this.panel_g.TabIndex = 84;
+            // 
+            // panel_r
+            // 
+            this.panel_r.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel_r.Location = new System.Drawing.Point(255, 83);
+            this.panel_r.Name = "panel_r";
+            this.panel_r.Size = new System.Drawing.Size(50, 50);
+            this.panel_r.TabIndex = 83;
+            // 
+            // trackBar_b
+            // 
+            this.trackBar_b.Location = new System.Drawing.Point(35, 238);
+            this.trackBar_b.Name = "trackBar_b";
+            this.trackBar_b.Size = new System.Drawing.Size(200, 45);
+            this.trackBar_b.TabIndex = 88;
+            // 
+            // trackBar_g
+            // 
+            this.trackBar_g.Location = new System.Drawing.Point(35, 213);
+            this.trackBar_g.Name = "trackBar_g";
+            this.trackBar_g.Size = new System.Drawing.Size(200, 45);
+            this.trackBar_g.TabIndex = 87;
+            // 
+            // trackBar_r
+            // 
+            this.trackBar_r.Location = new System.Drawing.Point(34, 187);
+            this.trackBar_r.Name = "trackBar_r";
+            this.trackBar_r.Size = new System.Drawing.Size(200, 45);
+            this.trackBar_r.TabIndex = 86;
+            // 
+            // lb_r2
+            // 
+            this.lb_r2.AutoSize = true;
+            this.lb_r2.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_r2.Location = new System.Drawing.Point(6, 187);
+            this.lb_r2.Name = "lb_r2";
+            this.lb_r2.Size = new System.Drawing.Size(22, 24);
+            this.lb_r2.TabIndex = 83;
+            this.lb_r2.Text = "R";
+            // 
+            // lb_g2
+            // 
+            this.lb_g2.AutoSize = true;
+            this.lb_g2.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_g2.Location = new System.Drawing.Point(6, 222);
+            this.lb_g2.Name = "lb_g2";
+            this.lb_g2.Size = new System.Drawing.Size(22, 24);
+            this.lb_g2.TabIndex = 84;
+            this.lb_g2.Text = "G";
+            // 
+            // lb_b2
+            // 
+            this.lb_b2.AutoSize = true;
+            this.lb_b2.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_b2.Location = new System.Drawing.Point(6, 259);
+            this.lb_b2.Name = "lb_b2";
+            this.lb_b2.Size = new System.Drawing.Size(22, 24);
+            this.lb_b2.TabIndex = 85;
+            this.lb_b2.Text = "B";
+            // 
+            // panel_rgb
+            // 
+            this.panel_rgb.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel_rgb.Location = new System.Drawing.Point(30, 21);
+            this.panel_rgb.Name = "panel_rgb";
+            this.panel_rgb.Size = new System.Drawing.Size(250, 50);
+            this.panel_rgb.TabIndex = 82;
             // 
             // groupBox_dtp1
             // 
@@ -833,7 +942,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1000, 742);
+            this.ClientSize = new System.Drawing.Size(1164, 742);
             this.Controls.Add(this.groupBox_pbx);
             this.Controls.Add(this.groupBox_progress);
             this.Controls.Add(this.groupBox_checkedlistbox);
@@ -869,6 +978,9 @@
             this.groupBox_dtp3.ResumeLayout(false);
             this.groupBox_rgb.ResumeLayout(false);
             this.groupBox_rgb.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_b)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_g)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_r)).EndInit();
             this.groupBox_dtp1.ResumeLayout(false);
             this.groupBox_dtp1.PerformLayout();
             this.groupBox_checkedlistbox.ResumeLayout(false);
@@ -902,12 +1014,9 @@
         private System.Windows.Forms.RadioButton rb_color1;
         private System.Windows.Forms.RadioButton rb_color3;
         private System.Windows.Forms.RadioButton rb_color2;
-        private System.Windows.Forms.TextBox tb_b;
-        private System.Windows.Forms.TextBox tb_g;
-        private System.Windows.Forms.TextBox tb_r;
-        private System.Windows.Forms.Label lb_b;
-        private System.Windows.Forms.Label lb_g;
-        private System.Windows.Forms.Label lb_r;
+        private System.Windows.Forms.Label lb_b1;
+        private System.Windows.Forms.Label lb_g1;
+        private System.Windows.Forms.Label lb_r1;
         private System.Windows.Forms.HScrollBar hScrollBar_b;
         private System.Windows.Forms.HScrollBar hScrollBar_g;
         private System.Windows.Forms.HScrollBar hScrollBar_r;
@@ -950,6 +1059,19 @@
         private System.Windows.Forms.Button bt_stop;
         private System.Windows.Forms.Button bt_start;
         private System.Windows.Forms.GroupBox groupBox_pbx;
+        private System.Windows.Forms.Panel panel_rgb;
+        private System.Windows.Forms.Label lb_r2;
+        private System.Windows.Forms.Label lb_g2;
+        private System.Windows.Forms.Label lb_b2;
+        private System.Windows.Forms.TrackBar trackBar_b;
+        private System.Windows.Forms.TrackBar trackBar_g;
+        private System.Windows.Forms.TrackBar trackBar_r;
+        private System.Windows.Forms.Label lb_r;
+        private System.Windows.Forms.Label lb_g;
+        private System.Windows.Forms.Label lb_b;
+        private System.Windows.Forms.Panel panel_b;
+        private System.Windows.Forms.Panel panel_g;
+        private System.Windows.Forms.Panel panel_r;
     }
 }
 

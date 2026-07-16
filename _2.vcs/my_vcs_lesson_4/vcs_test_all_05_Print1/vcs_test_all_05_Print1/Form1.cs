@@ -76,16 +76,12 @@ namespace vcs_test_all_05_Print1
             pictureBox1.Size = new Size(305, 400);
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
 
-            //預覽列印 Star
-            groupBox1.Location = new Point(x_st + dx * 2, y_st + dy * 6);
             //control
             groupBox_control.Location = new Point(x_st + dx * 2, y_st + dy * 8 + 20);
 
             //列出印表機資訊
             groupBox2.Location = new Point(x_st + dx * 4 - 80, y_st + dy * 0);
 
-            pictureBox_star.Size = new Size(200, 200);
-            pictureBox_star.Location = new Point(x_st + dx * 4 - 80, y_st + dy * 5 + 10);
             dataGridView1.Size = new Size(200, 200);
             dataGridView1.Location = new Point(x_st + dx * 4 - 80, y_st + dy * 5 + 220);
 
@@ -153,28 +149,11 @@ namespace vcs_test_all_05_Print1
                     printDocument1.DefaultPageSettings.PrinterResolution = printDocument1.DefaultPageSettings.PrinterSettings.PrinterResolutions[0];
                 }
             }
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //預覽列印
-            //加入PrintDocument 和 PrintPreviewDialog
-            //printPreviewDialog1屬性之Document選printDocument1
-            //編輯 printDocument1_PrintPage
-
-            //無印表機也可以預覽列印
-
-            printPreviewDialog1.ShowDialog();
-
         }
-
-
-
-
-
-
 
         /*  fewer
         private void printDocument1_PrintPage(object sender, PrintPageEventArgs e)
@@ -374,12 +353,7 @@ namespace vcs_test_all_05_Print1
 
             // Display the print preview of the calendar.
             printPreviewDialog_Calendar.ShowDialog();
-
-
-
-
         }
-
 
         // Generate some "random" data for
         // the indicated number of days.
@@ -416,8 +390,6 @@ namespace vcs_test_all_05_Print1
             }
             return result.Trim();
         }
-
-
 
         private const int HeaderMargin = 5;
         private const int ColMargin = 5;
@@ -592,13 +564,10 @@ namespace vcs_test_all_05_Print1
                     for (int i = 0; i < values[r].Length; i++)
                     {
                         // Draw the text.
-                        RectangleF layout_rect = new
-                            RectangleF(x + ColMargin, y, col_wid[i], RowMargin);
+                        RectangleF layout_rect = new                            RectangleF(x + ColMargin, y, col_wid[i], RowMargin);
                         string_format.Alignment = alignments[i];
                         string_format.LineAlignment = StringAlignment.Near;
-                        gr.DrawString(values[r][i].ToString(),
-                            body_font, Brushes.Black,
-                            layout_rect, string_format);
+                        gr.DrawString(values[r][i].ToString(),                            body_font, Brushes.Black,                            layout_rect, string_format);
 
                         x += col_wid[i] + 2 * ColMargin;
                     }
@@ -607,267 +576,11 @@ namespace vcs_test_all_05_Print1
             }
 
             // Outline the grid.
-            grid_bounds = new Rectangle(
-                grid_bounds.X, grid_bounds.Y, grid_bounds.Width,
-                (values.Length + 1) * RowMargin + HeaderMargin);
+            grid_bounds = new Rectangle(                grid_bounds.X, grid_bounds.Y, grid_bounds.Width,                (values.Length + 1) * RowMargin + HeaderMargin);
             gr.DrawRectangle(Pens.Black, grid_bounds);
         }
 
-        //#region 預覽列印 Star
-
-        private void bt_print_star_Click(object sender, EventArgs e)
-        {
-            //預覽列印 Star
-            printPreviewDialog_star.ShowDialog();
-        }
-
-        // Draw the star.
-        private void printDocument_star_PrintPage(object sender, PrintPageEventArgs e)
-        {
-            try
-            {
-                // Convert mm to inches * 100.
-                float diameter = float.Parse(txtRadius.Text);
-                diameter = diameter / 25.4f * 100f;
-
-                float cx = (e.MarginBounds.Left + e.MarginBounds.Right) / 2f;
-                float cy = (e.MarginBounds.Top + e.MarginBounds.Bottom) / 2f;
-                float x = cx - diameter / 2f;
-                float y = cy - diameter / 2f;
-
-                RectangleF rect = new RectangleF(x, y, diameter, diameter);
-
-                // Draw the star.
-                e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                DrawStar(e.Graphics, Pens.Red, Brushes.Yellow,
-                    (int)nudPoints.Value, (int)nudSkip.Value,
-                    rect);
-
-                // Draw axes in the middle of the page.
-                // DrawAxes(e);
-
-                e.HasMorePages = false;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        // Draw axes in the middle of the page.
-        private void DrawAxes(PrintPageEventArgs e)
-        {
-            float cx = (e.MarginBounds.Left + e.MarginBounds.Right) / 2f;
-            float cy = (e.MarginBounds.Top + e.MarginBounds.Bottom) / 2f;
-
-            e.Graphics.DrawLine(Pens.Black,
-                e.MarginBounds.Left, cy,
-                e.MarginBounds.Right, cy);
-            e.Graphics.DrawLine(Pens.Black,
-                cx, e.MarginBounds.Top,
-                cx, e.MarginBounds.Bottom);
-
-            for (float x = cx; x <= e.MarginBounds.Right; x += 100)
-                e.Graphics.DrawLine(Pens.Black, x, cy - 25, x, cy + 25);
-            for (float x = cx; x >= e.MarginBounds.Left; x -= 100)
-                e.Graphics.DrawLine(Pens.Black, x, cy - 25, x, cy + 25);
-
-            for (float y = cy; y <= e.MarginBounds.Bottom; y += 100)
-                e.Graphics.DrawLine(Pens.Black, cx - 25, y, cx + 25, y);
-            for (float y = cy; y >= e.MarginBounds.Top; y -= 100)
-                e.Graphics.DrawLine(Pens.Black, cx - 25, y, cx + 25, y);
-        }
-
-        // Draw the indicated star in the rectangle.
-        private void DrawStar(Graphics gr, Pen the_pen, Brush the_brush, int num_points, int skip, RectangleF rect)
-        {
-            // Get the star's points.
-            PointF[] star_points = MakeStarPoints(-Math.PI / 2, num_points, skip, rect);
-
-            // Draw the star.
-            gr.FillPolygon(the_brush, star_points);
-            gr.DrawPolygon(the_pen, star_points);
-        }
-
-        // Generate the points for a star.
-        private PointF[] MakeStarPoints(double start_theta, int num_points, int skip, RectangleF rect)
-        {
-            double theta, dtheta;
-            PointF[] result;
-            float rx = rect.Width / 2f;
-            float ry = rect.Height / 2f;
-            float cx = rect.X + rx;
-            float cy = rect.Y + ry;
-
-            // If this is a polygon, don't bother with concave points.
-            if (skip == 1)
-            {
-                result = new PointF[num_points];
-                theta = start_theta;
-                dtheta = 2 * Math.PI / num_points;
-                for (int i = 0; i < num_points; i++)
-                {
-                    result[i] = new PointF(
-                        (float)(cx + rx * Math.Cos(theta)),
-                        (float)(cy + ry * Math.Sin(theta)));
-                    theta += dtheta;
-                }
-                return result;
-            }
-
-            // Find the radius for the concave vertices.
-            double concave_radius = CalculateConcaveRadius(num_points, skip);
-
-            // Make the points.
-            result = new PointF[2 * num_points];
-            theta = start_theta;
-            dtheta = Math.PI / num_points;
-            for (int i = 0; i < num_points; i++)
-            {
-                result[2 * i] = new PointF(
-                    (float)(cx + rx * Math.Cos(theta)),
-                    (float)(cy + ry * Math.Sin(theta)));
-                theta += dtheta;
-                result[2 * i + 1] = new PointF(
-                    (float)(cx + rx * Math.Cos(theta) * concave_radius),
-                    (float)(cy + ry * Math.Sin(theta) * concave_radius));
-                theta += dtheta;
-            }
-            return result;
-        }
-
-        // Calculate the inner star radius.
-        private double CalculateConcaveRadius(int num_points, int skip)
-        {
-            // For really small numbers of points.
-            if (num_points < 5) return 0.33f;
-
-            // Calculate angles to key points.
-            double dtheta = 2 * Math.PI / num_points;
-            double theta00 = -Math.PI / 2;
-            double theta01 = theta00 + dtheta * skip;
-            double theta10 = theta00 + dtheta;
-            double theta11 = theta10 - dtheta * skip;
-
-            // Find the key points.
-            PointF pt00 = new PointF(
-                (float)Math.Cos(theta00),
-                (float)Math.Sin(theta00));
-            PointF pt01 = new PointF(
-                (float)Math.Cos(theta01),
-                (float)Math.Sin(theta01));
-            PointF pt10 = new PointF(
-                (float)Math.Cos(theta10),
-                (float)Math.Sin(theta10));
-            PointF pt11 = new PointF(
-                (float)Math.Cos(theta11),
-                (float)Math.Sin(theta11));
-
-            // See where the segments connecting the points intersect.
-            bool lines_intersect, segments_intersect;
-            PointF intersection, close_p1, close_p2;
-            FindIntersection(pt00, pt01, pt10, pt11,
-                out lines_intersect, out segments_intersect,
-                out intersection, out close_p1, out close_p2);
-
-            // Calculate the distance between the
-            // point of intersection and the center.
-            return Math.Sqrt(
-                intersection.X * intersection.X +
-                intersection.Y * intersection.Y);
-        }
-
-        // Find the point of intersection between
-        // the lines p1 --> p2 and p3 --> p4.
-        private void FindIntersection(
-            PointF p1, PointF p2, PointF p3, PointF p4,
-            out bool lines_intersect, out bool segments_intersect,
-            out PointF intersection,
-            out PointF close_p1, out PointF close_p2)
-        {
-            // Get the segments' parameters.
-            float dx12 = p2.X - p1.X;
-            float dy12 = p2.Y - p1.Y;
-            float dx34 = p4.X - p3.X;
-            float dy34 = p4.Y - p3.Y;
-
-            // Solve for t1 and t2
-            float denominator = (dy12 * dx34 - dx12 * dy34);
-
-            float t1 =
-                ((p1.X - p3.X) * dy34 + (p3.Y - p1.Y) * dx34)
-                    / denominator;
-            if (float.IsInfinity(t1))
-            {
-                // The lines are parallel (or close enough to it).
-                lines_intersect = false;
-                segments_intersect = false;
-                intersection = new PointF(float.NaN, float.NaN);
-                close_p1 = new PointF(float.NaN, float.NaN);
-                close_p2 = new PointF(float.NaN, float.NaN);
-                return;
-            }
-            lines_intersect = true;
-
-            float t2 =
-                ((p3.X - p1.X) * dy12 + (p1.Y - p3.Y) * dx12)
-                    / -denominator;
-
-            // Find the point of intersection.
-            intersection = new PointF(p1.X + dx12 * t1, p1.Y + dy12 * t1);
-
-            // The segments intersect if t1 and t2 are between 0 and 1.
-            segments_intersect =
-                ((t1 >= 0) && (t1 <= 1) &&
-                 (t2 >= 0) && (t2 <= 1));
-
-            // Find the closest points on the segments.
-            if (t1 < 0)
-            {
-                t1 = 0;
-            }
-            else if (t1 > 1)
-            {
-                t1 = 1;
-            }
-
-            if (t2 < 0)
-            {
-                t2 = 0;
-            }
-            else if (t2 > 1)
-            {
-                t2 = 1;
-            }
-
-            close_p1 = new PointF(p1.X + dx12 * t1, p1.Y + dy12 * t1);
-            close_p2 = new PointF(p3.X + dx34 * t2, p3.Y + dy34 * t2);
-        }
-
-
-        // Draw the star.
-        private void pictureBox_star_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-
-            // Draw the star.
-            DrawStar(e.Graphics, Pens.Red, Brushes.Yellow,
-                (int)nudPoints.Value, (int)nudSkip.Value,
-                pictureBox_star.ClientRectangle);
-        }
-
-        // Redraw the star with the new parameters.
-        private void nudPoints_ValueChanged(object sender, EventArgs e)
-        {
-            nudSkip.Maximum = (int)(((int)nudPoints.Value - 1) / 2.0);
-            pictureBox_star.Refresh();
-        }
-
-        private void nudSkip_ValueChanged(object sender, EventArgs e)
-        {
-            pictureBox_star.Refresh();
-        }
-        //#endregion
+        //6060
 
         private void button7_Click(object sender, EventArgs e)
         {
@@ -1376,70 +1089,13 @@ namespace vcs_test_all_05_Print1
         }
         //#endregion
 
-        //預覽列印巴斯卡三角形 ST
+        //6060
 
-        // Display the print preview.
         private void button13_Click(object sender, EventArgs e)
         {
-            // printDocument_pascal.PrinterSettings.PrinterName = "Dell Photo AIO Printer 926";
-
-            printDocument_pascal.DefaultPageSettings.Margins = new System.Drawing.Printing.Margins(50, 50, 50, 50);
-            printDocument_pascal.DefaultPageSettings.Landscape = true;
-            printPreviewDialog_pascal.ShowDialog();
         }
 
-        // Draw the triangle.
-        private void printDocument_pascal_PrintPage(object sender, PrintPageEventArgs e)
-        {
-            using (Font font = new Font("Courier New", 4))
-            {
-                using (StringFormat format = new StringFormat())
-                {
-                    // Center each line.
-                    format.Alignment = StringAlignment.Center;
-
-                    const float width_factor = 6.5f;
-                    int num_wid = (int)(width_factor * e.Graphics.MeasureString("0", font).Width);
-                    int num_hgt = (int)e.Graphics.MeasureString("0", font).Height;
-                    int y = e.MarginBounds.Top;
-                    int xmid = (e.MarginBounds.Left + e.MarginBounds.Right) / 2;
-
-                    // Make the first row.
-                    List<int> numbers = new List<int>();
-                    numbers.Add(1);
-
-                    // Display rows.
-                    while (y < e.MarginBounds.Height)
-                    {
-                        int x = xmid - (num_wid * numbers.Count) / 2;
-                        if (x < e.MarginBounds.Left) break;
-
-                        // Display the current list of numbers.
-                        foreach (int num in numbers)
-                        {
-                            e.Graphics.DrawString(num.ToString(),
-                                font, Brushes.Black, x, y, format);
-                            x += num_wid;
-                        }
-
-                        // Add the next number to the list.
-                        List<int> new_numbers = new List<int>();
-                        new_numbers.Add(1);
-                        for (int i = 1; i < numbers.Count; i++)
-                        {
-                            new_numbers.Add(numbers[i - 1] + numbers[i]);
-                        }
-                        new_numbers.Add(1);
-                        numbers = new_numbers;
-
-                        y += num_hgt;
-                    }
-                }
-            }
-
-        }
-
-        //預覽列印巴斯卡三角形 SP
+        //6060
 
         // Display information about the selected printer.
         private void cboPrinters_SelectedIndexChanged(object sender, EventArgs e)
@@ -1643,18 +1299,10 @@ namespace vcs_test_all_05_Print1
 
         private void bt_print2b_Click(object sender, EventArgs e)
         {
-            printDialog2.ShowDialog();
         }
 
         private void printDocument2_PrintPage(object sender, PrintPageEventArgs e)
         {
-            int x_st = 100;
-            int y_st = 100;
-            int dy = 60;
-            e.Graphics.DrawString("老來多驚夢，", new Font("細明體", 36, FontStyle.Regular), Brushes.Black, x_st, y_st);
-            e.Graphics.DrawString("似有獻刀人，", new Font("細明體", 36, FontStyle.Regular), Brushes.Black, x_st, y_st + dy * 1);
-            e.Graphics.DrawString("醒來懼銅鏡，", new Font("細明體", 36, FontStyle.Regular), Brushes.Black, x_st, y_st + dy * 2);
-            e.Graphics.DrawString("怕顯董賊身。", new Font("細明體", 36, FontStyle.Regular), Brushes.Black, x_st, y_st + dy * 3);
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -1726,12 +1374,21 @@ namespace vcs_test_all_05_Print1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-/*  可搬出
+/*
 
- */
+//預覽列印 Star
+控件PrintPreviewDialog    printPreviewDialog_xxxx 內的參數 Document 設定為 printDocument_xxxx
 
+//列印文件
+控件PrintDocument         printDocument_xxxx
+
+printDocument_xxxx 的PrintPage方法     printDocument_xxxx_PrintPage 設定要列印的內容
+
+//預覽列印 Star
+//            printPreviewDialog_star.ShowDialog();
+
+*/

@@ -41,6 +41,11 @@
             this.printDocument0 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog0 = new System.Windows.Forms.PrintPreviewDialog();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button0 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.printPreviewDialog_pascal = new System.Windows.Forms.PrintPreviewDialog();
+            this.printDocument_pascal = new System.Drawing.Printing.PrintDocument();
             this.groupBox0.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -149,11 +154,62 @@
             this.textBox1.Size = new System.Drawing.Size(100, 100);
             this.textBox1.TabIndex = 154;
             // 
+            // button0
+            // 
+            this.button0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button0.Location = new System.Drawing.Point(22, 320);
+            this.button0.Name = "button0";
+            this.button0.Size = new System.Drawing.Size(180, 55);
+            this.button0.TabIndex = 150;
+            this.button0.Text = "預覽列印巴斯卡三角形";
+            this.button0.UseVisualStyleBackColor = true;
+            this.button0.Click += new System.EventHandler(this.button0_Click);
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button1.Location = new System.Drawing.Point(22, 381);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(180, 55);
+            this.button1.TabIndex = 155;
+            this.button1.Text = "new";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button2.Location = new System.Drawing.Point(22, 442);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(180, 55);
+            this.button2.TabIndex = 156;
+            this.button2.Text = "new";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // printPreviewDialog_pascal
+            // 
+            this.printPreviewDialog_pascal.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog_pascal.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog_pascal.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog_pascal.Document = this.printDocument_pascal;
+            this.printPreviewDialog_pascal.Enabled = true;
+            this.printPreviewDialog_pascal.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog_pascal.Icon")));
+            this.printPreviewDialog_pascal.Name = "printPreviewDialog_pascal";
+            this.printPreviewDialog_pascal.Visible = false;
+            // 
+            // printDocument_pascal
+            // 
+            this.printDocument_pascal.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_pascal_PrintPage);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1047, 490);
+            this.ClientSize = new System.Drawing.Size(1047, 511);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.button0);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
@@ -181,6 +237,11 @@
         private System.Drawing.Printing.PrintDocument printDocument0;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog0;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button0;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog_pascal;
+        private System.Drawing.Printing.PrintDocument printDocument_pascal;
     }
 }
 

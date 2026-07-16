@@ -55,10 +55,39 @@ namespace vcs__small
 
             //------------------------------------------------------------  # 60個
 
-            groupBox_rgb.BackColor = Color.FromArgb(hScrollBar_r.Value, hScrollBar_g.Value, hScrollBar_b.Value);
-            tb_r.BackColor = Color.FromArgb(hScrollBar_r.Value, 0, 0);
-            tb_g.BackColor = Color.FromArgb(0, hScrollBar_g.Value, 0);
-            tb_b.BackColor = Color.FromArgb(0, 0, hScrollBar_b.Value);
+            trackBar_r.Minimum = 0;
+            trackBar_r.Maximum = 255;
+            trackBar_r.TickFrequency = 30;
+            trackBar_r.LargeChange = 30;
+            trackBar_r.SmallChange = 10;
+            trackBar_g.Minimum = 0;
+            trackBar_g.Maximum = 255;
+            trackBar_g.TickFrequency = 30;
+            trackBar_g.LargeChange = 30;
+            trackBar_g.SmallChange = 10;
+            trackBar_b.Minimum = 0;
+            trackBar_b.Maximum = 255;
+            trackBar_b.TickFrequency = 30;
+            trackBar_b.LargeChange = 30;
+            trackBar_b.SmallChange = 10;
+
+            trackBar_r.MouseDown += new MouseEventHandler(trackBar_r_MouseDown);
+            trackBar_r.MouseMove += new MouseEventHandler(trackBar_r_MouseMove);
+            trackBar_r.MouseUp += new MouseEventHandler(trackBar_r_MouseUp);
+            trackBar_g.MouseDown += new MouseEventHandler(trackBar_g_MouseDown);
+            trackBar_g.MouseMove += new MouseEventHandler(trackBar_g_MouseMove);
+            trackBar_g.MouseUp += new MouseEventHandler(trackBar_g_MouseUp);
+            trackBar_b.MouseDown += new MouseEventHandler(trackBar_b_MouseDown);
+            trackBar_b.MouseMove += new MouseEventHandler(trackBar_b_MouseMove);
+            trackBar_b.MouseUp += new MouseEventHandler(trackBar_b_MouseUp);
+            trackBar_r.Scroll += new EventHandler(trackBar_rgb_Scroll);
+            trackBar_g.Scroll += new EventHandler(trackBar_rgb_Scroll);
+            trackBar_b.Scroll += new EventHandler(trackBar_rgb_Scroll);
+
+            panel_rgb.BackColor = Color.FromArgb(hScrollBar_r.Value, hScrollBar_g.Value, hScrollBar_b.Value);
+            panel_r.BackColor = Color.FromArgb(hScrollBar_r.Value, 0, 0);
+            panel_g.BackColor = Color.FromArgb(0, hScrollBar_g.Value, 0);
+            panel_b.BackColor = Color.FromArgb(0, 0, hScrollBar_b.Value);
 
             //------------------------------------------------------------  # 60個
 
@@ -79,10 +108,6 @@ namespace vcs__small
             domainUpDown1.SelectedIndex = 0;
 
             richTextBox1.Text += "目前共有 " + domainUpDown1.Items.Count + " 個選項\n";
-
-            //------------------------------------------------------------  # 60個
-
-
 
             //------------------------------------------------------------  # 60個
 
@@ -148,19 +173,20 @@ namespace vcs__small
 
         void show_item_location()
         {
-            int W = 150;
+            int W = 180;
             int H = 100;
             int x_st = 20;
             int y_st = 20;
             int dx = 100;
             int dy = 100;
 
-            groupBox_radiobutton0.Size = new Size(W, H);
-            groupBox_radiobutton1.Size = new Size(W, H);
-            groupBox_radiobutton2.Size = new Size(W, H);
-            groupBox_radiobutton3.Size = new Size(W, H);
+            groupBox_radiobutton0.Size = new Size(W - 10, H);
+            groupBox_radiobutton1.Size = new Size(W - 10, H);
+            groupBox_radiobutton2.Size = new Size(W - 10, H);
+            groupBox_radiobutton3.Size = new Size(W - 10, H);
             groupBox_numericupdown.Size = new Size(W * 2, H);
             groupBox_domainupdown.Size = new Size(W * 2, H);
+            groupBox_progress.Size = new Size(W * 2, H + 40);
 
             groupBox_radiobutton0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox_radiobutton1.Location = new Point(x_st + dx * 0, y_st + dy * 1 + 20);
@@ -170,18 +196,63 @@ namespace vcs__small
             groupBox_pbx.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             groupBox_rgb.Size = new Size(360, 260);
             groupBox_rgb.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-
             groupBox_numericupdown.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+
+            groupBox_dtp1.Size = new Size(W * 2 - 60, H + 60);
+            groupBox_dtp2.Size = new Size(W * 2 - 120, H + 60);
+            groupBox_dtp3.Size = new Size(W * 2 - 170, H + 60);
             groupBox_dtp1.Location = new Point(x_st + dx * 4, y_st + dy * 3);
-            groupBox_dtp2.Location = new Point(x_st + dx * 4, y_st + dy * 4 + 70);
-            groupBox_dtp3.Location = new Point(x_st + dx * 6 + 50, y_st + dy * 4 + 70);
-            groupBox_checkedlistbox.Location = new Point(x_st + dx * 4, y_st + dy * 6 + 40);
+            groupBox_dtp2.Location = new Point(x_st + dx * 8 - 80, y_st + dy * 3);
+            groupBox_dtp3.Location = new Point(x_st + dx * 10 - 20, y_st + dy * 3);
+            groupBox_checkedlistbox.Location = new Point(x_st + dx * 4, y_st + dy * 6);
             groupBox_domainupdown.Location = new Point(x_st + dx * 8, y_st + dy * 0);
             groupBox_progress.Location = new Point(x_st + dx * 8, y_st + dy * 1 + 20);
 
             richTextBox1.Size = new Size(360, 860);
             richTextBox1.Location = new Point(x_st + dx * 12, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            x_st = 10;
+            y_st = 14;
+            dx = 20;
+            dy = 30;
+            panel_rgb.Size = new Size(340, 50);
+            panel_rgb.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            lb_r1.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            lb_g1.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            lb_b1.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            lb_r2.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            lb_g2.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            lb_b2.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            hScrollBar_r.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            hScrollBar_g.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            hScrollBar_b.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            trackBar_r.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            trackBar_g.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            trackBar_b.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+
+            hScrollBar_r.Size = new Size(250, 20);
+            hScrollBar_g.Size = new Size(250, 20);
+            hScrollBar_b.Size = new Size(250, 20);
+            trackBar_r.Size = new Size(250, 20);
+            trackBar_g.Size = new Size(250, 20);
+            trackBar_b.Size = new Size(250, 20);
+
+            lb_r1.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            lb_g1.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            lb_b1.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+
+            y_st = 6;
+            lb_r.Location = new Point(x_st + dx * 14, y_st + dy * 2);
+            lb_g.Location = new Point(x_st + dx * 14, y_st + dy * 4 + 3);
+            lb_b.Location = new Point(x_st + dx * 14, y_st + dy * 6 + 6);
+            panel_r.Size = new Size(60, 40);
+            panel_g.Size = new Size(60, 40);
+            panel_b.Size = new Size(60, 40);
+            int dd = 24;
+            panel_r.Location = new Point(x_st + dx * 14, y_st + dy * 2 + dd);
+            panel_g.Location = new Point(x_st + dx * 14, y_st + dy * 4 + dd + 3);
+            panel_b.Location = new Point(x_st + dx * 14, y_st + dy * 6 + dd + 6);
 
             this.ClientSize = new Size(1600, 900);
             this.Text = "vcs__small";
@@ -321,13 +392,96 @@ namespace vcs__small
         {
             //用水平滾動條調整背景色的實例
             //调用了方法，另外把hScrollBar2的scrooll时间设置成hScrollBar1的scroll事件就行了
-            groupBox_rgb.BackColor = Color.FromArgb(hScrollBar_r.Value, hScrollBar_g.Value, hScrollBar_b.Value);
-            tb_r.Text = hScrollBar_r.Value.ToString();
-            tb_g.Text = hScrollBar_g.Value.ToString();
-            tb_b.Text = hScrollBar_b.Value.ToString();
-            tb_r.BackColor = Color.FromArgb(hScrollBar_r.Value, 0, 0);
-            tb_g.BackColor = Color.FromArgb(0, hScrollBar_g.Value, 0);
-            tb_b.BackColor = Color.FromArgb(0, 0, hScrollBar_b.Value);
+            panel_rgb.BackColor = Color.FromArgb(hScrollBar_r.Value, hScrollBar_g.Value, hScrollBar_b.Value);
+            lb_r.Text = hScrollBar_r.Value.ToString();
+            lb_g.Text = hScrollBar_g.Value.ToString();
+            lb_b.Text = hScrollBar_b.Value.ToString();
+            panel_r.BackColor = Color.FromArgb(hScrollBar_r.Value, 0, 0);
+            panel_g.BackColor = Color.FromArgb(0, hScrollBar_g.Value, 0);
+            panel_b.BackColor = Color.FromArgb(0, 0, hScrollBar_b.Value);
+            trackBar_r.Value = hScrollBar_r.Value;
+            trackBar_g.Value = hScrollBar_g.Value;
+            trackBar_b.Value = hScrollBar_b.Value;
+        }
+
+        void trackBar_rgb_Scroll(object sender, EventArgs e)
+        {
+            int r = trackBar_r.Value;
+            int g = trackBar_g.Value;
+            int b = trackBar_b.Value;
+            panel_rgb.BackColor = Color.FromArgb(r, g, b);
+            panel_r.BackColor = Color.FromArgb(r, 0, 0);
+            panel_g.BackColor = Color.FromArgb(0, g, 0);
+            panel_b.BackColor = Color.FromArgb(0, 0, b);
+            hScrollBar_r.Value = trackBar_r.Value;
+            hScrollBar_g.Value = trackBar_g.Value;
+            hScrollBar_b.Value = trackBar_b.Value;
+        }
+
+        bool flag_trackBar_r_mouse_down = false;
+        private void trackBar_r_MouseDown(object sender, MouseEventArgs e)
+        {
+            flag_trackBar_r_mouse_down = true;
+            richTextBox1.Text += "MouseDown :" + trackBar_r.Value.ToString() + "\n";
+            lb_r.Text = trackBar_r.Value.ToString();
+        }
+
+        private void trackBar_r_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (flag_trackBar_r_mouse_down == true)
+            {
+                lb_r.Text = trackBar_r.Value.ToString();
+            }
+        }
+
+        private void trackBar_r_MouseUp(object sender, MouseEventArgs e)
+        {
+            flag_trackBar_r_mouse_down = false;
+            lb_r.Text = trackBar_r.Value.ToString();
+        }
+
+        bool flag_trackBar_g_mouse_down = false;
+        private void trackBar_g_MouseDown(object sender, MouseEventArgs e)
+        {
+            flag_trackBar_g_mouse_down = true;
+            richTextBox1.Text += "MouseDown :" + trackBar_g.Value.ToString() + "\n";
+            lb_r.Text = trackBar_r.Value.ToString();
+        }
+
+        private void trackBar_g_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (flag_trackBar_g_mouse_down == true)
+            {
+                lb_g.Text = trackBar_g.Value.ToString();
+            }
+        }
+
+        private void trackBar_g_MouseUp(object sender, MouseEventArgs e)
+        {
+            flag_trackBar_g_mouse_down = false;
+            lb_r.Text = trackBar_r.Value.ToString();
+        }
+
+        bool flag_trackBar_b_mouse_down = false;
+        private void trackBar_b_MouseDown(object sender, MouseEventArgs e)
+        {
+            flag_trackBar_b_mouse_down = true;
+            richTextBox1.Text += "MouseDown :" + trackBar_b.Value.ToString() + "\n";
+            lb_r.Text = trackBar_r.Value.ToString();
+        }
+
+        private void trackBar_b_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (flag_trackBar_b_mouse_down == true)
+            {
+                lb_b.Text = trackBar_b.Value.ToString();
+            }
+        }
+
+        private void trackBar_b_MouseUp(object sender, MouseEventArgs e)
+        {
+            flag_trackBar_b_mouse_down = false;
+            lb_r.Text = trackBar_r.Value.ToString();
         }
 
         //------------------------------------------------------------  # 60個
@@ -571,14 +725,12 @@ namespace vcs__small
         }
 
         //------------------------------------------------------------  # 60個
-
     }
 }
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
@@ -588,79 +740,11 @@ namespace vcs__small
             richTextBox1.Text += dateTimePicker1.Value.ToString() + "\n";
             richTextBox1.Text += dateTimePicker1.Value.ToShortDateString() + "\n";
 
-
-
-cccc
-
 vcs 之 radioButton 可以用Image, Text設為空
 
-
-cccc
-            numericUpDown1.Maximum = new System.Decimal(new int[] { 150, 0, 0, 0 });
+numericUpDown1.Maximum = new System.Decimal(new int[] { 150, 0, 0, 0 });
 
 
 */
-
-
-/*
-        bool flag_mouse_down = false;
-        private void trackBar1_MouseDown(object sender, MouseEventArgs e)
-        {
-            flag_mouse_down = true;
-            richTextBox1.Text += "MouseDown :" + trackBar1.Value.ToString() + "\n";
-        }
-
-        private void trackBar1_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (flag_mouse_down == true)
-            {
-                lb_trackber.Text = "取得 : " + trackBar1.Value.ToString();
-            }
-        }
-
-        private void trackBar1_MouseUp(object sender, MouseEventArgs e)
-        {
-            flag_mouse_down = false;
-            richTextBox1.Text += "MouseUp :" + trackBar1.Value.ToString() + "\n";
-        }
-
-//------------------------------------------------------------  # 60個
-
-
-TrackBar範例
-
-            trackBar1.Minimum = 0;
-            trackBar1.Maximum = 255;
-            trackBar1.TickFrequency = 30;
-            trackBar1.LargeChange = 30;
-            trackBar1.SmallChange = 10;
-
-            trackBar2.Minimum = 0;
-            trackBar2.Maximum = 255;
-            trackBar2.TickFrequency = 30;
-            trackBar2.LargeChange = 30;
-            trackBar2.SmallChange = 10;
-
-            trackBar3.Minimum = 0;
-            trackBar3.Maximum = 255;
-            trackBar3.TickFrequency = 30;
-            trackBar3.LargeChange = 30;
-            trackBar3.SmallChange = 10;
-
-            label1.Text = "R";
-            label2.Text = "G";
-            label3.Text = "B";
-            label7.Text = "示範：";
-
-//scroll方法
-            label4.Text = trackBar1.Value.ToString();
-            label5.Text = trackBar2.Value.ToString();
-            label6.Text = trackBar3.Value.ToString();
-            textBox1.BackColor = Color.FromArgb(trackBar1.Value, trackBar2.Value, trackBar3.Value);
-
-//------------------------------------------------------------  # 60個
-
-*/
-
 
 

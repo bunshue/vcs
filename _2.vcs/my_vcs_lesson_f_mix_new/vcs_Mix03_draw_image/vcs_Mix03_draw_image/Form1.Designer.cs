@@ -53,7 +53,20 @@
             this.button18 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bt_print_star = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtRadius = new System.Windows.Forms.TextBox();
+            this.nudPoints = new System.Windows.Forms.NumericUpDown();
+            this.nudSkip = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox_star = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPoints)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSkip)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star)).BeginInit();
             this.SuspendLayout();
             // 
             // bt_clear
@@ -300,11 +313,134 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.bt_print_star);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.txtRadius);
+            this.groupBox1.Controls.Add(this.nudPoints);
+            this.groupBox1.Controls.Add(this.nudSkip);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Location = new System.Drawing.Point(420, 133);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Size = new System.Drawing.Size(194, 142);
+            this.groupBox1.TabIndex = 128;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "預覽列印 Star";
+            // 
+            // bt_print_star
+            // 
+            this.bt_print_star.Location = new System.Drawing.Point(35, 95);
+            this.bt_print_star.Name = "bt_print_star";
+            this.bt_print_star.Size = new System.Drawing.Size(104, 36);
+            this.bt_print_star.TabIndex = 55;
+            this.bt_print_star.Text = "預覽列印 star";
+            this.bt_print_star.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(43, 70);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(50, 12);
+            this.label3.TabIndex = 53;
+            this.label3.Text = "Diameter:";
+            // 
+            // txtRadius
+            // 
+            this.txtRadius.Location = new System.Drawing.Point(100, 67);
+            this.txtRadius.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtRadius.Name = "txtRadius";
+            this.txtRadius.Size = new System.Drawing.Size(60, 22);
+            this.txtRadius.TabIndex = 54;
+            this.txtRadius.Text = "100";
+            this.txtRadius.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // nudPoints
+            // 
+            this.nudPoints.Location = new System.Drawing.Point(100, 20);
+            this.nudPoints.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.nudPoints.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.nudPoints.Name = "nudPoints";
+            this.nudPoints.Size = new System.Drawing.Size(60, 22);
+            this.nudPoints.TabIndex = 49;
+            this.nudPoints.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nudPoints.Value = new decimal(new int[] {
+            7,
+            0,
+            0,
+            0});
+            this.nudPoints.ValueChanged += new System.EventHandler(this.nudPoints_ValueChanged);
+            // 
+            // nudSkip
+            // 
+            this.nudSkip.Location = new System.Drawing.Point(100, 44);
+            this.nudSkip.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.nudSkip.Maximum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.nudSkip.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudSkip.Name = "nudSkip";
+            this.nudSkip.Size = new System.Drawing.Size(60, 22);
+            this.nudSkip.TabIndex = 50;
+            this.nudSkip.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nudSkip.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.nudSkip.ValueChanged += new System.EventHandler(this.nudSkip_ValueChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(43, 46);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(29, 12);
+            this.label2.TabIndex = 52;
+            this.label2.Text = "Skip:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(43, 22);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(45, 12);
+            this.label1.TabIndex = 51;
+            this.label1.Text = "# Points:";
+            // 
+            // pictureBox_star
+            // 
+            this.pictureBox_star.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox_star.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox_star.Location = new System.Drawing.Point(419, 283);
+            this.pictureBox_star.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox_star.Name = "pictureBox_star";
+            this.pictureBox_star.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox_star.TabIndex = 129;
+            this.pictureBox_star.TabStop = false;
+            this.pictureBox_star.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_star_Paint);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(681, 660);
+            this.Controls.Add(this.pictureBox_star);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button19);
             this.Controls.Add(this.button18);
             this.Controls.Add(this.button17);
@@ -332,6 +468,11 @@
             this.Text = "無法分類之單項和 vcs_Mix03_draw image";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPoints)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSkip)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -362,6 +503,15 @@
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Button button19;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button bt_print_star;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtRadius;
+        private System.Windows.Forms.NumericUpDown nudPoints;
+        private System.Windows.Forms.NumericUpDown nudSkip;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox pictureBox_star;
     }
 }
 

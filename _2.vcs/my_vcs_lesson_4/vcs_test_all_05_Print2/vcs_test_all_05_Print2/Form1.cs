@@ -174,20 +174,10 @@ namespace vcs_test_all_05_Print2
 
         private void button11_Click(object sender, EventArgs e)
         {
-            //列印設定
-            printDialog1.Document = printDocument1;
-            printDialog1.PrinterSettings = pageSetupDialog1.PrinterSettings;
-
-            if (printDialog1.ShowDialog() == DialogResult.OK)
-            {
-                printDocument1.Print();
-            }
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-            //預覽列印
-            printPreviewDialog1.ShowDialog();
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -305,8 +295,6 @@ namespace vcs_test_all_05_Print2
 
         private void button22_Click(object sender, EventArgs e)
         {
-            //預覽列印
-            printPreviewDialog2.ShowDialog();
         }
 
         private void button23_Click(object sender, EventArgs e)
@@ -368,10 +356,13 @@ namespace vcs_test_all_05_Print2
         private void button32_Click(object sender, EventArgs e)
         {
             //預覽列印
+
             ReadPrintFile();
+
             printPreviewControl1.UseAntiAlias = true;//啟用平滑字效果
             printPreviewControl1.Document = printDocument3;
             printPreviewControl1.Document.DocumentName = "CH1407-Demo02";
+
             printPreviewDialog3.ShowDialog();//顯示預覽列印對話方塊
         }
 
@@ -464,14 +455,7 @@ namespace vcs_test_all_05_Print2
             richTextBox1.LoadFile("../../../Demo01.rtf");
             printDocumentA.DocumentName = "AAAAAAA";
 
-            try
-            {
-                printDocumentA.Print();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            printDocumentA.Print();
         }
 
         //PrintDocument的事件
@@ -531,7 +515,6 @@ namespace vcs_test_all_05_Print2
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個

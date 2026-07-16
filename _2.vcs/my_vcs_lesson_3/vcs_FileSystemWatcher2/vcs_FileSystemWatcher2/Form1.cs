@@ -16,7 +16,6 @@ using System.Threading;
 //1.直接打開是監視所有邏輯磁盤文件變化。
 //2.或者傳遞參數，監視某一路徑文件變化。如圖，監視e盤
 
-
 namespace vcs_FileSystemWatcher2
 {
     public partial class Form1 : Form
@@ -73,7 +72,7 @@ namespace vcs_FileSystemWatcher2
             }
         }
 
-        #region [ 檢測文件是否占用 ]
+        //#region [ 檢測文件是否占用 ]
         /// <summary>
         /// 檢測文件是否占用
         /// </summary>
@@ -99,7 +98,7 @@ namespace vcs_FileSystemWatcher2
                     fs.Close();
             }
         }
-        #endregion
+        //#endregion
 
         private volatile object _lock = true;
         void onFileSystem_Changed(object sender, FileSystemEventArgs e)
@@ -157,13 +156,5 @@ namespace vcs_FileSystemWatcher2
             richTextBox1.Text += Thread.CurrentThread.Name;
             richTextBox1.Text += "\n";
         }
-         
-         
-         
-
-
-
-
-
     }
 }

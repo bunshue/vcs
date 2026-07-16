@@ -21,7 +21,7 @@ namespace vcs_MyNotepad2
             iv = derive_bytes.GetBytes(block_size_bits / 8);
         }
 
-        #region "Encrypt Files and Streams"
+        //#region "Encrypt Files and Streams"
 
         // Encrypt or decrypt a file, saving the results in another file.
         public static void EncryptFile(string password, string in_file, string out_file)
@@ -114,9 +114,9 @@ namespace vcs_MyNotepad2
             crypto_transform.Dispose();
         }
 
-        #endregion // Encrypt Files and Streams"
+        //#endregion // Encrypt Files and Streams"
 
-        #region "Encrypt Strings and Byte[]"
+        //#region "Encrypt Strings and Byte[]"
         // Note that extension methods must be defined in a non-generic static class.
 
         // Encrypt or decrypt the data in in_bytes[] and return the result.
@@ -230,7 +230,6 @@ namespace vcs_MyNotepad2
 #endif
         }
 
-        #endregion // Encrypt Strings and Byte[]
-
+        //#endregion // Encrypt Strings and Byte[]
     }
 }

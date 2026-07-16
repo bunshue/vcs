@@ -479,10 +479,21 @@ namespace vcs_RichTextBox3
             richTextBox1.Font = f;
         }
 
+        //------------------------------------------------------------  # 60個
+
+        public void DisplayValue(string text)
+        {
+            richTextBox1.AppendText(text);
+            richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
+        }
+
         private void button25_Click(object sender, EventArgs e)
         {
-
+            string text="RichTextBox顯示訊息自動捲動，顯示最後一行";
+            DisplayValue(text);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button26_Click(object sender, EventArgs e)
         {
@@ -538,7 +549,67 @@ namespace vcs_RichTextBox3
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-/*  可搬出
+/*
+
+設定部分字型顏色
+
+            //設定部分字型顏色
+            fontDialog1.ShowApply = true;
+            fontDialog1.ShowColor = true;
+            fontDialog1.ShowEffects = true;
+            fontDialog1.ShowHelp = true;
+            if (fontDialog1.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox1.SelectionFont = fontDialog1.Font;
+                richTextBox1.SelectionColor = fontDialog1.Color;
+                //richTextBox1.SelectionBackColor
+            }
+
+設定字型 使用Apply
+
+                richTextBox1.Font = fontDialog1.Font;
+                richTextBox1.ForeColor = fontDialog1.Color;
+                richTextBox1.Text += "已完成設定";
+
+
+                //改變文字方塊的字型
+                richTextBox1.Font = fontDialog1.Font;
+                //改變文字方塊的前景顏色
+                richTextBox1.ForeColor = fontDialog1.Color;
+
+//------------------------------------------------------------  # 60個
+
+全選與部分選取
+
+RichTextBox 和 TextBox 需要在Focus的狀態下才可以反白
+
+//全部反白
+	richTextBox1.Focus();
+	richTextBox1.Select(0, richTextBox1.Text.Length);
+
+//從位置40開始反白15拜
+	richTextBox1.Focus();
+	richTextBox1.Select(40, 15);
+
+//游標跳至RichTextBox之最前面
+	richTextBox1.Focus();
+	richTextBox1.Select(0, 0);
+
+            txtFile.Text = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+            txtFile.Select(txtFile.Text.Length, 0);  // 全選
+
+//------------------------------------------------------------  # 60個
+
+            int len = richTextBox1.Lines.Length;
+            //richTextBox1.Text += "lines = " + len.ToString() + "\n";
+            for (i = 0; i < len; i++)
+            {
+                //richTextBox1.Text += "i = " + i.ToString() + " : " + richTextBox1.Lines[i] + "\n";
+                sw.WriteLine(richTextBox1.Lines[i]); // 寫入一行
+            }
+
+//------------------------------------------------------------  # 60個
+
 
 */
 
