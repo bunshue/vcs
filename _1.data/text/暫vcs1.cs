@@ -1035,6 +1035,7 @@ this.notifyIcon1.Text = " ";
 this.notifyIcon1.Visible = true;
 this.notifyIcon1.DoubleClick += new System.EventHandler(this.notifyIcon1_DoubleClick);
 this.notifyIcon1.Click += new System.EventHandler(this.notifyIcon1_Click);
+
 this.NicontextMenu.MenuItems.AddRange(
 	new MenuItem[]
 	{
@@ -1044,6 +1045,7 @@ this.NicontextMenu.MenuItems.AddRange(
 		this.menuItem_Exit
 	}
 );
+
 //
 // menuItem_Hide
 //
@@ -3770,10 +3772,7 @@ MultiSelect
 Scrollabel
 顯示滾動條
 
-
-
 View
-
 列表檢視可以用4種不同的模式顯示其選項:
 LargeIcon:所有選項都在其旁邊顯示一個大圖示(32*32)和一個標籤
 SamllIcon:所有選項都在其旁邊顯示一個小圖示(32*16)和一個標籤
@@ -7912,58 +7911,6 @@ form1.CancelButton = button1;
 //------------------------------------------------------------  # 60個
 //------------------------------------------------------------  # 60個
 
-/// <summary>
-/// 實現bitmap到ico的轉換
-/// </summary>
-/// <param name="bitmap">原圖</param>
-/// <returns>轉換後的指定大小的圖標</returns>
-private Icon ConvertBitmap2Ico(Bitmap bitmap)
-{
-	Bitmap icoBitmap = new Bitmap(bitmap, size);//創建制定大小的原位圖
-	
-	//獲得原位圖的圖標句柄
-	IntPtr hIco = icoBitmap.GetHicon();
-	//從圖標的指定WINDOWS句柄創建Icon
-	Icon icon = Icon.FromHandle(hIco);
-	
-	return icon;
-}
-
-//------------------------------  # 30個
-
-使用程式圖標 icon  運行時顯示自己定義的圖標
-this.Icon = new Icon(@"D:\_git\vcs\_1.data\______test_files1\_icon\唐.ico");
-
-Icon ico = new Icon(@"D:/_git/vcs/_1.data/______test_files1/_icon/快.ico");
-this.Icon = ico;
-
-//------------------------------  # 30個
-
-需要為每個構建配置設置不同的ApplicationIcon
-
-//用程式內容改變表單icon(this.Icon), 但還沒辦法改變程式icon(PropertyGroup/ApplicationIcon)
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\_icon\尺.ico";
-            //取得 Icon 物件
-            Icon myIcon = Icon.FromHandle(new Bitmap(Image.FromFile(filename)).GetHicon());
-            //設定表單 Icon
-            this.Icon = myIcon;
-或
-			string filename = @"D:\_git\vcs\_1.data\______test_files1\_icon\尺.ico";
-            try
-            {
-                //取得 Icon 物件                    
-                using (Icon oIcon = new Icon(filename))
-                {
-                    //建立副本
-                    Icon myIcon = (Icon)oIcon.Clone();
-                    this.Icon = myIcon;
-                }
-            }
-            catch (Exception ex)
-            {
-                //AppFunc.HandleException2(ex, "遺失圖檔!");
-            }
 
 //------------------------------------------------------------  # 60個
 
@@ -8233,7 +8180,6 @@ DrawPie(Pen,x,y,Width,Height,startAngle,sweepAngle) //用指定的筆繪製一�
 
 //------------------------------------------------------------  # 60個
 
-
 string txt = link.Cost.ToString();
 SizeF txt_size = gr.MeasureString(txt, this.Font);
 gr.DrawString(txt, this.Font, Brushes.Black, x1 - txt_size.Width / 2, y1 - txt_size.Height / 2);
@@ -8242,9 +8188,6 @@ string txt = node.Id.ToString();
 SizeF txt_size = gr.MeasureString(txt, this.Font);
 gr.DrawString(txt, this.Font, text_brush, node.Location.X - txt_size.Width / 2, node.Location.Y - txt_size.Height / 2);
 
-
-
 this.Bounds = new Rectangle(0, 0, width, height);
+this.Bounds = Screen.PrimaryScreen.Bounds;
 
-
-sender as

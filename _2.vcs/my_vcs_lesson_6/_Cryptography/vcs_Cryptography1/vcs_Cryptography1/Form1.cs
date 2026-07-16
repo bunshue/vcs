@@ -13,7 +13,6 @@ using System.Security.Cryptography;  // for CryptoConfig, MD5, SHA
 /*
 雜湊值（Hash, Hash Value）
 Hash Function（雜湊函式）
-
 Hash Function/Hash Algorithm：
 
 MD5      128位元，快速但不安全
@@ -101,21 +100,14 @@ namespace vcs_Cryptography1
         public static string BytesToString(byte[] byteArray)
         {
             string result = "";
-
-            //dddddddddd
-            foreach (byte b in byteArray)
-            {
-                //result += b.ToString("X2");  // 轉2位的16進制字串
-            }
             for (int i = 0; i < byteArray.Length; i++)
             {
                 result += byteArray[i].ToString("X2");  // 轉2位的16進制字串
             }
-
-
             return result;
         }
 
+        //拜列轉字串
         public void PrintHexBytes(byte[] byteArray)
         {
             if ((byteArray == null) || (byteArray.Length == 0))
@@ -132,7 +124,6 @@ namespace vcs_Cryptography1
                 richTextBox1.Text += "\n";
             }
         }
-
 
         //------------------------------------------------------------  # 60個
 
@@ -428,12 +419,8 @@ namespace vcs_Cryptography1
             SHA1 sha = new SHA1CryptoServiceProvider();
             // This is one implementation of the abstract class SHA1.
             byte[] result = sha.ComputeHash(data);
-            richTextBox1.Text += "SHA1 :\t";
-            foreach (byte b in result)
-            {
-                richTextBox1.Text += b.ToString("X2");
-            }
-            richTextBox1.Text += "\n";
+            str_encrypted_text = BytesToString(result);
+            richTextBox1.Text += "SHA1 :\t" + str_encrypted_text + "\n";
         }
 
         public string SHA1Encrypt(string strIN)
@@ -582,16 +569,12 @@ namespace vcs_Cryptography1
             //各種加密算法
 
             //SHA1
-            richTextBox1.Text += "SHA1\t";
             UnicodeEncoding oConvert = new UnicodeEncoding();
             Byte[] bytData = oConvert.GetBytes(str_clear_text);
             SHA1Managed oSha1 = new SHA1Managed();
             Byte[] bytResult = oSha1.ComputeHash(bytData);
-            foreach (int oItem in bytResult)
-            {
-                richTextBox1.Text += oItem.ToString("X2");
-            }
-            richTextBox1.Text += "\n";
+            str_encrypted_text = BytesToString(bytResult);
+            richTextBox1.Text += "SHA1\t" + str_encrypted_text + "\n";
 
             //SHA512
             richTextBox1.Text += "SHA512\t";
@@ -609,13 +592,10 @@ namespace vcs_Cryptography1
             HashAlgorithm iSha = new SHA1CryptoServiceProvider();
             strRes = iSha.ComputeHash(strRes);
 
-            var str_encrypted_text2 = new StringBuilder();
-            foreach (byte iByte in strRes)
-            {
-                str_encrypted_text2.AppendFormat("{0:x2}", iByte);
-            }
+            str_encrypted_text = BytesToString(strRes);
 
-            richTextBox1.Text += "13s明碼 : " + str_clear_text + "\t密碼 : " + str_encrypted_text2 + "\tSHA1\t長度 : " + str_encrypted_text.Length + " 拜\n";
+            richTextBox1.Text += "13s明碼 : " + str_clear_text + "\t密碼 : " + str_encrypted_text +
+                "\tSHA1\t長度 : " + str_encrypted_text.Length + " 拜\n";
 
             //------------------------------------------------------------  # 60個
 
@@ -625,7 +605,8 @@ namespace vcs_Cryptography1
             HMACSHA1 hmacsha1 = new HMACSHA1(Encoding.UTF8.GetBytes(key));
             byte[] rstRes = hmacsha1.ComputeHash(Encoding.UTF8.GetBytes(str_clear_text));
             string strs = Convert.ToBase64String(rstRes);  // Hash轉字串, Base64
-            richTextBox1.Text += "14s明碼 : " + str_clear_text + "\t密碼 : " + strs + "\tSHA1\t長度 : " + strs.Length + ", Base64\n";
+            richTextBox1.Text += "14s明碼 : " + str_clear_text + "\t密碼 : " + strs +
+                "\tSHA1\t長度 : " + strs.Length + ", Base64\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -862,13 +843,7 @@ namespace vcs_Cryptography1
             byte[] input = Encoding.UTF8.GetBytes(text);  // 字串轉拜列, 中文字要先用 UTF8轉碼
             byte[] md5Hash = md5.ComputeHash(input);  // 算拜列之Hash值
 
-            //Hash轉字串
-            StringBuilder sb = new StringBuilder();
-            foreach (byte b in md5Hash)
-            {
-                sb.Append(b.ToString("X2"));  // 轉2位的16進制字串
-            }
-            return sb.ToString();
+            return BytesToString(md5Hash);
         }
 
         //------------------------------------------------------------  # 60個
@@ -936,13 +911,7 @@ namespace vcs_Cryptography1
             byte[] input = Encoding.UTF8.GetBytes(str);  // 字串轉拜列, 中文字要先用 UTF8轉碼
             byte[] md5Hash = md5.ComputeHash(input);  // 算拜列之Hash值
 
-            //Hash轉字串
-            StringBuilder sb = new StringBuilder();
-            foreach (byte b in md5Hash)
-            {
-                sb.Append(b.ToString("X2"));  // 轉2位的16進制字串
-            }
-            return sb.ToString();
+            return BytesToString(md5Hash);
         }
 
         public string MD5_Ecnrypt15(string str)
@@ -951,17 +920,8 @@ namespace vcs_Cryptography1
 
             byte[] input = Encoding.UTF8.GetBytes(str);  // 字串轉拜列, 中文字要先用 UTF8轉碼
             byte[] md5Hash = md5.ComputeHash(input);  // 算拜列之Hash值
-            //string md5Result = GetStringValue(md5Hash);  // Hash轉字串, 這個應該是不對的
-            //return md5Result;
-            string md5Result = "";  //定義一個變量，用來記錄加密後的密碼
-            for (int i = 0; i < md5Hash.Length; i++)//遍歷Byte數組
-            {
-                md5Result += md5Hash[i].ToString("X2");//對遍歷到的Byte進行加密  // 轉2位的16進制字串
-            }
-            return md5Result;
+            return BytesToString(md5Hash);
         }
-
-
 
         //------------------------------------------------------------  # 60個
 
@@ -1001,12 +961,7 @@ namespace vcs_Cryptography1
             byte[] md5Hash = md5.ComputeHash(input);  // 算拜列之Hash值
             //string md5Result = GetStringValue(md5Hash);  // Hash轉字串, 這個應該是不對的
             //return md5Result;
-            string md5Result = "";  //定義一個變量，用來記錄加密後的密碼
-            for (int i = 0; i < md5Hash.Length; i++)//遍歷Byte數組
-            {
-                md5Result += md5Hash[i].ToString("X2");//對遍歷到的Byte進行加密  // 轉2位的16進制字串
-            }
-            return md5Result;
+            return BytesToString(md5Hash);
         }
 
         public string MD5_Ecnrypt28(string str)
@@ -1017,8 +972,7 @@ namespace vcs_Cryptography1
             //string md5Result = ASCIIEncoding.ASCII.GetString(md5.ComputeHash(input));  // 拜列轉字串 NG
             byte[] md5Hash = md5.ComputeHash(input);  // 算拜列之Hash值
             //string md5Result = Encoding.UTF8.GetString(md5Hash);  // 拜列轉字串
-            string md5Result = BytesToString(md5Hash);  // Hash轉字串
-            return md5Result;
+            return BytesToString(md5Hash);  // Hash轉字串
         }
 
         //自建函數 SP
@@ -1254,16 +1208,9 @@ namespace vcs_Cryptography1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-
-/*  可搬出
-
-*/
-
 
 /*
 //C#使用MD5對用戶密碼加密與驗證
@@ -1292,6 +1239,7 @@ public static string Encrypt(string targetValue, string key)
     var cs = new CryptoStream(ms, des.CreateEncryptor(), CryptoStreamMode.Write);
     cs.Write(input, 0, input.Length);
     cs.FlushFinalBlock();
+
     foreach (byte b in ms.ToArray())
     {
         sb.AppendFormat("{0:X2}", b);
@@ -1386,78 +1334,11 @@ string md5Result = Encoding.UTF8.GetString(md5Hash);  // 拜列轉字串
 
 各種拜列轉字串
 
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < md5Hash.Length; i++)
-            {
-                sb.Append(md5Hash[i].ToString("X2"));  // 轉2位的16進制字串
-            }
-            md5Result = sb.ToString();
-
-            //Hash轉字串
-            for (int i = 0; i < md5Hash.Length; i++)
-            {
-                md5Result = md5Result + md5Hash[i].ToString("X2");  // 轉2位的16進制字串
-            }
-
-            //Hash轉字串
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < md5Hash.Length; i++)
-            {
-                sb.Append(md5Hash[i].ToString("X2"));  // 轉2位的16進制字串
-                //sb.AppendFormat("{0:X2}", md5Hash[i]);    //same
-            }
-            md5Result = sb.ToString();
-
-            //Hash轉字串
-            StringBuilder sb = new StringBuilder();
-            foreach (byte b in md5Hash)
-            {
-                sb.Append(b.ToString("X2"));  // 轉2位的16進制字串
-            }
-            md5Result = sb.ToString();
-
-            for (int i = 0; i < md5Hash.Length; i++)
-            {
-                md5Result += md5Hash[i].ToString("X2");  // 轉2位的16進制字串
-            }
-
             //Hash轉字串
             md5Result = Encoding.UTF8.GetString(md5Hash);  // 拜列轉字串
 
             //Hash轉字串
             md5Result = GetStringValue(md5Hash);  // 這個應該是不對的
-
-            //Hash轉字串
-            for (int i = 0; i < md5Hash.Length; i++)
-            {
-                md5Result += md5Hash[i].ToString("X2");  // 轉2位的16進制字串
-            }
-
-            for (int i = 0; i < md5Hash.Length - 1; i++)//遍歷Byte數組
-            {
-                md5Result += md5Hash[i].ToString("X2");//對遍歷到的Byte進行加密  // 轉2位的16進制字串
-            }
-
-            for (int i = 0; i < md5Hash.Length; i++)
-            {
-                md5Result = md5Result + md5Hash[i].ToString("X2");  // 轉2位的16進制字串
-            }
-
-            //Hash轉字串
-            StringBuilder sb = new StringBuilder(16);
-            for (int i = 0; i < md5Hash.Length; i++)
-            {
-                sb.Append((md5Hash[i]).ToString("X2"));  // 轉2位的16進制字串
-            }
-            md5Result = sb.ToString();
-
-            //Hash轉字串
-            StringBuilder sb = new StringBuilder(32);
-            for (int i = 0; i < md5Hash.Length; i++)
-            {
-                sb.Append(md5Hash[i].ToString("X2"));  // 轉2位的16進制字串
-            }
-            md5Result = sb.ToString();
 
             //md5Result = BitConverter.ToString(md5Hash).Replace("-", "");
             //md5Result = Encoding.UTF8.GetString(md5Hash);  // 拜列轉字串
@@ -1585,58 +1466,4 @@ byte[] input = Encoding.UTF8.GetBytes(str);  // 字串轉拜列, 中文字要先
 //Encoding encode = Encoding.Unicode;
 //Encoding encode = new UTF8Encoding();
 //byte[] input = encode.GetBytes(str); //字串轉拜列
-
-//
-
-/*
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < md5Hash.Length; i++)
-            {
-                sb.Append(md5Hash[i].ToString("X2"));  // 轉2位的16進制字串
-            }
-            str_encrypted_text = sb.ToString();
-
-            //StringBuilder
-            StringBuilder sb = new StringBuilder(32);
-            for (int i = 0; i < md5Hash.Length; i++)
-            {
-                sb.Append(md5Hash[i].ToString("X2"));  // 轉2位的16進制字串
-            }
-            str_encrypted_text = sb.ToString();
-
-
-
-            StringBuilder sb = new StringBuilder();
-            foreach (byte b in md5Hash)
-            {
-                sb.Append(b.ToString("X2"));  // 轉2位的16進制字串
-                sb.Append("aaa");
-            }
-            return sb.ToString();
-
-
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < hashbytes.Length; i++)
-            {
-                sb.Append(hashbytes[i].ToString("X2"));
-            }
-
-
- *             sb = new StringBuilder();
-            for (int i = 0; i < hashbytes.Length; i++)
-            {
-                sb.Append(hashbytes[i].ToString("x2"));
-            }
-
-*/
-
-
-/*
-var sb = new StringBuilder();
-foreach (var t in data)
-{
-    sb.Append(t.ToString("X2"));
-}
-return sb.ToString();
-*/
 

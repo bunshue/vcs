@@ -580,11 +580,6 @@ namespace vcs_Draw3A
             }
             pictureBox_battery.Image = square_bm;
 
-            //  TBD 製作 ICON 用
-            // Convert the bitmap into an icon.
-            //Icon icon = Icon.FromHandle(square_bm.GetHicon());
-            //notifyIcon1.Icon = icon;
-
             percent += 2;
             if (percent > 100)
                 percent = 0;
@@ -1610,13 +1605,7 @@ namespace vcs_Draw3A
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
 

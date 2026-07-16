@@ -7,9 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Runtime.InteropServices;   //for DllImport
-using System.IO;                        //for FileAccess, File
-
+using System.IO;  // for File, FileAccess
+using System.Runtime.InteropServices;  // for DllImport
 
 namespace vcs_translate_TCSC
 {
@@ -68,7 +67,7 @@ namespace vcs_translate_TCSC
             int x_st;
             int y_st;
             int dx;
-            int dy;
+            //int dy;
             int border = 10;
 
             int W = 600;
@@ -108,28 +107,28 @@ namespace vcs_translate_TCSC
 
         private void bt_tc_sc_Click(object sender, EventArgs e)
         {
-            //正中轉簡中
+            // 正中轉簡中
             richTextBox_sc.Text = Big5translateGB2312(this.richTextBox_tc.Text);
         }
 
         private void bt_sc_tc_Click(object sender, EventArgs e)
         {
-            //簡中轉正中
+            // 簡中轉正中
             richTextBox_tc.Text = GB2312translateBig5(this.richTextBox_sc.Text);
         }
 
         private void bt_copy_tc_Click(object sender, EventArgs e)
         {
-            //C# – 複製資料到剪貼簿
-            //Clipboard.SetData(DataFormats.Text, richTextBox1.Text + "\n");
+            // 複製資料到剪貼簿
+            // Clipboard.SetData(DataFormats.Text, richTextBox1.Text + "\n");
             Clipboard.SetDataObject(richTextBox_tc.Text + "\n");      //建議用此
             richTextBox_tc.Text += "已複製資料到系統剪貼簿\n";
         }
 
         private void bt_copy_sc_Click(object sender, EventArgs e)
         {
-            //C# – 複製資料到剪貼簿
-            //Clipboard.SetData(DataFormats.Text, richTextBox1.Text + "\n");
+            // 複製資料到剪貼簿
+            // Clipboard.SetData(DataFormats.Text, richTextBox1.Text + "\n");
             Clipboard.SetDataObject(richTextBox_sc.Text + "\n");      //建議用此
             richTextBox_sc.Text += "已複製資料到系統剪貼簿\n";
         }
@@ -149,12 +148,7 @@ namespace vcs_translate_TCSC
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
 

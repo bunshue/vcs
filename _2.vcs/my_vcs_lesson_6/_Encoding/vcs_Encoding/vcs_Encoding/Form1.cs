@@ -495,11 +495,13 @@ namespace vcs_Encoding
 
             string text = richTextBox_string1.Text;
 
-            // Convert the string into bytes.
-            UnicodeEncoding ascii_encoder = new UnicodeEncoding();
-            byte[] byteArray = ascii_encoder.GetBytes(text);  // 字串轉拜列
+            // 使用UNICODE編碼
+            byte[] byteArray = Encoding.GetEncoding("unicode").GetBytes(text);  // 字串轉拜列
 
-            // Display the result as a string of hexadecimal values.
+            // 使用預設編碼編碼
+            //byte[] byteArray = Encoding.Default.GetBytes(text);  // 使用預設編碼將字串轉拜列
+
+            // 打印拜列
             richTextBox_hex.Text = byteArray.ToHex(' ');  // 使用補充功能 ToHex
         }
 
@@ -507,12 +509,16 @@ namespace vcs_Encoding
         {
             //十六進位轉字串
 
-            // Convert the string of hexadecimal values into an array of bytes.
+            // 取得拜列
             byte[] byteArray = richTextBox_hex.Text.ToBytes();
 
-            // Convert the bytes into a string and display the result.
-            UnicodeEncoding ascii_encoder = new UnicodeEncoding();
-            richTextBox_string2.Text = ascii_encoder.GetString(byteArray);  // 拜列轉字串
+            // 使用UNICODE解碼
+            string text = Encoding.Unicode.GetString(byteArray);  // 使用Unicode編碼將拜列轉字串
+
+            // 使用預設編解碼
+            //string text = Encoding.Default.GetString(byteArray);  // 使用預設編碼將拜列轉字串
+
+            richTextBox_string2.Text = text;
         }
 
         //------------------------------------------------------------  # 60個
@@ -677,7 +683,7 @@ namespace vcs_Encoding
             }
             richTextBox1.Text += "\n";
 
-            //6060
+            //------------------------------------------------------------  # 60個
 
             //Byte型態的陣列轉換為字串
             Byte[] byteArray2 = new Byte[256];
@@ -699,7 +705,7 @@ namespace vcs_Encoding
             }
             richTextBox1.Text += "\n";
 
-            //6060
+            //------------------------------------------------------------  # 60個
 
             text = "ABCDE\n";
             richTextBox1.Text += "原字串 : " + text + "\n";
@@ -937,17 +943,17 @@ Encoding enc = Encoding.GetEncoding("GB2312");
 
 //------------------------------------------------------------  # 60個
 
-            char c = 'A';
-            int i = 'A';
+char c = 'A';
+int i = 'A';
 
-            richTextBox1.Text += "字元變數c是" + c + "\n";
-            richTextBox1.Text += "字元A的內碼是" + i + "\n";
+richTextBox1.Text += "字元變數c是" + c + "\n";
+richTextBox1.Text += "字元A的內碼是" + i + "\n";
 
-            i = 'B';
-            richTextBox1.Text += "字元B的內碼是" + i + "\n";
+i = 'B';
+richTextBox1.Text += "字元B的內碼是" + i + "\n";
 
-            c = '\u0041'; //16進位,2個Bytes
-            richTextBox1.Text += "UniCode 0041的字元是" + c + "\n";
+c = '\u0041'; //16進位,2個Bytes
+richTextBox1.Text += "UniCode 0041的字元是" + c + "\n";
 
 //------------------------------------------------------------  # 60個
 
@@ -956,20 +962,12 @@ Encoding.GetEncoding big5 gb2312 shift_jis UTF-8 unicode
 大小寫不分
 
 打印字串的編碼值
-
-            int i;
-            for (i = 0; i < Info.Length; i++)
-            {
-                //richTextBox1.Text += Info[i].ToString() + "\n";
-                //richTextBox1.Text += ((int)Info[i]).ToString("X2") + " ";
-            }
-
-                string filename = "02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3";
-                for (i = 0; i < filename.Length; i++)
-                {
-                    //richTextBox1.Text += filename[i].ToString() + "\n";
-                    richTextBox1.Text += ((int)filename[i]).ToString("X2") + " ";
-                }
+string text = "02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3";
+for (i = 0; i < text.Length; i++)
+{
+    richTextBox1.Text +=       text[i].ToString() + "\n";
+    richTextBox1.Text += ((int)text[i]).ToString("X2") + " ";
+}
 
 */
 
