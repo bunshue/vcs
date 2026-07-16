@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Browser
+namespace vcs_WebBrowser3
 {
     public partial class Form1 : Form
     {
@@ -103,7 +103,7 @@ namespace Browser
 
         private void mnuExit_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure to quit?", "Web Browser", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+            DialogResult result = MessageBox.Show("Are you sure to quit?", "vcs_WebBrowser3", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
 
             if (result == DialogResult.Yes)
                 this.Close();

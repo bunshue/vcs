@@ -8,8 +8,8 @@
     <ProjectGuid>{F86FCF22-72EE-4594-922F-38B71FD52AA7}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Browser</RootNamespace>
-    <AssemblyName>Browser</AssemblyName>
+    <RootNamespace>vcs_WebBrowser3</RootNamespace>
+    <AssemblyName>vcs_WebBrowser3</AssemblyName>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>

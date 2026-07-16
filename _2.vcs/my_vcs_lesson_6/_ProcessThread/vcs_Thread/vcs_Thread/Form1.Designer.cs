@@ -91,9 +91,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.lb_cpu1 = new System.Windows.Forms.Label();
             this.timer11 = new System.Windows.Forms.Timer(this.components);
-            this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.button101 = new System.Windows.Forms.Button();
-            this.button100 = new System.Windows.Forms.Button();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
             this.button112 = new System.Windows.Forms.Button();
             this.button111 = new System.Windows.Forms.Button();
@@ -118,7 +115,6 @@
             this.groupBox11.SuspendLayout();
             this.groupBox12.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.groupBox10.SuspendLayout();
             this.groupBox13.SuspendLayout();
             this.groupBox14.SuspendLayout();
             this.SuspendLayout();
@@ -802,38 +798,6 @@
             this.timer11.Interval = 1000;
             this.timer11.Tick += new System.EventHandler(this.timer11_Tick);
             // 
-            // groupBox10
-            // 
-            this.groupBox10.Controls.Add(this.button101);
-            this.groupBox10.Controls.Add(this.button100);
-            this.groupBox10.Location = new System.Drawing.Point(424, 483);
-            this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(200, 220);
-            this.groupBox10.TabIndex = 34;
-            this.groupBox10.TabStop = false;
-            this.groupBox10.Text = "Thread使用範例10";
-            // 
-            // button101
-            // 
-            this.button101.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button101.Location = new System.Drawing.Point(14, 126);
-            this.button101.Name = "button101";
-            this.button101.Size = new System.Drawing.Size(180, 60);
-            this.button101.TabIndex = 1;
-            this.button101.UseVisualStyleBackColor = true;
-            this.button101.Click += new System.EventHandler(this.button101_Click);
-            // 
-            // button100
-            // 
-            this.button100.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button100.Location = new System.Drawing.Point(14, 38);
-            this.button100.Name = "button100";
-            this.button100.Size = new System.Drawing.Size(180, 60);
-            this.button100.TabIndex = 0;
-            this.button100.Text = "定時檢測子線程是否已經完成";
-            this.button100.UseVisualStyleBackColor = true;
-            this.button100.Click += new System.EventHandler(this.button100_Click);
-            // 
             // groupBox13
             // 
             this.groupBox13.Controls.Add(this.button112);
@@ -966,7 +930,6 @@
             this.ClientSize = new System.Drawing.Size(1277, 724);
             this.Controls.Add(this.groupBox14);
             this.Controls.Add(this.groupBox13);
-            this.Controls.Add(this.groupBox10);
             this.Controls.Add(this.groupBox12);
             this.Controls.Add(this.groupBox11);
             this.Controls.Add(this.groupBox9);
@@ -1002,7 +965,6 @@
             this.groupBox12.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.groupBox10.ResumeLayout(false);
             this.groupBox13.ResumeLayout(false);
             this.groupBox14.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -1073,9 +1035,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label lb_cpu1;
         private System.Windows.Forms.Timer timer11;
-        private System.Windows.Forms.GroupBox groupBox10;
-        private System.Windows.Forms.Button button101;
-        private System.Windows.Forms.Button button100;
         private System.Windows.Forms.GroupBox groupBox13;
         private System.Windows.Forms.Button button112;
         private System.Windows.Forms.Button button111;

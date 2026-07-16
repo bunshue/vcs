@@ -134,9 +134,13 @@ namespace VideoConference
         private void btnSend_Click(object sender, EventArgs e)
         {
             if (txtHost.Text != "")
+            {
                 timer1.Enabled = true;
+            }
             else
+            {
                 MessageBox.Show("請輸入遠端IP位址或DNS名稱.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnListen_Click(object sender, EventArgs e)
@@ -238,3 +242,4 @@ namespace VideoConference
         }
     }
 }
+

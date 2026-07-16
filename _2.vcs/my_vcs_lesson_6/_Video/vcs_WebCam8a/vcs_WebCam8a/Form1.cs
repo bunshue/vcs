@@ -5,20 +5,15 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.IO;
 using System.Windows.Forms;
 
+using System.IO;
 using System.Runtime.InteropServices;
 
-namespace WebCam
+namespace vcs_WebCam8a
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         int device = 0;
         int hwnd;
 
@@ -55,19 +50,56 @@ namespace WebCam
         [DllImport("user32.dll")]
         static extern bool DestroyWindow(int hndw);
 
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            btnStart.Enabled = true;
-            btnSave.Enabled = false;
+            show_item_location();
+
+            //------------------------------------------------------------  # 60個
 
             StartWebCam();
+        }
+
+        void show_item_location()
+        {
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+
+            pictureBox1.Size = new Size(640, 480);
+            pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+
+            richTextBox1.Size = new Size(300, 690);
+            richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1273, 750);
+            this.Text = "vcs_WebCam8a";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void StartWebCam()
         {
             // 建立視訊裝置的控制代碼 (Handle to a Window) 
             // 並輸出至指定的PictureBox物件中
-            hwnd = capCreateCaptureWindowA("WebCam", (WS_CHILD | WS_VISIBLE), 0, 0, 0, 0, picCapture.Handle.ToInt32(), 0);
+            hwnd = capCreateCaptureWindowA("WebCam", (WS_CHILD | WS_VISIBLE), 0, 0, 0, 0, pictureBox1.Handle.ToInt32(), 0);
 
             // 連接至視訊裝置
             if (SendMessage(hwnd, WM_CAP_DRIVER_CONNECT, device, 0) == 1)
@@ -79,7 +111,7 @@ namespace WebCam
                 // 開始視訊裝置預覽
                 SendMessage(hwnd, WM_CAP_SET_PREVIEW, 1, 0);
                 // 調整預覽大小至PictureBox
-                SetWindowPos(hwnd, HWND_BOTTOM, 0, 0, picCapture.Width, picCapture.Height, (SWP_NOMOVE | SWP_NOZORDER));
+                SetWindowPos(hwnd, HWND_BOTTOM, 0, 0, pictureBox1.Width, pictureBox1.Height, (SWP_NOMOVE | SWP_NOZORDER));
             }
             else
             {
@@ -92,11 +124,8 @@ namespace WebCam
             }
         }
 
-        private void btnStart_Click(object sender, EventArgs e)
+        private void button0_Click(object sender, EventArgs e)
         {
-            btnStart.Enabled = false;
-            btnSave.Enabled = true;
-
             // 停止視訊裝置
             SendMessage(hwnd, WM_CAP_DRIVER_DISCONNECT, device, 0);
             DestroyWindow(hwnd);
@@ -107,10 +136,8 @@ namespace WebCam
             SendMessage(hwnd, WM_CAP_SEQUENCE, 0, 0);
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            btnStart.Enabled = true;
-            btnSave.Enabled = false;
 
             string file = Directory.GetCurrentDirectory() + "\\file.avi";
 
@@ -118,16 +145,25 @@ namespace WebCam
             SendMessage(hwnd, WM_CAP_FILE_SAVEAS, 0, file);
 
             MessageBox.Show("影像已被儲存至" + file, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
         }
 
-        private void btnStop_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
-            btnStart.Enabled = true;
-            btnSave.Enabled = false;
 
             // 停止視訊裝置
             SendMessage(hwnd, WM_CAP_DRIVER_DISCONNECT, device, 0);
             DestroyWindow(hwnd);
+
         }
+
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+

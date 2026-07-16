@@ -1,4 +1,4 @@
-namespace Browser
+namespace vcs_WebBrowser3
 {
   partial class Form1
   {
@@ -102,12 +102,12 @@ namespace Browser
         // StatusBar1
         // 
         this.StatusBar1.Font = new System.Drawing.Font("·s²Ó©úÅé", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.StatusBar1.Location = new System.Drawing.Point(0, 270);
+        this.StatusBar1.Location = new System.Drawing.Point(0, 542);
         this.StatusBar1.Name = "StatusBar1";
         this.StatusBar1.Panels.AddRange(new System.Windows.Forms.StatusBarPanel[] {
             this.StatusBarPanel1});
         this.StatusBar1.ShowPanels = true;
-        this.StatusBar1.Size = new System.Drawing.Size(329, 22);
+        this.StatusBar1.Size = new System.Drawing.Size(784, 22);
         this.StatusBar1.TabIndex = 9;
         this.StatusBar1.Text = "Status:";
         // 
@@ -116,7 +116,7 @@ namespace Browser
         this.StatusBarPanel1.AutoSize = System.Windows.Forms.StatusBarPanelAutoSize.Spring;
         this.StatusBarPanel1.Name = "StatusBarPanel1";
         this.StatusBarPanel1.Text = "Status: ";
-        this.StatusBarPanel1.Width = 312;
+        this.StatusBarPanel1.Width = 767;
         // 
         // ToolBar1
         // 
@@ -134,7 +134,7 @@ namespace Browser
         this.ToolBar1.Location = new System.Drawing.Point(0, 0);
         this.ToolBar1.Name = "ToolBar1";
         this.ToolBar1.ShowToolTips = true;
-        this.ToolBar1.Size = new System.Drawing.Size(329, 41);
+        this.ToolBar1.Size = new System.Drawing.Size(784, 41);
         this.ToolBar1.TabIndex = 8;
         this.ToolBar1.ButtonClick += new System.Windows.Forms.ToolBarButtonClickEventHandler(this.ToolBar1_ButtonClick);
         // 
@@ -183,7 +183,7 @@ namespace Browser
         this.webBrowser.Location = new System.Drawing.Point(0, 71);
         this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
         this.webBrowser.Name = "webBrowser";
-        this.webBrowser.Size = new System.Drawing.Size(329, 199);
+        this.webBrowser.Size = new System.Drawing.Size(784, 471);
         this.webBrowser.TabIndex = 11;
         this.webBrowser.Navigated += new System.Windows.Forms.WebBrowserNavigatedEventHandler(this.webBrowser_Navigated);
         // 
@@ -194,7 +194,7 @@ namespace Browser
         this.Panel1.Dock = System.Windows.Forms.DockStyle.Top;
         this.Panel1.Location = new System.Drawing.Point(0, 41);
         this.Panel1.Name = "Panel1";
-        this.Panel1.Size = new System.Drawing.Size(329, 30);
+        this.Panel1.Size = new System.Drawing.Size(784, 30);
         this.Panel1.TabIndex = 10;
         // 
         // txtURL
@@ -220,7 +220,7 @@ namespace Browser
         // 
         this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        this.ClientSize = new System.Drawing.Size(329, 292);
+        this.ClientSize = new System.Drawing.Size(784, 564);
         this.Controls.Add(this.webBrowser);
         this.Controls.Add(this.Panel1);
         this.Controls.Add(this.StatusBar1);
@@ -228,7 +228,7 @@ namespace Browser
         this.Menu = this.MainMenu1;
         this.Name = "Form1";
         this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-        this.Text = "Web Browser";
+        this.Text = "vcs_WebBrowser3";
         this.Load += new System.EventHandler(this.Form1_Load);
         this.Resize += new System.EventHandler(this.Form1_Resize);
         ((System.ComponentModel.ISupportInitialize)(this.StatusBarPanel1)).EndInit();

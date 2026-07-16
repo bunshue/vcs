@@ -13,9 +13,6 @@ using System.Timers;  // for ElapsedEventHandler
 
 namespace vcs_Thread
 {
-    //創建SetValue的委托
-    public delegate void SetValueDel(string str, object obj);
-
     public partial class Form1 : Form
     {
         private Thread thread_ex0;
@@ -26,13 +23,10 @@ namespace vcs_Thread
         private Thread thread_ex10;
         private Thread thread_ex11;
 
-        private bool flag_thread_running0 = false;
         private bool flag_thread_running2a = false;
         private bool flag_thread_running2b = false;
         private bool flag_thread_running8a = false;
         private bool flag_thread_running8b = false;
-        private bool flag_thread_running7 = false;
-        private bool flag_thread_running9 = false;
         private bool flag_thread_running10 = false;
 
         public Form1()
@@ -53,7 +47,7 @@ namespace vcs_Thread
             //CheckForIllegalCrossThreadCalls = false; 另法
             get_cpu_useage();
 
-            Thread.CurrentThread.Name = "MainThread";
+            Thread.CurrentThread.Name = "MainThread";  // 設置這個線程的名字
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -137,7 +131,6 @@ namespace vcs_Thread
             groupBox7.Size = new Size(W, H);
             groupBox8.Size = new Size(W, H);
             groupBox9.Size = new Size(W, H);
-            groupBox10.Size = new Size(W, H);
             groupBox13.Size = new Size(W, H);
             groupBox12.Size = new Size(W, H);
             groupBox14.Size = new Size(W * 2 + 10, H);
@@ -152,7 +145,6 @@ namespace vcs_Thread
             groupBox7.Location = new Point(x_st + dx * 3, y_st + dy * 1);
             groupBox8.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             groupBox9.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            groupBox10.Location = new Point(x_st + dx * 2, y_st + dy * 2);
             groupBox13.Location = new Point(x_st + dx * 3, y_st + dy * 2);
             groupBox11.Location = new Point(x_st + dx * 5, y_st + dy * 0);
             groupBox14.Location = new Point(x_st + dx * 4, y_st + dy * 1);
@@ -199,8 +191,6 @@ namespace vcs_Thread
             button90.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button91.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button92.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button100.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button101.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             lb_R.Location = new Point(x_st + dx * 0 + 130, y_st + dy * 0);
             lb_G.Location = new Point(x_st + dx * 0 + 130, y_st + dy * 1);
             lb_B.Location = new Point(x_st + dx * 0 + 130, y_st + dy * 2);
@@ -222,14 +212,16 @@ namespace vcs_Thread
 
         //Thread使用範例0 ST
 
+        int count0 = 0;
         private void ThreadProc_ex0()
         {
             richTextBox1.Text += "啟動一個thread0 ";
-            while (flag_thread_running0 == true)
+            for (int i = 0; i < 10; i++)
             {
-                //無限迴圈
-                richTextBox1.Text += "0 ";
+
+                richTextBox1.Text += count0.ToString() + " ";
                 Thread.Sleep(500);
+                count0++;
             }
             richTextBox1.Text += "\n結束 ThreadProc_ex0\n";
         }
@@ -238,11 +230,9 @@ namespace vcs_Thread
         {
             richTextBox1.Text += "啟動 thread 0\n";
 
-            flag_thread_running0 = true;
-
             //thread_ex0 = new Thread(ThreadProc_ex0);//same
             thread_ex0 = new Thread(new ThreadStart(ThreadProc_ex0));
-            thread_ex0.Name = "Thread_ex0";
+            thread_ex0.Name = "Thread_ex0";  // 設置這個線程的名字
             //thread_ex0.IsBackground = true;  //設定為背景執行緒, 這樣能隨主程序一起結束
             thread_ex0.Start();
 
@@ -256,9 +246,6 @@ namespace vcs_Thread
                 richTextBox1.Text += "停止 thread 0\n";
                 thread_ex0.Abort();
             }
-
-            //same
-            flag_thread_running0 = false;
         }
 
         private void button02_Click(object sender, EventArgs e)
@@ -288,52 +275,12 @@ namespace vcs_Thread
 
         //Thread使用範例1 ST
 
-        // This value is incremented by the thread.
-        public int Value = 0;
-        // Make and start a new counter object.
-        private int thread_num = 0;
-
-
-        // Add the text to the results.
-        // The form provides this service because the
-        // thread cannot access the form's controls directly.
-        public void DisplayValue(string txt)
-        {
-            richTextBox1.AppendText(txt + "\n");
-            richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
-        }
-
-        private void ThreadProc_ex9()
-        {
-            richTextBox1.Text += "啟動一個thread9 ";
-            while (flag_thread_running9 == true)
-            {
-                //無限迴圈
-                richTextBox1.Text += "9 ";
-                Thread.Sleep(500);
-            }
-            richTextBox1.Text += "\n結束 ThreadProc_ex9\n";
-        }
-
         private void button10_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "啟動 thread 9\n";
-
-            // Make a new counter object.
-            Counter new_counter = new Counter(this, thread_num);
-            richTextBox1.Text += "開啟thread, 編號 " + thread_num.ToString() + "\n";
-            thread_num++;
-
-            Thread thread_ex9a = new Thread(new_counter.ThreadProc_ex9);
-            thread_ex9a.IsBackground = true;  //設定為背景執行緒, 這樣能隨主程序一起結束
-            thread_ex9a.Start();
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-            //same
-            flag_thread_running9 = false;
-
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -395,10 +342,10 @@ namespace vcs_Thread
         private void button20_Click(object sender, EventArgs e)
         {
             thread_ex2a = new Thread(ThreadProc_ex2);
-            thread_ex2a.Name = "Thread_ex2a";
+            thread_ex2a.Name = "Thread_ex2a";  // 設置這個線程的名字
 
             thread_ex2b = new Thread(ThreadProc_ex2);
-            thread_ex2b.Name = "Thread_ex2b";
+            thread_ex2b.Name = "Thread_ex2b";  // 設置這個線程的名字
 
             richTextBox1.Text += "啟動 thread 2\n";
             //啟動
@@ -415,14 +362,14 @@ namespace vcs_Thread
             if (thread_ex2a.ThreadState == System.Threading.ThreadState.Aborted)
             {
                 thread_ex2a = new Thread(ThreadProc_ex2);
-                thread_ex2a.Name = "Thread_ex2a";
+                thread_ex2a.Name = "Thread_ex2a";  // 設置這個線程的名字
                 thread_ex2a.Start();
                 richTextBox1.Text += "啟動 thread 2a, 名稱 : " + thread_ex2a.Name + "\n";
             }
             if (thread_ex2b.ThreadState == System.Threading.ThreadState.Aborted)
             {
                 thread_ex2b = new Thread(ThreadProc_ex2);
-                thread_ex2b.Name = "Thread_ex2b";
+                thread_ex2b.Name = "Thread_ex2b";  // 設置這個線程的名字
                 thread_ex2b.Start();
                 richTextBox1.Text += "啟動 thread 2b, 名稱 : " + thread_ex2b.Name + "\n";
             }
@@ -461,18 +408,6 @@ namespace vcs_Thread
 
         private void button30_Click(object sender, EventArgs e)
         {
-            Thread thread_ex3 = new Thread(new ParameterizedThreadStart(delegate(object obj)
-            {
-                while (true)
-                {
-                    richTextBox1.Text += "3 ";
-                    Thread.Sleep(500);
-                }
-            }));
-            thread_ex3.Name = " --start tray thread";
-            thread_ex3.IsBackground = true;  //設定為背景執行緒, 這樣能隨主程序一起結束
-            thread_ex3.Priority = ThreadPriority.Lowest;
-            thread_ex3.Start(null);
         }
 
         private void button31_Click(object sender, EventArgs e)
@@ -567,30 +502,13 @@ namespace vcs_Thread
 
         //Thread使用範例6 ST
 
-        System.Timers.Timer timer6 = new System.Timers.Timer(1234);
-        int number = 0;
-
-        public void ThreadProc_ex6(object source, System.Timers.ElapsedEventArgs e)
-        {
-            number++;
-            System.Diagnostics.Debug.Print("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！ " + number.ToString());
-            Console.Write(number.ToString() + "\r\n");
-
-            //MessageBox.Show("number = " + number);
-        }
-
         private void button60_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "啟動 thread 6\n";
 
-            timer6.Elapsed += new ElapsedEventHandler(ThreadProc_ex6);
-            timer6.Enabled = true;
         }
 
         private void button61_Click(object sender, EventArgs e)
         {
-            timer6.Enabled = false;
-            number = 0;
 
         }
 
@@ -604,56 +522,8 @@ namespace vcs_Thread
 
         //Thread使用範例7 ST
 
-        private void ThreadProc_ex7()
-        {
-            richTextBox1.Text += "啟動一個thread7 ";
-            while (flag_thread_running7 == true)
-            {
-                //無限迴圈
-                richTextBox1.Text += "7 ";
-                Thread.Sleep(500);
-            }
-            richTextBox1.Text += "\n結束 ThreadProc_ex7\n";
-        }
-
-        // Make a thread with the indicated priority.
-        private void MakeThread(string thread_name, ThreadPriority thread_priority)
-        {
-            richTextBox1.Text += "開啟thread, 名稱 : " + thread_name + ", 優先序 : " + thread_priority.ToString() + "\n";
-            Application.DoEvents();
-
-            // Initialize the thread.
-            Counter2 new_counter = new Counter2(thread_name);
-            Thread thread = new Thread(new_counter.ThreadProc_ex7);
-            thread.Priority = thread_priority;
-            thread.IsBackground = true;  //設定為背景執行緒, 這樣能隨主程序一起結束
-            thread.Name = thread_name;
-
-            // Start the thread.
-            thread.Start();
-        }
-
         private void button70_Click(object sender, EventArgs e)
         {
-            //啟動thread, 不同優先序
-            int i;
-            int num_low = 4;
-            for (i = 0; i < num_low; i++)
-            {
-                MakeThread("低_" + i.ToString(), ThreadPriority.BelowNormal);
-            }
-
-            int num_normal = 4;
-            for (i = 0; i < num_normal; i++)
-            {
-                MakeThread("中_" + i.ToString(), ThreadPriority.Normal);
-            }
-
-            int num_high = 4;
-            for (i = 0; i < num_high; i++)
-            {
-                MakeThread("高_" + i.ToString(), ThreadPriority.AboveNormal);
-            }
         }
 
         private void button71_Click(object sender, EventArgs e)
@@ -767,35 +637,8 @@ namespace vcs_Thread
 
         //Thread使用範例9 ST
 
-        //開啟一個線程
-
-        //給文本框賦值
-        private void SetValue(string str, object obj)
-        {
-            //lock裡面的代碼同一個時刻，只能被一個線程使用。其它的後面排隊。這樣防止數據混亂。
-            lock (obj)
-            {
-                richTextBox1.Text += "Thread名稱 : " + str + " 做事 " + DateTime.Now.ToString() + "\n";
-            }
-        }
-
-        int thread_ex9b_count = 0;
         private void button90_Click(object sender, EventArgs e)
         {
-            //將委托的方法和主窗體傳過去
-            NEWThreadClass threadOneClass = new NEWThreadClass(SetValue, this);
-
-            thread_ex9b_count++;
-            string thread_name = "Thread測試_" + thread_ex9b_count.ToString();
-
-            Thread thread_ex9b = new Thread(threadOneClass.threadOne);//不需要ThreadStart()也可以
-            thread_ex9b.Name = thread_name;
-
-            richTextBox1.Text += "開啟thread, 名稱 : " + thread_ex9b.Name + "\n";
-
-            //讓線程變為後台線程（默認是前台的），這樣主線程結束了，這個線程也會結束。要不然，任何前台線程在運行都會保持程序存活。
-            thread_ex9b.IsBackground = true;  //設定為背景執行緒, 這樣能隨主程序一起結束
-            thread_ex9b.Start();
         }
 
         private void button91_Click(object sender, EventArgs e)
@@ -808,65 +651,6 @@ namespace vcs_Thread
 
         }
         //Thread使用範例9 SP
-
-        //------------------------------------------------------------  # 60個
-
-        delegate void Delegate_do();
-
-        static void ThreadProc_ex10b()
-        {
-            try
-            {
-                Delegate_do Delegate_do = new Delegate_do(FindAllProduct);
-                IAsyncResult result = Delegate_do.BeginInvoke(null, null);
-                while (!result.IsCompleted)
-                {
-                    Console.WriteLine("子線程未完成");
-                    Thread.Sleep(1000);//每隔1秒判斷一下是否完成
-                }
-                while (true)
-                {
-                    if (result.IsCompleted)
-                    {
-                        Console.WriteLine("-------子線程已完成-------");
-                        break;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-
-        static void FindAllProduct()
-        {
-            List<int> array = new List<int>();   //宣告int型態的List
-            for (int i = 0; i < 100000000; i++)
-            {
-                array.Add(i);
-            }
-
-            int m = 0;
-            foreach (var i in array)
-            {
-                m++;
-            }
-            Console.WriteLine(m);
-        }
-
-        private void button100_Click(object sender, EventArgs e)
-        {
-            //主線程中啟動一個支線程, 執行doSomething這樣的一個方法。
-            Thread thread_ex10b = new Thread(new ThreadStart(ThreadProc_ex10b));
-            thread_ex10b.IsBackground = true;  //設定為背景執行緒, 這樣能隨主程序一起結束
-            thread_ex10b.Start();
-        }
-
-        private void button101_Click(object sender, EventArgs e)
-        {
-
-        }
 
         //------------------------------------------------------------  # 60個
 
@@ -1047,7 +831,7 @@ namespace vcs_Thread
 
             Console.WriteLine("This is Main.{0}", 2);
             Console.ReadLine();
-       }
+        }
 
         //------------------------------------------------------------  # 60個
 
@@ -1107,112 +891,9 @@ namespace vcs_Thread
         }
 
         //------------------------------------------------------------  # 60個
-
     }
 
-    // This class's Run method displays a count in the Output window.
-    class Counter
-    {
-        // The form that owns the Value variable.
-        private Form1 MyForm;
-
-        // This counter's number.
-        private int Number;
-
-        // Define a delegate type for the form's DisplayValue method.
-        private delegate void DisplayValueDelegateType(string txt);
-
-        // Declare a delegate variable to point to the form's DisplayValue method.
-        private DisplayValueDelegateType DisplayValueDelegate;
-
-        public Counter(Form1 form1, int number)
-        {
-            MyForm = form1;
-            Number = number;
-
-            // Initialize the delegate variable to point
-            // to the form's DisplayValue method.
-            DisplayValueDelegate = MyForm.DisplayValue;
-        }
-
-        // Count off seconds in the Output window.
-        public void ThreadProc_ex9()
-        {
-            try
-            {
-                while (true)
-                {
-                    // Wait 1 second.
-                    Thread.Sleep(1000);
-
-                    // Lock the form object. This doesn't do anything
-                    // to the form, it just means no other thread can
-                    // lock the form object until we release the lock.
-                    // That means a thread can update MyForm.Value
-                    // and then display its value without interference.
-                    lock (MyForm)
-                    {
-                        // Increment the form's Value.
-                        MyForm.Value++;
-
-                        // Display the value on the form.
-                        // The call to InvokeRequired returns true
-                        // if this code is not running on the same
-                        // thread as the object MyForm. In this
-                        // example, we know that is true so the call
-                        // isn't necessary, but in other cases it
-                        // might not be so clear.
-                        if (MyForm.InvokeRequired)
-                        {
-                            // Make an array containing the parameters
-                            // to pass to the method.
-                            string[] args = new string[] { "Thread : " + Number + ", 數字 : " + MyForm.Value };
-
-                            // Invoke the delegate.
-                            MyForm.Invoke(DisplayValueDelegate, args);
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Unexpected error in thread " + Number + "\r\n" + ex.Message);
-            }
-        }
-    }
-
-    class Counter2
-    {
-        // This counter's number.
-        public string Name;
-
-        // Initializing constructor.
-        public Counter2(string name)
-        {
-            Name = name;
-        }
-
-        // Count off 10 half second intervals in the Output window.
-        public void ThreadProc_ex7()
-        {
-            for (int i = 1; i <= 10; i++)
-            {
-                // Display the next message.
-                Console.WriteLine(Name + " " + i);
-
-                // See when we should display the next message.
-                DateTime next_time = DateTime.Now.AddSeconds(0.5);
-
-                // Waste half a second. We don't sleep or call
-                // DoEvents so we don't give up control of the CPU.
-                while (DateTime.Now < next_time)
-                {
-                    // Wait a bit.
-                }
-            }
-            Console.WriteLine(Name + "  done");
-        }
-    }
+    //------------------------------------------------------------  # 60個
 
     class ChangeTime
     {
@@ -1271,62 +952,14 @@ namespace vcs_Thread
             }
         }
     }
-
-    //建一個類，模擬實際使用情況
-    public class NEWThreadClass
-    {
-        //接收主窗體傳過來的委托方法。
-        public SetValueDel setValueDel;
-
-        //接收主窗體
-        public Form form;
-
-        //用於告訴主線程中鎖，是哪一個線程調用的。
-        static object locker = new object();
-
-        public NEWThreadClass(SetValueDel del, Form fom)
-        {
-            this.setValueDel = del;
-            this.form = fom;
-        }
-        //第一個線程,給主線程創建的控件傳值。
-        public void threadOne()
-        {
-            //這裡獲取線程的名字
-            string threadName = Thread.CurrentThread.Name;
-            try
-            {
-                while (true)
-                {
-                    //告訴主線程，我要更改你的控件了。
-                    this.form.Invoke((EventHandler)(delegate
-                    {
-                        //如果在這裡使用Thread.CurrentThread.Name 獲取到的是主線程的名字。
-                        setValueDel(threadName + " :Hello!", locker);//給文本框傳值，“自己的名字：Hello!”。
-                    }));
-                    Thread.Sleep(3 * 1000);//太累了 ，休息三秒。。。。
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Unexpected error in thread : " + ex.Message);
-            }
-        }
-    }
 }
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
 
 /*
 
@@ -1378,23 +1011,23 @@ Thread.Sleep(500);
 
 利用线程的方法 做延时 不卡界面
 
-Thread t = new Thread(o => Thread.Sleep(500));
-                    t.Start(this);
-                    while (t.IsAlive)
-                    {
-                        Application.DoEvents();
-                    }
+Thread thread_ex5 = new Thread(o => Thread.Sleep(500));
+thread_ex5.Start(this);
+while (thread_ex5.IsAlive)
+{
+    Application.DoEvents();
+}
 
- 不用线程 也可以这样不卡界面 
+不用线程 也可以这样不卡界面 
 public static void Delay(int mm)
-        {
-            DateTime current = DateTime.Now;
-            while (current.AddMilliseconds(mm) > DateTime.Now)
-            {
-                Application.DoEvents();
-            }
-            return;
-        } 
+{
+    DateTime current = DateTime.Now;
+    while (current.AddMilliseconds(mm) > DateTime.Now)
+    {
+        Application.DoEvents();
+    }
+    return;
+} 
 
 //------------------------------------------------------------  # 60個
 
@@ -1408,7 +1041,7 @@ private void TestMethod()
     Console.WriteLine("我是测试线程");
 }
 //无参数线程的创建
-Thread Thd = new Thread(TestMethod);
+Thread thread_ex8a = new Thread(TestMethod);
 
 /// <summary>
 /// 一个示例方法 - 有参数
@@ -1419,63 +1052,41 @@ private void TestMethod(int Obj)
 }
 //有参数线程的创建
 int Obj = 0;
-Thread Thd = new Thread(() => TestMethod(Obj));
+Thread thread_ex8b = new Thread(() => TestMethod(Obj));
 
 //如果要设置线程为MTA模型
-Thd.SetApartmentState(ApartmentState.MTA);
-
-//如果设置线程为后台线程（有人说这个就是MTA模型的线程，不过未经考证）
-Thd.IsBackground = true;
-
-//设置这个线程的名字
-Thd.Name = "MyThread";
-
-//线程激活
-Thd.Start();
+thread_ex8b.SetApartmentState(ApartmentState.MTA);
 
 //线程挂起（类似线程暂停）
-Thd.Suspend();
+thread_ex8b.Suspend();
 
 //线程恢复（将挂起线程恢复运行状态）
-Thd.Resume();
+thread_ex8b.Resume();
 
 //线程强制终止（强制退出）
-Thd.Abort();
+thread_ex8b.Abort();
 //为了保证线程被终止，要加入一句Join
-Thd.Join();
+thread_ex8b.Join();
 
 //得到当前线程的名字
 string MyThreadName = Thread.CurrentThread.Name;
 
 //判断线程是否存活
-if (Thd.IsAlive)
+if (thread_ex8b.IsAlive)
 {
     //如果存活，则执行....
 }
 
 //------------------------------------------------------------  # 60個
 
+Thread.Sleep()方法用於將當前線程休眠一定時間,時間單位是毫秒。
+在阻塞時線程狀態是 ThreadState.WaitSleepJoin， 在休眠的時間裡讓其他等待線程先執行，可以減少CPU的占用時間。
+
 c# Delay 1秒鐘寫法
 using System.Threading;
 Thread.Sleep(1000); //Delay 1秒，不好用，因為這段時間會卡住
-
-System.Threading.Thread.Sleep( 5000 ); // wait 5 seconds (5000 milliseconds)
-
-//------------------------------------------------------------  # 60個
-
-開啟一個thread, 做一件很忙碌的事
-主thread可以讓user操作 主thread可以中斷子thread
-
-Thread.Sleep()方法用於將當前線程休眠一定時間,時間單位是毫秒。在阻塞時線程狀態是 ThreadState.WaitSleepJoin， 在休眠的時間裡讓其他等待線程先執行，可以減少CPU的占用時間。
-
 System.Threading.Thread.Sleep(2000);當前休眠2秒，
-
 System.Threading.Thread.Sleep(5000);當前休眠5秒，
-
-
-//------------------------------------------------------------  # 60個
-
-//Wait
 System.Threading.Thread.Sleep(5000); // wait 5 seconds (5000 milliseconds)
 
 //------------------------------------------------------------  # 60個
@@ -1492,14 +1103,12 @@ System.Threading.Thread.Sleep(5000); // wait 5 seconds (5000 milliseconds)
 
  1 //實例化Thread類，並傳入一個指向線程所要運行的方法。（這時線程已經產生，但還沒有運行）
  2 //調用Thread類的Start方法，標記線程可以被CPU執行了，但具體執行事件由CPU決定。
- 3 Thread th = new Thread(Test); //創建一個線程去執行這個方法。
- 4 th.IsBackground = true; //將線程設置為後台線程，前台關閉後 線程結束。
- 5 th.Start(); //標記准備就緒，可以隨意被執行，具體什麼時候執行由CPU決定。
+ 3 Thread thread_ex6 = new Thread(Test); //創建一個線程去執行這個方法。
  6 //在.net下是不允許跨線程訪問的。
  7 //有時候需要手動釋放線程 關閉時 判斷線程是否關閉 
- 8 if (th != null)
+ 8 if (thread_ex6 != null)
  9 {
-10     th.Abort(); //結束這個線程 不能再Start()
+10     thread_ex6.Abort(); //結束這個線程 不能再Start()
 11 }
 12 Thread.Sleep(3000); //睡眠3秒後執行
 13 //線程執行帶參數方法
@@ -1516,9 +1125,14 @@ Thread.Sleep 方法能夠在一個固定周期類停止一個線程
 thread.Sleep(); 
  
 設定線程優先級
-線程類中的ThreadPriority 屬性是用來設定一個ThreadPriority的優先級別。線程優先級別包括Normal, AboveNormal, BelowNormal, Highest, and Lowest幾種。
+線程類中的ThreadPriority 屬性是用來設定一個ThreadPriority的優先級別。
+線程優先級別包括Normal, AboveNormal, BelowNormal, Highest, and Lowest幾種。
 	
 thread.Priority = ThreadPriority.Highest; 
+thread.Priority = ThreadPriority.Lowest;
+                  ThreadPriority.BelowNormal
+                  ThreadPriority.Normal
+                  ThreadPriority.AboveNormal
 
 掛起一個線程
 調用線程類的Suspend()方法將掛起一個線程直到使用Resume()方法喚起她。在掛起一個線程起前應該判斷線程是否在活動期間。
@@ -1533,7 +1147,6 @@ if (thread.ThreadState = ThreadState.Running )
 通過使用Resume()方法可以喚起一個被掛起線程。在掛起一個線程起前應該判斷線程是否在掛起期間，如果
 線程未被掛起則方法不起作用。
 
-
 if (thread.ThreadState = ThreadState.Suspended )
 {
 	thread.Resume();
@@ -1543,5 +1156,15 @@ if (thread.ThreadState = ThreadState.Suspended )
 
 */
 
+/*
 
+
+
+//這裡獲取線程的名字
+//string threadName = Thread.CurrentThread.Name;
+
+//讓線程變為後台線程（默認是前台的），這樣主線程結束了，這個線程也會結束。要不然，任何前台線程在運行都會保持程序存活。
+thread_ex9b.IsBackground = true;  //設定為背景執行緒, 這樣能隨主程序一起結束
+
+*/
 
