@@ -12,7 +12,7 @@ namespace vcs_test_all_05_Print1
 {
     class PrintClass
     {
-        //#region  全局变量
+        // 全局变量
         private DataGridView datagrid;
         private PrintDocument printdocument;
         private PageSetupDialog pagesetupdialog;
@@ -38,15 +38,11 @@ namespace vcs_test_all_05_Print1
         public bool PageAspect = false;//打印的方向
         public static bool PageScape = false;//打印方向
         public int PageSheet = 0;
-        //#endregion
 
-        //#region  打印信息的初始化
-        /// <summary>
-        /// 打印信息的初始化
-        /// </summary>
-        /// <param datagrid="DataGridView">打印数据</param>
-        /// <param PageS="int">纸张大小</param>
-        /// <param lendscape="bool">是否横向打印</param>
+        // 打印信息的初始化
+        // <param datagrid="DataGridView">打印数据</param>
+        // <param PageS="int">纸张大小</param>
+        // <param lendscape="bool">是否横向打印</param>
         public PrintClass(DataGridView datagrid, int PageS, bool lendscape)
         {
             this.datagrid = datagrid;//获取打印数据
@@ -57,27 +53,26 @@ namespace vcs_test_all_05_Print1
             printpreviewdialog = new PrintPreviewDialog();//实例化PrintPreviewDialog类
             printpreviewdialog.Document = printdocument;//获取预览文档的信息
             printpreviewdialog.FormBorderStyle = FormBorderStyle.Fixed3D;//设置窗体的边框样式
-            //横向打印的设置
+
+            // 横向打印的設置
             if (PageSheet >= 0)
             {
                 if (lendscape == true)
                 {
-                    printdocument.DefaultPageSettings.Landscape = lendscape;//横向打印
+                    Console.WriteLine("横向打印\n");
+                    printdocument.DefaultPageSettings.Landscape = lendscape;  // 横向打印
                 }
                 else
                 {
-                    printdocument.DefaultPageSettings.Landscape = lendscape;//纵向打印
+                    Console.WriteLine("縱向打印\n");
+                    printdocument.DefaultPageSettings.Landscape = lendscape;  // 縱向打印
                 }
             }
             pagesetupdialog.Document = printdocument;
             printdocument.PrintPage += new PrintPageEventHandler(this.printdocument_printpage);//事件的重载
         }
-        //#endregion
 
-        //#region  纸张大小的设置
-        /// <summary>
-        ///  纸张大小的设置
-        /// </summary>
+        //  纸张大小的设置
         /// <param n="int">纸张大小的编号</param>
         /// <returns>返回string对象</returns>
         public string Page_Size(int n)
@@ -102,26 +97,27 @@ namespace vcs_test_all_05_Print1
                 case 15: { pageN = "16K"; PrintPageWidth = 775; PrintPageHeight = 1075; break; }
                 case 16: { pageN = "8.5x13"; PrintPageWidth = 850; PrintPageHeight = 1300; break; }
             }
+            Console.WriteLine("Page : " + pageN);
             return pageN;//返回纸张的名
         }
-        //#endregion
 
-        //#region  页的打印事件
-        /// <summary>
-        ///  页的打印事件(主要用于绘制打印报表)
-        /// </summary>
+        //  页的打印事件(主要用于绘制打印报表)
         private void printdocument_printpage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
             PrintPageWidth = e.PageBounds.Width;//获取打印线张的宽度
             PrintPageHeight = e.PageBounds.Height;//获取打印线张的高度
             if (this.isautopagerowcount)//自动计算页的行数
+            {
                 pagerowcount = (int)((PrintPageHeight - this.topmargin - //获取每页的行数
                     this.headerfont.Height - this.headerheight -
                     this.buttommargin) / this.rowgap);
+            }
             pagecount = (int)(rowcount / pagerowcount);//获取打印多少页
             pagesetupdialog.AllowOrientation = true;//启动打印页面对话框的方向部分
             if (rowcount % pagerowcount > 0)//如果数据的行数大于页的行数
+            {
                 pagecount++;//页数加1
+            }
             int colcount = 0;//记录数据的列数
             int y = topmargin;//获取表格的顶边距
             string cellvalue = "";//记录文本信息（单元格的文本信息）
@@ -184,22 +180,25 @@ namespace vcs_test_all_05_Print1
                 this.currentpageindex = 0;//当前打印的页编号设为0
             }
         }
-        //#endregion
 
-        //#region 显示打印预览窗体
-        /// <summary>
-        ///  显示打印预览窗体
-        /// </summary>
+        //  显示打印预览窗体
         public void print()
         {
             rowcount = 0;//记录数据的行数
             string paperName = Page_Size(PageSheet);//获取当前纸张的大小
             PageSettings storePageSetting = new PageSettings();//实列化一个对PageSettings对象
             foreach (PaperSize ps in printdocument.PrinterSettings.PaperSizes)//查找当前设置纸张
+            {
                 if (paperName == ps.PaperName)//如果找到当前纸张的名称
                 {
                     storePageSetting.PaperSize = ps;//获取当前纸张的信息
                 }
+            }
+
+            return;
+
+            // NG here
+
             if (datagrid.DataSource.GetType().ToString() == "System.Data.DataTable")//判断数据类型
             {
                 rowcount = ((DataTable)datagrid.DataSource).Rows.Count;//获取数据的行数
@@ -208,6 +207,7 @@ namespace vcs_test_all_05_Print1
             {
                 rowcount = ((ArrayList)datagrid.DataSource).Count;//获取数据的行数
             }
+
             try
             {
                 printdocument.DefaultPageSettings.Landscape = PageScape;//设置横向打印
@@ -219,7 +219,6 @@ namespace vcs_test_all_05_Print1
                 throw new Exception("printer error." + e.Message);
             }
         }
-        //#endregion
     }
 }
 

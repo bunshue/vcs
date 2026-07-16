@@ -89,7 +89,6 @@ namespace vcs_Locale
             {
                 richTextBox1.Text += info.EnglishName + '\t' + info.NativeName + "\n";
             }
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -203,12 +202,7 @@ namespace vcs_Locale
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
 

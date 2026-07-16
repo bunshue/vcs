@@ -708,17 +708,9 @@ namespace vcs_Clipboard
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-
-
-
-
-
+/*
 //clipboardData.setData('text',clipboardData.getData('text').)" />
 
-
-
-
-/*
 將Bitmap的資料放到剪貼簿裏
             richTextBox1.Text += "將Bitmap的資料放到剪貼簿裏\n";
 
@@ -731,9 +723,9 @@ namespace vcs_Clipboard
 
             //複製到剪貼簿
             Clipboard.SetImage(bitmap1);
-*/
 
-/*
+//------------------------------------------------------------  # 60個
+
 將Bitmap的資料放到剪貼簿裏
             richTextBox1.Text += "將Bitmap的資料放到剪貼簿裏\n";
 
@@ -757,19 +749,22 @@ namespace vcs_Clipboard
             Clipboard.SetImage(bm);
         }
 
-*/
+//------------------------------------------------------------  # 60個
 
-/*
             richTextBox1.Text += "將圖片資料放置到Clipboard中\n";
             Clipboard.SetImage(bitmap2);
-*/
 
+//------------------------------------------------------------  # 60個
 
-
-
-/*
             //C# – 複製資料到剪貼簿
             //Clipboard.SetData(DataFormats.Text, richTextBox1.Text + "\n");
             Clipboard.SetDataObject(richTextBox1.Text + "\n");      //建議用此
             richTextBox1.Text += "已複製資料到系統剪貼簿\n";
+
+//------------------------------------------------------------  # 60個
+
 */
+
+
+
+

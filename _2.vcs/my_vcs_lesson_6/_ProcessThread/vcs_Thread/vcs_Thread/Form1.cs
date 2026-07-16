@@ -23,11 +23,8 @@ namespace vcs_Thread
         private Thread thread_ex10;
         private Thread thread_ex11;
 
-        private bool flag_thread_running2a = false;
-        private bool flag_thread_running2b = false;
         private bool flag_thread_running8a = false;
         private bool flag_thread_running8b = false;
-        private bool flag_thread_running10 = false;
 
         public Form1()
         {
@@ -126,11 +123,7 @@ namespace vcs_Thread
             groupBox2.Size = new Size(W, H);
             groupBox3.Size = new Size(W, H);
             groupBox4.Size = new Size(W, H);
-            groupBox5.Size = new Size(W, H);
-            groupBox6.Size = new Size(W, H);
-            groupBox7.Size = new Size(W, H);
             groupBox8.Size = new Size(W, H);
-            groupBox9.Size = new Size(W, H);
             groupBox13.Size = new Size(W, H);
             groupBox12.Size = new Size(W, H);
             groupBox14.Size = new Size(W * 2 + 10, H);
@@ -138,19 +131,15 @@ namespace vcs_Thread
             groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             groupBox3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            groupBox12.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             groupBox4.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            groupBox5.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            groupBox6.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            groupBox7.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            groupBox8.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            groupBox9.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            groupBox13.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            groupBox11.Location = new Point(x_st + dx * 5, y_st + dy * 0);
-            groupBox14.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            groupBox8.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            groupBox13.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            groupBox12.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            groupBox14.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            groupBox11.Location = new Point(x_st + dx * 2, y_st + dy * 2);
 
-            richTextBox1.Size = new Size(400, 690 + 50);
-            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
+            richTextBox1.Size = new Size(500, 690 + 50);
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             x_st = 10;
@@ -174,28 +163,16 @@ namespace vcs_Thread
             button40.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button41.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button42.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button50.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button51.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button52.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button60.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button61.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button62.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button70.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button71.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button72.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button80a.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button81a.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button80b.Location = new Point(x_st + dx * 0 + 90, y_st + dy * 0);
             button81b.Location = new Point(x_st + dx * 0 + 90, y_st + dy * 1);
             button82.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button90.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button91.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button92.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             lb_R.Location = new Point(x_st + dx * 0 + 130, y_st + dy * 0);
             lb_G.Location = new Point(x_st + dx * 0 + 130, y_st + dy * 1);
             lb_B.Location = new Point(x_st + dx * 0 + 130, y_st + dy * 2);
 
-            this.Size = new Size(1700, 750 + 50);
+            this.Size = new Size(1380, 750 + 50);
             this.Text = "vcs_Thread";
 
             //設定執行後的表單起始位置, 正中央
@@ -388,10 +365,6 @@ namespace vcs_Thread
                 richTextBox1.Text += "停止 thread 2b\n";
                 thread_ex2b.Abort();
             }
-
-            //same
-            flag_thread_running2a = false;
-            flag_thread_running2b = false;
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -457,9 +430,6 @@ namespace vcs_Thread
                 richTextBox1.Text += "停止 thread 10\n";
                 thread_ex10.Abort();
             }
-
-            //same
-            flag_thread_running10 = false;
         }
 
         private void button42_Click(object sender, EventArgs e)
@@ -475,67 +445,6 @@ namespace vcs_Thread
         }
 
         //Thread使用範例4 SP
-
-        //------------------------------------------------------------  # 60個
-
-        //Thread使用範例5 ST
-
-        private void ThreadProc_ex5()
-        {
-        }
-
-        private void button50_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button51_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button52_Click(object sender, EventArgs e)
-        {
-
-        }
-        //Thread使用範例5 SP
-
-        //------------------------------------------------------------  # 60個
-
-        //Thread使用範例6 ST
-
-        private void button60_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button61_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button62_Click(object sender, EventArgs e)
-        {
-
-        }
-        //Thread使用範例6 SP
-
-        //------------------------------------------------------------  # 60個
-
-        //Thread使用範例7 ST
-
-        private void button70_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button71_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button72_Click(object sender, EventArgs e)
-        {
-
-        }
-        //Thread使用範例7 SP
 
         //------------------------------------------------------------  # 60個
 
@@ -632,25 +541,6 @@ namespace vcs_Thread
         }
 
         //Thread使用範例8 SP
-
-        //------------------------------------------------------------  # 60個
-
-        //Thread使用範例9 ST
-
-        private void button90_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button91_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button92_Click(object sender, EventArgs e)
-        {
-
-        }
-        //Thread使用範例9 SP
 
         //------------------------------------------------------------  # 60個
 
@@ -1153,12 +1043,6 @@ if (thread.ThreadState = ThreadState.Suspended )
 } 
 
 //------------------------------------------------------------  # 60個
-
-*/
-
-/*
-
-
 
 //這裡獲取線程的名字
 //string threadName = Thread.CurrentThread.Name;

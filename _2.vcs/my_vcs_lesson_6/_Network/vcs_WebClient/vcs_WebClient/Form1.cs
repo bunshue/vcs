@@ -122,6 +122,7 @@ namespace vcs_WebClient
             string url = @"https://www.telerik.com/sfimages/default-source/blogs/super_ninja-png";
             string filename = Path.GetFileName(url);  // 取得網址上的檔案名, 存檔用
 
+            /*
             wc.DownloadFile(url, filename);  // 從URL下載檔案
             //------------------------------  # 30個
 
@@ -141,7 +142,7 @@ namespace vcs_WebClient
 
 
             //------------------------------  # 30個
-
+            */
             richTextBox1.Text += "wc.DownloadFile 04\n";
 
             url = @"https://www.aspphp.online/bianchen/UploadFiles_4619/201701/2017010416252406.jpg";
@@ -149,15 +150,6 @@ namespace vcs_WebClient
             wc.DownloadFile(new Uri(url), filename);  // 從URL下載檔案
 
             //------------------------------  # 30個
-
-
-
-            //ddddddddddddddddddddddddddddddd
-
-
-
-
-
 
             richTextBox1.Text += "wc.DownloadFile 05\n";
 
@@ -970,6 +962,8 @@ namespace vcs_WebClient
         {
             //WebClient 22
 
+            // 比較
+
             WebClient wc = new WebClient();  // 建立 WebClient
 
             wc.DownloadFile("http://24.duote.com.cn/kugou.zip", @"ku.zip");  // 從URL下載檔案
@@ -1580,26 +1574,6 @@ HtmlAgilityPack 訊息
 //------------------------------------------------------------  # 60個
 
 /*
-vcs抓網路上的檔案
-            try
-            {
-                //抓現在時間
-                DateTime dt = DateTime.Now;
-                string filetime = dt.ToString("yyyy-MM-dd-HHmm");  //將檔案寫入現在時間
-
-                WebClient wc = new WebClient();  // 建立 WebClient
-                wc.DownloadFile("http://data.taipei/bus/PathDetail",      // 從URL下載檔案
-                "C:\\TEMP\\1_PathDetail\\PathDetail_" + filetime + ".gz");    //寫入本機的路徑  // 從URL下載檔案
-            }
-            catch
-            {
-                Environment.Exit(0);    //如果抓不到檔案就離開程式，沒這行程式會一直卡在這如果沒抓到檔案的話…
-            }
-wc.DownloadFile(url_file2, filename_local);          //抓網頁資料到本地檔案  // 從URL下載檔案
-
-*/
-
-/*
 //保留
             catch (WebException ex)
             {
@@ -1619,6 +1593,4 @@ wc.DownloadFile(url_file2, filename_local);          //抓網頁資料到本地�
                 }
 
 */
-
-
 

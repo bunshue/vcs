@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_PerformanceCounter2
+namespace vcs_PerformanceCounter1
 {
     static class Program
     {

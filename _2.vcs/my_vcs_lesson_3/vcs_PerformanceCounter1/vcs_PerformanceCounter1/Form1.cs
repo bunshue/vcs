@@ -23,7 +23,7 @@ InstanceName 填 _Total
 //如果要監控單個處理器的狀態，屬性InstanceName需設為指向某個特定的處理器(比如說0或1)
 */
 
-namespace vcs_PerformanceCounter2
+namespace vcs_PerformanceCounter1
 {
     public partial class Form1 : Form
     {

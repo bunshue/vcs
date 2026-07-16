@@ -1,5 +1,20 @@
 ﻿
 
+            Font font = new Font("Courier New", 14);
+            StringFormat format = new StringFormat();
+
+            format.Alignment = StringAlignment.Center;
+            e.Graphics.DrawString("AAAAAAAAA", font, Brushes.Black, 100, 100, format);
+
+            format.Alignment = StringAlignment.Far;
+            e.Graphics.DrawString("AAAAAAAAA", font, Brushes.Black, 100, 200, format);
+
+            format.Alignment = StringAlignment.Near;
+            e.Graphics.DrawString("AAAAAAAAA", font, Brushes.Black, 100, 300, format);
+
+//------------------------------------------------------------  # 60個
+
+
             Debug.Print("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！ " + number.ToString());
 
 
@@ -376,6 +391,7 @@ vcs_test_all_04_Dialog
             richTextBox1.Text += myYear.ToString() + " 年後領回本利和：" + Cal(myMoney, myYear, myRate).ToString() + "\n";
         }
 
+//------------------------------------------------------------  # 60個
 
 radioButton1屬性
 
@@ -429,6 +445,8 @@ radioButton1屬性
 label
             //將兩個標籤的文字對齊以垂直置中，水平置中
             lblMouse.TextAlign = ContentAlignment.MiddleCenter;
+
+//------------------------------------------------------------  # 60個
 
 鍵盤按鍵狀態
             if (Control.IsKeyLocked(Keys.CapsLock))

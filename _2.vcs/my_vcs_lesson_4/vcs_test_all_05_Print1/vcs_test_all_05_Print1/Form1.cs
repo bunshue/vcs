@@ -82,13 +82,10 @@ namespace vcs_test_all_05_Print1
             //列出印表機資訊
             groupBox2.Location = new Point(x_st + dx * 4 - 80, y_st + dy * 0);
 
-            dataGridView1.Size = new Size(200, 200);
-            dataGridView1.Location = new Point(x_st + dx * 4 - 80, y_st + dy * 5 + 220);
+            dataGridView1.Size = new Size(300, 300);
+            dataGridView1.Location = new Point(x_st + dx * 3, y_st + dy * 5 + 120);
 
             printPreviewControl1.Location = new Point(x_st + dx * 5 + 50, y_st + dy * 0);
-            bt_print.Location = new Point(x_st + dx * 5 + 50, y_st + dy * 2 + 30);
-            bt_print3.Location = new Point(x_st + dx * 5 + 50 + 110, y_st + dy * 2 + 30);
-            groupBox3.Location = new Point(x_st + dx * 5 + 50, y_st + dy * 3 + 20);
 
             richTextBox1.Size = new Size(360, 420);
             richTextBox1.Location = new Point(x_st + dx * 5 + 50, y_st + dy * 6);
@@ -564,10 +561,10 @@ namespace vcs_test_all_05_Print1
                     for (int i = 0; i < values[r].Length; i++)
                     {
                         // Draw the text.
-                        RectangleF layout_rect = new                            RectangleF(x + ColMargin, y, col_wid[i], RowMargin);
+                        RectangleF layout_rect = new RectangleF(x + ColMargin, y, col_wid[i], RowMargin);
                         string_format.Alignment = alignments[i];
                         string_format.LineAlignment = StringAlignment.Near;
-                        gr.DrawString(values[r][i].ToString(),                            body_font, Brushes.Black,                            layout_rect, string_format);
+                        gr.DrawString(values[r][i].ToString(), body_font, Brushes.Black, layout_rect, string_format);
 
                         x += col_wid[i] + 2 * ColMargin;
                     }
@@ -576,7 +573,7 @@ namespace vcs_test_all_05_Print1
             }
 
             // Outline the grid.
-            grid_bounds = new Rectangle(                grid_bounds.X, grid_bounds.Y, grid_bounds.Width,                (values.Length + 1) * RowMargin + HeaderMargin);
+            grid_bounds = new Rectangle(grid_bounds.X, grid_bounds.Y, grid_bounds.Width, (values.Length + 1) * RowMargin + HeaderMargin);
             gr.DrawRectangle(Pens.Black, grid_bounds);
         }
 
@@ -1264,47 +1261,6 @@ namespace vcs_test_all_05_Print1
 
         //------------------------------------------------------------  # 60個
 
-        private void bt_print_Click(object sender, EventArgs e)
-        {
-            printPreviewDialog1.Document = this.printDocument_preview;
-            printPreviewDialog1.ShowDialog();
-        }
-
-        private void bt_print3_Click(object sender, EventArgs e)
-        {
-            printDocument1.Print();
-        }
-
-        private void printDocument_preview_PrintPage(object sender, PrintPageEventArgs e)
-        {
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            try
-            {
-                Bitmap bitmap = new Bitmap(filename);
-                e.Graphics.DrawImage(bitmap, 150, 240, 350, 300);
-            }
-            catch (Exception ee)
-            {
-                MessageBox.Show(ee.Message);
-            }
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void bt_print2_Click(object sender, EventArgs e)
-        {
-            printPreviewDialog2.Document = this.printDocument2;
-            printPreviewDialog2.ShowDialog();
-        }
-
-        private void bt_print2b_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void printDocument2_PrintPage(object sender, PrintPageEventArgs e)
-        {
-        }
-
         private void button16_Click(object sender, EventArgs e)
         {
             //使用PrintClass
@@ -1347,6 +1303,7 @@ namespace vcs_test_all_05_Print1
             richTextBox1.Text += "紙張大小 : " + comboBox_PageSize.SelectedIndex + "\n";
 
             PrintClass dgp = new PrintClass(this.dataGridView1, comboBox_PageSize.SelectedIndex, print_direction_width);
+
             MSetUp(dgp);//记录窗体中打印信息的相关设置
             string[] header = new string[dataGridView1.ColumnCount];//创建一个与数据列相等的字符串数组
             for (int p = 0; p < dataGridView1.ColumnCount; p++)//记录所有列标题的名列
@@ -1355,19 +1312,15 @@ namespace vcs_test_all_05_Print1
             }
 
             //NG
-            //dgp.print();//显示打印预览窗体
+            dgp.print();//显示打印预览窗体
         }
 
-        //#region  设置打印数据的相关信息
-        /// <summary>
-        /// 设置打印数据的相关信息
-        /// </summary>
+        // 设置打印数据的相关信息
         /// <param dgp="PrintClass">公共类PrintClass</param>
         private void MSetUp(PrintClass dgp)
         {
             dgp.PageAspect = Aspect;//设置横向打印
         }
-        //#endregion
     }
 }
 
@@ -1378,17 +1331,4 @@ namespace vcs_test_all_05_Print1
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-/*
 
-//預覽列印 Star
-控件PrintPreviewDialog    printPreviewDialog_xxxx 內的參數 Document 設定為 printDocument_xxxx
-
-//列印文件
-控件PrintDocument         printDocument_xxxx
-
-printDocument_xxxx 的PrintPage方法     printDocument_xxxx_PrintPage 設定要列印的內容
-
-//預覽列印 Star
-//            printPreviewDialog_star.ShowDialog();
-
-*/

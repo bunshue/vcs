@@ -90,27 +90,12 @@
             this.chkMaximized = new System.Windows.Forms.CheckBox();
             this.bt_print_control = new System.Windows.Forms.Button();
             this.printPreviewControl1 = new System.Windows.Forms.PrintPreviewControl();
-            this.printDocument_preview = new System.Drawing.Printing.PrintDocument();
-            this.bt_print = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.bt_print2b = new System.Windows.Forms.Button();
-            this.label13 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.bt_print2 = new System.Windows.Forms.Button();
-            this.label14 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.printDocument2 = new System.Drawing.Printing.PrintDocument();
-            this.printPreviewDialog2 = new System.Windows.Forms.PrintPreviewDialog();
             this.printDialog2 = new System.Windows.Forms.PrintDialog();
-            this.bt_print3 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.comboBox_PageSize = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox_control.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -215,11 +200,11 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(461, 409);
+            this.bt_clear.Location = new System.Drawing.Point(445, 438);
             this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(54, 35);
+            this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 47;
-            this.bt_clear.Text = "clear";
+            this.bt_clear.Text = "Clear";
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
@@ -681,141 +666,15 @@
             // printPreviewControl1
             // 
             this.printPreviewControl1.AutoZoom = false;
-            this.printPreviewControl1.Document = this.printDocument_preview;
             this.printPreviewControl1.Location = new System.Drawing.Point(435, 267);
             this.printPreviewControl1.Name = "printPreviewControl1";
             this.printPreviewControl1.Size = new System.Drawing.Size(223, 124);
             this.printPreviewControl1.TabIndex = 66;
             this.printPreviewControl1.Zoom = 0.0932420872540633D;
             // 
-            // printDocument_preview
-            // 
-            this.printDocument_preview.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_preview_PrintPage);
-            // 
-            // bt_print
-            // 
-            this.bt_print.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_print.Location = new System.Drawing.Point(558, 399);
-            this.bt_print.Name = "bt_print";
-            this.bt_print.Size = new System.Drawing.Size(100, 40);
-            this.bt_print.TabIndex = 67;
-            this.bt_print.Text = "預覽列印";
-            this.bt_print.UseVisualStyleBackColor = true;
-            this.bt_print.Click += new System.EventHandler(this.bt_print_Click);
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.bt_print2b);
-            this.groupBox3.Controls.Add(this.label13);
-            this.groupBox3.Controls.Add(this.textBox3);
-            this.groupBox3.Controls.Add(this.bt_print2);
-            this.groupBox3.Controls.Add(this.label14);
-            this.groupBox3.Controls.Add(this.textBox1);
-            this.groupBox3.Controls.Add(this.textBox2);
-            this.groupBox3.Controls.Add(this.label15);
-            this.groupBox3.Location = new System.Drawing.Point(677, 383);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(206, 157);
-            this.groupBox3.TabIndex = 68;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "列印視窗中的資訊";
-            // 
-            // bt_print2b
-            // 
-            this.bt_print2b.Location = new System.Drawing.Point(106, 109);
-            this.bt_print2b.Name = "bt_print2b";
-            this.bt_print2b.Size = new System.Drawing.Size(80, 40);
-            this.bt_print2b.TabIndex = 7;
-            this.bt_print2b.Text = "列印";
-            this.bt_print2b.UseVisualStyleBackColor = true;
-            this.bt_print2b.Click += new System.EventHandler(this.bt_print2b_Click);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(22, 30);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(65, 12);
-            this.label13.TabIndex = 1;
-            this.label13.Text = "員工姓名：";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(89, 81);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 22);
-            this.textBox3.TabIndex = 6;
-            // 
-            // bt_print2
-            // 
-            this.bt_print2.Location = new System.Drawing.Point(20, 109);
-            this.bt_print2.Name = "bt_print2";
-            this.bt_print2.Size = new System.Drawing.Size(80, 40);
-            this.bt_print2.TabIndex = 0;
-            this.bt_print2.Text = "預覽列印";
-            this.bt_print2.UseVisualStyleBackColor = true;
-            this.bt_print2.Click += new System.EventHandler(this.bt_print2_Click);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(34, 84);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(41, 12);
-            this.label14.TabIndex = 5;
-            this.label14.Text = "職位：";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(89, 27);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 22);
-            this.textBox1.TabIndex = 2;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(89, 54);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 22);
-            this.textBox2.TabIndex = 4;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(34, 57);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(41, 12);
-            this.label15.TabIndex = 3;
-            this.label15.Text = "部門：";
-            // 
-            // printDocument2
-            // 
-            this.printDocument2.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument2_PrintPage);
-            // 
-            // printPreviewDialog2
-            // 
-            this.printPreviewDialog2.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog2.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog2.ClientSize = new System.Drawing.Size(400, 300);
-            this.printPreviewDialog2.Enabled = true;
-            this.printPreviewDialog2.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog2.Icon")));
-            this.printPreviewDialog2.Name = "printPreviewDialog1";
-            this.printPreviewDialog2.Visible = false;
-            // 
             // printDialog2
             // 
             this.printDialog2.UseEXDialog = true;
-            // 
-            // bt_print3
-            // 
-            this.bt_print3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_print3.Location = new System.Drawing.Point(558, 450);
-            this.bt_print3.Name = "bt_print3";
-            this.bt_print3.Size = new System.Drawing.Size(100, 40);
-            this.bt_print3.TabIndex = 69;
-            this.bt_print3.Text = "列印 ";
-            this.bt_print3.UseVisualStyleBackColor = true;
-            this.bt_print3.Click += new System.EventHandler(this.bt_print3_Click);
             // 
             // dataGridView1
             // 
@@ -861,9 +720,6 @@
             this.ClientSize = new System.Drawing.Size(1323, 642);
             this.Controls.Add(this.comboBox_PageSize);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.bt_print3);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.bt_print);
             this.Controls.Add(this.printPreviewControl1);
             this.Controls.Add(this.groupBox_control);
             this.Controls.Add(this.button7);
@@ -895,8 +751,6 @@
             this.groupBox2.PerformLayout();
             this.groupBox_control.ResumeLayout(false);
             this.groupBox_control.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
@@ -965,21 +819,7 @@
         private System.Windows.Forms.CheckBox chkZoom100;
         private System.Windows.Forms.CheckBox chkMaximized;
         private System.Windows.Forms.PrintPreviewControl printPreviewControl1;
-        private System.Windows.Forms.Button bt_print;
-        private System.Drawing.Printing.PrintDocument printDocument_preview;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button bt_print2;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label15;
-        private System.Drawing.Printing.PrintDocument printDocument2;
-        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog2;
         private System.Windows.Forms.PrintDialog printDialog2;
-        private System.Windows.Forms.Button bt_print3;
-        private System.Windows.Forms.Button bt_print2b;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.ComboBox comboBox_PageSize;
     }

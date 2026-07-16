@@ -70,11 +70,41 @@ namespace vcs_Icon
 
         private void button0_Click(object sender, EventArgs e)
         {
+            //使用程式圖標 icon  運行時顯示自己定義的圖標
+            this.Icon = new Icon(@"D:\_git\vcs\_1.data\______test_files1\_icon\唐.ico");
+
+            Icon ico = new Icon(@"D:/_git/vcs/_1.data/______test_files1/_icon/快.ico");
+            this.Icon = ico;
         }
+
+        //------------------------------------------------------------  # 60個
+
+        /*
+        /// <summary>
+        /// 實現bitmap到ico的轉換
+        /// </summary>
+        /// <param name="bitmap">原圖</param>
+        /// <returns>轉換後的指定大小的圖標</returns>
+        private Icon ConvertBitmap2Ico(Bitmap bitmap)
+        {
+            Bitmap icoBitmap = new Bitmap(bitmap, size);//創建制定大小的原位圖
+
+            //獲得原位圖的圖標句柄
+            IntPtr hIco = icoBitmap.GetHicon();
+            //從圖標的指定WINDOWS句柄創建Icon
+            Icon icon = Icon.FromHandle(hIco);
+
+            return icon;
+        }
+        */
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //BMP轉ICON
+            //ConvertBitmap2Ico
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -160,34 +190,6 @@ namespace vcs_Icon
 
 
 /*
-//------------------------------------------------------------  # 60個
-
-/// <summary>
-/// 實現bitmap到ico的轉換
-/// </summary>
-/// <param name="bitmap">原圖</param>
-/// <returns>轉換後的指定大小的圖標</returns>
-private Icon ConvertBitmap2Ico(Bitmap bitmap)
-{
-	Bitmap icoBitmap = new Bitmap(bitmap, size);//創建制定大小的原位圖
-	
-	//獲得原位圖的圖標句柄
-	IntPtr hIco = icoBitmap.GetHicon();
-	//從圖標的指定WINDOWS句柄創建Icon
-	Icon icon = Icon.FromHandle(hIco);
-	
-	return icon;
-}
-
-//------------------------------  # 30個
-
-使用程式圖標 icon  運行時顯示自己定義的圖標
-this.Icon = new Icon(@"D:\_git\vcs\_1.data\______test_files1\_icon\唐.ico");
-
-Icon ico = new Icon(@"D:/_git/vcs/_1.data/______test_files1/_icon/快.ico");
-this.Icon = ico;
-
-//------------------------------  # 30個
 
 需要為每個構建配置設置不同的ApplicationIcon
 
@@ -215,9 +217,7 @@ this.Icon = ico;
                 //AppFunc.HandleException2(ex, "遺失圖檔!");
             }
 
-
 //------------------------------------------------------------  # 60個
-
 
             //  製作 ICON 用
             // Convert the bitmap into an icon.
@@ -226,10 +226,6 @@ this.Icon = ico;
 
 //------------------------------------------------------------  # 60個
 
-
 bitmap1.Save(filename, ImageFormat.Icon);
 
-
-
 */
-

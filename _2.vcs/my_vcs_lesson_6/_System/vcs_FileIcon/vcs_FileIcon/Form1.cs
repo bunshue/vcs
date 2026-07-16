@@ -23,8 +23,39 @@ namespace vcs_FileIcon
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
             textBox1.Text = foldername;
         }
+
+        void show_item_location()
+        {
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+
+            richTextBox1.Size = new Size(400, 690);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1070, 750);
+            this.Text = "vcs_test_all_00_Usually";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -37,7 +68,7 @@ namespace vcs_FileIcon
             }
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         [DllImport("shell32.dll", EntryPoint = "SHGetFileInfo")]
         public static extern IntPtr SHGetFileInfo(string pszPath, uint dwFileAttribute, ref SHFILEINFO psfi, uint cbSizeFileInfo, uint Flags);
@@ -61,48 +92,53 @@ namespace vcs_FileIcon
         {
             lv.Items.Clear();
             SHFILEINFO shfi = new SHFILEINFO();//實例化SHFILEINFO類
-            try
+            string[] dirs = Directory.GetDirectories(path);//取得指定目錄中子目錄的名稱
+            string[] files = Directory.GetFiles(path);//取得目錄中文件的名稱
+            for (int i = 0; i < dirs.Length; i++)//搜尋子文件夾
             {
-                string[] dirs = Directory.GetDirectories(path);//取得指定目錄中子目錄的名稱
-                string[] files = Directory.GetFiles(path);//取得目錄中文件的名稱
-                for (int i = 0; i < dirs.Length; i++)//搜尋子文件夾
+                string[] info = new string[4];//定義一個數組
+                DirectoryInfo dir = new DirectoryInfo(dirs[i]);//根據文件夾的路徑實例化DirectoryInfo類
+                if (!(dir.Name == "RECYCLER" || dir.Name == "RECYCLED" || dir.Name == "Recycled" || dir.Name == "System Volume Information"))
                 {
-                    string[] info = new string[4];//定義一個數組
-                    DirectoryInfo dir = new DirectoryInfo(dirs[i]);//根據文件夾的路徑實例化DirectoryInfo類
-                    if (!(dir.Name == "RECYCLER" || dir.Name == "RECYCLED" || dir.Name == "Recycled" || dir.Name == "System Volume Information"))
-                    {
-                        SHGetFileInfo(dirs[i], (uint)0x80, ref shfi, (uint)System.Runtime.InteropServices.Marshal.SizeOf(shfi), (uint)(0x100 | 0x400)); //取得文件夾的圖標及類型
-                        imglist.Images.Add(dir.Name, (Icon)Icon.FromHandle(shfi.hIcon).Clone());  // 新增圖標
-                        info[0] = dir.Name;//取得文件夾的名稱
-                        info[1] = "";//取得文件夾的大小
-                        info[2] = "文件夾";//取得類型
-                        info[3] = dir.LastWriteTime.ToString();//取得修改時間
-                        ListViewItem item = new ListViewItem(info, dir.Name);//實例化ListViewItem類
-                        lv.Items.Add(item);//新增目前文件夾的基本訊息
-                        DestroyIcon(shfi.hIcon);//銷毀圖標
-                    }
-                }
-                for (int i = 0; i < files.Length; i++)//搜尋文件
-                {
-                    string[] info = new string[4];//定義一個數組
-                    FileInfo fi = new FileInfo(files[i]);//根據文件的路徑實例化FileInfo類
-                    string Filetype = fi.Name.Substring(fi.Name.LastIndexOf(".") + 1, fi.Name.Length - fi.Name.LastIndexOf(".") - 1);//取得文件的類型
-                    string newtype = Filetype.ToLower();//將文件類型轉換為小寫
-                    if (!(newtype == "sys" || newtype == "ini" || newtype == "bin" || newtype == "log" || newtype == "com" || newtype == "bat" || newtype == "db"))
-                    {
-                        SHGetFileInfo(files[i], (uint)0x80, ref shfi, (uint)System.Runtime.InteropServices.Marshal.SizeOf(shfi), (uint)(0x100 | 0x400)); //取得文件的圖標及類型
-                        imglist.Images.Add(fi.Name, (Icon)Icon.FromHandle(shfi.hIcon).Clone());  // 新增圖標
-                        info[0] = fi.Name;//取得文件的名稱
-                        info[1] = fi.Length.ToString();//取得文件的大小
-                        info[2] = fi.Extension.ToString();//取得文件的類型
-                        info[3] = fi.LastWriteTime.ToString();//取得文件的修改時間
-                        ListViewItem item = new ListViewItem(info, fi.Name);//實例化ListViewItem類
-                        lv.Items.Add(item);//新增目前文件的基本訊息
-                        DestroyIcon(shfi.hIcon);//銷毀圖標
-                    }
+                    SHGetFileInfo(dirs[i], (uint)0x80, ref shfi, (uint)System.Runtime.InteropServices.Marshal.SizeOf(shfi), (uint)(0x100 | 0x400)); //取得文件夾的圖標及類型
+                    imglist.Images.Add(dir.Name, (Icon)Icon.FromHandle(shfi.hIcon).Clone());  // 新增圖標
+                    info[0] = dir.Name;//取得文件夾的名稱
+                    info[1] = "";//取得文件夾的大小
+                    info[2] = "文件夾";//取得類型
+                    info[3] = dir.LastWriteTime.ToString();//取得修改時間
+                    ListViewItem item = new ListViewItem(info, dir.Name);//實例化ListViewItem類
+                    lv.Items.Add(item);//新增目前文件夾的基本訊息
+                    DestroyIcon(shfi.hIcon);//銷毀圖標
                 }
             }
-            catch { }
+
+            for (int i = 0; i < files.Length; i++)//搜尋文件
+            {
+                string[] info = new string[4];//定義一個數組
+                FileInfo fi = new FileInfo(files[i]);//根據文件的路徑實例化FileInfo類
+                string Filetype = fi.Name.Substring(fi.Name.LastIndexOf(".") + 1, fi.Name.Length - fi.Name.LastIndexOf(".") - 1);//取得文件的類型
+                string newtype = Filetype.ToLower();//將文件類型轉換為小寫
+                if (!(newtype == "sys" || newtype == "ini" || newtype == "bin" || newtype == "log" || newtype == "com" || newtype == "bat" || newtype == "db"))
+                {
+                    SHGetFileInfo(files[i], (uint)0x80, ref shfi, (uint)System.Runtime.InteropServices.Marshal.SizeOf(shfi), (uint)(0x100 | 0x400)); //取得文件的圖標及類型
+                    imglist.Images.Add(fi.Name, (Icon)Icon.FromHandle(shfi.hIcon).Clone());  // 新增圖標
+                    info[0] = fi.Name;//取得文件的名稱
+                    info[1] = fi.Length.ToString();//取得文件的大小
+                    info[2] = fi.Extension.ToString();//取得文件的類型
+                    info[3] = fi.LastWriteTime.ToString();//取得文件的修改時間
+                    ListViewItem item = new ListViewItem(info, fi.Name);//實例化ListViewItem類
+                    lv.Items.Add(item);//新增目前文件的基本訊息
+                    DestroyIcon(shfi.hIcon);//銷毀圖標
+                }
+            }
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+

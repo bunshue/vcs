@@ -18,7 +18,6 @@ namespace vcs_BackgroundWorker1
         private BackgroundWorker backgroundWorker0 = new BackgroundWorker();
         private BackgroundWorker backgroundWorker2 = new BackgroundWorker();
         private BackgroundWorker backgroundWorker4 = new BackgroundWorker();
-        private BackgroundWorker backgroundWorker6 = new BackgroundWorker();//多線程顯示運行狀態
 
         public Form1()
         {
@@ -56,13 +55,8 @@ namespace vcs_BackgroundWorker1
 
             //------------------------------------------------------------  # 60個
 
-            backgroundWorker6.DoWork += DoSomethingBusy1;
-            backgroundWorker6.RunWorkerCompleted += backgroundWorker6_RunWorkerCompleted;
-            backgroundWorker6.WorkerReportsProgress = true;  // 是否報告進度
-
-            //------------------------------------------------------------  # 60個
-
-            label6.Text = "";
+            backgroundWorker2.RunWorkerCompleted += backgroundWorker2_RunWorkerCompleted;
+            backgroundWorker2.WorkerReportsProgress = true;  // 是否報告進度
         }
 
         void show_item_location()
@@ -86,7 +80,6 @@ namespace vcs_BackgroundWorker1
             progressBar0.Size = new Size(410, 40);
             progressBar0.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             label0.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            label6.Location = new Point(x_st + dx * 1, y_st + dy * 1);
 
             pictureBox1.Size = new Size(620, 550);
             pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 2);
@@ -433,56 +426,14 @@ namespace vcs_BackgroundWorker1
 
         //------------------------------------------------------------  # 60個
 
-        private void DoSomethingBusy1(object sender, DoWorkEventArgs e)
-        {
-            // 模擬耗時工作
-            long sum = 0;
-            for (int i = 0; i < 1000000; i++)
-            {
-                sum += i;
-                //progressBar0.Value = i / 10000000;
-                //label6.Text = "使用BackgroundWorker " + (i / 10000000).ToString();
-                Application.DoEvents();
-            }
-        }
-
-        private void DoSomethingBusy2()
-        {
-            // 模擬耗時工作
-            long sum = 0;
-            for (int i = 0; i < 1000000; i++)
-            {
-                sum += i;
-                //progressBar0.Value = i / 10000000;
-                //label6.Text = "不使用BackgroundWorker " + (i / 10000000).ToString();
-                Application.DoEvents();
-            }
-        }
-
-        private void backgroundWorker6_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            richTextBox1.Text += "BGW6 執行 RunWorkerCompleted()\t完成\n";
-        }
-
         private void button5_Click(object sender, EventArgs e)
         {
-            //不使用BackgroundWorker
-            label6.Text = "不使用BackgroundWorker6";
-            richTextBox1.Text += "不使用BackgroundWorker 開始\n";
-            DoSomethingBusy2();
-            label6.Text = "不使用BackgroundWorker 完成";
-            richTextBox1.Text += "不使用BackgroundWorker 完成\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button6_Click(object sender, EventArgs e)
         {
-            label6.Text = "使用BackgroundWorker6";
-
-            if (backgroundWorker6.IsBusy == false)
-            {
-                richTextBox1.Text += "啟動BackgroundWorker6\n";
-                backgroundWorker6.RunWorkerAsync();  // 啟動非同步背景執行緒, 將觸發BackgroundWorker.DoWork事件
-            }
         }
 
         //------------------------------------------------------------  # 60個
