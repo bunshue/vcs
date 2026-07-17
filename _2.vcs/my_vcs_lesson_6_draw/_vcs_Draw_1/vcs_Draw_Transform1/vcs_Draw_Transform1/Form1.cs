@@ -759,8 +759,6 @@ namespace vcs_Draw_Transform1
 
             //畫Sinc
 
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-
             // Transform to map the graph bounds to the Bitmap.
             // The bounds to draw.
             float xmin = -20;
@@ -1514,10 +1512,42 @@ namespace vcs_Draw_Transform1
 
         //------------------------------------------------------------  # 60個
 
+        // Draw a smiley face in the area (-1, -1)-(1, 1).
+        private void DrawSmiley(Graphics gr)
+        {
+            using (Pen thin_pen = new Pen(Color.Black, 0))
+            {
+                gr.FillEllipse(Brushes.Yellow, -1, -1, 2, 2);
+                gr.DrawEllipse(thin_pen, -1, -1, 2, 2);
+
+                gr.FillEllipse(Brushes.LightGreen, -0.5F, -0.5F, 0.3F, 0.5F);
+                gr.DrawEllipse(thin_pen, -0.5F, -0.5F, 0.3F, 0.5F);
+                gr.FillEllipse(Brushes.Black, -0.4F, -0.4F, 0.2F, 0.3F);
+
+                gr.FillEllipse(Brushes.LightGreen, 0.2F, -0.5F, 0.3F, 0.5F);
+                gr.DrawEllipse(thin_pen, 0.2F, -0.5F, 0.3F, 0.5F);
+                gr.FillEllipse(Brushes.Black, 0.3F, -0.4F, 0.2F, 0.3F);
+
+                gr.FillEllipse(Brushes.LightBlue, -0.2F, -0.1F, 0.4F, 0.6F);
+                gr.DrawEllipse(thin_pen, -0.2F, -0.1F, 0.4F, 0.6F);
+
+                gr.DrawArc(thin_pen, -0.75F, -0.75F, 1.5F, 1.5F, 20, 120);
+            }
+        }
+
         private void button24_Click(object sender, EventArgs e)
         {
+            reset_pictureBox();
 
+            g.TranslateTransform(1, 1);
+            g.ScaleTransform(100, 100, MatrixOrder.Append);
+            g.TranslateTransform(100, 100, MatrixOrder.Append);
+            DrawSmiley(g);
+
+            pictureBox1.Image = bitmap1;
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button25_Click(object sender, EventArgs e)
         {

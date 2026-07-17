@@ -1103,7 +1103,7 @@ namespace vcs_Draw1
             g = Graphics.FromImage(bitmap1);
 
             //清空畫布並用透明色填充
-            //g.Clear(Color.Transparent);
+            //g.Clear(Color.Transparent);  // 填上透明色
 
             Color c1 = Color.FromArgb(255, 255, 0, 0);
             SolidBrush sb1 = new SolidBrush(c1);
@@ -1793,6 +1793,21 @@ namespace vcs_Draw1
 
         private void button17_Click(object sender, EventArgs e)
         {
+            //StringFormat
+
+            Font font = new Font("Courier New", 14);
+            StringFormat format = new StringFormat();
+
+            /*
+            format.Alignment = StringAlignment.Center;
+            e.Graphics.DrawString("AAAAAAAAA", font, Brushes.Black, 100, 100, format);
+
+            format.Alignment = StringAlignment.Far;
+            e.Graphics.DrawString("AAAAAAAAA", font, Brushes.Black, 100, 200, format);
+
+            format.Alignment = StringAlignment.Near;
+            e.Graphics.DrawString("AAAAAAAAA", font, Brushes.Black, 100, 300, format);
+            */
 
         }
 
@@ -2967,9 +2982,48 @@ blackPen.StartCap=LineCap.ArrowAnchor;
             richTextBox1.Text += "第5項 PictureBox\n";
             e.Graphics.DrawImage(bitmap1, 0, 0); // 呈現原圖
 
+//------------------------------------------------------------  # 60個
+
+本文將介紹在．Net中如何使用代碼畫圖表，就像用MS Excel產生的圖表一樣。也可以畫像DataGrid一樣的表格。
+在．Net中，微軟給我們提供了畫圖類（System.Drawing.Imaging），在該類中畫圖的準系統都有。
+比如：直線、折線、矩形、多邊形、橢圓形、扇形、曲線等等，因此一般的圖形都可以直接通過代碼畫出來。
+接下來介紹一些畫圖函數：
+
+Bitmap bMap=new Bitmap(500,500)　//定義映像大小；
+bMap.Save(Stream,ImageCodecInfo) //將映像儲存到指定的輸出資料流；
+Graphics gph //定義或建立GDI繪圖對像；
+PointF cPt　//定義二維平面中x,y座標；
+DrawString(string,Font,Brush,PonitF) //用指定的Brush和Font對像在指定的矩形或點繪製指定的字串；
+DrawLine(Pen,Ponit,Ponit) //用指定的筆(Pen)對像繪製指定兩點之間直線；
+DrawPolygon(Pen,Ponit[]) //用指定的筆(Pen)對像繪製指定多邊形，比如三角形，四邊形等等；
+FillPolygon(Brush,Ponit[]) //用指定的刷子(Brush)對像填充指定的多邊形；
+DrawEllipse(Pen,x,y,Width,Height) //用指定的筆繪製一個邊框定義的橢圓；
+FillEllipse(Brush,x,y,Width,Height) //用指定的刷子填充一個邊框定義的橢圓；
+DrawRectangle(Pen,x,y,Width,Height) //用指定的筆繪製一個指定座標點、寬度、高度的矩形；
+DrawPie(Pen,x,y,Width,Height,startAngle,sweepAngle) //用指定的筆繪製一個指定座標點、寬度、高度以及兩條射線組成的扇形；
+
+//------------------------------------------------------------  # 60個
+
+//多點之間的線段
+      Graphics g = this.CreateGraphics();
+      Pen pen = new Pen(Color.Blue, 2);      
+
+      //定義一個陣列有三個點
+      //分別為(10,10)、(20,20)、(30,30)
+      Point[] points = 
+      {
+            new Point(10, 10),
+            new Point(20, 20),
+            new Point(30, 30)
+      };
+
+      g.DrawLines(pen, points);
+
+//------------------------------------------------------------  # 60個
+
+
+
 */
-
-
 
 
 

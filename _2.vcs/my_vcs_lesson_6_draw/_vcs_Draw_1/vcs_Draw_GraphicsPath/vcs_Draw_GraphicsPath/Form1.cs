@@ -427,6 +427,7 @@ namespace vcs_Draw_GraphicsPath
         public static GraphicsPath CreateRoundRectangle(Rectangle rectangle, int radius)
         {
             GraphicsPath path = new GraphicsPath(FillMode.Winding);
+
             int l = rectangle.Left;
             int t = rectangle.Top;
             int w = rectangle.Width;
@@ -1007,13 +1008,13 @@ namespace vcs_Draw_GraphicsPath
             Bitmap bitmap1 = new Bitmap(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height);
             g = Graphics.FromImage(bitmap1);
 
-            //1111
-            GraphicsPath gp2 = RetrieveGraphicsPath();
+            GraphicsPath gp = RetrieveGraphicsPath();
 
             Pen p = new Pen(Color.Blue, 1);
-            //g.DrawPath(p, gp2);
+            //g.DrawPath(p, gp);
 
-            g.FillPath(new SolidBrush(Color.FromArgb(217, 218, 219)), gp2);
+            //g.FillPath(new SolidBrush(Color.FromArgb(217, 218, 219)), gp);
+            g.FillPath(new SolidBrush(Color.Red), gp);
 
             pictureBox1.Image = bitmap1;
         }
@@ -1132,13 +1133,7 @@ namespace vcs_Draw_GraphicsPath
             gp.FillMode = FillMode.Alternate;
             gp.AddPath(cCP, false);
 
-            //LogoHelper lh = new LogoHelper();
-            //lh.DestRectF = new RectangleF(this._location, new SizeF(this._width, this._height));
-            //lh.SrcGP = gp;
-            //GraphicsPath gpResult = lh.RetrievePath();
             gp.Dispose();
-
-            //return gpResult;
 
             return cCP;
         }

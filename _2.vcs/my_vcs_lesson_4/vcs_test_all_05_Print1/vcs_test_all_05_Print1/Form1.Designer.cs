@@ -42,14 +42,6 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.printPreviewDialog_image = new System.Windows.Forms.PrintPreviewDialog();
-            this.printDocument_image = new System.Drawing.Printing.PrintDocument();
-            this.printDocument_draw = new System.Drawing.Printing.PrintDocument();
-            this.printDocument_Calendar = new System.Drawing.Printing.PrintDocument();
-            this.printPreviewDialog_Calendar = new System.Windows.Forms.PrintPreviewDialog();
-            this.printPreviewDialog_grid = new System.Windows.Forms.PrintPreviewDialog();
-            this.printDocument_grid = new System.Drawing.Printing.PrintDocument();
             this.button10 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
@@ -59,8 +51,6 @@
             this.button16 = new System.Windows.Forms.Button();
             this.printDocument_pages = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog_pages = new System.Windows.Forms.PrintPreviewDialog();
-            this.printDocument_grid2 = new System.Drawing.Printing.PrintDocument();
-            this.printPreviewDialog_grid2 = new System.Windows.Forms.PrintPreviewDialog();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lstPaperSizes = new System.Windows.Forms.ListBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -82,20 +72,11 @@
             this.label12 = new System.Windows.Forms.Label();
             this.cboPrinters = new System.Windows.Forms.ComboBox();
             this.button7 = new System.Windows.Forms.Button();
-            this.printDocument_control = new System.Drawing.Printing.PrintDocument();
-            this.printPreviewDialog_control = new System.Windows.Forms.PrintPreviewDialog();
-            this.groupBox_control = new System.Windows.Forms.GroupBox();
-            this.chkAntiAlias = new System.Windows.Forms.CheckBox();
-            this.chkZoom100 = new System.Windows.Forms.CheckBox();
-            this.chkMaximized = new System.Windows.Forms.CheckBox();
-            this.bt_print_control = new System.Windows.Forms.Button();
             this.printPreviewControl1 = new System.Windows.Forms.PrintPreviewControl();
             this.printDialog2 = new System.Windows.Forms.PrintDialog();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.comboBox_PageSize = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox2.SuspendLayout();
-            this.groupBox_control.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -117,7 +98,6 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(200, 60);
             this.button9.TabIndex = 35;
-            this.button9.Text = "系統已經安裝的打印機訊息";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -128,7 +108,6 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(200, 60);
             this.button5.TabIndex = 33;
-            this.button5.Text = "預覽列印 月曆";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -139,7 +118,6 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(200, 60);
             this.button6.TabIndex = 32;
-            this.button6.Text = "預覽列印 Grid";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -160,7 +138,6 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(200, 60);
             this.button4.TabIndex = 29;
-            this.button4.Text = "列印畫圖 至 pdf";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -171,7 +148,6 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(200, 60);
             this.button3.TabIndex = 28;
-            this.button3.Text = "預覽列印 圖片";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -193,7 +169,6 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(200, 60);
             this.button1.TabIndex = 26;
-            this.button1.Text = "預覽列印";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -232,68 +207,6 @@
             this.printPreviewDialog1.Name = "printPreviewDialog1";
             this.printPreviewDialog1.Visible = false;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(657, 10);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 48;
-            this.pictureBox1.TabStop = false;
-            // 
-            // printPreviewDialog_image
-            // 
-            this.printPreviewDialog_image.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog_image.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog_image.ClientSize = new System.Drawing.Size(400, 300);
-            this.printPreviewDialog_image.Document = this.printDocument_image;
-            this.printPreviewDialog_image.Enabled = true;
-            this.printPreviewDialog_image.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog_image.Icon")));
-            this.printPreviewDialog_image.Name = "printPreviewDialog_image";
-            this.printPreviewDialog_image.Visible = false;
-            // 
-            // printDocument_image
-            // 
-            this.printDocument_image.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_image_PrintPage);
-            // 
-            // printDocument_draw
-            // 
-            this.printDocument_draw.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_draw_PrintPage);
-            // 
-            // printDocument_Calendar
-            // 
-            this.printDocument_Calendar.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_Calendar_PrintPage);
-            this.printDocument_Calendar.QueryPageSettings += new System.Drawing.Printing.QueryPageSettingsEventHandler(this.printDocument_Calendar_QueryPageSettings);
-            // 
-            // printPreviewDialog_Calendar
-            // 
-            this.printPreviewDialog_Calendar.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog_Calendar.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog_Calendar.ClientSize = new System.Drawing.Size(400, 300);
-            this.printPreviewDialog_Calendar.Document = this.printDocument_Calendar;
-            this.printPreviewDialog_Calendar.Enabled = true;
-            this.printPreviewDialog_Calendar.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog_Calendar.Icon")));
-            this.printPreviewDialog_Calendar.Name = "printPreviewDialog_Calendar";
-            this.printPreviewDialog_Calendar.Visible = false;
-            // 
-            // printPreviewDialog_grid
-            // 
-            this.printPreviewDialog_grid.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog_grid.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog_grid.ClientSize = new System.Drawing.Size(400, 300);
-            this.printPreviewDialog_grid.Document = this.printDocument_grid;
-            this.printPreviewDialog_grid.Enabled = true;
-            this.printPreviewDialog_grid.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog_grid.Icon")));
-            this.printPreviewDialog_grid.Name = "printPreviewDialog_grid";
-            this.printPreviewDialog_grid.Visible = false;
-            // 
-            // printDocument_grid
-            // 
-            this.printDocument_grid.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_grid_PrintPage);
-            // 
             // button10
             // 
             this.button10.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -323,7 +236,6 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(200, 60);
             this.button12.TabIndex = 59;
-            this.button12.Text = "格式化表單預覽列印";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -382,21 +294,6 @@
             this.printPreviewDialog_pages.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog_pages.Icon")));
             this.printPreviewDialog_pages.Name = "printPreviewDialog_grid";
             this.printPreviewDialog_pages.Visible = false;
-            // 
-            // printDocument_grid2
-            // 
-            this.printDocument_grid2.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_grid2_PrintPage);
-            // 
-            // printPreviewDialog_grid2
-            // 
-            this.printPreviewDialog_grid2.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog_grid2.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog_grid2.ClientSize = new System.Drawing.Size(400, 300);
-            this.printPreviewDialog_grid2.Document = this.printDocument_grid2;
-            this.printPreviewDialog_grid2.Enabled = true;
-            this.printPreviewDialog_grid2.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog_grid2.Icon")));
-            this.printPreviewDialog_grid2.Name = "printPreviewDialog_grid2";
-            this.printPreviewDialog_grid2.Visible = false;
             // 
             // groupBox2
             // 
@@ -592,77 +489,6 @@
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
-            // printDocument_control
-            // 
-            this.printDocument_control.BeginPrint += new System.Drawing.Printing.PrintEventHandler(this.printDocument_control_BeginPrint);
-            this.printDocument_control.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_control_PrintPage);
-            // 
-            // printPreviewDialog_control
-            // 
-            this.printPreviewDialog_control.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog_control.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog_control.ClientSize = new System.Drawing.Size(400, 300);
-            this.printPreviewDialog_control.Document = this.printDocument_control;
-            this.printPreviewDialog_control.Enabled = true;
-            this.printPreviewDialog_control.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog_control.Icon")));
-            this.printPreviewDialog_control.Name = "printPreviewDialog_control";
-            this.printPreviewDialog_control.Visible = false;
-            // 
-            // groupBox_control
-            // 
-            this.groupBox_control.Controls.Add(this.chkAntiAlias);
-            this.groupBox_control.Controls.Add(this.chkZoom100);
-            this.groupBox_control.Controls.Add(this.chkMaximized);
-            this.groupBox_control.Controls.Add(this.bt_print_control);
-            this.groupBox_control.Location = new System.Drawing.Point(445, 11);
-            this.groupBox_control.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox_control.Name = "groupBox_control";
-            this.groupBox_control.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox_control.Size = new System.Drawing.Size(194, 142);
-            this.groupBox_control.TabIndex = 56;
-            this.groupBox_control.TabStop = false;
-            this.groupBox_control.Text = "Control";
-            // 
-            // chkAntiAlias
-            // 
-            this.chkAntiAlias.AutoSize = true;
-            this.chkAntiAlias.Location = new System.Drawing.Point(39, 73);
-            this.chkAntiAlias.Name = "chkAntiAlias";
-            this.chkAntiAlias.Size = new System.Drawing.Size(71, 16);
-            this.chkAntiAlias.TabIndex = 58;
-            this.chkAntiAlias.Text = "Anti-Alias";
-            this.chkAntiAlias.UseVisualStyleBackColor = true;
-            // 
-            // chkZoom100
-            // 
-            this.chkZoom100.AutoSize = true;
-            this.chkZoom100.Location = new System.Drawing.Point(39, 46);
-            this.chkZoom100.Name = "chkZoom100";
-            this.chkZoom100.Size = new System.Drawing.Size(82, 16);
-            this.chkZoom100.TabIndex = 57;
-            this.chkZoom100.Text = "Zoom 100%";
-            this.chkZoom100.UseVisualStyleBackColor = true;
-            // 
-            // chkMaximized
-            // 
-            this.chkMaximized.AutoSize = true;
-            this.chkMaximized.Location = new System.Drawing.Point(39, 21);
-            this.chkMaximized.Name = "chkMaximized";
-            this.chkMaximized.Size = new System.Drawing.Size(76, 16);
-            this.chkMaximized.TabIndex = 56;
-            this.chkMaximized.Text = "Maximized";
-            this.chkMaximized.UseVisualStyleBackColor = true;
-            // 
-            // bt_print_control
-            // 
-            this.bt_print_control.Location = new System.Drawing.Point(35, 95);
-            this.bt_print_control.Name = "bt_print_control";
-            this.bt_print_control.Size = new System.Drawing.Size(104, 36);
-            this.bt_print_control.TabIndex = 55;
-            this.bt_print_control.Text = "預覽列印 control";
-            this.bt_print_control.UseVisualStyleBackColor = true;
-            this.bt_print_control.Click += new System.EventHandler(this.bt_print_control_Click);
-            // 
             // printPreviewControl1
             // 
             this.printPreviewControl1.AutoZoom = false;
@@ -717,11 +543,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1323, 642);
+            this.ClientSize = new System.Drawing.Size(1115, 642);
             this.Controls.Add(this.comboBox_PageSize);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.printPreviewControl1);
-            this.Controls.Add(this.groupBox_control);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button16);
@@ -731,7 +556,6 @@
             this.Controls.Add(this.button12);
             this.Controls.Add(this.button11);
             this.Controls.Add(this.button10);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button0);
@@ -746,11 +570,8 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox_control.ResumeLayout(false);
-            this.groupBox_control.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
@@ -771,14 +592,6 @@
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Drawing.Printing.PrintDocument printDocument1;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog_image;
-        private System.Drawing.Printing.PrintDocument printDocument_image;
-        private System.Drawing.Printing.PrintDocument printDocument_draw;
-        private System.Drawing.Printing.PrintDocument printDocument_Calendar;
-        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog_Calendar;
-        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog_grid;
-        private System.Drawing.Printing.PrintDocument printDocument_grid;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button12;
@@ -788,8 +601,6 @@
         private System.Windows.Forms.Button button16;
         private System.Drawing.Printing.PrintDocument printDocument_pages;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog_pages;
-        private System.Drawing.Printing.PrintDocument printDocument_grid2;
-        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog_grid2;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ListBox lstPaperSizes;
         private System.Windows.Forms.Label label9;
@@ -811,13 +622,6 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox cboPrinters;
         private System.Windows.Forms.Button button7;
-        private System.Drawing.Printing.PrintDocument printDocument_control;
-        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog_control;
-        private System.Windows.Forms.GroupBox groupBox_control;
-        private System.Windows.Forms.Button bt_print_control;
-        private System.Windows.Forms.CheckBox chkAntiAlias;
-        private System.Windows.Forms.CheckBox chkZoom100;
-        private System.Windows.Forms.CheckBox chkMaximized;
         private System.Windows.Forms.PrintPreviewControl printPreviewControl1;
         private System.Windows.Forms.PrintDialog printDialog2;
         private System.Windows.Forms.DataGridView dataGridView1;

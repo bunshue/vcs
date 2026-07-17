@@ -1,16 +1,8 @@
 ﻿
 
-            Font font = new Font("Courier New", 14);
-            StringFormat format = new StringFormat();
+ssss
+//                e.Graphics.DrawString(fahrenheit.ToString("0"), font, Brushes.Black, x1, y, sf);
 
-            format.Alignment = StringAlignment.Center;
-            e.Graphics.DrawString("AAAAAAAAA", font, Brushes.Black, 100, 100, format);
-
-            format.Alignment = StringAlignment.Far;
-            e.Graphics.DrawString("AAAAAAAAA", font, Brushes.Black, 100, 200, format);
-
-            format.Alignment = StringAlignment.Near;
-            e.Graphics.DrawString("AAAAAAAAA", font, Brushes.Black, 100, 300, format);
 
 //------------------------------------------------------------  # 60個
 
@@ -79,13 +71,6 @@ richTextBox1.Location = new Point(10, 50);
 groupBox3.Controls.Add(richTextBox1);
 
 this.panel_plc.Controls.Add(richTextBox1);
-
-//------------------------------------------------------------  # 60個
-
-drawdraw
-
-填上透明色
-g.Clear(Color.Transparent);
 
 //------------------------------------------------------------  # 60個
 
@@ -3978,23 +3963,6 @@ http://www.lingoes.net/en/translator/codepage.htm
 //------------------------------------------------------------  # 60個
 
 [C#] webBrowser如何判斷網頁是否讀取完成
-
-//------------------------------------------------------------  # 60個
-ddddddddd
-//多點之間的線段
-      Graphics g = this.CreateGraphics();
-      Pen pen = new Pen(Color.Blue, 2);      
-
-      //定義一個陣列有三個點
-      //分別為(10,10)、(20,20)、(30,30)
-      Point[] points = 
-      {
-            new Point(10, 10),
-            new Point(20, 20),
-            new Point(30, 30)
-      };
-
-      g.DrawLines(pen, points);
 
 //------------------------------------------------------------  # 60個
 
@@ -8119,11 +8087,6 @@ string thumb = fpath + fn.Replace(CodecExtension, ".jpg");
 
 //------------------------------------------------------------  # 60個
 
-
-
-
-//------------------------------------------------------------  # 60個
-
 常用圖形的繪制方法
 
 1．畫直線
@@ -8171,30 +8134,6 @@ string thumb = fpath + fn.Replace(CodecExtension, ".jpg");
 6．畫Bezier曲線
 [格式1]：public void DrawBezier(Pen pen,Point pt1,Point pt2,Point pt3,Point pt4);
 [格式2]：public void DrawBezier(Pen pen,float x1,float y1,float x2,float y2,float x3,float y3,float x4,float y4);
-
-//------------------------------------------------------------  # 60個
-
-drawdraw
-
-本文將介紹在．Net中如何使用代碼畫圖表，就像用MS Excel產生的圖表一樣。也可以畫像DataGrid一樣的表格。
-在．Net中，微軟給我們提供了畫圖類（System.Drawing.Imaging），在該類中畫圖的準系統都有。
-比如：直線、折線、矩形、多邊形、橢圓形、扇形、曲線等等，因此一般的圖形都可以直接通過代碼畫出來。
-接下來介紹一些畫圖函數：
-
-Bitmap bMap=new Bitmap(500,500)　//定義映像大小；
-bMap.Save(Stream,ImageCodecInfo) //將映像儲存到指定的輸出資料流；
-Graphics gph //定義或建立GDI繪圖對像；
-PointF cPt　//定義二維平面中x,y座標；
-DrawString(string,Font,Brush,PonitF) //用指定的Brush和Font對像在指定的矩形或點繪製指定的字串；
-DrawLine(Pen,Ponit,Ponit) //用指定的筆(Pen)對像繪製指定兩點之間直線；
-DrawPolygon(Pen,Ponit[]) //用指定的筆(Pen)對像繪製指定多邊形，比如三角形，四邊形等等；
-FillPolygon(Brush,Ponit[]) //用指定的刷子(Brush)對像填充指定的多邊形；
-DrawEllipse(Pen,x,y,Width,Height) //用指定的筆繪製一個邊框定義的橢圓；
-FillEllipse(Brush,x,y,Width,Height) //用指定的刷子填充一個邊框定義的橢圓；
-DrawRectangle(Pen,x,y,Width,Height) //用指定的筆繪製一個指定座標點、寬度、高度的矩形；
-DrawPie(Pen,x,y,Width,Height,startAngle,sweepAngle) //用指定的筆繪製一個指定座標點、寬度、高度以及兩條射線組成的扇形；
-
-//------------------------------------------------------------  # 60個
 
 //------------------------------------------------------------  # 60個
 

@@ -44,8 +44,13 @@
             this.button0 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.printPreviewDialog_pascal = new System.Windows.Forms.PrintPreviewDialog();
-            this.printDocument_pascal = new System.Drawing.Printing.PrintDocument();
+            this.printDocument555 = new System.Drawing.Printing.PrintDocument();
+            this.printPreviewDialog555 = new System.Windows.Forms.PrintPreviewDialog();
+            this.printPreviewDialog_Calendar = new System.Windows.Forms.PrintPreviewDialog();
+            this.printDocument_Calendar = new System.Drawing.Printing.PrintDocument();
+            this.button3 = new System.Windows.Forms.Button();
+            this.printDocument_image = new System.Drawing.Printing.PrintDocument();
+            this.printPreviewDialog_image = new System.Windows.Forms.PrintPreviewDialog();
             this.groupBox0.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -161,7 +166,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(180, 55);
             this.button0.TabIndex = 150;
-            this.button0.Text = "預覽列印";
+            this.button0.Text = "列印畫圖 至 pdf";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -172,7 +177,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(180, 55);
             this.button1.TabIndex = 155;
-            this.button1.Text = "new";
+            this.button1.Text = "預覽列印555";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -183,30 +188,74 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(180, 55);
             this.button2.TabIndex = 156;
-            this.button2.Text = "new";
+            this.button2.Text = "預覽列印 月曆";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // printPreviewDialog_pascal
+            // printDocument555
             // 
-            this.printPreviewDialog_pascal.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog_pascal.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog_pascal.ClientSize = new System.Drawing.Size(400, 300);
-            this.printPreviewDialog_pascal.Document = this.printDocument_pascal;
-            this.printPreviewDialog_pascal.Enabled = true;
-            this.printPreviewDialog_pascal.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog_pascal.Icon")));
-            this.printPreviewDialog_pascal.Name = "printPreviewDialog_pascal";
-            this.printPreviewDialog_pascal.Visible = false;
+            this.printDocument555.BeginPrint += new System.Drawing.Printing.PrintEventHandler(this.printDocument555_BeginPrint);
+            this.printDocument555.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument555_PrintPage);
             // 
-            // printDocument_pascal
+            // printPreviewDialog555
             // 
-            this.printDocument_pascal.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_pascal_PrintPage);
+            this.printPreviewDialog555.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog555.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog555.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog555.Document = this.printDocument555;
+            this.printPreviewDialog555.Enabled = true;
+            this.printPreviewDialog555.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog555.Icon")));
+            this.printPreviewDialog555.Name = "printPreviewDialog555";
+            this.printPreviewDialog555.Visible = false;
+            // 
+            // printPreviewDialog_Calendar
+            // 
+            this.printPreviewDialog_Calendar.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog_Calendar.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog_Calendar.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog_Calendar.Document = this.printDocument_Calendar;
+            this.printPreviewDialog_Calendar.Enabled = true;
+            this.printPreviewDialog_Calendar.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog_Calendar.Icon")));
+            this.printPreviewDialog_Calendar.Name = "printPreviewDialog_Calendar";
+            this.printPreviewDialog_Calendar.Visible = false;
+            // 
+            // printDocument_Calendar
+            // 
+            this.printDocument_Calendar.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_Calendar_PrintPage);
+            this.printDocument_Calendar.QueryPageSettings += new System.Drawing.Printing.QueryPageSettingsEventHandler(this.printDocument_Calendar_QueryPageSettings);
+            // 
+            // button3
+            // 
+            this.button3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button3.Location = new System.Drawing.Point(22, 503);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(180, 55);
+            this.button3.TabIndex = 157;
+            this.button3.Text = "預覽列印 圖片";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // printDocument_image
+            // 
+            this.printDocument_image.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_image_PrintPage);
+            // 
+            // printPreviewDialog_image
+            // 
+            this.printPreviewDialog_image.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog_image.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog_image.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog_image.Document = this.printDocument_image;
+            this.printPreviewDialog_image.Enabled = true;
+            this.printPreviewDialog_image.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog_image.Icon")));
+            this.printPreviewDialog_image.Name = "printPreviewDialog_image";
+            this.printPreviewDialog_image.Visible = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1047, 511);
+            this.ClientSize = new System.Drawing.Size(1047, 582);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button0);
@@ -240,8 +289,13 @@
         private System.Windows.Forms.Button button0;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog_pascal;
-        private System.Drawing.Printing.PrintDocument printDocument_pascal;
+        private System.Drawing.Printing.PrintDocument printDocument555;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog555;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog_Calendar;
+        private System.Drawing.Printing.PrintDocument printDocument_Calendar;
+        private System.Windows.Forms.Button button3;
+        private System.Drawing.Printing.PrintDocument printDocument_image;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog_image;
     }
 }
 
