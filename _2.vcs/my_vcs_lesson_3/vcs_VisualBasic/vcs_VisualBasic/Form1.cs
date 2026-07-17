@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using Microsoft.VisualBasic;  // for DateAndTime
 using Microsoft.VisualBasic.FileIO;
 using Microsoft.VisualBasic.Devices;  // for Computer
+
 using System.Runtime.InteropServices;  // for DllImport, StructLayout
 using System.Threading;
 using System.IO;
@@ -37,7 +38,6 @@ namespace vcs_VisualBasic
 
             CheckForIllegalCrossThreadCalls = false;
 
-            //for Interaction,          //參考/加入參考/.NET/Microsoft.VisualBasic
             string uName = Microsoft.VisualBasic.Interaction.InputBox("請輸入姓名", "程式啟動時，輸入資料");
             DialogResult dr = MessageBox.Show(uName + "歡迎您！", "歡迎", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             this.Text = uName;	//表單標題顯示姓名
@@ -203,11 +203,12 @@ namespace vcs_VisualBasic
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         //變量用于存儲年、月、日、時、分、秒
         public long LogYear, logMonth, logDay, logHour, logMinte, logSencon;
         private void timer1_Tick(object sender, EventArgs e)
         {
-            //參考/加入參考/.Net/Microsoft.VisualBasic
             Computer myComputer = new Computer();
             label0.Text = "物理內存總量（M）：" + Convert.ToString(myComputer.Info.TotalPhysicalMemory / 1024 / 1024);
             label1.Text = "可用物理內存（M）：" + Convert.ToString(myComputer.Info.AvailablePhysicalMemory / 1024 / 1024);
@@ -301,7 +302,6 @@ namespace vcs_VisualBasic
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
@@ -309,56 +309,23 @@ namespace vcs_VisualBasic
 /*
 
 [C#]將指定的檔案刪除並送到資源回收桶
-
-參考/加入參考/.NET/Microsoft.VisualBasic
-
-FileSystem.DeleteFile(openFileDialog1.FileName,
-		UIOption.OnlyErrorDialogs,
-		RecycleOption.SendToRecycleBin);
-
-.Dll加入參考。
-
-//------------------------------  # 30個
-
-參考/加入參考/.NET/Microsoft.VisualBasic
-
 不過要引入VB的組件，C#一樣能用
 加入參考Microsoft.VisualBasic.dll
 引用命名空間
+參考/加入參考/.NET/Microsoft.VisualBasic
+.Dll加入參考。
 
-using Microsoft.VisualBasic.FileIO;
-
-刪除範例，刪除D槽的test.txt
-
+//使用資源回收筒刪除檔案
+FileSystem.DeleteFile("欲刪除的檔案", UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
 FileSystem.DeleteFile("D:\\test.txt", UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+刪除範例，刪除D槽的test.txt
+FileSystem.DeleteFile("欲刪除的檔案", UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+richTextBox1.Text += "已將檔案移至資源回收筒\n";
 
 補充說明一下：UIOption.OnlyErrorDialogs會自動選取要丟入回收桶，只在錯誤時顯示錯誤方塊，
 如果是 FileIO.RecycleOption.SendToRecycleBin則是會跳窗問要不要丟入回收桶
 
-	//使用資源回收筒刪除檔案
-	FileSystem.DeleteFile("C:\\______test_files\\237.html", UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
-	richTextBox1.Text += "已將檔案移至資源回收筒\n";
-
 //------------------------------------------------------------  # 60個
 
-//resize
-            int[] score = new int[0];
-            string s = "";
-            do
-            {
-                s = Microsoft.VisualBasic.Interaction.InputBox("請輸入成績");
-                if (s != "")   //若s不是空字串
-                {
-                    Array.Resize(ref score, score.Length + 1);    //陣列大小+1
-                    score[score.Length - 1] = Convert.ToInt32(s); //存入最後元素中
-                }
-            } while (s != "");      //s不是空字串就繼續迴圈
-            
-            int sum = 0;           //預設總和sum = 0
-            foreach (int x in score) //用foreach迴圈逐一讀取陣列元素值
-            {
-                sum += x;        //總和加陣列元素值
-            }
-            MessageBox.Show("平均分數=" + (sum / score.Length).ToString());
-
 */
+

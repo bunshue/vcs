@@ -218,7 +218,9 @@ namespace vcs_test_all_05_Print1
 
             // See how much of the remaining text will fit.
             SizeF layout_area = new SizeF(e.MarginBounds.Width, e.MarginBounds.Height);
-            int chars_fitted, lines_filled; e.Graphics.MeasureString(FileContents, font, layout_area, string_format, out chars_fitted, out lines_filled);
+            int chars_fitted;
+            int lines_filled;
+            e.Graphics.MeasureString(FileContents, font, layout_area, string_format, out chars_fitted, out lines_filled);
 
             // Print as much as will fit.
             e.Graphics.DrawString(FileContents.Substring(0, chars_fitted), font, Brushes.Black, e.MarginBounds, string_format);
@@ -293,6 +295,9 @@ namespace vcs_test_all_05_Print1
         private int NextPageNum = 0;
         private void printDocument_pages_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
+            //畫列印範圍
+            e.Graphics.DrawRectangle(Pens.Red, e.MarginBounds.Left, e.MarginBounds.Top, e.MarginBounds.Width, e.MarginBounds.Height);
+
             // Draw a shape depending on the page we are printing.
             switch (NextPageNum)
             {
@@ -354,8 +359,7 @@ namespace vcs_test_all_05_Print1
             {
                 using (Brush the_brush = new SolidBrush(Color.Black))
                 {
-                    e.Graphics.DrawString(String.Format("{0}", NextPageNum + 1),
-                        the_font, the_brush, e.MarginBounds, sf);
+                    e.Graphics.DrawString(String.Format("{0}", NextPageNum + 1), the_font, the_brush, e.MarginBounds, sf);
                 }
             }
 
@@ -531,8 +535,6 @@ namespace vcs_test_all_05_Print1
             dataGridView1.Rows.Add(row);
             dataGridView1.Rows.Add(new Object[] { "ox", "班尼牛", 48 });
             dataGridView1.Rows.Add(new Object[] { "tiger", "跳跳虎", 33 });
-
-            //
 
             //对打印信息进行设置
             bool print_direction_width = false; //false:縱, true:橫

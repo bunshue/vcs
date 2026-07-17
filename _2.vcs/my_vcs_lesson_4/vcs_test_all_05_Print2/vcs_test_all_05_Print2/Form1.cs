@@ -47,8 +47,6 @@ namespace vcs_test_all_05_Print2
             printDialog0.Document = printDocument0;
             pageSetupDialog0.Document = printDocument0;
 
-            button20.Enabled = false;
-            button21.Enabled = false;
             button30.Enabled = false;
             button31.Enabled = false;
         }
@@ -63,14 +61,12 @@ namespace vcs_test_all_05_Print2
 
             groupBox0.Size = new Size(200, 280);
             groupBox1.Size = new Size(200, 280);
-            groupBox2.Size = new Size(200, 280);
             groupBox3.Size = new Size(200, 280);
             groupBox4.Size = new Size(200, 280);
             groupBox5.Size = new Size(200, 280);
 
             groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             groupBox3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             groupBox4.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             groupBox5.Location = new Point(x_st + dx * 1, y_st + dy * 1);
@@ -94,10 +90,6 @@ namespace vcs_test_all_05_Print2
             button11.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button12.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button13.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button20.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button21.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button22.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button23.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button30.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button31.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button32.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -279,43 +271,6 @@ namespace vcs_test_all_05_Print2
                     isFirstPage = true;
                 }
             }
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button20_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button21_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button22_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button23_Click(object sender, EventArgs e)
-        {
-            //對話方塊啟用頁數核取方塊
-            printDialog2.AllowSomePages = true;
-            //對話方塊啟用說明按鈕
-            printDialog2.ShowHelp = true;
-            //列印對話方塊中，按下確定鈕的話
-            DialogResult result = printDialog2.ShowDialog();
-            if (result == DialogResult.OK)
-            {
-                printDocument2.Print();
-            }
-        }
-
-        private void printDocument2_PrintPage(object sender, PrintPageEventArgs e)
-        {
-            string text = "千江有水千月，\n萬里晴空萬里晴";
-            Font oneFont = new Font("標楷體", 50, FontStyle.Bold);
-            e.Graphics.DrawString(text, oneFont, Brushes.Blue, 50, 50);
         }
 
         //------------------------------------------------------------  # 60個

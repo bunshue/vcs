@@ -104,6 +104,9 @@ namespace vcs_test_all_05_Print1
         //  页的打印事件(主要用于绘制打印报表)
         private void printdocument_printpage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
+            //畫列印範圍
+            e.Graphics.DrawRectangle(Pens.Red, e.MarginBounds.Left, e.MarginBounds.Top, e.MarginBounds.Width, e.MarginBounds.Height);
+
             PrintPageWidth = e.PageBounds.Width;//获取打印线张的宽度
             PrintPageHeight = e.PageBounds.Height;//获取打印线张的高度
             if (this.isautopagerowcount)//自动计算页的行数

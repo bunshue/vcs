@@ -50,11 +50,6 @@
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button20 = new System.Windows.Forms.Button();
-            this.button23 = new System.Windows.Forms.Button();
-            this.button21 = new System.Windows.Forms.Button();
-            this.button22 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button30 = new System.Windows.Forms.Button();
             this.button33 = new System.Windows.Forms.Button();
@@ -65,7 +60,6 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button0 = new System.Windows.Forms.Button();
-            this.printDocument2 = new System.Drawing.Printing.PrintDocument();
             this.printDialog2 = new System.Windows.Forms.PrintDialog();
             this.printDialog3 = new System.Windows.Forms.PrintDialog();
             this.printDocument3 = new System.Drawing.Printing.PrintDocument();
@@ -86,7 +80,6 @@
             this.printPreviewDialog2 = new System.Windows.Forms.PrintPreviewDialog();
             this.groupBox0.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -266,62 +259,6 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.button20);
-            this.groupBox2.Controls.Add(this.button23);
-            this.groupBox2.Controls.Add(this.button21);
-            this.groupBox2.Controls.Add(this.button22);
-            this.groupBox2.Location = new System.Drawing.Point(415, 0);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 280);
-            this.groupBox2.TabIndex = 151;
-            this.groupBox2.TabStop = false;
-            // 
-            // button20
-            // 
-            this.button20.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button20.Location = new System.Drawing.Point(10, 20);
-            this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(180, 55);
-            this.button20.TabIndex = 146;
-            this.button20.Text = "版面設定";
-            this.button20.UseVisualStyleBackColor = true;
-            this.button20.Click += new System.EventHandler(this.button20_Click);
-            // 
-            // button23
-            // 
-            this.button23.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button23.Location = new System.Drawing.Point(10, 204);
-            this.button23.Name = "button23";
-            this.button23.Size = new System.Drawing.Size(180, 55);
-            this.button23.TabIndex = 149;
-            this.button23.Text = "列印";
-            this.button23.UseVisualStyleBackColor = true;
-            this.button23.Click += new System.EventHandler(this.button23_Click);
-            // 
-            // button21
-            // 
-            this.button21.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button21.Location = new System.Drawing.Point(10, 81);
-            this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(180, 55);
-            this.button21.TabIndex = 147;
-            this.button21.Text = "列印設定";
-            this.button21.UseVisualStyleBackColor = true;
-            this.button21.Click += new System.EventHandler(this.button21_Click);
-            // 
-            // button22
-            // 
-            this.button22.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button22.Location = new System.Drawing.Point(10, 143);
-            this.button22.Name = "button22";
-            this.button22.Size = new System.Drawing.Size(180, 55);
-            this.button22.TabIndex = 148;
-            this.button22.Text = "預覽列印";
-            this.button22.UseVisualStyleBackColor = true;
-            this.button22.Click += new System.EventHandler(this.button22_Click);
-            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.button30);
@@ -430,13 +367,8 @@
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
-            // printDocument2
-            // 
-            this.printDocument2.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument2_PrintPage);
-            // 
             // printDialog2
             // 
-            this.printDialog2.Document = this.printDocument2;
             this.printDialog2.UseEXDialog = true;
             // 
             // printDialog3
@@ -594,7 +526,6 @@
             this.printPreviewDialog2.AutoScrollMargin = new System.Drawing.Size(0, 0);
             this.printPreviewDialog2.AutoScrollMinSize = new System.Drawing.Size(0, 0);
             this.printPreviewDialog2.ClientSize = new System.Drawing.Size(400, 300);
-            this.printPreviewDialog2.Document = this.printDocument2;
             this.printPreviewDialog2.Enabled = true;
             this.printPreviewDialog2.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog2.Icon")));
             this.printPreviewDialog2.Name = "printPreviewDialog2";
@@ -614,7 +545,6 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox0);
             this.Controls.Add(this.bt_clear);
@@ -624,7 +554,6 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox0.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
@@ -655,11 +584,6 @@
         private System.Drawing.Printing.PrintDocument printDocument1;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button button20;
-        private System.Windows.Forms.Button button23;
-        private System.Windows.Forms.Button button21;
-        private System.Windows.Forms.Button button22;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button button30;
         private System.Windows.Forms.Button button33;
@@ -670,7 +594,6 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button0;
-        private System.Drawing.Printing.PrintDocument printDocument2;
         private System.Windows.Forms.PrintDialog printDialog2;
         private System.Windows.Forms.PrintDialog printDialog3;
         private System.Drawing.Printing.PrintDocument printDocument3;

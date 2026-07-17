@@ -120,6 +120,9 @@ namespace vcs_test_all_05_Print4
 
         private void printDocument0_PrintPage(object sender, PrintPageEventArgs e)
         {
+            //畫列印範圍
+            e.Graphics.DrawRectangle(Pens.Red, e.MarginBounds.Left, e.MarginBounds.Top, e.MarginBounds.Width, e.MarginBounds.Height);
+
             richTextBox1.Text += "可列印區間\n";
 
             richTextBox1.Text += e.MarginBounds.Left.ToString() + "\n";
@@ -269,6 +272,7 @@ namespace vcs_test_all_05_Print4
             printPreviewDialog555.PrintPreviewControl.BackColor = Color.Orange; // Background color.
             printPreviewDialog555.PrintPreviewControl.ForeColor = Color.Yellow; // Paper color.
             printPreviewDialog555.PrintPreviewControl.StartPage = 3;            // Page 3 in the upper left.
+            //第3頁
 
             printPreviewDialog555.ShowDialog();  // 預覽列印
         }
@@ -277,6 +281,9 @@ namespace vcs_test_all_05_Print4
         private int m_NextPage = 0;
         private void printDocument555_PrintPage(object sender, PrintPageEventArgs e)
         {
+            //畫列印範圍
+            e.Graphics.DrawRectangle(Pens.Red, e.MarginBounds.Left, e.MarginBounds.Top, e.MarginBounds.Width, e.MarginBounds.Height);
+
             // Draw the margins.
             using (Pen dashed_pen = new Pen(Color.Red, 5))
             {
@@ -384,6 +391,9 @@ namespace vcs_test_all_05_Print4
         // Draw the calendar.
         private void printDocument_Calendar_PrintPage(object sender, PrintPageEventArgs e)
         {
+            //畫列印範圍
+            e.Graphics.DrawRectangle(Pens.Red, e.MarginBounds.Left, e.MarginBounds.Top, e.MarginBounds.Width, e.MarginBounds.Height);
+
             DrawCalendar(e.Graphics, e.MarginBounds, FirstOfMonth, CalendarData);
         }
 
@@ -599,6 +609,13 @@ namespace vcs_test_all_05_Print4
 
         private void printDocument_image_PrintPage(object sender, PrintPageEventArgs e)
         {
+            //畫列印範圍
+            e.Graphics.DrawRectangle(Pens.Red, e.MarginBounds.Left, e.MarginBounds.Top, e.MarginBounds.Width, e.MarginBounds.Height);
+
+            string text = "千江有水千月，\n萬里晴空萬里晴";
+            Font oneFont = new Font("標楷體", 50, FontStyle.Bold);
+            e.Graphics.DrawString(text, oneFont, Brushes.Blue, 50, 50);
+
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Bitmap bitmap = new Bitmap(filename);
             e.Graphics.DrawImage(bitmap, 150, 240, 350, 300);
@@ -656,3 +673,17 @@ namespace vcs_test_all_05_Print4
 //5. printDocument555          的方法 BeginPrint 設定為 printDocument555_BeginPrint
 
 
+/*
+
+            //對話方塊啟用頁數核取方塊
+            printDialog2.AllowSomePages = true;
+            //對話方塊啟用說明按鈕
+            printDialog2.ShowHelp = true;
+            //列印對話方塊中，按下確定鈕的話
+            DialogResult result = printDialog2.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                printDocument2.Print();
+            }
+
+*/

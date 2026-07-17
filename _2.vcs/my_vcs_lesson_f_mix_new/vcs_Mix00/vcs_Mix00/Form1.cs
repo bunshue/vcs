@@ -341,7 +341,7 @@ namespace vcs_Mix00
                 }
                 pictureBox1.Image = bmp;
                 Application.DoEvents();
-                System.Threading.Thread.Sleep(100);
+                Thread.Sleep(100);
             }
         }
 
@@ -1329,7 +1329,6 @@ namespace vcs_Mix00
                 richTextBox1.Text += ex.StackTrace.ToString() + "\n";
             }
 
-
             /*
             //取得IP地址
             IPHostEntry ipEntry = Dns.GetHostByName(localhost);
@@ -1531,12 +1530,7 @@ namespace vcs_Mix00
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
 
