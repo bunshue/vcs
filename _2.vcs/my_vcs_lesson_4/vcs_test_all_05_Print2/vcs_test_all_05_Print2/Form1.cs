@@ -153,15 +153,6 @@ namespace vcs_test_all_05_Print2
 
         private void button10_Click(object sender, EventArgs e)
         {
-            // printDocument1 要加上方法 printDocument1_PrintPage
-
-            //版面設定
-            pageSetupDialog1.Document = printDocument1;
-
-            if (pageSetupDialog1.ShowDialog() == DialogResult.OK)
-            {
-                printDocument1.DefaultPageSettings = pageSetupDialog1.PageSettings;
-            }
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -174,9 +165,7 @@ namespace vcs_test_all_05_Print2
 
         private void button13_Click(object sender, EventArgs e)
         {
-            //列印
-            printDocument1.DocumentName = text_filename;
-            printDocument1.Print();
+
         }
 
         bool isFirstPage = true;
@@ -291,13 +280,15 @@ namespace vcs_test_all_05_Print2
         //利用FileStream來讀取檔案並開啟
         private void ReadPrintFile()
         {
-            //設定要讀取取的檔名和路徑
-            string printFile = "Demo02.txt";
-            string filePath = @"D:\\vcs\\";
-            //讀取的檔名「Demo02.txt」為列印文件的檔名
+            //設定要讀取取的檔案
+            string text_filename = @"D:\_git\vcs\_1.data\______test_files1\__text\王之渙_涼州詞.txt";
+            string printFile = "王之渙_涼州詞";
+
+            //讀取的檔名「王之渙_涼州詞」為列印文件的檔名
             printDocument3.DocumentName = printFile;
+
             //建立檔案並以Open開啟，以using指定範圍為唯讀
-            using (FileStream stream = new FileStream(filePath + printFile, FileMode.Open))
+            using (FileStream stream = new FileStream(text_filename, FileMode.Open))
             using (StreamReader reader = new
             StreamReader(stream)) //指定區段為唯讀
             {
@@ -413,19 +404,15 @@ namespace vcs_test_all_05_Print2
             printDocumentA.Print();
         }
 
-        //PrintDocument的事件
         private void printDocumentA_PrintPage(object sender, PrintPageEventArgs e)
         {
-            //1.建立繪圖物件gs和參數ev的關聯
-            Graphics gs = e.Graphics;
-            //設定列印字型
-            Font fontPrint = new Font("Segoe Print", 14);
+            Font f = new Font("Segoe Print", 14);
             int morePages = 0; //計算每份文件頁數
             int OnPageChars = 0;//計算每頁字元數
             //2.測量要繪製的字串
-            gs.MeasureString(richTextBox1.Text, fontPrint, e.MarginBounds.Size, StringFormat.GenericTypographic, out OnPageChars, out morePages);
+            e.Graphics.MeasureString(richTextBox1.Text, f, e.MarginBounds.Size, StringFormat.GenericTypographic, out OnPageChars, out morePages);
             //3.繪製邊界內的字型
-            gs.DrawString(richTextBox1.Text, fontPrint, Brushes.Black, e.MarginBounds, new StringFormat());
+            e.Graphics.DrawString(richTextBox1.Text, f, Brushes.Black, e.MarginBounds, new StringFormat());
         }
 
         private void button1_Click(object sender, EventArgs e)

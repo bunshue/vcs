@@ -83,6 +83,20 @@ namespace vcs_test_all_05_Print4
             {
                 printDocument0.DefaultPageSettings = pageSetupDialog0.PageSettings;
             }
+
+            //版面設定
+            // printDocument1 要加上方法 printDocument1_PrintPage
+
+            //版面設定
+            pageSetupDialog0.Document = printDocument0;
+
+            if (pageSetupDialog0.ShowDialog() == DialogResult.OK)
+            {
+                printDocument0.DefaultPageSettings = pageSetupDialog0.PageSettings;
+            }
+
+
+
         }
 
         private void button01_Click(object sender, EventArgs e)
@@ -104,6 +118,15 @@ namespace vcs_test_all_05_Print4
                 //Print()方法會觸動PrintDocument控制項的PrintPage事件
                 printDocument0.Print();  // 列印
             }
+
+            //6060
+
+            string text_filename = @"D:\_git\vcs\_1.data\______test_files1\__text\王之渙_涼州詞.txt";
+
+            //列印
+            printDocument0.DocumentName = text_filename;
+            //printDocument0.Print();
+
         }
 
         private void printDocument0_PrintPage(object sender, PrintPageEventArgs e)
@@ -221,7 +244,7 @@ namespace vcs_test_all_05_Print4
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //列印畫圖 至 pdf
+
 
         }
 

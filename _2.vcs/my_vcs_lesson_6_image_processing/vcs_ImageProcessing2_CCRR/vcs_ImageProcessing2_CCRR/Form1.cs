@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 using System.IO;
 using System.Drawing.Imaging;  // for PixelFormat
-using System.Drawing.Drawing2D;
+using System.Drawing.Drawing2D;  // for InterpolationMode, SmoothingMode
 
 namespace vcs_ImageProcessing2_CCRR
 {
@@ -849,8 +849,8 @@ namespace vcs_ImageProcessing2_CCRR
                 System.Drawing.Graphics newG = System.Drawing.Graphics.FromImage(newImage);
 
                 //设置质量
-                newG.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-                newG.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+                newG.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                newG.SmoothingMode = SmoothingMode.HighQuality;
 
                 //置背景色
                 newG.Clear(Color.White);
@@ -907,7 +907,6 @@ namespace vcs_ImageProcessing2_CCRR
                         }
                     }
                 }
-
                 //保存缩略图
                 newImage.Save(savePath, System.Drawing.Imaging.ImageFormat.Jpeg);
 
@@ -917,7 +916,6 @@ namespace vcs_ImageProcessing2_CCRR
                 initImage.Dispose();
             }
         }
-
 
         //------------------------------------------------------------  # 60個
 
@@ -994,7 +992,6 @@ namespace vcs_ImageProcessing2_CCRR
 
             //得到缩放后的图像
             //Bitmap bitmap2 = new Bitmap(bitmap1, this.pictureBox1.Width, this.pictureBox1.Height);   //縮放圖片大小
-
 
             //以任意角度旋转显示图像
 
@@ -1107,6 +1104,7 @@ namespace vcs_ImageProcessing2_CCRR
         {
             //原圖
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
+
             string filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp";
             Bitmap bitmap1;
             bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
@@ -1286,10 +1284,9 @@ namespace vcs_ImageProcessing2_CCRR
         private void bt_lanczos2_Click(object sender, EventArgs e)
         {
             //copy 拉大兩倍
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp";
-
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
 
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp";
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             Bitmap bitmap2 = Zoom2_copy(bitmap1);
             pictureBox1.Image = bitmap2;
@@ -1300,9 +1297,9 @@ namespace vcs_ImageProcessing2_CCRR
         private void bt_lanczos3_Click(object sender, EventArgs e)
         {
             //StretchImage 拉大兩倍
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp";
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp";
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             pictureBox1.Image = bitmap1;
         }
@@ -1312,16 +1309,9 @@ namespace vcs_ImageProcessing2_CCRR
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
-
 
 /*
 StartPiont = (200, 100)
@@ -1336,5 +1326,4 @@ private Image CutImage(Image SourceImage, Point StartPoint, Rectangle CutArea)
     return NewBitmap;
 }
 */
-
 

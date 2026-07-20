@@ -553,12 +553,15 @@ namespace vcs_ImageProcessingNew
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            //pictureBox1.Size = new Size(400, 450);
-            //pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            pictureBox1.Size = new Size(640, 480);
+            pictureBox2.Size = new Size(640, 480);
+            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            pictureBox2.Location = new Point(x_st + dx * 5 + 20, y_st + dy * 0);
+
             bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y);
 
             richTextBox1.Size = new Size(300, 300);
-            //richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 7);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1800, 860);
@@ -585,6 +588,8 @@ namespace vcs_ImageProcessingNew
         {
             measure_brightness();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -653,6 +658,8 @@ namespace vcs_ImageProcessingNew
             pictureBox1.Image = bitmap1;
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button2_Click(object sender, EventArgs e)
         {
             //測試畫動態圖
@@ -709,7 +716,6 @@ namespace vcs_ImageProcessingNew
                     output.SetPixel(x, y, pt3);
                 }
             }
-
             pictureBox1.Image = output;
         }
 
@@ -825,13 +831,7 @@ namespace vcs_ImageProcessingNew
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
 

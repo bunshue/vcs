@@ -166,7 +166,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(180, 55);
             this.button0.TabIndex = 150;
-            this.button0.Text = "列印畫圖 至 pdf";
+            this.button0.Text = "版面設定";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 

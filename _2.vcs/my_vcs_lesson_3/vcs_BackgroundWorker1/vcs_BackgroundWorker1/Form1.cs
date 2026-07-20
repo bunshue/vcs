@@ -130,7 +130,7 @@ namespace vcs_BackgroundWorker1
         private const int WIDTH = 100;
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            this.DoubleBuffered = true;  // 差異很大
+            this.DoubleBuffered = true;  // 使用 DoubleBuffer
 
             int r = 50;
             int cx = 770;
@@ -460,11 +460,14 @@ namespace vcs_BackgroundWorker1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-/*  可搬出
-
+/*
+看起來一個 BackgroundWorker 同時只能執行一個
+目前只能在 backgroundWorker0.DoWork += backgroundWorker0_DoWork 做固定的事
+或許可以改用委派方法做不同的事
 */
+
+

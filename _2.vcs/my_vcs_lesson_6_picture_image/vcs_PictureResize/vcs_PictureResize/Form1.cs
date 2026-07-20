@@ -8,8 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
-using System.Drawing.Imaging;   //for ImageFormat
-using System.Drawing.Drawing2D;//for InterpolationMode
+using System.Drawing.Imaging;  // for ImageFormat
+using System.Drawing.Drawing2D;  // for InterpolationMode
 
 namespace vcs_PictureResize
 {
@@ -22,7 +22,6 @@ namespace vcs_PictureResize
         private Bitmap bitmap1 = null;
         private int W = 0;  //原圖的寬
         private int H = 0;  //原圖的高
-
         int W_old = 0;
         int H_old = 0;
         int W_new = 0;
@@ -74,9 +73,6 @@ namespace vcs_PictureResize
 
             Size new_size = new Size(W2, H2);
             pictureBox2.Image = ResizeImage(image, new_size);
-
-
-
         }
 
         private void bt_open_file_Click(object sender, EventArgs e)
@@ -242,6 +238,8 @@ namespace vcs_PictureResize
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button1_Click(object sender, EventArgs e)
         {
             //放大2成
@@ -269,7 +267,7 @@ namespace vcs_PictureResize
             float scale = float.Parse(textBox2.Text);
             if (scale == 0)
             {
-                MessageBox.Show("Scale must not be zero.", "Invalid Scale", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                richTextBox1.Text += "Scale must not be zero.\tInvalid Scale\n";
                 return;
             }
             this.Refresh();
@@ -287,7 +285,7 @@ namespace vcs_PictureResize
                         richTextBox1.Text += "處理檔案 : " + file_info.FullName + "\n";
                         Bitmap bm = new Bitmap(file_info.FullName);
 
-                        Rectangle from_rect = new Rectangle(0, 0, bm.Width, bm.Height);
+                        Rectangle rect = new Rectangle(0, 0, bm.Width, bm.Height);
 
                         int wid2 = (int)Math.Round(scale * bm.Width);
                         int hgt2 = (int)Math.Round(scale * bm.Height);
@@ -296,7 +294,7 @@ namespace vcs_PictureResize
                         using (Graphics gr = Graphics.FromImage(bm2))
                         {
                             gr.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                            gr.DrawImage(bm, dest_rect, from_rect, GraphicsUnit.Pixel);
+                            gr.DrawImage(bm, dest_rect, rect, GraphicsUnit.Pixel);
                         }
 
                         string new_name = file_info.FullName;
@@ -307,11 +305,7 @@ namespace vcs_PictureResize
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error processing file '" +
-                        file_info.Name + "'\n" + ex.Message,
-                        "Error",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
+                    richTextBox1.Text += "Error processing file '" + file_info.Name + "'\n" + ex.Message + "\n";
                 }
             } // foreach file_info
             richTextBox1.Text += "處理檔案完成\n";
@@ -383,8 +377,8 @@ namespace vcs_PictureResize
             Bitmap b = new Bitmap(W3, H3);
             Graphics g = Graphics.FromImage((Image)b);
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            //繪製圖像
-            g.DrawImage(img_old, 0, 0, W3, H3);
+
+            g.DrawImage(img_old, 0, 0, W3, H3);  // 繪製圖像
             g.Dispose();
 
             richTextBox1.Text += "W1 = " + W1.ToString() + ", H1 = " + H1.ToString() + "\n";
@@ -429,11 +423,8 @@ namespace vcs_PictureResize
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-/*  可搬出
 
-*/

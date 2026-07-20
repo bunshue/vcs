@@ -35,7 +35,8 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Location = new System.Drawing.Point(10, 10);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(723, 564);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -47,10 +48,11 @@
             // 
             // txtAngle
             // 
-            this.txtAngle.Location = new System.Drawing.Point(741, 12);
+            this.txtAngle.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtAngle.Location = new System.Drawing.Point(741, 10);
             this.txtAngle.Name = "txtAngle";
             this.txtAngle.ReadOnly = true;
-            this.txtAngle.Size = new System.Drawing.Size(53, 22);
+            this.txtAngle.Size = new System.Drawing.Size(95, 30);
             this.txtAngle.TabIndex = 9;
             this.txtAngle.TabStop = false;
             // 
@@ -58,7 +60,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(806, 599);
+            this.ClientSize = new System.Drawing.Size(869, 599);
             this.Controls.Add(this.txtAngle);
             this.Controls.Add(this.pictureBox1);
             this.Name = "Form1";

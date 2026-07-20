@@ -7,15 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Drawing2D; //for SmoothingMode
-using System.Drawing.Imaging;   //for ColorAdjustType
+using System.Threading;
+using System.Drawing.Drawing2D;  // for SmoothingMode
+using System.Drawing.Imaging;  // for ColorAdjustType
 
 namespace vcs_ImageProcessing7
 {
     public partial class Form1 : Form
     {
-        private Bitmap SourceBitmap;
-        private Bitmap MyBitmap;
+        private Bitmap bitmap0;
+        private Bitmap bitmap1;
 
         public Form1()
         {
@@ -31,11 +32,11 @@ namespace vcs_ImageProcessing7
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             //得到原始大小的圖像
-            SourceBitmap = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+            bitmap0 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
             //得到縮放后的圖像
-            MyBitmap = new Bitmap(SourceBitmap, this.pictureBox1.Width, this.pictureBox1.Height);
+            bitmap1 = new Bitmap(bitmap0, this.pictureBox1.Width, this.pictureBox1.Height);
 
-            pictureBox1.Image = MyBitmap;
+            pictureBox1.Image = bitmap1;
         }
 
         void show_item_location()
@@ -109,8 +110,8 @@ namespace vcs_ImageProcessing7
 
             try
             {
-                int width = this.MyBitmap.Width; //圖像寬度
-                int height = this.MyBitmap.Height; //圖像高度
+                int width = this.bitmap1.Width; //圖像寬度
+                int height = this.bitmap1.Height; //圖像高度
                 Graphics g = this.panel1.CreateGraphics();
                 g.Clear(Color.Gray);
                 for (int i = -width / 2; i <= width / 2; i++)
@@ -118,9 +119,9 @@ namespace vcs_ImageProcessing7
                     g.Clear(Color.Gray);
                     int j = Convert.ToInt32(i * (Convert.ToSingle(height) / Convert.ToSingle(width)));
                     Rectangle DestRect = new Rectangle(0, height / 2 - j, width, 2 * j);
-                    Rectangle SrcRect = new Rectangle(0, 0, MyBitmap.Width, MyBitmap.Height);
-                    g.DrawImage(MyBitmap, DestRect, SrcRect, GraphicsUnit.Pixel);
-                    System.Threading.Thread.Sleep(10);
+                    Rectangle SrcRect = new Rectangle(0, 0, bitmap1.Width, bitmap1.Height);
+                    g.DrawImage(bitmap1, DestRect, SrcRect, GraphicsUnit.Pixel);
+                    Thread.Sleep(10);
                 }
             }
             catch (Exception ex)
@@ -146,16 +147,16 @@ namespace vcs_ImageProcessing7
                 {
                     for (int i = 0; i <= width - 1; i++)
                     {
-                        bitmap.SetPixel(i, x, MyBitmap.GetPixel(i, x));
+                        bitmap.SetPixel(i, x, bitmap1.GetPixel(i, x));
                     }
                     for (int i = 0; i <= width - 1; i++)
                     {
-                        bitmap.SetPixel(i, height - x - 1, MyBitmap.GetPixel(i, height - x - 1));
+                        bitmap.SetPixel(i, height - x - 1, bitmap1.GetPixel(i, height - x - 1));
                     }
                     x++;
                     this.panel1.Refresh();
                     g.DrawImage(bitmap, 0, 0);
-                    System.Threading.Thread.Sleep(10);
+                    Thread.Sleep(10);
                 }
             }
             catch (Exception ex)
@@ -171,8 +172,8 @@ namespace vcs_ImageProcessing7
 
             try
             {
-                int width = this.MyBitmap.Width; //圖像寬度
-                int height = this.MyBitmap.Height; //圖像高度
+                int width = this.bitmap1.Width; //圖像寬度
+                int height = this.bitmap1.Height; //圖像高度
                 //取得Graphics對象
                 Graphics g = this.panel1.CreateGraphics();
                 g.Clear(Color.Gray); //初始為全灰色
@@ -180,9 +181,9 @@ namespace vcs_ImageProcessing7
                 {
                     int j = Convert.ToInt32(i * (Convert.ToSingle(height) / Convert.ToSingle(width)));
                     Rectangle DestRect = new Rectangle(width / 2 - i, height / 2 - j, 2 * i, 2 * j);
-                    Rectangle SrcRect = new Rectangle(0, 0, MyBitmap.Width, MyBitmap.Height);
-                    g.DrawImage(MyBitmap, DestRect, SrcRect, GraphicsUnit.Pixel);
-                    System.Threading.Thread.Sleep(10);
+                    Rectangle SrcRect = new Rectangle(0, 0, bitmap1.Width, bitmap1.Height);
+                    g.DrawImage(bitmap1, DestRect, SrcRect, GraphicsUnit.Pixel);
+                    Thread.Sleep(10);
                 }
             }
             catch (Exception ex)
@@ -198,8 +199,8 @@ namespace vcs_ImageProcessing7
 
             Graphics g = this.panel1.CreateGraphics();
             g.Clear(Color.White);
-            int width = MyBitmap.Width;
-            int height = MyBitmap.Height;
+            int width = bitmap1.Width;
+            int height = bitmap1.Height;
             //定義將圖片切分成四個部分的區域
             RectangleF[] block =
             {
@@ -208,22 +209,23 @@ namespace vcs_ImageProcessing7
                 new RectangleF(0,height/2,width/2,height/2),
                 new RectangleF(width/2,height/2,width/2,height/2)
             };
+
             //分別克隆圖片的四個部分
-            Bitmap[] MyBitmapBlack =
+            Bitmap[] bitmap1Black =
             {
-                MyBitmap.Clone(block[0],System.Drawing.Imaging.PixelFormat.DontCare),
-                MyBitmap.Clone(block[1],System.Drawing.Imaging.PixelFormat.DontCare),
-                MyBitmap.Clone(block[2],System.Drawing.Imaging.PixelFormat.DontCare),
-                MyBitmap.Clone(block[3],System.Drawing.Imaging.PixelFormat.DontCare)
+                bitmap1.Clone(block[0], PixelFormat.DontCare),
+                bitmap1.Clone(block[1], PixelFormat.DontCare),
+                bitmap1.Clone(block[2], PixelFormat.DontCare),
+                bitmap1.Clone(block[3], PixelFormat.DontCare)
             };
             //繪制圖片的四個部分，各部分繪制時間間隔為0.5秒
-            g.DrawImage(MyBitmapBlack[0], 0, 0);
-            System.Threading.Thread.Sleep(1000);
-            g.DrawImage(MyBitmapBlack[1], width / 2, 0);
-            System.Threading.Thread.Sleep(1000);
-            g.DrawImage(MyBitmapBlack[3], width / 2, height / 2);
-            System.Threading.Thread.Sleep(1000);
-            g.DrawImage(MyBitmapBlack[2], 0, height / 2);
+            g.DrawImage(bitmap1Black[0], 0, 0);
+            Thread.Sleep(1000);
+            g.DrawImage(bitmap1Black[1], width / 2, 0);
+            Thread.Sleep(1000);
+            g.DrawImage(bitmap1Black[3], width / 2, height / 2);
+            Thread.Sleep(1000);
+            g.DrawImage(bitmap1Black[2], 0, height / 2);
         }
 
         //------------------------------------------------------------  # 60個
@@ -247,8 +249,8 @@ namespace vcs_ImageProcessing7
             //以左右對接方式顯示圖像
             try
             {
-                int width = this.MyBitmap.Width; //圖像寬度
-                int height = this.MyBitmap.Height; //圖像高度
+                int width = this.bitmap1.Width; //圖像寬度
+                int height = this.bitmap1.Height; //圖像高度
                 Graphics g = this.panel1.CreateGraphics();
                 g.Clear(Color.Gray); //初始為全灰色
                 Bitmap bitmap = new Bitmap(width, height);
@@ -257,17 +259,17 @@ namespace vcs_ImageProcessing7
                 {
                     for (int i = 0; i <= height - 1; i++)
                     {
-                        bitmap.SetPixel(x, i, MyBitmap.GetPixel(x, i));
+                        bitmap.SetPixel(x, i, bitmap1.GetPixel(x, i));
                     }
                     for (int i = 0; i <= height - 1; i++)
                     {
                         bitmap.SetPixel(width - x - 1, i,
-                        MyBitmap.GetPixel(width - x - 1, i));
+                        bitmap1.GetPixel(width - x - 1, i));
                     }
                     x++;
                     this.panel1.Refresh();
                     g.DrawImage(bitmap, 0, 0);
-                    System.Threading.Thread.Sleep(10);
+                    Thread.Sleep(10);
                 }
             }
             catch (Exception ex)
@@ -283,8 +285,8 @@ namespace vcs_ImageProcessing7
             //以左右反轉方式顯示圖像
             try
             {
-                int width = this.MyBitmap.Width; //圖像寬度
-                int height = this.MyBitmap.Height; //圖像高度
+                int width = this.bitmap1.Width; //圖像寬度
+                int height = this.bitmap1.Height; //圖像高度
                 Graphics g = this.panel1.CreateGraphics();
                 g.Clear(Color.Gray); //初始為全灰色
                 for (int j = -height / 2; j <= height / 2; j++)
@@ -292,9 +294,9 @@ namespace vcs_ImageProcessing7
                     g.Clear(Color.Gray); //初始為全灰色
                     int i = Convert.ToInt32(j * (Convert.ToSingle(width) / Convert.ToSingle(height)));
                     Rectangle DestRect = new Rectangle(width / 2 - i, 0, 2 * i, height);
-                    Rectangle SrcRect = new Rectangle(0, 0, MyBitmap.Width, MyBitmap.Height);
-                    g.DrawImage(MyBitmap, DestRect, SrcRect, GraphicsUnit.Pixel);
-                    System.Threading.Thread.Sleep(10);
+                    Rectangle SrcRect = new Rectangle(0, 0, bitmap1.Width, bitmap1.Height);
+                    g.DrawImage(bitmap1, DestRect, SrcRect, GraphicsUnit.Pixel);
+                    Thread.Sleep(10);
                 }
             }
             catch
@@ -310,8 +312,8 @@ namespace vcs_ImageProcessing7
             //以左右反轉方式顯示圖像
             try
             {
-                int width = this.MyBitmap.Width; //圖像寬度
-                int height = this.MyBitmap.Height; //圖像高度
+                int width = this.bitmap1.Width; //圖像寬度
+                int height = this.bitmap1.Height; //圖像高度
                 Graphics g = this.panel1.CreateGraphics();
                 g.Clear(Color.Gray); //初始為全灰色
                 for (int j = -height / 2; j <= height / 2; j++)
@@ -319,9 +321,9 @@ namespace vcs_ImageProcessing7
                     g.Clear(Color.Gray); //初始為全灰色
                     int i = Convert.ToInt32(j * (Convert.ToSingle(width) / Convert.ToSingle(height)));
                     Rectangle destrect = new Rectangle(width / 2 - i, 0, 2 * i, height);
-                    Rectangle srcrect = new Rectangle(0, 0, MyBitmap.Width, MyBitmap.Height);
-                    g.DrawImage(MyBitmap, destrect, srcrect, GraphicsUnit.Pixel);
-                    System.Threading.Thread.Sleep(10);
+                    Rectangle srcrect = new Rectangle(0, 0, bitmap1.Width, bitmap1.Height);
+                    g.DrawImage(bitmap1, destrect, srcrect, GraphicsUnit.Pixel);
+                    Thread.Sleep(10);
                 }
             }
             catch (Exception ex)
@@ -336,15 +338,15 @@ namespace vcs_ImageProcessing7
             //以從上向下拉伸方式顯示圖像
             try
             {
-                int width = this.MyBitmap.Width; //圖像寬度
-                int height = this.MyBitmap.Height; //圖像高度
+                int width = this.bitmap1.Width; //圖像寬度
+                int height = this.bitmap1.Height; //圖像高度
                 Graphics g = this.panel1.CreateGraphics();
                 g.Clear(Color.Gray); //初始為全灰色
                 for (int y = 1; y <= height; y++)
                 {
-                    Bitmap bitmap = MyBitmap.Clone(new Rectangle(0, 0, width, y), System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                    Bitmap bitmap = bitmap1.Clone(new Rectangle(0, 0, width, y), PixelFormat.Format24bppRgb);
                     g.DrawImage(bitmap, 0, 0);
-                    System.Threading.Thread.Sleep(10);
+                    Thread.Sleep(10);
                 }
             }
             catch (Exception ex)
@@ -360,15 +362,15 @@ namespace vcs_ImageProcessing7
             //以從左向右拉伸方式顯示圖像
             try
             {
-                int width = this.MyBitmap.Width; //圖像寬度
-                int height = this.MyBitmap.Height; //圖像高度
+                int width = this.bitmap1.Width; //圖像寬度
+                int height = this.bitmap1.Height; //圖像高度
                 Graphics g = this.panel1.CreateGraphics(); g.Clear(Color.Gray); //初始為全灰色
                 for (int x = 1; x <= width; x++)
                 {
-                    Bitmap bitmap = MyBitmap.Clone(new Rectangle(0, 0, x, height), System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                    Bitmap bitmap = bitmap1.Clone(new Rectangle(0, 0, x, height), PixelFormat.Format24bppRgb);
 
                     g.DrawImage(bitmap, 0, 0);
-                    System.Threading.Thread.Sleep(10);
+                    Thread.Sleep(10);
                 }
             }
             catch (Exception ex)
@@ -389,12 +391,12 @@ namespace vcs_ImageProcessing7
                 richTextBox1.Text += "角度 : " + myangle.ToString() + "\n";
                 Application.DoEvents();
 
-                TextureBrush mybrush = new TextureBrush(MyBitmap);
+                TextureBrush mybrush = new TextureBrush(bitmap1);
                 this.panel1.Refresh();
                 mybrush.RotateTransform(myangle);
                 g.FillRectangle(mybrush, 0, 0, this.ClientRectangle.Width, this.ClientRectangle.Height);
                 myangle += 15.5f;
-                System.Threading.Thread.Sleep(500);
+                Thread.Sleep(500);
             }
             richTextBox1.Text += "完成\n";
         }
@@ -414,7 +416,7 @@ namespace vcs_ImageProcessing7
             //以不同的透明度顯示圖像
             Graphics g = this.panel1.CreateGraphics();
             g.SmoothingMode = SmoothingMode.AntiAlias;
-            TextureBrush mybrush = new TextureBrush(MyBitmap);
+            TextureBrush mybrush = new TextureBrush(bitmap1);
             g.FillRectangle(mybrush, this.panel1.ClientRectangle);
             for (int i = 0; i < 255; i += 13)
             {
@@ -423,7 +425,7 @@ namespace vcs_ImageProcessing7
 
                 //由透明變為不透明
                 g.FillRectangle(new SolidBrush(Color.FromArgb(i, Color.DarkSlateGray)), this.panel1.ClientRectangle);
-                System.Threading.Thread.Sleep(100);
+                Thread.Sleep(100);
             }
             richTextBox1.Text += "完成\n";
         }
@@ -443,9 +445,9 @@ namespace vcs_ImageProcessing7
                 Application.DoEvents();
 
                 g.Clear(Color.Gray);
-                MyBitmap.SetResolution(i, i);  // 設定Bitmap解析度
-                g.DrawImage(MyBitmap, 0, 0);
-                System.Threading.Thread.Sleep(100);
+                bitmap1.SetResolution(i, i);  // 設定Bitmap解析度
+                g.DrawImage(bitmap1, 0, 0);
+                Thread.Sleep(100);
             }
             richTextBox1.Text += "完成\n";
         }
@@ -463,25 +465,25 @@ namespace vcs_ImageProcessing7
                 switch (i)
                 {
                     case 0:
-                        MyBitmap.RotateFlip(RotateFlipType.RotateNoneFlipX);
+                        bitmap1.RotateFlip(RotateFlipType.RotateNoneFlipX);
                         break;
                     case 1:
-                        MyBitmap.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                        bitmap1.RotateFlip(RotateFlipType.Rotate180FlipNone);
                         break;
                     case 2:
-                        MyBitmap.RotateFlip(RotateFlipType.Rotate180FlipX);
+                        bitmap1.RotateFlip(RotateFlipType.Rotate180FlipX);
                         break;
                     case 3:
-                        MyBitmap.RotateFlip(RotateFlipType.Rotate180FlipXY);
+                        bitmap1.RotateFlip(RotateFlipType.Rotate180FlipXY);
                         break;
                     case 4:
-                        MyBitmap.RotateFlip(RotateFlipType.Rotate180FlipY);
+                        bitmap1.RotateFlip(RotateFlipType.Rotate180FlipY);
                         break;
                     case 5:
-                        MyBitmap.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                        bitmap1.RotateFlip(RotateFlipType.Rotate270FlipNone);
                         break;
                     case 6:
-                        MyBitmap.RotateFlip(RotateFlipType.Rotate270FlipX);
+                        bitmap1.RotateFlip(RotateFlipType.Rotate270FlipX);
                         break;
                 }
             }
@@ -506,16 +508,10 @@ namespace vcs_ImageProcessing7
     }
 }
 
-
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
 

@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace vcs_PictureScroll
+namespace vcs_Draw_DoubleBuffer1
 {
     static class Program
     {

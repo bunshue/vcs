@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Imaging;
 using System.IO;
+using System.Drawing.Imaging;
 
 namespace vcs_OptimizeJpg
 {
@@ -152,3 +152,12 @@ namespace vcs_OptimizeJpg
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+

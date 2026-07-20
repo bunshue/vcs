@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Imaging;   //for ImageFormat
+using System.Drawing.Imaging;  // for ImageFormat
 
 namespace vcs_PictureBox
 {
@@ -37,7 +37,6 @@ namespace vcs_PictureBox
             int dy = 60 + 10;
             int W = 160;
             int H = 60;
-
             dx = W + 10;
             dy = H + 10;
 
@@ -168,16 +167,14 @@ namespace vcs_PictureBox
             //pictureBox2.Image = pictureBox1.Image.Clone(
 
             Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
-
             richTextBox1.Text += "圖片大小 W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
 
             int W = bitmap1.Width;
             int H = bitmap1.Height;
             int ww = 0;
             int hh = 0;
-            Rectangle cropArea;
-
             bool flag_crop_area_valid = true;
+            Rectangle cropArea;
 
             if (mouse_up_position_x > mouse_down_position_x)        //往右
             {
@@ -239,10 +236,12 @@ namespace vcs_PictureBox
                     }
                 }
             }
+
             if (ww <= 0)
             {
                 return;
             }
+
             if (hh <= 0)
             {
                 return;
@@ -267,6 +266,7 @@ namespace vcs_PictureBox
 
             //Image loadedImage = Image.FromFile(openFileDialog1.FileName);
             //pictureBox1.Image = loadedImage;
+
             /*
             Image zoomImage = new Bitmap(pictureBox1.Image.Width / 2, pictureBox1.Image.Height / 2) as Image;
             //準備繪製新的影像
@@ -288,12 +288,7 @@ namespace vcs_PictureBox
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
 

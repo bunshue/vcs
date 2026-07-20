@@ -148,8 +148,8 @@ namespace vcs_test_all_05_Print1
                 {
                     cellvalue = datagrid.Columns[j].HeaderText;//获取列标题
                     //绘制标题栏文字
-                    e.Graphics.DrawString(cellvalue, headerfont,//绘制列标题
-                        brushHeaderFont, x, y + celltopmargin);
+                    //绘制列标题
+                    e.Graphics.DrawString(cellvalue, headerfont, brushHeaderFont, x, y + celltopmargin);
                     x += colwidth + colgap;//横向，下一个单元格的位置
                     int nnp = y + currentpagerowcount * rowgap + this.headerheight;//下一行线的位置
                 }
@@ -163,11 +163,11 @@ namespace vcs_test_all_05_Print1
                     if (datagrid.Columns[j].Width > 0)//如果列的宽度大于0
                     {
                         cellvalue = datagrid.Rows[i].Cells[j].Value.ToString();//获取单元格的值
-                        e.Graphics.DrawString(cellvalue, Cellfont,//绘制单元格信息
-                            brushHeaderFont, x, y + celltopmargin + rowgap);
+                        //绘制单元格信息
+                        e.Graphics.DrawString(cellvalue, Cellfont, brushHeaderFont, x, y + celltopmargin + rowgap);
                         x += datagrid.Columns[j].Width + colgap;//单元格信息的X坐标
-                        y = y + rowgap * (cellvalue.Split(//单元格信息的Y坐标
-                            new char[] { '\r', '\n' }).Length - 1);
+                        //单元格信息的Y坐标
+                        y = y + rowgap * (cellvalue.Split(new char[] { '\r', '\n' }).Length - 1);
                     }
                 }
                 y += rowgap;//设置下行的位置

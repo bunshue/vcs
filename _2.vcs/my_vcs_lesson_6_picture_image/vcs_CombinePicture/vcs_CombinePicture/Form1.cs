@@ -146,21 +146,19 @@ namespace vcs_CombinePicture
             Bitmap bm = new Bitmap(wid, hgt);
 
             // Place the images on it.
-            using (Graphics gr = Graphics.FromImage(bm))
-            {
-                //gr.Clear(picBackground.BackColor);
+            Graphics gr = Graphics.FromImage(bm);
+            //gr.Clear(picBackground.BackColor);
 
-                int x = 0;
-                int y = 0;
-                for (int i = 0; i < num_images; i++)
+            int x = 0;
+            int y = 0;
+            for (int i = 0; i < num_images; i++)
+            {
+                gr.DrawImage(images[i], x, y);
+                x += max_wid + margin;
+                if (x >= wid)
                 {
-                    gr.DrawImage(images[i], x, y);
-                    x += max_wid + margin;
-                    if (x >= wid)
-                    {
-                        y += max_hgt + margin;
-                        x = 0;
-                    }
+                    y += max_hgt + margin;
+                    x = 0;
                 }
             }
 
@@ -291,7 +289,6 @@ namespace vcs_CombinePicture
         private void button5_Click(object sender, EventArgs e)
         {
             //合併圖
-            //合併圖
 
             string filename1 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_animals\z01.jpg";
             string filename2 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_animals\z02.jpg";
@@ -326,53 +323,34 @@ namespace vcs_CombinePicture
             int width = cols * cellWidth;
             int height = rows * cellHeight;
 
-            using (Bitmap bmp = new Bitmap(width, height))
-            using (Graphics g = Graphics.FromImage(bmp))
+            Bitmap bmp = new Bitmap(width, height);
+            Graphics g = Graphics.FromImage(bmp);
+            g.Clear(Color.White);
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            Font font = new Font("Segoe UI", 16, FontStyle.Bold);
+            StringFormat sf = new StringFormat { Alignment = StringAlignment.Center };
+
+            for (int i = 0; i < files.Length; i++)
             {
-                g.Clear(Color.White);
-                g.SmoothingMode = SmoothingMode.AntiAlias;
-                Font font = new Font("Segoe UI", 16, FontStyle.Bold);
-                StringFormat sf = new StringFormat { Alignment = StringAlignment.Center };
+                int col = i % cols;
+                int row = i / cols;
+                int x = col * cellWidth;
+                int y = row * cellHeight;
 
-                for (int i = 0; i < files.Length; i++)
-                {
-                    int col = i % cols;
-                    int row = i / cols;
-                    int x = col * cellWidth;
-                    int y = row * cellHeight;
+                // 背景格
+                Brush b = new SolidBrush(Color.FromArgb(240, 240, 240));
+                g.FillRoundedRectangle(b, new Rectangle(x + 10, y + 10, cellWidth - 20, cellHeight - 20), 20);
 
-                    // 背景格
-                    using (Brush b = new SolidBrush(Color.FromArgb(240, 240, 240)))
-                        g.FillRoundedRectangle(b, new Rectangle(x + 10, y + 10, cellWidth - 20, cellHeight - 20), 20);
+                // 載入 logo
+                Image logo = Image.FromFile(files[i]);
+                g.DrawImage(logo, x + 30, y + 20, 140, 80);
 
-                    // 載入 logo
-                    using (Image logo = Image.FromFile(files[i]))
-                    {
-                        g.DrawImage(logo, x + 30, y + 20, 140, 80);
-                    }
-
-                    // 顯示檔名（不含副檔名）
-                    //string name = Path.GetFileNameWithoutExtension(files[i]);
-                    g.DrawString(names[i], font, Brushes.Black, new RectangleF(x, y + cellHeight - 40, cellWidth, 40), sf);
-                }
-
-                bmp.Save("tmp_組合圖1.png");
+                // 顯示檔名（不含副檔名）
+                //string name = Path.GetFileNameWithoutExtension(files[i]);
+                g.DrawString(names[i], font, Brushes.Black, new RectangleF(x, y + cellHeight - 40, cellWidth, 40), sf);
             }
+            bmp.Save("tmp_組合圖1.png");
         }
-
-        /*
-        static GraphicsPath RoundedRect(Rectangle bounds, int radius)
-        {
-            GraphicsPath path = new GraphicsPath();
-            int d = radius * 2;
-            path.AddArc(bounds.X, bounds.Y, d, d, 180, 90);
-            path.AddArc(bounds.Right - d, bounds.Y, d, d, 270, 90);
-            path.AddArc(bounds.Right - d, bounds.Bottom - d, d, d, 0, 90);
-            path.AddArc(bounds.X, bounds.Bottom - d, d, d, 90, 90);
-            path.CloseFigure();
-            return path;
-        }
-        */
 
         //------------------------------------------------------------  # 60個
 
@@ -393,28 +371,24 @@ namespace vcs_CombinePicture
             int width = cellWidth * 1;
             int height = cellHeight * N;
 
-            using (Bitmap bmp = new Bitmap(width, height))
-            using (Graphics g = Graphics.FromImage(bmp))
+            Bitmap bmp = new Bitmap(width, height);
+            Graphics g = Graphics.FromImage(bmp);
+            g.Clear(Color.White);
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            Font font = new Font("Segoe UI", 16, FontStyle.Bold);
+            StringFormat sf = new StringFormat { Alignment = StringAlignment.Center };
+
+            for (int i = 0; i < files.Length; i++)
             {
-                g.Clear(Color.White);
-                g.SmoothingMode = SmoothingMode.AntiAlias;
-                Font font = new Font("Segoe UI", 16, FontStyle.Bold);
-                StringFormat sf = new StringFormat { Alignment = StringAlignment.Center };
+                int row = i;
+                int x = 0;
+                int y = row * cellHeight;
 
-                for (int i = 0; i < files.Length; i++)
-                {
-                    int row = i;
-                    int x = 0;
-                    int y = row * cellHeight;
-
-                    using (Image logo = Image.FromFile(files[i]))
-                    {
-                        //g.DrawImage(logo, x + 30, y + 20, 140, 80);
-                        g.DrawImage(logo, x, y, cellWidth, cellHeight);
-                    }
-                }
-                bmp.Save("tmp_組合圖2.png");
+                Image logo = Image.FromFile(files[i]);
+                //g.DrawImage(logo, x + 30, y + 20, 140, 80);
+                g.DrawImage(logo, x, y, cellWidth, cellHeight);
             }
+            bmp.Save("tmp_組合圖2.png");
         }
 
         //------------------------------------------------------------  # 60個
@@ -439,15 +413,13 @@ namespace vcs_CombinePicture
     {
         public static void FillRoundedRectangle(this Graphics g, Brush brush, Rectangle rect, int radius)
         {
-            using (GraphicsPath path = new GraphicsPath())
-            {
-                path.AddArc(rect.X, rect.Y, radius, radius, 180, 90);
-                path.AddArc(rect.Right - radius, rect.Y, radius, radius, 270, 90);
-                path.AddArc(rect.Right - radius, rect.Bottom - radius, radius, radius, 0, 90);
-                path.AddArc(rect.X, rect.Bottom - radius, radius, radius, 90, 90);
-                path.CloseFigure();
-                g.FillPath(brush, path);
-            }
+            GraphicsPath path = new GraphicsPath();
+            path.AddArc(rect.X, rect.Y, radius, radius, 180, 90);
+            path.AddArc(rect.Right - radius, rect.Y, radius, radius, 270, 90);
+            path.AddArc(rect.Right - radius, rect.Bottom - radius, radius, radius, 0, 90);
+            path.AddArc(rect.X, rect.Bottom - radius, radius, radius, 90, 90);
+            path.CloseFigure();
+            g.FillPath(brush, path);
         }
     }
 }
@@ -455,12 +427,7 @@ namespace vcs_CombinePicture
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
 

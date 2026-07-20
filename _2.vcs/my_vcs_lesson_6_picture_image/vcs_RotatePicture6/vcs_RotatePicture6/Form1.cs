@@ -172,34 +172,6 @@ namespace vcs_RotatePicture6
             return result;
         }
 
-        // Find the bounding rectangle for an array of points.
-        private void GetPointBounds(PointF[] points, out float xmin, out float xmax, out float ymin, out float ymax)
-        {
-            xmin = points[0].X;
-            xmax = xmin;
-            ymin = points[0].Y;
-            ymax = ymin;
-            foreach (PointF point in points)
-            {
-                if (xmin > point.X)
-                {
-                    xmin = point.X;
-                }
-                if (xmax < point.X)
-                {
-                    xmax = point.X;
-                }
-                if (ymin > point.Y)
-                {
-                    ymin = point.Y;
-                }
-                if (ymax < point.Y)
-                {
-                    ymax = point.Y;
-                }
-            }
-        }
-
         // Make sure the form is big enough to show the rotated image.
         private void SizeForm()
         {

@@ -288,6 +288,7 @@ namespace vcs_Draw_Bitmap
         private void button6_Click(object sender, EventArgs e)
         {
             //MakeTransparent 去背效果
+
             open_new_file();
             g.Clear(Color.Silver);
 
@@ -326,7 +327,6 @@ namespace vcs_Draw_Bitmap
 
             //讀出測試圖片
             Bitmap bmp = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-            //Bitmap bmp = new Bitmap(filename);//same
             int W = bmp.Width;
             int H = bmp.Height;
 
@@ -591,7 +591,7 @@ namespace vcs_Draw_Bitmap
             Graphics g = Graphics.FromImage(resizedbitmap);
             g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-            g.Clear(Color.Transparent);
+            g.Clear(Color.Transparent);  // 清空畫布並用透明色填充
             g.DrawImage(bitmap1, new Rectangle(0, 0, width, height), new Rectangle(0, 0, oriwidth, oriheight), GraphicsUnit.Pixel);
             return resizedbitmap;
 
@@ -797,6 +797,7 @@ namespace vcs_Draw_Bitmap
             string filename = "\\tmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
             bitmap1.Save(filename, ImageFormat.Bmp);
             //bitmap1.Save(filename, ImageFormat.Jpeg);
+
             /*            
             轉換圖片格式
             Bitmap bm = new Bitmap(舊檔名);
@@ -967,7 +968,6 @@ namespace vcs_Draw_Bitmap
             Bitmap bitmap2 = (Bitmap)Bitmap.FromFile(filename);
 
             Graphics g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.White);
 
             pictureBox1.Image = (Image)bitmap1;
 
@@ -1008,14 +1008,14 @@ namespace vcs_Draw_Bitmap
 
 //------------------------------------------------------------  # 60個
 
-.MakeTransparent(bmp.GetPixel(10, 10));  // 設定邊角點的顏色為透明色
+bitmap1.MakeTransparent(bmp.GetPixel(10, 10));  // 設定邊角點的顏色為透明色
 
 //------------------------------------------------------------  # 60個
-
-bitmap.maketransparent
-bmp.MakeTransparent(Color.Magenta);
+bitmap1.MakeTransparent
+bitmap1.MakeTransparent(Color.Magenta);
 
 [C#]WinForm利用Bitmap的MakeTransparent將圖片某些顏色透明化
+ * 
             Bitmap bmp2 = new Bitmap(asm.GetManifestResourceStream(name + ".puma.bmp"));//載入圖片資源
             bmp2.MakeTransparent(Color.White);//將圖片白色部分透明化;
             this.pictureBox2.Image = bmp2;
@@ -1025,19 +1025,10 @@ bmp.MakeTransparent(Color.Magenta);
 
 //------------------------------------------------------------  # 60個
 
-g.Clear(BackColor);     //清除整個繪圖介面，並使用指定的背景色彩填滿它。
-
-可以填滿透明的顏色~~~~~~
-
 DrawDiamond(gr, bounds, diamond_pen, Brushes.Transparent);
-
-g.Clear(Color.Transparent);
 
 //表單全填滿特定顏色
 g.FillRectangle(Brushes.Wheat, ClientRectangle);
-
-//清空畫布並用透明色填充
-g.Clear(Color.Transparent);
 
 //擷取部分圖片貼上
 //            貼上位置與大小,擷取部分圖片位置與大小,單位
@@ -1086,8 +1077,7 @@ bitmap1 = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg");
 pictureBox1.Image = bitmap1;
 
 開啟一圖 畫在pictureBox上
-Graphics g;
-g = pictureBox1.CreateGraphics();		//取得畫布物件
+Graphics g = pictureBox1.CreateGraphics();		//取得畫布物件
 
 Bitmap bitmap1 = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg");
 
