@@ -45,8 +45,6 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.button6 = new System.Windows.Forms.Button();
             this.picOriginal = new System.Windows.Forms.PictureBox();
-            this.picOrientation = new System.Windows.Forms.PictureBox();
-            this.lblOrientation = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -54,7 +52,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picOriginal)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picOrientation)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -194,7 +191,7 @@
             // button6
             // 
             this.button6.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button6.Location = new System.Drawing.Point(511, 39);
+            this.button6.Location = new System.Drawing.Point(747, 12);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(111, 88);
             this.button6.TabIndex = 10;
@@ -205,32 +202,12 @@
             // picOriginal
             // 
             this.picOriginal.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.picOriginal.Location = new System.Drawing.Point(754, 21);
+            this.picOriginal.Location = new System.Drawing.Point(864, 12);
             this.picOriginal.Name = "picOriginal";
-            this.picOriginal.Size = new System.Drawing.Size(114, 97);
+            this.picOriginal.Size = new System.Drawing.Size(120, 120);
             this.picOriginal.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picOriginal.TabIndex = 26;
             this.picOriginal.TabStop = false;
-            // 
-            // picOrientation
-            // 
-            this.picOrientation.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.picOrientation.Location = new System.Drawing.Point(874, 21);
-            this.picOrientation.Name = "picOrientation";
-            this.picOrientation.Size = new System.Drawing.Size(121, 97);
-            this.picOrientation.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.picOrientation.TabIndex = 25;
-            this.picOrientation.TabStop = false;
-            // 
-            // lblOrientation
-            // 
-            this.lblOrientation.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblOrientation.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOrientation.Location = new System.Drawing.Point(628, 37);
-            this.lblOrientation.Name = "lblOrientation";
-            this.lblOrientation.Size = new System.Drawing.Size(120, 59);
-            this.lblOrientation.TabIndex = 24;
-            this.lblOrientation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label3
             // 
@@ -283,8 +260,6 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.picOriginal);
-            this.Controls.Add(this.picOrientation);
-            this.Controls.Add(this.lblOrientation);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.button5);
@@ -302,7 +277,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picOriginal)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picOrientation)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -327,8 +301,6 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.PictureBox picOriginal;
-        private System.Windows.Forms.PictureBox picOrientation;
-        private System.Windows.Forms.Label lblOrientation;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;

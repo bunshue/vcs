@@ -368,18 +368,16 @@ namespace vcs_Exif
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //檢查圖片的方向
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\orient1.jpg";
+            richTextBox1.Text += "檢查圖片的方向\n";
 
-            // Open the file.
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\orient1.jpg";
             Bitmap bm = new Bitmap(filename);
             picOriginal.Image = bm;
 
             // Get the PropertyItems property from image.
             ExifStuff.ExifOrientations orientation = ExifStuff.ImageOrientation(bm);
-            lblOrientation.Text = orientation.ToString();
-            richTextBox1.Text += orientation.ToString() + "\n";
-            picOrientation.Image = ExifStuff.OrientationImage(orientation);
+
+            richTextBox1.Text += "檢查圖片的方向 : " + orientation.ToString() + "\n";
         }
     }
 
@@ -942,12 +940,8 @@ namespace vcs_Exif
                                 MyMetadata.CfaPattern.DisplayValue = BitConverter.ToString(MyImage.GetPropertyItem(MyPropertyId).Value);
                                 break;
                             }
-
-
-
                     }
                     //#endregion
-
                     index++;
                 }
             }
@@ -966,22 +960,15 @@ namespace vcs_Exif
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
 
 /*
 .Net 讀取、修改、複製 照片資訊 EXIF 使用 ExifLibrary
 https://www.ez2o.com/Blog/Post/csharp-Read-Image-EXIF-ExifLibrary
 
 參考/加入參考/ExifLibrary.dll
-
 
 */
 

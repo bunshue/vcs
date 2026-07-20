@@ -796,7 +796,6 @@ namespace vcs_Draw_Bitmap
 
             string filename = "\\tmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
             bitmap1.Save(filename, ImageFormat.Bmp);
-            //bitmap1.Save(filename, ImageFormat.Jpeg);
 
             /*            
             轉換圖片格式
@@ -964,64 +963,49 @@ namespace vcs_Draw_Bitmap
 //------------------------------  # 30個
 
 /*  可搬出
-            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height, PixelFormat.Format32bppRgb);
-            Bitmap bitmap2 = (Bitmap)Bitmap.FromFile(filename);
 
-            Graphics g = Graphics.FromImage(bitmap1);
+Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height, PixelFormat.Format32bppRgb);
+Bitmap bitmap2 = (Bitmap)Bitmap.FromFile(filename);
 
-            pictureBox1.Image = (Image)bitmap1;
+Graphics g = Graphics.FromImage(bitmap1);
 
-            g.Dispose();
+pictureBox1.Image = (Image)bitmap1;
 
-            g.DrawString("改變Bitmap大小,\n貼在原點", new Font("Arial", 30), Brushes.Red, new PointF(100, 400));
+g.Dispose();
 
-            Bitmap bmp = new Bitmap(filename, true);
-            g.DrawImage(bmp, 0, 0, W, H);
-            g.DrawImage(bmp, 0, 450, W, H / 2);
+g.DrawString("改變Bitmap大小,\n貼在原點", new Font("Arial", 30), Brushes.Red, new PointF(100, 400));
 
-//------------------------------------------------------------  # 60個
+Bitmap bitmap1 = new Bitmap(filename, true);
+g.DrawImage(bitmap1, 0, 0,   W, H);
+g.DrawImage(bitmap1, 0, 450, W, H / 2);
 
-            //img.Save(Response.OutputStream, ImageFormat.Jpeg);;
+//bitmap1.Save(Response.OutputStream, ImageFormat.Jpeg);
+//bitmap1.Dispose();
 
-            //bmp.Save ( Response.OutputStream , System.Drawing.Imaging.ImageFormat.Jpeg);
-            //bmp.Save ( Response.OutputStream , System.Drawing.Imaging.ImageFormat.Jpeg);
-            //bmp.Dispose();
+//該位圖對象以“GIF”格式輸出
+//bitmap1.Save(Response.OutputStream, ImageFormat.Gif);
 
-            //該位圖對象以“GIF”格式輸出
-            //objBitMap.Save(Response.OutputStream, ImageFormat.Gif);
+string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+bitmap1.Save(filename, ImageFormat.Bmp);
 
-            //Bg.Save(Response.OutputStream, ImageFormat.Gif);
-
-            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-            bitmap1.Save(filename, ImageFormat.Bmp);
-
-            string filename2 = Application.StartupPath + "\\jpg_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
-            bitmap1.Save(filename2, ImageFormat.Jpeg);
-
-            //使用指定參數輸出
-            //image.Save(Response.OutputStream, myImageCodecInfo, myEncoderParameters);
-
-            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-            bitmap1.Save(filename, ImageFormat.Bmp);
-            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png";
-            bitmap1.Save(filename, ImageFormat.Png);
+//使用指定參數輸出
+//image.Save(Response.OutputStream, myImageCodecInfo, myEncoderParameters);
 
 //------------------------------------------------------------  # 60個
 
-bitmap1.MakeTransparent(bmp.GetPixel(10, 10));  // 設定邊角點的顏色為透明色
+bitmap1.MakeTransparent(bitmap1.GetPixel(10, 10));  // 設定邊角點的顏色為透明色
 
-//------------------------------------------------------------  # 60個
 bitmap1.MakeTransparent
 bitmap1.MakeTransparent(Color.Magenta);
 
 [C#]WinForm利用Bitmap的MakeTransparent將圖片某些顏色透明化
- * 
-            Bitmap bmp2 = new Bitmap(asm.GetManifestResourceStream(name + ".puma.bmp"));//載入圖片資源
-            bmp2.MakeTransparent(Color.White);//將圖片白色部分透明化;
-            this.pictureBox2.Image = bmp2;
+
+Bitmap bitmap1 = new Bitmap(asm.GetManifestResourceStream(name + ".puma.bmp"));//載入圖片資源
+bitmap1.MakeTransparent(Color.White);//將圖片白色部分透明化;
+this.pictureBox2.Image = bitmap1;
             
-            bit = new Bitmap("picture1.jpg");  //圖片放在debug內
-            bit.MakeTransparent(Color.White);  //將視窗中白色的部份變為透明
+bitmap1 = new Bitmap("picture1.jpg");  //圖片放在debug內
+bitmap1.MakeTransparent(Color.White);  //將視窗中白色的部份變為透明
 
 //------------------------------------------------------------  # 60個
 
@@ -1036,12 +1020,12 @@ g.DrawImage(img, destRect1, srcRect, units);
 
 //------------------------------------------------------------  # 60個
 
-            Bitmap bitmap1 = new Bitmap(w, h);
-            Graphics g = Graphics.FromImage(bitmap1);
+Bitmap bitmap1 = new Bitmap(w, h);
+Graphics g = Graphics.FromImage(bitmap1);
 
-            g.SmoothingMode = SmoothingMode.AntiAlias;//消除鋸齒
-            g.CompositingQuality = CompositingQuality.HighQuality;
-            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+g.SmoothingMode = SmoothingMode.AntiAlias;//消除鋸齒
+g.CompositingQuality = CompositingQuality.HighQuality;
+g.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
 //------------------------------------------------------------  # 60個
 
@@ -1063,23 +1047,17 @@ g.SmoothingMode = SmoothingMode.HighQuality;//使画出的指针、线条更平�
 
 //------------------------------------------------------------  # 60個
 
-new 一個 bitmap
-
 Bitmap bitmap1;
 
-1. 新建一個指名大小的bitmap
-
-bitmap1 = new Bitmap(600, 400);
+Bitmap bitmap1 = new Bitmap(600, 400);  // 新建一個指名大小的bitmap
 pictureBox1.Image = bitmap1;
 
 2. 開啟圖檔 以此圖檔之大小為此bitmap之大小
-bitmap1 = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg");
+Bitmap bitmap1 = new Bitmap("picture1.jpg");
 pictureBox1.Image = bitmap1;
 
 開啟一圖 畫在pictureBox上
 Graphics g = pictureBox1.CreateGraphics();		//取得畫布物件
-
-Bitmap bitmap1 = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg");
 
 g.DrawEllipse(new Pen(Color.Red, 1), 10, 10, 100, 100);		//作畫於其上
 

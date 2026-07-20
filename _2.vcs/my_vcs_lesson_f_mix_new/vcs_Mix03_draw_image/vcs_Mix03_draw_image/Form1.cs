@@ -15,6 +15,7 @@ using System.Security.Cryptography; //for HashAlgorithm
 using System.Diagnostics;   //for Process
 using System.Threading;
 using System.Collections;//for Hashtable
+using System.Drawing.Text;  // for TextRenderingHint
 
 namespace vcs_Mix03_draw_image
 {
@@ -328,11 +329,66 @@ namespace vcs_Mix03_draw_image
             }
         }
 
+        int orientation = 0;
         private void button4_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
 
+            const int size = 120;
+            Bitmap bitmap1 = new Bitmap(size, size);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+            g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+
+            // Orient the result.
+            switch (orientation)
+            {
+                case 0://ExifOrientations.TopLeft:
+                    break;
+                case 1://ExifOrientations.TopRight:
+                    g.ScaleTransform(-1, 1);
+                    break;
+                case 2://ExifOrientations.BottomRight:
+                    g.RotateTransform(180);
+                    break;
+                case 3://ExifOrientations.BottomLeft:
+                    g.ScaleTransform(1, -1);
+                    break;
+                case 4://ExifOrientations.LeftTop:
+                    g.RotateTransform(90);
+                    g.ScaleTransform(-1, 1, MatrixOrder.Append);
+                    break;
+                case 5://ExifOrientations.RightTop:
+                    g.RotateTransform(-90);
+                    break;
+                case 6://ExifOrientations.RightBottom:
+                    g.RotateTransform(90);
+                    g.ScaleTransform(1, -1, MatrixOrder.Append);
+                    break;
+                case 7://ExifOrientations.LeftBottom:
+                    g.RotateTransform(90);
+                    break;
+            }
+
+            orientation++;
+            if (orientation > 7)
+                orientation = 0;
+
+            // Translate the result to the center of the bitmap.
+            g.TranslateTransform(size / 2, size / 2, MatrixOrder.Append);
+
+            StringFormat string_format = new StringFormat();
+            string_format.LineAlignment = StringAlignment.Center;
+            string_format.Alignment = StringAlignment.Center;
+
+            Font font = new Font("Times New Roman", 40, GraphicsUnit.Point);
+
+            g.DrawString("F", font, Brushes.Black, 0, 0, string_format);
+
+            pictureBox1.Image = bitmap1;
         }
+
+        //6060
 
         private void button5_Click(object sender, EventArgs e)
         {
@@ -821,12 +877,7 @@ namespace vcs_Mix03_draw_image
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
 

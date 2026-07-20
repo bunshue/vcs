@@ -1,5 +1,9 @@
 ﻿
 
+
+程式碼片段（Code Snippet）
+
+
 ssss
 //                e.Graphics.DrawString(fahrenheit.ToString("0"), font, Brushes.Black, x1, y, sf);
 

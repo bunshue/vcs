@@ -1809,6 +1809,16 @@ namespace vcs_Draw1
             e.Graphics.DrawString("AAAAAAAAA", font, Brushes.Black, 100, 300, format);
             */
 
+
+
+            //文字居中
+            StringFormat objStringFormat = new StringFormat(StringFormatFlags.NoClip);
+
+            objStringFormat.Alignment = StringAlignment.Center;
+            objStringFormat.LineAlignment = StringAlignment.Center;
+
+            //g.DrawString(chars[i].ToString(), objFont, objSolidBrush, -2, 2, objStringFormat);
+
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -2859,7 +2869,6 @@ bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0, 0, 0));
                         //richTextBox1.Text += p.ToString() + " ";
                         richTextBox1.Text += p.A.ToString("X2") + p.R.ToString("X2") + p.G.ToString("X2") + p.B.ToString("X2") + " ";
 
-
 //------------------------------------------------------------  # 60個
 
 Font設定字型及樣式
@@ -2867,8 +2876,6 @@ Font設定字型及樣式
                 
             //Graphics.DrawImage (Image, Rectangle, Rectangle, GraphicsUnit)
             //四個參數分別是     來源影像 目標區域  來源區域      單位
-
-
 
 string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 //讀檔 至 Image 影像
@@ -2885,7 +2892,7 @@ Image imgThumbnail = image1.GetThumbnailImage(w, (int)(w * image1.Height / image
 
 //------------------------------------------------------------  # 60個
 
-Pen的屬性主要有: Color(顏色),DashCap(短劃線終點形狀),DashStyle(虛線樣式),EndCap(線尾形狀), StartCap(線頭形狀),Width(粗細)等.
+Pen的屬性主要有: Color(顏色), DashCap(短劃線終點形狀), DashStyle(虛線樣式), EndCap(線尾形狀), StartCap(線頭形狀), Width(粗細) 等.
 
 void ctx.drawImage(image, dx, dy);
 void ctx.drawImage(image, dx, dy, dWidth, dHeight);
@@ -2911,7 +2918,6 @@ Graphics 畫布物件變數;
 例如：在表單上建立畫布g：
 Graphics g;
 g = this.CreateGraphics();
-
 
 例如：在圖片方塊pictureBox1上建立畫布g：
 Graphics g;
@@ -2989,18 +2995,18 @@ blackPen.StartCap=LineCap.ArrowAnchor;
 比如：直線、折線、矩形、多邊形、橢圓形、扇形、曲線等等，因此一般的圖形都可以直接通過代碼畫出來。
 接下來介紹一些畫圖函數：
 
-Bitmap bMap=new Bitmap(500,500)　//定義映像大小；
-bMap.Save(Stream,ImageCodecInfo) //將映像儲存到指定的輸出資料流；
-Graphics gph //定義或建立GDI繪圖對像；
-PointF cPt　//定義二維平面中x,y座標；
-DrawString(string,Font,Brush,PonitF) //用指定的Brush和Font對像在指定的矩形或點繪製指定的字串；
-DrawLine(Pen,Ponit,Ponit) //用指定的筆(Pen)對像繪製指定兩點之間直線；
-DrawPolygon(Pen,Ponit[]) //用指定的筆(Pen)對像繪製指定多邊形，比如三角形，四邊形等等；
-FillPolygon(Brush,Ponit[]) //用指定的刷子(Brush)對像填充指定的多邊形；
-DrawEllipse(Pen,x,y,Width,Height) //用指定的筆繪製一個邊框定義的橢圓；
-FillEllipse(Brush,x,y,Width,Height) //用指定的刷子填充一個邊框定義的橢圓；
-DrawRectangle(Pen,x,y,Width,Height) //用指定的筆繪製一個指定座標點、寬度、高度的矩形；
-DrawPie(Pen,x,y,Width,Height,startAngle,sweepAngle) //用指定的筆繪製一個指定座標點、寬度、高度以及兩條射線組成的扇形；
+Bitmap bitmap1 = new Bitmap(500, 500)　//定義映像大小；
+bitmap1.Save(Stream,ImageCodecInfo) //將映像儲存到指定的輸出資料流；
+Graphics g //定義或建立GDI繪圖對像；
+PointF pt　//定義二維平面中x,y座標；
+DrawString(text, f, Brush, PonitF) //用指定的Brush和Font對像在指定的矩形或點繪製指定的字串；
+DrawLine(Pen, Ponit, Ponit) //用指定的筆(Pen)對像繪製指定兩點之間直線；
+DrawPolygon(Pen, Ponit[]) //用指定的筆(Pen)對像繪製指定多邊形，比如三角形，四邊形等等；
+FillPolygon(Brush, Ponit[]) //用指定的刷子(Brush)對像填充指定的多邊形；
+DrawEllipse(Pen, x, y, Width, Height) //用指定的筆繪製一個邊框定義的橢圓；
+FillEllipse(Brush, x, y, Width, Height) //用指定的刷子填充一個邊框定義的橢圓；
+DrawRectangle(Pen, x, y, Width, Height) //用指定的筆繪製一個指定座標點、寬度、高度的矩形；
+DrawPie(Pen, x, y, Width, Height, startAngle, sweepAngle) //用指定的筆繪製一個指定座標點、寬度、高度以及兩條射線組成的扇形；
 
 //------------------------------------------------------------  # 60個
 

@@ -62,20 +62,16 @@ namespace vcs_test_all_05_Print2
             groupBox0.Size = new Size(200, 280);
             groupBox1.Size = new Size(200, 280);
             groupBox3.Size = new Size(200, 280);
-            groupBox4.Size = new Size(200, 280);
-            groupBox5.Size = new Size(200, 280);
 
             groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            groupBox3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            groupBox4.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            groupBox5.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            groupBox3.Location = new Point(x_st + dx * 0, y_st + dy * 1);
 
             printPreviewControl1.Size = new Size(240, 180);
             printPreviewControl1.Location = new Point(x_st + dx * 3 - 50, y_st + dy * 7);
 
-            richTextBox1.Size = new Size(400, 690);
-            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            richTextBox1.Size = new Size(440, 690);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             x_st = 10;
@@ -94,26 +90,18 @@ namespace vcs_test_all_05_Print2
             button31.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button32.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button33.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button40.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button41.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button42.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button43.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button50.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button51.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button52.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button53.Location = new Point(x_st + dx * 0, y_st + dy * 3);
 
-            x_st = 425;
+            x_st = 20;
             y_st = 300;
-            dx = 180 + 10;
+            dx = 200 + 10;
             dy = 55 + 10;
-            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button0.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 1, y_st + dy * 4);
 
-            this.Size = new Size(1300, 750);
+            this.Size = new Size(900, 750);
             this.Text = "vcs_test_all_05_Print2";
 
             //設定執行後的表單起始位置, 正中央
@@ -176,7 +164,6 @@ namespace vcs_test_all_05_Print2
         StreamReader streamToPrint;
         float linesPerPage = 0;
         string pageNumberTtile;
-        Font printFont;
         StringFormat format;
         RectangleF pageNumberArea;
 
@@ -188,7 +175,6 @@ namespace vcs_test_all_05_Print2
         }
         private void PageSetting(PrintPageEventArgs e)
         {
-            printFont = new Font("標楷體", 10);
             pageNumberArea = new RectangleF(0, e.PageBounds.Bottom - 20, e.PageSettings.Bounds.Width, 20);
             format = new StringFormat();
             format.Alignment = StringAlignment.Center;
@@ -203,69 +189,61 @@ namespace vcs_test_all_05_Print2
             int count = 0;
             string line = null;
 
-            try
+            Font printFont = new Font("標楷體", 10);
+
+            if (isFirstPage)
             {
-                if (isFirstPage)
-                {
-                    OpenFile();     // 判斷是否否是列印第一頁
-                    PageSetting(e); // 設定列印頁碼所需的資料
-                    // 計算每頁的列數
-                    linesPerPage = e.MarginBounds.Height / printFont.GetHeight(e.Graphics);
-                }
-
-                // 列印檔案中的每一列
-                while (count < linesPerPage && ((line = streamToPrint.ReadLine()) != null))
-                {
-                    yPos = topMargin + (count * printFont.GetHeight(e.Graphics));
-                    e.Graphics.DrawString(
-                        line,
-                        printFont,
-                        Brushes.Black,
-                        leftMargin,
-                        yPos,
-                        new StringFormat());
-                    count++;
-                }
-
-                // 如果還有沒列印完的內容，則列印其他頁
-                if (line != null)
-                {
-                    e.HasMorePages = true;
-
-                    // 註明再度執行PrintPage事件處理程序時，
-                    // 是第二頁以後的頁面
-                    isFirstPage = false;
-                }
-                else
-                {
-                    e.HasMorePages = false;
-                }
-
-                // 印出頁碼
-                pageNumber++;
-                pageNumberTtile = "第 " + pageNumber.ToString() + " 頁";
-                e.Graphics.DrawString(
-                    pageNumberTtile,
-                    printFont,
-                    Brushes.Red,
-                    pageNumberArea,
-                    format);
+                OpenFile();     // 判斷是否否是列印第一頁
+                PageSetting(e); // 設定列印頁碼所需的資料
+                // 計算每頁的列數
+                linesPerPage = e.MarginBounds.Height / printFont.GetHeight(e.Graphics);
             }
-            finally
+
+            // 列印檔案中的每一列
+            while (count < linesPerPage && ((line = streamToPrint.ReadLine()) != null))
             {
-                if (!e.HasMorePages)
-                {
-                    // 如果所有頁面皆已列印完畢，則關閉檔案
-                    streamToPrint.Close();
-                    isFirstPage = true;
-                }
+                yPos = topMargin + (count * printFont.GetHeight(e.Graphics));
+                e.Graphics.DrawString(
+                    line,
+                    printFont,
+                    Brushes.Black,
+                    leftMargin,
+                    yPos,
+                    new StringFormat());
+                count++;
+            }
+
+            // 如果還有沒列印完的內容，則列印其他頁
+            if (line != null)
+            {
+                e.HasMorePages = true;
+
+                // 註明再度執行PrintPage事件處理程序時，
+                // 是第二頁以後的頁面
+                isFirstPage = false;
+            }
+            else
+            {
+                e.HasMorePages = false;
+            }
+
+            // 印出頁碼
+            pageNumber++;
+            pageNumberTtile = "第 " + pageNumber.ToString() + " 頁";
+            e.Graphics.DrawString(pageNumberTtile, printFont, Brushes.Red, pageNumberArea, format);
+
+            if (!e.HasMorePages)
+            {
+                // 如果所有頁面皆已列印完畢，則關閉檔案
+                streamToPrint.Close();
+                isFirstPage = true;
             }
         }
 
         //------------------------------------------------------------  # 60個
 
-        private string readToPrint, allContents;
-        private Font printFont3;//列印字型
+        private string readToPrint;
+        private string allContents;
 
         private void button30_Click(object sender, EventArgs e)
         {
@@ -287,16 +265,13 @@ namespace vcs_test_all_05_Print2
             //讀取的檔名「王之渙_涼州詞」為列印文件的檔名
             printDocument3.DocumentName = printFile;
 
-            //建立檔案並以Open開啟，以using指定範圍為唯讀
-            using (FileStream stream = new FileStream(text_filename, FileMode.Open))
-            using (StreamReader reader = new
-            StreamReader(stream)) //指定區段為唯讀
-            {
-                //allContents存放檔案內容
-                allContents = reader.ReadToEnd();
-            }
+            FileStream stream = new FileStream(text_filename, FileMode.Open);
+            StreamReader reader = new StreamReader(stream);
+
+            //allContents存放檔案內容
+            allContents = reader.ReadToEnd();
+
             readToPrint = allContents;
-            printFont3 = new Font("標楷體", 20);
         }
 
         private void button32_Click(object sender, EventArgs e)
@@ -307,7 +282,7 @@ namespace vcs_test_all_05_Print2
 
             printPreviewControl1.UseAntiAlias = true;//啟用平滑字效果
             printPreviewControl1.Document = printDocument3;
-            printPreviewControl1.Document.DocumentName = "CH1407-Demo02";
+            printPreviewControl1.Document.DocumentName = "王之渙_涼州詞";
 
             printPreviewDialog3.ShowDialog();//顯示預覽列印對話方塊
         }
@@ -316,6 +291,7 @@ namespace vcs_test_all_05_Print2
         {
             //列印
             ReadPrintFile();//呼叫載入檔案方法
+
             //啟用「頁數」選項按鈕，「選取範圍」選項按鈕
             printDialog3.AllowSomePages = true;
             printDialog3.AllowSelection = true;
@@ -333,11 +309,14 @@ namespace vcs_test_all_05_Print2
         {
             int charsPerPage = 0;//統計每頁字元
             int morePages = 0; //統計頁數        
-            Graphics gs = e.Graphics;
-            gs.MeasureString(readToPrint, printFont3, e.MarginBounds.Size, StringFormat.GenericTypographic, out charsPerPage, out morePages);
+
+            Font printFont3 = new Font("標楷體", 20);// 列印字型
+
+            e.Graphics.MeasureString(readToPrint, printFont3, e.MarginBounds.Size, StringFormat.GenericTypographic, out charsPerPage, out morePages);
 
             //依據檔案內容繪製列印內容
-            gs.DrawString(readToPrint, printFont3, Brushes.Black, e.MarginBounds, StringFormat.GenericTypographic);
+            e.Graphics.DrawString(readToPrint, printFont3, Brushes.Black, e.MarginBounds, StringFormat.GenericTypographic);
+
             //移除已列印的字串
             readToPrint = readToPrint.Substring(charsPerPage);
             //當readToPrint大於零時，檢查是否要列印很多頁
@@ -348,58 +327,20 @@ namespace vcs_test_all_05_Print2
             }
         }
 
-        //列印到最後一頁顯示訊息
         private void printDocument3_EndPrint(object sender, PrintEventArgs e)
         {
-            MessageBox.Show(printDocument3.DocumentName + " -- 完成列印", "列印文件");
+            //列印到最後一頁顯示訊息
+            richTextBox1.Text += printDocument3.DocumentName + " -- 完成列印\n";
         }
 
-        private void button40_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button41_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button42_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button43_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button50_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button51_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button52_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button53_Click(object sender, EventArgs e)
-        {
-
-        }
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
             //print
             //printDocumentA
             richTextBox1.LoadFile("../../../Demo01.rtf");
-            printDocumentA.DocumentName = "AAAAAAA";
+            printDocumentA.DocumentName = "列印RTF檔案";
 
             printDocumentA.Print();
         }

@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Drawing.Printing;
+
 namespace vcs_test_all_05_Print3
 {
     public partial class Form1 : Form
@@ -42,7 +44,7 @@ namespace vcs_test_all_05_Print3
             //------------------------------------------------------------  # 60個
 
             //使用DGV1 ST
-            intRows = Convert.ToInt32(textBox1.Text);
+            intRows = Convert.ToInt32(textBox1.Text);  // 每頁打印行數 
 
             add_datagridview(dataGridView1);
 
@@ -63,7 +65,8 @@ namespace vcs_test_all_05_Print3
             {
                 intPage = Convert.ToInt32((R - 2) / intRows);
             }
-            richTextBox1.Text += "总页数：" + intPage + "页\n";
+            richTextBox1.Text += "每頁行數 : " + intRows.ToString() + " 行\n";
+            richTextBox1.Text += "總頁數 : " + intPage.ToString() + " 頁\n";
 
             //使用DGV1 SP
 
@@ -214,15 +217,18 @@ namespace vcs_test_all_05_Print3
             dgv.Columns[2].Name = "體重";
             dgv.Columns[2].Width = 100;//設置欄位寬度
 
-            for (int i = 0; i < 23; i++)
+            for (int i = 0; i < 80; i++)
             {
                 dgv.Rows.Add(new Object[] { (i + 1).ToString("D4"), "班尼牛", 48 });
             }
         }
 
         //設置打印內容
-        private void printDocument_dgv_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        private void printDocument_dgv_PrintPage(object sender, PrintPageEventArgs e)
         {
+            //畫列印範圍, 可列印區間
+            e.Graphics.DrawRectangle(new Pen(Color.Green, 10), e.MarginBounds.Left - 10, e.MarginBounds.Top - 10, e.MarginBounds.Width + 20, e.MarginBounds.Height + 20);
+
             int R = dataGridView1.Rows.Count;
             richTextBox1.Text += "printDocument1_PrintPage, R = " + R.ToString() + "\n";
 
@@ -237,7 +243,6 @@ namespace vcs_test_all_05_Print3
                 e.Graphics.DrawLine(Pens.Blue, leftmargin, PrintPageHeight - topmargin - buttommargin, PrintPageWidth - leftmargin - rightmargin, PrintPageHeight - topmargin - buttommargin);
                 e.Graphics.DrawLine(Pens.Cyan, PrintPageWidth - leftmargin - rightmargin, topmargin, PrintPageWidth - leftmargin - rightmargin, PrintPageHeight - topmargin - buttommargin);
 
-                //#region 打印
                 int intPrintRows = currentpageindex * intRows;//当前页最后一条记录的索引
                 //计算行高度
                 rowgap = Convert.ToInt32((PrintPageHeight - topmargin - buttommargin - 5 * intRows) / intRows) + 3;
@@ -246,9 +251,10 @@ namespace vcs_test_all_05_Print3
                 {
                     if (i <= R - 2)
                     {
-                        richTextBox1.Text += "i = " + i.ToString() + "\t" + dataGridView1.Rows[i].Cells[0].Value.ToString() + "\t" +
-    dataGridView1.Rows[i].Cells[1].Value.ToString() + "\t" +
-    dataGridView1.Rows[i].Cells[2].Value.ToString() + "\n";
+                        richTextBox1.Text += "i = " + i.ToString() + "\t" +
+                            dataGridView1.Rows[i].Cells[0].Value.ToString() + "\t" +
+                            dataGridView1.Rows[i].Cells[1].Value.ToString() + "\t" +
+                            dataGridView1.Rows[i].Cells[2].Value.ToString() + "\n";
 
                         e.Graphics.DrawString(dataGridView1.Rows[i].Cells[0].Value.ToString(),
                             myFont, myBrush, leftmargin + 5, topmargin + j * rowgap + 5);
@@ -270,6 +276,7 @@ namespace vcs_test_all_05_Print3
                         j++;//记数器
                     }
                 }
+
                 currentpageindex++;//下一页的页码
                 if (currentpageindex <= intPage)//如果当前页不是最后一页
                 {
@@ -280,7 +287,6 @@ namespace vcs_test_all_05_Print3
                     e.HasMorePages = false;//不打印副页
                     currentpageindex = 1;//当前打印的页编号设为1
                 }
-                //#endregion
             }
         }
 
@@ -292,27 +298,6 @@ namespace vcs_test_all_05_Print3
         // 設置分頁
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (textBox1.Text != "")
-            {
-                if (e.KeyChar == 13)
-                {
-                    int R = dataGridView1.Rows.Count;
-                    richTextBox1.Text += "資料總數 : " + R.ToString() + " 行\n";
-
-                    intRows = Convert.ToInt32(textBox1.Text);
-                    EndRows = (R - 2) % intRows;//去掉标题和最后一行的空行
-                    if (EndRows > 0)
-                    {
-                        intPage = Convert.ToInt32((R - 2) / intRows) + 1;
-                    }
-                    else
-                    {
-                        intPage = Convert.ToInt32((R - 2) / intRows);
-                    }
-                    richTextBox1.Text += "每頁行數 : " + intRows.ToString() + " 行\n";
-                    richTextBox1.Text += "總頁數 : " + intPage.ToString() + " 頁\n";
-                }
-            }
         }
 
         //------------------------------------------------------------  # 60個

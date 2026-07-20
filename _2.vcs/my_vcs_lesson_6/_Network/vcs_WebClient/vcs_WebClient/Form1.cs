@@ -1100,9 +1100,7 @@ namespace vcs_WebClient
 
     public static class StarSignsUtil
     {
-        /// <summary>
-        /// 紀錄星座資料的模型
-        /// </summary>
+        // 紀錄星座資料的模型
         public class StarSignInfo
         {
             public string Title { get; set; }
@@ -1110,9 +1108,7 @@ namespace vcs_WebClient
             public string DateRange { get; set; }
         }
 
-        /// <summary>
-        /// 查詢後的回應資料
-        /// </summary>
+        // 查詢後的回應資料
         public class FateResult
         {
             public StarSignInfo StarSign { get; set; }
@@ -1127,9 +1123,7 @@ namespace vcs_WebClient
             }
         }
 
-        /// <summary>
-        /// 星座資料
-        /// </summary>
+        // 星座資料
         public static System.Collections.Generic.List<StarSignInfo> Datas { get; set; }
 
         //Ctor
@@ -1194,7 +1188,6 @@ namespace vcs_WebClient
             {
                 if (match.Success)
                 {
-
                     var v = match.Groups["VALUE"].Value.Trim();
 
                     if (!string.IsNullOrEmpty(v))
@@ -1242,8 +1235,8 @@ namespace vcs_WebClient
         private void SendGETRequest(string url)
         {
             WebClient wc = new WebClient();  // 建立 WebClient
-                // DownloadStringAsync  // 異步下載頁面
-                wc.DownloadStringAsync(new Uri(url));
+            // DownloadStringAsync  // 異步下載頁面
+            wc.DownloadStringAsync(new Uri(url));
         }
 */
 
@@ -1251,15 +1244,11 @@ namespace vcs_WebClient
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
 /*
-MemoryStream image_stream = new MemoryStream(wc.DownloadData(url));
-
-//------------------------------------------------------------  # 60個
 
 Stream stream = client.OpenRead(URLAddress);
 
@@ -1274,42 +1263,42 @@ client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 
             //string url_file = @"http://antwrp.gsfc.nasa.gov/apod/";
 
             WebClient wc = new WebClient();  // 建立 WebClient
-                    // Get the response string from the URL.
-                    //richTextBox1.Text += str + "\n";
-                    richTextBox1.Text += "抓網頁資料到記憶體\tOK\n";
+            // Get the response string from the URL.
+            //richTextBox1.Text += str + "\n";
+            richTextBox1.Text += "抓網頁資料到記憶體\tOK\n";
             
             string url_file2 = @"http://snowball.tartarus.org/otherlangs/english_cpp.txt";
             //string url_file2 = @"https://apod.nasa.gov/apod/image/2103/VolcanoStars_Vella_1080.jpg";
             WebClient wc = new WebClient();  // 建立 WebClient
-                    // Get the response string from the URL.
-                    //string filename_local = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
-                    int pos1 = url_file2.LastIndexOf('/');
-                    int pos2 = url_file2.LastIndexOf('.');
-                    string filename_local = url_file2.Substring(pos1 + 1, pos2 - pos1 - 1) + DateTime.Now.ToString("_yyyyMMdd_HHmmss") + url_file2.Substring(pos2);
-                    richTextBox1.Text += "下載檔案, 本地檔案檔名 : " + filename_local + "\n";
+            // Get the response string from the URL.
+            //string filename_local = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
+            int pos1 = url_file2.LastIndexOf('/');
+            int pos2 = url_file2.LastIndexOf('.');
+            string filename_local = url_file2.Substring(pos1 + 1, pos2 - pos1 - 1) + DateTime.Now.ToString("_yyyyMMdd_HHmmss") + url_file2.Substring(pos2);
+            richTextBox1.Text += "下載檔案, 本地檔案檔名 : " + filename_local + "\n";
 
-                    richTextBox1.Text += "抓網頁資料到本地檔案\tOK\n";
+            richTextBox1.Text += "抓網頁資料到本地檔案\tOK\n";
             
             string url_weather = @"http://api.openweathermap.org/data/2.5/weather?q=Hsinchu&mode=xml&units=imperial&APPID=e8edf79325ae8948a635efd0e076a8bc";
             WebClient wc = new WebClient();  // 建立 WebClient
-                    // Get the response string from the URL.
-                    //richTextBox1.Text += "data\n" + str + "\n";
-                    richTextBox1.Text += "抓網頁查詢資料到記憶體\tOK\n";
+            // Get the response string from the URL.
+            //richTextBox1.Text += "data\n" + str + "\n";
+            richTextBox1.Text += "抓網頁查詢資料到記憶體\tOK\n";
 
 //------------------------------------------------------------  # 60個
             
 private void button1_Click(object sender, EventArgs e)
 {
-	//加入這段語法忽略憑證
-	//ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+        //加入這段語法忽略憑證
+        //ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
 
-	string url_file1 = @"http://snowball.tartarus.org/otherlangs/english_cpp.txt";
-	//string url_file = @"http://antwrp.gsfc.nasa.gov/apod/";
+        string url_file1 = @"http://snowball.tartarus.org/otherlangs/english_cpp.txt";
+        //string url_file = @"http://antwrp.gsfc.nasa.gov/apod/";
 	
-	WebClient wc = new WebClient();  // 建立 WebClient
-	// Get the response string from the URL.
-	//richTextBox1.Text += data + "\n";
-	richTextBox1.Text += "抓網頁資料到記憶體\tOK\n";
+        WebClient wc = new WebClient();  // 建立 WebClient
+        // Get the response string from the URL.
+        //richTextBox1.Text += data + "\n";
+        richTextBox1.Text += "抓網頁資料到記憶體\tOK\n";
 }
 
 string url_file2 = @"http://snowball.tartarus.org/otherlangs/english_cpp.txt";
@@ -1333,18 +1322,16 @@ richTextBox1.Text += "抓網頁查詢資料到記憶體\tOK\n";
 
 //------------------------------------------------------------  # 60個
 
-BTW, if the HtmlNode has a “ID”, like “<div id='post_list'>value</div>”, call GetElementbyId() is OK for getting the HtmlNode, then get the value by HtmlNode.InnerText or HtmlNode.Attribute.
+BTW, if the HtmlNode has a “ID”, like “<div id='post_list'>value</div>”,
+call GetElementbyId() is OK for getting the HtmlNode,
+then get the value by HtmlNode.InnerText or HtmlNode.Attribute.
 
-Please see the following C# code snippet.
-
-Code snippet:
-
- //get HtmlAgilityPack.HtmlDocument object   
- HtmlDocument doc = new HtmlDocument();  
- //load HTML   
+//get HtmlAgilityPack.HtmlDocument object   
+HtmlDocument doc = new HtmlDocument();  
+//load HTML   
 doc.LoadHtml(pageSource);         
 //get HtmlNode by ID   
- HtmlNode navNode = doc.GetElementbyId("post_list");	//測這個
+HtmlNode navNode = doc.GetElementbyId("post_list");	//測這個
 
 //------------------------------------------------------------  # 60個
 
