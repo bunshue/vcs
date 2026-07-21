@@ -267,73 +267,6 @@ namespace vcs_Draw6_String4
             e.Finish();
         }
 
-        private void bt_font_size_10_Click(object sender, EventArgs e)
-        {
-            font_size = 10;
-            font = new Font(font.Name, font_size);
-
-            //lb_moving1.Font.Size = 10F;
-            //this.comboBox_drive.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-        }
-
-        private void bt_font_size_20_Click(object sender, EventArgs e)
-        {
-            font_size = 20;
-            font = new Font(font.Name, font_size);
-        }
-
-        private void bt_font_size_30_Click(object sender, EventArgs e)
-        {
-            font_size = 30;
-            font = new Font(font.Name, font_size);
-        }
-
-        private void bt_font_size_40_Click(object sender, EventArgs e)
-        {
-            font_size = 40;
-            font = new Font(font.Name, font_size);
-        }
-
-        private void bt_font_size_50_Click(object sender, EventArgs e)
-        {
-            font_size = 50;
-            font = new Font(font.Name, font_size);
-        }
-
-        private void bt_font_size_minus_Click(object sender, EventArgs e)
-        {
-            font_size = font.Size;
-            if (font_size > 5)
-            {
-                font_size--;
-                //字體變小
-                font = new Font(font.Name, font_size);
-            }
-        }
-
-        private void bt_font_size_plus_Click(object sender, EventArgs e)
-        {
-            font_size = font.Size;
-            if (font_size < 100)
-            {
-                font_size++;
-                //字體變大
-                font = new Font(font.Name, font_size);
-            }
-        }
-
-        private void bt_fontname1_Click(object sender, EventArgs e)
-        {
-            SelectFont = 1;
-            font = new Font("標楷體", font_size);
-        }
-
-        private void bt_fontname2_Click(object sender, EventArgs e)
-        {
-            SelectFont = 2;
-            font = new Font("新細明體", font_size);
-        }
-
         private void bt_font_setup_Click(object sender, EventArgs e)
         {
             fontDialog1.ShowApply = true;
@@ -443,29 +376,6 @@ namespace vcs_Draw6_String4
             }
         }
 
-        private void bt_speed_minus_Click(object sender, EventArgs e)
-        {
-            timer1.Interval += 5;
-
-            if (moving_steps > 5)
-            {
-                moving_steps -= 5;
-            }
-        }
-
-        private void bt_speed_plus_Click(object sender, EventArgs e)
-        {
-            if (timer1.Interval > 5)
-            {
-                timer1.Interval -= 5;
-            }
-
-            if (moving_steps < 100)
-            {
-                moving_steps += 5;
-            }
-        }
-
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             showing_text = textBox1.Text;
@@ -491,20 +401,6 @@ namespace vcs_Draw6_String4
             richTextBox1.Text += "tmp_width = " + tmp_width.ToString() + "  tmp_height = " + tmp_height.ToString() + "\n";
 
             return;
-        }
-
-        private void bt_background_color_Click(object sender, EventArgs e)
-        {
-            colorDialog1.AllowFullOpen = true;  //可以使用該對話框定義自定義顏色
-            colorDialog1.AnyColor = true;      			//顯示基本顏色集中可用的所有顏色
-            colorDialog1.FullOpen = true;      //創建自定義顏色的控件在對話框打開時是可見的
-            colorDialog1.SolidColorOnly = false;			//不限制只選擇純色
-            if (colorDialog1.ShowDialog() == DialogResult.OK)   //彈出對話框
-            {
-                pictureBox1.BackColor = colorDialog1.Color;
-                background_color = colorDialog1.Color;
-                //richTextBox1.SelectionBackColor = colorDialog1.Color;
-            }
         }
 
         private void bt_open_picture_Click(object sender, EventArgs e)
@@ -678,11 +574,11 @@ namespace vcs_Draw6_String4
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-/*
+//lb_moving1.Font.Size = 10F;
+//this.comboBox_drive.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
 
-*/
+

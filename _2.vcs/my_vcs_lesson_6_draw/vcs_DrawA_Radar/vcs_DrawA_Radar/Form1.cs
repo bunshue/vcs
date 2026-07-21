@@ -27,6 +27,10 @@ namespace vcs_DrawA_Radar
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
             Cars = new List<CarData>();
             Cars.Add(new CarData("Audi e-tron", Color.Red, 69850, 80900, 8.4f, 218, 100f / 44));
             Cars.Add(new CarData("Jaguar I-PACE", Color.Green, 39090, 44590, 8.2f, 234, 100f / 30));
@@ -39,6 +43,33 @@ namespace vcs_DrawA_Radar
             AxisInfos.Add(new AxisInfo("Range", "0", 0, 300));
             AxisInfos.Add(new AxisInfo("Miles/kWh", "0.00", 0, 5));
         }
+
+        void show_item_location()
+        {
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+
+            richTextBox1.Size = new Size(300, 690);
+            richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1273, 750);
+            this.Text = "vcs_test_all_00_Usually";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //6060
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
@@ -262,6 +293,7 @@ namespace vcs_DrawA_Radar
             // Draw the axes.
             DrawCharts(e.Graphics, chkFillAreas.Checked);
         }
+
     }
 
     //------------------------------------------------------------  # 60個
@@ -299,13 +331,7 @@ namespace vcs_DrawA_Radar
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
 

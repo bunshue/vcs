@@ -97,10 +97,8 @@ namespace vcs_Encoding
         {
             int i;
             string text = "ABC密碼錯誤";
-            richTextBox1.Text += "原資料 : " + text + "\t";
             int len = text.Length;
-
-            richTextBox1.Text += "長度 : " + len.ToString() + "\n";
+            richTextBox1.Text += "原資料 : " + text + "\t長度 : " + len.ToString() + "\n";
             for (i = 0; i < len; i++)
             {
                 richTextBox1.Text += text[i].ToString() + "\n";
@@ -112,66 +110,52 @@ namespace vcs_Encoding
             byteArray = Encoding.ASCII.GetBytes(text);  // 使用ASCII編碼將字串轉拜列
             len = byteArray.Length;
             richTextBox1.Text += "長度 : " + len.ToString() + "\n";
-            for (i = 0; i < len; i++)
-            {
-                richTextBox1.Text += byteArray[i].ToString() + "\n";
-            }
+
+            PrintHexBytes(byteArray);
 
             richTextBox1.Text += "Default 編碼 = Big5編碼\t";
             byteArray = Encoding.Default.GetBytes(text);  // 使用預設編碼將字串轉拜列
             len = byteArray.Length;
             richTextBox1.Text += "長度 : " + len.ToString() + "\n";
-            for (i = 0; i < len; i++)
-            {
-                richTextBox1.Text += byteArray[i].ToString() + "\n";
-            }
+
+            PrintHexBytes(byteArray);
 
             richTextBox1.Text += "Big5編碼 :\t";
             richTextBox1.Text += "使用big5將字串轉拜列\n";
             byteArray = Encoding.GetEncoding("big5").GetBytes(text);  // 使用big5將字串轉拜列
             len = byteArray.Length;
             richTextBox1.Text += "長度 : " + len.ToString() + "\n";
-            for (i = 0; i < len; i++)
-            {
-                richTextBox1.Text += byteArray[i].ToString() + "\n";
-            }
+
+            PrintHexBytes(byteArray);
 
             richTextBox1.Text += "gb2312編碼 :\t";
             richTextBox1.Text += "使用gb2312將字串轉拜列\n";
             byteArray = Encoding.GetEncoding("gb2312").GetBytes(text);  // 使用gb2312將字串轉拜列
             len = byteArray.Length;
             richTextBox1.Text += "長度 : " + len.ToString() + "\n";
-            for (i = 0; i < len; i++)
-            {
-                richTextBox1.Text += byteArray[i].ToString() + "\n";
-            }
+
+            PrintHexBytes(byteArray);
 
             richTextBox1.Text += "Unicode編碼 = utf-16 編碼\t";
             byteArray = Encoding.GetEncoding("unicode").GetBytes(text);  // 字串轉拜列
             len = byteArray.Length;
             richTextBox1.Text += "長度 : " + len.ToString() + "\n";
-            for (i = 0; i < len; i++)
-            {
-                richTextBox1.Text += byteArray[i].ToString() + "\n";
-            }
+
+            PrintHexBytes(byteArray);
 
             richTextBox1.Text += "utf-16 編碼 :\t";
             byteArray = Encoding.GetEncoding("utf-16").GetBytes(text);  // 字串轉拜列
             len = byteArray.Length;
             richTextBox1.Text += "長度 : " + len.ToString() + "\n";
-            for (i = 0; i < len; i++)
-            {
-                richTextBox1.Text += byteArray[i].ToString() + "\n";
-            }
+
+            PrintHexBytes(byteArray);
 
             richTextBox1.Text += "使用UTF8將字串轉拜列 :\t";
             byteArray = Encoding.UTF8.GetBytes(text);  // 使用UTF8將字串轉拜列
             len = byteArray.Length;
             richTextBox1.Text += "長度 : " + len.ToString() + "\n";
-            for (i = 0; i < len; i++)
-            {
-                richTextBox1.Text += byteArray[i].ToString() + "\n";
-            }
+
+            PrintHexBytes(byteArray);
         }
 
         private void button1_Click(object sender, EventArgs e)

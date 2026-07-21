@@ -1177,8 +1177,6 @@ namespace vcs_Draw_Example1
                 g.DrawString((-i).ToString(), f, brush, new PointF(pCenter.X, pCenter.Y + iX * i));
             }
 
-            StringFormat sf = new StringFormat();
-            sf.Alignment = StringAlignment.Far;
             g.DrawString("x", f, brush, new PointF(pCenter.X + 200, pCenter.Y));
             g.DrawString("y", f, brush, new PointF(pCenter.X, pCenter.Y - 200));
             g.DrawString("0", f, brush, new PointF(pCenter.X, pCenter.Y));
@@ -1316,16 +1314,14 @@ namespace vcs_Draw_Example1
             eachSubTreeCount.Add(3);
             eachSubTreeCount.Add(2);
 
-            //定義一些畫圖需要的初始變量
-
             int midCountFlag = 0;   //畫中間結點時用到的偏移量 
             int subCountFlag = 0;   //畫頂層結點時用到的偏移量 
             int x = 0;              //結點矩形圖左上角X坐標 
             int y = 0;              //結點矩形圖左上角Y坐標 
             int picX = pictureBox1.Width;   //繪圖區域水平長度 
             int picY = pictureBox1.Height;  //繪圖區域豎直長度 
-            StringFormat sf = new StringFormat();
-            sf.Alignment = StringAlignment.Center;
+            StringFormat string_format = new StringFormat();
+            string_format.Alignment = StringAlignment.Center;
             Rectangle rect;         //結點矩形圖 
             Point loc;              //結點矩形圖左上角坐標 
             Point startP;           //連接線起始坐標 
@@ -1334,8 +1330,9 @@ namespace vcs_Draw_Example1
             SizeF sizeF;            //結點內容尺寸大小 
             Size s;
             Font f = new Font("宋體", 18);     //結點內容的字體 
-            Pen redPen = new Pen(Color.Red, 2);   //連線需要的畫筆 
+            Pen redPen = new Pen(Color.Red, 2);   //連線需要的畫筆
             Graphics g = this.pictureBox1.CreateGraphics();
+
             g.Clear(Color.White);         //每次重繪先把繪圖區域清空 
 
             //先把根部畫出來。
@@ -1352,7 +1349,7 @@ namespace vcs_Draw_Example1
 
             rect = new Rectangle(loc, s);
             g.DrawRectangle(Pens.Black, rect);
-            g.DrawString(parentTree, f, Brushes.Black, rect, sf);
+            g.DrawString(parentTree, f, Brushes.Black, rect, string_format);
             //#endregion
 
             //再把樹根的子樹畫出來。
@@ -1374,12 +1371,14 @@ namespace vcs_Draw_Example1
 
                 rect = new Rectangle(loc, s);
                 g.DrawRectangle(Pens.Black, rect);
-                g.DrawString(strMidTree, f, Brushes.Black, rect, sf);
+                g.DrawString(strMidTree, f, Brushes.Black, rect, string_format);
                 g.DrawLine(redPen, startP, endP);
 
                 midCountFlag++;
                 if (midCountFlag == 1)
+                {
                     tempP = new Point(endP.X, endP.Y + s.Height);
+                }
             }
             //#endregion
 
@@ -1394,10 +1393,11 @@ namespace vcs_Draw_Example1
                 int picXMid = picX / midTreeCount;
                 startP.X += picXMid * i;
                 if (i >= 1)
+                {
                     subCountFlag += (int)eachSubTreeCount[i - 1];
+                }
                 for (int j = 0; j != (int)eachSubTreeCount[i]; ++j)
                 {
-
                     int picXSub = picX / (midTreeCount * (int)eachSubTreeCount[i]);
 
                     string strSubTree = subTree[j + subCountFlag].ToString();
@@ -1412,7 +1412,7 @@ namespace vcs_Draw_Example1
 
                     rect = new Rectangle(loc, s);
                     g.DrawRectangle(Pens.Black, rect);
-                    g.DrawString(strSubTree, f, Brushes.Black, rect, sf);
+                    g.DrawString(strSubTree, f, Brushes.Black, rect, string_format);
                     g.DrawLine(redPen, startP, endP);
                 }
             }
@@ -1463,7 +1463,6 @@ namespace vcs_Draw_Example1
                 {
                     //直線
                     g.DrawLine(Pens.LightGray, i, 0, i, H);
-
                 }
                 for (j = 0; j <= H; j += 50)
                 {
@@ -1479,7 +1478,6 @@ namespace vcs_Draw_Example1
             for (i = 0; i < len; i++)
             {
                 richTextBox1.Text += points[i].ToString() + " ";
-
             }
             richTextBox1.Text += "\n\n";
 
@@ -1491,15 +1489,21 @@ namespace vcs_Draw_Example1
             for (i = 0; i < len; i++)
             {
                 if (x_max < points[i].X)
+                {
                     x_max = points[i].X;
+                }
                 if (x_min > points[i].X)
+                {
                     x_min = points[i].X;
-
+                }
                 if (y_max < points[i].Y)
+                {
                     y_max = points[i].Y;
+                }
                 if (y_min > points[i].Y)
+                {
                     y_min = points[i].Y;
-
+                }
             }
             richTextBox1.Text += "x_max = " + x_max.ToString() + "\n";
             richTextBox1.Text += "x_min = " + x_min.ToString() + "\n";
@@ -1555,7 +1559,6 @@ namespace vcs_Draw_Example1
                 g.DrawString(x_max.ToString(), new Font("標楷體", 10), new SolidBrush(Color.Black), p2.X - 15, p2.Y + 5);
 
                 //要畫 0
-
             }
 
             if ((x_max > 0) && (x_min < 0))
@@ -1653,7 +1656,9 @@ namespace vcs_Draw_Example1
             for (int index = 0; index < pattern.Count; index++)
             {
                 if (flag_running == false)
+                {
                     continue;
+                }
                 //richTextBox1.Text += "index = " + index.ToString() + " ";
                 draw_frame_style_index(pattern, x_st + dx * 0, y_st + dy * 0, step, index);
                 pictureBox1.Image = bitmap1;
@@ -1728,9 +1733,7 @@ namespace vcs_Draw_Example1
             int x_sp = 0;
             int y_sp = 0;
             int offset = 10;
-
             int h_st = height;
-
             int[] x_data = new int[21];
             int[] y_data = new int[21];
             Point point0;
@@ -1754,8 +1757,8 @@ namespace vcs_Draw_Example1
             Point point18;
             Point point19;
             Point point20;
-
             int dx = 22;
+
             y_st = h + H + h + title_size3 + h;
 
             if ((draw_case == 1) || (draw_case == 2))
@@ -2102,7 +2105,6 @@ namespace vcs_Draw_Example1
             }
             else if (draw_case == 6)
             {
-
                 x_data[0] = dx * 0; y_data[0] = y_st;
                 x_data[1] = dx * 1; y_data[1] = y_st;
                 x_data[2] = dx * 2; y_data[2] = y_st;
@@ -2212,7 +2214,6 @@ namespace vcs_Draw_Example1
                 x_sp = dx * 18 + 3;
                 y_sp = h_st - (h + H + h + title_size3 + h + offset + (H - offset * 2));
                 g.DrawLine(ArrowPen, x_st, y_st, x_sp, y_sp);
-
             }
             else if (draw_case == 5)
             {
@@ -2226,7 +2227,6 @@ namespace vcs_Draw_Example1
                 x_sp = dx * 5;
                 y_sp = h_st - (h + H + h + title_size3 + h + offset + (H - offset * 2));
                 g.DrawLine(ArrowPen, x_st, y_st, x_sp, y_sp);
-
             }
 
             ArrowPen = new Pen(Color.Blue, 6);   //重新設定pp的線條樣式
@@ -2259,7 +2259,6 @@ namespace vcs_Draw_Example1
             }
             else if (draw_case == 2)
             {
-
                 y_st = h_st - (h + offset);
                 y_sp = h_st - (h + offset + (H - offset * 2));
 
@@ -2310,9 +2309,13 @@ namespace vcs_Draw_Example1
                         g.DrawLine(ArrowPen, x_st, y_st, x_sp, y_sp);
                     }
                     if (i == 1)
+                    {
                         x_st2 = x_st;
+                    }
                     if (i == 2)
+                    {
                         x_sp2 = x_st;
+                    }
                 }
 
                 ArrowPen = new Pen(Color.Red, 5);   //重新設定pp的線條樣式
@@ -2323,7 +2326,6 @@ namespace vcs_Draw_Example1
 
                 g.DrawString("1 sec", new Font("Times New Roman", 17), new SolidBrush(Color.Red), new PointF(x_st2 + 40, y_st2 + 5));
                 g.DrawString("Conflict!", new Font("Times New Roman", 17), new SolidBrush(Color.Red), new PointF(315, y_st2 - 55));
-
             }
             else if (draw_case == 4)
             {
@@ -2349,8 +2351,6 @@ namespace vcs_Draw_Example1
             else if (draw_case == 5)
             {
 
-
-
             }
             else if (draw_case == 6)
             {
@@ -2368,8 +2368,6 @@ namespace vcs_Draw_Example1
 
                 g.DrawString("Detect OK Signal", new Font("Times New Roman", 17), new SolidBrush(Color.Red), new PointF(x_st2 + 10, y_st2 - H / 2 - 30));
 
-
-
                 ArrowPen = new Pen(Color.Black, 5);   //重新設定pp的線條樣式
                 ArrowPen.StartCap = LineCap.ArrowAnchor;
                 ArrowPen.EndCap = LineCap.ArrowAnchor;
@@ -2377,16 +2375,11 @@ namespace vcs_Draw_Example1
                 richTextBox1.Text += "x_st2 = " + x_st2.ToString() + "x_sp2 = " + x_sp2.ToString() + "\n";
 
                 g.DrawString("0.2 sec", new Font("Times New Roman", 17), new SolidBrush(Color.Red), new PointF(x_st2 + 120, y_st2 - H / 2 + 25));
-
-
-
             }
 
             int offset2 = 15;
-            SolidBrush sb;
-            Font f;
-            f = new Font("Times New Roman", 17);
-            sb = new SolidBrush(Color.Purple);
+            Font f = new Font("Times New Roman", 17);
+            SolidBrush sb = new SolidBrush(Color.Purple);
             if ((draw_case == 1) || (draw_case == 2))
             {
                 g.DrawString("IE Insert Bouncing", f, sb, new PointF(0, h + offset2));
@@ -2433,7 +2426,6 @@ namespace vcs_Draw_Example1
                 g.DrawString("Real Pedal Bouncing", f, sb, new PointF(0, h + title_size1 + offset2));
             }
 
-
             f = new Font("Times New Roman", 17);
             sb = new SolidBrush(Color.Blue);
             if (draw_case == 1)
@@ -2463,7 +2455,6 @@ namespace vcs_Draw_Example1
             int allow = 0;
 
             //richTextBox1.Text += "W = " + this.pictureBox1.Width.ToString() + " H = " + this.pictureBox1.Height.ToString() + "\n";
-
             //Graphics g = pictureBox1.CreateGraphics();
             //g.Clear(Color.White);
             //DrawXY();
@@ -2608,10 +2599,22 @@ namespace vcs_Draw_Example1
             float wymax = wymin;
             foreach (PointF point in points)
             {
-                if (wxmin > point.X) wxmin = point.X;
-                if (wxmax < point.X) wxmax = point.X;
-                if (wymin > point.Y) wymin = point.Y;
-                if (wymax < point.Y) wymax = point.Y;
+                if (wxmin > point.X)
+                {
+                    wxmin = point.X;
+                }
+                if (wxmax < point.X)
+                {
+                    wxmax = point.X;
+                }
+                if (wymin > point.Y)
+                {
+                    wymin = point.Y;
+                }
+                if (wymax < point.Y)
+                {
+                    wymax = point.Y;
+                }
             }
 
             // Make the world coordinate rectangle.
@@ -2668,16 +2671,6 @@ namespace vcs_Draw_Example1
 
         private void button13_Click(object sender, EventArgs e)
         {
-            //直書橫書
-            Font f = new Font("隸書", 17);
-            StringFormat format = new StringFormat();
-            format.FormatFlags = StringFormatFlags.DirectionVertical;
-
-            g.DrawString("三杯祝福歌", f, Brushes.Black, 250, 30, format);
-            g.DrawString("一曲迎春調", f, Brushes.Black, 20, 30, format);
-            g.DrawString("迎春祝福", f, Brushes.Black, 100, 0);
-
-            pictureBox1.Image = bitmap1;
         }
 
         //------------------------------------------------------------  # 60個
@@ -2743,7 +2736,6 @@ namespace vcs_Draw_Example1
                     if ((R >= upper_bound) && (G >= upper_bound) && (B >= upper_bound))
                     {
                         saturation_array[((i - x_st) / awb_block) + (((j - y_st) / awb_block)) * (search_size / awb_block)]++;
-
                     }
                 }
             }
@@ -2836,16 +2828,18 @@ namespace vcs_Draw_Example1
 
             int rgb_max = 0;
 
-            richTextBox1.Text += "R = " + "\n";
+            richTextBox1.Text += "R =\n";
             for (i = 0; i < 16; i++)
             {
                 richTextBox1.Text += rgb_array[0, i].ToString() + " ";
                 if (rgb_max < rgb_array[0, i])
+                {
                     rgb_max = rgb_array[0, i];
+                }
             }
             richTextBox1.Text += "\n";
 
-            richTextBox1.Text += "G = " + "\n";
+            richTextBox1.Text += "G =\n";
             for (i = 0; i < 16; i++)
             {
                 richTextBox1.Text += rgb_array[1, i].ToString() + " ";
@@ -2854,12 +2848,14 @@ namespace vcs_Draw_Example1
             }
             richTextBox1.Text += "\n";
 
-            richTextBox1.Text += "B = " + "\n";
+            richTextBox1.Text += "B =\n";
             for (i = 0; i < 16; i++)
             {
                 richTextBox1.Text += rgb_array[2, i].ToString() + " ";
                 if (rgb_max < rgb_array[2, i])
+                {
                     rgb_max = rgb_array[2, i];
+                }
             }
             richTextBox1.Text += "\n";
             richTextBox1.Text += "rgb_max = " + rgb_max.ToString() + "\n";
@@ -2873,8 +2869,7 @@ namespace vcs_Draw_Example1
             int height = 300;
             int h = 0;
             richTextBox1.Text += "normalize\n";
-
-            richTextBox1.Text += "R = " + "\n";
+            richTextBox1.Text += "R =\n";
             for (i = 0; i < 16; i++)
             {
                 h = (int)((double)rgb_array[0, i] * height / rgb_max);
@@ -2890,7 +2885,7 @@ namespace vcs_Draw_Example1
             }
             richTextBox1.Text += "\n";
 
-            richTextBox1.Text += "G = " + "\n";
+            richTextBox1.Text += "G =\n";
             for (i = 0; i < 16; i++)
             {
                 h = (int)((double)rgb_array[1, i] * height / rgb_max);
@@ -2903,7 +2898,7 @@ namespace vcs_Draw_Example1
             }
             richTextBox1.Text += "\n";
 
-            richTextBox1.Text += "B = " + "\n";
+            richTextBox1.Text += "B =\n";
             for (i = 0; i < 16; i++)
             {
                 h = (int)((double)rgb_array[2, i] * height / rgb_max);
@@ -3160,26 +3155,23 @@ namespace vcs_Draw_Example1
         }
 
         //通過系統Graphics繪圖把文字繪製到位圖上，然後顯示或保存起來，這裡用定義該函數
-        /// <summary>
-        /// 把文字轉換才Bitmap
-        /// </summary>
+        // 把文字轉換成Bitmap
         /// <param name="text"></param>
         /// <param name="font"></param>
         /// <param name="rect">用於輸出的矩形，文字在這個矩形內顯示，為空時自動計算</param>
         /// <param name="fontcolor">字體顏色</param>
         /// <param name="backColor">背景顏色</param>
-        /// <returns></returns>
         private Bitmap TextToBitmap(string text, Font f, Rectangle rect, Color fontcolor, Color backColor)
         {
             Graphics g;
             Bitmap bitmap1;
-            StringFormat format = new StringFormat(StringFormatFlags.NoClip);
+            StringFormat string_format = new StringFormat(StringFormatFlags.NoClip);
             if (rect == Rectangle.Empty)
             {
                 bitmap1 = new Bitmap(1, 1);
                 g = Graphics.FromImage(bitmap1);
                 //計算繪製文字所需的區域大小（根據寬度計算長度），重新創建矩形區域繪圖
-                SizeF sizef = g.MeasureString(text, f, PointF.Empty, format);
+                SizeF sizef = g.MeasureString(text, f, PointF.Empty, string_format);
 
                 int W = (int)(sizef.Width + 1);
                 int H = (int)(sizef.Height + 1);
@@ -3198,7 +3190,7 @@ namespace vcs_Draw_Example1
             //使用ClearType字體功能
             g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
             g.FillRectangle(new SolidBrush(backColor), rect);
-            g.DrawString(text, f, Brushes.Black, rect, format);
+            g.DrawString(text, f, Brushes.Black, rect, string_format);
             return bitmap1;
         }
 
@@ -3274,33 +3266,6 @@ namespace vcs_Draw_Example1
 
         private void button19_Click(object sender, EventArgs e)
         {
-            //sinc
-            g.DrawRectangle(Pens.Red, 0, 0, 600, 600);
-            g.DrawLine(Pens.Red, 300, 0, 300, 600);
-            g.DrawLine(Pens.Red, 0, 300, 600, 300);
-
-            Pen pen = new Pen(Color.Blue, 2);
-
-            int centerX = 600 / 2;
-            int centerY = 600 / 2;
-            double scaleX = 20; // 每單位 x 對應像素
-            double scaleY = 200; // 每單位 y 對應像素
-
-            PointF? prevPoint = null;
-            for (double x = -10; x <= 10; x += 0.01)
-            {
-                double y = (x == 0) ? 1.0 : Math.Sin(x) / x;
-                float px = (float)(centerX + x * scaleX);
-                float py = (float)(centerY - y * scaleY);
-
-                PointF point = new PointF(px, py);
-                if (prevPoint != null)
-                    g.DrawLine(pen, prevPoint.Value, point);
-
-                prevPoint = point;
-            }
-
-            pictureBox1.Image = bitmap1;
         }
 
         //------------------------------------------------------------  # 60個
@@ -4800,10 +4765,13 @@ namespace vcs_Draw_Example1
             //設定畫布和邊
             g.Clear(Color.White);
             g.DrawRectangle(Pens.Black, 0, 0, SIDE_LENGTH - 1, SIDE_LENGTH - 1);
+
             //畫大標題
             g.DrawString(title, new Font("Tahoma", 24), Brushes.Black, new PointF(5, 5));
+
             //畫小標題
             g.DrawString(subTitle, new Font("Tahoma", 14), Brushes.Black, new PointF(7, 35));
+
             //畫條形圖
             float barWidth = CHART_WIDTH / (dt.Rows.Count * 2);
             PointF barOrigin = new PointF(CHART_LEFT + (barWidth / 2), 0);
@@ -4815,9 +4783,11 @@ namespace vcs_Draw_Example1
                 g.FillRectangle(new SolidBrush(ChartUtil.GetChartItemColor(i)), barOrigin.X, barOrigin.Y, barWidth, barHeight);
                 barOrigin.X = barOrigin.X + (barWidth * 2);
             }
+
             //設置邊
             g.DrawLine(new Pen(Color.Black, 2), new Point(CHART_LEFT, CHART_TOP), new Point(CHART_LEFT, CHART_TOP + CHART_HEIGHT));
             g.DrawLine(new Pen(Color.Black, 2), new Point(CHART_LEFT, CHART_TOP + CHART_HEIGHT), new Point(CHART_LEFT + CHART_WIDTH, CHART_TOP + CHART_HEIGHT));
+
             //畫圖例框和文字
             g.DrawRectangle(new Pen(Color.Black, 1), 200, 300, 199, 99);
             g.DrawString("Legend", new Font("Tahoma", 12, FontStyle.Bold), Brushes.Black, new PointF(200, 300));
@@ -6747,14 +6717,13 @@ namespace vcs_Draw_Example1
                 j_st = j_next;
                 FindNeighborPoint(array, i_st, j_st, out i_next, out j_next);
                 Points.Add(new Point(i_next, j_next));
-                richTextBox1.Text += "i_next = " + i_next.ToString() + "\t" + "j_next = " + j_next.ToString() + "\n";
+                richTextBox1.Text += "i_next = " + i_next.ToString() + "\tj_next = " + j_next.ToString() + "\n";
                 array[i_next, j_next] = 0;
             }
         }
 
         void FindNeighborPoint(int[,] array, int i_st, int j_st, out int i_next, out int j_next)
         {
-            //int i;
             int len = array.Length;
             i_next = int.MaxValue;
             j_next = int.MinValue;
@@ -6798,7 +6767,6 @@ namespace vcs_Draw_Example1
                 i_next = i;
                 j_next = j;
                 return;
-
             }
             //richTextBox1.Text += "\n";
 
@@ -6815,7 +6783,6 @@ namespace vcs_Draw_Example1
                 i_next = i;
                 j_next = j;
                 return;
-
             }
             //richTextBox1.Text += "\n";
 
@@ -6832,7 +6799,6 @@ namespace vcs_Draw_Example1
                 i_next = i;
                 j_next = j;
                 return;
-
             }
             //richTextBox1.Text += "\n";
 
@@ -6849,7 +6815,6 @@ namespace vcs_Draw_Example1
                 i_next = i;
                 j_next = j;
                 return;
-
             }
             //richTextBox1.Text += "\n";
 
@@ -6866,7 +6831,6 @@ namespace vcs_Draw_Example1
                 i_next = i;
                 j_next = j;
                 return;
-
             }
             //richTextBox1.Text += "\n";
 
@@ -6883,7 +6847,6 @@ namespace vcs_Draw_Example1
                 i_next = i;
                 j_next = j;
                 return;
-
             }
             //richTextBox1.Text += "\n";
 
@@ -6900,7 +6863,6 @@ namespace vcs_Draw_Example1
                 i_next = i;
                 j_next = j;
                 return;
-
             }
             //richTextBox1.Text += "\n";
         }
@@ -6927,18 +6889,19 @@ namespace vcs_Draw_Example1
             cx += dd;
             cy += dd;
             if (cx > 721)
+            {
                 cx = dd;
+            }
             if (cy > 721)
+            {
                 cy = dd;
+            }
             draw_contour(cx, cy);
         }
     }
 
     //------------------------------------------------------------  # 60個
 
-    /// <summary>
-    /// DrawingCurve 的摘要說明
-    /// </summary>
     public class DrawingCurve
     {
         public int intXLong = 800;   //圖片大小 長
@@ -7149,10 +7112,8 @@ namespace vcs_Draw_Example1
         private int intCurveSize = 2; //曲線線條大小
         private int intFontSpace = 0; //intFontSpace 是字體大小和距離調整出來的一個比較適合的數字
         //#region 公共屬性
-        /// <summary>
 
-        /// 圖像的寬度
-        /// </summary>
+        // 圖像的寬度
         public float Width
         {
             set
@@ -7179,9 +7140,7 @@ namespace vcs_Draw_Example1
             }
         }
 
-        /// <summary>
-        /// 圖像的高度
-        /// </summary>
+        // 圖像的高度
         public float Height
         {
             set
@@ -7208,47 +7167,35 @@ namespace vcs_Draw_Example1
             }
         }
 
-        /// <summary>
-        /// X軸刻度寬度
-        /// </summary>
+        // X軸刻度寬度
         public float XSlice
         {
             set { fltXSlice = value; }
             get { return fltXSlice; }
         }
 
-        /// <summary>
-        /// Y軸刻度寬度
-        /// </summary>
+        // Y軸刻度寬度
         public float YSlice
         {
             set { fltYSlice = value; }
             get { return fltYSlice; }
         }
 
-        /// <summary>
-        /// Y軸刻度的數值寬度
-        /// </summary>
-
-
+        // Y軸刻度的數值寬度
         public float YSliceValue
         {
             set { fltYSliceValue = value; }
             get { return fltYSliceValue; }
         }
 
-        /// <summary>
-        /// Y軸刻度開始值
-        /// </summary>
+        // Y軸刻度開始值
         public float YSliceBegin
         {
             set { fltYSliceBegin = value; }
             get { return fltYSliceBegin; }
         }
 
-        /// <summary>
-        /// 張力系數
-        /// </summary>
+        // 張力系數
         public float Tension
         {
             set
@@ -7268,18 +7215,14 @@ namespace vcs_Draw_Example1
             }
         }
 
-        /// <summary>
-        /// 標題
-        /// </summary>
+        // 標題
         public string Title
         {
             set { strTitle = value; }
             get { return strTitle; }
         }
 
-        /// <summary>
-        /// 鍵，X軸數據
-        /// </summary>
+        // 鍵，X軸數據
         public string[] Keys
         {
             set
@@ -7289,9 +7232,7 @@ namespace vcs_Draw_Example1
             get { return strsKeys; }
         }
 
-        /// <summary>
-        /// 值，Y軸數據
-        /// </summary>
+        // 值，Y軸數據
         public float[] Values
         {
             set { fltsValues = value; }
@@ -7301,9 +7242,7 @@ namespace vcs_Draw_Example1
             }
         }
 
-        /// <summary>
-        /// 背景色
-        /// </summary>
+        // 背景色
         public Color BgColor
         {
             set
@@ -7313,27 +7252,21 @@ namespace vcs_Draw_Example1
             get { return clrBgColor; }
         }
 
-        /// <summary>
-        /// 文字顏色
-        /// </summary>
+        // 文字顏色
         public Color TextColor
         {
             set { clrTextColor = value; }
             get { return clrTextColor; }
         }
 
-        /// <summary>
-        /// 整體邊框顏色
-        /// </summary>
+        // 整體邊框顏色
         public Color BorderColor
         {
             set { clrBorderColor = value; }
             get { return clrBorderColor; }
         }
 
-        /// <summary>
-        /// 軸線顏色
-        /// </summary>
+        // 軸線顏色
         public Color AxisColor
         {
             set
@@ -7343,27 +7276,21 @@ namespace vcs_Draw_Example1
             get { return clrAxisColor; }
         }
 
-        /// <summary>
-        /// X軸說明文字
-        /// </summary>
+        // X軸說明文字
         public string XAxisText
         {
             set { strXAxisText = value; }
             get { return strXAxisText; }
         }
 
-        /// <summary>
-        /// Y軸說明文字
-        /// </summary>
+        // Y軸說明文字
         public string YAxisText
         {
             set { strYAxisText = value; }
             get { return strYAxisText; }
         }
 
-        /// <summary>
-        /// 軸說明文字顏色
-        /// </summary>
+        // 軸說明文字顏色
         public Color AxisTextColor
         {
             set
@@ -7373,9 +7300,7 @@ namespace vcs_Draw_Example1
             get { return clrAxisTextColor; }
         }
 
-        /// <summary>
-        /// 刻度文字顏色
-        /// </summary>
+        // 刻度文字顏色
         public Color SliceTextColor
         {
             set
@@ -7385,18 +7310,14 @@ namespace vcs_Draw_Example1
             get { return clrSliceTextColor; }
         }
 
-        /// <summary>
-        /// 刻度顏色
-        /// </summary>
+        // 刻度顏色
         public Color SliceColor
         {
             set { clrSliceColor = value; }
             get { return clrSliceColor; }
         }
 
-        /// <summary>
-        /// 曲線顏色
-        /// </summary>
+        // 曲線顏色
         public Color[] CurveColors
         {
             set { clrsCurveColors = value; }
@@ -7406,18 +7327,14 @@ namespace vcs_Draw_Example1
             }
         }
 
-        /// <summary>
-        /// X軸文字旋轉角度
-        /// </summary>
+        // X軸文字旋轉角度
         public float XRotateAngle
         {
             get { return fltXRotateAngle; }
             set { fltXRotateAngle = value; }
         }
 
-        /// <summary>
-        /// Y軸文字旋轉角度
-        /// </summary>
+        // Y軸文字旋轉角度
         public float YRotateAngle
         {
             get
@@ -7427,9 +7344,7 @@ namespace vcs_Draw_Example1
             set { fltYRotateAngle = value; }
         }
 
-        /// <summary>
-        /// 圖像左右距離邊緣距離
-        /// </summary>
+        // 圖像左右距離邊緣距離
         public float XSpace
         {
             get
@@ -7439,27 +7354,21 @@ namespace vcs_Draw_Example1
             set { fltXSpace = value; }
         }
 
-        /// <summary>
-        /// 圖像上下距離邊緣距離
-        /// </summary>
+        // 圖像上下距離邊緣距離
         public float YSpace
         {
             get { return fltYSpace; }
             set { fltYSpace = value; }
         }
 
-        /// <summary>
-        /// 字體大小號數
-        /// </summary>
+        // 字體大小號數
         public int FontSize
         {
             get { return intFontSize; }
             set { intFontSize = value; }
         }
 
-        /// <summary>
-        /// 曲線線條大小
-        /// </summary>
+        // 曲線線條大小
         public int CurveSize
         {
             get
@@ -7468,12 +7377,10 @@ namespace vcs_Draw_Example1
             }
             set { intCurveSize = value; }
         }
-
         //#endregion
-        /// <summary>
-        /// 自動根據參數調整圖像大小
-        /// 根據數據自動計算邊距和字體等
-        /// </summary>
+
+        // 自動根據參數調整圖像大小
+        // 根據數據自動計算邊距和字體等
         public void Fit()
         {
             //計算字體距離
@@ -7512,10 +7419,7 @@ namespace vcs_Draw_Example1
             YSlice = (Height - 2 * YSpace) / intYSliceCount;
         }
 
-        /// <summary>
-        /// 生成圖像並返回bmp圖像對像
-        /// </summary>
-        /// <returns></returns>
+        // 生成圖像並返回bmp圖像對像
         public Bitmap CreateImage()
         {
             InitializeGraph();
@@ -7543,9 +7447,7 @@ namespace vcs_Draw_Example1
             return bitmap1;
         }
 
-        /// <summary>
-        /// 初始化和填充圖像區域，畫出邊框，初始標題
-        /// </summary>
+        // 初始化和填充圖像區域，畫出邊框，初始標題
         private void InitializeGraph()
         {
             //根據給定的高度和寬度創建一個位圖圖像
@@ -7581,10 +7483,7 @@ namespace vcs_Draw_Example1
             CreateTitle(ref g);
         }
 
-        /// <summary>
-        /// 初始化軸線說明文字
-        /// </summary>
-        /// <param name="g"></param>
+        // 初始化軸線說明文字
         private void SetAxisText(ref Graphics g)
         {
             float fltX = Width - XSpace + XSlice / 2 - (XAxisText.Length - 1) * intFontSpace;
@@ -7599,10 +7498,7 @@ namespace vcs_Draw_Example1
             }
         }
 
-        /// <summary>
-        /// 初始化X軸上的刻度和文字
-        /// </summary>
-        /// <param name="g"></param>
+        // 初始化X軸上的刻度和文字
         private void SetXAxis(ref Graphics g)
         {
             float fltX1 = XSpace;
@@ -7661,10 +7557,7 @@ namespace vcs_Draw_Example1
             }
         }
 
-        /// <summary>
-        /// 初始化Y軸上的刻度和文字
-        /// </summary>
-        /// <param name="g"></param>
+        // 初始化Y軸上的刻度和文字
         private void SetYAxis(ref Graphics g)
         {
             float fltX1 = XSpace;
@@ -7716,10 +7609,7 @@ namespace vcs_Draw_Example1
             }
         }
 
-        /// <summary>
-        /// 畫曲線
-        /// </summary>
-        /// <param name="g"></param>
+        // 畫曲線
         private void DrawContent(ref Graphics g, float[] fltCurrentValues, Color clrCurrentColor)
         {
             Pen CurvePen = new Pen(clrCurrentColor, CurveSize);
@@ -7734,10 +7624,8 @@ namespace vcs_Draw_Example1
             }
             g.DrawCurve(CurvePen, CurvePointF, Tension);
         }
-        /// <summary>
-        /// 初始化標題
-        /// </summary>
-        /// <param name="g"></param>
+
+        // 初始化標題
         private void CreateTitle(ref Graphics g)
         {
             g.DrawString(Title, new Font("宋體", FontSize), new SolidBrush(TextColor), new Point((int)(Width - XSpace) - intFontSize * Title.Length, (int)(YSpace - YSlice / 2 - intFontSpace)));
@@ -7748,7 +7636,6 @@ namespace vcs_Draw_Example1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
@@ -7779,3 +7666,4 @@ g.DrawImage(bitmap1, Cx, Cy, -W / 2, -H / 2);
 ddddd
             g.Dispose();  // dispose後, 就不能再使用了
 */
+

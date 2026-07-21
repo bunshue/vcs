@@ -172,11 +172,10 @@ namespace vcs_Draw_Captcha1
         //Captcha 00 ST
         private void draw_captcha00()
         {
+            string captcha_code = "aMg8p37fo3";
+
             Captcha00 captcha = new Captcha00();
-
-            string code = "aMg8p37fo3";
-
-            Bitmap bitmap1 = captcha.CreateImage(code);
+            Bitmap bitmap1 = captcha.CreateImage(captcha_code);
             pictureBox00.Image = bitmap1;
         }
         //Captcha 00 SP
@@ -187,9 +186,8 @@ namespace vcs_Draw_Captcha1
         private void draw_captcha01()
         {
             //CreateCheckCodeImage01(GenerateCheckCodes01(10));
-            string code = "HZGPOHYM2K";
-
-            byte[] bytes = CreateCheckCodeImage01(code);
+            string captcha_code = "HZGPOHYM2K";
+            byte[] bytes = CreateCheckCodeImage01(captcha_code);
         }
 
         private string GenerateCheckCodes01(int iCount)
@@ -221,6 +219,7 @@ namespace vcs_Draw_Captcha1
             {
                 return null;
             }
+
             int iWordWidth = 20;
             int iImageWidth = checkCode.Length * iWordWidth;
             Bitmap bitmap1 = new Bitmap(iImageWidth, 30);
@@ -357,9 +356,8 @@ namespace vcs_Draw_Captcha1
             char[] texts = new char[myList.Count];
             texts = myList.ToArray();
 
-            string vaildNumAnswer = "vuFfHy9UAB";
-
-            RenderImage02(vaildNumAnswer);
+            string captcha_code = "vuFfHy9UAB";
+            RenderImage02(captcha_code);
         }
 
         //產生驗證圖片
@@ -407,8 +405,8 @@ namespace vcs_Draw_Captcha1
         //Captcha 03 ST
         private void draw_captcha03()
         {
-            string code = " 8 N 0 J";
-            CodeImage03(code, pictureBox03);    //for //for pictureBox03
+            string captcha_code = " 8 N 0 J";
+            CodeImage03(captcha_code, pictureBox03);    //for //for pictureBox03
         }
 
         private void CodeImage03(string checkCode, PictureBox pbx)
@@ -467,11 +465,7 @@ namespace vcs_Draw_Captcha1
         {
             string code;
             Bitmap bitmap1 = Captcha04.CreateVerifyCodeBmp(out code);
-            Bitmap bitmap2 = new Bitmap(bitmap1, 300, 200);  //改變大小
-
-            //lb_captcha4.Text = code;
             pictureBox04.Image = bitmap1;
-            //pictureBox4.Image = bitmap2;  //改變大小
         }
         //Captcha 04 SP
 
@@ -480,9 +474,8 @@ namespace vcs_Draw_Captcha1
         //Captcha 05 ST
         void draw_captcha05()
         {
-            //產生圖片驗證碼
-            string tmp = RndNum(4);
-            Create05(out tmp);
+            string captcha_code = "9NDW";
+            Create05(captcha_code);
         }
 
         // 該方法用於生成指定位數的隨機數
@@ -516,9 +509,8 @@ namespace vcs_Draw_Captcha1
 
         // 該方法是將生成的隨機數寫入圖像文件
         /// <param name="VNum">VNum是一個隨機數</param>
-        public MemoryStream Create05(out string VNum)
+        public MemoryStream Create05(string captcha_code)
         {
-            VNum = RndNum(4);
             Bitmap bitmap1 = new Bitmap(100, 25);
             Graphics g = null;
             MemoryStream ms = null;
@@ -541,7 +533,7 @@ namespace vcs_Draw_Captcha1
             }
 
             //驗證碼繪制在g中
-            for (int i = 0; i < VNum.Length; i++)
+            for (int i = 0; i < captcha_code.Length; i++)
             {
                 int cindex = random.Next(7);//隨機顏色索引值
                 int findex = random.Next(5);//隨機字體索引值
@@ -552,7 +544,7 @@ namespace vcs_Draw_Captcha1
                 {
                     ii = 2;
                 }
-                g.DrawString(VNum.Substring(i, 1), f, b, 3 + (i * 20), ii);//繪制一個驗證字符
+                g.DrawString(captcha_code.Substring(i, 1), f, b, 3 + (i * 20), ii);//繪制一個驗證字符
             }
             ms = new MemoryStream();//生成內存流對象
             bitmap1.Save(ms, ImageFormat.Jpeg);//將此圖像以jpg圖像文件的格式保存到流中
@@ -572,16 +564,10 @@ namespace vcs_Draw_Captcha1
         void draw_captcha06()
         {
             //製作驗證碼3
-            //C#生成驗證碼例子及代碼
+
+            string captcha_code = "19736";
 
             Random r = new Random();
-            string str = "";
-            for (int i = 0; i < 5; i++)
-            {
-                int rNumber = r.Next(0, 10);
-                str += rNumber;
-            }
-
             Bitmap bitmap1 = new Bitmap(120, 25);
             Graphics g = Graphics.FromImage(bitmap1);
 
@@ -591,7 +577,7 @@ namespace vcs_Draw_Captcha1
             for (int i = 0; i < 5; i++)
             {
                 Point p = new Point(i * 20, 0);//0,0 20 0
-                g.DrawString(str[i].ToString(), new Font(fonts[r.Next(0, 5)], 20, FontStyle.Bold), new SolidBrush(colors[r.Next(0, 5)]), p);
+                g.DrawString(captcha_code[i].ToString(), new Font(fonts[r.Next(0, 5)], 20, FontStyle.Bold), new SolidBrush(colors[r.Next(0, 5)]), p);
             }
 
             //畫線
@@ -618,9 +604,7 @@ namespace vcs_Draw_Captcha1
         //Captcha 07 ST
         void draw_captcha07()
         {
-            Random r = new Random();
-
-            string str = "42959";
+            string captcha_code = "42959";
 
             Bitmap bitmap1 = new Bitmap(150, 40);
             Graphics g = Graphics.FromImage(bitmap1);
@@ -628,12 +612,14 @@ namespace vcs_Draw_Captcha1
             //预定义几种字体样式和颜色
             string[] fonts = { "微软雅黑", "宋体", "黑体", "隶书", "仿宋" };
             Color[] colors = { Color.Yellow, Color.Blue, Color.Black, Color.Red, Color.Orange };
+            Random r = new Random();
+
             //因为每一数字的字体和颜色可能不同，
             //因此循环将生成的随机数每一数字绘制到图片
-            for (int i = 0; i < str.Length; i++)
+            for (int i = 0; i < captcha_code.Length; i++)
             {
                 Point p = new Point(i * 30, 0);
-                g.DrawString(str[i].ToString(), new Font(fonts[r.Next(0, 5)], 20, FontStyle.Bold), new SolidBrush(colors[r.Next(0, 5)]), p);
+                g.DrawString(captcha_code[i].ToString(), new Font(fonts[r.Next(0, 5)], 20, FontStyle.Bold), new SolidBrush(colors[r.Next(0, 5)]), p);
             }
 
             //循环在图片范围内绘制出50条线
@@ -660,35 +646,9 @@ namespace vcs_Draw_Captcha1
         //Captcha 08 ST
         void draw_captcha08()
         {
-            string captchacode08 = "D3W0K1N1F7";
-
-            pictureBox08.Image = drawImg08(captchacode08);
+            string captcha_code = "D3W0K1N1F7";
+            pictureBox08.Image = drawImg08(captcha_code);
         }
-
-        /// 字符
-        /// <param name="len">幾位</param>
-        public static string CaptchaCode08(int cd)
-        {
-            var ran = new Random();
-            int num, tem;
-            string rtuStr = "";
-            for (int i = 0; i < cd; i++)
-            {
-                num = ran.Next();
-                if (i % 2 == 1)
-                {
-                    tem = num % 10 + '0'; //數字
-                }
-                else
-                {
-                    tem = num % 26 + 'A'; //字母
-                }
-                rtuStr += Convert.ToChar(tem).ToString();
-            }
-            return rtuStr;
-        }
-
-        //------------------------------------------------------------  # 60個
 
         // 生成圖像
         /// <param name="check">字符</param>
@@ -712,10 +672,10 @@ namespace vcs_Draw_Captcha1
         //Captcha 09 ST
         void draw_captcha09()
         {
-            string strValidCode = "HQ58S";
+            string captcha_code = "HQ58S";
 
             //將字串儲存到Session中,以便需要時進行驗證                                                
-            //context.Session["ValidCode"] = strValidCode;
+            //context.Session["ValidCode"] = captcha_code;
             //定義寬120畫素,高30畫素的資料定義的影象物件                                          
             Bitmap bitmap1 = new Bitmap(120, 30);
             //繪製圖片                               
@@ -740,7 +700,7 @@ namespace vcs_Draw_Captcha1
                 //設定畫筆型別
                 LinearGradientBrush brush = new LinearGradientBrush(new Rectangle(0, 0, bitmap1.Width, bitmap1.Height), Color.Blue, Color.DarkRed, 3, true);
                 //繪製隨機字元
-                g.DrawString(strValidCode, font, brush, 5, 2);
+                g.DrawString(captcha_code, font, brush, 5, 2);
 
                 //繪製圖片的前景噪點
                 g.DrawRectangle(new Pen(Color.Silver), 0, 0, bitmap1.Width - 1, bitmap1.Height - 1);
@@ -756,24 +716,6 @@ namespace vcs_Draw_Captcha1
                 pictureBox09.Image = bitmap1;
             }
         }
-
-        private string GetValidCode09(int num)
-        {
-            //定義要隨機抽取的字串
-            string strRandomCode = "ABCD1EF2GH3IJ4KL5MN6P7QR8ST9UVWXYZ";
-            //將定義的字串轉成字元陣列                           
-            char[] chastr = strRandomCode.ToCharArray();
-            //定義StringBuilder物件用於存放驗證碼                                     
-            StringBuilder sbValidCode = new StringBuilder();
-            //隨機函式,隨機抽取字元                                       
-            Random rd = new Random();
-            for (int i = 0; i < num; i++)
-            {
-                //以strRandomCode的長度產生隨機位置並擷取該位置的字元新增到StringBuilder物件中
-                sbValidCode.Append(strRandomCode.Substring(rd.Next(0, strRandomCode.Length), 1));
-            }
-            return sbValidCode.ToString();
-        }
         //Captcha 09 SP
 
         //------------------------------------------------------------  # 60個
@@ -781,11 +723,8 @@ namespace vcs_Draw_Captcha1
         //Captcha 10 ST
         void draw_captcha10()
         {
-            string tmp = "5XF4";
-
-            //HttpCookie a = new HttpCookie("ImageV ", tmp);
-            //Response.Cookies.Add(a);
-            this.CaptchaCode10(tmp);
+            string captcha_code = "5XF4";
+            CaptchaCode10(captcha_code);
         }
 
         private void CaptchaCode10(string VNum)
@@ -839,17 +778,17 @@ namespace vcs_Draw_Captcha1
         //Captcha 12 ST
         void draw_captcha12()
         {
-            string text = "X1T4";
+            string captcha_code = "X1T4";
 
             Size ImageSize = Size.Empty;
-            Font myFont = new Font("MS Sans Serif", 20);
+            Font f = new Font("MS Sans Serif", 20);
 
             // 計算驗證 碼圖片大小
             using (Bitmap bitmap1 = new Bitmap(10, 10))
             {
                 using (Graphics g = Graphics.FromImage(bitmap1))
                 {
-                    SizeF size = g.MeasureString(text, myFont, 10000);
+                    SizeF size = g.MeasureString(captcha_code, f, 10000);
                     ImageSize.Width = (int)size.Width + 8;
                     ImageSize.Height = (int)size.Height + 8;
                 }
@@ -861,26 +800,14 @@ namespace vcs_Draw_Captcha1
                 Random rand = new Random();
 
                 // 繪制驗證碼文本
-                using (Graphics g = Graphics.FromImage(bitmap2))
-                {
-                    g.Clear(Color.White);
-                    using (StringFormat string_format = new StringFormat())
-                    {
-                        string_format.Alignment = StringAlignment.Near;
-                        string_format.LineAlignment = StringAlignment.Center;
-                        string_format.FormatFlags = StringFormatFlags.NoWrap;
-                        g.DrawString(
-                           text,
-                          myFont,
-                          Brushes.Black,
-                           new RectangleF(
-                          0,
-                          0,
-                          ImageSize.Width,
-                          ImageSize.Height),
-                          string_format);
-                    }//using
-                }//using
+                Graphics g = Graphics.FromImage(bitmap2);
+                g.Clear(Color.White);
+                StringFormat string_format = new StringFormat();
+                string_format.Alignment = StringAlignment.Near;
+                string_format.LineAlignment = StringAlignment.Center;
+                string_format.FormatFlags = StringFormatFlags.NoWrap;
+                g.DrawString(captcha_code, f, Brushes.Black, new RectangleF(0, 0, ImageSize.Width, ImageSize.Height), string_format);
+
                 // 制造噪聲 雜點面積占圖片面積的 30%
                 int num = ImageSize.Width * ImageSize.Height * 30 / 100;
                 for (int iCount = 0; iCount < num; iCount++)
@@ -888,12 +815,12 @@ namespace vcs_Draw_Captcha1
                     // 在隨機的位置使用隨機的顏色設置圖片的像素
                     int x = rand.Next(ImageSize.Width);
                     int y = rand.Next(ImageSize.Height);
-                    int r = rand.Next(255);
-                    int g = rand.Next(255);
-                    int b = rand.Next(255);
-                    Color c = Color.FromArgb(r, g, b);
+                    int rr = rand.Next(255);
+                    int gg = rand.Next(255);
+                    int bb = rand.Next(255);
+                    Color c = Color.FromArgb(rr, gg, bb);
                     bitmap2.SetPixel(x, y, c);
-                }//for
+                }
 
                 pictureBox12.Image = bitmap2;
 
@@ -902,7 +829,7 @@ namespace vcs_Draw_Captcha1
                 bitmap2.Save(ms, ImageFormat.Jpeg);
                 ms.Close();
             }//using
-            myFont.Dispose();
+            f.Dispose();
         }
         //Captcha 12 SP
 
@@ -911,57 +838,20 @@ namespace vcs_Draw_Captcha1
         //Captcha 13 ST
         void draw_captcha13()
         {
-            //產生圖片驗證碼
-            Bitmap bitmap1 = DrawCahpcha13(RandomGeneratorStyle.Number, 10);
+            string captcha_code = "3828353473";
+            Bitmap bitmap1 = DrawCahpcha13(captcha_code);
             pictureBox13.Image = bitmap1;
         }
 
-        public enum RandomGeneratorStyle
-        {
-            ///　只有數字
-            Number,
-            ///　包含數字和大小寫字符
-            NumberAndChar,
-            ///　包含數字和大寫字符
-            NumberAndCharIgnoreCase
-        }
-
-        public static string GenerateRandomNumber(RandomGeneratorStyle style, int length)
-        {
-            string strValidateString = "";
-            Random rnd = new Random();
-            string strValidateStringSource;
-            switch (style)
-            {
-                case RandomGeneratorStyle.Number:
-                    strValidateStringSource = "0123456789";
-                    break;
-                case RandomGeneratorStyle.NumberAndChar:
-                    strValidateStringSource = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                    break;
-                case RandomGeneratorStyle.NumberAndCharIgnoreCase:
-                    strValidateStringSource = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-                    break;
-                default:
-                    strValidateStringSource = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                    break;
-            }
-            for (int i = 0; i < length; i++)
-            {
-                strValidateString += strValidateStringSource[rnd.Next(strValidateStringSource.Length - 1)];
-            }
-            return strValidateString;
-        }
-
         //繪制驗證碼
-        public static Bitmap DrawCahpcha13(RandomGeneratorStyle style, int length)
+        public static Bitmap DrawCahpcha13(string captcha_code)
         {
+            int length = 10;  // 驗證碼長度
             Bitmap bitmap1 = new Bitmap((int)Math.Ceiling(length * 20.5), 50);//新建一個圖 片對象
             Graphics g = Graphics.FromImage(bitmap1);//利用該圖片對象生成“畫板”
-            string strCode = GenerateRandomNumber(style, length);//生成隨機數
             Font font = new Font("Arial", 24, FontStyle.Bold | FontStyle.Italic);//設 置字體顏色
             SolidBrush brush = new SolidBrush(Color.Red);//新建一個畫刷,到這裡為止,我們 已經准備好了畫板、畫刷、和數據
-            g.DrawString(strCode, font, brush, 0, 0);//關鍵的一步，進行繪制。
+            g.DrawString(captcha_code, font, brush, 0, 0);//關鍵的一步，進行繪制。
             //bitmap1.Save("aaaa.jpg", ImageFormat.Jpeg);//保存為輸出流，否則頁 面上顯示不出來
             //g.Dispose();//釋放掉該資源
             return bitmap1;
@@ -975,16 +865,15 @@ namespace vcs_Draw_Captcha1
         {
             //產生圖片驗證碼(很複雜)
 
-            //首先實例化驗證碼的類
-            Captcha14 captchacode14 = new Captcha14();
+            string captcha_code = "WZq5";
 
-            string code = "WZq5";
+            Captcha14 captchacode14 = new Captcha14();
 
             //設定Border, 但看不出差異
             captchacode14.Border = Captcha14.BorderStyle.RoundRectangle;
 
             //創建驗證碼的圖片
-            Bitmap bitmap1 = captchacode14.CreateImage(code);
+            Bitmap bitmap1 = captchacode14.CreateImage(captcha_code);
 
             pictureBox14.Image = bitmap1;
         }
@@ -996,34 +885,8 @@ namespace vcs_Draw_Captcha1
         void draw_captcha15()
         {
             //調用函數將驗證碼生成圖片
-            CreateCheckCodeImage15(GenerateCheckCode15());
-        }
-
-        private string GenerateCheckCode15()
-        {
-            //產生五位的隨機字符串
-            int number;
-            char code;
-            string checkCode = String.Empty;
-
-            Random random = new Random();
-
-            for (int i = 0; i < 5; i++)
-            {
-                number = random.Next();
-
-                if (number % 2 == 0)
-                {
-                    code = (char)('0' + (char)(number % 10));
-                }
-                else
-                {
-                    code = (char)('a' + (char)(number % 26));
-                }
-                checkCode += code.ToString();
-            }
-            richTextBox1.Text += "15取得 : " + checkCode + "\n";
-            return checkCode;
+            string captcha_code = "v8j82";
+            CreateCheckCodeImage15(captcha_code);
         }
 
         //將驗證碼生成圖片顯示
@@ -1097,21 +960,14 @@ namespace vcs_Draw_Captcha1
             int W = 80;
             int H = 22;
             int fontSize = 16;
-            string chkCode = string.Empty;
+
+            string captcha_code = "m2AG";
+
             //颜色列表，用于验证码、噪线、噪点 
             Color[] color = { Color.Black, Color.Red, Color.Blue, Color.Green, Color.Orange, Color.Brown, Color.Brown, Color.DarkBlue };
             //字体列表，用于验证码 
             string[] font = { "Times New Roman", "Verdana", "Arial", "Gungsuh", "Impact" };
-            //验证码的字符集，去掉了一些容易混淆的字符 
-            char[] character = { '2', '3', '4', '5', '6', '8', '9', 'a', 'b', 'd', 'e', 'f', 'h', 'k', 'm', 'n', 'r', 'x', 'y', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'R', 'S', 'T', 'W', 'X', 'Y' };
             Random rnd = new Random();
-            //生成验证码字符串 
-            for (int i = 0; i < 4; i++)
-            {
-                chkCode += character[rnd.Next(character.Length)];
-            }
-
-            richTextBox1.Text += "16取得 : " + chkCode + "\n";
 
             //创建画布
             Bitmap bitmap1 = new Bitmap(W, H);
@@ -1128,12 +984,12 @@ namespace vcs_Draw_Captcha1
                 g.DrawLine(new Pen(clr), x1, y1, x2, y2);
             }
             //画验证码字符串 
-            for (int i = 0; i < chkCode.Length; i++)
+            for (int i = 0; i < captcha_code.Length; i++)
             {
                 string fnt = font[rnd.Next(font.Length)];
                 Font ft = new Font(fnt, fontSize);
                 Color clr = color[rnd.Next(color.Length)];
-                g.DrawString(chkCode[i].ToString(), ft, new SolidBrush(clr), (float)i * 18 + 2, (float)0);
+                g.DrawString(captcha_code[i].ToString(), ft, new SolidBrush(clr), (float)i * 18 + 2, (float)0);
             }
             ////画噪点 
             //for (int i = 0; i < 1; i++)
@@ -1185,59 +1041,20 @@ namespace vcs_Draw_Captcha1
         //Captcha 18 ST
         void draw_captcha18()
         {
-            //產生圖片驗證碼
-            Bitmap bitmap1 = DrawCahpcha18(RandomGeneratorStyle.NumberAndChar, 10);
+            string captcha_code = "xy6nPlUJAR";
+            Bitmap bitmap1 = DrawCahpcha18(captcha_code);
             pictureBox18.Image = bitmap1;
         }
 
-        /* same
-        public enum RandomGeneratorStyle
-        {
-            ///　只有數字
-            Number,
-            ///　包含數字和大小寫字符
-            NumberAndChar,
-            ///　包含數字和大寫字符
-            NumberAndCharIgnoreCase
-        }
-        */
-
-        public static string Generate2(RandomGeneratorStyle style, int length)
-        {
-            string strValidateString = "";
-            Random rnd = new Random();
-            string strValidateStringSource;
-            switch (style)
-            {
-                case RandomGeneratorStyle.Number:
-                    strValidateStringSource = "0123456789";
-                    break;
-                case RandomGeneratorStyle.NumberAndChar:
-                    strValidateStringSource = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                    break;
-                case RandomGeneratorStyle.NumberAndCharIgnoreCase:
-                    strValidateStringSource = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-                    break;
-                default:
-                    strValidateStringSource = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                    break;
-            }
-            for (int i = 0; i < length; i++)
-            {
-                strValidateString += strValidateStringSource[rnd.Next(strValidateStringSource.Length - 1)];
-            }
-            return strValidateString;
-        }
-
         //繪制驗證碼
-        public static Bitmap DrawCahpcha18(RandomGeneratorStyle style, int length)
+        public static Bitmap DrawCahpcha18(string captcha_code)
         {
+            int length = 10;
             Bitmap bitmap1 = new Bitmap((int)Math.Ceiling(length * 12.5), 20);//新建一個圖 片對象
-            Graphics g = Graphics.FromImage(bitmap1);//利用該圖片對象生成“畫板”
-            string strCode = Generate2(style, length);//生成隨機數
+            Graphics g = Graphics.FromImage(bitmap1);
             Font font = new Font("Arial", 12, FontStyle.Bold | FontStyle.Italic);//設 置字體顏色
             SolidBrush brush = new SolidBrush(Color.Red);//新建一個畫刷,到這裡為止,我們 已經准備好了畫板、畫刷、和數據
-            g.DrawString(strCode, font, brush, 0, 0);//關鍵的一步，進行繪制。
+            g.DrawString(captcha_code, font, brush, 0, 0);//關鍵的一步，進行繪制。
             //bitmap1.Save("aaaa.jpg", ImageFormat.Jpeg);//保存為輸出流，否則頁 面上顯示不出來
             //g.Dispose();//釋放掉該資源
             return bitmap1;
@@ -1304,42 +1121,36 @@ namespace vcs_Draw_Captcha1
 
         //Captcha 20 ST
         //中文驗證法碼 ST
-        public string txt = "";
+
         void draw_captcha20()
         {
-            txt = "天階夜色涼如水";
+            string captcha_code = "天階夜色涼如水";
 
-            //lb_captcha1.Text = txt;
-
-            Bitmap bitmap1 = new Bitmap((int)Math.Ceiling((txt.Length * 20.5)) * 3, 22 * 3);
+            Bitmap bitmap1 = new Bitmap((int)Math.Ceiling((captcha_code.Length * 20.5)) * 3, 22 * 3);
             Graphics g = Graphics.FromImage(bitmap1);
-            try
+            Random random = new Random();
+            g.Clear(Color.White);
+
+            //画图片的背景噪音线
+            for (int i = 0; i < 2; i++)
             {
-                //生成随机生成器
-                Random random = new Random();
-                //清空图片背景色
-                g.Clear(Color.White);
-                //画图片的背景噪音线
-                for (int i = 0; i < 2; i++)
-                {
-                    Point tem_Point_1 = new Point(random.Next(bitmap1.Width), random.Next(bitmap1.Height));
-                    Point tem_Point_2 = new Point(random.Next(bitmap1.Width), random.Next(bitmap1.Height));
-                    g.DrawLine(new Pen(Color.Black), tem_Point_1, tem_Point_2);
-                }
-                Font font = new Font("標楷體", 12 * 2, (FontStyle.Bold));
-                LinearGradientBrush brush = new LinearGradientBrush(new Rectangle(0, 0, bitmap1.Width, bitmap1.Height), Color.Blue, Color.DarkRed, 1.2f, true);
-                g.DrawString(txt, font, brush, 2, 2);
-                //画图片的前景噪音点
-                for (int i = 0; i < 100; i++)
-                {
-                    Point tem_point = new Point(random.Next(bitmap1.Width), random.Next(bitmap1.Height));
-                    bitmap1.SetPixel(tem_point.X, tem_point.Y, Color.FromArgb(random.Next()));
-                }
-                //画图片的边框线
-                g.DrawRectangle(new Pen(Color.Silver), 0, 0, bitmap1.Width - 1, bitmap1.Height - 1);
-                pictureBox20.Image = bitmap1;
+                Point tem_Point_1 = new Point(random.Next(bitmap1.Width), random.Next(bitmap1.Height));
+                Point tem_Point_2 = new Point(random.Next(bitmap1.Width), random.Next(bitmap1.Height));
+                g.DrawLine(new Pen(Color.Black), tem_Point_1, tem_Point_2);
             }
-            catch { }
+
+            Font font = new Font("標楷體", 12 * 2, (FontStyle.Bold));
+            LinearGradientBrush brush = new LinearGradientBrush(new Rectangle(0, 0, bitmap1.Width, bitmap1.Height), Color.Blue, Color.DarkRed, 1.2f, true);
+            g.DrawString(captcha_code, font, brush, 2, 2);
+            //画图片的前景噪音点
+            for (int i = 0; i < 100; i++)
+            {
+                Point tem_point = new Point(random.Next(bitmap1.Width), random.Next(bitmap1.Height));
+                bitmap1.SetPixel(tem_point.X, tem_point.Y, Color.FromArgb(random.Next()));
+            }
+            //画图片的边框线
+            g.DrawRectangle(new Pen(Color.Silver), 0, 0, bitmap1.Width - 1, bitmap1.Height - 1);
+            pictureBox20.Image = bitmap1;
         }
 
         //中文驗證法碼 SP
@@ -1378,11 +1189,7 @@ namespace vcs_Draw_Captcha1
 
             // 2. 填充位圖背景
             Graphics g = Graphics.FromImage(bitmap1);
-            g.FillRectangle(new SolidBrush(Color.FromArgb(nRed, nGreen, nBlue))
-             , 0
-             , 0
-             , nBmpWidth
-             , nBmpHeight);
+            g.FillRectangle(new SolidBrush(Color.FromArgb(nRed, nGreen, nBlue)), 0, 0, nBmpWidth, nBmpHeight);
 
             // 3. 繪制干擾線條，采用比背景略深一些的顏色
             int nLines = 5;
@@ -1396,7 +1203,7 @@ namespace vcs_Draw_Captcha1
                 g.DrawLine(pen, x1, y1, x2, y2);
             }
 
-            string strCode = "天階夜色涼如水";
+            string captcha_code = "天階夜色涼如水";
 
             // 4. 循環取得字符，並繪制
             string strResult = "";
@@ -1407,7 +1214,7 @@ namespace vcs_Draw_Captcha1
 
                 // 確定字體
                 Font font = new Font("Arial", 14 + rd.Next() % 4, FontStyle.Bold);
-                string c = strCode.Substring(i, 1);  // 獲取字符
+                string c = captcha_code.Substring(i, 1);  // 獲取字符
                 strResult += c.ToString();
 
                 // 繪制字符, 繪制字體顏色，采用比背景與干擾線略深一些的顏色
@@ -1449,23 +1256,19 @@ namespace vcs_Draw_Captcha1
         {
             // Make the bitmap and associated Graphics object.
             Bitmap bitmap1 = new Bitmap(W, H);
-            using (Graphics g = Graphics.FromImage(bitmap1))
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.SmoothingMode = SmoothingMode.HighQuality;
+            g.Clear(Color.White);
+
+            // See how much room is available for each character.
+            int ch_wid = (int)(W / txt.Length);
+
+            // Draw each character.
+            for (int i = 0; i < txt.Length; i++)
             {
-                g.SmoothingMode = SmoothingMode.HighQuality;
-                g.Clear(Color.White);
-
-                // See how much room is available for each character.
-                int ch_wid = (int)(W / txt.Length);
-
-                // Draw each character.
-                for (int i = 0; i < txt.Length; i++)
-                {
-                    float font_size = Rand.Next(min_size, max_size);
-                    using (Font the_font = new Font("Times New Roman", font_size, FontStyle.Bold))
-                    {
-                        DrawCharacter22(txt.Substring(i, 1), g, the_font, i * ch_wid, ch_wid, W, H);
-                    }
-                }
+                float font_size = Rand.Next(min_size, max_size);
+                Font the_font = new Font("Times New Roman", font_size, FontStyle.Bold);
+                DrawCharacter22(txt.Substring(i, 1), g, the_font, i * ch_wid, ch_wid, W, H);
             }
             return bitmap1;
         }
@@ -1620,7 +1423,7 @@ namespace vcs_Draw_Captcha1
                 sbCode.Append(str);
             }
             code = sbCode.ToString();
-            //richTextBox1.Text += "04取得 : " + code + "\n";
+            Console.WriteLine("04取得 : " + code);
 
             //樂音線
             for (int i = 0; i < 10; i++)
@@ -1654,7 +1457,7 @@ namespace vcs_Draw_Captcha1
             return bitmap1;
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         // 獲得隨機字符
         private static string GetChar(Random rnd)
@@ -1674,7 +1477,7 @@ namespace vcs_Draw_Captcha1
             }
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         // 獲得隨機字體
         private static Font GetFont(Random rnd)
@@ -1682,7 +1485,7 @@ namespace vcs_Draw_Captcha1
             return new Font(fonts[rnd.Next(0, fonts.Length)], fontSize, FontStyle.Bold);
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         // 獲得隨機色彩
         private static Color GetColor(Random rnd)
@@ -1690,7 +1493,7 @@ namespace vcs_Draw_Captcha1
             return colors[rnd.Next(0, colors.Length)];
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         // 正弦曲線Wave歪曲圖片
         /// <param name="srcBmp">圖片途徑</param>  
@@ -2083,31 +1886,19 @@ namespace vcs_Draw_Captcha1
         }
 
         // 隨機生成的字符串
-        string validStr = "";
+        string captcha_code = "";
         public string ValidStr
         {
-            get { return validStr; }
-            set { validStr = value; }
-        }
-
-        // 產生指定個數的隨機字符串，默認字符個數為5
-        void GetValidateCode()
-        {
-            Random rd = new Random(); //創建隨機數對象
-            //產生由 charNum 個字母或數字組成的一個字符串
-            string str = "abcdefghijkmnpqrstuvwyzABCDEFGHJKLMNPQRSTUVWYZ23456789田國興";//共57個字符，除 l,o,x,I,O,X,1,0 的所有數字和大寫字母
-            for (int i = 0; i < charNum; i++)
-            {
-                validStr = validStr + str.Substring(rd.Next(57), 1);//返回0到56共57個
-            }
+            get { return captcha_code; }
+            set { captcha_code = value; }
         }
 
         // 由隨機字符串，隨即顏色背景，和隨機線條產生的Image
         // <returns>Image</returns>
         public Image GetImgWithValidateCode()//返回 Image
         {
-            //產生隨機字符串
-            GetValidateCode();
+            captcha_code = "tA6vZ";
+
             //聲明一個位圖對象
             Bitmap bitmap1 = null;
             //聲明一個繪圖畫面
@@ -2146,14 +1937,14 @@ namespace vcs_Draw_Captcha1
 
             SolidBrush sb = new SolidBrush(GetControllableColor(0));
             //通過循環,繪制每個字符,
-            for (int i = 0; i < validStr.Length; i++)
+            for (int i = 0; i < captcha_code.Length; i++)
             {
                 Font f = new Font(fontFamily[random.Next(10)], fontSize, FontStyle.Bold);//字體隨機,字號大小30,加粗
                 //每次循環繪制一個字符,設置字體格式,畫筆顏色,字符相對畫布的X坐標,字符相對畫布的Y坐標
                 int space = (int)Math.Round((double)((width - fontSize * (CharNum + 2)) / CharNum));
                 //縱坐標
                 int y = (int)Math.Round((double)((height - fontSize) / 3));
-                gph.DrawString(validStr.Substring(i, 1), f, sb, fontSize + i * (fontSize + space), y);
+                gph.DrawString(captcha_code.Substring(i, 1), f, sb, fontSize + i * (fontSize + space), y);
             }
             //扭曲圖片
             bitmap1 = TwistImage(bitmap1, true, random.Next(3, 5), random.Next(3));
@@ -2230,7 +2021,7 @@ namespace vcs_Draw_Captcha1
         /// <returns>正確返回 true,錯誤返回 false</returns>
         public bool IsRight(string inputValCode)
         {
-            if (validStr.ToUpper().Equals(inputValCode.ToUpper()))//無論輸入大小寫都轉換為大些判斷
+            if (captcha_code.ToUpper().Equals(inputValCode.ToUpper()))//無論輸入大小寫都轉換為大些判斷
             {
                 return true;
             }
@@ -4046,115 +3837,49 @@ namespace vcs_Draw_Captcha1
         // 得到驗證碼字符串
         private void GetText()
         {
-            //沒有外部輸入驗證碼時隨機生成
-            if (String.IsNullOrEmpty(this.verifyCodeText))
-            {
-                StringBuilder objStringBuilder = new StringBuilder();
-
-                //加入數字1-9
-                for (int i = 1; i <= 9; i++)
-                {
-                    objStringBuilder.Append(i.ToString());
-                }
-
-                //加入大寫字母A-Z，不包括O
-                if (this.addUpperLetter)
-                {
-                    char temp = ' ';
-
-                    for (int i = 0; i < 26; i++)
-                    {
-                        temp = Convert.ToChar(i + 65);
-
-                        //如果生成的字母不是'O'
-                        if (!temp.Equals('O'))
-                        {
-                            objStringBuilder.Append(temp);
-                        }
-                    }
-                }
-
-                //加入小寫字母a-z，不包括o
-                if (this.addLowerLetter)
-                {
-                    char temp = ' ';
-
-                    for (int i = 0; i < 26; i++)
-                    {
-                        temp = Convert.ToChar(i + 97);
-
-                        //如果生成的字母不是'o'
-                        if (!temp.Equals('o'))
-                        {
-                            objStringBuilder.Append(temp);
-                        }
-                    }
-                }
-
-                //生成驗證碼字符串
-                {
-                    int index = 0;
-
-                    for (int i = 0; i < length; i++)
-                    {
-                        index = objRandom.Next(0, objStringBuilder.Length);
-
-                        this.verifyCodeText += objStringBuilder[index];
-
-                        objStringBuilder.Remove(index, 1);
-                    }
-                }
-            }
+            verifyCodeText = "3279";
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         // 得到驗證碼圖片
         public Bitmap GetImage()
         {
-            Bitmap result = null;
+            Bitmap result = new Bitmap(this.verifyCodeText.Length * 16, 25);
+            Graphics g = Graphics.FromImage(result);
 
-            //創建繪圖
-            result = new Bitmap(this.verifyCodeText.Length * 16, 25);
+            g.SmoothingMode = SmoothingMode.HighQuality;
 
-            using (Graphics g = Graphics.FromImage(result))
+            //清除整個繪圖面並以指定背景色填充
+            g.Clear(this.backgroundColor);
+
+            SolidBrush objSolidBrush = new SolidBrush(this.fontColor);
+            this.AddForeNoisePoint(result);
+
+            this.AddBackgroundNoisePoint(result, g);
+
+            //文字居中
+            StringFormat objStringFormat = new StringFormat(StringFormatFlags.NoClip);
+
+            objStringFormat.Alignment = StringAlignment.Center;
+            objStringFormat.LineAlignment = StringAlignment.Center;
+
+            //字體樣式
+            Font f = new Font(this.fontFamily, objRandom.Next(this.fontSize - 3, this.fontSize), FontStyle.Regular);
+
+            //驗證碼旋轉，防止機器識別
+            char[] chars = this.verifyCodeText.ToCharArray();
+
+            for (int i = 0; i < chars.Length; i++)
             {
-                g.SmoothingMode = SmoothingMode.HighQuality;
+                //轉動的度數
+                float angle = objRandom.Next(-this.randomAngle, this.randomAngle);
 
-                //清除整個繪圖面並以指定背景色填充
-                g.Clear(this.backgroundColor);
-
-                //創建畫筆
-                using (SolidBrush objSolidBrush = new SolidBrush(this.fontColor))
-                {
-                    this.AddForeNoisePoint(result);
-
-                    this.AddBackgroundNoisePoint(result, g);
-
-                    //文字居中
-                    StringFormat objStringFormat = new StringFormat(StringFormatFlags.NoClip);
-
-                    objStringFormat.Alignment = StringAlignment.Center;
-                    objStringFormat.LineAlignment = StringAlignment.Center;
-
-                    //字體樣式
-                    Font objFont = new Font(this.fontFamily, objRandom.Next(this.fontSize - 3, this.fontSize), FontStyle.Regular);
-
-                    //驗證碼旋轉，防止機器識別
-                    char[] chars = this.verifyCodeText.ToCharArray();
-
-                    for (int i = 0; i < chars.Length; i++)
-                    {
-                        //轉動的度數
-                        float angle = objRandom.Next(-this.randomAngle, this.randomAngle);
-
-                        g.TranslateTransform(12, 12);
-                        g.RotateTransform(angle);
-                        g.DrawString(chars[i].ToString(), objFont, objSolidBrush, -2, 2, objStringFormat);
-                        g.RotateTransform(-angle);
-                        g.TranslateTransform(2, -12);
-                    }
-                }
+                g.TranslateTransform(12, 12);
+                g.RotateTransform(angle);
+                g.DrawString(chars[i].ToString(), f, objSolidBrush, -2, 2, objStringFormat);
+                g.RotateTransform(-angle);
+                g.TranslateTransform(2, -12);
             }
             return result;
         }
@@ -4171,38 +3896,14 @@ namespace vcs_Draw_Captcha1
         // 添加背景噪點
         private void AddBackgroundNoisePoint(Bitmap bitmap1, Graphics g)
         {
-            using (Pen objPen = new Pen(Color.Azure, 0))
+            Pen objPen = new Pen(Color.Azure, 0);
+            for (int i = 0; i < bitmap1.Width * 2; i++)
             {
-                for (int i = 0; i < bitmap1.Width * 2; i++)
-                {
-                    g.DrawRectangle(objPen, objRandom.Next(bitmap1.Width), objRandom.Next(bitmap1.Height), 1, 1);
-                }
+                g.DrawRectangle(objPen, objRandom.Next(bitmap1.Width), objRandom.Next(bitmap1.Height), 1, 1);
             }
         }
 
         //------------------------------------------------------------  # 60個
-
-        /*
-        public void Output(HttpResponse objHttpResponse)
-        {
-            using (Bitmap bitmap1 = this.GetImage())
-            {
-                if (bitmap1 != null)
-                {
-                    using (MemoryStream objMS = new MemoryStream())
-                    {
-                        bitmap1.Save(objMS, ImageFormat.Jpeg);
- 
-                        HttpContext.Current.Response.ClearContent();
-                        HttpContext.Current.Response.ContentType = "image/Jpeg";
-                        HttpContext.Current.Response.BinaryWrite(objMS.ToArray());
-                        HttpContext.Current.Response.Flush();
-                        HttpContext.Current.Response.End();
-                    }
-                }
-            }
-        }
-        */
     }
 }
 
@@ -4265,7 +3966,7 @@ namespace vcs_Draw_Captcha1
                 checkCode += " " + code.ToString();
             }
             richTextBox1.Text += "03取得 : " + checkCode + "\n";
-6060
+//------------------------------------------------------------  # 60個
 
             Random r = new Random();
             string str = string.Empty;
@@ -4276,23 +3977,64 @@ namespace vcs_Draw_Captcha1
             }
 
             richTextBox1.Text += "07取得 : " + str + "\n";
-6060
+//------------------------------------------------------------  # 60個
 
-
+        /// 字符
+        /// <param name="len">幾位</param>
+        public static string CaptchaCode08(int cd)
+        {
+            var ran = new Random();
+            int num, tem;
+            string captcha_code = "";
+            for (int i = 0; i < cd; i++)
+            {
+                num = ran.Next();
+                if (i % 2 == 1)
+                {
+                    tem = num % 10 + '0'; //數字
+                }
+                else
+                {
+                    tem = num % 26 + 'A'; //字母
+                }
+                captcha_code += Convert.ToChar(tem).ToString();
+            }
+            return captcha_code;
+        }
 
             int digits = 10;
             string captchacode08 = CaptchaCode08(digits);
             richTextBox1.Text += "08取得 : " + captchacode08 + "\n";
 
-6060
+//------------------------------------------------------------  # 60個
+        private string GetValidCode09(int num)
+        {
+            //定義要隨機抽取的字串
+            string strRandomCode = "ABCD1EF2GH3IJ4KL5MN6P7QR8ST9UVWXYZ";
+            //將定義的字串轉成字元陣列                           
+            char[] chastr = strRandomCode.ToCharArray();
+            //定義StringBuilder物件用於存放驗證碼                                     
+            StringBuilder sbValidCode = new StringBuilder();
+            //隨機函式,隨機抽取字元                                       
+            Random rd = new Random();
+            for (int i = 0; i < num; i++)
+            {
+                //以strRandomCode的長度產生隨機位置並擷取該位置的字元新增到StringBuilder物件中
+                sbValidCode.Append(strRandomCode.Substring(rd.Next(0, strRandomCode.Length), 1));
+            }
+            return sbValidCode.ToString();
+        }
 
             // 產生5位隨機字元
-            string strValidCode = this.GetValidCode09(5);
-            richTextBox1.Text += "09取得 : " + strValidCode + "\n";
-6060
+            string captcha_code = GetValidCode09(5);
+            richTextBox1.Text += "09取得 : " + captcha_code + "\n";
+//------------------------------------------------------------  # 60個
+ 
+            //產生圖片驗證碼
             string tmp = RndNum(4);
-            richTextBox1.Text += "10取得 : " + tmp + "\n";
-6060
+            richTextBox1.Text += "05取得 : " + tmp + "\n";
+
+//------------------------------------------------------------  # 60個
 
             // 創建一個包含隨機內容的驗證碼文本
             Random rand = new Random();
@@ -4307,19 +4049,208 @@ namespace vcs_Draw_Captcha1
             string text = myStr.ToString();
             richTextBox1.Text += "12取得 : " + text + "\n";
 
-6060
+//------------------------------------------------------------  # 60個
 
             //生成驗證碼指定的長度
             string code = captchacode14.GetRandomString(4);
             richTextBox1.Text += "14取得 : " + code + "\n";
 
-6060
+//------------------------------------------------------------  # 60個
+
+            //文字
+            StringBuilder sbCode = new StringBuilder();
+            for (int i = 0; i < 4; i++)
+            {
+                string str = GetChar(rnd);
+                Font font = GetFont(rnd);
+                Color color = GetColor(rnd);
+                g.DrawString(str, font, new SolidBrush(color), new PointF((float)(i * width / 4.0), 0));
+                sbCode.Append(str);
+            }
+            code = sbCode.ToString();
+            //Console.WriteLine("04取得 : " + code);
+            //richTextBox1.Text += "04取得 : " + code + "\n";
+
+//------------------------------------------------------------  # 60個
+
+        GenerateCheckCode15()
+
+        private string GenerateCheckCode15()
+        {
+            //產生五位的隨機字符串
+            int number;
+            char code;
+            string checkCode = String.Empty;
+
+            Random random = new Random();
+
+            for (int i = 0; i < 5; i++)
+            {
+                number = random.Next();
+
+                if (number % 2 == 0)
+                {
+                    code = (char)('0' + (char)(number % 10));
+                }
+                else
+                {
+                    code = (char)('a' + (char)(number % 26));
+                }
+                checkCode += code.ToString();
+            }
+            richTextBox1.Text += "15取得 : " + checkCode + "\n";
+            return checkCode;
+        }
+
+//------------------------------------------------------------  # 60個
 
 
-6060
+
+//------------------------------------------------------------  # 60個
+
+            //產生隨機字符串
+            GetValidateCode();
+
+        // 產生指定個數的隨機字符串，默認字符個數為5
+        void GetValidateCode()
+        {
+            Random rd = new Random(); //創建隨機數對象
+            //產生由 charNum 個字母或數字組成的一個字符串
+            string str = "abcdefghijkmnpqrstuvwyzABCDEFGHJKLMNPQRSTUVWYZ23456789田國興";//共57個字符，除 l,o,x,I,O,X,1,0 的所有數字和大寫字母
+            for (int i = 0; i < charNum; i++)
+            {
+                captcha_code = captcha_code + str.Substring(rd.Next(57), 1);//返回0到56共57個
+            }
+            Console.WriteLine("11取得 : " + captcha_code);
+        }
+
+//------------------------------------------------------------  # 60個
+
+        public enum RandomGeneratorStyle
+        {
+            //  純數字
+            Number,
+            //  數字+大小寫英文
+            NumberAndChar,
+            //  數字+大寫英文
+            NumberAndCharIgnoreCase
+        }
+
+        public static string GenerateRandomNumber(RandomGeneratorStyle style, int length)
+        {
+            string strValidateString = "";
+            Random rnd = new Random();
+            string strValidateStringSource;
+            switch (style)
+            {
+                case RandomGeneratorStyle.Number:  // 純數字
+                    strValidateStringSource = "0123456789";
+                    break;
+                case RandomGeneratorStyle.NumberAndChar:  // 數字+大小寫英文
+                    strValidateStringSource = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                    break;
+                case RandomGeneratorStyle.NumberAndCharIgnoreCase:  //  數字+大寫英文
+                    strValidateStringSource = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                    break;
+                default:
+                    strValidateStringSource = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                    break;
+            }
+            for (int i = 0; i < length; i++)
+            {
+                strValidateString += strValidateStringSource[rnd.Next(strValidateStringSource.Length - 1)];
+            }
+            return strValidateString;
+        }
+
+                                                    //  純數字
+            string strCode = GenerateRandomNumber(RandomGeneratorStyle.Number, 10);//生成隨機數
+                                                          數字+大小寫英文
+            string strCode = GenerateRandomNumber(RandomGeneratorStyle.NumberAndChar, length);//生成隨機數
+
+            string captcha_code = string.Empty;
+            //验证码的字符集，去掉了一些容易混淆的字符 
+            char[] character = { '2', '3', '4', '5', '6', '8', '9', 'a', 'b', 'd', 'e', 'f', 'h', 'k', 'm', 'n', 'r', 'x', 'y', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'R', 'S', 'T', 'W', 'X', 'Y' };
+            //生成验证码字符串 
+            for (int i = 0; i < 4; i++)
+            {
+                captcha_code += character[rnd.Next(character.Length)];
+            }
+            richTextBox1.Text += "16取得 : " + captcha_code + "\n";
+
+
+            //沒有外部輸入驗證碼時隨機生成
+            if (String.IsNullOrEmpty(this.verifyCodeText))
+            {
+                StringBuilder objStringBuilder = new StringBuilder();
+
+                //加入數字1-9
+                for (int i = 1; i <= 9; i++)
+                {
+                    objStringBuilder.Append(i.ToString());
+                }
+
+                //加入大寫字母A-Z，不包括O
+                if (this.addUpperLetter)
+                {
+                    char temp = ' ';
+
+                    for (int i = 0; i < 26; i++)
+                    {
+                        temp = Convert.ToChar(i + 65);
+
+                        //如果生成的字母不是'O'
+                        if (!temp.Equals('O'))
+                        {
+                            objStringBuilder.Append(temp);
+                        }
+                    }
+                }
+
+                //加入小寫字母a-z，不包括o
+                if (this.addLowerLetter)
+                {
+                    char temp = ' ';
+
+                    for (int i = 0; i < 26; i++)
+                    {
+                        temp = Convert.ToChar(i + 97);
+
+                        //如果生成的字母不是'o'
+                        if (!temp.Equals('o'))
+                        {
+                            objStringBuilder.Append(temp);
+                        }
+                    }
+                }
+
+                //生成驗證碼字符串
+                {
+                    int index = 0;
+
+                    for (int i = 0; i < length; i++)
+                    {
+                        index = objRandom.Next(0, objStringBuilder.Length);
+
+                        this.verifyCodeText += objStringBuilder[index];
+
+                        objStringBuilder.Remove(index, 1);
+                    }
+                }
+                Console.WriteLine("取得aaaa : " + objStringBuilder);
+                Console.WriteLine("取得verifyCodeText : " + verifyCodeText);
+
+*/
+/*
+
+
+
 
 
 */
+
+
+
 
 
 

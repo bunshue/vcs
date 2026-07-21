@@ -368,7 +368,7 @@ namespace howto_covid19_all_rev1
 
             // Get the used range.
             Excel.Range used_range = sheet.UsedRange;
-    
+
             // Get the sheet's values.
             object[,] values = (object[,])used_range.Value2;
 
@@ -752,7 +752,7 @@ namespace howto_covid19_all_rev1
             CountryList.Sort(Comparer);
 
             // Redraw the graph.
-            RedrawGraph();        
+            RedrawGraph();
         }
 
         // A data set radio button has been clicked. Update the graph.
@@ -783,5 +783,14 @@ namespace howto_covid19_all_rev1
             protocol_Tls11 = (SecurityProtocolType)768,
             protocol_Tls12 = (SecurityProtocolType)3072;
     }
-
 }
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+

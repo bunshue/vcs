@@ -117,6 +117,7 @@ namespace vcs_Draw1
             button38.Location = new Point(x_st + dx * 3, y_st + dy * 8);
             button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
 
+            checkBox1.Location = new Point(x_st + dx * 2 - dd * 4, y_st + dy * 10);
             bt_eraser.Location = new Point(x_st + dx * 2 - dd * 2, y_st + dy * 10);
             bt_reset.Location = new Point(x_st + dx * 3 - dd * 3, y_st + dy * 10);
             bt_save.Location = new Point(x_st + dx * 4 - dd * 4, y_st + dy * 10);
@@ -397,10 +398,10 @@ namespace vcs_Draw1
             x_st += dx;
             x_st += dx / 2;
             recs = new Rectangle[4] {
-	            new Rectangle(x_st+0, y_st+0, 50, 80),
-	            new Rectangle(x_st+60, y_st+0, 80, 60),
-	            new Rectangle(x_st+60+90, y_st+0, 100, 75),
-	            new Rectangle(x_st+60+90+110, y_st+0, 50, 70)
+	            new Rectangle(x_st + 0, y_st + 0, 50, 80),
+	            new Rectangle(x_st + 60, y_st + 0, 80, 60),
+	            new Rectangle(x_st + 60 + 90, y_st + 0, 100, 75),
+	            new Rectangle(x_st + 60 + 90 + 110, y_st + 0, 50, 70)
             };
             g.DrawRectangles(p, recs);
 
@@ -413,10 +414,10 @@ namespace vcs_Draw1
             x_st += dx;
             x_st += dx / 2;
             recs = new Rectangle[4] {
-	            new Rectangle(x_st+0, y_st+0, 50, 80),
-	            new Rectangle(x_st+60, y_st+0, 80, 60),
-	            new Rectangle(x_st+60+90, y_st+0, 100, 75),
-	            new Rectangle(x_st+60+90+110, y_st+0, 50, 70)
+	            new Rectangle(x_st + 0, y_st + 0, 50, 80),
+	            new Rectangle(x_st + 60, y_st + 0, 80, 60),
+	            new Rectangle(x_st + 60 + 90, y_st + 0, 100, 75),
+	            new Rectangle(x_st + 60 + 90 + 110, y_st + 0, 50, 70)
             };
             g.FillRectangles(sb, recs);
 
@@ -477,11 +478,11 @@ namespace vcs_Draw1
 
             x_st += dx;
             Point[] points2 = { 
-                new Point(x_st+0, y_st+0),
-                new Point(x_st+200, y_st+20),
-                new Point(x_st+200, y_st+60),
-                new Point(x_st+150, y_st+20),
-                new Point(x_st+20, y_st+60) };
+                new Point(x_st + 0, y_st + 0),
+                new Point(x_st + 200, y_st + 20),
+                new Point(x_st + 200, y_st + 60),
+                new Point(x_st + 150, y_st + 20),
+                new Point(x_st + 20, y_st + 60) };
             g.DrawPolygon(Pens.Red, points2);
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
@@ -503,11 +504,11 @@ namespace vcs_Draw1
 
             x_st += dx;
             Point[] points4 = { 
-                new Point(x_st+0, y_st+0),
-                new Point(x_st+200, y_st+20),
-                new Point(x_st+200, y_st+60),
-                new Point(x_st+150, y_st+20),
-                new Point(x_st+20, y_st+60) };
+                new Point(x_st + 0, y_st + 0),
+                new Point(x_st + 200, y_st + 20),
+                new Point(x_st + 200, y_st + 60),
+                new Point(x_st + 150, y_st + 20),
+                new Point(x_st + 20, y_st + 60) };
             g.FillPolygon(new SolidBrush(Color.Red), points4);
 
             //空派形
@@ -710,7 +711,6 @@ namespace vcs_Draw1
             // Create string to draw.
             String drawString = "各種畫圖範例";
 
-            // Create font and brush.
             Font drawFont = new Font("標楷體", 36, FontStyle.Italic | FontStyle.Underline | FontStyle.Strikeout);
             SolidBrush drawBrush = new SolidBrush(Color.Navy);
 
@@ -1031,7 +1031,7 @@ namespace vcs_Draw1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //箭頭 虛線
+            //箭頭 虛線 LineCap
 
             //自定義直線箭頭大小
             Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
@@ -1046,7 +1046,6 @@ namespace vcs_Draw1
 
             g.DrawLine(RedPen, 100, 100, 300, 300);
 
-
             //畫虛線
             Control P = (Control)sender;
             Pen pen = new Pen(Color.FromArgb(255, 0, 0), 5);
@@ -1054,7 +1053,6 @@ namespace vcs_Draw1
             pen.DashPattern = new float[] { 2, 2 };//設置虛線中實點和空白區域之間的間隔
             //g.DrawLine(pen, 0, 0, 0, P.Height - 1);
             g.DrawRectangle(pen, 50, 50, 300, 300);
-
 
             //#畫虛線
             Pen p = new Pen(Color.Red, 5);
@@ -1086,6 +1084,17 @@ namespace vcs_Draw1
             //PenStyle.LineJoin = System.Drawing.Drawing2D.LineJoin.Bevel;
             PenStyle.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
             */
+
+
+            //繪製虛線，可設定Pen的DashStyle屬性為Dash,Dot,DashDot或者DashDotDot等
+            //改變直線端點的形狀，可以設定StartCap和EndCap屬性
+
+            //blackPen.StartCap=LineCap.ArrowAnchor;
+
+            //箭頭的畫法
+
+            //Pen p = new Pen(Color.Red, 0);
+            p.EndCap = LineCap.ArrowAnchor;
 
             pictureBox1.Image = bitmap1;
         }
@@ -1318,13 +1327,9 @@ namespace vcs_Draw1
         {
             //亂畫一通
             Graphics g = pictureBox1.CreateGraphics();
-            /*
-            //畫字串畫直的
-            StringFormat drawFormat = new StringFormat();
-            drawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
-            g.DrawString("畫字串畫直的", this.Font, new SolidBrush(Color.Black), 300, 100, drawFormat);
-
             g.DrawRectangle(Pens.Red, 100, 100, 200, 200);
+
+            /*
 
             //c#畫三角形、並填充顏色
             //目前知道有兩種方法：畫多邊形、GraphicsPath。但是用畫多邊形的方式畫三角形不太好。老畫不正的，截圖放大就明顯了。
@@ -1338,7 +1343,25 @@ namespace vcs_Draw1
             */
             //------------------------------------------------------------  # 60個
 
-            PaintImage(g);
+            //PaintImage(g);
+
+            //------------------------------------------------------------  # 60個
+
+            //多點之間的線段
+            Pen pen = new Pen(Color.Blue, 2);
+
+            //定義一個陣列有三個點
+            //分別為(10,10)、(20,20)、(30,30)
+            Point[] points =
+            {
+                new Point(100, 100),
+                new Point(200, 50),
+                new Point(300, 200)
+            };
+            g.DrawLines(pen, points);
+
+            //------------------------------------------------------------  # 60個
+
         }
 
         private void PaintImage(Graphics g)
@@ -1791,35 +1814,70 @@ namespace vcs_Draw1
             pictureBox1.Image = bitmap1;
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button17_Click(object sender, EventArgs e)
         {
             //StringFormat
 
-            Font font = new Font("Courier New", 14);
+            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+
+            Font f = new Font("Courier New", 14);
+
+            //畫字串畫直的
+            //StringFormat string_format = new StringFormat(StringFormatFlags.NoClip);
+            StringFormat string_format = new StringFormat();
+            string_format.FormatFlags = StringFormatFlags.DirectionVertical;
+
+            g.DrawString("畫字串畫直的", f, new SolidBrush(Color.Black), 300, 100, string_format);
+
+
+
+            //直書橫書
+            f = new Font("隸書", 17);
             StringFormat format = new StringFormat();
+            format.FormatFlags = StringFormatFlags.DirectionVertical;
 
-            /*
-            format.Alignment = StringAlignment.Center;
-            e.Graphics.DrawString("AAAAAAAAA", font, Brushes.Black, 100, 100, format);
+            g.DrawString("三杯祝福歌", f, Brushes.Black, 250, 30, format);
+            g.DrawString("一曲迎春調", f, Brushes.Black, 20, 30, format);
+            g.DrawString("迎春祝福", f, Brushes.Black, 100, 0);
 
-            format.Alignment = StringAlignment.Far;
-            e.Graphics.DrawString("AAAAAAAAA", font, Brushes.Black, 100, 200, format);
-
-            format.Alignment = StringAlignment.Near;
-            e.Graphics.DrawString("AAAAAAAAA", font, Brushes.Black, 100, 300, format);
-            */
+            pictureBox1.Image = bitmap1;
 
 
+            //StringFormat sf = new StringFormat();
+            //sf.Alignment = StringAlignment.Far;
+
+
+            //string_format.Alignment = StringAlignment.Center;
+            //string_format.LineAlignment = StringAlignment.Near;
+            //string_format.Alignment = StringAlignment.Near;
+            //string_format.LineAlignment = StringAlignment.Near;
+            //string_format.Trimming = StringTrimming.None;
+            //string_format.FormatFlags = StringFormatFlags.MeasureTrailingSpaces;
 
             //文字居中
-            StringFormat objStringFormat = new StringFormat(StringFormatFlags.NoClip);
+            string_format.Alignment = StringAlignment.Center;
+            string_format.LineAlignment = StringAlignment.Center;
 
-            objStringFormat.Alignment = StringAlignment.Center;
-            objStringFormat.LineAlignment = StringAlignment.Center;
 
-            //g.DrawString(chars[i].ToString(), objFont, objSolidBrush, -2, 2, objStringFormat);
+            /*
+            string_format.Alignment = StringAlignment.Center;
+            e.Graphics.DrawString("AAAAAAAAA", f, Brushes.Black, 100, 100, string_format);
 
+            string_format.Alignment = StringAlignment.Far;
+            e.Graphics.DrawString("AAAAAAAAA", f, Brushes.Black, 100, 200, string_format);
+
+            string_format.Alignment = StringAlignment.Near;
+            e.Graphics.DrawString("AAAAAAAAA", f, Brushes.Black, 100, 300, string_format);
+            */
+
+            pictureBox1.Image = bitmap1;
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button18_Click(object sender, EventArgs e)
         {
@@ -1982,10 +2040,10 @@ namespace vcs_Draw1
             }
         }
 
-        public Image SetBadge(PictureBox Pict, String Str, Font font, int place)
+        public Image SetBadge(PictureBox Pict, String Str, Font f, int place)
         {
             Image image2 = Pict.Image;//根據圖片實例化Image類
-            int Var_FontSize = (int)font.Size;//取得字體大小
+            int Var_FontSize = (int)f.Size;//取得字體大小
             bool Var_isSetFont = false;//判斷目前文字是否超出圖片的大小
             int Var_W = image2.Width;//取得圖片的寬度
             int Var_H = image2.Height;//取得圖片的高度
@@ -1997,12 +2055,12 @@ namespace vcs_Draw1
             Graphics g = Graphics.FromImage(bitmap1);//用指定的Bitmap實例化Graphics
             Graphics g2 = Graphics.FromImage(image2);//用指定的Bitmap實例化Graphics
             SizeF Var_Size = new SizeF(Var_W, Var_H);//實例化SizeF類
-            Font tem_Font = font;//取得文字的設定文字
+            Font tem_Font = f;//取得文字的設定文字
             g.Clear(Color.White);//清空圖片
             while (Var_isSetFont == false)//如果文字超出圖片的大小
             {
                 //設定文字的文字
-                tem_Font = new Font(font.Name, Var_FontSize, font.Bold ? FontStyle.Bold : FontStyle.Regular);
+                tem_Font = new Font(f.Name, Var_FontSize, f.Bold ? FontStyle.Bold : FontStyle.Regular);
                 Var_Size = g.MeasureString(Str, tem_Font);//對文字進行測量
                 if (Var_Size.Width < bitmap1.Width - 10)//如果文字的寬度沒有超出圖片
                 {
@@ -2263,23 +2321,22 @@ namespace vcs_Draw1
 
             x_st = 460;
             y_st = 0;
-            // Make a font.
-            using (Font the_font = new Font("Times New Roman", 40, FontStyle.Regular, GraphicsUnit.Pixel))
-            {
-                // See how big the text will be when drawn.
-                string the_text = "群曜醫電\n股份有限公司";
-                SizeF text_size = e.Graphics.MeasureString(the_text, the_font);
+            Font the_font = new Font("Times New Roman", 40, FontStyle.Regular, GraphicsUnit.Pixel);
 
-                // Draw a rectangle and two ellipses.
-                e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                e.Graphics.DrawRectangle(Pens.Blue, x_st, y_st, text_size.Width, text_size.Height);
-                e.Graphics.DrawEllipse(Pens.Red, x_st - 3, y_st - 3, 6, 6);
-                e.Graphics.DrawEllipse(Pens.Green, text_size.Width - 3, text_size.Height - 3, 6, 6);
+            // See how big the text will be when drawn.
+            string the_text = "群曜醫電\n股份有限公司";
+            SizeF text_size = e.Graphics.MeasureString(the_text, the_font);
 
-                // Draw the text.
-                e.Graphics.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-                e.Graphics.DrawString(the_text, the_font, Brushes.Brown, x_st, y_st);
-            }
+            // Draw a rectangle and two ellipses.
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            e.Graphics.DrawRectangle(Pens.Blue, x_st, y_st, text_size.Width, text_size.Height);
+            e.Graphics.DrawEllipse(Pens.Red, x_st - 3, y_st - 3, 6, 6);
+            e.Graphics.DrawEllipse(Pens.Green, text_size.Width - 3, text_size.Height - 3, 6, 6);
+
+            // Draw the text.
+            e.Graphics.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+            e.Graphics.DrawString(the_text, the_font, Brushes.Brown, x_st, y_st);
+
             //表單底部畫字 SP
 
             //------------------------------------------------------------  # 60個
@@ -2327,15 +2384,12 @@ namespace vcs_Draw1
                 // Don't use TextRenderingHint.AntiAliasGridFit.
                 g.TextRenderingHint = TextRenderingHint.AntiAlias;
 
-                // Make a font to use.
-                using (Font font = new Font("Times New Roman", 16, FontStyle.Regular))
-                {
-                    // Draw the text.
-                    DrawTextInBoxes(g, font, 4, 4,
-                        "When in the course of human events it " +
-                        "becomes necessary for the quick brown " +
-                        "fox to jump over the lazy dog...");
-                }
+                Font f = new Font("Times New Roman", 16, FontStyle.Regular);
+                // Draw the text.
+                DrawTextInBoxes(g, f, 4, 4,
+                    "When in the course of human events it " +
+                    "becomes necessary for the quick brown " +
+                    "fox to jump over the lazy dog...");
             }
 
             // Display the result.
@@ -2352,20 +2406,20 @@ namespace vcs_Draw1
         }
 
         // Draw a long string with boxes around each character.
-        private void DrawTextInBoxes(Graphics g, Font font, float start_x, float start_y, string text)
+        private void DrawTextInBoxes(Graphics g, Font f, float start_x, float start_y, string text)
         {
             // Measure the characters.
-            List<RectangleF> rects = MeasureCharacters(g, font, text);
+            List<RectangleF> rects = MeasureCharacters(g, f, text);
 
             for (int i = 0; i < text.Length; i++)
             {
                 g.DrawRectangle(Pens.Red, start_x + rects[i].Left, start_y + rects[i].Top, rects[i].Width, rects[i].Height);
             }
-            g.DrawString(text, font, Brushes.Blue, start_x, start_y);
+            g.DrawString(text, f, Brushes.Blue, start_x, start_y);
         }
 
         // Measure the characters in the string.
-        private List<RectangleF> MeasureCharacters(Graphics g, Font font, string text)
+        private List<RectangleF> MeasureCharacters(Graphics g, Font f, string text)
         {
             List<RectangleF> results = new List<RectangleF>();
 
@@ -2384,7 +2438,7 @@ namespace vcs_Draw1
                 // Console.WriteLine(substring);
 
                 // Measure the characters.
-                List<RectangleF> rects = MeasureCharactersInWord(g, font, substring);
+                List<RectangleF> rects = MeasureCharactersInWord(g, f, substring);
 
                 // Remove lead-in for the first character.
                 if (start == 0) x += rects[0].Left;
@@ -2409,36 +2463,34 @@ namespace vcs_Draw1
             return results;
         }
 
-        // Measure the characters in a string with
-        // no more than 32 characters.
-        private List<RectangleF> MeasureCharactersInWord(Graphics g, Font font, string text)
+        // Measure the characters in a string with no more than 32 characters.
+        private List<RectangleF> MeasureCharactersInWord(Graphics g, Font f, string text)
         {
             List<RectangleF> result = new List<RectangleF>();
 
-            using (StringFormat string_format = new StringFormat())
+            StringFormat string_format = new StringFormat();
+            string_format.Alignment = StringAlignment.Near;
+            string_format.LineAlignment = StringAlignment.Near;
+            string_format.Trimming = StringTrimming.None;
+            string_format.FormatFlags = StringFormatFlags.MeasureTrailingSpaces;
+
+            CharacterRange[] ranges = new CharacterRange[text.Length];
+            for (int i = 0; i < text.Length; i++)
             {
-                string_format.Alignment = StringAlignment.Near;
-                string_format.LineAlignment = StringAlignment.Near;
-                string_format.Trimming = StringTrimming.None;
-                string_format.FormatFlags = StringFormatFlags.MeasureTrailingSpaces;
-
-                CharacterRange[] ranges = new CharacterRange[text.Length];
-                for (int i = 0; i < text.Length; i++)
-                {
-                    ranges[i] = new CharacterRange(i, 1);
-                }
-                string_format.SetMeasurableCharacterRanges(ranges);
-
-                // Find the character ranges.
-                RectangleF rect = new RectangleF(0, 0, 10000, 100);
-                Region[] regions = g.MeasureCharacterRanges(text, font, this.ClientRectangle, string_format);
-
-                // Convert the regions into rectangles.
-                foreach (Region region in regions)
-                {
-                    result.Add(region.GetBounds(g));
-                }
+                ranges[i] = new CharacterRange(i, 1);
             }
+            string_format.SetMeasurableCharacterRanges(ranges);
+
+            // Find the character ranges.
+            RectangleF rect = new RectangleF(0, 0, 10000, 100);
+            Region[] regions = g.MeasureCharacterRanges(text, f, this.ClientRectangle, string_format);
+
+            // Convert the regions into rectangles.
+            foreach (Region region in regions)
+            {
+                result.Add(region.GetBounds(g));
+            }
+
             return result;
         }
         #endregion
@@ -2526,7 +2578,7 @@ namespace vcs_Draw1
             g.DrawLine(Pens.Green, start_point, end_point);
 
             Brush brush = Brushes.Red;
-            Font font = new Font("標楷體", 18);
+            Font f = new Font("標楷體", 18);
 
             float dx = end_point.X - start_point.X;
             float dy = end_point.Y - start_point.Y;
@@ -2539,7 +2591,7 @@ namespace vcs_Draw1
             while (last_ch < txt.Length)
             {
                 string test_string = txt.Substring(first_ch, last_ch - first_ch + 1);
-                if (g.MeasureString(test_string, font).Width > dist)
+                if (g.MeasureString(test_string, f).Width > dist)
                 {
                     // This is one too many characters.
                     last_ch--;
@@ -2563,21 +2615,21 @@ namespace vcs_Draw1
             GraphicsState state = g.Save();
             if (text_above_segment)
             {
-                g.TranslateTransform(0, -g.MeasureString(chars_that_fit, font).Height, MatrixOrder.Append);
+                g.TranslateTransform(0, -g.MeasureString(chars_that_fit, f).Height, MatrixOrder.Append);
             }
             float angle = (float)(180 * Math.Atan2(dy, dx) / Math.PI);
             g.RotateTransform(angle, MatrixOrder.Append);
             g.TranslateTransform(start_point.X, start_point.Y, MatrixOrder.Append);
 
             // Draw the characters that fit.
-            g.DrawString(chars_that_fit, font, brush, 0, 0);
+            g.DrawString(chars_that_fit, f, brush, 0, 0);
 
             // Restore the saved state.
             g.Restore(state);
 
             // Update first_ch and start_point.
             first_ch = last_ch + 1;
-            float text_width = g.MeasureString(chars_that_fit, font).Width;
+            float text_width = g.MeasureString(chars_that_fit, f).Width;
             start_point = new PointF(start_point.X + dx * text_width, start_point.Y + dy * text_width);
         }
 
@@ -2842,40 +2894,70 @@ namespace vcs_Draw1
             }
             count++;
         }
+
+        //------------------------------------------------------------  # 60個
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            //g.Clear(Color.White);
+            if (checkBox1.Checked == true)
+            {
+                draw_grid();
+            }
+        }
+
+        public void draw_grid()
+        {
+            bitmap1 = new Bitmap(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height);
+            Graphics g = Graphics.FromImage(bitmap1);
+
+            int i;
+            int rows = pictureBox1.ClientSize.Height / 100;
+            int cols = pictureBox1.ClientSize.Width / 100;
+            p = new Pen(Color.Navy, 1);
+            for (i = 0; i <= rows; i++)
+            {
+                g.DrawLine(p, 0, i * 100, pictureBox1.ClientSize.Width - 1, i * 100);
+            }
+            for (i = 0; i <= cols; i++)
+            {
+                g.DrawLine(p, new Point(i * 100, 0), new Point(i * 100, pictureBox1.ClientSize.Height - 1));
+            }
+
+            pictureBox1.Image = bitmap1;
+        }
+
+        //------------------------------------------------------------  # 60個
     }
 }
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-/*  可搬出
-
-            bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0xff, 0x00, 0x00));
-            bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x00, 0xff, 0x00));
-            bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x00, 0x00, 0xff));
+/*
+bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0xff, 0x00, 0x00));
+bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x00, 0xff, 0x00));
+bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x00, 0x00, 0xff));
 
 bitmap1.SetPixel(xx, yy, Color.FromArgb(0xFF, (rr) % 256, (gg) % 256, (bb) % 256));
-
 bitmap1.SetPixel(xx, yy, Color.FromArgb(30, 0x11, 0x33, 0x55));
-
 bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0, 0, 0));
 
-                        Color p = bitmap1.GetPixel(xx, yy);
-                        //richTextBox1.Text += p.ToString() + " ";
-                        richTextBox1.Text += p.A.ToString("X2") + p.R.ToString("X2") + p.G.ToString("X2") + p.B.ToString("X2") + " ";
+Color p = bitmap1.GetPixel(xx, yy);
+//richTextBox1.Text += p.ToString() + " ";
+richTextBox1.Text += p.A.ToString("X2") + p.R.ToString("X2") + p.G.ToString("X2") + p.B.ToString("X2") + " ";
 
 //------------------------------------------------------------  # 60個
 
 Font設定字型及樣式
-                new Font(this.Font, FontStyle.Italic),
+new Font(this.Font, FontStyle.Italic),
                 
-            //Graphics.DrawImage (Image, Rectangle, Rectangle, GraphicsUnit)
-            //四個參數分別是     來源影像 目標區域  來源區域      單位
+//Graphics.DrawImage (Image, Rectangle, Rectangle, GraphicsUnit)
+//四個參數分別是     來源影像 目標區域  來源區域      單位
 
 string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 //讀檔 至 Image 影像
@@ -2935,8 +3017,8 @@ Pen 畫筆 = new Pen(畫筆顏色, 畫筆粗細);
 設定顏色的方法	呼叫靜態函式：Color.FromArgb()
 
 ex:
-Color red= Color.FromArgb(255,0,0)
-this.BackColor=Color.White;
+Color red = Color.FromArgb(255,0,0)
+this.BackColor = Color.White;
 
 //------------------------------------------------------------  # 60個
 
@@ -2947,24 +3029,10 @@ Pen用於告訴Graphics如何繪製線條
 Brush用於填充區域
 
 Point的用法
-Point b=new Point(20,10);
-Point a=new Point();
-a.X=20;
-a.Y=10;
-
-//------------------------------------------------------------  # 60個
-
-繪製虛線，可設定Pen的DashStyle屬性為Dash,Dot,DashDot或者DashDotDot等
-改變直線端點的形狀，可以設定StartCap和EndCap屬性
-
-blackPen.StartCap=LineCap.ArrowAnchor;
-
-//------------------------------------------------------------  # 60個
-
-箭頭的畫法
-
-            Pen p = new Pen(Color.Red, 0);
-            p.EndCap = LineCap.ArrowAnchor;
+Point b = new Point(20,10);
+Point a = new Point();
+a.X = 20;
+a.Y = 10;
 
 //------------------------------------------------------------  # 60個
 
@@ -3010,28 +3078,9 @@ DrawPie(Pen, x, y, Width, Height, startAngle, sweepAngle) //用指定的筆繪�
 
 //------------------------------------------------------------  # 60個
 
-//多點之間的線段
-      Graphics g = this.CreateGraphics();
-      Pen pen = new Pen(Color.Blue, 2);      
-
-      //定義一個陣列有三個點
-      //分別為(10,10)、(20,20)、(30,30)
-      Point[] points = 
-      {
-            new Point(10, 10),
-            new Point(20, 20),
-            new Point(30, 30)
-      };
-
-      g.DrawLines(pen, points);
-
-//------------------------------------------------------------  # 60個
-
 
 
 */
-
-
 
 
 

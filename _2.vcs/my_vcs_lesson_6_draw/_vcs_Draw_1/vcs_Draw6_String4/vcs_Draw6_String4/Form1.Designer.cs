@@ -35,25 +35,12 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.bt_font_size_10 = new System.Windows.Forms.Button();
             this.cb_font_style3 = new System.Windows.Forms.CheckBox();
             this.bt_font_setup = new System.Windows.Forms.Button();
-            this.bt_font_size_20 = new System.Windows.Forms.Button();
             this.cb_font_style2 = new System.Windows.Forms.CheckBox();
-            this.bt_font_size_30 = new System.Windows.Forms.Button();
-            this.bt_font_size_minus = new System.Windows.Forms.Button();
-            this.bt_font_size_40 = new System.Windows.Forms.Button();
             this.cb_font_style1 = new System.Windows.Forms.CheckBox();
-            this.bt_font_size_50 = new System.Windows.Forms.Button();
-            this.bt_font_size_plus = new System.Windows.Forms.Button();
-            this.bt_fontname1 = new System.Windows.Forms.Button();
-            this.bt_fontname2 = new System.Windows.Forms.Button();
-            this.bt_speed_minus = new System.Windows.Forms.Button();
-            this.bt_speed_plus = new System.Windows.Forms.Button();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.bt_clear = new System.Windows.Forms.Button();
-            this.bt_background_color = new System.Windows.Forms.Button();
             this.bt_open_picture = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.groupBox_selection = new System.Windows.Forms.GroupBox();
@@ -66,7 +53,6 @@
             this.lb_y_st = new System.Windows.Forms.Label();
             this.lb_w = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.groupBox5.SuspendLayout();
             this.groupBox_selection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_h)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_w)).BeginInit();
@@ -122,50 +108,17 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(12, 456);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 346);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(800, 171);
+            this.richTextBox1.Size = new System.Drawing.Size(800, 281);
             this.richTextBox1.TabIndex = 30;
             this.richTextBox1.Text = "";
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.bt_font_size_10);
-            this.groupBox5.Controls.Add(this.cb_font_style3);
-            this.groupBox5.Controls.Add(this.bt_font_setup);
-            this.groupBox5.Controls.Add(this.bt_font_size_20);
-            this.groupBox5.Controls.Add(this.cb_font_style2);
-            this.groupBox5.Controls.Add(this.bt_font_size_30);
-            this.groupBox5.Controls.Add(this.bt_font_size_minus);
-            this.groupBox5.Controls.Add(this.bt_font_size_40);
-            this.groupBox5.Controls.Add(this.cb_font_style1);
-            this.groupBox5.Controls.Add(this.bt_font_size_50);
-            this.groupBox5.Controls.Add(this.bt_font_size_plus);
-            this.groupBox5.Controls.Add(this.bt_fontname1);
-            this.groupBox5.Controls.Add(this.bt_fontname2);
-            this.groupBox5.Location = new System.Drawing.Point(160, 80);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(640, 140);
-            this.groupBox5.TabIndex = 31;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "自型設定";
-            // 
-            // bt_font_size_10
-            // 
-            this.bt_font_size_10.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_font_size_10.Location = new System.Drawing.Point(19, 22);
-            this.bt_font_size_10.Name = "bt_font_size_10";
-            this.bt_font_size_10.Size = new System.Drawing.Size(41, 40);
-            this.bt_font_size_10.TabIndex = 1;
-            this.bt_font_size_10.Text = "10";
-            this.bt_font_size_10.UseVisualStyleBackColor = true;
-            this.bt_font_size_10.Click += new System.EventHandler(this.bt_font_size_10_Click);
             // 
             // cb_font_style3
             // 
             this.cb_font_style3.AutoSize = true;
             this.cb_font_style3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_font_style3.Location = new System.Drawing.Point(556, 33);
+            this.cb_font_style3.Location = new System.Drawing.Point(257, 156);
             this.cb_font_style3.Name = "cb_font_style3";
             this.cb_font_style3.Size = new System.Drawing.Size(66, 23);
             this.cb_font_style3.TabIndex = 10;
@@ -177,7 +130,7 @@
             // 
             this.bt_font_setup.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_font_setup.ForeColor = System.Drawing.Color.Red;
-            this.bt_font_setup.Location = new System.Drawing.Point(298, 22);
+            this.bt_font_setup.Location = new System.Drawing.Point(12, 145);
             this.bt_font_setup.Name = "bt_font_setup";
             this.bt_font_setup.Size = new System.Drawing.Size(66, 40);
             this.bt_font_setup.TabIndex = 11;
@@ -185,22 +138,11 @@
             this.bt_font_setup.UseVisualStyleBackColor = true;
             this.bt_font_setup.Click += new System.EventHandler(this.bt_font_setup_Click);
             // 
-            // bt_font_size_20
-            // 
-            this.bt_font_size_20.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_font_size_20.Location = new System.Drawing.Point(72, 22);
-            this.bt_font_size_20.Name = "bt_font_size_20";
-            this.bt_font_size_20.Size = new System.Drawing.Size(41, 40);
-            this.bt_font_size_20.TabIndex = 2;
-            this.bt_font_size_20.Text = "20";
-            this.bt_font_size_20.UseVisualStyleBackColor = true;
-            this.bt_font_size_20.Click += new System.EventHandler(this.bt_font_size_20_Click);
-            // 
             // cb_font_style2
             // 
             this.cb_font_style2.AutoSize = true;
             this.cb_font_style2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_font_style2.Location = new System.Drawing.Point(475, 33);
+            this.cb_font_style2.Location = new System.Drawing.Point(176, 156);
             this.cb_font_style2.Name = "cb_font_style2";
             this.cb_font_style2.Size = new System.Drawing.Size(66, 23);
             this.cb_font_style2.TabIndex = 9;
@@ -208,116 +150,17 @@
             this.cb_font_style2.UseVisualStyleBackColor = true;
             this.cb_font_style2.CheckedChanged += new System.EventHandler(this.cb_font_style_CheckedChanged);
             // 
-            // bt_font_size_30
-            // 
-            this.bt_font_size_30.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_font_size_30.Location = new System.Drawing.Point(128, 22);
-            this.bt_font_size_30.Name = "bt_font_size_30";
-            this.bt_font_size_30.Size = new System.Drawing.Size(41, 40);
-            this.bt_font_size_30.TabIndex = 3;
-            this.bt_font_size_30.Text = "30";
-            this.bt_font_size_30.UseVisualStyleBackColor = true;
-            this.bt_font_size_30.Click += new System.EventHandler(this.bt_font_size_30_Click);
-            // 
-            // bt_font_size_minus
-            // 
-            this.bt_font_size_minus.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_font_size_minus.Location = new System.Drawing.Point(19, 85);
-            this.bt_font_size_minus.Name = "bt_font_size_minus";
-            this.bt_font_size_minus.Size = new System.Drawing.Size(112, 40);
-            this.bt_font_size_minus.TabIndex = 12;
-            this.bt_font_size_minus.Text = "字體 -";
-            this.bt_font_size_minus.UseVisualStyleBackColor = true;
-            this.bt_font_size_minus.Click += new System.EventHandler(this.bt_font_size_minus_Click);
-            // 
-            // bt_font_size_40
-            // 
-            this.bt_font_size_40.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_font_size_40.Location = new System.Drawing.Point(181, 22);
-            this.bt_font_size_40.Name = "bt_font_size_40";
-            this.bt_font_size_40.Size = new System.Drawing.Size(41, 40);
-            this.bt_font_size_40.TabIndex = 4;
-            this.bt_font_size_40.Text = "40";
-            this.bt_font_size_40.UseVisualStyleBackColor = true;
-            this.bt_font_size_40.Click += new System.EventHandler(this.bt_font_size_40_Click);
-            // 
             // cb_font_style1
             // 
             this.cb_font_style1.AutoSize = true;
             this.cb_font_style1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_font_style1.Location = new System.Drawing.Point(391, 33);
+            this.cb_font_style1.Location = new System.Drawing.Point(92, 156);
             this.cb_font_style1.Name = "cb_font_style1";
             this.cb_font_style1.Size = new System.Drawing.Size(66, 23);
             this.cb_font_style1.TabIndex = 8;
             this.cb_font_style1.Text = "粗體";
             this.cb_font_style1.UseVisualStyleBackColor = true;
             this.cb_font_style1.CheckedChanged += new System.EventHandler(this.cb_font_style_CheckedChanged);
-            // 
-            // bt_font_size_50
-            // 
-            this.bt_font_size_50.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_font_size_50.Location = new System.Drawing.Point(232, 22);
-            this.bt_font_size_50.Name = "bt_font_size_50";
-            this.bt_font_size_50.Size = new System.Drawing.Size(41, 40);
-            this.bt_font_size_50.TabIndex = 5;
-            this.bt_font_size_50.Text = "50";
-            this.bt_font_size_50.UseVisualStyleBackColor = true;
-            this.bt_font_size_50.Click += new System.EventHandler(this.bt_font_size_50_Click);
-            // 
-            // bt_font_size_plus
-            // 
-            this.bt_font_size_plus.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_font_size_plus.Location = new System.Drawing.Point(161, 85);
-            this.bt_font_size_plus.Name = "bt_font_size_plus";
-            this.bt_font_size_plus.Size = new System.Drawing.Size(112, 40);
-            this.bt_font_size_plus.TabIndex = 14;
-            this.bt_font_size_plus.Text = "字體 +";
-            this.bt_font_size_plus.UseVisualStyleBackColor = true;
-            this.bt_font_size_plus.Click += new System.EventHandler(this.bt_font_size_plus_Click);
-            // 
-            // bt_fontname1
-            // 
-            this.bt_fontname1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_fontname1.Location = new System.Drawing.Point(298, 85);
-            this.bt_fontname1.Name = "bt_fontname1";
-            this.bt_fontname1.Size = new System.Drawing.Size(112, 40);
-            this.bt_fontname1.TabIndex = 6;
-            this.bt_fontname1.Text = "標楷體";
-            this.bt_fontname1.UseVisualStyleBackColor = true;
-            this.bt_fontname1.Click += new System.EventHandler(this.bt_fontname1_Click);
-            // 
-            // bt_fontname2
-            // 
-            this.bt_fontname2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_fontname2.Location = new System.Drawing.Point(427, 85);
-            this.bt_fontname2.Name = "bt_fontname2";
-            this.bt_fontname2.Size = new System.Drawing.Size(112, 40);
-            this.bt_fontname2.TabIndex = 7;
-            this.bt_fontname2.Text = "新細明體";
-            this.bt_fontname2.UseVisualStyleBackColor = true;
-            this.bt_fontname2.Click += new System.EventHandler(this.bt_fontname2_Click);
-            // 
-            // bt_speed_minus
-            // 
-            this.bt_speed_minus.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_speed_minus.Location = new System.Drawing.Point(12, 409);
-            this.bt_speed_minus.Name = "bt_speed_minus";
-            this.bt_speed_minus.Size = new System.Drawing.Size(112, 40);
-            this.bt_speed_minus.TabIndex = 15;
-            this.bt_speed_minus.Text = "速度 -";
-            this.bt_speed_minus.UseVisualStyleBackColor = true;
-            this.bt_speed_minus.Click += new System.EventHandler(this.bt_speed_minus_Click);
-            // 
-            // bt_speed_plus
-            // 
-            this.bt_speed_plus.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_speed_plus.Location = new System.Drawing.Point(130, 410);
-            this.bt_speed_plus.Name = "bt_speed_plus";
-            this.bt_speed_plus.Size = new System.Drawing.Size(112, 40);
-            this.bt_speed_plus.TabIndex = 15;
-            this.bt_speed_plus.Text = "速度 +";
-            this.bt_speed_plus.UseVisualStyleBackColor = true;
-            this.bt_speed_plus.Click += new System.EventHandler(this.bt_speed_plus_Click);
             // 
             // bt_clear
             // 
@@ -330,22 +173,11 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
-            // bt_background_color
-            // 
-            this.bt_background_color.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_background_color.Location = new System.Drawing.Point(248, 410);
-            this.bt_background_color.Name = "bt_background_color";
-            this.bt_background_color.Size = new System.Drawing.Size(112, 40);
-            this.bt_background_color.TabIndex = 33;
-            this.bt_background_color.Text = "背景色";
-            this.bt_background_color.UseVisualStyleBackColor = true;
-            this.bt_background_color.Click += new System.EventHandler(this.bt_background_color_Click);
-            // 
             // bt_open_picture
             // 
             this.bt_open_picture.BackgroundImage = global::vcs_Draw6_String4.Properties.Resources.Unification_Church_symbol_svg;
             this.bt_open_picture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_open_picture.Location = new System.Drawing.Point(712, 350);
+            this.bt_open_picture.Location = new System.Drawing.Point(712, 85);
             this.bt_open_picture.Name = "bt_open_picture";
             this.bt_open_picture.Size = new System.Drawing.Size(100, 100);
             this.bt_open_picture.TabIndex = 249;
@@ -362,7 +194,7 @@
             this.groupBox_selection.Controls.Add(this.nud_x_st);
             this.groupBox_selection.Controls.Add(this.lb_y_st);
             this.groupBox_selection.Controls.Add(this.lb_w);
-            this.groupBox_selection.Location = new System.Drawing.Point(367, 344);
+            this.groupBox_selection.Location = new System.Drawing.Point(367, 79);
             this.groupBox_selection.Name = "groupBox_selection";
             this.groupBox_selection.Size = new System.Drawing.Size(272, 106);
             this.groupBox_selection.TabIndex = 250;
@@ -471,13 +303,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(824, 639);
+            this.Controls.Add(this.cb_font_style3);
             this.Controls.Add(this.groupBox_selection);
+            this.Controls.Add(this.cb_font_style2);
+            this.Controls.Add(this.bt_font_setup);
+            this.Controls.Add(this.cb_font_style1);
             this.Controls.Add(this.bt_open_picture);
-            this.Controls.Add(this.bt_background_color);
             this.Controls.Add(this.bt_clear);
-            this.Controls.Add(this.bt_speed_plus);
-            this.Controls.Add(this.bt_speed_minus);
-            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.textBox1);
@@ -487,8 +319,6 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
             this.groupBox_selection.ResumeLayout(false);
             this.groupBox_selection.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_h)).EndInit();
@@ -508,25 +338,12 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Button bt_font_size_10;
         private System.Windows.Forms.CheckBox cb_font_style3;
         private System.Windows.Forms.Button bt_font_setup;
-        private System.Windows.Forms.Button bt_font_size_20;
         private System.Windows.Forms.CheckBox cb_font_style2;
-        private System.Windows.Forms.Button bt_font_size_30;
-        private System.Windows.Forms.Button bt_font_size_minus;
-        private System.Windows.Forms.Button bt_font_size_40;
         private System.Windows.Forms.CheckBox cb_font_style1;
-        private System.Windows.Forms.Button bt_font_size_50;
-        private System.Windows.Forms.Button bt_font_size_plus;
-        private System.Windows.Forms.Button bt_fontname1;
-        private System.Windows.Forms.Button bt_fontname2;
-        private System.Windows.Forms.Button bt_speed_minus;
-        private System.Windows.Forms.Button bt_speed_plus;
         private System.Windows.Forms.FontDialog fontDialog1;
         private System.Windows.Forms.Button bt_clear;
-        private System.Windows.Forms.Button bt_background_color;
         private System.Windows.Forms.Button bt_open_picture;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.GroupBox groupBox_selection;

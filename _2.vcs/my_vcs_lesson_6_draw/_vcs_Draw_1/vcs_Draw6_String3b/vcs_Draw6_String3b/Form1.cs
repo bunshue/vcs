@@ -354,10 +354,8 @@ namespace vcs_Draw6_String3b
                 pictureBox2.ClientSize.Height - TextMargin.Top - TextMargin.Bottom);
 
             // Draw the text.
-            using (Font f = new Font("Times New Roman", 10))
-            {
-                DrawJustifiedLine(e.Graphics, rect, f, Brushes.Blue, MessageText);
-            }
+            Font f = new Font("Times New Roman", 10);
+            DrawJustifiedLine(e.Graphics, rect, f, Brushes.Blue, MessageText);
 
             // Show the text drawing area.
             e.Graphics.DrawRectangle(Pens.Silver, Rectangle.Round(rect));
@@ -413,13 +411,7 @@ namespace vcs_Draw6_String3b
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
 

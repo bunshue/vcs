@@ -287,7 +287,6 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(180, 45);
             this.button13.TabIndex = 31;
-            this.button13.Text = "直書橫書";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -385,7 +384,6 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(180, 45);
             this.button19.TabIndex = 46;
-            this.button19.Text = "sinc";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -445,7 +443,7 @@
             // 
             // button27
             // 
-            this.button27.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button27.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button27.Location = new System.Drawing.Point(377, 370);
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(180, 45);
@@ -494,7 +492,6 @@
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(180, 45);
             this.button29.TabIndex = 59;
-            this.button29.Text = "test";
             this.button29.UseVisualStyleBackColor = true;
             this.button29.Click += new System.EventHandler(this.button29_Click);
             // 

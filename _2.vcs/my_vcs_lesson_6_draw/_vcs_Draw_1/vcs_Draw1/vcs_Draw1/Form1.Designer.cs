@@ -80,6 +80,7 @@
             this.bt_reset = new System.Windows.Forms.Button();
             this.pictureBox_count = new System.Windows.Forms.PictureBox();
             this.timer_progress = new System.Windows.Forms.Timer(this.components);
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_uac)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_text)).BeginInit();
@@ -627,11 +628,24 @@
             this.timer_progress.Interval = 1000;
             this.timer_progress.Tick += new System.EventHandler(this.timer_progress_Tick);
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.checkBox1.Location = new System.Drawing.Point(429, 629);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(66, 23);
+            this.checkBox1.TabIndex = 109;
+            this.checkBox1.Text = "格線";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1104, 702);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.pictureBox_count);
             this.Controls.Add(this.bt_reset);
             this.Controls.Add(this.bt_eraser);
@@ -691,6 +705,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_text)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_count)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -747,6 +762,7 @@
         private System.Windows.Forms.Button bt_reset;
         private System.Windows.Forms.PictureBox pictureBox_count;
         private System.Windows.Forms.Timer timer_progress;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 
