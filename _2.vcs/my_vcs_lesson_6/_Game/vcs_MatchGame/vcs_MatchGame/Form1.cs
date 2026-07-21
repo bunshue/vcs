@@ -28,35 +28,6 @@ namespace vcs_MatchGame
             InitializeComponent();
         }
 
-        void show_item_location()
-        {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-            int w = 102;
-            int h = 76;
-
-            x_st = 50;
-            y_st = 50;
-            dx = w * 12 / 10;
-            dy = h * 12 / 10;
-            int i;
-            for (i = 0; i < pbx.Length; i++)
-            {
-                pbx[i] = new PictureBox();
-                pbx[i].AutoSize = false;
-                pbx[i].Name = "pbx" + i.ToString();
-                pbx[i].Text = (i + 1).ToString();
-                pbx[i].Click += pbx_Click;
-                pbx[i].Location = new Point(x_st + dx * (i % C), y_st + dy * (i / C));
-                pbx[i].Size = new Size(w, h);
-                pbx[i].Tag = "pbx : " + i.ToString();
-                pbx[i].BackColor = Color.Gray;
-                this.Controls.Add(pbx[i]);
-            }
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             total_items = R * C;
@@ -100,6 +71,52 @@ namespace vcs_MatchGame
 
             start = DateTime.Now;
         }
+
+        void show_item_location()
+        {
+            int x_st = 50;
+            int y_st = 50;
+            int w = 102;
+            int h = 76;
+            int dx = w * 12 / 10;
+            int dy = h * 12 / 10;
+            for (int i = 0; i < pbx.Length; i++)
+            {
+                pbx[i] = new PictureBox();
+                pbx[i].AutoSize = false;
+                pbx[i].Name = "pbx" + i.ToString();
+                pbx[i].Text = (i + 1).ToString();
+                pbx[i].Click += pbx_Click;
+                pbx[i].Location = new Point(x_st + dx * (i % C), y_st + dy * (i / C));
+                pbx[i].Size = new Size(w, h);
+                pbx[i].Tag = "pbx : " + i.ToString();
+                pbx[i].BackColor = Color.Gray;
+                this.Controls.Add(pbx[i]);
+            }
+
+            x_st = 10;
+            y_st = 10;
+            dx = 200 + 10;
+            dy = 60 + 10;
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            richTextBox1.Size = new Size(300, 690);
+            richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1273, 750);
+            this.Text = "vcs_test_all_00_Usually";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void pbx_Click(object sender, EventArgs e)
         {
@@ -189,13 +206,6 @@ namespace vcs_MatchGame
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
-

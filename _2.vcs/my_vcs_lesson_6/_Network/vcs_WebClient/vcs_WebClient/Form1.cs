@@ -112,7 +112,7 @@ namespace vcs_WebClient
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //簡易wc.DownloadFile()
+            // 簡易 wc.DownloadFile()  // 從URL下載檔案
 
             WebClient wc = new WebClient();  // 建立 WebClient
 
@@ -193,7 +193,7 @@ namespace vcs_WebClient
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //簡易wc.DownloadString(), 抓取網頁資料
+            // 簡易 wc.DownloadString(), 抓取網頁資料
 
             WebClient wc = new WebClient();  // 建立 WebClient
             wc.Encoding = Encoding.UTF8;  // 指定 WebClient 的編碼
@@ -508,6 +508,8 @@ namespace vcs_WebClient
                 richTextBox1.Text += "下載完成\n";
             }
 
+            //6060
+
             richTextBox1.Text += "WebClient DownloadFile\t取得網頁檔案......2\n";
 
             //https://upload.wikimedia.org/wikipedia/commons/b/be/%E7%90%89%E7%90%83%E5%AE%AB%E5%BB%B7%E9%9F%B3%E4%B9%90.jpg
@@ -516,7 +518,6 @@ namespace vcs_WebClient
             string filename2 = "LCC_IR1_CR_2750/LCC_IR1_CR_2750.jpg";
             string myStringWebResource = null;
 
-            //WebClient
             wc = new WebClient();  // 建立 WebClient
             //wc.Encoding = Encoding.UTF8;  // 指定 WebClient 的編碼
             wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");  // 指定 WebClient 的 Content-Type header
@@ -616,42 +617,12 @@ namespace vcs_WebClient
             wc.DownloadFile(url, filename);  // 從URL下載檔案
         }
 
-        // Download a file from the internet.
-        // Get the picture at a given URL.
         private Image GetPicture(string url)
         {
             WebClient wc = new WebClient();  // 建立 WebClient
             MemoryStream image_stream = new MemoryStream(wc.DownloadData(url));
             return Image.FromStream(image_stream);
         }
-
-        /*
-        // Download the indicated file
-        private void DownloadImage(string url)
-        {
-            //richTextBox1.Text += "下載圖片 : " + url + "\n";
-
-            WebClient wc = new WebClient();  // 建立 WebClient
-
-            //int pos = url.LastIndexOf('/');
-            //string filename = url.Substring(pos + 1);
-
-            int pos1 = url.LastIndexOf('/');
-            int pos2 = url.LastIndexOf('.');
-            string filename = url.Substring(pos1 + 1, pos2 - pos1 - 1) + DateTime.Now.ToString("_yyyyMMdd_HHmmss") + url.Substring(pos2);
-            richTextBox1.Text += "下載圖片, 本地圖片檔名 : " + filename + "\n";
-            wc.DownloadFile(url, filename);  // 從URL下載檔案
-        }
-
-        // Download a file from the internet.
-        // Get the picture at a given URL.
-        private Image GetPicture(string url)
-        {
-            WebClient wc = new WebClient();  // 建立 WebClient
-            MemoryStream image_stream = new MemoryStream(wc.DownloadData(url));
-            return Image.FromStream(image_stream);
-        }
-        */
 
         //下載NASA網頁的圖片 SP
 
@@ -874,6 +845,10 @@ namespace vcs_WebClient
             wc.Encoding = Encoding.UTF8;  // 指定 WebClient 的編碼, 設置按照何種編碼訪問，如果不加此行，獲取到的字符串中文將是亂碼
             wc.DownloadStringCompleted += new DownloadStringCompletedEventHandler(wc_DownloadStringCompleted2);
             wc.DownloadStringAsync(new Uri("http://www.juedui100.com/"));
+
+            //------------------------------------------------------------  # 60個
+
+            //wc.DownloadStringAsync(new Uri(url));
         }
 
         void wc_DownloadStringCompleted1(object sender, DownloadStringCompletedEventArgs e)
@@ -1164,9 +1139,9 @@ namespace vcs_WebClient
             string str = wc.DownloadString(url);
             //richTextBox1.Text += sInfo.Id + "\n";
 
-            var regex = new System.Text.RegularExpressions.Regex(@"<div class=[\s""']tab[\s""']><h4>(?<KEY>.*?)</h4><p>(?<VALUE>.*?)</p>", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
-            System.Text.RegularExpressions.MatchCollection matches = regex.Matches(str);
-            foreach (System.Text.RegularExpressions.Match match in matches)
+            var regex = new Regex(@"<div class=[\s""']tab[\s""']><h4>(?<KEY>.*?)</h4><p>(?<VALUE>.*?)</p>", RegexOptions.IgnoreCase);
+            MatchCollection matches = regex.Matches(str);
+            foreach (Match match in matches)
             {
                 if (match.Success)
                 {
@@ -1181,10 +1156,10 @@ namespace vcs_WebClient
                 }
             }
 
-            regex = new System.Text.RegularExpressions.Regex(@"&lt;p&gt;(?<VALUE>.*?)&lt;/p&gt", System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Singleline);
+            regex = new Regex(@"&lt;p&gt;(?<VALUE>.*?)&lt;/p&gt", RegexOptions.IgnoreCase | RegexOptions.Singleline);
             matches = regex.Matches(str);
 
-            foreach (System.Text.RegularExpressions.Match match in matches)
+            foreach (Match match in matches)
             {
                 if (match.Success)
                 {
@@ -1204,9 +1179,9 @@ namespace vcs_WebClient
                 }
             }
 
-            regex = new System.Text.RegularExpressions.Regex(@"有效日期:(?<VALUE>.*?)</li>", System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Singleline);
+            regex = new Regex(@"有效日期:(?<VALUE>.*?)</li>", RegexOptions.IgnoreCase | RegexOptions.Singleline);
             matches = regex.Matches(str);
-            foreach (System.Text.RegularExpressions.Match match in matches)
+            foreach (Match match in matches)
             {
                 if (match.Success)
                 {
@@ -1230,16 +1205,6 @@ namespace vcs_WebClient
             protocol_Tls12 = (SecurityProtocolType)3072;
     }
 }
-
-/*
-        private void SendGETRequest(string url)
-        {
-            WebClient wc = new WebClient();  // 建立 WebClient
-            // DownloadStringAsync  // 異步下載頁面
-            wc.DownloadStringAsync(new Uri(url));
-        }
-*/
-
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
@@ -1326,7 +1291,6 @@ BTW, if the HtmlNode has a “ID”, like “<div id='post_list'>value</div>”,
 call GetElementbyId() is OK for getting the HtmlNode,
 then get the value by HtmlNode.InnerText or HtmlNode.Attribute.
 
-//get HtmlAgilityPack.HtmlDocument object   
 HtmlDocument doc = new HtmlDocument();  
 //load HTML   
 doc.LoadHtml(pageSource);         
@@ -1335,12 +1299,6 @@ HtmlNode navNode = doc.GetElementbyId("post_list");	//測這個
 
 //------------------------------------------------------------  # 60個
 
-using HtmlAgilityPack;
-
-namespace RegexPractice
-{
-    class Program
-    {
         static void Main(string[] args)
         {
             string url = "http://top.baidu.com/buzz.php?p=top_keyword";
@@ -1431,13 +1389,6 @@ namespace RegexPractice
 Another code snippet
 Download specified number of pictures from “ http://browse.deviantart.com/customization/wallpaper/widescreen/?order=15” and save to local files.
 
-	using HtmlAgilityPack;  
-	  
-	namespace RegexPractice  
-	{  
-	    public class Util  
-	    {  
-	  
 	        //Get byte[] format page source    
 	        public static byte[] GetPageSourceBytes(string url)  
 	        {  
@@ -1455,12 +1406,6 @@ Download specified number of pictures from “ http://browse.deviantart.com/cust
 	            return pageSource;  
 	        }  
 	  
-	        //Save image to local file    
-	        public static void SavaImagesToFile(string url,string dirPath,string fileName)  
-	        {  
-	            WebClient wc = new WebClient();  // 建立 WebClient
-	            wc.DownloadFile(url, Path.Combine(dirPath, fileName + Guid.NewGuid().ToString()));    // 從URL下載檔案
-	        }  
 	    }  
 	  
 	    public class ImageInfo  
@@ -1472,17 +1417,23 @@ Download specified number of pictures from “ http://browse.deviantart.com/cust
 	    {  
 	        static void Main(string[] args)  
 	        {  
-							            int sumCount = 100;  
-							            string baseUrl = "http://browse.deviantart.com/customization/wallpaper/widescreen/?order=15";  
+							            int sumCount = 100;
+							            string url = "http://browse.deviantart.com/customization/wallpaper/widescreen/?order=15";  
+                                                        * https://www.deviantart.com/?order=15
 							  
 							            List<ImageInfo> imageInfoList = new List<ImageInfo>();  
-							            imageInfoList = GetSumImageInfoList(sumCount, baseUrl);  
+							            imageInfoList = GetSumImageInfoList(sumCount, url);  
 							  
 							            foreach (ImageInfo imageInfo in imageInfoList)  
 							            {  
-							                Util.SavaImagesToFile(imageInfo.SrcPath, @"c:\Images", GetValidFilename(imageInfo.Title));  
-							            }  
-							  
+							                SavaImagesToFile(imageInfo.SrcPath, , );
+
+                                            WebClient wc = new WebClient();  // 建立 WebClient
+                                            string dirPath = @"c:\Images";
+                                            string fileName = GetValidFilename(imageInfo.Title);
+                                            filename = Path.Combine(dirPath, fileName + Guid.NewGuid().ToString());
+                                            wc.DownloadFile(imageInfo.SrcPath, filename);    // 從URL下載檔案
+                                        }  
 							            return;  
 							        }  
 							  

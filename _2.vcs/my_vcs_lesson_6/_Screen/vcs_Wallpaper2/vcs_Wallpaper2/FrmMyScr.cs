@@ -18,11 +18,13 @@ namespace vcs_Wallpaper2
         public FrmMyScr()
         {
             InitializeComponent();
+
             this.DoubleBuffered = true;//设置本窗体
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.DoubleBuffer, true);
         }
+
         Timer NowTime = new Timer();
 
         private void FrmMyScr_Load(object sender, EventArgs e)

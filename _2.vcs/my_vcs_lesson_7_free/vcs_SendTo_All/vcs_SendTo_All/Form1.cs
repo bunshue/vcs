@@ -380,9 +380,7 @@ namespace vcs_SendTo_All
 
             this.Controls.Add(listView1);
 
-
             //加入
-
         }
 
         private void listView1_MouseClick(object sender, MouseEventArgs e)
@@ -393,22 +391,24 @@ namespace vcs_SendTo_All
 
             selNdx = listView1.SelectedIndices[0];
 
-
             richTextBox1.Text += "aaa:\t" + listView1.Items[selNdx].Text + "\n";
             richTextBox1.Text += "bbb:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
             richTextBox1.Text += "ccc:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
             richTextBox1.Text += "ddd:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
             */
-
         }
 
         void show_filename_data()
         {
             int i;
             if (fileinfos.Count == 0)
+            {
                 richTextBox1.Text += "show_filename_data 找不到資料\n";
+            }
             else
+            {
                 richTextBox1.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料a\n";
+            }
 
             for (i = 0; i < fileinfos.Count; i++)
             {
@@ -555,7 +555,10 @@ namespace vcs_SendTo_All
         void export_filename(string target_dir)
         {
             if (Directory.Exists(target_dir) == false)     //確認資料夾是否存在
+            {
                 return;
+            }
+
             //撈出多層
             //richTextBox1.Text += "資料夾: " + target_dir + "\n";
             ShowDirectory(target_dir);
@@ -609,7 +612,9 @@ namespace vcs_SendTo_All
                 richTextBox1.Text += "無資料, 不存檔\n";
             }
             else
+            {
                 richTextBox1.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料a\n";
+            }
 
             string save_filename = "filename_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
 
@@ -655,11 +660,8 @@ namespace vcs_SendTo_All
                 {
                     richTextBox1.Text += "非 影片檔案\n";
                 }
-
                 richTextBox1.Text += mesg + "\n";
                 str_writer.WriteLine(mesg);
-
-
             }
 
             // Dispose StreamWriter
@@ -734,12 +736,8 @@ namespace vcs_SendTo_All
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-/*  可搬出
-
-*/
 

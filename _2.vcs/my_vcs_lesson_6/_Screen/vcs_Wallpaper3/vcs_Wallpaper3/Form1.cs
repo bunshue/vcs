@@ -38,10 +38,10 @@ namespace vcs_Wallpaper3
             //新增圖檔
             //字串陣列的寫法(一維)：
             string[] files = { 
-            @"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_01.jpg",
-            @"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_02.jpg",
-            @"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_03.jpg",
-            @"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_04.jpg"
+            @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\poster_01.jpg",
+            @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\poster_02.jpg",
+            @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\poster_03.jpg",
+            @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\poster_04.jpg"
             };
 
             //listView1.Items.Clear();
@@ -97,7 +97,6 @@ namespace vcs_Wallpaper3
                     SystemParametersInfo(SPI_SETDESKWALLPAPER, 0, path, 1);
                 }
             }
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -116,4 +115,3 @@ namespace vcs_Wallpaper3
         }
     }
 }
-

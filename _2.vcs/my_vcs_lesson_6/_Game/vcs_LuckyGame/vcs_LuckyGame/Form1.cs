@@ -20,6 +20,8 @@ namespace vcs_LuckyGame
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.DoubleBuffered = true;
+
             //全屏空白表單
             this.BackColor = Color.Black;
             //this.Size = new Size(800, 600);
@@ -45,7 +47,6 @@ namespace vcs_LuckyGame
         private void timer1_Tick(object sender, EventArgs e)
         {
             this.Invalidate();
-
         }
 
         int cnt = 0;
@@ -81,6 +82,6 @@ namespace vcs_LuckyGame
 
             cnt += 30;
         }
-
     }
 }
+

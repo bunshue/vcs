@@ -53,7 +53,9 @@ namespace vcs_ShowPicture
             int operation_mode = Properties.Settings.Default.operation_mode;
 
             if ((operation_mode == 0) || (operation_mode == 2))
+            {
                 flag_operation_mode = operation_mode;
+            }
 
             string picture_folder = Properties.Settings.Default.picture_foldername;
 
@@ -306,19 +308,9 @@ namespace vcs_ShowPicture
     }
 }
 
-
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
-
-
-
