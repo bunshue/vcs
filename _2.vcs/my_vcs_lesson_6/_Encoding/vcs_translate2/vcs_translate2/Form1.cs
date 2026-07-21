@@ -27,7 +27,6 @@ namespace vcs_translate2
         /// <returns></returns>
         public string ConvertUsingWord(string argSource, bool argIsCht)
         {
-
             var doc = new Document();
             doc.Content.Text = argSource;
             doc.Content.TCSCConverter(
@@ -42,10 +41,6 @@ namespace vcs_translate2
             doc.Close(ref saveChanges, ref originalFormat, ref routeDocument);
 
             return ret;
-
-            //用法
-            //ConvertUsingWord("她來聽我　的演唱會　在十七歲的初戀　第一次約會，繁轉簡", true);
-            //ConvertUsingWord("她来听我　的演唱会　在十七岁的初恋　第一次约会，簡轉繁", false);
         }
 
         public Form1()
@@ -66,6 +61,10 @@ namespace vcs_translate2
             richTextBox1.Text += "TC字串: " + str_tc + ", 轉SC: " + ConvertUsingWord(str_tc, true) + "\n";
             richTextBox1.Text += "SC字串: " + str_sc + ", 轉TC: " + ConvertUsingWord(str_sc, false) + "\n";
         }
-
     }
 }
+
+//用法
+//ConvertUsingWord("她來聽我　的演唱會　在十七歲的初戀　第一次約會，繁轉簡", true);
+//ConvertUsingWord("她来听我　的演唱会　在十七岁的初恋　第一次约会，簡轉繁", false);
+

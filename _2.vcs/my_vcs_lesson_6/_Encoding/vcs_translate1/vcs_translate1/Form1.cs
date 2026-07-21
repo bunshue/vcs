@@ -8,7 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;  // for FileAccess, File
-using System.Runtime.InteropServices;  // for DllImport
 
 namespace vcs_translate1
 {
@@ -52,61 +51,6 @@ namespace vcs_translate1
         }
 
         //------------------------------------------------------------  # 60個
-
-        private string Big5toGB2312(string strBig5)
-        {
-            StringBuilder sb = new StringBuilder();
-            byte[] tmp = Encoding.GetEncoding("Big5").GetBytes(strBig5);  // 繁體中文 (Big5) 
-            return Encoding.GetEncoding("gb2312").GetString(tmp); // 簡體中文 (GB2312) 
-        }
-
-        //使用系統 kernel32.dll LCMapString進行轉換
-        internal const int LOCALE_SYSTEM_DEFAULT = 0x0800;
-        internal const int LCMAP_SIMPLIFIED_CHINESE = 0x02000000;
-        internal const int LCMAP_TRADITIONAL_CHINESE = 0x04000000;
-        [DllImport("kernel32", CharSet = CharSet.Auto, SetLastError = true)]
-        internal static extern int LCMapString(int Locale, int dwMapFlags, string lpSrcStr, int cchSrc, [Out] string lpDestStr, int cchDest);
-
-        /// <summary>
-        /// 將簡體中文字元轉換成繁體中文
-        /// </summary>
-        /// <param name="strGB2312"></param>
-        /// <returns></returns>
-        private string GB2312translateBig5(string strGB2312)
-        {
-            String tTarget = new String(' ', strGB2312.Length);
-            int tReturn = LCMapString(LOCALE_SYSTEM_DEFAULT, LCMAP_TRADITIONAL_CHINESE, strGB2312, strGB2312.Length, tTarget, strGB2312.Length);
-            return tTarget;
-        }
-
-        /// <summary>
-        /// 將繁體中文字元轉換成簡體中文
-        /// </summary>
-        /// <param name="strBig5"></param>
-        /// <returns></returns>
-        private string Big5translateGB2312(string strBig5)
-        {
-            String tTarget = new String(' ', strBig5.Length);
-            int tReturn = LCMapString(LOCALE_SYSTEM_DEFAULT, LCMAP_SIMPLIFIED_CHINESE, strBig5, strBig5.Length, tTarget, strBig5.Length);
-            return tTarget;
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            richTextBox5.Text = Big5toGB2312(this.richTextBox1.Text);
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            richTextBox6.Text = GB2312translateBig5(this.richTextBox2.Text);
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            richTextBox5.Text = Big5translateGB2312(this.richTextBox3.Text);
-        }
 
         private void button7_Click(object sender, EventArgs e)
         {
@@ -234,17 +178,7 @@ namespace vcs_translate1
                 richTextBox7.Text += "字串: " + textBox3.Text + "  不是GB2312碼\n";
         }
 
-        private void button9_Click(object sender, EventArgs e)
-        {
-            string str = "都はるみ全曲集２ Disc 2";
-            int i;
-            richTextBox7.Text += "len = " + str.Length.ToString() + "\n";
-            for (i = 0; i < str.Length; i++)
-            {
-                richTextBox7.Text += "i = " + i.ToString() + "\t" + str[i] + "\tvalue\t" + ((int)str[i]).ToString("X4") + "\n";
-            }
-            richTextBox7.Text += "\n文字編碼都是Unicode編碼 Unicode (Big-Endian) 	1201 	utf-16BE\n";
-        }
+        //------------------------------------------------------------  # 60個
 
         private void button10_Click(object sender, EventArgs e)
         {
@@ -265,20 +199,15 @@ namespace vcs_translate1
 
             richTextBox7.Text += "s" + ((char)178).ToString() + "   s" + ((char)179).ToString() + "  " + ((char)181).ToString() + "m";
 
-
-
             //去 https://unicode-table.com/en/#2327 找出需要的unicode
             //int i;
             for (i = 0x23E9; i < (0x23E9 + 18); i++)
             {
                 richTextBox7.Text += "i = 0x" + i.ToString("X4") + "\t" + ((char)i).ToString() + "\n";
-
-
             }
-
-
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button11_Click(object sender, EventArgs e)
         {
@@ -852,3 +781,26 @@ namespace vcs_translate1
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
+
+
+
+/*
+
+
+//------------------------------------------------------------  # 60個
+
+        richTextBox5.Text = Big5toGB2312(this.richTextBox1.Text);
+
+        private string Big5toGB2312(string strBig5)
+        {
+            StringBuilder sb = new StringBuilder();
+            byte[] tmp = Encoding.GetEncoding("Big5").GetBytes(strBig5);  // 繁體中文 (Big5) 
+            return Encoding.GetEncoding("gb2312").GetString(tmp); // 簡體中文 (GB2312) 
+        }
+
+
+
+
+*/
+
+

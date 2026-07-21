@@ -280,6 +280,7 @@
             this.bt_dir06.Name = "bt_dir06";
             this.bt_dir06.Size = new System.Drawing.Size(200, 60);
             this.bt_dir06.TabIndex = 14;
+            this.bt_dir06.Text = "資料夾最後修改時間";
             this.bt_dir06.UseVisualStyleBackColor = true;
             this.bt_dir06.Click += new System.EventHandler(this.bt_dir06_Click);
             // 
@@ -557,6 +558,7 @@
             // 
             // listView1
             // 
+            this.listView1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.listView1.Location = new System.Drawing.Point(849, 135);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(100, 100);
@@ -566,11 +568,12 @@
             // 
             // listBox1
             // 
+            this.listBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 12;
+            this.listBox1.ItemHeight = 19;
             this.listBox1.Location = new System.Drawing.Point(849, 241);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(100, 100);
+            this.listBox1.Size = new System.Drawing.Size(100, 99);
             this.listBox1.TabIndex = 74;
             // 
             // Form1

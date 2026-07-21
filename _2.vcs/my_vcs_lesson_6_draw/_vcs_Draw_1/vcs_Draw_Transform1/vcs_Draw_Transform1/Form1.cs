@@ -279,10 +279,6 @@ namespace vcs_Draw_Transform1
             g.DrawString("平移 + 縮放", new Font("標楷體", 20), new SolidBrush(Color.Blue), new PointF(320, 90));
             g.DrawString("平移 + 旋轉", new Font("標楷體", 20), new SolidBrush(Color.Blue), new PointF(620, 570));
 
-
-
-
-
             Pen p = new Pen(Color.Red, 5);
 
             // 未旋轉, 平移 + 畫線
@@ -737,6 +733,8 @@ namespace vcs_Draw_Transform1
             pictureBox1.Image = bitmap1;
         }
 
+        //6060
+
         private double rad(double d)
         {
             return d * Math.PI / 180.0;
@@ -752,7 +750,6 @@ namespace vcs_Draw_Transform1
             return Math.Cos(d * Math.PI / 180.0);
         }
 
-        //畫Sinc ST
         private void button7_Click(object sender, EventArgs e)
         {
             reset_pictureBox();
@@ -766,8 +763,8 @@ namespace vcs_Draw_Transform1
             float ymin = -5;
             float ymax = 12;
             RectangleF rect = new RectangleF(xmin, ymin, xmax - xmin, ymax - ymin);
-
             g.DrawRectangle(Pens.Red, rect.X, rect.Y, rect.Width, rect.Height);
+            richTextBox1.Text += rect.ToString() + "\n";
 
             int W = pictureBox1.ClientSize.Width;
             int H = pictureBox1.ClientSize.Height;
@@ -887,6 +884,34 @@ namespace vcs_Draw_Transform1
         {
             reset_pictureBox();
 
+            //畫Sinc
+
+            g.DrawLine(new Pen(Color.Blue, 10), 0, 300, 600, 300);  // X軸 
+            g.DrawLine(new Pen(Color.Green, 10), 300, 0, 300, 600);  // Y軸
+            g.DrawRectangle(new Pen(Color.Red, 10), 0, 0, 600, 600);  // 外框
+
+            int cx = 600 / 2;
+            int cy = 600 / 2;
+            double scaleX = 20; // 每單位 x 對應像素
+            double scaleY = 200; // 每單位 y 對應像素
+
+            PointF? prevPoint = null;
+            //for (double x = -10; x <= 10; x += 0.01)
+            for (double x = -10; x <= 10; x += 1)
+            {
+                double y = (x == 0) ? 1.0 : Math.Sin(x) / x;
+
+                float px = (float)(cx + x * scaleX);
+                float py = (float)(cy - y * scaleY);
+
+                PointF point = new PointF(px, py);
+                if (prevPoint != null)
+                {
+                    g.DrawLine(new Pen(Color.Magenta, 3), prevPoint.Value, point);
+                }
+                prevPoint = point;
+            }
+            pictureBox1.Image = bitmap1;
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -1549,9 +1574,58 @@ namespace vcs_Draw_Transform1
 
         //------------------------------------------------------------  # 60個
 
+        void draw_something25(Graphics g)
+        {
+            float xmin = -50;
+            float xmax = 50;
+            float ymin = -50;
+            float ymax = 50;
+            RectangleF rect = new RectangleF(xmin, ymin, xmax - xmin, ymax - ymin);
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_chicken\chicken1.bmp";
+            Bitmap bmp = new Bitmap(filename);
+            g.DrawImage(bmp, -50, -50, 100, 100);
+
+            g.DrawRectangle(new Pen(Color.Red, 10), rect.X, rect.Y, rect.Width, rect.Height);
+            g.DrawEllipse(new Pen(Color.Red, 10), rect.X, rect.Y, rect.Width, rect.Height);
+            g.DrawString("雞", new Font("標楷體", 24), new SolidBrush(Color.Blue), new PointF(20, 20));
+            g.FillEllipse(Brushes.Magenta, -10, -10, 20, 20);
+       }
+
         private void button25_Click(object sender, EventArgs e)
         {
+            reset_pictureBox();
 
+            float xmin = 0;
+            float xmax = 100;
+            float ymin = 0;
+            float ymax = 100;
+            RectangleF rect = new RectangleF(xmin, ymin, xmax - xmin, ymax - ymin);
+            richTextBox1.Text += rect.ToString() + "\n";
+
+            draw_something25(g);
+
+            //------------------------------  # 30個
+
+            int W = 100 * 3/2;  // X軸放大1.5倍
+            int H = 100 * 2;  // Y軸放大2倍
+            PointF[] pts = 
+            {
+                new PointF(0, 0),  // 左上
+                new PointF(W, 0),  // 右上
+                new PointF(0, H),  // 左下
+            };
+
+            // 轉置矩陣 mtx, 矩形範圍 轉 平行四邊形範圍
+            Matrix mtx = new Matrix(rect, pts);
+            g.Transform = mtx;  // 設定仿射矩陣, 矩陣轉置
+
+            // 平移一倍距離
+            g.TranslateTransform(100, 100);  // 平移, 右移, 下移
+
+            draw_something25(g);
+
+            //------------------------------  # 30個
         }
 
         private void button26_Click(object sender, EventArgs e)
@@ -1779,44 +1853,6 @@ Transform需要做到
 若是無法做到理想的Transform 則需要自己做Transform
 
 */
-
-
-
-
-
-/*
-//畫Sinc
-
-            //sinc
-            g.DrawRectangle(Pens.Red, 0, 0, 600, 600);
-            g.DrawLine(Pens.Red, 300, 0, 300, 600);
-            g.DrawLine(Pens.Red, 0, 300, 600, 300);
-
-            Pen pen = new Pen(Color.Blue, 2);
-
-            int centerX = 600 / 2;
-            int centerY = 600 / 2;
-            double scaleX = 20; // 每單位 x 對應像素
-            double scaleY = 200; // 每單位 y 對應像素
-
-            PointF? prevPoint = null;
-            for (double x = -10; x <= 10; x += 0.01)
-            {
-                double y = (x == 0) ? 1.0 : Math.Sin(x) / x;
-                float px = (float)(centerX + x * scaleX);
-                float py = (float)(centerY - y * scaleY);
-
-                PointF point = new PointF(px, py);
-                if (prevPoint != null)
-                    g.DrawLine(pen, prevPoint.Value, point);
-
-                prevPoint = point;
-            }
-
-            pictureBox1.Image = bitmap1;
-
-*/
-
 
 
 

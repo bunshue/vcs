@@ -616,8 +616,8 @@ namespace vcs_DiskDirectoryFile1
                 File.SetCreationTime(filename, new DateTime(1985, 5, 4));
                 File.SetLastWriteTime(filename, new DateTime(1995, 6, 5));
                 File.SetLastAccessTime(filename, new DateTime(2005, 7, 6));
-                //File.SetLastAccessTime(filename, DateTime.Now);   //touch
-                //File.SetLastWriteTime(filename, DateTime.Now);    //touch
+                //File.SetLastAccessTime(filename, DateTime.Now);  // touch
+                //File.SetLastWriteTime(filename, DateTime.Now);  // touch
 
                 if (attr == 0)
                 {
@@ -767,9 +767,6 @@ namespace vcs_DiskDirectoryFile1
                         string filename = Path.Combine(Application.StartupPath, "..\\..");
                         FileInfo fi = new FileInfo(filename);
                         filename = fi.FullName;
-
-                        // Display the original file.
-                        txtPlaintext.Text = File.ReadAllText(txtPlaintextFile.Text);
 
             將二進位檔讀出顯示出來
             txtCiphertextFile.Text = filename + "\\ciphertext.dat";
@@ -1615,6 +1612,23 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_dir06_Click(object sender, EventArgs e)
         {
+            //資料夾最後修改時間
+
+            string foldername = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\";
+
+            //取得資料夾最後一次被存取的時間
+            DateTime dt = Directory.GetLastWriteTime(foldername);  // 資料夾最後修改時間
+            richTextBox1.Text += "資料夾建立的時間 : " + dt + "\n";
+
+            //更新時間
+            Directory.SetLastWriteTime(foldername, DateTime.Now);  // touch
+            dt = Directory.GetLastWriteTime(foldername);  // 資料夾最後修改時間
+            richTextBox1.Text += "最後存取時間 : " + dt + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+
+
         }
 
         //------------------------------------------------------------  # 60個
@@ -2031,14 +2045,9 @@ namespace vcs_DiskDirectoryFile1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
 
 /*
         private void button2_Click(object sender, EventArgs e)
@@ -2074,25 +2083,6 @@ namespace vcs_DiskDirectoryFile1
             }
             sr.Close();  //關閉資料流
         }
-
-//------------------------------------------------------------  # 60個
-
-string foldername = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\";
-//取得資料夾最後一次被存取的時間
-DateTime dt = Directory.GetLastWriteTime(foldername);  // 資料夾最後修改時間
-//如果資料夾不存在就建立資料夾
-if (!Directory.Exists(foldername))
-{
-    Directory.CreateDirectory(foldername);
-}
-else
-{
-    richTextBox1.Text += "資料夾建立的時間 : " + dt + "\n";
-}
-//更新時間
-Directory.SetLastWriteTime(foldername, DateTime.Now);
-dt = Directory.GetLastWriteTime(foldername);  // 資料夾最後修改時間
-richTextBox1.Text += "最後存取時間 : " + dt + "\n";
 
 //------------------------------------------------------------  # 60個
 
@@ -2133,14 +2123,6 @@ Console.WriteLine("================================");
 
 //------------------------------------------------------------  # 60個
 
-textBox1.Text = File.ReadAllText(@"D:\鹿柴.txt");
-File.WriteAllText(@"setting.txt", folderPath);
-
-//------------------------------------------------------------  # 60個
-
-在 C# 中使用 File.ReadAllText() 方法將檔案讀取為字串
-string text = File.ReadAllText(@"D:\File\file.txt");
-Console.WriteLine(text);
 
 在 C# 中使用 StreamReader.ReadToEnd() 方法將檔案讀取為字串
 StreamReader fileReader = new StreamReader(@"D:\File\file.txt");
@@ -2162,7 +2144,7 @@ fs.Close();
 
 //------------------------------------------------------------  # 60個
 
-[C#] 圖片檔讀取：非鎖定檔方法 [Image.FromFile 釋放]
+圖片檔讀取：非鎖定檔方法 [Image.FromFile 釋放]
 
 content from http://jashliao.pixnet.net/blog/post/223534989
 
@@ -2173,11 +2155,6 @@ Byte[] image = new Byte[filelength]; //建立一個位元組陣列
 fs.Read(image, 0, filelength); //按位元組流讀取
 System.Drawing.Image result = System.Drawing.Image.FromStream(fs);
 fs.Close();
-
-//------------------------------------------------------------  # 60個
-
-待測
-//File.AppendAllText("E:\\Time\\新建文檔夾 (2)" + "/" + strname, DateTime.Now+"\n");
 
 //------------------------------------------------------------  # 60個
 
@@ -2233,12 +2210,18 @@ fi.Rename("test2.txt");
 //------------------------------------------------------------  # 60個
 
 
+待測
+//File.AppendAllText("E:\\Time\\新建文檔夾 (2)" + "/" + strname, DateTime.Now+"\n");
+
+//------------------------------------------------------------  # 60個
+
+使用 File.ReadAllText() 方法將檔案讀取為字串
+
+textBox1.Text = File.ReadAllText(@"D:\鹿柴.txt");
+File.WriteAllText(@"setting.txt", folderPath);
+
+string all_text = File.ReadAllText(filename);
+string all_text = File.ReadAllText(@"D:\File\file.txt");
 
 */
-
-
-
-
-
-
 
