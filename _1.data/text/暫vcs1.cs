@@ -1,8 +1,57 @@
 ﻿
 
+//------------------------------------------------------------  # 60個
+
+cccc
+
+listbox
+
+            //ListBox預設選項
+            // 建立Job字串陣列用來存放職業
+            String[] Job = new String[] { "士", "農", "工", "商", "兵", "其它" };
+            lstJob.Items.AddRange(Job); // lstJob清單放入Job陣列內容
+            lstJob.SelectedIndex = 0;   // lstJob清單預設第1個選項被選取
+
+
+listbox的方法
+從 listbox 的內容取得index
+
+int JobIndex = lstJob.FindString("aaaa");
+lstJob.SelectedIndex = JobIndex;
+
+
+
+
+
+
+
+//------------------------------------------------------------  # 60個
+
+
+            colorDialog1.AllowFullOpen = true;  //可以使用該對話框定義自定義顏色
+            colorDialog1.AnyColor = true;      			//顯示基本顏色集中可用的所有顏色
+            colorDialog1.FullOpen = true;      //創建自定義顏色的控件在對話框打開時是可見的
+            colorDialog1.SolidColorOnly = false;			//不限制只選擇純色
+            if (colorDialog1.ShowDialog() == DialogResult.OK)   //彈出對話框
+            {
+                pictureBox1.BackColor = colorDialog1.Color;
+                background_color = colorDialog1.Color;
+                //richTextBox1.SelectionBackColor = colorDialog1.Color;
+            }
+
+6060
+
 
 程式碼片段（Code Snippet）
 
+//------------------------------------------------------------  # 60個
+
+
+
+改變Bitmap大小
+Bitmap bitmap2 = new Bitmap(bitmap1, 300, 200);  //改變大小
+
+//------------------------------------------------------------  # 60個
 
 ssss
 //                e.Graphics.DrawString(fahrenheit.ToString("0"), font, Brushes.Black, x1, y, sf);

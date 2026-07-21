@@ -13,8 +13,8 @@ namespace TailorCalendarSchemeDuty
 {
     public partial class Form1 : Form
     {
-        public int Falg;  // 0１表示添加//2表示修改
-        public string strFalg;  // 表示要修改的日期
+        public int Flag;  // 0１表示添加//2表示修改
+        public string strFlag;  // 表示要修改的日期
 
         public Form1()
         {
@@ -23,6 +23,10 @@ namespace TailorCalendarSchemeDuty
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
             monthCalendar1.TitleBackColor = System.Drawing.Color.Blue;
             monthCalendar1.TrailingForeColor = System.Drawing.Color.Red;
             monthCalendar1.TitleForeColor = System.Drawing.Color.Yellow;
@@ -41,6 +45,36 @@ namespace TailorCalendarSchemeDuty
             monthCalendar1.ShowToday = !monthCalendar1.ShowToday;
         }
 
+        void show_item_location()
+        {
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+
+            dataGridView1.Size = new Size(600, 300);
+            dataGridView1.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+
+            richTextBox1.Size = new Size(600, 300);
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1273, 750);
+            this.Text = "TailorCalendarSchemeDuty";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
+
         private void button3_Click(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
@@ -55,7 +89,7 @@ namespace TailorCalendarSchemeDuty
         public string strName;//存儲今天任務時間
         //任務和時間查詢
         public int aasdf = 0;
-        public void getDateTime(string strFalg)
+        public void getDateTime(string strFlag)
         {
             string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";
             SqlConnection con = new SqlConnection(cnstr);
@@ -64,7 +98,7 @@ namespace TailorCalendarSchemeDuty
             SqlDataReader dr = com.ExecuteReader();
             while (dr.Read())
             {
-                switch (strFalg)//任務操作標記
+                switch (strFlag)//任務操作標記
                 {
                     case "one":
                         richTextBox1.Text += "查找末完成的任務的時間\n";
@@ -159,7 +193,7 @@ namespace TailorCalendarSchemeDuty
 
                         MessageBox.Show("任務日期已添加到任務列表\n" + "請補充添加任務說明否則\n" + "此次操作不會保存到數據庫中", "請添加任務說明");
                         textBox1.Focus();
-                        Falg = 1;
+                        Flag = 1;
                     }
                     else
                     {
@@ -233,10 +267,10 @@ namespace TailorCalendarSchemeDuty
                     if (MessageBox.Show("是否真的要修改任務", "任務修改提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
                         textBox1.Text = getStrName(listBox1.SelectedItem.ToString());
-                        strFalg = listBox1.SelectedItem.ToString();
+                        strFlag = listBox1.SelectedItem.ToString();
                         textBox1.Focus();
                         textBox1.BackColor = Color.Beige;
-                        Falg = 2;
+                        Flag = 2;
                         MessageBox.Show("修改完畢以後請單擊[確定]按鈕，保存到數據庫", "修改提示");
                     }
                 }
@@ -251,10 +285,10 @@ namespace TailorCalendarSchemeDuty
         //添加任務
         private void button5_Click(object sender, EventArgs e)
         {
-            //richTextBox1.Text += "button5_Click flag = " + Flag + "\n";
+            richTextBox1.Text += "button5_Click flag = " + Flag + "\n";
 
             //添加
-            if (Falg == 1)
+            if (Flag == 1)
             {
                 richTextBox1.Text += "添加任務\n";
 
@@ -272,7 +306,7 @@ namespace TailorCalendarSchemeDuty
                         {
                             MessageBox.Show("你已取消了修改", "修改提示");
                             textBox1.Text = "";
-                            Falg = 0;
+                            Flag = 0;
                         }
                     }
                 }
@@ -285,17 +319,17 @@ namespace TailorCalendarSchemeDuty
             }
 
             //修改
-            if (Falg == 2)
+            if (Flag == 2)
             {   //修改內容確定
                 richTextBox1.Text += "修改任務\n";
-                if (MessageBox.Show("任務日期為：" + strFalg + "\n" + "修改任務說明為：\n" + textBox1.Text.ToString(), "修改提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (MessageBox.Show("任務日期為：" + strFlag + "\n" + "修改任務說明為：\n" + textBox1.Text.ToString(), "修改提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                 }
                 else
                 {
                     MessageBox.Show("你已取消了修改", "修改提示");
                     textBox1.Text = "";
-                    Falg = 0;
+                    Flag = 0;
                 }
             }
         }
@@ -314,7 +348,7 @@ namespace TailorCalendarSchemeDuty
         }
 
         // 用任務時間查找了
-        public void getSelect(string strName, string strFalg)
+        public void getSelect(string strName, string strFlag)
         {
             string strSelect = null;
             string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";
@@ -322,7 +356,7 @@ namespace TailorCalendarSchemeDuty
             SqlConnection con = new SqlConnection(cnstr);
 
             con.Open();
-            switch (strFalg)
+            switch (strFlag)
             {
                 case "one":
                     strSelect = "SELECT * FROM tb_10 WHERE strdate='" + Convert.ToDateTime(strName) + "'";
@@ -336,7 +370,7 @@ namespace TailorCalendarSchemeDuty
             SqlDataReader dr = com.ExecuteReader();
             while (dr.Read())
             {
-                switch (strFalg)
+                switch (strFlag)
                 {
                     case "one":
 
@@ -419,3 +453,11 @@ namespace TailorCalendarSchemeDuty
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
