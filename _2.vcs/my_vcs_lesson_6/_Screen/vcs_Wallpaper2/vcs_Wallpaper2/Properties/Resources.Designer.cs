@@ -59,15 +59,5 @@ namespace vcs_Wallpaper2.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
-        /// </summary>
-        public static System.Drawing.Bitmap BgrdImg {
-            get {
-                object obj = ResourceManager.GetObject("BgrdImg", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }

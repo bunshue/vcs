@@ -113,5 +113,10 @@ namespace vcs_Wallpaper3
             //清除全部
             listView1.Items.Clear();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

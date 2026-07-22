@@ -37,7 +37,7 @@ namespace vcs_Wallpaper4
 
         }
 
-                /// <summary>
+        /// <summary>
         /// 直接在螢幕上畫一個區域性圖片
         /// </summary>
         public static void DrawStart()
@@ -52,7 +52,7 @@ namespace vcs_Wallpaper4
             //ReleaseDC(desktop);
         }
 
-        static int sW = 1024, sH = 768,cW = 20,cH = 20;
+        static int sW = 1024, sH = 768, cW = 20, cH = 20;
 
         /// <summary>
         /// 畫一個圖片,返回圖片儲存的路徑
@@ -79,13 +79,13 @@ namespace vcs_Wallpaper4
 
             g.FillRectangle(Brushes.Black, 0, 0, sW, sH);
             g.DrawString("BBBBBB", font, Brushes.White, 5, 5);
-            
+
             int wW = 200;
             int wH = 200;
             var r = new Random();
             int z = DateTime.Now.Second;
             int cs = r.Next(0, 100);
-            for (int c=0; c<cs; c++)
+            for (int c = 0; c < cs; c++)
             {
                 Pen pen = null;
                 switch (r.Next(0, 10))
@@ -133,29 +133,6 @@ namespace vcs_Wallpaper4
                 MessageBox.Show(ex.Message);
             }
             return imgFile + imgName;
-        }
-
-
-        /// <summary>
-        /// 設定拉伸圖片桌面桌布
-        /// https://blog.csdn.net/sonyicn/article/details/746280?utm_source=blogxgwz4
-        /// </summary>
-        /// <param name="path"></param>
-        public static void SetDesktopPicture(string path)
-        {
-            RegistryKey myRegKey = Registry.CurrentUser.OpenSubKey("Control Panel\\Desktop", true);
-            myRegKey.SetValue("TileWallpaper", "0");
-            myRegKey.SetValue("WallpagerStyle", "2");
-            myRegKey.Close();
-
-            SystemParametersInfo(20, 1, path, 1);
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //設置桌面圖片  OK
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            SetDesktopPicture(filename);
         }
 
         private void button2_Click(object sender, EventArgs e)

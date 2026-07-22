@@ -5,11 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Reflection;
-using System.IO;
 
 namespace vcs_Wallpaper2
 {
@@ -20,6 +16,7 @@ namespace vcs_Wallpaper2
             InitializeComponent();
 
             this.DoubleBuffered = true;//设置本窗体
+
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.DoubleBuffer, true);
@@ -56,5 +53,3 @@ namespace vcs_Wallpaper2
         }
     }
 }
-
-

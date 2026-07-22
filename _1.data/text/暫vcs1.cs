@@ -1,11 +1,15 @@
 ﻿
 
-//------------------------------------------------------------  # 60個
+cccc
+HScrollBar / VScrollBar
+            vsbHeight.LargeChange = 1;    //設定vsbHeight的快動值 = 1
+            hsbWidth.LargeChange = 1;     //設定hsbWidth的快動值 = 1
 
+
+//------------------------------------------------------------  # 60個
 cccc
 
 listbox
-
             //ListBox預設選項
             // 建立Job字串陣列用來存放職業
             String[] Job = new String[] { "士", "農", "工", "商", "兵", "其它" };
@@ -19,14 +23,7 @@ listbox的方法
 int JobIndex = lstJob.FindString("aaaa");
 lstJob.SelectedIndex = JobIndex;
 
-
-
-
-
-
-
 //------------------------------------------------------------  # 60個
-
 
             colorDialog1.AllowFullOpen = true;  //可以使用該對話框定義自定義顏色
             colorDialog1.AnyColor = true;      			//顯示基本顏色集中可用的所有顏色
@@ -349,7 +346,6 @@ vcs打印訊息
 poem+一頁模式
 
 //------------------------------------------------------------  # 60個
-
 cccc
 TextBox設定星號
             toolStripTextBox3.TextBox.PasswordChar = '*';
@@ -1652,7 +1648,6 @@ this.toggleOption(0, 2, false);
         }
 
 //------------------------------------------------------------  # 60個
-
 cccc
             //checkedListBox1
             // 將chkListLot核取清單方塊所有項目設為不勾選
@@ -7745,14 +7740,9 @@ string filename = @"D:\_git\vcs\_1.data\______test_files1\__text\war_and_peace.t
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
 
 pictureBox圖像直接存檔
 

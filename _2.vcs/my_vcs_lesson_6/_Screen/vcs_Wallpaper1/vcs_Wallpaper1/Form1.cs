@@ -8,8 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
-using System.Net;   //for SecurityProtocolType
-using System.Runtime.InteropServices;
+using System.Net;  // for SecurityProtocolType
+using System.Runtime.InteropServices;  // for DllImport, MarshalAs
 using System.Drawing.Imaging;
 using Microsoft.Win32;
 
@@ -17,7 +17,6 @@ namespace vcs_Wallpaper1
 {
     public partial class Form1 : Form
     {
-        #region System Innerface
         [DllImport("user32.dll", EntryPoint = "SystemParametersInfo")]
         public static extern int SystemParametersInfo(
             int uAction,
@@ -25,7 +24,6 @@ namespace vcs_Wallpaper1
             string lpvParam,
             int fuWinIni
          );
-        #endregion
 
         public enum Style : int
         {
@@ -52,9 +50,9 @@ namespace vcs_Wallpaper1
             SystemParametersInfo(20, 1, path, 1);
         }
 
-        const int SPI_SETDESKWALLPAPER = 20;
-        const int SPIF_UPDATEINIFILE = 0x01;
-        const int SPIF_SENDWININICHANGE = 0x02;
+        private const uint SPI_SETDESKWALLPAPER = 0x14;
+        private const uint SPIF_UPDATEINIFILE = 0x01;
+        private const uint SPIF_SENDWININICHANGE = 0x02;
 
         private static void SetWallPaper(string filename, Style style)
         {
@@ -180,28 +178,12 @@ namespace vcs_Wallpaper1
 
         private void button0_Click(object sender, EventArgs e)
         {
-
+            //設置桌布
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            SetDesktopPicture(filename);
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.bmp";
-            SetDesktopPicture(filename);
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\bear.bmp";
-            SetDesktopPicture(filename);
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\tiger.bmp";
-            SetDesktopPicture(filename);
-        }
-
-        private void button4_Click(object sender, EventArgs e)
         {
             string filename = @"D:\_git\vcs\_1.data\______test_files1\_material\ims1.bmp";
             SetDesktopPicture(filename);
@@ -214,7 +196,7 @@ namespace vcs_Wallpaper1
             //SetWallPaper(filename, Style.Tile);   //原圖大小 排列滿螢幕
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
             //下次開機後才套用
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.bmp";
@@ -223,6 +205,64 @@ namespace vcs_Wallpaper1
             myRegKey.SetValue("TileWallpaper", "0");
             myRegKey.SetValue("WallpagerStyle", "2");
             myRegKey.SetValue("WallPaper", filename);
+        }
+
+        //6060
+
+        [DllImport("user32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool SystemParametersInfo(uint uiAction, uint uiParam, String pvParam, uint fWinIni);
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //設定桌面圖片
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+
+            //設定桌布 + 更新registry
+            //DisplayPicture(filename, true);     // Display the picture on the desktop.
+
+            //設定桌布 + 不更新registry
+            DisplayPicture(filename, false);     // Display the picture on the desktop.
+
+            richTextBox1.Text += "將檔案 : " + filename + " 設定成桌布, 完成\n";
+        }
+
+        // Display the file on the desktop.
+        private void DisplayPicture(string filename, bool update_registry)
+        {
+            //richTextBox1.Text += "將檔案 : " + filename + " 設定成桌布\n";
+            try
+            {
+                // If we should update the registry,
+                // set the appropriate flags.
+                uint flags = 0;
+                if (update_registry)
+                {
+                    flags = SPIF_UPDATEINIFILE | SPIF_SENDWININICHANGE;
+                }
+
+                // Set the desktop background to this file.
+                if (!SystemParametersInfo(SPI_SETDESKWALLPAPER, 0, filename, flags))
+                {
+                    richTextBox1.Text += "*** SystemParametersInfo failed.\n";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error displaying picture " + filename + ".\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
+
+
+        //6060
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -425,7 +465,6 @@ namespace vcs_Wallpaper1
         {
 
         }
-
     }
 
     public class Protocols
