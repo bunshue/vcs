@@ -93,6 +93,9 @@
     <None Include="img\x.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="img\open_file.png" />
+    <Content Include="img\save_file.png" />
+    <Content Include="img\SCTC.jpg" />
     <Content Include="tcsc.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

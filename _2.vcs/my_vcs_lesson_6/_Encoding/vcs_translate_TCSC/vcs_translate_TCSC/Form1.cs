@@ -70,12 +70,19 @@ namespace vcs_translate_TCSC
 
             bt_tc_sc.Location = new Point(x_st + W + 10, y_st + H * 1 / 3 - bt_tc_sc.Height);
             bt_sc_tc.Location = new Point(x_st + W + 10, y_st + H * 2 / 3 - bt_sc_tc.Height);
+            bt_file_sc_tc.Location = new Point(x_st + W + 10, y_st + H - bt_file_sc_tc.Height);
 
             lb_tc.Location = new Point(richTextBox_tc.Location.X + richTextBox_tc.Size.Width - lb_tc.Size.Width, y_st);
             lb_sc.Location = new Point(richTextBox_sc.Location.X + richTextBox_sc.Size.Width - lb_sc.Size.Width, y_st);
 
+            bt_open_tc.Location = new Point(richTextBox_tc.Location.X, richTextBox_tc.Location.Y + richTextBox_tc.Size.Height - bt_open_tc.Size.Height);
+            bt_save_tc.Location = new Point(richTextBox_tc.Location.X + bt_open_tc.Size.Width, richTextBox_tc.Location.Y + richTextBox_tc.Size.Height - bt_open_tc.Size.Height);
+
             bt_clear_tc.Location = new Point(richTextBox_tc.Location.X + richTextBox_tc.Size.Width - bt_clear_tc.Size.Width, richTextBox_tc.Location.Y + richTextBox_tc.Size.Height - bt_clear_tc.Size.Height);
             bt_copy_tc.Location = new Point(richTextBox_tc.Location.X + richTextBox_tc.Size.Width - bt_clear_tc.Size.Width - bt_copy_tc.Size.Width, richTextBox_tc.Location.Y + richTextBox_tc.Size.Height - bt_copy_tc.Size.Height);
+
+            bt_open_sc.Location = new Point(richTextBox_sc.Location.X, richTextBox_sc.Location.Y + richTextBox_sc.Size.Height - bt_open_sc.Size.Height);
+            bt_save_sc.Location = new Point(richTextBox_sc.Location.X + bt_open_sc.Size.Width, richTextBox_sc.Location.Y + richTextBox_sc.Size.Height - bt_open_sc.Size.Height);
 
             bt_clear_sc.Location = new Point(richTextBox_sc.Location.X + richTextBox_sc.Size.Width - bt_clear_sc.Size.Width, richTextBox_sc.Location.Y + richTextBox_sc.Size.Height - bt_clear_sc.Size.Height);
             bt_copy_sc.Location = new Point(richTextBox_sc.Location.X + richTextBox_sc.Size.Width - bt_clear_sc.Size.Width - bt_copy_sc.Size.Width, richTextBox_sc.Location.Y + richTextBox_sc.Size.Height - bt_copy_sc.Size.Height);
@@ -127,6 +134,101 @@ namespace vcs_translate_TCSC
         {
             richTextBox_sc.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
+
+        private void bt_open_tc_Click(object sender, EventArgs e)
+        {
+            //正中開啟檔案
+        }
+
+        private void bt_save_tc_Click(object sender, EventArgs e)
+        {
+            //正中儲存檔案
+
+        }
+
+        private void bt_open_sc_Click(object sender, EventArgs e)
+        {
+            //簡中開啟檔案
+        }
+
+        private void bt_save_sc_Click(object sender, EventArgs e)
+        {
+            //簡中儲存檔案
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        void convert_sc_to_tc(string filename)
+        {
+            //richTextBox1.Text += "\n檔案 : " + filename + "\n\n";
+
+            if (System.IO.File.Exists(filename) == true)  //確認檔案是否存在
+            {
+                /*
+                richTextBox1.Text += "檔名(包含副檔名)： " + Path.GetFileName(filename) + "\n";
+                richTextBox1.Text += "檔名(不包含副檔名)： " + Path.GetFileNameWithoutExtension(filename) + "\n";
+                richTextBox1.Text += "副檔名： " + Path.GetExtension(filename) + "\n";
+                richTextBox1.Text += "根目錄： " + Path.GetPathRoot(filename) + "\n";
+                richTextBox1.Text += "路徑： " + Path.GetFullPath(filename) + "\n";
+                richTextBox1.Text += "路徑： " + Path.GetDirectoryName(filename) + "\n";
+                */
+
+                string fore_filename = Path.GetFileNameWithoutExtension(filename);
+                string ext_filename = Path.GetExtension(filename);
+                string foldername = Path.GetDirectoryName(filename);
+                string backup_filename = Path.Combine(foldername, fore_filename + "_old" + ext_filename);
+
+                //richTextBox1.Text += "新檔名： " + backup_filename + "\n";
+
+                if (System.IO.File.Exists(backup_filename) == false)
+                {
+                    System.IO.File.Copy(filename, backup_filename);     //若檔案已存在, 會出現IOException
+                }
+                else
+                {
+                    MessageBox.Show("備份檔案已存在, 跳過");
+                    return;
+                }
+            }
+            else
+            {
+                //richTextBox1.Text += "檔案: " + filename + " 不存在\n";
+                return;
+            }
+
+            try
+            {
+                string all_text = System.IO.File.ReadAllText(filename, Encoding.UTF8);
+
+                //簡中轉正中
+                string all_tc_text = GB2312ToBig5(all_text);
+
+                //string filename_new = @"D:\_git\vcs\_4.python\test10_new08_test_sc_tc_ccccc.py";
+                //覆蓋原檔
+                FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
+                StreamWriter sw = new StreamWriter(fs, Encoding.UTF8);   //指名編碼格式            
+                sw.Write(all_tc_text);
+                sw.Close();
+
+                MessageBox.Show("簡中轉正中完成, 檔名 : " + filename);
+            }
+            catch (FileNotFoundException)
+            {
+                MessageBox.Show("找不到檔案");
+            }
+        }
+
+        private void bt_file_sc_tc_Click(object sender, EventArgs e)
+        {
+            //檔案 簡中轉正中
+            //簡中轉正中
+            //TBD
+            //convert_sc_to_tc(filename);
+
+        }
     }
 }
 
@@ -136,5 +238,4 @@ namespace vcs_translate_TCSC
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
 
