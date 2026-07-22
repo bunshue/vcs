@@ -788,7 +788,6 @@ namespace vcs_Draw_Brush
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
@@ -796,21 +795,21 @@ namespace vcs_Draw_Brush
 //Font f = new Font("黑體", 30, FontStyle.Italic);
 //lgb.SetSigmaBellShape(0.5f);
 /*
-            Array obj = Enum.GetValues(typeof(LinearGradientMode));
+Array obj = Enum.GetValues(typeof(LinearGradientMode));
 
-            for (int x = 0; x < obj.Length; x++)
-            {
-                LinearGradientMode temp = (LinearGradientMode)obj.GetValue(x);
-                richTextBox1.Text += temp.ToString() + "\n";
-            }
+for (int x = 0; x < obj.Length; x++)
+{
+    LinearGradientMode temp = (LinearGradientMode)obj.GetValue(x);
+    richTextBox1.Text += temp.ToString() + "\n";
+}
 
 //------------------------------------------------------------  # 60個
 
-//LinearGradientBrush：使用沿漸變混合的兩種顏色進行繪制
+LinearGradientBrush：使用沿漸變混合的兩種顏色進行繪制
 
-//Graphics g = pictureBox1.CreateGraphics();
+Graphics g = pictureBox1.CreateGraphics();
 
-//                    Brush menu_brush = new LinearGradientBrush(e.Bounds, Color.Red, Color.Black, 90);
+Brush menu_brush = new LinearGradientBrush(e.Bounds, Color.Red, Color.Black, 90);
 
 //------------------------------------------------------------  # 60個
 
@@ -854,11 +853,10 @@ LinearGradienBrush	建立漸層筆刷
 
 //------------------------------------------------------------  # 60個
 
-//剪下 = 複製到剪貼簿 + 把選取區域塗成背景色  SolidBrush br = new SolidBrush(pictureBox1.BackColor)
+//剪下 = 複製到剪貼簿 + 把選取區域塗成背景色
+SolidBrush br = new SolidBrush(pictureBox1.BackColor)
 
 //------------------------------------------------------------  # 60個
 
 */
-
-
 

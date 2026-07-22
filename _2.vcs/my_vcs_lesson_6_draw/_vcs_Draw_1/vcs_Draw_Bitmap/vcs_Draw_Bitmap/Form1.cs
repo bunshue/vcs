@@ -963,16 +963,10 @@ namespace vcs_Draw_Bitmap
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-/*  可搬出
+/*
 
 Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height, PixelFormat.Format32bppRgb);
 Bitmap bitmap2 = (Bitmap)Bitmap.FromFile(filename);
-
-Graphics g = Graphics.FromImage(bitmap1);
-
-pictureBox1.Image = (Image)bitmap1;
-
-g.Dispose();
 
 g.DrawString("改變Bitmap大小,\n貼在原點", new Font("Arial", 30), Brushes.Red, new PointF(100, 400));
 
@@ -1084,7 +1078,6 @@ UnlockBits(BitmapData)				從系統記憶體解除鎖定這個 Bitmap。
 BitmapData，指定鎖定作業的相關資訊。
 
 //------------------------------------------------------------  # 60個
-
 
 */
 
