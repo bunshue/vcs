@@ -52,6 +52,7 @@ namespace vcs_Assembly
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
+            webBrowser1.Visible = false;
             richTextBox1.Size = new Size(600, 690);
             richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -92,7 +93,7 @@ namespace vcs_Assembly
 
             richTextBox1.Text += asm1.GetName() + "\n";
 
-        // 比較版本號
+            // 比較版本號
             if (asm_Name2.Version.CompareTo(asm_Name1.Version) <= 0)
             {
                 // 不需要更新
@@ -386,10 +387,70 @@ namespace vcs_Assembly
 
         //------------------------------------------------------------  # 60個
 
+        private string TempFile = Path.GetTempFileName();
+
         private void button12_Click(object sender, EventArgs e)
         {
+            // 使用資源檔
+            // 加入Resources文件, 屬性的建置動作 改 內嵌資源
+            // 才可以把檔案放到.exe裏
+            // 屬性/資源/加入資源/加入現有檔案/ 選取檔案 picture1.jpg
+            // 此時, Resources 會出現 picture1.jpg
+            // 點選picture1.jpg, 屬性
+            // 建置動作 改成 內嵌資源
 
+            // 使用資源檔 圖檔
+            Assembly asm = this.GetType().Assembly;
+            Stream stream = asm.GetManifestResourceStream("vcs_Assembly.Resources.picture1.jpg");
+            this.BackgroundImage = new Bitmap(stream);
+
+            //------------------------------------------------------------  # 60個
+
+            // 使用資源檔 icon
+            this.Icon = new Icon(asm.GetManifestResourceStream(asm.GetName().Name + ".Resources.my_icon.ico"));
+
+            //------------------------------------------------------------  # 60個
+
+            // 使用 html 檔
+
+            richTextBox1.Size = new Size(600, 690 - 300);
+            richTextBox1.Location = new Point(richTextBox1.Location.X, richTextBox1.Location.Y + 300);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+            webBrowser1.Visible = true;
+            webBrowser1.Size = new Size(600, 300);
+            webBrowser1.Location = new Point(richTextBox1.Location.X, 10);
+            webBrowser1.Navigated += new WebBrowserNavigatedEventHandler(webBrowser1_Navigated);
+
+            // Read the about HTML from the assembly
+            string html = (new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream("vcs_Assembly.Resources.About.htm"))).ReadToEnd();
+
+            // Replace sections with appropriate data
+            html = html.Replace("{version}", Assembly.GetExecutingAssembly().GetName().Version.ToString());
+
+            // Save the temp file so the web browser has a target to navigate to
+            File.WriteAllText(TempFile, html);
+
+            // Show the temp about file 
+            webBrowser1.Navigate(TempFile);
+
+            //------------------------------------------------------------  # 60個
+
+            //新進
+            /*
+            Bitmap image = new Bitmap(asm.GetManifestResourceStream(name + ".puma.bmp"));//載入圖片資源
+            Bitmap image = new Bitmap(asm.GetManifestResourceStream("BlobsExplorer.demo.png"));
+            Bitmap image = new Bitmap(asm.GetManifestResourceStream("PoseEstimation.Samples." + imageName));
+            Bitmap arrow = new Bitmap(asm.GetManifestResourceStream("AForge.Controls.Resources.arrow.bmp"));
+            */
         }
+
+        private void webBrowser1_Navigated(object sender, WebBrowserNavigatedEventArgs e)
+        {
+            // Since the navigation is complete, delete the temp file
+            File.Delete(TempFile);
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void button13_Click(object sender, EventArgs e)
         {
@@ -431,58 +492,39 @@ namespace vcs_Assembly
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-/*  可搬出
-
-*/
-
-
 /*
 private void AboutBox_Load(object sender, EventArgs e)
 {
-	AssemblyInfoClass asmi = new AssemblyInfoClass();
-	labelProductName.Text = "產品名稱：" + asmi.Product;
-	labelVersion.Text = "版本：" + asmi.Version;
-	labelCopyright.Text = "版權宣告：" + asmi.Copyright;
-	labelCompanyName.Text = "公司名稱：" + asmi.Company;
-	textBoxDescription.Text = "細部描述：" + asmi.Description;
+    AssemblyInfoClass asmi = new AssemblyInfoClass();
+    labelProductName.Text = "產品名稱：" + asmi.Product;
+    labelVersion.Text = "版本：" + asmi.Version;
+    labelCopyright.Text = "版權宣告：" + asmi.Copyright;
+    labelCompanyName.Text = "公司名稱：" + asmi.Company;
+    textBoxDescription.Text = "細部描述：" + asmi.Description;
 }
 
-                string location = Assembly.GetExecutingAssembly().Location;
-                string serviceFileName = location.Substring(0, location.LastIndexOf('\\')) + "\\" + serviceName + ".exe";
+string location = Assembly.GetExecutingAssembly().Location;
+string serviceFileName = location.Substring(0, location.LastIndexOf('\\')) + "\\" + serviceName + ".exe";
 
 一、獲取程序集版本
 label版本.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-            //獲取本代碼所在的文件作為臨時文件，用於獲取屬性列表
-            string tempFile = Assembly.GetExecutingAssembly().FullName;
+//獲取本代碼所在的文件作為臨時文件，用於獲取屬性列表
+string tempFile = Assembly.GetExecutingAssembly().FullName;
 
-
-            //取得 namespaceName
-            string namespaceName = Assembly.GetExecutingAssembly().GetName().Name.ToString();
-            richTextBox1.Text += namespaceName + "\n";
-            richTextBox1.Text += Assembly.GetExecutingAssembly().Location + "\n";
+//取得 namespaceName
+string namespaceName = Assembly.GetExecutingAssembly().GetName().Name.ToString();
+richTextBox1.Text += namespaceName + "\n";
+richTextBox1.Text += Assembly.GetExecutingAssembly().Location + "\n";
 
 一、獲取程序集版本
 label版本.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-使用資源檔的圖片
-
-屬性/資源/加入資源/加入現有檔案/ 選取檔案 picture1.jpg
-此時, Resources 會出現 picture1.jpg
-點選picture1.jpg, 屬性
-建置動作 改成 內嵌資源
-
-            Assembly asm = this.GetType().Assembly;
-            Stream stream = asm.GetManifestResourceStream("vcs_test.Resources.picture1.jpg");
-            this.BackgroundImage = new Bitmap(stream);
-*/
-/*
-            var RootDirectory = AppDomain.CurrentDomain.BaseDirectory ?? System.Reflection.Assembly.GetExecutingAssembly().Location;
-            richTextBox1.Text += "RootDirectory = " + RootDirectory + "\n";
+var RootDirectory = AppDomain.CurrentDomain.BaseDirectory ?? System.Reflection.Assembly.GetExecutingAssembly().Location;
+richTextBox1.Text += "RootDirectory = " + RootDirectory + "\n";
 */
 

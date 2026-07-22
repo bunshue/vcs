@@ -304,6 +304,7 @@ namespace vcs_Draw_Bitmap
             bmp1.MakeTransparent(Color.FromArgb(255, 255, 255, 0));
             bmp1.MakeTransparent(Color.Blue);
 
+
             //去除邊緣色
             Color backColor = bmp1.GetPixel(20, 80);   //選取圖片邊緣的一個點的顏色當成背景色
             bmp1.MakeTransparent(backColor); //將此背景色設定為透明
@@ -993,19 +994,12 @@ bitmap1.Save(filename, ImageFormat.Bmp);
 
 //------------------------------------------------------------  # 60個
 
-bitmap1.MakeTransparent(bitmap1.GetPixel(10, 10));  // 設定邊角點的顏色為透明色
-
-bitmap1.MakeTransparent
-bitmap1.MakeTransparent(Color.Magenta);
-
 [C#]WinForm利用Bitmap的MakeTransparent將圖片某些顏色透明化
 
-Bitmap bitmap1 = new Bitmap(asm.GetManifestResourceStream(name + ".puma.bmp"));//載入圖片資源
-bitmap1.MakeTransparent(Color.White);//將圖片白色部分透明化;
-this.pictureBox2.Image = bitmap1;
-            
-bitmap1 = new Bitmap("picture1.jpg");  //圖片放在debug內
-bitmap1.MakeTransparent(Color.White);  //將視窗中白色的部份變為透明
+bitmap1.MakeTransparent
+bitmap1.MakeTransparent(bitmap1.GetPixel(10, 10));  // 設定邊角點的顏色為透明色
+bitmap1.MakeTransparent(Color.Magenta);
+bitmap1.MakeTransparent(Color.White);  //將圖片白色部分變為透明
 
 //------------------------------------------------------------  # 60個
 
@@ -1093,5 +1087,4 @@ BitmapData，指定鎖定作業的相關資訊。
 
 
 */
-
 

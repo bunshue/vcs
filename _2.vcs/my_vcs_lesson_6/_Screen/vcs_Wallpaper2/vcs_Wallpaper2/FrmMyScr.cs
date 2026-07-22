@@ -29,9 +29,8 @@ namespace vcs_Wallpaper2
 
         private void FrmMyScr_Load(object sender, EventArgs e)
         {
-            Assembly asm = this.GetType().Assembly;
-            Stream stream = asm.GetManifestResourceStream("vcs_Wallpaper2.Resources.BgrdImg.jpg");
-            this.BackgroundImage = new Bitmap(stream);
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_scenery\ggb1.jpg";
+            this.BackgroundImage = new Bitmap(filename);
 
             this.Click += new System.EventHandler(Exit);
             this.BackColor = System.Drawing.Color.White;
@@ -57,3 +56,5 @@ namespace vcs_Wallpaper2
         }
     }
 }
+
+

@@ -50,7 +50,6 @@
             this.button17 = new System.Windows.Forms.Button();
             this.button18 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
-            this.linkLabel_About1 = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // button9
@@ -275,23 +274,11 @@
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
-            // linkLabel_About1
-            // 
-            this.linkLabel_About1.AutoSize = true;
-            this.linkLabel_About1.Location = new System.Drawing.Point(449, 36);
-            this.linkLabel_About1.Name = "linkLabel_About1";
-            this.linkLabel_About1.Size = new System.Drawing.Size(34, 12);
-            this.linkLabel_About1.TabIndex = 145;
-            this.linkLabel_About1.TabStop = true;
-            this.linkLabel_About1.Text = "&About";
-            this.linkLabel_About1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_About1_LinkClicked);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(771, 642);
-            this.Controls.Add(this.linkLabel_About1);
             this.Controls.Add(this.button19);
             this.Controls.Add(this.button18);
             this.Controls.Add(this.button17);
@@ -318,7 +305,6 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -346,7 +332,6 @@
         private System.Windows.Forms.Button button17;
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Button button19;
-        private System.Windows.Forms.LinkLabel linkLabel_About1;
     }
 }
 

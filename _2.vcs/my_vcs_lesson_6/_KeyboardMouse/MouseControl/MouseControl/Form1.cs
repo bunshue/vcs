@@ -75,13 +75,12 @@ namespace MouseControl
             System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
 
             notifyicon1 = new NotifyIcon();
-            //以下才可以把icon檔案放到.exe裏
-            notifyicon1.Icon = new Icon(asm.GetManifestResourceStream(asm.GetName().Name + ".1207680.ico"));
             //以下需要在執行時去特定位置找icon檔案
-            //notifyicon1.Icon = new Icon("../../1207680.ico");
+            notifyicon1.Icon = new Icon("../../1207680.ico");
             notifyicon1.Text = "Clicker";
             this.Icon = notifyicon1.Icon;
             notifyicon1.Click += new EventHandler(notifyicon1_Click);
+
             this.pictureBox1.Image = GenerateBitmap(Color.Green);
         }
 
