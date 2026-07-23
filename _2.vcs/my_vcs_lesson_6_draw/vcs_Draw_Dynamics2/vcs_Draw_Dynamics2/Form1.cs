@@ -13,7 +13,8 @@ namespace vcs_Draw_Dynamics2
 {
     public partial class Form1 : Form
     {
-        Image img = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird\Angry-Birds08.jpg");
+        Image img = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_angry_bird\Angry-Birds08.jpg");
+
         int W = 0;
         int H = 0;
         int x_st = 0;
@@ -28,8 +29,8 @@ namespace vcs_Draw_Dynamics2
         public Form1()
         {
             InitializeComponent();
-            W = img.Width*4/3;
-            H = img.Height*4/3;
+            W = img.Width * 4 / 3;
+            H = img.Height * 4 / 3;
             x_st = W / 2;
             y_st = H / 2;
             richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
@@ -197,7 +198,7 @@ namespace vcs_Draw_Dynamics2
 
             //SolidBrush newBrush = new SolidBrush(c);
             //e.Graphics.FillRectangle(new SolidBrush(Color.Red), 0, H - dh, dw, dh);
-            
+
             label1.Text = t.ToString();
             this.pictureBox2.Invalidate();
         }
@@ -274,27 +275,7 @@ namespace vcs_Draw_Dynamics2
             //            貼上位置與大小,擷取部分圖片位置與大小,單位
 
             e.Graphics.DrawImage(img, destRect1, srcRect, units);
-
+        }
         */
-
-
-
-            /*
-                //擷取部分圖片貼上
-                //            貼上位置與大小,擷取部分圖片位置與大小,單位
-                g.DrawImage(img, destRect1, srcRect, units);
-
-            Rectangle rect = Screen.GetBounds(Point.Empty);
-            using (Bitmap bitmap = new Bitmap(rect.Width, rect.Height))
-            {
-                using (Graphics g = Graphics.FromImage(bitmap))
-                    g.CopyFromScreen(Point.Empty, Point.Empty, rect.Size);
-
-                bitmap.Save("test.jpg", ImageFormat.Jpeg);
-             */
-
-
-        //}
-
     }
 }

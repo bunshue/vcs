@@ -121,7 +121,7 @@ namespace vcs_CopyFromScreen
 
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -141,7 +141,7 @@ namespace vcs_CopyFromScreen
             save_bitmap_file(bitmap1);  // 存檔
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -248,7 +248,7 @@ namespace vcs_CopyFromScreen
 
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button6_Click(object sender, EventArgs e)
         {
@@ -260,9 +260,19 @@ namespace vcs_CopyFromScreen
             Graphics g = Graphics.FromImage(bitmap1);
             g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(W, H));  //获取没有鼠标的屏幕截图
             g.Dispose();    //释放资源
+
+
+            /* same
+            Bitmap Source = new Bitmap(bounds.Width, bounds.Height);    //根据屏幕大小创建Bitmap对象
+            Graphics g = Graphics.FromImage(Source);
+            g.CopyFromScreen(0, 0, 0, 0, Source.Size);  //获取没有鼠标的屏幕截图
+            g.Dispose();    //释放资源
+            return Source;
+            */
+
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button7_Click(object sender, EventArgs e)
         {
@@ -277,13 +287,13 @@ namespace vcs_CopyFromScreen
             save_bitmap_file(bitmap1);  // 存檔
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button8_Click(object sender, EventArgs e)
         {
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button9_Click(object sender, EventArgs e)
         {
@@ -297,7 +307,7 @@ namespace vcs_CopyFromScreen
             save_bitmap_file(bitmap1);  // 存檔
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button10_Click(object sender, EventArgs e)
         {
@@ -545,4 +555,36 @@ g.CopyFromScreen(new Point(pt.X - w / 2, pt.Y - h / 2), new Point(0, 0), new Siz
 
 //參數
 //Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height));
+//Rectangle bounds = Screen.GetBounds(Screen.GetBounds(Point.Empty));
+
+
+/*
+            Bitmap bitmap2 = new Bitmap((int)W, (int)H);
+            Graphics g2 = Graphics.FromImage(bitmap2);
+
+            //             擷取螢幕位置起點  自建bmp的位置起點     擷取大小
+            g2.CopyFromScreen(this.Location.X + pictureBox1.Location.X + (int)x_st, this.Location.Y + pictureBox1.Location.Y + (int)y_st, 0, 0, new Size((int)W, (int)H));
+
+            g2.Dispose();
+
+*/
+
+
+
+
+
+
+/*
+    //擷取部分圖片貼上
+    //            貼上位置與大小,擷取部分圖片位置與大小,單位
+    g.DrawImage(img, destRect1, srcRect, units);
+
+Rectangle rect = Screen.GetBounds(Point.Empty);
+using (Bitmap bitmap = new Bitmap(rect.Width, rect.Height))
+{
+    using (Graphics g = Graphics.FromImage(bitmap))
+        g.CopyFromScreen(Point.Empty, Point.Empty, rect.Size);
+
+    bitmap.Save("test.jpg", ImageFormat.Jpeg);
+ */
 
