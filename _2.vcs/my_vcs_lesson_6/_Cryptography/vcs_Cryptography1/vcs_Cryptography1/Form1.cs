@@ -135,26 +135,8 @@ namespace vcs_Cryptography1
             str_encrypted_text = MD5_Ecnrypt03(str_clear_text);
             richTextBox1.Text += "03m明碼 : " + str_clear_text + "\t密碼 : " + str_encrypted_text + "\t長度 : " + str_encrypted_text.Length.ToString() + " 拜\n";
 
-            str_encrypted_text = MD5_Ecnrypt22(str_clear_text);
-            richTextBox1.Text += "22m明碼 : " + str_clear_text + "\t密碼 : " + str_encrypted_text + "\t長度 : " + str_encrypted_text.Length.ToString() + " 拜\n";
-
             str_encrypted_text = MD5_Ecnrypt20(str_clear_text);
             richTextBox1.Text += "20m明碼 : " + str_clear_text + "\t密碼 : " + str_encrypted_text + "\t長度 : " + str_encrypted_text.Length.ToString() + " 拜\n";
-
-            str_encrypted_text = MD5_Ecnrypt04(str_clear_text);
-            richTextBox1.Text += "04m明碼 : " + str_clear_text + "\t密碼 : " + str_encrypted_text + "\t長度 : " + str_encrypted_text.Length.ToString() + " 拜\n";
-
-            str_encrypted_text = MD5_Ecnrypt08(str_clear_text);
-            richTextBox1.Text += "08m明碼 : " + str_clear_text + "\t密碼 : " + str_encrypted_text + "\t長度 : " + str_encrypted_text.Length.ToString() + " 拜\n";
-
-            str_encrypted_text = MD5_Ecnrypt25(str_clear_text);
-            richTextBox1.Text += "25m明碼 : " + str_clear_text + "\t密碼 : " + str_encrypted_text + "\t長度 : " + str_encrypted_text.Length.ToString() + " 拜\n";
-
-            str_encrypted_text = MD5_Ecnrypt14(str_clear_text);
-            richTextBox1.Text += "14m明碼 : " + str_clear_text + "\t密碼 : " + str_encrypted_text + "\t長度 : " + str_encrypted_text.Length.ToString() + " 拜\n";
-
-            str_encrypted_text = MD5_Ecnrypt28(str_clear_text);
-            richTextBox1.Text += "28m明碼 : " + str_clear_text + "\t密碼 : " + str_encrypted_text + "\t長度 : " + str_encrypted_text.Length.ToString() + " 拜\n";
 
             //64位的MD5加密
             str_encrypted_text = MD5_Ecnrypt30_Base64(str_clear_text);
@@ -811,37 +793,6 @@ namespace vcs_Cryptography1
 
         //自建函數 ST
 
-        string MD5_Ecnrypt04(string text)
-        {
-            MD5 md5 = MD5.Create();  // 創建MD5對象
-            byte[] input = Encoding.UTF8.GetBytes(text);  // 字串轉拜列, 中文字要先用 UTF8轉碼
-            byte[] md5Hash = md5.ComputeHash(input);  // 算拜列之Hash值
-            return BytesToString(md5Hash);  // Hash拜列轉字串
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        //MD5加密, 以此為標準
-        string MD5_Ecnrypt08(string str)
-        {
-            MD5 md5 = MD5.Create();  // 創建MD5對象
-            byte[] input = Encoding.UTF8.GetBytes(str);  // 字串轉拜列, 中文字要先用 UTF8轉碼
-            byte[] md5Hash = md5.ComputeHash(input);  // 算拜列之Hash值
-            return BytesToString(md5Hash);  // Hash拜列轉字串
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        public static string MD5_Ecnrypt14(string str)
-        {
-            MD5 md5 = MD5.Create();  // 創建MD5對象
-
-            byte[] input = Encoding.UTF8.GetBytes(str);  // 字串轉拜列, 中文字要先用 UTF8轉碼
-            byte[] md5Hash = md5.ComputeHash(input);  // 算拜列之Hash值
-            //string md5Result = Encoding.UTF8.GetString(md5Hash);  // 拜列轉字串  NG
-            return BytesToString(md5Hash);  // Hash拜列轉字串
-        }
-
         private byte[] GetKeyByteArray(string str)
         {
             /*
@@ -857,6 +808,8 @@ namespace vcs_Cryptography1
         }
 
         //------------------------------------------------------------  # 60個
+
+        //MD5加密, 以此為標準
 
         public static string MD5_Ecnrypt03(string str)
         {
@@ -882,36 +835,6 @@ namespace vcs_Cryptography1
             byte[] md5Hash = ((HashAlgorithm)CryptoConfig.CreateFromName("MD5")).ComputeHash(input);  // 算拜列之Hash值
             string md5Result = BytesToString(md5Hash);  // Hash拜列轉字串
             return md5Result;
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        /// 加密用戶密碼
-        /// <param name="password">密碼</param>
-        /// <param name="codeLength">加密位數</param>
-        /// <returns>加密密碼</returns>
-        public static string MD5_Ecnrypt22(string str)
-        {
-            string md5Result = System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(str, "MD5").ToUpper();
-            return md5Result;
-        }
-
-        public string MD5_Ecnrypt25(string str)
-        {
-            MD5 md5 = MD5.Create();  // 創建MD5對象
-            byte[] input = GetKeyByteArray(str); //字串轉拜列
-            byte[] md5Hash = md5.ComputeHash(input);  // 算拜列之Hash值
-            return BytesToString(md5Hash);  // Hash拜列轉字串
-        }
-
-        public string MD5_Ecnrypt28(string str)
-        {
-            MD5 md5 = MD5.Create();  // 創建MD5對象
-            byte[] input = Encoding.UTF8.GetBytes(str);  // 字串轉拜列, 中文字要先用 UTF8轉碼
-            //string md5Result = ASCIIEncoding.ASCII.GetString(md5.ComputeHash(input));  // 拜列轉字串 NG
-            byte[] md5Hash = md5.ComputeHash(input);  // 算拜列之Hash值
-            //string md5Result = Encoding.UTF8.GetString(md5Hash);  // 拜列轉字串
-            return BytesToString(md5Hash);  // Hash拜列轉字串
         }
 
         //自建函數 SP

@@ -24,7 +24,7 @@ namespace vcs_Draw6_String4
         public Bitmap bitmap1 = null;
 
         bool flag_making_pictures = false;
-        int makeing_pictures_count = 0;
+        int making_pictures_count = 0;
 
         int moving_steps = 4;
 
@@ -160,10 +160,10 @@ namespace vcs_Draw6_String4
 
             if (flag_making_pictures == true)
             {
-                makeing_pictures_count += timer1.Interval;
-                if (makeing_pictures_count > 1000)
+                making_pictures_count += timer1.Interval;
+                if (making_pictures_count > 1000)
                 {
-                    makeing_pictures_count = 0;
+                    making_pictures_count = 0;
                     richTextBox1.Text += "X";
 
                     save_picturebox_to_image();
@@ -219,7 +219,7 @@ namespace vcs_Draw6_String4
             xx = pictureBox1.Width;
             yy = y_st;
 
-            makeing_pictures_count = 0;
+            making_pictures_count = 0;
             flag_making_pictures = true;
 
             timer1.Enabled = true;
@@ -238,9 +238,7 @@ namespace vcs_Draw6_String4
             richTextBox1.Text += "完成\n";
         }
 
-        /// <summary>
         /// 把directory文件夹里的png文件生成为gif文件，放在giffile
-        /// </summary>
         /// <param name="directory">png文件夹</param>
         /// <param name="giffile">gif保存路径</param>
         /// <param name="time">每帧的时间/ms</param>

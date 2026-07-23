@@ -306,20 +306,23 @@ namespace vcs_Process1
 
                 //取得特定應用程式的資訊
                 //richTextBox1.Text += process.ProcessName + "\n";
-                if (process.ProcessName == "putty")
+                if (process.ProcessName == "AMCap")
                 {
-                    richTextBox1.Text += process.ProcessName + "\n";
-                    SetForegroundWindow(process.MainWindowHandle);
+                    richTextBox1.Text += "\n取得特定應用程式的資訊 : " + process.ProcessName + "\n";
+
+                    SetForegroundWindow(process.MainWindowHandle);  // 移動至上層
                     ShowWindow(process.MainWindowHandle, 1);
-                    richTextBox1.Text += "time = " + process.StartTime.ToString() + "\n";
+
+                    richTextBox1.Text += "啟動時間 : " + process.StartTime.ToString() + "\n";
+
                     Rect rect = new Rect();
                     GetWindowRect(process.MainWindowHandle, ref rect);
-                    richTextBox1.Text += "Left = " + rect.Left.ToString() + "\n";
-                    richTextBox1.Text += "Right = " + rect.Right.ToString() + "\n";
-                    richTextBox1.Text += "Top = " + rect.Top.ToString() + "\n";
-                    richTextBox1.Text += "Bottom = " + rect.Bottom.ToString() + "\n";
-                    richTextBox1.Text += "Width = " + (rect.Right - rect.Left).ToString() + "\n";
-                    richTextBox1.Text += "Height = " + (rect.Bottom - rect.Top).ToString() + "\n";
+                    richTextBox1.Text += "位置 左 : " + rect.Left.ToString() + "\n";
+                    richTextBox1.Text += "右 : " + rect.Right.ToString() + "\n";
+                    richTextBox1.Text += "上 : " + rect.Top.ToString() + "\n";
+                    richTextBox1.Text += "下 : " + rect.Bottom.ToString() + "\n";
+                    richTextBox1.Text += "寬 : " + (rect.Right - rect.Left).ToString() + "\n";
+                    richTextBox1.Text += "高 : " + (rect.Bottom - rect.Top).ToString() + "\n";
 
                     richTextBox1.Text += "擷取此應用程式的畫面\n";
                     int W = rect.Right - rect.Left;
@@ -1152,14 +1155,14 @@ namespace vcs_Process1
             string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\poem.txt";
             //string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\琵琶行.txt";
 
-                Process.Start(filename);  // 啟動程式
+            Process.Start(filename);  // 啟動程式
 
             //用預設的程式開啟檔案
             filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_gif\sky.gif";
 
             Process.Start("explorer.exe", filename);  // 啟動程式+參數
             //Process.Start(filename);  // 啟動程式    //same
-            
+
             //開啟一個程式
             //Process process = Process.Start(filename);  // 啟動程式
 
@@ -2198,7 +2201,6 @@ Process.Start("路徑", "參數");   // 啟動程式+參數
 //Process.Start(textBox1.Text);  //呼叫 *.exe  // 啟動程式
 
 //------------------------------------------------------------  # 60個
-
 
 */
 
