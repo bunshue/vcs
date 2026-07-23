@@ -1061,18 +1061,15 @@ namespace vcs_Draw1
             g.DrawLine(p, 0, 0, this.pictureBox1.Width - 1, this.pictureBox1.Height - 1);
 
             //虛線樣式
-            using (Pen dash_pen = new Pen(Color.Red))
-            {
-                dash_pen.DashStyle = DashStyle.Custom;
-                dash_pen.DashPattern = new float[] { 4, 4 };
-                g.DrawLine(dash_pen, 100, 300, 300, 100);
-            }
+            Pen dash_pen = new Pen(Color.Red);
+            dash_pen.DashStyle = DashStyle.Custom;
+            dash_pen.DashPattern = new float[] { 4, 4 };
+            g.DrawLine(dash_pen, 100, 300, 300, 100);
 
             //畫箭頭
             Pen myPen2 = new Pen(Color.Blue, 20);
             myPen2.EndCap = LineCap.ArrowAnchor;
             g.DrawLine(myPen2, 20, 400, 300, 400); // 繪製箭形直線
-
 
             /*
             PenStyle = new Pen(foreColor);
@@ -1084,7 +1081,6 @@ namespace vcs_Draw1
             //PenStyle.LineJoin = System.Drawing.Drawing2D.LineJoin.Bevel;
             PenStyle.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
             */
-
 
             //繪製虛線，可設定Pen的DashStyle屬性為Dash,Dot,DashDot或者DashDotDot等
             //改變直線端點的形狀，可以設定StartCap和EndCap屬性
@@ -1469,30 +1465,28 @@ namespace vcs_Draw1
             g.DrawString("反鋸齒功能\t打開", f, sb, new PointF(170, 170));
 
             richTextBox1.Text += "有 無 Smoothing 比較\n";
-            using (Font the_font = new Font("Times New Roman", 16))
-            {
-                // Draw without smoothing.
-                int x = 30, y = 240;
-                g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
-                g.DrawString("無 Smoothing", the_font, Brushes.Blue, x, y);
-                y += 50;
-                g.DrawImage(Properties.Resources.Smiley100x100, x, y, 50, 50);
-                y += 100;
-                g.DrawEllipse(Pens.Red, x, y, 100, 50);
+            Font the_font = new Font("Times New Roman", 16);
+            // Draw without smoothing.
+            int x = 30, y = 240;
+            g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
+            g.DrawString("無 Smoothing", the_font, Brushes.Blue, x, y);
+            y += 50;
+            g.DrawImage(Properties.Resources.Smiley100x100, x, y, 50, 50);
+            y += 100;
+            g.DrawEllipse(Pens.Red, x, y, 100, 50);
 
-                // Draw with smoothing.
-                g.SmoothingMode = SmoothingMode.AntiAlias;
-                g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-                g.InterpolationMode = InterpolationMode.High;
+            // Draw with smoothing.
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+            g.InterpolationMode = InterpolationMode.High;
 
-                x = 180;
-                y = 240;
-                g.DrawString("有 Smoothing", the_font, Brushes.Blue, x, y);
-                y += 50;
-                g.DrawImage(Properties.Resources.Smiley100x100, x, y, 50, 50);
-                y += 100;
-                g.DrawEllipse(Pens.Red, x, y, 100, 50);
-            }
+            x = 180;
+            y = 240;
+            g.DrawString("有 Smoothing", the_font, Brushes.Blue, x, y);
+            y += 50;
+            g.DrawImage(Properties.Resources.Smiley100x100, x, y, 50, 50);
+            y += 100;
+            g.DrawEllipse(Pens.Red, x, y, 100, 50);
 
             //畫示意圖
             string filename = @"D:\_git\vcs\_1.data\______test_files1\_material\AntiAlias.jpg";
@@ -1859,33 +1853,31 @@ namespace vcs_Draw1
             Graphics g = Graphics.FromImage(bitmap1);
             g.Clear(Color.White);
 
-            Font f = new Font("Courier New", 14);
+            Font f = new Font("標楷體", 30);
 
             //畫字串畫直的
             //StringFormat string_format = new StringFormat(StringFormatFlags.NoClip);
             StringFormat string_format = new StringFormat();
             string_format.FormatFlags = StringFormatFlags.DirectionVertical;
 
-            g.DrawString("畫字串畫直的", f, new SolidBrush(Color.Black), 300, 100, string_format);
-
-
+            g.DrawString("畫字串畫直的", f, new SolidBrush(Color.Red), 300, 100, string_format);
 
             //直書橫書
-            f = new Font("隸書", 17);
-            StringFormat format = new StringFormat();
-            format.FormatFlags = StringFormatFlags.DirectionVertical;
+            f = new Font("標楷體", 24);
+            string_format = new StringFormat();
+            string_format.FormatFlags = StringFormatFlags.DirectionVertical;
 
-            g.DrawString("三杯祝福歌", f, Brushes.Black, 250, 30, format);
-            g.DrawString("一曲迎春調", f, Brushes.Black, 20, 30, format);
-            g.DrawString("迎春祝福", f, Brushes.Black, 100, 0);
+            //無參數的 預設 橫向列印
+            g.DrawString("迎春祝福", f, Brushes.Green, 100, 0);
+
+            g.DrawString("三杯祝福歌", f, Brushes.Green, 250, 30, string_format);
+            g.DrawString("一曲迎春調", f, Brushes.Green, 20, 30, string_format);
 
             pictureBox1.Image = bitmap1;
 
+            //StringFormat string_format = new StringFormat();
 
-            //StringFormat sf = new StringFormat();
-            //sf.Alignment = StringAlignment.Far;
-
-
+            //string_format.Alignment = StringAlignment.Far;
             //string_format.Alignment = StringAlignment.Center;
             //string_format.LineAlignment = StringAlignment.Near;
             //string_format.Alignment = StringAlignment.Near;
@@ -1897,17 +1889,14 @@ namespace vcs_Draw1
             string_format.Alignment = StringAlignment.Center;
             string_format.LineAlignment = StringAlignment.Center;
 
-
-            /*
             string_format.Alignment = StringAlignment.Center;
-            e.Graphics.DrawString("AAAAAAAAA", f, Brushes.Black, 100, 100, string_format);
+            g.DrawString("AAAAAAAAA", f, Brushes.Black, 100, 100, string_format);
 
             string_format.Alignment = StringAlignment.Far;
-            e.Graphics.DrawString("AAAAAAAAA", f, Brushes.Black, 100, 200, string_format);
+            g.DrawString("BBBBBBBBB", f, Brushes.Black, 100, 200, string_format);
 
             string_format.Alignment = StringAlignment.Near;
-            e.Graphics.DrawString("AAAAAAAAA", f, Brushes.Black, 100, 300, string_format);
-            */
+            g.DrawString("CCCCCCCCC", f, Brushes.Black, 100, 300, string_format);
 
             pictureBox1.Image = bitmap1;
         }
@@ -2333,18 +2322,16 @@ namespace vcs_Draw1
             //Rectangle rect2 = Rectangle.Truncate(rectf);
 
             // Draw them.
-            using (Pen the_pen = new Pen(Color.Red, 20))
-            {
-                e.Graphics.DrawRectangle(the_pen, rect1);
+            Pen the_pen = new Pen(Color.Red, 20);
+            e.Graphics.DrawRectangle(the_pen, rect1);
 
-                the_pen.Color = Color.Lime;
-                the_pen.Width = 10;
-                e.Graphics.DrawRectangle(the_pen, rectf.X, rectf.Y, rectf.Width, rectf.Height);
+            the_pen.Color = Color.Lime;
+            the_pen.Width = 10;
+            e.Graphics.DrawRectangle(the_pen, rectf.X, rectf.Y, rectf.Width, rectf.Height);
 
-                the_pen.Color = Color.Blue;
-                the_pen.Width = 1;
-                e.Graphics.DrawRectangle(the_pen, rect2);
-            }
+            the_pen.Color = Color.Blue;
+            the_pen.Width = 1;
+            e.Graphics.DrawRectangle(the_pen, rect2);
 
             //------------------------------------------------------------  # 60個
 
@@ -2412,20 +2399,18 @@ namespace vcs_Draw1
         {
             // Make a Bitmap to hold the text.
             Bitmap bm = new Bitmap(pictureBox_text.ClientSize.Width, pictureBox_text.ClientSize.Height);
-            using (Graphics g = Graphics.FromImage(bm))
-            {
-                g.Clear(Color.White);
+            Graphics g = Graphics.FromImage(bm);
+            g.Clear(Color.White);
 
-                // Don't use TextRenderingHint.AntiAliasGridFit.
-                g.TextRenderingHint = TextRenderingHint.AntiAlias;
+            // Don't use TextRenderingHint.AntiAliasGridFit.
+            g.TextRenderingHint = TextRenderingHint.AntiAlias;
 
-                Font f = new Font("Times New Roman", 16, FontStyle.Regular);
-                // Draw the text.
-                DrawTextInBoxes(g, f, 4, 4,
-                    "When in the course of human events it " +
-                    "becomes necessary for the quick brown " +
-                    "fox to jump over the lazy dog...");
-            }
+            Font f = new Font("Times New Roman", 16, FontStyle.Regular);
+            // Draw the text.
+            DrawTextInBoxes(g, f, 4, 4,
+                "When in the course of human events it " +
+                "becomes necessary for the quick brown " +
+                "fox to jump over the lazy dog...");
 
             // Display the result.
             pictureBox_text.Image = bm;
@@ -2635,10 +2620,12 @@ namespace vcs_Draw1
                 }
                 last_ch++;
             }
+
             if (last_ch < first_ch)
             {
                 return;
             }
+
             if (last_ch >= txt.Length)
             {
                 last_ch = txt.Length - 1;
@@ -2652,6 +2639,7 @@ namespace vcs_Draw1
             {
                 g.TranslateTransform(0, -g.MeasureString(chars_that_fit, f).Height, MatrixOrder.Append);
             }
+
             float angle = (float)(180 * Math.Atan2(dy, dx) / Math.PI);
             g.RotateTransform(angle, MatrixOrder.Append);
             g.TranslateTransform(start_point.X, start_point.Y, MatrixOrder.Append);
@@ -3113,20 +3101,6 @@ DrawPie(Pen, x, y, Width, Height, startAngle, sweepAngle) //用指定的筆繪�
 
 //------------------------------------------------------------  # 60個
 
-
-
-*/
-
-
-
-
-
-
-
-
-
-
-/*
 //影像的寬高可以是負的, 做倒影鏡射
 string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
@@ -3151,6 +3125,4 @@ g.DrawImage(bitmap1, Cx, Cy, -W / 2, -H / 2);
 ddddd
             g.Dispose();  // dispose後, 就不能再使用了
 */
-
-
 
