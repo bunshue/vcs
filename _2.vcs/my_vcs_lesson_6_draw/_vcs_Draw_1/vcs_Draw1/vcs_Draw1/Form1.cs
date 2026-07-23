@@ -1362,6 +1362,41 @@ namespace vcs_Draw1
 
             //------------------------------------------------------------  # 60個
 
+            //用GDI+畫圖
+
+            //Graphics g = this.pictureBox1.CreateGraphics();
+            g.FillRectangle(Brushes.White, this.ClientRectangle);
+            for (int i = 1; i <= 7; ++i)
+            {
+                //在窗體上面畫出橙色的矩形
+                Rectangle r = new Rectangle(i * 40 - 15, 0, 15, this.ClientRectangle.Height);
+                g.FillRectangle(Brushes.Orange, r);
+            }
+            //在內存中創建一個Bitmap並設置CompositingMode
+            Bitmap bmp = new Bitmap(260, 260, PixelFormat.Format32bppArgb);
+            Graphics gBmp = Graphics.FromImage(bmp);
+            gBmp.CompositingMode = CompositingMode.SourceCopy;
+
+            // 創建一個帶有Alpha的紅色區域
+            // 並將其畫在內存的位圖裏面
+            Color red = Color.FromArgb(0x60, 0xff, 0, 0);
+            Brush redBrush = new SolidBrush(red);
+            gBmp.FillEllipse(redBrush, 70, 70, 160, 160);
+            // 創建一個帶有Alpha的綠色區域
+            Color green = Color.FromArgb(0x40, 0, 0xff, 0);
+            Brush greenBrush = new SolidBrush(green);
+            gBmp.FillRectangle(greenBrush, 10, 10, 140, 140);
+
+            //在窗體上面畫出位圖 now draw the bitmap on our window
+            g.DrawImage(bmp, 20, 20, bmp.Width, bmp.Height);
+
+            // 清理資源
+            bmp.Dispose();
+            gBmp.Dispose();
+            redBrush.Dispose();
+            greenBrush.Dispose();
+
+
         }
 
         private void PaintImage(Graphics g)
@@ -3080,6 +3115,41 @@ DrawPie(Pen, x, y, Width, Height, startAngle, sweepAngle) //用指定的筆繪�
 
 
 
+*/
+
+
+
+
+
+
+
+
+
+
+/*
+//影像的寬高可以是負的, 做倒影鏡射
+string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+
+Bitmap bitmap1 = new Bitmap(filename);
+
+int Cx = this.pictureBox1.ClientSize.Width  / 2;  // 視窗客戶區 正中心
+int Cy = this.pictureBox1.ClientSize.Height / 2;
+
+int W = bitmap1.Width;
+int H = bitmap1.Height;
+
+Graphics g = this.pictureBox1.CreateGraphics();
+
+g.DrawImage(bitmap1, Cx, Cy,  W / 2,  H / 2);
+g.DrawImage(bitmap1, Cx, Cy, -W / 2,  H / 2);
+g.DrawImage(bitmap1, Cx, Cy,  W / 2, -H / 2);
+g.DrawImage(bitmap1, Cx, Cy, -W / 2, -H / 2);
+*/
+
+
+/*
+ddddd
+            g.Dispose();  // dispose後, 就不能再使用了
 */
 
 

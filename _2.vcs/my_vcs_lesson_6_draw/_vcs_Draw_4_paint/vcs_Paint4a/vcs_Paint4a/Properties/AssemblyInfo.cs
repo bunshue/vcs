@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("vcs_Paint4a")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("mychat")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("vcs_Paint4a")]
-[assembly: AssemblyCopyright("Copyright © mychat 2010")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

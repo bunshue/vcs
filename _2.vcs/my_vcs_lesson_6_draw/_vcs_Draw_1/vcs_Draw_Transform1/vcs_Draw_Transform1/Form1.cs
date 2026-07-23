@@ -249,7 +249,7 @@ namespace vcs_Draw_Transform1
 
             for (int i = 0; i < 24; i++)
             {
-                g.RotateTransform(15);//再旋轉指定的角度, 以全圖的左上角為原點, 順時鐘旋轉
+                g.RotateTransform(15);  // 再旋轉指定的角度, 以全圖的左上角為原點, 順時鐘旋轉
                 g.DrawImage(bmp, x_st, y_st, w, h);
                 g.DrawString(((i + 1) * 15).ToString(), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(305 - 50, 10));
             }
@@ -257,7 +257,7 @@ namespace vcs_Draw_Transform1
             g.TranslateTransform(0, 400);  // 平移, 右移, 下移
             for (int i = 0; i < 24; i++)
             {
-                g.RotateTransform(15);//再旋轉指定的角度, 以全圖的左上角為原點, 順時鐘旋轉
+                g.RotateTransform(15);  // 再旋轉指定的角度, 以全圖的左上角為原點, 順時鐘旋轉
                 g.DrawImage(bmp, x_st, y_st, w, h);
                 g.DrawString(((i + 1) * 15).ToString(), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(305 - 50, 10));
             }
@@ -309,7 +309,7 @@ namespace vcs_Draw_Transform1
                     double y1 = radius * Math.Sin(theta1);
 
                     g.TranslateTransform(x_st + w / 2 - (float)x1, y_st + h / 2 - (float)y1);  // 平移, 右移, 下移
-                    g.RotateTransform(angle);//再旋轉指定的角度, 以全圖的左上角為原點, 順時鐘旋轉
+                    g.RotateTransform(angle);  // 再旋轉指定的角度, 以全圖的左上角為原點, 順時鐘旋轉
                 }
                 g.DrawImage(bmp, 0, 0, w, h);
                 g.DrawRectangle(p, 0, 0, w, h);
@@ -850,67 +850,43 @@ namespace vcs_Draw_Transform1
 
         private void button16_Click(object sender, EventArgs e)
         {
-            //測試矩陣旋轉
-            g.Clear(Color.White);
-            Pen p = new Pen(Color.Red, 10);
-            Point point1a = new Point(0, 0);
-            Point point2a = new Point(500, 0);
-            //g.DrawLine(p, point1a, point2a);
+            //測試矩陣旋轉, 繞著原點順時針旋轉
 
-            p = new Pen(Color.Green, 10);
+            g.Clear(Color.White);
 
             double theta = Math.PI / 6;
-            PointF point1aa = RotationMatrix(point1a, theta);
-            PointF point2aa = RotationMatrix(point2a, theta);
-            //g.DrawLine(p, point1aa, point2aa);
-            richTextBox1.Text += "point1aa=" + point1aa + "\n";
-            richTextBox1.Text += "point2aa=" + point2aa + "\n";
 
-            PointF[] curvePoints = new PointF[8];    //一維陣列內有 8 個Point
-            for (int i = 0; i < 8; i++)
+            PointF[] pts = new PointF[4];    //一維陣列內有 4 個Point
+            float x_st = 0;
+            float y_st = 0;
+            pts[0] = new PointF(x_st + 0f, y_st+0f);
+            pts[1] = new PointF(x_st + 200f, y_st+0f);
+            pts[2] = new PointF(x_st + 200f, y_st+50f);
+            pts[3] = new PointF(x_st + 0f, y_st+50f);
+            g.DrawPolygon(Pens.Red, pts);
+            for (int i = 0; i < 4; i++)
             {
-                curvePoints[i].X = 50 * i;
-                curvePoints[i].Y = 0;
+                pts[i] = RotationMatrix(pts[i], theta);
             }
+            g.DrawPolygon(Pens.Green, pts);
 
-            Pen redPen = new Pen(Color.Red, 3);
-            Pen grayPen = new Pen(Color.Gray, 10);
-            g.DrawLines(grayPen, curvePoints);   //畫直線
-            for (int i = 0; i < 8; i++)
+
+            x_st = 300;
+            y_st = 100;
+            pts[0] = new PointF(x_st + 0f, y_st + 0f);
+            pts[1] = new PointF(x_st + 200f, y_st + 0f);
+            pts[2] = new PointF(x_st + 200f, y_st + 50f);
+            pts[3] = new PointF(x_st + 0f, y_st + 50f);
+            g.DrawPolygon(Pens.Red, pts);
+            for (int i = 0; i < 4; i++)
             {
-                curvePoints[i] = RotationMatrix(curvePoints[i], theta);
+                pts[i] = RotationMatrix(pts[i], theta);
             }
+            g.DrawPolygon(Pens.Green, pts);
 
-            g.DrawLines(redPen, curvePoints);   //畫直線
-            for (int i = 0; i < 8; i++)
-            {
-                g.FillEllipse(Brushes.Red, curvePoints[i].X - 10, curvePoints[i].Y - 10, 20, 20);
-            }
 
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            Bitmap bmp = new Bitmap(filename);
-            Rectangle src_area = new Rectangle(100, 100, 100, 100);//要截取的矩形區域
-            Rectangle dst_area = new Rectangle(400, 50, 100, 100);//要截取的矩形區域
-            //g.DrawImage(bmp, dst_area, src_area, GraphicsUnit.Pixel);
-            g.DrawImage(bmp, src_area, src_area, GraphicsUnit.Pixel);
 
-            int x_st = 100;
-            int y_st = 100;
-            int w = 100;
-            int h = 100;
-            for (int j = 0; j < h; j++)
-            {
-                for (int i = 0; i < w; i++)
-                {
-                    Color clr = bitmap1.GetPixel(x_st + i, y_st + j);
-                    PointF new_pt = RotationMatrix(new PointF(x_st + i, y_st + j), theta);
-                    if ((new_pt.X > 0) && (new_pt.Y > 0))
-                    {
-                        bitmap1.SetPixel((int)new_pt.X, (int)new_pt.Y, clr);
-                    }
 
-                }
-            }
             pictureBox1.Image = bitmap1;
         }
         //測試矩陣旋轉 SP
@@ -1061,6 +1037,8 @@ namespace vcs_Draw_Transform1
             Bitmap bmp = new Bitmap(filename);
             g.DrawImage(bmp, 0, 0, 100, 100);
             g.DrawImage(bmp, 200, 0, 100, 100);
+
+            g.FillEllipse(Brushes.Red, -15, -15, 30, 30);  // 畫原點
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -1122,8 +1100,13 @@ namespace vcs_Draw_Transform1
             //------------------------------  # 30個
 
             g.ResetTransform();  // 重置轉換, 恢復
+
             g.TranslateTransform(100, 300);  // 平移, 右移, 下移
             g.ScaleTransform(1.4f, 1.4f);  // 縮放, 水平縮放, 垂直縮放
+
+            //g.TranslateTransform(100, 300, MatrixOrder.Append);
+            //g.ScaleTransform(1.4f, 1.4f, MatrixOrder.Append);
+
             draw_something(g);
             g.DrawString("放大1.4倍 + 平移", new Font("標楷體", 24), new SolidBrush(Color.Blue), new PointF(200, 130));
         }
@@ -1183,24 +1166,18 @@ namespace vcs_Draw_Transform1
             g.DrawString("XXXXX", new Font("標楷體", 24), new SolidBrush(Color.Blue), new PointF(200, 130));
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button24_Click(object sender, EventArgs e)
         {
-            reset_pictureBox();
-
-            draw_something(g);
-
-            g.TranslateTransform(1, 1);
-            g.ScaleTransform(1.5f, 1.5f, MatrixOrder.Append);
-            g.TranslateTransform(100, 100, MatrixOrder.Append);
-
-            draw_something(g);
         }
 
         //------------------------------------------------------------  # 60個
 
-        void draw_something1(Graphics g)
+        void draw_something1(Graphics g, Color c)
         {
-            g.DrawRectangle(new Pen(Color.Red, 0), -50, -50, 100, 100);
+            g.DrawRectangle(new Pen(c, 4), -50, -50, 100, 100);
+            g.FillEllipse(Brushes.Red, -15, -15, 30, 30);  // 畫原點
         }
 
         private void button25_Click(object sender, EventArgs e)
@@ -1215,27 +1192,25 @@ namespace vcs_Draw_Transform1
             int radius = 100;
             int linewidth = 0;
 
-            draw_something1(g);
-
+            draw_something1(g, Color.Red);
 
             g.TranslateTransform(400, 400, MatrixOrder.Append);  // 平移, 右移, 下移
 
-            draw_something1(g);
+            draw_something1(g, Color.Green);
 
             g.ScaleTransform(1.4f, 1.4f);  // 縮放, 水平縮放, 垂直縮放
-            draw_something1(g);
+            draw_something1(g, Color.Green);
 
             g.ScaleTransform(1.4f, 1.4f);  // 縮放, 水平縮放, 垂直縮放
-            draw_something1(g);
-
+            draw_something1(g, Color.Green);
 
             g.ScaleTransform(1.4f, 1.4f);  // 縮放, 水平縮放, 垂直縮放
-            draw_something1(g);
+            draw_something1(g, Color.Green);
 
             g.ResetTransform();  // 重置轉換, 恢復
 
             g.TranslateTransform(700, 700, MatrixOrder.Append);  // 平移, 右移, 下移
-            draw_something1(g);
+            draw_something1(g, Color.Blue);
 
             //旋轉
             for (int i = 0; i < 5; i++)
@@ -1243,7 +1218,7 @@ namespace vcs_Draw_Transform1
                 g.RotateTransform(5);  // 順時針旋轉指定的角度
                 //g.RotateTransform(45.0f, MatrixOrder.Append);  // 旋轉, 對原點順時針旋轉
                 //g.RotateTransform(45.0f, MatrixOrder.Prepend);  // 旋轉
-                draw_something1(g);
+                draw_something1(g, Color.Magenta);
             }
 
             g.ResetTransform();  // 重置轉換, 恢復
@@ -1256,7 +1231,7 @@ namespace vcs_Draw_Transform1
             {
                 g.TranslateTransform(50, 0);  // 平移, 右移, 下移
                 //g.RotateTransform(30);  // 順時針旋轉指定的角度
-                draw_something1(g);
+                draw_something1(g, Color.Yellow);
             }
 
 
@@ -1271,7 +1246,7 @@ namespace vcs_Draw_Transform1
             {
                 g.TranslateTransform(50, 0);  // 平移, 右移, 下移
                 g.RotateTransform(30);  // 順時針旋轉指定的角度
-                draw_something1(g);
+                draw_something1(g, Color.Cyan);
             }
         }
 
@@ -1437,7 +1412,6 @@ namespace vcs_Draw_Transform1
                 new PointF(dx + dw, dy + dd),  // 右上
                 new PointF(dx, dy + dh),  // 左下
             };
-            //draw_pts(g, pts);
 
             // 轉置矩陣 mtx, 矩形範圍 轉 平行四邊形範圍
             mtx = new Matrix(src_rect2f, pts);
@@ -1460,7 +1434,6 @@ namespace vcs_Draw_Transform1
                 new PointF(dx + dw, dy+dd),  // 右上
                 new PointF(dx, dy + dh),  // 左下
             };
-            //draw_pts(g, pts);
 
             // 轉置矩陣 mtx, 矩形範圍 轉 平行四邊形範圍
             mtx = new Matrix(src_rect2f, pts);
@@ -1483,7 +1456,6 @@ namespace vcs_Draw_Transform1
                 new PointF(dx + dw, dy + dd),  // 右上
                 new PointF(dx, dy + dh),  // 左下
             };
-            //draw_pts(g, pts);
 
             // 轉置矩陣 mtx, 矩形範圍 轉 平行四邊形範圍
             mtx = new Matrix(src_rect2f, pts);
@@ -1506,7 +1478,6 @@ namespace vcs_Draw_Transform1
                 new PointF(dx + dw, dy + dd),  // 右上
                 new PointF(dx, dy + dh),  // 左下
             };
-            //draw_pts(g, pts);
 
             // 轉置矩陣 mtx, 矩形範圍 轉 平行四邊形範圍
             mtx = new Matrix(src_rect2f, pts);
@@ -1525,6 +1496,8 @@ namespace vcs_Draw_Transform1
             //string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6_draw\data\peony.bmp";  // 200 X 200
             Bitmap bmp = new Bitmap(filename);
             g.DrawImage(bmp, src_rect2.X, src_rect2.Y, bmp.Width, bmp.Height);
+
+            g.FillEllipse(Brushes.Green, -15, -15, 30, 30);  // 畫原點
         }
 
         private void DrawFigure(Graphics g, Color c)
@@ -1537,20 +1510,8 @@ namespace vcs_Draw_Transform1
             //string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6_draw\data\peony.bmp";  // 200 X 200
             Bitmap bmp = new Bitmap(filename);
             g.DrawImage(bmp, -50, -50, bmp.Width, bmp.Height);
-        }
 
-        void draw_pts(Graphics g, PointF[] pts)
-        {
-            PointF p0 = pts[0];  // 左上
-            PointF p1 = pts[1];  // 右上
-            PointF p2 = new PointF(pts[1].X, pts[1].Y + (pts[2].Y - pts[0].Y));
-            PointF p3 = pts[2];  // 左下
-
-            //Pen p = new Pen(Color.Red, 20);
-            g.DrawLine(new Pen(Color.Red, 20), p0, p1);//上
-            g.DrawLine(new Pen(Color.Green, 20), p1, p2);//右
-            g.DrawLine(new Pen(Color.Blue, 20), p2, p3);//下
-            g.DrawLine(new Pen(Color.Cyan, 20), p3, p0);//左
+            g.FillEllipse(Brushes.Red, -15, -15, 30, 30);  // 畫原點
         }
 
         //------------------------------------------------------------  # 60個
@@ -1560,10 +1521,63 @@ namespace vcs_Draw_Transform1
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button28_Click(object sender, EventArgs e)
         {
+            //new
+            int W = 500;
+            int H = 500;
+            Bitmap bitmap1 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            g.Clear(Color.Pink);
 
+            // Scale and translate.
+            RectangleF world_rect = new RectangleF(-4.0f, -4.4f, 8.0f, 7.3f);
+            float cx = (world_rect.Left + world_rect.Right) / 2;
+            float cy = (world_rect.Top + world_rect.Bottom) / 2;
+
+            // Center the world coordinates at origin.
+            g.TranslateTransform(-cx, -cy);
+
+            // Scale to fill the form.
+            float scale = Math.Min(W / world_rect.Width, H / world_rect.Height);
+            g.ScaleTransform(scale, scale, MatrixOrder.Append);
+
+            // Move the result to center on the form.
+            g.TranslateTransform(W / 2, H / 2, MatrixOrder.Append);
+
+            // Generate the points.
+            PointF pt0, pt1;
+            double t = 0;
+            double expr = Math.Exp(Math.Cos(t)) - 2 * Math.Cos(4 * t) - Math.Pow(Math.Sin(t / 12), 5);
+            pt1 = new PointF((float)(Math.Sin(t) * expr), (float)(-Math.Cos(t) * expr));
+
+            Pen p = new Pen(Color.Blue, 0);
+            g.DrawRectangle(p, 0, 0, 100, 100);
+            //g.DrawLine(p, pt0, pt1);
+
+            /*
+            using (Pen p = new Pen(Color.Blue, 0))
+            {
+                const long num_lines = 5000;
+                for (long i = 0; i < num_lines; i++)
+                {
+                    //t = i * period * Math.PI / num_lines;
+                    expr = Math.Exp(Math.Cos(t)) - 2 * Math.Cos(4 * t) - Math.Pow(Math.Sin(t / 12), 5);
+                    pt0 = pt1;
+                    pt1 = new PointF((float)(Math.Sin(t) * expr), (float)(-Math.Cos(t) * expr));
+                    //p.Color = GetColor(t);
+                    g.DrawLine(p, pt0, pt1);
+                }
+            }
+            */
+
+            pictureBox1.Image = bitmap1;
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button29_Click(object sender, EventArgs e)
         {
@@ -1690,7 +1704,9 @@ g.ScaleTransform(3.0f, 3);  // 縮放, 水平縮放, 垂直縮放  //x軸比例�
 //------------------------------------------------------------  # 60個
 
 g.ScaleTransform(100, 100, MatrixOrder.Append);
-g.RotateTransform(5, MatrixOrder.Append);
+
+g.RotateTransform(30, MatrixOrder.Append);  // 順時針旋轉指定的角度
+g.RotateTransform(30);  // 順時針旋轉指定的角度
 
 //------------------------------------------------------------  # 60個
 

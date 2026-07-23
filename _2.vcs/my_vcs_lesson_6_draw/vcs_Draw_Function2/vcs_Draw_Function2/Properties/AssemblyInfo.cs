@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("vcs_Draw_Function2")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("mychat")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("vcs_Draw_Function2")]
-[assembly: AssemblyCopyright("Copyright © mychat 2010")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

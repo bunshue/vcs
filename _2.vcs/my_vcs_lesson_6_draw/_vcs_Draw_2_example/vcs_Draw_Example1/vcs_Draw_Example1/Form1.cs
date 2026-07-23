@@ -1058,8 +1058,9 @@ namespace vcs_Draw_Example1
             */
 
             pictureBox1.Image = bitmap1;
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -2444,107 +2445,102 @@ namespace vcs_Draw_Example1
             pictureBox1.Image = bitmap1;
         }
 
-        private void button10_Click(object sender, EventArgs e)
+        //------------------------------------------------------------  # 60個
+
+        string title = "OV Exposure Plot";
+        string xlabel = "x";
+        string ylabel = "y";
+
+        void plotXY(int[] x, int[] y)
         {
+            int border_x = 10;  //10% border X
+            int border_y = 10;  //10% border Y
+
+            int WW = pictureBox1.ClientSize.Width;
+            int HH = pictureBox1.ClientSize.Height;
+
+            int x_st = WW * border_x / 100;
+            int y_st = HH * border_y / 100;
+
+            richTextBox1.Text += "WW = " + WW.ToString() + "\n";
+            richTextBox1.Text += "HH = " + HH.ToString() + "\n";
+
+            int W = WW * (100 - border_x * 2) / 100;
+            int H = HH * (100 - border_y * 2) / 100;
+
+            richTextBox1.Text += "W = " + W.ToString() + "\n";
+            richTextBox1.Text += "H = " + H.ToString() + "\n";
+
+            int N1 = x.Length;
+            int N2 = y.Length;
+            int N = Math.Min(N1, N2);
+            richTextBox1.Text += "x_len = " + x.Length.ToString() + "\n";
+            richTextBox1.Text += "y_len = " + y.Length.ToString() + "\n";
+            richTextBox1.Text += "N = " + N.ToString() + "\n";
+
+            int y_max = y.Max();
+            int y_min = y.Min();
+            richTextBox1.Text += "y_max = " + y_max.ToString() + "\n";
+            richTextBox1.Text += "y_min = " + y_min.ToString() + "\n";
+
+            float x_ratio = W / (float)N;
+            float y_ratio = H / (float)(y_max - y_min);
+
+            richTextBox1.Text += "x_ratio = " + x_ratio.ToString() + "\n";
+            richTextBox1.Text += "y_ratio = " + y_ratio.ToString() + "\n";
+
             g.Clear(Color.White);
 
-            //畫各種編碼的區間
-            int xx;
-            int yy;
-            int dd = 20;
-            int allow = 0;
+            int i;
+            Point[] curvePoints = new Point[N];    //一維陣列內有 N 個Point
 
-            //richTextBox1.Text += "W = " + this.pictureBox1.Width.ToString() + " H = " + this.pictureBox1.Height.ToString() + "\n";
-            //Graphics g = pictureBox1.CreateGraphics();
-            //g.Clear(Color.White);
-            //DrawXY();
-
-            Point[] pt1 = new Point[656];    //一維陣列內有360個Point
-            yy = 200;
-            allow = 0;
-            for (xx = 0; xx <= 65535; xx++)
+            for (i = 0; i < N; i++)
             {
-                pt1[xx / 100].X = xx / 100;
-                if ((((xx / 256) >= 0xA1) && ((xx / 256) <= 0xE7)) && (((xx % 256) >= 0xA1) && ((xx % 256) <= 0xFE)))
+                curvePoints[i].X = x_st + (int)(x[i] * x_ratio);
+                //curvePoints[i].Y = HH - (y_st + (int)(y[i] * y_ratio));
+                curvePoints[i].Y = HH - (y_st + (int)((y[i] - y_min) * y_ratio));
+                if (i == 0)
                 {
-                    pt1[xx / 100].Y = yy - 100 + dd;
-                    allow++;
-                }
-                else
-                {
-                    //pt1[xx / 100].Y = 300 - 100;
-                    pt1[xx / 100].Y = yy - dd;
+                    richTextBox1.Text += curvePoints[i].ToString() + "\n";
+                    richTextBox1.Text += "x_st = " + x_st.ToString() + ", y_st = " + y_st.ToString() + "\n";
                 }
             }
-            g.DrawLines(new Pen(Brushes.Red, 3), pt1);
-            g.DrawString("GB2313", new Font("標楷體", 30), new SolidBrush(Color.Red), new PointF(20, yy - 80));
-            richTextBox1.Text += "e1 allow = " + allow.ToString() + "\n";
+            g.DrawLines(p, curvePoints);   //畫直線
 
-            Point[] pt2 = new Point[656];    //一維陣列內有360個Point
-            yy = 300;
-            allow = 0;
-            for (xx = 0; xx <= 65535; xx++)
-            {
-                pt2[xx / 100].X = xx / 100;
-                if ((((xx / 256) >= 0x81) && ((xx / 256) <= 0xFE)) && ((((xx % 256) >= 0x40) && ((xx % 256) <= 0x7E)) || (((xx % 256) >= 0x80) && ((xx % 256) <= 0xFE))))
-                {
-                    pt2[xx / 100].Y = yy - 100 + dd;
-                    allow++;
-                    //pt1[xx / 100].Y = 300 - 100;
-                }
-                else
-                {
-                    //pt1[xx / 100].Y = 300 - 100;
-                    pt2[xx / 100].Y = yy - dd;
-                }
-            }
-            g.DrawLines(new Pen(Brushes.Green, 3), pt2);
-            g.DrawString("GBK", new Font("標楷體", 30), new SolidBrush(Color.Green), new PointF(20, yy - 80));
-            richTextBox1.Text += "e2 allow = " + allow.ToString() + "\n";
+            g.DrawRectangle(new Pen(Color.Red), new Rectangle(x_st, y_st, W - 1, H - 1));
 
-            Point[] pt3 = new Point[656];    //一維陣列內有360個Point
-            yy = 400;
-            allow = 0;
-            for (xx = 0; xx <= 65535; xx++)
-            {
-                pt3[xx / 100].X = xx / 100;
-                if ((((xx / 256) >= 0x81) && ((xx / 256) <= 0xFE)) && ((((xx % 256) >= 0x40) && ((xx % 256) <= 0x7E)) || (((xx % 256) >= 0xA1) && ((xx % 256) <= 0xFE))))
-                {
-                    pt3[xx / 100].Y = yy - 100 + dd;
-                    allow++;
-                    //pt1[xx / 100].Y = 300 - 100;
-                }
-                else
-                {
-                    //pt1[xx / 100].Y = 300 - 100;
-                    pt3[xx / 100].Y = yy - dd;
-                }
-            }
-            g.DrawLines(new Pen(Brushes.Blue, 3), pt3);
-            g.DrawString("GB2313", new Font("Big5", 30), new SolidBrush(Color.Blue), new PointF(20, yy - 80));
-            richTextBox1.Text += "e3 allow = " + allow.ToString() + "\n";
+            Font f = new Font("標楷體", 24);
+            int tmp_width = 0;
+            int tmp_height = 0;
+            tmp_width = g.MeasureString(title, f).ToSize().Width;
+            tmp_height = g.MeasureString(title, f).ToSize().Height;
+            richTextBox1.Text += "tmp_width = " + tmp_width.ToString() + "  tmp_height = " + tmp_height.ToString() + "\n";
+            g.DrawString(title, f, new SolidBrush(Color.Blue), new PointF((WW - tmp_width) / 2, (y_st - tmp_height) / 2));
 
-            Point[] pt4 = new Point[656];    //一維陣列內有360個Point
-            yy = 500;
-            allow = 0;
-            for (xx = 0; xx <= 65535; xx++)
-            {
-                pt4[xx / 100].X = xx / 100;
-                if ((xx > 0x4e00) && (xx < 0x9fbf))
-                {
-                    pt4[xx / 100].Y = yy - 100 + dd;
-                    allow++;
-                }
-                else
-                {
-                    pt4[xx / 100].Y = yy - dd;
-                }
-            }
-            g.DrawLines(new Pen(Brushes.Yellow, 3), pt4);
-            g.DrawString("Unicode", new Font("標楷體", 30), new SolidBrush(Color.Yellow), new PointF(20, yy - 80));
-            richTextBox1.Text += "e4 allow = " + allow.ToString() + "\n";
             pictureBox1.Image = bitmap1;
         }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //畫OV曲線 1
+
+            int i;
+            int N = 256;
+            int[] data_x = new int[N];
+            int[] data_y = new int[N];
+            double gamma = 2.2;
+
+            for (i = 0; i < N; i++)
+            {
+                data_x[i] = i;
+                //data_y[i] = (int)(Math.Sin(i) * 100 + 100);
+                data_y[i] = (int)(Math.Pow(((double)data_x[i]) / 255, 1 / gamma) * 255);
+                //data_y[i] = i;
+            }
+            plotXY(data_x, data_y);
+        }
+
+        //------------------------------------------------------------  # 60個
 
         //畫OV亮度
         private void button11_Click(object sender, EventArgs e)
@@ -2671,6 +2667,44 @@ namespace vcs_Draw_Example1
 
         private void button13_Click(object sender, EventArgs e)
         {
+            //按鍵樣橢圓
+            //按鍵樣橢圓
+            //pictureBox1.Size = new Size(300, 200);
+            Graphics g = pictureBox1.CreateGraphics();
+            Brush sb = new SolidBrush(Color.Blue);
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
+            //橢圓的左上角與長寬
+            int x_st = 30;
+            int y_st = 30;
+            int W = 300;
+            int H = 200;
+
+            g.DrawRectangle(Pens.Red, x_st, y_st, W - 60, H - 60);
+
+            // Get the area we will fill.
+            Rectangle rect = new Rectangle(x_st, y_st, W - 60, H - 60);
+
+            // Fill the ellipse.
+            using (LinearGradientBrush br = new LinearGradientBrush(rect, Color.Lime, Color.DarkGreen, 225f))
+            {
+                g.FillEllipse(br, rect);
+            }
+            // Outline the ellipse.
+            using (LinearGradientBrush br = new LinearGradientBrush(rect, Color.Lime, Color.DarkGreen, 45f))
+            {
+                using (Pen pen = new Pen(br, 20f))
+                {
+                    // g.DrawRectangle(Pens.Red, rect);
+                    rect.X += 10;
+                    rect.Y += 10;
+                    rect.Width -= 20;
+                    rect.Height -= 20;
+
+                    g.DrawEllipse(pen, rect);
+                }
+            }
+            sb.Dispose();
         }
 
         //------------------------------------------------------------  # 60個
@@ -2740,6 +2774,7 @@ namespace vcs_Draw_Example1
                 }
             }
 
+            //半透明筆刷 alpha = 60
             SolidBrush semiTransBrush = new SolidBrush(Color.FromArgb(60, 0, 255, 0));
             //richTextBox1.Text += "\nresult:\n";
             for (i = 0; i < saturation_array.Length; i++)
@@ -3134,15 +3169,7 @@ namespace vcs_Draw_Example1
             richTextBox1.Clear();
 
             //讀取純文字檔到richTextBox裏
-            try
-            {
-                richTextBox1.LoadFile(@"D:\_git\vcs\_1.data\______test_files1\article.txt", RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
-            }
-            catch (FileNotFoundException)
-            {
-                richTextBox1.Text += "找不到檔案\n";
-                return;
-            }
+            richTextBox1.LoadFile(@"D:\_git\vcs\_1.data\______test_files1\article.txt", RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
 
             //獲取文本
             string text = richTextBox1.Text;
@@ -3194,6 +3221,8 @@ namespace vcs_Draw_Example1
             return bitmap1;
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button17_Click(object sender, EventArgs e)
         {
             Font f1 = new Font("Arial", 12, FontStyle.Bold);//定義字符串的字體樣式
@@ -3209,11 +3238,13 @@ namespace vcs_Draw_Example1
             Graphics g = this.pictureBox1.CreateGraphics();//實例化Graphics類
             g.Clear(Color.White);//以白色清空pictureBox1控件的背景
             Pen p = new Pen(Color.Red, circularity_W);//設置畫筆的顏色
-            g.DrawEllipse(p, rect); //繪製圓 
+            g.DrawEllipse(p, rect); //繪製圓
+
             SizeF Var_Size = new SizeF(rect.Width, rect.Width);//實例化SizeF類
             Var_Size = g.MeasureString(star_Str, f2);//對指定字符串進行測量
             //要指定的位置繪製星號
             g.DrawString(star_Str, f2, p.Brush, new PointF((rect.Width / 2F) + circularity_W - Var_Size.Width / 2F, rect.Height / 2F - Var_Size.Width / 2F));
+
             Var_Size = g.MeasureString("專用章", f1);//對指定字符串進行測量
             //繪製文字
             g.DrawString("專用章", f1, p.Brush, new PointF((rect.Width / 2F) + circularity_W - Var_Size.Width / 2F, rect.Height / 2F + Var_Size.Height * 2));
@@ -3718,7 +3749,11 @@ namespace vcs_Draw_Example1
         private void button26_Click(object sender, EventArgs e)
         {
             //透明的畫筆與塗刷
+
+            //半透明畫筆 alpha = 64
             Pen p = new Pen(Color.FromArgb(64, 0, 255, 0), 40); // 透明的畫筆
+
+            //半透明筆刷 alpha = 64
             SolidBrush sb = new SolidBrush(Color.FromArgb(64, 0, 0, 255)); // 透明的塗刷
 
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
@@ -4562,55 +4597,6 @@ namespace vcs_Draw_Example1
 
         private void button40_Click(object sender, EventArgs e)
         {
-            int W = 500;
-            int H = 500;
-            Bitmap bitmap1 = new Bitmap(W, H);
-            Graphics g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-            g.Clear(Color.Pink);
-
-            // Scale and translate.
-            RectangleF world_rect = new RectangleF(-4.0f, -4.4f, 8.0f, 7.3f);
-            float cx = (world_rect.Left + world_rect.Right) / 2;
-            float cy = (world_rect.Top + world_rect.Bottom) / 2;
-
-            // Center the world coordinates at origin.
-            g.TranslateTransform(-cx, -cy);
-
-            // Scale to fill the form.
-            float scale = Math.Min(W / world_rect.Width, H / world_rect.Height);
-            g.ScaleTransform(scale, scale, MatrixOrder.Append);
-
-            // Move the result to center on the form.
-            g.TranslateTransform(W / 2, H / 2, MatrixOrder.Append);
-
-            // Generate the points.
-            PointF pt0, pt1;
-            double t = 0;
-            double expr = Math.Exp(Math.Cos(t)) - 2 * Math.Cos(4 * t) - Math.Pow(Math.Sin(t / 12), 5);
-            pt1 = new PointF((float)(Math.Sin(t) * expr), (float)(-Math.Cos(t) * expr));
-
-            Pen p = new Pen(Color.Blue, 0);
-            g.DrawRectangle(p, 0, 0, 100, 100);
-            //g.DrawLine(p, pt0, pt1);
-
-            /*
-            using (Pen p = new Pen(Color.Blue, 0))
-            {
-                const long num_lines = 5000;
-                for (long i = 0; i < num_lines; i++)
-                {
-                    //t = i * period * Math.PI / num_lines;
-                    expr = Math.Exp(Math.Cos(t)) - 2 * Math.Cos(4 * t) - Math.Pow(Math.Sin(t / 12), 5);
-                    pt0 = pt1;
-                    pt1 = new PointF((float)(Math.Sin(t) * expr), (float)(-Math.Cos(t) * expr));
-                    //p.Color = GetColor(t);
-                    g.DrawLine(p, pt0, pt1);
-                }
-            }
-            */
-
-            pictureBox1.Image = bitmap1;
         }
 
         //------------------------------------------------------------  # 60個
@@ -7639,31 +7625,4 @@ namespace vcs_Draw_Example1
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-
-/*
-//影像的寬高可以是負的, 做倒影鏡射
-string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-
-Bitmap bitmap1 = new Bitmap(filename);
-
-int Cx = this.pictureBox1.ClientSize.Width  / 2;  // 視窗客戶區 正中心
-int Cy = this.pictureBox1.ClientSize.Height / 2;
-
-int W = bitmap1.Width;
-int H = bitmap1.Height;
-
-Graphics g = this.pictureBox1.CreateGraphics();
-
-g.DrawImage(bitmap1, Cx, Cy,  W / 2,  H / 2);
-g.DrawImage(bitmap1, Cx, Cy, -W / 2,  H / 2);
-g.DrawImage(bitmap1, Cx, Cy,  W / 2, -H / 2);
-g.DrawImage(bitmap1, Cx, Cy, -W / 2, -H / 2);
-*/
-
-
-/*
-ddddd
-            g.Dispose();  // dispose後, 就不能再使用了
-*/
 

@@ -243,7 +243,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(180, 45);
             this.button10.TabIndex = 27;
-            this.button10.Text = "畫各種編碼的區間";
+            this.button10.Text = "畫OV曲線 1";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -287,6 +287,7 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(180, 45);
             this.button13.TabIndex = 31;
+            this.button13.Text = "按鍵樣橢圓";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -961,7 +962,6 @@
             this.button40.Name = "button40";
             this.button40.Size = new System.Drawing.Size(180, 45);
             this.button40.TabIndex = 110;
-            this.button40.Text = "test";
             this.button40.UseVisualStyleBackColor = true;
             this.button40.Click += new System.EventHandler(this.button40_Click);
             // 

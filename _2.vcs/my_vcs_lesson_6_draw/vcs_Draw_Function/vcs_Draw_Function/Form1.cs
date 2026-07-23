@@ -22,6 +22,12 @@ namespace vcs_Draw_Function
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            //6060
+
+            label4.Text = "";
+            //this.ClientSize = new Size(800, 600);
+            G = this.pictureBox2.CreateGraphics();
         }
 
         void show_item_location()
@@ -32,8 +38,21 @@ namespace vcs_Draw_Function
             int dx = 200 + 10;
             int dy = 60 + 10;
 
-            richTextBox1.Size = new Size(450, 340);
-            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+
+            groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            groupBox3.Location = new Point(x_st + dx * 2 + 30, y_st + dy * 0);
+            groupBox2.Location = new Point(x_st + dx * 3 + 60, y_st + dy * 0);
+
+            pictureBox1.Size = new Size(840, 480);
+            pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            pictureBox2.Size = new Size(300, 300);
+            pictureBox2.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
+            comboBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
+            richTextBox1.Size = new Size(300, 690-300-10);
+            richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0+300+10);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1273, 750);
@@ -467,9 +486,328 @@ namespace vcs_Draw_Function
         {
             return (float)(one_over_2pi * Math.Exp(-(x - mean) * (x - mean) / (2 * var)));
         }
+
         //#endregion 常態分佈
 
         //------------------------------------------------------------  # 60個
+
+        // Return true if the number is not infinity or NaN.
+        private bool IsNumber(float number)
+        {
+            return !(float.IsNaN(number) || float.IsInfinity(number));
+        }
+
+        // Calculate Polynomial(x)  Polynomial(x) = ax^4+bx^3+cx^2+dx+e
+        private float Polynomial(float x, float A, float B, float C, float D, float E)
+        {
+            float result;
+            result = A * x * x * x * x + B * x * x * x + C * x * x + D * x + E;
+            return result;
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+            //畫多項式
+            float A;
+            float B;
+            float C;
+            float D;
+            float E;
+
+            // Calculate Polynomial(x)  Polynomial(x) = ax^4+bx^3+cx^2+dx+e
+            A = 0;
+            B = 0;
+            C = 1;
+            D = 0;
+            E = 0;
+
+            // Get the X coordinate bounds.
+            float xmin = -10;
+            float xmax = 10;
+            float ymin = 100;
+            float ymax = 0;
+
+            float x_tick = 1;
+
+            // Get points for the negative root on the left.
+            List<PointF> points = new List<PointF>();
+            float xmid1 = xmax;
+
+            for (float x = xmin; x <= xmax; x += x_tick)
+            {
+                //float y = G1(x, A, B, C, D, E, F, -1f);
+                float y = Polynomial(x, A, B, C, D, E);
+                if (!IsNumber(y))
+                {
+                    xmid1 = x - 1;
+                    break;
+                }
+                points.Add(new PointF(x, y));
+            }
+
+            int len = points.Count;
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+
+            for (int i = 0; i < len; i++)
+            {
+                if (points[i].Y > ymax)
+                    ymax = points[i].Y;
+                else if (points[i].Y < ymin)
+                    ymin = points[i].Y;
+                //richTextBox1.Text += "i = " + i.ToString() + "\tx = " + points[i].X.ToString() + "\ty = " + points[i].Y.ToString() + "\n";
+            }
+            richTextBox1.Text += "ymax = " + ymax.ToString() + "\n";
+            richTextBox1.Text += "ymin = " + ymin.ToString() + "\n";
+
+            int x_ratio = 1;
+            int y_ratio = 1;
+            int W = pictureBox1.ClientSize.Width;
+            int H = pictureBox1.ClientSize.Height;
+
+            x_ratio = (int)(W / (xmax - xmin));
+            richTextBox1.Text += "x_ratio = " + x_ratio.ToString() + "\n";
+            //x_ratio -= 10;    //to see the boundary
+
+            y_ratio = (int)(H / (ymax - ymin));
+            richTextBox1.Text += "y_ratio = " + y_ratio.ToString() + "\n";
+
+            Bitmap bitmap1 = new Bitmap(W, H);
+            using (Graphics g = Graphics.FromImage(bitmap1))
+            {
+                g.Clear(Color.White);
+                g.SmoothingMode = SmoothingMode.AntiAlias;
+
+                // Draw the curves.
+                using (Pen thick_pen = new Pen(Color.Red, 2))
+                {
+                    for (int i = 0; i < len; i++)
+                    {
+                        points[i] = new PointF((points[i].X + 10) * x_ratio, H - (points[i].Y) * y_ratio);
+                    }
+
+                    thick_pen.Color = Color.Red;
+                    if (points.Count > 1)
+                        g.DrawLines(thick_pen, points.ToArray());
+                }
+            }
+            // Display the result.
+            pictureBox1.Image = bitmap1;
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //畫XY平面
+            Graphics g;
+            Pen p;
+            SolidBrush sb;
+            Bitmap bitmap1;
+
+            int W = pictureBox1.ClientSize.Width;
+            int H = pictureBox1.ClientSize.Height;
+
+            //----開新的Bitmap----
+            bitmap1 = new Bitmap(W, H);
+            //----使用上面的Bitmap畫圖----
+            g = Graphics.FromImage(bitmap1);
+
+            p = new Pen(Color.Red, 10);     // 設定畫筆為紅色、粗細為 10 點。
+            sb = new SolidBrush(Color.Blue);
+
+            g.Clear(Color.White);
+
+            float ratio_x, ratio_y;
+            float w, h;
+            float x0, x1, y0, y1;
+
+            //----畫筆顏色----
+            p = new Pen(Color.Black);
+            sb = new SolidBrush(p.Color);
+            //----取得picturebox寬度與高度----
+            w = pictureBox1.Width;
+            h = pictureBox1.Height;
+            //----是否有上一次的圖片，如果有就清除----
+            if (pictureBox1.Image != null)
+                pictureBox1.Image = null;
+            //if (bitmap1 != null)
+            //  bitmap1.Dispose();
+            //----轉換使用者輸入的資料----
+            x0 = (float)10;
+            y0 = (float)10;
+            x1 = (float)-5;
+            y1 = (float)-9;
+            //----計算放大倍率----
+            ratio_x = (w - 50) / 20;
+            ratio_y = (h - 50) / 20;
+            //----開新的Bitmap----
+            bitmap1 = new Bitmap((int)w, (int)h);
+            //----使用上面的Bitmap畫圖----
+            g = Graphics.FromImage(bitmap1);
+            //----清除Bitmap為某顏色----
+            g.Clear(Color.White);
+            //----更改原點位置----
+            g.TranslateTransform(pictureBox1.Width / 2, pictureBox1.Height / 2);
+            //----畫坐標軸----
+            g.DrawLine(p, -1000, 0, 1000, 0);//x軸
+            g.DrawLine(p, 0, -1000, 0, 1000);//y軸
+            g.DrawString("X", this.Font, sb, w / 2 - 20, 20);
+            g.DrawString("Y", this.Font, sb, 20, -h / 2);
+            g.DrawLine(p, w / 2, 0, w / 2 - 10, 5);//x軸箭頭
+            g.DrawLine(p, w / 2, 0, w / 2 - 10, -5);
+            g.DrawLine(p, 0, -h / 2, 5, -h / 2 + 10);//y軸箭頭
+            g.DrawLine(p, 0, -h / 2, -5, -h / 2 + 10);
+            for (int i = -10; i <= 10; i++)//畫X Y軸座標位置
+            {
+                g.DrawLine(p, i * ratio_x, -5, i * ratio_x, 5);
+                g.DrawString(i.ToString().PadLeft(2, ' '), this.Font, sb, i * ratio_x - 9, 10);
+                g.DrawLine(p, -5, i * ratio_y, 5, i * ratio_y);
+                if (i != 0)
+                    g.DrawString(i.ToString(), this.Font, sb, 15, i * ratio_y - 8);
+            }
+            //----換顏色----
+            p = new Pen(Color.Red);
+            sb = new SolidBrush(p.Color);
+            //----畫線----
+            g.DrawLine(p, x0 * ratio_x, -y0 * ratio_y, x1 * ratio_x, -y1 * ratio_y);
+            //----畫兩點----
+            g.FillEllipse(sb, new RectangleF(x0 * ratio_x - 2.5f, -y0 * ratio_y - 2.5f, 5, 5));
+            g.FillEllipse(sb, new RectangleF(x1 * ratio_x - 2.5f, -y1 * ratio_y - 2.5f, 5, 5));
+            //----釋放Graphics資源----
+            //g.Dispose();
+            //----將Bitmap顯示在Picture上
+            g.ResetTransform();
+            pictureBox1.Image = bitmap1;
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        double theta = 0;// 徑度 (一圈為 Math.PI * 2)
+        double r; // 半徑
+        int x1, x2, y1, y2; //直線的兩個點
+        bool First = true;//定義第一點 (通常不畫)
+        Graphics G;// 畫布
+        int a, b;// 方程式的 參數
+        Pen MyPen = new Pen(Color.Black, 3);  //黑色筆 寬為 3
+
+        private void pictureBox2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            label4.Text = comboBox1.Text.ToString();
+            this.Invalidate();
+            this.pictureBox2.Invalidate();
+            timer1.Enabled = true;
+            theta = 0;
+            First = true;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            theta = theta + 0.01;
+
+            if (comboBox1.Text == "")
+            {
+                timer1.Enabled = false;
+                label4.Text = "";
+                return;
+            }
+            else if (comboBox1.Text == "Circle")
+            {
+                if (theta >= Math.PI * 2)
+                {
+                    timer1.Enabled = false;
+                    label4.Text = "";
+                }
+                r = pictureBox2.Height / 4;
+                x2 = pictureBox2.Width / 2 + (int)(r * Math.Cos(theta));
+                y2 = pictureBox2.Height / 2 + (int)(r * Math.Sin(theta));
+            }
+            else if (comboBox1.Text == "Limacon")  // 帕斯卡蝸線
+            {
+                if (theta >= Math.PI * 2)
+                {
+                    timer1.Enabled = false;
+                    label4.Text = "";
+                }
+                a = 200;
+                b = 100;
+                r = a * Math.Cos(theta - Math.PI / 2) + b;
+                x2 = pictureBox2.Width / 2 + (int)(r * Math.Cos(theta));
+                y2 = pictureBox2.Height / 4 + (int)(r * Math.Sin(theta));
+            }
+            else if (comboBox1.Text == "Cardiod")
+            {
+                if (theta >= Math.PI * 2)
+                {
+                    timer1.Enabled = false;
+                    label4.Text = "";
+                }
+                a = 200;// b = 50;
+                r = a * Math.Cos(theta - Math.PI / 2) + a;
+                x2 = pictureBox2.Width / 2 + (int)(r * Math.Cos(theta));
+                y2 = pictureBox2.Height / 4 + (int)(r * Math.Sin(theta));
+            }
+            else if (comboBox1.Text == "Three Left")
+            {
+                if (theta >= Math.PI)
+                {
+                    timer1.Enabled = false;
+                    label4.Text = "";
+                }
+                a = 275;
+                r = a * Math.Cos(3.0 * theta);
+                x2 = pictureBox2.Width / 2 + (int)(r * Math.Cos(theta));
+                y2 = pictureBox2.Height / 2 + (int)(r * Math.Sin(theta));
+            }
+            else if (comboBox1.Text == "Four Left")
+            {
+                if (theta >= Math.PI * 2)
+                {
+                    timer1.Enabled = false;
+                    label4.Text = "";
+                }
+                a = 275;
+                r = a * Math.Cos(2.0 * theta);
+                x2 = pictureBox2.Width / 2 + (int)(r * Math.Cos(theta));
+                y2 = pictureBox2.Height / 2 + (int)(r * Math.Sin(theta));
+            }
+            else if (comboBox1.Text == "Spiral")
+            {
+                if (theta >= Math.PI * 20)
+                {
+                    timer1.Enabled = false;
+                    label4.Text = "";
+                }
+                a = 175;
+                r = a / 40.0 * theta;
+                x2 = pictureBox2.Width / 2 + (int)(r * Math.Cos(theta));
+                y2 = pictureBox2.Height / 2 + (int)(r * Math.Sin(theta));
+            }
+
+            if (First)
+            {
+                First = !First;
+            }
+            else
+            {
+                G.DrawLine(MyPen, x1, y1, x2, y2);
+            }
+            x1 = x2;
+            y1 = y2;
+        }
+
+
     }
 }
 

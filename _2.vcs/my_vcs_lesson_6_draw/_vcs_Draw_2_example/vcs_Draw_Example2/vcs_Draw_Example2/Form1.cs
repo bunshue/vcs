@@ -31,10 +31,6 @@ namespace vcs_Draw_Example2
         SolidBrush sb;
         Bitmap bitmap1;
 
-        string title = "OV Exposure Plot";
-        string xlabel = "x";
-        string ylabel = "y";
-
         public Form1()
         {
             InitializeComponent();
@@ -213,399 +209,7 @@ namespace vcs_Draw_Example2
         {
         }
 
-        //------------------------------------------------------------  # 60個
-
-        //畫多項式 ST
         private void button1_Click(object sender, EventArgs e)
-        {
-            float A;
-            float B;
-            float C;
-            float D;
-            float E;
-
-            // Calculate Polynomial(x)  Polynomial(x) = ax^4+bx^3+cx^2+dx+e
-            A = 0;
-            B = 0;
-            C = 1;
-            D = 0;
-            E = 0;
-
-            // Get the X coordinate bounds.
-            float xmin = -10;
-            float xmax = 10;
-            float ymin = 100;
-            float ymax = 0;
-
-            float x_tick = 1;
-
-            // Get points for the negative root on the left.
-            List<PointF> points = new List<PointF>();
-            float xmid1 = xmax;
-
-            for (float x = xmin; x <= xmax; x += x_tick)
-            {
-                //float y = G1(x, A, B, C, D, E, F, -1f);
-                float y = Polynomial(x, A, B, C, D, E);
-                if (!IsNumber(y))
-                {
-                    xmid1 = x - 1;
-                    break;
-                }
-                points.Add(new PointF(x, y));
-            }
-
-            int len = points.Count;
-            richTextBox1.Text += "len = " + len.ToString() + "\n";
-
-            for (int i = 0; i < len; i++)
-            {
-                if (points[i].Y > ymax)
-                    ymax = points[i].Y;
-                else if (points[i].Y < ymin)
-                    ymin = points[i].Y;
-                //richTextBox1.Text += "i = " + i.ToString() + "\tx = " + points[i].X.ToString() + "\ty = " + points[i].Y.ToString() + "\n";
-            }
-            richTextBox1.Text += "ymax = " + ymax.ToString() + "\n";
-            richTextBox1.Text += "ymin = " + ymin.ToString() + "\n";
-
-            int x_ratio = 1;
-            int y_ratio = 1;
-            int W = pictureBox1.ClientSize.Width;
-            int H = pictureBox1.ClientSize.Height;
-
-            x_ratio = (int)(W / (xmax - xmin));
-            richTextBox1.Text += "x_ratio = " + x_ratio.ToString() + "\n";
-            //x_ratio -= 10;    //to see the boundary
-
-            y_ratio = (int)(H / (ymax - ymin));
-            richTextBox1.Text += "y_ratio = " + y_ratio.ToString() + "\n";
-
-            Bitmap bitmap1 = new Bitmap(W, H);
-            using (Graphics g = Graphics.FromImage(bitmap1))
-            {
-                g.Clear(Color.White);
-                g.SmoothingMode = SmoothingMode.AntiAlias;
-
-                // Draw the curves.
-                using (Pen thick_pen = new Pen(Color.Red, 2))
-                {
-                    for (int i = 0; i < len; i++)
-                    {
-                        points[i] = new PointF((points[i].X + 10) * x_ratio, H - (points[i].Y) * y_ratio);
-                    }
-
-                    thick_pen.Color = Color.Red;
-                    if (points.Count > 1)
-                        g.DrawLines(thick_pen, points.ToArray());
-                }
-            }
-            // Display the result.
-            pictureBox1.Image = bitmap1;
-
-
-        }
-
-        // Return true if the number is not infinity or NaN.
-        private bool IsNumber(float number)
-        {
-            return !(float.IsNaN(number) || float.IsInfinity(number));
-        }
-
-        // Calculate Polynomial(x)  Polynomial(x) = ax^4+bx^3+cx^2+dx+e
-        private float Polynomial(float x, float A, float B, float C, float D, float E)
-        {
-            float result;
-            result = A * x * x * x * x + B * x * x * x + C * x * x + D * x + E;
-            return result;
-        }
-        //畫多項式 SP
-
-        //------------------------------------------------------------  # 60個
-
-        //畫XY平面 ST
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Graphics g;
-            Pen p;
-            SolidBrush sb;
-            Bitmap bitmap1;
-
-            int W = pictureBox1.ClientSize.Width;
-            int H = pictureBox1.ClientSize.Height;
-
-            //----開新的Bitmap----
-            bitmap1 = new Bitmap(W, H);
-            //----使用上面的Bitmap畫圖----
-            g = Graphics.FromImage(bitmap1);
-
-
-            p = new Pen(Color.Red, 10);     // 設定畫筆為紅色、粗細為 10 點。
-            sb = new SolidBrush(Color.Blue);
-
-            g.Clear(Color.White);
-
-
-            float ratio_x, ratio_y;
-            float w, h;
-            float x0, x1, y0, y1;
-
-            //----畫筆顏色----
-            p = new Pen(Color.Black);
-            sb = new SolidBrush(p.Color);
-            //----取得picturebox寬度與高度----
-            w = pictureBox1.Width;
-            h = pictureBox1.Height;
-            //----是否有上一次的圖片，如果有就清除----
-            if (pictureBox1.Image != null)
-                pictureBox1.Image = null;
-            //if (bitmap1 != null)
-            //  bitmap1.Dispose();
-            //----轉換使用者輸入的資料----
-            x0 = (float)10;
-            y0 = (float)10;
-            x1 = (float)-5;
-            y1 = (float)-9;
-            //----計算放大倍率----
-            ratio_x = (w - 50) / 20;
-            ratio_y = (h - 50) / 20;
-            //----開新的Bitmap----
-            bitmap1 = new Bitmap((int)w, (int)h);
-            //----使用上面的Bitmap畫圖----
-            g = Graphics.FromImage(bitmap1);
-            //----清除Bitmap為某顏色----
-            g.Clear(Color.White);
-            //----更改原點位置----
-            g.TranslateTransform(pictureBox1.Width / 2, pictureBox1.Height / 2);
-            //----畫坐標軸----
-            g.DrawLine(p, -1000, 0, 1000, 0);//x軸
-            g.DrawLine(p, 0, -1000, 0, 1000);//y軸
-            g.DrawString("X", this.Font, sb, w / 2 - 20, 20);
-            g.DrawString("Y", this.Font, sb, 20, -h / 2);
-            g.DrawLine(p, w / 2, 0, w / 2 - 10, 5);//x軸箭頭
-            g.DrawLine(p, w / 2, 0, w / 2 - 10, -5);
-            g.DrawLine(p, 0, -h / 2, 5, -h / 2 + 10);//y軸箭頭
-            g.DrawLine(p, 0, -h / 2, -5, -h / 2 + 10);
-            for (int i = -10; i <= 10; i++)//畫X Y軸座標位置
-            {
-                g.DrawLine(p, i * ratio_x, -5, i * ratio_x, 5);
-                g.DrawString(i.ToString().PadLeft(2, ' '), this.Font, sb, i * ratio_x - 9, 10);
-                g.DrawLine(p, -5, i * ratio_y, 5, i * ratio_y);
-                if (i != 0)
-                    g.DrawString(i.ToString(), this.Font, sb, 15, i * ratio_y - 8);
-            }
-            //----換顏色----
-            p = new Pen(Color.Red);
-            sb = new SolidBrush(p.Color);
-            //----畫線----
-            g.DrawLine(p, x0 * ratio_x, -y0 * ratio_y, x1 * ratio_x, -y1 * ratio_y);
-            //----畫兩點----
-            g.FillEllipse(sb, new RectangleF(x0 * ratio_x - 2.5f, -y0 * ratio_y - 2.5f, 5, 5));
-            g.FillEllipse(sb, new RectangleF(x1 * ratio_x - 2.5f, -y1 * ratio_y - 2.5f, 5, 5));
-            //----釋放Graphics資源----
-            //g.Dispose();
-            //----將Bitmap顯示在Picture上
-            g.ResetTransform();
-            pictureBox1.Image = bitmap1;
-
-
-        }
-        //畫XY平面 SP
-
-        //------------------------------------------------------------  # 60個
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            //按鍵樣橢圓
-            //pictureBox1.Size = new Size(300, 200);
-            Graphics g = pictureBox1.CreateGraphics();
-            Brush sb = new SolidBrush(Color.Blue);
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-
-            //橢圓的左上角與長寬
-            int x_st = 30;
-            int y_st = 30;
-            int W = 300;
-            int H = 200;
-
-            g.DrawRectangle(Pens.Red, x_st, y_st, W - 60, H - 60);
-
-            // Get the area we will fill.
-            Rectangle rect = new Rectangle(x_st, y_st, W - 60, H - 60);
-
-            // Fill the ellipse.
-            using (LinearGradientBrush br = new LinearGradientBrush(rect, Color.Lime, Color.DarkGreen, 225f))
-            {
-                g.FillEllipse(br, rect);
-            }
-            // Outline the ellipse.
-            using (LinearGradientBrush br = new LinearGradientBrush(rect, Color.Lime, Color.DarkGreen, 45f))
-            {
-                using (Pen pen = new Pen(br, 20f))
-                {
-                    // g.DrawRectangle(Pens.Red, rect);
-                    rect.X += 10;
-                    rect.Y += 10;
-                    rect.Width -= 20;
-                    rect.Height -= 20;
-
-                    g.DrawEllipse(pen, rect);
-                }
-            }
-            sb.Dispose();
-        }
-
-        void plotXY(int[] x, int[] y)
-        {
-            int border_x = 10;  //10% border X
-            int border_y = 10;  //10% border Y
-
-            int WW = pictureBox1.ClientSize.Width;
-            int HH = pictureBox1.ClientSize.Height;
-
-            int x_st = WW * border_x / 100;
-            int y_st = HH * border_y / 100;
-
-            richTextBox1.Text += "WW = " + WW.ToString() + "\n";
-            richTextBox1.Text += "HH = " + HH.ToString() + "\n";
-
-            int W = WW * (100 - border_x * 2) / 100;
-            int H = HH * (100 - border_y * 2) / 100;
-
-            richTextBox1.Text += "W = " + W.ToString() + "\n";
-            richTextBox1.Text += "H = " + H.ToString() + "\n";
-
-            int N1 = x.Length;
-            int N2 = y.Length;
-            int N = Math.Min(N1, N2);
-            richTextBox1.Text += "x_len = " + x.Length.ToString() + "\n";
-            richTextBox1.Text += "y_len = " + y.Length.ToString() + "\n";
-            richTextBox1.Text += "N = " + N.ToString() + "\n";
-
-            int y_max = y.Max();
-            int y_min = y.Min();
-            richTextBox1.Text += "y_max = " + y_max.ToString() + "\n";
-            richTextBox1.Text += "y_min = " + y_min.ToString() + "\n";
-
-            float x_ratio = W / (float)N;
-            float y_ratio = H / (float)(y_max - y_min);
-
-            richTextBox1.Text += "x_ratio = " + x_ratio.ToString() + "\n";
-            richTextBox1.Text += "y_ratio = " + y_ratio.ToString() + "\n";
-
-            g.Clear(Color.White);
-
-            int i;
-            Point[] curvePoints = new Point[N];    //一維陣列內有 N 個Point
-
-            for (i = 0; i < N; i++)
-            {
-                curvePoints[i].X = x_st + (int)(x[i] * x_ratio);
-                //curvePoints[i].Y = HH - (y_st + (int)(y[i] * y_ratio));
-                curvePoints[i].Y = HH - (y_st + (int)((y[i] - y_min) * y_ratio));
-                if (i == 0)
-                {
-                    richTextBox1.Text += curvePoints[i].ToString() + "\n";
-                    richTextBox1.Text += "x_st = " + x_st.ToString() + ", y_st = " + y_st.ToString() + "\n";
-                }
-            }
-            g.DrawLines(p, curvePoints);   //畫直線
-
-            g.DrawRectangle(new Pen(Color.Red), new Rectangle(x_st, y_st, W - 1, H - 1));
-
-            Font f = new Font("標楷體", 24);
-            int tmp_width = 0;
-            int tmp_height = 0;
-            tmp_width = g.MeasureString(title, f).ToSize().Width;
-            tmp_height = g.MeasureString(title, f).ToSize().Height;
-            richTextBox1.Text += "tmp_width = " + tmp_width.ToString() + "  tmp_height = " + tmp_height.ToString() + "\n";
-            g.DrawString(title, f, new SolidBrush(Color.Blue), new PointF((WW - tmp_width) / 2, (y_st - tmp_height) / 2));
-
-            pictureBox1.Image = bitmap1;
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            //畫OV曲線 1
-
-            int i;
-            int N = 256;
-            int[] data_x = new int[N];
-            int[] data_y = new int[N];
-            double gamma = 2.2;
-
-            for (i = 0; i < N; i++)
-            {
-                data_x[i] = i;
-                //data_y[i] = (int)(Math.Sin(i) * 100 + 100);
-                data_y[i] = (int)(Math.Pow(((double)data_x[i]) / 255, 1 / gamma) * 255);
-                //data_y[i] = i;
-            }
-            plotXY(data_x, data_y);
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-            //用GDI+畫圖
-
-            Graphics g = this.pictureBox1.CreateGraphics();
-            g.FillRectangle(Brushes.White, this.ClientRectangle);
-            for (int i = 1; i <= 7; ++i)
-            {
-                //在窗體上面畫出橙色的矩形
-                Rectangle r = new Rectangle(i * 40 - 15, 0, 15, this.ClientRectangle.Height);
-                g.FillRectangle(Brushes.Orange, r);
-            }
-            //在內存中創建一個Bitmap並設置CompositingMode
-            Bitmap bmp = new Bitmap(260, 260, PixelFormat.Format32bppArgb);
-            Graphics gBmp = Graphics.FromImage(bmp);
-            gBmp.CompositingMode = CompositingMode.SourceCopy;
-
-            // 創建一個帶有Alpha的紅色區域
-            // 並將其畫在內存的位圖裏面
-            Color red = Color.FromArgb(0x60, 0xff, 0, 0);
-            Brush redBrush = new SolidBrush(red);
-            gBmp.FillEllipse(redBrush, 70, 70, 160, 160);
-            // 創建一個帶有Alpha的綠色區域
-            Color green = Color.FromArgb(0x40, 0, 0xff, 0);
-            Brush greenBrush = new SolidBrush(green);
-            gBmp.FillRectangle(greenBrush, 10, 10, 140, 140);
-
-            //在窗體上面畫出位圖 now draw the bitmap on our window
-            g.DrawImage(bmp, 20, 20, bmp.Width, bmp.Height);
-
-            // 清理資源
-            bmp.Dispose();
-            gBmp.Dispose();
-            redBrush.Dispose();
-            greenBrush.Dispose();
-        }
-
-        private void button11_Click(object sender, EventArgs e)
         {
         }
 
@@ -618,7 +222,7 @@ namespace vcs_Draw_Example2
 
         const bool leftStatus = false;
 
-        private void button12_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
             //wave轉txt
             richTextBox1.Text += "wave轉txt ST\n";
@@ -684,7 +288,7 @@ namespace vcs_Draw_Example2
 
         //------------------------------------------------------------  # 60個
 
-        private void button13_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
             //顯示wave 1
             string filename2 = @"start.txt";
@@ -730,7 +334,7 @@ namespace vcs_Draw_Example2
             })).Start();
         }
 
-        private void button14_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e)
         {
             //顯示wave 2
             string filename = @"D:\_git\vcs\_1.data\______test_files1\_wav\start.wav";
@@ -761,7 +365,7 @@ namespace vcs_Draw_Example2
 
         //------------------------------------------------------------  # 60個
 
-        private void button15_Click(object sender, EventArgs e)
+        private void button5_Click(object sender, EventArgs e)
         {
             //畫函數
             // Make the Bitmap.
@@ -823,11 +427,11 @@ namespace vcs_Draw_Example2
             pictureBox1.Image = bm;
         }
 
-        private void button16_Click(object sender, EventArgs e)
+        private void button6_Click(object sender, EventArgs e)
         {
         }
 
-        private void button17_Click(object sender, EventArgs e)
+        private void button7_Click(object sender, EventArgs e)
         {
         }
 
@@ -860,18 +464,74 @@ namespace vcs_Draw_Example2
             ucOscilloscope1.MappingDatas = mapData;
         }
 
-        private void button18_Click(object sender, EventArgs e)
+        private void button8_Click(object sender, EventArgs e)
         {
             //畫 Oscilloscope 1
             string filename = @"..\..\data\MappingData1.txt";
             draw_Oscilloscope(filename);
         }
 
-        private void button19_Click(object sender, EventArgs e)
+        //------------------------------------------------------------  # 60個
+
+        private void button9_Click(object sender, EventArgs e)
         {
             //畫 Oscilloscope 2
             string filename = @"..\..\data\MappingData2.txt";
             draw_Oscilloscope(filename);
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
         }
     }
 

@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("vcs_Keyboard")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("mychat")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("vcs_Keyboard")]
-[assembly: AssemblyCopyright("Copyright (C) mychat 2009")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
