@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("DialogApplication")]
+[assembly: AssemblyTitle("vcs_test_all_05_Print7")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("DialogApplication")]
-[assembly: AssemblyCopyright("Copyright © Chia-Hui Huang 2008")]
+[assembly: AssemblyProduct("vcs_test_all_05_Print7")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -8,8 +8,8 @@
     <ProjectGuid>{376FCFE4-A44B-43B0-91B2-DEAC5E4BF175}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DialogApplication</RootNamespace>
-    <AssemblyName>DialogApplication</AssemblyName>
+    <RootNamespace>vcs_test_all_05_Print7</RootNamespace>
+    <AssemblyName>vcs_test_all_05_Print7</AssemblyName>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>

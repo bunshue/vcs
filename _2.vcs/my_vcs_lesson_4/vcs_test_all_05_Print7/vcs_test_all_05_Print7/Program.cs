@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace DialogApplication
+namespace vcs_test_all_05_Print7
 {
     static class Program
     {

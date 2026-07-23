@@ -153,9 +153,7 @@ namespace PrintStuCertificate
                 }
             }
             lists.Sort();
-
             pageSetupDialog1.PageSettings.Landscape = true;
-
             printPreviewDialog1.ShowDialog();
         }
 

@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
 
-namespace DialogApplication
+namespace vcs_test_all_05_Print7
 {
     public class PrintClass : System.Drawing.Printing.PrintDocument
     {

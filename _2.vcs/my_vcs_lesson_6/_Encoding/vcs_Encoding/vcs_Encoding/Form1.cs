@@ -58,25 +58,13 @@ namespace vcs_Encoding
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            richTextBox1.Size = new Size(500 + 210, 690 - 70 * 4);
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            richTextBox1.Size = new Size(500 + 210, 690);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            tb_unicode.Size = new Size(500, 690 - 70 * 4);
-            tb_unicode.Location = new Point(x_st + dx * 5 + 90, y_st + dy * 4);
-            lb_unicode.Location = new Point(x_st + dx * 5 + 360, y_st + dy * 4 - 60);
-
-            richTextBox_string1.Size = new Size(250, 270);
-            richTextBox_string2.Size = new Size(250, 270);
-            richTextBox_hex.Size = new Size(250, 270);
-            richTextBox_string1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            richTextBox_hex.Location = new Point(x_st + dx * 3 + 50, y_st + dy * 0);
-            richTextBox_string2.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
-
-            bt_string2hex.Location = new Point(x_st + dx * 2 + 250 - 35, y_st + dy * 0 + 270 - 80);
-            bt_hex2string.Location = new Point(x_st + dx * 3 + 50 + 250 - 35, y_st + dy * 0 + 270 - 80);
-            bt_string2hex.Text = "字串\n轉\n十六進位";
-            bt_hex2string.Text = "十六進位\n轉\n字串";
+            tb_unicode.Size = new Size(500, 690 - 70 * 1);
+            tb_unicode.Location = new Point(x_st + dx * 5 + 90, y_st + dy * 1);
+            lb_unicode.Location = new Point(x_st + dx * 5 + 260, y_st + dy * 1 - 60);
 
             this.Size = new Size(1470 + 210, 750);
             this.Text = "vcs_Encoding";
@@ -95,58 +83,15 @@ namespace vcs_Encoding
 
         private void button0_Click(object sender, EventArgs e)
         {
-            int i;
-            string text = "ABC密碼錯誤";
-            int len = text.Length;
-            richTextBox1.Text += "原資料 : " + text + "\t長度 : " + len.ToString() + "\n";
-            for (i = 0; i < len; i++)
-            {
-                richTextBox1.Text += text[i].ToString() + "\n";
-            }
-
-            byte[] byteArray;
-
-            richTextBox1.Text += "gb2312編碼 :\t";
-            richTextBox1.Text += "使用gb2312將字串轉拜列\n";
-            byteArray = Encoding.GetEncoding("gb2312").GetBytes(text);  // 使用gb2312將字串轉拜列
-            len = byteArray.Length;
-            richTextBox1.Text += "長度 : " + len.ToString() + "\n";
-
-            PrintHexBytes(byteArray);
-
-            richTextBox1.Text += "Unicode編碼 = utf-16 編碼\t";
-            byteArray = Encoding.GetEncoding("unicode").GetBytes(text);  // 字串轉拜列
-            len = byteArray.Length;
-            richTextBox1.Text += "長度 : " + len.ToString() + "\n";
-
-            PrintHexBytes(byteArray);
-
-            richTextBox1.Text += "utf-16 編碼 :\t";
-            byteArray = Encoding.GetEncoding("utf-16").GetBytes(text);  // 字串轉拜列
-            len = byteArray.Length;
-            richTextBox1.Text += "長度 : " + len.ToString() + "\n";
-
-            PrintHexBytes(byteArray);
-
         }
+
+        //6060
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //編碼轉換
-            string str1 = "https://ja.wikipedia.org/wiki/和 製 英 語";
-
-            richTextBox1.Text += "原字串(a)\t\t" + str1 + "\n";
-            richTextBox1.Text += "原字串空白轉nbsp(b)\t" + str1.SpaceToNbsp() + "\n";
-
-            string str2 = str1.UrlEncode();
-
-            richTextBox1.Text += "原字串特殊符號編碼(c)\t" + str2 + "\n";
-
-            richTextBox1.Text += "(c)再解碼\t\t" + str2.UrlDecode() + "\n";
-
-            richTextBox1.Text += "(b)目前無法解碼\n";
-            richTextBox1.Text += "\n";
         }
+
+        //6060
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -429,37 +374,6 @@ namespace vcs_Encoding
 
         private void button9_Click(object sender, EventArgs e)
         {
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void bt_string2hex_Click(object sender, EventArgs e)
-        {
-            // 字串轉十六進位
-
-            string text = richTextBox_string1.Text;
-
-            // 使用UNICODE編碼
-            byte[] byteArray = Encoding.GetEncoding("unicode").GetBytes(text);  // 字串轉拜列
-
-            // 打印拜列
-            richTextBox_hex.Text = byteArray.ToHex(' ');  // 使用補充功能 ToHex
-        }
-
-        private void bt_hex2string_Click(object sender, EventArgs e)
-        {
-            //十六進位轉字串
-
-            // 取得拜列
-            byte[] byteArray = richTextBox_hex.Text.ToBytes();
-
-            // 使用UNICODE解碼
-            string text = Encoding.Unicode.GetString(byteArray);  // 使用Unicode編碼將拜列轉字串
-
-            // 使用預設編解碼
-            //string text = Encoding.Default.GetString(byteArray);  // 使用預設編碼將拜列轉字串
-
-            richTextBox_string2.Text = text;
         }
 
         //------------------------------------------------------------  # 60個
@@ -750,14 +664,6 @@ namespace vcs_Encoding
             byteArray = Encoding.GetEncoding("shift_jis").GetBytes(text);  //指名使用日語(Shift-JIS)編碼, 把字串轉成拜列
             print_data(byteArray);
 
-            richTextBox1.Text += "指名使用簡體中文(GB2312)編碼, 把字串轉成拜列\n";
-            byteArray = Encoding.GetEncoding("gb2312").GetBytes(text);  //指名使用簡體中文(GB2312)編碼, 把字串轉成拜列
-            print_data(byteArray);
-
-            richTextBox1.Text += "指名使用正體中文(Big5)編碼, 把字串轉成拜列\n";
-            byteArray = Encoding.GetEncoding("big5").GetBytes(text);  //指名使用正體中文(Big5)編碼, 把字串轉成拜列
-            print_data(byteArray);
-
             richTextBox1.Text += "指名使用Unicode編碼, 把字串轉成拜列\n";
             byteArray = Encoding.GetEncoding("utf-16").GetBytes(text);  //指名使用Unicode編碼, 把字串轉成拜列
             print_data(byteArray);
@@ -945,14 +851,6 @@ Hexadecimal value of ? is 003F
 
 //------------------------------------------------------------  # 60個
 
-使用 Encoding 類別中的這兩個方法，須注意編碼方式 :
-字串轉拜列 與 拜列轉字串
-
-Encoding.GetBytes方法 : 將字元集編碼成位元組序列。  // 字串轉拜列
-Encoding.GetBytes方法，將 String 轉為 Byte 序列  // 字串轉拜列
-Encoding.GetString方法 : 將位元組序列解碼成字串。
-Encoding.GetString方法，將 Byte 序列 轉為 String, 拜列轉字串
-
 Encoding enc = Encoding.GetEncoding("BIG5");
 Encoding enc = Encoding.GetEncoding("GB2312");
 
@@ -973,24 +871,19 @@ richTextBox1.Text += "UniCode 0041的字元是" + c + "\n";
 //------------------------------------------------------------  # 60個
 
 Encoding.GetEncoding big5 gb2312 shift_jis UTF-8 unicode
-
 大小寫不分
 
-打印字串的編碼值
-string text = "02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3";
-for (i = 0; i < text.Length; i++)
-{
-    richTextBox1.Text +=       text[i].ToString() + "\n";
-    richTextBox1.Text += ((int)text[i]).ToString("X2") + " ";
-}
 
 */
 
-
-
-
 /*
-//大整理
+使用 Encoding 類別中的這兩個方法，須注意編碼方式 :
+字串轉拜列 與 拜列轉字串
+
+Encoding.GetBytes方法 : 將字元集編碼成位元組序列。  // 字串轉拜列
+Encoding.GetBytes方法，將 String 轉為 Byte 序列  // 字串轉拜列
+Encoding.GetString方法 : 將位元組序列解碼成字串。
+Encoding.GetString方法，將 Byte 序列 轉為 String, 拜列轉字串
 
 // 字串轉拜列
 string text = "中秋佳節";
@@ -998,8 +891,10 @@ byte[] byteArray = Encoding.Default.GetBytes(text);  // 使用預設編碼將字
 byte[] byteArray = Encoding.ASCII.GetBytes(text);  // 使用ASCII編碼將字串轉拜列
 byte[] byteArray = Encoding.UTF8.GetBytes(text);  // 使用UTF8將字串轉拜列
 byte[] byteArray = Encoding.Unicode.GetBytes(text);
-byte[] byteArray = Encoding.GetEncoding("Big5").GetBytes(text);  // 使用big5將字串轉拜列
-byte[] byteArray = Encoding.GetEncoding("GB2312").GetBytes(text);  // 使用gb2312將字串轉拜列
+byte[] byteArray = Encoding.GetEncoding("Big5").GetBytes(text);  //指名使用正體中文(Big5)編碼, 把字串轉成拜列  // 使用big5將字串轉拜列
+byte[] byteArray = Encoding.GetEncoding("GB2312").GetBytes(text);  //指名使用簡體中文(GB2312)編碼, 把字串轉成拜列  // 使用gb2312將字串轉拜列
+byte[] byteArray = Encoding.GetEncoding("unicode").GetBytes(text);  // Unicode編碼 = utf-16 編碼 字串轉拜列
+byte[] byteArray = Encoding.GetEncoding("utf-16").GetBytes(text);  // utf-16 編碼 字串轉拜列
 byte[] byteArray = Encoding.GetEncoding(1252).GetBytes(text);
 byte[] byteArray = ASCIIEncoding.ASCII.GetBytes(text);
 byte[] byteArray = UTF8Encoding.UTF8.GetBytes(text);  // 使用UTF8將字串轉拜列
@@ -1008,6 +903,10 @@ byte[] byteArray = new ASCIIEncoding().GetBytes(text);
 
 // 拜列轉字串
 text = Encoding.Default.GetString(byteArray);  // 使用預設編碼將拜列轉字串
-text = Encoding.UTF8.GetString(byteArray);  // 使用UTF8將拜列轉字串
 text = Encoding.ASCII.GetString(byteArray);  // 拜列轉字串
+text = Encoding.UTF8.GetString(byteArray);  // 使用UTF8將拜列轉字串
+text = Encoding.Unicode.GetString(byteArray);  // 使用Unicode編碼 將拜列轉字串
+
 */
+
+

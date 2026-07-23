@@ -95,8 +95,16 @@ namespace vcs_test_all_05_Print4
                 printDocument0.DefaultPageSettings = pageSetupDialog0.PageSettings;
             }
 
+            //6060
 
+            PageSettings pageSetting = new System.Drawing.Printing.PageSettings();
 
+            pageSetupDialog0.AllowMargins = true;
+            pageSetupDialog0.AllowOrientation = true;
+            pageSetupDialog0.AllowPaper = true;
+            pageSetupDialog0.AllowPrinter = true;
+            pageSetupDialog0.PageSettings = pageSetting;
+            pageSetupDialog0.ShowDialog();
         }
 
         private void button01_Click(object sender, EventArgs e)

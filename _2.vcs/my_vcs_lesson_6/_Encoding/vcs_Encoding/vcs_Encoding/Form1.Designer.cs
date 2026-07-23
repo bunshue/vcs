@@ -40,11 +40,6 @@
             this.button9 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
-            this.richTextBox_string1 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox_hex = new System.Windows.Forms.RichTextBox();
-            this.richTextBox_string2 = new System.Windows.Forms.RichTextBox();
-            this.bt_string2hex = new System.Windows.Forms.Button();
-            this.bt_hex2string = new System.Windows.Forms.Button();
             this.tb_unicode = new System.Windows.Forms.TextBox();
             this.lb_unicode = new System.Windows.Forms.Label();
             this.button10 = new System.Windows.Forms.Button();
@@ -66,7 +61,6 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(200, 60);
             this.button0.TabIndex = 116;
-            this.button0.Text = "各種編碼";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -88,7 +82,6 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(200, 60);
             this.button1.TabIndex = 114;
-            this.button1.Text = "編碼轉換";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -188,62 +181,12 @@
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
-            // richTextBox_string1
-            // 
-            this.richTextBox_string1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox_string1.Location = new System.Drawing.Point(532, 14);
-            this.richTextBox_string1.Name = "richTextBox_string1";
-            this.richTextBox_string1.Size = new System.Drawing.Size(100, 100);
-            this.richTextBox_string1.TabIndex = 122;
-            this.richTextBox_string1.Text = "蒹葭\n\n蒹葭蒼蒼  白露為霜\n所謂伊人  在水一方\n遫洄從之  道阻且長\n遫游從之  宛在水中央\n\n蒹葭淒淒  白露未晞\n所謂伊人  在水之湄\n遫洄從之  道阻且" +
-                "躋\n遫游從之  宛在水中坻\n\n蒹葭采采  白露未已\n所謂伊人  在水之涘\n遫洄從之  道阻且右\n遫游從之  宛在水中沚";
-            // 
-            // richTextBox_hex
-            // 
-            this.richTextBox_hex.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox_hex.Location = new System.Drawing.Point(638, 14);
-            this.richTextBox_hex.Name = "richTextBox_hex";
-            this.richTextBox_hex.Size = new System.Drawing.Size(100, 100);
-            this.richTextBox_hex.TabIndex = 123;
-            this.richTextBox_hex.Text = "";
-            // 
-            // richTextBox_string2
-            // 
-            this.richTextBox_string2.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox_string2.Location = new System.Drawing.Point(744, 14);
-            this.richTextBox_string2.Name = "richTextBox_string2";
-            this.richTextBox_string2.Size = new System.Drawing.Size(100, 100);
-            this.richTextBox_string2.TabIndex = 124;
-            this.richTextBox_string2.Text = "";
-            // 
-            // bt_string2hex
-            // 
-            this.bt_string2hex.Font = new System.Drawing.Font("新細明體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_string2hex.Location = new System.Drawing.Point(532, 126);
-            this.bt_string2hex.Name = "bt_string2hex";
-            this.bt_string2hex.Size = new System.Drawing.Size(80, 80);
-            this.bt_string2hex.TabIndex = 125;
-            this.bt_string2hex.Text = "字串轉十六進位";
-            this.bt_string2hex.UseVisualStyleBackColor = true;
-            this.bt_string2hex.Click += new System.EventHandler(this.bt_string2hex_Click);
-            // 
-            // bt_hex2string
-            // 
-            this.bt_hex2string.Font = new System.Drawing.Font("新細明體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_hex2string.Location = new System.Drawing.Point(618, 126);
-            this.bt_hex2string.Name = "bt_hex2string";
-            this.bt_hex2string.Size = new System.Drawing.Size(80, 80);
-            this.bt_hex2string.TabIndex = 126;
-            this.bt_hex2string.Text = "十六進位轉字串";
-            this.bt_hex2string.UseVisualStyleBackColor = true;
-            this.bt_hex2string.Click += new System.EventHandler(this.bt_hex2string_Click);
-            // 
             // tb_unicode
             // 
             this.tb_unicode.BackColor = System.Drawing.Color.White;
             this.tb_unicode.Cursor = System.Windows.Forms.Cursors.Cross;
             this.tb_unicode.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_unicode.Location = new System.Drawing.Point(532, 212);
+            this.tb_unicode.Location = new System.Drawing.Point(532, 14);
             this.tb_unicode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tb_unicode.Multiline = true;
             this.tb_unicode.Name = "tb_unicode";
@@ -259,7 +202,7 @@
             this.lb_unicode.BackColor = System.Drawing.SystemColors.Control;
             this.lb_unicode.Font = new System.Drawing.Font("Arial", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_unicode.ForeColor = System.Drawing.Color.Red;
-            this.lb_unicode.Location = new System.Drawing.Point(638, 212);
+            this.lb_unicode.Location = new System.Drawing.Point(648, 14);
             this.lb_unicode.Name = "lb_unicode";
             this.lb_unicode.Size = new System.Drawing.Size(177, 56);
             this.lb_unicode.TabIndex = 136;
@@ -386,11 +329,6 @@
             this.Controls.Add(this.button10);
             this.Controls.Add(this.lb_unicode);
             this.Controls.Add(this.tb_unicode);
-            this.Controls.Add(this.bt_hex2string);
-            this.Controls.Add(this.bt_string2hex);
-            this.Controls.Add(this.richTextBox_string2);
-            this.Controls.Add(this.richTextBox_hex);
-            this.Controls.Add(this.richTextBox_string1);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
@@ -425,11 +363,6 @@
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.RichTextBox richTextBox_string1;
-        private System.Windows.Forms.RichTextBox richTextBox_hex;
-        private System.Windows.Forms.RichTextBox richTextBox_string2;
-        private System.Windows.Forms.Button bt_string2hex;
-        private System.Windows.Forms.Button bt_hex2string;
         private System.Windows.Forms.TextBox tb_unicode;
         private System.Windows.Forms.Label lb_unicode;
         private System.Windows.Forms.Button button10;

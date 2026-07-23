@@ -1,4 +1,4 @@
-namespace DialogApplication
+namespace vcs_test_all_05_Print7
 {
     partial class Form1
     {

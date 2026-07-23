@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DialogApplication.Properties {
+namespace vcs_test_all_05_Print7.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

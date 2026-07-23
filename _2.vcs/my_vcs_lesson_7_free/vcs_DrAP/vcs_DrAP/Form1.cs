@@ -2519,11 +2519,13 @@ namespace vcs_DrAP
                             res = false;
                             return;
                         }
+                        /*
                         else if (fi.FullName.ToLower().Replace(" ", "").Contains("assemblyinfo.cs"))
                         {
                             res = false;
                             return;
                         }
+                        */
                         else if (fi.FullName.ToLower().Replace(" ", "").Contains("csproj"))
                         {
                             res = false;
@@ -2591,17 +2593,10 @@ namespace vcs_DrAP
     }
 }
 
-
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
 
