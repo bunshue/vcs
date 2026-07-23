@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_Draw_Function", "vcs_Draw_Function\vcs_Draw_Function.csproj", "{2B3377E3-9035-44A3-A32D-DFAD12392D6D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_Draw_Function1", "vcs_Draw_Function1\vcs_Draw_Function1.csproj", "{2B3377E3-9035-44A3-A32D-DFAD12392D6D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -8,9 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Drawing.Drawing2D;
-using System.Drawing.Text;  //for TextRenderingHint
+using System.Drawing.Text;  // for TextRenderingHint
 
-namespace vcs_Draw_Function
+namespace vcs_Draw_Function1
 {
     public partial class Form1 : Form
     {
@@ -41,6 +41,7 @@ namespace vcs_Draw_Function
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 1, y_st + dy * 2);
 
             groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             groupBox3.Location = new Point(x_st + dx * 2 + 30, y_st + dy * 0);
@@ -51,12 +52,12 @@ namespace vcs_Draw_Function
             pictureBox2.Size = new Size(300, 300);
             pictureBox2.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
             comboBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
-            richTextBox1.Size = new Size(300, 690-300-10);
-            richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0+300+10);
+            richTextBox1.Size = new Size(300, 690 - 300 - 10);
+            richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0 + 300 + 10);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1273, 750);
-            this.Text = "vcs_Draw_Function";
+            this.Text = "vcs_Draw_Function1";
 
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;
@@ -684,6 +685,174 @@ namespace vcs_Draw_Function
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //畫Sinc 1
+            int W = pictureBox1.ClientSize.Width;
+            int H = pictureBox1.ClientSize.Height;
+            Bitmap bitmap1 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.ResetTransform();  // 重置轉換, 恢復
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            g.Clear(Color.White);
+            pictureBox1.Image = bitmap1;
+
+            //畫Sinc
+
+            // Transform to map the graph bounds to the Bitmap.
+            // The bounds to draw.
+            float xmin = -20;
+            float xmax = 20;
+            float ymin = -5;
+            float ymax = 12;
+            RectangleF rect = new RectangleF(xmin, ymin, xmax - xmin, ymax - ymin);
+            g.DrawRectangle(Pens.Red, rect.X, rect.Y, rect.Width, rect.Height);
+            richTextBox1.Text += rect.ToString() + "\n";
+
+            PointF[] pts = 
+            {
+                new PointF(0, H),  // 左上
+                new PointF(W, H),  // 右上
+                new PointF(0, 0),  // 左下
+            };
+
+            // 轉置矩陣 mtx, 矩形範圍 轉 平行四邊形範圍
+            Matrix mtx = new Matrix(rect, pts);
+            g.Transform = mtx;  // 設定仿射矩陣, 矩陣轉置
+
+            // Draw the graph.
+            Pen p = new Pen(Color.Blue, 0);
+            // Draw the axes.
+            g.DrawLine(p, xmin, 0, xmax, 0);
+            g.DrawLine(p, 0, ymin, 0, ymax);
+            for (int x = (int)xmin; x <= xmax; x++)
+            {
+                g.DrawLine(p, x, -0.1f, x, 0.1f);
+            }
+            for (int y = (int)ymin; y <= ymax; y++)
+            {
+                g.DrawLine(p, -0.1f, y, 0.1f, y);
+            }
+            p.Color = Color.Red;
+
+            // See how big 1 pixel is horizontally.
+            Matrix inverse = g.Transform;
+            inverse.Invert();
+
+            PointF[] pixel_pts =
+            {
+                new PointF(0, 0),
+                new PointF(1, 0)
+            };
+            inverse.TransformPoints(pixel_pts);
+
+            float dx = pixel_pts[1].X - pixel_pts[0].X;
+            dx /= 2;
+
+            // Loop over x values to generate points.
+            List<PointF> points = new List<PointF>();
+            for (float x = xmin; x <= xmax; x += dx)
+            {
+                bool valid_point = false;
+                try
+                {
+                    // Get the next point.
+                    float y = F(x);
+
+                    // If the slope is reasonable, this is a valid point.
+                    if (points.Count == 0)
+                    {
+                        valid_point = true;
+                    }
+                    else
+                    {
+                        float dy = y - points[points.Count - 1].Y;
+                        if (Math.Abs(dy / dx) < 1000)
+                        {
+                            valid_point = true;
+                        }
+                    }
+                    if (valid_point)
+                    {
+                        points.Add(new PointF(x, y));
+                    }
+                }
+                catch
+                {
+                }
+
+                // If the new point is invalid, draw
+                // the points in the latest batch.
+                if (!valid_point)
+                {
+                    if (points.Count > 1)
+                    {
+                        g.DrawLines(p, points.ToArray());
+                    }
+                    points.Clear();
+                }
+            }
+
+            // Draw the last batch of points.
+            if (points.Count > 1)
+            {
+                g.DrawLines(p, points.ToArray());
+            }
+
+            pictureBox1.Image = bitmap1;
+        }
+
+        // The function to graph.
+        private float F(float x)
+        {
+            //return (float)((1 / x + 1 / (x + 1) - 2 * x * x) / 10);
+            //return x;
+            //return (float)Math.Sin(x);
+            return (float)(10 * Math.Sin(x) / x);
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //畫Sinc 2
+            int W = pictureBox1.ClientSize.Width;
+            int H = pictureBox1.ClientSize.Height;
+            Bitmap bitmap1 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.ResetTransform();  // 重置轉換, 恢復
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            g.Clear(Color.White);
+            pictureBox1.Image = bitmap1;
+
+            //畫Sinc
+
+            g.DrawLine(new Pen(Color.Blue, 10), 0, 300, 600, 300);  // X軸 
+            g.DrawLine(new Pen(Color.Green, 10), 300, 0, 300, 600);  // Y軸
+            g.DrawRectangle(new Pen(Color.Red, 10), 0, 0, 600, 600);  // 外框
+
+            int cx = 600 / 2;
+            int cy = 600 / 2;
+            double scaleX = 20; // 每單位 x 對應像素
+            double scaleY = 200; // 每單位 y 對應像素
+
+            PointF? prevPoint = null;
+            //for (double x = -10; x <= 10; x += 0.01)
+            for (double x = -10; x <= 10; x += 1)
+            {
+                double y = (x == 0) ? 1.0 : Math.Sin(x) / x;
+
+                float px = (float)(cx + x * scaleX);
+                float py = (float)(cy - y * scaleY);
+
+                PointF point = new PointF(px, py);
+                if (prevPoint != null)
+                {
+                    g.DrawLine(new Pen(Color.Magenta, 3), prevPoint.Value, point);
+                }
+                prevPoint = point;
+            }
+            pictureBox1.Image = bitmap1;
+
 
         }
 
@@ -806,8 +975,6 @@ namespace vcs_Draw_Function
             x1 = x2;
             y1 = y2;
         }
-
-
     }
 }
 
@@ -818,4 +985,60 @@ namespace vcs_Draw_Function
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
+
+
+
+/*
+        private double rad(double d)
+        {
+            return d * Math.PI / 180.0;
+        }
+
+        private double sind(double d)
+        {
+            return Math.Sin(d * Math.PI / 180.0);
+        }
+
+        private double cosd(double d)
+        {
+            return Math.Cos(d * Math.PI / 180.0);
+        }
+
+*/
+
+
+/*
+
+角度-180~+180
+正弦值 -1~+1
+
+xmin = -180;
+xmax = 180;
+ymin = -1;
+ymax = 1;
+xmargin = 10;
+ymargin = 0.2;
+
+顯示區域寬度W  if 720
+顯示區域高度H  if 360
+
+xratio = W / (xmax - xmin + xmargin * 2);  // 2 倍
+yratio = H / (ymax - ymin + ymargin * 2);  // 180 倍
+
+x=xmin:1:xmax;
+y=sind(x);
+
+先不考慮margin  把圖畫在中間
+
+畫x時 每點相距 2 pixel
+
+畫y時 要放大180倍
+
+for(i = 0; i < 360; i++)
+{
+	x_new = x_old * 2;
+	y_new = y_old * 180;
+}
+
+*/
 
