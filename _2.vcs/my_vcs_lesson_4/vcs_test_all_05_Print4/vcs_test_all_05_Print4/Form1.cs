@@ -167,35 +167,25 @@ namespace vcs_test_all_05_Print4
             richTextBox1.Text += e.MarginBounds.Height.ToString() + "\n";
             */
 
-            string text =
-                "老來多驚夢，" + Environment.NewLine +
-                "似有獻刀人，" + Environment.NewLine +
-                "醒來懼銅鏡，" + Environment.NewLine +
-                "怕顯董賊身。";
+            string text = "老來多驚夢，\n似有獻刀人，\n醒來懼銅鏡，\n怕顯董賊身。";
 
             Font f = new Font("標楷體", 64, FontStyle.Regular);
-            SolidBrush sb = new SolidBrush(Color.Red);
-            Single left = printDocument0.DefaultPageSettings.Margins.Left;
-            Single top = printDocument0.DefaultPageSettings.Margins.Top;
-            e.Graphics.DrawString(text, f, sb, left, top);
+            f = new Font("標楷體", 50, FontStyle.Bold);
 
-            //6060
-
-            text = "千江有水千月，\n萬里晴空萬里晴";
-            Font oneFont = new Font("標楷體", 50, FontStyle.Bold);
-            e.Graphics.DrawString(text, oneFont, Brushes.Blue, 150, 550);
+            SolidBrush sb = new SolidBrush(Color.Blue);
+            x_st = printDocument0.DefaultPageSettings.Margins.Left;
+            y_st = printDocument0.DefaultPageSettings.Margins.Top;
+            e.Graphics.DrawString(text, f, sb, x_st, y_st);
 
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Bitmap bitmap = new Bitmap(filename);
-            e.Graphics.DrawImage(bitmap, 150, 720, 350, 300);
+            e.Graphics.DrawImage(bitmap, 400, 640, bitmap.Width, bitmap.Height);
 
-            return;
-            //string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            Bitmap bmp = (Bitmap)Bitmap.FromFile(filename);
-
-            // Print in the upper left corner at its full size.
-            e.Graphics.DrawImage(bmp, e.MarginBounds.X, e.MarginBounds.Y, bmp.Width, bmp.Height);
+            x_st = e.MarginBounds.X;
+            y_st = e.MarginBounds.Y;
+            e.Graphics.FillEllipse(Brushes.Green, x_st - 20, y_st - 20, 40, 40);
             e.Graphics.DrawString("左上", new Font("細明體", 20, FontStyle.Regular), Brushes.Black, e.MarginBounds.X, e.MarginBounds.Y);
+
             /*
             // Print in the upper right corner,
             // sized to fit beside the other image.
@@ -323,13 +313,13 @@ namespace vcs_test_all_05_Print4
 
             // Draw the page number.
             // Center it inside the margins.
-            StringFormat sf = new StringFormat();
-            sf.Alignment = StringAlignment.Center;
-            sf.LineAlignment = StringAlignment.Center;
+            StringFormat string_format = new StringFormat();
+            string_format.Alignment = StringAlignment.Center;
+            string_format.LineAlignment = StringAlignment.Center;
 
             Font the_font = new Font("Times New Roman", 200, FontStyle.Bold);
             Brush the_brush = new SolidBrush(Color.Black);
-            e.Graphics.DrawString(String.Format("{0}", m_NextPage + 1), the_font, the_brush, e.MarginBounds, sf);
+            e.Graphics.DrawString(String.Format("{0}", m_NextPage + 1), the_font, the_brush, e.MarginBounds, string_format);
 
             // Next time print the next page.
             m_NextPage += 1;
@@ -397,7 +387,8 @@ namespace vcs_test_all_05_Print4
             // printDocument_pascal.PrinterSettings.PrinterName = "Dell Photo AIO Printer 926";
             printDocument_pascal.DefaultPageSettings.Margins = new System.Drawing.Printing.Margins(50, 50, 50, 50);
             printDocument_pascal.DefaultPageSettings.Landscape = true;
-*/
+
+//------------------------------------------------------------  # 60個
 
 //預覽列印555
 //1. 拉一個 PrintPreviewDialog 控件為 printPreviewDialog555
@@ -408,7 +399,7 @@ namespace vcs_test_all_05_Print4
 //5. printDocument555          的方法 BeginPrint 設定為 printDocument555_BeginPrint
 
 
-/*
+//------------------------------------------------------------  # 60個
 
             //對話方塊啟用頁數核取方塊
             printDialog2.AllowSomePages = true;
@@ -421,28 +412,28 @@ namespace vcs_test_all_05_Print4
                 printDocument2.Print();
             }
 
-*/
 
+//------------------------------------------------------------  # 60個
 
-/*
+StringFormat string_format = new StringFormat();
+string_format.Alignment = StringAlignment.Center;
+string_format.LineAlignment = StringAlignment.Center;
 
-                using (StringFormat sf = new StringFormat())
-                    sf.Alignment = StringAlignment.Center;
-                    sf.LineAlignment = StringAlignment.Center;
-                    int index = (int)CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek;
-            string[] day_names = CultureInfo.CurrentCulture.DateTimeFormat.DayNames;
-            int col = (int)date.DayOfWeek - (int)CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek;
+int index = (int)CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek;
+string[] day_names = CultureInfo.CurrentCulture.DateTimeFormat.DayNames;
+int col = (int)date.DayOfWeek - (int)CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek;
 
-            using (StringFormat sf = new StringFormat())
-                sf.Alignment = StringAlignment.Center;
-                sf.LineAlignment = StringAlignment.Center;
-                string[] month_names = CultureInfo.CurrentCulture.DateTimeFormat.MonthNames;
+StringFormat string_format = new StringFormat();
+string_format.Alignment = StringAlignment.Center;
+string_format.LineAlignment = StringAlignment.Center;
 
-                    using (StringFormat ul_sf = new StringFormat())
-                        ul_sf.Alignment = StringAlignment.Near;
-                        ul_sf.LineAlignment = StringAlignment.Near;
-                        ul_sf.Trimming = StringTrimming.EllipsisWord;
-                        ul_sf.FormatFlags = StringFormatFlags.LineLimit;
+string[] month_names = CultureInfo.CurrentCulture.DateTimeFormat.MonthNames;
+
+StringFormat string_format = new StringFormat();
+string_format.Alignment = StringAlignment.Near;
+string_format.LineAlignment = StringAlignment.Near;
+string_format.Trimming = StringTrimming.EllipsisWord;
+string_format.FormatFlags = StringFormatFlags.LineLimit;
 
 
 
@@ -451,7 +442,5 @@ namespace vcs_test_all_05_Print4
 
 
 //            gr.DrawRectangle(Pens.Black, bounds.X, bounds.Y, bounds.Width, bounds.Height);
-
-
 
  */
