@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 
-namespace WindowsFormsApplication1
+namespace vcs_MousePaint3
 {
     static class G2D_PointAndLine  // 點線關係類別
     {
@@ -104,4 +104,3 @@ namespace WindowsFormsApplication1
         }
     }
 }
-

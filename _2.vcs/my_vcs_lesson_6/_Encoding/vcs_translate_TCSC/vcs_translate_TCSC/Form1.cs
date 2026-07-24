@@ -224,10 +224,11 @@ namespace vcs_translate_TCSC
         private void bt_file_sc_tc_Click(object sender, EventArgs e)
         {
             //檔案 簡中轉正中
-            //簡中轉正中
-            //TBD
-            //convert_sc_to_tc(filename);
 
+            //含有簡中的 Visual C# 檔案
+            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Encoding\test_encoding.cs";
+
+            convert_sc_to_tc(filename);
         }
     }
 }

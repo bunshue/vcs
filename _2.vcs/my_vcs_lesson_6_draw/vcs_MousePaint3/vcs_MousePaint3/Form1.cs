@@ -48,6 +48,17 @@ namespace vcs_MousePaint3
         int Gap = 2;
         // 圓形轉盤調控器 (以顏色為例) SP
 
+        // pbx5 ST
+
+        List<ClassMovingPoint> mpList = new List<ClassMovingPoint>(); // 可移動點的動態陣列
+        int mp_Selected = -1;  // 動態陣列 的第幾個 被選到
+        bool dragging = false; // 是否拖拉中
+        Pen myPen = new Pen(Color.Green, 5);  // 有箭頭的直線筆 當作三角形的邊界
+        int D = 10; // 小球的半徑
+        BallInATriangle ball; // 在三角形 內的小球物件
+
+        // pbx5 SP
+
         public Form1()
         {
             InitializeComponent();
@@ -73,6 +84,27 @@ namespace vcs_MousePaint3
             D_Big = Math.Min(pictureBox4.Width, pictureBox4.Height) * 0.3f;
             D_Small = D_Big * 0.1f; // 小圓的 半徑
             // 圓形轉盤調控器 (以顏色為例) SP
+
+            //6060
+
+            //pbox5
+            myPen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+
+            // 加入三個可移動點  當作 三角形 的三個頂點
+            ClassMovingPoint mp;
+            mp = new ClassMovingPoint(new Point(250, 30), 10, Color.Blue, "p1");
+            mpList.Add(mp);
+            mp = new ClassMovingPoint(new Point(100, 330), 10, Color.Blue, "p2");
+            mpList.Add(mp);
+            mp = new ClassMovingPoint(new Point(400, 330), 10, Color.Blue, "p3");
+            mpList.Add(mp);
+
+            Point q1 = new Point(300, 300);  // 獨立的一點 當作 小球的座標
+            ball = new BallInATriangle(q1, new PointF(2, 3), D, Color.Red);
+
+            isBallInTriangle(); // 小球 是否在三角形內
+
+            //pbox5
         }
 
         void show_item_location()
@@ -107,7 +139,7 @@ namespace vcs_MousePaint3
             label2.Text = "切變矩陣";
             label3.Text = "畫布轉換矩陣的旋轉設定 - 繞固定點公轉";
             label4.Text = "";
-            label5.Text = "";
+            label5.Text = "在三角形內彈跳的小球";
 
             richTextBox1.Size = new Size(W - 200, H * 2 + 60);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
@@ -363,23 +395,69 @@ namespace vcs_MousePaint3
 
         //------------------------------------------------------------  # 60個
 
+        // 檢查是哪一個點被 選到
         private void pictureBox5_MouseDown(object sender, MouseEventArgs e)
         {
+            for (int i = 0; i <= mpList.Count - 1; i++)
+            {
+                if (mpList[i].CheckSelected(e.X, e.Y))
+                {
+                    mp_Selected = i;
+                    dragging = true;
+                    break;
+                }
+            }
         }
 
+        // 更新 被選到的點 的座標
         private void pictureBox5_MouseMove(object sender, MouseEventArgs e)
         {
+            if (dragging)
+            {
+                mpList[mp_Selected].Move(e.X, e.Y);
+                this.pictureBox5.Invalidate();
+            }
         }
 
+        // 解除 被選到的點
         private void pictureBox5_MouseUp(object sender, MouseEventArgs e)
         {
+            mp_Selected = -1;
+            dragging = false;
+            isBallInTriangle();
         }
 
         private void pictureBox5_Paint(object sender, PaintEventArgs e)
         {
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            for (int i = 0; i < mpList.Count; i++)
+            {
+                mpList[i].Draw(e.Graphics);
+            }
+
+            e.Graphics.DrawLine(myPen, mpList[0].pos, mpList[1].pos);
+            e.Graphics.DrawLine(myPen, mpList[1].pos, mpList[2].pos);
+            e.Graphics.DrawLine(myPen, mpList[2].pos, mpList[0].pos);
+
+            ball.Draw(e.Graphics);
         }
 
-        //6060
+        // 小球 是否在 mpList[0].pos, mpList[1].pos, mpList[2].pos 三角形內
+        void isBallInTriangle()
+        {
+            bool ret = G2D_PointAndLine.IsPointInTriangle(mpList[0].pos, mpList[1].pos, mpList[2].pos, ball.position);
+            if (ret == true)
+            {
+                label5.Text = "小球 在 p1 p2 p3 三角形內！ (Inside)";
+            }
+            else
+            {
+                label5.Text = "小球 不在 p1 p2 p3 三角形內！ (Outside)";
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void timer0_Tick(object sender, EventArgs e)
         {
@@ -426,10 +504,21 @@ namespace vcs_MousePaint3
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void timer3_Tick(object sender, EventArgs e)
         {
             theta = theta + 1; // 旋轉角度 遞增
             this.pictureBox3.Invalidate(); // 要求表單重畫
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void timer5_Tick(object sender, EventArgs e)
+        {
+            ball.Update(mpList[0].pos, mpList[1].pos, mpList[2].pos);
+            isBallInTriangle();
+            this.pictureBox5.Invalidate();
         }
     }
 }
@@ -437,11 +526,8 @@ namespace vcs_MousePaint3
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-/*  可搬出
 
-*/

@@ -56,6 +56,9 @@ namespace vcs_Draw_Transform1
         string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6_draw\data\volkswagen.png";
         Bitmap bmp;
 
+        Bitmap bitmap0;
+        float theta0 = 0; // 旋轉角度
+
         public Form1()
         {
             InitializeComponent();
@@ -70,6 +73,12 @@ namespace vcs_Draw_Transform1
             reset_pictureBox();
 
             bmp = new Bitmap(filename);
+
+            //------------------------------------------------------------  # 60個
+
+            //旋轉矩陣 - 在固定點自轉
+            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_angry_bird\AB_red.jpg";
+            bitmap0 = (Bitmap)Bitmap.FromFile(filename2);
         }
 
         void show_item_location()
@@ -114,8 +123,11 @@ namespace vcs_Draw_Transform1
             pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y);
 
-            pictureBox2.Size = new Size(410, 230);
-            pictureBox2.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            pictureBox0.Size = new Size(200, 180);
+            pictureBox0.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+
+            pictureBox2.Size = new Size(410, 180);
+            pictureBox2.Location = new Point(x_st + dx * 1, y_st + dy * 10);
 
             richTextBox1.Size = new Size(300, 880);
             richTextBox1.Location = new Point(x_st + dx * 7, y_st + dy * 0);
@@ -1418,6 +1430,33 @@ namespace vcs_Draw_Transform1
             this.pictureBox2.Invalidate();
         }
         //畫一個旋轉的矩形 SP
+        //------------------------------------------------------------  # 60個
+
+        private void timer0_Tick(object sender, EventArgs e)
+        {
+            theta0 = theta0 + 2;  // 旋轉角度 遞增
+            this.pictureBox0.Invalidate();
+        }
+
+        private void pictureBox0_Paint(object sender, PaintEventArgs e)
+        {
+            //視窗客戶區正中心點
+            int Cx = this.pictureBox0.ClientSize.Width / 2;
+            int Cy = this.pictureBox0.ClientSize.Height / 2;
+
+            e.Graphics.ResetTransform(); // 畫布的矩陣 = 單位矩陣
+
+            Matrix mtx = new Matrix(); // 轉換矩陣
+            mtx.Translate(-bitmap0.Width / 2, -bitmap0.Height / 2, MatrixOrder.Append);  // 先將圖形的中心點平移到原點
+            mtx.Rotate(theta0, MatrixOrder.Append);  // 乘上 旋轉矩陣
+            mtx.Translate(Cx, Cy, MatrixOrder.Append); // 再搬到視窗客戶區正中心點
+
+            e.Graphics.Transform = mtx;
+            e.Graphics.DrawImage(bitmap0, 0, 0); // 繪出圖形
+        }
+
+        //------------------------------------------------------------  # 60個
+
     }
 
     //------------------------------------------------------------  # 60個

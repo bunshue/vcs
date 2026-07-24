@@ -14,13 +14,32 @@ namespace vcs_Draw_Transform2
     public partial class Form1 : Form
     {
         //Bitmap bm = Properties.Resources.Butterfly;
-        Bitmap bitmap0;
-        float theta0 = 0; // 旋轉角度
 
         HatchBrush myBrush1 = new HatchBrush(HatchStyle.Cross, Color.Red);
         float theta1 = 0; // 旋轉角度
 
         float xScale = 1; // X 軸縮放倍數
+
+        //pbox0
+
+        float angle = 0; // 矩形的旋轉角度
+        bool dragging = false; // 是否開始拖拉
+        Pen myPen = new Pen(Color.Black); // 畫筆
+
+        int size = 100;  // 矩形的邊長
+        Color color = Color.Black; // 矩形的顏色
+
+        struct Apoint // 定義新結構
+        {
+            public Point point;  // 矩形的中心點
+            public float angle;  // 矩形的旋轉角度
+            public Color color;  // 矩形的顏色
+            public int size;     // 矩形的邊長
+        }
+
+        List<Apoint> pt = new List<Apoint>(); // 動態陣列
+
+        //pbox0
 
         public Form1()
         {
@@ -31,10 +50,11 @@ namespace vcs_Draw_Transform2
         {
             show_item_location();
 
-            //------------------------------------------------------------  # 60個
+            //6060
 
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_angry_bird\AB_red.jpg";
-            bitmap0 = (Bitmap)Bitmap.FromFile(filename);
+            pictureBox0.MouseDown += new MouseEventHandler(pictureBox0_MouseDown);
+            pictureBox0.MouseMove += new MouseEventHandler(pictureBox0_MouseMove);
+            pictureBox0.MouseUp += new MouseEventHandler(pictureBox0_MouseUp);
         }
 
         void show_item_location()
@@ -66,7 +86,7 @@ namespace vcs_Draw_Transform2
             label3.Location = new Point(x_st + dx * 0, y_st + dy * 1 - dd);
             label4.Location = new Point(x_st + dx * 1, y_st + dy * 1 - dd);
             label5.Location = new Point(x_st + dx * 2, y_st + dy * 1 - dd);
-            label0.Text = "旋轉矩陣 - 在固定點自轉";
+            label0.Text = "拖拉畫矩形 (右鍵清空)";
             label1.Text = "旋轉矩陣 - 繞固定點公轉";
             label2.Text = "縮放矩陣 - X 軸放大縮小";
             label3.Text = "";
@@ -85,26 +105,67 @@ namespace vcs_Draw_Transform2
 
         private void timer0_Tick(object sender, EventArgs e)
         {
-            theta0 = theta0 + 2;  // 旋轉角度 遞增
-            this.pictureBox0.Invalidate();
         }
 
         private void pictureBox0_Paint(object sender, PaintEventArgs e)
         {
-            //視窗客戶區正中心點
-            int Cx = this.pictureBox0.ClientSize.Width / 2;
-            int Cy = this.pictureBox0.ClientSize.Height / 2;
+            for (int i = 0; i < pt.Count; i++) // 動態陣列全部重畫
+            {
+                e.Graphics.ResetTransform(); // 重設畫布變換矩陣
+                e.Graphics.TranslateTransform(pt[i].point.X, pt[i].point.Y); // 平移畫布原點
+                e.Graphics.RotateTransform(pt[i].angle);  // 旋轉畫布
+                //e.Graphics.DrawRectangle(Pens.Black, -50, -50, 100, 100); // 繪出矩形
 
-            e.Graphics.ResetTransform(); // 畫布的矩陣 = 單位矩陣
-
-            Matrix mtx = new Matrix(); // 轉換矩陣
-            mtx.Translate(-bitmap0.Width / 2, -bitmap0.Height / 2, MatrixOrder.Append);  // 先將圖形的中心點平移到原點
-            mtx.Rotate(theta0, MatrixOrder.Append);  // 乘上 旋轉矩陣
-            mtx.Translate(Cx, Cy, MatrixOrder.Append); // 再搬到視窗客戶區正中心點
-
-            e.Graphics.Transform = mtx;
-            e.Graphics.DrawImage(bitmap0, 0, 0); // 繪出圖形
+                myPen.Color = pt[i].color;
+                e.Graphics.DrawRectangle(myPen, -pt[i].size / 2, -pt[i].size / 2, pt[i].size, pt[i].size); // 繪出矩形
+            }
         }
+
+        private void pictureBox0_MouseDown(object sender, MouseEventArgs e)
+        {
+            /* 改右鍵
+            if (e.KeyData == Keys.Space)
+            {
+                pt.Clear(); // 清空動態陣列
+                this.Invalidate(); // 要求重畫
+            }
+            */
+            
+            dragging = true; // 開始拖拉
+        }
+
+        private void pictureBox0_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!dragging)
+            {
+                return; // 如果不是開始拖拉 就離開
+            }
+
+            Apoint p = new Apoint(); // 定義一個新的矩形
+            p.point = new Point(e.X, e.Y); // 矩形的中心點
+
+            angle = angle + 10;
+            p.angle = angle;  // 矩形的旋轉角度
+            p.color = color;
+            p.size = size;
+            pt.Add(p);  // 加到動態陣列
+
+            // 只繪出最新的矩形
+            Graphics G = this.pictureBox0.CreateGraphics(); // 取得 畫布
+            G.TranslateTransform(e.X, e.Y); // 平移畫布原點
+            G.RotateTransform(angle); // 旋轉畫布
+            //G.DrawRectangle(Pens.Black, -50, -50, 100, 100); // 繪出矩形
+            myPen.Color = color;
+            G.DrawRectangle(myPen, -size / 2, -size / 2, size, size); // 繪出矩形
+        }
+        
+        private void pictureBox0_MouseUp(object sender, MouseEventArgs e)
+        {
+            dragging = false; // 結束拖拉
+        }
+
+
+        //------------------------------------------------------------  # 60個
 
         private void timer1_Tick(object sender, EventArgs e)
         {

@@ -65,8 +65,11 @@
             this.button27 = new System.Windows.Forms.Button();
             this.button28 = new System.Windows.Forms.Button();
             this.button29 = new System.Windows.Forms.Button();
+            this.pictureBox0 = new System.Windows.Forms.PictureBox();
+            this.timer0 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox0)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -447,11 +450,29 @@
             this.button29.UseVisualStyleBackColor = true;
             this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
+            // pictureBox0
+            // 
+            this.pictureBox0.BackColor = System.Drawing.Color.White;
+            this.pictureBox0.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox0.Location = new System.Drawing.Point(628, 228);
+            this.pictureBox0.Name = "pictureBox0";
+            this.pictureBox0.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox0.TabIndex = 240;
+            this.pictureBox0.TabStop = false;
+            this.pictureBox0.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox0_Paint);
+            // 
+            // timer0
+            // 
+            this.timer0.Enabled = true;
+            this.timer0.Interval = 10;
+            this.timer0.Tick += new System.EventHandler(this.timer0_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(887, 661);
+            this.Controls.Add(this.pictureBox0);
             this.Controls.Add(this.button29);
             this.Controls.Add(this.button28);
             this.Controls.Add(this.button27);
@@ -492,6 +513,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox0)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -534,6 +556,8 @@
         private System.Windows.Forms.Button button27;
         private System.Windows.Forms.Button button28;
         private System.Windows.Forms.Button button29;
+        private System.Windows.Forms.PictureBox pictureBox0;
+        private System.Windows.Forms.Timer timer0;
     }
 }
 

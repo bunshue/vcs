@@ -35,15 +35,18 @@ namespace WindowsFormsApplication1
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
+            // 繪出 三個顏色方塊
             e.Graphics.FillRectangle(Brushes.Red, rectRed);
             e.Graphics.FillRectangle(Brushes.Green, rectGreen);
             e.Graphics.FillRectangle(Brushes.Blue, rectBlue);
 
+            // 依序 繪出 小方塊
             for (int i = 0; i < rectList.Count; i++)
             {
                 rectList[i].Draw(e.Graphics);
             }
 
+            // 繪出格子
             for (int i = 0; i <= 20; i++)
             {
                 e.Graphics.DrawLine(Pens.Black, x0 + i * 30, y0, x0 + i * 30, y0 + 600);
@@ -55,36 +58,36 @@ namespace WindowsFormsApplication1
         {
             G2D_DraggingRect rectNew;
 
-            if (rectRed.Contains(e.Location))
+            if (rectRed.Contains(e.Location)) // 選到 紅色方塊
             {
                 dragging = true;
                 rectNew = new G2D_DraggingRect(Color.Red, rectRed);
-                rectList.Add(rectNew);
+                rectList.Add(rectNew); // 新增一個 紅色方塊
                 rectSelected = rectNew;
                 dx = e.X - rectSelected.rect.X;
                 dy = e.Y - rectSelected.rect.Y;
             }
-            else if (rectGreen.Contains(e.Location))
+            else if (rectGreen.Contains(e.Location)) // 選到 綠色方塊
             {
                 dragging = true;
                 rectNew = new G2D_DraggingRect(Color.Green, rectGreen);
-                rectList.Add(rectNew);
+                rectList.Add(rectNew); // 新增一個 綠色方塊
                 rectSelected = rectNew;
                 dx = e.X - rectSelected.rect.X;
                 dy = e.Y - rectSelected.rect.Y;
             }
-            else if (rectBlue.Contains(e.Location))
+            else if (rectBlue.Contains(e.Location)) // 選到 藍色方塊
             {
                 dragging = true;
                 rectNew = new G2D_DraggingRect(Color.Blue, rectBlue);
-                rectList.Add(rectNew);
+                rectList.Add(rectNew); // 新增一個 藍色方塊
                 rectSelected = rectNew;
                 dx = e.X - rectSelected.rect.X;
                 dy = e.Y - rectSelected.rect.Y;
             }
             else
             {
-                for (int i = 0; i < rectList.Count; i++)
+                for (int i = 0; i < rectList.Count; i++)  // 從後面開始找 因為後面的會蓋在上面
                 {
                     if (rectList[i].rect.Contains(e.Location))
                     {

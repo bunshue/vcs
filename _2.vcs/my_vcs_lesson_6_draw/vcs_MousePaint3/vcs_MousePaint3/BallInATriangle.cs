@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 
-namespace WindowsFormsApplication1
+namespace vcs_MousePaint3
 {
     class BallInATriangle  // 在一個三角形內部彈跳的小球
     {
