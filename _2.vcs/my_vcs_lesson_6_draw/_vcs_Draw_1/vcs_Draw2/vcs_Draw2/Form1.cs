@@ -17,7 +17,6 @@ namespace vcs_Draw2
     {
         Graphics g;
         Pen p;
-        //SolidBrush sb;
         Bitmap bitmap1;
 
         public Form1()
@@ -893,11 +892,11 @@ namespace vcs_Draw2
             g.Clear(Color.Pink);
 
             //Graphics g = this.pictureBox1.CreateGraphics();
-            System.Drawing.Point px1 = new System.Drawing.Point(0, this.pictureBox1.Height);
-            System.Drawing.Point px2 = new System.Drawing.Point(this.pictureBox1.Width, this.pictureBox1.Height);
+            Point px1 = new Point(0, this.pictureBox1.Height);
+            Point px2 = new Point(this.pictureBox1.Width, this.pictureBox1.Height);
             g.DrawLine(new Pen(Brushes.Black, 5), px1, px2);
-            System.Drawing.Point py1 = new System.Drawing.Point(0, this.pictureBox1.Height);
-            System.Drawing.Point py2 = new System.Drawing.Point(0, 0);
+            Point py1 = new Point(0, this.pictureBox1.Height);
+            Point py2 = new Point(0, 0);
             g.DrawLine(new Pen(Brushes.Black, 5), py1, py2);
             pictureBox1.Image = bitmap1;
             pictureBox1.Refresh();
@@ -921,8 +920,8 @@ namespace vcs_Draw2
             //Graphics g = this.pictureBox1.CreateGraphics();
             for (int i = 1; i < 9; i++)
             {
-                System.Drawing.Point py1 = new System.Drawing.Point(100 * i, this.pictureBox1.Height - 5);
-                System.Drawing.Point py2 = new System.Drawing.Point(100 * i, this.pictureBox1.Height);
+                Point py1 = new Point(100 * i, this.pictureBox1.Height - 5);
+                Point py2 = new Point(100 * i, this.pictureBox1.Height);
                 g.DrawLine(new Pen(Brushes.Red, 1), py1, py2);
             }
             //pictureBox1.Refresh();
@@ -1097,13 +1096,7 @@ namespace vcs_Draw2
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
 

@@ -1322,7 +1322,15 @@ namespace vcs_Draw1
         private void button9_Click(object sender, EventArgs e)
         {
             //亂畫一通
-            Graphics g = pictureBox1.CreateGraphics();
+
+            //畫格線
+            bitmap1 = new Bitmap(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height);
+            Graphics g = Graphics.FromImage(bitmap1);
+            draw_grid(g);
+            pictureBox1.Image = bitmap1;
+
+            //------------------------------------------------------------  # 60個
+
             g.DrawRectangle(Pens.Red, 100, 100, 200, 200);
 
             /*
@@ -1849,56 +1857,51 @@ namespace vcs_Draw1
         {
             //StringFormat
 
-            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            //畫格線
+            bitmap1 = new Bitmap(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height);
             Graphics g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.White);
+            draw_grid(g);
+            pictureBox1.Image = bitmap1;
 
-            Font f = new Font("標楷體", 30);
+            //------------------------------------------------------------  # 60個
 
-            //畫字串畫直的
-            //StringFormat string_format = new StringFormat(StringFormatFlags.NoClip);
+            Font f = new Font("標楷體", 24);
+
             StringFormat string_format = new StringFormat();
-            string_format.FormatFlags = StringFormatFlags.DirectionVertical;
 
-            g.DrawString("畫字串畫直的", f, new SolidBrush(Color.Red), 300, 100, string_format);
+            //直書
+            string_format.FormatFlags = StringFormatFlags.DirectionVertical;  // 文字會垂直對齊
+            //string_format.FormatFlags = StringFormatFlags.NoClip;
+            g.DrawString("畫字串畫直的400, 100", f, new SolidBrush(Color.Red), 400, 100, string_format);
 
-            //直書橫書
-            f = new Font("標楷體", 24);
-            string_format = new StringFormat();
-            string_format.FormatFlags = StringFormatFlags.DirectionVertical;
-
-            //無參數的 預設 橫向列印
-            g.DrawString("迎春祝福", f, Brushes.Green, 100, 0);
-
+            //直書
+            string_format.FormatFlags = StringFormatFlags.DirectionVertical;  // 文字會垂直對齊
             g.DrawString("三杯祝福歌", f, Brushes.Green, 250, 30, string_format);
             g.DrawString("一曲迎春調", f, Brushes.Green, 20, 30, string_format);
 
-            pictureBox1.Image = bitmap1;
+            //橫書
+            //無參數的 預設 橫向列印
+            g.DrawString("迎春祝福", f, Brushes.Green, 100, 0);
 
-            //StringFormat string_format = new StringFormat();
-
-            //string_format.Alignment = StringAlignment.Far;
-            //string_format.Alignment = StringAlignment.Center;
-            //string_format.LineAlignment = StringAlignment.Near;
-            //string_format.Alignment = StringAlignment.Near;
-            //string_format.LineAlignment = StringAlignment.Near;
             //string_format.Trimming = StringTrimming.None;
             //string_format.FormatFlags = StringFormatFlags.MeasureTrailingSpaces;
 
-            //文字居中
-            string_format.Alignment = StringAlignment.Center;
-            string_format.LineAlignment = StringAlignment.Center;
+            //重設StringFormat
+            string_format = new StringFormat();
+
+            //文字在線位置
+            string_format.LineAlignment = StringAlignment.Near;  // 字在線下
+            string_format.LineAlignment = StringAlignment.Far;  // 字在線上
+            string_format.LineAlignment = StringAlignment.Center;  // 字在線中
 
             string_format.Alignment = StringAlignment.Center;
-            g.DrawString("AAAAAAAAA", f, Brushes.Black, 100, 100, string_format);
+            g.DrawString("從錨點位置置中", f, Brushes.Black, 200, 300, string_format);
 
             string_format.Alignment = StringAlignment.Far;
-            g.DrawString("BBBBBBBBB", f, Brushes.Black, 100, 200, string_format);
+            g.DrawString("到錨點結尾向右寫", f, Brushes.Black, 200, 400, string_format);
 
             string_format.Alignment = StringAlignment.Near;
-            g.DrawString("CCCCCCCCC", f, Brushes.Black, 100, 300, string_format);
-
-            pictureBox1.Image = bitmap1;
+            g.DrawString("從錨點開始向右寫", f, Brushes.Black, 200, 500, string_format);
         }
 
         //------------------------------------------------------------  # 60個
@@ -2925,15 +2928,15 @@ namespace vcs_Draw1
             //g.Clear(Color.White);
             if (checkBox1.Checked == true)
             {
-                draw_grid();
+                bitmap1 = new Bitmap(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height);
+                Graphics g = Graphics.FromImage(bitmap1);
+                draw_grid(g);
+                pictureBox1.Image = bitmap1;
             }
         }
 
-        public void draw_grid()
+        public void draw_grid(Graphics g)
         {
-            bitmap1 = new Bitmap(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height);
-            Graphics g = Graphics.FromImage(bitmap1);
-
             int i;
             int rows = pictureBox1.ClientSize.Height / 100;
             int cols = pictureBox1.ClientSize.Width / 100;
@@ -2946,8 +2949,6 @@ namespace vcs_Draw1
             {
                 g.DrawLine(p, new Point(i * 100, 0), new Point(i * 100, pictureBox1.ClientSize.Height - 1));
             }
-
-            pictureBox1.Image = bitmap1;
         }
 
         //------------------------------------------------------------  # 60個

@@ -1,5 +1,15 @@
 ﻿
 
+
+厲害的random
+        /// 全局隨機數生成器
+        private Random rand;
+            rand = new Random(unchecked((int)DateTime.Now.Ticks));
+
+
+
+
+
 cccc
 HScrollBar / VScrollBar
             vsbHeight.LargeChange = 1;    //設定vsbHeight的快動值 = 1

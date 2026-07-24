@@ -14,9 +14,6 @@ namespace vcs_Picasa
 {
     public partial class Form1 : Form
     {
-        Graphics g;
-        Bitmap bitmap1;
-
         public Form1()
         {
             InitializeComponent();
@@ -28,37 +25,7 @@ namespace vcs_Picasa
 
             //------------------------------------------------------------  # 60個
 
-            //新建圖檔, 初始化畫布
-            int W = 1920;
-            int H = 1080;
-
-            bitmap1 = new Bitmap(W, H);
-            g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.Pink);
-
-            //圖片的中心, 依此中心旋轉
-            int cx = W / 2;
-            int cy = H / 2;
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-
-            int angle = 0;
-
-            angle = -20;
-            draw_bitmap_with_angle(filename, g, cx, cy, angle);
-
-            angle = 20;
-            draw_bitmap_with_angle(filename, g, cx, cy, angle);
-
-            angle = 0;
-            draw_bitmap_with_angle(filename, g, cx, cy, angle);
-
-            cx = 0 + 200;
-            cy = 0 + 200;
-            draw_bitmap_with_angle(filename, g, cx, cy, angle);
-
-            this.BackgroundImageLayout = ImageLayout.None;
-            this.BackgroundImage = bitmap1;
+            do_picasa();
         }
 
         void show_item_location()
@@ -66,38 +33,11 @@ namespace vcs_Picasa
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             this.WindowState = FormWindowState.Maximized;
-
-            bt_exit_setup();
         }
 
-        private void bt_exit_Click(object sender, EventArgs e)
+        private void Form1_DoubleClick(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        void bt_exit_setup()
-        {
-            int width = 5;
-            int w = 50; //設定按鈕大小 W
-            int h = 50; //設定按鈕大小 H
-
-            Button bt_exit = new Button();  // 實例化按鈕
-            bt_exit.Size = new Size(w, h);
-            bt_exit.Text = "";
-            Bitmap bmp = new Bitmap(w, h);
-            Graphics g = Graphics.FromImage(bmp);
-            Pen p = new Pen(Color.Red, width);
-            g.Clear(Color.Pink);
-            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
-            g.DrawLine(p, 0, 0, w - 1, h - 1);
-            g.DrawLine(p, w - 1, 0, 0, h - 1);
-            bt_exit.Image = bmp;
-
-            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
-            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
-
-            this.Controls.Add(bt_exit); // 將按鈕加入表單
-            bt_exit.BringToFront();     //移到最上層
         }
 
         //------------------------------------------------------------  # 60個
@@ -145,19 +85,50 @@ namespace vcs_Picasa
             g.DrawImage(bitmap1, 0, 0, w, h);
             g.DrawRectangle(p, 0, 0, w, h);
         }
+
+        void do_picasa()
+        {
+            //新建圖檔, 初始化畫布
+            int W = 1920;
+            int H = 1080;
+            Bitmap bitmap1 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap1);
+
+            g.Clear(Color.Pink);
+
+            //圖片的中心, 依此中心旋轉
+            int cx = W / 2;
+            int cy = H / 2;
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+
+            int angle = 0;
+
+            angle = -20;
+            draw_bitmap_with_angle(filename, g, cx, cy, angle);
+
+            angle = 20;
+            draw_bitmap_with_angle(filename, g, cx, cy, angle);
+
+            angle = 0;
+            draw_bitmap_with_angle(filename, g, cx, cy, angle);
+
+            cx = 0 + 200;
+            cy = 0 + 200;
+            draw_bitmap_with_angle(filename, g, cx, cy, angle);
+
+            this.BackgroundImageLayout = ImageLayout.None;
+            this.BackgroundImage = bitmap1;
+
+        }
     }
 }
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
 
 

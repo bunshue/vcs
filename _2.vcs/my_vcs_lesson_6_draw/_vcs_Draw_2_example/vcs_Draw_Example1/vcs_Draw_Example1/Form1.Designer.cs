@@ -143,7 +143,6 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(180, 45);
             this.button3.TabIndex = 17;
-            this.button3.Text = "座標圖";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -210,7 +209,6 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(180, 45);
             this.button6.TabIndex = 22;
-            this.button6.Text = "畫 sin";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
