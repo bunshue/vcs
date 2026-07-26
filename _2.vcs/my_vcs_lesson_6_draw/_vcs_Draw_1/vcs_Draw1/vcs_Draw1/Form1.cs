@@ -1301,16 +1301,10 @@ namespace vcs_Draw1
 
         private void button6_Click(object sender, EventArgs e)
         {
-            int W = 640;
-            int H = 750;
-            reset_bitmap1(W, H);  // 初始化畫布
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            bitmap1 = null;
-            pictureBox1.Image = null;
-            richTextBox1.Clear();
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -1333,8 +1327,6 @@ namespace vcs_Draw1
 
             g.DrawRectangle(Pens.Red, 100, 100, 200, 200);
 
-            /*
-
             //c#畫三角形、並填充顏色
             //目前知道有兩種方法：畫多邊形、GraphicsPath。但是用畫多邊形的方式畫三角形不太好。老畫不正的，截圖放大就明顯了。
 
@@ -1344,7 +1336,9 @@ namespace vcs_Draw1
             Point[] pntArr = { point1, point2, point3 };
 
             g.FillPolygon(Brushes.Red, pntArr);
-            */
+
+            return;
+
             //------------------------------------------------------------  # 60個
 
             //PaintImage(g);
@@ -1459,18 +1453,21 @@ namespace vcs_Draw1
             Font f = new Font("標楷體", 20);
             SolidBrush sb = new SolidBrush(Color.Purple);
 
+            Pen p = new Pen(Color.Red, 10);
+
             Point p1 = new Point(10, 100);
-            Point p2 = new Point(590, 120);
-            Pen p = new Pen(Color.Red, 5);
+            Point p2 = new Point(590, 160);
             g.DrawLine(p, p1, p2);
             g.DrawString("反鋸齒功能\t關閉", f, sb, new PointF(170, 70));
 
             g.SmoothingMode = SmoothingMode.AntiAlias;  //反鋸齒功能
 
             Point p3 = new Point(10, 100 + 100);
-            Point p4 = new Point(590, 100 + 120);
+            Point p4 = new Point(590, 100 + 160);
             g.DrawLine(p, p3, p4);
             g.DrawString("反鋸齒功能\t打開", f, sb, new PointF(170, 170));
+
+            //6060
 
             richTextBox1.Text += "有 無 Smoothing 比較\n";
             Font the_font = new Font("Times New Roman", 16);
@@ -1869,39 +1866,87 @@ namespace vcs_Draw1
 
             StringFormat string_format = new StringFormat();
 
+            //橫書
+            //無參數的 預設 橫向列印
+            g.DrawString("預設為橫向書寫, 字在線下", f, Brushes.Green, 200, 100);
+
             //直書
             string_format.FormatFlags = StringFormatFlags.DirectionVertical;  // 文字會垂直對齊
             //string_format.FormatFlags = StringFormatFlags.NoClip;
-            g.DrawString("畫字串畫直的400, 100", f, new SolidBrush(Color.Red), 400, 100, string_format);
-
-            //直書
-            string_format.FormatFlags = StringFormatFlags.DirectionVertical;  // 文字會垂直對齊
-            g.DrawString("三杯祝福歌", f, Brushes.Green, 250, 30, string_format);
-            g.DrawString("一曲迎春調", f, Brushes.Green, 20, 30, string_format);
-
-            //橫書
-            //無參數的 預設 橫向列印
-            g.DrawString("迎春祝福", f, Brushes.Green, 100, 0);
+            g.DrawString("直向書寫, 字在線右", f, Brushes.Green, 200, 100, string_format);
 
             //string_format.Trimming = StringTrimming.None;
             //string_format.FormatFlags = StringFormatFlags.MeasureTrailingSpaces;
 
+            g.FillEllipse(Brushes.Red, 200 - 10, 100 - 10, 20, 20);
+
+            //------------------------------------------------------------  # 60個
+
             //重設StringFormat
             string_format = new StringFormat();
 
-            //文字在線位置
-            string_format.LineAlignment = StringAlignment.Near;  // 字在線下
+            //文字在線位置 + 置中/向左/向右
+
+            int x_st = 100;
+            int y_st = 400;
+            int dx = 200;
+            int dy = 100;
+
             string_format.LineAlignment = StringAlignment.Far;  // 字在線上
-            string_format.LineAlignment = StringAlignment.Center;  // 字在線中
-
             string_format.Alignment = StringAlignment.Center;
-            g.DrawString("從錨點位置置中", f, Brushes.Black, 200, 300, string_format);
-
+            g.DrawString("字在線上", f, Brushes.Black, x_st + dx * 0, y_st + dy * 0, string_format);
+            string_format.Alignment = StringAlignment.Center;
+            g.DrawString("位置置中", f, Brushes.Black, x_st + dx * 0, y_st + dy * 1, string_format);
             string_format.Alignment = StringAlignment.Far;
-            g.DrawString("到錨點結尾向右寫", f, Brushes.Black, 200, 400, string_format);
-
+            g.DrawString("向右寫", f, Brushes.Black, x_st + dx * 0, y_st + dy * 2, string_format);
             string_format.Alignment = StringAlignment.Near;
-            g.DrawString("從錨點開始向右寫", f, Brushes.Black, 200, 500, string_format);
+            g.DrawString("向右寫", f, Brushes.Black, x_st + dx * 0, y_st + dy * 3, string_format);
+
+            //------------------------------------------------------------  # 60個
+
+            string_format.LineAlignment = StringAlignment.Center;  // 字在線中
+            string_format.Alignment = StringAlignment.Center;
+            g.DrawString("字在線中", f, Brushes.Black, x_st + dx * 1, y_st + dy * 0, string_format);
+            string_format.Alignment = StringAlignment.Center;
+            g.DrawString("位置置中", f, Brushes.Black, x_st + dx * 1, y_st + dy * 1, string_format);
+            string_format.Alignment = StringAlignment.Far;
+            g.DrawString("向右寫", f, Brushes.Black, x_st + dx * 1, y_st + dy * 2, string_format);
+            string_format.Alignment = StringAlignment.Near;
+            g.DrawString("向右寫", f, Brushes.Black, x_st + dx * 1, y_st + dy * 3, string_format);
+
+            //------------------------------------------------------------  # 60個
+
+            string_format.LineAlignment = StringAlignment.Near;  // 字在線下
+            string_format.Alignment = StringAlignment.Center;
+            g.DrawString("字在線下", f, Brushes.Black, x_st + dx * 2, y_st + dy * 0, string_format);
+            string_format.Alignment = StringAlignment.Center;
+            g.DrawString("位置置中", f, Brushes.Black, x_st + dx * 2, y_st + dy * 1, string_format);
+            string_format.Alignment = StringAlignment.Far;
+            g.DrawString("向右寫", f, Brushes.Black, x_st + dx * 2, y_st + dy * 2, string_format);
+            string_format.Alignment = StringAlignment.Near;
+            g.DrawString("向右寫", f, Brushes.Black, x_st + dx * 2, y_st + dy * 3, string_format);
+
+            for (int i = 0; i < 4; i++)
+            {
+                int xx = x_st + dx * 0;
+                int yy = y_st + dy * i;
+                g.FillEllipse(Brushes.Red, xx - 10, yy - 10, 20, 20);
+            }
+
+            for (int i = 0; i < 4; i++)
+            {
+                int xx = x_st + dx * 1;
+                int yy = y_st + dy * i;
+                g.FillEllipse(Brushes.Green, xx - 10, yy - 10, 20, 20);
+
+            }
+
+            for (int i = 0; i < 4; i++)
+            {
+                int xx = x_st + dx * 2;
+                int yy = y_st + dy * i;
+                g.FillEllipse(Brushes.Blue, xx - 10, yy - 10, 20, 20);
+            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -2044,32 +2089,9 @@ namespace vcs_Draw1
         int show_position = 1;
         private void button24_Click(object sender, EventArgs e)
         {
-            //製作圖面的標記文字
-            if (bitmap1 == null)
-            {
-                int W = 640;
-                int H = 750;
-                reset_bitmap1(W, H);  // 初始化畫布
-
-                //製作圖面的標記文字
-                bitmap1 = new Bitmap(filename);
-                g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
-                pictureBox1.Image = bitmap1;
-            }
-
+            string text = "牡丹亭";
             Font f = new Font("標楷體", 24, FontStyle.Bold);
-
-            pictureBox1.Image = SetBadge(pictureBox1, "牡丹亭", f, show_position);//呼叫自定義方法
-            show_position++;  //設定文字的顯示位置
-            if (show_position > 6)
-            {
-                show_position = 1;
-            }
-        }
-
-        public Image SetBadge(PictureBox Pict, String Str, Font f, int place)
-        {
-            Image image2 = Pict.Image;//根據圖片實例化Image類
+            Image image2 = new Bitmap(filename);
             int Var_FontSize = (int)f.Size;//取得字體大小
             bool Var_isSetFont = false;//判斷目前文字是否超出圖片的大小
             int Var_W = image2.Width;//取得圖片的寬度
@@ -2088,7 +2110,7 @@ namespace vcs_Draw1
             {
                 //設定文字的文字
                 tem_Font = new Font(f.Name, Var_FontSize, f.Bold ? FontStyle.Bold : FontStyle.Regular);
-                Var_Size = g.MeasureString(Str, tem_Font);//對文字進行測量
+                Var_Size = g.MeasureString(text, tem_Font);//對文字進行測量
                 if (Var_Size.Width < bitmap1.Width - 10)//如果文字的寬度沒有超出圖片
                 {
                     if (Var_Size.Height < bitmap1.Height - 10)//如果文字的高度沒有超出圖片
@@ -2101,34 +2123,41 @@ namespace vcs_Draw1
                     Var_FontSize = Var_FontSize - 1;//文字的字體大小減1
                 }
             }
-            switch (place)//選擇文字的顯示位置
+            switch (show_position)//選擇文字的顯示位置
             {
                 case 1://右下角
+                    richTextBox1.Text += "右下角\n";
                     Var_StrX = (int)(bitmap1.Width - Var_Size.Width - 3);//設定文字的X座標值
                     Var_StrY = (int)(bitmap1.Height - Var_Size.Height);//設定文字的Y座標值
                     break;
                 case 2://右上角
+                    richTextBox1.Text += "右上角\n";
                     Var_StrX = (int)(bitmap1.Width - Var_Size.Width - 3);
                     Var_StrY = 1;
                     break;
                 case 3://左下角
+                    richTextBox1.Text += "左下角\n";
                     Var_StrX = 1;
                     Var_StrY = (int)(bitmap1.Height - Var_Size.Height);
                     break;
                 case 4://左上角
+                    richTextBox1.Text += "左上角\n";
                     Var_StrX = 1;
                     Var_StrY = 1;
                     break;
                 case 5://頂局中
+                    richTextBox1.Text += "上中\n";
                     Var_StrX = (int)(bitmap1.Width - Var_Size.Width - 2) / 2;
                     Var_StrY = 1;
                     break;
                 case 6://底局中
+                    richTextBox1.Text += "下中\n";
                     Var_StrX = (int)(bitmap1.Width - Var_Size.Width - 2) / 2;
                     Var_StrY = (int)(bitmap1.Height - Var_Size.Height);
                     break;
             }
-            g.DrawString(Str, tem_Font, new SolidBrush(Color.Black), Var_StrX, Var_StrY);//繪製前景色為黑色的文字
+            g.DrawString(text, tem_Font, new SolidBrush(Color.Black), Var_StrX, Var_StrY);//繪製前景色為黑色的文字
+
             int tem_Become = 40;//設定文字的變色深度
             //搜尋圖片的所有象素
             for (int x = 1; x < bitmap1.Width; x++)
@@ -2176,7 +2205,13 @@ namespace vcs_Draw1
                     }
                 }
             }
-            return image2;
+            pictureBox1.Image = image2;
+
+            show_position++;  //設定文字的顯示位置
+            if (show_position > 6)
+            {
+                show_position = 1;
+            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -2807,7 +2842,13 @@ namespace vcs_Draw1
 
         private void bt_reset_Click(object sender, EventArgs e)
         {
+            int W = 640;
+            int H = 750;
+            reset_bitmap1(W, H);  // 初始化畫布
 
+            bitmap1 = null;
+            pictureBox1.Image = null;
+            richTextBox1.Clear();
         }
 
         private void bt_save_Click(object sender, EventArgs e)
