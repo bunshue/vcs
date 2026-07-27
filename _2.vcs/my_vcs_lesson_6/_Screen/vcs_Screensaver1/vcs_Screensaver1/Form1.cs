@@ -75,7 +75,7 @@ namespace vcs_Screensaver1
             pictureBox1.Image = Image.FromFile(filename);
             pictureBox1.Location = new Point(800, 600);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(304, 224);
+            pictureBox1.Size = new Size(305, 400);
 
             // 設置窗體(screen)屬性
             this.AutoScaleBaseSize = new Size(6, 14);
@@ -228,4 +228,3 @@ namespace vcs_Screensaver1
         }
     }
 }
-

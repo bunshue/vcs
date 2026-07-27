@@ -13,7 +13,8 @@ using System.Windows.Forms;
 */
 
 /*
-1)屏保运行起来是一个整个屏幕且无边框的窗体，不能显示任务栏，鼠标点击就会退出。当然你还可以在界面上自定义一些东西，如显示系统时间，屏保里面显示Rss内容等。
+1)屏保运行起来是一个整个屏幕且无边框的窗体，不能显示任务栏，鼠标点击就会退出。
+  当然你还可以在界面上自定义一些东西，如显示系统时间，屏保里面显示Rss内容等。
 
 2)屏幕保护程序的扩展名虽然是".scr"，但本质是一个可执行的".exe"文件。
 */
@@ -68,10 +69,9 @@ namespace vcs_Screensaver4
             this.BackgroundImage = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             this.BackgroundImageLayout = ImageLayout.Center;
             this.Deactivate += new System.EventHandler(this.Form1_Deactivate);
-            this.Click += new System.EventHandler(Exit);
-            this.BackColor = Color.White;
 
             this.DoubleBuffered = true;//設置本窗體
+
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.DoubleBuffer, true);
@@ -88,7 +88,7 @@ namespace vcs_Screensaver4
             timer1.Start();
         }
 
-        private void Exit(object sender, EventArgs e)
+        private void Form1_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }

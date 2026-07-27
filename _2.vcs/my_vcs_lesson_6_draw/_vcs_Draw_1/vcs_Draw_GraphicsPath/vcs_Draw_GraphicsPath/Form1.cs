@@ -485,49 +485,50 @@ namespace vcs_Draw_GraphicsPath
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            // Make a GraphicsPath to define the start cap.
+            richTextBox1.Text += "用 GraphicsPath 製作 箭頭\n";
+
+            // 箭頭開始
             GraphicsPath gp1 = new GraphicsPath();
             gp1.AddArc(-2, 0, 4, 4, 180, 180);
-
-            // Make the start cap.
             CustomLineCap start_cap = new CustomLineCap(null, gp1);
-            // Make a GraphicsPath to define the end cap.
+
+            // 箭頭結束
             GraphicsPath gp2 = new GraphicsPath();
             gp2.AddLine(0, 0, -2, -2);
             gp2.AddLine(0, 0, 2, -2);
-
-            // Make the end cap.
             CustomLineCap end_cap = new CustomLineCap(null, gp2);
-            // Make a pen that uses the custom caps.
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             Pen p1 = new Pen(Color.Red, 5);
             p1.CustomStartCap = start_cap;
             p1.CustomEndCap = end_cap;
-            Pen p2 = new Pen(Color.Green, 5);
-            p2.CustomStartCap = start_cap;
-            p2.CustomEndCap = end_cap;
-            Pen p3 = new Pen(Color.Blue, 5);
-            p3.CustomStartCap = start_cap;
-            p3.CustomEndCap = end_cap;
 
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            // Draw a line.
+            //畫出直線箭頭
             g.DrawLine(p1, 50, 50, 200, 50);
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
-            // Draw a polygon.
+            Pen p2 = new Pen(Color.Green, 5);
+            p2.CustomStartCap = start_cap;
+            p2.CustomEndCap = end_cap;
+
             PointF[] points = new PointF[]
             {
                 new PointF(40, 100),
                 new PointF(120, 120),
                 new PointF(230, 90),
             };
+            //畫出折線箭頭
             g.DrawLines(p2, points);
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
+            Pen p3 = new Pen(Color.Blue, 5);
+            p3.CustomStartCap = start_cap;
+            p3.CustomEndCap = end_cap;
+
+            //畫出弧線箭頭
             g.DrawArc(p3, 50, 150, 150, 80, 180, 270);
         }
 
@@ -731,6 +732,8 @@ namespace vcs_Draw_GraphicsPath
             return image;
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button8_Click(object sender, EventArgs e)
         {
         }
@@ -740,21 +743,25 @@ namespace vcs_Draw_GraphicsPath
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button10_Click(object sender, EventArgs e)
         {
             //GraphicsPath 大全 字
 
-            int x_st = 360;
+            int x_st = 400;
             int y_st = 20;
             Pen p = new Pen(Color.Red, 3);
             Font f = new Font("標楷體", 18);
 
-            g.DrawString("3加入字串", f, Brushes.Red, x_st, y_st);
+            g.DrawString("加入字串", f, Brushes.Red, x_st, y_st);
 
             p = new Pen(Color.Blue, 1);
 
             GraphicsPath gp = new GraphicsPath();
             FontFamily font_family = new FontFamily("標楷體");//設定字體樣式
+
+            y_st += 100;
 
             int fontStyle = (int)FontStyle.Italic;
             int emSize = 40;
@@ -772,27 +779,25 @@ namespace vcs_Draw_GraphicsPath
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
-            //畫字範例 + 放大
+            x_st = 20;
+            y_st = 20;
+            g.DrawString("畫字範例 + 放大", f, Brushes.Red, x_st, y_st);
 
             float size = 2.0f;//放大倍率
 
-            text = size.ToString() + " 倍\n海納百川，\n有容乃大；\n壁立千仞，\n無欲則剛。";//設定字串
+            text = "\n海納百川，\n有容乃大；\n壁立千仞，\n無欲則剛。";
 
             GraphicsPath gp1 = new GraphicsPath();//實例化GraphicsPath對像
             // GP加入字串
             gp1.AddString(text, font_family, (int)FontStyle.Regular, 36, new Point(0, 0), new StringFormat());//在路徑中新增文字
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //取出圖形路徑的所有點 => 矩陣轉換 => 轉 圖形路徑gp => 畫出來
 
             PointF[] Var_PointS = gp1.PathPoints;  // 取得路徑中的點
             Byte[] Car_Types = gp1.PathTypes;  // 取得對應點的類型
 
-            //richTextBox1.Text += "len = " + Var_PointS.Length.ToString() + "\n";
-
-            Matrix matrix = new Matrix((float)size, 0.0F, 0.0F, (float)size, 0.0F, 0.0F);//設定仿射矩陣
-            matrix.TransformPoints(Var_PointS);
+            Matrix mtx = new Matrix((float)size, 0.0F, 0.0F, (float)size, 0.0F, 0.0F);//設定仿射矩陣
+            mtx.TransformPoints(Var_PointS);
 
             GraphicsPath gp2 = new GraphicsPath(Var_PointS, Car_Types);
 
@@ -1004,6 +1009,11 @@ namespace vcs_Draw_GraphicsPath
         private void button15_Click(object sender, EventArgs e)
         {
             //畫CCP
+            groupBox2.Visible = false;
+            pictureBox1.BringToFront();
+            pictureBox1.Size = new Size(800 + 100, 640 + 200);
+            this.Size = new Size(1600, 960);
+
 
             Bitmap bitmap1 = new Bitmap(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height);
             g = Graphics.FromImage(bitmap1);
@@ -1014,9 +1024,149 @@ namespace vcs_Draw_GraphicsPath
             //g.DrawPath(p, gp);
 
             //g.FillPath(new SolidBrush(Color.FromArgb(217, 218, 219)), gp);
-            g.FillPath(new SolidBrush(Color.Red), gp);
+            g.FillPath(new SolidBrush(Color.Gray), gp);
 
             pictureBox1.Image = bitmap1;
+
+            PointF[] ccc = new PointF[] {
+                    new PointF(365F, 6F),
+                    new PointF(531F, 54F),
+                    new PointF(596F, 133F),
+                    new PointF(622F, 250F),
+                    new PointF(637F, 336F),
+                    new PointF(627F, 412F),
+                    new PointF(573F, 486F),
+                    new PointF(323F, 234F),
+                    new PointF(416F, 140F),
+                    new PointF(376F, 100F),
+                    new PointF(358F, 101F),
+                    new PointF(343F, 118F),
+                    new PointF(258F, 118F),
+                    new PointF(88F, 288F),
+                    new PointF(183F, 384F),
+                    new PointF(248F, 320F),
+                    new PointF(490F, 563F),
+                    new PointF(408F, 629F),
+                    new PointF(317F, 629F),
+                    new PointF(210F, 583F),
+                    new PointF(165F, 560F),
+                    new PointF(134F, 537F),
+                    new PointF(93F, 484F),
+                    new PointF(37F, 539F),
+                    new PointF(76F, 578F),
+                    new PointF(67F, 591F),
+                    new PointF(26F, 585F),
+                    new PointF(-9F, 620F),
+                    new PointF(11F, 676F),
+                    new PointF(27F, 704F),
+                    new PointF(42F, 718F),
+                    new PointF(81F, 713F),
+                    new PointF(105F, 709F),
+                    new PointF(125F, 676F),
+                    new PointF(126F, 640F),
+                    new PointF(137F, 631F),
+                    new PointF(199F, 685F),
+                    new PointF(246F, 713F),
+                    new PointF(342F, 720F),
+                    new PointF(431F, 724F),
+                    new PointF(492F, 711F),
+                    new PointF(576F, 651F),
+                    new PointF(649F, 725F),
+                    new PointF(731F, 640F),
+                    new PointF(655F, 566F),
+                    new PointF(703F, 491F),
+                    new PointF(718F, 451F),
+                    new PointF(719F, 354F),
+                    new PointF(720F, 243F),
+                    new PointF(635F, 22F),
+                    new PointF(379F, 6F)
+            };
+
+            Byte[] ddd = new System.Byte[]
+                   {
+                        0,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        1,
+                        1,
+                        1,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        1,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        1,
+                        1,
+                        1,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        131};
+
+
+
+            richTextBox1.Text += "ccc : " + ccc.Length.ToString() + "\n";
+            richTextBox1.Text += "ddd : " + ddd.Length.ToString() + "\n";
+
+            for (int i = 0; i < ccc.Length; i++)
+            {
+                if (ddd[i] == 0)
+                {
+                    g.FillEllipse(Brushes.Red, ccc[i].X, ccc[i].Y, 10, 10);
+                }
+                else if (ddd[i] == 1)
+                {
+                    g.FillEllipse(Brushes.Green, ccc[i].X, ccc[i].Y, 10, 10);
+                }
+                else if (ddd[i] == 3)
+                {
+                    g.FillEllipse(Brushes.Blue, ccc[i].X, ccc[i].Y, 10, 10);
+                }
+                else
+                {
+                    g.FillEllipse(Brushes.Cyan, ccc[i].X, ccc[i].Y, 10, 10);
+                }
+
+                Font f = new Font("標楷體", 18);
+                g.DrawString(i.ToString(), f, Brushes.Red, ccc[i].X, ccc[i].Y);
+
+
+            }
+
+
         }
 
         GraphicsPath RetrieveGraphicsPath()
@@ -1264,19 +1414,14 @@ namespace vcs_Draw_GraphicsPath
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-/*
-
-*/
-
 // Draw a transformed arc. 放大3倍??
-//g.ScaleTransform(3, 1);
+// g.ScaleTransform(3, 1);
 
-//填滿組合路徑 fill
+// 填滿組合路徑 fill
 // 繪出文字字串//繪出組合路徑 draw
 
 //  Pen penJoin = new Pen(Color.Red, 5);

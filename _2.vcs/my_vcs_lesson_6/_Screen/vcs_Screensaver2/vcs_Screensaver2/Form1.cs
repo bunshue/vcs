@@ -151,8 +151,6 @@ namespace vcs_Screensaver2
                     }
                 }
                 this.ClientSize = new Size(this.BackgroundImage.Size.Width * 1 / 4 * ratio / 100, this.BackgroundImage.Size.Height * 1 / 4 * ratio / 100);
-
-
             }
         }
 
@@ -171,7 +169,7 @@ namespace vcs_Screensaver2
         private Point mouseOffset;//記錄滑鼠座標
         private bool isMouseDown = false;//是否按下滑鼠
         //***********************
-        #region 移動無邊框表單
+        //#region 移動無邊框表單
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
             int xOffset;
@@ -202,6 +200,6 @@ namespace vcs_Screensaver2
                 isMouseDown = false;
             }
         }
-        #endregion
+        //#endregion
     }
 }

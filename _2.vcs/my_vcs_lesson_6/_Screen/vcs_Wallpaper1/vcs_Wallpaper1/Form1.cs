@@ -180,21 +180,27 @@ namespace vcs_Wallpaper1
         {
             //設置桌布
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\_material\ims1.bmp";
+
             SetDesktopPicture(filename);
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\_material\ims1.bmp";
-            SetDesktopPicture(filename);
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             //SetWallPaper(filename, Style.Center); //置中
-            //SetWallPaper(filename, Style.Fill);   //填滿
+            SetWallPaper(filename, Style.Fill);   //填滿
             //SetWallPaper(filename, Style.Fit);  //等比例放大/縮小至螢幕最大
             //SetWallPaper(filename, Style.Span);
             //SetWallPaper(filename, Style.Stretch);
             //SetWallPaper(filename, Style.Tile);   //原圖大小 排列滿螢幕
+
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button2_Click(object sender, EventArgs e)
         {

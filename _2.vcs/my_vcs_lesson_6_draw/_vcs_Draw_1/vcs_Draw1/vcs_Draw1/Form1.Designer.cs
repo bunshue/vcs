@@ -67,7 +67,6 @@
             this.button30 = new System.Windows.Forms.Button();
             this.button31 = new System.Windows.Forms.Button();
             this.pictureBox_uac = new System.Windows.Forms.PictureBox();
-            this.pictureBox_text = new System.Windows.Forms.PictureBox();
             this.button32 = new System.Windows.Forms.Button();
             this.button33 = new System.Windows.Forms.Button();
             this.button34 = new System.Windows.Forms.Button();
@@ -83,7 +82,6 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_uac)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_text)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_count)).BeginInit();
             this.SuspendLayout();
             // 
@@ -182,7 +180,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(200, 60);
             this.button6.TabIndex = 22;
-            this.button6.Text = "開新檔案";
+            this.button6.Text = "MeasureString 測試";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -193,7 +191,6 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(200, 60);
             this.button7.TabIndex = 25;
-            this.button7.Text = "清除畫布";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -344,7 +341,6 @@
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(200, 60);
             this.button21.TabIndex = 38;
-            this.button21.Text = "DrawTest";
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
@@ -492,16 +488,6 @@
             this.pictureBox_uac.Size = new System.Drawing.Size(90, 90);
             this.pictureBox_uac.TabIndex = 57;
             this.pictureBox_uac.TabStop = false;
-            // 
-            // pictureBox_text
-            // 
-            this.pictureBox_text.BackColor = System.Drawing.Color.Pink;
-            this.pictureBox_text.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox_text.Location = new System.Drawing.Point(12, 210);
-            this.pictureBox_text.Name = "pictureBox_text";
-            this.pictureBox_text.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox_text.TabIndex = 58;
-            this.pictureBox_text.TabStop = false;
             // 
             // button32
             // 
@@ -657,7 +643,6 @@
             this.Controls.Add(this.button34);
             this.Controls.Add(this.button33);
             this.Controls.Add(this.button32);
-            this.Controls.Add(this.pictureBox_text);
             this.Controls.Add(this.pictureBox_uac);
             this.Controls.Add(this.button31);
             this.Controls.Add(this.button30);
@@ -702,7 +687,6 @@
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_uac)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_text)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_count)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -749,7 +733,6 @@
         private System.Windows.Forms.Button button30;
         private System.Windows.Forms.Button button31;
         private System.Windows.Forms.PictureBox pictureBox_uac;
-        private System.Windows.Forms.PictureBox pictureBox_text;
         private System.Windows.Forms.Button button32;
         private System.Windows.Forms.Button button33;
         private System.Windows.Forms.Button button34;

@@ -28,7 +28,10 @@ namespace vcs_Draw1
         private static Bitmap shield_bm = null;
         public static Bitmap GetUacShieldImage()
         {
-            if (shield_bm != null) return shield_bm;
+            if (shield_bm != null)
+            {
+                return shield_bm;
+            }
 
             const int WID = 50;
             const int HGT = 50;
@@ -45,9 +48,12 @@ namespace vcs_Draw1
             Bitmap bm = new Bitmap(WID, HGT);
             btn.Refresh();
             btn.DrawToBitmap(bm, new Rectangle(0, 0, WID, HGT));
-            
+
             // Find the part containing the shield.
-            int min_x = WID, max_x = 0, min_y = HGT, max_y = 0;
+            int min_x = WID;
+            int max_x = 0;
+            int min_y = HGT;
+            int max_y = 0;
 
             // Fill on the left.
             for (int y = MARGIN; y < HGT - MARGIN; y++)
@@ -68,10 +74,22 @@ namespace vcs_Draw1
                     else
                     {
                         // It's part of the shield.
-                        if (min_y > y) min_y = y;
-                        if (min_x > x) min_x = x;
-                        if (max_y < y) max_y = y;
-                        if (max_x < x) max_x = x;
+                        if (min_y > y)
+                        {
+                            min_y = y;
+                        }
+                        if (min_x > x)
+                        {
+                            min_x = x;
+                        }
+                        if (max_y < y)
+                        {
+                            max_y = y;
+                        }
+                        if (max_x < x)
+                        {
+                            max_x = x;
+                        }
                     }
                 }
             }
@@ -81,9 +99,7 @@ namespace vcs_Draw1
             int shield_hgt = max_y - min_y + 1;
             shield_bm = new Bitmap(shield_wid, shield_hgt);
             Graphics shield_gr = Graphics.FromImage(shield_bm);
-            shield_gr.DrawImage(bm, 0, 0,
-                new Rectangle(min_x, min_y, shield_wid, shield_hgt),
-                GraphicsUnit.Pixel);
+            shield_gr.DrawImage(bm, 0, 0, new Rectangle(min_x, min_y, shield_wid, shield_hgt), GraphicsUnit.Pixel);
 
             // Return the shield.
             return shield_bm;
