@@ -38,6 +38,10 @@ namespace vcs_Draw1
 
             p = new Pen(Color.Red, 3);
 
+            int W = 640;
+            int H = 750;
+            reset_bitmap1(W, H);  // 初始化畫布
+
             //------------------------------------------------------------  # 60個
 
             //畫 UAC
@@ -1342,6 +1346,29 @@ namespace vcs_Draw1
 
         private void button7_Click(object sender, EventArgs e)
         {
+            //透明的畫筆與塗刷
+
+            //透明的畫筆與塗刷
+
+            //半透明畫筆 alpha = 64
+            Pen p = new Pen(Color.FromArgb(64, 0, 255, 0), 40); // 透明的畫筆
+
+            //半透明筆刷 alpha = 64
+            SolidBrush sb = new SolidBrush(Color.FromArgb(64, 0, 0, 255)); // 透明的塗刷
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            Image image1 = Image.FromFile(filename);
+
+            Rectangle rect = new Rectangle(0, 0, image1.Width, image1.Height);
+            g.Clear(Color.Pink);
+            g.DrawImage(image1, rect); // 呈現原圖
+            g.DrawLine(p, 0, 100, image1.Width, 100); // 畫出透明的直線
+            int Cx = this.pictureBox1.ClientSize.Width / 2; // 視窗客戶區 正中心
+            int Cy = this.pictureBox1.ClientSize.Height / 2;
+            g.FillEllipse(sb, Cx - 100, Cy - 100, 200, 200); // 繪畫出透明的圓形
+
+            pictureBox1.Image = bitmap1;
+
         }
 
         //------------------------------------------------------------  # 60個
@@ -1354,8 +1381,6 @@ namespace vcs_Draw1
 
         private void button9_Click(object sender, EventArgs e)
         {
-            //亂畫一通
-
             //畫格線
             bitmap1 = new Bitmap(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height);
             Graphics g = Graphics.FromImage(bitmap1);
@@ -1365,9 +1390,6 @@ namespace vcs_Draw1
             //------------------------------------------------------------  # 60個
 
             PaintImage(g);
-
-            return;
-
 
             //------------------------------------------------------------  # 60個
 
@@ -2899,28 +2921,6 @@ a.Y = 10;
 
 //------------------------------------------------------------  # 60個
 
-各種 DrawImage
-            richTextBox1.Text += "第1項 PictureBox\n";
-            Rectangle rectDest = new Rectangle(0, 0, bitmap1.Width, bitmap1.Height);
-            Rectangle rectSrc = new Rectangle(0, 0, bitmap1.Width, bitmap1.Height);
-            e.Graphics.DrawImage(bitmap1, rectDest, rectSrc, GraphicsUnit.Pixel); // 呈現原圖
-
-            richTextBox1.Text += "第2項 PictureBox\n";
-            Rectangle rectDest = new Rectangle(0, 0, bitmap1.Width, bitmap1.Height);
-            e.Graphics.DrawImage(bitmap1, rectDest); // 呈現原圖
-
-            richTextBox1.Text += "第3項 PictureBox\n";
-            Rectangle rectDest = new Rectangle(0, 0, bitmap1.Width * 2, bitmap1.Height / 2);
-            e.Graphics.DrawImage(bitmap1, rectDest); // 呈現原圖
-            richTextBox1.Text += "第4項 PictureBox\n";
-            Point dest = new Point(0, 0); // 目的地左上角座標
-            e.Graphics.DrawImage(bitmap1, dest); // 呈現原圖
-
-            richTextBox1.Text += "第5項 PictureBox\n";
-            e.Graphics.DrawImage(bitmap1, 0, 0); // 呈現原圖
-
-//------------------------------------------------------------  # 60個
-
 本文將介紹在．Net中如何使用代碼畫圖表，就像用MS Excel產生的圖表一樣。也可以畫像DataGrid一樣的表格。
 在．Net中，微軟給我們提供了畫圖類（System.Drawing.Imaging），在該類中畫圖的準系統都有。
 比如：直線、折線、矩形、多邊形、橢圓形、扇形、曲線等等，因此一般的圖形都可以直接通過代碼畫出來。
@@ -2952,8 +2952,6 @@ int Cy = this.pictureBox1.ClientSize.Height / 2;
 int W = bitmap1.Width;
 int H = bitmap1.Height;
 
-Graphics g = this.pictureBox1.CreateGraphics();
-
 g.DrawImage(bitmap1, Cx, Cy,  W / 2,  H / 2);
 g.DrawImage(bitmap1, Cx, Cy, -W / 2,  H / 2);
 g.DrawImage(bitmap1, Cx, Cy,  W / 2, -H / 2);
@@ -2968,22 +2966,9 @@ g.DrawImage(bitmap1, Cx, Cy, -W / 2, -H / 2);
             string_format.Trimming = StringTrimming.None;
             string_format.FormatFlags = StringFormatFlags.MeasureTrailingSpaces;
 
-            RectangleF rect = new RectangleF(0, 0, 10000, 100);
-
-            Region[] regions = g.MeasureCharacterRanges(text, f, this.ClientRectangle, string_format);
-
-            // Convert the regions into rectangles.
-            foreach (Region region in regions)
-            {
-                result.Add(region.GetBounds(g));
-            }
-
             g.TextRenderingHint = TextRenderingHint.AntiAlias;
-
-
 */
 
 
 //f = new Font("Times New Roman", 40, FontStyle.Regular, GraphicsUnit.Pixel);
-
 

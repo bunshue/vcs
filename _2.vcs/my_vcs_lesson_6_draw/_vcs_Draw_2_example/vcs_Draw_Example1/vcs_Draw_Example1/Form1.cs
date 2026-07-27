@@ -439,6 +439,7 @@ namespace vcs_Draw_Example1
         private void timer_dot_line_Tick(object sender, EventArgs e)
         {
             graphicsHandle = Graphics.FromHwnd(Handle).GetHdc();
+
             for (int i = 0; i < graphicsPath.PathPoints.Length; i++)
             {
                 if (graphicsPath.PathTypes[i] == (byte)(PT_CLOSEFIGURE | PT_LINETO))
@@ -3501,26 +3502,6 @@ namespace vcs_Draw_Example1
 
         private void button26_Click(object sender, EventArgs e)
         {
-            //透明的畫筆與塗刷
-
-            //半透明畫筆 alpha = 64
-            Pen p = new Pen(Color.FromArgb(64, 0, 255, 0), 40); // 透明的畫筆
-
-            //半透明筆刷 alpha = 64
-            SolidBrush sb = new SolidBrush(Color.FromArgb(64, 0, 0, 255)); // 透明的塗刷
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            Image image1 = Image.FromFile(filename);
-
-            Rectangle rect = new Rectangle(0, 0, image1.Width, image1.Height);
-            g.Clear(Color.Pink);
-            g.DrawImage(image1, rect); // 呈現原圖
-            g.DrawLine(p, 0, 100, image1.Width, 100); // 畫出透明的直線
-            int Cx = this.pictureBox1.ClientSize.Width / 2; // 視窗客戶區 正中心
-            int Cy = this.pictureBox1.ClientSize.Height / 2;
-            g.FillEllipse(sb, Cx - 100, Cy - 100, 200, 200); // 繪畫出透明的圓形
-
-            pictureBox1.Image = bitmap1;
         }
 
         //------------------------------------------------------------  # 60個

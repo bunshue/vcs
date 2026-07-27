@@ -117,8 +117,6 @@ namespace vcs_PictureMagnify2
             Bitmap bt = new Bitmap(imgWidth / 2, imgHeight / 2);
             Graphics g = Graphics.FromImage(bt);
             g.CopyFromScreen(new Point(Cursor.Position.X - imgWidth / 4, Cursor.Position.Y - imgHeight / 4), new Point(0, 0), new Size(imgWidth / 2, imgHeight / 2));
-            IntPtr dc1 = g.GetHdc();
-            g.ReleaseHdc(dc1);
             pictureBox1.Image = (Image)bt;
         }
 
@@ -156,3 +154,4 @@ namespace vcs_PictureMagnify2
         }
     }
 }
+

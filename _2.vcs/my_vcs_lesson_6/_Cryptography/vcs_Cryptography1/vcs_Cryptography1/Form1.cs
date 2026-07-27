@@ -168,34 +168,6 @@ namespace vcs_Cryptography1
 
             //------------------------------------------------------------  # 60個
 
-            //未使用函數 MD5
-
-            FileStream fs = new FileStream(filename, FileMode.Open);
-
-            //byte[] md5Hash = md5.ComputeHash(fs);  // 算拜列之Hash值
-
-            string md5_hash_str = MD5Encrypt(fs);
-            richTextBox1.Text += "02mf檔案 : " + filename + "\tMD5 : " + md5_hash_str + "\n";
-
-            fs.Close();
-
-            //------------------------------------------------------------  # 60個
-
-            //FileStream
-            fs = new FileStream(filename, FileMode.Open);
-            md5Hash = md5.ComputeHash(fs);  // 算拜列之Hash值
-            fs.Close();
-
-            str_encrypted_text = BytesToString(md5Hash);  // Hash拜列轉字串
-            richTextBox1.Text += "03mf檔案 : " + filename + "\tMD5 : " + str_encrypted_text + "\n";
-
-            //------------------------------------------------------------  # 60個
-
-            str_encrypted_text = BytesToString(GetHashMD5(filename));  // Hash拜列轉字串
-            richTextBox1.Text += "04mf檔案 : " + filename + "\tMD5 : " + str_encrypted_text + "\n";
-
-            //------------------------------------------------------------  # 60個
-
             //取得第一個檔案MD5演算後的陣列
             byte[] input = File.ReadAllBytes(filename);
             md5Hash = md5.ComputeHash(input);  // 算拜列之Hash值
@@ -206,7 +178,20 @@ namespace vcs_Cryptography1
 
             //------------------------------------------------------------  # 60個
 
-            //FileStream
+            //未使用函數 MD5
+
+            FileStream fs = new FileStream(filename, FileMode.Open);
+
+            md5 = MD5.Create();  // 創建MD5對象
+            md5Hash = md5.ComputeHash(fs);  // 算拜列之Hash值
+            str_encrypted_text = BytesToString(md5Hash);  // Hash拜列轉字串
+
+            richTextBox1.Text += "02mf檔案 : " + filename + "\tMD5 : " + str_encrypted_text + "\n";
+
+            fs.Close();
+
+            //------------------------------------------------------------  # 60個
+
             fs = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read);
             md5Hash = md5.ComputeHash(fs);  // 算拜列之Hash值
             fs.Close();
@@ -232,29 +217,18 @@ namespace vcs_Cryptography1
             //------------------------------------------------------------  # 60個
 
             //檔案轉拜列轉Hash值
-            md5Hash = GetHashMD5(filename);
+
+            md5 = MD5.Create();  // 創建MD5對象
+            fs = File.OpenRead(filename);
+            md5Hash = md5.ComputeHash(fs);  // 算拜列之Hash值
+            fs.Close();
+
+            str_encrypted_text = BytesToString(md5Hash);  // Hash拜列轉字串
+            richTextBox1.Text += "04mf檔案 : " + filename + "\tMD5 : " + str_encrypted_text + "\n";
 
             //Hash拜列轉字串
             str_encrypted_text = Convert.ToBase64String(md5Hash);  // Hash拜列轉字串, Base64
             richTextBox1.Text += "09mf檔案 : " + filename + "\tMD5 : " + str_encrypted_text + ", Base64\n";
-        }
-
-        // Compute the file's hash.
-        private byte[] GetHashMD5(string filename)
-        {
-            MD5 md5 = MD5.Create();  // 創建MD5對象
-            FileStream fs = File.OpenRead(filename);
-            byte[] md5Hash = md5.ComputeHash(fs);  // 算拜列之Hash值
-            fs.Close();
-            return md5Hash;
-        }
-
-        // MD5對文件流加密
-        public static string MD5Encrypt(Stream stream)
-        {
-            MD5 md5 = MD5.Create();  // 創建MD5對象
-            byte[] md5Hash = md5.ComputeHash(stream);  // 算拜列之Hash值
-            return BytesToString(md5Hash);  // Hash拜列轉字串
         }
 
         //------------------------------------------------------------  # 60個

@@ -495,11 +495,35 @@ namespace vcs_DriveInfo1
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-
-
+            //取得磁碟資訊
+            //C#獲取硬盤序列號
+            string sVol = GetVolOf("C");
+            richTextBox1.Text += "xxx : " + sVol + "\n";
 
             //------------------------------------------------------------  # 60個
 
+            //取得磁碟資訊
+            string drive_letter = "C:";
+
+            uint serial_number = 0;
+            uint max_component_length = 0;
+            StringBuilder sb_volume_name = new StringBuilder(256);
+            UInt32 file_system_flags = new UInt32();
+            StringBuilder sb_file_system_name = new StringBuilder(256);
+
+            if (GetVolumeInformation(drive_letter, sb_volume_name, (UInt32)sb_volume_name.Capacity, ref serial_number, ref max_component_length, ref file_system_flags, sb_file_system_name, (UInt32)sb_file_system_name.Capacity) == 0)
+            {
+                richTextBox1.Text += "無法取得磁碟資訊\n";
+            }
+            else
+            {
+                richTextBox1.Text += "磁碟名稱 : " + drive_letter + "\n";
+                richTextBox1.Text += "磁碟名稱 : " + sb_volume_name.ToString() + "\n";
+                richTextBox1.Text += "序號 : " + serial_number.ToString() + "\n";
+                richTextBox1.Text += "Max Component Length\t" + max_component_length.ToString() + "\n";
+                richTextBox1.Text += "檔案系統 : " + sb_file_system_name.ToString() + "\n";
+                richTextBox1.Text += "Flags\t" + "&&H" + file_system_flags.ToString("x") + "\n";
+            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -697,35 +721,6 @@ namespace vcs_DriveInfo1
 
         private void button10_Click(object sender, EventArgs e)
         {
-            //取得磁碟資訊
-            //C#獲取硬盤序列號
-            string sVol = GetVolOf("C");
-            richTextBox1.Text += "xxx : " + sVol + "\n";
-
-            //------------------------------------------------------------  # 60個
-
-            //取得磁碟資訊
-            string drive_letter = "C:";
-
-            uint serial_number = 0;
-            uint max_component_length = 0;
-            StringBuilder sb_volume_name = new StringBuilder(256);
-            UInt32 file_system_flags = new UInt32();
-            StringBuilder sb_file_system_name = new StringBuilder(256);
-
-            if (GetVolumeInformation(drive_letter, sb_volume_name, (UInt32)sb_volume_name.Capacity, ref serial_number, ref max_component_length, ref file_system_flags, sb_file_system_name, (UInt32)sb_file_system_name.Capacity) == 0)
-            {
-                richTextBox1.Text += "無法取得磁碟資訊\n";
-            }
-            else
-            {
-                richTextBox1.Text += "磁碟名稱 : " + drive_letter + "\n";
-                richTextBox1.Text += "磁碟名稱 : " + sb_volume_name.ToString() + "\n";
-                richTextBox1.Text += "序號 : " + serial_number.ToString() + "\n";
-                richTextBox1.Text += "Max Component Length\t" + max_component_length.ToString() + "\n";
-                richTextBox1.Text += "檔案系統 : " + sb_file_system_name.ToString() + "\n";
-                richTextBox1.Text += "Flags\t" + "&&H" + file_system_flags.ToString("x") + "\n";
-            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -1042,12 +1037,7 @@ namespace vcs_DriveInfo1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
 

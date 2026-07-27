@@ -91,39 +91,31 @@ namespace vcs_DriveInfo3
         {
             //通过GetVolumeInformation获取
             var diskID = GetdiskID();
-            Console.WriteLine("GetVolumeInformation C={diskID}");
-            Console.WriteLine(diskID);
+
+            richTextBox1.Text += "取得 : " + diskID + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //获取进程所在盘符序列号
 
             CmdResult result;
-            //获取进程所在盘符序列号
             result = CmdExecute(new string[] { "vol" });
-            Console.WriteLine("Output={result.OutputData}");
-            Console.WriteLine(result.OutputData);
+            richTextBox1.Text += "取得 : " + result.OutputData + "\n";
 
-            Console.WriteLine("Error={result.ErrorData}");
-            Console.WriteLine(result.ErrorData);
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //获取c盘序列号
             result = CmdExecute(new string[] { "c:", "vol" });
-            Console.WriteLine("Output={result.OutputData}");
-            Console.WriteLine(result.OutputData);
+            richTextBox1.Text += "取得 : " + result.OutputData + "\n";
 
-            Console.WriteLine("Error={result.ErrorData}");
-            Console.WriteLine(result.ErrorData);
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //获取d盘序列号
             result = CmdExecute(new string[] { "d:", "vol" });
-            Console.WriteLine("Output={result.OutputData}");
-            Console.WriteLine(result.OutputData);
+            richTextBox1.Text += "取得 : " + result.OutputData + "\n";
 
-            Console.WriteLine("Error={result.ErrorData}");
-            Console.WriteLine(result.ErrorData);
-
-            Console.WriteLine("回车退出程序");
-            Console.ReadLine();
-
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
         }
-
 
         /// <summary>
         /// GetVolumeInformation
@@ -150,7 +142,7 @@ namespace vcs_DriveInfo3
         /// 获取硬盘ID
         /// </summary>
         /// <returns></returns>
-        public static string GetdiskID()
+        public string GetdiskID()
         {
 
             const int MAX_FILENAME_LEN = 256;
@@ -260,6 +252,7 @@ namespace vcs_DriveInfo3
             public string ErrorData { get; set; }
         }
 
+        //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -383,12 +376,7 @@ namespace vcs_DriveInfo3
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
 

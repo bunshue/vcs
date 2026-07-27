@@ -174,37 +174,32 @@ namespace vcs_Draw6_String4
         int cnt = 0;
         void save_picturebox_to_image()
         {
-            using (Bitmap bmp = new Bitmap(this.pictureBox1.Width, this.pictureBox1.Height))
-            {
-                using (Graphics g = Graphics.FromImage(bmp))
-                {
-                    //public void CopyFromScreen(int sourceX, int sourceY, int destinationX, int destinationY, Size blockRegionSize);
-                    //g.CopyFromScreen(this.pictureBox1.Location, new Point(0, 0), new Size(this.pictureBox1.Width, this.pictureBox1.Height));
+            Bitmap bmp = new Bitmap(this.pictureBox1.Width, this.pictureBox1.Height);
+            Graphics g = Graphics.FromImage(bmp);
+            //public void CopyFromScreen(int sourceX, int sourceY, int destinationX, int destinationY, Size blockRegionSize);
+            //g.CopyFromScreen(this.pictureBox1.Location, new Point(0, 0), new Size(this.pictureBox1.Width, this.pictureBox1.Height));
 
-                    int x_st = 5 + 3;
-                    int y_st = 10 + 5 + 5 + 5 + 5;
-                    int W = pictureBox1.Width + x_st;
-                    int H = pictureBox1.Height + y_st;
-                    g.CopyFromScreen(this.Location.X + pictureBox1.Location.X + (int)x_st, this.Location.Y + pictureBox1.Location.Y + (int)y_st, 0, 0, new Size(W, H));
+            int x_st = 5 + 3;
+            int y_st = 10 + 5 + 5 + 5 + 5;
+            int W = pictureBox1.Width + x_st;
+            int H = pictureBox1.Height + y_st;
+            g.CopyFromScreen(this.Location.X + pictureBox1.Location.X + (int)x_st, this.Location.Y + pictureBox1.Location.Y + (int)y_st, 0, 0, new Size(W, H));
 
-                    //richTextBox1.Text += "W = " + this.Width.ToString() + "\n";
-                    //richTextBox1.Text += "H = " + this.Height.ToString() + "\n";
-                    IntPtr dc1 = g.GetHdc();
-                    g.ReleaseHdc(dc1);
-                }
+            //richTextBox1.Text += "W = " + this.Width.ToString() + "\n";
+            //richTextBox1.Text += "H = " + this.Height.ToString() + "\n";
 
-                string filename = Application.StartupPath + "\\pngfiles\\png_" + cnt.ToString("D4") + ".png";
+            string filename = Application.StartupPath + "\\pngfiles\\png_" + cnt.ToString("D4") + ".png";
 
-                bmp.Save(filename, ImageFormat.Png);
+            bmp.Save(filename, ImageFormat.Png);
 
-                //存成jpg檔
-                //String filename = Application.StartupPath + "\\picture\\image_this_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
-                //myImage.Save(filename, ImageFormat.Jpeg);
-                richTextBox1.Text += "本程式截圖，存檔檔名：" + filename + "\n";
-                cnt++;
-            }
+            //存成jpg檔
+            //String filename = Application.StartupPath + "\\picture\\image_this_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            //myImage.Save(filename, ImageFormat.Jpeg);
+            richTextBox1.Text += "本程式截圖，存檔檔名：" + filename + "\n";
+            cnt++;
         }
 
+        //6060
 
         private void button1_Click(object sender, EventArgs e)
         {

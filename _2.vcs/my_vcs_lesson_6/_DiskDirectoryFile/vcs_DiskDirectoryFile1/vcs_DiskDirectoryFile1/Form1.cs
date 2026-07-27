@@ -230,6 +230,8 @@ namespace vcs_DiskDirectoryFile1
             message += "\n";
         }
 
+        //6060
+
         private void bt_file00_Click(object sender, EventArgs e)
         {
             /*
@@ -241,7 +243,7 @@ namespace vcs_DiskDirectoryFile1
             File.Delete()
             File.Open()
             File.OpenRead()
-            File.ReadAllText()
+            File.ReadAllText()  // 將檔案讀取為字串
             File.WriteAllText()
             File.AppendAllText()
 
@@ -2093,27 +2095,21 @@ StreamWriter sw;
 string filename = "tmp_aaaa.txt";
 FileInfo fi = new FileInfo(filename);
 
-Console.Write("請選擇功能->1.寫入  2.附加   其他.離開：");
+1.寫入
+sw = fi.CreateText();  //開啟新檔
+input = "寫入AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+//將輸入的資料覆蓋原檔並重新寫入
+sw.WriteLine(input);
+sw.Flush();
+sw.Close();
 
-sel = "1";
-if (sel == "1")
-{
-    sw = fi.CreateText();  //開啟新檔
-    input = "寫入AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
-    //將輸入的資料覆蓋原檔並重新寫入
-    sw.WriteLine(input);
-    sw.Flush();
-    sw.Close();
-}
-else if (sel == "2")
-{
-    sw = fi.AppendText();   //開啟舊檔
-    input = "附加AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
-    //將輸入的資料附加到資料檔的最後
-    sw.WriteLine(input);
-    sw.Flush();
-    sw.Close();
-}
+2.附加 
+sw = fi.AppendText();   //開啟舊檔
+input = "附加AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+//將輸入的資料附加到資料檔的最後
+sw.WriteLine(input);
+sw.Flush();
+sw.Close();
 
 sr = fi.OpenText();  //以唯讀模式開檔
 Console.WriteLine("資料檔內容如下：");
@@ -2123,26 +2119,14 @@ Console.WriteLine("================================");
 
 //------------------------------------------------------------  # 60個
 
-
 在 C# 中使用 StreamReader.ReadToEnd() 方法將檔案讀取為字串
-StreamReader fileReader = new StreamReader(@"D:\File\file.txt");
-string text = fileReader.ReadToEnd();
+StreamReader sr = new StreamReader(@"D:\File\file.txt");
+string text = sr.ReadToEnd();
 Console.WriteLine(text);			
 
 //------------------------------------------------------------  # 60個
 
 string filename = @"D:\______test_files\_case1\pic1.jpg";
-FileStream fs = File.OpenRead(filename); //OpenRead[二進位讀檔]
-int filelength = 0;
-filelength = (int)fs.Length; //獲得檔長度
-Byte[] image = new Byte[filelength]; //建立一個位元組陣列
-fs.Read(image, 0, filelength); //按位元組流讀取
-System.Drawing.Image result = System.Drawing.Image.FromStream(fs);
-fs.Close();
-
-//pictureBox1.Image = (Image)image;
-
-//------------------------------------------------------------  # 60個
 
 圖片檔讀取：非鎖定檔方法 [Image.FromFile 釋放]
 
@@ -2155,6 +2139,8 @@ Byte[] image = new Byte[filelength]; //建立一個位元組陣列
 fs.Read(image, 0, filelength); //按位元組流讀取
 System.Drawing.Image result = System.Drawing.Image.FromStream(fs);
 fs.Close();
+
+//pictureBox1.Image = (Image)image;
 
 //------------------------------------------------------------  # 60個
 
@@ -2185,16 +2171,9 @@ filename = @"_tmp_aaaa.txt";
 String tagPath = filename + "tmp";
 FileInfo fi = new FileInfo(filename);
 
-try
-{
-    //以CopyTo方法複製檔案
-    fi.CopyTo(tagPath);
-    richTextBox1.Text += filename + " 已複製";
-}
-catch (Exception ex)
-{
-    MessageBox.Show(ex.Message);
-}
+//以CopyTo方法複製檔案
+fi.CopyTo(tagPath);
+richTextBox1.Text += filename + " 已複製";
 
 //------------------------------------------------------------  # 60個
 
@@ -2209,19 +2188,16 @@ fi.Rename("test2.txt");
 
 //------------------------------------------------------------  # 60個
 
-
 待測
 //File.AppendAllText("E:\\Time\\新建文檔夾 (2)" + "/" + strname, DateTime.Now+"\n");
 
 //------------------------------------------------------------  # 60個
 
 使用 File.ReadAllText() 方法將檔案讀取為字串
+string all_text = File.ReadAllText(filename);
 
-textBox1.Text = File.ReadAllText(@"D:\鹿柴.txt");
 File.WriteAllText(@"setting.txt", folderPath);
 
-string all_text = File.ReadAllText(filename);
-string all_text = File.ReadAllText(@"D:\File\file.txt");
 
 */
 
