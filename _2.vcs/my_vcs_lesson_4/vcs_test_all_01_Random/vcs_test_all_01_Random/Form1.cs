@@ -52,6 +52,7 @@ namespace vcs_test_all_01_Random
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox4.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             groupBox3.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button0.Location = new Point(x_st + dx * 0+10, y_st + dy * 10+30);
 
             dx = 190 + 10;
             y_st = 20;
@@ -250,7 +251,7 @@ namespace vcs_test_all_01_Random
             }
 
             //Random初始化+種子
-            Random rand = new Random(_RandomSeed++);
+            Random rand = new Random(_RandomSeed++);  // 使用亂數種子
             return rand.Next(0, 1000);
         }
 
@@ -418,7 +419,7 @@ ASP.Net實現中文漢字驗證碼
                 string str_r1 = rBase[r1].Trim();
 
                 //區位碼第2位   
-                rnd = new Random(r1 * unchecked((int)DateTime.Now.Ticks) + i);//更換隨機數發生器的  種子避免產生重復值   
+                rnd = new Random(r1 * unchecked((int)DateTime.Now.Ticks) + i);  // 使用亂數種子//更換隨機數發生器的  種子避免產生重復值   
                 int r2;
                 if (r1 == 13)
                 {
@@ -431,12 +432,12 @@ ASP.Net實現中文漢字驗證碼
                 string str_r2 = rBase[r2].Trim();
 
                 //區位碼第3位   
-                rnd = new Random(r2 * unchecked((int)DateTime.Now.Ticks) + i);
+                rnd = new Random(r2 * unchecked((int)DateTime.Now.Ticks) + i);  // 使用亂數種子
                 int r3 = rnd.Next(10, 16);
                 string str_r3 = rBase[r3].Trim();
 
                 //區位碼第4位   
-                rnd = new Random(r3 * unchecked((int)DateTime.Now.Ticks) + i);
+                rnd = new Random(r3 * unchecked((int)DateTime.Now.Ticks) + i);  // 使用亂數種子
                 int r4;
                 if (r3 == 10)
                 {
@@ -464,13 +465,13 @@ ASP.Net實現中文漢字驗證碼
             return bytes;
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         /* 
-此函数在汉字编码范围内随机创建含两个元素的十六进制字节数组，每个字节数组代表一个汉字，并将 
-四个字节数组存储在object数组中。 
-参数：strlength，代表需要产生的汉字个数 
-*/
+        此函数在汉字编码范围内随机创建含两个元素的十六进制字节数组，每个字节数组代表一个汉字，并将 
+        四个字节数组存储在object数组中。 
+        参数：strlength，代表需要产生的汉字个数 
+        */
         public static object[] CreateCode20(int strlength)
         {
             //定义一个字符串数组储存汉字编码的组成元素 
@@ -489,7 +490,7 @@ ASP.Net實現中文漢字驗證碼
                 int r1 = rnd.Next(11, 14);
                 string str_r1 = r[r1].Trim();
                 //区位码第2位 
-                rnd = new Random(r1 * unchecked((int)DateTime.Now.Ticks) + i);//更换随机数发生器的种子避免产生重复值 
+                rnd = new Random(r1 * unchecked((int)DateTime.Now.Ticks) + i);  // 使用亂數種子//更换随机数发生器的种子避免产生重复值 
                 int r2;
                 if (r1 == 13)
                     r2 = rnd.Next(0, 7);
@@ -497,11 +498,11 @@ ASP.Net實現中文漢字驗證碼
                     r2 = rnd.Next(0, 16);
                 string str_r2 = r[r2].Trim();
                 //区位码第3位 
-                rnd = new Random(r2 * unchecked((int)DateTime.Now.Ticks) + i);
+                rnd = new Random(r2 * unchecked((int)DateTime.Now.Ticks) + i);  // 使用亂數種子
                 int r3 = rnd.Next(10, 16);
                 string str_r3 = r[r3].Trim();
                 //区位码第4位 
-                rnd = new Random(r3 * unchecked((int)DateTime.Now.Ticks) + i);
+                rnd = new Random(r3 * unchecked((int)DateTime.Now.Ticks) + i);  // 使用亂數種子
                 int r4;
                 if (r3 == 10)
                 {
@@ -536,7 +537,7 @@ ASP.Net實現中文漢字驗證碼
             string strCode = GetRandomText21(nLen);
             richTextBox1.Text += "取得 : " + strCode + "\n";
 
-            //6060
+            //------------------------------------------------------------  # 60個
 
             //获取GB2312编码页（表） 
             Encoding gb = Encoding.GetEncoding("gb2312");
@@ -813,8 +814,10 @@ ASP.Net實現中文漢字驗證碼
         //------------------------------------------------------------  # 60個
 
         // 隨機數生成器
+
         //Random初始化+種子
-        Random rand = new Random(unchecked((int)DateTime.Now.Ticks));
+        Random rand = new Random(unchecked((int)DateTime.Now.Ticks));  // 使用亂數種子
+
         // 英文與數字串
         string EnglishOrNumChars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
@@ -1205,17 +1208,17 @@ ASP.Net實現中文漢字驗證碼
         public static Color GetRandomColor5()
         {
             //Random初始化+種子
-            Random rand1 = new Random((int)DateTime.Now.Ticks);
+            Random rand1 = new Random((int)DateTime.Now.Ticks);  // 使用亂數種子
 
             System.Threading.Thread.Sleep(300);
 
             //Random初始化+種子
-            Random rand2 = new Random((int)DateTime.Now.Ticks);
+            Random rand2 = new Random((int)DateTime.Now.Ticks);  // 使用亂數種子
 
             System.Threading.Thread.Sleep(300);
 
             //Random初始化+種子
-            Random rand3 = new Random((int)DateTime.Now.Ticks);
+            Random rand3 = new Random((int)DateTime.Now.Ticks);  // 使用亂數種子
 
             int R = rand1.Next(256);
             int G = rand2.Next(256);
@@ -1508,7 +1511,7 @@ ASP.Net實現中文漢字驗證碼
 
             string chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
             //Random初始化+種子
-            Random randrom = new Random((int)DateTime.Now.Ticks);
+            Random randrom = new Random((int)DateTime.Now.Ticks);  // 使用亂數種子
             string filename = "tmp_pwd.txt";
 
             for (int j = 0; j < 1000; j++)
@@ -1623,7 +1626,8 @@ ASP.Net實現中文漢字驗證碼
         }
 
         //Random初始化+種子
-        Random real_random = new Random(~unchecked((int)DateTime.Now.Ticks));
+        Random real_random = new Random(~unchecked((int)DateTime.Now.Ticks));  // 使用亂數種子
+
         private string CreateAndCheckCode(Random random, int length) // code 激活碼前綴
         {
             //char[] Pattern = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
@@ -1671,7 +1675,7 @@ ASP.Net實現中文漢字驗證碼
 
                 //區位碼第2位
                 //Random初始化+種子
-                rand = new Random(r1 * unchecked((int)DateTime.Now.Ticks) + i);//更換隨機數發生器的種子避免產生重復值
+                rand = new Random(r1 * unchecked((int)DateTime.Now.Ticks) + i);  // 使用亂數種子//更換隨機數發生器的種子避免產生重復值
                 int r2;
                 if (r1 == 13)
                 {
@@ -1685,13 +1689,13 @@ ASP.Net實現中文漢字驗證碼
 
                 //區位碼第3位
                 //Random初始化+種子
-                rand = new Random(r2 * unchecked((int)DateTime.Now.Ticks) + i);
+                rand = new Random(r2 * unchecked((int)DateTime.Now.Ticks) + i);  // 使用亂數種子
                 int r3 = rand.Next(10, 16);
                 string str_r3 = r[r3].Trim();
 
                 //區位碼第4位
                 //Random初始化+種子
-                rand = new Random(r3 * unchecked((int)DateTime.Now.Ticks) + i);
+                rand = new Random(r3 * unchecked((int)DateTime.Now.Ticks) + i);  // 使用亂數種子
                 int r4;
                 if (r3 == 10)
                 {
@@ -1784,7 +1788,7 @@ ASP.Net實現中文漢字驗證碼
                 string str_r1 = r[r1].Trim();
                 //區位碼第2位
                 //Random初始化+種子
-                rand = new Random(r1 * unchecked((int)DateTime.Now.Ticks) + i);//更換隨機數發生器的種子避免產生重復值
+                rand = new Random(r1 * unchecked((int)DateTime.Now.Ticks) + i);  // 使用亂數種子//更換隨機數發生器的種子避免產生重復值
                 int r2;
                 if (r1 == 13)
                 {
@@ -1797,12 +1801,12 @@ ASP.Net實現中文漢字驗證碼
                 string str_r2 = r[r2].Trim();
                 //區位碼第3位
                 //Random初始化+種子
-                rand = new Random(r2 * unchecked((int)DateTime.Now.Ticks) + i);
+                rand = new Random(r2 * unchecked((int)DateTime.Now.Ticks) + i);  // 使用亂數種子
                 int r3 = rand.Next(10, 16);
                 string str_r3 = r[r3].Trim();
                 //區位碼第4位
                 //Random初始化+種子
-                rand = new Random(r3 * unchecked((int)DateTime.Now.Ticks) + i);
+                rand = new Random(r3 * unchecked((int)DateTime.Now.Ticks) + i);  // 使用亂數種子
                 int r4;
                 if (r3 == 10)
                 {
@@ -1891,8 +1895,10 @@ ASP.Net實現中文漢字驗證碼
                 string str_r1 = rBase[r1].Trim();
 
                 //區位碼第2位
+
                 //Random初始化+種子
-                rand = new Random(r1 * unchecked((int)DateTime.Now.Ticks) + i);//更換隨機數發生器的種子避免產生重復值
+                rand = new Random(r1 * unchecked((int)DateTime.Now.Ticks) + i);  // 使用亂數種子//更換隨機數發生器的種子避免產生重復值
+
                 int r2;
                 if (r1 == 13)
                 {
@@ -1906,13 +1912,15 @@ ASP.Net實現中文漢字驗證碼
 
                 //區位碼第3位
                 //Random初始化+種子
-                rand = new Random(r2 * unchecked((int)DateTime.Now.Ticks) + i);
+                rand = new Random(r2 * unchecked((int)DateTime.Now.Ticks) + i);  // 使用亂數種子
+
                 int r3 = rand.Next(10, 16);
                 string str_r3 = rBase[r3].Trim();
 
                 //區位碼第4位
                 //Random初始化+種子
-                rand = new Random(r3 * unchecked((int)DateTime.Now.Ticks) + i);
+                rand = new Random(r3 * unchecked((int)DateTime.Now.Ticks) + i);  // 使用亂數種子
+
                 int r4;
                 if (r3 == 10)
                 {
@@ -2055,6 +2063,16 @@ ASP.Net實現中文漢字驗證碼
         //--- RandomText11 --- SP
 
         //RandomText SP
+
+        //------------------------------------------------------------  # 60個
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
     }
 
     class Randomizer
@@ -2202,11 +2220,6 @@ ASP.Net實現中文漢字驗證碼
 //------------------------------  # 30個
 
 /*
-
-//使用 Random 方法產生不重複亂數 
-//Random初始化+種子 //取得非常random的數字
-Random rd = new Random((int)DateTime.Now.Ticks);
-
         public static string GetRandomString2(int length)
         {
             var str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -2218,8 +2231,5 @@ Random rd = new Random((int)DateTime.Now.Ticks);
             }
             return builder.ToString();
         }
-
-
 */
-
 

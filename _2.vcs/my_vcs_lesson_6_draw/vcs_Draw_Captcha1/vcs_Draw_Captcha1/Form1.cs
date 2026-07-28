@@ -1641,7 +1641,7 @@ namespace vcs_Draw_Captcha1
             return sb.ToString();
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -1769,7 +1769,7 @@ namespace vcs_Draw_Captcha1
             captcha_text = GetRandomCode(length);
             richTextBox1.Text += "17取得 : " + captcha_text + "\n";
 
-            //6060
+            //------------------------------------------------------------  # 60個
 
             //亂數產生驗證答案
             //從已知幾個元素中任意選出幾個

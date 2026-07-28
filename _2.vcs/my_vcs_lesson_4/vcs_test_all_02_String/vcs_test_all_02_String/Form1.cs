@@ -1304,7 +1304,6 @@ namespace vcs_test_all_02_String
 //------------------------------  # 30個
 
 /*
-//------------------------------------------------------------  # 60個
 
 C# 提供了許多方法給string使用
 
@@ -1356,5 +1355,12 @@ Console.WriteLine(x[4]); //o
 
 
 */
+
+
+
+//sb.Append((md5Hash[i]).ToString("X2", System.Globalization.CultureInfo.InvariantCulture));  // 轉2位的16進制字串
+//                e.Graphics.DrawString(fahrenheit.ToString("0"), font, Brushes.Black, x1, y, sf);
+
+
 
 

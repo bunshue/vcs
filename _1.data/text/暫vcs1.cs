@@ -1,15 +1,118 @@
 ﻿
+//------------------------------------------------------------  # 60個
 
-
-厲害的random
-        /// 全局隨機數生成器
-        private Random rand;
-            rand = new Random(unchecked((int)DateTime.Now.Ticks));
+GetPointBounds
 
 
 
+        // Find the bounding rectangle for an array of points.
+        private void GetPointBounds(PointF[] points, out float xmin, out float xmax, out float ymin, out float ymax)
+        {
+            xmin = points[0].X;
+            xmax = xmin;
+            ymin = points[0].Y;
+            ymax = ymin;
+            foreach (PointF point in points)
+            {
+                if (xmin > point.X)
+                {
+                    xmin = point.X;
+                }
+                if (xmax < point.X)
+                {
+                    xmax = point.X;
+                }
+                if (ymin > point.Y)
+                {
+                    ymin = point.Y;
+                }
+                if (ymax < point.Y)
+                {
+                    ymax = point.Y;
+                }
+            }
+        }
 
 
+
+        // Find the bounding rectangle for an array of points.
+        private void GetPointBounds(PointF[] points, out float xmin, out float xmax, out float ymin, out float ymax)
+        {
+            xmin = points[0].X;
+            xmax = xmin;
+            ymin = points[0].Y;
+            ymax = ymin;
+            foreach (PointF point in points)
+            {
+                if (xmin > point.X)
+                {
+                    xmin = point.X;
+                }
+                if (xmax < point.X)
+                {
+                    xmax = point.X;
+                }
+                if (ymin > point.Y)
+                {
+                    ymin = point.Y;
+                }
+                if (ymax < point.Y)
+                {
+                    ymax = point.Y;
+                }
+            }
+        }
+
+
+
+
+
+
+        // Find the bounding rectangle for an array of points.
+        private void GetPointBounds(PointF[] points, out float xmin, out float xmax, out float ymin, out float ymax)
+        {
+            xmin = points[0].X;
+            xmax = xmin;
+            ymin = points[0].Y;
+            ymax = ymin;
+            foreach (PointF point in points)
+            {
+                if (xmin > point.X)
+                {
+                    xmin = point.X;
+                }
+                if (xmax < point.X)
+                {
+                    xmax = point.X;
+                }
+                if (ymin > point.Y)
+                {
+                    ymin = point.Y;
+                }
+                if (ymax < point.Y)
+                {
+                    ymax = point.Y;
+                }
+            }
+        }
+
+
+
+        /*
+        static GraphicsPath RoundedRect(Rectangle bounds, int radius)
+        {
+            GraphicsPath path = new GraphicsPath();
+            int d = radius * 2;
+            path.AddArc(bounds.X, bounds.Y, d, d, 180, 90);
+            path.AddArc(bounds.Right - d, bounds.Y, d, d, 270, 90);
+            path.AddArc(bounds.Right - d, bounds.Bottom - d, d, d, 0, 90);
+            path.AddArc(bounds.X, bounds.Bottom - d, d, d, 90, 90);
+            path.CloseFigure();
+            return path;
+        }
+        */
+
+//------------------------------------------------------------  # 60個
 cccc
 HScrollBar / VScrollBar
             vsbHeight.LargeChange = 1;    //設定vsbHeight的快動值 = 1
@@ -46,23 +149,14 @@ lstJob.SelectedIndex = JobIndex;
                 //richTextBox1.SelectionBackColor = colorDialog1.Color;
             }
 
-6060
-
+//------------------------------------------------------------  # 60個
 
 程式碼片段（Code Snippet）
 
 //------------------------------------------------------------  # 60個
 
-
-
 改變Bitmap大小
 Bitmap bitmap2 = new Bitmap(bitmap1, 300, 200);  //改變大小
-
-//------------------------------------------------------------  # 60個
-
-ssss
-//                e.Graphics.DrawString(fahrenheit.ToString("0"), font, Brushes.Black, x1, y, sf);
-
 
 //------------------------------------------------------------  # 60個
 
@@ -947,58 +1041,6 @@ PixelFormat.Format48bppRgb 或 PixelFormat.Format64bppArgb:
 
 //------------------------------------------------------------  # 60個
 
-	axWindowsMediaPlayer1.Ctlcontrols.playItem(playListDict[path]);		playItem ??
-
-指名播放某項
-	axWindowsMediaPlayer1.currentMedia = axWindowsMediaPlayer1.currentPlaylist.Item[int.Parse(lvDetail.SelectedItems[0].Text) - 1];
-
-	IWMPMedia currentMedia = axWindowsMediaPlayer1.currentMedia;
-
-        public int index = 1;
-        public int listIndex;
-        private bool first_in = true;   //是否第一次進入歌詞區域
-        private bool showLrc = true;//預設顯示歌詞
-        private int index = 0;//播放的圖片下標
-        private List<string> imageList;//播放的圖片
-        private Point closePoint;//關閉按鈕的位置
-        private Size dfSize;//最初的位置
-
-        //聲音
-        SoundPlayer player = new SoundPlayer();
-        Dictionary<string, string> dic = new Dictionary<string, string>();
-
-        //播放列表
-        Dictionary<string, IWMPMedia> playListDict = new Dictionary<string, IWMPMedia>();
-
-	List<string> al = new List<string>(); //當前歌詞時間表     
-
-        IWMPMedia media;
-
-        /// <summary>
-        ///  刪除選中的檔案 並停止播放
-        private void skinButton2_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ListView.SelectedIndexCollection indexes = this.lvDetail.SelectedIndices;
-                if (indexes.Count > 0)
-                {
-                    int index = indexes[0];
-                    string path = this.lvDetail.Items[index].SubItems[4].Text;
-					
-                    IWMPPlaylist iWMPPlaylist = axWindowsMediaPlayer1.currentPlaylist;
-                    //先移除播放列表 再移除listview列表
-                    axWindowsMediaPlayer1.currentPlaylist.removeItem(playListDict[path]);
-					
-                    playListDict.Remove(path);
-                    this.lvDetail.Items[index].Remove();
-                    dic.Remove(path);
-                }
-            }
-        }
-
-//------------------------------------------------------------  # 60個
-
 var urlFormat = @"
 
 http://maps.google.com/maps/api/staticmap?center={0},           
@@ -1841,17 +1883,9 @@ Randomly任意位置顯示 及方向
 
 //------------------------------------------------------------  # 60個
 
-車諾比核事故
-
-，是烏克蘭的一座已經停止使用的核電廠；1986年4月26日四號機因核事故而停止使用，從2015年4月開始1至3號機組已陸續進入退役狀態[1]。而1986年電站的四號機組發生爆炸，引發車諾比核事故。 
-
-//------------------------------------------------------------  # 60個
-
 將一個資料夾中的所有圖片檔案撈出來編號 每隔1分鐘更換一張桌面底圖 寫上時間 循環播放
 
 記住上次程式關閉時的中心位置 及顯示圖片狀態 給下次程式啟動實用
-
-
 
 //要將視頻升級到1080p，請輸入：
 //ffmpeg -i input.mp4 -vf scale = 1920x1080：flags = lanczos output_1080p.mp4
@@ -1861,10 +1895,7 @@ Randomly任意位置顯示 及方向
 
 pie.mp4
 
-
 ffmpeg -i pie.mp4 -vf scale = 1920x1080：flags = lanczos pie222.mp4
-
-
 
 C:\______test_files\_exe\ffmpeg>
 C:\______test_files\_exe\ffmpeg>ffmpeg.exe -i pie.mp4 -vf scale=1920x1080 pie222.mp4
@@ -1969,11 +2000,9 @@ ContextMenuStrip 選取項目 按右鍵 編輯DropDownItems(E)
 
 //------------------------------------------------------------  # 60個
 
-        private DrawingMode drawingMode = DrawingMode.None;
-
+private DrawingMode drawingMode = DrawingMode.None;
 
 drawingMode = DrawingMode.None;
-
 
 namespace GMapDrawTools
 {
@@ -2010,11 +2039,6 @@ EMGU讀取圖片檔案
 string filename = @"C:\______test_files\ims01.bmp";
 Image<Bgr, Byte> image = new Image<Bgr, byte>(filename);
             
-//------------------------------------------------------------  # 60個
-
-高德地圖
-https://www.amap.com/
-
 //------------------------------------------------------------  # 60個
 
 https://www.cnblogs.com/wpwen/archive/2009/01/01/1366719.html
@@ -2230,7 +2254,6 @@ File: Camera.cs Project: alienwow/CSharpProjects
 
 webBrowser1 空白頁
 this.webBrowser1.Navigate("about:blank");
-
 
 <a> 超連結 如何取得文字 :
 
@@ -2463,7 +2486,6 @@ vcs
 Form1關閉Form2   f2.Close();
 Form1隱藏Form2   f2.Hide();
 
-
 強制回應表單	Form2 f2 = new Form2();	f2.ShowDialog();
 可以取得回應
 if(f3.DialogResult == DialogREsult.OK)
@@ -2505,7 +2527,6 @@ C: 從繼承自圖像的任何對象創建Graphics對象
 
 覆寫就是子類為了實現某一個功能而重復定義父類的某個方法，覆寫方法比重載方法要更加嚴格：只有虛方法和抽象方法才可以被覆寫，同時覆寫時必須滿足一下幾個條件：相同的方法名字，參數列表和返回值類型，缺一不可。
 
-
 　　18、把字符轉為數字，查代碼點，注意是單引號。
 
 　　(int)'字符'
@@ -2544,42 +2565,6 @@ abstract用來修飾抽象類，表示該類只能作為父類被用於繼承，
 
 sealed用來修飾類為密封類，阻止該類被繼承。同時對一個類作abstract和sealed的修飾是沒有意義的，也是被禁止的。
 
-//------------------------------------------------------------  # 60個
-
-//C# 播放聲音﻿﻿
-
-2.使用System.Media.SoundPlayer播放.wav格式聲音
-
-	SoundPlayer player = new SoundPlayer();
-	player.SoundLocation = "sounds/WallHit.wav";
-	player.Load(); //同步加載聲音
-	player.Play(); //啟用新線程播放
-	//player.PlayLooping(); //循環播放模式
-	//player.PlaySync(); //UI線程播放
-
-3.利用Windows Media Player
-
-	加載COM組件:ToolBox->Choose Items->COM Components->Windows Media Player
-	把Windows Media Player控件拖放到Winform窗體中，把axWindowsMediaPlayer1中URL屬性設置為MP3或是AVI的文件路徑。
-
-4.MCI Command String多媒體設備的程序接口
-
-	using System.Runtime.InteropServices;
-	
-	public static uint SND_ASYNC = 0x0001;
-	public static uint SND_FILENAME = 0x00020000;
-	[DllImport("winmm.dll")]
-	public static extern uint mciSendString(string lpstrCommand,
-	string lpstrReturnString, uint uReturnLength, uint hWndCallback);
-	public void Play()
-	{
-		mciSendString(@"close temp_alias", null, 0, 0);
-		mciSendString(@"open " "路徑.mp3"" alias temp_alias", null, 0, 0);
-		mciSendString("play temp_alias repeat", null, 0, 0);
-	}
-
-關於MCI Command String多媒體設備的程序接口的詳細資料，可以參看http://blog.csdn.net/psongchao/article/details/1487788
-        				
 //------------------------------------------------------------  # 60個
 
 先使用無符號字節數組存放數據庫對應的數據集中表的image類型字段的值。例如：
@@ -3441,232 +3426,6 @@ openGL
 
 //------------------------------------------------------------  # 60個
 
-
-//-----wmp----------------------------------------------------  # 60個        				
-
-//添加列表
-WC = new WMPLib.WindowsMediaPlayerClass();
-MC = WC.newMedia(str);
-this.axWindowsMediaPlayer1.currentPlaylist.appendItem(MC);
-richTextBox1.Text += "add " + str + "\n";
-
-C# WindowsMediaPlayer 的一些用法
-
-播放單首歌曲
-                player.URL = 
-
-添加多首歌曲到播放列表
-            IWMPPlaylist playList = player.playlistCollection.newPlaylist(); 
- (DataRow drItem = player.newMedia(drItem[].ToString()); 
-=
-
- 或者直接在當前列表上添加
- (DataRow drItem = player.newMedia(drItem[].ToString()); 
-
-設置播放器音量
- player.settings.volume=;
-
- 設置循環播放
-player.settings.setMode(, );
-
-設置隨機播放
-  player.settings.setMode(, );
-
-richTextBox1.Text += "測試使用WindowsMediaPlayerClass\n";
-WindowsMediaPlayerClass c;
-IWMPMedia m;
-
-c = new WindowsMediaPlayerClass();
-m = c.newMedia(mp3_filename);
-richTextBox1.Text += "歌手名:\t" + m.getItemInfo("Author") + "\n" + "歌  名:\t" + m.getItemInfo("Title") + "\n";
-
-getItemInfo Author Title
-
-// Store the current media object.
-var cm = Player.currentMedia;
-
-// Get the number of attributes for the current media. 
-var atCount = cm.attributeCount;
-
-// Loop through the attribute list.
-for(var i=0; i < atCount; i++){
-
-   // Print each attribute index and name.   
-   myText.value += "Attribute " + i +": ";
-   myText.value += cm.getAttributeName(i);
-   myText.value += "\n";
-}
-
-//------------------------------------------------------------  # 60個
-
-//C#中如何禁止WindowsMediaPlayer双击全屏显示
-
-private void AxWindowsMediaPlayer1_MouseDownEvent(object sender, AxWMPLib._WMPOCXEvents_MouseDownEvent e)
-{
-    if (axWindowsMediaPlayer1.fullScreen)
-        axWindowsMediaPlayer1.fullScreen = false;
-} 
-
-//------------------------------------------------------------  # 60個
-
-axWindowsMediaPlayer1
-
-uiMode	//播放器介面模式
-//Full, 有影像, 完整播放器介面
-axWindowsMediaPlayer1.uiMode = "full";
-
-//Mini, 有影像, 簡約播放器介面
-axWindowsMediaPlayer1.uiMode = "mini";
-
-//None, 有影像, 無播放器介面
-axWindowsMediaPlayer1.uiMode = "none";
-
-//Invisible, 無影像, 有無播放器介面
-axWindowsMediaPlayer1.uiMode = "invisible";
-
-
-在視頻播放之後,可以通過如下方式讀取源視頻的寬度和高度,然後設置其還原爲原始的大小.
-         private void ResizeOriginal()
-         {
-             int intWidth = axWindowsMediaPlayer1.currentMedia.imageSourceWidth;
-             int intHeight = axWindowsMediaPlayer1.currentMedia.imageSourceHeight;
-             axWindowsMediaPlayer1.Width = intWidth + 2;
-             axWindowsMediaPlayer1.Height = intHeight + 2;
-         }
-
-可能因爲媒體文件的打開需要一定時間，這裏等待媒體文件的打開
-
-顯示文件播放長度。
-
-則顯示結果很可能爲0，因此，這時候很可能獲取不到文件的播放時間長度，容易出錯。所以在利用的時候可以加一個timer控件：
-
-從WMP8開始就不支持mms/rtsp協議了，所用wmp.URL="mms://xxxx";是不行的了。點此處見詳情，而mms這個協議現在還在廣泛使用。鬱悶。因此，我們不能使用wmp來看網絡電視了。
-
-媒體播放器包括如下元素：
-Video Display Panel：視頻顯示面板；
-Video Border：視頻邊框；
-Closed Captioning Display Panel；字幕顯示面板；
-Track Bar；搜索欄；
-Control Bar with Audio and Position Controls：帶有聲音和位置控制的控制欄；
-Go To Bar：轉到欄；
-Display Panel：顯示面板；
-Status Bar：狀態欄；
-　　就是這麼幾個部分，網上有資料說控件提供方法控制它們顯示與否，但是我在sdk中並沒有找到它們。唯一可以粗略控制它們的就是uiMode屬性。它的取值前面有。
-
-
-　　七、像暴風有字幕相關信息的設置，wmp控件有這個功能嗎？
-　　當然有。就是AxWindowsMediaPlayer.closedCaption。它是IWMPClosedCaption的實例。
-
-label4.Text = axMediaPlayer1.Volume.ToString();    //音量
-axMediaPlayer1.FileName = @"mms://218.98.101.164/vod/jingwei.wma";//文件路徑
-axMediaPlayer1.Play(); //開始播放
-
-
-nResL = axRealAudio1.GetPosition(); //獲得當前影片 的播放進度
-label1.Text = axRealAudio1.GetTitle();   //獲得影片的標題
-label2.Text = "當前的帶寬: " + axRealAudio1.GetBandwidthCurrent() / 1024 + "KB";//當前影片的當前的帶寬              
-label3.Text = "連接的帶寬: " + axRealAudio1.GetConnectionBandwidth() / 1024 + "KB"; //當前的連接的帶寬
-
-AxWindowsMediaPlayer媒體文件主要方法屬性
-屬性/方法名︰ 說明︰ 
-[基本屬性]  
-URL:String; 指定媒體位置，本機或網絡地址 
-
-playState:integer; 播放狀態，1=停止，2=暫停，3=播放，6=正在緩沖，9=正在連接，10=準備就緒 
-enableContextMenu:Boolean; 啟用/禁用右鍵菜單 
-
-
-//播放器基本控製 
-
-Ctlcontrols.next; 下一曲 
-Ctlcontrols.previous; 上一曲 
-
-[settings] wmp.settings //播放器基本設置 
-settings.volume:integer; 音量，0-100 
-settings.autoStart:Boolean; 是否自動播放 
-settings.mute:Boolean; 是否靜音 
-settings.playCount:integer; 播放次數 
-
-[currentMedia] wmp.currentMedia //當前媒體屬性 
-currentMedia.duration:double; 媒體總長度 
-currentMedia.durationString:string; 媒體總長度，字符串格式。如“03:24” 
-currentMedia.getItemInfo(const string); 獲取當前媒體信息"Title"=媒體標題，"Author"=藝術家，"Copyright"=版權信息，"Description"=媒體內容描述， "Duration"=持續時間（秒），"FileSize"=文件大小，"FileType"=文件類型，"sourceURL"=原始地址 
-currentMedia.setItemInfo(const string); 通過屬性名設置媒體信息 
-currentMedia.name:string; 同 currentMedia.getItemInfo("Title") 
-
-[currentPlaylist] wmp.currentPlaylist //當前播放列表屬性 
-currentPlaylist.count:integer; 當前播放列表所包含媒體數 
-currentPlaylist.Item[integer]; 獲取或設置指定項目媒體信息，其子屬性同wmp.currentMedia 
-
-
-在視頻播放之後,可以通過如下方式讀取源視頻的寬度和高度,然後設置其還原為原始的大小.
-         private void ResizeOriginal()
-         {
-							             int intWidth = axWindowsMediaPlayer1.currentMedia.imageSourceWidth;
-							             int intHeight = axWindowsMediaPlayer1.currentMedia.imageSourceHeight;
-							             axWindowsMediaPlayer1.Width = intWidth + 2;
-							             axWindowsMediaPlayer1.Height = intHeight + 2;
-         }
-
-//------------------------------------------------------------  # 60個
-
-ffmpeg的用法
-
-//從開始分割600秒視頻命令如下：
-
-//從開始的第1分鐘擷取3分鐘影片出來
-ffmpeg.exe -ss 00:01:00 -i sample.mp4 -c copy -t 180 cut.mp4
-or
-ffmpeg.exe -i sample.mp4 -ss 00:01:00 -t 00:03:00 -acodec copy -vcodec copy cut.mp4
-
-//-y : 強制覆蓋檔案
-//-i : 要擷取的原始檔案
-//-ss : 起始時間
-//-t : 擷取長度, -t sec 或 -t hh:mm:ss
-//-acodec copy : 音訊編碼格式和來源檔案相同
-//-vcodec copy : 影像編碼格式和來源檔案相同
-
-//查看視頻文件的音視頻編解碼格式，視頻時長，比特率等，如下：
-ffmpeg.exe -i sample.mp4
-
-ffmpeg.exe -i xxx.mp4 -f mp3 -vn xxx.mp3并回車。
-參數解釋：-i表示input，-f表示format，-vn表示video not
-
-//多個mp3文件合并成一個mp3文件
-一種方法是連接到一起
-ffmpeg64.exe -i "concat:123.mp3|124.mp3" -acodec copy output.mp3
-解釋：-i代表輸入參數
-          contact:123.mp3|124.mp3代表著需要連接到一起的音頻文件
-           -acodec copy output.mp3 重新編碼并復制到新文件中
-另一種方法是混合到一起
-ffmpeg64.exe -i 124.mp3 -i 123.mp3 -filter_complex amix=inputs=2:duration=first:dropout_transition=2 -f mp3 remix.mp3
-解釋：-i代表輸入參數
-           -filter_complex ffmpeg濾鏡功能，非常強大，詳細請查看文檔
-           amix是混合多個音頻到單個音頻輸出
-           inputs=2代表是2個音頻文件，如果更多則代表對應數字
-           duration 確定最終輸出文件的長度
-               longest(最長)|shortest（最短）|first（第一個文件）
-            dropout_transition
-The transition time, in seconds, for volume renormalization when an input stream ends. The default value is 2 seconds.
-            -f mp3  輸出文件格式
-音頻文件截取指定時間部分
-ffmpeg64.exe -i 124.mp3 -vn -acodec copy -ss 00:00:00 -t 00:01:32 output.mp3
-解釋：-i代表輸入參數
-          -acodec copy output.mp3 重新編碼并復制到新文件中
-           -ss 開始截取的時間點
-           -t 截取音頻時間長度
-           
-音頻文件格式轉換
-ffmpeg64.exe -i null.ape -ar 44100 -ac 2 -ab 16k -vol 50 -f mp3 null.mp3
-解釋：-i代表輸入參數
-           -acodec aac（音頻編碼用AAC） 
-          -ar 設置音頻采樣頻率
-          -ac  設置音頻通道數
-          -ab 設定聲音比特率
-           -vol <百分比> 設定音量
-
-//------------------------------------------------------------  # 60個
-
 old 暫存一下
 
         private void button5_Click(object sender, EventArgs e)
@@ -3888,16 +3647,6 @@ this.tcResult.MouseWheel += new MouseEventHandler(tcResult_MouseWheel);
 
 //------------------------------------------------------------  # 60個
 
-windows media player
-// 播放歌曲
-            axWMP.URL = @"D:\Music\02.AVRIL LAVIGNE 酷到骨子裡 MY HAPPY ENDING.mp3";
-            // 設定重複播放
-            //axWMP.settings.setMode("loop", true);
-            // 設定隨機播放
-            //axWMP.settings.setMode("shuffle", true);
-            
-//------------------------------------------------------------  # 60個
-
 桌布存放位置 win7 romeo
 C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Themes\TranscodedWallpaper.jpg
 
@@ -4101,14 +3850,6 @@ http://crazycat1130.pixnet.net/blog/post/1345538-%E9%BB%9E%E9%99%A3%E5%9C%96%EF%
 [C#] List 的用法
 http://frank1025.pixnet.net/blog/post/347251643-%5Bc%23%5D-list
 
-C# axWindowsMediaPlayer制作播放器
-http://www.mamicode.com/info-detail-986551.html
-
-AxWindowsMediaPlayer媒体文件主要方法屬性
-https://blog.csdn.net/ivan_ljf/article/details/9774231
-
-//------------------------------------------------------------  # 60個
-
 AForge Webcam 錄影
 https://blog.csdn.net/m_buddy/article/details/62417912
 
@@ -4190,50 +3931,6 @@ AForge啟動webcam
 http://www.voidcn.com/article/p-kvujrudv-ru.html
 
 //------------------------------------------------------------  # 60個       
-
-vcs_WMP
-richTextBox1.Text += " 歌曲名称：" + axWindowsMediaPlayer1.currentMedia.getItemInfo("Title");
-
-mute & un-mute
-        private void pictureBox7_Click(object sender, EventArgs e)//静音
-        {
-            if (MM)
-            {
-                pictureBox7.Image = (Image)Properties.Resources.音量按钮变色;
-                axWindowsMediaPlayer1.settings.mute = true;
-                MM = false;
-            }
-            else
-            {
-                pictureBox7.Image = (Image)Properties.Resources.音量按钮;
-                axWindowsMediaPlayer1.settings.mute = false;
-                MM = true;
-            }
-        }
-
-
-vcs_WMP
-richTextBox1.Text += " 歌曲名称：" + axWindowsMediaPlayer1.currentMedia.getItemInfo("Title");
-
-mute & un-mute
-        private void pictureBox7_Click(object sender, EventArgs e)//静音
-        {
-            if (MM)
-            {
-                pictureBox7.Image = (Image)Properties.Resources.音量按钮变色;
-                axWindowsMediaPlayer1.settings.mute = true;
-                MM = false;
-            }
-            else
-            {
-                pictureBox7.Image = (Image)Properties.Resources.音量按钮;
-                axWindowsMediaPlayer1.settings.mute = false;
-                MM = true;
-            }
-        }
-
-
-
 
 string與String有何不同？
 
@@ -4456,32 +4153,6 @@ genre 		1 	Index in a list of genres, or 255
 
 看範例學C# 系列
 https://ithelp.ithome.com.tw/users/20044155/ironman/241
-
-//------------------------------------------------------------  # 60個
-
-wmp改變視窗大小
-https://blog.csdn.net/ivan_ljf/article/details/9774231
-axWindowsMediaPlayer1.DisplaySize　　　　　　　?置播放?象大小  
-　　　　1-MpDefaultSize　　　　　　　　　原始大小  
-　　　　2-MpHalfSize　　　　　　　　　　 原始大小的一半  
-　　　　3-MpDoubleSize　　　　　　　　　 原始大小的?倍  
-　　　　4-MpFullScreen　　　　　　　　　 全屏  
-　　　　5-MpOneSixteenthScreen　　　　　 屏幕大小的1/16  
-　　　　6-MpOneFourthScreen　　　　　　　屏幕大小的1/4  
-　　　　7-MpOneHalfScreen　　　　　　　　屏幕大小的1/2  
-
-axWindowsMediaPlayer1.settings.balance = 1; 伴唱
-axWindowsMediaPlayer1.settings.balance = -1;原唱
-
-windows media player
-在視頻播放之後,可以通過如下方式讀取源視頻的寬度和高度,然後設置其還原為原始的大小.
-         private void ResizeOriginal()
-         {
-             int intWidth = axWindowsMediaPlayer1.currentMedia.imageSourceWidth;
-             int intHeight = axWindowsMediaPlayer1.currentMedia.imageSourceHeight;
-             axWindowsMediaPlayer1.Width = intWidth + 2;
-             axWindowsMediaPlayer1.Height = intHeight + 2;
-         }
 
 //------------------------------------------------------------  # 60個
 
@@ -5442,6 +5113,7 @@ video.WriteFrame<Bgr, byte>(image); //將每張圖片製作成影片
 選擇項目/瀏覽/選 AForge.Controls.dll
 就會出現AForge相關工具
 
+//------------------------------------------------------------  # 60個
 
 怒鳥紅（Red，憤怒鳥）
 飛鏢黃（Chuck，衝刺鳥）
@@ -7122,10 +6794,7 @@ vcs目前似乎不能做到程式一啟動就停在系統列蟄伏
 
 vcs有無可能做到 降版本儲存專案?
 
-
 ----------------欲新增之vcs範例 vcs++ ST----------------
-
-
 
 vcs_MyPlayer3
 + pdf可以記錄多檔
