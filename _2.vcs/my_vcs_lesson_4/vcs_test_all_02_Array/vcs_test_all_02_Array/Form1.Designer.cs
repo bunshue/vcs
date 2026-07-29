@@ -50,8 +50,6 @@
             this.button0 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
-            this.tb_matrix = new System.Windows.Forms.TextBox();
-            this.rtb_matrix = new System.Windows.Forms.RichTextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.bt_object = new System.Windows.Forms.Button();
             this.numText8a = new System.Windows.Forms.TextBox();
@@ -62,8 +60,6 @@
             this.numText3a = new System.Windows.Forms.TextBox();
             this.numText2a = new System.Windows.Forms.TextBox();
             this.numText1a = new System.Windows.Forms.TextBox();
-            this.bt_parse1 = new System.Windows.Forms.Button();
-            this.bt_parse2 = new System.Windows.Forms.Button();
             this.button20 = new System.Windows.Forms.Button();
             this.button21 = new System.Windows.Forms.Button();
             this.button22 = new System.Windows.Forms.Button();
@@ -126,7 +122,6 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(200, 60);
             this.button4.TabIndex = 4;
-            this.button4.Text = "二維陣列 rank";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -137,7 +132,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(200, 60);
             this.button5.TabIndex = 5;
-            this.button5.Text = "陣列的維度";
+            this.button5.Text = "秩和維度的上下限";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -159,7 +154,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(200, 60);
             this.button7.TabIndex = 7;
-            this.button7.Text = "使用 GetBytes()將字串轉換為位元組陣列";
+            this.button7.Text = "把控件做成陣列";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -280,7 +275,6 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(200, 60);
             this.button18.TabIndex = 19;
-            this.button18.Text = "new";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -316,25 +310,6 @@
             this.button19.Text = "Array方法";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
-            // 
-            // tb_matrix
-            // 
-            this.tb_matrix.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_matrix.Location = new System.Drawing.Point(635, 5);
-            this.tb_matrix.Multiline = true;
-            this.tb_matrix.Name = "tb_matrix";
-            this.tb_matrix.Size = new System.Drawing.Size(100, 100);
-            this.tb_matrix.TabIndex = 60;
-            this.tb_matrix.Text = "0 1 2 3 4 5\r\n1 2 3 4 5 6\r\n2 3 4 5 6 7\r\n3 4 5 6 7 8\r\n4 5 6 7 8 9\r\n5 6 7 8 9 10";
-            // 
-            // rtb_matrix
-            // 
-            this.rtb_matrix.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rtb_matrix.Location = new System.Drawing.Point(755, 5);
-            this.rtb_matrix.Name = "rtb_matrix";
-            this.rtb_matrix.Size = new System.Drawing.Size(100, 100);
-            this.rtb_matrix.TabIndex = 61;
-            this.rtb_matrix.Text = "0 1 2 3 4 5\n1 2 3 4 5 6\n2 3 4 5 6 7\n3 4 5 6 7 8\n4 5 6 7 8 9\n5 6 7 8 9 10";
             // 
             // groupBox2
             // 
@@ -429,28 +404,6 @@
             this.numText1a.TabIndex = 9;
             this.numText1a.Text = "0";
             // 
-            // bt_parse1
-            // 
-            this.bt_parse1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_parse1.Location = new System.Drawing.Point(657, 33);
-            this.bt_parse1.Name = "bt_parse1";
-            this.bt_parse1.Size = new System.Drawing.Size(72, 36);
-            this.bt_parse1.TabIndex = 75;
-            this.bt_parse1.Text = "解讀";
-            this.bt_parse1.UseVisualStyleBackColor = true;
-            this.bt_parse1.Click += new System.EventHandler(this.bt_parse1_Click);
-            // 
-            // bt_parse2
-            // 
-            this.bt_parse2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_parse2.Location = new System.Drawing.Point(761, 34);
-            this.bt_parse2.Name = "bt_parse2";
-            this.bt_parse2.Size = new System.Drawing.Size(72, 36);
-            this.bt_parse2.TabIndex = 76;
-            this.bt_parse2.Text = "解讀";
-            this.bt_parse2.UseVisualStyleBackColor = true;
-            this.bt_parse2.Click += new System.EventHandler(this.bt_parse2_Click);
-            // 
             // button20
             // 
             this.button20.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -458,7 +411,6 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(200, 60);
             this.button20.TabIndex = 77;
-            this.button20.Text = "new";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
@@ -569,11 +521,7 @@
             this.Controls.Add(this.button22);
             this.Controls.Add(this.button21);
             this.Controls.Add(this.button20);
-            this.Controls.Add(this.bt_parse2);
-            this.Controls.Add(this.bt_parse1);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.rtb_matrix);
-            this.Controls.Add(this.tb_matrix);
             this.Controls.Add(this.button19);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button0);
@@ -602,7 +550,6 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -630,8 +577,6 @@
         private System.Windows.Forms.Button button0;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Button button19;
-        private System.Windows.Forms.TextBox tb_matrix;
-        private System.Windows.Forms.RichTextBox rtb_matrix;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox numText8a;
         private System.Windows.Forms.TextBox numText7a;
@@ -642,8 +587,6 @@
         private System.Windows.Forms.TextBox numText2a;
         private System.Windows.Forms.TextBox numText1a;
         private System.Windows.Forms.Button bt_object;
-        private System.Windows.Forms.Button bt_parse1;
-        private System.Windows.Forms.Button bt_parse2;
         private System.Windows.Forms.Button button20;
         private System.Windows.Forms.Button button21;
         private System.Windows.Forms.Button button22;

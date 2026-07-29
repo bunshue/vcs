@@ -110,6 +110,7 @@
             this.lb_random9 = new System.Windows.Forms.Label();
             this.lb_random8 = new System.Windows.Forms.Label();
             this.button0 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -912,15 +913,27 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(190, 60);
             this.button0.TabIndex = 131;
-            this.button0.Text = "測試隨機文字";
+            this.button0.Text = "測試隨機文字1";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button1.Location = new System.Drawing.Point(622, 642);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(190, 60);
+            this.button1.TabIndex = 132;
+            this.button1.Text = "測試隨機文字2";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(918, 721);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.button0);
             this.Controls.Add(this.lb_random19);
             this.Controls.Add(this.lb_random18);
@@ -1073,6 +1086,7 @@
         private System.Windows.Forms.Label lb_random9;
         private System.Windows.Forms.Label lb_random8;
         private System.Windows.Forms.Button button0;
+        private System.Windows.Forms.Button button1;
     }
 }
 

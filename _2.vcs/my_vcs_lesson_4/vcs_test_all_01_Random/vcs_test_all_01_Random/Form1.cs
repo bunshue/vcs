@@ -52,7 +52,8 @@ namespace vcs_test_all_01_Random
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox4.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             groupBox3.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button0.Location = new Point(x_st + dx * 0+10, y_st + dy * 10+30);
+            button0.Location = new Point(x_st + dx * 0 + 10, y_st + dy * 10 + 30);
+            button1.Location = new Point(x_st + dx * 0 + 10, y_st + dy * 11 + 30);
 
             dx = 190 + 10;
             y_st = 20;
@@ -2066,9 +2067,519 @@ ASP.Net實現中文漢字驗證碼
 
         //------------------------------------------------------------  # 60個
 
+        private string GetCaptchaCode01(int length)
+        {
+            char[] oCharacter = {'0','1','2','3','4','5','6','7','8','9',
+            'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'
+            //'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'
+            };
+
+            string captcha_text = String.Empty;
+            Random rand = new Random(DateTime.Now.Millisecond);
+            for (int i = 0; i < length; i++)
+            {
+                captcha_text += oCharacter[rand.Next(oCharacter.Length)];
+
+                //純數字
+                //int number;
+                //number = rand.Next(10);
+                //number = oCharacter[rand.Next(oCharacter.Length)];
+                //captcha_text += number.ToString();
+            }
+            return captcha_text;
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        // 產生指定個數的隨機字符串
+        private string GetCaptchaCode02(int length)
+        {
+            string captcha_code = string.Empty;
+            Random rand = new Random(); //創建隨機數對象
+            //產生由 charNum 個字母或數字組成的一個字符串
+            string str = "abcdefghijkmnpqrstuvwyzABCDEFGHJKLMNPQRSTUVWYZ23456789隨機數對象"; //共59個字符，除 l,o,x,I,O,X,1,0 的所有數字和大寫字母
+            for (int i = 0; i < length; i++)
+            {
+                captcha_code = captcha_code + str.Substring(rand.Next(59), 1);//返回0到58共59個
+            }
+            return captcha_code;
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private string GetCaptchaCode03(int length)
+        {
+            //產生五位的隨機字符串
+            int number;
+            char code;
+            string captcha_code = String.Empty;
+
+            Random rand = new Random();
+
+            for (int i = 0; i < length; i++)
+            {
+                number = rand.Next();
+
+                if (number % 2 == 0)
+                {
+                    code = (char)('0' + (char)(number % 10));
+                }
+                else
+                {
+                    code = (char)('a' + (char)(number % 26));
+                }
+                captcha_code += code.ToString();
+            }
+            return captcha_code;
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        // 生成隨機字符串
+        public string GetCaptchaCode04(int length)
+        {
+            Random rand = new Random();
+
+            String charCollection = "2,3,4,5,6,7,8,9,a,s,d,f,g,h,z,c,v,b,n,m,k,q,w,e,r,t,y,u,p,A,S,D,F,G,H,Z,C,V,B,N,M,K,Q,W,E,R,T,Y,U,P"; //定義驗證碼字符及出現頻次 ,避免出現0 o j i l 1 x;  
+            // 隨機字符串列表，請使用英文狀態下的逗號分隔
+
+            string[] randomArray = charCollection.Split(','); //將字符串生成數組     
+            int arrayLength = randomArray.Length;
+            string captcha_code = "";
+            for (int i = 0; i < length; i++)
+            {
+                captcha_code += randomArray[rand.Next(0, arrayLength)];
+            }
+            return captcha_code;
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        // 該方法用於生成指定位數的隨機數
+        /// <param name="VcodeNum">參數是隨機數的位數</param>
+        /// <returns>返回一個隨機數字符串</returns>
+        private string GetCaptchaCode05(int length)
+        {
+            string Vchar = "1,2,3,4,5,6,7,8,9,A,B,C,D,E,F,G,H,I,J,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z";
+            string[] VcArray = Vchar.Split(new Char[] { ',' });//拆分成陣列
+            string VNum = "";//產生的隨機數
+            int temp = -1;//記錄上次隨機數值，盡量避免生產幾個一樣的隨機數
+            Random rand = new Random();
+            for (int i = 1; i < length + 1; i++)
+            {
+                if (temp != -1)
+                {
+                    rand = new Random(i * temp * unchecked((int)DateTime.Now.Ticks));
+                }
+                int t = rand.Next(33);
+                if (temp != -1 && temp == t)
+                {
+                    return GetCaptchaCode05(length);
+                }
+                temp = t;
+                VNum += VcArray[t];
+            }
+            return VNum;
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        public enum RandomGeneratorStyle
+        {
+            //  純數字
+            Number,
+            //  數字+大小寫英文
+            NumberAndChar,
+            //  數字+大寫英文
+            NumberAndCharIgnoreCase
+        }
+
+        public static string GetCaptchaCode06(RandomGeneratorStyle style, int length)
+        {
+            string captcha_text = "";
+            Random rand = new Random();
+            string strValidateStringSource;
+            switch (style)
+            {
+                case RandomGeneratorStyle.Number:  // 純數字
+                    strValidateStringSource = "0123456789";
+                    break;
+                case RandomGeneratorStyle.NumberAndChar:  // 數字+大小寫英文
+                    strValidateStringSource = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                    break;
+                case RandomGeneratorStyle.NumberAndCharIgnoreCase:  //  數字+大寫英文
+                    strValidateStringSource = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                    break;
+                default:
+                    strValidateStringSource = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                    break;
+            }
+            for (int i = 0; i < length; i++)
+            {
+                captcha_text += strValidateStringSource[rand.Next(strValidateStringSource.Length - 1)];
+            }
+            return captcha_text;
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private string GetCaptchaCode07(int length)
+        {
+            //定義要隨機抽取的字串
+            string strRandomCode = "ABCD1EF2GH3IJ4KL5MN6P7QR8ST9UVWXYZ";
+            //將定義的字串轉成字元陣列                           
+            char[] chastr = strRandomCode.ToCharArray();
+            //定義StringBuilder物件用於存放驗證碼                                     
+            StringBuilder sbValidCode = new StringBuilder();
+            //隨機函式,隨機抽取字元                                       
+            Random rand = new Random();
+            for (int i = 0; i < length; i++)
+            {
+                //以strRandomCode的長度產生隨機位置並擷取該位置的字元新增到StringBuilder物件中
+                sbValidCode.Append(strRandomCode.Substring(rand.Next(0, strRandomCode.Length), 1));
+            }
+            return sbValidCode.ToString();
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        public static string GetCaptchaCode08(int length)
+        {
+            Random rand = new Random();
+            int num, tem;
+            string captcha_code = "";
+            for (int i = 0; i < length; i++)
+            {
+                num = rand.Next();
+                if (i % 2 == 1)
+                {
+                    tem = num % 10 + '0'; //數字
+                }
+                else
+                {
+                    tem = num % 26 + 'A'; //字母
+                }
+                captcha_code += Convert.ToChar(tem).ToString();
+            }
+            return captcha_code;
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        /// 生成隨機字符碼
+        /// <param name="codeLen">字符串長度</param>
+        /// <param name="zhCharsCount">中文字符數</param>
+        public string GetCaptchaCode09(int codeLen, int zhCharsCount)
+        {
+            Random rand = new Random();
+
+            char[] chs = new char[codeLen];
+
+            int index;
+            for (int i = 0; i < zhCharsCount; i++)
+            {
+                index = rand.Next(0, codeLen);
+                if (chs[index] == '\0')
+                {
+                    chs[index] = CreateZhChar();
+                }
+                else
+                {
+                    --i;
+                }
+            }
+            for (int i = 0; i < codeLen; i++)
+            {
+                if (chs[i] == '\0')
+                {
+                    chs[i] = CreateEnOrNumChar2();
+                }
+            }
+
+            return new string(chs, 0, chs.Length);
+        }
+
+        // 生成英文或數字字符
+        protected char CreateEnOrNumChar2()
+        {
+            // 英文與數字串
+            string EnglishOrNumChars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+            Random rand = new Random();
+            return EnglishOrNumChars[rand.Next(0, EnglishOrNumChars.Length)];
+        }
+
+        // 生成漢字字符
+        protected char CreateZhChar()
+        {
+            string ChineseChars = String.Empty;
+
+            Random rand = new Random();
+
+            //若提供了漢字集，查詢漢字集選取漢字
+            if (ChineseChars.Length > 0)
+            {
+                return ChineseChars[rand.Next(0, ChineseChars.Length)];
+            }
+            //若沒有提供漢字集，則根據《GB2312簡體中文編碼表》編碼規則構造漢字
+            else
+            {
+                byte[] bytes = new byte[2];
+
+                //第一個字節值在0xb0, 0xf7之間
+                bytes[0] = (byte)rand.Next(0xb0, 0xf8);
+                //第二個字節值在0xa1, 0xfe之間
+                bytes[1] = (byte)rand.Next(0xa1, 0xff);
+
+                //根據漢字編碼的字節數組解碼出中文漢字
+                string str1 = Encoding.GetEncoding("gb2312").GetString(bytes);
+
+                return str1[0];
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        // 內部方法：產生隨機數和隨機點
+        // 產生0-9A-Z的隨機字符代碼
+        // <returns>字符代碼</returns>
+        private int RandomAZ09()
+        {
+            int result = 48;
+            Random rand = new Random();
+            int i = rand.Next(2);
+
+            switch (i)
+            {
+                case 0:
+                    result = rand.Next(48, 58);
+                    break;
+                case 1:
+                    result = rand.Next(65, 91);
+                    break;
+            }
+
+            return result;
+        }
+
+        // 內部方法：返回指定長度的隨機驗證碼字符串
+        // 根據指定大小返回隨機驗證碼
+        // <param >字符串長度</param>
+        // <returns>隨機字符串</returns>
+        private string GetCaptchaCode10(int length)
+        {
+            StringBuilder sb = new StringBuilder(6);
+
+            for (int i = 0; i < length; i++)
+            {
+                sb.Append(Char.ConvertFromUtf32(RandomAZ09()));
+            }
+
+            return sb.ToString();
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private static string GetChar(Random rand)
+        {
+            int n = rand.Next(0, 61);
+            if (n <= 9)
+            {
+                return ((char)(48 + n)).ToString();
+            }
+            else if (n <= 35)
+            {
+                return ((char)(65 + n - 10)).ToString();
+            }
+            else
+            {
+                return ((char)(97 + n - 36)).ToString();
+            }
+        }
+
+        private string GetCaptchaCode11(int length)
+        {
+            string captcha_code = "";
+            for (int i = 0; i < length; i++)
+            {
+                captcha_code += GetChar(rand);
+            }
+            return captcha_code;
+        }
+
+        //------------------------------------------------------------  # 60個
+
         private void button0_Click(object sender, EventArgs e)
         {
+            //測試隨機文字1
 
+            string captcha_text = string.Empty;
+            int length = 10;
+            Random rand = new Random();
+
+            //------------------------------------------------------------  # 60個
+
+            captcha_text = GetCaptchaCode01(length);
+            richTextBox1.Text += "01取得 : " + captcha_text + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            captcha_text = GetCaptchaCode02(length);
+            richTextBox1.Text += "02取得 : " + captcha_text + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            captcha_text = GetCaptchaCode03(length);
+            richTextBox1.Text += "03取得 : " + captcha_text + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            captcha_text = GetCaptchaCode04(length);
+            richTextBox1.Text += "04取得 : " + captcha_text + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            captcha_text = GetCaptchaCode05(length);
+            richTextBox1.Text += "05取得 : " + captcha_text + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            //  純數字
+            captcha_text = GetCaptchaCode06(RandomGeneratorStyle.Number, length);//生成隨機數
+            richTextBox1.Text += "06a取得 : " + captcha_text + "\n";
+            //數字+大小寫英文
+            captcha_text = GetCaptchaCode06(RandomGeneratorStyle.NumberAndChar, length);//生成隨機數
+            richTextBox1.Text += "06b取得 : " + captcha_text + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            captcha_text = GetCaptchaCode07(length);
+            richTextBox1.Text += "07取得 : " + captcha_text + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            captcha_text = GetCaptchaCode08(length);
+            richTextBox1.Text += "08取得 : " + captcha_text + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            captcha_text = GetCaptchaCode09(length, 5);
+            richTextBox1.Text += "09取得 : " + captcha_text + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            captcha_text = GetCaptchaCode10(length);
+            richTextBox1.Text += "10取得 : " + captcha_text + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            captcha_text = GetCaptchaCode11(length);
+            richTextBox1.Text += "11取得 : " + captcha_text + "\n";
+
+            //------------------------------------------------------------  # 60個
+            // 以上用函數, 以下用算的
+            //------------------------------------------------------------  # 60個
+
+            int len = rand.Next(4, 6);
+
+            char[] chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
+            StringBuilder myStr = new StringBuilder();
+            for (int iCount = 0; iCount < len; iCount++)
+            {
+                myStr.Append(chars[rand.Next(chars.Length)]);
+            }
+            captcha_text = myStr.ToString();
+            richTextBox1.Text += "12取得 : " + captcha_text + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            captcha_text = string.Empty;
+            //验证码的字符集，去掉了一些容易混淆的字符 
+            char[] character = { '2', '3', '4', '5', '6', '8', '9', 'a', 'b', 'd', 'e', 'f', 'h', 'k', 'm', 'n', 'r', 'x', 'y', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'R', 'S', 'T', 'W', 'X', 'Y' };
+            //生成验证码字符串 
+            for (int i = 0; i < 4; i++)
+            {
+                captcha_text += character[rand.Next(character.Length)];
+            }
+            richTextBox1.Text += "13取得 : " + captcha_text + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            //亂數產生驗證答案
+            //從已知幾個元素中任意選出幾個
+
+            string texts = "fjalkdfjalkdjfalkjdf";
+
+            string vaildNumAnswer = "";
+            vaildNumAnswer = "";
+            for (int i = 1; i <= length; i++)
+            {
+                char c = texts[rand.Next(texts.Length)];
+                vaildNumAnswer += c;
+            }
+            richTextBox1.Text += "14取得 : " + vaildNumAnswer + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            StringBuilder objStringBuilder = new StringBuilder();
+
+            //加入數字1-9
+            for (int i = 1; i <= 9; i++)
+            {
+                objStringBuilder.Append(i.ToString());
+            }
+
+            //加入大寫字母A-Z，不包括O
+            char temp = ' ';
+
+            for (int i = 0; i < 26; i++)
+            {
+                temp = Convert.ToChar(i + 65);
+
+                //如果生成的字母不是'O'
+                if (!temp.Equals('O'))
+                {
+                    objStringBuilder.Append(temp);
+                }
+            }
+
+            //加入小寫字母a-z，不包括o
+            temp = ' ';
+
+            for (int i = 0; i < 26; i++)
+            {
+                temp = Convert.ToChar(i + 97);
+
+                //如果生成的字母不是'o'
+                if (!temp.Equals('o'))
+                {
+                    objStringBuilder.Append(temp);
+                }
+            }
+
+            //生成驗證碼字符串
+            int index = 0;
+
+            captcha_text = string.Empty;
+
+            for (int i = 0; i < length; i++)
+            {
+                index = rand.Next(0, objStringBuilder.Length);
+
+                captcha_text += objStringBuilder[index];
+
+                objStringBuilder.Remove(index, 1);
+            }
+
+            richTextBox1.Text += "15取得 : " + objStringBuilder + "\n";
+            richTextBox1.Text += "15取得 : " + captcha_text + "\n";
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //測試隨機文字2
         }
 
         //------------------------------------------------------------  # 60個
@@ -2232,4 +2743,5 @@ ASP.Net實現中文漢字驗證碼
             return builder.ToString();
         }
 */
+
 
