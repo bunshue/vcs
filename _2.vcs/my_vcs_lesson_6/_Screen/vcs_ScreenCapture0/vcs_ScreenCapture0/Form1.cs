@@ -117,23 +117,9 @@ namespace vcs_ScreenCapture0
             g2.ReleaseHdc(dc2);
 
             //釋放位圖句柄
-            string filename = "tmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
-            try
-            {
-                bitmap1.Save(filename, ImageFormat.Jpeg);
-                //bitmap1.Save(filename, ImageFormat.Bmp);
-                //bitmap1.Save(@file3, ImageFormat.Png);
-
-                //richTextBox1.Text += "已存檔 : " + file1 + "\n";
-                richTextBox1.Text += "已存檔 : " + filename + "\n";
-                //richTextBox1.Text += "已存檔 : " + file3 + "\n";
-            }
-            catch (Exception ex)
-            {
-                //richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-            }
-
-
+            string filename = "tmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+            bitmap1.Save(filename, ImageFormat.Bmp);
+            richTextBox1.Text += "已存檔 : " + filename + "\n";
         }
 
         private void button1_Click(object sender, EventArgs e)

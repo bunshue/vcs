@@ -95,8 +95,6 @@ namespace vcs_CopyFromScreen
         {
             //全螢幕截圖
 
-            //int W = this.Bounds.Width;
-            //int H = this.Bounds.Height;
             int W = Screen.PrimaryScreen.Bounds.Width;  // 主螢幕寬度
             int H = Screen.PrimaryScreen.Bounds.Height;  // 主螢幕高度
             Bitmap bitmap1 = new Bitmap(W, H);  // 建立空白畫布
@@ -306,6 +304,31 @@ namespace vcs_CopyFromScreen
 
         private void button7_Click(object sender, EventArgs e)
         {
+            /*
+            //                    來源位置             目的位置      要傳輸的區域大小  判斷在像素複製作業中來源色彩如何與目的色彩結合以產生最後的色彩
+            //g.CopyFromScreen(new Point(x_st, y_st), new Point(0, 0), new Size(w, h), CopyPixelOperation.SourceInvert);
+            //g.CopyFromScreen(new Point(x_st, y_st), new Point(0, 0), new Size(w, h));
+            //g.CopyFromScreen(new Point(pt.X - w / 2, pt.Y - h / 2), new Point(0, 0), new Size(w, h));
+            */
+
+            //用Graphics.CopyFromScreen()把屏幕位圖拷貝到該位圖上
+            //g.CopyFromScreen(0, 0, 0, 0, new Size(W, H));
+            //public void CopyFromScreen(int sourceX, int sourceY, int destinationX, int destinationY, Size blockRegionSize);
+
+            /*
+            Bitmap bitmap2 = new Bitmap((int)W, (int)H);
+            Graphics g2 = Graphics.FromImage(bitmap2);
+
+            //             擷取螢幕位置起點  自建bmp的位置起點     擷取大小
+            g2.CopyFromScreen(this.Location.X + pictureBox1.Location.X + (int)x_st, this.Location.Y + pictureBox1.Location.Y + (int)y_st, 0, 0, new Size((int)W, (int)H));
+            */
+
+            /*
+            Bitmap bitmap = new Bitmap(rect.Width, rect.Height);
+            Graphics g = Graphics.FromImage(bitmap);
+            g.CopyFromScreen(Point.Empty, Point.Empty, rect.Size);
+            */
+
         }
 
         //------------------------------------------------------------  # 60個
@@ -332,16 +355,13 @@ namespace vcs_CopyFromScreen
             int H = Screen.PrimaryScreen.Bounds.Height;  // 主螢幕高度
             richTextBox1.Text += "螢幕解析度 : " + W.ToString() + " X " + H.ToString() + "\n";
 
-            Rectangle rect = Screen.GetBounds(Point.Empty);
-            richTextBox1.Text += "rect = " + rect.ToString() + "\n";
-
-            richTextBox1.Text += "x = " + Screen.PrimaryScreen.Bounds.X.ToString() + "\n";
-            richTextBox1.Text += "y = " + Screen.PrimaryScreen.Bounds.Y.ToString() + "\n";
+            richTextBox1.Text += "Bounds = " + Screen.PrimaryScreen.Bounds.ToString() + "\n";
+            richTextBox1.Text += "X = " + Screen.PrimaryScreen.Bounds.X.ToString() + "\n";
+            richTextBox1.Text += "Y = " + Screen.PrimaryScreen.Bounds.Y.ToString() + "\n";
             richTextBox1.Text += "size = " + Screen.PrimaryScreen.Bounds.Size.ToString() + "\n";
 
-            Rectangle rect2 = new Rectangle();//實例化Rectangle類
-            rect2 = Screen.GetWorkingArea(this);//獲得目前螢幕的大小
-            richTextBox1.Text += "rect2 = " + rect2.ToString() + "\n";
+            Rectangle rect1 = Screen.GetBounds(Point.Empty);
+            richTextBox1.Text += "rect1 = " + rect1.ToString() + "\n";
 
             //------------------------------------------------------------  # 60個
 
@@ -397,17 +417,20 @@ namespace vcs_CopyFromScreen
 
             richTextBox1.Text += "DeviceName = " + Screen.PrimaryScreen.DeviceName + "\n";
             richTextBox1.Text += "BitsPerPixel = " + Screen.PrimaryScreen.BitsPerPixel.ToString() + "\n";
-            richTextBox1.Text += "Bounds = " + Screen.PrimaryScreen.Bounds.ToString() + "\n";
 
             //------------------------------------------------------------  # 60個
             //Screen.GetWorkingArea
 
-            Rectangle WorkArea = Screen.GetWorkingArea(this);//屏幕顯示區域
+            Rectangle WorkArea = Screen.GetWorkingArea(this);//屏幕顯示區域, 獲得目前螢幕的大小
             W = WorkArea.Width; //屏幕寬度
             H = WorkArea.Height; //屏幕高度
             richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+            richTextBox1.Text += "WorkArea = " + WorkArea.ToString() + "\n";
 
             //------------------------------------------------------------  # 60個
+
+            //int W = this.Bounds.Width;
+            //int H = this.Bounds.Height;
 
         }
         //------------------------------------------------------------  # 60個
@@ -421,36 +444,12 @@ namespace vcs_CopyFromScreen
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-/*
-//                    來源位置             目的位置      要傳輸的區域大小  判斷在像素複製作業中來源色彩如何與目的色彩結合以產生最後的色彩
-//g.CopyFromScreen(new Point(x_st, y_st), new Point(0, 0), new Size(w, h), CopyPixelOperation.SourceInvert);
-//g.CopyFromScreen(new Point(x_st, y_st), new Point(0, 0), new Size(w, h));
-//g.CopyFromScreen(new Point(pt.X - w / 2, pt.Y - h / 2), new Point(0, 0), new Size(w, h));
-*/
 
-//用Graphics.CopyFromScreen()把屏幕位圖拷貝到該位圖上
-//g.CopyFromScreen(0, 0, 0, 0, new Size(W, H));
-//public void CopyFromScreen(int sourceX, int sourceY, int destinationX, int destinationY, Size blockRegionSize);
-
-//參數
-//Rectangle bounds = Screen.GetBounds(Screen.GetBounds(Point.Empty));
-
-/*
-            Bitmap bitmap2 = new Bitmap((int)W, (int)H);
-            Graphics g2 = Graphics.FromImage(bitmap2);
-
-            //             擷取螢幕位置起點  自建bmp的位置起點     擷取大小
-            g2.CopyFromScreen(this.Location.X + pictureBox1.Location.X + (int)x_st, this.Location.Y + pictureBox1.Location.Y + (int)y_st, 0, 0, new Size((int)W, (int)H));
-*/
 
 /*
     //擷取部分圖片貼上
     //            貼上位置與大小,擷取部分圖片位置與大小,單位
     g.DrawImage(img, destRect1, srcRect, units);
 
-Rectangle rect = Screen.GetBounds(Point.Empty);
-Bitmap bitmap = new Bitmap(rect.Width, rect.Height);
-Graphics g = Graphics.FromImage(bitmap);
-g.CopyFromScreen(Point.Empty, Point.Empty, rect.Size);
 */
 

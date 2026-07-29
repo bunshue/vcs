@@ -101,10 +101,14 @@ namespace vcs_SpeechRecognitionEngine
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button0_Click(object sender, EventArgs e)
         {
 
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -119,10 +123,14 @@ namespace vcs_SpeechRecognitionEngine
             recEngine.RecognizeAsync(RecognizeMode.Multiple);
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button2_Click(object sender, EventArgs e)
         {
             recEngine.RecognizeAsyncStop();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -154,6 +162,8 @@ namespace vcs_SpeechRecognitionEngine
         {
             Console.WriteLine("Recognized text: " + e.Result.Text);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -202,13 +212,7 @@ namespace vcs_SpeechRecognitionEngine
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
 

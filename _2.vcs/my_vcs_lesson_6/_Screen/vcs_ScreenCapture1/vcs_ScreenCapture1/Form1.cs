@@ -39,8 +39,7 @@ namespace vcs_ScreenCapture1
         private void timer1_Tick(object sender, EventArgs e)
         {
             //獲得當前屏幕的大小   
-            Rectangle rect = new Rectangle();
-            rect = System.Windows.Forms.Screen.GetWorkingArea(this);
+            Rectangle rect = Screen.GetWorkingArea(this);
             Size mySize = new Size(rect.Width, rect.Height);
             Bitmap bitmap1 = new Bitmap(rect.Width, rect.Height);
             Graphics g = Graphics.FromImage(bitmap1);
@@ -49,7 +48,7 @@ namespace vcs_ScreenCapture1
             string filename = Application.StartupPath + "\\jpg_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
             bitmap1.Save(filename);
 
-            //釋放資源  
+            //釋放資源
             bitmap1.Dispose();
             g.Dispose();
             GC.Collect();

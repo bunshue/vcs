@@ -142,33 +142,44 @@ namespace vcs_SpeechSynthesizer1
             // 播放文字
             string textToSpeak = "這是 Copilot 的回覆，現在用電腦喇叭播放出來。";
             synth.Speak(textToSpeak);
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button2_Click(object sender, EventArgs e)
         {
 
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button3_Click(object sender, EventArgs e)
         {
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button4_Click(object sender, EventArgs e)
         {
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button5_Click(object sender, EventArgs e)
         {
 
         }
+
+        //------------------------------------------------------------  # 60個
 
         /// <summary>
         /// 開始朗讀 放在線程中
@@ -404,13 +415,7 @@ namespace vcs_SpeechSynthesizer1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
 

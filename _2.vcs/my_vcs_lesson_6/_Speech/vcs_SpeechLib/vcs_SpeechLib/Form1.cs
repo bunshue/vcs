@@ -65,52 +65,44 @@ namespace vcs_SpeechLib
             string article1 = "Insight Medical Solutions Inc.";
             string article2 = "群曜醫電股份有限公司";
 
-            try
-            {
-                SpeechVoiceSpeakFlags SpFlags = SpeechVoiceSpeakFlags.SVSFlagsAsync;
-                SpVoice Voice = new SpVoice();
-                Voice.Speak(article1 + article2, SpFlags);
-            }
-            catch (Exception er)
-            {
-                MessageBox.Show("An Error Occured!", "SpeechApp", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            SpeechVoiceSpeakFlags SpFlags = SpeechVoiceSpeakFlags.SVSFlagsAsync;
+
+            SpVoice Voice = new SpVoice();
+
+            Voice.Speak(article1, SpFlags);
+            Voice.Speak(article2, SpFlags);
+
+            richTextBox1.Text += "完成\n";
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             //生成聲音文件(Wav)
+            string filename = "tmp_generated_audio.wav";
 
             string article1 = "Insight Medical Solutions Inc.";
             string article2 = "群曜醫電股份有限公司";
-            try
-            {
-                string filename = Application.StartupPath + "\\wav_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".wav";
 
-                SpeechVoiceSpeakFlags SpFlags = SpeechVoiceSpeakFlags.SVSFlagsAsync;
-                SpVoice Voice = new SpVoice();
+            SpeechVoiceSpeakFlags SpFlags = SpeechVoiceSpeakFlags.SVSFlagsAsync;
 
-                SpeechStreamFileMode SpFileMode = SpeechStreamFileMode.SSFMCreateForWrite;
-                SpFileStream SpFileStream = new SpFileStream();
-                SpFileStream.Open(filename, SpFileMode, false);
-                Voice.AudioOutputStream = SpFileStream;
-                Voice.Speak(article1 + article2, SpFlags);
-                Voice.WaitUntilDone(100);
-                SpFileStream.Close();
+            SpVoice Voice = new SpVoice();
 
-                richTextBox1.Text += "已存檔 : " + filename + "\n";
+            SpeechStreamFileMode SpFileMode = SpeechStreamFileMode.SSFMCreateForWrite;
+            SpFileStream SpFileStream = new SpFileStream();
+            SpFileStream.Open(filename, SpFileMode, false);
+            Voice.AudioOutputStream = SpFileStream;
+            Voice.Speak(article1 + article2, SpFlags);
+            Voice.WaitUntilDone(100);
+            SpFileStream.Close();
 
-                /* 後續
-                ISpeechObjectTokens tokens = Voice.GetVoices(string.Empty, string.Empty);
+            richTextBox1.Text += "已存檔 : " + filename + "\n";
+
+            /* 後續
+            ISpeechObjectTokens tokens = Voice.GetVoices(string.Empty, string.Empty);
                 
-                int index = GetChineseVoiceIndex(tokens);
-                voice.Voice = tokens.Item(index);    //簡單的語音短信就生成了。
-                */
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An Error Occured!", "SpeechApp", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            int index = GetChineseVoiceIndex(tokens);
+            voice.Voice = tokens.Item(index);    //簡單的語音短信就生成了。
+            */
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -118,31 +110,31 @@ namespace vcs_SpeechLib
             string article1 = "Insight Medical Solutions Inc.";
             string article2 = "群曜醫電股份有限公司";
 
-            SpeechVoiceSpeakFlags spFlags1 = SpeechVoiceSpeakFlags.SVSFDefault;
-            SpeechVoiceSpeakFlags spFlags2 = SpeechVoiceSpeakFlags.SVSFlagsAsync;
+            SpeechVoiceSpeakFlags spFlags = SpeechVoiceSpeakFlags.SVSFDefault;
 
             richTextBox1.Text += "\n應用一: 只說英文\n";
+
             //應用一: 只說英文
             SpVoiceClass spvc1 = new SpVoiceClass();
             //Item(1)女聲
             spvc1.Voice = spvc1.GetVoices(string.Empty, string.Empty).Item(1);
             //SVSFDefault: Specifies that the default settings
-            spvc1.Speak(article1, spFlags1);
+            spvc1.Speak(article1, spFlags);
+
+            //------------------------------  # 30個
 
             richTextBox1.Text += "應用二: 說中文\n";
             SpVoiceClass spvc2 = new SpVoiceClass();
             spvc2.Voice = spvc2.GetVoices(string.Empty, string.Empty).Item(0);//Item(0)中文女聲
-            spvc2.Speak(article2, spFlags1);
+
+            spvc2.Speak(article2, spFlags);
 
             System.Threading.Thread.Sleep(1000);
-            spvc2.Speak(article2, spFlags1);
 
-            richTextBox1.Text += "應用三: 說英文中文\n";
-            //讀出richtextbox裡的文字
-
-            SpVoice sp = new SpVoice();
-            sp.Speak(article1 + article2, spFlags2);
+            spvc2.Speak(article2, spFlags);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -167,7 +159,6 @@ namespace vcs_SpeechLib
             //{
             //   MessageBox.Show("An Error Occured!", "SpeechApp", MessageBoxButtons.OK, MessageBoxIcon.Error);
             //}
-
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -175,7 +166,7 @@ namespace vcs_SpeechLib
         }
     }
 
-    //6060
+    //------------------------------------------------------------  # 60個
 
     public class Speach
     {
@@ -322,13 +313,7 @@ namespace vcs_SpeechLib
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
 
