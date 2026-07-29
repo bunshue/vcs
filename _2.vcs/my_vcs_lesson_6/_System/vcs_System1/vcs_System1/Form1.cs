@@ -11,7 +11,7 @@ using System.IO;
 using System.Net;   //for DNS
 using System.IO.Ports;  //for serial ports
 using System.Collections;   //for DictionaryEntry
-using System.Globalization;
+using System.Globalization;  // for CultureInfo CultureTypes
 using System.Runtime.InteropServices;   //for DllImport, StructLayout
 using System.Diagnostics;       //for Process, Debug, FileVersionInfo
 using System.Reflection;        //for Assembly
@@ -43,6 +43,37 @@ namespace vcs_System1
             //------------------------------------------------------------  # 60個
 
             CheckForIllegalCrossThreadCalls = false;
+
+            //------------------------------------------------------------  # 60個
+
+            float float_value = 1234.56f;
+            decimal dec_value = 1234.56m;
+            DateTime now = DateTime.Now;
+
+            // Loop through the locales.
+            foreach (CultureInfo info in CultureInfo.GetCultures(CultureTypes.AllCultures))
+            {
+                ListViewItem item = listView1.Items.Add(info.EnglishName);
+                item.SubItems.Add(info.NativeName);
+                item.SubItems.Add(info.Name);
+
+                // You can't use a neutral culture as a format
+                // provider, so if the CultureInfo is neutral,
+                // look for a non-neutral ancestor.
+                CultureInfo culture = info;
+                while ((culture != null) && (culture.IsNeutralCulture))
+                {
+                    culture = culture.Parent;
+                }
+
+                if (culture != null)
+                {
+                    item.SubItems.Add(float_value.ToString("N", culture));
+                    item.SubItems.Add(dec_value.ToString("C", culture));
+                    item.SubItems.Add(now.ToString("d", culture));
+                    item.SubItems.Add(now.ToString("t", culture));
+                }
+            }
         }
 
         void show_item_location()
@@ -94,20 +125,15 @@ namespace vcs_System1
             button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
             button40.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             button41.Location = new Point(x_st + dx * 4, y_st + dy * 1);
-            button42.Location = new Point(x_st + dx * 4, y_st + dy * 2);
-            button43.Location = new Point(x_st + dx * 4, y_st + dy * 3);
-            button44.Location = new Point(x_st + dx * 4, y_st + dy * 4);
-            button45.Location = new Point(x_st + dx * 4, y_st + dy * 5);
-            button46.Location = new Point(x_st + dx * 4, y_st + dy * 6);
-            button47.Location = new Point(x_st + dx * 4, y_st + dy * 7);
-            button48.Location = new Point(x_st + dx * 4, y_st + dy * 8);
-            button49.Location = new Point(x_st + dx * 4, y_st + dy * 9);
 
             groupBox1.Size = new Size(200, 150);//Windows 開關機(偽執行)
-            groupBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            groupBox1.Location = new Point(x_st + dx * 4, y_st + dy * 2 - 5);
 
-            richTextBox1.Size = new Size(300, 690);
-            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
+            listView1.Size = new Size(720, 410);
+            listView1.Location = new Point(x_st + dx * 4, y_st + dy * 4 + 5);
+
+            richTextBox1.Size = new Size(300 + 210, 690 - 420);
+            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1600, 750);
@@ -574,7 +600,88 @@ namespace vcs_System1
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //使用 SystemInformation
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "電腦名稱 3 : " + SystemInformation.ComputerName + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+            richTextBox1.Text += "檢測系統啟動模式\n";
+
+            string mode = SystemInformation.BootMode.ToString();
+            richTextBox1.Text += "目前系統的啟動模式是：";
+            switch (mode)
+            {
+                case "FailSafe":
+                    richTextBox1.Text += "不具有網絡支援的安全模式\n";
+                    break;
+                case "FailSafeWithNetwork":
+                    richTextBox1.Text += "具有網絡支援的安全模式\n";
+                    break;
+                case "Normal":
+                    richTextBox1.Text += "標準模式\n";
+                    break;
+            }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+            richTextBox1.Text += "讀取電源狀態\n";
+
+            PowerStatus status = SystemInformation.PowerStatus;
+            float percent = status.BatteryLifePercent;
+
+            string percent_text = percent.ToString("P0");
+
+            richTextBox1.Text += percent_text + "\n";
+            if (status.PowerLineStatus == PowerLineStatus.Online)
+            {
+                if (percent < 1.0f)
+                    richTextBox1.Text += percent_text + ", charging\n";
+                else
+                    richTextBox1.Text += "Online fully charged\n";
+            }
+            else
+            {
+                richTextBox1.Text += "Offline, " + percent_text + " remaining\n";
+            }
+
+            //------------------------------------------------------------  # 60個
+
+            status = SystemInformation.PowerStatus;
+
+            int percents = (int)(status.BatteryLifePercent * 100);
+            richTextBox1.Text += "充電百分比 : " + percents.ToString() + "%" + "\n";
+
+            richTextBox1.Text += "充電百分比:\t\t" + status.BatteryLifePercent.ToString("P0") + "\n";
+            richTextBox1.Text += "BatteryLifePercent : " + status.BatteryLifePercent.ToString() + "\n";
+
+            richTextBox1.Text += "電源線狀態 : " + status.PowerLineStatus.ToString() + "\n";
+            richTextBox1.Text += "電池充電狀態 : " + status.BatteryChargeStatus.ToString() + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            richTextBox1.Text += "BatteryFullLifetime : " + status.BatteryFullLifetime.ToString() + "\n";
+            if (status.BatteryFullLifetime == -1)
+            {
+                richTextBox1.Text += "Full Lifetime:\t" + "Unknown" + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "Full Lifetime (sec):\t" + status.BatteryFullLifetime.ToString() + "\n";
+            }
+
+            richTextBox1.Text += "BatteryLifeRemaining : " + status.BatteryLifeRemaining.ToString() + "\n";
+            if (status.BatteryLifeRemaining == -1)
+            {
+                richTextBox1.Text += "Life Remaining:\t" + "Unknown" + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "Life Remaining (sec):\t" + status.BatteryLifeRemaining.ToString() + "\n";
+            }
         }
+
+        //6060
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -868,10 +975,85 @@ namespace vcs_System1
             richTextBox1.Text += "Version number: " + myFileVersionInfo.FileVersion + "\n";
         }
 
+        //6060
         private void button13_Click(object sender, EventArgs e)
         {
+            //使用Class取得系統資訊
 
+            SYSTEMTIME_INFO SystemInfo = new SYSTEMTIME_INFO();
+            ComputerInfo.GetSystemTime(ref SystemInfo);
+
+            richTextBox1.Text += "date : " + SystemInfo.wYear.ToString() + "/" + SystemInfo.wMonth.ToString() + "/" + SystemInfo.wDay.ToString() + " " + SystemInfo.wHour.ToString() + ":" + SystemInfo.wMinute.ToString() + ":" + SystemInfo.wSecond.ToString() + "." + SystemInfo.wMilliseconds.ToString() + "\n";
+
+            //調用GetSystemInfo函數獲取CPU的相關訊息
+            CPU_INFO CpuInfo = new CPU_INFO();
+            ComputerInfo.GetSystemInfo(ref CpuInfo);
+            richTextBox1.Text += "dwOemId = " + CpuInfo.dwOemId.ToString() + "\n";
+            richTextBox1.Text += "dwPageSize = " + CpuInfo.dwPageSize.ToString() + "\n";
+            richTextBox1.Text += "lpMinimumApplicationAddress = " + CpuInfo.lpMinimumApplicationAddress.ToString() + "\n";
+            richTextBox1.Text += "lpMaximumApplicationAddress = " + CpuInfo.lpMaximumApplicationAddress.ToString() + "\n";
+            richTextBox1.Text += "dwActiveProcessorMask = " + CpuInfo.dwActiveProcessorMask.ToString() + "\n";
+            richTextBox1.Text += "dwNumberOfProcessors = " + CpuInfo.dwNumberOfProcessors.ToString() + "\n";
+            richTextBox1.Text += "dwProcessorType = " + CpuInfo.dwProcessorType.ToString() + "\n";
+            richTextBox1.Text += "dwAllocationGranularity = " + CpuInfo.dwAllocationGranularity.ToString() + "\n";
+            richTextBox1.Text += "dwProcessorLevel = " + CpuInfo.dwProcessorLevel.ToString() + "\n";
+            richTextBox1.Text += "dwProcessorRevision = " + CpuInfo.dwProcessorRevision.ToString() + "\n";
+
+            richTextBox1.Text += "本計算機中有" + CpuInfo.dwNumberOfProcessors.ToString() + "個CPU" + "\n";
+            richTextBox1.Text += "CPU的類型為" + CpuInfo.dwProcessorType.ToString() + "\n";
+            richTextBox1.Text += "CPU等級為" + CpuInfo.dwProcessorLevel.ToString() + "\n";
+            richTextBox1.Text += "CPU的OEM ID為" + CpuInfo.dwOemId.ToString() + "\n";
+            richTextBox1.Text += "CPU中的頁面大小為" + CpuInfo.dwPageSize.ToString() + "\n";
+
+            //調用GlobalMemoryStatus函數獲取記憶體的相關訊息
+            MEMORY_INFO MemInfo = new MEMORY_INFO();
+            ComputerInfo.GlobalMemoryStatus(ref MemInfo);
+            richTextBox1.Text += "dwLength = " + MemInfo.dwLength.ToString() + "\n";
+            richTextBox1.Text += "dwMemoryLoad = " + MemInfo.dwMemoryLoad.ToString() + "\n";
+            richTextBox1.Text += "dwTotalPhys = " + (MemInfo.dwTotalPhys / 1024 / 1024).ToString().ToString() + "\n";
+            richTextBox1.Text += "dwAvailPhys = " + (MemInfo.dwAvailPhys / 1024 / 1024).ToString().ToString() + "\n";
+            richTextBox1.Text += "dwTotalPageFile = " + (MemInfo.dwTotalPageFile / 1024 / 1024).ToString().ToString() + "\n";
+            richTextBox1.Text += "dwAvailPageFile = " + (MemInfo.dwAvailPageFile / 1024 / 1024).ToString().ToString() + "\n";
+            richTextBox1.Text += "dwTotalVirtual = " + (MemInfo.dwTotalVirtual / 1024 / 1024).ToString().ToString() + "\n";
+            richTextBox1.Text += "dwAvailVirtual = " + (MemInfo.dwAvailVirtual / 1024 / 1024).ToString().ToString() + "\n";
+
+            richTextBox1.Text += MemInfo.dwMemoryLoad.ToString() + "%的內存正在使用" + "\n";
+            richTextBox1.Text += "物理內存共有" + MemInfo.dwTotalPhys.ToString() + "字節" + "\n";
+            richTextBox1.Text += "可使用的物理內存有" + MemInfo.dwAvailPhys.ToString() + "字節" + "\n";
+            richTextBox1.Text += "交換文件總大小為" + MemInfo.dwTotalPageFile.ToString() + "字節" + "\n";
+            richTextBox1.Text += "尚可交換文件大小為" + MemInfo.dwAvailPageFile.ToString() + "字節" + "\n";
+            richTextBox1.Text += "總虛擬內存有" + MemInfo.dwTotalVirtual.ToString() + "字節" + "\n";
+            richTextBox1.Text += "未用虛擬內存有" + MemInfo.dwAvailVirtual.ToString() + "字節" + "\n";
+
+            //調用GetSystemTime函數獲取系統時間訊息
+            SYSTEMTIME_INFO SysInfo = new SYSTEMTIME_INFO();
+            ComputerInfo.GetSystemTime(ref SysInfo);
+            richTextBox1.Text += "wYear = " + SysInfo.wYear.ToString() + "\n";
+            richTextBox1.Text += "wMonth = " + SysInfo.wMonth.ToString() + "\n";
+            richTextBox1.Text += "wDayOfWeek = " + SysInfo.wDayOfWeek.ToString() + "\n";
+            richTextBox1.Text += "wDay = " + SysInfo.wDay.ToString() + "\n";
+            richTextBox1.Text += "wHour = " + SysInfo.wHour.ToString() + "\n";
+            richTextBox1.Text += "wMinute = " + SysInfo.wMinute.ToString() + "\n";
+            richTextBox1.Text += "wSecond = " + SysInfo.wSecond.ToString() + "\n";
+            richTextBox1.Text += "wMilliseconds = " + SysInfo.wMilliseconds.ToString() + "\n";
+
+            //調用GetWindowsDirectory和GetSystemDirectory函數分別取得Windows路徑和系統路徑
+            const int nChars = 128;
+            StringBuilder Buff = new StringBuilder(nChars);
+            ComputerInfo.GetWindowsDirectory(Buff, nChars);
+            richTextBox1.Text += "Windows路徑：" + Buff.ToString() + "\n";
+            ComputerInfo.GetSystemDirectory(Buff, nChars);
+            richTextBox1.Text += "系統路徑：" + Buff.ToString() + "\n";
+
+            //調用GetSystemTime函數獲取系統時間信息
+            SYSTEMTIME_INFO StInfo;
+            StInfo = new SYSTEMTIME_INFO();
+            ComputerInfo.GetSystemTime(ref StInfo);
+            richTextBox1.Text += StInfo.wYear.ToString() + "年" + StInfo.wMonth.ToString() + "月" + StInfo.wDay.ToString() + "日" + "\n";
+            richTextBox1.Text += (StInfo.wHour + 8).ToString() + "點" + StInfo.wMinute.ToString() + "分" + StInfo.wSecond.ToString() + "秒" + "\n";
         }
+
+        //6060
 
         private void button14_Click(object sender, EventArgs e)
         {
@@ -1137,12 +1319,22 @@ namespace vcs_System1
             ci = new CultureInfo("ja-JP");
             str = string.Format(msg2, ci.DisplayName, ci.Name);
             richTextBox1.Text += "str = " + str + "\n";
-
         }
+
+        //6060
 
         private void button30_Click(object sender, EventArgs e)
         {
+            //(偽)將計算機設定為休眠狀態
+
+            if (MessageBox.Show("確定要休眠計算機嗎？") == DialogResult.OK)
+            {
+                //偽執行
+                //Application.SetSuspendState(PowerState.Hibernate, true, true);
+            }
         }
+
+        //6060
 
         //光碟機開關 ST
         [DllImport("winmm.dll", EntryPoint = "mciSendString")]
@@ -1168,10 +1360,6 @@ namespace vcs_System1
         }
         //光碟機開關 SP
 
-        private void button32_Click(object sender, EventArgs e)
-        {
-        }
-
         /* 另外的寫法
         [DllImport("winmm.dll", EntryPoint = "mciSendString", CharSet = CharSet.Auto)]
         public static extern int mciSendString(string lpstrCommand, string lpstrReturnstring, int uReturnLength, int hwndCallback);
@@ -1187,24 +1375,93 @@ namespace vcs_System1
         }
         */
 
+        //6060
+
+        private void button32_Click(object sender, EventArgs e)
+        {
+            //判斷電腦中是否安裝了SQL軟體
+
+            if (ExitSQL())
+            {
+                richTextBox1.Text += "本機電腦中已經安裝SQL軟體\n";
+            }
+            else
+            {
+                richTextBox1.Text += "本機電腦中沒有安裝SQL軟體\n";
+            }
+        }
+
+        public bool ExitSQL()
+        {
+            bool sqlFlag = false;
+            ServiceController[] services = ServiceController.GetServices();
+            for (int i = 0; i < services.Length; i++)
+            {
+                if (services[i].DisplayName.ToString() == "MSSQLSERVER")
+                    sqlFlag = true;
+            }
+            return sqlFlag;
+        }
+
+        //6060
+
         private void button33_Click(object sender, EventArgs e)
         {
+            //獲取本機所有SQLServer引擎
+
+            //获得主机名称
+            string HostName = Dns.GetHostName();
+            ServiceController[] services = ServiceController.GetServices();
+
+            //从机器服务列表中找到本机的SqlServer引擎
+
+            richTextBox1.Text += "services len = " + services.Length.ToString() + "\n";
+
+            foreach (ServiceController s in services)
+            {
+                richTextBox1.Text += "s = " + s.ServiceName + "\n";
+                if (s.ServiceName.ToLower().IndexOf("mssql$") != -1)
+                {
+                    //ddlServerName.Items.Add(HostName + "\\" + s.ServiceName.Substring(s.ServiceName.IndexOf("$") + 1));     
+                    richTextBox1.Text += HostName + "\\" + s.ServiceName.Substring(s.ServiceName.IndexOf("$") + 1) + "\n";
+                }
+                else if (s.ServiceName.ToLower() == "mssqlserver")
+                {
+                    //ddlServerName.Items.Add(HostName);
+                    richTextBox1.Text += "bbbb " + HostName + "\n";
+                }
+            }
         }
+
+        //6060
 
         private void button34_Click(object sender, EventArgs e)
         {
+            //使用 Application.DoEvents
+            int i;
+            for (i = 0; i <= 7777; i++)
+            {
+                //do something lb_DoEvents.Text = i.ToString();
+                Application.DoEvents();//實時響應文本框中的值
+                //Application.DoEvents()的作用：处理当前在消息队列中的所有 Windows 消息。
+                //加Application.DoEvents可以防止界面停止响应
+            }
         }
+
+        //6060
 
         private void button35_Click(object sender, EventArgs e)
         {
-            //(偽)將計算機設定為休眠狀態
-
-            if (MessageBox.Show("確定要休眠計算機嗎？") == DialogResult.OK)
+            //不使用 Application.DoEvents
+            int i;
+            for (i = 0; i <= 7777; i++)
             {
-                //偽執行
-                //Application.SetSuspendState(PowerState.Hibernate, true, true);
+                //do something lb_DoEvents.Text = i.ToString();
+                //Application.DoEvents();//實時響應文本框中的值
             }
         }
+
+        //6060
 
         private void button36_Click(object sender, EventArgs e)
         {
@@ -1263,263 +1520,130 @@ namespace vcs_System1
         }
         //隱藏任務欄, 顯示任務欄 SP
 
+        //------------------------------------------------------------  # 60個
+
         private void button40_Click(object sender, EventArgs e)
         {
-            //使用 SystemInformation
+            //列出 Locales 1
+            richTextBox1.Text += "共有 " + CultureInfo.GetCultures(CultureTypes.AllCultures).Length.ToString() + " 筆Locale\n";
 
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            richTextBox1.Text += "電腦名稱 3 : " + SystemInformation.ComputerName + "\n";
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-            richTextBox1.Text += "檢測系統啟動模式\n";
-
-            string mode = SystemInformation.BootMode.ToString();
-            richTextBox1.Text += "目前系統的啟動模式是：";
-            switch (mode)
+            // Add the locale information.
+            foreach (CultureInfo info in CultureInfo.GetCultures(CultureTypes.AllCultures))
             {
-                case "FailSafe":
-                    richTextBox1.Text += "不具有網絡支援的安全模式\n";
-                    break;
-                case "FailSafeWithNetwork":
-                    richTextBox1.Text += "具有網絡支援的安全模式\n";
-                    break;
-                case "Normal":
-                    richTextBox1.Text += "標準模式\n";
-                    break;
+                richTextBox1.Text += info.EnglishName + '\t' + info.NativeName + "\n";
             }
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-            richTextBox1.Text += "讀取電源狀態\n";
-
-            PowerStatus status = SystemInformation.PowerStatus;
-            float percent = status.BatteryLifePercent;
-
-            string percent_text = percent.ToString("P0");
-
-            richTextBox1.Text += percent_text + "\n";
-            if (status.PowerLineStatus == PowerLineStatus.Online)
-            {
-                if (percent < 1.0f)
-                    richTextBox1.Text += percent_text + ", charging\n";
-                else
-                    richTextBox1.Text += "Online fully charged\n";
-            }
-            else
-            {
-                richTextBox1.Text += "Offline, " + percent_text + " remaining\n";
-            }
-
-            //------------------------------------------------------------  # 60個
-
-            status = SystemInformation.PowerStatus;
-
-            int percents = (int)(status.BatteryLifePercent * 100);
-            richTextBox1.Text += "充電百分比 : " + percents.ToString() + "%" + "\n";
-
-            richTextBox1.Text += "充電百分比:\t\t" + status.BatteryLifePercent.ToString("P0") + "\n";
-            richTextBox1.Text += "BatteryLifePercent : " + status.BatteryLifePercent.ToString() + "\n";
-
-            richTextBox1.Text += "電源線狀態 : " + status.PowerLineStatus.ToString() + "\n";
-            richTextBox1.Text += "電池充電狀態 : " + status.BatteryChargeStatus.ToString() + "\n";
-
-            //------------------------------------------------------------  # 60個
-
-            richTextBox1.Text += "BatteryFullLifetime : " + status.BatteryFullLifetime.ToString() + "\n";
-            if (status.BatteryFullLifetime == -1)
-            {
-                richTextBox1.Text += "Full Lifetime:\t" + "Unknown" + "\n";
-            }
-            else
-            {
-                richTextBox1.Text += "Full Lifetime (sec):\t" + status.BatteryFullLifetime.ToString() + "\n";
-            }
-
-            richTextBox1.Text += "BatteryLifeRemaining : " + status.BatteryLifeRemaining.ToString() + "\n";
-            if (status.BatteryLifeRemaining == -1)
-            {
-                richTextBox1.Text += "Life Remaining:\t" + "Unknown" + "\n";
-            }
-            else
-            {
-                richTextBox1.Text += "Life Remaining (sec):\t" + status.BatteryLifeRemaining.ToString() + "\n";
-            }
-        }
-
-        private void button41_Click(object sender, EventArgs e)
-        {
-            //判斷電腦中是否安裝了SQL軟體
-            if (ExitSQL())
-            {
-                richTextBox1.Text += "本機電腦中已經安裝SQL軟體\n";
-            }
-            else
-            {
-                richTextBox1.Text += "本機電腦中沒有安裝SQL軟體\n";
-            }
-        }
-
-        public bool ExitSQL()
-        {
-            bool sqlFlag = false;
-            ServiceController[] services = ServiceController.GetServices();
-            for (int i = 0; i < services.Length; i++)
-            {
-                if (services[i].DisplayName.ToString() == "MSSQLSERVER")
-                    sqlFlag = true;
-            }
-            return sqlFlag;
-        }
-
-        private void button42_Click(object sender, EventArgs e)
-        {
-            //獲取本機所有SQLServer引擎
-
-            //获得主机名称
-            string HostName = Dns.GetHostName();
-            ServiceController[] services = ServiceController.GetServices();
-
-            //从机器服务列表中找到本机的SqlServer引擎
-
-            richTextBox1.Text += "services len = " + services.Length.ToString() + "\n";
-
-            foreach (ServiceController s in services)
-            {
-                richTextBox1.Text += "s = " + s.ServiceName + "\n";
-                if (s.ServiceName.ToLower().IndexOf("mssql$") != -1)
-                {
-                    //ddlServerName.Items.Add(HostName + "\\" + s.ServiceName.Substring(s.ServiceName.IndexOf("$") + 1));     
-                    richTextBox1.Text += HostName + "\\" + s.ServiceName.Substring(s.ServiceName.IndexOf("$") + 1) + "\n";
-                }
-                else if (s.ServiceName.ToLower() == "mssqlserver")
-                {
-                    //ddlServerName.Items.Add(HostName);
-                    richTextBox1.Text += "bbbb " + HostName + "\n";
-                }
-            }
-        }
-
-        private void button43_Click(object sender, EventArgs e)
-        {
-            //使用 Application.DoEvents
-            int i;
-            for (i = 0; i <= 7777; i++)
-            {
-                //do something lb_DoEvents.Text = i.ToString();
-                Application.DoEvents();//實時響應文本框中的值
-                //Application.DoEvents()的作用：处理当前在消息队列中的所有 Windows 消息。
-                //加Application.DoEvents可以防止界面停止响应
-            }
-        }
-
-        private void button44_Click(object sender, EventArgs e)
-        {
-            //不使用 Application.DoEvents
-            int i;
-            for (i = 0; i <= 7777; i++)
-            {
-                //do something lb_DoEvents.Text = i.ToString();
-                //Application.DoEvents();//實時響應文本框中的值
-            }
-        }
-
-        private void button45_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button46_Click(object sender, EventArgs e)
-        {
-            //使用Class取得系統資訊
-            SYSTEMTIME_INFO SystemInfo = new SYSTEMTIME_INFO();
-            ComputerInfo.GetSystemTime(ref SystemInfo);
-
-            richTextBox1.Text += "date : " + SystemInfo.wYear.ToString() + "/" + SystemInfo.wMonth.ToString() + "/" + SystemInfo.wDay.ToString() + " " + SystemInfo.wHour.ToString() + ":" + SystemInfo.wMinute.ToString() + ":" + SystemInfo.wSecond.ToString() + "." + SystemInfo.wMilliseconds.ToString() + "\n";
-
-            //調用GetSystemInfo函數獲取CPU的相關訊息
-            CPU_INFO CpuInfo = new CPU_INFO();
-            ComputerInfo.GetSystemInfo(ref CpuInfo);
-            richTextBox1.Text += "dwOemId = " + CpuInfo.dwOemId.ToString() + "\n";
-            richTextBox1.Text += "dwPageSize = " + CpuInfo.dwPageSize.ToString() + "\n";
-            richTextBox1.Text += "lpMinimumApplicationAddress = " + CpuInfo.lpMinimumApplicationAddress.ToString() + "\n";
-            richTextBox1.Text += "lpMaximumApplicationAddress = " + CpuInfo.lpMaximumApplicationAddress.ToString() + "\n";
-            richTextBox1.Text += "dwActiveProcessorMask = " + CpuInfo.dwActiveProcessorMask.ToString() + "\n";
-            richTextBox1.Text += "dwNumberOfProcessors = " + CpuInfo.dwNumberOfProcessors.ToString() + "\n";
-            richTextBox1.Text += "dwProcessorType = " + CpuInfo.dwProcessorType.ToString() + "\n";
-            richTextBox1.Text += "dwAllocationGranularity = " + CpuInfo.dwAllocationGranularity.ToString() + "\n";
-            richTextBox1.Text += "dwProcessorLevel = " + CpuInfo.dwProcessorLevel.ToString() + "\n";
-            richTextBox1.Text += "dwProcessorRevision = " + CpuInfo.dwProcessorRevision.ToString() + "\n";
-
-            richTextBox1.Text += "本計算機中有" + CpuInfo.dwNumberOfProcessors.ToString() + "個CPU" + "\n";
-            richTextBox1.Text += "CPU的類型為" + CpuInfo.dwProcessorType.ToString() + "\n";
-            richTextBox1.Text += "CPU等級為" + CpuInfo.dwProcessorLevel.ToString() + "\n";
-            richTextBox1.Text += "CPU的OEM ID為" + CpuInfo.dwOemId.ToString() + "\n";
-            richTextBox1.Text += "CPU中的頁面大小為" + CpuInfo.dwPageSize.ToString() + "\n";
-
-            //調用GlobalMemoryStatus函數獲取記憶體的相關訊息
-            MEMORY_INFO MemInfo = new MEMORY_INFO();
-            ComputerInfo.GlobalMemoryStatus(ref MemInfo);
-            richTextBox1.Text += "dwLength = " + MemInfo.dwLength.ToString() + "\n";
-            richTextBox1.Text += "dwMemoryLoad = " + MemInfo.dwMemoryLoad.ToString() + "\n";
-            richTextBox1.Text += "dwTotalPhys = " + (MemInfo.dwTotalPhys / 1024 / 1024).ToString().ToString() + "\n";
-            richTextBox1.Text += "dwAvailPhys = " + (MemInfo.dwAvailPhys / 1024 / 1024).ToString().ToString() + "\n";
-            richTextBox1.Text += "dwTotalPageFile = " + (MemInfo.dwTotalPageFile / 1024 / 1024).ToString().ToString() + "\n";
-            richTextBox1.Text += "dwAvailPageFile = " + (MemInfo.dwAvailPageFile / 1024 / 1024).ToString().ToString() + "\n";
-            richTextBox1.Text += "dwTotalVirtual = " + (MemInfo.dwTotalVirtual / 1024 / 1024).ToString().ToString() + "\n";
-            richTextBox1.Text += "dwAvailVirtual = " + (MemInfo.dwAvailVirtual / 1024 / 1024).ToString().ToString() + "\n";
-
-            richTextBox1.Text += MemInfo.dwMemoryLoad.ToString() + "%的內存正在使用" + "\n";
-            richTextBox1.Text += "物理內存共有" + MemInfo.dwTotalPhys.ToString() + "字節" + "\n";
-            richTextBox1.Text += "可使用的物理內存有" + MemInfo.dwAvailPhys.ToString() + "字節" + "\n";
-            richTextBox1.Text += "交換文件總大小為" + MemInfo.dwTotalPageFile.ToString() + "字節" + "\n";
-            richTextBox1.Text += "尚可交換文件大小為" + MemInfo.dwAvailPageFile.ToString() + "字節" + "\n";
-            richTextBox1.Text += "總虛擬內存有" + MemInfo.dwTotalVirtual.ToString() + "字節" + "\n";
-            richTextBox1.Text += "未用虛擬內存有" + MemInfo.dwAvailVirtual.ToString() + "字節" + "\n";
-
-            //調用GetSystemTime函數獲取系統時間訊息
-            SYSTEMTIME_INFO SysInfo = new SYSTEMTIME_INFO();
-            ComputerInfo.GetSystemTime(ref SysInfo);
-            richTextBox1.Text += "wYear = " + SysInfo.wYear.ToString() + "\n";
-            richTextBox1.Text += "wMonth = " + SysInfo.wMonth.ToString() + "\n";
-            richTextBox1.Text += "wDayOfWeek = " + SysInfo.wDayOfWeek.ToString() + "\n";
-            richTextBox1.Text += "wDay = " + SysInfo.wDay.ToString() + "\n";
-            richTextBox1.Text += "wHour = " + SysInfo.wHour.ToString() + "\n";
-            richTextBox1.Text += "wMinute = " + SysInfo.wMinute.ToString() + "\n";
-            richTextBox1.Text += "wSecond = " + SysInfo.wSecond.ToString() + "\n";
-            richTextBox1.Text += "wMilliseconds = " + SysInfo.wMilliseconds.ToString() + "\n";
-
-            //調用GetWindowsDirectory和GetSystemDirectory函數分別取得Windows路徑和系統路徑
-            const int nChars = 128;
-            StringBuilder Buff = new StringBuilder(nChars);
-            ComputerInfo.GetWindowsDirectory(Buff, nChars);
-            richTextBox1.Text += "Windows路徑：" + Buff.ToString() + "\n";
-            ComputerInfo.GetSystemDirectory(Buff, nChars);
-            richTextBox1.Text += "系統路徑：" + Buff.ToString() + "\n";
-
-            //調用GetSystemTime函數獲取系統時間信息
-            SYSTEMTIME_INFO StInfo;
-            StInfo = new SYSTEMTIME_INFO();
-            ComputerInfo.GetSystemTime(ref StInfo);
-            richTextBox1.Text += StInfo.wYear.ToString() + "年" + StInfo.wMonth.ToString() + "月" + StInfo.wDay.ToString() + "日" + "\n";
-            richTextBox1.Text += (StInfo.wHour + 8).ToString() + "點" + StInfo.wMinute.ToString() + "分" + StInfo.wSecond.ToString() + "秒" + "\n";
-        }
-
-        private void button47_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button48_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button49_Click(object sender, EventArgs e)
-        {
         }
 
         //------------------------------------------------------------  # 60個
 
+        private void button41_Click(object sender, EventArgs e)
+        {
+            //列出 Locales 2
+            // Save the culture (to make the following code shorter).
+            CultureInfo info = CultureInfo.InstalledUICulture;
+
+            // Day/Month values.
+            AddHeader("Day/Month:");
+            AddArrayItems("Day", info.DateTimeFormat.DayNames);
+            AddArrayItems("Abbrev Day", info.DateTimeFormat.AbbreviatedDayNames);
+            AddArrayItems("Short Days", info.DateTimeFormat.ShortestDayNames);
+            AddArrayItems("Month", info.DateTimeFormat.MonthNames);
+            AddArrayItems("Abbrev Month", info.DateTimeFormat.AbbreviatedMonthNames);
+
+            // Date/Time values.
+            AddHeader("Date/Time Format:");
+            AddItem("AMDesignator", info.DateTimeFormat.AMDesignator);
+            AddItem("DateSeparator", info.DateTimeFormat.DateSeparator);
+            AddItem("FirstDayOfWeek", info.DateTimeFormat.FirstDayOfWeek.ToString());
+            AddItem("FullDateTimePattern", info.DateTimeFormat.FullDateTimePattern);
+            AddItem("LongDatePattern", info.DateTimeFormat.LongDatePattern);
+            AddItem("LongTimePattern", info.DateTimeFormat.LongTimePattern);
+            AddItem("MonthDayPattern", info.DateTimeFormat.MonthDayPattern);
+            AddItem("NativeCalendarName", info.DateTimeFormat.NativeCalendarName);
+            AddItem("PMDesignator", info.DateTimeFormat.PMDesignator);
+            AddItem("RFC1123Pattern", info.DateTimeFormat.RFC1123Pattern);
+            AddItem("ShortDatePattern", info.DateTimeFormat.ShortDatePattern);
+            AddItem("ShortTimePattern", info.DateTimeFormat.ShortTimePattern);
+            AddItem("SortableDateTimePattern", info.DateTimeFormat.SortableDateTimePattern);
+            AddItem("TimeSeparator", info.DateTimeFormat.TimeSeparator);
+
+            // Culture values.
+            AddHeader("Culture:");
+            AddItem("Culture Name", info.Name);
+            AddItem("Culture Native Name", info.NativeName);
+            AddItem("Culture Display Name", info.DisplayName);
+            AddItem("Culture English Name", info.EnglishName);
+            AddItem("IetfLanguageTag", info.IetfLanguageTag);
+            AddItem("IsNeutralCulture", info.IsNeutralCulture.ToString());
+
+            // Currency values.
+            AddHeader("Currency Format:");
+            AddItem("Decimal Digits", info.NumberFormat.CurrencyDecimalDigits.ToString());
+            AddItem("Decimal Separator", info.NumberFormat.CurrencyDecimalSeparator);
+            AddItem("Group Separator", info.NumberFormat.CurrencyGroupSeparator);
+            AddIntegerArrayItems("Group Size", info.NumberFormat.CurrencyGroupSizes);
+            AddItem("Negative Pattern", info.NumberFormat.CurrencyNegativePattern.ToString());
+            AddItem("Positive Pattern", info.NumberFormat.CurrencyPositivePattern.ToString());
+            AddItem("Currency Symbol", info.NumberFormat.CurrencySymbol);
+
+            // Number values.
+            AddHeader("Number Format:");
+            AddItem("NaN", info.NumberFormat.NaNSymbol);
+            AddArrayItems("Native Digits", info.NumberFormat.NativeDigits);
+            AddItem("Infinity Symbol", info.NumberFormat.NegativeInfinitySymbol);
+            AddItem("Negative Sign", info.NumberFormat.NegativeSign);
+            AddItem("Decimal Separator", info.NumberFormat.NumberDecimalSeparator);
+            AddItem("Group Separator", info.NumberFormat.NumberGroupSeparator);
+            AddIntegerArrayItems("Group Size", info.NumberFormat.PercentGroupSizes);
+            AddItem("Negative Pattern", info.NumberFormat.NumberNegativePattern.ToString());
+            AddItem("Positive Infinity Symbol", info.NumberFormat.PositiveInfinitySymbol);
+            AddItem("Positive Sign", info.NumberFormat.PositiveSign);
+
+            // Percent values.
+            AddHeader("Percent Format:");
+            AddItem("Decimal Digits", info.NumberFormat.PercentDecimalDigits.ToString());
+            AddItem("Decimal Separator", info.NumberFormat.PercentDecimalSeparator);
+            AddItem("Group Separator", info.NumberFormat.PercentGroupSeparator);
+            AddIntegerArrayItems("Group Size", info.NumberFormat.PercentGroupSizes);
+            AddItem("Negative Pattern", info.NumberFormat.PercentNegativePattern.ToString());
+            AddItem("Positive Pattern", info.NumberFormat.PercentPositivePattern.ToString());
+            AddItem("Percent Symbol", info.NumberFormat.PercentSymbol);
+            AddItem("PerMilleSymbol", info.NumberFormat.PerMilleSymbol);
+        }
+
+        // Add a header row.
+        private void AddHeader(string name)
+        {
+            richTextBox1.Text += "\n--------------------\t" + name + "\t--------------------\n";
+        }
+
+        // Add a value to the result.
+        private void AddItem(string name, string value)
+        {
+            richTextBox1.Text += name + "\t" + value + "\n";
+        }
+
+        // Add all values in an array.
+        private void AddArrayItems(string name, string[] values)
+        {
+            for (int i = 0; i < values.Length; i++)
+            {
+                AddItem(name + "[" + i + "]", values[i]);
+                //richTextBox1.Text += name + "[" + i + "]" + "\t" + values[i] + "\n";
+            }
+        }
+
+        // Add all values in an integer array.
+        private void AddIntegerArrayItems(string name, int[] values)
+        {
+            for (int i = 0; i < values.Length; i++)
+            {
+                AddItem(name + "[" + i + "]", values[i].ToString());
+                //richTextBox1.Text += name + "[" + i + "]" + "\t" + values[i].ToString() + "\n";
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
 
         //#region Windows 開關機
         [DllImport("user32")]
@@ -1867,14 +1991,9 @@ namespace vcs_System1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
 
 /*
 
@@ -1882,6 +2001,4 @@ var desktop1 = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 richTextBox1.Text += "你的計算機名稱 : " + Environment.MachineName.ToString() + "\n";
 
 */
-
-
 

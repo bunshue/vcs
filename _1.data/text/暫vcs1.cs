@@ -1,16 +1,24 @@
-﻿StringFormat string_format = new StringFormat();
-string_format.Alignment = StringAlignment.Center;
-string_format.LineAlignment = StringAlignment.Center;
-
-int index = (int)CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek;
+﻿int index = (int)CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek;
 string[] day_names = CultureInfo.CurrentCulture.DateTimeFormat.DayNames;
 int col = (int)date.DayOfWeek - (int)CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek;
+
+string[] month_names = CultureInfo.CurrentCulture.DateTimeFormat.MonthNames;
+
+            DateTime first_of_month = new DateTime(year_num, month_num, 1);
+            int num_days = DateTime.DaysInMonth(year_num, month_num);
+
+
+//            gr.DrawRectangle(Pens.Black, bounds.X, bounds.Y, bounds.Width, bounds.Height);
+
+
 
 StringFormat string_format = new StringFormat();
 string_format.Alignment = StringAlignment.Center;
 string_format.LineAlignment = StringAlignment.Center;
 
-string[] month_names = CultureInfo.CurrentCulture.DateTimeFormat.MonthNames;
+StringFormat string_format = new StringFormat();
+string_format.Alignment = StringAlignment.Center;
+string_format.LineAlignment = StringAlignment.Center;
 
 StringFormat string_format = new StringFormat();
 string_format.Alignment = StringAlignment.Near;
@@ -18,12 +26,6 @@ string_format.LineAlignment = StringAlignment.Near;
 string_format.Trimming = StringTrimming.EllipsisWord;
 string_format.FormatFlags = StringFormatFlags.LineLimit;
 
-
-            DateTime first_of_month = new DateTime(year_num, month_num, 1);
-            int num_days = DateTime.DaysInMonth(year_num, month_num);
-
-
-//            gr.DrawRectangle(Pens.Black, bounds.X, bounds.Y, bounds.Width, bounds.Height);
 
 
 //------------------------------------------------------------  # 60個
