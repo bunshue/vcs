@@ -299,9 +299,64 @@ namespace vcs_test_all_03_Syntax1
         {
         }
 
+        //------------------------------------------------------------  # 60個
+
+        static bool test_out_syntax_function(int index, out string ErrorMessage)
+        {
+            ErrorMessage = "";
+
+            if (index < 5)
+            {
+                //失敗
+                ErrorMessage = "作業失敗";
+                return false;
+            }
+            else
+            {
+                ErrorMessage = "作業成功";
+                return true;
+            }
+        }
+
+
+                void MaxMinArray(int[] a, out int max, out int min)
+        {
+            max = a[0];
+            min = a[0];
+
+            for (int i = 1; i < a.Length; i++)
+            {
+                if (a[i] > max) max = a[i];
+                if (a[i] < min) min = a[i];
+            }
+        }
+
+
         private void button10_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "測試 out 語法\n";
+
+            string errorMessage;
+            int index = 5;
+            bool result = test_out_syntax_function(index, out errorMessage);
+            richTextBox1.Text += "取得資料 : " + result.ToString() + "\t" + errorMessage + "\n";
+
+
+            index = 0;
+            result = test_out_syntax_function(index, out errorMessage);
+            richTextBox1.Text += "取得資料 : " + result.ToString() + "\t" + errorMessage + "\n";
+
+
+            int max, min;
+            /*
+            MaxMinArray(s, out max, out min);
+            res += "最高分 = " + max + "\r\n";
+            res += "最低分 = " + min + "\r\n";
+            */
+
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button11_Click(object sender, EventArgs e)
         {
@@ -1097,15 +1152,13 @@ namespace vcs_test_all_03_Syntax1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-
 /*
 
- vcs 使用 macro
+vcs 使用 macro
 
 #define Use_IndexOf
 #define Use_HitTest

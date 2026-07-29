@@ -58,25 +58,15 @@ namespace vcs_CopyFromScreen
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            pictureBox1.Size = new Size(830, 600);
-            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            pictureBox1.Size = new Size(830, 690);
+            pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
 
-            richTextBox1.Size = new Size(300, 600);
-            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
+            richTextBox1.Size = new Size(300, 690);
+            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1610, 750);
+            this.Size = new Size(1400, 750);
             this.Text = "vcs_CopyFromScreen";
 
             //設定執行後的表單起始位置, 正中央
@@ -261,40 +251,7 @@ namespace vcs_CopyFromScreen
 
         private void button5_Click(object sender, EventArgs e)
         {
-
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-            //本程式截圖
-
-            //執行螢幕截圖的操作
+            //本程式截圖1
 
             Point Var_Loc = this.Location;//取得目前視窗的位置
 
@@ -306,6 +263,7 @@ namespace vcs_CopyFromScreen
 
             Rectangle rect = new Rectangle();//實例化Rectangle類
             rect = Screen.GetWorkingArea(this);//獲得目前螢幕的大小
+
             Graphics g1 = this.CreateGraphics();//建立一個以目前螢幕為模板的圖片
             Bitmap bitmap1 = new Bitmap(rect.Width, rect.Height, g1);//建立以螢幕大小為標準的位圖 
             Graphics g2 = Graphics.FromImage(bitmap1);//根據圖片實例化Graphics類
@@ -323,9 +281,10 @@ namespace vcs_CopyFromScreen
 
         //------------------------------------------------------------  # 60個
 
-        private void button11_Click(object sender, EventArgs e)
+        private void button6_Click(object sender, EventArgs e)
         {
-            //本程式截圖
+            //本程式截圖2
+
             Graphics g1 = this.CreateGraphics();//獲得窗體圖形對象
 
             Bitmap bitmap1 = new Bitmap(this.ClientRectangle.Width, this.ClientRectangle.Height, g1);
@@ -345,48 +304,14 @@ namespace vcs_CopyFromScreen
 
         //------------------------------------------------------------  # 60個
 
-        private void button12_Click(object sender, EventArgs e)
+        private void button7_Click(object sender, EventArgs e)
         {
         }
 
         //------------------------------------------------------------  # 60個
 
-        private void button13_Click(object sender, EventArgs e)
+        private void button8_Click(object sender, EventArgs e)
         {
-
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button14_Click(object sender, EventArgs e)
-        {
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button15_Click(object sender, EventArgs e)
-        {
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button16_Click(object sender, EventArgs e)
-        {
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button17_Click(object sender, EventArgs e)
-        {
-
-
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button18_Click(object sender, EventArgs e)
-        {
-
         }
 
         //------------------------------------------------------------  # 60個
@@ -394,34 +319,29 @@ namespace vcs_CopyFromScreen
         [DllImport("user32.dll", EntryPoint = "GetSystemMetrics")]
         private static extern int GetSystemMetrics(int mVal);
 
-        private void button19_Click(object sender, EventArgs e)
+        private void button9_Click(object sender, EventArgs e)
         {
+            // 根據桌面大小調整視窗大小 
+            // PrimaryScreen為取得主顯示器，WorkingArea可取得顯示器的工作區(不包含工作列…等)
+
             //參數
+
+            //取得螢幕大小
+            richTextBox1.Text += "使用 Screen.PrimaryScreen.Bounds\n";
             int W = Screen.PrimaryScreen.Bounds.Width;  // 主螢幕寬度
             int H = Screen.PrimaryScreen.Bounds.Height;  // 主螢幕高度
-            richTextBox1.Text += "W = " + W.ToString() + "\n";
-            richTextBox1.Text += "H = " + H.ToString() + "\n";
+            richTextBox1.Text += "螢幕解析度 : " + W.ToString() + " X " + H.ToString() + "\n";
 
             Rectangle rect = Screen.GetBounds(Point.Empty);
-
             richTextBox1.Text += "rect = " + rect.ToString() + "\n";
+
             richTextBox1.Text += "x = " + Screen.PrimaryScreen.Bounds.X.ToString() + "\n";
             richTextBox1.Text += "y = " + Screen.PrimaryScreen.Bounds.Y.ToString() + "\n";
             richTextBox1.Text += "size = " + Screen.PrimaryScreen.Bounds.Size.ToString() + "\n";
 
             Rectangle rect2 = new Rectangle();//實例化Rectangle類
             rect2 = Screen.GetWorkingArea(this);//獲得目前螢幕的大小
-            richTextBox1.Text += "rect2 : " + rect2.ToString() + "\n";
-
-            return;
-
-            //取得螢幕大小
-
-            richTextBox1.Text += "使用 Screen.PrimaryScreen.Bounds\n";
-            W = Screen.PrimaryScreen.Bounds.Width;
-            H = Screen.PrimaryScreen.Bounds.Height;
-
-            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+            richTextBox1.Text += "rect2 = " + rect2.ToString() + "\n";
 
             //------------------------------------------------------------  # 60個
 
@@ -435,83 +355,62 @@ namespace vcs_CopyFromScreen
             //獲取屏幕的分辨率，也就是顯示器屏幕的大小。
             W = SystemInformation.PrimaryMonitorSize.Width;
             H = SystemInformation.PrimaryMonitorSize.Height;
-
-            richTextBox1.Text += "W = " + W.ToString() + " H = " + H.ToString() + "\n";
-
-            richTextBox1.Text += "取得桌面大小\n";
-            richTextBox1.Text += "桌面寬度 : \t" + Screen.PrimaryScreen.WorkingArea.Width.ToString() + "\n";
-            richTextBox1.Text += "桌面高度 : \t" + Screen.PrimaryScreen.WorkingArea.Height.ToString() + "\n";
+            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
 
             //------------------------------------------------------------  # 60個
 
             //取得螢幕解析度資料
-            System.Windows.Forms.Screen scr = System.Windows.Forms.Screen.PrimaryScreen;//PrimaryScreen 属性：获取主显示设备
-            richTextBox1.Text += "Bounds:\t\t" + scr.Bounds.ToString() + "\n"; //获取屏幕的边界。属性值是一个Rectangle结构的值
-            richTextBox1.Text += "DeviceName:\t" + scr.DeviceName.ToString() + "\n"; //获取与显示关联的设备名称
-            richTextBox1.Text += "Primary:\t\t" + scr.Primary.ToString() + "\n";   //该值指示某个显示是否为主设备
-            richTextBox1.Text += "WorkingArea:\t" + scr.WorkingArea.ToString() + "\n";   //获取显示器的工作区, 属性值是一个Rectangle结构的值
-            richTextBox1.Text += "BitsPerPixel:\t" + scr.BitsPerPixel.ToString() + "\n"; //获取与数据的一个像素相关联的内存位数
+            Screen pscr = Screen.PrimaryScreen;//PrimaryScreen 属性：获取主显示设备
+            richTextBox1.Text += "Bounds:\t\t" + pscr.Bounds.ToString() + "\n"; //获取屏幕的边界。属性值是一个Rectangle结构的值
+            richTextBox1.Text += "DeviceName:\t" + pscr.DeviceName.ToString() + "\n"; //获取与显示关联的设备名称
+            richTextBox1.Text += "Primary:\t\t" + pscr.Primary.ToString() + "\n";   //该值指示某个显示是否为主设备
+            richTextBox1.Text += "WorkingArea:\t" + pscr.WorkingArea.ToString() + "\n";   //获取显示器的工作区, 属性值是一个Rectangle结构的值
+            richTextBox1.Text += "BitsPerPixel:\t" + pscr.BitsPerPixel.ToString() + "\n"; //获取与数据的一个像素相关联的内存位数
 
             //------------------------------------------------------------  # 60個
 
-            //螢幕解析度 與 可工作區域
-            //取得螢幕解析度
-            int ScreenWidth = Screen.PrimaryScreen.Bounds.Width;
-            int ScreenHeight = Screen.PrimaryScreen.Bounds.Height;
+            //取得 可工作區域大小
+            W = Screen.PrimaryScreen.WorkingArea.Width;
+            H = Screen.PrimaryScreen.WorkingArea.Height;
+            richTextBox1.Text += "可工作區域大小, W = " + W.ToString() + ", H = " + H.ToString() + "\n";
 
-            richTextBox1.Text += "螢幕解析度 : " + ScreenWidth.ToString() + " X " + ScreenHeight.ToString() + "\n";
+            richTextBox1.Text += "WorkingArea = " + Screen.PrimaryScreen.WorkingArea.ToString() + "\n";
 
-            //取得可工作區域大小
-            int WorkingAreaWidth = Screen.PrimaryScreen.WorkingArea.Width;
-            int WorkingAreaHeight = Screen.PrimaryScreen.WorkingArea.Height;
+            //------------------------------------------------------------  # 60個
+            //Screen.AllScreens
 
-            richTextBox1.Text += "可工作區域大小 : " + WorkingAreaWidth.ToString() + " X " + WorkingAreaHeight.ToString() + "\n";
-
-            foreach (Screen screen in System.Windows.Forms.Screen.AllScreens)
+            foreach (Screen scr in Screen.AllScreens)
             {
-                richTextBox1.Text += "Screen " + screen.DeviceName + "\n";
-                richTextBox1.Text += "\tPrimary " + screen.Primary + "\n";
-                richTextBox1.Text += "\tBounds: " + screen.Bounds + "\n";
-                richTextBox1.Text += "\tWorking Area: " + screen.WorkingArea + "\n";
-                richTextBox1.Text += "\tBitsPerPixel: " + screen.BitsPerPixel + "\n";
+                richTextBox1.Text += "Screen " + scr.DeviceName + "\n";
+                richTextBox1.Text += "\tPrimary " + scr.Primary + "\n";
+                richTextBox1.Text += "\tBounds: " + scr.Bounds + "\n";
+                richTextBox1.Text += "\tWorking Area: " + scr.WorkingArea + "\n";
+                richTextBox1.Text += "\tBitsPerPixel: " + scr.BitsPerPixel + "\n";
             }
 
-            //------------------------------------------------------------  # 60個
-
-            //螢幕資訊
             richTextBox1.Text += "AllScreens.Length = " + Screen.AllScreens.Length.ToString() + "\n";
-
-            richTextBox1.Text += "W = " + Screen.AllScreens[0].Bounds.Width.ToString() + ", H = " + Screen.AllScreens[0].Bounds.Height.ToString() + "\n";
+            W = Screen.AllScreens[0].Bounds.Width;
+            H = Screen.AllScreens[0].Bounds.Height;
+            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
             richTextBox1.Text += "Bounds = " + Screen.AllScreens[0].Bounds.Size.ToString() + "\n";
             richTextBox1.Text += "Rank = " + Screen.AllScreens.Rank.ToString() + "\n";
 
             richTextBox1.Text += "DeviceName = " + Screen.PrimaryScreen.DeviceName + "\n";
             richTextBox1.Text += "BitsPerPixel = " + Screen.PrimaryScreen.BitsPerPixel.ToString() + "\n";
             richTextBox1.Text += "Bounds = " + Screen.PrimaryScreen.Bounds.ToString() + "\n";
-            richTextBox1.Text += "WorkingArea = " + Screen.PrimaryScreen.WorkingArea.ToString() + "\n";
 
             //------------------------------------------------------------  # 60個
+            //Screen.GetWorkingArea
 
             Rectangle WorkArea = Screen.GetWorkingArea(this);//屏幕顯示區域
             W = WorkArea.Width; //屏幕寬度
             H = WorkArea.Height; //屏幕高度
-            richTextBox1.Text += "W = " + W.ToString() + "\n";
-            richTextBox1.Text += "H = " + H.ToString() + "\n";
+            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
 
             //------------------------------------------------------------  # 60個
 
-            // 根據桌面大小調整視窗大小 
-            int DeskWidth = Screen.PrimaryScreen.WorkingArea.Width; //PrimaryScreen為取得主顯示器，WorkingArea可取得顯示器的工作區(不包含工作列…等)
-            int DeskHeight = Screen.PrimaryScreen.WorkingArea.Height;
-            this.Width = Convert.ToInt32(DeskWidth * 0.8);
-            this.Height = Convert.ToInt32(DeskHeight * 0.8);
-
-            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
-            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
-            richTextBox1.AppendText("螢幕解析度 : " + screenWidth.ToString() + "*" + screenHeight.ToString() + "\n");
-
-            //------------------------------------------------------------  # 60個
         }
+        //------------------------------------------------------------  # 60個
     }
 }
 
@@ -526,7 +425,7 @@ namespace vcs_CopyFromScreen
 //                    來源位置             目的位置      要傳輸的區域大小  判斷在像素複製作業中來源色彩如何與目的色彩結合以產生最後的色彩
 //g.CopyFromScreen(new Point(x_st, y_st), new Point(0, 0), new Size(w, h), CopyPixelOperation.SourceInvert);
 //g.CopyFromScreen(new Point(x_st, y_st), new Point(0, 0), new Size(w, h));
-g.CopyFromScreen(new Point(pt.X - w / 2, pt.Y - h / 2), new Point(0, 0), new Size(w, h));
+//g.CopyFromScreen(new Point(pt.X - w / 2, pt.Y - h / 2), new Point(0, 0), new Size(w, h));
 */
 
 //用Graphics.CopyFromScreen()把屏幕位圖拷貝到該位圖上
@@ -534,7 +433,6 @@ g.CopyFromScreen(new Point(pt.X - w / 2, pt.Y - h / 2), new Point(0, 0), new Siz
 //public void CopyFromScreen(int sourceX, int sourceY, int destinationX, int destinationY, Size blockRegionSize);
 
 //參數
-//Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height));
 //Rectangle bounds = Screen.GetBounds(Screen.GetBounds(Point.Empty));
 
 /*

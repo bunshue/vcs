@@ -51,7 +51,24 @@
             this.button3 = new System.Windows.Forms.Button();
             this.printDocument_image = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog_image = new System.Windows.Forms.PrintPreviewDialog();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.bt_dgv_print2 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txt_Range = new System.Windows.Forms.TextBox();
+            this.rb_Range = new System.Windows.Forms.RadioButton();
+            this.rb_All = new System.Windows.Forms.RadioButton();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.bt_dgv_print = new System.Windows.Forms.Button();
+            this.textBox_page = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.printDocument_dgv = new System.Drawing.Printing.PrintDocument();
+            this.printPreviewDialog_dgv = new System.Windows.Forms.PrintPreviewDialog();
             this.groupBox0.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.groupBox5.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox0
@@ -113,7 +130,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(254, 154);
+            this.bt_clear.Location = new System.Drawing.Point(527, 51);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 153;
@@ -124,7 +141,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(237, 117);
+            this.richTextBox1.Location = new System.Drawing.Point(510, 14);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 152;
@@ -250,11 +267,151 @@
             this.printPreviewDialog_image.Name = "printPreviewDialog_image";
             this.printPreviewDialog_image.Visible = false;
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(237, 311);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(100, 100);
+            this.dataGridView1.TabIndex = 160;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.bt_dgv_print2);
+            this.groupBox5.Controls.Add(this.label2);
+            this.groupBox5.Controls.Add(this.txt_Range);
+            this.groupBox5.Controls.Add(this.rb_Range);
+            this.groupBox5.Controls.Add(this.rb_All);
+            this.groupBox5.Location = new System.Drawing.Point(237, 215);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(435, 71);
+            this.groupBox5.TabIndex = 163;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "页码范围设置";
+            // 
+            // bt_dgv_print2
+            // 
+            this.bt_dgv_print2.Location = new System.Drawing.Point(332, 12);
+            this.bt_dgv_print2.Name = "bt_dgv_print2";
+            this.bt_dgv_print2.Size = new System.Drawing.Size(72, 36);
+            this.bt_dgv_print2.TabIndex = 4;
+            this.bt_dgv_print2.Text = "打印";
+            this.bt_dgv_print2.UseVisualStyleBackColor = true;
+            this.bt_dgv_print2.Click += new System.EventHandler(this.bt_dgv_print2_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(259, 47);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(83, 12);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "(例如：1,2,3-5)";
+            // 
+            // txt_Range
+            // 
+            this.txt_Range.Enabled = false;
+            this.txt_Range.Location = new System.Drawing.Point(87, 43);
+            this.txt_Range.Name = "txt_Range";
+            this.txt_Range.Size = new System.Drawing.Size(166, 22);
+            this.txt_Range.TabIndex = 2;
+            // 
+            // rb_Range
+            // 
+            this.rb_Range.AutoSize = true;
+            this.rb_Range.Location = new System.Drawing.Point(10, 44);
+            this.rb_Range.Name = "rb_Range";
+            this.rb_Range.Size = new System.Drawing.Size(71, 16);
+            this.rb_Range.TabIndex = 1;
+            this.rb_Range.Text = "页码范围";
+            this.rb_Range.UseVisualStyleBackColor = true;
+            // 
+            // rb_All
+            // 
+            this.rb_All.AutoSize = true;
+            this.rb_All.Checked = true;
+            this.rb_All.Location = new System.Drawing.Point(10, 22);
+            this.rb_All.Name = "rb_All";
+            this.rb_All.Size = new System.Drawing.Size(47, 16);
+            this.rb_All.TabIndex = 0;
+            this.rb_All.TabStop = true;
+            this.rb_All.Text = "全部";
+            this.rb_All.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.label3);
+            this.groupBox4.Controls.Add(this.bt_dgv_print);
+            this.groupBox4.Controls.Add(this.textBox_page);
+            this.groupBox4.Controls.Add(this.label1);
+            this.groupBox4.Location = new System.Drawing.Point(237, 142);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(435, 67);
+            this.groupBox4.TabIndex = 162;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "分页打印设置";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.Color.Red;
+            this.label3.Location = new System.Drawing.Point(17, 47);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(245, 12);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "注意：请在输入每页打印行数之后按回车键！";
+            // 
+            // bt_dgv_print
+            // 
+            this.bt_dgv_print.Location = new System.Drawing.Point(321, 21);
+            this.bt_dgv_print.Name = "bt_dgv_print";
+            this.bt_dgv_print.Size = new System.Drawing.Size(72, 36);
+            this.bt_dgv_print.TabIndex = 3;
+            this.bt_dgv_print.Text = "打印";
+            this.bt_dgv_print.UseVisualStyleBackColor = true;
+            this.bt_dgv_print.Click += new System.EventHandler(this.bt_dgv_print_Click);
+            // 
+            // textBox_page
+            // 
+            this.textBox_page.Location = new System.Drawing.Point(103, 21);
+            this.textBox_page.Name = "textBox_page";
+            this.textBox_page.Size = new System.Drawing.Size(28, 22);
+            this.textBox_page.TabIndex = 1;
+            this.textBox_page.Text = "30";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(17, 24);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(89, 12);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "每页打印行数：";
+            // 
+            // printDocument_dgv
+            // 
+            this.printDocument_dgv.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_dgv_PrintPage);
+            // 
+            // printPreviewDialog_dgv
+            // 
+            this.printPreviewDialog_dgv.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog_dgv.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog_dgv.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog_dgv.Document = this.printDocument_dgv;
+            this.printPreviewDialog_dgv.Enabled = true;
+            this.printPreviewDialog_dgv.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog_dgv.Icon")));
+            this.printPreviewDialog_dgv.Name = "printPreviewDialog_dgv";
+            this.printPreviewDialog_dgv.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1047, 582);
+            this.Controls.Add(this.groupBox5);
+            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -267,6 +424,11 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox0.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -296,6 +458,20 @@
         private System.Windows.Forms.Button button3;
         private System.Drawing.Printing.PrintDocument printDocument_image;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog_image;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Button bt_dgv_print2;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txt_Range;
+        private System.Windows.Forms.RadioButton rb_Range;
+        private System.Windows.Forms.RadioButton rb_All;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button bt_dgv_print;
+        private System.Windows.Forms.TextBox textBox_page;
+        private System.Windows.Forms.Label label1;
+        private System.Drawing.Printing.PrintDocument printDocument_dgv;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog_dgv;
     }
 }
 

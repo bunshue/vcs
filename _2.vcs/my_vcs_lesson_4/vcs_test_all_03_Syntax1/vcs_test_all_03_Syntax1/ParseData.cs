@@ -225,3 +225,73 @@ namespace vcs_test_all_03_Syntax1
         }
     }
 }
+
+/*
+又被問到如何判斷數值( Check Numeric ) 這個問題了...
+1.「double.TryParse」
+
+Code：
+
+double i;
+
+if (double.TryParse(textBox1.Text, out i))
+	MessageBox.Show("為數值!!");
+else
+	MessageBox.Show("非數值!!");
+
+//------------------------------------------------------------  # 60個
+
+            Price = int.Parse(Console.ReadLine());
+
+console mode讀取double數字
+            double netIncome;
+            int taxRate;
+
+            Console.Write("請輸入全年綜合所得淨額(單位:萬元) : ");
+            netIncome = double.Parse(Console.ReadLine());
+
+//------------------------------------------------------------  # 60個
+
+把TextBox的每一行數字解出到數值陣列裏
+
+// Get the item values.
+string[] strings = textBox1.Lines;
+int[] values = new int[strings.Length];
+for (int i = 0; i < strings.Length; i++)
+{
+	values[i] = int.Parse(strings[i]);
+}
+
+//------------------------------------------------------------  # 60個
+
+// 命名空間
+using System.Net;
+using System.Net.Sockets;
+      try
+      {
+        // 將IP位址字串轉換為IPAddress類別
+        IPAddress address = IPAddress.Parse(txtIP.Text);
+
+        // 判斷IP位址是為否回送位址
+        if (IPAddress.IsLoopback(address) && address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+		// 為IPv4及回送位址
+		MessageBox.Show(address.ToString() + " is a IPv4 loopback address.", "IP Address",
+		MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+        else if (IPAddress.IsLoopback(address) && address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6)
+		// 為IPv6及回送位址
+		MessageBox.Show(address.ToString() + " is a IPv6 loopback address.", "IP Address",
+		MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+        else
+		MessageBox.Show(address.ToString() + " is not a loopback address.", "IP Address",
+		MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+      }
+      catch (Exception ex)
+      {
+		Console.WriteLine(ex.Message);
+      }
+
+//------------------------------------------------------------  # 60個
+*/
+
+
+

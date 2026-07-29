@@ -140,8 +140,7 @@ namespace vcs_AudioVideoTest1
             sp.Play(); //播放声音文件
             */
 
-
-            //3030
+            //------------------------------  # 30個
 
             //停止播放
             /*
@@ -155,7 +154,7 @@ namespace vcs_AudioVideoTest1
 
             sp.Stop(); // 停止
             */
-            //3030
+            //------------------------------  # 30個
 
             /*
             //播放 wav或音樂檔
@@ -200,12 +199,11 @@ namespace vcs_AudioVideoTest1
             */
 
             /*
-            using (SoundPlayer player = new SoundPlayer(Properties.Resources.tada))
+            using (SoundPlayer sp = new SoundPlayer(Properties.Resources.tada))
             {
-                player.Play();
+                sp.Play();
             }
             */
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -217,6 +215,14 @@ namespace vcs_AudioVideoTest1
         private void button2_Click(object sender, EventArgs e)
         {
             //播放系統預設的音效
+            /*
+            System.Media.SystemSounds.Asterisk.Play();
+            System.Media.SystemSounds.Beep.Play();
+            System.Media.SystemSounds.Exclamation.Play();
+            System.Media.SystemSounds.Hand.Play();
+            System.Media.SystemSounds.Question.Play();
+            */
+
             switch (number)
             {
                 case 0:
@@ -250,13 +256,36 @@ namespace vcs_AudioVideoTest1
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button3_Click(object sender, EventArgs e)
         {
+            // SoundPlayer
+            // 使用System.Media.SoundPlayer播放.wav格式聲音
+
+            SoundPlayer sp = new SoundPlayer();
+            sp.SoundLocation = "sounds/WallHit.wav";
+            sp.Load(); //同步加載聲音
+            sp.Play(); //啟用新線程播放
+            //sp.PlayLooping(); //循環播放模式
+            //sp.PlaySync(); //UI線程播放
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //windows media player  TBD
+
+            // 播放歌曲
+            //axWMP.URL = @"D:\Music\02.AVRIL LAVIGNE 酷到骨子裡 MY HAPPY ENDING.mp3";
+            // 設定重複播放
+            //axWMP.settings.setMode("loop", true);
+            // 設定隨機播放
+            //axWMP.settings.setMode("shuffle", true);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button5_Click(object sender, EventArgs e)
         {
@@ -966,18 +995,18 @@ namespace vcs_AudioVideoTest1
         }
 
         // The player making the current sound.
-        private SoundPlayer Player = null;
+        private SoundPlayer sound_player = null;
 
         // Dispose of the current player and
         // play the indicated WAV file.
         private void PlayWav(string filename, bool play_looping)
         {
             // Stop the player if it is running.
-            if (Player != null)
+            if (sound_player != null)
             {
-                Player.Stop();
-                Player.Dispose();
-                Player = null;
+                sound_player.Stop();
+                sound_player.Dispose();
+                sound_player = null;
             }
 
             // If we have no file name, we're done.
@@ -991,16 +1020,16 @@ namespace vcs_AudioVideoTest1
             }
 
             // Make the new player for the WAV file.
-            Player = new SoundPlayer(filename);
+            sound_player = new SoundPlayer(filename);
 
             // Play.
             if (play_looping)
             {
-                Player.PlayLooping();
+                sound_player.PlayLooping();
             }
             else
             {
-                Player.Play();
+                sound_player.Play();
             }
         }
 
@@ -1405,26 +1434,12 @@ namespace vcs_AudioVideoTest1
     }
 }
 
-
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*
-
-1.播放系統事件聲音
-　　 System.Media.SystemSounds.Asterisk.Play();
-　　 System.Media.SystemSounds.Beep.Play();
-　　 System.Media.SystemSounds.Exclamation.Play();
-　　 System.Media.SystemSounds.Hand.Play();
-　　 System.Media.SystemSounds.Question.Play();
-
-*/
-
 
 /*
         [DllImport("kernel32.dll")]
@@ -1433,26 +1448,7 @@ namespace vcs_AudioVideoTest1
         {
             Beep(800, 3000);
         }
-*/
-
-
-
-
-
-
-
 //------------------------------------------------------------  # 60個
-/*
-//C# 播放聲音﻿﻿
-
-2.使用System.Media.SoundPlayer播放.wav格式聲音
-
-	SoundPlayer player = new SoundPlayer();
-	player.SoundLocation = "sounds/WallHit.wav";
-	player.Load(); //同步加載聲音
-	player.Play(); //啟用新線程播放
-	//player.PlayLooping(); //循環播放模式
-	//player.PlaySync(); //UI線程播放
 
 3.利用Windows Media Player
 
@@ -1479,8 +1475,6 @@ namespace vcs_AudioVideoTest1
         				
 MCISendString
 
-
-
 //------------------------------------------------------------  # 60個
 
 	axWindowsMediaPlayer1.Ctlcontrols.playItem(playListDict[path]);		playItem ??
@@ -1499,8 +1493,6 @@ MCISendString
         private Point closePoint;//關閉按鈕的位置
         private Size dfSize;//最初的位置
 
-        //聲音
-        SoundPlayer player = new SoundPlayer();
         Dictionary<string, string> dic = new Dictionary<string, string>();
 
         //播放列表
@@ -1533,8 +1525,6 @@ MCISendString
             }
         }
 
-//------------------------------------------------------------  # 60個
-
 
 //-----wmp----------------------------------------------------  # 60個        				
 
@@ -1547,10 +1537,10 @@ richTextBox1.Text += "add " + str + "\n";
 C# WindowsMediaPlayer 的一些用法
 
 播放單首歌曲
-                player.URL = 
+player.URL = 
 
 添加多首歌曲到播放列表
-            IWMPPlaylist playList = player.playlistCollection.newPlaylist(); 
+IWMPPlaylist playList = player.playlistCollection.newPlaylist(); 
  (DataRow drItem = player.newMedia(drItem[].ToString()); 
 =
 
@@ -1619,15 +1609,6 @@ axWindowsMediaPlayer1.uiMode = "none";
 axWindowsMediaPlayer1.uiMode = "invisible";
 
 
-在視頻播放之後,可以通過如下方式讀取源視頻的寬度和高度,然後設置其還原爲原始的大小.
-         private void ResizeOriginal()
-         {
-             int intWidth = axWindowsMediaPlayer1.currentMedia.imageSourceWidth;
-             int intHeight = axWindowsMediaPlayer1.currentMedia.imageSourceHeight;
-             axWindowsMediaPlayer1.Width = intWidth + 2;
-             axWindowsMediaPlayer1.Height = intHeight + 2;
-         }
-
 可能因爲媒體文件的打開需要一定時間，這裏等待媒體文件的打開
 
 顯示文件播放長度。
@@ -1692,16 +1673,6 @@ currentMedia.name:string; 同 currentMedia.getItemInfo("Title")
 currentPlaylist.count:integer; 當前播放列表所包含媒體數 
 currentPlaylist.Item[integer]; 獲取或設置指定項目媒體信息，其子屬性同wmp.currentMedia 
 
-
-在視頻播放之後,可以通過如下方式讀取源視頻的寬度和高度,然後設置其還原為原始的大小.
-         private void ResizeOriginal()
-         {
-							             int intWidth = axWindowsMediaPlayer1.currentMedia.imageSourceWidth;
-							             int intHeight = axWindowsMediaPlayer1.currentMedia.imageSourceHeight;
-							             axWindowsMediaPlayer1.Width = intWidth + 2;
-							             axWindowsMediaPlayer1.Height = intHeight + 2;
-         }
-
 //------------------------------------------------------------  # 60個
 
 ffmpeg的用法
@@ -1761,18 +1732,6 @@ ffmpeg64.exe -i null.ape -ar 44100 -ac 2 -ab 16k -vol 50 -f mp3 null.mp3
 
 //------------------------------------------------------------  # 60個
 
-windows media player
-// 播放歌曲
-            axWMP.URL = @"D:\Music\02.AVRIL LAVIGNE 酷到骨子裡 MY HAPPY ENDING.mp3";
-            // 設定重複播放
-            //axWMP.settings.setMode("loop", true);
-            // 設定隨機播放
-            //axWMP.settings.setMode("shuffle", true);
-            
-//------------------------------------------------------------  # 60個
-
-
-
 C# axWindowsMediaPlayer制作播放器
 http://www.mamicode.com/info-detail-986551.html
 
@@ -1781,49 +1740,27 @@ https://blog.csdn.net/ivan_ljf/article/details/9774231
 
 //------------------------------------------------------------  # 60個
 
-
 vcs_WMP
 richTextBox1.Text += " 歌曲名称：" + axWindowsMediaPlayer1.currentMedia.getItemInfo("Title");
 
 mute & un-mute
-        private void pictureBox7_Click(object sender, EventArgs e)//静音
-        {
-            if (MM)
-            {
-                pictureBox7.Image = (Image)Properties.Resources.音量按钮变色;
-                axWindowsMediaPlayer1.settings.mute = true;
-                MM = false;
-            }
-            else
-            {
-                pictureBox7.Image = (Image)Properties.Resources.音量按钮;
-                axWindowsMediaPlayer1.settings.mute = false;
-                MM = true;
-            }
-        }
+private void pictureBox7_Click(object sender, EventArgs e)//静音
+{
+    if (MM)
+    {
+        pictureBox7.Image = (Image)Properties.Resources.音量按钮变色;
+        axWindowsMediaPlayer1.settings.mute = true;
+        MM = false;
+    }
+    else
+    {
+        pictureBox7.Image = (Image)Properties.Resources.音量按钮;
+        axWindowsMediaPlayer1.settings.mute = false;
+        MM = true;
+    }
+}
 
-
-vcs_WMP
-richTextBox1.Text += " 歌曲名称：" + axWindowsMediaPlayer1.currentMedia.getItemInfo("Title");
-
-mute & un-mute
-        private void pictureBox7_Click(object sender, EventArgs e)//静音
-        {
-            if (MM)
-            {
-                pictureBox7.Image = (Image)Properties.Resources.音量按钮变色;
-                axWindowsMediaPlayer1.settings.mute = true;
-                MM = false;
-            }
-            else
-            {
-                pictureBox7.Image = (Image)Properties.Resources.音量按钮;
-                axWindowsMediaPlayer1.settings.mute = false;
-                MM = true;
-            }
-        }
-
-6060
+//------------------------------------------------------------  # 60個
 
 wmp改變視窗大小
 https://blog.csdn.net/ivan_ljf/article/details/9774231
@@ -1840,19 +1777,16 @@ axWindowsMediaPlayer1.settings.balance = 1; 伴唱
 axWindowsMediaPlayer1.settings.balance = -1;原唱
 
 windows media player
+
 在視頻播放之後,可以通過如下方式讀取源視頻的寬度和高度,然後設置其還原為原始的大小.
-         private void ResizeOriginal()
-         {
-             int intWidth = axWindowsMediaPlayer1.currentMedia.imageSourceWidth;
-             int intHeight = axWindowsMediaPlayer1.currentMedia.imageSourceHeight;
-             axWindowsMediaPlayer1.Width = intWidth + 2;
-             axWindowsMediaPlayer1.Height = intHeight + 2;
-         }
+private void ResizeOriginal()
+{
+    int intWidth = axWindowsMediaPlayer1.currentMedia.imageSourceWidth;
+    int intHeight = axWindowsMediaPlayer1.currentMedia.imageSourceHeight;
+    axWindowsMediaPlayer1.Width = intWidth + 2;
+    axWindowsMediaPlayer1.Height = intHeight + 2;
+}
 
 //------------------------------------------------------------  # 60個
 */
-
-
-
-
 

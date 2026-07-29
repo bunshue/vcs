@@ -1,56 +1,42 @@
-﻿
+﻿StringFormat string_format = new StringFormat();
+string_format.Alignment = StringAlignment.Center;
+string_format.LineAlignment = StringAlignment.Center;
+
+int index = (int)CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek;
+string[] day_names = CultureInfo.CurrentCulture.DateTimeFormat.DayNames;
+int col = (int)date.DayOfWeek - (int)CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek;
+
+StringFormat string_format = new StringFormat();
+string_format.Alignment = StringAlignment.Center;
+string_format.LineAlignment = StringAlignment.Center;
+
+string[] month_names = CultureInfo.CurrentCulture.DateTimeFormat.MonthNames;
+
+StringFormat string_format = new StringFormat();
+string_format.Alignment = StringAlignment.Near;
+string_format.LineAlignment = StringAlignment.Near;
+string_format.Trimming = StringTrimming.EllipsisWord;
+string_format.FormatFlags = StringFormatFlags.LineLimit;
+
+
+            DateTime first_of_month = new DateTime(year_num, month_num, 1);
+            int num_days = DateTime.DaysInMonth(year_num, month_num);
+
+
+//            gr.DrawRectangle(Pens.Black, bounds.X, bounds.Y, bounds.Width, bounds.Height);
+
+
+//------------------------------------------------------------  # 60個
+
 List->
 
 List<int> myLists = new List<int>();
 另外List如同一張資料表,你可以對它編輯,如加入某一列或刪除某一列.
 
-
-
-
-        private string[] DirName()
-        {
-            int j = 0;
-            string[] str = new string[26];
-            for (int i = 65; i <91;i++ )
-            {
-                str [j]= Convert.ToChar(i).ToString()+":";
-                j++;
-            }
-            return str;
-        }
-
-
-//字串轉拜列
-string mystring = "this is a string"
-char[] mychars  = mystring.ToCharArray();
-
-//foreach循環處理char數組
-foreach(char mychar in mystring)
-{
-    Console.WriteLine(mychar);
-}
-mystring.Length //獲取元素的個數 
-
-6060
-
-	    //使用 GetBytes()將字串轉換為位元組陣列
-            //使用 GetBytes() 方法將字串轉換為位元組陣列
-
-            string myString = "This is a string.";
-            byte[] byteArray = Encoding.ASCII.GetBytes(myString);
-            richTextBox1.Text += "The Byte Array is:\n";
-            foreach (byte bytes in byteArray)
-            {
-                richTextBox1.Text += bytes.ToString() + "\n";
-            }
-
-
 //------------------------------------------------------------  # 60個
 
 GetPointBounds
 
-
-
         // Find the bounding rectangle for an array of points.
         private void GetPointBounds(PointF[] points, out float xmin, out float xmax, out float ymin, out float ymax)
         {
@@ -79,8 +65,6 @@ GetPointBounds
             }
         }
 
-
-
         // Find the bounding rectangle for an array of points.
         private void GetPointBounds(PointF[] points, out float xmin, out float xmax, out float ymin, out float ymax)
         {
@@ -108,10 +92,6 @@ GetPointBounds
                 }
             }
         }
-
-
-
-
 
 
         // Find the bounding rectangle for an array of points.
@@ -2164,60 +2144,6 @@ EMGU用的 在sugar使用OK
 
 //------------------------------------------------------------  # 60個
 
-測試out 語法
-
-C#通過POP3協議驗證 Email 賬號
-
-static bool ValidateEmailAccount(string server, int port, string userName, string password, out string ErrorMessage) 
-        { 
-            ErrorMessage = "";
-            //create a tcp connection
-            TcpClient _server = new TcpClient(server, port);
-            
-            //prepare
-            NetworkStream netStream = _server.GetStream();
-            
-            StreamReader sr = new StreamReader(_server.GetStream());
-            
-            if (!sr.ReadLine().Contains("+OK"))
-           { 
-                //失敗
-                ErrorMessage = "server鏈接失敗";
-                return false;
-            } 
-            string data;
-            byte[] charData;
-            string CRLF = "\r\n";
-            //login
-            data = "USER " + userName + CRLF;
-            charData = Encoding.ASCII.GetBytes(data);
-            
-            netStream.Write(charData, 0, charData.Length); 
-            if (!sr.ReadLine().Contains("+OK")) 
-            { 
-                //賬戶錯誤 
-                ErrorMessage = "賬戶錯誤"; 
-                return false; 
-            } 
-            data = "PASS " + password + CRLF; 
-            charData = Encoding.ASCII.GetBytes(data); 
-            netStream.Write(charData, 0, charData.Length); 
-            if (!sr.ReadLine().Contains("+OK")) 
-            { 
-                //密碼錯誤 
-                ErrorMessage = "密碼錯誤"; 
-                return false; 
-            } 
-            return true; 
-        } 
-調用
-
-string errorMessage; 
-
-bool isContains = ValidateEmailAccount("pop3.163.com", 110, "wise_sandy@XXX.com", "************", out errorMessage); 
-
-//------------------------------------------------------------  # 60個
-
 File: Camera.cs Project: alienwow/CSharpProjects
 
         private void Video_Player_NewFrame(object sender, ref Bitmap image)
@@ -2388,16 +2314,6 @@ https://github.com/SubramanymRajuB/Xamarin.Forms/tree/master/HtmlParsing
 
 c# - C#htmlagilitypack Node.InnerHTML不正确区分大小写，如何拉正确大小写 
 
-//------------------------------------------------------------  # 60個
-
-var response1 = await http.GetByteArrayAsync("http://www.nsfund.ir/news?"+link);
-
-String source1 = Encoding.GetEncoding("utf-8").GetString(response1, 0, response1.Length - 1);
-source1 = WebUtility.HtmlDecode(source1);
-HtmlDocument resultat1 = new HtmlDocument();
-resultat1.LoadHtml(source1);
-var val = resultat1.DocumentNode.SelectSingleNode("//div[@class='news_content_container']").InnerText;
-               
 //------------------------------------------------------------  # 60個
 
 dll檔案選sapi.dll
@@ -2948,33 +2864,6 @@ if(isprint(ch))
 系統時間
 
 函式 abs dec2hex hex2dec print9X9_Table
-
-colsole mode的scanf        
-        
-            // 宣告字串資料型別ProductName變數，用來存放品名
-            string ProductName;
-            // 宣告整數資料型別Price變數，用來存放單價
-            int Price;
-            Console.Write("請輸入品名：");        // 印出 "請輸入品名："
-            // 由鍵盤輸入品名資料並按 [Enter]鍵，即將品名存放至ProductName變數
-            ProductName = Console.ReadLine();
-            Console.Write("請輸入單價：");         // 印出 "請輸入單價："
-            // 由鍵盤輸入單價並按 [Enter]鍵，將單價轉成整數之後
-            // 再將單價放至Price變數
-            Price = int.Parse(Console.ReadLine());
-            Console.WriteLine("品名：{0}　單價：{1}　這筆記錄儲存成功",ProductName, Price);
-            Console.Read();
-
-console mode讀取double數字
-            double netIncome;
-            int taxRate;
-
-            Console.Write("請輸入全年綜合所得淨額(單位:萬元) : ");
-            netIncome = double.Parse(Console.ReadLine());
-
-console mode讀取字串
-            // 宣告Ans字串變數用來存放使用者由鍵盤輸入的答案
-            string Ans = Console.ReadLine();
                         
 //------------------------------------------------------------  # 60個
 
@@ -5591,6 +5480,8 @@ label1.Text = "(" + Control.MousePosition.X.ToString() + ", " + Control.MousePos
 
 vcs_PicPick	還要能夠用鼠標移動表單		目前有些問題
 
+//------------------------------------------------------------  # 60個
+
             DialogResult result;
 
             result = MessageBox.Show("確定結束程式嗎?", "詢問", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -5619,23 +5510,6 @@ textbox把資料拉到最下方
 
             txtMessage.SelectionStart = txtMessage.TextLength;
             txtMessage.ScrollToCaret();
-
-        void MaxMinArray(int[] a, out int max, out int min)
-        {
-            max = a[0];
-            min = a[0];
-
-            for (int i = 1; i < a.Length; i++)
-            {
-                if (a[i] > max) max = a[i];
-                if (a[i] < min) min = a[i];
-            }
-        }
-            int max, min;
-
-            MaxMinArray(s, out max, out min);
-            res += "最高分 = " + max + "\r\n";
-            res += "最低分 = " + min + "\r\n";
 
 //------------------------------------------------------------  # 60個
 
@@ -5789,17 +5663,6 @@ FixedSingle
 NotifyIcon測試\nnotifyIcon1屬性的ContextMenuStrip加入contextMenuStrip1
 
 ShowInTaskbar
-
-
-把TextBox的每一行數字解出到數值陣列裏
-
-// Get the item values.
-string[] strings = textBox1.Lines;
-int[] values = new int[strings.Length];
-for (int i = 0; i < strings.Length; i++)
-{
-	values[i] = int.Parse(strings[i]);
-}
 
 //------------------------------------------------------------  # 60個
 
@@ -6387,28 +6250,11 @@ XOR
 
 之後依此類推，總共要做滿8次，然後換資料的下一個Byte做...........全部做完即完成crc
 
-
-
-
-
+//------------------------------------------------------------  # 60個
 
 e8edf79325ae8948a635efd0e076a8bc
 
-----------------準備加到vcs範例裏 ST vcs vcs----------------
-
-又被問到如何判斷數值( Check Numeric ) 這個問題了...
-1.「double.TryParse」
-
-Code：
-
-double i;
-
-if (double.TryParse(textBox1.Text, out i))
-	MessageBox.Show("為數值!!");
-else
-	MessageBox.Show("非數值!!");
-
-----------------準備加到vcs範例裏 SP vcs vcs----------------
+//------------------------------------------------------------  # 60個
 
 hhhh
 莫罕達斯·卡拉姆昌德·甘地（古吉拉特語：??????? ?????? ?????；印地語：??????? ?????? ?????；英語：Mohandas Karamchand Gandhi，台語舊譯顏智（臺灣話：gan5-ti3），1869年10月2日－1948年1月30日），尊稱聖雄甘地
@@ -6417,36 +6263,10 @@ hhhh
 
 翁山蘇姬（緬甸語：???????????????，緬甸語委轉寫：aung hcan: cu. krany，拉丁轉寫：Aung San Suu Kyi，/aʊ??sæn.su??tʃi?/,[2]緬甸語發音：[àʊ? s?á? s? t?ì]；1945年6月19日－）
 
+//------------------------------------------------------------  # 60個
 
 沒有標題但是可以改變大小的視窗
 ControlBox = false;
-
-
-// 命名空間
-using System.Net;
-using System.Net.Sockets;
-      try
-      {
-        // 將IP位址字串轉換為IPAddress類別
-        IPAddress address = IPAddress.Parse(txtIP.Text);
-
-        // 判斷IP位址是為否回送位址
-        if (IPAddress.IsLoopback(address) && address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-		// 為IPv4及回送位址
-		MessageBox.Show(address.ToString() + " is a IPv4 loopback address.", "IP Address",
-		MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
-        else if (IPAddress.IsLoopback(address) && address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6)
-		// 為IPv6及回送位址
-		MessageBox.Show(address.ToString() + " is a IPv6 loopback address.", "IP Address",
-		MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
-        else
-		MessageBox.Show(address.ToString() + " is not a loopback address.", "IP Address",
-		MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
-      }
-      catch (Exception ex)
-      {
-		Console.WriteLine(ex.Message);
-      }
 
 //------------------------------------------------------------  # 60個      
 

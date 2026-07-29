@@ -880,10 +880,8 @@ richTextBox1.Text += "UniCode 0041的字元是" + c + "\n";
 Encoding.GetEncoding big5 gb2312 shift_jis UTF-8 unicode
 大小寫不分
 
+//------------------------------------------------------------  # 60個
 
-*/
-
-/*
 使用 Encoding 類別中的這兩個方法，須注意編碼方式 :
 字串轉拜列 與 拜列轉字串
 
@@ -913,6 +911,63 @@ text = Encoding.Default.GetString(byteArray);  // 使用預設編碼將拜列轉
 text = Encoding.ASCII.GetString(byteArray);  // 拜列轉字串
 text = Encoding.UTF8.GetString(byteArray);  // 使用UTF8將拜列轉字串
 text = Encoding.Unicode.GetString(byteArray);  // 使用Unicode編碼 將拜列轉字串
+
+//------------------------------------------------------------  # 60個
+
+        private string[] DirName()
+        {
+            int j = 0;
+            string[] str = new string[26];
+            for (int i = 65; i <91;i++ )
+            {
+                str [j]= Convert.ToChar(i).ToString()+":";
+                j++;
+            }
+            return str;
+        }
+
+//------------------------------------------------------------  # 60個
+
+//字串轉拜列
+string mystring = "this is a string"
+char[] mychars  = mystring.ToCharArray();
+
+//foreach循環處理char數組
+foreach(char mychar in mystring)
+{
+    Console.WriteLine(mychar);
+}
+mystring.Length //獲取元素的個數 
+
+//------------------------------------------------------------  # 60個
+
+//使用 GetBytes()將字串轉換為位元組陣列
+//使用 GetBytes() 方法將字串轉換為位元組陣列
+
+string myString = "This is a string.";
+byte[] byteArray = Encoding.ASCII.GetBytes(myString);
+richTextBox1.Text += "The Byte Array is:\n";
+foreach (byte bytes in byteArray)
+{
+    richTextBox1.Text += bytes.ToString() + "\n";
+}
+
+//------------------------------------------------------------  # 60個
+
+String source1 = Encoding.GetEncoding("utf-8").GetString(response1, 0, response1.Length - 1);
+
+//------------------------------------------------------------  # 60個
+
+             string data;
+            byte[] charData;
+            string CRLF = "\r\n";
+            //login
+            data = "USER " + userName + CRLF;
+            charData = Encoding.ASCII.GetBytes(data);
+
+            data = "PASS " + password + CRLF;
+            charData = Encoding.ASCII.GetBytes(data);
+            netStream.Write(charData, 0, charData.Length);
 
 */
 

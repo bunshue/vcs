@@ -14,6 +14,25 @@ namespace vcs_test_all_05_Print4
 {
     public partial class Form1 : Form
     {
+        //使用DGV1 ST
+        int intPage = 0;//总页数
+        int intRows = 0;//每页行数
+        int EndRows = 0;//最后一页行数
+        int currentpageindex = 1;//当前打印页
+        Pen myPen = new Pen(Color.Black);
+        Font myFont = new Font("宋体", 9);//字体
+        Brush myBrush = new SolidBrush(Color.Black);//画刷
+        int PrintPageHeight = 1169;//打印的默认高度
+        int PrintPageWidth = 827;//打印的默认宽度
+        int topmargin = 60; //顶边距 
+        int rowgap = 0;//行高 
+        int leftmargin = 50;//左边距 
+        int rightmargin = 50;//右边距
+        int buttommargin = 80;//底边距 
+        int columnWidth1 = 57;//第一列宽度
+        int columnWidth2 = 335;//第二列宽度
+        //使用DGV1 SP
+
         public Form1()
         {
             InitializeComponent();
@@ -31,6 +50,35 @@ namespace vcs_test_all_05_Print4
             printPreviewDialog0.Document = printDocument0;
 
             pageSetupDialog0.Document = printDocument0;
+
+            //------------------------------------------------------------  # 60個
+
+            //使用DGV1 ST
+            intRows = Convert.ToInt32(textBox_page.Text);  // 每頁打印行數 
+
+            add_datagridview(dataGridView1);
+
+            //設置欄位寬度
+            dataGridView1.Columns[0].Width = 57;
+            dataGridView1.Columns[1].Width = 260;
+            dataGridView1.Columns[2].Width = 280;
+
+            int R = dataGridView1.Rows.Count;
+            richTextBox1.Text += "資料總數 : " + R.ToString() + " 行\n";
+
+            EndRows = (R - 2) % intRows;//去掉标题和最后一行的空行
+            if (EndRows > 0)
+            {
+                intPage = Convert.ToInt32((R - 2) / intRows) + 1;
+            }
+            else
+            {
+                intPage = Convert.ToInt32((R - 2) / intRows);
+            }
+            richTextBox1.Text += "每頁行數 : " + intRows.ToString() + " 行\n";
+            richTextBox1.Text += "總頁數 : " + intPage.ToString() + " 頁\n";
+
+            //使用DGV1 SP
         }
 
         private void show_item_location()
@@ -60,6 +108,16 @@ namespace vcs_test_all_05_Print4
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button3.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+
+            groupBox4.Size = new Size(410, 70);
+            //groupBox4.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+
+            groupBox5.Size = new Size(410, 100);
+            //groupBox5.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 100);
+
+            dataGridView1.Size = new Size(410, 360);
+            dataGridView1.Location = new Point(x_st + dx * 1, y_st + dy * 4+40);
+
 
             this.Size = new Size(1300, 750);
             this.Text = "vcs_test_all_05_Print4";
@@ -371,6 +429,106 @@ namespace vcs_test_all_05_Print4
 
         //------------------------------------------------------------  # 60個
 
+        void add_datagridview(DataGridView dgv)
+        {
+            dgv.Columns.Clear();
+
+            //設定DGV
+            dgv.ColumnCount = 3;
+            dgv.Columns[0].Name = "英文名";
+            dgv.Columns[0].Width = 100;//設置欄位寬度
+            dgv.Columns[1].Name = "中文名";
+            dgv.Columns[1].Width = 100;//設置欄位寬度
+            dgv.Columns[2].Name = "體重";
+            dgv.Columns[2].Width = 100;//設置欄位寬度
+
+            for (int i = 0; i < 80; i++)
+            {
+                dgv.Rows.Add(new Object[] { (i + 1).ToString("D4"), "班尼牛", 48 });
+            }
+        }
+
+        //設置打印內容
+        private void printDocument_dgv_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            //畫列印範圍, 可列印區間
+            e.Graphics.DrawRectangle(new Pen(Color.Green, 10), e.MarginBounds.Left - 10, e.MarginBounds.Top - 10, e.MarginBounds.Width + 20, e.MarginBounds.Height + 20);
+
+            int R = dataGridView1.Rows.Count;
+            richTextBox1.Text += "printDocument1_PrintPage, R = " + R.ToString() + "\n";
+
+            if (R > 0)
+            {
+                PrintPageWidth = e.PageBounds.Width;//获取打印线张的宽度
+                PrintPageHeight = e.PageBounds.Height;//获取打印线张的高度
+
+                //myPen
+                e.Graphics.DrawLine(Pens.Red, leftmargin, topmargin, PrintPageWidth - leftmargin - rightmargin, topmargin);
+                e.Graphics.DrawLine(Pens.Green, leftmargin, topmargin, leftmargin, PrintPageHeight - topmargin - buttommargin);
+                e.Graphics.DrawLine(Pens.Blue, leftmargin, PrintPageHeight - topmargin - buttommargin, PrintPageWidth - leftmargin - rightmargin, PrintPageHeight - topmargin - buttommargin);
+                e.Graphics.DrawLine(Pens.Cyan, PrintPageWidth - leftmargin - rightmargin, topmargin, PrintPageWidth - leftmargin - rightmargin, PrintPageHeight - topmargin - buttommargin);
+
+                int intPrintRows = currentpageindex * intRows;//当前页最后一条记录的索引
+                //计算行高度
+                rowgap = Convert.ToInt32((PrintPageHeight - topmargin - buttommargin - 5 * intRows) / intRows) + 3;
+                int j = 0;//记录正在打印的行数
+                for (int i = 0 + (intPrintRows - intRows); i < intPrintRows; i++)
+                {
+                    if (i <= R - 2)
+                    {
+                        richTextBox1.Text += "i = " + i.ToString() + "\t" +
+                            dataGridView1.Rows[i].Cells[0].Value.ToString() + "\t" +
+                            dataGridView1.Rows[i].Cells[1].Value.ToString() + "\t" +
+                            dataGridView1.Rows[i].Cells[2].Value.ToString() + "\n";
+
+                        e.Graphics.DrawString(dataGridView1.Rows[i].Cells[0].Value.ToString(),
+                            myFont, myBrush, leftmargin + 5, topmargin + j * rowgap + 5);
+                        e.Graphics.DrawString(dataGridView1.Rows[i].Cells[1].Value.ToString(),
+                            myFont, myBrush, leftmargin + columnWidth1 + 5, topmargin + j * rowgap + 5);
+                        e.Graphics.DrawString(dataGridView1.Rows[i].Cells[2].Value.ToString(),
+                            myFont, myBrush, leftmargin + columnWidth1 + columnWidth2 + 5, topmargin + j * rowgap + 5);
+
+                        //myPen
+                        e.Graphics.DrawLine(Pens.Red, leftmargin, topmargin + j * rowgap + 1,
+                            PrintPageWidth - leftmargin - rightmargin, topmargin + j * rowgap + 1);
+                        e.Graphics.DrawLine(Pens.Green, leftmargin + columnWidth1, topmargin +
+                            j * rowgap, leftmargin + columnWidth1, PrintPageHeight - topmargin - buttommargin);
+                        e.Graphics.DrawLine(Pens.Blue, leftmargin + columnWidth1 + columnWidth2,
+                            topmargin + j * rowgap, leftmargin + columnWidth1 + columnWidth2, PrintPageHeight - topmargin - buttommargin);
+
+                        e.Graphics.DrawString("共 " + intPage + " 页   第 " + currentpageindex
+                            + " 页", myFont, myBrush, PrintPageWidth - 200, (int)(PrintPageHeight - buttommargin / 2));
+                        j++;//记数器
+                    }
+                }
+
+                currentpageindex++;//下一页的页码
+                if (currentpageindex <= intPage)//如果当前页不是最后一页
+                {
+                    e.HasMorePages = true;//打印副页
+                }
+                else
+                {
+                    e.HasMorePages = false;//不打印副页
+                    currentpageindex = 1;//当前打印的页编号设为1
+                }
+            }
+        }
+
+        private void bt_dgv_print_Click(object sender, EventArgs e)
+        {
+            printPreviewDialog_dgv.ShowDialog();
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void bt_dgv_print2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
     }
 }
 
@@ -384,9 +542,9 @@ namespace vcs_test_all_05_Print4
 /*
 
 //5. 開啟預覽列印
-            // printDocument_pascal.PrinterSettings.PrinterName = "Dell Photo AIO Printer 926";
-            printDocument_pascal.DefaultPageSettings.Margins = new System.Drawing.Printing.Margins(50, 50, 50, 50);
-            printDocument_pascal.DefaultPageSettings.Landscape = true;
+// printDocument_pascal.PrinterSettings.PrinterName = "Dell Photo AIO Printer 926";
+printDocument_pascal.DefaultPageSettings.Margins = new System.Drawing.Printing.Margins(50, 50, 50, 50);
+printDocument_pascal.DefaultPageSettings.Landscape = true;
 
 //------------------------------------------------------------  # 60個
 
@@ -401,46 +559,17 @@ namespace vcs_test_all_05_Print4
 
 //------------------------------------------------------------  # 60個
 
-            //對話方塊啟用頁數核取方塊
-            printDialog2.AllowSomePages = true;
-            //對話方塊啟用說明按鈕
-            printDialog2.ShowHelp = true;
-            //列印對話方塊中，按下確定鈕的話
-            DialogResult result = printDialog2.ShowDialog();
-            if (result == DialogResult.OK)
-            {
-                printDocument2.Print();
-            }
-
+//對話方塊啟用頁數核取方塊
+printDialog2.AllowSomePages = true;
+//對話方塊啟用說明按鈕
+printDialog2.ShowHelp = true;
+//列印對話方塊中，按下確定鈕的話
+DialogResult result = printDialog2.ShowDialog();
+if (result == DialogResult.OK)
+{
+    printDocument2.Print();
+}
 
 //------------------------------------------------------------  # 60個
-
-StringFormat string_format = new StringFormat();
-string_format.Alignment = StringAlignment.Center;
-string_format.LineAlignment = StringAlignment.Center;
-
-int index = (int)CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek;
-string[] day_names = CultureInfo.CurrentCulture.DateTimeFormat.DayNames;
-int col = (int)date.DayOfWeek - (int)CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek;
-
-StringFormat string_format = new StringFormat();
-string_format.Alignment = StringAlignment.Center;
-string_format.LineAlignment = StringAlignment.Center;
-
-string[] month_names = CultureInfo.CurrentCulture.DateTimeFormat.MonthNames;
-
-StringFormat string_format = new StringFormat();
-string_format.Alignment = StringAlignment.Near;
-string_format.LineAlignment = StringAlignment.Near;
-string_format.Trimming = StringTrimming.EllipsisWord;
-string_format.FormatFlags = StringFormatFlags.LineLimit;
-
-
-
-            DateTime first_of_month = new DateTime(year_num, month_num, 1);
-            int num_days = DateTime.DaysInMonth(year_num, month_num);
-
-
-//            gr.DrawRectangle(Pens.Black, bounds.X, bounds.Y, bounds.Width, bounds.Height);
 
  */
