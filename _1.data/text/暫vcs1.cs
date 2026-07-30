@@ -398,16 +398,6 @@ vcs待尋找
 
 //------------------------------------------------------------  # 60個
 
-
-//------------------------------------------------------------  # 60個
-
-DotNetSpeech----文本轉wave語音文件
-wav操作
-引入dll(DotNetSpeech.dll)，引入以后需要選中項目中引入的dll，鼠標右鍵，選擇屬性，把“嵌入互操作類型”設置為False。不然會提示無法嵌入互操作類型"SpeechLib.SpVoiceClass".請改用適用的接口.
-DotNetSpeech.SpeechAudioFormatType.SAFTCCITT_uLaw_11kHzMono表示音頻編碼格式為G711U
-
-//------------------------------------------------------------  # 60個
-
 微軟開發者網路（英語：MSDN, Microsoft Developer Network）
 
 2020年1月起，︁微軟開發者網路整合至Microsoft Docs；
@@ -2473,19 +2463,6 @@ c# - C#htmlagilitypack Node.InnerHTML不正确区分大小写，如何拉正确�
 
 //------------------------------------------------------------  # 60個
 
-dll檔案選sapi.dll
-
-參考出現SpeechLib
-
-引用要寫 using SpeechLib;
- 
-SpeechVoiceSpeakFlags spFlags = SpeechVoiceSpeakFlags.SVSFlagsAsync;
-SpVoice voice = new SpVoice();
-
-voice.Speak(this.textBox1.Text, spFlags);
-          
-//------------------------------------------------------------  # 60個
-
 可以錄影的那個webcam版本 x86可用的
 用的AForge是比較舊的版本
 目前會認版本
@@ -2511,11 +2488,6 @@ C#處理圖像有三種方法:像素法、內存法和指針法。
 
 Image.FromFile可開啟影像檔:
  "*.jpg,*.jpeg,*.bmp,*.gif,*.ico,*.png,*.tif,*.wmf|*.jpg;*.jpeg;*.bmp;*.gif;*.ico;*.png;*.tif;*.wmf";
-
-//------------------------------------------------------------  # 60個
-
-微軟 SAPI.SpVoice C# 使用方法 + 實例
-http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/192842.html
 
 //------------------------------------------------------------  # 60個
 

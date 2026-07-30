@@ -10,13 +10,12 @@ using System.Windows.Forms;
 using System.IO;
 using System.Threading;
 
-using DotNetSpeech; //for SpVoice
+using DotNetSpeech;  // for SpVoice
 
-//使用DotNetSpeech 做 文字轉語音
-//微軟 SAPI.SpVoice C# 使用方法
-
-//參考/加入參考, 選DotNetSpeech.dll
-//DotNetSpeech屬性/內嵌Interop型別 改false
+// 使用DotNetSpeech 做 文字轉語音
+// 微軟 SAPI.SpVoice C# 使用方法
+// 參考/加入參考, 選DotNetSpeech.dll
+// DotNetSpeech屬性/內嵌Interop型別 改false
 
 namespace vcs_Speech_DotNetSpeech
 {
@@ -76,35 +75,30 @@ namespace vcs_Speech_DotNetSpeech
 
         private void button0_Click(object sender, EventArgs e)
         {
-
             //文本轉換成音頻流
 
             //1.生成聲音文件
 
+            string text = "VCS將Text轉成語音";
+
             DotNetSpeech.SpeechVoiceSpeakFlags SSF = DotNetSpeech.SpeechVoiceSpeakFlags.SVSFlagsAsync;
             DotNetSpeech.SpVoice vo = new SpVoiceClass();
-            System.Windows.Forms.SaveFileDialog SFD = new System.Windows.Forms.SaveFileDialog();
-            SFD.Filter = "All files (*.*)|*.*|wav files (*.wav)|*.wav";
-            SFD.Title = "Save to a wav file";
-            SFD.FilterIndex = 2;
-            SFD.RestoreDirectory = true;
-            if (SFD.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                DotNetSpeech.SpeechStreamFileMode SSFM = DotNetSpeech.SpeechStreamFileMode.SSFMCreateForWrite;
-                DotNetSpeech.SpFileStream SFS = new DotNetSpeech.SpFileStreamClass();
-                SFS.Open(SFD.FileName, SSFM, false);
-                vo.AudioOutputStream = SFS;
-                vo.Speak(this.textBox1.Text, SSF);
-                vo.WaitUntilDone(System.Threading.Timeout.Infinite);
-                SFS.Close();
-            }
+            DotNetSpeech.SpeechStreamFileMode SSFM = DotNetSpeech.SpeechStreamFileMode.SSFMCreateForWrite;
+            DotNetSpeech.SpFileStream SFS = new DotNetSpeech.SpFileStreamClass();
+            string filename = "tmp_spvoice2.wav";
+            SFS.Open(filename, SSFM, false);
+            vo.AudioOutputStream = SFS;
+            vo.Speak(text, SSF);
+            vo.WaitUntilDone(System.Threading.Timeout.Infinite);
+            SFS.Close();
+
+            richTextBox1.Text += "done\n";
 
             //2.朗讀
-            /*
-            DotNetSpeech.SpeechVoiceSpeakFlags SSF = DotNetSpeech.SpeechVoiceSpeakFlags.SVSFlagsAsync;
-            DotNetSpeech.SpVoice vo = new SpVoiceClass();
-            vo.Speak(this.textBox1.Text,SSF);
-            */
+
+            //DotNetSpeech.SpeechVoiceSpeakFlags SSF = DotNetSpeech.SpeechVoiceSpeakFlags.SVSFlagsAsync;
+            //DotNetSpeech.SpVoice vo = new SpVoiceClass();
+            vo.Speak(text, SSF);
         }
 
         //------------------------------------------------------------  # 60個
@@ -166,9 +160,6 @@ namespace vcs_Speech_DotNetSpeech
             svu.WriteToWAV(filename, text, SpeechAudioFormatType.SAFTCCITT_uLaw_11kHzMono);  // SAFT11kHz16BitMono 生成wav文件
 
             richTextBox1.Text += "已存檔 : " + filename + "\n";
-
-
-
         }
 
         // 连续字母中加空格
@@ -189,24 +180,29 @@ namespace vcs_Speech_DotNetSpeech
             return s;
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button2_Click(object sender, EventArgs e)
         {
-            SpVoice voice = new SpVoiceClass();
+        }
 
-            ISpeechObjectTokens obj = voice.GetVoices();
+        //------------------------------------------------------------  # 60個
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //SpVoiceClass
+            DotNetSpeech.SpVoice vo = new SpVoiceClass();
+
+            ISpeechObjectTokens obj = vo.GetVoices();
             int count = obj.Count;//获取语音库总数
             for (int i = 0; i < count; i++)
             {
                 string desc = obj.Item(i).GetDescription(); //遍历语音库
-                //list.Add(desc);
-                richTextBox1.Text += desc + "\n";
+                richTextBox1.Text += "取得語音庫 : " + desc + "\n";
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-        }
+        //------------------------------------------------------------  # 60個
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -414,4 +410,17 @@ namespace vcs_Speech_DotNetSpeech
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
+
+
+/*
+
+DotNetSpeech----文本轉wave語音文件
+wav操作
+引入dll(DotNetSpeech.dll)，引入以后需要選中項目中引入的dll，鼠標右鍵，選擇屬性，把“嵌入互操作類型”設置為False。不然會提示無法嵌入互操作類型"SpeechLib.SpVoiceClass".請改用適用的接口.
+DotNetSpeech.SpeechAudioFormatType.SAFTCCITT_uLaw_11kHzMono表示音頻編碼格式為G711U
+
+//------------------------------------------------------------  # 60個
+
+
+*/
 

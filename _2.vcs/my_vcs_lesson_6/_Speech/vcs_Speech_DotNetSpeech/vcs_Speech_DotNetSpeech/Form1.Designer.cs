@@ -50,7 +50,7 @@
             this.textBox1.Size = new System.Drawing.Size(678, 191);
             this.textBox1.TabIndex = 6;
             this.textBox1.Text = "簡言之就是應用程式與作業系統的介面In compupting, a system call is the mechanism used by an applica" +
-                "tion program to request service from the operating system.";
+    "tion program to request service from the operating system.";
             // 
             // richTextBox1
             // 
@@ -79,7 +79,6 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 7;
-            this.button2.Text = "文字轉語音存檔";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -101,6 +100,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(200, 60);
             this.button3.TabIndex = 9;
+            this.button3.Text = "SpVoiceClass";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 

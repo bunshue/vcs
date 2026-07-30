@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Collections;   //for ArrayList
+using System.Collections;  // for ArrayList
 
 using System.IO;
 using System.Text.RegularExpressions;
@@ -77,15 +77,13 @@ namespace vcs_GetFileIcon
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic";
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\_FileIcon";
 
             int cnt = 0;
             cnt = imageList1.Images.Count;
             richTextBox1.Text += "cnt = " + cnt.ToString() + "\n";
-            GetListViewItem(foldername, imageList1);
 
-            cnt = imageList1.Images.Count;
-            richTextBox1.Text += "cnt = " + cnt.ToString() + "\n";
+            GetListViewItem(foldername, imageList1);
 
             if (cnt > 0)
             {
@@ -212,15 +210,9 @@ namespace vcs_GetFileIcon
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
 
 
 /*

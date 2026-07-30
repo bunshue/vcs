@@ -96,13 +96,6 @@ namespace vcs_SpeechLib
             SpFileStream.Close();
 
             richTextBox1.Text += "已存檔 : " + filename + "\n";
-
-            /* 後續
-            ISpeechObjectTokens tokens = Voice.GetVoices(string.Empty, string.Empty);
-                
-            int index = GetChineseVoiceIndex(tokens);
-            voice.Voice = tokens.Item(index);    //簡單的語音短信就生成了。
-            */
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -138,210 +131,85 @@ namespace vcs_SpeechLib
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //fail
+            SpVoiceClass spvc = new SpVoiceClass();
+
+            /*
+            int value = spvc.Volume;
+            richTextBox1.Text += "Volume = " + value.ToString() + "\n";
+
+            value = 70;
+            spvc.SetVolume((ushort)(value));
+            value = spvc.Volume;
+            richTextBox1.Text += "Volume = " + value.ToString() + "\n";
+
+            //------------------------------  # 30個
+
+            int rate = spvc.Rate;
+            richTextBox1.Text += "Rate = " + rate.ToString() + "\n";
+            rate = 5;
+            spvc.SetRate(rate);
+            rate = spvc.Rate;
+            richTextBox1.Text += "Rate = " + rate.ToString() + "\n";
+
+            //------------------------------  # 30個
+            */
+
+            ISpeechObjectTokens tokens = spvc.GetVoices(string.Empty, string.Empty);
+            //spvc.Voice = tokens.Item(0);
+
+            //設定中文
+            spvc.Voice = spvc.GetVoices(string.Empty, string.Empty).Item(0);
+
+            //設定英文
+            //spvc.Voice = spvc.GetVoices(string.Empty, string.Empty).Item(1);
+
+            string text = "VCS將Text轉成語音";
+            spvc.Speak(text, SpeechVoiceSpeakFlags.SVSFlagsAsync);
+
+            SpeechVoiceSpeakFlags SpFlags = SpeechVoiceSpeakFlags.SVSFlagsAsync;
+            spvc.Speak(text, SpFlags);
+
+            //Stop
+            //spvc.Speak(string.Empty, SpeechVoiceSpeakFlags.SVSFPurgeBeforeSpeak);
+            //Pause
+            //spvc.Pause();
+            //Resume
+            //spvc.Resume();
 
             return;
-
-            Speach sp = Speach.instance();
-            sp.Volume = 100;
-            sp.Rate = 1;
-            sp.AnalyseSpeak(this.richTextBox1.Text.Trim());
-            //try
-            //{
-            //   SpeechVoiceSpeakFlags SpFlags = SpeechVoiceSpeakFlags.SVSFlagsAsync;
-            //   SpVoice Voice = new SpVoice();
-            //   ///3表示是汉用，0124都表示英语，就是口音不同
-            //   Voice.Voice = Voice.GetVoices(string.Empty, string.Empty).Item(0);
-            //   //voice.Voice =voice.GetVoices(string.Empty, string.Empty).Item(0);
-            //   Voice.Speak(this.textBox1.Text, SpFlags);
-            //}
-            //catch (Exception er)
-            //{
-            //   MessageBox.Show("An Error Occured!", "SpeechApp", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //SpVoice sv = new SpVoice()
-            //在下面
-        }
+            string text = "VCS將Text轉成語音";
 
-        /*
-        private void Read(string text)
-        {
             SpVoice sv = new SpVoice();
-            sv.Rate = 0;//設置朗讀速度
+
+            /*
+            sv.Rate = 0;  // 設置朗讀速度
             SpeechVoiceSpeakFlags SSF = SpeechVoiceSpeakFlags.SVSFlagsAsync;
+
             sv.Speak(text, SSF);
-        }
-        /// 
-        /// 生成聲音文件
-        /// 要朗讀的文本
-        /// 生成聲音文件的路徑
-        /// 生成聲音文件的名稱
-        private void CreateFile(string text, string filePath, string fileName)
-        {
-            if (!Directory.Exists(filePath))
-                Directory.CreateDirectory(filePath);
-            SpVoice sv = new SpVoice();
+            */
+
+            //------------------------------  # 30個
+
+            // 生成聲音文件
+
             SpeechVoiceSpeakFlags SVSF = SpeechVoiceSpeakFlags.SVSFlagsAsync;
             SpeechStreamFileMode SSFM = SpeechStreamFileMode.SSFMCreateForWrite;
             SpFileStream SFS = new SpFileStream();
-            SFS.Open(filePath + fileName, SSFM, false);
+            string filename = "tmp_spvoice.wav";
+            SFS.Open(filename, SSFM, false);
             sv.AudioOutputStream = SFS;
             sv.Speak(text, SVSF);
             sv.WaitUntilDone(System.Threading.Timeout.Infinite);
             SFS.Close();
+
+            richTextBox1.Text += "done\n";
         }
-        */
-
-
-        //6060
+        //------------------------------------------------------------  # 60個
     }
-
-    //------------------------------------------------------------  # 60個
-
-    public class Speach
-    {
-        private static Speach _Instance = null;
-        private SpVoiceClass spvc = null;
-        private Speach()
-        {
-            BuildSpeach();
-        }
-        public static Speach instance()
-        {
-            if (_Instance == null)
-                _Instance = new Speach();
-            return _Instance;
-        }
-        private void SetChinaVoice()
-        {
-            spvc.Voice = spvc.GetVoices(string.Empty, string.Empty).Item(3);
-        }
-        private void SetEnglishVoice()
-        {
-            spvc.Voice = spvc.GetVoices(string.Empty, string.Empty).Item(1);
-        }
-        private void SpeakChina(string strSpeak)
-        {
-            SetChinaVoice();
-            Speak(strSpeak);
-        }
-        private void SpeakEnglishi(string strSpeak)
-        {
-            SetEnglishVoice();
-            Speak(strSpeak);
-        }
-
-        public void AnalyseSpeak(string strSpeak)
-        {
-            int iCbeg = 0;
-            int iEbeg = 0;
-            bool IsChina = true;
-            for (int i = 0; i < strSpeak.Length; i++)
-            {
-                /*
-                char chr = strSpeak;
-                if (IsChina)
-                {
-                    if (chr <= 122 && chr >= 65)
-                    {
-                        int iLen = i - iCbeg;
-                        string strValue = strSpeak.Substring(iCbeg, iLen);
-                        SpeakChina(strValue);
-                        iEbeg = i;
-                        IsChina = false;
-                    }
-                }
-                else
-                {
-                    if (chr > 122 || chr < 65)
-                    {
-                        int iLen = i - iEbeg;
-                        string strValue = strSpeak.Substring(iEbeg, iLen);
-
-                        this.SpeakEnglishi(strValue);
-                        iCbeg = i;
-                        IsChina = true;
-                    }
-                }
-                */
-            }//end for
-            if (IsChina)
-            {
-                int iLen = strSpeak.Length - iCbeg;
-                string strValue = strSpeak.Substring(iCbeg, iLen);
-                SpeakChina(strValue);
-            }
-            else
-            {
-                int iLen = strSpeak.Length - iEbeg;
-                string strValue = strSpeak.Substring(iEbeg, iLen);
-                SpeakEnglishi(strValue);
-            }
-        }
-
-        private void BuildSpeach()
-        {
-            if (spvc == null)
-            {
-                spvc = new SpVoiceClass();
-            }
-        }
-
-        public int Volume
-        {
-            get
-            {
-                return spvc.Volume;
-            }
-            set
-            {
-                spvc.SetVolume((ushort)(value));
-            }
-        }
-
-        public int Rate
-        {
-            get
-            {
-                return spvc.Rate;
-            }
-            set
-            {
-                spvc.SetRate(value);
-            }
-        }
-
-        private void Speak(string strSpeack)
-        {
-            try
-            {
-                spvc.Speak(strSpeack, SpeechVoiceSpeakFlags.SVSFlagsAsync);
-            }
-            catch (Exception err)
-            {
-                throw (new Exception("发生一个错误：" + err.Message));
-            }
-        }
-
-        public void Stop()
-        {
-            spvc.Speak(string.Empty, SpeechVoiceSpeakFlags.SVSFPurgeBeforeSpeak);
-        }
-
-        public void Pause()
-        {
-            spvc.Pause();
-        }
-
-        public void Continue()
-        {
-            spvc.Resume();
-        }
-    }//end class
 }
 
 //6060
@@ -351,5 +219,32 @@ namespace vcs_SpeechLib
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
+/*
+            if (!Directory.Exists(filePath))
+                Directory.CreateDirectory(filePath);
+*/
+
+// SpeechLib    的 SpVoice
+// DotNetSpeech 的 SpVoice vo = new SpVoiceClass();
 
 
+/*
+dll檔案選sapi.dll
+
+參考出現SpeechLib
+
+引用要寫 using SpeechLib;
+ 
+SpeechVoiceSpeakFlags spFlags = SpeechVoiceSpeakFlags.SVSFlagsAsync;
+SpVoice voice = new SpVoice();
+
+voice.Speak(this.textBox1.Text, spFlags);
+          
+//------------------------------------------------------------  # 60個
+
+微軟 SAPI.SpVoice C# 使用方法 + 實例
+http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/192842.html
+
+//------------------------------------------------------------  # 60個
+
+*/
