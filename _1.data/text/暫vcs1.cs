@@ -1,4 +1,7 @@
-﻿int index = (int)CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek;
+﻿
+//------------------------------------------------------------  # 60個
+
+int index = (int)CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek;
 string[] day_names = CultureInfo.CurrentCulture.DateTimeFormat.DayNames;
 int col = (int)date.DayOfWeek - (int)CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek;
 
@@ -392,6 +395,158 @@ vcs待尋找
             toolStripProgressBar1.Style = ProgressBarStyle.Marquee;  //進度條一直重複跑
             toolStripProgressBar1.Style = ProgressBarStyle.Blocks;  //依Value顯示進度
             toolStripProgressBar1.Value = 30;
+
+//------------------------------------------------------------  # 60個
+
+
+//------------------------------------------------------------  # 60個
+
+DotNetSpeech----文本轉wave語音文件
+wav操作
+引入dll(DotNetSpeech.dll)，引入以后需要選中項目中引入的dll，鼠標右鍵，選擇屬性，把“嵌入互操作類型”設置為False。不然會提示無法嵌入互操作類型"SpeechLib.SpVoiceClass".請改用適用的接口.
+DotNetSpeech.SpeechAudioFormatType.SAFTCCITT_uLaw_11kHzMono表示音頻編碼格式為G711U
+
+//------------------------------------------------------------  # 60個
+
+微軟開發者網路（英語：MSDN, Microsoft Developer Network）
+
+2020年1月起，︁微軟開發者網路整合至Microsoft Docs；
+Microsoft Docs後來在2022年整合至Microsoft Learn。
+
+
+//------------------------------------------------------------  # 60個
+
+/// <param name="quality">质量（范围0-100）</param>
+
+            //使用編碼參數存圖, 可以調整圖片質量
+            //建立一個resultImage
+            //在上面作圖
+            //對resultImage做縮略圖, 要做關鍵質量控制
+
+            //關鍵質量控制
+            //取得系統編碼類型,包含了jpeg,bmp,png,gif,tiff
+            ImageCodecInfo[] icis = ImageCodecInfo.GetImageEncoders();
+            ImageCodecInfo ici = null;
+            foreach (ImageCodecInfo i in icis)
+            {
+                richTextBox1.Text += "ImageCodecInfo : " + i.MimeType + "\n";
+                if (i.MimeType == "image/jpeg" || i.MimeType == "image/bmp" || i.MimeType == "image/png" || i.MimeType == "image/gif")
+                {
+                    ici = i;
+                    richTextBox1.Text += "ici aaaaaa\n";
+                }
+            }
+
+            EncoderParameters ep = new EncoderParameters(1);
+            ep.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, (long)quality);
+            image.Save(filename, ici, ep);  // 保存缩略图
+
+
+            ep.Dispose();
+
+            //释放原始图片资源
+            image.Dispose();
+
+
+
+
+        //#region 正方型裁剪并缩放
+        /// 正方型裁剪
+        /// 以图片中心为轴心，截取正方型，然后等比缩放
+        /// 用于头像处理
+        /// <param name="fromFile">原图Stream对象</param>
+        /// <param name="fileSaveUrl">缩略图存放地址</param>
+        /// <param name="side">指定的边长（正方型）</param>
+        /// <param name="quality">质量（范围0-100）</param>
+        void CutForSquare(System.IO.Stream fromFile, string fileSaveUrl, int side, int quality)
+        {
+            //使用 stream
+            System.Drawing.Image initImage = System.Drawing.Image.FromStream(fromFile, true);
+
+            //截图对象
+            System.Drawing.Image image = null;
+            System.Drawing.Graphics g = null;
+
+            //对象实例化
+            image = new System.Drawing.Bitmap(initHeight, initHeight);
+
+            g = System.Drawing.Graphics.FromImage(image);
+            //设置质量
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            //定位
+            Rectangle fromR = new Rectangle(initWidth / 2 - side / 2-40, 0, side, side);
+            Rectangle toR = new Rectangle(0, 0, side, side);
+            //画图
+            g.DrawImage(initImage, toR, fromR, System.Drawing.GraphicsUnit.Pixel);
+
+            //将截图对象赋给原图
+            initImage = (System.Drawing.Image)image.Clone();
+
+            //释放截图资源
+            g.Dispose();
+            image.Dispose();
+
+
+            //製作縮略圖, 大小為 side X side
+            System.Drawing.Image resultImage = new System.Drawing.Bitmap(side, side);
+            System.Drawing.Graphics resultG = System.Drawing.Graphics.FromImage(resultImage);
+            //设置质量
+            resultG.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+            resultG.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            //用指定背景色清空画布
+            resultG.Clear(Color.White);
+            //绘制缩略图
+            resultG.DrawImage(initImage, new System.Drawing.Rectangle(0, 0, side, side),
+                new System.Drawing.Rectangle(0, 0, side, side), System.Drawing.GraphicsUnit.Pixel);
+       }
+
+//------------------------------------------------------------  # 60個
+
+取樣率（Sample Rate）。
+
+
+
+            double beatTime = time % Period;  // 測試時間
+            double value = 0.0;
+
+            /*
+            if (beatTime < Period/2)
+                value = beatTime;
+            else
+                value = 1.0 - beatTime;
+            */
+
+            value = Math.Sin(2 * Math.PI * beatTime / Period);
+
+//------------------------------------------------------------  # 60個
+
+存取修飾詞
+
+private：同一類別
+internal：同一組件(dll)
+protected：同一類別、該類別的衍生類別
+protected internal：符合protected或internal，兩者其一即可
+public：不設限
+
+
+//建議刪掉 fs1.Close()、fs2.Close()，因為 using 會自動釋放資源。
+
+
+4. UI 更新方式
+你用 richTextBox1.Text += ... 來追加文字，這會造成效能問題，因為每次都會重新建立字串。
+👉 建議改用：
+
+csharp
+richTextBox1.AppendText("訊息內容\n");
+
+
+
+通過 WIN32 API 實現嵌入程序窗體，win32api
+
+
+
+
 
 //------------------------------------------------------------  # 60個
 

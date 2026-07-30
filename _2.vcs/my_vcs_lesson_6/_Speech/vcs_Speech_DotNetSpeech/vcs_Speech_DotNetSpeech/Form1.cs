@@ -22,6 +22,8 @@ namespace vcs_Speech_DotNetSpeech
 {
     public partial class Form1 : Form
     {
+        private SpVoiceUtil svu;
+
         public Form1()
         {
             InitializeComponent();
@@ -30,6 +32,10 @@ namespace vcs_Speech_DotNetSpeech
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
+            svu = new SpVoiceUtil();
         }
 
         void show_item_location()
@@ -61,21 +67,108 @@ namespace vcs_Speech_DotNetSpeech
             this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+
+        }
 
         //------------------------------------------------------------  # 60個
 
+        private void button0_Click(object sender, EventArgs e)
+        {
+
+            //文本轉換成音頻流
+
+            //1.生成聲音文件
+
+            DotNetSpeech.SpeechVoiceSpeakFlags SSF = DotNetSpeech.SpeechVoiceSpeakFlags.SVSFlagsAsync;
+            DotNetSpeech.SpVoice vo = new SpVoiceClass();
+            System.Windows.Forms.SaveFileDialog SFD = new System.Windows.Forms.SaveFileDialog();
+            SFD.Filter = "All files (*.*)|*.*|wav files (*.wav)|*.wav";
+            SFD.Title = "Save to a wav file";
+            SFD.FilterIndex = 2;
+            SFD.RestoreDirectory = true;
+            if (SFD.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                DotNetSpeech.SpeechStreamFileMode SSFM = DotNetSpeech.SpeechStreamFileMode.SSFMCreateForWrite;
+                DotNetSpeech.SpFileStream SFS = new DotNetSpeech.SpFileStreamClass();
+                SFS.Open(SFD.FileName, SSFM, false);
+                vo.AudioOutputStream = SFS;
+                vo.Speak(this.textBox1.Text, SSF);
+                vo.WaitUntilDone(System.Threading.Timeout.Infinite);
+                SFS.Close();
+            }
+
+            //2.朗讀
+            /*
+            DotNetSpeech.SpeechVoiceSpeakFlags SSF = DotNetSpeech.SpeechVoiceSpeakFlags.SVSFlagsAsync;
+            DotNetSpeech.SpVoice vo = new SpVoiceClass();
+            vo.Speak(this.textBox1.Text,SSF);
+            */
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        // 定義符合 CallBack 委派的方法
+        static void MyCallBack(bool finished, int InputWordPosition, int InputWordLength)
+        {
+            if (!finished)
+            {
+                //Console.WriteLine($"朗讀中... 位置={InputWordPosition}, 長度={InputWordLength}");
+                Console.WriteLine("朗讀中... " + InputWordPosition + " / " + InputWordLength);
+            }
+            else
+            {
+                Console.WriteLine("朗讀完成！");
+            }
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
-            /*
-            var text = "In compupting, a system call is the mechanism used by an application program to request service from the operating system.";
+            SpVoiceUtil svu = new SpVoiceUtil();
+
+            //取得語音庫
+            List<string> sss = svu.getDescription();
+            foreach (string s in sss)
+            {
+                richTextBox1.Text += "取得語音庫 : " + s + "\n";
+            }
+            //取得語音庫 : Microsoft Hanhan Desktop - Chinese (Taiwan)
+            //取得語音庫 : Microsoft Zira Desktop - English (United States)
+
+            //------------------------------  # 30個
+
+            //設置語音庫
+            string language = "Microsoft Hanhan Desktop - Chinese (Taiwan)";  // 可以說中文
+            //language = "Microsoft Zira Desktop - English (United States)";  // 不能說中文
+            svu.setDescription(language);  // 設置語音庫
+
+            //------------------------------  # 30個
+
+            //Speak
+            string text = "In computing, a system call is the mechanism used by an application program to request service from the operating system.";
+            //text = "啟動結果啟動結果啟動結果啟動結果";
+            // 呼叫 Speak，並傳入 callback
+            bool result = svu.Speak(text, MyCallBack);
+
+            richTextBox1.Text += "Speak 啟動結果: " + result + "\n";
+
+            //------------------------------  # 30個
+
+            //語音轉wav
+            //text = "我来测试一下！AB连续字母加空格";
+            text = "In compupting, a system call is the mechanism used by an application program to request service from the operating system.";
             text = AddKongGeToPlateNo(text).Trim();
-            setRate(0);
-            setVolume(100);
+
+            svu.setRate(0);  // 設置語速
+            svu.setVolume(100);  // 設置聲音大小
             string filename = "tmp_wave_file.wav";
-            WriteToWAV(filename, text, SpeechAudioFormatType.SAFTCCITT_uLaw_11kHzMono);  // SAFT11kHz16BitMono 生成wav文件
+            svu.WriteToWAV(filename, text, SpeechAudioFormatType.SAFTCCITT_uLaw_11kHzMono);  // SAFT11kHz16BitMono 生成wav文件
 
             richTextBox1.Text += "已存檔 : " + filename + "\n";
-            */
+
+
+
         }
 
         // 连续字母中加空格
@@ -110,11 +203,6 @@ namespace vcs_Speech_DotNetSpeech
             }
         }
 
-        private void button0_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button3_Click(object sender, EventArgs e)
         {
 
@@ -125,10 +213,45 @@ namespace vcs_Speech_DotNetSpeech
 
         }
 
+        //------------------------------------------------------------  # 60個
+
+        private void MyCallBack2(bool finished, int InputWordPosition, int InputWordLength)
+        {
+            if (this.InvokeRequired)
+            {
+                // 注意這裡要用 SpVoiceUtil.CallBack，而不是單純 CallBack
+                this.Invoke(new SpVoiceUtil.CallBack(MyCallBack2), finished, InputWordPosition, InputWordLength);
+                return;
+            }
+
+            if (!finished)
+            {
+                label1.Text = string.Format("朗讀中... 位置={0}, 長度={1}", InputWordPosition, InputWordLength);
+
+                progressBar1.Maximum = textBox1.Text.Length;
+                int pos = InputWordPosition + InputWordLength;
+                if (pos > progressBar1.Maximum) pos = progressBar1.Maximum;
+                progressBar1.Value = pos;
+            }
+            else
+            {
+                label1.Text = "朗讀完成！";
+                progressBar1.Value = progressBar1.Maximum;
+            }
+        }
+
         private void button5_Click(object sender, EventArgs e)
         {
+            string text = textBox1.Text;
+            bool result = svu.Speak(text, MyCallBack2);
 
+            label1.Text = result ? "朗讀開始..." : "朗讀失敗";
+            progressBar1.Value = 0;
         }
+
+        //------------------------------------------------------------  # 60個
+
+
     }
 
     //------------------------------------------------------------  # 60個
@@ -291,7 +414,4 @@ namespace vcs_Speech_DotNetSpeech
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//var filename = Path.Combine(@"C:\ZZ_VoiceFile", $"1.wav");
-
 

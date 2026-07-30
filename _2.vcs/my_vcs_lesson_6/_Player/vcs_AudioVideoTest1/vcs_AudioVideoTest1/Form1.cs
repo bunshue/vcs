@@ -15,6 +15,18 @@ using System.Threading;     // for Thread
 
 using WMPLib;   //for mp3
 
+/*
+Beep()			會播放主機喇叭的嗶嗶聲。預設情況下，嗶聲以800赫茲頻率播放，持續200毫秒。
+Beep(Int32, Int32)	透過控制台喇叭播放指定頻率與持續時間的嗶聲。
+frequency
+Int32
+嗶聲頻率範圍從37赫茲到32767赫茲。
+
+duration
+Int32
+嗶聲的持續時間以毫秒計。
+*/
+
 namespace vcs_AudioVideoTest1
 {
     public partial class Form1 : Form
@@ -41,7 +53,6 @@ namespace vcs_AudioVideoTest1
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -280,9 +291,9 @@ namespace vcs_AudioVideoTest1
             // 播放歌曲
             //axWMP.URL = @"D:\Music\02.AVRIL LAVIGNE 酷到骨子裡 MY HAPPY ENDING.mp3";
             // 設定重複播放
-            //axWMP.settings.setMode("loop", true);
+            //axWMP.settings.setMode("loop", true);  // 設置循環播放/隨機播放
             // 設定隨機播放
-            //axWMP.settings.setMode("shuffle", true);
+            //axWMP.settings.setMode("shuffle", true);  // 設置循環播放/隨機播放
         }
 
         //------------------------------------------------------------  # 60個
@@ -333,6 +344,7 @@ namespace vcs_AudioVideoTest1
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
+            //設置播放器音量
             wplayer.settings.volume = trackBar1.Value;
         }
 
@@ -359,7 +371,7 @@ namespace vcs_AudioVideoTest1
         private void mp3_player_play_Click(object sender, EventArgs e)
         {
             wplayer.URL = @"D:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";
-            wplayer.settings.setMode("loop", true);
+            wplayer.settings.setMode("loop", true);  // 設置循環播放/隨機播放
             wplayer.controls.play();
             timer1.Enabled = true;
             richTextBox1.Text += wplayer.currentMedia.getItemInfo("Title") + "\n";
@@ -737,6 +749,8 @@ namespace vcs_AudioVideoTest1
         {
         }
 
+        //------------------------------------------------------------  # 60個
+
         // Play the notes in a song.
         //protected static void Play(Note[] tune)
         void Play(Note[] tune)
@@ -753,12 +767,83 @@ namespace vcs_AudioVideoTest1
             }
         }
 
+
+        // Define the frequencies of notes in an octave, as well as silence (rest).
+        protected enum Tone
+        {
+            REST = 0,
+            GbelowC = 196,
+            A = 220,        //DO    261.63Hz
+            Asharp = 233,
+            B = 247,        //RE    293.66Hz
+            C = 262,        //MI    329.63Hz
+            Csharp = 277,
+            D = 294,        //FA    349.23Hz
+            Dsharp = 311,
+            E = 330,        //SO    392.00Hz
+            F = 349,        //LA    440.00Hz
+            Fsharp = 370,
+            G = 392,        //SI    493.88Hz
+            Gsharp = 415,
+            A2 = 220,       //DO2   523.26Hz
+        }
+
+        // Define the duration of a note in units of milliseconds.
+        protected enum Duration
+        {
+            WHOLE = 1200,  // 還是 1600?
+            HALF = WHOLE / 2,
+            QUARTER = HALF / 2,
+            EIGHTH = QUARTER / 2,
+            SIXTEENTH = EIGHTH / 2,
+        }
+
+        // Define a note as a frequency (tone) and the amount of 
+        // time (duration) the note plays.
+        protected struct Note
+        {
+            Tone toneVal;
+            Duration durVal;
+
+            // Define a constructor to create a specific note.
+            public Note(Tone frequency, Duration time)
+            {
+                toneVal = frequency;
+                durVal = time;
+            }
+
+            // Define properties to return the note's tone and duration.
+            public Tone NoteTone
+            {
+                get
+                {
+                    return toneVal;
+                }
+                set
+                {
+                    toneVal = value;
+                }
+            }
+            public Duration NoteDuration
+            {
+                get
+                {
+                    return durVal;
+                }
+                set
+                {
+                    durVal = value;
+                }
+            }
+        }
+
         private void button15_Click(object sender, EventArgs e)
         {
             //Mary Had A Little Lamb
 
             //參考https://msdn.microsoft.com/zh-tw/library/4fe3hdb1(v=vs.110).aspx
             // Declare the first few notes of the song, "Mary Had A Little Lamb".
+
             Note[] Mary = 
             {
             new Note(Tone.B, Duration.QUARTER),
@@ -777,8 +862,6 @@ namespace vcs_AudioVideoTest1
             };
             // Play the song
             Play(Mary);
-
-
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -798,6 +881,8 @@ namespace vcs_AudioVideoTest1
             // Play the song
             Play(DoReMi);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button17_Click(object sender, EventArgs e)
         {
@@ -926,6 +1011,7 @@ namespace vcs_AudioVideoTest1
         //[DllImport("kernel32", CharSet = CharSet.Ansi)]
         //[DllImport("kernel32.dll")]
         //public static extern bool Beep(int frequency, int duration);
+        //Beep(800, 3000);
 
         public enum BeepType
         {
@@ -1049,75 +1135,6 @@ namespace vcs_AudioVideoTest1
         }
 
         //PC喇叭音效 ST
-
-        // Define the frequencies of notes in an octave, as well as silence (rest).
-        protected enum Tone
-        {
-            REST = 0,
-            GbelowC = 196,
-            A = 220,        //DO    261.63Hz
-            Asharp = 233,
-            B = 247,        //RE    293.66Hz
-            C = 262,        //MI    329.63Hz
-            Csharp = 277,
-            D = 294,        //FA    349.23Hz
-            Dsharp = 311,
-            E = 330,        //SO    392.00Hz
-            F = 349,        //LA    440.00Hz
-            Fsharp = 370,
-            G = 392,        //SI    493.88Hz
-            Gsharp = 415,
-            A2 = 220,       //DO2   523.26Hz
-        }
-
-        // Define the duration of a note in units of milliseconds.
-        protected enum Duration
-        {
-            WHOLE = 1200,
-            HALF = WHOLE / 2,
-            QUARTER = HALF / 2,
-            EIGHTH = QUARTER / 2,
-            SIXTEENTH = EIGHTH / 2,
-        }
-
-        // Define a note as a frequency (tone) and the amount of 
-        // time (duration) the note plays.
-        protected struct Note
-        {
-            Tone toneVal;
-            Duration durVal;
-
-            // Define a constructor to create a specific note.
-            public Note(Tone frequency, Duration time)
-            {
-                toneVal = frequency;
-                durVal = time;
-            }
-
-            // Define properties to return the note's tone and duration.
-            public Tone NoteTone
-            {
-                get
-                {
-                    return toneVal;
-                }
-                set
-                {
-                    toneVal = value;
-                }
-            }
-            public Duration NoteDuration
-            {
-                get
-                {
-                    return durVal;
-                }
-                set
-                {
-                    durVal = value;
-                }
-            }
-        }
 
         protected void Play(Note tune)
         {
@@ -1442,12 +1459,6 @@ namespace vcs_AudioVideoTest1
 //------------------------------  # 30個
 
 /*
-        [DllImport("kernel32.dll")]
-        public static extern bool Beep(int freq, int duration);
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Beep(800, 3000);
-        }
 //------------------------------------------------------------  # 60個
 
 3.利用Windows Media Player
@@ -1546,15 +1557,6 @@ IWMPPlaylist playList = player.playlistCollection.newPlaylist();
 
  或者直接在當前列表上添加
  (DataRow drItem = player.newMedia(drItem[].ToString()); 
-
-設置播放器音量
- player.settings.volume=;
-
- 設置循環播放
-player.settings.setMode(, );
-
-設置隨機播放
-  player.settings.setMode(, );
 
 richTextBox1.Text += "測試使用WindowsMediaPlayerClass\n";
 WindowsMediaPlayerClass c;
@@ -1656,8 +1658,9 @@ enableContextMenu:Boolean; 啟用/禁用右鍵菜單
 Ctlcontrols.next; 下一曲 
 Ctlcontrols.previous; 上一曲 
 
+
 [settings] wmp.settings //播放器基本設置 
-settings.volume:integer; 音量，0-100 
+settings.volume:integer; 音量，0-100       設置播放器音量
 settings.autoStart:Boolean; 是否自動播放 
 settings.mute:Boolean; 是否靜音 
 settings.playCount:integer; 播放次數 
@@ -1744,21 +1747,14 @@ vcs_WMP
 richTextBox1.Text += " 歌曲名称：" + axWindowsMediaPlayer1.currentMedia.getItemInfo("Title");
 
 mute & un-mute
-private void pictureBox7_Click(object sender, EventArgs e)//静音
-{
-    if (MM)
-    {
-        pictureBox7.Image = (Image)Properties.Resources.音量按钮变色;
-        axWindowsMediaPlayer1.settings.mute = true;
-        MM = false;
-    }
-    else
-    {
-        pictureBox7.Image = (Image)Properties.Resources.音量按钮;
-        axWindowsMediaPlayer1.settings.mute = false;
-        MM = true;
-    }
-}
+
+//靜音
+axWindowsMediaPlayer1.settings.mute = true;
+MM = false;
+
+//恢復
+axWindowsMediaPlayer1.settings.mute = false;
+MM = true;
 
 //------------------------------------------------------------  # 60個
 
@@ -1773,15 +1769,15 @@ axWindowsMediaPlayer1.DisplaySize　　　　　　　?置播放?象大小
 　　　　6-MpOneFourthScreen　　　　　　　屏幕大小的1/4  
 　　　　7-MpOneHalfScreen　　　　　　　　屏幕大小的1/2  
 
-axWindowsMediaPlayer1.settings.balance = 1; 伴唱
-axWindowsMediaPlayer1.settings.balance = -1;原唱
+axWindowsMediaPlayer1.settings.balance = 1;  伴唱
+axWindowsMediaPlayer1.settings.balance = -1; 原唱
 
 windows media player
 
 在視頻播放之後,可以通過如下方式讀取源視頻的寬度和高度,然後設置其還原為原始的大小.
 private void ResizeOriginal()
 {
-    int intWidth = axWindowsMediaPlayer1.currentMedia.imageSourceWidth;
+    int intWidth  = axWindowsMediaPlayer1.currentMedia.imageSourceWidth;
     int intHeight = axWindowsMediaPlayer1.currentMedia.imageSourceHeight;
     axWindowsMediaPlayer1.Width = intWidth + 2;
     axWindowsMediaPlayer1.Height = intHeight + 2;

@@ -50,29 +50,10 @@
             this.bt_random4 = new System.Windows.Forms.Button();
             this.bt_random3 = new System.Windows.Forms.Button();
             this.bt_random1 = new System.Windows.Forms.Button();
-            this.tb_random_text19 = new System.Windows.Forms.TextBox();
-            this.tb_random_text18 = new System.Windows.Forms.TextBox();
-            this.tb_random_text17 = new System.Windows.Forms.TextBox();
-            this.tb_random_text9 = new System.Windows.Forms.TextBox();
-            this.tb_random_text16 = new System.Windows.Forms.TextBox();
-            this.tb_random_text15 = new System.Windows.Forms.TextBox();
-            this.tb_random_text14 = new System.Windows.Forms.TextBox();
-            this.tb_random_text13 = new System.Windows.Forms.TextBox();
-            this.tb_random_text12 = new System.Windows.Forms.TextBox();
-            this.tb_random_text11 = new System.Windows.Forms.TextBox();
-            this.tb_random_text10 = new System.Windows.Forms.TextBox();
-            this.tb_random_text8 = new System.Windows.Forms.TextBox();
-            this.tb_random_text0 = new System.Windows.Forms.TextBox();
-            this.tb_random_text7 = new System.Windows.Forms.TextBox();
-            this.tb_random_text6 = new System.Windows.Forms.TextBox();
-            this.tb_random_text5 = new System.Windows.Forms.TextBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.tb_random_text4 = new System.Windows.Forms.TextBox();
             this.tb_random_text3 = new System.Windows.Forms.TextBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.tb_random_text2 = new System.Windows.Forms.TextBox();
-            this.tb_random_text1 = new System.Windows.Forms.TextBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -89,26 +70,6 @@
             this.bt_clear = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.lb_random0 = new System.Windows.Forms.Label();
-            this.lb_random1 = new System.Windows.Forms.Label();
-            this.lb_random3 = new System.Windows.Forms.Label();
-            this.lb_random2 = new System.Windows.Forms.Label();
-            this.lb_random13 = new System.Windows.Forms.Label();
-            this.lb_random12 = new System.Windows.Forms.Label();
-            this.lb_random11 = new System.Windows.Forms.Label();
-            this.lb_random10 = new System.Windows.Forms.Label();
-            this.lb_random17 = new System.Windows.Forms.Label();
-            this.lb_random16 = new System.Windows.Forms.Label();
-            this.lb_random15 = new System.Windows.Forms.Label();
-            this.lb_random14 = new System.Windows.Forms.Label();
-            this.lb_random7 = new System.Windows.Forms.Label();
-            this.lb_random6 = new System.Windows.Forms.Label();
-            this.lb_random5 = new System.Windows.Forms.Label();
-            this.lb_random4 = new System.Windows.Forms.Label();
-            this.lb_random19 = new System.Windows.Forms.Label();
-            this.lb_random18 = new System.Windows.Forms.Label();
-            this.lb_random9 = new System.Windows.Forms.Label();
-            this.lb_random8 = new System.Windows.Forms.Label();
             this.button0 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
@@ -370,134 +331,6 @@
             this.bt_random1.UseVisualStyleBackColor = true;
             this.bt_random1.Click += new System.EventHandler(this.bt_random1_Click);
             // 
-            // tb_random_text19
-            // 
-            this.tb_random_text19.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_random_text19.Location = new System.Drawing.Point(827, 586);
-            this.tb_random_text19.Name = "tb_random_text19";
-            this.tb_random_text19.Size = new System.Drawing.Size(36, 36);
-            this.tb_random_text19.TabIndex = 84;
-            // 
-            // tb_random_text18
-            // 
-            this.tb_random_text18.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_random_text18.Location = new System.Drawing.Point(829, 546);
-            this.tb_random_text18.Name = "tb_random_text18";
-            this.tb_random_text18.Size = new System.Drawing.Size(36, 36);
-            this.tb_random_text18.TabIndex = 83;
-            // 
-            // tb_random_text17
-            // 
-            this.tb_random_text17.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_random_text17.Location = new System.Drawing.Point(827, 504);
-            this.tb_random_text17.Name = "tb_random_text17";
-            this.tb_random_text17.Size = new System.Drawing.Size(36, 36);
-            this.tb_random_text17.TabIndex = 82;
-            // 
-            // tb_random_text9
-            // 
-            this.tb_random_text9.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_random_text9.Location = new System.Drawing.Point(787, 586);
-            this.tb_random_text9.Name = "tb_random_text9";
-            this.tb_random_text9.Size = new System.Drawing.Size(36, 36);
-            this.tb_random_text9.TabIndex = 81;
-            // 
-            // tb_random_text16
-            // 
-            this.tb_random_text16.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_random_text16.Location = new System.Drawing.Point(827, 464);
-            this.tb_random_text16.Name = "tb_random_text16";
-            this.tb_random_text16.Size = new System.Drawing.Size(36, 36);
-            this.tb_random_text16.TabIndex = 80;
-            // 
-            // tb_random_text15
-            // 
-            this.tb_random_text15.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_random_text15.Location = new System.Drawing.Point(827, 422);
-            this.tb_random_text15.Name = "tb_random_text15";
-            this.tb_random_text15.Size = new System.Drawing.Size(36, 36);
-            this.tb_random_text15.TabIndex = 79;
-            // 
-            // tb_random_text14
-            // 
-            this.tb_random_text14.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_random_text14.Location = new System.Drawing.Point(829, 374);
-            this.tb_random_text14.Name = "tb_random_text14";
-            this.tb_random_text14.Size = new System.Drawing.Size(36, 36);
-            this.tb_random_text14.TabIndex = 78;
-            // 
-            // tb_random_text13
-            // 
-            this.tb_random_text13.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_random_text13.Location = new System.Drawing.Point(829, 332);
-            this.tb_random_text13.Name = "tb_random_text13";
-            this.tb_random_text13.Size = new System.Drawing.Size(36, 36);
-            this.tb_random_text13.TabIndex = 77;
-            // 
-            // tb_random_text12
-            // 
-            this.tb_random_text12.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_random_text12.Location = new System.Drawing.Point(829, 290);
-            this.tb_random_text12.Name = "tb_random_text12";
-            this.tb_random_text12.Size = new System.Drawing.Size(36, 36);
-            this.tb_random_text12.TabIndex = 76;
-            // 
-            // tb_random_text11
-            // 
-            this.tb_random_text11.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_random_text11.Location = new System.Drawing.Point(829, 242);
-            this.tb_random_text11.Name = "tb_random_text11";
-            this.tb_random_text11.Size = new System.Drawing.Size(36, 36);
-            this.tb_random_text11.TabIndex = 75;
-            // 
-            // tb_random_text10
-            // 
-            this.tb_random_text10.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_random_text10.Location = new System.Drawing.Point(829, 200);
-            this.tb_random_text10.Name = "tb_random_text10";
-            this.tb_random_text10.Size = new System.Drawing.Size(36, 36);
-            this.tb_random_text10.TabIndex = 74;
-            // 
-            // tb_random_text8
-            // 
-            this.tb_random_text8.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_random_text8.Location = new System.Drawing.Point(787, 546);
-            this.tb_random_text8.Name = "tb_random_text8";
-            this.tb_random_text8.Size = new System.Drawing.Size(36, 36);
-            this.tb_random_text8.TabIndex = 73;
-            // 
-            // tb_random_text0
-            // 
-            this.tb_random_text0.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_random_text0.Location = new System.Drawing.Point(787, 200);
-            this.tb_random_text0.Name = "tb_random_text0";
-            this.tb_random_text0.Size = new System.Drawing.Size(36, 36);
-            this.tb_random_text0.TabIndex = 72;
-            // 
-            // tb_random_text7
-            // 
-            this.tb_random_text7.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_random_text7.Location = new System.Drawing.Point(787, 506);
-            this.tb_random_text7.Name = "tb_random_text7";
-            this.tb_random_text7.Size = new System.Drawing.Size(36, 36);
-            this.tb_random_text7.TabIndex = 71;
-            // 
-            // tb_random_text6
-            // 
-            this.tb_random_text6.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_random_text6.Location = new System.Drawing.Point(787, 464);
-            this.tb_random_text6.Name = "tb_random_text6";
-            this.tb_random_text6.Size = new System.Drawing.Size(36, 36);
-            this.tb_random_text6.TabIndex = 70;
-            // 
-            // tb_random_text5
-            // 
-            this.tb_random_text5.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_random_text5.Location = new System.Drawing.Point(789, 422);
-            this.tb_random_text5.Name = "tb_random_text5";
-            this.tb_random_text5.Size = new System.Drawing.Size(36, 36);
-            this.tb_random_text5.TabIndex = 69;
-            // 
             // pictureBox5
             // 
             this.pictureBox5.BackColor = System.Drawing.Color.LightGray;
@@ -508,18 +341,10 @@
             this.pictureBox5.TabIndex = 68;
             this.pictureBox5.TabStop = false;
             // 
-            // tb_random_text4
-            // 
-            this.tb_random_text4.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_random_text4.Location = new System.Drawing.Point(789, 374);
-            this.tb_random_text4.Name = "tb_random_text4";
-            this.tb_random_text4.Size = new System.Drawing.Size(36, 36);
-            this.tb_random_text4.TabIndex = 67;
-            // 
             // tb_random_text3
             // 
             this.tb_random_text3.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_random_text3.Location = new System.Drawing.Point(789, 332);
+            this.tb_random_text3.Location = new System.Drawing.Point(583, 400);
             this.tb_random_text3.Name = "tb_random_text3";
             this.tb_random_text3.Size = new System.Drawing.Size(36, 36);
             this.tb_random_text3.TabIndex = 66;
@@ -543,22 +368,6 @@
             this.pictureBox3.Size = new System.Drawing.Size(50, 50);
             this.pictureBox3.TabIndex = 52;
             this.pictureBox3.TabStop = false;
-            // 
-            // tb_random_text2
-            // 
-            this.tb_random_text2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_random_text2.Location = new System.Drawing.Point(789, 284);
-            this.tb_random_text2.Name = "tb_random_text2";
-            this.tb_random_text2.Size = new System.Drawing.Size(36, 36);
-            this.tb_random_text2.TabIndex = 51;
-            // 
-            // tb_random_text1
-            // 
-            this.tb_random_text1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_random_text1.Location = new System.Drawing.Point(789, 242);
-            this.tb_random_text1.Name = "tb_random_text1";
-            this.tb_random_text1.Size = new System.Drawing.Size(36, 36);
-            this.tb_random_text1.TabIndex = 50;
             // 
             // pictureBox2
             // 
@@ -726,186 +535,6 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // lb_random0
-            // 
-            this.lb_random0.AutoSize = true;
-            this.lb_random0.Location = new System.Drawing.Point(584, 397);
-            this.lb_random0.Name = "lb_random0";
-            this.lb_random0.Size = new System.Drawing.Size(33, 12);
-            this.lb_random0.TabIndex = 85;
-            this.lb_random0.Text = "label1";
-            // 
-            // lb_random1
-            // 
-            this.lb_random1.AutoSize = true;
-            this.lb_random1.Location = new System.Drawing.Point(586, 422);
-            this.lb_random1.Name = "lb_random1";
-            this.lb_random1.Size = new System.Drawing.Size(33, 12);
-            this.lb_random1.TabIndex = 86;
-            this.lb_random1.Text = "label2";
-            // 
-            // lb_random3
-            // 
-            this.lb_random3.AutoSize = true;
-            this.lb_random3.Location = new System.Drawing.Point(588, 471);
-            this.lb_random3.Name = "lb_random3";
-            this.lb_random3.Size = new System.Drawing.Size(33, 12);
-            this.lb_random3.TabIndex = 88;
-            this.lb_random3.Text = "label5";
-            // 
-            // lb_random2
-            // 
-            this.lb_random2.AutoSize = true;
-            this.lb_random2.Location = new System.Drawing.Point(586, 446);
-            this.lb_random2.Name = "lb_random2";
-            this.lb_random2.Size = new System.Drawing.Size(33, 12);
-            this.lb_random2.TabIndex = 87;
-            this.lb_random2.Text = "label6";
-            // 
-            // lb_random13
-            // 
-            this.lb_random13.AutoSize = true;
-            this.lb_random13.Location = new System.Drawing.Point(627, 471);
-            this.lb_random13.Name = "lb_random13";
-            this.lb_random13.Size = new System.Drawing.Size(33, 12);
-            this.lb_random13.TabIndex = 92;
-            this.lb_random13.Text = "label7";
-            // 
-            // lb_random12
-            // 
-            this.lb_random12.AutoSize = true;
-            this.lb_random12.Location = new System.Drawing.Point(625, 446);
-            this.lb_random12.Name = "lb_random12";
-            this.lb_random12.Size = new System.Drawing.Size(33, 12);
-            this.lb_random12.TabIndex = 91;
-            this.lb_random12.Text = "label8";
-            // 
-            // lb_random11
-            // 
-            this.lb_random11.AutoSize = true;
-            this.lb_random11.Location = new System.Drawing.Point(625, 422);
-            this.lb_random11.Name = "lb_random11";
-            this.lb_random11.Size = new System.Drawing.Size(33, 12);
-            this.lb_random11.TabIndex = 90;
-            this.lb_random11.Text = "label9";
-            // 
-            // lb_random10
-            // 
-            this.lb_random10.AutoSize = true;
-            this.lb_random10.Location = new System.Drawing.Point(623, 397);
-            this.lb_random10.Name = "lb_random10";
-            this.lb_random10.Size = new System.Drawing.Size(39, 12);
-            this.lb_random10.TabIndex = 89;
-            this.lb_random10.Text = "label10";
-            // 
-            // lb_random17
-            // 
-            this.lb_random17.AutoSize = true;
-            this.lb_random17.Location = new System.Drawing.Point(627, 562);
-            this.lb_random17.Name = "lb_random17";
-            this.lb_random17.Size = new System.Drawing.Size(39, 12);
-            this.lb_random17.TabIndex = 100;
-            this.lb_random17.Text = "label11";
-            // 
-            // lb_random16
-            // 
-            this.lb_random16.AutoSize = true;
-            this.lb_random16.Location = new System.Drawing.Point(625, 537);
-            this.lb_random16.Name = "lb_random16";
-            this.lb_random16.Size = new System.Drawing.Size(39, 12);
-            this.lb_random16.TabIndex = 99;
-            this.lb_random16.Text = "label12";
-            // 
-            // lb_random15
-            // 
-            this.lb_random15.AutoSize = true;
-            this.lb_random15.Location = new System.Drawing.Point(625, 513);
-            this.lb_random15.Name = "lb_random15";
-            this.lb_random15.Size = new System.Drawing.Size(39, 12);
-            this.lb_random15.TabIndex = 98;
-            this.lb_random15.Text = "label13";
-            // 
-            // lb_random14
-            // 
-            this.lb_random14.AutoSize = true;
-            this.lb_random14.Location = new System.Drawing.Point(623, 488);
-            this.lb_random14.Name = "lb_random14";
-            this.lb_random14.Size = new System.Drawing.Size(39, 12);
-            this.lb_random14.TabIndex = 97;
-            this.lb_random14.Text = "label14";
-            // 
-            // lb_random7
-            // 
-            this.lb_random7.AutoSize = true;
-            this.lb_random7.Location = new System.Drawing.Point(588, 562);
-            this.lb_random7.Name = "lb_random7";
-            this.lb_random7.Size = new System.Drawing.Size(39, 12);
-            this.lb_random7.TabIndex = 96;
-            this.lb_random7.Text = "label15";
-            // 
-            // lb_random6
-            // 
-            this.lb_random6.AutoSize = true;
-            this.lb_random6.Location = new System.Drawing.Point(586, 537);
-            this.lb_random6.Name = "lb_random6";
-            this.lb_random6.Size = new System.Drawing.Size(39, 12);
-            this.lb_random6.TabIndex = 95;
-            this.lb_random6.Text = "label16";
-            // 
-            // lb_random5
-            // 
-            this.lb_random5.AutoSize = true;
-            this.lb_random5.Location = new System.Drawing.Point(586, 513);
-            this.lb_random5.Name = "lb_random5";
-            this.lb_random5.Size = new System.Drawing.Size(39, 12);
-            this.lb_random5.TabIndex = 94;
-            this.lb_random5.Text = "label17";
-            // 
-            // lb_random4
-            // 
-            this.lb_random4.AutoSize = true;
-            this.lb_random4.Location = new System.Drawing.Point(584, 488);
-            this.lb_random4.Name = "lb_random4";
-            this.lb_random4.Size = new System.Drawing.Size(39, 12);
-            this.lb_random4.TabIndex = 93;
-            this.lb_random4.Text = "label18";
-            // 
-            // lb_random19
-            // 
-            this.lb_random19.AutoSize = true;
-            this.lb_random19.Location = new System.Drawing.Point(629, 611);
-            this.lb_random19.Name = "lb_random19";
-            this.lb_random19.Size = new System.Drawing.Size(39, 12);
-            this.lb_random19.TabIndex = 104;
-            this.lb_random19.Text = "label19";
-            // 
-            // lb_random18
-            // 
-            this.lb_random18.AutoSize = true;
-            this.lb_random18.Location = new System.Drawing.Point(627, 586);
-            this.lb_random18.Name = "lb_random18";
-            this.lb_random18.Size = new System.Drawing.Size(39, 12);
-            this.lb_random18.TabIndex = 103;
-            this.lb_random18.Text = "label20";
-            // 
-            // lb_random9
-            // 
-            this.lb_random9.AutoSize = true;
-            this.lb_random9.Location = new System.Drawing.Point(590, 611);
-            this.lb_random9.Name = "lb_random9";
-            this.lb_random9.Size = new System.Drawing.Size(39, 12);
-            this.lb_random9.TabIndex = 102;
-            this.lb_random9.Text = "label21";
-            // 
-            // lb_random8
-            // 
-            this.lb_random8.AutoSize = true;
-            this.lb_random8.Location = new System.Drawing.Point(588, 586);
-            this.lb_random8.Name = "lb_random8";
-            this.lb_random8.Size = new System.Drawing.Size(39, 12);
-            this.lb_random8.TabIndex = 101;
-            this.lb_random8.Text = "label22";
-            // 
             // button0
             // 
             this.button0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -935,56 +564,17 @@
             this.ClientSize = new System.Drawing.Size(918, 721);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button0);
-            this.Controls.Add(this.lb_random19);
-            this.Controls.Add(this.lb_random18);
-            this.Controls.Add(this.lb_random9);
-            this.Controls.Add(this.lb_random8);
-            this.Controls.Add(this.lb_random17);
-            this.Controls.Add(this.lb_random16);
-            this.Controls.Add(this.lb_random15);
-            this.Controls.Add(this.lb_random14);
-            this.Controls.Add(this.lb_random7);
-            this.Controls.Add(this.lb_random6);
-            this.Controls.Add(this.lb_random5);
-            this.Controls.Add(this.lb_random4);
-            this.Controls.Add(this.lb_random13);
-            this.Controls.Add(this.lb_random12);
-            this.Controls.Add(this.lb_random11);
-            this.Controls.Add(this.lb_random10);
-            this.Controls.Add(this.lb_random3);
-            this.Controls.Add(this.lb_random2);
-            this.Controls.Add(this.lb_random1);
-            this.Controls.Add(this.lb_random0);
-            this.Controls.Add(this.tb_random_text19);
             this.Controls.Add(this.bt_clear);
-            this.Controls.Add(this.tb_random_text18);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.tb_random_text17);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.tb_random_text9);
             this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.tb_random_text16);
             this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.tb_random_text15);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.tb_random_text14);
             this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.tb_random_text13);
-            this.Controls.Add(this.tb_random_text1);
-            this.Controls.Add(this.tb_random_text12);
-            this.Controls.Add(this.tb_random_text2);
-            this.Controls.Add(this.tb_random_text11);
             this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.tb_random_text10);
             this.Controls.Add(this.pictureBox4);
-            this.Controls.Add(this.tb_random_text8);
             this.Controls.Add(this.tb_random_text3);
-            this.Controls.Add(this.tb_random_text0);
-            this.Controls.Add(this.tb_random_text4);
-            this.Controls.Add(this.tb_random_text7);
             this.Controls.Add(this.pictureBox5);
-            this.Controls.Add(this.tb_random_text6);
-            this.Controls.Add(this.tb_random_text5);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -1034,8 +624,6 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.TextBox tb_random_text1;
-        private System.Windows.Forms.TextBox tb_random_text2;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Button bt_random17;
         private System.Windows.Forms.Button bt_random16;
@@ -1047,44 +635,7 @@
         private System.Windows.Forms.Button bt_random18;
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.TextBox tb_random_text3;
-        private System.Windows.Forms.TextBox tb_random_text4;
         private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.TextBox tb_random_text5;
-        private System.Windows.Forms.TextBox tb_random_text6;
-        private System.Windows.Forms.TextBox tb_random_text7;
-        private System.Windows.Forms.TextBox tb_random_text0;
-        private System.Windows.Forms.TextBox tb_random_text8;
-        private System.Windows.Forms.TextBox tb_random_text19;
-        private System.Windows.Forms.TextBox tb_random_text18;
-        private System.Windows.Forms.TextBox tb_random_text17;
-        private System.Windows.Forms.TextBox tb_random_text9;
-        private System.Windows.Forms.TextBox tb_random_text16;
-        private System.Windows.Forms.TextBox tb_random_text15;
-        private System.Windows.Forms.TextBox tb_random_text14;
-        private System.Windows.Forms.TextBox tb_random_text13;
-        private System.Windows.Forms.TextBox tb_random_text12;
-        private System.Windows.Forms.TextBox tb_random_text11;
-        private System.Windows.Forms.TextBox tb_random_text10;
-        private System.Windows.Forms.Label lb_random0;
-        private System.Windows.Forms.Label lb_random1;
-        private System.Windows.Forms.Label lb_random3;
-        private System.Windows.Forms.Label lb_random2;
-        private System.Windows.Forms.Label lb_random13;
-        private System.Windows.Forms.Label lb_random12;
-        private System.Windows.Forms.Label lb_random11;
-        private System.Windows.Forms.Label lb_random10;
-        private System.Windows.Forms.Label lb_random17;
-        private System.Windows.Forms.Label lb_random16;
-        private System.Windows.Forms.Label lb_random15;
-        private System.Windows.Forms.Label lb_random14;
-        private System.Windows.Forms.Label lb_random7;
-        private System.Windows.Forms.Label lb_random6;
-        private System.Windows.Forms.Label lb_random5;
-        private System.Windows.Forms.Label lb_random4;
-        private System.Windows.Forms.Label lb_random19;
-        private System.Windows.Forms.Label lb_random18;
-        private System.Windows.Forms.Label lb_random9;
-        private System.Windows.Forms.Label lb_random8;
         private System.Windows.Forms.Button button0;
         private System.Windows.Forms.Button button1;
     }

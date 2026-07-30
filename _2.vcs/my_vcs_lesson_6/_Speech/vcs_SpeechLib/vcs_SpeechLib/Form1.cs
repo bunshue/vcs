@@ -163,7 +163,41 @@ namespace vcs_SpeechLib
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //SpVoice sv = new SpVoice()
+            //在下面
         }
+
+        /*
+        private void Read(string text)
+        {
+            SpVoice sv = new SpVoice();
+            sv.Rate = 0;//設置朗讀速度
+            SpeechVoiceSpeakFlags SSF = SpeechVoiceSpeakFlags.SVSFlagsAsync;
+            sv.Speak(text, SSF);
+        }
+        /// 
+        /// 生成聲音文件
+        /// 要朗讀的文本
+        /// 生成聲音文件的路徑
+        /// 生成聲音文件的名稱
+        private void CreateFile(string text, string filePath, string fileName)
+        {
+            if (!Directory.Exists(filePath))
+                Directory.CreateDirectory(filePath);
+            SpVoice sv = new SpVoice();
+            SpeechVoiceSpeakFlags SVSF = SpeechVoiceSpeakFlags.SVSFlagsAsync;
+            SpeechStreamFileMode SSFM = SpeechStreamFileMode.SSFMCreateForWrite;
+            SpFileStream SFS = new SpFileStream();
+            SFS.Open(filePath + fileName, SSFM, false);
+            sv.AudioOutputStream = SFS;
+            sv.Speak(text, SVSF);
+            sv.WaitUntilDone(System.Threading.Timeout.Infinite);
+            SFS.Close();
+        }
+        */
+
+
+        //6060
     }
 
     //------------------------------------------------------------  # 60個
@@ -316,4 +350,6 @@ namespace vcs_SpeechLib
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
+
+
 

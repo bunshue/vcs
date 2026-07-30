@@ -80,117 +80,25 @@ namespace vcs_test_all_01_Random
             bt_random19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
             richTextBox1.Size = new Size(450, 860);
-            richTextBox1.Location = new Point(x_st + dx * 5 + 50, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            pictureBox1.Size = new Size(256, 256);
-            pictureBox1.Location = new Point(800, 20);
-
-            pictureBox2.Size = new Size(256 / 2, 50);
-            pictureBox2.Location = new Point(800, 20 + 256 + 10);
-
-            pictureBox3.Size = new Size(256 / 2, 50);
-            pictureBox3.Location = new Point(800 + 256 / 2, 20 + 256 + 10);
-
-            pictureBox4.Size = new Size(256 / 2, 50);
-            pictureBox4.Location = new Point(800, 20 + 256 + 10 + 50 + 10);
-
-            pictureBox5.Size = new Size(256 / 2, 50);
-            pictureBox5.Location = new Point(800 + 256 / 2, 20 + 256 + 10 + 50 + 10);
-
-            int w = 270;
-            int h = 50;
             x_st = 430;
-            y_st = 430;
-            dx = w + 30;
-            dy = 46;
+            y_st = 400;
+            dx = 30;
+            dy = 256 + 10;
+            pictureBox1.Size = new Size(256, 256);
+            pictureBox1.Location = new Point(x_st, y_st);
+            pictureBox2.Size = new Size(256 / 2, 50);
+            pictureBox2.Location = new Point(x_st, y_st + dy);
+            pictureBox3.Size = new Size(256 / 2, 50);
+            pictureBox3.Location = new Point(x_st + 256 / 2, y_st + dy);
+            pictureBox4.Size = new Size(256 / 2, 50);
+            pictureBox4.Location = new Point(x_st, y_st + dy + 50 + 10);
+            pictureBox5.Size = new Size(256 / 2, 50);
+            pictureBox5.Location = new Point(x_st + 256 / 2, y_st + dy + 50 + 10);
 
-            tb_random_text0.Size = new Size(w, h);
-            tb_random_text1.Size = new Size(w, h);
-            tb_random_text2.Size = new Size(w, h);
-            tb_random_text3.Size = new Size(w, h);
-            tb_random_text4.Size = new Size(w, h);
-            tb_random_text5.Size = new Size(w, h);
-            tb_random_text6.Size = new Size(w, h);
-            tb_random_text7.Size = new Size(w, h);
-            tb_random_text8.Size = new Size(w, h);
-            tb_random_text9.Size = new Size(w, h);
-            tb_random_text10.Size = new Size(w, h);
-            tb_random_text11.Size = new Size(w, h);
-            tb_random_text12.Size = new Size(w, h);
-            tb_random_text13.Size = new Size(w, h);
-            tb_random_text14.Size = new Size(w, h);
-            tb_random_text15.Size = new Size(w, h);
-            tb_random_text16.Size = new Size(w, h);
-            tb_random_text17.Size = new Size(w, h);
-            tb_random_text18.Size = new Size(w, h);
-            tb_random_text19.Size = new Size(w, h);
-
-            lb_random0.Location = new Point(x_st, y_st + dy * 0);
-            lb_random1.Location = new Point(x_st, y_st + dy * 1);
-            lb_random2.Location = new Point(x_st, y_st + dy * 2);
-            lb_random3.Location = new Point(x_st, y_st + dy * 3);
-            lb_random4.Location = new Point(x_st, y_st + dy * 4);
-            lb_random5.Location = new Point(x_st, y_st + dy * 5);
-            lb_random6.Location = new Point(x_st, y_st + dy * 6);
-            lb_random7.Location = new Point(x_st, y_st + dy * 7);
-            lb_random8.Location = new Point(x_st, y_st + dy * 8);
-            lb_random9.Location = new Point(x_st, y_st + dy * 9);
-            lb_random10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            lb_random11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            lb_random12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            lb_random13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            lb_random14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            lb_random15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            lb_random16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            lb_random17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            lb_random18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            lb_random19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-
-            int ddx = 20;
-            tb_random_text0.Location = new Point(x_st + ddx, y_st + dy * 0);
-            tb_random_text1.Location = new Point(x_st + ddx, y_st + dy * 1);
-            tb_random_text2.Location = new Point(x_st + ddx, y_st + dy * 2);
-            tb_random_text3.Location = new Point(x_st + ddx, y_st + dy * 3);
-            tb_random_text4.Location = new Point(x_st + ddx, y_st + dy * 4);
-            tb_random_text5.Location = new Point(x_st + ddx, y_st + dy * 5);
-            tb_random_text6.Location = new Point(x_st + ddx, y_st + dy * 6);
-            tb_random_text7.Location = new Point(x_st + ddx, y_st + dy * 7);
-            tb_random_text8.Location = new Point(x_st + ddx, y_st + dy * 8);
-            tb_random_text9.Location = new Point(x_st + ddx, y_st + dy * 9);
-            tb_random_text10.Location = new Point(x_st + dx * 1 + ddx, y_st + dy * 0);
-            tb_random_text11.Location = new Point(x_st + dx * 1 + ddx, y_st + dy * 1);
-            tb_random_text12.Location = new Point(x_st + dx * 1 + ddx, y_st + dy * 2);
-            tb_random_text13.Location = new Point(x_st + dx * 1 + ddx, y_st + dy * 3);
-            tb_random_text14.Location = new Point(x_st + dx * 1 + ddx, y_st + dy * 4);
-            tb_random_text15.Location = new Point(x_st + dx * 1 + ddx, y_st + dy * 5);
-            tb_random_text16.Location = new Point(x_st + dx * 1 + ddx, y_st + dy * 6);
-            tb_random_text17.Location = new Point(x_st + dx * 1 + ddx, y_st + dy * 7);
-            tb_random_text18.Location = new Point(x_st + dx * 1 + ddx, y_st + dy * 8);
-            tb_random_text19.Location = new Point(x_st + dx * 1 + ddx, y_st + dy * 9);
-
-            lb_random0.Text = "0";
-            lb_random1.Text = "1";
-            lb_random2.Text = "2";
-            lb_random3.Text = "3";
-            lb_random4.Text = "4";
-            lb_random5.Text = "5";
-            lb_random6.Text = "6";
-            lb_random7.Text = "7";
-            lb_random8.Text = "8";
-            lb_random9.Text = "9";
-            lb_random10.Text = "10";
-            lb_random11.Text = "11";
-            lb_random12.Text = "12";
-            lb_random13.Text = "13";
-            lb_random14.Text = "14";
-            lb_random15.Text = "15";
-            lb_random16.Text = "16";
-            lb_random17.Text = "17";
-            lb_random18.Text = "18";
-            lb_random19.Text = "19";
-
-            this.Size = new Size(1540, 930);
+            this.Size = new Size(1300, 930);
             this.Text = "vcs_test_all_01_Random";
 
             //設定執行後的表單起始位置, 正中央
@@ -1345,39 +1253,6 @@ ASP.Net實現中文漢字驗證碼
 
             pictureBox5.BackColor = GetRandomColor5();
 
-            tb_random_text0.Text = RandomText0();
-            tb_random_text1.Text = RandomText1();
-            tb_random_text2.Text = RandomText2();
-            tb_random_text5.Text = RandomText5(10);
-            tb_random_text6.Text = RandomText6(10);
-            tb_random_text7.Text = RandomText7();
-            tb_random_text8.Text = RandomText8();
-            tb_random_text9.Text = RandomText9();
-            tb_random_text10.Text = RandomText10();
-            tb_random_text11.Text = RandomText11();
-
-            string result = string.Empty;
-            /*
-            //任意中文字, 有點問題
-            int lower = 0x20;
-            int upper = 0xD7FF;
-
-            result = NextString(lower, upper, 4);
-            richTextBox1.Text += result + "\n";
-            */
-
-            //亂數產生Unicode中文範圍的中文字元
-            //呼叫視窗使用Unicode字串來顯示
-            Console.OutputEncoding = System.Text.Encoding.Unicode;
-            //產生1000字Unicode中文字
-            tb_random_text3.Text = "";
-            for (int i = 0; i < 4; i++)
-            {
-                tb_random_text3.Text += getRandomUnicode().Substring(0, 1);
-            }
-
-            result = VerficationText(10);
-            tb_random_text4.Text = result;
 
             // 產生隨機二維陣列
             Values.Randomize2();
@@ -2477,7 +2352,95 @@ ASP.Net實現中文漢字驗證碼
             richTextBox1.Text += "11取得 : " + captcha_text + "\n";
 
             //------------------------------------------------------------  # 60個
-            // 以上用函數, 以下用算的
+
+            captcha_text = RandomText0();
+            richTextBox1.Text += "00取得 : " + captcha_text + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            captcha_text = RandomText1();
+            richTextBox1.Text += "01取得 : " + captcha_text + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            captcha_text = RandomText2();
+            richTextBox1.Text += "02取得 : " + captcha_text + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            captcha_text = RandomText5(10);
+            richTextBox1.Text += "05取得 : " + captcha_text + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            captcha_text = RandomText6(10);
+            richTextBox1.Text += "06取得 : " + captcha_text + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            captcha_text = RandomText7();
+            richTextBox1.Text += "07取得 : " + captcha_text + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            captcha_text = RandomText8();
+            richTextBox1.Text += "08取得 : " + captcha_text + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            captcha_text = RandomText9();
+            richTextBox1.Text += "09取得 : " + captcha_text + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            captcha_text = RandomText10();
+            richTextBox1.Text += "10取得 : " + captcha_text + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            captcha_text = RandomText11();
+            richTextBox1.Text += "11取得 : " + captcha_text + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            captcha_text = VerficationText(10);
+            richTextBox1.Text += "12取得 : " + captcha_text + "\n";
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //測試隨機文字2
+            string captcha_text = string.Empty;
+            int length = 10;
+            Random rand = new Random();
+
+            //------------------------------------------------------------  # 60個
+
+            //string result = string.Empty;
+            /*
+            //任意中文字, 有點問題
+            int lower = 0x20;
+            int upper = 0xD7FF;
+
+            result = NextString(lower, upper, 4);
+            richTextBox1.Text += result + "\n";
+            */
+
+            captcha_text = string.Empty;
+
+            //亂數產生Unicode中文範圍的中文字元
+            //呼叫視窗使用Unicode字串來顯示
+            Console.OutputEncoding = System.Text.Encoding.Unicode;
+            //產生10字Unicode中文字
+            for (int i = 0; i < 10; i++)
+            {
+                captcha_text += getRandomUnicode().Substring(0, 1);
+            }
+
+            richTextBox1.Text += "11取得 : " + captcha_text + "\n";
+
             //------------------------------------------------------------  # 60個
 
             int len = rand.Next(4, 6);
@@ -2573,13 +2536,8 @@ ASP.Net實現中文漢字驗證碼
 
             richTextBox1.Text += "15取得 : " + objStringBuilder + "\n";
             richTextBox1.Text += "15取得 : " + captcha_text + "\n";
-        }
 
-        //------------------------------------------------------------  # 60個
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //測試隨機文字2
         }
 
         //------------------------------------------------------------  # 60個
