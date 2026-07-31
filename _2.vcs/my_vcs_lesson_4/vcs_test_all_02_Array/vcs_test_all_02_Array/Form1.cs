@@ -61,6 +61,7 @@ namespace vcs_test_all_02_Array
             button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            bt_controls_array.Location = new Point(x_st + dx * 4 + 60, y_st + dy * 0);
 
             groupBox2.Size = new Size(470, 60);
             groupBox2.Location = new Point(x_st + dx * 3, y_st + dy * 2);
@@ -71,7 +72,7 @@ namespace vcs_test_all_02_Array
 
             x_st = 10;
             y_st = 20;
-            dx = 50;
+            dx = 58;
             numText1a.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             numText2a.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             numText3a.Location = new Point(x_st + dx * 2, y_st + dy * 0);
@@ -80,7 +81,6 @@ namespace vcs_test_all_02_Array
             numText6a.Location = new Point(x_st + dx * 5, y_st + dy * 0);
             numText7a.Location = new Point(x_st + dx * 6, y_st + dy * 0);
             numText8a.Location = new Point(x_st + dx * 7, y_st + dy * 0);
-            bt_object.Location = new Point(x_st + dx * 8 - 10, y_st + dy * 0 - 5);
 
             this.Size = new Size(930 + 210, 750);
             this.Text = "vcs_test_all_02_Array";
@@ -265,7 +265,8 @@ namespace vcs_test_all_02_Array
             //二維陣列
 
             int[,] D = new int[3, 3];
-            int[,] E = new int[,] {
+            int[,] E = new int[,]
+            {
             { 1, 2, 3 },
             { 4, 5, 6 },
             { 7, 8, 9 }
@@ -340,9 +341,9 @@ namespace vcs_test_all_02_Array
             //整數二維陣列 R=3, C=8
             int[,] array2D2 = new int[,]
             {
-            {0, 1, 2, 3, 4, 5, 6, 7},
-            {0, 1, 2, 3, 4, 5, 6, 7},
-            {0, 1, 2, 3, 4, 5, 6, 7},
+            { 0, 1, 2, 3, 4, 5, 6, 7 },
+            { 0, 1, 2, 3, 4, 5, 6, 7 },
+            { 0, 1, 2, 3, 4, 5, 6, 7 },
             };
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
@@ -362,6 +363,103 @@ namespace vcs_test_all_02_Array
                 Total += element;
             }
             richTextBox1.Text += "此二維陣列的各個元素總和為: " + Total.ToString() + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //獲取二維陣列的長度
+            //Array.GetLength() 函式獲取 2D 陣列的寬度和高度
+            //Array.GetUpperBound() 函式獲取二維陣列的寬度和高度
+
+            /*
+            //整數二維陣列
+            const int ROWS = 3;
+            const int COLUMNS = 8;
+
+            //寫法一
+            int[,] array2D = new int[ROWS, COLUMNS]
+            {
+            { 0, 1, 2, 3, 4, 5, 6, 7 },
+            { 1, 2, 3, 4, 5, 6, 7, 8 },
+            { 2, 3, 4, 5, 6, 7, 8, 9 }
+            };
+
+            //寫法二
+            array2D = new int[,]
+            {
+            { 0, 1, 2, 3, 4, 5, 6, 7 },
+            { 1, 2, 3, 4, 5, 6, 7, 8 },
+            { 2, 3, 4, 5, 6, 7, 8, 9 }
+            };
+
+            int ROW = array2D.GetUpperBound(0) + 1;  // 取得指定維度的上限，第0項就是橫列數 ROW
+            int COL = array2D.GetUpperBound(1) + 1;  // 取得指定維度的上限，第1項就是直行數 COL
+            richTextBox1.Text += "橫列 ROW : " + ROW.ToString() + "\n";
+            richTextBox1.Text += "直行 COL : " + COL.ToString() + "\n";
+
+            richTextBox1.Text += "秩 :\t" + array2D.Rank + "\t長度 :\t" + array2D.Length + "\n";  // 獲取維度和整個二維陣列的長度
+            for (int i = 0; i < array2D.Rank; i++)
+            {
+                richTextBox1.Text += "第 " + i.ToString() + " 維 :\t"
+                    + array2D.GetLowerBound(i) + " ~ " + array2D.GetUpperBound(i) + "\t長度 :\t" + array2D.GetLength(i) + "\n";
+                //                下限                             上限                                     長度
+            }
+
+            richTextBox1.Text += "設定數值 :\n";
+
+            //逐一設定 二維陣列
+            for (int i = 0; i < ROW; i++)
+            {
+                for (int j = 0; j < COL; j++)
+                {
+                    array2D[i, j] = i + j;
+                }
+            }
+
+            richTextBox1.Text += "二維陣列內容\n";
+            PrintArray2D(array2D);
+            */
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            /*
+            //字串二維陣列 R=3, C=6
+            string[,] array2D = new string[,]
+            {
+            { "1", "隋文帝", "541年7月21日", "604年8月13日", "581年3月4日", "604年8月13日"},
+            { "2", "隋煬帝", "569年", "618年4月11日", "604年8月21日", "618年4月11日"},
+            { "3", "隋恭帝", "605年", "619年9月14日", "617年12月18日", "618年6月18日"},
+            };
+
+            int ROW = array2D.GetUpperBound(0) + 1;  // 取得指定維度的上限，第0項就是橫列數 ROW
+            int COL = array2D.GetUpperBound(1) + 1;  // 取得指定維度的上限，第1項就是直行數 COL
+            richTextBox1.Text += "橫列 ROW : " + ROW.ToString() + "\n";
+            richTextBox1.Text += "直行 COL : " + COL.ToString() + "\n";
+
+            richTextBox1.Text += "秩 :\t" + array2D.Rank + "\t長度 :\t" + array2D.Length + "\n";  // 獲取維度和整個二維陣列的長度
+            for (int i = 0; i < array2D.Rank; i++)
+            {
+                richTextBox1.Text += "第 " + i.ToString() + " 維 :\t"
+                    + array2D.GetLowerBound(i) + " ~ " + array2D.GetUpperBound(i) + "\t長度 :\t" + array2D.GetLength(i) + "\n";
+                //                下限                             上限                                     長度
+            }
+
+            richTextBox1.Text += "二維陣列內容\n";
+            PrintArray2D(array2D);
+
+            richTextBox1.Text += "二維陣列內容\n";
+            for (int i = 0; i < ROW; i++)
+            {
+                for (int j = 0; j < COL; j++)
+                {
+                    richTextBox1.Text += "第(" + i.ToString() + ", " + j.ToString() + ")項 " + array2D[i, j] + "\t";
+                }
+                richTextBox1.Text += "\n";
+            }
+            */
+
+
+
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -436,8 +534,6 @@ namespace vcs_test_all_02_Array
 
             richTextBox1.Text += "三維陣列內容\n";
             PrintArray(array3Da);
-
-            return;
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -577,7 +673,24 @@ namespace vcs_test_all_02_Array
 
         private void button6_Click(object sender, EventArgs e)
         {
+            // Array方法
+
             richTextBox1.Text += "各種Array()方法\n";
+
+            /*
+            Array.Sort(Values);
+            Array.Reverse(Values);
+            Array.Copy(array1, array2, array1.Length);
+            Array.BinarySearch(Values, target);
+            Array.IndexOf(score, 100);   //搜尋第一個滿分學生
+            Array.CreateInstance(typeof(int), 3, 4);
+            Array.CreateInstance(typeof(int), 2, 3, 4);
+            Array.Resize(ref score, score.Length + 1);    //陣列大小+1
+            Array.Copy(array_data, 0, array_data, offset, array_data.Length - offset);
+            Array.Copy(array_data, offset, array_data, 0, array_data.Length - offset);
+            */
+
+            //------------------------------------------------------------  # 60個
 
             //一列排序 內建函數1
             int[] num = { 12, 45, 76, -3, 48, 93 };
@@ -676,50 +789,98 @@ namespace vcs_test_all_02_Array
                 richTextBox1.Text += s + " ";
             }
             richTextBox1.Text += "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            // Array方法
+
+            // 建立一個整數二維陣列 R=3, C=4
+            Array myArr2D = Array.CreateInstance(typeof(int), 3, 4);
+
+            int ROW = myArr2D.GetUpperBound(0) + 1;  // 取得指定維度的上限，第0項就是橫列數 ROW
+            int COL = myArr2D.GetUpperBound(1) + 1;  // 取得指定維度的上限，第1項就是直行數 COL
+            richTextBox1.Text += "橫列 ROW : " + ROW.ToString() + "\n";
+            richTextBox1.Text += "直行 COL : " + COL.ToString() + "\n";
+
+            for (int i = 0; i < ROW; i++)
+            {
+                for (int j = 0; j < COL; j++)
+                {
+                    //SetValue 設定資料
+                    myArr2D.SetValue((i * 10) + (j * 1), i, j);
+                }
+            }
+
+            for (int i = 0; i < ROW; i++)
+            {
+                for (int j = 0; j < COL; j++)
+                {
+                    //GetValue 取得資料
+                    int value = (int)myArr2D.GetValue(i, j);
+                    richTextBox1.Text += value + " ";
+                }
+                richTextBox1.Text += "\n";
+            }
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "秩 :\t" + myArr2D.Rank + "\t長度 :\t" + myArr2D.Length + "\n";  // 獲取維度和整個二維陣列的長度
+            for (int i = 0; i < myArr2D.Rank; i++)
+            {
+                richTextBox1.Text += "第 " + i.ToString() + " 維 :\t"
+                    + myArr2D.GetLowerBound(i) + " ~ " + myArr2D.GetUpperBound(i) + "\t長度 :\t" + myArr2D.GetLength(i) + "\n";
+                //                下限                             上限                                     長度
+            }
+
+            richTextBox1.Text += "Array內容\n";
+            //TBD
+
+            //------------------------------------------------------------  # 60個
+
+            // 建立一個整數三維陣列
+            Array myArr3D = Array.CreateInstance(typeof(int), 2, 3, 4);
+            for (int i = 0; i <= myArr3D.GetUpperBound(0); i++)
+            {
+                for (int j = 0; j <= myArr3D.GetUpperBound(1); j++)
+                {
+                    for (int k = 0; k <= myArr3D.GetUpperBound(2); k++)
+                    {
+                        //SetValue 設定資料
+                        myArr3D.SetValue((i * 100) + (j * 10) + k, i, j, k);
+                    }
+                }
+            }
+            for (int i = 0; i <= myArr3D.GetUpperBound(0); i++)
+            {
+                for (int j = 0; j <= myArr3D.GetUpperBound(1); j++)
+                {
+                    for (int k = 0; k <= myArr3D.GetUpperBound(2); k++)
+                    {
+                        //GetValue 取得資料
+                        int value = (int)myArr3D.GetValue(i, j, k);
+                        richTextBox1.Text += value + " ";
+                    }
+                    richTextBox1.Text += "\n";
+                }
+                richTextBox1.Text += "\n";
+            }
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "秩 :\t" + myArr3D.Rank + "\t長度 :\t" + myArr3D.Length + "\n";  // 獲取維度和整個二維陣列的長度
+            for (int i = 0; i < myArr3D.Rank; i++)
+            {
+                richTextBox1.Text += "第 " + i.ToString() + " 維 :\t"
+                    + myArr3D.GetLowerBound(i) + " ~ " + myArr3D.GetUpperBound(i) + "\t長度 :\t" + myArr3D.GetLength(i) + "\n";
+                //                下限                             上限                                     長度
+            }
+
+            richTextBox1.Text += "Array內容\n";
+            //TBD
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button7_Click(object sender, EventArgs e)
         {
-            //把控件做成陣列
-
-            //控件陣列 宣告
-            PictureBox[] DisplayReference = new PictureBox[4];
-            GroupBox[] camOptions = new GroupBox[4];
-            /*
-            //控件陣列 使用
-            this.DisplayReference[0] = this.pictureBox1;
-            this.DisplayReference[1] = this.pictureBox2;
-            this.DisplayReference[2] = this.pictureBox3;
-            this.DisplayReference[3] = this.pictureBox4;
-
-            this.camOptions[0] = this.groupBox5;
-            this.camOptions[1] = this.groupBox6;
-            this.camOptions[2] = this.groupBox7;
-            this.camOptions[3] = this.groupBox8;
-
-            //物件陣列 宣告
-            CameraMonitor[] CamMonitor = new CameraMonitor[4];
-
-            //物件陣列 使用
-            this.CamMonitor[0] = new CameraMonitor(xxxx, yyyy, zzzz);
-            this.CamMonitor[1] = new CameraMonitor(xxxx, yyyy, zzzz);
-            this.CamMonitor[2] = new CameraMonitor(xxxx, yyyy, zzzz);
-            this.CamMonitor[3] = new CameraMonitor(xxxx, yyyy, zzzz);
-
-            // 製作一個PictureBox Array
-            // Make an array holding the PictureBoxes.
-            PictureBox[] pics = { PictureBox1, PictureBox2, PictureBox3, PictureBox4 };
-
-            // 製作一個CheckBox Array
-            // Arrays of controls.
-            private CheckBox[] BreakfastControls, LunchControls, DinnerControls;
-
-            BreakfastControls = new CheckBox[] { chkCereal,    chkToast,      chkOrangeJuice };
-            LunchControls     = new CheckBox[] { chkSandwhich, chkChips,      chkSoda };
-            DinnerControls    = new CheckBox[] { chkSalad,     chkTofuburger, chkWine };
-            */
         }
 
         //------------------------------------------------------------  # 60個
@@ -1228,20 +1389,6 @@ namespace vcs_test_all_02_Array
 
         private void button17_Click(object sender, EventArgs e)
         {
-            //Array 方法
-
-            /*
-            Array.Sort(Values);
-            Array.Reverse(Values);
-            Array.Copy(array1, array2, array1.Length);
-            Array.BinarySearch(Values, target);
-            Array.IndexOf(score, 100);   //搜尋第一個滿分學生
-            Array.CreateInstance(typeof(int), 3, 4);
-            Array.CreateInstance(typeof(int), 2, 3, 4);
-            Array.Resize(ref score, score.Length + 1);    //陣列大小+1
-            Array.Copy(array_data, 0, array_data, offset, array_data.Length - offset);
-            Array.Copy(array_data, offset, array_data, 0, array_data.Length - offset);
-            */
         }
 
         //------------------------------------------------------------  # 60個
@@ -1254,192 +1401,305 @@ namespace vcs_test_all_02_Array
 
         private void button19_Click(object sender, EventArgs e)
         {
-            // Array方法
-
-            // 建立一個整數二維陣列 R=3, C=4
-            Array myArr2D = Array.CreateInstance(typeof(int), 3, 4);
-
-            int ROW = myArr2D.GetUpperBound(0) + 1;  // 取得指定維度的上限，第0項就是橫列數 ROW
-            int COL = myArr2D.GetUpperBound(1) + 1;  // 取得指定維度的上限，第1項就是直行數 COL
-            richTextBox1.Text += "橫列 ROW : " + ROW.ToString() + "\n";
-            richTextBox1.Text += "直行 COL : " + COL.ToString() + "\n";
-
-            for (int i = 0; i < ROW; i++)
+            //Array測試
+            int[] total = new int[4];
+            int[,] gdp =
             {
-                for (int j = 0; j < COL; j++)
-                {
-                    //SetValue 設定資料
-                    myArr2D.SetValue((i * 10) + (j * 1), i, j);
-                }
-            }
+            {250872, 259564, 288579, 283280 },
+            { 3208572, 3541387, 401368, 4244227},
+            { 7804898, 8071281, 8369219, 8643443}
+            };
 
-            for (int i = 0; i < ROW; i++)
+            //GetLength()方法分別取得列(row)和欄(column)的值
+            int row = gdp.GetLength(0);
+            int column = gdp.GetLength(1);
+
+            //雙層for廻圈，外層for先讀取row數
+            for (int outer = 0; outer < row; outer++)
             {
-                for (int j = 0; j < COL; j++)
+                //內層for讀取column數
+                for (int inner = 0; inner < column; inner++)
                 {
-                    //GetValue 取得資料
-                    int value = (int)myArr2D.GetValue(i, j);
-                    richTextBox1.Text += value + " ";
+                    //欄寬14，NO表示含有千位分號但小數位數是零
+                    //Write($"{gdp[outer, inner],14:N0}");
                 }
                 richTextBox1.Text += "\n";
+                total[0] += gdp[outer, 0];//101年gdp合計
+                total[1] += gdp[outer, 1];//102年gdp合計
+                total[2] += gdp[outer, 2];//103年gdp合計
+                total[3] += gdp[outer, 3];//104年gdp合計
             }
             richTextBox1.Text += "\n";
 
-            richTextBox1.Text += "秩 :\t" + myArr2D.Rank + "\t長度 :\t" + myArr2D.Length + "\n";  // 獲取維度和整個二維陣列的長度
-            for (int i = 0; i < myArr2D.Rank; i++)
+            for (int i = 0; i < total.Length; i++)
             {
-                richTextBox1.Text += "第 " + i.ToString() + " 維 :\t"
-                    + myArr2D.GetLowerBound(i) + " ~ " + myArr2D.GetUpperBound(i) + "\t長度 :\t" + myArr2D.GetLength(i) + "\n";
-                //                下限                             上限                                     長度
+                richTextBox1.Text += total[i] + "\n";
             }
 
-            richTextBox1.Text += "Array內容\n";
-            //TBD
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //宣告鋸齒陣列為隱含型別
+            var subject = new[]
+            {
+                new[] {"Tomas", "國文", "英文", "計算機概論" },
+                new[] {"Mary", "數學", "資料庫"},
+                new[] {"Peter", "數學","應用文", "多媒體", "程式設計"}
+            };
+
+            //外層for廻圈，取屬性subject.Length為列數
+            for (var outer = 0; outer < subject.Length; outer++)
+            {
+                //內層for廻圈，取屬性subject[outer].Length為欄數
+                for (var inner = 0; inner < subject[outer].Length; inner++)
+                {
+                    //-6表示欄寬為6，負號為靠左對齊
+                    //Write($"{subject[outer][inner],-6}");
+                }
+                //WriteLine();//
+            }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //三維 array
+            /*
+                        //宣告多維陣列並初始化
+                        int[,,] arr3D = new int[2, 2, 3] {
+                        { { 1, 2, 3 }, { 12, 14, 16 } },
+                        { { 21, 24, 27 }, { 30, 35, 40 } } };
+
+                        //Write("第2個表格，第2列 第2欄 元素：");
+                        //WriteLine($"{arr3D[1, 1, 1]}");
+
+                        //GetLength()方法取得多維陣列的Table, Row, Column
+                        int table = arr3D.GetLength(0);
+                        int row = arr3D.GetLength(1);
+                        int column = arr3D.GetLength(2);
+
+                        //Write($"有{table}個表格，");
+                        //Write($"是 {row} * {column} 二維表格\n");
+
+                        //3層for廻圈；第一層先讀表格(table)
+                        for (int first = 0; first < table; first++)
+                        {
+                            //WriteLine($"表格 {first + 1} -------");
+
+                            //第二層for廻圈讀列(row)
+                            for (int second = 0; second < row; second++)
+                            {
+                                //第三層for廻圈讀欄(column)
+                                for (int thrid = 0; thrid < column; thrid++)
+                                {
+                                    //依序輸出多維陣列的元素
+                                    //Write($"{arr3D[first, second, thrid],3} |");
+                                }
+
+                                //WriteLine();   //換行
+
+                            }//end second for-loop
+
+                            //WriteLine();   //換行
+
+                        }//end first for-loop
+                    }//end Main()
+            */
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            /*
+            int num = 10;
+            double sum = 0;
+            double[] tall = new double[num];  // 建立tall倍精確陣列存放每位的身高
+
+            for (int i = 0; i <= tall.GetUpperBound(0); i++)
+            {
+                Console.Write("請輸入第 {0} 位身高(公分) : ", i + 1);
+                tall[i] = double.Parse(Console.ReadLine()); //輸入身高逐一存入陣列  
+            }
+
+            foreach (double height in tall)  // 計算總人數身高的加總
+                sum += height;   // 將所有陣列元素依序加總指定給sum           
+
+            //richTextBox1.Text +="\n=== " + i.ToString("#") + " 位平均身高:" + (sum / num).ToString("00.00"));// 顯示平均身高
+            */
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //宣告陣列並初始化
+            int[] number = { 124, 65, 3314, 81, 92, 65 };
+
+            //foreach廻圈讀取陣列元素
+            foreach (int item in number)
+            {
+                //Write($"{item,4} ");
+            }
+            //WriteLine();//換行
+
+            int first = Array.IndexOf(number, 65);
+            //WriteLine($"從前方找65，索引值 {first}");
+
+            int tail = Array.LastIndexOf(number, 65);
+            //WriteLine($"從末端找65，索引值 {tail}");
+
+            int unknown = Array.IndexOf(number, 33);
+            //WriteLine($"從前方找33，索引值 {unknown}");
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            string[] RoleName = new string[] { "魯夫", "喬巴", "羅賓", "香吉士", "騙人布" };
+            int[] Money = new int[] { 300000000, 50, 78000000, 77000000, 30000000 };
+            // 陣列的GetUpperBound()方法可用來取得某一維度的上限
+            // 因此RoleName.GetUpperBound(0) 會傳回 4
+            for (int i = 0; i <= RoleName.GetUpperBound(0); i++)
+            {
+                // 顯示RoleName[0]~RoleName[4] 及Money[0] ~Money[4] 
+                //richTextBox1.Text +="{0}\t{1}", RoleName[i], Money[i]);
+                richTextBox1.Text += RoleName[i] + "\t" + Money[i].ToString("#,#") + "\n";
+            }
+
+            richTextBox1.Text += "aaaaaaaaaaaaaaaaaaa\n";
+
+            string[] ng_reason = new string[] { "無資料", "鏡頭脫落", "影像有黑影", "Ring上有異物", "Ring未組裝好", "Ring裂痕", "LED脫落", "LED不亮", "LED有異物", "漏光", "其他：" };
+
+            //最大值，剛好為陣列索引上限
+            int num = ng_reason.GetUpperBound(0);
+            richTextBox1.Text += "num = " + num.ToString() + "\n";
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //IEnumerator
+
+            // 宣告並建立含有10個字元的字串陣列
+            String[] myAry = new String[10];
+            // 設定陣列初值
+            myAry[0] = "第三次";
+            myAry[1] = "工業革命";
+            myAry[2] = "是";
+            myAry[3] = "3D 列印";
+
+            // 顯示陣列的內容
+            int idx = 0;
+            //實作名稱myEnumerator列舉器, 透過GetEnumerator方法來讀取myAry陣列
+            // 此時指標指到myAry陣列第一個陣列元素的前面
+            IEnumerator myEnumerator = myAry.GetEnumerator();
+
+            Console.WriteLine("myAry 陣列元素內容如下 :\n");
+            // 依序透過MoveNext方法指標下移一個項目,current屬性讀取陣列元素
+            while ((myEnumerator.MoveNext()) && (myEnumerator.Current != null))
+            {
+                Console.WriteLine("myAry[{0}] = {1}", idx++, myEnumerator.Current);
+            }
 
             //------------------------------------------------------------  # 60個
 
-            // 建立一個整數三維陣列
-            Array myArr3D = Array.CreateInstance(typeof(int), 2, 3, 4);
-            for (int i = 0; i <= myArr3D.GetUpperBound(0); i++)
-            {
-                for (int j = 0; j <= myArr3D.GetUpperBound(1); j++)
-                {
-                    for (int k = 0; k <= myArr3D.GetUpperBound(2); k++)
-                    {
-                        //SetValue 設定資料
-                        myArr3D.SetValue((i * 100) + (j * 10) + k, i, j, k);
-                    }
-                }
-            }
-            for (int i = 0; i <= myArr3D.GetUpperBound(0); i++)
-            {
-                for (int j = 0; j <= myArr3D.GetUpperBound(1); j++)
-                {
-                    for (int k = 0; k <= myArr3D.GetUpperBound(2); k++)
-                    {
-                        //GetValue 取得資料
-                        int value = (int)myArr3D.GetValue(i, j, k);
-                        richTextBox1.Text += value + " ";
-                    }
-                    richTextBox1.Text += "\n";
-                }
-                richTextBox1.Text += "\n";
-            }
-            richTextBox1.Text += "\n";
-
-            richTextBox1.Text += "秩 :\t" + myArr3D.Rank + "\t長度 :\t" + myArr3D.Length + "\n";  // 獲取維度和整個二維陣列的長度
-            for (int i = 0; i < myArr3D.Rank; i++)
-            {
-                richTextBox1.Text += "第 " + i.ToString() + " 維 :\t"
-                    + myArr3D.GetLowerBound(i) + " ~ " + myArr3D.GetUpperBound(i) + "\t長度 :\t" + myArr3D.GetLength(i) + "\n";
-                //                下限                             上限                                     長度
-            }
-
-            richTextBox1.Text += "Array內容\n";
-            //TBD
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button20_Click(object sender, EventArgs e)
         {
+            //sort
 
+            // 建立RoleName[0]~RoleName[4]用來存放角色姓名
+            string[] RoleName = new string[] { "魯夫", "喬巴", "羅賓", "香吉士", "騙人布" };
+            // 建立Money[0]~Money[4] 用來存放角色的懸賞金額
+            int[] Money = new int[] { 300000000, 50, 78000000, 77000000, 30000000 };
+            Console.WriteLine("==草帽海賊團成員(遞增排序)==\n");
+            Console.WriteLine("姓名\t懸賞金額");
+            Console.WriteLine("==================");
+            // Money 陣列遞增排序，且RoleName亦跟著更動
+            Array.Sort(Money, RoleName);
+            int i; // 宣告 i 為for迴圈計數變數
+            // 陣列的GetUpperBound()方法可用來取得某一維度的上限
+            // 因此RoleName.GetUpperBound(0) 會傳回 4
+            for (i = 0; i <= RoleName.GetUpperBound(0); i++)
+            {
+                // 顯示RoleName[0]~RoleName[4] 及Money[0] ~Money[4] 
+                Console.WriteLine(RoleName[i] + "\t" + Money[i].ToString("#,#"));
+            }
+            Console.WriteLine("\n");
+
+            Console.WriteLine("==草帽海賊團成員(遞減排序)==\n");
+            Console.WriteLine("姓名\t懸賞金額");
+            Console.WriteLine("==================");
+            // Money 陣列遞增排序，且RoleName亦跟著更動
+            Array.Sort(Money, RoleName);
+            // 反轉Money陣列，使Money陣列變成遞減排序
+            Array.Reverse(Money);
+            Array.Reverse(RoleName);    // 反轉RoleName陣列
+            for (i = 0; i <= RoleName.GetUpperBound(0); i++)
+            {
+                Console.WriteLine(RoleName[i] + "\t" + Money[i].ToString("#,#"));
+            }
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button21_Click(object sender, EventArgs e)
         {
-            //獲取二維陣列的長度
-            //Array.GetLength() 函式獲取 2D 陣列的寬度和高度
-            //Array.GetUpperBound() 函式獲取二維陣列的寬度和高度
-
-            //整數二維陣列
-            const int ROWS = 3;
-            const int COLUMNS = 8;
-
-            //寫法一
-            int[,] array2D = new int[ROWS, COLUMNS]
+            //Array 1
+            // 產生一個含有五個陣列元素的整數陣列
+            Array ary1D = Array.CreateInstance(typeof(Int32), 5);
+            // 設定陣列初值依序為:1,2,3,4,5
+            for (int i = ary1D.GetLowerBound(0); i <= ary1D.GetUpperBound(0); i++)
             {
-            { 0, 1, 2, 3, 4, 5, 6, 7 },
-            { 1, 2, 3, 4, 5, 6, 7, 8 },
-            { 2, 3, 4, 5, 6, 7, 8, 9 }
-            };
-
-            //寫法二
-            array2D = new int[,]
-            {
-            { 0, 1, 2, 3, 4, 5, 6, 7 },
-            { 1, 2, 3, 4, 5, 6, 7, 8 },
-            { 2, 3, 4, 5, 6, 7, 8, 9 }
-            };
-
-            int ROW = array2D.GetUpperBound(0) + 1;  // 取得指定維度的上限，第0項就是橫列數 ROW
-            int COL = array2D.GetUpperBound(1) + 1;  // 取得指定維度的上限，第1項就是直行數 COL
-            richTextBox1.Text += "橫列 ROW : " + ROW.ToString() + "\n";
-            richTextBox1.Text += "直行 COL : " + COL.ToString() + "\n";
-
-            richTextBox1.Text += "秩 :\t" + array2D.Rank + "\t長度 :\t" + array2D.Length + "\n";  // 獲取維度和整個二維陣列的長度
-            for (int i = 0; i < array2D.Rank; i++)
-            {
-                richTextBox1.Text += "第 " + i.ToString() + " 維 :\t"
-                    + array2D.GetLowerBound(i) + " ~ " + array2D.GetUpperBound(i) + "\t長度 :\t" + array2D.GetLength(i) + "\n";
-                //                下限                             上限                                     長度
+                ary1D.SetValue(i + 1, i);
             }
 
-            richTextBox1.Text += "設定數值 :\n";
-
-            //逐一設定 二維陣列
-            for (int i = 0; i < ROW; i++)
+            // 顯示陣列初值            
+            IEnumerator myEnumerator = ary1D.GetEnumerator();
+            int k = 0;
+            int cols = ary1D.GetLength(ary1D.Rank - 1);
+            while (myEnumerator.MoveNext())
             {
-                for (int j = 0; j < COL; j++)
+                if (k < cols)
                 {
-                    array2D[i, j] = i + j;
+                    k++;
                 }
+                else
+                {
+                    Console.WriteLine();
+                    k = 1;
+                }
+                Console.Write(" {0}. ary1D[{1}] = {2} \n", k, k, myEnumerator.Current);
             }
-
-            richTextBox1.Text += "二維陣列內容\n";
-            PrintArray2D(array2D);
-
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button22_Click(object sender, EventArgs e)
         {
-            //字串二維陣列 R=3, C=6
-            string[,] array2D = new string[,]
+            //Array 2
+            // 產生 2x3 字串陣列並設定初值
+            Array ary2D = Array.CreateInstance(typeof(String), 2, 3);
+
+            for (int i = ary2D.GetLowerBound(0); i <= ary2D.GetUpperBound(0); i++)
             {
-            { "1", "隋文帝", "541年7月21日", "604年8月13日", "581年3月4日", "604年8月13日"},
-            { "2", "隋煬帝", "569年", "618年4月11日", "604年8月21日", "618年4月11日"},
-            { "3", "隋恭帝", "605年", "619年9月14日", "617年12月18日", "618年6月18日"},
-            };
-
-            int ROW = array2D.GetUpperBound(0) + 1;  // 取得指定維度的上限，第0項就是橫列數 ROW
-            int COL = array2D.GetUpperBound(1) + 1;  // 取得指定維度的上限，第1項就是直行數 COL
-            richTextBox1.Text += "橫列 ROW : " + ROW.ToString() + "\n";
-            richTextBox1.Text += "直行 COL : " + COL.ToString() + "\n";
-
-            richTextBox1.Text += "秩 :\t" + array2D.Rank + "\t長度 :\t" + array2D.Length + "\n";  // 獲取維度和整個二維陣列的長度
-            for (int i = 0; i < array2D.Rank; i++)
-            {
-                richTextBox1.Text += "第 " + i.ToString() + " 維 :\t"
-                    + array2D.GetLowerBound(i) + " ~ " + array2D.GetUpperBound(i) + "\t長度 :\t" + array2D.GetLength(i) + "\n";
-                //                下限                             上限                                     長度
-            }
-
-            richTextBox1.Text += "二維陣列內容\n";
-            PrintArray2D(array2D);
-
-            richTextBox1.Text += "二維陣列內容\n";
-            for (int i = 0; i < ROW; i++)
-            {
-                for (int j = 0; j < COL; j++)
+                for (int j = ary2D.GetLowerBound(1); j <= ary2D.GetUpperBound(1); j++)
                 {
-                    richTextBox1.Text += "第(" + i.ToString() + ", " + j.ToString() + ")項 " + array2D[i, j] + "\t";
+                    ary2D.SetValue("註標 " + i + "," + j, i, j);
                 }
-                richTextBox1.Text += "\n";
             }
+
+            // 顯示陣列的資料
+            Console.WriteLine(" 二維陣列包含下列資料 :");
+
+            IEnumerator myEnumerator = ary2D.GetEnumerator();
+
+            int r = 0;  // row 列
+            int c = 0;  // col 欄
+
+            int cols = ary2D.GetLength(ary2D.Rank - 1);
+
+            while (myEnumerator.MoveNext() && (myEnumerator.Current != null))
+            {
+                if (r > cols || c >= 3)
+                {
+                    Console.WriteLine();
+                    r++; c = 0;
+                }
+                Console.Write(" ary2D[{0},{1}]={2} , ", r, c++, myEnumerator.Current);
+            }
+
         }
 
         //------------------------------------------------------------  # 60個
@@ -1525,19 +1785,48 @@ namespace vcs_test_all_02_Array
             //richTextBox1.Text += "\n";
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
-        private void bt_object_Click(object sender, EventArgs e)
+        private void bt_controls_array_Click(object sender, EventArgs e)
         {
+            //把控件做成陣列
+
             //控件一維陣列
             TextBox[] textArray = new TextBox[] { numText1a, numText2a, numText3a, numText4a, numText5a, numText6a, numText7a, numText8a };
 
             for (int i = 0; i < 8; i++)
             {
-                //textArray[i].BackColor = SystemColors.Window;
+                textArray[i].Multiline = true;
+                textArray[i].Size = new Size(48, 32);
                 textArray[i].BackColor = Color.Pink;
                 textArray[i].Text = i.ToString();
             }
+
+            //------------------------------------------------------------  # 60個
+
+            // 製作一個PictureBox Array
+
+            //控件陣列 宣告
+            PictureBox[] pbox = { pictureBox1, pictureBox2, pictureBox3, pictureBox4 }; //same
+
+            /* same
+            PictureBox[] pbox = new PictureBox[4];
+            //控件陣列 使用
+            pbox[0] = this.pictureBox1;
+            pbox[1] = this.pictureBox2;
+            pbox[2] = this.pictureBox3;
+            pbox[3] = this.pictureBox4;
+            */
+            pbox[0].BackColor = Color.Red;
+            pbox[1].BackColor = Color.Green;
+            pbox[2].BackColor = Color.Blue;
+            pbox[3].BackColor = Color.Yellow;
+
+            // 製作一個CheckBox Array
+            //CheckBox[] BreakfastControls, LunchControls, DinnerControls;
+            //BreakfastControls = new CheckBox[] { cb00, cb01, cb02 };
+            //LunchControls     = new CheckBox[] { cb10, cb11, cb12 };
+            //DinnerControls    = new CheckBox[] { cb20, cb21, cb22 };
         }
 
         //------------------------------------------------------------  # 60個

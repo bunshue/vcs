@@ -262,25 +262,6 @@ ASP.Net實現中文漢字驗證碼
   之後發現字節數組bytes16進制變碼後內容竟然是{ba,c3}，剛好是“好”字的十六進制區位碼（見區位碼表）。
   因此我們就可以隨機生成一個長度為2的十六進制字節數組，使用GetString ()方法對其進行解碼就可以得到漢字字符了。不過對於生成中文漢字驗證碼來說，因為第15區也就是AF區以前都沒有漢字，只有少量符號，漢字都從第16區B0開始，並且從區位D7開始以後的漢字都是和很難見到的繁雜漢字，所以這些都要排出掉。所以隨機生成的漢字十六進制區位碼第1位范圍在B、C、D之間，如果第1位是D的話，第2位區位碼就不能是7以後的十六進制數。在來看看區位碼表發現每區的第一個位置和最後一個位置都是空的，沒有漢字，因此隨機生成的區位碼第3位如果是A的話，第4位就不能是0；第3位如果是F的話，第4位就不能是F。
   */
-
-        private string GetRandomText21(int nLen)
-        {
-            //獲取GB2312編碼頁（表）
-            Encoding gb = Encoding.GetEncoding("gb2312");
-
-            //調用函數產生4個隨機中文漢字編碼
-            object[] bytes = CreateRegionCode21(nLen);
-
-            //根據漢字編碼的字節數組解碼出中文漢字
-            string[] strs = new string[nLen];
-            string randString = "";
-            for (int i = 0; i < nLen; i++)
-            {
-                strs[i] = gb.GetString((byte[])Convert.ChangeType(bytes[i], typeof(byte[])));
-                randString += strs[i];
-            }
-            return randString;
-        }
         /* 
         在.Net中可以使用System.Text來處理所有語言的編碼。在System.Text命名空間中包含眾多編碼的類，可供進行操作及轉換。其中的Encoding類就是重點處理漢字編碼的類。通過在.Net文檔中查詢Encoding類的方法我們可以發現所有和文字編碼有關的都是字節數組，其中有兩個很好用的方法：  
         Encoding.GetBytes ()方法將指定的 String 或字符數組的全部或部分內容編碼為字節數組  
@@ -306,160 +287,13 @@ ASP.Net實現中文漢字驗證碼
         四個字節數組存儲在object數組中。   
         參數：strlength，代表需要產生的漢字個數   
         */
-        public static object[] CreateRegionCode21(int strlength)
-        {
-            //定義一個字符串數組儲存漢字編碼的組成元素   
-            string[] rBase = new String[16] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
+        //區位碼第3位和區位碼第4位作為字節數組第二個元素 111 ddddd
 
-            Random rnd = new Random();
-
-            //定義一個object數組用來   
-            object[] bytes = new object[strlength];
-
-            /*每循環一次產生一個含兩個元素的十六進制字節數組，並將其放入bject數組中   
-             每個漢字有四個區位碼組成   
-             區位碼第1位和區位碼第2位作為字節數組第一個元素   
-             區位碼第3位和區位碼第4位作為字節數組第二個元素   
-            */
-            for (int i = 0; i < strlength; i++)
-            {
-                //區位碼第1位   
-                int r1 = rnd.Next(11, 14);
-                string str_r1 = rBase[r1].Trim();
-
-                //區位碼第2位   
-                rnd = new Random(r1 * unchecked((int)DateTime.Now.Ticks) + i);  // 使用亂數種子//更換隨機數發生器的  種子避免產生重復值   
-                int r2;
-                if (r1 == 13)
-                {
-                    r2 = rnd.Next(0, 7);
-                }
-                else
-                {
-                    r2 = rnd.Next(0, 16);
-                }
-                string str_r2 = rBase[r2].Trim();
-
-                //區位碼第3位   
-                rnd = new Random(r2 * unchecked((int)DateTime.Now.Ticks) + i);  // 使用亂數種子
-                int r3 = rnd.Next(10, 16);
-                string str_r3 = rBase[r3].Trim();
-
-                //區位碼第4位   
-                rnd = new Random(r3 * unchecked((int)DateTime.Now.Ticks) + i);  // 使用亂數種子
-                int r4;
-                if (r3 == 10)
-                {
-                    r4 = rnd.Next(1, 16);
-                }
-                else if (r3 == 15)
-                {
-                    r4 = rnd.Next(0, 15);
-                }
-                else
-                {
-                    r4 = rnd.Next(0, 16);
-                }
-                string str_r4 = rBase[r4].Trim();
-
-                //定義兩個字節變量存儲產生的隨機漢字區位碼   
-                byte byte1 = Convert.ToByte(str_r1 + str_r2, 16);
-                byte byte2 = Convert.ToByte(str_r3 + str_r4, 16);
-                //將兩個字節變量存儲在字節數組中   
-                byte[] str_r = new byte[] { byte1, byte2 };
-
-                //將產生的一個漢字的字節數組放入object數組中   
-                bytes.SetValue(str_r, i);
-            }
-            return bytes;
-        }
 
         //------------------------------------------------------------  # 60個
 
-        /* 
-        此函数在汉字编码范围内随机创建含两个元素的十六进制字节数组，每个字节数组代表一个汉字，并将 
-        四个字节数组存储在object数组中。 
-        参数：strlength，代表需要产生的汉字个数 
-        */
-        public static object[] CreateCode20(int strlength)
-        {
-            //定义一个字符串数组储存汉字编码的组成元素 
-            string[] r = new String[16] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
-            Random rnd = new Random();
-            //定义一个object数组用来 
-            object[] bytes = new object[strlength];
-            /*每循环一次产生一个含两个元素的十六进制字节数组，并将其放入bject数组中 
-             每个汉字有四个区位码组成 
-             区位码第1位和区位码第2位作为字节数组第一个元素 
-             区位码第3位和区位码第4位作为字节数组第二个元素 
-            */
-            for (int i = 0; i < strlength; i++)
-            {
-                //区位码第1位 
-                int r1 = rnd.Next(11, 14);
-                string str_r1 = r[r1].Trim();
-                //区位码第2位 
-                rnd = new Random(r1 * unchecked((int)DateTime.Now.Ticks) + i);  // 使用亂數種子//更换随机数发生器的种子避免产生重复值 
-                int r2;
-                if (r1 == 13)
-                    r2 = rnd.Next(0, 7);
-                else
-                    r2 = rnd.Next(0, 16);
-                string str_r2 = r[r2].Trim();
-                //区位码第3位 
-                rnd = new Random(r2 * unchecked((int)DateTime.Now.Ticks) + i);  // 使用亂數種子
-                int r3 = rnd.Next(10, 16);
-                string str_r3 = r[r3].Trim();
-                //区位码第4位 
-                rnd = new Random(r3 * unchecked((int)DateTime.Now.Ticks) + i);  // 使用亂數種子
-                int r4;
-                if (r3 == 10)
-                {
-                    r4 = rnd.Next(1, 16);
-                }
-                else if (r3 == 15)
-                {
-                    r4 = rnd.Next(0, 15);
-                }
-                else
-                {
-                    r4 = rnd.Next(0, 16);
-                }
-                string str_r4 = r[r4].Trim();
-                //定义两个字节变量存储产生的随机汉字区位码 
-                byte byte1 = Convert.ToByte(str_r1 + str_r2, 16);
-                byte byte2 = Convert.ToByte(str_r3 + str_r4, 16);
-                //将两个字节变量存储在字节数组中 
-                byte[] str_r = new byte[] { byte1, byte2 };
-                //将产生的一个汉字的字节数组放入object数组中 
-                bytes.SetValue(str_r, i);
-            }
-            return bytes;
-        }
-
         private void bt_random3_Click(object sender, EventArgs e)
         {
-            //隨機中文
-
-            int nLen = 10;
-            // 采用的字符集，可以隨即拓展，並可以控制字符出現的幾率
-            string strCode = GetRandomText21(nLen);
-            richTextBox1.Text += "取得 : " + strCode + "\n";
-
-            //------------------------------------------------------------  # 60個
-
-            //获取GB2312编码页（表） 
-            Encoding gb = Encoding.GetEncoding("gb2312");
-            //调用函数产生4个随机中文汉字编码 
-            object[] bytes = CreateCode20(4);
-            //根据汉字编码的字节数组解码出中文汉字 
-            string str1 = gb.GetString((byte[])Convert.ChangeType(bytes[0], typeof(byte[])));
-            string str2 = gb.GetString((byte[])Convert.ChangeType(bytes[1], typeof(byte[])));
-            string str3 = gb.GetString((byte[])Convert.ChangeType(bytes[2], typeof(byte[])));
-            string str4 = gb.GetString((byte[])Convert.ChangeType(bytes[3], typeof(byte[])));
-            string txt = str1 + str2 + str3 + str4;
-
-            richTextBox1.Text += "取得 : " + txt + "\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -479,24 +313,14 @@ ASP.Net實現中文漢字驗證碼
 
         private void bt_random5_Click(object sender, EventArgs e)
         {
-            Random rand = new Random();//亂數種子
-            //int i = rand.Next(0, 100);//回傳0-99的亂數
-            //如果用for 或其它回圈抓亂數，一定要把 Random 亂數 = new Random();//亂數種子 放在回圈外面。
+            Random rand = new Random();
 
-            //Random rand = new Random();//亂數種子
             for (int i = 0; i < 100; i++)
             {
-                int j = rand.Next(0, 100);
+                int j = rand.Next(0, 100);  //回傳0-99的亂數
                 richTextBox1.Text += j.ToString() + "  ";
             }
             richTextBox1.Text += "\n";
-
-            /* dddd
-            Random rand = new Random();
-            int index = rand.Next(len);
-            //richTextBox1.Text += index.ToString() + " ";
-            //pictureBox2.BackColor = Colors[index % len];  //same
-            */
         }
 
         //------------------------------------------------------------  # 60個
@@ -507,14 +331,14 @@ ASP.Net實現中文漢字驗證碼
 
             for (int i = 0; i < 20; i++)
             {
-                var str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                var builder = new StringBuilder();
+                string str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                StringBuilder sb = new StringBuilder();
                 int length = 5;
                 for (int j = 0; j < length; j++)
                 {
-                    builder.Append(str[rand.Next(0, str.Length)]);
+                    sb.Append(str[rand.Next(0, str.Length)]);
                 }
-                string name_string = builder.ToString();
+                string name_string = sb.ToString();
                 int score_chi = rand.Next(80, 100) + 1;
                 int score_eng = rand.Next(70, 100) + 1;
                 int score_math = rand.Next(60, 100) + 1;
@@ -527,15 +351,14 @@ ASP.Net實現中文漢字驗證碼
 
         public static string GetRandomString3(int length)
         {
-            //var str = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-            var str = "ABCDE";
-            var rand = new Random();
-            var builder = new StringBuilder();
+            string str = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+            Random rand = new Random();
+            StringBuilder sb = new StringBuilder();
             for (var i = 0; i < length; i++)
             {
-                builder.Append(str[rand.Next(0, str.Length)]);
+                sb.Append(str[rand.Next(0, str.Length)]);
             }
-            return builder.ToString();
+            return sb.ToString();
         }
 
         private const int ROUND = 1000;
@@ -675,6 +498,8 @@ ASP.Net實現中文漢字驗證碼
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void bt_random10_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "整個string array都變成亂數陣列\n";
@@ -808,6 +633,8 @@ ASP.Net實現中文漢字驗證碼
         }
         //亂數方法比較 SP
 
+        //------------------------------------------------------------  # 60個
+
         private void bt_random13_Click(object sender, EventArgs e)
         {
             //建立亂七八糟陣列
@@ -821,6 +648,8 @@ ASP.Net實現中文漢字驗證碼
                 richTextBox1.Text += dataArray[i].ToString() + " ";
             }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void bt_random14_Click(object sender, EventArgs e)
         {
@@ -860,6 +689,8 @@ ASP.Net實現中文漢字驗證碼
             this.WindowState = FormWindowState.Maximized;
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void bt_random15_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Normal;
@@ -898,6 +729,8 @@ ASP.Net實現中文漢字驗證碼
             this.WindowState = FormWindowState.Maximized;
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void nudgeWindow()
         {
             // 記錄視窗舊位置
@@ -917,6 +750,8 @@ ASP.Net實現中文漢字驗證碼
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void bt_random16_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Normal;
@@ -924,6 +759,8 @@ ASP.Net實現中文漢字驗證碼
             nudgeWindow();
             this.WindowState = FormWindowState.Maximized;
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void bt_random17_Click(object sender, EventArgs e)
         {
@@ -1242,8 +1079,6 @@ ASP.Net實現中文漢字驗證碼
         private void timer1_Tick(object sender, EventArgs e)
         {
             //製作random color的方法
-            int len = Colors.Length;
-
             pictureBox2.BackColor = GetRandomColor2();          //same
 
             Random rd = new Random();
@@ -1253,18 +1088,15 @@ ASP.Net實現中文漢字驗證碼
 
             pictureBox5.BackColor = GetRandomColor5();
 
+            //------------------------------------------------------------  # 60個
 
             // 產生隨機二維陣列
             Values.Randomize2();
             this.pictureBox1.Refresh();
         }
 
-        /// <summary>  
-        /// 獲取驗證碼【字符串】  
-        /// </summary>  
-        /// <param name="Length">驗證碼長度【必須大於0】</param>  
-        /// <returns></returns>  
-        public static string VerficationText(int Length)
+        // 獲取驗證碼【字符串】  
+        public static string RandomText12(int Length)
         {
             char[] _verfication = new char[Length];
             Random _random = new Random();
@@ -1288,8 +1120,10 @@ ASP.Net實現中文漢字驗證碼
             //Unicode中文字範圍
             int iMin = Convert.ToInt32("4E00", 16);
             int iMax = Convert.ToInt32("9FFF", 16); //不考慮最末16個空白
+
             //隨機一個中文字之整數
             System.Random oRnd = new System.Random(System.Guid.NewGuid().GetHashCode());
+
             int iChar = oRnd.Next(iMin, iMax);
             //整數轉成Byte[]，再轉成字串
             return System.Text.Encoding.Unicode.GetString(System.BitConverter.GetBytes(iChar));
@@ -1322,48 +1156,50 @@ ASP.Net實現中文漢字驗證碼
             }
         }
 
-        private string GenCode(int num)
+        private string GenCode(int length)
         {
             //string str = "的一是在不123456789了Q有和人這Q中大為W上個國我以要他時來E用ASDFGHJKLIUYTREWQZXCVBNM3們生到作地R於出就分對成會可主發年動同工也能下2過子2說產43種ASDFGHJKLIUYTREWQZXCVBNM3面而方後多定行學法0所民得經十三之進著等部度sASDFGHJKLIUYTREWQZXCVBNM3家電力裡如水化高自二k123456789q加量都兩體制機9當使點從業1本去把性3好應開它E合R還因由其D些然前外天政ASDFGHJKLIUYTREWQZXCVBNM3W四日那社E義事平SWQ形RFE相a全h表間樣與關j各重新線內數正心反8你明l看原又麼z利比或T但質123456789氣第4向道命W3此變43條只DF沒結0S解a問A意建8月公0無7系軍很情AUF者4W最立代想D1已L通G並提7g直4L34題H黨123456789程展五U3果料U象員革4位入常文2總次品式活設U及AY管A特件長求w老頭基資5邊流2路F級S少圖3山統接知5TK較S將0組3見計F別她手5角期b根0論ASDFGHJKLIUYTREWQZXCVBNM3油思s術極交受U123456789聯20什認六共S權F收asdecvrrtfghujnmkiolpz證改F清D己美4再采轉更7單SD風5切U8打白J2教速花帶安IM場123456789身車J例真務具萬每目至達G走積r,示345議聲U報N斗完類0八離ASDFGHJKLIUYTREWQ123456789ZXCVBNM3華名確A才SS科張CDXG信U馬節話XZ米U整空Z元Y況D今集a溫傳土許步pGBY群廣J石記asdecvrrtfghujnmk123456789iolpz需段H4研界拉J林律叫K且究O觀越H織K6裝U影casdecvr123456789rtfghujnmkiolpzL算低持v音眾o3書t布A復TV容兒8際商Z非驗連斷HJ深難近礦千周委素M技備半辦V青VT5省PD列n習響B約s支般史d感I勞便團9往5酸歷市克何除消構府u稱太准精值號Zi率族G維XB劃選標C寫存候毛3親快2效M斯Masdecvrrtfghujnmkiolpz3院C查江4型眼5王4B按格5養N易5置M派5層片U始C卻專狀育7廠U京asdecvrrtfghujnmkiolpz識7適屬圓8包火住調m滿縣局7照參紅細引聽該鐵價嚴";
-            string str = "123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ";//去掉的O容易混淆的字母
+            string str = "123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ";  // 去掉的O容易混淆的字母
             char[] chastr = str.ToCharArray();
             // string[] source ={ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "#", "$", "%", "&", "@" };
-            string code = "";
-            Random rd = new Random();
-            for (int i = 0; i < num; i++)
+
+            string captcha_text = "";
+            Random rand = new Random();
+            for (int i = 0; i < length; i++)
             {
-                //code += source[rd.Next(0, source.Length)];
-                code += str.Substring(rd.Next(0, str.Length), 1);
+                captcha_text += str.Substring(rand.Next(0, str.Length), 1);
             }
-            return code;
+            return captcha_text;
         }
+
+        //------------------------------------------------------------  # 60個
 
         //生成大量隨機碼 ST
         private void bt_random18_Click(object sender, EventArgs e)
         {
             //生成大量隨機碼
-            StreamWriter swriter = new StreamWriter("1.txt", true);
+            StreamWriter sw = new StreamWriter("1.txt", true);
             for (int i = 0; i < 100; i++)
             {
-                swriter.Write(generateRandomString(20));
-                swriter.WriteLine();
+                sw.Write(generateRandomString(20));
+                sw.WriteLine();
                 Console.WriteLine("Number: {0}", i);
             }
-            swriter.Flush();
-            swriter.Close();
+            sw.Flush();
+            sw.Close();
         }
 
         static Random random2 = new Random();
         static string generateRandomString(int length)
         {
-            var chars = "ABCDEFGHIJKLMNPQRSTUVWXYZ123456789";
-            StringBuilder result = new StringBuilder();
+            string chars = "ABCDEFGHIJKLMNPQRSTUVWXYZ123456789";
+            StringBuilder sb = new StringBuilder();
             for (int i = 0; i < length; i++)
             {
                 int index = random2.Next(chars.Length);
-                result.Append(chars[index]);
+                sb.Append(chars[index]);
             }
-            return result.ToString();
+            return sb.ToString();
         }
         //生成大量隨機碼 SP
 
@@ -1378,16 +1214,16 @@ ASP.Net實現中文漢字驗證碼
             /*
             要求：密碼必須包含數字和字母
             思路：
-            1.列出數字和字符。 組成字符串 ：chars
-            2.利用randrom.Next(int i)返回一個小於所指定最大值的非負隨機數。
+            1. 列出數字和字符。 組成字符串 ：chars
+            2. 利用rand.Next(int i)返回一個小於所指定最大值的非負隨機數。
             3. 隨機取不小於chars長度的隨機數a,取字符串chars的第a位字符。
-            4.循環 8次，得到8位密碼
-            5.循環N次，批量得到密碼。
+            4. 循環 8次，得到8位密碼
+            5. 循環N次，批量得到密碼。
             */
 
             string chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
             //Random初始化+種子
-            Random randrom = new Random((int)DateTime.Now.Ticks);  // 使用亂數種子
+            Random rand = new Random((int)DateTime.Now.Ticks);  // 使用亂數種子
             string filename = "tmp_pwd.txt";
 
             for (int j = 0; j < 1000; j++)
@@ -1395,7 +1231,7 @@ ASP.Net實現中文漢字驗證碼
                 string str = "";
                 for (int i = 0; i < 8; i++)
                 {
-                    str += chars[randrom.Next(chars.Length)];//randrom.Next(int i)返回一個小於所指定最大值的非負隨機數
+                    str += chars[rand.Next(chars.Length)];  // rand.Next(int i)返回一個小於所指定最大值的非負隨機數
                 }
                 if (IsNumber(str))//判斷是否全是數字
                 {
@@ -1406,8 +1242,6 @@ ASP.Net實現中文漢字驗證碼
                     continue;
                 }
                 File.AppendAllText(filename, str);
-                string pws = Md5(str, 32);//MD5加密
-                File.AppendAllText(filename, "," + pws + "\r\n");
             }
 
             richTextBox1.Text += "完成\n";
@@ -1433,29 +1267,6 @@ ASP.Net實現中文漢字驗證碼
             return false;
         }
 
-        /// <summary>
-        /// MD5加密
-        /// </summary>
-        /// <param name="str">加密字元</param>
-        /// <param name="code">加密位數16/32</param>
-        /// <returns></returns>
-        public static string Md5(string str, int code)
-        {
-            string strEncrypt = string.Empty;
-
-            MD5 md5 = new MD5CryptoServiceProvider();
-            byte[] fromData = Encoding.GetEncoding("GB2312").GetBytes(str);
-            byte[] targetData = md5.ComputeHash(fromData);
-            for (int i = 0; i < targetData.Length; i++)
-            {
-                strEncrypt += targetData[i].ToString("X2");
-            }
-            if (code == 16)
-            {
-                strEncrypt = strEncrypt.Substring(8, 16);
-            }
-            return strEncrypt;
-        }
         //批量生成隨機密碼, 存檔 SP
 
         private void btnPick_Click(object sender, EventArgs e)
@@ -1496,15 +1307,13 @@ ASP.Net實現中文漢字驗證碼
         private string RandomText0()
         {
             //取得任意字串
-            int len = 20;
-            string random_pattern = CreateAndCheckCode(real_random, len);
-            return random_pattern;
+            return CreateAndCheckCode(real_random, 20);
         }
 
         //Random初始化+種子
         Random real_random = new Random(~unchecked((int)DateTime.Now.Ticks));  // 使用亂數種子
 
-        private string CreateAndCheckCode(Random random, int length) // code 激活碼前綴
+        private string CreateAndCheckCode(Random random, int length)
         {
             //char[] Pattern = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
             char[] Pattern = new char[] { '1', '2', '3', 'A', 'B', 'C' };
@@ -1530,226 +1339,6 @@ ASP.Net實現中文漢字驗證碼
         public static object[] CreateRegionCode(int strlength)
         {
             //定義一個字符串數組儲存漢字編碼的組成元素
-            string[] r = new String[16] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
-
-            Random rand = new Random();
-
-            //定義一個object數組用來
-            object[] bytes = new object[strlength];
-
-            /*
-            每循環一次產生一個含兩個元素的十六進制字節數組，並將其放入bject數組中
-            每個漢字有四個區位碼組成
-            區位碼第1位和區位碼第2位作為字節數組第一個元素
-            區位碼第3位和區位碼第4位作為字節數組第二個元素
-            */
-            for (int i = 0; i < strlength; i++)
-            {
-                //區位碼第1位
-                int r1 = rand.Next(11, 14);
-                string str_r1 = r[r1].Trim();
-
-                //區位碼第2位
-                //Random初始化+種子
-                rand = new Random(r1 * unchecked((int)DateTime.Now.Ticks) + i);  // 使用亂數種子//更換隨機數發生器的種子避免產生重復值
-                int r2;
-                if (r1 == 13)
-                {
-                    r2 = rand.Next(0, 7);
-                }
-                else
-                {
-                    r2 = rand.Next(0, 16);
-                }
-                string str_r2 = r[r2].Trim();
-
-                //區位碼第3位
-                //Random初始化+種子
-                rand = new Random(r2 * unchecked((int)DateTime.Now.Ticks) + i);  // 使用亂數種子
-                int r3 = rand.Next(10, 16);
-                string str_r3 = r[r3].Trim();
-
-                //區位碼第4位
-                //Random初始化+種子
-                rand = new Random(r3 * unchecked((int)DateTime.Now.Ticks) + i);  // 使用亂數種子
-                int r4;
-                if (r3 == 10)
-                {
-                    r4 = rand.Next(1, 16);
-                }
-                else if (r3 == 15)
-                {
-                    r4 = rand.Next(0, 15);
-                }
-                else
-                {
-                    r4 = rand.Next(0, 16);
-                }
-                string str_r4 = r[r4].Trim();
-
-                //定義兩個字節變量存儲產生的隨機漢字區位碼
-                byte byte1 = Convert.ToByte(str_r1 + str_r2, 16);
-                byte byte2 = Convert.ToByte(str_r3 + str_r4, 16);
-                //將兩個字節變量存儲在字節數組中
-                byte[] str_r = new byte[] { byte1, byte2 };
-
-                //將產生的一個漢字的字節數組放入object數組中
-                bytes.SetValue(str_r, i);
-            }
-            return bytes;
-        }
-
-        private string RandomText1()
-        {
-            //產生隨機漢字
-            //獲取GB2312編碼頁（表）
-            Encoding gb = Encoding.GetEncoding("gb2312");
-
-            //int len = 20;
-            //調用函數產生隨機中文漢字編碼
-            object[] bytes = CreateRegionCode(4);
-
-            //根據漢字編碼的字節數組解碼出中文漢字
-            string str1 = gb.GetString((byte[])Convert.ChangeType(bytes[0], typeof(byte[])));
-            string str2 = gb.GetString((byte[])Convert.ChangeType(bytes[1], typeof(byte[])));
-            string str3 = gb.GetString((byte[])Convert.ChangeType(bytes[2], typeof(byte[])));
-            string str4 = gb.GetString((byte[])Convert.ChangeType(bytes[3], typeof(byte[])));
-            string txt = str1 + str2 + str3 + str4;
-            return "隨機文字 : " + txt;
-        }
-        //--- RandomText1 --- SP
-
-        //--- RandomText2 --- ST
-        private string RandomText2()
-        {
-            //產生隨機字串
-            int len = 10;
-            return GenCode(len);
-        }
-        //--- RandomText2 --- SP
-
-        //--- RandomText3 --- ST
-
-        //--- RandomText3 --- SP
-
-        //--- RandomText4 --- ST
-
-        //--- RandomText4 --- SP
-
-        //--- RandomText5 --- ST
-
-        //隨機生成漢字（摘錄保存的代碼），生成漢字摘錄代碼
-        /// <summary>
-        /// 隨機生成漢字
-        /// </summary>
-        /// <param name="strlength">長度（4位）</param>
-        /// <returns></returns>
-        public string RandomText5(int strlength)
-        {
-            //定義一個字符串數組儲存漢字編碼的組成元素
-            string[] r = new String[16] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
-            Random rand = new Random();
-            //定義一個object數組用來
-            object[] bytes = new object[strlength];
-            /**/
-            /*每循環一次產生一個含兩個元素的十六進制字節數組，並將其放入bject數組中
-            每個漢字有四個區位碼組成
-            區位碼第1位和區位碼第2位作為字節數組第一個元素
-            區位碼第3位和區位碼第4位作為字節數組第二個元素
-            */
-            for (int i = 0; i < strlength; i++)
-            {
-                //區位碼第1位
-                int r1 = rand.Next(11, 14);
-                string str_r1 = r[r1].Trim();
-                //區位碼第2位
-                //Random初始化+種子
-                rand = new Random(r1 * unchecked((int)DateTime.Now.Ticks) + i);  // 使用亂數種子//更換隨機數發生器的種子避免產生重復值
-                int r2;
-                if (r1 == 13)
-                {
-                    r2 = rand.Next(0, 7);
-                }
-                else
-                {
-                    r2 = rand.Next(0, 16);
-                }
-                string str_r2 = r[r2].Trim();
-                //區位碼第3位
-                //Random初始化+種子
-                rand = new Random(r2 * unchecked((int)DateTime.Now.Ticks) + i);  // 使用亂數種子
-                int r3 = rand.Next(10, 16);
-                string str_r3 = r[r3].Trim();
-                //區位碼第4位
-                //Random初始化+種子
-                rand = new Random(r3 * unchecked((int)DateTime.Now.Ticks) + i);  // 使用亂數種子
-                int r4;
-                if (r3 == 10)
-                {
-                    r4 = rand.Next(1, 16);
-                }
-                else if (r3 == 15)
-                {
-                    r4 = rand.Next(0, 15);
-                }
-                else
-                {
-                    r4 = rand.Next(0, 16);
-                }
-                string str_r4 = r[r4].Trim();
-                //定義兩個字節變量存儲產生的隨機漢字區位碼
-                byte byte1 = Convert.ToByte(str_r1 + str_r2, 16);
-                byte byte2 = Convert.ToByte(str_r3 + str_r4, 16);
-                //將兩個字節變量存儲在字節數組中
-                byte[] str_r = new byte[] { byte1, byte2 };
-                //將產生的一個漢字的字節數組放入object數組中
-                bytes.SetValue(str_r, i);
-            }
-
-            //獲取GB2312編碼頁（表）
-            Encoding gb = Encoding.GetEncoding("gb2312");
-
-            //根據漢字編碼的字節數組解碼出中文漢字
-
-            string txt = string.Empty;
-
-            for (int i = 0; i < strlength; i++)
-            {
-                string str1 = gb.GetString((byte[])Convert.ChangeType(bytes[i], typeof(byte[])));
-                txt += str1;
-            }
-            return txt;
-        }
-        //--- RandomText5 --- SP
-
-
-        //--- RandomText6 --- ST
-        public string RandomText6(int len)
-        {
-            //產生隨機漢字
-            //獲取GB2312編碼頁（表）
-            Encoding gb = Encoding.GetEncoding("gb2312");
-
-            //調用函數產生隨機中文漢字編碼
-            object[] bytes = CreateRegionCode2(len);
-
-            //根據漢字編碼的字節數組解碼出中文漢字
-            string str = string.Empty;
-            for (int i = 0; i < len; i++)
-            {
-                str += gb.GetString((byte[])Convert.ChangeType(bytes[i], typeof(byte[])));
-            }
-            return str;
-        }
-
-        /*
-        此函數在漢字編碼范圍內隨機創建含兩個元素的十六進制字節數組，每個字節數組代表一個漢字，並將
-        四個字節數組存儲在object數組中。
-        參數：strlength，代表需要產生的漢字個數
-        */
-        public static object[] CreateRegionCode2(int strlength)
-        {
-            //定義一個字符串數組儲存漢字編碼的組成元素
             string[] rBase = new String[16] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
 
             Random rand = new Random();
@@ -1761,9 +1350,8 @@ ASP.Net實現中文漢字驗證碼
             每循環一次產生一個含兩個元素的十六進制字節數組，並將其放入bject數組中
             每個漢字有四個區位碼組成
             區位碼第1位和區位碼第2位作為字節數組第一個元素
-            區位碼第3位和區位碼第4位作為字節數組第二個元素
+            區位碼第3位和區位碼第4位作為字節數組第二個元素 222
             */
-
             for (int i = 0; i < strlength; i++)
             {
                 //區位碼第1位
@@ -1771,10 +1359,8 @@ ASP.Net實現中文漢字驗證碼
                 string str_r1 = rBase[r1].Trim();
 
                 //區位碼第2位
-
                 //Random初始化+種子
                 rand = new Random(r1 * unchecked((int)DateTime.Now.Ticks) + i);  // 使用亂數種子//更換隨機數發生器的種子避免產生重復值
-
                 int r2;
                 if (r1 == 13)
                 {
@@ -1789,14 +1375,12 @@ ASP.Net實現中文漢字驗證碼
                 //區位碼第3位
                 //Random初始化+種子
                 rand = new Random(r2 * unchecked((int)DateTime.Now.Ticks) + i);  // 使用亂數種子
-
                 int r3 = rand.Next(10, 16);
                 string str_r3 = rBase[r3].Trim();
 
                 //區位碼第4位
                 //Random初始化+種子
                 rand = new Random(r3 * unchecked((int)DateTime.Now.Ticks) + i);  // 使用亂數種子
-
                 int r4;
                 if (r3 == 10)
                 {
@@ -1823,28 +1407,17 @@ ASP.Net實現中文漢字驗證碼
             }
             return bytes;
         }
-        //--- RandomText6 --- SP
+        //--- RandomText1 --- SP
 
-        //--- RandomText7 --- ST
-        private string RandomText7()
+        //--- RandomText2 --- ST
+        private string RandomText2()
         {
-            string random_string = GetRandomString(16);
-            return random_string;
+            //產生隨機字串
+            return GenCode(10);
         }
+        //--- RandomText2 --- SP
 
-        public static string GetRandomString(int length)
-        {
-            var str = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-            var rand = new Random();
-            var builder = new StringBuilder();
-            for (var i = 0; i < length; i++)
-            {
-                builder.Append(str[rand.Next(0, str.Length)]);
-            }
-            return builder.ToString();
-        }
-        //--- RandomText7 --- SP
-
+        //6060
 
         //--- RandomText8 --- ST
         private string RandomText8()
@@ -1852,9 +1425,9 @@ ASP.Net實現中文漢字驗證碼
             //[C#] 產生一組亂數
             //最後產生的finalString就是我們要的亂數,至於亂數長度,你可以調整第二行中8這個數字,如果沒改就是長度8的亂數.
 
-            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             var stringChars = new char[8];
-            var random = new Random();
+            Random random = new Random();
             for (int i = 0; i < stringChars.Length; i++)
             {
                 stringChars[i] = chars[random.Next(chars.Length)];
@@ -1865,17 +1438,19 @@ ASP.Net實現中文漢字驗證碼
         }
         //--- RandomText8 --- SP
 
+        //6060
+
         //--- RandomText9 --- ST
         private string RandomText9()
         {
             //隨機生成四位驗證碼（0~9，a~Z）
             int LEN = 4;
-            Random r = new Random();
+            Random rand = new Random();
             string code = "0123456789abcdefghjklmnopqistuvwxyzABCDEFGHIJKLMNOPQISTUVWXYZ";
             string captcha = "";
             for (int i = 0; i < LEN; i++)
             {
-                int ra = r.Next(code.Length);
+                int ra = rand.Next(code.Length);
                 captcha = code.Substring(ra, 1) + captcha;
             }
             //richTextBox1.Text += captcha + "\n";
@@ -1886,56 +1461,40 @@ ASP.Net實現中文漢字驗證碼
         //--- RandomText10 --- ST
         private string RandomText10()
         {
-            // Make the random words.
-            // Get the number of words and letters per word.
-            int num_letters = 10;
-
-            // Make an array of the letters we will use.
-            char[] letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
-
-            // Make a random number generator.
             Random rand = new Random();
 
-            // Make a word.
-            string word = "";
-            for (int j = 1; j <= num_letters; j++)
+            // Make an array of the letters we will use.
+            char[] texts = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
+
+            int length = 10;
+            string captcha_text = "";
+            for (int i = 0; i < length; i++)
             {
                 // Pick a random number between 0 and 25
                 // to select a letter from the letters array.
-                int letter_num = rand.Next(0, letters.Length - 1);
+                int letter_num = rand.Next(0, texts.Length - 1);
 
                 // Append the letter.
-                word += letters[letter_num];
+                captcha_text += texts[letter_num];
             }
-            return word;
+            return captcha_text;
         }
         //--- RandomText10 --- SP
 
         //--- RandomText11 --- ST
         private string RandomText11()
         {
-            //生成隨機字符串
-            string random_str = RandomStringGenerator.GetRandomString();
-            return random_str;
+            Random rand = new Random();
+            string _chars = "0123456789";
+
+            char[] buffer = new char[5];
+            for (int i = 0; i < 5; i++)
+            {
+                buffer[i] = _chars[rand.Next(_chars.Length)];
+            }
+            return new string(buffer);
         }
 
-        /// <summary> 
-        /// 生成隨機字符串
-        /// </summary> 
-        private class RandomStringGenerator
-        {
-            static readonly Random r = new Random();
-            const string _chars = "0123456789";
-            public static string GetRandomString()
-            {
-                char[] buffer = new char[5];
-                for (int i = 0; i < 5; i++)
-                {
-                    buffer[i] = _chars[r.Next(_chars.Length)];
-                }
-                return new string(buffer);
-            }
-        }
         //--- RandomText11 --- SP
 
         //RandomText SP
@@ -1984,7 +1543,6 @@ ASP.Net實現中文漢字驗證碼
 
         private string GetCaptchaCode03(int length)
         {
-            //產生五位的隨機字符串
             int number;
             char code;
             string captcha_code = String.Empty;
@@ -2089,10 +1647,12 @@ ASP.Net實現中文漢字驗證碼
                     strValidateStringSource = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
                     break;
             }
+
             for (int i = 0; i < length; i++)
             {
                 captcha_text += strValidateStringSource[rand.Next(strValidateStringSource.Length - 1)];
             }
+
             return captcha_text;
         }
 
@@ -2102,18 +1662,18 @@ ASP.Net實現中文漢字驗證碼
         {
             //定義要隨機抽取的字串
             string strRandomCode = "ABCD1EF2GH3IJ4KL5MN6P7QR8ST9UVWXYZ";
-            //將定義的字串轉成字元陣列                           
+            //將定義的字串轉成字元陣列
             char[] chastr = strRandomCode.ToCharArray();
-            //定義StringBuilder物件用於存放驗證碼                                     
-            StringBuilder sbValidCode = new StringBuilder();
-            //隨機函式,隨機抽取字元                                       
+
+            StringBuilder sb = new StringBuilder();
+
             Random rand = new Random();
             for (int i = 0; i < length; i++)
             {
                 //以strRandomCode的長度產生隨機位置並擷取該位置的字元新增到StringBuilder物件中
-                sbValidCode.Append(strRandomCode.Substring(rand.Next(0, strRandomCode.Length), 1));
+                sb.Append(strRandomCode.Substring(rand.Next(0, strRandomCode.Length), 1));
             }
-            return sbValidCode.ToString();
+            return sb.ToString();
         }
 
         //------------------------------------------------------------  # 60個
@@ -2121,8 +1681,10 @@ ASP.Net實現中文漢字驗證碼
         public static string GetCaptchaCode08(int length)
         {
             Random rand = new Random();
-            int num, tem;
+            int num;
+            int tem;
             string captcha_code = "";
+
             for (int i = 0; i < length; i++)
             {
                 num = rand.Next();
@@ -2147,10 +1709,9 @@ ASP.Net實現中文漢字驗證碼
         public string GetCaptchaCode09(int codeLen, int zhCharsCount)
         {
             Random rand = new Random();
-
             char[] chs = new char[codeLen];
-
             int index;
+
             for (int i = 0; i < zhCharsCount; i++)
             {
                 index = rand.Next(0, codeLen);
@@ -2163,6 +1724,7 @@ ASP.Net實現中文漢字驗證碼
                     --i;
                 }
             }
+
             for (int i = 0; i < codeLen; i++)
             {
                 if (chs[i] == '\0')
@@ -2244,12 +1806,10 @@ ASP.Net實現中文漢字驗證碼
         private string GetCaptchaCode10(int length)
         {
             StringBuilder sb = new StringBuilder(6);
-
             for (int i = 0; i < length; i++)
             {
                 sb.Append(Char.ConvertFromUtf32(RandomAZ09()));
             }
-
             return sb.ToString();
         }
 
@@ -2358,28 +1918,27 @@ ASP.Net實現中文漢字驗證碼
 
             //------------------------------------------------------------  # 60個
 
-            captcha_text = RandomText1();
-            richTextBox1.Text += "01取得 : " + captcha_text + "\n";
-
-            //------------------------------------------------------------  # 60個
-
             captcha_text = RandomText2();
             richTextBox1.Text += "02取得 : " + captcha_text + "\n";
 
             //------------------------------------------------------------  # 60個
 
-            captcha_text = RandomText5(10);
+            //產生隨機漢字
+            //獲取GB2312編碼頁（表）
+            Encoding gb = Encoding.GetEncoding("gb2312");
+
+            //調用函數產生隨機中文漢字編碼
+            object[] bytes = CreateRegionCode(length);
+
+            captcha_text = "";
+
+            //根據漢字編碼的字節數組解碼出中文漢字
+            for (int i = 0; i < length; i++)
+            {
+                captcha_text += gb.GetString((byte[])Convert.ChangeType(bytes[i], typeof(byte[])));
+            }
+
             richTextBox1.Text += "05取得 : " + captcha_text + "\n";
-
-            //------------------------------------------------------------  # 60個
-
-            captcha_text = RandomText6(10);
-            richTextBox1.Text += "06取得 : " + captcha_text + "\n";
-
-            //------------------------------------------------------------  # 60個
-
-            captcha_text = RandomText7();
-            richTextBox1.Text += "07取得 : " + captcha_text + "\n";
 
             //------------------------------------------------------------  # 60個
 
@@ -2403,7 +1962,7 @@ ASP.Net實現中文漢字驗證碼
 
             //------------------------------------------------------------  # 60個
 
-            captcha_text = VerficationText(10);
+            captcha_text = RandomText12(10);
             richTextBox1.Text += "12取得 : " + captcha_text + "\n";
         }
 
@@ -2443,15 +2002,14 @@ ASP.Net實現中文漢字驗證碼
 
             //------------------------------------------------------------  # 60個
 
-            int len = rand.Next(4, 6);
-
             char[] chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
-            StringBuilder myStr = new StringBuilder();
-            for (int iCount = 0; iCount < len; iCount++)
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < 10; i++)
             {
-                myStr.Append(chars[rand.Next(chars.Length)]);
+                sb.Append(chars[rand.Next(chars.Length)]);
             }
-            captcha_text = myStr.ToString();
+            captcha_text = sb.ToString();
             richTextBox1.Text += "12取得 : " + captcha_text + "\n";
 
             //------------------------------------------------------------  # 60個
@@ -2471,25 +2029,24 @@ ASP.Net實現中文漢字驗證碼
             //亂數產生驗證答案
             //從已知幾個元素中任意選出幾個
 
-            string texts = "fjalkdfjalkdjfalkjdf";
+            string texts = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-            string vaildNumAnswer = "";
-            vaildNumAnswer = "";
+            captcha_text = "";
             for (int i = 1; i <= length; i++)
             {
                 char c = texts[rand.Next(texts.Length)];
-                vaildNumAnswer += c;
+                captcha_text += c;
             }
-            richTextBox1.Text += "14取得 : " + vaildNumAnswer + "\n";
+            richTextBox1.Text += "14取得 : " + captcha_text + "\n";
 
             //------------------------------------------------------------  # 60個
 
-            StringBuilder objStringBuilder = new StringBuilder();
+            sb = new StringBuilder();
 
             //加入數字1-9
             for (int i = 1; i <= 9; i++)
             {
-                objStringBuilder.Append(i.ToString());
+                sb.Append(i.ToString());
             }
 
             //加入大寫字母A-Z，不包括O
@@ -2502,7 +2059,7 @@ ASP.Net實現中文漢字驗證碼
                 //如果生成的字母不是'O'
                 if (!temp.Equals('O'))
                 {
-                    objStringBuilder.Append(temp);
+                    sb.Append(temp);
                 }
             }
 
@@ -2516,7 +2073,7 @@ ASP.Net實現中文漢字驗證碼
                 //如果生成的字母不是'o'
                 if (!temp.Equals('o'))
                 {
-                    objStringBuilder.Append(temp);
+                    sb.Append(temp);
                 }
             }
 
@@ -2527,14 +2084,14 @@ ASP.Net實現中文漢字驗證碼
 
             for (int i = 0; i < length; i++)
             {
-                index = rand.Next(0, objStringBuilder.Length);
+                index = rand.Next(0, sb.Length);
 
-                captcha_text += objStringBuilder[index];
+                captcha_text += sb[index];
 
-                objStringBuilder.Remove(index, 1);
+                sb.Remove(index, 1);
             }
 
-            richTextBox1.Text += "15取得 : " + objStringBuilder + "\n";
+            richTextBox1.Text += "15取得 : " + sb + "\n";
             richTextBox1.Text += "15取得 : " + captcha_text + "\n";
 
 
@@ -2688,18 +2245,9 @@ ASP.Net實現中文漢字驗證碼
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
+
 /*
-        public static string GetRandomString2(int length)
-        {
-            var str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            Random rand = new Random();
-            var builder = new StringBuilder();
-            for (var i = 0; i < length; i++)
-            {
-                builder.Append(str[rand.Next(0, str.Length)]);
-            }
-            return builder.ToString();
-        }
+此函數在漢字編碼范圍內隨機創建含兩個元素的十六進制字節數組，每個字節數組代表一個漢字，並將
+四個字節數組存儲在object數組中。
+參數：strlength，代表需要產生的漢字個數
 */
-
-

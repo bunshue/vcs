@@ -206,6 +206,8 @@ namespace vcs_Mix00
             show_button_text(sender);
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button2_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
@@ -363,37 +365,21 @@ namespace vcs_Mix00
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button6_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button7_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //IEnumerator
-
-            // 宣告並建立含有10個字元的字串陣列
-            String[] myAry = new String[10];
-            // 設定陣列初值
-            myAry[0] = "第三次";
-            myAry[1] = "工業革命";
-            myAry[2] = "是";
-            myAry[3] = "3D 列印";
-
-            // 顯示陣列的內容
-            int i = 0;
-            //實作名稱myEnumerator列舉器, 透過GetEnumerator方法來讀取myAry陣列
-            // 此時指標指到myAry陣列第一個陣列元素的前面
-            IEnumerator myEnumerator = myAry.GetEnumerator();
-
-            Console.WriteLine("myAry 陣列元素內容如下 :\n");
-            // 依序透過MoveNext方法指標下移一個項目,current屬性讀取陣列元素
-            while ((myEnumerator.MoveNext()) && (myEnumerator.Current != null))
-            {
-                Console.WriteLine("myAry[{0}] = {1}", i++, myEnumerator.Current);
-            }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button8_Click(object sender, EventArgs e)
         {
@@ -1124,193 +1110,34 @@ namespace vcs_Mix00
             }
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button29_Click(object sender, EventArgs e)
         {
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button30_Click(object sender, EventArgs e)
         {
+
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button31_Click(object sender, EventArgs e)
         {
+
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button32_Click(object sender, EventArgs e)
         {
-            int[] total = new int[4];
-            int[,] gdp =
-            {
-            {250872, 259564, 288579, 283280 },
-            { 3208572, 3541387, 401368, 4244227},
-            { 7804898, 8071281, 8369219, 8643443}
-            };
-
-            //GetLength()方法分別取得列(row)和欄(column)的值
-            int row = gdp.GetLength(0);
-            int column = gdp.GetLength(1);
-
-            //雙層for廻圈，外層for先讀取row數
-            for (int outer = 0; outer < row; outer++)
-            {
-                //內層for讀取column數
-                for (int inner = 0; inner < column; inner++)
-                {
-                    //欄寬14，NO表示含有千位分號但小數位數是零
-                    //Write($"{gdp[outer, inner],14:N0}");
-                }
-                richTextBox1.Text += "\n";
-                total[0] += gdp[outer, 0];//101年gdp合計
-                total[1] += gdp[outer, 1];//102年gdp合計
-                total[2] += gdp[outer, 2];//103年gdp合計
-                total[3] += gdp[outer, 3];//104年gdp合計
-            }
-            richTextBox1.Text += "\n";
-
-            for (int i = 0; i < total.Length; i++)
-            {
-                richTextBox1.Text += total[i] + "\n";
-            }
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //宣告鋸齒陣列為隱含型別
-            var subject = new[]
-            {
-                new[] {"Tomas", "國文", "英文", "計算機概論" },
-                new[] {"Mary", "數學", "資料庫"},
-                new[] {"Peter", "數學","應用文", "多媒體", "程式設計"}
-            };
-
-            //外層for廻圈，取屬性subject.Length為列數
-            for (var outer = 0; outer < subject.Length; outer++)
-            {
-                //內層for廻圈，取屬性subject[outer].Length為欄數
-                for (var inner = 0; inner < subject[outer].Length; inner++)
-                {
-                    //-6表示欄寬為6，負號為靠左對齊
-                    //Write($"{subject[outer][inner],-6}");
-                }
-                //WriteLine();//
-            }
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            //三維 array
-            /*
-                        //宣告多維陣列並初始化
-                        int[,,] arr3D = new int[2, 2, 3] {
-                        { { 1, 2, 3 }, { 12, 14, 16 } },
-                        { { 21, 24, 27 }, { 30, 35, 40 } } };
-
-                        //Write("第2個表格，第2列 第2欄 元素：");
-                        //WriteLine($"{arr3D[1, 1, 1]}");
-
-                        //GetLength()方法取得多維陣列的Table, Row, Column
-                        int table = arr3D.GetLength(0);
-                        int row = arr3D.GetLength(1);
-                        int column = arr3D.GetLength(2);
-
-                        //Write($"有{table}個表格，");
-                        //Write($"是 {row} * {column} 二維表格\n");
-
-                        //3層for廻圈；第一層先讀表格(table)
-                        for (int first = 0; first < table; first++)
-                        {
-                            //WriteLine($"表格 {first + 1} -------");
-
-                            //第二層for廻圈讀列(row)
-                            for (int second = 0; second < row; second++)
-                            {
-                                //第三層for廻圈讀欄(column)
-                                for (int thrid = 0; thrid < column; thrid++)
-                                {
-                                    //依序輸出多維陣列的元素
-                                    //Write($"{arr3D[first, second, thrid],3} |");
-                                }
-
-                                //WriteLine();   //換行
-
-                            }//end second for-loop
-
-                            //WriteLine();   //換行
-
-                        }//end first for-loop
-                    }//end Main()
-            */
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            /*
-            int num = 10;
-            double sum = 0;
-            double[] tall = new double[num];  // 建立tall倍精確陣列存放每位的身高
-
-            for (int i = 0; i <= tall.GetUpperBound(0); i++)
-            {
-                Console.Write("請輸入第 {0} 位身高(公分) : ", i + 1);
-                tall[i] = double.Parse(Console.ReadLine()); //輸入身高逐一存入陣列  
-            }
-
-            foreach (double height in tall)  // 計算總人數身高的加總
-                sum += height;   // 將所有陣列元素依序加總指定給sum           
-
-            //richTextBox1.Text +="\n=== " + i.ToString("#") + " 位平均身高:" + (sum / num).ToString("00.00"));// 顯示平均身高
-            */
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //宣告陣列並初始化
-            int[] number = { 124, 65, 3314, 81, 92, 65 };
-
-            //foreach廻圈讀取陣列元素
-            foreach (int item in number)
-            {
-                //Write($"{item,4} ");
-            }
-            //WriteLine();//換行
-
-            int first = Array.IndexOf(number, 65);
-            //WriteLine($"從前方找65，索引值 {first}");
-
-            int tail = Array.LastIndexOf(number, 65);
-            //WriteLine($"從末端找65，索引值 {tail}");
-
-            int unknown = Array.IndexOf(number, 33);
-            //WriteLine($"從前方找33，索引值 {unknown}");
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            string[] RoleName = new string[] { "魯夫", "喬巴", "羅賓", "香吉士", "騙人布" };
-            int[] Money = new int[] { 300000000, 50, 78000000, 77000000, 30000000 };
-            // 陣列的GetUpperBound()方法可用來取得某一維度的上限
-            // 因此RoleName.GetUpperBound(0) 會傳回 4
-            for (int i = 0; i <= RoleName.GetUpperBound(0); i++)
-            {
-                // 顯示RoleName[0]~RoleName[4] 及Money[0] ~Money[4] 
-                //richTextBox1.Text +="{0}\t{1}", RoleName[i], Money[i]);
-                richTextBox1.Text += RoleName[i] + "\t" + Money[i].ToString("#,#") + "\n";
-            }
-
-            richTextBox1.Text += "aaaaaaaaaaaaaaaaaaa\n";
-
-            string[] ng_reason = new string[] { "無資料", "鏡頭脫落", "影像有黑影", "Ring上有異物", "Ring未組裝好", "Ring裂痕", "LED脫落", "LED不亮", "LED有異物", "漏光", "其他：" };
-
-            //最大值，剛好為陣列索引上限
-            int num = ng_reason.GetUpperBound(0);
-            richTextBox1.Text += "num = " + num.ToString() + "\n";
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
 
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button33_Click(object sender, EventArgs e)
         {
@@ -1357,37 +1184,6 @@ namespace vcs_Mix00
 
         private void button35_Click(object sender, EventArgs e)
         {
-            // 建立RoleName[0]~RoleName[4]用來存放角色姓名
-            string[] RoleName = new string[] { "魯夫", "喬巴", "羅賓", "香吉士", "騙人布" };
-            // 建立Money[0]~Money[4] 用來存放角色的懸賞金額
-            int[] Money = new int[] { 300000000, 50, 78000000, 77000000, 30000000 };
-            Console.WriteLine("==草帽海賊團成員(遞增排序)==\n");
-            Console.WriteLine("姓名\t懸賞金額");
-            Console.WriteLine("==================");
-            // Money 陣列遞增排序，且RoleName亦跟著更動
-            Array.Sort(Money, RoleName);
-            int i; // 宣告 i 為for迴圈計數變數
-            // 陣列的GetUpperBound()方法可用來取得某一維度的上限
-            // 因此RoleName.GetUpperBound(0) 會傳回 4
-            for (i = 0; i <= RoleName.GetUpperBound(0); i++)
-            {
-                // 顯示RoleName[0]~RoleName[4] 及Money[0] ~Money[4] 
-                Console.WriteLine(RoleName[i] + "\t" + Money[i].ToString("#,#"));
-            }
-            Console.WriteLine("\n");
-
-            Console.WriteLine("==草帽海賊團成員(遞減排序)==\n");
-            Console.WriteLine("姓名\t懸賞金額");
-            Console.WriteLine("==================");
-            // Money 陣列遞增排序，且RoleName亦跟著更動
-            Array.Sort(Money, RoleName);
-            // 反轉Money陣列，使Money陣列變成遞減排序
-            Array.Reverse(Money);
-            Array.Reverse(RoleName);    // 反轉RoleName陣列
-            for (i = 0; i <= RoleName.GetUpperBound(0); i++)
-            {
-                Console.WriteLine(RoleName[i] + "\t" + Money[i].ToString("#,#"));
-            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -1401,68 +1197,15 @@ namespace vcs_Mix00
 
         private void button37_Click(object sender, EventArgs e)
         {
-            //Array 1
-            // 產生一個含有五個陣列元素的整數陣列
-            Array ary1D = Array.CreateInstance(typeof(Int32), 5);
-            // 設定陣列初值依序為:1,2,3,4,5
-            for (int i = ary1D.GetLowerBound(0); i <= ary1D.GetUpperBound(0); i++)
-            {
-                ary1D.SetValue(i + 1, i);
-            }
-
-            // 顯示陣列初值            
-            IEnumerator myEnumerator = ary1D.GetEnumerator();
-            int k = 0;
-            int cols = ary1D.GetLength(ary1D.Rank - 1);
-            while (myEnumerator.MoveNext())
-            {
-                if (k < cols)
-                {
-                    k++;
-                }
-                else
-                {
-                    Console.WriteLine();
-                    k = 1;
-                }
-                Console.Write(" {0}. ary1D[{1}] = {2} \n", k, k, myEnumerator.Current);
-            }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button38_Click(object sender, EventArgs e)
         {
-            //Array 2
-            // 產生 2x3 字串陣列並設定初值
-            Array ary2D = Array.CreateInstance(typeof(String), 2, 3);
-
-            for (int i = ary2D.GetLowerBound(0); i <= ary2D.GetUpperBound(0); i++)
-            {
-                for (int j = ary2D.GetLowerBound(1); j <= ary2D.GetUpperBound(1); j++)
-                {
-                    ary2D.SetValue("註標 " + i + "," + j, i, j);
-                }
-            }
-
-            // 顯示陣列的資料
-            Console.WriteLine(" 二維陣列包含下列資料 :");
-
-            IEnumerator myEnumerator = ary2D.GetEnumerator();
-
-            int r = 0;  // row 列
-            int c = 0;  // col 欄
-
-            int cols = ary2D.GetLength(ary2D.Rank - 1);
-
-            while (myEnumerator.MoveNext() && (myEnumerator.Current != null))
-            {
-                if (r > cols || c >= 3)
-                {
-                    Console.WriteLine();
-                    r++; c = 0;
-                }
-                Console.Write(" ary2D[{0},{1}]={2} , ", r, c++, myEnumerator.Current);
-            }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button39_Click(object sender, EventArgs e)
         {

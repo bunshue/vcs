@@ -1,4 +1,36 @@
-﻿
+﻿我的電腦已經裝了藍芽接收器，我要如何得知目前有多少藍芽裝置呢?
+請用 Visual C# 程式來查詢目前能找到的藍芽裝置
+
+//------------------------------------------------------------  # 60個
+
+                string pws = Md5(str, 32);//MD5加密
+                File.AppendAllText(filename, "," + pws + "\r\n");
+
+
+        /// <summary>
+        /// MD5加密
+        /// </summary>
+        /// <param name="str">加密字元</param>
+        /// <param name="code">加密位數16/32</param>
+        /// <returns></returns>
+        public static string Md5(string str, int code)
+        {
+            string strEncrypt = string.Empty;
+
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] fromData = Encoding.GetEncoding("GB2312").GetBytes(str);
+            byte[] targetData = md5.ComputeHash(fromData);
+            for (int i = 0; i < targetData.Length; i++)
+            {
+                strEncrypt += targetData[i].ToString("X2");
+            }
+            if (code == 16)
+            {
+                strEncrypt = strEncrypt.Substring(8, 16);
+            }
+            return strEncrypt;
+        }
+
 //------------------------------------------------------------  # 60個
 
 int index = (int)CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek;
@@ -574,16 +606,10 @@ public Point? GetIntersectionWith(Line secondLine);
             
 //------------------------------------------------------------  # 60個
 
-Windows 的 文字轉語音 (Text-to-Speech) 功能，或使用螢幕閱讀器 (Narrator) 來朗讀我的回答。
-
-好的，我來一步一步教你如何在 Windows 上讓我的文字回覆直接用電腦喇叭播放出來。這主要是透過 文字轉語音 (Text-to-Speech, TTS) 或 Windows Narrator 來完成。
-
-方法一：使用 Windows Narrator
+Windows 朗讀程式 Windows Narrator
 - 按下 Win + Ctrl + Enter，開啟 Narrator。
 - Narrator 會自動朗讀螢幕上的文字，包括我的回覆。
 - 你可以在 設定 → 輔助工具 → Narrator 裡調整語音、速度與音量。
-
-這裡給你一個完整的 Visual C# 範例程式，可以直接把文字透過電腦喇叭播放出來。它使用 System.Speech.Synthesis 命名空間，這是 .NET Framework 內建的文字轉語音 (TTS) 功能。
 
 //------------------------------------------------------------  # 60個
 
@@ -7460,15 +7486,6 @@ pictureBox1.Image.Save(filename);
                 //存圖
             }
         }
-
-//------------------------------------------------------------  # 60個
-
-//------------------------------------------------------------  # 60個
-
-
-//------------------------------------------------------------  # 60個
-
-//------------------------------------------------------------  # 60個
 
 
 //------------------------------------------------------------  # 60個

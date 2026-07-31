@@ -316,7 +316,6 @@
             this.bt_random3.Name = "bt_random3";
             this.bt_random3.Size = new System.Drawing.Size(190, 60);
             this.bt_random3.TabIndex = 23;
-            this.bt_random3.Text = "隨機中文";
             this.bt_random3.UseVisualStyleBackColor = true;
             this.bt_random3.Click += new System.EventHandler(this.bt_random3_Click);
             // 
