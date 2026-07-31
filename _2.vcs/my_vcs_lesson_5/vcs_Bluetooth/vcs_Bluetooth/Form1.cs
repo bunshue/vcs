@@ -73,7 +73,7 @@ namespace vcs_Bluetooth
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //bt1
+            //bt0
             Console.WriteLine("正在查詢藍芽裝置...\n");
 
             try
@@ -150,6 +150,7 @@ namespace vcs_Bluetooth
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //bt1
             Console.WriteLine("列出所有藍芽相關裝置...\n");
 
             IntPtr hDevInfo = SetupDiGetClassDevs(IntPtr.Zero, IntPtr.Zero, IntPtr.Zero,
@@ -171,13 +172,12 @@ namespace vcs_Bluetooth
             {
                 index++;
 
-                const int SPDRP_DEVICEDESC = 0x00000000;
+                const int SPDRP_DEVICEDESC = 0x00000000;  // 取得裝置名稱
                 int regType;
                 byte[] buffer = new byte[1024];
                 int requiredSize;
 
-                if (SetupDiGetDeviceRegistryProperty(hDevInfo, ref devInfoData,
-                    SPDRP_DEVICEDESC, out regType, buffer, buffer.Length, out requiredSize))
+                if (SetupDiGetDeviceRegistryProperty(hDevInfo, ref devInfoData, SPDRP_DEVICEDESC, out regType, buffer, buffer.Length, out requiredSize))
                 {
                     string deviceName = Encoding.Unicode.GetString(buffer, 0, requiredSize - 2);
 
@@ -198,6 +198,64 @@ namespace vcs_Bluetooth
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //bt2
+            Console.WriteLine("列出所有藍芽相關裝置 (含 HID/Audio)...\n");
+
+            IntPtr hDevInfo = SetupDiGetClassDevs(IntPtr.Zero, IntPtr.Zero, IntPtr.Zero,
+                DIGCF_PRESENT | DIGCF_ALLCLASSES);
+
+            if (hDevInfo == IntPtr.Zero)
+            {
+                Console.WriteLine("無法取得裝置資訊。");
+                return;
+            }
+
+            SP_DEVINFO_DATA devInfoData = new SP_DEVINFO_DATA();
+            devInfoData.cbSize = Marshal.SizeOf(devInfoData);
+
+            int index = 0;
+            int count = 0;
+
+            while (SetupDiEnumDeviceInfo(hDevInfo, index, ref devInfoData))
+            {
+                index++;
+
+                const int SPDRP_DEVICEDESC = 0x00000000;  // 取得裝置名稱
+                const int SPDRP_HARDWAREID = 0x00000001;  // 取得硬體 ID（通常藍芽裝置會包含 BTH 字樣）
+
+                int regType;
+                byte[] buffer = new byte[1024];
+                int requiredSize;
+
+                string deviceName = "";
+                string hardwareId = "";
+
+                // 取得裝置名稱
+                if (SetupDiGetDeviceRegistryProperty(hDevInfo, ref devInfoData, SPDRP_DEVICEDESC, out regType, buffer, buffer.Length, out requiredSize))
+                {
+                    deviceName = Encoding.Unicode.GetString(buffer, 0, requiredSize - 2);
+                }
+
+                // 取得硬體 ID
+                if (SetupDiGetDeviceRegistryProperty(hDevInfo, ref devInfoData, SPDRP_HARDWAREID, out regType, buffer, buffer.Length, out requiredSize))
+                {
+                    hardwareId = Encoding.Unicode.GetString(buffer, 0, requiredSize - 2);
+                }
+
+                // 判斷是否為藍芽裝置 (名稱或硬體 ID 包含 Bluetooth)
+                if (!string.IsNullOrEmpty(deviceName) &&
+                    (deviceName.Contains("Bluetooth") || hardwareId.Contains("BTH")))
+                {
+                    Console.WriteLine("裝置名稱: " + deviceName);
+                    Console.WriteLine("硬體ID: " + hardwareId);
+                    Console.WriteLine("--------------------------------------");
+                    count++;
+                }
+            }
+
+            SetupDiDestroyDeviceInfoList(hDevInfo);
+
+            Console.WriteLine("\n找到的藍芽相關裝置數量: " + count);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -279,16 +337,11 @@ namespace vcs_Bluetooth
 //------------------------------  # 30個
 
 
-
-
 /*
 差異與效果
 WMI 方法：		只能抓到部分藍芽裝置（通常是控制器）。
 SetupDi API 方法：	能列出所有裝置，包含 HID、音訊、驅動程式等，只要名稱裡有「Bluetooth」就會顯示。
 這樣就能更接近裝置管理員顯示的數量。
 
-
 */
-
-
 

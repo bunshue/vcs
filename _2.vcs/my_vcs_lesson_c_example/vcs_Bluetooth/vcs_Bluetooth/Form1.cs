@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using InTheHand.Net.Sockets;
 using System.IO;
+using InTheHand.Net.Sockets;
 using InTheHand.Net.Bluetooth;
 
 namespace vcs_Bluetooth

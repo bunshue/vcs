@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,9 +16,9 @@ using System.Diagnostics;
 所以一般都需要先把256個色階線性的隱射到更少的色階范圍。
 */
 
-namespace ColorStatistics
+namespace vcs_ColorStatistics
 {
-    public partial class FrmTest : Form
+    public partial class Form1 : Form
     {
         string filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp";
 
@@ -26,22 +26,30 @@ namespace ColorStatistics
 
         int PixelAmount = 0;
 
-        public FrmTest()
+        public Form1()
         {
             InitializeComponent();
         }
 
-        private void FrmTest_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             pictureBox1.Image = Image.FromFile(filename);
 
-            CmdDeal_Click(sender, e);
+            button1_Click(sender, e);
         }
 
-        private void CmdOpen_Click(object sender, EventArgs e)
+        private void bt_clear_Click(object sender, EventArgs e)
         {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+            //選擇圖像
             openFileDialog1.InitialDirectory = @"D:\_git\vcs\_1.data\______test_files1\";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -49,17 +57,14 @@ namespace ColorStatistics
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         public static Color IntToColor(int color)
         {
             int R = color & 255;
             int G = (color & 65280) / 256;
             int B = (color & 16711680) / 65536;
             return Color.FromArgb(255, R, G, B);
-        }
-
-        private void PicR_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void PicR_Paint(object sender, PaintEventArgs e)
@@ -97,8 +102,9 @@ namespace ColorStatistics
             }
         }
 
-        private void CmdDeal_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
+            //處理
             if (pictureBox1.Image != null)
             {
                 Stopwatch Sw = new Stopwatch();
@@ -117,6 +123,7 @@ namespace ColorStatistics
                 PixelAmount = pictureBox1.Image.Width * pictureBox1.Image.Height;
                 PicR.Refresh();
             }
+
         }
 
         private void SliderColorAmount_Scroll(object sender, EventArgs e)
@@ -128,10 +135,12 @@ namespace ColorStatistics
         {
             LblDelta.Text = SliderDelta.Value.ToString();
         }
-
-        private void bt_clear_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-        }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
