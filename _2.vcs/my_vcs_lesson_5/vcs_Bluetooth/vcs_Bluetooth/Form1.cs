@@ -73,36 +73,33 @@ namespace vcs_Bluetooth
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //bt0
-            Console.WriteLine("正在查詢藍芽裝置...\n");
+            richTextBox1.Text += "查詢藍芽裝置, 使用 WMI 查詢 PNP 裝置\n";
 
-            try
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE Name LIKE '%Bluetooth%'");
+
+            int count = 0;
+            foreach (ManagementObject obj in searcher.Get())
             {
-                // 使用 WMI 查詢 PNP 裝置
-                ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE Name LIKE '%Bluetooth%'");
+                richTextBox1.Text += "全部 :\n" + obj.GetText(TextFormat.Mof) + "\n";  // 全部
 
-                int count = 0;
-                foreach (ManagementObject obj in searcher.Get())
-                {
-                    string name = obj["Name"] != null ? obj["Name"].ToString() : "(未知名稱)";
-                    string deviceId = obj["DeviceID"] != null ? obj["DeviceID"].ToString() : "(未知ID)";
+                string name = obj["Name"] != null ? obj["Name"].ToString() : "(未知名稱)";
+                string deviceId = obj["DeviceID"] != null ? obj["DeviceID"].ToString() : "(未知ID)";
 
-                    Console.WriteLine("名稱: " + name);
-                    Console.WriteLine("ID: " + deviceId);
-                    Console.WriteLine("--------------------------------------");
-                    richTextBox1.Text += "名稱: " + name + "\n";
-                    richTextBox1.Text += "ID: " + deviceId + "\n";
+                richTextBox1.Text += "名稱: " + name + "\n";
+                richTextBox1.Text += "ID: " + deviceId + "\n";
+                richTextBox1.Text += "Caption: " + obj["Caption"] + "\n";
+                richTextBox1.Text += "Description: " + obj["Description"] + "\n";
+                richTextBox1.Text += "Name: " + obj["Name"] + "\n";
+                richTextBox1.Text += "DeviceID: " + obj["DeviceID"] + "\n";
+                richTextBox1.Text += "HardwareID: " + obj["HardwareID"] + "\n";
+                richTextBox1.Text += "PNPDeviceID: " + obj["PNPDeviceID"] + "\n";
+                richTextBox1.Text += "ClassGuid: " + obj["ClassGuid".ToString()] + "\n";
+                richTextBox1.Text += "Manufacturer: " + obj["Manufacturer".ToString()] + "\n";
 
-                    count++;
-                }
-
-                Console.WriteLine("找到的藍芽裝置數量: " + count);
+                richTextBox1.Text += "------------------------------\n";  // 30個
+                count++;
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("查詢失敗: " + ex.Message);
-            }
-
+            richTextBox1.Text += "找到的藍芽裝置數量: " + count + "\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -150,15 +147,13 @@ namespace vcs_Bluetooth
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //bt1
-            Console.WriteLine("列出所有藍芽相關裝置...\n");
+            richTextBox1.Text += "查詢藍芽裝置, 使用 SetupDi API 方法\n";
 
-            IntPtr hDevInfo = SetupDiGetClassDevs(IntPtr.Zero, IntPtr.Zero, IntPtr.Zero,
-                DIGCF_PRESENT | DIGCF_ALLCLASSES);
+            IntPtr hDevInfo = SetupDiGetClassDevs(IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, DIGCF_PRESENT | DIGCF_ALLCLASSES);
 
             if (hDevInfo == IntPtr.Zero)
             {
-                Console.WriteLine("無法取得裝置資訊。");
+                richTextBox1.Text += "無法取得裝置資訊。\n";
                 return;
             }
 
@@ -183,7 +178,7 @@ namespace vcs_Bluetooth
 
                     if (deviceName.Contains("Bluetooth"))
                     {
-                        Console.WriteLine("裝置: " + deviceName);
+                        richTextBox1.Text += "裝置: " + deviceName + "\n";
                         count++;
                     }
                 }
@@ -191,22 +186,20 @@ namespace vcs_Bluetooth
 
             SetupDiDestroyDeviceInfoList(hDevInfo);
 
-            Console.WriteLine("\n找到的藍芽裝置數量: " + count);
+            richTextBox1.Text += "\n找到的藍芽裝置數量: " + count + "\n";
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //bt2
-            Console.WriteLine("列出所有藍芽相關裝置 (含 HID/Audio)...\n");
+            richTextBox1.Text += "查詢藍芽裝置, 含 HID/Audio\n";
 
-            IntPtr hDevInfo = SetupDiGetClassDevs(IntPtr.Zero, IntPtr.Zero, IntPtr.Zero,
-                DIGCF_PRESENT | DIGCF_ALLCLASSES);
+            IntPtr hDevInfo = SetupDiGetClassDevs(IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, DIGCF_PRESENT | DIGCF_ALLCLASSES);
 
             if (hDevInfo == IntPtr.Zero)
             {
-                Console.WriteLine("無法取得裝置資訊。");
+                richTextBox1.Text += "無法取得裝置資訊。";
                 return;
             }
 
@@ -243,19 +236,18 @@ namespace vcs_Bluetooth
                 }
 
                 // 判斷是否為藍芽裝置 (名稱或硬體 ID 包含 Bluetooth)
-                if (!string.IsNullOrEmpty(deviceName) &&
-                    (deviceName.Contains("Bluetooth") || hardwareId.Contains("BTH")))
+                if (!string.IsNullOrEmpty(deviceName) && (deviceName.Contains("Bluetooth") || hardwareId.Contains("BTH")))
                 {
-                    Console.WriteLine("裝置名稱: " + deviceName);
-                    Console.WriteLine("硬體ID: " + hardwareId);
-                    Console.WriteLine("--------------------------------------");
+                    richTextBox1.Text += "裝置名稱: " + deviceName + "\n";
+                    richTextBox1.Text += "硬體ID: " + hardwareId + "\n";
+                    richTextBox1.Text += "------------------------------\n";  // 30個
                     count++;
                 }
             }
 
             SetupDiDestroyDeviceInfoList(hDevInfo);
 
-            Console.WriteLine("\n找到的藍芽相關裝置數量: " + count);
+            richTextBox1.Text += "\n找到的藍芽相關裝置數量: " + count + "\n";
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -339,7 +331,7 @@ namespace vcs_Bluetooth
 
 /*
 差異與效果
-WMI 方法：		只能抓到部分藍芽裝置（通常是控制器）。
+WMI 方法：		    只能抓到部分藍芽裝置（通常是控制器）。
 SetupDi API 方法：	能列出所有裝置，包含 HID、音訊、驅動程式等，只要名稱裡有「Bluetooth」就會顯示。
 這樣就能更接近裝置管理員顯示的數量。
 

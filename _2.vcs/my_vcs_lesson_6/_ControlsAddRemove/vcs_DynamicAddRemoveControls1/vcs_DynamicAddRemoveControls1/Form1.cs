@@ -41,6 +41,8 @@ namespace vcs_DynamicAddRemoveControls1
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             //動態產生button並且綁定click事件
             int x_st = 220;
             int y_st = 10;
@@ -77,7 +79,6 @@ namespace vcs_DynamicAddRemoveControls1
             //動態創建控件和事件 Panel
             richTextBox1.Text += "在panel1上新增控件於其上\n";
             DynamicAddControlsOnPanel(panel1);
-
         }
 
         void show_item_location()
@@ -1193,7 +1194,6 @@ namespace vcs_DynamicAddRemoveControls1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
@@ -1202,20 +1202,19 @@ namespace vcs_DynamicAddRemoveControls1
 調整位置
 myButton.BringToFront() 或 myButton.SendToBack() 調整。
 
-                richTextBox1.Text += "在 表單/panel/pictureBox/richtextBox 上動態建立6個按鈕控件\n";
-    
-                this.Controls.Add(btn[i]);//將控件加入 到 表單 容器
-                //panel1.Controls.Add(btn[i]);//將控件加入 到 panel1 容器
-                //pictureBox1.Controls.Add(btn[i]);//將控件加入 到 pictureBox1 容器
-                //richTextBox1.Controls.Add(btn[i]);//將控件加入 到 richTextBox1 容器
+richTextBox1.Text += "在 表單/panel/pictureBox/richtextBox 上動態建立6個按鈕控件\n";
+this.Controls.Add(btn[i]);//將控件加入 到 表單 容器
+//panel1.Controls.Add(btn[i]);//將控件加入 到 panel1 容器
+//pictureBox1.Controls.Add(btn[i]);//將控件加入 到 pictureBox1 容器
+//richTextBox1.Controls.Add(btn[i]);//將控件加入 到 richTextBox1 容器
 
--------------------------
-                //動態創建按鈕和事件, 創建在richTextBox裡
-                this.richTextBox1.Controls.Add(btn);    //向 某控件 中添加此按鈕
+//------------------------------------------------------------  # 60個
+//動態創建按鈕和事件, 創建在richTextBox裡
+this.richTextBox1.Controls.Add(btn);    //向 某控件 中添加此按鈕
 
-                //動態添加控件的事件,語句:
-                //Control.Command += new CommandEventHandler(this.EventFun);
-                btn.Click += new System.EventHandler(btn_ClickEvent1);// 加入按鈕事件
+//動態添加控件的事件,語句:
+//Control.Command += new CommandEventHandler(this.EventFun);
+btn.Click += new System.EventHandler(btn_ClickEvent1);// 加入按鈕事件
 */
 
 /*
@@ -1238,6 +1237,7 @@ myButton.BringToFront() 或 myButton.SendToBack() 調整。
             this.panel1.Controls.Add(tb4)
 */
 
+//------------------------------------------------------------  # 60個
 
 /*
         //清空文本框

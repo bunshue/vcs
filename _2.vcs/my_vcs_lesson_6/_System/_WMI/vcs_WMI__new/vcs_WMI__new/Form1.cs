@@ -22,7 +22,7 @@ using System.Runtime.InteropServices;
 // 參考 / 加入參考 / .NET  System.Management
 using System.Management;    //for WMI
 
-// WMI是Windows Management Instrumentation的簡稱，即：視窗管理規范。
+// WMI是Windows Management Instrumentation的簡稱，即 : 視窗管理規范。
 
 namespace vcs_WMI__new
 {
@@ -146,10 +146,10 @@ namespace vcs_WMI__new
                 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
                 //取得記憶體狀態
-                richTextBox1.Text += "TotalVisibleMemorySize : " + mo["TotalVisibleMemorySize"].ToString() + "\n";
+                richTextBox1.Text += "TotalVisibleMemorySize : " + mo["TotalVisibleMemorySize"].ToString() + "\n";//總的物理內存
                 object property_obj = mo["TotalVisibleMemorySize"];
                 ulong property_value = (ulong)property_obj * 1024;
-                richTextBox1.Text += "TotalVisibleMemorySize : " + property_value.ToFileSizeApi() + "\n";
+                richTextBox1.Text += "總的物理內存 TotalVisibleMemorySize : " + property_value.ToFileSizeApi() + "\n";
                 richTextBox1.Text += "------------------------------\n";  // 30個
                 richTextBox1.Text += "FreePhysicalMemory : " + mo["FreePhysicalMemory"].ToString() + "\n";
                 property_obj = mo["FreePhysicalMemory"];
@@ -176,12 +176,53 @@ namespace vcs_WMI__new
                 property_value = (ulong)property_obj * 1024;
                 richTextBox1.Text += "SizeStoredInPagingFiles : " + property_value.ToFileSizeApi() + "\n";
                 richTextBox1.Text += "------------------------------\n";  // 30個
-                richTextBox1.Text += "TotalVisibleMemorySize : " + ((ulong)mo["TotalVisibleMemorySize"] / 1024.0 / 1024).ToString("#0.00") + "G" + "\n";　　//獲取總的物理內存
+                richTextBox1.Text += "總的物理內存 TotalVisibleMemorySize : " + ((ulong)mo["TotalVisibleMemorySize"] / 1024.0 / 1024).ToString("#0.00") + "G" + "\n";　　//獲取總的物理內存
                 richTextBox1.Text += "FreePhysicalMemory : " + ((ulong)mo["FreePhysicalMemory"] / 1024.0 / 1024).ToString("#0.00") + "G" + "\n";　　//獲取可用物理內存
                 richTextBox1.Text += "TotalVirtualMemorySize : " + ((ulong)mo["TotalVirtualMemorySize"] / 1024.0 / 1024).ToString("#0.00") + "G" + "\n";　　　//獲取總的虛擬內存
                 richTextBox1.Text += "FreeVirtualMemory : " + ((ulong)mo["FreeVirtualMemory"] / 1024.0 / 1024).ToString("#0.00") + "G" + "\n";　　//獲取可用虛擬內存
                 richTextBox1.Text += "SizeStoredInPagingFiles : " + ((ulong)mo["SizeStoredInPagingFiles"] / 1024.0 / 1024).ToString("#0.00") + "G" + "\n";　　//獲取頁面文檔大小
                 richTextBox1.Text += "------------------------------\n";  // 30個
+
+
+                // 獲取操作系統參數
+                string OSName = mo["Caption"].ToString();　　//獲取OS　名稱
+                string OSManufacturer = mo["Manufacturer"].ToString();　　//獲取　OS　制造商
+                string Country = mo["CountryCode"].ToString();　　//地區
+                //string OSName = mo["CSName"].ToString();　　//獲取系統名稱
+                string WindowsDirectory = mo["WindowsDirectory"].ToString();　　//獲取Windows　目錄
+                string SystemDirectory = mo["SystemDirectory"].ToString();　　//獲取系統目錄
+                string BootDevice = mo["BootDevice"].ToString();　　//獲取啟動設備
+                string OSVersion = mo["Version"].ToString();//獲取版本
+                string OSCSDVersion = mo["CSDVersion"].ToString();//獲取SP 不可用此
+                string OSBuildNumber = mo["BuildNumber"].ToString();//獲取builderNumber
+                string TotalVisibleMemorySize = ((ulong)mo["TotalVisibleMemorySize"] / 1024.0 / 1024).ToString("#0.00") + "G";　　//獲取總的物理內存
+                string FreePhysicalMemory = ((ulong)mo["FreePhysicalMemory"] / 1024.0 / 1024).ToString("#0.00") + "G";　　//獲取可用物理內存
+                string TotalVirtualMemorySize = ((ulong)mo["TotalVirtualMemorySize"] / 1024.0 / 1024).ToString("#0.00") + "G";　　　//獲取總的虛擬內存
+                string FreeVirtualMemory = ((ulong)mo["FreeVirtualMemory"] / 1024.0 / 1024).ToString("#0.00") + "G";　　//獲取可用虛擬內存
+                string SizeStoredInPagingFiles = ((ulong)mo["SizeStoredInPagingFiles"] / 1024.0 / 1024).ToString("#0.00") + "G";　　//獲取頁面文件大小
+
+                //系統信息
+                richTextBox1.Text += "OS名稱 : " + OSName + "\n";
+                richTextBox1.Text += "OS版本 : " + OSVersion + "\n";
+                richTextBox1.Text += "OS制造商 : " + OSManufacturer + "\n";
+                richTextBox1.Text += "SP包版本 : " + OSCSDVersion + "\n";
+                richTextBox1.Text += "Build版本 : " + OSBuildNumber + "\n";
+                richTextBox1.Text += "Windows　目錄 : " + WindowsDirectory + "\n";
+                richTextBox1.Text += "系統目錄 : " + SystemDirectory + "\n";
+                richTextBox1.Text += "啟動設備 : " + BootDevice + "\n";
+                richTextBox1.Text += "地區 : " + Country + "\n";
+                //richTextBox1.Text += "時區 : " + TimeZone + "\n";
+                richTextBox1.Text += "總的物理內存 : " + TotalVisibleMemorySize + "\n";
+                richTextBox1.Text += "可用物理內存 : " + FreePhysicalMemory + "\n";
+                richTextBox1.Text += "總的虛擬內存 : " + TotalVirtualMemorySize + "\n";
+                richTextBox1.Text += "可用虛擬內存 : " + FreeVirtualMemory + "\n";
+                richTextBox1.Text += "頁面文件大小 : " + SizeStoredInPagingFiles + "\n";
+                //richTextBox1.Text += "可用頁面文件大小 : " + FreeSpaceInPagingFiles + "\n";
+                //richTextBox1.Text += "頁面文件大小 : " + FileSize + "\n";
+                //richTextBox1.Text += "頁面文件大小 : " + FileName + "\n";
+
+
+
             }
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
         }
@@ -209,17 +250,43 @@ namespace vcs_WMI__new
                     richTextBox1.Text += "PC類型 :\t" + SystemType + "\n";
 
                     System.UInt64 TotalPhysicalMemory = UInt64.MinValue;
-                    TotalPhysicalMemory = (System.UInt64)(mo["TotalPhysicalMemory"]);//單位：拜
+                    TotalPhysicalMemory = (System.UInt64)(mo["TotalPhysicalMemory"]);//單位 : 拜
 
                     richTextBox1.Text += "物理內存 :\t" + TotalPhysicalMemory.ToString() + " 拜\n";
                     richTextBox1.Text += "物理內存 :\t" + (TotalPhysicalMemory / 1024).ToString() + " K\n";
                     richTextBox1.Text += "物理內存 :\t" + (TotalPhysicalMemory / 1024 / 1024).ToString() + " M\n";
                     richTextBox1.Text += "物理內存 :\t" + (TotalPhysicalMemory / 1024 / 1024 / 1024).ToString() + " G\n";
+
+
+
+                    /// 獲取計算機信息
+
+                    //計算機系統信息
+                    //系統名稱:Name
+                    //public string ComputerSystemName
+                    //系統制造商:Manufacturer
+                    //public string ComputerManufacturer
+                    //系統模式:Model
+                    //public string ComputerSystemModel
+                    //系統類型:SystemType
+                    //public string ComputerSystemType
+
+                    string ComputerSystemName = mo["Name"].ToString();//系統名稱
+                    string ComputerManufacturer = mo["Manufacturer"].ToString();//系統制造商
+                    string ComputerSystemModel = mo["Model"].ToString();//系統模式
+                    string ComputerSystemType = mo["SystemType"].ToString();//系統類型
+
+                    richTextBox1.Text += "系統名稱 : " + ComputerSystemName + "\n";
+                    richTextBox1.Text += "系統制造商 : " + ComputerManufacturer + "\n";
+                    richTextBox1.Text += "系統模式 : " + ComputerSystemModel + "\n";
+                    richTextBox1.Text += "系統類型 : " + ComputerSystemType + "\n";
+
                 }
                 catch
                 {
                 }
             }
+
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             richTextBox1.Text += "Win32_ComputerSystem 獲取電腦資訊\n";
@@ -228,8 +295,8 @@ namespace vcs_WMI__new
             {
                 richTextBox1.Text += "------------------------------\n";  // 30個
                 //richTextBox1.Text += "全部 :\n" + mo.GetText(TextFormat.Mof) + "\n";  // 全部
-                richTextBox1.Text += "操作系統類型：" + mo["SystemType"] + "\n";
-                richTextBox1.Text += "實體記憶體：" + mo["TotalPhysicalMemory"].ToString() + "\n";
+                richTextBox1.Text += "操作系統類型 : " + mo["SystemType"] + "\n";
+                richTextBox1.Text += "實體記憶體 : " + mo["TotalPhysicalMemory"].ToString() + "\n";
                 richTextBox1.Text += "PrimaryOwnerName: " + mo["PrimaryOwnerName"] + "\n";
                 richTextBox1.Text += "UserName: " + mo["UserName"] + "\n";
                 richTextBox1.Text += "Caption: " + mo["Caption"] + "\n";
@@ -289,7 +356,7 @@ namespace vcs_WMI__new
                     richTextBox1.Text += "ExtClock : " + mo["ExtClock"].ToString() + "\n";　//獲取外部頻率
                     richTextBox1.Text += "------------------------------\n";  // 30個
                     richTextBox1.Text += "讀取計算機CPU的當前使用百分比 注意要把SQLserver或者其他耗CPU的軟件開著否則看不到效果就一直為0\n";
-                    richTextBox1.Text += "計算機CPU的當前使用百分比是：";
+                    richTextBox1.Text += "計算機CPU的當前使用百分比是 : ";
                     richTextBox1.Text += "CPU使用率 : " + mo["LoadPercentage"].ToString() + " %\n";// LoadPercentage 像是被廢棄
                     richTextBox1.Text += "------------------------------\n";  // 30個
                     richTextBox1.Text += "讀取計算機CPU的最大時鐘頻率 MaxClockSpeed\n";
@@ -301,6 +368,42 @@ namespace vcs_WMI__new
                     richTextBox1.Text += "讀取計算機的CPU數據寬度 DataWidth\n";
                     richTextBox1.Text += "DataWidth : " + mo["DataWidth"].ToString() + "\n";　//獲取數據帶寬
                     richTextBox1.Text += "------------------------------\n";  // 30個
+
+                    //6060
+
+                    richTextBox1.Text += mo["Name"].ToString() + "\n";　//獲取CPU名稱
+
+                    string CPUName = mo["Name"].ToString();　//CPU名稱
+                    string CPUID = mo["ProcessorId"].ToString();  // CPU序列號
+                    //int CPUCount = moCollection.Count;  // CPU個數
+                    string CPUManufacturer = mo["Manufacturer"].ToString();//CPU制造商
+                    string CPUCurrentClockSpeed = mo["CurrentClockSpeed"].ToString();//當前時鐘頻率
+                    string CPUMaxClockSpeed = mo["MaxClockSpeed"] == null ? string.Empty : mo["MaxClockSpeed"].ToString();//最大時鐘頻率
+                    string CPUExtClock = mo["ExtClock"] == null ? string.Empty : mo["ExtClock"].ToString();//外部頻率
+                    string CPUCurrentVoltage = mo["CurrentVoltage"] == null ? string.Empty : mo["CurrentVoltage"].ToString();//當前電壓
+                    string CPUL2CacheSize = mo["L2CacheSize"] == null ? string.Empty : mo["L2CacheSize"].ToString();　//二級緩存
+                    string CPUDataWidth = mo["DataWidth"] == null ? string.Empty : mo["DataWidth"].ToString();　//數據帶寬
+                    string CPUAddressWidth = mo["AddressWidth"] == null ? string.Empty : mo["AddressWidth"].ToString();　//地址帶寬
+                    float CPUUsedPercent = mo["LoadPercentage"] == null ? 0 : float.Parse(mo["LoadPercentage"].ToString());//使用百分比
+                    //CPU溫度double CPUTemperature
+                    string CPUNumberOfCores = mo["NumberOfCores"] == null ? string.Empty : mo["NumberOfCores"].ToString();//CPU內核
+                    string CPUNumberOfLogicalProcessors = mo["NumberOfLogicalProcessors"] == null ? string.Empty : mo["NumberOfLogicalProcessors"].ToString();//CPU邏輯處理器
+
+                    richTextBox1.Text += "CPU名稱 : " + CPUName + "\n";
+                    richTextBox1.Text += "CPU序列號 : " + CPUID + "\n";
+                    //richTextBox1.Text += "CPU個數 : " + CPUCount + "\n";
+                    richTextBox1.Text += "CPU制造商 : " + CPUManufacturer + "\n";
+                    richTextBox1.Text += "當前時鐘頻率 : " + CPUCurrentClockSpeed + "\n";
+                    richTextBox1.Text += "最大時鐘頻率 : " + CPUMaxClockSpeed + "\n";
+                    richTextBox1.Text += "外部頻率 : " + CPUExtClock + "\n";
+                    richTextBox1.Text += "當前電壓 : " + CPUCurrentVoltage + "\n";
+                    richTextBox1.Text += "二級緩存 : " + CPUL2CacheSize + "\n";
+                    richTextBox1.Text += "數據帶寬 : " + CPUDataWidth + "\n";
+                    richTextBox1.Text += "地址帶寬 : " + CPUAddressWidth + "\n";
+                    richTextBox1.Text += "使用百分比 : " + CPUUsedPercent + "\n";
+                    //richTextBox1.Text += "CPU溫度 : " + CPUTemperature + "\n";
+                    richTextBox1.Text += "CPU內核 : " + CPUNumberOfCores + "\n";
+                    richTextBox1.Text += "CPU邏輯處理器 : " + CPUNumberOfLogicalProcessors + "\n";
                 }
                 catch (Exception ex)
                 {
@@ -349,11 +452,16 @@ namespace vcs_WMI__new
                 {
                     richTextBox1.Text += "------------------------------\n";  // 30個
                     //richTextBox1.Text += "全部 :\n" + mo.GetText(TextFormat.Mof) + "\n";  // 全部
-                    richTextBox1.Text += "BIOS序號：" + mo["SerialNumber"].ToString().Trim() + "\n";
-                    richTextBox1.Text += "BIOS名稱：" + mo["Name"].ToString().Trim() + "\n";
-                    richTextBox1.Text += "BIOS時間：" + mo["ReleaseDate"].ToString().Trim() + "\n";
-                    richTextBox1.Text += "BIOS製造商：" + mo["Manufacturer"].ToString().Trim() + "\n";
-                    richTextBox1.Text += "BIOS版本：" + mo["SMBIOSBIOSVersion"].ToString().Trim() + "\n";
+                    richTextBox1.Text += "BIOS序號 : " + mo["SerialNumber"].ToString().Trim() + "\n";
+                    richTextBox1.Text += "BIOS名稱 : " + mo["Name"].ToString().Trim() + "\n";
+                    richTextBox1.Text += "BIOS時間 : " + mo["ReleaseDate"].ToString().Trim() + "\n";
+                    string BIOSReleaseDate = mo["ReleaseDate"] == null ? string.Empty : getDateTimeFromDmtfDate(mo["ReleaseDate"].ToString());　　//時間
+                    richTextBox1.Text += "BIOS時間 : " + BIOSReleaseDate + "\n";
+                    richTextBox1.Text += "BIOS製造商 : " + mo["Manufacturer"].ToString().Trim() + "\n";
+                    richTextBox1.Text += "BIOS版本 : " + mo["SMBIOSBIOSVersion"].ToString().Trim() + "\n";
+
+                    richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
                 }
                 catch (Exception ex)
                 {
@@ -372,7 +480,7 @@ namespace vcs_WMI__new
                 //richTextBox1.Text += "全部 :\n" + mo.GetText(TextFormat.Mof) + "\n";  // 全部
                 richTextBox1.Text += "主機板製造商 : " + mo["Manufacturer"].ToString() + "\n";
                 richTextBox1.Text += "型號 : " + mo["Product"].ToString() + "\n";
-                richTextBox1.Text += "主機板序號：" + mo["SerialNumber"].ToString() + "\n";
+                richTextBox1.Text += "主機板序號 : " + mo["SerialNumber"].ToString() + "\n";
                 richTextBox1.Text += "主板型號\t\t" + mo["Name"].ToString() + "\n";          //取得主板型號
             }
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
@@ -477,15 +585,15 @@ namespace vcs_WMI__new
                 richTextBox1.Text += "------------------------------\n";  // 30個
                 //richTextBox1.Text += "全部 :\n" + mo.GetText(TextFormat.Mof) + "\n";  // 全部
                 richTextBox1.Text += "顯示設備訊息\n";
-                richTextBox1.Text += "名稱： " + mo["Name"].ToString() + "\n";//顯示設備名稱
+                richTextBox1.Text += "名稱 : " + mo["Name"].ToString() + "\n";//顯示設備名稱
                 richTextBox1.Text += "設備ID" + mo["DeviceID"].ToString() + "\n";
-                richTextBox1.Text += "PNPDeviceID： " + mo["PNPDeviceID"].ToString() + "\n";//顯示設備的PNPDeviceID
-                richTextBox1.Text += "驅動程序文件： " + mo["InstalledDisplayDrivers"].ToString() + "\n";//顯示設備的驅動程序文件
-                richTextBox1.Text += "驅動版本號： " + mo["DriverVersion"].ToString() + "\n";//顯示設備的驅動版本號
-                richTextBox1.Text += "顯示處理器： " + mo["VideoProcessor"].ToString() + "\n";//顯示設備的顯示處理器
-                richTextBox1.Text += "最大更新率： " + mo["MaxRefreshRate"].ToString() + "\n";//顯示設備的最大更新率
-                richTextBox1.Text += "最小更新率： " + mo["MinRefreshRate"].ToString() + "\n";//顯示設備的最大更新率
-                richTextBox1.Text += "顯示設備目前顯示模式： " + mo["VideoModeDescription"].ToString() + "\n";//顯示設備目前顯示模式
+                richTextBox1.Text += "PNPDeviceID : " + mo["PNPDeviceID"].ToString() + "\n";//顯示設備的PNPDeviceID
+                richTextBox1.Text += "驅動程序文件 : " + mo["InstalledDisplayDrivers"].ToString() + "\n";//顯示設備的驅動程序文件
+                richTextBox1.Text += "驅動版本號 : " + mo["DriverVersion"].ToString() + "\n";//顯示設備的驅動版本號
+                richTextBox1.Text += "顯示處理器 : " + mo["VideoProcessor"].ToString() + "\n";//顯示設備的顯示處理器
+                richTextBox1.Text += "最大更新率 : " + mo["MaxRefreshRate"].ToString() + "\n";//顯示設備的最大更新率
+                richTextBox1.Text += "最小更新率 : " + mo["MinRefreshRate"].ToString() + "\n";//顯示設備的最大更新率
+                richTextBox1.Text += "顯示設備目前顯示模式 : " + mo["VideoModeDescription"].ToString() + "\n";//顯示設備目前顯示模式
                 richTextBox1.Text += "配接器相容性 " + mo["AdapterCompatibility"].ToString() + "\n";
                 richTextBox1.Text += "配接器類型 " + mo["AdapterDACType"].ToString() + "\n";
                 richTextBox1.Text += "字幕" + mo["Caption"].ToString() + "\n";
@@ -517,14 +625,14 @@ namespace vcs_WMI__new
             foreach (ManagementObject mo in mos.Get())
             {
                 richTextBox1.Text += "顯示設備訊息\n";
-                richTextBox1.Text += "顯示設備名稱：" + mo["Name"].ToString() + "\n";//顯示設備名稱
-                richTextBox1.Text += "顯示設備PNPDeviceID：" + mo["PNPDeviceID"].ToString() + "\n";//顯示設備的PNPDeviceID
-                richTextBox1.Text += "顯示設備驅動程序文件：" + mo["InstalledDisplayDrivers"].ToString() + "\n";//顯示設備的驅動程序文件
-                richTextBox1.Text += "顯示設備驅動版本號：" + mo["DriverVersion"].ToString() + "\n";//顯示設備的驅動版本號
-                richTextBox1.Text += "顯示設備的顯示處理器：" + mo["VideoProcessor"].ToString() + "\n";//顯示設備的顯示處理器
-                richTextBox1.Text += "顯示設備的最大更新率：" + mo["MaxRefreshRate"].ToString() + "\n";//顯示設備的最大更新率
-                richTextBox1.Text += "顯示設備的最小更新率：" + mo["MinRefreshRate"].ToString() + "\n";//顯示設備的最大更新率
-                richTextBox1.Text += "顯示設備目前顯示模式：" + mo["VideoModeDescription"].ToString() + "\n";//顯示設備目前顯示模式
+                richTextBox1.Text += "顯示設備名稱 : " + mo["Name"].ToString() + "\n";//顯示設備名稱
+                richTextBox1.Text += "顯示設備PNPDeviceID : " + mo["PNPDeviceID"].ToString() + "\n";//顯示設備的PNPDeviceID
+                richTextBox1.Text += "顯示設備驅動程序文件 : " + mo["InstalledDisplayDrivers"].ToString() + "\n";//顯示設備的驅動程序文件
+                richTextBox1.Text += "顯示設備驅動版本號 : " + mo["DriverVersion"].ToString() + "\n";//顯示設備的驅動版本號
+                richTextBox1.Text += "顯示設備的顯示處理器 : " + mo["VideoProcessor"].ToString() + "\n";//顯示設備的顯示處理器
+                richTextBox1.Text += "顯示設備的最大更新率 : " + mo["MaxRefreshRate"].ToString() + "\n";//顯示設備的最大更新率
+                richTextBox1.Text += "顯示設備的最小更新率 : " + mo["MinRefreshRate"].ToString() + "\n";//顯示設備的最大更新率
+                richTextBox1.Text += "顯示設備目前顯示模式 : " + mo["VideoModeDescription"].ToString() + "\n";//顯示設備目前顯示模式
             }
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
@@ -629,6 +737,16 @@ namespace vcs_WMI__new
                 richTextBox1.Text += "CreationDate: " + mo["CreationDate"].ToString() + "\n";
                 richTextBox1.Text += "LastAccessed: " + mo["LastAccessed"].ToString() + "\n";
                 richTextBox1.Text += "LastModified: " + mo["LastModified"].ToString() + "\n";
+
+                // 獲取頁面文件
+                long FileSize1 = mo["FileSize"] == null ? 0 : long.Parse(mo["FileSize"].ToString());//頁面文件大小
+                //計算
+                string FileSize2 = (FileSize1 / 1024 / 1024).ToString("#0.00") + "G";
+                string FileName = mo["Name"].ToString();　　//頁面文件
+
+                richTextBox1.Text += "FileSize1 : " + FileSize1 + "\n";
+                richTextBox1.Text += "FileSize2 : " + FileSize2 + "\n";
+                richTextBox1.Text += "FileName : " + FileName + "\n";
             }
         }
 
@@ -972,8 +1090,8 @@ namespace vcs_WMI__new
                 DriveInfo dinfo = new DriveInfo(disk_name);
                 if (dinfo.IsReady == true)
                 {
-                    richTextBox1.Text += "驅動器總容量：" + dinfo.TotalSize + " B\n";
-                    richTextBox1.Text += "驅動器剩餘容量：" + dinfo.TotalFreeSpace + " B\n"; ;
+                    richTextBox1.Text += "驅動器總容量 : " + dinfo.TotalSize + " B\n";
+                    richTextBox1.Text += "驅動器剩餘容量 : " + dinfo.TotalFreeSpace + " B\n"; ;
                 }
             }
 
@@ -1264,7 +1382,7 @@ namespace vcs_WMI__new
                 string DriveType;
                 DriveType = mo["DriveType"].ToString();
 
-                richTextBox1.Text += "磁盤名稱：" + mo["Name"].ToString() + "\n";
+                richTextBox1.Text += "磁盤名稱 : " + mo["Name"].ToString() + "\n";
                 //獲得硬盤的可用空間
 
                 long mb = 1048576;
@@ -1276,9 +1394,9 @@ namespace vcs_WMI__new
                 use = (Convert.ToInt64(mo["Size"]) - Convert.ToInt64(mo["FreeSpace"])) / mb;
                 //獲得硬盤的合計空間
                 total = Convert.ToInt64(mo["Size"]) / mb;
-                richTextBox1.Text += " 總計：" + total.ToString() + "MB\n";
-                richTextBox1.Text += "已用空間：" + use.ToString() + "MB\n";
-                richTextBox1.Text += "可用空間：" + free.ToString() + "MB\n";
+                richTextBox1.Text += " 總計 : " + total.ToString() + "MB\n";
+                richTextBox1.Text += "已用空間 : " + use.ToString() + "MB\n";
+                richTextBox1.Text += "可用空間 : " + free.ToString() + "MB\n";
 
                 if (DriveType == "4")
                 {
@@ -1490,8 +1608,8 @@ namespace vcs_WMI__new
 
             有時候需要監控到筆記本電池的剩余電量，調查後發現WMI對象可以搞定。
             在使用WMI對象前，先要添加對System.Management的引用，然後就可以調用WMI對象。
-            我們使用的WMI對象是：Win32_Battery
-            對象參考：http://msdn.microsoft.com/zh-cn/library/aa394074(v=VS.85).aspx
+            我們使用的WMI對象是 : Win32_Battery
+            對象參考 : http://msdn.microsoft.com/zh-cn/library/aa394074(v=VS.85).aspx
             */
 
             ManagementClass mc = new ManagementClass("Win32_Battery");
@@ -1564,6 +1682,7 @@ namespace vcs_WMI__new
         {
             richTextBox1.Text += "Win32_PnPEntity\n";
             ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity");
+            ManagementObjectSearcher ser = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE Name LIKE '%Bluetooth%'");
             int cnt = 1;
             foreach (ManagementObject mo in mos.Get())
             {
@@ -1791,31 +1910,11 @@ namespace vcs_WMI__new
 
         private void button37_Click(object sender, EventArgs e)
         {
-            //取得系統資訊1
-            SystemInfoEntity r1 = GetSystemInfo();
-
-            richTextBox1.Text += "aaaaa = " + r1.FreePhysicalMemory.ToString() + "\n";
-
-            SystemInfoEntity r2 = GetTimeZoneInfo();
-            richTextBox1.Text += "aaaaa = " + r2.OSName.ToString() + "\n";
-
-            SystemInfoEntity r3 = GetPageFileInfo();
-            richTextBox1.Text += "aaaaa = " + r3.OSName.ToString() + "\n";
-
-            BIOSInfoEntity r4 = GetBIOSInfo();
-            richTextBox1.Text += "aaaaa = " + r4.BIOSVersion.ToString() + "\n";
-
-            ComputerInfoEntity r5 = GetComputerInfo();
-            richTextBox1.Text += "aaaaa = " + r5.ComputerSystemName.ToString() + "\n";
-
-            List<CPUInfoEntity> r6 = GetCPUInfo();
-            richTextBox1.Text += "len = " + r6.Count.ToString() + "\n";
-            //richTextBox1.Text += "aaaaa = " + r2.OSName.ToString() + "\n";
         }
 
         //------------------------------------------------------------  # 60個
 
-        //聲明一個結構體，它將做為GetSystemInfo的一個參數：
+        //聲明一個結構體，它將做為GetSystemInfo的一個參數 : 
         //Struct 收集系統信息
         [StructLayout(LayoutKind.Sequential)]
         public struct SYSTEM_INFO
@@ -1872,8 +1971,7 @@ namespace vcs_WMI__new
 
         private void button38_Click(object sender, EventArgs e)
         {
-
-            //取得系統資訊2
+            //取得系統資訊1
             /*
             try
             {
@@ -1948,908 +2046,10 @@ namespace vcs_WMI__new
 
         private void button39_Click(object sender, EventArgs e)
         {
-            List<CPUInfoEntity> cpu_info = GetCPUInfo();
-            richTextBox1.Text += "len = " + cpu_info.Count.ToString() + "\n";
 
-            foreach (CPUInfoEntity info in cpu_info)
-            {
-                richTextBox1.Text += info.ToString() + "\n";
-                richTextBox1.Text += "aaa : " + info.CPUName + "\n";
-                richTextBox1.Text += "aaa : " + info.CPUID + "\n";
-                richTextBox1.Text += "aaa : " + info.CPUTemperature + "\n";
-                richTextBox1.Text += "aaa : " + info.CPUDataWidth + "\n";
-                richTextBox1.Text += "aaa : " + info.CPUNumberOfCores + "\n";
-            }
         }
 
         //------------------------------------------------------------  # 60個
-
-        //1、實體類
-
-        //***************cpu信息
-        bool flag_isLocal = true;
-        public class CPUInfoEntity
-        {
-            //#region　屬性
-            //#region　CPU名稱
-            string strCPUName = string.Empty;
-            /// <summary>
-            /// CPU名稱
-            /// </summary>
-            public string CPUName
-            {
-                get { return strCPUName; }
-                set { strCPUName = value; }
-            }
-            //#endregion
-
-            //#region　CPU序列號
-            string strCPUID = string.Empty;
-            /// <summary>
-            /// CPU序列號
-            /// </summary>
-            public string CPUID
-            {
-                get { return strCPUID; }
-                set { strCPUID = value; }
-            }
-            //#endregion
-
-            //#region　CPU個數
-            int nCPUCount = 0;
-            /// <summary>
-            /// CPU個數
-            /// </summary>
-            public int CPUCount
-            {
-                get { return nCPUCount; }
-                set { nCPUCount = value; }
-            }
-            //#endregion
-
-            //#region　CPU制造商
-            string strCPUManufacturer = string.Empty;
-            /// <summary>
-            /// CPU制造商
-            /// </summary>
-            public string CPUManufacturer
-            {
-                get { return strCPUManufacturer; }
-                set { strCPUManufacturer = value; }
-            }
-            //#endregion
-
-            //#region　當前時鐘頻率
-            string strCPUCurrentClockSpeed = string.Empty;
-            /// <summary>
-            /// 當前時鐘頻率
-            /// </summary>
-            public string CPUCurrentClockSpeed
-            {
-                get { return strCPUCurrentClockSpeed; }
-                set { strCPUCurrentClockSpeed = value; }
-            }
-            //#endregion
-
-            //#region　最大時鐘頻率
-            string strCPUMaxClockSpeed = string.Empty;
-            /// <summary>
-            /// 最大時鐘頻率
-            /// </summary>
-            public string CPUMaxClockSpeed
-            {
-                get { return strCPUMaxClockSpeed; }
-                set { strCPUMaxClockSpeed = value; }
-            }
-            //#endregion
-
-            //#region　外部頻率
-            string strCPUExtClock = string.Empty;
-            /// <summary>
-            /// 外部頻率
-            /// </summary>
-            public string CPUExtClock
-            {
-                get { return strCPUExtClock; }
-                set { strCPUExtClock = value; }
-            }
-            //#endregion
-
-            //#region　當前電壓
-            string strCPUCurrentVoltage = string.Empty;
-            /// <summary>
-            /// 當前電壓
-            /// </summary>
-            public string CPUCurrentVoltage
-            {
-                get { return strCPUCurrentVoltage; }
-                set { strCPUCurrentVoltage = value; }
-            }
-            //#endregion
-
-            //#region　二級緩存
-            string strCPUL2CacheSize = string.Empty;
-            /// <summary>
-            /// 二級緩存
-            /// </summary>
-            public string CPUL2CacheSize
-            {
-                get { return strCPUL2CacheSize; }
-                set { strCPUL2CacheSize = value; }
-            }
-            //#endregion
-
-            //#region　數據帶寬
-            string strCPUDataWidth = string.Empty;
-            /// <summary>
-            /// 數據帶寬
-            /// </summary>
-            public string CPUDataWidth
-            {
-                get { return strCPUDataWidth; }
-                set { strCPUDataWidth = value; }
-            }
-            //#endregion
-
-            //#region　地址帶寬
-            string strCPUAddressWidth = string.Empty;
-            /// <summary>
-            /// 地址帶寬
-            /// </summary>
-            public string CPUAddressWidth
-            {
-                get { return strCPUAddressWidth; }
-                set { strCPUAddressWidth = value; }
-            }
-            //#endregion
-
-            //#region　使用百分比
-            float fCPUUsedPercent;
-            /// <summary>
-            /// 使用百分比
-            /// </summary>
-            public float CPUUsedPercent
-            {
-                get { return fCPUUsedPercent; }
-                set { fCPUUsedPercent = value; }
-            }
-            //#endregion
-
-            //#region　CPU溫度
-            double strCPUTemperature;
-            /// <summary>
-            /// CPU溫度
-            /// </summary>
-            public double CPUTemperature
-            {
-                get { return strCPUTemperature; }
-                set { strCPUTemperature = value; }
-            }
-            //#endregion
-
-            //#region CPU內核
-            string strNumberOfCores = "";
-            /// <summary>
-            /// CPU內核
-            /// </summary>
-            public string CPUNumberOfCores
-            {
-                get { return strNumberOfCores; }
-                set { strNumberOfCores = value; }
-            }
-            //#endregion
-
-            //#region CPU邏輯處理器
-            string strNumberOfLogicalProcessors = "";
-            /// <summary>
-            /// CPU邏輯處理器
-            /// </summary>
-            public string CPUNumberOfLogicalProcessors
-            {
-                get { return strNumberOfLogicalProcessors; }
-                set { strNumberOfLogicalProcessors = value; }
-            }
-            //#endregion
-
-            //#endregion
-        }
-
-        //*****************系統信息
-        public class SystemInfoEntity
-        {
-            //#region　屬性
-            //#region　OS名稱
-            string strOSName = string.Empty;　　//OS名稱
-            /// <summary>
-            /// OS名稱
-            /// </summary>
-            public string OSName
-            {
-                get { return strOSName; }
-                set { strOSName = value; }
-            }
-            //#endregion
-            //#region　OS版本
-            string strOSVersion = string.Empty;　　//OS版本
-            /// <summary>
-            /// OS版本
-            /// </summary>
-            public string OSVersion
-            {
-                get { return strOSVersion; }
-                set { strOSVersion = value; }
-            }
-            //#endregion
-            //#region　OS制造商
-            string strOSManufacturer = string.Empty;　　//OS制造商
-            /// <summary>
-            /// OS制造商
-            /// </summary>
-            public string OSManufacturer
-            {
-                get { return strOSManufacturer; }
-                set { strOSManufacturer = value; }
-            }
-            //#endregion
-
-            //#region SP包版本
-            /// <summary>
-            /// SP包版本
-            /// </summary>
-            string strOSCSDVersion = string.Empty;
-            public string OSCSDVersion
-            {
-                get { return strOSCSDVersion; }
-                set { strOSCSDVersion = value; }
-            }
-            //#endregion
-
-            //#region //Build版本
-            string str0SBuildNumber = string.Empty;
-            public string OSBuildNumber
-            {
-                get { return str0SBuildNumber; }
-                set { str0SBuildNumber = value; }
-            }
-            //#endregion
-
-            //#region　Windows　目錄
-            string strWindowsDirectory = string.Empty;
-            /// <summary>
-            /// Windows　目錄
-            /// </summary>
-            public string WindowsDirectory
-            {
-                get { return strWindowsDirectory; }
-                set { strWindowsDirectory = value; }
-            }
-            //#endregion
-            //#region　系統目錄
-            string strSystemDirectory = string.Empty;　　//系統目錄
-            /// <summary>
-            /// 系統目錄
-            /// </summary>
-            public string SystemDirectory
-            {
-                get { return strSystemDirectory; }
-                set { strSystemDirectory = value; }
-            }
-            //#endregion
-            //#region　啟動設備
-            string strBootDevice = string.Empty;　　//啟動設備
-            /// <summary>
-            /// //啟動設備
-            /// </summary>
-            public string BootDevice
-            {
-                get { return strBootDevice; }
-                set { strBootDevice = value; }
-            }
-            //#endregion
-            //#region　地區
-            string strCountry = string.Empty;　　//地區
-            /// <summary>
-            /// 地區
-            /// </summary>
-            public string Country
-            {
-                get { return strCountry; }
-                set { strCountry = value; }
-            }
-            //#endregion
-            //#region　時區
-            string strTimeZone = string.Empty;　　//時區
-            /// <summary>
-            /// 時區
-            /// </summary>
-            public string TimeZone
-            {
-                get { return strTimeZone; }
-                set { strTimeZone = value; }
-            }
-            //#endregion
-            //#region　總的物理內存
-            string strTotalVisibleMemorySize = string.Empty;　　//總的物理內存
-            /// <summary>
-            /// 總的物理內存
-            /// </summary>
-            public string TotalVisibleMemorySize
-            {
-                get { return strTotalVisibleMemorySize; }
-                set { strTotalVisibleMemorySize = value; }
-            }
-            //#endregion
-            //#region　可用物理內存
-            string strFreePhysicalMemory = string.Empty;　　//可用物理內存
-            /// <summary>
-            /// 可用物理內存
-            /// </summary>
-            public string FreePhysicalMemory
-            {
-                get { return strFreePhysicalMemory; }
-                set { strFreePhysicalMemory = value; }
-            }
-            //#endregion
-            //#region　總的虛擬內存
-            string strTotalVirtualMemorySize = string.Empty;　　//總的虛擬內存
-            /// <summary>
-            /// 總的虛擬內存
-            /// </summary>
-            public string TotalVirtualMemorySize
-            {
-                get { return strTotalVirtualMemorySize; }
-                set { strTotalVirtualMemorySize = value; }
-            }
-            //#endregion
-            //#region　可用虛擬內存
-            string strFreeVirtualMemory = string.Empty;　　//可用虛擬內存
-            /// <summary>
-            /// 可用虛擬內存
-            /// </summary>
-            public string FreeVirtualMemory
-            {
-                get { return strFreeVirtualMemory; }
-                set { strFreeVirtualMemory = value; }
-            }
-            //#endregion
-            //#region　頁面文件大小
-            string strSizeStoredInPagingFiles = string.Empty;　　//頁面文件大小
-            /// <summary>
-            /// 頁面文件大小
-            /// </summary>
-            public string SizeStoredInPagingFiles
-            {
-                get { return strSizeStoredInPagingFiles; }
-                set { strSizeStoredInPagingFiles = value; }
-            }
-            //#endregion
-
-            //#region 可用頁面文件大小
-            string strFreeSpaceInPagingFiles = string.Empty;
-            /// <summary>
-            /// 可用頁面文件大小
-            /// </summary>
-            public string FreeSpaceInPagingFiles
-            {
-                get { return strFreeSpaceInPagingFiles; }
-                set { strFreeSpaceInPagingFiles = value; }
-            }
-            //#endregion
-
-            //#region 頁面文件大小
-            string strFileSize = string.Empty;
-            /// <summary>
-            /// 頁面文件大小
-            /// </summary>
-            public string FileSize
-            {
-                get { return strFileSize; }
-                set { strFileSize = value; }
-            }
-            //#endregion
-
-            //#region 頁面文件
-            string strFileName = string.Empty;
-            /// <summary>
-            /// 頁面文件大小
-            /// </summary>
-            public string FileName
-            {
-                get { return strFileName; }
-                set { strFileName = value; }
-            }
-            //#endregion
-            //#endregion
-        }
-
-        //*****************計算機系統信息
-        public class ComputerInfoEntity
-        {
-            //系統名稱:Name
-            private string strName = string.Empty;
-            /// <summary>
-            /// 系統名稱
-            /// </summary>
-            public string ComputerSystemName
-            {
-                get { return strName; }
-                set { strName = value; }
-            }
-            //系統制造商:Manufacturer
-            private string strManufacturer = string.Empty;
-            /// <summary>
-            /// 系統制造商
-            /// </summary>
-            public string ComputerManufacturer
-            {
-                get { return strManufacturer; }
-                set { strManufacturer = value; }
-            }
-
-            //系統模式:Model
-            private string strModel = string.Empty;
-            /// <summary>
-            /// 系統模式
-            /// </summary>
-            public string ComputerSystemModel
-            {
-                get { return strModel; }
-                set { strModel = value; }
-            }
-
-            //系統類型:SystemType
-            private string strType = string.Empty;
-            /// <summary>
-            /// 系統類型
-            /// </summary>
-            public string ComputerSystemType
-            {
-                get { return strType; }
-                set { strType = value; }
-            }
-        }
-
-        //***************BIOS
-        public class BIOSInfoEntity
-        {
-            //BIOS版本
-            private string strBIOSVersion = string.Empty;
-            /// <summary>
-            /// BIOS版本
-            /// </summary>
-            public string BIOSVersion
-            {
-                get { return strBIOSVersion; }
-                set { strBIOSVersion = value; }
-            }
-            //日期
-            private string strBIOSReleaseDate = string.Empty;
-            /// <summary>
-            /// 日期
-            /// </summary>
-            public string BIOSReleaseDate
-            {
-                get { return strBIOSReleaseDate; }
-                set { strBIOSReleaseDate = value; }
-            }
-            //SMBIOS
-            private string strSMBIOS = string.Empty;
-            /// <summary>
-            /// SMBIOS
-            /// </summary>
-            public string SMBIOS
-            {
-                get { return strSMBIOS; }
-                set { strSMBIOS = value; }
-            }
-        }
-
-        //*********************內存信息
-        public class MemoryInfoEntity
-        {
-            //#region 總的物理內存
-            string strTotalVisibleMemorySize = string.Empty;  //總的物理內存
-            public string TotalVisibleMemorySize
-            {
-                get { return strTotalVisibleMemorySize; }
-                set { strTotalVisibleMemorySize = value; }
-            }
-            //#endregion
-
-            //#region 可用物理內存
-            string strFreePhysicalMemory = string.Empty;  //可用物理內存
-
-            public string FreePhysicalMemory
-            {
-                get { return strFreePhysicalMemory; }
-                set { strFreePhysicalMemory = value; }
-            }
-            //#endregion
-
-            //#region 總的虛擬內存
-            string strTotalVirtualMemorySize = string.Empty;  //總的虛擬內存
-
-            public string TotalVirtualMemorySize
-            {
-                get { return strTotalVirtualMemorySize; }
-                set { strTotalVirtualMemorySize = value; }
-            }
-            //#endregion
-
-            //#region 可用虛擬內存
-            string strFreeVirtualMemory = string.Empty;  //可用虛擬內存
-
-            public string FreeVirtualMemory
-            {
-                get { return strFreeVirtualMemory; }
-                set { strFreeVirtualMemory = value; }
-            }
-            //#endregion
-
-            //#region 頁面文件大小
-            string strSizeStoredInPagingFiles = string.Empty;  //頁面文件大小
-
-            public string SizeStoredInPagingFiles
-            {
-                get { return strSizeStoredInPagingFiles; }
-                set { strSizeStoredInPagingFiles = value; }
-            }
-            //#endregion
-
-            //#region 可用頁面文件大小
-            string strFreeSpaceInPagingFiles = string.Empty;
-
-            public string FreeSpaceInPagingFiles
-            {
-                get { return strFreeSpaceInPagingFiles; }
-                set { strFreeSpaceInPagingFiles = value; }
-            }
-            //#endregion
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        //2、核心實現類
-
-        //#region//獲取CPU參數
-        /// <summary>
-        /// 獲取CPU參數
-        /// </summary>
-        /// <returns></returns>
-        public List<CPUInfoEntity> GetCPUInfo()
-        {
-            //返回值
-            List<CPUInfoEntity> cpuInfoList = new List<CPUInfoEntity>();
-
-            try
-            {
-                //值
-                ManagementObjectCollection moCollection = null;
-                //如果是本地
-                if (flag_isLocal)
-                {
-                    ManagementClass mClass = new ManagementClass("Win32_Processor");
-                    //獲取Win32_Processor這個類的所有實例
-                    moCollection = mClass.GetInstances();
-
-                }
-                //表示遠程
-                else
-                {
-                    //設定通過WMI要查詢的內容
-                    ObjectQuery Query = new ObjectQuery("select * from Win32_Processor");
-                    //WQL語句，設定的WMI查詢內容和WMI的操作范圍，檢索WMI對象集合
-                    ManagementObjectSearcher mos = new ManagementObjectSearcher(Query);
-                    //異步調用WMI查詢
-                    moCollection = mos.Get();
-                }
-                //循環
-                if (moCollection != null)
-                {
-                    //foreach,cpu可能有多個
-                    foreach (ManagementObject mObject in moCollection)
-                    {
-                        CPUInfoEntity cpuInfo = new CPUInfoEntity();
-                        cpuInfo.CPUCount = moCollection.Count;
-                        cpuInfo.CPUName = mObject["Name"].ToString();　//獲取CPU名稱
-                        cpuInfo.CPUID = mObject["ProcessorId"].ToString();　//獲取　CPU　ID
-                        cpuInfo.CPUManufacturer = mObject["Manufacturer"].ToString();　//獲取CPU制造商
-                        cpuInfo.CPUCurrentClockSpeed = mObject["CurrentClockSpeed"].ToString();　//獲取當前時鐘頻率
-                        cpuInfo.CPUMaxClockSpeed = mObject["MaxClockSpeed"] == null ? string.Empty : mObject["MaxClockSpeed"].ToString();　//獲取最大時鐘頻率
-                        cpuInfo.CPUExtClock = mObject["ExtClock"] == null ? string.Empty : mObject["ExtClock"].ToString();　//獲取外部頻率
-                        cpuInfo.CPUCurrentVoltage = mObject["CurrentVoltage"] == null ? string.Empty : mObject["CurrentVoltage"].ToString();　//獲取當前電壓
-                        cpuInfo.CPUL2CacheSize = mObject["L2CacheSize"] == null ? string.Empty : mObject["L2CacheSize"].ToString();　//獲取二級緩存
-                        cpuInfo.CPUDataWidth = mObject["DataWidth"] == null ? string.Empty : mObject["DataWidth"].ToString();　//獲取數據帶寬
-                        cpuInfo.CPUAddressWidth = mObject["AddressWidth"] == null ? string.Empty : mObject["AddressWidth"].ToString();　//獲取地址帶寬
-                        cpuInfo.CPUNumberOfCores = mObject["NumberOfCores"] == null ? string.Empty : mObject["NumberOfCores"].ToString(); //內核
-                        cpuInfo.CPUNumberOfLogicalProcessors = mObject["NumberOfLogicalProcessors"] == null ? string.Empty : mObject["NumberOfLogicalProcessors"].ToString();    //邏輯處理器
-                        cpuInfo.CPUUsedPercent = mObject["LoadPercentage"] == null ? 0 : float.Parse(mObject["LoadPercentage"].ToString());
-
-                        //加入進去
-                        cpuInfoList.Add(cpuInfo);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            return cpuInfoList;
-        }
-        //#endregion
-
-        //#region//獲取操作系統參數
-        /// <summary>
-        /// 獲取操作系統參數
-        /// </summary>
-        /// <returns></returns>
-        public SystemInfoEntity GetSystemInfo()
-        {
-            //返回值
-            SystemInfoEntity systemInfoList = new SystemInfoEntity();
-
-            try
-            {
-                //值
-                ManagementObjectCollection moCollection = null;
-                //如果是本地
-                if (flag_isLocal)
-                {
-                    ManagementClass mClass = new ManagementClass("Win32_OperatingSystem");
-                    //獲取Win32_Processor這個類的所有實例
-                    moCollection = mClass.GetInstances();
-                }
-                //表示遠程
-                else
-                {
-                    //設定通過WMI要查詢的內容
-                    ObjectQuery Query = new ObjectQuery("select * from Win32_OperatingSystem");
-                    //WQL語句，設定的WMI查詢內容和WMI的操作范圍，檢索WMI對象集合
-                    ManagementObjectSearcher mos = new ManagementObjectSearcher(Query);
-                    //異步調用WMI查詢
-                    moCollection = mos.Get();
-                }
-                //循環
-                if (moCollection != null)
-                {
-                    //foreach
-
-                    foreach (ManagementObject mObject in moCollection)
-                    {
-                        systemInfoList.OSName = mObject["Caption"].ToString();　　//獲取OS　名稱
-                        systemInfoList.OSManufacturer = mObject["Manufacturer"].ToString();　　//獲取　OS　制造商
-                        systemInfoList.Country = mObject["CountryCode"].ToString();　　//地區
-                        systemInfoList.OSName = mObject["CSName"].ToString();　　//獲取系統名稱
-                        systemInfoList.WindowsDirectory = mObject["WindowsDirectory"].ToString();　　//獲取Windows　目錄
-                        systemInfoList.SystemDirectory = mObject["SystemDirectory"].ToString();　　//獲取系統目錄
-                        systemInfoList.BootDevice = mObject["BootDevice"].ToString();　　//獲取啟動設備
-                        systemInfoList.OSVersion = mObject["Version"].ToString();//獲取版本
-                        systemInfoList.OSCSDVersion = mObject["CSDVersion"].ToString();//獲取SP 不可用此
-                        systemInfoList.OSBuildNumber = mObject["BuildNumber"].ToString();//獲取builderNumber
-                        systemInfoList.TotalVisibleMemorySize = ((ulong)mObject["TotalVisibleMemorySize"] / 1024.0 / 1024).ToString("#0.00") + "G";　　//獲取總的物理內存
-                        systemInfoList.FreePhysicalMemory = ((ulong)mObject["FreePhysicalMemory"] / 1024.0 / 1024).ToString("#0.00") + "G";　　//獲取可用物理內存
-                        systemInfoList.TotalVirtualMemorySize = ((ulong)mObject["TotalVirtualMemorySize"] / 1024.0 / 1024).ToString("#0.00") + "G";　　　//獲取總的虛擬內存
-                        systemInfoList.FreeVirtualMemory = ((ulong)mObject["FreeVirtualMemory"] / 1024.0 / 1024).ToString("#0.00") + "G";　　//獲取可用虛擬內存
-                        systemInfoList.SizeStoredInPagingFiles = ((ulong)mObject["SizeStoredInPagingFiles"] / 1024.0 / 1024).ToString("#0.00") + "G";　　//獲取頁面文件大小
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            return systemInfoList;
-        }
-        //#endregion
-
-        //#region//獲取時間區域
-        /// <summary>
-        /// 獲取時間區域
-        /// </summary>
-        /// <returns></returns>
-        public SystemInfoEntity GetTimeZoneInfo()
-        {
-            //返回值
-            SystemInfoEntity systemInfoList = new SystemInfoEntity();
-
-            try
-            {
-                //值
-                ManagementObjectCollection moCollection = null;
-                //如果是本地
-                if (flag_isLocal)
-                {
-                    ManagementClass mClass = new ManagementClass("Win32_TimeZone");
-                    //獲取Win32_Processor這個類的所有實例
-                    moCollection = mClass.GetInstances();
-                }
-                //表示遠程
-                else
-                {
-                    //設定通過WMI要查詢的內容
-                    ObjectQuery Query = new ObjectQuery("select * from Win32_TimeZone");
-                    //WQL語句，設定的WMI查詢內容和WMI的操作范圍，檢索WMI對象集合
-                    ManagementObjectSearcher mos = new ManagementObjectSearcher(Query);
-                    //ManagementObjectSearcher mos = new ManagementObjectSearcher("Select SerialNumber From Win32_BIOS");
-
-                    //異步調用WMI查詢
-                    moCollection = mos.Get();
-                }
-                //循環
-                if (moCollection != null)
-                {
-                    //foreach
-                    foreach (ManagementObject mObject in moCollection)
-                    {
-                        systemInfoList.OSName = mObject["StandardName"].ToString();　　//時區
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            return systemInfoList;
-        }
-        //#endregion
-
-        //#region//獲取頁面文件
-        /// <summary>
-        /// 獲取頁面文件
-        /// </summary>
-        /// <returns></returns>
-        public SystemInfoEntity GetPageFileInfo()
-        {
-            //返回值
-            SystemInfoEntity systemInfoList = new SystemInfoEntity();
-
-            try
-            {
-                //值
-                ManagementObjectCollection moCollection = null;
-                //如果是本地
-                if (flag_isLocal)
-                {
-                    ManagementClass mClass = new ManagementClass("Win32_PageFile");
-                    //獲取Win32_Processor這個類的所有實例
-                    moCollection = mClass.GetInstances();
-                }
-                //表示遠程
-                else
-                {
-                    //設定通過WMI要查詢的內容
-                    ObjectQuery Query = new ObjectQuery("select * from Win32_PageFile");
-                    //WQL語句，設定的WMI查詢內容和WMI的操作范圍，檢索WMI對象集合
-                    ManagementObjectSearcher mos = new ManagementObjectSearcher(Query);
-                    //異步調用WMI查詢
-                    moCollection = mos.Get();
-                }
-                //循環
-                if (moCollection != null)
-                {
-                    //foreach
-
-                    foreach (ManagementObject mObject in moCollection)
-                    {
-                        long FileSize = mObject["FileSize"] == null ? 0 : long.Parse(mObject["FileSize"].ToString());//頁面文件大小
-                        //計算
-                        systemInfoList.FileSize = (FileSize / 1024 / 1024).ToString("#0.00") + "G";
-                        systemInfoList.FileName = mObject["Name"].ToString();　　//頁面文件
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            return systemInfoList;
-        }
-        //#endregion
-
-        //#region//獲取BIOS信息
-        /// <summary>
-        /// 獲取BIOS信息
-        /// </summary>
-        /// <returns></returns>
-        public BIOSInfoEntity GetBIOSInfo()
-        {
-            //返回值
-            BIOSInfoEntity BIOSInfoList = new BIOSInfoEntity();
-
-            try
-            {
-                //值
-                ManagementObjectCollection moCollection = null;
-                //如果是本地
-                if (flag_isLocal)
-                {
-                    ManagementClass mClass = new ManagementClass("Win32_BIOS");
-                    //獲取Win32_Processor這個類的所有實例
-                    moCollection = mClass.GetInstances();
-                }
-                //表示遠程
-                else
-                {
-                    //設定通過WMI要查詢的內容
-                    ObjectQuery Query = new ObjectQuery("select * from Win32_BIOS");
-                    //WQL語句，設定的WMI查詢內容和WMI的操作范圍，檢索WMI對象集合
-                    ManagementObjectSearcher mos = new ManagementObjectSearcher(Query);
-                    //異步調用WMI查詢
-                    moCollection = mos.Get();
-                }
-                //循環
-                if (moCollection != null)
-                {
-                    //foreach
-                    foreach (ManagementObject mObject in moCollection)
-                    {
-                        BIOSInfoList.BIOSReleaseDate = mObject["ReleaseDate"] == null ? string.Empty : getDateTimeFromDmtfDate(mObject["ReleaseDate"].ToString());　　//時間
-                        BIOSInfoList.BIOSVersion = mObject["Manufacturer"].ToString();　　//Manufacturer
-                        BIOSInfoList.SMBIOS = mObject["SMBIOSBIOSVersion"].ToString();　　//SMBIOSBIOSVersion
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            return BIOSInfoList;
-        }
-        //#endregion
-
-        //#region//獲取計算機信息
-        /// <summary>
-        /// 獲取計算機信息
-        /// </summary>
-        /// <returns></returns>
-        public ComputerInfoEntity GetComputerInfo()
-        {
-            //返回值
-            ComputerInfoEntity ComputerInfoList = new ComputerInfoEntity();
-
-            try
-            {
-                //值
-                ManagementObjectCollection moCollection = null;
-                //如果是本地
-                if (flag_isLocal)
-                {
-                    ManagementClass mClass = new ManagementClass("Win32_ComputerSystem");
-                    //獲取Win32_Processor這個類的所有實例
-                    moCollection = mClass.GetInstances();
-
-                }
-                //表示遠程
-                else
-                {
-                    //設定通過WMI要查詢的內容
-                    ObjectQuery Query = new ObjectQuery("select * from Win32_ComputerSystem");
-                    //WQL語句，設定的WMI查詢內容和WMI的操作范圍，檢索WMI對象集合
-                    ManagementObjectSearcher mos = new ManagementObjectSearcher(Query);
-                    //異步調用WMI查詢
-                    moCollection = mos.Get();
-                }
-                //循環
-                if (moCollection != null)
-                {
-
-                    //foreach
-                    foreach (ManagementObject mObject in moCollection)
-                    {
-                        ComputerInfoList.ComputerSystemName = mObject["Name"].ToString();//系統名稱
-                        ComputerInfoList.ComputerManufacturer = mObject["Manufacturer"].ToString();//系統制造商
-                        ComputerInfoList.ComputerSystemModel = mObject["Model"].ToString();//系統模式
-                        ComputerInfoList.ComputerSystemType = mObject["SystemType"].ToString();//系統類型
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            return ComputerInfoList;
-        }
-        //#endregion
 
         private static string getDmtfFromDateTime(DateTime dateTime)
         {
@@ -2872,14 +2072,9 @@ namespace vcs_WMI__new
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
 
 /*
 // 空資料的處理
