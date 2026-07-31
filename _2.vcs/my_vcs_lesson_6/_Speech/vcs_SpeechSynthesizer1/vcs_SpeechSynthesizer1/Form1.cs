@@ -8,7 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;    //for MemoryStream
-using System.Threading;
 
 // 實現語音朗讀功能
 // 參考/加入參考/.NET/System.Speech
@@ -99,17 +98,22 @@ namespace vcs_SpeechSynthesizer1
 
             //------------------------------------------------------------  # 60個
 
-            /* 最簡易
+            // 最簡易
             SpeechSynthesizer synth = new SpeechSynthesizer();  // 建立語音合成器
-            synth.Speak(text);
-            */
+            //synth.Speak(text);  // 同步播放, 會拉住程式
+            synth.SpeakAsync(text);  // 非同步播放, 不會拉住程式           
+
+            //synth.Rate = 0;       //Rate：播放語速，-10~10
+            //synth.Volume = 10;    //Volume：音量調節：0~100
+            //synth.SelectVoice("Microsoft Hanhan Desktop");	//選擇當前朗讀的人員，參數是朗讀者名稱，如：Microsoft Sam
+            //synth.SelectVoice("Microsoft Server Speech Text to Speech Voice (en-GB, Hazel)");
+            richTextBox1.Text += "使用聲音 : " + synth.Voice.Name + "\n";
 
             //------------------------------------------------------------  # 60個
 
-            SpeechSynthesizer synth = new SpeechSynthesizer();  // 建立語音合成器
+            //SpeechSynthesizer synth = new SpeechSynthesizer();  // 建立語音合成器
             /*
-            // 設定語音輸出到預設音效裝置 (電腦喇叭)
-            synth.SetOutputToDefaultAudioDevice();
+            synth.SetOutputToDefaultAudioDevice();  // 設定語音合成的輸出 為 預設音效裝置 (電腦喇叭)
 
             // 可選：設定語速與音量
             synth.Rate = 0;   // -10 (最慢) 到 10 (最快)，0 為正常速度
@@ -127,41 +131,17 @@ namespace vcs_SpeechSynthesizer1
             */
             //------------------------------------------------------------  # 60個
 
-            /*
-            SpeechSynthesizer ss = new SpeechSynthesizer();  // 建立語音合成器
-
-            //播放
-            if (ss != null)
-            {
-                //ss.Dispose();
-                ss.SpeakAsync("朗讀的文本");
-            }
-
-            //暫停
-            if (ss.State == SynthesizerState.Speaking)
-            {
-                ss.Pause();
-            }
-
-            //繼續
-            if (ss.State == SynthesizerState.Paused)
-            {
-                ss.Resume();
-            }
-
-            //停止
-            if (ss != null)
-            {
-                ss.Dispose();
-            }
-            */
-
-            //------------------------------------------------------------  # 60個
+            //狀態
+            //synth.State
+            //SynthesizerState.Speaking
+            //SynthesizerState.Paused
 
             //暫停
             //synth.Pause();
             //繼續
             //synth.Resume();
+            //捨棄
+            //synth.Dispose();
 
             //------------------------------------------------------------  # 60個
 
@@ -171,13 +151,25 @@ namespace vcs_SpeechSynthesizer1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //播放
-            richTextBox1.Text += "播放\n";
-            //synth.Rate = 0;       //Rate：播放語速，-10~10
-            //synth.Volume = 10;    //Volume：音量調節：0~100
-            //synth.SelectVoice("Microsoft Hanhan Desktop");	//選擇當前朗讀的人員，參數是朗讀者名稱，如：Microsoft Sam
-            richTextBox1.Text += "使用聲音 : " + synth.Voice.Name + "\n";
-            synth.SpeakAsync(richTextBox1.Text);	//開始進行異步朗讀，參數是朗讀的文本。
+            //SpeechSynthesizer
+            synth = new SpeechSynthesizer();  // 建立語音合成器
+
+            synth.SelectVoice("Microsoft Hanhan Desktop");	//選擇當前朗讀的人員，參數是朗讀者名稱，如：Microsoft Sam
+            synth.Speak("Hi there, I am darkthread.");		//開始進行朗讀，參數是朗讀的文本
+
+            synth.SelectVoice("Microsoft Zira Desktop");	//選擇當前朗讀的人員，參數是朗讀者名稱，如：Microsoft Sam
+            synth.Speak("Hi there, I am darkthread.");		//開始進行朗讀，參數是朗讀的文本
+
+            var pb = new PromptBuilder();
+            pb.StartVoice("Microsoft Hanhan Desktop");
+            pb.AppendText("大家好，我是黑暗執行緒");
+            //https://msdn.microsoft.com/zh-tw/library/hh378418(v=office.14).aspx
+            pb.AppendSsmlMarkup("<voice name=\"Microsoft David Desktop\">darkthread</voice>");
+            pb.EndVoice();
+            synth.Speak(pb);	//開始進行朗讀，參數是朗讀的文本
+
+            synth.SelectVoice("Microsoft Tracy Desktop");	//選擇當前朗讀的人員，參數是朗讀者名稱，如：Microsoft Sam
+            synth.Speak("大家好，我是黑暗執行緒");		//開始進行朗讀，參數是朗讀的文本
         }
 
         //------------------------------------------------------------  # 60個
@@ -200,8 +192,7 @@ namespace vcs_SpeechSynthesizer1
 
             synth.Speak(text);	//開始進行朗讀，參數是朗讀的文本
 
-            // 設定語音輸出到預設音效裝置 (電腦喇叭)
-            synth.SetOutputToDefaultAudioDevice();
+            synth.SetOutputToDefaultAudioDevice();  // 設定語音合成的輸出 為 預設音效裝置 (電腦喇叭)
 
             richTextBox1.Text += "已存檔 : " + filename + "\n";
 
@@ -217,8 +208,7 @@ namespace vcs_SpeechSynthesizer1
             //synth.SetOutputToNull();    //保存文件結束語句，必須調用該語句，否則生產的語音文件無法播放。
             //      SetOutputToNull()：保存文件結束語句，必須調用該語句，否則生產的語音文件無法播放。
 
-            // 設定語音輸出到預設音效裝置 (電腦喇叭)
-            //synth.SetOutputToDefaultAudioDevice();
+            //synth.SetOutputToDefaultAudioDevice();  // 設定語音合成的輸出 為 預設音效裝置 (電腦喇叭)
             richTextBox1.Text += "已存檔 : " + filename + "\n";
         }
 
@@ -245,27 +235,8 @@ namespace vcs_SpeechSynthesizer1
 
         //------------------------------------------------------------  # 60個
 
-        /// <summary>
-        /// 開始朗讀 放在線程中
-        /// </summary>
-        /// <param name="VoiceObject"></param>
-        public void ReadText(object VoiceObject)
-        {
-            try
-            {
-                synth.SpeakAsync(richTextBox1.Text);	//開始進行異步朗讀，參數是朗讀的文本。
-            }
-            catch (Exception er)
-            {
-                MessageBox.Show(er.ToString(), "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         private void button6_Click(object sender, EventArgs e)
         {
-            //使用thread播放
-            Thread thread = new Thread(ReadText);
-            thread.Start();
         }
 
         //------------------------------------------------------------  # 60個
@@ -308,24 +279,6 @@ namespace vcs_SpeechSynthesizer1
 
         private void button8_Click(object sender, EventArgs e)
         {
-            synth = new SpeechSynthesizer();  // 建立語音合成器
-
-            synth.SelectVoice("Microsoft Hanhan Desktop");	//選擇當前朗讀的人員，參數是朗讀者名稱，如：Microsoft Sam
-            synth.Speak("Hi there, I am darkthread.");		//開始進行朗讀，參數是朗讀的文本
-
-            synth.SelectVoice("Microsoft Zira Desktop");	//選擇當前朗讀的人員，參數是朗讀者名稱，如：Microsoft Sam
-            synth.Speak("Hi there, I am darkthread.");		//開始進行朗讀，參數是朗讀的文本
-
-            var pb = new PromptBuilder();
-            pb.StartVoice("Microsoft Hanhan Desktop");
-            pb.AppendText("大家好，我是黑暗執行緒");
-            //https://msdn.microsoft.com/zh-tw/library/hh378418(v=office.14).aspx
-            pb.AppendSsmlMarkup("<voice name=\"Microsoft David Desktop\">darkthread</voice>");
-            pb.EndVoice();
-            synth.Speak(pb);	//開始進行朗讀，參數是朗讀的文本
-
-            synth.SelectVoice("Microsoft Tracy Desktop");	//選擇當前朗讀的人員，參數是朗讀者名稱，如：Microsoft Sam
-            synth.Speak("大家好，我是黑暗執行緒");		//開始進行朗讀，參數是朗讀的文本
         }
 
         //------------------------------------------------------------  # 60個
@@ -403,7 +356,5 @@ namespace vcs_SpeechSynthesizer1
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-
 
 

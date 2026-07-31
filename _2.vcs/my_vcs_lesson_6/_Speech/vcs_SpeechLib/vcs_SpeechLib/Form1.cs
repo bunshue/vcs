@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using SpeechLib;    //for SpVoiceClass
+using System.Threading;
 
 /*
 參考/加入參考/COM/Microsoft Speech Object Library 5.4 選 C:\Windows\System32\Speech\Common\sapi.dll
@@ -73,20 +74,15 @@ namespace vcs_SpeechLib
             Voice.Speak(article2, SpFlags);
 
             richTextBox1.Text += "完成\n";
-        }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //生成聲音文件(Wav)
+            //------------------------------------------------------------  # 60個
+
+            /*
+            // 生成聲音文件(Wav)
             string filename = "tmp_generated_audio.wav";
 
-            string article1 = "Insight Medical Solutions Inc.";
-            string article2 = "群曜醫電股份有限公司";
-
             SpeechVoiceSpeakFlags SpFlags = SpeechVoiceSpeakFlags.SVSFlagsAsync;
-
             SpVoice Voice = new SpVoice();
-
             SpeechStreamFileMode SpFileMode = SpeechStreamFileMode.SSFMCreateForWrite;
             SpFileStream SpFileStream = new SpFileStream();
             SpFileStream.Open(filename, SpFileMode, false);
@@ -96,10 +92,41 @@ namespace vcs_SpeechLib
             SpFileStream.Close();
 
             richTextBox1.Text += "已存檔 : " + filename + "\n";
+            */
+
+            //------------------------------------------------------------  # 60個
+
+            string text = "VCS將Text轉成語音";
+
+            SpVoice sv = new SpVoice();
+
+            //sv.Rate = 0;  // 設置朗讀速度
+            //SpeechVoiceSpeakFlags SSF = SpeechVoiceSpeakFlags.SVSFlagsAsync;
+            //sv.Speak(text, SSF);
+
+            //------------------------------------------------------------  # 60個
+
+            // 生成聲音文件
+
+            SpeechVoiceSpeakFlags SVSF = SpeechVoiceSpeakFlags.SVSFlagsAsync;
+            SpeechStreamFileMode SSFM = SpeechStreamFileMode.SSFMCreateForWrite;
+            SpFileStream SFS = new SpFileStream();
+            string filename = "tmp_spvoice.wav";
+            SFS.Open(filename, SSFM, false);
+            sv.AudioOutputStream = SFS;
+            sv.Speak(text, SVSF);
+            sv.WaitUntilDone(System.Threading.Timeout.Infinite);
+            SFS.Close();
+
+            richTextBox1.Text += "done\n";
+
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        //------------------------------------------------------------  # 60個
+
+        private void button1_Click(object sender, EventArgs e)
         {
+            //SpVoiceClass1
             string article1 = "Insight Medical Solutions Inc.";
             string article2 = "群曜醫電股份有限公司";
 
@@ -122,15 +149,16 @@ namespace vcs_SpeechLib
 
             spvc2.Speak(article2, spFlags);
 
-            System.Threading.Thread.Sleep(1000);
+            Thread.Sleep(1000);
 
             spvc2.Speak(article2, spFlags);
         }
 
         //------------------------------------------------------------  # 60個
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
+            //SpVoiceClass2
             SpVoiceClass spvc = new SpVoiceClass();
 
             /*
@@ -175,38 +203,16 @@ namespace vcs_SpeechLib
             //spvc.Pause();
             //Resume
             //spvc.Resume();
+        }
 
-            return;
+        //------------------------------------------------------------  # 60個
+
+        private void button3_Click(object sender, EventArgs e)
+        {
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            string text = "VCS將Text轉成語音";
-
-            SpVoice sv = new SpVoice();
-
-            /*
-            sv.Rate = 0;  // 設置朗讀速度
-            SpeechVoiceSpeakFlags SSF = SpeechVoiceSpeakFlags.SVSFlagsAsync;
-
-            sv.Speak(text, SSF);
-            */
-
-            //------------------------------  # 30個
-
-            // 生成聲音文件
-
-            SpeechVoiceSpeakFlags SVSF = SpeechVoiceSpeakFlags.SVSFlagsAsync;
-            SpeechStreamFileMode SSFM = SpeechStreamFileMode.SSFMCreateForWrite;
-            SpFileStream SFS = new SpFileStream();
-            string filename = "tmp_spvoice.wav";
-            SFS.Open(filename, SSFM, false);
-            sv.AudioOutputStream = SFS;
-            sv.Speak(text, SVSF);
-            sv.WaitUntilDone(System.Threading.Timeout.Infinite);
-            SFS.Close();
-
-            richTextBox1.Text += "done\n";
         }
         //------------------------------------------------------------  # 60個
     }
@@ -225,20 +231,13 @@ namespace vcs_SpeechLib
 */
 
 // SpeechLib    的 SpVoice
+// SpeechLib    的 SpVoiceClass()
 // DotNetSpeech 的 SpVoice vo = new SpVoiceClass();
-
 
 /*
 dll檔案選sapi.dll
-
 參考出現SpeechLib
-
 引用要寫 using SpeechLib;
- 
-SpeechVoiceSpeakFlags spFlags = SpeechVoiceSpeakFlags.SVSFlagsAsync;
-SpVoice voice = new SpVoice();
-
-voice.Speak(this.textBox1.Text, spFlags);
           
 //------------------------------------------------------------  # 60個
 
@@ -248,3 +247,4 @@ http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/192842.html
 //------------------------------------------------------------  # 60個
 
 */
+

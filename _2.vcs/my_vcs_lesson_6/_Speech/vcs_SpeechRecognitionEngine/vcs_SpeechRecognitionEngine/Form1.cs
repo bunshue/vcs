@@ -7,11 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;
 using System.Threading;
-using System.Globalization; //for CultureInfo
+using System.Globalization;  // for CultureInfo
 
 using System.Speech;
-using System.Speech.Recognition;    //for SpeechRecognitionEngine   //參考/加入參考/.NET/System.Speech
+using System.Speech.Recognition;  // for SpeechRecognitionEngine   //參考/加入參考/.NET/System.Speech
 using System.Speech.Synthesis;
 
 //語音識別
@@ -28,8 +29,8 @@ namespace vcs_SpeechRecognitionEngine
 {
     public partial class Form1 : Form
     {
-        SpeechRecognitionEngine recEngine = new SpeechRecognitionEngine();
-        //SpeechRecognitionEngine _recognizer = new SpeechRecognitionEngine();
+        // 創建識別器物件
+        SpeechRecognitionEngine recognizer = new SpeechRecognitionEngine(new CultureInfo("zh-tw"));
 
         public Form1()
         {
@@ -39,21 +40,6 @@ namespace vcs_SpeechRecognitionEngine
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
-
-            //------------------------------------------------------------  # 60個
-
-            //_recognizer.LoadGrammar(new Grammar(new GrammarBuilder("test")) { Name = "testGrammar" }); // load a grammar"test"
-
-            /*
-            Choices preCmd = new Choices();
-            preCmd.Add(new string[] { "name", "age" });
-            GrammarBuilder gb = new GrammarBuilder();
-            gb.Append(preCmd);
-            Grammar gr = new Grammar(gb);
-            recEngine.LoadGrammarAsync(gr);
-            recEngine.SetInputToDefaultAudioDevice();
-            recEngine.SpeechRecognized += recEngine_SpeechRecognized;
-            */
         }
 
         void show_item_location()
@@ -68,6 +54,11 @@ namespace vcs_SpeechRecognitionEngine
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
             richTextBox1.Size = new Size(500, 690);
             richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
@@ -103,38 +94,61 @@ namespace vcs_SpeechRecognitionEngine
 
         //------------------------------------------------------------  # 60個
 
+        // Handle the SpeechRecognized event.  
+        void recognizer_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
+        {
+            //語音辨識結果
+            richTextBox1.Text += "語音辨識結果 : " + e.Result.Text + "\n";
+            richTextBox1.Text += "語音辨識信心 : " + e.Result.Confidence + "\n";
+        }
+
         private void button0_Click(object sender, EventArgs e)
         {
+            String textFilePath = "result.txt";
+            string waveFilePath = "tmp_spvoice2.wav";
 
+            // Create an in-process speech recognizer for the en-US locale.  // 創建識別器物件
+            using (SpeechRecognitionEngine recognizer = new SpeechRecognitionEngine(new CultureInfo("zh-tw")))
+            {
+                // Create and load a dictation grammar.
+                recognizer.LoadGrammar(new DictationGrammar());
+
+                // Add a handler for the speech recognized event.  
+                recognizer.SpeechRecognized += new EventHandler<SpeechRecognizedEventArgs>(recognizer_SpeechRecognized);
+
+                // Configure input to the speech recognizer.
+                recognizer.SetInputToWaveFile(waveFilePath);  // 設定語音辨識的來源裝置 為 音頻檔案
+                //recognizer.SetInputToDefaultAudioDevice();  // 設定語音辨識的來源裝置 為 音頻設備
+
+                // Modify the initial silence time-out value.
+                recognizer.InitialSilenceTimeout = TimeSpan.FromSeconds(500);
+
+                // Start synchronous speech recognition.
+                RecognitionResult result = recognizer.Recognize();  // 啟動語音辨識
+
+                if (result != null)
+                {
+                    //FileStream fs = new FileStream(textFilePath, FileMode.Open, FileAccess.ReadWrite);
+                    StreamWriter sw = File.CreateText(textFilePath);
+                    //fs.SetLength(0);//首先把文件清空了。
+                    sw.Write(result.Text);//写你的字符串。
+                    sw.Close();
+                    richTextBox1.Text += "辨識結果 : " + result.Text + "\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "辨識失敗\n";
+                }
+            }
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //_recognizer.LoadGrammar(new Grammar(new GrammarBuilder("test")) { Name = "testGrammar" }); // load a grammar"test"    same
+            // MSDN的範例, 看起來是要從麥克風輸入語音再轉文字
 
-            /*
-            Grammar gr = new Grammar(new GrammarBuilder("test"));
-            gr.Name = "testGrammar";
-            _recognizer.LoadGrammar(gr);
-            */
-
-            recEngine.RecognizeAsync(RecognizeMode.Multiple);
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            recEngine.RecognizeAsyncStop();
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            // Create an in-process speech recognizer for the en-US locale.  
+            // Create an in-process speech recognizer for the en-US locale.  // 創建識別器物件
             using (SpeechRecognitionEngine recognizer = new SpeechRecognitionEngine(new CultureInfo("zh-tw")))
             {
                 // Create and load a dictation grammar.  
@@ -144,10 +158,10 @@ namespace vcs_SpeechRecognitionEngine
                 recognizer.SpeechRecognized += new EventHandler<SpeechRecognizedEventArgs>(recognizer_SpeechRecognized);
 
                 // Configure input to the speech recognizer.  
-                recognizer.SetInputToDefaultAudioDevice();
+                recognizer.SetInputToDefaultAudioDevice();  // 設定語音辨識的來源裝置 為 音頻設備
 
                 // Start asynchronous, continuous speech recognition.  
-                recognizer.RecognizeAsync(RecognizeMode.Multiple);
+                recognizer.RecognizeAsync(RecognizeMode.Multiple);  // 啟動語音辨識
 
                 // Keep the console window open.  
                 while (true)
@@ -157,55 +171,293 @@ namespace vcs_SpeechRecognitionEngine
             }
         }
 
-        // Handle the SpeechRecognized event.  
-        static void recognizer_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
+        //------------------------------------------------------------  # 60個
+
+        private void button2_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("Recognized text: " + e.Result.Text);
+            //建立字典 dictation 聽寫
+
+            // 創建識別器物件
+            SpeechRecognitionEngine recognizer = new SpeechRecognitionEngine();
+
+            Choices preCmd = new Choices();
+            preCmd.Add(new string[] { "name", "age" });
+            GrammarBuilder gb = new GrammarBuilder();
+            gb.Append(preCmd);
+            //Grammar gr = new Grammar(gb);
+            //recognizer.LoadGrammarAsync(gr);
+
+            //3030
+
+            //recognizer.LoadGrammar(new Grammar(new GrammarBuilder("test")) { Name = "testGrammar" }); // load a grammar"test"    same
+            Grammar gr = new Grammar(new GrammarBuilder("test"));
+            gr.Name = "testGrammar";
+            recognizer.LoadGrammar(gr);
+
+            //3030
+
+            GrammarBuilder phrases_grammar = new GrammarBuilder();
+
+            List<string> glossory = new List<string>();
+
+            glossory.Add("trigger1");
+            glossory.Add("trigger2");
+            glossory.Add("trigger3");
+
+            phrases_grammar.Append(new Choices(glossory.ToArray()));
+
+            recognizer.LoadGrammar(new Grammar(phrases_grammar));
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //列出內建的語音辨識引擎名稱
+
+            foreach (var x in SpeechRecognitionEngine.InstalledRecognizers())
+            {
+                richTextBox1.Text += x.Name + "\n";
+            }
+
+            foreach (var x in SpeechRecognitionEngine.InstalledRecognizers())
+            {
+                richTextBox1.Text += x.Culture.Name + "\n";
+            }
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button4_Click(object sender, EventArgs e)
         {
-            SpeechRecognitionEngine sr = new SpeechRecognitionEngine();
-            sr.SetInputToDefaultAudioDevice();
+            //測試 msdn上的範例
+
+            recognizer.SetInputToDefaultAudioDevice();  // 設定語音辨識的來源裝置 為 音頻設備
+            recognizer.SpeechRecognized += recognizer_SpeechRecognized2;
+            Grammar g_HelloGoodbye = GetHelloGoodbyeGrammar();
+            Grammar g_SetTextBox = GetTextBox1TextGrammar();
+            recognizer.LoadGrammarAsync(g_HelloGoodbye);
+            recognizer.LoadGrammarAsync(g_SetTextBox);
+            recognizer.RecognizeAsync(RecognizeMode.Multiple);  // 啟動語音辨識
+        }
+
+
+        static Grammar GetHelloGoodbyeGrammar()
+        {
+            Choices ch_HelloGoodbye = new Choices();
+            ch_HelloGoodbye.Add("hello");
+            ch_HelloGoodbye.Add("goodbye");
+            GrammarBuilder gb_result = new GrammarBuilder(ch_HelloGoodbye);
+            Grammar g_result = new Grammar(gb_result);
+            return g_result;
+        }
+
+        static Grammar GetTextBox1TextGrammar()
+        {
+            Choices ch_Colors = new Choices();
+            ch_Colors.Add(new string[] { "red", "white", "blue" });
+            GrammarBuilder gb_result = new GrammarBuilder();
+            gb_result.Append("set text box 1");
+            gb_result.Append(ch_Colors);
+            Grammar g_result = new Grammar(gb_result);
+            return g_result;
+        }
+
+        void recognizer_SpeechRecognized2(object sender, SpeechRecognizedEventArgs e)
+        {
+            string txt = e.Result.Text;
+            float confidence = e.Result.Confidence;
+            if (confidence < 0.65) return;
+
+            //"I heard you say: " + txt
+
+            if (txt.IndexOf("text") >= 0 && txt.IndexOf("box") >= 0 && txt.IndexOf("1") >= 0)
+            {
+                string[] words = txt.Split(' ');
+
+                //textBox1.Text = words[4];
+            }
+        }
+
+
+        static bool done = false;
+        static bool speechOn = true;
+
+        void recognizer_SpeechRecognized2b(object sender, SpeechRecognizedEventArgs e)
+        {
+            string txt = e.Result.Text;
+            float confidence = e.Result.Confidence;
+            Console.WriteLine("\nRecognized: " + txt);
+            if (confidence < 0.60) return;
+
+            if (txt.IndexOf("speech on") >= 0)
+            {
+                Console.WriteLine("Speech is now ON");
+                speechOn = true;
+            }
+
+            if (txt.IndexOf("speech off") >= 0)
+            {
+                Console.WriteLine("Speech is now OFF");
+                speechOn = false;
+            }
+
+            if (speechOn == false)
+                return;
+
+            if (txt.IndexOf("klatu") >= 0 && txt.IndexOf("barada") >= 0)
+            {
+                ((SpeechRecognitionEngine)sender).RecognizeAsyncCancel();
+                done = true;
+                Console.WriteLine("(Speaking: Farewell)");
+            }
+
+            if (txt.IndexOf("What") >= 0 && txt.IndexOf("plus") >= 0)
+            {
+                string[] words = txt.Split(' ');
+                int num1 = int.Parse(words[2]);
+                int num2 = int.Parse(words[4]);
+                int sum = num1 + num2;
+                Console.WriteLine("(Speaking: " + words[2] + " plus " + words[4] + " equals " + sum + ")");
+            }
+        }
+
+        // recognizer_SpeechRecognized2b
+
+        //------------------------------------------------------------  # 60個
+
+        SpeechRecognitionEngine sr = new SpeechRecognitionEngine();
+
+        private string Greet { get; set; }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Choices inputs = new Choices();
+            inputs.Add(new string[] { "hello", "goodbye", "my name is" });
+            GrammarBuilder gb = new GrammarBuilder();
+            gb.Append(inputs);
+            Grammar g = new Grammar(gb);
+
+            sr.SetInputToDefaultAudioDevice();  // 設定語音辨識的來源裝置 為 音頻設備
+            sr.LoadGrammarAsync(g);
+            sr.SpeechRecognized += sr_SpeechRecognized;
+            sr.RecognizeAsync(RecognizeMode.Multiple);
+        }
+
+        void sr_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
+        {
+            MessageBox.Show("Speech recognized: " + e.Result.Text);
+            if (e.Result.Text == "my name is")
+            {
+                // store the users name in a variable
+            }
         }
 
         //------------------------------------------------------------  # 60個
 
-        /*
-        public void load_listen(VI_Profile profile, VI_Settings settings, ListView statusContainer)
+        private void button6_Click(object sender, EventArgs e)
         {
-            this.profile = profile;
-            this.settings = settings;
-            this.statusContainer = statusContainer;
-
-            vi_syn = profile.synth;
-
-            SpeechRecognitionEngine recEngine = new SpeechRecognitionEngine(settings.recognizer_info);
-
-            GrammarBuilder phrases_grammar = new GrammarBuilder();
-            List<string> glossory = new List<string>();
-
-            foreach (VI_Phrase trigger in profile.Profile_Triggers)
+            // Initialize an in-process speech recognition engine.
+            using (SpeechRecognitionEngine recognizer = new SpeechRecognitionEngine())
             {
-                glossory.Add(trigger.value);
-            }
-            if (glossory.Count == 0)
-            {
-                MessageBox.Show("You need to add at least one Trigger");
-                return;
-            }
-            phrases_grammar.Append(new Choices(glossory.ToArray()));
+                // Create a grammar.
+                //  Create lists of alternative choices.
+                Choices listTypes = new Choices(new string[] { "albums", "artists" });
+                Choices genres = new Choices(new string[] {
+          "blues", "classical", "gospel", "jazz", "rock" });
 
-            recEngine.LoadGrammar(new Grammar(phrases_grammar));
-            //set event function
-            recEngine.SpeechRecognized += phraseRecognized;
-            recEngine.SpeechRecognitionRejected += _recognizer_SpeechRecognitionRejected;
-            recEngine.SetInputToDefaultAudioDevice();
-            recEngine.RecognizeAsync(RecognizeMode.Multiple);
+                //  Create a GrammarBuilder object and assemble the grammar components.
+                GrammarBuilder mediaMenu = new GrammarBuilder("Display the list of");
+                mediaMenu.Append(listTypes);
+                mediaMenu.Append("in the");
+                mediaMenu.Append(genres);
+                mediaMenu.Append("category.");
+
+                //  Build a Grammar object from the GrammarBuilder.
+                Grammar mediaMenuGrammar = new Grammar(mediaMenu);
+                mediaMenuGrammar.Name = "Media Chooser";
+
+                // Attach event handlers.
+                recognizer.LoadGrammarCompleted +=
+                  new EventHandler<LoadGrammarCompletedEventArgs>(recognizer_LoadGrammarCompleted);
+                recognizer.SpeechRecognized +=
+                  new EventHandler<SpeechRecognizedEventArgs>(recognizer_SpeechRecognized3);
+                recognizer.SpeechHypothesized +=
+                  new EventHandler<SpeechHypothesizedEventArgs>(recognizer_SpeechHypothesized);
+
+                // Load the grammar object to the recognizer.
+                recognizer.LoadGrammarAsync(mediaMenuGrammar);
+
+                recognizer.SetInputToDefaultAudioDevice();  // 設定語音辨識的來源裝置 為 音頻設備
+
+                // Start asynchronous recognition.
+                recognizer.RecognizeAsync();
+            }
         }
-        */
+
+        // Handle the SpeechHypothesized event.
+        static void recognizer_SpeechHypothesized(object sender, SpeechHypothesizedEventArgs e)
+        {
+            Console.WriteLine("Speech hypothesized: " + e.Result.Text);
+        }
+
+        // Handle the LoadGrammarCompleted event.
+        static void recognizer_LoadGrammarCompleted(object sender, LoadGrammarCompletedEventArgs e)
+        {
+            Console.WriteLine("Grammar loaded: " + e.Grammar.Name);
+            Console.WriteLine();
+        }
+
+        // Handle the SpeechRecognized event.
+        static void recognizer_SpeechRecognized3(object sender, SpeechRecognizedEventArgs e)
+        {
+            Console.WriteLine();
+            Console.WriteLine("Speech recognized: " + e.Result.Text);
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            /*
+            參考
+        https://blog.darkthread.net/blog/sapi-demo/
+
+            */
+
+            // 創建識別器物件
+            SpeechRecognitionEngine recognizer = new SpeechRecognitionEngine(new CultureInfo("zh-tw"));
+
+            recognizer.SetInputToDefaultAudioDevice();  // 設定語音辨識的來源裝置 為 音頻設備
+
+            recognizer.LoadGrammar(new DictationGrammar());
+
+            recognizer.SpeechRecognized += new EventHandler<SpeechRecognizedEventArgs>(recognizer_SpeechRecognized);
+
+            /*
+            recognizer.SpeechRecognized += (sender, e) =>
+            {   //識別即念出
+                Console.WriteLine(e.Result.Text);
+                speak(e.Result.Text);
+            };
+            */
+            recognizer.RecognizeAsync(RecognizeMode.Multiple);
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+        }
+
+        //------------------------------------------------------------  # 60個
     }
 }
 
@@ -215,4 +467,44 @@ namespace vcs_SpeechRecognitionEngine
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
+
+
+//開啟
+//recognizer.RecognizeAsync(RecognizeMode.Multiple);
+//關閉
+//recognizer.RecognizeAsyncCancel();
+//停止
+//recognizer.RecognizeAsyncStop();
+
+/*
+Choices ch_StartStopCommands = new Choices();
+ch_StartStopCommands.Add("speech on");
+ch_StartStopCommands.Add("speech off");
+ch_StartStopCommands.Add("klatu barada nikto");
+GrammarBuilder gb_StartStop = new GrammarBuilder();
+gb_StartStop.Append(ch_StartStopCommands);
+Grammar g_StartStop = new Grammar(gb_StartStop);
+
+//演示設置識別命令以添加兩個數字的能力
+Choices ch_Numbers = new Choices();
+ch_Numbers.Add("1");
+ch_Numbers.Add("2");
+ch_Numbers.Add("3");
+ch_Numbers.Add("4");
+
+GrammarBuilder gb_WhatIsXplusY = new GrammarBuilder();
+gb_WhatIsXplusY.Append("What is");
+gb_WhatIsXplusY.Append(ch_Numbers);
+gb_WhatIsXplusY.Append("plus");
+gb_WhatIsXplusY.Append(ch_Numbers);
+Grammar g_WhatIsXplusY = new Grammar(gb_WhatIsXplusY);
+recognizer.LoadGrammarAsync(g_StartStop);
+recognizer.LoadGrammarAsync(g_WhatIsXplusY);
+recognizer.RecognizeAsync(RecognizeMode.Multiple);  // 啟動語音辨識
+
+while (done == false) { ; }
+Console.WriteLine("\nHit <enter> to close shell\n");
+Console.ReadLine();
+*/
+
 

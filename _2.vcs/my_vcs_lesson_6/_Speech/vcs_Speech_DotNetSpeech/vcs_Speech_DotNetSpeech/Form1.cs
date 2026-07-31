@@ -16,13 +16,17 @@ using DotNetSpeech;  // for SpVoice
 // 微軟 SAPI.SpVoice C# 使用方法
 // 參考/加入參考, 選DotNetSpeech.dll
 // DotNetSpeech屬性/內嵌Interop型別 改false
+/*
+DotNetSpeech----文本轉wave語音文件wav操作
+引入dll(DotNetSpeech.dll)，引入以后需要選中項目中引入的dll，鼠標右鍵，選擇屬性，把“嵌入互操作類型”設置為False。
+不然會提示無法嵌入互操作類型"SpeechLib.SpVoiceClass".請改用適用的接口.
+DotNetSpeech.SpeechAudioFormatType.SAFTCCITT_uLaw_11kHzMono表示音頻編碼格式為G711U
+*/
 
 namespace vcs_Speech_DotNetSpeech
 {
     public partial class Form1 : Form
     {
-        private SpVoiceUtil svu;
-
         public Form1()
         {
             InitializeComponent();
@@ -31,10 +35,6 @@ namespace vcs_Speech_DotNetSpeech
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
-
-            //------------------------------------------------------------  # 60個
-
-            svu = new SpVoiceUtil();
         }
 
         void show_item_location()
@@ -75,12 +75,34 @@ namespace vcs_Speech_DotNetSpeech
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //文本轉換成音頻流
+            // 使用 DotNetSpeech 的 SpVoiceClass
 
-            //1.生成聲音文件
+            DotNetSpeech.SpVoice vo = new SpVoiceClass();
+
+            ISpeechObjectTokens obj = vo.GetVoices();
+            int count = obj.Count;//获取语音库总数
+            for (int i = 0; i < count; i++)
+            {
+                string desc = obj.Item(i).GetDescription(); //遍历语音库
+                richTextBox1.Text += "取得語音庫 : " + desc + "\n";
+            }
+
+            //------------------------------  # 30個
 
             string text = "VCS將Text轉成語音";
 
+            /*
+            //朗讀
+
+            DotNetSpeech.SpeechVoiceSpeakFlags SSF = DotNetSpeech.SpeechVoiceSpeakFlags.SVSFlagsAsync;
+            DotNetSpeech.SpVoice vo = new SpVoiceClass();
+            vo.Speak(text, SSF);
+            */
+
+            //------------------------------  # 30個
+
+            /*
+            //錄音
             DotNetSpeech.SpeechVoiceSpeakFlags SSF = DotNetSpeech.SpeechVoiceSpeakFlags.SVSFlagsAsync;
             DotNetSpeech.SpVoice vo = new SpVoiceClass();
             DotNetSpeech.SpeechStreamFileMode SSFM = DotNetSpeech.SpeechStreamFileMode.SSFMCreateForWrite;
@@ -93,32 +115,41 @@ namespace vcs_Speech_DotNetSpeech
             SFS.Close();
 
             richTextBox1.Text += "done\n";
-
-            //2.朗讀
-
-            //DotNetSpeech.SpeechVoiceSpeakFlags SSF = DotNetSpeech.SpeechVoiceSpeakFlags.SVSFlagsAsync;
-            //DotNetSpeech.SpVoice vo = new SpVoiceClass();
-            vo.Speak(text, SSF);
+            */
         }
 
         //------------------------------------------------------------  # 60個
 
         // 定義符合 CallBack 委派的方法
-        static void MyCallBack(bool finished, int InputWordPosition, int InputWordLength)
+        private void MyCallBack(bool finished, int InputWordPosition, int InputWordLength)
         {
+            if (this.InvokeRequired)
+            {
+                // 注意這裡要用 SpVoiceUtil.CallBack，而不是單純 CallBack
+                this.Invoke(new SpVoiceUtil.CallBack(MyCallBack), finished, InputWordPosition, InputWordLength);
+                return;
+            }
+
             if (!finished)
             {
-                //Console.WriteLine($"朗讀中... 位置={InputWordPosition}, 長度={InputWordLength}");
-                Console.WriteLine("朗讀中... " + InputWordPosition + " / " + InputWordLength);
+                label1.Text = string.Format("朗讀中... 位置={0}, 長度={1}", InputWordPosition, InputWordLength);
+
+                progressBar1.Maximum = textBox1.Text.Length;
+                int pos = InputWordPosition + InputWordLength;
+                if (pos > progressBar1.Maximum) pos = progressBar1.Maximum;
+                progressBar1.Value = pos;
             }
             else
             {
-                Console.WriteLine("朗讀完成！");
+                label1.Text = "朗讀完成！";
+                progressBar1.Value = progressBar1.Maximum;
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            // SpVoiceUtil 類別內用的是 SpVoiceClass()
+
             SpVoiceUtil svu = new SpVoiceUtil();
 
             //取得語音庫
@@ -139,11 +170,12 @@ namespace vcs_Speech_DotNetSpeech
 
             //------------------------------  # 30個
 
-            //Speak
-            string text = "In computing, a system call is the mechanism used by an application program to request service from the operating system.";
-            //text = "啟動結果啟動結果啟動結果啟動結果";
+            string text = "VCS將Text轉成語音";
+
             // 呼叫 Speak，並傳入 callback
             bool result = svu.Speak(text, MyCallBack);
+            label1.Text = result ? "朗讀開始..." : "朗讀失敗";
+            progressBar1.Value = 0;
 
             richTextBox1.Text += "Speak 啟動結果: " + result + "\n";
 
@@ -190,16 +222,6 @@ namespace vcs_Speech_DotNetSpeech
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //SpVoiceClass
-            DotNetSpeech.SpVoice vo = new SpVoiceClass();
-
-            ISpeechObjectTokens obj = vo.GetVoices();
-            int count = obj.Count;//获取语音库总数
-            for (int i = 0; i < count; i++)
-            {
-                string desc = obj.Item(i).GetDescription(); //遍历语音库
-                richTextBox1.Text += "取得語音庫 : " + desc + "\n";
-            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -211,38 +233,8 @@ namespace vcs_Speech_DotNetSpeech
 
         //------------------------------------------------------------  # 60個
 
-        private void MyCallBack2(bool finished, int InputWordPosition, int InputWordLength)
-        {
-            if (this.InvokeRequired)
-            {
-                // 注意這裡要用 SpVoiceUtil.CallBack，而不是單純 CallBack
-                this.Invoke(new SpVoiceUtil.CallBack(MyCallBack2), finished, InputWordPosition, InputWordLength);
-                return;
-            }
-
-            if (!finished)
-            {
-                label1.Text = string.Format("朗讀中... 位置={0}, 長度={1}", InputWordPosition, InputWordLength);
-
-                progressBar1.Maximum = textBox1.Text.Length;
-                int pos = InputWordPosition + InputWordLength;
-                if (pos > progressBar1.Maximum) pos = progressBar1.Maximum;
-                progressBar1.Value = pos;
-            }
-            else
-            {
-                label1.Text = "朗讀完成！";
-                progressBar1.Value = progressBar1.Maximum;
-            }
-        }
-
         private void button5_Click(object sender, EventArgs e)
         {
-            string text = textBox1.Text;
-            bool result = svu.Speak(text, MyCallBack2);
-
-            label1.Text = result ? "朗讀開始..." : "朗讀失敗";
-            progressBar1.Value = 0;
         }
 
         //------------------------------------------------------------  # 60個
@@ -410,17 +402,4 @@ namespace vcs_Speech_DotNetSpeech
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-
-/*
-
-DotNetSpeech----文本轉wave語音文件
-wav操作
-引入dll(DotNetSpeech.dll)，引入以后需要選中項目中引入的dll，鼠標右鍵，選擇屬性，把“嵌入互操作類型”設置為False。不然會提示無法嵌入互操作類型"SpeechLib.SpVoiceClass".請改用適用的接口.
-DotNetSpeech.SpeechAudioFormatType.SAFTCCITT_uLaw_11kHzMono表示音頻編碼格式為G711U
-
-//------------------------------------------------------------  # 60個
-
-
-*/
 
