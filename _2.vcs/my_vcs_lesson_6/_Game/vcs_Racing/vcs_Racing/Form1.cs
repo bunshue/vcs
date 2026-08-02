@@ -6,26 +6,35 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using RunnerSpace;
 
 namespace vcs_Racing
 {
     public partial class Form1 : Form
     {
+        private Turtle turtle;
+        private Rabbit rabbit;
+
         public Form1()
         {
             InitializeComponent();
         }
-
-        private Turtle turtle;
-        private Rabbit rabbit;
 
         private void Form1_Load(object sender, EventArgs e)
         {
             reset();
         }
 
-        private void reset() {
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void reset()
+        {
             this.turtle = new Turtle(4, 3);
             this.rabbit = new Rabbit(15, 5);
             turtleLabel.Left = 12;
@@ -39,19 +48,29 @@ namespace vcs_Racing
             turtleLabel.Left += this.turtle.step();
             rabbitLabel.Left += this.rabbit.step();
 
-            if (turtleLabel.Left > 320) {
+            if (turtleLabel.Left > 320)
+            {
                 reset();
                 if (turtleButton.Checked == true)
+                {
                     MessageBox.Show("烏龜贏了! 恭喜您猜對了!");
+                }
                 else
+                {
                     MessageBox.Show("烏龜贏了! 但您猜錯了");
+                }
             }
-            else if (rabbitLabel.Left > 320) {
+            else if (rabbitLabel.Left > 320)
+            {
                 reset();
                 if (rabbitButton.Checked == true)
+                {
                     MessageBox.Show("兔子贏了! 恭喜您猜對了!");
+                }
                 else
+                {
                     MessageBox.Show("兔子贏了! 但您猜錯了");
+                }
             }
         }
 
@@ -60,7 +79,13 @@ namespace vcs_Racing
             startButton.Enabled = false;
             timer1.Start();
         }
-
-
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+

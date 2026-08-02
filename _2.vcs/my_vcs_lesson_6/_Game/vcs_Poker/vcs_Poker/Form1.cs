@@ -72,7 +72,9 @@ namespace vcs_Poker
                     // 決定 是否 玩家暴掉了
                     int sum = 0;
                     for (int i = 0; i <= MyPB_index; i++)
+                    {
                         sum = sum + weight[MyScore[i]];
+                    }
 
                     if (sum > 21)
                     {
@@ -99,7 +101,9 @@ namespace vcs_Poker
                         }
                     }
                     else if (MyPB_Active) // 電腦 已經叫停  玩家 還未 叫停
+                    {
                         MyTurn = true; // 開始 玩家時間
+                    }
                 }
                 else  // 尚未到位 就放開滑鼠  只好歸回原位
                 {
@@ -107,7 +111,6 @@ namespace vcs_Poker
                     Dragging = false;
                 }
             }
-
         }
 
         private void pictureBox2_MouseMove(object sender, MouseEventArgs e)
@@ -197,8 +200,8 @@ namespace vcs_Poker
                     ComputerPB[ComputerPB_Index].Image = imageList1.Images[CardSeq[Card_No]];
                     Card_No++; // 發牌序 加一
                 }
-                pictureBox2.Location = new Point(pictureBox1.Location.X + 10, pictureBox1.Location.Y - 10);  // 瞬間將發牌 移回 原處 障眼法
 
+                pictureBox2.Location = new Point(pictureBox1.Location.X + 10, pictureBox1.Location.Y - 10);  // 瞬間將發牌 移回 原處 障眼法
 
                 // 要決定 是否 電腦要叫停
                 int sum = 0;
@@ -206,11 +209,24 @@ namespace vcs_Poker
                 for (int i = 0; i <= ComputerPB_Index; i++)
                 {
                     sum = sum + weight[ComputerScore[i]]; // 全部加總 Ace 算 1 分
-                    if (weight[ComputerScore[i]] == 1) aces++; // 有幾張 Ace 
+                    if (weight[ComputerScore[i]] == 1)
+                    {
+                        aces++; // 有幾張 Ace
+                    }
                 }
-                if (sum > 16) ComputerPB_Active = false; // 電腦 不再 要牌
-                else if (aces >= 1 && sum > 7) ComputerPB_Active = false;
-                else if (aces >= 2 && sum == 3) ComputerPB_Active = false;
+
+                if (sum > 16)
+                {
+                    ComputerPB_Active = false; // 電腦 不再 要牌
+                }
+                else if (aces >= 1 && sum > 7)
+                {
+                    ComputerPB_Active = false;
+                }
+                else if (aces >= 2 && sum == 3)
+                {
+                    ComputerPB_Active = false;
+                }
 
                 if (sum > 21)
                 {
@@ -221,7 +237,9 @@ namespace vcs_Poker
                 }
 
                 if (MyPB_Active) // 如果玩家 還未 叫停
+                {
                     MyTurn = true; // 開始 玩家時間
+                }
                 else if (ComputerPB_Active) // 否則  玩家已經叫停 且 電腦 尚未叫停
                 {
                     if (ComputerPB_Index < ComputerPB.Length - 1) // 還有空間
@@ -242,13 +260,19 @@ namespace vcs_Poker
             int t1, t2, temp;
 
             for (int i = 0; i < ComputerPB.Length; i++)
+            {
                 ComputerPB[i].Image = null;  // 電腦的 PictureBox
+            }
 
             for (int i = 0; i < MyPB.Length; i++)
+            {
                 MyPB[i].Image = null;         // 玩家的 PictureBox
+            }
 
             for (int i = 0; i <= 51; i++)  // 先依序排好
+            {
                 CardSeq[i] = i;
+            }
 
             for (int i = 0; i < 100; i++)  // 再兩兩洗牌
             {
@@ -308,47 +332,86 @@ namespace vcs_Poker
                 for (int i = 0; i <= ComputerPB_Index; i++)
                 {
                     sum1 = sum1 + weight[ComputerScore[i]];
-                    if (weight[ComputerScore[i]] == 1) aces1++; // 電腦有幾張 Ace 
+                    if (weight[ComputerScore[i]] == 1)
+                    {
+                        aces1++; // 電腦有幾張 Ace
+                    }
                 }
                 if (aces1 >= 1)
                 {
                     k = sum1 + 9;
-                    if (k <= 21) sum1 = k;
+                    if (k <= 21)
+                    {
+                        sum1 = k;
+                    }
                 }
                 if (aces1 >= 2)  // 最多只會有2張Ace當作10 否則會爆掉
                 {
                     k = sum1 + 9;
-                    if (k <= 21) sum1 = k;
+                    if (k <= 21)
+                    {
+                        sum1 = k;
+                    }
                 }
 
                 // 計算 玩家的最高得分
                 for (int i = 0; i < MyPB_index; i++)
                 {
                     sum2 = sum2 + weight[MyScore[i]];
-                    if (weight[MyScore[i]] == 1) aces2++; // 玩家有幾張 Ace
+                    if (weight[MyScore[i]] == 1)
+                    {
+                        aces2++; // 玩家有幾張 Ace
+                    }
                 }
+
                 if (aces2 >= 1)
                 {
                     k = sum2 + 9;
-                    if (k <= 21) sum2 = k;
+                    if (k <= 21)
+                    {
+                        sum2 = k;
+                    }
                 }
+
                 if (aces2 >= 2)
                 {
                     k = sum2 + 9;
-                    if (k <= 21) sum2 = k;
+                    if (k <= 21)
+                    {
+                        sum2 = k;
+                    }
                 }
 
                 if (sum1 > 21)
+                {
                     MessageBox.Show("電腦爆了！ 玩家贏！" + Convert.ToString(sum1) + " : " + Convert.ToString(sum2));
+                }
                 else if (sum2 > 21)
+                {
                     MessageBox.Show("玩家爆了！ 電腦贏！" + Convert.ToString(sum1) + " : " + Convert.ToString(sum2));
+                }
                 else if (sum1 > sum2)
+                {
                     MessageBox.Show("電腦贏！" + Convert.ToString(sum1) + " : " + Convert.ToString(sum2));
+                }
                 else if (sum1 < sum2)
+                {
                     MessageBox.Show("玩家贏！" + Convert.ToString(sum1) + " : " + Convert.ToString(sum2));
+                }
                 else if (sum1 == sum2)
+                {
                     MessageBox.Show("平手" + Convert.ToString(sum1) + " : " + Convert.ToString(sum2));
+                }
             }
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+

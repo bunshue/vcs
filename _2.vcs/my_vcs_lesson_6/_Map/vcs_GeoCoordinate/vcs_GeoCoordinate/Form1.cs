@@ -22,8 +22,11 @@ namespace vcs_GeoCoordinate
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            label3.Text = "";
             show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
+            label3.Text = "";
 
             LoadCities();
 
@@ -66,6 +69,13 @@ namespace vcs_GeoCoordinate
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -547,11 +557,6 @@ namespace vcs_GeoCoordinate
 
         }
 
-        private void bt_clear_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-        }
-
         //------------------------------------------------------------  # 60個
 
         // for 量測距離 ST
@@ -805,9 +810,6 @@ namespace vcs_GeoCoordinate
             return d * Math.PI / 180.0;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="lat1">緯度1</param>
         /// <param name="lng1">經度1</param>
         /// <param name="lat2">緯度2</param>
@@ -835,11 +837,7 @@ namespace vcs_GeoCoordinate
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-/*  可搬出
-
-*/
