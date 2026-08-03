@@ -357,9 +357,6 @@ namespace vcs_Encoding
             richTextBox1.Text += "Unicode (UTF-8)解碼\t\t\t";
             text = Encoding.GetEncoding("utf-8").GetString(byteArray);	//指名使用Unicode (UTF-8)解碼, 把拜列轉成字串
             richTextBox1.Text += text + "\n";
-
-
-
         }
 
         //------------------------------------------------------------  # 60個
@@ -745,6 +742,22 @@ namespace vcs_Encoding
             richTextBox1.Text += "得到一個正確字串 : " + new_text + "\n";
 
             richTextBox1.Text += new_text + "\n";
+
+            //------------------------------  # 30個
+
+            richTextBox1.Text += "驗算\n";
+
+            old_text = new_text;
+
+            richTextBox1.Text += "原本正確的字串 : " + old_text + "\tGB2312編碼";
+
+            richTextBox1.Text += "使用正確的編碼編碼\n";
+            byteArray = Encoding.GetEncoding("GB2312").GetBytes(old_text);  //指名使用簡體中文(GB2312)編碼, 把字串轉成拜列  // 使用gb2312將字串轉拜列
+
+            // 正確的編碼資料，經過傳輸後，卻使用錯誤的編碼來解碼
+            new_text = Encoding.Default.GetString(byteArray);  // 使用gb2312將拜列轉字串
+
+            richTextBox1.Text += "使用錯誤的編碼解碼 : " + new_text + "\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -956,7 +969,7 @@ mystring.Length //獲取元素的個數
 
 //------------------------------------------------------------  # 60個
 
-//使用 GetBytes()將字串轉換為位元組陣列
+//使用 GetBytes() 將字串轉換為位元組陣列
 //使用 GetBytes() 方法將字串轉換為位元組陣列
 
 string myString = "This is a string.";
@@ -967,25 +980,7 @@ foreach (byte bytes in byteArray)
     richTextBox1.Text += bytes.ToString() + "\n";
 }
 
-//------------------------------------------------------------  # 60個
-
-String source1 = Encoding.GetEncoding("utf-8").GetString(response1, 0, response1.Length - 1);
-
-//------------------------------------------------------------  # 60個
-
-             string data;
-            byte[] charData;
-            string CRLF = "\r\n";
-            //login
-            data = "USER " + userName + CRLF;
-            charData = Encoding.ASCII.GetBytes(data);
-
-            data = "PASS " + password + CRLF;
-            charData = Encoding.ASCII.GetBytes(data);
-            netStream.Write(charData, 0, charData.Length);
-
 */
-
 
 //絞怀隙陬奀ㄛ壽敕耀宒勤趕敦极
 //当输入回车时，关闭模式对话窗体

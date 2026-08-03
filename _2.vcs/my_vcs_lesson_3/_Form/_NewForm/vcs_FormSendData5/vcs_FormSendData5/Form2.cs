@@ -47,7 +47,8 @@ namespace vcs_FormSendData5
 
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;
-            this.Location = new Point(100+710, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+            this.Location = new Point(100 + 710, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
     }
 }
+

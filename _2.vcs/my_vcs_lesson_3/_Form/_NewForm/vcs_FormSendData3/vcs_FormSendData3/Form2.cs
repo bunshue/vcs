@@ -35,7 +35,7 @@ namespace vcs_FormSendData3
         private void button1_Click(object sender, EventArgs e)
         {
             f1.MessageFromChildForm = "子表單傳送一個訊息給父表單\t" + (i++).ToString() + "\t" + DateTime.Now.ToString() + "\n";
-
         }
     }
 }
+

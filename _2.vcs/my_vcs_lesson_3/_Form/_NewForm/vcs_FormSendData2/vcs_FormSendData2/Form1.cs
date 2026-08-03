@@ -18,6 +18,7 @@ namespace vcs_FormSendData2
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            richTextBox1.Size = new Size(500, 400);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
@@ -42,7 +43,6 @@ namespace vcs_FormSendData2
                 MessageBox.Show("資料不能空白，請重新輸入");
                 return;
             }
-
 
             Form2 f2 = new Form2(data);
             //f2.Show();

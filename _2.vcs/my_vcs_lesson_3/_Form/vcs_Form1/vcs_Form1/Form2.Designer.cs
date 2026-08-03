@@ -33,7 +33,8 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(71, 168);
+            this.button1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button1.Location = new System.Drawing.Point(66, 167);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(148, 75);
             this.button1.TabIndex = 0;
@@ -50,6 +51,7 @@
             this.Name = "Form2";
             this.Text = "Form2";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
+            this.Load += new System.EventHandler(this.Form2_Load);
             this.ResumeLayout(false);
 
         }

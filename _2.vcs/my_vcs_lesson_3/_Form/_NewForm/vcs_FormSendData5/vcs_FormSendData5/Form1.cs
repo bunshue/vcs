@@ -67,6 +67,8 @@ namespace vcs_FormSendData5
             richTextBox1.Clear();
         }
 
+        //6060
+
         private void button0_Click(object sender, EventArgs e)
         {
             f2.Show();

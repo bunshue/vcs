@@ -19,6 +19,8 @@ namespace vcs_SpeechLib
 {
     public partial class Form1 : Form
     {
+        string speech_text = "影像邊緣檢測(edge detection) 函數 Canny() Sobel()";
+
         public Form1()
         {
             InitializeComponent();
@@ -63,8 +65,8 @@ namespace vcs_SpeechLib
 
         private void button0_Click(object sender, EventArgs e)
         {
-            string article1 = "Insight Medical Solutions Inc.";
-            string article2 = "群曜醫電股份有限公司";
+            string article1 = "影像邊緣檢測(edge detection)";
+            string article2 = "函數 Canny() Sobel()";
 
             SpeechVoiceSpeakFlags SpFlags = SpeechVoiceSpeakFlags.SVSFlagsAsync;
 
@@ -127,8 +129,8 @@ namespace vcs_SpeechLib
         private void button1_Click(object sender, EventArgs e)
         {
             //SpVoiceClass1
-            string article1 = "Insight Medical Solutions Inc.";
-            string article2 = "群曜醫電股份有限公司";
+            string article1 = "影像邊緣檢測(edge detection)";
+            string article2 = "函數 Canny() Sobel()";
 
             SpeechVoiceSpeakFlags spFlags = SpeechVoiceSpeakFlags.SVSFDefault;
 

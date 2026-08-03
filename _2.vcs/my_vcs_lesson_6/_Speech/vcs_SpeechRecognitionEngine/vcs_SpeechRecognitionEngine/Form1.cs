@@ -29,6 +29,8 @@ namespace vcs_SpeechRecognitionEngine
 {
     public partial class Form1 : Form
     {
+        string speech_text = "影像邊緣檢測(edge detection) 函數 Canny() Sobel()";
+
         // 創建識別器物件
         SpeechRecognitionEngine recognizer = new SpeechRecognitionEngine(new CultureInfo("zh-tw"));
 

@@ -24,6 +24,8 @@ namespace vcs_SpeechSynthesizer1
 {
     public partial class Form1 : Form
     {
+        string speech_text = "影像邊緣檢測(edge detection) 函數 Canny() Sobel()";
+
         private SpeechSynthesizer synth = null;//語音對象
 
         public Form1()

@@ -28,7 +28,6 @@ namespace vcs_Form1_NewForm
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -41,12 +40,7 @@ namespace vcs_Form1_NewForm
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1273, 784);
-            this.Text = "vcs_test_all_00_Usually";
-
-
-
-
-
+            this.Text = "vcs_Form1_NewForm";
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -54,18 +48,18 @@ namespace vcs_Form1_NewForm
             richTextBox1.Clear();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button0_Click(object sender, EventArgs e)
         {
-            //建立新表單
+            //建立新表單1
             Form Form_new = new Form
             {
                 Text = "新表單",
-                BackColor = Color.Pink,   //背景色
+                BackColor = Color.Pink,  // 背景色
                 FormBorderStyle = FormBorderStyle.Fixed3D,
-                //設定表單大小，方法Size(width, height)
-                Size = new Size(640, 480),
-                //自動調整大小-依控制項放大一倍
-                AutoSize = true,
+                Size = new Size(640, 480),  // 設定表單大小
+                AutoSize = true,  // 自動調整大小-依控制項放大一倍
                 AutoSizeMode = AutoSizeMode.GrowOnly,
             };
 
@@ -75,33 +69,29 @@ namespace vcs_Form1_NewForm
                 Text = "顯示",
                 Font = new Font("新細明體", 14),
                 AutoSize = true,
-                //以Location屬性設定按鈕在表單的位置
-                Location = new Point(75, 40)
+                Location = new Point(75, 40)  // 控件位置
             };
 
-            //Form.CancelButton 屬性
-            //取得或設定使用者按下 ESC 鍵時所按下的按鈕控制項。
+            // Form.CancelButton 屬性
+            // 取得或設定使用者按下 ESC 鍵時所按下的按鈕控制項。
             Form_new.CancelButton = btn_exit;
 
             Form_new.Controls.Add(btn);//加入控件
 
             Form_new.Show();//顯示表單
-
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             //建立新表單2
-            //建立新表單
             Form form1 = new Form();
 
             //建立新控件
             Button button1 = new Button();
-            Button button2 = new Button();
-
             button1.Text = "OK";
             button1.Location = new Point(10, 10);
 
+            Button button2 = new Button();
             button2.Text = "Cancel";
             button2.Location = new Point(10, 100);
 
@@ -115,18 +105,15 @@ namespace vcs_Form1_NewForm
             // Set the MinimizeBox to false to remove the minimize box.
             form1.MinimizeBox = false;
             // Set the accept button of the form to button1.
-            form1.AcceptButton = button1;
+            form1.AcceptButton = button1;  // 設定AcceptButton
             // Set the cancel button of the form to button2.
-            form1.CancelButton = button2;
+            form1.CancelButton = button2;  // 設定CancelButton
             // Set the start position of the form to the center of the screen.
             form1.StartPosition = FormStartPosition.CenterScreen;
 
-            // Add button1 to the form.
             form1.Controls.Add(button1);
-            // Add button2 to the form.
             form1.Controls.Add(button2);
 
-            // Display the form as a modal dialog box.
             form1.ShowDialog();
         }
 
@@ -151,3 +138,11 @@ namespace vcs_Form1_NewForm
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+

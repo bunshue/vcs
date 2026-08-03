@@ -27,6 +27,8 @@ namespace vcs_Speech_DotNetSpeech
 {
     public partial class Form1 : Form
     {
+        string speech_text = "影像邊緣檢測(edge detection) 函數 Canny() Sobel()";
+
         public Form1()
         {
             InitializeComponent();
@@ -35,6 +37,8 @@ namespace vcs_Speech_DotNetSpeech
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            richTextBox1.Text += speech_text + "\n";
         }
 
         void show_item_location()
@@ -51,14 +55,11 @@ namespace vcs_Speech_DotNetSpeech
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
 
-            textBox1.Size = new Size(640, 300);
-            textBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-
-            richTextBox1.Size = new Size(640, 300);
-            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            richTextBox1.Size = new Size(640, 690);
+            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1273, 750);
+            this.Size = new Size(890, 750);
             this.Text = "vcs_Speech_DotNetSpeech";
 
             //設定執行後的表單起始位置, 正中央
@@ -68,7 +69,7 @@ namespace vcs_Speech_DotNetSpeech
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
-
+            richTextBox1.Clear();
         }
 
         //------------------------------------------------------------  # 60個
@@ -89,15 +90,11 @@ namespace vcs_Speech_DotNetSpeech
 
             //------------------------------  # 30個
 
-            string text = "VCS將Text轉成語音";
-
-            /*
             //朗讀
 
             DotNetSpeech.SpeechVoiceSpeakFlags SSF = DotNetSpeech.SpeechVoiceSpeakFlags.SVSFlagsAsync;
-            DotNetSpeech.SpVoice vo = new SpVoiceClass();
-            vo.Speak(text, SSF);
-            */
+            //DotNetSpeech.SpVoice vo = new SpVoiceClass();
+            vo.Speak(speech_text, SSF);
 
             //------------------------------  # 30個
 
@@ -110,7 +107,7 @@ namespace vcs_Speech_DotNetSpeech
             string filename = "tmp_spvoice2.wav";
             SFS.Open(filename, SSFM, false);
             vo.AudioOutputStream = SFS;
-            vo.Speak(text, SSF);
+            vo.Speak(speech_text, SSF);
             vo.WaitUntilDone(System.Threading.Timeout.Infinite);
             SFS.Close();
 
@@ -134,9 +131,12 @@ namespace vcs_Speech_DotNetSpeech
             {
                 label1.Text = string.Format("朗讀中... 位置={0}, 長度={1}", InputWordPosition, InputWordLength);
 
-                progressBar1.Maximum = textBox1.Text.Length;
+                progressBar1.Maximum = speech_text.Length;
                 int pos = InputWordPosition + InputWordLength;
-                if (pos > progressBar1.Maximum) pos = progressBar1.Maximum;
+                if (pos > progressBar1.Maximum)
+                {
+                    pos = progressBar1.Maximum;
+                }
                 progressBar1.Value = pos;
             }
             else
@@ -158,6 +158,7 @@ namespace vcs_Speech_DotNetSpeech
             {
                 richTextBox1.Text += "取得語音庫 : " + s + "\n";
             }
+
             //取得語音庫 : Microsoft Hanhan Desktop - Chinese (Taiwan)
             //取得語音庫 : Microsoft Zira Desktop - English (United States)
 
@@ -170,10 +171,8 @@ namespace vcs_Speech_DotNetSpeech
 
             //------------------------------  # 30個
 
-            string text = "VCS將Text轉成語音";
-
             // 呼叫 Speak，並傳入 callback
-            bool result = svu.Speak(text, MyCallBack);
+            bool result = svu.Speak(speech_text, MyCallBack);
             label1.Text = result ? "朗讀開始..." : "朗讀失敗";
             progressBar1.Value = 0;
 
@@ -182,14 +181,14 @@ namespace vcs_Speech_DotNetSpeech
             //------------------------------  # 30個
 
             //語音轉wav
-            //text = "我来测试一下！AB连续字母加空格";
-            text = "In compupting, a system call is the mechanism used by an application program to request service from the operating system.";
-            text = AddKongGeToPlateNo(text).Trim();
+            //speech_text = "我来测试一下！AB连续字母加空格";
+            speech_text = "In compupting, a system call is the mechanism used by an application program to request service from the operating system.";
+            speech_text = AddKongGeToPlateNo(speech_text).Trim();
 
             svu.setRate(0);  // 設置語速
             svu.setVolume(100);  // 設置聲音大小
             string filename = "tmp_wave_file.wav";
-            svu.WriteToWAV(filename, text, SpeechAudioFormatType.SAFTCCITT_uLaw_11kHzMono);  // SAFT11kHz16BitMono 生成wav文件
+            svu.WriteToWAV(filename, speech_text, SpeechAudioFormatType.SAFTCCITT_uLaw_11kHzMono);  // SAFT11kHz16BitMono 生成wav文件
 
             richTextBox1.Text += "已存檔 : " + filename + "\n";
         }
