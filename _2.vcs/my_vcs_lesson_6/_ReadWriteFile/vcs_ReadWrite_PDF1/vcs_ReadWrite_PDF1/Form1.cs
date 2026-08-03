@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;    //for Path
+using System.IO;
 using System.Text.RegularExpressions;
 
 using iTextSharp.text;
@@ -202,23 +202,18 @@ namespace vcs_ReadWrite_PDF1
             //以RTB1的內容製作PDF檔案
             string filename = "tmp_pdf_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".pdf";
 
-            //SaveFileDialog saveFileDialog = new SaveFileDialog(); 				//給出文件保存信息，確定保存位置
-            //saveFileDialog.Filter = "PDF文件（*.PDF）|*.PDF";
-            //if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                //開始創建PDF文檔，首先聲明一個Document對象
-                Document document = new Document();
-                //使用指定的路徑和創建模式初始化文件流對象
-                PdfWriter.getInstance(document, new FileStream(filename, FileMode.Create));
-                document.Open();										//打開文檔
-                BaseFont baseFont = BaseFont.createFont(@"c:\windows\fonts\SIMSUN.TTC,1", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
-                iTextSharp.text.Font font = new iTextSharp.text.Font(baseFont, 20); 	//設置文檔字體樣式
-                document.Add(new Paragraph(richTextBox1.Text, font)); 			//添加內容至PDF文檔中
-                document.Close();										//關閉文檔
+            //開始創建PDF文檔，首先聲明一個Document對象
+            Document document = new Document();
+            //使用指定的路徑和創建模式初始化文件流對象
+            PdfWriter.getInstance(document, new FileStream(filename, FileMode.Create));
+            document.Open();										//打開文檔
+            BaseFont baseFont = BaseFont.createFont(@"c:\windows\fonts\SIMSUN.TTC,1", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+            iTextSharp.text.Font font = new iTextSharp.text.Font(baseFont, 20); 	//設置文檔字體樣式
+            document.Add(new Paragraph(richTextBox1.Text, font)); 			//添加內容至PDF文檔中
+            document.Close();										//關閉文檔
 
-                richTextBox2.Text += "存檔成功\n";
-                richTextBox2.Text += "已存檔 : " + filename + "\n";
-            }
+            richTextBox2.Text += "存檔成功\n";
+            richTextBox2.Text += "已存檔 : " + filename + "\n";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -251,6 +246,8 @@ namespace vcs_ReadWrite_PDF1
             richTextBox2.Text += "已存檔 : " + filename2 + "\n";
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button2_Click(object sender, EventArgs e)
         {
             string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_pdf\note_Linux_workstation.pdf";
@@ -263,19 +260,15 @@ namespace vcs_ReadWrite_PDF1
             richTextBox1.Text += "pageCount : " + pageCount.ToString() + "\n";
         }
 
-        /// <summary>
-        /// 讀取PDF文本內容
-        /// </summary>
-        /// <param name="fileName"></param>
-        /// <returns></returns>
-        public static string ReadPdf(string fileName)
+        // 讀取PDF文本內容
+        public string ReadPdf(string fileName)
         {
             if (!File.Exists(fileName))
             {
-                //LogHandler.LogWrite(@"指定的PDF文件不存在：" + fileName);
+                richTextBox1.Text += "指定的PDF文件不存在 : " + fileName + "\n";
                 return string.Empty;
             }
-            //
+
             string fileContent = string.Empty;
             StringBuilder sbFileContent = new StringBuilder();
             //打開文件
@@ -286,7 +279,7 @@ namespace vcs_ReadWrite_PDF1
             }
             catch (Exception ex)
             {
-                //LogHandler.LogWrite(string.Format(@"加載PDF文件{0}失敗,錯誤:{1}", new string[] { fileName, ex.ToString() }));
+                richTextBox1.Text += "錯誤訊息e01 : " + ex.Message + "\n";
 
                 if (reader != null)
                 {
@@ -302,14 +295,11 @@ namespace vcs_ReadWrite_PDF1
                 for (int i = 1; i <= reader.NumberOfPages; i++)
                 {
                     //sbFileContent.AppendLine(PdfTextExtractor.GetTextFromPage(reader, i));
-
                 }
-
             }
             catch (Exception ex)
             {
-                //LogHandler.LogWrite(string.Format(@"解析PDF文件{0}失敗,錯誤:{1}", new string[] { fileName, ex.ToString() }));
-
+                richTextBox1.Text += "錯誤訊息e02 : " + ex.Message + "\n";
             }
             finally
             {
@@ -318,22 +308,19 @@ namespace vcs_ReadWrite_PDF1
                     reader = null;
                 }
             }
-            //
             fileContent = sbFileContent.ToString();
             return fileContent;
         }
-        /// <summary>
-        /// 獲取PDF頁數
-        /// </summary>
-        /// <param name="fileName"></param>
-        /// <returns></returns>
-        public static int GetPdfPageCount(string fileName)
+
+        // 獲取PDF頁數
+        public int GetPdfPageCount(string fileName)
         {
             if (!File.Exists(fileName))
             {
-                //LogHandler.LogWrite(@"指定的PDF文件不存在：" + fileName);
+                richTextBox1.Text += "指定的PDF文件不存在 : " + fileName + "\n";
                 return -1;
             }
+
             //打開文件
             PdfReader reader = null;
             try
@@ -342,7 +329,7 @@ namespace vcs_ReadWrite_PDF1
             }
             catch (Exception ex)
             {
-                //LogHandler.LogWrite(string.Format(@"加載PDF文件{0}失敗,錯誤:{1}", new string[] { fileName, ex.ToString() }));
+                richTextBox1.Text += "錯誤訊息e03 : " + ex.Message + "\n";
 
                 if (reader != null)
                 {
@@ -351,7 +338,6 @@ namespace vcs_ReadWrite_PDF1
 
                 return -1;
             }
-            //
             return reader.NumberOfPages;
         }
 
@@ -395,22 +381,20 @@ namespace vcs_ReadWrite_PDF1
 
                 try
                 {
-
                     doc.Save(filename2);
                     richTextBox1.Text += "存檔成功\n";
                     richTextBox1.Text += "已存檔 : " + filename2 + "\n";
                 }
                 catch (Exception ex)
                 {
-                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                    richTextBox1.Text += "錯誤訊息e04 : " + ex.Message + "\n";
                 }
                 doc.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                richTextBox1.Text += "xxx錯誤訊息e05 : " + ex.Message + "\n";
             }
-
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -649,6 +633,8 @@ namespace vcs_ReadWrite_PDF1
             webBrowser1.Navigate(command);
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button30_Click(object sender, EventArgs e)
         {
             //頁數
@@ -659,13 +645,8 @@ namespace vcs_ReadWrite_PDF1
             richTextBox1.Text += "頁數 : " + pages.ToString() + "\n";
         }
 
-        //[操作pdf文檔]之C#判斷pdf文檔的頁數：
-        /// <summary>
-        /// 擷取pdf文檔的頁數
-        /// </summary>
-        /// <param name="filePath"></param>
-        /// <returns>-1表示檔案不存在</returns>
-        public static int GetPDFofPageCount(string filePath)
+        // 擷取pdf文檔的頁數
+        public int GetPDFofPageCount(string filePath)
         {
             int count = -1;//-1表示檔案不存在
             if (File.Exists(filePath))
@@ -702,13 +683,7 @@ namespace vcs_ReadWrite_PDF1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
 

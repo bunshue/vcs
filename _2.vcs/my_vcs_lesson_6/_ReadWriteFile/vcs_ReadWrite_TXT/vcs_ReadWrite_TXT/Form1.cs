@@ -187,7 +187,6 @@ namespace vcs_ReadWrite_TXT
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\琵琶行.txt";
-            //運用 ReadAllText 方法 (String, Encoding), 其中 Encoding 針對您txt檔案的編碼做變更, 讀出的資料才不會有亂碼
             string txt = File.ReadAllText(filename, Encoding.Default);
             richTextBox1.Text += "檔案內容 : " + txt + "\n";
             richTextBox1.Text += "長度 : " + txt.Length.ToString() + "\n";
@@ -1295,6 +1294,25 @@ namespace vcs_ReadWrite_TXT
             */
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            /*
+            StreamWriter sw = File.CreateText(filename);
+
+            string content = "";
+            content += "\"C:\\Program Files\\DAUM\\PotPlayer\\PotPlayerMini.exe\"\n";
+            content += "\"C:\\Program Files (x86)\\DAUM\\PotPlayer\\PotPlayerMini.exe\"\n";
+            content += "\"C:\\Program Files (x86)\\AIMP\\AIMP.exe\"\n";
+            content += "\"C:\\Program Files (x86)\\ACDSee32\\ACDSee32.exe\"\n";
+            content += "\"C:\\Program Files (x86)\\IDM Computer Solutions\\UltraEdit-32\\uedit32.exe\"\n";
+            content += SelectedLanguage.ToString() + "\n";
+            content += comboBox1.SelectedIndex.ToString() + "\n";
+            audio_player_path = @"C:\Program Files (x86)\AIMP\AIMP.exe";
+            picture_viewer_path = @"C:\Program Files (x86)\ACDSee32\ACDSee32.exe";
+            text_editor_path = @"C:\Program Files (x86)\IDM Computer Solutions\UltraEdit-32\uedit32.exe";
+
+            sw.WriteLine(content, Encoding.UTF8);
+            sw.Close();
+            */
         }
 
         private void button28_Click(object sender, EventArgs e)
@@ -1679,7 +1697,26 @@ namespace vcs_ReadWrite_TXT
 
         private void button36_Click(object sender, EventArgs e)
         {
+            //程式碼加入行號
+            //設定檔案的路徑
+            string path = @"../../data/Program.cs";
+            string append = @"tmp_final.txt";
+            string str;
+            int index = 1;
 
+            StreamReader sr = File.OpenText(path);
+            StreamWriter sw = File.AppendText(append);
+
+            while ((str = sr.ReadLine()) != null)
+            {
+                richTextBox1.Text += str + "\n";
+                //sw.WriteLine($"{index:D5} {str}");
+                //sw.WriteLine($"{index++:D5} {str}");
+                //Console.WriteLine("{0:D5} {1}", index, str);
+                //sw.WriteLine("{0:D5} {1}", index++, str);
+            }
+            sr.Close();
+            sw.Close();
         }
 
         private void button37_Click(object sender, EventArgs e)
@@ -1701,18 +1738,9 @@ namespace vcs_ReadWrite_TXT
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
-/*
-*/
-
 
 /*
 _X	|～|	FF5E	65374	
@@ -1735,48 +1763,20 @@ _C	|合|	5408	21512	_A	|、|	3001	12289	_C	|單|	55AE	21934	_C	|位|	4F4D	20301	
 
 //------------------------------------------------------------  # 60個
 
-            //程式碼加入行號
-            //設定檔案的路徑
-            string path = @"../../data/Program.cs";
-            string append = @"tmp_final.txt";
-            string str;
-            int index = 1;
-
-            StreamReader sr = File.OpenText(path);
-            StreamWriter sw = File.AppendText(append);
-
-            while ((str = sr.ReadLine()) != null)
-            {
-                richTextBox1.Text += str + "\n";
-                //WriteLine($"{index:D5} {str}");
-                //sw.WriteLine($"{index++:D5} {str}");
-            }
-            sr.Close();
-            sw.Close();
-
-            //程式碼加入行號
-            string str;
-            int index = 1;
-
-            StreamReader sr = File.OpenText("Program.cs");
-            StreamWriter sw = File.AppendText("final.txt");
-
-            while ((str = sr.ReadLine()) != null)
-            {
-                Console.WriteLine("{0:D5} {1}", index, str);
-                sw.WriteLine("{0:D5} {1}", index++, str);
-            }
-            sr.Close();
-            sw.Close();
-
 //編碼相關 使用指定的編碼
 sw = new StreamWriter(filename, Encoding.Unicode);
 sw = new StreamWriter(filename, false, Encoding.GetEncoding(950));
+sw = new StreamWriter(filename, false, Encoding.GetEncoding("big5"));
+sw = new StreamWriter(fs, Encoding.GetEncoding("UTF-8"));  // 指名編碼格式
+sw = new StreamWriter(fs, Encoding.GetEncoding("unicode"));  // 指名編碼格式
+sw = new StreamReader(fs, Encoding.GetEncoding("gb2312"));	    //
+sw = new StreamWriter(fs, Encoding.UTF8);  // 指名編碼格式
+sw = new StreamWriter(File.Open(filename, FileMode.Create), Encoding.GetEncoding("UTF-8"));    //指名編碼格式
 
 sr = new StreamReader(filename, Encoding.Default);
+sr = new StreamReader(filename, Encoding.ASCII);
 sr = new StreamReader(filename, Encoding.UTF8);
 sr = new StreamReader(filename, Encoding.Unicode);
-sr = new StreamReader(filename, Encoding.ASCII);
 sr = new StreamReader(filename, Encoding.GetEncoding(936));
 sr = new StreamReader(filename, Encoding.GetEncoding(950));
 sr = new StreamReader(filename, Encoding.GetEncoding("big5"));
@@ -1811,36 +1811,5 @@ foreach (String q in rcq)
                 
 //------------------------------------------------------------  # 60個
 
-StreamWriter
-       
-StreamWriter sw = File.CreateText(filename);
-
-string content = "";
-content += "\"C:\\Program Files\\DAUM\\PotPlayer\\PotPlayerMini.exe\"\n";
-content += "\"C:\\Program Files (x86)\\DAUM\\PotPlayer\\PotPlayerMini.exe\"\n";
-content += "\"C:\\Program Files (x86)\\AIMP\\AIMP.exe\"\n";
-content += "\"C:\\Program Files (x86)\\ACDSee32\\ACDSee32.exe\"\n";
-content += "\"C:\\Program Files (x86)\\IDM Computer Solutions\\UltraEdit-32\\uedit32.exe\"\n";
-content += SelectedLanguage.ToString() + "\n";
-content += comboBox1.SelectedIndex.ToString() + "\n";
-audio_player_path = @"C:\Program Files (x86)\AIMP\AIMP.exe";
-picture_viewer_path = @"C:\Program Files (x86)\ACDSee32\ACDSee32.exe";
-text_editor_path = @"C:\Program Files (x86)\IDM Computer Solutions\UltraEdit-32\uedit32.exe";
-
-sw.WriteLine(content, Encoding.UTF8);
-sw.Close();
-
-//------------------------------------------------------------  # 60個
-
-
-test write
-StreamWriter sw = new StreamWriter(strFilePath + strFileName, false, Encoding.GetEncoding("big5"));
-
-StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("UTF-8"));  // 指名編碼格式
-StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("unicode"));  // 指名編碼格式
-StreamWriter sw = new StreamReader(fs, Encoding.GetEncoding("gb2312"));	    //
-StreamWriter sw = new StreamWriter(fs, Encoding.UTF8);  // 指名編碼格式
-StreamWriter sw = new StreamWriter(File.Open(filename, FileMode.Create), Encoding.GetEncoding("UTF-8"));    //指名編碼格式
 
 */
-

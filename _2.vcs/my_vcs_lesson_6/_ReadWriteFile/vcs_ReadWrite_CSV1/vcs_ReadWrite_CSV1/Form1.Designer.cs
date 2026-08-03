@@ -61,7 +61,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(200, 60);
             this.button0.TabIndex = 128;
-            this.button0.Text = "建立List資料 / 顯示List內容";
+            this.button0.Text = "串列資料轉CSV檔";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -103,7 +103,6 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(200, 60);
             this.button17.TabIndex = 116;
-            this.button17.Text = "讀取一CSV檔至DataTable";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
@@ -189,7 +188,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(200, 60);
             this.button8.TabIndex = 108;
-            this.button8.Text = "讀取CSV檔至DataTable 2";
+            this.button8.Text = "讀取CSV檔至DataTable";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -200,7 +199,6 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(200, 60);
             this.button7.TabIndex = 107;
-            this.button7.Text = "讀取CSV檔至DataTable 1";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -266,7 +264,6 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(200, 60);
             this.button1.TabIndex = 101;
-            this.button1.Text = "List匯出到CSV檔";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 

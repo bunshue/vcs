@@ -858,11 +858,6 @@ Hexadecimal value of ? is 003F
 
 //------------------------------------------------------------  # 60個
 
-Encoding enc = Encoding.GetEncoding("BIG5");
-Encoding enc = Encoding.GetEncoding("GB2312");
-
-//------------------------------------------------------------  # 60個
-
 char c = 'A';
 int i = 'A';
 
@@ -880,15 +875,17 @@ richTextBox1.Text += "UniCode 0041的字元是" + c + "\n";
 Encoding.GetEncoding big5 gb2312 shift_jis UTF-8 unicode
 大小寫不分
 
-//------------------------------------------------------------  # 60個
+//設定檔案的編碼
+Encoding enc = Encoding.GetEncoding("BIG5");
+Encoding enc = Encoding.GetEncoding("GB2312");
 
 使用 Encoding 類別中的這兩個方法，須注意編碼方式 :
 字串轉拜列 與 拜列轉字串
 
 Encoding.GetBytes方法 : 將字元集編碼成位元組序列。  // 字串轉拜列
-Encoding.GetBytes方法，將 String 轉為 Byte 序列  // 字串轉拜列
+Encoding.GetBytes方法 : 將 String 轉為 Byte 序列  // 字串轉拜列
 Encoding.GetString方法 : 將位元組序列解碼成字串。
-Encoding.GetString方法，將 Byte 序列 轉為 String, 拜列轉字串
+Encoding.GetString方法 : 將 Byte 序列 轉為 String, 拜列轉字串
 
 // 字串轉拜列
 string text = "中秋佳節";

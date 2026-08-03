@@ -87,21 +87,18 @@ namespace vcs_ReadWrite_BIN1
             string filename1 = @"D:\_git\vcs\_1.data\______test_files1\bear.bmp";
             string filename2 = @"D:\_git\vcs\_1.data\______test_files1\bear2.bmp";
 
-            using (FileStream fsWriter = new FileStream(filename2, FileMode.Create, FileAccess.Write))
+            FileStream fsWriter = new FileStream(filename2, FileMode.Create, FileAccess.Write);
+            FileStream fsReader = new FileStream(filename1, FileMode.Open, FileAccess.Read);
+            byte[] bytes = new byte[1024 * 4];//4kB是合適的；
+            int readNum;
+            while ((readNum = fsReader.Read(bytes, 0, bytes.Length)) != 0)//小於說明讀完了
             {
-                using (FileStream fsReader = new FileStream(filename1, FileMode.Open, FileAccess.Read))
-                {
-                    byte[] bytes = new byte[1024 * 4];//4kB是合適的；
-                    int readNum;
-                    while ((readNum = fsReader.Read(bytes, 0, bytes.Length)) != 0)//小於說明讀完了
-                    {
-                        fsWriter.Write(bytes, 0, readNum);
-                    }
-                }//using reader
-            }//using writer
-
+                fsWriter.Write(bytes, 0, readNum);
+            }
             richTextBox1.Text += "完成\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -263,8 +260,9 @@ namespace vcs_ReadWrite_BIN1
             //寫資料
             File.WriteAllBytes(filename, data);
             richTextBox1.Text += "寫成檔案" + filename + "\n";
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -734,49 +732,44 @@ namespace vcs_ReadWrite_BIN1
             }
 
             richTextBox1.Text += "\nWriteByte\n";
-            //打印資料
-            print_data(data, data.Length);
+            print_data(data, data.Length);  // 打印資料
 
-            using (FileStream fileStream = new FileStream(filename, FileMode.Create))
+            FileStream fileStream = new FileStream(filename, FileMode.Create);
+            // Write the data to the file, byte by byte.
+            for (i = 0; i < data.Length; i++)
             {
-                // Write the data to the file, byte by byte.
-                for (i = 0; i < data.Length; i++)
-                {
-                    fileStream.WriteByte(data[i]);
-                }
+                fileStream.WriteByte(data[i]);
             }
+
             richTextBox1.Text += "\nWriteByte存檔完成, 檔名 : " + filename + "\n";
 
             filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_bin\vcs_ReadWrite_BIN.bin";
             richTextBox1.Text += "\nReadByte, 檔名 : " + filename + "\n";
 
-            using (FileStream fileStream = new FileStream(filename, FileMode.Open))
+            //FileStream
+            fileStream = new FileStream(filename, FileMode.Open);
+            // Set the stream position to the beginning of the file.
+            fileStream.Seek(0, SeekOrigin.Begin);
+
+            byte[] data2 = new byte[fileStream.Length];
+
+            // Read and verify the data.
+            for (i = 0; i < fileStream.Length; i++)
             {
-                // Set the stream position to the beginning of the file.
-                fileStream.Seek(0, SeekOrigin.Begin);
-
-                byte[] data2 = new byte[fileStream.Length];
-
-                // Read and verify the data.
-                for (i = 0; i < fileStream.Length; i++)
-                {
-                    data2[i] = (byte)fileStream.ReadByte();  // 讀一拜
-                }
-                //打印資料
-                print_data(data2, data2.Length);
+                data2[i] = (byte)fileStream.ReadByte();  // 讀一拜
             }
+            print_data(data2, data2.Length);  //打印資料
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
             string filename = Application.StartupPath + "\\bin_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bin";
-            using (BinaryWriter writer = new BinaryWriter(File.Open(filename, FileMode.Create)))
-            {
-                writer.Write(1.250F);
-                writer.Write(@"c:\Temp");
-                writer.Write(10);
-                writer.Write(true);
-            }
+            BinaryWriter writer = new BinaryWriter(File.Open(filename, FileMode.Create));
+            writer.Write(1.250F);
+            writer.Write(@"c:\Temp");
+            writer.Write(10);
+            writer.Write(true);
+
             richTextBox1.Text += "\nBinaryWriter\n";
             richTextBox1.Text += "\nWriteByte存檔完成, 檔名 : " + filename + "\n";
 
@@ -788,13 +781,11 @@ namespace vcs_ReadWrite_BIN1
 
             if (File.Exists(filename))
             {
-                using (BinaryReader reader = new BinaryReader(File.Open(filename, FileMode.Open)))
-                {
-                    aspectRatio = reader.ReadSingle();
-                    tempDirectory = reader.ReadString();
-                    autoSaveTime = reader.ReadInt32();
-                    showStatusBar = reader.ReadBoolean();
-                }
+                BinaryReader reader = new BinaryReader(File.Open(filename, FileMode.Open));
+                aspectRatio = reader.ReadSingle();
+                tempDirectory = reader.ReadString();
+                autoSaveTime = reader.ReadInt32();
+                showStatusBar = reader.ReadBoolean();
 
                 richTextBox1.Text += "Aspect ratio set to: " + aspectRatio.ToString() + "\n";
                 richTextBox1.Text += "Temp directory is: " + tempDirectory + "\n";
@@ -809,55 +800,25 @@ namespace vcs_ReadWrite_BIN1
             BinaryWriter objWriter;
             FileStream objStream;
             filename = @"tmp_BinaryWriter.txt";
-            try
-            {
-                objStream = new FileStream(filename, FileMode.Append, FileAccess.Write);
-                //使用using敘詞，寫入完會自動釋放資源
-                using (objWriter = new BinaryWriter(objStream))
-                {
-                    // 寫入字串
-                    objWriter.Write("空山不見人");
-                    objWriter.Write("Visual C# 7.0");
-                    // 寫入數值
-                    objWriter.Write(640526);
-                }
-            }
-            catch (IndexOutOfRangeException ex)
-            {
-                richTextBox1.Text += "沒有指定檔案\n";
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += ex.Message + "\n";
-            }
+
+            objStream = new FileStream(filename, FileMode.Append, FileAccess.Write);
+            objWriter = new BinaryWriter(objStream);
+            // 寫入字串
+            objWriter.Write("空山不見人");
+            objWriter.Write("Visual C# 7.0");
+            // 寫入數值
+            objWriter.Write(640526);
 
             //------------------------------------------------------------  # 60個
 
             BinaryReader objReader;
             //FileStream objStream;
             filename = @"tmp_03aa.txt";
-            try
-            {
-                objStream = new FileStream(filename, FileMode.Open, FileAccess.Read);
-                objReader = new BinaryReader(objStream);
-                richTextBox1.Text += objReader.ReadString() + "\n";
-                richTextBox1.Text += objReader.ReadInt32() + "\n";
-                objReader.Close();
-            }
-            catch (IndexOutOfRangeException ex)
-            {
-                richTextBox1.Text += "沒有指定檔案\n";
-            }
-
-            catch (EndOfStreamException ex)
-            {
-                richTextBox1.Text += "檔案讀取完畢\n";
-            }
-
-            catch (Exception ex)
-            {
-                richTextBox1.Text += ex.Message + "\n";
-            }
+            objStream = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            objReader = new BinaryReader(objStream);
+            richTextBox1.Text += objReader.ReadString() + "\n";
+            richTextBox1.Text += objReader.ReadInt32() + "\n";
+            objReader.Close();
 
             //------------------------------------------------------------  # 60個
 
@@ -869,43 +830,22 @@ namespace vcs_ReadWrite_BIN1
             filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_bin\vcs_ReadWrite_BIN.bin";
 
             int count = 0;
-            try
-            {
-                objStream = new FileStream(filename, FileMode.Open, FileAccess.Read);
 
-                //使用using陳述詞，確保資源的釋放
-                using (readBit = new BinaryReader(objStream))
+            objStream = new FileStream(filename, FileMode.Open, FileAccess.Read);
+
+            readBit = new BinaryReader(objStream);
+            do
+            {
+                //以位元組為單位讀取檔案內容，16進位方式顯示
+                richTextBox1.Text += readBit.ReadByte().ToString() + " ";  // 讀一拜
+                count += 1;
+                //'** 換行
+                if (count == 10)
                 {
-                    do
-                    {
-                        //以位元組為單位讀取檔案內容，16進位方式顯示
-                        richTextBox1.Text += readBit.ReadByte().ToString() + " ";  // 讀一拜
-                        count += 1;
-                        //'** 換行
-                        if (count == 10)
-                        {
-                            richTextBox1.Text += "\n";
-                            count = 0;
-                        }
-                    } while (true);
+                    richTextBox1.Text += "\n";
+                    count = 0;
                 }
-            }
-            catch (IndexOutOfRangeException ex)
-            {
-                richTextBox1.Text += "沒有指定檔案\n";
-            }
-
-            catch (EndOfStreamException ex)
-            {
-                richTextBox1.Text += "檔案讀取完畢\n";
-            }
-
-            catch (Exception ex)
-            {
-                richTextBox1.Text += ex.Message + "\n";
-            }
-
-
+            } while (true);
         }
 
         //------------------------------------------------------------  # 60個
@@ -1092,6 +1032,8 @@ namespace vcs_ReadWrite_BIN1
             ShowData();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button18_Click(object sender, EventArgs e)
         {
             //儲存資料(BIN)
@@ -1126,6 +1068,8 @@ namespace vcs_ReadWrite_BIN1
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button20_Click(object sender, EventArgs e)
         {
             string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_bin\txt_rw.bin";
@@ -1155,6 +1099,7 @@ namespace vcs_ReadWrite_BIN1
                 return; // 先確定檔案存在
             }
             richTextBox1.Clear();
+
             BinaryReader br = new BinaryReader(File.Open(filename, FileMode.Open)); // 開啟檔案
 
             string my_string;
@@ -1291,57 +1236,44 @@ namespace vcs_ReadWrite_BIN1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-/*  可搬出
-
-*/
-
-
-//------------------------------------------------------------  # 60個
 /*
 //開啟檔案
 FileStream fs = File.Open(@"D:\myWriter.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
 BinaryReader myReader = new BinaryReader(fs);
 int dl = System.Convert.ToInt16(fs.Length);
+
 //讀取位元陣列
 byte[] myData = myReader.ReadBytes(dl);
+
 //釋放資源
 myReader.Close();
 fs.Close();
 
 //------------------------------------------------------------  # 60個
 
-*/
+//讀取一檔
+FileStream fs = new FileStream(targetPath, FileMode.Open, FileAccess.Read);
+BinaryReader br = new BinaryReader(fs);
+br.BaseStream.Seek(0, SeekOrigin.Begin); //將指針設到開頭
+while (br.BaseStream.Position < br.BaseStream.Length)
+{
+    try
+    {
+        Console.WriteLine(br.ReadString());
+    }
+    catch (EndOfStreamException e)
+    {
+        Console.WriteLine("已經到了結尾");
+    }
+}
+br.Close();
+fs.Close();
 
-
-
-
-/*
-
-            	//讀取一檔
-                FileStream fs = new FileStream(targetPath, FileMode.Open, FileAccess.Read);
-                BinaryReader br = new BinaryReader(fs);
-                br.BaseStream.Seek(0, SeekOrigin.Begin); //將指針設到開頭
-                while (br.BaseStream.Position < br.BaseStream.Length)
-                {
-                    try
-                    {
-                        Console.WriteLine(br.ReadString());
-                    }
-                    catch (EndOfStreamException e)
-                    {
-                        Console.WriteLine("已經到了結尾");
-                    }
-                }
-                br.Close();
-                fs.Close();
-
-6060
-
+//------------------------------------------------------------  # 60個
 
 Binary格式讀出一個檔案到拜列
 

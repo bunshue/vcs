@@ -1,4 +1,30 @@
-﻿我的電腦已經裝了藍芽接收器，我要如何得知目前有多少藍芽裝置呢?
+﻿
+//建議刪掉 fs1.Close()、fs2.Close()，因為 using 會自動釋放資源。
+
+//使用using陳述詞，確保資源的釋放
+
+//使用using敘詞，寫入完會自動釋放資源
+
+
+else if (File.Exists(this.fileName))
+{
+	File.Delete(this.fileName);
+}
+
+
+throw new Exception("行數不能小於0");
+
+
+
+//點二維陣列
+//Point[][] colonPoints = new Point[2][];
+//Point[][] colonPoints = new Point[2][];
+
+
+
+
+
+我的電腦已經裝了藍芽接收器，我要如何得知目前有多少藍芽裝置呢?
 請用 Visual C# 程式來查詢目前能找到的藍芽裝置
 
 //------------------------------------------------------------  # 60個
@@ -551,9 +577,7 @@ protected：同一類別、該類別的衍生類別
 protected internal：符合protected或internal，兩者其一即可
 public：不設限
 
-
-//建議刪掉 fs1.Close()、fs2.Close()，因為 using 會自動釋放資源。
-
+6060
 
 4. UI 更新方式
 你用 richTextBox1.Text += ... 來追加文字，這會造成效能問題，因為每次都會重新建立字串。
@@ -694,13 +718,6 @@ plt.suptitle(
 
 //------------------------------------------------------------  # 60個
 //------------------------------------------------------------  # 60個
-
-vcs_test_all_04_Dialog
-
-            // 設定FolderBrowserDialog的初值
-            folderBrowserDialog1.ShowNewFolderButton = false;
-            folderBrowserDialog1.RootFolder = "xxxx";  // 設定FBD預設路徑
-            folderBrowserDialog1.Description = "----資料夾瀏覽對話方塊----" + "\n請選擇所要開啟的檔案所在的資料夾";
 
 //待測試
     folderBrowserDialog1.ShowNewFolderButton = checkBox1.Checked;
@@ -2274,26 +2291,25 @@ https://www.twblogs.net/a/5f02b56e9644181341a1b6e0
     
 //------------------------------------------------------------  # 60個
 
-            //WebBrowser 轉 RichTextBox
-            
-            string testString = @"<FONT face=Verdana><FONT face=Verdana> 
+//WebBrowser 轉 RichTextBox
+
+string testString = @"<FONT face=Verdana><FONT face=Verdana> 
 <P><FONT face=Verdana>測試內容：</FONT></P> 
 <P><FONT face=Verdana>    哈哈       <BR>    吃飯啦<BR>     下班啦   <BR>     回家<BR>     睡覺       </FONT></P> 
 <P><FONT face=Verdana>呵呵呵<BR>神馬</FONT></P> 
 <P><FONT face=Verdana><BR></FONT> </P></FONT> 
 <P><FONT face=Verdana><BR></FONT> </P></FONT>";
 
-            webBrowser1.DocumentText = testString;
-            webBrowser1.Document.Write(testString);
-            webBrowser1.Refresh();
+webBrowser1.DocumentText = testString;
+webBrowser1.Document.Write(testString);
+webBrowser1.Refresh();
 
-            using (WebBrowser webBrowser = new WebBrowser())
-            {
-                webBrowser.Visible = false;
-                webBrowser.DocumentText = testString;
-                webBrowser.Document.Write(testString);
-                richTextBox1.Text = webBrowser.Document.Body.OuterText;
-            } 
+WebBrowser webBrowser = new WebBrowser();
+webBrowser.Visible = false;
+webBrowser.DocumentText = testString;
+webBrowser.Document.Write(testString);
+richTextBox1.Text = webBrowser.Document.Body.OuterText;
+
 
 //------------------------------------------------------------  # 60個
 
@@ -2536,12 +2552,6 @@ P2P，英文Peer-to-Peer的縮寫，中譯為對等互聯或點對點技術。
 
 //------------------------------------------------------------  # 60個
 
-vcs_test_all_04_Dialog
-                saveFileDialog1.CreatePrompt = true;	//如果指定不存在的文件，提示允許創建該文件
-                saveFileDialog1.OverwritePrompt = true;//如果用戶指定的文件名已存在，顯示警告
-
-//------------------------------------------------------------  # 60個
-
 鼠標相關的事件大致有六種，分別是 ：
 "MouseHover"、"MouseLeave"、"MouseEnter"、"MouseMove"、"MouseDown"和"MouseUp"。
 
@@ -2694,118 +2704,6 @@ emule
 http://www.ed2k.online/tushu/jsjwl/16725.html
 
 ed2k://|file|[www.ed2k.online][C#%E5%85%A8%E8%83%BD%E9%80%9F%E6%9F%A5%E5%AE%9D%E5%85%B8].%E6%98%8E%E6%97%A5%E7%A7%91%E6%8A%80%E7%AD%89.%E6%89%AB%E6%8F%8F%E7%89%88.pdf|255157709|83403adcb05aaf95a0a0ef19846a00aa|h=pk25dcx3grk63emqyukmuh2eb6zuhpg5|/
-
-//------------------------------------------------------------  # 60個
-
-fullscreenfullscreen
-
-接下來為了方便在這之上進行截圖，有一個很重要的設計實現方式：用全屏幕窗體代替現有真實屏幕，這樣就可以把截圖過程的所有操作都在那個窗體上實現（該窗體設置成無邊框，高寬等於屏幕大小即可），另外為了顯示掩蔽效果（只能正常顯示選擇的部分屏幕內容，而其實部分用一個如半透明層覆蓋），就添加一層半透明位置位圖。具體代碼如下：
-
-    public partial class FullScreenForm : Form
-    {
-	    private Rectangle rectSelected = Rectangle.Empty;
-	    private bool isClipping = false;
-	    private Bitmap screen;
-	    private Bitmap coverLayer = null;
-	    private Color coverColor;
-	    private Brush rectBrush = null;
-	    private Bitmap resultBmp = null;
-	    
-	    public FullScreenForm(Bitmap screen)
-	    {
-		    InitializeComponent();
-		    
-		    int width = Screen.PrimaryScreen.Bounds.Width;
-		    int height = Screen.PrimaryScreen.Bounds.Height;
-		    coverLayer = new Bitmap(width, height);
-		    coverColor = Color.FromArgb(50, 200, 0, 0);
-		    rectBrush = new SolidBrush(coverColor);
-		    using (Graphics g = Graphics.FromImage(coverLayer)) {
-		    g.Clear(coverColor);
-	    }
-	    this.Bounds = new Rectangle(0, 0, width, height);
-	    this.screen = screen;
-    }
-
-    protected override void OnMouseDown(MouseEventArgs e)
-    {
-	    if (e.Button == MouseButtons.Left)
-	    {
-		    isClipping = true;
-		    rectSelected.Location = e.Location;
-	    }
-	    else if (e.Button == MouseButtons.Right)
-	    {
-	    	this.DialogResult = DialogResult.OK;
-	    }
-    }
-
-    protected override void OnMouseMove(MouseEventArgs e)
-    {
-	    if (e.Button == MouseButtons.Left & & isClipping)
-	    {
-		    rectSelected.Width = e.X - rectSelected.X;
-		    rectSelected.Height = e.Y - rectSelected.Y;
-		    this.Invalidate();
-	    }
-    }
-
-    protected override void OnMouseUp(MouseEventArgs e)
-    {
-	    if (e.Button == MouseButtons.Left && isClipping)
-	    {
-		    rectSelected.Width = e.X - rectSelected.X;
-		    rectSelected.Height = e.Y - rectSelected.Y;
-		    this.Invalidate();
-		    resultBmp = new Bitmap(rectSelected.Width, rectSelected.Height);
-		    using (Graphics g = Graphics.FromImage(resultBmp))
-		    {
-		    	g.DrawImage(screen,new Rectangle(0, 0, rectSelected.Width, rectSelected.Height), rectSelected, GraphicsUnit.Pixel);
-		    }
-		    this.DialogResult = DialogResult.OK;
-	    }
-    }
-
-    protected override void OnPaint(PaintEventArgs e)
-    {
-	    Graphics g = e.Graphics;
-	    g.DrawImage(screen, 0, 0);
-	    g.DrawImage(coverLayer, 0, 0);
-	    PaintRectangle();
-    }
-
-    protected override void OnPaintBackground(PaintEventArgs e)
-    {
-    }
-
-    protected override void OnKeyDown(KeyEventArgs e)
-    {
-	    if (e.KeyCode == Keys.Escape)
-	    {
-	    	this.DialogResult = DialogResult.Cancel;
-	    }
-    }
-
-    private void PaintRectangle()
-    {
-	    using (Graphics g = Graphics.FromImage(coverLayer))
-	    {
-		    g.Clear(coverColor);
-		    
-		    GraphicsPath path = new GraphicsPath();
-		    path.AddRectangle(this.Bounds);
-		    path.AddRectangle(rectSelected);
-		    g.FillPath(rectBrush, path);
-		    
-		    g.DrawRectangle(Pens.Blue, rectSelected);
-	    }
-    }
-
-    public Bitmap ResultBitmap
-    {
-    	get { return resultBmp; }
-    }
-}
 
 //------------------------------------------------------------  # 60個
 
@@ -4294,17 +4192,7 @@ vcs不可畫點，用畫橢圓取代
 
 //------------------------------------------------------------  # 60個
 
-vcs_test_all_04_Dialog
-
-openFileDialog1.Filter = "XML設定檔|*.xml";
-openFileDialog1.Filter = "*.jpg,*.jpeg,*.bmp,*.gif,*.ico,*.png,*.wmf|*.jpg;*.jpeg;*.bmp;*.gif;*.ico;*.png;*.wmf";
-
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "jpg (*.jpg)|*.jpg|bmp (*.bmp)|*.bmp|png (*.png)|*.png";
-
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "jpg (*.jpg)|*.jpg|bmp (*.bmp)|*.bmp|png (*.png)|*.png";
-
+cccc
         //----選到textbox時，選取全部文字
         private void TextBox_Enter(object sender, EventArgs e)
         {
@@ -5373,7 +5261,9 @@ ex:
 		:
 取得單項長度 trans[5].Length
 
+6060
 
+cccc
 表單對其某控件之邊緣
 this.ClientSize = new Size(lblEvent.Bounds.Right, lblEvent.Bounds.Bottom);
 
@@ -6438,6 +6328,35 @@ ControlBox = false;
 ----------------Dialog語法 ST----------------
 
 vcs_test_all_04_Dialog
+
+            //saveFileDialog.Filter = "PDF文件（*.PDF）|*.PDF";
+
+vcs_test_all_04_Dialog
+
+openFileDialog1.Filter = "XML設定檔|*.xml";
+openFileDialog1.Filter = "*.jpg,*.jpeg,*.bmp,*.gif,*.ico,*.png,*.wmf|*.jpg;*.jpeg;*.bmp;*.gif;*.ico;*.png;*.wmf";
+
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "jpg (*.jpg)|*.jpg|bmp (*.bmp)|*.bmp|png (*.png)|*.png";
+
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "jpg (*.jpg)|*.jpg|bmp (*.bmp)|*.bmp|png (*.png)|*.png";
+
+//------------------------------------------------------------  # 60個
+
+vcs_test_all_04_Dialog
+
+            // 設定FolderBrowserDialog的初值
+            folderBrowserDialog1.ShowNewFolderButton = false;
+            folderBrowserDialog1.RootFolder = "xxxx";  // 設定FBD預設路徑
+            folderBrowserDialog1.Description = "----資料夾瀏覽對話方塊----" + "\n請選擇所要開啟的檔案所在的資料夾";
+
+
+vcs_test_all_04_Dialog
+                saveFileDialog1.CreatePrompt = true;	//如果指定不存在的文件，提示允許創建該文件
+                saveFileDialog1.OverwritePrompt = true;//如果用戶指定的文件名已存在，顯示警告
+
+//------------------------------------------------------------  # 60個
 
 filter all
 
@@ -7863,7 +7782,8 @@ string thumb = fpath + fn.Replace(CodecExtension, ".jpg");
 [格式2]：public void FillPie(Brush brush,int x,int y,int width,int height,int startAngle,int sweepAngle);
 
 4．畫扇形圖
-使用Graphics對象的DrawPie方法可以繪制扇形圖，所謂扇形圖其實就是把一段圓弧的兩個端點與圓心相連。DrawPie方法的格式與DrawArc方法基本一致。
+使用Graphics對象的DrawPie方法可以繪制扇形圖，所謂扇形圖其實就是把一段圓弧的兩個端點與圓心相連。
+DrawPie方法的格式與DrawArc方法基本一致。
 
 6．畫Bezier曲線
 [格式1]：public void DrawBezier(Pen pen,Point pt1,Point pt2,Point pt3,Point pt4);
@@ -7881,4 +7801,24 @@ gr.DrawString(txt, this.Font, text_brush, node.Location.X - txt_size.Width / 2, 
 
 this.Bounds = new Rectangle(0, 0, width, height);
 this.Bounds = Screen.PrimaryScreen.Bounds;
+
+
+
+fullscreenfullscreen
+
+
+    public partial class FullScreenForm : Form
+    {
+	    
+	    public FullScreenForm(Bitmap screen)
+	    {
+		    InitializeComponent();
+		    
+    		}
+
+
+}
+
+//------------------------------------------------------------  # 60個
+
 

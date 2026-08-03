@@ -80,9 +80,6 @@ namespace vcs_ReadWrite_BMP_PNG
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //讀檔案的一部分 bmp
-
-            //讀檔案的一部分 bmp
             richTextBox1.Text += "讀檔案的一部分\n";
 
             string filename = @"D:\_git\vcs\_1.data\______test_files1\test_ReadAllBytes.bmp";
@@ -139,7 +136,6 @@ namespace vcs_ReadWrite_BMP_PNG
                 }
             }
             richTextBox1.Text += bytes + "\n";
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -442,17 +438,13 @@ namespace vcs_ReadWrite_BMP_PNG
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Graphics g;
-            Pen p;
-            SolidBrush sb;
-            Bitmap bitmap1;
-            string FileName = "";
             Color foreground_color = Color.Red;
             Color background_color = Color.White;
-
-            p = new Pen(foreground_color, 3);
-            sb = new SolidBrush(foreground_color);
-
+            Graphics g;
+            Pen p = new Pen(foreground_color, 3);
+            SolidBrush sb = new SolidBrush(foreground_color);
+            Bitmap bitmap1;
+            string FileName = "";
 
             openFileDialog1.Filter = "圖片(*.bmp,*.jpg,*.png)|*.bmp;*.jpg;*.png";
             //openFileDialog1.Filter = "BMP|*.bmp|JPG|*.jpg|PNG|*.png|GIF|*.gif";
@@ -499,7 +491,9 @@ namespace vcs_ReadWrite_BMP_PNG
             {
                 ss = (xx / 48) * 8;
                 if (ss == 256)
+                {
                     ss = 255;
+                }
                 g.DrawString(ss.ToString(), f, sb, new PointF(xx, 20));
             }
 
@@ -528,6 +522,8 @@ namespace vcs_ReadWrite_BMP_PNG
                 richTextBox1.Text += "無圖可存\n";
             }
         }
+
+        //6060
 
         private void button5_Click(object sender, EventArgs e)
         {
@@ -674,7 +670,6 @@ namespace vcs_ReadWrite_BMP_PNG
 
         private void button7_Click(object sender, EventArgs e)
         {
-            //???????
             string filename = @"D:\_git\vcs\_1.data\______test_files1\test_ReadAllBytes.bmp";
 
             byte[] bmp_data = new byte[256];
@@ -684,7 +679,9 @@ namespace vcs_ReadWrite_BMP_PNG
             richTextBox1.Text += "\nlength = " + fs.Length.ToString() + "\n";
 
             if (len > 256)
+            {
                 len = 256;
+            }
 
             fs.Read(bmp_data, 0, len);
 
@@ -790,7 +787,9 @@ namespace vcs_ReadWrite_BMP_PNG
                     richTextBox1.Text += "\n";
                 }
                 else
+                {
                     richTextBox1.Text += " ";
+                }
             }
 
             richTextBox1.Text += "\n";
@@ -845,14 +844,12 @@ namespace vcs_ReadWrite_BMP_PNG
             richTextBox1.Text += "filter_method : " + filter_method.ToString() + "\n";
             richTextBox1.Text += "interlace_method : " + interlace_method.ToString() + "\n";
 
-
             //顯示圖片
             fs = File.OpenRead(filename); //OpenRead[二進位讀檔]
             System.Drawing.Image result = System.Drawing.Image.FromStream(fs);
             fs.Close();
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.Image = result;
-
 
             //讀前面256拜
             fs = File.OpenRead(filename); //OpenRead[二進位讀檔]
@@ -933,13 +930,8 @@ namespace vcs_ReadWrite_BMP_PNG
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
 
 
