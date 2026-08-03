@@ -38,6 +38,11 @@ namespace vcs_Paint6
             InitializeComponent();
         }
 
+        private void Frm_Main_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void 打开ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             openFileDialog1.Filter = "Image Files(*.bmp;*.wmf;*.ico;*.cur;*.jgp)|*.bmp;*.wmf;*.ico;*.cur;*.jpg";

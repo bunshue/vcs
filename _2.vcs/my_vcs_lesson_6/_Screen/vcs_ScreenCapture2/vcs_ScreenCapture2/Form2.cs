@@ -65,8 +65,8 @@ namespace vcs_ScreenCapture2
 
         private void Form2_MouseMove(object sender, MouseEventArgs e)
         {
-            if (CatchStart)
-            {//如果捕捉開始
+            if (CatchStart)  // 如果捕捉開始
+            {
                 Bitmap destBmp = (Bitmap)originBmp.Clone();//新建一個圖片對象，並讓它與原始圖片相同
                 Point newPoint = new Point(DownPoint.X, DownPoint.Y);//獲取鼠標的坐標
                 Graphics g = Graphics.FromImage(destBmp);//在剛才新建的圖片上新建一個畫板
@@ -113,15 +113,15 @@ namespace vcs_ScreenCapture2
             {
                 if (CatchRect.Contains(new Point(e.X, e.Y)))
                 {
-                    Bitmap CatchedBmp = new Bitmap(CatchRect.Width, CatchRect.Height);//新建一個於矩形等大的空白圖片
-                    Graphics g = Graphics.FromImage(CatchedBmp);
+                    Bitmap bmp = new Bitmap(CatchRect.Width, CatchRect.Height);//新建一個於矩形等大的空白圖片
+                    Graphics g = Graphics.FromImage(bmp);
                     g.DrawImage(originBmp, new Rectangle(0, 0, CatchRect.Width, CatchRect.Height), CatchRect, GraphicsUnit.Pixel);
                     //把orginBmp中的指定部分按照指定大小畫在畫板上
-                    Clipboard.SetImage(CatchedBmp);//將圖片保存到剪貼板
+                    Clipboard.SetImage(bmp);//將圖片保存到剪貼板
                     g.Dispose();
                     CatchFinished = false;
                     this.BackgroundImage = originBmp;
-                    CatchedBmp.Dispose();
+                    bmp.Dispose();
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }

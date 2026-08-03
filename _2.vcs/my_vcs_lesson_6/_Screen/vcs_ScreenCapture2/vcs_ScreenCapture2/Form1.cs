@@ -26,13 +26,14 @@ namespace vcs_ScreenCapture2
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();//隱藏當前窗體
-            Thread.Sleep(50);//讓線程睡眠一段時間，窗體消失需要一點時間
+
+            Thread.Sleep(200);//讓線程睡眠一段時間，窗體消失需要一點時間
 
             Form2 f2 = new Form2();
-            Bitmap CatchBmp = new Bitmap(Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height);//新建一個和屏幕大小相同的圖片
-            Graphics g = Graphics.FromImage(CatchBmp);
+            Bitmap bmp = new Bitmap(Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height);//新建一個和屏幕大小相同的圖片
+            Graphics g = Graphics.FromImage(bmp);
             g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height));//保存全屏圖片
-            f2.BackgroundImage = CatchBmp;//將Catch窗體的背景設為全屏時的圖片
+            f2.BackgroundImage = bmp;//將Catch窗體的背景設為全屏時的圖片
             if (f2.ShowDialog() == DialogResult.OK)
             {
                 //如果Catch窗體結束,就將剪貼板中的圖片放到信息發送框中

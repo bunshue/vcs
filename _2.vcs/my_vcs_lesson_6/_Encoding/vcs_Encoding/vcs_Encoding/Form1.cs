@@ -727,6 +727,24 @@ namespace vcs_Encoding
 
         private void button12_Click(object sender, EventArgs e)
         {
+            //絞怀隙陬奀ㄛ壽敕耀宒勤趕敦极
+
+            string old_text = "絞怀隙陬奀ㄛ壽敕耀宒勤趕敦极";
+
+            richTextBox1.Text += "測試編碼轉換\n";
+
+            richTextBox1.Text += "看到一個亂碼字串 : " + old_text + "\n";
+
+            //原本是 簡中編碼 => 正中解碼 導致的錯誤 故需要反向操作
+
+            richTextBox1.Text += "1. 亂碼字串先用BIG5編碼取得正確編碼\n";
+            byte[] byteArray = Encoding.GetEncoding("BIG5").GetBytes(old_text);  //指名使用簡體中文(GB2312)編碼, 把字串轉成拜列  // 使用gb2312將字串轉拜列
+            richTextBox1.Text += "2. 正確編碼再用正確編碼(GB2312)解碼\n";
+            string new_text = Encoding.GetEncoding("GB2312").GetString(byteArray);  // 使用gb2312將拜列轉字串
+
+            richTextBox1.Text += "得到一個正確字串 : " + new_text + "\n";
+
+            richTextBox1.Text += new_text + "\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -968,4 +986,7 @@ String source1 = Encoding.GetEncoding("utf-8").GetString(response1, 0, response1
 
 */
 
+
+//絞怀隙陬奀ㄛ壽敕耀宒勤趕敦极
+//当输入回车时，关闭模式对话窗体
 

@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Threading;
+
 namespace vcs_ScreenCapture3
 {
     public partial class Form1 : Form
@@ -23,17 +25,23 @@ namespace vcs_ScreenCapture3
 
         private void button1_Click(object sender, EventArgs e)
         {
+            this.Hide();//隱藏當前窗體
+
+            Thread.Sleep(200);//讓線程睡眠一段時間，窗體消失需要一點時間
+
             int width = Screen.PrimaryScreen.Bounds.Width;
             int height = Screen.PrimaryScreen.Bounds.Height;
 
             Bitmap bmp = new Bitmap(width, height);
-            using (Graphics g = Graphics.FromImage(bmp))
-            {
-                g.CopyFromScreen(0, 0, 0, 0, new Size(width, height));
-            }
+            Graphics g = Graphics.FromImage(bmp);
+            g.CopyFromScreen(0, 0, 0, 0, new Size(width, height));
 
             FullScreenForm f2 = new FullScreenForm(bmp);
-            f2.Show();
+            if (f2.ShowDialog() == DialogResult.OK)
+            {
+                this.Show();//重新顯示窗體
+                pictureBox1.Image = bmp;
+            }
         }
     }
 }

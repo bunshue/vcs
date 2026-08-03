@@ -43,13 +43,38 @@ namespace vcs_FormSendData
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        void show_item_location()
+        {
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+            //button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+
+            richTextBox1.Size = new Size(500, 690);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(960, 750);
+            this.Text = "vcs_test_all_00_Usually";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -116,8 +141,6 @@ namespace vcs_FormSendData
             {
                 richTextBox1.Text += "按下了" + f2.DialogResult.ToString() + "\n";
             }
-
-
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -144,7 +167,6 @@ namespace vcs_FormSendData
 
             // 以Form類別的Show方法顯示視窗表單, 不用等到新表單結束, 可重複開啟新表單
             form_new.Show();
-
         }
 
         private Form3 frm3 = null;
@@ -207,7 +229,6 @@ namespace vcs_FormSendData
                 frm.ClientSize = bm.Size;
                 frm.ShowDialog();
             }
-
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -266,4 +287,11 @@ namespace vcs_FormSendData
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
 

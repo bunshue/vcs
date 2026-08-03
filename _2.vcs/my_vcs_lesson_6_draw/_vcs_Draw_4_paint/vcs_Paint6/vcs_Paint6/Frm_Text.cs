@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,7 +18,7 @@ namespace vcs_Paint6
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //µ±ÊäÈë»Ø³µÊ±£¬¹Ø±ÕÄ£Ê½¶Ô»°´°Ìå
+            //å½“è¾“å…¥å›è½¦æ—¶ï¼Œå…³é—­æ¨¡å¼å¯¹è¯çª—ä½“
             if (e.KeyChar == (char)13)
             {
                 this.DialogResult = DialogResult.OK;

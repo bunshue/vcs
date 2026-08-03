@@ -59,6 +59,7 @@ namespace vcs_ScreenCapture3
             else if (e.Button == MouseButtons.Right)
             {
                 this.DialogResult = DialogResult.OK;
+                this.Close();
             }
         }
 

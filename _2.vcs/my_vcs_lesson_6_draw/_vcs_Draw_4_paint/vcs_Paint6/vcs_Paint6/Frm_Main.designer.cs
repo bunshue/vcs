@@ -199,6 +199,7 @@
             this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "简单画图程序";
+            this.Load += new System.EventHandler(this.Frm_Main_Load);
             this.SizeChanged += new System.EventHandler(this.Frm_Main_SizeChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Frm_Main_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Frm_Main_MouseDown);
