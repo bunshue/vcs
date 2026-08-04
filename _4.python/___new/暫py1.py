@@ -1,9 +1,7 @@
+
+
 //------------------------------------------------------------  # 60個
 
-import hashlib
-password = "mypassword"
-hash_value = hashlib.md5(password.encode()).hexdigest()
-print(hash_value)  # e99a18c428cb38d5f260853678922e03
 
 //------------------------------------------------------------  # 60個
 

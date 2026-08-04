@@ -574,14 +574,13 @@ plt.title("Scores by group and gender")
 plt.xticks(ind, ("G1", "G2", "G3", "G4", "G5"))
 plt.legend()
 
-
 # 第六張圖
 plt.subplot(236)
-
 
 show()
 
 print("------------------------------------------------------------")  # 60個
+
 plt.figure(
     num="bar 集合 7 堆疊圖 疊加長條圖",
     figsize=(12, 8),
@@ -929,38 +928,6 @@ sys.exit()
 
 print("新進")
 
-
-"""
------
-from collections import Counter
-
-cyl = [6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 8, 8, 8, 8, 4, 4, 4, 8, 6, 8, 4]
-
-labels, values = zip(*Counter(cyl).items())
-indexes = np.arange(len(values))
-
-plt.bar(indexes, values, width = 0.5)
-plt.xticks(indexes, labels)
-
-# 預設字體大小
-plt.rc("font", size=15)
-# 軸標題字體大小
-plt.rc("axes", titlesize=30)
-# 軸標籤字體大小
-plt.rc("axes", labelsize=20)
-# X軸刻度字體大小
-plt.rc("xtick", labelsize=20)
-# Y軸刻度字體大小
-plt.rc("ytick", labelsize=20)
-
-
-#plt.bar(listx2, listy2, color="red", label="女性")
-
-plt.xlim(0, 20)
-plt.ylim(0, 100)
-"""
-
-
 cc = np.arange(0.6, 5)
 print(cc)
 
@@ -995,3 +962,24 @@ plt.bar(x, values, width)  # 繪製長條圖
 plt.xticks(x, names)  # x 軸刻度
 # y設定範圍刻距
 plt.yticks(np.arange(0, 50, 5))  # y 軸刻度
+
+
+
+
+
+
+#plt.bar(listx2, listy2, color="red", label="女性")
+#plt.xlim(0, 20)
+#plt.ylim(0, 100)
+
+
+# 預設字體大小
+plt.rc("font", size=15)
+# 軸標題字體大小
+plt.rc("axes", titlesize=30)
+# 軸標籤字體大小
+plt.rc("axes", labelsize=20)
+# X軸刻度字體大小
+plt.rc("xtick", labelsize=20)
+# Y軸刻度字體大小
+plt.rc("ytick", labelsize=20)

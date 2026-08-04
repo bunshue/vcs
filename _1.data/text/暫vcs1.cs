@@ -1,14 +1,14 @@
-﻿            Color slateBlue = Color.FromName("SlateBlue");
+﻿
+
+
+//------------------------------------------------------------  # 60個
+
+            Color slateBlue = Color.FromName("SlateBlue");
             byte g = slateBlue.G;
             byte b = slateBlue.B;
             byte r = slateBlue.R;
             byte a = slateBlue.A;
             string text = String.Format("用OnPaint寫字範例\nSlate Blue has these ARGB values:\n A:{0}, " + "R:{1}, G: {2}, B {3}", new object[] { a, r, g, b });
-
-
-//------------------------------------------------------------  # 60個
-
-
 
 //------------------------------------------------------------  # 60個
 
@@ -36,14 +36,12 @@ else if (File.Exists(this.fileName))
 throw new Exception("行數不能小於0");
 
 
-
 //點二維陣列
 //Point[][] colonPoints = new Point[2][];
 //Point[][] colonPoints = new Point[2][];
 
 
-
-
+//------------------------------------------------------------  # 60個
 
 我的電腦已經裝了藍芽接收器，我要如何得知目前有多少藍芽裝置呢?
 請用 Visual C# 程式來查詢目前能找到的藍芽裝置
@@ -7387,7 +7385,6 @@ string filename = @"D:\_git\vcs\_1.data\______test_files1\__text\war_and_peace.t
 pictureBox圖像直接存檔
 
 pictureBox1.Image.Save(@"D:\bbbbb.jpg");
-pictureBox1.Image.Save(filename);
 pictureBox1.Image.Save(filename);
 
 //------------------------------------------------------------  # 60個

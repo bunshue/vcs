@@ -277,12 +277,14 @@ namespace vcs_ReadWrite_XML1A
                 //插入某節點前邊
                 //xeRoot.InsertBefore(newBook, xeRoot.FirstChild);
 
-                //保存結果
+                //存檔
                 xdDocument.Save(filename0_add);
-                richTextBox1.Text += "寫入XML文件 : " + filename0_add + "\n";
+                richTextBox1.Text += "已存檔 : " + filename0_add + "\n";
             }
             else
+            {
                 richTextBox1.Text += "XML文件 : " + filename0 + " 不存在\n";
+            }
         }
 
         private void button02_Click(object sender, EventArgs e)
@@ -303,13 +305,16 @@ namespace vcs_ReadWrite_XML1A
                     XmlNode xnBook = xeRoot.LastChild;
                     //刪除最後一個結點
                     xeRoot.RemoveChild(xnBook);
-                    //保存結果
+
+                    //存檔
                     xdDocument.Save(filename0_delete);
-                    richTextBox1.Text += "寫入XML文件 : " + filename0_delete + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename0_delete + "\n";
                 }
             }
             else
+            {
                 richTextBox1.Text += "XML文件 : " + filename0 + " 不存在\n";
+            }
         }
 
         private void button03_Click(object sender, EventArgs e)
@@ -368,10 +373,9 @@ namespace vcs_ReadWrite_XML1A
             xmlnode_root.AppendChild(xmlnode_settinginfo);//將xmlnode_settinginfo節點加入xmlnode_root節點下
             document.AppendChild(xmlnode_root); //將xmlnode_root節點加入document中
 
-            //保存結果
+            //存檔
             document.Save(filename1b);
-            richTextBox1.Text += "寫入XML文件 : " + filename1b + "\n";
-
+            richTextBox1.Text += "已存檔 : " + filename1b + "\n";
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -402,8 +406,9 @@ namespace vcs_ReadWrite_XML1A
                 richTextBox1.Text += "\n\n仙人的設計之路2 OK\n\n";
             }
             else
+            {
                 richTextBox1.Text += "XML文件 : " + filename1c + " 不存在\n";
-
+            }
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -626,9 +631,6 @@ namespace vcs_ReadWrite_XML1A
             xml_text_writer.Formatting = Formatting.Indented;
             xml_document.WriteTo(xml_text_writer);
 
-            // Display the result.
-            //txtResult.Text = string_writer.ToString();
-
             richTextBox1.Text += string_writer.ToString();
         }
 
@@ -636,11 +638,9 @@ namespace vcs_ReadWrite_XML1A
         private void button40_Click(object sender, EventArgs e)
         {
             //使用LINQ讀取XML
-            //使用LINQ讀取XML
+
             string sURL = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\weather_current.xml";
-
             UseLINQ(sURL);
-
         }
 
         private void button41_Click(object sender, EventArgs e)
@@ -650,7 +650,6 @@ namespace vcs_ReadWrite_XML1A
             string sURL = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\weather_current.xml";
             UseXmlReader(sURL);
         }
-
 
         //一、使用LINQ讀取
 
@@ -761,10 +760,9 @@ namespace vcs_ReadWrite_XML1A
             }
             xmlDocument.AppendChild(xmlElement); //For xmlDocument add child node
 
-            string filename = Application.StartupPath + "\\xml_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xml";
-
-            xmlDocument.Save(filename); //save the xmlDocument
-
+            //存檔
+            string filename = "tmp_xml_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xml";
+            xmlDocument.Save(filename);
             richTextBox1.Text += "已存檔 : " + filename + "\n";
         }
 
@@ -792,8 +790,8 @@ namespace vcs_ReadWrite_XML1A
         private void button60_Click(object sender, EventArgs e)
         {
             //加載doc
-            //加載office文件並編碼序列花為一個XmlDocument變量
-            //加載office文件並編碼序列花為一個XmlDocument變量
+            //加載office文件並編碼序列化為一個XmlDocument變量
+
             string filename1 = @"D:\_git\vcs\_1.data\______test_files1\__RW\_word\Step.doc";
             FileStream inFile = new FileStream(filename1, FileMode.Open, FileAccess.Read);
             byte[] binaryData = new byte[inFile.Length];
@@ -807,18 +805,16 @@ namespace vcs_ReadWrite_XML1A
 
             richTextBox1.Text += "doc轉XmlDocument變量 成功\n";
 
-
-            richTextBox1.Text += "另存成xml檔\n";
-            string filename2 = Application.StartupPath + "\\xml_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xml";
-
+            //存檔
+            string filename2 = "tmp_xml_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xml";
             mXmlDoc.Save(filename2);//用私有對象mXmlDoc保存文件,mXmlDoc在前面聲明過
-            richTextBox1.Text += "保存成功\n";
+            richTextBox1.Text += "已存檔 : " + filename2 + "\n";
         }
 
         private void button61_Click(object sender, EventArgs e)
         {
-            //加載xml
             //加載xml文件到私有對象dox
+
             string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\vcs_ReadWrite_XML1.xml";
             XmlDocument doc = new XmlDocument();
             doc.Load(filename);
@@ -832,8 +828,8 @@ namespace vcs_ReadWrite_XML1A
             byte[] bytes = Convert.FromBase64String(pic);//聲明一個byte[]用來存放Base64解碼轉換過來的數據流
 
             richTextBox1.Text += "另存成doc檔\n";
-            string filename2 = Application.StartupPath + "\\doc_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".doc";
 
+            string filename2 = "tmp_doc_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".doc";
             //創建文件流並保存
             FileStream outfile = new FileStream(filename2, FileMode.CreateNew);
             outfile.Write(bytes, 0, (int)bytes.Length);
@@ -889,14 +885,7 @@ namespace vcs_ReadWrite_XML1A
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
-
 

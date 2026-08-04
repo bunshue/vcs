@@ -274,6 +274,12 @@ namespace vcs_System1
             richTextBox1.Text += "aaa : " + Environment.SpecialFolder.MyComputer + "\n";
 
             //桌面路徑
+            var desktop1 = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            richTextBox1.Text += "桌面路徑 : " + desktop1 + "\n";
+
+            richTextBox1.Text += "你的計算機名稱 : " + Environment.MachineName.ToString() + "\n";
+
+            //桌面路徑
             string directory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
 
             richTextBox1.Text += "系統特殊資料夾的路徑：" + Environment.GetFolderPath(Environment.SpecialFolder.System) + "\n";
@@ -681,7 +687,7 @@ namespace vcs_System1
             }
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -975,7 +981,8 @@ namespace vcs_System1
             richTextBox1.Text += "Version number: " + myFileVersionInfo.FileVersion + "\n";
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
+
         private void button13_Click(object sender, EventArgs e)
         {
             //使用Class取得系統資訊
@@ -1053,7 +1060,7 @@ namespace vcs_System1
             richTextBox1.Text += (StInfo.wHour + 8).ToString() + "點" + StInfo.wMinute.ToString() + "分" + StInfo.wSecond.ToString() + "秒" + "\n";
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button14_Click(object sender, EventArgs e)
         {
@@ -1321,7 +1328,7 @@ namespace vcs_System1
             richTextBox1.Text += "str = " + str + "\n";
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button30_Click(object sender, EventArgs e)
         {
@@ -1334,7 +1341,7 @@ namespace vcs_System1
             }
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         //光碟機開關 ST
         [DllImport("winmm.dll", EntryPoint = "mciSendString")]
@@ -1375,7 +1382,7 @@ namespace vcs_System1
         }
         */
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button32_Click(object sender, EventArgs e)
         {
@@ -1403,7 +1410,7 @@ namespace vcs_System1
             return sqlFlag;
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button33_Click(object sender, EventArgs e)
         {
@@ -1433,7 +1440,7 @@ namespace vcs_System1
             }
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button34_Click(object sender, EventArgs e)
         {
@@ -1448,7 +1455,7 @@ namespace vcs_System1
             }
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button35_Click(object sender, EventArgs e)
         {
@@ -1461,7 +1468,7 @@ namespace vcs_System1
             }
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button36_Click(object sender, EventArgs e)
         {
@@ -1994,11 +2001,4 @@ namespace vcs_System1
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*
-
-var desktop1 = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-richTextBox1.Text += "你的計算機名稱 : " + Environment.MachineName.ToString() + "\n";
-
-*/
 

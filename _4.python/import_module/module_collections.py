@@ -58,6 +58,20 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+from collections import Counter
+
+cyl = [6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 8, 8, 8, 8, 4, 4, 4, 8, 6, 8, 4]
+
+cc = Counter(cyl).items()
+print(cc)
+
+labels, values = zip(*Counter(cyl).items())
+
+print(values)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 # 排序字典
 
 d = collections.OrderedDict()
@@ -162,6 +176,106 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+from collections import deque
+
+graph = {}  # 建立空字典
+graph["Tom"] = ["Ivan", "Ira", "Kevin"]  # 建立字典graph, key='Tom'的值
+people = deque()  # 建立queue
+people += graph["Tom"]  # 將graph字典Tom鍵的值加入people
+print("列出people資料類型 : ", type(people))
+print("列出搜尋名單       : ", people)
+for name in range(len(people)):
+    print(people.popleft())
+
+print("------------------------------------------------------------")  # 60個
+
+from collections import deque
+
+graph = {}  # 建立空字典
+graph["Tom"] = ["Ivan", "Ira", "Kevin"]  # 建立字典graph, key='Tom'的值
+people = deque()  # 建立queue
+people += graph["Tom"]  # 將graph字典Tom鍵的值加入people
+print("列出people資料類型 : ", type(people))
+print("列出搜尋名單       : ", people)
+for name in range(len(people)):
+    print(people.pop())
+
+print("------------------------------------------------------------")  # 60個
+
+from collections import deque
+
+people = deque()  # 建立queue
+people.append("Ivan")  # 右邊加入
+people.append("Ira")  # 右邊加入
+print("列出名單 : ", people)
+people.appendleft("Unistar")  # 右邊加入
+print("列出名單 : ", people)
+people.appendleft("Ice Rain")  # 右邊加入
+print("列出名單 : ", people)
+
+print("------------------------------------------------------------")  # 60個
+
+from collections import deque
+
+
+def banana_dealer(name):
+    # 回應是不是賣香蕉的經銷商
+    if name == "Banana":
+        return True
+
+
+def search(name):
+    # 搜尋賣香蕉的朋友
+    global not_dealer  # 儲存已搜尋的名單
+    dealer = deque()
+    dealer += graph[name]  # 搜尋串列先儲存Tom的朋友
+    while dealer:
+        person = dealer.popleft()  # 從左邊取資料
+        if banana_dealer(person):  # 如果是True, 表示找到了
+            print(person + " 是香蕉經銷商 ")
+            return True  # search()執行結束
+        else:
+            not_dealer.append(person)  # 將搜尋過的人儲存至串列
+            dealer += graph[person]  # 將不是經銷商的朋友加入搜尋串列
+    print("沒有找到經銷商")
+    return False
+
+
+not_dealer = []
+graph = {}  # 建立空字典
+graph["Tom"] = ["Ivan", "Ira", "Kevin"]  # 建立字典graph, key='Tom'的值
+graph["Ivan"] = ["Peter"]  # 建立字典graph, key='Ivan'的值
+graph["Ira"] = ["Banana"]  # 建立字典graph, key='Ira'的值
+graph["Kevin"] = ["Mary"]  # 建立字典graph, key='Mary'的值
+graph["Peter"] = []  # 沒有其他朋友用空集合
+graph["Banana"] = []  # 沒有其他朋友用空集合
+graph["Mary"] = []  # 沒有其他朋友用空集合
+
+search("Tom")
+print("列出已搜尋名單 : ", not_dealer)
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("統計一串英文字串個字母出現的頻率")
+
+from collections import defaultdict
+
+text = "this is a lion-mouse"
+
+frequency = defaultdict(int)
+for symbol in text:
+    frequency[symbol] += 1
+print(frequency)
+
+heap = [[weight, [symbol, ""]] for symbol, weight in frequency.items()]
+print(heap)
+
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
@@ -174,3 +288,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+

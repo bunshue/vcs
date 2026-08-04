@@ -235,6 +235,7 @@ def monte_carlo_tree_search(board_state, side, number_of_samples):
     """
     move_wins = collections.defaultdict(int)
     move_samples = collections.defaultdict(int)
+    
     for _ in range(number_of_samples):
         result, move = monte_carlo_sample(board_state, side)
         # store the result and a count of the number of times we have tried this move

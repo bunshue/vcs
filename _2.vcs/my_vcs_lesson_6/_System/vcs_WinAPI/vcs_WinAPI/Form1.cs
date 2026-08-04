@@ -235,7 +235,7 @@ namespace vcs_WinAPI
 
         //------------------------------------------------------------  # 60個
 
-        //設定音量1, 2  ST
+        //設定音量 ST
 
         //winmm控制方式，涉及Xp系統波形聲音的左右聲道，高位為左聲道，低位為右聲道：
         //winmm
@@ -254,27 +254,6 @@ namespace vcs_WinAPI
             int retVal = WaveOutSetVolume(IntPtr.Zero, vAll);
         }
 
-        //user32控制方式：
-        //user32
-
-        [DllImport("user32.dll")]
-        public static extern IntPtr SendMessageW(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
-
-        public void SetVol2()
-        {
-            p = Process.GetCurrentProcess();
-            for (int i = 0; i < 5; i++)
-            {
-                SendMessageW(p.Handle, WM_APPCOMMAND, p.Handle, (IntPtr)APPCOMMAND_VOLUME_UP);
-            }
-        }
-
-        private Process p;
-        private const int APPCOMMAND_VOLUME_MUTE = 0x80000;
-        private const int APPCOMMAND_VOLUME_UP = 0x0a0000;
-        private const int APPCOMMAND_VOLUME_DOWN = 0x090000;
-        private const int WM_APPCOMMAND = 0x319;
-
         double a = 0;
 
         private void button4_Click(object sender, EventArgs e)
@@ -285,13 +264,13 @@ namespace vcs_WinAPI
 
             a += 10;
         }
+        //設定音量 SP
+
+        //------------------------------------------------------------  # 60個
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //設定音量2 user32
-            SetVol2();
         }
-        //設定音量1, 2  SP
 
         //------------------------------------------------------------  # 60個
 
@@ -347,7 +326,7 @@ namespace vcs_WinAPI
 
         private void button8_Click(object sender, EventArgs e)
         {
-            int drive_id = 1;   //A: 0, B: 1, C: 2, D: 3, E: 4.....
+            //int drive_id = 1;   //A: 0, B: 1, C: 2, D: 3, E: 4.....
 
             //格式化磁盤
             try
@@ -710,7 +689,6 @@ namespace vcs_WinAPI
 
         //------------------------------------------------------------  # 60個
 
-        /*
         // 使用Windows API控制電腦靜音與音量
         // 宣告常式 
         private const int APPCOMMAND_VOLUME_MUTE = 0x80000;
@@ -718,26 +696,47 @@ namespace vcs_WinAPI
         private const int APPCOMMAND_VOLUME_DOWN = 0x090000;
         private const int WM_APPCOMMAND = 0x319;
 
+        private Process p;
+
         [DllImport("user32.dll")]
         public static extern IntPtr SendMessageW(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
-        */
+
+        public void SetVol2()
+        {
+            p = Process.GetCurrentProcess();
+            for (int i = 0; i < 5; i++)
+            {
+                SendMessageW(p.Handle, WM_APPCOMMAND, p.Handle, (IntPtr)APPCOMMAND_VOLUME_UP);
+            }
+        }
 
         private void button20_Click(object sender, EventArgs e)
         {
+            //電腦聲音控制
+
+            //設定音量2 user32
+            SetVol2();
+
+            /*
             // 聲音變大 
             SendMessageW(this.Handle, WM_APPCOMMAND, this.Handle, (IntPtr)APPCOMMAND_VOLUME_UP);
+
+            // 聲音變小 
+            SendMessageW(this.Handle, WM_APPCOMMAND, this.Handle, (IntPtr)APPCOMMAND_VOLUME_DOWN);
+
+            // 靜音 
+            // SendMessageW(this.Handle, WM_APPCOMMAND, this.Handle, (IntPtr)APPCOMMAND_VOLUME_MUTE);
+            */
+
+
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
-            // 聲音變小 
-            SendMessageW(this.Handle, WM_APPCOMMAND, this.Handle, (IntPtr)APPCOMMAND_VOLUME_DOWN);
         }
 
         private void button22_Click(object sender, EventArgs e)
         {
-            // 靜音 
-            SendMessageW(this.Handle, WM_APPCOMMAND, this.Handle, (IntPtr)APPCOMMAND_VOLUME_MUTE);
         }
 
         //------------------------------------------------------------  # 60個
@@ -776,7 +775,6 @@ namespace vcs_WinAPI
         {
 
         }
-
     }
 
     /// <summary>

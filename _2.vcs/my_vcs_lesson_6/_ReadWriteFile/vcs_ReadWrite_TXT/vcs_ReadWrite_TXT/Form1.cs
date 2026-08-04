@@ -668,11 +668,10 @@ namespace vcs_ReadWrite_TXT
             }
             sr.Close();
 
+            //6060
 
-            //StreamReader
             sr = new StreamReader(filename, Encoding.Default);
             List<String> lines = new List<string>();
-            //string line;
             while ((line = sr.ReadLine()) != null)
             {
                 lines.Add(line);
@@ -1697,26 +1696,6 @@ namespace vcs_ReadWrite_TXT
 
         private void button36_Click(object sender, EventArgs e)
         {
-            //程式碼加入行號
-            //設定檔案的路徑
-            string path = @"../../data/Program.cs";
-            string append = @"tmp_final.txt";
-            string str;
-            int index = 1;
-
-            StreamReader sr = File.OpenText(path);
-            StreamWriter sw = File.AppendText(append);
-
-            while ((str = sr.ReadLine()) != null)
-            {
-                richTextBox1.Text += str + "\n";
-                //sw.WriteLine($"{index:D5} {str}");
-                //sw.WriteLine($"{index++:D5} {str}");
-                //Console.WriteLine("{0:D5} {1}", index, str);
-                //sw.WriteLine("{0:D5} {1}", index++, str);
-            }
-            sr.Close();
-            sw.Close();
         }
 
         private void button37_Click(object sender, EventArgs e)
@@ -1785,29 +1764,22 @@ sr = new StreamReader(filename, Encoding.GetEncoding("gb2312"));
 sr = new StreamReader(filename, Encoding.GetEncoding("gb2312"), true);
 sr = new StreamReader(filename, Encoding.GetEncoding("shift_jis"));
 
-以下兩種寫法是一樣的喔，可以參考 CodePage : http://www.lingoes.net/en/translator/codepage.htm
+以下兩種寫法是一樣的, 參考 CodePage : http://www.lingoes.net/en/translator/codepage.htm
 Encoding.GetEncoding("big5")
 Encoding.GetEncoding(950)
 
 //------------------------------------------------------------  # 60個
 
-讀取文件到一個List
+StreamWriter sw = File.AppendText(filename1);
+sw.Close();
 
-用法
-// 讀取cs文件內容
-List<String> rcq = ReaderLine(e.FullName);
-
- // 遍歷cs文件代碼行
-foreach (String q in rcq)
+string line;
+StreamReader sr = File.OpenText(filename2);
+while ((line = sr.ReadLine()) != null)
 {
-    if (!StringHandle.isNote(q)) continue;// 判斷是否是注釋
-
-    string note = StringHandle.GetNoteValue(q);// 獲取注釋內容
-
-    if (string.IsNullOrWhiteSpace(note)) continue;
-    :
-    :
+    richTextBox1.Text += line + "\n";
 }
+sr.Close();
                 
 //------------------------------------------------------------  # 60個
 

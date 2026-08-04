@@ -51,9 +51,9 @@ namespace vcs_Draw_Function1
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
             groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            groupBox2.Location = new Point(x_st + dx * 1, y_st + dy * 1+40);
+            groupBox2.Location = new Point(x_st + dx * 1, y_st + dy * 1 + 40);
             groupBox3.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            label4.Location = new Point(x_st + dx * 4-30, y_st + dy * 0);
+            label4.Location = new Point(x_st + dx * 4 - 30, y_st + dy * 0);
 
             pictureBox1.Size = new Size(720, 480);
             pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 3);
@@ -866,7 +866,78 @@ namespace vcs_Draw_Function1
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //畫Sinc
 
+            int W = pictureBox1.ClientSize.Width;
+            int H = pictureBox1.ClientSize.Height;
+            Bitmap bitmap1 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.Pink);
+            pictureBox1.Image = bitmap1;
+
+            //畫Sinc
+
+            List<PointF> points1 = new List<PointF>();
+            List<PointF> points2 = new List<PointF>();
+
+            double xmin = -5;
+            double xmax = 5;
+            double ymin = 2;
+            double ymax = 2;
+
+            float ratio_x = 60f;
+            float ratio_y = 100f;
+            float offset_x = 5.1f;
+            float offset_y = 1.0f;
+
+            int dy = 200;  // sinc 圖下移的距離
+
+            float xx;
+            float yy1;
+            float yy2;
+            for (float x = (float)xmin; x <= xmax; x += 0.1f)
+            {
+                richTextBox1.Text += x.ToString() + "\n";
+                xx = (x + offset_x) * ratio_x;
+                if (x == 0f)
+                {
+                    richTextBox1.Text += "X";
+
+                    yy1 = (float)(1.0f - Math.Sin(Math.PI * x) + 0) * ratio_y;
+                    yy2 = (1 + offset_y) + ratio_y + 200f;
+                }
+                else
+                {
+                    yy1 = (float)(1.0f - Math.Sin(Math.PI * x) + 0) * ratio_y;
+                    yy2 = (1.0f - ((float)(Math.Sin(Math.PI * x) / (Math.PI * x)))) * ratio_y + dy;
+                }
+
+                points1.Add(new PointF(xx, yy1));
+                points2.Add(new PointF(xx, yy2));
+            }
+
+            Pen thin_pen = new Pen(Color.Purple, 0);
+            thin_pen.Color = Color.Red;
+            g.DrawLines(thin_pen, points1.ToArray());
+
+            thin_pen.Color = Color.Green;
+            g.DrawLines(thin_pen, points2.ToArray());
+
+            for (float x = (float)xmin; x <= xmax; x += 1.0f)
+            {
+                xx = (x + offset_x) * ratio_x;
+                yy1 = 100;
+                if (x == 0)
+                {
+                    yy2 = 0 + dy;
+                }
+                else
+                {
+                    yy2 = 100 + dy;
+                }
+                g.FillEllipse(Brushes.Green, xx - 5, yy1 - 5, 10, 10);
+                g.FillEllipse(Brushes.Green, xx - 5, yy2 - 5, 10, 10);
+            }
         }
 
         //------------------------------------------------------------  # 60個

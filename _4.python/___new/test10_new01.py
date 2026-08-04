@@ -10019,23 +10019,6 @@ print(USERS)
 for _ in USERS:
     print(_)
 
-print("------------------------------------------------------------")  # 60個
-
-print("統計一串英文字串個字母出現的頻率")
-
-from collections import defaultdict
-
-text = "this is a lion-mouse"
-
-frequency = defaultdict(int)
-for symbol in text:
-    frequency[symbol] += 1
-print(frequency)
-
-heap = [[weight, [symbol, ""]] for symbol, weight in frequency.items()]
-print(heap)
-
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
