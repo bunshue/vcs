@@ -708,20 +708,39 @@ namespace vcs_WinAPI
 
         }
 
+        //------------------------------------------------------------  # 60個
+
+        /*
+        // 使用Windows API控制電腦靜音與音量
+        // 宣告常式 
+        private const int APPCOMMAND_VOLUME_MUTE = 0x80000;
+        private const int APPCOMMAND_VOLUME_UP = 0x0a0000;
+        private const int APPCOMMAND_VOLUME_DOWN = 0x090000;
+        private const int WM_APPCOMMAND = 0x319;
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr SendMessageW(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
+        */
+
         private void button20_Click(object sender, EventArgs e)
         {
-
+            // 聲音變大 
+            SendMessageW(this.Handle, WM_APPCOMMAND, this.Handle, (IntPtr)APPCOMMAND_VOLUME_UP);
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
-
+            // 聲音變小 
+            SendMessageW(this.Handle, WM_APPCOMMAND, this.Handle, (IntPtr)APPCOMMAND_VOLUME_DOWN);
         }
 
         private void button22_Click(object sender, EventArgs e)
         {
-
+            // 靜音 
+            SendMessageW(this.Handle, WM_APPCOMMAND, this.Handle, (IntPtr)APPCOMMAND_VOLUME_MUTE);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button23_Click(object sender, EventArgs e)
         {
@@ -831,12 +850,6 @@ namespace vcs_WinAPI
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-

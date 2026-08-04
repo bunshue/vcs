@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using Microsoft.VisualBasic.PowerPacks;//匯入VB向量繪圖功能     需要加入參考dll與using此行
+using Microsoft.VisualBasic.PowerPacks;  // 匯入VB向量繪圖功能     需要加入參考dll與using此行
+// for ShapeContainer OvalShape
 
 namespace vcs_Chess
 {

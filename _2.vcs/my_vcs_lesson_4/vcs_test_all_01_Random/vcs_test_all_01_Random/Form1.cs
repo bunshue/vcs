@@ -230,38 +230,38 @@ namespace vcs_test_all_01_Random
         //------------------------------------------------------------  # 60個
 
         /*
-ASP.Net實現中文漢字驗證碼
+        ASP.Net實現中文漢字驗證碼
 
-1、漢字編碼原理
-  到底怎麼辦到隨機生成漢字的呢？漢字從哪裡來的呢？是不是有個後台數據表，其中存放了所需要的所有漢字，使用程序隨機取出幾個漢字組合就行了呢？使用後台數據庫先將所有漢字存起來使用時隨機取出，這也是一種辦法，但是中文漢字有這麼多，怎麼來制作呢？其實可以不使用任何後台數據庫，使用程序就能做到這一切。要知道如何生成漢字，就得先了解中文漢字的編碼原理。
-  1980年，為了使每一個漢字有一個全國統一的代碼，我國頒布了第一個漢字編碼的國家標准： GB2312-80《信息交換用漢字編碼字符集》基本集，簡稱GB2312，這個字符集是我國中文信息處理技術的發展基礎，也是國內所有漢字系統的統一標准。到了後來又公布了國家標准GB18030-2000《信息交換用漢字編碼字符集基本集的擴充》，簡稱GB18030，編程時如果涉及到編碼和本地化的朋友應該對GB18030很熟悉。這是是我國繼GB2312-1980和GB13000-1993之後最重要的漢字編碼標准，同時也是未來我國計算機系統必須遵循的基礎性標准之一。
-  目前在中文Windows操作系統中，.Net編程中默認的的代碼頁就是GB18030簡體中文。但是事實上如果生成中文漢字驗證碼只須要使用GB2312字符集就已經足夠了。字符集中除了我們平時大家都認識的漢字外，也包含了很多我們不認識平時也很少見到的漢字。如果生成中文漢字驗證碼中有很多我們不認識的漢字讓我們輸入，對於使用拼音輸入法的朋友來說可不是好事，五筆使用者還能勉強根據漢字的長相打出來，呵呵！所以對於GB2312字符集中的漢字我們也不是全都要用。
-  中文漢字字符可以使用區位碼來表示，見
+        1、漢字編碼原理
+        到底怎麼辦到隨機生成漢字的呢？漢字從哪裡來的呢？是不是有個後台數據表，其中存放了所需要的所有漢字，使用程序隨機取出幾個漢字組合就行了呢？使用後台數據庫先將所有漢字存起來使用時隨機取出，這也是一種辦法，但是中文漢字有這麼多，怎麼來制作呢？其實可以不使用任何後台數據庫，使用程序就能做到這一切。要知道如何生成漢字，就得先了解中文漢字的編碼原理。
+        1980年，為了使每一個漢字有一個全國統一的代碼，我國頒布了第一個漢字編碼的國家標准： GB2312-80《信息交換用漢字編碼字符集》基本集，簡稱GB2312，這個字符集是我國中文信息處理技術的發展基礎，也是國內所有漢字系統的統一標准。到了後來又公布了國家標准GB18030-2000《信息交換用漢字編碼字符集基本集的擴充》，簡稱GB18030，編程時如果涉及到編碼和本地化的朋友應該對GB18030很熟悉。這是是我國繼GB2312-1980和GB13000-1993之後最重要的漢字編碼標准，同時也是未來我國計算機系統必須遵循的基礎性標准之一。
+        目前在中文Windows操作系統中，.Net編程中默認的的代碼頁就是GB18030簡體中文。但是事實上如果生成中文漢字驗證碼只須要使用GB2312字符集就已經足夠了。字符集中除了我們平時大家都認識的漢字外，也包含了很多我們不認識平時也很少見到的漢字。如果生成中文漢字驗證碼中有很多我們不認識的漢字讓我們輸入，對於使用拼音輸入法的朋友來說可不是好事，五筆使用者還能勉強根據漢字的長相打出來，呵呵！所以對於GB2312字符集中的漢字我們也不是全都要用。
+        中文漢字字符可以使用區位碼來表示，見
   
-  漢字區位碼表 http://navicy2005.home4u.china.com/resource/gb2312tbl.htm
-  漢字區位碼代碼表 http://navicy2005.home4u.china.com/resource/gb2312tbm.htm
+        漢字區位碼表 http://navicy2005.home4u.china.com/resource/gb2312tbl.htm
+        漢字區位碼代碼表 http://navicy2005.home4u.china.com/resource/gb2312tbm.htm
   
-  其實這兩個表是同一回事，只不過一個使用十六進制分區表示，一個使用區位所在的數字位置表示。 例如“好”字的十六進制區位碼是ba c3，前兩位是區域，後兩位代表位置，ba處在第26區，“好”處在此區漢字的第35位也就是c3位置，所以數字代碼就是2635。這就是GB2312漢字區位原理。根據《漢字區位碼表 》我們可以發現第15區也就是AF區以前都沒有漢字，只有少量符號，漢字都從第16區B0開始，這就是為什麼GB2312字符集都是從16區開始的。
+        其實這兩個表是同一回事，只不過一個使用十六進制分區表示，一個使用區位所在的數字位置表示。 例如“好”字的十六進制區位碼是ba c3，前兩位是區域，後兩位代表位置，ba處在第26區，“好”處在此區漢字的第35位也就是c3位置，所以數字代碼就是2635。這就是GB2312漢字區位原理。根據《漢字區位碼表 》我們可以發現第15區也就是AF區以前都沒有漢字，只有少量符號，漢字都從第16區B0開始，這就是為什麼GB2312字符集都是從16區開始的。
   
-  2、.Net程序處理漢字編碼原理分析
-  在.Net中可以使用System.Text來處理所有語言的編碼。在System.Text命名空間中包含眾多編碼的類，可供進行操作及轉換。其中的Encoding類就是重點處理漢字編碼的類。通過在.Net文檔中查詢Encoding類的方法我們可以發現所有和文字編碼有關的都是字節數組，其中有兩個很好用的方法：
+        2、.Net程序處理漢字編碼原理分析
+        在.Net中可以使用System.Text來處理所有語言的編碼。在System.Text命名空間中包含眾多編碼的類，可供進行操作及轉換。其中的Encoding類就是重點處理漢字編碼的類。通過在.Net文檔中查詢Encoding類的方法我們可以發現所有和文字編碼有關的都是字節數組，其中有兩個很好用的方法：
     
-  Encoding.GetBytes ()方法將指定的 String 或字符數組的全部或部分內容編碼為字節數組
-  Encoding.GetString ()方法將指定字節數組解碼為字符串。
+        Encoding.GetBytes ()方法將指定的 String 或字符數組的全部或部分內容編碼為字節數組
+        Encoding.GetString ()方法將指定字節數組解碼為字符串。
     
-  沒錯我們可以通過這兩個方法將漢字字符編碼為字節數組，同樣知道了漢字GB2312的字節數組編碼也就可以將字節數組解碼為漢字字符。通過對“好”字進行編碼為字節數組後
+        沒錯我們可以通過這兩個方法將漢字字符編碼為字節數組，同樣知道了漢字GB2312的字節數組編碼也就可以將字節數組解碼為漢字字符。通過對“好”字進行編碼為字節數組後
     
-  Encoding gb=Encoding.GetEncoding("gb2312");
-  object[] bytes=gb.Encoding.GetBytes ("好")；
+        Encoding gb=Encoding.GetEncoding("gb2312");
+        object[] bytes=gb.Encoding.GetBytes ("好")；
     
-  發現得到了一個長度為2的字節數組bytes，使用
+        發現得到了一個長度為2的字節數組bytes，使用
     
-  string lowCode = System.Convert.ToString(bytes[0], 16); //取出元素1編碼內容（兩位16進制）
-  string hightCode = System.Convert.ToString(bytes[1], 16);//取出元素2編碼內容（兩位16進制）
+        string lowCode = System.Convert.ToString(bytes[0], 16); //取出元素1編碼內容（兩位16進制）
+        string hightCode = System.Convert.ToString(bytes[1], 16);//取出元素2編碼內容（兩位16進制）
    
-  之後發現字節數組bytes16進制變碼後內容竟然是{ba,c3}，剛好是“好”字的十六進制區位碼（見區位碼表）。
-  因此我們就可以隨機生成一個長度為2的十六進制字節數組，使用GetString ()方法對其進行解碼就可以得到漢字字符了。不過對於生成中文漢字驗證碼來說，因為第15區也就是AF區以前都沒有漢字，只有少量符號，漢字都從第16區B0開始，並且從區位D7開始以後的漢字都是和很難見到的繁雜漢字，所以這些都要排出掉。所以隨機生成的漢字十六進制區位碼第1位范圍在B、C、D之間，如果第1位是D的話，第2位區位碼就不能是7以後的十六進制數。在來看看區位碼表發現每區的第一個位置和最後一個位置都是空的，沒有漢字，因此隨機生成的區位碼第3位如果是A的話，第4位就不能是0；第3位如果是F的話，第4位就不能是F。
-  */
+        之後發現字節數組bytes16進制變碼後內容竟然是{ba,c3}，剛好是“好”字的十六進制區位碼（見區位碼表）。
+        因此我們就可以隨機生成一個長度為2的十六進制字節數組，使用GetString ()方法對其進行解碼就可以得到漢字字符了。不過對於生成中文漢字驗證碼來說，因為第15區也就是AF區以前都沒有漢字，只有少量符號，漢字都從第16區B0開始，並且從區位D7開始以後的漢字都是和很難見到的繁雜漢字，所以這些都要排出掉。所以隨機生成的漢字十六進制區位碼第1位范圍在B、C、D之間，如果第1位是D的話，第2位區位碼就不能是7以後的十六進制數。在來看看區位碼表發現每區的第一個位置和最後一個位置都是空的，沒有漢字，因此隨機生成的區位碼第3位如果是A的話，第4位就不能是0；第3位如果是F的話，第4位就不能是F。
+        */
         /* 
         在.Net中可以使用System.Text來處理所有語言的編碼。在System.Text命名空間中包含眾多編碼的類，可供進行操作及轉換。其中的Encoding類就是重點處理漢字編碼的類。通過在.Net文檔中查詢Encoding類的方法我們可以發現所有和文字編碼有關的都是字節數組，其中有兩個很好用的方法：  
         Encoding.GetBytes ()方法將指定的 String 或字符數組的全部或部分內容編碼為字節數組  
@@ -287,8 +287,8 @@ ASP.Net實現中文漢字驗證碼
         四個字節數組存儲在object數組中。   
         參數：strlength，代表需要產生的漢字個數   
         */
-        //區位碼第3位和區位碼第4位作為字節數組第二個元素 111 ddddd
 
+        //區位碼第3位和區位碼第4位作為字節數組第二個元素 111 ddddd
 
         //------------------------------------------------------------  # 60個
 
@@ -628,16 +628,16 @@ ASP.Net實現中文漢字驗證碼
             this.WindowState = FormWindowState.Normal;
             //來電震動視窗1
 
-            int rand = 50;
+            int range = 50;
             int recordx = this.Left;　//保存原來窗體的左上角的x坐標
             int recordy = this.Top;　//保存原來窗體的左上角的y坐標
 
-            Random random = new Random();
+            Random rand = new Random();
 
             for (int i = 0; i < 100; i++)
             {
-                int x = random.Next(rand);
-                int y = random.Next(rand);
+                int x = rand.Next(range);
+                int y = rand.Next(range);
                 if (x % 2 == 0)
                 {
                     this.Left = this.Left + x;
@@ -667,16 +667,16 @@ ASP.Net實現中文漢字驗證碼
         {
             this.WindowState = FormWindowState.Normal;
             //來電震動視窗2
-            int rand = 10;
+            int range = 10;
             int recordx = this.Left;
             int recordy = this.Top;
 
-            Random random = new Random();
+            Random rand = new Random();
 
             for (int i = 0; i < 50; i++)
             {
-                int x = random.Next(rand);
-                int y = random.Next(rand);
+                int x = rand.Next(range);
+                int y = rand.Next(range);
                 if (x % 2 == 0)
                 {
                     this.Left = this.Left + x;
@@ -746,7 +746,9 @@ ASP.Net實現中文漢字驗證碼
             {
                 Point new_p = new Point(now_p.X + rand.Next(-10, 10), now_p.Y + rand.Next(-10, 10)); //新的位置
                 this.Location = new_p;
-                System.Threading.Thread.Sleep(20);
+
+                Thread.Sleep(20);
+
                 this.Location = now_p; //還原位置
             }
             this.WindowState = FormWindowState.Maximized;
@@ -928,12 +930,12 @@ ASP.Net實現中文漢字驗證碼
             //Random初始化+種子
             Random rand1 = new Random((int)DateTime.Now.Ticks);  // 使用亂數種子
 
-            System.Threading.Thread.Sleep(300);
+            Thread.Sleep(300);
 
             //Random初始化+種子
             Random rand2 = new Random((int)DateTime.Now.Ticks);  // 使用亂數種子
 
-            System.Threading.Thread.Sleep(300);
+            Thread.Sleep(300);
 
             //Random初始化+種子
             Random rand3 = new Random((int)DateTime.Now.Ticks);  // 使用亂數種子
@@ -979,7 +981,7 @@ ASP.Net實現中文漢字驗證碼
             //{162,162,162},//灰，特殊
             };
 
-            int total_colors = colorVelue.GetUpperBound(0) + 1;
+            int total_colors = colorVelue.GetUpperBound(0) + 1;  // 取得指定維度的上限，第0項就是橫列數 ROW
             //richTextBox1.Text += "total_colors = " + total_colors.ToString() + "\n";
 
             Random rand = new Random();
@@ -1040,7 +1042,7 @@ ASP.Net實現中文漢字驗證碼
         }
 
         // 產生隨機二維陣列
-        private int[,] Values =
+        private int[,] random_array2D =
         {
             {1, 2, 3, 4, 5},
             {6, 7, 8, 9, 10},
@@ -1063,7 +1065,7 @@ ASP.Net實現中文漢字驗證碼
             //------------------------------------------------------------  # 60個
 
             // 產生隨機二維陣列
-            Values.Randomize2();
+            random_array2D.Randomize2();
             this.pictureBox1.Refresh();
         }
 
@@ -1091,10 +1093,10 @@ ASP.Net實現中文漢字驗證碼
         // Draw the values.
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            int num_rows = Values.GetUpperBound(0) + 1;
-            int num_cols = Values.GetUpperBound(1) + 1;
-            int col_wid = this.pictureBox1.ClientSize.Width / num_cols;
-            int row_hgt = this.pictureBox1.ClientSize.Height / num_rows;
+            int ROW = random_array2D.GetUpperBound(0) + 1;  // 取得指定維度的上限，第0項就是橫列數 ROW
+            int COL = random_array2D.GetUpperBound(1) + 1;  // 取得指定維度的上限，第1項就是直行數 COL
+            int col_wid = this.pictureBox1.ClientSize.Width / COL;
+            int row_hgt = this.pictureBox1.ClientSize.Height / ROW;
 
             e.Graphics.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
             Font f = new Font("Times New Roman", 20);
@@ -1102,13 +1104,13 @@ ASP.Net實現中文漢字驗證碼
             string_format.Alignment = StringAlignment.Center;
             string_format.LineAlignment = StringAlignment.Center;
             int y = 0;
-            for (int row = 0; row < num_rows; row++)
+            for (int row = 0; row < ROW; row++)
             {
                 int x = 0;
-                for (int col = 0; col < num_cols; col++)
+                for (int col = 0; col < COL; col++)
                 {
                     Rectangle rect = new Rectangle(x, y, col_wid, row_hgt);
-                    e.Graphics.DrawString(Values[row, col].ToString(), f, Brushes.Blue, rect, string_format);
+                    e.Graphics.DrawString(random_array2D[row, col].ToString(), f, Brushes.Blue, rect, string_format);
                     x += col_wid;
                 }
                 y += row_hgt;
@@ -1709,7 +1711,7 @@ ASP.Net實現中文漢字驗證碼
         //Random初始化+種子
         Random real_random = new Random(~unchecked((int)DateTime.Now.Ticks));  // 使用亂數種子
 
-        private string CreateAndCheckCode(Random random, int length)
+        private string CreateAndCheckCode(Random rand, int length)
         {
             //char[] Pattern = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
             char[] Pattern = new char[] { '1', '2', '3', 'A', 'B', 'C' };
@@ -1717,8 +1719,8 @@ ASP.Net實現中文漢字驗證碼
             int n = Pattern.Length;
             for (int i = 0; i < length; i++)
             {
-                int rand = random.Next(0, n);
-                result += Pattern[rand];
+                int r = rand.Next(0, n);
+                result += Pattern[r];
             }
             return result;
         }
@@ -1730,12 +1732,12 @@ ASP.Net實現中文漢字驗證碼
             //[C#] 產生一組亂數
             //最後產生的finalString就是我們要的亂數
 
-            Random random = new Random();
+            Random rand = new Random();
             string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             var stringChars = new char[length];
             for (int i = 0; i < stringChars.Length; i++)
             {
-                stringChars[i] = chars[random.Next(chars.Length)];
+                stringChars[i] = chars[rand.Next(chars.Length)];
             }
             string captcha_text = new String(stringChars);
 
@@ -2215,12 +2217,11 @@ ASP.Net實現中文漢字驗證碼
         }
 
         // Randomize a 2D array.
-        public static void Randomize<T>(this T[,] values)
+        public static void Randomize<T>(this T[,] random_array2D)
         {
-            // Get the dimensions.
-            int num_rows = values.GetUpperBound(0) + 1;
-            int num_cols = values.GetUpperBound(1) + 1;
-            int num_cells = num_rows * num_cols;
+            int ROW = random_array2D.GetUpperBound(0) + 1;  // 取得指定維度的上限，第0項就是橫列數 ROW
+            int COL = random_array2D.GetUpperBound(1) + 1;  // 取得指定維度的上限，第1項就是直行數 COL
+            int num_cells = ROW * COL;
 
             // Randomize the array.
             for (int i = 0; i < num_cells - 1; i++)
@@ -2229,15 +2230,15 @@ ASP.Net實現中文漢字驗證碼
                 int j = rand.Next(i, num_cells);
 
                 // Convert to row/column indexes.
-                int row_i = i / num_cols;
-                int col_i = i % num_cols;
-                int row_j = j / num_cols;
-                int col_j = j % num_cols;
+                int row_i = i / COL;
+                int col_i = i % COL;
+                int row_j = j / COL;
+                int col_j = j % COL;
 
                 // Swap cells i and j.
-                T temp = values[row_i, col_i];
-                values[row_i, col_i] = values[row_j, col_j];
-                values[row_j, col_j] = temp;
+                T temp = random_array2D[row_i, col_i];
+                random_array2D[row_i, col_i] = random_array2D[row_j, col_j];
+                random_array2D[row_j, col_j] = temp;
             }
         }
     }

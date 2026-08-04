@@ -8,12 +8,11 @@ namespace vcs_test_all_01_Random
     public static class RandomizeStuff
     {
         // Randomize a 2D array.
-        public static void Randomize2<T>(this T[,] values)
+        public static void Randomize2<T>(this T[,] random_array2D)
         {
-            // Get the dimensions.
-            int num_rows = values.GetUpperBound(0) + 1;
-            int num_cols = values.GetUpperBound(1) + 1;
-            int num_cells = num_rows * num_cols;
+            int ROW = random_array2D.GetUpperBound(0) + 1;  // 取得指定維度的上限，第0項就是橫列數 ROW
+            int COL = random_array2D.GetUpperBound(1) + 1;  // 取得指定維度的上限，第1項就是直行數 COL
+            int num_cells = ROW * COL;
 
             // Randomize the array.
             Random rand = new Random();
@@ -23,15 +22,15 @@ namespace vcs_test_all_01_Random
                 int j = rand.Next(i, num_cells);
 
                 // Convert to row/column indexes.
-                int row_i = i / num_cols;
-                int col_i = i % num_cols;
-                int row_j = j / num_cols;
-                int col_j = j % num_cols;
+                int row_i = i / COL;
+                int col_i = i % COL;
+                int row_j = j / COL;
+                int col_j = j % COL;
 
                 // Swap cells i and j.
-                T temp = values[row_i, col_i];
-                values[row_i, col_i] = values[row_j, col_j];
-                values[row_j, col_j] = temp;
+                T temp = random_array2D[row_i, col_i];
+                random_array2D[row_i, col_i] = random_array2D[row_j, col_j];
+                random_array2D[row_j, col_j] = temp;
             }
         }
     }

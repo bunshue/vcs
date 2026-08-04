@@ -7,21 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using Microsoft.VisualBasic;                  //引用Microsoft.VisualBasic命名空間
-using Microsoft.VisualBasic.Devices;   //引用Microsoft.VisualBasic.Devices命名空間
+using Microsoft.VisualBasic;  // 引用Microsoft.VisualBasic命名空間
+using Microsoft.VisualBasic.Devices;  // 引用Microsoft.VisualBasic.Devices命名空間
 
 namespace vcs_MatchGame2
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         //宣告n[0]~n[8]整數陣列，用來表示8個圖片方塊所表示的值
         //n[0]省略不用
-        int[] n = new int[9] ;
+        int[] n = new int[9];
         //宣告p[0]~p[8]圖片方塊控制項陣列，
         //p[0]省略不用，p[1]~p[8]用來代表pic1~pic8
         PictureBox[] p = new PictureBox[9];
@@ -39,20 +34,9 @@ namespace vcs_MatchGame2
         //建立Computer物件myComputer，用來播放指定的聲音檔
         Computer myComputer = new Computer();
 
-        // 亂數方法，用來將n陣列重新洗牌
-        void SetRnd()
+        public Form1()
         {
-            int[] ary = new int[] { 0, 1, 1, 2, 2, 3, 3, 4, 4 };
-            int max = n.GetUpperBound(0);
-            Random rndObj = new Random();
-            int rndNum;
-            for (int i = 1; i <= n.GetUpperBound(0); i++)
-            {
-                rndNum = rndObj.Next(1, max + 1);
-                n[i] = ary[rndNum];
-                ary[rndNum] = ary[max];
-                max--;
-            }
+            InitializeComponent();
         }
 
         //Form1表單載入時，即觸發Form1_Load事件處理函式
@@ -116,7 +100,7 @@ namespace vcs_MatchGame2
                     hitPic1.Enabled = false;
                     hitPic2.Enabled = false;
                     tot += 1;   //答對組數加1
-                    myComputer.Audio.Play("CHIMES.WAV", AudioPlayMode.Background);
+                    myComputer.Audio.Play("../../CHIMES.WAV", AudioPlayMode.Background);
                 }
                 //若t1不等於t2，表示所翻牌兩個圖片的Tag屬性不同，即兩者的圖示不相同
                 if (t1 != t2)
@@ -148,8 +132,24 @@ namespace vcs_MatchGame2
                         MessageBox.Show("過關了...你的記憶力還馬馬乎乎");
                     }
                     //播放股掌聲
-                    myComputer.Audio.Play("APPLAUSE.WAV", AudioPlayMode.Background);
+                    myComputer.Audio.Play("../../APPLAUSE.WAV", AudioPlayMode.Background);
                 }
+            }
+        }
+
+        // 亂數方法，用來將n陣列重新洗牌
+        void SetRnd()
+        {
+            int[] ary = new int[] { 0, 1, 1, 2, 2, 3, 3, 4, 4 };
+            int max = n.GetUpperBound(0);
+            Random rndObj = new Random();
+            int rndNum;
+            for (int i = 1; i <= n.GetUpperBound(0); i++)
+            {
+                rndNum = rndObj.Next(1, max + 1);
+                n[i] = ary[rndNum];
+                ary[rndNum] = ary[max];
+                max--;
             }
         }
 
@@ -244,8 +244,6 @@ namespace vcs_MatchGame2
                     p[i].Enabled = false;  //pic1~pic8圖片失效
                 }
             }
-        }  
+        }
     }
 }
-
-

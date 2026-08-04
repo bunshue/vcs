@@ -34,6 +34,8 @@
             this.btn1 = new System.Windows.Forms.Button();
             this.lblTime = new System.Windows.Forms.Label();
             this.lblShow = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.pic8 = new System.Windows.Forms.PictureBox();
             this.pic7 = new System.Windows.Forms.PictureBox();
             this.pic4 = new System.Windows.Forms.PictureBox();
@@ -42,8 +44,6 @@
             this.pic5 = new System.Windows.Forms.PictureBox();
             this.pic2 = new System.Windows.Forms.PictureBox();
             this.pic1 = new System.Windows.Forms.PictureBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.timer2 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pic8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic4)).BeginInit();
@@ -57,7 +57,7 @@
             // btn3
             // 
             this.btn3.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btn3.Location = new System.Drawing.Point(545, 93);
+            this.btn3.Location = new System.Drawing.Point(499, 86);
             this.btn3.Name = "btn3";
             this.btn3.Size = new System.Drawing.Size(62, 29);
             this.btn3.TabIndex = 20;
@@ -68,7 +68,7 @@
             // btn2
             // 
             this.btn2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btn2.Location = new System.Drawing.Point(545, 60);
+            this.btn2.Location = new System.Drawing.Point(499, 53);
             this.btn2.Name = "btn2";
             this.btn2.Size = new System.Drawing.Size(62, 26);
             this.btn2.TabIndex = 19;
@@ -79,7 +79,7 @@
             // btn1
             // 
             this.btn1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btn1.Location = new System.Drawing.Point(545, 25);
+            this.btn1.Location = new System.Drawing.Point(499, 18);
             this.btn1.Name = "btn1";
             this.btn1.Size = new System.Drawing.Size(62, 28);
             this.btn1.TabIndex = 18;
@@ -91,7 +91,7 @@
             // 
             this.lblTime.AutoSize = true;
             this.lblTime.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lblTime.Location = new System.Drawing.Point(375, 147);
+            this.lblTime.Location = new System.Drawing.Point(230, 18);
             this.lblTime.Name = "lblTime";
             this.lblTime.Size = new System.Drawing.Size(56, 16);
             this.lblTime.TabIndex = 17;
@@ -101,76 +101,11 @@
             // 
             this.lblShow.AutoSize = true;
             this.lblShow.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lblShow.Location = new System.Drawing.Point(216, 147);
+            this.lblShow.Location = new System.Drawing.Point(71, 18);
             this.lblShow.Name = "lblShow";
             this.lblShow.Size = new System.Drawing.Size(59, 16);
             this.lblShow.TabIndex = 16;
             this.lblShow.Text = "lblShow";
-            // 
-            // pic8
-            // 
-            this.pic8.Location = new System.Drawing.Point(495, 321);
-            this.pic8.Name = "pic8";
-            this.pic8.Size = new System.Drawing.Size(101, 102);
-            this.pic8.TabIndex = 15;
-            this.pic8.TabStop = false;
-            // 
-            // pic7
-            // 
-            this.pic7.Location = new System.Drawing.Point(386, 321);
-            this.pic7.Name = "pic7";
-            this.pic7.Size = new System.Drawing.Size(101, 102);
-            this.pic7.TabIndex = 14;
-            this.pic7.TabStop = false;
-            // 
-            // pic4
-            // 
-            this.pic4.Location = new System.Drawing.Point(495, 202);
-            this.pic4.Name = "pic4";
-            this.pic4.Size = new System.Drawing.Size(101, 102);
-            this.pic4.TabIndex = 9;
-            this.pic4.TabStop = false;
-            // 
-            // pic6
-            // 
-            this.pic6.Location = new System.Drawing.Point(277, 321);
-            this.pic6.Name = "pic6";
-            this.pic6.Size = new System.Drawing.Size(101, 102);
-            this.pic6.TabIndex = 8;
-            this.pic6.TabStop = false;
-            // 
-            // pic3
-            // 
-            this.pic3.Location = new System.Drawing.Point(386, 202);
-            this.pic3.Name = "pic3";
-            this.pic3.Size = new System.Drawing.Size(101, 102);
-            this.pic3.TabIndex = 13;
-            this.pic3.TabStop = false;
-            // 
-            // pic5
-            // 
-            this.pic5.Location = new System.Drawing.Point(168, 321);
-            this.pic5.Name = "pic5";
-            this.pic5.Size = new System.Drawing.Size(101, 102);
-            this.pic5.TabIndex = 12;
-            this.pic5.TabStop = false;
-            // 
-            // pic2
-            // 
-            this.pic2.Location = new System.Drawing.Point(277, 202);
-            this.pic2.Name = "pic2";
-            this.pic2.Size = new System.Drawing.Size(101, 102);
-            this.pic2.TabIndex = 11;
-            this.pic2.TabStop = false;
-            // 
-            // pic1
-            // 
-            this.pic1.Location = new System.Drawing.Point(168, 202);
-            this.pic1.Name = "pic1";
-            this.pic1.Size = new System.Drawing.Size(101, 102);
-            this.pic1.TabIndex = 10;
-            this.pic1.TabStop = false;
-            this.pic1.Tag = "";
             // 
             // timer1
             // 
@@ -180,11 +115,75 @@
             // 
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
+            // pic8
+            // 
+            this.pic8.Location = new System.Drawing.Point(350, 192);
+            this.pic8.Name = "pic8";
+            this.pic8.Size = new System.Drawing.Size(101, 102);
+            this.pic8.TabIndex = 15;
+            this.pic8.TabStop = false;
+            // 
+            // pic7
+            // 
+            this.pic7.Location = new System.Drawing.Point(241, 192);
+            this.pic7.Name = "pic7";
+            this.pic7.Size = new System.Drawing.Size(101, 102);
+            this.pic7.TabIndex = 14;
+            this.pic7.TabStop = false;
+            // 
+            // pic4
+            // 
+            this.pic4.Location = new System.Drawing.Point(350, 73);
+            this.pic4.Name = "pic4";
+            this.pic4.Size = new System.Drawing.Size(101, 102);
+            this.pic4.TabIndex = 9;
+            this.pic4.TabStop = false;
+            // 
+            // pic6
+            // 
+            this.pic6.Location = new System.Drawing.Point(132, 192);
+            this.pic6.Name = "pic6";
+            this.pic6.Size = new System.Drawing.Size(101, 102);
+            this.pic6.TabIndex = 8;
+            this.pic6.TabStop = false;
+            // 
+            // pic3
+            // 
+            this.pic3.Location = new System.Drawing.Point(241, 73);
+            this.pic3.Name = "pic3";
+            this.pic3.Size = new System.Drawing.Size(101, 102);
+            this.pic3.TabIndex = 13;
+            this.pic3.TabStop = false;
+            // 
+            // pic5
+            // 
+            this.pic5.Location = new System.Drawing.Point(23, 192);
+            this.pic5.Name = "pic5";
+            this.pic5.Size = new System.Drawing.Size(101, 102);
+            this.pic5.TabIndex = 12;
+            this.pic5.TabStop = false;
+            // 
+            // pic2
+            // 
+            this.pic2.Location = new System.Drawing.Point(132, 73);
+            this.pic2.Name = "pic2";
+            this.pic2.Size = new System.Drawing.Size(101, 102);
+            this.pic2.TabIndex = 11;
+            this.pic2.TabStop = false;
+            // 
+            // pic1
+            // 
+            this.pic1.Location = new System.Drawing.Point(23, 73);
+            this.pic1.Name = "pic1";
+            this.pic1.Size = new System.Drawing.Size(101, 102);
+            this.pic1.TabIndex = 10;
+            this.pic1.TabStop = false;
+            this.pic1.Tag = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::vcs_MatchGame2.Properties.Resources.bg;
             this.ClientSize = new System.Drawing.Size(632, 468);
             this.Controls.Add(this.btn3);
             this.Controls.Add(this.btn2);

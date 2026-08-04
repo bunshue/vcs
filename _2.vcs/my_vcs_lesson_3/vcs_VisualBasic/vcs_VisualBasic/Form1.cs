@@ -7,14 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;
+using System.Threading;
+using System.Runtime.InteropServices;  // for DllImport, StructLayout
+
 //for Interaction,          //參考/加入參考/.NET/Microsoft.VisualBasic
 using Microsoft.VisualBasic;  // for DateAndTime
 using Microsoft.VisualBasic.FileIO;
 using Microsoft.VisualBasic.Devices;  // for Computer
-
-using System.Runtime.InteropServices;  // for DllImport, StructLayout
-using System.Threading;
-using System.IO;
 
 namespace vcs_VisualBasic
 {
@@ -193,10 +193,45 @@ namespace vcs_VisualBasic
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
+        int index = 1;
         private void button4_Click(object sender, EventArgs e)
         {
+            Computer myComputer = new Computer();
 
+            //使用VB控件播放聲音
+            // 播放外部的聲音檔
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\_wav\" + index.ToString() + ".wav";
+            //richTextBox1.Text += "filename = " + filename + "\n";
+
+
+            //播放數字聲音檔
+
+            //myComputer.Audio.Play(filename);
+            //myComputer.Audio.Play(filename, AudioPlayMode.WaitToComplete);
+
+            index++;
+            if (index > 10)
+                index = 1;
+
+            //------------------------------------------------------------  # 60個
+
+            //Computer myComputer = new Computer();
+
+            // 播放資源內嵌的聲音檔
+            myComputer.Audio.Play(Properties.Resources.ding, AudioPlayMode.WaitToComplete);
+
+            //------------------------------------------------------------  # 60個
+
+            //Computer myComputer = new Computer();
+
+            // 播放在 Windows 音效配置中事件相關的音效
+            myComputer.Audio.PlaySystemSound(System.Media.SystemSounds.Asterisk);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button5_Click(object sender, EventArgs e)
         {
@@ -307,7 +342,6 @@ namespace vcs_VisualBasic
 //------------------------------  # 30個
 
 /*
-
 [C#]將指定的檔案刪除並送到資源回收桶
 不過要引入VB的組件，C#一樣能用
 加入參考Microsoft.VisualBasic.dll

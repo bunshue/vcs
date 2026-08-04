@@ -95,7 +95,7 @@ namespace vcs_Form1_NewForm
             button2.Text = "Cancel";
             button2.Location = new Point(10, 100);
 
-            form1.Text = "My Dialog Box";
+            form1.Text = "新建對話框";
             form1.HelpButton = true;
 
             // Define the border style of the form to a dialog box.

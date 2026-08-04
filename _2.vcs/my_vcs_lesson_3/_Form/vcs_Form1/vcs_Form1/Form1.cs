@@ -195,46 +195,83 @@ namespace vcs_Form1
 
         private void button0_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "表單基本操作1\n";
+
             richTextBox1.Text += "表單顯示在螢幕最右下方\n";
             const int margin = 10;
             int x = Screen.PrimaryScreen.WorkingArea.Right - this.Width - margin;
             int y = Screen.PrimaryScreen.WorkingArea.Bottom - this.Height - margin;
             this.Location = new Point(x, y);
-        }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
+            //3030
+
             richTextBox1.Text += "表單變大 50點\n";
             this.Height += 50;
             this.Width += 50;
-        }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "表單縮小 50點\n";
-            this.Height -= 50;
-            this.Width -= 50;
-        }
+            //3030
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "顯示表單\n";
-            this.Show();
-        }
+            richTextBox1.Text += "表單縮小 20點\n";
+            this.Height -= 20;
+            this.Width -= 20;
 
-        private void button4_Click(object sender, EventArgs e)
-        {
+            //3030
+
             richTextBox1.Text += "隱藏表單\n";
             this.Hide();
 
             //same
             //Hide();
+
+            //3030
+
+            richTextBox1.Text += "顯示表單\n";
+            this.Show();
+
+            //3030
+
+            richTextBox1.Text += "設定表單的螢幕位置\n";
+            this.Location = new Point(100, 500);
+
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "表單基本操作1\n";
+
+            richTextBox1.Text += "透明-\n";
+            this.Opacity += 0.1;
+
+            richTextBox1.Text += "透明+\n";
+            this.Opacity -= 0.1;
+
+            richTextBox1.Text += "表單變大\n";
+            this.Width += 10;
+            this.Height += 10;
+
+            richTextBox1.Text += "表單變小\n";
+            this.Width -= 10;
+            this.Height -= 10;
+
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "表單基本操作2\n";
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "設定表單的螢幕位置\n";
-            this.Location = new Point(100, 500);
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -340,27 +377,6 @@ namespace vcs_Form1
 
         private void button16_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "震動視窗\n";
-
-            nudgeWindow();
-        }
-
-        private void nudgeWindow()
-        {
-            // 記錄視窗舊位置
-            int oldLeft = Left;
-            int oldTop = Top;
-            // 變動位置
-            Random r = new Random();
-            for (int i = 0; i <= 500; i++)
-            {
-                int left = r.Next(Left - 20, Left + 20);
-                Left = left;
-                int top = r.Next(Top - 20, Top + 20);
-                Top = top;
-                Left = oldLeft;
-                Top = oldTop;
-            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -395,16 +411,10 @@ namespace vcs_Form1
 
         private void button20_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "表單變大\n";
-            this.Width += 10;
-            this.Height += 10;
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "表單變小\n";
-            this.Width -= 10;
-            this.Height -= 10;
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -436,14 +446,10 @@ namespace vcs_Form1
 
         private void button25_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "透明-\n";
-            this.Opacity += 0.1;
         }
 
         private void button26_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "透明+\n";
-            this.Opacity -= 0.1;
         }
 
         bool flag_full_screen = false;
