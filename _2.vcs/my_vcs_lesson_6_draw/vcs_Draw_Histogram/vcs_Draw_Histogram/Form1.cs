@@ -68,6 +68,8 @@ namespace vcs_Draw_Histogram
             DrawHistogram(pictureBox1, Brushes.Blue, p, numbers);
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button1_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "數字很大, 最大值 大於 pictureBox1的高度 H = " + pictureBox1.ClientSize.Height.ToString() + "\t需要縮小數字\n";
@@ -94,7 +96,6 @@ namespace vcs_Draw_Histogram
             DrawHistogram(pictureBox1, Brushes.Blue, p, numbers);
         }
 
-        // Display a histogram.
         private void DrawHistogram(PictureBox pic, Brush brush, Pen pen, int[] values)
         {
             //david 改畫長條圖 int array
@@ -185,7 +186,6 @@ namespace vcs_Draw_Histogram
                 }
             }
 
-            // Display the histogram.
             pic.Image = bitmap1;
         }
 
@@ -212,12 +212,11 @@ namespace vcs_Draw_Histogram
 
         private void button6_Click(object sender, EventArgs e)
         {
-            int i;
             Pen p = new Pen(Color.LightBlue, 0);
             int num_numbers = 10;
             float[] numbers = new float[num_numbers];
             Random rand = new Random();
-            for (i = 0; i < num_numbers; i++)
+            for (int i = 0; i < num_numbers; i++)
             {
                 //result4 += r.NextDouble().ToString() + " ";
                 numbers[i] = (float)rand.NextDouble() * 100;
@@ -226,7 +225,6 @@ namespace vcs_Draw_Histogram
             DrawHistogramF(pictureBox1, Brushes.Blue, p, numbers);
         }
 
-        // Display a histogram.
         private void DrawHistogramF(PictureBox pic, Brush brush, Pen pen, float[] values)
         {
             //david 改畫長條圖 float array
@@ -252,7 +250,6 @@ namespace vcs_Draw_Histogram
 
             int i;
 
-            // Make a Bitmap.
             Bitmap bitmap1 = new Bitmap(W, H);
             using (Graphics g = Graphics.FromImage(bitmap1))
             {
@@ -276,10 +273,10 @@ namespace vcs_Draw_Histogram
                 }
             }
 
-            // Display the histogram.
             pic.Image = bitmap1;
         }
 
+        //------------------------------------------------------------  # 60個
 
         //原本範例 ST
         void draw_histogram_old()
@@ -296,14 +293,14 @@ namespace vcs_Draw_Histogram
                 Random rand = new Random();
                 int[] rand_numbers = new int[num_numbers];
                 for (int i = 0; i < num_numbers; i++)
+                {
                     rand_numbers[i] = rand.Next(min, max);
+                }
 
-                // Display a histogram.
                 DrawHistogram_old(pictureBox_old, Brushes.Blue, p, rand_numbers);
             }
         }
 
-        // Display a histogram.
         private void DrawHistogram_old(PictureBox pic, Brush brush, Pen pen, int[] values)
         {
             // Count the values.
@@ -348,7 +345,6 @@ namespace vcs_Draw_Histogram
                 }
             }
 
-            // Display the histogram.
             pic.Image = bitmap1;
         }
         //原本範例 SP
@@ -358,12 +354,7 @@ namespace vcs_Draw_Histogram
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
 

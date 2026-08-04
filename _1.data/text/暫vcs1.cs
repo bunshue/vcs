@@ -1,4 +1,16 @@
-﻿
+﻿我在Visual C# 看到一個宣告
+public Point? GetIntersectionWith(Line secondLine);
+為什麼Point後面還多一個?呢?
+
+//------------------------------------------------------------  # 60個
+
+
+PointF? prevPoint = null;
+if (prevPoint != null)
+{
+	g.DrawLine(new Pen(Color.Magenta, 3), prevPoint.Value, point);
+}
+prevPoint = point;
 
 
 //------------------------------------------------------------  # 60個
@@ -612,12 +624,6 @@ richTextBox1.AppendText("訊息內容\n");
 
 
 
-
-//------------------------------------------------------------  # 60個
-
-我在Visual C# 看到一個宣告
-public Point? GetIntersectionWith(Line secondLine);
-為什麼Point後面還多一個?呢?
 
 //------------------------------------------------------------  # 60個
 
@@ -2925,7 +2931,6 @@ panel1.BackColor = Color.FromA#41ccd4;
 
 Unicode中文字碼（CJK Unified Ideographs；中日韓統一表意文字）的範圍落在0x4E00至0x9FFF（UTF-32），但迄今（Unicode v11.0）最末的0x9FF0～0x9FFF這16個字仍是空白。
 
-
 #define abs(a, b)	(((a) > (b)) ? (a - b) : (b - a))
 
 printf("function: %s:%s(%d) debug message\r\n",__FILE__,__func__,__LINE__);
@@ -4396,8 +4401,8 @@ vcs如何做兩色或多色相加
 
 我使用Visual C#做一個遊戲的程式，我在一台電腦讓接上2個滑鼠讓兩個人來比賽，
 程式要如何分辨滑鼠按鍵是由哪個滑鼠發出的呢?
-
-
+	
+6060
 
 contextMenuStrip1/Items 展開集合/加入 MenuItem 或 Seperator
 MenuItem 加入 ToolStripMenuItem，修改Text，修改觸發事件
