@@ -13,7 +13,7 @@ namespace vcs_FormSendData3
 {
     public partial class Form1 : Form
     {
-        #region 子窗口刷新父窗口的值
+        //#region 子窗口刷新父窗口的值
 
         private string message = "";
 
@@ -29,7 +29,7 @@ namespace vcs_FormSendData3
                 this.richTextBox1.Text += message;
             }
         }
-        #endregion
+        //#endregion
 
         public Form1()
         {

@@ -52,7 +52,8 @@ namespace vcs_Form1_NewForm
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //建立新表單1
+            // 建立新表單1
+
             Form Form_new = new Form
             {
                 Text = "新表單",
@@ -81,9 +82,11 @@ namespace vcs_Form1_NewForm
             Form_new.Show();//顯示表單
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button1_Click(object sender, EventArgs e)
         {
-            //建立新表單2
+            // 建立新表單2
             Form form1 = new Form();
 
             //建立新控件
@@ -117,15 +120,43 @@ namespace vcs_Form1_NewForm
             form1.ShowDialog();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button2_Click(object sender, EventArgs e)
         {
+            // 建立新表單3, 繼承Form類別產生新的視窗表單
 
+            Form form_new = new Form();
+
+            form_new.Cursor = System.Windows.Forms.Cursors.Cross;
+            form_new.FormBorderStyle = FormBorderStyle.Sizable;
+            form_new.Height = 400;
+            form_new.HelpButton = true;
+            form_new.MaximizeBox = true;
+            form_new.MinimizeBox = true;
+            form_new.Name = "New Form";
+            form_new.ShowInTaskbar = true;
+            form_new.StartPosition = FormStartPosition.CenterParent;
+            form_new.Text = "New Form";
+            form_new.Width = 500;
+            form_new.WindowState = FormWindowState.Normal;
+            form_new.Enabled = true;
+
+            // 以Form類別的ShowDialog方法顯示視窗表單, 需要等到新表單結束, 不可重複開啟新表單
+            //form_new.ShowDialog();
+
+            // 以Form類別的Show方法顯示視窗表單, 不用等到新表單結束, 可重複開啟新表單
+            form_new.Show();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button3_Click(object sender, EventArgs e)
         {
 
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button4_Click(object sender, EventArgs e)
         {

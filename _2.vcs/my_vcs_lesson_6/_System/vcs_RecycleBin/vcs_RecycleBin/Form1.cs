@@ -10,8 +10,6 @@ using System.Windows.Forms;
 using System.IO;
 using System.Runtime.InteropServices;   //for DllImport, DllImportAttribute
 
-//參考/加入參考/.NET/Microsoft.VisualBasic
-
 //編輯 vcs_RecycleBin.csproj 把x86改成x64
 
 namespace vcs_RecycleBin
@@ -143,14 +141,6 @@ namespace vcs_RecycleBin
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
-
-

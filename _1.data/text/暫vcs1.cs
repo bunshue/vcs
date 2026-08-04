@@ -1,4 +1,25 @@
-﻿
+﻿            Color slateBlue = Color.FromName("SlateBlue");
+            byte g = slateBlue.G;
+            byte b = slateBlue.B;
+            byte r = slateBlue.R;
+            byte a = slateBlue.A;
+            string text = String.Format("用OnPaint寫字範例\nSlate Blue has these ARGB values:\n A:{0}, " + "R:{1}, G: {2}, B {3}", new object[] { a, r, g, b });
+
+
+//------------------------------------------------------------  # 60個
+
+
+
+//------------------------------------------------------------  # 60個
+
+            DialogResult bb = MessageBox.Show("是否要退出登錄？", "退出登錄", MessageBoxButtons.YesNo);
+            if (Convert.ToString(bb) == "Yes")
+            {
+                Application.Exit();
+            }
+
+//------------------------------------------------------------  # 60個
+
 //建議刪掉 fs1.Close()、fs2.Close()，因為 using 會自動釋放資源。
 
 //使用using陳述詞，確保資源的釋放
@@ -577,7 +598,7 @@ protected：同一類別、該類別的衍生類別
 protected internal：符合protected或internal，兩者其一即可
 public：不設限
 
-6060
+//------------------------------------------------------------  # 60個
 
 4. UI 更新方式
 你用 richTextBox1.Text += ... 來追加文字，這會造成效能問題，因為每次都會重新建立字串。
@@ -5261,7 +5282,7 @@ ex:
 		:
 取得單項長度 trans[5].Length
 
-6060
+//------------------------------------------------------------  # 60個
 
 cccc
 表單對其某控件之邊緣

@@ -40,7 +40,7 @@
             // 
             // txtLastName
             // 
-            this.txtLastName.Location = new System.Drawing.Point(88, 92);
+            this.txtLastName.Location = new System.Drawing.Point(88, 97);
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.ReadOnly = true;
             this.txtLastName.Size = new System.Drawing.Size(194, 22);
@@ -49,7 +49,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(22, 95);
+            this.label2.Location = new System.Drawing.Point(22, 100);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 12);
             this.label2.TabIndex = 9;
@@ -57,7 +57,7 @@
             // 
             // txtFirstName
             // 
-            this.txtFirstName.Location = new System.Drawing.Point(88, 68);
+            this.txtFirstName.Location = new System.Drawing.Point(88, 73);
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.ReadOnly = true;
             this.txtFirstName.Size = new System.Drawing.Size(194, 22);
@@ -66,7 +66,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(22, 71);
+            this.label1.Location = new System.Drawing.Point(22, 76);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 12);
             this.label1.TabIndex = 7;
@@ -74,9 +74,10 @@
             // 
             // btnSetName
             // 
-            this.btnSetName.Location = new System.Drawing.Point(115, 28);
+            this.btnSetName.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btnSetName.Location = new System.Drawing.Point(116, 20);
             this.btnSetName.Name = "btnSetName";
-            this.btnSetName.Size = new System.Drawing.Size(75, 21);
+            this.btnSetName.Size = new System.Drawing.Size(120, 40);
             this.btnSetName.TabIndex = 6;
             this.btnSetName.Text = "Set Name";
             this.btnSetName.UseVisualStyleBackColor = true;
@@ -84,17 +85,18 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(24, 239);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 219);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(458, 329);
+            this.richTextBox1.Size = new System.Drawing.Size(559, 349);
             this.richTextBox1.TabIndex = 11;
             this.richTextBox1.Text = "";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(115, 146);
+            this.button1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button1.Location = new System.Drawing.Point(88, 140);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 61);
+            this.button1.Size = new System.Drawing.Size(200, 60);
             this.button1.TabIndex = 12;
             this.button1.Text = "開啟新表單 並且從子表單取回回傳值";
             this.button1.UseVisualStyleBackColor = true;
@@ -102,9 +104,10 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(407, 68);
+            this.button2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button2.Location = new System.Drawing.Point(336, 68);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 61);
+            this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 13;
             this.button2.Text = "開啟新表單, 全螢幕, pictureBox放一圖";
             this.button2.UseVisualStyleBackColor = true;
@@ -114,7 +117,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(494, 580);
+            this.ClientSize = new System.Drawing.Size(583, 580);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.richTextBox1);

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 using System.IO;  // for Directory
 using System.Collections;  // for ArrayList
-using Microsoft.VisualBasic.FileIO;
+using Microsoft.VisualBasic.FileIO;  // for 刪除檔案(使用資源回收筒)
 
 namespace vcs_DiskDirectoryFile1
 {

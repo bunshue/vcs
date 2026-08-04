@@ -55,14 +55,15 @@ namespace vcs_FormSendData
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            //button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+
+            groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
 
             richTextBox1.Size = new Size(500, 690);
             richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(960, 750);
-            this.Text = "vcs_test_all_00_Usually";
+            this.Text = "vcs_FormSendData";
 
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;
@@ -143,31 +144,35 @@ namespace vcs_FormSendData
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button5_Click(object sender, EventArgs e)
         {
-            // 繼承Form類別產生新的視窗表單
-            Form form_new = new Form();
+            //開啟新表單, 並傳遞資料
+            string data = "This is a lion-mouse.";
 
-            form_new.Cursor = System.Windows.Forms.Cursors.Cross;
-            form_new.FormBorderStyle = FormBorderStyle.Sizable;
-            form_new.Height = 400;
-            form_new.HelpButton = true;
-            form_new.MaximizeBox = true;
-            form_new.MinimizeBox = true;
-            form_new.Name = "New Form";
-            form_new.ShowInTaskbar = true;
-            form_new.StartPosition = FormStartPosition.CenterParent;
-            form_new.Text = "New Form";
-            form_new.Width = 500;
-            form_new.WindowState = FormWindowState.Normal;
-            form_new.Enabled = true;
+            if (string.IsNullOrEmpty(data))
+            {
+                MessageBox.Show("資料不能空白，請重新輸入");
+                return;
+            }
 
-            // 以Form類別的ShowDialog方法顯示視窗表單, 需要等到新表單結束, 不可重複開啟新表單
-            //form_new.ShowDialog();
+            Form7 f7 = new Form7(data);
+            //f7.Show();
+            //this.Hide();//隱藏窗體
 
-            // 以Form類別的Show方法顯示視窗表單, 不用等到新表單結束, 可重複開啟新表單
-            form_new.Show();
+            //子表單關閉時 回傳給父表單訊息
+            if (f7.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox1.Text += "子表單回傳 OK\n";
+            }
+            else
+            {
+                richTextBox1.Text += "子表單回傳 Cancel\n";
+            }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private Form3 frm3 = null;
         private void button6_Click(object sender, EventArgs e)

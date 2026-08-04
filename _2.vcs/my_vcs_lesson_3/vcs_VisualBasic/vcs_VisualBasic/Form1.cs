@@ -361,5 +361,14 @@ richTextBox1.Text += "已將檔案移至資源回收筒\n";
 
 //------------------------------------------------------------  # 60個
 
+//建立Computer物件myComputer，用來播放指定的聲音檔
+Computer myComputer = new Computer();
+
+myComputer.Audio.Play("../../CHIMES.WAV", AudioPlayMode.Background);
+
+myComputer.Audio.Stop();  //停止播放聲音
+
 */
+
+
 

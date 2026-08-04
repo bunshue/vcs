@@ -7,9 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using Microsoft.VisualBasic;  // 引用Microsoft.VisualBasic命名空間
-using Microsoft.VisualBasic.Devices;  // 引用Microsoft.VisualBasic.Devices命名空間
-
 namespace vcs_MatchGame2
 {
     public partial class Form1 : Form
@@ -31,8 +28,6 @@ namespace vcs_MatchGame2
         int timer2Tot; //表示timer2計時器執行的次數
         int level;    //表示等級，2為高級,5為中級,10為初級
         int tot;         //答對的組數，若tot為4表示過關
-        //建立Computer物件myComputer，用來播放指定的聲音檔
-        Computer myComputer = new Computer();
 
         public Form1()
         {
@@ -100,7 +95,6 @@ namespace vcs_MatchGame2
                     hitPic1.Enabled = false;
                     hitPic2.Enabled = false;
                     tot += 1;   //答對組數加1
-                    myComputer.Audio.Play("../../CHIMES.WAV", AudioPlayMode.Background);
                 }
                 //若t1不等於t2，表示所翻牌兩個圖片的Tag屬性不同，即兩者的圖示不相同
                 if (t1 != t2)
@@ -131,8 +125,6 @@ namespace vcs_MatchGame2
                     {
                         MessageBox.Show("過關了...你的記憶力還馬馬乎乎");
                     }
-                    //播放股掌聲
-                    myComputer.Audio.Play("../../APPLAUSE.WAV", AudioPlayMode.Background);
                 }
             }
         }
@@ -156,7 +148,6 @@ namespace vcs_MatchGame2
         //進行遊戲的GameStart()事件處理函式
         private void GameStart()
         {
-            myComputer.Audio.Stop();  //停止播放聲音
             level = timer1Tot;
             btn1.Enabled = false;       //btn1鈕失效
             btn2.Enabled = false;        //btn2鈕失效

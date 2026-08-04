@@ -131,18 +131,14 @@ namespace vcs_Form1
             button37.Location = new Point(x_st + dx * 3, y_st + dy * 7);
             button38.Location = new Point(x_st + dx * 3, y_st + dy * 8);
             button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
-            button40.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            button41.Location = new Point(x_st + dx * 4, y_st + dy * 1);
-            button42.Location = new Point(x_st + dx * 4, y_st + dy * 2);
-            button43.Location = new Point(x_st + dx * 4, y_st + dy * 3);
 
-            label1.Location = new Point(x_st + dx * 0, y_st + dy * 12);
-            label5.Location = new Point(x_st + dx * 3, y_st + dy * 12);
-            richTextBox1.Size = new Size(300, 300);
+            label1.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+            label5.Location = new Point(x_st + dx * 4, y_st + dy * 3);
+            richTextBox1.Size = new Size(500, 410);
             richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 4);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            //this.Size = new Size(1273, 750);
+            this.Size = new Size(1383, 750);
             this.Text = "vcs_Form1";
 
             //最大化螢幕
@@ -203,19 +199,19 @@ namespace vcs_Form1
             int y = Screen.PrimaryScreen.WorkingArea.Bottom - this.Height - margin;
             this.Location = new Point(x, y);
 
-            //3030
+            //------------------------------  # 30個
 
             richTextBox1.Text += "表單變大 50點\n";
             this.Height += 50;
             this.Width += 50;
 
-            //3030
+            //------------------------------  # 30個
 
             richTextBox1.Text += "表單縮小 20點\n";
             this.Height -= 20;
             this.Width -= 20;
 
-            //3030
+            //------------------------------  # 30個
 
             richTextBox1.Text += "隱藏表單\n";
             this.Hide();
@@ -223,17 +219,15 @@ namespace vcs_Form1
             //same
             //Hide();
 
-            //3030
+            //------------------------------  # 30個
 
             richTextBox1.Text += "顯示表單\n";
             this.Show();
 
-            //3030
+            //------------------------------  # 30個
 
             richTextBox1.Text += "設定表單的螢幕位置\n";
             this.Location = new Point(100, 500);
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -254,50 +248,13 @@ namespace vcs_Form1
             this.Width -= 10;
             this.Height -= 10;
 
+            //------------------------------  # 30個
 
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "表單基本操作2\n";
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "顯示表單屬性\n";
-            richTextBox1.Text += "The Name is: " + this.Name + "\n";
-            richTextBox1.Text += "The ProductName is: " + this.ProductName + "\n";
-            richTextBox1.Text += "The ProductVersion is: " + this.ProductVersion + "\n";
-            richTextBox1.Text += "The CompanyName is: " + this.CompanyName + "\n";
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
             richTextBox1.Text += "改變表單背景顏色\n";
             this.BackColor = Color.Red;
-        }
 
-        private void button8_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "取得目前表單大小\n";
-            richTextBox1.Text += "Width : " + this.Width.ToString() + "\n";
-            richTextBox1.Text += "Height : " + this.Height.ToString() + "\n";
-        }
+            //------------------------------  # 30個
 
-        private void button9_Click(object sender, EventArgs e)
-        {
             richTextBox1.Text += "表單最大化\n";
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             //this.WindowState = FormWindowState.Maximized;
@@ -311,40 +268,132 @@ namespace vcs_Form1
             this.WindowState = FormWindowState.Maximized;
             this.TopMost = true;
             */
-        }
 
-        private void button10_Click(object sender, EventArgs e)
-        {
+            //------------------------------  # 30個
+
             richTextBox1.Text += "表單最小化\n";
             this.WindowState = FormWindowState.Minimized;   //設定表單最小化
 
             //same
             //WindowState = FormWindowState.Minimized;
+
+            //------------------------------  # 30個
+
+            richTextBox1.Text += "表單預設大小\n";
+            this.WindowState = FormWindowState.Normal;      //設定表單預設大小
+
+            //------------------------------  # 30個
+
+            richTextBox1.Text += "表單最上層顯示\n";
+            this.TopMost = true;    //設定表單最上層顯示
+
+            richTextBox1.Text += "取消表單最上層顯示\n";
+            this.TopMost = false;    //設定表單最上層顯示
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "表單基本操作2\n";
+
+            richTextBox1.Text += "表單背景色改變\n";
+            this.BackColor = Color.Pink;
+
+            //------------------------------  # 30個
+
+            richTextBox1.Text += "改變表單大小\n";
+            int W = this.Size.Width;
+            int H = this.Size.Height;
+
+            this.Size = new Size(W + 10, H + 10);
+
+            //------------------------------  # 30個
+
+            richTextBox1.Text += "改變表單位置\n";
+            int location_x = this.Location.X;
+            int location_y = this.Location.Y;
+            this.Location = new Point(location_x + 20, location_y + 20);
+
+            //------------------------------  # 30個
+
+            richTextBox1.Text += "沒有標題的Form\n";
+            this.Text = string.Empty;
+            this.ControlBox = false;
+
+            //------------------------------  # 30個
+
+            richTextBox1.Text += "移動表單位置\n";
+            this.Top += 10;
+            this.Left += 10;
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //表單參數
+
+            richTextBox1.Text += "顯示表單屬性\n";
+            richTextBox1.Text += "The Name is: " + this.Name + "\n";
+            richTextBox1.Text += "The ProductName is: " + this.ProductName + "\n";
+            richTextBox1.Text += "The ProductVersion is: " + this.ProductVersion + "\n";
+            richTextBox1.Text += "The CompanyName is: " + this.CompanyName + "\n";
+            richTextBox1.Text += "取得目前表單大小\n";
+            richTextBox1.Text += "Width : " + this.Width.ToString() + "\n";
+            richTextBox1.Text += "Height : " + this.Height.ToString() + "\n";
+
+            richTextBox1.Text += "游移表單\n";
+            richTextBox1.Text += "表單位置 " + this.Location.X.ToString() + ", " + this.Location.Y.ToString() + "\n";
+            richTextBox1.Text += "表單大小 " + this.Size.Width.ToString() + " X " + this.Size.Height.ToString() + "\n";
+            richTextBox1.Text += "表單大小 " + this.ClientSize.Width.ToString() + " X " + this.ClientSize.Height.ToString() + "\n";
+
+            //int screenWidth = Screen.PrimaryScreen.Bounds.Width;
+            //int screenHeight = Screen.PrimaryScreen.Bounds.Height;
+            richTextBox1.Text += "目前的螢幕解析度 :" + Screen.PrimaryScreen.Bounds.Width.ToString() + " * " + Screen.PrimaryScreen.Bounds.Height.ToString() + "\n";
+
+            //改變表單位置
+            //this.Location = new Point(1920 / 2, 0);
+
+            richTextBox1.Text += "FormSize ClientSize\n";
+            richTextBox1.Text += "Form Size : w = " + this.Width.ToString() + " h = " + this.Height.ToString() + "\n";
+            richTextBox1.Text += "Form ClientSize : w = " + this.ClientSize.Width.ToString() + " h = " + this.ClientSize.Height.ToString() + "\n";
+
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "表單預設大小\n";
-            this.WindowState = FormWindowState.Normal;      //設定表單預設大小
         }
 
-        bool flag_TopMost = false;
         private void button12_Click(object sender, EventArgs e)
         {
-            if (flag_TopMost == false)
-            {
-                flag_TopMost = true;
-                richTextBox1.Text += "表單最上層顯示\n";
-                button12.Text = "取消表單最上層顯示";
-                this.TopMost = true;    //設定表單最上層顯示
-            }
-            else
-            {
-                flag_TopMost = false;
-                richTextBox1.Text += "取消表單最上層顯示\n";
-                button12.Text = "表單最上層顯示";
-                this.TopMost = false;    //設定表單最上層顯示
-            }
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -383,24 +432,11 @@ namespace vcs_Form1
 
         private void button17_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "游移表單\n";
-            richTextBox1.Text += "表單位置 " + this.Location.X.ToString() + ", " + this.Location.Y.ToString() + "\n";
-            richTextBox1.Text += "表單大小 " + this.Size.Width.ToString() + " X " + this.Size.Height.ToString() + "\n";
-            richTextBox1.Text += "表單大小 " + this.ClientSize.Width.ToString() + " X " + this.ClientSize.Height.ToString() + "\n";
 
-            //int screenWidth = Screen.PrimaryScreen.Bounds.Width;
-            //int screenHeight = Screen.PrimaryScreen.Bounds.Height;
-            richTextBox1.Text += "目前的螢幕解析度 :" + Screen.PrimaryScreen.Bounds.Width.ToString() + " * " + Screen.PrimaryScreen.Bounds.Height.ToString() + "\n";
-
-            //改變表單位置
-            //this.Location = new Point(1920 / 2, 0);
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "移動表單位置\n";
-            this.Top += 10;
-            this.Left += 10;
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -438,10 +474,6 @@ namespace vcs_Form1
 
         private void button24_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "表單背景色改變\n";
-            this.BackColor = Color.Pink;
-            button24.BackColor = Color.Blue;
-            button22.BackColor = Color.Blue;
         }
 
         private void button25_Click(object sender, EventArgs e)
@@ -554,79 +586,56 @@ namespace vcs_Form1
 
         private void button35_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "FormSize ClientSize\n";
-            richTextBox1.Text += "Form Size : w = " + this.Width.ToString() + " h = " + this.Height.ToString() + "\n";
-            richTextBox1.Text += "Form ClientSize : w = " + this.ClientSize.Width.ToString() + " h = " + this.ClientSize.Height.ToString() + "\n";
         }
 
-        private void button36_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "改變表單大小\n";
-            int W = this.Size.Width;
-            int H = this.Size.Height;
-
-            this.Size = new Size(W + 10, H + 10);
-        }
-
-        private void button37_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "改變表單位置\n";
-            int location_x = this.Location.X;
-            int location_y = this.Location.Y;
-            this.Location = new Point(location_x + 20, location_y + 20);
-        }
-
-        private void button38_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "沒有標題的Form\n";
-            this.Text = string.Empty;
-            this.ControlBox = false;
-        }
+        //6060
 
         bool flag_ShowInTaskbar = true;
-        private void button39_Click(object sender, EventArgs e)
+        private void button36_Click(object sender, EventArgs e)
         {
+            //表單不顯示在 Windows 工作列中
             if (flag_ShowInTaskbar == true)
             {
                 flag_ShowInTaskbar = false;
                 this.ShowInTaskbar = false;     //false : 表單不顯示在 Windows 工作列中
                 richTextBox1.Text += "表單不顯示在 Windows 工作列中\n";
-                button39.Text = "表單顯示在 Windows 工作列中";
+                button36.Text = "表單顯示在 Windows 工作列中";
             }
             else
             {
                 flag_ShowInTaskbar = true;
                 this.ShowInTaskbar = true;     //true : 表單顯示在 Windows 工作列中
                 richTextBox1.Text += "表單顯示在 Windows 工作列中\n";
-                button39.Text = "表單不顯示在 Windows 工作列中";
+                button36.Text = "表單不顯示在 Windows 工作列中";
             }
         }
 
-        private void button40_Click(object sender, EventArgs e)
+        //6060
+
+        private void button37_Click(object sender, EventArgs e)
         {
             //背景變成透明 滑鼠可以穿透表單
             this.BackColor = Color.White;
             this.TransparencyKey = Color.White;
         }
 
-        private void button41_Click(object sender, EventArgs e)
+        //6060
+
+        private void button38_Click(object sender, EventArgs e)
         {
             //背景變成透明 滑鼠不可以穿透表單
             this.BackColor = Color.Red;
             this.TransparencyKey = Color.Red;
         }
 
-        private void button42_Click(object sender, EventArgs e)
+        //6060
+
+        private void button39_Click(object sender, EventArgs e)
         {
             //整個窗體都變成半透明
             this.Opacity = 0.5;
 
             //this.Opacity = 0; //使窗體不可見 
-        }
-
-        private void button43_Click(object sender, EventArgs e)
-        {
-
         }
 
         //------------------------------------------------------------  # 60個
@@ -694,15 +703,9 @@ namespace vcs_Form1
 
         private void ShowPropertiesOfSlateBlue(PaintEventArgs e)
         {
-            Color slateBlue = Color.FromName("SlateBlue");
-            byte g = slateBlue.G;
-            byte b = slateBlue.B;
-            byte r = slateBlue.R;
-            byte a = slateBlue.A;
-            string text = String.Format("用OnPaint寫字範例\nSlate Blue has these ARGB values:\n A:{0}, " + "R:{1}, G: {2}, B {3}", new object[] { a, r, g, b });
-            int x_st = label1.Location.X + 100;
-            int y_st = label1.Location.Y - 100;
-            e.Graphics.DrawString(text, new Font(this.Font, FontStyle.Italic), new SolidBrush(slateBlue), new RectangleF(new PointF(x_st, y_st), this.Size));
+            int x_st = label1.Location.X + 50;
+            int y_st = label1.Location.Y - 50;
+            e.Graphics.DrawString("用OnPaint寫字範例", new Font("標楷體", 20, FontStyle.Italic), new SolidBrush(Color.Red), new RectangleF(new PointF(x_st, y_st), this.Size));
         }
 
         // On left button, let the user drag the form.
