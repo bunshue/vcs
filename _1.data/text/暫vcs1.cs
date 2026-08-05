@@ -100,7 +100,7 @@ string[] month_names = CultureInfo.CurrentCulture.DateTimeFormat.MonthNames;
 
 //            gr.DrawRectangle(Pens.Black, bounds.X, bounds.Y, bounds.Width, bounds.Height);
 
-
+//------------------------------------------------------------  # 60個
 
 StringFormat string_format = new StringFormat();
 string_format.Alignment = StringAlignment.Center;
@@ -115,8 +115,6 @@ string_format.Alignment = StringAlignment.Near;
 string_format.LineAlignment = StringAlignment.Near;
 string_format.Trimming = StringTrimming.EllipsisWord;
 string_format.FormatFlags = StringFormatFlags.LineLimit;
-
-
 
 //------------------------------------------------------------  # 60個
 
@@ -302,7 +300,6 @@ Bitmap bitmap2 = new Bitmap(bitmap1, 300, 200);  //改變大小
             }
             string fileFullName = Path.Combine(path, string.Format("{0}.log", DateTime.Now.ToString("yyMMdd-HHmmss")));
 
-
             string myPath = Application.StartupPath;
             string myName = "david_log";
 
@@ -324,9 +321,9 @@ Bitmap bitmap2 = new Bitmap(bitmap1, 300, 200);  //改變大小
 
 //------------------------------------------------------------  # 60個
 
-            Console.WriteLine("測試多型（Polymorphism）");
-            hi();
-            hi("lion-mouse");
+Console.WriteLine("測試多型（Polymorphism）");
+hi();
+hi("lion-mouse");
 
 //------------------------------------------------------------  # 60個
 
@@ -490,7 +487,6 @@ vcs待尋找
 2020年1月起，︁微軟開發者網路整合至Microsoft Docs；
 Microsoft Docs後來在2022年整合至Microsoft Learn。
 
-
 //------------------------------------------------------------  # 60個
 
 /// <param name="quality">质量（范围0-100）</param>
@@ -582,8 +578,6 @@ Microsoft Docs後來在2022年整合至Microsoft Learn。
 
 取樣率（Sample Rate）。
 
-
-
             double beatTime = time % Period;  // 測試時間
             double value = 0.0;
 
@@ -615,13 +609,7 @@ public：不設限
 csharp
 richTextBox1.AppendText("訊息內容\n");
 
-
-
 通過 WIN32 API 實現嵌入程序窗體，win32api
-
-
-
-
 
 //------------------------------------------------------------  # 60個
 
@@ -746,7 +734,6 @@ plt.suptitle(
 )
 
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------  # 60個
 
 //待測試
     folderBrowserDialog1.ShowNewFolderButton = checkBox1.Checked;
@@ -850,7 +837,6 @@ label
                 label1.Text = "數字鎖鍵已取消";
             }
 
-
         private void lblMouse_MouseUp(object sender, MouseEventArgs e)
         {
             switch (e.Button)
@@ -866,7 +852,6 @@ label
                     break;
             }
         }
-
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -884,6 +869,7 @@ label
             }
         }
 
+//------------------------------------------------------------  # 60個
 
 PasswordChar
 
@@ -944,7 +930,6 @@ printDocument_pascal
             WriteLine("倍精度  = {b}");
             WriteLine("精確小數 = {c}");
 
-
             //將指定ASCII數值以型別char轉為字元
             int num1 = 69;
             //呼叫Convert類別的ToChar()轉為字元
@@ -960,7 +945,6 @@ printDocument_pascal
             //直接以unicode做設定
             char key = '\u0308';
             WriteLine($"字元 {key}");
-
 
 MessageBox.Show("輸入的ASCII碼為" + Convert.ToByte(e.KeyChar).ToString());
 
@@ -1298,7 +1282,6 @@ https://maps.googleapis.com/maps/api/staticmap?parameters
 http://maps.google.com/maps/api/staticmap?parameters
 
 https://maps.googleapis.com/maps/api/staticmap?parameters
-
 
 如何抓取Google Static Map
 
@@ -7830,23 +7813,4 @@ gr.DrawString(txt, this.Font, text_brush, node.Location.X - txt_size.Width / 2, 
 this.Bounds = new Rectangle(0, 0, width, height);
 this.Bounds = Screen.PrimaryScreen.Bounds;
 
-
-
-fullscreenfullscreen
-
-
-    public partial class FullScreenForm : Form
-    {
-	    
-	    public FullScreenForm(Bitmap screen)
-	    {
-		    InitializeComponent();
-		    
-    		}
-
-
-}
-
 //------------------------------------------------------------  # 60個
-
-

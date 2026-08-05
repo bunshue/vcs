@@ -358,6 +358,19 @@ namespace vcs_FormSendData
         {
 
         }
+
+        //------------------------------------------------------------  # 60個
+
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+            int xx = x_st + dx * 1 - 5;
+            int yy = y_st + dy * 7 - 5;
+            e.Graphics.DrawRectangle(Pens.Red, xx, yy, 200 + 10, 210);
+        }
     }
 }
 
@@ -368,12 +381,7 @@ namespace vcs_FormSendData
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-
-
 /*
-
 frm.DrawToBitmap(whole_form, new Rectangle(0, 0, frm.Width, frm.Height));
-
 Point origin = frm.PointToScreen(new Point(0, 0));
-
 */
