@@ -755,7 +755,20 @@ namespace vcs_Draw_Bitmap
 
         private void button14_Click(object sender, EventArgs e)
         {
+            //控件轉Bitmap DrawToBitmap
+
+            Control ctl = button7;
+            ctl = pictureBox2;
+            ctl = this;
+
+            Bitmap bm = new Bitmap(ctl.Width, ctl.Height);
+            ctl.DrawToBitmap(bm, new Rectangle(0, 0, ctl.Width, ctl.Height));
+
+            pictureBox1.Image = bm;
+            //pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button15_Click(object sender, EventArgs e)
         {

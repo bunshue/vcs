@@ -59,17 +59,7 @@
             this.button27 = new System.Windows.Forms.Button();
             this.button28 = new System.Windows.Forms.Button();
             this.button29 = new System.Windows.Forms.Button();
-            this.button30 = new System.Windows.Forms.Button();
-            this.button31 = new System.Windows.Forms.Button();
-            this.button33 = new System.Windows.Forms.Button();
-            this.button32 = new System.Windows.Forms.Button();
-            this.button34 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.button35 = new System.Windows.Forms.Button();
-            this.button36 = new System.Windows.Forms.Button();
-            this.button37 = new System.Windows.Forms.Button();
-            this.button38 = new System.Windows.Forms.Button();
-            this.button39 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -119,6 +109,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(200, 60);
             this.button4.TabIndex = 3;
+            this.button4.Text = "DesktopLocation的用法";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -149,6 +140,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(200, 60);
             this.button7.TabIndex = 6;
+            this.button7.Text = "全螢幕";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -159,6 +151,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(200, 60);
             this.button8.TabIndex = 7;
+            this.button8.Text = "去掉外框";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -169,6 +162,7 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(200, 60);
             this.button9.TabIndex = 8;
+            this.button9.Text = "閃爍外框";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -179,6 +173,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(200, 60);
             this.button10.TabIndex = 9;
+            this.button10.Text = "無法改變Form大小";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -189,7 +184,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(200, 60);
             this.button11.TabIndex = 10;
-            this.button11.Text = "表單預設大小";
+            this.button11.Text = "顯示桌面";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -243,6 +238,7 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(200, 60);
             this.button16.TabIndex = 15;
+            this.button16.Text = "表單不顯示在 Windows 工作列中";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -253,6 +249,7 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(200, 60);
             this.button17.TabIndex = 14;
+            this.button17.Text = "背景變成透明 滑鼠可以穿透表單";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
@@ -263,6 +260,7 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(200, 60);
             this.button18.TabIndex = 17;
+            this.button18.Text = "背景變成透明 滑鼠不可以穿透表單";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -293,7 +291,6 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(200, 60);
             this.button19.TabIndex = 25;
-            this.button19.Text = "無法改變Form大小";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -304,7 +301,6 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(200, 60);
             this.button22.TabIndex = 24;
-            this.button22.Text = "表單背景色恢復";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
@@ -315,7 +311,6 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(200, 60);
             this.button23.TabIndex = 23;
-            this.button23.Text = "顯示桌面";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
@@ -366,7 +361,6 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(200, 60);
             this.button27.TabIndex = 27;
-            this.button27.Text = "全螢幕";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
@@ -377,7 +371,6 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(200, 60);
             this.button28.TabIndex = 28;
-            this.button28.Text = "去掉外框";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
@@ -389,60 +382,8 @@
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(200, 60);
             this.button29.TabIndex = 29;
-            this.button29.Text = "閃爍外框";
             this.button29.UseVisualStyleBackColor = true;
             this.button29.Click += new System.EventHandler(this.button29_Click);
-            // 
-            // button30
-            // 
-            this.button30.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button30.Location = new System.Drawing.Point(629, 5);
-            this.button30.Name = "button30";
-            this.button30.Size = new System.Drawing.Size(200, 60);
-            this.button30.TabIndex = 31;
-            this.button30.Text = "DesktopLocation的用法";
-            this.button30.UseVisualStyleBackColor = true;
-            this.button30.Click += new System.EventHandler(this.button30_Click);
-            // 
-            // button31
-            // 
-            this.button31.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button31.Location = new System.Drawing.Point(629, 65);
-            this.button31.Name = "button31";
-            this.button31.Size = new System.Drawing.Size(200, 60);
-            this.button31.TabIndex = 30;
-            this.button31.UseVisualStyleBackColor = true;
-            this.button31.Click += new System.EventHandler(this.button31_Click);
-            // 
-            // button33
-            // 
-            this.button33.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button33.Location = new System.Drawing.Point(629, 186);
-            this.button33.Name = "button33";
-            this.button33.Size = new System.Drawing.Size(200, 60);
-            this.button33.TabIndex = 32;
-            this.button33.UseVisualStyleBackColor = true;
-            this.button33.Click += new System.EventHandler(this.button33_Click);
-            // 
-            // button32
-            // 
-            this.button32.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button32.Location = new System.Drawing.Point(629, 126);
-            this.button32.Name = "button32";
-            this.button32.Size = new System.Drawing.Size(200, 60);
-            this.button32.TabIndex = 33;
-            this.button32.UseVisualStyleBackColor = true;
-            this.button32.Click += new System.EventHandler(this.button32_Click);
-            // 
-            // button34
-            // 
-            this.button34.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button34.Location = new System.Drawing.Point(629, 246);
-            this.button34.Name = "button34";
-            this.button34.Size = new System.Drawing.Size(200, 60);
-            this.button34.TabIndex = 34;
-            this.button34.UseVisualStyleBackColor = true;
-            this.button34.Click += new System.EventHandler(this.button34_Click);
             // 
             // richTextBox1
             // 
@@ -452,60 +393,6 @@
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 35;
             this.richTextBox1.Text = "";
-            // 
-            // button35
-            // 
-            this.button35.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button35.Location = new System.Drawing.Point(629, 305);
-            this.button35.Name = "button35";
-            this.button35.Size = new System.Drawing.Size(200, 60);
-            this.button35.TabIndex = 36;
-            this.button35.UseVisualStyleBackColor = true;
-            this.button35.Click += new System.EventHandler(this.button35_Click);
-            // 
-            // button36
-            // 
-            this.button36.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button36.Location = new System.Drawing.Point(630, 367);
-            this.button36.Name = "button36";
-            this.button36.Size = new System.Drawing.Size(200, 60);
-            this.button36.TabIndex = 37;
-            this.button36.Text = "表單不顯示在 Windows 工作列中";
-            this.button36.UseVisualStyleBackColor = true;
-            this.button36.Click += new System.EventHandler(this.button36_Click);
-            // 
-            // button37
-            // 
-            this.button37.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button37.Location = new System.Drawing.Point(630, 429);
-            this.button37.Name = "button37";
-            this.button37.Size = new System.Drawing.Size(200, 60);
-            this.button37.TabIndex = 38;
-            this.button37.Text = "背景變成透明 滑鼠可以穿透表單";
-            this.button37.UseVisualStyleBackColor = true;
-            this.button37.Click += new System.EventHandler(this.button37_Click);
-            // 
-            // button38
-            // 
-            this.button38.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button38.Location = new System.Drawing.Point(630, 489);
-            this.button38.Name = "button38";
-            this.button38.Size = new System.Drawing.Size(200, 60);
-            this.button38.TabIndex = 39;
-            this.button38.Text = "背景變成透明 滑鼠不可以穿透表單";
-            this.button38.UseVisualStyleBackColor = true;
-            this.button38.Click += new System.EventHandler(this.button38_Click);
-            // 
-            // button39
-            // 
-            this.button39.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button39.Location = new System.Drawing.Point(630, 551);
-            this.button39.Name = "button39";
-            this.button39.Size = new System.Drawing.Size(200, 60);
-            this.button39.TabIndex = 40;
-            this.button39.Text = "整個窗體都變成半透明";
-            this.button39.UseVisualStyleBackColor = true;
-            this.button39.Click += new System.EventHandler(this.button39_Click);
             // 
             // bt_clear
             // 
@@ -588,17 +475,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button14);
             this.Controls.Add(this.bt_clear);
-            this.Controls.Add(this.button39);
-            this.Controls.Add(this.button38);
-            this.Controls.Add(this.button37);
-            this.Controls.Add(this.button36);
-            this.Controls.Add(this.button35);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.button34);
-            this.Controls.Add(this.button32);
-            this.Controls.Add(this.button33);
-            this.Controls.Add(this.button30);
-            this.Controls.Add(this.button31);
             this.Controls.Add(this.button29);
             this.Controls.Add(this.button28);
             this.Controls.Add(this.button27);
@@ -673,17 +550,7 @@
         private System.Windows.Forms.Button button27;
         private System.Windows.Forms.Button button28;
         private System.Windows.Forms.Button button29;
-        private System.Windows.Forms.Button button30;
-        private System.Windows.Forms.Button button31;
-        private System.Windows.Forms.Button button33;
-        private System.Windows.Forms.Button button32;
-        private System.Windows.Forms.Button button34;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Button button35;
-        private System.Windows.Forms.Button button36;
-        private System.Windows.Forms.Button button37;
-        private System.Windows.Forms.Button button38;
-        private System.Windows.Forms.Button button39;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Label label2;

@@ -1066,8 +1066,9 @@ namespace vcs_Network4_network_http
 
             //截圖
             Bitmap bitmap1 = new Bitmap(W, H);
-            Rectangle DrawRect = new Rectangle(0, 0, W, H);
-            webBrowser1.DrawToBitmap(bitmap1, DrawRect);
+
+            //控件轉Bitmap DrawToBitmap
+            webBrowser1.DrawToBitmap(bitmap1, new Rectangle(0, 0, W, H));
 
             string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
 
@@ -1543,12 +1544,6 @@ namespace vcs_Network4_network_http
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-

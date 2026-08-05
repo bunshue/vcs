@@ -121,24 +121,14 @@ namespace vcs_Form1
             button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
-            button30.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            button31.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            button32.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            button33.Location = new Point(x_st + dx * 3, y_st + dy * 3);
-            button34.Location = new Point(x_st + dx * 3, y_st + dy * 4);
-            button35.Location = new Point(x_st + dx * 3, y_st + dy * 5);
-            button36.Location = new Point(x_st + dx * 3, y_st + dy * 6);
-            button37.Location = new Point(x_st + dx * 3, y_st + dy * 7);
-            button38.Location = new Point(x_st + dx * 3, y_st + dy * 8);
-            button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
 
-            label1.Location = new Point(x_st + dx * 4, y_st + dy * 2);
-            label5.Location = new Point(x_st + dx * 4, y_st + dy * 3);
-            richTextBox1.Size = new Size(500, 410);
-            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 4);
+            label1.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            label5.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            richTextBox1.Size = new Size(600, 410);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 4);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1383, 750);
+            this.Size = new Size(1383 - 110, 750);
             this.Text = "vcs_Form1";
 
             //最大化螢幕
@@ -240,6 +230,10 @@ namespace vcs_Form1
             richTextBox1.Text += "透明+\n";
             this.Opacity -= 0.1;
 
+            //整個窗體都變成半透明
+            this.Opacity = 0.5;
+            //this.Opacity = 0; //使窗體不可見
+
             richTextBox1.Text += "表單變大\n";
             this.Width += 10;
             this.Height += 10;
@@ -250,8 +244,11 @@ namespace vcs_Form1
 
             //------------------------------  # 30個
 
-            richTextBox1.Text += "改變表單背景顏色\n";
-            this.BackColor = Color.Red;
+            richTextBox1.Text += "改變表單背景色\n";
+            this.BackColor = Color.Pink;
+
+            richTextBox1.Text += "恢復表單背景色\n";
+            this.BackColor = default(Color);
 
             //------------------------------  # 30個
 
@@ -296,8 +293,6 @@ namespace vcs_Form1
         {
             richTextBox1.Text += "表單基本操作2\n";
 
-            richTextBox1.Text += "表單背景色改變\n";
-            this.BackColor = Color.Pink;
 
             //------------------------------  # 30個
 
@@ -356,45 +351,137 @@ namespace vcs_Form1
             richTextBox1.Text += "FormSize ClientSize\n";
             richTextBox1.Text += "Form Size : w = " + this.Width.ToString() + " h = " + this.Height.ToString() + "\n";
             richTextBox1.Text += "Form ClientSize : w = " + this.ClientSize.Width.ToString() + " h = " + this.ClientSize.Height.ToString() + "\n";
-
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //DesktopLocation的用法
+
+            richTextBox1.Text += "DesktopLocation = " + this.DesktopLocation.ToString() + "\n";
+            richTextBox1.Text += "DesktopLocation = " + this.DesktopLocation.X.ToString() + "\n";
+            richTextBox1.Text += "DesktopLocation = " + this.DesktopLocation.Y.ToString() + "\n";
+
+            Point p = new Point(this.DesktopLocation.X - 10, this.DesktopLocation.Y - 5);
+            this.DesktopLocation = p;
+
+            //指定視窗出現的地方
+            //Point p = new Point(600, 240);
+            //this.DesktopLocation = p;
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button5_Click(object sender, EventArgs e)
         {
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button6_Click(object sender, EventArgs e)
         {
         }
 
+        //------------------------------------------------------------  # 60個
+
+        bool flag_full_screen = false;
         private void button7_Click(object sender, EventArgs e)
         {
+            if (flag_full_screen == false)
+            {
+                richTextBox1.Text += "全螢幕\n";
+                flag_full_screen = true;
+                button7.Text = "恢復一般螢幕";
+
+                this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
+                //this.WindowState = FormWindowState.Maximized;
+                this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
+            }
+            else
+            {
+                richTextBox1.Text += "恢復一般螢幕\n";
+                flag_full_screen = false;
+                button7.Text = "全螢幕";
+
+                this.FormBorderStyle = FormBorderStyle.Sizable;
+                //this.WindowState = FormWindowState.Maximized;
+                this.WindowState = FormWindowState.Normal;  // 設定表單恢復一般螢幕
+            }
         }
 
+        //------------------------------------------------------------  # 60個
+
+        bool flag_border_none = false;
         private void button8_Click(object sender, EventArgs e)
         {
+            if (flag_border_none == false)
+            {
+                richTextBox1.Text += "去掉外框\n";
+                flag_border_none = true;
+                button8.Text = "恢復外框";
+
+                //same
+                //this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
+
+                //same
+                FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
+            }
+            else
+            {
+                richTextBox1.Text += "恢復外框\n";
+                flag_border_none = false;
+                button8.Text = "去掉外框";
+
+                //same
+                //this.FormBorderStyle = FormBorderStyle.Sizable;
+
+                //same
+                FormBorderStyle = FormBorderStyle.Sizable;
+            }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button9_Click(object sender, EventArgs e)
         {
+            if (button9.Text == "閃爍外框")
+            {
+                button9.Text = "停止閃爍外框";
+                timer1.Enabled = true;
+            }
+            else
+            {
+                button9.Text = "閃爍外框";
+                timer1.Enabled = false;
+            }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button10_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "無法改變Form大小\n";
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button11_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "顯示桌面\n";
+            Type shellType = Type.GetTypeFromProgID("Shell.Application");
+            object shellObject = System.Activator.CreateInstance(shellType);
+            shellType.InvokeMember("ToggleDesktop", System.Reflection.BindingFlags.InvokeMethod, null, shellObject, null);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button12_Click(object sender, EventArgs e)
         {
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button13_Click(object sender, EventArgs e)
         {
@@ -404,9 +491,13 @@ namespace vcs_Form1
             F2.Show();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button14_Click(object sender, EventArgs e)
         {
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button15_Click(object sender, EventArgs e)
         {
@@ -424,25 +515,48 @@ namespace vcs_Form1
 
         //------------------------------------------------------------  # 60個
 
+        bool flag_ShowInTaskbar = true;
         private void button16_Click(object sender, EventArgs e)
         {
+            //表單不顯示在 Windows 工作列中
+            if (flag_ShowInTaskbar == true)
+            {
+                flag_ShowInTaskbar = false;
+                this.ShowInTaskbar = false;     //false : 表單不顯示在 Windows 工作列中
+                richTextBox1.Text += "表單不顯示在 Windows 工作列中\n";
+                button16.Text = "表單顯示在 Windows 工作列中";
+            }
+            else
+            {
+                flag_ShowInTaskbar = true;
+                this.ShowInTaskbar = true;     //true : 表單顯示在 Windows 工作列中
+                richTextBox1.Text += "表單顯示在 Windows 工作列中\n";
+                button16.Text = "表單不顯示在 Windows 工作列中";
+            }
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button17_Click(object sender, EventArgs e)
         {
-
+            //背景變成透明 滑鼠可以穿透表單
+            this.BackColor = Color.White;
+            this.TransparencyKey = Color.White;
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button18_Click(object sender, EventArgs e)
         {
+            //背景變成透明 滑鼠不可以穿透表單
+            this.BackColor = Color.Red;
+            this.TransparencyKey = Color.Red;
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button19_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "無法改變Form大小\n";
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -455,21 +569,10 @@ namespace vcs_Form1
 
         private void button22_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "表單背景色恢復\n";
-            this.BackColor = default(Color);
-
-            button24.BackColor = default(Color);
-            button24.UseVisualStyleBackColor = true;
-            button22.BackColor = default(Color);
-            button22.UseVisualStyleBackColor = true;
         }
 
         private void button23_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "顯示桌面\n";
-            Type shellType = Type.GetTypeFromProgID("Shell.Application");
-            object shellObject = System.Activator.CreateInstance(shellType);
-            shellType.InvokeMember("ToggleDesktop", System.Reflection.BindingFlags.InvokeMethod, null, shellObject, null);
         }
 
         private void button24_Click(object sender, EventArgs e)
@@ -484,158 +587,16 @@ namespace vcs_Form1
         {
         }
 
-        bool flag_full_screen = false;
         private void button27_Click(object sender, EventArgs e)
         {
-            if (flag_full_screen == false)
-            {
-                richTextBox1.Text += "全螢幕\n";
-                flag_full_screen = true;
-                button27.Text = "恢復一般螢幕";
-
-                this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
-                //this.WindowState = FormWindowState.Maximized;
-                this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
-            }
-            else
-            {
-                richTextBox1.Text += "恢復一般螢幕\n";
-                flag_full_screen = false;
-                button27.Text = "全螢幕";
-
-                this.FormBorderStyle = FormBorderStyle.Sizable;
-                //this.WindowState = FormWindowState.Maximized;
-                this.WindowState = FormWindowState.Normal;  // 設定表單恢復一般螢幕
-            }
         }
 
-        bool flag_border_none = false;
         private void button28_Click(object sender, EventArgs e)
         {
-            if (flag_border_none == false)
-            {
-                richTextBox1.Text += "去掉外框\n";
-                flag_border_none = true;
-                button28.Text = "恢復外框";
-
-                //same
-                //this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
-
-                //same
-                FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
-            }
-            else
-            {
-                richTextBox1.Text += "恢復外框\n";
-                flag_border_none = false;
-                button28.Text = "去掉外框";
-
-                //same
-                //this.FormBorderStyle = FormBorderStyle.Sizable;
-
-                //same
-                FormBorderStyle = FormBorderStyle.Sizable;
-            }
         }
 
         private void button29_Click(object sender, EventArgs e)
         {
-            if (button29.Text == "閃爍外框")
-            {
-                button29.Text = "停止閃爍外框";
-                timer1.Enabled = true;
-            }
-            else
-            {
-                button29.Text = "閃爍外框";
-                timer1.Enabled = false;
-            }
-        }
-
-        private void button30_Click(object sender, EventArgs e)
-        {
-            //DesktopLocation的用法
-
-            richTextBox1.Text += "DesktopLocation = " + this.DesktopLocation.ToString() + "\n";
-            richTextBox1.Text += "DesktopLocation = " + this.DesktopLocation.X.ToString() + "\n";
-            richTextBox1.Text += "DesktopLocation = " + this.DesktopLocation.Y.ToString() + "\n";
-
-            Point p = new Point(this.DesktopLocation.X - 10, this.DesktopLocation.Y - 5);
-            this.DesktopLocation = p;
-
-            //指定視窗出現的地方
-            //Point p = new Point(600, 240);
-            //this.DesktopLocation = p;
-        }
-
-        private void button31_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button32_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button33_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button34_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button35_Click(object sender, EventArgs e)
-        {
-        }
-
-        //6060
-
-        bool flag_ShowInTaskbar = true;
-        private void button36_Click(object sender, EventArgs e)
-        {
-            //表單不顯示在 Windows 工作列中
-            if (flag_ShowInTaskbar == true)
-            {
-                flag_ShowInTaskbar = false;
-                this.ShowInTaskbar = false;     //false : 表單不顯示在 Windows 工作列中
-                richTextBox1.Text += "表單不顯示在 Windows 工作列中\n";
-                button36.Text = "表單顯示在 Windows 工作列中";
-            }
-            else
-            {
-                flag_ShowInTaskbar = true;
-                this.ShowInTaskbar = true;     //true : 表單顯示在 Windows 工作列中
-                richTextBox1.Text += "表單顯示在 Windows 工作列中\n";
-                button36.Text = "表單不顯示在 Windows 工作列中";
-            }
-        }
-
-        //6060
-
-        private void button37_Click(object sender, EventArgs e)
-        {
-            //背景變成透明 滑鼠可以穿透表單
-            this.BackColor = Color.White;
-            this.TransparencyKey = Color.White;
-        }
-
-        //6060
-
-        private void button38_Click(object sender, EventArgs e)
-        {
-            //背景變成透明 滑鼠不可以穿透表單
-            this.BackColor = Color.Red;
-            this.TransparencyKey = Color.Red;
-        }
-
-        //6060
-
-        private void button39_Click(object sender, EventArgs e)
-        {
-            //整個窗體都變成半透明
-            this.Opacity = 0.5;
-
-            //this.Opacity = 0; //使窗體不可見 
         }
 
         //------------------------------------------------------------  # 60個
@@ -688,7 +649,9 @@ namespace vcs_Form1
             Graphics g = e.Graphics;
             g.DrawRectangle(new Pen(Color.Green, 10), new Rectangle(00, 00, this.ClientSize.Width - 1, this.ClientSize.Height - 1));    //畫邊框
 
-            ShowPropertiesOfSlateBlue(e);   //用OnPaint寫字範例
+            int x_st = label1.Location.X + 50;
+            int y_st = label1.Location.Y - 50;
+            e.Graphics.DrawString("用 Form1_Paint 寫字", new Font("標楷體", 20, FontStyle.Italic), new SolidBrush(Color.Red), new RectangleF(new PointF(x_st, y_st), this.Size));
 
             /*
             //表單的背景圖案 法二  // Tile the image.
@@ -699,13 +662,6 @@ namespace vcs_Form1
                 e.Graphics.FillRectangle(brush, this.ClientRectangle);
             }
             */
-        }
-
-        private void ShowPropertiesOfSlateBlue(PaintEventArgs e)
-        {
-            int x_st = label1.Location.X + 50;
-            int y_st = label1.Location.Y - 50;
-            e.Graphics.DrawString("用OnPaint寫字範例", new Font("標楷體", 20, FontStyle.Italic), new SolidBrush(Color.Red), new RectangleF(new PointF(x_st, y_st), this.Size));
         }
 
         // On left button, let the user drag the form.
@@ -745,5 +701,4 @@ namespace vcs_Form1
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
 

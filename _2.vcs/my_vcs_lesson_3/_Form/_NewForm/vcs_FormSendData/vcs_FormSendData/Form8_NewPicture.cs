@@ -11,14 +11,14 @@ using System.Windows.Forms;
 
 namespace vcs_FormSendData
 {
-    public partial class ImageForm : Form
+    public partial class Form8_NewPicture : Form
     {
-        public ImageForm()
+        public Form8_NewPicture()
         {
             InitializeComponent();
         }
 
-        private void ImageForm_Load(object sender, EventArgs e)
+        private void Form8_NewPicture_Load(object sender, EventArgs e)
         {
 
         }

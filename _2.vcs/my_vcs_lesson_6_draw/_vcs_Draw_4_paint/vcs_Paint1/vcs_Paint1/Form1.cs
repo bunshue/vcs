@@ -207,10 +207,7 @@ namespace vcs_Paint1
                     int h = pictureBox1.Height;
 
                     Bitmap bm = new Bitmap(w, h);
-
-                    //panel1.DrawToBitmap(bm, new Rectangle(0, 0, width, height));
                     pictureBox1.DrawToBitmap(bm, new Rectangle(0, 0, w, h));
-
 
                     bm.Save(@filename1, ImageFormat.Jpeg);
                     bm.Save(@filename2, ImageFormat.Bmp);
@@ -227,7 +224,9 @@ namespace vcs_Paint1
                 }
             }
             else
+            {
                 richTextBox1.Text += "無圖可存\n";
+            }
         }
 
         private void button25_Click(object sender, EventArgs e)
@@ -391,13 +390,6 @@ namespace vcs_Paint1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
-

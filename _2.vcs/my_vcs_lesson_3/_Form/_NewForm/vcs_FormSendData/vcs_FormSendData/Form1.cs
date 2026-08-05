@@ -44,8 +44,6 @@ namespace vcs_FormSendData
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
-
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
         void show_item_location()
@@ -55,11 +53,32 @@ namespace vcs_FormSendData
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            pictureBox1.Size = new Size(500, 300);
+            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
 
-            richTextBox1.Size = new Size(500, 690);
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            richTextBox1.Size = new Size(500, 690 - 310);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 310);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(960, 750);
@@ -77,22 +96,20 @@ namespace vcs_FormSendData
 
         //------------------------------------------------------------  # 60個
 
+        private void button0_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
         private void button1_Click(object sender, EventArgs e)
         {
             f2.SetupForm2Data = "父告訴子一件事~~~~~~~";
             f2.setForm2Value();
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            //f2.StartPosition = FormStartPosition.CenterScreen;      //設定新表單的顯示位置, 居中顯示
-            //f2.StartPosition = FormStartPosition.CenterParent;
-            f2.StartPosition = FormStartPosition.Manual;
-            f2.Location = new Point(this.Location.X + 550, this.Location.Y);
-            f2.Owner = this;
-            //f2.ShowDialog();
-            f2.Show();
-        }
+        //------------------------------------------------------------  # 60個
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -120,6 +137,21 @@ namespace vcs_FormSendData
                 richTextBox1.Text += "你按了 XXXXX\n";
             }
         }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //f2.StartPosition = FormStartPosition.CenterScreen;      //設定新表單的顯示位置, 居中顯示
+            //f2.StartPosition = FormStartPosition.CenterParent;
+            f2.StartPosition = FormStartPosition.Manual;
+            f2.Location = new Point(this.Location.X + 550, this.Location.Y);
+            f2.Owner = this;
+            //f2.ShowDialog();
+            f2.Show();
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -184,6 +216,8 @@ namespace vcs_FormSendData
             frm3.Show();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private double sind(double d)
         {
             return Math.Sin(d * Math.PI / 180.0);
@@ -205,6 +239,8 @@ namespace vcs_FormSendData
             form4.Show();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button8_Click(object sender, EventArgs e)
         {
             //開啟子表單並傳一張圖過去
@@ -218,45 +254,23 @@ namespace vcs_FormSendData
             f6.Show();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button9_Click(object sender, EventArgs e)
         {
             //截圖傳至新表單 1
             ShowControlImage(this);
-        }
 
-        private void button10_Click(object sender, EventArgs e)
-        {
-            //截圖傳至新表單 2 client area
-            using (Bitmap bm = GetFormImageWithoutBorders(this))
-            {
-                ImageForm frm = new ImageForm();
-                frm.BackgroundImage = bm;
-                frm.ClientSize = bm.Size;
-                frm.ShowDialog();
-            }
-        }
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-            //截圖傳至新表單 3
-            ShowControlImage(richTextBox1);
-        }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-            //截圖傳至新表單 4
-
+            ShowControlImage(button6);
         }
 
         private void ShowControlImage(Control ctl)
         {
-            using (Bitmap bm = GetControlImage(ctl))
-            {
-                ImageForm frm = new ImageForm();
-                frm.BackgroundImage = bm;
-                frm.ClientSize = bm.Size;
-                frm.ShowDialog();
-            }
+            Bitmap bm = GetControlImage(ctl);
+            Form8_NewPicture frm = new Form8_NewPicture();
+            frm.BackgroundImage = bm;
+            frm.ClientSize = bm.Size;
+            frm.ShowDialog();
         }
 
         // Return a Bitmap holding an image of the control.
@@ -267,28 +281,82 @@ namespace vcs_FormSendData
             return bm;
         }
 
-        // Return the form's image without its borders and decorations.
-        private Bitmap GetFormImageWithoutBorders(Form frm)
-        {
-            // Get the form's whole image.
-            using (Bitmap whole_form = GetControlImage(frm))
-            {
-                // See how far the form's upper left corner is
-                // from the upper left corner of its client area.
-                Point origin = frm.PointToScreen(new Point(0, 0));
-                int dx = origin.X - frm.Left;
-                int dy = origin.Y - frm.Top;
+        //------------------------------------------------------------  # 60個
 
-                // Copy the client area into a new Bitmap.
-                int wid = frm.ClientSize.Width;
-                int hgt = frm.ClientSize.Height;
-                Bitmap bm = new Bitmap(wid, hgt);
-                using (Graphics gr = Graphics.FromImage(bm))
-                {
-                    gr.DrawImage(whole_form, 0, 0, new Rectangle(dx, dy, wid, hgt), GraphicsUnit.Pixel);
-                }
-                return bm;
-            }
+        private void button10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            //傳圖至新表單
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
+            Bitmap bm = (Bitmap)Bitmap.FromFile(filename);
+
+            Form8_NewPicture frm = new Form8_NewPicture();
+            frm.BackgroundImage = bm;
+            frm.ClientSize = bm.Size;
+            frm.ShowDialog();
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
@@ -300,3 +368,12 @@ namespace vcs_FormSendData
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
+
+
+/*
+
+frm.DrawToBitmap(whole_form, new Rectangle(0, 0, frm.Width, frm.Height));
+
+Point origin = frm.PointToScreen(new Point(0, 0));
+
+*/

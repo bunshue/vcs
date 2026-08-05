@@ -1,6 +1,6 @@
 ﻿namespace vcs_FormSendData
 {
-    partial class ImageForm
+    partial class Form8_NewPicture
     {
         /// <summary>
         /// 設計工具所需的變數。
@@ -30,14 +30,14 @@
         {
             this.SuspendLayout();
             // 
-            // ImageForm
+            // Form8_NewPicture
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Name = "ImageForm";
-            this.Text = "ImageForm";
-            this.Load += new System.EventHandler(this.ImageForm_Load);
+            this.Name = "Form8_NewPicture";
+            this.Text = "Form8_NewPicture";
+            this.Load += new System.EventHandler(this.Form8_NewPicture_Load);
             this.ResumeLayout(false);
 
         }
