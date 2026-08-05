@@ -14,9 +14,7 @@ namespace vcs_Draw_Word
 {
     public partial class Form1 : Form
     {
-        string draw_text = "群曜醫電";
-
-        Point pt_st;    //文字的起始點(左上方)
+        string draw_text = "牡丹亭";
 
         public Form1()
         {
@@ -26,18 +24,6 @@ namespace vcs_Draw_Word
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
-
-            //------------------------------------------------------------  # 60個
-
-            pt_st = new Point(100, 100);
-
-            int W = this.Width;
-            int H = this.Height;
-            //this.Width / 2, this.Height / 2);
-            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
-
-            //------------------------------------------------------------  # 60個
-
         }
 
         void show_item_location()
@@ -78,74 +64,78 @@ namespace vcs_Draw_Word
 
         private void button0_Click(object sender, EventArgs e)
         {
-            int x_st;
-            int y_st;
+            /*
+            Bitmap bitmap1 = new Bitmap(800, 720);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.Pink);
+            pictureBox1.Image = bitmap1;
+            */
+
+            draw_grid();
+
+            int x_st = 20;
+            int y_st = 20;
+            int dx = 400;
+            int dy = 120;
 
             richTextBox1.Text += "1投影文字\n";
-            x_st = 0;
-            y_st = 30;
+            x_st = 20;
+            y_st = 20 + dy * 0;
             do_word_effect1(x_st, y_st);
 
             richTextBox1.Text += "2浮雕效果\n";
             x_st = 20;
-            y_st = 100;
+            y_st = 20 + dy * 1;
             do_word_effect2(x_st, y_st);
 
             richTextBox1.Text += "3印版效果\n";
             x_st = 20;
-            y_st = 200;
+            y_st = 20 + dy * 2;
             do_word_effect3(x_st, y_st);
 
             richTextBox1.Text += "4倒影文字\n";
             x_st = 20;
-            y_st = 350;
+            y_st = 20 + dy * 3;
             do_word_effect4(x_st, y_st);
 
             richTextBox1.Text += "5陰影文字\n";
             x_st = 20;
-            y_st = 450;
+            y_st = 20 + dy * 4;
             do_word_effect5(x_st, y_st);
 
             richTextBox1.Text += "6紋理效果\n";
-            x_st = 0;
-            y_st = 30;
+            x_st = 20 + dx * 1;
+            y_st = 20 + dy * 0;
             do_word_effect6(x_st, y_st);
 
             richTextBox1.Text += "7傾斜效果\n";
-            x_st = 400;
-            y_st = 20;
+            x_st = 20 + dx * 1;
+            y_st = 20 + dy * 1;
             do_word_effect7(x_st, y_st);
 
             richTextBox1.Text += "8漸層色文字\n";
-            x_st = 400;
-            y_st = 200;
+            x_st = 20 + dx * 1;
+            y_st = 20 + dy * 2;
             do_word_effect8(x_st, y_st);
 
             richTextBox1.Text += "9旋轉效果\n";
-            x_st = 400;
-            y_st = 400;
+            x_st = 20 + dx * 1;
+            y_st = 20 + dy * 4 - 50;
             do_word_effect9(x_st, y_st);
+
+            richTextBox1.Text += "9字體做陰影效果\n";
+            x_st = 20 + dx * 1 - 100;
+            y_st = 20 + dy * 5 - 20;
+            do_word_effect10(x_st, y_st);
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //字體做陰影效果 同樣字往右下寫一遍 顏色不同
 
-            string test_string = "世界大同";
-            Bitmap bmp = new Bitmap(800, 720);     //initial W, H
-            Graphics g = Graphics.FromImage(bmp);
 
-            int font_size_default = 130;
-            Font f = new Font("標楷體", font_size_default);
-            g.DrawString(test_string, f, new SolidBrush(Color.Pink), new PointF(0, 0));
 
-            font_size_default = 130;
-            f = new Font("標楷體", font_size_default);
-            g.DrawString(test_string, f, new SolidBrush(Color.Red), new PointF(5, 5));
-
-            pictureBox1.Image = bmp;
         }
 
         //------------------------------------------------------------  # 60個
@@ -191,6 +181,21 @@ namespace vcs_Draw_Word
         }
 
         //------------------------------------------------------------  # 60個
+
+        void draw_grid()
+        {
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+            Graphics g = this.pictureBox1.CreateGraphics();
+            for (int i = 0; i <= W; i += 100)
+            {
+                g.DrawLine(Pens.Red, i, 0, i, H);  // 垂直線
+            }
+            for (int j = 0; j <= H; j += 100)
+            {
+                g.DrawLine(Pens.Red, 0, j, W, j);  // 水平線
+            }
+        }
 
         void do_word_effect1(int x_st, int y_st)
         {
@@ -361,6 +366,17 @@ namespace vcs_Draw_Word
                 //恢復全局變換矩陣
                 g.ResetTransform();
             }
+        }
+
+        void do_word_effect10(int x_st, int y_st)
+        {
+            //字體做陰影效果 同樣字往右下寫一遍 顏色不同
+
+            Graphics g = this.pictureBox1.CreateGraphics();
+            int font_size_default = 80;
+            Font f = new Font("標楷體", font_size_default);
+            g.DrawString(draw_text, f, new SolidBrush(Color.Pink), new PointF(x_st, y_st));
+            g.DrawString(draw_text, f, new SolidBrush(Color.Red), new PointF(x_st + 5, y_st + 5));
         }
     }
 }

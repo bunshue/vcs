@@ -194,14 +194,11 @@ namespace vcs_Draw1
             SolidBrush b = new SolidBrush(c_in);
             //Brush b = new Brush(c_in);
 
-            // Draw the circle
             g.FillEllipse(b, pt.X - radius, pt.Y - radius, radius * 2, radius * 2);
             g.DrawEllipse(p, pt.X - radius, pt.Y - radius, radius * 2, radius * 2);
-            //Dispose of the pen.
             p.Dispose();
         }
 
-        // Draw a point.
         private void DrawPoint2(Graphics g, PointF pt, Brush brush, Pen pen)
         {
             const int RADIUS = 3;
