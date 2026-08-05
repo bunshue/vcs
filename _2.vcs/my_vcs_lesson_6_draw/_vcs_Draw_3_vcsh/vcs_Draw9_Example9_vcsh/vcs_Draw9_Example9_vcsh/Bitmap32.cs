@@ -117,11 +117,8 @@ namespace vcs_Draw9_Example9_vcsh
             if (IsLocked) return;
 
             // Lock the bitmap data.
-            Rectangle bounds = new Rectangle(
-                0, 0, Bitmap.Width, Bitmap.Height);
-            m_BitmapData = Bitmap.LockBits(bounds,
-                ImageLockMode.ReadWrite,
-                PixelFormat.Format32bppArgb);
+            Rectangle bounds = new Rectangle(0, 0, Bitmap.Width, Bitmap.Height);
+            m_BitmapData = Bitmap.LockBits(bounds, ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
             RowSizeBytes = m_BitmapData.Stride;
 
             // Allocate room for the data.
@@ -140,7 +137,10 @@ namespace vcs_Draw9_Example9_vcsh
         public void UnlockBitmap()
         {
             // If it's already unlocked, do nothing.
-            if (!IsLocked) return;
+            if (!IsLocked)
+            {
+                return;
+            }
 
             // Copy the data back into the bitmap.
             int total_size = m_BitmapData.Stride * m_BitmapData.Height;
@@ -178,7 +178,10 @@ namespace vcs_Draw9_Example9_vcsh
             }
 
             // Unlock if appropriate.
-            if (!was_locked) UnlockBitmap();
+            if (!was_locked)
+            {
+                UnlockBitmap();
+            }
         }
 
         // Convert to grayscale.
@@ -201,7 +204,10 @@ namespace vcs_Draw9_Example9_vcsh
             }
 
             // Unlock if appropriate.
-            if (!was_locked) UnlockBitmap();
+            if (!was_locked)
+            {
+                UnlockBitmap();
+            }
         }
 
         // Clear the red color components.
@@ -220,7 +226,10 @@ namespace vcs_Draw9_Example9_vcsh
             }
 
             // Unlock if appropriate.
-            if (!was_locked) UnlockBitmap();
+            if (!was_locked)
+            {
+                UnlockBitmap();
+            }
         }
 
         // Clear the green color components.
@@ -239,7 +248,10 @@ namespace vcs_Draw9_Example9_vcsh
             }
 
             // Unlock if appropriate.
-            if (!was_locked) UnlockBitmap();
+            if (!was_locked)
+            {
+                UnlockBitmap();
+            }
         }
 
         // Clear the blue color components.
@@ -258,7 +270,10 @@ namespace vcs_Draw9_Example9_vcsh
             }
 
             // Unlock if appropriate.
-            if (!was_locked) UnlockBitmap();
+            if (!was_locked)
+            {
+                UnlockBitmap();
+            }
         }
 
         // Invert the pixel values.
@@ -281,10 +296,15 @@ namespace vcs_Draw9_Example9_vcsh
             }
 
             // Unlock if appropriate.
-            if (!was_locked) UnlockBitmap();
+            if (!was_locked)
+            {
+                UnlockBitmap();
+            }
         }
 
-        #region "FilterStuff"
+        //------------------------------------------------------------  # 60個
+
+        //#region "FilterStuff"
 
         // A public class to represent filters.
         public class Filter
@@ -638,9 +658,11 @@ namespace vcs_Draw9_Example9_vcsh
             return result;
         }
 
-        #endregion // FilterStuff
+        //#endregion // FilterStuff
 
-        #region "Rank Filters"
+        //------------------------------------------------------------  # 60個
+
+        //#region "Rank Filters"
 
         // Use the maximum brightness value in a region.
         public Bitmap32 RankMaximum(int rank, bool lock_result)
@@ -675,10 +697,7 @@ namespace vcs_Draw9_Example9_vcsh
                                 int col = x + dx;
                                 if ((col >= 0) && (col < Width))
                                 {
-                                    int test_brightness =
-                                        GetRed(col, row) +
-                                        GetGreen(col, row) +
-                                        GetBlue(col, row);
+                                    int test_brightness = GetRed(col, row) + GetGreen(col, row) + GetBlue(col, row);
                                     if (test_brightness > best_brightness)
                                     {
                                         best_brightness = test_brightness;
@@ -691,17 +710,19 @@ namespace vcs_Draw9_Example9_vcsh
                     }
 
                     // Set this pixel to the brighest value we found.
-                    result.SetPixel(x, y,
-                        GetRed(best_col, best_row),
-                        GetGreen(best_col, best_row),
-                        GetBlue(best_col, best_row),
-                        255);
+                    result.SetPixel(x, y, GetRed(best_col, best_row), GetGreen(best_col, best_row), GetBlue(best_col, best_row), 255);
                 }
             }
 
             // Unlock the bitmaps.
-            if (!lock_result) result.UnlockBitmap();
-            if (!was_locked) this.UnlockBitmap();
+            if (!lock_result)
+            {
+                result.UnlockBitmap();
+            }
+            if (!was_locked)
+            {
+                this.UnlockBitmap();
+            }
 
             // Return the result.
             return result;
@@ -740,10 +761,7 @@ namespace vcs_Draw9_Example9_vcsh
                                 int col = x + dx;
                                 if ((col >= 0) && (col < Width))
                                 {
-                                    int test_brightness =
-                                        GetRed(col, row) +
-                                        GetGreen(col, row) +
-                                        GetBlue(col, row);
+                                    int test_brightness = GetRed(col, row) + GetGreen(col, row) + GetBlue(col, row);
                                     if (test_brightness < best_brightness)
                                     {
                                         best_brightness = test_brightness;
@@ -756,17 +774,19 @@ namespace vcs_Draw9_Example9_vcsh
                     }
 
                     // Set this pixel to the brighest value we found.
-                    result.SetPixel(x, y,
-                        GetRed(best_col, best_row),
-                        GetGreen(best_col, best_row),
-                        GetBlue(best_col, best_row),
-                        255);
+                    result.SetPixel(x, y, GetRed(best_col, best_row), GetGreen(best_col, best_row), GetBlue(best_col, best_row), 255);
                 }
             }
 
             // Unlock the bitmaps.
-            if (!lock_result) result.UnlockBitmap();
-            if (!was_locked) this.UnlockBitmap();
+            if (!lock_result)
+            {
+                result.UnlockBitmap();
+            }
+            if (!was_locked)
+            {
+                this.UnlockBitmap();
+            }
 
             // Return the result.
             return result;
@@ -819,8 +839,7 @@ namespace vcs_Draw9_Example9_vcsh
                             {
                                 if (col < Width)
                                 {
-                                    SetPixel(col, row,
-                                        byte_r, byte_g, byte_b, 255);
+                                    SetPixel(col, row, byte_r, byte_g, byte_b, 255);
                                 }
                             }
                         }
@@ -841,62 +860,60 @@ namespace vcs_Draw9_Example9_vcsh
 
             // Create the result Bitmap.
             Bitmap bm = new Bitmap(Width, Height);
-            using (Graphics gr = Graphics.FromImage(bm))
-            {
-                gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            Graphics gr = Graphics.FromImage(bm);
+            gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
-                for (int y = 0; y < Height; y += rank)
+            for (int y = 0; y < Height; y += rank)
+            {
+                for (int x = 0; x < Width; x += rank)
                 {
-                    for (int x = 0; x < Width; x += rank)
+                    // Add up the pixel values in this area.
+                    int total_r = 0;
+                    int total_g = 0;
+                    int total_b = 0;
+                    int num_pixels = 0;
+                    for (int row = y; row < y + rank; row++)
                     {
-                        // Add up the pixel values in this area.
-                        int total_r = 0;
-                        int total_g = 0;
-                        int total_b = 0;
-                        int num_pixels = 0;
-                        for (int row = y; row < y + rank; row++)
+                        if (row < Height)
                         {
-                            if (row < Height)
+                            for (int col = x; col < x + rank; col++)
                             {
-                                for (int col = x; col < x + rank; col++)
+                                if (col < Width)
                                 {
-                                    if (col < Width)
-                                    {
-                                        total_r += GetRed(col, row);
-                                        total_g += GetGreen(col, row);
-                                        total_b += GetBlue(col, row);
-                                        num_pixels++;
-                                    }
+                                    total_r += GetRed(col, row);
+                                    total_g += GetGreen(col, row);
+                                    total_b += GetBlue(col, row);
+                                    num_pixels++;
                                 }
                             }
                         }
-
-                        // Calculate the averages.
-                        byte byte_r = (byte)(total_r / num_pixels);
-                        byte byte_g = (byte)(total_g / num_pixels);
-                        byte byte_b = (byte)(total_b / num_pixels);
-
-                        // Set the color for this area.
-                        int offset = (rank - point_diameter) / 2;
-                        using (Brush br = new
-                            SolidBrush(Color.FromArgb(255, byte_r, byte_g, byte_b)))
-                        {
-                            gr.FillEllipse(br,
-                                x + offset, y + offset,
-                                point_diameter, point_diameter);
-                        }
                     }
+
+                    // Calculate the averages.
+                    byte byte_r = (byte)(total_r / num_pixels);
+                    byte byte_g = (byte)(total_g / num_pixels);
+                    byte byte_b = (byte)(total_b / num_pixels);
+
+                    // Set the color for this area.
+                    int offset = (rank - point_diameter) / 2;
+                    Brush br = new SolidBrush(Color.FromArgb(255, byte_r, byte_g, byte_b));
+                    gr.FillEllipse(br, x + offset, y + offset, point_diameter, point_diameter);
                 }
             }
 
             // Unlock the bitmaps.
-            if (!was_locked) this.UnlockBitmap();
+            if (!was_locked)
+            {
+                this.UnlockBitmap();
+            }
 
             // Return the new bitmap.
             return bm;
         }
 
-        #endregion // Rank Filters
+        //#endregion // Rank Filters
+
+        //------------------------------------------------------------  # 60個
 
         // Flood the area at this point.
         // Color pixels matching the starting pixel's color.
@@ -904,8 +921,9 @@ namespace vcs_Draw9_Example9_vcsh
         {
             // Make sure the bitmap is locked.
             if (!IsLocked)
-                throw new InvalidOperationException(
-                    "Bitmap32 object must be locked before you call FloodFill");
+            {
+                throw new InvalidOperationException("Bitmap32 object must be locked before you call FloodFill");
+            }
 
             // Get the old and new colors' components.
             byte old_r, old_g, old_b, old_a;
@@ -916,8 +934,10 @@ namespace vcs_Draw9_Example9_vcsh
             byte new_a = new_color.A;
 
             // If the colors are the same, we're done.
-            if ((old_r == new_r) && (old_g == new_g) &&
-                (old_b == new_b) && (old_a == new_a)) return;
+            if ((old_r == new_r) && (old_g == new_g) && (old_b == new_b) && (old_a == new_a))
+            {
+                return;
+            }
 
             // Start with the original point in the stack.
             Stack<Point> points = new Stack<Point>();
@@ -928,10 +948,22 @@ namespace vcs_Draw9_Example9_vcsh
             while (points.Count > 0)
             {
                 Point pt = points.Pop();
-                if (pt.X > 0) CheckPoint(points, pt.X - 1, pt.Y, old_r, old_g, old_b, old_a, new_r, new_g, new_b, new_a);
-                if (pt.Y > 0) CheckPoint(points, pt.X, pt.Y - 1, old_r, old_g, old_b, old_a, new_r, new_g, new_b, new_a);
-                if (pt.X < Width - 1) CheckPoint(points, pt.X + 1, pt.Y, old_r, old_g, old_b, old_a, new_r, new_g, new_b, new_a);
-                if (pt.Y < Height - 1) CheckPoint(points, pt.X, pt.Y + 1, old_r, old_g, old_b, old_a, new_r, new_g, new_b, new_a);
+                if (pt.X > 0)
+                {
+                    CheckPoint(points, pt.X - 1, pt.Y, old_r, old_g, old_b, old_a, new_r, new_g, new_b, new_a);
+                }
+                if (pt.Y > 0)
+                {
+                    CheckPoint(points, pt.X, pt.Y - 1, old_r, old_g, old_b, old_a, new_r, new_g, new_b, new_a);
+                }
+                if (pt.X < Width - 1)
+                {
+                    CheckPoint(points, pt.X + 1, pt.Y, old_r, old_g, old_b, old_a, new_r, new_g, new_b, new_a);
+                }
+                if (pt.Y < Height - 1)
+                {
+                    CheckPoint(points, pt.X, pt.Y + 1, old_r, old_g, old_b, old_a, new_r, new_g, new_b, new_a);
+                }
             }
         }
 

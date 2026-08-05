@@ -913,6 +913,11 @@ namespace vcs_Draw_Function1
             Pen p = new Pen(Color.Blue, 0);
             g.DrawRectangle(p, -5, -1, 10, 2);
             g.DrawRectangle(p, -5, -1 + dd, 10, 2);
+
+            Pen blackPen = new Pen(Color.Black, 0);
+            g.DrawLine(blackPen, -5.0f, 0, 5.0f, 0);  // X軸
+            g.DrawLine(blackPen, -5.0f, 2, 5.0f, 2);  // X軸
+            g.DrawLine(blackPen, 0f, -1, 0f, 3);  // Y軸
         }
 
         //------------------------------------------------------------  # 60個

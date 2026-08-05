@@ -14,11 +14,6 @@ namespace howto_minimal_bounding_rectangle
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         // The polygon's points.
         private PointF[] Points;
         private int NumPoints;
@@ -45,6 +40,11 @@ namespace howto_minimal_bounding_rectangle
         // The number of bounding rectangles we have examined.
         private int RectanglesExamined = 0;
 
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             // Make some points.
@@ -59,6 +59,7 @@ namespace howto_minimal_bounding_rectangle
                 new PointF(185, 51),
                 new PointF(87, 92)
             };
+
             Points = new PointF[]
             {
                 new PointF(67, 201),
@@ -78,6 +79,7 @@ namespace howto_minimal_bounding_rectangle
                 new PointF(60, 119),
                 new PointF(59, 156)
             };
+
             Points = new PointF[]
             {
                 new PointF(45, 148),
@@ -174,8 +176,7 @@ namespace howto_minimal_bounding_rectangle
             // This says we are done using this edge.
             if (CurrentControlPoint >= 0)
             {
-                ControlPoints[CurrentControlPoint] =
-                    (ControlPoints[CurrentControlPoint] + 1) % NumPoints;
+                ControlPoints[CurrentControlPoint] = (ControlPoints[CurrentControlPoint] + 1) % NumPoints;
             }
 
             // Find the next point on an edge.
@@ -210,6 +211,7 @@ namespace howto_minimal_bounding_rectangle
                     best_control_point = 0;
                 }
             }
+
             if ((ymaxopp >= 0) && (ymaxadj >= 0))
             {
                 if (ymaxopp * bestadj < bestopp * ymaxadj)
@@ -219,6 +221,7 @@ namespace howto_minimal_bounding_rectangle
                     best_control_point = 1;
                 }
             }
+
             if ((xmaxopp >= 0) && (xmaxadj >= 0))
             {
                 if (xmaxopp * bestadj < bestopp * xmaxadj)
@@ -228,6 +231,7 @@ namespace howto_minimal_bounding_rectangle
                     best_control_point = 2;
                 }
             }
+
             if ((yminopp >= 0) && (yminadj >= 0))
             {
                 if (yminopp * bestadj < bestopp * yminadj)
@@ -326,12 +330,9 @@ namespace howto_minimal_bounding_rectangle
                 sf.LineAlignment = StringAlignment.Far;
                 for (int i = 0; i < NumPoints; i++)
                 {
-                    e.Graphics.FillRectangle(Brushes.White,
-                        Points[i].X - 3, Points[i].Y - 3, 6, 6);
-                    e.Graphics.DrawRectangle(Pens.Black,
-                        Points[i].X - 3, Points[i].Y - 3, 6, 6);
-                    e.Graphics.DrawString(i.ToString(), this.Font,
-                        Brushes.Black, Points[i].X, Points[i].Y, sf);
+                    e.Graphics.FillRectangle(Brushes.White, Points[i].X - 3, Points[i].Y - 3, 6, 6);
+                    e.Graphics.DrawRectangle(Pens.Black, Points[i].X - 3, Points[i].Y - 3, 6, 6);
+                    e.Graphics.DrawString(i.ToString(), this.Font, Brushes.Black, Points[i].X, Points[i].Y, sf);
                 }
 
                 if (true)
@@ -354,12 +355,8 @@ namespace howto_minimal_bounding_rectangle
                     sf.LineAlignment = StringAlignment.Near;
                     for (int i = 0; i < 4; i++)
                     {
-                        e.Graphics.FillEllipse(Brushes.Lime,
-                            Points[ControlPoints[i]].X - 3,
-                            Points[ControlPoints[i]].Y - 3, 6, 6);
-                        e.Graphics.DrawString(i.ToString(), this.Font, Brushes.Red,
-                            Points[ControlPoints[i]].X,
-                            Points[ControlPoints[i]].Y, sf);
+                        e.Graphics.FillEllipse(Brushes.Lime, Points[ControlPoints[i]].X - 3, Points[ControlPoints[i]].Y - 3, 6, 6);
+                        e.Graphics.DrawString(i.ToString(), this.Font, Brushes.Red, Points[ControlPoints[i]].X, Points[ControlPoints[i]].Y, sf);
                     }
 
                     // Mark the selected control point//s edge.
@@ -431,7 +428,10 @@ namespace howto_minimal_bounding_rectangle
             float s, t;
 
             // If the segments are parallel, return False.
-            if (Math.Abs(da * dy - db * dx) < 0.001) return false;
+            if (Math.Abs(da * dy - db * dx) < 0.001)
+            {
+                return false;
+            }
 
             // Find the point of intersection.
             s = (dx * (B1 - Y1) + dy * (X1 - A1)) / (da * dy - db * dx);

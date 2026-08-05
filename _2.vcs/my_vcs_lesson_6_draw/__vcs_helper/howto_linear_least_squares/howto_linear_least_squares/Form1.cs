@@ -66,47 +66,43 @@ namespace howto_linear_least_squares
             // Draw the axes.
             DrawAxes(e.Graphics);
 
+            Pen thin_pen = new Pen(Color.Blue, 0);
+
             // Draw the curve.
             if (HasSolution == true)
             {
-                using (Pen thin_pen = new Pen(Color.Blue, 0))
-                {
-                    double y0 = BestM * Xmin + BestB;
-                    double y1 = BestM * Xmax + BestB;
-                    e.Graphics.DrawLine(thin_pen, (float)Xmin, (float)y0, (float)Xmax, (float)y1);
-                }
+
+                double y0 = BestM * Xmin + BestB;
+                double y1 = BestM * Xmax + BestB;
+                e.Graphics.DrawLine(thin_pen, (float)Xmin, (float)y0, (float)Xmax, (float)y1);
             }
 
             // Draw the points.
             const float dx = (Xmax - Xmin) / 100;
             const float dy = (Ymax - Ymin) / 100;
-            using (Pen thin_pen = new Pen(Color.Black, 0))
+            thin_pen = new Pen(Color.Black, 0);
+            foreach (PointF pt in Points)
             {
-                foreach (PointF pt in Points)
-                {
-                    e.Graphics.FillRectangle(Brushes.White, pt.X - dx, pt.Y - dy, 2 * dx, 2 * dy);
-                    e.Graphics.DrawRectangle(thin_pen, pt.X - dx, pt.Y - dy, 2 * dx, 2 * dy);
-                }
+                e.Graphics.FillRectangle(Brushes.White, pt.X - dx, pt.Y - dy, 2 * dx, 2 * dy);
+                e.Graphics.DrawRectangle(thin_pen, pt.X - dx, pt.Y - dy, 2 * dx, 2 * dy);
             }
         }
 
         // Draw the axes.
         private void DrawAxes(Graphics gr)
         {
-            using (Pen thin_pen = new Pen(Color.Black, 0))
+            Pen thin_pen = new Pen(Color.Black, 0);
+            const float xthick = 0.2f;
+            const float ythick = 0.2f;
+            gr.DrawLine(thin_pen, Xmin, 0, Xmax, 0);
+            for (float x = Xmin; x <= Xmax; x += 1.0f)
             {
-                const float xthick = 0.2f;
-                const float ythick = 0.2f;
-                gr.DrawLine(thin_pen, Xmin, 0, Xmax, 0);
-                for (float x = Xmin; x <= Xmax; x += 1.0f)
-                {
-                    gr.DrawLine(thin_pen, x, -ythick, x, ythick);
-                }
-                gr.DrawLine(thin_pen, 0, Ymin, 0, Ymax);
-                for (float y = Ymin; y <= Ymax; y += 1.0f)
-                {
-                    gr.DrawLine(thin_pen, -xthick, y, xthick, y);
-                }
+                gr.DrawLine(thin_pen, x, -ythick, x, ythick);
+            }
+            gr.DrawLine(thin_pen, 0, Ymin, 0, Ymax);
+            for (float y = Ymin; y <= Ymax; y += 1.0f)
+            {
+                gr.DrawLine(thin_pen, -xthick, y, xthick, y);
             }
         }
 
@@ -128,7 +124,9 @@ namespace howto_linear_least_squares
             richTextBox1.Text += "資料點數 : " + Points.Count.ToString() + "\n";
 
             if (Points.Count <= 0)
+            {
                 return;
+            }
 
             txtM.Clear();
             txtB.Clear();
@@ -160,7 +158,9 @@ namespace howto_linear_least_squares
         private void btnGraph_Click(object sender, EventArgs e)
         {
             if (Points.Count <= 0)
+            {
                 return;
+            }
 
             BestM = double.Parse(txtM.Text);
             BestB = double.Parse(txtB.Text);

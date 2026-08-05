@@ -75,6 +75,8 @@ namespace vcs_Draw9_Example7_vcsh
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             //for sierpinski1 ST
             DefineCorners();
             //for sierpinski1 SP
@@ -109,10 +111,8 @@ namespace vcs_Draw9_Example7_vcsh
             numericUpDown1.Location = new Point(x_st + dx * 0 + 55, y_st + dy * 0 + 50);
             numericUpDown1.Value = 0;
 
-            bt_save.Location = new Point(x_st + dx * 0 + 55, y_st + dy * 9);
-
-            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 12);
-            richTextBox1.Size = new Size(richTextBox1.Size.Width - 70, this.Height - richTextBox1.Size.Height - 20);
+            richTextBox1.Size = new Size(160, 900);
+            richTextBox1.Location = new Point(x_st + dx * 0 - 50, y_st + dy * 3);
 
             pictureBox_sierpinski1.Size = new Size(W, H);
             pictureBox_sierpinski2.Size = new Size(W, H);
@@ -683,40 +683,6 @@ namespace vcs_Draw9_Example7_vcsh
             richTextBox1.Clear();
         }
 
-        void save_image_to_drive()
-        {
-            if (bitmap1 != null)
-            {
-                string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                string filename1 = filename + ".jpg";
-                string filename2 = filename + ".bmp";
-                string filename3 = filename + ".png";
-
-                try
-                {
-                    bitmap1.Save(@filename1, ImageFormat.Jpeg);
-                    bitmap1.Save(@filename2, ImageFormat.Bmp);
-                    bitmap1.Save(@filename3, ImageFormat.Png);
-
-                    richTextBox1.Text += "存檔成功\n";
-                    richTextBox1.Text += "已存檔 : " + filename1 + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename2 + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename3 + "\n";
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-                }
-            }
-            else
-                richTextBox1.Text += "無圖可存\n";
-        }
-
-        private void bt_save_Click(object sender, EventArgs e)
-        {
-            save_image_to_drive();
-        }
-
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
         }
@@ -1233,10 +1199,9 @@ namespace vcs_Draw9_Example7_vcsh
             gr.ResetTransform();
         }
 
+        //------------------------------------------------------------  # 60個
 
-
-
-        #region sierpinski
+        //#region sierpinski
 
         // Draw the carpet.
         private void DrawGasket1()
@@ -1368,7 +1333,9 @@ namespace vcs_Draw9_Example7_vcsh
                 DrawTriangle(gr, level - 1, right_mid, bottom_mid, right_point);
             }
         }
-        #endregion
+        ///#endregion
+
+        //------------------------------------------------------------  # 60個
 
         //連接球 ST
         void draw_connection_balls()
@@ -1508,6 +1475,8 @@ namespace vcs_Draw9_Example7_vcsh
 
         //連接球 SP
 
+        //------------------------------------------------------------  # 60個
+
         //任意圈圈圖 ST
         void draw_random_circles()
         {
@@ -1530,6 +1499,8 @@ namespace vcs_Draw9_Example7_vcsh
             pictureBox14.Image = bm;
         }
         //任意圈圈圖 SP
+
+        //------------------------------------------------------------  # 60個
 
         // Apollonian Gasket ST
         void draw_Apollonian_Gasket()
@@ -1844,6 +1815,7 @@ namespace vcs_Draw9_Example7_vcsh
 
         // Apollonian Gasket SP
 
+        //------------------------------------------------------------  # 60個
 
         // 畫箭頭 ST
 
@@ -1894,6 +1866,7 @@ namespace vcs_Draw9_Example7_vcsh
 
         // 畫箭頭 SP
 
+        //------------------------------------------------------------  # 60個
 
         // 畫 Fractal 1 ST
 
@@ -1989,9 +1962,9 @@ namespace vcs_Draw9_Example7_vcsh
             return true;
         }
 
-
         // 畫 Fractal 1 SP
 
+        //------------------------------------------------------------  # 60個
 
         // 畫 Fractal 2 ST
 
@@ -2120,6 +2093,8 @@ namespace vcs_Draw9_Example7_vcsh
         }
 
         // 畫 Fractal 2 SP
+
+        //------------------------------------------------------------  # 60個
 
         //for sierpinski1 ST
         int aa = 0;
@@ -2332,6 +2307,8 @@ namespace vcs_Draw9_Example7_vcsh
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         //畫 pickover_popcorn ST
         // Plot a bunch of points.
         void draw_pickover_popcorn1()
@@ -2407,12 +2384,14 @@ namespace vcs_Draw9_Example7_vcsh
             dx = (int)(Dxmin + Dwid * (wx - Wxmin) / Wwid);
             dy = (int)(Dymin + Dhgt * (wy - Wymin) / Whgt);
         }
+
         private void DeviceToWorld(int dx, int dy, out float wx, out float wy)
         {
             wx = Wxmin + Wwid * (dx - Dxmin) / Dwid;
             wy = Wymin + Whgt * (dy - Dymin) / Dhgt;
         }
 
+        //------------------------------------------------------------  # 60個
 
         //彩色
 
@@ -2760,3 +2739,12 @@ namespace vcs_Draw9_Example7_vcsh
         }
     }
 }
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+

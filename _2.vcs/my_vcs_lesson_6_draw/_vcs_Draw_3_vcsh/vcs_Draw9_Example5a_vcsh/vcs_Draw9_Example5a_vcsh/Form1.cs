@@ -36,7 +36,7 @@ namespace vcs_Draw9_Example5a_vcsh
             RemoveBottom
         }
 
-        #region spiral_of_theodorus
+        //#region spiral_of_theodorus
         // Return an array of rainbow colors.
         private Color[] RainbowColors(byte alpha)
         {
@@ -61,9 +61,9 @@ namespace vcs_Draw9_Example5a_vcsh
                 brushes[i] = new SolidBrush(colors[i]);
             return brushes;
         }
-        #endregion spiral_of_theodorus
+        //#endregion spiral_of_theodorus
 
-        #region pickover_attractor
+        //#region pickover_attractor
         // The plane we should project on.
         private enum Plane
         {
@@ -87,7 +87,7 @@ namespace vcs_Draw9_Example5a_vcsh
         // The colors.
         Color BgColor, FgColor;
 
-        #endregion pickover_attractor
+        //#endregion pickover_attractor
 
         public Form1()
         {
@@ -100,11 +100,11 @@ namespace vcs_Draw9_Example5a_vcsh
             DrawPhiSpiralBitmap();
             this.ResizeRedraw = true;
 
-            #region pickover_attractor
+            //#region pickover_attractor
             // Start with the first plane selected.
             cboPlane.SelectedIndex = 0;
             SelectedPlane = Plane.XY;
-            #endregion pickover_attractor
+            //#endregion pickover_attractor
         }
 
         private void Form1_Resize(object sender, EventArgs e)
@@ -216,7 +216,7 @@ namespace vcs_Draw9_Example5a_vcsh
             Environment.Exit(0);
         }
 
-        #region 萬花筒
+        //#region 萬花筒
         // Start drawing.
         private void pictureBox0_MouseDown(object sender, MouseEventArgs e)
         {
@@ -320,9 +320,9 @@ namespace vcs_Draw9_Example5a_vcsh
             Polylines = new List<List<Point>>();
             pictureBox0.Refresh();
         }
-        #endregion 萬花筒
+        //#endregion 萬花筒
 
-        #region PhiSpiral
+        //#region PhiSpiral
         // Draw the bitmap.
         private void DrawPhiSpiralBitmap()
         {
@@ -495,9 +495,9 @@ namespace vcs_Draw9_Example5a_vcsh
         {
             DrawPhiSpiralBitmap();
         }
-        #endregion PhiSpiral
+        //#endregion PhiSpiral
 
-        #region spiral_of_theodorus
+        //#region spiral_of_theodorus
 
         // Draw.
         private void btnDraw_Click(object sender, EventArgs e)
@@ -507,9 +507,7 @@ namespace vcs_Draw9_Example5a_vcsh
             List<PointF> edge_points = FindTheodorusPoints(num_triangles);
 
             // Draw the spiral of Theodorus.
-            pictureBox2.Image = DrawTheodorusSpiral(
-                edge_points, pictureBox2.ClientSize,
-                chkOutline.Checked, chkFill.Checked);
+            pictureBox2.Image = DrawTheodorusSpiral(edge_points, pictureBox2.ClientSize, chkOutline.Checked, chkFill.Checked);
         }
 
         // Find points on the spiral of Theodorus.
@@ -524,9 +522,7 @@ namespace vcs_Draw9_Example5a_vcsh
             for (int i = 1; i <= num_triangles + 1; i++)
             {
                 radius = (float)Math.Sqrt(i);
-                edge_points.Add(new PointF(
-                    radius * (float)Math.Cos(theta),
-                    radius * (float)Math.Sin(theta)));
+                edge_points.Add(new PointF(radius * (float)Math.Cos(theta), radius * (float)Math.Sin(theta)));
                 theta -= (float)Math.Atan2(1, radius);
             }
 
@@ -534,8 +530,7 @@ namespace vcs_Draw9_Example5a_vcsh
         }
 
         // Draw the spiral of Theodorus.
-        private Bitmap DrawTheodorusSpiral(List<PointF> edge_points,
-            Size size, bool outline_triangles, bool fill_triangles)
+        private Bitmap DrawTheodorusSpiral(List<PointF> edge_points, Size size, bool outline_triangles, bool fill_triangles)
         {
             // Make the bitmap and associated Graphics object.
             int wid = size.Width;
@@ -553,13 +548,10 @@ namespace vcs_Draw9_Example5a_vcsh
                 // Scale and center.
                 float xmin, xmax, ymin, ymax;
                 GetBounds(edge_points, out xmin, out xmax, out ymin, out ymax);
-                RectangleF drawing_rect = new RectangleF(
-                    xmin, ymin, xmax - xmin, ymax - ymin);
-                RectangleF target_rect = new RectangleF(
-                    5, 5, wid - 10, hgt - 10);
+                RectangleF drawing_rect = new RectangleF(xmin, ymin, xmax - xmin, ymax - ymin);
+                RectangleF target_rect = new RectangleF(5, 5, wid - 10, hgt - 10);
                 MapDrawing(gr, drawing_rect, target_rect, false);
 
-                // Draw.
                 using (Pen pen = new Pen(Color.Black, 0))
                 {
                     int num_brushes = brushes.Length;
@@ -572,9 +564,13 @@ namespace vcs_Draw9_Example5a_vcsh
                             new PointF(edge_points[i - 1].X, edge_points[i - 1].Y),
                         };
                         if (fill_triangles)
+                        {
                             gr.FillPolygon(brushes[i % num_brushes], points);
+                        }
                         if (outline_triangles)
+                        {
                             gr.DrawPolygon(pen, points);
+                        }
                     }
                 }
             }
@@ -583,9 +579,7 @@ namespace vcs_Draw9_Example5a_vcsh
         }
 
         // Get the points' bounds.
-        private void GetBounds(List<PointF> points,
-            out float xmin, out float xmax,
-            out float ymin, out float ymax)
+        private void GetBounds(List<PointF> points, out float xmin, out float xmax, out float ymin, out float ymax)
         {
             // Find the bounds.
             xmin = points[0].X;
@@ -594,21 +588,34 @@ namespace vcs_Draw9_Example5a_vcsh
             ymax = ymin;
             foreach (PointF point in points)
             {
-                if (xmin > point.X) xmin = point.X;
-                if (xmax < point.X) xmax = point.X;
-                if (ymin > point.Y) ymin = point.Y;
-                if (ymax < point.Y) ymax = point.Y;
+                if (xmin > point.X)
+                {
+                    xmin = point.X;
+                }
+                if (xmax < point.X)
+                {
+                    xmax = point.X;
+                }
+                if (ymin > point.Y)
+                {
+                    ymin = point.Y;
+                }
+                if (ymax < point.Y)
+                {
+                    ymax = point.Y;
+                }
             }
         }
 
         // Map a drawing coordinate rectangle to
         // a graphics object rectangle.
         // See http://csharphelper.com/blog/2014/11/scale-a-drawing-so-it-fits-a-target-area-in-c/
-        private void MapDrawing(Graphics gr, RectangleF drawing_rect,
-            RectangleF target_rect, bool stretch)
+        private void MapDrawing(Graphics gr, RectangleF drawing_rect, RectangleF target_rect, bool stretch)
         {
-            if ((target_rect.Width < 1) ||
-                (target_rect.Height < 1)) return;
+            if ((target_rect.Width < 1) || (target_rect.Height < 1))
+            {
+                return;
+            }
 
             gr.ResetTransform();
 
@@ -628,17 +635,14 @@ namespace vcs_Draw9_Example5a_vcsh
                 scale_x = Math.Min(scale_x, scale_y);
                 scale_y = scale_x;
             }
-            gr.ScaleTransform(scale_x, scale_y,
-                System.Drawing.Drawing2D.MatrixOrder.Append);
+            gr.ScaleTransform(scale_x, scale_y, System.Drawing.Drawing2D.MatrixOrder.Append);
 
             // Translate to center over the drawing area.
             float graphics_cx = (target_rect.Left + target_rect.Right) / 2;
             float graphics_cy = (target_rect.Top + target_rect.Bottom) / 2;
-            gr.TranslateTransform(graphics_cx, graphics_cy,
-                System.Drawing.Drawing2D.MatrixOrder.Append);
+            gr.TranslateTransform(graphics_cx, graphics_cy, System.Drawing.Drawing2D.MatrixOrder.Append);
         }
-        #endregion spiral_of_theodorus
-
+        //#endregion spiral_of_theodorus
 
         private void ColorSample_Click(object sender, EventArgs e)
         {
@@ -760,14 +764,38 @@ namespace vcs_Draw9_Example5a_vcsh
             }
 
             // Get the parameters.
-            if (double.TryParse(txtA.Text, out A)) A = 2.0;
-            if (double.TryParse(txtB.Text, out B)) B = 0.5;
-            if (double.TryParse(txtC.Text, out C)) C = -0.6;
-            if (double.TryParse(txtD.Text, out D)) D = -2.5;
-            if (double.TryParse(txtE.Text, out E)) E = 1.0;
-            if (double.TryParse(txtX0.Text, out X0)) X0 = 0.0;
-            if (double.TryParse(txtY0.Text, out Y0)) Y0 = 0.0;
-            if (double.TryParse(txtZ0.Text, out Z0)) Z0 = 0.0;
+            if (double.TryParse(txtA.Text, out A))
+            {
+                A = 2.0;
+            }
+            if (double.TryParse(txtB.Text, out B))
+            {
+                B = 0.5;
+            }
+            if (double.TryParse(txtC.Text, out C))
+            {
+                C = -0.6;
+            }
+            if (double.TryParse(txtD.Text, out D))
+            {
+                D = -2.5;
+            }
+            if (double.TryParse(txtE.Text, out E))
+            {
+                E = 1.0;
+            }
+            if (double.TryParse(txtX0.Text, out X0))
+            {
+                X0 = 0.0;
+            }
+            if (double.TryParse(txtY0.Text, out Y0))
+            {
+                Y0 = 0.0;
+            }
+            if (double.TryParse(txtZ0.Text, out Z0))
+            {
+                Z0 = 0.0;
+            }
         }
 
         // Adjust for the new size.
@@ -776,8 +804,7 @@ namespace vcs_Draw9_Example5a_vcsh
             Prepare();
         }
 
-
-        #region self_avoiding_corner_walk
+        //#region self_avoiding_corner_walk
         private List<List<Point>> Walks = null;
         private int WalkWidth, WalkHeight;
 
@@ -803,10 +830,7 @@ namespace vcs_Draw9_Example5a_vcsh
             watch.Stop();
 
             string noun = (Walks.Count == 1 ? " walk " : " walks ");
-            lblResults.Text = "Found " +
-                Walks.Count.ToString() + noun + "in " +
-                watch.Elapsed.TotalSeconds.ToString("0.00") +
-                " seconds";
+            lblResults.Text = "Found " + Walks.Count.ToString() + noun + "in " + watch.Elapsed.TotalSeconds.ToString("0.00") + " seconds";
 
             // Display the first walk.
             if (Walks.Count > 0)
@@ -822,7 +846,6 @@ namespace vcs_Draw9_Example5a_vcsh
 
             btnGenerate.Enabled = true;
             Cursor = Cursors.Default;
-
 
             if (btnGenerate.Text == "Generate")
             {
@@ -844,7 +867,6 @@ namespace vcs_Draw9_Example5a_vcsh
                 btnGenerate.Text = "Generate";
                 Walker = null;
             }
-
         }
 
         // Generate all self-avoiding walks.
@@ -864,16 +886,12 @@ namespace vcs_Draw9_Example5a_vcsh
             visited[0, 0] = true;
 
             // Search for walks.
-            FindWalks(num_points, walks, current_walk,
-                0, 0, width, height, visited);
+            FindWalks(num_points, walks, current_walk, 0, 0, width, height, visited);
             return walks;
         }
 
         // Extend the walk that is at (current_x, current_y).
-        private void FindWalks(int num_points,
-            List<List<Point>> walks, Stack<Point> current_walk,
-            int current_x, int current_y,
-            int width, int height, bool[,] visited)
+        private void FindWalks(int num_points, List<List<Point>> walks, Stack<Point> current_walk, int current_x, int current_y, int width, int height, bool[,] visited)
         {
             // If we have visited every position, and the
             // last point is in the lower right corner,
@@ -882,15 +900,16 @@ namespace vcs_Draw9_Example5a_vcsh
             {
 #if CORNER_WALKS
                 if ((current_x == width) && (current_y == height))
+                {
                     walks.Add(current_walk.ToList());
+                }
 #else
                 walks.Add(current_walk.ToList());
 #endif
 
                 if (walks.Count % 1000 == 0)
                 {
-                    lblResults.Text = "... " +
-                        walks.Count.ToString() + " ...";
+                    lblResults.Text = "... " + walks.Count.ToString() + " ...";
                     Application.DoEvents();
                 }
             }
@@ -906,18 +925,32 @@ namespace vcs_Draw9_Example5a_vcsh
                 };
                 foreach (Point point in next_points)
                 {
-                    if (point.X < 0) continue;
-                    if (point.X > width) continue;
-                    if (point.Y < 0) continue;
-                    if (point.Y > height) continue;
-                    if (visited[point.X, point.Y]) continue;
+                    if (point.X < 0)
+                    {
+                        continue;
+                    }
+                    if (point.X > width)
+                    {
+                        continue;
+                    }
+                    if (point.Y < 0)
+                    {
+                        continue;
+                    }
+                    if (point.Y > height)
+                    {
+                        continue;
+                    }
+                    if (visited[point.X, point.Y])
+                    {
+                        continue;
+                    }
 
                     // Try visiting this point.
                     visited[point.X, point.Y] = true;
                     current_walk.Push(point);
 
-                    FindWalks(num_points, walks, current_walk,
-                        point.X, point.Y, width, height, visited);
+                    FindWalks(num_points, walks, current_walk, point.X, point.Y, width, height, visited);
 
                     // We're done visiting this point.
                     visited[point.X, point.Y] = false;
@@ -931,24 +964,19 @@ namespace vcs_Draw9_Example5a_vcsh
         {
             DisplayWalk(trkWalk.Value);
         }
+
         private void DisplayWalk(int walk_num)
         {
             lblWalkNum.Text = "Walk " + walk_num.ToString();
             using (Pen pen = new Pen(Color.Blue, 2))
             {
-                Bitmap bm = DrawWalk(Walks[walk_num],
-                    WalkWidth, WalkHeight,
-                    pictureBox6.ClientSize.Width,
-                    pictureBox6.ClientSize.Height,
-                    Color.White, Brushes.Green, pen);
+                Bitmap bm = DrawWalk(Walks[walk_num], WalkWidth, WalkHeight, pictureBox6.ClientSize.Width, pictureBox6.ClientSize.Height, Color.White, Brushes.Green, pen);
                 pictureBox6.Image = bm;
             }
         }
 
         // Draw a walk.
-        private Bitmap DrawWalk(List<Point> walk,
-            int width, int height, int bm_width, int bm_height,
-            Color bg_color, Brush dot_brush, Pen pen)
+        private Bitmap DrawWalk(List<Point> walk, int width, int height, int bm_width, int bm_height, Color bg_color, Brush dot_brush, Pen pen)
         {
             Bitmap bm = new Bitmap(bm_width, bm_height);
 
@@ -972,10 +1000,7 @@ namespace vcs_Draw9_Example5a_vcsh
                 {
                     for (int y = 0; y <= height; y++)
                     {
-                        gr.FillEllipse(dot_brush,
-                            offset_x + x * scale - dot_r,
-                            offset_y + y * scale - dot_r,
-                            dot_w, dot_w);
+                        gr.FillEllipse(dot_brush, offset_x + x * scale - dot_r, offset_y + y * scale - dot_r, dot_w, dot_w);
                     }
                 }
 
@@ -985,9 +1010,7 @@ namespace vcs_Draw9_Example5a_vcsh
                     List<PointF> points = new List<PointF>();
                     foreach (Point point in walk.ToArray())
                     {
-                        points.Add(new PointF(
-                            offset_x + point.X * scale,
-                            offset_y + point.Y * scale));
+                        points.Add(new PointF(offset_x + point.X * scale, offset_y + point.Y * scale));
                     }
                     gr.DrawLines(pen, points.ToArray());
                 }
@@ -1011,15 +1034,11 @@ namespace vcs_Draw9_Example5a_vcsh
             visited[0, 0] = true;
 
             // Search for walks.
-            return FindWalks2(num_points, current_walk,
-                0, 0, width, height, visited);
+            return FindWalks2(num_points, current_walk, 0, 0, width, height, visited);
         }
 
         // Extend the walk that is at (current_x, current_y).
-        private IEnumerable<List<Point>> FindWalks2(int num_points,
-            Stack<Point> current_walk,
-            int current_x, int current_y,
-            int width, int height, bool[,] visited)
+        private IEnumerable<List<Point>> FindWalks2(int num_points, Stack<Point> current_walk, int current_x, int current_y, int width, int height, bool[,] visited)
         {
             // If we have visited every position, and the
             // last point is in the lower right corner,
@@ -1047,19 +1066,35 @@ namespace vcs_Draw9_Example5a_vcsh
                 // Try the moves.
                 foreach (Point point in next_points)
                 {
-                    if (point.X < 0) continue;
-                    if (point.X > width) continue;
-                    if (point.Y < 0) continue;
-                    if (point.Y > height) continue;
-                    if (visited[point.X, point.Y]) continue;
+                    if (point.X < 0)
+                    {
+                        continue;
+                    }
+                    if (point.X > width)
+                    {
+                        continue;
+                    }
+                    if (point.Y < 0)
+                    {
+                        continue;
+                    }
+                    if (point.Y > height)
+                    {
+                        continue;
+                    }
+                    if (visited[point.X, point.Y])
+                    {
+                        continue;
+                    }
 
                     // Try visiting this point.
                     visited[point.X, point.Y] = true;
                     current_walk.Push(point);
 
-                    foreach (List<Point> walk in FindWalks2(num_points, current_walk,
-                        point.X, point.Y, width, height, visited))
+                    foreach (List<Point> walk in FindWalks2(num_points, current_walk, point.X, point.Y, width, height, visited))
+                    {
                         yield return walk;
+                    }
 
                     // We're done visiting this point.
                     visited[point.X, point.Y] = false;
@@ -1083,11 +1118,7 @@ namespace vcs_Draw9_Example5a_vcsh
                 using (Pen pen = new Pen(Color.Blue, 2))
                 {
                     List<Point> walk = Walker.Current;
-                    Bitmap bm = DrawWalk(walk,
-                        WalkWidth, WalkHeight,
-                        pictureBox7.ClientSize.Width,
-                        pictureBox7.ClientSize.Height,
-                        Color.White, Brushes.Green, pen);
+                    Bitmap bm = DrawWalk(walk, WalkWidth, WalkHeight, pictureBox7.ClientSize.Width, pictureBox7.ClientSize.Height, Color.White, Brushes.Green, pen);
                     pictureBox7.Image = bm;
                 }
             }
@@ -1149,9 +1180,13 @@ namespace vcs_Draw9_Example5a_vcsh
         private void tmrShowWalk_Tick(object sender, EventArgs e)
         {
             if (Walker == null)
+            {
                 tmrShowWalk.Enabled = false;
+            }
             else
+            {
                 DisplayNextWalk();
+            }
         }
 
         private void scrSpeed_Scroll(object sender, ScrollEventArgs e)
@@ -1159,6 +1194,6 @@ namespace vcs_Draw9_Example5a_vcsh
             tmrShowWalk.Interval = 1000 / scrSpeed.Value;
         }
 
-        #endregion self_avoiding_corner_walk
+        //#endregion self_avoiding_corner_walk
     }
 }

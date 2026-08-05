@@ -37,6 +37,7 @@ namespace vcs_Draw_Example1
         //重寫表單的OnPaint範例 直接寫在此即可
         protected override void OnPaint(PaintEventArgs e)
         {
+            e.Graphics.DrawString("使用\nOnPaint", new Font("標楷體", 14), new SolidBrush(Color.Red), new PointF(this.ClientSize.Width - 80, this.ClientSize.Height - 50));
             e.Graphics.DrawRectangle(Pens.Red, 5, 5, this.ClientSize.Width - 10, this.ClientSize.Height - 10);
         }
 
@@ -155,7 +156,7 @@ namespace vcs_Draw_Example1
             //pictureBox2.Visible = false;
 
             richTextBox1.Size = new Size(480, 250);
-            richTextBox1.Location = new Point(x_st + dx * 7 - 100, y_st + dy * 11 + 40);
+            richTextBox1.Location = new Point(x_st + dx * 7 - 140, y_st + dy * 11 + 40);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             y_st += 10;
@@ -2440,24 +2441,20 @@ namespace vcs_Draw_Example1
             Rectangle rect = new Rectangle(x_st, y_st, W - 60, H - 60);
 
             // Fill the ellipse.
-            using (LinearGradientBrush br = new LinearGradientBrush(rect, Color.Lime, Color.DarkGreen, 225f))
-            {
-                g.FillEllipse(br, rect);
-            }
-            // Outline the ellipse.
-            using (LinearGradientBrush br = new LinearGradientBrush(rect, Color.Lime, Color.DarkGreen, 45f))
-            {
-                using (Pen pen = new Pen(br, 20f))
-                {
-                    // g.DrawRectangle(Pens.Red, rect);
-                    rect.X += 10;
-                    rect.Y += 10;
-                    rect.Width -= 20;
-                    rect.Height -= 20;
+            LinearGradientBrush br = new LinearGradientBrush(rect, Color.Lime, Color.DarkGreen, 225f);
+            g.FillEllipse(br, rect);
 
-                    g.DrawEllipse(pen, rect);
-                }
-            }
+            // Outline the ellipse.
+            br = new LinearGradientBrush(rect, Color.Lime, Color.DarkGreen, 45f);
+
+            Pen pen = new Pen(br, 20f);
+            // g.DrawRectangle(Pens.Red, rect);
+            rect.X += 10;
+            rect.Y += 10;
+            rect.Width -= 20;
+            rect.Height -= 20;
+
+            g.DrawEllipse(pen, rect);
             sb.Dispose();
         }
 
@@ -3126,32 +3123,30 @@ namespace vcs_Draw_Example1
             // Label the slices.
             // We label the slices after drawing them all so one
             // slice doesn't cover the label on another very thin slice.
-            using (StringFormat string_format = new StringFormat())
+            StringFormat string_format = new StringFormat();
+            // Center text.
+            string_format.Alignment = StringAlignment.Center;
+            string_format.LineAlignment = StringAlignment.Center;
+
+            // Find the center of the rectangle.
+            float cx = (rect.Left + rect.Right) / 2f;
+            float cy = (rect.Top + rect.Bottom) / 2f;
+
+            // Place the label about 2/3 of the way out to the edge.
+            float radius = (rect.Width + rect.Height) / 2f * 0.33f;
+
+            start_angle = initial_angle;
+            for (int i = 0; i < values.Length; i++)
             {
-                // Center text.
-                string_format.Alignment = StringAlignment.Center;
-                string_format.LineAlignment = StringAlignment.Center;
+                float sweep_angle = values[i] * 360f / total;
 
-                // Find the center of the rectangle.
-                float cx = (rect.Left + rect.Right) / 2f;
-                float cy = (rect.Top + rect.Bottom) / 2f;
+                // Label the slice.
+                double label_angle = Math.PI * (start_angle + sweep_angle / 2f) / 180f;
+                float x = cx + (float)(radius * Math.Cos(label_angle));
+                float y = cy + (float)(radius * Math.Sin(label_angle));
+                g.DrawString(values[i].ToString(label_format), label_font, label_brush, x, y, string_format);
 
-                // Place the label about 2/3 of the way out to the edge.
-                float radius = (rect.Width + rect.Height) / 2f * 0.33f;
-
-                start_angle = initial_angle;
-                for (int i = 0; i < values.Length; i++)
-                {
-                    float sweep_angle = values[i] * 360f / total;
-
-                    // Label the slice.
-                    double label_angle = Math.PI * (start_angle + sweep_angle / 2f) / 180f;
-                    float x = cx + (float)(radius * Math.Cos(label_angle));
-                    float y = cy + (float)(radius * Math.Sin(label_angle));
-                    g.DrawString(values[i].ToString(label_format), label_font, label_brush, x, y, string_format);
-
-                    start_angle += sweep_angle;
-                }
+                start_angle += sweep_angle;
             }
         }
         //Pie Chart 1 SP
@@ -3232,15 +3227,13 @@ namespace vcs_Draw_Example1
             Rectangle left_rect = new Rectangle(left_margin, left_margin, annotation_width, annotation_height);
             Rectangle ellipse_rect = new Rectangle(left_rect.Right + left_margin, top_margin, circle_width, circle_width);
             Rectangle right_rect = new Rectangle(ellipse_rect.Right + left_margin, left_rect.Top, left_rect.Width, left_rect.Height);
-            using (Font annotation_font = new Font("Times New Roman", 12))
-            {
-                DrawAnnotatedPieChart(g,
-                    ellipse_rect, left_rect, right_rect, 1.1f, 0,
-                    SliceBrushes, SlicePens,
-                    Values, Annotations, "0.0", Font, Brushes.Black,
-                    annotation_font, Pens.Blue, Brushes.Green,
-                    Brushes.LightBlue, null);
-            }
+            Font annotation_font = new Font("Times New Roman", 12);
+            DrawAnnotatedPieChart(g,
+                ellipse_rect, left_rect, right_rect, 1.1f, 0,
+                SliceBrushes, SlicePens,
+                Values, Annotations, "0.0", Font, Brushes.Black,
+                annotation_font, Pens.Blue, Brushes.Green,
+                Brushes.LightBlue, null);
         }
 
         // Draw a pie chart.
@@ -3277,62 +3270,60 @@ namespace vcs_Draw_Example1
             // Label and annotate the slices.
             // We label the slices after drawing them all so one
             // slice doesn't cover the label on another very thin slice.
-            using (StringFormat string_format = new StringFormat())
+            StringFormat string_format = new StringFormat();
+            // Find the center of the rectangle.
+            float cx = (ellipse_rect.Left + ellipse_rect.Right) / 2;
+            float cy = (ellipse_rect.Top + ellipse_rect.Bottom) / 2;
+
+            // Place the label about 2/3 of the way out to the edge.
+            float radius = (ellipse_rect.Width + ellipse_rect.Height) / 2f * 0.33f;
+
+            // Distances for annotation lines.
+            float annotation_rx1 = ellipse_rect.Width / 2;
+            float annotation_ry1 = ellipse_rect.Height / 2;
+            float annotation_rx2 = annotation_rx1 * annotation_radius_scale;
+            float annotation_ry2 = annotation_ry1 * annotation_radius_scale;
+
+            start_angle = start_angle = initial_angle;
+            for (int i = 0; i < values.Length; i++)
             {
-                // Find the center of the rectangle.
-                float cx = (ellipse_rect.Left + ellipse_rect.Right) / 2;
-                float cy = (ellipse_rect.Top + ellipse_rect.Bottom) / 2;
+                float sweep_angle = values[i] * 360f / total;
 
-                // Place the label about 2/3 of the way out to the edge.
-                float radius = (ellipse_rect.Width + ellipse_rect.Height) / 2f * 0.33f;
+                // Label the slice.
+                string_format.Alignment = StringAlignment.Center;
+                string_format.LineAlignment = StringAlignment.Center;
+                double label_angle = Math.PI * (start_angle + sweep_angle / 2) / 180;
+                float x = cx + (float)(radius * Math.Cos(label_angle));
+                float y = cy + (float)(radius * Math.Sin(label_angle));
+                g.DrawString(values[i].ToString(label_format), label_font, label_brush, x, y, string_format);
 
-                // Distances for annotation lines.
-                float annotation_rx1 = ellipse_rect.Width / 2;
-                float annotation_ry1 = ellipse_rect.Height / 2;
-                float annotation_rx2 = annotation_rx1 * annotation_radius_scale;
-                float annotation_ry2 = annotation_ry1 * annotation_radius_scale;
+                // Draw a radial line to connect to the annotation.
+                float x1 = cx + (float)(annotation_rx1 * Math.Cos(label_angle));
+                float y1 = cy + (float)(annotation_rx1 * Math.Sin(label_angle));
+                float x2 = cx + (float)(annotation_rx2 * Math.Cos(label_angle));
+                float y2 = cy + (float)(annotation_rx2 * Math.Sin(label_angle));
+                g.DrawLine(annotation_pen, x1, y1, x2, y2);
 
-                start_angle = start_angle = initial_angle;
-                for (int i = 0; i < values.Length; i++)
+                // Draw a horizontal line to the annotation.
+                if (x2 < x1)
                 {
-                    float sweep_angle = values[i] * 360f / total;
+                    // Draw to the left.
+                    g.DrawLine(annotation_pen, x2, y2, left_rect.Right, y2);
 
-                    // Label the slice.
-                    string_format.Alignment = StringAlignment.Center;
-                    string_format.LineAlignment = StringAlignment.Center;
-                    double label_angle = Math.PI * (start_angle + sweep_angle / 2) / 180;
-                    float x = cx + (float)(radius * Math.Cos(label_angle));
-                    float y = cy + (float)(radius * Math.Sin(label_angle));
-                    g.DrawString(values[i].ToString(label_format), label_font, label_brush, x, y, string_format);
-
-                    // Draw a radial line to connect to the annotation.
-                    float x1 = cx + (float)(annotation_rx1 * Math.Cos(label_angle));
-                    float y1 = cy + (float)(annotation_rx1 * Math.Sin(label_angle));
-                    float x2 = cx + (float)(annotation_rx2 * Math.Cos(label_angle));
-                    float y2 = cy + (float)(annotation_rx2 * Math.Sin(label_angle));
-                    g.DrawLine(annotation_pen, x1, y1, x2, y2);
-
-                    // Draw a horizontal line to the annotation.
-                    if (x2 < x1)
-                    {
-                        // Draw to the left.
-                        g.DrawLine(annotation_pen, x2, y2, left_rect.Right, y2);
-
-                        // Draw the annotation right justified.
-                        string_format.Alignment = StringAlignment.Far;
-                        g.DrawString(annotations[i], annotation_font, annotation_brush, left_rect.Right, y2, string_format);
-                    }
-                    else
-                    {
-                        // Draw to the right.
-                        g.DrawLine(annotation_pen, x2, y2, right_rect.Left, y2);
-
-                        // Draw the annotation left justified.
-                        string_format.Alignment = StringAlignment.Near;
-                        g.DrawString(annotations[i], annotation_font, annotation_brush, right_rect.Left, y2, string_format);
-                    }
-                    start_angle += sweep_angle;
+                    // Draw the annotation right justified.
+                    string_format.Alignment = StringAlignment.Far;
+                    g.DrawString(annotations[i], annotation_font, annotation_brush, left_rect.Right, y2, string_format);
                 }
+                else
+                {
+                    // Draw to the right.
+                    g.DrawLine(annotation_pen, x2, y2, right_rect.Left, y2);
+
+                    // Draw the annotation left justified.
+                    string_format.Alignment = StringAlignment.Near;
+                    g.DrawString(annotations[i], annotation_font, annotation_brush, right_rect.Left, y2, string_format);
+                }
+                start_angle += sweep_angle;
             }
         }
         //Pie Chart 2 SP
@@ -3421,48 +3412,46 @@ namespace vcs_Draw_Example1
             Pen outline_pen = Pens.Red;
             Brush fill_brush = Brushes.LightGreen;
 
-            using (Pen ellipse_pen = new Pen(Color.Blue))
-            {
-                ellipse_pen.DashPattern = new float[] { 5, 5 };
+            Pen ellipse_pen = new Pen(Color.Blue);
+            ellipse_pen.DashPattern = new float[] { 5, 5 };
 
-                // Northeast wedge.
-                Rectangle rect = new Rectangle(margin + 30, 10, W, W);
-                g.DrawEllipse(ellipse_pen, rect);
-                g.FillPie(fill_brush, rect, 300, 30);
-                g.DrawPie(outline_pen, rect, 300, 30);
+            // Northeast wedge.
+            Rectangle rect = new Rectangle(margin + 30, 10, W, W);
+            g.DrawEllipse(ellipse_pen, rect);
+            g.FillPie(fill_brush, rect, 300, 30);
+            g.DrawPie(outline_pen, rect, 300, 30);
 
-                // Everything else.
-                rect.X += W + margin;
-                g.DrawEllipse(ellipse_pen, rect);
-                g.FillPie(fill_brush, rect, 300, -330);
-                g.DrawPie(outline_pen, rect, 300, -330);
+            // Everything else.
+            rect.X += W + margin;
+            g.DrawEllipse(ellipse_pen, rect);
+            g.FillPie(fill_brush, rect, 300, -330);
+            g.DrawPie(outline_pen, rect, 300, -330);
 
-                // East wedge.
-                rect.Y += W + margin;
-                rect.X = margin + 30;
-                g.DrawEllipse(ellipse_pen, rect);
-                g.FillPie(fill_brush, rect, 315, 90);
-                g.DrawPie(outline_pen, rect, 315, 90);
+            // East wedge.
+            rect.Y += W + margin;
+            rect.X = margin + 30;
+            g.DrawEllipse(ellipse_pen, rect);
+            g.FillPie(fill_brush, rect, 315, 90);
+            g.DrawPie(outline_pen, rect, 315, 90);
 
-                // Everything else.
-                rect.X += W + margin;
-                g.DrawEllipse(ellipse_pen, rect);
-                g.FillPie(fill_brush, rect, 315, -270);
-                g.DrawPie(outline_pen, rect, 315, -270);
+            // Everything else.
+            rect.X += W + margin;
+            g.DrawEllipse(ellipse_pen, rect);
+            g.FillPie(fill_brush, rect, 315, -270);
+            g.DrawPie(outline_pen, rect, 315, -270);
 
-                // Northwest quadrant.
-                rect.Y += W + margin;
-                rect.X = margin + 30;
-                g.DrawEllipse(ellipse_pen, rect);
-                g.FillPie(fill_brush, rect, 180, 90);
-                g.DrawPie(outline_pen, rect, 180, 90);
+            // Northwest quadrant.
+            rect.Y += W + margin;
+            rect.X = margin + 30;
+            g.DrawEllipse(ellipse_pen, rect);
+            g.FillPie(fill_brush, rect, 180, 90);
+            g.DrawPie(outline_pen, rect, 180, 90);
 
-                // Everything else.
-                rect.X += W + margin;
-                g.DrawEllipse(ellipse_pen, rect);
-                g.FillPie(fill_brush, rect, 180, -270);
-                g.DrawPie(outline_pen, rect, 180, -270);
-            }
+            // Everything else.
+            rect.X += W + margin;
+            g.DrawEllipse(ellipse_pen, rect);
+            g.FillPie(fill_brush, rect, 180, -270);
+            g.DrawPie(outline_pen, rect, 180, -270);
         }
         //Pie Chart 4 SP
 

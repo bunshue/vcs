@@ -14,13 +14,18 @@ namespace howto_self_avoiding_walk
 {
     public partial class Form1 : Form
     {
+        private List<List<Point>> Walks = null;
+        private int WalkWidth, WalkHeight;
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        private List<List<Point>> Walks = null;
-        private int WalkWidth, WalkHeight;
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
 
         private void btnGenerate_Click(object sender, EventArgs e)
         {
@@ -41,10 +46,7 @@ namespace howto_self_avoiding_walk
             watch.Stop();
 
             string noun = (Walks.Count == 1 ? " walk " : " walks ");
-            lblResults.Text = "Found " +
-                Walks.Count.ToString() + noun + "in " +
-                watch.Elapsed.TotalSeconds.ToString("0.00") +
-                " seconds";
+            lblResults.Text = "Found " + Walks.Count.ToString() + noun + "in " + watch.Elapsed.TotalSeconds.ToString("0.00") + " seconds";
 
             // Display the first walk.
             if (Walks.Count > 0)
@@ -79,16 +81,12 @@ namespace howto_self_avoiding_walk
             visited[0, 0] = true;
 
             // Search for walks.
-            FindWalks(num_points, walks, current_walk,
-                0, 0, width, height, visited);
+            FindWalks(num_points, walks, current_walk, 0, 0, width, height, visited);
             return walks;
         }
 
         // Extend the walk that is at (current_x, current_y).
-        private void FindWalks(int num_points,
-            List<List<Point>> walks, Stack<Point> current_walk,
-            int current_x, int current_y,
-            int width, int height, bool[,] visited)
+        private void FindWalks(int num_points, List<List<Point>> walks, Stack<Point> current_walk, int current_x, int current_y, int width, int height, bool[,] visited)
         {
             // If we have visited every position,
             // then this is a complete walk.
@@ -98,8 +96,7 @@ namespace howto_self_avoiding_walk
 
                 if (walks.Count % 1000 == 0)
                 {
-                    lblResults.Text = "... " +
-                        walks.Count.ToString() + " ...";
+                    lblResults.Text = "... " + walks.Count.ToString() + " ...";
                     Application.DoEvents();
                 }
             }
@@ -113,20 +110,35 @@ namespace howto_self_avoiding_walk
                     new Point(current_x, current_y - 1),
                     new Point(current_x, current_y + 1),
                 };
+
                 foreach (Point point in next_points)
                 {
-                    if (point.X < 0) continue;
-                    if (point.X > width) continue;
-                    if (point.Y < 0) continue;
-                    if (point.Y > height) continue;
-                    if (visited[point.X, point.Y]) continue;
+                    if (point.X < 0)
+                    {
+                        continue;
+                    }
+                    if (point.X > width)
+                    {
+                        continue;
+                    }
+                    if (point.Y < 0)
+                    {
+                        continue;
+                    }
+                    if (point.Y > height)
+                    {
+                        continue;
+                    }
+                    if (visited[point.X, point.Y])
+                    {
+                        continue;
+                    }
 
                     // Try visiting this point.
                     visited[point.X, point.Y] = true;
                     current_walk.Push(point);
 
-                    FindWalks(num_points, walks, current_walk,
-                        point.X, point.Y, width, height, visited);
+                    FindWalks(num_points, walks, current_walk, point.X, point.Y, width, height, visited);
 
                     // We're done visiting this point.
                     visited[point.X, point.Y] = false;
@@ -140,24 +152,19 @@ namespace howto_self_avoiding_walk
         {
             DisplayWalk(trkWalk.Value);
         }
+
         private void DisplayWalk(int walk_num)
         {
             lblWalkNum.Text = "Walk " + walk_num.ToString();
             using (Pen pen = new Pen(Color.Blue, 2))
             {
-                Bitmap bm = DrawWalk(Walks[walk_num],
-                    WalkWidth, WalkHeight,
-                    picCanvas.ClientSize.Width,
-                    picCanvas.ClientSize.Height,
-                    Color.White, Brushes.Green, pen);
+                Bitmap bm = DrawWalk(Walks[walk_num], WalkWidth, WalkHeight, picCanvas.ClientSize.Width, picCanvas.ClientSize.Height, Color.White, Brushes.Green, pen);
                 picCanvas.Image = bm;
             }
         }
 
         // Draw a walk.
-        private Bitmap DrawWalk(List<Point> walk,
-            int width, int height, int bm_width, int bm_height,
-            Color bg_color, Brush dot_brush, Pen pen)
+        private Bitmap DrawWalk(List<Point> walk, int width, int height, int bm_width, int bm_height, Color bg_color, Brush dot_brush, Pen pen)
         {
             Bitmap bm = new Bitmap(bm_width, bm_height);
 
@@ -181,10 +188,7 @@ namespace howto_self_avoiding_walk
                 {
                     for (int y = 0; y <= height; y++)
                     {
-                        gr.FillEllipse(dot_brush,
-                            offset_x + x * scale - dot_r,
-                            offset_y + y * scale - dot_r,
-                            dot_w, dot_w);
+                        gr.FillEllipse(dot_brush, offset_x + x * scale - dot_r, offset_y + y * scale - dot_r, dot_w, dot_w);
                     }
                 }
 
@@ -194,9 +198,7 @@ namespace howto_self_avoiding_walk
                     List<PointF> points = new List<PointF>();
                     foreach (Point point in walk.ToArray())
                     {
-                        points.Add(new PointF(
-                            offset_x + point.X * scale,
-                            offset_y + point.Y * scale));
+                        points.Add(new PointF(offset_x + point.X * scale, offset_y + point.Y * scale));
                     }
                     gr.DrawLines(pen, points.ToArray());
                 }
@@ -206,3 +208,4 @@ namespace howto_self_avoiding_walk
         }
     }
 }
+

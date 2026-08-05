@@ -54,10 +54,13 @@ namespace vcs_Draw9_Example9_vcsh
                 Color.Violet
         };
 
-        #region pictureBox_butterfly butterfly
-        private const int period = 24;
-        #endregion
+        //------------------------------------------------------------  # 60個
 
+        //#region pictureBox_butterfly butterfly
+        private const int period = 24;
+        //#endregion
+
+        //------------------------------------------------------------  # 60個
 
         //畫triangle_puzzle_solution ST
         // The points.
@@ -70,6 +73,7 @@ namespace vcs_Draw9_Example9_vcsh
         private int CurrentSolution = 100;
         //畫triangle_puzzle_solution SP
 
+        //------------------------------------------------------------  # 60個
 
         //畫find_squares_colored ST
         // The points.
@@ -187,8 +191,6 @@ namespace vcs_Draw9_Example9_vcsh
 
             groupBox2.Location = new Point(x_st + dx * 5 - 40, y_st + dy * 1);
 
-            bt_save.Location = new Point(x_st + dx * 6 + 225, y_st + dy * 0 + 50);
-
             richTextBox1.Size = new Size(280, 400);
             richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0 + 50 + 50);
 
@@ -238,40 +240,6 @@ namespace vcs_Draw9_Example9_vcsh
 
         //------------------------------------------------------------  # 60個
 
-        void save_image_to_drive()
-        {
-            if (bitmap1 != null)
-            {
-                string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                string filename1 = filename + ".jpg";
-                string filename2 = filename + ".bmp";
-                string filename3 = filename + ".png";
-
-                try
-                {
-                    bitmap1.Save(@filename1, ImageFormat.Jpeg);
-                    bitmap1.Save(@filename2, ImageFormat.Bmp);
-                    bitmap1.Save(@filename3, ImageFormat.Png);
-
-                    richTextBox1.Text += "存檔成功\n";
-                    richTextBox1.Text += "已存檔 : " + filename1 + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename2 + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename3 + "\n";
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-                }
-            }
-            else
-                richTextBox1.Text += "無圖可存\n";
-        }
-
-        private void bt_save_Click(object sender, EventArgs e)
-        {
-            save_image_to_drive();
-        }
-
         // Force all threads to end.
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -301,24 +269,20 @@ namespace vcs_Draw9_Example9_vcsh
 
             // Generate the points.
             double t = 0;
-            double r = 5 * (1 + Math.Sin(11 * t / 5))
-                - 4 * Math.Pow(Math.Sin(17 * t / 3), 4)
-                * Math.Pow(Math.Sin(2 * Math.Cos(3 * t) - 28 * t), 8);
+            double r = 5 * (1 + Math.Sin(11 * t / 5)) - 4 * Math.Pow(Math.Sin(17 * t / 3), 4) * Math.Pow(Math.Sin(2 * Math.Cos(3 * t) - 28 * t), 8);
             PointF pt1 = new PointF((float)(r * Math.Sin(t)), (float)(-r * Math.Cos(t)));
 
-            using (Pen the_pen = new Pen(Color.Blue, 0))
+            Pen the_pen = new Pen(Color.Blue, 0);
+            for (int i = 0; i <= num_lines; i++)
             {
-                for (int i = 0; i <= num_lines; i++)
-                {
-                    t = i * Period * Math.PI / num_lines;
-                    r = 5 * (1 + Math.Sin(11 * t / 5))
-                        - 4 * Math.Pow(Math.Sin(17 * t / 3), 4)
-                        * Math.Pow(Math.Sin(2 * Math.Cos(3 * t) - 28 * t), 8);
-                    PointF pt0 = pt1;
-                    pt1 = new PointF((float)(r * Math.Sin(t)), (float)(r * Math.Cos(t)));
-                    the_pen.Color = GetColor(t);
-                    e.Graphics.DrawLine(the_pen, pt0, pt1);
-                }
+                t = i * Period * Math.PI / num_lines;
+                r = 5 * (1 + Math.Sin(11 * t / 5))
+                    - 4 * Math.Pow(Math.Sin(17 * t / 3), 4)
+                    * Math.Pow(Math.Sin(2 * Math.Cos(3 * t) - 28 * t), 8);
+                PointF pt0 = pt1;
+                pt1 = new PointF((float)(r * Math.Sin(t)), (float)(r * Math.Cos(t)));
+                the_pen.Color = GetColor(t);
+                e.Graphics.DrawLine(the_pen, pt0, pt1);
             }
         }
 
@@ -355,38 +319,32 @@ namespace vcs_Draw9_Example9_vcsh
                 * Math.Pow(Math.Sin(2 * Math.Cos(3 * t) - 28 * t), 8);
             PointF pt1 = new PointF((float)(r * Math.Sin(t)), (float)(-r * Math.Cos(t)));
 
-            using (Pen the_pen = new Pen(Color.Blue, 0))
+            Pen the_pen = new Pen(Color.Blue, 0);
+            SolidBrush the_brush = new SolidBrush(Color.Blue);
+            for (int i = 0; i <= num_lines; i++)
             {
-                using (SolidBrush the_brush = new SolidBrush(Color.Blue))
-                {
-                    for (int i = 0; i <= num_lines; i++)
-                    {
-                        t = i * Period * Math.PI / num_lines;
-                        r = 5 * (1 + Math.Sin(11 * t / 5))
-                            - 4 * Math.Pow(Math.Sin(17 * t / 3), 4)
-                            * Math.Pow(Math.Sin(2 * Math.Cos(3 * t) - 28 * t), 8);
-                        PointF pt0 = pt1;
-                        pt1 = new PointF((float)(r * Math.Sin(t)), (float)(r * Math.Cos(t)));
-                        Color the_color = GetColor(t);
+                t = i * Period * Math.PI / num_lines;
+                r = 5 * (1 + Math.Sin(11 * t / 5))
+                    - 4 * Math.Pow(Math.Sin(17 * t / 3), 4)
+                    * Math.Pow(Math.Sin(2 * Math.Cos(3 * t) - 28 * t), 8);
+                PointF pt0 = pt1;
+                pt1 = new PointF((float)(r * Math.Sin(t)), (float)(r * Math.Cos(t)));
+                Color the_color = GetColor(t);
 
-                        // Fill the triangle from this edge to the origin.
-                        the_brush.Color = Color.FromArgb(64,
-                            the_color.R, the_color.G, the_color.B);
-                        PointF[] pts = { pt0, pt1, new PointF(0, 0) };
-                        e.Graphics.FillPolygon(the_brush, pts);
+                // Fill the triangle from this edge to the origin.
+                the_brush.Color = Color.FromArgb(64, the_color.R, the_color.G, the_color.B);
+                PointF[] pts = { pt0, pt1, new PointF(0, 0) };
+                e.Graphics.FillPolygon(the_brush, pts);
 
-                        // Draw the curve's outer edge.
-                        the_pen.Color = the_color;
-                        e.Graphics.DrawLine(the_pen, pt0, pt1);
-                    }
-                }
+                // Draw the curve's outer edge.
+                the_pen.Color = the_color;
+                e.Graphics.DrawLine(the_pen, pt0, pt1);
             }
         }
 
+        //------------------------------------------------------------  # 60個
 
-
-
-        #region pictureBox_butterfly butterfly
+        //#region pictureBox_butterfly butterfly
 
         // Draw the butterfly.
         private void pictureBox_butterfly_Paint(object sender, PaintEventArgs e)
@@ -417,21 +375,21 @@ namespace vcs_Draw9_Example9_vcsh
             double t = 0;
             double expr = Math.Exp(Math.Cos(t)) - 2 * Math.Cos(4 * t) - Math.Pow(Math.Sin(t / 12), 5);
             pt1 = new PointF((float)(Math.Sin(t) * expr), (float)(-Math.Cos(t) * expr));
-            using (Pen the_pen = new Pen(Color.Blue, 0))
+            Pen the_pen = new Pen(Color.Blue, 0);
+            const long num_lines = 5000;
+            for (long i = 0; i < num_lines; i++)
             {
-                const long num_lines = 5000;
-                for (long i = 0; i < num_lines; i++)
-                {
-                    t = i * period * Math.PI / num_lines;
-                    expr = Math.Exp(Math.Cos(t)) - 2 * Math.Cos(4 * t) - Math.Pow(Math.Sin(t / 12), 5);
-                    pt0 = pt1;
-                    pt1 = new PointF((float)(Math.Sin(t) * expr), (float)(-Math.Cos(t) * expr));
-                    the_pen.Color = GetColor(t);
-                    e.Graphics.DrawLine(the_pen, pt0, pt1);
-                }
+                t = i * period * Math.PI / num_lines;
+                expr = Math.Exp(Math.Cos(t)) - 2 * Math.Cos(4 * t) - Math.Pow(Math.Sin(t / 12), 5);
+                pt0 = pt1;
+                pt1 = new PointF((float)(Math.Sin(t) * expr), (float)(-Math.Cos(t) * expr));
+                the_pen.Color = GetColor(t);
+                e.Graphics.DrawLine(the_pen, pt0, pt1);
             }
         }
-        #endregion
+        //#endregion
+
+        //------------------------------------------------------------  # 60個
 
         // polar graph ST
         // Draw the graph.
@@ -448,31 +406,35 @@ namespace vcs_Draw9_Example9_vcsh
                         new PointF(W, H),
                         new PointF(0, 0),
                     };
-            //e.Graphics
+
             e.Graphics.Transform = new Matrix(rect, pts);
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
-            using (Pen thin_pen = new Pen(Color.Blue, 0))
+            Pen thin_pen = new Pen(Color.Blue, 0);
+            // Draw the X and Y axes.
+            thin_pen.Color = Color.Blue;
+            e.Graphics.DrawLine(thin_pen, -2.1f, 0, 2.1f, 0);
+            const float big_tick = 0.1f;
+            const float small_tick = 0.05f;
+            for (float x = (int)-2.1f; x <= 2.1f; x += 1)
             {
-                // Draw the X and Y axes.
-                thin_pen.Color = Color.Blue;
-                e.Graphics.DrawLine(thin_pen, -2.1f, 0, 2.1f, 0);
-                const float big_tick = 0.1f;
-                const float small_tick = 0.05f;
-                for (float x = (int)-2.1f; x <= 2.1f; x += 1)
-                    e.Graphics.DrawLine(thin_pen, x, -small_tick, x, small_tick);
-                for (float x = (int)-2.1f + 0.5f; x <= 2.1f; x += 1)
-                    e.Graphics.DrawLine(thin_pen, x, -big_tick, x, big_tick);
-
-                e.Graphics.DrawLine(thin_pen, 0, -2.1f, 0, 2.1f);
-                for (float y = (int)-2.1f; y <= 2.1f; y += 1)
-                    e.Graphics.DrawLine(thin_pen, -small_tick, y, small_tick, y);
-                for (float y = (int)-2.1f + 0.5f; y <= 2.1f; y += 1)
-                    e.Graphics.DrawLine(thin_pen, -big_tick, y, big_tick, y);
-
-                // Draw the graph.
-                DrawGraph(e.Graphics);
+                e.Graphics.DrawLine(thin_pen, x, -small_tick, x, small_tick);
             }
+            for (float x = (int)-2.1f + 0.5f; x <= 2.1f; x += 1)
+            {
+                e.Graphics.DrawLine(thin_pen, x, -big_tick, x, big_tick);
+            }
+
+            e.Graphics.DrawLine(thin_pen, 0, -2.1f, 0, 2.1f);
+            for (float y = (int)-2.1f; y <= 2.1f; y += 1)
+            {
+                e.Graphics.DrawLine(thin_pen, -small_tick, y, small_tick, y);
+            }
+            for (float y = (int)-2.1f + 0.5f; y <= 2.1f; y += 1)
+            {
+                e.Graphics.DrawLine(thin_pen, -big_tick, y, big_tick, y);
+            }
+            DrawGraph(e.Graphics);
         }
 
         // Draw the graph on a Bitmap.
@@ -493,28 +455,24 @@ namespace vcs_Draw9_Example9_vcsh
             }
 
             // Draw the curve.
-            using (Pen thin_pen = new Pen(Color.Red, 0))
-            {
-                gr.DrawPolygon(thin_pen, points.ToArray());
-            }
+            Pen thin_pen = new Pen(Color.Red, 0);
+            gr.DrawPolygon(thin_pen, points.ToArray());
         }
         // polar graph SP
+
+        //------------------------------------------------------------  # 60個
 
         private void timer_change_Tick(object sender, EventArgs e)
         {
             redraw_all();
-
         }
 
         void redraw_all()
         {
 
-
-
-
         }
 
-
+        //------------------------------------------------------------  # 60個
 
         //畫蜂巢狀圖 ST
 
@@ -551,14 +509,12 @@ namespace vcs_Draw9_Example9_vcsh
 
 #if FIG34
             // Draw the selected rectangles for Figures 3 and 4.
-            using (Pen pen = new Pen(Color.Red, 3))
-            {
+            Pen pen = new Pen(Color.Red, 3);
                 pen.DashStyle = DashStyle.Dash;
                 foreach (RectangleF rect in TestRects)
                 {
                     e.Graphics.DrawRectangle(pen, Rectangle.Round(rect));
                 }
-            }
 #endif
         }
 
@@ -595,17 +551,13 @@ namespace vcs_Draw9_Example9_vcsh
 
 #if FIG1
                         // Label the hexagon (for Figure 1).
-                        using (StringFormat sf = new StringFormat())
-                        {
-                            sf.Alignment = StringAlignment.Center;
-                            sf.LineAlignment = StringAlignment.Center;
-                            float x = (points[0].X + points[3].X) / 2;
-                            float y = (points[1].Y + points[4].Y) / 2;
-                            string label = "(" + row.ToString() + ", " +
-                                col.ToString() + ")";
-                            gr.DrawString(label, this.Font,
-                                Brushes.Black, x, y, sf);
-                        }
+                        StringFormat sf = new StringFormat();
+                        sf.Alignment = StringAlignment.Center;
+                        sf.LineAlignment = StringAlignment.Center;
+                        float x = (points[0].X + points[3].X) / 2;
+                        float y = (points[1].Y + points[4].Y) / 2;
+                        string label = "(" + row.ToString() + ", " + col.ToString() + ")";
+                        gr.DrawString(label, this.Font, Brushes.Black, x, y, sf);
 #endif
                     }
                 }
@@ -736,6 +688,8 @@ namespace vcs_Draw9_Example9_vcsh
         }
         //畫蜂巢狀圖 SP
 
+        //------------------------------------------------------------  # 60個
+
         //畫三角巢狀圖 ST
 
         // The height of a triangle.
@@ -764,8 +718,7 @@ namespace vcs_Draw9_Example9_vcsh
 
             //// Used to draw Figure 1.
             //PointF[] tri_points = TriangleToPoints(TriangleHeight, 2, 1.5f);
-            //using (Pen pen = new Pen(Color.Red, 3))
-            //{
+            //Pen pen = new Pen(Color.Red, 3);
             //    pen.DashStyle = DashStyle.Dash;
             //    var xquery =
             //        from PointF point in tri_points
@@ -775,16 +728,11 @@ namespace vcs_Draw9_Example9_vcsh
             //        from PointF point in tri_points
             //        select point.Y;
             //    float y = yquery.Min();
-            //    e.Graphics.DrawRectangle(pen, x, y,
-            //        TriangleWidth(TriangleHeight),
-            //        TriangleHeight);
-            //}
+            //    e.Graphics.DrawRectangle(pen, x, y, TriangleWidth(TriangleHeight), TriangleHeight);
         }
 
         // Draw a triangular grid for the indicated area.
-        private void DrawTriangularGrid(Graphics gr, Pen pen,
-            float xmin, float xmax, float ymin, float ymax,
-            float height)
+        private void DrawTriangularGrid(Graphics gr, Pen pen, float xmin, float xmax, float ymin, float ymax, float height)
         {
             float width = TriangleWidth(height);
             int row = 0;
@@ -906,7 +854,7 @@ namespace vcs_Draw9_Example9_vcsh
 
         //畫三角巢狀圖 SP
 
-
+        //------------------------------------------------------------  # 60個
 
         void draw_circle_connection()   //pictureBox_circle
         {
@@ -917,61 +865,58 @@ namespace vcs_Draw9_Example9_vcsh
         private Bitmap DrawPattern(int wid, int hgt)
         {
             Bitmap bm = new Bitmap(wid, hgt);
-            using (Graphics gr = Graphics.FromImage(bm))
+            Graphics gr = Graphics.FromImage(bm);
+            gr.SmoothingMode = SmoothingMode.AntiAlias;
+
+            float margin = 10;
+            float diameter1 = (hgt - margin) / 5f;
+            float diameter2 = (wid - margin) / (float)(1 + 2 * Math.Sqrt(3));
+            float diameter = Math.Min(diameter1, diameter2);
+
+            float radius = diameter / 2f;
+            float cx = wid / 2f;
+            float cy = hgt / 2f;
+
+            // Find the center circle's center.
+            List<PointF> centers = new List<PointF>();
+            centers.Add(new PointF(cx, cy));
+
+            // Add the other circles.
+            for (int ring_num = 0; ring_num < 2; ring_num++)
             {
-                gr.SmoothingMode = SmoothingMode.AntiAlias;
-
-                float margin = 10;
-                float diameter1 = (hgt - margin) / 5f;
-                float diameter2 = (wid - margin) / (float)(1 + 2 * Math.Sqrt(3));
-                float diameter = Math.Min(diameter1, diameter2);
-
-                float radius = diameter / 2f;
-                float cx = wid / 2f;
-                float cy = hgt / 2f;
-
-                // Find the center circle's center.
-                List<PointF> centers = new List<PointF>();
-                centers.Add(new PointF(cx, cy));
-
-                // Add the other circles.
-                for (int ring_num = 0; ring_num < 2; ring_num++)
+                float ring_radius = diameter * (ring_num + 1);
+                double theta = Math.PI / 2.0;
+                double dtheta = Math.PI / 3.0;
+                for (int i = 0; i < 6; i++)
                 {
-                    float ring_radius = diameter * (ring_num + 1);
-                    double theta = Math.PI / 2.0;
-                    double dtheta = Math.PI / 3.0;
-                    for (int i = 0; i < 6; i++)
-                    {
-                        double x = cx + ring_radius * Math.Cos(theta);
-                        double y = cy + ring_radius * Math.Sin(theta);
-                        centers.Add(new PointF((float)x, (float)y));
-                        theta += dtheta;
-                    }
+                    double x = cx + ring_radius * Math.Cos(theta);
+                    double y = cy + ring_radius * Math.Sin(theta);
+                    centers.Add(new PointF((float)x, (float)y));
+                    theta += dtheta;
                 }
+            }
 
-                // Fill and outline the circles.
-                foreach (PointF center in centers)
-                {
-                    float x = center.X - radius;
-                    float y = center.Y - radius;
-                    gr.FillEllipse(Brushes.LightBlue, x, y, diameter, diameter);
-                    gr.DrawEllipse(Pens.Blue, x, y, diameter, diameter);
-                }
+            // Fill and outline the circles.
+            foreach (PointF center in centers)
+            {
+                float x = center.X - radius;
+                float y = center.Y - radius;
+                gr.FillEllipse(Brushes.LightBlue, x, y, diameter, diameter);
+                gr.DrawEllipse(Pens.Blue, x, y, diameter, diameter);
+            }
 
-                // Connect the circle centers.
-                int num_circles = centers.Count;
-                for (int i = 0; i < num_circles; i++)
+            // Connect the circle centers.
+            int num_circles = centers.Count;
+            for (int i = 0; i < num_circles; i++)
+            {
+                for (int j = i + 1; j < num_circles; j++)
                 {
-                    for (int j = i + 1; j < num_circles; j++)
-                    {
-                        gr.DrawLine(Pens.Blue, centers[i], centers[j]);
-                    }
+                    gr.DrawLine(Pens.Blue, centers[i], centers[j]);
                 }
             }
 
             return bm;
         }
-
 
         // Draw the indicated star in the rectangle.
         private void DrawStar2(Graphics gr, Pen the_pen, Brush the_brush, int num_points, int skip, Rectangle rect)
@@ -989,15 +934,15 @@ namespace vcs_Draw9_Example9_vcsh
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
-            using (Pen the_pen = new Pen(Color.Blue, 20))
-            {
-                the_pen.CompoundArray = new float[] { 0.0f, 0.1f, 0.2f, 0.8f, 0.9f, 1.0f };
+            Pen the_pen = new Pen(Color.Blue, 20);
+            the_pen.CompoundArray = new float[] { 0.0f, 0.1f, 0.2f, 0.8f, 0.9f, 1.0f };
 
-                // Draw the star.
-                Rectangle rect = new Rectangle(35, 40, this.pictureBox_star1.ClientSize.Width - 70, this.pictureBox_star1.ClientSize.Height - 50);
-                DrawStar2(e.Graphics, the_pen, Brushes.White, 5, 2, rect);
-            }
+            // Draw the star.
+            Rectangle rect = new Rectangle(35, 40, this.pictureBox_star1.ClientSize.Width - 70, this.pictureBox_star1.ClientSize.Height - 50);
+            DrawStar2(e.Graphics, the_pen, Brushes.White, 5, 2, rect);
         }
+
+        //------------------------------------------------------------  # 60個
 
         // 畫星形 ST
         private void pictureBox_star2_Paint(object sender, PaintEventArgs e)
@@ -1042,6 +987,8 @@ namespace vcs_Draw9_Example9_vcsh
         }
 
         // 畫星形 SP
+
+        //------------------------------------------------------------  # 60個
 
         // 畫星形2 ST
         // For information on star polygons, see:
@@ -1225,6 +1172,8 @@ namespace vcs_Draw9_Example9_vcsh
 
         // 畫星形2 SP
 
+        //------------------------------------------------------------  # 60個
+
         //畫floodfill ST
         // The background image.
         private Bitmap bm_floodfill;
@@ -1236,20 +1185,18 @@ namespace vcs_Draw9_Example9_vcsh
             int H = this.pictureBox_floodfill.ClientSize.Height;
 
             bm_floodfill = new Bitmap(W, H);
-            using (Graphics gr = Graphics.FromImage(bm_floodfill))
-            {
-                gr.Clear(Color.Silver);
+            Graphics gr = Graphics.FromImage(bm_floodfill);
+            gr.Clear(Color.Silver);
 
-                Random rnd = new Random();
-                int max_r = Math.Min(W, H) / 3;
-                int min_r = max_r / 4;
-                for (int i = 0; i < 15; i++)
-                {
-                    int r = rnd.Next(min_r, max_r);
-                    int x = rnd.Next(min_r, W - min_r);
-                    int y = rnd.Next(min_r, H - min_r);
-                    gr.DrawEllipse(Pens.Black, x - r, y - r, 2 * r, 2 * r);
-                }
+            Random rnd = new Random();
+            int max_r = Math.Min(W, H) / 3;
+            int min_r = max_r / 4;
+            for (int i = 0; i < 15; i++)
+            {
+                int r = rnd.Next(min_r, max_r);
+                int x = rnd.Next(min_r, W - min_r);
+                int y = rnd.Next(min_r, H - min_r);
+                gr.DrawEllipse(Pens.Black, x - r, y - r, 2 * r, 2 * r);
             }
 
             bm32_floodfill = new Bitmap32(bm_floodfill);
@@ -1298,6 +1245,7 @@ namespace vcs_Draw9_Example9_vcsh
 
         //畫floodfill SP
 
+        //------------------------------------------------------------  # 60個
 
         //畫triangle_puzzle_solution ST
         void draw_triangle_puzzle_solution()
@@ -1370,10 +1318,22 @@ namespace vcs_Draw9_Example9_vcsh
 
             // Get the right color for this solution.
             Pen the_pen;
-            if (solution_num < 13) the_pen = Pens.Red;
-            else if (solution_num < 17) the_pen = Pens.Green;
-            else if (solution_num < 23) the_pen = Pens.Purple;
-            else the_pen = Pens.Orange;
+            if (solution_num < 13)
+            {
+                the_pen = Pens.Red;
+            }
+            else if (solution_num < 17)
+            {
+                the_pen = Pens.Green;
+            }
+            else if (solution_num < 23)
+            {
+                the_pen = Pens.Purple;
+            }
+            else
+            {
+                the_pen = Pens.Orange;
+            }
 
             // Make a list of the points in this solution.
             List<PointF> pts = new List<PointF>();
@@ -1390,9 +1350,7 @@ namespace vcs_Draw9_Example9_vcsh
             const float radius = 5;
             foreach (PointF pt in Points)
             {
-                e.Graphics.FillEllipse(Brushes.Blue,
-                    pt.X - radius, pt.Y - radius,
-                    2 * radius, 2 * radius);
+                e.Graphics.FillEllipse(Brushes.Blue, pt.X - radius, pt.Y - radius, 2 * radius, 2 * radius);
             }
 
             // Draw the current solution.
@@ -1425,10 +1383,8 @@ namespace vcs_Draw9_Example9_vcsh
             // Start the timer.
             timer_triangle_puzzle_solution.Enabled = true;
 
-            // Redraw.
             Refresh();
             this.pictureBox_triangle_puzzle_solution.Refresh();
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -1458,11 +1414,9 @@ namespace vcs_Draw9_Example9_vcsh
             this.pictureBox_triangle_puzzle_solution.Refresh();
         }
 
-
-
         //畫triangle_puzzle_solution SP
 
-
+        //------------------------------------------------------------  # 60個
 
         //畫find_squares_colored ST
 
@@ -1520,10 +1474,11 @@ namespace vcs_Draw9_Example9_vcsh
                                 Solutions2.Add(square_points);
 
                                 // Save the side length.
-                                int side_length =
-                                    (int)PointFDistance(Points2[i], Points2[j]);
+                                int side_length = (int)PointFDistance(Points2[i], Points2[j]);
                                 if (!SideLengths.Contains(side_length))
+                                {
                                     SideLengths.Add(side_length);
+                                }
                             }
                         }
                     }
@@ -1555,19 +1510,31 @@ namespace vcs_Draw9_Example9_vcsh
 
             // If the two smaller distances are not roughly
             // the same (the side length), then this isn't a square.
-            if (Math.Abs(distances[0] - distances[1]) > tiny) return null;
+            if (Math.Abs(distances[0] - distances[1]) > tiny)
+            {
+                return null;
+            }
 
             // If the longer distance isn't roughly Sqr(2) times
             // the side length (the diagonal length), then this isn't a square.
             float diagonal_length = (float)(Math.Sqrt(2) * distances[0]);
-            if (Math.Abs(distances[2] - diagonal_length) > tiny) return null;
+            if (Math.Abs(distances[2] - diagonal_length) > tiny)
+            {
+                return null;
+            }
 
             // See if the distance between the farther point and
             // the two closer points is roughly the side length.
             float distance1 = PointFDistance(Points2[indexes[2]], Points2[indexes[0]]);
-            if (Math.Abs(distances[0] - distance1) > tiny) return null;
+            if (Math.Abs(distances[0] - distance1) > tiny)
+            {
+                return null;
+            }
             float distance2 = PointFDistance(Points2[indexes[2]], Points2[indexes[1]]);
-            if (Math.Abs(distances[0] - distance2) > tiny) return null;
+            if (Math.Abs(distances[0] - distance2) > tiny)
+            {
+                return null;
+            }
 
             // It's a square!
             return new int[] { i, indexes[0], indexes[2], indexes[1] };
@@ -1605,18 +1572,12 @@ namespace vcs_Draw9_Example9_vcsh
                 Colors2[index].R,
                 Colors2[index].G,
                 Colors2[index].B);
-            using (Brush brush = new SolidBrush(fill_color))
-            {
-                gr.FillPolygon(brush, pts.ToArray());
-            }
+            Brush brush = new SolidBrush(fill_color);
+            gr.FillPolygon(brush, pts.ToArray());
 
-            using (Pen pen = new Pen(Colors2[index], 0))
-            {
-                gr.DrawPolygon(pen, pts.ToArray());
-            }
+            Pen pen = new Pen(Colors2[index], 0);
+            gr.DrawPolygon(pen, pts.ToArray());
         }
-
-
 
         // Show the next solution.
         private void timer_find_squares_colored_Tick(object sender, EventArgs e)
@@ -1633,7 +1594,6 @@ namespace vcs_Draw9_Example9_vcsh
                 label17.Text = "";
             }
 
-            // Redraw.
             Refresh();
         }
 
@@ -1672,9 +1632,7 @@ namespace vcs_Draw9_Example9_vcsh
             const float radius = 5;
             foreach (PointF pt in Points2)
             {
-                e.Graphics.FillEllipse(Brushes.Blue,
-                    pt.X - radius, pt.Y - radius,
-                    2 * radius, 2 * radius);
+                e.Graphics.FillEllipse(Brushes.Blue, pt.X - radius, pt.Y - radius, 2 * radius, 2 * radius);
             }
 
             // Draw the current solution.
@@ -1703,12 +1661,6 @@ namespace vcs_Draw9_Example9_vcsh
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-

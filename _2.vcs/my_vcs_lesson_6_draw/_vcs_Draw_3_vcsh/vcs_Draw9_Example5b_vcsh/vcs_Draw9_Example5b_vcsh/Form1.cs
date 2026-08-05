@@ -78,7 +78,7 @@ namespace vcs_Draw9_Example5b_vcsh
 
             //groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 1 - 80);
             groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 1 - 80);
-            groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 1 - 80-3);
+            groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 1 - 80 - 3);
             groupBox2.Size = new Size(448, 80);
 
             groupBox3.Location = new Point(x_st + dx * 3, y_st + dy * 1 - 80);
@@ -131,9 +131,7 @@ namespace vcs_Draw9_Example5b_vcsh
             Environment.Exit(0);
         }
 
-        #region epitrochoid長短輻圓外旋輪線；外旋輪線
-
-
+        //#region epitrochoid長短輻圓外旋輪線；外旋輪線
 
         // Draw the epitrochoid.
         private void pictureBox0_Paint(object sender, PaintEventArgs e)
@@ -323,7 +321,7 @@ namespace vcs_Draw9_Example5b_vcsh
             pictureBox1.Refresh();
         }
 
-        #endregion epitrochoid長短輻圓外旋輪線；外旋輪線
+        //#endregion epitrochoid長短輻圓外旋輪線；外旋輪線
 
 
         // The angle from one circle's center to the other.

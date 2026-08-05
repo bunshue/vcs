@@ -13,17 +13,18 @@ namespace howto_round_scaled_ellipses
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         // The drawing transformation and its inverse.
         private Matrix Transform, Inverse;
 
         // Initialize the drawing transformation.
         private const float XScale = 20;
         private const float YScale = 10;
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             // Make the drawing transformation.
@@ -41,12 +42,14 @@ namespace howto_round_scaled_ellipses
             // Draw the grid.
             int hgt = (int)(1 + pic.ClientSize.Height / YScale);
             int wid = (int)(1 + pic.ClientSize.Width / XScale);
-            using (Pen thin_pen = new Pen(Color.Blue, 0))
+            Pen thin_pen = new Pen(Color.Blue, 0);
+            for (int x = 0; x < wid; x++)
             {
-                for (int x = 0; x < wid; x++)
-                    gr.DrawLine(thin_pen, x, 0, x, hgt);
-                for (int y = 0; y < hgt; y++)
-                    gr.DrawLine(thin_pen, 0, y, wid, y);
+                gr.DrawLine(thin_pen, x, 0, x, hgt);
+            }
+            for (int y = 0; y < hgt; y++)
+            {
+                gr.DrawLine(thin_pen, 0, y, wid, y);
             }
         }
 
@@ -85,11 +88,10 @@ namespace howto_round_scaled_ellipses
             if (PointsClicked.Count == 0) return;
 
             // Draw the points.
-            using (Pen thin_pen = new Pen(Color.Red, 0))
+            Pen thin_pen = new Pen(Color.Red, 0);
+            foreach (PointF point in PointsClicked)
             {
-                foreach (PointF point in PointsClicked)
-                    e.Graphics.DrawEllipse(thin_pen,
-                        point.X - 1, point.Y - 1, 2, 2);
+                e.Graphics.DrawEllipse(thin_pen, point.X - 1, point.Y - 1, 2, 2);
             }
         }
 
@@ -103,25 +105,25 @@ namespace howto_round_scaled_ellipses
             DrawGrid(picNormal, e.Graphics);
 
             // If there are no points, do nothing else.
-            if (PointsClicked.Count == 0) return;
+            if (PointsClicked.Count == 0)
+            {
+                return;
+            }
 
             // Reset the Graphics object's transformation.
             e.Graphics.ResetTransform();
 
             // Draw the points.
-            using (Pen thick_pen = new Pen(Color.Red, 3))
-            {
-                // Use the inverse transform to convert
-                // from world coordinates to device coordinates.
-                PointF[] points = PointsClicked.ToArray();
-                Transform.TransformPoints(points);
+            Pen thick_pen = new Pen(Color.Red, 3);
+            // Use the inverse transform to convert
+            // from world coordinates to device coordinates.
+            PointF[] points = PointsClicked.ToArray();
+            Transform.TransformPoints(points);
 
-                // Draw the points' circles in device coordinates.
-                foreach (PointF point in points)
-                {
-                    e.Graphics.DrawEllipse(thick_pen,
-                        point.X - 5, point.Y - 5, 10, 10);
-                }
+            // Draw the points' circles in device coordinates.
+            foreach (PointF point in points)
+            {
+                e.Graphics.DrawEllipse(thick_pen, point.X - 5, point.Y - 5, 10, 10);
             }
         }
 

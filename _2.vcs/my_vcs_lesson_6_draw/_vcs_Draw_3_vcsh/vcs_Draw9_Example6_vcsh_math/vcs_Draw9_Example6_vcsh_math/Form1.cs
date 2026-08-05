@@ -222,7 +222,7 @@ namespace vcs_Draw9_Example6_vcsh_math
             Application.Exit();
         }
 
-        #region 畫前四圖曲線
+        //#region 畫前四圖曲線
         //for pictureBox1~4
         //1. Bowl: z = x^2 + (y*2)^2 - 200
         //2. Monkey saddle: x * (x^2 - 3 * y^2)
@@ -429,7 +429,7 @@ namespace vcs_Draw9_Example6_vcsh_math
         {
             return Math.Sqrt(400 - (x * x + y * y));
         }
-        #endregion
+        //#endregion
 
         private void bt_clear_Click(object sender, EventArgs e)
         {

@@ -47,7 +47,6 @@ namespace vcs_Draw_Word
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -79,24 +78,53 @@ namespace vcs_Draw_Word
 
         private void button0_Click(object sender, EventArgs e)
         {
+            int x_st;
+            int y_st;
+
             richTextBox1.Text += "1投影文字\n";
-            do_word_effect1();
+            x_st = 0;
+            y_st = 30;
+            do_word_effect1(x_st, y_st);
+
             richTextBox1.Text += "2浮雕效果\n";
-            do_word_effect2();
+            x_st = 20;
+            y_st = 100;
+            do_word_effect2(x_st, y_st);
+
             richTextBox1.Text += "3印版效果\n";
-            do_word_effect3();
+            x_st = 20;
+            y_st = 200;
+            do_word_effect3(x_st, y_st);
+
             richTextBox1.Text += "4倒影文字\n";
-            do_word_effect4();
+            x_st = 20;
+            y_st = 350;
+            do_word_effect4(x_st, y_st);
+
             richTextBox1.Text += "5陰影文字\n";
-            do_word_effect5();
+            x_st = 20;
+            y_st = 450;
+            do_word_effect5(x_st, y_st);
+
             richTextBox1.Text += "6紋理效果\n";
-            do_word_effect6();
+            x_st = 0;
+            y_st = 30;
+            do_word_effect6(x_st, y_st);
+
             richTextBox1.Text += "7傾斜效果\n";
-            do_word_effect7();
+            x_st = 400;
+            y_st = 20;
+            do_word_effect7(x_st, y_st);
+
             richTextBox1.Text += "8漸層色文字\n";
-            do_word_effect8();
+            x_st = 400;
+            y_st = 200;
+            do_word_effect8(x_st, y_st);
+
             richTextBox1.Text += "9旋轉效果\n";
-            do_word_effect9();
+            x_st = 400;
+            y_st = 400;
+            do_word_effect9(x_st, y_st);
         }
 
         //------------------------------------------------------------  # 60個
@@ -109,14 +137,12 @@ namespace vcs_Draw_Word
             Bitmap bmp = new Bitmap(800, 720);     //initial W, H
             Graphics g = Graphics.FromImage(bmp);
 
-            string font_type = "標楷體";
-
             int font_size_default = 130;
-            Font f = new Font(font_type, font_size_default);
+            Font f = new Font("標楷體", font_size_default);
             g.DrawString(test_string, f, new SolidBrush(Color.Pink), new PointF(0, 0));
 
             font_size_default = 130;
-            f = new Font(font_type, font_size_default);
+            f = new Font("標楷體", font_size_default);
             g.DrawString(test_string, f, new SolidBrush(Color.Red), new PointF(5, 5));
 
             pictureBox1.Image = bmp;
@@ -164,10 +190,10 @@ namespace vcs_Draw_Word
 
         }
 
-        void do_word_effect1()
+        //------------------------------------------------------------  # 60個
+
+        void do_word_effect1(int x_st, int y_st)
         {
-            int x_st = 0;
-            int y_st = 30;
             //投影文字
             Graphics g = this.pictureBox1.CreateGraphics();
             //設置文本輸出質量
@@ -193,10 +219,8 @@ namespace vcs_Draw_Word
             g.DrawString(text, newFont, colorBrush, new PointF(x_st, y_st));
         }
 
-        void do_word_effect2()
+        void do_word_effect2(int x_st, int y_st)
         {
-            int x_st = 20;
-            int y_st = 100;
             //浮雕效果
             Brush backBrush = Brushes.Black;
             Brush foreBrush = Brushes.White;
@@ -208,13 +232,9 @@ namespace vcs_Draw_Word
             g.DrawString(text, font, foreBrush, x_st, y_st);
         }
 
-        void do_word_effect3()
+        void do_word_effect3(int x_st, int y_st)
         {
-            int x_st = 20;
-            int y_st = 200;
-
             //印版效果
-
             //印版文字
             int i = 0;
             Brush backBrush = Brushes.Black;
@@ -231,12 +251,10 @@ namespace vcs_Draw_Word
             g.DrawString(text, font, foreBrush, x_st, y_st);
         }
 
-        void do_word_effect4()
+        void do_word_effect4(int x_st, int y_st)
         {
-            int x_st = 20;
-            int y_st = 350;
-
             //倒影文字
+
             Brush backBrush = Brushes.Gray;
             Brush foreBrush = Brushes.Black;
             Font font = new Font("幼圓", Convert.ToInt16(40), FontStyle.Regular);
@@ -257,11 +275,8 @@ namespace vcs_Draw_Word
             g.DrawString(text, font, foreBrush, 0, -height);
         }
 
-        void do_word_effect5()
+        void do_word_effect5(int x_st, int y_st)
         {
-            int x_st = 20;
-            int y_st = 450;
-
             //陰影文字
             string text = "博客園5";
             Brush shadowBrush = Brushes.Gray;
@@ -276,11 +291,8 @@ namespace vcs_Draw_Word
             //有點問題
         }
 
-        void do_word_effect6()
+        void do_word_effect6(int x_st, int y_st)
         {
-            int x_st = 0;
-            int y_st = 30;
-
             //紋理效果
             /*
             //紋理效果
@@ -291,11 +303,8 @@ namespace vcs_Draw_Word
             */
         }
 
-        void do_word_effect7()
+        void do_word_effect7(int x_st, int y_st)
         {
-            int x_st = 400;
-            int y_st = 20;
-
             //傾斜效果
             Brush foreBrush = Brushes.Blue;
             Font font = new Font("幼圆", Convert.ToInt16(40), FontStyle.Regular);
@@ -318,11 +327,8 @@ namespace vcs_Draw_Word
             g.DrawString(text, font, foreBrush, 0, 0);
         }
 
-        void do_word_effect8()
+        void do_word_effect8(int x_st, int y_st)
         {
-            int x_st = 400;
-            int y_st = 200;
-
             //漸層色文字
             String text = "天階夜色涼如水8";
             Brush ShadowBrush = Brushes.Gray;
@@ -337,11 +343,8 @@ namespace vcs_Draw_Word
             g.DrawString(text, font, brush, x_st, y_st);
         }
 
-        void do_word_effect9()
+        void do_word_effect9(int x_st, int y_st)
         {
-            int x_st = 400;
-            int y_st = 400;
-
             //旋轉效果顯示文字
             Graphics g = this.pictureBox1.CreateGraphics();
             g.SmoothingMode = SmoothingMode.AntiAlias;
@@ -365,12 +368,7 @@ namespace vcs_Draw_Word
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
 

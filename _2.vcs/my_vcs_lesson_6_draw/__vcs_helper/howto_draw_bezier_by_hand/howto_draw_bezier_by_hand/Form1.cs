@@ -13,11 +13,6 @@ namespace howto_draw_bezier_by_hand
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         // The end points are points 0 and 3. 
         // The interior control points are points 1 and 2.
         private PointF[] Points = new PointF[4];
@@ -25,12 +20,25 @@ namespace howto_draw_bezier_by_hand
         // The index of the next point to define.
         private int NextPoint = 0;
 
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         // Select a point.
         private void picCanvas_MouseClick(object sender, MouseEventArgs e)
         {
             // If we're starting a new set of four points,
             // get the first point.
-            if (NextPoint > 3) NextPoint = 0;
+            if (NextPoint > 3)
+            {
+                NextPoint = 0;
+            }
 
             // Save this point.
             Points[NextPoint].X = e.X;
@@ -54,13 +62,11 @@ namespace howto_draw_bezier_by_hand
                 // Draw a spline the easy way.
                 using (Pen thick_pen = new Pen(Color.Yellow, 7))
                 {
-                    e.Graphics.DrawBezier(thick_pen,
-                        Points[0], Points[1], Points[2], Points[3]);
+                    e.Graphics.DrawBezier(thick_pen, Points[0], Points[1], Points[2], Points[3]);
                 }
 
                 // Draw a spline the hard way.
-                BezierStuff.DrawBezier(e.Graphics, Pens.Black, 0.01f,
-                    Points[0], Points[1], Points[2], Points[3]);
+                BezierStuff.DrawBezier(e.Graphics, Pens.Black, 0.01f, Points[0], Points[1], Points[2], Points[3]);
             }
 
             // Draw the control points.

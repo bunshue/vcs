@@ -8,9 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Drawing.Drawing2D; //for CompositingQuality, SmoothingMode
-
 using System.Drawing.Imaging;   //for ImageFormat
-
 using System.Drawing.Text;      //for TextRenderingHint
 
 namespace vcs_Draw9_Example4_vcsh
@@ -227,19 +225,21 @@ namespace vcs_Draw9_Example4_vcsh
 
             // Draw the hits and misses.
             foreach (Point point in Misses)
+            {
                 DrawPoint(e.Graphics, Brushes.Pink, Pens.Red, point);
+            }
             foreach (Point point in Hits)
+            {
                 DrawPoint(e.Graphics, Brushes.Lime, Pens.Green, point);
+            }
         }
 
         // Return true if the point is over the curve.
         private bool PointIsOverCurve(Point point)
         {
             // Use a three pixel wide pen.
-            using (Pen thick_pen = new Pen(Color.Black, 3))
-            {
-                return Path.IsOutlineVisible(point, thick_pen);
-            }
+            Pen thick_pen = new Pen(Color.Black, 3);
+            return Path.IsOutlineVisible(point, thick_pen);
         }
 
         // Draw a point.
@@ -247,9 +247,7 @@ namespace vcs_Draw9_Example4_vcsh
         {
             const int radius = 3;
             const int diameter = 2 * radius;
-            Rectangle rect = new Rectangle(
-                point.X - radius, point.Y - radius,
-                diameter, diameter);
+            Rectangle rect = new Rectangle(point.X - radius, point.Y - radius, diameter, diameter);
             gr.FillEllipse(brush, rect);
             gr.DrawEllipse(pen, rect);
         }
@@ -271,25 +269,17 @@ namespace vcs_Draw9_Example4_vcsh
                 tmrPicture.Enabled = true;
 
                 // Clear the colorbar.
-                using (Graphics gr = Graphics.FromImage(ColorsBm))
-                {
-                    gr.Clear(picColors.BackColor);
-                }
+                Graphics gr = Graphics.FromImage(ColorsBm);
+                gr.Clear(picColors.BackColor);
                 picColors.Visible = true;
 
                 // Display a pale picture.
-                using (Graphics gr = Graphics.FromImage(PictureBm))
-                {
-                    Rectangle rect = new Rectangle(0, 0, PictureBm.Width, PictureBm.Height);
-                    using (TextureBrush br = new TextureBrush(picHidden.Image))
-                    {
-                        gr.FillRectangle(br, rect);
-                    }
-                    using (SolidBrush br = new SolidBrush(Color.FromArgb(128, 255, 255, 255)))
-                    {
-                        gr.FillRectangle(br, rect);
-                    }
-                }
+                gr = Graphics.FromImage(PictureBm);
+                Rectangle rect = new Rectangle(0, 0, PictureBm.Width, PictureBm.Height);
+                TextureBrush tb = new TextureBrush(picHidden.Image);
+                gr.FillRectangle(tb, rect);
+                SolidBrush br = new SolidBrush(Color.FromArgb(128, 255, 255, 255));
+                gr.FillRectangle(br, rect);
                 picVisible.Visible = true;
 
                 this.Cursor = Cursors.WaitCursor;
@@ -395,17 +385,12 @@ namespace vcs_Draw9_Example4_vcsh
             }
 
             // Display the next chunk of colors.
-            using (LinearGradientBrush br = new LinearGradientBrush(
-                new Point(0, 0), new Point(ColorsBm.Width, 0), Color.Red, Color.Yellow))
-            {
-                using (Graphics gr = Graphics.FromImage(ColorsBm))
-                {
-                    float wid = ColorsBm.Width * ProgressColorBar / (max_progress - 1);
-                    float hgt = ColorsBm.Height;
-                    RectangleF rect = new RectangleF(0, 0, wid, hgt);
-                    gr.FillRectangle(br, rect);
-                }
-            }
+            LinearGradientBrush br = new LinearGradientBrush(new Point(0, 0), new Point(ColorsBm.Width, 0), Color.Red, Color.Yellow);
+            Graphics gr = Graphics.FromImage(ColorsBm);
+            float wid = ColorsBm.Width * ProgressColorBar / (max_progress - 1);
+            float hgt = ColorsBm.Height;
+            RectangleF rect = new RectangleF(0, 0, wid, hgt);
+            gr.FillRectangle(br, rect);
             picColors.Refresh();
         }
 
@@ -425,26 +410,14 @@ namespace vcs_Draw9_Example4_vcsh
             }
 
             // Display the next chunk of picture.
-            using (TextureBrush br = new TextureBrush(picHidden.Image))
-            {
-                using (Graphics gr = Graphics.FromImage(PictureBm))
-                {
-                    float wid = PictureBm.Width * ProgressPicture / (max_progress - 1);
-                    float hgt = PictureBm.Height;
-                    RectangleF rect = new RectangleF(0, 0, wid, hgt);
-                    gr.FillRectangle(br, rect);
-                }
-            }
+            TextureBrush br = new TextureBrush(picHidden.Image);
+            Graphics gr = Graphics.FromImage(PictureBm);
+            float wid = PictureBm.Width * ProgressPicture / (max_progress - 1);
+            float hgt = PictureBm.Height;
+            RectangleF rect = new RectangleF(0, 0, wid, hgt);
+            gr.FillRectangle(br, rect);
             picVisible.Refresh();
         }
-
-
-
-
         //for unique progressbar SP
-
-
-
-
     }
 }

@@ -149,6 +149,7 @@
             this.Controls.Add(this.picCanvas);
             this.Name = "Form1";
             this.Text = "howto_self_avoiding_walk";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picCanvas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkWalk)).EndInit();
             this.ResumeLayout(false);

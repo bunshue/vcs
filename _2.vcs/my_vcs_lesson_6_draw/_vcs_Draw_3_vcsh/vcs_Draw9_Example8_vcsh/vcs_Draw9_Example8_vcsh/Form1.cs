@@ -90,6 +90,8 @@ namespace vcs_Draw9_Example8_vcsh
         };
         // 畫派圖，可以偵測位置 SP
 
+        //------------------------------------------------------------  # 60個
+
         // 畫動態派圖 ST
         // Represents a pie slice.
         private struct Slice : IComparable
@@ -118,7 +120,9 @@ namespace vcs_Draw9_Example8_vcsh
                 }
             }
 
-            #region IComparable Members
+            //------------------------------------------------------------  # 60個
+
+            //#region IComparable Members
 
             // Compare by ZDistance.
             public int CompareTo(object obj)
@@ -126,8 +130,7 @@ namespace vcs_Draw9_Example8_vcsh
                 Slice other = (Slice)obj;
                 return ZDistance.CompareTo(other.ZDistance);
             }
-
-            #endregion
+            //#endregion
         }
 
         // Colors.
@@ -211,6 +214,8 @@ namespace vcs_Draw9_Example8_vcsh
             EllipseRy = hgt / 2;
             EllipseCenter = new Point(pictureBox17.ClientSize.Width / 2, pictureBox17.ClientSize.Height / 2);
             // 畫派圖，可以偵測位置 SP
+
+            //------------------------------------------------------------  # 60個
 
             // 畫動態派圖 ST
             // Make some random data.
@@ -359,7 +364,7 @@ namespace vcs_Draw9_Example8_vcsh
             pictureBox15.Location = new Point(x_st + dx * 2, y_st + dy * 2);
             pictureBox16.Location = new Point(x_st + dx * 3, y_st + dy * 2);
             pictureBox17.Location = new Point(x_st + dx * 4, y_st + dy * 2);
-            label1.Location = new Point(x_st + dx * 4+10, y_st + dy * 2+10);
+            label1.Location = new Point(x_st + dx * 4 + 10, y_st + dy * 2 + 10);
             label1.Text = "";
             pictureBox18.Location = new Point(x_st + dx * 5, y_st + dy * 2);
 
@@ -372,7 +377,7 @@ namespace vcs_Draw9_Example8_vcsh
 
             bt_save.Location = new Point(x_st + dx * 6 + 225, y_st + dy * 0 + 50);
 
-            richTextBox1.Location = new Point(x_st + dx * 6 + 225-100, y_st + dy * 0 + 50+50);
+            richTextBox1.Location = new Point(x_st + dx * 6 + 225 - 100, y_st + dy * 0 + 50 + 50);
 
             //richTextBox1.Size = new Size(bt_exit.Right - richTextBox1.Location.X, this.Height - richTextBox1.Location.Y - 25);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -551,51 +556,46 @@ namespace vcs_Draw9_Example8_vcsh
 
             // Make the Bitmap and associated Graphics object.
             Bitmap bm = new Bitmap(W, H);
-            using (Graphics gr = Graphics.FromImage(bm))
-            {
-                gr.Clear(Color.White);
-                gr.SmoothingMode = SmoothingMode.AntiAlias;
+            Graphics gr = Graphics.FromImage(bm);
+            gr.Clear(Color.White);
+            gr.SmoothingMode = SmoothingMode.AntiAlias;
 
-                // Set up a transformation to map the region
-                // x/y = A +/- 0.1 onto the Bitmap.
-                RectangleF rect = new RectangleF(
-                    -A - 0.1f, -A - 0.1f, 2 * A + 0.2f, 2 * A + 0.2f);
-                PointF[] pts =
+            // Set up a transformation to map the region
+            // x/y = A +/- 0.1 onto the Bitmap.
+            RectangleF rect = new RectangleF(
+                -A - 0.1f, -A - 0.1f, 2 * A + 0.2f, 2 * A + 0.2f);
+            PointF[] pts =
                 {
                     new PointF(0, bm.Height),
                     new PointF(bm.Width, bm.Height),
                     new PointF(0, 0),
                 };
-                gr.Transform = new Matrix(rect, pts);
+            gr.Transform = new Matrix(rect, pts);
 
-                // Draw the curve.
-                DrawCurve(gr, A, n, d);
+            // Draw the curve.
+            DrawCurve(gr, A, n, d);
 
-                // Draw the axes.
-                DrawAxes(gr, rect.Right);
+            // Draw the axes.
+            DrawAxes(gr, rect.Right);
 
-                // Display the result and size the form to fit.
-                pictureBox5.Image = bm;
-                pictureBox5.SizeMode = PictureBoxSizeMode.AutoSize;
-            }
-
+            // Display the result and size the form to fit.
+            pictureBox5.Image = bm;
+            pictureBox5.SizeMode = PictureBoxSizeMode.AutoSize;
         }
 
         private void DrawAxes(Graphics gr, float wxmax)
         {
             int xmax = (int)wxmax;
-            using (Pen pen = new Pen(Color.Black, 0))
-            {
-                // Draw the X and Y axes.
-                gr.DrawLine(pen, -wxmax, 0, wxmax, 0);
-                gr.DrawLine(pen, 0, -wxmax, 0, wxmax);
+            Pen pen = new Pen(Color.Black, 0);
+            // Draw the X and Y axes.
+            gr.DrawLine(pen, -wxmax, 0, wxmax, 0);
+            gr.DrawLine(pen, 0, -wxmax, 0, wxmax);
 
-                float tic = 0.1f;
-                for (int x = -xmax; x <= xmax; x++)
-                {
-                    gr.DrawLine(pen, x, -tic, x, tic);
-                    gr.DrawLine(pen, -tic, x, tic, x);
-                }
+            float tic = 0.1f;
+            for (int x = -xmax; x <= xmax; x++)
+            {
+                gr.DrawLine(pen, x, -tic, x, tic);
+                gr.DrawLine(pen, -tic, x, tic, x);
             }
         }
 
@@ -624,14 +624,13 @@ namespace vcs_Draw9_Example8_vcsh
 
             gr.FillPolygon(Brushes.LightBlue, points.ToArray());
 
-            // Draw the curve.
-            using (Pen pen = new Pen(Color.Red, 0))
-            {
-                gr.DrawLines(pen, points.ToArray());
-            }
+            Pen pen = new Pen(Color.Red, 0);
+            gr.DrawLines(pen, points.ToArray());
         }
 
-        #region pictureBox3齒輪運轉圖
+        //------------------------------------------------------------  # 60個
+
+        ///#region pictureBox3齒輪運轉圖
 
         // The angle used as the gears' origins.
         private float StartAngle = 0;
@@ -780,9 +779,11 @@ namespace vcs_Draw9_Example8_vcsh
             return bm;
         }
 #endif
-        #endregion
+        //#endregion
 
-        #region pictureBox_histogram 柱狀圖
+        //------------------------------------------------------------  # 60個
+
+        //#region pictureBox_histogram 柱狀圖
 
         // Draw the histogram.
         private void pictureBox_histogram_Paint(object sender, PaintEventArgs e)
@@ -822,17 +823,13 @@ namespace vcs_Draw9_Example8_vcsh
             gr.Transform = Transformation;
 
             // Draw the histogram.
-            using (Pen thin_pen = new Pen(Color.Black, 0))
+            Pen thin_pen = new Pen(Color.Black, 0);
+            for (int i = 0; i < values.Length; i++)
             {
-                for (int i = 0; i < values.Length; i++)
-                {
-                    RectangleF rect = new RectangleF(i, 0, 1, values[i]);
-                    using (Brush the_brush = new SolidBrush(Colors[i % Colors.Length]))
-                    {
-                        gr.FillRectangle(the_brush, rect);
-                        gr.DrawRectangle(thin_pen, rect.X, rect.Y, rect.Width, rect.Height);
-                    }
-                }
+                RectangleF rect = new RectangleF(i, 0, 1, values[i]);
+                Brush the_brush = new SolidBrush(Colors[i % Colors.Length]);
+                gr.FillRectangle(the_brush, rect);
+                gr.DrawRectangle(thin_pen, rect.X, rect.Y, rect.Width, rect.Height);
             }
 
             gr.ResetTransform();
@@ -881,9 +878,11 @@ namespace vcs_Draw9_Example8_vcsh
             }
         }
 
-        #endregion
+        //#endregion
 
-        #region pictureBox_age
+        //------------------------------------------------------------  # 60個
+
+        //#region pictureBox_age
 
         // Draw the graph.
         private void DrawGraph(int min_age, float[] means, float[] stddevs)
@@ -909,9 +908,7 @@ namespace vcs_Draw9_Example8_vcsh
             max_value = middle + hgt / 2f;
 
             // Make a transformation for drawing.
-            RectangleF world = new RectangleF(
-                min_age - 1f, min_value,
-                max_age - min_age + 1.5f, max_value - min_value);
+            RectangleF world = new RectangleF(min_age - 1f, min_value, max_age - min_age + 1.5f, max_value - min_value);
             PointF[] device_points =
             {
                 new PointF(0, pictureBox_age.ClientSize.Height),
@@ -920,144 +917,140 @@ namespace vcs_Draw9_Example8_vcsh
             };
             Matrix transform = new Matrix(world, device_points);
 
-            Bitmap bm = new Bitmap(
-                pictureBox_age.ClientSize.Width,
-                pictureBox_age.ClientSize.Height);
-            using (Graphics gr = Graphics.FromImage(bm))
+            Bitmap bm = new Bitmap(pictureBox_age.ClientSize.Width, pictureBox_age.ClientSize.Height);
+            Graphics gr = Graphics.FromImage(bm);
+            Pen pen = new Pen(Color.Red, 0);
+            gr.SmoothingMode = SmoothingMode.AntiAlias;
+            gr.Transform = transform;
+
+            // Draw the standard deviation envelopes.
+            using (SolidBrush brush = new SolidBrush(Color.FromArgb(255, 128, 128)))
             {
-                using (Pen pen = new Pen(Color.Red, 0))
-                {
-                    gr.SmoothingMode = SmoothingMode.AntiAlias;
-                    gr.Transform = transform;
+                pen.Color = brush.Color;
+                DrawEnvelope(gr, min_age, means, stddevs, 2.5f, brush, pen);
+            }
+            using (SolidBrush brush = new SolidBrush(Color.FromArgb(255, 255, 128)))
+            {
+                pen.Color = brush.Color;
+                DrawEnvelope(gr, min_age, means, stddevs, 1.5f, brush, pen);
+            }
+            using (SolidBrush brush = new SolidBrush(Color.FromArgb(128, 255, 128)))
+            {
+                pen.Color = brush.Color;
+                DrawEnvelope(gr, min_age, means, stddevs, 0.5f, brush, pen);
+            }
 
-                    // Draw the standard deviation envelopes.
-                    using (SolidBrush brush = new SolidBrush(Color.FromArgb(255, 128, 128)))
-                    {
-                        pen.Color = brush.Color;
-                        DrawEnvelope(gr, min_age, means, stddevs,
-                            2.5f, brush, pen);
-                    }
-                    using (SolidBrush brush = new SolidBrush(Color.FromArgb(255, 255, 128)))
-                    {
-                        pen.Color = brush.Color;
-                        DrawEnvelope(gr, min_age, means, stddevs,
-                            1.5f, brush, pen);
-                    }
-                    using (SolidBrush brush = new SolidBrush(Color.FromArgb(128, 255, 128)))
-                    {
-                        pen.Color = brush.Color;
-                        DrawEnvelope(gr, min_age, means, stddevs,
-                            0.5f, brush, pen);
-                    }
+            // Draw the curve.
+            List<PointF> points = new List<PointF>();
+            for (int i = 0; i < means.Length; i++)
+            {
+                points.Add(new PointF(i + min_age, means[i]));
+            }
+            pen.Color = Color.Black;
+            gr.DrawLines(pen, points.ToArray());
 
-                    // Draw the curve.
-                    List<PointF> points = new List<PointF>();
-                    for (int i = 0; i < means.Length; i++)
-                        points.Add(new PointF(i + min_age, means[i]));
-                    pen.Color = Color.Black;
-                    gr.DrawLines(pen, points.ToArray());
+            // Draw and label the axes.
+            pen.Color = Color.Black;
+            Font font = new Font("Arial", 8);
+            gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+            StringFormat sf = new StringFormat();
+            sf.Alignment = StringAlignment.Center;
+            sf.LineAlignment = StringAlignment.Near;
 
-                    // Draw and label the axes.
-                    pen.Color = Color.Black;
-                    using (Font font = new Font("Arial", 8))
-                    {
-                        gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-                        using (StringFormat sf = new StringFormat())
-                        {
-                            sf.Alignment = StringAlignment.Center;
-                            sf.LineAlignment = StringAlignment.Near;
+            // Draw the X axis.
+            // Draw the axis.
+            gr.DrawLine(pen, min_age, 0, max_age, 0);
 
-                            // Draw the X axis.
-                            // Draw the axis.
-                            gr.DrawLine(pen, min_age, 0, max_age, 0);
+            // Draw the tick marks.
+            for (int x = min_age; x <= max_age; x++)
+            {
+                gr.DrawLine(pen, x, 0, x, max_value);
+            }
 
-                            // Draw the tick marks.
-                            for (int x = min_age; x <= max_age; x++)
-                                gr.DrawLine(pen, x, 0, x, max_value);
+            // Label the ages.
+            List<PointF> tick_points = new List<PointF>();
+            List<string> tick_labels = new List<string>();
+            PointF[] label_points_array;
+            for (int x = min_age; x <= max_age; x++)
+            {
+                tick_points.Add(new PointF(x, 0));
+                tick_labels.Add(x.ToString());
+            }
 
-                            // Label the ages.
-                            List<PointF> tick_points = new List<PointF>();
-                            List<string> tick_labels = new List<string>();
-                            PointF[] label_points_array;
-                            for (int x = min_age; x <= max_age; x++)
-                            {
-                                tick_points.Add(new PointF(x, 0));
-                                tick_labels.Add(x.ToString());
-                            }
-                            label_points_array = tick_points.ToArray();
-                            transform.TransformPoints(label_points_array);
-                            gr.Transform = new Matrix();
-                            for (int i = 0; i < label_points_array.Length; i++)
-                            {
-                                gr.DrawString(tick_labels[i], font,
-                                    Brushes.Black, label_points_array[i], sf);
-                            }
+            label_points_array = tick_points.ToArray();
+            transform.TransformPoints(label_points_array);
+            gr.Transform = new Matrix();
+            for (int i = 0; i < label_points_array.Length; i++)
+            {
+                gr.DrawString(tick_labels[i], font, Brushes.Black, label_points_array[i], sf);
+            }
 
-                            // Draw the Y axis.
-                            // Draw the axis.
-                            gr.Transform = transform;
-                            gr.DrawLine(pen, 0, min_value, 0, max_value);
+            // Draw the Y axis.
+            // Draw the axis.
+            gr.Transform = transform;
+            gr.DrawLine(pen, 0, min_value, 0, max_value);
 
-                            // Draw the tick marks.
-                            int start_y = 10;
-                            int stop_y = 10 * (int)(max_value / 10f);
-                            int num_y = stop_y - start_y + 1;
-                            for (int y = start_y; y <= stop_y; y += 10)
-                                gr.DrawLine(pen, min_age - 0.15f, y, min_age + 0.15f, y);
+            // Draw the tick marks.
+            int start_y = 10;
+            int stop_y = 10 * (int)(max_value / 10f);
+            int num_y = stop_y - start_y + 1;
+            for (int y = start_y; y <= stop_y; y += 10)
+            {
+                gr.DrawLine(pen, min_age - 0.15f, y, min_age + 0.15f, y);
+            }
 
-                            // Label the Y axis.
-                            sf.Alignment = StringAlignment.Far;
-                            sf.LineAlignment = StringAlignment.Center;
+            // Label the Y axis.
+            sf.Alignment = StringAlignment.Far;
+            sf.LineAlignment = StringAlignment.Center;
 
-                            tick_points.Clear();
-                            tick_labels.Clear();
-                            for (int y = start_y; y <= stop_y; y += 10)
-                            {
-                                tick_points.Add(new PointF(min_age - 0.2f, y));
-                                tick_labels.Add(y.ToString());
-                            }
-                            label_points_array = tick_points.ToArray();
-                            transform.TransformPoints(label_points_array);
+            tick_points.Clear();
+            tick_labels.Clear();
+            for (int y = start_y; y <= stop_y; y += 10)
+            {
+                tick_points.Add(new PointF(min_age - 0.2f, y));
+                tick_labels.Add(y.ToString());
+            }
 
-                            gr.Transform = new Matrix();
-                            for (int y = 0; y < label_points_array.Length; y++)
-                            {
-                                gr.DrawString(tick_labels[y], font,
-                                    Brushes.Black, label_points_array[y], sf);
-                            }
-                        } // StringFormat
-                    } // Font
+            label_points_array = tick_points.ToArray();
+            transform.TransformPoints(label_points_array);
 
-                    // Plot test points.
-                    transform.TransformPoints(TestPoints);
-                    gr.Transform = new Matrix();
-                    foreach (PointF point in TestPoints)
-                    {
-                        gr.FillRectangle(Brushes.Red,
-                            point.X - 3, point.Y - 3, 6, 6);
-                    }
-                } // Pen
-            } // Graphics
+            gr.Transform = new Matrix();
+            for (int y = 0; y < label_points_array.Length; y++)
+            {
+                gr.DrawString(tick_labels[y], font, Brushes.Black, label_points_array[y], sf);
+            }
+
+            // Plot test points.
+            transform.TransformPoints(TestPoints);
+            gr.Transform = new Matrix();
+            foreach (PointF point in TestPoints)
+            {
+                gr.FillRectangle(Brushes.Red, point.X - 3, point.Y - 3, 6, 6);
+            }
 
             pictureBox_age.Image = bm;
         }
 
         // Draw an envelope for dev_mult times the standard deviations.
-        private void DrawEnvelope(Graphics gr, int min_age,
-            float[] means, float[] stddevs,
-            float dev_mult, Brush brush, Pen pen)
+        private void DrawEnvelope(Graphics gr, int min_age, float[] means, float[] stddevs, float dev_mult, Brush brush, Pen pen)
         {
             List<PointF> points = new List<PointF>();
             for (int i = 0; i < means.Length; i++)
+            {
                 points.Add(new PointF(i + min_age, means[i] + dev_mult * stddevs[i]));
+            }
             for (int i = means.Length - 1; i >= 0; i--)
+            {
                 points.Add(new PointF(i + min_age, means[i] - dev_mult * stddevs[i]));
+            }
 
             gr.FillPolygon(brush, points.ToArray());
             gr.DrawPolygon(pen, points.ToArray());
         }
 
-        #endregion
+        //#endregion
+
+        //------------------------------------------------------------  # 60個
 
         private void pictureBox4_MouseMove(object sender, MouseEventArgs e)
         {
@@ -1071,22 +1064,19 @@ namespace vcs_Draw9_Example8_vcsh
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
             // Make a GraphicsPath to represent the ellipse.
-            Rectangle rect = new Rectangle(
-                10, 10,
-                this.pictureBox4.ClientSize.Width - 20,
-                this.pictureBox4.ClientSize.Height - 20);
+            Rectangle rect = new Rectangle(10, 10, this.pictureBox4.ClientSize.Width - 20, this.pictureBox4.ClientSize.Height - 20);
             GraphicsPath path = new GraphicsPath();
             path.AddEllipse(rect);
 
             // Make a PathGradientBrush from the path.
-            using (PathGradientBrush br = new PathGradientBrush(path))
+            PathGradientBrush br = new PathGradientBrush(path);
+            if (checkBox1.Checked == true)
             {
-                if (checkBox1.Checked == true)
-                    br.CenterPoint = CenterPoint;
-                br.CenterColor = Color.Blue;
-                br.SurroundColors = new Color[] { this.pictureBox4.BackColor };
-                e.Graphics.FillEllipse(br, rect);
+                br.CenterPoint = CenterPoint;
             }
+            br.CenterColor = Color.Blue;
+            br.SurroundColors = new Color[] { this.pictureBox4.BackColor };
+            e.Graphics.FillEllipse(br, rect);
         }
 
         // See if the mouse has moved.
@@ -1094,7 +1084,10 @@ namespace vcs_Draw9_Example8_vcsh
         {
             // See if the cursor has moved.
             Point new_pos = Control.MousePosition;
-            if (new_pos.Equals(OldMousePos)) return;
+            if (new_pos.Equals(OldMousePos))
+            {
+                return;
+            }
             OldMousePos = new_pos;
 
             // Redraw.
@@ -1154,10 +1147,8 @@ namespace vcs_Draw9_Example8_vcsh
             double px = cx + dx * wid / 4;
             double py = cy + dy * hgt / 4;
 
-            // Draw an ellipse 1/2 the size of the eye
-            // centered at (px, py).
-            gr.FillEllipse(Brushes.Blue, (int)(px - wid / 4),
-                (int)(py - hgt / 4), wid / 2, hgt / 2);
+            // Draw an ellipse 1/2 the size of the eye centered at (px, py).
+            gr.FillEllipse(Brushes.Blue, (int)(px - wid / 4), (int)(py - hgt / 4), wid / 2, hgt / 2);
         }
 
         void draw_random_pixel_image()
@@ -1166,10 +1157,8 @@ namespace vcs_Draw9_Example8_vcsh
             int width = pictureBox_random_pixel_image.ClientSize.Width;
             int height = pictureBox_random_pixel_image.ClientSize.Height;
 
-            //bitmap
             Bitmap bmp = new Bitmap(width, height);
 
-            //random number
             Random rand = new Random();
 
             //create random pixels
@@ -1205,83 +1194,73 @@ namespace vcs_Draw9_Example8_vcsh
         {
             // Make the Bitmap.
             Bitmap bm = new Bitmap(pictureBox15.ClientSize.Width, pictureBox15.ClientSize.Height);
-            using (Graphics gr = Graphics.FromImage(bm))
+            Graphics gr = Graphics.FromImage(bm);
+            gr.Clear(Color.White);
+            gr.ScaleTransform(24f, -24f, System.Drawing.Drawing2D.MatrixOrder.Append);
+            gr.TranslateTransform(bm.Width * 0.5f, bm.Height * 0.5f,
+                System.Drawing.Drawing2D.MatrixOrder.Append);
+
+            // Draw axes.
+            Pen axis_pen = new Pen(Color.Blue, 0);
+            gr.DrawLine(axis_pen, -6, 0, 6, 0);
+            gr.DrawLine(axis_pen, 0, -6, 0, 6);
+            for (int i = -6; i <= 6; i++)
             {
-                // Clear.
-                gr.Clear(Color.White);
-                gr.ScaleTransform(24f, -24f, System.Drawing.Drawing2D.MatrixOrder.Append);
-                gr.TranslateTransform(bm.Width * 0.5f, bm.Height * 0.5f,
-                    System.Drawing.Drawing2D.MatrixOrder.Append);
+                gr.DrawLine(axis_pen, i, -0.1f, i, 0.1f);
+                gr.DrawLine(axis_pen, -0.1f, i, 0.1f, i);
+            }
 
-                // Draw axes.
-                using (Pen axis_pen = new Pen(Color.Blue, 0))
-                {
-                    gr.DrawLine(axis_pen, -6, 0, 6, 0);
-                    gr.DrawLine(axis_pen, 0, -6, 0, 6);
-                    for (int i = -6; i <= 6; i++)
-                    {
-                        gr.DrawLine(axis_pen, i, -0.1f, i, 0.1f);
-                        gr.DrawLine(axis_pen, -0.1f, i, 0.1f, i);
-                    }
-                }
+            // Graph the equations.
+            float dx = 2f / bm.Width;
+            float dy = 2f / bm.Height;
+            PlotFunction(gr, F1, -6, -6, 6, 6, dx, dy);
+            PlotFunction(gr, F2, -6, -6, 6, 6, dx, dy);
 
-                // Graph the equations.
-                float dx = 2f / bm.Width;
-                float dy = 2f / bm.Height;
-                PlotFunction(gr, F1, -6, -6, 6, 6, dx, dy);
-                PlotFunction(gr, F2, -6, -6, 6, 6, dx, dy);
-            } // using gr.
-
-            // Display the result.
             pictureBox15.Image = bm;
         }
 
         // Plot a function.
-        private void PlotFunction(Graphics gr, FofXY func,
-            float xmin, float ymin, float xmax, float ymax,
-            float dx, float dy)
+        private void PlotFunction(Graphics gr, FofXY func, float xmin, float ymin, float xmax, float ymax, float dx, float dy)
         {
             // Plot the function.
-            using (Pen thin_pen = new Pen(Color.Black, 0))
+            Pen thin_pen = new Pen(Color.Black, 0);
+            // Horizontal comparisons.
+            for (float x = xmin; x <= xmax; x += dx)
             {
-                // Horizontal comparisons.
-                for (float x = xmin; x <= xmax; x += dx)
-                {
-                    float last_y = func(x, ymin);
-                    for (float y = ymin + dy; y <= ymax; y += dy)
-                    {
-                        float next_y = func(x, y);
-                        if (
-                            ((last_y <= 0f) && (next_y >= 0f)) ||
-                            ((last_y >= 0f) && (next_y <= 0f))
-                           )
-                        {
-                            // Plot this point.
-                            gr.DrawLine(thin_pen, x, y - dy, x, y);
-                        }
-                        last_y = next_y;
-                    }
-                } // Horizontal comparisons.
-
-                // Vertical comparisons.
+                float last_y = func(x, ymin);
                 for (float y = ymin + dy; y <= ymax; y += dy)
                 {
-                    float last_x = func(xmin, y);
-                    for (float x = xmin + dx; x <= xmax; x += dx)
+                    float next_y = func(x, y);
+                    if (
+                        ((last_y <= 0f) && (next_y >= 0f)) ||
+                        ((last_y >= 0f) && (next_y <= 0f))
+                       )
                     {
-                        float next_x = func(x, y);
-                        if (
-                            ((last_x <= 0f) && (next_x >= 0f)) ||
-                            ((last_x >= 0f) && (next_x <= 0f))
-                           )
-                        {
-                            // Plot this point.
-                            gr.DrawLine(thin_pen, x - dx, y, x, y);
-                        }
-                        last_x = next_x;
+                        // Plot this point.
+                        gr.DrawLine(thin_pen, x, y - dy, x, y);
                     }
-                } // Vertical comparisons.
-            } // using thin_pen.
+                    last_y = next_y;
+                }
+            } // Horizontal comparisons.
+
+            // Vertical comparisons.
+            for (float y = ymin + dy; y <= ymax; y += dy)
+            {
+                float last_x = func(xmin, y);
+                for (float x = xmin + dx; x <= xmax; x += dx)
+                {
+                    float next_x = func(x, y);
+                    if (
+                        ((last_x <= 0f) && (next_x >= 0f)) ||
+                        ((last_x >= 0f) && (next_x <= 0f))
+                       )
+                    {
+                        // Plot this point.
+                        gr.DrawLine(thin_pen, x - dx, y, x, y);
+                    }
+                    last_x = next_x;
+                }
+            } // Vertical comparisons.
         }
 
         // Calculate:
@@ -1306,6 +1285,8 @@ namespace vcs_Draw9_Example8_vcsh
             return (float)(y + Math.Sqrt(12.25f - x * x));
         }
         // 畫Smiley SP
+
+        //------------------------------------------------------------  # 60個
 
         // 畫星形，可以偵測位置 ST
         // The polygon's points.
@@ -1351,6 +1332,8 @@ namespace vcs_Draw9_Example8_vcsh
             return path.IsVisible(target_point);
         }
         // 畫星形，可以偵測位置 SP
+
+        //------------------------------------------------------------  # 60個
 
         // 畫派圖，可以偵測位置 ST    pictureBox17
         // Draw the pie slices.
@@ -1417,14 +1400,12 @@ namespace vcs_Draw9_Example8_vcsh
         }
         // 畫派圖，可以偵測位置 SP
 
+        //------------------------------------------------------------  # 60個
 
         void draw_polygon_pathgradientbrush()
         {
             pictureBox18.Refresh();
-
-
         }
-
 
         private void timer_change_draw_figure_Tick(object sender, EventArgs e)
         {
@@ -1448,19 +1429,16 @@ namespace vcs_Draw9_Example8_vcsh
             }
 
             // Make a path gradient brush.
-            using (PathGradientBrush path_brush = new PathGradientBrush(pts))
-            {
-                // Define the center and surround colors.
-                path_brush.CenterColor = Color.White;
-                path_brush.SurroundColors = new Color[] { Color.Red, Color.Yellow, Color.Lime, Color.Cyan, Color.Blue, Color.Magenta };
+            PathGradientBrush path_brush = new PathGradientBrush(pts);
+            // Define the center and surround colors.
+            path_brush.CenterColor = Color.White;
+            path_brush.SurroundColors = new Color[] { Color.Red, Color.Yellow, Color.Lime, Color.Cyan, Color.Blue, Color.Magenta };
 
-                // Fill the hexagon.
-                e.Graphics.FillPolygon(path_brush, pts);
-            }
+            // Fill the hexagon.
+            e.Graphics.FillPolygon(path_brush, pts);
             // Outline the hexagon.
             e.Graphics.DrawPolygon(Pens.Black, pts);
         }
-
 
         // Some drawing parameters.
         private BallSprite[] Sprites;
@@ -1522,18 +1500,12 @@ namespace vcs_Draw9_Example8_vcsh
             int hgt2 = (int)(hgt / 2);
             for (int x = 0; x < wid; x++)
             {
-                using (Pen the_pen = new Pen(MapRainbowColor(x, 0, wid)))
-                {
-                    e.Graphics.DrawLine(the_pen, x, 0, x, hgt2);
-                }
-                using (Pen the_pen = new Pen(MapRainbowColor(x, wid, 0)))
-                {
-                    e.Graphics.DrawLine(the_pen, x, hgt2, x, hgt);
-                }
+                Pen the_pen = new Pen(MapRainbowColor(x, 0, wid));
+                e.Graphics.DrawLine(the_pen, x, 0, x, hgt2);
+                the_pen = new Pen(MapRainbowColor(x, wid, 0));
+                e.Graphics.DrawLine(the_pen, x, hgt2, x, hgt);
             }
-
         }
-
 
         // Map a value to a rainbow color.
         private Color MapRainbowColor(float value, float red_value, float blue_value)
@@ -1609,19 +1581,15 @@ namespace vcs_Draw9_Example8_vcsh
                 g += dg;
             }
 
-            using (PathGradientBrush path_brush = new PathGradientBrush(wheel_path))
-            {
-                path_brush.CenterColor = Color.White;
-                path_brush.SurroundColors = surround_colors;
+            PathGradientBrush path_brush = new PathGradientBrush(wheel_path);
+            path_brush.CenterColor = Color.White;
+            path_brush.SurroundColors = surround_colors;
 
-                gr.FillPath(path_brush, wheel_path);
+            gr.FillPath(path_brush, wheel_path);
 
-                // It looks better if we outline the wheel.
-                using (Pen thick_pen = new Pen(outline_color, 2))
-                {
-                    gr.DrawPath(thick_pen, wheel_path);
-                }
-            }
+            // It looks better if we outline the wheel.
+            Pen thick_pen = new Pen(outline_color, 2);
+            gr.DrawPath(thick_pen, wheel_path);
 
             //// Uncomment the following to draw the path's points.
             //for (int i = 0; i < wheel_path.PointCount; i++)
@@ -1667,20 +1635,15 @@ namespace vcs_Draw9_Example8_vcsh
             InterpolateColors(surround_colors, ref index,
                 wheel_path.PointCount, 255, 255, 255, 0, 255, 255, 0, 0);
 
-            using (PathGradientBrush path_brush =
-                new PathGradientBrush(wheel_path))
-            {
-                path_brush.CenterColor = Color.White;
-                path_brush.SurroundColors = surround_colors;
+            PathGradientBrush path_brush = new PathGradientBrush(wheel_path);
+            path_brush.CenterColor = Color.White;
+            path_brush.SurroundColors = surround_colors;
 
-                gr.FillPath(path_brush, wheel_path);
+            gr.FillPath(path_brush, wheel_path);
 
-                // It looks better if we outline the wheel.
-                using (Pen thick_pen = new Pen(outline_color, 2))
-                {
-                    gr.DrawPath(thick_pen, wheel_path);
-                }
-            }
+            // It looks better if we outline the wheel.
+            Pen thick_pen = new Pen(outline_color, 2);
+            gr.DrawPath(thick_pen, wheel_path);
 
             //// Uncomment the following to draw the path's points.
             //for (int i = 0; i < wheel_path.PointCount; i++)
@@ -1724,8 +1687,9 @@ namespace vcs_Draw9_Example8_vcsh
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             DrawColorWheel2(e.Graphics, this.pictureBox_color_wheel2.BackColor, 10, 10, this.pictureBox_color_wheel2.ClientSize.Width - 20, this.pictureBox_color_wheel2.ClientSize.Height - 20);
         }
-
         // 兩種 Color Wheel SP
+
+        //------------------------------------------------------------  # 60個
 
         //畫各種箭頭 ST
 
@@ -1796,37 +1760,35 @@ namespace vcs_Draw9_Example8_vcsh
             int x1 = 20;
             int x2 = 200;
 
-            using (Pen thick_pen = new Pen(Color.Blue, 3))
-            {
-                int y = 20;
-                DrawArrow(e.Graphics, thick_pen,
-                    new PointF(x1, y), new PointF(x2, y), 10,
-                    EndpointStyle.Fletching,
-                    EndpointStyle.ArrowHead);
-                y += 30;
-                DrawArrow(e.Graphics, thick_pen,
-                    new PointF(x1, y), new PointF(x2, y), 10,
-                    EndpointStyle.ArrowHead,
-                    EndpointStyle.ArrowHead);
-                y += 30;
-                DrawArrow(e.Graphics, thick_pen,
-                    new PointF(x1, y), new PointF(x2, y), 10,
-                    EndpointStyle.ArrowHead,
-                    EndpointStyle.Fletching);
-                y += 30;
-                DrawArrow(e.Graphics, thick_pen,
-                    new PointF(x1, y), new PointF(x2, y), 10,
-                    EndpointStyle.Fletching,
-                    EndpointStyle.Fletching);
-            }
+            Pen thick_pen = new Pen(Color.Blue, 3);
+            int y = 20;
+            DrawArrow(e.Graphics, thick_pen,
+                new PointF(x1, y), new PointF(x2, y), 10,
+                EndpointStyle.Fletching,
+                EndpointStyle.ArrowHead);
+            y += 30;
+            DrawArrow(e.Graphics, thick_pen,
+                new PointF(x1, y), new PointF(x2, y), 10,
+                EndpointStyle.ArrowHead,
+                EndpointStyle.ArrowHead);
+            y += 30;
+            DrawArrow(e.Graphics, thick_pen,
+                new PointF(x1, y), new PointF(x2, y), 10,
+                EndpointStyle.ArrowHead,
+                EndpointStyle.Fletching);
+            y += 30;
+            DrawArrow(e.Graphics, thick_pen,
+                new PointF(x1, y), new PointF(x2, y), 10,
+                EndpointStyle.Fletching,
+                EndpointStyle.Fletching);
         }
 
         //畫各種箭頭 SP
 
+        //------------------------------------------------------------  # 60個
 
         int hilbert_curve_depth = 2;
         int sierpinski_curve_depth = 2;
-
 
         private void timer_change_Tick(object sender, EventArgs e)
         {
@@ -1841,7 +1803,9 @@ namespace vcs_Draw9_Example8_vcsh
                 sierpinski_curve_depth = 2;
         }
 
-        #region Hilbert Curve
+        //------------------------------------------------------------  # 60個
+
+        //#region Hilbert Curve
         private float LastX, LastY;
         private Bitmap HilbertImage;
 
@@ -1871,14 +1835,12 @@ namespace vcs_Draw9_Example8_vcsh
             HilbertImage = new Bitmap(pictureBox_hilbert_curve.ClientSize.Width, pictureBox_hilbert_curve.ClientSize.Height);
             pictureBox_hilbert_curve.Image = HilbertImage;
 
-            using (Graphics gr = Graphics.FromImage(HilbertImage))
-            {
-                // Draw the curve.
-                gr.Clear(pictureBox_hilbert_curve.BackColor);
-                LastX = (int)start_x;
-                LastY = (int)start_y;
-                Hilbert(gr, hilbert_curve_depth, start_length, 0);
-            }
+            Graphics gr = Graphics.FromImage(HilbertImage);
+            // Draw the curve.
+            gr.Clear(pictureBox_hilbert_curve.BackColor);
+            LastX = (int)start_x;
+            LastY = (int)start_y;
+            Hilbert(gr, hilbert_curve_depth, start_length, 0);
         }
 
         // Draw a Hilbert curve.
@@ -1902,11 +1864,11 @@ namespace vcs_Draw9_Example8_vcsh
             LastY = LastY + dy;
         }
 
-        #endregion Hilbert Curve
+        //#endregion Hilbert Curve
 
+        //------------------------------------------------------------  # 60個
 
-
-        #region Sierpinski Curve
+        //#region Sierpinski Curve
         private Bitmap m_Bm;
 
         void draw_sierpinski_curve()
@@ -1918,15 +1880,13 @@ namespace vcs_Draw9_Example8_vcsh
             m_Bm = new Bitmap(pictureBox_sierpinski_curve.ClientSize.Width, pictureBox_sierpinski_curve.ClientSize.Height);
             pictureBox_sierpinski_curve.Image = m_Bm;
 
-            using (Graphics gr = Graphics.FromImage(m_Bm))
-            {
-                // Draw the curve.
-                gr.Clear(pictureBox_sierpinski_curve.BackColor);
+            Graphics gr = Graphics.FromImage(m_Bm);
+            // Draw the curve.
+            gr.Clear(pictureBox_sierpinski_curve.BackColor);
 
-                float dx = (float)(m_Bm.Width / Math.Pow(2, sierpinski_curve_depth - 1) / 8);
-                float dy = (float)(m_Bm.Height / Math.Pow(2, sierpinski_curve_depth - 1) / 8);
-                Sierpinski(gr, sierpinski_curve_depth, dx, dy);
-            }
+            float dx = (float)(m_Bm.Width / Math.Pow(2, sierpinski_curve_depth - 1) / 8);
+            float dy = (float)(m_Bm.Height / Math.Pow(2, sierpinski_curve_depth - 1) / 8);
+            Sierpinski(gr, sierpinski_curve_depth, dx, dy);
 
             // Display the result.
             pictureBox_sierpinski_curve.Refresh();
@@ -2023,8 +1983,9 @@ namespace vcs_Draw9_Example8_vcsh
             x += dx;
             y += dy;
         }
-        #endregion Sierpinski Curve
+        //#endregion Sierpinski Curve
 
+        //------------------------------------------------------------  # 60個
 
         // 畫動態派圖 ST        
         private void pictureBox_pie_Paint(object sender, PaintEventArgs e)
@@ -2133,17 +2094,15 @@ namespace vcs_Draw9_Example8_vcsh
 
         // 畫動態派圖 SP
 
+        //------------------------------------------------------------  # 60個
 
         // one_self_avoiding_walk ST
-
 
         // The lattice size.
         private int WalkWidth, WalkHeight;
 
         // Used to pick a random starting vertex.
         private Random Rand = new Random();
-
-
 
         void start_one_self_avoiding_walk()
         {
@@ -2250,43 +2209,36 @@ namespace vcs_Draw9_Example8_vcsh
             float dot_w = 2 * dot_r;
 
             // Draw the walk.
-            using (Graphics gr = Graphics.FromImage(bm))
+            Graphics gr = Graphics.FromImage(bm);
+            gr.SmoothingMode = SmoothingMode.AntiAlias;
+            gr.Clear(bg_color);
+
+            // Draw a grid of dots.
+            for (int x = 0; x <= width; x++)
             {
-                gr.SmoothingMode = SmoothingMode.AntiAlias;
-                gr.Clear(bg_color);
+                for (int y = 0; y <= height; y++)
+                {
+                    gr.FillEllipse(dot_brush,
+                        offset_x + x * scale - dot_r,
+                        offset_y + y * scale - dot_r,
+                        dot_w, dot_w);
+                }
+            }
 
-                // Draw a grid of dots.
-                for (int x = 0; x <= width; x++)
+            // Draw the walk.
+            if (walk.Count == 1)
+            {
+                RectangleF rect = new RectangleF(offset_x + walk[0].X * scale - 2 * dot_r, offset_y + walk[0].Y * scale - 2 * dot_r, 4 * dot_r, 4 * dot_r);
+                gr.DrawEllipse(pen, rect);
+            }
+            else
+            {
+                List<PointF> points = new List<PointF>();
+                foreach (Point point in walk.ToArray())
                 {
-                    for (int y = 0; y <= height; y++)
-                    {
-                        gr.FillEllipse(dot_brush,
-                            offset_x + x * scale - dot_r,
-                            offset_y + y * scale - dot_r,
-                            dot_w, dot_w);
-                    }
+                    points.Add(new PointF(offset_x + point.X * scale, offset_y + point.Y * scale));
                 }
-
-                // Draw the walk.
-                if (walk.Count == 1)
-                {
-                    RectangleF rect = new RectangleF(
-                        offset_x + walk[0].X * scale - 2 * dot_r,
-                        offset_y + walk[0].Y * scale - 2 * dot_r,
-                        4 * dot_r, 4 * dot_r);
-                    gr.DrawEllipse(pen, rect);
-                }
-                else
-                {
-                    List<PointF> points = new List<PointF>();
-                    foreach (Point point in walk.ToArray())
-                    {
-                        points.Add(new PointF(
-                            offset_x + point.X * scale,
-                            offset_y + point.Y * scale));
-                    }
-                    gr.DrawLines(pen, points.ToArray());
-                }
+                gr.DrawLines(pen, points.ToArray());
             }
 
             return bm;
@@ -2297,26 +2249,24 @@ namespace vcs_Draw9_Example8_vcsh
         {
             List<Point> walk = FindOneWalk(WalkWidth, WalkHeight);
             if (walk == null)
+            {
                 pictureBox_one_self_avoiding_walk.Image = null;
+            }
             else
             {
-                using (Pen pen = new Pen(Color.Blue, 2))
-                {
-                    Bitmap bm = DrawWalk(walk,
-                        WalkWidth, WalkHeight,
-                        pictureBox_one_self_avoiding_walk.ClientSize.Width,
-                        pictureBox_one_self_avoiding_walk.ClientSize.Height,
-                        Color.White, Brushes.Green, pen);
-                    pictureBox_one_self_avoiding_walk.Image = bm;
-                }
+                Pen pen = new Pen(Color.Blue, 2);
+                Bitmap bm = DrawWalk(walk, WalkWidth, WalkHeight, pictureBox_one_self_avoiding_walk.ClientSize.Width, pictureBox_one_self_avoiding_walk.ClientSize.Height, Color.White, Brushes.Green, pen);
+                pictureBox_one_self_avoiding_walk.Image = bm;
             }
         }
-
-
-
-
-
-
         // one_self_avoiding_walk SP
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+

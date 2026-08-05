@@ -50,19 +50,19 @@ namespace howto_scale_drawing
         }
 
         // Map a drawing coordinate rectangle to a graphics object rectangle.
-        private void MapDrawing(Graphics gr, RectangleF drawing_rect, RectangleF target_rect, bool stretch)
+        private void MapDrawing(Graphics g, RectangleF drawing_rect, RectangleF target_rect, bool stretch)
         {
             if ((target_rect.Width < 1) || (target_rect.Height < 1))
             {
                 return;
             }
 
-            gr.ResetTransform();
+            g.ResetTransform();
 
             // Center the drawing area at the origin.
             float drawing_cx = (drawing_rect.Left + drawing_rect.Right) / 2;
             float drawing_cy = (drawing_rect.Top + drawing_rect.Bottom) / 2;
-            gr.TranslateTransform(-drawing_cx, -drawing_cy);
+            g.TranslateTransform(-drawing_cx, -drawing_cy);
 
             // Scale.
             // Get scale factors for both directions.
@@ -74,37 +74,35 @@ namespace howto_scale_drawing
                 scale_x = Math.Min(scale_x, scale_y);
                 scale_y = scale_x;
             }
-            gr.ScaleTransform(scale_x, scale_y, MatrixOrder.Append);
+            g.ScaleTransform(scale_x, scale_y, MatrixOrder.Append);
 
             // Translate to center over the drawing area.
             float graphics_cx = (target_rect.Left + target_rect.Right) / 2;
             float graphics_cy = (target_rect.Top + target_rect.Bottom) / 2;
-            gr.TranslateTransform(graphics_cx, graphics_cy, MatrixOrder.Append);
+            g.TranslateTransform(graphics_cx, graphics_cy, MatrixOrder.Append);
         }
 
         // Draw a smiley face in the area (-1, -1)-(1, 1).
-        private void DrawSmiley(Graphics gr)
+        private void DrawSmiley(Graphics g)
         {
-            gr.DrawRectangle(new Pen(Color.Red, 0), -1, -1, 2, 2);
+            g.DrawRectangle(new Pen(Color.Red, 0), -1, -1, 2, 2);
 
-            using (Pen thin_pen = new Pen(Color.Black, 0))
-            {
-                gr.FillEllipse(Brushes.Yellow, -1, -1, 2, 2);
-                gr.DrawEllipse(thin_pen, -1, -1, 2, 2);
+            Pen thin_pen = new Pen(Color.Black, 0);
+            g.FillEllipse(Brushes.Yellow, -1, -1, 2, 2);
+            g.DrawEllipse(thin_pen, -1, -1, 2, 2);
 
-                gr.FillEllipse(Brushes.LightGreen, -0.5f, -0.5f, 0.3f, 0.5f);
-                gr.DrawEllipse(thin_pen, -0.5f, -0.5f, 0.3f, 0.5f);
-                gr.FillEllipse(Brushes.Black, -0.4f, -0.4f, 0.2f, 0.3f);
+            g.FillEllipse(Brushes.LightGreen, -0.5f, -0.5f, 0.3f, 0.5f);
+            g.DrawEllipse(thin_pen, -0.5f, -0.5f, 0.3f, 0.5f);
+            g.FillEllipse(Brushes.Black, -0.4f, -0.4f, 0.2f, 0.3f);
 
-                gr.FillEllipse(Brushes.LightGreen, 0.2f, -0.5f, 0.3f, 0.5f);
-                gr.DrawEllipse(thin_pen, 0.2f, -0.5f, 0.3f, 0.5f);
-                gr.FillEllipse(Brushes.Black, 0.3f, -0.4f, 0.2f, 0.3f);
+            g.FillEllipse(Brushes.LightGreen, 0.2f, -0.5f, 0.3f, 0.5f);
+            g.DrawEllipse(thin_pen, 0.2f, -0.5f, 0.3f, 0.5f);
+            g.FillEllipse(Brushes.Black, 0.3f, -0.4f, 0.2f, 0.3f);
 
-                gr.FillEllipse(Brushes.LightBlue, -0.2f, -0.1f, 0.4f, 0.6f);
-                gr.DrawEllipse(thin_pen, -0.2f, -0.1f, 0.4f, 0.6f);
+            g.FillEllipse(Brushes.LightBlue, -0.2f, -0.1f, 0.4f, 0.6f);
+            g.DrawEllipse(thin_pen, -0.2f, -0.1f, 0.4f, 0.6f);
 
-                gr.DrawArc(thin_pen, -0.75f, -0.75f, 1.5f, 1.5f, 20, 120);
-            }
+            g.DrawArc(thin_pen, -0.75f, -0.75f, 1.5f, 1.5f, 20, 120);
         }
     }
 }

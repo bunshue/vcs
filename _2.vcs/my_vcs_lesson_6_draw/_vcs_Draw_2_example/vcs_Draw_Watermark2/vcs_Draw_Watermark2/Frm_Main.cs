@@ -385,7 +385,6 @@ namespace vcs_Draw_Watermark2
                 {
                     AddFontWatermark(txtWaterMarkFont.Text.Trim(), lbImgList.Items[i].ToString(), 1);
                 }
-
                 richTextBox1.Text += "添加水印成功\n";
             }
 

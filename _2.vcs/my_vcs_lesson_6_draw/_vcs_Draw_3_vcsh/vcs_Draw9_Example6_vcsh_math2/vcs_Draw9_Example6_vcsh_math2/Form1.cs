@@ -468,7 +468,7 @@ namespace vcs_Draw9_Example6_vcsh_math2
         }
         */
 
-        #region Newton's approximation
+        //#region Newton's approximation
 
         // Pi/2 = Sum(k!/(2k+1)!!)
         private double Pi(int num_terms)
@@ -495,9 +495,9 @@ namespace vcs_Draw9_Example6_vcsh_math2
             return result;
         }
 
-        #endregion Newton's approximation
+        //#endregion Newton's approximation
 
-        #region Nilakantha
+        //#region Nilakantha
 
         // Nilakantha series.
         // Pi/2 = Sum(-1^k/(2k+2)(2k+3)(2k+4))
@@ -513,9 +513,9 @@ namespace vcs_Draw9_Example6_vcsh_math2
             return 3 + result * 4;
         }
 
-        #endregion Nilakantha
+        //#endregion Nilakantha
 
-        #region Arcsine
+        //#region Arcsine
 
         // Arcsine series.
         // Pi = Sum(3*(2n choose n) / 16^n (2*n+1))
@@ -541,10 +541,10 @@ namespace vcs_Draw9_Example6_vcsh_math2
             return result;
         }
 
-        #endregion Arcsine
+        //#endregion Arcsine
 
 
-        #region draw fractal
+        //#region draw fractal
 
         private const int Wid = 250 * 2 + 100;
         private const int Hgt = 250 * 2 + 100;
@@ -706,11 +706,11 @@ namespace vcs_Draw9_Example6_vcsh_math2
         {
             Running = false;
         }
-        #endregion draw fractal
+        //#endregion draw fractal
 
 
 
-        #region 四個等高線圖 picturebox 7 8 9 10
+        //#region 四個等高線圖 picturebox 7 8 9 10
 
 
         // The function type.
@@ -839,6 +839,6 @@ namespace vcs_Draw9_Example6_vcsh_math2
             return (float)Math.Sqrt(25 - (x * x + y * y));
         }
 
-        #endregion 四個等高線圖
+        //#endregion 四個等高線圖
     }
 }

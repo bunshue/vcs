@@ -82,7 +82,9 @@ namespace vcs_Draw9_Example8_vcsh
             }
 
             if (bounced)
+            {
                 Boing();
+            }
         }
 
         // Play the boing sound file resource.

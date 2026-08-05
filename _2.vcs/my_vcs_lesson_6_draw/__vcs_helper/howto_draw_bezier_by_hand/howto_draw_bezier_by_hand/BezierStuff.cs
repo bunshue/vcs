@@ -37,15 +37,11 @@ namespace howto_draw_bezier_by_hand
             List<PointF> points = new List<PointF>();
             for (float t = 0.0f; t < 1.0; t += dt)
             {
-                points.Add(new PointF(
-                    X(t, pt0.X, pt1.X, pt2.X, pt3.X),
-                    Y(t, pt0.Y, pt1.Y, pt2.Y, pt3.Y)));
+                points.Add(new PointF(X(t, pt0.X, pt1.X, pt2.X, pt3.X), Y(t, pt0.Y, pt1.Y, pt2.Y, pt3.Y)));
             }
 
             // Connect to the final point.
-            points.Add(new PointF(
-                X(1.0f, pt0.X, pt1.X, pt2.X, pt3.X),
-                Y(1.0f, pt0.Y, pt1.Y, pt2.Y, pt3.Y)));
+            points.Add(new PointF(X(1.0f, pt0.X, pt1.X, pt2.X, pt3.X), Y(1.0f, pt0.Y, pt1.Y, pt2.Y, pt3.Y)));
 
             // Draw the curve.
             gr.DrawLines(the_pen, points.ToArray());

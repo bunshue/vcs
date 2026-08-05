@@ -34,7 +34,6 @@ namespace vcs_Draw_Watermark1
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -176,9 +175,9 @@ namespace vcs_Draw_Watermark1
 
             Bitmap watermark_bm = new Bitmap(image_watermark);
 
-            int x = (bitmap1.Width - watermark_bm.Width) / 2;
-            int y = (bitmap1.Height - watermark_bm.Height) / 2;
-            DrawWatermark1(watermark_bm, bitmap1, x, y);
+            int x_st = (bitmap1.Width - watermark_bm.Width) / 2;
+            int y_st = (bitmap1.Height - watermark_bm.Height) / 2;
+            DrawWatermark1(watermark_bm, bitmap1, x_st, y_st);
 
             pictureBox1.Image = bitmap1;
         }
@@ -188,12 +187,11 @@ namespace vcs_Draw_Watermark1
         {
             const byte ALPHA = 128;
             // Set the watermark's pixels' Alpha components.
-            Color clr;
             for (int py = 0; py < bitmap1.Height; py++)
             {
                 for (int px = 0; px < bitmap1.Width; px++)
                 {
-                    clr = bitmap1.GetPixel(px, py);
+                    Color clr = bitmap1.GetPixel(px, py);
                     bitmap1.SetPixel(px, py, Color.FromArgb(ALPHA, clr.R, clr.G, clr.B));
                 }
             }
@@ -202,10 +200,8 @@ namespace vcs_Draw_Watermark1
             bitmap1.MakeTransparent(bitmap1.GetPixel(0, 0));
 
             // Copy onto the result image.
-            using (Graphics g = Graphics.FromImage(result_bm))
-            {
-                g.DrawImage(bitmap1, x, y);
-            }
+            Graphics g = Graphics.FromImage(result_bm);
+            g.DrawImage(bitmap1, x, y);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -221,11 +217,7 @@ namespace vcs_Draw_Watermark1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-/*  可搬出
-
-*/

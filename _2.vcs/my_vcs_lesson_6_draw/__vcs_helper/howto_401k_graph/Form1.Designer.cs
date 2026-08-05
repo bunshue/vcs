@@ -361,6 +361,7 @@
             this.Controls.Add(this.Label1);
             this.Name = "Form1";
             this.Text = "howto_401k_graph";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudYears)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picGraph)).EndInit();
             this.ResumeLayout(false);

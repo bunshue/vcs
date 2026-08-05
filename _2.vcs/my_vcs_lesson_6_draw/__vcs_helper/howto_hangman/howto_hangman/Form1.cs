@@ -13,15 +13,15 @@ using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Text;
 
+/*
+在英文中，出現次數最多的12個字母是（由多至少排列）：e-t-a-o-i-n-s-h-r-d-l-u。
+玩家在猜字是使用此表與其他字母頻率表，以增加猜中的機會。
+*/
+
 namespace howto_hangman
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         // PictureBoxes holding skeleton pictures.
         private PictureBox[] PictureBoxes;
 
@@ -40,9 +40,17 @@ namespace howto_hangman
         // A list holding the letter buttons.
         private List<Button> KeyboardButtons;
 
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
         // Prepare to play.
         private void Form1_Load(object sender, EventArgs e)
         {
+            label1.Text = "猜中一個字的所有字母\n若未猜中，則會在吊頸公仔上畫一筆";
+            label1.Visible = true;
+
             // Save references to the PictureBoxes in the array.
             PictureBoxes = new PictureBox[]
             {
@@ -92,8 +100,7 @@ namespace howto_hangman
                 {
                     string_format.Alignment = StringAlignment.Center;
                     string_format.LineAlignment = StringAlignment.Center;
-                    gr.DrawString(btn.Text, btn.Font, Brushes.Black,
-                        btn.ClientRectangle, string_format);
+                    gr.DrawString(btn.Text, btn.Font, Brushes.Black, btn.ClientRectangle, string_format);
                 }
             }
             btn.Tag = btn.Text;
@@ -135,7 +142,10 @@ namespace howto_hangman
             lblLost.Visible = false;
 
             // Enable the letter buttons.
-            foreach (Button letter_btn in KeyboardButtons) letter_btn.Enabled = true;
+            foreach (Button letter_btn in KeyboardButtons)
+            {
+                letter_btn.Enabled = true;
+            }
 
             // Display the first picture.
             PictureBoxes[CurrentPictureIndex].Visible = false;
@@ -159,17 +169,26 @@ namespace howto_hangman
                 foreach (Label lbl in LetterLabels)
                 {
                     // See if this letter matches the current guess.
-                    if (lbl.Tag.ToString() == ch) lbl.Text = ch.ToString();
+                    if (lbl.Tag.ToString() == ch)
+                    {
+                        lbl.Text = ch.ToString();
+                    }
 
                     // See if the user has found this letter.
-                    if (lbl.Text == "") has_won = false;
+                    if (lbl.Text == "")
+                    {
+                        has_won = false;
+                    }
                 }
 
                 // See if the user has won.
                 if (has_won)
                 {
                     lblWon.Visible = true;
-                    foreach (Button letter_btn in KeyboardButtons) letter_btn.Enabled = false;
+                    foreach (Button letter_btn in KeyboardButtons)
+                    {
+                        letter_btn.Enabled = false;
+                    }
                 }
             }
             else
@@ -183,8 +202,14 @@ namespace howto_hangman
                 if (CurrentPictureIndex == PictureBoxes.Length - 1)
                 {
                     lblLost.Visible = true;
-                    foreach (Button letter_btn in KeyboardButtons) letter_btn.Enabled = false;
-                    foreach (Label lbl in LetterLabels) lbl.Text = lbl.Tag.ToString();
+                    foreach (Button letter_btn in KeyboardButtons)
+                    {
+                        letter_btn.Enabled = false;
+                    }
+                    foreach (Label lbl in LetterLabels)
+                    {
+                        lbl.Text = lbl.Tag.ToString();
+                    }
                 }
             }
         }
