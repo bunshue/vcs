@@ -140,8 +140,12 @@
             this.button93 = new System.Windows.Forms.Button();
             this.button94 = new System.Windows.Forms.Button();
             this.button95 = new System.Windows.Forms.Button();
+            this.groupBox_SizeMode = new System.Windows.Forms.GroupBox();
+            this.rb_zoom = new System.Windows.Forms.RadioButton();
+            this.rb_normal = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox_SizeMode.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -1427,11 +1431,50 @@
             this.button95.UseVisualStyleBackColor = true;
             this.button95.Click += new System.EventHandler(this.button95_Click);
             // 
+            // groupBox_SizeMode
+            // 
+            this.groupBox_SizeMode.Controls.Add(this.rb_zoom);
+            this.groupBox_SizeMode.Controls.Add(this.rb_normal);
+            this.groupBox_SizeMode.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.groupBox_SizeMode.Location = new System.Drawing.Point(940, 222);
+            this.groupBox_SizeMode.Name = "groupBox_SizeMode";
+            this.groupBox_SizeMode.Size = new System.Drawing.Size(100, 100);
+            this.groupBox_SizeMode.TabIndex = 100;
+            this.groupBox_SizeMode.TabStop = false;
+            this.groupBox_SizeMode.Text = "SizeMode";
+            // 
+            // rb_zoom
+            // 
+            this.rb_zoom.AutoSize = true;
+            this.rb_zoom.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_zoom.Location = new System.Drawing.Point(11, 52);
+            this.rb_zoom.Name = "rb_zoom";
+            this.rb_zoom.Size = new System.Drawing.Size(70, 23);
+            this.rb_zoom.TabIndex = 1;
+            this.rb_zoom.Text = "Zoom";
+            this.rb_zoom.UseVisualStyleBackColor = true;
+            this.rb_zoom.CheckedChanged += new System.EventHandler(this.pictureBox1_SizeMode_CheckedChanged);
+            // 
+            // rb_normal
+            // 
+            this.rb_normal.AutoSize = true;
+            this.rb_normal.Checked = true;
+            this.rb_normal.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_normal.Location = new System.Drawing.Point(11, 29);
+            this.rb_normal.Name = "rb_normal";
+            this.rb_normal.Size = new System.Drawing.Size(82, 23);
+            this.rb_normal.TabIndex = 0;
+            this.rb_normal.TabStop = true;
+            this.rb_normal.Text = "Normal";
+            this.rb_normal.UseVisualStyleBackColor = true;
+            this.rb_normal.CheckedChanged += new System.EventHandler(this.pictureBox1_SizeMode_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1120, 641);
+            this.Controls.Add(this.groupBox_SizeMode);
             this.Controls.Add(this.button95);
             this.Controls.Add(this.button94);
             this.Controls.Add(this.button93);
@@ -1537,6 +1580,8 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox_SizeMode.ResumeLayout(false);
+            this.groupBox_SizeMode.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1654,6 +1699,9 @@
         private System.Windows.Forms.Button button93;
         private System.Windows.Forms.Button button94;
         private System.Windows.Forms.Button button95;
+        private System.Windows.Forms.GroupBox groupBox_SizeMode;
+        private System.Windows.Forms.RadioButton rb_zoom;
+        private System.Windows.Forms.RadioButton rb_normal;
     }
 }
 

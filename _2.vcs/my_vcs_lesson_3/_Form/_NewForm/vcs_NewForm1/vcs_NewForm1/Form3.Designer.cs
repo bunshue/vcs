@@ -1,6 +1,6 @@
-﻿namespace vcs_NewForm2
+﻿namespace vcs_NewForm1
 {
-    partial class Form2
+    partial class Form3
     {
         /// <summary>
         /// 設計工具所需的變數。
@@ -35,25 +35,25 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(24, 28);
+            this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(74, 27);
-            this.label1.TabIndex = 0;
+            this.label1.TabIndex = 1;
             this.label1.Text = "label1";
             // 
-            // Form2
+            // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(397, 274);
+            this.ClientSize = new System.Drawing.Size(412, 346);
             this.Controls.Add(this.label1);
-            this.Name = "Form2";
-            this.Text = "Form2";
-            this.Activated += new System.EventHandler(this.Form2_Activated);
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form2_FormClosed);
-            this.Load += new System.EventHandler(this.Form2_Load);
-            this.Shown += new System.EventHandler(this.Form2_Shown);
+            this.Name = "Form3";
+            this.Text = "Form3";
+            this.Activated += new System.EventHandler(this.Form3_Activated);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form3_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form3_FormClosed);
+            this.Load += new System.EventHandler(this.Form3_Load);
+            this.Shown += new System.EventHandler(this.Form3_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

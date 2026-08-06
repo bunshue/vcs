@@ -7,34 +7,34 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace vcs_NewForm2
+namespace vcs_NewForm1
 {
-    public partial class Form2 : Form
+    public partial class Form3 : Form
     {
         static int count = 0;
 
-        public Form2()
+        public Form3()
         {
             InitializeComponent();
         }
 
-        private void Form2_Load(object sender, EventArgs e)
+        private void Form3_Load(object sender, EventArgs e)
         {
             count += 1;
             this.Text = "第 " + count.ToString() + " 張表單";
         }
 
-        private void Form2_Activated(object sender, EventArgs e)
+        private void Form3_Activated(object sender, EventArgs e)
         {
             label1.Text = "目前已開啟的表單數：" + count;
         }
 
-        private void Form2_Shown(object sender, EventArgs e)
+        private void Form3_Shown(object sender, EventArgs e)
         {
             //MessageBox.Show("已引發 Form.Shown 事件");
         }
 
-        private void Form2_FormClosing(object sender, FormClosingEventArgs e)
+        private void Form3_FormClosing(object sender, FormClosingEventArgs e)
         {
             DialogResult result = MessageBox.Show("是否要關閉表單？",
                 "FormClosing事件" + e.CloseReason.ToString(),
@@ -47,7 +47,7 @@ namespace vcs_NewForm2
             }
         }
 
-        private void Form2_FormClosed(object sender, FormClosedEventArgs e)
+        private void Form3_FormClosed(object sender, FormClosedEventArgs e)
         {
             MessageBox.Show("關閉表單的原因：" + e.CloseReason.ToString(), "FormClosed事件");
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_NewForm2
+namespace vcs_StartupScreen3
 {
     static class Program
     {

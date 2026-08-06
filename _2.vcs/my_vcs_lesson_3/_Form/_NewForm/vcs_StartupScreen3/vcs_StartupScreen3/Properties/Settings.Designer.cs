@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_NewForm2.Properties
+namespace vcs_StartupScreen3.Properties
 {
 
 

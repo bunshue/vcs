@@ -44,7 +44,7 @@ namespace vcs_Draw6_String1
         void show_item_location()
         {
             //button
-            int x_st = 1290;
+            int x_st = 10;
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
@@ -79,32 +79,29 @@ namespace vcs_Draw6_String1
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            richTextBox1.Size = new Size(520, 360);
-            richTextBox1.Location = new Point(x_st + dx * 0 + 100, y_st + dy * 10);
+            richTextBox1.Size = new Size(620, 360);
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            pictureBox1.Location = new Point(40, 40);
-            //指定畫布大小
-            pictureBox1.Width = 640;
-            pictureBox1.Height = 480;
+            pictureBox1.Size = new Size(850, 580);
+            pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
-            x_st = 700;
-            y_st = 40;
-            pictureBox2.Location = new Point(x_st, y_st);
+            pictureBox2.Size = new Size(400, 300);
+            pictureBox2.Location = new Point(x_st + dx * 7 + 30, y_st + dy * 0);
             pictureBox2.BackColor = Color.Red;
 
-            x_st = 20;
-            y_st = 620;
+            pictureBox_time.Size = new Size(400, 150);
+            pictureBox_time.Location = new Point(x_st + dx * 7 + 30, y_st + dy * 6 - 40);
 
-            dx = 450;
-            dy = 150;
-            int W = 440;
+            x_st = 635;
+            y_st = 600;
+            int W = 420;
             int H = 150;
-
-            pictureBox_time.Location = new Point(x_st + dx * 0, y_st - 70);
-            pictureBox_time.Size = new Size(700, 60);
+            dx = W + 10;
+            dy = H + 10;
 
             pictureBox3.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            pictureBox3.Size = new Size(W, H);
             pictureBox3.BackColor = Color.Pink;
 
             pictureBox4.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -880,7 +877,30 @@ namespace vcs_Draw6_String1
             g.ResetTransform();
 
             g.DrawString("顯示豎排文字", new Font("標楷體", 20), new SolidBrush(Color.Black), 0, 0, new StringFormat(StringFormatFlags.DirectionVertical));
+
+            //------------------------------------------------------------  # 60個
+
+            //寫出直排的字串
+
+            //int W = pictureBox1.Width;
+            //int H = pictureBox1.Height;
+            g = this.pictureBox1.CreateGraphics();
+
+            Font f = new Font("標楷體", 24); // 字型
+            string text = "用 VC# 寫出直排的字串"; // 文字字串
+            StringFormat stringFormat = new StringFormat();　// 字串 繪出格式
+            stringFormat.FormatFlags = StringFormatFlags.DirectionVertical;　// 垂直
+
+            int stringWidth = 100; // 字串　最大的寬度
+
+            SizeF stringSize = g.MeasureString(text, f, stringWidth, stringFormat); // 文字字串的寬高
+            float X = 200; // 左上角的座標
+            float Y = 100;
+
+            g.DrawString(text, f, Brushes.Red, X, Y, stringFormat);  // 繪出文字字串
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button21_Click(object sender, EventArgs e)
         {
@@ -956,24 +976,6 @@ namespace vcs_Draw6_String1
 
         private void button23_Click(object sender, EventArgs e)
         {
-            //寫出直排的字串
-
-            int W = pictureBox1.Width;
-            int H = pictureBox1.Height;
-            Graphics g = this.pictureBox1.CreateGraphics();
-
-            Font f = new Font("標楷體", 24); // 字型
-            string text = "用 VC# 寫出直排的字串"; // 文字字串
-            StringFormat stringFormat = new StringFormat();　// 字串 繪出格式
-            stringFormat.FormatFlags = StringFormatFlags.DirectionVertical;　// 垂直
-
-            int stringWidth = 100; // 字串　最大的寬度
-
-            SizeF stringSize = g.MeasureString(text, f, stringWidth, stringFormat); // 文字字串的寬高
-            float X = 100; // 左上角的座標
-            float Y = 100;
-
-            g.DrawString(text, f, Brushes.Red, X, Y, stringFormat);  // 繪出文字字串
         }
 
         //------------------------------------------------------------  # 60個
@@ -1394,16 +1396,23 @@ namespace vcs_Draw6_String1
 
             TimeSpan use_time = current_time - start_time;
 
-            string text = "空心字體 " + DateTime.Now + "    " + use_time.ToString(@"hh\:mm\:ss");
+            string text1 = "空心字體";
+            string text2 = DateTime.Now.ToString();
+            string text3 = use_time.ToString(@"hh\:mm\:ss");
+            int dy = 40;
 
             for (var i = -1; i <= 1; ++i)
             {
                 for (var j = -1; j <= 1; ++j)
                 {
-                    e.Graphics.DrawString(text, f, Brushes.Black, 2 + i, 2 + j);
+                    e.Graphics.DrawString(text1, f, Brushes.Black, 2 + i, 2 + j);
+                    e.Graphics.DrawString(text2, f, Brushes.Black, 2 + i, 2 + j + dy * 1);
+                    e.Graphics.DrawString(text3, f, Brushes.Black, 2 + i, 2 + j + dy * 2);
                 }
             }
-            e.Graphics.DrawString(text, f, Brushes.White, 2, 2);
+            e.Graphics.DrawString(text1, f, Brushes.White, 2, 2);
+            e.Graphics.DrawString(text2, f, Brushes.White, 2, 2 + dy * 1);
+            e.Graphics.DrawString(text3, f, Brushes.White, 2, 2 + dy * 2);
         }
     }
 }

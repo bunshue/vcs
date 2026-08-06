@@ -1595,11 +1595,14 @@ namespace vcs_Draw1
             Brush ForeBrush = Brushes.Black;
             Font f = new Font("標楷體", font_size, FontStyle.Regular);
             Graphics g = this.pictureBox1.CreateGraphics();
-            PointF point = new PointF(0, 0);
+            PointF point = new PointF(x_st, y_st);
             SizeF size = g.MeasureString(draw_text, f);
             RectangleF rectangle = new RectangleF(point, size);
             Brush brush = new LinearGradientBrush(rectangle, Color.Red, Color.Green, LinearGradientMode.Horizontal);
             g.DrawString(draw_text, f, brush, x_st, y_st);
+
+            g.FillRectangle(brush, x_st, y_st+75, size.Width, size.Height/3);
+            g.DrawRectangle(Pens.Red, x_st, y_st, size.Width, size.Height);
         }
 
         void do_word_effect9(int x_st, int y_st)

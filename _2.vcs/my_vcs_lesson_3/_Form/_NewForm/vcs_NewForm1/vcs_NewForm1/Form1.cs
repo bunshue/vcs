@@ -34,12 +34,17 @@ namespace vcs_NewForm1
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            btn_exit.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
-            richTextBox1.Size = new Size(250, 440);
+            richTextBox1.Size = new Size(350, 690);
             richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(500, 500);
+            this.Size = new Size(600, 750);
             this.Text = "vcs_NewForm1";
 
             //設定執行後的表單起始位置, 正中央
@@ -49,8 +54,10 @@ namespace vcs_NewForm1
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
-
+            richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -59,24 +66,201 @@ namespace vcs_NewForm1
             richTextBox1.Text += "表單 Form2 回傳了 : " + result + "\n";
         }
 
+        //------------------------------------------------------------  # 60個
+
+        static int x = 200;
+        static int y = 200;
+
         private void button1_Click(object sender, EventArgs e)
         {
+            //開啟新表單
+            Form3 f3 = new Form3();
+            f3.Visible = true;
 
+            // 每新增一個Form2表單，其出現的位置依序往右下角100個像素
+            f3.SetDesktopLocation(x, y);
+            x += 100;
+            y += 100;
+
+            // 讓Form1保持在Activate的狀態
+            this.Activate();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //開啟新表單, 全螢幕, pictureBox放一圖
 
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+
+            PictureBox pictureBox1 = new PictureBox();
+            Form Form2 = new Form() { Size = new Size(1024, 768), WindowState = FormWindowState.Maximized };
+            pictureBox1.Dock = DockStyle.Fill;
+            pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox1.Image = Image.FromFile(filename);
+
+            Form2.Controls.Add(pictureBox1);
+            Form2.Show();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button3_Click(object sender, EventArgs e)
         {
+            // 建立新表單1
+
+            Form Form_new = new Form
+            {
+                Text = "新表單",
+                BackColor = Color.Pink,  // 背景色
+                FormBorderStyle = FormBorderStyle.Fixed3D,
+                Size = new Size(640, 480),  // 設定表單大小
+                AutoSize = true,  // 自動調整大小-依控制項放大一倍
+                AutoSizeMode = AutoSizeMode.GrowOnly,
+            };
+
+            //在新表單加入控件
+            Button btn = new Button
+            {
+                Text = "顯示",
+                Font = new Font("新細明體", 14),
+                AutoSize = true,
+                Location = new Point(75, 40)  // 控件位置
+            };
+
+            // Form.CancelButton 屬性
+            // 取得或設定使用者按下 ESC 鍵時所按下的按鈕控制項。
+            Form_new.CancelButton = btn_exit;
+
+            Form_new.Controls.Add(btn);//加入控件
+
+            Form_new.Show();//顯示表單
 
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button4_Click(object sender, EventArgs e)
         {
+            // 建立新表單2
 
+            Form form1 = new Form();
+
+            //建立新控件
+            Button button1 = new Button();
+            button1.Text = "OK";
+            button1.Location = new Point(10, 10);
+
+            Button button2 = new Button();
+            button2.Text = "Cancel";
+            button2.Location = new Point(10, 100);
+
+            form1.Text = "新建對話框";
+            form1.HelpButton = true;
+
+            // Define the border style of the form to a dialog box.
+            form1.FormBorderStyle = FormBorderStyle.FixedDialog;
+            // Set the MaximizeBox to false to remove the maximize box.
+            form1.MaximizeBox = false;
+            // Set the MinimizeBox to false to remove the minimize box.
+            form1.MinimizeBox = false;
+            // Set the accept button of the form to button1.
+            form1.AcceptButton = button1;  // 設定AcceptButton
+            // Set the cancel button of the form to button2.
+            form1.CancelButton = button2;  // 設定CancelButton
+            // Set the start position of the form to the center of the screen.
+            form1.StartPosition = FormStartPosition.CenterScreen;
+
+            form1.Controls.Add(button1);
+            form1.Controls.Add(button2);
+
+            form1.ShowDialog();
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            // 建立新表單3, 繼承Form類別產生新的視窗表單
+
+            Form form_new = new Form();
+
+            form_new.Cursor = System.Windows.Forms.Cursors.Cross;
+            form_new.FormBorderStyle = FormBorderStyle.Sizable;
+            form_new.Height = 400;
+            form_new.HelpButton = true;
+            form_new.MaximizeBox = true;
+            form_new.MinimizeBox = true;
+            form_new.Name = "New Form";
+            form_new.ShowInTaskbar = true;
+            form_new.StartPosition = FormStartPosition.CenterParent;
+            form_new.Text = "New Form";
+            form_new.Width = 500;
+            form_new.WindowState = FormWindowState.Normal;
+            form_new.Enabled = true;
+
+            // 以Form類別的ShowDialog方法顯示視窗表單, 需要等到新表單結束, 不可重複開啟新表單
+            //form_new.ShowDialog();
+
+            // 以Form類別的Show方法顯示視窗表單, 不用等到新表單結束, 可重複開啟新表單
+            form_new.Show();
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            // 建立新表單4
+            richTextBox1.Text += "繼承Form類別產生新的視窗表單\n";
+
+            Form Form2 = new Form();
+
+            Form2.Cursor = Cursors.Cross;
+            Form2.FormBorderStyle = FormBorderStyle.Sizable;
+            Form2.Width = 800;
+            Form2.Height = 800;
+            Form2.HelpButton = true;
+            Form2.MaximizeBox = true;
+            Form2.MinimizeBox = true;
+            Form2.Name = "Form2";
+            Form2.ShowInTaskbar = true;
+            Form2.StartPosition = FormStartPosition.CenterParent;
+            Form2.Text = "New Form";
+            Form2.WindowState = FormWindowState.Normal;
+            Form2.Enabled = true;
+
+            // 以Form類別的ShowDialog方法顯示視窗表單
+            Form2.ShowDialog();
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void btn_exit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+

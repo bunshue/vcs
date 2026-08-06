@@ -180,6 +180,13 @@ namespace _vcs_MakePicture
             pictureBox1.Location = new Point(x_st + dx * 13, y_st + dy * 0);
             pictureBox1.BackColor = Color.Pink;
 
+            int w = 100;
+            int h = 80;
+            groupBox_SizeMode.Size = new Size(w, h);
+            groupBox_SizeMode.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - w - 5, pictureBox1.Location.Y + pictureBox1.Height - h - 5);
+            rb_normal.Location = new Point(10, 24);
+            rb_zoom.Location = new Point(10, 50);
+
             richTextBox1.Size = new Size(800, 240);
             richTextBox1.Location = new Point(x_st + dx * 13, y_st + dy * 9 + 30);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -3310,6 +3317,7 @@ namespace _vcs_MakePicture
             */
             pictureBox1.Image = bitmap1;
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            rb_zoom.Checked = true;
         }
 
         private void button78_Click(object sender, EventArgs e)
@@ -4481,22 +4489,26 @@ namespace _vcs_MakePicture
                 g.FillEllipse(sb, new Rectangle(x_st + width / 4, y_st + height / 4, width / 2, height / 2));
             }
         }
+
+        private void pictureBox1_SizeMode_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rb_normal.Checked == true)
+            {
+                pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
+            }
+            else
+            {
+                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            }
+        }
     }
 }
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
-
-
 
 

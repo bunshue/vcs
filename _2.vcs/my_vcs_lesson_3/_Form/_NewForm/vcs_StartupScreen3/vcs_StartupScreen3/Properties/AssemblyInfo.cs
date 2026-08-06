@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 組件的一般資訊是由下列的屬性集控制。
 // 變更這些屬性的值即可修改組件的相關
 // 資訊。
-[assembly: AssemblyTitle("vcs_NewForm4")]
+[assembly: AssemblyTitle("vcs_StartupScreen3")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("vcs_NewForm4")]
+[assembly: AssemblyProduct("vcs_StartupScreen3")]
 [assembly: AssemblyCopyright("Copyright ©  2026")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 下列 GUID 為專案公開 (Expose) 至 COM 時所要使用的 typelib ID
-[assembly: Guid("09566f93-7a2d-465e-bf6f-cdd3148e2d83")]
+[assembly: Guid("e82c2115-f4b7-4f97-8b79-c5edce1c5978")]
 
 // 組件的版本資訊是由下列四項值構成:
 //
