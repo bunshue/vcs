@@ -319,7 +319,7 @@ namespace vcs_test_all_03_Syntax1
         }
 
 
-                void MaxMinArray(int[] a, out int max, out int min)
+        void MaxMinArray(int[] a, out int max, out int min)
         {
             max = a[0];
             min = a[0];
@@ -927,25 +927,25 @@ namespace vcs_test_all_03_Syntax1
             int age = date.Age();
             richTextBox1.Text += "Age : " + age.ToString() + "\n";
 
+            //------------------------------------------------------------  # 60個
 
-            Guid guid = Guid.NewGuid();
-
-            Guid[] guids = new Guid[]
+            string[] names = new string[]
             {
-                Guid.NewGuid(),
-                Guid.NewGuid(),
-                Guid.NewGuid(),
-                guid
+                "John",
+                "Mary",
+                "Jack",
+                "Lisa",
+                "Jeff"
             };
 
-            // C# Extension Method: Guid - In
-            if (guid.In(guids))
+            // C# Extension Method: names - In
+            if ("Lisa".In(names))
             {
-                richTextBox1.Text += "guid = " + guid + "exists in the list.\n";
+                richTextBox1.Text += "string = " + "Lisa" + "exists in the list.\n";
             }
             else
             {
-                richTextBox1.Text += "guid = " + guid + "doesn't exists in the list.\n";
+                richTextBox1.Text += "string = " + "Lisa" + "doesn't exists in the list.\n";
             }
         }
 
@@ -1134,15 +1134,7 @@ namespace vcs_test_all_03_Syntax1
         }
 
         //第三種Extension
-        /// <summary>
-        ///     A T extension method to determines whether the object is equal to any of the provided values.
-        /// </summary>
-        /// <param name="this">The object to be compared.</param>
-        /// <param name="values">The value list to compare with the object.</param>
-        /// <returns>true if the values list contains the object, else false.</returns>
-        /// ###
-        /// <typeparam name="T">Generic type parameter.</typeparam>
-        public static bool In(this Guid @this, params Guid[] values)
+        public static bool In(this string @this, params string[] values)
         {
             return Array.IndexOf(values, @this) != -1;
         }

@@ -15,6 +15,7 @@ namespace vcs_Draw_Word
     public partial class Form1 : Form
     {
         string draw_text = "牡丹亭";
+        int font_size = 40;
 
         public Form1()
         {
@@ -44,14 +45,14 @@ namespace vcs_Draw_Word
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
-            pictureBox1.Size = new Size(800, 720);
+            pictureBox1.Size = new Size(830, 830);
             pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
 
             richTextBox1.Size = new Size(300, 720);
             richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1400, 800);
+            this.Size = new Size(1400, 900);
             this.Text = "vcs_Draw_Word";
         }
 
@@ -65,7 +66,7 @@ namespace vcs_Draw_Word
         private void button0_Click(object sender, EventArgs e)
         {
             /*
-            Bitmap bitmap1 = new Bitmap(800, 720);
+            Bitmap bitmap1 = new Bitmap(830, 830);
             Graphics g = Graphics.FromImage(bitmap1);
             g.Clear(Color.Pink);
             pictureBox1.Image = bitmap1;
@@ -75,35 +76,36 @@ namespace vcs_Draw_Word
 
             int x_st = 20;
             int y_st = 20;
-            int dx = 400;
-            int dy = 120;
+            int dx = 250;
+            int dy = 140;
 
             richTextBox1.Text += "1投影文字\n";
-            x_st = 20;
+            x_st = 20 + dx * 0;
             y_st = 20 + dy * 0;
             do_word_effect1(x_st, y_st);
 
             richTextBox1.Text += "2浮雕效果\n";
-            x_st = 20;
+            x_st = 20 + dx * 0;
             y_st = 20 + dy * 1;
             do_word_effect2(x_st, y_st);
 
             richTextBox1.Text += "3印版效果\n";
-            x_st = 20;
+            x_st = 20 + dx * 0;
             y_st = 20 + dy * 2;
             do_word_effect3(x_st, y_st);
 
             richTextBox1.Text += "4倒影文字\n";
-            x_st = 20;
-            y_st = 20 + dy * 3;
+            x_st = 20 + dx * 0;
+            y_st = 20 + dy * 3 + 50;
             do_word_effect4(x_st, y_st);
 
             richTextBox1.Text += "5陰影文字\n";
-            x_st = 20;
+            x_st = 20 + dx * 0;
             y_st = 20 + dy * 4;
             do_word_effect5(x_st, y_st);
 
-            richTextBox1.Text += "6紋理效果\n";
+            richTextBox1.Text += "6字體做陰影效果\n";
+
             x_st = 20 + dx * 1;
             y_st = 20 + dy * 0;
             do_word_effect6(x_st, y_st);
@@ -119,23 +121,21 @@ namespace vcs_Draw_Word
             do_word_effect8(x_st, y_st);
 
             richTextBox1.Text += "9旋轉效果\n";
-            x_st = 20 + dx * 1;
-            y_st = 20 + dy * 4 - 50;
+            x_st = 20 + dx * 1 + 200;
+            y_st = 20 + dy * 4;
             do_word_effect9(x_st, y_st);
-
-            richTextBox1.Text += "9字體做陰影效果\n";
-            x_st = 20 + dx * 1 - 100;
-            y_st = 20 + dy * 5 - 20;
-            do_word_effect10(x_st, y_st);
         }
 
         //------------------------------------------------------------  # 60個
 
+        int xx = 100;
+        int yy = 100;
+        int dy = 100;
         private void button1_Click(object sender, EventArgs e)
         {
-
-
-
+            Graphics g = this.pictureBox1.CreateGraphics();
+            g.DrawRectangle(Pens.Red, xx, yy, 300, 50);
+            yy += dy;
         }
 
         //------------------------------------------------------------  # 60個
@@ -184,9 +184,10 @@ namespace vcs_Draw_Word
 
         void draw_grid()
         {
+            Graphics g = this.pictureBox1.CreateGraphics();
+            /*
             int W = pictureBox1.Width;
             int H = pictureBox1.Height;
-            Graphics g = this.pictureBox1.CreateGraphics();
             for (int i = 0; i <= W; i += 100)
             {
                 g.DrawLine(Pens.Red, i, 0, i, H);  // 垂直線
@@ -195,6 +196,73 @@ namespace vcs_Draw_Word
             {
                 g.DrawLine(Pens.Red, 0, j, W, j);  // 水平線
             }
+            */
+
+            int x_st = 20;
+            int y_st = 20;
+            int dx = 250;
+            int dy = 140;
+            for (int i = x_st; i <= 820; i += dx)
+            {
+                g.DrawLine(Pens.Red, i, y_st, i, 820);  // 垂直線
+            }
+            for (int j = y_st; j <= 820; j += dy)
+            {
+                g.DrawLine(Pens.Red, x_st, j, 820, j);  // 水平線
+            }
+
+
+            Font f = new Font("標楷體", 20);
+
+            int dd = dy - 32;
+
+            string draw_text = "1投影文字";
+            x_st = 20 + dx * 0;
+            y_st = 20 + dy * 0 + dd;
+            g.DrawString(draw_text, f, new SolidBrush(Color.Black), new PointF(x_st, y_st));
+
+
+            draw_text = "2浮雕效果";
+            x_st = 20 + dx * 0;
+            y_st = 20 + dy * 1 + dd;
+            g.DrawString(draw_text, f, new SolidBrush(Color.Black), new PointF(x_st, y_st));
+
+            draw_text = "3印版效果";
+            x_st = 20 + dx * 0;
+            y_st = 20 + dy * 2 + dd;
+            g.DrawString(draw_text, f, new SolidBrush(Color.Black), new PointF(x_st, y_st));
+
+            draw_text = "4倒影文字";
+            x_st = 20 + dx * 0;
+            y_st = 20 + dy * 3 + dd;
+            g.DrawString(draw_text, f, new SolidBrush(Color.Black), new PointF(x_st, y_st));
+
+            draw_text = "5陰影文字";
+            x_st = 20 + dx * 0;
+            y_st = 20 + dy * 4 + dd;
+            g.DrawString(draw_text, f, new SolidBrush(Color.Black), new PointF(x_st, y_st));
+
+            draw_text = "6字體做陰影效果";
+
+            x_st = 20 + dx * 1;
+            y_st = 20 + dy * 0 + dd;
+            g.DrawString(draw_text, f, new SolidBrush(Color.Black), new PointF(x_st, y_st));
+
+            draw_text = "7傾斜效果";
+            x_st = 20 + dx * 1;
+            y_st = 20 + dy * 1 + dd;
+            g.DrawString(draw_text, f, new SolidBrush(Color.Black), new PointF(x_st, y_st));
+
+            draw_text = "8漸層色文字";
+            x_st = 20 + dx * 1;
+            y_st = 20 + dy * 2 + dd;
+            g.DrawString(draw_text, f, new SolidBrush(Color.Black), new PointF(x_st, y_st));
+
+            draw_text = "9旋轉效果";
+            x_st = 20 + dx * 1;
+            y_st = 20 + dy * 4 + dd;
+            g.DrawString(draw_text, f, new SolidBrush(Color.Black), new PointF(x_st, y_st));
+
         }
 
         void do_word_effect1(int x_st, int y_st)
@@ -204,7 +272,7 @@ namespace vcs_Draw_Word
             //設置文本輸出質量
             g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
             g.SmoothingMode = SmoothingMode.AntiAlias;
-            Font newFont = new Font("Times New Roman", 48);
+            Font f = new Font("標楷體", font_size);
             Matrix matrix = new Matrix();
             //投射
             matrix.Shear(-1.5f, 0.0f);
@@ -216,12 +284,12 @@ namespace vcs_Draw_Word
             g.Transform = matrix;
             SolidBrush grayBrush = new SolidBrush(Color.Gray);
             SolidBrush colorBrush = new SolidBrush(Color.BlueViolet);
-            string text = "博客園1";
+            string draw_text = "博客園1";
             //繪制陰影
-            g.DrawString(text, newFont, grayBrush, new PointF(x_st, y_st));
+            g.DrawString(draw_text, f, grayBrush, new PointF(x_st, y_st));
             g.ResetTransform();
             //繪制前景
-            g.DrawString(text, newFont, colorBrush, new PointF(x_st, y_st));
+            g.DrawString(draw_text, f, colorBrush, new PointF(x_st, y_st));
         }
 
         void do_word_effect2(int x_st, int y_st)
@@ -229,12 +297,11 @@ namespace vcs_Draw_Word
             //浮雕效果
             Brush backBrush = Brushes.Black;
             Brush foreBrush = Brushes.White;
-            Font font = new Font("宋體", Convert.ToInt16(40), FontStyle.Regular);
+            Font f = new Font("標楷體", font_size, FontStyle.Regular);
             Graphics g = this.pictureBox1.CreateGraphics();
-            string text = "博客園2";
-            SizeF size = g.MeasureString(text, font);
-            g.DrawString(text, font, backBrush, x_st + 1, y_st + 1);
-            g.DrawString(text, font, foreBrush, x_st, y_st);
+            string draw_text = "博客園2";
+            g.DrawString(draw_text, f, backBrush, x_st + 1, y_st + 1);
+            g.DrawString(draw_text, f, foreBrush, x_st, y_st);
         }
 
         void do_word_effect3(int x_st, int y_st)
@@ -244,16 +311,15 @@ namespace vcs_Draw_Word
             int i = 0;
             Brush backBrush = Brushes.Black;
             Brush foreBrush = Brushes.Violet;
-            Font font = new Font("Times New Roman", System.Convert.ToInt16(40), FontStyle.Regular);
+            Font f = new Font("標楷體", font_size, FontStyle.Regular);
             Graphics g = this.pictureBox1.CreateGraphics();
-            string text = "博客園3";
-            SizeF size = g.MeasureString(text, font);
-            while (i < Convert.ToInt16(20))
+            string draw_text = "博客園3";
+            while (i < 20)
             {
-                g.DrawString(text, font, backBrush, x_st - i, y_st + i);
+                g.DrawString(draw_text, f, backBrush, x_st - i, y_st + i);
                 i = i + 1;
             }
-            g.DrawString(text, font, foreBrush, x_st, y_st);
+            g.DrawString(draw_text, f, foreBrush, x_st, y_st);
         }
 
         void do_word_effect4(int x_st, int y_st)
@@ -262,60 +328,58 @@ namespace vcs_Draw_Word
 
             Brush backBrush = Brushes.Gray;
             Brush foreBrush = Brushes.Black;
-            Font font = new Font("幼圓", Convert.ToInt16(40), FontStyle.Regular);
+            Font f = new Font("標楷體", font_size, FontStyle.Regular);
             Graphics g = this.pictureBox1.CreateGraphics();
-            string text = "博客園4";
-            SizeF size = g.MeasureString(text, font);
+            string draw_text = "博客園4";
 
             g.TranslateTransform(x_st, y_st);
 
-            int ascent = font.FontFamily.GetCellAscent(font.Style);
-            int spacing = font.FontFamily.GetLineSpacing(font.Style);
-            int lineHeight = System.Convert.ToInt16(font.GetHeight(g));
+            int ascent = f.FontFamily.GetCellAscent(f.Style);
+            int spacing = f.FontFamily.GetLineSpacing(f.Style);
+            int lineHeight = System.Convert.ToInt16(f.GetHeight(g));
             int height = lineHeight * ascent / spacing;
             GraphicsState state = g.Save();
             g.ScaleTransform(1, -1.0F);
-            g.DrawString(text, font, backBrush, 0, -height);
+            g.DrawString(draw_text, f, backBrush, 0, -height);
             g.Restore(state);
-            g.DrawString(text, font, foreBrush, 0, -height);
+            g.DrawString(draw_text, f, foreBrush, 0, -height);
         }
 
         void do_word_effect5(int x_st, int y_st)
         {
             //陰影文字
-            string text = "博客園5";
+            string draw_text = "博客園5";
             Brush shadowBrush = Brushes.Gray;
             Brush foreBrush = Brushes.Black;
-            Font font = new Font("幼圓", Convert.ToInt16(40), FontStyle.Regular);
+            Font f = new Font("標楷體", font_size, FontStyle.Regular);
             Graphics g = this.pictureBox1.CreateGraphics();
-            SizeF size = g.MeasureString(text, font);
 
-            g.DrawString(text, font, shadowBrush, x_st + Convert.ToInt16(20), y_st + Convert.ToInt16(20));
-            g.DrawString(text, font, foreBrush, x_st, y_st);
+            g.DrawString(draw_text, f, shadowBrush, x_st + 20, y_st + 20);
+            g.DrawString(draw_text, f, foreBrush, x_st, y_st);
 
             //有點問題
         }
 
         void do_word_effect6(int x_st, int y_st)
         {
-            //紋理效果
-            /*
-            //紋理效果
-            //使用圖像填充文字線條
-            TextureBrush brush = new TextureBrush(Image.FromFile(Application.StartupPath + "\\myPicture.jpg"));
-            Graphics g = e.Graphics;
-            g.DrawString("博客園", new Font("隸書", 60), brush, new PointF(0, 0));
-            */
+            //字體做陰影效果 同樣字往右下寫一遍 顏色不同
+
+            string draw_text = "牡丹亭";
+
+            Graphics g = this.pictureBox1.CreateGraphics();
+            int font_size_default = 80;
+            Font f = new Font("標楷體", font_size_default);
+            g.DrawString(draw_text, f, new SolidBrush(Color.Pink), new PointF(x_st, y_st));
+            g.DrawString(draw_text, f, new SolidBrush(Color.Red), new PointF(x_st + 5, y_st + 5));
         }
 
         void do_word_effect7(int x_st, int y_st)
         {
             //傾斜效果
             Brush foreBrush = Brushes.Blue;
-            Font font = new Font("幼圆", Convert.ToInt16(40), FontStyle.Regular);
+            Font f = new Font("標楷體", font_size, FontStyle.Regular);
             Graphics g = this.pictureBox1.CreateGraphics();
-            string text = "博客园7";
-            SizeF size = g.MeasureString(text, font);
+            string draw_text = "博客園7";
 
             g.TranslateTransform(x_st, y_st);
 
@@ -329,23 +393,22 @@ namespace vcs_Draw_Word
             float shearY = 0.10F;
             transform.Shear(shearX, shearY);
             g.Transform = transform;
-            g.DrawString(text, font, foreBrush, 0, 0);
+            g.DrawString(draw_text, f, foreBrush, 0, 0);
         }
 
         void do_word_effect8(int x_st, int y_st)
         {
             //漸層色文字
-            String text = "天階夜色涼如水8";
+            String draw_text = "天階夜色涼如水8";
             Brush ShadowBrush = Brushes.Gray;
             Brush ForeBrush = Brushes.Black;
-            Font font = new Font("幼圆", System.Convert.ToInt16(40), FontStyle.Regular);
+            Font f = new Font("標楷體", font_size, FontStyle.Regular);
             Graphics g = this.pictureBox1.CreateGraphics();
-            //g.Clear(Color.White);
             PointF point = new PointF(0, 0);
-            SizeF size = g.MeasureString(text, font);
+            SizeF size = g.MeasureString(draw_text, f);
             RectangleF rectangle = new RectangleF(point, size);
             Brush brush = new LinearGradientBrush(rectangle, Color.Red, Color.Green, LinearGradientMode.Horizontal);
-            g.DrawString(text, font, brush, x_st, y_st);
+            g.DrawString(draw_text, f, brush, x_st, y_st);
         }
 
         void do_word_effect9(int x_st, int y_st)
@@ -366,17 +429,6 @@ namespace vcs_Draw_Word
                 //恢復全局變換矩陣
                 g.ResetTransform();
             }
-        }
-
-        void do_word_effect10(int x_st, int y_st)
-        {
-            //字體做陰影效果 同樣字往右下寫一遍 顏色不同
-
-            Graphics g = this.pictureBox1.CreateGraphics();
-            int font_size_default = 80;
-            Font f = new Font("標楷體", font_size_default);
-            g.DrawString(draw_text, f, new SolidBrush(Color.Pink), new PointF(x_st, y_st));
-            g.DrawString(draw_text, f, new SolidBrush(Color.Red), new PointF(x_st + 5, y_st + 5));
         }
     }
 }

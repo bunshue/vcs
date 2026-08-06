@@ -47,7 +47,8 @@ namespace vcs_Draw3D
         //for random color ST
         //Reference : https://home.gamer.com.tw/creationDetail.php?sn=4281924
         private Label[] lb_color = new Label[101];
-        Random r = new Random(Guid.NewGuid().GetHashCode());
+        Random rand = new Random();
+
         private int _R = 0, _G = 0, _B = 0;
         private int lb_color_x = 0, lb_color_y = 0;
         //for random color SP
@@ -339,7 +340,7 @@ namespace vcs_Draw3D
         private void timer3_Tick(object sender, EventArgs e)
         {
             //製作任意顏色
-            g3.DrawArc(new Pen(Color.FromArgb(r.Next(0, 256), r.Next(0, 256), r.Next(0, 256))), 10, 10, W - 20, H - 20, angle, angle + 5);  //r.Next(0, 256) 產出0~255之間的整數
+            g3.DrawArc(new Pen(Color.FromArgb(rand.Next(0, 256), rand.Next(0, 256), rand.Next(0, 256))), 10, 10, W - 20, H - 20, angle, angle + 5);  //rand.Next(0, 256) 產出0~255之間的整數
             angle += 5;
         }
 
@@ -353,27 +354,27 @@ namespace vcs_Draw3D
 
         private void pictureBox4_Paint(object sender, PaintEventArgs e)
         {
-            Rectangle r = new Rectangle(25, 10, 200, 200);
+            Rectangle rect = new Rectangle(25, 10, 200, 200);
             if (this.c1 != 0)
-                e.Graphics.FillPie(yellow_b, r, 0.0F, 360.0F * this.c1 / (this.c1 + this.c2 + this.c3));
+                e.Graphics.FillPie(yellow_b, rect, 0.0F, 360.0F * this.c1 / (this.c1 + this.c2 + this.c3));
             if (this.c2 != 0)
-                e.Graphics.FillPie(green_b, r, 360.0F * this.c1 / (this.c1 + this.c2 + this.c3), 360.0F * this.c2 / (this.c1 + this.c2 + this.c3));
+                e.Graphics.FillPie(green_b, rect, 360.0F * this.c1 / (this.c1 + this.c2 + this.c3), 360.0F * this.c2 / (this.c1 + this.c2 + this.c3));
             if (this.c3 != 0)
-                e.Graphics.FillPie(red_b, r, 360.0F * (this.c1 + this.c2) / (this.c1 + this.c2 + this.c3), 360.0F * this.c3 / (this.c1 + this.c2 + this.c3));
+                e.Graphics.FillPie(red_b, rect, 360.0F * (this.c1 + this.c2) / (this.c1 + this.c2 + this.c3), 360.0F * this.c3 / (this.c1 + this.c2 + this.c3));
             Pen p = new Pen(Color.Black);
             if (this.c1 >= this.c2 && this.c1 >= this.c3 && this.c1 != 0)
-                e.Graphics.DrawPie(p, r, 0.0F, 360.0F * this.c1 / (this.c1 + this.c2 + this.c3));
+                e.Graphics.DrawPie(p, rect, 0.0F, 360.0F * this.c1 / (this.c1 + this.c2 + this.c3));
             else if (this.c2 >= this.c3 && this.c2 != 0)
-                e.Graphics.DrawPie(p, r, 360.0F * this.c1 / (this.c1 + this.c2 + this.c3), 360.0F * this.c2 / (this.c1 + this.c2 + this.c3));
+                e.Graphics.DrawPie(p, rect, 360.0F * this.c1 / (this.c1 + this.c2 + this.c3), 360.0F * this.c2 / (this.c1 + this.c2 + this.c3));
             else if (this.c3 != 0)
-                e.Graphics.DrawPie(p, r, 360.0F * (this.c1 + this.c2) / (this.c1 + this.c2 + this.c3), 360.0F * this.c3 / (this.c1 + this.c2 + this.c3));
+                e.Graphics.DrawPie(p, rect, 360.0F * (this.c1 + this.c2) / (this.c1 + this.c2 + this.c3), 360.0F * this.c3 / (this.c1 + this.c2 + this.c3));
         }
 
         private void timer4_Tick(object sender, EventArgs e)
         {
-            this.c1 = r.Next(1234);
-            this.c2 = r.Next(1234);
-            this.c3 = r.Next(1234);
+            this.c1 = rand.Next(1234);
+            this.c2 = rand.Next(1234);
+            this.c3 = rand.Next(1234);
             candidateText1.Text = this.c1.ToString();
             candidateText2.Text = this.c2.ToString();
             candidateText3.Text = this.c3.ToString();
@@ -398,12 +399,12 @@ namespace vcs_Draw3D
                 int i;
                 int j;
                 int rr = 20;
-                Random r = new Random();
+                Random rand = new Random();
 
                 Points.Clear();
                 for (i = 0; i < N; i++)
                 {
-                    Points.Add(new Point(r.Next(W), r.Next(H)));
+                    Points.Add(new Point(rand.Next(W), rand.Next(H)));
                 }
 
                 if (type == 1)
@@ -466,12 +467,12 @@ namespace vcs_Draw3D
                     richTextBox1.Text += "N = " + N.ToString() + "\n";
                     richTextBox1.Text += "H = " + H.ToString() + "\n";
 
-                    //Random r = new Random();
+                    //Random rand = new Random();
 
                     //int i;
                     for (i = 0; i < N; i++)
                     {
-                        rnd[i] = r.Next(H); //0~250 抽出數字  共 N 次
+                        rnd[i] = rand.Next(H); //0~250 抽出數字  共 N 次
                     }
 
                     //累計到 result 陣列裏
@@ -684,13 +685,13 @@ namespace vcs_Draw3D
 
             int[,] brightness = new int[COLUMNS, ROWS];
 
-            Random r = new Random();
+            Random rand = new Random();
 
             for (j = 0; j < ROWS; j++)
             {
                 for (i = 0; i < COLUMNS; i++)
                 {
-                    brightness[i, j] = r.Next(1, 160);
+                    brightness[i, j] = rand.Next(1, 160);
                 }
             }
 
@@ -707,7 +708,7 @@ namespace vcs_Draw3D
             {
                 for (i = 0; i < COLUMNS; i++)
                 {
-                    brightness[i, j] = r.Next(1, 160);
+                    brightness[i, j] = rand.Next(1, 160);
 
                     //richTextBox1.Text += brightness[j, i].ToString() + " ";
                     if (max < brightness[i, j])
@@ -789,9 +790,9 @@ namespace vcs_Draw3D
                 lb_color[i].Height = WIDTH;
                 lb_color[i].Text = " ";
                 lb_color[i].Location = new Point(x_st + lb_color_x, y_st + lb_color_y);
-                _R = r.Next(256);
-                _G = r.Next(256);
-                _B = r.Next(256);
+                _R = rand.Next(256);
+                _G = rand.Next(256);
+                _B = rand.Next(256);
                 lb_color[i].BackColor = Color.FromArgb(_R, _G, _B);
                 this.Controls.Add(lb_color[i]);
                 lb_color_x += WIDTH;
@@ -809,9 +810,9 @@ namespace vcs_Draw3D
         {
             for (int i = 1; i < lb_color.Length; i++)
             {
-                _R = r.Next(256);
-                _G = r.Next(256);
-                _B = r.Next(256);
+                _R = rand.Next(256);
+                _G = rand.Next(256);
+                _B = rand.Next(256);
                 lb_color[i].BackColor = Color.FromArgb(_R, _G, _B);
             }
         }
@@ -845,11 +846,7 @@ namespace vcs_Draw3D
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-/*  可搬出
-
-*/

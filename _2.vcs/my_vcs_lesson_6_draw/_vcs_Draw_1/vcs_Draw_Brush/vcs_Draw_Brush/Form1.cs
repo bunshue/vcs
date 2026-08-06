@@ -10,6 +10,21 @@ using System.Windows.Forms;
 using System.Drawing.Drawing2D;  // for HatchBrush, LinearGradientBrush
 
 //使用TextureBrush類繪製圖像
+/*
+筆刷物件（單色S、圖案T、花紋H、漸層L）
+
+筆刷類別
+SolidBrush		建立單一顏色的筆刷
+	SolidBrush sb = new SolidBrush(Color.Red);
+	Pen p = new Pen(sb, 2);
+TextureBrush		建立以圖形物件當作圖案的筆刷
+	TextureBrush tb = new TextureBrush("bmp1.bmp");
+	Pen p = new Pen(tb, 2);
+HatchBrush		建立花紋筆刷
+	HatchBrush 花紋筆刷變數 = new HatchBrush(花紋筆刷, 前景顏色, 背景顏色);
+	HatchBrush hb = new HatchBrush(HatchStyle.Wave, Color.Blue, Color.Red);
+	Pen p = new Pen(hb, 10);
+*/
 
 namespace vcs_Draw_Brush
 {
@@ -18,7 +33,7 @@ namespace vcs_Draw_Brush
         Graphics g;
         Pen pen;
         //SolidBrush sb;
-        Bitmap bitmap1;
+        //Bitmap bitmap1;
 
         public Form1()
         {
@@ -95,14 +110,14 @@ namespace vcs_Draw_Brush
             int dx = W + 10;
             int dy = H + 10;
 
-            groupBox0.Size = new Size(W, H * 3 + 110);
-            groupBox1.Size = new Size(W, H * 4);
-            groupBox2.Size = new Size(W, H * 2 + 110);
+            groupBox0.Size = new Size(W, H * 6 + 10);
+            groupBox1.Size = new Size(W, H * 6 + 10);
+            groupBox2.Size = new Size(W, H * 4);
             groupBox3.Size = new Size(W, H * 4);
             groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 5 - 50);
-            groupBox3.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            groupBox3.Location = new Point(x_st + dx * 1, y_st + dy * 6);
 
             pictureBox1.Size = new Size(750, 620);
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
@@ -124,9 +139,12 @@ namespace vcs_Draw_Brush
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             button10.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button12.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+
             button20.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button21.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button22.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -316,15 +334,6 @@ namespace vcs_Draw_Brush
         }
 
         //------------------------------------------------------------  # 60個
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-        }
 
         private void button10_Click(object sender, EventArgs e)
         {
@@ -782,6 +791,50 @@ namespace vcs_Draw_Brush
                 richTextBox1.Text += "LinearGradientBrush\n";
             }
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //LinearGradientBrush 建立漸層筆刷, 使用沿漸變混合的兩種顏色進行繪制
+            //LinearGradientBrush 漸層筆刷變數 = new LinearGradientBrush(漸層矩形區域, 前景顏色, 背景顏色, 漸層傾斜角度);
+
+            Graphics g = pictureBox1.CreateGraphics();
+
+            int W = 400;
+            int H = 200;
+            int x_st = 100;
+            int y_st = 100;
+            int x_sp = 100 + W;
+            int y_sp = y_st;
+            Rectangle rect1 = new Rectangle(x_st, y_st, W, H);
+
+            LinearGradientBrush lgb = new LinearGradientBrush(rect1, Color.Red, Color.Green, 0f);
+
+            Pen p = new Pen(lgb, 200);
+            g.DrawLine(p, x_st - 50, y_st, x_sp + 50, y_sp);
+
+            //lgb.SetSigmaBellShape(0.5f);
+
+            Array obj = Enum.GetValues(typeof(LinearGradientMode));
+
+            for (int x = 0; x < obj.Length; x++)
+            {
+                LinearGradientMode temp = (LinearGradientMode)obj.GetValue(x);
+                richTextBox1.Text += temp.ToString() + "\n";
+            }
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //TextureBrush
+
+            //方法一：(用圖片填滿圓圈)
+            Graphics g = this.pictureBox1.CreateGraphics();
+            TextureBrush tb = new TextureBrush(new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg"));
+
+            //20, 20 為座標位置，10, 10 為圓的大小
+            g.FillEllipse(tb, 20, 20, 200, 200);
+        }
     }
 }
 
@@ -792,35 +845,8 @@ namespace vcs_Draw_Brush
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-//Font f = new Font("黑體", 30, FontStyle.Italic);
-//lgb.SetSigmaBellShape(0.5f);
+
 /*
-Array obj = Enum.GetValues(typeof(LinearGradientMode));
-
-for (int x = 0; x < obj.Length; x++)
-{
-    LinearGradientMode temp = (LinearGradientMode)obj.GetValue(x);
-    richTextBox1.Text += temp.ToString() + "\n";
-}
-
-//------------------------------------------------------------  # 60個
-
-LinearGradientBrush：使用沿漸變混合的兩種顏色進行繪制
-
-Graphics g = pictureBox1.CreateGraphics();
-
-Brush menu_brush = new LinearGradientBrush(e.Bounds, Color.Red, Color.Black, 90);
-
-//------------------------------------------------------------  # 60個
-
-//畫實心圓圈，就是把圈圈填滿，方法有二!
-
-方法一：(用圖片填滿圓圈)
-      Graphics g = this.CreateGraphics();
-      TextureBrush tb = new TextureBrush(new Bitmap(@"pic_point.jpg"));
-     
-      //20, 20 為座標位置，10, 10 為圓的大小
-      g.FillEllipse(tb, 20, 20, 10, 10);
 
 方法二：(用筆刷填滿圓圈)
       Graphics g = this.CreateGraphics();
@@ -831,32 +857,19 @@ Brush menu_brush = new LinearGradientBrush(e.Bounds, Color.Red, Color.Black, 90)
 
 //------------------------------------------------------------  # 60個
 
-筆刷物件（單色S、圖案T、花紋H、漸層L）
-
-筆刷類別
-SolidBrush		建立單一顏色的筆刷
-	SolidBrush sb = new SolidBrush(Color.Red);
-	Pen p = new Pen(sb, 2);
-TextureBrush		建立以圖形物件當作圖案的筆刷
-	TextureBrush tb = new TextureBrush("bmp1.bmp");
-	Pen p = new Pen(tb, 2);
-HatchBrush		建立花紋筆刷
-	HatchBrush 花紋筆刷變數 = new HatchBrush(花紋筆刷, 前景顏色, 背景顏色);
-	HatchBrush hb = new HatchBrush(HatchStyle.Wave, Color.Blue, Color.Red);
-	Pen p = new Pen(hb, 10);
-LinearGradienBrush	建立漸層筆刷
-	LinearGradientBrush 漸層筆刷變數 = new LinearGradientBrush(漸層矩形區域, 前景顏色, 背景顏色, 漸層傾斜角度);
-	
-	Rectangle rect1 = new Rectangle(0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
-	LinearGradientBrush lgb = new LinearGradientBrush(rect1, Color.Blue, Color.Red, 90);
-	Pen p = new Pen(lgb, 10);
-
-//------------------------------------------------------------  # 60個
-
 //剪下 = 複製到剪貼簿 + 把選取區域塗成背景色
 SolidBrush br = new SolidBrush(pictureBox1.BackColor)
 
 //------------------------------------------------------------  # 60個
+
+            //紋理效果, 使用圖像填充文字線條
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_背景圖\background.jpg";  //使用一張背景圖
+            Graphics g = this.pictureBox1.CreateGraphics();
+            TextureBrush brush = new TextureBrush(Image.FromFile(filename));
+            g.DrawString("紋理效果, 使用圖像填充文字線條", new Font("標楷體", 60), brush, new PointF(x_st, y_st));
+
+
+//            Font f = new Font("黑體", 30, FontStyle.Italic);
 
 */
 

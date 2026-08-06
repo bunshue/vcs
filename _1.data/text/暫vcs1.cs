@@ -3,8 +3,6 @@
 Slate blue (石板藍) 是一種將涼爽的藍色與沉穩的灰色相結合的中等暗色調藍灰色。它的常見十六進制代碼（HEX）為 #557C99 或 #5B7C99，給人一種平靜、柔和且精緻的感覺。
 
 
-
-
             button24.BackColor = default(Color);
             button24.UseVisualStyleBackColor = true;
             button22.BackColor = default(Color);
@@ -96,9 +94,6 @@ string[] month_names = CultureInfo.CurrentCulture.DateTimeFormat.MonthNames;
 
             DateTime first_of_month = new DateTime(year_num, month_num, 1);
             int num_days = DateTime.DaysInMonth(year_num, month_num);
-
-
-//            gr.DrawRectangle(Pens.Black, bounds.X, bounds.Y, bounds.Width, bounds.Height);
 
 //------------------------------------------------------------  # 60個
 
@@ -231,8 +226,9 @@ GetPointBounds
 //------------------------------------------------------------  # 60個
 cccc
 HScrollBar / VScrollBar
-            vsbHeight.LargeChange = 1;    //設定vsbHeight的快動值 = 1
-            hsbWidth.LargeChange = 1;     //設定hsbWidth的快動值 = 1
+
+	vsbHeight.LargeChange = 1;  // 設定vsbHeight的快動值 = 1
+	hsbWidth.LargeChange  = 1;  // 設定hsbWidth 的快動值 = 1
 
 
 //------------------------------------------------------------  # 60個
@@ -271,23 +267,10 @@ lstJob.SelectedIndex = JobIndex;
 
 //------------------------------------------------------------  # 60個
 
-改變Bitmap大小
-Bitmap bitmap2 = new Bitmap(bitmap1, 300, 200);  //改變大小
+            Debug.Print("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！ " + number.ToString());
 
 //------------------------------------------------------------  # 60個
 
-
-            Debug.Print("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！ " + number.ToString());
-
-
-        private void SetValue(string str, object obj)
-        {
-            //lock裡面的代碼同一個時刻，只能被一個線程使用。其它的後面排隊。這樣防止數據混亂。
-            lock (obj)
-            {
-                richTextBox1.Text += "Thread名稱 : " + str + " 做事 " + DateTime.Now.ToString() + "\n";
-            }
-        }
 
 //------------------------------------------------------------  # 60個
 
@@ -514,14 +497,12 @@ Microsoft Docs後來在2022年整合至Microsoft Learn。
             ep.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, (long)quality);
             image.Save(filename, ici, ep);  // 保存缩略图
 
-
             ep.Dispose();
 
             //释放原始图片资源
             image.Dispose();
 
-
-
+6060
 
         //#region 正方型裁剪并缩放
         /// 正方型裁剪
@@ -684,6 +665,17 @@ vcs打印訊息
             {
                 lastFrame = (Bitmap)eventArgs.Frame.Clone();
             }
+
+//------------------------------  # 30個
+
+        private void SetValue(string str, object obj)
+        {
+            //lock裡面的代碼同一個時刻，只能被一個線程使用。其它的後面排隊。這樣防止數據混亂。
+            lock (obj)
+            {
+                richTextBox1.Text += "Thread名稱 : " + str + " 做事 " + DateTime.Now.ToString() + "\n";
+            }
+        }
 
 //------------------------------------------------------------  # 60個
 
@@ -879,11 +871,6 @@ json load 出來後是字典
 
 //------------------------------------------------------------  # 60個
 
-            this.AutoSize = true;
-            this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            this.AutoSize = true;
-            this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            
 LinkLabel + ToolTip
 
 使用 Validating + Validated
@@ -2716,45 +2703,6 @@ emule
 http://www.ed2k.online/tushu/jsjwl/16725.html
 
 ed2k://|file|[www.ed2k.online][C#%E5%85%A8%E8%83%BD%E9%80%9F%E6%9F%A5%E5%AE%9D%E5%85%B8].%E6%98%8E%E6%97%A5%E7%A7%91%E6%8A%80%E7%AD%89.%E6%89%AB%E6%8F%8F%E7%89%88.pdf|255157709|83403adcb05aaf95a0a0ef19846a00aa|h=pk25dcx3grk63emqyukmuh2eb6zuhpg5|/
-
-//------------------------------------------------------------  # 60個
-
-C# GUID介紹和的使用，
-
-GUID（全局統一標識符）是指在一台機器上生成的數字，它保證對在同一時空中的所有機器都是唯一的。通常平台會提供生成GUID的API。生成算法很有意思，用到了以太網卡地址、納秒級時間、芯片ID碼和許多可能的數字。GUID的唯一缺陷在於生成的結果串會比較大。
-
-GUID永遠是方便的; 對於程序開發的各個方面，.NET Framework簡化了建立和處理GUID數值的過程。在.NET程序需要的地方，這一功能很容易地生成唯一的數值。
-
-1. 一個GUID為一個128位的整數(16字節)，在使用唯一標識符的情況下，你可以在所有計算機和網絡之間使用這一整數。
-
-2. GUID 的格式為“xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx”，其中每個 x 是 0-9 或 a-f 范圍內的一個十六進制的數字。例如：337c7f2b-7a34-4f50-9141-bab9e6478cc8 即為有效的 GUID 值。
-
-3. 世界上（Koffer注：應該是地球上）的任何兩台計算機都不會生成重復的 GUID 值。GUID 主要用於在擁有多個節點、多台計算機的網絡或系統中，分配必須具有唯一性的標識符。
-
-4. 在 Windows 平台上，GUID 應用非常廣泛：注冊表、類及接口標識、數據庫、甚至自動生成的機器名、目錄名等。
-
-//------------------------------------------------------------  # 60個
-
-GUID（全局統一標識符）是指在一台機器上生成的數字，它保證對在同一時空中的所有機器都是唯一的。
-GUID的唯一缺陷在於生成的結果串會比較大。
-
-對於程序開發的各個方面，.NET Framework簡化了建立和處理GUID數值的過程。
-在.NET程序需要的地方，這一功能很容易地生成唯一的數值。
-
-1、Guid.NewGuid().ToString("N") 結果為：
-	38bddf48f43c48588e0d78761eaa1ce6
-2、Guid.NewGuid().ToString("D") 結果為：
-	57d99d89-caab-482a-a0e9-a0a803eed3ba
-3、Guid.NewGuid().ToString("B") 結果為：
-	{09f140d5-af72-44ba-a763-c861304b46f8}
-4、Guid.NewGuid().ToString("P") 結果為：
-	(778406c2-efff-4262-ab03-70a77d09c2b5)
-            
-可見默認的為第2種效果
-        其中：N、D、B、P分別代表一種輸出格式
-
-小注：在個人使用中，主要是在數據中某列在沒有輸入值的情況下，用於生成內碼（NOT NULL PRIMARY KEY）。
-EG:       string str = "insert into 表名(NM,BH,MC) values('" + Guid.NewGuid().ToString("N") + "','" + textBox_bh.Text + "','" + textBox_mc.Text + "')";
 
 //------------------------------------------------------------  # 60個
 
@@ -4607,11 +4555,6 @@ Git操作指南，git權威指南
 請訪問以下網址，很詳細，今天偷個懶記錄一下，之後有時間再來補全吧！
 https://git-scm.com/book/zh/v2
 
-
-C#短時間內產生大量不重復的隨機數
-用種子Guid.NewGuid().GetHashCode()，在短時間裡不會出現大量重復。 
-
-
 CSharp编程大全
 https://cloud.tencent.com/developer/column/88848
 
@@ -5276,12 +5219,12 @@ ex:
 //------------------------------------------------------------  # 60個
 
 cccc
-表單對其某控件之邊緣
-this.ClientSize = new Size(lblEvent.Bounds.Right, lblEvent.Bounds.Bottom);
+//表單對其某控件之邊緣
+this.ClientSize = new Size(richTextBox1.Bounds.Right + 10, richTextBox1.Bounds.Bottom + 10);
 
 表單大小自動調整 成跟每個控件相接, 預設是GrowOnly
 this.AutoSize = true;
-this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+this.AutoSizeMode = AutoSizeMode.GrowAndShrink;     //讓表單大小可以自動隨著圖片大小變化。
 
 textBox內換行要\r\n   ?!?!
 
@@ -5377,29 +5320,6 @@ btn_Tag.Tag = "本技巧是Tag属性应用";//为按钮的数据对象赋值
 https://kiang.github.io/covid19/
 
 https://github.com/kiang/covid19
-
-//------------------------------------------------------------  # 60個
-
-            richTextBox1.Text += "繼承Form類別產生新的視窗表單\n";
-
-            Form Form2 = new Form();
-
-            Form2.Cursor = Cursors.Cross;
-            Form2.FormBorderStyle = FormBorderStyle.Sizable;
-            Form2.Width = 800;
-            Form2.Height = 800;
-            Form2.HelpButton = true;
-            Form2.MaximizeBox = true;
-            Form2.MinimizeBox = true;
-            Form2.Name = "Form2";
-            Form2.ShowInTaskbar = true;
-            Form2.StartPosition = FormStartPosition.CenterParent;
-            Form2.Text = "New Form";
-            Form2.WindowState = FormWindowState.Normal;
-            Form2.Enabled = true;
-
-            // 以Form類別的ShowDialog方法顯示視窗表單
-            Form2.ShowDialog();
 
 //------------------------------------------------------------  # 60個
 
@@ -5803,7 +5723,10 @@ this.ClientSize = new Size(btnClickMe.Right, btnClickMe.Bottom);
                 chk.Checked = false;
             }
 
+//------------------------------------------------------------  # 60個
+
 或許考慮imsLink不要全屏 下方留一些空間操作 切換選擇程式
+            int margin = 10;
             Rectangle rect = new Rectangle(
                 Screen.PrimaryScreen.WorkingArea.X + margin,
                 Screen.PrimaryScreen.WorkingArea.Y + margin,
@@ -5811,6 +5734,9 @@ this.ClientSize = new Size(btnClickMe.Right, btnClickMe.Bottom);
                 Screen.PrimaryScreen.WorkingArea.Height - 2 * margin);
             this.Bounds = rect;
 
+//------------------------------------------------------------  # 60個
+
+cccc
 //MenuStrip 加上圖示的方法
             // Add the shield to a menu item.
             mnuFileFormatHardDrive.ImageScaling = ToolStripItemImageScaling.None;
@@ -7375,10 +7301,6 @@ string filename = @"D:\_git\vcs\_1.data\______test_files1\__text\war_and_peace.t
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-pictureBox圖像直接存檔
-
-pictureBox1.Image.Save(@"D:\bbbbb.jpg");
-pictureBox1.Image.Save(filename);
 
 //------------------------------------------------------------  # 60個
 
@@ -7416,7 +7338,6 @@ pictureBox1.Image.Save(filename);
                 //存圖
             }
         }
-
 
 //------------------------------------------------------------  # 60個
 
@@ -7501,6 +7422,12 @@ Application.Run(new Form1());
 　　Application.Run(new screen());
 　}
 　　最後運行該程序，把screen_saver.exe改為screen_saver.scr，拷入Windows系統目錄中，這樣就可以運行該屏幕保護程序。
+
+6060
+
+pictureBox圖像直接存檔
+pictureBox1.Image.Save(@"D:\bbbbb.jpg");
+pictureBox1.Image.Save(filename);
 
 bitmap1.Save(filename, ImageFormat.Bmp);
 bitmap1.Save(filename, ImageFormat.Jpeg);
@@ -7651,8 +7578,6 @@ this.ShowInTaskbar = false;//不在任务栏显现
 this.BackColor = SystemColors.ControlLight;
 this.BackColor = Color.Black;
 
-this.AutoSize = true;
-this.AutoSizeMode = AutoSizeMode.GrowAndShrink;     //讓表單大小可以自動隨著圖片大小變化。
 this.TransparencyKey = SystemColors.ControlLight;   //將表單的TransparencyKey設為Control，這樣可以去掉桌面小玩意外圍多餘的部份
 
 this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -7802,15 +7727,21 @@ DrawPie方法的格式與DrawArc方法基本一致。
 
 //------------------------------------------------------------  # 60個
 
+// SizeF size = g.MeasureString(draw_text, f);
+
 string txt = link.Cost.ToString();
-SizeF txt_size = gr.MeasureString(txt, this.Font);
-gr.DrawString(txt, this.Font, Brushes.Black, x1 - txt_size.Width / 2, y1 - txt_size.Height / 2);
+SizeF txt_size = g.MeasureString(txt, this.Font);
+g.DrawString(txt, this.Font, Brushes.Black, x1 - txt_size.Width / 2, y1 - txt_size.Height / 2);
 
 string txt = node.Id.ToString();
-SizeF txt_size = gr.MeasureString(txt, this.Font);
-gr.DrawString(txt, this.Font, text_brush, node.Location.X - txt_size.Width / 2, node.Location.Y - txt_size.Height / 2);
+SizeF txt_size = g.MeasureString(txt, this.Font);
+g.DrawString(txt, this.Font, text_brush, node.Location.X - txt_size.Width / 2, node.Location.Y - txt_size.Height / 2);
 
 this.Bounds = new Rectangle(0, 0, width, height);
 this.Bounds = Screen.PrimaryScreen.Bounds;
 
 //------------------------------------------------------------  # 60個
+
+//            g.DrawRectangle(Pens.Black, bounds.X, bounds.Y, bounds.Width, bounds.Height);
+
+

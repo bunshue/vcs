@@ -397,7 +397,8 @@ namespace vcs_Thread
 
         //Thread使用範例4 ST
 
-        Random r = new Random(Guid.NewGuid().GetHashCode());
+        Random rand = new Random();
+
         private int _R = 0, _G = 0, _B = 0;
 
         private void ThreadProc_ex10()
@@ -405,9 +406,9 @@ namespace vcs_Thread
             richTextBox1.Text += "啟動一個thread10 ";
             while (true)
             {
-                _R = r.Next(256);
-                _G = r.Next(256);
-                _B = r.Next(256);
+                _R = rand.Next(256);
+                _G = rand.Next(256);
+                _B = rand.Next(256);
                 Thread.Sleep(100);
             }
             richTextBox1.Text += "\n結束 ThreadProc_ex10\n";

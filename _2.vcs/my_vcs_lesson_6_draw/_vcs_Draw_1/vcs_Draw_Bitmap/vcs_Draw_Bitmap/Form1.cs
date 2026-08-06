@@ -699,6 +699,8 @@ namespace vcs_Draw_Bitmap
         private void button12_Click(object sender, EventArgs e)
         {
             //改變bitmap大小
+            //如何把一個大Bitmap直接縮成一個小Bitmap
+            //例如原本300X300的Bitmap要如何變成一個100X100的Bitmap?
 
             int W = pictureBox1.Width;
             int H = pictureBox1.Height;
@@ -1021,17 +1023,6 @@ g.DrawImage(img, destRect1, srcRect, units);
 
 //------------------------------------------------------------  # 60個
 
-Bitmap bitmap1 = new Bitmap(w, h);
-Graphics g = Graphics.FromImage(bitmap1);
-
-g.SmoothingMode = SmoothingMode.AntiAlias;//消除鋸齒
-g.CompositingQuality = CompositingQuality.HighQuality;
-g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-
-//------------------------------------------------------------  # 60個
-
-Graphics g = Graphics.FromImage(ThumbNail);
-
 // 設置畫布的描繪質量
 g.CompositingQuality = CompositingQuality.HighSpeed;
 g.CompositingQuality = CompositingQuality.HighQuality;
@@ -1047,8 +1038,6 @@ g.InterpolationMode = InterpolationMode.High;
 g.SmoothingMode = SmoothingMode.HighQuality;//使画出的指针、线条更平滑、高质量
 
 //------------------------------------------------------------  # 60個
-
-Bitmap bitmap1;
 
 Bitmap bitmap1 = new Bitmap(600, 400);  // 新建一個指名大小的bitmap
 pictureBox1.Image = bitmap1;
@@ -1078,11 +1067,6 @@ Bitmap內部資料的排列 及 使用
 2. 直接從圖片建立Bitmap
 3. 自建空白打Bitmap 裡面加入一個小Bitmap
 4. 改變Bitmap/Image大小
-
-//------------------------------------------------------------  # 60個
-
-如何把一個大Bitmap直接縮成一個小Bitmap
-例如原本300X300的Bitmap要如何變成一個100X100的Bitmap?
 
 //------------------------------------------------------------  # 60個
 

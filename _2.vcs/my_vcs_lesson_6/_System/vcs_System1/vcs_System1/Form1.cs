@@ -1096,9 +1096,27 @@ namespace vcs_System1
             richTextBox1.Text += newName + "\n";
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button17_Click(object sender, EventArgs e)
         {
+            //GUID
+            Guid guid = Guid.NewGuid();
+
+            Guid[] guids = new Guid[]
+            {
+                Guid.NewGuid(),
+                Guid.NewGuid(),
+                Guid.NewGuid(),
+                guid
+            };
+
+            //------------------------------------------------------------  # 60個
+
+
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button18_Click(object sender, EventArgs e)
         {
@@ -2001,4 +2019,61 @@ namespace vcs_System1
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
+
+
+
+/*
+C# GUID介紹和的使用，
+
+GUID（全局統一標識符）是指在一台機器上生成的數字，它保證對在同一時空中的所有機器都是唯一的。通常平台會提供生成GUID的API。生成算法很有意思，用到了以太網卡地址、納秒級時間、芯片ID碼和許多可能的數字。GUID的唯一缺陷在於生成的結果串會比較大。
+
+GUID永遠是方便的; 對於程序開發的各個方面，.NET Framework簡化了建立和處理GUID數值的過程。在.NET程序需要的地方，這一功能很容易地生成唯一的數值。
+
+1. 一個GUID為一個128位的整數(16字節)，在使用唯一標識符的情況下，你可以在所有計算機和網絡之間使用這一整數。
+
+2. GUID 的格式為“xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx”，其中每個 x 是 0-9 或 a-f 范圍內的一個十六進制的數字。例如：337c7f2b-7a34-4f50-9141-bab9e6478cc8 即為有效的 GUID 值。
+
+3. 世界上（Koffer注：應該是地球上）的任何兩台計算機都不會生成重復的 GUID 值。GUID 主要用於在擁有多個節點、多台計算機的網絡或系統中，分配必須具有唯一性的標識符。
+
+4. 在 Windows 平台上，GUID 應用非常廣泛：注冊表、類及接口標識、數據庫、甚至自動生成的機器名、目錄名等。
+
+//------------------------------------------------------------  # 60個
+
+GUID（全局統一標識符）是指在一台機器上生成的數字，它保證對在同一時空中的所有機器都是唯一的。
+GUID的唯一缺陷在於生成的結果串會比較大。
+
+對於程序開發的各個方面，.NET Framework簡化了建立和處理GUID數值的過程。
+在.NET程序需要的地方，這一功能很容易地生成唯一的數值。
+
+1、Guid.NewGuid().ToString("N") 結果為：
+	38bddf48f43c48588e0d78761eaa1ce6
+2、Guid.NewGuid().ToString("D") 結果為：
+	57d99d89-caab-482a-a0e9-a0a803eed3ba
+3、Guid.NewGuid().ToString("B") 結果為：
+	{09f140d5-af72-44ba-a763-c861304b46f8}
+4、Guid.NewGuid().ToString("P") 結果為：
+	(778406c2-efff-4262-ab03-70a77d09c2b5)
+            
+可見默認的為第2種效果
+        其中：N、D、B、P分別代表一種輸出格式
+
+小注：在個人使用中，主要是在數據中某列在沒有輸入值的情況下，用於生成內碼（NOT NULL PRIMARY KEY）。
+EG:       string str = "insert into 表名(NM,BH,MC) values('" + Guid.NewGuid().ToString("N") + "','" + textBox_bh.Text + "','" + textBox_mc.Text + "')";
+
+//------------------------------------------------------------  # 60個
+
+*/
+
+
+/*
+Guid.NewGuid().ToString()
+
+Guid.NewGuid().ToString()
+
+        Random rand = new Random(Guid.NewGuid().GetHashCode());
+*/
+
+
+
+
 

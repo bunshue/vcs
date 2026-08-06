@@ -38,7 +38,9 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox0 = new System.Windows.Forms.GroupBox();
+            this.button5 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button4 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
@@ -66,7 +68,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(462, 39);
+            this.pictureBox1.Location = new System.Drawing.Point(229, 466);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 100);
             this.pictureBox1.TabIndex = 117;
@@ -119,7 +121,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(683, 39);
+            this.richTextBox1.Location = new System.Drawing.Point(450, 466);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 109;
@@ -128,7 +130,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(696, 76);
+            this.bt_clear.Location = new System.Drawing.Point(463, 503);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 118;
@@ -139,7 +141,7 @@
             // pictureBox2
             // 
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox2.Location = new System.Drawing.Point(577, 37);
+            this.pictureBox2.Location = new System.Drawing.Point(344, 464);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(100, 100);
             this.pictureBox2.TabIndex = 122;
@@ -152,7 +154,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(458, 12);
+            this.label1.Location = new System.Drawing.Point(225, 439);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(310, 24);
             this.label1.TabIndex = 123;
@@ -160,28 +162,51 @@
             // 
             // groupBox0
             // 
+            this.groupBox0.Controls.Add(this.button5);
             this.groupBox0.Controls.Add(this.button0);
             this.groupBox0.Controls.Add(this.button2);
             this.groupBox0.Controls.Add(this.button3);
             this.groupBox0.Controls.Add(this.button1);
             this.groupBox0.Location = new System.Drawing.Point(23, 12);
             this.groupBox0.Name = "groupBox0";
-            this.groupBox0.Size = new System.Drawing.Size(200, 325);
+            this.groupBox0.Size = new System.Drawing.Size(200, 403);
             this.groupBox0.TabIndex = 124;
             this.groupBox0.TabStop = false;
             this.groupBox0.Text = "TextureBrush";
             // 
+            // button5
+            // 
+            this.button5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button5.Location = new System.Drawing.Point(6, 315);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(180, 60);
+            this.button5.TabIndex = 117;
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button4);
             this.groupBox1.Controls.Add(this.button10);
             this.groupBox1.Controls.Add(this.button12);
             this.groupBox1.Controls.Add(this.button11);
-            this.groupBox1.Location = new System.Drawing.Point(238, 12);
+            this.groupBox1.Location = new System.Drawing.Point(435, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 247);
+            this.groupBox1.Size = new System.Drawing.Size(200, 325);
             this.groupBox1.TabIndex = 125;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "LinearGradientBrush";
+            // 
+            // button4
+            // 
+            this.button4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button4.Location = new System.Drawing.Point(12, 239);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(180, 60);
+            this.button4.TabIndex = 117;
+            this.button4.Text = "lgb";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button10
             // 
@@ -221,7 +246,7 @@
             this.groupBox2.Controls.Add(this.button20);
             this.groupBox2.Controls.Add(this.button22);
             this.groupBox2.Controls.Add(this.button21);
-            this.groupBox2.Location = new System.Drawing.Point(23, 353);
+            this.groupBox2.Location = new System.Drawing.Point(229, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(200, 248);
             this.groupBox2.TabIndex = 126;
@@ -262,7 +287,7 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Location = new System.Drawing.Point(462, 145);
+            this.panel1.Location = new System.Drawing.Point(556, 466);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(100, 100);
             this.panel1.TabIndex = 80;
@@ -271,7 +296,7 @@
             // bt_pictureBox1_clear
             // 
             this.bt_pictureBox1_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_pictureBox1_clear.Location = new System.Drawing.Point(481, 76);
+            this.bt_pictureBox1_clear.Location = new System.Drawing.Point(248, 503);
             this.bt_pictureBox1_clear.Name = "bt_pictureBox1_clear";
             this.bt_pictureBox1_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_pictureBox1_clear.TabIndex = 128;
@@ -287,7 +312,7 @@
             this.groupBox3.Controls.Add(this.radioButton2);
             this.groupBox3.Controls.Add(this.bt_draw1);
             this.groupBox3.Controls.Add(this.radioButton1);
-            this.groupBox3.Location = new System.Drawing.Point(238, 353);
+            this.groupBox3.Location = new System.Drawing.Point(641, 13);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(153, 247);
             this.groupBox3.TabIndex = 129;
@@ -366,7 +391,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(839, 614);
+            this.ClientSize = new System.Drawing.Size(1055, 614);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.bt_pictureBox1_clear);
@@ -422,6 +447,8 @@
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.Button bt_draw1;
         private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
     }
 }
 

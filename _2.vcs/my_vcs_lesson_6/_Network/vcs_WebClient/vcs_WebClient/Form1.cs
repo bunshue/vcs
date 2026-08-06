@@ -1431,7 +1431,7 @@ Download specified number of pictures from “ http://browse.deviantart.com/cust
                                             WebClient wc = new WebClient();  // 建立 WebClient
                                             string dirPath = @"c:\Images";
                                             string fileName = GetValidFilename(imageInfo.Title);
-                                            filename = Path.Combine(dirPath, fileName + Guid.NewGuid().ToString());
+                                            filename = Path.Combine(dirPath, fileName + "tmp");
                                             wc.DownloadFile(imageInfo.SrcPath, filename);    // 從URL下載檔案
                                         }  
 							            return;  

@@ -1083,7 +1083,7 @@ namespace vcs_test_all_01_Random
             int iMax = Convert.ToInt32("9FFF", 16); //不考慮最末16個空白
 
             //隨機一個中文字之整數
-            System.Random oRnd = new System.Random(System.Guid.NewGuid().GetHashCode());
+            Random oRnd = new System.Random(System.Guid.NewGuid().GetHashCode());
 
             int iChar = oRnd.Next(iMin, iMax);
             //整數轉成Byte[]，再轉成字串
@@ -2259,3 +2259,11 @@ namespace vcs_test_all_01_Random
 */
 
 //            Random rand = new Random(DateTime.Now.Millisecond);
+
+
+
+
+//C#短時間內產生大量不重復的隨機數
+//用種子Guid.NewGuid().GetHashCode()，在短時間裡不會出現大量重復。 
+//        Random rand = new Random(Guid.NewGuid().GetHashCode());
+

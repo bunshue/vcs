@@ -153,7 +153,27 @@ namespace vcs_NewForm4
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //建立新表單4
+            richTextBox1.Text += "繼承Form類別產生新的視窗表單\n";
 
+            Form Form2 = new Form();
+
+            Form2.Cursor = Cursors.Cross;
+            Form2.FormBorderStyle = FormBorderStyle.Sizable;
+            Form2.Width = 800;
+            Form2.Height = 800;
+            Form2.HelpButton = true;
+            Form2.MaximizeBox = true;
+            Form2.MinimizeBox = true;
+            Form2.Name = "Form2";
+            Form2.ShowInTaskbar = true;
+            Form2.StartPosition = FormStartPosition.CenterParent;
+            Form2.Text = "New Form";
+            Form2.WindowState = FormWindowState.Normal;
+            Form2.Enabled = true;
+
+            // 以Form類別的ShowDialog方法顯示視窗表單
+            Form2.ShowDialog();
         }
 
         //------------------------------------------------------------  # 60個

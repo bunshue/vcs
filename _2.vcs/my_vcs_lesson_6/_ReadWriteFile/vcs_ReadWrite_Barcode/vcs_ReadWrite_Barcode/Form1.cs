@@ -199,7 +199,7 @@ namespace vcs_ReadWrite_Barcode
             writer.Format = BarcodeFormat.ITF;
             writer.Options = options;
             Bitmap bitmap = writer.Write(contents);
-            string fileName = Guid.NewGuid().ToString() + ".png";
+            string fileName = "tmp_aaaa.png";
             bitmap.Save(tempPath + fileName);
             return fileName;
         }
@@ -325,7 +325,6 @@ namespace vcs_ReadWrite_Barcode
             int ImgWidth = 300;
             int ImgHeight = 120;
             pictureBox4.Image = CreateBarcodePicture(BarcodeString, ImgWidth, ImgHeight);
-
         }
     }
 }
@@ -333,11 +332,6 @@ namespace vcs_ReadWrite_Barcode
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
