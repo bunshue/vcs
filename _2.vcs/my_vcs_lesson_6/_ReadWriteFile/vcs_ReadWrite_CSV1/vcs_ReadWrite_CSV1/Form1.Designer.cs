@@ -300,7 +300,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 661);
+            this.ClientSize = new System.Drawing.Size(584, 631);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);

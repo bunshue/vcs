@@ -1405,7 +1405,7 @@ namespace vcs_ReadWrite_CSV1
                 Type.Missing);
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button17_Click(object sender, EventArgs e)
         {
@@ -1464,7 +1464,7 @@ namespace vcs_ReadWrite_CSV1
             }
             sr.Close();
 
-//6060
+//------------------------------------------------------------  # 60個
 
             System.IO.StreamWriter sw = new StreamWriter(this.fileName, false, Encoding.Default);
 
@@ -1473,9 +1473,6 @@ namespace vcs_ReadWrite_CSV1
                 sw.WriteLine(ConvertToSaveLine((ArrayList)this.rowAL[i]));
             }
             sw.Close();
-
-
 */
-
 
 

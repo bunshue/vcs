@@ -64,6 +64,7 @@ namespace vcs_Draw9_Example4_vcsh
             sb = new SolidBrush(Color.Blue);
             g.Clear(Color.Red);             //useless??
             pictureBox1.BackColor = Color.Pink;
+
             show_item_location();
 
             // Make a GraphicsPath for the curve.
@@ -108,19 +109,16 @@ namespace vcs_Draw9_Example4_vcsh
             int dy;
 
             //button
-            x_st = 850;
+            x_st = 750;
             y_st = 10;
             dx = 110;
             dy = 45;
 
-            bt_save.Location = new Point(x_st + dx * 3, y_st + dy * 10);
-            bt_exit.Location = new Point(x_st + dx * 4, y_st + dy * 10);
-
-            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 11);
-            richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y - 50);
+            richTextBox1.Size = new Size(400, 300);
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //pictureBox1.Location = new Point(10, 10);
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -145,53 +143,11 @@ namespace vcs_Draw9_Example4_vcsh
 
         }
 
-
-
-
         private void bt_clear_Click(object sender, EventArgs e)
         {
             bitmap1 = null;
             pictureBox1.Image = null;
             richTextBox1.Clear();
-        }
-
-        void save_image_to_drive()
-        {
-            if (bitmap1 != null)
-            {
-                string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                string filename1 = filename + ".jpg";
-                string filename2 = filename + ".bmp";
-                string filename3 = filename + ".png";
-
-                try
-                {
-                    bitmap1.Save(@filename1, ImageFormat.Jpeg);
-                    bitmap1.Save(@filename2, ImageFormat.Bmp);
-                    bitmap1.Save(@filename3, ImageFormat.Png);
-
-                    richTextBox1.Text += "存檔成功\n";
-                    richTextBox1.Text += "已存檔 : " + filename1 + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename2 + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename3 + "\n";
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-                }
-            }
-            else
-                richTextBox1.Text += "無圖可存\n";
-        }
-
-        private void bt_save_Click(object sender, EventArgs e)
-        {
-            save_image_to_drive();
-        }
-
-        private void bt_exit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
         }
 
         private void pictureBox_hit_curve_MouseClick(object sender, MouseEventArgs e)
@@ -421,3 +377,12 @@ namespace vcs_Draw9_Example4_vcsh
         //for unique progressbar SP
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+

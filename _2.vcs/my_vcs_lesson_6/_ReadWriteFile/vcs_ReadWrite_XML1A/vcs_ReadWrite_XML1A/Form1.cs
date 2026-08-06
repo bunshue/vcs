@@ -327,88 +327,19 @@ namespace vcs_ReadWrite_XML1A
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         //XML操作1
         private void button10_Click(object sender, EventArgs e)
         {
-            string filename1a = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\宅之力R.xml";
-            if (File.Exists(filename1a))
-            {
-                XmlDocument document = new XmlDocument();
-                richTextBox1.Text += "開啟XML文件 : " + filename1a + "\n";
-                document.Load(filename1a);
-
-                richTextBox1.Text += document.SelectSingleNode("/root/settinginfo").Attributes["server"].Value + "\t";
-                richTextBox1.Text += document.SelectSingleNode("/root/settinginfo").Attributes["account"].Value + "\t";
-                richTextBox1.Text += document.SelectSingleNode("/root/settinginfo").Attributes["password"].Value + "\t";
-                richTextBox1.Text += document.SelectSingleNode("/root/settinginfo").Attributes["delay"].Value + "\n";
-            }
-            else
-            {
-                richTextBox1.Text += "XML文件 : " + filename1a + " 不存在\n";
-            }
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-            string filename1b = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\宅之力W.xml";
-
-            XmlDocument document = new XmlDocument();
-            document.AppendChild(document.CreateXmlDeclaration("1.0", "UTF-8", ""));//將宣告節點加入document中
-            XmlNode xmlnode_root = document.CreateNode(XmlNodeType.Element, "root", "");
-            XmlNode xmlnode_settinginfo = document.CreateNode(XmlNodeType.Element, "settinginfo", "");
-            XmlAttribute xmlattribute_server = document.CreateAttribute("server");
-            XmlAttribute xmlattribute_account = document.CreateAttribute("account");
-            XmlAttribute xmlattribute_password = document.CreateAttribute("password");
-            XmlAttribute xmlattribute_delay = document.CreateAttribute("delay");
-
-            xmlattribute_server.Value = "Server Name A";
-            xmlattribute_account.Value = "Account Lion";
-            xmlattribute_password.Value = "Password mouse";
-            xmlattribute_delay.Value = "Interval 12345";
-
-            xmlnode_settinginfo.Attributes.Append(xmlattribute_server);//將屬性加入xmlnode_settinginfo節點下
-            xmlnode_settinginfo.Attributes.Append(xmlattribute_account);//將屬性加入xmlnode_settinginfo節點下
-            xmlnode_settinginfo.Attributes.Append(xmlattribute_password);//將屬性加入xmlnode_settinginfo節點下
-            xmlnode_settinginfo.Attributes.Append(xmlattribute_delay);//將屬性加入xmlnode_settinginfo節點下
-            xmlnode_root.AppendChild(xmlnode_settinginfo);//將xmlnode_settinginfo節點加入xmlnode_root節點下
-            document.AppendChild(xmlnode_root); //將xmlnode_root節點加入document中
-
-            //存檔
-            document.Save(filename1b);
-            richTextBox1.Text += "已存檔 : " + filename1b + "\n";
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-            string filename1c = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\仙人的設計之路2.xml";
-            if (File.Exists(filename1c))
-            {
-                XmlDocument document = new XmlDocument();
-                richTextBox1.Text += "開啟XML文件 : " + filename1c + "\n";
-                document.Load(filename1c);
-
-                XmlNodeList NodeLists = document.SelectNodes("Root/MyLevel1");
-                //XmlNodeList NodeLists = XmlDoc.SelectNodes("Root/MyLevel1/MyLevel2");
-
-                richTextBox1.Text += "Attribute" + "\t|\t" + "參數" + "\t\t|\t" + "內容" + "\n\n";
-
-                foreach (XmlNode OneNode in NodeLists)
-                {
-                    String StrNodeName = OneNode.Name.ToString();
-                    foreach (XmlAttribute Attr in OneNode.Attributes)
-                    {
-                        String StrAttr = Attr.Name.ToString();
-                        String StrValue = OneNode.Attributes[Attr.Name.ToString()].Value;
-                        String StrInnerText = OneNode.InnerText;
-                        richTextBox1.Text += "[" + StrAttr + "\t|\t" + StrValue + "\t|\t" + StrInnerText + "]\n";
-                    }
-                }
-                richTextBox1.Text += "\n\n仙人的設計之路2 OK\n\n";
-            }
-            else
-            {
-                richTextBox1.Text += "XML文件 : " + filename1c + " 不存在\n";
-            }
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -421,37 +352,16 @@ namespace vcs_ReadWrite_XML1A
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         //XML操作2
 
-        string xml_filename2 = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\vcs_ReadWrite_XML2.xml";
         private void button20_Click(object sender, EventArgs e)
         {
-            XmlDocument xml = new XmlDocument();
-            xml.Load(xml_filename2);//加载xml文件
-            XmlNode xn = xml.DocumentElement;
-
-            richTextBox1.Text += "取得帳號 : " + xn["user"].InnerText + "\n";
-            richTextBox1.Text += "取得密碼 : " + xn["psw"].InnerText + "\n";
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
-            XmlDocument xml = new XmlDocument();
-            xml.Load(xml_filename2);//加载xml文件
-            XmlNode xn = xml.DocumentElement;
-
-            string account = "lion";
-            string password = "mouse";
-
-            xn["user"].InnerText = account;
-            xn["psw"].InnerText = password;
-
-            richTextBox1.Text += "設定帳號 : " + xn["user"].InnerText + "\n";
-            richTextBox1.Text += "設定密碼 : " + xn["psw"].InnerText + "\n";
-
-            xml.Save(xml_filename2);//保存xml文件
-
-            richTextBox1.Text += "存檔完成\n";
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -468,6 +378,8 @@ namespace vcs_ReadWrite_XML1A
         {
 
         }
+
+        //------------------------------------------------------------  # 60個
 
         //XML操作3
         private void button30_Click(object sender, EventArgs e)
@@ -634,6 +546,8 @@ namespace vcs_ReadWrite_XML1A
             richTextBox1.Text += string_writer.ToString();
         }
 
+        //------------------------------------------------------------  # 60個
+
         //XML操作4
         private void button40_Click(object sender, EventArgs e)
         {
@@ -719,51 +633,11 @@ namespace vcs_ReadWrite_XML1A
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         //XML操作5
         private void button50_Click(object sender, EventArgs e)
         {
-            //建立XML檔案
-            XmlDocument xmlDocument = new XmlDocument(); //create xml document
-            XmlNode xmlNode = xmlDocument.CreateNode(XmlNodeType.XmlDeclaration, "", ""); //xml document header declaration
-            xmlDocument.AppendChild(xmlNode); // add xml document header declarations
-            XmlElement xmlElement = xmlDocument.CreateElement("", "TestDataModels", ""); //create xml root node
-            XmlElement element2 = xmlDocument.CreateElement("", "TestDataModels", ""); //create TestDataModels' child node
-            for (int i = 1; i < 4; i++)
-            {
-                XmlElement element = xmlDocument.CreateElement("", "TestDataModels", ""); //create TestDataModels' child node
-                //add child node for the TestDataModels's node
-                XmlElement elementCode = xmlDocument.CreateElement("Test", "Code", "");
-                XmlText xmlTextCode = xmlDocument.CreateTextNode("TCode " + i.ToString());
-                elementCode.AppendChild(xmlTextCode);
-                element.AppendChild(elementCode);
-
-                XmlElement elementName = xmlDocument.CreateElement("Test", "Name", "");
-                XmlText xmlTextName = xmlDocument.CreateTextNode("TName " + i.ToString());
-                elementName.AppendChild(xmlTextName);
-                element.AppendChild(elementName);
-
-                //testType start
-                XmlElement elementType = xmlDocument.CreateElement("Test", "Type", "");
-                XmlElement elementTypeCode = xmlDocument.CreateElement("Type", "TCode", "");
-                XmlText xmlTextTypeCode = xmlDocument.CreateTextNode("tt.TtCode-" + i.ToString());
-                elementTypeCode.AppendChild(xmlTextTypeCode);
-                elementType.AppendChild(elementTypeCode);
-
-                XmlElement elementTypeName = xmlDocument.CreateElement("Type", "TName", "");
-                XmlText xmlTextTypeName = xmlDocument.CreateTextNode("tt.TtName-" + i.ToString());
-                elementTypeName.AppendChild(xmlTextTypeName);
-                elementType.AppendChild(elementTypeName);
-                element.AppendChild(elementType);
-
-                //testType end
-                xmlElement.AppendChild(element); //For xmlElement add child element
-            }
-            xmlDocument.AppendChild(xmlElement); //For xmlDocument add child node
-
-            //存檔
-            string filename = "tmp_xml_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xml";
-            xmlDocument.Save(filename);
-            richTextBox1.Text += "已存檔 : " + filename + "\n";
         }
 
         private void button51_Click(object sender, EventArgs e)
@@ -785,6 +659,8 @@ namespace vcs_ReadWrite_XML1A
         {
 
         }
+
+        //------------------------------------------------------------  # 60個
 
         //XML操作6
         private void button60_Click(object sender, EventArgs e)
@@ -850,6 +726,8 @@ namespace vcs_ReadWrite_XML1A
         {
 
         }
+
+        //------------------------------------------------------------  # 60個
 
         //XML操作7    vcs_ReadWrite_XML8
         private void button70_Click(object sender, EventArgs e)

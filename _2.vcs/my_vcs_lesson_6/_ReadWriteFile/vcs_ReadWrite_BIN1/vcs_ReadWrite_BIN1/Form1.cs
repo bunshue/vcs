@@ -89,7 +89,7 @@ namespace vcs_ReadWrite_BIN1
 
             FileStream fsWriter = new FileStream(filename2, FileMode.Create, FileAccess.Write);
             FileStream fsReader = new FileStream(filename1, FileMode.Open, FileAccess.Read);
-            byte[] bytes = new byte[1024 * 4];//4kB是合適的；
+            byte[] bytes = new byte[1024 * 4];  // 4KB 是合適的
             int readNum;
             while ((readNum = fsReader.Read(bytes, 0, bytes.Length)) != 0)//小於說明讀完了
             {

@@ -244,6 +244,8 @@ namespace vcs_Draw9_Example7_vcsh
             Environment.Exit(0);
         }
 
+        //------------------------------------------------------------  # 60個
+
         // Define the corners.
         private void DefineCorners()
         {
@@ -324,14 +326,11 @@ namespace vcs_Draw9_Example7_vcsh
             // Build the Root.
             int depth = (int)numericUpDown1.Value;
 
-            PointF center = new PointF(
-                pictureBox12.ClientSize.Width / 2,
-                pictureBox12.ClientSize.Height / 2);
+            PointF center = new PointF(pictureBox12.ClientSize.Width / 2, pictureBox12.ClientSize.Height / 2);
             float radius = (float)Math.Min(center.X, center.Y);
             radius -= 5;
             Root8 = MakeOctagon(depth, center, radius);
 
-            // Redraw.
             pictureBox12.Refresh();
         }
 
@@ -354,11 +353,9 @@ namespace vcs_Draw9_Example7_vcsh
                 // Recursively draw the smaller octagons.
                 foreach (PointF point in centers)
                 {
-                    parent.Children.Add(MakeOctagon(
-                        depth - 1, point, radius * size_scale8));
+                    parent.Children.Add(MakeOctagon(depth - 1, point, radius * size_scale8));
                 }
             }
-
             return parent;
         }
 
@@ -370,9 +367,7 @@ namespace vcs_Draw9_Example7_vcsh
             double dtheta = 2.0 * Math.PI / 8.0;
             for (int i = 0; i < 8; i++)
             {
-                points[i] = new PointF(
-                    center.X + (float)(radius * Math.Cos(theta)),
-                    center.Y + (float)(radius * Math.Sin(theta)));
+                points[i] = new PointF(center.X + (float)(radius * Math.Cos(theta)), center.Y + (float)(radius * Math.Sin(theta)));
                 theta += dtheta;
             }
             return points;
@@ -442,9 +437,7 @@ namespace vcs_Draw9_Example7_vcsh
 
             // Get the parameters.
             int depth = (int)numericUpDown1.Value;
-            Bitmap bm = new Bitmap(
-                pictureBox_snowflake.ClientSize.Width,
-                pictureBox_snowflake.ClientSize.Height);
+            Bitmap bm = new Bitmap(pictureBox_snowflake.ClientSize.Width, pictureBox_snowflake.ClientSize.Height);
             pictureBox_snowflake.Image = bm;
 
             // Draw the snowflake.
@@ -453,9 +446,7 @@ namespace vcs_Draw9_Example7_vcsh
                 gr.SmoothingMode = SmoothingMode.AntiAlias;
                 DrawSnowflake(gr, depth);
             }
-
             this.Cursor = Cursors.Default;
-
         }
 
         // Draw the complete snowflake.
@@ -485,9 +476,7 @@ namespace vcs_Draw9_Example7_vcsh
         {
             if (depth == 0)
             {
-                PointF p2 = new PointF(
-                    (float)(p1.X + dist * Math.Cos(theta)),
-                    (float)(p1.Y + dist * Math.Sin(theta)));
+                PointF p2 = new PointF((float)(p1.X + dist * Math.Cos(theta)), (float)(p1.Y + dist * Math.Sin(theta)));
                 gr.DrawLine(Pens.Blue, p1, p2);
                 p1 = p2;
                 return;
@@ -509,9 +498,7 @@ namespace vcs_Draw9_Example7_vcsh
 
             // Define an initiator and generator.
             Initiator = new List<PointF>();
-            float height = 0.75f * (Math.Min(
-                pictureBox_snowflake2.ClientSize.Width,
-                pictureBox_snowflake2.ClientSize.Height) - 20);
+            float height = 0.75f * (Math.Min(pictureBox_snowflake2.ClientSize.Width, pictureBox_snowflake2.ClientSize.Height) - 20);
             float width = (float)(height / Math.Sqrt(3.0) * 2);
             float y3 = pictureBox_snowflake2.ClientSize.Height - 10;
             float y1 = y3 - height;
@@ -546,8 +533,6 @@ namespace vcs_Draw9_Example7_vcsh
             }
 
             this.Cursor = Cursors.Default;
-
-
         }
 
         // Draw the complete snowflake.
@@ -577,9 +562,7 @@ namespace vcs_Draw9_Example7_vcsh
         {
             if (depth == 0)
             {
-                PointF p2 = new PointF(
-                    (float)(p1.X + dist * Math.Cos(theta)),
-                    (float)(p1.Y + dist * Math.Sin(theta)));
+                PointF p2 = new PointF((float)(p1.X + dist * Math.Cos(theta)), (float)(p1.Y + dist * Math.Sin(theta)));
                 gr.DrawLine(Pens.Blue, p1, p2);
                 p1 = p2;
                 return;
@@ -598,9 +581,7 @@ namespace vcs_Draw9_Example7_vcsh
         {
             // Define an initiator and generator.
             Initiator = new List<PointF>();
-            float height = Math.Min(
-                pictureBox4.ClientSize.Width,
-                pictureBox4.ClientSize.Height) - 100;
+            float height = Math.Min(pictureBox4.ClientSize.Width, pictureBox4.ClientSize.Height) - 100;
             float x1 = (pictureBox4.ClientSize.Width - height) / 2;
             float x2 = x1 + height;
             float y1 = (pictureBox4.ClientSize.Height - height) / 2;
@@ -660,9 +641,7 @@ namespace vcs_Draw9_Example7_vcsh
         {
             if (depth == 0)
             {
-                PointF p2 = new PointF(
-                    (float)(p1.X + dist * Math.Cos(theta)),
-                    (float)(p1.Y + dist * Math.Sin(theta)));
+                PointF p2 = new PointF((float)(p1.X + dist * Math.Cos(theta)), (float)(p1.Y + dist * Math.Sin(theta)));
                 gr.DrawLine(Pens.Blue, p1, p2);
                 p1 = p2;
                 return;
@@ -803,10 +782,12 @@ namespace vcs_Draw9_Example7_vcsh
 
                 // Set the position for the next character.
                 x += size.Width * 0.75f;
-                if (max_y < y + size.Height) max_y = y + size.Height;
+                if (max_y < y + size.Height)
+                {
+                    max_y = y + size.Height;
+                }
             }
         }
-
 
         // Draw the text in the RichTextBox.
         private void DrawRansomNoteText2()
@@ -829,8 +810,14 @@ namespace vcs_Draw9_Example7_vcsh
             string font_name = FontNames[Rand.Next(0, FontNames.Length)];
             float font_size = (float)(min_size + Rand.NextDouble() * (max_size - min_size));
             FontStyle font_style = FontStyle.Regular;
-            if (Rand.Next(0, 2) == 1) font_style |= FontStyle.Bold;
-            if (Rand.Next(0, 2) == 1) font_style |= FontStyle.Italic;
+            if (Rand.Next(0, 2) == 1)
+            {
+                font_style |= FontStyle.Bold;
+            }
+            if (Rand.Next(0, 2) == 1)
+            {
+                font_style |= FontStyle.Italic;
+            }
             //if (Rand.Next(0,2) == 1) font_style |= FontStyle.Strikeout;
             //if (Rand.Next(0,2) == 1) font_style |= FontStyle.Underline;
 
@@ -843,7 +830,10 @@ namespace vcs_Draw9_Example7_vcsh
         {
             e.Graphics.Clear(pictureBox5.BackColor);
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            if (Root5 == null) return;
+            if (Root5 == null)
+            {
+                return;
+            }
 
             Root5.Draw(e.Graphics);
         }
@@ -852,7 +842,10 @@ namespace vcs_Draw9_Example7_vcsh
         {
             e.Graphics.Clear(pictureBox12.BackColor);
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            if (Root8 == null) return;
+            if (Root8 == null)
+            {
+                return;
+            }
 
             Root8.Draw(e.Graphics);
         }
@@ -957,9 +950,7 @@ namespace vcs_Draw9_Example7_vcsh
 
                 // Find the first control point.
                 const int margin = 5;
-                float dx = Math.Min(
-                    (pictureBox_dragon4.ClientSize.Width - 2 * margin) / (14 / 6f),
-                    (pictureBox_dragon4.ClientSize.Height - 2 * margin) / (14 / 6f));
+                float dx = Math.Min((pictureBox_dragon4.ClientSize.Width - 2 * margin) / (14 / 6f), (pictureBox_dragon4.ClientSize.Height - 2 * margin) / (14 / 6f));
 
                 // Center it.
                 float x0 = pictureBox_dragon4.ClientSize.Width / 2;
@@ -969,28 +960,41 @@ namespace vcs_Draw9_Example7_vcsh
                 //int level = (int)nudLevel.Value;
                 int level = (int)numericUpDown1.Value;
                 if (DrawLastColor != Color.Red)
+                {
                     DrawDragonLine(gr, Pens.Red, level, Direction.Right, x0, y0, dx, 0);
+                }
                 if (DrawLastColor != Color.Green)
+                {
                     DrawDragonLine(gr, Pens.Green, level, Direction.Right, x0, y0, 0, dx);
+                }
                 if (DrawLastColor != Color.Blue)
+                {
                     DrawDragonLine(gr, Pens.Blue, level, Direction.Right, x0, y0, -dx, 0);
+                }
                 if (DrawLastColor != Color.Black)
+                {
                     DrawDragonLine(gr, Pens.Black, level, Direction.Right, x0, y0, 0, -dx);
+                }
 
                 // Redraw the one we should draw last.
                 if (DrawLastColor == Color.Red)
+                {
                     DrawDragonLine(gr, Pens.Red, level, Direction.Right, x0, y0, dx, 0);
+                }
                 else if (DrawLastColor == Color.Green)
+                {
                     DrawDragonLine(gr, Pens.Green, level, Direction.Right, x0, y0, 0, dx);
+                }
                 else if (DrawLastColor == Color.Blue)
+                {
                     DrawDragonLine(gr, Pens.Blue, level, Direction.Right, x0, y0, -dx, 0);
+                }
                 else if (DrawLastColor == Color.Black)
+                {
                     DrawDragonLine(gr, Pens.Black, level, Direction.Right, x0, y0, 0, -dx);
+                }
             }
-
-            // Display the result.
             pictureBox_dragon4.Image = bm;
-
         }
 
         // Recursively draw the dragon curve between the two points.
@@ -1040,28 +1044,40 @@ namespace vcs_Draw9_Example7_vcsh
         {
             numericUpDown1.Value++;
             if (numericUpDown1.Value == 5)
+            {
                 numericUpDown1.Value = 0;
+            }
 
             fractal_num_points += 1000;
             if (fractal_num_points > 12000)
+            {
                 fractal_num_points = 5000;
+            }
 
             NumPoints_ngon_stars++;
             if (NumPoints_ngon_stars > 12)
+            {
                 NumPoints_ngon_stars = 3;
+            }
 
             // for pickover popcorn ST
             HH += 0.01f;
             if (HH > 0.1)
+            {
                 HH = 0.01f;
+            }
 
             IterationsPerPixel += 10;
             if (IterationsPerPixel > 80)
+            {
                 IterationsPerPixel = 10;
+            }
 
             dx++;
             if (dx > 30)
+            {
                 dx = 5;
+            }
             // for pickover popcorn SP
 
             redraw_all();
@@ -1097,8 +1113,6 @@ namespace vcs_Draw9_Example7_vcsh
 
             draw_pickover_popcorn1();    //for pickover popcorn 單色
             draw_pickover_popcorn2();    //for pickover popcorn 彩色
-
-
         }
 
         private void pictureBox_fractal1_Paint(object sender, PaintEventArgs e)
@@ -1118,6 +1132,7 @@ namespace vcs_Draw9_Example7_vcsh
             {
                 return;
             }
+
             e.Graphics.Clear(pictureBox_ngon_stars.BackColor);
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
@@ -1179,7 +1194,6 @@ namespace vcs_Draw9_Example7_vcsh
                 a = b;
                 b = remainder;
             }
-
             return b;
         }
 
@@ -1208,9 +1222,7 @@ namespace vcs_Draw9_Example7_vcsh
         {
             int Level = (int)numericUpDown1.Value;
 
-            Bitmap bm = new Bitmap(
-                pictureBox_sierpinski3.ClientSize.Width,
-                pictureBox_sierpinski3.ClientSize.Height);
+            Bitmap bm = new Bitmap(pictureBox_sierpinski3.ClientSize.Width, pictureBox_sierpinski3.ClientSize.Height);
             using (Graphics gr = Graphics.FromImage(bm))
             {
                 gr.Clear(Color.White);
@@ -1218,8 +1230,7 @@ namespace vcs_Draw9_Example7_vcsh
 
                 // Draw the top-level carpet.
                 const float margin = 10;
-                RectangleF rect = new RectangleF(
-                    margin, margin,
+                RectangleF rect = new RectangleF(margin, margin,
                     pictureBox_sierpinski3.ClientSize.Width - 2 * margin,
                     pictureBox_sierpinski3.ClientSize.Height - 2 * margin);
                 DrawRectangle(gr, Level, rect);
@@ -1271,9 +1282,7 @@ namespace vcs_Draw9_Example7_vcsh
         {
             int Level = (int)numericUpDown1.Value;
 
-            Bitmap bm = new Bitmap(
-                pictureBox_sierpinski2.ClientSize.Width,
-                pictureBox_sierpinski2.ClientSize.Height);
+            Bitmap bm = new Bitmap(pictureBox_sierpinski2.ClientSize.Width, pictureBox_sierpinski2.ClientSize.Height);
             using (Graphics gr = Graphics.FromImage(bm))
             {
                 gr.Clear(Color.White);
@@ -1281,15 +1290,9 @@ namespace vcs_Draw9_Example7_vcsh
 
                 // Draw the top-level triangle.
                 const float margin = 10;
-                PointF top_point = new PointF(
-                    pictureBox_sierpinski2.ClientSize.Width / 2f,
-                    margin);
-                PointF left_point = new PointF(
-                    margin,
-                    pictureBox_sierpinski2.ClientSize.Height - margin);
-                PointF right_point = new PointF(
-                    pictureBox_sierpinski2.ClientRectangle.Right - margin,
-                    pictureBox_sierpinski2.ClientRectangle.Bottom - margin);
+                PointF top_point = new PointF(pictureBox_sierpinski2.ClientSize.Width / 2f, margin);
+                PointF left_point = new PointF(margin, pictureBox_sierpinski2.ClientSize.Height - margin);
+                PointF right_point = new PointF(pictureBox_sierpinski2.ClientRectangle.Right - margin, pictureBox_sierpinski2.ClientRectangle.Bottom - margin);
                 DrawTriangle(gr, Level, top_point, left_point, right_point);
             }
 
@@ -1301,8 +1304,7 @@ namespace vcs_Draw9_Example7_vcsh
         }
 
         // Draw a triangle between the points.
-        private void DrawTriangle(Graphics gr, int level,
-            PointF top_point, PointF left_point, PointF right_point)
+        private void DrawTriangle(Graphics gr, int level, PointF top_point, PointF left_point, PointF right_point)
         {
             // See if we should stop.
             if (level == 0)
@@ -1317,15 +1319,9 @@ namespace vcs_Draw9_Example7_vcsh
             else
             {
                 // Find the edge midpoints.
-                PointF left_mid = new PointF(
-                    (top_point.X + left_point.X) / 2f,
-                    (top_point.Y + left_point.Y) / 2f);
-                PointF right_mid = new PointF(
-                    (top_point.X + right_point.X) / 2f,
-                    (top_point.Y + right_point.Y) / 2f);
-                PointF bottom_mid = new PointF(
-                    (left_point.X + right_point.X) / 2f,
-                    (left_point.Y + right_point.Y) / 2f);
+                PointF left_mid = new PointF((top_point.X + left_point.X) / 2f, (top_point.Y + left_point.Y) / 2f);
+                PointF right_mid = new PointF((top_point.X + right_point.X) / 2f, (top_point.Y + right_point.Y) / 2f);
+                PointF bottom_mid = new PointF((left_point.X + right_point.X) / 2f, (left_point.Y + right_point.Y) / 2f);
 
                 // Recursively draw smaller triangles.
                 DrawTriangle(gr, level - 1, top_point, left_mid, right_mid);
@@ -1422,7 +1418,6 @@ namespace vcs_Draw9_Example7_vcsh
             }
             richTextBox1.Text += "\n";
 
-
             richTextBox1.Text += "x array\n";
             for (i = 0; i < N; i++)
             {
@@ -1436,7 +1431,6 @@ namespace vcs_Draw9_Example7_vcsh
                 richTextBox1.Text += y[i].ToString() + "\n";
             }
             richTextBox1.Text += "\n";
-
 
             Point pointa;
             Point pointb;
@@ -1517,9 +1511,13 @@ namespace vcs_Draw9_Example7_vcsh
             {
                 gr.SmoothingMode = SmoothingMode.AntiAlias;
                 if (rb1.Checked == true)
+                {
                     gr.Clear(Color.LightGreen);
+                }
                 else
+                {
                     gr.Clear(Color.Black);
+                }
 
                 // Create the three central tangent circles.
                 float radius = width * 0.225f;
@@ -1568,10 +1566,12 @@ namespace vcs_Draw9_Example7_vcsh
                     {
                         circle0.Draw(gr, the_brush);
                     }
+
                     using (Brush the_brush = new SolidBrush(RandomColor()))
                     {
                         circle1.Draw(gr, the_brush);
                     }
+
                     using (Brush the_brush = new SolidBrush(RandomColor()))
                     {
                         circle2.Draw(gr, the_brush);
@@ -1659,14 +1659,14 @@ namespace vcs_Draw9_Example7_vcsh
                 {
                     foreach (int s2 in new int[] { -1, 1 })
                     {
-                        Circle new_circle = FindApollonianCircle(
-                            given_circles[0], given_circles[1], given_circles[2],
-                            s0, s1, s2);
-                        if (new_circle != null) solution_circles.Add(new_circle);
+                        Circle new_circle = FindApollonianCircle(given_circles[0], given_circles[1], given_circles[2], s0, s1, s2);
+                        if (new_circle != null)
+                        {
+                            solution_circles.Add(new_circle);
+                        }
                     }
                 }
             }
-
             // Return the results.
             return solution_circles.ToArray();
         }
@@ -1681,8 +1681,7 @@ namespace vcs_Draw9_Example7_vcsh
         {
             // Make sure c2 doesn't have the same X or Y coordinate as the others.
             const float tiny = 0.0001f;
-            if ((Math.Abs(c2.Center.X - c1.Center.X) < tiny) ||
-                (Math.Abs(c2.Center.Y - c1.Center.Y) < tiny))
+            if ((Math.Abs(c2.Center.X - c1.Center.X) < tiny) || (Math.Abs(c2.Center.Y - c1.Center.Y) < tiny))
             {
                 Circle temp_circle = c2;
                 c2 = c3;
@@ -1691,8 +1690,7 @@ namespace vcs_Draw9_Example7_vcsh
                 s2 = s3;
                 s3 = temp_s;
             }
-            if ((Math.Abs(c2.Center.X - c3.Center.X) < tiny) ||
-                (Math.Abs(c2.Center.Y - c3.Center.Y) < tiny))
+            if ((Math.Abs(c2.Center.X - c3.Center.X) < tiny) || (Math.Abs(c2.Center.Y - c3.Center.Y) < tiny))
             {
                 Circle temp_circle = c2;
                 c2 = c1;
@@ -1881,7 +1879,10 @@ namespace vcs_Draw9_Example7_vcsh
             for (long i = 0; i < num_points; i++)
             {
                 // Find the next prime.
-                while (!IsPrime(prime)) prime += 2;
+                while (!IsPrime(prime))
+                {
+                    prime += 2;
+                }
 
                 // Use this prime.
                 switch (prime % 5)
@@ -2001,7 +2002,9 @@ namespace vcs_Draw9_Example7_vcsh
                 points[i] = current_point;
                 int count = 0;
                 if (hits.ContainsKey(current_point))
+                {
                     count = hits[current_point];
+                }
                 hits[current_point] = count + 1;
 
                 // Move to the next possible prime.
@@ -2134,8 +2137,7 @@ namespace vcs_Draw9_Example7_vcsh
         }
         //for sierpinski1 SP
 
-
-
+        //------------------------------------------------------------  # 60個
 
         int NumBuildings = 5;
         private Rectangle[] Buildings = null;
@@ -2163,11 +2165,17 @@ namespace vcs_Draw9_Example7_vcsh
                 const int block_size = 10;
                 int width = rand.Next(min_wid, max_wid + 1);
                 width = block_size * (int)(width / block_size);
-                if (width < block_size) width = block_size;
+                if (width < block_size)
+                {
+                    width = block_size;
+                }
 
                 int height = rand.Next(min_hgt, max_hgt + 1);
                 height = block_size * (int)(height / block_size);
-                if (height < block_size) height = block_size;
+                if (height < block_size)
+                {
+                    height = block_size;
+                }
 
                 int x = rand.Next(xmin, xmax - width + 1);
                 int y = basey - height;
@@ -2185,7 +2193,10 @@ namespace vcs_Draw9_Example7_vcsh
         // Draw the buildings and skyline.
         private void pictureBox_skyline_Paint(object sender, PaintEventArgs e)
         {
-            if (Buildings == null) return;
+            if (Buildings == null)
+            {
+                return;
+            }
             e.Graphics.Clear(pictureBox_skyline.BackColor);
 
             // Draw the skyline.
@@ -2213,12 +2224,8 @@ namespace vcs_Draw9_Example7_vcsh
             List<BuildingEvent> building_events = new List<BuildingEvent>();
             for (int i = 0; i < num_buildings; i++)
             {
-                building_events.Add(new BuildingEvent(
-                    buildings[i].X,
-                    BuildingEvent.EventTypes.Start, i));
-                building_events.Add(new BuildingEvent(
-                    buildings[i].Right,
-                    BuildingEvent.EventTypes.End, i));
+                building_events.Add(new BuildingEvent(buildings[i].X, BuildingEvent.EventTypes.Start, i));
+                building_events.Add(new BuildingEvent(buildings[i].Right, BuildingEvent.EventTypes.End, i));
             }
 
             // Sort the events.
@@ -2275,14 +2282,19 @@ namespace vcs_Draw9_Example7_vcsh
                         results.Add(new Point(event_x, ymin));
 
                         // Find the new tallest active building.
-                        if (active_buildings.Count == 0) ymin = ground;
+                        if (active_buildings.Count == 0)
+                        {
+                            ymin = ground;
+                        }
                         else
                         {
                             ymin = active_buildings[0].Top;
                             for (int j = 1; j < active_buildings.Count; j++)
                             {
                                 if (ymin > active_buildings[j].Top)
+                                {
                                     ymin = active_buildings[j].Top;
+                                }
                             }
                         }
 
@@ -2302,9 +2314,10 @@ namespace vcs_Draw9_Example7_vcsh
         {
             NumBuildings++;
             if (NumBuildings > 15)
+            {
                 NumBuildings = 5;
+            }
             drawBuildings();
-
         }
 
         //------------------------------------------------------------  # 60個
@@ -2358,8 +2371,7 @@ namespace vcs_Draw9_Example7_vcsh
                 wy = new_y;
 
                 WorldToDevice(wx, wy, out pix_x, out pix_y);
-                if (pix_x >= 0 && pix_x < bm.Width &&
-                    pix_y >= 0 && pix_y < bm.Height)
+                if (pix_x >= 0 && pix_x < bm.Width && pix_y >= 0 && pix_y < bm.Height)
                 {
                     bm.SetPixel(pix_x, pix_y, Color.Red);
                 }
@@ -2447,8 +2459,7 @@ namespace vcs_Draw9_Example7_vcsh
                 wy = new_y;
 
                 WorldToDevice(wx, wy, out pix_x, out pix_y);
-                if (pix_x >= 0 && pix_x < bm.Width &&
-                    pix_y >= 0 && pix_y < bm.Height)
+                if (pix_x >= 0 && pix_x < bm.Width && pix_y >= 0 && pix_y < bm.Height)
                 {
                     Color color = bm.GetPixel(pix_x, pix_y);
                     int new_r = color.R;
@@ -2466,7 +2477,6 @@ namespace vcs_Draw9_Example7_vcsh
                             new_b = new_b + (255 - new_b) / 2;
                             break;
                     }
-
                     color = Color.FromArgb(255, new_r, new_g, new_b);
                     bm.SetPixel(pix_x, pix_y, color);
                 }
@@ -2474,6 +2484,7 @@ namespace vcs_Draw9_Example7_vcsh
         }
         //畫 pickover_popcorn SP
 
+        //------------------------------------------------------------  # 60個
 
         private void timer_battery1_Tick(object sender, EventArgs e)
         {
@@ -2485,7 +2496,9 @@ namespace vcs_Draw9_Example7_vcsh
         {
             percent += 0.13f;
             if (percent > 1)
+            {
                 percent -= 1;
+            }
             richTextBox1.Text += percent.ToString() + " ";
 
             lblStatus.Text = percent.ToString("P0");
@@ -2522,11 +2535,7 @@ namespace vcs_Draw9_Example7_vcsh
                 false);
         }
 
-        private Bitmap DrawBattery(
-            float percent, int wid, int hgt,
-            Color bg_color, Color outline_color,
-            Color charged_color, Color uncharged_color,
-            bool striped)
+        private Bitmap DrawBattery(float percent, int wid, int hgt, Color bg_color, Color outline_color, Color charged_color, Color uncharged_color, bool striped)
         {
             Bitmap bm = new Bitmap(wid, hgt);
             using (Graphics gr = Graphics.FromImage(bm))
@@ -2543,29 +2552,21 @@ namespace vcs_Draw9_Example7_vcsh
                 }
 
                 // Draw the battery.
-                DrawVerticalBattery(gr, percent, wid, hgt, bg_color,
-                    outline_color, charged_color, uncharged_color,
-                    striped);
+                DrawVerticalBattery(gr, percent, wid, hgt, bg_color, outline_color, charged_color, uncharged_color, striped);
             }
             return bm;
         }
 
         // Draw a vertically oriented battery with
         // the indicated percentage filled in.
-        private void DrawVerticalBattery(Graphics gr,
-            float percent, int wid, int hgt,
-            Color bg_color, Color outline_color,
-            Color charged_color, Color uncharged_color,
-            bool striped)
+        private void DrawVerticalBattery(Graphics gr, float percent, int wid, int hgt, Color bg_color, Color outline_color, Color charged_color, Color uncharged_color, bool striped)
         {
             gr.Clear(bg_color);
             gr.SmoothingMode = SmoothingMode.AntiAlias;
 
             // Make a rectangle for the main body.
             float thickness = hgt / 20f;
-            RectangleF body_rect = new RectangleF(
-                thickness * 0.5f, thickness * 1.5f,
-                wid - thickness, hgt - thickness * 2f);
+            RectangleF body_rect = new RectangleF(thickness * 0.5f, thickness * 1.5f, wid - thickness, hgt - thickness * 2f);
 
             using (Pen pen = new Pen(outline_color, thickness))
             {
@@ -2577,9 +2578,7 @@ namespace vcs_Draw9_Example7_vcsh
 
                 // Fill the charged area.
                 float charged_hgt = body_rect.Height * percent;
-                RectangleF charged_rect = new RectangleF(
-                    body_rect.Left, body_rect.Bottom - charged_hgt,
-                    body_rect.Width, charged_hgt);
+                RectangleF charged_rect = new RectangleF(body_rect.Left, body_rect.Bottom - charged_hgt, body_rect.Width, charged_hgt);
                 using (Brush brush = new SolidBrush(charged_color))
                 {
                     gr.FillRectangle(brush, charged_rect);
@@ -2587,11 +2586,13 @@ namespace vcs_Draw9_Example7_vcsh
 
                 // Optionally stripe multiples of 25%
                 if (striped)
+                {
                     for (int i = 1; i <= 3; i++)
                     {
                         float y = body_rect.Bottom - i * 0.25f * body_rect.Height;
                         gr.DrawLine(pen, body_rect.Left, y, body_rect.Right, y);
                     }
+                }
 
                 // Draw the main body.
                 gr.DrawPath(pen, MakeRoundedRect(body_rect, thickness, thickness, true, true, true, true));
@@ -2680,7 +2681,10 @@ namespace vcs_Draw9_Example7_vcsh
                 path.AddArc(corner, 90, 90);
                 point1 = new PointF(rect.X, rect.Bottom - yradius);
             }
-            else point1 = new PointF(rect.X, rect.Bottom);
+            else
+            {
+                point1 = new PointF(rect.X, rect.Bottom);
+            }
 
             // Left side.
             if (round_ul)
@@ -2734,12 +2738,10 @@ namespace vcs_Draw9_Example7_vcsh
                 e.Graphics.FillPath(Brushes.LightGreen, path);
                 e.Graphics.DrawPath(pen, path);
             }
-
             e.Graphics.DrawString("畫矩形圓邊", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(55, 22));
         }
     }
 }
-
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個

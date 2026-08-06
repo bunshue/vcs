@@ -104,6 +104,7 @@ namespace vcs_Draw9_Example9_vcsh
             //------------------------------------------------------------  # 60個
 
             draw_circle_connection();       //pictureBox_circle
+
             draw_some_random_circles();     //pictureBox_floodfill
 
             draw_triangle_puzzle_solution();

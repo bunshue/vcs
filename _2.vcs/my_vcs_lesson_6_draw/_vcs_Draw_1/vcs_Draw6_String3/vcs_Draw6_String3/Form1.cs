@@ -322,15 +322,21 @@ namespace vcs_Draw6_String3
         {
             Button btn = sender as Button;
             if (btn.Name == "button1")
+            {
                 justification = TextJustification.Left;
+            }
             else if (btn.Name == "button2")
+            {
                 justification = TextJustification.Center;
+            }
             else if (btn.Name == "button3")
+            {
                 justification = TextJustification.Right;
+            }
             else if (btn.Name == "button4")
+            {
                 justification = TextJustification.Full;
-
-            // Redraw the text.
+            }
             pictureBox3.Refresh();
         }
     }
@@ -342,6 +348,4 @@ namespace vcs_Draw6_String3
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-
 

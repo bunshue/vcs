@@ -196,7 +196,6 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(180, 60);
             this.button10.TabIndex = 4;
-            this.button10.Text = "讀取";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -207,7 +206,6 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(180, 60);
             this.button11.TabIndex = 2;
-            this.button11.Text = "增加節點";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -218,7 +216,6 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(180, 60);
             this.button12.TabIndex = 3;
-            this.button12.Text = "讀取";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -263,7 +260,6 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(180, 60);
             this.button20.TabIndex = 4;
-            this.button20.Text = "讀取資料";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
@@ -274,7 +270,6 @@
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(180, 60);
             this.button21.TabIndex = 2;
-            this.button21.Text = "寫入資料";
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
@@ -464,7 +459,6 @@
             this.button50.Name = "button50";
             this.button50.Size = new System.Drawing.Size(180, 60);
             this.button50.TabIndex = 4;
-            this.button50.Text = "建立XML檔案";
             this.button50.UseVisualStyleBackColor = true;
             this.button50.Click += new System.EventHandler(this.button50_Click);
             // 

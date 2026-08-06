@@ -573,5 +573,3 @@ namespace vcs_Draw6_String4
 
 //lb_moving1.Font.Size = 10F;
 //this.comboBox_drive.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-
-

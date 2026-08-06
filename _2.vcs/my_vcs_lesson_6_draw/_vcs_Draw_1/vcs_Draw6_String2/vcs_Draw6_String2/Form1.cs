@@ -37,7 +37,9 @@ namespace vcs_Draw6_String2
         private float[] CharacterWidths;
         private float TotalCharacterWidth;
 
-        #region rotate_brush
+        //------------------------------------------------------------  # 60個
+
+        //#region rotate_brush
         // The polygon's points.
         private PointF[] PolygonPoints;
 
@@ -49,7 +51,7 @@ namespace vcs_Draw6_String2
 
         // Offset when assigning colors.
         private int ColorOffset = 0;
-        #endregion
+        //#endregion
 
         public Form1()
         {
@@ -102,7 +104,9 @@ namespace vcs_Draw6_String2
             pictureBox_stretching.Refresh();
             TicksToGo = TotalTicks;
 
-            #region rotate_brush
+            //------------------------------------------------------------  # 60個
+
+            //#region rotate_brush
             // Make points that define a polygon.
             // Double buffer to prevent flicker.
             this.DoubleBuffered = true;
@@ -120,7 +124,10 @@ namespace vcs_Draw6_String2
             // Make the brush's path.
             Path = new GraphicsPath();
             Path.AddPolygon(DoublePoints(PolygonPoints));
-            #endregion
+            //#endregion
+
+            //------------------------------------------------------------  # 60個
+
             ShowSample1();
             ShowSample2();
         }
@@ -209,6 +216,8 @@ namespace vcs_Draw6_String2
             pictureBox6.BackColor = Color.LightGreen;
             pictureBox7.BackColor = Color.LightBlue;
             //三個寫字範例 SP
+
+            //------------------------------------------------------------  # 60個
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -423,8 +432,7 @@ namespace vcs_Draw6_String2
                 string_format.SetMeasurableCharacterRanges(range_list.ToArray());
 
                 // Measure the string's character ranges.
-                Region[] regions = gr.MeasureCharacterRanges(
-                    text, font, rect, string_format);
+                Region[] regions = gr.MeasureCharacterRanges(text, font, rect, string_format);
 
                 // Draw the character bounds.
                 for (int i = 0; i < text.Length; i++)
@@ -637,7 +645,9 @@ namespace vcs_Draw6_String2
             }
         }
 
-        #region rotate_brush
+        //------------------------------------------------------------  # 60個
+
+        //#region rotate_brush
         // Return PointFs to define a polygon.
         private PointF[] MakePolygon(int num_points, Rectangle bounds)
         {
@@ -729,10 +739,11 @@ namespace vcs_Draw6_String2
         {
             pictureBox_rotate_brush.Refresh();
         }
-        #endregion
+        //#endregion
 
+        //------------------------------------------------------------  # 60個
 
-        #region 自動字型大小
+        //#region 自動字型大小
         private void txtSample_TextChanged(object sender, EventArgs e)
         {
             ShowSample1();
@@ -828,10 +839,11 @@ namespace vcs_Draw6_String2
                 return min_size;
             }
         }
-        #endregion
+        //#endregion
 
+        //------------------------------------------------------------  # 60個
 
-        #region 字串任意顏色
+        //#region 字串任意顏色
         // Return a random color.
         private Random rand = new Random();
         private Color[] colors =
@@ -875,19 +887,14 @@ namespace vcs_Draw6_String2
                     string_format.SetMeasurableCharacterRanges(ranges);
 
                     // Measure the text to see where each character range goes.
-                    Region[] regions =
-                        e.Graphics.MeasureCharacterRanges(
-                            txt, the_font, this.pictureBox_random_color.ClientRectangle,
-                            string_format);
+                    Region[] regions = e.Graphics.MeasureCharacterRanges(txt, the_font, this.pictureBox_random_color.ClientRectangle, string_format);
 
                     // Draw the characters one at a time.
                     for (int i = 0; i < txt.Length; i++)
                     {
                         // See where this character would be drawn.
                         RectangleF rectf = regions[i].GetBounds(e.Graphics);
-                        Rectangle rect = new Rectangle(
-                            (int)rectf.X, (int)rectf.Y,
-                            (int)rectf.Width, (int)rectf.Height);
+                        Rectangle rect = new Rectangle((int)rectf.X, (int)rectf.Y, (int)rectf.Width, (int)rectf.Height);
 
                         // Make a brush with a random color.
                         using (Brush the_brush = new SolidBrush(RandomColor()))
@@ -900,10 +907,11 @@ namespace vcs_Draw6_String2
                 }
             }
         }
-        #endregion
+        //#endregion
 
+        //------------------------------------------------------------  # 60個
 
-        #region 用圖片寫文字
+        //#region 用圖片寫文字
         private void pictureBox_image_string_Paint(object sender, PaintEventArgs e)
         {
             // Make text filled with a single big image.
@@ -928,9 +936,11 @@ namespace vcs_Draw6_String2
                 }
             }
         }
-        #endregion
+        //#endregion
 
-        #region 文字內填滿文字
+        //------------------------------------------------------------  # 60個
+
+        //#region 文字內填滿文字
         private void pictureBox_filled_text_Paint(object sender, PaintEventArgs e)
         {
             pictureBox_filled_text.BackColor = Color.Pink;
@@ -989,8 +999,9 @@ namespace vcs_Draw6_String2
             }
 
         }
-        #endregion
+        //#endregion
 
+        //------------------------------------------------------------  # 60個
 
         //彩色文字 ST
         private void pictureBox_rainbow_text_Paint(object sender, PaintEventArgs e)
@@ -1059,6 +1070,8 @@ namespace vcs_Draw6_String2
         }
         //彩色文字 SP
 
+        //------------------------------------------------------------  # 60個
+
         //把字體旋轉90度 ST
         private void pictureBox4_Paint(object sender, PaintEventArgs e)
         {
@@ -1119,8 +1132,9 @@ namespace vcs_Draw6_String2
             // Restore the graphics state.
             gr.Restore(state);
         }
-
         //把字體旋轉90度 SP
+
+        //------------------------------------------------------------  # 60個
 
         //三個寫字範例 ST
 
@@ -1339,7 +1353,14 @@ namespace vcs_Draw6_String2
             bm_top.Dispose();
             bm_bottom.Dispose();
         }
-
         //三個寫字範例 SP
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+

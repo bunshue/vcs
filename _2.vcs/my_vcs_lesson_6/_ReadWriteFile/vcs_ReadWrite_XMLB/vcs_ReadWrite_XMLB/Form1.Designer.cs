@@ -61,9 +61,10 @@
             // 
             // button1
             // 
+            this.button1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button1.Location = new System.Drawing.Point(486, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(100, 40);
             this.button1.TabIndex = 2;
             this.button1.Text = "info";
             this.button1.UseVisualStyleBackColor = true;
@@ -71,9 +72,10 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(486, 150);
+            this.button2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button2.Location = new System.Drawing.Point(486, 145);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(100, 40);
             this.button2.TabIndex = 3;
             this.button2.Text = "clear";
             this.button2.UseVisualStyleBackColor = true;
@@ -81,9 +83,10 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(486, 62);
+            this.button3.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button3.Location = new System.Drawing.Point(486, 58);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.Size = new System.Drawing.Size(100, 40);
             this.button3.TabIndex = 4;
             this.button3.Text = "添加記錄";
             this.button3.UseVisualStyleBackColor = true;
@@ -91,9 +94,10 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(486, 108);
+            this.button4.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button4.Location = new System.Drawing.Point(486, 102);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.Size = new System.Drawing.Size(100, 40);
             this.button4.TabIndex = 5;
             this.button4.Text = "獲取當前值";
             this.button4.UseVisualStyleBackColor = true;
@@ -101,9 +105,10 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(581, 12);
+            this.button5.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button5.Location = new System.Drawing.Point(590, 12);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.Size = new System.Drawing.Size(100, 40);
             this.button5.TabIndex = 6;
             this.button5.Text = "定位";
             this.button5.UseVisualStyleBackColor = true;
@@ -111,9 +116,10 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(581, 62);
+            this.button6.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button6.Location = new System.Drawing.Point(590, 58);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.Size = new System.Drawing.Size(100, 40);
             this.button6.TabIndex = 7;
             this.button6.Text = "下遍歷";
             this.button6.UseVisualStyleBackColor = true;
@@ -121,9 +127,10 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(677, 12);
+            this.button7.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button7.Location = new System.Drawing.Point(695, 12);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(75, 23);
+            this.button7.Size = new System.Drawing.Size(100, 40);
             this.button7.TabIndex = 8;
             this.button7.Text = "one data";
             this.button7.UseVisualStyleBackColor = true;
@@ -131,9 +138,10 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(581, 108);
+            this.button8.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button8.Location = new System.Drawing.Point(590, 102);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(75, 23);
+            this.button8.Size = new System.Drawing.Size(100, 40);
             this.button8.TabIndex = 9;
             this.button8.Text = "上遍歷";
             this.button8.UseVisualStyleBackColor = true;
@@ -141,9 +149,10 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(677, 62);
+            this.button9.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button9.Location = new System.Drawing.Point(695, 58);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(75, 23);
+            this.button9.Size = new System.Drawing.Size(100, 40);
             this.button9.TabIndex = 10;
             this.button9.Text = "all data";
             this.button9.UseVisualStyleBackColor = true;

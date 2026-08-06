@@ -32,8 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.bt_exit = new System.Windows.Forms.Button();
-            this.bt_save = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_hit_curve = new System.Windows.Forms.PictureBox();
@@ -98,7 +96,7 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(706, 479);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 477);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(548, 140);
             this.richTextBox1.TabIndex = 16;
@@ -119,32 +117,10 @@
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
             // 
-            // bt_exit
-            // 
-            this.bt_exit.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_exit.Location = new System.Drawing.Point(994, 428);
-            this.bt_exit.Name = "bt_exit";
-            this.bt_exit.Size = new System.Drawing.Size(100, 40);
-            this.bt_exit.TabIndex = 57;
-            this.bt_exit.Text = "Exit";
-            this.bt_exit.UseVisualStyleBackColor = true;
-            this.bt_exit.Click += new System.EventHandler(this.bt_exit_Click);
-            // 
-            // bt_save
-            // 
-            this.bt_save.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_save.Location = new System.Drawing.Point(875, 428);
-            this.bt_save.Name = "bt_save";
-            this.bt_save.Size = new System.Drawing.Size(100, 40);
-            this.bt_save.TabIndex = 56;
-            this.bt_save.Text = "Save";
-            this.bt_save.UseVisualStyleBackColor = true;
-            this.bt_save.Click += new System.EventHandler(this.bt_save_Click);
-            // 
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(1153, 579);
+            this.bt_clear.Location = new System.Drawing.Point(253, 524);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(63, 40);
             this.bt_clear.TabIndex = 55;
@@ -159,7 +135,7 @@
             // pictureBox_hit_curve
             // 
             this.pictureBox_hit_curve.BackColor = System.Drawing.Color.LightGreen;
-            this.pictureBox_hit_curve.Location = new System.Drawing.Point(431, 438);
+            this.pictureBox_hit_curve.Location = new System.Drawing.Point(721, 33);
             this.pictureBox_hit_curve.Name = "pictureBox_hit_curve";
             this.pictureBox_hit_curve.Size = new System.Drawing.Size(254, 238);
             this.pictureBox_hit_curve.TabIndex = 75;
@@ -632,7 +608,7 @@
             // label41
             // 
             this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(704, 438);
+            this.label41.Location = new System.Drawing.Point(729, 9);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(113, 12);
             this.label41.TabIndex = 78;
@@ -647,8 +623,6 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pictureBox_hit_curve);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.bt_exit);
-            this.Controls.Add(this.bt_save);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
             this.Name = "Form1";
@@ -670,8 +644,6 @@
 
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button bt_exit;
-        private System.Windows.Forms.Button bt_save;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.PictureBox pictureBox_hit_curve;

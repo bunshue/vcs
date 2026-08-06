@@ -26,6 +26,8 @@ namespace vcs_Draw9_Example5b_vcsh
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             // Redraw on resize.
             this.ResizeRedraw = true;
         }
@@ -130,6 +132,8 @@ namespace vcs_Draw9_Example5b_vcsh
         {
             Environment.Exit(0);
         }
+
+        //------------------------------------------------------------  # 60個
 
         //#region epitrochoid長短輻圓外旋輪線；外旋輪線
 
@@ -323,6 +327,7 @@ namespace vcs_Draw9_Example5b_vcsh
 
         //#endregion epitrochoid長短輻圓外旋輪線；外旋輪線
 
+        //------------------------------------------------------------  # 60個
 
         // The angle from one circle's center to the other.
         private float theta = 0;
@@ -692,7 +697,16 @@ namespace vcs_Draw9_Example5b_vcsh
         }
 
         // 佛像碎形 SP
-
-
     }
 }
+
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+

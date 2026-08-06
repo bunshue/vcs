@@ -1,4 +1,16 @@
 ﻿
+rtb
+
+richTextBox1.LoadFile("pipa.txt", RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
+
+
+//------------------------------------------------------------  # 60個
+
+編碼的CodePage
+http://www.lingoes.net/en/translator/codepage.htm
+
+//------------------------------------------------------------  # 60個
+
 
 Slate blue (石板藍) 是一種將涼爽的藍色與沉穩的灰色相結合的中等暗色調藍灰色。它的常見十六進制代碼（HEX）為 #557C99 或 #5B7C99，給人一種平靜、柔和且精緻的感覺。
 
@@ -3709,11 +3721,6 @@ https://debbiedbaby.pixnet.net/blog/post/426657881-%E3%80%90c%23%E3%80%91-emgucv
 
 如何自訂右鍵工具選單
 http://davidhsu666.com/archives/context_menu/
-
-//------------------------------------------------------------  # 60個
-
-codepage
-http://www.lingoes.net/en/translator/codepage.htm
 
 //------------------------------------------------------------  # 60個
 
