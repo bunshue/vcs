@@ -1,6 +1,34 @@
 
+//------------------------------------------------------------  # 60個
+
+你遇到的錯誤是因為 google.colab 這個模組只存在於 Google Colab 的雲端環境，
+在本機的 Python (例如你用的 IDLE) 裡並沒有這個套件，所以會出現 ModuleNotFoundError。
+
+為什麼會這樣？
+Google Colab 是 Google 提供的雲端 Jupyter Notebook 平台，
+裡面內建了 google.colab 模組，讓你可以掛載 Google Drive (drive.mount('/content/drive'))。
+
+在本機 Python 環境下，這個模組不存在，因此不能直接 from google.colab import drive。
+
+如果你真的要用 google.colab：
+那就必須在 Google Colab 平台上執行程式，而不是在本機的 IDLE。
+
+
+如果你只是要在本機存取 Google Drive 檔案：
+安裝 PyDrive 或 gdown 套件。
+pip install pydrive gdown
+使用 PyDrive 進行 OAuth 驗證後存取檔案，或用 gdown 直接下載 Google Drive 上的檔案。
 
 //------------------------------------------------------------  # 60個
+
+Matplotlib 內建的色系
+viridis	黃綠藍紫色系
+magna	橘紅紫色系
+Reds	紅色系
+Blues	藍色系
+Greens	綠色矽
+Greys	灰色系
+rainbow	彩色
 
 
 //------------------------------------------------------------  # 60個

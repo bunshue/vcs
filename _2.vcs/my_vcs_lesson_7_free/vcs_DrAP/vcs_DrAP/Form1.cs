@@ -1380,6 +1380,19 @@ namespace vcs_DrAP
 
         public void ProcessFileS(string path)
         {
+            if (cb_option1.Checked == true)
+            {
+                if (fileinfos.Count >= 30)
+                {
+                    if (flag_show_30_message == false)
+                    {
+                        flag_show_30_message = true;
+                        richTextBox1.Text += "滿30結束\n";
+                    }
+                    return;
+                }
+            }
+
             //richTextBox1.Text += "處理File " + path + "\n";
 
             FileInfo fi;
