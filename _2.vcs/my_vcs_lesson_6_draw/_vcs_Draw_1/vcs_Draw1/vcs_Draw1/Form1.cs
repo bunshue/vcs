@@ -1299,52 +1299,12 @@ namespace vcs_Draw1
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //MeasureString
-
-            Bitmap bitmap1 = new Bitmap(640, 480);
-
-            Graphics g = Graphics.FromImage(bitmap1);//用指定的Bitmap實例化Graphics
-
-            Font f = new Font("標楷體", 30);
-
-            pictureBox1.Image = bitmap1;
-
-            string text = "標楷體";
-            SizeF size = g.MeasureString(text, f);  // 對文字進行測量
-            g.DrawString(text, f, Brushes.Blue, 100, 100);
-            g.DrawRectangle(Pens.Red, 100, 100, size.Width, size.Height);
-
-            //------------------------------------------------------------  # 60個
-
-            //表單底部畫字 ST
-            // Transform. 縮放+旋轉+平移
-            g.ScaleTransform(1.5f, 1.5f, MatrixOrder.Append);
-            g.RotateTransform(25, MatrixOrder.Append);
-            g.TranslateTransform(80, 30, MatrixOrder.Append);
-
-            int x_st = 160;
-            int y_st = 0;
-
-            // See how big the text will be when drawn.
-            string the_text = "群曜醫電\n股份有限公司";
-            SizeF text_size = g.MeasureString(the_text, f);
-
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-
-            g.DrawRectangle(new Pen(Color.Red, 3), x_st, y_st, text_size.Width, text_size.Height);
-
-            g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-            g.DrawString(the_text, f, Brushes.Brown, x_st, y_st);
-
-            //表單底部畫字 SP
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button7_Click(object sender, EventArgs e)
         {
-            //透明的畫筆與塗刷
-
             //透明的畫筆與塗刷
 
             //半透明畫筆 alpha = 64
@@ -1365,330 +1325,12 @@ namespace vcs_Draw1
             g.FillEllipse(sb, Cx - 100, Cy - 100, 200, 200); // 繪畫出透明的圓形
 
             pictureBox1.Image = bitmap1;
-
         }
 
         //------------------------------------------------------------  # 60個
 
-        string draw_text = "牡丹亭";
-        int font_size = 40;
-
-        void draw_grid()
-        {
-            Graphics g = this.pictureBox1.CreateGraphics();
-            /*
-            int W = pictureBox1.Width;
-            int H = pictureBox1.Height;
-            for (int i = 0; i <= W; i += 100)
-            {
-                g.DrawLine(Pens.Red, i, 0, i, H);  // 垂直線
-            }
-            for (int j = 0; j <= H; j += 100)
-            {
-                g.DrawLine(Pens.Red, 0, j, W, j);  // 水平線
-            }
-            */
-
-            int x_st = 20;
-            int y_st = 20;
-            int dx = 250;
-            int dy = 140;
-            for (int i = x_st; i <= 820; i += dx)
-            {
-                g.DrawLine(Pens.Red, i, y_st, i, 820);  // 垂直線
-            }
-            for (int j = y_st; j <= 820; j += dy)
-            {
-                g.DrawLine(Pens.Red, x_st, j, 820, j);  // 水平線
-            }
-
-
-            Font f = new Font("標楷體", 20);
-
-            int dd = dy - 32;
-
-            string draw_text = "1投影文字";
-            x_st = 20 + dx * 0;
-            y_st = 20 + dy * 0 + dd;
-            g.DrawString(draw_text, f, new SolidBrush(Color.Black), new PointF(x_st, y_st));
-
-
-            draw_text = "2浮雕效果";
-            x_st = 20 + dx * 0;
-            y_st = 20 + dy * 1 + dd;
-            g.DrawString(draw_text, f, new SolidBrush(Color.Black), new PointF(x_st, y_st));
-
-            draw_text = "3印版效果";
-            x_st = 20 + dx * 0;
-            y_st = 20 + dy * 2 + dd;
-            g.DrawString(draw_text, f, new SolidBrush(Color.Black), new PointF(x_st, y_st));
-
-            draw_text = "4倒影文字";
-            x_st = 20 + dx * 0;
-            y_st = 20 + dy * 3 + dd;
-            g.DrawString(draw_text, f, new SolidBrush(Color.Black), new PointF(x_st, y_st));
-
-            draw_text = "5陰影文字";
-            x_st = 20 + dx * 0;
-            y_st = 20 + dy * 4 + dd;
-            g.DrawString(draw_text, f, new SolidBrush(Color.Black), new PointF(x_st, y_st));
-
-            draw_text = "6字體做陰影效果";
-
-            x_st = 20 + dx * 1;
-            y_st = 20 + dy * 0 + dd;
-            g.DrawString(draw_text, f, new SolidBrush(Color.Black), new PointF(x_st, y_st));
-
-            draw_text = "7傾斜效果";
-            x_st = 20 + dx * 1;
-            y_st = 20 + dy * 1 + dd;
-            g.DrawString(draw_text, f, new SolidBrush(Color.Black), new PointF(x_st, y_st));
-
-            draw_text = "8漸層色文字";
-            x_st = 20 + dx * 1;
-            y_st = 20 + dy * 2 + dd;
-            g.DrawString(draw_text, f, new SolidBrush(Color.Black), new PointF(x_st, y_st));
-
-            draw_text = "9旋轉效果";
-            x_st = 20 + dx * 1;
-            y_st = 20 + dy * 4 + dd;
-            g.DrawString(draw_text, f, new SolidBrush(Color.Black), new PointF(x_st, y_st));
-
-        }
-
-        void do_word_effect1(int x_st, int y_st)
-        {
-            //投影文字
-            Graphics g = this.pictureBox1.CreateGraphics();
-            //設置文本輸出質量
-            g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-            Font f = new Font("標楷體", font_size);
-            Matrix matrix = new Matrix();
-            //投射
-            matrix.Shear(-1.5f, 0.0f);
-            //縮放
-            matrix.Scale(1, 0.5f);
-            //平移
-            matrix.Translate(x_st + 130, y_st + 58);
-            //對繪圖平面實施坐標變換、、
-            g.Transform = matrix;
-            SolidBrush grayBrush = new SolidBrush(Color.Gray);
-            SolidBrush colorBrush = new SolidBrush(Color.BlueViolet);
-            string draw_text = "博客園1";
-            //繪制陰影
-            g.DrawString(draw_text, f, grayBrush, new PointF(x_st, y_st));
-            g.ResetTransform();
-            //繪制前景
-            g.DrawString(draw_text, f, colorBrush, new PointF(x_st, y_st));
-        }
-
-        void do_word_effect2(int x_st, int y_st)
-        {
-            //浮雕效果
-            Brush backBrush = Brushes.Black;
-            Brush foreBrush = Brushes.White;
-            Font f = new Font("標楷體", font_size, FontStyle.Regular);
-            Graphics g = this.pictureBox1.CreateGraphics();
-            string draw_text = "博客園2";
-            g.DrawString(draw_text, f, backBrush, x_st + 1, y_st + 1);
-            g.DrawString(draw_text, f, foreBrush, x_st, y_st);
-        }
-
-        void do_word_effect3(int x_st, int y_st)
-        {
-            //印版效果
-            //印版文字
-            int i = 0;
-            Brush backBrush = Brushes.Black;
-            Brush foreBrush = Brushes.Violet;
-            Font f = new Font("標楷體", font_size, FontStyle.Regular);
-            Graphics g = this.pictureBox1.CreateGraphics();
-            string draw_text = "博客園3";
-            while (i < 20)
-            {
-                g.DrawString(draw_text, f, backBrush, x_st - i, y_st + i);
-                i = i + 1;
-            }
-            g.DrawString(draw_text, f, foreBrush, x_st, y_st);
-        }
-
-        void do_word_effect4(int x_st, int y_st)
-        {
-            //倒影文字
-
-            Brush backBrush = Brushes.Gray;
-            Brush foreBrush = Brushes.Black;
-            Font f = new Font("標楷體", font_size, FontStyle.Regular);
-            Graphics g = this.pictureBox1.CreateGraphics();
-            string draw_text = "博客園4";
-
-            g.TranslateTransform(x_st, y_st);
-
-            int ascent = f.FontFamily.GetCellAscent(f.Style);
-            int spacing = f.FontFamily.GetLineSpacing(f.Style);
-            int lineHeight = System.Convert.ToInt16(f.GetHeight(g));
-            int height = lineHeight * ascent / spacing;
-            GraphicsState state = g.Save();
-            g.ScaleTransform(1, -1.0F);
-            g.DrawString(draw_text, f, backBrush, 0, -height);
-            g.Restore(state);
-            g.DrawString(draw_text, f, foreBrush, 0, -height);
-        }
-
-        void do_word_effect5(int x_st, int y_st)
-        {
-            //陰影文字
-            string draw_text = "博客園5";
-            Brush shadowBrush = Brushes.Gray;
-            Brush foreBrush = Brushes.Black;
-            Font f = new Font("標楷體", font_size, FontStyle.Regular);
-            Graphics g = this.pictureBox1.CreateGraphics();
-
-            g.DrawString(draw_text, f, shadowBrush, x_st + 20, y_st + 20);
-            g.DrawString(draw_text, f, foreBrush, x_st, y_st);
-
-            //有點問題
-        }
-
-        void do_word_effect6(int x_st, int y_st)
-        {
-            //字體做陰影效果 同樣字往右下寫一遍 顏色不同
-
-            string draw_text = "牡丹亭";
-
-            Graphics g = this.pictureBox1.CreateGraphics();
-            int font_size_default = 80;
-            Font f = new Font("標楷體", font_size_default);
-            g.DrawString(draw_text, f, new SolidBrush(Color.Pink), new PointF(x_st, y_st));
-            g.DrawString(draw_text, f, new SolidBrush(Color.Red), new PointF(x_st + 5, y_st + 5));
-        }
-
-        void do_word_effect7(int x_st, int y_st)
-        {
-            //傾斜效果
-            Brush foreBrush = Brushes.Blue;
-            Font f = new Font("標楷體", font_size, FontStyle.Regular);
-            Graphics g = this.pictureBox1.CreateGraphics();
-            string draw_text = "博客園7";
-
-            g.TranslateTransform(x_st, y_st);
-
-            Matrix transform = g.Transform;
-
-            //右倾斜文字
-            //float shearX = -0.230F;
-
-            //左倾斜文字
-            float shearX = 0.550F;
-            float shearY = 0.10F;
-            transform.Shear(shearX, shearY);
-            g.Transform = transform;
-            g.DrawString(draw_text, f, foreBrush, 0, 0);
-        }
-
-        void do_word_effect8(int x_st, int y_st)
-        {
-            //漸層色文字
-            String draw_text = "天階夜色涼如水8";
-            Brush ShadowBrush = Brushes.Gray;
-            Brush ForeBrush = Brushes.Black;
-            Font f = new Font("標楷體", font_size, FontStyle.Regular);
-            Graphics g = this.pictureBox1.CreateGraphics();
-            PointF point = new PointF(x_st, y_st);
-            SizeF size = g.MeasureString(draw_text, f);
-            RectangleF rectangle = new RectangleF(point, size);
-            Brush brush = new LinearGradientBrush(rectangle, Color.Red, Color.Green, LinearGradientMode.Horizontal);
-            g.DrawString(draw_text, f, brush, x_st, y_st);
-
-            g.FillRectangle(brush, x_st, y_st+75, size.Width, size.Height/3);
-            g.DrawRectangle(Pens.Red, x_st, y_st, size.Width, size.Height);
-        }
-
-        void do_word_effect9(int x_st, int y_st)
-        {
-            //旋轉效果顯示文字
-            Graphics g = this.pictureBox1.CreateGraphics();
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-            for (int i = 0; i <= 360; i += 10)
-            {
-                //平移Graphics對象到窗體中心
-                g.TranslateTransform(x_st, y_st);
-                //設置Graphics對象的輸出角度
-                g.RotateTransform(i);
-                //設置文字填充顏色
-                Brush brush = Brushes.DarkViolet;
-                //旋轉顯示文字
-                g.DrawString("Happy New Year", new Font("Lucida Console", 11f), brush, 0, 0);
-                //恢復全局變換矩陣
-                g.ResetTransform();
-            }
-        }
-
         private void button8_Click(object sender, EventArgs e)
         {
-            //製作藝術字
-            /*
-            Bitmap bitmap1 = new Bitmap(830, 830);
-            Graphics g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.Pink);
-            pictureBox1.Image = bitmap1;
-            */
-
-            pictureBox1.Size = new Size(830, 830);
-
-            draw_grid();
-
-            int x_st = 20;
-            int y_st = 20;
-            int dx = 250;
-            int dy = 140;
-
-            richTextBox1.Text += "1投影文字\n";
-            x_st = 20 + dx * 0;
-            y_st = 20 + dy * 0;
-            do_word_effect1(x_st, y_st);
-
-            richTextBox1.Text += "2浮雕效果\n";
-            x_st = 20 + dx * 0;
-            y_st = 20 + dy * 1;
-            do_word_effect2(x_st, y_st);
-
-            richTextBox1.Text += "3印版效果\n";
-            x_st = 20 + dx * 0;
-            y_st = 20 + dy * 2;
-            do_word_effect3(x_st, y_st);
-
-            richTextBox1.Text += "4倒影文字\n";
-            x_st = 20 + dx * 0;
-            y_st = 20 + dy * 3 + 50;
-            do_word_effect4(x_st, y_st);
-
-            richTextBox1.Text += "5陰影文字\n";
-            x_st = 20 + dx * 0;
-            y_st = 20 + dy * 4;
-            do_word_effect5(x_st, y_st);
-
-            richTextBox1.Text += "6字體做陰影效果\n";
-
-            x_st = 20 + dx * 1;
-            y_st = 20 + dy * 0;
-            do_word_effect6(x_st, y_st);
-
-            richTextBox1.Text += "7傾斜效果\n";
-            x_st = 20 + dx * 1;
-            y_st = 20 + dy * 1;
-            do_word_effect7(x_st, y_st);
-
-            richTextBox1.Text += "8漸層色文字\n";
-            x_st = 20 + dx * 1;
-            y_st = 20 + dy * 2;
-            do_word_effect8(x_st, y_st);
-
-            richTextBox1.Text += "9旋轉效果\n";
-            x_st = 20 + dx * 1 + 200;
-            y_st = 20 + dy * 4;
-            do_word_effect9(x_st, y_st);
         }
 
         //------------------------------------------------------------  # 60個
@@ -1698,7 +1340,7 @@ namespace vcs_Draw1
             //畫格線
             bitmap1 = new Bitmap(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height);
             Graphics g = Graphics.FromImage(bitmap1);
-            draw_grid(g);
+            draw_grid2(g);
             pictureBox1.Image = bitmap1;
 
             //------------------------------------------------------------  # 60個
@@ -2223,101 +1865,6 @@ namespace vcs_Draw1
 
         private void button17_Click(object sender, EventArgs e)
         {
-            //StringFormat
-
-            //畫格線
-            bitmap1 = new Bitmap(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height);
-            Graphics g = Graphics.FromImage(bitmap1);
-            draw_grid(g);
-            pictureBox1.Image = bitmap1;
-
-            //------------------------------------------------------------  # 60個
-
-            Font f = new Font("標楷體", 24);
-
-            StringFormat string_format = new StringFormat();
-
-            //橫書
-            //無參數的 預設 橫向列印
-            g.DrawString("預設為橫向書寫, 字在線下", f, Brushes.Green, 200, 100);
-
-            //直書
-            string_format.FormatFlags = StringFormatFlags.DirectionVertical;  // 文字會垂直對齊
-            //string_format.FormatFlags = StringFormatFlags.NoClip;
-            g.DrawString("直向書寫, 字在線右", f, Brushes.Green, 200, 100, string_format);
-
-            //string_format.Trimming = StringTrimming.None;
-            //string_format.FormatFlags = StringFormatFlags.MeasureTrailingSpaces;
-
-            g.FillEllipse(Brushes.Red, 200 - 10, 100 - 10, 20, 20);
-
-            //------------------------------------------------------------  # 60個
-
-            //重設StringFormat
-            string_format = new StringFormat();
-
-            //文字在線位置 + 置中/向左/向右
-
-            int x_st = 100;
-            int y_st = 400;
-            int dx = 200;
-            int dy = 100;
-
-            string_format.LineAlignment = StringAlignment.Far;  // 字在線上
-            string_format.Alignment = StringAlignment.Center;
-            g.DrawString("字在線上", f, Brushes.Black, x_st + dx * 0, y_st + dy * 0, string_format);
-            string_format.Alignment = StringAlignment.Center;
-            g.DrawString("位置置中", f, Brushes.Black, x_st + dx * 0, y_st + dy * 1, string_format);
-            string_format.Alignment = StringAlignment.Far;
-            g.DrawString("向右寫", f, Brushes.Black, x_st + dx * 0, y_st + dy * 2, string_format);
-            string_format.Alignment = StringAlignment.Near;
-            g.DrawString("向右寫", f, Brushes.Black, x_st + dx * 0, y_st + dy * 3, string_format);
-
-            //------------------------------------------------------------  # 60個
-
-            string_format.LineAlignment = StringAlignment.Center;  // 字在線中
-            string_format.Alignment = StringAlignment.Center;
-            g.DrawString("字在線中", f, Brushes.Black, x_st + dx * 1, y_st + dy * 0, string_format);
-            string_format.Alignment = StringAlignment.Center;
-            g.DrawString("位置置中", f, Brushes.Black, x_st + dx * 1, y_st + dy * 1, string_format);
-            string_format.Alignment = StringAlignment.Far;
-            g.DrawString("向右寫", f, Brushes.Black, x_st + dx * 1, y_st + dy * 2, string_format);
-            string_format.Alignment = StringAlignment.Near;
-            g.DrawString("向右寫", f, Brushes.Black, x_st + dx * 1, y_st + dy * 3, string_format);
-
-            //------------------------------------------------------------  # 60個
-
-            string_format.LineAlignment = StringAlignment.Near;  // 字在線下
-            string_format.Alignment = StringAlignment.Center;
-            g.DrawString("字在線下", f, Brushes.Black, x_st + dx * 2, y_st + dy * 0, string_format);
-            string_format.Alignment = StringAlignment.Center;
-            g.DrawString("位置置中", f, Brushes.Black, x_st + dx * 2, y_st + dy * 1, string_format);
-            string_format.Alignment = StringAlignment.Far;
-            g.DrawString("向右寫", f, Brushes.Black, x_st + dx * 2, y_st + dy * 2, string_format);
-            string_format.Alignment = StringAlignment.Near;
-            g.DrawString("向右寫", f, Brushes.Black, x_st + dx * 2, y_st + dy * 3, string_format);
-
-            for (int i = 0; i < 4; i++)
-            {
-                int xx = x_st + dx * 0;
-                int yy = y_st + dy * i;
-                g.FillEllipse(Brushes.Red, xx - 10, yy - 10, 20, 20);
-            }
-
-            for (int i = 0; i < 4; i++)
-            {
-                int xx = x_st + dx * 1;
-                int yy = y_st + dy * i;
-                g.FillEllipse(Brushes.Green, xx - 10, yy - 10, 20, 20);
-
-            }
-
-            for (int i = 0; i < 4; i++)
-            {
-                int xx = x_st + dx * 2;
-                int yy = y_st + dy * i;
-                g.FillEllipse(Brushes.Blue, xx - 10, yy - 10, 20, 20);
-            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -3113,12 +2660,12 @@ namespace vcs_Draw1
             {
                 bitmap1 = new Bitmap(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height);
                 Graphics g = Graphics.FromImage(bitmap1);
-                draw_grid(g);
+                draw_grid2(g);
                 pictureBox1.Image = bitmap1;
             }
         }
 
-        public void draw_grid(Graphics g)
+        public void draw_grid2(Graphics g)
         {
             int i;
             int rows = pictureBox1.ClientSize.Height / 100;
@@ -3270,17 +2817,6 @@ g.DrawImage(bitmap1, Cx, Cy,  W / 2,  H / 2);
 g.DrawImage(bitmap1, Cx, Cy, -W / 2,  H / 2);
 g.DrawImage(bitmap1, Cx, Cy,  W / 2, -H / 2);
 g.DrawImage(bitmap1, Cx, Cy, -W / 2, -H / 2);
-*/
-
-
-/*
-            StringFormat string_format = new StringFormat();
-            string_format.Alignment = StringAlignment.Near;
-            string_format.LineAlignment = StringAlignment.Near;
-            string_format.Trimming = StringTrimming.None;
-            string_format.FormatFlags = StringFormatFlags.MeasureTrailingSpaces;
-
-            g.TextRenderingHint = TextRenderingHint.AntiAlias;
 */
 
 

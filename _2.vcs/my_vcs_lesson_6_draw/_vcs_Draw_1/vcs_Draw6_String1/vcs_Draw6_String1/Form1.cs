@@ -180,15 +180,13 @@ namespace vcs_Draw6_String1
         private void DrawText(Graphics gr, string text, Rectangle rect, StringAlignment alignment)
         {
             gr.DrawRectangle(Pens.Blue, rect);
-            using (StringFormat string_format = new StringFormat())
-            {
-                // Center alignment.
-                string_format.Alignment = alignment;
-                string_format.FormatFlags = StringFormatFlags.LineLimit;
-                string_format.Trimming = StringTrimming.Word;
+            StringFormat string_format = new StringFormat();
+            // Center alignment.
+            string_format.Alignment = alignment;
+            string_format.FormatFlags = StringFormatFlags.LineLimit;
+            string_format.Trimming = StringTrimming.Word;
 
-                gr.DrawString(text, this.Font, Brushes.Black, rect, string_format);
-            }
+            gr.DrawString(text, this.Font, Brushes.Black, rect, string_format);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -202,30 +200,27 @@ namespace vcs_Draw6_String1
             const string quote = "The trouble ain't that there is too many fools, but that the lightning ain't distributed right.";
             const int margin = 20;
             StringFormatFlags[] flags =
-                {
-                    StringFormatFlags.FitBlackBox,
-                    StringFormatFlags.LineLimit,
-                    StringFormatFlags.NoClip,
-                    StringFormatFlags.NoWrap
-                };
+            {
+                StringFormatFlags.FitBlackBox,
+                StringFormatFlags.LineLimit,
+                StringFormatFlags.NoClip,
+                StringFormatFlags.NoWrap
+            };
+
             int height = (this.pictureBox1.ClientSize.Height - (flags.Length + 1) * margin) / flags.Length;
             int width = this.pictureBox1.ClientSize.Width - 2 * margin;
 
-            using (Font font = new Font("Times New Roman", 20))
+            Font font = new Font("Times New Roman", 20);
+            StringFormat string_format = new StringFormat();
+            int y = margin;
+            foreach (StringFormatFlags flag in flags)
             {
-                using (StringFormat string_format = new StringFormat())
-                {
-                    int y = margin;
-                    foreach (StringFormatFlags flag in flags)
-                    {
-                        Rectangle rect = new Rectangle(margin, y, width, height);
-                        g.DrawRectangle(Pens.Black, rect);
-                        string_format.FormatFlags = flag;
-                        g.DrawString(flag.ToString() + "  :  " + quote, font, Brushes.Blue, rect, string_format);
-                        y += height + margin;
-                        richTextBox1.Text += "flag : " + flag.ToString() + "\n";
-                    }
-                }
+                Rectangle rect = new Rectangle(margin, y, width, height);
+                g.DrawRectangle(Pens.Black, rect);
+                string_format.FormatFlags = flag;
+                g.DrawString(flag.ToString() + "  :  " + quote, font, Brushes.Blue, rect, string_format);
+                y += height + margin;
+                richTextBox1.Text += "flag : " + flag.ToString() + "\n";
             }
 
             pictureBox1.Image = bitmap1;
@@ -243,26 +238,21 @@ namespace vcs_Draw6_String1
                 "The trouble ain't that there is too many fools, " +
                 "but that the lightning ain't distributed right.";
             const int margin = 5;
-            StringTrimming[] values =
-                (StringTrimming[])Enum.GetValues(typeof(StringTrimming));
+            StringTrimming[] values = (StringTrimming[])Enum.GetValues(typeof(StringTrimming));
             int height = (this.pictureBox1.ClientSize.Height - (values.Length + 1) * margin) / values.Length;
             int width = this.pictureBox1.ClientSize.Width - 2 * margin;
 
-            using (Font font = new Font("Times New Roman", 16))
+            Font font = new Font("Times New Roman", 16);
+            StringFormat string_format = new StringFormat();
+            int y = margin;
+            foreach (StringTrimming trimmming in values)
             {
-                using (StringFormat string_format = new StringFormat())
-                {
-                    int y = margin;
-                    foreach (StringTrimming trimmming in values)
-                    {
-                        Rectangle rect = new Rectangle(margin, y, width, height);
-                        g.DrawRectangle(Pens.Black, rect);
-                        string_format.Trimming = trimmming;
-                        g.DrawString(trimmming.ToString() + "  :  " + quote, font, Brushes.Blue, rect, string_format);
-                        y += height + margin;
-                        richTextBox1.Text += "trimmming : " + trimmming.ToString() + "\n";
-                    }
-                }
+                Rectangle rect = new Rectangle(margin, y, width, height);
+                g.DrawRectangle(Pens.Black, rect);
+                string_format.Trimming = trimmming;
+                g.DrawString(trimmming.ToString() + "  :  " + quote, font, Brushes.Blue, rect, string_format);
+                y += height + margin;
+                richTextBox1.Text += "trimmming : " + trimmming.ToString() + "\n";
             }
             pictureBox1.Image = bitmap1;
         }
@@ -313,32 +303,25 @@ namespace vcs_Draw6_String1
 
             Bitmap bm = new Bitmap(filename);
 
-            using (Graphics gr = Graphics.FromImage(bm))
+            Graphics gr = Graphics.FromImage(bm);
+            StringFormat string_format = new StringFormat();
+            string_format.Alignment = StringAlignment.Center;
+
+            int dy = (int)(gr.MeasureString("X", this.Font).Height * 1.5);
+            int x = bm.Width / 2;
+            int y = 30;
+
+            for (int opacity = 20; opacity <= 80; opacity += 10)
             {
-                using (StringFormat string_format = new StringFormat())
-                {
-                    string_format.Alignment = StringAlignment.Center;
-
-                    int dy = (int)(gr.MeasureString("X", this.Font).Height * 1.5);
-                    int x = bm.Width / 2;
-                    int y = 30;
-
-                    for (int opacity = 20; opacity <= 80; opacity += 10)
-                    {
-                        string txt = "透明度 " + opacity.ToString();
-                        using (Brush brush = new SolidBrush(Color.FromArgb(opacity, 0, 0, 0)))
-                        {
-                            gr.DrawString(txt, this.Font, brush, x, y, string_format);
-                        }
-                        using (Brush brush = new SolidBrush(Color.FromArgb(opacity, 255, 255, 255)))
-                        {
-                            gr.DrawString(txt, this.Font, brush, x - 2, y - 2, string_format);
-                        }
-                        y += dy;
-                    }
-                }
-                pictureBox1.Image = bm;
+                string txt = "透明度 " + opacity.ToString();
+                Brush brush = new SolidBrush(Color.FromArgb(opacity, 0, 0, 0));
+                gr.DrawString(txt, this.Font, brush, x, y, string_format);
+                //Brush
+                brush = new SolidBrush(Color.FromArgb(opacity, 255, 255, 255));
+                gr.DrawString(txt, this.Font, brush, x - 2, y - 2, string_format);
+                y += dy;
             }
+            pictureBox1.Image = bm;
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -531,20 +514,18 @@ namespace vcs_Draw6_String1
             Graphics g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
 
             string text1 = "Use StringFormat and Rectangle objects to center text in a rectangle.";
-            using (Font font1 = new Font("Arial", 22, FontStyle.Bold, GraphicsUnit.Point))
-            {
-                Rectangle rect1 = new Rectangle(10, 10, 130, 140);
+            Font font1 = new Font("Arial", 22, FontStyle.Bold, GraphicsUnit.Point);
+            Rectangle rect1 = new Rectangle(10, 10, 130, 140);
 
-                // Create a StringFormat object with the each line of text, and the block
-                // of text centered on the page.
-                StringFormat stringFormat = new StringFormat();
-                stringFormat.Alignment = StringAlignment.Center;
-                stringFormat.LineAlignment = StringAlignment.Center;
+            // Create a StringFormat object with the each line of text, and the block
+            // of text centered on the page.
+            StringFormat stringFormat = new StringFormat();
+            stringFormat.Alignment = StringAlignment.Center;
+            stringFormat.LineAlignment = StringAlignment.Center;
 
-                // Draw the text and the surrounding rectangle.
-                g.DrawString(text1, font1, Brushes.Blue, rect1, stringFormat);
-                g.DrawRectangle(Pens.Black, rect1);
-            }
+            // Draw the text and the surrounding rectangle.
+            g.DrawString(text1, font1, Brushes.Blue, rect1, stringFormat);
+            g.DrawRectangle(Pens.Black, rect1);
             pictureBox1.Image = bitmap1;
         }
 
@@ -556,19 +537,16 @@ namespace vcs_Draw6_String1
 
             string text2 = "Use TextFormatFlags and Rectangle objects to center text in a rectangle.";
 
-            using (Font font2 = new Font("Arial", 12, FontStyle.Bold, GraphicsUnit.Point))
-            {
-                Rectangle rect2 = new Rectangle(150, 10, 130, 140);
+            Font font2 = new Font("Arial", 12, FontStyle.Bold, GraphicsUnit.Point);
+            Rectangle rect2 = new Rectangle(150, 10, 130, 140);
 
-                // Create a TextFormatFlags with word wrapping, horizontal center and
-                // vertical center specified.
-                TextFormatFlags flags = TextFormatFlags.HorizontalCenter |
-                    TextFormatFlags.VerticalCenter | TextFormatFlags.WordBreak;
+            // Create a TextFormatFlags with word wrapping, horizontal center and
+            // vertical center specified.
+            TextFormatFlags flags = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.WordBreak;
 
-                // Draw the text and the surrounding rectangle.
-                TextRenderer.DrawText(g, text2, font2, rect2, Color.Blue, flags);
-                g.DrawRectangle(Pens.Black, rect2);
-            }
+            // Draw the text and the surrounding rectangle.
+            TextRenderer.DrawText(g, text2, font2, rect2, Color.Blue, flags);
+            g.DrawRectangle(Pens.Black, rect2);
             pictureBox1.Image = bitmap1;
         }
 
@@ -596,53 +574,49 @@ namespace vcs_Draw6_String1
                 };
 
             // Prepare a StringFormat to use the tabs.
-            using (StringFormat string_format = new StringFormat())
-            {
-                // Define the columns' X coordinates.
-                float[] xpos = { 10, 310, 400, 475 };
+            StringFormat string_format = new StringFormat();
+            // Define the columns' X coordinates.
+            float[] xpos = { 10, 310, 400, 475 };
 
-                // Define the column alignments.
-                StringAlignment[] alignments =
-                    {
+            // Define the column alignments.
+            StringAlignment[] alignments =
+                {
                     StringAlignment.Near,
                     StringAlignment.Far,
                     StringAlignment.Far,
                     StringAlignment.Far,
-                    };
+                };
 
-                // Draw the headings.
-                float margin = 10;
-                float y = 10;
-                using (Font font = new Font("Times New Roman", 13, FontStyle.Bold))
+            // Draw the headings.
+            float margin = 10;
+            float y = 10;
+            Font font = new Font("Times New Roman", 13, FontStyle.Bold);
+            string[] strings = headings.Split('\t');
+            for (int i = 0; i < strings.Length; i++)
+            {
+                string_format.Alignment = alignments[i];
+                g.DrawString(strings[i], font, Brushes.Blue, xpos[i], y, string_format);
+            }
+
+            // Draw a horizontal line.
+            y += 1.4f * Font.Height;
+            float width = xpos[xpos.Length - 1] + 5;
+            g.DrawLine(Pens.Blue, margin, y, width, y);
+            y += 5;
+
+            // Draw the book entries.
+            //Font
+            font = new Font("Times New Roman", 11);
+            foreach (string line in lines)
+            {
+                //string[]
+                strings = line.Split('\t');
+                for (int i = 0; i < strings.Length; i++)
                 {
-                    string[] strings = headings.Split('\t');
-                    for (int i = 0; i < strings.Length; i++)
-                    {
-                        string_format.Alignment = alignments[i];
-                        g.DrawString(strings[i], font, Brushes.Blue, xpos[i], y, string_format);
-                    }
+                    string_format.Alignment = alignments[i];
+                    g.DrawString(strings[i], font, Brushes.Black, xpos[i], y, string_format);
                 }
-
-                // Draw a horizontal line.
-                y += 1.4f * Font.Height;
-                float width = xpos[xpos.Length - 1] + 5;
-                g.DrawLine(Pens.Blue, margin, y, width, y);
-                y += 5;
-
-                // Draw the book entries.
-                using (Font font = new Font("Times New Roman", 11))
-                {
-                    foreach (string line in lines)
-                    {
-                        string[] strings = line.Split('\t');
-                        for (int i = 0; i < strings.Length; i++)
-                        {
-                            string_format.Alignment = alignments[i];
-                            g.DrawString(strings[i], font, Brushes.Black, xpos[i], y, string_format);
-                        }
-                        y += 1.2f * this.Font.Height;
-                    }
-                }
+                y += 1.2f * this.Font.Height;
             }
             pictureBox1.Image = bitmap1;
         }
@@ -671,99 +645,87 @@ namespace vcs_Draw6_String1
             };
 
             // Prepare a StringFormat to use the tabs.
-            using (StringFormat string_format = new StringFormat())
+            StringFormat string_format = new StringFormat();
+            // These just make things weird:
+            //string_format.Alignment = StringAlignment.Center;
+            //string_format.LineAlignment = StringAlignment.Center;
+
+            // Define the tab stops.
+            float[] tabs = { 250, 75, 75 };
+            string_format.SetTabStops(0, tabs);
+
+            // Draw the headings.
+            float margin = 10;
+            float y = 10;
+            Font font = new Font("Times New Roman", 13, FontStyle.Bold);
+            g.DrawString(headings, font, Brushes.Blue, margin, y, string_format);
+
+            // Draw a horizontal line.
+            y += 1.4f * Font.Height;
+            g.DrawLine(Pens.Blue, margin, y, margin + tabs.Sum() + 50, y);
+            y += 5;
+
+            // Draw the book entries.
+            //Font
+            font = new Font("Times New Roman", 11);
+            foreach (string line in lines)
             {
-                // These just make things weird:
-                //string_format.Alignment = StringAlignment.Center;
-                //string_format.LineAlignment = StringAlignment.Center;
-
-                // Define the tab stops.
-                float[] tabs = { 250, 75, 75 };
-                string_format.SetTabStops(0, tabs);
-
-                // Draw the headings.
-                float margin = 10;
-                float y = 10;
-                using (Font font = new Font("Times New Roman", 13, FontStyle.Bold))
-                {
-                    g.DrawString(headings, font, Brushes.Blue, margin, y, string_format);
-                }
-
-                // Draw a horizontal line.
-                y += 1.4f * Font.Height;
-                g.DrawLine(Pens.Blue, margin, y, margin + tabs.Sum() + 50, y);
-                y += 5;
-
-                // Draw the book entries.
-                using (Font font = new Font("Times New Roman", 11))
-                {
-                    foreach (string line in lines)
-                    {
-                        g.DrawString(line, font, Brushes.Black, margin, y, string_format);
-                        y += 1.2f * this.Font.Height;
-                    }
-                }
+                g.DrawString(line, font, Brushes.Black, margin, y, string_format);
+                y += 1.2f * this.Font.Height;
             }
+
             pictureBox1.Image = bitmap1;
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
             //做一個跟字串一樣大的圖檔
+
             string str = "做一個跟字串一樣大的圖檔";
             Bitmap bitmap1 = null;
             Graphics g = null;
 
+            Font fontCounter = new Font("Lucida Sans Unicode", 50);
+
+            // calculate size of the string.
+            bitmap1 = new Bitmap(1, 1, PixelFormat.Format32bppPArgb);
+            g = Graphics.FromImage(bitmap1);
+            SizeF stringSize = g.MeasureString(str, fontCounter);
+            int nWidth = (int)stringSize.Width;
+            int nHeight = (int)stringSize.Height;
+            g.Dispose();
+            bitmap1.Dispose();
+
+            bitmap1 = new Bitmap(nWidth, nHeight, PixelFormat.Format32bppPArgb);
+            g = Graphics.FromImage(bitmap1);
+            g.FillRectangle(new SolidBrush(Color.Pink),
+            new Rectangle(0, 0, nWidth, nHeight));
+
+            g.DrawString(str, fontCounter, new SolidBrush(Color.Black), 0, 0);
+
+            string filename = Application.StartupPath + "\\png_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png";
             try
             {
-                Font fontCounter = new Font("Lucida Sans Unicode", 50);
+                //bitmap1.Save(@file1, ImageFormat.Jpeg);
+                bitmap1.Save(filename, ImageFormat.Png);
+                //bitmap1.Save(@file3, ImageFormat.Png);
 
-                // calculate size of the string.
-                bitmap1 = new Bitmap(1, 1, PixelFormat.Format32bppPArgb);
-                g = Graphics.FromImage(bitmap1);
-                SizeF stringSize = g.MeasureString(str, fontCounter);
-                int nWidth = (int)stringSize.Width;
-                int nHeight = (int)stringSize.Height;
-                g.Dispose();
-                bitmap1.Dispose();
-
-                bitmap1 = new Bitmap(nWidth, nHeight, PixelFormat.Format32bppPArgb);
-                g = Graphics.FromImage(bitmap1);
-                g.FillRectangle(new SolidBrush(Color.Pink),
-                new Rectangle(0, 0, nWidth, nHeight));
-
-                g.DrawString(str, fontCounter, new SolidBrush(Color.Black), 0, 0);
-
-                string filename = Application.StartupPath + "\\png_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png";
-                try
-                {
-                    //bitmap1.Save(@file1, ImageFormat.Jpeg);
-                    bitmap1.Save(filename, ImageFormat.Png);
-                    //bitmap1.Save(@file3, ImageFormat.Png);
-
-                    //richTextBox1.Text += "已存檔 : " + file1 + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename + "\n";
-                    //richTextBox1.Text += "已存檔 : " + file3 + "\n";
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-                }
+                //richTextBox1.Text += "已存檔 : " + file1 + "\n";
+                richTextBox1.Text += "已存檔 : " + filename + "\n";
+                //richTextBox1.Text += "已存檔 : " + file3 + "\n";
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
             }
-            finally
+
+            if (g != null)
             {
-                if (g != null)
-                {
-                    g.Dispose();
-                }
-                if (bitmap1 != null)
-                {
-                    bitmap1.Dispose();
-                }
+                g.Dispose();
+            }
+            if (bitmap1 != null)
+            {
+                bitmap1.Dispose();
             }
         }
 
@@ -779,7 +741,6 @@ namespace vcs_Draw6_String1
             g.DrawRectangle(Pens.Blue, rect);//繪製一個矩形
             g.DrawString("This text is left justified.", Font, Brushes.Black, rect);
             y += Font.Height + 20;
-            //Font.Dispose();//沒有創建對象,無須釋放資源
 
             Font f = new Font("Arial", 16, FontStyle.Bold | FontStyle.Italic);
             rect = new Rectangle(0, y, 400, f.Height);
@@ -813,46 +774,40 @@ namespace vcs_Draw6_String1
         private void button19_Click(object sender, EventArgs e)
         {
             //發光效果文字
-            using (Font fnt = new Font("Arial", 40, FontStyle.Bold))//定義字體
-            {
-                this.pictureBox1.Image = (Bitmap)ImageLightEffect("發光效果文字", fnt, Color.Yellow, Color.Red, 10);//呼叫自定義方法ImageLightEffect
-            }
-        }
 
-        public static Image ImageLightEffect(string Str, Font F, Color ColorFore, Color ColorBack, int BlurConsideration)
-        {
+            string text = "發光效果文字";
+            Font F = new Font("Arial", 40, FontStyle.Bold);  // 定義字體
+            Color ColorFore = Color.Yellow;
+            Color ColorBack = Color.Red;
+            int BlurConsideration = 10;
+
             Bitmap Var_Bitmap = null;//實例化Bitmap類
-            using (Graphics g = Graphics.FromHwnd(IntPtr.Zero))//實例化Graphics類
+            Graphics g = Graphics.FromHwnd(IntPtr.Zero);  // 實例化Graphics類
+            SizeF Var_Size = g.MeasureString(text, F);//對字串進行測量
+            Bitmap Var_bmp = new Bitmap((int)Var_Size.Width, (int)Var_Size.Height);  // 透過文字的大小實例化Bitmap類
+            Graphics Var_G_Bmp = Graphics.FromImage(Var_bmp);  // 實例化Bitmap類
+            SolidBrush Var_BrushBack = new SolidBrush(Color.FromArgb(16, ColorBack.R, ColorBack.G, ColorBack.B));  // 根據RGB的值定義畫刷
+            SolidBrush Var_BrushFore = new SolidBrush(ColorFore);  // 定義畫刷
+            Var_G_Bmp.SmoothingMode = SmoothingMode.HighQuality;//設定為高質量
+            Var_G_Bmp.InterpolationMode = InterpolationMode.HighQualityBilinear;//設定為高質量的收合
+            Var_G_Bmp.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;//消除鋸齒
+            Var_G_Bmp.DrawString(text, F, Var_BrushBack, 0, 0);//給制文字
+            Var_Bitmap = new Bitmap(Var_bmp.Width + BlurConsideration, Var_bmp.Height + BlurConsideration);//根據發光文字的大小實例化Bitmap類
+            Graphics Var_G_Bitmap = Graphics.FromImage(Var_Bitmap);  // 實例化Graphics類
+            Var_G_Bitmap.SmoothingMode = SmoothingMode.HighQuality;//設定為高質量
+            Var_G_Bitmap.InterpolationMode = InterpolationMode.HighQualityBilinear;//設定為高質量的收合
+            Var_G_Bitmap.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;//消除鋸齒
+            //搜尋發光文字的各象素點
+            for (int x = 0; x <= BlurConsideration; x++)
             {
-                SizeF Var_Size = g.MeasureString(Str, F);//對字串進行測量
-                using (Bitmap Var_bmp = new Bitmap((int)Var_Size.Width, (int)Var_Size.Height))//透過文字的大小實例化Bitmap類
-                using (Graphics Var_G_Bmp = Graphics.FromImage(Var_bmp))//實例化Bitmap類
-                using (SolidBrush Var_BrushBack = new SolidBrush(Color.FromArgb(16, ColorBack.R, ColorBack.G, ColorBack.B)))//根據RGB的值定義畫刷
-                using (SolidBrush Var_BrushFore = new SolidBrush(ColorFore))//定義畫刷
+                for (int y = 0; y <= BlurConsideration; y++)
                 {
-                    Var_G_Bmp.SmoothingMode = SmoothingMode.HighQuality;//設定為高質量
-                    Var_G_Bmp.InterpolationMode = InterpolationMode.HighQualityBilinear;//設定為高質量的收合
-                    Var_G_Bmp.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;//消除鋸齒
-                    Var_G_Bmp.DrawString(Str, F, Var_BrushBack, 0, 0);//給制文字
-                    Var_Bitmap = new Bitmap(Var_bmp.Width + BlurConsideration, Var_bmp.Height + BlurConsideration);//根據發光文字的大小實例化Bitmap類
-                    using (Graphics Var_G_Bitmap = Graphics.FromImage(Var_Bitmap))//實例化Graphics類
-                    {
-                        Var_G_Bitmap.SmoothingMode = SmoothingMode.HighQuality;//設定為高質量
-                        Var_G_Bitmap.InterpolationMode = InterpolationMode.HighQualityBilinear;//設定為高質量的收合
-                        Var_G_Bitmap.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;//消除鋸齒
-                        //搜尋發光文字的各象素點
-                        for (int x = 0; x <= BlurConsideration; x++)
-                        {
-                            for (int y = 0; y <= BlurConsideration; y++)
-                            {
-                                Var_G_Bitmap.DrawImageUnscaled(Var_bmp, x, y);//繪製發光文字的點
-                            }
-                        }
-                        Var_G_Bitmap.DrawString(Str, F, Var_BrushFore, BlurConsideration / 2, BlurConsideration / 2);//繪製文字
-                    }
+                    Var_G_Bitmap.DrawImageUnscaled(Var_bmp, x, y);//繪製發光文字的點
                 }
             }
-            return Var_Bitmap;
+            Var_G_Bitmap.DrawString(text, F, Var_BrushFore, BlurConsideration / 2, BlurConsideration / 2);//繪製文字
+
+            pictureBox1.Image = Var_Bitmap;
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -909,40 +864,31 @@ namespace vcs_Draw6_String1
             Bitmap newBitmap = null;
             Graphics g = null;
 
-            try
-            {
-                Font fontCounter = new Font("Lucida Sans Unicode", 70);
+            Font fontCounter = new Font("Lucida Sans Unicode", 70);
 
-                // calculate size of the string.
-                newBitmap = new Bitmap(1, 1, PixelFormat.Format32bppArgb);
-                g = Graphics.FromImage(newBitmap);
-                SizeF stringSize = g.MeasureString(show_word, fontCounter);
-                int nWidth = (int)stringSize.Width;
-                int nHeight = (int)stringSize.Height;
+            // calculate size of the string.
+            newBitmap = new Bitmap(1, 1, PixelFormat.Format32bppArgb);
+            g = Graphics.FromImage(newBitmap);
+            SizeF stringSize = g.MeasureString(show_word, fontCounter);
+            int nWidth = (int)stringSize.Width;
+            int nHeight = (int)stringSize.Height;
+            g.Dispose();
+            newBitmap.Dispose();
+
+            newBitmap = new Bitmap(nWidth, nHeight, PixelFormat.Format32bppArgb);
+            g = Graphics.FromImage(newBitmap);
+            g.FillRectangle(new SolidBrush(Color.White), new Rectangle(0, 0, nWidth, nHeight));
+
+            g.DrawString(show_word, fontCounter, new SolidBrush(Color.Black), 0, 0);
+
+            newBitmap.Save("test.png", ImageFormat.Png);
+            pictureBox1.Image = newBitmap;
+
+            if (null != g)
+            {
                 g.Dispose();
-                newBitmap.Dispose();
-
-                newBitmap = new Bitmap(nWidth, nHeight, PixelFormat.Format32bppArgb);
-                g = Graphics.FromImage(newBitmap);
-                g.FillRectangle(new SolidBrush(Color.White), new Rectangle(0, 0, nWidth, nHeight));
-
-                g.DrawString(show_word, fontCounter, new SolidBrush(Color.Black), 0, 0);
-
-                newBitmap.Save("test.png", ImageFormat.Png);
-                pictureBox1.Image = newBitmap;
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-            finally
-            {
-                if (null != g)
-                {
-                    g.Dispose();
-                }
-                //if (null != newBitmap) newBitmap.Dispose();
-            }
+            //if (null != newBitmap) newBitmap.Dispose();
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -976,19 +922,491 @@ namespace vcs_Draw6_String1
 
         private void button23_Click(object sender, EventArgs e)
         {
+            //MeasureString 測試
+            //MeasureString
+
+            Bitmap bitmap1 = new Bitmap(640, 480);
+
+            Graphics g = Graphics.FromImage(bitmap1);//用指定的Bitmap實例化Graphics
+
+            Font f = new Font("標楷體", 30);
+
+            pictureBox1.Image = bitmap1;
+
+            string text = "標楷體";
+            SizeF size = g.MeasureString(text, f);  // 對文字進行測量
+            g.DrawString(text, f, Brushes.Blue, 100, 100);
+            g.DrawRectangle(Pens.Red, 100, 100, size.Width, size.Height);
+
+            //------------------------------------------------------------  # 60個
+
+            //表單底部畫字 ST
+            // Transform. 縮放+旋轉+平移
+            g.ScaleTransform(1.5f, 1.5f, MatrixOrder.Append);
+            g.RotateTransform(25, MatrixOrder.Append);
+            g.TranslateTransform(80, 30, MatrixOrder.Append);
+
+            int x_st = 160;
+            int y_st = 0;
+
+            // See how big the text will be when drawn.
+            string the_text = "群曜醫電\n股份有限公司";
+            SizeF text_size = g.MeasureString(the_text, f);
+
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
+            g.DrawRectangle(new Pen(Color.Red, 3), x_st, y_st, text_size.Width, text_size.Height);
+
+            g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+            g.DrawString(the_text, f, Brushes.Brown, x_st, y_st);
+
+            //表單底部畫字 SP
         }
 
         //------------------------------------------------------------  # 60個
 
+        public void draw_grid2(Graphics g)
+        {
+            int i;
+            int rows = pictureBox1.ClientSize.Height / 100;
+            int cols = pictureBox1.ClientSize.Width / 100;
+            p = new Pen(Color.Navy, 1);
+            for (i = 0; i <= rows; i++)
+            {
+                g.DrawLine(p, 0, i * 100, pictureBox1.ClientSize.Width - 1, i * 100);
+            }
+            for (i = 0; i <= cols; i++)
+            {
+                g.DrawLine(p, new Point(i * 100, 0), new Point(i * 100, pictureBox1.ClientSize.Height - 1));
+            }
+        }
+
         private void button24_Click(object sender, EventArgs e)
         {
+            //StringFormat
+            //StringFormat
 
+            //畫格線
+            bitmap1 = new Bitmap(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height);
+            Graphics g = Graphics.FromImage(bitmap1);
+            draw_grid2(g);
+            pictureBox1.Image = bitmap1;
+
+            //------------------------------------------------------------  # 60個
+
+            Font f = new Font("標楷體", 24);
+
+            StringFormat string_format = new StringFormat();
+
+            //橫書
+            //無參數的 預設 橫向列印
+            g.DrawString("預設為橫向書寫, 字在線下", f, Brushes.Green, 200, 100);
+
+            //直書
+            string_format.FormatFlags = StringFormatFlags.DirectionVertical;  // 文字會垂直對齊
+            //string_format.FormatFlags = StringFormatFlags.NoClip;
+            g.DrawString("直向書寫, 字在線右", f, Brushes.Green, 200, 100, string_format);
+
+            //string_format.Trimming = StringTrimming.None;
+            //string_format.FormatFlags = StringFormatFlags.MeasureTrailingSpaces;
+
+            g.FillEllipse(Brushes.Red, 200 - 10, 100 - 10, 20, 20);
+
+            //------------------------------------------------------------  # 60個
+
+            //重設StringFormat
+            string_format = new StringFormat();
+
+            //文字在線位置 + 置中/向左/向右
+
+            int x_st = 100;
+            int y_st = 400;
+            int dx = 200;
+            int dy = 100;
+
+            string_format.LineAlignment = StringAlignment.Far;  // 字在線上
+            string_format.Alignment = StringAlignment.Center;
+            g.DrawString("字在線上", f, Brushes.Black, x_st + dx * 0, y_st + dy * 0, string_format);
+            string_format.Alignment = StringAlignment.Center;
+            g.DrawString("位置置中", f, Brushes.Black, x_st + dx * 0, y_st + dy * 1, string_format);
+            string_format.Alignment = StringAlignment.Far;
+            g.DrawString("向右寫", f, Brushes.Black, x_st + dx * 0, y_st + dy * 2, string_format);
+            string_format.Alignment = StringAlignment.Near;
+            g.DrawString("向右寫", f, Brushes.Black, x_st + dx * 0, y_st + dy * 3, string_format);
+
+            //------------------------------------------------------------  # 60個
+
+            string_format.LineAlignment = StringAlignment.Center;  // 字在線中
+            string_format.Alignment = StringAlignment.Center;
+            g.DrawString("字在線中", f, Brushes.Black, x_st + dx * 1, y_st + dy * 0, string_format);
+            string_format.Alignment = StringAlignment.Center;
+            g.DrawString("位置置中", f, Brushes.Black, x_st + dx * 1, y_st + dy * 1, string_format);
+            string_format.Alignment = StringAlignment.Far;
+            g.DrawString("向右寫", f, Brushes.Black, x_st + dx * 1, y_st + dy * 2, string_format);
+            string_format.Alignment = StringAlignment.Near;
+            g.DrawString("向右寫", f, Brushes.Black, x_st + dx * 1, y_st + dy * 3, string_format);
+
+            //------------------------------------------------------------  # 60個
+
+            string_format.LineAlignment = StringAlignment.Near;  // 字在線下
+            string_format.Alignment = StringAlignment.Center;
+            g.DrawString("字在線下", f, Brushes.Black, x_st + dx * 2, y_st + dy * 0, string_format);
+            string_format.Alignment = StringAlignment.Center;
+            g.DrawString("位置置中", f, Brushes.Black, x_st + dx * 2, y_st + dy * 1, string_format);
+            string_format.Alignment = StringAlignment.Far;
+            g.DrawString("向右寫", f, Brushes.Black, x_st + dx * 2, y_st + dy * 2, string_format);
+            string_format.Alignment = StringAlignment.Near;
+            g.DrawString("向右寫", f, Brushes.Black, x_st + dx * 2, y_st + dy * 3, string_format);
+
+            for (int i = 0; i < 4; i++)
+            {
+                int xx = x_st + dx * 0;
+                int yy = y_st + dy * i;
+                g.FillEllipse(Brushes.Red, xx - 10, yy - 10, 20, 20);
+            }
+
+            for (int i = 0; i < 4; i++)
+            {
+                int xx = x_st + dx * 1;
+                int yy = y_st + dy * i;
+                g.FillEllipse(Brushes.Green, xx - 10, yy - 10, 20, 20);
+
+            }
+
+            for (int i = 0; i < 4; i++)
+            {
+                int xx = x_st + dx * 2;
+                int yy = y_st + dy * i;
+                g.FillEllipse(Brushes.Blue, xx - 10, yy - 10, 20, 20);
+            }
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+
+        string draw_text = "牡丹亭";
+        int font_size = 40;
+
+        void draw_grid()
+        {
+            Graphics g = this.pictureBox1.CreateGraphics();
+            /*
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+            for (int i = 0; i <= W; i += 100)
+            {
+                g.DrawLine(Pens.Red, i, 0, i, H);  // 垂直線
+            }
+            for (int j = 0; j <= H; j += 100)
+            {
+                g.DrawLine(Pens.Red, 0, j, W, j);  // 水平線
+            }
+            */
+
+            int x_st = 20;
+            int y_st = 20;
+            int dx = 250;
+            int dy = 140;
+            for (int i = x_st; i <= 820; i += dx)
+            {
+                g.DrawLine(Pens.Red, i, y_st, i, 820);  // 垂直線
+            }
+            for (int j = y_st; j <= 820; j += dy)
+            {
+                g.DrawLine(Pens.Red, x_st, j, 820, j);  // 水平線
+            }
+
+
+            Font f = new Font("標楷體", 20);
+
+            int dd = dy - 32;
+
+            string draw_text = "1投影文字";
+            x_st = 20 + dx * 0;
+            y_st = 20 + dy * 0 + dd;
+            g.DrawString(draw_text, f, new SolidBrush(Color.Black), new PointF(x_st, y_st));
+
+
+            draw_text = "2浮雕效果";
+            x_st = 20 + dx * 0;
+            y_st = 20 + dy * 1 + dd;
+            g.DrawString(draw_text, f, new SolidBrush(Color.Black), new PointF(x_st, y_st));
+
+            draw_text = "3印版效果";
+            x_st = 20 + dx * 0;
+            y_st = 20 + dy * 2 + dd;
+            g.DrawString(draw_text, f, new SolidBrush(Color.Black), new PointF(x_st, y_st));
+
+            draw_text = "4倒影文字";
+            x_st = 20 + dx * 0;
+            y_st = 20 + dy * 3 + dd;
+            g.DrawString(draw_text, f, new SolidBrush(Color.Black), new PointF(x_st, y_st));
+
+            draw_text = "5陰影文字";
+            x_st = 20 + dx * 0;
+            y_st = 20 + dy * 4 + dd;
+            g.DrawString(draw_text, f, new SolidBrush(Color.Black), new PointF(x_st, y_st));
+
+            draw_text = "6字體做陰影效果";
+
+            x_st = 20 + dx * 1;
+            y_st = 20 + dy * 0 + dd;
+            g.DrawString(draw_text, f, new SolidBrush(Color.Black), new PointF(x_st, y_st));
+
+            draw_text = "7傾斜效果";
+            x_st = 20 + dx * 1;
+            y_st = 20 + dy * 1 + dd;
+            g.DrawString(draw_text, f, new SolidBrush(Color.Black), new PointF(x_st, y_st));
+
+            draw_text = "8漸層色文字";
+            x_st = 20 + dx * 1;
+            y_st = 20 + dy * 2 + dd;
+            g.DrawString(draw_text, f, new SolidBrush(Color.Black), new PointF(x_st, y_st));
+
+            draw_text = "9旋轉效果";
+            x_st = 20 + dx * 1;
+            y_st = 20 + dy * 4 + dd;
+            g.DrawString(draw_text, f, new SolidBrush(Color.Black), new PointF(x_st, y_st));
+
+        }
+
+        void do_word_effect1(int x_st, int y_st)
+        {
+            //投影文字
+            Graphics g = this.pictureBox1.CreateGraphics();
+            //設置文本輸出質量
+            g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            Font f = new Font("標楷體", font_size);
+            Matrix matrix = new Matrix();
+            //投射
+            matrix.Shear(-1.5f, 0.0f);
+            //縮放
+            matrix.Scale(1, 0.5f);
+            //平移
+            matrix.Translate(x_st + 130, y_st + 58);
+            //對繪圖平面實施坐標變換、、
+            g.Transform = matrix;
+            SolidBrush grayBrush = new SolidBrush(Color.Gray);
+            SolidBrush colorBrush = new SolidBrush(Color.BlueViolet);
+            string draw_text = "博客園1";
+            //繪制陰影
+            g.DrawString(draw_text, f, grayBrush, new PointF(x_st, y_st));
+            g.ResetTransform();
+            //繪制前景
+            g.DrawString(draw_text, f, colorBrush, new PointF(x_st, y_st));
+        }
+
+        void do_word_effect2(int x_st, int y_st)
+        {
+            //浮雕效果
+            Brush backBrush = Brushes.Black;
+            Brush foreBrush = Brushes.White;
+            Font f = new Font("標楷體", font_size, FontStyle.Regular);
+            Graphics g = this.pictureBox1.CreateGraphics();
+            string draw_text = "博客園2";
+            g.DrawString(draw_text, f, backBrush, x_st + 1, y_st + 1);
+            g.DrawString(draw_text, f, foreBrush, x_st, y_st);
+        }
+
+        void do_word_effect3(int x_st, int y_st)
+        {
+            //印版效果
+            //印版文字
+            int i = 0;
+            Brush backBrush = Brushes.Black;
+            Brush foreBrush = Brushes.Violet;
+            Font f = new Font("標楷體", font_size, FontStyle.Regular);
+            Graphics g = this.pictureBox1.CreateGraphics();
+            string draw_text = "博客園3";
+            while (i < 20)
+            {
+                g.DrawString(draw_text, f, backBrush, x_st - i, y_st + i);
+                i = i + 1;
+            }
+            g.DrawString(draw_text, f, foreBrush, x_st, y_st);
+        }
+
+        void do_word_effect4(int x_st, int y_st)
+        {
+            //倒影文字
+
+            Brush backBrush = Brushes.Gray;
+            Brush foreBrush = Brushes.Black;
+            Font f = new Font("標楷體", font_size, FontStyle.Regular);
+            Graphics g = this.pictureBox1.CreateGraphics();
+            string draw_text = "博客園4";
+
+            g.TranslateTransform(x_st, y_st);
+
+            int ascent = f.FontFamily.GetCellAscent(f.Style);
+            int spacing = f.FontFamily.GetLineSpacing(f.Style);
+            int lineHeight = System.Convert.ToInt16(f.GetHeight(g));
+            int height = lineHeight * ascent / spacing;
+            GraphicsState state = g.Save();
+            g.ScaleTransform(1, -1.0F);
+            g.DrawString(draw_text, f, backBrush, 0, -height);
+            g.Restore(state);
+            g.DrawString(draw_text, f, foreBrush, 0, -height);
+        }
+
+        void do_word_effect5(int x_st, int y_st)
+        {
+            //陰影文字
+            string draw_text = "博客園5";
+            Brush shadowBrush = Brushes.Gray;
+            Brush foreBrush = Brushes.Black;
+            Font f = new Font("標楷體", font_size, FontStyle.Regular);
+            Graphics g = this.pictureBox1.CreateGraphics();
+
+            g.DrawString(draw_text, f, shadowBrush, x_st + 20, y_st + 20);
+            g.DrawString(draw_text, f, foreBrush, x_st, y_st);
+
+            //有點問題
+        }
+
+        void do_word_effect6(int x_st, int y_st)
+        {
+            //字體做陰影效果 同樣字往右下寫一遍 顏色不同
+
+            string draw_text = "牡丹亭";
+
+            Graphics g = this.pictureBox1.CreateGraphics();
+            int font_size_default = 80;
+            Font f = new Font("標楷體", font_size_default);
+            g.DrawString(draw_text, f, new SolidBrush(Color.Pink), new PointF(x_st, y_st));
+            g.DrawString(draw_text, f, new SolidBrush(Color.Red), new PointF(x_st + 5, y_st + 5));
+        }
+
+        void do_word_effect7(int x_st, int y_st)
+        {
+            //傾斜效果
+            Brush foreBrush = Brushes.Blue;
+            Font f = new Font("標楷體", font_size, FontStyle.Regular);
+            Graphics g = this.pictureBox1.CreateGraphics();
+            string draw_text = "博客園7";
+
+            g.TranslateTransform(x_st, y_st);
+
+            Matrix transform = g.Transform;
+
+            //右倾斜文字
+            //float shearX = -0.230F;
+
+            //左倾斜文字
+            float shearX = 0.550F;
+            float shearY = 0.10F;
+            transform.Shear(shearX, shearY);
+            g.Transform = transform;
+            g.DrawString(draw_text, f, foreBrush, 0, 0);
+        }
+
+        void do_word_effect8(int x_st, int y_st)
+        {
+            //漸層色文字
+            String draw_text = "天階夜色涼如水8";
+            Brush ShadowBrush = Brushes.Gray;
+            Brush ForeBrush = Brushes.Black;
+            Font f = new Font("標楷體", font_size, FontStyle.Regular);
+            Graphics g = this.pictureBox1.CreateGraphics();
+            PointF point = new PointF(x_st, y_st);
+            SizeF size = g.MeasureString(draw_text, f);
+            RectangleF rectangle = new RectangleF(point, size);
+            Brush brush = new LinearGradientBrush(rectangle, Color.Red, Color.Green, LinearGradientMode.Horizontal);
+            g.DrawString(draw_text, f, brush, x_st, y_st);
+
+            g.FillRectangle(brush, x_st, y_st + 75, size.Width, size.Height / 3);
+            g.DrawRectangle(Pens.Red, x_st, y_st, size.Width, size.Height);
+        }
+
+        void do_word_effect9(int x_st, int y_st)
+        {
+            //旋轉效果顯示文字
+            Graphics g = this.pictureBox1.CreateGraphics();
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            for (int i = 0; i <= 360; i += 10)
+            {
+                //平移Graphics對象到窗體中心
+                g.TranslateTransform(x_st, y_st);
+                //設置Graphics對象的輸出角度
+                g.RotateTransform(i);
+                //設置文字填充顏色
+                Brush brush = Brushes.DarkViolet;
+                //旋轉顯示文字
+                g.DrawString("Happy New Year", new Font("Lucida Console", 11f), brush, 0, 0);
+                //恢復全局變換矩陣
+                g.ResetTransform();
+            }
         }
 
         private void button25_Click(object sender, EventArgs e)
         {
+            //製作藝術字
+            /*
+            Bitmap bitmap1 = new Bitmap(830, 830);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.Pink);
+            pictureBox1.Image = bitmap1;
+            */
 
+            pictureBox1.Size = new Size(830, 830);
+
+            draw_grid();
+
+            int x_st = 20;
+            int y_st = 20;
+            int dx = 250;
+            int dy = 140;
+
+            richTextBox1.Text += "1投影文字\n";
+            x_st = 20 + dx * 0;
+            y_st = 20 + dy * 0;
+            do_word_effect1(x_st, y_st);
+
+            richTextBox1.Text += "2浮雕效果\n";
+            x_st = 20 + dx * 0;
+            y_st = 20 + dy * 1;
+            do_word_effect2(x_st, y_st);
+
+            richTextBox1.Text += "3印版效果\n";
+            x_st = 20 + dx * 0;
+            y_st = 20 + dy * 2;
+            do_word_effect3(x_st, y_st);
+
+            richTextBox1.Text += "4倒影文字\n";
+            x_st = 20 + dx * 0;
+            y_st = 20 + dy * 3 + 50;
+            do_word_effect4(x_st, y_st);
+
+            richTextBox1.Text += "5陰影文字\n";
+            x_st = 20 + dx * 0;
+            y_st = 20 + dy * 4;
+            do_word_effect5(x_st, y_st);
+
+            richTextBox1.Text += "6字體做陰影效果\n";
+
+            x_st = 20 + dx * 1;
+            y_st = 20 + dy * 0;
+            do_word_effect6(x_st, y_st);
+
+            richTextBox1.Text += "7傾斜效果\n";
+            x_st = 20 + dx * 1;
+            y_st = 20 + dy * 1;
+            do_word_effect7(x_st, y_st);
+
+            richTextBox1.Text += "8漸層色文字\n";
+            x_st = 20 + dx * 1;
+            y_st = 20 + dy * 2;
+            do_word_effect8(x_st, y_st);
+
+            richTextBox1.Text += "9旋轉效果\n";
+            x_st = 20 + dx * 1 + 200;
+            y_st = 20 + dy * 4;
+            do_word_effect9(x_st, y_st);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button26_Click(object sender, EventArgs e)
         {
@@ -1025,90 +1443,82 @@ namespace vcs_Draw6_String1
             return;
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void pictureBox2_Paint(object sender, PaintEventArgs e)
         {
             // Draw text aligned in various ways.
             Rectangle rect = new Rectangle(5, 5, this.pictureBox2.ClientSize.Width - 10, this.pictureBox2.ClientSize.Height - 10);
             e.Graphics.DrawRectangle(Pens.Red, rect);
 
-            using (Font font = new Font("Times New Roman", 16, GraphicsUnit.Pixel))
-            {
-                using (StringFormat sf = new StringFormat())
-                {
-                    // Top.
-                    sf.LineAlignment = StringAlignment.Near;    // Top.
+            Font font = new Font("Times New Roman", 16, GraphicsUnit.Pixel);
+            StringFormat sf = new StringFormat();
 
-                    // Top/Left.
-                    sf.Alignment = StringAlignment.Near;        // Left.
-                    e.Graphics.DrawString("Top/Left", font, Brushes.Black, rect, sf);
+            // Top.
+            sf.LineAlignment = StringAlignment.Near;    // Top.
 
-                    // Top/Center.
-                    sf.Alignment = StringAlignment.Center;      // Center.
-                    e.Graphics.DrawString("Top/Center", font, Brushes.Black, rect, sf);
+            // Top/Left.
+            sf.Alignment = StringAlignment.Near;        // Left.
+            e.Graphics.DrawString("Top/Left", font, Brushes.Black, rect, sf);
 
-                    // Top/Right.
-                    sf.Alignment = StringAlignment.Far;         // Right.
-                    e.Graphics.DrawString("Top/Right", font, Brushes.Black, rect, sf);
+            // Top/Center.
+            sf.Alignment = StringAlignment.Center;      // Center.
+            e.Graphics.DrawString("Top/Center", font, Brushes.Black, rect, sf);
 
-                    // Middle.
-                    sf.LineAlignment = StringAlignment.Center;  // Middle.
+            // Top/Right.
+            sf.Alignment = StringAlignment.Far;         // Right.
+            e.Graphics.DrawString("Top/Right", font, Brushes.Black, rect, sf);
 
-                    // Middle/Left.
-                    sf.Alignment = StringAlignment.Near;        // Left.
-                    e.Graphics.DrawString("Middle/Left", font, Brushes.Black, rect, sf);
+            // Middle.
+            sf.LineAlignment = StringAlignment.Center;  // Middle.
 
-                    // Middle/Center.
-                    sf.Alignment = StringAlignment.Center;      // Center.
-                    e.Graphics.DrawString("Middle/Center", font, Brushes.Black, rect, sf);
+            // Middle/Left.
+            sf.Alignment = StringAlignment.Near;        // Left.
+            e.Graphics.DrawString("Middle/Left", font, Brushes.Black, rect, sf);
 
-                    // Middle/Right.
-                    sf.Alignment = StringAlignment.Far;         // Right.
-                    e.Graphics.DrawString("Middle/Right", font, Brushes.Black, rect, sf);
+            // Middle/Center.
+            sf.Alignment = StringAlignment.Center;      // Center.
+            e.Graphics.DrawString("Middle/Center", font, Brushes.Black, rect, sf);
 
-                    // Bottom.
-                    sf.LineAlignment = StringAlignment.Far;     // Bottom.
+            // Middle/Right.
+            sf.Alignment = StringAlignment.Far;         // Right.
+            e.Graphics.DrawString("Middle/Right", font, Brushes.Black, rect, sf);
 
-                    // Bottom/Left.
-                    sf.Alignment = StringAlignment.Near;        // Left.
-                    e.Graphics.DrawString("Bottom/Left", font, Brushes.Black, rect, sf);
+            // Bottom.
+            sf.LineAlignment = StringAlignment.Far;     // Bottom.
 
-                    // Bottom/Center.
-                    sf.Alignment = StringAlignment.Center;      // Center.
-                    e.Graphics.DrawString("Bottom/Center", font, Brushes.Black, rect, sf);
+            // Bottom/Left.
+            sf.Alignment = StringAlignment.Near;        // Left.
+            e.Graphics.DrawString("Bottom/Left", font, Brushes.Black, rect, sf);
 
-                    // Bottom/Right.
-                    sf.Alignment = StringAlignment.Far;         // Right.
-                    e.Graphics.DrawString("Bottom/Right", font, Brushes.Black, rect, sf);
-                }
-            }
+            // Bottom/Center.
+            sf.Alignment = StringAlignment.Center;      // Center.
+            e.Graphics.DrawString("Bottom/Center", font, Brushes.Black, rect, sf);
 
-
+            // Bottom/Right.
+            sf.Alignment = StringAlignment.Far;         // Right.
+            e.Graphics.DrawString("Bottom/Right", font, Brushes.Black, rect, sf);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void pictureBox3_Paint(object sender, PaintEventArgs e)
         {
             /*
             Bitmap bm = new Bitmap(280, 100);
-            using (Graphics gr = Graphics.FromImage(bm))
-            {
-                gr.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
-                gr.ScaleTransform(-1, 1);
-                using (Font the_font = new Font("Comic Sans MS", 40))
-                {
-                    gr.DrawString("Backward", the_font, Brushes.Black, -280, 0);
-                    pictureBox3.Image = bm;
-                }
-            }
+            Graphics gr = Graphics.FromImage(bm);
+            gr.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+            gr.ScaleTransform(-1, 1);
+            Font the_font = new Font("Comic Sans MS", 40);
+            gr.DrawString("Backward", the_font, Brushes.Black, -280, 0);
+            pictureBox3.Image = bm;
             */
 
             e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
             e.Graphics.ScaleTransform(-1, 1);
-            using (Font the_font = new Font("Comic Sans MS", 40))
-            {
-                e.Graphics.DrawString("Backward", the_font, Brushes.Black, -280, 0);
-
-                e.Graphics.DrawString("反向字體", the_font, Brushes.Black, -280, 50);
-            }
+            Font the_font = new Font("Comic Sans MS", 40);
+            e.Graphics.DrawString("Backward", the_font, Brushes.Black, -280, 0);
+            e.Graphics.DrawString("反向字體", the_font, Brushes.Black, -280, 50);
         }
 
         // 彩色字體 ST
@@ -1133,127 +1543,101 @@ namespace vcs_Draw6_String1
             return colors[rand.Next(0, colors.Length)];
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void pictureBox4_Paint(object sender, PaintEventArgs e)
         {
             // Draw the lined-filled text.
 
-            const string TXT = "群曜醫電";
+            const string text = "群曜醫電1";
 
             // Make the result smoother.
             e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
             //e.Graphics.Clear(this.BackColor);
             e.Graphics.Clear(Color.LightGray);
 
-            // Make a font.
-            using (Font the_font = new Font("Times New Roman", 85, FontStyle.Bold, GraphicsUnit.Pixel))
+            Font the_font = new Font("Times New Roman", 85, FontStyle.Bold, GraphicsUnit.Pixel);
+            GraphicsPath path = new GraphicsPath();
+            StringFormat string_format = new StringFormat();
+            string_format.Alignment = StringAlignment.Center;
+            string_format.LineAlignment = StringAlignment.Center;
+            int cx = this.pictureBox4.ClientSize.Width / 2;
+            int cy = this.pictureBox4.ClientSize.Height / 2;
+            path.AddString(text, the_font.FontFamily, (int)the_font.Style, the_font.Size, new Point(cx, cy), string_format);
+
+            // Restrict drawing to the path.
+            Region clip_region = new Region(path);
+            e.Graphics.Clip = clip_region;
+
+            // Fill the path with circles.
+            Random rand = new Random();
+            for (int i = 1; i < 200; i++)
             {
-                using (GraphicsPath path = new GraphicsPath())
-                {
-                    using (StringFormat string_format = new StringFormat())
-                    {
-                        string_format.Alignment = StringAlignment.Center;
-                        string_format.LineAlignment = StringAlignment.Center;
-                        int cx = this.pictureBox4.ClientSize.Width / 2;
-                        int cy = this.pictureBox4.ClientSize.Height / 2;
-                        path.AddString(TXT, the_font.FontFamily,
-                            (int)the_font.Style, the_font.Size,
-                            new Point(cx, cy), string_format);
-                    }
-
-                    // Restrict drawing to the path.
-                    using (Region clip_region = new Region(path))
-                    {
-                        e.Graphics.Clip = clip_region;
-
-                        // Fill the path with circles.
-                        Random rand = new Random();
-                        for (int i = 1; i < 200; i++)
-                        {
-                            int radius = rand.Next(5, 50);
-                            int cx = rand.Next(0, this.pictureBox4.ClientSize.Width);
-                            int cy = rand.Next(0, this.pictureBox4.ClientSize.Height);
-                            using (Brush colored_brush = new SolidBrush(RandomColor()))
-                            {
-                                e.Graphics.FillEllipse(colored_brush,
-                                    cx - radius, cy - radius, 2 * radius, 2 * radius);
-                            }
-                        }
-
-                        // Reset the clipping region.
-                        e.Graphics.ResetClip();
-                    }
-                }
+                int radius = rand.Next(5, 50);
+                cx = rand.Next(0, this.pictureBox4.ClientSize.Width);
+                cy = rand.Next(0, this.pictureBox4.ClientSize.Height);
+                Brush colored_brush = new SolidBrush(RandomColor());
+                e.Graphics.FillEllipse(colored_brush, cx - radius, cy - radius, 2 * radius, 2 * radius);
             }
-        }
 
+            // Reset the clipping region.
+            e.Graphics.ResetClip();
+        }
         // 彩色字體 SP
 
-        // 鉛筆彩色字體 ST
+        //------------------------------------------------------------  # 60個
 
+        // 鉛筆彩色字體 ST
         private void pictureBox5_Paint(object sender, PaintEventArgs e)
         {
             // Draw the lined-filled text.
-            const string TXT = "群曜醫電";
+            const string text = "群曜醫電2";
 
             // Make the result smoother.
             e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
             e.Graphics.Clear(this.BackColor);
 
-            // Make a font.
-            using (Font the_font = new Font("Times New Roman", 85, FontStyle.Bold, GraphicsUnit.Pixel))
+            Font the_font = new Font("Times New Roman", 85, FontStyle.Bold, GraphicsUnit.Pixel);
+            GraphicsPath path = new GraphicsPath();
+            StringFormat string_format = new StringFormat();
+            string_format.Alignment = StringAlignment.Center;
+            string_format.LineAlignment = StringAlignment.Center;
+            int cx = this.pictureBox5.ClientSize.Width / 2;
+            int cy = this.pictureBox5.ClientSize.Height / 2;
+            path.AddString(text, the_font.FontFamily, (int)the_font.Style, the_font.Size, new Point(cx, cy), string_format);
+
+            // Restrict drawing to the path.
+            Region clip_region = new Region(path);
+            e.Graphics.Clip = clip_region;
+
+            // Fill the path with lines.
+            Random rand = new Random();
+            int x0, y0, x1, y1;
+            x0 = 0;
+            x1 = this.pictureBox5.ClientSize.Width;
+            for (int i = 1; i < 75; i++)
             {
-                using (GraphicsPath path = new GraphicsPath())
-                {
-                    using (StringFormat string_format = new StringFormat())
-                    {
-                        string_format.Alignment = StringAlignment.Center;
-                        string_format.LineAlignment = StringAlignment.Center;
-                        int cx = this.pictureBox5.ClientSize.Width / 2;
-                        int cy = this.pictureBox5.ClientSize.Height / 2;
-                        path.AddString(TXT, the_font.FontFamily,
-                            (int)the_font.Style, the_font.Size,
-                            new Point(cx, cy), string_format);
-                    }
-
-                    // Restrict drawing to the path.
-                    using (Region clip_region = new Region(path))
-                    {
-                        e.Graphics.Clip = clip_region;
-
-                        // Fill the path with lines.
-                        Random rand = new Random();
-                        int x0, y0, x1, y1;
-                        x0 = 0;
-                        x1 = this.pictureBox5.ClientSize.Width;
-                        for (int i = 1; i < 75; i++)
-                        {
-                            y0 = rand.Next(0, this.pictureBox5.ClientSize.Height);
-                            y1 = rand.Next(0, this.pictureBox5.ClientSize.Height);
-                            using (Pen colored_pen = new Pen(RandomColor()))
-                            {
-                                e.Graphics.DrawLine(colored_pen, x0, y0, x1, y1);
-                            }
-                        }
-                        y0 = 0;
-                        y1 = this.pictureBox5.ClientSize.Height;
-                        for (int i = 1; i < 75; i++)
-                        {
-                            x0 = rand.Next(0, this.pictureBox5.ClientSize.Width);
-                            x1 = rand.Next(0, this.pictureBox5.ClientSize.Width);
-                            using (Pen colored_pen = new Pen(RandomColor()))
-                            {
-                                e.Graphics.DrawLine(colored_pen, x0, y0, x1, y1);
-                            }
-                        }
-
-                        // Reset the clipping region.
-                        e.Graphics.ResetClip();
-                    }
-                }
+                y0 = rand.Next(0, this.pictureBox5.ClientSize.Height);
+                y1 = rand.Next(0, this.pictureBox5.ClientSize.Height);
+                Pen colored_pen1 = new Pen(RandomColor());
+                e.Graphics.DrawLine(colored_pen1, x0, y0, x1, y1);
+            }
+            y0 = 0;
+            y1 = this.pictureBox5.ClientSize.Height;
+            for (int i = 1; i < 75; i++)
+            {
+                x0 = rand.Next(0, this.pictureBox5.ClientSize.Width);
+                x1 = rand.Next(0, this.pictureBox5.ClientSize.Width);
+                Pen colored_pen2 = new Pen(RandomColor());
+                e.Graphics.DrawLine(colored_pen2, x0, y0, x1, y1);
             }
 
+            // Reset the clipping region.
+            e.Graphics.ResetClip();
         }
         // 鉛筆彩色字體 SP
+
+        //------------------------------------------------------------  # 60個
 
         // 字體外框顏色改變 ST
         private void pictureBox6_Paint(object sender, PaintEventArgs e)
@@ -1265,89 +1649,77 @@ namespace vcs_Draw6_String1
             GraphicsPath path = new GraphicsPath(FillMode.Alternate);
 
             // Draw text using a StringFormat to center it on the form.
-            using (FontFamily font_family = new FontFamily("Times New Roman"))
-            {
-                using (StringFormat sf = new StringFormat())
-                {
-                    sf.Alignment = StringAlignment.Center;
-                    sf.LineAlignment = StringAlignment.Center;
-                    path.AddString("群曜醫電", font_family, (int)FontStyle.Bold, 85, this.pictureBox6.ClientRectangle, sf);
-                }
-            }
+            FontFamily font_family = new FontFamily("Times New Roman");
+            StringFormat sf = new StringFormat();
+            sf.Alignment = StringAlignment.Center;
+            sf.LineAlignment = StringAlignment.Center;
+            path.AddString("群曜醫電", font_family, (int)FontStyle.Bold, 85, this.pictureBox6.ClientRectangle, sf);
 
             // Fill and draw the path.
             e.Graphics.FillPath(Brushes.Blue, path);
-            using (Pen pen = new Pen(Color.Red, 3))
-            {
-                e.Graphics.DrawPath(pen, path);
-            }
+            Pen pen = new Pen(Color.Red, 3);
+            e.Graphics.DrawPath(pen, path);
         }
         // 字體外框顏色改變 SP
 
+        //------------------------------------------------------------  # 60個
+
         private void pictureBox7_Paint(object sender, PaintEventArgs e)
         {
-
+            e.Graphics.Clear(Color.Cyan);
         }
+
+        //------------------------------------------------------------  # 60個
 
         // 單色鉛筆彩色字體 ST
         private void pictureBox8_Paint(object sender, PaintEventArgs e)
         {
             // Draw the lined-filled text.
-            const string TXT = "群曜醫電";
+            const string text = "群曜醫電3";
 
             // Make the result smoother.
             e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
             e.Graphics.Clear(this.BackColor);
 
-            // Make a font.
-            using (Font the_font = new Font("Times New Roman", 85, FontStyle.Bold, GraphicsUnit.Pixel))
+            Font the_font = new Font("Times New Roman", 85, FontStyle.Bold, GraphicsUnit.Pixel);
+            GraphicsPath path = new GraphicsPath();
+            StringFormat string_format = new StringFormat();
+            string_format.Alignment = StringAlignment.Center;
+            string_format.LineAlignment = StringAlignment.Center;
+            int cx = this.pictureBox8.ClientSize.Width / 2;
+            int cy = this.pictureBox8.ClientSize.Height / 2;
+            path.AddString(text, the_font.FontFamily, (int)the_font.Style, the_font.Size, new Point(cx, cy), string_format);
+
+            // Restrict drawing to the path.
+            Region clip_region = new Region(path);
+            e.Graphics.Clip = clip_region;
+
+            // Fill the path with lines.
+            Random rand = new Random();
+            int x0, y0, x1, y1;
+            x0 = 0;
+            x1 = this.pictureBox8.ClientSize.Width;
+            for (int i = 1; i < 75; i++)
             {
-                using (GraphicsPath path = new GraphicsPath())
-                {
-                    using (StringFormat string_format = new StringFormat())
-                    {
-                        string_format.Alignment = StringAlignment.Center;
-                        string_format.LineAlignment = StringAlignment.Center;
-                        int cx = this.pictureBox8.ClientSize.Width / 2;
-                        int cy = this.pictureBox8.ClientSize.Height / 2;
-                        path.AddString(TXT, the_font.FontFamily,
-                            (int)the_font.Style, the_font.Size,
-                            new Point(cx, cy), string_format);
-                    }
-
-                    // Restrict drawing to the path.
-                    using (Region clip_region = new Region(path))
-                    {
-                        e.Graphics.Clip = clip_region;
-
-                        // Fill the path with lines.
-                        Random rand = new Random();
-                        int x0, y0, x1, y1;
-                        x0 = 0;
-                        x1 = this.pictureBox8.ClientSize.Width;
-                        for (int i = 1; i < 75; i++)
-                        {
-                            y0 = rand.Next(0, this.pictureBox8.ClientSize.Height);
-                            y1 = rand.Next(0, this.pictureBox8.ClientSize.Height);
-                            e.Graphics.DrawLine(Pens.Black, x0, y0, x1, y1);
-                        }
-                        y0 = 0;
-                        y1 = this.pictureBox8.ClientSize.Height;
-                        for (int i = 1; i < 75; i++)
-                        {
-                            x0 = rand.Next(0, this.pictureBox8.ClientSize.Width);
-                            x1 = rand.Next(0, this.pictureBox8.ClientSize.Width);
-                            e.Graphics.DrawLine(Pens.Black, x0, y0, x1, y1);
-                        }
-
-                        // Reset the clipping region.
-                        e.Graphics.ResetClip();
-                    }
-                }
+                y0 = rand.Next(0, this.pictureBox8.ClientSize.Height);
+                y1 = rand.Next(0, this.pictureBox8.ClientSize.Height);
+                e.Graphics.DrawLine(Pens.Black, x0, y0, x1, y1);
             }
-        }
+            y0 = 0;
+            y1 = this.pictureBox8.ClientSize.Height;
+            for (int i = 1; i < 75; i++)
+            {
+                x0 = rand.Next(0, this.pictureBox8.ClientSize.Width);
+                x1 = rand.Next(0, this.pictureBox8.ClientSize.Width);
+                e.Graphics.DrawLine(Pens.Black, x0, y0, x1, y1);
+            }
 
+            // Reset the clipping region.
+            e.Graphics.ResetClip();
+        }
         // 單色鉛筆彩色字體 SP
+
+        //------------------------------------------------------------  # 60個
 
         //倒影效果
         private void pictureBox9_Paint(object sender, PaintEventArgs e)
@@ -1362,6 +1734,8 @@ namespace vcs_Draw6_String1
             e.Graphics.ScaleTransform(1, -1.0F);//縮放變換矩陣
             e.Graphics.DrawString(Var_Str, Var_Font, Var_Brush_Back, 0, -Var_Size.Height * 1.6F);//繪製倒影文本
         }
+
+        //------------------------------------------------------------  # 60個
 
         //投影效果
         private void pictureBox10_Paint(object sender, PaintEventArgs e)
@@ -1383,10 +1757,21 @@ namespace vcs_Draw6_String1
             e.Graphics.DrawString(Var_Str, Var_Font, Var_Brush_2, new PointF(0, 60));//繪製文字
         }
 
+        //------------------------------------------------------------  # 60個
+
+        private void pictureBox11_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.Clear(Color.Cyan);
+        }
+
+        //------------------------------------------------------------  # 60個
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             this.pictureBox_time.Invalidate();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void pictureBox_time_Paint(object sender, PaintEventArgs e)
         {
@@ -1423,4 +1808,17 @@ namespace vcs_Draw6_String1
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
+
+
+
+
+/*
+            StringFormat string_format = new StringFormat();
+            string_format.Alignment = StringAlignment.Near;
+            string_format.LineAlignment = StringAlignment.Near;
+            string_format.Trimming = StringTrimming.None;
+            string_format.FormatFlags = StringFormatFlags.MeasureTrailingSpaces;
+
+            g.TextRenderingHint = TextRenderingHint.AntiAlias;
+*/
 

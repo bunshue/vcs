@@ -27,18 +27,14 @@ namespace vcs_PictureOverlay
         private void Form1_Load(object sender, EventArgs e)
         {
             DoubleBuffered = true;  // Reduce flicker.
-        }
 
-        //------------------------------------------------------------  # 60個
-
-        //開啟底圖
-        private void button1_Click(object sender, EventArgs e)
-        {
+            //開啟底圖
             string filename1 = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
-
             bitmap1 = new Bitmap(filename1);
             pictureBox1.Image = bitmap1;
         }
+
+        //------------------------------------------------------------  # 60個
 
         //選擇貼上圖片
         private void button2_Click(object sender, EventArgs e)
@@ -107,15 +103,6 @@ namespace vcs_PictureOverlay
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
-
-
-
