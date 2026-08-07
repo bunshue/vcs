@@ -38,9 +38,8 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox0 = new System.Windows.Forms.GroupBox();
-            this.button5 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button4 = new System.Windows.Forms.Button();
+            this.button13 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
@@ -57,6 +56,8 @@
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.bt_draw1 = new System.Windows.Forms.Button();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button14 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox0.SuspendLayout();
@@ -162,7 +163,7 @@
             // 
             // groupBox0
             // 
-            this.groupBox0.Controls.Add(this.button5);
+            this.groupBox0.Controls.Add(this.button4);
             this.groupBox0.Controls.Add(this.button0);
             this.groupBox0.Controls.Add(this.button2);
             this.groupBox0.Controls.Add(this.button3);
@@ -174,39 +175,30 @@
             this.groupBox0.TabStop = false;
             this.groupBox0.Text = "TextureBrush";
             // 
-            // button5
-            // 
-            this.button5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button5.Location = new System.Drawing.Point(6, 315);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(180, 60);
-            this.button5.TabIndex = 117;
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button4);
+            this.groupBox1.Controls.Add(this.button14);
+            this.groupBox1.Controls.Add(this.button13);
             this.groupBox1.Controls.Add(this.button10);
             this.groupBox1.Controls.Add(this.button12);
             this.groupBox1.Controls.Add(this.button11);
-            this.groupBox1.Location = new System.Drawing.Point(435, 12);
+            this.groupBox1.Location = new System.Drawing.Point(229, 13);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 325);
+            this.groupBox1.Size = new System.Drawing.Size(200, 403);
             this.groupBox1.TabIndex = 125;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "LinearGradientBrush";
             // 
-            // button4
+            // button13
             // 
-            this.button4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button4.Location = new System.Drawing.Point(12, 239);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(180, 60);
-            this.button4.TabIndex = 117;
-            this.button4.Text = "lgb";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.button13.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button13.Location = new System.Drawing.Point(12, 248);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(180, 60);
+            this.button13.TabIndex = 118;
+            this.button13.Text = "lgb";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // button10
             // 
@@ -246,7 +238,7 @@
             this.groupBox2.Controls.Add(this.button20);
             this.groupBox2.Controls.Add(this.button22);
             this.groupBox2.Controls.Add(this.button21);
-            this.groupBox2.Location = new System.Drawing.Point(229, 12);
+            this.groupBox2.Location = new System.Drawing.Point(435, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(200, 248);
             this.groupBox2.TabIndex = 126;
@@ -387,6 +379,26 @@
             this.radioButton1.UseVisualStyleBackColor = true;
             this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
+            // button4
+            // 
+            this.button4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button4.Location = new System.Drawing.Point(6, 315);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(180, 60);
+            this.button4.TabIndex = 117;
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button14
+            // 
+            this.button14.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button14.Location = new System.Drawing.Point(12, 314);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(180, 60);
+            this.button14.TabIndex = 118;
+            this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -447,8 +459,9 @@
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.Button bt_draw1;
         private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button14;
     }
 }
 

@@ -19,6 +19,11 @@ namespace howto_piston
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         // Geometry.
         private float Ax = 10;
         private float Cx = 200;
@@ -38,10 +43,7 @@ namespace howto_piston
         private Graphics Gr;
 
         // Find the points where the two circles intersect.
-        private int FindCircleCircleIntersections(
-            float cx0, float cy0, float radius0,
-            float cx1, float cy1, float radius1,
-            out PointF intersection1, out PointF intersection2)
+        private int FindCircleCircleIntersections(float cx0, float cy0, float radius0, float cx1, float cy1, float radius1, out PointF intersection1, out PointF intersection2)
         {
             // Find the distance between the centers.
             float dx = cx0 - cx1;
@@ -73,8 +75,7 @@ namespace howto_piston
             else
             {
                 // Find a and h.
-                double a = (radius0 * radius0 -
-                    radius1 * radius1 + dist * dist) / (2 * dist);
+                double a = (radius0 * radius0 - radius1 * radius1 + dist * dist) / (2 * dist);
                 double h = Math.Sqrt(radius0 * radius0 - a * a);
 
                 // Find P2.
@@ -82,15 +83,14 @@ namespace howto_piston
                 double cy2 = cy0 + a * (cy1 - cy0) / dist;
 
                 // Get the points P3.
-                intersection1 = new PointF(
-                    (float)(cx2 + h * (cy1 - cy0) / dist),
-                    (float)(cy2 - h * (cx1 - cx0) / dist));
-                intersection2 = new PointF(
-                    (float)(cx2 - h * (cy1 - cy0) / dist),
-                    (float)(cy2 + h * (cx1 - cx0) / dist));
+                intersection1 = new PointF((float)(cx2 + h * (cy1 - cy0) / dist), (float)(cy2 - h * (cx1 - cx0) / dist));
+                intersection2 = new PointF((float)(cx2 - h * (cy1 - cy0) / dist), (float)(cy2 + h * (cx1 - cx0) / dist));
 
                 // See if we have 1 or 2 solutions.
-                if (dist == radius0 + radius1) return 1;
+                if (dist == radius0 + radius1)
+                {
+                    return 1;
+                }
                 return 2;
             }
         }
@@ -119,9 +119,7 @@ namespace howto_piston
             using (Pen custom_pen = new Pen(Color.Blue, 2))
             {
                 // Draw the wheel.
-                RectangleF wheel_rect = new RectangleF(
-                    Cx - Radius, Cy - Radius,
-                    2 * Radius, 2 * Radius);
+                RectangleF wheel_rect = new RectangleF(Cx - Radius, Cy - Radius, 2 * Radius, 2 * Radius);
                 Gr.FillEllipse(Brushes.LightBlue, wheel_rect);
                 custom_pen.Color = Color.Blue;
                 custom_pen.Width = 2;
@@ -165,10 +163,7 @@ namespace howto_piston
                 float linkage_x1 = X + PistonLength + ArmLength;
                 float linkage_y1 = Cy;
                 PointF pt1, pt2;
-                FindCircleCircleIntersections(
-                    linkage_x1, linkage_y1, L1,
-                    Cx, Cy, Radius,
-                    out pt1, out pt2);
+                FindCircleCircleIntersections(linkage_x1, linkage_y1, L1, Cx, Cy, Radius, out pt1, out pt2);
                 float linkage_x2, linkage_y2;
                 if (Dx > 0)
                 {
@@ -191,10 +186,8 @@ namespace howto_piston
 
                 // Draw joints.
                 Gr.FillEllipse(Brushes.Black, Cx - 4, Cy - 4, 8, 8);
-                Gr.FillEllipse(Brushes.Green,
-                    linkage_x1 - 4, linkage_y1 - 4, 8, 8);
-                Gr.FillEllipse(Brushes.Green,
-                    linkage_x2 - 4, linkage_y2 - 4, 8, 8);
+                Gr.FillEllipse(Brushes.Green, linkage_x1 - 4, linkage_y1 - 4, 8, 8);
+                Gr.FillEllipse(Brushes.Green, linkage_x2 - 4, linkage_y2 - 4, 8, 8);
             }
         }
 
@@ -216,9 +209,7 @@ namespace howto_piston
 
                 Cx = Xmin + PistonLength + ArmLength + L1 + Radius;
 
-                Picture = new Bitmap(
-                    picCanvas.ClientSize.Width,
-                    picCanvas.ClientSize.Height);
+                Picture = new Bitmap(picCanvas.ClientSize.Width, picCanvas.ClientSize.Height);
                 Gr = Graphics.FromImage(Picture);
                 picCanvas.Image = Picture;
 

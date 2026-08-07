@@ -1508,42 +1508,6 @@ namespace vcs_Draw1
 
         private void button11_Click(object sender, EventArgs e)
         {
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
-            richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
-
-            bitmap1 = new Bitmap(filename);
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-            richTextBox1.Text += "W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
-            pictureBox1.Size = new Size(W, H);
-
-            SolidBrush sb = new SolidBrush(Color.Purple);
-            Font f = new Font("標楷體", 30);
-            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
-
-            //g.DrawRectangle(p, 0, 0, bitmap1.Width - 1, bitmap1.Height - 1);
-            //g.DrawRectangle(p, 100, 100, bitmap1.Width - 1 - 200, bitmap1.Height - 1 - 200);
-
-            p = new Pen(Color.Purple, 5);
-
-            /*
-            g.DrawLine(p, 0, bitmap1.Height / 2, bitmap1.Width - 1, bitmap1.Height / 2);
-            g.DrawLine(p, bitmap1.Width / 2, 0, bitmap1.Width / 2, bitmap1.Height - 1);
-            g.DrawString("Sugar", f, sb, new PointF(bitmap1.Width - 75, bitmap1.Height / 2 - 35));
-            g.DrawString("Sugar", f, sb, new PointF(bitmap1.Width - 75, bitmap1.Height / 1 - 35));
-            */
-
-            g.DrawString("在圖上寫字", f, sb, new PointF(300, 30));
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            //小圖貼到大圖上
-
-            Bitmap bitmap2 = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\__RW\_png\vcs_ReadWrite_PNG.png");
-            //將小圖貼到大圖上
-            g.DrawImage(bitmap2, 5, 5);
-
-            pictureBox1.Image = bitmap1;
         }
 
         //------------------------------------------------------------  # 60個
@@ -2821,4 +2785,3 @@ g.DrawImage(bitmap1, Cx, Cy, -W / 2, -H / 2);
 
 
 //f = new Font("Times New Roman", 40, FontStyle.Regular, GraphicsUnit.Pixel);
-

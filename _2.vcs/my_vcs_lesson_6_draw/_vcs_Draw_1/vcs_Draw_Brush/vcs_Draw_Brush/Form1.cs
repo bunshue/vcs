@@ -130,7 +130,7 @@ namespace vcs_Draw_Brush
             pictureBox2.Location = new Point(x_st + dx * 6, y_st + dy * 0 + 30);
             label1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
 
-            richTextBox1.Size = new Size(305, 240);
+            richTextBox1.Size = new Size(305, 340);
             richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 7 - 50);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -139,11 +139,13 @@ namespace vcs_Draw_Brush
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button5.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+
             button10.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button12.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button4.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button13.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 0, y_st + dy * 4);
 
             button20.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button21.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -160,7 +162,7 @@ namespace vcs_Draw_Brush
             bt_draw1.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             bt_draw2.Location = new Point(x_st + dx * 0, y_st + dy * 5 + 20);
 
-            this.Size = new Size(1610, 740);
+            this.Size = new Size(1610, 840);
             this.Text = "vcs_Draw_Brush";
 
             //設定執行後的表單起始位置, 正中央
@@ -331,6 +333,20 @@ namespace vcs_Draw_Brush
             Graphics g = this.pictureBox1.CreateGraphics();
             TextureBrush mybrush = new TextureBrush(bitmap1);
             g.FillEllipse(mybrush, 0, 0, W, H);
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //TextureBrush
+
+            //方法一：(用圖片填滿圓圈)
+            Graphics g = this.pictureBox1.CreateGraphics();
+            TextureBrush tb = new TextureBrush(new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg"));
+
+            //20, 20 為座標位置，10, 10 為圓的大小
+            g.FillEllipse(tb, 20, 20, 200, 200);
         }
 
         //------------------------------------------------------------  # 60個
@@ -519,7 +535,7 @@ namespace vcs_Draw_Brush
             g.FillRectangle(br3, rect);
             g.DrawRectangle(Pens.Black, rect);//外框
 
-            //3030
+            //------------------------------  # 30個
 
             //PathGradientBrush 路徑漸層塗刷
 
@@ -541,6 +557,8 @@ namespace vcs_Draw_Brush
             pictureBox1.Image = bitmap1;
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button12_Click(object sender, EventArgs e)
         {
             //彩色曲線
@@ -559,27 +577,27 @@ namespace vcs_Draw_Brush
             }
 
             RectangleF world_rect = new RectangleF(0, 0, 100, 100);
-            RectangleF device_rect = new RectangleF(5, 5,
-                pictureBox1.ClientSize.Width - 10,
-                pictureBox1.ClientSize.Height - 10);
+            RectangleF device_rect = new RectangleF(5, 5, pictureBox1.ClientSize.Width - 10, pictureBox1.ClientSize.Height - 10);
             SetTransformation(g, world_rect, device_rect, false, true);
 
             // Draw the axes.
             using (Pen pen = new Pen(Color.Black, 0))
             {
                 for (int y = 10; y < 100; y += 10)
+                {
                     g.DrawLine(pen, -2, y, 2, y);
+                }
                 g.DrawLine(pen, 0, 0, 0, 100);
 
                 for (int x = 10; x < 100; x += 10)
+                {
                     g.DrawLine(pen, x, -2, x, 2);
+                }
                 g.DrawLine(pen, 0, 0, 100, 0);
             }
 
             // Make a brush for the curve.
-            using (LinearGradientBrush brush =
-                new LinearGradientBrush(world_rect,
-                    Color.Red, Color.Blue, 270))
+            using (LinearGradientBrush brush = new LinearGradientBrush(world_rect, Color.Red, Color.Blue, 270))
             {
                 ColorBlend blend = new ColorBlend();
                 blend.Colors = new Color[]
@@ -646,6 +664,47 @@ namespace vcs_Draw_Brush
             g.Transform = new Matrix(world_rect, device_points);  // 設定仿射矩陣, 矩陣轉置, 只能 矩形範圍 轉 平行四邊形範圍
         }
 
+        //------------------------------------------------------------  # 60個
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            //LinearGradientBrush 建立漸層筆刷, 使用沿漸變混合的兩種顏色進行繪制
+            //LinearGradientBrush 漸層筆刷變數 = new LinearGradientBrush(漸層矩形區域, 前景顏色, 背景顏色, 漸層傾斜角度);
+
+            Graphics g = pictureBox1.CreateGraphics();
+
+            int W = 400;
+            int H = 200;
+            int x_st = 100;
+            int y_st = 100;
+            int x_sp = 100 + W;
+            int y_sp = y_st;
+            Rectangle rect1 = new Rectangle(x_st, y_st, W, H);
+
+            LinearGradientBrush lgb = new LinearGradientBrush(rect1, Color.Red, Color.Green, 0f);
+
+            Pen p = new Pen(lgb, 200);
+            g.DrawLine(p, x_st - 50, y_st, x_sp + 50, y_sp);
+
+            //lgb.SetSigmaBellShape(0.5f);
+
+            Array obj = Enum.GetValues(typeof(LinearGradientMode));
+
+            for (int x = 0; x < obj.Length; x++)
+            {
+                LinearGradientMode temp = (LinearGradientMode)obj.GetValue(x);
+                richTextBox1.Text += temp.ToString() + "\n";
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void button20_Click(object sender, EventArgs e)
         {
@@ -791,50 +850,6 @@ namespace vcs_Draw_Brush
                 richTextBox1.Text += "LinearGradientBrush\n";
             }
         }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            //LinearGradientBrush 建立漸層筆刷, 使用沿漸變混合的兩種顏色進行繪制
-            //LinearGradientBrush 漸層筆刷變數 = new LinearGradientBrush(漸層矩形區域, 前景顏色, 背景顏色, 漸層傾斜角度);
-
-            Graphics g = pictureBox1.CreateGraphics();
-
-            int W = 400;
-            int H = 200;
-            int x_st = 100;
-            int y_st = 100;
-            int x_sp = 100 + W;
-            int y_sp = y_st;
-            Rectangle rect1 = new Rectangle(x_st, y_st, W, H);
-
-            LinearGradientBrush lgb = new LinearGradientBrush(rect1, Color.Red, Color.Green, 0f);
-
-            Pen p = new Pen(lgb, 200);
-            g.DrawLine(p, x_st - 50, y_st, x_sp + 50, y_sp);
-
-            //lgb.SetSigmaBellShape(0.5f);
-
-            Array obj = Enum.GetValues(typeof(LinearGradientMode));
-
-            for (int x = 0; x < obj.Length; x++)
-            {
-                LinearGradientMode temp = (LinearGradientMode)obj.GetValue(x);
-                richTextBox1.Text += temp.ToString() + "\n";
-            }
-
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            //TextureBrush
-
-            //方法一：(用圖片填滿圓圈)
-            Graphics g = this.pictureBox1.CreateGraphics();
-            TextureBrush tb = new TextureBrush(new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg"));
-
-            //20, 20 為座標位置，10, 10 為圓的大小
-            g.FillEllipse(tb, 20, 20, 200, 200);
-        }
     }
 }
 
@@ -848,17 +863,6 @@ namespace vcs_Draw_Brush
 
 /*
 
-方法二：(用筆刷填滿圓圈)
-      Graphics g = this.CreateGraphics();
-      SolidBrush sb = new SolidBrush(Color.Blue);
-      
-      //20, 20 為座標位置，10, 10 為圓的大小
-      g.FillEllipse(sb, 20, 20, 10, 10);
-
-//------------------------------------------------------------  # 60個
-
-//剪下 = 複製到剪貼簿 + 把選取區域塗成背景色
-SolidBrush br = new SolidBrush(pictureBox1.BackColor)
 
 //------------------------------------------------------------  # 60個
 

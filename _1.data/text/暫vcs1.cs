@@ -1,4 +1,36 @@
 ﻿
+
+
+
+        //重寫表單的OnPaint範例 直接寫在此即可
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            e.Graphics.DrawString("使用\nOnPaint", new Font("標楷體", 14), new SolidBrush(Color.Red), new PointF(this.ClientSize.Width - 80, this.ClientSize.Height - 50));
+            e.Graphics.DrawRectangle(Pens.Red, 5, 5, this.ClientSize.Width - 10, this.ClientSize.Height - 10);
+        }
+
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+            //不進行背景的繪制
+        }
+
+//------------------------------------------------------------  # 60個
+
+方法二：(用筆刷填滿圓圈)
+      Graphics g = this.CreateGraphics();
+      SolidBrush sb = new SolidBrush(Color.Blue);
+      
+      //20, 20 為座標位置，10, 10 為圓的大小
+      g.FillEllipse(sb, 20, 20, 10, 10);
+
+//------------------------------------------------------------  # 60個
+
+//pbox 的 剪下
+//剪下 = 複製到剪貼簿 + 把選取區域塗成背景色
+SolidBrush br = new SolidBrush(pictureBox1.BackColor)
+
+//------------------------------------------------------------  # 60個
+
 rtb
 richTextBox1.LoadFile("pipa.txt", RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
 
@@ -18,7 +50,6 @@ Slate blue (石板藍) 是一種將涼爽的藍色與沉穩的灰色相結合的
             button22.BackColor = default(Color);
             button22.UseVisualStyleBackColor = true;
 
-
 //------------------------------------------------------------  # 60個
 
             Color slateBlue = Color.FromName("SlateBlue");
@@ -26,7 +57,7 @@ Slate blue (石板藍) 是一種將涼爽的藍色與沉穩的灰色相結合的
             byte b = slateBlue.B;
             byte r = slateBlue.R;
             byte a = slateBlue.A;
-            string text = String.Format("用OnPaint寫字範例\nSlate Blue has these ARGB values:\n A:{0}, " + "R:{1}, G: {2}, B {3}", new object[] { a, r, g, b });
+            string text = String.Format("寫字範例\nSlate Blue has these ARGB values:\n A:{0}, " + "R:{1}, G: {2}, B {3}", new object[] { a, r, g, b });
 
 //------------------------------------------------------------  # 60個
 
@@ -50,14 +81,7 @@ else if (File.Exists(this.fileName))
 	File.Delete(this.fileName);
 }
 
-
 throw new Exception("行數不能小於0");
-
-
-//點二維陣列
-//Point[][] colonPoints = new Point[2][];
-//Point[][] colonPoints = new Point[2][];
-
 
 //------------------------------------------------------------  # 60個
 
@@ -102,8 +126,8 @@ int col = (int)date.DayOfWeek - (int)CultureInfo.CurrentCulture.DateTimeFormat.F
 
 string[] month_names = CultureInfo.CurrentCulture.DateTimeFormat.MonthNames;
 
-            DateTime first_of_month = new DateTime(year_num, month_num, 1);
-            int num_days = DateTime.DaysInMonth(year_num, month_num);
+DateTime first_of_month = new DateTime(year_num, month_num, 1);
+int num_days = DateTime.DaysInMonth(year_num, month_num);
 
 //------------------------------------------------------------  # 60個
 
@@ -250,7 +274,6 @@ listbox
             String[] Job = new String[] { "士", "農", "工", "商", "兵", "其它" };
             lstJob.Items.AddRange(Job); // lstJob清單放入Job陣列內容
             lstJob.SelectedIndex = 0;   // lstJob清單預設第1個選項被選取
-
 
 listbox的方法
 從 listbox 的內容取得index
@@ -610,31 +633,31 @@ public Point? GetIntersectionWith(Line secondLine);
 
 //------------------------------------------------------------  # 60個
 
-            /*
-            Vector3 row0 = new Vector3(1, 2, 3);
-            Vector3 row1 = new Vector3(4, 5, 6);
-            Vector3 row2 = new Vector3(7, 8, 9);
-            Matrix3x3 matrix = Matrix3x3.CreateFromRows(row0, row1, row2);
-            */
+/*
+Vector3 row0 = new Vector3(1, 2, 3);
+Vector3 row1 = new Vector3(4, 5, 6);
+Vector3 row2 = new Vector3(7, 8, 9);
+Matrix3x3 matrix = Matrix3x3.CreateFromRows(row0, row1, row2);
+*/
 
-            //CreateFromColumnsTest
-            Vector3 column0 = new Vector3(1, 4, 7);
-            Vector3 column1 = new Vector3(2, 5, 8);
-            Vector3 column2 = new Vector3(3, 6, 9);
-            Matrix3x3 matrix = Matrix3x3.CreateFromColumns(column0, column1, column2);
+//CreateFromColumnsTest
+Vector3 column0 = new Vector3(1, 4, 7);
+Vector3 column1 = new Vector3(2, 5, 8);
+Vector3 column2 = new Vector3(3, 6, 9);
+Matrix3x3 matrix = Matrix3x3.CreateFromColumns(column0, column1, column2);
 
-            float[] array = matrix.ToArray();
+float[] array = matrix.ToArray();
 
-            for (int i = 0; i < 9; i++)
-            {
-            }
+for (int i = 0; i < 9; i++)
+{
+}
 
-            //Assert.AreEqual<Vector3>(column0, matrix.GetColumn(0));
-            //Assert.AreEqual<Vector3>(column1, matrix.GetColumn(1));
-            //Assert.AreEqual<Vector3>(column2, matrix.GetColumn(2));
+//Assert.AreEqual<Vector3>(column0, matrix.GetColumn(0));
+//Assert.AreEqual<Vector3>(column1, matrix.GetColumn(1));
+//Assert.AreEqual<Vector3>(column2, matrix.GetColumn(2));
 
-            //matrix.GetColumn(-1);
-            //matrix.GetColumn(3);
+//matrix.GetColumn(-1);
+//matrix.GetColumn(3);
             
 //------------------------------------------------------------  # 60個
 
@@ -1023,7 +1046,6 @@ C# 7.0 引入 具名 Tuple 語法
 
 //------------------------------------------------------------  # 60個
 
-/*
 記住目前的設定值，下次程式開啟時，可以拿來用。
 
 方案總管/Properties/Settings settings/
@@ -1034,7 +1056,6 @@ C# 7.0 引入 具名 Tuple 語法
 
 目前找不到設定型態的位置，只好到Settings settings檔案改成以下：
 <Setting Name="Argbs" Type="System.Int32[]" Scope="User">
-*/
 
 //------------------------------------------------------------  # 60個
 
@@ -2756,19 +2777,6 @@ C# TabControl標簽的隱藏
 	this.tabMain.TabPages.Add(tabpageThePage);
 	}
 
-int len = 10;                       
-int x = 0;
-int y = 0;
-Point[] pntArr = new Point[3];
-pntArr[0] = new Point(x, y);
-pntArr[1] = new Point(x - len, y);
-pntArr[2] = new Point(x - len / 2, (int)(len * Math.Sqrt(3) / 2 + y));
-
-        protected override void OnPaintBackground(PaintEventArgs e)
-        {
-            //不進行背景的繪制
-        }
-
 //------------------------------------------------------------  # 60個
 
 c# 控件閃爍處理方法
@@ -2778,6 +2786,7 @@ c# 控件閃爍處理方法
 SetStyle(ControlStyles.UserPaint, true);
 SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
 SetStyle(ControlStyles.DoubleBuffer, true); // 雙緩沖
+
 參數說明：
 
 UserPaint
@@ -3638,49 +3647,16 @@ this.richTextBox1.SelectionFont = MyFont;
 
 //------------------------------------------------------------  # 60個
 
-拜列轉字串
-
- C# byte 轉 文字
-byte轉char或 byte轉string
-
-Convert.ToChar是把hex轉成相對應ascii code
-像a的ascii code是0x61
-
-byte[] b = new byte[2] { 0x61,0x62 };
-string s=Convert.ToChar(b[0]); => s="a";
-string s=Convert.ToChar(b[1]); => s="b";
-
-如果你要把byte code轉成"字面上"的數值 應該這樣寫
-
-byte[] b = new byte[2] { 0x61,0x62 };
-string s=b[0].ToString("X2"); => s="61";
-string s=b[1].ToString("X2"); => s="62";
-
-ToString("X2")這個格式化字串還蠻好用的 一下就可以把byte轉成相對應的文字
-以前我要把byte轉成文字都是用下面這方法
-
-byte[] b = new byte[2] { 0x03,0x04 };
-string s= Convert.ToString(b[1], 16);
-if (s.Length == 1) //不滿2位要補一個零
-{
-	s= "0"+s;
-}
-===> s="03";
-
-太麻煩了 那麼多行直接用b[0].ToString("X2")一行就可以取代 還不用自己判斷前面要不要補零 
-
-//------------------------------------------------------------  # 60個
-
 [ C# ] WinForm 顯示於延伸螢幕之方法
 https://georgiosky2000.wordpress.com/2014/03/19/c-winform-%e9%a1%af%e7%a4%ba%e6%96%bc%e5%bb%b6%e4%bc%b8%e8%9e%a2%e5%b9%95%e4%b9%8b%e6%96%b9%e6%b3%95/
 
 //------------------------------------------------------------  # 60個
 
-richTextBox1.Text += "year = " + year.ToString("00") + "\n";
-richTextBox1.Text += "month = " + month.ToString("00") + "\n";
-richTextBox1.Text += "mday = " + mday.ToString("0000") + "\n";
-richTextBox1.Text += "wday = " + wday.ToString() + "\n";
-richTextBox1.Text += "hour = " + hour.ToString("00") + "\n";
+richTextBox1.Text += "year =    " +    year.ToString("00") + "\n";
+richTextBox1.Text += "month =   " +   month.ToString("00") + "\n";
+richTextBox1.Text += "mday =    " +    mday.ToString("0000") + "\n";
+richTextBox1.Text += "wday =    " +    wday.ToString() + "\n";
+richTextBox1.Text += "hour =    " +    hour.ToString("00") + "\n";
 richTextBox1.Text += "minutes = " + minutes.ToString("00") + "\n";
 richTextBox1.Text += "seconds = " + seconds.ToString("00") + "\n";
 
@@ -4227,16 +4203,6 @@ GC.Collect();  // 強制執行記憶體回收機制
 
 //------------------------------------------------------------  # 60個
 
-記住目前的設定值，下次程式開啟時，可以拿來用。
-
-方案總管/Properties/Settings settings/
-加入：
-名稱 Argbs
-型別 System.Int32[]
-範圍 User
-
-目前找不到設定型態的位置，只好到Settings settings檔案改成以下：
-<Setting Name="Argbs" Type="System.Int32[]" Scope="User">
 
 //------------------------------------------------------------  # 60個
 
@@ -5207,19 +5173,6 @@ sugar不能用 先用 kilo/romeo測一下
 
 找一下現在kilo裡面的m3u
 先用Access把目前的.mdb讀出來看看	果然是跟預期的一樣
-
-Jagged Array
-string[][] trans = new string[30][];
-trans有30項 每項長度不定 需要動態配置長度
-ex:
-	trans[5] = new string[10];
-	第5項長度10個字串
-	trans[5][0] = "aa";
-	trans[5][1] = "bb";
-	trans[5][2] = "cc";
-		:
-		:
-取得單項長度 trans[5].Length
 
 //------------------------------------------------------------  # 60個
 
@@ -6211,7 +6164,7 @@ Step6: 將資料的下一個Byte做Step2~4 直到全部資料都做完
 
 取資料的第一個Byte開始計算
 
-crc = 0xFFFF = 1111 1111 1111 1111
+crc  = 0xFFFF = 1111 1111 1111 1111
 Byte1 =  0x02 = 0000 0000 0000 0010
 
 crc XOR Byte1 = 1111 1111 1111 1101

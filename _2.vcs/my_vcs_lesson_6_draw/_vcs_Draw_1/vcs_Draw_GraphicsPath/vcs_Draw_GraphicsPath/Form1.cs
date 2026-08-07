@@ -641,6 +641,7 @@ namespace vcs_Draw_GraphicsPath
         {
             //做一個圓形的pictureBox
             string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_computer\burn1.jpg";
+            filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             pictureBox1.Image = Image.FromFile(filename);
             pictureBox1.BackColor = Color.Pink;
 
@@ -648,7 +649,7 @@ namespace vcs_Draw_GraphicsPath
 
             //做一個圓形的pictureBox
             // Make a Rectangle that defines the circular area.
-            Rectangle rect = new Rectangle(15, 15, 200, 200);
+            Rectangle rect = new Rectangle(10, 10, 305 - 20, 400 - 20);
 
             // Make a GraphicsPath and add the circle.
             GraphicsPath path = new GraphicsPath();
@@ -1407,6 +1408,11 @@ namespace vcs_Draw_GraphicsPath
                 }
                 //g.DrawRectangle(Pens.Red, 100, 100, 200, 200);
             }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "你按了 pictureBox1\n";
         }
     }
 }

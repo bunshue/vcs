@@ -18,6 +18,11 @@ namespace howto_robot_arm_with_hand
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         // Redraw.
         private void scrJoint_Scroll(object sender, ScrollEventArgs e)
         {
@@ -121,7 +126,7 @@ namespace howto_robot_arm_with_hand
 
             // Rotate at the wrist.
             gr.RotateTransform(-scrJoint3.Value, MatrixOrder.Prepend);
-            
+
             // Translate to the end of the wrist.
             gr.TranslateTransform(WristLength, 0, MatrixOrder.Prepend);
 

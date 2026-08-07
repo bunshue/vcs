@@ -56,22 +56,14 @@ namespace vcs_Draw2
             button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
 
-            bt_reset.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            bt_save.Location = new Point(x_st + dx * 2 + 100, y_st + dy * 4);
+            pictureBox1.Size = new Size(920, 690);
+            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y + pictureBox1.Size.Height - bt_reset.Size.Height);
 
-            richTextBox1.Size = new Size(200, 340);
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            richTextBox1.Size = new Size(200, 690);
+            richTextBox1.Location = new Point(x_st + dx * 6 + 100, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-
-            int W = 920;
-            int H = 690;
-            pictureBox1.Size = new Size(W, H);
-            pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
             this.Size = new Size(1600, 750);
             this.Text = "vcs_Draw2";
@@ -605,13 +597,55 @@ namespace vcs_Draw2
             g.DrawLine(pen, 20, 20, this.pictureBox1.ClientSize.Width - 20, this.pictureBox1.ClientSize.Height - 20);
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button10_Click(object sender, EventArgs e)
         {
+            //DrawHeart
+
+            DrawGrid();
+
+            richTextBox1.Text += "DrawHeart\n";
+
+            int center_x;
+            int center_y;
+            int radius;
+            int linewidth;
+            Color c;
+
+            center_x = 100;
+            center_y = 100;
+            radius = 100;
+            linewidth = 10;
+            c = Color.Red;
+
+            p = new Pen(c, linewidth);
+            g.DrawArc(p, center_x - radius / 1, center_y - radius / 1, radius / 1, radius / 1, 180, 180);
+            g.DrawArc(p, center_x, center_y - radius / 1, radius / 1, radius / 1, 180, 180);
+
+
+            Point[] pt = new Point[3];    //一維陣列內有3個Point
+
+            pt[0].X = 0;
+            pt[0].Y = radius / 2;
+
+            pt[1].X = radius;
+            pt[1].Y = radius + radius * 2 / 3;
+
+            pt[2].X = radius * 2;
+            pt[2].Y = radius / 2;
+            g.DrawLines(new Pen(Brushes.Red, linewidth), pt);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button11_Click(object sender, EventArgs e)
         {
+            //DrawGrid
+            DrawGrid();
         }
+
+        //------------------------------------------------------------  # 60個
 
         //HatchStyles ST
         private void button12_Click(object sender, EventArgs e)
@@ -949,93 +983,14 @@ namespace vcs_Draw2
             pictureBox1.Image = bitmap1;
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button19_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void button20_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button21_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button22_Click(object sender, EventArgs e)
-        {
-            //DrawHeart
-
-            DrawGrid();
-
-            richTextBox1.Text += "DrawHeart\n";
-
-            int center_x;
-            int center_y;
-            int radius;
-            int linewidth;
-            Color c;
-
-            center_x = 100;
-            center_y = 100;
-            radius = 100;
-            linewidth = 10;
-            c = Color.Red;
-
-            p = new Pen(c, linewidth);
-            g.DrawArc(p, center_x - radius / 1, center_y - radius / 1, radius / 1, radius / 1, 180, 180);
-            g.DrawArc(p, center_x, center_y - radius / 1, radius / 1, radius / 1, 180, 180);
-
-
-            Point[] pt = new Point[3];    //一維陣列內有3個Point
-
-            pt[0].X = 0;
-            pt[0].Y = radius / 2;
-
-            pt[1].X = radius;
-            pt[1].Y = radius + radius * 2 / 3;
-
-            pt[2].X = radius * 2;
-            pt[2].Y = radius / 2;
-            g.DrawLines(new Pen(Brushes.Red, linewidth), pt);
-        }
-
-        private void button23_Click(object sender, EventArgs e)
-        {
-            DrawGrid();
-        }
-
-        void save_image_to_drive()
-        {
-            if (bitmap1 != null)
-            {
-                string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                String filename1 = filename + ".jpg";
-                String filename2 = filename + ".bmp";
-                String filename3 = filename + ".png";
-
-                try
-                {
-                    bitmap1.Save(@filename1, ImageFormat.Jpeg);
-                    bitmap1.Save(@filename2, ImageFormat.Bmp);
-                    bitmap1.Save(@filename3, ImageFormat.Png);
-
-                    richTextBox1.Text += "存檔成功\n";
-                    richTextBox1.Text += "已存檔 : " + filename1 + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename2 + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename3 + "\n";
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-                }
-            }
-            else
-            {
-                richTextBox1.Text += "無圖可存\n";
-            }
-        }
+        //------------------------------------------------------------  # 60個
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
@@ -1059,11 +1014,6 @@ namespace vcs_Draw2
 
         //------------------------------------------------------------  # 60個
 
-        private void bt_save_Click(object sender, EventArgs e)
-        {
-            save_image_to_drive();
-        }
-
         void open_new_file()
         {
             //指定畫布大小
@@ -1079,13 +1029,12 @@ namespace vcs_Draw2
 
         private void DrawGrid()
         {
-            int i;
             p = new Pen(Color.Navy, 1);
-            for (i = 0; i < 7; i++)
+            for (int i = 0; i < 7; i++)
             {
                 g.DrawLine(p, 0, i * 100, pictureBox1.ClientSize.Width - 1, i * 100);
             }
-            for (i = 0; i < 7; i++)
+            for (int i = 0; i < 7; i++)
             {
                 g.DrawLine(p, new Point(i * 100, 0), new Point(i * 100, pictureBox1.ClientSize.Height - 1));
             }

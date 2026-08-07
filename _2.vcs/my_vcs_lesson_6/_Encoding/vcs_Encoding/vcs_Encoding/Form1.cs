@@ -985,3 +985,42 @@ foreach (byte bytes in byteArray)
 //絞怀隙陬奀ㄛ壽敕耀宒勤趕敦极
 //当输入回车时，关闭模式对话窗体
 
+//------------------------------------------------------------  # 60個
+
+/*
+拜列轉字串
+
+ C# byte 轉 文字
+byte轉char或 byte轉string
+
+Convert.ToChar是把hex轉成相對應ascii code
+像a的ascii code是0x61
+
+byte[] b = new byte[2] { 0x61,0x62 };
+string s=Convert.ToChar(b[0]); => s="a";
+string s=Convert.ToChar(b[1]); => s="b";
+
+如果你要把byte code轉成"字面上"的數值 應該這樣寫
+
+byte[] b = new byte[2] { 0x61,0x62 };
+string s=b[0].ToString("X2"); => s="61";
+string s=b[1].ToString("X2"); => s="62";
+
+ToString("X2")這個格式化字串還蠻好用的 一下就可以把byte轉成相對應的文字
+以前我要把byte轉成文字都是用下面這方法
+
+byte[] b = new byte[2] { 0x03,0x04 };
+string s= Convert.ToString(b[1], 16);
+if (s.Length == 1) //不滿2位要補一個零
+{
+	s= "0"+s;
+}
+===> s="03";
+
+太麻煩了 那麼多行直接用b[0].ToString("X2")一行就可以取代 還不用自己判斷前面要不要補零 
+
+//------------------------------------------------------------  # 60個
+
+*/
+
+

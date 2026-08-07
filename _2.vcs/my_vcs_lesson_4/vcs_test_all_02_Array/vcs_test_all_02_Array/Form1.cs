@@ -457,8 +457,12 @@ namespace vcs_test_all_02_Array
             }
             */
 
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-
+            //點二維陣列
+            //Point二維陣列
+            //Point[][] colonPoints = new Point[2][];
+            //Point[][] colonPoints = new Point[2][];
 
         }
 
@@ -1863,6 +1867,26 @@ for (int j = myArr2D.GetLowerBound(1); j < COL; j++)
                 //richTextBox1.Text +="{0}\t{1}", RoleName[i], Money[i]);
                 richTextBox1.Text += RoleName[i] + "\t" + Money[i].ToString("#,#") + "\n";
             }
+
+6060
+
+
+Jagged Array
+string[][] trans = new string[30][];
+trans有30項 每項長度不定 需要動態配置長度
+ex:
+	trans[5] = new string[10];
+	第5項長度10個字串
+	trans[5][0] = "aa";
+	trans[5][1] = "bb";
+	trans[5][2] = "cc";
+		:
+		:
+取得單項長度 trans[5].Length
+
+
+
+Point[] pntArr = new Point[3];
+
+
 */
-
-

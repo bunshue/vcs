@@ -45,17 +45,17 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.picCanvas.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.picCanvas.Location = new System.Drawing.Point(99, 12);
+            this.picCanvas.Location = new System.Drawing.Point(99, 11);
             this.picCanvas.Name = "picCanvas";
-            this.picCanvas.Size = new System.Drawing.Size(273, 190);
+            this.picCanvas.Size = new System.Drawing.Size(273, 176);
             this.picCanvas.TabIndex = 28;
             this.picCanvas.TabStop = false;
             // 
             // txtRadius
             // 
-            this.txtRadius.Location = new System.Drawing.Point(43, 38);
+            this.txtRadius.Location = new System.Drawing.Point(43, 35);
             this.txtRadius.Name = "txtRadius";
-            this.txtRadius.Size = new System.Drawing.Size(50, 20);
+            this.txtRadius.Size = new System.Drawing.Size(50, 22);
             this.txtRadius.TabIndex = 24;
             this.txtRadius.Text = "30";
             this.txtRadius.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -63,17 +63,17 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 15);
+            this.label1.Location = new System.Drawing.Point(12, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(16, 13);
+            this.label1.Size = new System.Drawing.Size(15, 12);
             this.label1.TabIndex = 26;
             this.label1.Text = "L:";
             // 
             // btnStartStop
             // 
-            this.btnStartStop.Location = new System.Drawing.Point(15, 64);
+            this.btnStartStop.Location = new System.Drawing.Point(15, 59);
             this.btnStartStop.Name = "btnStartStop";
-            this.btnStartStop.Size = new System.Drawing.Size(78, 23);
+            this.btnStartStop.Size = new System.Drawing.Size(78, 21);
             this.btnStartStop.TabIndex = 25;
             this.btnStartStop.Text = "Start";
             this.btnStartStop.UseVisualStyleBackColor = true;
@@ -86,17 +86,17 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 41);
+            this.label4.Location = new System.Drawing.Point(12, 38);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(18, 13);
+            this.label4.Size = new System.Drawing.Size(16, 12);
             this.label4.TabIndex = 27;
             this.label4.Text = "R:";
             // 
             // txtL1
             // 
-            this.txtL1.Location = new System.Drawing.Point(43, 12);
+            this.txtL1.Location = new System.Drawing.Point(43, 11);
             this.txtL1.Name = "txtL1";
-            this.txtL1.Size = new System.Drawing.Size(50, 20);
+            this.txtL1.Size = new System.Drawing.Size(50, 22);
             this.txtL1.TabIndex = 23;
             this.txtL1.Text = "100";
             this.txtL1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -104,9 +104,9 @@
             // Form1
             // 
             this.AcceptButton = this.btnStartStop;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 214);
+            this.ClientSize = new System.Drawing.Size(384, 198);
             this.Controls.Add(this.picCanvas);
             this.Controls.Add(this.txtRadius);
             this.Controls.Add(this.label1);
@@ -115,6 +115,7 @@
             this.Controls.Add(this.txtL1);
             this.Name = "Form1";
             this.Text = "howto_piston";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picCanvas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

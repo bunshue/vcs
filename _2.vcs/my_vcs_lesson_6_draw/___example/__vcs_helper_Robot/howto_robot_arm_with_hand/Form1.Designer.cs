@@ -41,7 +41,7 @@
             this.scrHand.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.scrHand.LargeChange = 1;
-            this.scrHand.Location = new System.Drawing.Point(8, 71);
+            this.scrHand.Location = new System.Drawing.Point(8, 66);
             this.scrHand.Maximum = 20;
             this.scrHand.Name = "scrHand";
             this.scrHand.Size = new System.Drawing.Size(369, 17);
@@ -53,7 +53,7 @@
             // 
             this.scrJoint3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.scrJoint3.Location = new System.Drawing.Point(8, 50);
+            this.scrJoint3.Location = new System.Drawing.Point(8, 46);
             this.scrJoint3.Maximum = 169;
             this.scrJoint3.Minimum = -160;
             this.scrJoint3.Name = "scrJoint3";
@@ -65,7 +65,7 @@
             // 
             this.scrJoint2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.scrJoint2.Location = new System.Drawing.Point(8, 29);
+            this.scrJoint2.Location = new System.Drawing.Point(8, 27);
             this.scrJoint2.Maximum = 169;
             this.scrJoint2.Minimum = -160;
             this.scrJoint2.Name = "scrJoint2";
@@ -77,7 +77,7 @@
             // 
             this.scrJoint1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.scrJoint1.Location = new System.Drawing.Point(8, 8);
+            this.scrJoint1.Location = new System.Drawing.Point(8, 7);
             this.scrJoint1.Maximum = 169;
             this.scrJoint1.Minimum = -160;
             this.scrJoint1.Name = "scrJoint1";
@@ -91,18 +91,18 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.picCanvas.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.picCanvas.Location = new System.Drawing.Point(8, 91);
+            this.picCanvas.Location = new System.Drawing.Point(8, 84);
             this.picCanvas.Name = "picCanvas";
-            this.picCanvas.Size = new System.Drawing.Size(370, 370);
+            this.picCanvas.Size = new System.Drawing.Size(370, 342);
             this.picCanvas.TabIndex = 16;
             this.picCanvas.TabStop = false;
             this.picCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.picCanvas_Paint);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(387, 469);
+            this.ClientSize = new System.Drawing.Size(387, 433);
             this.Controls.Add(this.scrHand);
             this.Controls.Add(this.scrJoint3);
             this.Controls.Add(this.scrJoint2);
@@ -110,6 +110,7 @@
             this.Controls.Add(this.picCanvas);
             this.Name = "Form1";
             this.Text = "howto_robot_arm_with_hand";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picCanvas)).EndInit();
             this.ResumeLayout(false);
 

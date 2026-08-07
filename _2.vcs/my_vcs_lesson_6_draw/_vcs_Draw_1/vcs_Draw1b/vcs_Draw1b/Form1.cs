@@ -192,14 +192,11 @@ namespace vcs_Draw1b
         {
             int W = this.Width;
             int H = this.Height;
-            int i;
-            int j;
-
-            for (i = 0; i <= W; i += 100)
+            for (int i = 0; i <= W; i += 100)
             {
                 g.DrawLine(Pens.Gray, i, 0, i, H);
             }
-            for (j = 0; j <= H; j += 100)
+            for (int j = 0; j <= H; j += 100)
             {
                 g.DrawLine(Pens.Gray, 0, j, W, j);
             }
@@ -210,11 +207,7 @@ namespace vcs_Draw1b
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-/*  可搬出
-
-*/

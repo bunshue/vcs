@@ -18,6 +18,11 @@ namespace howto_robot_arm
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         // Redraw.
         private void scrJoint_Scroll(object sender, ScrollEventArgs e)
         {
@@ -103,7 +108,7 @@ namespace howto_robot_arm
             gr.TranslateTransform(UpperArmLength, 0, MatrixOrder.Prepend);
 
             // Draw the elbow.
-            gr.FillEllipse(Brushes.Red, joint_rect); 
+            gr.FillEllipse(Brushes.Red, joint_rect);
 
             // Rotate at the elbow.
             gr.RotateTransform(-scrJoint2.Value, MatrixOrder.Prepend);
