@@ -28,7 +28,7 @@ namespace vcs_Draw6_String4
 
         int moving_steps = 4;
 
-        Font font = new Font("標楷體", 22);
+        Font f = new Font("標楷體", 22);
 
         Color foreground_color = Color.Blue;
         Color background_color = Color.Pink;
@@ -92,7 +92,7 @@ namespace vcs_Draw6_String4
             nud_y_st.ValueChanged += new EventHandler(setup_banner_profile);
             nud_w.ValueChanged += new EventHandler(setup_banner_profile);
             nud_h.ValueChanged += new EventHandler(setup_banner_profile);
-            font_size = font.Size;
+            font_size = f.Size;
         }
 
         void show_item_location()
@@ -199,7 +199,7 @@ namespace vcs_Draw6_String4
             cnt++;
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -267,12 +267,12 @@ namespace vcs_Draw6_String4
             fontDialog1.ShowEffects = true;
             fontDialog1.ShowHelp = true;
 
-            fontDialog1.Font = font;
+            fontDialog1.Font = f;
             fontDialog1.Color = foreground_color;
 
             if (fontDialog1.ShowDialog() == DialogResult.OK)
             {
-                font = fontDialog1.Font;
+                f = fontDialog1.Font;
                 foreground_color = fontDialog1.Color;
             }
         }
@@ -283,88 +283,88 @@ namespace vcs_Draw6_String4
             {
                 if (SelectFont == 1)
                 {
-                    font = new Font("標楷體", font_size, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline);
+                    f = new Font("標楷體", font_size, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline);
                 }
                 else if (SelectFont == 2)
                 {
-                    font = new Font("新細明體", font_size, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline);
+                    f = new Font("新細明體", font_size, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline);
                 }
             }
             else if ((cb_font_style1.Checked == true) && (cb_font_style2.Checked == true) && (cb_font_style3.Checked == false))
             {
                 if (SelectFont == 1)
                 {
-                    font = new Font("標楷體", font_size, FontStyle.Bold | FontStyle.Italic);
+                    f = new Font("標楷體", font_size, FontStyle.Bold | FontStyle.Italic);
                 }
                 else if (SelectFont == 2)
                 {
-                    font = new Font("新細明體", font_size, FontStyle.Bold | FontStyle.Italic);
+                    f = new Font("新細明體", font_size, FontStyle.Bold | FontStyle.Italic);
                 }
             }
             else if ((cb_font_style1.Checked == true) && (cb_font_style2.Checked == false) && (cb_font_style3.Checked == true))
             {
                 if (SelectFont == 1)
                 {
-                    font = new Font("標楷體", font_size, FontStyle.Bold | FontStyle.Underline);
+                    f = new Font("標楷體", font_size, FontStyle.Bold | FontStyle.Underline);
                 }
                 else if (SelectFont == 2)
                 {
-                    font = new Font("新細明體", font_size, FontStyle.Bold | FontStyle.Underline);
+                    f = new Font("新細明體", font_size, FontStyle.Bold | FontStyle.Underline);
                 }
             }
             else if ((cb_font_style1.Checked == false) && (cb_font_style2.Checked == true) && (cb_font_style3.Checked == true))
             {
                 if (SelectFont == 1)
                 {
-                    font = new Font("標楷體", font_size, FontStyle.Italic | FontStyle.Underline);
+                    f = new Font("標楷體", font_size, FontStyle.Italic | FontStyle.Underline);
                 }
                 else if (SelectFont == 2)
                 {
-                    font = new Font("新細明體", font_size, FontStyle.Italic | FontStyle.Underline);
+                    f = new Font("新細明體", font_size, FontStyle.Italic | FontStyle.Underline);
                 }
             }
             else if ((cb_font_style1.Checked == true) && (cb_font_style2.Checked == false) && (cb_font_style3.Checked == false))
             {
                 if (SelectFont == 1)
                 {
-                    font = new Font("標楷體", font_size, FontStyle.Bold);
+                    f = new Font("標楷體", font_size, FontStyle.Bold);
                 }
                 else if (SelectFont == 2)
                 {
-                    font = new Font("新細明體", font_size, FontStyle.Bold);
+                    f = new Font("新細明體", font_size, FontStyle.Bold);
                 }
             }
             else if ((cb_font_style1.Checked == false) && (cb_font_style2.Checked == false) && (cb_font_style3.Checked == true))
             {
                 if (SelectFont == 1)
                 {
-                    font = new Font("標楷體", font_size, FontStyle.Underline);
+                    f = new Font("標楷體", font_size, FontStyle.Underline);
                 }
                 else if (SelectFont == 2)
                 {
-                    font = new Font("新細明體", font_size, FontStyle.Underline);
+                    f = new Font("新細明體", font_size, FontStyle.Underline);
                 }
             }
             else if ((cb_font_style1.Checked == false) && (cb_font_style2.Checked == true) && (cb_font_style3.Checked == false))
             {
                 if (SelectFont == 1)
                 {
-                    font = new Font("標楷體", font_size, FontStyle.Italic);
+                    f = new Font("標楷體", font_size, FontStyle.Italic);
                 }
                 else if (SelectFont == 2)
                 {
-                    font = new Font("新細明體", font_size, FontStyle.Italic);
+                    f = new Font("新細明體", font_size, FontStyle.Italic);
                 }
             }
             else if ((cb_font_style1.Checked == false) && (cb_font_style2.Checked == false) && (cb_font_style3.Checked == false))
             {
                 if (SelectFont == 1)
                 {
-                    font = new Font("標楷體", font_size, FontStyle.Regular);
+                    f = new Font("標楷體", font_size, FontStyle.Regular);
                 }
                 else if (SelectFont == 2)
                 {
-                    font = new Font("新細明體", font_size, FontStyle.Regular);
+                    f = new Font("新細明體", font_size, FontStyle.Regular);
                 }
             }
         }
@@ -376,11 +376,11 @@ namespace vcs_Draw6_String4
 
         void get_string_size(string text)
         {
-            Font font = new Font("標楷體", 60);
+            Font f = new Font("標楷體", 60);
             /*
-            richTextBox1.Text += font + "\n";
-            richTextBox1.Text += font.Name + "\n";
-            richTextBox1.Text += font.Size + "\n";
+            richTextBox1.Text += f + "\n";
+            richTextBox1.Text += f.Name + "\n";
+            richTextBox1.Text += f.Size + "\n";
             richTextBox1.Text += "len = " + text.Length + "\n";
             */
             int tmp_width = 0;
@@ -388,8 +388,8 @@ namespace vcs_Draw6_String4
             string str = text;
 
             Graphics g = this.pictureBox1.CreateGraphics();
-            tmp_width = g.MeasureString(str, font).ToSize().Width;
-            tmp_height = g.MeasureString(str, font).ToSize().Height;
+            tmp_width = g.MeasureString(str, f).ToSize().Width;
+            tmp_height = g.MeasureString(str, f).ToSize().Height;
             richTextBox1.Text += "len = " + str.Length + "\t";
             richTextBox1.Text += "tmp_width = " + tmp_width.ToString() + "  tmp_height = " + tmp_height.ToString() + "\n";
 
@@ -481,16 +481,16 @@ namespace vcs_Draw6_String4
 
             string text = textBox1.Text;
             /*
-            richTextBox1.Text += font + "\n";
-            richTextBox1.Text += font.Name + "\n";
-            richTextBox1.Text += font.Size + "\n";
+            richTextBox1.Text += f + "\n";
+            richTextBox1.Text += f.Name + "\n";
+            richTextBox1.Text += f.Size + "\n";
             richTextBox1.Text += "len = " + text.Length + "\n";
             */
             int tmp_width = 0;
             int tmp_height = 0;
 
-            tmp_width = e.Graphics.MeasureString(text, font).ToSize().Width;
-            tmp_height = e.Graphics.MeasureString(text, font).ToSize().Height;
+            tmp_width = e.Graphics.MeasureString(text, f).ToSize().Width;
+            tmp_height = e.Graphics.MeasureString(text, f).ToSize().Height;
             //richTextBox1.Text += "len = " + text.Length + "\t";
             //richTextBox1.Text += "tmp_width = " + tmp_width.ToString() + "  tmp_height = " + tmp_height.ToString() + "\t";
 
@@ -508,15 +508,15 @@ namespace vcs_Draw6_String4
             SolidBrush sb = new SolidBrush(foreground_color);
             if ((xx + tmp_width) < (left + dx))
             {
-                e.Graphics.DrawString(text, font, sb, xx - dx, yy);
+                e.Graphics.DrawString(text, f, sb, xx - dx, yy);
             }
             else if (xx > (left + ww))
             {
-                e.Graphics.DrawString(text, font, sb, xx - dx, yy);
+                e.Graphics.DrawString(text, f, sb, xx - dx, yy);
             }
             else
             {
-                //e.Graphics.DrawString(text, font, Brushes.Red, xx - dx, yy);
+                //e.Graphics.DrawString(text, f, Brushes.Red, xx - dx, yy);
                 int len = text.Length;
                 int every_word_width = tmp_width / len;
 
@@ -531,21 +531,21 @@ namespace vcs_Draw6_String4
                 //richTextBox1.Text += left_word.ToString() + " ";
                 if (left_word == 1)
                 {
-                    e.Graphics.DrawString(left_string, font, sb, xx - dx - 10, yy);
+                    e.Graphics.DrawString(left_string, f, sb, xx - dx - 10, yy);
                 }
                 else
                 {
-                    e.Graphics.DrawString(left_string, font, sb, xx - dx - 10, yy);
+                    e.Graphics.DrawString(left_string, f, sb, xx - dx - 10, yy);
                 }
 
                 int dd = left_word * every_word_width + ww + 40;
 
                 string right_string = text.Substring(left_word, len - left_word);
-                e.Graphics.DrawString(right_string, font, sb, xx - dx + dd, yy);
+                e.Graphics.DrawString(right_string, f, sb, xx - dx + dd, yy);
                 //string tt = text.Substring(0, i + 1);
             }
 
-            //e.Graphics.DrawString(text, font, sb, xx - dx, yy);
+            //e.Graphics.DrawString(text, f, sb, xx - dx, yy);
 
             //e.Graphics.DrawRectangle(Pens.Red, xx, yy, tmp_width, tmp_height);
             //richTextBox1.Text += xx.ToString() + " ";

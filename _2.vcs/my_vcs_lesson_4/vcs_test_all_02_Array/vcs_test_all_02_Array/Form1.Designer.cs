@@ -74,11 +74,13 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.bt_controls_array = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -95,7 +97,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(642, 157);
+            this.richTextBox1.Location = new System.Drawing.Point(738, 518);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 1;
@@ -298,7 +300,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(652, 184);
+            this.bt_clear.Location = new System.Drawing.Point(748, 545);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 46;
@@ -327,7 +329,7 @@
             this.groupBox2.Controls.Add(this.numText3a);
             this.groupBox2.Controls.Add(this.numText2a);
             this.groupBox2.Controls.Add(this.numText1a);
-            this.groupBox2.Location = new System.Drawing.Point(630, 74);
+            this.groupBox2.Location = new System.Drawing.Point(20, 84);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(237, 75);
             this.groupBox2.TabIndex = 73;
@@ -501,7 +503,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(630, 9);
+            this.pictureBox1.Location = new System.Drawing.Point(20, 28);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(50, 50);
             this.pictureBox1.TabIndex = 87;
@@ -510,7 +512,7 @@
             // pictureBox2
             // 
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox2.Location = new System.Drawing.Point(688, 9);
+            this.pictureBox2.Location = new System.Drawing.Point(78, 28);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(50, 50);
             this.pictureBox2.TabIndex = 88;
@@ -519,7 +521,7 @@
             // pictureBox3
             // 
             this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox3.Location = new System.Drawing.Point(744, 9);
+            this.pictureBox3.Location = new System.Drawing.Point(134, 28);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(50, 50);
             this.pictureBox3.TabIndex = 89;
@@ -528,7 +530,7 @@
             // pictureBox4
             // 
             this.pictureBox4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox4.Location = new System.Drawing.Point(800, 9);
+            this.pictureBox4.Location = new System.Drawing.Point(190, 28);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(50, 50);
             this.pictureBox4.TabIndex = 90;
@@ -537,7 +539,7 @@
             // bt_controls_array
             // 
             this.bt_controls_array.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_controls_array.Location = new System.Drawing.Point(642, 380);
+            this.bt_controls_array.Location = new System.Drawing.Point(305, 26);
             this.bt_controls_array.Name = "bt_controls_array";
             this.bt_controls_array.Size = new System.Drawing.Size(200, 60);
             this.bt_controls_array.TabIndex = 91;
@@ -545,16 +547,26 @@
             this.bt_controls_array.UseVisualStyleBackColor = true;
             this.bt_controls_array.Click += new System.EventHandler(this.bt_controls_array_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.bt_controls_array);
+            this.groupBox1.Controls.Add(this.pictureBox4);
+            this.groupBox1.Controls.Add(this.pictureBox1);
+            this.groupBox1.Controls.Add(this.pictureBox3);
+            this.groupBox1.Controls.Add(this.pictureBox2);
+            this.groupBox1.Controls.Add(this.groupBox2);
+            this.groupBox1.Location = new System.Drawing.Point(642, 310);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(511, 202);
+            this.groupBox1.TabIndex = 92;
+            this.groupBox1.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(956, 670);
-            this.Controls.Add(this.bt_controls_array);
-            this.Controls.Add(this.pictureBox4);
-            this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.pictureBox1);
+            this.ClientSize = new System.Drawing.Size(1220, 670);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button29);
             this.Controls.Add(this.button28);
             this.Controls.Add(this.button27);
@@ -565,7 +577,6 @@
             this.Controls.Add(this.button22);
             this.Controls.Add(this.button21);
             this.Controls.Add(this.button20);
-            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button19);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button0);
@@ -597,6 +608,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -649,6 +661,7 @@
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.Button bt_controls_array;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
 

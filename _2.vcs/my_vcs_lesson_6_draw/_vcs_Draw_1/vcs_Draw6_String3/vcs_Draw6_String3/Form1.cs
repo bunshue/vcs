@@ -98,16 +98,14 @@ namespace vcs_Draw6_String3
             */
 
             // Draw the text.
-            using (Font font = new Font("Times New Roman", 10))
+            Font font = new Font("Times New Roman", 10);
+            if ((justification == TextJustification.Right) || (justification == TextJustification.Center))
             {
-                if ((justification == TextJustification.Right) || (justification == TextJustification.Center))
-                {
-                    rect = DrawParagraphs(e.Graphics, rect, font, Brushes.Green, MessageText, justification, LineSpacing, 0, ExtraParagraphSpacing);
-                }
-                else
-                {
-                    rect = DrawParagraphs(e.Graphics, rect, font, Brushes.Green, MessageText, justification, LineSpacing, ParagraphIndent, ExtraParagraphSpacing);
-                }
+                rect = DrawParagraphs(e.Graphics, rect, font, Brushes.Green, MessageText, justification, LineSpacing, 0, ExtraParagraphSpacing);
+            }
+            else
+            {
+                rect = DrawParagraphs(e.Graphics, rect, font, Brushes.Green, MessageText, justification, LineSpacing, ParagraphIndent, ExtraParagraphSpacing);
             }
 
             // Show the text drawing area.
@@ -242,23 +240,21 @@ namespace vcs_Draw6_String3
             else
             {
                 // Make a StringFormat to align the text.
-                using (StringFormat sf = new StringFormat())
+                StringFormat sf = new StringFormat();
+                // Use the appropriate alignment.
+                switch (justification)
                 {
-                    // Use the appropriate alignment.
-                    switch (justification)
-                    {
-                        case TextJustification.Left:
-                            sf.Alignment = StringAlignment.Near;
-                            break;
-                        case TextJustification.Right:
-                            sf.Alignment = StringAlignment.Far;
-                            break;
-                        case TextJustification.Center:
-                            sf.Alignment = StringAlignment.Center;
-                            break;
-                    }
-                    gr.DrawString(line, font, brush, rect, sf);
+                    case TextJustification.Left:
+                        sf.Alignment = StringAlignment.Near;
+                        break;
+                    case TextJustification.Right:
+                        sf.Alignment = StringAlignment.Far;
+                        break;
+                    case TextJustification.Center:
+                        sf.Alignment = StringAlignment.Center;
+                        break;
                 }
+                gr.DrawString(line, font, brush, rect, sf);
             }
         }
 

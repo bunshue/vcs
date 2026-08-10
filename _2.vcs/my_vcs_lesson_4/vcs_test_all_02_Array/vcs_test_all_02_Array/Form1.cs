@@ -61,18 +61,28 @@ namespace vcs_test_all_02_Array
             button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
-            bt_controls_array.Location = new Point(x_st + dx * 4 + 60, y_st + dy * 0);
 
-            groupBox2.Size = new Size(470, 60);
-            groupBox2.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-
-            richTextBox1.Size = new Size(470, 480);
-            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            richTextBox1.Size = new Size(470, 480 + 30);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 3 - 30);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
+            groupBox1.Size = new Size(470, 160);
+            groupBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             x_st = 10;
             y_st = 20;
             dx = 58;
+            pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            pictureBox2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            pictureBox3.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            pictureBox4.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+
+            bt_controls_array.Location = new Point(x_st + dx * 4 + 20, y_st + dy * 0);
+
+            groupBox2.Size = new Size(450, 60);
+            groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            x_st = 10;
+            y_st = 20;
+            dx = 54;
             numText1a.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             numText2a.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             numText3a.Location = new Point(x_st + dx * 2, y_st + dy * 0);
@@ -1868,8 +1878,7 @@ for (int j = myArr2D.GetLowerBound(1); j < COL; j++)
                 richTextBox1.Text += RoleName[i] + "\t" + Money[i].ToString("#,#") + "\n";
             }
 
-6060
-
+//------------------------------------------------------------  # 60個
 
 Jagged Array
 string[][] trans = new string[30][];
@@ -1884,9 +1893,7 @@ ex:
 		:
 取得單項長度 trans[5].Length
 
-
-
 Point[] pntArr = new Point[3];
 
-
 */
+

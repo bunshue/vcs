@@ -72,6 +72,7 @@ namespace vcs_Draw6_String2
 
             show_item_location();
 
+            //6060
 
             //可以變大變小的Label 與 動態文字
             label_size_w_old = label_size.Size.Width;
@@ -89,14 +90,13 @@ namespace vcs_Draw6_String2
             // Make the font and measure the characters.
             CharacterWidths = new float[LabelText.Length];
             TextFont = new Font("Times New Roman", 16);
-            using (Graphics gr = this.CreateGraphics())
+            Graphics gr = this.CreateGraphics();
+            for (int i = 0; i < LabelText.Length; i++)
             {
-                for (int i = 0; i < LabelText.Length; i++)
-                {
-                    SizeF ch_size = gr.MeasureString(LabelText.Substring(i, 1), TextFont);
-                    CharacterWidths[i] = ch_size.Width;
-                }
+                SizeF ch_size = gr.MeasureString(LabelText.Substring(i, 1), TextFont);
+                CharacterWidths[i] = ch_size.Width;
             }
+
             TotalCharacterWidth = CharacterWidths.Sum();
 
             CurrentWidth = StartWidth;
@@ -113,10 +113,7 @@ namespace vcs_Draw6_String2
 
             // Make the drawing area rectangle.
             const int margin = 10;
-            DrawingArea = new Rectangle(
-                margin, margin,
-                pictureBox_rotate_brush.ClientSize.Width - 2 * margin,
-                pictureBox_rotate_brush.ClientSize.Height - 2 * margin);
+            DrawingArea = new Rectangle(margin, margin, pictureBox_rotate_brush.ClientSize.Width - 2 * margin, pictureBox_rotate_brush.ClientSize.Height - 2 * margin);
 
             // Make the polygon's points.
             PolygonPoints = MakePolygon(22, DrawingArea);
@@ -158,8 +155,8 @@ namespace vcs_Draw6_String2
             button6.Location = new Point(x_st + dx * 2, y_st + dy * 6);
             button7.Location = new Point(x_st + dx * 2, y_st + dy * 7);
 
+            richTextBox1.Size = new Size(180, 360);
             richTextBox1.Location = new Point(x_st + dx * 1 + 70, y_st + dy * 11);
-            richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y - 25);
 
             x_st = 10;
             y_st = 10;
@@ -358,41 +355,31 @@ namespace vcs_Draw6_String2
 
             Rectangle rect = new Rectangle(x_st, y_st, w, h);
             e.Graphics.DrawRectangle(new Pen(Color.Gray, 1), rect);
-            using (Font font = new Font("Times New Roman", 60, FontStyle.Italic))
-            {
-                DrawStringWithCharacterBounds(e.Graphics, "Lion-mouse", font, rect);
-            }
+            Font font = new Font("Times New Roman", 60, FontStyle.Italic);
+            DrawStringWithCharacterBounds(e.Graphics, "Lion-mouse", font, rect);
 
             w = 250;
             y_st += dy;
             rect = new Rectangle(x_st, y_st, w, h);
             e.Graphics.DrawRectangle(new Pen(Color.Gray, 1), rect);
-            using (Font font = new Font("Times New Roman", 60, FontStyle.Regular))
-            {
-                DrawStringWithCharacterBounds(e.Graphics, "Lion", font, rect);
-            }
+            font = new Font("Times New Roman", 60, FontStyle.Regular);
+            DrawStringWithCharacterBounds(e.Graphics, "Lion", font, rect);
 
             w = 250;
             x_st += 260;
             rect = new Rectangle(x_st, y_st, w, h);
             e.Graphics.DrawRectangle(new Pen(Color.Gray, 1), rect);
-            using (Font font = new Font("Times New Roman", 60, FontStyle.Italic))
-            {
-                DrawStringWithCharacterBounds(e.Graphics, "Mouse", font, rect);
-            }
-
-
+            font = new Font("Times New Roman", 60, FontStyle.Italic);
+            DrawStringWithCharacterBounds(e.Graphics, "Mouse", font, rect);
 
             //利用label所在位置畫字，把字畫成直的
-            using (StringFormat string_format = new StringFormat())
-            {
-                string_format.Alignment = StringAlignment.Center;
-                string_format.LineAlignment = StringAlignment.Center;
+            StringFormat string_format = new StringFormat();
+            string_format.Alignment = StringAlignment.Center;
+            string_format.LineAlignment = StringAlignment.Center;
 
-                e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+            e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
 
-                DrawSidewaysText(e.Graphics, Font, Brushes.Black, label2.Bounds, string_format, "利用label所在位置畫字，把字畫成直的");
-            }
+            DrawSidewaysText(e.Graphics, Font, Brushes.Black, label2.Bounds, string_format, "利用label所在位置畫字，把字畫成直的");
         }
 
         // Draw sideways text in the indicated rectangle.
@@ -415,31 +402,29 @@ namespace vcs_Draw6_String2
         // Draw the string and the bounds for its characters.
         private void DrawStringWithCharacterBounds(Graphics gr, string text, Font font, Rectangle rect)
         {
-            using (StringFormat string_format = new StringFormat())
+            StringFormat string_format = new StringFormat();
+            string_format.Alignment = StringAlignment.Center;
+            string_format.LineAlignment = StringAlignment.Center;
+
+            // Draw the string.
+            gr.DrawString(text, font, Brushes.Blue, rect, string_format);
+
+            // Make a CharacterRange for the string's characters.
+            List<CharacterRange> range_list = new List<CharacterRange>();
+            for (int i = 0; i < text.Length; i++)
             {
-                string_format.Alignment = StringAlignment.Center;
-                string_format.LineAlignment = StringAlignment.Center;
+                range_list.Add(new CharacterRange(i, 1));
+            }
+            string_format.SetMeasurableCharacterRanges(range_list.ToArray());
 
-                // Draw the string.
-                gr.DrawString(text, font, Brushes.Blue, rect, string_format);
+            // Measure the string's character ranges.
+            Region[] regions = gr.MeasureCharacterRanges(text, font, rect, string_format);
 
-                // Make a CharacterRange for the string's characters.
-                List<CharacterRange> range_list = new List<CharacterRange>();
-                for (int i = 0; i < text.Length; i++)
-                {
-                    range_list.Add(new CharacterRange(i, 1));
-                }
-                string_format.SetMeasurableCharacterRanges(range_list.ToArray());
-
-                // Measure the string's character ranges.
-                Region[] regions = gr.MeasureCharacterRanges(text, font, rect, string_format);
-
-                // Draw the character bounds.
-                for (int i = 0; i < text.Length; i++)
-                {
-                    Rectangle char_rect = Rectangle.Round(regions[i].GetBounds(gr));
-                    gr.DrawRectangle(Pens.Red, char_rect);
-                }
+            // Draw the character bounds.
+            for (int i = 0; i < text.Length; i++)
+            {
+                Rectangle char_rect = Rectangle.Round(regions[i].GetBounds(gr));
+                gr.DrawRectangle(Pens.Red, char_rect);
             }
         }
 
@@ -462,40 +447,35 @@ namespace vcs_Draw6_String2
 
             // Increase the start position.
             GradientStart += Delta;
-            if (GradientStart >= wid) GradientStart = 0;
+            if (GradientStart >= wid)
+            {
+                GradientStart = 0;
+            }
 
             // Draw some text.
-            using (Font font = new Font("Times New Roman", 18, FontStyle.Bold))
-            {
-                using (StringFormat string_format = new StringFormat())
-                {
-                    string_format.Alignment = StringAlignment.Center;
-                    string_format.LineAlignment = StringAlignment.Center;
-                    e.Graphics.DrawString("群曜醫電 Insight Medical Solutions Inc.",
-                        font, Brushes.Black,
-                        pictureBox_gradient.ClientSize.Width / 2,
-                        pictureBox_gradient.ClientSize.Height / 2,
-                        string_format);
-                }
-            }
+            Font font = new Font("Times New Roman", 18, FontStyle.Bold);
+            StringFormat string_format = new StringFormat();
+            string_format.Alignment = StringAlignment.Center;
+            string_format.LineAlignment = StringAlignment.Center;
+            e.Graphics.DrawString("群曜醫電 Insight Medical Solutions Inc.",
+                font, Brushes.Black,
+                pictureBox_gradient.ClientSize.Width / 2,
+                pictureBox_gradient.ClientSize.Height / 2,
+                string_format);
         }
 
         // Fill the rectangle with a gradient that
         // shades from red to white to red.
         private void ShadeRect(Graphics gr, float xmin, float xmax)
         {
-            using (LinearGradientBrush br = new LinearGradientBrush(
-                new PointF(xmin, 0), new PointF(xmax, 0),
-                Color.Red, Color.Red))
-            {
-                br.WrapMode = WrapMode.Tile;
-                ColorBlend color_blend = new ColorBlend();
-                color_blend.Colors = new Color[] { Color.Red, Color.White, Color.Red };
-                color_blend.Positions = new float[] { 0, 0.5f, 1 };
+            LinearGradientBrush br = new LinearGradientBrush(new PointF(xmin, 0), new PointF(xmax, 0), Color.Red, Color.Red);
+            br.WrapMode = WrapMode.Tile;
+            ColorBlend color_blend = new ColorBlend();
+            color_blend.Colors = new Color[] { Color.Red, Color.White, Color.Red };
+            color_blend.Positions = new float[] { 0, 0.5f, 1 };
 
-                br.InterpolationColors = color_blend;
-                gr.FillRectangle(br, pictureBox_gradient.ClientRectangle);
-            }
+            br.InterpolationColors = color_blend;
+            gr.FillRectangle(br, pictureBox_gradient.ClientRectangle);
         }
 
         // Draw the background with text on top.
@@ -506,47 +486,39 @@ namespace vcs_Draw6_String2
             e.Graphics.Clear(Color.White);
 
             // Make the gradient brush.
-            using (LinearGradientBrush brush = new LinearGradientBrush(
-                new PointF(GradientStart, 0),
-                new PointF(GradientStart + wid, 0),
-                Color.Red, Color.Red))
-            {
-                brush.WrapMode = WrapMode.Tile;
-                ColorBlend color_blend = new ColorBlend();
-                color_blend.Colors = new Color[]
+            LinearGradientBrush brush = new LinearGradientBrush(new PointF(GradientStart, 0), new PointF(GradientStart + wid, 0), Color.Red, Color.Red);
+            brush.WrapMode = WrapMode.Tile;
+            ColorBlend color_blend = new ColorBlend();
+            color_blend.Colors = new Color[]
                 {
                     Color.Blue, Color.Blue,
                     Color.White, Color.Blue, Color.Blue
                 };
-                color_blend.Positions =
-                    new float[] { 0, 0.4f, 0.5f, 0.6f, 1 };
-                brush.InterpolationColors = color_blend;
+            color_blend.Positions = new float[] { 0, 0.4f, 0.5f, 0.6f, 1 };
+            brush.InterpolationColors = color_blend;
 
-                // Use the brush to draw some text.
-                using (Font font = new Font("Times New Roman", 18, FontStyle.Bold))
-                {
-                    using (StringFormat string_format = new StringFormat())
-                    {
-                        string_format.Alignment = StringAlignment.Center;
-                        string_format.LineAlignment = StringAlignment.Center;
-                        e.Graphics.DrawString("群曜醫電 Insight Medical Solutions Inc.",
-                            font, brush,
-                            pictureBox_text.ClientSize.Width / 2,
-                            pictureBox_text.ClientSize.Height / 2,
-                            string_format);
-                    }
-                }
-            }
+            // Use the brush to draw some text.
+            Font font = new Font("Times New Roman", 18, FontStyle.Bold);
+            StringFormat string_format = new StringFormat();
+            string_format.Alignment = StringAlignment.Center;
+            string_format.LineAlignment = StringAlignment.Center;
+            e.Graphics.DrawString("群曜醫電 Insight Medical Solutions Inc.",
+                font, brush,
+                pictureBox_text.ClientSize.Width / 2,
+                pictureBox_text.ClientSize.Height / 2,
+                string_format);
 
             // Increase the start position.
             GradientStart += Delta;
-            if (GradientStart >= wid) GradientStart = 0;
+            if (GradientStart >= wid)
+            {
+                GradientStart = 0;
+            }
         }
 
         private int ProgressMinimum = 0;
         private int ProgressMaximum = 100;
         private int ProgressValue = 0;
-
         private void timer_progressbar_Tick(object sender, EventArgs e)
         {
             ProgressValue += 1;
@@ -571,13 +543,11 @@ namespace vcs_Draw6_String2
 
             // Draw the text.
             e.Graphics.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-            using (StringFormat sf = new StringFormat())
-            {
-                sf.Alignment = StringAlignment.Center;
-                sf.LineAlignment = StringAlignment.Center;
-                int percent = (int)(fraction * 100);
-                e.Graphics.DrawString(percent.ToString() + "%", this.Font, Brushes.Black, pictureBox_progressbar.ClientRectangle, sf);
-            }
+            StringFormat sf = new StringFormat();
+            sf.Alignment = StringAlignment.Center;
+            sf.LineAlignment = StringAlignment.Center;
+            int percent = (int)(fraction * 100);
+            e.Graphics.DrawString(percent.ToString() + "%", this.Font, Brushes.Black, pictureBox_progressbar.ClientRectangle, sf);
         }
 
         // Draw the text on the control.
@@ -593,23 +563,21 @@ namespace vcs_Draw6_String2
         // to make it fill the indicated width.
         private void SpaceTextToFit(Graphics g, Rectangle rect, Font font, Brush brush, string text)
         {
-            using (StringFormat string_format = new StringFormat())
+            StringFormat string_format = new StringFormat();
+            string_format.Alignment = StringAlignment.Near;
+            string_format.LineAlignment = StringAlignment.Near;
+
+            // Calculate the spacing.
+            float space = (rect.Width - TotalCharacterWidth) / (text.Length - 1);
+
+            g.DrawRectangle(new Pen(Color.Red, 1), rect);
+
+            // Draw the characters.
+            PointF point = new PointF(rect.X, rect.Y);
+            for (int i = 0; i < text.Length; i++)
             {
-                string_format.Alignment = StringAlignment.Near;
-                string_format.LineAlignment = StringAlignment.Near;
-
-                // Calculate the spacing.
-                float space = (rect.Width - TotalCharacterWidth) / (text.Length - 1);
-
-                g.DrawRectangle(new Pen(Color.Red, 1), rect);
-
-                // Draw the characters.
-                PointF point = new PointF(rect.X, rect.Y);
-                for (int i = 0; i < text.Length; i++)
-                {
-                    g.DrawString(text[i].ToString(), font, brush, point);
-                    point.X += CharacterWidths[i] + space;
-                }
+                g.DrawString(text[i].ToString(), font, brush, point);
+                point.X += CharacterWidths[i] + space;
             }
         }
 
@@ -628,9 +596,13 @@ namespace vcs_Draw6_String2
             dw++;
             dh++;
             if (dw > 50)
+            {
                 dw = 0;
+            }
             if (dh > 50)
+            {
                 dh = 0;
+            }
             label_size.Size = new Size(label_size_w_old + dw, label_size_h_old + dh);
 
             CurrentWidth += Dx;
@@ -690,49 +662,41 @@ namespace vcs_Draw6_String2
         // Return a point between two points.
         private PointF PointBetween(PointF point1, PointF point2)
         {
-            return new PointF(
-                (point1.X + point2.X) / 2,
-                (point1.Y + point2.Y) / 2);
+            return new PointF((point1.X + point2.X) / 2, (point1.Y + point2.Y) / 2);
         }
 
         // Draw the polygon.
         private void pictureBox_rotate_brush_Paint(object sender, PaintEventArgs e)
         {
             // Make a path gradient brush.
-            using (PathGradientBrush br = new PathGradientBrush(Path))
-            {
-                // Define edge colors.
-                Color[] edge_colors = new Color[PolygonPoints.Length * 2];
-                Color[] color_series = new Color[]
+            PathGradientBrush br = new PathGradientBrush(Path);
+            // Define edge colors.
+            Color[] edge_colors = new Color[PolygonPoints.Length * 2];
+            Color[] color_series = new Color[]
                 {
                     Color.Green,
                     Color.LightGreen,
                     Color.White,
                     Color.LightGreen,
                 };
-                for (int i = 0; i < edge_colors.Length; i++)
-                {
-                    edge_colors[i] = color_series[(i + ColorOffset) % color_series.Length];
-                }
-                br.SurroundColors = edge_colors;
-                br.CenterColor = Color.White;
-                ColorOffset++;
-
-                // Fill the polygon.
-                //e.Graphics.FillPolygon(br, PolygonPoints);
-                e.Graphics.FillRectangle(br, DrawingArea);
-
-                // Draw text over the background.
-                using (Font font = new Font("Times New Roman", 30, FontStyle.Bold))
-                {
-                    using (StringFormat sf = new StringFormat())
-                    {
-                        sf.Alignment = StringAlignment.Center;
-                        sf.LineAlignment = StringAlignment.Center;
-                        e.Graphics.DrawString(LabelText, font, Brushes.Blue, DrawingArea, sf);
-                    }
-                }
+            for (int i = 0; i < edge_colors.Length; i++)
+            {
+                edge_colors[i] = color_series[(i + ColorOffset) % color_series.Length];
             }
+            br.SurroundColors = edge_colors;
+            br.CenterColor = Color.White;
+            ColorOffset++;
+
+            // Fill the polygon.
+            //e.Graphics.FillPolygon(br, PolygonPoints);
+            e.Graphics.FillRectangle(br, DrawingArea);
+
+            // Draw text over the background.
+            Font font = new Font("Times New Roman", 30, FontStyle.Bold);
+            StringFormat sf = new StringFormat();
+            sf.Alignment = StringAlignment.Center;
+            sf.LineAlignment = StringAlignment.Center;
+            e.Graphics.DrawString(LabelText, font, Brushes.Blue, DrawingArea, sf);
         }
 
         private void timer_rotate_brush_Tick(object sender, EventArgs e)
@@ -754,18 +718,19 @@ namespace vcs_Draw6_String2
         private void ShowSample1()
         {
             string text = txtSample.Text;
-            if (text.Length == 0) return;
+            if (text.Length == 0)
+            {
+                return;
+            }
 
-            float font_size = GetFontSize(
-                lblSample1, text, 10, 1, 1000);
+            float font_size = GetFontSize(lblSample1, text, 10, 1, 1000);
             lblFontSize1.Text = font_size.ToString("0.0");
             lblSample1.Font = new Font(lblSample1.Font.FontFamily, font_size);
             lblSample1.Text = text;
         }
 
         // Return the largest font size that lets the text fit in the Label.
-        private float GetFontSize(Label label, string text,
-            int margin, float min_size, float max_size)
+        private float GetFontSize(Label label, string text, int margin, float min_size, float max_size)
         {
             // Only bother if there's text.
             if (text.Length == 0) return min_size;
@@ -776,44 +741,48 @@ namespace vcs_Draw6_String2
             int hgt = label.DisplayRectangle.Height - margin;
 
             // Make a Graphics object to measure the text.
-            using (Graphics gr = label.CreateGraphics())
+            Graphics gr = label.CreateGraphics();
+            while (max_size - min_size > 0.1f)
             {
-                while (max_size - min_size > 0.1f)
+                float pt = (min_size + max_size) / 2f;
+                Font test_font = new Font(label.Font.FontFamily, pt);
+                // See if this font is too big.
+                SizeF text_size = gr.MeasureString(text, test_font);
+                if ((text_size.Width > wid) || (text_size.Height > hgt))
                 {
-                    float pt = (min_size + max_size) / 2f;
-                    using (Font test_font = new Font(label.Font.FontFamily, pt))
-                    {
-                        // See if this font is too big.
-                        SizeF text_size = gr.MeasureString(text, test_font);
-                        if ((text_size.Width > wid) || (text_size.Height > hgt))
-                            max_size = pt;
-                        else
-                            min_size = pt;
-                    }
+                    max_size = pt;
                 }
-                return min_size;
+                else
+                {
+                    min_size = pt;
+                }
             }
+            return min_size;
         }
 
         // Display the sample text as large as possible.
         private void ShowSample2()
         {
             string text = txtSample.Text;
-            if (text.Length == 0) return;
+            if (text.Length == 0)
+            {
+                return;
+            }
 
-            float font_size = GetFontSize2(
-                lblSample2, text, 10, 1, 1000);
+            float font_size = GetFontSize2(lblSample2, text, 10, 1, 1000);
             lblFontSize2.Text = font_size.ToString("0.0");
             lblSample2.Font = new Font(lblSample2.Font.FontFamily, font_size);
             lblSample2.Text = text;
         }
 
         // Return the largest font size that lets the text fit in the Label.
-        private float GetFontSize2(Label label, string text,
-            int margin, float min_size, float max_size)
+        private float GetFontSize2(Label label, string text, int margin, float min_size, float max_size)
         {
             // Only bother if there's text.
-            if (text.Length == 0) return min_size;
+            if (text.Length == 0)
+            {
+                return min_size;
+            }
 
             // See how much room we have, allowing a bit
             // for the Label's internal margin.
@@ -821,23 +790,23 @@ namespace vcs_Draw6_String2
             int hgt = label.DisplayRectangle.Height - margin;
 
             // Make a Graphics object to measure the text.
-            using (Graphics gr = label.CreateGraphics())
+            Graphics gr = label.CreateGraphics();
+            while (max_size - min_size > 0.1f)
             {
-                while (max_size - min_size > 0.1f)
+                float pt = (min_size + max_size) / 2f;
+                Font test_font = new Font(label.Font.FontFamily, pt);
+                // See if this font is too big.
+                SizeF text_size = gr.MeasureString(text, test_font, wid);
+                if ((text_size.Width > wid) || (text_size.Height > hgt))
                 {
-                    float pt = (min_size + max_size) / 2f;
-                    using (Font test_font = new Font(label.Font.FontFamily, pt))
-                    {
-                        // See if this font is too big.
-                        SizeF text_size = gr.MeasureString(text, test_font, wid);
-                        if ((text_size.Width > wid) || (text_size.Height > hgt))
-                            max_size = pt;
-                        else
-                            min_size = pt;
-                    }
+                    max_size = pt;
                 }
-                return min_size;
+                else
+                {
+                    min_size = pt;
+                }
             }
+            return min_size;
         }
         //#endregion
 
@@ -865,46 +834,37 @@ namespace vcs_Draw6_String2
         {
             const string txt = "群曜醫電股份有限公司";
 
-            // Make the font.
-            using (Font the_font = new Font("Times New Roman", 30,
-                FontStyle.Bold | FontStyle.Italic))
+            Font f = new Font("Times New Roman", 30, FontStyle.Bold | FontStyle.Italic);
+            // Make a StringFormat object to use for text layout.
+            StringFormat string_format = new StringFormat();
+            // Center the text.
+            string_format.Alignment = StringAlignment.Center;
+            string_format.LineAlignment = StringAlignment.Center;
+            string_format.FormatFlags = StringFormatFlags.NoClip;
+
+            // Make CharacterRanges to indicate which
+            // ranges we want to measure.
+            CharacterRange[] ranges = new CharacterRange[txt.Length];
+            for (int i = 0; i < txt.Length; i++)
             {
-                // Make a StringFormat object to use for text layout.
-                using (StringFormat string_format = new StringFormat())
-                {
-                    // Center the text.
-                    string_format.Alignment = StringAlignment.Center;
-                    string_format.LineAlignment = StringAlignment.Center;
-                    string_format.FormatFlags = StringFormatFlags.NoClip;
+                ranges[i] = new CharacterRange(i, 1);
+            }
+            string_format.SetMeasurableCharacterRanges(ranges);
 
-                    // Make CharacterRanges to indicate which
-                    // ranges we want to measure.
-                    CharacterRange[] ranges = new CharacterRange[txt.Length];
-                    for (int i = 0; i < txt.Length; i++)
-                    {
-                        ranges[i] = new CharacterRange(i, 1);
-                    }
-                    string_format.SetMeasurableCharacterRanges(ranges);
+            // Measure the text to see where each character range goes.
+            Region[] regions = e.Graphics.MeasureCharacterRanges(txt, f, this.pictureBox_random_color.ClientRectangle, string_format);
 
-                    // Measure the text to see where each character range goes.
-                    Region[] regions = e.Graphics.MeasureCharacterRanges(txt, the_font, this.pictureBox_random_color.ClientRectangle, string_format);
+            // Draw the characters one at a time.
+            for (int i = 0; i < txt.Length; i++)
+            {
+                // See where this character would be drawn.
+                RectangleF rectf = regions[i].GetBounds(e.Graphics);
+                Rectangle rect = new Rectangle((int)rectf.X, (int)rectf.Y, (int)rectf.Width, (int)rectf.Height);
 
-                    // Draw the characters one at a time.
-                    for (int i = 0; i < txt.Length; i++)
-                    {
-                        // See where this character would be drawn.
-                        RectangleF rectf = regions[i].GetBounds(e.Graphics);
-                        Rectangle rect = new Rectangle((int)rectf.X, (int)rectf.Y, (int)rectf.Width, (int)rectf.Height);
-
-                        // Make a brush with a random color.
-                        using (Brush the_brush = new SolidBrush(RandomColor()))
-                        {
-                            // Draw the character.
-                            e.Graphics.DrawString(txt.Substring(i, 1),
-                                the_font, the_brush, rectf, string_format);
-                        }
-                    }
-                }
+                // Make a brush with a random color.
+                Brush the_brush = new SolidBrush(RandomColor());
+                // Draw the character.
+                e.Graphics.DrawString(txt.Substring(i, 1), f, the_brush, rectf, string_format);
             }
         }
         //#endregion
@@ -916,25 +876,15 @@ namespace vcs_Draw6_String2
         {
             // Make text filled with a single big image.
             // Make a brush containing the picture.
-            using (TextureBrush the_brush = new TextureBrush(Properties.Resources.ColoradoFlowers))
-            {
-                // Draw the text.
-                using (Font the_font = new Font("Times New Roman", 50, FontStyle.Bold))
-                {
-                    e.Graphics.DrawString("群曜醫電", the_font, the_brush, 0, 0);
-                }
-            }
+            TextureBrush the_brush = new TextureBrush(Properties.Resources.ColoradoFlowers);
+            Font f = new Font("Times New Roman", 50, FontStyle.Bold);
+            e.Graphics.DrawString("群曜醫電", f, the_brush, 0, 0);
 
             // Make text filled with a tiled image.
             // Make a brush containing the picture.
-            using (TextureBrush the_brush = new TextureBrush(Properties.Resources.Smiley))
-            {
-                // Draw the text.
-                using (Font the_font = new Font("Times New Roman", 40, FontStyle.Bold))
-                {
-                    e.Graphics.DrawString("股份有限公司", the_font, the_brush, 60, 75);
-                }
-            }
+            the_brush = new TextureBrush(Properties.Resources.Smiley);
+            f = new Font("Times New Roman", 40, FontStyle.Bold);
+            e.Graphics.DrawString("股份有限公司", f, the_brush, 60, 75);
         }
         //#endregion
 
@@ -948,56 +898,38 @@ namespace vcs_Draw6_String2
             // Make things smoother.
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
-
             // Create the text path.
             GraphicsPath path = new GraphicsPath(FillMode.Alternate);
 
             // Draw text using a StringFormat to center it on the form.
-            using (FontFamily font_family = new FontFamily("Times New Roman"))
-            {
-                using (StringFormat sf = new StringFormat())
-                {
-                    sf.Alignment = StringAlignment.Center;
-                    sf.LineAlignment = StringAlignment.Center;
-                    path.AddString("群曜醫電", font_family,
-                        (int)FontStyle.Bold, 80,
-                        this.pictureBox_filled_text.ClientRectangle, sf);
-                }
-            }
+            FontFamily font_family = new FontFamily("Times New Roman");
+            StringFormat sf = new StringFormat();
+            sf.Alignment = StringAlignment.Center;
+            sf.LineAlignment = StringAlignment.Center;
+            path.AddString("群曜醫電", font_family, (int)FontStyle.Bold, 80, this.pictureBox_filled_text.ClientRectangle, sf);
 
             // Make a bitmap containing the small brush's text.
-            using (Font small_font = new Font("Times New Roman", 8))
-            {
-                // See how big the text will be.
-                SizeF text_size = e.Graphics.MeasureString("Text", small_font);
+            Font small_font = new Font("Times New Roman", 8);
+            // See how big the text will be.
+            SizeF text_size = e.Graphics.MeasureString("Text", small_font);
 
-                // Make a Bitmap to hold the text.
-                Bitmap bm = new Bitmap(
-                    (int)(2 * text_size.Width),
-                    (int)(2 * text_size.Height));
-                using (Graphics gr = Graphics.FromImage(bm))
-                {
-                    gr.Clear(Color.LightBlue);
-                    gr.DrawString("Insight Medical Solutions Inc.", small_font, Brushes.Red, 0, 0);
-                    gr.DrawString("Insight Medical Solutions Inc.", small_font, Brushes.Green, text_size.Width, 0);
-                    gr.DrawString("Insight Medical Solutions Inc.", small_font, Brushes.Blue, -text_size.Width / 2, text_size.Height);
-                    gr.DrawString("Insight Medical Solutions Inc.", small_font, Brushes.DarkOrange, text_size.Width / 2, text_size.Height);
-                    gr.DrawString("Insight Medical Solutions Inc.", small_font, Brushes.Blue, 1.5f * text_size.Width, text_size.Height);
-                }
+            // Make a Bitmap to hold the text.
+            Bitmap bm = new Bitmap((int)(2 * text_size.Width), (int)(2 * text_size.Height));
+            Graphics gr = Graphics.FromImage(bm);
+            gr.Clear(Color.LightBlue);
+            gr.DrawString("Insight Medical Solutions Inc.", small_font, Brushes.Red, 0, 0);
+            gr.DrawString("Insight Medical Solutions Inc.", small_font, Brushes.Green, text_size.Width, 0);
+            gr.DrawString("Insight Medical Solutions Inc.", small_font, Brushes.Blue, -text_size.Width / 2, text_size.Height);
+            gr.DrawString("Insight Medical Solutions Inc.", small_font, Brushes.DarkOrange, text_size.Width / 2, text_size.Height);
+            gr.DrawString("Insight Medical Solutions Inc.", small_font, Brushes.Blue, 1.5f * text_size.Width, text_size.Height);
 
-                // Fill the path.
-                using (TextureBrush br = new TextureBrush(bm))
-                {
-                    e.Graphics.FillPath(br, path);
-                }
-            }
+            // Fill the path.
+            TextureBrush br = new TextureBrush(bm);
+            e.Graphics.FillPath(br, path);
 
             // Outline the path.
-            using (Pen pen = new Pen(Color.Black, 3))
-            {
-                e.Graphics.DrawPath(pen, path);
-            }
-
+            Pen pen = new Pen(Color.Black, 3);
+            e.Graphics.DrawPath(pen, path);
         }
         //#endregion
 
@@ -1014,31 +946,26 @@ namespace vcs_Draw6_String2
             e.Graphics.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
 
             // Make a font.
-            using (Font the_font = new Font("Times New Roman", 80, FontStyle.Bold, GraphicsUnit.Pixel))
-            {
-                // Get the font's metrics.
-                FontInfo font_info = new FontInfo(e.Graphics, the_font);
+            Font f = new Font("Times New Roman", 80, FontStyle.Bold, GraphicsUnit.Pixel);
+            // Get the font's metrics.
+            FontInfo font_info = new FontInfo(e.Graphics, f);
 
-                // See how big the text is.
-                SizeF text_size = e.Graphics.MeasureString(Txt, the_font);
-                int x0 = (int)((this.pictureBox_rainbow_text.ClientSize.Width - text_size.Width) / 2);
-                int y0 = (int)((this.pictureBox_rainbow_text.ClientSize.Height - text_size.Height) / 2);
+            // See how big the text is.
+            SizeF text_size = e.Graphics.MeasureString(Txt, f);
+            int x0 = (int)((this.pictureBox_rainbow_text.ClientSize.Width - text_size.Width) / 2);
+            int y0 = (int)((this.pictureBox_rainbow_text.ClientSize.Height - text_size.Height) / 2);
 
-                // Get the Y coordinates that the brush should span.
-                int brush_y0 = (int)(y0 + font_info.InternalLeadingPixels);
-                int brush_y1 = (int)(y0 + font_info.AscentPixels);
+            // Get the Y coordinates that the brush should span.
+            int brush_y0 = (int)(y0 + font_info.InternalLeadingPixels);
+            int brush_y1 = (int)(y0 + font_info.AscentPixels);
 
-                // Fudge the brush down a smidgen.
-                brush_y0 += (int)(font_info.InternalLeadingPixels);
-                brush_y1 += 5;
+            // Fudge the brush down a smidgen.
+            brush_y0 += (int)(font_info.InternalLeadingPixels);
+            brush_y1 += 5;
 
-                // Make a brush to color the area.
-                using (LinearGradientBrush the_brush = new LinearGradientBrush(
-                    new Point(x0, brush_y0),
-                    new Point(x0, brush_y1),
-                    Color.Red, Color.Violet))
-                {
-                    Color[] colors = new Color[]
+            // Make a brush to color the area.
+            LinearGradientBrush the_brush = new LinearGradientBrush(new Point(x0, brush_y0), new Point(x0, brush_y1), Color.Red, Color.Violet);
+            Color[] colors = new Color[]
                     {
                         Color.FromArgb(255, 0, 0),
                         Color.FromArgb(255, 0, 0),
@@ -1051,22 +978,20 @@ namespace vcs_Draw6_String2
                         Color.FromArgb(0, 0, 255),
                         Color.FromArgb(0, 0, 255),
                     };
-                    int num_colors = colors.Length;
-                    float[] blend_positions = new float[num_colors];
-                    for (int i = 0; i < num_colors; i++)
-                    {
-                        blend_positions[i] = i / (num_colors - 1f);
-                    }
-
-                    ColorBlend color_blend = new ColorBlend();
-                    color_blend.Colors = colors;
-                    color_blend.Positions = blend_positions;
-                    the_brush.InterpolationColors = color_blend;
-
-                    // Draw the text.
-                    e.Graphics.DrawString(Txt, the_font, the_brush, x0, y0);
-                }
+            int num_colors = colors.Length;
+            float[] blend_positions = new float[num_colors];
+            for (int i = 0; i < num_colors; i++)
+            {
+                blend_positions[i] = i / (num_colors - 1f);
             }
+
+            ColorBlend color_blend = new ColorBlend();
+            color_blend.Colors = colors;
+            color_blend.Positions = blend_positions;
+            the_brush.InterpolationColors = color_blend;
+
+            // Draw the text.
+            e.Graphics.DrawString(Txt, f, the_brush, x0, y0);
         }
         //彩色文字 SP
 
@@ -1077,43 +1002,39 @@ namespace vcs_Draw6_String2
         {
             e.Graphics.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
 
-            using (Font the_font = new Font("Comic Sans MS", 20))
-            {
+            Font f = new Font("Comic Sans MS", 20);
+            int x_st = 5;
+            int y_st = 220;
+            int dx;
 
-                int x_st = 5;
-                int y_st = 220;
-                int dx;
-
-                dx = 35;
-                DrawRotatedTextAt(e.Graphics, -90, "January", x_st, y_st, the_font, Brushes.Red);
-                x_st += dx;
-                DrawRotatedTextAt(e.Graphics, -90, "February", x_st, y_st, the_font, Brushes.Red);
-                x_st += dx;
-                DrawRotatedTextAt(e.Graphics, -90, "March", x_st, y_st, the_font, Brushes.Red);
-                x_st += dx;
-                DrawRotatedTextAt(e.Graphics, -90, "April", x_st, y_st, the_font, Brushes.Red);
-                x_st += dx;
-                DrawRotatedTextAt(e.Graphics, -90, "May", x_st, y_st, the_font, Brushes.Red);
-                x_st += dx;
-                DrawRotatedTextAt(e.Graphics, -90, "June", x_st, y_st, the_font, Brushes.Red);
-                x_st += dx;
-                DrawRotatedTextAt(e.Graphics, -90, "July", x_st, y_st, the_font, Brushes.Red);
-                x_st += dx;
-                DrawRotatedTextAt(e.Graphics, -90, "August", x_st, y_st, the_font, Brushes.Red);
-                x_st += dx;
-                DrawRotatedTextAt(e.Graphics, -90, "September", x_st, y_st, the_font, Brushes.Red);
-                x_st += dx;
-                DrawRotatedTextAt(e.Graphics, -90, "October", x_st, y_st, the_font, Brushes.Red);
-                x_st += dx;
-                DrawRotatedTextAt(e.Graphics, -90, "November", x_st, y_st, the_font, Brushes.Red);
-                x_st += dx;
-                DrawRotatedTextAt(e.Graphics, -90, "December", x_st, y_st, the_font, Brushes.Red);
-            }
-
+            dx = 35;
+            DrawRotatedTextAt(e.Graphics, -90, "January", x_st, y_st, f, Brushes.Red);
+            x_st += dx;
+            DrawRotatedTextAt(e.Graphics, -90, "February", x_st, y_st, f, Brushes.Red);
+            x_st += dx;
+            DrawRotatedTextAt(e.Graphics, -90, "March", x_st, y_st, f, Brushes.Red);
+            x_st += dx;
+            DrawRotatedTextAt(e.Graphics, -90, "April", x_st, y_st, f, Brushes.Red);
+            x_st += dx;
+            DrawRotatedTextAt(e.Graphics, -90, "May", x_st, y_st, f, Brushes.Red);
+            x_st += dx;
+            DrawRotatedTextAt(e.Graphics, -90, "June", x_st, y_st, f, Brushes.Red);
+            x_st += dx;
+            DrawRotatedTextAt(e.Graphics, -90, "July", x_st, y_st, f, Brushes.Red);
+            x_st += dx;
+            DrawRotatedTextAt(e.Graphics, -90, "August", x_st, y_st, f, Brushes.Red);
+            x_st += dx;
+            DrawRotatedTextAt(e.Graphics, -90, "September", x_st, y_st, f, Brushes.Red);
+            x_st += dx;
+            DrawRotatedTextAt(e.Graphics, -90, "October", x_st, y_st, f, Brushes.Red);
+            x_st += dx;
+            DrawRotatedTextAt(e.Graphics, -90, "November", x_st, y_st, f, Brushes.Red);
+            x_st += dx;
+            DrawRotatedTextAt(e.Graphics, -90, "December", x_st, y_st, f, Brushes.Red);
         }
 
         // Draw a rotated string at a particular position.
-        private void DrawRotatedTextAt(Graphics gr, float angle, string txt, int x, int y, Font the_font, Brush the_brush)
+        private void DrawRotatedTextAt(Graphics gr, float angle, string txt, int x, int y, Font f, Brush the_brush)
         {
             // Save the graphics state.
             GraphicsState state = gr.Save();
@@ -1127,7 +1048,7 @@ namespace vcs_Draw6_String2
             gr.TranslateTransform(x, y, MatrixOrder.Append);
 
             // Draw the text at the origin.
-            gr.DrawString(txt, the_font, the_brush, 0, 0);
+            gr.DrawString(txt, f, the_brush, 0, 0);
 
             // Restore the graphics state.
             gr.Restore(state);
@@ -1141,68 +1062,50 @@ namespace vcs_Draw6_String2
         // Draw the split text.
         private void pictureBox5_Paint(object sender, PaintEventArgs e)
         {
-            using (Font font = new Font("Times New Roman", 28, FontStyle.Bold))
-            {
-                Color top_bg_color = Color.LightGreen;
-                Color top_fg_color = Color.Fuchsia;
-                Color bottom_bg_color = Color.FromArgb(255, 128, 255);
-                Color bottom_fg_color = Color.FromArgb(0, 128, 0);
+            Font font = new Font("Times New Roman", 28, FontStyle.Bold);
+            Color top_bg_color = Color.LightGreen;
+            Color top_fg_color = Color.Fuchsia;
+            Color bottom_bg_color = Color.FromArgb(255, 128, 255);
+            Color bottom_fg_color = Color.FromArgb(0, 128, 0);
 
-                SolidBrush top_bg_brush = new SolidBrush(top_bg_color);
-                SolidBrush top_fg_brush = new SolidBrush(top_fg_color);
-                SolidBrush bottom_bg_brush = new SolidBrush(bottom_bg_color);
-                SolidBrush bottom_fg_brush = new SolidBrush(bottom_fg_color);
+            SolidBrush top_bg_brush = new SolidBrush(top_bg_color);
+            SolidBrush top_fg_brush = new SolidBrush(top_fg_color);
+            SolidBrush bottom_bg_brush = new SolidBrush(bottom_bg_color);
+            SolidBrush bottom_fg_brush = new SolidBrush(bottom_fg_color);
 
-                DrawSineSplitText(e.Graphics, "群曜醫電 Insight Medical Solutions Inc.",
-                    font, pictureBox5.ClientRectangle,
-                    top_bg_brush, top_fg_brush,
-                    bottom_bg_brush, bottom_fg_brush,
-                    2.5f, 0.25f);
+            DrawSineSplitText(e.Graphics, "群曜醫電 Insight Medical Solutions Inc.", font, pictureBox5.ClientRectangle, top_bg_brush, top_fg_brush, bottom_bg_brush, bottom_fg_brush, 2.5f, 0.25f);
 
-                top_bg_brush.Dispose();
-                top_fg_brush.Dispose();
-                bottom_bg_brush.Dispose();
-                bottom_fg_brush.Dispose();
-            }
+            top_bg_brush.Dispose();
+            top_fg_brush.Dispose();
+            bottom_bg_brush.Dispose();
+            bottom_fg_brush.Dispose();
         }
 
         // Draw sine split text centered in the indicated rectangle.
-        private void DrawSineSplitText(Graphics gr,
-            string text, Font font, Rectangle rect,
-            Brush top_bg_brush, Brush top_fg_brush,
-            Brush bottom_bg_brush, Brush bottom_fg_brush,
-            float num_waves, float y_scale)
+        private void DrawSineSplitText(Graphics gr, string text, Font font, Rectangle rect, Brush top_bg_brush, Brush top_fg_brush, Brush bottom_bg_brush, Brush bottom_fg_brush, float num_waves, float y_scale)
         {
             // Make bitmaps holding the text in different colors.
             Bitmap bm_top = new Bitmap(rect.Width, rect.Height);
             Bitmap bm_bottom = new Bitmap(rect.Width, rect.Height);
 
             // Make a StringFormat to center text.
-            using (StringFormat sf = new StringFormat())
-            {
-                sf.Alignment = StringAlignment.Center;
-                sf.LineAlignment = StringAlignment.Center;
+            StringFormat sf = new StringFormat();
+            sf.Alignment = StringAlignment.Center;
+            sf.LineAlignment = StringAlignment.Center;
 
-                using (Graphics gr_top = Graphics.FromImage(bm_top))
-                {
-                    gr_top.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-                    gr_top.FillRectangle(top_bg_brush, rect);
-                    gr_top.DrawString(text, font, top_fg_brush, rect, sf);
-                }
+            Graphics gr_top = Graphics.FromImage(bm_top);
+            gr_top.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+            gr_top.FillRectangle(top_bg_brush, rect);
+            gr_top.DrawString(text, font, top_fg_brush, rect, sf);
 
-                using (Graphics gr_bottom = Graphics.FromImage(bm_bottom))
-                {
-                    gr_bottom.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-                    gr_bottom.FillRectangle(bottom_bg_brush, rect);
-                    gr_bottom.DrawString(text, font, bottom_fg_brush, rect, sf);
-                }
-            }
+            Graphics gr_bottom = Graphics.FromImage(bm_bottom);
+            gr_bottom.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+            gr_bottom.FillRectangle(bottom_bg_brush, rect);
+            gr_bottom.DrawString(text, font, bottom_fg_brush, rect, sf);
 
             // Fill the rectangle with the top bitmap.
-            using (TextureBrush brush = new TextureBrush(bm_top))
-            {
-                gr.FillRectangle(brush, rect);
-            }
+            TextureBrush brush = new TextureBrush(bm_top);
+            gr.FillRectangle(brush, rect);
 
             // Make a polygon to fill the bottom half.
             List<PointF> points = new List<PointF>();
@@ -1218,11 +1121,9 @@ namespace vcs_Draw6_String2
             points.Add(new PointF(rect.Width - 1, rect.Height));
 
             // Fill the polygon.
-            using (TextureBrush brush = new TextureBrush(bm_bottom))
-            {
-                gr.SmoothingMode = SmoothingMode.AntiAlias;
-                gr.FillPolygon(brush, points.ToArray());
-            }
+            brush = new TextureBrush(bm_bottom);
+            gr.SmoothingMode = SmoothingMode.AntiAlias;
+            gr.FillPolygon(brush, points.ToArray());
 
             bm_top.Dispose();
             bm_bottom.Dispose();
@@ -1231,49 +1132,35 @@ namespace vcs_Draw6_String2
         // Draw the split text.
         private void pictureBox6_Paint(object sender, PaintEventArgs e)
         {
-            using (Font font = new Font("Times New Roman", 28, FontStyle.Bold))
-            {
-                DrawSplitText(e.Graphics, "群曜醫電 Insight Medical Solutions Inc.",
-                    font, pictureBox6.ClientRectangle,
-                    Brushes.Black, Brushes.White);
-            }
+            Font font = new Font("Times New Roman", 28, FontStyle.Bold);
+            DrawSplitText(e.Graphics, "群曜醫電 Insight Medical Solutions Inc.", font, pictureBox6.ClientRectangle, Brushes.Black, Brushes.White);
         }
 
         // Draw split text centered in the indicated rectangle.
-        private void DrawSplitText(Graphics gr,
-            string text, Font font, Rectangle rect,
-            Brush top_fg_brush, Brush bottom_fg_brush)
+        private void DrawSplitText(Graphics gr, string text, Font font, Rectangle rect, Brush top_fg_brush, Brush bottom_fg_brush)
         {
             // Make bitmaps holding the text in different colors.
             Bitmap bm_top = new Bitmap(rect.Width, rect.Height);
             Bitmap bm_bottom = new Bitmap(rect.Width, rect.Height);
 
             // Make a StringFormat to center text.
-            using (StringFormat sf = new StringFormat())
-            {
-                sf.Alignment = StringAlignment.Center;
-                sf.LineAlignment = StringAlignment.Center;
+            StringFormat sf = new StringFormat();
+            sf.Alignment = StringAlignment.Center;
+            sf.LineAlignment = StringAlignment.Center;
 
-                using (Graphics gr_top = Graphics.FromImage(bm_top))
-                {
-                    gr_top.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-                    gr_top.FillRectangle(bottom_fg_brush, rect);
-                    gr_top.DrawString(text, font, top_fg_brush, rect, sf);
-                }
+            Graphics gr_top = Graphics.FromImage(bm_top);
+            gr_top.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+            gr_top.FillRectangle(bottom_fg_brush, rect);
+            gr_top.DrawString(text, font, top_fg_brush, rect, sf);
 
-                using (Graphics gr_bottom = Graphics.FromImage(bm_bottom))
-                {
-                    gr_bottom.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-                    gr_bottom.FillRectangle(top_fg_brush, rect);
-                    gr_bottom.DrawString(text, font, bottom_fg_brush, rect, sf);
-                }
-            }
+            Graphics gr_bottom = Graphics.FromImage(bm_bottom);
+            gr_bottom.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+            gr_bottom.FillRectangle(top_fg_brush, rect);
+            gr_bottom.DrawString(text, font, bottom_fg_brush, rect, sf);
 
             // Fill the entire rectangle with the top version.
-            using (TextureBrush brush = new TextureBrush(bm_top))
-            {
-                gr.FillRectangle(brush, rect);
-            }
+            TextureBrush brush = new TextureBrush(bm_top);
+            gr.FillRectangle(brush, rect);
 
             // Fill the lower left corner with the bottom version.
             Point[] points = 
@@ -1285,10 +1172,8 @@ namespace vcs_Draw6_String2
                 //new Point(rect.Right, rect.Bottom),
                 //new Point(rect.Right, rect.Y),
             };
-            using (TextureBrush brush = new TextureBrush(bm_bottom))
-            {
-                gr.FillPolygon(brush, points);
-            }
+            brush = new TextureBrush(bm_bottom);
+            gr.FillPolygon(brush, points);
 
             bm_top.Dispose();
             bm_bottom.Dispose();
@@ -1297,58 +1182,40 @@ namespace vcs_Draw6_String2
         // Draw the split text.
         private void pictureBox7_Paint(object sender, PaintEventArgs e)
         {
-            using (Font font = new Font("Times New Roman", 28, FontStyle.Bold))
-            {
-                DrawSplitText2(e.Graphics, "群曜醫電 Insight Medical Solutions Inc.",
-                    font, pictureBox7.ClientRectangle,
-                    Brushes.Black, Brushes.White);
-            }
+            Font font = new Font("Times New Roman", 28, FontStyle.Bold);
+            DrawSplitText2(e.Graphics, "群曜醫電 Insight Medical Solutions Inc.", font, pictureBox7.ClientRectangle, Brushes.Black, Brushes.White);
         }
 
         // Draw split text centered in the indicated rectangle.
-        private void DrawSplitText2(Graphics gr,
-            string text, Font font, Rectangle rect,
-            Brush top_fg_brush, Brush bottom_fg_brush)
+        private void DrawSplitText2(Graphics gr, string text, Font font, Rectangle rect, Brush top_fg_brush, Brush bottom_fg_brush)
         {
             // Make bitmaps holding the text in different colors.
             Bitmap bm_top = new Bitmap(rect.Width, rect.Height);
             Bitmap bm_bottom = new Bitmap(rect.Width, rect.Height);
 
             // Make a StringFormat to center text.
-            using (StringFormat sf = new StringFormat())
-            {
-                sf.Alignment = StringAlignment.Center;
-                sf.LineAlignment = StringAlignment.Center;
+            StringFormat sf = new StringFormat();
+            sf.Alignment = StringAlignment.Center;
+            sf.LineAlignment = StringAlignment.Center;
 
-                using (Graphics gr_top = Graphics.FromImage(bm_top))
-                {
-                    gr_top.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-                    gr_top.FillRectangle(bottom_fg_brush, rect);
-                    gr_top.DrawString(text, font, top_fg_brush, rect, sf);
-                }
+            Graphics gr_top = Graphics.FromImage(bm_top);
+            gr_top.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+            gr_top.FillRectangle(bottom_fg_brush, rect);
+            gr_top.DrawString(text, font, top_fg_brush, rect, sf);
 
-                using (Graphics gr_bottom = Graphics.FromImage(bm_bottom))
-                {
-                    gr_bottom.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-                    gr_bottom.FillRectangle(top_fg_brush, rect);
-                    gr_bottom.DrawString(text, font, bottom_fg_brush, rect, sf);
-                }
-            }
+            Graphics gr_bottom = Graphics.FromImage(bm_bottom);
+            gr_bottom.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+            gr_bottom.FillRectangle(top_fg_brush, rect);
+            gr_bottom.DrawString(text, font, bottom_fg_brush, rect, sf);
 
             // Fill the top and bottom halves of the rectangle.
-            RectangleF top_rect = new RectangleF(
-                rect.X, rect.Y, rect.Width, rect.Height / 2f);
-            using (TextureBrush brush = new TextureBrush(bm_top))
-            {
-                gr.FillRectangle(brush, top_rect);
-            }
+            RectangleF top_rect = new RectangleF(rect.X, rect.Y, rect.Width, rect.Height / 2f);
+            TextureBrush brush = new TextureBrush(bm_top);
+            gr.FillRectangle(brush, top_rect);
 
-            RectangleF bottom_rect = new RectangleF(
-                rect.X, top_rect.Bottom, rect.Width, rect.Height / 2f);
-            using (TextureBrush brush = new TextureBrush(bm_bottom))
-            {
-                gr.FillRectangle(brush, bottom_rect);
-            }
+            RectangleF bottom_rect = new RectangleF(rect.X, top_rect.Bottom, rect.Width, rect.Height / 2f);
+            brush = new TextureBrush(bm_bottom);
+            gr.FillRectangle(brush, bottom_rect);
 
             bm_top.Dispose();
             bm_bottom.Dispose();

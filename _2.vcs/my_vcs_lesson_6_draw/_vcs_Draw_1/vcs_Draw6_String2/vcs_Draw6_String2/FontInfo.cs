@@ -25,21 +25,17 @@ namespace vcs_Draw6_String2
         public float RelBottom;
 
         // Initialize the properties.
-        public FontInfo(Graphics gr, Font the_font)
+        public FontInfo(Graphics gr, Font f)
         {
-            float em_height = the_font.FontFamily.GetEmHeight(the_font.Style);
-            EmHeightPixels = ConvertUnits(gr, the_font.Size,
-                the_font.Unit, GraphicsUnit.Pixel);
+            float em_height = f.FontFamily.GetEmHeight(f.Style);
+            EmHeightPixels = ConvertUnits(gr, f.Size, f.Unit, GraphicsUnit.Pixel);
             float design_to_pixels = EmHeightPixels / em_height;
 
-            AscentPixels = design_to_pixels *
-                the_font.FontFamily.GetCellAscent(the_font.Style);
-            DescentPixels = design_to_pixels *
-                the_font.FontFamily.GetCellDescent(the_font.Style);
+            AscentPixels = design_to_pixels * f.FontFamily.GetCellAscent(f.Style);
+            DescentPixels = design_to_pixels * f.FontFamily.GetCellDescent(f.Style);
             CellHeightPixels = AscentPixels + DescentPixels;
             InternalLeadingPixels = CellHeightPixels - EmHeightPixels;
-            LineSpacingPixels = design_to_pixels *
-                the_font.FontFamily.GetLineSpacing(the_font.Style);
+            LineSpacingPixels = design_to_pixels * f.FontFamily.GetLineSpacing(f.Style);
             ExternalLeadingPixels = LineSpacingPixels - CellHeightPixels;
 
             RelTop = InternalLeadingPixels;
