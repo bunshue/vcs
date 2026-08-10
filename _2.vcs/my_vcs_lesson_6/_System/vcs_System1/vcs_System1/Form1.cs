@@ -125,9 +125,8 @@ namespace vcs_System1
             button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
             button40.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             button41.Location = new Point(x_st + dx * 4, y_st + dy * 1);
-
-            groupBox1.Size = new Size(200, 150);//Windows 開關機(偽執行)
-            groupBox1.Location = new Point(x_st + dx * 4, y_st + dy * 2 - 5);
+            button42.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+            button43.Location = new Point(x_st + dx * 4, y_st + dy * 3);
 
             listView1.Size = new Size(720, 410);
             listView1.Location = new Point(x_st + dx * 4, y_st + dy * 4 + 5);
@@ -1064,7 +1063,23 @@ namespace vcs_System1
 
         private void button14_Click(object sender, EventArgs e)
         {
+            //傳送到 + 程式參數
+
+            string sendto_folder = Environment.GetFolderPath(Environment.SpecialFolder.SendTo);
+            richTextBox1.Text += "[傳送到]資料夾位置:\n" + sendto_folder + "\n";
+
+            richTextBox1.Text += "檔案總管 右鍵 傳送到 XXX, 可用XXX開啟檔案\n\n拉一個捷徑到\n%APPDATA%\\Microsoft\\Windows\\SendTo\n或\n" + sendto_folder;
+
+            int len = System.Environment.GetCommandLineArgs().Length;
+            int i;
+            richTextBox1.Text += "參數長度\t" + len.ToString() + "\t分別是:\n";
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += "第 " + i.ToString() + " 項\t" + System.Environment.GetCommandLineArgs()[i] + "\n";
+            }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button15_Click(object sender, EventArgs e)
         {
@@ -1488,9 +1503,40 @@ namespace vcs_System1
 
         //------------------------------------------------------------  # 60個
 
+        //#region Windows 開關機休眠
+        [DllImport("user32")]
+        public static extern bool ExitWindowsEx(uint uFlags, uint dwReason);
+
+        [DllImport("user32")]
+        public static extern void LockWorkStation();
+
         private void button36_Click(object sender, EventArgs e)
         {
+            // Log off.
+            //關機 偽執行
+            //ExitWindowsEx(0, 0);
+
+            //------------------------------  # 30個
+
+            // Lock.
+            //偽執行
+            //LockWorkStation();
+
+            //------------------------------  # 30個
+
+            // Hibernate.
+            //偽執行
+            //Application.SetSuspendState(PowerState.Hibernate, true, true);
+
+            //------------------------------  # 30個
+
+            // Sleep.
+            //偽執行
+            //Application.SetSuspendState(PowerState.Suspend, true, true);
         }
+        //#endregion
+
+        //------------------------------------------------------------  # 60個
 
         //取得任務欄尺寸大小 ST
 
@@ -1670,41 +1716,19 @@ namespace vcs_System1
 
         //------------------------------------------------------------  # 60個
 
-        //#region Windows 開關機
-        [DllImport("user32")]
-        public static extern bool ExitWindowsEx(uint uFlags, uint dwReason);
-
-        [DllImport("user32")]
-        public static extern void LockWorkStation();
-
-        // Log off.
-        private void btnLogOff_Click(object sender, EventArgs e)
+        private void button42_Click(object sender, EventArgs e)
         {
-            //偽執行
-            //ExitWindowsEx(0, 0);
+
         }
 
-        // Lock.
-        private void btnLock_Click(object sender, EventArgs e)
+        //------------------------------------------------------------  # 60個
+
+        private void button43_Click(object sender, EventArgs e)
         {
-            //偽執行
-            //LockWorkStation();
+
         }
 
-        // Hibernate.
-        private void btnHibernate_Click(object sender, EventArgs e)
-        {
-            //偽執行
-            //Application.SetSuspendState(PowerState.Hibernate, true, true);
-        }
-
-        // Sleep.
-        private void btnSleep_Click(object sender, EventArgs e)
-        {
-            //偽執行
-            //Application.SetSuspendState(PowerState.Suspend, true, true);
-        }
-        //#endregion
+        //------------------------------------------------------------  # 60個
     }
 
     //------------------------------------------------------------  # 60個
@@ -2020,8 +2044,6 @@ namespace vcs_System1
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-
-
 /*
 C# GUID介紹和的使用，
 
@@ -2062,14 +2084,8 @@ EG:       string str = "insert into 表名(NM,BH,MC) values('" + Guid.NewGuid().
 
 //------------------------------------------------------------  # 60個
 
-*/
-
-
-/*
 Guid.NewGuid().ToString()
-
 Guid.NewGuid().ToString()
-
         Random rand = new Random(Guid.NewGuid().GetHashCode());
 */
 

@@ -30,10 +30,13 @@ namespace vcs_LOG
 
             //------------------------------------------------------------  # 60個
 
+            Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
+
+            //------------------------------------------------------------  # 60個
+
             LogFileName = "timer1_logA_" + DateTime.Now.ToString("yyyyMMdd") + ".txt";
             richTextBox1.Text += "用Timer1自動存Log中.....\n";
-
-            Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
+            timer1.Enabled = true;
 
             _que = new ConcurrentQueue<FlashLogMessage>();
             _mre = new ManualResetEvent(false);
@@ -112,15 +115,13 @@ namespace vcs_LOG
             WriteLog("寫log的方法2 " + (i2++).ToString());
         }
 
-        private void WriteLog(string text)
+        private void WriteLog(string message)
         {
             string filename = "Logger4_" + DateTime.Now.ToString("yyMMdd-HHmmss") + ".log";
 
-            using (StreamWriter output = File.AppendText(filename))
-            {
-                output.WriteLine(text);
-                output.Close();
-            }
+            StreamWriter output = File.AppendText(filename);
+            output.WriteLine(message);
+            output.Close();
         }
 
         //------------------------------------------------------------  # 60個
@@ -132,7 +133,7 @@ namespace vcs_LOG
             WriteLog2("寫log的方法3 " + (i3++).ToString());
         }
 
-        public static void WriteLog2(string text)
+        public static void WriteLog2(string mesg)
         {
             string strDicPath = Application.StartupPath + "//";
             string log_filename1 = strDicPath + "aaaLogger1_" + string.Format("{0:yyyy年-MM月-dd日}", DateTime.Now) + "日誌記錄.txt";
@@ -148,13 +149,15 @@ namespace vcs_LOG
             {
                 try
                 {
+                    string message = DateTime.Now.ToString("HH:mm:ss") + "  " + mesg;
                     StreamWriter sr = File.AppendText(log_filename1);
-                    sr.WriteLine(DateTime.Now.ToString("HH:mm:ss") + "  " + text);
+                    sr.WriteLine(message);
                     sr.Close();
                     break;
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
+                    //richTextBox1.Text += "xxx錯誤訊息e17 : " + ex.ToString() + "\n";
                     Thread.Sleep(50);
                     continue;
                 }
@@ -359,11 +362,11 @@ namespace vcs_LOG
 
         public List<string> Log = new List<string>();
         int iii = 0;
-        private void AddLog(string logtext)
+        private void AddLog(string message)
         {
             if (Log.Count < 1000)
             {
-                Log.Add(DateTime.Now.ToString() + "\t" + logtext);
+                Log.Add(DateTime.Now.ToString() + "\t" + message);
             }
             else if (Log.Count == 1000)
             {
@@ -375,7 +378,8 @@ namespace vcs_LOG
         {
             //加入LOG
             iii++;
-            AddLog("add log " + iii.ToString());
+            string message = "add log " + iii.ToString();
+            AddLog(message);
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -404,8 +408,8 @@ namespace vcs_LOG
         private void button14_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "加入log\n";
-            var msg = "要加入的日誌資料";
-            string message1 = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "\t" + msg;
+            string message = "要加入的日誌資料";
+            string message1 = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "\t" + message;
             Logs.Add(message1);
         }
 
@@ -427,7 +431,7 @@ namespace vcs_LOG
         // with .1 appended to the name and bump down older versions.
         // (E.g. log.txt.1, log.txt.2, etc.)
         // Then write the text into the main log file. 
-        private void WriteToLog(string new_text, string file_name, long max_size, int num_backups)
+        private void WriteToLog(string text, string file_name, long max_size, int num_backups)
         {
             // See if the file is too big.
             FileInfo file_info = new FileInfo(file_name);
@@ -454,8 +458,7 @@ namespace vcs_LOG
                 // Move the main log file.
                 File.Move(file_name, file_name + ".0001");
             }
-            // Write the text.
-            File.AppendAllText(file_name, new_text + '\n');
+            File.AppendAllText(file_name, text + '\n');
         }
 
         int i = 0;
@@ -477,15 +480,9 @@ namespace vcs_LOG
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
 
 /*
 寫日誌範例 :

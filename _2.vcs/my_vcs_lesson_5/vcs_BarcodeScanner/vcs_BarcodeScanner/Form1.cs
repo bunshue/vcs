@@ -54,13 +54,21 @@ namespace vcs_BarcodeScanner
         {
             ccc++;
             if ((ccc % 4) == 0)
+            {
                 lb_main_mesg1.Text = "等待 \\";
+            }
             else if ((ccc % 4) == 1)
+            {
                 lb_main_mesg1.Text = "等待 |";
+            }
             else if ((ccc % 4) == 2)
+            {
                 lb_main_mesg1.Text = "等待 /";
+            }
             else
+            {
                 lb_main_mesg1.Text = "等待 -";
+            }
 
             if ((timer_cnt++ % 10) == 0)
             {
@@ -124,12 +132,6 @@ namespace vcs_BarcodeScanner
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-

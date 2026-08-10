@@ -21,6 +21,17 @@ namespace vcs_LED_Text
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
+            //左上
+            pictureBox0.Invalidate();
+
+            //右
+            pictureBox1.Invalidate();
+
+            //左下
+            pictureBox2.Invalidate();
         }
 
         void show_item_location()
@@ -32,11 +43,16 @@ namespace vcs_LED_Text
             int dx = W + 10;
             int dy = H + 10;
             pictureBox0.Size = new Size(W, H);
-            pictureBox1.Size = new Size(W * 7, H * 2 + 10);
+            pictureBox1.Size = new Size(W * 7 - 70, H * 2 + 10);
             pictureBox2.Size = new Size(W, H);
             pictureBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             pictureBox2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            pictureBox0.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+
+            this.BackColor = Color.Pink;
 
             this.Size = new Size(1900, 950);
             this.Text = "vcs_LED_Text";
@@ -138,7 +154,7 @@ namespace vcs_LED_Text
             position = new PointF(x_st + dx * 0, y_st + dy * 3);
             letter.DrawText(gr, bg_brush2, used_brush2, used_pen2, unused_brush2, unused_pen2, position, 1.2f, "IJKLMNOPQRSTUVWXYZ");
 
-
+            //------------------------------  # 30個
 
             Brush bg_brush = Brushes.Black;
             Brush used_brush = Brushes.Lime;
@@ -151,8 +167,6 @@ namespace vcs_LED_Text
 
             position.Y += letter.CellHeight * 1.2f;
             letter.DrawText(gr, bg_brush, used_brush, used_pen, unused_brush, unused_pen, position, 1.2f, "IJKLMNOPQRSTUVWXYZ");
-
-
         }
 
         //------------------------------------------------------------  # 60個
@@ -228,12 +242,6 @@ namespace vcs_LED_Text
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-

@@ -61,9 +61,13 @@ namespace vcs_Bin2Hex
             {
                 richTextBox1.Text += byteArray[i].ToString("X2");
                 if ((i % new_line) == (new_line - 1))
+                {
                     richTextBox1.Text += "\n";
+                }
                 else
+                {
                     richTextBox1.Text += " ";
+                }
             }
             richTextBox1.Text += "\n";
         }
@@ -71,17 +75,29 @@ namespace vcs_Bin2Hex
         void do_bin2hex(int mode)
         {
             if (radioButton1.Checked == true)
+            {
                 new_line = 1;
+            }
             else if (radioButton2.Checked == true)
+            {
                 new_line = 2;
+            }
             else if (radioButton3.Checked == true)
+            {
                 new_line = 8;
+            }
             else if (radioButton4.Checked == true)
+            {
                 new_line = 16;
+            }
             else if (radioButton5.Checked == true)
+            {
                 new_line = 32;
+            }
             else
+            {
                 new_line = 4;
+            }
 
             openFileDialog1.Title = "二進位檔轉成文字檔";
             //openFileDialog1.ShowHelp = true;
@@ -127,7 +143,9 @@ namespace vcs_Bin2Hex
                         richTextBox1.Text += "讀取長度 : " + len.ToString() + "\n";
 
                         if (len > len_file)
+                        {
                             len = len_file;
+                        }
 
                         if (radioButton6.Checked == true)
                         {
@@ -175,9 +193,13 @@ namespace vcs_Bin2Hex
                         {
                             sw.Write(byteArray[i].ToString("X2"));
                             if ((i % new_line) == (new_line - 1))
+                            {
                                 sw.Write(byteArray[i].ToString("\n"));
+                            }
                             else
+                            {
                                 sw.Write(byteArray[i].ToString(" "));
+                            }
                         }
 
                         sw.Close();
@@ -207,9 +229,13 @@ namespace vcs_Bin2Hex
             {
                 richTextBox1.Text += byteArray[i].ToString("X2");
                 if ((i % 32) == 31)
+                {
                     richTextBox1.Text += "\n";
+                }
                 else
+                {
                     richTextBox1.Text += "  ";
+                }
             }
             richTextBox1.Text += "\n";
         }
@@ -219,13 +245,6 @@ namespace vcs_Bin2Hex
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
-

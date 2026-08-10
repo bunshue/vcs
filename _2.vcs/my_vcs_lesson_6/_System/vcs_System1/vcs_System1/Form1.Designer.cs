@@ -60,11 +60,6 @@
             this.button23 = new System.Windows.Forms.Button();
             this.button24 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnSleep = new System.Windows.Forms.Button();
-            this.btnHibernate = new System.Windows.Forms.Button();
-            this.btnLock = new System.Windows.Forms.Button();
-            this.btnLogOff = new System.Windows.Forms.Button();
             this.button30 = new System.Windows.Forms.Button();
             this.button31 = new System.Windows.Forms.Button();
             this.button32 = new System.Windows.Forms.Button();
@@ -85,7 +80,8 @@
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.button40 = new System.Windows.Forms.Button();
             this.button41 = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
+            this.button42 = new System.Windows.Forms.Button();
+            this.button43 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -235,6 +231,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(200, 60);
             this.button14.TabIndex = 15;
+            this.button14.Text = "傳送到 + 程式參數";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -429,59 +426,6 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.btnSleep);
-            this.groupBox1.Controls.Add(this.btnHibernate);
-            this.groupBox1.Controls.Add(this.btnLock);
-            this.groupBox1.Controls.Add(this.btnLogOff);
-            this.groupBox1.Location = new System.Drawing.Point(1034, 6);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(191, 151);
-            this.groupBox1.TabIndex = 75;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Windows 開關機(偽執行)";
-            // 
-            // btnSleep
-            // 
-            this.btnSleep.Location = new System.Drawing.Point(98, 87);
-            this.btnSleep.Name = "btnSleep";
-            this.btnSleep.Size = new System.Drawing.Size(80, 45);
-            this.btnSleep.TabIndex = 11;
-            this.btnSleep.Text = "Sleep";
-            this.btnSleep.UseVisualStyleBackColor = true;
-            this.btnSleep.Click += new System.EventHandler(this.btnSleep_Click);
-            // 
-            // btnHibernate
-            // 
-            this.btnHibernate.Location = new System.Drawing.Point(12, 87);
-            this.btnHibernate.Name = "btnHibernate";
-            this.btnHibernate.Size = new System.Drawing.Size(80, 45);
-            this.btnHibernate.TabIndex = 10;
-            this.btnHibernate.Text = "Hibernate";
-            this.btnHibernate.UseVisualStyleBackColor = true;
-            this.btnHibernate.Click += new System.EventHandler(this.btnHibernate_Click);
-            // 
-            // btnLock
-            // 
-            this.btnLock.Location = new System.Drawing.Point(98, 30);
-            this.btnLock.Name = "btnLock";
-            this.btnLock.Size = new System.Drawing.Size(80, 45);
-            this.btnLock.TabIndex = 9;
-            this.btnLock.Text = "Lock";
-            this.btnLock.UseVisualStyleBackColor = true;
-            this.btnLock.Click += new System.EventHandler(this.btnLock_Click);
-            // 
-            // btnLogOff
-            // 
-            this.btnLogOff.Location = new System.Drawing.Point(12, 30);
-            this.btnLogOff.Name = "btnLogOff";
-            this.btnLogOff.Size = new System.Drawing.Size(80, 45);
-            this.btnLogOff.TabIndex = 8;
-            this.btnLogOff.Text = "Log Off";
-            this.btnLogOff.UseVisualStyleBackColor = true;
-            this.btnLogOff.Click += new System.EventHandler(this.btnLogOff_Click);
-            // 
             // button30
             // 
             this.button30.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -555,6 +499,7 @@
             this.button36.Name = "button36";
             this.button36.Size = new System.Drawing.Size(200, 60);
             this.button36.TabIndex = 87;
+            this.button36.Text = "開關機休眠";
             this.button36.UseVisualStyleBackColor = true;
             this.button36.Click += new System.EventHandler(this.button36_Click);
             // 
@@ -669,11 +614,33 @@
             this.button41.UseVisualStyleBackColor = true;
             this.button41.Click += new System.EventHandler(this.button41_Click);
             // 
+            // button42
+            // 
+            this.button42.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button42.Location = new System.Drawing.Point(833, 129);
+            this.button42.Name = "button42";
+            this.button42.Size = new System.Drawing.Size(200, 60);
+            this.button42.TabIndex = 94;
+            this.button42.UseVisualStyleBackColor = true;
+            this.button42.Click += new System.EventHandler(this.button42_Click);
+            // 
+            // button43
+            // 
+            this.button43.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button43.Location = new System.Drawing.Point(833, 190);
+            this.button43.Name = "button43";
+            this.button43.Size = new System.Drawing.Size(200, 60);
+            this.button43.TabIndex = 95;
+            this.button43.UseVisualStyleBackColor = true;
+            this.button43.Click += new System.EventHandler(this.button43_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1248, 641);
+            this.Controls.Add(this.button43);
+            this.Controls.Add(this.button42);
             this.Controls.Add(this.button41);
             this.Controls.Add(this.button40);
             this.Controls.Add(this.listView1);
@@ -687,7 +654,6 @@
             this.Controls.Add(this.button32);
             this.Controls.Add(this.button31);
             this.Controls.Add(this.button30);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button24);
             this.Controls.Add(this.button23);
@@ -723,7 +689,6 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -762,11 +727,6 @@
         private System.Windows.Forms.Button button23;
         private System.Windows.Forms.Button button24;
         private System.Windows.Forms.Button bt_clear;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnSleep;
-        private System.Windows.Forms.Button btnHibernate;
-        private System.Windows.Forms.Button btnLock;
-        private System.Windows.Forms.Button btnLogOff;
         private System.Windows.Forms.Button button30;
         private System.Windows.Forms.Button button31;
         private System.Windows.Forms.Button button32;
@@ -787,6 +747,8 @@
         private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.Button button40;
         private System.Windows.Forms.Button button41;
+        private System.Windows.Forms.Button button42;
+        private System.Windows.Forms.Button button43;
     }
 }
 

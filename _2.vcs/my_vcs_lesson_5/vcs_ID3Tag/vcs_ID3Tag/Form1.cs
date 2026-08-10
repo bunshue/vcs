@@ -661,17 +661,19 @@ namespace vcs_ID3Tag
         void get_ID3Tag(string filename, string encoding)
         {
             this.Text = "讀取" + filename;
-            this.BackColor = Color.Pink;
             richTextBox1.BackColor = Color.Pink;
             clear_textbox_id3_data();
             textBox_filename.Text = filename;
             richTextBox1.Text += "檔名:\t\t" + filename + "\n";
             if (cb_v1.Checked == true)
+            {
                 get_ID3v1Tag(filename, encoding);
+            }
             if (cb_v2.Checked == true)
+            {
                 get_ID3v2Tag(filename, encoding);
+            }
             this.Text = "ID3Tag";
-            this.BackColor = Color.White;
             richTextBox1.BackColor = Color.White;
         }
 
@@ -2030,12 +2032,6 @@ namespace vcs_ID3Tag
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
