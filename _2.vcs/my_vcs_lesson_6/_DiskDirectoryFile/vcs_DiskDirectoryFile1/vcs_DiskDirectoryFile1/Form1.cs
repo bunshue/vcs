@@ -198,7 +198,9 @@ namespace vcs_DiskDirectoryFile1
             foreach (DirectoryInfo di in dis)
             {
                 if (di.Name != "System Volume Information" && di.Name.Substring(0, 1) != "$")//避開此類folder權限問題
+                {
                     Size += DirSize(di);   //利用遞迴把子資料夾也計算進來
+                }
             }
             return (Size);
         }
@@ -504,7 +506,7 @@ namespace vcs_DiskDirectoryFile1
 
             //定义一个字符串数组，用来存储文件的相关属性
             string[] strAttribute = new string[] { fi.Name, Convert.ToDouble(fi.Length / 1024).ToString(), fi.Extension, fi.CreationTime.ToString(), fi.IsReadOnly.ToString(), fi.LastWriteTime.ToString() };
-            var values = from str in strAttribute//使用LINQ为文件属性赋值
+            var values = from str in strAttribute  // 使用LINQ为文件属性赋值
                          select new
                          {
                              Name = strAttribute[0].ToString(),
@@ -525,6 +527,8 @@ namespace vcs_DiskDirectoryFile1
                 richTextBox1.Text += "是否唯讀 : " + v.ReadOnly.ToString() + "\n";//显示文件是否只读
             }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void bt_file02_Click(object sender, EventArgs e)
         {
@@ -556,6 +560,8 @@ namespace vcs_DiskDirectoryFile1
                 richTextBox1.Text += "新增檔案 完成\n";
             }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void bt_file03_Click(object sender, EventArgs e)
         {
@@ -738,6 +744,8 @@ namespace vcs_DiskDirectoryFile1
                 }
             }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void bt_file08_Click(object sender, EventArgs e)
         {
@@ -1044,7 +1052,9 @@ namespace vcs_DiskDirectoryFile1
                         }
                     }
                     else
+                    {
                         richTextBox1.Text += "\n";
+                    }
                 }
 
                 //  檢查每個檔案的資訊
@@ -1556,7 +1566,6 @@ namespace vcs_DiskDirectoryFile1
                 total_number_files++;
             }
             richTextBox1.Text += "共取得檔案 " + total_number_files.ToString() + " 個\n";
-
         }
 
         //------------------------------------------------------------  # 60個

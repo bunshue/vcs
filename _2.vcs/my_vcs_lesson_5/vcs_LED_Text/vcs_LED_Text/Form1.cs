@@ -43,7 +43,7 @@ namespace vcs_LED_Text
             int dx = W + 10;
             int dy = H + 10;
             pictureBox0.Size = new Size(W, H);
-            pictureBox1.Size = new Size(W * 7 - 70, H * 2 + 10);
+            pictureBox1.Size = new Size(W * 3 + 50, H * 2 + 10);
             pictureBox2.Size = new Size(W, H);
             pictureBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
@@ -52,15 +52,25 @@ namespace vcs_LED_Text
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
 
-            this.BackColor = Color.Pink;
+            richTextBox1.Size = new Size(300, 690);
+            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1900, 950);
+            this.BackColor = Color.Pink;
+            this.Size = new Size(1700, 950);
             this.Text = "vcs_LED_Text";
 
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void pictureBox0_Paint(object sender, PaintEventArgs e)
         {
@@ -111,9 +121,14 @@ namespace vcs_LED_Text
 
         //------------------------------------------------------------  # 60個
 
+        //0123456789ABCDEFGH
+        //IJKLMNOPQRSTUVWXYZ
+
+        int index = 0;
+        string text = "0";
         private void TestColorful(Graphics gr)
         {
-            const float ratio = 2.7f;
+            const float ratio = 1.3f;
 
             gr.Clear(Color.Black);
             gr.SmoothingMode = SmoothingMode.AntiAlias;
@@ -123,7 +138,7 @@ namespace vcs_LED_Text
             const float led_thickness = 28 / ratio;
             const float gap = 5f / ratio;
             int dx = (int)W + 5;
-            int dy = (int)H + 5;
+            int dy = (int)H + 5 + 50;
             int x_st = 10;
             int y_st = 10;
             PointF position = new PointF(x_st + dx * 0, y_st + dy * 0);
@@ -137,9 +152,7 @@ namespace vcs_LED_Text
             Pen unused_pen1 = used_pen1;
 
             position = new PointF(x_st + dx * 0, y_st + dy * 0);
-            letter.DrawText(gr, bg_brush1, used_brush1, used_pen1, unused_brush1, unused_pen1, position, 1.2f, "0123456789ABCDEFGH");
-            position = new PointF(x_st + dx * 0, y_st + dy * 1);
-            letter.DrawText(gr, bg_brush1, used_brush1, used_pen1, unused_brush1, unused_pen1, position, 1.2f, "IJKLMNOPQRSTUVWXYZ");
+            letter.DrawText(gr, bg_brush1, used_brush1, used_pen1, unused_brush1, unused_pen1, position, 1.2f, text + text + text + text);
 
             //------------------------------  # 30個
 
@@ -149,10 +162,8 @@ namespace vcs_LED_Text
             Brush unused_brush2 = new SolidBrush(Color.FromArgb(0, 40, 0));
             Pen unused_pen2 = Pens.Transparent;
 
-            position = new PointF(x_st + dx * 0, y_st + dy * 2);
-            letter.DrawText(gr, bg_brush2, used_brush2, used_pen2, unused_brush2, unused_pen2, position, 1.2f, "0123456789ABCDEFGH");
-            position = new PointF(x_st + dx * 0, y_st + dy * 3);
-            letter.DrawText(gr, bg_brush2, used_brush2, used_pen2, unused_brush2, unused_pen2, position, 1.2f, "IJKLMNOPQRSTUVWXYZ");
+            position = new PointF(x_st + dx * 0, y_st + dy * 1);
+            letter.DrawText(gr, bg_brush2, used_brush2, used_pen2, unused_brush2, unused_pen2, position, 1.2f, text + text + text + text);
 
             //------------------------------  # 30個
 
@@ -162,11 +173,32 @@ namespace vcs_LED_Text
             Brush unused_brush = new SolidBrush(Color.FromArgb(0, 40, 0));
             Pen unused_pen = Pens.Transparent;
 
-            position = new PointF(x_st + dx * 0, y_st + dy * 4);
-            letter.DrawText(gr, bg_brush, used_brush, used_pen, unused_brush, unused_pen, position, 1.2f, "0123456789ABCDEFGH");
+            position = new PointF(x_st + dx * 0, y_st + dy * 2);
+            letter.DrawText(gr, bg_brush, used_brush, used_pen, unused_brush, unused_pen, position, 1.2f, text + text + text + text);
 
-            position.Y += letter.CellHeight * 1.2f;
-            letter.DrawText(gr, bg_brush, used_brush, used_pen, unused_brush, unused_pen, position, 1.2f, "IJKLMNOPQRSTUVWXYZ");
+
+            index++;
+            if (index < 10)
+            {
+                text = index.ToString();
+            }
+            else
+            {
+                text = ((char)(0x40 + (index - 9))).ToString();
+                //richTextBox1.Text += index.ToString() + "\n";
+                //richTextBox1.Text += text + " ";
+                Application.DoEvents();
+            }
+
+            richTextBox1.Text += index.ToString() + "\t" + text + "\n";
+
+            if (index >= 36)
+            {
+                index = 0;
+                text = "0";
+            }
+
+
         }
 
         //------------------------------------------------------------  # 60個
@@ -235,6 +267,11 @@ namespace vcs_LED_Text
             //g.DrawEllipse(Pens.Red, pts[0].X - 2, pts[0].Y - 2, 4, 4);
             //g.DrawEllipse(Pens.Green, pts[1].X - 2, pts[1].Y - 2, 4, 4);
             //g.DrawEllipse(Pens.Blue, pts[2].X - 2, pts[2].Y - 2, 4, 4);
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            pictureBox1.Invalidate();
         }
     }
 }

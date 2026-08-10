@@ -47,7 +47,10 @@ namespace vcs_CompareDirectory
 
             // Get sorted lists of files in the directories.
             string dir1 = textBox1.Text;
-            if (!dir1.EndsWith("\\")) dir1 += "\\";
+            if (!dir1.EndsWith("\\"))
+            {
+                dir1 += "\\";
+            }
             string[] file_names1 = Directory.GetFiles(dir1);
             for (int i = 0; i < file_names1.Length; i++)
             {
@@ -56,7 +59,10 @@ namespace vcs_CompareDirectory
             Array.Sort(file_names1);
 
             string dir2 = textBox2.Text;
-            if (!dir2.EndsWith("\\")) dir2 += "\\";
+            if (!dir2.EndsWith("\\"))
+            {
+                dir2 += "\\";
+            }
             string[] file_names2 = Directory.GetFiles(dir2);
             for (int i = 0; i < file_names2.Length; i++)
             {

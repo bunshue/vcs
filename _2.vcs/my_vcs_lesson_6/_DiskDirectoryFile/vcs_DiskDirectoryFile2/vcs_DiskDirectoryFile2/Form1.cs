@@ -312,7 +312,6 @@ namespace vcs_DiskDirectoryFile2
         Int64 folder_size = 0;
         Int64 folder_files = 0;
 
-
         // Process all files in the directory passed in, recurse on any directories 
         // that are found, and process the files they contain.
         public void ProcessDirectory(string targetDirectory)
@@ -414,17 +413,12 @@ namespace vcs_DiskDirectoryFile2
                 richTextBox1.Text += "非合法路徑或檔案\n";
             }
 
-
-            richTextBox1.Text += "\n\n\n";
-
-
-            richTextBox1.Text += "fileinfos len = " + fileinfos.Count.ToString() + "\n";
+            richTextBox1.Text += "\n\nfileinfos len = " + fileinfos.Count.ToString() + "\n";
 
             richTextBox1.Text += "total_size = " + total_size.ToString() + "\n";
             richTextBox1.Text += "total_files = " + total_files.ToString() + "\n";
             //richTextBox1.Text += "folder_size = " + folder_size.ToString() + "\n";
             //richTextBox1.Text += "folder_files = " + folder_files.ToString() + "\n";
-
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -886,10 +880,6 @@ namespace vcs_DiskDirectoryFile2
                     richTextBox1.Text += "其他 檔案\n";
                 }
             }
-
-
-
-
         }
 
         //------------------------------------------------------------  # 60個
@@ -937,14 +927,7 @@ namespace vcs_DiskDirectoryFile2
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-
-/*  可搬出
-
-*/
-
 

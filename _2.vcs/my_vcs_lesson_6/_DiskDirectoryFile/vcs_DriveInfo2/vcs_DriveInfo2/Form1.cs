@@ -16,7 +16,7 @@ namespace vcs_DriveInfo2
     public partial class Form1 : Form
     {
         bool flag_debug_mode = false;
-        bool flag_warning = false;
+        //bool flag_warning = false;
 
         private const int THRESHOLD1 = 20;  //預設 一級警戒, 警告
         private const int THRESHOLD2 = 10;  //預設 二級警戒, 嚴重警告
@@ -274,7 +274,7 @@ namespace vcs_DriveInfo2
 
         void get_disk_info()
         {
-            flag_warning = false;
+            //flag_warning = false;
 
             //使用System.IO.DriveInfo來遍歷磁片及其分區資訊
             //引用System.IO後即可調用DriveInfo類來對磁碟空間資訊進行遍歷了，此外DriveInfo只有在普通WINFORM中可以調用，WINCE專案中未封裝此類。
@@ -399,7 +399,7 @@ namespace vcs_DriveInfo2
 
             if (warning.Length > 0)
             {
-                flag_warning = true;
+                //flag_warning = true;
                 if (total_drives < 2)
                 {
                     g.DrawString("磁碟 : " + warning, new Font("標楷體", 18), new SolidBrush(Color.Red), new Point(40, 190));
@@ -484,7 +484,7 @@ namespace vcs_DriveInfo2
                 }
                 catch (Exception ex)
                 {
-                    //richTextBox1.Text += "xxx錯誤訊息e39 : " + ex.Message + "\n";
+                    richTextBox1.Text += "xxx錯誤訊息e39 : " + ex.Message + "\n";
                 }
 
                 this.Cursor = Cursors.Default;

@@ -54,7 +54,7 @@ namespace vcs_ColorMap
             comboBox1.SelectedIndex = 0;
             richTextBox1.Text += "共有 " + comboBox1.Items.Count.ToString() + " 種顏色\n";
 
-            //6060
+            //------------------------------------------------------------  # 60個
 
             draw_minion_yellow_color();
         }
@@ -935,6 +935,8 @@ namespace vcs_ColorMap
             getColorFromWaveLength2(l);
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button14_Click(object sender, EventArgs e)
         {
             //建立調色盤
@@ -1025,6 +1027,9 @@ namespace vcs_ColorMap
             PictureBox pic = sender as PictureBox;
             this.pictureBox1.BackColor = pic.BackColor;
         }
+
+        //------------------------------------------------------------  # 60個
+
         private void button15_Click(object sender, EventArgs e)
         {
         }
@@ -1775,7 +1780,6 @@ namespace vcs_ColorMap
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
@@ -1784,7 +1788,6 @@ namespace vcs_ColorMap
 
 Color的另一種寫法
 this.BackColor = Color.FromKnownColor(KnownColor.GrayText);
-
 
             Random rr = new Random();
             Brush db = new SolidBrush(Color.FromArgb(rr.Next(256), rr.Next(256), rr.Next(256)));
