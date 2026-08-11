@@ -18,7 +18,10 @@ namespace vcs_PictureCard
         // The 5th suite is for the back, jokers, etc.
         private const int NumSuits = 5;
         private const int NumRanks = 13;
-        private int CardWidth, CardHeight;
+        private int CardWidth;
+        private int CardHeight;
+        int W = 936;
+        int H = 500;
 
         // The suits in their order in the file.
         private enum Suits
@@ -41,6 +44,10 @@ namespace vcs_PictureCard
         // Load the cards.
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
             // Load the card images.
             LoadCardImages();
 
@@ -48,11 +55,38 @@ namespace vcs_PictureCard
             ArrangeCards();
         }
 
+        void show_item_location()
+        {
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+
+            richTextBox1.Size = new Size(300, 690);
+            richTextBox1.Location = new Point(x_st + dx * 5 + 100, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1273 + 210, 750);
+            this.Text = "vcs_test_all_00_Usually";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
+
         // Load the card PictureBoxes.
         private void LoadCardImages()
         {
-            CardWidth = Properties.Resources.cards.Width / NumRanks;
-            CardHeight = Properties.Resources.cards.Height / NumSuits;
+            CardWidth = W / NumRanks;
+            CardHeight = H / NumSuits;
             int x0 = 0;
             int y0 = 0;
             int dx = CardWidth;
@@ -69,7 +103,6 @@ namespace vcs_PictureCard
                 }
                 y += dy;
             }
-            this.ClientSize = new Size(Properties.Resources.cards.Width + 150, Properties.Resources.cards.Height + 150);
         }
 
         // Load a single card from the deck.
@@ -101,14 +134,10 @@ namespace vcs_PictureCard
             Bitmap bm = new Bitmap(CardWidth, CardHeight);
             using (Graphics gr = Graphics.FromImage(bm))
             {
-                Rectangle dest_rect =
-                    new Rectangle(0, 0, CardWidth, CardHeight);
-                Rectangle src_rect =
-                    new Rectangle(x, y, CardWidth, CardHeight);
-                gr.DrawImage(Properties.Resources.cards,
-                    dest_rect, src_rect, GraphicsUnit.Pixel);
+                Rectangle dest_rect = new Rectangle(0, 0, CardWidth, CardHeight);
+                Rectangle src_rect = new Rectangle(x, y, CardWidth, CardHeight);
+                gr.DrawImage(Properties.Resources.cards, dest_rect, src_rect, GraphicsUnit.Pixel);
             }
-
             return bm;
         }
 
@@ -151,7 +180,8 @@ namespace vcs_PictureCard
 
     public class Card
     {
-        public int Rank, Suit;
+        public int Rank;
+        public int Suit;
         public Bitmap Picture;
 
         public Card(int rank, int suit, Bitmap picture)
@@ -162,3 +192,11 @@ namespace vcs_PictureCard
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+

@@ -71,6 +71,8 @@ namespace vcs_ImageViewer
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             this.pictureBox1.BorderStyle = BorderStyle.Fixed3D;
 
             //this.pictureBox1.Dock = DockStyle.Left;
@@ -110,17 +112,14 @@ namespace vcs_ImageViewer
 
         void show_item_location()
         {
-            //最大化螢幕
-            //this.FormBorderStyle = FormBorderStyle.None;
-            //this.WindowState = FormWindowState.Maximized;
-            //this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
 
-            //設定執行後的表單起始位置, 指定位置
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = new Point(0, 0);
-
-            int x_st = 1400;
-            int y_st = 20;
+            x_st = 1400;
+            y_st = 20;
 
             lb_pixel_info = new Label();
             lb_pixel_info.Location = new Point(x_st, y_st + 0);
@@ -134,22 +133,25 @@ namespace vcs_ImageViewer
             lb_image_info.Size = new Size(150, 50);
             this.Controls.Add(lb_image_info);
 
+            x_st = 10;
+            y_st = 10;
+
             pictureBox1.Size = new Size(1000, 800);
-            pictureBox1.Location = new Point(0, 0);
-            richTextBox1.Size = new Size(300, 700);
-            richTextBox1.Location = new Point(1400, 100);
+            pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
 
-            //一般螢幕大小
-            this.Size = new Size(1720, 850);
+            richTextBox1.Size = new Size(300, 690);
+            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            /*
-            //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
-            */
+            this.Size = new Size(1600, 750);
+            this.Text = "vcs_test_all_00_Usually";
 
             bt_open_file_setup();
             bt_exit_setup();
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_open_file_Click(object sender, EventArgs e)
@@ -240,6 +242,13 @@ namespace vcs_ImageViewer
             this.Controls.Add(bt_exit); // 將按鈕加入表單
             bt_exit.BringToFront();     //移到最上層
         }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -656,3 +665,11 @@ namespace vcs_ImageViewer
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Drawing2D;//for Dash
+using System.Drawing.Drawing2D;  // for Dash
 
 namespace vcs_PictureCrop7
 {
@@ -27,7 +27,6 @@ namespace vcs_PictureCrop7
             Bitmap bm = new Bitmap(filename);
             TheBitmap = new Bitmap(bm);
             pictureBox1.Image = TheBitmap;
-
         }
 
         // Let the user click and drag to select an area.
@@ -48,18 +47,10 @@ namespace vcs_PictureCrop7
                 return;
             }
             Bitmap temp_bm = new Bitmap(TheBitmap);
-            using (Graphics gr = Graphics.FromImage(temp_bm))
-            {
-                using (Pen dashed_pen = new Pen(Color.Black, 0))
-                {
-                    dashed_pen.DashStyle = DashStyle.Dash;
-                    gr.DrawRectangle(dashed_pen,
-                        Math.Min(StartX, e.X),
-                        Math.Min(StartY, e.Y),
-                        Math.Abs(StartX - e.X),
-                        Math.Abs(StartY - e.Y));
-                }
-            }
+            Graphics gr = Graphics.FromImage(temp_bm);
+            Pen dashed_pen = new Pen(Color.Black, 0);
+            dashed_pen.DashStyle = DashStyle.Dash;
+            gr.DrawRectangle(dashed_pen, Math.Min(StartX, e.X), Math.Min(StartY, e.Y), Math.Abs(StartX - e.X), Math.Abs(StartY - e.Y));
             pictureBox1.Image = temp_bm;
         }
 
@@ -72,11 +63,7 @@ namespace vcs_PictureCrop7
             Drawing = false;
 
             // Process the selected area.
-            Rectangle rect = new Rectangle(
-                Math.Min(StartX, e.X),
-                Math.Min(StartY, e.Y),
-                Math.Abs(StartX - e.X),
-                Math.Abs(StartY - e.Y));
+            Rectangle rect = new Rectangle(Math.Min(StartX, e.X), Math.Min(StartY, e.Y), Math.Abs(StartX - e.X), Math.Abs(StartY - e.Y));
             Gray_Selection(TheBitmap, rect);
             pictureBox1.Image = TheBitmap;
             pictureBox1.Refresh();
@@ -97,3 +84,11 @@ namespace vcs_PictureCrop7
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+

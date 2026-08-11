@@ -240,26 +240,34 @@ namespace vcs_PictureCrop1
             SelectionRectangle = MakeRectangle(pt_st, pt_sp);
 
             if ((SelectionRectangle.X < 0) || (SelectionRectangle.X >= W))
+            {
                 return;
+            }
             if ((SelectionRectangle.Y < 0) || (SelectionRectangle.Y >= H))
+            {
                 return;
+            }
             if ((SelectionRectangle.Width <= 0) || (SelectionRectangle.Width > W))
+            {
                 return;
+            }
             if ((SelectionRectangle.Height <= 0) || (SelectionRectangle.Height > H))
+            {
                 return;
+            }
             if (((SelectionRectangle.X + SelectionRectangle.Width) > W) || ((SelectionRectangle.Y + SelectionRectangle.Height) > H))
+            {
                 return;
+            }
 
             // Make a Bitmap to display the selection rectangle.
             Bitmap bmp = new Bitmap(bitmap1);
 
             // Draw the selection rectangle.
-            using (Graphics g = Graphics.FromImage(bmp))
-            {
-                Pen p = new Pen(Color.Green);
-                p.DashStyle = DashStyle.Dash;
-                g.DrawRectangle(p, SelectionRectangle);
-            }
+            Graphics g = Graphics.FromImage(bmp);
+            Pen p = new Pen(Color.Green);
+            p.DashStyle = DashStyle.Dash;
+            g.DrawRectangle(p, SelectionRectangle);
             // Display the temporary bitmap.
             pictureBox1.Image = bmp;
 
@@ -292,11 +300,9 @@ namespace vcs_PictureCrop1
                 return;
 
             bitmap2 = new Bitmap(w, h);  //擷取部分位圖Bitmap
-            using (Graphics g2 = Graphics.FromImage(bitmap2))
-            {
-                Rectangle dest_rectangle = new Rectangle(0, 0, w, h);
-                g2.DrawImage(bitmap1, dest_rectangle, SelectionRectangle, GraphicsUnit.Pixel);
-            }
+            Graphics g2 = Graphics.FromImage(bitmap2);
+            Rectangle dest_rectangle = new Rectangle(0, 0, w, h);
+            g2.DrawImage(bitmap1, dest_rectangle, SelectionRectangle, GraphicsUnit.Pixel);
 
             pictureBox2.Image = bitmap2;
 
@@ -342,13 +348,9 @@ namespace vcs_PictureCrop1
                 }
 
                 // Blank the selected area in the original image.
-                using (Graphics gr = Graphics.FromImage(bitmap1))
-                {
-                    using (SolidBrush br = new SolidBrush(pictureBox1.BackColor))
-                    {
-                        gr.FillRectangle(br, SelectionRectangle);
-                    }
-                }
+                Graphics gr = Graphics.FromImage(bitmap1);
+                SolidBrush br = new SolidBrush(pictureBox1.BackColor);
+                gr.FillRectangle(br, SelectionRectangle);
                 // Display the result.
                 bitmap2 = new Bitmap(bitmap1);
                 pictureBox1.Image = bitmap2;
@@ -410,28 +412,38 @@ namespace vcs_PictureCrop1
             Rectangle SelectionRectangle2 = new Rectangle(x_st, y_st, w, h);
 
             if ((SelectionRectangle2.Width <= 0) || (SelectionRectangle2.Height <= 0))
+            {
                 return;
+            }
             if ((SelectionRectangle2.X < 0) || (SelectionRectangle2.X >= W))
+            {
                 return;
+            }
             if ((SelectionRectangle2.Y < 0) || (SelectionRectangle2.Y >= H))
+            {
                 return;
+            }
             if ((SelectionRectangle2.Width <= 0) || (SelectionRectangle2.Width > W))
+            {
                 return;
+            }
             if ((SelectionRectangle2.Height <= 0) || (SelectionRectangle2.Height > H))
+            {
                 return;
+            }
             if (((SelectionRectangle2.X + SelectionRectangle2.Width) > W) || ((SelectionRectangle2.Y + SelectionRectangle2.Height) > H))
+            {
                 return;
+            }
 
             // Make a Bitmap to display the selection rectangle.
             Bitmap bmp = new Bitmap(bitmap1);
 
             // Draw the selection rectangle.
-            using (Graphics g = Graphics.FromImage(bmp))
-            {
-                Pen p = new Pen(Color.Red);
-                p.DashStyle = DashStyle.Dash;
-                g.DrawRectangle(p, SelectionRectangle2);
-            }
+            Graphics g = Graphics.FromImage(bmp);
+            Pen p = new Pen(Color.Red);
+            p.DashStyle = DashStyle.Dash;
+            g.DrawRectangle(p, SelectionRectangle2);
             // Display the temporary bitmap.
             pictureBox1.Image = bmp;
 
@@ -444,15 +456,25 @@ namespace vcs_PictureCrop1
         private void Form1_MouseClick(object sender, MouseEventArgs e)
         {
             if ((SelectionRectangle.X < 0) || (SelectionRectangle.X >= W))
+            {
                 return;
+            }
             if ((SelectionRectangle.Y < 0) || (SelectionRectangle.Y >= H))
+            {
                 return;
+            }
             if ((SelectionRectangle.Width <= 0) || (SelectionRectangle.Width > W))
+            {
                 return;
+            }
             if ((SelectionRectangle.Height <= 0) || (SelectionRectangle.Height > H))
+            {
                 return;
+            }
             if (((SelectionRectangle.X + SelectionRectangle.Width) > W) || ((SelectionRectangle.Y + SelectionRectangle.Height) > H))
+            {
                 return;
+            }
 
             try
             {
@@ -473,4 +495,11 @@ namespace vcs_PictureCrop1
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
 

@@ -7,10 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;
 using System.Drawing.Imaging;   //for ImageFormat
 using System.Drawing.Drawing2D;
-using System.IO;
-
 
 namespace vcs_PictureCropA
 {
@@ -46,7 +45,9 @@ namespace vcs_PictureCropA
         void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             if (flag_select_area == false)
+            {
                 return;
+            }
             Points.Add(new Point(e.X, e.Y));
             pictureBox1.Invalidate();
         }
@@ -62,14 +63,11 @@ namespace vcs_PictureCropA
         {
             if ((Points != null) && (Points.Count > 1))
             {
-                using (Pen dashed_pen = new Pen(Color.Red))
-                {
-                    dashed_pen.DashPattern = new float[] { 5, 5 };
-                    e.Graphics.DrawLines(Pens.White, Points.ToArray());
-                    e.Graphics.DrawLines(dashed_pen, Points.ToArray());
-                }
+                Pen dashed_pen = new Pen(Color.Red);
+                dashed_pen.DashPattern = new float[] { 5, 5 };
+                e.Graphics.DrawLines(Pens.White, Points.ToArray());
+                e.Graphics.DrawLines(dashed_pen, Points.ToArray());
             }
-
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -119,9 +117,7 @@ namespace vcs_PictureCropA
             Bitmap bm_transparent = GetSelectedArea(pictureBox1.Image, Color.Transparent, Points);
             pictureBox2.Image = bm_transparent;
 
-
             /*
-
             MemoryStream ms = new MemoryStream();
             bm_transparent.Save(ms, ImageFormat.Png);
             data_object.SetData("PNG", false, ms);
@@ -131,10 +127,6 @@ namespace vcs_PictureCropA
             Clipboard.SetDataObject(data_object, true);
             richTextBox1.Text += "已選擇區域複製至剪貼簿\n";
             */
-
-
-
-
         }
 
         // Return the bounds of the list of points.
@@ -177,41 +169,38 @@ namespace vcs_PictureCropA
             // Make a new bitmap that has the background
             // color except in the selected area.
             Bitmap big_bm = new Bitmap(source);
-            using (Graphics gr = Graphics.FromImage(big_bm))
-            {
-                // Set the background color.
-                gr.Clear(bg_color);
+            Graphics gr = Graphics.FromImage(big_bm);
+            // Set the background color.
+            gr.Clear(bg_color);
 
-                // Make a brush out of the original image.
-                using (Brush br = new TextureBrush(source))
-                {
-                    // Fill the selected area with the brush.
-                    gr.FillPolygon(br, points.ToArray());
+            // Make a brush out of the original image.
+            Brush br = new TextureBrush(source);
+            // Fill the selected area with the brush.
+            gr.FillPolygon(br, points.ToArray());
 
-                    gr.FillRectangle(br,new Rectangle(100,100,100,100));
+            gr.FillRectangle(br, new Rectangle(100, 100, 100, 100));
 
-                    // Find the bounds of the selected area.
-                    Rectangle source_rect = GetPointListBounds(points);//取得擴大矩形
+            // Find the bounds of the selected area.
+            Rectangle source_rect = GetPointListBounds(points);//取得擴大矩形
 
-                    // Make a bitmap that only holds the selected area.
-                    Bitmap result = new Bitmap(source_rect.Width, source_rect.Height);
+            // Make a bitmap that only holds the selected area.
+            Bitmap result = new Bitmap(source_rect.Width, source_rect.Height);
 
-                    // Copy the selected area to the result bitmap.
-                    using (Graphics result_gr = Graphics.FromImage(result))
-                    {
-                        Rectangle dest_rect = new Rectangle(0, 0,
-                            source_rect.Width, source_rect.Height);
-                        result_gr.DrawImage(big_bm, dest_rect, source_rect,
-                            GraphicsUnit.Pixel);
-                    }
+            // Copy the selected area to the result bitmap.
+            Graphics result_gr = Graphics.FromImage(result);
+            Rectangle dest_rect = new Rectangle(0, 0, source_rect.Width, source_rect.Height);
+            result_gr.DrawImage(big_bm, dest_rect, source_rect, GraphicsUnit.Pixel);
 
-                    // Return the result.
-                    return result;
-                }
-            }
+            // Return the result.
+            return result;
         }
-
-
-
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+

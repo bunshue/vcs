@@ -180,7 +180,6 @@ namespace vcs_PictureCrop5
             Graphics g = Graphics.FromImage(bitmap1b);
             g.DrawRectangle(Pens.Red, x_st, y_st, W, H);
             pictureBox1.Image = bitmap1b;
-
             g.Dispose();
 
         }
@@ -190,13 +189,6 @@ namespace vcs_PictureCrop5
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
-

@@ -54,6 +54,10 @@ namespace vcs_PictureCrop2
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            richTextBox1.Size = new Size(207, 671);
+            //richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
             float.TryParse(txtWidth.Text, out RectWidth);
             float.TryParse(txtHeight.Text, out RectHeight);
             ReadAspectRatio();
@@ -67,6 +71,13 @@ namespace vcs_PictureCrop2
             bitmap1 = LoadBitmapUnlocked(filename);
             ShowScaledImage();
         }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
 
         // Display the scaled image.
         private void ShowScaledImage()
@@ -86,10 +97,7 @@ namespace vcs_PictureCrop2
                     new Point(scaled_width - 1, 0),
                     new Point(0, scaled_height - 1),
                 };
-                Rectangle src_rect = new Rectangle(
-                    0, 0,
-                    bitmap1.Width - 1,
-                    bitmap1.Height - 1);
+                Rectangle src_rect = new Rectangle(0, 0, bitmap1.Width - 1, bitmap1.Height - 1);
                 g.DrawImage(bitmap1, dest_points, src_rect, GraphicsUnit.Pixel);
             }
             picImage.Image = bitmap2;
@@ -474,6 +482,7 @@ namespace vcs_PictureCrop2
             IgnoreTextChanged = false;
             SetSelectionRectangle();
         }
+
         private void SetHeight(float height)
         {
             RectWidth = (float)(height * AspectRatio);
@@ -564,6 +573,7 @@ namespace vcs_PictureCrop2
             //開啟檔案
             // Load the image.
             bitmap1 = LoadBitmapUnlocked(filename);
+
             ShowScaledImage();
         }
 
@@ -608,6 +618,7 @@ namespace vcs_PictureCrop2
 
             ImageScale = 100 / 100f;
             richTextBox1.Text += ImageScale + "\n";
+
             ShowScaledImage();
         }
 
@@ -616,8 +627,8 @@ namespace vcs_PictureCrop2
             //75
             ImageScale = 75 / 100f;
             richTextBox1.Text += ImageScale + "\n";
-            ShowScaledImage();
 
+            ShowScaledImage();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -625,8 +636,8 @@ namespace vcs_PictureCrop2
             //66
             ImageScale = 66 / 100f;
             richTextBox1.Text += ImageScale + "\n";
-            ShowScaledImage();
 
+            ShowScaledImage();
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -634,9 +645,8 @@ namespace vcs_PictureCrop2
             //50
             ImageScale = 50 / 100f;
             richTextBox1.Text += ImageScale + "\n";
+
             ShowScaledImage();
-
-
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -644,9 +654,8 @@ namespace vcs_PictureCrop2
             //25
             ImageScale = 25 / 100f;
             richTextBox1.Text += ImageScale + "\n";
+
             ShowScaledImage();
-
-
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -654,7 +663,16 @@ namespace vcs_PictureCrop2
             //15
             ImageScale = 15 / 100f;
             richTextBox1.Text += ImageScale + "\n";
+
             ShowScaledImage();
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+

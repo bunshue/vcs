@@ -56,8 +56,9 @@ namespace vcs_PictureCrop6
 
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         // Return a Rectangle with these points as corners.
         private Rectangle MakeRectangle(int x0, int y0, int x1, int y1)
@@ -88,7 +89,9 @@ namespace vcs_PictureCrop6
         {
             // Do nothing if we're not selecting an area.
             if (flag_select_area == false)
+            {
                 return;
+            }
 
             pt_sp = e.Location; //終點座標
 
@@ -131,7 +134,9 @@ namespace vcs_PictureCrop6
             if (e.KeyChar == 27)
             {
                 if (flag_select_area == false)
+                {
                     return;
+                }
                 flag_select_area = false;
 
                 // Stop selecting.
@@ -152,19 +157,17 @@ namespace vcs_PictureCrop6
             Bitmap bm = new Bitmap(src_rect.Width, src_rect.Height);
 
             // Copy the selected area into the bitmap.
-            using (Graphics g2 = Graphics.FromImage(bm))
-            {
-                //目標矩形
-                Rectangle dest_rect = new Rectangle(0, 0, src_rect.Width, src_rect.Height);
-                g2.DrawImage(bitmap1, dest_rect, src_rect, GraphicsUnit.Pixel);
-                g2.DrawRectangle(Pens.Red, dest_rect);
-            }
+            Graphics g2 = Graphics.FromImage(bm);
+            //目標矩形
+            Rectangle dest_rect = new Rectangle(0, 0, src_rect.Width, src_rect.Height);
+            g2.DrawImage(bitmap1, dest_rect, src_rect, GraphicsUnit.Pixel);
+            g2.DrawRectangle(Pens.Red, dest_rect);
 
             //複製影像到剪貼簿
             Clipboard.SetImage(bm);
         }
 
-       private void button5_Click(object sender, EventArgs e)
+        private void button5_Click(object sender, EventArgs e)
         {
             //複製選取部分到剪貼簿
             CopyToClipboard(select_rectangle);
@@ -218,3 +221,11 @@ namespace vcs_PictureCrop6
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+

@@ -14,13 +14,9 @@ namespace vcs_PictureCrop2
             gr.DrawRectangle(pen, rect.X, rect.Y, rect.Width, rect.Height);
         }
 
-        public static void DrawBox(this Graphics gr,
-            Brush brush, Pen pen, PointF center, float radius)
+        public static void DrawBox(this Graphics gr, Brush brush, Pen pen, PointF center, float radius)
         {
-            RectangleF rect = new RectangleF(
-                center.X - radius,
-                center.Y - radius,
-                2 * radius, 2 * radius);
+            RectangleF rect = new RectangleF(center.X - radius, center.Y - radius, 2 * radius, 2 * radius);
             gr.FillRectangle(brush, rect);
             gr.DrawRectangle(pen, rect);
         }
