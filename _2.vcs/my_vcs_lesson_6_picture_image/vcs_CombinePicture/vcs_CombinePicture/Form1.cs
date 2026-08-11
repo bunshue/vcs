@@ -41,13 +41,8 @@ namespace vcs_CombinePicture
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
-
             pictureBox1.Size = new Size(830, 690);
             pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-
-
-
-
 
             richTextBox1.Size = new Size(300, 690);
             richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
@@ -111,8 +106,14 @@ namespace vcs_CombinePicture
             int max_hgt = 0;
             for (int i = 0; i < num_images; i++)
             {
-                if (max_wid < images[i].Width) max_wid = images[i].Width;
-                if (max_hgt < images[i].Height) max_hgt = images[i].Height;
+                if (max_wid < images[i].Width)
+                {
+                    max_wid = images[i].Width;
+                }
+                if (max_hgt < images[i].Height)
+                {
+                    max_hgt = images[i].Height;
+                }
             }
 
             // Make the result bitmap.
@@ -131,7 +132,9 @@ namespace vcs_CombinePicture
             {
                 num_rows = num_images / num_cols;
                 if ((num_images % num_cols) > 0)
+                {
                     num_rows += 1;
+                }
             }
 
             richTextBox1.Text += "決定 C = " + num_cols.ToString() + ", R = " + num_rows.ToString() + "\n";
@@ -162,7 +165,6 @@ namespace vcs_CombinePicture
                 }
             }
 
-            // Save the result.
             //存檔
             if (bm != null)
             {
@@ -170,7 +172,6 @@ namespace vcs_CombinePicture
                 String filename1 = filename0 + ".jpg";
                 String filename2 = filename0 + ".bmp";
                 String filename3 = filename0 + ".png";
-
 
                 bm.Save(@filename1, ImageFormat.Jpeg);
                 bm.Save(@filename2, ImageFormat.Bmp);
@@ -182,11 +183,12 @@ namespace vcs_CombinePicture
                 richTextBox1.Text += "已存檔 : " + filename3 + "\n";
             }
             else
+            {
                 richTextBox1.Text += "無圖可存\n";
-
-
+            }
         }
 
+        //------------------------------------------------------------  # 60個
 
         enum ImageMergeOrientation
         {
@@ -212,8 +214,8 @@ namespace vcs_CombinePicture
             Graphics g = Graphics.FromImage(bitmap1);
             g.Clear(SystemColors.AppWorkspace);
 
-            var width = finalWidth;
-            var height = finalHeight;
+            var W = finalWidth;
+            var H = finalHeight;
             var nIndex = 0;
             foreach (FileInfo file in files)
             {
@@ -222,20 +224,20 @@ namespace vcs_CombinePicture
                 {
                     g.DrawImage(img, new Point(0, 0));
                     nIndex++;
-                    width = img.Width;
-                    height = img.Height;
+                    W = img.Width;
+                    H = img.Height;
                 }
                 else
                 {
                     switch (mergeType)
                     {
                         case ImageMergeOrientation.Horizontal:
-                            g.DrawImage(img, new Point(width, 0));
-                            width += img.Width;
+                            g.DrawImage(img, new Point(W, 0));
+                            W += img.Width;
                             break;
                         case ImageMergeOrientation.Vertical:
-                            g.DrawImage(img, new Point(0, height));
-                            height += img.Height;
+                            g.DrawImage(img, new Point(0, H));
+                            H += img.Height;
                             break;
                         default:
                             throw new ArgumentOutOfRangeException("mergeType");
@@ -311,19 +313,21 @@ namespace vcs_CombinePicture
 
             //string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_animals"; // logo 圖片所在資料夾
             //string[] files = Directory.GetFiles(foldername, "*.png");
-            string[] files = {
-                                 filename1, filename2, filename3, filename4,
-                                 filename5, filename6, filename7, filename8,
-                                 filename9, filename10, filename11, filename12
-                             };
+            string[] files =
+            {
+                filename1, filename2, filename3, filename4,
+                filename5, filename6, filename7, filename8,
+                filename9, filename10, filename11, filename12
+            };
 
             int cols = 4;
             int rows = (int)Math.Ceiling(files.Length / (double)cols);
-            int cellWidth = 200, cellHeight = 150;
-            int width = cols * cellWidth;
-            int height = rows * cellHeight;
+            int w = 200;
+            int h = 150;
+            int W = cols * w;
+            int H = rows * h;
 
-            Bitmap bmp = new Bitmap(width, height);
+            Bitmap bmp = new Bitmap(W, H);
             Graphics g = Graphics.FromImage(bmp);
             g.Clear(Color.White);
             g.SmoothingMode = SmoothingMode.AntiAlias;
@@ -334,12 +338,12 @@ namespace vcs_CombinePicture
             {
                 int col = i % cols;
                 int row = i / cols;
-                int x = col * cellWidth;
-                int y = row * cellHeight;
+                int x = col * w;
+                int y = row * h;
 
                 // 背景格
                 Brush b = new SolidBrush(Color.FromArgb(240, 240, 240));
-                g.FillRoundedRectangle(b, new Rectangle(x + 10, y + 10, cellWidth - 20, cellHeight - 20), 20);
+                g.FillRoundedRectangle(b, new Rectangle(x + 10, y + 10, w - 20, h - 20), 20);
 
                 // 載入 logo
                 Image logo = Image.FromFile(files[i]);
@@ -347,9 +351,12 @@ namespace vcs_CombinePicture
 
                 // 顯示檔名（不含副檔名）
                 //string name = Path.GetFileNameWithoutExtension(files[i]);
-                g.DrawString(names[i], font, Brushes.Black, new RectangleF(x, y + cellHeight - 40, cellWidth, 40), sf);
+                g.DrawString(names[i], font, Brushes.Black, new RectangleF(x, y + h - 40, w, 40), sf);
             }
-            bmp.Save("tmp_組合圖1.png");
+
+            string filename = "tmp_組合圖1.png";
+            bmp.Save(filename);
+            richTextBox1.Text += "已存檔 : " + filename + "\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -366,12 +373,12 @@ namespace vcs_CombinePicture
 
             int N = files.Length;
 
-            int cellWidth = 200;
-            int cellHeight = 150;
-            int width = cellWidth * 1;
-            int height = cellHeight * N;
+            int w = 200;
+            int h = 150;
+            int W = w * 1;
+            int H = h * N;
 
-            Bitmap bmp = new Bitmap(width, height);
+            Bitmap bmp = new Bitmap(W, H);
             Graphics g = Graphics.FromImage(bmp);
             g.Clear(Color.White);
             g.SmoothingMode = SmoothingMode.AntiAlias;
@@ -382,13 +389,15 @@ namespace vcs_CombinePicture
             {
                 int row = i;
                 int x = 0;
-                int y = row * cellHeight;
+                int y = row * h;
 
                 Image logo = Image.FromFile(files[i]);
                 //g.DrawImage(logo, x + 30, y + 20, 140, 80);
-                g.DrawImage(logo, x, y, cellWidth, cellHeight);
+                g.DrawImage(logo, x, y, w, h);
             }
-            bmp.Save("tmp_組合圖2.png");
+            string filename = "tmp_組合圖2.png";
+            bmp.Save(filename);
+            richTextBox1.Text += "已存檔 : " + filename + "\n";
         }
 
         //------------------------------------------------------------  # 60個

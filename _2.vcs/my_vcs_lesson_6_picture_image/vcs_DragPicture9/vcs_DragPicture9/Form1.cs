@@ -36,9 +36,9 @@ namespace vcs_DragPicture9
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //設定執行後的表單起始位置, 指定位置
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = new System.Drawing.Point(0, 0);
+            show_item_location();
+
+            //------------------------------------------------------------  # 60個
 
             filenames.Clear();
             filenames.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony1\p1.jpg");
@@ -49,17 +49,42 @@ namespace vcs_DragPicture9
             showPictures();
         }
 
+        void show_item_location()
+        {
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+
+            //richTextBox1.Size = new Size(300, 690);
+            //richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            //this.Size = new Size(1273, 750);
+            this.Text = "vcs_DragPicture9";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
+
         void showPictures()
         {
             // 設定位置及圖片方塊寬高值
             int LEFT_ANCHOR = 0;
             int TOP_ANCHOR = 0;
 
-            int i;
-            int j;
-            for (j = 0; j < ROWS; j++)
+            for (int j = 0; j < ROWS; j++)
             {
-                for (i = 0; i < COLUMNS; i++)
+                for (int i = 0; i < COLUMNS; i++)
                 {
                     // 實例化圖片方塊
                     PictureBox pbx = new PictureBox();
@@ -68,7 +93,7 @@ namespace vcs_DragPicture9
                     pbx.Top = TOP_ANCHOR + PICTURE_HEIGHT * j;
                     pbx.Width = PICTURE_WIDTH;
                     pbx.Height = PICTURE_HEIGHT;
-                    //pbx.BackColor = Color.Pink;
+                    pbx.BackColor = Color.Pink;
                     //pbx.Text = i.ToString() + ", " + j.ToString();
                     pbx.Tag = "dynamic" + (COLUMNS * j + i).ToString("D2");
                     pbx.Name = "pbx" + (COLUMNS * j + i).ToString("D2");
@@ -129,3 +154,12 @@ namespace vcs_DragPicture9
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+

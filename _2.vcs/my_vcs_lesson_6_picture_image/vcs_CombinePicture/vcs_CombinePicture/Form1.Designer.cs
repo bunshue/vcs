@@ -208,7 +208,7 @@
             // 
             // button6
             // 
-            this.button6.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button6.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button6.Location = new System.Drawing.Point(232, 83);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(200, 60);

@@ -25,8 +25,6 @@ namespace vcs_DragPicture5
         int w = 0;
         int h = 0;
 
-        PictureBox pictureBox1 = new PictureBox();
-
         public Form1()
         {
             InitializeComponent();
@@ -36,19 +34,12 @@ namespace vcs_DragPicture5
         {
             show_item_location();
 
-            pictureBox1.Width = 1200;
-            pictureBox1.Height = 800;
-            pictureBox1.Location = new Point(0, 0);
-            pictureBox1.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox1.BackColor = SystemColors.ControlLight;
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            //------------------------------------------------------------  # 60個
 
             // 加入事件
             pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
             pictureBox1.MouseMove += new MouseEventHandler(pictureBox1_MouseMove);
             pictureBox1.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
-
-            this.Controls.Add(pictureBox1);	// 將控件加入表單
 
             pt_picture_position = new Point(0, 0);
 
@@ -89,86 +80,29 @@ namespace vcs_DragPicture5
 
         void show_item_location()
         {
-            richTextBox1.Location = new Point(1650, 10);
-            //richTextBox1.Visible = false;
+            //pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
 
-            pictureBox1.Size = new Size(1600, 900);
+            pictureBox1.Size = new Size(800, 690);
             pictureBox1.Location = new Point(10, 10);
 
-            //控件位置
-            //bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+            richTextBox1.Size = new Size(300, 690);
+            richTextBox1.Location = new Point(820, 10);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
+            this.Size = new Size(1150, 750);
+            this.Text = "vcs_test_all_00_Usually";
 
-            //離開按鈕的寫法
-            bt_exit_setup();
-
-            //最小化按鈕的寫法
-            bt_minimize_setup();
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
-        void bt_exit_setup()
+        private void bt_clear_Click(object sender, EventArgs e)
         {
-            int width = 5;
-            int w = 50; //設定按鈕大小 W
-            int h = 50; //設定按鈕大小 H
-
-            Button bt_exit = new Button();  // 實例化按鈕
-            bt_exit.Size = new Size(w, h);
-            bt_exit.Text = "";
-            Bitmap bmp = new Bitmap(w, h);
-            Graphics g = Graphics.FromImage(bmp);
-            Pen p = new Pen(Color.Red, width);
-            g.Clear(Color.Pink);
-            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
-            g.DrawLine(p, 0, 0, w - 1, h - 1);
-            g.DrawLine(p, w - 1, 0, 0, h - 1);
-            bt_exit.Image = bmp;
-
-            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
-            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
-
-            this.Controls.Add(bt_exit); // 將按鈕加入表單
-            bt_exit.BringToFront();     //移到最上層
+            richTextBox1.Clear();
         }
 
-        private void bt_exit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        void bt_minimize_setup()
-        {
-            int width = 5;
-            int w = 50; //設定按鈕大小 W
-            int h = 50; //設定按鈕大小 H
-
-            Button bt_minimize = new Button();  // 實例化按鈕
-            bt_minimize.Size = new Size(w, h);
-            bt_minimize.Text = "";
-            Bitmap bmp = new Bitmap(w, h);
-            Graphics g = Graphics.FromImage(bmp);
-            Pen p = new Pen(Color.Red, width);
-            g.Clear(Color.Pink);
-            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
-            //g.DrawLine(p, 0, 0, w - 1, h - 1);
-            //g.DrawLine(p, w - 1, 0, 0, h - 1);
-            g.DrawLine(p, w / 4, h / 2 - 1, w * 3 / 4, h / 2 - 1);
-            bt_minimize.Image = bmp;
-
-            bt_minimize.Location = new Point(this.ClientSize.Width - bt_minimize.Width * 2 - 2, 0);
-            bt_minimize.Click += bt_minimize_Click;     // 加入按鈕事件
-
-            this.Controls.Add(bt_minimize); // 將按鈕加入表單
-            bt_minimize.BringToFront();     //移到最上層
-        }
-
-        private void bt_minimize_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;   //設定表單最小化
-        }
+        //------------------------------------------------------------  # 60個
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -281,3 +215,12 @@ namespace vcs_DragPicture5
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+

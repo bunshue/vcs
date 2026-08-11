@@ -23,13 +23,13 @@ namespace vcs_DragPicture1
 
         //製作拖曳元件
         //定義一些全域變數幫助拖曳時計算元件位置
-        #region 移動元件時相關變數
+        //#region 移動元件時相關變數
         private int _ControlPositionX, _ControlPositionY;   //元件初始位置
         private int _CursorInitialX = 0, _CursorInitialY = 0;   //滑鼠拖曳初始位置
         private bool _isMoveState = false;  //移動狀態
-        #endregion
+        //#endregion
 
-        #region MouseDown記錄滑鼠與元件位置
+        //#region MouseDown記錄滑鼠與元件位置
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             if (!_isMoveState)   //假如非移動狀態
@@ -41,9 +41,9 @@ namespace vcs_DragPicture1
                 _isMoveState = true;    //設定為移動狀態
             }
         }
-        #endregion
+        //#endregion
 
-        #region MouseMove移動元件運算
+        //#region MouseMove移動元件運算
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             if (_isMoveState)    //若為移動狀態
@@ -55,16 +55,15 @@ namespace vcs_DragPicture1
                 ((PictureBox)sender).Top = _ControlPositionY + (tY - _CursorInitialY); //設定視窗新位置 Y
             }
         }
-        #endregion
+        //#endregion
 
-        #region MouseUp結束移動元件
+        //#region MouseUp結束移動元件
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             //設定非拖曳狀態
             _isMoveState = false;
         }
-        #endregion
-
+        //#endregion
 
         //移動貓咪 ST
         int offset_x = 0;
@@ -76,11 +75,13 @@ namespace vcs_DragPicture1
         {
             pictureBox2.Image = Image.FromFile("../../cat3.gif");//載入cat3.gif
         }
+
         //滑鼠游標移出pictureBox2時
         private void pictureBox2_MouseLeave(object sender, EventArgs e)
         {
             pictureBox2.Image = Image.FromFile("../../cat1.gif");//載入cat1.gif
         }
+
         //在pictureBox2內按下滑鼠左鍵時
         private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
         {
@@ -93,6 +94,7 @@ namespace vcs_DragPicture1
                 offset_y = e.Location.Y;
             }
         }
+
         //滑鼠游標在pictureBox2內移動時
         private void pictureBox2_MouseMove(object sender, MouseEventArgs e)
         {
@@ -102,6 +104,7 @@ namespace vcs_DragPicture1
                 pictureBox2.Top += (e.Y - offset_y);
             }
         }
+
         //在pictureBox2內放開滑鼠左鍵時
         private void pictureBox2_MouseUp(object sender, MouseEventArgs e)
         {
@@ -111,4 +114,3 @@ namespace vcs_DragPicture1
         //移動貓咪 SP
     }
 }
-

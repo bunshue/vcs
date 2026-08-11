@@ -11,7 +11,7 @@ namespace vcs_DragPicture4b
 {
     public partial class Form1 : Form
     {
-        
+
 
         public Form1()
         {
@@ -22,7 +22,7 @@ namespace vcs_DragPicture4b
         {
             //讀取圖檔
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            Image image = System.Drawing.Image.FromFile(filename);
+            Image image = Image.FromFile(filename);
             pictureBox1.Image = image;
             pictureBox1.Height = image.Height;
             pictureBox1.Width = image.Width;
@@ -61,7 +61,5 @@ namespace vcs_DragPicture4b
                 flag_pictureBox1_mouse_down = false;
             }
         }
-
     }
 }
-

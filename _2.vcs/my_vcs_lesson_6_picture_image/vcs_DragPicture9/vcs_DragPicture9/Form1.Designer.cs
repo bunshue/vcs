@@ -29,22 +29,35 @@
         private void InitializeComponent()
         {
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.bt_clear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // richTextBox1
             // 
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.richTextBox1.Location = new System.Drawing.Point(1037, 0);
+            this.richTextBox1.Location = new System.Drawing.Point(1060, 0);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(224, 1061);
+            this.richTextBox1.Size = new System.Drawing.Size(224, 711);
             this.richTextBox1.TabIndex = 4;
             this.richTextBox1.Text = "";
+            // 
+            // bt_clear
+            // 
+            this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear.Location = new System.Drawing.Point(1071, 12);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(72, 36);
+            this.bt_clear.TabIndex = 9;
+            this.bt_clear.Text = "Clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1261, 1061);
+            this.ClientSize = new System.Drawing.Size(1284, 711);
+            this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
             this.Name = "Form1";
             this.Text = "用滑鼠拖曳圖片";
@@ -56,6 +69,7 @@
         #endregion
 
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button bt_clear;
     }
 }
 

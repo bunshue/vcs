@@ -23,20 +23,19 @@ namespace vcs_DragPicture8
         /// <param name="sender"></param>
         /// <param name="e"></param>
 
-        #region 本程序中用到的API函数
+        //#region 本程序中用到的API函数
         [DllImport("user32.dll")]
         public static extern bool ReleaseCapture();  //用来释放被当前线程中某个窗口捕获的光标
 
         [DllImport("user32.dll")]
-        public static extern bool SendMessage(IntPtr hwdn,int wMsg,int mParam,int lParam);//向指定的窗体发送Windows消息
-        #endregion
+        public static extern bool SendMessage(IntPtr hwdn, int wMsg, int mParam, int lParam);//向指定的窗体发送Windows消息
+        //#endregion
 
-        #region 本程序中需要声明的变量
+        //#region 本程序中需要声明的变量
         public const int WM_SYSCOMMAND = 0x0112;
         public const int SC_MOVE = 0xF010;
         public const int HTCAPTION = 0x0002;
-        #endregion
-
+        //#endregion
 
         private void ExitContext_Click(object sender, EventArgs e)
         {
@@ -57,3 +56,12 @@ namespace vcs_DragPicture8
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+
