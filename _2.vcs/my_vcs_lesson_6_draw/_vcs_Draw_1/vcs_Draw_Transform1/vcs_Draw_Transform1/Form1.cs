@@ -487,12 +487,56 @@ namespace vcs_Draw_Transform1
         {
             //連續旋轉一張圖片
             angle11 += 15;
+
+            richTextBox1.Text += "連續旋轉一張圖片 : " + angle11.ToString() + "\n";
+
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Image image = Image.FromFile(filename);
-            Image image_rotated = image.GetRotateImage(angle11);
+            Image image_rotated = GetRotateImage(image, angle11);
 
             pictureBox1.Image = image_rotated;
             pictureBox1.Size = new Size(image_rotated.Width, image_rotated.Height);
+        }
+
+        private Image GetRotateImage(Image img, float angle)
+        {
+            angle = angle % 360;//弧度轉換
+            double radian = angle * Math.PI / 180.0;
+            double cos = Math.Cos(radian);
+            double sin = Math.Sin(radian);
+
+            //原圖的寬和高
+            int w = img.Width;
+            int h = img.Height;
+            int W = (int)(Math.Max(Math.Abs(w * cos - h * sin), Math.Abs(w * cos + h * sin)));
+            int H = (int)(Math.Max(Math.Abs(w * sin - h * cos), Math.Abs(w * sin + h * cos)));
+
+            Console.WriteLine("W = " + W.ToString() + ", H = " + H.ToString());
+
+            //目標位圖
+            Image dsImage = new Bitmap(W, H, img.PixelFormat);
+            Graphics g = Graphics.FromImage(dsImage);
+            g.InterpolationMode = InterpolationMode.Bilinear;
+            g.SmoothingMode = SmoothingMode.HighQuality;
+            g.Clear(Color.White);
+
+            //計算偏移量
+            Point Offset = new Point((W - w) / 2, (H - h) / 2);
+
+            //構造圖像顯示區域：讓圖像的中心與窗口的中心點一致
+            Rectangle rect = new Rectangle(Offset.X, Offset.Y, w, h);
+            Point center = new Point(rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
+            g.TranslateTransform(center.X, center.Y);  // 平移, 右移, 下移
+            g.RotateTransform(360 - angle);  // 順時針旋轉指定的角度
+
+            //恢復圖像在水平和垂直方向的平移
+            g.TranslateTransform(-center.X, -center.Y);  // 平移, 右移, 下移
+            g.DrawImage(img, rect);
+
+            g.ResetTransform();  // 重置轉換, 恢復
+            g.Save();
+
+            return dsImage;
         }
         //連續旋轉一張圖片 SP
 
@@ -985,7 +1029,7 @@ namespace vcs_Draw_Transform1
             g.DrawString("反向縮放1.5/1.25倍 + 平移", new Font("標楷體", 24), new SolidBrush(Color.Blue), new PointF(100, 130));
 
 
-            //g.TranslateTransform(100, 300, MatrixOrder.Append);
+            //g.TranslateTransform(100, 300, MatrixOrder.Append);  // 平移, 右移, 下移
             //g.ScaleTransform(1.5f, 1.5f, MatrixOrder.Append);
         }
 
@@ -1343,14 +1387,14 @@ namespace vcs_Draw_Transform1
             float cy = (world_rect.Top + world_rect.Bottom) / 2;
 
             // Center the world coordinates at origin.
-            g.TranslateTransform(-cx, -cy);
+            g.TranslateTransform(-cx, -cy);  // 平移, 右移, 下移
 
             // Scale to fill the form.
             float scale = Math.Min(W / world_rect.Width, H / world_rect.Height);
             g.ScaleTransform(scale, scale, MatrixOrder.Append);
 
             // Move the result to center on the form.
-            g.TranslateTransform(W / 2, H / 2, MatrixOrder.Append);
+            g.TranslateTransform(W / 2, H / 2, MatrixOrder.Append);  // 平移, 右移, 下移
 
             // Generate the points.
             PointF pt0, pt1;
@@ -1392,28 +1436,31 @@ namespace vcs_Draw_Transform1
         private void button30_Click(object sender, EventArgs e)
         {
             //顯示豎排文字
-            //顯示豎排文字
 
-            int W = pictureBox1.Width;
-            int H = pictureBox1.Height;
             Graphics g = this.pictureBox1.CreateGraphics();
-            g.DrawString("顯示橫排", new Font("標楷體", 20, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline), Brushes.Red, 10, 200);
+            g.DrawString("預設顯示橫排111", new Font("標楷體", 20), Brushes.Red, 100, 100);
+            g.FillEllipse(Brushes.Red, 100 - 10, 100 - 10, 20, 20);
+            g.DrawRectangle(Pens.Red, 100, 100, 200, 50);
+
+            g.FillEllipse(Brushes.Red, 300 - 20, 300 - 20, 40, 40);
+
             //設置旋轉中心點
-            g.TranslateTransform(W / 2, H / 2);
+            g.TranslateTransform(300, 300);  // 平移, 右移, 下移
+
             //設置旋轉角度
-            g.RotateTransform(90);
-            //畫文字
-            g.DrawString("顯示豎排文字", new Font("標楷體", 20), new SolidBrush(Color.Black), 0, 0);
-            //平移
-            g.TranslateTransform(100, 100);
-            //畫文字
-            g.DrawString("平移後顯示豎排文字", new Font("標楷體", 20), new SolidBrush(Color.Black), 0, 0);
-            //恢復為默認場景
-            g.ResetTransform();
+            g.RotateTransform(90);  // 順時針旋轉指定的角度
 
-            g.DrawString("顯示豎排文字", new Font("標楷體", 20), new SolidBrush(Color.Black), 0, 0, new StringFormat(StringFormatFlags.DirectionVertical));
+            g.DrawString("顯示豎排文字222", new Font("標楷體", 20), new SolidBrush(Color.Black), 0, 0);
+            g.FillEllipse(Brushes.Green, 0 - 10, 0 - 10, 20, 20);
+            g.DrawRectangle(Pens.Green, 0, 0, 200, 50);
 
-            //------------------------------------------------------------  # 60個
+            g.TranslateTransform(100, 100);  // 平移, 右移, 下移
+
+            g.DrawString("平移後顯示豎排文字333", new Font("標楷體", 20), new SolidBrush(Color.Black), 0, 0);
+            g.FillEllipse(Brushes.Blue, 0 - 10, 0 - 10, 20, 20);
+            g.DrawRectangle(Pens.Blue, 0, 0, 200, 50);
+
+            g.ResetTransform();  // 重置轉換, 恢復
         }
 
         //------------------------------------------------------------  # 60個
@@ -1532,6 +1579,7 @@ namespace vcs_Draw_Transform1
             this.pictureBox2.Invalidate();
         }
         //畫一個旋轉的矩形 SP
+
         //------------------------------------------------------------  # 60個
 
         private void timer0_Tick(object sender, EventArgs e)
@@ -1555,52 +1603,6 @@ namespace vcs_Draw_Transform1
 
             e.Graphics.Transform = mtx;
             e.Graphics.DrawImage(bitmap0, 0, 0); // 繪出圖形
-        }
-
-    }
-
-    //------------------------------------------------------------  # 60個
-
-    public static class ImageEx
-    {
-        public static Image GetRotateImage(this Image img, float angle)
-        {
-            angle = angle % 360;//弧度轉換
-            double radian = angle * Math.PI / 180.0;
-            double cos = Math.Cos(radian);
-            double sin = Math.Sin(radian);
-
-            //原圖的寬和高
-            int w = img.Width;
-            int h = img.Height;
-            int W = (int)(Math.Max(Math.Abs(w * cos - h * sin), Math.Abs(w * cos + h * sin)));
-            int H = (int)(Math.Max(Math.Abs(w * sin - h * cos), Math.Abs(w * sin + h * cos)));
-
-            Console.WriteLine("W = " + W.ToString() + ", H = " + H.ToString());
-
-            //目標位圖
-            Image dsImage = new Bitmap(W, H, img.PixelFormat);
-            Graphics g = Graphics.FromImage(dsImage);
-            g.InterpolationMode = InterpolationMode.Bilinear;
-            g.SmoothingMode = SmoothingMode.HighQuality;
-            g.Clear(Color.White);
-
-            //計算偏移量
-            Point Offset = new Point((W - w) / 2, (H - h) / 2);
-
-            //構造圖像顯示區域：讓圖像的中心與窗口的中心點一致
-            Rectangle rect = new Rectangle(Offset.X, Offset.Y, w, h);
-            Point center = new Point(rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
-            g.TranslateTransform(center.X, center.Y);  // 平移, 右移, 下移
-            g.RotateTransform(360 - angle);  // 順時針旋轉指定的角度
-
-            //恢復圖像在水平和垂直方向的平移
-            g.TranslateTransform(-center.X, -center.Y);  // 平移, 右移, 下移
-            g.DrawImage(img, rect);
-
-            g.ResetTransform();  // 重置轉換, 恢復
-            g.Save();
-            return dsImage;
         }
     }
 }
@@ -1654,7 +1656,6 @@ Transform需要做到
 文字應該不可能做到完整轉換
 
 若是無法做到理想的Transform 則需要自己做Transform
-
 */
 
-
+//g.DrawString("顯示橫排", new Font("標楷體", 20, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline), Brushes.Red, 10, 200);

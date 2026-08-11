@@ -35,6 +35,17 @@ namespace vcs_Draw_Brush
         //SolidBrush sb;
         //Bitmap bitmap1;
 
+        //以塗刷新增畫筆, 刮刮樂效果 ST
+        Bitmap image;
+        TextureBrush textureBrush;
+        Pen p;
+        int x, y;　// 紀錄上一個筆畫的起始點
+        Graphics g2; // 畫布物件
+
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+        bool flag_mouse_down = false;
+        //以塗刷新增畫筆, 刮刮樂效果 SP
+
         public Form1()
         {
             InitializeComponent();
@@ -325,43 +336,42 @@ namespace vcs_Draw_Brush
             //橢圓顯示圖像
             //原理：主要使用了 graphics 類提供的 fillellipse() 方法和 texturebrush() 方法。
 
+            Graphics g = this.pictureBox1.CreateGraphics();
+
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+            //Bitmap bitmap1 = new Bitmap(filename);
+
             int W = bitmap1.Width;
             int H = bitmap1.Height;
 
-            Graphics g = this.pictureBox1.CreateGraphics();
-            TextureBrush mybrush = new TextureBrush(bitmap1);
-            g.FillEllipse(mybrush, 0, 0, W, H);
+            //用圖片填滿圓圈
+            //TextureBrush tb = new TextureBrush(bitmap1);
+            TextureBrush tb = new TextureBrush(new Bitmap(filename));
+            g.FillEllipse(tb, 10, 10, W, H);
+            g.FillEllipse(tb, 400, 10, 200, 200);
+
+            //------------------------------  # 30個
+
+            //紋理效果, 使用圖像填充文字線條
+            filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_背景圖\background.jpg";  //使用一張背景圖
+            TextureBrush brush = new TextureBrush(Image.FromFile(filename));
+            g.DrawString("紋理效果, 使用圖像填充文字線條", new Font("標楷體", 40), brush, new PointF(300, 250));
+
+            //------------------------------  # 30個
+
+            //旋轉顯示圖像
+
+            float MyAngle = 30f;//旋转的角度
+            tb = new TextureBrush(bitmap1);//实例化TextureBrush类
+            tb.RotateTransform(MyAngle);//以指定角度旋转图像
+            g.FillRectangle(tb, 0, 400, 300, 300);//绘制旋转后的图像
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //TextureBrush
-
-            /*
-            //方法一：(用圖片填滿圓圈)
-            Graphics g = this.pictureBox1.CreateGraphics();
-            TextureBrush tb = new TextureBrush(new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg"));
-
-            //20, 20 為座標位置，10, 10 為圓的大小
-            g.FillEllipse(tb, 20, 20, 200, 200);
-            */
-            //------------------------------------------------------------  # 60個
-
-            //旋轉
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            Bitmap bitmap1 = new Bitmap(filename);
-
-            Graphics g = this.pictureBox1.CreateGraphics();
-            float MyAngle = 30f;//旋转的角度
-
-            TextureBrush tb = new TextureBrush(bitmap1);//实例化TextureBrush类
-            this.pictureBox1.Refresh();//使工作区无效
-            tb.RotateTransform(MyAngle);//以指定角度旋转图像
-            g.FillRectangle(tb, 0, 0, this.ClientRectangle.Width, this.ClientRectangle.Height);//绘制旋转后的图像
         }
 
         //------------------------------------------------------------  # 60個
@@ -739,15 +749,6 @@ namespace vcs_Draw_Brush
 
         //以塗刷新增畫筆, 刮刮樂效果 ST
 
-        Bitmap image;
-        TextureBrush textureBrush;
-        Pen p;
-        int x, y;　// 紀錄上一個筆畫的起始點
-        Graphics g2; // 畫布物件
-
-        string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-        bool flag_mouse_down = false;
-
         private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
         {
             flag_mouse_down = true;
@@ -866,16 +867,4 @@ namespace vcs_Draw_Brush
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*
-            //紋理效果, 使用圖像填充文字線條
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_背景圖\background.jpg";  //使用一張背景圖
-            Graphics g = this.pictureBox1.CreateGraphics();
-            TextureBrush brush = new TextureBrush(Image.FromFile(filename));
-            g.DrawString("紋理效果, 使用圖像填充文字線條", new Font("標楷體", 60), brush, new PointF(x_st, y_st));
-
-
-//            Font f = new Font("黑體", 30, FontStyle.Italic);
-
-*/
 

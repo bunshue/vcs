@@ -1,5 +1,25 @@
 ﻿
 
+StringFormat string_format = new StringFormat();
+string_format.Alignment = StringAlignment.Center;
+string_format.LineAlignment = StringAlignment.Center;
+
+StringFormat string_format = new StringFormat();
+string_format.Alignment = StringAlignment.Center;
+string_format.LineAlignment = StringAlignment.Center;
+
+StringFormat string_format = new StringFormat();
+string_format.Alignment = StringAlignment.Near;
+string_format.LineAlignment = StringAlignment.Near;
+string_format.Trimming = StringTrimming.EllipsisWord;
+string_format.FormatFlags = StringFormatFlags.LineLimit;
+
+//------------------------------------------------------------  # 60個
+
+
+            g.DrawString("顯示豎排文字444", new Font("標楷體", 20), new SolidBrush(Color.Black), 0, 0, new StringFormat(StringFormatFlags.DirectionVertical));
+
+
 //------------------------------------------------------------  # 60個
 
             Pen p;
@@ -140,22 +160,6 @@ string[] month_names = CultureInfo.CurrentCulture.DateTimeFormat.MonthNames;
 
 DateTime first_of_month = new DateTime(year_num, month_num, 1);
 int num_days = DateTime.DaysInMonth(year_num, month_num);
-
-//------------------------------------------------------------  # 60個
-
-StringFormat string_format = new StringFormat();
-string_format.Alignment = StringAlignment.Center;
-string_format.LineAlignment = StringAlignment.Center;
-
-StringFormat string_format = new StringFormat();
-string_format.Alignment = StringAlignment.Center;
-string_format.LineAlignment = StringAlignment.Center;
-
-StringFormat string_format = new StringFormat();
-string_format.Alignment = StringAlignment.Near;
-string_format.LineAlignment = StringAlignment.Near;
-string_format.Trimming = StringTrimming.EllipsisWord;
-string_format.FormatFlags = StringFormatFlags.LineLimit;
 
 //------------------------------------------------------------  # 60個
 

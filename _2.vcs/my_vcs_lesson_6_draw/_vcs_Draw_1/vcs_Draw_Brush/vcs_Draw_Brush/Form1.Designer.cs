@@ -104,7 +104,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(180, 60);
             this.button3.TabIndex = 111;
-            this.button3.Text = "橢圓顯示圖像";
+            this.button3.Text = "TextureBrush";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -182,7 +182,6 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(180, 60);
             this.button4.TabIndex = 117;
-            this.button4.Text = "TextureBrush";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
