@@ -728,6 +728,13 @@ namespace vcs_System1
         {
             //取得程式編譯時間
             richTextBox1.Text += "編譯時間 : " + GetLinkerTime() + "\n";
+            
+            string exe_filename = Assembly.GetExecutingAssembly().Location;
+            richTextBox1.Text += "filePath : " + exe_filename + "\n";
+
+            // 最後編輯時間
+            string file_compile_time = File.GetLastWriteTime(exe_filename).ToString("yyyy/MM/dd HH:mm:ss");
+            richTextBox1.Text += "檔案時間 : " + file_compile_time + "\n";
 
             //取得程式啟動時間
             richTextBox1.Text += "程式開啟時間: " + (DateTime.Now - start_time).ToString() + " 秒\n";
@@ -737,6 +744,7 @@ namespace vcs_System1
         DateTime GetLinkerTime()
         {
             var filePath = Assembly.GetExecutingAssembly().Location;
+            richTextBox1.Text += "filePath : " + filePath + "\n";
 
             const int c_PeHeaderOffset = 60;
             const int c_LinkerTimestampOffset = 8;

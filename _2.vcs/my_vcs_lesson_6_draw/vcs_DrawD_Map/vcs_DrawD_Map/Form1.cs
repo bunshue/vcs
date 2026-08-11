@@ -38,7 +38,11 @@ namespace vcs_DrawD_Map
             pictureBox1.Image = bitmap1; //顯示在 pictureBox1 圖片控制項中
             pictureBox1.ClientSize = new Size(pictureBox1.Image.Size.Width, pictureBox1.Image.Size.Height);
 
+            //------------------------------------------------------------  # 60個
+
             show_item_location();
+
+            //------------------------------------------------------------  # 60個
 
             // The hotspots.
             // Initialize the hotspots.
@@ -200,6 +204,7 @@ namespace vcs_DrawD_Map
         private void makeHotspot_MouseMove(object sender, MouseEventArgs e)
         {
             richTextBox1.Text += "makeHotspot_MouseMove\n";
+
             // Save the new point.
             HotspotEnd = e.Location;
 
@@ -209,11 +214,9 @@ namespace vcs_DrawD_Map
             float y = Math.Min(HotspotStart.Y, HotspotEnd.Y) * MapScale;
             float wid = Math.Abs(HotspotStart.X - HotspotEnd.X) * MapScale;
             float hgt = Math.Abs(HotspotStart.Y - HotspotEnd.Y) * MapScale;
-            using (Pen thin_pen = new Pen(Color.Red, 1 * MapScale))
-            {
-                thin_pen.DashStyle = DashStyle.Dash;
-                HotspotGr.DrawRectangle(thin_pen, x, y, wid, hgt);
-            }
+            Pen thin_pen = new Pen(Color.Red, 1 * MapScale);
+            thin_pen.DashStyle = DashStyle.Dash;
+            HotspotGr.DrawRectangle(thin_pen, x, y, wid, hgt);
 
             pictureBox1.Refresh();
         }
@@ -246,12 +249,7 @@ namespace vcs_DrawD_Map
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
 

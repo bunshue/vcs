@@ -47,9 +47,9 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.White;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(94, 11);
+            this.pictureBox1.Location = new System.Drawing.Point(144, 11);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(310, 286);
+            this.pictureBox1.Size = new System.Drawing.Size(360, 360);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
@@ -58,39 +58,43 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label1.ForeColor = System.Drawing.Color.Red;
             this.label1.Location = new System.Drawing.Point(12, 11);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 12);
+            this.label1.Size = new System.Drawing.Size(93, 19);
             this.label1.TabIndex = 1;
             this.label1.Text = "Audi e-tron";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label2.ForeColor = System.Drawing.Color.Green;
-            this.label2.Location = new System.Drawing.Point(12, 30);
+            this.label2.Location = new System.Drawing.Point(12, 38);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(75, 12);
+            this.label2.Size = new System.Drawing.Size(119, 19);
             this.label2.TabIndex = 2;
             this.label2.Text = "Jaguar I-PACE";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label3.ForeColor = System.Drawing.Color.Blue;
-            this.label3.Location = new System.Drawing.Point(12, 50);
+            this.label3.Location = new System.Drawing.Point(12, 68);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(50, 12);
+            this.label3.Size = new System.Drawing.Size(81, 19);
             this.label3.TabIndex = 2;
             this.label3.Text = "Polestar 2";
             // 
             // chkFillAreas
             // 
             this.chkFillAreas.AutoSize = true;
-            this.chkFillAreas.Location = new System.Drawing.Point(12, 90);
+            this.chkFillAreas.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.chkFillAreas.Location = new System.Drawing.Point(16, 123);
             this.chkFillAreas.Name = "chkFillAreas";
-            this.chkFillAreas.Size = new System.Drawing.Size(48, 16);
+            this.chkFillAreas.Size = new System.Drawing.Size(66, 23);
             this.chkFillAreas.TabIndex = 3;
             this.chkFillAreas.Text = "填滿";
             this.chkFillAreas.UseVisualStyleBackColor = true;
@@ -98,7 +102,8 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(731, 10);
+            this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.richTextBox1.Location = new System.Drawing.Point(889, 11);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 4;
@@ -108,9 +113,9 @@
             // 
             this.pictureBox_radar.BackColor = System.Drawing.Color.White;
             this.pictureBox_radar.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox_radar.Location = new System.Drawing.Point(410, 11);
+            this.pictureBox_radar.Location = new System.Drawing.Point(514, 11);
             this.pictureBox_radar.Name = "pictureBox_radar";
-            this.pictureBox_radar.Size = new System.Drawing.Size(310, 286);
+            this.pictureBox_radar.Size = new System.Drawing.Size(360, 360);
             this.pictureBox_radar.TabIndex = 5;
             this.pictureBox_radar.TabStop = false;
             this.pictureBox_radar.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_radar_Paint);
@@ -119,7 +124,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(745, 30);
+            this.bt_clear.Location = new System.Drawing.Point(902, 38);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 9;
@@ -131,7 +136,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(881, 584);
+            this.ClientSize = new System.Drawing.Size(1009, 422);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.pictureBox_radar);
             this.Controls.Add(this.richTextBox1);

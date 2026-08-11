@@ -40,8 +40,8 @@ namespace vcs_LED_Text
 
             LetterLeds.Add((char)0, StringToBool("11111111111111"));
 
-            //LetterLeds.Add('0', StringToBool("11000100100011"));    // Without diagonal slashes.
-            LetterLeds.Add('0', StringToBool("11001100110011"));    // With diagonal slashes.
+            //LetterLeds.Add('0', StringToBool("11000100100011"));    // Without diagonal slashes. 跟大寫O一樣
+            LetterLeds.Add('0', StringToBool("11001100110011"));    // With diagonal slashes. 區隔大寫O
             LetterLeds.Add('1', StringToBool("00001100000010"));
             LetterLeds.Add('2', StringToBool("10000111100001"));
             LetterLeds.Add('3', StringToBool("10000101000011"));

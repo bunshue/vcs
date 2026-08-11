@@ -103,20 +103,18 @@ namespace vcs_DrawA_Radar
         private void DrawAxes(Graphics gr, float cx, float cy, float rx, float ry, double dtheta)
         {
             double theta = -Math.PI / 2;
-            using (Font font = new Font("Arial", 12))
+            Font font = new Font("Arial", 12);
+            for (int i = 0; i < AxisInfos.Count; i++)
             {
-                for (int i = 0; i < AxisInfos.Count; i++)
-                {
-                    double x = cx + rx * Math.Cos(theta);
-                    double y = cy + ry * Math.Sin(theta);
-                    gr.DrawLine(Pens.Black, cx, cy, (float)x, (float)y);
+                double x = cx + rx * Math.Cos(theta);
+                double y = cy + ry * Math.Sin(theta);
+                gr.DrawLine(Pens.Black, cx, cy, (float)x, (float)y);
 
-                    x = cx + (rx + 10) * Math.Cos(theta);
-                    y = cy + (ry + 10) * Math.Sin(theta);
-                    DrawRotatedText(gr, font, Brushes.Black, AxisInfos[i].Name, x, y, theta + Math.PI / 2);
+                x = cx + (rx + 10) * Math.Cos(theta);
+                y = cy + (ry + 10) * Math.Sin(theta);
+                DrawRotatedText(gr, font, Brushes.Black, AxisInfos[i].Name, x, y, theta + Math.PI / 2);
 
-                    theta += dtheta;
-                }
+                theta += dtheta;
             }
         }
 
@@ -175,15 +173,11 @@ namespace vcs_DrawA_Radar
             if (fill_areas)
             {
                 Color color = Color.FromArgb(64, car_data.Color);
-                using (Brush brush = new SolidBrush(color))
-                {
-                    gr.FillPolygon(brush, points);
-                }
+                Brush brush = new SolidBrush(color);
+                gr.FillPolygon(brush, points);
             }
-            using (Pen pen = new Pen(car_data.Color, 3))
-            {
-                gr.DrawPolygon(pen, points);
-            }
+            Pen pen = new Pen(car_data.Color, 3);
+            gr.DrawPolygon(pen, points);
         }
 
         // Draw text rotated at the indicated point.
@@ -194,12 +188,10 @@ namespace vcs_DrawA_Radar
 
             gr.RotateTransform((float)(theta * 180 / Math.PI));
             gr.TranslateTransform((float)x, (float)y, MatrixOrder.Append);
-            using (StringFormat sf = new StringFormat())
-            {
-                sf.Alignment = StringAlignment.Center;
-                sf.LineAlignment = StringAlignment.Center;
-                gr.DrawString(text, font, brush, 0, 0, sf);
-            }
+            StringFormat sf = new StringFormat();
+            sf.Alignment = StringAlignment.Center;
+            sf.LineAlignment = StringAlignment.Center;
+            gr.DrawString(text, font, brush, 0, 0, sf);
             gr.Restore(state);
         }
 
@@ -293,7 +285,6 @@ namespace vcs_DrawA_Radar
             // Draw the axes.
             DrawCharts(e.Graphics, chkFillAreas.Checked);
         }
-
     }
 
     //------------------------------------------------------------  # 60­Ó

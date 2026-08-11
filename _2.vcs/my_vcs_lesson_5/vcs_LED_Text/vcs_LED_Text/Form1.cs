@@ -29,9 +29,6 @@ namespace vcs_LED_Text
 
             //右
             pictureBox1.Invalidate();
-
-            //左下
-            pictureBox2.Invalidate();
         }
 
         void show_item_location()
@@ -44,13 +41,10 @@ namespace vcs_LED_Text
             int dy = H + 10;
             pictureBox0.Size = new Size(W, H);
             pictureBox1.Size = new Size(W * 3 + 50, H * 2 + 10);
-            pictureBox2.Size = new Size(W, H);
             pictureBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            pictureBox2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             pictureBox0.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
 
             richTextBox1.Size = new Size(300, 690);
             richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
@@ -84,51 +78,42 @@ namespace vcs_LED_Text
             TestColorful(e.Graphics);
         }
 
-        private void pictureBox2_Paint(object sender, PaintEventArgs e)
-        {
-            //左下
-            TestSplat(e.Graphics);
-        }
-
         //------------------------------------------------------------  # 60個
 
-        private void TestSplat(Graphics gr)
+        int index = -1;
+
+        string get_text()
         {
-            gr.Clear(Color.Black);
-            gr.SmoothingMode = SmoothingMode.AntiAlias;
+            index++;
+            string text = "0";
 
-            const float W = 200;
-            const float H = 320;
-            const float led_thickness = 28;
-            const float gap = 1.5f;
-            int dx = (int)W + 5;
-            int dy = (int)H + 5;
-            int x_st = 10;
-            int y_st = 10;
-            PointF position = new PointF(x_st + dx * 0, y_st + dy * 0);
+            if (index < 10)
+            {
+                text = index.ToString();
+            }
+            else
+            {
+                text = ((char)(0x40 + (index - 9))).ToString();
+                //richTextBox1.Text += index.ToString() + "\n";
+                //richTextBox1.Text += text + " ";
+                Application.DoEvents();
+            }
 
-            LedText letter = new LedText(W, H, led_thickness, gap);
+            richTextBox1.Text += index.ToString() + "\t" + text + "\n";
 
-            Brush bg_brush = Brushes.Black;
-            Brush used_brush = Brushes.Lime;
-            Pen used_pen = Pens.Transparent;
-            Brush unused_brush = new SolidBrush(Color.FromArgb(0, 40, 0));
-            Pen unused_pen = Pens.Transparent;
-
-            position = new PointF(x_st + dx * 0, y_st + dy * 0);
-            letter.DrawText(gr, bg_brush, used_brush, used_pen, unused_brush, unused_pen, position, 1.2f, "!");
+            if (index >= 36)
+            {
+                index = 0;
+                text = "0";
+            }
+            return text;
         }
 
-        //------------------------------------------------------------  # 60個
-
-        //0123456789ABCDEFGH
-        //IJKLMNOPQRSTUVWXYZ
-
-        int index = 0;
-        string text = "0";
         private void TestColorful(Graphics gr)
         {
-            const float ratio = 1.3f;
+            string text = get_text();
+
+            const float ratio = 1.5f;
 
             gr.Clear(Color.Black);
             gr.SmoothingMode = SmoothingMode.AntiAlias;
@@ -136,7 +121,7 @@ namespace vcs_LED_Text
             const float W = 200 / ratio;
             const float H = 320 / ratio;
             const float led_thickness = 28 / ratio;
-            const float gap = 5f / ratio;
+            const float gap = 5f / ratio;  // 每段中間的距離
             int dx = (int)W + 5;
             int dy = (int)H + 5 + 50;
             int x_st = 10;
@@ -175,30 +160,6 @@ namespace vcs_LED_Text
 
             position = new PointF(x_st + dx * 0, y_st + dy * 2);
             letter.DrawText(gr, bg_brush, used_brush, used_pen, unused_brush, unused_pen, position, 1.2f, text + text + text + text);
-
-
-            index++;
-            if (index < 10)
-            {
-                text = index.ToString();
-            }
-            else
-            {
-                text = ((char)(0x40 + (index - 9))).ToString();
-                //richTextBox1.Text += index.ToString() + "\n";
-                //richTextBox1.Text += text + " ";
-                Application.DoEvents();
-            }
-
-            richTextBox1.Text += index.ToString() + "\t" + text + "\n";
-
-            if (index >= 36)
-            {
-                index = 0;
-                text = "0";
-            }
-
-
         }
 
         //------------------------------------------------------------  # 60個
