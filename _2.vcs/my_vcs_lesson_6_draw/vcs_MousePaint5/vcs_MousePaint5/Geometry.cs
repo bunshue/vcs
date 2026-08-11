@@ -27,12 +27,23 @@ namespace vcs_MousePaint5
             // Search the other points.
             foreach (Point pt in points)
             {
-                if (-pt.X - pt.Y > -ul.X - ul.Y) ul = pt;
-                if (pt.X - pt.Y > ur.X - ur.Y) ur = pt;
-                if (-pt.X + pt.Y > -ll.X + ll.Y) ll = pt;
-                if (pt.X + pt.Y > lr.X + lr.Y) lr = pt;
+                if (-pt.X - pt.Y > -ul.X - ul.Y)
+                {
+                    ul = pt;
+                }
+                if (pt.X - pt.Y > ur.X - ur.Y)
+                {
+                    ur = pt;
+                }
+                if (-pt.X + pt.Y > -ll.X + ll.Y)
+                {
+                    ll = pt;
+                }
+                if (pt.X + pt.Y > lr.X + lr.Y)
+                {
+                    lr = pt;
+                }
             }
-
             g_MinMaxCorners = new Point[] { ul, ur, lr, ll }; // For debugging.
         }
 
@@ -49,9 +60,15 @@ namespace vcs_MousePaint5
             ymin = ul.Y;
 
             xmax = ur.X;
-            if (ymin < ur.Y) ymin = ur.Y;
+            if (ymin < ur.Y)
+            {
+                ymin = ur.Y;
+            }
 
-            if (xmax > lr.X) xmax = lr.X;
+            if (xmax > lr.X)
+            {
+                xmax = lr.X;
+            }
             ymax = lr.Y;
 
             if (xmin < ll.X) xmin = ll.X;
@@ -76,10 +93,7 @@ namespace vcs_MousePaint5
             foreach (Point pt in points)
             {
                 // See if (this point lies outside of the culling box.
-                if (pt.X <= culling_box.Left ||
-                    pt.X >= culling_box.Right ||
-                    pt.Y <= culling_box.Top ||
-                    pt.Y >= culling_box.Bottom)
+                if (pt.X <= culling_box.Left || pt.X >= culling_box.Right || pt.Y <= culling_box.Top || pt.Y >= culling_box.Bottom)
                 {
                     // This point cannot be culled.
                     // Add it to the results.
@@ -131,8 +145,7 @@ namespace vcs_MousePaint5
                 foreach (Point pt in points)
                 {
                     float test_angle = AngleValue(X, Y, pt.X, pt.Y);
-                    if ((test_angle >= sweep_angle) &&
-                        (best_angle > test_angle))
+                    if ((test_angle >= sweep_angle) && (best_angle > test_angle))
                     {
                         best_angle = test_angle;
                         best_pt = pt;
@@ -142,8 +155,7 @@ namespace vcs_MousePaint5
                 // See if the first point is better.
                 // If so, we are done.
                 float first_angle = AngleValue(X, Y, hull[0].X, hull[0].Y);
-                if ((first_angle >= sweep_angle) &&
-                    (best_angle >= first_angle))
+                if ((first_angle >= sweep_angle) && (best_angle >= first_angle))
                 {
                     // The first point is better. We're done.
                     break;
@@ -156,7 +168,10 @@ namespace vcs_MousePaint5
                 sweep_angle = best_angle;
 
                 // If all of the points are on the hull, we're done.
-                if (points.Count == 0) break;
+                if (points.Count == 0)
+                {
+                    break;
+                }
             }
 
             return hull;

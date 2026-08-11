@@ -1,6 +1,18 @@
 ﻿
 
+//------------------------------------------------------------  # 60個
 
+            Pen p;
+            p = new Pen(foreColor);
+            p.Width = 8;
+            p.StartCap = System.Drawing.Drawing2D.LineCap.Round;
+            p.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+            p.Color = foreColor;
+
+            //p.LineJoin = System.Drawing.Drawing2D.LineJoin.Bevel;
+            p.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
+
+//------------------------------------------------------------  # 60個
 
         //重寫表單的OnPaint範例 直接寫在此即可
         protected override void OnPaint(PaintEventArgs e)
@@ -7697,5 +7709,4 @@ this.Bounds = Screen.PrimaryScreen.Bounds;
 //------------------------------------------------------------  # 60個
 
 //            g.DrawRectangle(Pens.Black, bounds.X, bounds.Y, bounds.Width, bounds.Height);
-
 

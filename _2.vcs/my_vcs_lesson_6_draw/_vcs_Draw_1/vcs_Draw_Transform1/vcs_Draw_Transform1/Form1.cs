@@ -118,9 +118,19 @@ namespace vcs_Draw_Transform1
             button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            button30.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button31.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button32.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button33.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            button34.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button35.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            button36.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            button37.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+            button38.Location = new Point(x_st + dx * 3, y_st + dy * 8);
+            button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
 
             pictureBox1.Size = new Size(820, 880);
-            pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            pictureBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y);
 
             pictureBox0.Size = new Size(200, 180);
@@ -129,11 +139,11 @@ namespace vcs_Draw_Transform1
             pictureBox2.Size = new Size(410, 180);
             pictureBox2.Location = new Point(x_st + dx * 1, y_st + dy * 10);
 
-            richTextBox1.Size = new Size(300, 880);
-            richTextBox1.Location = new Point(x_st + dx * 7, y_st + dy * 0);
+            richTextBox1.Size = new Size(200, 880);
+            richTextBox1.Location = new Point(x_st + dx * 8, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1810, 940);
+            this.Size = new Size(1920, 940);
             this.Text = "vcs_Draw_Transform1";
 
             //設定執行後的表單起始位置, 正中央
@@ -1379,6 +1389,98 @@ namespace vcs_Draw_Transform1
 
         //------------------------------------------------------------  # 60個
 
+        private void button30_Click(object sender, EventArgs e)
+        {
+            //顯示豎排文字
+            //顯示豎排文字
+
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+            Graphics g = this.pictureBox1.CreateGraphics();
+            g.DrawString("顯示橫排", new Font("標楷體", 20, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline), Brushes.Red, 10, 200);
+            //設置旋轉中心點
+            g.TranslateTransform(W / 2, H / 2);
+            //設置旋轉角度
+            g.RotateTransform(90);
+            //畫文字
+            g.DrawString("顯示豎排文字", new Font("標楷體", 20), new SolidBrush(Color.Black), 0, 0);
+            //平移
+            g.TranslateTransform(100, 100);
+            //畫文字
+            g.DrawString("平移後顯示豎排文字", new Font("標楷體", 20), new SolidBrush(Color.Black), 0, 0);
+            //恢復為默認場景
+            g.ResetTransform();
+
+            g.DrawString("顯示豎排文字", new Font("標楷體", 20), new SolidBrush(Color.Black), 0, 0, new StringFormat(StringFormatFlags.DirectionVertical));
+
+            //------------------------------------------------------------  # 60個
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button31_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button32_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button33_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button34_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button35_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button36_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button37_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button38_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button39_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
         float angle1 = 0;
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
@@ -1455,8 +1557,6 @@ namespace vcs_Draw_Transform1
             e.Graphics.DrawImage(bitmap0, 0, 0); // 繪出圖形
         }
 
-        //------------------------------------------------------------  # 60個
-
     }
 
     //------------------------------------------------------------  # 60個
@@ -1513,9 +1613,6 @@ namespace vcs_Draw_Transform1
 //------------------------------  # 30個
 
 /*
-
-//------------------------------------------------------------  # 60個
-
 g.ScaleTransform(100, 100, MatrixOrder.Append);
 
 g.RotateTransform(30, MatrixOrder.Append);  // 順時針旋轉指定的角度

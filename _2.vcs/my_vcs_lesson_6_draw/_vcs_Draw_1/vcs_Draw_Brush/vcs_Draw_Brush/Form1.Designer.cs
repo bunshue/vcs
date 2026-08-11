@@ -38,7 +38,9 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox0 = new System.Windows.Forms.GroupBox();
+            this.button4 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button14 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
@@ -56,8 +58,6 @@
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.bt_draw1 = new System.Windows.Forms.Button();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button14 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox0.SuspendLayout();
@@ -175,6 +175,17 @@
             this.groupBox0.TabStop = false;
             this.groupBox0.Text = "TextureBrush";
             // 
+            // button4
+            // 
+            this.button4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button4.Location = new System.Drawing.Point(6, 315);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(180, 60);
+            this.button4.TabIndex = 117;
+            this.button4.Text = "TextureBrush";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.button14);
@@ -188,6 +199,16 @@
             this.groupBox1.TabIndex = 125;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "LinearGradientBrush";
+            // 
+            // button14
+            // 
+            this.button14.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button14.Location = new System.Drawing.Point(12, 314);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(180, 60);
+            this.button14.TabIndex = 118;
+            this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
             // button13
             // 
@@ -378,26 +399,6 @@
             this.radioButton1.Text = "單色";
             this.radioButton1.UseVisualStyleBackColor = true;
             this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
-            // 
-            // button4
-            // 
-            this.button4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button4.Location = new System.Drawing.Point(6, 315);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(180, 60);
-            this.button4.TabIndex = 117;
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // button14
-            // 
-            this.button14.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button14.Location = new System.Drawing.Point(12, 314);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(180, 60);
-            this.button14.TabIndex = 118;
-            this.button14.UseVisualStyleBackColor = true;
-            this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
             // Form1
             // 

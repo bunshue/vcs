@@ -66,13 +66,13 @@ namespace WindowsFormsApplication1sssss
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string localhost = (Dns.GetHostByName(Dns.GetHostName())).AddressList[0].ToString();  //本地主機IP地址
-            str = localhost.Substring(0, localhost.LastIndexOf("."));
-
+            string localhost = (Dns.GetHostByName(Dns.GetHostName())).AddressList[0].ToString();  // 本地主機IP地址
             richTextBox1.Text += "本地主機IP地址 : " + localhost + "\n";
-            richTextBox1.Text += "str : " + str + "\n";
 
-            for (int i = 0; i < 255/20; i++)  //建立255個線程掃描IP
+            str = localhost.Substring(0, localhost.LastIndexOf("."));
+            richTextBox1.Text += "取出前3碼 : " + str + "\n";
+
+            for (int i = 0; i < 255 / 20; i++)  //建立255個線程掃描IP
             {
                 IPAddress ScanIP = IPAddress.Parse(str + "." + Convert.ToString(i + 1));  //獲得掃描IP地址
                 richTextBox1.Text += "IP :" + ScanIP.ToString() + "\n";
@@ -100,12 +100,8 @@ namespace WindowsFormsApplication1sssss
                 }
 
                 int Currently_i = Convert.ToUInt16(Thread.CurrentThread.Name);  //當前進程名稱
-
                 */
-
             }
-
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -129,26 +125,25 @@ namespace WindowsFormsApplication1sssss
                 */
                 Thread.Sleep(1234);
             }
-
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            /*
-            string sss = Thread.CurrentThread.Name;  //當前進程名稱
-
-            richTextBox1.Text += "sss : " + sss + "\n";
-            */
             int i;
             for (i = 0; i < 10; i++)
             {
                 many_thread[i].Abort();
-
             }
+        }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string sss = Thread.CurrentThread.Name;  //當前進程名稱
+            richTextBox1.Text += "當前進程名稱 : " + sss + "\n";
 
         }
     }
 }
 
+//Thread.CurrentThread.Name = "MainThread";  // 設置這個線程的名字
 

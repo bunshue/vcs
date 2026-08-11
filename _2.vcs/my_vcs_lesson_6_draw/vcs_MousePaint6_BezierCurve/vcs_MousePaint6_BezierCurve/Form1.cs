@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Drawing2D; //for SmoothingMode
+using System.Drawing.Drawing2D;  // for SmoothingMode
 
 // 滑鼠操作畫圖相關
 
@@ -393,12 +393,6 @@ namespace vcs_MousePaint6_BezierCurve
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-

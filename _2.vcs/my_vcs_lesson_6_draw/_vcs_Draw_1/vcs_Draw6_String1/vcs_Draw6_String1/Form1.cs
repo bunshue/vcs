@@ -812,29 +812,6 @@ namespace vcs_Draw6_String1
 
         private void button20_Click(object sender, EventArgs e)
         {
-            //顯示豎排文字
-
-            int W = pictureBox1.Width;
-            int H = pictureBox1.Height;
-            Graphics g = this.pictureBox1.CreateGraphics();
-            g.DrawString("顯示橫排", new Font("標楷體", 20, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline), Brushes.Red, 10, 200);
-            //設置旋轉中心點
-            g.TranslateTransform(W / 2, H / 2);
-            //設置旋轉角度
-            g.RotateTransform(90);
-            //畫文字
-            g.DrawString("顯示豎排文字", new Font("標楷體", 20), new SolidBrush(Color.Black), 0, 0);
-            //平移
-            g.TranslateTransform(100, 100);
-            //畫文字
-            g.DrawString("平移後顯示豎排文字", new Font("標楷體", 20), new SolidBrush(Color.Black), 0, 0);
-            //恢復為默認場景
-            g.ResetTransform();
-
-            g.DrawString("顯示豎排文字", new Font("標楷體", 20), new SolidBrush(Color.Black), 0, 0, new StringFormat(StringFormatFlags.DirectionVertical));
-
-            //------------------------------------------------------------  # 60個
-
             //寫出直排的字串
 
             //int W = pictureBox1.Width;
@@ -853,6 +830,7 @@ namespace vcs_Draw6_String1
             float Y = 100;
 
             g.DrawString(text, f, Brushes.Red, X, Y, stringFormat);  // 繪出文字字串
+
         }
 
         //------------------------------------------------------------  # 60個
@@ -1808,8 +1786,6 @@ namespace vcs_Draw6_String1
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-
 
 
 /*

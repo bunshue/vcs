@@ -341,12 +341,27 @@ namespace vcs_Draw_Brush
         {
             //TextureBrush
 
+            /*
             //方法一：(用圖片填滿圓圈)
             Graphics g = this.pictureBox1.CreateGraphics();
             TextureBrush tb = new TextureBrush(new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg"));
 
             //20, 20 為座標位置，10, 10 為圓的大小
             g.FillEllipse(tb, 20, 20, 200, 200);
+            */
+            //------------------------------------------------------------  # 60個
+
+            //旋轉
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            Bitmap bitmap1 = new Bitmap(filename);
+
+            Graphics g = this.pictureBox1.CreateGraphics();
+            float MyAngle = 30f;//旋转的角度
+
+            TextureBrush tb = new TextureBrush(bitmap1);//实例化TextureBrush类
+            this.pictureBox1.Refresh();//使工作区无效
+            tb.RotateTransform(MyAngle);//以指定角度旋转图像
+            g.FillRectangle(tb, 0, 0, this.ClientRectangle.Width, this.ClientRectangle.Height);//绘制旋转后的图像
         }
 
         //------------------------------------------------------------  # 60個
@@ -581,26 +596,23 @@ namespace vcs_Draw_Brush
             SetTransformation(g, world_rect, device_rect, false, true);
 
             // Draw the axes.
-            using (Pen pen = new Pen(Color.Black, 0))
+            Pen pen = new Pen(Color.Black, 0);
+            for (int y = 10; y < 100; y += 10)
             {
-                for (int y = 10; y < 100; y += 10)
-                {
-                    g.DrawLine(pen, -2, y, 2, y);
-                }
-                g.DrawLine(pen, 0, 0, 0, 100);
-
-                for (int x = 10; x < 100; x += 10)
-                {
-                    g.DrawLine(pen, x, -2, x, 2);
-                }
-                g.DrawLine(pen, 0, 0, 100, 0);
+                g.DrawLine(pen, -2, y, 2, y);
             }
+            g.DrawLine(pen, 0, 0, 0, 100);
+
+            for (int x = 10; x < 100; x += 10)
+            {
+                g.DrawLine(pen, x, -2, x, 2);
+            }
+            g.DrawLine(pen, 0, 0, 100, 0);
 
             // Make a brush for the curve.
-            using (LinearGradientBrush brush = new LinearGradientBrush(world_rect, Color.Red, Color.Blue, 270))
-            {
-                ColorBlend blend = new ColorBlend();
-                blend.Colors = new Color[]
+            LinearGradientBrush brush = new LinearGradientBrush(world_rect, Color.Red, Color.Blue, 270);
+            ColorBlend blend = new ColorBlend();
+            blend.Colors = new Color[]
                 {
                     Color.Red, Color.Red,
                     Color.Orange, Color.Orange,
@@ -608,8 +620,8 @@ namespace vcs_Draw_Brush
                     Color.Green, Color.Green,
                     Color.Blue, Color.Blue,
                 };
-                blend.Positions =
-                    new float[]
+            blend.Positions =
+                new float[]
                     {
                         0.0f, 0.2f,
                         0.2f, 0.4f,
@@ -617,24 +629,21 @@ namespace vcs_Draw_Brush
                         0.6f, 0.8f,
                         0.8f, 1.0f,
                     };
-                brush.InterpolationColors = blend;
+            brush.InterpolationColors = blend;
 
-                // Make a thick pen defined by the brush.
-                using (Pen pen = new Pen(brush, 3))
-                {
-                    pen.LineJoin = LineJoin.Bevel;
+            // Make a thick pen defined by the brush.
+            pen = new Pen(brush, 3);
+            pen.LineJoin = LineJoin.Bevel;
 
-                    // Draw the curve.
-                    rand = new Random();
+            // Draw the curve.
+            rand = new Random();
 
-                    g.DrawCurve(pen, ColorPoints);     //曲線
+            g.DrawCurve(pen, ColorPoints);     //曲線
 
-                    //g.DrawLines(pen, ColorPoints);     //直線
+            //g.DrawLines(pen, ColorPoints);     //直線
 
-                    //// Draw a vertical line on the edge to show the colors.
-                    //g.DrawLine(pen, 100, 0, 100, 100);
-                }
-            }
+            //// Draw a vertical line on the edge to show the colors.
+            //g.DrawLine(pen, 100, 0, 100, 100);
             pictureBox1.Image = bitmap1;
         }
 
@@ -711,11 +720,9 @@ namespace vcs_Draw_Brush
             Graphics g = this.pictureBox1.CreateGraphics();
 
             //條紋
-            HatchBrush hBrush = new HatchBrush(HatchStyle.DarkHorizontal, Color.Gold);
-            using (Pen p = new Pen(hBrush, 30))
-            {
-                g.DrawLine(p, 10, 30, 200, 200);
-            }
+            HatchBrush hb = new HatchBrush(HatchStyle.DarkHorizontal, Color.Gold);
+            Pen p = new Pen(hb, 30);
+            g.DrawLine(p, 10, 30, 200, 200);
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -860,12 +867,7 @@ namespace vcs_Draw_Brush
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-
 /*
-
-
-//------------------------------------------------------------  # 60個
-
             //紋理效果, 使用圖像填充文字線條
             string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_背景圖\background.jpg";  //使用一張背景圖
             Graphics g = this.pictureBox1.CreateGraphics();

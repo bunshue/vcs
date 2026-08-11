@@ -30,7 +30,6 @@ namespace vcs_Mix00
     public partial class Form1 : Form
     {
         Bitmap bitmap1;
-
         bool lastStatus = false;
 
         public Form1()
@@ -1266,8 +1265,6 @@ namespace vcs_Mix00
             protocol_Tls11 = (SecurityProtocolType)768,
             protocol_Tls12 = (SecurityProtocolType)3072;
     }
-
-    //------------------------------------------------------------  # 60個
 }
 
 //6060

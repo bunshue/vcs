@@ -15,6 +15,14 @@ namespace vcs_Draw_Function1
 {
     public partial class Form1 : Form
     {
+        double theta = 0;// 徑度 (一圈為 Math.PI * 2)
+        double r; // 半徑
+        int x1, x2, y1, y2; //直線的兩個點
+        bool First = true;//定義第一點 (通常不畫)
+        Graphics g;  // 畫布
+        int a, b;  // 方程式的 參數
+        Pen MyPen = new Pen(Color.Black, 3);  //黑色筆 寬為 3
+
         public Form1()
         {
             InitializeComponent();
@@ -28,7 +36,7 @@ namespace vcs_Draw_Function1
 
             label4.Text = "";
             //this.ClientSize = new Size(800, 600);
-            G = this.pictureBox2.CreateGraphics();
+            g = this.pictureBox2.CreateGraphics();
         }
 
         void show_item_location()
@@ -57,14 +65,15 @@ namespace vcs_Draw_Function1
 
             pictureBox1.Size = new Size(720, 480);
             pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            pictureBox2.Size = new Size(300, 300);
+            pictureBox2.Size = new Size(300 + 100, 300 + 100);
             pictureBox2.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
+
             comboBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
-            richTextBox1.Size = new Size(300, 690 - 300 - 10);
-            richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0 + 300 + 10);
+            richTextBox1.Size = new Size(300 + 100, 250);
+            richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0 + 420);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1273, 750);
+            this.Size = new Size(1400, 750);
             this.Text = "vcs_Draw_Function1";
 
             //設定執行後的表單起始位置, 正中央
@@ -1089,14 +1098,6 @@ namespace vcs_Draw_Function1
         //------------------------------------------------------------  # 60個
         //------------------------------------------------------------  # 60個
 
-        double theta = 0;// 徑度 (一圈為 Math.PI * 2)
-        double r; // 半徑
-        int x1, x2, y1, y2; //直線的兩個點
-        bool First = true;//定義第一點 (通常不畫)
-        Graphics G;// 畫布
-        int a, b;// 方程式的 參數
-        Pen MyPen = new Pen(Color.Black, 3);  //黑色筆 寬為 3
-
         private void pictureBox2_Paint(object sender, PaintEventArgs e)
         {
 
@@ -1144,7 +1145,7 @@ namespace vcs_Draw_Function1
                 b = 100;
                 r = a * Math.Cos(theta - Math.PI / 2) + b;
                 x2 = pictureBox2.Width / 2 + (int)(r * Math.Cos(theta));
-                y2 = pictureBox2.Height / 4 + (int)(r * Math.Sin(theta));
+                y2 = pictureBox2.Height / 5 + (int)(r * Math.Sin(theta));
             }
             else if (comboBox1.Text == "Cardiod")
             {
@@ -1153,7 +1154,7 @@ namespace vcs_Draw_Function1
                     timer1.Enabled = false;
                     label4.Text = "";
                 }
-                a = 200;// b = 50;
+                a = 100;// b = 50;
                 r = a * Math.Cos(theta - Math.PI / 2) + a;
                 x2 = pictureBox2.Width / 2 + (int)(r * Math.Cos(theta));
                 y2 = pictureBox2.Height / 4 + (int)(r * Math.Sin(theta));
@@ -1165,7 +1166,7 @@ namespace vcs_Draw_Function1
                     timer1.Enabled = false;
                     label4.Text = "";
                 }
-                a = 275;
+                a = 150;
                 r = a * Math.Cos(3.0 * theta);
                 x2 = pictureBox2.Width / 2 + (int)(r * Math.Cos(theta));
                 y2 = pictureBox2.Height / 2 + (int)(r * Math.Sin(theta));
@@ -1177,7 +1178,7 @@ namespace vcs_Draw_Function1
                     timer1.Enabled = false;
                     label4.Text = "";
                 }
-                a = 275;
+                a = 150;
                 r = a * Math.Cos(2.0 * theta);
                 x2 = pictureBox2.Width / 2 + (int)(r * Math.Cos(theta));
                 y2 = pictureBox2.Height / 2 + (int)(r * Math.Sin(theta));
@@ -1189,7 +1190,7 @@ namespace vcs_Draw_Function1
                     timer1.Enabled = false;
                     label4.Text = "";
                 }
-                a = 175;
+                a = 150;
                 r = a / 40.0 * theta;
                 x2 = pictureBox2.Width / 2 + (int)(r * Math.Cos(theta));
                 y2 = pictureBox2.Height / 2 + (int)(r * Math.Sin(theta));
@@ -1201,7 +1202,7 @@ namespace vcs_Draw_Function1
             }
             else
             {
-                G.DrawLine(MyPen, x1, y1, x2, y2);
+                g.DrawLine(MyPen, x1, y1, x2, y2);
             }
             x1 = x2;
             y1 = y2;
@@ -1277,7 +1278,5 @@ for(i = 0; i < 360; i++)
             //return (float)(x * x + 2 * x + 1);
             return (float)(sind(3 * x) * 100);
         }
-
-
 */
 
