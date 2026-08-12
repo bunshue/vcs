@@ -18,6 +18,7 @@ namespace howto_password_tracker
         {
             SaveFormPosition(frm, APP_NAME, section_name);
         }
+
         public static void SaveFormPosition(Form frm, string app_name, string section_name)
         {
             SaveSetting(app_name, section_name, "WindowState", (int)frm.WindowState);
@@ -43,6 +44,7 @@ namespace howto_password_tracker
         {
             RestoreFormPosition(frm, APP_NAME, section_name);
         }
+
         public static void RestoreFormPosition(Form frm, string app_name, string section_name)
         {
             frm.SetBounds(
@@ -60,13 +62,12 @@ namespace howto_password_tracker
         {
             SaveDgvSettings(dgv, APP_NAME, section_name);
         }
+
         public static void SaveDgvSettings(DataGridView dgv, string app_name, string section_name)
         {
             for (int i = 0; i < dgv.ColumnCount; i++)
             {
-                SaveSetting(app_name, section_name,
-                    "DgvColWidth" + i.ToString(),
-                    dgv.Columns[i].Width);
+                SaveSetting(app_name, section_name, "DgvColWidth" + i.ToString(), dgv.Columns[i].Width);
             }
         }
 
@@ -75,14 +76,12 @@ namespace howto_password_tracker
         {
             RestoreDgvSettings(dgv, APP_NAME, section_name);
         }
+
         public static void RestoreDgvSettings(DataGridView dgv, string app_name, string section_name)
         {
             for (int i = 0; i < dgv.ColumnCount; i++)
             {
-                dgv.Columns[i].Width =
-                    GetSetting(app_name, section_name,
-                        "DgvColWidth" + i.ToString(),
-                        dgv.Columns[i].Width);
+                dgv.Columns[i].Width = GetSetting(app_name, section_name, "DgvColWidth" + i.ToString(), dgv.Columns[i].Width);
             }
         }
 
@@ -112,7 +111,10 @@ namespace howto_password_tracker
             string key_name = KeyName(app_name, section_name);
             using (RegistryKey reg_key = Registry.CurrentUser.OpenSubKey(key_name, false))
             {
-                if (reg_key == null) return default_value;
+                if (reg_key == null)
+                {
+                    return default_value;
+                }
                 return (T)reg_key.GetValue(name, default_value);
             }
         }

@@ -38,9 +38,9 @@
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOk.Location = new System.Drawing.Point(116, 74);
+            this.btnOk.Location = new System.Drawing.Point(116, 68);
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(75, 23);
+            this.btnOk.Size = new System.Drawing.Size(75, 21);
             this.btnOk.TabIndex = 1;
             this.btnOk.Text = "OK";
             this.btnOk.UseVisualStyleBackColor = true;
@@ -49,9 +49,9 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(197, 74);
+            this.btnCancel.Location = new System.Drawing.Point(197, 68);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(75, 21);
             this.btnCancel.TabIndex = 2;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -59,32 +59,33 @@
             // lblPrompt
             // 
             this.lblPrompt.AutoSize = true;
-            this.lblPrompt.Location = new System.Drawing.Point(12, 9);
+            this.lblPrompt.Location = new System.Drawing.Point(12, 8);
             this.lblPrompt.Name = "lblPrompt";
-            this.lblPrompt.Size = new System.Drawing.Size(35, 13);
+            this.lblPrompt.Size = new System.Drawing.Size(33, 12);
             this.lblPrompt.TabIndex = 2;
             this.lblPrompt.Text = "label1";
             // 
             // txtValue
             // 
-            this.txtValue.Location = new System.Drawing.Point(12, 34);
+            this.txtValue.Location = new System.Drawing.Point(12, 31);
             this.txtValue.Name = "txtValue";
-            this.txtValue.Size = new System.Drawing.Size(260, 20);
+            this.txtValue.Size = new System.Drawing.Size(260, 22);
             this.txtValue.TabIndex = 0;
             // 
             // frmInputBox
             // 
             this.AcceptButton = this.btnOk;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(284, 109);
+            this.ClientSize = new System.Drawing.Size(284, 101);
             this.Controls.Add(this.txtValue);
             this.Controls.Add(this.lblPrompt);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Name = "frmInputBox";
             this.Text = "Value";
+            this.Load += new System.EventHandler(this.frmInputBox_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

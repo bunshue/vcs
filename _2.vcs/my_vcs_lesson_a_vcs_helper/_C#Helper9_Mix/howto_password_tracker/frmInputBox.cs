@@ -16,5 +16,10 @@ namespace howto_password_tracker
         {
             InitializeComponent();
         }
+
+        private void frmInputBox_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

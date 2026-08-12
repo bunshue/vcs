@@ -17,64 +17,111 @@ namespace howto_password_tracker
             InitializeComponent();
         }
 
+        private void frmNewPassword_Load(object sender, EventArgs e)
+        {
+
+        }
+
         // Required implies allowed.
         private void chkRequireLowercase_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkRequireLowercase.Checked) chkAllowLowercase.Checked = true;
+            if (chkRequireLowercase.Checked)
+            {
+                chkAllowLowercase.Checked = true;
+            }
         }
         private void chkRequireUppercase_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkRequireUppercase.Checked) chkAllowUppercase.Checked = true;
+            if (chkRequireUppercase.Checked)
+            {
+                chkAllowUppercase.Checked = true;
+            }
         }
         private void chkRequireNumber_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkRequireNumber.Checked) chkAllowNumber.Checked = true;
+            if (chkRequireNumber.Checked)
+            {
+                chkAllowNumber.Checked = true;
+            }
         }
         private void chkRequireSpecial_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkRequireSpecial.Checked) chkAllowSpecial.Checked = true;
+            if (chkRequireSpecial.Checked)
+            {
+                chkAllowSpecial.Checked = true;
+            }
         }
         private void chkRequireUnderscore_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkRequireUnderscore.Checked) chkAllowUnderscore.Checked = true;
+            if (chkRequireUnderscore.Checked)
+            {
+                chkAllowUnderscore.Checked = true;
+            }
         }
         private void chkRequireSpace_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkRequireSpace.Checked) chkAllowSpace.Checked = true;
+            if (chkRequireSpace.Checked)
+            {
+                chkAllowSpace.Checked = true;
+            }
         }
         private void chkRequireOther_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkRequireOther.Checked) chkAllowOther.Checked = true;
+            if (chkRequireOther.Checked)
+            {
+                chkAllowOther.Checked = true;
+            }
         }
 
         // Not allowed implies not required.
         private void chkAllowLowercase_CheckedChanged(object sender, EventArgs e)
         {
-            if (!chkAllowLowercase.Checked) chkRequireLowercase.Checked = false;
+            if (!chkAllowLowercase.Checked)
+            {
+                chkRequireLowercase.Checked = false;
+            }
         }
         private void chkAllowUppercase_CheckedChanged(object sender, EventArgs e)
         {
-            if (!chkAllowUppercase.Checked) chkRequireUppercase.Checked = false;
+            if (!chkAllowUppercase.Checked)
+            {
+                chkRequireUppercase.Checked = false;
+            }
         }
         private void chkAllowNumber_CheckedChanged(object sender, EventArgs e)
         {
-            if (!chkAllowNumber.Checked) chkRequireNumber.Checked = false;
+            if (!chkAllowNumber.Checked)
+            {
+                chkRequireNumber.Checked = false;
+            }
         }
         private void chkAllowSpecial_CheckedChanged(object sender, EventArgs e)
         {
-            if (!chkAllowSpecial.Checked) chkRequireSpecial.Checked = false;
+            if (!chkAllowSpecial.Checked)
+            {
+                chkRequireSpecial.Checked = false;
+            }
         }
         private void chkAllowUnderscore_CheckedChanged(object sender, EventArgs e)
         {
-            if (!chkAllowUnderscore.Checked) chkRequireUnderscore.Checked = false;
+            if (!chkAllowUnderscore.Checked)
+            {
+                chkRequireUnderscore.Checked = false;
+            }
         }
         private void chkAllowSpace_CheckedChanged(object sender, EventArgs e)
         {
-            if (!chkAllowSpace.Checked) chkRequireSpace.Checked = false;
+            if (!chkAllowSpace.Checked)
+            {
+                chkRequireSpace.Checked = false;
+            }
         }
         private void chkAllowOther_CheckedChanged(object sender, EventArgs e)
         {
-            if (!chkAllowOther.Checked) chkRequireOther.Checked = false;
+            if (!chkAllowOther.Checked)
+            {
+                chkRequireOther.Checked = false;
+            }
         }
 
         // Generate a new password.
@@ -100,21 +147,41 @@ namespace howto_password_tracker
             string other = txtOther.Text;
             if (chkRequireOther.Checked && (other.Length < 1))
             {
-                MessageBox.Show("You cannot require characters from a blank string.",
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("You cannot require characters from a blank string.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtOther.Focus();
                 return txtPassword.Text;
             }
 
             // Make a list of allowed characters.
             string allowed = "";
-            if (chkAllowLowercase.Checked) allowed += LOWER;
-            if (chkAllowUppercase.Checked) allowed += UPPER;
-            if (chkAllowNumber.Checked) allowed += NUMBER;
-            if (chkAllowSpecial.Checked) allowed += SPECIAL;
-            if (chkAllowUnderscore.Checked) allowed += "_";
-            if (chkAllowSpace.Checked) allowed += " ";
-            if (chkAllowOther.Checked) allowed += other;
+            if (chkAllowLowercase.Checked)
+            {
+                allowed += LOWER;
+            }
+            if (chkAllowUppercase.Checked)
+            {
+                allowed += UPPER;
+            }
+            if (chkAllowNumber.Checked)
+            {
+                allowed += NUMBER;
+            }
+            if (chkAllowSpecial.Checked)
+            {
+                allowed += SPECIAL;
+            }
+            if (chkAllowUnderscore.Checked)
+            {
+                allowed += "_";
+            }
+            if (chkAllowSpace.Checked)
+            {
+                allowed += " ";
+            }
+            if (chkAllowOther.Checked)
+            {
+                allowed += other;
+            }
 
             // Pick the number of characters.
             int min_chars = int.Parse(txtMinLength.Text);
@@ -123,32 +190,26 @@ namespace howto_password_tracker
 
             // Satisfy requirements.
             string password = "";
-            if (chkRequireLowercase.Checked &&
-                (password.IndexOfAny(LOWER.ToCharArray()) == -1))
+            if (chkRequireLowercase.Checked && (password.IndexOfAny(LOWER.ToCharArray()) == -1))
                 password += RandomChar(LOWER);
-            if (chkRequireUppercase.Checked &&
-                (password.IndexOfAny(UPPER.ToCharArray()) == -1))
+            if (chkRequireUppercase.Checked && (password.IndexOfAny(UPPER.ToCharArray()) == -1))
                 password += RandomChar(UPPER);
-            if (chkRequireNumber.Checked &&
-                (password.IndexOfAny(NUMBER.ToCharArray()) == -1))
+            if (chkRequireNumber.Checked && (password.IndexOfAny(NUMBER.ToCharArray()) == -1))
                 password += RandomChar(NUMBER);
-            if (chkRequireSpecial.Checked &&
-                (password.IndexOfAny(SPECIAL.ToCharArray()) == -1))
+            if (chkRequireSpecial.Checked && (password.IndexOfAny(SPECIAL.ToCharArray()) == -1))
                 password += RandomChar(SPECIAL);
-            if (chkRequireUnderscore.Checked &&
-                (password.IndexOfAny("_".ToCharArray()) == -1))
+            if (chkRequireUnderscore.Checked && (password.IndexOfAny("_".ToCharArray()) == -1))
                 password += "_";
-            if (chkRequireSpace.Checked &&
-                (password.IndexOfAny(" ".ToCharArray()) == -1))
+            if (chkRequireSpace.Checked && (password.IndexOfAny(" ".ToCharArray()) == -1))
                 password += " ";
-            if (chkRequireOther.Checked &&
-                (password.IndexOfAny(other.ToCharArray()) == -1))
+            if (chkRequireOther.Checked && (password.IndexOfAny(other.ToCharArray()) == -1))
                 password += RandomChar(other);
 
             // Add the remaining characters randomly.
             while (password.Length < num_chars)
-                password += allowed.Substring(
-                    Crypto.RandomInteger(0, allowed.Length - 1), 1);
+            {
+                password += allowed.Substring(Crypto.RandomInteger(0, allowed.Length - 1), 1);
+            }
 
             // Randomize (to mix up the required characters at the front).
             password = RandomizeString(password);

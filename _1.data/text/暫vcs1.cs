@@ -1,5 +1,30 @@
 ﻿
 
+
+this.SetBounds(600, 100, 700, 700);  // 設置當前表單的位置與邊界
+
+//------------------------------------------------------------  # 60個
+
+Bitmap 半透明貼上
+
+Bitmap 去邊 半透明貼上
+
+
+「不規則形狀」最常見與通用的英文是 irregular shape（名詞）或 irregularly shaped（形容詞）。
+
+
+Lab主螢幕墊高 多一個螢幕
+
+那個一轉三的HDMI分配器要買幾個?
+
+
+//     將控制項帶到疊置順序的前面。
+public void BringToFront();
+//     將控制項傳送到疊置順序的後面。
+public void SendToBack();
+
+//------------------------------------------------------------  # 60個
+
 StringFormat string_format = new StringFormat();
 string_format.Alignment = StringAlignment.Center;
 string_format.LineAlignment = StringAlignment.Center;
@@ -551,7 +576,7 @@ Microsoft Docs後來在2022年整合至Microsoft Learn。
             //释放原始图片资源
             image.Dispose();
 
-6060
+//------------------------------------------------------------  # 60個
 
         //#region 正方型裁剪并缩放
         /// 正方型裁剪
@@ -7397,7 +7422,7 @@ Application.Run(new Form1());
 　}
 　　最後運行該程序，把screen_saver.exe改為screen_saver.scr，拷入Windows系統目錄中，這樣就可以運行該屏幕保護程序。
 
-6060
+//------------------------------------------------------------  # 60個
 
 pictureBox圖像直接存檔
 pictureBox1.Image.Save(@"D:\bbbbb.jpg");

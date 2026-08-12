@@ -976,20 +976,44 @@ namespace vcs_Draw_Transform1
 
             //------------------------------  # 30個
 
-            int angle = 30;  // 順時針旋轉度
+            int angle = 20;  // 順時針旋轉度
             g.ResetTransform();  // 重置轉換, 恢復
 
             // Reset後, 移動原點
-            g.TranslateTransform(400, 400);  // 平移, 右移, 下移
-            //g.TranslateTransform(400, 400, MatrixOrder.Append);  // 平移, 右移, 下移
+            g.TranslateTransform(450, 200);  // 平移, 右移, 下移
+            //g.TranslateTransform(450, 200, MatrixOrder.Append);  // 平移, 右移, 下移
 
-            g.RotateTransform(30);  // 順時針旋轉指定的角度
+            g.RotateTransform(angle);  // 順時針旋轉指定的角度
             draw_something(g);
             g.DrawString("旋轉" + angle.ToString() + "度", new Font("標楷體", 24), new SolidBrush(Color.Blue), new PointF(200, 130));
 
             //g.RotateTransform(5);  // 順時針旋轉指定的角度
             //g.RotateTransform(45.0f, MatrixOrder.Append);  // 旋轉, 對原點順時針旋轉
             //g.RotateTransform(45.0f, MatrixOrder.Prepend);  // 旋轉
+
+            //------------------------------  # 30個
+
+            g.ResetTransform();  // 重置轉換, 恢復
+
+            //Graphics g = this.pictureBox1.CreateGraphics();
+            g.DrawString("預設顯示橫排111", new Font("標楷體", 20), Brushes.Red, 100, 100);
+            g.FillEllipse(Brushes.Red, 100 - 10, 100 - 10, 20, 20);
+            g.DrawRectangle(Pens.Red, 100, 100, 200, 50);
+
+            g.FillEllipse(Brushes.Red, 200 - 20, 500 - 20, 40, 40);
+
+            //設置旋轉中心點
+            g.TranslateTransform(200, 500);  // 平移, 右移, 下移
+
+            angle = 45;
+
+            for (int i = 0; i < 8; i++)
+            {
+                g.RotateTransform(angle);  // 順時針旋轉指定的角度
+                g.DrawString("   顯示豎排文字222", new Font("標楷體", 20), new SolidBrush(Color.Black), 0, 0);
+                g.FillEllipse(Brushes.Green, 0 - 10, 0 - 10, 20, 20);
+                g.DrawRectangle(Pens.Green, 0, 0, 200, 50);
+            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -1435,32 +1459,6 @@ namespace vcs_Draw_Transform1
 
         private void button30_Click(object sender, EventArgs e)
         {
-            //顯示豎排文字
-
-            Graphics g = this.pictureBox1.CreateGraphics();
-            g.DrawString("預設顯示橫排111", new Font("標楷體", 20), Brushes.Red, 100, 100);
-            g.FillEllipse(Brushes.Red, 100 - 10, 100 - 10, 20, 20);
-            g.DrawRectangle(Pens.Red, 100, 100, 200, 50);
-
-            g.FillEllipse(Brushes.Red, 300 - 20, 300 - 20, 40, 40);
-
-            //設置旋轉中心點
-            g.TranslateTransform(300, 300);  // 平移, 右移, 下移
-
-            //設置旋轉角度
-            g.RotateTransform(90);  // 順時針旋轉指定的角度
-
-            g.DrawString("顯示豎排文字222", new Font("標楷體", 20), new SolidBrush(Color.Black), 0, 0);
-            g.FillEllipse(Brushes.Green, 0 - 10, 0 - 10, 20, 20);
-            g.DrawRectangle(Pens.Green, 0, 0, 200, 50);
-
-            g.TranslateTransform(100, 100);  // 平移, 右移, 下移
-
-            g.DrawString("平移後顯示豎排文字333", new Font("標楷體", 20), new SolidBrush(Color.Black), 0, 0);
-            g.FillEllipse(Brushes.Blue, 0 - 10, 0 - 10, 20, 20);
-            g.DrawRectangle(Pens.Blue, 0, 0, 200, 50);
-
-            g.ResetTransform();  // 重置轉換, 恢復
         }
 
         //------------------------------------------------------------  # 60個
@@ -1659,3 +1657,4 @@ Transform需要做到
 */
 
 //g.DrawString("顯示橫排", new Font("標楷體", 20, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline), Brushes.Red, 10, 200);
+
