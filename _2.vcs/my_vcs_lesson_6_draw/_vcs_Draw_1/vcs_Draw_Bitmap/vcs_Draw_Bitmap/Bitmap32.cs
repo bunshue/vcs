@@ -42,6 +42,7 @@ namespace vcs_Draw_Bitmap
                 return Bitmap.Width;
             }
         }
+
         public int Height
         {
             get
@@ -113,7 +114,10 @@ namespace vcs_Draw_Bitmap
         public void LockBitmap()
         {
             // If it's already locked, do nothing.
-            if (IsLocked) return;
+            if (IsLocked)
+            {
+                return;
+            }
 
             // Lock the bitmap data.
             Rectangle bounds = new Rectangle(0, 0, Bitmap.Width, Bitmap.Height);
@@ -360,7 +364,10 @@ namespace vcs_Draw_Bitmap
             result.m_IsLocked = false;
 
             // Unlock if appropriate.
-            if (!was_locked) this.UnlockBitmap();
+            if (!was_locked)
+            {
+                this.UnlockBitmap();
+            }
 
             // Return the result.
             return result;
@@ -602,7 +609,10 @@ namespace vcs_Draw_Bitmap
                             green += new_green * filter.Kernel[row, col];
                             blue += new_blue * filter.Kernel[row, col];
                         }
-                        if (skip_pixel) break;
+                        if (skip_pixel)
+                        {
+                            break;
+                        }
                     }
 
                     if (!skip_pixel)
@@ -610,27 +620,50 @@ namespace vcs_Draw_Bitmap
                         // Divide by the weight, add the offset, and
                         // make sure the result is between 0 and 255.
                         red = filter.offset + red / filter.Weight;
-                        if (red < 0) red = 0;
-                        if (red > 255) red = 255;
+                        if (red < 0)
+                        {
+                            red = 0;
+                        }
+                        if (red > 255)
+                        {
+                            red = 255;
+                        }
 
                         green = filter.offset + green / filter.Weight;
-                        if (green < 0) green = 0;
-                        if (green > 255) green = 255;
+                        if (green < 0)
+                        {
+                            green = 0;
+                        }
+                        if (green > 255)
+                        {
+                            green = 255;
+                        }
 
                         blue = filter.offset + blue / filter.Weight;
-                        if (blue < 0) blue = 0;
-                        if (blue > 255) blue = 255;
+                        if (blue < 0)
+                        {
+                            blue = 0;
+                        }
+                        if (blue > 255)
+                        {
+                            blue = 255;
+                        }
 
                         // Set the new pixel's value.
-                        result.SetPixel(x, y, (byte)red, (byte)green, (byte)blue,
-                            this.GetAlpha(x, y));
+                        result.SetPixel(x, y, (byte)red, (byte)green, (byte)blue, this.GetAlpha(x, y));
                     }
                 }
             }
 
             // Unlock the bitmaps.
-            if (!lock_result) result.UnlockBitmap();
-            if (!was_locked) this.UnlockBitmap();
+            if (!lock_result)
+            {
+                result.UnlockBitmap();
+            }
+            if (!was_locked)
+            {
+                this.UnlockBitmap();
+            }
 
             // Return the result.
             return result;
@@ -667,8 +700,14 @@ namespace vcs_Draw_Bitmap
             WarpImage(this, result, warp_op);
 
             // Unlock the bitmaps.
-            if (!lock_result) result.UnlockBitmap();
-            if (!was_locked) this.UnlockBitmap();
+            if (!lock_result)
+            {
+                result.UnlockBitmap();
+            }
+            if (!was_locked)
+            {
+                this.UnlockBitmap();
+            }
 
             // Return the result.
             return result;
@@ -700,8 +739,7 @@ namespace vcs_Draw_Bitmap
                     int iy0 = (int)y0;
 
                     // See if this is out of bounds.
-                    if ((ix0 < 0) || (ix0 > ix_max) ||
-                        (iy0 < 0) || (iy0 > iy_max))
+                    if ((ix0 < 0) || (ix0 > ix_max) || (iy0 < 0) || (iy0 > iy_max))
                     {
                         // The point is outside the image. Use white.
                         bm_dest.SetPixel(x1, y1, 255, 255, 255, 255);
@@ -724,18 +762,10 @@ namespace vcs_Draw_Bitmap
                         bm_src.GetPixel(ix0 + 1, iy0 + 1, out r11, out g11, out b11, out a11);
 
                         // Compute the weighted average.
-                        int r = (int)(
-                            r00 * dx1 * dy1 + r01 * dx1 * dy0 +
-                            r10 * dx0 * dy1 + r11 * dx0 * dy0);
-                        int g = (int)(
-                            g00 * dx1 * dy1 + g01 * dx1 * dy0 +
-                            g10 * dx0 * dy1 + g11 * dx0 * dy0);
-                        int b = (int)(
-                            b00 * dx1 * dy1 + b01 * dx1 * dy0 +
-                            b10 * dx0 * dy1 + b11 * dx0 * dy0);
-                        int a = (int)(
-                            a00 * dx1 * dy1 + a01 * dx1 * dy0 +
-                            a10 * dx0 * dy1 + a11 * dx0 * dy0);
+                        int r = (int)(r00 * dx1 * dy1 + r01 * dx1 * dy0 + r10 * dx0 * dy1 + r11 * dx0 * dy0);
+                        int g = (int)(g00 * dx1 * dy1 + g01 * dx1 * dy0 + g10 * dx0 * dy1 + g11 * dx0 * dy0);
+                        int b = (int)(b00 * dx1 * dy1 + b01 * dx1 * dy0 + b10 * dx0 * dy1 + b11 * dx0 * dy0);
+                        int a = (int)(a00 * dx1 * dy1 + a01 * dx1 * dy0 + a10 * dx0 * dy1 + a11 * dx0 * dy0);
                         bm_dest.SetPixel(x1, y1, (byte)r, (byte)g, (byte)b, (byte)a);
                     }
                 }

@@ -51,19 +51,11 @@
             this.button21 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.bt_pictureBox1_clear = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.bt_draw2 = new System.Windows.Forms.Button();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.bt_draw1 = new System.Windows.Forms.Button();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox0.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -283,6 +275,7 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(180, 60);
             this.button22.TabIndex = 110;
+            this.button22.Text = "四種一起比較";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
@@ -316,95 +309,11 @@
             this.bt_pictureBox1_clear.UseVisualStyleBackColor = true;
             this.bt_pictureBox1_clear.Click += new System.EventHandler(this.bt_pictureBox1_clear_Click);
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.radioButton4);
-            this.groupBox3.Controls.Add(this.bt_draw2);
-            this.groupBox3.Controls.Add(this.radioButton3);
-            this.groupBox3.Controls.Add(this.radioButton2);
-            this.groupBox3.Controls.Add(this.bt_draw1);
-            this.groupBox3.Controls.Add(this.radioButton1);
-            this.groupBox3.Location = new System.Drawing.Point(641, 13);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(153, 247);
-            this.groupBox3.TabIndex = 129;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "修改畫筆色色";
-            // 
-            // radioButton4
-            // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(19, 87);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(47, 16);
-            this.radioButton4.TabIndex = 9;
-            this.radioButton4.Text = "漸層";
-            this.radioButton4.UseVisualStyleBackColor = true;
-            this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
-            // 
-            // bt_draw2
-            // 
-            this.bt_draw2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_draw2.Location = new System.Drawing.Point(19, 173);
-            this.bt_draw2.Name = "bt_draw2";
-            this.bt_draw2.Size = new System.Drawing.Size(102, 42);
-            this.bt_draw2.TabIndex = 49;
-            this.bt_draw2.Text = "draw2";
-            this.bt_draw2.UseVisualStyleBackColor = true;
-            this.bt_draw2.Click += new System.EventHandler(this.bt_draw2_Click);
-            // 
-            // radioButton3
-            // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(19, 65);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(47, 16);
-            this.radioButton3.TabIndex = 8;
-            this.radioButton3.Text = "花紋";
-            this.radioButton3.UseVisualStyleBackColor = true;
-            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(19, 43);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(47, 16);
-            this.radioButton2.TabIndex = 7;
-            this.radioButton2.Text = "圖案";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
-            // 
-            // bt_draw1
-            // 
-            this.bt_draw1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_draw1.Location = new System.Drawing.Point(19, 109);
-            this.bt_draw1.Name = "bt_draw1";
-            this.bt_draw1.Size = new System.Drawing.Size(102, 42);
-            this.bt_draw1.TabIndex = 48;
-            this.bt_draw1.Text = "draw1";
-            this.bt_draw1.UseVisualStyleBackColor = true;
-            this.bt_draw1.Click += new System.EventHandler(this.bt_draw1_Click);
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(18, 21);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(47, 16);
-            this.radioButton1.TabIndex = 6;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "單色";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1055, 614);
-            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.bt_pictureBox1_clear);
             this.Controls.Add(this.groupBox2);
@@ -423,8 +332,6 @@
             this.groupBox0.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -452,13 +359,6 @@
         private System.Windows.Forms.Button button21;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button bt_pictureBox1_clear;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.Button bt_draw2;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.Button bt_draw1;
-        private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button14;

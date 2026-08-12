@@ -31,7 +31,6 @@ namespace vcs_Draw_Brush
     public partial class Form1 : Form
     {
         Graphics g;
-        Pen pen;
         //SolidBrush sb;
         //Bitmap bitmap1;
 
@@ -63,54 +62,8 @@ namespace vcs_Draw_Brush
             p = new Pen(textureBrush, 40);
             //以塗刷新增畫筆, 刮刮樂效果 SP
 
-            //------------------------------------------------------------  # 60個
 
-            pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
-            pen = new Pen(Color.Red, 3);
-
-            if (radioButton1.Checked == true)
-            {
-                g = pictureBox1.CreateGraphics();
-                pen = new Pen(Color.Red, 10);     //default pen
-                //pictureBox1.Location = new Point(0, 0);
-
-                SolidBrush sb = new SolidBrush(Color.Gold);
-                pen = new Pen(sb, 10);
-                richTextBox1.Text += "SolidBrush\n";
-            }
-            else if (radioButton2.Checked == true)
-            {
-                g = pictureBox1.CreateGraphics();
-                pen = new Pen(Color.Red, 10);     //default pen
-                //pictureBox1.Location = new Point(50, 50);
-
-                TextureBrush tb = new TextureBrush(new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg"));
-                pen = new Pen(tb, 10);
-                richTextBox1.Text += "TextureBrush\n";
-            }
-            else if (radioButton3.Checked == true)
-            {
-                g = pictureBox1.CreateGraphics();
-                pen = new Pen(Color.Red, 10);     //default pen
-                //pictureBox1.Location = new Point(50, 50);
-
-                HatchBrush hb = new HatchBrush(HatchStyle.Wave, Color.Blue, Color.Red);
-                pen = new Pen(hb, 10);
-                richTextBox1.Text += "HatchBrush\n";
-            }
-            else if (radioButton4.Checked == true)
-            {
-                g = pictureBox1.CreateGraphics();
-                pen = new Pen(Color.Red, 10);     //default pen
-                //pictureBox1.Location = new Point(50, 50);
-
-                Rectangle rect1 = new Rectangle(0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
-                LinearGradientBrush lgb = new LinearGradientBrush(rect1, Color.Blue, Color.Red, 90);
-                pen = new Pen(lgb, 10);
-                richTextBox1.Text += "LinearGradientBrush\n";
-            }
         }
-
         void show_item_location()
         {
             //button
@@ -124,11 +77,9 @@ namespace vcs_Draw_Brush
             groupBox0.Size = new Size(W, H * 6 + 10);
             groupBox1.Size = new Size(W, H * 6 + 10);
             groupBox2.Size = new Size(W, H * 4);
-            groupBox3.Size = new Size(W, H * 4);
             groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            groupBox3.Location = new Point(x_st + dx * 1, y_st + dy * 6);
 
             pictureBox1.Size = new Size(750, 620);
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
@@ -161,17 +112,6 @@ namespace vcs_Draw_Brush
             button20.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button21.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button22.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-
-            x_st = 20;
-            y_st = 20;
-            dx = 50;
-            dy = 30;
-            radioButton1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            radioButton2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            radioButton3.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            radioButton4.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            bt_draw1.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            bt_draw2.Location = new Point(x_st + dx * 0, y_st + dy * 5 + 20);
 
             this.Size = new Size(1610, 840);
             this.Text = "vcs_Draw_Brush";
@@ -742,7 +682,53 @@ namespace vcs_Draw_Brush
 
         private void button22_Click(object sender, EventArgs e)
         {
+            int x_st = 180;
+            int y_st = 50;
+            int dy = 140;
+            int W = pictureBox1.ClientSize.Width;
+            int H = pictureBox1.ClientSize.Height;
+            int pen_width = 25;
 
+            Pen p = new Pen(Color.Red, 10);     //default pen
+            Graphics g = pictureBox1.CreateGraphics();
+
+            richTextBox1.Text += "SolidBrush 單色筆\n";
+            SolidBrush sb = new SolidBrush(Color.Gold);
+            p = new Pen(sb, pen_width);
+            g.DrawRectangle(p, x_st, y_st, W - 250, 50);
+            g.DrawLine(p, x_st, y_st + 100, W - 150, y_st + 100);
+            g.DrawString("單色筆", new Font("標楷體", 32), new SolidBrush(Color.Black), new PointF(x_st - 160, y_st));
+
+            //------------------------------  # 30個
+
+            richTextBox1.Text += "TextureBrush 圖案筆\n";
+            TextureBrush tb = new TextureBrush(new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg"));
+            p = new Pen(tb, pen_width);
+            y_st += dy;
+            g.DrawRectangle(p, x_st, y_st, W - 250, 50);
+            g.DrawLine(p, x_st, y_st + 100, W - 150, y_st + 100);
+            g.DrawString("圖案筆", new Font("標楷體", 32), new SolidBrush(Color.Black), new PointF(x_st - 160, y_st));
+
+            //------------------------------  # 30個
+
+            richTextBox1.Text += "HatchBrush 花紋筆\n";
+            HatchBrush hb = new HatchBrush(HatchStyle.Wave, Color.Blue, Color.Red);
+            p = new Pen(hb, pen_width);
+            y_st += dy;
+            g.DrawRectangle(p, x_st, y_st, W - 250, 50);
+            g.DrawLine(p, x_st, y_st + 100, W - 150, y_st + 100);
+            g.DrawString("花紋筆", new Font("標楷體", 32), new SolidBrush(Color.Black), new PointF(x_st - 160, y_st));
+
+            //------------------------------  # 30個
+
+            richTextBox1.Text += "LinearGradientBrush 漸層筆\n";
+            Rectangle rect1 = new Rectangle(0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
+            LinearGradientBrush lgb = new LinearGradientBrush(rect1, Color.Blue, Color.Red, 90);
+            p = new Pen(lgb, pen_width);
+            y_st += dy;
+            g.DrawRectangle(p, x_st, y_st, W - 250, 50);
+            g.DrawLine(p, x_st, y_st + 100, W - 150, y_st + 100);
+            g.DrawString("漸層筆", new Font("標楷體", 32), new SolidBrush(Color.Black), new PointF(x_st - 160, y_st));
         }
 
         //------------------------------------------------------------  # 60個
@@ -791,72 +777,6 @@ namespace vcs_Draw_Brush
              * ForwardDiagonal = 2　 從左上到右下的漸變
              * BackwardDiagonal = 3　從右上到左下的漸變
              */
-        }
-
-        private void bt_draw1_Click(object sender, EventArgs e)
-        {
-            //p = new Pen(Color.Red, 5);
-            int width, height;
-            width = pictureBox1.ClientSize.Width;
-            height = pictureBox1.ClientSize.Height;
-            g.Clear(Color.LightGreen);
-            g.DrawRectangle(p, 0, 0, width - 1, height - 1);
-        }
-
-        private void bt_draw2_Click(object sender, EventArgs e)
-        {
-            //g.Clear(Color.LightGreen);
-            p.Width = 10;
-            for (int i = 0; i <= pictureBox1.Width; i = i + 36)
-            {
-                g.DrawLine(p, i, 0, i, pictureBox1.Height);
-                p.Width += 2;
-            }
-        }
-
-        private void radioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioButton1.Checked == true)
-            {
-                g = pictureBox1.CreateGraphics();
-                p = new Pen(Color.Red, 10);     //default pen
-                //pictureBox1.Location = new Point(50, 50);
-
-                SolidBrush sb = new SolidBrush(Color.Gold);
-                p = new Pen(sb, 10);
-                richTextBox1.Text += "SolidBrush\n";
-            }
-            else if (radioButton2.Checked == true)
-            {
-                g = pictureBox1.CreateGraphics();
-                p = new Pen(Color.Red, 10);     //default pen
-                //pictureBox1.Location = new Point(50, 50);
-
-                TextureBrush tb = new TextureBrush(new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg"));
-                p = new Pen(tb, 10);
-                richTextBox1.Text += "TextureBrush\n";
-            }
-            else if (radioButton3.Checked == true)
-            {
-                g = pictureBox1.CreateGraphics();
-                p = new Pen(Color.Red, 10);     //default pen
-                //pictureBox1.Location = new Point(50, 50);
-
-                HatchBrush hb = new HatchBrush(HatchStyle.Wave, Color.Blue, Color.Red);
-                p = new Pen(hb, 10);
-                richTextBox1.Text += "HatchBrush\n";
-            }
-            else if (radioButton4.Checked == true)
-            {
-                g = pictureBox1.CreateGraphics();
-                p = new Pen(Color.Red, 10);     //default pen
-                //pictureBox1.Location = new Point(50, 50);
-
-                Rectangle rect1 = new Rectangle(0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
-                LinearGradientBrush lgb = new LinearGradientBrush(rect1, Color.Blue, Color.Red, 90);
-                p = new Pen(lgb, 10);
-                richTextBox1.Text += "LinearGradientBrush\n";
-            }
         }
     }
 }

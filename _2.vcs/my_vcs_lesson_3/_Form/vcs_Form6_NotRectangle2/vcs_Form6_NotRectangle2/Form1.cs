@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Drawing2D; //for GraphicsPath
+using System.Drawing.Drawing2D;  // for GraphicsPath
 
-namespace vcs_Form6_NotRectangle2_Region
+namespace vcs_Form6_NotRectangle2
 {
     public partial class Form1 : Form
     {
@@ -101,6 +101,14 @@ namespace vcs_Form6_NotRectangle2_Region
                 this.Region = region;
             }
         }
-
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+

@@ -23,7 +23,7 @@ namespace vcs__common
 
         void show_item_location()
         {
-            int W = 360;
+            int W = 560;
             int H = 200;
             int x_st;
             int y_st;
@@ -36,11 +36,11 @@ namespace vcs__common
             dx = W + 10;
             dy = H + 10;
 
-            groupBox0.Size = new Size(600, 600);
+            groupBox0.Size = new Size(810, 600);
             groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
 
             //button
-            x_st = 380;
+            x_st = 380 + 210;
             y_st = 30;
             dx = 200 + 10;
             dy = 60 + 10;
@@ -50,6 +50,9 @@ namespace vcs__common
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
 
             x_st = 10;
             y_st = 30;
@@ -66,10 +69,16 @@ namespace vcs__common
             hScrollBar1.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             vScrollBar1.Location = new Point(x_st + dx * 1, y_st + dy * 7);
             textBox1.Location = new Point(x_st + dx * 0, y_st + dy * 8);
-            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-            richTextBox1.Size = new Size(400, 200);
 
-            this.Size = new Size(650, 670);
+            x_st = 10;
+            y_st = 10;
+            dx = 200 + 10;
+            dy = 60 + 10;
+            richTextBox1.Size = new Size(300, 700);
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1200, 820);
             this.Text = "vcs__common";
 
             //設定執行後的表單起始位置, 正中央
@@ -146,19 +155,28 @@ namespace vcs__common
         {
 
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
 

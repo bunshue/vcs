@@ -81,16 +81,11 @@ namespace vcs_Draw_Bitmap
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y);
 
-            lb_rotate.Location = new Point(x_st + dx * 7 + 40, y_st + dy * 0);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.Size = new Size(300, 300);
-            pictureBox2.Location = new Point(x_st + dx * 7 + 40, y_st + dy * 0 + 30);
-
-            richTextBox1.Size = new Size(300, 498);
-            richTextBox1.Location = new Point(x_st + dx * 7 + 40, y_st + dy * 4 + 60);
+            richTextBox1.Size = new Size(300, 840);
+            richTextBox1.Location = new Point(x_st + dx * 7 + 40, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1860, 910);
+            this.Size = new Size(1860, 900);
             this.Text = "vcs_Draw_Bitmap";
 
             //設定執行後的表單起始位置, 正中央
@@ -157,14 +152,116 @@ namespace vcs_Draw_Bitmap
             int sh = H / 3;
 
             //舊圖上標明位置
-            Graphics g_old = Graphics.FromImage(bitmap1);
+            Graphics g = Graphics.FromImage(bitmap1);
+
             //標示下一步要擷取的區域
-            g_old.DrawRectangle(new Pen(Color.Red, 2), new Rectangle(sx, sy, sw, sh));
+            g.DrawRectangle(new Pen(Color.Red, 2), new Rectangle(sx, sy, sw, sh));
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //各種旋轉+鏡射
+            richTextBox1.Text += "各種旋轉+鏡射\n";
+            richTextBox1.Text += "共16種狀況、兩兩相同\n";
+
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+            Bitmap bitmap1 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap1);
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\螺子黛.jpg";
+
+            string caption = string.Empty;
+            int x_st = 20;
+            int y_st = 20;
+            int dx = 280;
+            int dy = 205;
+            for (int i = 0; i < 16; i++)
+            {
+                Bitmap bmp = new Bitmap(filename);
+
+                switch (i)
+                {
+                    case 0:
+                        caption = "0, 旋轉180 + 無鏡射";
+                        bmp.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                        break;
+                    case 1:
+                        caption = "1, 旋轉180 + X鏡射";
+                        bmp.RotateFlip(RotateFlipType.Rotate180FlipX);
+                        break;
+                    case 2:
+                        caption = "2, 旋轉180 + XY鏡射";
+                        bmp.RotateFlip(RotateFlipType.Rotate180FlipXY);
+                        break;
+                    case 3:
+                        caption = "3, 旋轉180 + Y鏡射";
+                        bmp.RotateFlip(RotateFlipType.Rotate180FlipY);
+                        break;
+                    case 4:
+                        caption = "4, 旋轉270 + 無鏡射";
+                        bmp.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                        break;
+                    case 5:
+                        caption = "5, 旋轉270 + X鏡射";
+                        bmp.RotateFlip(RotateFlipType.Rotate270FlipX);
+                        break;
+                    case 6:
+                        caption = "6, 旋轉270 + XY鏡射";
+                        bmp.RotateFlip(RotateFlipType.Rotate270FlipXY);
+                        break;
+                    case 7:
+                        caption = "7, 旋轉270 + Y鏡射";
+                        bmp.RotateFlip(RotateFlipType.Rotate270FlipY);
+                        break;
+                    case 8:
+                        caption = "8, 旋轉90 + 無鏡射";
+                        bmp.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                        break;
+                    case 9:
+                        caption = "9, 旋轉90 + X鏡射";
+                        bmp.RotateFlip(RotateFlipType.Rotate90FlipX);
+                        break;
+                    case 10:
+                        caption = "10, 旋轉90 + XY鏡射";
+                        bmp.RotateFlip(RotateFlipType.Rotate90FlipXY);
+                        break;
+                    case 11:
+                        caption = "11, 旋轉90 + Y鏡射";
+                        bmp.RotateFlip(RotateFlipType.Rotate90FlipY);
+                        break;
+                    case 12:
+                        caption = "12, 旋轉0 + 無鏡射";
+                        bmp.RotateFlip(RotateFlipType.RotateNoneFlipNone);
+                        break;
+                    case 13:
+                        caption = "13, 旋轉0 + X鏡射";
+                        bmp.RotateFlip(RotateFlipType.RotateNoneFlipX);
+                        break;
+                    case 14:
+                        caption = "14, 旋轉0 + XY鏡射";
+                        bmp.RotateFlip(RotateFlipType.RotateNoneFlipXY);
+                        break;
+                    case 15:
+                        caption = "15, 旋轉0 + Y鏡射";
+                        bmp.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                        break;
+                    default:
+                        break;
+                }
+
+                int xx = x_st + dx * (i % 4);
+                int yy = y_st + dy * (i / 4);
+                int dd = 28;
+                g.DrawString(caption, new Font("標楷體", 16), Brushes.Black, xx, yy);
+                g.DrawImage(bmp, xx, yy + dd, bmp.Width * 2 / 5, bmp.Height * 2 / 5);
+            }
+            pictureBox1.Image = bitmap1;
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -595,7 +692,6 @@ namespace vcs_Draw_Bitmap
             g.Clear(Color.Transparent);  // 清空畫布並用透明色填充
             g.DrawImage(bitmap1, new Rectangle(0, 0, width, height), new Rectangle(0, 0, oriwidth, oriheight), GraphicsUnit.Pixel);
             return resizedbitmap;
-
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -604,7 +700,6 @@ namespace vcs_Draw_Bitmap
 
         private void button9_Click(object sender, EventArgs e)
         {
-            return;
             int W = 760;
             int H = 384;
             Bitmap bitmap1 = new Bitmap(W, H, PixelFormat.Format32bppArgb);
@@ -760,7 +855,7 @@ namespace vcs_Draw_Bitmap
             //控件轉Bitmap DrawToBitmap
 
             Control ctl = button7;
-            ctl = pictureBox2;
+            ctl = pictureBox1;
             ctl = this;
 
             Bitmap bm = new Bitmap(ctl.Width, ctl.Height);
@@ -776,6 +871,8 @@ namespace vcs_Draw_Bitmap
         {
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button16_Click(object sender, EventArgs e)
         {
         }
@@ -788,15 +885,17 @@ namespace vcs_Draw_Bitmap
 
         private void button18_Click(object sender, EventArgs e)
         {
+            //Bitmap參數
+
             // 測試 Bitmap 的 GetBounds
             bitmap1 = (Bitmap)Bitmap.FromFile(filename);
 
-            GraphicsUnit units = GraphicsUnit.Pixel;
+            GraphicsUnit units = GraphicsUnit.Pixel;  // 看似各種單位都一樣
 
-            // Get the bounding dimensions 
+            // 測試 Bitmap 的 GetBounds
             RectangleF boundsF = bitmap1.GetBounds(ref units);
 
-            // Convert floating points to whole integers if necessary
+            // 轉整數 Convert floating points to whole integers if necessary
             Rectangle bounds = Rectangle.Round(boundsF);
 
             richTextBox1.Text += "A : " + bounds.ToString() + "\n";
@@ -885,89 +984,6 @@ namespace vcs_Draw_Bitmap
                 richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
             }
         }
-
-        int cnt = 0;
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\螺子黛.jpg";
-            Image image = Image.FromFile(filename);
-            Bitmap bitmap1 = (Bitmap)image;
-            switch (cnt)
-            {
-                case 0:
-                    lb_rotate.Text = "0, 旋轉180 + 無鏡射";
-                    bitmap1.RotateFlip(RotateFlipType.Rotate180FlipNone);
-                    break;
-                case 1:
-                    lb_rotate.Text = "1, 旋轉180 + X鏡射";
-                    bitmap1.RotateFlip(RotateFlipType.Rotate180FlipX);
-                    break;
-                case 2:
-                    lb_rotate.Text = "2, 旋轉180 + XY鏡射";
-                    bitmap1.RotateFlip(RotateFlipType.Rotate180FlipXY);
-                    break;
-                case 3:
-                    lb_rotate.Text = "3, 旋轉180 + Y鏡射";
-                    bitmap1.RotateFlip(RotateFlipType.Rotate180FlipY);
-                    break;
-                case 4:
-                    lb_rotate.Text = "4, 旋轉270 + 無鏡射";
-                    bitmap1.RotateFlip(RotateFlipType.Rotate270FlipNone);
-                    break;
-                case 5:
-                    lb_rotate.Text = "5, 旋轉270 + X鏡射";
-                    bitmap1.RotateFlip(RotateFlipType.Rotate270FlipX);
-                    break;
-                case 6:
-                    lb_rotate.Text = "6, 旋轉270 + XY鏡射";
-                    bitmap1.RotateFlip(RotateFlipType.Rotate270FlipXY);
-                    break;
-                case 7:
-                    lb_rotate.Text = "7, 旋轉270 + Y鏡射";
-                    bitmap1.RotateFlip(RotateFlipType.Rotate270FlipY);
-                    break;
-                case 8:
-                    lb_rotate.Text = "8, 旋轉90 + 無鏡射";
-                    bitmap1.RotateFlip(RotateFlipType.Rotate90FlipNone);
-                    break;
-                case 9:
-                    lb_rotate.Text = "9, 旋轉90 + X鏡射";
-                    bitmap1.RotateFlip(RotateFlipType.Rotate90FlipX);
-                    break;
-                case 10:
-                    lb_rotate.Text = "10, 旋轉90 + XY鏡射";
-                    bitmap1.RotateFlip(RotateFlipType.Rotate90FlipXY);
-                    break;
-                case 11:
-                    lb_rotate.Text = "11, 旋轉90 + Y鏡射";
-                    bitmap1.RotateFlip(RotateFlipType.Rotate90FlipY);
-                    break;
-                case 12:
-                    lb_rotate.Text = "12, 旋轉0 + 無鏡射";
-                    bitmap1.RotateFlip(RotateFlipType.RotateNoneFlipNone);
-                    break;
-                case 13:
-                    lb_rotate.Text = "13, 旋轉0 + X鏡射";
-                    bitmap1.RotateFlip(RotateFlipType.RotateNoneFlipX);
-                    break;
-                case 14:
-                    lb_rotate.Text = "14, 旋轉0 + XY鏡射";
-                    bitmap1.RotateFlip(RotateFlipType.RotateNoneFlipXY);
-                    break;
-                case 15:
-                    lb_rotate.Text = "15, 旋轉0 + Y鏡射";
-                    bitmap1.RotateFlip(RotateFlipType.RotateNoneFlipY);
-                    break;
-                default:
-                    break;
-            }
-            pictureBox2.Image = bitmap1;
-            cnt++;
-            if (cnt > 15)
-            {
-                cnt = 0;
-            }
-        }
     }
 }
 
@@ -979,7 +995,6 @@ namespace vcs_Draw_Bitmap
 //------------------------------  # 30個
 
 /*
-
 Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height, PixelFormat.Format32bppRgb);
 Bitmap bitmap2 = (Bitmap)Bitmap.FromFile(filename);
 

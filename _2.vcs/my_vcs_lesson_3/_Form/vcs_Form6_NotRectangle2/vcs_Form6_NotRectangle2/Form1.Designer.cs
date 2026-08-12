@@ -1,4 +1,4 @@
-﻿namespace vcs_Form6_NotRectangle2_Region
+﻿namespace vcs_Form6_NotRectangle2
 {
     partial class Form1
     {
