@@ -677,7 +677,19 @@ namespace vcs_Draw_Brush
 
         private void button21_Click(object sender, EventArgs e)
         {
+            //pbox的背景圖案
+            //表單的背景圖案 法二  // Tile the image.
 
+            Graphics g = pictureBox1.CreateGraphics();
+
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_背景圖\bg1.png";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_angry_bird\AB_red.jpg";
+            Bitmap bmp = new Bitmap(filename);
+            TextureBrush brush = new TextureBrush(bmp);
+            g.FillRectangle(brush, this.pictureBox1.ClientRectangle);
+
+            //把一張小圖畫出來
+            g.DrawRectangle(Pens.Blue, bmp.Width, bmp.Height, bmp.Width, bmp.Height);
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -695,8 +707,9 @@ namespace vcs_Draw_Brush
             richTextBox1.Text += "SolidBrush 單色筆\n";
             SolidBrush sb = new SolidBrush(Color.Gold);
             p = new Pen(sb, pen_width);
-            g.DrawRectangle(p, x_st, y_st, W - 250, 50);
-            g.DrawLine(p, x_st, y_st + 100, W - 150, y_st + 100);
+            g.DrawRectangle(p, x_st, y_st, 200, 50);
+            g.DrawLine(p, x_st, y_st + 100, x_st + 200, y_st + 100);
+            g.FillEllipse(sb, x_st + 250, y_st, 200, 100);
             g.DrawString("單色筆", new Font("標楷體", 32), new SolidBrush(Color.Black), new PointF(x_st - 160, y_st));
 
             //------------------------------  # 30個
@@ -705,8 +718,9 @@ namespace vcs_Draw_Brush
             TextureBrush tb = new TextureBrush(new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg"));
             p = new Pen(tb, pen_width);
             y_st += dy;
-            g.DrawRectangle(p, x_st, y_st, W - 250, 50);
-            g.DrawLine(p, x_st, y_st + 100, W - 150, y_st + 100);
+            g.DrawRectangle(p, x_st, y_st, 200, 50);
+            g.DrawLine(p, x_st, y_st + 100, x_st + 200, y_st + 100);
+            g.FillEllipse(tb, x_st + 250, y_st, 200, 100);
             g.DrawString("圖案筆", new Font("標楷體", 32), new SolidBrush(Color.Black), new PointF(x_st - 160, y_st));
 
             //------------------------------  # 30個
@@ -715,8 +729,9 @@ namespace vcs_Draw_Brush
             HatchBrush hb = new HatchBrush(HatchStyle.Wave, Color.Blue, Color.Red);
             p = new Pen(hb, pen_width);
             y_st += dy;
-            g.DrawRectangle(p, x_st, y_st, W - 250, 50);
-            g.DrawLine(p, x_st, y_st + 100, W - 150, y_st + 100);
+            g.DrawRectangle(p, x_st, y_st, 200, 50);
+            g.DrawLine(p, x_st, y_st + 100, x_st + 200, y_st + 100);
+            g.FillEllipse(hb, x_st + 250, y_st, 200, 100);
             g.DrawString("花紋筆", new Font("標楷體", 32), new SolidBrush(Color.Black), new PointF(x_st - 160, y_st));
 
             //------------------------------  # 30個
@@ -726,8 +741,9 @@ namespace vcs_Draw_Brush
             LinearGradientBrush lgb = new LinearGradientBrush(rect1, Color.Blue, Color.Red, 90);
             p = new Pen(lgb, pen_width);
             y_st += dy;
-            g.DrawRectangle(p, x_st, y_st, W - 250, 50);
-            g.DrawLine(p, x_st, y_st + 100, W - 150, y_st + 100);
+            g.DrawRectangle(p, x_st, y_st, 200, 50);
+            g.DrawLine(p, x_st, y_st + 100, x_st + 200, y_st + 100);
+            g.FillEllipse(lgb, x_st + 250, y_st, 200, 100);
             g.DrawString("漸層筆", new Font("標楷體", 32), new SolidBrush(Color.Black), new PointF(x_st - 160, y_st));
         }
 
@@ -787,4 +803,3 @@ namespace vcs_Draw_Brush
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-

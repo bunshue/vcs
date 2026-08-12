@@ -53,7 +53,7 @@ namespace vcs_Mix03_draw_image
             this.Height = Convert.ToInt32(DeskHeight * 0.8);
             */
 
-            //6060
+            //------------------------------------------------------------  # 60個
 
             Random r = new Random();
             int W = pictureBox1.Width;
@@ -65,38 +65,6 @@ namespace vcs_Mix03_draw_image
                 Points1.Add(new Point(x, y));
             }
             timer1.Enabled = true;
-        }
-
-        //直接寫一個OnPaint在此, 取代Form1_Paint
-
-        private const string FONT_NAME = "Times New Roman";
-        private const float FONT_SIZE = 12;
-        private const FontStyle FONT_STYLE = FontStyle.Bold;
-        private const string MENU_CAPTION = "Say Hi";
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            e.Graphics.DrawRectangle(Pens.Red, 5, 5, this.ClientSize.Width - 10, this.ClientSize.Height - 10);
-            // Create the font we will use to draw the text.
-            using (Font menu_font = new Font(FONT_NAME, FONT_SIZE, FONT_STYLE))
-            {
-                // See how big the text will be.
-                SizeF text_size = e.Graphics.MeasureString(MENU_CAPTION, menu_font);
-            }
-
-            // Create the font we will use to draw the text.
-            using (Font menu_font = new Font(FONT_NAME, FONT_SIZE, FONT_STYLE))
-            {
-                //e.Graphics.FillRectangle(Brushes.Pink, e.Bounds);
-
-                // Draw the text.
-                //e.Graphics.DrawString(MENU_CAPTION, menu_font, Brushes.AliceBlue, e.Bounds.X, e.Bounds.Y);
-                // The mouse is not over the item.
-                // Erase the background.
-                //e.Graphics.FillRectangle(Brushes.LightGray, e.Bounds.X, e.Bounds.Y, e.Bounds.Width, e.Bounds.Height);
-
-                // Draw the text.
-                //e.Graphics.DrawString(MENU_CAPTION, menu_font, Brushes.Black, e.Bounds.X, e.Bounds.Y);
-            }
         }
 
         void show_item_location()
@@ -161,7 +129,6 @@ namespace vcs_Mix03_draw_image
         private void button0_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
         }
 
         //------------------------------------------------------------  # 60個
@@ -329,6 +296,8 @@ namespace vcs_Mix03_draw_image
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         int orientation = 0;
         private void button4_Click(object sender, EventArgs e)
         {
@@ -388,7 +357,7 @@ namespace vcs_Mix03_draw_image
             pictureBox1.Image = bitmap1;
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button5_Click(object sender, EventArgs e)
         {
@@ -493,55 +462,7 @@ namespace vcs_Mix03_draw_image
         private void button9_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            /*
-            string str = "天階夜色涼如水";
-
-            Font f = new Font("標楷體", 48, GraphicsUnit.Point);  // 預設為 Point
-            int W = g.MeasureString(str, f).ToSize().Width;
-            int H = g.MeasureString(str, f).ToSize().Height;
-            richTextBox1.Text += "GraphicsUnit : " + f.Unit.ToString() + "\n";
-            richTextBox1.Text += "W = " + W.ToString() + "  H = " + H.ToString() + "\n";
-
-            int x_st = 50;
-            int y_st = 50;
-            g.DrawString(str, f, new SolidBrush(Color.Blue), new PointF(x_st, y_st));
-            g.DrawRectangle(Pens.Red, x_st, y_st, W, H);
-
-            pictureBox1.Image = bitmap1;
-            */
-
-            //6060
-            /*
-            string tmp_string = "春花秋月何時了";
-            richTextBox1.Text += button18.Text + "\n";
-            richTextBox1.Text += tmp_string + "\n";
-            Graphics g2 = richTextBox1.CreateGraphics();
-            Size sss = g2.MeasureString(tmp_string, richTextBox1.Font).ToSize();
-            richTextBox1.Text += "size W = " + sss.Width.ToString() + "\n";
-            richTextBox1.Text += "size H = " + sss.Height.ToString() + "\n";
-
-            Font f = new Font("Arial", 128);
-            SolidBrush sb = new SolidBrush(Color.Red);
-            g.DrawString("A", f, sb, new PointF(0, 0));
-
-            //Graphics g2 = richTextBox1.CreateGraphics();
-            sss = g.MeasureString("A", f).ToSize();
-            richTextBox1.Text += "size f = " + f.Size.ToString() + "\t";
-            richTextBox1.Text += "size W = " + sss.Width.ToString() + "\t";
-            richTextBox1.Text += "size H = " + sss.Height.ToString() + "\n";
-            */
-
-
-            //6060
-
-            //量測字體大小
-            Font f = new Font("標楷體", 40);
-            string str = "放大縮小";
-            int w = g.MeasureString(str, f).ToSize().Width;
-            int h = g.MeasureString(str, f).ToSize().Height;
-
         }
-
 
         //------------------------------------------------------------  # 60個
 
@@ -697,7 +618,6 @@ namespace vcs_Mix03_draw_image
                 foreach (PointF pt in Points2)
                 {
                     e.Graphics.FillEllipse(Brushes.Red, pt.X - 5, pt.Y - 5, 10, 10);
-
                 }
             }
         }
@@ -757,13 +677,9 @@ namespace vcs_Mix03_draw_image
             dtheta = Math.PI / num_points;
             for (int i = 0; i < num_points; i++)
             {
-                result[2 * i] = new PointF(
-                    (float)(cx + rx * Math.Cos(theta)),
-                    (float)(cy + ry * Math.Sin(theta)));
+                result[2 * i] = new PointF((float)(cx + rx * Math.Cos(theta)), (float)(cy + ry * Math.Sin(theta)));
                 theta += dtheta;
-                result[2 * i + 1] = new PointF(
-                    (float)(cx + rx * Math.Cos(theta) * concave_radius),
-                    (float)(cy + ry * Math.Sin(theta) * concave_radius));
+                result[2 * i + 1] = new PointF((float)(cx + rx * Math.Cos(theta) * concave_radius), (float)(cy + ry * Math.Sin(theta) * concave_radius));
                 theta += dtheta;
             }
             return result;

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 組件的一般資訊是由下列的屬性集控制。
 // 變更這些屬性的值即可修改組件的相關
 // 資訊。
-[assembly: AssemblyTitle("vcs_Form4_MouseWheel")]
+[assembly: AssemblyTitle("vcs_Form5_Paint")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("vcs_Form4_MouseWheel")]
+[assembly: AssemblyProduct("vcs_Form5_Paint")]
 [assembly: AssemblyCopyright("Copyright ©  2026")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 下列 GUID 為專案公開 (Expose) 至 COM 時所要使用的 typelib ID
-[assembly: Guid("2d5bcd03-a9e3-4cab-a306-010259839b34")]
+[assembly: Guid("eb542fd0-7ba8-4608-ac6d-ee8839307bd9")]
 
 // 組件的版本資訊是由下列四項值構成:
 //

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_Form4_MouseWheel.Properties
+namespace vcs_Form5_Paint.Properties
 {
 
 

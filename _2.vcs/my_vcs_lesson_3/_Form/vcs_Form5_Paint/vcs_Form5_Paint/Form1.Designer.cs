@@ -1,4 +1,4 @@
-﻿namespace vcs_Form4_MouseWheel
+﻿namespace vcs_Form5_Paint
 {
     partial class Form1
     {
@@ -34,10 +34,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(688, 568);
+            this.ClientSize = new System.Drawing.Size(584, 561);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.ResumeLayout(false);
 
         }

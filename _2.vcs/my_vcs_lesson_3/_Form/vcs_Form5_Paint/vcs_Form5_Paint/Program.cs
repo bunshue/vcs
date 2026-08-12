@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_Form4_MouseWheel
+namespace vcs_Form5_Paint
 {
     static class Program
     {

@@ -1,5 +1,24 @@
 ﻿
 
+三種比較
+OnPaintBackground
+
+
+
+//------------------------------------------------------------  # 60個
+
+//SetStyle(ControlStyles.Opaque, true);   //無背景色
+
+//SetStyle(ControlStyles.Opaque, true);
+
+
+Point p = new Point(0, 0);
+Size s = new Size(500, 500);
+//Bounds = new Rectangle(0, 0, 500, 300);
+Bounds = new Rectangle(p, s);//窗體大小及相對於父客體的位置(0,0)
+
+//------------------------------------------------------------  # 60個
+
 
 this.SetBounds(600, 100, 700, 700);  // 設置當前表單的位置與邊界
 
@@ -22,28 +41,6 @@ Lab主螢幕墊高 多一個螢幕
 public void BringToFront();
 //     將控制項傳送到疊置順序的後面。
 public void SendToBack();
-
-//------------------------------------------------------------  # 60個
-
-StringFormat string_format = new StringFormat();
-string_format.Alignment = StringAlignment.Center;
-string_format.LineAlignment = StringAlignment.Center;
-
-StringFormat string_format = new StringFormat();
-string_format.Alignment = StringAlignment.Center;
-string_format.LineAlignment = StringAlignment.Center;
-
-StringFormat string_format = new StringFormat();
-string_format.Alignment = StringAlignment.Near;
-string_format.LineAlignment = StringAlignment.Near;
-string_format.Trimming = StringTrimming.EllipsisWord;
-string_format.FormatFlags = StringFormatFlags.LineLimit;
-
-//------------------------------------------------------------  # 60個
-
-
-            g.DrawString("顯示豎排文字444", new Font("標楷體", 20), new SolidBrush(Color.Black), 0, 0, new StringFormat(StringFormatFlags.DirectionVertical));
-
 
 //------------------------------------------------------------  # 60個
 
@@ -70,15 +67,6 @@ string_format.FormatFlags = StringFormatFlags.LineLimit;
         {
             //不進行背景的繪制
         }
-
-//------------------------------------------------------------  # 60個
-
-方法二：(用筆刷填滿圓圈)
-      Graphics g = this.CreateGraphics();
-      SolidBrush sb = new SolidBrush(Color.Blue);
-      
-      //20, 20 為座標位置，10, 10 為圓的大小
-      g.FillEllipse(sb, 20, 20, 10, 10);
 
 //------------------------------------------------------------  # 60個
 
@@ -2990,7 +2978,6 @@ Display_Cam1
             //bitmap1.RotateFlip(RotateFlipType.RotateNoneFlipY);    //反轉
 			
             Graphics g = Graphics.FromImage(image);
-
 			
 						SolidBrush drawBrush = new SolidBrush(Color.Yellow);
 
@@ -5560,9 +5547,6 @@ foreach (Point point in Points)
 
 //------------------------------------------------------------  # 60個
 
-
-//------------------------------------------------------------  # 60個
-
 this.Refresh();         //加上.Refresh()才可以讓人看清楚字的變化
 
 lblLoading.Text = "Loading case data...";
@@ -6624,13 +6608,6 @@ string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yy
 
 //WebBrowser 關閉 指令碼偵錯視窗
 webBrowser1.ScriptErrorsSuppressed = true;
-
-g.DrawString("大家好", new Font("標楷體", 20), new SolidBrush(Color.Red), new Rectangle(20, 20, 100, 100));
-g.DrawString("大家好", new Font("標楷體", 20, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline), Brushes.Red, 10, 200);
-g.DrawString("大家好", new Font("標楷體", 20, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline), lgBrush, 10, 200);
-
-Brush blueBrush = new SolidBrush(Color.Blue);
-g.DrawString("大家好", new Font("標楷體", 20, FontStyle.Italic),blueBrush, new PointF(300, 400));
 
 //依日期製作資料夾
 string foldername = @"C:\dddddddddd\_screen_capture_" + DateTime.Now.ToString("yyyy-MM-dd");
@@ -7722,20 +7699,14 @@ DrawPie方法的格式與DrawArc方法基本一致。
 
 //------------------------------------------------------------  # 60個
 
-// SizeF size = g.MeasureString(draw_text, f);
-
-string txt = link.Cost.ToString();
-SizeF txt_size = g.MeasureString(txt, this.Font);
-g.DrawString(txt, this.Font, Brushes.Black, x1 - txt_size.Width / 2, y1 - txt_size.Height / 2);
-
-string txt = node.Id.ToString();
-SizeF txt_size = g.MeasureString(txt, this.Font);
-g.DrawString(txt, this.Font, text_brush, node.Location.X - txt_size.Width / 2, node.Location.Y - txt_size.Height / 2);
-
 this.Bounds = new Rectangle(0, 0, width, height);
 this.Bounds = Screen.PrimaryScreen.Bounds;
 
 //------------------------------------------------------------  # 60個
 
 //            g.DrawRectangle(Pens.Black, bounds.X, bounds.Y, bounds.Width, bounds.Height);
+
+
+
+
 

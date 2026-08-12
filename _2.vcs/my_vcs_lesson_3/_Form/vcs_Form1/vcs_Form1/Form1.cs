@@ -628,25 +628,7 @@ namespace vcs_Form1
             */
         }
 
-        private void Form1_Paint(object sender, PaintEventArgs e)
-        {
-            Graphics g = e.Graphics;
-            g.DrawRectangle(new Pen(Color.Green, 10), new Rectangle(00, 00, this.ClientSize.Width - 1, this.ClientSize.Height - 1));    //畫邊框
-
-            int x_st = label1.Location.X + 50;
-            int y_st = label1.Location.Y - 50;
-            e.Graphics.DrawString("用 Form1_Paint 寫字", new Font("標楷體", 20, FontStyle.Italic), new SolidBrush(Color.Red), new RectangleF(new PointF(x_st, y_st), this.Size));
-
-            /*
-            //表單的背景圖案 法二  // Tile the image.
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_背景圖\bg2.png";
-            
-            using (TextureBrush brush = new TextureBrush(new Bitmap(filename)))
-            {
-                e.Graphics.FillRectangle(brush, this.ClientRectangle);
-            }
-            */
-        }
+        //------------------------------------------------------------  # 60個
 
         // On left button, let the user drag the form.
         private void label2_MouseDown(object sender, MouseEventArgs e)

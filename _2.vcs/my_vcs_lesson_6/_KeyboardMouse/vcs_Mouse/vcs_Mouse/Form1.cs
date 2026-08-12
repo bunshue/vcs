@@ -25,7 +25,8 @@ namespace vcs_Mouse
         {
             show_item_location();
 
-            this.MouseWheel += new MouseEventHandler(label_Zoom);
+            //this.MouseWheel += new MouseEventHandler(label_Zoom);
+            this.MouseWheel += new MouseEventHandler(Form1_MouseWheel);
         }
 
         void show_item_location()
@@ -36,6 +37,36 @@ namespace vcs_Mouse
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void Form1_MouseWheel(object sender, MouseEventArgs e)
+        {
+            //this.Width += e.Delta;
+            //this.Height += e.Delta;
+            if (e.Delta > 0)
+            {
+                this.Width++;
+                this.Height++;
+            }
+            else
+            {
+                this.Width--;
+                this.Height--;
+            }
+            this.Invalidate();
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            int W = this.ClientSize.Width;
+            int H = this.ClientSize.Height;
+            Graphics g = e.Graphics;
+            g.DrawRectangle(Pens.Red, 5, 5, W - 10, H - 10);
+
+            Font f = new Font("標楷體", 15);
+            g.DrawString("隨滑鼠滾輪滾動改變大小", f, new SolidBrush(Color.Red), new PointF(100, 100));
+
+            //隨滑鼠滾輪滾動改變大小
         }
 
         private void label_Zoom(object sender, MouseEventArgs e)
@@ -204,3 +235,11 @@ namespace vcs_Mouse
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+

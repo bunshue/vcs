@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{CB93126F-8B75-498D-B170-A24B38587995}</ProjectGuid>
+    <ProjectGuid>{4E8E8CCD-B22A-49F2-837E-44486D006B1B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_Form4_MouseWheel</RootNamespace>
-    <AssemblyName>vcs_Form4_MouseWheel</AssemblyName>
+    <RootNamespace>vcs_Form5_Paint</RootNamespace>
+    <AssemblyName>vcs_Form5_Paint</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

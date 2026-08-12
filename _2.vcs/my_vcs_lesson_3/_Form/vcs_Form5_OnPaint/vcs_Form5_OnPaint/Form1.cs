@@ -14,26 +14,11 @@ namespace vcs_Form5_OnPaint
         public Form1()
         {
             InitializeComponent();
-            SetStyle(ControlStyles.Opaque, true);   //無背景色
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            InitializeCircle();
 
-            SetStyle(ControlStyles.Opaque, true);
-            Point p = new Point(0, 0);
-            Size s = new Size(500, 500);
-            //Bounds = new Rectangle(0, 0, 500, 300);
-            Bounds = new Rectangle(p, s);//窗體大小及相對於父客體的位置(0,0)
-        }
-
-        private void InitializeCircle()
-        {
-            float Cx = this.ClientSize.Width / 2;
-            float Cy = this.ClientSize.Height / 2;
-            float Radius = (float)(Math.Min(Cx, Cy) * 0.8);
-            this.Invalidate();
         }
 
         //重定義基類OnPaint()方法
@@ -41,7 +26,7 @@ namespace vcs_Form5_OnPaint
         {
             int W = this.ClientSize.Width;
             int H = this.ClientSize.Height;
-            e.Graphics.Clear(Color.White);
+            //e.Graphics.Clear(Color.White);
             e.Graphics.DrawRectangle(Pens.Red, 50, 50, W - 50 * 2, H - 50 * 2);
 
             Font f = new Font("微軟正黑體", 22, FontStyle.Bold);//建立字體物件
@@ -59,7 +44,6 @@ namespace vcs_Form5_OnPaint
 
         private void Form1_Resize(object sender, EventArgs e)
         {
-            InitializeCircle();
             this.Invalidate();
         }
     }

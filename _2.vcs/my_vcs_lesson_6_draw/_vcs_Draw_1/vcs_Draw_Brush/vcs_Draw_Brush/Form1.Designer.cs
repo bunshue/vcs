@@ -286,6 +286,7 @@
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(180, 60);
             this.button21.TabIndex = 114;
+            this.button21.Text = "pbox的背景圖案";
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 

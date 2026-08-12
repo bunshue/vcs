@@ -896,7 +896,58 @@ namespace vcs_Draw6_String1
             richTextBox1.Text += "字串寬高 : " + stringSize2.ToSize() + "\n";
 
             richTextBox1.Text += "其實量得也不準\n";
+
+            //------------------------------------------------------------  # 60個
+
+            /*
+            string str = "天階夜色涼如水";
+
+            Font f = new Font("標楷體", 48, GraphicsUnit.Point);  // 預設為 Point
+            int W = g.MeasureString(str, f).ToSize().Width;
+            int H = g.MeasureString(str, f).ToSize().Height;
+            richTextBox1.Text += "GraphicsUnit : " + f.Unit.ToString() + "\n";
+            richTextBox1.Text += "W = " + W.ToString() + "  H = " + H.ToString() + "\n";
+
+            int x_st = 50;
+            int y_st = 50;
+            g.DrawString(str, f, new SolidBrush(Color.Blue), new PointF(x_st, y_st));
+            g.DrawRectangle(Pens.Red, x_st, y_st, W, H);
+
+            pictureBox1.Image = bitmap1;
+            */
+
+            //------------------------------------------------------------  # 60個
+
+            /*
+            string tmp_string = "春花秋月何時了";
+            richTextBox1.Text += button18.Text + "\n";
+            richTextBox1.Text += tmp_string + "\n";
+            Graphics g2 = richTextBox1.CreateGraphics();
+            Size sss = g2.MeasureString(tmp_string, richTextBox1.Font).ToSize();
+            richTextBox1.Text += "size W = " + sss.Width.ToString() + "\n";
+            richTextBox1.Text += "size H = " + sss.Height.ToString() + "\n";
+
+            Font f = new Font("Arial", 128);
+            SolidBrush sb = new SolidBrush(Color.Red);
+            g.DrawString("A", f, sb, new PointF(0, 0));
+
+            //Graphics g2 = richTextBox1.CreateGraphics();
+            sss = g.MeasureString("A", f).ToSize();
+            richTextBox1.Text += "size f = " + f.Size.ToString() + "\t";
+            richTextBox1.Text += "size W = " + sss.Width.ToString() + "\t";
+            richTextBox1.Text += "size H = " + sss.Height.ToString() + "\n";
+            */
+
+            //------------------------------------------------------------  # 60個
+
+            //量測字體大小
+            f = new Font("標楷體", 40);
+            string str = "放大縮小";
+            int w = g.MeasureString(str, f).ToSize().Width;
+            int h = g.MeasureString(str, f).ToSize().Height;
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button23_Click(object sender, EventArgs e)
         {
@@ -961,7 +1012,6 @@ namespace vcs_Draw6_String1
 
         private void button24_Click(object sender, EventArgs e)
         {
-            //StringFormat
             //StringFormat
 
             //畫格線
@@ -1057,6 +1107,24 @@ namespace vcs_Draw6_String1
                 int yy = y_st + dy * i;
                 g.FillEllipse(Brushes.Blue, xx - 10, yy - 10, 20, 20);
             }
+
+            //------------------------------------------------------------  # 60個
+
+            /*
+            StringFormat string_format = new StringFormat();
+            string_format.Alignment = StringAlignment.Center;
+            string_format.LineAlignment = StringAlignment.Center;
+
+            StringFormat string_format = new StringFormat();
+            string_format.Alignment = StringAlignment.Center;
+            string_format.LineAlignment = StringAlignment.Center;
+
+            StringFormat string_format = new StringFormat();
+            string_format.Alignment = StringAlignment.Near;
+            string_format.LineAlignment = StringAlignment.Near;
+            string_format.Trimming = StringTrimming.EllipsisWord;
+            string_format.FormatFlags = StringFormatFlags.LineLimit;
+            */
 
         }
 
@@ -1787,7 +1855,6 @@ namespace vcs_Draw6_String1
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-
 /*
             StringFormat string_format = new StringFormat();
             string_format.Alignment = StringAlignment.Near;
@@ -1796,5 +1863,29 @@ namespace vcs_Draw6_String1
             string_format.FormatFlags = StringFormatFlags.MeasureTrailingSpaces;
 
             g.TextRenderingHint = TextRenderingHint.AntiAlias;
+
+//            g.DrawString("顯示豎排文字444", new Font("標楷體", 20), new SolidBrush(Color.Black), 0, 0, new StringFormat(StringFormatFlags.DirectionVertical));
+
+g.DrawString("大家好", new Font("標楷體", 20), new SolidBrush(Color.Red), new Rectangle(20, 20, 100, 100));
+g.DrawString("大家好", new Font("標楷體", 20, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline), Brushes.Red, 10, 200);
+g.DrawString("大家好", new Font("標楷體", 20, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline), lgBrush, 10, 200);
+
+Brush blueBrush = new SolidBrush(Color.Blue);
+g.DrawString("大家好", new Font("標楷體", 20, FontStyle.Italic),blueBrush, new PointF(300, 400));
+
+//------------------------------------------------------------  # 60個
+
+// SizeF size = g.MeasureString(draw_text, f);
+
+string txt = link.Cost.ToString();
+SizeF txt_size = g.MeasureString(txt, this.Font);
+g.DrawString(txt, this.Font, Brushes.Black, x1 - txt_size.Width / 2, y1 - txt_size.Height / 2);
+
+string txt = node.Id.ToString();
+SizeF txt_size = g.MeasureString(txt, this.Font);
+g.DrawString(txt, this.Font, text_brush, node.Location.X - txt_size.Width / 2, node.Location.Y - txt_size.Height / 2);
+
+//------------------------------------------------------------  # 60個
+
 */
 
