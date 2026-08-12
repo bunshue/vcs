@@ -11,8 +11,6 @@ namespace vcs_Form5_OnPaint
 {
     public partial class Form1 : Form
     {
-        float Cx, Cy, Radius;
-
         public Form1()
         {
             InitializeComponent();
@@ -32,9 +30,9 @@ namespace vcs_Form5_OnPaint
 
         private void InitializeCircle()
         {
-            Cx = this.ClientSize.Width / 2;
-            Cy = this.ClientSize.Height / 2;
-            Radius = (float)(Math.Min(Cx, Cy) * 0.8);
+            float Cx = this.ClientSize.Width / 2;
+            float Cy = this.ClientSize.Height / 2;
+            float Radius = (float)(Math.Min(Cx, Cy) * 0.8);
             this.Invalidate();
         }
 
@@ -53,6 +51,9 @@ namespace vcs_Form5_OnPaint
             e.Graphics.DrawString("使用Resize()方法", f, Brushes.Black, 100, 150);
             f.Dispose();
 
+            float Cx = this.ClientSize.Width / 2;
+            float Cy = this.ClientSize.Height / 2;
+            float Radius = (float)(Math.Min(Cx, Cy) * 0.8);
             e.Graphics.DrawEllipse(Pens.Blue, Cx - Radius, Cy - Radius, Radius * 2, Radius * 2);
         }
 

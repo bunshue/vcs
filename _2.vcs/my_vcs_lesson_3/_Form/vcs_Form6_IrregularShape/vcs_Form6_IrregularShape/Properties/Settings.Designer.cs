@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_Form6_NotRectangle2.Properties {
+namespace vcs_Form6_IrregularShape.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

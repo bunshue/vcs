@@ -1,4 +1,4 @@
-﻿namespace vcs_Form6_NotRectangle1
+﻿namespace vcs_Form6_IrregularShape
 {
     partial class Form1
     {
