@@ -470,35 +470,17 @@ namespace vcs_Mix00
             catch { }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button10_Click(object sender, EventArgs e)
         {
             //測試網路連線狀態
-
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button11_Click(object sender, EventArgs e)
         {
-            Point p1 = new Point(100, 100);
-            Point p2 = new Point(300, 300);
-            Graphics g = this.pictureBox1.CreateGraphics();
-            g.DrawLine(Pens.Red, p1, p2);
-
-            richTextBox1.Text += "在pictureBox1上的座標\n";
-            richTextBox1.Text += "p1 : " + p1.ToString() + "\n";
-            richTextBox1.Text += "p2 : " + p2.ToString() + "\n";
-
-            richTextBox1.Text += "在表單上的座標\n";
-            Point p1a = this.PointToScreen(p1);
-            Point p2a = this.PointToScreen(p2);
-            richTextBox1.Text += "p1a : " + p1a.ToString() + "\n";
-            richTextBox1.Text += "p2a : " + p2a.ToString() + "\n";
-
-            richTextBox1.Text += "在視窗上的座標\n";
-            Point p1b = this.pictureBox1.PointToScreen(p1);
-            Point p2b = this.pictureBox1.PointToScreen(p2);
-            richTextBox1.Text += "p1b : " + p1b.ToString() + "\n";
-            richTextBox1.Text += "p2b : " + p2b.ToString() + "\n";
         }
 
         //------------------------------------------------------------  # 60個

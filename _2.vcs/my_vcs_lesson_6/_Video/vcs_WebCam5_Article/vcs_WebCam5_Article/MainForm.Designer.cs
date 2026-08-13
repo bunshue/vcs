@@ -1,4 +1,4 @@
-﻿namespace WebcamSecurity
+﻿namespace vcs_WebCam5_Article
 {
     partial class MainForm
     {

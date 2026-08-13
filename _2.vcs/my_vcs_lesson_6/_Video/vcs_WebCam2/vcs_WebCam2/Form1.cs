@@ -1662,16 +1662,6 @@ Cam.SetCameraProperty(CameraControlProperty.Zoom, v, CameraControlFlags.Manual);
                     richTextBox1.Text += "xxx錯誤訊息e01 : " + ex.Message + "\n";
                 }
             }
-
-            if (Cam != null)
-            {
-                if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
-                {
-                    Cam.Stop();   // WebCam stops capturing images.
-                    Cam.SignalToStop();
-                    Cam.WaitForStop();
-                }
-            }
         }
 
         private void bt_exit_Click(object sender, EventArgs e)
@@ -1683,18 +1673,5 @@ Cam.SetCameraProperty(CameraControlProperty.Zoom, v, CameraControlFlags.Manual);
             show_main_message("測試自動錄影", S_OK, 20);
             test_auto_record();
         }
-
-class CameraMonitor
-{
-    public void StopCapture()
-    {
-        if (this.Cam.IsRunning == true)
-        {
-            // we must stop the VideoCaptureDevice when done to free it so it can be used by other applications
-            this.Cam.Stop();
-        }
-    }
-
-}
  */
 

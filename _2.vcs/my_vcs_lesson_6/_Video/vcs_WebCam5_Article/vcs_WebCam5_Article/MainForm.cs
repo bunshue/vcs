@@ -12,7 +12,7 @@ using System.IO;
 using AForge.Video;
 using AForge.Video.DirectShow;
 
-namespace WebcamSecurity
+namespace vcs_WebCam5_Article
 {
     public partial class MainForm : Form
     {
@@ -203,4 +203,10 @@ namespace WebcamSecurity
     }
 }
 
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
 

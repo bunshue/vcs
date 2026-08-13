@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace WebcamSecurity
+namespace vcs_WebCam5_Article
 {
     static class Program
     {

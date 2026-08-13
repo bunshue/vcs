@@ -1,4 +1,19 @@
 ﻿
+//------------------------------------------------------------  # 60個
+
+            //PointToScreen測試
+
+            Point pt = new Point(0, 0);
+            Graphics g = this.CreateGraphics();
+            g.FillEllipse(Brushes.Red, pt.X - 10, pt.Y - 10, 20, 20);
+
+            richTextBox1.Text += "在表單上的座標\n";
+            Point pt1 = this.PointToScreen(pt);
+            richTextBox1.Text += "pt1 : " + pt1.ToString() + "\n";
+
+            richTextBox1.Text += "在視窗上的座標\n";
+            Point pt2 = this.button0.PointToScreen(pt);
+            richTextBox1.Text += "pt2 : " + pt2.ToString() + "\n";
 
 //------------------------------------------------------------  # 60個
 
@@ -1868,6 +1883,24 @@ private bool blnColorTicker;
 
 //------------------------------------------------------------  # 60個
 
+
+        private void toggleOption(int optionIndex, bool value)
+        {
+            switch (optionIndex)
+            {
+                case 0:
+                    CamMonitor.MotionDetection = value;
+                    break;
+                case 1:
+                    CamMonitor.RecordOnMotion = value;
+                    break;
+                case 2:
+                    CamMonitor.BeepOnMotion = value;
+                    break;
+            }
+        }
+
+
         private void toggleOption(int camIndex, int optionIndex, bool value)
         {
             switch (optionIndex)
@@ -3050,6 +3083,9 @@ string str2 = "ON-C";
 bool res = my_string.ToLower().Replace(" ", "").Contains(str2.ToLower().Replace("-", ""));
 richTextBox1.Text += "result = " + res.ToString() + "\n";
 
+ssss
+string thumb = fpath + fn.Replace(CodecExtension, ".jpg");
+
 //------------------------------------------------------------  # 60個
 
 如何清除播放清單
@@ -3075,7 +3111,6 @@ richTextBox1.Text += "result = " + res.ToString() + "\n";
             return res;
         }
         				
-//------------------------------------------------------------  # 60個
 //------------------------------------------------------------  # 60個
 
 typedef double point[3];
@@ -5846,25 +5881,6 @@ Marshal.StructureToPtr方法簡介
 
 //------------------------------------------------------------  # 60個
 
-                richTextBox1.Text += "aaaa1 len = " + tb_reason_stage1.Text.Length.ToString() + "\n";
-                tb_reason_stage1.Text.Replace("\n", "");
-                richTextBox1.Text += "aaaa2 len = " + tb_reason_stage1.Text.Length.ToString() + "\n";
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            tb_reason_stage1.Text = tb_reason_stage1.Text.Replace("\n", "");
-            tb_reason_stage1.Text = tb_reason_stage1.Text.Replace("\r", "");
-
-            richTextBox1.Text += "len = " + textBox1.Text.Length.ToString() + "\n";
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            textBox1.Text = textBox1.Text.Replace("\n", "");
-            textBox1.Text = textBox1.Text.Replace("\r", "");
-            richTextBox1.Text += "len = " + textBox1.Text.Length.ToString() + "\n";
-            
-
 MP3文件分析：TAG區格式
 
 Sign Length	(bytes) Position(bytes) Description 
@@ -7553,10 +7569,6 @@ while (IsRecording)
 	}
 }
 writer.Close();
-
-//------------------------------------------------------------  # 60個
-
-string thumb = fpath + fn.Replace(CodecExtension, ".jpg");
 
 //------------------------------------------------------------  # 60個
 

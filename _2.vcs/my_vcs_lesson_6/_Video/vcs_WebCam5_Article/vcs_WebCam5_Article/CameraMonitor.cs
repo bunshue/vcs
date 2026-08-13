@@ -12,7 +12,7 @@ using AForge.Video.DirectShow;  // Video Recording
 using AForge.Vision.Motion;     // Motion detection
 using AForge.Video.FFMPEG;
 
-namespace WebcamSecurity
+namespace vcs_WebCam5_Article
 {
     class CameraMonitor
     {

@@ -8,8 +8,8 @@
     <ProjectGuid>{46A3FD9C-57CA-4371-8655-4EDA1B465111}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WebcamSecurity</RootNamespace>
-    <AssemblyName>MicroDVR2.0</AssemblyName>
+    <RootNamespace>vcs_WebCam5_Article</RootNamespace>
+    <AssemblyName>vcs_WebCam5_Article</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
