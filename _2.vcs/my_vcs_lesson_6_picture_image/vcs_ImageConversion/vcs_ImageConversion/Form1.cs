@@ -187,18 +187,11 @@ namespace vcs_ImageConversion
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-/*  可搬出
-
-*/
-
-
 /*
-
 轉成ico
             if (bitmap1 == null)
             {
@@ -225,9 +218,9 @@ namespace vcs_ImageConversion
                     }
                 }
             }
-*/
 
-/*
+//------------------------------------------------------------  # 60個
+
             //bmp2jpg
             Bitmap bitmap;
             string filename1 = @"D:\_git\vcs\_1.data\______test_files1\bear.bmp";
@@ -275,5 +268,3 @@ namespace vcs_ImageConversion
             richTextBox1.Text += "圖像轉換 : " + f1.Name + " 轉換成 " + f2.Name + "\n";
 
 */
-
-

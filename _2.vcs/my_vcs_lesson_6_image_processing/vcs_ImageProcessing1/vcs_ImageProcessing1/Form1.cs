@@ -885,25 +885,18 @@ namespace vcs_ImageProcessing1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
 
 /*
 //圖片檔案 => Image => MemoryStream(ms) => 拜列
 //拜列 => MemoryStream(ms) => Image => 圖片檔案
 // bmp/png 資料長度 4*W*H + 檔頭54拜
 // jpg     資料長度 3*W*H + 檔頭54拜
-*/
 
+//------------------------------------------------------------  # 60個
 
-/*
 IntPtr ptr = bmpData.Scan0;　 // 獲取bmpData的內存起始位置
 // Get the address of the first line.
 //IntPtr ptr = bmpData.Scan0; //得到首地址
@@ -935,8 +928,9 @@ IntPtr dstPtr = bmpData2.Scan0;
         托管代碼中，能不用unsafe就盡量不用。在.Net 2.0中已經提供了BitmapData類及其LockBits()、 UnLockBits()操作，能夠安全地進行內存讀寫；
         圖像的width和它存儲時的stride是不一樣的。位圖的掃描線寬度一定是4的倍數，因此圖像在內存中 的大小並不是它的顯示大小；
         Format8bppIndexed類型的PixelFormat是索引格式，其調色板並不是灰度的而是偽彩，因此需要我們 對其加以修改。
-*/
-/*
+
+//------------------------------------------------------------  # 60個
+
             //内存法
             //定义一个类LockBitmap，通过把Bitmap数据拷贝出来，在内存上直接操作，操作完成后在拷贝到Bitmap中
             //使用：先锁定Bitmap，然后通过Pixels操作颜色对象，最后释放锁，把数据更新到Bitmap中

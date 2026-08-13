@@ -48,6 +48,7 @@
             // 
             // richTextBox1
             // 
+            this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.richTextBox1.Location = new System.Drawing.Point(120, 10);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
@@ -56,10 +57,11 @@
             // 
             // bt_motion_detection
             // 
+            this.bt_motion_detection.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_motion_detection.ImageIndex = 0;
             this.bt_motion_detection.Location = new System.Drawing.Point(10, 125);
             this.bt_motion_detection.Name = "bt_motion_detection";
-            this.bt_motion_detection.Size = new System.Drawing.Size(100, 30);
+            this.bt_motion_detection.Size = new System.Drawing.Size(133, 30);
             this.bt_motion_detection.TabIndex = 7;
             this.bt_motion_detection.Text = "啟動 移動偵測";
             this.bt_motion_detection.UseVisualStyleBackColor = true;

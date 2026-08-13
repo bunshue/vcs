@@ -95,10 +95,6 @@ namespace vcs_ImageProcessing_Example1
             richTextBox1.Text += "P1, W = " + bitmap1.Width.ToString() + ", H = " + bitmap1.Height.ToString() + "\n";
 
             //pictureBox1 SP
-
-            //------------------------------------------------------------  # 60個
-
-
         }
 
         void show_item_location()
@@ -111,8 +107,8 @@ namespace vcs_ImageProcessing_Example1
             int dy = H + 50;
             pictureBox0.Size = new Size(W, H);
             pictureBox1.Size = new Size(W, H);
-            pictureBox2.Size = new Size(W, H/3);
-            pictureBox3.Size = new Size(W, H/3);
+            pictureBox2.Size = new Size(W, H / 3);
+            pictureBox3.Size = new Size(W, H / 3);
             pictureBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             pictureBox2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -263,20 +259,13 @@ namespace vcs_ImageProcessing_Example1
         }
 
         //------------------------------------------------------------  # 60個
-
     }
 }
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
 

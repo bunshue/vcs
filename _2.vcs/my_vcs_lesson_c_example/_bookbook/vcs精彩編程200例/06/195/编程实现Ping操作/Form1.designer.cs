@@ -161,9 +161,10 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(189, 180);
+            this.button1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button1.Location = new System.Drawing.Point(152, 189);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(100, 40);
             this.button1.TabIndex = 2;
             this.button1.Text = "开始Ping";
             this.button1.UseVisualStyleBackColor = true;
@@ -171,9 +172,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(8, 211);
+            this.richTextBox1.Location = new System.Drawing.Point(8, 235);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(741, 304);
+            this.richTextBox1.Size = new System.Drawing.Size(741, 280);
             this.richTextBox1.TabIndex = 3;
             this.richTextBox1.Text = "";
             // 

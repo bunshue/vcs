@@ -42,6 +42,10 @@ namespace vcs_PicPick1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //richTextBox1.Size = new Size(300, 690);
+            //richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
             // 判斷是否已有程式在執行
             string proc = Process.GetCurrentProcess().ProcessName;
             Process[] processes = Process.GetProcessesByName(proc);
@@ -56,6 +60,11 @@ namespace vcs_PicPick1
             KeyHookHandler.Hook();
             timer1.Enabled = true;
             this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         //------------------------------------------------------------  # 60個
@@ -75,7 +84,6 @@ namespace vcs_PicPick1
                 notifyIcon1.ShowBalloonTip(300);
                 this.Hide();
             }
-
         }
 
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -85,7 +93,6 @@ namespace vcs_PicPick1
             notifyIcon1.Visible = false;
             this.Show();
             //this.BringToFront();
-
         }
 
         private void SetMonitorState(MonitorState state)
@@ -142,14 +149,14 @@ namespace vcs_PicPick1
                 richTextBox1.Text += "F12\n";
                 KeyHooker.IsF12Pressed = false;
             }
-
         }
-
-
-
-
-
-
-
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+

@@ -65,9 +65,10 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(263, 447);
+            this.button5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button5.Location = new System.Drawing.Point(264, 436);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(100, 51);
+            this.button5.Size = new System.Drawing.Size(120, 60);
             this.button5.TabIndex = 9;
             this.button5.Text = "匯出到 EXCEL";
             this.button5.UseVisualStyleBackColor = true;
@@ -75,9 +76,10 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(133, 442);
+            this.button4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button4.Location = new System.Drawing.Point(138, 436);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(100, 51);
+            this.button4.Size = new System.Drawing.Size(120, 60);
             this.button4.TabIndex = 8;
             this.button4.Text = "匯出到 WORD";
             this.button4.UseVisualStyleBackColor = true;
@@ -85,9 +87,10 @@
             // 
             // button3
             // 
+            this.button3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button3.Location = new System.Drawing.Point(12, 436);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(100, 62);
+            this.button3.Size = new System.Drawing.Size(120, 60);
             this.button3.TabIndex = 7;
             this.button3.Text = "debug";
             this.button3.UseVisualStyleBackColor = true;

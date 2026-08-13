@@ -6,24 +6,24 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Imaging;
 using System.IO;
 using System.Threading;
+using System.Drawing.Imaging;
 
 namespace vcs_Paint9
 {
     public partial class Draw : Form
     {
-        public Draw()
-        {
-            InitializeComponent();
-        }
         private DrawTools dt;
         private string sType;//绘图样式
         private string sFileName;//打开的文件名
         private bool bReSize = false;//是否改变画布大小
         private Size DefaultPicSize;//储存原始画布大小，用来新建文件时使用
 
+        public Draw()
+        {
+            InitializeComponent();
+        }
 
         //pbimg＂鼠标按下＂事件处理方法
         private void pbImg_MouseDown(object sender, MouseEventArgs e)
@@ -75,8 +75,9 @@ namespace vcs_Paint9
             g.Dispose();
             dt = new DrawTools(this.pbImg.CreateGraphics(), colorHatch1.HatchColor, bmp);//实例化工具类
             DefaultPicSize = pbImg.Size;
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         //＂打开文件＂事件处理方法
         private void openPic_Click(object sender, EventArgs e)
@@ -265,12 +266,7 @@ namespace vcs_Paint9
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
 

@@ -133,9 +133,8 @@ namespace vcs_WebCam5
         private void button2_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "找到 " + webcam_count.ToString() + " 台WebCam\n";
-            int i;
-            i = 0;
 
+            int i = 0;
             richTextBox1.Text += "第 " + (i + 1).ToString() + " 台WebCam:\n";
             richTextBox1.Text += "IsRecording\t" + this.CamMonitor[i].IsRecording.ToString() + "\n";
             richTextBox1.Text += "cameraName\t" + this.CamMonitor[i].cameraName.ToString() + "\n";
@@ -148,14 +147,6 @@ namespace vcs_WebCam5
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
-
-

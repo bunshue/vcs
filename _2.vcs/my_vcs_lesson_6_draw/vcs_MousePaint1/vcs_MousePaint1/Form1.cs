@@ -746,7 +746,7 @@ namespace vcs_MousePaint1
         // Continue drawing the new ellipse.
         private void pictureBox5_MouseMove(object sender, MouseEventArgs e)
         {
-            if (flag_pictureBox5_MouseDown==false)
+            if (flag_pictureBox5_MouseDown == false)
             {
                 return;
             }
@@ -757,7 +757,7 @@ namespace vcs_MousePaint1
         // Finish drawing the new ellipse.
         private void pictureBox5_MouseUp(object sender, MouseEventArgs e)
         {
-            if (flag_pictureBox5_MouseDown==false)
+            if (flag_pictureBox5_MouseDown == false)
             {
                 return;
             }
@@ -793,7 +793,7 @@ namespace vcs_MousePaint1
             }
 
             // If we are creating a new ellipse, draw it.
-            if (flag_pictureBox5_MouseDown==true)//新畫的
+            if (flag_pictureBox5_MouseDown == true)//新畫的
             {
                 using (Pen dashed_pen = new Pen(Color.Red, 3))
                 {
@@ -822,12 +822,7 @@ namespace vcs_MousePaint1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
 

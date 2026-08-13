@@ -27,6 +27,8 @@ namespace ArbitrarinessCombination
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         public void SetArbitrariness(int n, ArrayList List)
         {
             ArrayList SList = new ArrayList(a);//實例化ArrayList類
@@ -94,13 +96,7 @@ namespace ArbitrarinessCombination
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
 

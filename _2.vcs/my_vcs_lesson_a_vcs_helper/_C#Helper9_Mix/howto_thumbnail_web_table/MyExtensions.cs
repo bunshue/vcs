@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 //      http://blog.csharphelper.com/2009/12/13/format-a-number-of-bytes-in-kb-mb-gb-and-so-forth-in-c.aspx
 
 namespace howto_thumbnail_web_table
-{    
+{
     public static class MyExtensions
     {
         [DllImport("Shlwapi.dll", CharSet = CharSet.Auto)]
@@ -31,7 +31,7 @@ namespace howto_thumbnail_web_table
         // For example, 1.23 MB.
         public static string ToFileSize(this double value)
         {
-            string[] suffixes = { "bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"};
+            string[] suffixes = { "bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" };
             for (int i = 0; i < suffixes.Length; i++)
             {
                 if (value <= (Math.Pow(1024, i + 1)))
@@ -40,7 +40,7 @@ namespace howto_thumbnail_web_table
                 }
             }
 
-            return ThreeNonZeroDigits(value / Math.Pow(1024, suffixes.Length - 1)) + 
+            return ThreeNonZeroDigits(value / Math.Pow(1024, suffixes.Length - 1)) +
                 " " + suffixes[suffixes.Length - 1];
         }
 
@@ -72,3 +72,4 @@ namespace howto_thumbnail_web_table
         }
     }
 }
+

@@ -516,7 +516,6 @@ namespace vcs_MyPdfReader
                     richTextBox1.Text += "i = " + i.ToString() + "\t" + pdf_filename_data[i].filename + "\n";
                 }
                 pdf_filename_data[len - 1].page = int.Parse(tb_pdf_page.Text);
-
             }
         }
 
@@ -929,12 +928,7 @@ namespace vcs_MyPdfReader
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
 
