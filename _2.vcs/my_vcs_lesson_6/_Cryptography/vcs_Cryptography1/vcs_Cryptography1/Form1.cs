@@ -805,17 +805,20 @@ namespace vcs_Cryptography1
         {
             string strEncrypt = string.Empty;
 
-            MD5 md5 = new MD5CryptoServiceProvider();
-            byte[] fromData = Encoding.GetEncoding("GB2312").GetBytes(str);
-            byte[] targetData = md5.ComputeHash(fromData);
-            for (int i = 0; i < targetData.Length; i++)
+            MD5 md5 = MD5.Create();  // 創建MD5對象
+
+            byte[] input = Encoding.GetEncoding("GB2312").GetBytes(str);  // 字串轉拜列, 中文字要先用 UTF8轉碼
+            byte[] md5Hash = md5.ComputeHash(input);  // 算拜列之Hash值
+            for (int i = 0; i < md5Hash.Length; i++)
             {
-                strEncrypt += targetData[i].ToString("X2");
+                strEncrypt += md5Hash[i].ToString("X2");
             }
+
             if (code == 16)
             {
                 strEncrypt = strEncrypt.Substring(8, 16);
             }
+
             return strEncrypt;
         }
 
@@ -859,15 +862,6 @@ namespace vcs_Cryptography1
                 sb.Append(md5Hash[i].ToString("X2"));  // 轉2位的16進制字串
             }
             return sb.ToString();
-        }
-
-        /// 获取MD5值
-        /// <param name="sourceString">源字符串</param>
-        /// <returns>MD5值</returns>
-        public static string GetMD5(string sourceString)
-        {
-            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
-            return GetHash(sourceString, md5);
         }
 
         /// 获取SHA1值
@@ -1165,6 +1159,17 @@ public static string Decrypt(string targetValue, string key)
             MD5 md5 = MD5.Create();  // 創建MD5對象
 
 //------------------------------------------------------------  # 60個
+
+        /// 获取MD5值
+        /// <param name="sourceString">源字符串</param>
+        /// <returns>MD5值</returns>
+        public static string GetMD5(string sourceString)
+        {
+            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+            //MD5 md5 = MD5.Create();  // 創建MD5對象
+            return GetHash(sourceString, md5);
+        }
+
 
 MD5/SHA1說明大集合
 

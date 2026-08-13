@@ -28,6 +28,8 @@ namespace vcs_StackOrder
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         void show_info(object sender)
         {
             Button btn = sender as Button;
@@ -123,5 +125,3 @@ namespace vcs_StackOrder
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-

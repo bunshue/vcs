@@ -226,7 +226,7 @@ namespace vcs_ClockE
                 //最大化螢幕
                 this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
                 this.WindowState = FormWindowState.Maximized;
-                
+
                 pictureBox1.Location = new Point(0, 0);
                 pictureBox1.Size = new Size(1920, 1080);
                 //flag_countdown_start = true;

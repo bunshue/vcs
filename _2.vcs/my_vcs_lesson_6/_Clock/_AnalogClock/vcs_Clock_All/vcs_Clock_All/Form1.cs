@@ -88,10 +88,6 @@ namespace vcs_Clock_All
             //------------------------------------------------------------  # 60個
 
             //pictureBox5 ST
-            MyPen_H2.EndCap = LineCap.ArrowAnchor;
-            MyPen_M2.EndCap = LineCap.ArrowAnchor;
-            MyPen_S2.EndCap = LineCap.ArrowAnchor;
-            MyPen_AL.EndCap = LineCap.RoundAnchor;
             //pictureBox5 SP
 
             //------------------------------------------------------------  # 60個
@@ -106,8 +102,8 @@ namespace vcs_Clock_All
 
         void show_item_location()
         {
-            int W = 460;
-            int H = 400;
+            int W = 300;
+            int H = 300;
             int x_st = 10;
             int y_st = 30;
             int dx = W + 20;
@@ -138,11 +134,11 @@ namespace vcs_Clock_All
             label4.Text = "";
             label5.Text = "";
 
-            richTextBox1.Size = new Size(W - 200, H * 2 + 60);
+            richTextBox1.Size = new Size(W, H * 2 + 60);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1740, 940);
+            this.Size = new Size(1320, 760);
             this.Text = "vcs_Clock_All";
 
             //設定執行後的表單起始位置, 正中央
@@ -406,28 +402,6 @@ namespace vcs_Clock_All
 
         private void pictureBox2_Paint(object sender, PaintEventArgs e)
         {
-            int hh = DateTime.Now.Hour;
-            int mm = DateTime.Now.Minute;
-            int ss = DateTime.Now.Second;
-
-            int h_pinlen = 50;//時針
-            int m_pinlen = 75;//分針
-            int s_pinlen = 100;//秒針
-
-            Graphics g = e.Graphics;
-
-            g.Clear(Color.White);
-            Pen p = new Pen(Color.Black, 1);
-            g.DrawEllipse(p, pictureBox2.ClientRectangle);
-            Point CPoint = new Point(pictureBox2.ClientRectangle.Width / 2, pictureBox2.ClientRectangle.Height / 2);
-            Point SPoint = new Point((int)(CPoint.X + (Math.Sin(6 * ss * Math.PI / 180)) * s_pinlen), (int)(CPoint.Y - (Math.Cos(6 * ss * Math.PI / 180)) * s_pinlen));
-            Point MPoint = new Point((int)(CPoint.X + (Math.Sin(6 * mm * Math.PI / 180)) * m_pinlen), (int)(CPoint.Y - (Math.Cos(6 * mm * Math.PI / 180)) * m_pinlen));
-            Point HPoint = new Point((int)(CPoint.X + (Math.Sin(((30 * hh) + (mm / 2)) * Math.PI / 180)) * h_pinlen), (int)(CPoint.Y - (Math.Cos(((30 * hh) + (mm / 2)) * Math.PI / 180)) * h_pinlen));
-            g.DrawLine(p, CPoint, SPoint);
-            p = new Pen(Color.Black, 2);
-            g.DrawLine(p, CPoint, MPoint);
-            p = new Pen(Color.Black, 4);
-            g.DrawLine(p, CPoint, HPoint);
         }
 
         //------------------------------------------------------------  # 60個
@@ -512,9 +486,10 @@ namespace vcs_Clock_All
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
             e.Graphics.ResetTransform(); // 表單畫布 設為預設值
+
             // 表單畫布的原點 平移到 視窗客戶區的 中心點
-            e.Graphics.TranslateTransform(this.pictureBox4.ClientSize.Width / 2,
-                                          this.pictureBox4.ClientSize.Height / 2);
+            e.Graphics.TranslateTransform(this.pictureBox4.ClientSize.Width / 2, this.pictureBox4.ClientSize.Height / 2);
+
             // 繪出 時鐘的圓形
             e.Graphics.DrawEllipse(MyPen_Frame, -110, -110, 220, 220);
 
@@ -558,56 +533,12 @@ namespace vcs_Clock_All
 
         //------------------------------------------------------------  # 60個
 
-        Pen MyPen_H2 = new Pen(Color.Blue, 8); // 時針使用的筆
-        Pen MyPen_M2 = new Pen(Color.Green, 8); // 分針使用的筆
-        Pen MyPen_S2 = new Pen(Color.Red, 6);   // 秒針使用的筆
-        Pen MyPen_AL = new Pen(Color.Black, 6);   // 秒針使用的筆
-        float alarm_Angle = 0; // 
-        Point current = new Point(); // 滑鼠游標 目前的座標
-        Pen MyPen_Frame2 = new Pen(Color.Black, 1); // 時鐘框架使用的筆
-
         private void pictureBox5_MouseDown(object sender, MouseEventArgs e)
         {
         }
 
         private void pictureBox5_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                if (e.X >= this.pictureBox5.ClientSize.Width / 2) // 在右方
-                {
-                    if (e.Y < current.Y)  // 滑鼠往上
-                        alarm_Angle -= 1;
-                    else if (e.Y > current.Y)  // 滑鼠往下
-                        alarm_Angle += 1;
-                }
-                else // 在左方 
-                {
-                    if (e.Y < current.Y)  // 滑鼠往上
-                        alarm_Angle += 1;
-                    else if (e.Y > current.Y) // 滑鼠往下
-                        alarm_Angle -= 1;
-                }
-
-                if (e.Y <= this.pictureBox5.ClientSize.Height / 2) // 在上方
-                {
-                    if (e.X < current.X)  // 滑鼠往左
-                        alarm_Angle -= 1;
-                    else if (e.X > current.X) // 滑鼠往右
-                        alarm_Angle += 1;
-                }
-                else // 在下方 
-                {
-                    if (e.X < current.X)  // 滑鼠往左
-                        alarm_Angle += 1;
-                    else if (e.X > current.X)  // 滑鼠往右
-                        alarm_Angle -= 1;
-                }
-
-                current.X = e.X;
-                current.Y = e.Y;
-                this.pictureBox5.Invalidate();
-            }
         }
 
         private void pictureBox5_MouseUp(object sender, MouseEventArgs e)
@@ -616,54 +547,6 @@ namespace vcs_Clock_All
 
         private void pictureBox5_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.ResetTransform(); // 表單畫布 設為預設值
-            // 表單畫布的原點 平移到 視窗客戶區的 中心點
-            e.Graphics.TranslateTransform(this.pictureBox5.ClientSize.Width / 2, this.pictureBox5.ClientSize.Height / 2);
-            // 繪出 時鐘的圓形
-            e.Graphics.DrawEllipse(MyPen_Frame2, -110, -110, 220, 220);
-
-            // 繪出 時鐘的 12 個刻度
-            for (int i = 0; i < 360; i = i + 30)
-            {
-                e.Graphics.ResetTransform();
-                e.Graphics.TranslateTransform(this.pictureBox5.ClientSize.Width / 2, this.pictureBox5.ClientSize.Height / 2);
-                e.Graphics.RotateTransform(i); // 旋轉表單畫布 (每次30度)
-                e.Graphics.DrawLine(MyPen_Frame2, 100, 0, 110, 0); // 繪出 刻度
-            }
-
-            DateTime t = DateTime.Now; // 目前的時間
-
-            // 繪出 時針
-            e.Graphics.ResetTransform();
-            e.Graphics.TranslateTransform(this.pictureBox5.ClientSize.Width / 2, this.pictureBox5.ClientSize.Height / 2);
-            // 旋轉表單畫布 1個小時為30度 要把分鐘轉為小時的小數部分 
-            e.Graphics.RotateTransform(((t.Hour % 12) + (t.Minute / 60.0f)) * 30.0f);
-            e.Graphics.DrawLine(MyPen_H2, 0, 0, 0, -60);
-
-            // 繪出 分針
-            e.Graphics.ResetTransform();
-            e.Graphics.TranslateTransform(this.pictureBox5.ClientSize.Width / 2, this.pictureBox5.ClientSize.Height / 2);
-            // 旋轉表單畫布 1分鐘為6度 要把秒數轉為分鐘的小數部分
-            e.Graphics.RotateTransform((t.Minute + t.Second / 60.0f) * 6.0f);
-            e.Graphics.DrawLine(MyPen_M2, 0, 0, 0, -75);
-
-            // 繪出 秒針
-            e.Graphics.ResetTransform();
-            e.Graphics.TranslateTransform(this.pictureBox5.ClientSize.Width / 2, this.pictureBox5.ClientSize.Height / 2);
-            // 旋轉表單畫布 1秒鐘為6度
-            e.Graphics.RotateTransform(t.Second * 6.0f);
-            e.Graphics.DrawLine(MyPen_S2, 0, 0, 0, -100);
-
-            // 繪出 鬧鐘針
-            e.Graphics.ResetTransform();
-            e.Graphics.TranslateTransform(this.pictureBox5.ClientSize.Width / 2, this.pictureBox5.ClientSize.Height / 2);
-            e.Graphics.RotateTransform(alarm_Angle);
-            e.Graphics.DrawLine(MyPen_AL, 0, 0, 0, -100);
-
-            // 繪出 時鐘中心的小圓圈
-            e.Graphics.ResetTransform();
-            e.Graphics.TranslateTransform(this.pictureBox5.ClientSize.Width / 2, this.pictureBox5.ClientSize.Height / 2);
-            e.Graphics.FillEllipse(Brushes.Brown, -10, -10, 20, 20);
         }
 
         //------------------------------------------------------------  # 60個

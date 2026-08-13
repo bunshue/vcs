@@ -24,7 +24,7 @@ namespace vcs_LED_Text
 
             //------------------------------------------------------------  # 60個
 
-            //左上
+            //左
             pictureBox0.Invalidate();
 
             //右
@@ -68,7 +68,7 @@ namespace vcs_LED_Text
 
         private void pictureBox0_Paint(object sender, PaintEventArgs e)
         {
-            //左上
+            //左
             TestLeds(e.Graphics);
         }
 
@@ -169,14 +169,16 @@ namespace vcs_LED_Text
             g.Clear(pictureBox1.BackColor);
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            const float W = 100;
-            const float H = 160;
-            const float led_thickness = 15;
-            const float gap = 3;
+            float ratio = 1.5f;
+            float W = 100 * ratio;
+            float H = 160 * ratio;
+            float led_thickness = 15 * ratio;
+            float gap = 3 * ratio;
+
             int dx = (int)W + 5;
             int dy = (int)H + 5;
-            int x_st = 10;
-            int y_st = 10;
+            int x_st = 20;
+            int y_st = 20;
             PointF position = new PointF(x_st + dx * 0, y_st + dy * 0);
 
             LedText letter = new LedText(W, H, led_thickness, gap);
@@ -217,17 +219,15 @@ namespace vcs_LED_Text
 
             PointF[] ur_d = letter.MakeLed4(position);
             g.DrawPolygon(Pens.Red, ur_d);
+            g.FillPolygon(Brushes.Red, ur_d);
 
             PointF[] ll_d = letter.MakeLed9(position);
             g.DrawPolygon(Pens.Red, ll_d);
+            g.FillPolygon(Brushes.Green, ll_d);
 
             PointF[] lr_d = letter.MakeLed11(position);
             g.DrawPolygon(Pens.Red, lr_d);
-
-            PointF[] pts = lr_d;
-            //g.DrawEllipse(Pens.Red, pts[0].X - 2, pts[0].Y - 2, 4, 4);
-            //g.DrawEllipse(Pens.Green, pts[1].X - 2, pts[1].Y - 2, 4, 4);
-            //g.DrawEllipse(Pens.Blue, pts[2].X - 2, pts[2].Y - 2, 4, 4);
+            g.FillPolygon(Brushes.Blue, lr_d);
         }
 
         private void timer1_Tick(object sender, EventArgs e)

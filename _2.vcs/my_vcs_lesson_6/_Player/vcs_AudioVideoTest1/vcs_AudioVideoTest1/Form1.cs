@@ -17,14 +17,9 @@ using WMPLib;   //for mp3
 
 /*
 Beep()			會播放主機喇叭的嗶嗶聲。預設情況下，嗶聲以800赫茲頻率播放，持續200毫秒。
-Beep(Int32, Int32)	透過控制台喇叭播放指定頻率與持續時間的嗶聲。
-frequency
-Int32
-嗶聲頻率範圍從37赫茲到32767赫茲。
-
-duration
-Int32
-嗶聲的持續時間以毫秒計。
+Beep(int frequency, int duration) Beep(Int32, Int32)	透過控制台喇叭播放指定頻率與持續時間的嗶聲。
+frequency   Int32   嗶聲頻率範圍從37赫茲到32767赫茲。
+duration    Int32   嗶聲的持續時間以毫秒(msec)計。
 */
 
 namespace vcs_AudioVideoTest1
@@ -86,7 +81,6 @@ namespace vcs_AudioVideoTest1
             groupBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             groupBox2.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             groupBox3.Location = new Point(x_st + dx * 3, y_st + dy * 4);
-            groupBox4.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 4);
 
             richTextBox1.Size = new Size(400, 320);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 6);
@@ -99,6 +93,13 @@ namespace vcs_AudioVideoTest1
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -263,8 +264,9 @@ namespace vcs_AudioVideoTest1
             }
             number++;
             if (number > 4)
+            {
                 number = 0;
-
+            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -361,11 +363,6 @@ namespace vcs_AudioVideoTest1
             wplayer.controls.play();
         }
 
-        private void bt_clear_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-        }
-
         //參考/加入參考/COM 選W indows Media Player (wmp.dll)
         //using WMPLib;
         private void mp3_player_play_Click(object sender, EventArgs e)
@@ -438,7 +435,6 @@ namespace vcs_AudioVideoTest1
             //string mp3_filename = @"D:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";
 
             // TBD
-
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -505,7 +501,6 @@ namespace vcs_AudioVideoTest1
 
                 System.Console.WriteLine("备注:" + sComm);
                 richTextBox1.Text += "備註:" + sComm + "\n";
-
             }
             fs.Close();
         }
@@ -767,7 +762,6 @@ namespace vcs_AudioVideoTest1
             }
         }
 
-
         // Define the frequencies of notes in an octave, as well as silence (rest).
         protected enum Tone
         {
@@ -944,7 +938,6 @@ namespace vcs_AudioVideoTest1
             Console.Beep(mnote5, onedot);
             Console.Beep(mnote5, half);
 
-
             Console.Beep(mnote6, onedot);
             Console.Beep(mnote7, half);
             Console.Beep(hnote1, onedot);
@@ -970,7 +963,6 @@ namespace vcs_AudioVideoTest1
             Console.Beep(mnote2, half);
             Console.Beep(mnote3, half);
 
-
             Console.Beep(mnote2, onedot);
             Console.Beep(mnote1, half);
             Console.Beep(lnote6, one);
@@ -978,17 +970,22 @@ namespace vcs_AudioVideoTest1
             Console.Beep(mnote3, half);
 
             Console.Beep(mnote2, one);
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button18_Click(object sender, EventArgs e)
         {
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button19_Click(object sender, EventArgs e)
         {
         }
+
+        //------------------------------------------------------------  # 60個
 
         [DllImport("kernel32", EntryPoint = "Beep")]
         public extern static int Beep(int dwfreq, int dwduration);
@@ -1000,18 +997,32 @@ namespace vcs_AudioVideoTest1
 
             //使用一般 Beep
 
-            System.Console.Beep(400, 500);
-            System.Console.Beep(800, 500);
+            //Console.Beep(400, 500);
 
-            Console.Beep(); //蜂鳴器發聲 262Hz, 500ms
+            //Console.Beep(800, 500);
+
+            //Console.Beep(); //蜂鳴器發聲 ? Hz, ? ms
+
             //Console.Beep(262, 500); //蜂鳴器發聲 262Hz, 500ms
+
+            /*
+            int freq = 1000;  // Hz
+            int duration = 500;  // msec
+            richTextBox1.Text += "F = " + freq.ToString() + "\tT = " + duration.ToString() + "\n";
+            Console.Beep(freq, duration);
+            */
+
+            //Beep 與 雜音Beep
+            Beep(500, 300);
+            //其中的Beep就是Win API的調用，使用[DllImport("kernel32")]屬性進行調用。
+
+            for (int i = 0; i < 10; i++)
+            {
+                Beep(500 + i * 30, 100);
+            }
         }
 
-        //Beep ST
-        //[DllImport("kernel32", CharSet = CharSet.Ansi)]
-        //[DllImport("kernel32.dll")]
-        //public static extern bool Beep(int frequency, int duration);
-        //Beep(800, 3000);
+        //------------------------------------------------------------  # 60個
 
         public enum BeepType
         {
@@ -1027,18 +1038,10 @@ namespace vcs_AudioVideoTest1
 
         private void button21_Click(object sender, EventArgs e)
         {
-            //Beep 與 雜音Beep
-            Beep(500, 300);
-            //其中的Beep就是Win API的調用，使用[DllImport("kernel32")]屬性進行調用。
-
-            //雜音Beep
-            Random random = new Random();
-            for (int i = 0; i < 10; i++)
-            {
-                Beep(random.Next(10000), 100);
-            }
+            //MessageBeep
         }
-        //Beep SP
+
+        //------------------------------------------------------------  # 60個
 
         private void button22_Click(object sender, EventArgs e)
         {
@@ -1079,6 +1082,8 @@ namespace vcs_AudioVideoTest1
         {
 
         }
+
+        //------------------------------------------------------------  # 60個
 
         // The player making the current sound.
         private SoundPlayer sound_player = null;
@@ -1133,6 +1138,8 @@ namespace vcs_AudioVideoTest1
         {
             PlayWav(null, false);
         }
+
+        //------------------------------------------------------------  # 60個
 
         //PC喇叭音效 ST
 
@@ -1237,13 +1244,10 @@ namespace vcs_AudioVideoTest1
 
         //PC喇叭音效 SP
 
-        private void bt_play_tone_Click(object sender, EventArgs e)
-        {
-            int freq = int.Parse(txtFrequency.Text);
-            int duration = int.Parse(txtDuration.Text);
-            Console.Beep(freq, duration);
-        }
+        //------------------------------------------------------------  # 60個
     }
+
+    //------------------------------------------------------------  # 60個
 
     public class clsMP3TAG
     {
@@ -1281,15 +1285,12 @@ namespace vcs_AudioVideoTest1
                 Array.Copy(TAG, 93, sYear, 0, 4);
                 Array.Copy(TAG, 97, sComment, 0, 30);
                 Array.Copy(TAG, 127, sGenre, 0, 1);
-
-
             }
         }
 
-        /**/
-        //////////////////////////////////////////////////////
-        /// 以下是屬性，只讀
-        //////////////////////////////////////////////////////
+        //------------------------------------------------------------  # 60個
+
+        // 以下是屬性，唯讀
         public string Title
         {
             get
@@ -1425,6 +1426,8 @@ namespace vcs_AudioVideoTest1
         }
     }
 
+    //------------------------------------------------------------  # 60個
+
     struct Mp3Info
     {
         public string Title;  //歌曲名,30个字节     3-62 
@@ -1459,8 +1462,6 @@ namespace vcs_AudioVideoTest1
 //------------------------------  # 30個
 
 /*
-//------------------------------------------------------------  # 60個
-
 3.利用Windows Media Player
 
 	加載COM組件:ToolBox->Choose Items->COM Components->Windows Media Player
@@ -1610,7 +1611,6 @@ axWindowsMediaPlayer1.uiMode = "none";
 //Invisible, 無影像, 有無播放器介面
 axWindowsMediaPlayer1.uiMode = "invisible";
 
-
 可能因爲媒體文件的打開需要一定時間，這裏等待媒體文件的打開
 
 顯示文件播放長度。
@@ -1630,14 +1630,12 @@ Display Panel：顯示面板；
 Status Bar：狀態欄；
 　　就是這麼幾個部分，網上有資料說控件提供方法控制它們顯示與否，但是我在sdk中並沒有找到它們。唯一可以粗略控制它們的就是uiMode屬性。它的取值前面有。
 
-
 　　七、像暴風有字幕相關信息的設置，wmp控件有這個功能嗎？
 　　當然有。就是AxWindowsMediaPlayer.closedCaption。它是IWMPClosedCaption的實例。
 
 label4.Text = axMediaPlayer1.Volume.ToString();    //音量
 axMediaPlayer1.FileName = @"mms://218.98.101.164/vod/jingwei.wma";//文件路徑
 axMediaPlayer1.Play(); //開始播放
-
 
 nResL = axRealAudio1.GetPosition(); //獲得當前影片 的播放進度
 label1.Text = axRealAudio1.GetTitle();   //獲得影片的標題
@@ -1652,12 +1650,10 @@ URL:String; 指定媒體位置，本機或網絡地址
 playState:integer; 播放狀態，1=停止，2=暫停，3=播放，6=正在緩沖，9=正在連接，10=準備就緒 
 enableContextMenu:Boolean; 啟用/禁用右鍵菜單 
 
+//播放器基本控製
 
-//播放器基本控製 
-
-Ctlcontrols.next; 下一曲 
-Ctlcontrols.previous; 上一曲 
-
+Ctlcontrols.next; 下一曲
+Ctlcontrols.previous; 上一曲
 
 [settings] wmp.settings //播放器基本設置 
 settings.volume:integer; 音量，0-100       設置播放器音量
@@ -1784,5 +1780,13 @@ private void ResizeOriginal()
 }
 
 //------------------------------------------------------------  # 60個
+
+//[DllImport("kernel32", CharSet = CharSet.Ansi)]
+//[DllImport("kernel32.dll")]
+//public static extern bool Beep(int frequency, int duration);
+//Beep(800, 3000);
+
 */
+
+
 
