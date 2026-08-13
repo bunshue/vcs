@@ -28,6 +28,8 @@ namespace vcs_RichTextBox9
             richTextBox1.SelectionBullet = true;  // 設置RichTextBox控件標識項目符號的值為true
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button1_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();  // 聲明一個打開文件對話框的對象
@@ -75,13 +77,7 @@ namespace vcs_RichTextBox9
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
 

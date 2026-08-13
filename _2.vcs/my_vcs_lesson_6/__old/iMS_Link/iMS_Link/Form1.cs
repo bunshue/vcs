@@ -2006,14 +2006,14 @@ namespace iMS_Link
 
             if (flag_operation_mode == MODE_RELEASE_STAGE20)
             {
-                this.tabControl1.Size = new Size(600+200+30, 600+100);
-                this.Size = new Size(640+200+30, 730+100);
+                this.tabControl1.Size = new Size(600 + 200 + 30, 600 + 100);
+                this.Size = new Size(640 + 200 + 30, 730 + 100);
 
                 groupBox_wpt_bpt.Visible = true;
                 groupBox_wpt_bpt.Size = new Size(630 + 145, 105);
 
                 //groupBox_wpt_bpt.Location = new Point(300,460);
-                int x_st = bt_led_off.Location.X-60;
+                int x_st = bt_led_off.Location.X - 60;
                 int y_st = bt_led_off.Location.Y + bt_led_off.Height + 10;
                 groupBox_wpt_bpt.Location = new Point(x_st, y_st);
 
@@ -2074,7 +2074,7 @@ namespace iMS_Link
                 numericUpDown_denoise.Enabled = false;
                 numericUpDown_sharpness.Enabled = false;
 
-                richTextBox1.Location = new Point(richTextBox1.Location.X + 200+100, richTextBox1.Location.Y);
+                richTextBox1.Location = new Point(richTextBox1.Location.X + 200 + 100, richTextBox1.Location.Y);
 
             }
 
@@ -5330,7 +5330,7 @@ namespace iMS_Link
                             temperature_data = input[2] * 256 + input[3];
                             //richTextBox1.Text += temperature_data.ToString("X4") + "  ";
                             float temperature = ((((float)(temperature_data) / 65536.0f) / 0.00198421639f) - 273.15f);
-                            richTextBox1.Text += temperature.ToString()+" C ";
+                            richTextBox1.Text += temperature.ToString() + " C ";
                             /*
                             #define XAdcPs_RawToTemperature(AdcData)				\
                             ((((float)(AdcData)/65536.0f)/0.00198421639f ) - 273.15f)
@@ -40575,17 +40575,6 @@ namespace iMS_Link
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
 //------------------------------------------------------------
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
-
-/*  可搬出
-
-*/
-
-

@@ -19,7 +19,6 @@ namespace vcs_Explosion
             InitializeComponent();
         }
 
-
         private void Form1_Load(object sender, EventArgs e)
         {
             explore = new G2D_Explores(image, 5, 3);
@@ -51,13 +50,7 @@ namespace vcs_Explosion
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
 

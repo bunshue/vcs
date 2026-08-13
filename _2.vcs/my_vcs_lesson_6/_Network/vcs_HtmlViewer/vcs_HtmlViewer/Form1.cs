@@ -81,7 +81,6 @@ namespace vcs_HtmlViewer
             cnt++;
             //richTextBox1.Text += "webBrowser1_DocumentCompleted " + cnt.ToString() + "\n";
 
-
             //這樣再也不會發生重複執行的狀況
             richTextBox1.Text += "讀取中..." + cnt.ToString() + "\n";
             if (webBrowser1.ReadyState < WebBrowserReadyState.Complete || finished == true)
@@ -115,8 +114,6 @@ namespace vcs_HtmlViewer
             //HTML網頁顯示
             HtmlDocument doc = webBrowser1.Document;
             doc.Body.InnerHtml = richTextBox_html.Text;
-
-
         }
 
         //------------------------------------------------------------  # 60個
@@ -287,12 +284,6 @@ namespace vcs_HtmlViewer
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-

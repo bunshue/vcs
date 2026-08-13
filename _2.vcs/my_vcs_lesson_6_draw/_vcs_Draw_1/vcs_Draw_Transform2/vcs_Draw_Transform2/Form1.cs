@@ -50,7 +50,7 @@ namespace vcs_Draw_Transform2
         {
             show_item_location();
 
-            //6060
+            //------------------------------------------------------------  # 60個
 
             pictureBox0.MouseDown += new MouseEventHandler(pictureBox0_MouseDown);
             pictureBox0.MouseMove += new MouseEventHandler(pictureBox0_MouseMove);
@@ -130,7 +130,7 @@ namespace vcs_Draw_Transform2
                 this.Invalidate(); // 要求重畫
             }
             */
-            
+
             dragging = true; // 開始拖拉
         }
 
@@ -158,7 +158,7 @@ namespace vcs_Draw_Transform2
             myPen.Color = color;
             G.DrawRectangle(myPen, -size / 2, -size / 2, size, size); // 繪出矩形
         }
-        
+
         private void pictureBox0_MouseUp(object sender, MouseEventArgs e)
         {
             dragging = false; // 結束拖拉
@@ -237,11 +237,6 @@ namespace vcs_Draw_Transform2
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/

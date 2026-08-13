@@ -107,6 +107,8 @@ namespace vcs_DataGridView1
             //dataGridView1.Invalidate();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void bt_info_Click(object sender, EventArgs e)
         {
             //dataGridView1.CurrentRow.Cells[0].Value
@@ -121,6 +123,8 @@ namespace vcs_DataGridView1
             //顯示DGV內容
             show_DataGridView_content(dataGridView1);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
@@ -965,9 +969,13 @@ namespace vcs_DataGridView1
                     DataGridViewCell dgvCell = dgv[c, r];
                     richTextBox1.Text += dgvCell.Value;
                     if (c == (C - 1))
+                    {
                         richTextBox1.Text += "\n";
+                    }
                     else
+                    {
                         richTextBox1.Text += "\t";
+                    }
                 }
             }
         }
@@ -994,9 +1002,13 @@ namespace vcs_DataGridView1
                 {
                     richTextBox1.Text += dt.Rows[j].ItemArray[i];
                     if (i == (C - 1))
+                    {
                         richTextBox1.Text += "\n";
+                    }
                     else
+                    {
                         richTextBox1.Text += "\t";
+                    }
                 }
             }
         }
@@ -1125,14 +1137,9 @@ namespace vcs_DataGridView1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
- */
 
 
 /*
@@ -1141,7 +1148,7 @@ dataGridView1.DataSource = nemployees.ToList();
 WaferAdapter.Fill(WaferSet, "商品");//向數據集中填充數據
 WaferTable = WaferSet.Tables["商品"];//向數據表中填充數據
 this.dataGridView1.DataSource = WaferSet.Tables["商品"].DefaultView;//為DataGridView控件綁定數據源
-
+//------------------------------------------------------------  # 60個
 dgv1
             //// Make the columns autosize.
             //foreach (DataGridViewColumn col in dataGridView1.Columns)
@@ -1208,10 +1215,6 @@ row.Delete();
 
 //------------------------------------------------------------  # 60個
 
-
-*/
-
-
 //欄位設定
 
 //欄位顯示/不顯示
@@ -1221,7 +1224,8 @@ row.Delete();
 //dataGridView1.Columns[0].HeaderText = "编号";
 //dataGridView1.Columns[0].Name = "英文名";
 
-/*
+//------------------------------------------------------------  # 60個
+
 dataGridView1.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter; //設置對其方式   此欄置中對齊
 dataGridView1.Columns[2].DefaultCellStyle.Font = new Font(dataGridView1.DefaultCellStyle.Font, FontStyle.Italic);
 dataGridView1.Columns[3].DefaultCellStyle.Font = new Font(dataGridView1.DefaultCellStyle.Font, FontStyle.Italic);
@@ -1233,10 +1237,9 @@ cell_style.BackColor = Color.LightGreen;
 cell_style.Alignment = DataGridViewContentAlignment.MiddleRight;
 cell_style.Format = "C2";
 dataGridView1.Columns[3].DefaultCellStyle = cell_style;
-*/
 
+//------------------------------------------------------------  # 60個
 
-/*
             DataGridView1.ColumnHeadersVisible = true;
             // 設定欄標題樣式。
             DataGridViewCellStyle columnHeaderStyle = new DataGridViewCellStyle();
@@ -1272,14 +1275,9 @@ dataGridView1.Columns[3].DefaultCellStyle = cell_style;
             DataGridView3.Columns[2].Name = "電話";
             DataGridView3.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
-
-
-
                 this.DataGridView1.Rows.Clear();
                 this.DataGridView2.Rows.Clear();
                 this.DataGridView3.Rows.Clear();
-
-
 
                                 this.DataGridView1.Rows.Add(CurrentRow);
                                 this.DataGridView2.Rows.Add(CurrentRow);
@@ -1290,15 +1288,11 @@ dataGridView1.Columns[3].DefaultCellStyle = cell_style;
                 DataGridView2.Sort(DataGridView2.Columns[0], System.ComponentModel.ListSortDirection.Ascending);
                 DataGridView3.Sort(DataGridView3.Columns[0], System.ComponentModel.ListSortDirection.Ascending);
 
-*/
+//------------------------------------------------------------  # 60個
 
-
-
-/*
 vcs
 richtextbox datagridview一次寫入數千行
 拉動scroll bar會不會遲緩
 
 */
-
 

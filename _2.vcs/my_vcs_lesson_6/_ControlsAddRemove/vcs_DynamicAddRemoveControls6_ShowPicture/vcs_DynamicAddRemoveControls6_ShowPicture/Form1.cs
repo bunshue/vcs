@@ -40,6 +40,8 @@ namespace vcs_DynamicAddRemoveControls6_ShowPicture
             showPictures();
         }
 
+        //------------------------------------------------------------  # 60個
+
         void showPictures()
         {
             picture_files = GetFiles(path);
@@ -267,13 +269,7 @@ namespace vcs_DynamicAddRemoveControls6_ShowPicture
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
 

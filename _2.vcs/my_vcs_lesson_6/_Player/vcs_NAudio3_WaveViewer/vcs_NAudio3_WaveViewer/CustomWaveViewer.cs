@@ -226,3 +226,5 @@ namespace vcs_NAudio3_WaveViewer
         #endregion
     }
 }
+
+

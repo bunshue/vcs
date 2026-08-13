@@ -207,6 +207,8 @@ namespace vcs_MouseCursor1
             this.Cursor = Cursors.Default;
         }
 
+        //------------------------------------------------------------  # 60個
+
         //delay 10000 約 10秒
         //C# 不lag的延遲時間
         private void delay(int delay_milliseconds)
@@ -861,15 +863,9 @@ namespace vcs_MouseCursor1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
 
 //測試滑鼠移動
 //mouse_event(MOUSEEVENTF_MOVE,-10,-10,0,0);
@@ -1071,9 +1067,6 @@ label 之 cursor 可以改變游標指到label時，會改變的滑鼠游標。
 			}
 
 
-
-
-
 //Cursor myCursor = new Cursor(@"C:\WINDOWS\Cursors\cross_r.cur"); //自定義鼠標 
 
 //------------------------------------------------------------  # 60個
@@ -1144,7 +1137,6 @@ this.Cursor = Cursors.Hand;
 1             this.Cursor = new Cursor("C:\\test.ico"); // "C:\\test.ico" 改成您的圖檔，接受的影像格式為cur與ico
         
 //------------------------------------------------------------  # 60個
-
 
 */
 

@@ -215,15 +215,8 @@ namespace vcs_TabControl
         private void page_MouseClick(object sender, MouseEventArgs e)
         {
             Rectangle tab_rect = tabControl2.GetTabRect(0);
-            RectangleF rect = new RectangleF(
-                tab_rect.Left + tab_margin,
-                tab_rect.Y + tab_margin,
-                tab_rect.Width - 2 * tab_margin,
-                tab_rect.Height - 2 * tab_margin);
-            if (e.X >= rect.Right - Xwid &&
-                e.X <= rect.Right &&
-                e.Y >= rect.Top &&
-                e.Y <= rect.Top + Xwid)
+            RectangleF rect = new RectangleF(tab_rect.Left + tab_margin, tab_rect.Y + tab_margin, tab_rect.Width - 2 * tab_margin, tab_rect.Height - 2 * tab_margin);
+            if (e.X >= rect.Right - Xwid && e.X <= rect.Right && e.Y >= rect.Top && e.Y <= rect.Top + Xwid)
             {
                 Console.WriteLine("Tab " + 0);
                 // tabMenu.TabPages.RemoveAt(i);
@@ -263,9 +256,7 @@ namespace vcs_TabControl
             }
 
             // Allow room for margins.
-            RectangleF layout_rect = new RectangleF(
-                tab_rect.Left + tab_margin, tab_rect.Y + tab_margin,
-                tab_rect.Width - 2 * tab_margin, tab_rect.Height - 2 * tab_margin);
+            RectangleF layout_rect = new RectangleF(tab_rect.Left + tab_margin, tab_rect.Y + tab_margin, tab_rect.Width - 2 * tab_margin, tab_rect.Height - 2 * tab_margin);
             using (StringFormat string_format = new StringFormat())
             {
                 // Draw the tab # in the upper left corner.
@@ -273,8 +264,7 @@ namespace vcs_TabControl
                 {
                     string_format.Alignment = StringAlignment.Near;
                     string_format.LineAlignment = StringAlignment.Near;
-                    e.Graphics.DrawString(e.Index.ToString(),
-                        small_font, txt_brush, layout_rect, string_format);
+                    e.Graphics.DrawString(e.Index.ToString(), small_font, txt_brush, layout_rect, string_format);
                 }
 
                 // Draw the tab's text centered.
@@ -282,21 +272,15 @@ namespace vcs_TabControl
                 {
                     string_format.Alignment = StringAlignment.Center;
                     string_format.LineAlignment = StringAlignment.Center;
-                    e.Graphics.DrawString(
-                        tabControl2.TabPages[e.Index].Text,
-                        big_font, txt_brush, layout_rect, string_format);
+                    e.Graphics.DrawString(tabControl2.TabPages[e.Index].Text, big_font, txt_brush, layout_rect, string_format);
                 }
 
                 // Draw an X in the upper right corner.
                 Rectangle rect = tabControl2.GetTabRect(e.Index);
-                e.Graphics.FillRectangle(box_brush, layout_rect.Right - Xwid,
-                    layout_rect.Top, Xwid, Xwid);
-                e.Graphics.DrawRectangle(box_pen, layout_rect.Right - Xwid,
-                    layout_rect.Top, Xwid, Xwid);
-                e.Graphics.DrawLine(box_pen, layout_rect.Right - Xwid,
-                    layout_rect.Top, layout_rect.Right, layout_rect.Top + Xwid);
-                e.Graphics.DrawLine(box_pen, layout_rect.Right - Xwid,
-                    layout_rect.Top + Xwid, layout_rect.Right, layout_rect.Top);
+                e.Graphics.FillRectangle(box_brush, layout_rect.Right - Xwid, layout_rect.Top, Xwid, Xwid);
+                e.Graphics.DrawRectangle(box_pen, layout_rect.Right - Xwid, layout_rect.Top, Xwid, Xwid);
+                e.Graphics.DrawLine(box_pen, layout_rect.Right - Xwid, layout_rect.Top, layout_rect.Right, layout_rect.Top + Xwid);
+                e.Graphics.DrawLine(box_pen, layout_rect.Right - Xwid, layout_rect.Top + Xwid, layout_rect.Right, layout_rect.Top);
             }
         }
 
@@ -308,11 +292,8 @@ namespace vcs_TabControl
             {
                 // Get the TabRect plus room for margins.
                 Rectangle tab_rect = tabControl2.GetTabRect(i);
-                RectangleF rect = new RectangleF(
-                    tab_rect.Left + tab_margin, tab_rect.Y + tab_margin,
-                    tab_rect.Width - 2 * tab_margin, tab_rect.Height - 2 * tab_margin);
-                if (e.X >= rect.Right - Xwid && e.X <= rect.Right &&
-                    e.Y >= rect.Top && e.Y <= rect.Top + Xwid)
+                RectangleF rect = new RectangleF(tab_rect.Left + tab_margin, tab_rect.Y + tab_margin, tab_rect.Width - 2 * tab_margin, tab_rect.Height - 2 * tab_margin);
+                if (e.X >= rect.Right - Xwid && e.X <= rect.Right && e.Y >= rect.Top && e.Y <= rect.Top + Xwid)
                 {
                     Console.WriteLine("Removing Tab " + i);
                     // tabControl2.TabPages.RemoveAt(i);
@@ -352,13 +333,7 @@ namespace vcs_TabControl
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
 

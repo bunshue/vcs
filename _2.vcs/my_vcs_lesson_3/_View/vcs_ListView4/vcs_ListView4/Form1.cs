@@ -54,6 +54,8 @@ namespace vcs_ListView4
             richTextBox1.Clear();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void listView1_MouseMove(object sender, MouseEventArgs e)
         {
             ListViewHitTestInfo hti = listView1.HitTest(e.Location);
@@ -91,16 +93,9 @@ namespace vcs_ListView4
     }
 }
 
-
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
- */
-

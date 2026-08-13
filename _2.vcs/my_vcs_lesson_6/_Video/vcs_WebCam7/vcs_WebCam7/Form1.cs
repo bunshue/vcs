@@ -41,7 +41,7 @@ namespace vcs_WebCam7
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1 + 70);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 1 + 140);
-            button3.Location = new Point(x_st + dx * 0+210, y_st + dy * 1);
+            button3.Location = new Point(x_st + dx * 0 + 210, y_st + dy * 1);
             button4.Location = new Point(x_st + dx * 0 + 210, y_st + dy * 1 + 70);
             button5.Location = new Point(x_st + dx * 0 + 210, y_st + dy * 1 + 140);
 
@@ -221,16 +221,9 @@ namespace vcs_WebCam7
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
-
 
 /*
 Image ImgOrnek = (Image.FromFile(pic_filename) as Bitmap).Clone() as Image;

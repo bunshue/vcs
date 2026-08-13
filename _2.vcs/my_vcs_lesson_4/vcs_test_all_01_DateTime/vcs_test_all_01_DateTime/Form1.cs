@@ -2096,14 +2096,9 @@ namespace vcs_test_all_01_DateTime
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
 
 /*
 "-123年4月5日"
@@ -2119,7 +2114,8 @@ string drawDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 richTextBox1.Text += "PC時間 : " + DateTime.Now.ToString("yyyy" + '/' + "MM" + '/' + "dd ") + weekday + DateTime.Now.ToString(" HH" + ':' + "mm" + ':' + "ss");
 string filename = "imsLink_log." + DateTime.Now.ToString("yyyy.MMdd.HHmm.ss") + ".txt";
 
+//var strname=DateTime.Now.ToShortDateString().Replace("/","-")+".txt";
+
 */
 
-//var strname=DateTime.Now.ToShortDateString().Replace("/","-")+".txt";
 

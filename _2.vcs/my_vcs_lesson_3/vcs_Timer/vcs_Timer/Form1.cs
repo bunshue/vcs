@@ -204,7 +204,9 @@ namespace vcs_Timer
             label5.Text = "讀取進度： " + percentage.ToString() + " %";
             percentage++;
             if (percentage > 100)
+            {
                 percentage = 0;
+            }
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -283,12 +285,7 @@ namespace vcs_Timer
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
 

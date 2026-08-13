@@ -52,14 +52,14 @@ namespace vcs_ReadWrite_XML1C
             groupBox4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             groupBox5.Location = new Point(x_st + dx * 2, y_st + dy * 1);
 
-            richTextBox1.Size = new Size(500, H * 2+10);
+            richTextBox1.Size = new Size(500, H * 2 + 10);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             x_st = 10;
             y_st = 20;
-            dx = 180+10;
-            dy = 60+10;
+            dx = 180 + 10;
+            dy = 60 + 10;
             button00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button02.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -906,15 +906,6 @@ namespace vcs_ReadWrite_XML1C
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
-
-
-

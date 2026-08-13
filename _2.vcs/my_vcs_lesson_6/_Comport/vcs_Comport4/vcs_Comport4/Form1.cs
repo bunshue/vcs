@@ -120,7 +120,9 @@ namespace vcs_Comport4
             {
                 input = serialPort1.ReadExisting();     //從Com 1 讀出資料, 傳到 input 裡
                 if (input.Length > 0)
+                {
                     SpyMonitorRX();
+                }
             }
         }
         private void SpyMonitorRX()
@@ -149,7 +151,9 @@ namespace vcs_Comport4
             }
 
             if (COM_Ports_NameArr.Length > 0)
+            {
                 comboBox1.Text = COM_Ports_NameArr[0];
+            }
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
@@ -164,13 +168,6 @@ namespace vcs_Comport4
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
-

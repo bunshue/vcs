@@ -50,12 +50,12 @@ namespace vcs_GetFileInfo
 
             listView1.Size = new Size(W * 3 + 20, H * 11 + 10);
             pictureBox1.Size = new Size(W * 2, H * 5);
-            richTextBox1.Size = new Size(W * 2, H * 7+10);
+            richTextBox1.Size = new Size(W * 2, H * 7 + 10);
 
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             listView1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 5-40);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 5 - 40);
 
             //richTextBox1.Size = new Size(300, 690);
             //richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
@@ -136,12 +136,7 @@ namespace vcs_GetFileInfo
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
 

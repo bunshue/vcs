@@ -22,7 +22,7 @@ namespace vcs_Class2
         {
 
         }
-                
+
         private void btnOK_Click(object sender, EventArgs e)
         {
             string name = txtName.Text;
@@ -42,9 +42,6 @@ namespace vcs_Class2
             string r = txtRank.Text;
 
             tObj = new Teacher(name, age, gender, date, r);
-                       
         }
-
-       
     }
 }

@@ -25,32 +25,29 @@ namespace vcs_Password
             // Get the password from the user.
             PasswordForm frm = new PasswordForm();
             if (frm.ShowDialog() == DialogResult.Cancel)
+            {
                 this.Close();
+            }
 
             // See if the password is correct.
             string password = frm.textBox1.Text;
             if (password != "iloveims")
+            {
                 this.Close();
+            }
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
         }
-
     }
 }
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
 

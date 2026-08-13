@@ -14,7 +14,6 @@ using System.Linq;
 //   pixel values between -32768 and 32767.
 // Updated Aug 2012, to accommodate rescale-slope and rescale-intercept.
 // Updated Oct 2020 for a couple of bug fixes. 
-
 // Inspired heavily by ImageJ
 
 namespace vcs_ReadWrite_DICOM
@@ -855,12 +854,6 @@ namespace vcs_ReadWrite_DICOM
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-

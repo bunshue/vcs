@@ -204,10 +204,7 @@ namespace vcs_Draw3C
             pathList.Add(3);
             pathList.Add(4);
 
-            ball = new BallInNet(mpList, pathList,
-                5,
-                D,
-                Color.Red);
+            ball = new BallInNet(mpList, pathList, 5, D, Color.Red);
 
             //在多點網格移動的小球 SP
 
@@ -355,7 +352,6 @@ namespace vcs_Draw3C
 
             PointF pt = lob.GetPos(angle0, cx0, cy0);
             e.Graphics.FillEllipse(Brushes.Red, pt.X - 10, pt.Y - 10, 20, 20);
-
         }
 
         private void timer0_Tick(object sender, EventArgs e)
@@ -911,13 +907,6 @@ namespace vcs_Draw3C
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
-

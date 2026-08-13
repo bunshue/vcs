@@ -1632,43 +1632,40 @@ namespace vcs_OleDb1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-/*  可搬出
-
-*/
 
 /*
 //也可改成用 DataTable
 DataTable dt = new DataTable();//创建数据表
 da.Fill(dt);//填充数据表
 dgv.DataSource = dt;
-*/
 
+//------------------------------------------------------------  # 60個
 //cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\\Northwind.mdb";
 //         Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\Northwind.mdb;User ID=Admin
 
-/*          
+//------------------------------------------------------------  # 60個
+
 如果訪問的數據庫是SQL Server 7.0，只需要把上面源代碼中的一條語句：
 private static string strConnect = "Provider = Microsoft.Jet.OLEDB.4.0 ; Data Source = " + Application.StartupPath + "\\MY.MDB" ;
 改變成：
 private static string strConnect = "Provider=SQLOLEDB.1 ; Persist Security Info=False ; User ID = sa ; Initial Catalog=數據庫名稱; Data Source = 服務器名稱 " ;
 即可。
-*/
 
-/*
+//------------------------------------------------------------  # 60個
+
             db_filename = "Northwind.mdb";
 
             OleDbConnectionStringBuilder builder = new OleDbConnectionStringBuilder();
             builder["Provider"] = "Microsoft.Jet.OLEDB.4.0";
             builder["Data Source"] = "D:\\" + db_filename;
             builder["User Id"] = "Admin";
-*/
 
-/*
+//------------------------------------------------------------  # 60個
+
             // 資料庫檔案
             //db_filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\__db\_access\tt04.mdb";
             db_filename = @"D:\Northwind.mdb";
@@ -1676,13 +1673,15 @@ private static string strConnect = "Provider=SQLOLEDB.1 ; Persist Security Info=
             //cnstr = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + db_filename+ ";Uid=Admin;Pwd=jcvadmin;";              //有帳號密碼的
             //cnstr = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + db_filename+ ";Jet OLEDB:Database Password=workbill"  //有帳號密碼的
             cnstr = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + db_filename;
-*/
+
+//------------------------------------------------------------  # 60個
 
 //NG
 //string insert_cnstr = "INSERT INTO 客戶 (客戶編號, 公司名稱, 連絡人, 連絡人職稱, 地址, 城市, 行政區, 郵遞區號, 國家地區, 電話, 傳真電話) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}')";
 //sqlstr = string.Format(insert_cnstr, customer_id, company_name, "aa", "aa", "aa", "aa", "aa", "aa", "aa", "aa", "aa");
 
-/*
+//------------------------------------------------------------  # 60個
+
             OleDat = new OleDbDataAdapter("SELECT * FROM 帳目", cn);
             MaxValue = Convert.ToInt32(new OleDbCommand("SELECT COUNT(*) FROM 帳目", cn).ExecuteScalar());
 
@@ -1896,14 +1895,11 @@ Provider=Microsoft.Jet.OLEDB.4.0
 改成
 Provider=Microsoft.ACE.OLEDB.12.0
 
-
 kilo用
 Provider=Microsoft.Jet.OLEDB.4.0
 
 sugar用
 Provider=Microsoft.ACE.OLEDB.12.0
-
-
 
 ex:
             //string ConStr = "Provider=Microsoft.Jet.OLEDB.4.0;Data source='" + filename + "'";     old
@@ -1912,17 +1908,4 @@ ex:
 			//string strOdbcCon = @"Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;
 			string strOdbcCon = @"Provider=Microsoft.ACE.OLEDB.12.0;Persist Security Info=False;
 
-
-
-
-
-
-
 */
-
-
-
-
-
-
-

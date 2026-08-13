@@ -94,6 +94,8 @@ namespace vcs_Puzzle4
             richTextBox1.Clear();
         }
 
+        //------------------------------------------------------------  # 60個
+
         void print_puzzle_array(int[,] array2d)
         {
             richTextBox1.Text += "aaaaaaa = {\n";
@@ -103,9 +105,13 @@ namespace vcs_Puzzle4
                 for (i = 0; i < M; i++)
                 {
                     if (i == (M - 1))
+                    {
                         richTextBox1.Text += array2d[j, i];
+                    }
                     else
+                    {
                         richTextBox1.Text += array2d[j, i] + ", ";
+                    }
                 }
                 richTextBox1.Text += "},\n";
             }
@@ -118,9 +124,13 @@ namespace vcs_Puzzle4
             int W = box_w * M;
             int H = box_h * N;
             if (e.X >= W)
+            {
                 return;
+            }
             if (e.Y >= H)
+            {
                 return;
+            }
 
             int x = e.X / box_w;
             int y = e.Y / box_h;
@@ -1256,18 +1266,6 @@ namespace vcs_Puzzle4
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
-
-/*  可搬出
-
-*/
-
-

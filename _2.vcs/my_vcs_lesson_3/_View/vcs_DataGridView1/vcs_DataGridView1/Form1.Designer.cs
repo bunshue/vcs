@@ -417,10 +417,10 @@
             // 
             // bt_info
             // 
-            this.bt_info.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_info.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_info.Location = new System.Drawing.Point(650, 70);
             this.bt_info.Name = "bt_info";
-            this.bt_info.Size = new System.Drawing.Size(60, 32);
+            this.bt_info.Size = new System.Drawing.Size(72, 36);
             this.bt_info.TabIndex = 65;
             this.bt_info.Text = "Info";
             this.bt_info.UseVisualStyleBackColor = true;

@@ -248,18 +248,12 @@ namespace vcs_ListBox2
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-/*  可搬出
-
-*/
 /*
-
             if (listBox1.SelectedItems.Count > 0)
-
 
 移除多選的項目
             while (listBox1.SelectedIndices.Count > 0)
@@ -271,7 +265,7 @@ listBox屬性
             listBox1.SelectionMode = SelectionMode.MultiExtended;
             listBox1.HorizontalScrollbar = true;
 
-6060
+//------------------------------------------------------------  # 60個
 
 		//建立線上名單
         private string OnlineList()

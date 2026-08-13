@@ -243,7 +243,9 @@ namespace vcs_PictureBox1
                     reload_picturebox();
                 }
                 else
+                {
                     richTextBox1.Text += "已達最大放大倍率\n";
+                }
             }
             else if (flag_zoom_operation_mode == MODE_RELEASE_STAGE1)
             {
@@ -262,7 +264,9 @@ namespace vcs_PictureBox1
                     reload_picturebox();
                 }
                 else
+                {
                     richTextBox1.Text += "已達最大放大倍率\n";
+                }
             }
             else if (flag_zoom_operation_mode == MODE_RELEASE_STAGE2)
             {
@@ -282,7 +286,9 @@ namespace vcs_PictureBox1
                     reload_picturebox();
                 }
                 else
+                {
                     richTextBox1.Text += "已達最大放大倍率\n";
+                }
             }
             else if (flag_zoom_operation_mode == MODE_RELEASE_STAGE3)
             {
@@ -374,7 +380,9 @@ namespace vcs_PictureBox1
                     }
                 }
                 else
+                {
                     richTextBox1.Text += "已達最小放大倍率\n";
+                }
             }
             else if (flag_zoom_operation_mode == MODE_RELEASE_STAGE2)
             {
@@ -413,7 +421,9 @@ namespace vcs_PictureBox1
                 reload_picturebox();
             }
             else
+            {
                 richTextBox1.Text += "已達邊界最左\n";
+            }
         }
 
         private void btnRight_Click(object sender, EventArgs e)
@@ -425,7 +435,9 @@ namespace vcs_PictureBox1
                 reload_picturebox();
             }
             else
+            {
                 richTextBox1.Text += "已達邊界最右\n";
+            }
         }
 
         private void btnUp_Click(object sender, EventArgs e)
@@ -437,7 +449,9 @@ namespace vcs_PictureBox1
                 reload_picturebox();
             }
             else
+            {
                 richTextBox1.Text += "已達邊界最上\n";
+            }
         }
 
         private void btnDown_Click(object sender, EventArgs e)
@@ -449,7 +463,9 @@ namespace vcs_PictureBox1
                 reload_picturebox();
             }
             else
+            {
                 richTextBox1.Text += "已達邊界最下\n";
+            }
         }
 
         private void btnCenter_Click(object sender, EventArgs e)
@@ -523,15 +539,25 @@ namespace vcs_PictureBox1
         private void picture_mode_CheckedChanged(object sender, EventArgs e)
         {
             if (sender.Equals(radioButton1))
+            {
                 richTextBox1.Text += "你按了radioButton1\n";
+            }
             else if (sender.Equals(radioButton2))
+            {
                 richTextBox1.Text += "你按了radioButton2\n";
+            }
             else if (sender.Equals(radioButton3))
+            {
                 richTextBox1.Text += "你按了radioButton3\n";
+            }
             else if (sender.Equals(radioButton4))
+            {
                 richTextBox1.Text += "你按了radioButton4\n";
+            }
             else
+            {
                 richTextBox1.Text += "你按了未知radioButton\n";
+            }
 
             if (radioButton1.Checked == true)
             {
@@ -568,13 +594,7 @@ namespace vcs_PictureBox1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
 

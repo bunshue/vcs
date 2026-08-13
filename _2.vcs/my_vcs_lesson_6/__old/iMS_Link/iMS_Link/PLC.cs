@@ -1805,7 +1805,7 @@ namespace iMS_Link
                 points.Add(new Point(x, y));
             }
             g.DrawLines(redPen, points.ToArray());  //畫直線
-            g.DrawString("A M" + (7980 + plc_m_address_offset).ToString(), f3, new SolidBrush(Color.Green), new PointF(x_st - 70-15, H - y_st - hh * 1 - 5 - hh * 5 - dd * 5));
+            g.DrawString("A M" + (7980 + plc_m_address_offset).ToString(), f3, new SolidBrush(Color.Green), new PointF(x_st - 70 - 15, H - y_st - hh * 1 - 5 - hh * 5 - dd * 5));
 
             //畫M7981
             points.Clear();
@@ -5943,17 +5943,9 @@ namespace iMS_Link
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-
-/*  可搬出
-
-*/
-
-
 
 /*
 erase_plc_d_data("8020", 6);    //清除年月日時分秒的資料
