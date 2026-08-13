@@ -62,13 +62,14 @@ namespace vcs_RichTextBox5_RTF1
             this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button0_Click(object sender, EventArgs e)
         {
             //RTF檔案讀取到RTB
             string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_rtf\VS2013Express.rtf";
             richTextBox1.LoadFile(filename, RichTextBoxStreamType.RichText);//從指定位置加載RTF文件
             richTextBox2.Text += "開啟檔案 : " + filename + "\n";
-
 
             /*
             //以RichTextBox的LoadFile()方法載入檔案
@@ -352,12 +353,6 @@ namespace vcs_RichTextBox5_RTF1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-

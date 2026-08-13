@@ -46,6 +46,12 @@ namespace vcs_Form8_FormMove3
             pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
             pictureBox1.MouseMove += new MouseEventHandler(pictureBox1_MouseMove);
             //從pictureBox拖曳視窗 SP
+
+            //------------------------------------------------------------  # 60個
+
+            //this.MouseDown += new MouseEventHandler(MyBaseControl_MouseDown);
+            this.button4.MouseDown += new MouseEventHandler(MyBaseControl_MouseDown);
+            //this.pictureBox1.MouseDown += new MouseEventHandler(MyBaseControl_MouseDown);
         }
 
         //從pictureBox拖曳視窗 ST
@@ -123,7 +129,7 @@ namespace vcs_Form8_FormMove3
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            //由此Button用SendMessage移動窗體
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -135,20 +141,37 @@ namespace vcs_Form8_FormMove3
         {
 
         }
+
         //鼠標點擊按鈕拖動窗體 SP
+
+        //------------------------------------------------------------  # 60個
+
+        protected void MyBaseControl_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                this.Cursor = Cursors.SizeAll;
+                ReleaseCapture();
+                SendMessage(this.Handle, 0xA1, 0x2, 0);
+                this.Cursor = Cursors.Default;
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //由此Button用SendMessage移動窗體
+            //使用SendMessage, 由控件移動窗體
+
+        }
+
+        //------------------------------------------------------------  # 60個
     }
 }
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*  可搬出
-
-*/
-
 

@@ -21,40 +21,85 @@ namespace vcs_Form5_Paint
 
         }
 
-        //直接寫一個OnPaint在此, 取代Form1_Paint
-
-        private const string MENU_CAPTION = "用 OnPaint 寫字";
-        protected override void OnPaint(PaintEventArgs e)
+        //------------------------------------------------------------  # 60個
+        /*
+        protected override void OnSizeChanged(EventArgs e)
         {
-            e.Graphics.DrawRectangle(Pens.Red, 5, 5, this.ClientSize.Width - 10, this.ClientSize.Height - 10);
+            Invalidate();
+            base.OnSizeChanged(e);
 
-            // Create the font we will use to draw the text.
-            Font f = new Font("標楷體", 20, FontStyle.Bold);
-
-            // See how big the text will be.
-            SizeF text_size = e.Graphics.MeasureString(MENU_CAPTION, f);
-
-            e.Graphics.FillRectangle(Brushes.Pink, 700, 100, 100, 100);
-
-            e.Graphics.DrawString(MENU_CAPTION, f, Brushes.AliceBlue, 900, 100);
-
-            e.Graphics.FillRectangle(Brushes.LightGray, 900, 200, 100, 100);
-
-            // Draw the text.
-            e.Graphics.DrawString(MENU_CAPTION, f, Brushes.Black, 900, 200);
+            this.Text = this.Size.ToString();
         }
 
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            Pen p = new Pen(Color.Red, 10);
+            e.Graphics.DrawRectangle(p, 50, 50, this.ClientSize.Width - 100, this.ClientSize.Height - 100);
 
+            base.OnPaint(e);
+        }
+        */
+        //------------------------------------------------------------  # 60個
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            this.Invalidate();
+            //this.Refresh(); //執行 Form1_Paint()
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        //表單背景作圖, 只要補這一段就好
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+            e.Graphics.Clear(Color.Pink);
+            int W = this.ClientSize.Width;
+            int H = this.ClientSize.Height;
+            e.Graphics.DrawRectangle(Pens.Red, 50, 50, W - 50 * 2, H - 50 * 2);
+
+            Font f = new Font("微軟正黑體", 22, FontStyle.Bold);//建立字體物件
+            e.Graphics.DrawString("OnPaintBackground,\n直接寫 override", f, Brushes.Black, 100, 100);
+        }
+
+        /*
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+            //不進行背景的繪制
+        }
+        */
+
+        //------------------------------------------------------------  # 60個
+
+        /*
+        //重定義基類OnPaint()方法
+        //直接寫一個OnPaint在此, 取代Form1_Paint
+        //重寫表單的OnPaint範例, 直接寫在此即可
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            //畫邊框
+            e.Graphics.DrawRectangle(new Pen(Color.Green, 10), new Rectangle(5, 5, this.ClientSize.Width - 10, this.ClientSize.Height - 10));
+
+            //寫字
+            int x_st = 50;
+            int y_st = 150;
+            e.Graphics.DrawString("用 OnPaint 寫字", new Font("標楷體", 20, FontStyle.Italic), new SolidBrush(Color.Green), x_st, y_st);
+        }
+        */
+
+        //------------------------------------------------------------  # 60個
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawRectangle(new Pen(Color.Green, 10), new Rectangle(00, 00, this.ClientSize.Width - 1, this.ClientSize.Height - 1));    //畫邊框
+            //畫邊框
+            e.Graphics.DrawRectangle(new Pen(Color.Red, 10), new Rectangle(5, 5, this.ClientSize.Width - 10, this.ClientSize.Height - 10));
 
-            int x_st = 100;
+            //寫字
+            int x_st = 50;
             int y_st = 100;
-            e.Graphics.DrawString("用 Form1_Paint 寫字", new Font("標楷體", 20, FontStyle.Italic), new SolidBrush(Color.Red), new RectangleF(new PointF(x_st, y_st), this.Size));
-
+            e.Graphics.DrawString("用 Form1_Paint 寫字", new Font("標楷體", 20, FontStyle.Italic), new SolidBrush(Color.Red), x_st, y_st);
         }
+
+        //------------------------------------------------------------  # 60個
     }
 }
 
@@ -65,3 +110,6 @@ namespace vcs_Form5_Paint
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
+/*
+
+*/

@@ -41,6 +41,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.Create1DBtn = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.bt_clear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.barCodeImg)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,6 +57,7 @@
             // 
             // barCodeImg
             // 
+            this.barCodeImg.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.barCodeImg.Location = new System.Drawing.Point(14, 101);
             this.barCodeImg.Name = "barCodeImg";
             this.barCodeImg.Size = new System.Drawing.Size(340, 223);
@@ -163,11 +165,23 @@
             this.richTextBox1.TabIndex = 24;
             this.richTextBox1.Text = "";
             // 
+            // bt_clear
+            // 
+            this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear.Location = new System.Drawing.Point(868, 582);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(72, 36);
+            this.bt_clear.TabIndex = 206;
+            this.bt_clear.Text = "Clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(952, 630);
+            this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.Creat2DOfHaveLogoBtn);
             this.Controls.Add(this.barCodeImg);
@@ -205,6 +219,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button Create1DBtn;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button bt_clear;
     }
 }
 

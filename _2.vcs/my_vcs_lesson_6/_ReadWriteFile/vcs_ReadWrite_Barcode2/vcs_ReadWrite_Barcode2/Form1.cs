@@ -24,6 +24,13 @@ namespace vcs_ReadWrite_Barcode2
 
         }
 
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
+
         // 【生成一維碼】
         private void Create1DBtn_Click(object sender, EventArgs e)
         {
@@ -170,4 +177,10 @@ namespace vcs_ReadWrite_Barcode2
     }
 }
 
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
 

@@ -106,6 +106,7 @@ namespace vcs_Form5_AutoSize
             public int Width;
             public int Height;
         }
+
         //(2).声明 1个对象
         //注意这里不能使用控件列表记录 List nCtrl;，因为控件的关联性，记录的始终是当前的大小。
         //      public List oldCtrl= new List();//这里将西文的大于小于号都过滤掉了，只能改为中文的，使用中要改回西文
@@ -136,8 +137,9 @@ namespace vcs_Form5_AutoSize
                 oldCtrl.Add(objCtrl);
                 //**放在这里，是先记录控件本身，后记录控件的子控件
                 if (c.Controls.Count > 0)
+                {
                     AddControl(c);//窗体内其余控件还可能嵌套控件(比如panel),要单独抽出,因为要递归调用
-
+                }
             }
         }
 
@@ -183,8 +185,9 @@ namespace vcs_Form5_AutoSize
                 ctrlNo++;//累加序号
                 //**放在这里，是先缩放控件本身，后缩放控件的子控件
                 if (c.Controls.Count > 0)
+                {
                     AutoScaleControl(c, wScale, hScale);//窗体内其余控件还可能嵌套控件(比如panel),要单独抽出,因为要递归调用
-
+                }
 
                 if (ctl is DataGridView)
                 {
@@ -194,20 +197,21 @@ namespace vcs_Form5_AutoSize
                     int widths = 0;
                     for (int i = 0; i < dgv.Columns.Count; i++)
                     {
-                        dgv.AutoResizeColumn(i, DataGridViewAutoSizeColumnMode.AllCells);  // 自动调整列宽  
-                        widths += dgv.Columns[i].Width;   // 计算调整列后单元列的宽度和                       
+                        dgv.AutoResizeColumn(i, DataGridViewAutoSizeColumnMode.AllCells);  // 自动调整列宽
+                        widths += dgv.Columns[i].Width;   // 计算调整列后单元列的宽度和
                     }
-                    if (widths >= ctl.Size.Width)  // 如果调整列的宽度大于设定列宽  
-                        dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;  // 调整列的模式 自动  
+                    if (widths >= ctl.Size.Width)  // 如果调整列的宽度大于设定列宽
+                    {
+                        dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;  // 调整列的模式 自动
+                    }
                     else
-                        dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;  // 如果小于 则填充  
-
+                    {
+                        dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;  // 如果小于 则填充
+                    }
                     Cursor.Current = Cursors.Default;
                 }
-
             }
         }
     }
-
-
 }
+

@@ -945,6 +945,9 @@ namespace vcs_Draw6_String1
             string str = "放大縮小";
             int w = g.MeasureString(str, f).ToSize().Width;
             int h = g.MeasureString(str, f).ToSize().Height;
+
+            f = new Font("標楷體", 20, FontStyle.Bold);
+            SizeF text_size = g.MeasureString("AAAAAAAA", f);
         }
 
         //------------------------------------------------------------  # 60個
@@ -952,7 +955,6 @@ namespace vcs_Draw6_String1
         private void button23_Click(object sender, EventArgs e)
         {
             //MeasureString 測試
-            //MeasureString
 
             Bitmap bitmap1 = new Bitmap(640, 480);
 
@@ -1456,8 +1458,15 @@ namespace vcs_Draw6_String1
 
         private void button26_Click(object sender, EventArgs e)
         {
+            //Font 參數
+
+            Font f = new Font("標楷體", 20, FontStyle.Bold);
+            //Font f = new Font("微軟正黑體", 22, FontStyle.Bold);//建立字體物件
+
 
         }
+
+        //6060
 
         private void button27_Click(object sender, EventArgs e)
         {

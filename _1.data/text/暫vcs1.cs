@@ -1,9 +1,13 @@
 ﻿
 
-三種比較
-OnPaintBackground
+//------------------------------------------------------------  # 60個
 
-
+            Font f = new Font("微軟正黑體", 22, FontStyle.Bold);//建立字體物件
+            Rectangle rect = new Rectangle(100, 100, 400, f.Height);
+            string str = "微軟正黑體微軟正黑體";
+            e.Graphics.DrawString(str, f, Brushes.Black, rect);
+            e.Graphics.DrawRectangle(Pens.Red, rect);
+            f.Dispose();
 
 //------------------------------------------------------------  # 60個
 
@@ -18,7 +22,6 @@ Size s = new Size(500, 500);
 Bounds = new Rectangle(p, s);//窗體大小及相對於父客體的位置(0,0)
 
 //------------------------------------------------------------  # 60個
-
 
 this.SetBounds(600, 100, 700, 700);  // 設置當前表單的位置與邊界
 
@@ -56,20 +59,6 @@ public void SendToBack();
 
 //------------------------------------------------------------  # 60個
 
-        //重寫表單的OnPaint範例 直接寫在此即可
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            e.Graphics.DrawString("使用\nOnPaint", new Font("標楷體", 14), new SolidBrush(Color.Red), new PointF(this.ClientSize.Width - 80, this.ClientSize.Height - 50));
-            e.Graphics.DrawRectangle(Pens.Red, 5, 5, this.ClientSize.Width - 10, this.ClientSize.Height - 10);
-        }
-
-        protected override void OnPaintBackground(PaintEventArgs e)
-        {
-            //不進行背景的繪制
-        }
-
-//------------------------------------------------------------  # 60個
-
 //pbox 的 剪下
 //剪下 = 複製到剪貼簿 + 把選取區域塗成背景色
 SolidBrush br = new SolidBrush(pictureBox1.BackColor)
@@ -88,7 +77,6 @@ http://www.lingoes.net/en/translator/codepage.htm
 
 Slate blue (石板藍) 是一種將涼爽的藍色與沉穩的灰色相結合的中等暗色調藍灰色。
 它的常見十六進制代碼（HEX）為 #557C99 或 #5B7C99，給人一種平靜、柔和且精緻的感覺。
-
 
             button24.BackColor = default(Color);
             button24.UseVisualStyleBackColor = true;
@@ -132,36 +120,6 @@ throw new Exception("行數不能小於0");
 
 我的電腦已經裝了藍芽接收器，我要如何得知目前有多少藍芽裝置呢?
 請用 Visual C# 程式來查詢目前能找到的藍芽裝置
-
-//------------------------------------------------------------  # 60個
-
-                string pws = Md5(str, 32);//MD5加密
-                File.AppendAllText(filename, "," + pws + "\r\n");
-
-
-        /// <summary>
-        /// MD5加密
-        /// </summary>
-        /// <param name="str">加密字元</param>
-        /// <param name="code">加密位數16/32</param>
-        /// <returns></returns>
-        public static string Md5(string str, int code)
-        {
-            string strEncrypt = string.Empty;
-
-            MD5 md5 = new MD5CryptoServiceProvider();
-            byte[] fromData = Encoding.GetEncoding("GB2312").GetBytes(str);
-            byte[] targetData = md5.ComputeHash(fromData);
-            for (int i = 0; i < targetData.Length; i++)
-            {
-                strEncrypt += targetData[i].ToString("X2");
-            }
-            if (code == 16)
-            {
-                strEncrypt = strEncrypt.Substring(8, 16);
-            }
-            return strEncrypt;
-        }
 
 //------------------------------------------------------------  # 60個
 
@@ -2619,6 +2577,20 @@ P2P，英文Peer-to-Peer的縮寫，中譯為對等互聯或點對點技術。
 下面是程序中具體實現代碼：
 button1.MouseLeave += new Syetem.EvenHandler（button1_MLeave）；
 
+//3030
+
+C# DoubleClick與MouseDoubleClick區別，雙擊事件引發順序
+DoubleClick 事件 在雙擊控件時發生。處理時不包含任何事件數據.
+MouseDoubleClick 事件 當用鼠標雙擊控件時發生。通過事件所包含的MouseEventArgs 對象,可以獲取鼠標數據.
+
+Click 事件。
+DoubleClick 事件。
+MouseClick 事件。
+MouseDoubleClick 事件。
+MouseDown 事件。
+MouseMove 事件。
+MouseUp 事件。
+
 //------------------------------------------------------------  # 60個
 
         //實現控件中捕獲按鍵 只要補上這個函數就好
@@ -4195,10 +4167,6 @@ XML 註解	<!-- --> 的內容。
 
 //------------------------------------------------------------  # 60個
 
-this.Refresh() ; //執行 Form1_Paint()
-
-//------------------------------------------------------------  # 60個
-
 vcs
 Form2的元件的Modifiers要改成Internal, 預設為private
 
@@ -4556,24 +4524,6 @@ https://git-scm.com/book/zh/v2
 
 CSharp编程大全
 https://cloud.tencent.com/developer/column/88848
-
-//------------------------------------------------------------  # 60個
-
-C# DoubleClick與MouseDoubleClick區別，雙擊事件引發順序
-DoubleClick 事件 在雙擊控件時發生。處理時不包含任何事件數據.
-MouseDoubleClick 事件 當用鼠標雙擊控件時發生。通過事件所包含的MouseEventArgs 對象,可以獲取鼠標數據.
-
-從邏輯上來說,由於比MouseDoubleClick 描述更抽象，DoubleClick 事件是控件的更高級別的事件,
-
-事件引發的順序:
-MouseDown 事件。
-Click 事件。
-MouseClick 事件。
-MouseUp 事件。
-MouseDown 事件。
-DoubleClick 事件。
-MouseDoubleClick 事件。
-MouseUp 事件。 
 
 //------------------------------------------------------------  # 60個
 
@@ -7321,44 +7271,6 @@ string filename = @"D:\_git\vcs\_1.data\______test_files1\__text\war_and_peace.t
 // 欲刪除關鍵字 d10d dddddddddd
 //------------------------------------------------------------  # 60個
 
-Paint
-        Graphics g;                 // 繪圖區
-        Pen pen;                    // 畫筆
-        bool isMouseDown = false;   // 紀錄滑鼠是否被按下
-        List<Point> points = new List<Point>(); // 紀錄滑鼠軌跡的陣列。
-
-        public Form1()
-        {
-            InitializeComponent();
-
-            g = this.CreateGraphics(); // 取得繪圖區物件
-            pen = new Pen(Color.Black, 3); // 設定畫筆為黑色、粗細為 3 點。
-        }
-
-        private void Form1_MouseDown(object sender, MouseEventArgs e)
-        {
-            isMouseDown = true; // 滑鼠被按下後設定旗標值。
-            points.Add(e.Location); // 將點加入到 points 陣列當中。
-        }
-
-        private void Form1_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (isMouseDown) // 如果滑鼠被按下
-            {
-                points.Add(e.Location); // 將點加入到 points 陣列當中。
-                // 畫出上一點到此點的線段。
-                g.DrawLine(pen, points[points.Count - 2], points[points.Count - 1]);
-            }
-        }
-
-        private void Form1_MouseUp(object sender, MouseEventArgs e)
-        {
-            points.Add(new Point(-1, -1)); // 滑鼠放開時，插入一個斷點 (-1,-1)，以代表前後兩點之間有斷開。
-            isMouseDown = false; // 滑鼠已經沒有被按下了。
-        }
-
-//------------------------------------------------------------  # 60個      
-
         //禁止使用 Alt + F4 關閉表單
         //需表單上沒有其他控件才能使用
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -7705,8 +7617,5 @@ this.Bounds = Screen.PrimaryScreen.Bounds;
 //------------------------------------------------------------  # 60個
 
 //            g.DrawRectangle(Pens.Black, bounds.X, bounds.Y, bounds.Width, bounds.Height);
-
-
-
 
 

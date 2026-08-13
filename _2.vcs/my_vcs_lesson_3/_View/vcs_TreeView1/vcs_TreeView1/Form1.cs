@@ -439,17 +439,11 @@ namespace vcs_TreeView1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-/*  可搬出
-
-*/
-
 /*
-            
 treeView1 + treeView1_AfterSelect
         // Display the appropriate Panel.
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
@@ -506,11 +500,9 @@ vcs_Splitter
 最後添加ListView控件，命名為listView，Dock屬性設為Fill。
 Splitter(用於允許用戶調整TreeView和ListView的大小)；
 
-*/
-
 //------------------------------------------------------------  # 60個
 
-/* treeview
+// treeview
             treeView1.Nodes.Clear();//清空treeView1原有的數據內容
             TreeNode root = treeView1.Nodes.Add("產品名稱");  // 為treeView1控件添加根節點
 

@@ -135,6 +135,9 @@ namespace vcs_Cryptography1
             str_encrypted_text = MD5_Ecnrypt03(str_clear_text);
             richTextBox1.Text += "03m明碼 : " + str_clear_text + "\t密碼 : " + str_encrypted_text + "\t長度 : " + str_encrypted_text.Length.ToString() + " 拜\n";
 
+            str_encrypted_text = MD5_Ecnrypt04(str_clear_text, 32);
+            richTextBox1.Text += "04m明碼 : " + str_clear_text + "\t密碼 : " + str_encrypted_text + "\t長度 : " + str_encrypted_text.Length.ToString() + " 拜\n";
+
             str_encrypted_text = MD5_Ecnrypt20(str_clear_text);
             richTextBox1.Text += "20m明碼 : " + str_clear_text + "\t密碼 : " + str_encrypted_text + "\t長度 : " + str_encrypted_text.Length.ToString() + " 拜\n";
 
@@ -791,6 +794,29 @@ namespace vcs_Cryptography1
             byte[] input = Encoding.UTF8.GetBytes(str);  // 字串轉拜列, 中文字要先用 UTF8轉碼
             byte[] md5Hash = md5.ComputeHash(input);  // 算拜列之Hash值
             return BytesToString(md5Hash);  // Hash拜列轉字串
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        /// MD5加密
+        /// <param name="str">加密字元</param>
+        /// <param name="code">加密位數16/32</param>
+        public static string MD5_Ecnrypt04(string str, int code)
+        {
+            string strEncrypt = string.Empty;
+
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] fromData = Encoding.GetEncoding("GB2312").GetBytes(str);
+            byte[] targetData = md5.ComputeHash(fromData);
+            for (int i = 0; i < targetData.Length; i++)
+            {
+                strEncrypt += targetData[i].ToString("X2");
+            }
+            if (code == 16)
+            {
+                strEncrypt = strEncrypt.Substring(8, 16);
+            }
+            return strEncrypt;
         }
 
         //------------------------------------------------------------  # 60個
