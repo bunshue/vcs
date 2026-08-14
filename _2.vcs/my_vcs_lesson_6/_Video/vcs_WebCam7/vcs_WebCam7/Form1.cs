@@ -27,6 +27,15 @@ namespace vcs_WebCam7
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
+            Init_WebcamSetup();
+
+            Start_Webcam();
+
+            //------------------------------------------------------------  # 60個
+
         }
 
         void show_item_location()
@@ -147,15 +156,16 @@ namespace vcs_WebCam7
             GC.Collect();       //回收資源
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button0_Click(object sender, EventArgs e)
         {
-            Init_WebcamSetup();
-            Start_Webcam();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Stop_Webcam();
         }
 
         //------------------------------------------------------------  # 60個
@@ -243,4 +253,6 @@ writer.Open(filename, width, height, this.Videofps, VideoCodec.MPEG4);
 
 
 
+
+// Stop_Webcam();
 

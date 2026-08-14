@@ -547,48 +547,37 @@ namespace vcs_Thread
 
         //Thread使用範例 時鐘 ST
 
-        //委派function
-        public delegate void InvokeFunction(int h, int m, int s);
-        //設定時間
-        public void setTime(int h, int m, int s)
+        public void setResult(int value)
         {
-            setHH(h);
-            setMM(m);
-            setSS(s);
+            lb_thread.Text = "結果 : " + value.ToString();
         }
 
-        public void setHH(int h)
-        {
-            this.label1.Text = h.ToString();
-        }
-        public void setMM(int m)
-        {
-            this.label2.Text = m.ToString();
-        }
-        public void setSS(int s)
-        {
-            this.label3.Text = s.ToString();
-        }
+        //委派function
+        public delegate void InvokeFunction(int value);
 
         private ChangeTime timechange;
 
-        private void bt_clock_st_Click(object sender, EventArgs e)
+        private void bt_start_Click(object sender, EventArgs e)
         {
             //啟動時鐘
             //產生一個類別，專門來管理時間運作
             timechange = new ChangeTime(this);
-            //timechange.change();
 
-            //使用一個thread來增加時間的秒數
-            Thread thread_clock = new Thread(new ThreadStart(timechange.run));
-            thread_clock.Start();
+            Thread th = new Thread(new ThreadStart(timechange.run));
+            th.Start();
         }
 
-        private void bt_clock_sp_Click(object sender, EventArgs e)
+        private void bt_stop_Click(object sender, EventArgs e)
         {
-            //關閉時鐘
             if (timechange != null)
+            {
                 timechange.stop();
+            }
+        }
+
+        private void bt_reset_Click(object sender, EventArgs e)
+        {
+
         }
 
         //Thread使用範例 時鐘 SP
@@ -759,10 +748,31 @@ namespace vcs_Thread
 
         //------------------------------------------------------------  # 60個
 
+        private void MotionReaction()
+        {
+            richTextBox1.Text += "建立一個Thread : " + Thread.CurrentThread.Name + "\n";
+
+            for (int i = 0; i < 5; i++)
+            {
+                richTextBox1.Text += Thread.CurrentThread.Name + " ";
+                Thread.Sleep(1000);
+            }
+
+            richTextBox1.Text += "Thread : " + Thread.CurrentThread.Name + ", 完成\n";
+        }
+
+        int thread_index = 0;
         private void button143_Click(object sender, EventArgs e)
         {
             //新進 3
 
+            // 累計建立多個thread
+
+            Thread th = new Thread(MotionReaction);
+            th.Name = thread_index.ToString();  // 設置這個線程的名字
+            th.Start();
+
+            thread_index++;
         }
 
         //------------------------------------------------------------  # 60個
@@ -780,7 +790,6 @@ namespace vcs_Thread
             //新進 5
 
         }
-
         //------------------------------------------------------------  # 60個
     }
 
@@ -792,21 +801,18 @@ namespace vcs_Thread
 
         private Boolean state = true;
 
-        private int h;
-        private int m;
-        private int s;
+        private int value;
 
         public ChangeTime(Form1 form1)
         {
             this.form = form1;
-            //設定預設的起始時間
+
+            //設定數值
             DateTime date = DateTime.Now;
-            h = date.Hour;
-            m = date.Minute;
-            s = date.Second;
+            value = date.Second;
         }
 
-        //停止thread,在fomr Dispose時要把thread也設定關掉
+        //停止thread,在form Dispose時要把thread也設定關掉
         public void stop()
         {
             state = false;
@@ -814,29 +820,15 @@ namespace vcs_Thread
 
         public void run()
         {
-            while (state)
+            while (state == true)
             {
-                s++;
-                if (s / 60 == 1)
-                {
-                    s = s - 60;
-                    m++;
-                    if (m / 60 == 1)
-                    {
-                        m = m - 60;
-                        h++;
-                        if (h / 24 == 1)
-                        {
-                            h = h - 24;
-                        }
-                    }
-                }
+                value++;
 
                 //一定要使用form裡的thread才可以變動form上的元件內容，其它thread更動時會有問題
                 //利用invoke來執行form的thread
                 if (state)//如果已經Dispose掉了就不再invoke了
                 {
-                    form.Invoke(new Form1.InvokeFunction(form.setTime), new object[] { h, m, s });
+                    form.Invoke(new Form1.InvokeFunction(form.setResult), new object[] { value });
                 }
                 //一秒執行一次
                 Thread.Sleep(1000);//停一秒
@@ -878,7 +870,6 @@ Console.Write("XX ");
                 MessageBox.Show("本程式一次只能運行一個實例！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);//彈出提示信息
                 this.Close();//關閉當前窗体
             }
-
         }
 
 //------------------------------------------------------------  # 60個

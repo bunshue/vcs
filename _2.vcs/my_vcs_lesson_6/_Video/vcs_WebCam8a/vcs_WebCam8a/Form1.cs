@@ -92,8 +92,10 @@ namespace vcs_WebCam8a
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
-
+            richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void StartWebCam()
         {
@@ -124,6 +126,8 @@ namespace vcs_WebCam8a
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button0_Click(object sender, EventArgs e)
         {
             // 停止視訊裝置
@@ -136,27 +140,24 @@ namespace vcs_WebCam8a
             SendMessage(hwnd, WM_CAP_SEQUENCE, 0, 0);
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button1_Click(object sender, EventArgs e)
         {
-
             string file = Directory.GetCurrentDirectory() + "\\file.avi";
 
             // 儲存影像
             SendMessage(hwnd, WM_CAP_FILE_SAVEAS, 0, file);
 
             MessageBox.Show("影像已被儲存至" + file, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
             // 停止視訊裝置
             SendMessage(hwnd, WM_CAP_DRIVER_DISCONNECT, device, 0);
             DestroyWindow(hwnd);
-
         }
-
     }
 }
 

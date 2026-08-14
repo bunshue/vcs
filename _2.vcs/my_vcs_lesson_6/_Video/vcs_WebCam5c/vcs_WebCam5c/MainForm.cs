@@ -51,10 +51,10 @@ namespace vcs_WebCam5c
             USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice); //實例化對象
 
             webcam_count = USBWebcams.Count;
+            richTextBox1.Text += "找到 " + webcam_count.ToString() + " 台WebCam\n";
 
             int i;
             /*
-            richTextBox1.Text += "找到 " + webcam_count.ToString() + " 台WebCam\n";
 
             richTextBox1.Text += "USBWebcams.Capacity : " + USBWebcams.Capacity.ToString() + "\n";
             richTextBox1.Text += "USBWebcams.Count : " + USBWebcams.Count.ToString() + "\n";
@@ -116,17 +116,13 @@ namespace vcs_WebCam5c
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //離開程式前, 關閉相機(錄影與播放)
-            for (int i = 0; i < 4; i++)
+            //離開程式前, 關閉相機
+            try
             {
-                try
-                {
-                    CamMonitor.StopRecording();
-                    CamMonitor.StopCapture();
-                }
-                catch (Exception ex)
-                {
-                }
+                this.CamMonitor.StopCapture();
+            }
+            catch (Exception ex)
+            {
             }
         }
     }

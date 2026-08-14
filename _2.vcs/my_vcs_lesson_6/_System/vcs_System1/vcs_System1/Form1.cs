@@ -123,16 +123,11 @@ namespace vcs_System1
             button37.Location = new Point(x_st + dx * 3, y_st + dy * 7);
             button38.Location = new Point(x_st + dx * 3, y_st + dy * 8);
             button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
-            button40.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            button41.Location = new Point(x_st + dx * 4, y_st + dy * 1);
-            button42.Location = new Point(x_st + dx * 4, y_st + dy * 2);
-            button43.Location = new Point(x_st + dx * 4, y_st + dy * 3);
 
             listView1.Size = new Size(720, 410);
-            listView1.Location = new Point(x_st + dx * 4, y_st + dy * 4 + 5);
-
-            richTextBox1.Size = new Size(300 + 210, 690 - 420);
-            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            listView1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            richTextBox1.Size = new Size(720, 690 - 420);
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 6);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1600, 750);
@@ -728,7 +723,7 @@ namespace vcs_System1
         {
             //取得程式編譯時間
             richTextBox1.Text += "編譯時間 : " + GetLinkerTime() + "\n";
-            
+
             string exe_filename = Assembly.GetExecutingAssembly().Location;
             richTextBox1.Text += "filePath : " + exe_filename + "\n";
 
@@ -1143,15 +1138,132 @@ namespace vcs_System1
 
         private void button18_Click(object sender, EventArgs e)
         {
+            //列出 Locales 1
+            richTextBox1.Text += "共有 " + CultureInfo.GetCultures(CultureTypes.AllCultures).Length.ToString() + " 筆Locale\n";
+
+            // Add the locale information.
+            foreach (CultureInfo info in CultureInfo.GetCultures(CultureTypes.AllCultures))
+            {
+                richTextBox1.Text += info.EnglishName + '\t' + info.NativeName + "\n";
+            }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button19_Click(object sender, EventArgs e)
         {
+            //列出 Locales 2
+            // Save the culture (to make the following code shorter).
+            CultureInfo info = CultureInfo.InstalledUICulture;
+
+            // Day/Month values.
+            AddHeader("Day/Month:");
+            AddArrayItems("Day", info.DateTimeFormat.DayNames);
+            AddArrayItems("Abbrev Day", info.DateTimeFormat.AbbreviatedDayNames);
+            AddArrayItems("Short Days", info.DateTimeFormat.ShortestDayNames);
+            AddArrayItems("Month", info.DateTimeFormat.MonthNames);
+            AddArrayItems("Abbrev Month", info.DateTimeFormat.AbbreviatedMonthNames);
+
+            // Date/Time values.
+            AddHeader("Date/Time Format:");
+            AddItem("AMDesignator", info.DateTimeFormat.AMDesignator);
+            AddItem("DateSeparator", info.DateTimeFormat.DateSeparator);
+            AddItem("FirstDayOfWeek", info.DateTimeFormat.FirstDayOfWeek.ToString());
+            AddItem("FullDateTimePattern", info.DateTimeFormat.FullDateTimePattern);
+            AddItem("LongDatePattern", info.DateTimeFormat.LongDatePattern);
+            AddItem("LongTimePattern", info.DateTimeFormat.LongTimePattern);
+            AddItem("MonthDayPattern", info.DateTimeFormat.MonthDayPattern);
+            AddItem("NativeCalendarName", info.DateTimeFormat.NativeCalendarName);
+            AddItem("PMDesignator", info.DateTimeFormat.PMDesignator);
+            AddItem("RFC1123Pattern", info.DateTimeFormat.RFC1123Pattern);
+            AddItem("ShortDatePattern", info.DateTimeFormat.ShortDatePattern);
+            AddItem("ShortTimePattern", info.DateTimeFormat.ShortTimePattern);
+            AddItem("SortableDateTimePattern", info.DateTimeFormat.SortableDateTimePattern);
+            AddItem("TimeSeparator", info.DateTimeFormat.TimeSeparator);
+
+            // Culture values.
+            AddHeader("Culture:");
+            AddItem("Culture Name", info.Name);
+            AddItem("Culture Native Name", info.NativeName);
+            AddItem("Culture Display Name", info.DisplayName);
+            AddItem("Culture English Name", info.EnglishName);
+            AddItem("IetfLanguageTag", info.IetfLanguageTag);
+            AddItem("IsNeutralCulture", info.IsNeutralCulture.ToString());
+
+            // Currency values.
+            AddHeader("Currency Format:");
+            AddItem("Decimal Digits", info.NumberFormat.CurrencyDecimalDigits.ToString());
+            AddItem("Decimal Separator", info.NumberFormat.CurrencyDecimalSeparator);
+            AddItem("Group Separator", info.NumberFormat.CurrencyGroupSeparator);
+            AddIntegerArrayItems("Group Size", info.NumberFormat.CurrencyGroupSizes);
+            AddItem("Negative Pattern", info.NumberFormat.CurrencyNegativePattern.ToString());
+            AddItem("Positive Pattern", info.NumberFormat.CurrencyPositivePattern.ToString());
+            AddItem("Currency Symbol", info.NumberFormat.CurrencySymbol);
+
+            // Number values.
+            AddHeader("Number Format:");
+            AddItem("NaN", info.NumberFormat.NaNSymbol);
+            AddArrayItems("Native Digits", info.NumberFormat.NativeDigits);
+            AddItem("Infinity Symbol", info.NumberFormat.NegativeInfinitySymbol);
+            AddItem("Negative Sign", info.NumberFormat.NegativeSign);
+            AddItem("Decimal Separator", info.NumberFormat.NumberDecimalSeparator);
+            AddItem("Group Separator", info.NumberFormat.NumberGroupSeparator);
+            AddIntegerArrayItems("Group Size", info.NumberFormat.PercentGroupSizes);
+            AddItem("Negative Pattern", info.NumberFormat.NumberNegativePattern.ToString());
+            AddItem("Positive Infinity Symbol", info.NumberFormat.PositiveInfinitySymbol);
+            AddItem("Positive Sign", info.NumberFormat.PositiveSign);
+
+            // Percent values.
+            AddHeader("Percent Format:");
+            AddItem("Decimal Digits", info.NumberFormat.PercentDecimalDigits.ToString());
+            AddItem("Decimal Separator", info.NumberFormat.PercentDecimalSeparator);
+            AddItem("Group Separator", info.NumberFormat.PercentGroupSeparator);
+            AddIntegerArrayItems("Group Size", info.NumberFormat.PercentGroupSizes);
+            AddItem("Negative Pattern", info.NumberFormat.PercentNegativePattern.ToString());
+            AddItem("Positive Pattern", info.NumberFormat.PercentPositivePattern.ToString());
+            AddItem("Percent Symbol", info.NumberFormat.PercentSymbol);
+            AddItem("PerMilleSymbol", info.NumberFormat.PerMilleSymbol);
         }
+
+        // Add a header row.
+        private void AddHeader(string name)
+        {
+            richTextBox1.Text += "\n--------------------\t" + name + "\t--------------------\n";
+        }
+
+        // Add a value to the result.
+        private void AddItem(string name, string value)
+        {
+            richTextBox1.Text += name + "\t" + value + "\n";
+        }
+
+        // Add all values in an array.
+        private void AddArrayItems(string name, string[] values)
+        {
+            for (int i = 0; i < values.Length; i++)
+            {
+                AddItem(name + "[" + i + "]", values[i]);
+                //richTextBox1.Text += name + "[" + i + "]" + "\t" + values[i] + "\n";
+            }
+        }
+
+        // Add all values in an integer array.
+        private void AddIntegerArrayItems(string name, int[] values)
+        {
+            for (int i = 0; i < values.Length; i++)
+            {
+                AddItem(name + "[" + i + "]", values[i].ToString());
+                //richTextBox1.Text += name + "[" + i + "]" + "\t" + values[i].ToString() + "\n";
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void button20_Click(object sender, EventArgs e)
         {
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button21_Click(object sender, EventArgs e)
         {
@@ -1600,143 +1712,6 @@ namespace vcs_System1
         //隱藏任務欄, 顯示任務欄 SP
 
         //------------------------------------------------------------  # 60個
-
-        private void button40_Click(object sender, EventArgs e)
-        {
-            //列出 Locales 1
-            richTextBox1.Text += "共有 " + CultureInfo.GetCultures(CultureTypes.AllCultures).Length.ToString() + " 筆Locale\n";
-
-            // Add the locale information.
-            foreach (CultureInfo info in CultureInfo.GetCultures(CultureTypes.AllCultures))
-            {
-                richTextBox1.Text += info.EnglishName + '\t' + info.NativeName + "\n";
-            }
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button41_Click(object sender, EventArgs e)
-        {
-            //列出 Locales 2
-            // Save the culture (to make the following code shorter).
-            CultureInfo info = CultureInfo.InstalledUICulture;
-
-            // Day/Month values.
-            AddHeader("Day/Month:");
-            AddArrayItems("Day", info.DateTimeFormat.DayNames);
-            AddArrayItems("Abbrev Day", info.DateTimeFormat.AbbreviatedDayNames);
-            AddArrayItems("Short Days", info.DateTimeFormat.ShortestDayNames);
-            AddArrayItems("Month", info.DateTimeFormat.MonthNames);
-            AddArrayItems("Abbrev Month", info.DateTimeFormat.AbbreviatedMonthNames);
-
-            // Date/Time values.
-            AddHeader("Date/Time Format:");
-            AddItem("AMDesignator", info.DateTimeFormat.AMDesignator);
-            AddItem("DateSeparator", info.DateTimeFormat.DateSeparator);
-            AddItem("FirstDayOfWeek", info.DateTimeFormat.FirstDayOfWeek.ToString());
-            AddItem("FullDateTimePattern", info.DateTimeFormat.FullDateTimePattern);
-            AddItem("LongDatePattern", info.DateTimeFormat.LongDatePattern);
-            AddItem("LongTimePattern", info.DateTimeFormat.LongTimePattern);
-            AddItem("MonthDayPattern", info.DateTimeFormat.MonthDayPattern);
-            AddItem("NativeCalendarName", info.DateTimeFormat.NativeCalendarName);
-            AddItem("PMDesignator", info.DateTimeFormat.PMDesignator);
-            AddItem("RFC1123Pattern", info.DateTimeFormat.RFC1123Pattern);
-            AddItem("ShortDatePattern", info.DateTimeFormat.ShortDatePattern);
-            AddItem("ShortTimePattern", info.DateTimeFormat.ShortTimePattern);
-            AddItem("SortableDateTimePattern", info.DateTimeFormat.SortableDateTimePattern);
-            AddItem("TimeSeparator", info.DateTimeFormat.TimeSeparator);
-
-            // Culture values.
-            AddHeader("Culture:");
-            AddItem("Culture Name", info.Name);
-            AddItem("Culture Native Name", info.NativeName);
-            AddItem("Culture Display Name", info.DisplayName);
-            AddItem("Culture English Name", info.EnglishName);
-            AddItem("IetfLanguageTag", info.IetfLanguageTag);
-            AddItem("IsNeutralCulture", info.IsNeutralCulture.ToString());
-
-            // Currency values.
-            AddHeader("Currency Format:");
-            AddItem("Decimal Digits", info.NumberFormat.CurrencyDecimalDigits.ToString());
-            AddItem("Decimal Separator", info.NumberFormat.CurrencyDecimalSeparator);
-            AddItem("Group Separator", info.NumberFormat.CurrencyGroupSeparator);
-            AddIntegerArrayItems("Group Size", info.NumberFormat.CurrencyGroupSizes);
-            AddItem("Negative Pattern", info.NumberFormat.CurrencyNegativePattern.ToString());
-            AddItem("Positive Pattern", info.NumberFormat.CurrencyPositivePattern.ToString());
-            AddItem("Currency Symbol", info.NumberFormat.CurrencySymbol);
-
-            // Number values.
-            AddHeader("Number Format:");
-            AddItem("NaN", info.NumberFormat.NaNSymbol);
-            AddArrayItems("Native Digits", info.NumberFormat.NativeDigits);
-            AddItem("Infinity Symbol", info.NumberFormat.NegativeInfinitySymbol);
-            AddItem("Negative Sign", info.NumberFormat.NegativeSign);
-            AddItem("Decimal Separator", info.NumberFormat.NumberDecimalSeparator);
-            AddItem("Group Separator", info.NumberFormat.NumberGroupSeparator);
-            AddIntegerArrayItems("Group Size", info.NumberFormat.PercentGroupSizes);
-            AddItem("Negative Pattern", info.NumberFormat.NumberNegativePattern.ToString());
-            AddItem("Positive Infinity Symbol", info.NumberFormat.PositiveInfinitySymbol);
-            AddItem("Positive Sign", info.NumberFormat.PositiveSign);
-
-            // Percent values.
-            AddHeader("Percent Format:");
-            AddItem("Decimal Digits", info.NumberFormat.PercentDecimalDigits.ToString());
-            AddItem("Decimal Separator", info.NumberFormat.PercentDecimalSeparator);
-            AddItem("Group Separator", info.NumberFormat.PercentGroupSeparator);
-            AddIntegerArrayItems("Group Size", info.NumberFormat.PercentGroupSizes);
-            AddItem("Negative Pattern", info.NumberFormat.PercentNegativePattern.ToString());
-            AddItem("Positive Pattern", info.NumberFormat.PercentPositivePattern.ToString());
-            AddItem("Percent Symbol", info.NumberFormat.PercentSymbol);
-            AddItem("PerMilleSymbol", info.NumberFormat.PerMilleSymbol);
-        }
-
-        // Add a header row.
-        private void AddHeader(string name)
-        {
-            richTextBox1.Text += "\n--------------------\t" + name + "\t--------------------\n";
-        }
-
-        // Add a value to the result.
-        private void AddItem(string name, string value)
-        {
-            richTextBox1.Text += name + "\t" + value + "\n";
-        }
-
-        // Add all values in an array.
-        private void AddArrayItems(string name, string[] values)
-        {
-            for (int i = 0; i < values.Length; i++)
-            {
-                AddItem(name + "[" + i + "]", values[i]);
-                //richTextBox1.Text += name + "[" + i + "]" + "\t" + values[i] + "\n";
-            }
-        }
-
-        // Add all values in an integer array.
-        private void AddIntegerArrayItems(string name, int[] values)
-        {
-            for (int i = 0; i < values.Length; i++)
-            {
-                AddItem(name + "[" + i + "]", values[i].ToString());
-                //richTextBox1.Text += name + "[" + i + "]" + "\t" + values[i].ToString() + "\n";
-            }
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button42_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button43_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        //------------------------------------------------------------  # 60個
     }
 
     //------------------------------------------------------------  # 60個
@@ -2096,8 +2071,3 @@ Guid.NewGuid().ToString()
 Guid.NewGuid().ToString()
         Random rand = new Random(Guid.NewGuid().GetHashCode());
 */
-
-
-
-
-

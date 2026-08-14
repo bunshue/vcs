@@ -116,6 +116,8 @@ namespace vcs_SystemTray2
         {
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (this.WindowState == FormWindowState.Minimized)
@@ -131,3 +133,4 @@ namespace vcs_SystemTray2
         }
     }
 }
+

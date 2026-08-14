@@ -41,7 +41,7 @@
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.Location = new System.Drawing.Point(10, 10);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox1.Size = new System.Drawing.Size(640, 480);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -49,9 +49,9 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(120, 10);
+            this.richTextBox1.Location = new System.Drawing.Point(660, 60);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(100, 100);
+            this.richTextBox1.Size = new System.Drawing.Size(250, 430);
             this.richTextBox1.TabIndex = 5;
             this.richTextBox1.Text = "";
             // 
@@ -59,9 +59,9 @@
             // 
             this.bt_motion_detection.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_motion_detection.ImageIndex = 0;
-            this.bt_motion_detection.Location = new System.Drawing.Point(10, 125);
+            this.bt_motion_detection.Location = new System.Drawing.Point(660, 10);
             this.bt_motion_detection.Name = "bt_motion_detection";
-            this.bt_motion_detection.Size = new System.Drawing.Size(133, 30);
+            this.bt_motion_detection.Size = new System.Drawing.Size(160, 40);
             this.bt_motion_detection.TabIndex = 7;
             this.bt_motion_detection.Text = "啟動 移動偵測";
             this.bt_motion_detection.UseVisualStyleBackColor = true;
@@ -70,7 +70,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(137, 46);
+            this.bt_clear.Location = new System.Drawing.Point(838, 453);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 20;
@@ -82,7 +82,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(924, 501);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.bt_motion_detection);
             this.Controls.Add(this.richTextBox1);

@@ -292,7 +292,6 @@ const int MK_XBUTTON1 = 0x0020;
 const int MK_XBUTTON2 = 0x0040;
 */
 
-
 namespace vcs_SendMessage
 {
     public partial class Form1 : Form
@@ -313,8 +312,52 @@ namespace vcs_SendMessage
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+        }
+
+        void show_item_location()
+        {
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+
+            richTextBox1.Size = new Size(600, 690);
+            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(850, 750);
+            this.Text = "vcs_SendMessage";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button0_Click(object sender, EventArgs e)
+        {
 
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -367,6 +410,8 @@ namespace vcs_SendMessage
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         //啟動螢幕保護 ST
 
         private const int WM_SYSCOMMAND = 0x0112;
@@ -382,6 +427,8 @@ namespace vcs_SendMessage
         }
 
         //啟動螢幕保護 SP
+
+        //------------------------------------------------------------  # 60個
 
         int iii = 0;
         private void button4_Click(object sender, EventArgs e)
@@ -425,10 +472,9 @@ namespace vcs_SendMessage
             {
                 richTextBox1.Text += "沒有找到窗口\n";
             }
-
-
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button5_Click(object sender, EventArgs e)
         {
@@ -456,7 +502,6 @@ namespace vcs_SendMessage
             //這一步將會打開i1的窗口
             SetForegroundWindow(i1);
             ShowWindow(i1, 1);
-
         }
 
         public struct WindowInfo
@@ -466,6 +511,7 @@ namespace vcs_SendMessage
             public string szClassName;
 
         }
+
         /// <summary>
         /// 根據類名獲取窗口信息
         /// </summary>
@@ -488,8 +534,7 @@ namespace vcs_SendMessage
                 GetClassName(hWnd, sb, sb.Capacity);
                 wnd.szClassName = sb.ToString();
 
-                if ((className == "" || wnd.szClassName == className)
-                    && (windowText == "" || wnd.szWindowName == windowText))
+                if ((className == "" || wnd.szClassName == className) && (windowText == "" || wnd.szWindowName == windowText))
                 {
                     wndList.Add(wnd);
                 }
@@ -615,6 +660,7 @@ namespace vcs_SendMessage
 
             return windowInfo;
         }
+
         /// <summary>
         /// 功能：更具窗體標題獲取窗體的信息
         /// </summary>
@@ -646,6 +692,37 @@ namespace vcs_SendMessage
 
             return windowInfo;
         }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
         /// <summary>
         /// 指定句柄的窗口發送消息
         /// </summary>
@@ -658,3 +735,11 @@ namespace vcs_SendMessage
         //public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, string lParam);
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+

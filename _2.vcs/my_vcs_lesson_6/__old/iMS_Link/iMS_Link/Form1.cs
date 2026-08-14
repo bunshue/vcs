@@ -33,7 +33,6 @@ namespace iMS_Link
 
         bool david_debug = false;
         bool flag_enaglb_automation = false;    //自動化製程專用
-        bool flag_enaglb_automation_debug = true;    //自動化製程專用
         int flag_operation_mode = MODE_RELEASE_STAGE0;  //不允許第四, 第七, 第八
 
         private const int MODE_RELEASE_STAGE0 = 0x00;   //release mode stage 0, normal use
@@ -53,7 +52,7 @@ namespace iMS_Link
         private const int MODE_RELEASE_STAGE12 = 0x12;   //release mode stage 12, COSMO check
         private const int MODE_RELEASE_STAGE20 = 0x20;   //release mode stage 20, chicony test  //群光相機檢查
 
-        private const int AUTOMATION_MODE = MODE_WRITE_DATA;    //自動化程式預設模式 1: MODE_WRITE_DATA 燒錄, 2: MODE_AWB 色調
+        private const int AUTOMATION_MODE = MODE_AWB;    //自動化程式預設模式 1: MODE_WRITE_DATA 燒錄, 2: MODE_AWB 色調
         private const bool AUTOMATION_FACTORY_MODE = false;     //自動化程式預設模式 工廠模式
         private const bool AUTOMATION_USE_PLC = true;           //自動化程式預設模式 是否使用真的PLC, true: 真上位PLC, false: 假上位, 偽裝PLC上位來下命令
         private const bool AUTOMATION_USE_IMS = true;           //自動化程式預設模式 是否使用真的 IMS 執行 燒錄 或 色調, true: 真下位, false: 假下位
@@ -79,7 +78,7 @@ namespace iMS_Link
         bool flag_use_real_plc = AUTOMATION_USE_PLC;    //是否使用真的PLC, true: 真上位PLC, false: 假上位, 偽裝PLC上位來下命令
         bool flag_use_real_ims = AUTOMATION_USE_IMS;    //是否使用真的 IMS 執行 燒錄 或 色調, true: 真下位, false: 假下位
 
-        bool flag_auto_connect_comport = false;  //啟動時自動連線comport mode0 mode2
+        bool flag_auto_connect_comport = true;  //啟動時自動連線comport mode0 mode2
         int flag_auto_connect_comport_round = 0;  //自動連線comport次數
         int flag_automation_check_connection_retry_count = AUTOMATION_CONNECTION_RETRY_COUNT;  //自動連線 webcam/comport 重試次數
         bool flag_automation_check_break = false;
@@ -127,6 +126,7 @@ namespace iMS_Link
         bool flag_use_specific_ims = true; //指明對應主機
         bool flag_video_ok_for_awb = false;
         bool flag_camera_has_serial = false;
+        bool flag_use_logi_c270_webcam = false; //使用 Logi C270 HD WebCam
 
         int total_test_count = 300;
         int current_test_count = 0;
@@ -287,6 +287,7 @@ namespace iMS_Link
         int global_data_b_old = 0;
         int global_user_brigheness = 0;
         int global_rework_time = 0;
+        double fps = 0;
 
         string save_data_folder_date = "20231201";
 
@@ -1389,9 +1390,9 @@ namespace iMS_Link
                 || (flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE3))
             {
                 if (check_ims_camera() == S_OK)
-                    richTextBox1.Text += "有InsightEyes影像裝置\n";
+                    richTextBox1.Text += "有InsightEyes影像裝置1\n";
                 else
-                    richTextBox1.Text += "無InsightEyes影像裝置\n";
+                    richTextBox1.Text += "無InsightEyes影像裝置1\n";
             }
 
             if (flag_operation_mode == MODE_RELEASE_STAGE0)
@@ -2090,6 +2091,8 @@ namespace iMS_Link
             {
                 //重工1
 
+                bt_rework_test.Visible = false;
+
                 this.Size = new Size(1036, 745 + 50);
 
                 int W = Screen.PrimaryScreen.Bounds.Width;
@@ -2258,7 +2261,7 @@ namespace iMS_Link
                             continue;
                         }
 
-                        richTextBox1.Text += "第 " + flag_auto_connect_comport_round.ToString() + " 輪 找尋comport\n";
+                        richTextBox1.Text += "第 " + flag_auto_connect_comport_round.ToString() + " 輪 找尋comport b\n";
                         connect_IMS_comport();
 
                         if (flag_comport_connection_ok == true)
@@ -5856,9 +5859,10 @@ namespace iMS_Link
 
             bt_rework.Size = new Size(200, 100);
             bt_rework.Location = new Point(groupBox1.Width - 200 - 20, groupBox1.Height - 100 - 20);
-            bt_rework.Text = "重工\n胃鏡=>食道";
+            //bt_rework.Text = "重工\n胃鏡=>食道";
+            bt_rework.Text = "重工\n食道=>胃鏡";
             bt_rework.Font = new Font("標楷體", 24, FontStyle.Bold);
-            bt_rework.BackColor = Color.Pink;
+            bt_rework.BackColor = Color.Orange;
 
             bt_rework_test.Size = new Size(110, 60);
             bt_rework_test.Location = new Point(groupBox1.Width - 200 - 20 + 100 - 10, groupBox1.Height - 100 - 20 - 60);
@@ -7080,8 +7084,9 @@ namespace iMS_Link
                     */
                     if (flag_use_metering == false)
                     {
-                        double fps = (((frame_count - frame_count_old) * 1000) / ((TimeSpan)(dt - dt_old)).TotalMilliseconds);
-                        lb_fps.Text = fps.ToString("F2") + " fps";
+                        fps = (((frame_count - frame_count_old) * 1000) / ((TimeSpan)(dt - dt_old)).TotalMilliseconds);
+                        //lb_fps.Text = fps.ToString("F2") + " fps";
+                        lb_fps.Text = fps.ToString("F2");
 
                         if (fps < 5)
                         {
@@ -12757,8 +12762,8 @@ namespace iMS_Link
             {
                 tb_sn2.Text = tb_sn2.Text + "_";
             }
-            richTextBox1.Text += "相機序號1長度 : " + tb_sn1.Text.Length.ToString() + "\n";
-            richTextBox1.Text += "相機序號2長度 : " + tb_sn2.Text.Length.ToString() + "\n";
+            richTextBox1.Text += "a相機序號1長度 : " + tb_sn1.Text.Length.ToString() + "\n";
+            richTextBox1.Text += "a相機序號2長度 : " + tb_sn2.Text.Length.ToString() + "\n";
             //if ((tb_sn1.Text.Length != 9) && (tb_sn1.Text.Length != 10))
             if (tb_sn1.Text.Length != 10)
             {
@@ -12770,9 +12775,15 @@ namespace iMS_Link
                 return;
             }
 
+            if (tb_sn2.Text.Length == 14)
+            {
+                tb_sn2.Text = tb_sn2.Text.Substring(0, 13);
+            }
+
             if ((tb_sn2.Text.Length != 12) && (tb_sn2.Text.Length != 13))
             {
                 richTextBox1.Text += "相機序號2長度錯誤, 長度 : " + tb_sn2.Text.Length.ToString() + "\n";
+                richTextBox1.Text += "相機序號2 : [" + tb_sn2.Text + "]\n";
                 lb_write_camera_serial2.Text = "相機序號2長度錯誤";
                 lb_write_camera_serial2.BackColor = Color.Red;
                 playSound(S_FALSE);
@@ -14374,6 +14385,52 @@ namespace iMS_Link
                 }
             }
 
+            //或許沒有用, 之前已經重開IMS主機、重抓影像了, 先留在此
+            richTextBox_plc.Text += "檢查特殊狀況, 影像卡住, 要影像重抓\n";
+            if (fps < 5)
+            {
+                richTextBox_plc.Text += "特殊狀況, 影像卡住, 要影像重抓\n";
+
+                show_main_message1("影像重抓", S_OK, 30);
+                if (Cam != null)
+                {
+                    if ((flag_camera_start == 1) && (Cam.IsRunning == true))
+                    {
+                        richTextBox1.Text += "USB影像傳輸中, 中斷重來ST\n";  //david : 應考慮此功能是否有用?
+                        flag_camera_start = 0;
+
+                        Stop_Webcam();
+
+                        comboBox_webcam.Items.Clear();
+                        richTextBox1.Text += "USB影像傳輸中, 中斷重來SP\n";
+                    }
+                }
+
+                richTextBox1.Text += "call Init_WebcamSetup() 222\n";
+                if (Init_WebcamSetup() == S_OK)
+                {
+                    richTextBox1.Text += "重新抓取USB影像\t";
+                    USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice); //枚舉所有視頻輸入設備
+                    if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
+                    {
+                        //button12.Enabled = false;
+                        Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);
+                        Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
+                        richTextBox1.Text += "Start_Webcam() refresh\n";
+                        Start_Webcam();
+                        flag_camera_start = 1;
+                        richTextBox1.Text += "有影像裝置\n";
+                    }
+                    else
+                    {
+                        //button12.Enabled = true;
+                        flag_camera_start = 0;
+                        richTextBox1.Text += "無影像裝置\n";
+                    }
+                }
+                flag_doing_refreshing_camera = false;
+            }
+
             /*
             //開始檢查相機連線
             g_conn_status = CAMERA_UNKNOWN;
@@ -15177,6 +15234,8 @@ namespace iMS_Link
 
                             this.tp_USB.Controls.Remove(this.pictureBox1);
 
+                            richTextBox_plc.Text += "loc : " + richTextBox_plc.Location.ToString() + "\n";
+
                             int WW = PLC_RTB_WIDTH;
                             int HH = PLC_RTB_WIDTH * 480 / 640;
                             pictureBox1.Location = new Point(richTextBox_plc.Location.X, richTextBox_plc.Location.Y);
@@ -15187,6 +15246,28 @@ namespace iMS_Link
                             richTextBox_plc.Location = new Point(richTextBox_plc.Location.X, richTextBox_plc.Location.Y + HH);
                             richTextBox_plc.Size = new Size(richTextBox_plc.Size.Width, richTextBox_plc.Size.Height - HH);
                             lb_plc_command_type.Location = new Point(lb_plc_command_type.Location.X, lb_plc_command_type.Location.Y + HH);
+
+                            lb_fps.Location = new Point(richTextBox_plc.Location.X + 220, richTextBox_plc.Location.Y - 30);
+                            this.panel_plc.Controls.Add(lb_fps);
+                            lb_fps.BringToFront();
+
+                            pictureBox_fps.Size = new Size(45, 45);
+                            pictureBox_fps.Location = new Point(richTextBox_plc.Location.X + 302, richTextBox_plc.Location.Y - 45);
+                            this.panel_plc.Controls.Add(pictureBox_fps);
+                            pictureBox_fps.BringToFront();
+
+                            //camera status
+                            panel_camera_status6.Size = new Size(60, 60);
+                            panel_camera_status6.Location = new Point(richTextBox_plc.Location.X + richTextBox_plc.Size.Width - bt_plc_clear.Size.Width, richTextBox_plc.Location.Y + 34);
+                            panel_camera_status6.BringToFront();
+                            panel_camera_status6.Visible = true;
+
+                            //Refresh
+                            button12.Size = new Size(60, 60);
+                            button12.Location = new Point(richTextBox_plc.Location.X + richTextBox_plc.Size.Width - bt_plc_clear.Size.Width, richTextBox_plc.Location.Y + richTextBox_plc.Size.Height - bt_plc_clear.Size.Height - 60);
+                            this.panel_plc.Controls.Add(button12);
+                            button12.BringToFront();
+                            button12.Enabled = true;
 
                             lb_plc_awb_video_message.AutoSize = true;
                             lb_plc_awb_video_message.Name = "lb_plc_awb_video_message";
@@ -16902,9 +16983,11 @@ namespace iMS_Link
                     //richTextBox1.Text += "\ncamera " + i.ToString() + "\n";
                     //richTextBox1.Text += "name : " + USBWebcams[i].Name + "\n";
 
-                    if (USBWebcams[i].Name == "InsightEyes")
+                    //bool flag_use_logi_c270_webcam = true; //使用 Logi C270 HD WebCam
+                    if (((flag_use_logi_c270_webcam == false) && (USBWebcams[i].Name == "InsightEyes")) ||
+                    ((flag_use_logi_c270_webcam == true) && (USBWebcams[i].Name == "Logi C270 HD WebCam")))
                     {
-                        richTextBox1.Text += "有InsightEyes影像裝置 在 i = " + i.ToString() + "\n";
+                        richTextBox1.Text += "有InsightEyes影像裝置5 在 i = " + i.ToString() + "\n";
                         richTextBox1.Text += USBWebcams[i].Name + "\n";
                         richTextBox1.Text += USBWebcams[i].MonikerString + "\n";
                         flag_ims_egd_exist = true;
@@ -16919,7 +17002,7 @@ namespace iMS_Link
                 flag_ims_egd_exist = false;
                 return S_FALSE;
             }
-            richTextBox1.Text += "有影像裝置, 但是沒有InsightEyes影像裝置\n";
+            richTextBox1.Text += "有影像裝置, 但是沒有InsightEyes影像裝置6\n";
             flag_ims_egd_exist = false;
             return S_FALSE;
         }
@@ -17082,6 +17165,8 @@ namespace iMS_Link
                     }
                 }
 
+                //insighteyes_name = @"@device:pnp:\\?\usb#vid_046d&pid_0825&mi_00#6&8594c43&0&0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\global";
+
                 for (i = 0; i < webcam_count; i++)
                 {
                     if ((flag_use_specific_ims == true) && (USBWebcams[i].MonikerString == insighteyes_name))
@@ -17091,9 +17176,13 @@ namespace iMS_Link
 
                     if ((flag_use_specific_ims == false) || (USBWebcams[i].MonikerString == insighteyes_name))
                     {
-                        if (USBWebcams[i].Name == "InsightEyes")
+                        //if (USBWebcams[i].Name == "Logi C270 HD WebCam")
+                        //bool flag_use_logi_c270_webcam = true; //使用 Logi C270 HD WebCam
+                        //if (USBWebcams[i].Name == "InsightEyes")
+                        if (((flag_use_logi_c270_webcam == false) && (USBWebcams[i].Name == "InsightEyes")) ||
+                            ((flag_use_logi_c270_webcam == true) && (USBWebcams[i].Name == "Logi C270 HD WebCam")))
                         {
-                            //richTextBox1.Text += "有InsightEyes影像裝置 在 i = " + i.ToString() + "\n";
+                            //richTextBox1.Text += "有InsightEyes影像裝置7 在 i = " + i.ToString() + "\n";
                             Cam = new VideoCaptureDevice(USBWebcams[i].MonikerString);  //實例化對象
                             Cam.VideoResolution = Cam.VideoCapabilities[0];
                             Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);     //綁定事件
@@ -31210,10 +31299,12 @@ namespace iMS_Link
             show_main_message0("debug15 : 測試相機狀態", S_OK, 30);
 
             if (check_ims_camera() == S_OK)
-                richTextBox1.Text += "有InsightEyes影像裝置\n";
+            {
+                richTextBox1.Text += "有InsightEyes影像裝置2\n";
+            }
             else
             {
-                richTextBox1.Text += "無InsightEyes影像裝置\n";
+                richTextBox1.Text += "無InsightEyes影像裝置2\n";
 
                 if (Cam != null)
                 {
@@ -39466,11 +39557,11 @@ namespace iMS_Link
                 {
                     if (check_ims_camera() == S_OK)
                     {
-                        richTextBox1.Text += "111有InsightEyes影像裝置\n";
+                        richTextBox1.Text += "111有InsightEyes影像裝置3\n";
                     }
                     else
                     {
-                        richTextBox1.Text += "111無InsightEyes影像裝置\n";
+                        richTextBox1.Text += "111無InsightEyes影像裝置3\n";
 
                         if (Cam != null)
                         {
@@ -39520,7 +39611,7 @@ namespace iMS_Link
                 {
                     if (check_ims_camera() == S_OK)
                     {
-                        richTextBox1.Text += "000有InsightEyes影像裝置\n";
+                        richTextBox1.Text += "000有InsightEyes影像裝置4\n";
                         if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2)
                             || (flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE3))
                         {
@@ -39531,7 +39622,7 @@ namespace iMS_Link
                     }
                     else
                     {
-                        richTextBox1.Text += "000無InsightEyes影像裝置\n";
+                        richTextBox1.Text += "000無InsightEyes影像裝置4\n";
                     }
                 }
             }
@@ -39798,61 +39889,6 @@ namespace iMS_Link
             }
         }
 
-        private void timer_automation_debug_Tick(object sender, EventArgs e)
-        {
-            /*
-            lb_debug0.Text = "時間 : " + DateTime.Now.ToString("hh:mm:ss.fff");
-            lb_debug1.Text = "時間 : " + DateTime.Now.ToString("hh:mm:ss.fff");
-            lb_debug2.Text = "時間 : " + DateTime.Now.ToString("hh:mm:ss.fff");
-            */
-            string contact_address = string.Empty;
-            bool ret = false;
-
-            contact_address = (7980 + plc_m_address_offset).ToString();
-            lb_debug0.Text = "讀取 M" + contact_address + "  時間 : " + DateTime.Now.ToString("hh:mm:ss.fff");
-            ret = get_plc_m_status(contact_address);
-            if (ret == false)
-            {
-                lb_debug0.Text = "讀取 M" + contact_address + "  0000   時間 : " + DateTime.Now.ToString("hh:mm:ss.fff");
-            }
-            else
-            {
-                lb_debug0.Text = "讀取 M" + contact_address + "  1111   時間 : " + DateTime.Now.ToString("hh:mm:ss.fff");
-            }
-
-            contact_address = (7981 + plc_m_address_offset).ToString();
-            lb_debug1.Text = "讀取 M" + contact_address + "  時間 : " + DateTime.Now.ToString("hh:mm:ss.fff");
-            ret = get_plc_m_status(contact_address);
-            if (ret == false)
-            {
-                lb_debug1.Text = "讀取 M" + contact_address + "  0000   時間 : " + DateTime.Now.ToString("hh:mm:ss.fff");
-            }
-            else
-            {
-                lb_debug1.Text = "讀取 M" + contact_address + "  1111   時間 : " + DateTime.Now.ToString("hh:mm:ss.fff");
-            }
-
-            contact_address = (7982 + plc_m_address_offset).ToString();
-            lb_debug2.Text = "讀取 M" + contact_address + "  時間 : " + DateTime.Now.ToString("hh:mm:ss.fff");
-            ret = get_plc_m_status(contact_address);
-            if (ret == false)
-            {
-                lb_debug2.Text = "讀取 M" + contact_address + "  0000   時間 : " + DateTime.Now.ToString("hh:mm:ss.fff");
-            }
-            else
-            {
-                lb_debug2.Text = "讀取 M" + contact_address + "  1111   時間 : " + DateTime.Now.ToString("hh:mm:ss.fff");
-            }
-
-            lb_debug3.Text = plc_simulator_step.ToString();
-
-            /*
-            lb_debug0.Text = "(6a) PC 讀取 M" + (7980 + plc_m_address_offset).ToString() + " 狀態\t=>\t";
-            lb_debug1.Text = "(6a) PC 讀取 M" + (7981 + plc_m_address_offset).ToString() + " 狀態\t=>\t";
-            lb_debug2.Text = "(6a) PC 讀取 M" + (7982 + plc_m_address_offset).ToString() + " 狀態\t=>\t";
-            */
-        }
-
         private void bt_led_white2_Click(object sender, EventArgs e)
         {
             //bt_led_white
@@ -40073,12 +40109,15 @@ namespace iMS_Link
 
         int do_rework(object sender, EventArgs e)
         {
+            //int target_brightness = 90;  // 轉成食道鏡
+            int target_brightness = 120;  // 轉成胃鏡
+            numericUpDown_brightness.Value = target_brightness;
+
             richTextBox1.Text += "開始重工\n";
             bt_rework_status.Text = "開始重工1";
 
             bt_rework.BackColor = Color.Red;
 
-            numericUpDown_brightness.Value = 90;    //食道鏡設定
 
             string mesg = string.Empty;
 
@@ -40183,8 +40222,8 @@ namespace iMS_Link
             tb_sn1.Text = tb_info_aa1.Text;
             tb_sn2.Text = tb_info_aa2.Text;
 
-            richTextBox1.Text += "相機序號1長度 : " + tb_sn1.Text.Length.ToString() + "\n";
-            richTextBox1.Text += "相機序號2長度 : " + tb_sn2.Text.Length.ToString() + "\n";
+            richTextBox1.Text += "b相機序號1長度 : " + tb_sn1.Text.Length.ToString() + "\n";
+            richTextBox1.Text += "b相機序號2長度 : " + tb_sn2.Text.Length.ToString() + "\n";
 
             button11_Click(sender, e);//執行燒錄按鍵
 
@@ -40363,7 +40402,7 @@ namespace iMS_Link
             ims_read_camera_brightness();//讀取相機亮度中值
             richTextBox1.Text += "取得 亮度中值 : " + global_user_brigheness.ToString() + "\n";
 
-            if (global_user_brigheness != 90)
+            if (global_user_brigheness != target_brightness)
             {
                 richTextBox1.Text += "未取得亮度中值\n";
 
@@ -40371,7 +40410,7 @@ namespace iMS_Link
                 ims_read_camera_brightness();//讀取相機亮度中值
                 richTextBox1.Text += "取得 亮度中值 : " + global_user_brigheness.ToString() + "\n";
 
-                if (global_user_brigheness != 90)
+                if (global_user_brigheness != target_brightness)
                 {
                     richTextBox1.Text += "未取得亮度中值\n";
 
@@ -40379,7 +40418,7 @@ namespace iMS_Link
                     ims_read_camera_brightness();//讀取相機亮度中值
                     richTextBox1.Text += "取得 亮度中值 : " + global_user_brigheness.ToString() + "\n";
 
-                    if (global_user_brigheness != 90)
+                    if (global_user_brigheness != target_brightness)
                     {
                         richTextBox1.Text += "未取得亮度中值\n";
 
@@ -40396,16 +40435,15 @@ namespace iMS_Link
                         ims_read_camera_brightness();//讀取相機亮度中值
                         richTextBox1.Text += "取得 亮度中值 : " + global_user_brigheness.ToString() + "\n";
 
-                        if (global_user_brigheness != 90)
+                        if (global_user_brigheness != target_brightness)
                         {
                             richTextBox1.Text += "未取得亮度中值\n";
 
                             //再讀一次
                             ims_read_camera_brightness();//讀取相機亮度中值
                             richTextBox1.Text += "取得 亮度中值 : " + global_user_brigheness.ToString() + "\n";
-                            if (global_user_brigheness != 90)
+                            if (global_user_brigheness != target_brightness)
                             {
-
                                 richTextBox1.Text += "未取得亮度中值\n";
                                 richTextBox1.Text += "錯誤5\n";
                                 flag_rework_error = true;
@@ -40543,6 +40581,83 @@ namespace iMS_Link
         int global_rework_test_ng = 0;
         private void bt_rework_test_Click(object sender, EventArgs e)
         {
+            /*
+            richTextBox1.Text += "設定AWB參數\n";
+
+            int global_data_r = 456;
+            int global_data_b = 678;
+
+            richTextBox1.Text += "取得 AWB R : " + global_data_r.ToString() + "\n";
+            richTextBox1.Text += "取得 AWB B : " + global_data_b.ToString() + "\n";
+
+            int i;
+            int page = AWB_PAGE1;
+            for (i = 0; i < 16; i++)
+            {
+                user_flash_data[i] = 0;
+            }
+
+            //ex: DA-52-1A-04-52-1B-D2-52-1E-07-52-1F-08-00-00-00
+
+            user_flash_data[0] = 0xDA;  //header
+
+            user_flash_data[1] = 0x52;  //AWB R H AH
+            user_flash_data[2] = 0x1A;  //AWB R H AL
+            user_flash_data[3] = (Byte)(global_data_r / 256);
+
+            user_flash_data[4] = 0x52;  //AWB R L AH
+            user_flash_data[5] = 0x1B;  //AWB R L AL
+            user_flash_data[6] = (Byte)(global_data_r % 256);
+
+            user_flash_data[7] = 0x52;  //AWB B H AH
+            user_flash_data[8] = 0x1E;  //AWB B H AL
+            user_flash_data[9] = (Byte)(global_data_b / 256);
+
+            user_flash_data[10] = 0x52; //AWB B L AH
+            user_flash_data[11] = 0x1F; //AWB B L AL
+            user_flash_data[12] = (Byte)(global_data_b % 256);
+
+            user_flash_data[13] = 0x00; //dummy, no data
+            user_flash_data[14] = 0x00; //dummy, no data
+            user_flash_data[15] = 0x00; //dummy, no data
+
+            Send_IMS_Data(0xD0, (byte)page, 0, 0);  //write user data to camera flash
+            serialPort2.Write(user_flash_data, 0, 16);
+
+            //------------------------------------------------------------  # 60個
+
+            page = USER_PAGE2;
+
+            for (i = 0; i < 16; i++)
+            {
+                user_flash_data[i] = 0;
+            }
+
+            user_flash_data[0] = 0xDA;  //header
+
+            byte data;
+            data = 90;//(byte)numericUpDown_brightness.Value;    //default WPT = 120, BPT = 100
+
+            richTextBox1.Text += "Brightness = " + data.ToString() + "\n";
+
+            user_flash_data[1] = 0xAA;
+            user_flash_data[2] = 0xBB;
+            user_flash_data[3] = data;
+
+            user_flash_data[13] = 0x00; //dummy, no data
+            user_flash_data[14] = 0x00; //dummy, no data
+            user_flash_data[15] = 0x00; //dummy, no data
+
+            Send_IMS_Data(0xD0, (byte)page, 0, 0);  //write user data to camera flash
+            serialPort2.Write(user_flash_data, 0, 16);
+
+            delay(3000);
+
+            richTextBox1.Text += "寫入資料  完成\n";
+
+            return;
+            */
+
             global_rework_test_ok = 0;
             global_rework_test_ng = 0;
             for (int global_rework_test_cnt = 1; global_rework_test_cnt < 1000; global_rework_test_cnt++)
@@ -40574,7 +40689,7 @@ namespace iMS_Link
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
+

@@ -116,6 +116,12 @@ namespace vcs_WebCam5
             }
         }
 
+        // 最小化WebCam設定
+        void Init_WebcamSetup()
+        {
+            //TBD
+        }
+
         // The Rest is User Interface EventHandling
         private void button1_Click(object sender, EventArgs e)
         {

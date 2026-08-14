@@ -799,7 +799,6 @@
             this.SerialPortTimer100ms2 = new System.Windows.Forms.Timer(this.components);
             this.timer_automation = new System.Windows.Forms.Timer(this.components);
             this.timer_connection_status = new System.Windows.Forms.Timer(this.components);
-            this.timer_automation_debug = new System.Windows.Forms.Timer(this.components);
             this.plC_Open_Time1 = new iMS_Link.SetupControls.PLC_Open_Time();
             this.timer_rework1 = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
@@ -9894,11 +9893,6 @@
             this.timer_connection_status.Interval = 5000;
             this.timer_connection_status.Tick += new System.EventHandler(this.timer_connection_status_Tick);
             // 
-            // timer_automation_debug
-            // 
-            this.timer_automation_debug.Interval = 234;
-            this.timer_automation_debug.Tick += new System.EventHandler(this.timer_automation_debug_Tick);
-            // 
             // plC_Open_Time1
             // 
             this.plC_Open_Time1.Interval = 500;
@@ -10831,7 +10825,6 @@
         private System.Windows.Forms.Button bt_led_white;
         private System.Windows.Forms.Button bt_led_off;
         private System.Windows.Forms.Button bt_led_on;
-        private System.Windows.Forms.Timer timer_automation_debug;
         private System.Windows.Forms.Button bt_led_nbi2;
         private System.Windows.Forms.Button bt_led_white2;
         private System.Windows.Forms.GroupBox groupBox_brightness2;

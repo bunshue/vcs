@@ -28,14 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button3 = new System.Windows.Forms.Button();
-            this.lb_fps = new System.Windows.Forms.Label();
-            this.timer_clock = new System.Windows.Forms.Timer(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button0 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
@@ -90,27 +87,10 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // lb_fps
-            // 
-            this.lb_fps.AutoSize = true;
-            this.lb_fps.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_fps.Location = new System.Drawing.Point(11, 74);
-            this.lb_fps.Name = "lb_fps";
-            this.lb_fps.Size = new System.Drawing.Size(35, 21);
-            this.lb_fps.TabIndex = 13;
-            this.lb_fps.Text = "fps";
-            // 
-            // timer_clock
-            // 
-            this.timer_clock.Enabled = true;
-            this.timer_clock.Interval = 1000;
-            this.timer_clock.Tick += new System.EventHandler(this.timer_clock_Tick);
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.button0);
             this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.lb_fps);
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Location = new System.Drawing.Point(12, 131);
@@ -155,7 +135,6 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -167,8 +146,6 @@
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Label lb_fps;
-        private System.Windows.Forms.Timer timer_clock;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button0;
         private System.Windows.Forms.Button bt_clear;

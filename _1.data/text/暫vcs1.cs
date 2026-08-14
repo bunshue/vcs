@@ -1,4 +1,58 @@
 ﻿
+//需要添加這兩個.dll, 參考/右鍵/加入參考/瀏覽 此二檔 AForge.Video.dll和AForge.Video.DirectShow.dll
+
+//參考
+//【AForge.NET】C#上使用AForge.Net擷取視訊畫面
+//https://ccw1986.blogspot.com/2013/01/ccaforgenetcapture-image.html
+
+//AForge下載鏈結
+//http://www.aforgenet.com/framework/downloads.html
+
+//使用Aforge的VideoSourcePlayer, 在要再多添加4個.dll
+
+/*
+Aforge.Net 安裝路徑設定
+Solution Explorer(方案總管) => References(參考)(右鍵) => Add Reference(加入參考) => AForge.Net的Release資料夾
+加入AForge.Video.dll、AForge.Video.DirectShow.dll
+*/
+
+/*
+參考
+【AForge.NET】C#上使用AForge.Net擷取視訊畫面
+https://ccw1986.blogspot.com/2013/01/ccaforgenetcapture-image.html
+
+AForge下載鏈結
+http://www.aforgenet.com/framework/downloads.html
+
+Aforge.Net 安裝路徑設定
+Solution Explorer(方案總管) => References(參考)(右鍵) => Add Reference(加入參考) => AForge.Net的Release資料夾
+加入AForge.Video.dll、AForge.Video.DirectShow.dll
+
+移動偵測 需要 參考/加入參考/選取以下3個dll
+AForge.dll
+AForge.Imaging.dll
+AForge.Vision.dll
+*/
+
+
+
+            //算 fps
+            if (Cam != null)
+            {
+                if (Cam.IsRunning == true)
+                {
+                    DateTime dt = DateTime.Now;
+                    lb_fps.Text = (((frame_count - frame_count_old) * 1000) / ((TimeSpan)(dt - dt_old)).TotalMilliseconds).ToString("F2") + " fps";
+                    dt_old = dt;
+                    frame_count_old = frame_count;
+                }
+                else
+                {
+                    lb_fps.Text = "";
+                }
+            }
+
+
 //------------------------------------------------------------  # 60個
 
             //PointToScreen測試

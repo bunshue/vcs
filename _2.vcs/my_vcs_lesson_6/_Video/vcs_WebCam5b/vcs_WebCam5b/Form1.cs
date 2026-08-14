@@ -38,58 +38,8 @@ namespace vcs_WebCam5b
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
-        }
 
-        void show_item_location()
-        {
-            pictureBox1.Size = new Size(W_pictureBox1, H_pictureBox1);
-            pictureBox1.Location = new Point(BORDER, BORDER);
-
-            richTextBox1.Location = new Point(BORDER + W_pictureBox1 + BORDER, BORDER);
-            richTextBox1.Size = new Size(W_richTextBox1, H_richTextBox1);
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-
-            int dx = 80;
-            int offset_y = 3;
-            button0.Location = new Point(BORDER + dx * 0, BORDER + offset_y);
-            button1.Location = new Point(BORDER + dx * 1, BORDER + offset_y);
-            button2.Location = new Point(BORDER + dx * 2, BORDER + offset_y);
-            button3.Location = new Point(BORDER + dx * 3, BORDER + offset_y);
-            lb_fps.Location = new Point(BORDER + dx * 4, BORDER + BORDER);
-
-            groupBox1.Size = new Size(W_groupBox1, H_groupBox1);
-            groupBox1.Location = new Point(BORDER + dx * 0, BORDER + H_pictureBox1 + BORDER);
-
-            this.ClientSize = new Size(BORDER + W_pictureBox1 + BORDER + W_richTextBox1 + BORDER, BORDER + H_pictureBox1 + BORDER + H_groupBox1 + BORDER);
-            this.Text = "";
-
-            //設定執行後的表單起始位置, 正中央
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
-        }
-
-        private void bt_clear_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            //離開程式前, 關閉相機
-            try
-            {
-                this.webcam.StopCapture();
-            }
-            catch (Exception ex)
-            {
-            }
-        }
-
-        private void button0_Click(object sender, EventArgs e)
-        {
-            //ST
+            //6060
 
             USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice); //實例化對象
 
@@ -127,6 +77,58 @@ namespace vcs_WebCam5b
             }
         }
 
+        void show_item_location()
+        {
+            pictureBox1.Size = new Size(W_pictureBox1, H_pictureBox1);
+            pictureBox1.Location = new Point(BORDER, BORDER);
+
+            richTextBox1.Location = new Point(BORDER + W_pictureBox1 + BORDER, BORDER);
+            richTextBox1.Size = new Size(W_richTextBox1, H_richTextBox1);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            int dx = 80;
+            int offset_y = 3;
+            button0.Location = new Point(BORDER + dx * 0, BORDER + offset_y);
+            button1.Location = new Point(BORDER + dx * 1, BORDER + offset_y);
+            button2.Location = new Point(BORDER + dx * 2, BORDER + offset_y);
+            button3.Location = new Point(BORDER + dx * 3, BORDER + offset_y);
+
+            groupBox1.Size = new Size(W_groupBox1, H_groupBox1);
+            groupBox1.Location = new Point(BORDER + dx * 0, BORDER + H_pictureBox1 + BORDER);
+
+            this.ClientSize = new Size(BORDER + W_pictureBox1 + BORDER + W_richTextBox1 + BORDER, BORDER + H_pictureBox1 + BORDER + H_groupBox1 + BORDER);
+            this.Text = "";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //離開程式前, 關閉相機
+            try
+            {
+                this.webcam.StopCapture();
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+            //ST
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             //SP
@@ -159,26 +161,6 @@ namespace vcs_WebCam5b
 
         private void button3_Click(object sender, EventArgs e)
         {
-        }
-
-        private void timer_clock_Tick(object sender, EventArgs e)
-        {
-            /*
-            if (Cam != null)
-            {
-                if (Cam.IsRunning == true)
-                {
-                    DateTime dt = DateTime.Now;
-                    lb_fps.Text = (((frame_count - frame_count_old) * 1000) / ((TimeSpan)(dt - dt_old)).TotalMilliseconds).ToString("F2") + " fps";
-                    dt_old = dt;
-                    frame_count_old = frame_count;
-                }
-                else
-                {
-                    lb_fps.Text = "";
-                }
-            }
-            */
         }
     }
 

@@ -28,6 +28,14 @@ namespace vcs_WebCam6
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
+            Init_WebcamSetup();
+
+            Start_Webcam();
+
+            //------------------------------------------------------------  # 60個
+
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
@@ -40,11 +48,11 @@ namespace vcs_WebCam6
             int y_st = 10;
             int dx = W + 10;
             int dy = H + 10;
-            button0.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1 + 70);
+            //button0.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            //button1.Location = new Point(x_st + dx * 0, y_st + dy * 1 + 70);
             lb_zoom.Location = new Point(x_st + dx * 0, y_st + dy * 1 + 140);
-            bt_plus.Location = new Point(x_st + dx * 0 + 210, y_st + dy * 1);
-            bt_minus.Location = new Point(x_st + dx * 0 + 210, y_st + dy * 1 + 70);
+            bt_plus.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_minus.Location = new Point(x_st + dx * 0 + 70, y_st + dy * 1);
             bt_plus.BackgroundImageLayout = ImageLayout.Zoom;
             bt_minus.BackgroundImageLayout = ImageLayout.Zoom;
             bt_plus.BackgroundImage = Properties.Resources.plus;
@@ -185,8 +193,6 @@ namespace vcs_WebCam6
                     richTextBox1.Text += "xxx錯誤訊息e12 : " + ex.Message + "\n";
                 }
                 GC.Collect();       //回收資源
-
-
             }
             catch (Exception ex)
             {
@@ -195,16 +201,7 @@ namespace vcs_WebCam6
             GC.Collect();       //回收資源
         }
 
-        private void button0_Click(object sender, EventArgs e)
-        {
-            Init_WebcamSetup();
-            Start_Webcam();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Stop_Webcam();
-        }
+        //------------------------------------------------------------  # 60個
 
         bool flag_pictureBox1_MouseHover = false;
         private void pictureBox1_MouseHover(object sender, EventArgs e)
@@ -340,3 +337,5 @@ namespace vcs_WebCam6
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
+
+// Stop_Webcam();

@@ -34,9 +34,10 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(23, 12);
+            this.button1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button1.Location = new System.Drawing.Point(10, 10);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(137, 67);
+            this.button1.Size = new System.Drawing.Size(200, 60);
             this.button1.TabIndex = 0;
             this.button1.Text = "建立 桌面捷徑 與 開始頁捷徑";
             this.button1.UseVisualStyleBackColor = true;
@@ -44,9 +45,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(178, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(216, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(635, 544);
+            this.richTextBox1.Size = new System.Drawing.Size(597, 544);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 

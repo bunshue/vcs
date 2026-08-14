@@ -14,14 +14,14 @@ using AForge.Video.FFMPEG;
 
 namespace vcs_WebCam5_Article
 {
-    class CameraMonitor
+    class WebCam
     {
         PictureBox display;    // a refrence to the PictureBox on the MainForm
         private VideoCaptureDevice Cam = null; // refrence to the actual VidioCaptureDevice (webcam)
         public String cameraName; // string for display purposes
         MotionDetector md;
 
-        public CameraMonitor(PictureBox display, string monikerString, String cameraName)
+        public WebCam(PictureBox display, string monikerString, String cameraName)
         {
             this.cameraName = cameraName;
             this.display = display;

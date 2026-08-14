@@ -62,13 +62,10 @@
             this.button80a = new System.Windows.Forms.Button();
             this.timer_rgb = new System.Windows.Forms.Timer(this.components);
             this.groupBox11 = new System.Windows.Forms.GroupBox();
-            this.bt_clock_sp = new System.Windows.Forms.Button();
-            this.bt_clock_st = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.bt_reset = new System.Windows.Forms.Button();
+            this.bt_stop = new System.Windows.Forms.Button();
+            this.bt_start = new System.Windows.Forms.Button();
+            this.lb_thread = new System.Windows.Forms.Label();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
             this.lb_cpu2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -102,7 +99,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(795, 509);
+            this.bt_clear.Location = new System.Drawing.Point(664, 515);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 27;
@@ -113,7 +110,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(775, 467);
+            this.richTextBox1.Location = new System.Drawing.Point(644, 473);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 26;
@@ -460,89 +457,59 @@
             // 
             // groupBox11
             // 
-            this.groupBox11.Controls.Add(this.bt_clock_sp);
-            this.groupBox11.Controls.Add(this.bt_clock_st);
-            this.groupBox11.Controls.Add(this.label1);
-            this.groupBox11.Controls.Add(this.label5);
-            this.groupBox11.Controls.Add(this.label2);
-            this.groupBox11.Controls.Add(this.label4);
-            this.groupBox11.Controls.Add(this.label3);
+            this.groupBox11.Controls.Add(this.bt_reset);
+            this.groupBox11.Controls.Add(this.bt_stop);
+            this.groupBox11.Controls.Add(this.bt_start);
+            this.groupBox11.Controls.Add(this.lb_thread);
             this.groupBox11.Location = new System.Drawing.Point(428, 492);
             this.groupBox11.Name = "groupBox11";
             this.groupBox11.Size = new System.Drawing.Size(198, 148);
             this.groupBox11.TabIndex = 35;
             this.groupBox11.TabStop = false;
-            this.groupBox11.Text = "時鐘";
+            this.groupBox11.Text = "碼表";
             // 
-            // bt_clock_sp
+            // bt_reset
             // 
-            this.bt_clock_sp.Font = new System.Drawing.Font("新細明體", 14F);
-            this.bt_clock_sp.Location = new System.Drawing.Point(100, 84);
-            this.bt_clock_sp.Name = "bt_clock_sp";
-            this.bt_clock_sp.Size = new System.Drawing.Size(70, 56);
-            this.bt_clock_sp.TabIndex = 9;
-            this.bt_clock_sp.Text = "關閉時鐘";
-            this.bt_clock_sp.UseVisualStyleBackColor = true;
-            this.bt_clock_sp.Click += new System.EventHandler(this.bt_clock_sp_Click);
+            this.bt_reset.Font = new System.Drawing.Font("新細明體", 14F);
+            this.bt_reset.Location = new System.Drawing.Point(132, 99);
+            this.bt_reset.Name = "bt_reset";
+            this.bt_reset.Size = new System.Drawing.Size(60, 36);
+            this.bt_reset.TabIndex = 13;
+            this.bt_reset.Text = "重置";
+            this.bt_reset.UseVisualStyleBackColor = true;
+            this.bt_reset.Click += new System.EventHandler(this.bt_reset_Click);
             // 
-            // bt_clock_st
+            // bt_stop
             // 
-            this.bt_clock_st.Font = new System.Drawing.Font("新細明體", 14F);
-            this.bt_clock_st.Location = new System.Drawing.Point(16, 83);
-            this.bt_clock_st.Name = "bt_clock_st";
-            this.bt_clock_st.Size = new System.Drawing.Size(70, 56);
-            this.bt_clock_st.TabIndex = 8;
-            this.bt_clock_st.Text = "啟動時鐘";
-            this.bt_clock_st.UseVisualStyleBackColor = true;
-            this.bt_clock_st.Click += new System.EventHandler(this.bt_clock_st_Click);
+            this.bt_stop.Font = new System.Drawing.Font("新細明體", 14F);
+            this.bt_stop.Location = new System.Drawing.Point(70, 99);
+            this.bt_stop.Name = "bt_stop";
+            this.bt_stop.Size = new System.Drawing.Size(60, 36);
+            this.bt_stop.TabIndex = 12;
+            this.bt_stop.Text = "停止";
+            this.bt_stop.UseVisualStyleBackColor = true;
+            this.bt_stop.Click += new System.EventHandler(this.bt_stop_Click);
             // 
-            // label1
+            // bt_start
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("新細明體", 16F);
-            this.label1.Location = new System.Drawing.Point(37, 39);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(32, 22);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "時";
+            this.bt_start.Font = new System.Drawing.Font("新細明體", 14F);
+            this.bt_start.Location = new System.Drawing.Point(7, 99);
+            this.bt_start.Name = "bt_start";
+            this.bt_start.Size = new System.Drawing.Size(60, 36);
+            this.bt_start.TabIndex = 11;
+            this.bt_start.Text = "啟動";
+            this.bt_start.UseVisualStyleBackColor = true;
+            this.bt_start.Click += new System.EventHandler(this.bt_start_Click);
             // 
-            // label5
+            // lb_thread
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(66, 46);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(20, 12);
-            this.label5.TabIndex = 4;
-            this.label5.Text = " ：";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("新細明體", 16F);
-            this.label2.Location = new System.Drawing.Point(87, 39);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(32, 22);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "分";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(115, 46);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(20, 12);
-            this.label4.TabIndex = 3;
-            this.label4.Text = " ：";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("新細明體", 16F);
-            this.label3.Location = new System.Drawing.Point(141, 39);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(32, 22);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "秒";
+            this.lb_thread.AutoSize = true;
+            this.lb_thread.Font = new System.Drawing.Font("新細明體", 16F);
+            this.lb_thread.Location = new System.Drawing.Point(16, 51);
+            this.lb_thread.Name = "lb_thread";
+            this.lb_thread.Size = new System.Drawing.Size(32, 22);
+            this.lb_thread.TabIndex = 10;
+            this.lb_thread.Text = "秒";
             // 
             // groupBox12
             // 
@@ -727,7 +694,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1277, 709);
+            this.ClientSize = new System.Drawing.Size(848, 709);
             this.Controls.Add(this.groupBox14);
             this.Controls.Add(this.groupBox13);
             this.Controls.Add(this.groupBox12);
@@ -798,13 +765,6 @@
         private System.Windows.Forms.Label lb_R;
         private System.Windows.Forms.Timer timer_rgb;
         private System.Windows.Forms.GroupBox groupBox11;
-        private System.Windows.Forms.Button bt_clock_sp;
-        private System.Windows.Forms.Button bt_clock_st;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox groupBox12;
         private System.Windows.Forms.Label lb_cpu2;
         private System.Windows.Forms.Panel panel1;
@@ -822,6 +782,10 @@
         private System.Windows.Forms.Button button145;
         private System.Windows.Forms.Button button144;
         private System.Windows.Forms.Button button143;
+        private System.Windows.Forms.Label lb_thread;
+        private System.Windows.Forms.Button bt_reset;
+        private System.Windows.Forms.Button bt_stop;
+        private System.Windows.Forms.Button bt_start;
     }
 }
 

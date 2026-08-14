@@ -124,10 +124,6 @@ namespace iMS_Link
         Label lb_pc_plc3b = new Label();
         Label lb_pc_plc4b = new Label();
         Label lb_read_write_plc = new Label();
-        Label lb_debug0 = new Label();
-        Label lb_debug1 = new Label();
-        Label lb_debug2 = new Label();
-        Label lb_debug3 = new Label();
         Button bt_open_folder = new Button();
         Button bt_save = new Button();
         Button bt_pause = new Button();
@@ -219,47 +215,14 @@ namespace iMS_Link
 
             richTextBox_plc.Text = "";
             richTextBox_plc.Name = "richTextBox_plc";
-            if (flag_enaglb_automation_debug == false)
-            {
-                richTextBox_plc.Location = new Point(PLC_PANEL_WIDTH - PLC_RTB_WIDTH - BORDER, BORDER);
-                richTextBox_plc.Size = new Size(PLC_RTB_WIDTH, PLC_RTB_HEIGHT);
-                this.panel_plc.Controls.Add(richTextBox_plc);
-            }
-            else
-            {
-                richTextBox_plc.Location = new Point(PLC_PANEL_WIDTH - PLC_RTB_WIDTH - BORDER, BORDER + 100);
-                richTextBox_plc.Size = new Size(PLC_RTB_WIDTH, PLC_RTB_HEIGHT - 100);
-                this.panel_plc.Controls.Add(richTextBox_plc);
 
-                //實例化3個label
-                lb_debug0.Text = "檢測結果檢測結果檢測結果1";
-                lb_debug0.Font = f1;
-                lb_debug0.ForeColor = Color.Red;
-                lb_debug0.AutoSize = true;
-                lb_debug0.Location = new Point(PLC_PANEL_WIDTH - PLC_RTB_WIDTH - BORDER, BORDER + 10);
-                this.panel_plc.Controls.Add(lb_debug0);     // 將控件加入表單
+            richTextBox_plc.Location = new Point(PLC_PANEL_WIDTH - PLC_RTB_WIDTH - BORDER, BORDER);
+            richTextBox_plc.Size = new Size(PLC_RTB_WIDTH, PLC_RTB_HEIGHT - 100);
+            this.panel_plc.Controls.Add(richTextBox_plc);
 
-                lb_debug1.Text = "檢測結果檢測結果檢測結果1";
-                lb_debug1.Font = f1;
-                lb_debug1.ForeColor = Color.Red;
-                lb_debug1.AutoSize = true;
-                lb_debug1.Location = new Point(PLC_PANEL_WIDTH - PLC_RTB_WIDTH - BORDER, BORDER + 40);
-                this.panel_plc.Controls.Add(lb_debug1);     // 將控件加入表單
-
-                lb_debug2.Text = "檢測結果檢測結果檢測結果2";
-                lb_debug2.Font = f1;
-                lb_debug2.ForeColor = Color.Red;
-                lb_debug2.AutoSize = true;
-                lb_debug2.Location = new Point(PLC_PANEL_WIDTH - PLC_RTB_WIDTH - BORDER, BORDER + 70);
-                this.panel_plc.Controls.Add(lb_debug2);     // 將控件加入表單
-
-                lb_debug3.Text = "";
-                lb_debug3.Font = f5;
-                lb_debug3.ForeColor = Color.Red;
-                lb_debug3.AutoSize = true;
-                lb_debug3.Location = new Point(PLC_PANEL_WIDTH - 36 - BORDER, BORDER + 32);
-                this.panel_plc.Controls.Add(lb_debug3);     // 將控件加入表單
-            }
+            richTextBox1.Location = new Point(PLC_PANEL_WIDTH - PLC_RTB_WIDTH - BORDER, BORDER + 100 + 500 + 4);
+            richTextBox1.Size = new Size(PLC_RTB_WIDTH, 96);
+            this.panel_plc.Controls.Add(richTextBox1);
 
             lb_plc_command_type.AutoSize = true;
             lb_plc_command_type.Name = "lb_plc_command_type";
@@ -1805,7 +1768,7 @@ namespace iMS_Link
                 points.Add(new Point(x, y));
             }
             g.DrawLines(redPen, points.ToArray());  //畫直線
-            g.DrawString("A M" + (7980 + plc_m_address_offset).ToString(), f3, new SolidBrush(Color.Green), new PointF(x_st - 70 - 15, H - y_st - hh * 1 - 5 - hh * 5 - dd * 5));
+            g.DrawString("M" + (7980 + plc_m_address_offset).ToString(), f3, new SolidBrush(Color.Green), new PointF(x_st - 70, H - y_st - hh * 1 - 5 - hh * 5 - dd * 5));
 
             //畫M7981
             points.Clear();
@@ -1828,7 +1791,7 @@ namespace iMS_Link
                 points.Add(new Point(x, y));
             }
             g.DrawLines(redPen, points.ToArray());  //畫直線
-            g.DrawString("B M" + (7981 + plc_m_address_offset).ToString(), f3, new SolidBrush(Color.Green), new PointF(x_st - 70 - 15, H - y_st - hh * 1 - 5 - hh * 4 - dd * 4));
+            g.DrawString("M" + (7981 + plc_m_address_offset).ToString(), f3, new SolidBrush(Color.Green), new PointF(x_st - 70, H - y_st - hh * 1 - 5 - hh * 4 - dd * 4));
 
             //畫M7982
             points.Clear();
@@ -1851,7 +1814,7 @@ namespace iMS_Link
                 points.Add(new Point(x, y));
             }
             g.DrawLines(redPen, points.ToArray());  //畫直線
-            g.DrawString("C M" + (7982 + plc_m_address_offset).ToString(), f3, new SolidBrush(Color.Green), new PointF(x_st - 70 - 15, H - y_st - hh * 1 - 5 - hh * 3 - dd * 3));
+            g.DrawString("M" + (7982 + plc_m_address_offset).ToString(), f3, new SolidBrush(Color.Green), new PointF(x_st - 70, H - y_st - hh * 1 - 5 - hh * 3 - dd * 3));
 
             //畫M7990
             points.Clear();
@@ -3855,15 +3818,6 @@ namespace iMS_Link
 
             richTextBox_plc.Text += "\n啟動自動化作業\n";
 
-            if (flag_enaglb_automation_debug == true)
-            {
-                timer_automation_debug.Enabled = true;
-            }
-            else
-            {
-                timer_automation_debug.Enabled = false;
-            }
-
             if (flag_automation_mode == MODE_WRITE_DATA)
             {
                 this.Text = "iMS_Link_DataWrite";
@@ -4309,7 +4263,7 @@ namespace iMS_Link
             {
                 if (flag_comport_connection_ok == false)
                 {
-                    richTextBox_plc.Text += "第 " + (flag_auto_connect_comport_round + 1).ToString() + " 輪 找尋comport\n";
+                    richTextBox_plc.Text += "第 " + (flag_auto_connect_comport_round + 1).ToString() + " 輪 找尋comport a\n";
                     flag_auto_connect_comport_round++;
 
                     richTextBox_plc.Text += "awb call connect_IMS_comport()\n";
@@ -5543,9 +5497,13 @@ namespace iMS_Link
 
             update_plc_breathe_status_data();
 
-            if (richTextBox_plc.Text.Length > 10000)
+            if (richTextBox_plc.Text.Length > 20000)
             {
                 richTextBox_plc.Clear();
+            }
+            if (richTextBox1.Text.Length > 20000)
+            {
+                richTextBox1.Clear();
             }
 
             //------------------------------------------------------------  # 60個

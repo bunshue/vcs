@@ -16,7 +16,7 @@ namespace vcs_WebCam5_Article
 {
     public partial class MainForm : Form
     {
-        CameraMonitor[] CamMonitor = new CameraMonitor[4];  //物件陣列
+        WebCam CamMonitor;
 
         private FilterInfoCollection USBWebcams = null;
         int webcam_count = 0;
@@ -28,7 +28,6 @@ namespace vcs_WebCam5_Article
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            int i;
             show_item_location();
 
             //檢查錄影存檔的資料夾
@@ -46,9 +45,10 @@ namespace vcs_WebCam5_Article
             USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice); //實例化對象
 
             webcam_count = USBWebcams.Count;
-
-            /*
             richTextBox1.Text += "找到 " + webcam_count.ToString() + " 台WebCam\n";
+
+            int i;
+            /*
 
             richTextBox1.Text += "USBWebcams.Capacity : " + USBWebcams.Capacity.ToString() + "\n";
             richTextBox1.Text += "USBWebcams.Count : " + USBWebcams.Count.ToString() + "\n";
@@ -67,7 +67,7 @@ namespace vcs_WebCam5_Article
             {
                 i = 0;
                 string camera_name = USBWebcams[i].MonikerString;   //長名
-                this.CamMonitor[i] = new CameraMonitor(pictureBox1, camera_name, "第 " + (i + 1).ToString() + " 台攝影機");
+                CamMonitor = new WebCam(pictureBox1, camera_name, "第1台攝影機");
 
                 /*
                 richTextBox1.Text += "第 " + (i + 1).ToString() + " 台WebCam:\n";
@@ -110,8 +110,8 @@ namespace vcs_WebCam5_Article
             {
                 try
                 {
-                    this.CamMonitor[i].StopRecording();
-                    this.CamMonitor[i].StopCapture();
+                    CamMonitor.StopRecording();
+                    CamMonitor.StopCapture();
                 }
                 catch (Exception ex)
                 {
@@ -122,32 +122,32 @@ namespace vcs_WebCam5_Article
         // The Rest is User Interface EventHandling
         private void button1_Click(object sender, EventArgs e)
         {
-            if (this.CamMonitor[0].IsRecording)
+            if (CamMonitor.IsRecording)
             {
-                this.CamMonitor[0].StopRecording();
-                this.CamMonitor[0].forceRecord = false;
+                CamMonitor.StopRecording();
+                CamMonitor.forceRecord = false;
                 ((Button)sender).Text = "Record";
             }
             else
             {
-                this.CamMonitor[0].StartRecording();
-                this.CamMonitor[0].forceRecord = true;
+                CamMonitor.StartRecording();
+                CamMonitor.forceRecord = true;
                 ((Button)sender).Text = "Stop";
             }
         }
 
-        private void toggleOption(int camIndex, int optionIndex, bool value)
+        private void toggleOption(int optionIndex, bool value)
         {
             switch (optionIndex)
             {
                 case 0:
-                    this.CamMonitor[camIndex].MotionDetection = value;
+                    CamMonitor.MotionDetection = value;
                     break;
                 case 1:
-                    this.CamMonitor[camIndex].RecordOnMotion = value;
+                    CamMonitor.RecordOnMotion = value;
                     break;
                 case 2:
-                    this.CamMonitor[camIndex].BeepOnMotion = value;
+                    CamMonitor.BeepOnMotion = value;
                     break;
             }
         }
@@ -156,11 +156,11 @@ namespace vcs_WebCam5_Article
         {
             if (((CheckBox)sender).Checked)
             {
-                this.toggleOption(0, 0, true);
+                this.toggleOption(0, true);
             }
             else
             {
-                this.toggleOption(0, 0, false);
+                this.toggleOption(0, false);
             }
         }
 
@@ -168,11 +168,11 @@ namespace vcs_WebCam5_Article
         {
             if (((CheckBox)sender).Checked)
             {
-                this.toggleOption(0, 1, true);
+                this.toggleOption(1, true);
             }
             else
             {
-                this.toggleOption(0, 1, false);
+                this.toggleOption(1, false);
             }
         }
 
@@ -180,25 +180,16 @@ namespace vcs_WebCam5_Article
         {
             if (((CheckBox)sender).Checked)
             {
-                this.toggleOption(0, 2, true);
+                this.toggleOption(2, true);
             }
             else
             {
-                this.toggleOption(0, 2, false);
+                this.toggleOption(2, false);
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "找到 " + webcam_count.ToString() + " 台WebCam\n";
-            int i;
-            i = 0;
-
-            richTextBox1.Text += "第 " + (i + 1).ToString() + " 台WebCam:\n";
-            richTextBox1.Text += "IsRecording\t" + this.CamMonitor[i].IsRecording.ToString() + "\n";
-            richTextBox1.Text += "cameraName\t" + this.CamMonitor[i].cameraName.ToString() + "\n";
-            richTextBox1.Text += "CamMonitor\t" + this.CamMonitor[i].ToString() + "\n";
-            richTextBox1.Text += "BeepOnMotion\t" + this.CamMonitor[i].BeepOnMotion.ToString() + "\n";
         }
     }
 }

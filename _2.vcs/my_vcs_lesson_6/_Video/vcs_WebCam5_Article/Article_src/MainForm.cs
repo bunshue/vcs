@@ -19,7 +19,7 @@ namespace WebcamSecurity
     public partial class MainForm : Form
     {
         // Refrence to cameraMonitors of all 4 cams
-        CameraMonitor[] CamMonitor = new CameraMonitor[4];
+        WebCam[] CamMonitor = new WebCam[4];
         // Indexed arrays containing referces to the user interface components
         // so they can be easily accessed later on
         PictureBox[] DisplayReference = new PictureBox[4];
@@ -183,9 +183,9 @@ namespace WebcamSecurity
             // an instance of FilterInfoCollection is created to fetch available VideoCaptureDevices
             webcam = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             // we create our CameraMonitors
-            for (int i = 0; i < webcam.Count && i<4; i++)
+            for (int i = 0; i < webcam.Count && i < 4; i++)
             {
-                this.CamMonitor[i] = new CameraMonitor(this.DisplayReference[i],webcam[i].MonikerString,"Camera"+(i+1));
+                this.CamMonitor[i] = new WebCam(this.DisplayReference[i], webcam[i].MonikerString, "Camera" + (i + 1));
                 // Enable the user controls coressponding to the CameraMonitor
                 this.camPanels[i].Enabled = true;
                 this.camOptions[i].Enabled = true;
@@ -369,7 +369,8 @@ namespace WebcamSecurity
             {
                 this.toggleOption(0, 0, true);
             }
-            else {
+            else
+            {
                 this.toggleOption(0, 0, false);
             }
         }
@@ -562,7 +563,5 @@ namespace WebcamSecurity
         {
             this.SetFocus(0);
         }
-
-        
     }
 }

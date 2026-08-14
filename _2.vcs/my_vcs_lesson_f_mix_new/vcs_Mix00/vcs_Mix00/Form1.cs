@@ -338,7 +338,6 @@ namespace vcs_Mix00
                             );
                         bmp.SetPixel(i, j, c);
                     }
-
                 }
                 pictureBox1.Image = bmp;
                 Application.DoEvents();
@@ -449,7 +448,6 @@ namespace vcs_Mix00
 
             Console.WriteLine("系統開機時間: " + bootTime);
             richTextBox1.Text += "系統開機時間: " + bootTime + "\n";
-
         }
 
         //局部圖像放大
@@ -583,7 +581,7 @@ namespace vcs_Mix00
             //richTextBox1.Text += "camera_serial_data_len = " + len.ToString() + "\n";
             richTextBox1.Text += "序號資料 : " + camera_serial_data + "\n";
 
-
+            //------------------------------------------------------------  # 60個
 
             string camera_serial_data2 = string.Empty;
             if (camera_serial_data.Length > 16)
@@ -604,6 +602,8 @@ namespace vcs_Mix00
             richTextBox1.Text += "len of camera_serial_data2 = " + camera_serial_data2.Length.ToString() + "\n";
             richTextBox1.Text += camera_serial_data2 + "\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         public void StatisticsWords(string path)
         {
@@ -717,6 +717,8 @@ namespace vcs_Mix00
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button18_Click(object sender, EventArgs e)
         {
             //一個檔案的英文字母出現的字數統計
@@ -815,7 +817,6 @@ namespace vcs_Mix00
 
             //StackCount(filename);
         }
-
 
         //统计方法的个数
         public void CountMethods(string path)
@@ -968,6 +969,8 @@ namespace vcs_Mix00
         {
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button24_Click(object sender, EventArgs e)
         {
             //測試 ErrorProvider
@@ -1036,7 +1039,9 @@ namespace vcs_Mix00
             {
                 card[i] = i;
             }
+
             richTextBox1.Text += "[洗牌中...請稍後!]" + "\n";
+
             while (k < 30)
             {
                 for (i = 0; i < 51; i++)
@@ -1054,6 +1059,7 @@ namespace vcs_Mix00
                 }
                 k++;
             }
+
             i = 0;
             while (i != 52)
             {
