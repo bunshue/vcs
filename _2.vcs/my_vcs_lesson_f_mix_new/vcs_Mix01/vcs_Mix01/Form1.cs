@@ -258,16 +258,56 @@ namespace vcs_Mix01
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
+        public static double CalculateShoelaceArea(List<PointF> points)
+        {
+            int n = points.Count;
+            if (n < 3) return 0; // 少於三個點無法構成多邊形
+
+            double area = 0;
+
+            for (int i = 0; i < n; i++)
+            {
+                // 下一個點的索引，最後一個點會與第一個點相接
+                int next = (i + 1) % n;
+
+                // 左上到右下相乘，減去右上到左下相乘
+                area += points[i].X * points[next].Y;
+                area -= points[next].X * points[i].Y;
+            }
+
+            // 取絕對值並除以 2
+            return Math.Abs(area) / 2.0;
+        }
+
         private void button4_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //鞋帶定理
+            //鞋帶定理（Shoelace Formula），又稱高斯面積公式或測量員公式，是用來計算座標平面上任意簡單多邊形面積的數學方法。
+
+            List<PointF> points = new List<PointF>();
+
+            points.Add(new PointF(0, 0));
+            points.Add(new PointF(100, 0));
+            points.Add(new PointF(0, 100));
+
+            double area = CalculateShoelaceArea(points);
+
+            richTextBox1.Text += "面積 : " + area.ToString() + "\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button5_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
 
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button6_Click(object sender, EventArgs e)
         {

@@ -1,4 +1,8 @@
-﻿
+﻿一個不錯的vcs blog
+http://www.cnblogs.com/conexpress/
+
+//------------------------------------------------------------  # 60個
+
 //需要添加這兩個.dll, 參考/右鍵/加入參考/瀏覽 此二檔 AForge.Video.dll和AForge.Video.DirectShow.dll
 
 //參考
@@ -319,7 +323,6 @@ HScrollBar / VScrollBar
 
 	vsbHeight.LargeChange = 1;  // 設定vsbHeight的快動值 = 1
 	hsbWidth.LargeChange  = 1;  // 設定hsbWidth 的快動值 = 1
-
 
 //------------------------------------------------------------  # 60個
 cccc

@@ -164,41 +164,9 @@ namespace vcs_Mix00
         private void button0_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //測試 String.Format
-
-            //自訂格式化輸出
-
-            richTextBox1.Text += "自訂格式化輸出\n";
-            richTextBox1.Text += String.Format("{0:##,##0.00}", 8567.1) + "\n";
-            richTextBox1.Text += String.Format("{0:###0.00}", 566.7) + "\n";
-            richTextBox1.Text += String.Format("{0:0.00%}", 8) + "\n";
-
-
-            //String.Format("{0，–10}",text)
-            //要将字符串向左对齐使用负数，正对齐使用正数，里面的值为当前所占字符的格子。例如:
-
-            String aaa = String.Format("{0,-30} | {1,-20} | {2,5}", "a", "b", 3);
-            String bbb = String.Format("{0,-30} | {1,-20} | {2,5}", "aaaaaaaaaaaaaaaaaaaaaaaa", "b", 3);
-            String ccc = String.Format("{0,-30} | {1,-20} | {2,5}", "aaaa", "b", 3);
-
-            int s32_Section45 = 123;
-            int ms32_Quadrant = 456;
-            string ddd = String.Format("Section: {0}  Quadrant: {1}", s32_Section45, ms32_Quadrant);
-
-            string Name = "李";
-            int Age = 2;
-            string Address = "吉林";
-            richTextBox1.Text += "Name : " + Name + "\tAge : " + Age.ToString() + "\tAddress : " + Address + "\n";
-
-            string Begin = "550";
-            string end = "570";
-            string sqlstr = string.Format(@"WHERE 总分>{0} AND 总分<{1})", Begin, end);
-            richTextBox1.Text += sqlstr + "\n";
-
-            sqlstr = string.Format(@"WHERE 学生姓名 LIKE '{0}%' and 年龄 LIKE '{1}%' and 家庭住址 LIKE '{2}%'", Name, Age, Address);
-            richTextBox1.Text += sqlstr + "\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {

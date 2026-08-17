@@ -811,6 +811,9 @@ namespace vcs_Button1
         private void bt_shortcut_Click(object sender, EventArgs e)
         {
             MessageBox.Show("你按了快捷键 Alt + F\n只要在Text改 快捷鍵 (&F) 即可");
+
+            //richTextBox1.Text += "只要在 button14 的 Text 寫 關於(&A) 就好\n";
+            //關於(&A)
         }
 
         //------------------------------------------------------------  # 60個
@@ -885,9 +888,6 @@ button1.PerformClick();
 
 button1.PerformClick();	把按鍵按一下
 */
-
-//------------------------------------------------------------  # 60個
-
 
 
 

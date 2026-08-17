@@ -30,10 +30,6 @@ namespace vcs_Draw_Brush
 {
     public partial class Form1 : Form
     {
-        Graphics g;
-        //SolidBrush sb;
-        //Bitmap bitmap1;
-
         //以塗刷新增畫筆, 刮刮樂效果 ST
         Bitmap image;
         TextureBrush textureBrush;
@@ -81,12 +77,9 @@ namespace vcs_Draw_Brush
             groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 6);
 
-            pictureBox1.Size = new Size(750, 620);
+            pictureBox1.Size = new Size(830, 780);
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             bt_pictureBox1_clear.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_pictureBox1_clear.Size.Width, pictureBox1.Location.Y + pictureBox1.Size.Height - bt_pictureBox1_clear.Size.Height);
-
-            panel1.Size = new Size(750, 50);
-            panel1.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
             pictureBox2.Size = new Size(305, 400);
             pictureBox2.Location = new Point(x_st + dx * 6, y_st + dy * 0 + 30);
@@ -273,39 +266,6 @@ namespace vcs_Draw_Brush
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //橢圓顯示圖像
-            //原理：主要使用了 graphics 類提供的 fillellipse() 方法和 texturebrush() 方法。
-
-            Graphics g = this.pictureBox1.CreateGraphics();
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
-            //Bitmap bitmap1 = new Bitmap(filename);
-
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-
-            //用圖片填滿圓圈
-            //TextureBrush tb = new TextureBrush(bitmap1);
-            TextureBrush tb = new TextureBrush(new Bitmap(filename));
-            g.FillEllipse(tb, 10, 10, W, H);
-            g.FillEllipse(tb, 400, 10, 200, 200);
-
-            //------------------------------  # 30個
-
-            //紋理效果, 使用圖像填充文字線條
-            filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_背景圖\background.jpg";  //使用一張背景圖
-            TextureBrush brush = new TextureBrush(Image.FromFile(filename));
-            g.DrawString("紋理效果, 使用圖像填充文字線條", new Font("標楷體", 40), brush, new PointF(300, 250));
-
-            //------------------------------  # 30個
-
-            //旋轉顯示圖像
-
-            float MyAngle = 30f;//旋转的角度
-            tb = new TextureBrush(bitmap1);//实例化TextureBrush类
-            tb.RotateTransform(MyAngle);//以指定角度旋转图像
-            g.FillRectangle(tb, 0, 400, 300, 300);//绘制旋转后的图像
         }
 
         //------------------------------------------------------------  # 60個
@@ -654,6 +614,19 @@ namespace vcs_Draw_Brush
                 LinearGradientMode temp = (LinearGradientMode)obj.GetValue(x);
                 richTextBox1.Text += temp.ToString() + "\n";
             }
+
+            //3030
+
+            Rectangle rect = new Rectangle(50, 300, 600, 50);
+            Brush b = new LinearGradientBrush(rect, Color.Red, Color.Green, LinearGradientMode.Horizontal);
+            g.FillRectangle(b, rect);
+
+            /*
+            Horizontal = 0　　　　從左到右的漸變
+            Vertical = 1　　　　　從上到下的漸變
+            ForwardDiagonal = 2　 從左上到右下的漸變
+            BackwardDiagonal = 3　從右上到左下的漸變
+            */
         }
 
         //------------------------------------------------------------  # 60個
@@ -714,14 +687,34 @@ namespace vcs_Draw_Brush
 
             //------------------------------  # 30個
 
+            //用圖片填滿筆刷
             richTextBox1.Text += "TextureBrush 圖案筆\n";
-            TextureBrush tb = new TextureBrush(new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg"));
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            TextureBrush tb = new TextureBrush(new Bitmap(filename));
             p = new Pen(tb, pen_width);
             y_st += dy;
             g.DrawRectangle(p, x_st, y_st, 200, 50);
             g.DrawLine(p, x_st, y_st + 100, x_st + 200, y_st + 100);
             g.FillEllipse(tb, x_st + 250, y_st, 200, 100);
             g.DrawString("圖案筆", new Font("標楷體", 32), new SolidBrush(Color.Black), new PointF(x_st - 160, y_st));
+
+            //------------------------------  # 30個
+
+            //旋轉顯示圖像
+
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+            float MyAngle = 30f;//旋转的角度
+            tb = new TextureBrush(bitmap1);//实例化TextureBrush类
+            tb.RotateTransform(MyAngle);//以指定角度旋转图像
+            g.FillRectangle(tb, 0, 400, 300, 300);//绘制旋转后的图像
+
+            //------------------------------  # 30個
+
+            //紋理效果, 使用圖像填充文字線條
+            filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_背景圖\background.jpg";  //使用一張背景圖
+            //用圖片填滿筆刷
+            tb = new TextureBrush(Image.FromFile(filename));
+            g.DrawString("紋理效果, 使用圖像填充文字線條", new Font("標楷體", 40), tb, new PointF(x_st + 450, y_st));
 
             //------------------------------  # 30個
 
@@ -780,20 +773,6 @@ namespace vcs_Draw_Brush
         //以塗刷新增畫筆, 刮刮樂效果 SP
 
         //------------------------------------------------------------  # 60個
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-            Brush b = new LinearGradientBrush(this.panel1.ClientRectangle, Color.Red, Color.Green, LinearGradientMode.Horizontal);
-
-            e.Graphics.FillRectangle(b, this.panel1.ClientRectangle);
-
-            /*
-             * Horizontal = 0　　　　從左到右的漸變
-             * Vertical = 1　　　　　從上到下的漸變
-             * ForwardDiagonal = 2　 從左上到右下的漸變
-             * BackwardDiagonal = 3　從右上到左下的漸變
-             */
-        }
     }
 }
 
@@ -803,3 +782,4 @@ namespace vcs_Draw_Brush
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
+

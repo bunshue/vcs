@@ -1398,8 +1398,8 @@ namespace vcs_Draw_Transform1
         private void button28_Click(object sender, EventArgs e)
         {
             //new
-            int W = 500;
-            int H = 500;
+            int W = 800;
+            int H = 800;
             Bitmap bitmap1 = new Bitmap(W, H);
             Graphics g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
             g.SmoothingMode = SmoothingMode.AntiAlias;
@@ -1415,10 +1415,14 @@ namespace vcs_Draw_Transform1
 
             // Scale to fill the form.
             float scale = Math.Min(W / world_rect.Width, H / world_rect.Height);
+
+            richTextBox1.Text += scale.ToString() + "\n";
+            scale = 3.0f;
+
             g.ScaleTransform(scale, scale, MatrixOrder.Append);
 
             // Move the result to center on the form.
-            g.TranslateTransform(W / 2, H / 2, MatrixOrder.Append);  // 平移, 右移, 下移
+            g.TranslateTransform(200, 200, MatrixOrder.Append);  // 平移, 右移, 下移
 
             // Generate the points.
             PointF pt0, pt1;
@@ -1430,21 +1434,21 @@ namespace vcs_Draw_Transform1
             g.DrawRectangle(p, 0, 0, 100, 100);
             //g.DrawLine(p, pt0, pt1);
 
-            /*
-            using (Pen p = new Pen(Color.Blue, 0))
+            const long num_lines = 5000;
+            for (long i = 0; i < num_lines; i++)
             {
-                const long num_lines = 5000;
-                for (long i = 0; i < num_lines; i++)
-                {
-                    //t = i * period * Math.PI / num_lines;
-                    expr = Math.Exp(Math.Cos(t)) - 2 * Math.Cos(4 * t) - Math.Pow(Math.Sin(t / 12), 5);
-                    pt0 = pt1;
-                    pt1 = new PointF((float)(Math.Sin(t) * expr), (float)(-Math.Cos(t) * expr));
-                    //p.Color = GetColor(t);
-                    g.DrawLine(p, pt0, pt1);
-                }
+                //t = i * period * Math.PI / num_lines;
+                expr = Math.Exp(Math.Cos(t)) - 2 * Math.Cos(4 * t) - Math.Pow(Math.Sin(t / 12), 5);
+                pt0 = pt1;
+                pt1 = new PointF((float)(Math.Sin(t) * expr), (float)(-Math.Cos(t) * expr));
+                //p.Color = GetColor(t);
+                g.DrawLine(p, pt0, pt1);
             }
-            */
+
+
+
+
+
 
             pictureBox1.Image = bitmap1;
         }
@@ -1613,8 +1617,6 @@ namespace vcs_Draw_Transform1
 //------------------------------  # 30個
 
 /*
-g.ScaleTransform(100, 100, MatrixOrder.Append);
-
 g.RotateTransform(30, MatrixOrder.Append);  // 順時針旋轉指定的角度
 g.RotateTransform(30);  // 順時針旋轉指定的角度
 

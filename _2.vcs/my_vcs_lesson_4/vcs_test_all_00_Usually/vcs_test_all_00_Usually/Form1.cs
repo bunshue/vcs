@@ -771,8 +771,6 @@ namespace vcs_test_all_00_Usually
 
         private void button14_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "只要在 button14 的 Text 寫 關於(&A) 就好\n";
-            //關於(&A)
         }
 
         private void button15_Click(object sender, EventArgs e)
