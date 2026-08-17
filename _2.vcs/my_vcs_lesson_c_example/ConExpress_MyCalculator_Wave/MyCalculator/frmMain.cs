@@ -27,7 +27,7 @@ namespace ConExpress.Calculator
         }
 
 
-        #region 內部方法
+        //#region 內部方法
 
         /// <summary>
         /// 加載操作記號樹視圖
@@ -128,10 +128,10 @@ namespace ConExpress.Calculator
             this.rtbInput.Text += strBehindSelectionStart;
         }
 
-        #endregion 內部方法
+        //#endregion 內部方法
 
 
-        #region 控件操作
+        //#region 控件操作
 
         /// <summary>
         /// 選擇樹節點
@@ -276,23 +276,23 @@ namespace ConExpress.Calculator
             Application.Exit();
         }
 
-        /// <summary>
-        /// 點擊“關於”按鈕
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnAbout_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Author: Alex Leo\nEmail: alexleo321@hotmail.com\nBlog: http://www.cnblogs.com/conexpress/", "關於", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        #endregion 控件操作
+        //#endregion 控件操作
 
         private void btnDraw_Click(object sender, EventArgs e)
         {
             frmDraw myDraw = new frmDraw();
             myDraw.Show();
         }
-
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+
+
+

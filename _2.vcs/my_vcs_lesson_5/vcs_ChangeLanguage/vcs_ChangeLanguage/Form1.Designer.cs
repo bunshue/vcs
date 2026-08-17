@@ -53,9 +53,9 @@
             // change_language1
             // 
             this.change_language1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.change_language1.Location = new System.Drawing.Point(272, 20);
+            this.change_language1.Location = new System.Drawing.Point(292, 20);
             this.change_language1.Name = "change_language1";
-            this.change_language1.Size = new System.Drawing.Size(139, 76);
+            this.change_language1.Size = new System.Drawing.Size(200, 60);
             this.change_language1.TabIndex = 1;
             this.change_language1.Text = "正中";
             this.change_language1.UseVisualStyleBackColor = true;
@@ -66,7 +66,7 @@
             this.button1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button1.Location = new System.Drawing.Point(25, 20);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(204, 54);
+            this.button1.Size = new System.Drawing.Size(200, 60);
             this.button1.TabIndex = 2;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
@@ -76,7 +76,7 @@
             this.button2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button2.Location = new System.Drawing.Point(25, 92);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(204, 54);
+            this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 3;
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
@@ -86,7 +86,7 @@
             this.button3.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button3.Location = new System.Drawing.Point(25, 167);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(204, 54);
+            this.button3.Size = new System.Drawing.Size(200, 60);
             this.button3.TabIndex = 4;
             this.button3.Text = "button3";
             this.button3.UseVisualStyleBackColor = true;
@@ -96,7 +96,7 @@
             this.button4.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button4.Location = new System.Drawing.Point(25, 245);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(204, 54);
+            this.button4.Size = new System.Drawing.Size(200, 60);
             this.button4.TabIndex = 5;
             this.button4.Text = "button4";
             this.button4.UseVisualStyleBackColor = true;
@@ -126,9 +126,9 @@
             // change_language2
             // 
             this.change_language2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.change_language2.Location = new System.Drawing.Point(272, 124);
+            this.change_language2.Location = new System.Drawing.Point(292, 124);
             this.change_language2.Name = "change_language2";
-            this.change_language2.Size = new System.Drawing.Size(139, 76);
+            this.change_language2.Size = new System.Drawing.Size(200, 60);
             this.change_language2.TabIndex = 8;
             this.change_language2.Text = "簡中";
             this.change_language2.UseVisualStyleBackColor = true;
@@ -137,9 +137,9 @@
             // change_language3
             // 
             this.change_language3.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.change_language3.Location = new System.Drawing.Point(272, 237);
+            this.change_language3.Location = new System.Drawing.Point(292, 237);
             this.change_language3.Name = "change_language3";
-            this.change_language3.Size = new System.Drawing.Size(139, 76);
+            this.change_language3.Size = new System.Drawing.Size(200, 60);
             this.change_language3.TabIndex = 9;
             this.change_language3.Text = "英文";
             this.change_language3.UseVisualStyleBackColor = true;
@@ -147,6 +147,7 @@
             // 
             // bt_clear
             // 
+            this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_clear.Location = new System.Drawing.Point(526, 35);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(75, 39);
@@ -158,9 +159,9 @@
             // button5
             // 
             this.button5.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button5.Location = new System.Drawing.Point(272, 352);
+            this.button5.Location = new System.Drawing.Point(292, 352);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(139, 76);
+            this.button5.Size = new System.Drawing.Size(200, 60);
             this.button5.TabIndex = 11;
             this.button5.Text = "測試";
             this.button5.UseVisualStyleBackColor = true;

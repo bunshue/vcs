@@ -10,7 +10,6 @@ namespace WinBaseTerm
 {
     public class MonitorTerm : CommBase
     {
-
         public static GPSReadForm form;
         public static MonitorTerm term;
         public static CommBaseTermSettings settings;
@@ -73,18 +72,32 @@ namespace WinBaseTerm
         bool isNoend = true;
         protected override void OnRxChar(byte c)
         {
-            string s; bool nl = false;
+            Console.WriteLine("X" + c.ToString() + " ");
+            string s;
+            bool nl = false;
             ASCII v = (ASCII)c;
             if (settings.charsInLine > 0)
             {
                 nl = (++lineCount >= settings.charsInLine);
             }
-            if (settings.breakLineOnChar) if (v == settings.lineBreakChar) nl = true;
-            if (nl) lineCount = 0;
+            if (settings.breakLineOnChar)
+            {
+                if (v == settings.lineBreakChar)
+                {
+                    nl = true;
+                }
+            }
+            if (nl)
+            {
+                lineCount = 0;
+            }
             if (settings.showAsHex)
             {
                 s = c.ToString("X2");
-                if (!nl) s += " ";
+                if (!nl)
+                {
+                    s += " ";
+                }
             }
             else
             {

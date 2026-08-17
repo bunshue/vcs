@@ -102,9 +102,8 @@ namespace WinBaseTerm
 
                     this.bt.Tag = 1;
                     this.bt.Text = "關閉";
-                    this.Text = "GPS讀取(監聽狀態)";
-                    richTextBox1.Text += "GPS讀取(監聽狀態)\n";
-
+                    this.Text = "111GPS讀取(監聽狀態)";
+                    richTextBox1.Text += "1111GPS讀取(監聽狀態)\n";
                 }
                 catch (Exception ex)
                 {
@@ -118,8 +117,8 @@ namespace WinBaseTerm
                     MonitorTerm.term.Close();
                     this.bt.Tag = 0;
                     this.bt.Text = "監聽";
-                    this.Text = "GPS讀取(關閉狀態)";
-                    richTextBox1.Text += "GPS讀取(關閉狀態)\n";
+                    this.Text = "222GPS讀取(關閉狀態)";
+                    richTextBox1.Text += "2222GPS讀取(關閉狀態)\n";
                 }
                 catch (Exception ex)
                 {

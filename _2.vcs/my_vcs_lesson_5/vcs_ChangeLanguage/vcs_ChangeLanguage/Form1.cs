@@ -27,7 +27,6 @@ namespace vcs_ChangeLanguage
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
             show_item_location();
 
             //------------------------------------------------------------  # 60個
@@ -68,39 +67,40 @@ namespace vcs_ChangeLanguage
 
         private void change_language1_Click(object sender, EventArgs e)
         {
-            //正中
-            string str = "ChineseTraditional";
-            richTextBox1.Text += str + "\n";
+            richTextBox1.Text += "套用語言 : 正中\n";
 
+            string str = "ChineseTraditional";
+            richTextBox1.Text += "套用語言 : " + str + "\n";
             MultiLanguage.LoadLanguage(this, str);
         }
 
         private void change_language2_Click(object sender, EventArgs e)
         {
-            //簡中
+            richTextBox1.Text += "套用語言 : 簡中\n";
+
             string str = "ChineseSimplified";
-            richTextBox1.Text += str + "\n";
-
+            richTextBox1.Text += "套用語言 : " + str + "\n";
             MultiLanguage.LoadLanguage(this, str);
-
         }
 
         private void change_language3_Click(object sender, EventArgs e)
         {
-            //英文
-            string str = "English";
-            richTextBox1.Text += str + "\n";
+            richTextBox1.Text += "套用語言 : 英文\n";
 
+            string str = "English";
+            richTextBox1.Text += "套用語言 : " + str + "\n";
             MultiLanguage.LoadLanguage(this, str);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            /*
+            richTextBox1.Text += "默認語言 : 默認\n";
+
             string str = MultiLanguage.GetDefaultLanguage();
-            richTextBox1.Text += str + "\n";
+            richTextBox1.Text += "默認語言 : " + str + "\n";
             MultiLanguage.LoadLanguage(this, str);
-            */
+
+            return;
 
             string defaultLanguage = "ChineseSimplified";
             XmlReader reader = new XmlTextReader("../../Languages/DefaultLanguage.xml");

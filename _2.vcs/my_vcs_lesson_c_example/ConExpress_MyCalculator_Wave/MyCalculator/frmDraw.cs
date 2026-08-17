@@ -114,7 +114,7 @@ namespace ConExpress.Calculator
             }
         }
 
-        #region 工具欄操作
+        //#region 工具欄操作
 
         private void btnDraw_Click(object sender, EventArgs e)
         {
@@ -158,7 +158,7 @@ namespace ConExpress.Calculator
             this.splitContainer1.Panel2Collapsed = !this.btnShowProperty.Checked;
         }
 
-        #endregion 工具欄操作
+        //#endregion 工具欄操作
 
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -191,7 +191,7 @@ namespace ConExpress.Calculator
     /// </summary>
     public class DrawInfo
     {
-        #region 字段和屬性聲明
+        //#region 字段和屬性聲明
 
         private const string CategoryName = "繪圖信息";
 
@@ -259,7 +259,7 @@ namespace ConExpress.Calculator
             get { return m_PointList; }
         }
 
-        #endregion 字段和屬性聲明
+        //#endregion 字段和屬性聲明
 
         /// <summary>
         /// 構造函數
@@ -298,9 +298,5 @@ namespace ConExpress.Calculator
         {
             return m_Name;
         }
-
     }//class DrawInfo
-
-
-
 }//namespace

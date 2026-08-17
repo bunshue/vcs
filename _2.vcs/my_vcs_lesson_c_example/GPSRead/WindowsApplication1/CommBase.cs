@@ -1179,6 +1179,7 @@ namespace JH.CommBase
 
         private void ReceiveThread()
         {
+            Console.WriteLine("L");
             byte[] buf = new Byte[1];
             uint gotbytes;
             bool starting;
@@ -1193,7 +1194,8 @@ namespace JH.CommBase
             unmanagedOv = Marshal.AllocHGlobal(Marshal.SizeOf(ov));
             uMask = Marshal.AllocHGlobal(Marshal.SizeOf(eventMask));
 
-            ov.Offset = 0; ov.OffsetHigh = 0;
+            ov.Offset = 0;
+            ov.OffsetHigh = 0;
             ov.hEvent = sg.Handle;
             Marshal.StructureToPtr(ov, unmanagedOv, true);
 
@@ -1201,6 +1203,7 @@ namespace JH.CommBase
             {
                 while (true)
                 {
+                    Console.WriteLine("a");
                     if (!Win32Com.SetCommMask(hPort, Win32Com.EV_RXCHAR | Win32Com.EV_TXEMPTY | Win32Com.EV_CTS | Win32Com.EV_DSR
                         | Win32Com.EV_BREAK | Win32Com.EV_RLSD | Win32Com.EV_RING | Win32Com.EV_ERR))
                     {
@@ -1295,6 +1298,8 @@ namespace JH.CommBase
                             gotbytes = 0;
                             if (!Win32Com.ReadFile(hPort, buf, 1, out gotbytes, unmanagedOv))
                             {
+                                Console.WriteLine("len = " + gotbytes);
+
                                 //JH 1.1: Removed ERROR_IO_PENDING handling as comm timeouts have now
                                 //been set so ReadFile returns immediately. This avoids use of CancelIo
                                 //which was causing loss of data. Thanks to Daniel Moth for suggesting this

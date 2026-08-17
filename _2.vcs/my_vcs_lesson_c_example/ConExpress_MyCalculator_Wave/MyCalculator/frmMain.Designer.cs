@@ -50,20 +50,22 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.chkAllowMultiLine = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnAbout = new System.Windows.Forms.Button();
             this.btnDraw = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
@@ -76,9 +78,9 @@
             this.rtbInput.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtbInput.HideSelection = false;
             this.rtbInput.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.rtbInput.Location = new System.Drawing.Point(3, 17);
+            this.rtbInput.Location = new System.Drawing.Point(3, 18);
             this.rtbInput.Name = "rtbInput";
-            this.rtbInput.Size = new System.Drawing.Size(346, 128);
+            this.rtbInput.Size = new System.Drawing.Size(561, 79);
             this.rtbInput.TabIndex = 0;
             this.rtbInput.Text = "";
             this.toolTip1.SetToolTip(this.rtbInput, "可輸入多行進行計算,也可選擇部分表達式計算\r\n未選擇時計算輸入的全部表達式");
@@ -94,16 +96,16 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(482, 328);
+            this.tabControl1.Size = new System.Drawing.Size(660, 328);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.splitContainer3);
-            this.tabPage1.Location = new System.Drawing.Point(4, 21);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(474, 303);
+            this.tabPage1.Size = new System.Drawing.Size(652, 302);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "計算表達式";
             this.toolTip1.SetToolTip(this.tabPage1, "輸入表達式和查看計算結果");
@@ -122,8 +124,8 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.splitContainer1);
-            this.splitContainer3.Size = new System.Drawing.Size(468, 297);
-            this.splitContainer3.SplitterDistance = 112;
+            this.splitContainer3.Size = new System.Drawing.Size(646, 296);
+            this.splitContainer3.SplitterDistance = 75;
             this.splitContainer3.TabIndex = 4;
             // 
             // groupBox5
@@ -132,7 +134,7 @@
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox5.Location = new System.Drawing.Point(0, 0);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(112, 297);
+            this.groupBox5.Size = new System.Drawing.Size(75, 296);
             this.groupBox5.TabIndex = 0;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "操作符";
@@ -142,10 +144,10 @@
             this.trvOperateToken.Dock = System.Windows.Forms.DockStyle.Fill;
             this.trvOperateToken.Indent = 19;
             this.trvOperateToken.ItemHeight = 19;
-            this.trvOperateToken.Location = new System.Drawing.Point(3, 17);
+            this.trvOperateToken.Location = new System.Drawing.Point(3, 18);
             this.trvOperateToken.Name = "trvOperateToken";
             this.trvOperateToken.ShowNodeToolTips = true;
-            this.trvOperateToken.Size = new System.Drawing.Size(106, 277);
+            this.trvOperateToken.Size = new System.Drawing.Size(69, 275);
             this.trvOperateToken.TabIndex = 0;
             this.toolTip1.SetToolTip(this.trvOperateToken, "雙擊操作符即可在當前輸入位置插入選擇的操作符");
             this.trvOperateToken.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.trvOperateToken_NodeMouseDoubleClick);
@@ -167,8 +169,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
             this.splitContainer1.Panel2MinSize = 100;
-            this.splitContainer1.Size = new System.Drawing.Size(352, 297);
-            this.splitContainer1.SplitterDistance = 148;
+            this.splitContainer1.Size = new System.Drawing.Size(567, 296);
+            this.splitContainer1.SplitterDistance = 100;
             this.splitContainer1.TabIndex = 3;
             // 
             // groupBox1
@@ -177,7 +179,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(352, 148);
+            this.groupBox1.Size = new System.Drawing.Size(567, 100);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "輸入表達式";
@@ -188,7 +190,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(352, 145);
+            this.groupBox2.Size = new System.Drawing.Size(567, 192);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "計算結果";
@@ -196,9 +198,9 @@
             // rtbOutput
             // 
             this.rtbOutput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtbOutput.Location = new System.Drawing.Point(3, 17);
+            this.rtbOutput.Location = new System.Drawing.Point(3, 18);
             this.rtbOutput.Name = "rtbOutput";
-            this.rtbOutput.Size = new System.Drawing.Size(346, 125);
+            this.rtbOutput.Size = new System.Drawing.Size(561, 171);
             this.rtbOutput.TabIndex = 0;
             this.rtbOutput.Text = "";
             this.toolTip1.SetToolTip(this.rtbOutput, "顯示計算結果，多行計算時分行顯示");
@@ -206,10 +208,10 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.splitContainer2);
-            this.tabPage2.Location = new System.Drawing.Point(4, 21);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(474, 303);
+            this.tabPage2.Size = new System.Drawing.Size(652, 302);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "語法樹分析";
             this.toolTip1.SetToolTip(this.tabPage2, "查看表達式的語法樹分析");
@@ -231,8 +233,8 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.groupBox4);
             this.splitContainer2.Panel2MinSize = 100;
-            this.splitContainer2.Size = new System.Drawing.Size(468, 297);
-            this.splitContainer2.SplitterDistance = 265;
+            this.splitContainer2.Size = new System.Drawing.Size(646, 296);
+            this.splitContainer2.SplitterDistance = 443;
             this.splitContainer2.TabIndex = 2;
             // 
             // groupBox3
@@ -241,7 +243,7 @@
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Location = new System.Drawing.Point(0, 0);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(265, 297);
+            this.groupBox3.Size = new System.Drawing.Size(443, 296);
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "語法樹";
@@ -249,9 +251,9 @@
             // trvSyntaxTree
             // 
             this.trvSyntaxTree.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trvSyntaxTree.Location = new System.Drawing.Point(3, 17);
+            this.trvSyntaxTree.Location = new System.Drawing.Point(3, 18);
             this.trvSyntaxTree.Name = "trvSyntaxTree";
-            this.trvSyntaxTree.Size = new System.Drawing.Size(259, 277);
+            this.trvSyntaxTree.Size = new System.Drawing.Size(437, 275);
             this.trvSyntaxTree.TabIndex = 0;
             this.toolTip1.SetToolTip(this.trvSyntaxTree, "表達式的語法樹分析，選擇節點后在右邊顯示節點屬性");
             this.trvSyntaxTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.trvSyntaxTree_AfterSelect);
@@ -262,7 +264,7 @@
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.Location = new System.Drawing.Point(0, 0);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(199, 297);
+            this.groupBox4.Size = new System.Drawing.Size(199, 296);
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "節點屬性";
@@ -270,16 +272,16 @@
             // pgToken
             // 
             this.pgToken.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pgToken.Location = new System.Drawing.Point(3, 17);
+            this.pgToken.Location = new System.Drawing.Point(3, 18);
             this.pgToken.Name = "pgToken";
-            this.pgToken.Size = new System.Drawing.Size(193, 277);
+            this.pgToken.Size = new System.Drawing.Size(193, 275);
             this.pgToken.TabIndex = 0;
             this.toolTip1.SetToolTip(this.pgToken, "顯示選中的節點屬性");
             // 
             // btnExecute
             // 
             this.btnExecute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExecute.Location = new System.Drawing.Point(334, 346);
+            this.btnExecute.Location = new System.Drawing.Point(512, 346);
             this.btnExecute.Name = "btnExecute";
             this.btnExecute.Size = new System.Drawing.Size(75, 23);
             this.btnExecute.TabIndex = 1;
@@ -292,7 +294,7 @@
             // 
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnExit.Location = new System.Drawing.Point(412, 346);
+            this.btnExit.Location = new System.Drawing.Point(590, 346);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 23);
             this.btnExit.TabIndex = 2;
@@ -305,7 +307,7 @@
             // 
             this.chkAllowMultiLine.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chkAllowMultiLine.AutoSize = true;
-            this.chkAllowMultiLine.Location = new System.Drawing.Point(232, 350);
+            this.chkAllowMultiLine.Location = new System.Drawing.Point(410, 350);
             this.chkAllowMultiLine.Name = "chkAllowMultiLine";
             this.chkAllowMultiLine.Size = new System.Drawing.Size(96, 16);
             this.chkAllowMultiLine.TabIndex = 4;
@@ -320,19 +322,9 @@
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip1.ToolTipTitle = "提示信息";
             // 
-            // btnAbout
-            // 
-            this.btnAbout.Location = new System.Drawing.Point(12, 345);
-            this.btnAbout.Name = "btnAbout";
-            this.btnAbout.Size = new System.Drawing.Size(75, 23);
-            this.btnAbout.TabIndex = 5;
-            this.btnAbout.Text = "關於(&A)";
-            this.btnAbout.UseVisualStyleBackColor = true;
-            this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
-            // 
             // btnDraw
             // 
-            this.btnDraw.Location = new System.Drawing.Point(93, 346);
+            this.btnDraw.Location = new System.Drawing.Point(16, 350);
             this.btnDraw.Name = "btnDraw";
             this.btnDraw.Size = new System.Drawing.Size(75, 23);
             this.btnDraw.TabIndex = 6;
@@ -346,9 +338,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnExit;
-            this.ClientSize = new System.Drawing.Size(503, 378);
+            this.ClientSize = new System.Drawing.Size(681, 378);
             this.Controls.Add(this.btnDraw);
-            this.Controls.Add(this.btnAbout);
             this.Controls.Add(this.chkAllowMultiLine);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnExecute);
@@ -358,22 +349,25 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MyCalculator - Alex Leo @ ConExpress";
+            this.Text = "MyCalculator";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
@@ -404,7 +398,6 @@
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.TreeView trvOperateToken;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Button btnAbout;
         private System.Windows.Forms.Button btnDraw;
     }
 }
