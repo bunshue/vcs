@@ -68,9 +68,11 @@ namespace vcs_Draw_Brush
             groupBox0.Size = new Size(W, H * 6 + 10);
             groupBox1.Size = new Size(W, H * 6 + 10);
             groupBox2.Size = new Size(W, H * 4);
+            groupBox3.Size = new Size(W, H * 4);
             groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            groupBox3.Location = new Point(x_st + dx * 1, y_st + dy * 6);
 
             pictureBox1.Size = new Size(830, 780);
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
@@ -100,6 +102,9 @@ namespace vcs_Draw_Brush
             button20.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button21.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button22.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button30.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button31.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button32.Location = new Point(x_st + dx * 0, y_st + dy * 2);
 
             this.Size = new Size(1610, 840);
             this.Text = "vcs_Draw_Brush";
@@ -176,8 +181,9 @@ namespace vcs_Draw_Brush
         private void button1_Click(object sender, EventArgs e)
         {
             Graphics g = pictureBox1.CreateGraphics();
+            g.Clear(pictureBox1.BackColor);
 
-            //TextureBrush 有圖形的塗刷
+            richTextBox1.Text += "TextureBrush 有圖形的塗刷\n";
 
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Bitmap bmp = new Bitmap(filename);
@@ -221,6 +227,9 @@ namespace vcs_Draw_Brush
         private void button2_Click(object sender, EventArgs e)
         {
             Graphics g = pictureBox1.CreateGraphics();
+            g.Clear(pictureBox1.BackColor);
+
+            richTextBox1.Text += "";
 
             int x_st = 0;
             int y_st = 0;
@@ -228,7 +237,6 @@ namespace vcs_Draw_Brush
             int h = 50;
             int dy = h + 5;
             Rectangle rect = new Rectangle(x_st, y_st, w, h);
-
 
             //(紋理刷)
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
@@ -245,6 +253,9 @@ namespace vcs_Draw_Brush
         private void button3_Click(object sender, EventArgs e)
         {
             Graphics g = pictureBox1.CreateGraphics();
+            g.Clear(pictureBox1.BackColor);
+
+            richTextBox1.Text += "";
 
             string pic_filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_ic\ic1.jpg";
             TextureBrush textureBrush1;
@@ -280,6 +291,51 @@ namespace vcs_Draw_Brush
 
         private void button4_Click(object sender, EventArgs e)
         {
+            Graphics g = pictureBox1.CreateGraphics();
+            g.Clear(pictureBox1.BackColor);
+
+            richTextBox1.Text += "";
+
+            int x_st = 180;
+            int y_st = 50;
+            int dy = 140;
+            int W = pictureBox1.ClientSize.Width;
+            int H = pictureBox1.ClientSize.Height;
+            int pen_width = 25;
+
+            Pen p = new Pen(Color.Red, 10);     //default pen
+
+            //------------------------------  # 30個
+
+            //用圖片填滿筆刷
+            richTextBox1.Text += "TextureBrush 圖案筆\n";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            TextureBrush tb = new TextureBrush(new Bitmap(filename));
+            p = new Pen(tb, pen_width);
+            y_st += dy;
+            g.DrawRectangle(p, x_st, y_st, 200, 50);
+            g.DrawLine(p, x_st, y_st + 100, x_st + 200, y_st + 100);
+            g.FillEllipse(tb, x_st + 250, y_st, 200, 100);
+            g.DrawString("圖案筆", new Font("標楷體", 32), new SolidBrush(Color.Black), new PointF(x_st - 160, y_st));
+
+            //------------------------------  # 30個
+
+            //旋轉顯示圖像
+
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+            float MyAngle = 30f;//旋转的角度
+            tb = new TextureBrush(bitmap1);//实例化TextureBrush类
+            tb.RotateTransform(MyAngle);//以指定角度旋转图像
+            g.FillRectangle(tb, 0, 400, 300, 300);//绘制旋转后的图像
+
+            //------------------------------  # 30個
+
+            //紋理效果, 使用圖像填充文字線條
+            filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_背景圖\background.jpg";  //使用一張背景圖
+            //用圖片填滿筆刷
+            tb = new TextureBrush(Image.FromFile(filename));
+            g.DrawString("紋理效果, 使用圖像填充文字線條", new Font("標楷體", 40), tb, new PointF(x_st + 450, y_st));
+
         }
 
         //------------------------------------------------------------  # 60個
@@ -595,10 +651,13 @@ namespace vcs_Draw_Brush
 
         private void button13_Click(object sender, EventArgs e)
         {
+            Graphics g = pictureBox1.CreateGraphics();
+            g.Clear(pictureBox1.BackColor);
+
+            richTextBox1.Text += "";
+
             //LinearGradientBrush 建立漸層筆刷, 使用沿漸變混合的兩種顏色進行繪制
             //LinearGradientBrush 漸層筆刷變數 = new LinearGradientBrush(漸層矩形區域, 前景顏色, 背景顏色, 漸層傾斜角度);
-
-            Graphics g = pictureBox1.CreateGraphics();
 
             int W = 400;
             int H = 200;
@@ -668,6 +727,28 @@ namespace vcs_Draw_Brush
 
         private void button14_Click(object sender, EventArgs e)
         {
+            Graphics g = pictureBox1.CreateGraphics();
+            g.Clear(pictureBox1.BackColor);
+
+            richTextBox1.Text += "LinearGradientBrush 漸層筆\n";
+
+            int x_st = 180;
+            int y_st = 50;
+            int dy = 140;
+            int W = pictureBox1.ClientSize.Width;
+            int H = pictureBox1.ClientSize.Height;
+            int pen_width = 25;
+
+            Pen p = new Pen(Color.Red, 10);     //default pen
+            Rectangle rect1 = new Rectangle(0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
+            LinearGradientBrush lgb = new LinearGradientBrush(rect1, Color.Blue, Color.Red, 90);
+            p = new Pen(lgb, pen_width);
+            y_st += dy;
+            g.DrawRectangle(p, x_st, y_st, 200, 50);
+            g.DrawLine(p, x_st, y_st + 100, x_st + 200, y_st + 100);
+            g.FillEllipse(lgb, x_st + 250, y_st, 200, 100);
+            g.DrawString("漸層筆", new Font("標楷體", 32), new SolidBrush(Color.Black), new PointF(x_st - 160, y_st));
+
 
         }
 
@@ -675,15 +756,17 @@ namespace vcs_Draw_Brush
 
         private void button20_Click(object sender, EventArgs e)
         {
-            //HatchBrush 花紋筆刷
+            Graphics g = pictureBox1.CreateGraphics();
+            g.Clear(pictureBox1.BackColor);
+
+            richTextBox1.Text += "HatchBrush 花紋筆刷\n";
+
             /*
             HatchBrush		建立花紋筆刷
             HatchBrush 花紋筆刷變數 = new HatchBrush(花紋筆刷, 前景顏色, 背景顏色);
             HatchBrush hb = new HatchBrush(HatchStyle.Wave, Color.Blue, Color.Red);
             Pen p = new Pen(hb, 10);
             */
-
-            Graphics g = pictureBox1.CreateGraphics();
 
             int x_st = 0;
             int y_st = 0;
@@ -775,19 +858,19 @@ namespace vcs_Draw_Brush
 
             f = new Font("Broadway", 22, FontStyle.Underline);
             g.DrawString(".NET Framework", f, hatchBrush2, new PointF(x_st + 30, y_st + 100));
-
-
-
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button21_Click(object sender, EventArgs e)
         {
+            Graphics g = pictureBox1.CreateGraphics();
+            g.Clear(pictureBox1.BackColor);
+
+            richTextBox1.Text += "";
+
             //pbox的背景圖案
             //表單的背景圖案 法二  // Tile the image.
-
-            Graphics g = pictureBox1.CreateGraphics();
 
             //string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_背景圖\bg1.png";
             string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_angry_bird\AB_red.jpg";
@@ -801,17 +884,24 @@ namespace vcs_Draw_Brush
 
         private void button22_Click(object sender, EventArgs e)
         {
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button30_Click(object sender, EventArgs e)
+        {
+            Graphics g = pictureBox1.CreateGraphics();
+            g.Clear(pictureBox1.BackColor);
+
+            richTextBox1.Text += "SolidBrush 單色筆\n";
+
             int x_st = 180;
             int y_st = 50;
             int dy = 140;
             int W = pictureBox1.ClientSize.Width;
             int H = pictureBox1.ClientSize.Height;
             int pen_width = 25;
-
             Pen p = new Pen(Color.Red, 10);     //default pen
-            Graphics g = pictureBox1.CreateGraphics();
-
-            richTextBox1.Text += "SolidBrush 單色筆\n";
             SolidBrush sb = new SolidBrush(Color.Gold);
             p = new Pen(sb, pen_width);
             g.DrawRectangle(p, x_st, y_st, 200, 50);
@@ -819,51 +909,26 @@ namespace vcs_Draw_Brush
             g.FillEllipse(sb, x_st + 250, y_st, 200, 100);
             g.DrawString("單色筆", new Font("標楷體", 32), new SolidBrush(Color.Black), new PointF(x_st - 160, y_st));
 
-            //------------------------------  # 30個
+            int w = 300;
+            int h = 50;
 
-            //用圖片填滿筆刷
-            richTextBox1.Text += "TextureBrush 圖案筆\n";
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            TextureBrush tb = new TextureBrush(new Bitmap(filename));
-            p = new Pen(tb, pen_width);
-            y_st += dy;
-            g.DrawRectangle(p, x_st, y_st, 200, 50);
-            g.DrawLine(p, x_st, y_st + 100, x_st + 200, y_st + 100);
-            g.FillEllipse(tb, x_st + 250, y_st, 200, 100);
-            g.DrawString("圖案筆", new Font("標楷體", 32), new SolidBrush(Color.Black), new PointF(x_st - 160, y_st));
+            //實心刷
+            SolidBrush sb1 = new SolidBrush(Color.DarkOrchid);
+            SolidBrush sb2 = new SolidBrush(Color.Aquamarine);
+            SolidBrush sb3 = new SolidBrush(Color.DarkOrange);
+            Rectangle rect = new Rectangle(x_st, y_st + dy * 1, w, h);
+            g.FillRectangle(sb1, rect);　        // (實心刷)
+            g.DrawString("實心刷1", new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st + w + 10, y_st + dy * 1));
+        }
 
-            //------------------------------  # 30個
+        private void button31_Click(object sender, EventArgs e)
+        {
 
-            //旋轉顯示圖像
+        }
 
-            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
-            float MyAngle = 30f;//旋转的角度
-            tb = new TextureBrush(bitmap1);//实例化TextureBrush类
-            tb.RotateTransform(MyAngle);//以指定角度旋转图像
-            g.FillRectangle(tb, 0, 400, 300, 300);//绘制旋转后的图像
+        private void button32_Click(object sender, EventArgs e)
+        {
 
-            //------------------------------  # 30個
-
-            //紋理效果, 使用圖像填充文字線條
-            filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_背景圖\background.jpg";  //使用一張背景圖
-            //用圖片填滿筆刷
-            tb = new TextureBrush(Image.FromFile(filename));
-            g.DrawString("紋理效果, 使用圖像填充文字線條", new Font("標楷體", 40), tb, new PointF(x_st + 450, y_st));
-
-            //------------------------------  # 30個
-
-
-            //------------------------------  # 30個
-
-            richTextBox1.Text += "LinearGradientBrush 漸層筆\n";
-            Rectangle rect1 = new Rectangle(0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
-            LinearGradientBrush lgb = new LinearGradientBrush(rect1, Color.Blue, Color.Red, 90);
-            p = new Pen(lgb, pen_width);
-            y_st += dy;
-            g.DrawRectangle(p, x_st, y_st, 200, 50);
-            g.DrawLine(p, x_st, y_st + 100, x_st + 200, y_st + 100);
-            g.FillEllipse(lgb, x_st + 250, y_st, 200, 100);
-            g.DrawString("漸層筆", new Font("標楷體", 32), new SolidBrush(Color.Black), new PointF(x_st - 160, y_st));
         }
 
         //------------------------------------------------------------  # 60個
@@ -896,6 +961,7 @@ namespace vcs_Draw_Brush
         {
             flag_mouse_down = false;
         }
+
         //以塗刷新增畫筆, 刮刮樂效果 SP
 
         //------------------------------------------------------------  # 60個
@@ -908,18 +974,4 @@ namespace vcs_Draw_Brush
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-
-
-/*
-//實心刷
-SolidBrush sb1 = new SolidBrush(Color.DarkOrchid);
-SolidBrush sb2 = new SolidBrush(Color.Aquamarine);
-SolidBrush sb3 = new SolidBrush(Color.DarkOrange);
-rect = new Rectangle(x_st, y_st + dy * 4, w, h);
-g.FillRectangle(sb1, rect);　        // (實心刷)
-g.DrawString("實心刷1", new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st + w + 10, y_st + dy * 4));
-
-*/
-
 

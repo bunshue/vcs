@@ -1,4 +1,145 @@
 ﻿
+            // Work until the epsilon squared < this.
+            const double cutoff = 0.000001;
+
+                    const int max_iter = 100;
+                    int iter = 0;
+                    do
+                    {
+                        if (++iter > max_iter) break;
+                        epsilon = -(F(x) / dFdx(x));
+                        x += epsilon;
+                    } while (epsilon.MagnitudeSquared() > cutoff);
+
+//6060
+
+            List<Color> Colors = new List<Color>();
+
+            Colors.Add(Color.Red);
+            Colors.Add(Color.Green);
+            Colors.Add(Color.Blue);
+            Colors.Add(Color.Cyan);
+
+            int num_colors = Colors.Count;
+
+6060
+            Text = "Mandelbrot (" +
+                m_Xmin.ToString("0.000000") + ", " +
+                m_Ymin.ToString("0.000000") + ")-(" +
+                m_Xmax.ToString("0.000000") + ", " +
+                m_Ymax.ToString("0.000000") + ")";
+
+
+
+
+//------------------------------------------------------------  # 60個
+
+能夠各方向都可以選取圖片框
+
+
+
+
+//------------------------------------------------------------  # 60個
+
+                mnuScaleFull_Click(null, null);
+
+/*
+沒有 sender,e 的 click事件
+            // Deselect all colors.
+            // Deselect all colors.
+            // Deselect all colors.
+            // Deselect all colors.
+            btnNone_Click(null, null);
+
+            btnNone_Click(null, null);
+
+            btnNone_Click(null, null);
+
+            btnNone_Click(null, null);
+
+
+
+        // Deselect all colors.
+        private void btnNone_Click(object sender, EventArgs e)
+        {
+            foreach (Control ctl in this.Controls)
+            {
+                if (ctl is PictureBox)
+                {
+                    PictureBox pic = ctl as PictureBox;
+                    pic.BorderStyle = BorderStyle.None;
+                }
+            }
+        }
+
+        // Select all colors.
+        private void btnAll_Click(object sender, EventArgs e)
+        {
+            foreach (Control ctl in this.Controls)
+            {
+                if (ctl is PictureBox)
+                {
+                    PictureBox pic = ctl as PictureBox;
+                    pic.BorderStyle = BorderStyle.Fixed3D;
+                }
+            }
+        }
+
+
+        private void SelectColor(Color clr)
+        {
+            foreach (Control ctl in this.Controls)
+            {
+                if (ctl is PictureBox)
+                {
+                    if (ctl.BackColor.Equals(clr))
+                    {
+                        PictureBox pic = ctl as PictureBox;
+                        pic.BorderStyle = BorderStyle.Fixed3D;
+                        return;
+                    }
+                }
+            }
+        }
+
+
+
+
+        // Select the PictureBox with this name.
+        private void SelectPictureBox(string pic_name)
+        {
+            Control ctl = GetControlByName(pic_name);
+            PictureBox pic = ctl as PictureBox;
+            pic.BorderStyle = BorderStyle.Fixed3D;
+        }
+
+
+                Control ctl = GetControlByName("picColor_" + i);
+                PictureBox pic = ctl as PictureBox;
+                if (pic.BorderStyle == BorderStyle.Fixed3D)
+                {
+                    FractalForm.Colors.Add(pic.BackColor);
+                }
+
+        // Return the control with this name.
+        private Control GetControlByName(string pic_name)
+        {
+            foreach (Control ctl in this.Controls)
+            {
+                if (ctl.Name == pic_name)
+                {
+                    return ctl;
+                }
+            }
+            return null;
+        }
+
+
+
+
+*/
+
+
 //------------------------------------------------------------  # 60個
 
 菲爾茲獎（英語：Fields Medal），
