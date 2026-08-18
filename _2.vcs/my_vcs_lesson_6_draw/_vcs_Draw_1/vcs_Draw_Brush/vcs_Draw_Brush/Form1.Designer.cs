@@ -95,6 +95,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(180, 60);
             this.button3.TabIndex = 111;
+            this.button3.Text = "tb";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -262,7 +263,7 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(180, 60);
             this.button20.TabIndex = 116;
-            this.button20.Text = "HatchBrush 0";
+            this.button20.Text = "HatchBrush 花紋筆刷";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 

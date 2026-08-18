@@ -297,6 +297,11 @@ namespace vcs_Mix01
             double area = CalculateShoelaceArea(points);
 
             richTextBox1.Text += "面積 : " + area.ToString() + "\n";
+
+            Graphics g = richTextBox1.CreateGraphics();
+            g.DrawRectangle(Pens.Red, 100, 100, 100, 100);
+            g.DrawPolygon(new Pen(Color.Red, 5), points.ToArray());
+
         }
 
         //------------------------------------------------------------  # 60個

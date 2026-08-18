@@ -6,13 +6,14 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.IO;
+using System.Threading;
 
-// Libraries needed to work with VideoInputDevices
-using AForge.Video;
-using AForge.Video.DirectShow;
-
-
+using AForge.Vision.Motion; // Motion detection
+using AForge.Video;              //
+using AForge.Video.DirectShow;   // Video Recording
+using AForge.Video.FFMPEG;
 
 namespace WebcamSecurity
 {
@@ -25,13 +26,13 @@ namespace WebcamSecurity
         PictureBox[] DisplayReference = new PictureBox[4];
         GroupBox[] camPanels = new GroupBox[4];
         GroupBox[] camOptions = new GroupBox[4];
-        // The Configuration data set where we will store all user options (recording path , etc..)
-        Config config;
 
+        string RecordingPath = @"D:\dddddddddd";
 
         public MainForm()
         {
             InitializeComponent();
+
             // linking the user interface componets to the arrays
             this.DisplayReference[0] = this.Display_Cam1;
             this.DisplayReference[1] = this.Display_Cam2;
@@ -57,123 +58,7 @@ namespace WebcamSecurity
             this.camOptions[2].Enabled = false;
             this.camOptions[3].Enabled = false;
         }
-        // The following method is responsible of saving data (upon exit) to the Config DataSet
-        private void SaveOptions()
-        {
-            try
-            {
-                // we try to get the option record by key
-                DataRow r = this.config.Options.Select("Key = 'Camera1'")[0];
-                // then we retrieve the value from the user control
-                r[1] = ((!this.MotionDetection1.Checked) ? "0" : "1") +
-                    ((!this.AutoRecord1.Checked) ? "0" : "1") +
-                    ((!this.BeepOnMotionCheck1.Checked) ? "0" : "1");
-            }
-            catch (Exception ex) // if somthing goes wrong (ie. Option key is not found)
-            {
-                // we create a new Option record
-                this.config.Options.AddOptionsRow("Camera1",
-                    ((!this.MotionDetection1.Checked) ? "0" : "1") +
-                    ((!this.AutoRecord1.Checked) ? "0" : "1") +
-                    ((!this.BeepOnMotionCheck1.Checked) ? "0" : "1"));
-            }
-            try
-            {
-                DataRow r = this.config.Options.Select("Key = 'Camera2'")[0];
-                r[1] = ((!this.MotionDetection2.Checked) ? "0" : "1") +
-                    ((!this.AutoRecord2.Checked) ? "0" : "1") +
-                    ((!this.BeepOnMotionCheck2.Checked) ? "0" : "1");
-            }
-            catch (Exception ex)
-            {
-                this.config.Options.AddOptionsRow("Camera2",
-                    ((!this.MotionDetection2.Checked) ? "0" : "1") +
-                    ((!this.AutoRecord2.Checked) ? "0" : "1") +
-                    ((!this.BeepOnMotionCheck2.Checked) ? "0" : "1"));
-            }
-            try
-            {
-                DataRow r = this.config.Options.Select("Key = 'Camera3'")[0];
-                r[1] = ((!this.MotionDetection3.Checked) ? "0" : "1") +
-                    ((!this.AutoRecord3.Checked) ? "0" : "1") +
-                    ((!this.BeepOnMotionCheck3.Checked) ? "0" : "1");
-            }
-            catch (Exception ex)
-            {
-                this.config.Options.AddOptionsRow("Camera3",
-                    ((!this.MotionDetection3.Checked) ? "0" : "1") +
-                    ((!this.AutoRecord3.Checked) ? "0" : "1") +
-                    ((!this.BeepOnMotionCheck3.Checked) ? "0" : "1"));
-            }
-            try
-            {
-                DataRow r = this.config.Options.Select("Key = 'Camera4'")[0];
-                r[1] = ((!this.MotionDetection4.Checked) ? "0" : "1") +
-                    ((!this.AutoRecord4.Checked) ? "0" : "1") +
-                    ((!this.BeepOnMotionCheck4.Checked) ? "0" : "1");
-            }
-            catch (Exception ex)
-            {
-                this.config.Options.AddOptionsRow("Camera4",
-                    ((!this.MotionDetection4.Checked) ? "0" : "1") +
-                    ((!this.AutoRecord4.Checked) ? "0" : "1") +
-                    ((!this.BeepOnMotionCheck4.Checked) ? "0" : "1"));
-            }
-            try
-            {
-                DataRow r = this.config.Options.Select("Key = 'RECORDINGPATH'")[0];
-                r[1] = this.RecordingPathInput.Text;
-            }
-            catch (Exception ex)
-            {
-                this.config.Options.AddOptionsRow("RECORDINGPATH", this.RecordingPathInput.Text);
-            }
-            // finally we write everyting to an xml file
-            this.config.WriteXml("config.xml");
-        }
-        // The following method is responsible of loading data (upon application load) 
-        // from the Config Dataset to the user interface
-        private void LoadOptions()
-        {
-            try
-            {
-                // we try to get the option by its Key
-                DataRow r = this.config.Options.Select("Key = 'Camera1'")[0];
-                string option = r[1].ToString();
-                // we apply changes to the user interface
-                this.MotionDetection1.Checked = (option[0] == '0') ? false : true;
-                this.AutoRecord1.Checked = (option[1] == '0') ? false : true;
-                this.BeepOnMotionCheck1.Checked = (option[2] == '0') ? false : true;
-            }
-            catch (Exception ex) { }
-            try
-            {
-                DataRow r = this.config.Options.Select("Key = 'Camera2'")[0];
-                string option = r[1].ToString();
-                this.MotionDetection2.Checked = (option[0] == '0') ? false : true;
-                this.AutoRecord2.Checked = (option[1] == '0') ? false : true;
-                this.BeepOnMotionCheck2.Checked = (option[2] == '0') ? false : true;
-            }
-            catch (Exception ex) { }
-            try
-            {
-                DataRow r = this.config.Options.Select("Key = 'Camera3'")[0];
-                string option = r[1].ToString();
-                this.MotionDetection3.Checked = (option[0] == '0') ? false : true;
-                this.AutoRecord3.Checked = (option[1] == '0') ? false : true;
-                this.BeepOnMotionCheck3.Checked = (option[2] == '0') ? false : true;
-            }
-            catch (Exception ex) { }
-            try
-            {
-                DataRow r = this.config.Options.Select("Key = 'Camera4'")[0];
-                string option = r[1].ToString();
-                this.MotionDetection4.Checked = (option[0] == '0') ? false : true;
-                this.AutoRecord4.Checked = (option[1] == '0') ? false : true;
-                this.BeepOnMotionCheck4.Checked = (option[2] == '0') ? false : true;
-            }
-            catch (Exception ex) { }
-        }
+
         // the FilterInfoCollection is where we get information about VideoCaptureDevices
         private FilterInfoCollection webcam;
 
@@ -191,44 +76,13 @@ namespace WebcamSecurity
                 this.camOptions[i].Enabled = true;
             }
 
-            // we try to load Options from the xml file saved previously
-            this.config = new Config();
-
-            try
-            {
-                config.ReadXml("config.xml");
-                // we fetch the recording path from the DataSet
-                DataRow result = config.Options.Select("Key = 'RECORDINGPATH'")[0];
-                this.RecordingPathInput.Text = result[1].ToString();
-            }
-            catch (Exception ex)
-            {
-                // if the recording path is not set previously by the user
-                // this code below will prompt the user to set it
-                FolderBrowserDialog folder = new FolderBrowserDialog();
-                while (folder.SelectedPath == "")
-                {
-                    folder.ShowDialog();
-                }
-                if (folder.SelectedPath != "")
-                {
-                    this.RecordingPathInput.Text = folder.SelectedPath;
-                }
-            }
-
-            // load the options the the user interface
-            LoadOptions();
-
             // set the recording path to the exising CameraMonitors
             for (int i = 0; i < 4; i++)
             {
-                try
-                {
-                    this.CamMonitor[i].RecordingPath = this.RecordingPathInput.Text;
-                }
-                catch (NullReferenceException ex) { }
+                this.CamMonitor[i].RecordingPath = RecordingPath;
             }
         }
+
         // this method will stop recording and running cameras 
         // also save the options to an xml file
         private void StopCameras(object sender, FormClosingEventArgs e)
@@ -242,47 +96,9 @@ namespace WebcamSecurity
                 }
                 catch (Exception ex) { }
             }
-            // save options to an  xml file
-            this.SaveOptions();
         }
 
-        // Method for changing the record path
-        private void ChangeRecordingPath(object sender, EventArgs e)
-        {
-            // prompt the user with a FolderBrowserDialog
-            FolderBrowserDialog folder = new FolderBrowserDialog();
-            folder.ShowDialog();
-
-            if (folder.SelectedPath != "")
-            {
-                this.RecordingPathInput.Text = folder.SelectedPath;
-                // Load the selected path to the Config DataSet
-                try
-                {
-                    DataRow r = this.config.Options.Select("Key = 'RECORDINGPATH'")[0];
-                    r[1] = this.RecordingPathInput.Text;
-                }
-                catch (Exception ex)
-                {
-                    this.config.Options.AddOptionsRow("RECORDINGPATH", this.RecordingPathInput.Text);
-                }
-                // update the recording path to the exising CameraMonitors
-                for (int i = 0; i < 4; i++)
-                {
-                    try
-                    {
-                        this.CamMonitor[i].RecordingPath = this.RecordingPathInput.Text;
-                    }
-                    catch (NullReferenceException ex) { }
-                }
-            }
-        }
-        // Opening the record directory 
-        private void OpenRecordingDirectory_Click(object sender, EventArgs e)
-        {
-            string filePath = this.RecordingPathInput.Text;
-            System.Diagnostics.Process.Start("explorer.exe", filePath);
-        }
+        //6060
 
         // The Rest is User Interface EventHandling
         private void RecordButton1_Click(object sender, EventArgs e)
@@ -564,4 +380,195 @@ namespace WebcamSecurity
             this.SetFocus(0);
         }
     }
+
+
+
+    class WebCam
+    {
+        PictureBox display;    // a refrence to the PictureBox on the MainForm
+        private VideoCaptureDevice cam; // refrence to the actual VidioCaptureDevice (webcam)
+        String cameraName; // string for display purposes
+        MotionDetector md;
+        public WebCam(PictureBox display, string monikerString, String cameraName)
+        {
+            this.cameraName = cameraName;
+            this.display = display;
+            this.display.Paint += new PaintEventHandler(DrawMessage);
+
+            md = new MotionDetector(new TwoFramesDifferenceDetector(), new MotionAreaHighlighting()); // creates the motion detector
+
+            cam = new VideoCaptureDevice(monikerString);
+            cam.NewFrame += new NewFrameEventHandler(cam_NewFrame); // defines which method to call when a new frame arrives
+            cam.Start(); // starts the videoCapture
+        }
+
+
+
+        public void StopCapture()
+        {
+            if (this.cam.IsRunning)
+            {
+                // we must stop the VideoCaptureDevice when done to free it so it can be used by other applications
+                this.cam.Stop();
+            }
+        }
+
+        /*
+         * the following method draws information on the PictureBox
+         * (date / time / motion if detected / recording state ...)
+         */
+        private void DrawMessage(object sender, PaintEventArgs e)
+        {
+            using (Font myFont = new Font("Tahoma", 10, FontStyle.Bold))
+            {
+
+                e.Graphics.DrawString(DateTime.Now.ToString() + ((this.motionDetected) ? " + Motion !" : ""), myFont, ((this.motionDetected) ? Brushes.Red : Brushes.Green), new Point(2, 2));
+                if (this.IsRecording)
+                {
+                    if (this.showRecordMarkerCount > 10)
+                    {
+                        e.Graphics.DrawString("[RECORDING]", myFont, Brushes.Red, new Point(2, 14));
+
+                        if (this.showRecordMarkerCount == 20)
+                        {
+                            this.showRecordMarkerCount = 0;
+                        }
+                    }
+                    this.showRecordMarkerCount++;
+                }
+            }
+
+
+        }
+
+        bool motionDetected = false; // was there any motion detected previously
+        int calibrateAndResume = 0; // counter used delay/skip frames from being processed by the MotionDetector
+
+        void cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        {
+            try
+            {
+                Bitmap bit = (Bitmap)eventArgs.Frame.Clone(); // get a copy of the BitMap from the VideoCaptureDevice
+                if (!this.isResolutionSet)
+                {
+                    // this is run once to set the resolution for the VideoRecorder
+                    this.Width = bit.Width;
+                    this.Height = bit.Height;
+                    this.isResolutionSet = true;
+                }
+                this.display.Image = (Bitmap)bit.Clone(); // displays the current frame on the main form
+                if (this.MotionDetection && !this.motionDetected)
+                {
+                    // if motion detection is enabled and there werent any previous motion detected
+                    Bitmap bit2 = (Bitmap)bit.Clone(); // clone the bits from the current frame
+
+                    if (md.ProcessFrame(bit2) > 0.001) // feed the bits to the MD 
+                    {
+                        if (this.calibrateAndResume > 3)
+                        {
+                            // if motion was detected in 3 subsequent frames
+                            Thread th = new Thread(MotionReaction);
+                            th.Start(); // start the motion reaction thread
+                        }
+                        else this.calibrateAndResume++;
+                    }
+
+                }
+                if (IsRecording)
+                {
+                    // if recording is enabled we enqueue the current frame to be encoded to a video file
+                    Graphics gr = Graphics.FromImage(bit);
+                    Pen p = new Pen(Color.Red);
+                    p.Width = 5.0f;
+                    using (Font myFont = new Font("Tahoma", 10, FontStyle.Bold))
+                    {
+                        gr.DrawString(DateTime.Now.ToString(), myFont, Brushes.Red, new Point(2, 2));
+                    }
+                    frames.Enqueue((Bitmap)bit.Clone());
+                }
+
+            }
+            catch (InvalidOperationException ex) { }
+        }
+
+        // different option toggles
+        public bool RecordOnMotion = false;
+        public bool BeepOnMotion = false;
+        public bool MotionDetection = false;
+        public bool forceRecord = false;
+
+        private void MotionReaction()
+        {
+            this.motionDetected = true;
+            if (this.RecordOnMotion)
+            {
+                this.StartRecording(); // record if Autorecord is toggled
+            }
+            if (this.BeepOnMotion)
+            {
+                // beep if BeepOnMotion is toggeled
+                System.Console.Beep(400, 500);
+                System.Console.Beep(800, 500);
+            }
+
+            Thread.Sleep(10000); // the user is notified for 10 seconds
+            calibrateAndResume = 0;
+            this.motionDetected = false;
+            Thread.Sleep(3000);
+            // the thread waits 3 seconds if there is no motion detected we stop the AutoRecord
+            if (!this.forceRecord && this.motionDetected == false)
+            {
+                this.StopRecording();
+            }
+        }
+
+        // output video resolution info
+        bool isResolutionSet = false;
+        int Width = 0;
+        int Height = 0;
+
+        public bool IsRecording = false; // recording flag
+
+        Queue<Bitmap> frames = new Queue<Bitmap>(); // Queue that stors frames to be written by the recorder thread
+        public string RecordingPath = "recording"; // default recording path
+
+        private void DoRecord()
+        {
+            // we set our VideoFileWriter as well as the file name, resolution and fps
+            VideoFileWriter writer = new VideoFileWriter();
+            writer.Open(RecordingPath + "\\" + this.cameraName + String.Format("{0:_dd-M-yyyy_hh-mm-ss}", DateTime.Now) + ".avi", this.Width, this.Height, 30);
+
+            // as long as we're recording
+            // we dequeue the BitMaps waiting in the Queue and write them to the file
+            while (IsRecording)
+            {
+                if (frames.Count > 0)
+                {
+                    Bitmap bmp = frames.Dequeue();
+                    writer.WriteVideoFrame(bmp);
+                }
+            }
+            writer.Close();
+        }
+
+        int showRecordMarkerCount = 0; // used to display message on the main form
+        public void StartRecording()
+        {
+            if (!IsRecording)
+            {
+                // if were not already recording we start the recording thread
+                this.IsRecording = true;
+                Thread th = new Thread(DoRecord);
+                th.Start();
+            }
+        }
+
+        // stops recording
+        public void StopRecording()
+        {
+            this.IsRecording = false;
+        }
+    }
 }
+
+

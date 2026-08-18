@@ -38,6 +38,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -72,7 +73,7 @@
             // 
             // btnConnect
             // 
-            this.btnConnect.Location = new System.Drawing.Point(240, 17);
+            this.btnConnect.Location = new System.Drawing.Point(240, 16);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(75, 23);
             this.btnConnect.TabIndex = 8;
@@ -92,9 +93,9 @@
             // videoSourcePlayer
             // 
             this.videoSourcePlayer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.videoSourcePlayer.Location = new System.Drawing.Point(3, 17);
+            this.videoSourcePlayer.Location = new System.Drawing.Point(3, 18);
             this.videoSourcePlayer.Name = "videoSourcePlayer";
-            this.videoSourcePlayer.Size = new System.Drawing.Size(256, 291);
+            this.videoSourcePlayer.Size = new System.Drawing.Size(256, 290);
             this.videoSourcePlayer.TabIndex = 10;
             this.videoSourcePlayer.Text = "videoSourcePlayer";
             this.videoSourcePlayer.VideoSource = null;
@@ -103,9 +104,9 @@
             // videoSourcePlayer1
             // 
             this.videoSourcePlayer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.videoSourcePlayer1.Location = new System.Drawing.Point(3, 17);
+            this.videoSourcePlayer1.Location = new System.Drawing.Point(3, 18);
             this.videoSourcePlayer1.Name = "videoSourcePlayer1";
-            this.videoSourcePlayer1.Size = new System.Drawing.Size(256, 291);
+            this.videoSourcePlayer1.Size = new System.Drawing.Size(256, 290);
             this.videoSourcePlayer1.TabIndex = 10;
             this.videoSourcePlayer1.Text = "videoSourcePlayer";
             this.videoSourcePlayer1.VideoSource = null;
@@ -141,11 +142,20 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(816, 12);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(320, 625);
+            this.richTextBox1.TabIndex = 14;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(570, 384);
+            this.ClientSize = new System.Drawing.Size(1148, 649);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -179,6 +189,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

@@ -20,10 +20,6 @@ SolidBrush		建立單一顏色的筆刷
 TextureBrush		建立以圖形物件當作圖案的筆刷
 	TextureBrush tb = new TextureBrush("bmp1.bmp");
 	Pen p = new Pen(tb, 2);
-HatchBrush		建立花紋筆刷
-	HatchBrush 花紋筆刷變數 = new HatchBrush(花紋筆刷, 前景顏色, 背景顏色);
-	HatchBrush hb = new HatchBrush(HatchStyle.Wave, Color.Blue, Color.Red);
-	Pen p = new Pen(hb, 10);
 */
 
 namespace vcs_Draw_Brush
@@ -57,9 +53,8 @@ namespace vcs_Draw_Brush
             textureBrush = new TextureBrush(image);
             p = new Pen(textureBrush, 40);
             //以塗刷新增畫筆, 刮刮樂效果 SP
-
-
         }
+
         void show_item_location()
         {
             //button
@@ -180,25 +175,47 @@ namespace vcs_Draw_Brush
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Graphics g = pictureBox1.CreateGraphics();
+
             //TextureBrush 有圖形的塗刷
 
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Bitmap bmp = new Bitmap(filename);
-            TextureBrush textureBrush = new TextureBrush(bmp);
-
-            Graphics g = pictureBox1.CreateGraphics();
-
-
             TextureBrush tb = new TextureBrush(bmp);  // 使用的影像
-            g.FillEllipse(tb, 0, 0, 305, 400); //塗刷填滿橢圓形區域
+
+            g.FillRectangle(tb, 0, 30, 305, 30);
+
+            g.FillRectangle(tb, 0, 90, 305, 30);
+
+            g.FillRectangle(tb, 0, 150, 305, 30);
+
+            g.FillRectangle(tb, 0, 210, 305, 30);
+
+            g.FillRectangle(tb, 0, 270, 305, 30);
+
+            g.FillRectangle(tb, 0, 330, 305, 30);
+
+            g.FillRectangle(tb, 0, 390, 305, 30);
+
+
+
+
+            //g.FillRectangle(tb, 0, 0, 305, 400);
+
+            //g.FillEllipse(tb, 0, 0, 305, 400); //塗刷填滿橢圓形區域
             g.DrawEllipse(Pens.Black, 0, 0, 305, 400);  //畫出橢圓形外框
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
-            Rectangle rect = new Rectangle(150, 150, 80, 80);
+            filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_animals\animals2.jpg";
+            bmp = new Bitmap(filename);
+            Rectangle rect = new Rectangle(399, 209, 140, 140);
             tb = new TextureBrush(bmp, rect);  // 使用的影像
-            g.FillEllipse(tb, 320, 20, 400, 200); //塗刷填滿橢圓形區域
-            g.DrawEllipse(Pens.Black, 320, 20, 400, 200);  //畫出橢圓形外框
+            //g.FillEllipse(tb, 320, 20, 400, 200); //塗刷填滿橢圓形區域
+            //g.FillRectangle(tb, 320, 230, 400, 200); //塗刷填滿橢圓形區域
+
+            g.FillRectangle(tb, 0, 0, 140 * 3, 140 * 3); //塗刷填滿橢圓形區域
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -212,60 +229,51 @@ namespace vcs_Draw_Brush
             int dy = h + 5;
             Rectangle rect = new Rectangle(x_st, y_st, w, h);
 
+
             //(紋理刷)
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            TextureBrush textureBrush = new TextureBrush(new Bitmap(filename));
+            TextureBrush tb = new TextureBrush(new Bitmap(filename));
 
             //對原圖(x_st,y_st) w, h 抓一塊出來放在(x_st,y_st)
             rect = new Rectangle(x_st, y_st, w, h);
-            g.FillRectangle(textureBrush, rect);       //(紋理刷)
+            g.FillRectangle(tb, rect);       //(紋理刷)
             g.DrawString("紋理刷1", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(x_st + w + 10, y_st));
-            rect = new Rectangle(x_st, y_st + dy, w, h);
-            g.FillRectangle(textureBrush, rect);       //(紋理刷)
-            g.DrawString("紋理刷2", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(x_st + w + 10, y_st + dy));
-            rect = new Rectangle(x_st, y_st + dy * 2, w, h);
-            g.FillRectangle(textureBrush, rect);       //(紋理刷)
-            g.DrawString("紋理刷3", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(x_st + w + 10, y_st + dy * 2));
-            rect = new Rectangle(x_st, y_st + dy * 3, w, h);
-            g.FillRectangle(textureBrush, rect);       //(紋理刷)
-            g.DrawString("紋理刷4", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(x_st + w + 10, y_st + dy * 3));
-
-            //實心刷
-            SolidBrush sb1 = new SolidBrush(Color.DarkOrchid);
-            SolidBrush sb2 = new SolidBrush(Color.Aquamarine);
-            SolidBrush sb3 = new SolidBrush(Color.DarkOrange);
-            rect = new Rectangle(x_st, y_st + dy * 4, w, h);
-            g.FillRectangle(sb1, rect);　        // (實心刷)
-            g.DrawString("實心刷1", new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st + w + 10, y_st + dy * 4));
-            rect = new Rectangle(x_st, y_st + dy * 5, w, h);
-            g.FillRectangle(sb2, rect);　        // (實心刷)
-            g.DrawString("實心刷2", new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st + w + 10, y_st + dy * 5));
-            rect = new Rectangle(x_st, y_st + dy * 6, w, h);
-            g.FillRectangle(sb3, rect);　        // (實心刷)
-            g.DrawString("實心刷3", new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st + w + 10, y_st + dy * 6));
-
-            //陰影刷
-            HatchBrush hb1 = new HatchBrush(HatchStyle.DiagonalCross,
-            Color.DarkOrange, Color.Aquamarine);
-            HatchBrush hb2 = new HatchBrush(HatchStyle.DarkVertical,
-            Color.DarkOrange, Color.Aquamarine);
-            HatchBrush hb3 = new HatchBrush(HatchStyle.LargeConfetti,
-            Color.DarkOrange, Color.Aquamarine);
-            rect = new Rectangle(x_st, y_st + dy * 8, w, h);
-            g.FillRectangle(hb1, rect);             //(陰影刷)
-            g.DrawString("陰影刷1", new Font("標楷體", 20), new SolidBrush(Color.Purple), new PointF(x_st + w + 10, y_st + dy * 8));
-            rect = new Rectangle(x_st, y_st + dy * 9, w, h);
-            g.FillRectangle(hb2, rect);             //(陰影刷)
-            g.DrawString("陰影刷2", new Font("標楷體", 20), new SolidBrush(Color.Purple), new PointF(x_st + w + 10, y_st + dy * 9));
-            rect = new Rectangle(x_st, y_st + dy * 10, w, h);
-            g.FillRectangle(hb3, rect);             //(陰影刷)
-            g.DrawString("陰影刷3", new Font("標楷體", 20), new SolidBrush(Color.Purple), new PointF(x_st + w + 10, y_st + dy * 10));
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button3_Click(object sender, EventArgs e)
         {
+            Graphics g = pictureBox1.CreateGraphics();
+
+            string pic_filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_ic\ic1.jpg";
+            TextureBrush textureBrush1;
+            Image img = Image.FromFile(pic_filename);
+            g.DrawImage(img, 100, 100);
+
+            textureBrush1 = new TextureBrush(img, WrapMode.TileFlipXY);
+            int W = this.Size.Width;
+            int H = this.Size.Height;
+            //g.FillRectangle(textureBrush1, 0, 0, this.Size.Width, this.Size.Height);
+            //g.FillRectangle(textureBrush1, W * 4 / 5, H * 4 / 5, W / 5, H / 5);
+
+            g.FillRectangle(textureBrush1, W * 2 / 3, H * 2 / 3, W / 3, H / 3);
+
+            //------------------------------------------------------------  # 60個
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+
+            TextureBrush textureBrush2;
+            Rectangle sR, dR;
+            img = Image.FromFile(filename);
+            //g.DrawImage(img, 10, 10);
+
+            sR = new Rectangle(100, 100, 100, 100);//來源矩形
+            dR = new Rectangle(W * 1 / 3 - 50, H * 2 / 3 - 100, W / 3, H / 3);//目標矩形
+
+            textureBrush2 = new TextureBrush(img, WrapMode.TileFlipXY);
+            g.DrawImage(img, dR, sR, GraphicsUnit.Pixel);
+
         }
 
         //------------------------------------------------------------  # 60個
@@ -615,7 +623,7 @@ namespace vcs_Draw_Brush
                 richTextBox1.Text += temp.ToString() + "\n";
             }
 
-            //3030
+            //------------------------------------------------------------  # 60個
 
             Rectangle rect = new Rectangle(50, 300, 600, 50);
             Brush b = new LinearGradientBrush(rect, Color.Red, Color.Green, LinearGradientMode.Horizontal);
@@ -627,6 +635,33 @@ namespace vcs_Draw_Brush
             ForwardDiagonal = 2　 從左上到右下的漸變
             BackwardDiagonal = 3　從右上到左下的漸變
             */
+
+            //------------------------------------------------------------  # 60個
+
+            x_st = 100;
+            y_st = 400;
+
+            Font f_index = new Font("Arial", 80, FontStyle.Bold);
+            SolidBrush sb = new SolidBrush(Color.FromArgb(128, 255, 0, 0));
+
+            g.DrawString("5", f_index, sb, new PointF(x_st, y_st));
+            g.DrawRectangle(Pens.Red, x_st, y_st, 100, 100);
+
+            Rectangle R2;
+            LinearGradientBrush lgb2;
+
+            R2 = new Rectangle(x_st + 20, y_st + 50, 80, 80);
+            lgb2 = new LinearGradientBrush(R2, Color.Green, Color.Yellow, -45);
+            g.FillPie(lgb2, R2, 30, 300);
+
+            R2 = new Rectangle(x_st + 120, y_st + 70, 50, 50);
+            lgb2 = new LinearGradientBrush(R2, Color.Green, Color.Yellow, -45);
+            g.FillPie(lgb2, R2, 30, 300);
+
+            R2 = new Rectangle(x_st + 190, y_st + 85, 30, 30);
+            lgb2 = new LinearGradientBrush(R2, Color.Green, Color.Yellow, -45);
+            g.FillPie(lgb2, R2, 30, 300);
+
         }
 
         //------------------------------------------------------------  # 60個
@@ -640,13 +675,112 @@ namespace vcs_Draw_Brush
 
         private void button20_Click(object sender, EventArgs e)
         {
-            Graphics g = this.pictureBox1.CreateGraphics();
+            //HatchBrush 花紋筆刷
+            /*
+            HatchBrush		建立花紋筆刷
+            HatchBrush 花紋筆刷變數 = new HatchBrush(花紋筆刷, 前景顏色, 背景顏色);
+            HatchBrush hb = new HatchBrush(HatchStyle.Wave, Color.Blue, Color.Red);
+            Pen p = new Pen(hb, 10);
+            */
+
+            Graphics g = pictureBox1.CreateGraphics();
+
+            int x_st = 0;
+            int y_st = 0;
+            int w = 300;
+            int h = 50;
+            int dy = h + 5;
+            Rectangle rect = new Rectangle(x_st, y_st, w, h);
+
+            //花紋筆刷
+            HatchBrush hb1 = new HatchBrush(HatchStyle.DiagonalCross, Color.DarkOrange, Color.Aquamarine);
+            HatchBrush hb2 = new HatchBrush(HatchStyle.DarkVertical, Color.DarkOrange, Color.Aquamarine);
+            HatchBrush hb3 = new HatchBrush(HatchStyle.LargeConfetti, Color.DarkOrange, Color.Aquamarine);
+            rect = new Rectangle(x_st, y_st + dy * 1, w, h);
+            g.FillRectangle(hb1, rect);
+
+            g.DrawString("花紋筆刷1", new Font("標楷體", 20), new SolidBrush(Color.Purple), new PointF(x_st + w + 10, y_st + dy * 1));
+
+            rect = new Rectangle(x_st, y_st + dy * 2, w, h);
+            g.FillRectangle(hb2, rect);
+            g.DrawString("花紋筆刷2", new Font("標楷體", 20), new SolidBrush(Color.Purple), new PointF(x_st + w + 10, y_st + dy * 2));
+
+            rect = new Rectangle(x_st, y_st + dy * 3, w, h);
+            g.FillRectangle(hb3, rect);
+            g.DrawString("花紋筆刷3", new Font("標楷體", 20), new SolidBrush(Color.Purple), new PointF(x_st + w + 10, y_st + dy * 3));
+
+            //------------------------------------------------------------  # 60個
+
+            int pen_width = 25;
+            richTextBox1.Text += "HatchBrush 花紋筆\n";
+            HatchBrush hb = new HatchBrush(HatchStyle.Wave, Color.Blue, Color.Red);
+            p = new Pen(hb, pen_width);
+            y_st += dy;
+            y_st += 200;
+            g.DrawRectangle(p, x_st, y_st, 200, 50);
+            g.DrawLine(p, x_st, y_st + 100, x_st + 200, y_st + 100);
+            g.FillEllipse(hb, x_st + 250, y_st, 200, 100);
+            g.DrawString("花紋筆", new Font("標楷體", 32), new SolidBrush(Color.Black), new PointF(x_st - 160, y_st));
+
+            //------------------------------------------------------------  # 60個
 
             //條紋
-            HatchBrush hb = new HatchBrush(HatchStyle.DarkHorizontal, Color.Gold);
-            Pen p = new Pen(hb, 30);
-            g.DrawLine(p, 10, 30, 200, 200);
+            hb = new HatchBrush(HatchStyle.DarkHorizontal, Color.Gold);
+            p = new Pen(hb, pen_width);
+            g.DrawLine(p, 100, 400, 400, 500);
+
+            //------------------------------------------------------------  # 60個
+
+            Font f_index = new Font("Arial", 80, FontStyle.Bold);
+            SolidBrush sb = new SolidBrush(Color.FromArgb(128, 255, 0, 0));
+
+            HatchBrush hatchBrush1;
+            Single p1, p2, p3;
+            x_st = 500;
+            y_st = 0;
+
+            g.DrawString("3", f_index, sb, new PointF(x_st, y_st));
+            g.DrawRectangle(Pens.Red, x_st, y_st, 100, 100);
+
+            p1 = 180;
+            p2 = 125;
+            p3 = 160;
+
+            hatchBrush1 = new HatchBrush(HatchStyle.DashedDownwardDiagonal, Color.White, Color.Red);
+            g.FillRectangle(hatchBrush1, x_st + 70, y_st + 250 - p1, 30, p1);
+
+            hatchBrush1 = new HatchBrush(HatchStyle.DarkUpwardDiagonal, Color.White, Color.Blue);
+            g.FillRectangle(hatchBrush1, x_st + 120, y_st + 250 - p2, 30, p2);
+
+            hatchBrush1 = new HatchBrush(HatchStyle.DiagonalCross, Color.White, Color.Green);
+            g.FillRectangle(hatchBrush1, x_st + 170, y_st + 250 - p3, 30, p3);
+
+            g.DrawLine(new Pen(Color.Black, 2), new Point(x_st + 10, y_st + 250), new Point(x_st + 280, y_st + 250));
+
+
+            x_st = 500;
+            y_st = 300;
+
+            g.DrawString("4", f_index, sb, new PointF(x_st, y_st));
+            g.DrawRectangle(Pens.Red, x_st, y_st, 100, 100);
+
+            HatchBrush hatchBrush2 = new HatchBrush(HatchStyle.DashedDownwardDiagonal, Color.Black, Color.Red);
+            Font f = new Font("Arial", 25, FontStyle.Bold);
+            g.DrawString("Visual Studio", f, hatchBrush2, new PointF(x_st + 20, y_st + 10));
+            hatchBrush2 = new HatchBrush(HatchStyle.DarkUpwardDiagonal, Color.Black, Color.Blue);
+
+            f = new Font("Garamond", 16, FontStyle.Strikeout);
+            g.DrawString("Visual Studio I love it.", f, hatchBrush2, new PointF(x_st + 10, y_st + 60));
+            hatchBrush2 = new HatchBrush(HatchStyle.DashedDownwardDiagonal, Color.Black, Color.Green);
+
+            f = new Font("Broadway", 22, FontStyle.Underline);
+            g.DrawString(".NET Framework", f, hatchBrush2, new PointF(x_st + 30, y_st + 100));
+
+
+
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button21_Click(object sender, EventArgs e)
         {
@@ -718,14 +852,6 @@ namespace vcs_Draw_Brush
 
             //------------------------------  # 30個
 
-            richTextBox1.Text += "HatchBrush 花紋筆\n";
-            HatchBrush hb = new HatchBrush(HatchStyle.Wave, Color.Blue, Color.Red);
-            p = new Pen(hb, pen_width);
-            y_st += dy;
-            g.DrawRectangle(p, x_st, y_st, 200, 50);
-            g.DrawLine(p, x_st, y_st + 100, x_st + 200, y_st + 100);
-            g.FillEllipse(hb, x_st + 250, y_st, 200, 100);
-            g.DrawString("花紋筆", new Font("標楷體", 32), new SolidBrush(Color.Black), new PointF(x_st - 160, y_st));
 
             //------------------------------  # 30個
 
@@ -782,4 +908,18 @@ namespace vcs_Draw_Brush
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
+
+
+
+/*
+//實心刷
+SolidBrush sb1 = new SolidBrush(Color.DarkOrchid);
+SolidBrush sb2 = new SolidBrush(Color.Aquamarine);
+SolidBrush sb3 = new SolidBrush(Color.DarkOrange);
+rect = new Rectangle(x_st, y_st + dy * 4, w, h);
+g.FillRectangle(sb1, rect);　        // (實心刷)
+g.DrawString("實心刷1", new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st + w + 10, y_st + dy * 4));
+
+*/
+
 

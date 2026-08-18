@@ -103,11 +103,11 @@ namespace vcs_SpectrumAnalyzer
 
                         this.FormBorderStyle = FormBorderStyle.FixedSingle;
                         this.WindowState = FormWindowState.Normal;
-                        this.ClientSize = new Size(pictureBox1.Location.X + pictureBox1.Width + 50+300+50, pictureBox1.Location.Y + pictureBox1.Height + 50+300+200);
+                        this.ClientSize = new Size(pictureBox1.Location.X + pictureBox1.Width + 50 + 300 + 50, pictureBox1.Location.Y + pictureBox1.Height + 50 + 300 + 200);
                         this.Location = new Point(100, 10);
 
                         richTextBox1.Size = new Size(300, 600);
-                        richTextBox1.Location = new Point(pictureBox1.Location.X+pictureBox1.Width + 50, pictureBox1.Location.Y);
+                        richTextBox1.Location = new Point(pictureBox1.Location.X + pictureBox1.Width + 50, pictureBox1.Location.Y);
 
                         pictureBox2.Size = new Size(ww, hh);
                         pictureBox2.Location = new Point(pictureBox1.Location.X, pictureBox1.Location.Y + pictureBox1.Height + 20);
@@ -390,7 +390,7 @@ namespace vcs_SpectrumAnalyzer
                 richTextBox1.Text += "color\n";
                 for (i = 0; i < hue_array.Length; i++)
                 {
-                    richTextBox1.Text +=color_array[i].ToString();
+                    richTextBox1.Text += color_array[i].ToString();
                     if ((i % 24) == 23)
                         richTextBox1.Text += "\n";
                     else
@@ -634,7 +634,13 @@ namespace vcs_SpectrumAnalyzer
                 pictureBox1.Focus();
             }
         }
-
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
 

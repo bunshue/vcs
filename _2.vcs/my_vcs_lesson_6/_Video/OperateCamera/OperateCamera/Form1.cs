@@ -58,6 +58,7 @@ namespace OperateCamera
 
                 foreach (FilterInfo device in videoDevices)
                 {
+                    richTextBox1.Text += "aaaa : " + device.Name + "\n";
                     tscbxCameras.Items.Add(device.Name);
                     videos.Add(device.Name);
                 }
@@ -70,11 +71,13 @@ namespace OperateCamera
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void btnConnect_Click(object sender, EventArgs e)
         {
             CameraConn();
-
         }
+
         //连接摄像头
         private void CameraConn()
         {
@@ -82,6 +85,8 @@ namespace OperateCamera
             {
                 if (i == 0)
                 {
+                    richTextBox1.Text += videoDevices[i].MonikerString + "\n";
+
                     VideoCaptureDevice videoSource = new VideoCaptureDevice(videoDevices[i].MonikerString);
                     //videoSource.DesiredFrameSize = new System.Drawing.Size(320, 240);
                     //videoSource.DesiredFrameRate = 1;
@@ -144,7 +149,6 @@ namespace OperateCamera
                         videoSourcePlayer.SignalToStop();
                         videoSourcePlayer.WaitForStop();
                     }
-
                     this.Close();
                 }
             }
@@ -285,3 +289,12 @@ namespace OperateCamera
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+

@@ -108,10 +108,13 @@ namespace vcs_WebCam8a
             {
                 // 設定預覽比率
                 SendMessage(hwnd, WM_CAP_SET_SCALE, 1, 0);
+
                 // 設定預覽速率
                 SendMessage(hwnd, WM_CAP_SET_PREVIEWRATE, 30, 0);
+
                 // 開始視訊裝置預覽
                 SendMessage(hwnd, WM_CAP_SET_PREVIEW, 1, 0);
+
                 // 調整預覽大小至PictureBox
                 SetWindowPos(hwnd, HWND_BOTTOM, 0, 0, pictureBox1.Width, pictureBox1.Height, (SWP_NOMOVE | SWP_NOZORDER));
             }
@@ -122,7 +125,7 @@ namespace vcs_WebCam8a
 
                 MessageBox.Show("無法連接至視訊裝置.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                Environment.Exit(0);
+                //Environment.Exit(0);
             }
         }
 

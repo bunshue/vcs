@@ -32,6 +32,10 @@ namespace vcs_WebCam4_MotionDetection  // 標準 移動偵測
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //C# 跨 Thread 存取 UI
+            //Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效	same
+            Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
+
             //影像加上訊息
             pictureBox1.Paint += new PaintEventHandler(DrawMessage);
 
@@ -131,6 +135,8 @@ namespace vcs_WebCam4_MotionDetection  // 標準 移動偵測
 
         private void MotionReaction()
         {
+            richTextBox1.Text += "偵測到移動 警示5秒\n";
+
             this.motionDetected = true;
 
             Thread.Sleep(5000); // 警示 5 秒

@@ -25,11 +25,7 @@ namespace vcs_WebCam_WindowsAPI
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            panel1.Size = new Size(640, 480);
-            wc = new WebCamera(panel1.Handle, panel1.Width, panel1.Height);
-            wc.StartWebCam();
-            bt_start.Enabled = false;
-            bt_stop.Enabled = true;
+            pictureBox1.Size = new Size(640, 480);
         }
 
         //------------------------------------------------------------  # 60個
@@ -37,7 +33,7 @@ namespace vcs_WebCam_WindowsAPI
         private void bt_start_Click(object sender, EventArgs e)
         {
             //Start
-            wc = new WebCamera(panel1.Handle, panel1.Width, panel1.Height);
+            wc = new WebCamera(pictureBox1.Handle, pictureBox1.Width, pictureBox1.Height);
             wc.StartWebCam();
             bt_start.Enabled = false;
             bt_stop.Enabled = true;
@@ -51,6 +47,8 @@ namespace vcs_WebCam_WindowsAPI
             bt_stop.Enabled = false;
         }
     }
+
+    //------------------------------------------------------------  # 60個
 
     /// avicap 的摘要说明。
     public class showVideo
@@ -277,3 +275,4 @@ namespace vcs_WebCam_WindowsAPI
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
+
