@@ -17,18 +17,23 @@ namespace vcs_Paint_All
     public partial class Form1 : Form
     {
         //picture0
-        private bool Drawing = false;
+        private bool flag_MouseDown0 = false;
         private List<Point> Points = new List<Point>();
         //picture0
 
+        //picture1 ST
+        Bitmap bmp1;
+        Pen p1;
+        float x1;
+        float y1;
+        //picture1 SP
 
-        //picture1
-        Bitmap bmp;
-        Pen p;
-        float x, y;
-
-
-        //picture1
+        //picture2 ST
+        Graphics g2;                 // 繪圖區
+        Pen pen2;                    // 畫筆
+        bool flag_MouseDown2 = false;   // 紀錄滑鼠是否被按下
+        List<Point> points2 = new List<Point>(); // 紀錄滑鼠軌跡的陣列。
+        //picture2 SP
 
         public Form1()
         {
@@ -41,14 +46,18 @@ namespace vcs_Paint_All
 
             this.DoubleBuffered = true;
 
-            //picture1
+            //picture1 ST
             int W = pictureBox1.ClientSize.Width;
             int H = pictureBox1.ClientSize.Height;
-            bmp = new Bitmap(W, H);
+            bmp1 = new Bitmap(W, H);
             pictureBox1.BackColor = Color.White;
-            p = new Pen(Color.Black, 2);  //指定畫筆的顏色與粗細
-            //picture1
+            p1 = new Pen(Color.Black, 2);  //指定畫筆的顏色與粗細
+            //picture1 SP
 
+            //picture2 ST
+            g2 = this.pictureBox2.CreateGraphics(); // 取得繪圖區物件
+            pen2 = new Pen(Color.Black, 3); // 設定畫筆為黑色、粗細為 3 點。
+            //picture2 SP
         }
 
         void show_item_location()
@@ -102,11 +111,18 @@ namespace vcs_Paint_All
             Environment.Exit(0);
         }
 
+        private void bt_clear1_Click(object sender, EventArgs e)
+        {
+            Graphics g = Graphics.FromImage(bmp1);
+            g.Clear(Color.White);    // 清除畫布，背景為白色
+            pictureBox1.Image = bmp1;
+        }
+
         //------------------------------------------------------------  # 60個
 
         private void pictureBox0_MouseDown(object sender, MouseEventArgs e)
         {
-            Drawing = true;
+            flag_MouseDown0 = true;
             Points = new List<Point>();
             Points.Add(e.Location);
             Refresh();
@@ -114,7 +130,7 @@ namespace vcs_Paint_All
 
         private void pictureBox0_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!Drawing)
+            if (!flag_MouseDown0)
             {
                 return;
             }
@@ -136,7 +152,7 @@ namespace vcs_Paint_All
 
         private void pictureBox0_MouseUp(object sender, MouseEventArgs e)
         {
-            Drawing = false;
+            flag_MouseDown0 = false;
         }
 
         private void pictureBox0_Paint(object sender, PaintEventArgs e)
@@ -147,25 +163,27 @@ namespace vcs_Paint_All
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            x = e.X;
-            y = e.Y;
+            x1 = e.X;
+            y1 = e.Y;
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            //宣告畫布的來源是bmp圖案物件
-            Graphics g = Graphics.FromImage(bmp);
+            //宣告畫布的來源是bmp1圖案物件
+            Graphics g = Graphics.FromImage(bmp1);
             //如果按下滑鼠左鍵時
             if (e.Button == MouseButtons.Left)
             {
                 //隨指標移動不斷在畫布上(圖案物件)畫短點直線
-                g.DrawLine(p, x, y, e.X, e.Y);
+                g.DrawLine(p1, x1, y1, e.X, e.Y);
                 //用圖片方塊pictureBox1來顯示畫布(圖案物件)的內容
-                pictureBox1.Image = bmp;
-                x = e.X;
-                y = e.Y;
+                pictureBox1.Image = bmp1;
+                x1 = e.X;
+                y1 = e.Y;
             }
         }
 
@@ -178,25 +196,40 @@ namespace vcs_Paint_All
         {
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void pictureBox2_MouseClick(object sender, MouseEventArgs e)
         {
         }
 
         private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
         {
+            flag_MouseDown2 = true; // 滑鼠被按下後設定旗標值。
+            points2.Add(e.Location); // 將點加入到 points2 陣列當中。
         }
 
         private void pictureBox2_MouseMove(object sender, MouseEventArgs e)
         {
+            if (flag_MouseDown2) // 如果滑鼠被按下
+            {
+                points2.Add(e.Location); // 將點加入到 points2 陣列當中。
+                // 畫出上一點到此點的線段。
+                g2.DrawLine(pen2, points2[points2.Count - 2], points2[points2.Count - 1]);
+            }
         }
 
         private void pictureBox2_MouseUp(object sender, MouseEventArgs e)
         {
+            points2.Add(new Point(-1, -1)); // 滑鼠放開時，插入一個斷點 (-1,-1)，以代表前後兩點之間有斷開。
+            flag_MouseDown2 = false; // 滑鼠已經沒有被按下了。
+
         }
 
         private void pictureBox2_Paint(object sender, PaintEventArgs e)
         {
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void pictureBox3_MouseDown(object sender, MouseEventArgs e)
         {
@@ -214,6 +247,8 @@ namespace vcs_Paint_All
         {
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void pictureBox4_MouseDown(object sender, MouseEventArgs e)
         {
         }
@@ -229,6 +264,8 @@ namespace vcs_Paint_All
         private void pictureBox4_Paint(object sender, PaintEventArgs e)
         {
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void pictureBox5_MouseDown(object sender, MouseEventArgs e)
         {
@@ -246,12 +283,8 @@ namespace vcs_Paint_All
         {
         }
 
-        private void bt_clear1_Click(object sender, EventArgs e)
-        {
-            Graphics g = Graphics.FromImage(bmp);
-            g.Clear(Color.White);    // 清除畫布，背景為白色
-            pictureBox1.Image = bmp;
-        }
+        //------------------------------------------------------------  # 60個
+
     }
 }
 
