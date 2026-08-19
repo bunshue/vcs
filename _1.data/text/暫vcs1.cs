@@ -1,7 +1,12 @@
 ﻿
-請參考課程， Brush 了解其他更複雜的繪畫方式。 
+TextureBrush newBrush = new TextureBrush(myPic);
 
-例如，試著使用漸層（LinearGradientBrush、） RadialGradientBrush或影像（ImageBrush）。
+g.FillRegion(newBrush, new Region(PaintPath));
+
+
+
+
+
 
 
 button的Paint事件
@@ -9,10 +14,6 @@ rtb的CreateGraphics()
 
         private void button1b_Paint(object sender, PaintEventArgs e)
 
-
-
-HatchBrush myBrush1 = new HatchBrush(HatchStyle.Cross, Color.Red);
-e.Graphics.FillEllipse(myBrush1, 0 - D, 0 - D, 2 * D, 2 * D); //畫出旋轉的圓點 
 
 //------------------------------------------------------------  # 60個
 

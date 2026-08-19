@@ -45,6 +45,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.bt_plus = new System.Windows.Forms.Button();
             this.bt_minus = new System.Windows.Forms.Button();
+            this.timer3 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -149,6 +150,7 @@
             this.pictureBox3.Size = new System.Drawing.Size(50, 50);
             this.pictureBox3.TabIndex = 93;
             this.pictureBox3.TabStop = false;
+            this.pictureBox3.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox3_Paint);
             // 
             // pictureBox2
             // 
@@ -202,6 +204,12 @@
             this.bt_minus.UseVisualStyleBackColor = true;
             this.bt_minus.Click += new System.EventHandler(this.bt_minus_Click);
             // 
+            // timer3
+            // 
+            this.timer3.Enabled = true;
+            this.timer3.Interval = 10;
+            this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -253,6 +261,7 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button bt_plus;
         private System.Windows.Forms.Button bt_minus;
+        private System.Windows.Forms.Timer timer3;
     }
 }
 

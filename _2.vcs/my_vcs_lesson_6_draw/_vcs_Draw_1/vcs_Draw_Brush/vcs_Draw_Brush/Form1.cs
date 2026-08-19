@@ -67,15 +67,15 @@ namespace vcs_Draw_Brush
 
             groupBox0.Size = new Size(W, H * 6 + 10);
             groupBox1.Size = new Size(W, H * 6 + 10);
-            groupBox2.Size = new Size(W, H * 5);
-            groupBox3.Size = new Size(W, H * 5);
-            groupBox4.Size = new Size(W, H * 5);
+            groupBox2.Size = new Size(W, H * 6 + 10);
+            groupBox3.Size = new Size(W, H * 6 + 10);
+            groupBox4.Size = new Size(W, H * 6 + 10);
             pictureBox3.Size = new Size(W, W);
             groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            groupBox3.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            groupBox4.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 6 - 10);
+            groupBox3.Location = new Point(x_st + dx * 1, y_st + dy * 6 - 10);
+            groupBox4.Location = new Point(x_st + dx * 2, y_st + dy * 6 - 10);
             pictureBox3.Location = new Point(x_st + dx * 2, y_st + dy * 0);
 
             pictureBox1.Size = new Size(830, 780);
@@ -96,25 +96,26 @@ namespace vcs_Draw_Brush
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-
             button10.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button12.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button13.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button14.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-
             button20.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button21.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button22.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button23.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button24.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             button30.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button31.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button32.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button33.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button34.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             button40.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button41.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button42.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button43.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button44.Location = new Point(x_st + dx * 0, y_st + dy * 4);
 
             this.Size = new Size(1810, 840);
             this.Text = "vcs_Draw_Brush";
@@ -137,11 +138,6 @@ namespace vcs_Draw_Brush
         //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
-        {
-            draw_TextureBrush();
-        }
-
-        public void draw_TextureBrush()
         {
             SetStyle(ControlStyles.Opaque, true);
 
@@ -256,6 +252,50 @@ namespace vcs_Draw_Brush
             rect = new Rectangle(x_st, y_st, w, h);
             g.FillRectangle(tb, rect);       //(紋理刷)
             g.DrawString("紋理刷1", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(x_st + w + 10, y_st));
+
+            //3030
+
+            x_st = 180;
+            y_st = 50;
+            dy = 140;
+            int W = pictureBox1.ClientSize.Width;
+            int H = pictureBox1.ClientSize.Height;
+            int pen_width = 25;
+
+            Pen p = new Pen(Color.Red, 10);     //default pen
+
+            //------------------------------  # 30個
+
+            //用圖片填滿筆刷
+            richTextBox1.Text += "TextureBrush 圖案筆\n";
+            filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            tb = new TextureBrush(new Bitmap(filename));
+            p = new Pen(tb, pen_width);
+            y_st += dy;
+            g.DrawRectangle(p, x_st, y_st, 200, 50);
+            g.DrawLine(p, x_st, y_st + 100, x_st + 200, y_st + 100);
+            g.FillEllipse(tb, x_st + 250, y_st, 200, 100);
+            g.DrawString("圖案筆", new Font("標楷體", 32), new SolidBrush(Color.Black), new PointF(x_st - 160, y_st));
+
+            //------------------------------  # 30個
+
+            //旋轉顯示圖像
+
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+            float MyAngle = 30f;//旋转的角度
+            tb = new TextureBrush(bitmap1);//实例化TextureBrush类
+            tb.RotateTransform(MyAngle);//以指定角度旋转图像
+            g.FillRectangle(tb, 0, 400, 300, 300);//绘制旋转后的图像
+
+            //------------------------------  # 30個
+
+            //紋理效果, 使用圖像填充文字線條
+            filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_背景圖\background.jpg";  //使用一張背景圖
+            //用圖片填滿筆刷
+            tb = new TextureBrush(Image.FromFile(filename));
+            g.DrawString("紋理效果, 使用圖像填充文字線條", new Font("標楷體", 40), tb, new PointF(x_st + 450, y_st));
+
+
         }
 
         //------------------------------------------------------------  # 60個
@@ -301,50 +341,6 @@ namespace vcs_Draw_Brush
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Graphics g = pictureBox1.CreateGraphics();
-            g.Clear(pictureBox1.BackColor);
-
-            richTextBox1.Text += "";
-
-            int x_st = 180;
-            int y_st = 50;
-            int dy = 140;
-            int W = pictureBox1.ClientSize.Width;
-            int H = pictureBox1.ClientSize.Height;
-            int pen_width = 25;
-
-            Pen p = new Pen(Color.Red, 10);     //default pen
-
-            //------------------------------  # 30個
-
-            //用圖片填滿筆刷
-            richTextBox1.Text += "TextureBrush 圖案筆\n";
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            TextureBrush tb = new TextureBrush(new Bitmap(filename));
-            p = new Pen(tb, pen_width);
-            y_st += dy;
-            g.DrawRectangle(p, x_st, y_st, 200, 50);
-            g.DrawLine(p, x_st, y_st + 100, x_st + 200, y_st + 100);
-            g.FillEllipse(tb, x_st + 250, y_st, 200, 100);
-            g.DrawString("圖案筆", new Font("標楷體", 32), new SolidBrush(Color.Black), new PointF(x_st - 160, y_st));
-
-            //------------------------------  # 30個
-
-            //旋轉顯示圖像
-
-            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
-            float MyAngle = 30f;//旋转的角度
-            tb = new TextureBrush(bitmap1);//实例化TextureBrush类
-            tb.RotateTransform(MyAngle);//以指定角度旋转图像
-            g.FillRectangle(tb, 0, 400, 300, 300);//绘制旋转后的图像
-
-            //------------------------------  # 30個
-
-            //紋理效果, 使用圖像填充文字線條
-            filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_背景圖\background.jpg";  //使用一張背景圖
-            //用圖片填滿筆刷
-            tb = new TextureBrush(Image.FromFile(filename));
-            g.DrawString("紋理效果, 使用圖像填充文字線條", new Font("標楷體", 40), tb, new PointF(x_st + 450, y_st));
 
         }
 
@@ -664,7 +660,7 @@ namespace vcs_Draw_Brush
             Graphics g = pictureBox1.CreateGraphics();
             g.Clear(pictureBox1.BackColor);
 
-            richTextBox1.Text += "";
+            richTextBox1.Text += "LinearGradientBrush 漸層筆\n";
 
             //LinearGradientBrush 建立漸層筆刷, 使用沿漸變混合的兩種顏色進行繪制
             //LinearGradientBrush 漸層筆刷變數 = new LinearGradientBrush(漸層矩形區域, 前景顏色, 背景顏色, 漸層傾斜角度);
@@ -731,33 +727,30 @@ namespace vcs_Draw_Brush
             lgb2 = new LinearGradientBrush(R2, Color.Green, Color.Yellow, -45);
             g.FillPie(lgb2, R2, 30, 300);
 
+            //3030
+
+            x_st = 180;
+            y_st = 50;
+            int dy = 140;
+            //W = pictureBox1.ClientSize.Width;
+            //H = pictureBox1.ClientSize.Height;
+            int pen_width = 25;
+
+            p = new Pen(Color.Red, 10);     //default pen
+            rect1 = new Rectangle(0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
+            lgb = new LinearGradientBrush(rect1, Color.Blue, Color.Red, 90);
+            p = new Pen(lgb, pen_width);
+            y_st += dy * 4;
+            g.DrawRectangle(p, x_st, y_st, 200, 50);
+            g.DrawLine(p, x_st, y_st + 100, x_st + 200, y_st + 100);
+            g.FillEllipse(lgb, x_st + 250, y_st, 200, 100);
+            g.DrawString("漸層筆", new Font("標楷體", 32), new SolidBrush(Color.Black), new PointF(x_st - 160, y_st));
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button14_Click(object sender, EventArgs e)
         {
-            Graphics g = pictureBox1.CreateGraphics();
-            g.Clear(pictureBox1.BackColor);
-
-            richTextBox1.Text += "LinearGradientBrush 漸層筆\n";
-
-            int x_st = 180;
-            int y_st = 50;
-            int dy = 140;
-            int W = pictureBox1.ClientSize.Width;
-            int H = pictureBox1.ClientSize.Height;
-            int pen_width = 25;
-
-            Pen p = new Pen(Color.Red, 10);     //default pen
-            Rectangle rect1 = new Rectangle(0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
-            LinearGradientBrush lgb = new LinearGradientBrush(rect1, Color.Blue, Color.Red, 90);
-            p = new Pen(lgb, pen_width);
-            y_st += dy;
-            g.DrawRectangle(p, x_st, y_st, 200, 50);
-            g.DrawLine(p, x_st, y_st + 100, x_st + 200, y_st + 100);
-            g.FillEllipse(lgb, x_st + 250, y_st, 200, 100);
-            g.DrawString("漸層筆", new Font("標楷體", 32), new SolidBrush(Color.Black), new PointF(x_st - 160, y_st));
 
 
         }
@@ -980,6 +973,11 @@ namespace vcs_Draw_Brush
 
         }
 
+        private void button24_Click(object sender, EventArgs e)
+        {
+
+        }
+
         //------------------------------------------------------------  # 60個
 
         private void button30_Click(object sender, EventArgs e)
@@ -1030,6 +1028,58 @@ namespace vcs_Draw_Brush
 
         }
 
+        private void button34_Click(object sender, EventArgs e)
+        {
+            Graphics g = pictureBox1.CreateGraphics();
+            g.Clear(pictureBox1.BackColor);
+
+            richTextBox1.Text += "新進 mix\n";
+
+
+
+            //純色筆刷
+            SolidBrush sb = new SolidBrush(Color.LightGreen);
+            g.FillEllipse(sb, 50, 50, 300, 100);
+
+            //規劃筆刷
+            HatchBrush hb = new HatchBrush(HatchStyle.Vertical, Color.Blue, Color.Green);
+            g.FillEllipse(hb, 50, 150, 200, 100);
+
+            hb = new HatchBrush(HatchStyle.Cross, Color.Blue, Color.Green);
+            g.FillEllipse(hb, 250, 150, 200, 100);
+
+            hb = new HatchBrush(HatchStyle.Wave, Color.Blue, Color.Green);
+            g.FillEllipse(hb, 450, 150, 200, 100);
+
+            //紋理筆刷
+            Image myImage = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\bear.jpg");
+            TextureBrush tb = new TextureBrush(myImage);
+            g.FillEllipse(tb, 50, 250, 300, 100);
+
+
+            //漸層筆刷
+            Rectangle r;
+            LinearGradientBrush lgb;
+
+            r = new Rectangle(50, 350, 300, 100);
+            lgb = new LinearGradientBrush(
+               r,
+               Color.Blue,
+               Color.Green,
+               LinearGradientMode.Horizontal);
+            g.FillEllipse(lgb, r);
+
+
+            r = new Rectangle(50, 450, 300, 100);
+            lgb = new LinearGradientBrush(
+               r,
+               Color.Blue,
+               Color.Green,
+               LinearGradientMode.BackwardDiagonal);
+            g.FillEllipse(lgb, r);
+
+        }
+
         //------------------------------------------------------------  # 60個
 
         private void button40_Click(object sender, EventArgs e)
@@ -1048,6 +1098,11 @@ namespace vcs_Draw_Brush
         }
 
         private void button43_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button44_Click(object sender, EventArgs e)
         {
 
         }
@@ -1172,46 +1227,12 @@ namespace vcs_Draw_Brush
 
 
 /*
-            //純色筆刷
-            SolidBrush sb = new SolidBrush(Color.LightGreen);
-            g.FillEllipse(sb, 50, 50, 300, 100);
-
-            //規劃筆刷
-            HatchBrush hb = new HatchBrush(HatchStyle.Vertical, Color.Blue, Color.Green);
-            g.FillEllipse(hb, 50, 150, 200, 100);
-
-            hb = new HatchBrush(HatchStyle.Cross, Color.Blue, Color.Green);
-            g.FillEllipse(hb, 250, 150, 200, 100);
-
-            hb = new HatchBrush(HatchStyle.Wave, Color.Blue, Color.Green);
-            g.FillEllipse(hb, 450, 150, 200, 100);
-
-            //紋理筆刷
-            Image myImage = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\bear.jpg");
-            TextureBrush tb = new TextureBrush(myImage);
-            g.FillEllipse(tb, 50, 250, 300, 100);
 
 
-            //漸層筆刷
-            Rectangle r;
-            LinearGradientBrush lgb;
+HatchBrush myBrush1 = new HatchBrush(HatchStyle.Cross, Color.Red);
+HatchBrush myBrush1 = new HatchBrush(HatchStyle.Cross, Color.Red);
+e.Graphics.FillEllipse(myBrush1, 0 - D, 0 - D, 2 * D, 2 * D); //畫出旋轉的圓點 
 
-            r = new Rectangle(50, 350, 300, 100);
-            lgb = new LinearGradientBrush(
-               r,
-               Color.Blue,
-               Color.Green,
-               LinearGradientMode.Horizontal);
-            g.FillEllipse(lgb, r);
-
-
-            r = new Rectangle(50, 450, 300, 100);
-            lgb = new LinearGradientBrush(
-               r,
-               Color.Blue,
-               Color.Green,
-               LinearGradientMode.BackwardDiagonal);
-            g.FillEllipse(lgb, r);
 
 */
 

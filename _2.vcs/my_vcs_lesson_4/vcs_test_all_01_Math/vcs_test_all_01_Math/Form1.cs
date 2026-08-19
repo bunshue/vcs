@@ -557,9 +557,36 @@ namespace vcs_test_all_01_Math
             richTextBox1.Text += "夾角 : " + Angle(button3Point, button2Point, button4Point) + " 度\n";
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button11_Click(object sender, EventArgs e)
         {
+            //科學記號
+            //使用 e 或 E 來代表十的次方
+            double a = 1.5e3;    // 1500
+            double b = 2.5E-2;   // 0.025
+
+
+            /*
+            使用字串格式化方法（如 ToString("E") 或內插字串），
+            字母 E 或 e 代表科學記號，後面可接數字控制小數位數。
+            大寫 E 會輸出大寫的 E+000。小寫 e 會輸出小寫的 e+000
+            */
+
+            double num = 12345.6789;
+
+            // 輸出 "1.234568E+004"
+            Console.WriteLine(num.ToString("E"));
+
+            // 指定小數點後 2 位，輸出 "1.23e+004"
+            Console.WriteLine(num.ToString("e2"));
+
+            // 使用字串內插
+            //Console.WriteLine($"{num:E4}");
+
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button12_Click(object sender, EventArgs e)
         {
@@ -1698,10 +1725,57 @@ namespace vcs_test_all_01_Math
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
+        public static double CalculateShoelaceArea(List<PointF> points)
+        {
+            int n = points.Count;
+            if (n < 3) return 0; // 少於三個點無法構成多邊形
+
+            double area = 0;
+
+            for (int i = 0; i < n; i++)
+            {
+                // 下一個點的索引，最後一個點會與第一個點相接
+                int next = (i + 1) % n;
+
+                // 左上到右下相乘，減去右上到左下相乘
+                area += points[i].X * points[next].Y;
+                area -= points[next].X * points[i].Y;
+            }
+
+            // 取絕對值並除以 2
+            return Math.Abs(area) / 2.0;
+        }
+
         private void button37_Click(object sender, EventArgs e)
         {
+            //鞋帶定理（Shoelace Formula），又稱高斯面積公式或測量員公式，
+            //是用來計算座標平面上任意簡單多邊形面積的數學方法。
 
+            int cx = 300;
+            int cy = 300;
+            List<PointF> points = new List<PointF>();
+
+            points.Add(new PointF(cx + 0, cx - 150));
+            points.Add(new PointF(cx + 50, cx - 50));
+            points.Add(new PointF(cx + 150, cx + 0));
+            points.Add(new PointF(cx + 50, cx + 50));
+            points.Add(new PointF(cx + 0, cx + 150));
+            points.Add(new PointF(cx - 50, cx + 50));
+            points.Add(new PointF(cx - 150, cx + 0));
+            points.Add(new PointF(cx - 50, cx - 50));
+
+            double area = CalculateShoelaceArea(points);
+
+            richTextBox1.Text += "面積 : " + area.ToString() + "\n";
+
+            Graphics g = richTextBox1.CreateGraphics();
+            g.DrawRectangle(Pens.Red, cx - 50, cy - 50, 100, 100);
+            g.DrawPolygon(new Pen(Color.Red, 5), points.ToArray());
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button38_Click(object sender, EventArgs e)
         {

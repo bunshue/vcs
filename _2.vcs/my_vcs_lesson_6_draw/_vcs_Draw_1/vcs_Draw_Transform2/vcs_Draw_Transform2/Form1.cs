@@ -85,7 +85,7 @@ namespace vcs_Draw_Transform2
             label0.Text = "拖拉畫矩形 (右鍵清空)";
             label1.Text = "旋轉矩陣 - 繞固定點公轉";
             label2.Text = "縮放矩陣 - X 軸放大縮小";
-            label3.Text = "";
+            label3.Text = "畫布轉換矩陣的旋轉設定 - 繞固定點公轉";
             label4.Text = "";
             label5.Text = "";
 
@@ -227,6 +227,39 @@ namespace vcs_Draw_Transform2
             e.Graphics.Transform = mtx;  // 畫布的矩陣 = 矩陣 A
             e.Graphics.DrawEllipse(Pens.Red, 0 - D, 0 - D, 2 * D, 2 * D); //畫出縮放後的圓 
         }
+
+        //------------------------------------------------------------  # 60個
+
+        float theta = 0; // 旋轉角度
+
+        private void pictureBox3_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+            // 視窗客戶區正中心點
+            int Cx = this.pictureBox3.ClientSize.Width / 2;
+            int Cy = this.pictureBox3.ClientSize.Height / 2;
+            int D = 20; // 球本身的半徑
+            int D2 = 100; // 球旋轉的半徑
+
+            e.Graphics.ResetTransform(); // 畫布的矩陣 = 單位矩陣
+            e.Graphics.FillEllipse(Brushes.Gray, Cx - D, Cy - D, 2 * D, 2 * D); //畫出正中心圓點 
+            e.Graphics.DrawEllipse(Pens.Silver, Cx - D2, Cy - D2, 2 * D2, 2 * D2); //畫出軌道
+
+            e.Graphics.TranslateTransform(D2, 0, MatrixOrder.Append);  // 先平移到 旋轉的半徑邊緣
+            e.Graphics.RotateTransform(theta, MatrixOrder.Append);  // 乘上 旋轉矩陣
+            e.Graphics.TranslateTransform(Cx, Cy, MatrixOrder.Append); // 再搬到視窗客戶區正中心點
+            e.Graphics.FillEllipse(Brushes.Red, 0 - D, 0 - D, 2 * D, 2 * D); //畫出旋轉的圓點 
+
+        }
+
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+            theta = theta + 1; // 旋轉角度 遞增
+            this.pictureBox3.Invalidate(); // 要求表單重畫
+        }
+
+        //------------------------------------------------------------  # 60個
     }
 }
 

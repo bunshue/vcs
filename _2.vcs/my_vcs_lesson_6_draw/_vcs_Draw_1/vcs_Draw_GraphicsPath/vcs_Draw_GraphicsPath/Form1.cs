@@ -101,7 +101,7 @@ namespace vcs_Draw_GraphicsPath
 
             int x_st = 20;
             int y_st = 20;
-            int dx = 100;
+            //int dx = 100;
             //int dy = 80;
             //int w = 100;
             //int h = 100;
@@ -154,7 +154,7 @@ namespace vcs_Draw_GraphicsPath
             int y = y_st;
             int width = 200;
             int height = 100;
-            int cornerRadius = 20;
+            //int cornerRadius = 20;
 
             GraphicsPath gp = new GraphicsPath();  // GraphicsPath物件
 
@@ -944,7 +944,7 @@ namespace vcs_Draw_GraphicsPath
             int W = 300;
             int H = 200;
             int cornerRadius = 50;  // 圓角半徑
-            int dy = 230;
+            //int dy = 230;
 
             Rectangle rect = new Rectangle(x_st, y_st, W, H);
 
