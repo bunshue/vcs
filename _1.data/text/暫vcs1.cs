@@ -5,7 +5,35 @@ g.FillRegion(newBrush, new Region(PaintPath));
 
 
 
-
+        // Select the PictureBox with this color.
+        private void SelectColor(Color clr)
+        {
+            foreach (Control ctl in this.Controls)
+            {
+                if (ctl is PictureBox)
+                {
+                    if (ctl.BackColor.Equals(clr))
+                    {
+                        PictureBox pic = ctl as PictureBox;
+                        pic.BorderStyle = BorderStyle.Fixed3D;
+                        return;
+                    }
+                }
+            }
+        }
+        
+        
+                    foreach (Control ctl in this.Controls)
+            {
+                if (ctl.Name == pic_name) return ctl;
+            }
+            
+        // Select the colors in a column.
+        private void btnColumn_Click(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            SelectColumn(int.Parse(btn.Tag.ToString()));
+        }
 
 
 
