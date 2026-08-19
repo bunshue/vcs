@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;                //for File
 using System.Drawing.Drawing2D; //for SmoothingMode
 using System.Drawing.Text;      //for TextRenderingHint
-using System.IO;                //for File
 
 namespace vcs_Draw3C
 {
@@ -736,74 +736,14 @@ namespace vcs_Draw3C
         }
         //直線和圓的互動 SP
 
-        int heart_type = 0;
+        //------------------------------------------------------------  # 60個
 
         private void timer14_Tick(object sender, EventArgs e)
         {
-            this.pictureBox14.Invalidate();
-            heart_type++;
-            if (heart_type > 4)
-                heart_type = 0;
         }
 
         private void pictureBox14_Paint(object sender, PaintEventArgs e)
         {
-            //GraphicsPath - FillPath() 心形
-
-            GraphicsPath gp = new GraphicsPath();
-            int Cx = this.pictureBox14.ClientSize.Width / 2; // 視窗客戶區的中心點
-            int Cy = this.pictureBox14.ClientSize.Height / 2;
-
-            int D = 20;    // 每格 寬
-            int x = Cx;    // 心臟的起始點
-            int y = Cy - 2 * D;
-
-            //心臟右邊的曲線 由上往下
-            PointF[] pt = new PointF[]{
-                          new PointF(x, y),
-                          new PointF(x+3*D, y - 1.5f*D),
-                          new PointF(x+5*D, y),
-                          new PointF(x+4*D, y+3*D),
-                          new PointF(x, y+ 7 *D),
-                          };
-            gp.AddCurve(pt, 0.6f);
-
-            //心臟左邊的曲線 順時間方向 由下往上 定義點的座標
-            PointF[] pt2 = new PointF[]{
-                          new PointF(x, y+ 7 *D),
-                          new PointF(x-4*D, y+3*D),
-                          new PointF(x-5*D, y),
-                          new PointF(x-3*D, y - 1.5f*D),
-                          new PointF(x, y),
-                          };
-            gp.AddCurve(pt2, 0.6f);
-
-
-            if (heart_type == 0)
-            {
-                //空心
-            }
-            else if (heart_type == 1)   //單色塗刷
-            {
-                e.Graphics.FillPath(Brushes.Red, gp); // 填滿形狀區域 //SolidBrush - Red
-            }
-            else if (heart_type == 2)   //樣式塗刷一
-            {
-                HatchBrush myBrush1 = new HatchBrush(HatchStyle.DiagonalCross, Color.Yellow, Color.Blue);   //HatchBrush - DiagonalCross
-                e.Graphics.FillPath(myBrush1, gp); //填滿形狀區域
-            }
-            else if (heart_type == 3)   //樣式塗刷二
-            {
-                HatchBrush myBrush2 = new HatchBrush(HatchStyle.SolidDiamond, Color.Yellow, Color.Blue);    //HatchBrush - SolidDiamond
-                e.Graphics.FillPath(myBrush2, gp); //填滿形狀區域
-            }
-            else if (heart_type == 4)   //使用圖形塗刷
-            {
-                Bitmap bm = new Bitmap(Properties.Resources.Butterfly);
-                TextureBrush myBrush3 = new TextureBrush(bm);  // 圖形塗刷  //TextureBrush
-                e.Graphics.FillPath(myBrush3, gp); //填滿形狀區域
-            }
-            e.Graphics.DrawPath(Pens.Black, gp); //繪出圖形軌跡
         }
 
         //------------------------------------------------------------  # 60個

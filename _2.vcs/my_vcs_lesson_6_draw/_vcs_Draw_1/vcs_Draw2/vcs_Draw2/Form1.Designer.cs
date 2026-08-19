@@ -83,7 +83,6 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(200, 60);
             this.button3.TabIndex = 17;
-            this.button3.Text = "BrushStyle";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -137,7 +136,6 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(200, 60);
             this.button6.TabIndex = 22;
-            this.button6.Text = "使用不透明和半透明筆刷繪製";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -148,7 +146,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(200, 60);
             this.button7.TabIndex = 25;
-            this.button7.Text = "使用不透明和半透明筆刷繪製2";
+            this.button7.Text = "使用不透明和半透明筆刷繪製";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -225,7 +223,6 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(200, 60);
             this.button14.TabIndex = 32;
-            this.button14.Text = "HatchBrush 有樣式的塗刷";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 

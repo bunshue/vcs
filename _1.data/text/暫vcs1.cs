@@ -1,4 +1,21 @@
 ﻿
+請參考課程， Brush 了解其他更複雜的繪畫方式。 
+
+例如，試著使用漸層（LinearGradientBrush、） RadialGradientBrush或影像（ImageBrush）。
+
+
+button的Paint事件
+rtb的CreateGraphics()
+
+        private void button1b_Paint(object sender, PaintEventArgs e)
+
+
+
+HatchBrush myBrush1 = new HatchBrush(HatchStyle.Cross, Color.Red);
+e.Graphics.FillEllipse(myBrush1, 0 - D, 0 - D, 2 * D, 2 * D); //畫出旋轉的圓點 
+
+//------------------------------------------------------------  # 60個
+
             // Work until the epsilon squared < this.
             const double cutoff = 0.000001;
 
@@ -11,7 +28,7 @@
                         x += epsilon;
                     } while (epsilon.MagnitudeSquared() > cutoff);
 
-//6060
+//------------------------------------------------------------  # 60個
 
             List<Color> Colors = new List<Color>();
 
@@ -22,7 +39,8 @@
 
             int num_colors = Colors.Count;
 
-6060
+//------------------------------------------------------------  # 60個
+
             Text = "Mandelbrot (" +
                 m_Xmin.ToString("0.000000") + ", " +
                 m_Ymin.ToString("0.000000") + ")-(" +
@@ -2835,7 +2853,7 @@ P2P，英文Peer-to-Peer的縮寫，中譯為對等互聯或點對點技術。
 下面是程序中具體實現代碼：
 button1.MouseLeave += new Syetem.EvenHandler（button1_MLeave）；
 
-//3030
+//------------------------------------------------------------  # 60個
 
 C# DoubleClick與MouseDoubleClick區別，雙擊事件引發順序
 DoubleClick 事件 在雙擊控件時發生。處理時不包含任何事件數據.

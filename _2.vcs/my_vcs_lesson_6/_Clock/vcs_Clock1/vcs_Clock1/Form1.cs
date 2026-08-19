@@ -47,6 +47,8 @@ namespace vcs_Clock1
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             this.Text = "小時鐘";
             this.ShowInTaskbar = false;     //false : 表單不顯示在 Windows 工作列中
             this.TopMost = true;
@@ -74,6 +76,8 @@ namespace vcs_Clock1
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(ScreenWidth - this.Width, ScreenHeight - this.Height);
         }
+
+        //------------------------------------------------------------  # 60個
 
         //Form1 initial location
         private const int FORM1_DEFAULT_POSITION_X = 600 - 10;
@@ -548,3 +552,11 @@ namespace vcs_Clock1
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+

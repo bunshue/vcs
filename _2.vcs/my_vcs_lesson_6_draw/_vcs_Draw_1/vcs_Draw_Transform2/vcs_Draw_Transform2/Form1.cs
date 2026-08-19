@@ -13,11 +13,7 @@ namespace vcs_Draw_Transform2
 {
     public partial class Form1 : Form
     {
-        //Bitmap bm = Properties.Resources.Butterfly;
-
-        HatchBrush myBrush1 = new HatchBrush(HatchStyle.Cross, Color.Red);
         float theta1 = 0; // 旋轉角度
-
         float xScale = 1; // X 軸縮放倍數
 
         //pbox0
@@ -193,7 +189,7 @@ namespace vcs_Draw_Transform2
             mtx.Translate(Cx, Cy, MatrixOrder.Append); // 再搬到視窗客戶區正中心點
 
             e.Graphics.Transform = mtx;  // 畫布的矩陣 = 矩陣 A
-            e.Graphics.FillEllipse(myBrush1, 0 - D, 0 - D, 2 * D, 2 * D); //畫出旋轉的圓點 
+            e.Graphics.FillEllipse(Brushes.Red, 0 - D, 0 - D, 2 * D, 2 * D); //畫出旋轉的圓點 
         }
 
         private void bt_plus_Click(object sender, EventArgs e)
