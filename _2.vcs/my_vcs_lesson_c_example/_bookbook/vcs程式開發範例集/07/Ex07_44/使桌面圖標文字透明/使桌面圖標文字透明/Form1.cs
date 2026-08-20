@@ -40,6 +40,7 @@ namespace 使桌面圖標文字透明
         {
 
         }
+
         private void button1_Click(object sender, EventArgs e)
         {
             //使桌面圖標文字透明 看不出效果

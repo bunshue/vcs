@@ -10,37 +10,26 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
 /*
-當我們需要透過程式去操作"另外一個程式"的功能，例如將記事本中寫入一些文字，這時候就可以利用FindWindow取得主操作視窗，再透過FindWindowEx來取得編輯框的window handle 操作的功能，最後透過SendMessage將訊息送到目標中的編輯區即可達到我們期望的效果。
+當我們需要透過程式去操作"另外一個程式"的功能，例如將記事本中寫入一些文字，
+這時候就可以利用FindWindow取得主操作視窗，再透過 FindWindowEx 來取得編輯框的window handle 操作的功能，
+最後透過SendMessage將訊息送到目標中的編輯區即可達到我們期望的效果。
 
-FindWindow 中的 “Notepad" 與 FindWindowEx中的 “Edit" 是要透過 SPY++ 看class名稱後，填入參數中
-
+FindWindow 中的 “Notepad" 與 FindWindowEx 中的 “Edit" 是要透過 SPY++ 看class名稱後，填入參數中
 找到 FindWindow 中的 “Notepad"
-
 開啟 SPY++ 從 View -> Find Windows -> 點 Hide Spy ++ ->將游標點到 Notepad 上就可以得到 Class 名稱
-
 將文字送到notepad 中的 edit
-
 const int WM_SETTEXT = 0x000C; //發送此訊息設置一個視窗的文字
-
 SendMessage(ChildWnd, WM_SETTEXT, 0, InsStr);
-
 以上就可以達成操作另外一應用程式的功能
-
 函數原型：LRESULT SendMessage（HWND hWnd，UINT Msg，WPARAM wParam，LPARAM IParam）；
 
     參數：
-
     hWnd：其窗口程序將接收消息的窗口的句柄。如果此參數為HWND_BROADCAST，則消息將被發送到系統中所有頂層窗口，包括無效或不可見的非自身擁有的窗口、被覆蓋的窗口和彈出式窗口，但消息不被發送到子窗口。
-
     Msg：指定被發送的消息。
-
     wParam：指定附加的消息指定信息。
-
     IParam：指定附加的消息指定信息。 
-
  
 const int WM_Lbutton = 0x201; //定義了鼠標的左鍵點擊消息。
-
 */
 
 /*
@@ -361,6 +350,8 @@ namespace vcs_SendMessage
 
         private void button1_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "傳送資料到 記事本\n";
+
             const int WM_SETTEXT = 0x000C;
 
             IntPtr MainWnd = FindWindow("Notepad", null);
@@ -372,7 +363,7 @@ namespace vcs_SendMessage
                     StringBuilder InsStr = new StringBuilder();
                     InsStr.Append("ABCDEFGHIJK565465465");
                     SendMessage(ChildWnd, WM_SETTEXT, 0, InsStr);
-                    richTextBox1.Text += "傳送訊息完成\n";
+                    richTextBox1.Text += "傳送資料到 記事本 完成\n";
                 }
                 else
                 {
@@ -381,7 +372,7 @@ namespace vcs_SendMessage
             }
             else
             {
-                richTextBox1.Text += "沒有找到窗口\n";
+                richTextBox1.Text += "找不到 記事本\n";
             }
         }
 

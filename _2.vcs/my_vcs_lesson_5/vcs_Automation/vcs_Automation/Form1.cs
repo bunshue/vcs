@@ -14,6 +14,8 @@ using System.Windows.Automation; // 需要加入 UIAutomationClient.dll 參考
 
 //參考/加入參考/.NET/UIAutomationClient 和 UIAutomationTypes
 
+using System.Runtime.InteropServices;
+
 namespace vcs_Automation
 {
     public partial class Form1 : Form
@@ -77,12 +79,14 @@ namespace vcs_Automation
 
         private void button0_Click(object sender, EventArgs e)
         {
+            //自動化測試1
+
             string exe_filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_5\vcs_Automation\vcs_PushButtonTest.exe";
 
             // 啟動要測試的程式
             Process p = Process.Start(exe_filename);
 
-            Thread.Sleep(2000); // 等待程式啟動
+            Thread.Sleep(200); // 等待程式啟動
 
             // 取得主視窗
             AutomationElement mainWindow = AutomationElement.FromHandle(p.MainWindowHandle);
@@ -92,6 +96,8 @@ namespace vcs_Automation
                 MessageBox.Show("找不到程式的主視窗");
                 return;
             }
+
+            richTextBox1.Text += "取得程式名稱 : " + mainWindow.Current.Name + "\n";
 
             // 找出所有 Button
             AutomationElementCollection buttons = mainWindow.FindAll(
@@ -116,6 +122,7 @@ namespace vcs_Automation
                     {
                         richTextBox1.Text += "取得 : " + name + "\n";
 
+                        //檢查按鈕狀態：用 IsEnabled、IsOffscreen 判斷是否能點擊。
                         bool isEnabled = !btn.Current.IsOffscreen && btn.Current.IsEnabled;
 
                         if (isEnabled)
@@ -124,7 +131,7 @@ namespace vcs_Automation
                             // 模擬點擊
                             InvokePattern clickPattern = btn.GetCurrentPattern(InvokePattern.Pattern) as InvokePattern;
                             clickPattern.Invoke();
-                            Thread.Sleep(500); // 等待半秒
+                            Thread.Sleep(100);  // 等一下
                         }
                     }
                 }
@@ -133,12 +140,66 @@ namespace vcs_Automation
             richTextBox1.Text += "作業完成, 共點擊 " + count.ToString() + " 個按鈕\n";
         }
 
-
         //------------------------------------------------------------  # 60個
+
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter, string lpszClass, string lpszWindow);
+
+        [DllImport("user32.dll")]
+        static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
+
+        const int BM_CLICK = 0x00F5;
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //可以用 FindWindow + FindWindowEx + SendMessage(BM_CLICK) 模擬點擊。
+
+            //自動化測試2
+
+            string exe_filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_5\vcs_Automation\vcs_PushButtonTest.exe";
+
+            // 啟動要測試的程式
+            Process p = Process.Start(exe_filename);
+
+            Thread.Sleep(200); // 等待程式啟動
+
+            IntPtr hWnd = p.MainWindowHandle;
+
+            richTextBox1.Text += "dddddddddddddddddd\n";
+
+            // 假設 AAA.exe 的按鈕是標準 WinForms Button
+            for (int i = 0; i < 10; i++)
+            {
+                richTextBox1.Text += i.ToString() + "\n";
+                IntPtr hButton = FindWindowEx(hWnd, IntPtr.Zero, "Button", null);
+                if (hButton == IntPtr.Zero)
+                {
+                    richTextBox1.Text += "Null\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "OK\n";
+                }
+
+                if (hButton != IntPtr.Zero)
+                {
+                    richTextBox1.Text += "點擊 : " + hButton.ToString() + "\n";
+
+                    //SendMessage(hButton, BM_CLICK, IntPtr.Zero, IntPtr.Zero);
+                    //Console.WriteLine($"已點擊第 {i+1} 個按鈕");
+                }
+                Thread.Sleep(500);
+            }
+
+
+
+
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button2_Click(object sender, EventArgs e)
         {

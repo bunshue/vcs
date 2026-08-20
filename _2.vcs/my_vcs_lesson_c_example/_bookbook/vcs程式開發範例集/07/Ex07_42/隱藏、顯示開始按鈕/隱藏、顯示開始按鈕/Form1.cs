@@ -42,12 +42,12 @@ namespace 隱藏_顯示開始按鈕
             if (radioButton1.Checked)
             {
                 ShowWindow(FindWindowEx(FindWindow("Shell_TrayWnd", null), 0, "Button", null), SW_HIDE);
-                richTextBox1.Text += "隱藏開始按鈕\n";
+                richTextBox1.Text += "隱藏 開始 按鈕\n";
             }
             if (radioButton2.Checked)
             {
                 ShowWindow(FindWindowEx(FindWindow("Shell_TrayWnd", null), 0, "Button", null), SW_SHOW);
-                richTextBox1.Text += "顯示開始按鈕\n";
+                richTextBox1.Text += "顯示 開始 按鈕\n";
             }
         }
     }
