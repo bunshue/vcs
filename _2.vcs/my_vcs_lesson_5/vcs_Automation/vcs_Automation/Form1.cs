@@ -166,6 +166,52 @@ namespace vcs_Automation
 
             Thread.Sleep(200); // 等待程式啟動
 
+            // 找 AAA.exe 主視窗 (假設標題是 "AAA")
+            IntPtr hWnd = FindWindow(null, "vcs_PushButtonTest");
+            if (hWnd == IntPtr.Zero)
+            {
+                richTextBox1.Text += "找不到 AAA 視窗\n";
+                return;
+            }
+
+                richTextBox1.Text += "OK\n";
+
+
+
+                // 循環找出所有 Button
+                IntPtr hButton = IntPtr.Zero;
+                int count = 0;
+                do
+                {
+                    hButton = FindWindowEx(hWnd, hButton, "Button", null);
+                    if (hButton == IntPtr.Zero)
+                    {
+                        richTextBox1.Text += "XXXX\n";
+                    }
+                    else
+                    {
+                        richTextBox1.Text += "OOOO\n";
+                    }
+
+                    if (hButton != IntPtr.Zero)
+                    {
+                        SendMessage(hButton, BM_CLICK, IntPtr.Zero, IntPtr.Zero);
+                        count++;
+                        //Console.WriteLine($"已點擊第 {count} 個按鈕");
+                        Thread.Sleep(500);
+                    }
+                } while (hButton != IntPtr.Zero);
+
+                //Console.WriteLine($"總共點擊 {count} 個按鈕");
+
+
+            return;
+
+
+
+
+
+            /*
             IntPtr hWnd = p.MainWindowHandle;
 
             richTextBox1.Text += "dddddddddddddddddd\n";
@@ -193,6 +239,7 @@ namespace vcs_Automation
                 }
                 Thread.Sleep(500);
             }
+            */
 
 
 
