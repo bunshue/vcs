@@ -88,6 +88,8 @@ namespace vcs_Automation
 
             Thread.Sleep(200); // 等待程式啟動
 
+            //Process.MainWindowHandle 屬性 : 取得相關處理序主視窗的視窗控制代碼。
+
             // 取得主視窗
             AutomationElement mainWindow = AutomationElement.FromHandle(p.MainWindowHandle);
 

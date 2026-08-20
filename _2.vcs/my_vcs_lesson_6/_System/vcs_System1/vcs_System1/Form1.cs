@@ -1658,58 +1658,17 @@ namespace vcs_System1
 
         //------------------------------------------------------------  # 60個
 
-        //取得任務欄尺寸大小 ST
-
-        [DllImport("user32.dll")]
-        public static extern int FindWindow(string lpClassName, string lpWindowName);
-
-        [DllImport("user32.dll")]
-        public static extern int GetWindowRect(int hwnd, ref Rectangle lpRect);
-
-        Rectangle myrect;
-
         private void button37_Click(object sender, EventArgs e)
         {
-            //取得任務欄尺寸大小
-            if (GetWindowRect(FindWindow("Shell_TrayWnd", null), ref myrect) == 0)
-            {
-                return;
-            }
-            else
-            {
-                richTextBox1.Text += "取得任務欄尺寸大小\n";
-                richTextBox1.Text += "上 : \t" + Convert.ToString(myrect.Top) + "\n";
-                richTextBox1.Text += "下 : \t" + Convert.ToString(myrect.Bottom) + "\n";
-                richTextBox1.Text += "左 : \t" + Convert.ToString(myrect.Left) + "\n";
-                richTextBox1.Text += "右 : \t" + Convert.ToString(myrect.Right) + "\n";
-            }
         }
-        //取得任務欄尺寸大小 SP
-
-        //隱藏任務欄, 顯示任務欄 ST
-        private const int SW_HIDE = 0;
-        private const int SW_RESTORE = 9;
-
-        /*
-        [DllImport("user32.dll")]
-        public static extern int FindWindow(string lpClassName, string lpWindowName);
-        */
-
-        [DllImport("user32.dll")]
-        public static extern int ShowWindow(int hwnd, int nCmdShow);
 
         private void button38_Click(object sender, EventArgs e)
         {
-            //隱藏任務欄
-            ShowWindow(FindWindow("Shell_TrayWnd", null), SW_HIDE);
         }
 
         private void button39_Click(object sender, EventArgs e)
         {
-            //顯示任務欄
-            ShowWindow(FindWindow("Shell_TrayWnd", null), SW_RESTORE);
         }
-        //隱藏任務欄, 顯示任務欄 SP
 
         //------------------------------------------------------------  # 60個
     }

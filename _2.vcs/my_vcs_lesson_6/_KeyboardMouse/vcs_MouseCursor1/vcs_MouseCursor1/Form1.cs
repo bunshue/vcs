@@ -225,9 +225,7 @@ namespace vcs_MouseCursor1
 
         //移動滑鼠鼠標, 設定滑鼠位置
         [DllImport("user32")]
-        //[DllImport("user32.dll")]
         static extern bool SetCursorPos(int X, int Y);
-        //static extern void SetCursorPos(int x, int y);
 
         int screenWidth = Screen.PrimaryScreen.Bounds.Width;
         int screenHeight = Screen.PrimaryScreen.Bounds.Height;
@@ -889,27 +887,6 @@ using System.Runtime.InteropServices;  //StructLayout
             public int bottom;
         }
 
-
-        //設置鼠標位置
-        [DllImport("user32.dll")]
-        static extern bool SetCursorPos(int X, int Y);
-
-
-        [DllImport("user32.dll")]
-        static extern IntPtr FindWindow(string strClass, string strWindow);
-
-        //該函數獲取一個窗口句柄,該窗口雷鳴和窗口名與給定字符串匹配 hwnParent=Null從桌面窗口查找
-        [DllImport("user32.dll")]
-        static extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter,
-            string strClass, string strWindow);
-
-        [DllImport("user32.dll")]
-        static extern bool GetWindowRect(HandleRef hwnd, out NativeRECT rect);
-
-
-        //private Point pt_st;
-        //private Point pt_sp;
-        //private int count;
 //------------------------------------------------------------  # 60個
  C# 透過Win32取得滑鼠位置 GetCursorPos
 

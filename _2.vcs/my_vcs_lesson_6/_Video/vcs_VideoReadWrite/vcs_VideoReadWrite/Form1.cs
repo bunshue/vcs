@@ -289,6 +289,8 @@ namespace vcs_VideoReadWrite
             richTextBox1.Text += "寫入檔案 : " + filename_write + "\n";
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button4_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "將.avi的聲音分離出來\n";
@@ -326,35 +328,37 @@ namespace vcs_VideoReadWrite
             }
         }
 
-        /* 引入 Win32 API 中的 User32.DLL
-         * 需要加上 using System.Runtime.InteropServices;
-         */
+        //------------------------------------------------------------  # 60個
+
+        // 引入 Win32 API 中的 User32.DLL
+        // 需要加上 using System.Runtime.InteropServices;
         [DllImport("user32.dll")]
         public static extern Boolean GetWindowRect(IntPtr hWnd, ref Rectangle bounds);
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //抓取指定視窗的畫面截圖
-            /* 取得目標視窗的 Handle
-             * 需要加上 using System.Diagnostics;
-             */
+            // 抓取指定視窗的畫面截圖
+            // 取得目標視窗的 Handle
+            // 需要加上 using System.Diagnostics;
 
             Process[] process = Process.GetProcessesByName("notepad");
 
-            /* 取得該視窗的大小與位置 */
+            // 取得該視窗的大小與位置
             Rectangle bounds = new Rectangle(100, 100, 100, 100);
 
             GetWindowRect(process[0].MainWindowHandle, ref bounds);
 
-            /* 抓取截圖 */
+            // 抓取截圖
             Bitmap screenshot = new Bitmap(bounds.Width, bounds.Height, PixelFormat.Format32bppArgb);
             Graphics gfx = Graphics.FromImage(screenshot);
             gfx.CopyFromScreen(bounds.X, bounds.Y, 0, 0, bounds.Size, CopyPixelOperation.SourceCopy);
 
-            /* 利用 PictureBox 顯示出來 */
+            // 利用 PictureBox 顯示出來
             pictureBox1.Image = (Image)screenshot;
             pictureBox1.Update();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button6_Click(object sender, EventArgs e)
         {
@@ -407,5 +411,3 @@ namespace vcs_VideoReadWrite
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-

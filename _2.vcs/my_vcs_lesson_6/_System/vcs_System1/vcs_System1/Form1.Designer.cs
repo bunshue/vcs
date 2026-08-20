@@ -508,7 +508,6 @@
             this.button37.Name = "button37";
             this.button37.Size = new System.Drawing.Size(200, 60);
             this.button37.TabIndex = 88;
-            this.button37.Text = "取得任務欄尺寸大小";
             this.button37.UseVisualStyleBackColor = true;
             this.button37.Click += new System.EventHandler(this.button37_Click);
             // 
@@ -519,7 +518,6 @@
             this.button38.Name = "button38";
             this.button38.Size = new System.Drawing.Size(200, 60);
             this.button38.TabIndex = 89;
-            this.button38.Text = "隱藏任務欄";
             this.button38.UseVisualStyleBackColor = true;
             this.button38.Click += new System.EventHandler(this.button38_Click);
             // 
@@ -530,7 +528,6 @@
             this.button39.Name = "button39";
             this.button39.Size = new System.Drawing.Size(200, 60);
             this.button39.TabIndex = 90;
-            this.button39.Text = "顯示任務欄";
             this.button39.UseVisualStyleBackColor = true;
             this.button39.Click += new System.EventHandler(this.button39_Click);
             // 

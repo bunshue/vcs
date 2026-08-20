@@ -1,4 +1,120 @@
 ﻿
+
+
+
+//------------------------------------------------------------  # 60個
+
+隱藏_顯示桌面圖標
+
+        [DllImport("user32")]
+        public static extern int FindWindow(string ClassName, string WindowName);
+        [DllImport("user32")]
+        public static extern int ShowWindow(int handle, int cmdshow);
+
+            //隱藏桌面圖標
+            ShowWindow(FindWindow("progman", null), 0);
+            richTextBox1.Text += "隱藏桌面圖標\n";
+
+            //顯示桌面圖標
+            ShowWindow(FindWindow("progman", null), 5);
+            richTextBox1.Text += "顯示桌面圖標\n";
+
+//------------------------------------------------------------  # 60個
+
+隱藏_顯示開始按鈕
+
+        private const int SW_HIDE = 0;
+        private const int SW_SHOW = 5;
+
+        [DllImport("user32.dll")]
+        public static extern int FindWindow(string lpClassName, string lpWindowName);
+
+        [DllImport("user32.dll")]
+        public static extern int FindWindowEx(int hWnd1, int hWnd2, string lpsz1, string lpsz2);
+
+        [DllImport("user32.dll")]
+        public static extern int ShowWindow(int hwnd, int nCmdShow);
+
+
+            // 看不出效果
+
+            //隱藏開始按鈕
+            ShowWindow(FindWindowEx(FindWindow("Shell_TrayWnd", null), 0, "Button", null), SW_HIDE);
+            richTextBox1.Text += "隱藏 開始 按鈕\n";
+
+            //顯示開始按鈕
+            ShowWindow(FindWindowEx(FindWindow("Shell_TrayWnd", null), 0, "Button", null), SW_SHOW);
+            richTextBox1.Text += "顯示 開始 按鈕\n";
+
+//------------------------------------------------------------  # 60個
+
+        [DllImport("user32.dll")]
+        static extern IntPtr FindWindow(string strClass, string strWindow);
+
+        //該函數獲取一個窗口句柄,該窗口雷鳴和窗口名與給定字符串匹配 hwnParent=Null從桌面窗口查找
+        [DllImport("user32.dll")]
+        static extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter,
+            string strClass, string strWindow);
+
+        [DllImport("user32.dll")]
+        static extern bool GetWindowRect(HandleRef hwnd, out NativeRECT rect);
+
+
+
+//------------------------------------------------------------  # 60個
+
+//隱藏任務欄
+ShowWindow(FindWindow("Shell_TrayWnd", null), SW_HIDE);
+//顯示任務欄
+ShowWindow(FindWindow("Shell_TrayWnd", null), SW_RESTORE);
+
+
+//隱藏任務欄, 顯示任務欄 ST
+private const int SW_HIDE = 0;
+private const int SW_RESTORE = 9;
+
+/*
+[DllImport("user32.dll")]
+public static extern int FindWindow(string lpClassName, string lpWindowName);
+*/
+
+[DllImport("user32.dll")]
+public static extern int ShowWindow(int hwnd, int nCmdShow);
+//隱藏任務欄, 顯示任務欄 SP
+
+//------------------------------  # 30個
+
+//取得任務欄尺寸大小 ST
+
+[DllImport("user32.dll")]
+public static extern int FindWindow(string lpClassName, string lpWindowName);
+
+[DllImport("user32.dll")]
+public static extern int GetWindowRect(int hwnd, ref Rectangle lpRect);
+
+Rectangle myrect;
+
+
+//取得任務欄尺寸大小
+if (GetWindowRect(FindWindow("Shell_TrayWnd", null), ref myrect) == 0)
+{
+	return;
+}
+else
+{
+	richTextBox1.Text += "取得任務欄尺寸大小\n";
+	richTextBox1.Text += "上 : \t" + Convert.ToString(myrect.Top) + "\n";
+	richTextBox1.Text += "下 : \t" + Convert.ToString(myrect.Bottom) + "\n";
+	richTextBox1.Text += "左 : \t" + Convert.ToString(myrect.Left) + "\n";
+	richTextBox1.Text += "右 : \t" + Convert.ToString(myrect.Right) + "\n";
+}
+//取得任務欄尺寸大小 SP
+
+
+
+//------------------------------------------------------------  # 60個
+
+
 TextureBrush newBrush = new TextureBrush(myPic);
 
 g.FillRegion(newBrush, new Region(PaintPath));
