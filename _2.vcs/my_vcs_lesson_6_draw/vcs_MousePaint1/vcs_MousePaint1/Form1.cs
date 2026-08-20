@@ -142,11 +142,7 @@ namespace vcs_MousePaint1
             int angle = 360 / N;
             int r = Math.Min(w, h) * 2 / 5;
 
-            int i;
-            int x = 0;
-            int y = 0;
-
-            for (i = 0; i < N; i++)
+            for (int i = 0; i < N; i++)
             {
                 pts[i] = new Point(w / 2 + (int)(r * Math.Cos(Math.PI * angle * i / 180)), h / 2 + (int)(r * Math.Sin(Math.PI * angle * i / 180)));
             }

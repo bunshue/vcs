@@ -1458,15 +1458,41 @@ namespace vcs_Draw6_String1
 
         private void button26_Click(object sender, EventArgs e)
         {
+            int x_st = 20;
+            int y_st = 20;
+            int dy = 80;
+
+            Graphics g = pictureBox1.CreateGraphics();
+
             //Font 參數
+            //                      字型    大小      樣式              單位
+            //Font font = new Font("標楷體", 32, FontStyle.Bold, GraphicsUnit.Point);
 
-            Font f = new Font("標楷體", 20, FontStyle.Bold);
-            //Font f = new Font("微軟正黑體", 22, FontStyle.Bold);//建立字體物件
+            Font f = new Font("標楷體", 32, FontStyle.Regular);
+            g.DrawString("Regular 一般文字", f, Brushes.Blue, x_st, y_st);
 
+            f = new Font("標楷體", 32, FontStyle.Bold);
+            y_st += dy;
+            g.DrawString("Bold 粗體文字", f, Brushes.Blue, x_st, y_st);
 
+            f = new Font("標楷體", 32, FontStyle.Italic);
+            y_st += dy;
+            g.DrawString("Italic 斜體文字", f, Brushes.Blue, x_st, y_st);
+
+            f = new Font("標楷體", 32, FontStyle.Underline);
+            y_st += dy;
+            g.DrawString("Underline 加上底線的文字", f, Brushes.Blue, x_st, y_st);
+
+            f = new Font("標楷體", 32, FontStyle.Strikeout);
+            y_st += dy;
+            g.DrawString("Strikeout 中間有線條經過的文字", f, Brushes.Blue, x_st, y_st);
+
+            f = new Font("標楷體", 40, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline | FontStyle.Strikeout);
+            y_st += dy;
+            g.DrawString("各種文字樣式混和", f, Brushes.Blue, x_st, y_st);
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button27_Click(object sender, EventArgs e)
         {
@@ -1865,22 +1891,15 @@ namespace vcs_Draw6_String1
 //------------------------------  # 30個
 
 /*
-            StringFormat string_format = new StringFormat();
-            string_format.Alignment = StringAlignment.Near;
-            string_format.LineAlignment = StringAlignment.Near;
-            string_format.Trimming = StringTrimming.None;
-            string_format.FormatFlags = StringFormatFlags.MeasureTrailingSpaces;
+StringFormat string_format = new StringFormat();
+string_format.Alignment = StringAlignment.Near;
+string_format.LineAlignment = StringAlignment.Near;
+string_format.Trimming = StringTrimming.None;
+string_format.FormatFlags = StringFormatFlags.MeasureTrailingSpaces;
 
-            g.TextRenderingHint = TextRenderingHint.AntiAlias;
+g.TextRenderingHint = TextRenderingHint.AntiAlias;
 
-//            g.DrawString("顯示豎排文字444", new Font("標楷體", 20), new SolidBrush(Color.Black), 0, 0, new StringFormat(StringFormatFlags.DirectionVertical));
-
-g.DrawString("大家好", new Font("標楷體", 20), new SolidBrush(Color.Red), new Rectangle(20, 20, 100, 100));
-g.DrawString("大家好", new Font("標楷體", 20, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline), Brushes.Red, 10, 200);
-g.DrawString("大家好", new Font("標楷體", 20, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline), lgBrush, 10, 200);
-
-Brush blueBrush = new SolidBrush(Color.Blue);
-g.DrawString("大家好", new Font("標楷體", 20, FontStyle.Italic),blueBrush, new PointF(300, 400));
+g.DrawString("顯示豎排文字444", new Font("標楷體", 20), new SolidBrush(Color.Black), 0, 0, new StringFormat(StringFormatFlags.DirectionVertical));
 
 //------------------------------------------------------------  # 60個
 
@@ -1896,5 +1915,11 @@ g.DrawString(txt, this.Font, text_brush, node.Location.X - txt_size.Width / 2, n
 
 //------------------------------------------------------------  # 60個
 
-*/
+//用 MeasureString 量字串寬度, 用 f.Height 取得字串的高 比較準
+Font f = new Font("微軟正黑體", 40, FontStyle.Bold);//建立字體物件
+string str = "微軟正黑體";
+SizeF size = e.Graphics.MeasureString(str, f);//獲取字符串的大小
+e.Graphics.DrawRectangle(Pens.Blue, 100, 100, size.Width, f.Height);
 
+
+*/

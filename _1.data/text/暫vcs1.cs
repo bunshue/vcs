@@ -37,12 +37,6 @@ g.FillRegion(newBrush, new Region(PaintPath));
 
 
 
-button的Paint事件
-rtb的CreateGraphics()
-
-        private void button1b_Paint(object sender, PaintEventArgs e)
-
-
 //------------------------------------------------------------  # 60個
 
             // Work until the epsilon squared < this.
@@ -290,12 +284,6 @@ AForge.Vision.dll
 
 //------------------------------------------------------------  # 60個
 
-            Font f = new Font("微軟正黑體", 22, FontStyle.Bold);//建立字體物件
-            Rectangle rect = new Rectangle(100, 100, 400, f.Height);
-            string str = "微軟正黑體微軟正黑體";
-            e.Graphics.DrawString(str, f, Brushes.Black, rect);
-            e.Graphics.DrawRectangle(Pens.Red, rect);
-            f.Dispose();
 
 //------------------------------------------------------------  # 60個
 
@@ -724,6 +712,18 @@ pppp
 
 //------------------------------------------------------------  # 60個
             
+vcs不同專案共用一個檔案  看起來不行
+
+特殊控件操作 可行的但不常用
+1. 在 rtb 上畫圖
+2. 
+	button的Paint事件
+	rtb的CreateGraphics()
+	
+	private void button1b_Paint(object sender, PaintEventArgs e)
+	
+
+
 搜尋
 ProcessDirectory
 
@@ -3943,6 +3943,7 @@ https://jojosula001.pixnet.net/blog/category/2297573
 
 //------------------------------------------------------------  # 60個
 
+rtb
  27. 設定兩個或兩個以上的字型樣式 (例如一段文字設定粗體加斜體)。
 
 假如要將一段文字，同時設定 粗體文字 FontStyle.Bold 與 斜體文字 FontStyle.Italic，則需透過 FontFamily 類別，透過 | 做連結

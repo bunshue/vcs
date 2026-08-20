@@ -54,6 +54,10 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button0 = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.label1a = new System.Windows.Forms.Label();
+            this.label1b = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -324,11 +328,58 @@
             this.textBox1.TabIndex = 89;
             this.textBox1.Text = "-10";
             // 
+            // button0
+            // 
+            this.button0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button0.Location = new System.Drawing.Point(15, 388);
+            this.button0.Name = "button0";
+            this.button0.Size = new System.Drawing.Size(200, 60);
+            this.button0.TabIndex = 106;
+            this.button0.Text = "在Form上印出滑鼠游標形狀";
+            this.button0.UseVisualStyleBackColor = true;
+            this.button0.Click += new System.EventHandler(this.button0_Click);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.checkBox1.Location = new System.Drawing.Point(111, 359);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(104, 23);
+            this.checkBox1.TabIndex = 105;
+            this.checkBox1.Text = "滑鼠畫圖";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // label1a
+            // 
+            this.label1a.AutoSize = true;
+            this.label1a.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label1a.Location = new System.Drawing.Point(465, 12);
+            this.label1a.Name = "label1a";
+            this.label1a.Size = new System.Drawing.Size(68, 21);
+            this.label1a.TabIndex = 107;
+            this.label1a.Text = "label11";
+            // 
+            // label1b
+            // 
+            this.label1b.AutoSize = true;
+            this.label1b.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label1b.Location = new System.Drawing.Point(466, 42);
+            this.label1b.Name = "label1b";
+            this.label1b.Size = new System.Drawing.Size(68, 21);
+            this.label1b.TabIndex = 108;
+            this.label1b.Text = "label12";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(773, 561);
+            this.Controls.Add(this.label1b);
+            this.Controls.Add(this.label1a);
+            this.Controls.Add(this.button0);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.bt_update2);
             this.Controls.Add(this.textBox_c);
@@ -359,6 +410,10 @@
             this.Text = "Form1";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -396,6 +451,10 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button0;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Label label1a;
+        private System.Windows.Forms.Label label1b;
     }
 }
 

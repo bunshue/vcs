@@ -7,6 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Diagnostics;
+using System.Threading;
+
+using System.Windows.Automation; // 需要加入 UIAutomationClient.dll 參考
+
+//參考/加入參考/.NET/UIAutomationClient 和 UIAutomationTypes
+
 namespace vcs_Automation
 {
     public partial class Form1 : Form
@@ -70,7 +77,64 @@ namespace vcs_Automation
 
         private void button0_Click(object sender, EventArgs e)
         {
+            string exe_filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_5\vcs_Automation\vcs_PushButtonTest.exe";
+
+            // 啟動要測試的程式
+            Process p = Process.Start(exe_filename);
+
+            Thread.Sleep(2000); // 等待程式啟動
+
+            // 取得主視窗
+            AutomationElement mainWindow = AutomationElement.FromHandle(p.MainWindowHandle);
+
+            if (mainWindow == null)
+            {
+                MessageBox.Show("找不到程式的主視窗");
+                return;
+            }
+
+            // 找出所有 Button
+            AutomationElementCollection buttons = mainWindow.FindAll(
+                TreeScope.Descendants,
+                new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Button));
+
+            int count = 0;
+            foreach (AutomationElement btn in buttons)
+            {
+                richTextBox1.Text += btn.ToString() + "\n";
+                //richTextBox1.Text += btn.Current.ToString() + "\n";
+                //richTextBox1.Text += btn.Current.ProcessId + "\n";
+
+                if (btn.Current.Name != null)
+                {
+                    richTextBox1.Text += btn.Current.Name.ToString() + "\n";
+
+                    string name = btn.Current.Name.ToString();
+                    //richTextBox1.Text += btn.Current.IsOffscreen.ToString() + "\t" + btn.Current.IsEnabled.ToString() + "\n";
+
+                    if ((name.Length > 3) && (name.Substring(0, 3) == "btn"))
+                    {
+                        richTextBox1.Text += "取得 : " + name + "\n";
+
+                        bool isEnabled = !btn.Current.IsOffscreen && btn.Current.IsEnabled;
+
+                        if (isEnabled)
+                        {
+                            count++;
+                            // 模擬點擊
+                            InvokePattern clickPattern = btn.GetCurrentPattern(InvokePattern.Pattern) as InvokePattern;
+                            clickPattern.Invoke();
+                            Thread.Sleep(500); // 等待半秒
+                        }
+                    }
+                }
+            }
+
+            richTextBox1.Text += "作業完成, 共點擊 " + count.ToString() + " 個按鈕\n";
         }
+
+
+        //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
