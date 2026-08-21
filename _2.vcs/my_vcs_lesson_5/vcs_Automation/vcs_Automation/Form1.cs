@@ -197,7 +197,7 @@ namespace vcs_Automation
 
                     if (hButton != IntPtr.Zero)
                     {
-                        SendMessage(hButton, BM_CLICK, IntPtr.Zero, IntPtr.Zero);
+                        SendMessage(hButton, BM_CLICK, IntPtr.Zero, IntPtr.Zero);  // 發送點擊按鈕的消息
                         count++;
                         //Console.WriteLine($"已點擊第 {count} 個按鈕");
                         Thread.Sleep(500);
@@ -236,7 +236,7 @@ namespace vcs_Automation
                 {
                     richTextBox1.Text += "點擊 : " + hButton.ToString() + "\n";
 
-                    //SendMessage(hButton, BM_CLICK, IntPtr.Zero, IntPtr.Zero);
+                    //SendMessage(hButton, BM_CLICK, IntPtr.Zero, IntPtr.Zero);  // 發送點擊按鈕的消息
                     //Console.WriteLine($"已點擊第 {i+1} 個按鈕");
                 }
                 Thread.Sleep(500);

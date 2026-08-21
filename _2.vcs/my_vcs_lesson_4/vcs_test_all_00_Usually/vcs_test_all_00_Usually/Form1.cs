@@ -50,22 +50,10 @@ namespace vcs_test_all_00_Usually
 
         //------------------------------------------------------------  # 60個
 
-        //移動無邊框窗體1 ST
-        [DllImport("user32.dll")]
-        public static extern bool ReleaseCapture();
-        [DllImport("user32.dll")]
-        public static extern bool SendMessage(IntPtr hwnd, int wMsg, int wParam, int lParam);
-        public const int WM_SYSCOMMAND = 0x0112;
-        public const int SC_MOVE = 0xF010;
-        public const int HTCAPTION = 0x0002;
-        //移動無邊框窗體1 SP
-
-        //------------------------------------------------------------  # 60個
-
         //移動無邊框窗體2 ST, 加在三Form之間即可
         private const int WM_NCHITTEST = 0x84;
         private const int HTCLIENT = 0x1;
-        //private const int HTCAPTION = 0x2;
+        private const int HTCAPTION = 0x2;
 
         protected override void WndProc(ref Message m)
         {
@@ -243,10 +231,10 @@ namespace vcs_test_all_00_Usually
             label1b.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 25);
             label1c.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 50);
             label1d.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 75);
-            label1a.Text = "移動無邊框窗體1/5, 使用MouseDown";
-            label1b.Text = "移動無邊框窗體2, 最簡易";
-            label1c.Text = "移動無邊框窗體3, 使用MouseDown-Move-Up";
-            label1d.Text = "移動無邊框窗體4, 使用MouseDown-Move-Up";
+            label1a.Text = "移動無邊框窗體2, 最簡易";
+            label1b.Text = "移動無邊框窗體3, 使用MouseDown-Move-Up";
+            label1c.Text = "移動無邊框窗體4, 使用MouseDown-Move-Up";
+            label1d.Text = "移動無邊框窗體5, 使用MouseDown";
 
             label2.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 110);
             label3.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 140);
@@ -358,11 +346,6 @@ namespace vcs_test_all_00_Usually
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
-            //移動無邊框窗體1 ST
-            ReleaseCapture();
-            SendMessage(this.Handle, WM_SYSCOMMAND, SC_MOVE + HTCAPTION, 0);
-            //移動無邊框窗體1 SP
-
             //移動無邊框窗體3 ST
             mouseOffset3 = new Point(e.X, e.Y);
             //移動無邊框窗體3 SP

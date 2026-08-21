@@ -20,11 +20,6 @@ namespace vcs_Form8_FormMove3
 {
     public partial class Form1 : Form
     {
-        [DllImportAttribute("user32.dll")]
-        private extern static bool ReleaseCapture();
-        [DllImportAttribute("user32.dll")]
-        private extern static int SendMessage(IntPtr handle, int m, int p, int h);
-
         //從pictureBox拖曳視窗 ST
         string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
         int nOldWndLeft;
@@ -49,9 +44,6 @@ namespace vcs_Form8_FormMove3
 
             //------------------------------------------------------------  # 60個
 
-            //this.MouseDown += new MouseEventHandler(MyBaseControl_MouseDown);
-            this.button4.MouseDown += new MouseEventHandler(MyBaseControl_MouseDown);
-            //this.pictureBox1.MouseDown += new MouseEventHandler(MyBaseControl_MouseDown);
         }
 
         //從pictureBox拖曳視窗 ST
@@ -78,30 +70,13 @@ namespace vcs_Form8_FormMove3
         }
         //從pictureBox拖曳視窗 SP
 
-        private void Form1_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                this.Cursor = Cursors.SizeAll;
-                ReleaseCapture();
-                SendMessage(this.Handle, 0xA1, 0x2, 0);
-                this.Cursor = Cursors.Default;
-            }
-        }
-
-        private void button1_MouseDown(object sender, MouseEventArgs e)
-        {
-            Form1_MouseDown(sender, e);
-        }
+        //------------------------------------------------------------  # 60個
 
         //鼠標點擊按鈕拖動窗體 ST
 
-        //記錄窗體的X坐標 
+        //記錄窗體的坐標 
         private int startX;
-
-        //記錄窗體的Y坐標 
         private int startY;
-
         private void button3_MouseDown(object sender, MouseEventArgs e)
         {
             //判斷點擊的是不是左鍵 
@@ -126,10 +101,11 @@ namespace vcs_Form8_FormMove3
                 this.Top += e.Y - startY;
             }
         }
+        //鼠標點擊按鈕拖動窗體 SP
+        //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //由此Button用SendMessage移動窗體
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -142,25 +118,11 @@ namespace vcs_Form8_FormMove3
 
         }
 
-        //鼠標點擊按鈕拖動窗體 SP
 
         //------------------------------------------------------------  # 60個
 
-        protected void MyBaseControl_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                this.Cursor = Cursors.SizeAll;
-                ReleaseCapture();
-                SendMessage(this.Handle, 0xA1, 0x2, 0);
-                this.Cursor = Cursors.Default;
-            }
-        }
-
         private void button4_Click(object sender, EventArgs e)
         {
-            //由此Button用SendMessage移動窗體
-            //使用SendMessage, 由控件移動窗體
 
         }
 
@@ -174,4 +136,3 @@ namespace vcs_Form8_FormMove3
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-

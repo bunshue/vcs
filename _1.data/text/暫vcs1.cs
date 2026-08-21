@@ -4326,31 +4326,6 @@ http://zxingnet.codeplex.com/
 
 //------------------------------------------------------------  # 60個
 
-C#中使用SendMessage進行進程通信的實例
-https://blog.csdn.net/yl2isoft/article/details/20227421
-
-(C#)WinAPI的SendMessage傳送
-[DllImport("user32.dll")]
-
-public static extern long SendMessage(int hWnd, uint msg, uint wparam, string text);
-
-public const uint WM_SETTEXT = 0x0c;
-public const uint WM_GETTEXT = 0x0d;
-public const uint WM_LBUTTONUP = 0x0202;
-public const uint WM_LBUTTONDOWN = 0x0201;
-
-SendMessage(輸入欄位的Handle, WM_SETTEXT, 0, "你要送的字串" );
-
-對按鈕按下去的訊號：
-
-SendMessage(按鈕的Handle, WM_LBUTTONDOWN, 0, null);
-
-SendMessage(按鈕的Handle, WM_LBUTTONUP, 0, null);
-
-兩個執行檔間數值的傳遞與接收
-
-//------------------------------------------------------------  # 60個
-
 /**
 * @brief   Convert a 6 digit HTML code (hex) into a color value.
 */
@@ -4361,7 +4336,6 @@ SendMessage(按鈕的Handle, WM_LBUTTONUP, 0, null);
 #define COLOR_BITS		16
 #define COLOR_TYPE		uint16_t
 #define COLOR_TYPE_BITS		16
-
 		
 /**
  * @name   Some basic colors

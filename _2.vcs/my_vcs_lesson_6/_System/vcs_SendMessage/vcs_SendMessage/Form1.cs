@@ -294,6 +294,15 @@ namespace vcs_SendMessage
         [DllImport("user32.dll", SetLastError = true)]
         static extern int SendMessage(IntPtr hWnd, int msg, int wParam, StringBuilder lParam);
 
+
+        [DllImportAttribute("user32.dll")]
+        private extern static bool ReleaseCapture();
+        [DllImportAttribute("user32.dll")]
+
+        //[DllImport("user32.dll")]
+        public static extern bool SendMessage(IntPtr hwnd, int wMsg, int wParam, int lParam);
+        //private extern static int SendMessage(IntPtr handle, int m, int p, int h);
+
         public Form1()
         {
             InitializeComponent();
@@ -302,6 +311,13 @@ namespace vcs_SendMessage
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
+            //使用 SendMessage 做移動窗體
+            //this.MouseDown += new MouseEventHandler(MyBaseControl_MouseDown);
+            this.button4.MouseDown += new MouseEventHandler(MyBaseControl_MouseDown);
+            //this.pictureBox1.MouseDown += new MouseEventHandler(MyBaseControl_MouseDown);
         }
 
         void show_item_location()
@@ -340,15 +356,38 @@ namespace vcs_SendMessage
         }
 
         //------------------------------------------------------------  # 60個
+        /*
+        //移動無邊框窗體1 ST
+        [DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
+        [DllImport("user32.dll")]
+        public static extern bool SendMessage(IntPtr hwnd, int wMsg, int wParam, int lParam);
+        */
+        //public const int WM_SYSCOMMAND = 0x0112;
+        public const int SC_MOVE = 0xF010;
+        public const int HTCAPTION = 0x0002;
+        //移動無邊框窗體1 SP
 
-        private void button0_Click(object sender, EventArgs e)
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
+            if (e.Button == MouseButtons.Left)
+            {
+                this.Cursor = Cursors.SizeAll;
+                ReleaseCapture();
+                SendMessage(this.Handle, 0xA1, 0x2, 0);
+                this.Cursor = Cursors.Default;
 
+                //移動無邊框窗體1 ST
+                //ReleaseCapture();
+                //SendMessage(this.Handle, WM_SYSCOMMAND, SC_MOVE + HTCAPTION, 0);
+                //移動無邊框窗體1 SP
+            }
         }
 
         //------------------------------------------------------------  # 60個
 
-        private void button1_Click(object sender, EventArgs e)
+        int iii = 0;
+        private void button0_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "傳送資料到 記事本\n";
 
@@ -362,6 +401,7 @@ namespace vcs_SendMessage
                 {
                     StringBuilder InsStr = new StringBuilder();
                     InsStr.Append("ABCDEFGHIJK565465465");
+                    InsStr.Append((iii++).ToString() + "\t" + DateTime.Now.ToString() + "\n");
                     SendMessage(ChildWnd, WM_SETTEXT, 0, InsStr);
                     richTextBox1.Text += "傳送資料到 記事本 完成\n";
                 }
@@ -369,12 +409,36 @@ namespace vcs_SendMessage
                 {
                     richTextBox1.Text += "沒有找到子窗口\n";
                 }
+
+                /*
+                ChildWnd = FindWindowEx(MainWnd, IntPtr.Zero, "msctls_statusbar32", "");
+                if (ChildWnd != IntPtr.Zero)
+                {
+                    //StringBuilder InsStr = new StringBuilder();
+                    //InsStr.Append("ABCDEFGHIJK565465465");
+                    //InsStr.Append((iii++).ToString() + "\t" + DateTime.Now.ToString() + "\n");
+                    //SendMessage(ChildWnd, WM_SETTEXT, 0, InsStr);
+                    //richTextBox1.Text += "傳送訊息完成2222\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "沒有找到子窗口2222\n";
+                }
+                */
             }
             else
             {
                 richTextBox1.Text += "找不到 記事本\n";
             }
         }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -385,7 +449,7 @@ namespace vcs_SendMessage
                 IntPtr ChildWnd = FindWindowEx(MainWnd, IntPtr.Zero, null, "登錄");   //獲得按鈕的句柄
                 if (ChildWnd != IntPtr.Zero)
                 {
-                    SendMessage(ChildWnd, BM_CLICK, 0, null);     //發送點擊按鈕的消息
+                    SendMessage(ChildWnd, BM_CLICK, 0, null);  // 發送點擊按鈕的消息
                     //SendMessage(ChildWnd, BM_CLICK, 0, InsStr);
 
                     richTextBox1.Text += "傳送訊息完成\n";
@@ -408,9 +472,6 @@ namespace vcs_SendMessage
         private const int WM_SYSCOMMAND = 0x0112;
         private const int SC_SCREENSAVE = 0xf140;
 
-        [DllImport("user32.dll")]
-        public static extern bool SendMessage(IntPtr hwnd, int wMsg, int wParam, int lParam);
-
         private void button3_Click(object sender, EventArgs e)
         {
             //啟動螢幕保護
@@ -421,48 +482,21 @@ namespace vcs_SendMessage
 
         //------------------------------------------------------------  # 60個
 
-        int iii = 0;
+        protected void MyBaseControl_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                this.Cursor = Cursors.SizeAll;
+                ReleaseCapture();
+                SendMessage(this.Handle, 0xA1, 0x2, 0);
+                this.Cursor = Cursors.Default;
+            }
+        }
+
         private void button4_Click(object sender, EventArgs e)
         {
-            const int WM_SETTEXT = 0x000C;
-
-            IntPtr MainWnd = FindWindow("Notepad", null);
-            if (MainWnd != IntPtr.Zero)
-            {
-                IntPtr ChildWnd = FindWindowEx(MainWnd, IntPtr.Zero, "Edit", "");
-                if (ChildWnd != IntPtr.Zero)
-                {
-                    StringBuilder InsStr = new StringBuilder();
-                    InsStr.Append((iii++).ToString() + "\t" + DateTime.Now.ToString() + "\n");
-                    SendMessage(ChildWnd, WM_SETTEXT, 0, InsStr);
-                    richTextBox1.Text += "傳送訊息完成\n";
-                }
-                else
-                {
-                    richTextBox1.Text += "沒有找到子窗口\n";
-                }
-
-
-                ChildWnd = FindWindowEx(MainWnd, IntPtr.Zero, "msctls_statusbar32", "");
-                if (ChildWnd != IntPtr.Zero)
-                {
-                    /*
-                    StringBuilder InsStr = new StringBuilder();
-                    InsStr.Append((iii++).ToString() + "\t" + DateTime.Now.ToString() + "\n");
-                    SendMessage(ChildWnd, WM_SETTEXT, 0, InsStr);
-                    */
-                    richTextBox1.Text += "傳送訊息完成2222\n";
-                }
-                else
-                {
-                    richTextBox1.Text += "沒有找到子窗口2222\n";
-                }
-
-            }
-            else
-            {
-                richTextBox1.Text += "沒有找到窗口\n";
-            }
+            //由此Button用SendMessage移動窗體
+            //使用SendMessage, 由控件移動窗體
         }
 
         //------------------------------------------------------------  # 60個
@@ -686,9 +720,15 @@ namespace vcs_SendMessage
 
         //------------------------------------------------------------  # 60個
 
+        private void button6_MouseDown(object sender, MouseEventArgs e)
+        {
+            Form1_MouseDown(sender, e);
+        }
+
         private void button6_Click(object sender, EventArgs e)
         {
-
+            //由此Button用SendMessage移動窗體
+            //透過 Form1_MouseDown
         }
 
         //------------------------------------------------------------  # 60個
@@ -733,4 +773,35 @@ namespace vcs_SendMessage
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
+
+
+
+/*
+
+C#中使用SendMessage進行進程通信的實例
+https://blog.csdn.net/yl2isoft/article/details/20227421
+
+(C#)WinAPI的SendMessage傳送
+[DllImport("user32.dll")]
+
+public static extern long SendMessage(int hWnd, uint msg, uint wparam, string text);
+
+public const uint WM_SETTEXT = 0x0c;
+public const uint WM_GETTEXT = 0x0d;
+public const uint WM_LBUTTONUP = 0x0202;
+public const uint WM_LBUTTONDOWN = 0x0201;
+
+SendMessage(輸入欄位的Handle, WM_SETTEXT, 0, "你要送的字串" );
+
+對按鈕按下去的訊號：
+
+SendMessage(按鈕的Handle, WM_LBUTTONDOWN, 0, null);
+
+SendMessage(按鈕的Handle, WM_LBUTTONUP, 0, null);
+
+兩個執行檔間數值的傳遞與接收
+
+*/
+
+
 
