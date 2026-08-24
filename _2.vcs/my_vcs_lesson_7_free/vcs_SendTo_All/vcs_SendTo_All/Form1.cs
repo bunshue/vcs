@@ -28,7 +28,7 @@ namespace vcs_SendTo_All
 {
     public partial class Form1 : Form
     {
-        int flag_operation_mode = MODE1;
+        int flag_operation_mode = MODE4;
 
         bool flag_debug_mode = true;  //debug模式
 
@@ -36,7 +36,7 @@ namespace vcs_SendTo_All
         private const int MODE1 = 0x01;   //檢視檔案內容
         private const int MODE2 = 0x02;   //簡中轉正中
         private const int MODE3 = 0x03;   //計算檔案之MD5值
-        private const int MODE4 = 0x04;   //grep 一層
+        private const int MODE4 = 0x04;   //匯出一層  vcs_匯出一層.exe
         private const int MODE5 = 0x05;   //grep 多層
         private const int MODE6 = 0x06;   //轉出檔案目錄資料 目錄下檔名轉出純文字 右鍵匯出資料夾內的檔案資料
 
@@ -170,6 +170,47 @@ namespace vcs_SendTo_All
             else if (flag_operation_mode == MODE3)
             {
                 this.Text = "計算檔案之MD5值";
+            }
+            else if (flag_operation_mode == MODE4)
+            {
+                this.Text = "匯出一層 資料夾 + 檔案名";
+
+                ///string foldername = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_7_free\vcs_SendTo_All\vcs_SendTo_All";
+                //export_filename(foldername);//轉出檔案目錄資料 目錄下檔名轉出純文字
+                string foldername = Application.StartupPath;
+
+                if (Directory.Exists(foldername) == false)     //確認資料夾是否存在
+                {
+                    return;
+                }
+
+                string[] files = Directory.GetFiles(foldername);
+                string[] dirs = Directory.GetDirectories(foldername);
+                //richTextBox1.Text += "資料夾: " + target_dir + "\t檔案個數 = " + files.Length.ToString() + "\n";
+
+                foreach (string dir in dirs)
+                {
+                    richTextBox1.Text += "資料夾: " + dir + "\n";
+                }
+                richTextBox1.Text += "\n";
+
+                foreach (string file in files)
+                {
+                    FileInfo fi = new FileInfo(file);
+                    long filesize = fi.Length;
+
+                    /*
+                    richTextBox1.Text += "資料夾：" + fi.Directory + Environment.NewLine;
+                    richTextBox1.Text += "檔名：" + fi.Name + Environment.NewLine;
+                    richTextBox1.Text += "檔案大小：" + fi.Length.ToString() + Environment.NewLine;
+                    richTextBox1.Text += "建立時間1：" + fi.CreationTime.ToString() + Environment.NewLine;
+                    richTextBox1.Text += "建立時間2：" + fi.CreationTimeUtc.ToString() + Environment.NewLine;
+                    richTextBox1.Text += "最近寫入時間：" + fi.LastWriteTime.ToString() + Environment.NewLine;
+                    */
+
+                    richTextBox1.Text += "檔案: " + file + "\n";
+                }
+
             }
             else if (flag_operation_mode == MODE6)
             {
