@@ -41,11 +41,11 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 
 def show():
-    # return
+    return
     # plt.tight_layout()
     plt.show()
 
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -7125,47 +7125,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-
-"""
-def batch_resize_images(input_folder, output_folder, size=(300, 300)):
-    # 確保輸出資料夾存在
-    if not os.path.exists(output_folder):
-        os.makedirs(output_folder)
-    
-    # 遍歷輸入資料夾中的所有影像檔案
-    for filename in os.listdir(input_folder):
-        if filename.endswith((".jpg", ".png")):
-            # 打開影像
-            image = Image.open(os.path.join(input_folder, filename))
-            # 調整影像尺寸
-            image = image.resize(size, Image.ANTIALIAS)
-            # 保存調整尺寸後的影像到輸出資料夾
-            #image.save(os.path.join(output_folder, filename))
-
-# 假設有一個包含原始圖片的資料夾 "input_images" 和
-# 一個用於存放調整後圖片的資料夾 "output_images"
-input_folder = "input_images"
-output_folder = "output_images"
-
-# 呼叫函數，將所有圖片調整為300x300大小
-batch_resize_images(input_folder, output_folder)
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-def batch_convert_images(directory, target_format=".jpg"):
-    for filename in os.listdir(directory):
-        if filename.endswith(".png"):
-            path = os.path.join(directory, filename)
-            image = Image.open(path)
-            image_rgb = image.convert("RGB")  # 轉換為RGB模式以便保存為JPEG
-            #image_rgb.save(path.replace(".png", target_format), quality=95)
-
-# 呼叫批次更改函數
-batch_convert_images("images_directory")
-"""
-
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -9023,29 +8982,6 @@ print(set99)
 
 print("------------------------------------------------------------")  # 60個
 
-pName = "D:/pcYah"
-if os.path.isdir(pName):  # 檢查資料夾路徑是否存在
-    print("%s 資料夾路徑存在" % pName)
-else:
-    print("%s 資料夾路徑不存在" % pName)
-
-fName = "D:/Windows/win.ini"
-if os.path.isfile(fName):  # 檢查檔案路徑是否存在
-    print("%s 檔案路徑存在" % fName)
-else:
-    print("%s 檔案路徑不存在" % fName)
-
-"""
-
-isdir  isfile
-
-if os.path.exists(pName):        # 檢查資料夾路徑是否存在
-if os.path.exists(fName):        # 檢查檔案路徑是否存在
-
-
-"""
-
-
 # try-catch-finally
 n1 = 8
 n2 = 0
@@ -9076,22 +9012,6 @@ except MemoryErroe:
     print("錯誤類型 : 超出記憶體空間")
 except Exception as e:
     print("錯誤類型 :", e)
-
-fName = "score.txt"
-if os.path.isfile(fName):
-    f = open(fName, "r")
-    print("讀1行")
-    str1 = f.readline()
-    print(str1)
-    print("讀4行")
-    str2 = f.readline(4)
-    print(str2)
-    print("剩下的讀完")
-    print(f.read())
-    f.close()
-else:
-    print(None)
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -9137,37 +9057,37 @@ print("執行一百萬次浮點數運算的時間：" + str(timeend - timestart)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
-import time as t
+
+import time
 
 week = ["一", "二", "三", "四", "五", "六", "日"]
 dst = ["無日光節約時間", "有日光節約時間"]
-time1 = t.localtime()
-show = "現在時刻：民國 " + str(int(time1.tm_year) - 1911) + " 年 "
-show += str(time1.tm_mon) + " 月 " + str(time1.tm_mday) + " 日 "
-show += str(time1.tm_hour) + " 點 " + str(time1.tm_min) + " 分 "
-show += str(time1.tm_sec) + " 秒 星期" + week[time1.tm_wday] + "\n"
-show += "今天是今年的第 " + str(time1.tm_yday) + " 天，此地" + dst[time1.tm_isdst]
-print(show)
+time1 = time.localtime()
+mesg = "現在時刻：民國 " + str(int(time1.tm_year) - 1911) + " 年 "
+mesg += str(time1.tm_mon) + " 月 " + str(time1.tm_mday) + " 日 "
+mesg += str(time1.tm_hour) + " 點 " + str(time1.tm_min) + " 分 "
+mesg += str(time1.tm_sec) + " 秒 星期" + week[time1.tm_wday] + "\n"
+mesg += "今天是今年的第 " + str(time1.tm_yday) + " 天，此地" + dst[time1.tm_isdst]
+print(mesg)
 
 print("------------------------------------------------------------")  # 60個
 
-import time as t
+import time
 
-timestart = t.perf_counter()
+timestart = time.perf_counter()
 for i in range(0, 1000):
     for j in range(0, 1000):
         n = i * j
-timeend = t.perf_counter()
+timeend = time.perf_counter()
 print("執行一百萬次 整數 運算的時間：" + str(timeend - timestart) + " 秒")
 
-import time as t
+import time
 
-timestart = t.perf_counter()
+timestart = time.perf_counter()
 for i in range (0,1000):
     for j in range (0,1000):
         n = float(i) * float(j)
-timeend = t.perf_counter()
+timeend = time.perf_counter()
 print("執行一百萬次 浮點數 運算的時間：" + str(timeend-timestart) + " 秒")
 
 print("------------------------------------------------------------")  # 60個
@@ -9181,15 +9101,15 @@ print(date1)
 
 print("------------------------------------------------------------")  # 60個
 
-import time as t
+import time
 
-time1 = t.localtime()
-show = "今天是今年的第 " + str(time1.tm_yday) + " 天，屬於"
+time1 = time.localtime()
+mesg = "今天是今年的第 " + str(time1.tm_yday) + " 天，屬於"
 if time1.tm_yday < 184:
-    show += "上半年。"
+    mesg += "上半年。"
 else:
-    show += "下半年。"
-print(show)
+    mesg += "下半年。"
+print(mesg)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -9201,19 +9121,19 @@ print(time1)
 
 print("------------------------------------------------------------")  # 60個
 
-import time as t
+import time
 
-time1 = t.localtime()
-show = "現在時刻："
+time1 = time.localtime()
+mesg = "現在時刻："
 if time1.tm_hour < 12:
-    show += "上午 "
+    mesg += "上午 "
     hour = time1.tm_hour
 else:
-    show += "下午 "
+    mesg += "下午 "
     hour = time1.tm_hour - 12
-show += str(hour) + " 點 " + str(time1.tm_min) + " 分 "
-show += str(time1.tm_sec) + " 秒"
-print(show)
+mesg += str(hour) + " 點 " + str(time1.tm_min) + " 分 "
+mesg += str(time1.tm_sec) + " 秒"
+print(mesg)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -9992,24 +9912,6 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-root_dir = os.path.abspath(".")
-gunfire_path = os.path.join(root_dir, "gunfire.wav")
-filename = os.path.join(root_dir, "tone.wav")
-print(filename)
-
-"""
-# 新建資料夾用於放置影像
-if not os.path.isdir('trainer'):
-    os.mkdir('trainer')
-os.chdir('trainer')
-"""
-
-root_dir = os.path.abspath(".")
-filename = os.path.join(root_dir, "tone.wav")
-print(filename)
-
-print("------------------------------------------------------------")  # 60個
-
 print("建立20組資料")
 USERS = [(i, f"account_{i}", f"nickname_{i}") for i in range(20)]
 
@@ -10067,6 +9969,7 @@ print(data_path)
 
 print("------------------------------------------------------------")  # 60個
 
+"""
 import pydicom.data
 from pydicom.data import get_testdata_file
 
@@ -10074,8 +9977,7 @@ fname = "693_UNCI.dcm"
 fpath = get_testdata_file(fname)
 print(fpath)
 
-print("done")
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 # UTC时间
@@ -10198,7 +10100,7 @@ def load_template(file_path):
     with open(file_path, "r", encoding="utf-8") as file:
         return file.read()
 
-
+"""
 # テンプレートを読み込む
 header_template = load_template("templates/header_template.txt")
 section_template = load_template("templates/section_template.txt")
@@ -10223,9 +10125,8 @@ with open("README.md", "w", encoding="utf-8") as readme:
         # READMEにセクションを追加
         section_content = section_template.format(cmap_name=cmap)
         readme.write(section_content)
-
+"""
 print("------------------------------------------------------------")  # 60個
-
 
 print("map 的用法")
 
@@ -10435,7 +10336,7 @@ for ticker in tickers:
     print("\n")
 
 print("------------------------------------------------------------")  # 60個
-
+"""
 import tensorflow as tf
 
 # Check that we are using a GPU, if not switch runtimes
@@ -10444,7 +10345,7 @@ import tensorflow as tf
 
 length = len(tf.config.list_physical_devices("GPU"))
 print("GPU個數 :", length)
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 
@@ -10612,53 +10513,6 @@ var_sort.plot(kind="bar")
 show()
 """
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-""" many
-cur_path=os.path.dirname(__file__) # 取得目前路徑
-sample_tree=os.walk(cur_path)
-for dirname,subdir,files in sample_tree:
-    print("檔案路徑：",dirname)
-    print("目錄串列：" , subdir)   
-    print("檔案串列：",files)
-    print()
-"""
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 系統
-
-from pathlib import Path
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-print("------------------------------------------------------------")  # 60個
-
-print("本py檔全檔名")
-print(__file__)
-
-print("本py檔所在資料夾")
-basedir = os.path.dirname(__file__)
-print(basedir)
-
-print("------------------------------------------------------------")  # 60個
-
-cur_dir = os.path.dirname(__file__)
-print(cur_dir)
-
-
-# 列出Python所有內建函數 dir()
-cc = dir(__builtins__)
-print(cc)
-
-# Python的輔助說明 help()
-cc = help(print)
-print(cc)
-
-print("------------------------------------------------------------")  # 60個
 """
 # 刪除特定檔案
 
@@ -10694,31 +10548,6 @@ print(locals())
 
 print("------------------------------------------------------------")  # 60個
 
-print(__file__)
-print(__file__.lower())
-print(__file__.upper())
-
-print(os.path.dirname(__file__))
-
-pathlist = os.environ["PATH"].split(os.pathsep)
-print(pathlist)
-
-print("------------------------------------------------------------")  # 60個
-
-# 重新命名檔案
-
-os.rename("filename.txt", "new_filename.txt")
-
-os.rename("/path/to/dir/filename.txt", "/path/to/dir/new_filename.txt")
-
-dir = "/path/to/dir"
-old_file = os.path.join(dir, "filename.txt")
-new_file = os.path.join(dir, "new_filename.txt")
-
-os.rename(old_file, new_file)
-
-print("------------------------------------------------------------")  # 60個
-
 print("# Generated by {}.  Do not edit manually.".format(__file__))
 
 print(globals())  # 印出記憶體內目前所有的變數名稱
@@ -10729,110 +10558,6 @@ print()
 print(__doc__)  # 有%不替換
 
 print("------------------------------------------------------------")  # 60個
-
-
-def lll(dirname):
-    for name in os.listdir(dirname):
-        # print('a')
-        if name not in (os.curdir, os.pardir):
-            print("b")
-            full = os.path.join(dirname, name)
-            print(full)
-
-
-foldername = "D:/_git/vcs/_1.data/______test_files5"
-# lll(foldername)
-
-print("------------------------------------------------------------")  # 60個
-"""
-    outdir = os.path.join(WORKDIR, 'diskimage')
-    if os.path.exists(outdir):
-        shutil.rmtree(outdir)
-"""
-print("------------------------------------------------------------")  # 60個
-
-drive = os.environ["HOMEDRIVE"]
-print("HOMEDRIVE :", drive)
-
-path = os.environ["PATH"]
-print("PATH :", path)
-
-paths = path.split(os.pathsep)
-print(paths)
-
-# NG base, ext = os.path.splitext(executable)
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-[Python] 遍歷資料夾取得檔案名稱和目錄
-這個程式碼示範了如何使用遞迴遍歷指定資料夾中的所有檔案和目錄。當遇到檔案時，它會使用縮排列印檔案名稱，當遇到目錄時，它會使用縮排列印目錄名稱，並且遞迴調用traverse_folder函數處理子目錄。
-您可以將 'C:/Users/User/python/path' 替換為您要遍歷的資料夾的實際路徑。運行程式碼後，它會遞迴地列印資料夾中的所有檔案和目錄，並使用縮排來顯示層次結構。
-請注意，indent參數用於控制縮排的數量，以便更好地表示層次結構。在遞迴調用時，將 indent + 4 傳遞給下一級目錄，以增加縮排的寬度。您可以根據需要自定義縮排的數量。
-"""
-
-
-def traverse_folder(folder_path, indent=0):
-    # 獲取資料夾中的所有檔案和子目錄
-    items = os.listdir(folder_path)
-
-    for item in items:
-        # 構建完整的路徑
-        item_path = os.path.join(folder_path, item)
-
-        if os.path.isfile(item_path):
-            # 如果是檔案，列印檔案名稱
-            print(" " * indent + "檔案:", item)
-        elif os.path.isdir(item_path):
-            # 如果是目錄，列印目錄名稱，並遞迴處理目錄
-            print(" " * indent + "目錄:", item)
-            traverse_folder(item_path, indent + 4)
-
-
-# 指定資料夾路徑
-folder_path = "C:/Users/User/python/path"
-# 遍歷資料夾中的檔案和目錄
-# traverse_folder(folder_path)
-
-print("------------------------------------------------------------")  # 60個
-
-# 撈出多層
-
-foldername = "D:/_git/vcs/_1.data/______test_files3/DrAP_test"
-
-# This would print all the files and directories
-if __name__ == "__main__":
-    print(foldername)
-    if os.path.isdir(foldername):
-        print("是資料夾")
-        dirs = os.listdir(foldername)
-        print("撈出一層(檔案+資料夾) :", dirs)
-        for file in dirs:
-            print(file)
-            if not os.path.isdir(foldername + "/" + file):
-                print("檔案 :", foldername + "/" + file)
-            else:
-                print("資料夾 :", foldername + "/" + file)
-    else:
-        print("不是資料夾")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-cwd = os.getcwd()
-print(cwd)
-
-new_folder = "AAAAA"
-
-# 構建完整的路徑
-full_path = os.path.join(cwd, new_folder)
-print("full_path :", full_path)
-
-
-# 刪除資料夾
-# import shutil
-# shutil.rmtree(png_path)
-
 
 # 打印 print 測試
 
@@ -14553,5 +14278,303 @@ totalSeconds = int(currentTime)
 print(totalSeconds)
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+
+
+"""
+def batch_resize_images(input_folder, output_folder, size=(300, 300)):
+    # 確保輸出資料夾存在
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
+    
+    # 遍歷輸入資料夾中的所有影像檔案
+    for filename in os.listdir(input_folder):
+        if filename.endswith((".jpg", ".png")):
+            # 打開影像
+            image = Image.open(os.path.join(input_folder, filename))
+            # 調整影像尺寸
+            image = image.resize(size, Image.ANTIALIAS)
+            # 保存調整尺寸後的影像到輸出資料夾
+            #image.save(os.path.join(output_folder, filename))
+
+# 假設有一個包含原始圖片的資料夾 "input_images" 和
+# 一個用於存放調整後圖片的資料夾 "output_images"
+input_folder = "input_images"
+output_folder = "output_images"
+
+# 呼叫函數，將所有圖片調整為300x300大小
+batch_resize_images(input_folder, output_folder)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+def batch_convert_images(directory, target_format=".jpg"):
+    for filename in os.listdir(directory):
+        if filename.endswith(".png"):
+            path = os.path.join(directory, filename)
+            image = Image.open(path)
+            image_rgb = image.convert("RGB")  # 轉換為RGB模式以便保存為JPEG
+            #image_rgb.save(path.replace(".png", target_format), quality=95)
+
+# 呼叫批次更改函數
+batch_convert_images("images_directory")
+"""
+
+
+
+
+pName = "D:/pcYah"
+if os.path.isdir(pName):  # 檢查資料夾路徑是否存在
+    print("%s 資料夾路徑存在" % pName)
+else:
+    print("%s 資料夾路徑不存在" % pName)
+
+fName = "D:/Windows/win.ini"
+if os.path.isfile(fName):  # 檢查檔案路徑是否存在
+    print("%s 檔案路徑存在" % fName)
+else:
+    print("%s 檔案路徑不存在" % fName)
+
+"""
+
+isdir  isfile
+
+if os.path.exists(pName):        # 檢查資料夾路徑是否存在
+if os.path.exists(fName):        # 檢查檔案路徑是否存在
+
+
+"""
+
+
+
+6060
+
+fName = "score.txt"
+if os.path.isfile(fName):
+    f = open(fName, "r")
+    print("讀1行")
+    str1 = f.readline()
+    print(str1)
+    print("讀4行")
+    str2 = f.readline(4)
+    print(str2)
+    print("剩下的讀完")
+    print(f.read())
+    f.close()
+else:
+    print(None)
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+""" many
+cur_path=os.path.dirname(__file__) # 取得目前路徑
+sample_tree=os.walk(cur_path)
+for dirname,subdir,files in sample_tree:
+    print("檔案路徑：",dirname)
+    print("目錄串列：" , subdir)   
+    print("檔案串列：",files)
+    print()
+"""
+
+
+root_dir = os.path.abspath(".")
+gunfire_path = os.path.join(root_dir, "gunfire.wav")
+filename = os.path.join(root_dir, "tone.wav")
+print(filename)
+
+"""
+# 新建資料夾用於放置影像
+if not os.path.isdir('trainer'):
+    os.mkdir('trainer')
+os.chdir('trainer')
+"""
+
+root_dir = os.path.abspath(".")
+filename = os.path.join(root_dir, "tone.wav")
+print(filename)
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 系統
+
+from pathlib import Path
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+print("------------------------------------------------------------")  # 60個
+
+print("本py檔全檔名")
+print(__file__)
+
+print("本py檔所在資料夾")
+basedir = os.path.dirname(__file__)
+print(basedir)
+
+print("------------------------------------------------------------")  # 60個
+
+cur_dir = os.path.dirname(__file__)
+print(cur_dir)
+
+
+# 列出Python所有內建函數 dir()
+cc = dir(__builtins__)
+print(cc)
+
+# Python的輔助說明 help()
+cc = help(print)
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print(__file__)
+print(__file__.lower())
+print(__file__.upper())
+
+print(os.path.dirname(__file__))
+
+pathlist = os.environ["PATH"].split(os.pathsep)
+print(pathlist)
+
+print("------------------------------------------------------------")  # 60個
+"""
+# 重新命名檔案
+
+os.rename("filename.txt", "new_filename.txt")
+
+os.rename("/path/to/dir/filename.txt", "/path/to/dir/new_filename.txt")
+
+dir = "/path/to/dir"
+old_file = os.path.join(dir, "filename.txt")
+new_file = os.path.join(dir, "new_filename.txt")
+
+os.rename(old_file, new_file)
+"""
+print("------------------------------------------------------------")  # 60個
+
+
+def lll(dirname):
+    for name in os.listdir(dirname):
+        # print('a')
+        if name not in (os.curdir, os.pardir):
+            print("b")
+            full = os.path.join(dirname, name)
+            print(full)
+
+
+foldername = "D:/_git/vcs/_1.data/______test_files5"
+# lll(foldername)
+
+print("------------------------------------------------------------")  # 60個
+"""
+    outdir = os.path.join(WORKDIR, 'diskimage')
+    if os.path.exists(outdir):
+        shutil.rmtree(outdir)
+"""
+print("------------------------------------------------------------")  # 60個
+
+drive = os.environ["HOMEDRIVE"]
+print("HOMEDRIVE :", drive)
+
+path = os.environ["PATH"]
+print("PATH :", path)
+
+paths = path.split(os.pathsep)
+print(paths)
+
+# NG base, ext = os.path.splitext(executable)
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+[Python] 遍歷資料夾取得檔案名稱和目錄
+這個程式碼示範了如何使用遞迴遍歷指定資料夾中的所有檔案和目錄。當遇到檔案時，它會使用縮排列印檔案名稱，當遇到目錄時，它會使用縮排列印目錄名稱，並且遞迴調用traverse_folder函數處理子目錄。
+您可以將 'C:/Users/User/python/path' 替換為您要遍歷的資料夾的實際路徑。運行程式碼後，它會遞迴地列印資料夾中的所有檔案和目錄，並使用縮排來顯示層次結構。
+請注意，indent參數用於控制縮排的數量，以便更好地表示層次結構。在遞迴調用時，將 indent + 4 傳遞給下一級目錄，以增加縮排的寬度。您可以根據需要自定義縮排的數量。
+"""
+
+
+def traverse_folder(folder_path, indent=0):
+    # 獲取資料夾中的所有檔案和子目錄
+    items = os.listdir(folder_path)
+
+    for item in items:
+        # 構建完整的路徑
+        item_path = os.path.join(folder_path, item)
+
+        if os.path.isfile(item_path):
+            # 如果是檔案，列印檔案名稱
+            print(" " * indent + "檔案:", item)
+        elif os.path.isdir(item_path):
+            # 如果是目錄，列印目錄名稱，並遞迴處理目錄
+            print(" " * indent + "目錄:", item)
+            traverse_folder(item_path, indent + 4)
+
+
+# 指定資料夾路徑
+folder_path = "C:/Users/User/python/path"
+# 遍歷資料夾中的檔案和目錄
+# traverse_folder(folder_path)
+
+print("------------------------------------------------------------")  # 60個
+
+# 撈出多層
+
+foldername = "D:/_git/vcs/_1.data/______test_files3/DrAP_test"
+
+# This would print all the files and directories
+if __name__ == "__main__":
+    print(foldername)
+    if os.path.isdir(foldername):
+        print("是資料夾")
+        dirs = os.listdir(foldername)
+        print("撈出一層(檔案+資料夾) :", dirs)
+        for file in dirs:
+            print(file)
+            if not os.path.isdir(foldername + "/" + file):
+                print("檔案 :", foldername + "/" + file)
+            else:
+                print("資料夾 :", foldername + "/" + file)
+    else:
+        print("不是資料夾")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+cwd = os.getcwd()
+print(cwd)
+
+new_folder = "AAAAA"
+
+# 構建完整的路徑
+full_path = os.path.join(cwd, new_folder)
+print("full_path :", full_path)
+
+
+# 刪除資料夾
+# import shutil
+# shutil.rmtree(png_path)
+
+
+
 
 
