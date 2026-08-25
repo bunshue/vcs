@@ -254,6 +254,14 @@ for i in range(1,length):
 
 print("------------------------------------------------------------")  # 60個
 
+# 通過sys.argv獲取命令行參數
+if len(sys.argv) > 1:
+    # 第一個命令行參數是程序本身所以從第二個開始取
+    for index in range(1, len(sys.argv)):
+        print(sys.argv[index])
+
+print("------------------------------------------------------------")  # 60個
+
 length = len(sys.argv)
 print("參數長度 : ", length)
 for i in range(0, length):
@@ -804,7 +812,6 @@ print("作業系統：", sys.platform)
 print("------------------------------------------------------------")  # 60個
 
 print("記事本 開啟")
-import os
 import win32process
 import win32event
 
@@ -861,15 +868,11 @@ print(sys.path)
 
 print("------------------------------------------------------------")  # 60個
 
-import sys
-
 # 查看搜尋模組套件的路徑優先順序
 for path in sys.path:
     print(path)
 
 print("------------------------------------------------------------")  # 60個
-
-import sys
 
 print("目前python程式所在位置 sys.executable :")
 print(sys.executable)
@@ -894,7 +897,8 @@ print(version_suffix)
 print("Python%s.dll" % version_suffix)
 
 from _msi import *
-import os, string, re, sys
+import string
+import re
 
 AMD64 = "AMD64" in sys.version
 Itanium = "Itanium" in sys.version
@@ -959,10 +963,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-import os
-
 print("HOME環境變數:", os.environ["HOME"])
-
 
 df = pd.DataFrame({"key": ["b", "b", "a", "c", "a", "a", "b"], "data1": range(7)})
 print(df)
@@ -983,7 +984,14 @@ print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
-import platform, os, sys, getopt, textwrap, shutil, stat, time
+import platform
+import os
+import sys
+import getopt
+import textwrap
+import shutil
+import stat
+import time
 
 FW_PREFIX = ["Library", "Frameworks", "Python.framework"]
 FW_VERSION_PREFIX = "--undefined--"
@@ -1110,7 +1118,7 @@ print("列出所有全域變數的名稱與內容")
 cc = globals()
 print(cc)
 
-import sys
+print("------------------------------------------------------------")  # 60個
 
 # 目前 python程式 路徑
 print(sys.executable)
@@ -1121,7 +1129,7 @@ os.system("ls -l")
 os.system("ls -l")
 # os.mkdir('test')
 
-import os
+print("------------------------------------------------------------")  # 60個
 
 cur_path = os.getcwd()  # 取得目前路徑
 os.system("cls")  # 清除螢幕
@@ -1138,8 +1146,6 @@ print("------------------------------------------------------------")  # 60個
 
 """
 os.system 整理
-
-import os
 
 開啟外部程式
 #rc = os.system("nasm -f win64 -DNEAR -Ox -g ms\\uptable.asm")
@@ -1203,7 +1209,7 @@ os.popen方式：
 返回值：cmd的输出信息。本身是异步调用，返回为一个Io文件指针，读取IO才会导致同步阻塞
 """
 
-import os
+print("------------------------------------------------------------")  # 60個
 
 cmd = "dir"
 f = os.popen(cmd)

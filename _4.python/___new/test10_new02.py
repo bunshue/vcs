@@ -130,9 +130,6 @@ cc = np.mgrid[0:10:11j]
 print("共", len(cc), "點")
 print(cc)
 
-
-sys.exit()
-
 print("------------------------------------------------------------")  # 60個
 
 print("np.mgrid : mesh-grid")

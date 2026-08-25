@@ -45,7 +45,7 @@ def show():
     # plt.tight_layout()
     plt.show()
 
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -7482,47 +7482,21 @@ file1.write("\tprint('被import使用中')")
 file1.close()  # 關閉檔案
 
 print("------------------------------------------------------------")  # 60個
-
-import subprocess
+'''
 from os import path
 import re
 
-"""
-for folder, subfolders, filenames in os.walk("."):
+foldername = "D:\_git\vcs\_1.data\______test_files3"
+
+# for folder, subfolders, filenames in os.walk("."):
+for folder, subfolders, filenames in os.walk(foldername):
+    print(folder, subfolders, filenames)
     for filename in filenames:
         fullpath = path.join(folder, filename)
         if fullpath.lower().endswith(".ipynb"):
             print(fullpath)
-            #subprocess.call(["ipython", "trust", fullpath, "--profile", "scipybook2"])
-"""
+
 print("------------------------------------------------------------")  # 60個
-
-# from IPython.nbformat import read
-
-links = []
-for folder, _, filenames in os.walk("."):
-    for filename in filenames:
-        if re.match(r"\w+-[0-9a-zA-Z]\d\d-.+?\.ipynb$", filename):
-            fullpath = path.join(folder, filename)
-            print(fullpath)
-            """
-            book = read(fullpath, 4)
-            for cell in book.cells:
-                if cell.cell_type == "markdown" and cell.source.startswith("#"):
-                    title = cell.source.strip("# ")
-                    name = path.splitext(filename)[0]
-                    folder = path.basename(folder)
-                    link = u"[{title} - {name}]({folder}/{name}.ipynb)".format(
-                        title=title, name=name, folder=folder)
-                    links.append(link)
-                    break
-            """
-
-from IPython.display import display_markdown  # 用IPython
-from IPython.display import Markdown  # 用IPython
-
-display_markdown(Markdown("\n\n".join(links)))
-
 
 from os import path
 import json
@@ -11427,33 +11401,6 @@ x = np.linalg.solve(A, B)
 print("The solutions are:", x)
 
 print("------------------------------------------------------------")  # 60個---------
-
-# from IPython.html import widgets
-# from IPython.html.widgets import interact
-
-slider = widgets.FloatSliderWidget(min=0, max=4, value=2)
-
-# from IPython.html.widgets import interact
-
-# NG interact(plot_3D, elev=[-90, 90], azip=(-180, 180))
-# NG interact(plot_fit, degree=[1, 30], Npts=[2, 100])
-
-# dimensionality reduction techniques
-# Principal component analysis (PCA)
-# Independent component analysis (ICA)
-# Random projections (RP)
-
-
-# 搜尋開始	python	 interact(
-# NG interact(plot_svm, N=[10, 200], kernel='linear')
-# NG interact(plot_3D, elev=[-90, 90], azip=(-180, 180))
-# NG interact(plot_fit, degree=[1, 30], Npts=[2, 100])
-# interact(fit_randomized_tree, random_state=[0, 100])
-# 上面搜尋到的資料在檔案	D:\_git\vcs\_4.python\__code\data-science-ipython-notebooks-master\scikit-learn\scikit-learn01.py
-
-interact(plot_pdfs, cohen_d=slider)
-# 上面搜尋到的資料在檔案	D:\_git\vcs\_4.python\__code\data-science-ipython-notebooks-master\scipy\scipy_新進1.py
-
 
 """
 Python的歷史
