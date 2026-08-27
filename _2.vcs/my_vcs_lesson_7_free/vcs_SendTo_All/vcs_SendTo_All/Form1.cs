@@ -36,7 +36,7 @@ namespace vcs_SendTo_All
         private const int MODE1 = 0x01;   //檢視檔案內容
         private const int MODE2 = 0x02;   //簡中轉正中
         private const int MODE3 = 0x03;   //計算檔案之MD5值
-        private const int MODE4 = 0x04;   //匯出一層  vcs_匯出一層.exe
+        private const int MODE4 = 0x04;   //匯出一層  vcs_匯出一層.exe, 目前資料夾下
         private const int MODE5 = 0x05;   //grep 多層
         private const int MODE6 = 0x06;   //轉出檔案目錄資料 目錄下檔名轉出純文字 右鍵匯出資料夾內的檔案資料
 
@@ -178,11 +178,14 @@ namespace vcs_SendTo_All
                 ///string foldername = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_7_free\vcs_SendTo_All\vcs_SendTo_All";
                 //export_filename(foldername);//轉出檔案目錄資料 目錄下檔名轉出純文字
                 string foldername = Application.StartupPath;
+                richTextBox1.Text += "資料夾 " + foldername + "\n";
 
                 if (Directory.Exists(foldername) == false)     //確認資料夾是否存在
                 {
                     return;
                 }
+
+                richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
                 string[] files = Directory.GetFiles(foldername);
                 string[] dirs = Directory.GetDirectories(foldername);
@@ -190,27 +193,51 @@ namespace vcs_SendTo_All
 
                 foreach (string dir in dirs)
                 {
-                    richTextBox1.Text += "資料夾: " + dir + "\n";
+                    //richTextBox1.Text += "資料夾: " + dir + "\n";
+                    DirectoryInfo d = new DirectoryInfo(dir);
+                    richTextBox1.Text += d.Name + "\n";
+                    //richTextBox1.Text += "Name : " + d.Name + "\n";
+                    //richTextBox1.Text += "FullName : " + d.FullName + "\n";
+                    //richTextBox1.Text += "Parent : " + d.Parent + "\n";
+                    //richTextBox1.Text += "Root : " + d.Root + "\n";
+                    //richTextBox1.Text += "------------------------------\n";  // 30個
                 }
-                richTextBox1.Text += "\n";
+                if (dirs.Length > 0)
+                {
+                    richTextBox1.Text += "------------------------------\n";  // 30個
+                    richTextBox1.Text += "資料夾個數 : " + dirs.Length.ToString() + "\n";
+                    richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+                }
+
+                total_size = 0;
+                total_files = 0;
 
                 foreach (string file in files)
                 {
                     FileInfo fi = new FileInfo(file);
-                    long filesize = fi.Length;
 
-                    /*
-                    richTextBox1.Text += "資料夾：" + fi.Directory + Environment.NewLine;
-                    richTextBox1.Text += "檔名：" + fi.Name + Environment.NewLine;
-                    richTextBox1.Text += "檔案大小：" + fi.Length.ToString() + Environment.NewLine;
-                    richTextBox1.Text += "建立時間1：" + fi.CreationTime.ToString() + Environment.NewLine;
-                    richTextBox1.Text += "建立時間2：" + fi.CreationTimeUtc.ToString() + Environment.NewLine;
-                    richTextBox1.Text += "最近寫入時間：" + fi.LastWriteTime.ToString() + Environment.NewLine;
-                    */
-
-                    richTextBox1.Text += "檔案: " + file + "\n";
+                    if ((fi.Extension.ToLower() == ".rar") || (fi.Extension.ToLower() == ".zip"))
+                    {
+                        //richTextBox1.Text += "資料夾：" + fi.Directory + "\n";
+                        richTextBox1.Text += fi.Name + "\n";
+                        //richTextBox1.Text += "副檔名：" + fi.Extension + "\n";
+                        //richTextBox1.Text += "檔案大小：" + fi.Length.ToString() + "\n";
+                        //richTextBox1.Text += "建立時間1：" + fi.CreationTime.ToString() + "\n";
+                        //richTextBox1.Text += "建立時間2：" + fi.CreationTimeUtc.ToString() + "\n";
+                        //richTextBox1.Text += "最近寫入時間：" + fi.LastWriteTime.ToString() + "\n";
+                        //richTextBox1.Text += "檔案: " + file + "\n";
+                        //richTextBox1.Text += "------------------------------\n";  // 30個
+                        total_files++;
+                        total_size += fi.Length;
+                    }
                 }
-
+                if (total_files > 0)
+                {
+                    richTextBox1.Text += "------------------------------\n";  // 30個
+                    richTextBox1.Text += "檔案個數 : " + total_files.ToString();
+                    richTextBox1.Text += ", 大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
+                    richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+                }
             }
             else if (flag_operation_mode == MODE6)
             {
@@ -559,12 +586,12 @@ namespace vcs_SendTo_All
                 long filesize = fi.Length;
 
                 /*
-                richTextBox1.Text += "資料夾：" + fi.Directory + Environment.NewLine;
-                richTextBox1.Text += "檔名：" + fi.Name + Environment.NewLine;
-                richTextBox1.Text += "檔案大小：" + fi.Length.ToString() + Environment.NewLine;
-                richTextBox1.Text += "建立時間1：" + fi.CreationTime.ToString() + Environment.NewLine;
-                richTextBox1.Text += "建立時間2：" + fi.CreationTimeUtc.ToString() + Environment.NewLine;
-                richTextBox1.Text += "最近寫入時間：" + fi.LastWriteTime.ToString() + Environment.NewLine;
+                richTextBox1.Text += "資料夾：" + fi.Directory + "\n";
+                richTextBox1.Text += "檔名：" + fi.Name + "\n";
+                richTextBox1.Text += "檔案大小：" + fi.Length.ToString() + "\n";
+                richTextBox1.Text += "建立時間1：" + fi.CreationTime.ToString() + "\n";
+                richTextBox1.Text += "建立時間2：" + fi.CreationTimeUtc.ToString() + "\n";
+                richTextBox1.Text += "最近寫入時間：" + fi.LastWriteTime.ToString() + "\n";
                 */
 
                 if ((flag_show_big_files_only == false) || (filesize > file_size_limit))
