@@ -1,5 +1,10 @@
 ﻿
 
+            Console.WriteLine("例外處理類型   :{0}", ex.GetType().ToString());
+            Console.WriteLine("錯誤訊息       :{0}", ex.Message);
+            Console.WriteLine("程式或物件名稱 :{0}", ex.Source);
+            Console.WriteLine("產生錯誤程序   :{0}", ex.TargetSite.Name);
+            Console.WriteLine("錯誤之處       :{0}", ex.StackTrace);
 
 
 //------------------------------------------------------------  # 60個

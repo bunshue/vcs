@@ -219,7 +219,10 @@ namespace vcs_SendTo_All
                     if ((fi.Extension.ToLower() == ".rar") || (fi.Extension.ToLower() == ".zip"))
                     {
                         //richTextBox1.Text += "資料夾：" + fi.Directory + "\n";
-                        richTextBox1.Text += fi.Name + "\n";
+
+                        richTextBox1.Text += string.Format("{0,-30}{1,10}", fi.Name, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length))) + "\n";
+
+                        //richTextBox1.Text += fi.Name + "\n";
                         //richTextBox1.Text += "副檔名：" + fi.Extension + "\n";
                         //richTextBox1.Text += "檔案大小：" + fi.Length.ToString() + "\n";
                         //richTextBox1.Text += "建立時間1：" + fi.CreationTime.ToString() + "\n";

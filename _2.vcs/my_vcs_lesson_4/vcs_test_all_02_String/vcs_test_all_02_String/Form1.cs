@@ -276,21 +276,20 @@ namespace vcs_test_all_02_String
             Console.ReadLine();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button2_Click(object sender, EventArgs e)
         {
-            //連接符 與 佔位符
-            string str1 = "lion";
-            string str2 = "mouse";
-            string m = String.Format("{0}", str1);   //字符串格式輸出
-            string n = String.Format("{0}", str2);
-
-            richTextBox1.Text += "str = " + m + "-" + n + "\n";     //用“+”連接符
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button3_Click(object sender, EventArgs e)
         {
 
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -582,11 +581,6 @@ namespace vcs_test_all_02_String
         {
             //string.Format語法
 
-            string animal1 = "Cats";
-            string animal2 = "dogs";
-            string result = string.Format("{0} and {1} are animals.", animal1, animal2);
-            richTextBox1.Text += "string.Format 的用法\n結果 : " + result + "\n";
-
             string filename = string.Format("bmp_{0:yyyyMMdd_HHmmss}.bmp", DateTime.Now);
             richTextBox1.Text += "用string.Format製作依時檔案\n結果 : " + filename + "\n";
 
@@ -603,11 +597,11 @@ namespace vcs_test_all_02_String
             ee = 1234567890;
             f = 2468;
 
-            richTextBox1.Text += "數字保留10位, 向左靠齊\n";
+            richTextBox1.Text += "5項, 數字保留10位, 向左靠齊\n";
             richTextBox1.Text += string.Format("{0,-10}{1,-10}{2,-10}{3,-10}{4,-10}{5,-10}", a.ToString(), b.ToString(), c.ToString(), d.ToString(), ee.ToString(), f.ToString()) + "\n";
-            richTextBox1.Text += "數字保留10位, 向右靠齊\n";
+            richTextBox1.Text += "5項, 數字保留10位, 向右靠齊\n";
             richTextBox1.Text += string.Format("{0,10}{1,10}{2,10}{3,10}{4,10}{5,10}", a.ToString(), b.ToString(), c.ToString(), d.ToString(), ee.ToString(), f.ToString()) + "\n";
-            richTextBox1.Text += "字串保留10位, 向左靠齊\n";
+            richTextBox1.Text += "5項, 字串保留10位, 向左靠齊\n";
             richTextBox1.Text += string.Format("{0,-10}{1,-10}{2,-10}{3,-10}{4,-10}{5,-10}", "David", "Mary", "Doraemon", "Cat", "Dog", "Lion") + "\n";
 
             Random rnd = new Random();
@@ -633,25 +627,6 @@ namespace vcs_test_all_02_String
             Console.WriteLine("e format : {0:e}", 99999);
             Console.WriteLine("X format : {0:X}", 99999);
             Console.WriteLine("x format : {0:x}", 99999);
-
-            int x1 = 3;
-            int x2 = 8;
-            int x3 = 3;
-            int x4 = 4;
-            int x5 = 2;
-            string xx = String.Format("{0}-{1}-{2}-{3}-{4}", x1, x2, x3, x4, x5);
-            richTextBox1.Text += "xx = " + xx + "\n";
-
-            richTextBox1.Text += "String.Format是將指定的 String類型的數據中的每個格式項替換為相應對象的值的文本等效項。\n";
-
-            string p1 = "Jackie";
-            string p2 = "Aillo";
-
-            string string1 = String.Format("Hello {0}, I'm {1}", p1, p2);
-            richTextBox1.Text += "string1 = " + string1 + "\n";
-
-            string string2 = String.Format("Hello {0}, I'm {1}", "Jackie", "Aillo");
-            richTextBox1.Text += "string2 = " + string2 + "\n";
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -1111,14 +1086,6 @@ namespace vcs_test_all_02_String
             richTextBox1.Text += String.Format("{0:###0.00}", 566.7) + "\n";
             richTextBox1.Text += String.Format("{0:0.00%}", 8) + "\n";
 
-
-            //String.Format("{0，–10}",text)
-            //要将字符串向左对齐使用负数，正对齐使用正数，里面的值为当前所占字符的格子。例如:
-
-            String aaa = String.Format("{0,-30} | {1,-20} | {2,5}", "a", "b", 3);
-            String bbb = String.Format("{0,-30} | {1,-20} | {2,5}", "aaaaaaaaaaaaaaaaaaaaaaaa", "b", 3);
-            String ccc = String.Format("{0,-30} | {1,-20} | {2,5}", "aaaa", "b", 3);
-
             int s32_Section45 = 123;
             int ms32_Quadrant = 456;
             string ddd = String.Format("Section: {0}  Quadrant: {1}", s32_Section45, ms32_Quadrant);
@@ -1184,9 +1151,47 @@ namespace vcs_test_all_02_String
             richTextBox1.Text += "f\t" + value.ToString("p") + "\n"; //生成 1,234,500.00%
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button24_Click(object sender, EventArgs e)
         {
+            string[] name = { "mouse", "ox", "tiger", "rabbit", "dragon" };
+
+            richTextBox1.Text += string.Format("簡易用法1項\t{0} 是動物", name[0]) + "\n";
+            richTextBox1.Text += string.Format("簡易用法3項\t{0} 和 {1} 和 {2} 是動物", name[0], name[1], name[2]) + "\n";
+
+
+            //連接符 與 佔位符
+            string str1 = "lion";
+            string str2 = "mouse";
+            string m = String.Format("{0}", str1);   //字符串格式輸出
+            string n = String.Format("{0}", str2);
+
+            richTextBox1.Text += "str = " + m + "-" + n + "\n";     //用“+”連接符
+
+            //                                 第0項靠左30位, 第1項靠右10位
+            //richTextBox1.Text += string.Format("{0,-30}{1,10}", fi.Name, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length))) + "\n";
+            //richTextBox1.Text += string.Format("{0,-30}{1,10}", fi.Name, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length))) + "\n";
+
+
+            int x1 = 3;
+            int x2 = 8;
+            int x3 = 3;
+            int x4 = 4;
+            int x5 = 2;
+            string xx = String.Format("{0}-{1}-{2}-{3}-{4}", x1, x2, x3, x4, x5);
+            richTextBox1.Text += "xx = " + xx + "\n";
+
+            richTextBox1.Text += "String.Format是將指定的 String類型的數據中的每個格式項替換為相應對象的值的文本等效項。\n";
+            //String.Format("{0，–10}",text)
+            //要将字符串向左对齐使用负数，正对齐使用正数，里面的值为当前所占字符的格子。例如:
+
+            String aaa = String.Format("{0,-30} | {1,-20} | {2,5}", "a", "b", 3);
+            String bbb = String.Format("{0,-30} | {1,-20} | {2,5}", "aaaaaaaaaaaaaaaaaaaaaaaa", "b", 3);
+            String ccc = String.Format("{0,-30} | {1,-20} | {2,5}", "aaaa", "b", 3);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button25_Click(object sender, EventArgs e)
         {
@@ -1196,12 +1201,10 @@ namespace vcs_test_all_02_String
             richTextBox1.Text += num.ToString("F" + nudPoint.ToString()) + "\n";
             richTextBox1.Text += num.ToString("F3") + "\n";
 
-
             //在 C# 中使用 String.Format() 方法將字串轉換為十六進位制
             string decString = "0123456789";
             var hexString = string.Join("", decString.Select(c => String.Format("{0:X2}", Convert.ToInt32(c))));
             richTextBox1.Text += "hexString :" + hexString + "\n";
-
 
             //string filename = string.Format("{0}bmp_{1}{2}", dir, DateTime.Now.ToString("yyyyMMdd_HHmmss"), ".bmp");
 
@@ -1209,30 +1212,13 @@ namespace vcs_test_all_02_String
 
             //格式化列印
 
-            //this.Text                    = String.Format("關於 {0}", AssemblyTitle);
-            //this.labelVersion.Text       = String.Format("版本 {0}", AssemblyVersion);
             /*
             Console.WriteLine("{0}  {1}   {2}", bcc[i].No, bcc[i].Name, bcc[i].Score);
             Console.WriteLine("{0}, {1},  {2},    {3},   {4}", stu_No[i], stu_Name[i], stu_Chin[i], stu_Eng[i], stu_Math[i]);
-
-            Console.WriteLine("例外處理類型   :{0}", ex.GetType().ToString());
-            Console.WriteLine("錯誤訊息       :{0}", ex.Message);
-            Console.WriteLine("程式或物件名稱 :{0}", ex.Source);
-            Console.WriteLine("產生錯誤程序   :{0}", ex.TargetSite.Name);
-            Console.WriteLine("錯誤之處       :{0}", ex.StackTrace);
             */
-            //var str = string.Format("我的名字叫{1}，我今年{1}岁。", "张三", 23);
-            //Console.WriteLine(str);
-
-            //var str = $"我的名字叫{"张三"}，我今年{23}岁。";
-            //Console.WriteLine(str);
-
-
-
             //if (!currentExe.Equals(targetExe, StringComparison.OrdinalIgnoreCase))
             string sign = new string('*', 30);
             Console.WriteLine(sign);
-
         }
 
         private void button26_Click(object sender, EventArgs e)
@@ -1294,7 +1280,6 @@ namespace vcs_test_all_02_String
                 "已使用空間 :", used.ToString("N0", CultureInfo.InvariantCulture), " 個位元組", used2.ToString() + " GB") + "\n";
 
             //richTextBox1.Text += "已使用空間 :\t" + (drive.TotalSize - drive.AvailableFreeSpace).ToString("N0", CultureInfo.InvariantCulture) + " 個位元組\t" + ByteConversionGBMBKB(Convert.ToInt64(drive.TotalSize - drive.AvailableFreeSpace)) + "\n";
-
         }
 
         //------------------------------------------------------------  # 60個
@@ -1392,8 +1377,8 @@ Console.WriteLine(x[4]); //o
 //sb.Append((md5Hash[i]).ToString("X2", System.Globalization.CultureInfo.InvariantCulture));  // 轉2位的16進制字串
 //                e.Graphics.DrawString(fahrenheit.ToString("0"), font, Brushes.Black, x1, y, sf);
 
+//------------------------------------------------------------  # 60個
+
+
 
 */
-
-
-
