@@ -173,12 +173,18 @@ namespace vcs_SendTo_All
             }
             else if (flag_operation_mode == MODE4)
             {
-                this.Text = "匯出一層 資料夾 + 檔案名";
+                string doc_foldername = Properties.Settings.Default.doc_foldername;
 
-                ///string foldername = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_7_free\vcs_SendTo_All\vcs_SendTo_All";
-                //export_filename(foldername);//轉出檔案目錄資料 目錄下檔名轉出純文字
                 string foldername = Application.StartupPath;
-                richTextBox1.Text += "資料夾 " + foldername + "\n";
+
+                if (Directory.Exists(doc_foldername) == true)     //確認資料夾是否存在
+                {
+                    foldername = doc_foldername;
+                }
+
+                this.Text = "匯出一層 資料夾 + 檔案名 : " + foldername;
+
+                //richTextBox1.Text += "資料夾 " + foldername + "\n";
 
                 if (Directory.Exists(foldername) == false)     //確認資料夾是否存在
                 {
@@ -393,8 +399,8 @@ namespace vcs_SendTo_All
             bt_open_folder.BackgroundImage = vcs_SendTo_All.Properties.Resources.folder_open;
             bt_refresh.BackgroundImage = vcs_SendTo_All.Properties.Resources.refresh;
 
-            //this.Size = new Size(1273, 750);
-            //this.Text = "vcs_test_all_00_Usually";
+            this.Size = new Size(660, 600);
+            this.Text = "vcs_SendTo_All";
 
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;

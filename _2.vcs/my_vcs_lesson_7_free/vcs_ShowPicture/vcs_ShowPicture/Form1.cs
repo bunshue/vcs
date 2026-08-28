@@ -9,17 +9,16 @@ using System.Windows.Forms;
 
 using System.IO;
 
-/*
-全屏隨機位置顯示圖片
-*/
+// 全屏隨機位置顯示圖片
+// ESC 離開
+// F2  設定
 
 namespace vcs_ShowPicture
 {
     public partial class Form1 : Form
     {
-        //string pic_foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\";
+        //string pic_foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU";
         string pic_foldername = string.Empty;
-
         string filename = string.Empty;
 
         int flag_operation_mode = MODE_0;
@@ -31,7 +30,6 @@ namespace vcs_ShowPicture
 
         bool debug_mode = false;
         RichTextBox rtb = new RichTextBox();
-
         //Rectangle bounds = Screen.GetBounds(Screen.GetBounds(Point.Empty));
         Rectangle bounds = Screen.PrimaryScreen.Bounds;
         //Rectangle bounds = new Rectangle(0, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
@@ -39,7 +37,6 @@ namespace vcs_ShowPicture
         int total_picture_count = 0;
         int sel_picture = -1;
         bool random_sel_picture = true;
-
         int show_picture_ratio_width = 30;
         int show_picture_ratio_height = 30;
 
@@ -63,7 +60,6 @@ namespace vcs_ShowPicture
             //tb_ratio_width.Text = ratio_width.ToString();
             //tb_ratio_height.Text = ratio_height.ToString();
             //tb_play_interval.Text = play_interval.ToString();
-
 
             int ratio_width = Properties.Settings.Default.size_width;
             int ratio_height = Properties.Settings.Default.size_height;
@@ -314,3 +310,4 @@ namespace vcs_ShowPicture
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
+

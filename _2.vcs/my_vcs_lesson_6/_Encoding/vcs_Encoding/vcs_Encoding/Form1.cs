@@ -402,7 +402,7 @@ namespace vcs_Encoding
         {
             //字串編碼處理
             /*
-            GB2312是簡體中文系統的標准編碼 用“區” 跟“位”的概念表示 稱之為區位碼
+            GB2312是簡體中文系統的標準編碼 用“區” 跟“位”的概念表示 稱之為區位碼
             區指代大的范圍 位相當於偏移量。
             每個漢字占兩個字節
             高位字節”的范圍是0xB0-0xF7，“低位字節”的范圍是0xA1-0xFE。
@@ -429,7 +429,7 @@ namespace vcs_Encoding
         {
             //輸出所有的漢字
             /*
-            GB2312是簡體中文系統的標准編碼 用“區” 跟“位”的概念表示 稱之為區位碼
+            GB2312是簡體中文系統的標準編碼 用“區” 跟“位”的概念表示 稱之為區位碼
             區指代大的范圍 位相當於偏移量。
             每個漢字占兩個字節
             高位字節”的范圍是0xB0-0xF7，“低位字節”的范圍是0xA1-0xFE。
@@ -592,10 +592,11 @@ namespace vcs_Encoding
         private void button11_Click(object sender, EventArgs e)
         {
             //new
+            richTextBox1.Text += "ASCII轉換\n";
 
             int number = 75;
-            string result = ((char)number).ToString();//将ASCII码转换为字符
-            richTextBox1.Text += "轉換結果 : " + result + "\n";
+            string result = ((char)number).ToString();//將ASCII碼轉換為字符
+            richTextBox1.Text += "ASCII轉換結果 : " + result + "\n";
 
             //------------------------------------------------------------  # 60個
 
@@ -692,32 +693,32 @@ namespace vcs_Encoding
 
             //獲取區位碼
 
-            text = "汉字区位码";
+            text = "漢字區位碼";
 
             try
             {
-                //得到汉字区位码信息
+                //得到漢字區位碼信息
                 string result3 = getCode(text);
                 richTextBox1.Text += "獲取區位碼 : " + result3 + "\n";
             }
             catch (IndexOutOfRangeException ex)
             {
-                //使用消息对话框提示异常信息
-                MessageBox.Show(ex.Message + "请输入正确的汉字", "出错！");
+                //使用消息對話框提示異常信息
+                MessageBox.Show(ex.Message + "請輸入正確的漢字", "出錯！");
             }
         }
 
         /// <summary>
-        /// 得到汉字区位码方法
+        /// 得到漢字區位碼方法
         /// </summary>
-        /// <param name="strChinese">汉字字符</param>
-        /// <returns>返回汉字区位码</returns>
+        /// <param name="strChinese">漢字字符</param>
+        /// <returns>返回漢字區位碼</returns>
         public string getCode(string text)
         {
             byte[] byteArray = Encoding.Default.GetBytes(text);  // 使用預設編碼將字串轉拜列
-            int front = (short)(byteArray[0] - '\0');//将字节数组的第一位转换成short类型
-            int back = (short)(byteArray[1] - '\0');//将字节数组的第二位转换成short类型
-            return (front - 160).ToString() + (back - 160).ToString();//计算并返回区位码
+            int front = (short)(byteArray[0] - '\0');//將字節數組的第一位轉換成short類型
+            int back = (short)(byteArray[1] - '\0');//將字節數組的第二位轉換成short類型
+            return (front - 160).ToString() + (back - 160).ToString();//計算并返回區位碼
         }
 
         //------------------------------------------------------------  # 60個
@@ -1022,5 +1023,4 @@ if (s.Length == 1) //不滿2位要補一個零
 //------------------------------------------------------------  # 60個
 
 */
-
 

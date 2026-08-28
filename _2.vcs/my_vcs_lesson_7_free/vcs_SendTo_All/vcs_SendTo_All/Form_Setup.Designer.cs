@@ -58,6 +58,10 @@
             this.rb_auto_save_on = new System.Windows.Forms.RadioButton();
             this.groupBox_show_file_content = new System.Windows.Forms.GroupBox();
             this.cb_show_file_path = new System.Windows.Forms.CheckBox();
+            this.bt_select_foldername = new System.Windows.Forms.Button();
+            this.tb_foldername = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox_file.SuspendLayout();
             this.groupBox_video.SuspendLayout();
             this.groupBox_search.SuspendLayout();
@@ -83,7 +87,7 @@
             this.lb_main_mesg2.AutoSize = true;
             this.lb_main_mesg2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lb_main_mesg2.ForeColor = System.Drawing.Color.Red;
-            this.lb_main_mesg2.Location = new System.Drawing.Point(346, 56);
+            this.lb_main_mesg2.Location = new System.Drawing.Point(346, 127);
             this.lb_main_mesg2.Name = "lb_main_mesg2";
             this.lb_main_mesg2.Size = new System.Drawing.Size(135, 24);
             this.lb_main_mesg2.TabIndex = 25;
@@ -94,7 +98,7 @@
             this.lb_main_mesg1.AutoSize = true;
             this.lb_main_mesg1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lb_main_mesg1.ForeColor = System.Drawing.Color.Red;
-            this.lb_main_mesg1.Location = new System.Drawing.Point(346, 22);
+            this.lb_main_mesg1.Location = new System.Drawing.Point(346, 93);
             this.lb_main_mesg1.Name = "lb_main_mesg1";
             this.lb_main_mesg1.Size = new System.Drawing.Size(135, 24);
             this.lb_main_mesg1.TabIndex = 24;
@@ -103,7 +107,7 @@
             // bt_save
             // 
             this.bt_save.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_save.Location = new System.Drawing.Point(348, 99);
+            this.bt_save.Location = new System.Drawing.Point(348, 170);
             this.bt_save.Name = "bt_save";
             this.bt_save.Size = new System.Drawing.Size(94, 32);
             this.bt_save.TabIndex = 23;
@@ -113,7 +117,8 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(633, 8);
+            this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.richTextBox1.Location = new System.Drawing.Point(348, 231);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 28;
@@ -415,11 +420,42 @@
             this.cb_show_file_path.Text = "顯示檔案路徑與檔名";
             this.cb_show_file_path.UseVisualStyleBackColor = true;
             // 
+            // bt_select_foldername
+            // 
+            this.bt_select_foldername.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_select_foldername.Location = new System.Drawing.Point(585, 22);
+            this.bt_select_foldername.Name = "bt_select_foldername";
+            this.bt_select_foldername.Size = new System.Drawing.Size(60, 60);
+            this.bt_select_foldername.TabIndex = 252;
+            this.bt_select_foldername.UseVisualStyleBackColor = true;
+            this.bt_select_foldername.Click += new System.EventHandler(this.bt_select_foldername_Click);
+            // 
+            // tb_foldername
+            // 
+            this.tb_foldername.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_foldername.Location = new System.Drawing.Point(346, 46);
+            this.tb_foldername.Name = "tb_foldername";
+            this.tb_foldername.Size = new System.Drawing.Size(233, 36);
+            this.tb_foldername.TabIndex = 251;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label1.Location = new System.Drawing.Point(344, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(178, 24);
+            this.label1.TabIndex = 250;
+            this.label1.Text = "選擇瀏覽資料夾";
+            // 
             // Form_Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(745, 554);
+            this.ClientSize = new System.Drawing.Size(657, 528);
+            this.Controls.Add(this.bt_select_foldername);
+            this.Controls.Add(this.tb_foldername);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox_show_file_content);
             this.Controls.Add(this.groupBox_auto_save);
             this.Controls.Add(this.groupBox_text_mode);
@@ -485,5 +521,9 @@
         private System.Windows.Forms.RadioButton rb_auto_save_on;
         private System.Windows.Forms.GroupBox groupBox_show_file_content;
         private System.Windows.Forms.CheckBox cb_show_file_path;
+        private System.Windows.Forms.Button bt_select_foldername;
+        private System.Windows.Forms.TextBox tb_foldername;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }

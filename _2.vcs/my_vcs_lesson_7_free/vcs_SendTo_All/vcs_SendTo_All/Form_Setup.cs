@@ -22,10 +22,14 @@ namespace vcs_SendTo_All
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             bool flag_show_big_files_only = Properties.Settings.Default.show_big_files_only;
             bool flag_show_video_files_only = Properties.Settings.Default.show_video_files_only;
             bool flag_show_audio_files_only = Properties.Settings.Default.show_audio_files_only;
             bool flag_show_file_path = Properties.Settings.Default.show_file_path;
+            string doc_foldername = Properties.Settings.Default.doc_foldername;
+            tb_foldername.Text = doc_foldername;
 
             if (flag_show_big_files_only == true)
             {
@@ -82,24 +86,18 @@ namespace vcs_SendTo_All
         void show_item_location()
         {
             //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
+            //this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             //this.FormBorderStyle = FormBorderStyle.FixedSingle;
             //this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
 
-            this.Size = new Size(600, 520);
+            this.Size = new Size(820, 626);
 
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
+            int x_st = 15;
+            int y_st = 15;
             int W = 300;
             int H = 45;
-
-            x_st = 15;
-            y_st = 15;
-            dx = 110;
-            dy = 35;
-
+            int dx = W + 10;
+            int dy = 35;
             groupBox_search.Size = new Size(W, H * 2);
             groupBox_search_type.Size = new Size(W, H * 2);
             groupBox_file.Size = new Size(W, H);
@@ -146,8 +144,17 @@ namespace vcs_SendTo_All
             lb_main_mesg1.Location = new Point(x_st + dx * 0, y_st + dy * 12);
             lb_main_mesg2.Location = new Point(x_st + dx * 0, y_st + dy * 13);
 
-            richTextBox1.Size = new Size(270, 461);
-            richTextBox1.Dock = DockStyle.Right;
+            lb_main_mesg1.Text = "aaaa";
+            lb_main_mesg2.Text = "bbbb";
+
+            label1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            tb_foldername.Size = new Size(400, 100);
+            tb_foldername.Location = new Point(x_st + dx * 1, y_st + dy * 1 + 10);
+            bt_select_foldername.Location = new Point(x_st + dx * 2 + 100, y_st + dy * 1);
+            bt_select_foldername.BackgroundImage = vcs_SendTo_All.Properties.Resources.folder_open;
+
+            richTextBox1.Size = new Size(470, 460);
+            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 2 + 30);
 
             bt_exit_setup();
 
@@ -209,6 +216,7 @@ namespace vcs_SendTo_All
             Properties.Settings.Default.show_video_files_only = cb_search_video_files.Checked;
             Properties.Settings.Default.show_audio_files_only = cb_search_audio_files.Checked;
             Properties.Settings.Default.show_file_path = cb_show_file_path.Checked;
+            Properties.Settings.Default.doc_foldername = tb_foldername.Text;
 
             int file_size_limit = 0;
             bool conversionSuccessful = int.TryParse(tb_filesize_mb.Text, out file_size_limit);    //out為必須
@@ -233,6 +241,19 @@ namespace vcs_SendTo_All
             if (e.KeyChar == (Char)13)
             {
                 bt_save_Click(sender, e);
+            }
+        }
+
+        private void bt_select_foldername_Click(object sender, EventArgs e)
+        {
+            //folderBrowserDialog1.SelectedPath = Application.StartupPath;    //預設開啟的路徑
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                tb_foldername.Text = folderBrowserDialog1.SelectedPath;
+            }
+            else
+            {
+                //richTextBox2.Text = "未選取資料夾\n";
             }
         }
     }
