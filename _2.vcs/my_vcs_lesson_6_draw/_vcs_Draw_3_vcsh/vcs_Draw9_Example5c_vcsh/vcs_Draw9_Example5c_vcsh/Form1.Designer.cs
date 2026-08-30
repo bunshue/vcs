@@ -30,16 +30,6 @@
         {
             this.pictureBox0 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.pictureBox7 = new System.Windows.Forms.PictureBox();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.lblWalkNum = new System.Windows.Forms.Label();
             this.groupBox0 = new System.Windows.Forms.GroupBox();
             this.nudDtheta = new System.Windows.Forms.NumericUpDown();
             this.label17 = new System.Windows.Forms.Label();
@@ -51,13 +41,6 @@
             this.label20 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
-            this.groupBox6.SuspendLayout();
             this.groupBox0.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudDtheta)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLength)).BeginInit();
@@ -86,96 +69,6 @@
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             this.pictureBox1.Resize += new System.EventHandler(this.pictureBox1_Resize);
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox2.Location = new System.Drawing.Point(258, 12);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox2.TabIndex = 61;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox3.Location = new System.Drawing.Point(381, 12);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox3.TabIndex = 62;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.BackColor = System.Drawing.Color.Red;
-            this.pictureBox4.Location = new System.Drawing.Point(12, 129);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox4.TabIndex = 63;
-            this.pictureBox4.TabStop = false;
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox5.Location = new System.Drawing.Point(133, 129);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox5.TabIndex = 68;
-            this.pictureBox5.TabStop = false;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Location = new System.Drawing.Point(12, 465);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(469, 56);
-            this.groupBox3.TabIndex = 70;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Hypotrochoid";
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Location = new System.Drawing.Point(487, 12);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(468, 100);
-            this.groupBox4.TabIndex = 74;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "pickover_attractor";
-            // 
-            // pictureBox6
-            // 
-            this.pictureBox6.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox6.Location = new System.Drawing.Point(258, 129);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox6.TabIndex = 75;
-            this.pictureBox6.TabStop = false;
-            // 
-            // pictureBox7
-            // 
-            this.pictureBox7.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox7.Location = new System.Drawing.Point(381, 129);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox7.TabIndex = 76;
-            this.pictureBox7.TabStop = false;
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.lblWalkNum);
-            this.groupBox6.Location = new System.Drawing.Point(12, 251);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(960, 114);
-            this.groupBox6.TabIndex = 75;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "self_avoiding_corner_walk";
-            // 
-            // lblWalkNum
-            // 
-            this.lblWalkNum.AutoSize = true;
-            this.lblWalkNum.Location = new System.Drawing.Point(205, 97);
-            this.lblWalkNum.Name = "lblWalkNum";
-            this.lblWalkNum.Size = new System.Drawing.Size(0, 12);
-            this.lblWalkNum.TabIndex = 25;
-            // 
             // groupBox0
             // 
             this.groupBox0.Controls.Add(this.nudDtheta);
@@ -186,7 +79,7 @@
             this.groupBox0.Controls.Add(this.label19);
             this.groupBox0.Controls.Add(this.nudDepth);
             this.groupBox0.Controls.Add(this.label20);
-            this.groupBox0.Location = new System.Drawing.Point(487, 129);
+            this.groupBox0.Location = new System.Drawing.Point(12, 131);
             this.groupBox0.Name = "groupBox0";
             this.groupBox0.Size = new System.Drawing.Size(303, 74);
             this.groupBox0.TabIndex = 78;
@@ -317,15 +210,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1105, 594);
             this.Controls.Add(this.groupBox0);
-            this.Controls.Add(this.groupBox6);
-            this.Controls.Add(this.pictureBox7);
-            this.Controls.Add(this.pictureBox6);
-            this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.pictureBox5);
-            this.Controls.Add(this.pictureBox4);
-            this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pictureBox0);
             this.Name = "Form1";
@@ -335,14 +219,6 @@
             this.Resize += new System.EventHandler(this.Form1_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox0)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
             this.groupBox0.ResumeLayout(false);
             this.groupBox0.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudDtheta)).EndInit();
@@ -356,16 +232,6 @@
 
         private System.Windows.Forms.PictureBox pictureBox0;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.PictureBox pictureBox6;
-        private System.Windows.Forms.PictureBox pictureBox7;
-        private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.Label lblWalkNum;
         private System.Windows.Forms.GroupBox groupBox0;
         private System.Windows.Forms.NumericUpDown nudDtheta;
         private System.Windows.Forms.Label label17;

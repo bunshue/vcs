@@ -1,5 +1,57 @@
 ﻿
 
+//------------------------------------------------------------  # 60個
+
+
+
+//------------------------------------------------------------  # 60個
+
+
+
+        // Search for files matching the patterns.
+        private List<string> FindFiles(string dir_name, string patterns, bool search_subdirectories)
+        {
+            // Make the result list.
+            List<string> files = new List<string>();
+
+            // Get the patterns.
+            string[] pattern_array = patterns.Split(';');
+
+            // Search.
+            SearchOption search_option = SearchOption.TopDirectoryOnly;
+            if (search_subdirectories) search_option = SearchOption.AllDirectories;
+            foreach (string pattern in pattern_array)
+            {
+                foreach (string filename in Directory.GetFiles(dir_name, pattern, search_option))
+                {
+                    if (!files.Contains(filename)) files.Add(filename);
+                }
+            }
+            //排序
+            files.Sort();
+            return files;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic";
+            List<string> files = FindFiles(foldername, "*.bmp;*.gif;*.jpg;*.png;*.tif", false);
+
+            richTextBox1.Text += "找到 " + files.Count + " images.\n";
+
+            foreach (string image_filename in files)
+            {
+                FileInfo image_fileinfo = new FileInfo(image_filename);
+                string filename = image_fileinfo.Name;
+                richTextBox1.Text += filename + "\n";
+            }
+        }
+
+
+
+//------------------------------------------------------------  # 60個
+
+
             Console.WriteLine("例外處理類型   :{0}", ex.GetType().ToString());
             Console.WriteLine("錯誤訊息       :{0}", ex.Message);
             Console.WriteLine("程式或物件名稱 :{0}", ex.Source);
@@ -185,25 +237,19 @@ g.FillRegion(newBrush, new Region(PaintPath));
 
 //------------------------------------------------------------  # 60個
 
-            Text = "Mandelbrot (" +
-                m_Xmin.ToString("0.000000") + ", " +
-                m_Ymin.ToString("0.000000") + ")-(" +
-                m_Xmax.ToString("0.000000") + ", " +
-                m_Ymax.ToString("0.000000") + ")";
-
-
-
+Text = "Mandelbrot (" +
+m_Xmin.ToString("0.000000") + ", " +
+m_Ymin.ToString("0.000000") + ")-(" +
+m_Xmax.ToString("0.000000") + ", " +
+m_Ymax.ToString("0.000000") + ")";
 
 //------------------------------------------------------------  # 60個
 
 能夠各方向都可以選取圖片框
 
-
-
-
 //------------------------------------------------------------  # 60個
 
-                mnuScaleFull_Click(null, null);
+mnuScaleFull_Click(null, null);
 
 /*
 沒有 sender,e 的 click事件
@@ -295,10 +341,6 @@ g.FillRegion(newBrush, new Region(PaintPath));
             }
             return null;
         }
-
-
-
-
 */
 
 
@@ -320,11 +362,6 @@ g.FillRegion(newBrush, new Region(PaintPath));
 在 Visual C# (.NET) 中，XSD 指的是 XML Schema Definition（XML 架構定義）。
 它是一種用副檔名 .xsd 表示的檔案，專門用來定義和規範 XML 檔案的結構、標籤名稱以及資料型態。
 你可以把它當成 XML 檔案的「藍圖」或「規則手冊」。
-
-//------------------------------------------------------------  # 60個
-
-string filePath = this.RecordingPathInput.Text;
-System.Diagnostics.Process.Start("explorer.exe", filePath);
 
 //------------------------------------------------------------  # 60個
 
@@ -404,14 +441,6 @@ AForge.Vision.dll
             richTextBox1.Text += "pt2 : " + pt2.ToString() + "\n";
 
 //------------------------------------------------------------  # 60個
-
-
-//------------------------------------------------------------  # 60個
-
-//SetStyle(ControlStyles.Opaque, true);   //無背景色
-
-//SetStyle(ControlStyles.Opaque, true);
-
 
 Point p = new Point(0, 0);
 Size s = new Size(500, 500);
@@ -3206,6 +3235,16 @@ C# TabControl標簽的隱藏
 
 //------------------------------------------------------------  # 60個
 
+//看不出有什麼用途~~~~
+
+private void Form1_Load(object sender, EventArgs e)
+{
+	SetStyle(ControlStyles.Opaque, true);
+}
+
+//SetStyle(ControlStyles.Opaque, true);   //無背景色
+//SetStyle(ControlStyles.Opaque, true);
+
 c# 控件閃爍處理方法
 如果你在Form中繪圖的話，不論是不是采用的雙緩存，都會看到圖片在更新的時候都會不斷地閃爍，解決方法就是在這個窗體的構造函數中增加以下三行代碼：
 
@@ -4785,6 +4824,8 @@ https://www.nuget.org/
 
 ABCDEFG用各種不同編碼存檔 (要不要中文?)
 
+//6060
+
 SetStyle(ControlStyles.ResizeRedraw, true);
 
 this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
@@ -4818,15 +4859,6 @@ DataCollectionSolution.rar
 http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/184633.html
 
 http://www.shaoqun.com/m/a/250267.html
-
-//------------------------------------------------------------  # 60個
-
-//看不出有什麼用途~~~~
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            SetStyle(ControlStyles.Opaque, true);
-        }
 
 //------------------------------------------------------------  # 60個
 
@@ -6207,20 +6239,20 @@ A.新建一個窗體．命名為Catch.然後設置這個窗體的FormBorderStyle
 
 B.我們對代碼進行編輯：
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
-            this.UpdateStyles();
-            //以上兩句是為了設置控件樣式為雙緩沖，這可以有效減少圖片閃爍的問題，關於這個大家可以自己去搜索下
-        }
+private void Form1_Load(object sender, EventArgs e)
+{
+	this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
+	this.UpdateStyles();
+	//以上兩句是為了設置控件樣式為雙緩沖，這可以有效減少圖片閃爍的問題，關於這個大家可以自己去搜索下
+}
 
 //------------------------------------------------------------  # 60個
 
 按鍵後反相的寫法	toggle一個timer的開關
-        private void button1_Click(object sender, EventArgs e)
-        {
-            timer1.Enabled = !timer1.Enabled;
-        }
+private void button1_Click(object sender, EventArgs e)
+{
+	timer1.Enabled = !timer1.Enabled;
+}
 
 //------------------------------------------------------------  # 60個
 

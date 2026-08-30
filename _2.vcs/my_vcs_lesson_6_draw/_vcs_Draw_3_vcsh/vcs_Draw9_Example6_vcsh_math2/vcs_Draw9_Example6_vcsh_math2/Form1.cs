@@ -34,12 +34,6 @@ namespace vcs_Draw9_Example6_vcsh_math2
 
             show_item_location();
 
-            //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
-
-            bt_exit_setup();
-
             DrawFractal();
             Application.DoEvents();
             DrawLevelCurves(pictureBox7, F1, -75, 65, 20);
@@ -54,10 +48,6 @@ namespace vcs_Draw9_Example6_vcsh_math2
 
         void show_item_location()
         {
-            //設定執行後的表單起始位置, 指定位置
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = new System.Drawing.Point(0, 0);
-
             int x_st;
             int y_st;
             int dx;
@@ -68,9 +58,6 @@ namespace vcs_Draw9_Example6_vcsh_math2
             y_st = 10;
             dx = 140;
             dy = 55;
-
-            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 13);
-            richTextBox1.Size = new Size(210, 350);
 
             x_st = 10;
             y_st = 60;
@@ -85,12 +72,6 @@ namespace vcs_Draw9_Example6_vcsh_math2
             pictureBox8.Size = new Size(W, H);
             pictureBox9.Size = new Size(W, H);
             pictureBox10.Size = new Size(W, H);
-            pictureBox13.Size = new Size(W, H);
-            pictureBox14.Size = new Size(W, H);
-            pictureBox15.Size = new Size(W, H);
-            pictureBox16.Size = new Size(W, H);
-            pictureBox17.Size = new Size(W, H);
-            pictureBox18.Size = new Size(W, H);
 
             pictureBox_pi1.BorderStyle = BorderStyle.Fixed3D;
             pictureBox_pi2.BorderStyle = BorderStyle.Fixed3D;
@@ -100,12 +81,6 @@ namespace vcs_Draw9_Example6_vcsh_math2
             pictureBox8.BorderStyle = BorderStyle.Fixed3D;
             pictureBox9.BorderStyle = BorderStyle.Fixed3D;
             pictureBox10.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox13.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox14.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox15.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox16.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox17.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox18.BorderStyle = BorderStyle.Fixed3D;
 
             pictureBox_pi1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox_pi2.Location = new Point(x_st + dx * 1 + dx / 2, y_st + dy * 0);
@@ -121,80 +96,26 @@ namespace vcs_Draw9_Example6_vcsh_math2
             pictureBox9.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             pictureBox10.Location = new Point(x_st + dx * 3, y_st + dy * 1);
 
-            pictureBox13.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            pictureBox14.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            pictureBox15.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            pictureBox16.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            pictureBox17.Location = new Point(x_st + dx * 4, y_st + dy * 2);
-            pictureBox18.Location = new Point(x_st + dx * 5, y_st + dy * 2);
-
-
-            label1.Location = new Point(x_st + dx * 0, y_st + dy * 0 - 25);
-            label2.Location = new Point(x_st + dx * 1, y_st + dy * 0 - 25);
-            label3.Location = new Point(x_st + dx * 2, y_st + dy * 0 - 25);
-            label4.Location = new Point(x_st + dx * 3, y_st + dy * 0 - 25);
-            label5.Location = new Point(x_st + dx * 4, y_st + dy * 0 - 25);
-            label6.Location = new Point(x_st + dx * 5, y_st + dy * 0 - 25);
-
             label7.Location = new Point(x_st + dx * 0, y_st + dy * 1 - 25);
             label8.Location = new Point(x_st + dx * 1, y_st + dy * 1 - 25);
             label9.Location = new Point(x_st + dx * 2, y_st + dy * 1 - 25);
             label10.Location = new Point(x_st + dx * 3, y_st + dy * 1 - 25);
-            label11.Location = new Point(x_st + dx * 4, y_st + dy * 1 - 25);
-            label12.Location = new Point(x_st + dx * 5, y_st + dy * 1 - 25);
 
-            label13.Location = new Point(x_st + dx * 0, y_st + dy * 2 - 25);
-            label14.Location = new Point(x_st + dx * 1, y_st + dy * 2 - 25);
-            label15.Location = new Point(x_st + dx * 24, y_st + dy * 2 - 25);
-
-            label1.Text = "";
-            label2.Text = "";
-            label3.Text = "";
-            label4.Text = "";
-            label5.Text = "";
-            label6.Text = "";
             label7.Text = "Bowl: z = x^2 + (y*2)^2 - 75";
             label8.Text = "Monkey saddle: x * (x^2 - 3 * y^2)";
             label9.Text = "Crossed trough: x^2 * y^2";
             label10.Text = "Hemisphere: Sqrt(25 - (x^2 + y^2))";
-            label11.Text = "";
-            label12.Text = "";
-            label13.Text = "";
-            label14.Text = "";
-            label15.Text = "";
 
-            //richTextBox1.Size = new Size(bt_exit.Right - richTextBox1.Location.X - 5, this.Height - richTextBox1.Location.Y - 25);
+            richTextBox1.Size = new Size(W, H);
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-        }
 
-        void bt_exit_setup()
-        {
-            int width = 5;
-            int w = 50; //設定按鈕大小 W
-            int h = 50; //設定按鈕大小 H
+            this.Size = new Size(1800, 960);
+            this.Text = "xxxx";
 
-            Button bt_exit = new Button();  // 實例化按鈕
-            bt_exit.Size = new Size(w, h);
-            bt_exit.Text = "";
-            Bitmap bmp = new Bitmap(w, h);
-            Graphics g = Graphics.FromImage(bmp);
-            Pen p = new Pen(Color.Red, width);
-            g.Clear(Color.Pink);
-            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
-            g.DrawLine(p, 0, 0, w - 1, h - 1);
-            g.DrawLine(p, w - 1, 0, 0, h - 1);
-            bt_exit.Image = bmp;
-
-            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
-            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
-
-            this.Controls.Add(bt_exit); // 將按鈕加入表單
-            bt_exit.BringToFront();     //移到最上層
-        }
-
-        private void bt_exit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -842,3 +763,11 @@ namespace vcs_Draw9_Example6_vcsh_math2
         //#endregion 四個等高線圖
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+

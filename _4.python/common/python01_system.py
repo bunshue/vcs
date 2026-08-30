@@ -1,7 +1,7 @@
 """
 系統操作與系統資料
-
 """
+
 import os
 import sys
 import platform
@@ -123,7 +123,6 @@ machine_details = get_machine_details()
 
 print_header()
 
-
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -160,6 +159,8 @@ systeminfo
             return spec
 """
 
+print("------------------------------------------------------------")  # 60個
+
 import _locale
 
 print(_locale._getdefaultlocale())
@@ -172,20 +173,7 @@ for path in sys.builtin_module_names:
 
 print("------------------------------------------------------------")  # 60個
 
-print("顯示模組的所有名稱")
-import random
-
-print(dir(random))
-
-print("------------------------------------------------------------")  # 60個
-
 print(f"全域變數 : {globals()}")
-
-print("------------------------------------------------------------")  # 60個
-
-import builtins
-
-print(dir(builtins))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -204,6 +192,7 @@ import random
 
 packagedir = os.path.dirname(random.__file__)
 print(packagedir)
+
 print("------------------------------------------------------------")  # 60個
 
 from bs4 import BeautifulSoup
@@ -231,7 +220,7 @@ import matplotlib
 
 # import keras
 print("Python version:", sys.version)
-print("Numpy version:", numpy.version.version)
+# print("Numpy version:", numpy.version.version)
 print("Pandas version:", pd.__version__)
 # print("Scikit-learn version:", sklearn.__version__)
 print("Matplotlib version:", matplotlib.__version__)
@@ -297,8 +286,14 @@ print(sys.argv[:])
 
 print("------------------------------------------------------------")  # 60個
 
-print("目前路徑 : ", sys.path)
-print("打印系統路徑")
+print("目前路徑 : ", sys.path)  # 系統路徑
+print(sys.path)
+
+# 查看搜尋模組套件的路徑優先順序
+for path in sys.path:
+    print(path)
+
+print(type(sys.path))
 print(sys.path)
 
 print("------------------------------------------------------------")  # 60個
@@ -336,6 +331,7 @@ os.system("notepad " + filename_r)
 # os.system("svn checkout%s -q %s %s" % (creds, url, filename))
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print(os.environ.get("CI_COMMIT_TAG", "0.0.0"))
 _version = os.environ.get("CI_COMMIT_TAG", "0.0.1.dev2")
@@ -348,7 +344,6 @@ with open(os.path.join(here, "README.md"), encoding="utf-8") as f:
 print("------------------------------------------------------------")  # 60個
 
 """
-print(sys.path)
 sys.exit(1)	#立刻退出程式
 
 #強制離開程式, 並說明原因
@@ -443,10 +438,10 @@ from importlib_metadata import version
 
 print(version("numpy"))
 
+"""
 import pkg_resources
-
 print(pkg_resources.get_distribution("numpy").version)
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 # import this	可以看到 Zen of Python
@@ -585,10 +580,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-print("目前Python版本是: ", sys.version)
-
-print("------------------------------------------------------------")  # 60個
-
 f = [x for x in range(1, 10)]
 
 print(f)
@@ -614,9 +605,6 @@ sys.stdout.write("I like Python")
 
 print("------------------------------------------------------------")  # 60個
 
-for dirpath in sys.path:
-    print(dirpath)
-
 print("------------------------------------------------------------")  # 60個
 
 print("命令列參數 : ", sys.argv)
@@ -632,18 +620,11 @@ pprint(sys.path)
 
 print("------------------------------------------------------------")  # 60個
 
-print("目前Python版本是:     ", sys.version)
-print("目前Python版本是:     ", sys.version_info)
-print("目前Python平台是:     ", sys.platform)
-print("目前Python視窗版本是: ", sys.getwindowsversion())
-print("目前Python可執行檔路徑", sys.executable)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 """
-
 system
 print(sys.builtin_module_names)
 
@@ -653,7 +634,17 @@ for fullname in sys.modules:
     print(fullname, module)
 
 """
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
+print("顯示模組的所有名稱")
+import random
+
+print(dir(random))
+
+import builtins
+
+print(dir(builtins))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -661,16 +652,13 @@ print("內建函式dir()檢視目前的名稱空間")
 print(dir())
 
 import qrcode
-
 print(dir())
 
 # 看單一模組的函式
 import math
-
 print(dir(math))
 
 print("------------------------------------------------------------")  # 60個
-
 
 # 以 dir() 與 help() 探索 Python 模組與物件
 
@@ -685,23 +673,14 @@ print([_ for _ in dir(datetime) if "date" in _.lower()])
 # help(datetime)
 
 print("------------------------------------------------------------")  # 60個
-
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
+print("目前Python版本是: ", sys.version)
+print("目前Python版本是:     ", sys.version)
+print("目前Python版本是:     ", sys.version_info)
+print("目前Python平台是:     ", sys.platform)
+print("目前Python視窗版本是: ", sys.getwindowsversion())
+print("目前Python可執行檔路徑", sys.executable)
 
 print("Python版本號：", sys.version)
 print("作業系統：", sys.platform)
@@ -709,13 +688,16 @@ print("作業系統：", sys.platform)
 print("目前Python版本是: ", sys.version)
 print("目前Python版本是: ", sys.version_info)
 
+print("Python:", sys.version)
+print(sys.version)
+print(sys.version)
+
+print("Python版本號：", sys.version)
+print("作業系統：", sys.platform)
+
 print(sys.version_info)
-print("---")
 print(sys.platform)
-print("---")
 print(sys.argv)
-print("---")
-print(sys.path)
 
 version_rows = [("platform", platform.platform()), ("Python", sys.version)]
 print(version_rows)
@@ -748,12 +730,14 @@ print(
 
 print("------------------------------------------------------------")  # 60個
 
+"""
 from distutils.util import get_platform
 
 PLAT_SPEC = "%s-%s" % (get_platform(), sys.version[0:3])
 src = os.path.join("build", "lib.%s" % PLAT_SPEC)
 # sys.path.append(src)
 print(src)
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -801,16 +785,8 @@ if sys.platform == "win32":
 else:
     print("Non-Windows")
 
-print("Python:", sys.version)
-print(sys.version)
-print(sys.version)
-
-print("Python版本號：", sys.version)
-print("作業系統：", sys.platform)
-
-
 print("------------------------------------------------------------")  # 60個
-
+"""
 print("記事本 開啟")
 import win32process
 import win32event
@@ -828,7 +804,7 @@ handle = win32process.CreateProcess(
 )
 win32event.WaitForSingleObject(handle[0], -1)
 print("記事本 關閉")
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 sys.path.append(os.path.dirname(os.getcwd()))
@@ -862,15 +838,7 @@ print(sys.builtin_module_names)
 if "ce" in sys.builtin_module_names:
     defpath = "\\Windows"
 
-
-print(type(sys.path))
-print(sys.path)
-
 print("------------------------------------------------------------")  # 60個
-
-# 查看搜尋模組套件的路徑優先順序
-for path in sys.path:
-    print(path)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -913,31 +881,18 @@ cc = sys.getdefaultencoding()
 print(cc)
 
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
 
 """
-
-
 所有版本
-
-
 1. 作業系統
-
 2. Python
-
 3. 各套件
 
 # many
 # pd.show_versions()
 
 """
-
-
-import random
-
-print(dir(random))
-
-
 import math
 
 help(math.sqrt)
@@ -946,7 +901,6 @@ help(math.pow)
 print("help 的用法")
 import random
 
-print(dir(random))
 help(random.randint)
 help(random.choice)
 
@@ -955,11 +909,16 @@ print("------------------------------------------------------------")  # 60個
 # 用預設程式開啟檔案
 # os.system('cccc.mp3')
 
+# 用系統預設程式開啟檔案
+# os.system('tmp_pic.png')
+
 # 用預設程式wav檔案
 # os.startfile('harumi99.wav')
 
-# 用系統預設程式開啟檔案
-# os.system('tmp_pic.png')
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
+# filename = 'D:/_git/vcs/_4.python/_data/picture1.jpg'
+
+os.system(filename)  # 用系統內建的程式開啟檔案
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1102,11 +1061,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
-
-# filename = 'D:/_git/vcs/_4.python/_data/picture1.jpg'
-
-os.system(filename)  # 用系統內建的程式開啟檔案
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1138,9 +1092,7 @@ os.system("copy ossystem.py dir2\copyfile.py")  # 複製檔案
 file = cur_path + "\dir2\copyfile.py"
 os.system("notepad " + file)  # 以記事本開啟 copyfile.py 檔
 
-
 os.system("leaks %d" % os.getpid())
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1253,7 +1205,5 @@ print(response)
 
 response = os.popen(f"ping -c 3 -i 1 {hostname}").read()
 print(response)
-
-
 
 """

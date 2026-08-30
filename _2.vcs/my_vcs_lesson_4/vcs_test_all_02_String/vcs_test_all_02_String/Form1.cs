@@ -695,9 +695,6 @@ namespace vcs_test_all_02_String
             //txtValue.Text = pi.ToString("F15");		//小數點以下15位
             //txtError.Text = error.ToString("E");		//科學符號
             */
-
-
-
         }
 
         //------------------------------------------------------------  # 60個
@@ -724,6 +721,20 @@ namespace vcs_test_all_02_String
             richTextBox1.Text += "zz3 = " + zz3 + "\n";
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            //PadRight / PadLeft
+            //測試 PadRight / PadLeft
+
+            int number = 1234;
+            richTextBox1.Text += number.ToString() + "\n";
+            richTextBox1.Text += number.ToString().PadRight(20, '-') + "\n";
+            richTextBox1.Text += number.ToString().PadLeft(20, '-') + "\n";
+            richTextBox1.Text += number.ToString() + "\n";
 
             //左邊補空 和 右邊補空
 
@@ -757,11 +768,10 @@ namespace vcs_test_all_02_String
             int aa = 15;
             string ss1 = aa.ToString().PadLeft(10, '-');
             richTextBox1.Text += ss1 + "\n";
+
         }
 
-        private void button15_Click(object sender, EventArgs e)
-        {
-        }
+        //------------------------------------------------------------  # 60個
 
         private void button16_Click(object sender, EventArgs e)
         {

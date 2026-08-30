@@ -22,8 +22,7 @@ namespace howto_rename_files_with_regex
         // Start in the test directory.
         private void Form1_Load(object sender, EventArgs e)
         {
-            DirectoryInfo dir_info = new DirectoryInfo(
-                Path.Combine(Application.StartupPath, @"..\..\Test"));
+            DirectoryInfo dir_info = new DirectoryInfo(Path.Combine(Application.StartupPath, @"..\..\Test"));
             txtDirectory.Text = dir_info.FullName;
         }
 
@@ -44,8 +43,7 @@ namespace howto_rename_files_with_regex
                 Regex regex = new Regex(txtOldPattern.Text);
                 for (int i = 0; i < files.Length; i++)
                 {
-                    string new_name = regex.Replace(files[i].Name,
-                        txtNewPattern.Text);
+                    string new_name = regex.Replace(files[i].Name, txtNewPattern.Text);
                     new_name = new_name.Replace("$i", i.ToString());
 
                     if (files[i].Name != new_name)
@@ -75,8 +73,7 @@ namespace howto_rename_files_with_regex
             lvwResults.Items.Clear();
             for (int i = 0; i < FromNames.Count; i++)
             {
-                ListViewItem new_item =
-                    lvwResults.Items.Add(FromNames[i]);
+                ListViewItem new_item = lvwResults.Items.Add(FromNames[i]);
                 new_item.SubItems.Add(ToNames[i]);
             }
             lvwResults.Columns[0].Width = -2;
@@ -103,9 +100,7 @@ namespace howto_rename_files_with_regex
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Error moving file '" +
-                            FromNames[i] + "' to '" +
-                            ToNames[i] + "'.\n" + ex.Message);
+                        MessageBox.Show("Error moving file '" + FromNames[i] + "' to '" + ToNames[i] + "'.\n" + ex.Message);
                         throw;
                     }
                 }

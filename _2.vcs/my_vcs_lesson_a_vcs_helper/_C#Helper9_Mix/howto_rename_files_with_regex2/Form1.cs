@@ -22,8 +22,7 @@ namespace howto_rename_files_with_regex2
         // Start in the test directory.
         private void Form1_Load(object sender, EventArgs e)
         {
-            DirectoryInfo dir_info = new DirectoryInfo(
-                Path.Combine(Application.StartupPath, @"..\..\Test"));
+            DirectoryInfo dir_info = new DirectoryInfo(Path.Combine(Application.StartupPath, @"..\..\Test"));
             txtDirectory.Text = dir_info.FullName;
 
             DateTime last_month = DateTime.Now.AddMonths(-1);
@@ -54,16 +53,14 @@ namespace howto_rename_files_with_regex2
 
                 for (int i = 0; i < files.Length; i++)
                 {
-                    string new_name = regex.Replace(files[i].Name,
-                        txtNewPattern.Text);
+                    string new_name = regex.Replace(files[i].Name, txtNewPattern.Text);
                     new_name = new_name.Replace("$i", i.ToString());
 
                     if (files[i].Name != new_name)
                     {
                         // Get the file's last modificaiton date.
                         FileInfo file_info = new FileInfo(files[i].FullName);
-                        if ((file_info.LastWriteTime.Date >= from_date) &&
-                            (file_info.LastWriteTime.Date <= to_date))
+                        if ((file_info.LastWriteTime.Date >= from_date) && (file_info.LastWriteTime.Date <= to_date))
                         {
                             FullFromNames.Add(files[i].FullName);
                             FromNames.Add(files[i].Name);
@@ -92,13 +89,14 @@ namespace howto_rename_files_with_regex2
             lvwResults.Items.Clear();
             for (int i = 0; i < FromNames.Count; i++)
             {
-                ListViewItem new_item =
-                    lvwResults.Items.Add(FromNames[i]);
+                ListViewItem new_item = lvwResults.Items.Add(FromNames[i]);
                 new_item.SubItems.Add(ToNames[i]);
                 new_item.SubItems.Add(Dates[i].ToShortDateString());
             }
             for (int i = 0; i < lvwResults.Columns.Count; i++)
+            {
                 lvwResults.Columns[i].Width = -2;
+            }
 
             // Enable the Make Changes button.
             btnMakeChanges.Enabled = true;
@@ -121,9 +119,7 @@ namespace howto_rename_files_with_regex2
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Error moving file '" +
-                            FromNames[i] + "' to '" +
-                            ToNames[i] + "'.\n" + ex.Message);
+                        MessageBox.Show("Error moving file '" + FromNames[i] + "' to '" + ToNames[i] + "'.\n" + ex.Message);
                         throw;
                     }
                 }

@@ -75,6 +75,7 @@ namespace vcs_DrawE_FamilyTree
         {
             ArrangeTree();
         }
+
         private void ArrangeTree()
         {
             using (Graphics gr = pictureBox1.CreateGraphics())
@@ -88,7 +89,6 @@ namespace vcs_DrawE_FamilyTree
                 ymin = 10;
                 root.Arrange(gr, ref xmin, ref ymin);
             }
-
             pictureBox1.Refresh();
         }
 
@@ -128,3 +128,11 @@ namespace vcs_DrawE_FamilyTree
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+

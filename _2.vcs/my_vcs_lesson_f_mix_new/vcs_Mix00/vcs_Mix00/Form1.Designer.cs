@@ -169,7 +169,6 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(200, 60);
             this.button4.TabIndex = 88;
-            this.button4.Text = "測試 PadRight / PadLeft";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -501,7 +500,6 @@
             this.button37.Name = "button37";
             this.button37.Size = new System.Drawing.Size(200, 60);
             this.button37.TabIndex = 137;
-            this.button37.Text = "Array 1";
             this.button37.UseVisualStyleBackColor = true;
             this.button37.Click += new System.EventHandler(this.button37_Click);
             // 
@@ -512,7 +510,6 @@
             this.button38.Name = "button38";
             this.button38.Size = new System.Drawing.Size(200, 60);
             this.button38.TabIndex = 138;
-            this.button38.Text = "Array 2";
             this.button38.UseVisualStyleBackColor = true;
             this.button38.Click += new System.EventHandler(this.button38_Click);
             // 
