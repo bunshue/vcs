@@ -523,6 +523,7 @@
             this.bt_files16.Name = "bt_files16";
             this.bt_files16.Size = new System.Drawing.Size(200, 60);
             this.bt_files16.TabIndex = 69;
+            this.bt_files16.Text = "FindFiles()1";
             this.bt_files16.UseVisualStyleBackColor = true;
             this.bt_files16.Click += new System.EventHandler(this.bt_files16_Click);
             // 
@@ -533,6 +534,7 @@
             this.bt_files17.Name = "bt_files17";
             this.bt_files17.Size = new System.Drawing.Size(200, 60);
             this.bt_files17.TabIndex = 70;
+            this.bt_files17.Text = "FindFiles()2";
             this.bt_files17.UseVisualStyleBackColor = true;
             this.bt_files17.Click += new System.EventHandler(this.bt_files17_Click);
             // 
@@ -543,6 +545,7 @@
             this.bt_files18.Name = "bt_files18";
             this.bt_files18.Size = new System.Drawing.Size(200, 60);
             this.bt_files18.TabIndex = 71;
+            this.bt_files18.Text = "FindFiles()3";
             this.bt_files18.UseVisualStyleBackColor = true;
             this.bt_files18.Click += new System.EventHandler(this.bt_files18_Click);
             // 

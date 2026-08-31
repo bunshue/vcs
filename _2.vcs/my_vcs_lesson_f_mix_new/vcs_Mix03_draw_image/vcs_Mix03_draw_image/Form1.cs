@@ -164,33 +164,6 @@ namespace vcs_Mix03_draw_image
             }
         }
 
-        // Search for files matching the patterns.
-        // 搜尋符合格式的文件
-        private List<string> FindFiles(string dir_name, string patterns, bool search_subdirectories)
-        {
-            // Make the result list.
-            List<string> files = new List<string>();
-
-            // Get the patterns.
-            string[] pattern_array = patterns.Split(';');
-
-            // Search.
-            SearchOption search_option = SearchOption.TopDirectoryOnly;
-            if (search_subdirectories) search_option = SearchOption.AllDirectories;
-            foreach (string pattern in pattern_array)
-            {
-                foreach (string filename in Directory.GetFiles(dir_name, pattern, search_option))
-                {
-                    if (!files.Contains(filename)) files.Add(filename);
-                }
-            }
-
-            //排序
-            files.Sort();
-
-            return files;
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
@@ -216,43 +189,6 @@ namespace vcs_Mix03_draw_image
         private void button2_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //撈出所有圖片檔 並存成一個List 2
-
-            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony1";
-
-            if (Directory.Exists(foldername) == false)
-            {
-                richTextBox1.Text += "圖片資料夾不存在, 離開\n";
-                return;
-            }
-
-            // Load the list of files.
-            List<String> filenames = new List<String>();
-
-            filenames = FindFiles(foldername, "*.bmp;*.png;*.jpg;*.tif;*.gif", false);
-
-            for (int i = 0; i < filenames.Count; i++)
-            {
-                richTextBox1.Text += "get file \t" + filenames[i] + "\n";
-            }
-            richTextBox1.Text += "共有 " + filenames.Count.ToString() + " 個檔案\n";
-
-            //------------------------------------------------------------  # 60個
-
-            foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic";
-            List<string> files = FindFiles(foldername, "*.bmp;*.gif;*.jpg;*.png;*.tif", false);
-
-            richTextBox1.Text += "找到 " + files.Count + " images.\n";
-
-            foreach (string image_filename in files)
-            {
-                FileInfo image_fileinfo = new FileInfo(image_filename);
-                string filename = image_fileinfo.Name;
-                richTextBox1.Text += filename + "\n";
-            }
-
-
         }
 
         //------------------------------------------------------------  # 60個
@@ -260,55 +196,6 @@ namespace vcs_Mix03_draw_image
         private void button3_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            string dir_name = @"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony2";
-
-            // The list of files we will pick from.
-            List<string> FileNames = new List<string>();
-
-            // Load the list of files.
-            if (Directory.Exists(dir_name))
-            {
-                FileNames = FindFiles(dir_name, "*.bmp;*.png;*.jpg;*.tif;*.gif", false);
-            }
-            else
-            {
-                FileNames = new List<string>();
-            }
-
-            for (int i = 0; i < FileNames.Count; i++)
-            {
-                richTextBox1.Text += "get file \t" + FileNames[i] + "\n";
-            }
-
-            Random Rand = new Random();
-
-            // Repeat until we succeed or run out of files.
-            for (; ; )
-            {
-                // Pick a random image.
-                int file_num = Rand.Next(FileNames.Count);
-
-                // Try to use that image.
-                try
-                {
-                    richTextBox1.Text += "使用圖片 : " + FileNames[file_num] + "\n";
-                    // Set the desktop picture.
-                    //DisplayPicture(FileNames[file_num], checkBox1.Checked);
-                    break;
-                }
-                catch
-                {
-                    // This file doesn't work. Remove it from the list.
-                    FileNames.RemoveAt(file_num);
-
-                    // If there are no more files, stop trying.
-                    if (FileNames.Count == 0)
-                    {
-                        break;
-                    }
-                }
-            }
         }
 
         //------------------------------------------------------------  # 60個
