@@ -3013,7 +3013,7 @@ namespace _vcs_MakePicture
             //取得圖片的一部分
             //string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\SF0.jpg";
             //string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird\Angry-Birds01.jpg";
-            //string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\id_card_01.jpg";
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\id_card_01.jpg";
             //string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_book\20161226161423441.jpg";
             //string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
             string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_哆啦A夢\doraemon1.jpg";

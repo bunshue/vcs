@@ -1,4 +1,22 @@
-﻿
+﻿/*
+//创建目录
+string dir = Path.GetDirectoryName(fileSaveUrl);
+
+if (!Directory.Exists(dir))
+	Directory.CreateDirectory(dir);
+*/
+
+if (Directory.Exists(foldername) == false)
+{
+	Directory.CreateDirectory(foldername);
+}
+
+
+if (File.Exists(this.fileName))
+{
+	File.Delete(this.fileName);
+}
+
 
 //------------------------------------------------------------  # 60個
 
@@ -6,46 +24,6 @@
 
 //------------------------------------------------------------  # 60個
 
-
-
-        // Search for files matching the patterns.
-        private List<string> FindFiles(string dir_name, string patterns, bool search_subdirectories)
-        {
-            // Make the result list.
-            List<string> files = new List<string>();
-
-            // Get the patterns.
-            string[] pattern_array = patterns.Split(';');
-
-            // Search.
-            SearchOption search_option = SearchOption.TopDirectoryOnly;
-            if (search_subdirectories) search_option = SearchOption.AllDirectories;
-            foreach (string pattern in pattern_array)
-            {
-                foreach (string filename in Directory.GetFiles(dir_name, pattern, search_option))
-                {
-                    if (!files.Contains(filename)) files.Add(filename);
-                }
-            }
-            //排序
-            files.Sort();
-            return files;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic";
-            List<string> files = FindFiles(foldername, "*.bmp;*.gif;*.jpg;*.png;*.tif", false);
-
-            richTextBox1.Text += "找到 " + files.Count + " images.\n";
-
-            foreach (string image_filename in files)
-            {
-                FileInfo image_fileinfo = new FileInfo(image_filename);
-                string filename = image_fileinfo.Name;
-                richTextBox1.Text += filename + "\n";
-            }
-        }
 
 
 
@@ -534,11 +512,6 @@ Slate blue (石板藍) 是一種將涼爽的藍色與沉穩的灰色相結合的
 
 //使用using敘詞，寫入完會自動釋放資源
 
-
-else if (File.Exists(this.fileName))
-{
-	File.Delete(this.fileName);
-}
 
 throw new Exception("行數不能小於0");
 
@@ -7893,19 +7866,6 @@ this.MaximizeBox = false;
 //取得副檔名
 FileInfo file_info = new FileInfo(filename);
 switch (file_info.Extension)
-
-/*
-//创建目录
-string dir = Path.GetDirectoryName(fileSaveUrl);
-
-if (!Directory.Exists(dir))
-	Directory.CreateDirectory(dir);
-*/
-
-if (Directory.Exists(foldername) == false)
-{
-	Directory.CreateDirectory(foldername);
-}
 
 //------------------------------------------------------------  # 60個
 //------------------------------------------------------------  # 60個

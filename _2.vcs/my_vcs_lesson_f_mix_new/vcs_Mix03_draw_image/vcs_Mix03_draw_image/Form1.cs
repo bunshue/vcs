@@ -164,9 +164,8 @@ namespace vcs_Mix03_draw_image
             }
         }
 
-        // See: Search for files that match multiple patterns in C#
-        //      http://csharphelper.com/blog/2015/06/find-files-that-match-multiple-patterns-in-c/
         // Search for files matching the patterns.
+        // 搜尋符合格式的文件
         private List<string> FindFiles(string dir_name, string patterns, bool search_subdirectories)
         {
             // Make the result list.
@@ -186,10 +185,9 @@ namespace vcs_Mix03_draw_image
                 }
             }
 
-            // Sort.
+            //排序
             files.Sort();
 
-            // Return the result.
             return files;
         }
 
@@ -218,11 +216,10 @@ namespace vcs_Mix03_draw_image
         private void button2_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
             //撈出所有圖片檔 並存成一個List 2
 
             string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony1";
-
-            filenames.Clear();
 
             if (Directory.Exists(foldername) == false)
             {
@@ -231,6 +228,8 @@ namespace vcs_Mix03_draw_image
             }
 
             // Load the list of files.
+            List<String> filenames = new List<String>();
+
             filenames = FindFiles(foldername, "*.bmp;*.png;*.jpg;*.tif;*.gif", false);
 
             for (int i = 0; i < filenames.Count; i++)
@@ -238,6 +237,22 @@ namespace vcs_Mix03_draw_image
                 richTextBox1.Text += "get file \t" + filenames[i] + "\n";
             }
             richTextBox1.Text += "共有 " + filenames.Count.ToString() + " 個檔案\n";
+
+            //------------------------------------------------------------  # 60個
+
+            foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic";
+            List<string> files = FindFiles(foldername, "*.bmp;*.gif;*.jpg;*.png;*.tif", false);
+
+            richTextBox1.Text += "找到 " + files.Count + " images.\n";
+
+            foreach (string image_filename in files)
+            {
+                FileInfo image_fileinfo = new FileInfo(image_filename);
+                string filename = image_fileinfo.Name;
+                richTextBox1.Text += filename + "\n";
+            }
+
+
         }
 
         //------------------------------------------------------------  # 60個

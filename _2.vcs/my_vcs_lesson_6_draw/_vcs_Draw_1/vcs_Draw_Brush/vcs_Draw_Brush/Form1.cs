@@ -12,14 +12,12 @@ using System.Drawing.Drawing2D;  // for HatchBrush, LinearGradientBrush
 //使用TextureBrush類繪製圖像
 /*
 筆刷物件（單色S、圖案T、花紋H、漸層L）
+SolidBrush / TextureBrush / HatchBrush / LinearGradientBrush / PathGradientBrush
 
-筆刷類別
-SolidBrush		建立單一顏色的筆刷
-	SolidBrush sb = new SolidBrush(Color.Red);
-	Pen p = new Pen(sb, 2);
-TextureBrush		建立以圖形物件當作圖案的筆刷
-	TextureBrush tb = new TextureBrush("bmp1.bmp");
-	Pen p = new Pen(tb, 2);
+單色筆刷
+圖案筆刷    TextureBrush tb = new TextureBrush("bmp1.bmp");  // 建立以圖形物件當作圖案的筆刷
+花紋筆刷    HatchBrush hb = new HatchBrush(HatchStyle.Wave, Color.Blue, Color.Red);
+漸層筆刷
 */
 
 namespace vcs_Draw_Brush
@@ -890,7 +888,6 @@ namespace vcs_Draw_Brush
         private void button22_Click(object sender, EventArgs e)
         {
             //HatchBrush 有樣式的塗刷
-            //HatchBrush 有樣式的塗刷
 
             int x_st = 10;
             int y_st = 10;
@@ -1228,11 +1225,8 @@ namespace vcs_Draw_Brush
 
 /*
 
-
-HatchBrush myBrush1 = new HatchBrush(HatchStyle.Cross, Color.Red);
 HatchBrush myBrush1 = new HatchBrush(HatchStyle.Cross, Color.Red);
 e.Graphics.FillEllipse(myBrush1, 0 - D, 0 - D, 2 * D, 2 * D); //畫出旋轉的圓點 
-
 
 */
 

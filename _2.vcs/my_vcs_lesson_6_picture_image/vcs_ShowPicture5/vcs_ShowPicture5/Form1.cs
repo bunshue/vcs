@@ -31,7 +31,7 @@ namespace vcs_ShowPicture5
 {
     public partial class Form1 : Form
     {
-        string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\";
+        string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\";
         string filename = string.Empty;
         int total_picture_count = 0;
         int sel_picture = -1;

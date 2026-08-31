@@ -188,35 +188,35 @@ namespace _emgu_test1
 
             VideoWriter video = new VideoWriter(filename, CvInvoke.CV_FOURCC('X', 'V', 'I', 'D'), 1, 640, 480, true);
 
-            filenamej = @"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\id_card_01.jpg";
+            filenamej = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\id_card_01.jpg";
             pictureBox1.Image = Image.FromFile(filenamej);
             img = new Image<Bgr, byte>(filenamej);
             video.WriteFrame<Bgr, byte>(img); //將每張圖片製作成影片
             Application.DoEvents();
             System.Threading.Thread.Sleep(1000);
 
-            filenamej = @"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\id_card_02.jpg";
+            filenamej = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\id_card_02.jpg";
             pictureBox1.Image = Image.FromFile(filenamej);
             img = new Image<Bgr, byte>(filenamej);
             video.WriteFrame<Bgr, byte>(img); //將每張圖片製作成影片
             Application.DoEvents();
             System.Threading.Thread.Sleep(1000);
 
-            filenamej = @"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\id_card_03.jpg";
+            filenamej = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\id_card_03.jpg";
             pictureBox1.Image = Image.FromFile(filenamej);
             img = new Image<Bgr, byte>(filenamej);
             video.WriteFrame<Bgr, byte>(img); //將每張圖片製作成影片
             Application.DoEvents();
             System.Threading.Thread.Sleep(1000);
 
-            filenamej = @"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\id_card_04.jpg";
+            filenamej = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\id_card_04.jpg";
             pictureBox1.Image = Image.FromFile(filenamej);
             img = new Image<Bgr, byte>(filenamej);
             video.WriteFrame<Bgr, byte>(img); //將每張圖片製作成影片
             Application.DoEvents();
             System.Threading.Thread.Sleep(1000);
 
-            filenamej = @"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\id_card_05.jpg";
+            filenamej = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\id_card_05.jpg";
             pictureBox1.Image = Image.FromFile(filenamej);
             img = new Image<Bgr, byte>(filenamej);
             video.WriteFrame<Bgr, byte>(img); //將每張圖片製作成影片
@@ -405,4 +405,3 @@ namespace _emgu_test1
         }
     }
 }
-

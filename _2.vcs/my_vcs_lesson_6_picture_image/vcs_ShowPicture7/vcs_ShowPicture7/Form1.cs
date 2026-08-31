@@ -16,7 +16,7 @@ namespace vcs_ShowPicture7
         bool debug_mode = false;
 
         //string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony1";
-        string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_MU";
+        string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU";
 
         // The list of files we will pick from.
         private List<string> FileNames = new List<string>();
@@ -52,6 +52,7 @@ namespace vcs_ShowPicture7
         // See: Search for files that match multiple patterns in C#
         //      http://csharphelper.com/blog/2015/06/find-files-that-match-multiple-patterns-in-c/
         // Search for files matching the patterns.
+        // 搜尋符合格式的文件
         private List<string> FindFiles(string fname, string patterns, bool search_subdirectories)
         {
             // Make the result list.
@@ -71,10 +72,9 @@ namespace vcs_ShowPicture7
                 }
             }
 
-            // Sort.
+            // 排序
             files.Sort();
 
-            // Return the result.
             return files;
         }
 

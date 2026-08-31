@@ -12,7 +12,7 @@ namespace vcs_PictureSlideShow5
     {
         int width = 0;
         int heigh = 0;
-        string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_MU";
+        string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU";
 
         public Form1()
         {
@@ -63,6 +63,4 @@ namespace vcs_PictureSlideShow5
         }
     }
 }
-
-
 

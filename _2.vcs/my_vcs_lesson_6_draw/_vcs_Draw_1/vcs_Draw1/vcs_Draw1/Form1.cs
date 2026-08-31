@@ -345,7 +345,6 @@ namespace vcs_Draw1
             f = new Font("Times New Roman", 14);
 
             Rectangle rec;
-            Rectangle[] recs;
 
             int x_st = 20;
             int y_st = 20;
@@ -394,9 +393,10 @@ namespace vcs_Draw1
 
             x_st += dx;
             x_st += dx / 2;
-            recs = new Rectangle[4] {
-	            new Rectangle(x_st + 0, y_st + 0, 50, 80),
-	            new Rectangle(x_st + 60, y_st + 0, 80, 60),
+            Rectangle[] recs = new Rectangle[4]
+            {
+                new Rectangle(x_st + 0, y_st + 0, 50, 80),
+                new Rectangle(x_st + 60, y_st + 0, 80, 60),
 	            new Rectangle(x_st + 60 + 90, y_st + 0, 100, 75),
 	            new Rectangle(x_st + 60 + 90 + 110, y_st + 0, 50, 70)
             };
@@ -2782,6 +2782,5 @@ g.DrawImage(bitmap1, Cx, Cy, -W / 2,  H / 2);
 g.DrawImage(bitmap1, Cx, Cy,  W / 2, -H / 2);
 g.DrawImage(bitmap1, Cx, Cy, -W / 2, -H / 2);
 */
-
 
 //f = new Font("Times New Roman", 40, FontStyle.Regular, GraphicsUnit.Pixel);
