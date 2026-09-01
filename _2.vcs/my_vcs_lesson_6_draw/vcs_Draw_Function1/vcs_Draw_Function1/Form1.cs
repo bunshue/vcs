@@ -1087,7 +1087,13 @@ namespace vcs_Draw_Function1
         {
             //輸入兩點並劃出直線
 
-            float x0, x1, y0, y1;
+            // X,Y顯示範圍為-10~10
+            Random rand = new Random();
+            float x0 = (float)rand.Next(-100, 100) / 10;
+            float y0 = (float)rand.Next(-100, 100) / 10;
+            float x1 = (float)rand.Next(-100, 100) / 10;
+            float y1 = (float)rand.Next(-100, 100) / 10;
+
             float ratio_x, ratio_y;
             float wid, hei;
             Bitmap bmp;
@@ -1104,12 +1110,6 @@ namespace vcs_Draw_Function1
             richTextBox1.Text += "W = " + wid.ToString() + "\n";
             richTextBox1.Text += "H = " + hei.ToString() + "\n";
 
-
-            ///X,Y顯示範圍為-10~10
-            x0 = 8.4f;
-            y0 = -3.4f;
-            x1 = -6.6f;
-            y1 = 7.8f;
             //----計算放大倍率----
             ratio_x = (wid - 50) / 20;
             ratio_y = (hei - 50) / 20;
