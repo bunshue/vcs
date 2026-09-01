@@ -22,9 +22,76 @@ if (File.Exists(this.fileName))
 //------------------------------------------------------------  # 60個
 
 
+private Thread thread_ex = null;
+
+        private void ReceiveThread()
+        {
+            Console.WriteLine("L");
+            while (true)
+            {
+                Console.WriteLine("a");
+                Thread.Sleep(100);
+            }
+        }
+
+
+            thread_ex = new Thread(new ThreadStart(this.ReceiveThread));
+            thread_ex.Name = "CommBaseRx";
+            thread_ex.Priority = ThreadPriority.AboveNormal;
+            thread_ex.Start();
+
+
+            if (thread_ex != null)
+            {
+                thread_ex.Abort();
+                thread_ex.Join(100);
+                thread_ex = null;
+            }
+
+
+            if (Thread.CurrentThread == thread_ex)
+            {
+                //throw new CommPortException(reason);
+            }
+
 
 //------------------------------------------------------------  # 60個
 
+        protected void Send(string toSend)
+        {
+            uint l = (uint)Encoding.ASCII.GetByteCount(toSend);
+
+            if (TxTerm != null) l += (uint)TxTerm.GetLength(0);
+            byte[] b = new byte[l];
+            byte[] s = Encoding.ASCII.GetBytes(toSend);
+
+
+//------------------------------------------------------------  # 60個
+
+
+            Dictionary<string, int> dic = new Dictionary<string, int>();
+            Dictionary<string,int> dic = new Dictionary<string,int>();
+
+
+            var myList = dic.ToList();
+
+            myList.Sort((p, v) => v.Value.CompareTo(p.Value));
+
+
+
+        /// 按32M读取文件，循环发送给WordBufferBlock
+            using (FileStream fs = new FileStream(_fileName, FileMode.Open, FileAccess.Read))
+            {
+                using (StreamReader sr = new StreamReader(fs))
+                {
+                    while (!sr.EndOfStream)
+                    {
+
+                        char[] charBuffer = new char[32 * 1024 * 1024];
+                        sr.ReadBlock(charBuffer, 0, charBuffer.Length);
+                        _buffer.Post(new WordStream(charBuffer));
+                    }
+                }
 
 
 
@@ -150,11 +217,10 @@ else
 
 //------------------------------------------------------------  # 60個
 
+FillRegion
 
 TextureBrush newBrush = new TextureBrush(myPic);
-
 g.FillRegion(newBrush, new Region(PaintPath));
-
 
 
         // Select the PictureBox with this color.
@@ -3914,6 +3980,13 @@ old 暫存一下
 //------------------------------------------------------------  # 60個
 
 .net 4.5中新增了async和await這一對用於異步編程的關鍵字。
+
+
+
+新語法 目前不可用的
+
+NET Framework 4.0，這個版本還沒有 async/await
+
 
 //------------------------------------------------------------  # 60個
 
