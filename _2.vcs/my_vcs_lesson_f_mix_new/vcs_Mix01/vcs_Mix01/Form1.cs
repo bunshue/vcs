@@ -224,38 +224,6 @@ namespace vcs_Mix01
         private void button3_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //分析文章
-            string text =
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse lobortis blandit mauris, a sagittis libero. Proin a posuere justo, vel scelerisque risus.\n" +
-                "Sed condimentum suscipit est in sagittis. Maecenas ac nulla in metus gravida feugiat nec vel odio. Aenean vulputate urna vel gravida rhoncus.\n" +
-                "Etiam vel lacinia urna, non ultrices arcu. Curabitur eget neque nec felis facilisis lacinia. Donec sit amet neque vel ligula scelerisque cursus et quis nisl.\n" +
-                "Proin convallis metus elit, eu condimentum nunc ultrices vel. Maecenas elementum orci tellus, quis pretium risus fringilla non.\n" +
-                "Quisque eget diam a erat vestibulum cursus ut nec nisi. Duis non velit quis augue mattis consectetur pharetra sed dolor.\n" +
-                "Pellentesque luctus tempor ornare.\n" +
-                "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Proin pellentesque dolor in leo porttitor, dignissim sollicitudin nulla bibendum.\n" +
-                "Nullam sit amet faucibus nunc, nec laoreet orci. Etiam nec rutrum mauris. Integer sapien felis, placerat id orci eu, fermentum porta dui.\n" +
-                "Nam in pharetra orci, sed sollicitudin urna. Suspendisse sit amet tellus sagittis, lobortis ante quis, consectetur est.\n" +
-                "Aliquam tempor ligula in augue facilisis, vehicula fermentum sem elementum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.";
-
-            // Split the text into paragraphs.
-            string[] paragraphs = text.Split('\n');
-
-            int i = 1;
-            // Draw each paragraph.
-            foreach (string paragraph in paragraphs)
-            {
-                richTextBox1.Text += "第 " + i.ToString() + " 行\t" + paragraph + "\n";
-                // Break the text into words.
-                string[] words = paragraph.Split(' ');
-                foreach (string word in words)
-                {
-                    richTextBox1.Text += word + "_";
-
-                }
-                richTextBox1.Text += "\n";
-                i++;
-            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -283,10 +251,14 @@ namespace vcs_Mix01
             richTextBox1.Text += "在Form1()的InitializeComponent()後加入訊息\n";
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button7_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button8_Click(object sender, EventArgs e)
         {
@@ -303,13 +275,16 @@ namespace vcs_Mix01
             {
                 richTextBox1.Text += "i = " + i.ToString() + "\t" + gender[i] + "\n";
             }
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button9_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
         }
+
+        //------------------------------------------------------------  # 60個
 
         //最短路徑分析 ST
         static int length = 6;
@@ -345,8 +320,7 @@ namespace vcs_Mix01
             }
             richTextBox1.Text += "長度:" + dist1 + "\n";
 
-
-            richTextBox1.Text += "\r\n-----------------------------------------\r\n";
+            //------------------------------------------------------------  # 60個
 
             int[] pathdist = getShortedPath(G, 0, path2);
             richTextBox1.Text += "點0到任意點的路徑:" + "\n";
@@ -354,7 +328,9 @@ namespace vcs_Mix01
             {
                 richTextBox1.Text += "點0到" + j + "的路徑:" + "\n";
                 for (int i = 0; i < length; i++)
+                {
                     richTextBox1.Text += path2[j, i].ToString() + " ";
+                }
                 richTextBox1.Text += "長度:" + pathdist[j] + "\n";
             }
         }
@@ -374,9 +350,13 @@ namespace vcs_Mix01
                 s[v] = false;
                 dist[v] = G[start, v];
                 if (dist[v] > MaxSize)
+                {
                     prev[v] = 0;
+                }
                 else
+                {
                     prev[v] = start;
+                }
             }
             path[0] = end;
             dist[start] = 0;
@@ -396,13 +376,15 @@ namespace vcs_Mix01
 
                 s[curNode] = true;
                 for (int j = 0; j < length; j++)
+                {
                     if (!s[j] && min + G[curNode, j] < dist[j])
                     {
                         dist[j] = min + G[curNode, j];
                         prev[j] = curNode;
                     }
-
+                }
             }
+
             //輸出路徑結點
             int e = end, step = 0;
             while (e != start)

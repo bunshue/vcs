@@ -167,9 +167,9 @@ namespace vcs_Mix03_draw_image
         private void button1_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //撈出所有圖片檔 並存成一個List 1
 
             //撈出所有圖片檔 並存成一個List
+
             string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_book_magazine";
 
             filenames.Clear();

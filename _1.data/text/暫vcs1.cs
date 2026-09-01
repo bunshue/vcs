@@ -106,20 +106,6 @@ private Thread thread_ex = null;
 
 
 
-        /// 按32M读取文件，循环发送给WordBufferBlock
-            using (FileStream fs = new FileStream(_fileName, FileMode.Open, FileAccess.Read))
-            {
-                using (StreamReader sr = new StreamReader(fs))
-                {
-                    while (!sr.EndOfStream)
-                    {
-
-                        char[] charBuffer = new char[32 * 1024 * 1024];
-                        sr.ReadBlock(charBuffer, 0, charBuffer.Length);
-                        _buffer.Post(new WordStream(charBuffer));
-                    }
-                }
-
 
 
 //------------------------------------------------------------  # 60個

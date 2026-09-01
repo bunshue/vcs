@@ -887,10 +887,30 @@ namespace vcs_ReadWrite_TXT
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button19_Click(object sender, EventArgs e)
         {
+            //StreamReader block
 
+            // 按32M读取文件
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\article.txt";
+
+            using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
+            {
+                using (StreamReader sr = new StreamReader(fs))
+                {
+                    while (!sr.EndOfStream)
+                    {
+                        char[] charBuffer = new char[32 * 1024 * 1024];
+                        sr.ReadBlock(charBuffer, 0, charBuffer.Length);
+
+                    }
+                }
+            }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button20_Click(object sender, EventArgs e)
         {
