@@ -48,6 +48,7 @@ namespace WindowsFormsApplication1
             e.Graphics.FillRegion(Brushes.Red, r1); // r1 區域表面 繪出
             e.Graphics.DrawPath(Pens.Black, gp1); // 圖形軌跡 繪出
             e.Graphics.DrawPath(Pens.Black, gp2); // 圖形軌跡 繪出
+
             if (show_Arrow)
             {
                 e.Graphics.DrawLine(myPen2, 40, this.ClientSize.Height / 2, this.ClientSize.Width - 40, this.ClientSize.Height / 2);
@@ -75,4 +76,3 @@ namespace WindowsFormsApplication1
         }
     }
 }
-

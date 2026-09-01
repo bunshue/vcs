@@ -1,4 +1,31 @@
 ﻿
+//------------------------------------------------------------  # 60個
+
+            //----textbox事件----
+            foreach (Control ctrl in Controls)
+            {
+                if (ctrl.GetType().Name == "TextBox")
+                {
+                    ctrl.Enter += TextBox_Enter;
+                    ctrl.MouseClick += TextBox_Enter;
+                }
+            }
+
+        //----選到textbox時，選取全部文字
+        private void TextBox_Enter(object sender, EventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            tb.SelectAll();
+        }
+
+//------------------------------------------------------------  # 60個
+
+
+//------------------------------------------------------------  # 60個
+
+
+//------------------------------------------------------------  # 60個
+
 /*
 //创建目录
 string dir = Path.GetDirectoryName(fileSaveUrl);
@@ -70,7 +97,7 @@ private Thread thread_ex = null;
 
 
             Dictionary<string, int> dic = new Dictionary<string, int>();
-            Dictionary<string,int> dic = new Dictionary<string,int>();
+            Dictionary<string, int> dic = new Dictionary<string, int>();
 
 
             var myList = dic.ToList();
@@ -216,12 +243,6 @@ else
 
 
 //------------------------------------------------------------  # 60個
-
-FillRegion
-
-TextureBrush newBrush = new TextureBrush(myPic);
-g.FillRegion(newBrush, new Region(PaintPath));
-
 
         // Select the PictureBox with this color.
         private void SelectColor(Color clr)

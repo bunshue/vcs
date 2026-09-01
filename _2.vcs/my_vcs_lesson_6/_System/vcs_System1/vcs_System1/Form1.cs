@@ -745,14 +745,11 @@ namespace vcs_System1
             const int c_LinkerTimestampOffset = 8;
 
             var buffer = new byte[256];
-
-            using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
-            {
-                stream.Read(buffer, 0, 256);
-            }
-
+            var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+            stream.Read(buffer, 0, 256);
             var offset = BitConverter.ToInt32(buffer, c_PeHeaderOffset);
             var secondsSince1970 = BitConverter.ToInt32(buffer, offset + c_LinkerTimestampOffset);
+
             var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
             var linkTimeUtc = epoch.AddSeconds(secondsSince1970);
@@ -1109,7 +1106,6 @@ namespace vcs_System1
             richTextBox1.Text += "GUID N :\t" + Guid.NewGuid().ToString("P") + "\n";//結果為：(778406c2-efff-4262-ab03-70a77d09c2b5)
 
             string newName = Guid.NewGuid().ToString();
-
             richTextBox1.Text += "C# 產生 GUID 3\n";
             richTextBox1.Text += newName + "\n";
         }
@@ -2026,7 +2022,5 @@ EG:       string str = "insert into 表名(NM,BH,MC) values('" + Guid.NewGuid().
 
 //------------------------------------------------------------  # 60個
 
-Guid.NewGuid().ToString()
-Guid.NewGuid().ToString()
         Random rand = new Random(Guid.NewGuid().GetHashCode());
 */

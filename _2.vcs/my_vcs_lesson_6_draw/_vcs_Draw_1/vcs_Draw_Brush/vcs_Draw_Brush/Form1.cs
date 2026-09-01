@@ -1231,3 +1231,13 @@ e.Graphics.FillEllipse(myBrush1, 0 - D, 0 - D, 2 * D, 2 * D); //畫出旋轉的�
 */
 
 
+
+/*
+FillRegion
+
+TextureBrush newBrush = new TextureBrush(myPic);
+g.FillRegion(newBrush, new Region(PaintPath));
+
+*/
+
+

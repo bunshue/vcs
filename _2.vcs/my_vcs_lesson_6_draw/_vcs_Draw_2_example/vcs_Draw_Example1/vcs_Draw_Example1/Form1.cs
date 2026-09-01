@@ -4320,6 +4320,26 @@ namespace vcs_Draw_Example1
 
         private void button40_Click(object sender, EventArgs e)
         {
+            //FillRegion
+
+            PointF[] pts1 = {
+                new Point( 20,  60),
+                new Point(140,  60),
+                new Point(140,  20),
+                new Point(220, 100),
+                new Point(140, 180),
+                new Point(140, 140),
+                new Point( 20, 140)
+            };
+
+            GraphicsPath polygon_path1 = new GraphicsPath(FillMode.Winding);
+            polygon_path1.AddPolygon(pts1);
+
+            Region polygon_region1 = new Region(polygon_path1);
+
+            g.FillRegion(Brushes.Red, polygon_region1);
+
+            pictureBox1.Image = bitmap1;
         }
 
         //------------------------------------------------------------  # 60個

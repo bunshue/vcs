@@ -322,9 +322,9 @@ namespace vcs_ImageProcessing2_CCRR
 
         //------------------------------------------------------------  # 60個
 
-        public static Image CutForCustomx(string imgPath, int top, int height)
+        public static Image CutForCustomx(string filename, int top, int height)
         {
-            FileStream fs = new FileStream(imgPath, FileMode.Open, FileAccess.Read);
+            FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
             //從文件獲取原始圖片，並使用流中嵌入的顏色管理信息
             Image initImage = Image.FromStream(fs, true);
 
@@ -334,9 +334,9 @@ namespace vcs_ImageProcessing2_CCRR
             return (Image)(img);
         }
 
-        public static Image CutForCustomx(string imgPath, Rectangle rec)
+        public static Image CutForCustomx(string filename, Rectangle rec)
         {
-            FileStream fs = new FileStream(imgPath, FileMode.Open, FileAccess.Read);
+            FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
             //從文件獲取原始圖片，並使用流中嵌入的顏色管理信息
             Image initImage = Image.FromStream(fs, true);
 

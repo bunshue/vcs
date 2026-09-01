@@ -959,6 +959,7 @@
             this.button40.Name = "button40";
             this.button40.Size = new System.Drawing.Size(180, 45);
             this.button40.TabIndex = 110;
+            this.button40.Text = "FillRegion";
             this.button40.UseVisualStyleBackColor = true;
             this.button40.Click += new System.EventHandler(this.button40_Click);
             // 
