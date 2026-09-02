@@ -22,17 +22,6 @@
 
 //------------------------------------------------------------  # 60個
 
-
-由短檔案名取的短資料夾名
-richTextBox1.Text += "資料夾：" + fi.Directory + "\n";
-richTextBox1.Text += "資料夾：" + fi.Directory.Parent + "\n";
-
-
-//------------------------------------------------------------  # 60個
-
-
-//------------------------------------------------------------  # 60個
-
 /*
 //创建目录
 string dir = Path.GetDirectoryName(fileSaveUrl);
@@ -770,36 +759,33 @@ lstJob.SelectedIndex = JobIndex;
 
 //------------------------------------------------------------  # 60個
 
+string path = AppDomain.CurrentDomain.BaseDirectory;
+path = Path.Combine(path, "Logger3_\\" + DateTime.Now.ToString("yy-MM-dd"));
 
-//------------------------------------------------------------  # 60個
+if (!Directory.Exists(path))
+{
+	Directory.CreateDirectory(path);
+}
+string fileFullName = Path.Combine(path, string.Format("{0}.log", DateTime.Now.ToString("yyMMdd-HHmmss")));
 
-            string path = AppDomain.CurrentDomain.BaseDirectory;
-            path = Path.Combine(path, "Logger3_\\" + DateTime.Now.ToString("yy-MM-dd"));
+string myPath = Application.StartupPath;
+string myName = "david_log";
 
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-            string fileFullName = Path.Combine(path, string.Format("{0}.log", DateTime.Now.ToString("yyMMdd-HHmmss")));
+if (myPath == "" || myName == "")
+	return;
 
-            string myPath = Application.StartupPath;
-            string myName = "david_log";
+string Year = DateTime.Now.Year.ToString();
+string Month = DateTime.Now.Month.ToString().PadLeft(2, '0');
+string Day = DateTime.Now.Day.ToString().PadLeft(2, '0');
 
-            if (myPath == "" || myName == "")
-                return;
+//年月日文件夾是否存在，不存在則建立
+if (!Directory.Exists(myPath + "\\LogFiles1\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day))
+{
+	Directory.CreateDirectory(myPath + "\\LogFiles1\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day);
+}
 
-            string Year = DateTime.Now.Year.ToString();
-            string Month = DateTime.Now.Month.ToString().PadLeft(2, '0');
-            string Day = DateTime.Now.Day.ToString().PadLeft(2, '0');
-
-            //年月日文件夾是否存在，不存在則建立
-            if (!Directory.Exists(myPath + "\\LogFiles1\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day))
-            {
-                Directory.CreateDirectory(myPath + "\\LogFiles1\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day);
-            }
-
-            //寫入日志UNDO,Exception has not been handle
-            string log_filename1 = myPath + "\\LogFiles1\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day + "\\" + myName;
+//寫入日志UNDO,Exception has not been handle
+string log_filename1 = myPath + "\\LogFiles1\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day + "\\" + myName;
 
 //------------------------------------------------------------  # 60個
 
@@ -808,6 +794,9 @@ hi();
 hi("lion-mouse");
 
 //------------------------------------------------------------  # 60個
+
+可以加入控件的控件
+Form pictureBox Panel GroupBox tab_control
 
 同一個控件，不能重複加入到不同容器
 但是可以移動加入到不同容器
@@ -826,8 +815,10 @@ this.panel_plc.Controls.Add(richTextBox1);
 //------------------------------------------------------------  # 60個
 
 string strMinute = "";
-if(DateTime.Now.Minute > 30) strMinute="30";
-else strMinute = "00";
+if(DateTime.Now.Minute > 30)
+	strMinute="30";
+else
+	strMinute = "00";
 
 string mapURL = String.Format(
    "http://www.cwb.gov.tw/V7/observe/satellite/Data/s3p/s3p-{0}-{2}-{3}-{4}.jpg";
@@ -837,7 +828,6 @@ string mapURL = String.Format(
    DateTime.Now.Hour.ToString("00");
    strMinute);
 pictureBox1.ImageLocation = mapURL;
-pictureBox1.ClientSize = new Size(400,430);
 
 //------------------------------------------------------------  # 60個
 
@@ -4885,7 +4875,7 @@ https://www.nuget.org/
 
 ABCDEFG用各種不同編碼存檔 (要不要中文?)
 
-//6060
+//------------------------------------------------------------  # 60個
 
 SetStyle(ControlStyles.ResizeRedraw, true);
 
@@ -7081,7 +7071,6 @@ vcs_MyPlayer3
 + pdf可以記錄多檔
 可以切換 maybe 建立 tab_page 來承載
 
-
 每次做色彩校正後 皆本地存圖
 每次開啟imsLink時 顯示磁碟所剩空間
 若磁碟所剩空間不多 應顯示警告 或 不再本地存圖
@@ -7947,13 +7936,6 @@ this.StartPosition = FormStartPosition.Manual;
 this.StartPosition = FormStartPosition.CenterScreen;  // 單獨寫致中，看似無效
 
 this.MaximizeBox = false;
-
-//------------------------------------------------------------  # 60個
-//------------------------------------------------------------  # 60個
-
-//取得副檔名
-FileInfo file_info = new FileInfo(filename);
-switch (file_info.Extension)
 
 //------------------------------------------------------------  # 60個
 //------------------------------------------------------------  # 60個

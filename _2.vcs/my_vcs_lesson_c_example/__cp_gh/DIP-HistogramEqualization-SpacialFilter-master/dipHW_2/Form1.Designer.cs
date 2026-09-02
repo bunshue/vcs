@@ -40,21 +40,21 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button6 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button7 = new System.Windows.Forms.Button();
+            this.filter9 = new System.Windows.Forms.TextBox();
+            this.filter8 = new System.Windows.Forms.TextBox();
+            this.filter7 = new System.Windows.Forms.TextBox();
+            this.filter6 = new System.Windows.Forms.TextBox();
+            this.filter5 = new System.Windows.Forms.TextBox();
+            this.filter4 = new System.Windows.Forms.TextBox();
+            this.filter3 = new System.Windows.Forms.TextBox();
+            this.filter2 = new System.Windows.Forms.TextBox();
+            this.filter1 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.filter1 = new System.Windows.Forms.TextBox();
-            this.filter2 = new System.Windows.Forms.TextBox();
-            this.filter3 = new System.Windows.Forms.TextBox();
-            this.filter6 = new System.Windows.Forms.TextBox();
-            this.filter5 = new System.Windows.Forms.TextBox();
-            this.filter4 = new System.Windows.Forms.TextBox();
-            this.filter9 = new System.Windows.Forms.TextBox();
-            this.filter8 = new System.Windows.Forms.TextBox();
-            this.filter7 = new System.Windows.Forms.TextBox();
-            this.button7 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -63,8 +63,8 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
@@ -185,6 +185,88 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "空间滤波";
             // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(206, 73);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(61, 23);
+            this.button7.TabIndex = 13;
+            this.button7.Text = "滤波";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // filter9
+            // 
+            this.filter9.Location = new System.Drawing.Point(174, 102);
+            this.filter9.Name = "filter9";
+            this.filter9.Size = new System.Drawing.Size(26, 22);
+            this.filter9.TabIndex = 12;
+            // 
+            // filter8
+            // 
+            this.filter8.Location = new System.Drawing.Point(142, 102);
+            this.filter8.Name = "filter8";
+            this.filter8.Size = new System.Drawing.Size(26, 22);
+            this.filter8.TabIndex = 11;
+            // 
+            // filter7
+            // 
+            this.filter7.Location = new System.Drawing.Point(110, 102);
+            this.filter7.Name = "filter7";
+            this.filter7.Size = new System.Drawing.Size(26, 22);
+            this.filter7.TabIndex = 10;
+            // 
+            // filter6
+            // 
+            this.filter6.Location = new System.Drawing.Point(174, 75);
+            this.filter6.Name = "filter6";
+            this.filter6.Size = new System.Drawing.Size(26, 22);
+            this.filter6.TabIndex = 9;
+            // 
+            // filter5
+            // 
+            this.filter5.Location = new System.Drawing.Point(142, 75);
+            this.filter5.Name = "filter5";
+            this.filter5.Size = new System.Drawing.Size(26, 22);
+            this.filter5.TabIndex = 8;
+            // 
+            // filter4
+            // 
+            this.filter4.Location = new System.Drawing.Point(110, 75);
+            this.filter4.Name = "filter4";
+            this.filter4.Size = new System.Drawing.Size(26, 22);
+            this.filter4.TabIndex = 7;
+            // 
+            // filter3
+            // 
+            this.filter3.Location = new System.Drawing.Point(174, 48);
+            this.filter3.Name = "filter3";
+            this.filter3.Size = new System.Drawing.Size(26, 22);
+            this.filter3.TabIndex = 6;
+            // 
+            // filter2
+            // 
+            this.filter2.Location = new System.Drawing.Point(142, 48);
+            this.filter2.Name = "filter2";
+            this.filter2.Size = new System.Drawing.Size(26, 22);
+            this.filter2.TabIndex = 5;
+            // 
+            // filter1
+            // 
+            this.filter1.Location = new System.Drawing.Point(110, 48);
+            this.filter1.Name = "filter1";
+            this.filter1.Size = new System.Drawing.Size(26, 22);
+            this.filter1.TabIndex = 4;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(19, 51);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(95, 12);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "3x3自定义滤波：";
+            // 
             // button5
             // 
             this.button5.Location = new System.Drawing.Point(208, 19);
@@ -199,7 +281,7 @@
             // 
             this.textBox3.Location = new System.Drawing.Point(110, 21);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(92, 21);
+            this.textBox3.Size = new System.Drawing.Size(92, 22);
             this.textBox3.TabIndex = 1;
             // 
             // label4
@@ -207,7 +289,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(19, 24);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(95, 12);
+            this.label4.Size = new System.Drawing.Size(92, 12);
             this.label4.TabIndex = 0;
             this.label4.Text = "平均滤波宽/高：";
             // 
@@ -216,91 +298,9 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(417, 540);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(155, 12);
+            this.label5.Size = new System.Drawing.Size(146, 12);
             this.label5.TabIndex = 9;
             this.label5.Text = "by 14数媒 孙展博 14331242";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(19, 51);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(95, 12);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "3x3自定义滤波：";
-            // 
-            // filter1
-            // 
-            this.filter1.Location = new System.Drawing.Point(110, 48);
-            this.filter1.Name = "filter1";
-            this.filter1.Size = new System.Drawing.Size(26, 21);
-            this.filter1.TabIndex = 4;
-            // 
-            // filter2
-            // 
-            this.filter2.Location = new System.Drawing.Point(142, 48);
-            this.filter2.Name = "filter2";
-            this.filter2.Size = new System.Drawing.Size(26, 21);
-            this.filter2.TabIndex = 5;
-            // 
-            // filter3
-            // 
-            this.filter3.Location = new System.Drawing.Point(174, 48);
-            this.filter3.Name = "filter3";
-            this.filter3.Size = new System.Drawing.Size(26, 21);
-            this.filter3.TabIndex = 6;
-            // 
-            // filter6
-            // 
-            this.filter6.Location = new System.Drawing.Point(174, 75);
-            this.filter6.Name = "filter6";
-            this.filter6.Size = new System.Drawing.Size(26, 21);
-            this.filter6.TabIndex = 9;
-            // 
-            // filter5
-            // 
-            this.filter5.Location = new System.Drawing.Point(142, 75);
-            this.filter5.Name = "filter5";
-            this.filter5.Size = new System.Drawing.Size(26, 21);
-            this.filter5.TabIndex = 8;
-            // 
-            // filter4
-            // 
-            this.filter4.Location = new System.Drawing.Point(110, 75);
-            this.filter4.Name = "filter4";
-            this.filter4.Size = new System.Drawing.Size(26, 21);
-            this.filter4.TabIndex = 7;
-            // 
-            // filter9
-            // 
-            this.filter9.Location = new System.Drawing.Point(174, 102);
-            this.filter9.Name = "filter9";
-            this.filter9.Size = new System.Drawing.Size(26, 21);
-            this.filter9.TabIndex = 12;
-            // 
-            // filter8
-            // 
-            this.filter8.Location = new System.Drawing.Point(142, 102);
-            this.filter8.Name = "filter8";
-            this.filter8.Size = new System.Drawing.Size(26, 21);
-            this.filter8.TabIndex = 11;
-            // 
-            // filter7
-            // 
-            this.filter7.Location = new System.Drawing.Point(110, 102);
-            this.filter7.Name = "filter7";
-            this.filter7.Size = new System.Drawing.Size(26, 21);
-            this.filter7.TabIndex = 10;
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(206, 73);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(61, 23);
-            this.button7.TabIndex = 13;
-            this.button7.Text = "滤波";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // Form1
             // 
@@ -318,6 +318,7 @@
             this.MinimumSize = new System.Drawing.Size(600, 600);
             this.Name = "Form1";
             this.Text = "DIP HW 2 - 孙展博";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);

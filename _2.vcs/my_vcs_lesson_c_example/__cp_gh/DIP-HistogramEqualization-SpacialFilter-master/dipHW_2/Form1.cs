@@ -26,7 +26,8 @@ namespace dipHW_2
         }
 
         // load and initialize from file
-        private void LoadBitmap(string path) {
+        private void LoadBitmap(string path)
+        {
             // read from file
             img = (Bitmap)Image.FromFile(path);
             pictureBox1.Image = img;
@@ -43,7 +44,8 @@ namespace dipHW_2
         }
 
         // build a new bitmap with byte data
-        private void BuildBitmap(int width, int height, byte[] newData) {
+        private void BuildBitmap(int width, int height, byte[] newData)
+        {
             // pay attention to the PixelFormat
             Bitmap newImg = new Bitmap(width, height, PixelFormat.Format8bppIndexed);
             // write in the byte data
@@ -81,7 +83,7 @@ namespace dipHW_2
             // for (int i = 0; i < width; ++i)
             //     for (int j = 0; j < height; ++j)
             //         newImg.SetPixel(i, j, Color.FromArgb(newData[j * width + i], newData[j * width + i], newData[j * width + i]));
-            
+
             // override the color palette to be grayscale
             ColorPalette tempPalette;
             using (Bitmap tempBmp = new Bitmap(1, 1, PixelFormat.Format8bppIndexed))
@@ -103,22 +105,26 @@ namespace dipHW_2
         }
 
         // calculate the histogram data
-        private void Cal_Hist() {
+        private void Cal_Hist()
+        {
             // width and height of the image
             int width = img.Width;
             int height = img.Height;
             histoData = new int[256];
             for (int i = 0; i < 256; ++i)
                 histoData[i] = 0;
-            for (int i = 0; i < height; ++i) {
-                for (int j = 0; j < width; ++j) {
+            for (int i = 0; i < height; ++i)
+            {
+                for (int j = 0; j < width; ++j)
+                {
                     histoData[srcData[i * width + j]]++;
-                } 
+                }
             }
         }
 
         // histogram equalization
-        private void Equalize_Hist(byte[] srcData) {
+        private void Equalize_Hist(byte[] srcData)
+        {
             // width and height and  pixels of the image
             int width = img.Width;
             int height = img.Height;
@@ -130,20 +136,23 @@ namespace dipHW_2
             // calculate the histo-qualization function
             int[] histoChange = new int[256];
             int sum = 0;
-            for (int i = 0; i < 256; ++i) {
+            for (int i = 0; i < 256; ++i)
+            {
                 sum += histoData[i];
                 histoChange[i] = 255 * sum / pixels;
             }
             // change the original image;
             for (int i = 0; i < height; ++i)
-                for (int j = 0; j < width; ++j) {
+                for (int j = 0; j < width; ++j)
+                {
                     tempData[i * width + j] = (byte)histoChange[srcData[i * width + j]];
                 }
             BuildBitmap(width, height, tempData);
         }
 
         // filter
-        private void Filter2d(byte[] srcData, int level, double[] filter) {
+        private void Filter2d(byte[] srcData, int level, double[] filter)
+        {
             // width and height of the image
             int width = img.Width;
             int height = img.Height;
@@ -152,16 +161,20 @@ namespace dipHW_2
             // generize the offset from current pixel
             int[] offset = new int[level * level];
             int temNum = 0;
-            for (int i = - level / 2; i <= level/2; ++i) {
-                for (int j = -level / 2; j <= level / 2; ++j) {
+            for (int i = -level / 2; i <= level / 2; ++i)
+            {
+                for (int j = -level / 2; j <= level / 2; ++j)
+                {
                     offset[temNum++] = i * width + j;
                 }
             }
             // generize new imgae data
             for (int i = 0; i < height; ++i)
-                for (int j = 0; j < width; ++j) {
+                for (int j = 0; j < width; ++j)
+                {
                     int temp = 0;
-                    for (int k = 0; k < level * level; ++k) {
+                    for (int k = 0; k < level * level; ++k)
+                    {
                         // zero padding
                         int pos = i * width + j + offset[k];
                         double data;
@@ -169,7 +182,8 @@ namespace dipHW_2
                         {
                             data = srcData[pos];
                         }
-                        else {
+                        else
+                        {
                             data = 0;
                         }
                         // applying filter
@@ -189,7 +203,7 @@ namespace dipHW_2
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 path = openFileDialog1.FileName;
-                LoadBitmap(path);                
+                LoadBitmap(path);
             }
         }
 
@@ -212,7 +226,8 @@ namespace dipHW_2
         private void button3_Click(object sender, EventArgs e)
         {
             if (pictureBox1.Image == null) return;
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK) {
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
                 img.Save(saveFileDialog1.FileName, ImageFormat.Bmp);
             }
         }
@@ -252,11 +267,17 @@ namespace dipHW_2
             TextBox[] filterBox = new TextBox[9] {
                 filter1, filter2, filter3, filter4, filter5, filter6, filter7, filter8, filter9};
             // initialize the filter
-            for (int i = 0; i < 9; ++i) {
+            for (int i = 0; i < 9; ++i)
+            {
                 filter[i] = Double.Parse(filterBox[i].Text);
             }
             // filter it
             Filter2d(srcData, 3, filter);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

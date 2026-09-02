@@ -51,6 +51,7 @@
             this.MinimumSize = new System.Drawing.Size(300, 320);
             this.Name = "Form2";
             this.Text = "直方图信息";
+            this.Load += new System.EventHandler(this.Form2_Load);
             this.ResumeLayout(false);
 
         }

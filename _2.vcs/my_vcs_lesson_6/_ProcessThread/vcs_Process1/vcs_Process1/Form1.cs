@@ -855,8 +855,10 @@ namespace vcs_Process1
         {
             //取得Process資訊
             //1. 當前進程資料, 取得目前的Process
-            //Process currentProcess = Process.GetCurrentProcess();  // 取得目前的process
-            //show_process_info(currentProcess);
+            Process currentProcess = Process.GetCurrentProcess();  // 取得目前的process
+            show_process_info(currentProcess);
+
+            return;
 
             //------------------------------  # 30個
 
@@ -950,16 +952,16 @@ namespace vcs_Process1
             richTextBox1.Text += "電腦名稱 : " + process.MachineName + "\n";
 
             richTextBox1.Text += "取得記憶體使用狀態\n";
-            richTextBox1.Text += "Min Working Set : " + ((double)process.MinWorkingSet).ToFileSize() + "\n";
-            richTextBox1.Text += "Max Working Set : " + ((double)process.MaxWorkingSet).ToFileSize() + "\n";
-            richTextBox1.Text += "Non-paged Memory Size : " + ((double)process.NonpagedSystemMemorySize64).ToFileSize() + "\n";
-            richTextBox1.Text += "Paged Memory Size : " + ((double)process.PagedMemorySize64).ToFileSize() + "\n";
-            richTextBox1.Text += "Paged System Memory Size : " + ((double)process.PagedSystemMemorySize64).ToFileSize() + "\n";
-            richTextBox1.Text += "Peak Paged Memory Size : " + ((double)process.PeakPagedMemorySize64).ToFileSize() + "\n";
-            richTextBox1.Text += "Peak Virtual Memory Size : " + ((double)process.PeakVirtualMemorySize64).ToFileSize() + "\n";
-            richTextBox1.Text += "Peak Working Set : " + ((double)process.PeakWorkingSet64).ToFileSize() + "\n";
-            richTextBox1.Text += "Virtual Memory Size : " + ((double)process.VirtualMemorySize64).ToFileSize() + "\n";
-            richTextBox1.Text += "Working Set : " + ((double)process.WorkingSet64).ToFileSize() + "\n";
+            richTextBox1.Text += "Min Working Set : " + process.MinWorkingSet.ToString() + "\n";
+            richTextBox1.Text += "Max Working Set : " + process.MaxWorkingSet.ToString() + "\n";
+            richTextBox1.Text += "Non-paged Memory Size : " + process.NonpagedSystemMemorySize64.ToString() + "\n";
+            richTextBox1.Text += "Paged Memory Size : " + process.PagedMemorySize64.ToString() + "\n";
+            richTextBox1.Text += "Paged System Memory Size : " + process.PagedSystemMemorySize64.ToString() + "\n";
+            richTextBox1.Text += "Peak Paged Memory Size : " + process.PeakPagedMemorySize64.ToString() + "\n";
+            richTextBox1.Text += "Peak Virtual Memory Size : " + process.PeakVirtualMemorySize64.ToString() + "\n";
+            richTextBox1.Text += "Peak Working Set : " + process.PeakWorkingSet64.ToString() + "\n";
+            richTextBox1.Text += "Virtual Memory Size : " + process.VirtualMemorySize64.ToString() + "\n";
+            richTextBox1.Text += "Working Set : " + process.WorkingSet64.ToString() + "\n";
 
             // 記憶體部分
             // 取得工作集 (Working Set) 記憶體大小，單位是位元組
@@ -1930,69 +1932,6 @@ namespace vcs_Process1
 
         //------------------------------------------------------------  # 60個
     }
-
-    //------------------------------------------------------------  # 60個
-
-    public static class MyExtensions
-    {
-        [DllImport("Shlwapi.dll", CharSet = CharSet.Auto)]
-        public static extern Int32 StrFormatByteSize(
-            long fileSize,
-            [MarshalAs(UnmanagedType.LPTStr)] StringBuilder buffer,
-            int bufferSize);
-
-        // Return a file size created by the StrFormatByteSize API function.
-        public static string ToFileSizeApi(this long file_size)
-        {
-            StringBuilder sb = new StringBuilder(20);
-            StrFormatByteSize(file_size, sb, 20);
-            return sb.ToString();
-        }
-
-        // Return a string describing the value as a file size.
-        // For example, 1.23 MB.
-        public static string ToFileSize(this double value)
-        {
-            string[] suffixes = { "bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" };
-            for (int i = 0; i < suffixes.Length; i++)
-            {
-                if (value <= (Math.Pow(1024, i + 1)))
-                {
-                    return ThreeNonZeroDigits(value / Math.Pow(1024, i)) + " " + suffixes[i];
-                }
-            }
-
-            return ThreeNonZeroDigits(value / Math.Pow(1024, suffixes.Length - 1)) + " " + suffixes[suffixes.Length - 1];
-        }
-
-        // Return the value formatted to include at most three
-        // non-zero digits and at most two digits after the
-        // decimal point. Examples:
-        //         1
-        //       123
-        //        12.3
-        //         1.23
-        //         0.12
-        private static string ThreeNonZeroDigits(double value)
-        {
-            if (value >= 100)
-            {
-                // No digits after the decimal.
-                return value.ToString("0,0");
-            }
-            else if (value >= 10)
-            {
-                // One digit after the decimal.
-                return value.ToString("0.0");
-            }
-            else
-            {
-                // Two digits after the decimal.
-                return value.ToString("0.00");
-            }
-        }
-    }
-
 
     //------------------------------------------------------------  # 60個
 
