@@ -323,6 +323,7 @@
             this.bt_files11.Name = "bt_files11";
             this.bt_files11.Size = new System.Drawing.Size(200, 60);
             this.bt_files11.TabIndex = 56;
+            this.bt_files11.Text = "test";
             this.bt_files11.UseVisualStyleBackColor = true;
             this.bt_files11.Click += new System.EventHandler(this.bt_files11_Click);
             // 
@@ -556,6 +557,7 @@
             this.bt_files19.Name = "bt_files19";
             this.bt_files19.Size = new System.Drawing.Size(200, 60);
             this.bt_files19.TabIndex = 72;
+            this.bt_files19.Text = "撈出所有圖片檔 並存成一個List";
             this.bt_files19.UseVisualStyleBackColor = true;
             this.bt_files19.Click += new System.EventHandler(this.bt_files19_Click);
             // 

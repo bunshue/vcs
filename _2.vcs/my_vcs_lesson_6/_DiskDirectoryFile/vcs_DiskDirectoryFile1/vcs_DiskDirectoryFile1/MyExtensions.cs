@@ -5,11 +5,9 @@ using System.Text;
 
 using System.Runtime.InteropServices;
 
-// See:
-//      Format a number of bytes in KB, MB, GB, and so forth in C#
-//      http://blog.csharphelper.com/2009/12/13/format-a-number-of-bytes-in-kb-mb-gb-and-so-forth-in-c.aspx
+// Format a number of bytes in KB, MB, GB, and so forth in C#
 
-namespace howto_thumbnail_web_table
+namespace vcs_DiskDirectoryFile1
 {
     public static class MyExtensions
     {
@@ -72,4 +70,3 @@ namespace howto_thumbnail_web_table
         }
     }
 }
-

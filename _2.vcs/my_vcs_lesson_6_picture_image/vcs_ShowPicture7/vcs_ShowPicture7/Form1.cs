@@ -36,46 +36,15 @@ namespace vcs_ShowPicture7
 
             //this.WindowState = FormWindowState.Maximized;
 
-            // Load the list of files.
-            FileNames = FindFiles(foldername, "*.bmp;*.png;*.jpg;*.tif;*.gif", false);
-
-            for (int i = 0; i < FileNames.Count; i++)
-            {
-                richTextBox1.Text += "get file \t" + FileNames[i] + "\n";
-            }
-            richTextBox1.Text += "共有 " + FileNames.Count.ToString() + " 個檔案\n";
-
             show_item_location();
+
             this.TopMost = true;
-        }
 
-        // See: Search for files that match multiple patterns in C#
-        //      http://csharphelper.com/blog/2015/06/find-files-that-match-multiple-patterns-in-c/
-        // Search for files matching the patterns.
-        // 搜尋符合格式的文件
-        private List<string> FindFiles(string fname, string patterns, bool search_subdirectories)
-        {
-            // Make the result list.
-            List<string> files = new List<string>();
-
-            // Get the patterns.
-            string[] pattern_array = patterns.Split(';');
-
-            // Search.
-            SearchOption search_option = SearchOption.TopDirectoryOnly;
-            if (search_subdirectories) search_option = SearchOption.AllDirectories;
-            foreach (string pattern in pattern_array)
-            {
-                foreach (string filename in Directory.GetFiles(fname, pattern, search_option))
-                {
-                    if (!files.Contains(filename)) files.Add(filename);
-                }
-            }
-
-            // 排序
-            files.Sort();
-
-            return files;
+            FileNames.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\poster_01.jpg");
+            FileNames.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\poster_02.jpg");
+            FileNames.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\poster_03.jpg");
+            FileNames.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\poster_04.jpg");
+            FileNames.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\poster_05.jpg");
         }
 
         void show_item_location()
@@ -86,8 +55,9 @@ namespace vcs_ShowPicture7
                 this.Size = new Size(200, 280);
                 richTextBox1.Visible = false;
             }
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -114,29 +84,17 @@ namespace vcs_ShowPicture7
 
         private void button3_Click(object sender, EventArgs e)
         {
-            int len = FileNames.Count;
-            int i;
-            for (i = 0; i < len; i++)
-            {
-                richTextBox1.Text += "i = " + i.ToString() + "\t" + FileNames[i] + "\n";
-
-            }
-
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             int cnt = 50;
-            int i;
-            for (i = 0; i < cnt; i++)
+            for (int i = 0; i < cnt; i++)
             {
                 button1_Click(sender, e);
                 Application.DoEvents();
                 System.Threading.Thread.Sleep(50);
-
-
             }
         }
     }
 }
-

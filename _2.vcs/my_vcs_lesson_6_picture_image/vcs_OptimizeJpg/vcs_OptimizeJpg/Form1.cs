@@ -48,7 +48,7 @@ namespace vcs_OptimizeJpg
 
             // See how big the file is.
             FileInfo file_info = new FileInfo(file_name);
-            lbl100.Text = file_info.Length.ToFileSizeApi();
+            lbl100.Text = file_info.Length.ToString();
 
             // Display the file at the selected compression.
             ShowImageSample();
@@ -86,7 +86,7 @@ namespace vcs_OptimizeJpg
 
             // See how big the file is.
             FileInfo file_info = new FileInfo(file_name);
-            lblFileSize.Text = file_info.Length.ToFileSizeApi();
+            lblFileSize.Text = file_info.Length.ToString();
         }
 
         // Return an ImageCodecInfo object for this mime type.
@@ -159,5 +159,3 @@ namespace vcs_OptimizeJpg
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-

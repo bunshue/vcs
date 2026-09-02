@@ -144,18 +144,18 @@ namespace vcs_Draw_Function1
             float tick_dy = -ticks[0].Y;
 
             // Make a thin Pen to use.
-            Pen pen = new Pen(Color.Red, 0);
-            Font font = new Font("Arial", 8);
+            Pen p = new Pen(Color.Red, 0);
+            Font f = new Font("Arial", 8);
             // Draw the X axis.
             g.Transform = transform;
-            pen.Color = Color.Black;
-            g.DrawLine(pen, wxmin, 0, wxmax, 0);
+            p.Color = Color.Black;
+            g.DrawLine(p, wxmin, 0, wxmax, 0);
             for (int x = (int)wxmin - 1; x <= wxmax; x++)
             {
-                g.DrawLine(pen, x, -tick_dy * 2, x, tick_dy * 2);
-                g.DrawLine(pen, x + 0.25f, -tick_dy, x + 0.25f, tick_dy);
-                g.DrawLine(pen, x + 0.50f, -tick_dy, x + 0.50f, tick_dy);
-                g.DrawLine(pen, x + 0.75f, -tick_dy, x + 0.75f, tick_dy);
+                g.DrawLine(p, x, -tick_dy * 2, x, tick_dy * 2);
+                g.DrawLine(p, x + 0.25f, -tick_dy, x + 0.25f, tick_dy);
+                g.DrawLine(p, x + 0.50f, -tick_dy, x + 0.50f, tick_dy);
+                g.DrawLine(p, x + 0.75f, -tick_dy, x + 0.75f, tick_dy);
             }
 
             // Label the X axis.
@@ -175,19 +175,19 @@ namespace vcs_Draw_Function1
             int index = 0;
             for (int x = (int)wxmin; x <= wxmax; x++)
             {
-                g.DrawString(x.ToString(), font, Brushes.Black, ints_array[index++], sf);
+                g.DrawString(x.ToString(), f, Brushes.Black, ints_array[index++], sf);
             }
 
             // Draw the Y axis.
             g.Transform = transform;
-            pen.Color = Color.Black;
-            g.DrawLine(pen, 0, wymin, 0, wymax);
+            p.Color = Color.Black;
+            g.DrawLine(p, 0, wymin, 0, wymax);
             for (int y = (int)wymin - 1; y <= wymax; y++)
             {
-                g.DrawLine(pen, -tick_dx * 2, y, tick_dx * 2, y);
-                g.DrawLine(pen, -tick_dx, y + 0.25f, tick_dx, y + 0.25f);
-                g.DrawLine(pen, -tick_dx, y + 0.50f, tick_dx, y + 0.50f);
-                g.DrawLine(pen, -tick_dx, y + 0.75f, tick_dx, y + 0.75f);
+                g.DrawLine(p, -tick_dx * 2, y, tick_dx * 2, y);
+                g.DrawLine(p, -tick_dx, y + 0.25f, tick_dx, y + 0.25f);
+                g.DrawLine(p, -tick_dx, y + 0.50f, tick_dx, y + 0.50f);
+                g.DrawLine(p, -tick_dx, y + 0.75f, tick_dx, y + 0.75f);
             }
 
             // Label the Y axis.
@@ -210,7 +210,7 @@ namespace vcs_Draw_Function1
             index = 0;
             for (float y = 0.25f; y < wymax; y += 0.25f)
             {
-                g.DrawString(y.ToString("0.00"), font, Brushes.Black, ints_array[index++], sf);
+                g.DrawString(y.ToString("0.00"), f, Brushes.Black, ints_array[index++], sf);
             }
 
             // Draw the curve.
@@ -223,8 +223,8 @@ namespace vcs_Draw_Function1
                 float y = F_normal1(x, one_over_2pi, mean, stddev, var);
                 points.Add(new PointF(x, y));
             }
-            pen.Color = Color.Red;
-            g.DrawLines(pen, points.ToArray());
+            p.Color = Color.Red;
+            g.DrawLines(p, points.ToArray());
             return bmp;
         }
 
@@ -390,18 +390,18 @@ namespace vcs_Draw_Function1
                 };
             Matrix transform = new Matrix(world, device_points);
 
-            Pen pen = new Pen(Color.Red, 0);
-            Font font = new Font("Arial", 8);
+            Pen p = new Pen(Color.Red, 0);
+            Font f = new Font("Arial", 8);
             // Draw the X axis.
             g.Transform = transform;
-            pen.Color = Color.Black;
-            g.DrawLine(pen, wxmin, 0, wxmax, 0);
+            p.Color = Color.Black;
+            g.DrawLine(p, wxmin, 0, wxmax, 0);
             for (int x = (int)wxmin; x <= wxmax; x++)
             {
-                g.DrawLine(pen, x, -0.05f, x, 0.05f);
-                g.DrawLine(pen, x + 0.25f, -0.025f, x + 0.25f, 0.025f);
-                g.DrawLine(pen, x + 0.50f, -0.025f, x + 0.50f, 0.025f);
-                g.DrawLine(pen, x + 0.75f, -0.025f, x + 0.75f, 0.025f);
+                g.DrawLine(p, x, -0.05f, x, 0.05f);
+                g.DrawLine(p, x + 0.25f, -0.025f, x + 0.25f, 0.025f);
+                g.DrawLine(p, x + 0.50f, -0.025f, x + 0.50f, 0.025f);
+                g.DrawLine(p, x + 0.75f, -0.025f, x + 0.75f, 0.025f);
             }
 
             // Label the X axis.
@@ -421,19 +421,19 @@ namespace vcs_Draw_Function1
             int index = 0;
             for (int x = (int)wxmin; x <= wxmax; x++)
             {
-                g.DrawString(x.ToString(), font, Brushes.Black, ints_array[index++], sf);
+                g.DrawString(x.ToString(), f, Brushes.Black, ints_array[index++], sf);
             }
 
             // Draw the Y axis.
             g.Transform = transform;
-            pen.Color = Color.Black;
-            g.DrawLine(pen, 0, wymin, 0, wymax);
+            p.Color = Color.Black;
+            g.DrawLine(p, 0, wymin, 0, wymax);
             for (int y = (int)wymin; y <= wymax; y++)
             {
-                g.DrawLine(pen, -0.2f, y, 0.2f, y);
-                g.DrawLine(pen, -0.1f, y + 0.25f, 0.1f, y + 0.25f);
-                g.DrawLine(pen, -0.1f, y + 0.50f, 0.1f, y + 0.50f);
-                g.DrawLine(pen, -0.1f, y + 0.75f, 0.1f, y + 0.75f);
+                g.DrawLine(p, -0.2f, y, 0.2f, y);
+                g.DrawLine(p, -0.1f, y + 0.25f, 0.1f, y + 0.25f);
+                g.DrawLine(p, -0.1f, y + 0.50f, 0.1f, y + 0.50f);
+                g.DrawLine(p, -0.1f, y + 0.75f, 0.1f, y + 0.75f);
             }
 
             // Label the Y axis.
@@ -453,7 +453,7 @@ namespace vcs_Draw_Function1
             index = 0;
             foreach (float y in new float[] { 0.25f, 0.5f, 0.75f, 1.0f })
             {
-                g.DrawString(y.ToString("0.00"), font, Brushes.Black, ints_array[index++], sf);
+                g.DrawString(y.ToString("0.00"), f, Brushes.Black, ints_array[index++], sf);
             }
 
             // Draw the curve.
@@ -467,8 +467,8 @@ namespace vcs_Draw_Function1
                 float y = F_normal2(x, one_over_2pi, mean, stddev, var);
                 points.Add(new PointF(x, y));
             }
-            pen.Color = Color.Red;
-            g.DrawLines(pen, points.ToArray());
+            p.Color = Color.Red;
+            g.DrawLines(p, points.ToArray());
             pictureBox1.Image = bmp;
         }
 
@@ -588,55 +588,38 @@ namespace vcs_Draw_Function1
         private void button1_Click(object sender, EventArgs e)
         {
             //畫XY平面
-            Graphics g;
-            Pen p;
-            SolidBrush sb;
-            Bitmap bitmap1;
+            //輸入兩點並劃出直線
 
-            int W = pictureBox1.ClientSize.Width;
-            int H = pictureBox1.ClientSize.Height;
-
-            //----開新的Bitmap----
-            bitmap1 = new Bitmap(W, H);
-            //----使用上面的Bitmap畫圖----
-            g = Graphics.FromImage(bitmap1);
-
-            p = new Pen(Color.Red, 10);     // 設定畫筆為紅色、粗細為 10 點。
-            sb = new SolidBrush(Color.Blue);
-
-            g.Clear(Color.White);
-
-            float ratio_x, ratio_y;
-            float w, h;
-            float x0, x1, y0, y1;
+            // X,Y顯示範圍為-10~10
+            Random rand = new Random();
+            float x0 = (float)rand.Next(-100, 100) / 10;
+            float y0 = (float)rand.Next(-100, 100) / 10;
+            float x1 = (float)rand.Next(-100, 100) / 10;
+            float y1 = (float)rand.Next(-100, 100) / 10;
 
             //----畫筆顏色----
-            p = new Pen(Color.Black);
-            sb = new SolidBrush(p.Color);
+            Pen p = new Pen(Color.Black);
+            SolidBrush sb = new SolidBrush(p.Color);
             //----取得picturebox寬度與高度----
-            w = pictureBox1.Width;
-            h = pictureBox1.Height;
-            //----是否有上一次的圖片，如果有就清除----
-            if (pictureBox1.Image != null)
-                pictureBox1.Image = null;
-            //if (bitmap1 != null)
-            //  bitmap1.Dispose();
-            //----轉換使用者輸入的資料----
-            x0 = (float)10;
-            y0 = (float)10;
-            x1 = (float)-5;
-            y1 = (float)-9;
+            float w = pictureBox1.Width;
+            float h = pictureBox1.Height;
+
             //----計算放大倍率----
-            ratio_x = (w - 50) / 20;
-            ratio_y = (h - 50) / 20;
+            float ratio_x = (w - 50) / 20;
+            float ratio_y = (h - 50) / 20;
+
             //----開新的Bitmap----
-            bitmap1 = new Bitmap((int)w, (int)h);
+            Bitmap bitmap1 = new Bitmap((int)w, (int)h);
+
             //----使用上面的Bitmap畫圖----
-            g = Graphics.FromImage(bitmap1);
+            Graphics g = Graphics.FromImage(bitmap1);
+
             //----清除Bitmap為某顏色----
             g.Clear(Color.White);
+
             //----更改原點位置----
             g.TranslateTransform(pictureBox1.Width / 2, pictureBox1.Height / 2);
+
             //----畫坐標軸----
             g.DrawLine(p, -1000, 0, 1000, 0);//x軸
             g.DrawLine(p, 0, -1000, 0, 1000);//y軸
@@ -654,18 +637,21 @@ namespace vcs_Draw_Function1
                 if (i != 0)
                     g.DrawString(i.ToString(), this.Font, sb, 15, i * ratio_y - 8);
             }
+
             //----換顏色----
             p = new Pen(Color.Red);
             sb = new SolidBrush(p.Color);
+
             //----畫線----
             g.DrawLine(p, x0 * ratio_x, -y0 * ratio_y, x1 * ratio_x, -y1 * ratio_y);
+
             //----畫兩點----
             g.FillEllipse(sb, new RectangleF(x0 * ratio_x - 2.5f, -y0 * ratio_y - 2.5f, 5, 5));
             g.FillEllipse(sb, new RectangleF(x1 * ratio_x - 2.5f, -y1 * ratio_y - 2.5f, 5, 5));
+
             //----釋放Graphics資源----
-            //g.Dispose();
-            //----將Bitmap顯示在Picture上
-            g.ResetTransform();
+            g.Dispose();
+
             pictureBox1.Image = bitmap1;
         }
 
@@ -1025,38 +1011,38 @@ namespace vcs_Draw_Function1
             Graphics g = Graphics.FromImage(bitmap1);
             g.Clear(Color.White);
             Font f = new Font(Font.Name, 11);
-            SolidBrush brush = new SolidBrush(Color.Black);
-            Pen pen = new Pen(Color.Black);
-            pen.EndCap = LineCap.ArrowAnchor;
-            pen.DashStyle = DashStyle.Solid;
+            SolidBrush sb = new SolidBrush(Color.Black);
+            Pen p = new Pen(Color.Black);
+            p.EndCap = LineCap.ArrowAnchor;
+            p.DashStyle = DashStyle.Solid;
             //坐标轴
             Point pCenter = new Point(300, 260);
-            g.DrawLine(pen, new Point(pCenter.X - 200, pCenter.Y), new Point(pCenter.X + 200, pCenter.Y));//x
-            g.DrawLine(pen, new Point(pCenter.X, pCenter.Y + 200), new Point(pCenter.X, pCenter.Y - 200));//y            
+            g.DrawLine(p, new Point(pCenter.X - 200, pCenter.Y), new Point(pCenter.X + 200, pCenter.Y));//x
+            g.DrawLine(p, new Point(pCenter.X, pCenter.Y + 200), new Point(pCenter.X, pCenter.Y - 200));//y            
             //轴标格
             int iX = 30;
             for (int i = 0; i < 5; i++)
             {
                 //零點向左
                 g.DrawLine(Pens.Black, new Point(pCenter.X - iX * i, pCenter.Y), new Point(pCenter.X - iX * i, pCenter.Y - 4));//x
-                g.DrawString((-i).ToString(), f, brush, new PointF(pCenter.X - iX * i, pCenter.Y));
+                g.DrawString((-i).ToString(), f, sb, new PointF(pCenter.X - iX * i, pCenter.Y));
 
                 //零點向右
                 g.DrawLine(Pens.Black, new Point(pCenter.X + iX * i, pCenter.Y), new Point(pCenter.X + iX * i, pCenter.Y - 4));//x
-                g.DrawString(i.ToString(), f, brush, new PointF(pCenter.X + iX * i, pCenter.Y));
+                g.DrawString(i.ToString(), f, sb, new PointF(pCenter.X + iX * i, pCenter.Y));
 
                 //零點向上
                 g.DrawLine(Pens.Black, new Point(pCenter.X, pCenter.Y - iX * i), new Point(pCenter.X + 4, pCenter.Y - iX * i));//y
-                g.DrawString(i.ToString(), f, brush, new PointF(pCenter.X, pCenter.Y - iX * i));
+                g.DrawString(i.ToString(), f, sb, new PointF(pCenter.X, pCenter.Y - iX * i));
 
                 //零點向下
                 g.DrawLine(Pens.Black, new Point(pCenter.X, pCenter.Y + iX * i), new Point(pCenter.X + 4, pCenter.Y + iX * i));//y
-                g.DrawString((-i).ToString(), f, brush, new PointF(pCenter.X, pCenter.Y + iX * i));
+                g.DrawString((-i).ToString(), f, sb, new PointF(pCenter.X, pCenter.Y + iX * i));
             }
 
-            g.DrawString("x", f, brush, new PointF(pCenter.X + 200, pCenter.Y));
-            g.DrawString("y", f, brush, new PointF(pCenter.X, pCenter.Y - 200));
-            g.DrawString("0", f, brush, new PointF(pCenter.X, pCenter.Y));
+            g.DrawString("x", f, sb, new PointF(pCenter.X + 200, pCenter.Y));
+            g.DrawString("y", f, sb, new PointF(pCenter.X, pCenter.Y - 200));
+            g.DrawString("0", f, sb, new PointF(pCenter.X, pCenter.Y));
             //定义比例尺
             int BX = 4;
             int BY = 4;
@@ -1066,13 +1052,13 @@ namespace vcs_Draw_Function1
             Point new4 = getNewPoint(new Point(500, -300), pCenter, BX, BY);
             //g.DrawLine(Pens.Black, pCenter, new1);
             g.DrawArc(Pens.Black, new1.X, new1.Y, 1, 1, 45.0F, 360.0F);
-            g.DrawString("p1", f, brush, new PointF(new1.X, new1.Y));
+            g.DrawString("p1", f, sb, new PointF(new1.X, new1.Y));
             g.DrawArc(Pens.Black, new2.X, new2.Y, 1, 1, 45.0F, 360.0F);
-            g.DrawString("p2", f, brush, new PointF(new2.X, new2.Y));
+            g.DrawString("p2", f, sb, new PointF(new2.X, new2.Y));
             g.DrawArc(Pens.Black, new3.X, new3.Y, 1, 1, 45.0F, 360.0F);
-            g.DrawString("p3", f, brush, new PointF(new3.X, new3.Y));
+            g.DrawString("p3", f, sb, new PointF(new3.X, new3.Y));
             g.DrawArc(Pens.Black, new4.X, new4.Y, 1, 1, 45.0F, 360.0F);
-            g.DrawString("p4", f, brush, new PointF(new4.X, new4.Y));
+            g.DrawString("p4", f, sb, new PointF(new4.X, new4.Y));
             g.DrawLine(Pens.Black, new1, new2);
             g.DrawLine(Pens.Black, new2, new3);
             g.DrawLine(Pens.Black, new3, new4);
@@ -1085,71 +1071,6 @@ namespace vcs_Draw_Function1
 
         private void button8_Click(object sender, EventArgs e)
         {
-            //輸入兩點並劃出直線
-
-            // X,Y顯示範圍為-10~10
-            Random rand = new Random();
-            float x0 = (float)rand.Next(-100, 100) / 10;
-            float y0 = (float)rand.Next(-100, 100) / 10;
-            float x1 = (float)rand.Next(-100, 100) / 10;
-            float y1 = (float)rand.Next(-100, 100) / 10;
-
-            float ratio_x, ratio_y;
-            float wid, hei;
-            Bitmap bmp;
-            Graphics g;
-            Pen pen;
-            SolidBrush brush;
-
-            //----畫筆顏色----
-            pen = new Pen(Color.Black);
-            brush = new SolidBrush(pen.Color);
-            //----取得picturebox寬度與高度----
-            wid = pictureBox1.Width;
-            hei = pictureBox1.Height;
-            richTextBox1.Text += "W = " + wid.ToString() + "\n";
-            richTextBox1.Text += "H = " + hei.ToString() + "\n";
-
-            //----計算放大倍率----
-            ratio_x = (wid - 50) / 20;
-            ratio_y = (hei - 50) / 20;
-            //----開新的Bitmap----
-            bmp = new Bitmap((int)wid, (int)hei);
-            //----使用上面的Bitmap畫圖----
-            g = Graphics.FromImage(bmp);
-            //----清除Bitmap為某顏色----
-            g.Clear(Color.White);
-            //----更改原點位置----
-            g.TranslateTransform(pictureBox1.Width / 2, pictureBox1.Height / 2);
-            //----畫坐標軸----
-            g.DrawLine(pen, -1000, 0, 1000, 0);//x軸
-            g.DrawLine(pen, 0, -1000, 0, 1000);//y軸
-            g.DrawString("X", this.Font, brush, wid / 2 - 20, 20);
-            g.DrawString("Y", this.Font, brush, 20, -hei / 2);
-            g.DrawLine(pen, wid / 2, 0, wid / 2 - 10, 5);//x軸箭頭
-            g.DrawLine(pen, wid / 2, 0, wid / 2 - 10, -5);
-            g.DrawLine(pen, 0, -hei / 2, 5, -hei / 2 + 10);//y軸箭頭
-            g.DrawLine(pen, 0, -hei / 2, -5, -hei / 2 + 10);
-            for (int i = -10; i <= 10; i++)//畫X Y軸座標位置
-            {
-                g.DrawLine(pen, i * ratio_x, -5, i * ratio_x, 5);
-                g.DrawString(i.ToString().PadLeft(2, ' '), this.Font, brush, i * ratio_x - 9, 10);
-                g.DrawLine(pen, -5, i * ratio_y, 5, i * ratio_y);
-                if (i != 0)
-                    g.DrawString(i.ToString(), this.Font, brush, 15, i * ratio_y - 8);
-            }
-            //----換顏色----
-            pen = new Pen(Color.Red);
-            brush = new SolidBrush(pen.Color);
-            //----畫線----
-            g.DrawLine(pen, x0 * ratio_x, -y0 * ratio_y, x1 * ratio_x, -y1 * ratio_y);
-            //----畫兩點----
-            g.FillEllipse(brush, new RectangleF(x0 * ratio_x - 2.5f, -y0 * ratio_y - 2.5f, 5, 5));
-            g.FillEllipse(brush, new RectangleF(x1 * ratio_x - 2.5f, -y1 * ratio_y - 2.5f, 5, 5));
-            //----釋放Graphics資源----
-            g.Dispose();
-            //----將Bitmap顯示在Picture上
-            pictureBox1.Image = bmp;
         }
 
         //------------------------------------------------------------  # 60個

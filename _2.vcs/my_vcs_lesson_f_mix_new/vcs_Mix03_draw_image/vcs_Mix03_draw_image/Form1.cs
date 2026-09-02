@@ -133,55 +133,9 @@ namespace vcs_Mix03_draw_image
 
         //------------------------------------------------------------  # 60個
 
-        List<String> filenames = new List<String>();
-        //多層 且指明副檔名
-        public void GetAllFiles(string foldername)
-        {
-            DirectoryInfo di = new DirectoryInfo(foldername);
-            //richTextBox1.Text += "資料夾 : " + di.FullName + "\n";
-            FileSystemInfo[] fileinfo = di.GetFileSystemInfos();  // 獲取所有的文件
-            foreach (FileSystemInfo fi in fileinfo)  // 遍歷獲取到的文件
-            {
-                if (fi is DirectoryInfo)
-                {
-                    GetAllFiles(((DirectoryInfo)fi).FullName);
-                }
-                else
-                {
-                    string fullname = fi.FullName;
-                    string shortname = fi.Name;
-                    string ext = fi.Extension.ToLower();
-                    string forename = shortname.Substring(0, shortname.Length - ext.Length);    //前檔名
-
-                    if (ext == ".jpg" || ext == ".jpeg" || ext == ".bmp" || ext == ".png" || ext == ".gif")
-                    {
-                        //richTextBox1.Text += "長檔名: " + fullname + "\t副檔名: " + ext + "\n";
-                        //richTextBox1.Text += "短檔名: " + shortname + "\n";
-                        //richTextBox1.Text += "前檔名: " + forename + "\n";
-                        filenames.Add(fullname);
-                    }
-                }
-            }
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //撈出所有圖片檔 並存成一個List
-
-            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_book_magazine";
-
-            filenames.Clear();
-
-            GetAllFiles(foldername);
-            int len = filenames.Count;
-            richTextBox1.Text += "len = " + len.ToString() + "\n";
-
-            for (int i = 0; i < len; i++)
-            {
-                richTextBox1.Text += filenames[i] + "\n";
-            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -406,19 +360,17 @@ namespace vcs_Mix03_draw_image
         {
             // Make the bitmap.
             Bitmap iml_bm = new Bitmap(iml.ImageSize.Width, iml.ImageSize.Height);
-            using (Graphics gr = Graphics.FromImage(iml_bm))
-            {
-                gr.Clear(Color.Transparent);
-                gr.InterpolationMode = InterpolationMode.High;
+            Graphics g = Graphics.FromImage(iml_bm);
+            g.Clear(Color.Transparent);
+            g.InterpolationMode = InterpolationMode.High;
 
-                // See where we need to draw the image to scale it properly.
-                RectangleF source_rect = new RectangleF(0, 0, bm.Width, bm.Height);
-                RectangleF dest_rect = new RectangleF(0, 0, iml_bm.Width, iml_bm.Height);
-                dest_rect = ScaleRect(source_rect, dest_rect);
+            // See where we need to draw the image to scale it properly.
+            RectangleF source_rect = new RectangleF(0, 0, bm.Width, bm.Height);
+            RectangleF dest_rect = new RectangleF(0, 0, iml_bm.Width, iml_bm.Height);
+            dest_rect = ScaleRect(source_rect, dest_rect);
 
-                // Draw the image.
-                gr.DrawImage(bm, dest_rect, source_rect, GraphicsUnit.Pixel);
-            }
+            // Draw the image.
+            g.DrawImage(bm, dest_rect, source_rect, GraphicsUnit.Pixel);
 
             // Add the image to the ImageList.
             iml.Images.Add(key, iml_bm);
@@ -536,14 +488,16 @@ namespace vcs_Mix03_draw_image
         }
 
         // Draw the indicated star in the rectangle.
-        private void DrawStar(Graphics gr, Pen the_pen, Brush the_brush, int num_points, int skip, RectangleF rect)
+        private void DrawStar(Graphics g, Pen p, Brush b, int num_points, int skip, RectangleF rect)
         {
+            richTextBox1.Text += "N = " + num_points.ToString() + ", S = " + skip.ToString() + ", " + rect.ToString() + "\n";
+
             // Get the star's points.
             PointF[] star_points = MakeStarPoints(-Math.PI / 2, num_points, skip, rect);
 
             // Draw the star.
-            gr.FillPolygon(the_brush, star_points);
-            gr.DrawPolygon(the_pen, star_points);
+            g.FillPolygon(b, star_points);
+            g.DrawPolygon(p, star_points);
         }
 
         // Generate the points for a star.
@@ -684,7 +638,6 @@ namespace vcs_Mix03_draw_image
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
-            // Draw the star.
             DrawStar(e.Graphics, Pens.Red, Brushes.Yellow, (int)nudPoints.Value, (int)nudSkip.Value, pictureBox_star.ClientRectangle);
         }
 

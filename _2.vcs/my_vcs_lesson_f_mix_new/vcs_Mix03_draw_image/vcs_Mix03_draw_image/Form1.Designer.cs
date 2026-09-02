@@ -54,8 +54,6 @@
             this.button19 = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtRadius = new System.Windows.Forms.TextBox();
             this.nudPoints = new System.Windows.Forms.NumericUpDown();
             this.nudSkip = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
@@ -127,7 +125,6 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(200, 60);
             this.button1.TabIndex = 98;
-            this.button1.Text = "撈出所有圖片檔 並存成一個List";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -312,8 +309,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.txtRadius);
             this.groupBox1.Controls.Add(this.nudPoints);
             this.groupBox1.Controls.Add(this.nudSkip);
             this.groupBox1.Controls.Add(this.label2);
@@ -325,28 +320,7 @@
             this.groupBox1.Size = new System.Drawing.Size(194, 142);
             this.groupBox1.TabIndex = 128;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "預覽列印 Star";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label3.Location = new System.Drawing.Point(20, 92);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(81, 19);
-            this.label3.TabIndex = 53;
-            this.label3.Text = "Diameter:";
-            // 
-            // txtRadius
-            // 
-            this.txtRadius.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.txtRadius.Location = new System.Drawing.Point(105, 89);
-            this.txtRadius.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtRadius.Name = "txtRadius";
-            this.txtRadius.Size = new System.Drawing.Size(60, 30);
-            this.txtRadius.TabIndex = 54;
-            this.txtRadius.Text = "100";
-            this.txtRadius.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.groupBox1.Text = "Star";
             // 
             // nudPoints
             // 
@@ -497,8 +471,6 @@
         private System.Windows.Forms.Button button19;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtRadius;
         private System.Windows.Forms.NumericUpDown nudPoints;
         private System.Windows.Forms.NumericUpDown nudSkip;
         private System.Windows.Forms.Label label2;

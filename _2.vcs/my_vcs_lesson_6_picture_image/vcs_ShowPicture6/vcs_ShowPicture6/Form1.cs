@@ -13,8 +13,6 @@ namespace vcs_ShowPicture6
 {
     public partial class Form1 : Form
     {
-                            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony1";
-
         List<String> filenames = new List<String>();
 
         public Form1()
@@ -26,20 +24,11 @@ namespace vcs_ShowPicture6
         {
             this.WindowState = FormWindowState.Maximized;
 
-                                                    if (Directory.Exists(foldername) == false)
-                                                    {
-                                                        richTextBox1.Text += "圖片資料夾不存在, 離開\n";
-                                                        return;
-                                                    }
-
-                                                    // Load the list of files.
-                                                    filenames = FindFiles(foldername, "*.bmp;*.png;*.jpg;*.tif;*.gif", false);
-
-                                                    for (int i = 0; i < filenames.Count; i++)
-                                                    {
-                                                        richTextBox1.Text += "get file \t" + filenames[i] + "\n";
-                                                    }
-                                                    richTextBox1.Text += "共有 " + filenames.Count.ToString() + " 個檔案\n";
+            filenames.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony1\p1.jpg");
+            filenames.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony1\p2.jpg");
+            filenames.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony1\p3.jpg");
+            filenames.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony1\p4.jpg");
+            filenames.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony1\p5.jpg");
 
             const int wid = 800;
             const int hgt = 300;
@@ -116,39 +105,5 @@ namespace vcs_ShowPicture6
 
             //要反推回原本那個pbox
         }
-
-
-
-
-                                                    // See: Search for files that match multiple patterns in C#
-                                                    //      http://csharphelper.com/blog/2015/06/find-files-that-match-multiple-patterns-in-c/
-                                                    // Search for files matching the patterns.
-                                                    private List<string> FindFiles(string fname, string patterns, bool search_subdirectories)
-                                                    {
-                                                        // Make the result list.
-                                                        List<string> files = new List<string>();
-
-                                                        // Get the patterns.
-                                                        string[] pattern_array = patterns.Split(';');
-
-                                                        // Search.
-                                                        SearchOption search_option = SearchOption.TopDirectoryOnly;
-                                                        if (search_subdirectories) search_option = SearchOption.AllDirectories;
-                                                        foreach (string pattern in pattern_array)
-                                                        {
-                                                            foreach (string filename in Directory.GetFiles(fname, pattern, search_option))
-                                                            {
-                                                                if (!files.Contains(filename)) files.Add(filename);
-                                                            }
-                                                        }
-
-                                                        // Sort.
-                                                        files.Sort();
-
-                                                        // Return the result.
-                                                        return files;
-                                                    }
-
-
     }
 }
