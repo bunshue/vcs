@@ -15,14 +15,19 @@ namespace dipHW_2
 {
     public partial class Form1 : Form
     {
-        string path;
         private Bitmap img;
         byte[] srcData;
         int[] histoData;
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
 
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            LoadBitmap(filename);
         }
 
         // load and initialize from file
@@ -76,7 +81,6 @@ namespace dipHW_2
             // accurate way
             Marshal.Copy(scanData, 0, srcPtr, height * stride);
             newImg.UnlockBits(bitmapData);
-
 
             // another method:
             // user setPixel to set color to every pixel
@@ -143,10 +147,12 @@ namespace dipHW_2
             }
             // change the original image;
             for (int i = 0; i < height; ++i)
+            {
                 for (int j = 0; j < width; ++j)
                 {
                     tempData[i * width + j] = (byte)histoChange[srcData[i * width + j]];
                 }
+            }
             BuildBitmap(width, height, tempData);
         }
 
@@ -170,6 +176,7 @@ namespace dipHW_2
             }
             // generize new imgae data
             for (int i = 0; i < height; ++i)
+            {
                 for (int j = 0; j < width; ++j)
                 {
                     int temp = 0;
@@ -190,27 +197,28 @@ namespace dipHW_2
                         temp += (int)(data * filter[k]);
                     }
                     // formatting into byte
-                    if (temp < 0) temp = 0;
-                    if (temp > 255) temp = 255;
+                    if (temp < 0)
+                    {
+                        temp = 0;
+                    }
+                    if (temp > 255)
+                    {
+                        temp = 255;
+                    }
                     tempData[i * width + j] = (byte)temp;
                 }
+            }
             // write the new image
             BuildBitmap(width, height, tempData);
-        }
-        // open an image
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                path = openFileDialog1.FileName;
-                LoadBitmap(path);
-            }
         }
 
         // histogram equation
         private void button2_Click(object sender, EventArgs e)
         {
-            if (pictureBox1.Image == null) return;
+            if (pictureBox1.Image == null)
+            {
+                return;
+            }
             // histogram equalization
             Equalize_Hist(srcData);
         }
@@ -218,18 +226,7 @@ namespace dipHW_2
         // reload the image
         private void button4_Click(object sender, EventArgs e)
         {
-            if (path == "") return;
-            LoadBitmap(path);
-        }
-
-        // save to file
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (pictureBox1.Image == null) return;
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                img.Save(saveFileDialog1.FileName, ImageFormat.Bmp);
-            }
+            LoadBitmap(filename);
         }
 
         // show histogram
@@ -246,7 +243,10 @@ namespace dipHW_2
         // average filter
         private void button5_Click(object sender, EventArgs e)
         {
-            if (pictureBox1.Image == null) return;
+            if (pictureBox1.Image == null)
+            {
+                return;
+            }
             int level = Int32.Parse(textBox3.Text);
             // calculate the average 
             double[] filter = new double[level * level];
@@ -261,7 +261,10 @@ namespace dipHW_2
         // customized 3*3 filter
         private void button7_Click(object sender, EventArgs e)
         {
-            if (pictureBox1.Image == null) return;
+            if (pictureBox1.Image == null)
+            {
+                return;
+            }
             double[] filter = new double[9];
             // get all the customed filter values
             TextBox[] filterBox = new TextBox[9] {
@@ -274,10 +277,14 @@ namespace dipHW_2
             // filter it
             Filter2d(srcData, 3, filter);
         }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+
