@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;  // for Marshal
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -36,11 +36,11 @@ namespace dipHW_2
             // read from file
             img = (Bitmap)Image.FromFile(path);
             pictureBox1.Image = img;
+
             label1.Text = img.Width + "*" + img.Height;
 
             // read byte data
-            BitmapData bitmapData = img.LockBits(new Rectangle(0, 0, img.Width, img.Height),
-                ImageLockMode.ReadWrite, PixelFormat.Format8bppIndexed);
+            BitmapData bitmapData = img.LockBits(new Rectangle(0, 0, img.Width, img.Height), ImageLockMode.ReadWrite, PixelFormat.Format8bppIndexed);
             srcData = new byte[img.Width * img.Height];
             IntPtr srcPtr = bitmapData.Scan0;
             Marshal.Copy(srcPtr, srcData, 0, img.Width * img.Height);
@@ -54,8 +54,7 @@ namespace dipHW_2
             // pay attention to the PixelFormat
             Bitmap newImg = new Bitmap(width, height, PixelFormat.Format8bppIndexed);
             // write in the byte data
-            BitmapData bitmapData = newImg.LockBits(new Rectangle(0, 0, width, height),
-                ImageLockMode.ReadWrite, PixelFormat.Format8bppIndexed);
+            BitmapData bitmapData = newImg.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format8bppIndexed);
             IntPtr srcPtr = bitmapData.Scan0;
 
             // width of stride, which sometimes can be different from width
@@ -115,8 +114,12 @@ namespace dipHW_2
             int width = img.Width;
             int height = img.Height;
             histoData = new int[256];
+
             for (int i = 0; i < 256; ++i)
+            {
                 histoData[i] = 0;
+            }
+
             for (int i = 0; i < height; ++i)
             {
                 for (int j = 0; j < width; ++j)
@@ -156,65 +159,11 @@ namespace dipHW_2
             BuildBitmap(width, height, tempData);
         }
 
-        // filter
-        private void Filter2d(byte[] srcData, int level, double[] filter)
-        {
-            // width and height of the image
-            int width = img.Width;
-            int height = img.Height;
-            // array to hold the new data
-            byte[] tempData = new byte[width * height];
-            // generize the offset from current pixel
-            int[] offset = new int[level * level];
-            int temNum = 0;
-            for (int i = -level / 2; i <= level / 2; ++i)
-            {
-                for (int j = -level / 2; j <= level / 2; ++j)
-                {
-                    offset[temNum++] = i * width + j;
-                }
-            }
-            // generize new imgae data
-            for (int i = 0; i < height; ++i)
-            {
-                for (int j = 0; j < width; ++j)
-                {
-                    int temp = 0;
-                    for (int k = 0; k < level * level; ++k)
-                    {
-                        // zero padding
-                        int pos = i * width + j + offset[k];
-                        double data;
-                        if (pos >= 0 && pos < height * width)
-                        {
-                            data = srcData[pos];
-                        }
-                        else
-                        {
-                            data = 0;
-                        }
-                        // applying filter
-                        temp += (int)(data * filter[k]);
-                    }
-                    // formatting into byte
-                    if (temp < 0)
-                    {
-                        temp = 0;
-                    }
-                    if (temp > 255)
-                    {
-                        temp = 255;
-                    }
-                    tempData[i * width + j] = (byte)temp;
-                }
-            }
-            // write the new image
-            BuildBitmap(width, height, tempData);
-        }
-
         // histogram equation
         private void button2_Click(object sender, EventArgs e)
         {
+            //顯示均衡化
+
             if (pictureBox1.Image == null)
             {
                 return;
@@ -232,51 +181,20 @@ namespace dipHW_2
         // show histogram
         private void button6_Click(object sender, EventArgs e)
         {
-            if (pictureBox1.Image == null) return;
+            //顯示直方圖
+            if (pictureBox1.Image == null)
+            {
+                return;
+            }
+
             // calculate the histogram data
             Cal_Hist();
+
             // show the histogram in a new form
             Form2 form2 = new Form2(histoData);
             form2.Show();
         }
 
-        // average filter
-        private void button5_Click(object sender, EventArgs e)
-        {
-            if (pictureBox1.Image == null)
-            {
-                return;
-            }
-            int level = Int32.Parse(textBox3.Text);
-            // calculate the average 
-            double[] filter = new double[level * level];
-            for (int i = 0; i < level * level; ++i)
-            {
-                filter[i] = 255.0 / (double)(level * level);
-            }
-            // filter it
-            Filter2d(srcData, level, filter);
-        }
-
-        // customized 3*3 filter
-        private void button7_Click(object sender, EventArgs e)
-        {
-            if (pictureBox1.Image == null)
-            {
-                return;
-            }
-            double[] filter = new double[9];
-            // get all the customed filter values
-            TextBox[] filterBox = new TextBox[9] {
-                filter1, filter2, filter3, filter4, filter5, filter6, filter7, filter8, filter9};
-            // initialize the filter
-            for (int i = 0; i < 9; ++i)
-            {
-                filter[i] = Double.Parse(filterBox[i].Text);
-            }
-            // filter it
-            Filter2d(srcData, 3, filter);
-        }
     }
 }
 

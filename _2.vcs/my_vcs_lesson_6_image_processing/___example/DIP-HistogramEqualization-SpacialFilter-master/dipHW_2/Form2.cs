@@ -30,6 +30,7 @@ namespace dipHW_2
                 g.DrawLine(pen, i, 260, i, 260 - 256 * data[i] / max);
             }
         }
+
         public Form2(int[] histData)
         {
             InitializeComponent();

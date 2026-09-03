@@ -1,5 +1,35 @@
 ﻿
 
+//------------------------------------------------------------  # 60個
+
+
+
+//------------------------------------------------------------  # 60個
+
+
+
+//------------------------------------------------------------  # 60個
+
+
+
+//------------------------------------------------------------  # 60個
+
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            RectangleF smiley_rect = new RectangleF(-1, -1, 2, 2);
+            e.Graphics.ResetTransform();
+            e.Graphics.TranslateTransform(0, 0);
+            e.Graphics.ScaleTransform(100, 100, MatrixOrder.Append);
+            e.Graphics.TranslateTransform(200, 200, MatrixOrder.Append);
+            DrawSomething(e.Graphics);
+        }
+
+        private void DrawSomething(Graphics g)
+        {
+            //原本是畫在 (-1, -1)-(1, 1)
+            g.DrawEllipse(new Pen(Color.Red, 0), -1, -1, 2, 2);
+            g.DrawRectangle(new Pen(Color.Red, 0), -1, -1, 2, 2);
+        }
 
 //------------------------------------------------------------  # 60個
 
@@ -21,25 +51,6 @@
         }
 
 //------------------------------------------------------------  # 60個
-
-/*
-//创建目录
-string dir = Path.GetDirectoryName(fileSaveUrl);
-
-if (!Directory.Exists(dir))
-	Directory.CreateDirectory(dir);
-*/
-
-if (Directory.Exists(foldername) == false)
-{
-	Directory.CreateDirectory(foldername);
-}
-
-
-if (File.Exists(this.fileName))
-{
-	File.Delete(this.fileName);
-}
 
 
 //------------------------------------------------------------  # 60個
@@ -762,10 +773,6 @@ lstJob.SelectedIndex = JobIndex;
 string path = AppDomain.CurrentDomain.BaseDirectory;
 path = Path.Combine(path, "Logger3_\\" + DateTime.Now.ToString("yy-MM-dd"));
 
-if (!Directory.Exists(path))
-{
-	Directory.CreateDirectory(path);
-}
 string fileFullName = Path.Combine(path, string.Format("{0}.log", DateTime.Now.ToString("yyMMdd-HHmmss")));
 
 string myPath = Application.StartupPath;
@@ -777,15 +784,6 @@ if (myPath == "" || myName == "")
 string Year = DateTime.Now.Year.ToString();
 string Month = DateTime.Now.Month.ToString().PadLeft(2, '0');
 string Day = DateTime.Now.Day.ToString().PadLeft(2, '0');
-
-//年月日文件夾是否存在，不存在則建立
-if (!Directory.Exists(myPath + "\\LogFiles1\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day))
-{
-	Directory.CreateDirectory(myPath + "\\LogFiles1\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day);
-}
-
-//寫入日志UNDO,Exception has not been handle
-string log_filename1 = myPath + "\\LogFiles1\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day + "\\" + myName;
 
 //------------------------------------------------------------  # 60個
 
