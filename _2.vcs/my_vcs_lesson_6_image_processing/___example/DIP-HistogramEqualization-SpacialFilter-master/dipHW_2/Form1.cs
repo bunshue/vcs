@@ -15,7 +15,7 @@ namespace dipHW_2
 {
     public partial class Form1 : Form
     {
-        private Bitmap img;
+        private Bitmap bitmap1;
         byte[] srcData;
         int[] histoData;
         string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
@@ -34,18 +34,18 @@ namespace dipHW_2
         private void LoadBitmap(string path)
         {
             // read from file
-            img = (Bitmap)Image.FromFile(path);
-            pictureBox1.Image = img;
+            bitmap1 = (Bitmap)Image.FromFile(path);
+            pictureBox1.Image = bitmap1;
 
-            label1.Text = img.Width + "*" + img.Height;
+            label1.Text = bitmap1.Width + "*" + bitmap1.Height;
 
             // read byte data
-            BitmapData bitmapData = img.LockBits(new Rectangle(0, 0, img.Width, img.Height), ImageLockMode.ReadWrite, PixelFormat.Format8bppIndexed);
-            srcData = new byte[img.Width * img.Height];
+            BitmapData bitmapData = bitmap1.LockBits(new Rectangle(0, 0, bitmap1.Width, bitmap1.Height), ImageLockMode.ReadWrite, PixelFormat.Format8bppIndexed);
+            srcData = new byte[bitmap1.Width * bitmap1.Height];
             IntPtr srcPtr = bitmapData.Scan0;
-            Marshal.Copy(srcPtr, srcData, 0, img.Width * img.Height);
+            Marshal.Copy(srcPtr, srcData, 0, bitmap1.Width * bitmap1.Height);
             // pay attention: order in byte array: height first
-            img.UnlockBits(bitmapData);
+            bitmap1.UnlockBits(bitmapData);
         }
 
         // build a new bitmap with byte data
@@ -101,18 +101,18 @@ namespace dipHW_2
             newImg.Palette = tempPalette;
 
             // rewrite and show
-            img = newImg;
+            bitmap1 = newImg;
             srcData = newData;
-            label1.Text = img.Width + "*" + img.Height;
-            pictureBox1.Image = img;
+            label1.Text = bitmap1.Width + "*" + bitmap1.Height;
+            pictureBox1.Image = bitmap1;
         }
 
         // calculate the histogram data
         private void Cal_Hist()
         {
             // width and height of the image
-            int width = img.Width;
-            int height = img.Height;
+            int width = bitmap1.Width;
+            int height = bitmap1.Height;
             histoData = new int[256];
 
             for (int i = 0; i < 256; ++i)
@@ -133,8 +133,8 @@ namespace dipHW_2
         private void Equalize_Hist(byte[] srcData)
         {
             // width and height and  pixels of the image
-            int width = img.Width;
-            int height = img.Height;
+            int width = bitmap1.Width;
+            int height = bitmap1.Height;
             int pixels = width * height;
             // array to hold the new data
             byte[] tempData = new byte[pixels];
@@ -182,15 +182,11 @@ namespace dipHW_2
         private void button6_Click(object sender, EventArgs e)
         {
             //顯示直方圖
-            if (pictureBox1.Image == null)
-            {
-                return;
-            }
 
             // calculate the histogram data
             Cal_Hist();
 
-            // show the histogram in a new form
+            // 傳資料給新表單並顯示之
             Form2 form2 = new Form2(histoData);
             form2.Show();
         }

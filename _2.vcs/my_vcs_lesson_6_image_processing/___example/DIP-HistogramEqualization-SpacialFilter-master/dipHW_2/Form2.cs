@@ -13,6 +13,27 @@ namespace dipHW_2
     public partial class Form2 : Form
     {
         int[] data;
+
+        public Form2(int[] histData)
+        {
+            InitializeComponent();
+            data = histData;
+            /* for (int i = 0; i < 256; ++i)
+             {
+                 Console.WriteLine(i + ":" + data[i]);
+             }*/
+        }
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+            Draw_Hist(data);
+        }
+
         void Draw_Hist(int[] data)
         {
             Graphics g = panel1.CreateGraphics();
@@ -29,26 +50,6 @@ namespace dipHW_2
             {
                 g.DrawLine(pen, i, 260, i, 260 - 256 * data[i] / max);
             }
-        }
-
-        public Form2(int[] histData)
-        {
-            InitializeComponent();
-            data = histData;
-            /* for (int i = 0; i < 256; ++i)
-             {
-                 Console.WriteLine(i + ":" + data[i]);
-             }*/
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-            Draw_Hist(data);
-        }
-
-        private void Form2_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
