@@ -534,6 +534,7 @@
             this.bt_files17.Name = "bt_files17";
             this.bt_files17.Size = new System.Drawing.Size(200, 60);
             this.bt_files17.TabIndex = 70;
+            this.bt_files17.Text = "SerachFile";
             this.bt_files17.UseVisualStyleBackColor = true;
             this.bt_files17.Click += new System.EventHandler(this.bt_files17_Click);
             // 

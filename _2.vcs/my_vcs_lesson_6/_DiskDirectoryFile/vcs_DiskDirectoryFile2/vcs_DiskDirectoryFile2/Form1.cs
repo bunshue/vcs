@@ -236,7 +236,9 @@ namespace vcs_DiskDirectoryFile2
             //轉出一層
             string foldername = @"D:\_git\vcs\_1.data\______test_files1";
             if (foldername.CompareTo("") == 0)
+            {
                 return;
+            }
             DirectoryInfo dir = new DirectoryInfo(foldername);
             DirectoryInfo[] dirs = dir.GetDirectories();
             FileInfo[] files = dir.GetFiles();
@@ -571,6 +573,8 @@ namespace vcs_DiskDirectoryFile2
         {
         }
 
+        //------------------------------------------------------------  # 60個
+
         //根據文件頭判斷上傳的文件類型 ST
         private void button16_Click(object sender, EventArgs e)
         {
@@ -579,6 +583,7 @@ namespace vcs_DiskDirectoryFile2
             string result = getFileType(filename);
             richTextBox1.Text += "File Type : " + result + "\n";
         }
+
         /// 根據文件頭判斷上傳的文件類型
         /// <param name="filePath">filePath是文件的完整路徑 </param>
         /// <returns>返回true或false</returns>
@@ -638,6 +643,8 @@ namespace vcs_DiskDirectoryFile2
             }
         }
         //根據文件頭判斷上傳的文件類型 SP
+
+        //------------------------------------------------------------  # 60個
 
         //取得檔案類型 ST
 
@@ -793,7 +800,6 @@ namespace vcs_DiskDirectoryFile2
 
         private void button20_Click(object sender, EventArgs e)
         {
-            //拷貝檔案, 限定拷貝大小
             //拷貝檔案, 限定拷貝大小, 每次拷貝1024拜
 
             string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";

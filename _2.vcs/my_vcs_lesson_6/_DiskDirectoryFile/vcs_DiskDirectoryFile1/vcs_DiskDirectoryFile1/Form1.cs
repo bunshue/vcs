@@ -2002,6 +2002,38 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_files17_Click(object sender, EventArgs e)
         {
+            //SerachFile
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony1";
+            SerachFile(foldername);
+
+            richTextBox1.Text += "搜尋完畢\n";
+        }
+
+        public void SerachFile(string fileDirectory)
+        {
+            DirectoryInfo dir = new DirectoryInfo(fileDirectory);
+            FileSystemInfo[] fsis = dir.GetFileSystemInfos();  // 獲取所有的文件
+            foreach (FileSystemInfo fsi in fsis)  // 遍歷獲取到的文件
+            {
+                if (fsi is DirectoryInfo)
+                {
+                    SerachFile(fsi.FullName);
+                }
+                else
+                {
+                    //if (fsi.Name == textBox1.Text)
+                    {
+                        FileInfo fi = new FileInfo(fsi.FullName);
+                        /*
+                        listView1.Items.Add(fi.Name);//為ListView新增數據
+                        listView1.Items[listView1.Items.Count - 1].SubItems.Add(fi.FullName);
+                        listView1.Items[listView1.Items.Count - 1].SubItems.Add(fi.Length.ToString());
+                        listView1.Items[listView1.Items.Count - 1].SubItems.Add(fi.CreationTime.ToString());
+                        */
+                        richTextBox1.Text += fi.Name + "\t" + fi.FullName + "\t" + fi.Length.ToString() + "\t" + fi.CreationTime.ToString() + "\n";
+                    }
+                }
+            }
         }
 
         //------------------------------------------------------------  # 60個

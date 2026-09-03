@@ -569,88 +569,8 @@ namespace vcs_Mix00
 
         //------------------------------------------------------------  # 60個
 
-        public void StatisticsWords(string path)
-        {
-            if (!File.Exists(path))
-            {
-                richTextBox1.Text += "文件不存在！\n";
-                return;
-            }
-            Hashtable ht = new Hashtable(StringComparer.OrdinalIgnoreCase);
-            StreamReader sr = new StreamReader(path, System.Text.Encoding.UTF8);
-            string line = sr.ReadLine();
-
-            string[] wordArr = null;
-            int num = 0;
-            while (line.Length > 0)
-            {
-                //   MatchCollection mc =  Regex.Matches(line, @"\b[a-z]+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-                //foreach (Match m in mc)
-                //{
-                //    if (ht.ContainsKey(m.Value))
-                //    {
-                //        num = Convert.ToInt32(ht[m.Value]) + 1;
-                //        ht[m.Value] = num;
-                //    }
-                //    else
-                //    {
-                //        ht.Add(m.Value, 1);
-                //    }
-                //}
-                //line = sr.ReadLine();
-
-                wordArr = line.Split(' ');
-                foreach (string s in wordArr)
-                {
-                    if (s.Length == 0)
-                        continue;
-                    //去除標點
-                    line = Regex.Replace(line, @"[\p{P}*]", "", RegexOptions.Compiled);
-                    //將單詞加入哈希表
-                    if (ht.ContainsKey(s))
-                    {
-                        num = Convert.ToInt32(ht[s]) + 1;
-                        ht[s] = num;
-                    }
-                    else
-                    {
-                        ht.Add(s, 1);
-                    }
-                }
-                line = sr.ReadLine();
-            }
-
-            ArrayList keysList = new ArrayList(ht.Keys);
-            //對Hashtable中的Keys按字母序排列
-            keysList.Sort();
-            //按次數進行插入排序【穩定排序】，所以相同次數的單詞依舊是字母序
-            string tmp = String.Empty;
-            int valueTmp = 0;
-            for (int i = 1; i < keysList.Count; i++)
-            {
-                tmp = keysList[i].ToString();
-                valueTmp = (int)ht[keysList[i]];//次數
-                int j = i;
-                while (j > 0 && valueTmp > (int)ht[keysList[j - 1]])
-                {
-                    keysList[j] = keysList[j - 1];
-                    j--;
-                }
-                keysList[j] = tmp;//j=0
-            }
-            //打印出來
-            foreach (object item in keysList)
-            {
-                //richTextBox1.Text +=(string)item + ":" + (string)ht[item]);
-                richTextBox1.Text += item.ToString() + ":" + ht[item].ToString() + "\n";
-            }
-        }
-
         private void button15_Click(object sender, EventArgs e)
         {
-            //統計英文文本中的單詞數並排序
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\english_text.txt";
-            StatisticsWords(filename);
         }
 
         //------------------------------------------------------------  # 60個
@@ -685,42 +605,9 @@ namespace vcs_Mix00
 
         private void button18_Click(object sender, EventArgs e)
         {
-            //一個檔案的英文字母出現的字數統計
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__text\war_and_peace.txt";
-
-            FileInfo f = new FileInfo(filename);
-            StreamReader sr = f.OpenText();
-
-            int[] letter = new int[26];
-            int k;
-            char ch;
-            while (sr.Peek() >= 0)
-            {
-                ch = (char)sr.Read();
-                if (ch >= 'A' && ch <= 'Z')
-                {
-                    k = (int)ch - 65;
-                    letter[k]++;
-                }
-                else if (ch >= 'a' && ch <= 'z')
-                {
-                    k = (int)ch - 97;
-                    letter[k]++;
-                }
-            }
-
-            richTextBox1.Text += "== 本檔案 英文字母出現的字數統計如下 : \n";
-            for (int i = 0; i < 26; i = i + 2)
-            {
-                if ((i % 2) == 0)
-                {
-                    richTextBox1.Text += (char)(65 + i) + ", " + (char)(97 + i) + ", " + letter[i] + "個\t";
-                    richTextBox1.Text += (char)(65 + i + 1) + ", " + (char)(97 + i + 1) + ", " + letter[i + 1] + "個\n";
-                }
-            }
-            sr.Close();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button19_Click(object sender, EventArgs e)
         {

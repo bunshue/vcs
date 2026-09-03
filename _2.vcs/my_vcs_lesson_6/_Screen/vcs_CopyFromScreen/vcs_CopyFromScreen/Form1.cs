@@ -94,13 +94,18 @@ namespace vcs_CopyFromScreen
         private void button0_Click(object sender, EventArgs e)
         {
             //全螢幕截圖
+            //全螢幕大小WH => 建立位圖bmp => 建立繪件g => 拷貝copy => 存檔save
 
             int W = Screen.PrimaryScreen.Bounds.Width;  // 主螢幕寬度
             int H = Screen.PrimaryScreen.Bounds.Height;  // 主螢幕高度
+
             Bitmap bitmap1 = new Bitmap(W, H);  // 建立空白畫布
-            //Bitmap bitmap1 = new Bitmap(W, H, PixelFormat.Format32bppArgb);  // 建立空白畫布
+
             Graphics g = Graphics.FromImage(bitmap1);
+
+            //             擷取螢幕位置起點  自建bmp的位置起點     擷取大小
             g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(W, H));
+            //same
             //g.CopyFromScreen(0, 0, 0, 0, Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
 
             g.Dispose();
@@ -113,12 +118,17 @@ namespace vcs_CopyFromScreen
         private void button1_Click(object sender, EventArgs e)
         {
             //本程式截圖
+            //本程式大小WH => 建立位圖bmp => 建立繪件g => 拷貝copy => 存檔save
 
-            int W = this.Width;
-            int H = this.Height;
+            int W = this.Width;  // 本程式寬度
+            int H = this.Height;  // 本程式高度
+
             Bitmap bitmap1 = new Bitmap(W, H);  // 建立空白畫布
+
             Graphics g = Graphics.FromImage(bitmap1);
+
             g.CopyFromScreen(this.Location, new Point(0, 0), new Size(W, H));
+
             g.Dispose();
 
             save_bitmap_file(bitmap1);  // 存檔
@@ -129,6 +139,7 @@ namespace vcs_CopyFromScreen
         private void button2_Click(object sender, EventArgs e)
         {
             //抓螢幕某區塊為檔案, 從(x_st, y_st)開始, 抓 W X H 大小的圖
+            //欲抓大小WH => 建立位圖bmp => 建立繪件g => 拷貝copy => 存檔save
 
             int x_st = 300;
             int y_st = 200;
@@ -136,13 +147,15 @@ namespace vcs_CopyFromScreen
             int H = 200;
 
             Bitmap bitmap1 = new Bitmap(W, H);  // 建立空白畫布
+
             Graphics g = Graphics.FromImage(bitmap1);
-            //                 擷取螢幕位置起點    自建bmp的位置起點        擷取大小
+
+            //                 擷取螢幕位置起點    自建bmp的位置起點       擷取大小
             g.CopyFromScreen(new Point(x_st, y_st), new Point(0, 0), new Size(W, H));
 
             save_bitmap_file(bitmap1);  // 存檔
 
-            //6060
+            //------------------------------------------------------------  # 60個
 
             //抓取指定螢幕的一部分存檔
             Rectangle rect = new Rectangle(0, 0, 300, 300);
@@ -314,21 +327,6 @@ namespace vcs_CopyFromScreen
             //用Graphics.CopyFromScreen()把屏幕位圖拷貝到該位圖上
             //g.CopyFromScreen(0, 0, 0, 0, new Size(W, H));
             //public void CopyFromScreen(int sourceX, int sourceY, int destinationX, int destinationY, Size blockRegionSize);
-
-            /*
-            Bitmap bitmap2 = new Bitmap((int)W, (int)H);
-            Graphics g2 = Graphics.FromImage(bitmap2);
-
-            //             擷取螢幕位置起點  自建bmp的位置起點     擷取大小
-            g2.CopyFromScreen(this.Location.X + pictureBox1.Location.X + (int)x_st, this.Location.Y + pictureBox1.Location.Y + (int)y_st, 0, 0, new Size((int)W, (int)H));
-            */
-
-            /*
-            Bitmap bitmap = new Bitmap(rect.Width, rect.Height);
-            Graphics g = Graphics.FromImage(bitmap);
-            g.CopyFromScreen(Point.Empty, Point.Empty, rect.Size);
-            */
-
         }
 
         //------------------------------------------------------------  # 60個
@@ -452,4 +450,8 @@ namespace vcs_CopyFromScreen
     g.DrawImage(img, destRect1, srcRect, units);
 
 */
+
+//same
+//Bitmap bitmap1 = new Bitmap(W, H);  // 建立空白畫布
+//Bitmap bitmap1 = new Bitmap(W, H, PixelFormat.Format32bppArgb);  // 建立空白畫布
 
