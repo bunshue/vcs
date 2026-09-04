@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
-using System.Collections;   //for Hashtable
+using System.Collections;  // for Hashtable
 
 namespace vcs_ComboBox1
 {
@@ -93,7 +93,7 @@ namespace vcs_ComboBox1
             richTextBox1.Clear();
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         Hashtable ht = new Hashtable();
         string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU";
@@ -165,7 +165,6 @@ namespace vcs_ComboBox1
             {
                 MessageBox.Show("目前還沒有圖片相關訊息！！！");
             }
-
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -197,3 +196,12 @@ namespace vcs_ComboBox1
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+

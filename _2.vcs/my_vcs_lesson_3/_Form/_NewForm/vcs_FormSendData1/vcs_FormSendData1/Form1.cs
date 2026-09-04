@@ -339,7 +339,7 @@ namespace vcs_FormSendData1
 
         private void button12_Click(object sender, EventArgs e)
         {
-            //傳圖至新表單
+            //傳圖至新表單1
 
             string filename = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
             Bitmap bm = (Bitmap)Bitmap.FromFile(filename);
@@ -354,6 +354,14 @@ namespace vcs_FormSendData1
 
         private void button13_Click(object sender, EventArgs e)
         {
+            //Form8_NewPicture2
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+
+            // 傳資料給新表單並顯示之
+            Form8_NewPicture2 form2 = new Form8_NewPicture2(bitmap1);
+            form2.Show();
 
         }
 

@@ -1,7 +1,71 @@
 ﻿
 
+pppp
+打印百分比
+private float ImageScale = 1.0f; //縮放比例
+            ImageScale += e.Delta * scale_per_delta;
+
+            this.Text = "縮放比例 : " + ImageScale.ToString("p0");
+
+Text = "Mandelbrot (" +
+m_Xmin.ToString("0.000000") + ", " +
+m_Ymin.ToString("0.000000") + ")-(" +
+m_Xmax.ToString("0.000000") + ", " +
+m_Ymax.ToString("0.000000") + ")";
+
 //------------------------------------------------------------  # 60個
 
+pppp
+            Tension = trkTension.Value / 10f;
+            txtTension.Text = Tension.ToString("0.0");
+
+//------------------------------------------------------------  # 60個
+            
+
+richTextBox1.Text += "year =    " +    year.ToString("00") + "\n";
+richTextBox1.Text += "month =   " +   month.ToString("00") + "\n";
+richTextBox1.Text += "mday =    " +    mday.ToString("0000") + "\n";
+richTextBox1.Text += "wday =    " +    wday.ToString() + "\n";
+richTextBox1.Text += "hour =    " +    hour.ToString("00") + "\n";
+richTextBox1.Text += "minutes = " + minutes.ToString("00") + "\n";
+richTextBox1.Text += "seconds = " + seconds.ToString("00") + "\n";
+
+richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
+
+richTextBox1.Text += receive_buffer_tmp[i].ToString("X2") + " ";
+
+richTextBox1.Text += byte_data[i].ToString("D03");
+
+
+
+
+//------------------------------------------------------------  # 60個
+
+                    else if (Comport_Mode == 2)  //hex mode
+                    {
+                        input = "";
+                        for (int i = 0; i < BytesToRead; i++)
+                        {
+                            input += ((int)receive_buffer[i]).ToString("X2") + " ";
+                        }
+                        richTextBox1.AppendText(input);     //打印一般文字訊息
+                        richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
+                    }
+
+48 65 78 20 6D 6F 64 65 986F 793A 5167 5BB9 0A 
+
+//------------------------------------------------------------  # 60個
+
+.format
+
+//------------------------------------------------------------  # 60個
+
+Color slateBlue = Color.FromName("SlateBlue");
+byte g = slateBlue.G;
+byte b = slateBlue.B;
+byte r = slateBlue.R;
+byte a = slateBlue.A;
+string text = String.Format("寫字範例\nSlate Blue has these ARGB values:\n A:{0}, " + "R:{1}, G: {2}, B {3}", new object[] { a, r, g, b });
 
 
 //------------------------------------------------------------  # 60個
@@ -146,43 +210,41 @@ private Thread thread_ex = null;
 
 隱藏_顯示開始按鈕
 
-        private const int SW_HIDE = 0;
-        private const int SW_SHOW = 5;
+private const int SW_HIDE = 0;
+private const int SW_SHOW = 5;
 
-        [DllImport("user32.dll")]
-        public static extern int FindWindow(string lpClassName, string lpWindowName);
+[DllImport("user32.dll")]
+public static extern int FindWindow(string lpClassName, string lpWindowName);
 
-        [DllImport("user32.dll")]
-        public static extern int FindWindowEx(int hWnd1, int hWnd2, string lpsz1, string lpsz2);
+[DllImport("user32.dll")]
+public static extern int FindWindowEx(int hWnd1, int hWnd2, string lpsz1, string lpsz2);
 
-        [DllImport("user32.dll")]
-        public static extern int ShowWindow(int hwnd, int nCmdShow);
+[DllImport("user32.dll")]
+public static extern int ShowWindow(int hwnd, int nCmdShow);
 
 
-            // 看不出效果
+// 看不出效果
 
-            //隱藏開始按鈕
-            ShowWindow(FindWindowEx(FindWindow("Shell_TrayWnd", null), 0, "Button", null), SW_HIDE);
-            richTextBox1.Text += "隱藏 開始 按鈕\n";
+//隱藏開始按鈕
+ShowWindow(FindWindowEx(FindWindow("Shell_TrayWnd", null), 0, "Button", null), SW_HIDE);
+richTextBox1.Text += "隱藏 開始 按鈕\n";
 
-            //顯示開始按鈕
-            ShowWindow(FindWindowEx(FindWindow("Shell_TrayWnd", null), 0, "Button", null), SW_SHOW);
-            richTextBox1.Text += "顯示 開始 按鈕\n";
+//顯示開始按鈕
+ShowWindow(FindWindowEx(FindWindow("Shell_TrayWnd", null), 0, "Button", null), SW_SHOW);
+richTextBox1.Text += "顯示 開始 按鈕\n";
 
 //------------------------------------------------------------  # 60個
 
-        [DllImport("user32.dll")]
-        static extern IntPtr FindWindow(string strClass, string strWindow);
+[DllImport("user32.dll")]
+static extern IntPtr FindWindow(string strClass, string strWindow);
 
-        //該函數獲取一個窗口句柄,該窗口雷鳴和窗口名與給定字符串匹配 hwnParent=Null從桌面窗口查找
-        [DllImport("user32.dll")]
-        static extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter,
-            string strClass, string strWindow);
+//該函數獲取一個窗口句柄,該窗口雷鳴和窗口名與給定字符串匹配 hwnParent=Null從桌面窗口查找
+[DllImport("user32.dll")]
+static extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter,
+string strClass, string strWindow);
 
-        [DllImport("user32.dll")]
-        static extern bool GetWindowRect(HandleRef hwnd, out NativeRECT rect);
-
-
+[DllImport("user32.dll")]
+static extern bool GetWindowRect(HandleRef hwnd, out NativeRECT rect);
 
 //------------------------------------------------------------  # 60個
 
@@ -216,7 +278,6 @@ public static extern int FindWindow(string lpClassName, string lpWindowName);
 public static extern int GetWindowRect(int hwnd, ref Rectangle lpRect);
 
 Rectangle myrect;
-
 
 //取得任務欄尺寸大小
 if (GetWindowRect(FindWindow("Shell_TrayWnd", null), ref myrect) == 0)
@@ -296,13 +357,6 @@ else
 
 //------------------------------------------------------------  # 60個
 
-Text = "Mandelbrot (" +
-m_Xmin.ToString("0.000000") + ", " +
-m_Ymin.ToString("0.000000") + ")-(" +
-m_Xmax.ToString("0.000000") + ", " +
-m_Ymax.ToString("0.000000") + ")";
-
-//------------------------------------------------------------  # 60個
 
 能夠各方向都可以選取圖片框
 
@@ -312,19 +366,17 @@ mnuScaleFull_Click(null, null);
 
 /*
 沒有 sender,e 的 click事件
-            // Deselect all colors.
-            // Deselect all colors.
-            // Deselect all colors.
-            // Deselect all colors.
-            btnNone_Click(null, null);
+// Deselect all colors.
+// Deselect all colors.
+// Deselect all colors.
+// Deselect all colors.
+btnNone_Click(null, null);
 
-            btnNone_Click(null, null);
+btnNone_Click(null, null);
 
-            btnNone_Click(null, null);
+btnNone_Click(null, null);
 
-            btnNone_Click(null, null);
-
-
+btnNone_Click(null, null);
 
         // Deselect all colors.
         private void btnNone_Click(object sender, EventArgs e)
@@ -485,19 +537,19 @@ AForge.Vision.dll
 
 //------------------------------------------------------------  # 60個
 
-            //PointToScreen測試
+//PointToScreen測試
 
-            Point pt = new Point(0, 0);
-            Graphics g = this.CreateGraphics();
-            g.FillEllipse(Brushes.Red, pt.X - 10, pt.Y - 10, 20, 20);
+Point pt = new Point(0, 0);
+Graphics g = this.CreateGraphics();
+g.FillEllipse(Brushes.Red, pt.X - 10, pt.Y - 10, 20, 20);
 
-            richTextBox1.Text += "在表單上的座標\n";
-            Point pt1 = this.PointToScreen(pt);
-            richTextBox1.Text += "pt1 : " + pt1.ToString() + "\n";
+richTextBox1.Text += "在表單上的座標\n";
+Point pt1 = this.PointToScreen(pt);
+richTextBox1.Text += "pt1 : " + pt1.ToString() + "\n";
 
-            richTextBox1.Text += "在視窗上的座標\n";
-            Point pt2 = this.button0.PointToScreen(pt);
-            richTextBox1.Text += "pt2 : " + pt2.ToString() + "\n";
+richTextBox1.Text += "在視窗上的座標\n";
+Point pt2 = this.button0.PointToScreen(pt);
+richTextBox1.Text += "pt2 : " + pt2.ToString() + "\n";
 
 //------------------------------------------------------------  # 60個
 
@@ -516,14 +568,11 @@ Bitmap 半透明貼上
 
 Bitmap 去邊 半透明貼上
 
-
 「不規則形狀」最常見與通用的英文是 irregular shape（名詞）或 irregularly shaped（形容詞）。
-
 
 Lab主螢幕墊高 多一個螢幕
 
 那個一轉三的HDMI分配器要買幾個?
-
 
 //     將控制項帶到疊置順序的前面。
 public void BringToFront();
@@ -532,15 +581,15 @@ public void SendToBack();
 
 //------------------------------------------------------------  # 60個
 
-            Pen p;
-            p = new Pen(foreColor);
-            p.Width = 8;
-            p.StartCap = System.Drawing.Drawing2D.LineCap.Round;
-            p.EndCap = System.Drawing.Drawing2D.LineCap.Round;
-            p.Color = foreColor;
+Pen p;
+p = new Pen(foreColor);
+p.Width = 8;
+p.StartCap = System.Drawing.Drawing2D.LineCap.Round;
+p.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+p.Color = foreColor;
 
-            //p.LineJoin = System.Drawing.Drawing2D.LineJoin.Bevel;
-            p.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
+//p.LineJoin = System.Drawing.Drawing2D.LineJoin.Bevel;
+p.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
 
 //------------------------------------------------------------  # 60個
 
@@ -563,27 +612,18 @@ http://www.lingoes.net/en/translator/codepage.htm
 Slate blue (石板藍) 是一種將涼爽的藍色與沉穩的灰色相結合的中等暗色調藍灰色。
 它的常見十六進制代碼（HEX）為 #557C99 或 #5B7C99，給人一種平靜、柔和且精緻的感覺。
 
-            button24.BackColor = default(Color);
-            button24.UseVisualStyleBackColor = true;
-            button22.BackColor = default(Color);
-            button22.UseVisualStyleBackColor = true;
+button24.BackColor = default(Color);
+button24.UseVisualStyleBackColor = true;
+button22.BackColor = default(Color);
+button22.UseVisualStyleBackColor = true;
 
 //------------------------------------------------------------  # 60個
 
-            Color slateBlue = Color.FromName("SlateBlue");
-            byte g = slateBlue.G;
-            byte b = slateBlue.B;
-            byte r = slateBlue.R;
-            byte a = slateBlue.A;
-            string text = String.Format("寫字範例\nSlate Blue has these ARGB values:\n A:{0}, " + "R:{1}, G: {2}, B {3}", new object[] { a, r, g, b });
-
-//------------------------------------------------------------  # 60個
-
-            DialogResult bb = MessageBox.Show("是否要退出登錄？", "退出登錄", MessageBoxButtons.YesNo);
-            if (Convert.ToString(bb) == "Yes")
-            {
-                Application.Exit();
-            }
+DialogResult bb = MessageBox.Show("是否要退出登錄？", "退出登錄", MessageBoxButtons.YesNo);
+if (Convert.ToString(bb) == "Yes")
+{
+	Application.Exit();
+}
 
 //------------------------------------------------------------  # 60個
 
@@ -735,11 +775,11 @@ HScrollBar / VScrollBar
 cccc
 
 listbox
-            //ListBox預設選項
-            // 建立Job字串陣列用來存放職業
-            String[] Job = new String[] { "士", "農", "工", "商", "兵", "其它" };
-            lstJob.Items.AddRange(Job); // lstJob清單放入Job陣列內容
-            lstJob.SelectedIndex = 0;   // lstJob清單預設第1個選項被選取
+	//ListBox預設選項
+	// 建立Job字串陣列用來存放職業
+	String[] Job = new String[] { "士", "農", "工", "商", "兵", "其它" };
+	lstJob.Items.AddRange(Job); // lstJob清單放入Job陣列內容
+	lstJob.SelectedIndex = 0;   // lstJob清單預設第1個選項被選取
 
 listbox的方法
 從 listbox 的內容取得index
@@ -749,16 +789,16 @@ lstJob.SelectedIndex = JobIndex;
 
 //------------------------------------------------------------  # 60個
 
-            colorDialog1.AllowFullOpen = true;  //可以使用該對話框定義自定義顏色
-            colorDialog1.AnyColor = true;      			//顯示基本顏色集中可用的所有顏色
-            colorDialog1.FullOpen = true;      //創建自定義顏色的控件在對話框打開時是可見的
-            colorDialog1.SolidColorOnly = false;			//不限制只選擇純色
-            if (colorDialog1.ShowDialog() == DialogResult.OK)   //彈出對話框
-            {
-                pictureBox1.BackColor = colorDialog1.Color;
-                background_color = colorDialog1.Color;
-                //richTextBox1.SelectionBackColor = colorDialog1.Color;
-            }
+colorDialog1.AllowFullOpen = true;  //可以使用該對話框定義自定義顏色
+colorDialog1.AnyColor = true;      			//顯示基本顏色集中可用的所有顏色
+colorDialog1.FullOpen = true;      //創建自定義顏色的控件在對話框打開時是可見的
+colorDialog1.SolidColorOnly = false;			//不限制只選擇純色
+if (colorDialog1.ShowDialog() == DialogResult.OK)   //彈出對話框
+{
+	pictureBox1.BackColor = colorDialog1.Color;
+	background_color = colorDialog1.Color;
+	//richTextBox1.SelectionBackColor = colorDialog1.Color;
+}
 
 //------------------------------------------------------------  # 60個
 
@@ -766,7 +806,7 @@ lstJob.SelectedIndex = JobIndex;
 
 //------------------------------------------------------------  # 60個
 
-            Debug.Print("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！ " + number.ToString());
+Debug.Print("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！ " + number.ToString());
 
 //------------------------------------------------------------  # 60個
 
@@ -825,6 +865,7 @@ string mapURL = String.Format(
    DataTime.Now.Day.ToString("00");
    DateTime.Now.Hour.ToString("00");
    strMinute);
+
 pictureBox1.ImageLocation = mapURL;
 
 //------------------------------------------------------------  # 60個
@@ -898,12 +939,6 @@ private void Form1_Load(object sender, EventArgs e)
 pictureBox1 能夠顯示部分圖片 然後接收空白鍵 換圖片的下一部份
 
 //------------------------------------------------------------  # 60個
-pppp
-            Tension = trkTension.Value / 10f;
-            txtTension.Text = Tension.ToString("0.0");
-
-//------------------------------------------------------------  # 60個
-            
 vcs不同專案共用一個檔案  看起來不行
 
 特殊控件操作 可行的但不常用
@@ -1488,6 +1523,8 @@ KPI: 關鍵 績效 指標
 
 //------------------------------------------------------------  # 60個
 
+newnew
+
 C# 6.0 是隨 Visual Studio 2015 發布的 C# 版本，專注於提升開發效率、代碼簡潔性及可讀性，
 引入了自動屬性初始化器、字串插補 ($"")、Null 傳遞運算子 (?.)、Nameof 運算子等重要特性，顯著減少了樣板代碼。
 C# 6.0 旨在讓代碼更精簡，是 .NET 開發中一個重要的生產力提升版本。
@@ -1561,8 +1598,6 @@ splitContainer1 預設兩個Panel, Panel1 和 Panel2，Dock 選 DockStyle.Fill
 放控件至Panel中，Dock 選 DockStyle.Fill
 
 //------------------------------------------------------------  # 60個
-
-richTextBox1.Text += byte_data[i].ToString("D03");
 
 # new_image = old_image * 2 - contrast + brightness
 
@@ -1774,12 +1809,12 @@ https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,N
 &markers=color:red%7Clabel:C%7C40.718217,-73.998284
 &key=AIzaSyDlCB_7UxkHonf782F-MhLa_DmCxfAzSRY
 
-
 AIzaSyDlCB_7UxkHonf782F-MhLa_DmCxfAzSRY
 
 private const string mapurl = "http://maps.google.com/mapdata?latitude_e6={0}&longitude_e6={1}&zm={2}&w={3}&h={4}&cc=&min_priority=2";
 
 string.Format(mapurl, this.Latitude, this.Longitude, this.Zoom, this.Width.Value, this.Height.Value)
+               0            1              2              3              4                   5
 			
 url : http://maps.google.com/mapdata?latitude_e6=100&longitude_e6=123&zm=200&w=640&h=480&cc=&min_priority=2
 
@@ -4168,33 +4203,6 @@ this.richTextBox1.SelectionFont = MyFont;
 https://georgiosky2000.wordpress.com/2014/03/19/c-winform-%e9%a1%af%e7%a4%ba%e6%96%bc%e5%bb%b6%e4%bc%b8%e8%9e%a2%e5%b9%95%e4%b9%8b%e6%96%b9%e6%b3%95/
 
 //------------------------------------------------------------  # 60個
-
-richTextBox1.Text += "year =    " +    year.ToString("00") + "\n";
-richTextBox1.Text += "month =   " +   month.ToString("00") + "\n";
-richTextBox1.Text += "mday =    " +    mday.ToString("0000") + "\n";
-richTextBox1.Text += "wday =    " +    wday.ToString() + "\n";
-richTextBox1.Text += "hour =    " +    hour.ToString("00") + "\n";
-richTextBox1.Text += "minutes = " + minutes.ToString("00") + "\n";
-richTextBox1.Text += "seconds = " + seconds.ToString("00") + "\n";
-
-richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
-
-richTextBox1.Text += receive_buffer_tmp[i].ToString("X2") + " ";
-
-//------------------------------------------------------------  # 60個
-
-                    else if (Comport_Mode == 2)  //hex mode
-                    {
-                        input = "";
-                        for (int i = 0; i < BytesToRead; i++)
-                        {
-                            input += ((int)receive_buffer[i]).ToString("X2") + " ";
-                        }
-                        richTextBox1.AppendText(input);     //打印一般文字訊息
-                        richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
-                    }
-
-48 65 78 20 6D 6F 64 65 986F 793A 5167 5BB9 0A 
 
 //------------------------------------------------------------  # 60個
 

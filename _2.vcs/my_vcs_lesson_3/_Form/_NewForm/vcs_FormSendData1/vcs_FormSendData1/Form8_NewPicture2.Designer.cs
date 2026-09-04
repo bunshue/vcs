@@ -1,6 +1,6 @@
-﻿namespace vcs_ZoomPicture3
+﻿namespace vcs_FormSendData1
 {
-    partial class Form1
+    partial class Form8_NewPicture2
     {
         /// <summary>
         /// 設計工具所需的變數。
@@ -41,15 +41,15 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // Form1
+            // Form8_NewPicture2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 461);
+            this.ClientSize = new System.Drawing.Size(722, 528);
             this.Controls.Add(this.pictureBox1);
-            this.Name = "Form1";
-            this.Text = "用滾輪縮放一張圖片";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Name = "Form8_NewPicture2";
+            this.Text = "Form8_NewPicture2";
+            this.Load += new System.EventHandler(this.Form8_NewPicture2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
@@ -60,4 +60,3 @@
         private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
-

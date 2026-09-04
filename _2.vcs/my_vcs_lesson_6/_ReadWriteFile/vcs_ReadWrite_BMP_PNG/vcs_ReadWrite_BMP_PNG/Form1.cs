@@ -457,12 +457,8 @@ namespace vcs_ReadWrite_BMP_PNG
             else
             {
                 richTextBox1.Text += "未選取檔案\n";
-
                 return;
             }
-
-            int width;
-            int height;
 
             //string filename = @"D:\_git\vcs\_1.data\______test_files1\step2.png";
             ///richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
@@ -472,9 +468,8 @@ namespace vcs_ReadWrite_BMP_PNG
 
             richTextBox1.Text += "W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
 
-            width = bitmap1.Width;
-            height = bitmap1.Height;
-
+            int width = bitmap1.Width;
+            int height = bitmap1.Height;
             //pictureBox1.Size = new Size(1, 1);
             pictureBox1.Size = new Size(width, height);
             pictureBox1.Location = new Point(0, 0);
@@ -485,8 +480,7 @@ namespace vcs_ReadWrite_BMP_PNG
             //int yy;
             int ss;
 
-            Font f;
-            f = new Font("Arial", 15);
+            Font f = new Font("Arial", 15);
             for (xx = 0; xx < width; xx += 48)
             {
                 ss = (xx / 48) * 8;
@@ -523,7 +517,7 @@ namespace vcs_ReadWrite_BMP_PNG
             }
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button5_Click(object sender, EventArgs e)
         {
@@ -695,9 +689,10 @@ namespace vcs_ReadWrite_BMP_PNG
                 else
                     richTextBox1.Text += " ";
             }
-            // 關閉檔案。
             fs.Close();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button8_Click(object sender, EventArgs e)
         {

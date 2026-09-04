@@ -48,8 +48,6 @@ namespace vcs_ZoomPicture3
             //same
             pictureBox1.Image = new Bitmap(filename);
 
-            //pictureBox1.ImageLocation = filename;   //可顯示圖片 但無法抓出圖片的相關資訊
-
             width = pictureBox1.Image.Width;
             height = pictureBox1.Image.Height;
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -73,9 +71,7 @@ namespace vcs_ZoomPicture3
             }
 
             // Size the image.
-            pictureBox1.Size = new Size(
-                (int)(width * ImageScale),
-                (int)(height * ImageScale));
+            pictureBox1.Size = new Size((int)(width * ImageScale), (int)(height * ImageScale));
 
             this.ClientSize = new Size(pictureBox1.Size.Width, pictureBox1.Size.Height);
 
