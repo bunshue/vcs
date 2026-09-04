@@ -105,7 +105,6 @@ namespace howto_bouncing_balls
                     BallVelocity[ball_num].Y = -BallVelocity[ball_num].Y;
                     Boing();
                 }
-
                 BallLocation[ball_num] = new Rectangle(new_x, new_y, BallLocation[ball_num].Width, BallLocation[ball_num].Height);
             }
             Refresh();
@@ -114,10 +113,8 @@ namespace howto_bouncing_balls
         // Play the boing sound file resource.
         private static void Boing()
         {
-            using (SoundPlayer player = new SoundPlayer(Properties.Resources.boing))
-            {
-                //player.Play();
-            }
+            SoundPlayer player = new SoundPlayer(Properties.Resources.boing);
+            //player.Play();
         }
     }
 }

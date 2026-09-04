@@ -58,43 +58,48 @@ namespace howto_bouncing_sprites
             // Move the ball.
             int new_x = Location.X + Velocity.X;
             int new_y = Location.Y + Velocity.Y;
-            bool bounced = ((new_x < 0) || (new_y < 0) ||
-                (new_x + Location.Width > MaxX) ||
-                (new_y + Location.Height > MaxY));
-            if (new_x < 0) Velocity.X = -Velocity.X;
-            else if (new_x + Location.Width > MaxX) Velocity.X = -Velocity.X;
-            if (new_y < 0) Velocity.Y = -Velocity.Y;
-            else if (new_y + Location.Height > MaxY) Velocity.Y = -Velocity.Y;
 
-            if (bounced) Boing();
+            bool bounced = ((new_x < 0) || (new_y < 0) || (new_x + Location.Width > MaxX) || (new_y + Location.Height > MaxY));
+            if (bounced == true)
+            {
+                Boing();
+            }
 
-            Location = new Rectangle(
-                new_x, new_y,
-                Location.Width,
-                Location.Height);
+            if (new_x < 0)
+            {
+                Velocity.X = -Velocity.X;
+            }
+            else if (new_x + Location.Width > MaxX)
+            {
+                Velocity.X = -Velocity.X;
+            }
+
+            if (new_y < 0)
+            {
+                Velocity.Y = -Velocity.Y;
+            }
+            else if (new_y + Location.Height > MaxY)
+            {
+                Velocity.Y = -Velocity.Y;
+            }
+
+            Location = new Rectangle(new_x, new_y, Location.Width, Location.Height);
         }
 
         // Play the boing sound file resource.
         private static void Boing()
         {
-            using (SoundPlayer player = new SoundPlayer(Properties.Resources.boing))
-            {
-                //player.Play();
-            }
+            SoundPlayer player = new SoundPlayer(Properties.Resources.boing);
+            //player.Play();
         }
 
         // Draw the ball.
         public void Draw(Graphics gr)
         {
-            using (SolidBrush the_brush = new SolidBrush(BackColor))
-            {
-                gr.FillEllipse(the_brush, Location);
-            }
-            using (Pen the_pen = new Pen(ForeColor))
-            {
-                gr.DrawEllipse(the_pen, Location);
-            }
+            SolidBrush the_brush = new SolidBrush(BackColor);
+            gr.FillEllipse(the_brush, Location);
+            Pen the_pen = new Pen(ForeColor);
+            gr.DrawEllipse(the_pen, Location);
         }
     }
 }
-

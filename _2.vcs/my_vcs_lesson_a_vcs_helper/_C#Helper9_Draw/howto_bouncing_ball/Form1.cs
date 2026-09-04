@@ -82,10 +82,8 @@ namespace howto_bouncing_ball
         // Play the boing sound file resource.
         private void Boing()
         {
-            using (SoundPlayer player = new SoundPlayer(Properties.Resources.boing))
-            {
-                //player.Play();
-            }
+            SoundPlayer player = new SoundPlayer(Properties.Resources.boing);
+            //player.Play();
         }
     }
 }

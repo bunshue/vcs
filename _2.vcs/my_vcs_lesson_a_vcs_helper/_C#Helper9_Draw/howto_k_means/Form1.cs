@@ -69,9 +69,7 @@ namespace howto_k_means
             // Draw the points.
             foreach (PointData point_data in Points)
             {
-                e.Graphics.DrawPoint(point_data.Location,
-                    PointBrushes[point_data.ClusterNum % MaxClusters],
-                    PointPens[point_data.ClusterNum % MaxClusters], RADIUS);
+                e.Graphics.DrawPoint(point_data.Location, PointBrushes[point_data.ClusterNum % MaxClusters], PointPens[point_data.ClusterNum % MaxClusters], RADIUS);
             }
 
             // Draw the centroids.
@@ -272,8 +270,18 @@ namespace howto_k_means
             {
                 fps = 1;
             }
-            lb_fps.Text = fps.ToString();
             tmrUpdate.Interval = 1000 / fps;
+
+            lb_fps.Text = fps.ToString() + " / " + tmrUpdate.Interval.ToString();
+
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+

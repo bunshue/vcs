@@ -357,19 +357,14 @@ namespace howto_print_full_scale
             }
         }
 
-        // Display a print preview.
         private void mnuFilePrintPreview_Click(object sender, EventArgs e)
         {
-            printPreviewDialog1.ShowDialog();
+            richTextBox1.Text += "A ";
         }
 
-        // Print at full scale.
         private void mnuFilePrint_Click(object sender, EventArgs e)
         {
-            // Print directly to the printer.
-
-            //david: do not really print
-            //printDocument1.Print();
+            richTextBox1.Text += "B ";
         }
 
         // Print the lines.
@@ -392,6 +387,26 @@ namespace howto_print_full_scale
 
             // We're done.
             e.HasMorePages = false;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            printPreviewDialog1.ShowDialog();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            // Print at full scale.
+
+            // Print directly to the printer.
+
+            //david: do not really print
+            //printDocument1.Print();
+        }
+
+        private void fileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
