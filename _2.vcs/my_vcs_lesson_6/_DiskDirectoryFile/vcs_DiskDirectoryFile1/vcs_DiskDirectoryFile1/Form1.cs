@@ -1114,21 +1114,6 @@ namespace vcs_DiskDirectoryFile1
             {
                 richTextBox1.Text += "完整路徑 : " + di.FullName + "\t建立時間 : " + di.CreationTime + "\n";
             }
-
-            //------------------------------------------------------------  # 60個
-
-            foldername = @"D:\_git\vcs\_1.data\______test_files1\compare\ddddd";
-
-            List<FileInfo> myFiles = new List<FileInfo>();//创建List泛型对象
-
-            // 由資料夾取出檔案名稱串列
-            string[] filenames = Directory.GetFiles(foldername);  // 取得指定目錄中檔案的名稱
-            show_filenames(filenames);
-
-            foreach (string filename in filenames)//遍历选择文件夹中的所有文件
-            {
-                myFiles.Add(new FileInfo(filename));//将遍历的所有文件添加到List对象中
-            }
         }
 
         private void bt_dir02_Click(object sender, EventArgs e)
@@ -1891,24 +1876,6 @@ namespace vcs_DiskDirectoryFile1
         {
             //FindAllFiles
 
-            string foldername = @"D:\_git\vcs\_1.data\______test_files3";
-
-            richTextBox1.Text += "讀取資料夾下的資料夾, 只看一層\n";
-            string[] dirs = Directory.GetDirectories(foldername);  // 取得指定目錄中子目錄的名稱, 一層
-            richTextBox1.Text += "總共" + dirs.Length.ToString() + "個資料夾\n";
-            foreach (string dir in dirs)
-            {
-                richTextBox1.Text += "取得子目錄 : " + dir + "\n";
-            }
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            richTextBox1.Text += "讀取資料夾下的檔案, 只看一層\n";
-            string[] filenames = Directory.GetFiles(foldername);  // 取得指定目錄中檔案的名稱
-            richTextBox1.Text += "總共" + filenames.Length.ToString() + "個檔案\n";
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
             richTextBox1.Text += "搜尋檔案, 只找一層 IMG_20180228_215525.jpg\n";
             foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_icon";
             DirectoryInfo dinfo = new DirectoryInfo(foldername);
@@ -1956,15 +1923,18 @@ namespace vcs_DiskDirectoryFile1
 
         private void FindAllFiles1(string foldername)
         {
+            //richTextBox1.Text += "讀取資料夾下的資料夾, 只看一層\n";
             string[] dirs = Directory.GetDirectories(foldername);  // 取得指定目錄中子目錄的名稱, 一層
+            //richTextBox1.Text += "總共" + dirs.Length.ToString() + "個資料夾\n";
             foreach (string dir in dirs)
             {
                 //richTextBox1.Text += "取得子目錄 : " + dir + "\n";
                 FindAllFiles1(dir);
             }
 
+            //richTextBox1.Text += "讀取資料夾下的檔案, 只看一層\n";
             string[] filenames = Directory.GetFiles(foldername);  // 取得指定目錄中檔案的名稱
-            //richTextBox1.Text += "檔案個數 = " + filenames.Length.ToString() + "\n";
+            //richTextBox1.Text += "總共" + filenames.Length.ToString() + "個檔案\n";
             //richTextBox1.Text += "資料夾: " + foldername + "\n";
             foreach (string filename in filenames)
             {
@@ -2127,5 +2097,27 @@ fs.Close();
 string all_text = File.ReadAllText(filename);
 File.WriteAllText(@"setting.txt", folderPath);
 
+//------------------------------------------------------------  # 60個
+
+List<FileInfo> myFiles = new List<FileInfo>();//创建List泛型对象
+myFiles.Add(new FileInfo(filename));//将遍历的所有文件添加到List对象中
+
+//------------------------------------------------------------  # 60個
+
+
+
 */
+
+
+/*
+FileInfo[] fis = dinfo.GetFiles();  // 由DI取得FI陣列, 單層檔案資訊
+FileInfo[] fis = dinfo.GetFiles("IMG_20180228_215525.jpg"))
+FileInfo[] fis = dinfo.GetFiles("*.jpg");
+FileInfo[] fis = dinfo.GetFiles("*.txt");
+FileInfo[] fis = dinfo.GetFiles("*.*");
+
+*/
+
+
+
 
