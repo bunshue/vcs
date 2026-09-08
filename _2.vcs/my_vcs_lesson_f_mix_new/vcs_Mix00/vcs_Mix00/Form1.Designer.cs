@@ -428,6 +428,7 @@
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(200, 60);
             this.button30.TabIndex = 130;
+            this.button30.Text = "取得任務欄尺寸大小";
             this.button30.UseVisualStyleBackColor = true;
             this.button30.Click += new System.EventHandler(this.button30_Click);
             // 

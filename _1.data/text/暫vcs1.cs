@@ -1,5 +1,4 @@
 ﻿
-
 pppp
 打印百分比
 private float ImageScale = 1.0f; //縮放比例
@@ -20,7 +19,6 @@ pppp
             txtTension.Text = Tension.ToString("0.0");
 
 //------------------------------------------------------------  # 60個
-            
 
 richTextBox1.Text += "year =    " +    year.ToString("00") + "\n";
 richTextBox1.Text += "month =   " +   month.ToString("00") + "\n";
@@ -35,9 +33,6 @@ richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯�
 richTextBox1.Text += receive_buffer_tmp[i].ToString("X2") + " ";
 
 richTextBox1.Text += byte_data[i].ToString("D03");
-
-
-
 
 //------------------------------------------------------------  # 60個
 
@@ -56,17 +51,12 @@ richTextBox1.Text += byte_data[i].ToString("D03");
 
 //------------------------------------------------------------  # 60個
 
-.format
-
-//------------------------------------------------------------  # 60個
-
 Color slateBlue = Color.FromName("SlateBlue");
 byte g = slateBlue.G;
 byte b = slateBlue.B;
 byte r = slateBlue.R;
 byte a = slateBlue.A;
 string text = String.Format("寫字範例\nSlate Blue has these ARGB values:\n A:{0}, " + "R:{1}, G: {2}, B {3}", new object[] { a, r, g, b });
-
 
 //------------------------------------------------------------  # 60個
 
@@ -163,24 +153,15 @@ private Thread thread_ex = null;
             byte[] b = new byte[l];
             byte[] s = Encoding.ASCII.GetBytes(toSend);
 
-
 //------------------------------------------------------------  # 60個
 
-
             Dictionary<string, int> dic = new Dictionary<string, int>();
             Dictionary<string, int> dic = new Dictionary<string, int>();
-
 
             var myList = dic.ToList();
-
             myList.Sort((p, v) => v.Value.CompareTo(p.Value));
 
-
-
-
-
 //------------------------------------------------------------  # 60個
-
 
             Console.WriteLine("例外處理類型   :{0}", ex.GetType().ToString());
             Console.WriteLine("錯誤訊息       :{0}", ex.Message);
@@ -188,23 +169,22 @@ private Thread thread_ex = null;
             Console.WriteLine("產生錯誤程序   :{0}", ex.TargetSite.Name);
             Console.WriteLine("錯誤之處       :{0}", ex.StackTrace);
 
-
 //------------------------------------------------------------  # 60個
 
 隱藏_顯示桌面圖標
 
-        [DllImport("user32")]
-        public static extern int FindWindow(string ClassName, string WindowName);
-        [DllImport("user32")]
-        public static extern int ShowWindow(int handle, int cmdshow);
+[DllImport("user32")]
+public static extern int FindWindow(string ClassName, string WindowName);
+[DllImport("user32")]
+public static extern int ShowWindow(int handle, int cmdshow);
 
-            //隱藏桌面圖標
-            ShowWindow(FindWindow("progman", null), 0);
-            richTextBox1.Text += "隱藏桌面圖標\n";
+//隱藏桌面圖標
+ShowWindow(FindWindow("progman", null), 0);
+richTextBox1.Text += "隱藏桌面圖標\n";
 
-            //顯示桌面圖標
-            ShowWindow(FindWindow("progman", null), 5);
-            richTextBox1.Text += "顯示桌面圖標\n";
+//顯示桌面圖標
+ShowWindow(FindWindow("progman", null), 5);
+richTextBox1.Text += "顯示桌面圖標\n";
 
 //------------------------------------------------------------  # 60個
 
@@ -267,35 +247,6 @@ public static extern int FindWindow(string lpClassName, string lpWindowName);
 public static extern int ShowWindow(int hwnd, int nCmdShow);
 //隱藏任務欄, 顯示任務欄 SP
 
-//------------------------------  # 30個
-
-//取得任務欄尺寸大小 ST
-
-[DllImport("user32.dll")]
-public static extern int FindWindow(string lpClassName, string lpWindowName);
-
-[DllImport("user32.dll")]
-public static extern int GetWindowRect(int hwnd, ref Rectangle lpRect);
-
-Rectangle myrect;
-
-//取得任務欄尺寸大小
-if (GetWindowRect(FindWindow("Shell_TrayWnd", null), ref myrect) == 0)
-{
-	return;
-}
-else
-{
-	richTextBox1.Text += "取得任務欄尺寸大小\n";
-	richTextBox1.Text += "上 : \t" + Convert.ToString(myrect.Top) + "\n";
-	richTextBox1.Text += "下 : \t" + Convert.ToString(myrect.Bottom) + "\n";
-	richTextBox1.Text += "左 : \t" + Convert.ToString(myrect.Left) + "\n";
-	richTextBox1.Text += "右 : \t" + Convert.ToString(myrect.Right) + "\n";
-}
-//取得任務欄尺寸大小 SP
-
-
-
 //------------------------------------------------------------  # 60個
 
         // Select the PictureBox with this color.
@@ -328,8 +279,6 @@ else
             SelectColumn(int.Parse(btn.Tag.ToString()));
         }
 
-
-
 //------------------------------------------------------------  # 60個
 
             // Work until the epsilon squared < this.
@@ -345,18 +294,6 @@ else
                     } while (epsilon.MagnitudeSquared() > cutoff);
 
 //------------------------------------------------------------  # 60個
-
-            List<Color> Colors = new List<Color>();
-
-            Colors.Add(Color.Red);
-            Colors.Add(Color.Green);
-            Colors.Add(Color.Blue);
-            Colors.Add(Color.Cyan);
-
-            int num_colors = Colors.Count;
-
-//------------------------------------------------------------  # 60個
-
 
 能夠各方向都可以選取圖片框
 
@@ -651,13 +588,6 @@ string[] month_names = CultureInfo.CurrentCulture.DateTimeFormat.MonthNames;
 
 DateTime first_of_month = new DateTime(year_num, month_num, 1);
 int num_days = DateTime.DaysInMonth(year_num, month_num);
-
-//------------------------------------------------------------  # 60個
-
-List->
-
-List<int> myLists = new List<int>();
-另外List如同一張資料表,你可以對它編輯,如加入某一列或刪除某一列.
 
 //------------------------------------------------------------  # 60個
 
@@ -4018,12 +3948,9 @@ old 暫存一下
 
 .net 4.5中新增了async和await這一對用於異步編程的關鍵字。
 
-
-
 新語法 目前不可用的
 
 NET Framework 4.0，這個版本還沒有 async/await
-
 
 //------------------------------------------------------------  # 60個
 
@@ -4277,24 +4204,6 @@ using System.Windows.Media.Imaging要引用PresentationCore
 
 在Windows上，[路徑]必須<248拜，[檔名加路徑]名必須<260拜
 
-	List<Point> points = new List<Point>(); // 紀錄滑鼠軌跡的陣列。	
-
-	List<MyFileInfo> fileinfos = new List<MyFileInfo>();             
-
-1維list宣告
-	List<string> myLists = new List<string>();
-	
-	myLists.Add("A001");
-	myLists.Add("A002");
-	myLists.Add("A003"); 
-
-2維list宣告
-	List<List<string>> myLists = new List<List<string>>();
-
-	myLists.Add(new List<string>() { "A001", "David" });
-	myLists.Add(new List<string>() { "A002", "John" });
-	myLists.Add(new List<string>() { "A003", "Tom" });             
-             
 //------------------------------------------------------------  # 60個
 
 bmp
@@ -5261,10 +5170,6 @@ RS422/RS485是可以一對多的通訊
 //------------------------------------------------------------  # 60個
 
 似乎表單是不能大於螢幕寬度的
-
-List<String> DuplicateList = new List();
-DuplicateList = DuplicateList.Distinct().ToList();
-//利用 Distinct 去除 List 中重複的資料
 
 //------------------------------------------------------------  # 60個
 

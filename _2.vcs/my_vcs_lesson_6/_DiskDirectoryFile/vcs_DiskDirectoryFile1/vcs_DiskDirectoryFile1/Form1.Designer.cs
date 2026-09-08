@@ -175,6 +175,7 @@
             this.bt_file03.Name = "bt_file03";
             this.bt_file03.Size = new System.Drawing.Size(200, 60);
             this.bt_file03.TabIndex = 12;
+            this.bt_file03.Text = "File的檔案操作方法";
             this.bt_file03.UseVisualStyleBackColor = true;
             this.bt_file03.Click += new System.EventHandler(this.bt_file03_Click);
             // 
@@ -525,6 +526,7 @@
             this.bt_files16.Name = "bt_files16";
             this.bt_files16.Size = new System.Drawing.Size(200, 60);
             this.bt_files16.TabIndex = 69;
+            this.bt_files16.Text = "屬性相關";
             this.bt_files16.UseVisualStyleBackColor = true;
             this.bt_files16.Click += new System.EventHandler(this.bt_files16_Click);
             // 

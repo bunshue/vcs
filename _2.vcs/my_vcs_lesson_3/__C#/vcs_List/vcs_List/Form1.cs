@@ -719,6 +719,16 @@ namespace vcs_List
 
         private void button9_Click(object sender, EventArgs e)
         {
+            //一維顏色串列
+            List<Color> Colors = new List<Color>();
+
+            Colors.Add(Color.Red);
+            Colors.Add(Color.Green);
+            Colors.Add(Color.Blue);
+            Colors.Add(Color.Cyan);
+
+            int num_colors = Colors.Count;
+
         }
 
         //------------------------------------------------------------  # 60個
@@ -1248,4 +1258,42 @@ int row = array.Rank;//獲取行數
 int col = array.GetLength(1);//獲取指定維中的元 個數，這裡也就是列數了。（1表示的是第二維，0是第一維）
 int col = array.GetUpperBound(0)+1;//獲取指定維度的上限，在 上一個1就是列數
 int num = array.Length;//獲取整個二維陣列的長度，即所有元 的個數
+
+//------------------------------------------------------------  # 60個
+
+List->
+
+List<int> myLists = new List<int>();
+另外List如同一張資料表,你可以對它編輯,如加入某一列或刪除某一列.
+
+
+	List<Point> points = new List<Point>(); // 紀錄滑鼠軌跡的陣列。	
+
+	List<MyFileInfo> fileinfos = new List<MyFileInfo>();             
+
+1維list宣告
+	List<string> myLists = new List<string>();
+	
+	myLists.Add("A001");
+	myLists.Add("A002");
+	myLists.Add("A003"); 
+
+2維list宣告
+	List<List<string>> myLists = new List<List<string>>();
+
+	myLists.Add(new List<string>() { "A001", "David" });
+	myLists.Add(new List<string>() { "A002", "John" });
+	myLists.Add(new List<string>() { "A003", "Tom" });             
+             
+//------------------------------------------------------------  # 60個
+
+List<String> DuplicateList = new List();
+DuplicateList = DuplicateList.Distinct().ToList();
+//利用 Distinct 去除 List 中重複的資料
+
+//------------------------------------------------------------  # 60個
+
 */
+
+
+

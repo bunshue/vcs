@@ -21,7 +21,7 @@ namespace vcs_Draw1
         Bitmap bitmap1;
         Font f;
 
-        string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
         public Form1()
         {
@@ -44,10 +44,10 @@ namespace vcs_Draw1
 
             //------------------------------------------------------------  # 60個
 
-            //畫 UAC
-
+            //畫 UAC, 在 pictureBox 上
             pictureBox_uac.Image = UacStuff.GetUacShieldImage();
-            // Add the shield to a button.
+
+            //畫 UAC, 在 button 上
             UacStuff.AddShieldToButton(button29);
         }
 
