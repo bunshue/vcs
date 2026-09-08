@@ -230,10 +230,13 @@ namespace vcs_DriveInfo1
             ulong freesize;
             freesize = GetFreeSpace("C");
             richTextBox1.Text += "磁碟C剩餘空間: " + freesize.ToString() + " bytes\n";
+            /*
             freesize = GetFreeSpace("D");
             richTextBox1.Text += "磁碟D剩餘空間: " + freesize.ToString() + " bytes\n";
+
             freesize = GetFreeSpace("G");
             richTextBox1.Text += "磁碟G剩餘空間: " + freesize.ToString() + " bytes\n";
+            */
         }
 
         /// <summary>
@@ -276,7 +279,7 @@ namespace vcs_DriveInfo1
                 }
                 else
                 {
-                    MessageBox.Show("NO");
+                    richTextBox1.Text += "取得資料錯誤\n";
                 }
             }
         }
@@ -308,11 +311,11 @@ namespace vcs_DriveInfo1
         private void button2_Click(object sender, EventArgs e)
         {
             //取得硬碟資訊
-            long fb, ftb, tfb;
-            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__RW\_excel";
 
-            //this.textBox4.Text = foldername;
-            richTextBox1.Text += "get : " + foldername + "\n";
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__RW\_excel";
+            long fb;
+            long ftb;
+            long tfb;
             if (GetDiskFreeSpaceEx(foldername, out fb, out ftb, out tfb) != 0)
             {
                 richTextBox1.Text += "磁碟總容量：" + ByteConversionTBGBMBKB(Convert.ToInt64(ftb)) + "\n";
@@ -321,7 +324,7 @@ namespace vcs_DriveInfo1
             }
             else
             {
-                MessageBox.Show("NO");
+                richTextBox1.Text += "取得資料錯誤\n";
             }
         }
         //取得硬碟資訊 SP
@@ -334,23 +337,36 @@ namespace vcs_DriveInfo1
             // 取得目前本機所有的磁碟機, GetLogicalDrives
 
             richTextBox1.Text += "列出Logical Drives\n";
-            foreach (string drive in Environment.GetLogicalDrives())
+            string[] drives = Environment.GetLogicalDrives();
+            foreach (string drive in drives)
             {
                 richTextBox1.Text += "\t" + drive + "\n";
             }
 
-            string[] drives = Environment.GetLogicalDrives();
+            //string[]
+            drives = Environment.GetLogicalDrives();
             richTextBox1.Text += "系統磁碟機：" + string.Join(", ", drives) + "\n";
 
             richTextBox1.Text += string.Format("系統磁碟機：{0}", string.Join(", ", drives)) + "\n";
 
-            //取得所有邏輯分區
-            //取得本地磁盤目錄
-            richTextBox1.Text += "取得所有邏輯分區\n";
-            string[] logicdrives = Directory.GetLogicalDrives();
-            for (int i = 0; i < logicdrives.Length; i++)
+
+            //GetLogicalDrives 3
+            //string[]
+            drives = Environment.GetLogicalDrives();
+            for (int i = 0; i < drives.Length; i++)
             {
-                richTextBox1.Text += "取得: " + logicdrives[i] + "\n";
+                richTextBox1.Text += "磁碟名稱 :" + drives[i] + "\n";
+                richTextBox1.Text += "全部大小 :" + GetHardDiskTotalSize(i).ToString() + " G" + "\n";
+                richTextBox1.Text += "可用大小 :" + GetHardDiskFreeSize(i).ToString() + " G" + "\n";
+            }
+
+            richTextBox1.Text += "取得所有邏輯分區\n";
+
+            //string[]
+            drives = Directory.GetLogicalDrives();  // 取得所有邏輯磁碟機
+            foreach (string drive in drives)
+            {
+                richTextBox1.Text += "drive : " + drive + "\n";
             }
         }
 
@@ -358,46 +374,12 @@ namespace vcs_DriveInfo1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //GetLogicalDrives 2
-            //顯示所有邏輯磁碟機
-            GetLogicalDrives();
-        }
-
-        // Print out all logical drives on the system.
-        void GetLogicalDrives()
-        {
-            try
-            {
-                string[] drives = Directory.GetLogicalDrives();
-
-                foreach (string str in drives)
-                {
-                    System.Console.WriteLine(str);
-                    richTextBox1.Text += "drive : " + str + "\n";
-                }
-            }
-            catch (IOException)
-            {
-                System.Console.WriteLine("An I/O error occurs.");
-            }
-            catch (System.Security.SecurityException)
-            {
-                System.Console.WriteLine("The caller does not have the required permission.");
-            }
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //GetLogicalDrives 3
-            string[] drive = Environment.GetLogicalDrives();
-            for (int i = 0; i < drive.Length; i++)
-            {
-                richTextBox1.Text += "磁碟名稱 :" + drive[i] + "\n";
-                richTextBox1.Text += "全部大小 :" + GetHardDiskTotalSize(i).ToString() + " G" + "\n";
-                richTextBox1.Text += "可用大小 :" + GetHardDiskFreeSize(i).ToString() + " G" + "\n";
-            }
         }
 
         /// <summary>
@@ -580,8 +562,7 @@ namespace vcs_DriveInfo1
             }
             else
             {
-                //Console.WriteLine("{0} is not a valid file or directory.", path);
-                richTextBox1.Text += "非合法路徑或檔案\n";
+                richTextBox1.Text += "非合法路徑或檔案 : " + path + "\n";
             }
         }
 

@@ -701,8 +701,8 @@ namespace vcs_ReadWrite_TXT
 
             filename = "tmp_poem.txt";
             //sw = new StreamWriter(filename); // true 是資料可附加至檔案, open write
-            sw = new StreamWriter(filename, true); // true 是資料可附加至檔案 open write append
-
+            sw = new StreamWriter(filename, true);  // true : append
+            
             sw.WriteLine("王之渙登鸛鵲樓"); // 寫入一行
             sw.Flush();
             sw.WriteLine(string1);  // 寫入一行
@@ -817,7 +817,7 @@ namespace vcs_ReadWrite_TXT
 
             //製作.inf檔
             //StreamWriter
-            sw = new StreamWriter("tmp_AutoRun.inf", false);
+            sw = new StreamWriter("tmp_AutoRun.inf", false);  // true : append, false : overwrite
             sw.WriteLine("[autorun]");
             sw.WriteLine("OPEN=AUTORUN.EXE");
             sw.WriteLine("ICON=run.ICO");
@@ -1141,7 +1141,7 @@ namespace vcs_ReadWrite_TXT
 
             sr = new StreamReader(filename1); // 開啟檔案
             StreamWriter sw = new StreamWriter(filename2); // true 是資料可附加至檔案, open write
-            //StreamWriter sw = new StreamWriter(filename2, true); // true 是資料可附加至檔案 open write append
+            //StreamWriter sw = new StreamWriter(filename2, true);  // true : append
 
             line = sr.ReadLine(); // 讀出一行
             while (line != null)

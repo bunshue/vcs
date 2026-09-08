@@ -21,7 +21,7 @@ namespace vcs_Draw1
         Bitmap bitmap1;
         Font f;
 
-        string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+        string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
         public Form1()
         {

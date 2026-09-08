@@ -104,15 +104,15 @@ namespace vcs_List
         {
             //類別List
 
-            List<Member> m = new List<Member>();   // 泛型           
+            List<Member> member_list = new List<Member>();   // 泛型           
 
-            m.Add(new Member() { Name = "David", Select = true, Score = 70 });
-            m.Add(new Member() { Name = "Mary", Select = false, Score = 65 });
-            m.Add(new Member() { Name = "Tom", Select = true, Score = 85 });
-            m.Add(new Member() { Name = "Jack", Select = true, Score = 95 });
+            member_list.Add(new Member() { Name = "David", Select = true, Score = 70 });
+            member_list.Add(new Member() { Name = "Mary", Select = false, Score = 65 });
+            member_list.Add(new Member() { Name = "Tom", Select = true, Score = 85 });
+            member_list.Add(new Member() { Name = "Jack", Select = true, Score = 95 });
 
             richTextBox1.Text += " === 泛型 LIst 操作不需強制轉換 .... \n";
-            foreach (var item in m)
+            foreach (var item in member_list)
             {
                 Console.WriteLine("姓名:{0} \t 選課:{1} \t 成績:{2} \n ", item.Name, item.Select ? "是" : "否", item.Score.ToString());
                 // Console.WriteLine(item.ToString());  // 執行此行 會呼叫覆寫覆類別 ToString()方法
@@ -1012,16 +1012,16 @@ namespace vcs_List
         private void button21_Click(object sender, EventArgs e)
         {
             //SortedList 1
-            SortedList m = new SortedList();  // 非泛型
+            SortedList students = new SortedList();  // 非泛型
 
-            m.Add("David", new Member1() { Name = "David", Select = true, Score = 70 });
-            m.Add("Mary", new Member1() { Name = "Mary", Select = false, Score = 65 });
-            m.Add("Tom", new Member1() { Name = "Tom", Select = true, Score = 85 });
-            m.Add("Jack", new Member1() { Name = "Jack", Select = true, Score = 95 });
+            students.Add("David", new Member1() { Name = "David", Select = true, Score = 70 });
+            students.Add("Mary", new Member1() { Name = "Mary", Select = false, Score = 65 });
+            students.Add("Tom", new Member1() { Name = "Tom", Select = true, Score = 85 });
+            students.Add("Jack", new Member1() { Name = "Jack", Select = true, Score = 95 });
 
             //非泛型操作
             richTextBox1.Text += "=== 非泛型 SortedList 操作需強制轉換 .... \n";
-            foreach (DictionaryEntry item in m)
+            foreach (DictionaryEntry item in students)
             {
                 richTextBox1.Text += ((Member1)item.Value).ToString() + "\n";
             }
@@ -1030,16 +1030,16 @@ namespace vcs_List
         private void button22_Click(object sender, EventArgs e)
         {
             //SortedList 2
-            SortedList<string, Member2> m = new SortedList<string, Member2>();
+            SortedList<string, Member2> students2 = new SortedList<string, Member2>();
 
-            m.Add("David", new Member2() { Name = "David", Select = true, Score = 70 });
-            m.Add("Mary", new Member2() { Name = "Mary", Select = false, Score = 65 });
-            m.Add("Tom", new Member2() { Name = "Tom", Select = true, Score = 85 });
-            m.Add("Jack", new Member2() { Name = "Jack", Select = true, Score = 95 });
+            students2.Add("David", new Member2() { Name = "David", Select = true, Score = 70 });
+            students2.Add("Mary", new Member2() { Name = "Mary", Select = false, Score = 65 });
+            students2.Add("Tom", new Member2() { Name = "Tom", Select = true, Score = 85 });
+            students2.Add("Jack", new Member2() { Name = "Jack", Select = true, Score = 95 });
 
             //泛型陣列操作
             richTextBox1.Text += "=== 泛型 SortedList 操作不需強制轉換 .... \n";
-            foreach (KeyValuePair<string, Member2> item in m)
+            foreach (KeyValuePair<string, Member2> item in students2)
             {
                 // Console.WriteLine (" 姓名:{0} \t 選課:{1}  \t  成績:{2}  \n" ,item.Key, item.Value.Select, item.Value.Score );
                 richTextBox1.Text += item.Value.ToString() + "\n";
@@ -1050,7 +1050,30 @@ namespace vcs_List
 
         private void button23_Click(object sender, EventArgs e)
         {
+            //一維陣列排序
+
+            //宣告一維陣列並初始化
+            ushort[] score = new ushort[] { 78, 65, 92, 55, 83 };
+
+            Array.Sort(score);//遞增排序
+            Array.Reverse(score);//遞減排序
+
+
+            //串列共同函數
+
+            //串列共同函數
+            //反相
+            //stringList1.Reverse();
+
+            //排序
+            //stringList1.Sort();
+
+            //清除List資料
+            //stringList1.Clear();
+
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button24_Click(object sender, EventArgs e)
         {
@@ -1061,7 +1084,7 @@ namespace vcs_List
         private void button25_Click(object sender, EventArgs e)
         {
             //二維陣列
-            string[,] data =
+            string[,] array_2d =
             {
                 { "mouse", "米老鼠", "3"},
                 { "ox", "班尼牛", "48"},
@@ -1069,19 +1092,20 @@ namespace vcs_List
                 { "rabbit", "彼得兔", "8"},
             };
 
-
-            int max_row = data.GetUpperBound(0);
-            int max_col = data.GetUpperBound(1);
+            int max_row = array_2d.GetUpperBound(0);
+            int max_col = array_2d.GetUpperBound(1);
             for (int row = 0; row <= max_row; row++)
             {
                 for (int col = 0; col <= max_col; col++)
                 {
                     //new_item.SubItems.Add();
-                    richTextBox1.Text += data[row, col] + "\t";
+                    richTextBox1.Text += array_2d[row, col] + "\t";
                 }
                 richTextBox1.Text += "\n";
             }
         }
+
+        //------------------------------------------------------------  # 60個
 
         struct Student
         {
@@ -1128,12 +1152,10 @@ namespace vcs_List
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button27_Click(object sender, EventArgs e)
         {
-            //宣告陣列並初始化
-            ushort[] score = new ushort[] { 78, 65, 92, 55, 83 };
-            Array.Sort(score);//遞增排序
-            Array.Reverse(score);//遞減排序
         }
 
         //------------------------------------------------------------  # 60個
@@ -1142,19 +1164,10 @@ namespace vcs_List
         {
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button29_Click(object sender, EventArgs e)
         {
-            //串列共同函數
-
-            //串列共同函數
-            //反相
-            //stringList1.Reverse();
-
-            //排序
-            //stringList1.Sort();
-
-            //清除List資料
-            //stringList1.Clear();
         }
     }
 

@@ -142,6 +142,7 @@
             this.bt_file09.Name = "bt_file09";
             this.bt_file09.Size = new System.Drawing.Size(200, 60);
             this.bt_file09.TabIndex = 53;
+            this.bt_file09.Text = "用 FileInfo 的方法 讀寫檔案";
             this.bt_file09.UseVisualStyleBackColor = true;
             this.bt_file09.Click += new System.EventHandler(this.bt_file09_Click);
             // 
@@ -534,7 +535,7 @@
             this.bt_files17.Name = "bt_files17";
             this.bt_files17.Size = new System.Drawing.Size(200, 60);
             this.bt_files17.TabIndex = 70;
-            this.bt_files17.Text = "SerachFile";
+            this.bt_files17.Text = "FindAllFiles";
             this.bt_files17.UseVisualStyleBackColor = true;
             this.bt_files17.Click += new System.EventHandler(this.bt_files17_Click);
             // 
