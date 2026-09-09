@@ -25,30 +25,17 @@ namespace vcs_CompareDirectory
         {
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            SizeColumns();
+            dataGridView1.Columns[0].Width = 300;
+            dataGridView1.Columns[1].Width = 300;
         }
 
         private void Form1_Resize(object sender, EventArgs e)
         {
-            SizeColumns();
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
-        }
-
-        //------------------------------------------------------------  # 60­Ó
-
-        private void SizeColumns()
-        {
-            int wid = (int)((dataGridView1.Width - 50) / 2);
-            if (wid < 10)
-            {
-                wid = 10;
-            }
-            dataGridView1.Columns[0].Width = wid;
-            dataGridView1.Columns[1].Width = wid;
         }
 
         //------------------------------------------------------------  # 60­Ó
