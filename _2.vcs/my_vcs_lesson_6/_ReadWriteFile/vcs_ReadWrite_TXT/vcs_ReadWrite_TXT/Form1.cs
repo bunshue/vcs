@@ -151,27 +151,6 @@ namespace vcs_ReadWrite_TXT
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename = "tmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
-
-            FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
-
-            StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("big5"));   //指名編碼格式
-
-            richTextBox1.Text += "RichTextBox1, 行數 : " + richTextBox1.Lines.Length.ToString() + "\t";
-            richTextBox1.Text += "內容 :\n";
-            int i;
-
-            for (i = 0; i < richTextBox1.Lines.Length; i++)
-            {
-                richTextBox1.Text += "i = " + i.ToString() + "\t" + richTextBox1.Lines[i].Trim() + "\t長度 :\t" + richTextBox1.Lines[i].Trim().Length.ToString() + "\n";
-            }
-
-            for (i = 0; i < richTextBox1.Lines.Length; i++)
-            {
-                sw.WriteLine(richTextBox1.Lines[i]);
-            }
-            sw.Close();
-            richTextBox1.Text += "已存檔 : " + filename + "\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -235,9 +214,37 @@ namespace vcs_ReadWrite_TXT
         {
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button8_Click(object sender, EventArgs e)
         {
+            //把RichTextBox中的資料存成純文字檔
+            //StreamWriter
+
+            string filename = "tmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
+
+            FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
+
+            StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("big5"));   //指名編碼格式
+
+            richTextBox1.Text += "RichTextBox1, 行數 : " + richTextBox1.Lines.Length.ToString() + "\t";
+            richTextBox1.Text += "內容 :\n";
+            int i;
+
+            for (i = 0; i < richTextBox1.Lines.Length; i++)
+            {
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + richTextBox1.Lines[i].Trim() + "\t長度 :\t" + richTextBox1.Lines[i].Trim().Length.ToString() + "\n";
+            }
+
+            for (i = 0; i < richTextBox1.Lines.Length; i++)
+            {
+                sw.WriteLine(richTextBox1.Lines[i]);
+            }
+            sw.Close();
+            richTextBox1.Text += "已存檔 : " + filename + "\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button9_Click(object sender, EventArgs e)
         {
@@ -245,104 +252,65 @@ namespace vcs_ReadWrite_TXT
 
         //------------------------------------------------------------  # 60個
 
-        private const int ENCODING_1 = 1;	//encoding type 1, big5
-        private const int ENCODING_2 = 2;	//encoding type 2, gb2312
-        private const int ENCODING_3 = 3;	//encoding type 3, shift_jis
-        private const int ENCODING_4 = 4;	//encoding type 4, unicode
-
         private void button10_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "使用各種編碼讀取/寫入檔案\n";
 
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+            //讀取 big5 / gb2312 / shift_jis / unicode 檔案
 
-            //讀取big5檔案
-            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\__text\Compressor.c";
-            read_text_file(filename1, ENCODING_1);
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\__text\Compressor.c";//big5
+            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\__text\sc\襟裳岬.txt";//gb2312
+            string filename3 = @"D:\_git\vcs\_1.data\______test_files1\__text\jap\饩Ⓚ丗钡冦冦葢轿瘅.txt";//shift_jis
+            string filename4 = @"D:\_git\vcs\_1.data\______test_files1\__text\Form1.cs.txt";//unicode
 
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            //讀取gb2312檔案
-            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\__text\sc\襟裳岬.txt";
-            read_text_file(filename2, ENCODING_2);
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            //讀取shift_jis檔案
-            string filename3 = @"D:\_git\vcs\_1.data\______test_files1\__text\jap\饩Ⓚ丗钡冦冦葢轿瘅.txt";
-            read_text_file(filename3, ENCODING_3);
+            read_text_file(filename1);//讀取big5檔案
+            read_text_file(filename2);//讀取gb2312檔案
+            read_text_file(filename3);//讀取shift_jis檔案
+            read_text_file(filename4);//讀取unicode檔案
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-            //讀取unicode檔案
-            string filename4 = @"D:\_git\vcs\_1.data\______test_files1\__text\Form1.cs.txt";
-            read_text_file(filename4, ENCODING_4);
+            //寫入 big5 / gb2312 / shift_jis / unicode 檔案
 
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            //寫入big5檔案
             filename1 = "tmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".big5.txt";
-            write_text_file(filename1, ENCODING_1);
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            //寫入gb2312檔案
             filename2 = "tmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".gb2312.txt";
-            write_text_file(filename2, ENCODING_2);
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            //寫入unicode檔案
             filename4 = "tmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".unicode.txt";
-            write_text_file(filename4, ENCODING_4);
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
+            write_text_file(filename1);//寫入big5檔案
+            write_text_file(filename2);//寫入gb2312檔案
+            write_text_file(filename4);//寫入unicode檔案
         }
 
-        void read_text_file(string filename, int encodng_type)
+        void read_text_file(string filename)
         {
             //使用指定編碼, big5、gb2312、shift_jis、unicode不分大小寫
 
             StreamReader sr;
 
-            switch (encodng_type)
-            {
-                case ENCODING_1:
-                    richTextBox1.Text += "ENCODING_1, Big5\n";
-                    //sr = new StreamReader(filename, Encoding.Default);    //Windows預設, 就是big5
-                    //sr = new StreamReader(filename, Encoding.GetEncoding("big5"));
-                    sr = new StreamReader(filename, Encoding.GetEncoding(950)); //same
-                    break;
-                case ENCODING_2:
-                    richTextBox1.Text += "ENCODING_2, gb2312\n";
-                    //sr = new StreamReader(filename, Encoding.GetEncoding("gb2312"));    //以gb2312編碼讀取文字檔案中的漢字, same
-                    sr = new StreamReader(filename, Encoding.GetEncoding("gb2312"), true);
-                    break;
-                case ENCODING_3:
-                    richTextBox1.Text += "ENCODING_3, Shift_jis\n";
-                    sr = new StreamReader(filename, Encoding.GetEncoding("shift_jis"));
-                    break;
-                case ENCODING_4:
-                    richTextBox1.Text += "ENCODING_4, Unicode\n";
-                    //sr = new StreamReader(filename, Encoding.Default);    //同
-                    //sr = new StreamReader(filename, Encoding.UTF8);       //同
-                    sr = new StreamReader(filename, Encoding.Unicode);      //同
-                    break;
-                default:
-                    richTextBox1.Text += "ENCODING unknown, xxxxxxxx\n";
-                    sr = new StreamReader(filename, Encoding.Default);  //使用默認編碼格式, 作業系統目前 ANSI 字碼頁的編碼方式
-                    break;
-            }
+            richTextBox1.Text += "Big5\n";
+            //sr = new StreamReader(filename, Encoding.Default);    //Windows預設, 就是big5
+            //sr = new StreamReader(filename, Encoding.GetEncoding("big5"));
+            sr = new StreamReader(filename, Encoding.GetEncoding(950)); //same
+
+            richTextBox1.Text += "gb2312\n";
+            //sr = new StreamReader(filename, Encoding.GetEncoding("gb2312"));    //以gb2312編碼讀取文字檔案中的漢字, same
+            sr = new StreamReader(filename, Encoding.GetEncoding("gb2312"), true);
+
+            richTextBox1.Text += "Shift_jis\n";
+            sr = new StreamReader(filename, Encoding.GetEncoding("shift_jis"));
+
+            richTextBox1.Text += "Unicode\n";
+            //sr = new StreamReader(filename, Encoding.Default);    //同
+            //sr = new StreamReader(filename, Encoding.UTF8);       //同
+            sr = new StreamReader(filename, Encoding.Unicode);      //同
+
+            sr = new StreamReader(filename, Encoding.Default);  //使用默認編碼格式, 作業系統目前 ANSI 字碼頁的編碼方式
+
             string all_text = sr.ReadToEnd();  //讀取所有文字內容
             richTextBox1.Text += all_text + "\n";
             sr.Close();
         }
 
-        void write_text_file(string filename, int encodng_type)
+        void write_text_file(string filename)
         {
             //使用指定編碼，big5、gb2312、shift_jis、unicode不分大小寫
 
@@ -351,30 +319,21 @@ namespace vcs_ReadWrite_TXT
             FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
             StreamWriter sw;
 
-            switch (encodng_type)
-            {
-                case ENCODING_1:
-                    richTextBox1.Text += "ENCODING_1, Big5\n";
-                    sw = new StreamWriter(fs, Encoding.GetEncoding("big5"));   //指名編碼格式
-                    break;
-                case ENCODING_2:
-                    richTextBox1.Text += "ENCODING_2, gb2312\n";
-                    sw = new StreamWriter(fs, Encoding.GetEncoding("gb2312"));   //指名編碼格式
-                    break;
-                case ENCODING_3:
-                    richTextBox1.Text += "ENCODING_3, Shift_jis\n";
-                    sw = new StreamWriter(fs, Encoding.GetEncoding("shift_jis"));   //指名編碼格式
-                    break;
-                case ENCODING_4:
-                    richTextBox1.Text += "ENCODING_4, Unicode\n";
-                    //sw = new StreamWriter(fs, Encoding.GetEncoding("utf-8"));   //指名編碼格式 the same
-                    sw = new StreamWriter(fs, Encoding.GetEncoding("unicode"));   //指名編碼格式
-                    break;
-                default:
-                    richTextBox1.Text += "ENCODING unknown, xxxxxxxx\n";
-                    sw = new StreamWriter(fs, Encoding.Default);   //指名編碼格式
-                    break;
-            }
+            richTextBox1.Text += "Big5\n";
+            sw = new StreamWriter(fs, Encoding.GetEncoding("big5"));   //指名編碼格式
+
+            richTextBox1.Text += "gb2312\n";
+            sw = new StreamWriter(fs, Encoding.GetEncoding("gb2312"));   //指名編碼格式
+
+            richTextBox1.Text += "Shift_jis\n";
+            sw = new StreamWriter(fs, Encoding.GetEncoding("shift_jis"));   //指名編碼格式
+
+            richTextBox1.Text += "Unicode\n";
+            //sw = new StreamWriter(fs, Encoding.GetEncoding("utf-8"));   //指名編碼格式 the same
+            sw = new StreamWriter(fs, Encoding.GetEncoding("unicode"));   //指名編碼格式
+
+            sw = new StreamWriter(fs, Encoding.Default);   //指名編碼格式
+
             sw.WriteLine(content);
             sw.Close();
 
@@ -390,7 +349,6 @@ namespace vcs_ReadWrite_TXT
             //寫入shift_jis檔案
 
             string filename = "tmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".shift_jis.txt";
-            //write_text_file(filename, ENCODING_3);
 
             //都はるみ全曲集２	shift_jis
             //byte[] data = { 0x93, 0x73, 0x82, 0xCD, 0x82, 0xE9, 0x82, 0xDD, 0x91, 0x53, 0x8B, 0xC8, 0x8F, 0x57, 0x82, 0x51 };
@@ -880,13 +838,6 @@ namespace vcs_ReadWrite_TXT
             //------------------------------------------------------------  # 60個
 
 
-
-
-
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-
         }
 
         //------------------------------------------------------------  # 60個
@@ -916,7 +867,7 @@ namespace vcs_ReadWrite_TXT
 
         private void button20_Click(object sender, EventArgs e)
         {
-            //編碼相關
+
 
         }
 
@@ -1661,7 +1612,7 @@ namespace vcs_ReadWrite_TXT
             }
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         public void StatisticsWords(string path)
         {
@@ -1743,16 +1694,14 @@ namespace vcs_ReadWrite_TXT
         private void button36_Click(object sender, EventArgs e)
         {
             //統計英文文本中的單詞數並排序
-            //統計英文文本中的單詞數並排序
             string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\english_text.txt";
             StatisticsWords(filename);
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button37_Click(object sender, EventArgs e)
         {
-            //一個檔案的英文字母出現的字數統計
             //一個檔案的英文字母出現的字數統計
 
             string filename = @"D:\_git\vcs\_1.data\______test_files1\__text\war_and_peace.txt";
@@ -1788,10 +1737,9 @@ namespace vcs_ReadWrite_TXT
                 }
             }
             sr.Close();
-
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button38_Click(object sender, EventArgs e)
         {
@@ -1831,6 +1779,13 @@ _C	|本|	672C	26412	_C	|的|	7684	30340	_C	|假|	5047	20551	_C	|名|	540D	21517	
 _C	|合|	5408	21512	_A	|、|	3001	12289	_C	|單|	55AE	21934	_C	|位|	4F4D	20301	_A	|、|	3001	12289	
 
 //------------------------------------------------------------  # 60個
+
+
+//StreamReader + StreamWriter 大全
+
+// StreamReader
+// StreamWriter
+
 
 //編碼相關 使用指定的編碼
 sw = new StreamWriter(filename, Encoding.Unicode);
@@ -1874,6 +1829,4 @@ sr.Close();
 
 
 */
-
-
 

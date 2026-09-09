@@ -62,11 +62,11 @@ namespace vcs_List
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            richTextBox1.Size = new Size(400, 690);
+            richTextBox1.Size = new Size(600, 690);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1070, 750);
+            this.Size = new Size(1270, 750);
             this.Text = "vcs_List";
 
             //設定執行後的表單起始位置, 正中央
@@ -459,7 +459,7 @@ namespace vcs_List
                 richTextBox1.Text += showlist[0] + "\t->\t" + showlist[1] + "\n";
             }
 
-            richTextBox1.Text += "------------------------------\n";  // 30個
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //建立 二維字串串列
             List<List<string>> list8 = new List<List<string>>();
@@ -474,10 +474,9 @@ namespace vcs_List
             richTextBox1.Text += "result : " + list8[1][0] + "\n"; // 輸出: 1,0: Jack
             richTextBox1.Text += "result : " + list8[1][1] + "\n"; // 輸出: 1,1: John
 
-            richTextBox1.Text += "------------------------------\n";  // 30個
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //二維字串串列
-
             //建立 二維字串串列
             List<string[]> stringList4 = new List<string[]>();
             stringList4.Add(new string[] { "AAA", "BBB" });
@@ -486,7 +485,7 @@ namespace vcs_List
             richTextBox1.Text += "Result : " + stringList4[1][1].ToString() + "\n";
             richTextBox1.Text += "Count : " + stringList4.Count.ToString() + "\n";
 
-            richTextBox1.Text += "------------------------------\n";  // 30個
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //建立 二維字串串列
             List<string[]> stringList5 = new List<string[]>();
@@ -597,7 +596,7 @@ namespace vcs_List
             }
             richTextBox1.Text += "\n";
 
-            richTextBox1.Text += "------------------------------\n";  // 30個
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //建立 二維字串串列
             List<string[]> stringList7 = new List<string[]>();
@@ -624,7 +623,37 @@ namespace vcs_List
                 string imgURL = fileName[0];
                 richTextBox1.Text += imgURL + "\n";
             }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //建立
+            //字串二維陣列
+            List<string[]> MyList = new List<string[]>();
+
+            MyList.Add(new string[] { "data111", "data222", DateTime.Now.ToString() });
+            MyList.Add(new string[] { "data333", "data444", DateTime.Now.ToString() });
+            MyList.Add(new string[] { "data555", "data666", DateTime.Now.ToString() });
+            richTextBox1.Text += "添加項目, 目前List共有 " + MyList.Count.ToString() + " 個項目\n";
+
+            //顯示
+            if (MyList.Count > 0)
+            {
+                richTextBox1.Text += "目前List共有 " + MyList.Count.ToString() + " 個項目, 分別是\n";
+                for (int i = 0; i < MyList.Count; i++)
+                {
+                    richTextBox1.Text += "MyList[" + i.ToString() + "][0] = " + MyList[i][0].ToString() +
+                        " MyList[" + i.ToString() + "][1] = " + MyList[i][1].ToString() +
+                        " MyList[" + i.ToString() + "][2] = " + MyList[i][2].ToString() + "\n";
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "目前List沒有項目\n";
+                return;
+            }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button6_Click(object sender, EventArgs e)
         {
@@ -1247,7 +1276,6 @@ namespace vcs_List
 
 /*
             byte[] number = { 21, 31, 41 };
-
             //宣告陣列並初始化
             int[] number = { 11, 21, 78, 125 };
 
@@ -1261,14 +1289,10 @@ int num = array.Length;//獲取整個二維陣列的長度，即所有元 的個
 
 //------------------------------------------------------------  # 60個
 
-List->
-
 List<int> myLists = new List<int>();
 另外List如同一張資料表,你可以對它編輯,如加入某一列或刪除某一列.
 
-
 	List<Point> points = new List<Point>(); // 紀錄滑鼠軌跡的陣列。	
-
 	List<MyFileInfo> fileinfos = new List<MyFileInfo>();             
 
 1維list宣告
@@ -1294,6 +1318,4 @@ DuplicateList = DuplicateList.Distinct().ToList();
 //------------------------------------------------------------  # 60個
 
 */
-
-
 

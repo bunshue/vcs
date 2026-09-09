@@ -251,18 +251,16 @@ namespace vcs_Draw_Brush
             g.FillRectangle(tb, rect);       //(紋理刷)
             g.DrawString("紋理刷1", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(x_st + w + 10, y_st));
 
-            //3030
+            //------------------------------  # 30個
+
+            int W = pictureBox1.ClientSize.Width;
+            int H = pictureBox1.ClientSize.Height;
+            int pen_width = 25;
+            Pen p = new Pen(Color.Red, 10);
 
             x_st = 180;
             y_st = 50;
             dy = 140;
-            int W = pictureBox1.ClientSize.Width;
-            int H = pictureBox1.ClientSize.Height;
-            int pen_width = 25;
-
-            Pen p = new Pen(Color.Red, 10);     //default pen
-
-            //------------------------------  # 30個
 
             //用圖片填滿筆刷
             richTextBox1.Text += "TextureBrush 圖案筆\n";
@@ -556,6 +554,8 @@ namespace vcs_Draw_Brush
         {
             //彩色曲線
 
+            int W = pictureBox1.ClientSize.Width;
+            int H = pictureBox1.ClientSize.Height;
             Bitmap bitmap1 = new Bitmap(600, 600);
             Graphics g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
             g.SmoothingMode = SmoothingMode.AntiAlias;
@@ -570,7 +570,7 @@ namespace vcs_Draw_Brush
             }
 
             RectangleF world_rect = new RectangleF(0, 0, 100, 100);
-            RectangleF device_rect = new RectangleF(5, 5, pictureBox1.ClientSize.Width - 10, pictureBox1.ClientSize.Height - 10);
+            RectangleF device_rect = new RectangleF(5, 5, W - 10, H - 10);
             SetTransformation(g, world_rect, device_rect, false, true);
 
             // Draw the axes.
@@ -725,17 +725,17 @@ namespace vcs_Draw_Brush
             lgb2 = new LinearGradientBrush(R2, Color.Green, Color.Yellow, -45);
             g.FillPie(lgb2, R2, 30, 300);
 
-            //3030
+            //------------------------------------------------------------  # 60個
 
             x_st = 180;
             y_st = 50;
             int dy = 140;
-            //W = pictureBox1.ClientSize.Width;
-            //H = pictureBox1.ClientSize.Height;
+            W = pictureBox1.ClientSize.Width;
+            H = pictureBox1.ClientSize.Height;
             int pen_width = 25;
 
             p = new Pen(Color.Red, 10);     //default pen
-            rect1 = new Rectangle(0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
+            rect1 = new Rectangle(0, 0, W, H);
             lgb = new LinearGradientBrush(rect1, Color.Blue, Color.Red, 90);
             p = new Pen(lgb, pen_width);
             y_st += dy * 4;
@@ -1156,9 +1156,10 @@ namespace vcs_Draw_Brush
             //GraphicsPath - FillPath() 心形
 
             GraphicsPath gp = new GraphicsPath();
-            int Cx = this.pictureBox3.ClientSize.Width / 2; // 視窗客戶區的中心點
-            int Cy = this.pictureBox3.ClientSize.Height / 2;
-
+            int W = pictureBox3.ClientSize.Width;
+            int H = pictureBox3.ClientSize.Height;
+            int Cx = W / 2; // 視窗客戶區的中心點
+            int Cy = H / 2;
             int D = 20;    // 每格 寬
             int x = Cx;    // 心臟的起始點
             int y = Cy - 2 * D;
@@ -1182,7 +1183,6 @@ namespace vcs_Draw_Brush
                           new PointF(x, y),
                           };
             gp.AddCurve(pt2, 0.6f);
-
 
             if (heart_type == 0)
             {
@@ -1222,22 +1222,15 @@ namespace vcs_Draw_Brush
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-
 /*
 
-HatchBrush myBrush1 = new HatchBrush(HatchStyle.Cross, Color.Red);
-e.Graphics.FillEllipse(myBrush1, 0 - D, 0 - D, 2 * D, 2 * D); //畫出旋轉的圓點 
+HatchBrush hb = new HatchBrush(HatchStyle.Cross, Color.Red);
+e.Graphics.FillEllipse(hb, 0 - D, 0 - D, 2 * D, 2 * D);
 
-*/
+//------------------------------------------------------------  # 60個
 
-
-
-/*
 FillRegion
-
-TextureBrush newBrush = new TextureBrush(myPic);
-g.FillRegion(newBrush, new Region(PaintPath));
-
+TextureBrush tb = new TextureBrush(bitmap0);//用圖片做成的筆刷
+g.FillRegion(tb, new Region(PaintPath));
 */
-
 

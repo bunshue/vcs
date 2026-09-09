@@ -13,7 +13,7 @@ using System.Xml.Linq;  //for XNamespace, XElement
 
 //作為一個小型的數據存儲傳遞的工具——XML
 
-namespace vcs_ReadWrite_XML0_mix
+namespace vcs_ReadWrite_XML4
 {
     public partial class Form1 : Form
     {
@@ -73,7 +73,7 @@ namespace vcs_ReadWrite_XML0_mix
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1070, 750);
-            this.Text = "vcs_ReadWrite_XML0_mix";
+            this.Text = "vcs_ReadWrite_XML4";
 
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;

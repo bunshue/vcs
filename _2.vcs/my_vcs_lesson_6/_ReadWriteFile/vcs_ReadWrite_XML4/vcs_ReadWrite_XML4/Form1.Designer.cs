@@ -1,4 +1,4 @@
-﻿namespace vcs_ReadWrite_XML0_mix
+﻿namespace vcs_ReadWrite_XML4
 {
     partial class Form1
     {

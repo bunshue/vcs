@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;
 using System.Drawing.Imaging;   //for ImageFormat
 using System.Drawing.Drawing2D; //for GraphicsState
 using System.Drawing.Text;      //for TextRenderingHint
@@ -319,14 +320,17 @@ namespace vcs_Draw1
 
         private void DrawGrid()
         {
+            int W = pictureBox1.ClientSize.Width;
+            int H = pictureBox1.ClientSize.Height;
+
             p = new Pen(Color.Navy, 1);
             for (int i = 0; i < 7; i++)
             {
-                g.DrawLine(p, 0, i * 100, pictureBox1.ClientSize.Width - 1, i * 100);
+                g.DrawLine(p, 0, i * 100, W - 1, i * 100);
             }
             for (int i = 0; i < 7; i++)
             {
-                g.DrawLine(p, new Point(i * 100, 0), new Point(i * 100, pictureBox1.ClientSize.Height - 1));
+                g.DrawLine(p, new Point(i * 100, 0), new Point(i * 100, H - 1));
             }
         }
 
@@ -1320,8 +1324,10 @@ namespace vcs_Draw1
             g.Clear(Color.Pink);
             g.DrawImage(image1, rect); // 呈現原圖
             g.DrawLine(p, 0, 100, image1.Width, 100); // 畫出透明的直線
-            int Cx = this.pictureBox1.ClientSize.Width / 2; // 視窗客戶區 正中心
-            int Cy = this.pictureBox1.ClientSize.Height / 2;
+            int W = pictureBox1.ClientSize.Width;
+            int H = pictureBox1.ClientSize.Height;
+            int Cx = W / 2; // 視窗客戶區 正中心
+            int Cy = H / 2;
             g.FillEllipse(sb, Cx - 100, Cy - 100, 200, 200); // 繪畫出透明的圓形
 
             pictureBox1.Image = bitmap1;
@@ -1331,16 +1337,63 @@ namespace vcs_Draw1
 
         private void button8_Click(object sender, EventArgs e)
         {
+            Graphics g = this.pictureBox1.CreateGraphics();
+            //g.CompositingMode = CompositingMode.SourceCopy;
+
+            g.FillRectangle(Brushes.White, this.ClientRectangle);
+            for (int i = 0; i < 7; ++i)
+            {
+                //在窗體上面畫出橙色的矩形
+                Rectangle r = new Rectangle(i * 40 - 15, 0, 15, this.ClientRectangle.Height);
+                g.FillRectangle(Brushes.Orange, r);
+            }
+
+            // 創建一個帶有Alpha的紅色區域
+            // 並將其畫在內存的位圖裏面
+            SolidBrush sb = new SolidBrush(Color.FromArgb(0x60, 0xff, 0, 0));
+            g.FillEllipse(sb, 70, 70, 160, 160);
+
+            // 創建一個帶有Alpha的綠色區域
+            Color green = Color.FromArgb(0x40, 0, 0xff, 0);
+            Brush greenBrush = new SolidBrush(green);
+            g.FillRectangle(greenBrush, 10, 10, 140, 140);
+
+
+
+            /*
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            //讀檔 至 Image 影像
+            Image image = Image.FromFile(filename); // 產生一個Image物件
+            //旋轉
+            image.RotateFlip(RotateFlipType.Rotate90FlipNone); // 影像旋轉90度
+            //畫出來
+            g.DrawImage(image, 10, 50, image.Width, image.Height);
+            //              貼上的位置      貼上的大小 放大縮小用
+
+            //製作縮圖
+            int w = 100;	//預縮放的圖的寬度
+            Image imgThumbnail = image1.GetThumbnailImage(w, (int)(w * image1.Height / image1.Width), null, (IntPtr)0);
+            */
+
+
+
+            // 清理資源
+            sb.Dispose();
+            greenBrush.Dispose();
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button9_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "AAAAAAAAAAAAAAAAAAAAAAAA\n";
+
             //畫格線
-            bitmap1 = new Bitmap(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height);
+            int W = pictureBox1.ClientSize.Width;
+            int H = pictureBox1.ClientSize.Height;
+            bitmap1 = new Bitmap(W, H);
             Graphics g = Graphics.FromImage(bitmap1);
-            draw_grid2(g);
+            draw_grid2(g);  // 畫格線
             pictureBox1.Image = bitmap1;
 
             //------------------------------------------------------------  # 60個
@@ -1364,38 +1417,8 @@ namespace vcs_Draw1
 
             //------------------------------------------------------------  # 60個
 
-            //用GDI+畫圖
 
-            //Graphics g = this.pictureBox1.CreateGraphics();
-            g.FillRectangle(Brushes.White, this.ClientRectangle);
-            for (int i = 1; i <= 7; ++i)
-            {
-                //在窗體上面畫出橙色的矩形
-                Rectangle r = new Rectangle(i * 40 - 15, 0, 15, this.ClientRectangle.Height);
-                g.FillRectangle(Brushes.Orange, r);
-            }
-            //在內存中創建一個Bitmap並設置CompositingMode
-            Bitmap bmp = new Bitmap(260, 260, PixelFormat.Format32bppArgb);
-            Graphics gBmp = Graphics.FromImage(bmp);
-            gBmp.CompositingMode = CompositingMode.SourceCopy;
 
-            // 創建一個帶有Alpha的紅色區域
-            // 並將其畫在內存的位圖裏面
-            SolidBrush sb = new SolidBrush(Color.FromArgb(0x60, 0xff, 0, 0));
-            gBmp.FillEllipse(sb, 70, 70, 160, 160);
-            // 創建一個帶有Alpha的綠色區域
-            Color green = Color.FromArgb(0x40, 0, 0xff, 0);
-            Brush greenBrush = new SolidBrush(green);
-            gBmp.FillRectangle(greenBrush, 10, 10, 140, 140);
-
-            //在窗體上面畫出位圖 now draw the bitmap on our window
-            g.DrawImage(bmp, 20, 20, bmp.Width, bmp.Height);
-
-            // 清理資源
-            bmp.Dispose();
-            gBmp.Dispose();
-            sb.Dispose();
-            greenBrush.Dispose();
         }
 
         private void PaintImage(Graphics g)
@@ -1496,9 +1519,7 @@ namespace vcs_Draw1
 
             //畫示意圖
             string filename = @"D:\_git\vcs\_1.data\______test_files1\_material\AntiAlias.jpg";
-            //讀檔 至 Image 影像
             Image img = Image.FromFile(filename); // 產生一個Image物件
-            //畫出來
             g.DrawImage(img, 300, 380, img.Width / 2, img.Height / 2);
 
             pictureBox1.Image = bitmap1;
@@ -1829,6 +1850,29 @@ namespace vcs_Draw1
 
         private void button17_Click(object sender, EventArgs e)
         {
+            //臨江仙
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_臨江仙";
+
+            //pictureBox1.Size = new Size
+            pictureBox1.Size = new Size(1030, 700);
+
+            bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.Pink);
+
+            int num = 0;
+            int x_st = 20;
+            int y_st = 60;
+            int dx = 100;
+            int dy = 100;
+            foreach (string filename in Directory.GetFiles(foldername, "*.jpeg"))
+            {
+                Bitmap bmp = new Bitmap(filename);
+                g.DrawImage(bmp, x_st + dx * (num % 10), y_st + dy * (num / 10), bmp.Width / 8, bmp.Height / 8);
+                num++;
+            }
+            pictureBox1.Image = bitmap1;
         }
 
         //------------------------------------------------------------  # 60個
@@ -2619,10 +2663,11 @@ namespace vcs_Draw1
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            //g.Clear(Color.White);
             if (checkBox1.Checked == true)
             {
-                bitmap1 = new Bitmap(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height);
+                int W = pictureBox1.ClientSize.Width;
+                int H = pictureBox1.ClientSize.Height;
+                bitmap1 = new Bitmap(W, H);
                 Graphics g = Graphics.FromImage(bitmap1);
                 draw_grid2(g);
                 pictureBox1.Image = bitmap1;
@@ -2631,17 +2676,20 @@ namespace vcs_Draw1
 
         public void draw_grid2(Graphics g)
         {
+            int W = pictureBox1.ClientSize.Width;
+            int H = pictureBox1.ClientSize.Height;
+
             int i;
-            int rows = pictureBox1.ClientSize.Height / 100;
-            int cols = pictureBox1.ClientSize.Width / 100;
+            int rows = H / 100;
+            int cols = W / 100;
             p = new Pen(Color.Navy, 1);
             for (i = 0; i <= rows; i++)
             {
-                g.DrawLine(p, 0, i * 100, pictureBox1.ClientSize.Width - 1, i * 100);
+                g.DrawLine(p, 0, i * 100, W - 1, i * 100);
             }
             for (i = 0; i <= cols; i++)
             {
-                g.DrawLine(p, new Point(i * 100, 0), new Point(i * 100, pictureBox1.ClientSize.Height - 1));
+                g.DrawLine(p, new Point(i * 100, 0), new Point(i * 100, H - 1));
             }
         }
 
@@ -2666,7 +2714,7 @@ bitmap1.SetPixel(xx, yy, Color.FromArgb(30, 0x11, 0x33, 0x55));
 bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0, 0, 0));
 
 Color p = bitmap1.GetPixel(xx, yy);
-//richTextBox1.Text += p.ToString() + " ";
+richTextBox1.Text += p.ToString() + " ";
 richTextBox1.Text += p.A.ToString("X2") + p.R.ToString("X2") + p.G.ToString("X2") + p.B.ToString("X2") + " ";
 
 //------------------------------------------------------------  # 60個
@@ -2676,19 +2724,6 @@ new Font(this.Font, FontStyle.Italic),
                 
 //Graphics.DrawImage (Image, Rectangle, Rectangle, GraphicsUnit)
 //四個參數分別是     來源影像 目標區域  來源區域      單位
-
-string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-//讀檔 至 Image 影像
-Image image = Image.FromFile(filename); // 產生一個Image物件
-//旋轉
-image.RotateFlip(RotateFlipType.Rotate90FlipNone); // 影像旋轉90度
-//畫出來
-g.DrawImage(image, 10, 50, image.Width, image.Height);
-//              貼上的位置      貼上的大小 放大縮小用
-
-//製作縮圖
-int w = 100;	//預縮放的圖的寬度
-Image imgThumbnail = image1.GetThumbnailImage(w, (int)(w * image1.Height / image1.Width), null, (IntPtr)0);
 
 //------------------------------------------------------------  # 60個
 
@@ -2771,8 +2806,10 @@ string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
 Bitmap bitmap1 = new Bitmap(filename);
 
-int Cx = this.pictureBox1.ClientSize.Width  / 2;  // 視窗客戶區 正中心
-int Cy = this.pictureBox1.ClientSize.Height / 2;
+int W = pictureBox1.ClientSize.Width;
+int H = pictureBox1.ClientSize.Height;
+int Cx = W / 2;  // 視窗客戶區 正中心
+int Cy = H / 2;
 
 int W = bitmap1.Width;
 int H = bitmap1.Height;
@@ -2784,3 +2821,4 @@ g.DrawImage(bitmap1, Cx, Cy, -W / 2, -H / 2);
 */
 
 //f = new Font("Times New Roman", 40, FontStyle.Regular, GraphicsUnit.Pixel);
+

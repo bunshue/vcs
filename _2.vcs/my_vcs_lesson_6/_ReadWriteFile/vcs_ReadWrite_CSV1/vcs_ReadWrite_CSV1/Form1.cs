@@ -85,54 +85,58 @@ namespace vcs_ReadWrite_CSV1
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //串列資料轉CSV檔
+            //簡易 製作/讀取 CSV檔
 
-            //建立
-            //字串二維陣列
-            List<string[]> MyList = new List<string[]>();
+            //製作CSV檔
 
-            MyList.Add(new string[] { "data111", "data222", DateTime.Now.ToString() });
-            MyList.Add(new string[] { "data333", "data444", DateTime.Now.ToString() });
-            MyList.Add(new string[] { "data555", "data666", DateTime.Now.ToString() });
-            richTextBox1.Text += "添加項目, 目前List共有 " + MyList.Count.ToString() + " 個項目\n";
+            string filename = Application.StartupPath + "\\aacsv_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".csv";
 
-            //顯示
-            if (MyList.Count > 0)
-            {
-                richTextBox1.Text += "目前List共有 " + MyList.Count.ToString() + " 個項目, 分別是\n";
-                for (int i = 0; i < MyList.Count; i++)
-                {
-                    richTextBox1.Text += "MyList[" + i.ToString() + "][0] = " + MyList[i][0].ToString() +
-                        " MyList[" + i.ToString() + "][1] = " + MyList[i][1].ToString() +
-                        " MyList[" + i.ToString() + "][2] = " + MyList[i][2].ToString() + "\n";
-                }
-            }
-            else
-            {
-                richTextBox1.Text += "目前List沒有項目\n";
-                return;
-            }
+            string columns = "第一欄" + "," + "第二欄" + "," + "第三欄" + "\n";
+            string datas = "aaa" + "," + "bbb" + "," + "ccc" + "\n";
 
-            //------------------------------  # 30個
+            StreamWriter stream = File.CreateText(filename);
 
-            //List匯出到CSV檔
-            String filename = Application.StartupPath + "\\csv_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".csv";
+            //File.WriteAllText(filename, csv);
+
+            stream.WriteLine(columns);
+            stream.WriteLine(datas);
+            stream.WriteLine(datas);
+            stream.WriteLine(datas);
+            stream.WriteLine(datas);
+            stream.WriteLine(datas);
+            stream.Close();
+
+            richTextBox1.Text += "存檔檔名: " + filename + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            filename = Application.StartupPath + "\\bbcsv_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".csv";
             //StreamWriter sw = new StreamWriter(File.Open(filename, FileMode.Create), Encoding.GetEncoding("UTF-8"));    //指名編碼格式
             StreamWriter sw = new StreamWriter(File.Open(filename, FileMode.Create), Encoding.UTF8);    //指名編碼格式
 
-            string content = "第一欄" + "," + "第二欄" + "," + "時間" + "\n";
-            for (int i = 0; i < MyList.Count; i++)
-            {
-                richTextBox1.Text += "MyList[" + i.ToString() + "][0] = " + MyList[i][0].ToString() +
-                    " MyList[" + i.ToString() + "][1] = " + MyList[i][1].ToString() +
-                    " MyList[" + i.ToString() + "][2] = " + MyList[i][2].ToString() + "\n";
-                content += MyList[i][0].ToString() + "," + MyList[i][1].ToString() + "," + MyList[i][2].ToString() + "\n";
-            }
-
-            sw.WriteLine(content);
+            sw.WriteLine(columns);
+            sw.WriteLine(datas);
+            sw.WriteLine(datas);
+            sw.WriteLine(datas);
+            sw.WriteLine(datas);
+            sw.WriteLine(datas);
             sw.Close();
+
             richTextBox1.Text += "存檔檔名: " + filename + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            //StreamWriter
+            sw = new StreamWriter(filename, false, Encoding.Default);
+
+            for (int i = 0; i < 5; i++)
+            {
+                //sw.WriteLine(ConvertToSaveLine((ArrayList)this.rowAL[i]));
+            }
+            sw.Close();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -140,22 +144,6 @@ namespace vcs_ReadWrite_CSV1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //製作CSV檔
-
-            string filename = Application.StartupPath + "\\csv_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".csv";
-
-            int aaa = 123;
-            int bbb = 456;
-
-            StreamWriter stream = File.CreateText(filename);
-            string first = aaa.ToString();
-            string second = bbb.ToString();
-            string csv = string.Format("{0},{1}\n", first, second);
-            //File.WriteAllText(filename, csv);
-            stream.WriteLine(csv);
-            richTextBox1.Text += "csv : " + csv + "\n";
-
-            richTextBox1.Text += "存檔檔名: " + filename + "\n";
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -482,12 +470,6 @@ namespace vcs_ReadWrite_CSV1
             //讀取CSV檔
 
             string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\vcs_ReadWrite_CSV_data.csv";
-
-            if (File.Exists(filename) == false)
-            {
-                richTextBox1.Text += "檔案 " + filename + " 不存在，離開。\n";
-                return;
-            }
 
             // Get the data.
             string[,] values = LoadCsv2(filename);
@@ -1412,14 +1394,17 @@ namespace vcs_ReadWrite_CSV1
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button18_Click(object sender, EventArgs e)
         {
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button19_Click(object sender, EventArgs e)
         {
-
         }
     }
 }
@@ -1466,13 +1451,6 @@ namespace vcs_ReadWrite_CSV1
 
 //------------------------------------------------------------  # 60個
 
-            System.IO.StreamWriter sw = new StreamWriter(this.fileName, false, Encoding.Default);
-
-            for (int i = 0; i < this.rowAL.Count; i++)
-            {
-                sw.WriteLine(ConvertToSaveLine((ArrayList)this.rowAL[i]));
-            }
-            sw.Close();
 */
 
 
