@@ -23,19 +23,6 @@ namespace vcs_GetFileInfo
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
-
-            //------------------------------------------------------------  # 60個
-
-            textBox1.Text = foldername;
-
-            listView1.Items.Clear();
-
-            foreach (string strFile in Directory.GetFiles(textBox1.Text))
-            {
-                FileInfo fi = new FileInfo(strFile);
-                richTextBox1.Text += "加入 : " + fi.FullName + "\n";
-                listView1.Items.Add(fi.FullName);
-            }
         }
 
         void show_item_location()
@@ -52,7 +39,6 @@ namespace vcs_GetFileInfo
             pictureBox1.Size = new Size(W * 2, H * 5);
             richTextBox1.Size = new Size(W * 2, H * 7 + 10);
 
-            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             listView1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 5 - 40);
@@ -78,17 +64,13 @@ namespace vcs_GetFileInfo
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-            {
-                listView1.Items.Clear();
-                textBox1.Text = folderBrowserDialog1.SelectedPath;
+            listView1.Items.Clear();
 
-                foreach (string strFile in Directory.GetFiles(textBox1.Text))
-                {
-                    FileInfo fi = new FileInfo(strFile);
-                    richTextBox1.Text += "加入 : " + fi.FullName + "\n";
-                    listView1.Items.Add(fi.FullName);
-                }
+            foreach (string strFile in Directory.GetFiles(foldername))
+            {
+                FileInfo fi = new FileInfo(strFile);
+                richTextBox1.Text += "加入 : " + fi.FullName + "\n";
+                listView1.Items.Add(fi.FullName);
             }
         }
 
@@ -129,6 +111,11 @@ namespace vcs_GetFileInfo
                     pictureBox1.Image = null;
                 }
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

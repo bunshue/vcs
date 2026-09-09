@@ -315,6 +315,7 @@
             this.bt_files12.Name = "bt_files12";
             this.bt_files12.Size = new System.Drawing.Size(200, 60);
             this.bt_files12.TabIndex = 57;
+            this.bt_files12.Text = "Directory.GetFiles()";
             this.bt_files12.UseVisualStyleBackColor = true;
             this.bt_files12.Click += new System.EventHandler(this.bt_files12_Click);
             // 
@@ -516,6 +517,7 @@
             this.bt_files15.Name = "bt_files15";
             this.bt_files15.Size = new System.Drawing.Size(200, 60);
             this.bt_files15.TabIndex = 68;
+            this.bt_files15.Text = "搜尋檔案";
             this.bt_files15.UseVisualStyleBackColor = true;
             this.bt_files15.Click += new System.EventHandler(this.bt_files15_Click);
             // 
@@ -548,6 +550,7 @@
             this.bt_files18.Name = "bt_files18";
             this.bt_files18.Size = new System.Drawing.Size(200, 60);
             this.bt_files18.TabIndex = 71;
+            this.bt_files18.Text = "FindAllFiles2";
             this.bt_files18.UseVisualStyleBackColor = true;
             this.bt_files18.Click += new System.EventHandler(this.bt_files18_Click);
             // 

@@ -52,22 +52,12 @@ namespace vcs_DiskDirectoryFile2
             button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
             richTextBox1.Size = new Size(530, 690);
-            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1200, 750);
+            this.Size = new Size(990, 750);
             this.Text = "vcs_DiskDirectoryFile2";
 
             //設定執行後的表單起始位置, 正中央
@@ -78,189 +68,6 @@ namespace vcs_DiskDirectoryFile2
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button0_Click(object sender, EventArgs e)
-        {
-            //撈出資料夾內的檔案(一層)
-            string foldername = @"D:\_git\vcs\_1.data\______test_files1";
-
-            SearchOption search_option;
-            search_option = SearchOption.TopDirectoryOnly;
-            //string[] patterns = { "*.png", "*.bmp", "*.jpg", "*.jpeg", "*.gif" };     //指名搜尋pattern
-            string[] patterns = { "*.*" };  //指名搜尋pattern
-            foreach (string pattern in patterns)
-            {
-                // Find the matching files.
-                foreach (string filename in Directory.GetFiles(foldername, pattern, search_option))
-                {
-                    richTextBox1.Text += filename + "\n";
-                }
-            }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //撈出資料夾內的檔案(多層)
-            string foldername = @"D:\_git\vcs\_1.data\______test_files1";
-
-            SearchOption search_option;
-            search_option = SearchOption.AllDirectories;
-            //string[] patterns = { "*.png", "*.bmp", "*.jpg", "*.jpeg", "*.gif" }; //指名搜尋pattern
-            string[] patterns = { "*.*" };  //指名搜尋pattern
-
-            //多個搜尋pattern
-            foreach (string pattern in patterns)
-            {
-                string[] filename = Directory.GetFiles(foldername, pattern, search_option);
-                foreach (string fname in filename)
-                {
-                    richTextBox1.Text += fname + "\n";
-                }
-            }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            //撈出資料夾內的檔案(一層), 所有檔案
-            string foldername = @"D:\_git\vcs\_1.data\______test_files1";
-
-            foreach (string filename in Directory.GetFileSystemEntries(foldername))
-            {
-                richTextBox1.Text += filename + "\n";
-            }
-
-            //------------------------------------------------------------  # 60個
-
-            //撈出資料夾內的TXT檔案(一層), 限定 *.txt
-            foldername = @"D:\_git\vcs\_1.data\______test_files1";
-
-            foreach (string filename in Directory.GetFileSystemEntries(foldername, "*.txt"))
-            {
-                richTextBox1.Text += filename + "\n";
-            }
-
-            //------------------------------------------------------------  # 60個
-
-            //取得一層檔案
-            foldername = @"D:\_git\vcs\_1.data\______test_files1";
-
-            DirectoryInfo dir = new DirectoryInfo(foldername);
-            FileInfo[] files = dir.GetFiles();
-            StringBuilder sb = new StringBuilder();
-            foreach (FileInfo file in files)
-            {
-                richTextBox1.Text += file.Name + "\n";
-            }
-
-            //------------------------------------------------------------  # 60個
-
-            //撈出資料夾內的檔案(一層)
-            foldername = @"D:\_git\vcs\_1.data\______test_files1";
-            /*
-            string[] files = Directory.GetFiles(foldername);
-            for (int i = 0; i < files.Length; i++)
-            {
-                richTextBox1.Text += files[i] + "\n";
-                //textBox2.Lines = files;
-            }
-            */
-
-            //------------------------------------------------------------  # 60個
-
-            //撈出資料夾內的檔案(多層)
-            foldername = @"D:\_git\vcs\_1.data\______test_files1";
-
-            /*
-            //單一搜尋pattern
-            string[] filename = Directory.GetFiles(foldername, "*.*", SearchOption.AllDirectories);
-            foreach (string fname in filename)
-            {
-                richTextBox1.Text += fname + "\n";
-            }
-            */
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            //搜尋子目錄內的所有檔案   一層
-            string foldername = @"D:\_git\vcs\_1.data\______test_files1";
-
-            int cnt = 0;
-            DirectoryInfo dir = new DirectoryInfo(foldername);
-            richTextBox1.Text += "搜尋子目錄內的所有檔案, 子目錄 : " + dir.ToString() + "\n";
-
-            DirectoryInfo[] dddd = dir.GetDirectories();
-            cnt = 0;
-            richTextBox1.Text += "子目錄 :\n";
-            foreach (DirectoryInfo d in dddd)
-            {
-                cnt++;
-                //richTextBox1.Text += cnt.ToString() + "\t" + d + "\n";
-                richTextBox1.Text += d + "\n";
-            }
-
-            FileInfo[] aaaa = dir.GetFiles();
-            cnt = 0;
-            richTextBox1.Text += "子目錄 " + dir.Name + " 下的檔案 :\n";
-            foreach (FileInfo b in aaaa)
-            {
-                cnt++;
-                //richTextBox1.Text += cnt.ToString() + "\t" + b + "\n";
-                richTextBox1.Text += b + "\n";
-            }
-            richTextBox1.Text += "\n";
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            //轉出一層
-            string foldername = @"D:\_git\vcs\_1.data\______test_files1";
-            if (foldername.CompareTo("") == 0)
-            {
-                return;
-            }
-            DirectoryInfo dir = new DirectoryInfo(foldername);
-            DirectoryInfo[] dirs = dir.GetDirectories();
-            FileInfo[] files = dir.GetFiles();
-
-            //顯示本機文件夾及文件
-            //資料夾部分
-            foreach (DirectoryInfo di in dirs)
-            {
-                string str1 = di.Name;
-                string str2 = di.FullName;
-                string str3 = di.LastAccessTime.ToString();
-                richTextBox1.Text += str1 + "\t" + str2 + "\t" + str3 + "\n";
-            }
-
-            //檔案部分
-            foreach (FileInfo fi in files)
-            {
-                string str4 = fi.Name;
-                string str5 = fi.FullName;
-                string str6 = fi.Length.ToString();
-                richTextBox1.Text += str4 + "\t" + str5 + "\t" + str6 + "\n";
-            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -316,45 +123,37 @@ namespace vcs_DiskDirectoryFile2
 
         // Process all files in the directory passed in, recurse on any directories 
         // that are found, and process the files they contain.
-        public void ProcessDirectory(string targetDirectory)
+        public void ProcessDirectory(string foldername)
         {
-            try
+            string[] filenames = Directory.GetFiles(foldername);
+            Array.Sort(filenames);
+            folder_size = 0;
+            folder_files = 0;
+            foreach (string filename in filenames)
             {
-                string[] fileEntries = Directory.GetFiles(targetDirectory);
-                Array.Sort(fileEntries);
-                folder_size = 0;
-                folder_files = 0;
-                foreach (string fileName in fileEntries)
-                {
-                    ProcessFile(fileName);
-                }
-                //richTextBox1.Text += "folder_name = " + targetDirectory + "\n";
-                //richTextBox1.Text += "folder_files = " + folder_files.ToString() + "\n";
-                //richTextBox1.Text += "folder_size = " + folder_size.ToString() + "\n";
-                if (folder_files == 0)
-                {
-                    //richTextBox1.Text += "空資料夾 folder_name = " + targetDirectory + "\n";
-                }
-
-
-                // Recurse into subdirectories of this directory.
-                string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
-                Array.Sort(subdirectoryEntries);
-                foreach (string subdirectory in subdirectoryEntries)
-                {
-                    DirectoryInfo di = new DirectoryInfo(subdirectory);
-                    FolederName = subdirectory;
-                    richTextBox1.Text += "\n\n" + FolederName + "\n";
-                    ProcessDirectory(subdirectory);
-                }
+                ProcessFile(filename);
             }
-            catch (IOException e)
+            //richTextBox1.Text += "folder_name = " + foldername + "\n";
+            //richTextBox1.Text += "folder_files = " + folder_files.ToString() + "\n";
+            //richTextBox1.Text += "folder_size = " + folder_size.ToString() + "\n";
+            if (folder_files == 0)
             {
-                richTextBox1.Text += "IOException, " + e.GetType().Name + "\n";
+                //richTextBox1.Text += "空資料夾 folder_name = " + foldername + "\n";
+            }
+
+            // Recurse into subdirectories of this directory.
+            string[] subdirectoryEntries = Directory.GetDirectories(foldername);
+            Array.Sort(subdirectoryEntries);
+            foreach (string subdirectory in subdirectoryEntries)
+            {
+                DirectoryInfo di = new DirectoryInfo(subdirectory);
+                FolederName = subdirectory;
+                richTextBox1.Text += "\n\n" + FolederName + "\n";
+                ProcessDirectory(subdirectory);
             }
 
             /*
-            richTextBox1.Text += "資料夾 " + targetDirectory + "\t檔案個數 : " + folder_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(folder_size)) + "\n";
+            richTextBox1.Text += "資料夾 " + foldername + "\t檔案個數 : " + folder_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(folder_size)) + "\n";
             richTextBox1.Text += "\n";
             */
         }
@@ -423,8 +222,9 @@ namespace vcs_DiskDirectoryFile2
             //richTextBox1.Text += "folder_files = " + folder_files.ToString() + "\n";
         }
 
-        private void button9_Click(object sender, EventArgs e)
+        private void button0_Click(object sender, EventArgs e)
         {
+            //我的轉出
             //string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic";
             //string foldername = @"D:\vcs\astro\_DATA2\_________整理_mp3\_mp3_台語\_陳一郎\";
             //string foldername = @"C:\dddddddddd\_music_from_yt";
@@ -432,6 +232,188 @@ namespace vcs_DiskDirectoryFile2
             string foldername = @"D:\_git\vcs\_1.data\______test_files1\_case1\";
 
             export_filenames(foldername);
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //拷貝檔案, 限定拷貝大小
+            //拷貝檔案, 限定拷貝大小, 每次拷貝1024拜
+
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+
+            string filename2 = Application.StartupPath + "\\jpg_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+
+            CopyFile(filename1, filename2, 1024);
+        }
+
+
+        FileStream FormerOpen;
+        FileStream ToFileOpen;
+        /// <summary>
+        /// 文件的複製
+        /// </summary>
+        /// <param FormerFile="string">源文件路徑</param>
+        /// <param toFile="string">目的文件路徑</param> 
+        /// <param SectSize="int">傳輸大小</param> 
+        /// <param progressBar="ProgressBar">ProgressBar控制元件</param> 
+        public void CopyFile(string FormerFile, string toFile, int SectSize)
+        {
+            FileStream fileToCreate = new FileStream(toFile, FileMode.Create);		//建立目的文件，如果已存在將被覆蓋
+            fileToCreate.Close();										//關閉所有資源
+            fileToCreate.Dispose();										//釋放所有資源
+            FormerOpen = new FileStream(FormerFile, FileMode.Open, FileAccess.Read);//以只讀方式打開源文件
+            ToFileOpen = new FileStream(toFile, FileMode.Append, FileAccess.Write);	//以寫方式打開目的文件
+            //根據一次傳輸的大小，計算傳輸的個數
+            int FileSize;												//要拷貝的文件的大小
+            //如果分段拷貝，即每次拷貝內容小於文件總長度
+            if (SectSize < FormerOpen.Length)
+            {
+                byte[] buffer = new byte[SectSize];							//根據傳輸的大小，定義一個字節數組
+                int copied = 0;										//記錄傳輸的大小
+                while (copied <= ((int)FormerOpen.Length - SectSize))			//拷貝主體部分
+                {
+                    FileSize = FormerOpen.Read(buffer, 0, SectSize);			//從0開始讀，每次最大讀SectSize
+                    FormerOpen.Flush();								//清空快取
+                    ToFileOpen.Write(buffer, 0, SectSize);					//向目的文件寫入字節
+                    ToFileOpen.Flush();									//清空快取
+                    ToFileOpen.Position = FormerOpen.Position;				//使源文件和目的文件流的位置相同
+                    copied += FileSize;									//記錄已拷貝的大小
+                }
+                int left = (int)FormerOpen.Length - copied;						//取得剩餘大小
+                FileSize = FormerOpen.Read(buffer, 0, left);					//讀取剩餘的字節
+                FormerOpen.Flush();									//清空快取
+                ToFileOpen.Write(buffer, 0, left);							//寫入剩餘的部分
+                ToFileOpen.Flush();									//清空快取
+            }
+            //如果整體拷貝，即每次拷貝內容大於文件總長度
+            else
+            {
+                byte[] buffer = new byte[FormerOpen.Length];				//取得文件的大小
+                FormerOpen.Read(buffer, 0, (int)FormerOpen.Length);			//讀取源文件的字節
+                FormerOpen.Flush();									//清空快取
+                ToFileOpen.Write(buffer, 0, (int)FormerOpen.Length);			//寫放字節
+                ToFileOpen.Flush();									//清空快取
+            }
+            FormerOpen.Close();										//釋放所有資源
+            ToFileOpen.Close();										//釋放所有資源
+            richTextBox1.Text += "文件複製完成\n";
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //偵測原始檔案類型
+            //偵測原始檔案類型
+
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_csv\covid19_data2021_06_27.part.csv";
+            string filename3 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\person.xml";
+            string filename4 = @"C:\_git\vcs\_1.data\______test_files1\_anime\cat\cat1.png";
+            string filename5 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_word\word_for_vcs_ReadWrite_WORD.doc";
+            string filename6 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_mdb\db_09.mdb";
+            string filename7 = @"C:\_git\vcs\_1.data\______test_files1\_case1\_case1a\_case1aa\eula.3081a.txt";
+            string filename8 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_ini\ConnectString.ini";
+
+            check_filetype(filename1);
+            //check_filetype(filename2);
+            //check_filetype(filename3);
+            //check_filetype(filename4);
+            //check_filetype(filename5);
+            //check_filetype(filename6);
+            //check_filetype(filename7);
+            //check_filetype(filename8);
+        }
+
+        void check_filetype(string filename)
+        {
+            int len = 10;
+            int[] data = new int[len];
+            string builtHex = string.Empty;
+            using (Stream S = File.OpenRead(filename))
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    data[i] = S.ReadByte();  // 讀一拜
+                    builtHex += data[i].ToString("X2") + " ";
+
+                    //builtHex += S.ReadByte().ToString("X2");  // 讀一拜
+
+                    /*
+                    if (ImageTypes.ContainsKey(builtHex))
+                    {
+                        string 真實副檔名 = ImageTypes[builtHex];
+                        break;
+                    }
+                    */
+                }
+                richTextBox1.Text += "data : " + builtHex + "\n";
+                if ((data[0] == 0x89) && (data[1] == 'P') && (data[2] == 'N') && (data[3] == 'G'))
+                {
+                    richTextBox1.Text += "PNG 檔案\n";
+                }
+                else if ((data[6] == 'J') && (data[7] == 'F') && (data[8] == 'I') && (data[9] == 'F'))
+                {
+                    richTextBox1.Text += "JPG 檔案\n";
+                }
+                else if ((data[0] == 'G') && (data[1] == 'I') && (data[2] == 'F') && (data[9] == '8') && (data[9] == '9'))
+                {
+                    richTextBox1.Text += "GIF 檔案\n";
+                }
+                else if ((data[0] == 'B') && (data[1] == 'M'))
+                {
+                    richTextBox1.Text += "BMP 檔案\n";
+                }
+                else if ((data[0] == 0xFF) && (data[1] == 0xFE))
+                {
+                    richTextBox1.Text += " 純文字Unicode 檔案\n";
+                }
+                else if ((data[0] == 'I') && (data[1] == 'D') && (data[2] == '3'))
+                {
+                    richTextBox1.Text += "MP3 檔案\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "其他 檔案\n";
+                }
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+        }
+
+
+        private void button9_Click(object sender, EventArgs e)
+        {
         }
 
         //------------------------------------------------------------  # 60個
@@ -743,190 +725,6 @@ namespace vcs_DiskDirectoryFile2
         private void button19_Click(object sender, EventArgs e)
         {
         }
-
-        //------------------------------------------------------------  # 60個
-
-        FileStream FormerOpen;
-        FileStream ToFileOpen;
-        /// <summary>
-        /// 文件的複製
-        /// </summary>
-        /// <param FormerFile="string">源文件路徑</param>
-        /// <param toFile="string">目的文件路徑</param> 
-        /// <param SectSize="int">傳輸大小</param> 
-        /// <param progressBar="ProgressBar">ProgressBar控制元件</param> 
-        public void CopyFile(string FormerFile, string toFile, int SectSize)
-        {
-            FileStream fileToCreate = new FileStream(toFile, FileMode.Create);		//建立目的文件，如果已存在將被覆蓋
-            fileToCreate.Close();										//關閉所有資源
-            fileToCreate.Dispose();										//釋放所有資源
-            FormerOpen = new FileStream(FormerFile, FileMode.Open, FileAccess.Read);//以只讀方式打開源文件
-            ToFileOpen = new FileStream(toFile, FileMode.Append, FileAccess.Write);	//以寫方式打開目的文件
-            //根據一次傳輸的大小，計算傳輸的個數
-            int FileSize;												//要拷貝的文件的大小
-            //如果分段拷貝，即每次拷貝內容小於文件總長度
-            if (SectSize < FormerOpen.Length)
-            {
-                byte[] buffer = new byte[SectSize];							//根據傳輸的大小，定義一個字節數組
-                int copied = 0;										//記錄傳輸的大小
-                while (copied <= ((int)FormerOpen.Length - SectSize))			//拷貝主體部分
-                {
-                    FileSize = FormerOpen.Read(buffer, 0, SectSize);			//從0開始讀，每次最大讀SectSize
-                    FormerOpen.Flush();								//清空快取
-                    ToFileOpen.Write(buffer, 0, SectSize);					//向目的文件寫入字節
-                    ToFileOpen.Flush();									//清空快取
-                    ToFileOpen.Position = FormerOpen.Position;				//使源文件和目的文件流的位置相同
-                    copied += FileSize;									//記錄已拷貝的大小
-                }
-                int left = (int)FormerOpen.Length - copied;						//取得剩餘大小
-                FileSize = FormerOpen.Read(buffer, 0, left);					//讀取剩餘的字節
-                FormerOpen.Flush();									//清空快取
-                ToFileOpen.Write(buffer, 0, left);							//寫入剩餘的部分
-                ToFileOpen.Flush();									//清空快取
-            }
-            //如果整體拷貝，即每次拷貝內容大於文件總長度
-            else
-            {
-                byte[] buffer = new byte[FormerOpen.Length];				//取得文件的大小
-                FormerOpen.Read(buffer, 0, (int)FormerOpen.Length);			//讀取源文件的字節
-                FormerOpen.Flush();									//清空快取
-                ToFileOpen.Write(buffer, 0, (int)FormerOpen.Length);			//寫放字節
-                ToFileOpen.Flush();									//清空快取
-            }
-            FormerOpen.Close();										//釋放所有資源
-            ToFileOpen.Close();										//釋放所有資源
-            richTextBox1.Text += "文件複製完成\n";
-        }
-
-        private void button20_Click(object sender, EventArgs e)
-        {
-            //拷貝檔案, 限定拷貝大小, 每次拷貝1024拜
-
-            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-
-            string filename2 = Application.StartupPath + "\\jpg_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
-
-            CopyFile(filename1, filename2, 1024);
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button21_Click(object sender, EventArgs e)
-        {
-            //偵測原始檔案類型
-
-            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_csv\covid19_data2021_06_27.part.csv";
-            string filename3 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\person.xml";
-            string filename4 = @"C:\_git\vcs\_1.data\______test_files1\_anime\cat\cat1.png";
-            string filename5 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_word\word_for_vcs_ReadWrite_WORD.doc";
-            string filename6 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_mdb\db_09.mdb";
-            string filename7 = @"C:\_git\vcs\_1.data\______test_files1\_case1\_case1a\_case1aa\eula.3081a.txt";
-            string filename8 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_ini\ConnectString.ini";
-
-            check_filetype(filename1);
-            //check_filetype(filename2);
-            //check_filetype(filename3);
-            //check_filetype(filename4);
-            //check_filetype(filename5);
-            //check_filetype(filename6);
-            //check_filetype(filename7);
-            //check_filetype(filename8);
-        }
-
-        void check_filetype(string filename)
-        {
-            int len = 10;
-            int[] data = new int[len];
-            string builtHex = string.Empty;
-            using (Stream S = File.OpenRead(filename))
-            {
-                for (int i = 0; i < 10; i++)
-                {
-                    data[i] = S.ReadByte();  // 讀一拜
-                    builtHex += data[i].ToString("X2") + " ";
-
-                    //builtHex += S.ReadByte().ToString("X2");  // 讀一拜
-
-                    /*
-                    if (ImageTypes.ContainsKey(builtHex))
-                    {
-                        string 真實副檔名 = ImageTypes[builtHex];
-                        break;
-                    }
-                    */
-                }
-                richTextBox1.Text += "data : " + builtHex + "\n";
-                if ((data[0] == 0x89) && (data[1] == 'P') && (data[2] == 'N') && (data[3] == 'G'))
-                {
-                    richTextBox1.Text += "PNG 檔案\n";
-                }
-                else if ((data[6] == 'J') && (data[7] == 'F') && (data[8] == 'I') && (data[9] == 'F'))
-                {
-                    richTextBox1.Text += "JPG 檔案\n";
-                }
-                else if ((data[0] == 'G') && (data[1] == 'I') && (data[2] == 'F') && (data[9] == '8') && (data[9] == '9'))
-                {
-                    richTextBox1.Text += "GIF 檔案\n";
-                }
-                else if ((data[0] == 'B') && (data[1] == 'M'))
-                {
-                    richTextBox1.Text += "BMP 檔案\n";
-                }
-                else if ((data[0] == 0xFF) && (data[1] == 0xFE))
-                {
-                    richTextBox1.Text += " 純文字Unicode 檔案\n";
-                }
-                else if ((data[0] == 'I') && (data[1] == 'D') && (data[2] == '3'))
-                {
-                    richTextBox1.Text += "MP3 檔案\n";
-                }
-                else
-                {
-                    richTextBox1.Text += "其他 檔案\n";
-                }
-            }
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button22_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button23_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button24_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button25_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button26_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button27_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button28_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button29_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
 
@@ -936,4 +734,3 @@ namespace vcs_DiskDirectoryFile2
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-

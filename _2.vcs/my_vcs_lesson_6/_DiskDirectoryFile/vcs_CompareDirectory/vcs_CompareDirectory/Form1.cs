@@ -13,6 +13,9 @@ namespace vcs_CompareDirectory
 {
     public partial class Form1 : Form
     {
+        string foldername1 = @"D:\_git\vcs\_1.data\______test_files1\Dir1";
+        string foldername2 = @"D:\_git\vcs\_1.data\______test_files1\Dir2";
+
         public Form1()
         {
             InitializeComponent();
@@ -20,8 +23,7 @@ namespace vcs_CompareDirectory
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            textBox1.Text = @"D:\_git\vcs\_1.data\______test_files1\Dir1";
-            textBox2.Text = @"D:\_git\vcs\_1.data\______test_files1\Dir2";
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             SizeColumns();
         }
@@ -31,22 +33,34 @@ namespace vcs_CompareDirectory
             SizeColumns();
         }
 
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
+
         private void SizeColumns()
         {
             int wid = (int)((dataGridView1.Width - 50) / 2);
-            if (wid < 10) wid = 10;
+            if (wid < 10)
+            {
+                wid = 10;
+            }
             dataGridView1.Columns[0].Width = wid;
             dataGridView1.Columns[1].Width = wid;
         }
 
-        // Compare the files in each directory.
+        //------------------------------------------------------------  # 60個
+
         private void btnCompare_Click(object sender, EventArgs e)
         {
-            // Clear previous results.
+            richTextBox1.Text += "比較兩資料夾\n";
+
             dataGridView1.Rows.Clear();
 
             // Get sorted lists of files in the directories.
-            string dir1 = textBox1.Text;
+            string dir1 = foldername1;
             if (!dir1.EndsWith("\\"))
             {
                 dir1 += "\\";
@@ -58,7 +72,7 @@ namespace vcs_CompareDirectory
             }
             Array.Sort(file_names1);
 
-            string dir2 = textBox2.Text;
+            string dir2 = foldername2;
             if (!dir2.EndsWith("\\"))
             {
                 dir2 += "\\";
@@ -109,3 +123,11 @@ namespace vcs_CompareDirectory
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
