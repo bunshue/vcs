@@ -155,22 +155,20 @@ namespace vcs_MyButton
             rc3.Inflate(-5, -5);
             rc3.Height = 15;
             GraphicsPath path3 = GetPath(rc3, 20);
-            LinearGradientBrush br3 = new LinearGradientBrush(rc3, Color.FromArgb(255,
-            Color.White), Color.FromArgb(0, Color.White), LinearGradientMode.Vertical);
+            LinearGradientBrush br3 = new LinearGradientBrush(rc3, Color.FromArgb(255, Color.White), Color.FromArgb(0, Color.White), LinearGradientMode.Vertical);
 
             ///  
             ///draw shapes  
             ///  
-            g.FillPath(br2, path2); //draw shadow  
-            g.FillPath(br1, path1); //draw main  
-            g.FillPath(br3, path3); //draw top bubble  
+            g.FillPath(br2, path2); //draw shadow
+            g.FillPath(br1, path1); //draw main
+            g.FillPath(br3, path3); //draw top bubble
 
             ///  
             ///Create a backup of the button image to a bitmap so we can manipulate it's pulsing action  
             ///  
             buttonBitmapRectangle = new Rectangle(rc.Location, rc.Size);
-            buttonBitmap = new Bitmap(buttonBitmapRectangle.Width,
-            buttonBitmapRectangle.Height);
+            buttonBitmap = new Bitmap(buttonBitmapRectangle.Width, buttonBitmapRectangle.Height);
             Graphics g_bmp = Graphics.FromImage(buttonBitmap);
             g_bmp.SmoothingMode = SmoothingMode.AntiAlias;
             g_bmp.FillPath(br1, path1);
@@ -188,21 +186,21 @@ namespace vcs_MyButton
             GraphicsPath path4 = new GraphicsPath();
 
             RectangleF path1bounds = path1.GetBounds();
-            Rectangle rcText = new Rectangle((int)path1bounds.X, (int)path1bounds.Y,
-            (int)path1bounds.Width, (int)path1bounds.Height);
+            Rectangle rcText = new Rectangle((int)path1bounds.X, (int)path1bounds.Y, (int)path1bounds.Width, (int)path1bounds.Height);
 
             StringFormat strformat = new StringFormat();
             strformat.Alignment = StringAlignment.Center;
             strformat.LineAlignment = StringAlignment.Center;
-            path4.AddString(this.Text, this.Font.FontFamily, (int)this.Font.Style,
-            this.Font.Size, rcText, strformat);
+            path4.AddString(this.Text, this.Font.FontFamily, (int)this.Font.Style, this.Font.Size, rcText, strformat);
 
             Pen txtPen = new Pen(this.ForeColor, 1);
             g.DrawPath(txtPen, path4);
             g_bmp.DrawPath(txtPen, path4);
         }
+
         private GraphicsPath GetPath(Rectangle rc, int r)
         {
+            //畫圓角矩形
             int x = rc.X, y = rc.Y, w = rc.Width, h = rc.Height;
             GraphicsPath path = new GraphicsPath();
             path.AddArc(x, y, r, r, 180, 90);               //Upper left corner  
@@ -226,13 +224,16 @@ namespace vcs_MyButton
         protected override void OnMouseUp(MouseEventArgs e)
         {
             if (this.Bounds.Contains(e.X, e.Y))
+            {
                 this.mouseAction = MouseActionType.Hover;
+            }
             else
+            {
                 this.mouseAction = MouseActionType.None;
+            }
             this.Invalidate();
             base.OnMouseUp(e);
         }
-
 
         protected override void OnMouseEnter(EventArgs e)
         {
@@ -256,7 +257,9 @@ namespace vcs_MyButton
         {
             base.OnGotFocus(e);
             if (this.pulseOnFocus)
+            {
                 pulseTimer.Start();
+            }
         }
 
         protected override void OnLostFocus(EventArgs e)
@@ -271,16 +274,18 @@ namespace vcs_MyButton
             if (this.Focused && pulseOnFocus && buttonBitmap != null)
             {
                 gamma += gammaStep;
-                if (gamma > this.maxGamma) gammaStep = -gammaStep;
-                if (gamma < this.minGamma) gammaStep = Math.Abs(gammaStep);
+                if (gamma > this.maxGamma)
+                {
+                    gammaStep = -gammaStep;
+                }
+                if (gamma < this.minGamma)
+                {
+                    gammaStep = Math.Abs(gammaStep);
+                }
                 imgAttr.SetGamma(gamma);
-                this.CreateGraphics().DrawImage(buttonBitmap,
-                buttonBitmapRectangle, 0, 0,
-                buttonBitmap.Width, buttonBitmap.Height, GraphicsUnit.Pixel, imgAttr);
+                this.CreateGraphics().DrawImage(buttonBitmap, buttonBitmapRectangle, 0, 0, buttonBitmap.Width, buttonBitmap.Height, GraphicsUnit.Pixel, imgAttr);
             }
         }
     }
-
     //自定義Button SP
-
 }

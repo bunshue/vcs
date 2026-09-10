@@ -377,11 +377,9 @@ namespace vcs_MousePaint2
             // to the points of intersection.
             if (HavePoints && (NumIntersections > 0))
             {
-                using (Pen dashed_pen = new Pen(Color.Red))
-                {
-                    dashed_pen.DashPattern = new float[] { 3, 3 };
-                    e.Graphics.DrawLine(dashed_pen, Intersection1, Point1);
-                }
+                Pen dashed_pen = new Pen(Color.Red);
+                dashed_pen.DashPattern = new float[] { 3, 3 };
+                e.Graphics.DrawLine(dashed_pen, Intersection1, Point1);
             }
 
             // Draw the intersections (if we have them).
@@ -560,17 +558,14 @@ namespace vcs_MousePaint2
                 return null;
             }
 
-            // Make a region.
             Region result_region = new Region();
 
             // Intersect the region with the circles.
             for (int i = 0; i < centers.Count; i++)
             {
-                using (GraphicsPath circle_path = new GraphicsPath())
-                {
-                    circle_path.AddEllipse(centers[i].X - radii[i], centers[i].Y - radii[i], 2 * radii[i], 2 * radii[i]);
-                    result_region.Intersect(circle_path);
-                }
+                GraphicsPath circle_path = new GraphicsPath();
+                circle_path.AddEllipse(centers[i].X - radii[i], centers[i].Y - radii[i], 2 * radii[i], 2 * radii[i]);
+                result_region.Intersect(circle_path);
                 //richTextBox1.Text += "i = " + i.ToString() + "cx=" + centers[i].X.ToString() + ", cy = " + centers[i].Y.ToString() + ", R = " + radii[i].ToString() + "\n";
             }
             return result_region;
@@ -967,6 +962,7 @@ namespace vcs_MousePaint2
         {
             int len = Centers.Count;
             richTextBox1.Text += "len =" + len.ToString() + "\n";
+
             int i;
             for (i = 0; i < len; i++)
             {

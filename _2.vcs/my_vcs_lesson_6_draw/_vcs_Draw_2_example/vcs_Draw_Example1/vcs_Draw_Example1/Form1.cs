@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Imaging;   //for ImageFormat   //提供畫GDI+圖形的高級功能
+using System.Drawing.Imaging;   //for ImageFormat
 using System.Drawing.Drawing2D; //for CompositingQuality, SmoothingMode //提供畫高級二維，矢量圖形功能
-using System.Drawing.Text;      //for TextRenderingHint //提供畫GDI+圖形的高級功能
+using System.Drawing.Text;      //for TextRenderingHint
 
 using System.IO;
 using System.Collections;   //for ArrayList
@@ -3759,83 +3759,6 @@ namespace vcs_Draw_Example1
 
         private void button28_Click(object sender, EventArgs e)
         {
-            //交集 聯集 互斥
-
-            Graphics g = pictureBox1.CreateGraphics();
-
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-
-            int Cx = 200;
-            int Cy = 70;
-            int R = 60;
-            int dd = 30;
-
-            g.DrawString("聯集", new Font("標楷體", 24), new SolidBrush(Color.Blue), new PointF(5, Cy));
-
-            GraphicsPath gp1 = new GraphicsPath(); // 圖形軌跡
-            gp1.AddEllipse(Cx - dd - R, Cy - R, R * 2, R * 2);
-
-            GraphicsPath gp2 = new GraphicsPath(); // 圖形軌跡
-            gp2.AddEllipse(Cx + dd - R, Cy - R, R * 2, R * 2);
-
-            Region r1 = new Region(gp1); // Region 區域表面 物件
-            Region r2 = new Region(gp2); // Region 區域表面 物件
-
-            r1.Union(r2);  // r1 = r1 + r2  聯集
-
-            g.FillRegion(Brushes.Silver, r1); // r1 區域表面 繪出
-            g.DrawPath(Pens.Black, gp1); // 圖形軌跡 繪出
-            g.DrawPath(Pens.Black, gp2); // 圖形軌跡 繪出
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            Cx = 200;
-            Cy = 200;
-
-            g.DrawString("交集\n排除", new Font("標楷體", 24), new SolidBrush(Color.Blue), new PointF(5, Cy));
-
-            gp1 = new GraphicsPath(); // 圖形軌跡
-            gp1.AddEllipse(Cx - dd - R, Cy - R, R * 2, R * 2);
-
-            gp2 = new GraphicsPath(); // 圖形軌跡
-            gp2.AddEllipse(Cx + dd - R, Cy - R, R * 2, R * 2);
-
-            r1 = new Region(gp1); // Region 區域表面 物件
-            r2 = new Region(gp2); // Region 區域表面 物件
-            Region r3 = new Region(gp1); // Region 區域表面 物件
-
-            r3.Intersect(r2);  // r3 = r1 - r2   交集
-            r1.Exclude(r3);    // r1 = r1 - r3   排除
-            r2.Exclude(r3);    // r2 = r2 - r3   排除
-
-            g.FillRegion(Brushes.Red, r1);  // r1 區域表面  繪出
-            g.FillRegion(Brushes.Blue, r2); // r2 區域表面 繪出
-            g.FillRegion(Brushes.Yellow, r3); // r3 區域表面 繪出
-
-            g.DrawPath(Pens.Black, gp1); // 圖形軌跡 繪出
-            g.DrawPath(Pens.Black, gp2); // 圖形軌跡 繪出
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            Cx = 200;
-            Cy = 330;
-
-            g.DrawString("互斥或", new Font("標楷體", 24), new SolidBrush(Color.Blue), new PointF(5, Cy));
-
-            gp1 = new GraphicsPath(); // 圖形軌跡
-            gp1.AddEllipse(Cx - dd - R, Cy - R, R * 2, R * 2);
-
-            gp2 = new GraphicsPath(); // 圖形軌跡
-            gp2.AddEllipse(Cx + dd - R, Cy - R, R * 2, R * 2);
-
-            r1 = new Region(gp1); // Region 區域表面 物件
-            r2 = new Region(gp2); // Region 區域表面 物件
-
-            r1.Xor(r2);  // r1 = r1 + r2 - (r1 Intersect r2)  互斥
-
-            g.FillRegion(Brushes.Silver, r1); // r1 區域表面  繪出
-            g.DrawPath(Pens.Black, gp1); // 圖形軌跡 繪出
-            g.DrawPath(Pens.Black, gp2); // 圖形軌跡 繪出
         }
 
         //------------------------------------------------------------  # 60個

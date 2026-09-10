@@ -479,7 +479,6 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(180, 45);
             this.button28.TabIndex = 58;
-            this.button28.Text = "交集聯集互斥";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 

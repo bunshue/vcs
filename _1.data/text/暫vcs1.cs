@@ -106,6 +106,7 @@ string text = String.Format("寫字範例\nSlate Blue has these ARGB values:\n A
                 }
             }
 
+
         //----選到textbox時，選取全部文字
         private void TextBox_Enter(object sender, EventArgs e)
         {
@@ -114,10 +115,6 @@ string text = String.Format("寫字範例\nSlate Blue has these ARGB values:\n A
         }
 
 //------------------------------------------------------------  # 60個
-
-
-//------------------------------------------------------------  # 60個
-
 
 private Thread thread_ex = null;
 
@@ -164,7 +161,6 @@ private Thread thread_ex = null;
 
 //------------------------------------------------------------  # 60個
 
-            Dictionary<string, int> dic = new Dictionary<string, int>();
             Dictionary<string, int> dic = new Dictionary<string, int>();
 
             var myList = dic.ToList();
@@ -542,11 +538,6 @@ p.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
 //pbox 的 剪下
 //剪下 = 複製到剪貼簿 + 把選取區域塗成背景色
 SolidBrush br = new SolidBrush(pictureBox1.BackColor)
-
-//------------------------------------------------------------  # 60個
-
-rtb
-richTextBox1.LoadFile("pipa.txt", RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
 
 //------------------------------------------------------------  # 60個
 
@@ -4123,22 +4114,8 @@ https://jojosula001.pixnet.net/blog/category/2297573
 
 //------------------------------------------------------------  # 60個
 
-rtb
- 27. 設定兩個或兩個以上的字型樣式 (例如一段文字設定粗體加斜體)。
-
-假如要將一段文字，同時設定 粗體文字 FontStyle.Bold 與 斜體文字 FontStyle.Italic，則需透過 FontFamily 類別，透過 | 做連結
-
-// 將RichTextBox中選取的文字，透過 FontFamily 類別
-// 同時設定 粗體文字 FontStyle.Bold 與 斜體文字 FontStyle.Italic 
-Font MyFont = new Font(new FontFamily("標楷體"), 10, FontStyle.Bold | FontStyle.Italic); 
-this.richTextBox1.SelectionFont = MyFont;
-
-//------------------------------------------------------------  # 60個
-
 [ C# ] WinForm 顯示於延伸螢幕之方法
 https://georgiosky2000.wordpress.com/2014/03/19/c-winform-%e9%a1%af%e7%a4%ba%e6%96%bc%e5%bb%b6%e4%bc%b8%e8%9e%a2%e5%b9%95%e4%b9%8b%e6%96%b9%e6%b3%95/
-
-//------------------------------------------------------------  # 60個
 
 //------------------------------------------------------------  # 60個
 
@@ -4547,16 +4524,6 @@ vcs開啟一個純文字檔到richtextbox裡面
 ImageViewer	研究選單架構
 
 vcs不可畫點，用畫橢圓取代
-
-//------------------------------------------------------------  # 60個
-
-cccc
-        //----選到textbox時，選取全部文字
-        private void TextBox_Enter(object sender, EventArgs e)
-        {
-            TextBox tb = sender as TextBox;
-            tb.SelectAll();
-        }
 
 //------------------------------------------------------------  # 60個
 

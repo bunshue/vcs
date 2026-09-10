@@ -1265,9 +1265,9 @@ public RichTextBox RichTxtBox
     get { return this.txtInput; }
     set { this.txtInput = value; }
 }
-*/
 
-/*
+//------------------------------------------------------------  # 60個
+
             //PlainText-代表OLE物件的純文字資料流，文字中允許有空格
             richTextBox1.LoadFile(openFileDialog1.FileName, RichTextBoxStreamType.PlainText);
 
@@ -1380,6 +1380,21 @@ load一檔
 
 //------------------------------------------------------------  # 60個
 
+rtb
+richTextBox1.LoadFile("pipa.txt", RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
+
+//------------------------------------------------------------  # 60個
+
+rtb
+ 27. 設定兩個或兩個以上的字型樣式 (例如一段文字設定粗體加斜體)。
+
+假如要將一段文字，同時設定 粗體文字 FontStyle.Bold 與 斜體文字 FontStyle.Italic，則需透過 FontFamily 類別，透過 | 做連結
+
+// 將RichTextBox中選取的文字，透過 FontFamily 類別
+// 同時設定 粗體文字 FontStyle.Bold 與 斜體文字 FontStyle.Italic 
+Font MyFont = new Font(new FontFamily("標楷體"), 10, FontStyle.Bold | FontStyle.Italic); 
+this.richTextBox1.SelectionFont = MyFont;
 
 */
+
 

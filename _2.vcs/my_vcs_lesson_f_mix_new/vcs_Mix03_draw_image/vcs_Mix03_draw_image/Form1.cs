@@ -126,9 +126,44 @@ namespace vcs_Mix03_draw_image
 
         //------------------------------------------------------------  # 60個
 
+        private GraphicsPath GetPath(Rectangle rc, int r)
+        {
+            int x = rc.X, y = rc.Y, w = rc.Width, h = rc.Height;
+            GraphicsPath path = new GraphicsPath();
+            path.AddArc(x, y, r, r, 180, 90);               //Upper left corner  
+            path.AddArc(x + w - r, y, r, r, 270, 90);         //Upper right corner  
+            path.AddArc(x + w - r, y + h - r, r, r, 0, 90);     //Lower right corner  
+            path.AddArc(x, y + h - r, r, r, 90, 90);          //Lower left corner  
+            path.CloseFigure();
+            return path;
+        }
+
         private void button0_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            Graphics g = pictureBox1.CreateGraphics();
+            g.Clear(pictureBox1.BackColor);
+
+            Rectangle rc1 = new Rectangle(100, 100, 200, 200);
+            GraphicsPath path1 = GetPath(rc1, 20);
+            SolidBrush sb1 = new SolidBrush(Color.FromArgb(255, 255, 0, 0));
+            g.FillPath(sb1, path1);
+
+            Rectangle rc2 = new Rectangle(150, 150, 200, 200);
+            GraphicsPath path2 = GetPath(rc2, 20);
+            SolidBrush sb2 = new SolidBrush(Color.FromArgb(255, 0, 255, 0));
+            g.FillPath(sb2, path2);
+
+            //聯集
+            Region rgn = new Region(path1);
+            rgn.Union(path2);
+            SolidBrush sb3 = new SolidBrush(Color.FromArgb(255, 0, 0, 255));
+            //g.FillPath(sb3, new GraphicsPath(rgn));
+
+            //this.Region = rgn;
+
+
         }
 
         //------------------------------------------------------------  # 60個
@@ -136,13 +171,138 @@ namespace vcs_Mix03_draw_image
         private void button1_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //交集 聯集 互斥
+
+            Graphics g = pictureBox1.CreateGraphics();
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
+            int Cx = 200;
+            int Cy = 70;
+            int R = 60;
+            int dd = 30;
+
+            g.DrawString("聯集", new Font("標楷體", 24), new SolidBrush(Color.Blue), new PointF(5, Cy));
+
+            GraphicsPath gp1 = new GraphicsPath(); // 圖形軌跡
+            gp1.AddEllipse(Cx - dd - R, Cy - R, R * 2, R * 2);
+
+            GraphicsPath gp2 = new GraphicsPath(); // 圖形軌跡
+            gp2.AddEllipse(Cx + dd - R, Cy - R, R * 2, R * 2);
+
+            Region r1 = new Region(gp1); // Region 區域表面 物件
+            Region r2 = new Region(gp2); // Region 區域表面 物件
+
+            r1.Union(r2);  // r1 = r1 + r2  聯集
+
+            g.FillRegion(Brushes.Silver, r1); // r1 區域表面 繪出
+            g.DrawPath(Pens.Black, gp1); // 圖形軌跡 繪出
+            g.DrawPath(Pens.Black, gp2); // 圖形軌跡 繪出
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            Cx = 200;
+            Cy = 200;
+
+            g.DrawString("交集\n排除", new Font("標楷體", 24), new SolidBrush(Color.Blue), new PointF(5, Cy));
+
+            gp1 = new GraphicsPath(); // 圖形軌跡
+            gp1.AddEllipse(Cx - dd - R, Cy - R, R * 2, R * 2);
+
+            gp2 = new GraphicsPath(); // 圖形軌跡
+            gp2.AddEllipse(Cx + dd - R, Cy - R, R * 2, R * 2);
+
+            r1 = new Region(gp1); // Region 區域表面 物件
+            r2 = new Region(gp2); // Region 區域表面 物件
+            Region r3 = new Region(gp1); // Region 區域表面 物件
+
+            r3.Intersect(r2);  // r3 = r1 - r2   交集
+            r1.Exclude(r3);    // r1 = r1 - r3   排除
+            r2.Exclude(r3);    // r2 = r2 - r3   排除
+
+            g.FillRegion(Brushes.Red, r1);  // r1 區域表面  繪出
+            g.FillRegion(Brushes.Blue, r2); // r2 區域表面 繪出
+            g.FillRegion(Brushes.Yellow, r3); // r3 區域表面 繪出
+
+            g.DrawPath(Pens.Black, gp1); // 圖形軌跡 繪出
+            g.DrawPath(Pens.Black, gp2); // 圖形軌跡 繪出
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            Cx = 200;
+            Cy = 330;
+
+            g.DrawString("互斥或", new Font("標楷體", 24), new SolidBrush(Color.Blue), new PointF(5, Cy));
+
+            gp1 = new GraphicsPath(); // 圖形軌跡
+            gp1.AddEllipse(Cx - dd - R, Cy - R, R * 2, R * 2);
+
+            gp2 = new GraphicsPath(); // 圖形軌跡
+            gp2.AddEllipse(Cx + dd - R, Cy - R, R * 2, R * 2);
+
+            r1 = new Region(gp1); // Region 區域表面 物件
+            r2 = new Region(gp2); // Region 區域表面 物件
+
+            r1.Xor(r2);  // r1 = r1 + r2 - (r1 Intersect r2)  互斥
+
+            g.FillRegion(Brushes.Silver, r1); // r1 區域表面  繪出
+            g.DrawPath(Pens.Black, gp1); // 圖形軌跡 繪出
+            g.DrawPath(Pens.Black, gp2); // 圖形軌跡 繪出
         }
 
         //------------------------------------------------------------  # 60個
 
+        private Region FindCircleIntersections(List<PointF> centers, List<float> radii)
+        {
+            if (centers.Count < 1)
+            {
+                return null;
+            }
+
+            Region result_region = new Region();
+
+            // Intersect the region with the circles.
+            for (int i = 0; i < centers.Count; i++)
+            {
+                GraphicsPath circle_path = new GraphicsPath();
+                circle_path.AddEllipse(centers[i].X - radii[i], centers[i].Y - radii[i], 2 * radii[i], 2 * radii[i]);
+                result_region.Intersect(circle_path);
+                //richTextBox1.Text += "i = " + i.ToString() + "cx=" + centers[i].X.ToString() + ", cy = " + centers[i].Y.ToString() + ", R = " + radii[i].ToString() + "\n";
+            }
+            return result_region;
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //test intersection
+            timer1.Enabled = false;
+
+            Graphics g = pictureBox1.CreateGraphics();
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
+            List<PointF> Centers = new List<PointF>();
+            List<float> Radii = new List<float>();
+
+            Centers.Add(new Point(100, 100));
+            Radii.Add(100);
+
+            Centers.Add(new Point(150, 100));
+            Radii.Add(100);
+
+            Region intersection = FindCircleIntersections(Centers, Radii);  // 交集
+
+            if (intersection != null)
+            {
+                g.FillRegion(Brushes.LightGreen, intersection);
+            }
+
+            for (int i = 0; i < Centers.Count; i++)
+            {
+                g.DrawEllipse(Pens.Blue, Centers[i].X - Radii[i], Centers[i].Y - Radii[i], 2 * Radii[i], 2 * Radii[i]);
+                g.DrawEllipse(Pens.Red, Centers[i].X - 10, Centers[i].Y - 10, 20, 20);
+            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -150,6 +310,69 @@ namespace vcs_Mix03_draw_image
         private void button3_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //gp轉region
+
+            timer1.Enabled = false;
+            pictureBox1.BackColor = Color.Pink;
+            int W = this.pictureBox1.Width;
+            int H = this.pictureBox1.Height;
+
+            GraphicsPath gp = new GraphicsPath();
+
+            /*
+            //簡易圓形Region
+            gp = new GraphicsPath();
+            gp.AddEllipse(this.pictureBox1.ClientRectangle);
+
+            //先製作非矩形的GP
+            gp = new GraphicsPath();
+            gp.AddPie(0, 0, W, H * 2, 190, 160);
+
+            Region region = new Region(gp);
+            this.pictureBox1.Region = region;
+            */
+            /*
+            //不規則表單 Region
+            //通過設置窗體的Region屬性，製作不規則窗體。
+            int W = this.pictureBox1.ClientSize.Width;
+            int H = this.pictureBox1.ClientSize.Height / 2;
+
+            Rectangle rect = new Rectangle(0, 0, W, H);
+            gp.AddEllipse(rect);
+            Region region = new Region(gp);
+            this.pictureBox1.Region = region;
+            */
+
+
+            //建立一個不規則的表單
+            // Make points to define a polygon for the form.
+            PointF[] pts = new PointF[10];
+            float cx = (float)(this.pictureBox1.ClientSize.Width * 0.5);
+            float cy = (float)(this.pictureBox1.ClientSize.Height * 0.5);
+            float r1 = (float)(this.pictureBox1.ClientSize.Height * 0.45);
+            float r2 = (float)(this.pictureBox1.ClientSize.Height * 0.25);
+            float theta = (float)(-Math.PI / 2);
+            float dtheta = (float)(2 * Math.PI / 10);
+            for (int i = 0; i < 10; i += 2)
+            {
+                pts[i] = new PointF((float)(cx + r1 * Math.Cos(theta)), (float)(cy + r1 * Math.Sin(theta)));
+                theta += dtheta;
+                pts[i + 1] = new PointF((float)(cx + r2 * Math.Cos(theta)), (float)(cy + r2 * Math.Sin(theta)));
+                theta += dtheta;
+            }
+
+            // Use the polygon to define a GraphicsPath.
+
+            gp.AddPolygon(pts);
+
+            // Make a region from the path.
+            Region region = new Region(gp);
+
+            this.pictureBox1.Region = region;
+
+
+
         }
 
         //------------------------------------------------------------  # 60個
@@ -222,10 +445,13 @@ namespace vcs_Mix03_draw_image
             //放大圖片
             //由 r X r 放大到 R X R
 
+            int W = this.pictureBox1.Width;
+            int H = this.pictureBox1.Height;
+
             string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
 
-            Bitmap bitmap2 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            Bitmap bitmap2 = new Bitmap(W, H);
             Graphics g = Graphics.FromImage(bitmap2);    //以記憶體圖像 bitmap2 建立 記憶體畫布g
 
             int x_st = 255;
@@ -260,8 +486,10 @@ namespace vcs_Mix03_draw_image
 
             int[] x = { 0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 360, 390, 420, 450, 480, 510, 540, 570, 600 };
             int[] y = { 200, 295, 368, 399, 381, 319, 228, 129, 48, 4, 8, 58, 144, 243, 331, 387, 397, 359, 282, 184, 91 };
-            Bitmap bitM = new Bitmap(this.pictureBox1.Width, this.pictureBox1.Height);
-            //MessageBox.Show("Width = " + this.pictureBox1.Width + "  Height = " + this.pictureBox1.Height);
+            int W = this.pictureBox1.Width;
+            int H = this.pictureBox1.Height;
+            Bitmap bitM = new Bitmap(W, H);
+            //MessageBox.Show("Width = " + W + "  Height = " + H);
             Graphics g = Graphics.FromImage(bitM);
             g.Clear(Color.WhiteSmoke);
             Point[] points = new Point[21];

@@ -898,68 +898,68 @@ namespace vcs_Draw_Brush
 
             Graphics g = pictureBox1.CreateGraphics();
 
-            HatchBrush myBrush1 = new HatchBrush(HatchStyle.Cross, Color.Yellow, Color.Blue);
-            g.FillEllipse(myBrush1, x_st + dx * 0, y_st + dy * 0, w, w);
+            HatchBrush hb1 = new HatchBrush(HatchStyle.Cross, Color.Yellow, Color.Blue);  // 前線後底
+            g.FillEllipse(hb1, x_st + dx * 0, y_st + dy * 0, w, w);
             g.DrawString("Cross", Font, Brushes.Black, x_st + dx * 0, y_st + dy * 0 + w + 10);
 
-            HatchBrush myBrush2 = new HatchBrush(HatchStyle.DarkVertical, Color.Yellow, Color.Blue);
-            g.FillEllipse(myBrush2, x_st + dx * 1, y_st + dy * 0, w, w);
+            HatchBrush hb2 = new HatchBrush(HatchStyle.DarkVertical, Color.Yellow, Color.Blue);
+            g.FillEllipse(hb2, x_st + dx * 1, y_st + dy * 0, w, w);
             g.DrawString("DarkVertical", Font, Brushes.Black, x_st + dx * 1, y_st + dy * 0 + w + 10);
 
-            HatchBrush myBrush3 = new HatchBrush(HatchStyle.DarkHorizontal, Color.Yellow, Color.Blue);
-            g.FillEllipse(myBrush3, x_st + dx * 2, y_st + dy * 0, w, w);
+            HatchBrush hb3 = new HatchBrush(HatchStyle.DarkHorizontal, Color.Yellow, Color.Blue);
+            g.FillEllipse(hb3, x_st + dx * 2, y_st + dy * 0, w, w);
             g.DrawString("DarkHorizontal", Font, Brushes.Black, x_st + dx * 2, y_st + dy * 0 + w + 10);
 
-            HatchBrush myBrush4 = new HatchBrush(HatchStyle.DiagonalCross, Color.Yellow, Color.Blue);
-            g.FillEllipse(myBrush4, x_st + dx * 3, y_st + dy * 0, w, w);
+            HatchBrush hb4 = new HatchBrush(HatchStyle.DiagonalCross, Color.Yellow, Color.Blue);
+            g.FillEllipse(hb4, x_st + dx * 3, y_st + dy * 0, w, w);
             g.DrawString("DiagonalCross", Font, Brushes.Black, x_st + dx * 3, y_st + dy * 0 + w + 10);
 
-            HatchBrush myBrush5 = new HatchBrush(HatchStyle.Divot, Color.Yellow, Color.Blue);
-            g.FillEllipse(myBrush5, x_st + dx * 4, y_st + dy * 0, w, w);
+            HatchBrush hb5 = new HatchBrush(HatchStyle.Divot, Color.Yellow, Color.Blue);
+            g.FillEllipse(hb5, x_st + dx * 4, y_st + dy * 0, w, w);
             g.DrawString("Divot", Font, Brushes.Black, x_st + dx * 4, y_st + dy * 0 + w + 10);
 
-            HatchBrush myBrush6 = new HatchBrush(HatchStyle.Horizontal, Color.Yellow, Color.Blue);
-            g.FillEllipse(myBrush6, x_st + dx * 0, y_st + dy * 1, w, w);
+            HatchBrush hb6 = new HatchBrush(HatchStyle.Horizontal, Color.Yellow, Color.Blue);
+            g.FillEllipse(hb6, x_st + dx * 0, y_st + dy * 1, w, w);
             g.DrawString("Horizontal", Font, Brushes.Black, x_st + dx * 0, y_st + dy * 1 + w + 10);
 
-            HatchBrush myBrush7 = new HatchBrush(HatchStyle.Vertical, Color.Yellow, Color.Blue);
-            g.FillEllipse(myBrush7, x_st + dx * 1, y_st + dy * 1, w, w);
+            HatchBrush hb7 = new HatchBrush(HatchStyle.Vertical, Color.Yellow, Color.Blue);
+            g.FillEllipse(hb7, x_st + dx * 1, y_st + dy * 1, w, w);
             g.DrawString("Vertical", Font, Brushes.Black, x_st + dx * 1, y_st + dy * 1 + w + 10);
 
-            HatchBrush myBrush8 = new HatchBrush(HatchStyle.Plaid, Color.Yellow, Color.Blue);
-            g.FillEllipse(myBrush8, x_st + dx * 2, y_st + dy * 1, w, w);
+            HatchBrush hb8 = new HatchBrush(HatchStyle.Plaid, Color.Yellow, Color.Blue);
+            g.FillEllipse(hb8, x_st + dx * 2, y_st + dy * 1, w, w);
             g.DrawString("Plaid", Font, Brushes.Black, x_st + dx * 2, y_st + dy * 1 + w + 10);
 
-            HatchBrush myBrush9 = new HatchBrush(HatchStyle.Percent50, Color.Yellow, Color.Blue);
-            g.FillEllipse(myBrush9, x_st + dx * 3, y_st + dy * 1, w, w);
+            HatchBrush hb9 = new HatchBrush(HatchStyle.Percent50, Color.Yellow, Color.Blue);
+            g.FillEllipse(hb9, x_st + dx * 3, y_st + dy * 1, w, w);
             g.DrawString("Percent50", Font, Brushes.Black, x_st + dx * 3, y_st + dy * 1 + w + 10);
 
-            HatchBrush myBrush10 = new HatchBrush(HatchStyle.Shingle, Color.Yellow, Color.Blue);
-            g.FillEllipse(myBrush10, x_st + dx * 4, y_st + dy * 1, w, w);
+            HatchBrush hb10 = new HatchBrush(HatchStyle.Shingle, Color.Yellow, Color.Blue);
+            g.FillEllipse(hb10, x_st + dx * 4, y_st + dy * 1, w, w);
             g.DrawString("Shingle", Font, Brushes.Black, x_st + dx * 4, y_st + dy * 1 + w + 10);
 
-            HatchBrush myBrush11 = new HatchBrush(HatchStyle.SolidDiamond, Color.Yellow, Color.Blue);
-            g.FillEllipse(myBrush11, x_st + dx * 0, y_st + dy * 2, w, w);
+            HatchBrush hb11 = new HatchBrush(HatchStyle.SolidDiamond, Color.Yellow, Color.Blue);
+            g.FillEllipse(hb11, x_st + dx * 0, y_st + dy * 2, w, w);
             g.DrawString("SolidDiamond", Font, Brushes.Black, x_st + dx * 0, y_st + dy * 2 + w + 10);
 
-            HatchBrush myBrush12 = new HatchBrush(HatchStyle.Trellis, Color.Yellow, Color.Blue);
-            g.FillEllipse(myBrush12, x_st + dx * 1, y_st + dy * 2, w, w);
+            HatchBrush hb12 = new HatchBrush(HatchStyle.Trellis, Color.Yellow, Color.Blue);
+            g.FillEllipse(hb12, x_st + dx * 1, y_st + dy * 2, w, w);
             g.DrawString("Trellis", Font, Brushes.Black, x_st + dx * 1, y_st + dy * 2 + w + 10);
 
-            HatchBrush myBrush13 = new HatchBrush(HatchStyle.Wave, Color.Yellow, Color.Blue);
-            g.FillEllipse(myBrush13, x_st + dx * 2, y_st + dy * 2, w, w);
+            HatchBrush hb13 = new HatchBrush(HatchStyle.Wave, Color.Yellow, Color.Blue);
+            g.FillEllipse(hb13, x_st + dx * 2, y_st + dy * 2, w, w);
             g.DrawString("Wave", Font, Brushes.Black, x_st + dx * 2, y_st + dy * 2 + w + 10);
 
-            HatchBrush myBrush14 = new HatchBrush(HatchStyle.Weave, Color.Yellow, Color.Blue);
-            g.FillEllipse(myBrush14, x_st + dx * 3, y_st + dy * 2, w, w);
+            HatchBrush hb14 = new HatchBrush(HatchStyle.Weave, Color.Yellow, Color.Blue);
+            g.FillEllipse(hb14, x_st + dx * 3, y_st + dy * 2, w, w);
             g.DrawString("Weave", Font, Brushes.Black, x_st + dx * 3, y_st + dy * 2 + w + 10);
 
-            HatchBrush myBrush15 = new HatchBrush(HatchStyle.SmallGrid, Color.Yellow, Color.Blue);
-            g.FillEllipse(myBrush15, x_st + dx * 4, y_st + dy * 2, w, w);
+            HatchBrush hb15 = new HatchBrush(HatchStyle.SmallGrid, Color.Yellow, Color.Blue);
+            g.FillEllipse(hb15, x_st + dx * 4, y_st + dy * 2, w, w);
             g.DrawString("SmallGrid", Font, Brushes.Black, x_st + dx * 4, y_st + dy * 2 + w + 10);
 
-            HatchBrush myBrush16 = new HatchBrush(HatchStyle.ZigZag, Color.Yellow, Color.Blue);
-            g.FillEllipse(myBrush16, x_st + dx * 0, y_st + dy * 3, w, w);
+            HatchBrush hb16 = new HatchBrush(HatchStyle.ZigZag, Color.Yellow, Color.Blue);
+            g.FillEllipse(hb16, x_st + dx * 0, y_st + dy * 3, w, w);
             g.DrawString("ZigZag", Font, Brushes.Black, x_st + dx * 0, y_st + dy * 3 + w + 10);
         }
 
@@ -967,6 +967,15 @@ namespace vcs_Draw_Brush
 
         private void button23_Click(object sender, EventArgs e)
         {
+
+            Graphics g = pictureBox1.CreateGraphics();
+            g.Clear(pictureBox1.BackColor);
+
+            HatchBrush hb = new HatchBrush(HatchStyle.Cross, Color.Red);  // 前線後底(黑)
+            g.FillEllipse(hb, 50, 50, 200, 200);
+
+            hb = new HatchBrush(HatchStyle.Cross, Color.Red, Color.Blue);  // 前線後底
+            g.FillEllipse(hb, 50, 250, 200, 200);
 
         }
 
@@ -1042,7 +1051,7 @@ namespace vcs_Draw_Brush
             HatchBrush hb = new HatchBrush(HatchStyle.Vertical, Color.Blue, Color.Green);
             g.FillEllipse(hb, 50, 150, 200, 100);
 
-            hb = new HatchBrush(HatchStyle.Cross, Color.Blue, Color.Green);
+            hb = new HatchBrush(HatchStyle.Cross, Color.Blue, Color.Green);  // 前線後底
             g.FillEllipse(hb, 250, 150, 200, 100);
 
             hb = new HatchBrush(HatchStyle.Wave, Color.Blue, Color.Green);
@@ -1094,13 +1103,42 @@ namespace vcs_Draw_Brush
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button43_Click(object sender, EventArgs e)
         {
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button44_Click(object sender, EventArgs e)
         {
+            //FillRegion
+
+            Graphics g = pictureBox1.CreateGraphics();
+            g.Clear(pictureBox1.BackColor);
+
+            SolidBrush sb = new SolidBrush(Color.FromArgb(255, 255, 0, 0));
+            Rectangle rect = new Rectangle(150, 150, 200, 100);
+            Region fillRegion = new Region(rect);
+            g.FillRegion(sb, fillRegion);
+
+
+
+            GraphicsPath gp = new GraphicsPath();
+            gp.AddEllipse(0, 0, 200, 200);
+
+            // 用圖片做成的筆刷
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_背景圖\background.jpg";  //使用一張背景圖
+            Image myImage = Image.FromFile(filename);
+            TextureBrush tb = new TextureBrush(myImage);//用圖片做成的筆刷
+
+            g.FillRegion(tb, new Region(gp));
+
+            tb.Dispose();
+            gp.Dispose();
+
+
 
         }
 
@@ -1194,19 +1232,19 @@ namespace vcs_Draw_Brush
             }
             else if (heart_type == 2)   //樣式塗刷一
             {
-                HatchBrush myBrush1 = new HatchBrush(HatchStyle.DiagonalCross, Color.Yellow, Color.Blue);   //HatchBrush - DiagonalCross
-                e.Graphics.FillPath(myBrush1, gp); //填滿形狀區域
+                HatchBrush hb1 = new HatchBrush(HatchStyle.DiagonalCross, Color.Yellow, Color.Blue);   //HatchBrush - DiagonalCross
+                e.Graphics.FillPath(hb1, gp); //填滿形狀區域
             }
             else if (heart_type == 3)   //樣式塗刷二
             {
-                HatchBrush myBrush2 = new HatchBrush(HatchStyle.SolidDiamond, Color.Yellow, Color.Blue);    //HatchBrush - SolidDiamond
-                e.Graphics.FillPath(myBrush2, gp); //填滿形狀區域
+                HatchBrush hb2 = new HatchBrush(HatchStyle.SolidDiamond, Color.Yellow, Color.Blue);    //HatchBrush - SolidDiamond
+                e.Graphics.FillPath(hb2, gp); //填滿形狀區域
             }
             else if (heart_type == 4)   //使用圖形塗刷
             {
                 Bitmap bm = new Bitmap(Properties.Resources.Butterfly);
-                TextureBrush myBrush3 = new TextureBrush(bm);  // 圖形塗刷  //TextureBrush
-                e.Graphics.FillPath(myBrush3, gp); //填滿形狀區域
+                TextureBrush tb3 = new TextureBrush(bm);  // 圖形塗刷  //TextureBrush
+                e.Graphics.FillPath(tb3, gp); //填滿形狀區域
             }
             e.Graphics.DrawPath(Pens.Black, gp); //繪出圖形軌跡
         }
@@ -1221,16 +1259,3 @@ namespace vcs_Draw_Brush
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*
-
-HatchBrush hb = new HatchBrush(HatchStyle.Cross, Color.Red);
-e.Graphics.FillEllipse(hb, 0 - D, 0 - D, 2 * D, 2 * D);
-
-//------------------------------------------------------------  # 60個
-
-FillRegion
-TextureBrush tb = new TextureBrush(bitmap0);//用圖片做成的筆刷
-g.FillRegion(tb, new Region(PaintPath));
-*/
-
