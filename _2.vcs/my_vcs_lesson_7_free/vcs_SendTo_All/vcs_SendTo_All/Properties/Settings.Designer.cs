@@ -94,5 +94,17 @@ namespace vcs_SendTo_All.Properties {
                 this["doc_foldername"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool show_foldername {
+            get {
+                return ((bool)(this["show_foldername"]));
+            }
+            set {
+                this["show_foldername"] = value;
+            }
+        }
     }
 }

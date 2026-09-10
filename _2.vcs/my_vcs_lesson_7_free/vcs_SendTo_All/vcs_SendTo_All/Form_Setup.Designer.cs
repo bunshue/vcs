@@ -62,6 +62,7 @@
             this.tb_foldername = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.cb_show_folder = new System.Windows.Forms.CheckBox();
             this.groupBox_file.SuspendLayout();
             this.groupBox_video.SuspendLayout();
             this.groupBox_search.SuspendLayout();
@@ -87,7 +88,7 @@
             this.lb_main_mesg2.AutoSize = true;
             this.lb_main_mesg2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lb_main_mesg2.ForeColor = System.Drawing.Color.Red;
-            this.lb_main_mesg2.Location = new System.Drawing.Point(346, 127);
+            this.lb_main_mesg2.Location = new System.Drawing.Point(346, 165);
             this.lb_main_mesg2.Name = "lb_main_mesg2";
             this.lb_main_mesg2.Size = new System.Drawing.Size(135, 24);
             this.lb_main_mesg2.TabIndex = 25;
@@ -98,7 +99,7 @@
             this.lb_main_mesg1.AutoSize = true;
             this.lb_main_mesg1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lb_main_mesg1.ForeColor = System.Drawing.Color.Red;
-            this.lb_main_mesg1.Location = new System.Drawing.Point(346, 93);
+            this.lb_main_mesg1.Location = new System.Drawing.Point(346, 131);
             this.lb_main_mesg1.Name = "lb_main_mesg1";
             this.lb_main_mesg1.Size = new System.Drawing.Size(135, 24);
             this.lb_main_mesg1.TabIndex = 24;
@@ -107,7 +108,7 @@
             // bt_save
             // 
             this.bt_save.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_save.Location = new System.Drawing.Point(348, 170);
+            this.bt_save.Location = new System.Drawing.Point(348, 208);
             this.bt_save.Name = "bt_save";
             this.bt_save.Size = new System.Drawing.Size(94, 32);
             this.bt_save.TabIndex = 23;
@@ -118,7 +119,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(348, 231);
+            this.richTextBox1.Location = new System.Drawing.Point(348, 269);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 28;
@@ -448,11 +449,23 @@
             this.label1.TabIndex = 250;
             this.label1.Text = "選擇瀏覽資料夾";
             // 
+            // cb_show_folder
+            // 
+            this.cb_show_folder.AutoSize = true;
+            this.cb_show_folder.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_show_folder.Location = new System.Drawing.Point(348, 100);
+            this.cb_show_folder.Name = "cb_show_folder";
+            this.cb_show_folder.Size = new System.Drawing.Size(149, 28);
+            this.cb_show_folder.TabIndex = 32;
+            this.cb_show_folder.Text = "搜尋資料夾";
+            this.cb_show_folder.UseVisualStyleBackColor = true;
+            // 
             // Form_Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(657, 528);
+            this.Controls.Add(this.cb_show_folder);
             this.Controls.Add(this.bt_select_foldername);
             this.Controls.Add(this.tb_foldername);
             this.Controls.Add(this.label1);
@@ -525,5 +538,6 @@
         private System.Windows.Forms.TextBox tb_foldername;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.CheckBox cb_show_folder;
     }
 }

@@ -30,6 +30,7 @@ namespace vcs_SendTo_All
             bool flag_show_file_path = Properties.Settings.Default.show_file_path;
             string doc_foldername = Properties.Settings.Default.doc_foldername;
             tb_foldername.Text = doc_foldername;
+            cb_show_folder.Checked = Properties.Settings.Default.show_foldername;
 
             if (flag_show_big_files_only == true)
             {
@@ -148,6 +149,7 @@ namespace vcs_SendTo_All
             lb_main_mesg2.Text = "bbbb";
 
             label1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            cb_show_folder.Location = new Point(x_st + dx * 2-52, y_st + dy * 0);
             tb_foldername.Size = new Size(400, 100);
             tb_foldername.Location = new Point(x_st + dx * 1, y_st + dy * 1 + 10);
             bt_select_foldername.Location = new Point(x_st + dx * 2 + 100, y_st + dy * 1);
@@ -217,6 +219,7 @@ namespace vcs_SendTo_All
             Properties.Settings.Default.show_audio_files_only = cb_search_audio_files.Checked;
             Properties.Settings.Default.show_file_path = cb_show_file_path.Checked;
             Properties.Settings.Default.doc_foldername = tb_foldername.Text;
+            Properties.Settings.Default.show_foldername = cb_show_folder.Checked;
 
             int file_size_limit = 0;
             bool conversionSuccessful = int.TryParse(tb_filesize_mb.Text, out file_size_limit);    //out為必須

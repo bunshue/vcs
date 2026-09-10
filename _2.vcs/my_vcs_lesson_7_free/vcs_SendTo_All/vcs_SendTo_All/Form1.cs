@@ -174,6 +174,7 @@ namespace vcs_SendTo_All
             else if (flag_operation_mode == MODE4)
             {
                 string doc_foldername = Properties.Settings.Default.doc_foldername;
+                bool show_folder = Properties.Settings.Default.show_foldername;
 
                 string foldername = Application.StartupPath;
 
@@ -193,27 +194,31 @@ namespace vcs_SendTo_All
 
                 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-                string[] files = Directory.GetFiles(foldername);
-                string[] dirs = Directory.GetDirectories(foldername);
-                //richTextBox1.Text += "資料夾: " + target_dir + "\t檔案個數 = " + files.Length.ToString() + "\n";
+                if (show_folder == true)
+                {
+                    string[] dirs = Directory.GetDirectories(foldername);
+                    //richTextBox1.Text += "資料夾: " + target_dir + "\t檔案個數 = " + files.Length.ToString() + "\n";
 
-                foreach (string dir in dirs)
-                {
-                    //richTextBox1.Text += "資料夾: " + dir + "\n";
-                    DirectoryInfo d = new DirectoryInfo(dir);
-                    richTextBox1.Text += d.Name + "\n";
-                    //richTextBox1.Text += "Name : " + d.Name + "\n";
-                    //richTextBox1.Text += "FullName : " + d.FullName + "\n";
-                    //richTextBox1.Text += "Parent : " + d.Parent + "\n";
-                    //richTextBox1.Text += "Root : " + d.Root + "\n";
-                    //richTextBox1.Text += "------------------------------\n";  // 30個
+                    foreach (string dir in dirs)
+                    {
+                        //richTextBox1.Text += "資料夾: " + dir + "\n";
+                        DirectoryInfo d = new DirectoryInfo(dir);
+                        richTextBox1.Text += d.Name + "\n";
+                        //richTextBox1.Text += "Name : " + d.Name + "\n";
+                        //richTextBox1.Text += "FullName : " + d.FullName + "\n";
+                        //richTextBox1.Text += "Parent : " + d.Parent + "\n";
+                        //richTextBox1.Text += "Root : " + d.Root + "\n";
+                        //richTextBox1.Text += "------------------------------\n";  // 30個
+                    }
+                    if (dirs.Length > 0)
+                    {
+                        richTextBox1.Text += "------------------------------\n";  // 30個
+                        richTextBox1.Text += "資料夾個數 : " + dirs.Length.ToString() + "\n";
+                        richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+                    }
                 }
-                if (dirs.Length > 0)
-                {
-                    richTextBox1.Text += "------------------------------\n";  // 30個
-                    richTextBox1.Text += "資料夾個數 : " + dirs.Length.ToString() + "\n";
-                    richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-                }
+
+                string[] files = Directory.GetFiles(foldername);
 
                 total_size = 0;
                 total_files = 0;

@@ -334,7 +334,7 @@
             this.bt_files11.Name = "bt_files11";
             this.bt_files11.Size = new System.Drawing.Size(200, 60);
             this.bt_files11.TabIndex = 56;
-            this.bt_files11.Text = "test";
+            this.bt_files11.Text = "顯示檔案大小";
             this.bt_files11.UseVisualStyleBackColor = true;
             this.bt_files11.Click += new System.EventHandler(this.bt_files11_Click);
             // 
@@ -418,7 +418,6 @@
             this.bt_files10.Name = "bt_files10";
             this.bt_files10.Size = new System.Drawing.Size(200, 60);
             this.bt_files10.TabIndex = 38;
-            this.bt_files10.Text = "new 1";
             this.bt_files10.UseVisualStyleBackColor = true;
             this.bt_files10.Click += new System.EventHandler(this.bt_files10_Click);
             // 
@@ -622,7 +621,6 @@
             this.bt_files22.Name = "bt_files22";
             this.bt_files22.Size = new System.Drawing.Size(200, 60);
             this.bt_files22.TabIndex = 77;
-            this.bt_files22.Text = "info";
             this.bt_files22.UseVisualStyleBackColor = true;
             this.bt_files22.Click += new System.EventHandler(this.bt_files22_Click);
             // 
@@ -655,6 +653,7 @@
             this.bt_files29.Name = "bt_files29";
             this.bt_files29.Size = new System.Drawing.Size(200, 60);
             this.bt_files29.TabIndex = 84;
+            this.bt_files29.Text = "test";
             this.bt_files29.UseVisualStyleBackColor = true;
             this.bt_files29.Click += new System.EventHandler(this.bt_files29_Click);
             // 
