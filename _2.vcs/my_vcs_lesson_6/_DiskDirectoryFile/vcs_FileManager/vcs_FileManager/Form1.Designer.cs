@@ -71,7 +71,6 @@
             this.lb_files = new System.Windows.Forms.Label();
             this.lb_filesize = new System.Windows.Forms.Label();
             this.lb_find = new System.Windows.Forms.Label();
-            this.lb_time = new System.Windows.Forms.Label();
             this.groupBox3.SuspendLayout();
             this.groupBox_file.SuspendLayout();
             this.SuspendLayout();
@@ -513,22 +512,11 @@
             this.lb_find.TabIndex = 71;
             this.lb_find.Text = "lb_find";
             // 
-            // lb_time
-            // 
-            this.lb_time.AutoSize = true;
-            this.lb_time.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_time.Location = new System.Drawing.Point(226, 245);
-            this.lb_time.Name = "lb_time";
-            this.lb_time.Size = new System.Drawing.Size(69, 21);
-            this.lb_time.TabIndex = 72;
-            this.lb_time.Text = "lb_time";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1784, 756);
-            this.Controls.Add(this.lb_time);
             this.Controls.Add(this.lb_find);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.button0);
@@ -617,7 +605,6 @@
         private System.Windows.Forms.Label lb_files;
         private System.Windows.Forms.Label lb_filesize;
         private System.Windows.Forms.Label lb_find;
-        private System.Windows.Forms.Label lb_time;
     }
 }
 

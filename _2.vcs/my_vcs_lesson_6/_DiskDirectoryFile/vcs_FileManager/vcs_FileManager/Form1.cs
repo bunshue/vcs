@@ -143,6 +143,9 @@ namespace vcs_FileManager
 
             check_filesize = int.Parse(tb_filesize.Text);
             skip_count = int.Parse(tb_count.Text);
+
+            string foldername = @"D:\_git\vcs\_1.data\______test_files3";
+            this.listBox1.Items.Add(foldername);
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -244,7 +247,6 @@ namespace vcs_FileManager
             bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Width - bt_clear2.Width, richTextBox2.Location.Y);
             bt_clear3.Location = new Point(listView1.Location.X + listView1.Size.Width - bt_clear3.Size.Width, listView1.Location.Y + listView1.Size.Height - bt_clear3.Size.Height);
             lb_find.Location = new Point(bt_clear3.Location.X - 200, bt_clear3.Location.Y);
-            lb_time.Location = new Point(bt_clear1.Location.X - 200, bt_clear1.Location.Y);
 
             bt_minimize_setup();
             bt_exit_setup();
@@ -252,7 +254,6 @@ namespace vcs_FileManager
             lb_files.Text = "";
             lb_filesize.Text = "";
             lb_find.Text = "";
-            lb_time.Text = "";
         }
 
         private void bt_minimize_Click(object sender, EventArgs e)
@@ -974,12 +975,6 @@ namespace vcs_FileManager
             lb_files.Text = "";
             lb_filesize.Text = "";
             lb_find.Text = "";
-            lb_time.Text = "";
-            this.Cursor = Cursors.WaitCursor;   // set busy cursor
-            button1.BackColor = Color.Red;
-            Application.DoEvents();
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
 
             //轉出多層
             fileinfos.Clear();
@@ -1020,11 +1015,6 @@ namespace vcs_FileManager
 
             //show_file_info();
 
-            this.Cursor = Cursors.Default;
-            button1.BackColor = System.Drawing.SystemColors.ControlLight;
-
-            //stopwatch.Stop();
-            lb_time.Text = "時間 : " + stopwatch.Elapsed.TotalSeconds.ToString("0.00") + " 秒";
             lb_files.Text = "檔案個數 : " + total_files.ToString();
             lb_filesize.Text = "總容量   : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size));
         }
@@ -1034,20 +1024,9 @@ namespace vcs_FileManager
             lb_files.Text = "";
             lb_filesize.Text = "";
             lb_find.Text = "";
-            lb_time.Text = "";
-            this.Cursor = Cursors.WaitCursor;   // set busy cursor
-            button2.BackColor = Color.Red;
-            Application.DoEvents();
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
 
             show_file_info();
 
-            this.Cursor = Cursors.Default;
-            button2.BackColor = System.Drawing.SystemColors.ControlLight;
-
-            stopwatch.Stop();
-            lb_time.Text = "時間 : " + stopwatch.Elapsed.TotalSeconds.ToString("0.00") + " 秒";
             lb_files.Text = "檔案個數 : " + total_files.ToString();
             lb_filesize.Text = "總容量   : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size));
         }
@@ -1070,12 +1049,6 @@ namespace vcs_FileManager
             lb_files.Text = "";
             lb_filesize.Text = "";
             lb_find.Text = "";
-            lb_time.Text = "";
-            this.Cursor = Cursors.WaitCursor;   // set busy cursor
-            button3.BackColor = Color.Red;
-            Application.DoEvents();
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
 
             match_count = 0;
             fileinfos_match.Clear();
@@ -1166,11 +1139,7 @@ namespace vcs_FileManager
             richTextBox1.Text += "show match files\n";
             show_MyFileInfo(fileinfos_match);
             flag_need_shortname = false;
-            this.Cursor = Cursors.Default;
-            button3.BackColor = System.Drawing.SystemColors.ControlLight;
 
-            stopwatch.Stop();
-            lb_time.Text = "時間 : " + stopwatch.Elapsed.TotalSeconds.ToString("0.00") + " 秒";
             lb_find.Text = "個數 : " + fileinfos_match.ToString() + " 個";
         }
 
@@ -1491,12 +1460,6 @@ namespace vcs_FileManager
             lb_files.Text = "";
             lb_filesize.Text = "";
             lb_find.Text = "";
-            lb_time.Text = "";
-            this.Cursor = Cursors.WaitCursor;   // set busy cursor
-            button5.BackColor = Color.Red;
-            Application.DoEvents();
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
 
             match_count = 0;
             fileinfos_match.Clear();
@@ -1522,11 +1485,7 @@ namespace vcs_FileManager
 
             richTextBox1.Text += "show match files\n";
             show_MyFileInfo(fileinfos_match);
-            this.Cursor = Cursors.Default;
-            button5.BackColor = System.Drawing.SystemColors.ControlLight;
 
-            stopwatch.Stop();
-            lb_time.Text = "時間 : " + stopwatch.Elapsed.TotalSeconds.ToString("0.00") + " 秒";
             lb_find.Text = "個數 : " + fileinfos_match.ToString() + " 個";
         }
 
@@ -1545,12 +1504,6 @@ namespace vcs_FileManager
             lb_files.Text = "";
             lb_filesize.Text = "";
             lb_find.Text = "";
-            lb_time.Text = "";
-            this.Cursor = Cursors.WaitCursor;   // set busy cursor
-            button6.BackColor = Color.Red;
-            Application.DoEvents();
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
 
             match_count = 0;
             fileinfos_match.Clear();
@@ -1602,13 +1555,7 @@ namespace vcs_FileManager
 
             richTextBox1.Text += "show match files\n";
             show_MyFileInfo(fileinfos_match);
-            this.Cursor = Cursors.Default;
-            button6.BackColor = System.Drawing.SystemColors.ControlLight;
-
-            stopwatch.Stop();
-            lb_time.Text = "時間 : " + stopwatch.Elapsed.TotalSeconds.ToString("0.00") + " 秒";
             lb_find.Text = "個數 : " + fileinfos_match.ToString() + " 個";
-
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -1824,4 +1771,3 @@ richTextBox1.Text += "依 其他 排序\n";
 }
 
 */
-

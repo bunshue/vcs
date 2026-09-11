@@ -216,6 +216,7 @@
             this.bt_dir09.Name = "bt_dir09";
             this.bt_dir09.Size = new System.Drawing.Size(200, 60);
             this.bt_dir09.TabIndex = 41;
+            this.bt_dir09.Text = "ff2";
             this.bt_dir09.UseVisualStyleBackColor = true;
             this.bt_dir09.Click += new System.EventHandler(this.bt_dir09_Click);
             // 
@@ -226,6 +227,7 @@
             this.bt_dir08.Name = "bt_dir08";
             this.bt_dir08.Size = new System.Drawing.Size(200, 60);
             this.bt_dir08.TabIndex = 40;
+            this.bt_dir08.Text = "ff1";
             this.bt_dir08.UseVisualStyleBackColor = true;
             this.bt_dir08.Click += new System.EventHandler(this.bt_dir08_Click);
             // 
@@ -280,6 +282,7 @@
             this.bt_dir07.Name = "bt_dir07";
             this.bt_dir07.Size = new System.Drawing.Size(200, 60);
             this.bt_dir07.TabIndex = 4;
+            this.bt_dir07.Text = "搜尋一個資料夾內所有特定格式的檔案";
             this.bt_dir07.UseVisualStyleBackColor = true;
             this.bt_dir07.Click += new System.EventHandler(this.bt_dir07_Click);
             // 
@@ -621,6 +624,7 @@
             this.bt_files22.Name = "bt_files22";
             this.bt_files22.Size = new System.Drawing.Size(200, 60);
             this.bt_files22.TabIndex = 77;
+            this.bt_files22.Text = "轉出全部 標準版";
             this.bt_files22.UseVisualStyleBackColor = true;
             this.bt_files22.Click += new System.EventHandler(this.bt_files22_Click);
             // 
@@ -664,6 +668,7 @@
             this.bt_files28.Name = "bt_files28";
             this.bt_files28.Size = new System.Drawing.Size(200, 60);
             this.bt_files28.TabIndex = 83;
+            this.bt_files28.Text = "test";
             this.bt_files28.UseVisualStyleBackColor = true;
             this.bt_files28.Click += new System.EventHandler(this.bt_files28_Click);
             // 

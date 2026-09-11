@@ -38,6 +38,7 @@ namespace vcs_ListView1
             //------------------------------------------------------------  # 60個
 
             // listView1的共同設定, 設定ListView與設定欄位
+
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.FullRowSelect = true; //整行一起選取
             listView1.GridLines = true;  // 顯示格線
@@ -201,19 +202,14 @@ namespace vcs_ListView1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //設定ListView與設定欄位
-            listView1.View = View.Details;  //定義列表顯示的方式
-            listView1.FullRowSelect = true; //整行一起選取
-            listView1.GridLines = true; //顯示格線
+            //加入欄位的方法
 
-            listView1.GridLines = true;
-            listView1.View = View.Details;
-            //listView1.Columns.Add(new ColumnHeader("aaaa"));
+            listView1.Columns.Add(new ColumnHeader("第一欄"));
 
             //設定欄位
             ColumnHeader ch1 = new ColumnHeader();
-            ch1.Text = "檔案名稱";
-            ch1.Width = 500;
+            ch1.Text = "第二欄";
+            ch1.Width = 200;
             listView1.Columns.Add(ch1);
         }
 
@@ -221,15 +217,144 @@ namespace vcs_ListView1
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //各種欄位設定方式
+
+            //清除所有的欄位
+            listView1.Columns.Clear();  // 看似與清除整個listView一樣
+
+            //listView1.AllowColumnReorder = true;//允許使用者拖曳欄位
+            listView1.Font = new Font("Microsoft Sans Serif", 12.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+
+            //設定欄位, 欄名, 欄寬, 對齊方式
+            listView1.Columns.Add("英文名", 120, HorizontalAlignment.Left);
+            listView1.Columns.Add("中文名", 120, HorizontalAlignment.Center);
+            listView1.Columns.Add("體重", 80, HorizontalAlignment.Right);
+            /*
+            //設定欄位, 欄名, 欄寬, 對齊方式, 寬度-2代表自動欄寬??
+            listView1.Columns.Add("英文名", -1, HorizontalAlignment.Center);
+            listView1.Columns.Add("中文名", -1, HorizontalAlignment.Left);
+            listView1.Columns.Add("體重", -1, HorizontalAlignment.Right);
+            */
+
+            /*
+            //設定欄位, 欄名, 欄寬, 對齊方式
+            listView1.Columns.Add("英文名", 200);
+            listView1.Columns.Add("中文名", 200);
+            listView1.Columns.Add("體重", 100, HorizontalAlignment.Right);
+            */
+
+            //設定欄寬
+            foreach (ColumnHeader col in listView1.Columns)
+            {
+                //col.Width = -1;  // 設定欄寬 符合 欄名長度
+                //col.Width = -2;  // 設定欄寬 符合 欄名長度 與 資料長度
+            }
+            //設定欄寬 1
+            foreach (ColumnHeader col in listView1.Columns)
+            {
+                //col.Width = -2;   //自動欄寬, 寬度-2代表自動欄寬
+                col.Width = 80;     //固定欄寬
+            }
+
+            //設定欄寬 2
+            int C = listView1.Columns.Count;//欄數
+            for (int i = 0; i < C; i++)
+            {
+                //listView1.Columns[i].Width = -2;//寬度-2代表自動欄寬
+            }
+
+
+
+            //設定欄位, 欄名, 欄寬, 對齊方式
+            ColumnHeader ch1 = new ColumnHeader();
+            ch1.Text = "英文名";
+            ch1.Width = 200;
+            ch1.TextAlign = HorizontalAlignment.Left;  // 對齊方式
+            listView1.Columns.Add(ch1);
+
+            ColumnHeader ch2 = new ColumnHeader();
+            ch2.Text = "中文名";
+            ch2.Width = 100;
+            ch2.TextAlign = HorizontalAlignment.Left;  // 對齊方式
+            listView1.Columns.Add(ch2);
+
+            ColumnHeader ch3 = new ColumnHeader();
+            ch3.Text = "體重";
+            ch3.Width = 200;
+            ch3.TextAlign = HorizontalAlignment.Left;  // 對齊方式
+            listView1.Columns.Add(ch3);
         }
 
+        //------------------------------------------------------------  # 60個
+
+        int type = 0;
         private void button3_Click(object sender, EventArgs e)
         {
+            //各種欄寬設定
+            if (type == 0)
+            {
+                richTextBox1.Text += "固定欄寬\n";
+                SetListViewColumnSizes(listView1, 60);
+            }
+            else if (type == 1)
+            {
+                richTextBox1.Text += "欄寬 -1 完整顯示 內容\n";
+                SetListViewColumnSizes(listView1, -1);
+            }
+            else if (type == 2)
+            {
+                richTextBox1.Text += "欄寬 -2 完整顯示 內容 和 欄位\n";
+                SetListViewColumnSizes(listView1, -2);
+            }
+            else
+            {
+                richTextBox1.Text += "xxxxxxxx\n";
+            }
+            type++;
+            if (type > 2)
+                type = 0;
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //各種View
+            if (type == 0)
+            {
+                richTextBox1.Text += "View.Details\n";
+                listView1.View = View.Details;  //定義列表顯示的方式
+            }
+            else if (type == 1)
+            {
+                richTextBox1.Text += "View.LargeIcon\n";
+                listView1.View = View.LargeIcon;  //定義列表顯示的方式
+            }
+            else if (type == 2)
+            {
+                richTextBox1.Text += "View.List\n";
+                listView1.View = View.List;  //定義列表顯示的方式
+            }
+            else if (type == 3)
+            {
+                richTextBox1.Text += "View.SmallIcon\n";
+                listView1.View = View.SmallIcon;  //定義列表顯示的方式
+            }
+            else if (type == 4)
+            {
+                richTextBox1.Text += "View.Tile\n";
+                listView1.View = View.Tile;  //定義列表顯示的方式
+            }
+            else
+            {
+                richTextBox1.Text += "xxxxxxxx\n";
+            }
+            type++;
+            if (type > 4)
+                type = 0;
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button5_Click(object sender, EventArgs e)
         {
@@ -861,75 +986,13 @@ namespace vcs_ListView1
             // listView1.BackgroundImage = imageList1.Images[1];
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button16_Click(object sender, EventArgs e)
         {
-            //各種欄位設定方式
-
-            //清除所有的欄位
-            listView1.Columns.Clear();  // 看似與清除整個listView一樣
-
-            //listView1.AllowColumnReorder = true;//允許使用者拖曳欄位
-            listView1.Font = new Font("Microsoft Sans Serif", 12.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
-
-            //設定欄位, 欄名, 欄寬, 對齊方式
-            listView1.Columns.Add("英文名", 120, HorizontalAlignment.Left);
-            listView1.Columns.Add("中文名", 120, HorizontalAlignment.Center);
-            listView1.Columns.Add("體重", 80, HorizontalAlignment.Right);
-            /*
-            //設定欄位, 欄名, 欄寬, 對齊方式, 寬度-2代表自動欄寬??
-            listView1.Columns.Add("英文名", -1, HorizontalAlignment.Center);
-            listView1.Columns.Add("中文名", -1, HorizontalAlignment.Left);
-            listView1.Columns.Add("體重", -1, HorizontalAlignment.Right);
-            */
-
-            /*
-            //設定欄位, 欄名, 欄寬, 對齊方式
-            listView1.Columns.Add("英文名", 200);
-            listView1.Columns.Add("中文名", 200);
-            listView1.Columns.Add("體重", 100, HorizontalAlignment.Right);
-            */
-
-            //設定欄寬
-            foreach (ColumnHeader col in listView1.Columns)
-            {
-                //col.Width = -1;  // 設定欄寬 符合 欄名長度
-                //col.Width = -2;  // 設定欄寬 符合 欄名長度 與 資料長度
-            }
-            //設定欄寬 1
-            foreach (ColumnHeader col in listView1.Columns)
-            {
-                //col.Width = -2;   //自動欄寬, 寬度-2代表自動欄寬
-                col.Width = 80;     //固定欄寬
-            }
-
-            //設定欄寬 2
-            int C = listView1.Columns.Count;//欄數
-            for (int i = 0; i < C; i++)
-            {
-                //listView1.Columns[i].Width = -2;//寬度-2代表自動欄寬
-            }
-
-
-
-            //設定欄位, 欄名, 欄寬, 對齊方式
-            ColumnHeader ch1 = new ColumnHeader();
-            ch1.Text = "英文名";
-            ch1.Width = 200;
-            ch1.TextAlign = HorizontalAlignment.Left;  // 對齊方式
-            listView1.Columns.Add(ch1);
-
-            ColumnHeader ch2 = new ColumnHeader();
-            ch2.Text = "中文名";
-            ch2.Width = 100;
-            ch2.TextAlign = HorizontalAlignment.Left;  // 對齊方式
-            listView1.Columns.Add(ch2);
-
-            ColumnHeader ch3 = new ColumnHeader();
-            ch3.Text = "體重";
-            ch3.Width = 200;
-            ch3.TextAlign = HorizontalAlignment.Left;  // 對齊方式
-            listView1.Columns.Add(ch3);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button17_Click(object sender, EventArgs e)
         {
@@ -1203,69 +1266,12 @@ namespace vcs_ListView1
                 col.Width = width;
         }
 
-        int type = 0;
         private void button25_Click(object sender, EventArgs e)
         {
-            //各種欄寬設定
-            if (type == 0)
-            {
-                richTextBox1.Text += "固定欄寬\n";
-                SetListViewColumnSizes(listView1, 60);
-            }
-            else if (type == 1)
-            {
-                richTextBox1.Text += "欄寬 -1 完整顯示 內容\n";
-                SetListViewColumnSizes(listView1, -1);
-            }
-            else if (type == 2)
-            {
-                richTextBox1.Text += "欄寬 -2 完整顯示 內容 和 欄位\n";
-                SetListViewColumnSizes(listView1, -2);
-            }
-            else
-            {
-                richTextBox1.Text += "xxxxxxxx\n";
-            }
-            type++;
-            if (type > 2)
-                type = 0;
         }
 
         private void button26_Click(object sender, EventArgs e)
         {
-            //各種View
-            if (type == 0)
-            {
-                richTextBox1.Text += "View.Details\n";
-                listView1.View = View.Details;  //定義列表顯示的方式
-            }
-            else if (type == 1)
-            {
-                richTextBox1.Text += "View.LargeIcon\n";
-                listView1.View = View.LargeIcon;  //定義列表顯示的方式
-            }
-            else if (type == 2)
-            {
-                richTextBox1.Text += "View.List\n";
-                listView1.View = View.List;  //定義列表顯示的方式
-            }
-            else if (type == 3)
-            {
-                richTextBox1.Text += "View.SmallIcon\n";
-                listView1.View = View.SmallIcon;  //定義列表顯示的方式
-            }
-            else if (type == 4)
-            {
-                richTextBox1.Text += "View.Tile\n";
-                listView1.View = View.Tile;  //定義列表顯示的方式
-            }
-            else
-            {
-                richTextBox1.Text += "xxxxxxxx\n";
-            }
-            type++;
-            if (type > 4)
-                type = 0;
         }
 
         private void button27_Click(object sender, EventArgs e)
