@@ -4,6 +4,16 @@
 
 //------------------------------------------------------------  # 60個
 
+//若是圖片, 秀出來
+string ext = fi.Extension.ToLower();
+if ((ext == ".bmp") || (ext == ".jpg") || (ext == ".png"))
+{
+	pictureBox1.Image = Image.FromFile(listView1.SelectedItems[0].Text);
+}
+else
+{
+	pictureBox1.Image = null;
+}
 
 
 //------------------------------------------------------------  # 60個

@@ -30,7 +30,19 @@ namespace vcs_SendTo_All
             bool flag_show_file_path = Properties.Settings.Default.show_file_path;
             string doc_foldername = Properties.Settings.Default.doc_foldername;
             tb_foldername.Text = doc_foldername;
-            cb_show_folder.Checked = Properties.Settings.Default.show_foldername;
+            int flag_search_mode = Properties.Settings.Default.flag_search_mode;
+            if (flag_search_mode == 1)
+            {
+                rb_search1.Checked = true;
+            }
+            else if (flag_search_mode == 2)
+            {
+                rb_search2.Checked = true;
+            }
+            else
+            {
+                rb_search0.Checked = true;
+            }
 
             if (flag_show_big_files_only == true)
             {
@@ -119,6 +131,7 @@ namespace vcs_SendTo_All
             groupBox_text_mode.Location = new Point(x_st + dx * 0, y_st + dy * 0 + H * 6);
             groupBox_auto_save.Location = new Point(x_st + dx * 0, y_st + dy * 0 + H * 7);
             groupBox_show_file_content.Location = new Point(x_st + dx * 0, y_st + dy * 0 + H * 8);
+            groupBox_search_mode.Location = new Point(x_st + dx * 0, y_st + dy * 0 + H * 9);
 
             // groupBox_search
             rb_search_big_files.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -140,16 +153,20 @@ namespace vcs_SendTo_All
             // groupBox_show_file_content
             cb_show_file_path.Location = new Point(x_st + dx * 0, y_st + dy * 0);
 
-            bt_save.Location = new Point(x_st + dx * 0 + 210, y_st + dy * 12 + 40);
+            //groupBox_search_mode
+            //rb_search0.Location
+            //rb_search0.Location
+            //rb_search0.Location
 
-            lb_main_mesg1.Location = new Point(x_st + dx * 0, y_st + dy * 12);
-            lb_main_mesg2.Location = new Point(x_st + dx * 0, y_st + dy * 13);
+            bt_save.Location = new Point(x_st + dx * 0 + 210, y_st + dy * 14 + 40);
+
+            lb_main_mesg1.Location = new Point(x_st + dx * 0, y_st + dy * 14);
+            lb_main_mesg2.Location = new Point(x_st + dx * 0, y_st + dy * 15);
 
             lb_main_mesg1.Text = "aaaa";
             lb_main_mesg2.Text = "bbbb";
 
             label1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            cb_show_folder.Location = new Point(x_st + dx * 2-52, y_st + dy * 0);
             tb_foldername.Size = new Size(400, 100);
             tb_foldername.Location = new Point(x_st + dx * 1, y_st + dy * 1 + 10);
             bt_select_foldername.Location = new Point(x_st + dx * 2 + 100, y_st + dy * 1);
@@ -219,7 +236,20 @@ namespace vcs_SendTo_All
             Properties.Settings.Default.show_audio_files_only = cb_search_audio_files.Checked;
             Properties.Settings.Default.show_file_path = cb_show_file_path.Checked;
             Properties.Settings.Default.doc_foldername = tb_foldername.Text;
-            Properties.Settings.Default.show_foldername = cb_show_folder.Checked;
+            int flag_search_mode = 0;
+            if (rb_search1.Checked == true)
+            {
+                flag_search_mode = 1;  // 一層
+            }
+            else if (rb_search2.Checked == true)
+            {
+                flag_search_mode = 2;  // 僅檔案
+            }
+            else
+            {
+                flag_search_mode = 0;  // 多層
+            }
+            Properties.Settings.Default.flag_search_mode = flag_search_mode;
 
             int file_size_limit = 0;
             bool conversionSuccessful = int.TryParse(tb_filesize_mb.Text, out file_size_limit);    //out為必須

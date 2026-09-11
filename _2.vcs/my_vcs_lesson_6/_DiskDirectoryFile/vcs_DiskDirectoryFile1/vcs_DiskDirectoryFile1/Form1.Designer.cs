@@ -450,7 +450,7 @@
             this.bt_files07.Name = "bt_files07";
             this.bt_files07.Size = new System.Drawing.Size(200, 60);
             this.bt_files07.TabIndex = 49;
-            this.bt_files07.Text = "撈出資料夾內所有jpg檔";
+            this.bt_files07.Text = "撈出資料夾內的jpg檔(一層)";
             this.bt_files07.UseVisualStyleBackColor = true;
             this.bt_files07.Click += new System.EventHandler(this.bt_files07_Click);
             // 
@@ -674,6 +674,7 @@
             this.bt_files27.Name = "bt_files27";
             this.bt_files27.Size = new System.Drawing.Size(200, 60);
             this.bt_files27.TabIndex = 82;
+            this.bt_files27.Text = "搜尋顯示至listview";
             this.bt_files27.UseVisualStyleBackColor = true;
             this.bt_files27.Click += new System.EventHandler(this.bt_files27_Click);
             // 

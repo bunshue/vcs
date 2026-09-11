@@ -15,8 +15,8 @@ namespace vcs_SendTo_All
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Form1());
-            Application.Run(new Form_Setup());
+            Application.Run(new Form1());
+            //Application.Run(new Form_Setup());
         }
     }
 }

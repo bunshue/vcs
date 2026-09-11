@@ -62,7 +62,10 @@
             this.tb_foldername = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.cb_show_folder = new System.Windows.Forms.CheckBox();
+            this.groupBox_search_mode = new System.Windows.Forms.GroupBox();
+            this.rb_search1 = new System.Windows.Forms.RadioButton();
+            this.rb_search0 = new System.Windows.Forms.RadioButton();
+            this.rb_search2 = new System.Windows.Forms.RadioButton();
             this.groupBox_file.SuspendLayout();
             this.groupBox_video.SuspendLayout();
             this.groupBox_search.SuspendLayout();
@@ -70,6 +73,7 @@
             this.groupBox_text_mode.SuspendLayout();
             this.groupBox_auto_save.SuspendLayout();
             this.groupBox_show_file_content.SuspendLayout();
+            this.groupBox_search_mode.SuspendLayout();
             this.SuspendLayout();
             // 
             // tb_filesize_mb
@@ -88,7 +92,7 @@
             this.lb_main_mesg2.AutoSize = true;
             this.lb_main_mesg2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lb_main_mesg2.ForeColor = System.Drawing.Color.Red;
-            this.lb_main_mesg2.Location = new System.Drawing.Point(346, 165);
+            this.lb_main_mesg2.Location = new System.Drawing.Point(346, 182);
             this.lb_main_mesg2.Name = "lb_main_mesg2";
             this.lb_main_mesg2.Size = new System.Drawing.Size(135, 24);
             this.lb_main_mesg2.TabIndex = 25;
@@ -99,7 +103,7 @@
             this.lb_main_mesg1.AutoSize = true;
             this.lb_main_mesg1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lb_main_mesg1.ForeColor = System.Drawing.Color.Red;
-            this.lb_main_mesg1.Location = new System.Drawing.Point(346, 131);
+            this.lb_main_mesg1.Location = new System.Drawing.Point(346, 148);
             this.lb_main_mesg1.Name = "lb_main_mesg1";
             this.lb_main_mesg1.Size = new System.Drawing.Size(135, 24);
             this.lb_main_mesg1.TabIndex = 24;
@@ -108,7 +112,7 @@
             // bt_save
             // 
             this.bt_save.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_save.Location = new System.Drawing.Point(348, 208);
+            this.bt_save.Location = new System.Drawing.Point(348, 225);
             this.bt_save.Name = "bt_save";
             this.bt_save.Size = new System.Drawing.Size(94, 32);
             this.bt_save.TabIndex = 23;
@@ -119,7 +123,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(348, 269);
+            this.richTextBox1.Location = new System.Drawing.Point(348, 286);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 28;
@@ -449,23 +453,59 @@
             this.label1.TabIndex = 250;
             this.label1.Text = "選擇瀏覽資料夾";
             // 
-            // cb_show_folder
+            // groupBox_search_mode
             // 
-            this.cb_show_folder.AutoSize = true;
-            this.cb_show_folder.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_show_folder.Location = new System.Drawing.Point(348, 100);
-            this.cb_show_folder.Name = "cb_show_folder";
-            this.cb_show_folder.Size = new System.Drawing.Size(149, 28);
-            this.cb_show_folder.TabIndex = 32;
-            this.cb_show_folder.Text = "搜尋資料夾";
-            this.cb_show_folder.UseVisualStyleBackColor = true;
+            this.groupBox_search_mode.Controls.Add(this.rb_search2);
+            this.groupBox_search_mode.Controls.Add(this.rb_search1);
+            this.groupBox_search_mode.Controls.Add(this.rb_search0);
+            this.groupBox_search_mode.Location = new System.Drawing.Point(18, 517);
+            this.groupBox_search_mode.Name = "groupBox_search_mode";
+            this.groupBox_search_mode.Size = new System.Drawing.Size(290, 56);
+            this.groupBox_search_mode.TabIndex = 54;
+            this.groupBox_search_mode.TabStop = false;
+            this.groupBox_search_mode.Text = "搜尋模式";
+            // 
+            // rb_search1
+            // 
+            this.rb_search1.AutoSize = true;
+            this.rb_search1.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_search1.Location = new System.Drawing.Point(94, 14);
+            this.rb_search1.Name = "rb_search1";
+            this.rb_search1.Size = new System.Drawing.Size(76, 28);
+            this.rb_search1.TabIndex = 29;
+            this.rb_search1.Text = "一層";
+            this.rb_search1.UseVisualStyleBackColor = true;
+            // 
+            // rb_search0
+            // 
+            this.rb_search0.AutoSize = true;
+            this.rb_search0.Checked = true;
+            this.rb_search0.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_search0.Location = new System.Drawing.Point(16, 15);
+            this.rb_search0.Name = "rb_search0";
+            this.rb_search0.Size = new System.Drawing.Size(76, 28);
+            this.rb_search0.TabIndex = 28;
+            this.rb_search0.TabStop = true;
+            this.rb_search0.Text = "多層";
+            this.rb_search0.UseVisualStyleBackColor = true;
+            // 
+            // rb_search2
+            // 
+            this.rb_search2.AutoSize = true;
+            this.rb_search2.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_search2.Location = new System.Drawing.Point(171, 14);
+            this.rb_search2.Name = "rb_search2";
+            this.rb_search2.Size = new System.Drawing.Size(100, 28);
+            this.rb_search2.TabIndex = 30;
+            this.rb_search2.Text = "僅檔案";
+            this.rb_search2.UseVisualStyleBackColor = true;
             // 
             // Form_Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(657, 528);
-            this.Controls.Add(this.cb_show_folder);
+            this.ClientSize = new System.Drawing.Size(657, 589);
+            this.Controls.Add(this.groupBox_search_mode);
             this.Controls.Add(this.bt_select_foldername);
             this.Controls.Add(this.tb_foldername);
             this.Controls.Add(this.label1);
@@ -497,6 +537,8 @@
             this.groupBox_auto_save.PerformLayout();
             this.groupBox_show_file_content.ResumeLayout(false);
             this.groupBox_show_file_content.PerformLayout();
+            this.groupBox_search_mode.ResumeLayout(false);
+            this.groupBox_search_mode.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -538,6 +580,9 @@
         private System.Windows.Forms.TextBox tb_foldername;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
-        private System.Windows.Forms.CheckBox cb_show_folder;
+        private System.Windows.Forms.GroupBox groupBox_search_mode;
+        private System.Windows.Forms.RadioButton rb_search2;
+        private System.Windows.Forms.RadioButton rb_search1;
+        private System.Windows.Forms.RadioButton rb_search0;
     }
 }

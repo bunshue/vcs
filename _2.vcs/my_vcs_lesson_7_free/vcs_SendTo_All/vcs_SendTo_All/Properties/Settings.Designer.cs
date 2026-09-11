@@ -97,13 +97,13 @@ namespace vcs_SendTo_All.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool show_foldername {
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int flag_search_mode {
             get {
-                return ((bool)(this["show_foldername"]));
+                return ((int)(this["flag_search_mode"]));
             }
             set {
-                this["show_foldername"] = value;
+                this["flag_search_mode"] = value;
             }
         }
     }
