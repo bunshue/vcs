@@ -4,6 +4,40 @@
 
 //------------------------------------------------------------  # 60個
 
+
+//------------------------------------------------------------  # 60個
+
+            MediaFile f = new MediaFile(fi.FullName);
+            //richTextBox1.Text += "  影片長度: " + f.General.DurationString + "\n";
+            //richTextBox1.Text += "  FileSize: " + f.FileSize.ToString() + "\n";
+            //richTextBox1.Text += "  Extension: " + f.Extension + "\n";
+            if ((f.InfoAvailable == true) && (f.Video.Count > 0))
+            {
+                int w = f.Video[0].Width;
+                int h = f.Video[0].Height;
+                //richTextBox1.Text += "  輸入大小: " + w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\n";
+                //richTextBox1.Text += "  FPS: " + f.Video[0].FrameRate.ToString() + "\n";
+                //if (cb_generate_text.Checked == true)
+                {
+                    richTextBox1.Text += "影片\t";
+                    richTextBox1.Text += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
+                        fi.FullName, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
+
+                    fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
+                }
+            }
+            else
+            {
+                //if (cb_generate_text.Checked == true)
+                {
+                    richTextBox1.Text += "非影片\t";
+                    richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+                    fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
+                }
+            }
+
+//------------------------------------------------------------  # 60個
+
 //若是圖片, 秀出來
 string ext = fi.Extension.ToLower();
 if ((ext == ".bmp") || (ext == ".jpg") || (ext == ".png"))
