@@ -45,7 +45,6 @@ namespace vcs_DrAP
         Int64 folder_files = 0;
         int min_size_mb = 0;
         int step = 0;
-        int flag_search_mode = 0;
         int flag_search_vcs_pattern = 0;
         string FolederName;
 
@@ -210,9 +209,6 @@ namespace vcs_DrAP
 
             x_st = 960;
             y_st = 15;
-
-            textBox4.Location = new Point(x_st - 10 - 120, y_st);
-            label3.Location = new Point(x_st + 35 - 120, y_st + 8);
 
             bt_find_empty_folders.Location = new Point(x_st - 55, y_st);
             bt_find_small_folders.Location = new Point(x_st - 55, y_st + 30);
@@ -418,7 +414,8 @@ namespace vcs_DrAP
                     folder_files = 0;
                     foreach (string fileName in fileEntries)
                     {
-                        ProcessFile4(fileName, step);
+                        FileInfo fi = new FileInfo(fileName);
+                        fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
                     }
                     //richTextBox1.Text += "folder_name = " + targetDirectory + "\n";
                     //richTextBox1.Text += "folder_files = " + folder_files.ToString() + "\n";
@@ -460,38 +457,15 @@ namespace vcs_DrAP
 
         //------------------------------------------------------------  # 60個
 
-        public void ProcessFile4(string path, int step)
-        {
-            //richTextBox1.Text += "處理File " + path + "\n";
-
-            FileInfo fi;
-
-            try
-            {   //可能會產生錯誤的程式區段
-                fi = new FileInfo(path);
-            }
-            catch (Exception ex)
-            {   //定義產生錯誤時的例外處理程式碼
-                richTextBox1.Text += "錯誤訊息1 : " + ex.Message + "\n";
-                return;
-            }
-            finally
-            {
-                //一定會被執行的程式區段
-            }
-
-            //在這裡做處理檔案的事情
-            get_fileinfo(fi, 0);
-        }
-
-        //------------------------------------------------------------  # 60個
-
         void show_file_info1()  //轉出一層
         {
             richTextBox1.Text += "show_file_info1 ST 轉出一層\n";
 
             if (cb_video_only.Checked == false)
+            {
+                richTextBox1.Text += "xxxx\n";
                 return;
+            }
 
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.FullRowSelect = true; //整行一起選取
@@ -543,92 +517,32 @@ namespace vcs_DrAP
                 string itemb = string.Empty;
                 string itemc = string.Empty;
 
+                richTextBox1.Text += "aaaa1\n";
                 if (cb_video_only.Checked == true)
                 {
+                    richTextBox1.Text += "aaaa2\n";
                     //debug mesg
                     //result_str += "i = " + i.ToString() + ", filename : " + fileinfos[i].filepath + "\\" + fileinfos[i].filename + "\n";
 
-                    MediaFile f = new MediaFile(fileinfos[i].filepath + "\\" + fileinfos[i].filename);
+                    if (cb_video_only.Checked == true)
+                        continue;
 
-                    //richTextBox1.Text += "  影片長度: " + f.General.DurationString + "\n";
-                    //richTextBox1.Text += "  FileSize: " + f.FileSize.ToString() + "\n";
-                    //richTextBox1.Text += "  Extension: " + f.Extension + "\n";
-                    if ((f.InfoAvailable == true) && (f.Video.Count > 0))
-                    {
-                        int w = f.Video[0].Width;
-                        int h = f.Video[0].Height;
-                        //result_str += "  輸入大小: " + w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\n";
-                        //result_str += "  FPS: " + f.Video[0].FrameRate.ToString() + "\n";
-                        //result_str += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
-                        //fi.FullName, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
+                    i1 = new ListViewItem(fileinfos[i].filename);
+                    i1.UseItemStyleForSubItems = false;
 
-                        if (((cb_video_l.Checked == true) && (h >= 1080)) || ((cb_video_m.Checked == true) && (h < 1080) && (h > 480)) || ((cb_video_s.Checked == true) && (h <= 480)))
-                        {
-                            item = w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
-                            if (h >= 1080)
-                                items = "大";
-                            else if (h <= 480)
-                                items = "小";
-                            else
-                                items = "中";
-                            itema = fileinfos[i].filename;
-                            itemb = fileinfos[i].filepath;
-                            itemc = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
+                    result_str += "XXXXXXXXXXXXXXXXXXXXXXXXX1\n";
+                    //result_str += "xxxxx" + fileinfos[i].filename + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize)) + "\n";
+                    sub_i1a.Text = fileinfos[i].filepath;
+                    i1.SubItems.Add(sub_i1a);
+                    //sub_i1a.Text = fi.Length.ToString();
+                    sub_i1b.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
+                    i1.SubItems.Add(sub_i1b);
 
-                            //i1 = new ListViewItem(fileinfos[i].filename);
-                            i1 = new ListViewItem(item);
-                            i1.UseItemStyleForSubItems = false;
+                    sub_i1a.ForeColor = Color.Blue;
+                    sub_i1b.ForeColor = Color.Blue;
 
-                            //sub_i10.Text = w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
-
-                            sub_i1s.Text = items;
-                            i1.SubItems.Add(sub_i1s);
-
-                            sub_i1a.Text = itema;
-                            i1.SubItems.Add(sub_i1a);
-                            //sub_i1a.Text = fileinfos[i].filepath;
-                            //sub_i1a.Text = w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
-                            sub_i1b.Text = itemb;
-                            i1.SubItems.Add(sub_i1b);
-
-                            //sub_i1a.Text = fi.Length.ToString();
-                            //sub_i1b.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
-                            sub_i1c.Text = itemc;
-                            i1.SubItems.Add(sub_i1c);
-
-                            sub_i1a.ForeColor = Color.Blue;
-                            sub_i1b.ForeColor = Color.Blue;
-                            sub_i1c.ForeColor = Color.Blue;
-
-                            sub_i1a.Font = new Font("Times New Roman", 10, FontStyle.Bold);
-                            sub_i1b.Font = new Font("Times New Roman", 10, FontStyle.Bold);
-                            sub_i1c.Font = new Font("Times New Roman", 10, FontStyle.Bold);
-                        }
-                        else
-                            continue;
-                    }
-                    else
-                    {
-                        if (cb_video_only.Checked == true)
-                            continue;
-
-                        i1 = new ListViewItem(fileinfos[i].filename);
-                        i1.UseItemStyleForSubItems = false;
-
-                        result_str += "XXXXXXXXXXXXXXXXXXXXXXXXX1\n";
-                        //result_str += "xxxxx" + fileinfos[i].filename + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize)) + "\n";
-                        sub_i1a.Text = fileinfos[i].filepath;
-                        i1.SubItems.Add(sub_i1a);
-                        //sub_i1a.Text = fi.Length.ToString();
-                        sub_i1b.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
-                        i1.SubItems.Add(sub_i1b);
-
-                        sub_i1a.ForeColor = Color.Blue;
-                        sub_i1b.ForeColor = Color.Blue;
-
-                        sub_i1a.Font = new Font("Times New Roman", 10, FontStyle.Bold);
-                        sub_i1b.Font = new Font("Times New Roman", 10, FontStyle.Bold);
-                    }
+                    sub_i1a.Font = new Font("Times New Roman", 10, FontStyle.Bold);
+                    sub_i1b.Font = new Font("Times New Roman", 10, FontStyle.Bold);
                 }
                 else
                 {
@@ -652,22 +566,12 @@ namespace vcs_DrAP
                     sub_i1b.Font = new Font("Times New Roman", 10, FontStyle.Bold);
                 }
 
-                if (flag_search_mode == 1)
-                {
-                    bool res;
-                    res = i1.Name.ToLower().Replace(" ", "").Contains(tb_search_text_pattern.Text.ToLower().Replace("-", ""));
-                    if (res == false)
-                        continue;
-                    else
-                    {
-                        richTextBox1.Text += "aaaa get file : " + i1.Name + "\n";
-                    }
-                }
-
                 listView1.Items.Add(i1);
                 //設置ListView最後一行可見
                 //listView1.Items[listView1.Items.Count - 1].EnsureVisible();
             }
+
+            richTextBox1.Text += result_str + "\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -1261,18 +1165,6 @@ namespace vcs_DrAP
 
             Application.DoEvents();
 
-            min_size_mb = 0;
-            bool conversionSuccessful = int.TryParse(tb_file_l.Text, out min_size_mb);    //out為必須
-            if (conversionSuccessful == true)
-            {
-                //richTextBox1.Text += "容量限制： " + min_size_mb.ToString() + " MB\n";
-            }
-            else
-            {
-                richTextBox1.Text += "int.TryParse 失敗\n";
-                richTextBox1.Text += "取得容量限制數字失敗\n";
-                return;
-            }
             flag_function = FUNCTION_FIND_BIG_FILES;
             find_and_show_big_files();
             bt_find_big_files.BackColor = SystemColors.ControlLight;
@@ -1516,19 +1408,7 @@ namespace vcs_DrAP
         {
             richTextBox1.Text += "找小資料夾\n";
 
-            min_size_mb = 0;
-            bool conversionSuccessful = int.TryParse(textBox4.Text, out min_size_mb);    //out為必須
-            if (conversionSuccessful == true)
-            {
-                richTextBox1.Text += "容量限制： " + min_size_mb.ToString() + " MB\n";
-            }
-            else
-            {
-                richTextBox1.Text += "int.TryParse 失敗\n";
-                richTextBox1.Text += "取得容量限制數字失敗\n";
-                return;
-            }
-            richTextBox1.Text += "找小資料夾\n";
+            min_size_mb = 10;  // 最小值 10 MB
 
             flag_function = FUNCTION_FIND_SMALL_FOLDERS;
             folderinfos.Clear();
@@ -1691,6 +1571,12 @@ namespace vcs_DrAP
 
         void find_and_show_big_files()
         {
+            richTextBox1.Text += "find_and_show_big_files()\n";
+
+            // debug
+            // search_path = @"D:\_git\vcs\_1.data\______test_files1\_video";
+            // this.listBox1.Items.Add(search_path);
+
             fileinfos.Clear();
 
             total_size = 0;
@@ -1699,6 +1585,7 @@ namespace vcs_DrAP
             if (listBox1.Items.Count == 0)
             {
                 result_str += "未選擇資料夾\n";
+                richTextBox1.Text += "XXXXX\n";
                 return;
             }
 
@@ -1777,7 +1664,10 @@ namespace vcs_DrAP
                 {
                     // path 是個 檔案
                     richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
-                    ProcessFile4(path, 0);
+
+                    FileInfo fi = new FileInfo(path);
+                    fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
+
                     richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
                 }
                 else if (Directory.Exists(path) == true)
@@ -2419,87 +2309,8 @@ namespace vcs_DrAP
 
         void get_fileinfo(FileInfo fi, int type)
         {
-            if (type == 0)
+            if (type == 1)
             {
-                //result_str += "folder = " + FolederName + ",  name = " + fi.Name + "\n";
-
-                total_size += fi.Length;
-                total_files++;
-                folder_size += fi.Length;
-                folder_files++;
-
-                //richTextBox1.Text += fi.Name + "\t" + fi.Length.ToString() + "\n";
-                if (((cb_file_l.Checked == true) && (fi.Length > min_size_mb * 1024 * 1024)) || (cb_file_l.Checked == false))
-                {
-                    if (flag_search_mode == 1)
-                    {
-                        bool res;
-                        res = fi.FullName.ToLower().Replace(" ", "").Contains(tb_search_text_pattern.Text.ToLower().Replace("-", ""));
-                        if (res == false)
-                            return;
-                        else
-                        {
-                            richTextBox1.Text += "get file : " + fi.FullName + "\n";
-                        }
-                    }
-
-                    for (int i = 0; i < step * 2; i++)
-                        richTextBox1.Text += " ";
-                    //richTextBox1.Text += fi.Name + " len = " + fi.Length.ToString() + "\n";
-                    //richTextBox1.Text += filename + "\n";
-                    //richTextBox1.Text += fi.Name + "\n";
-                    //richTextBox1.Text += fi.Name + " \t\t " + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
-                    //richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
-
-                    MediaFile f = new MediaFile(fi.FullName);
-
-                    //richTextBox1.Text += "  影片長度: " + f.General.DurationString + "\n";
-                    //richTextBox1.Text += "  FileSize: " + f.FileSize.ToString() + "\n";
-                    //richTextBox1.Text += "  Extension: " + f.Extension + "\n";
-                    if ((f.InfoAvailable == true) && (f.Video.Count > 0))
-                    {
-                        int w = f.Video[0].Width;
-                        int h = f.Video[0].Height;
-                        //richTextBox1.Text += "  輸入大小: " + w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\n";
-                        //richTextBox1.Text += "  FPS: " + f.Video[0].FrameRate.ToString() + "\n";
-                        richTextBox1.Text += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
-                            fi.FullName, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
-                    }
-                    else
-                    {
-                        richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
-                    }
-
-                    //richTextBox1.Text += fi.Directory + "\n";
-                    //richTextBox1.Text += fi.DirectoryName + "\n";
-
-                    /*
-                    ListViewItem i1 = new ListViewItem(fi.FullName);
-
-                    i1.UseItemStyleForSubItems = false;
-
-                    ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
-
-                    //sub_i1a.Text = fi.Length.ToString();
-                    sub_i1a.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length));
-                    i1.SubItems.Add(sub_i1a);
-                    sub_i1a.ForeColor = Color.Blue;
-
-                    sub_i1a.Font = new Font("Times New Roman", 10, FontStyle.Bold);
-
-                    listView1.Items.Add(i1);
-                    //設置ListView最後一行可見
-                    listView1.Items[listView1.Items.Count - 1].EnsureVisible();
-                    */
-
-                    //或許某些時候不需要
-                    fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
-                }
-
-            }
-            else if (type == 1)
-            {
-
                 //result_str += fi.Name + "\t" + fi.Length.ToString() + "\n";
                 bool res;
                 string pattern = string.Empty;// = "Form1.cs";
@@ -2601,7 +2412,6 @@ namespace vcs_DrAP
                 //fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length));
             }
         }
-
         //------------------------------------------------------------  # 60個
     }
 }
@@ -2613,3 +2423,14 @@ namespace vcs_DrAP
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
+// if (((cb_file_l.Checked == true) && (fi.Length > min_size_mb * 1024 * 1024)) || (cb_file_l.Checked == false))
+
+/*
+bool res;
+res = fi.FullName.ToLower().Replace(" ", "").Contains(tb_search_text_pattern.Text.ToLower().Replace("-", ""));
+res = fi.FullName.ToLower().Replace(" ", "").Contains(tb_search_text_pattern.Text.ToLower().Replace("-", ""));
+*/
+
+//tb_file_l
+//tb_file_s
+//tb_file_s

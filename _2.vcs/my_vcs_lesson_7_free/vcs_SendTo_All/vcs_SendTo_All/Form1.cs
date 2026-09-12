@@ -421,23 +421,6 @@ namespace vcs_SendTo_All
                 richTextBox1.Text += fi.FullName + "\t";
                 //richTextBox1.Text += fi.Length.ToString() + "\t";
                 richTextBox1.Text += ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
-
-                MediaFile f = new MediaFile(fileinfos[i].filepath + "\\" + filename);
-
-                if ((f.InfoAvailable == true) && (f.Video.Count > 0))
-                {
-                    int w = f.Video[0].Width;
-                    int h = f.Video[0].Height;
-                    /*
-                    richTextBox1.Text += "影片檔案\t"+w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\t";
-                    richTextBox1.Text += f.Video[0].FrameRate.ToString() + "\t";
-                    richTextBox1.Text += f.General.DurationString + "\n";
-                    */
-                }
-                else
-                {
-                    richTextBox1.Text += "非 影片檔案\n";
-                }
             }
         }
 
@@ -587,25 +570,6 @@ namespace vcs_SendTo_All
                 mesg += String.Format("{0,-30}", ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)));
                 richTextBox1.Text += "len = " + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)).Length.ToString() + "\n";
 
-                MediaFile f = new MediaFile(fileinfos[i].filepath + "\\" + filename);
-
-                if ((f.InfoAvailable == true) && (f.Video.Count > 0))
-                {
-                    int w = f.Video[0].Width;
-                    int h = f.Video[0].Height;
-                    /*
-                    richTextBox1.Text += "影片檔案\t"+w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\t";
-                    richTextBox1.Text += f.Video[0].FrameRate.ToString() + "\t";
-                    richTextBox1.Text += f.General.DurationString + "\n";
-                    */
-                    //mesg += "\t" + w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\t";
-                    //mesg += f.Video[0].FrameRate.ToString() + "\t";
-                    //mesg += f.General.DurationString;
-                }
-                else
-                {
-                    richTextBox1.Text += "非 影片檔案\n";
-                }
                 richTextBox1.Text += mesg + "\n";
                 str_writer.WriteLine(mesg);
             }

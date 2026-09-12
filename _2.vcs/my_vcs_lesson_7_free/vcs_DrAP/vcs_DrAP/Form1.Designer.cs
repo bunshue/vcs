@@ -46,8 +46,6 @@
             this.bt_remove_dir = new System.Windows.Forms.Button();
             this.bt_clear_dir = new System.Windows.Forms.Button();
             this.bt_find_small_folders = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
             this.bt_clear1 = new System.Windows.Forms.Button();
             this.bt_clear2 = new System.Windows.Forms.Button();
             this.cb_video_only = new System.Windows.Forms.CheckBox();
@@ -255,25 +253,6 @@
             this.bt_find_small_folders.Text = "找小資料夾";
             this.bt_find_small_folders.UseVisualStyleBackColor = true;
             this.bt_find_small_folders.Click += new System.EventHandler(this.bt_find_small_folders_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(879, 18);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(23, 12);
-            this.label3.TabIndex = 34;
-            this.label3.Text = "MB";
-            // 
-            // textBox4
-            // 
-            this.textBox4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox4.Location = new System.Drawing.Point(831, 10);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(42, 30);
-            this.textBox4.TabIndex = 33;
-            this.textBox4.Text = "10";
-            this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // bt_clear1
             // 
@@ -727,8 +706,6 @@
             this.Controls.Add(this.bt_save_rtb_data);
             this.Controls.Add(this.bt_clear2);
             this.Controls.Add(this.bt_clear1);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox4);
             this.Controls.Add(this.bt_find_small_folders);
             this.Controls.Add(this.bt_clear_dir);
             this.Controls.Add(this.bt_remove_dir);
@@ -787,8 +764,6 @@
         private System.Windows.Forms.Button bt_remove_dir;
         private System.Windows.Forms.Button bt_clear_dir;
         private System.Windows.Forms.Button bt_find_small_folders;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Button bt_clear1;
         private System.Windows.Forms.Button bt_clear2;
         private System.Windows.Forms.Button bt_search_pattern_python;

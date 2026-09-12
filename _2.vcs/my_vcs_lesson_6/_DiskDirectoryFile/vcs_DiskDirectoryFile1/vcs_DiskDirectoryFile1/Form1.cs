@@ -259,8 +259,6 @@ namespace vcs_DiskDirectoryFile1
             return (Size);
         }
 
-        double filesize_all = 0;
-
         public void GetAllFileNames(DirectoryInfo dinfo)
         {
             DirectoryInfo[] dinfos = dinfo.GetDirectories();  // 傳回目前目錄的子目錄, 一層
@@ -276,7 +274,6 @@ namespace vcs_DiskDirectoryFile1
             foreach (FileInfo finfo in fis)
             {
                 richTextBox1.Text += finfo.Name + "\t" + finfo.Length.ToString() + "\n";
-                filesize_all += finfo.Length;
             }
         }
 
@@ -1702,8 +1699,6 @@ namespace vcs_DiskDirectoryFile1
 
             string foldername = @"D:\_git\vcs\_1.data\______test_files1";
 
-            filesize_all = 0;
-
             DirectoryInfo dinfo = new DirectoryInfo(foldername);
 
             double size = DirSize(dinfo);
@@ -1729,7 +1724,6 @@ namespace vcs_DiskDirectoryFile1
 
             GetAllFileNames(dinfo);
 
-            richTextBox1.Text += "Total filesize: " + filesize_all.ToString() + " Bytes.\n";
             richTextBox1.Text += "Total filesize: " + size.ToString() + " Bytes.\n";
         }
 
