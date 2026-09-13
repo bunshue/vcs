@@ -352,18 +352,21 @@ namespace vcs_test_all_04_Dialog
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 richTextBox1.Text += "已選取檔案: " + openFileDialog1.FileName + "\n";
-                richTextBox1.Text += "已選取檔案個數: " + openFileDialog1.FileNames.Length.ToString() + "\n";
-                richTextBox1.Text += "已選取檔案: \n";
-                foreach (string strFilename in openFileDialog1.FileNames)
+                richTextBox1.Text += "已選取檔案個數: " + openFileDialog1.FileNames.Length.ToString() + "\n\n";
+                foreach (string filename in openFileDialog1.FileNames)
                 {
-                    richTextBox1.Text += "\t" + strFilename + "\n";
+                    richTextBox1.Text += "檔名:\t" + filename + "\n";
                 }
-                richTextBox1.Text += "\n";
             }
             else
             {
                 richTextBox1.Text += "未選取檔案\n";
             }
+            /*
+            openFileDialog1.DefaultExt = "*.mp3";
+            //openFileDialog1.Filter = "文字檔(*.txt)|*.txt|Word檔(*.doc)|*.txt|Excel檔(*.xls)|*.txt|所有檔案(*.*)|*.*";   //存檔類型
+            openFileDialog1.Filter = "音樂檔(*.mp3)|*.mp3|Wave檔(*.wav)|*.wav|所有檔案(*.*)|*.*";   //檔案類型
+            */
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -782,26 +785,27 @@ namespace vcs_test_all_04_Dialog
 /*
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-            openFileDialog1.Title = "單選檔案";
-            //openFileDialog1.ShowHelp = true;
-            openFileDialog1.FileName = "";              //預設開啟的檔名
-            openFileDialog1.DefaultExt = "*.txt";
-            openFileDialog1.Filter = "文字檔(*.txt)|*.txt|Word檔(*.doc)|*.txt|Excel檔(*.xls)|*.txt|所有檔案(*.*)|*.*";   //存檔類型
-            openFileDialog1.Filter = "文字檔|*.*|C#文件|*.cs|所有檔|*.*";   //限定檔案格式
-            openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-            openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
-            openFileDialog1.RestoreDirectory = true;
-            //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = @"D:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
-            openFileDialog1.Multiselect = false;    //單選
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                richTextBox1.Text += "已選取檔案: " + openFileDialog1.FileName + "\n";
-            }
-            else
-            {
-                richTextBox1.Text += "未選取檔案\n";
-            }
+openFileDialog1.Title = "單選檔案";
+//openFileDialog1.ShowHelp = true;
+openFileDialog1.FileName = "";              //預設開啟的檔名
+openFileDialog1.DefaultExt = "*.txt";
+openFileDialog1.Filter = "文字檔(*.txt)|*.txt|Word檔(*.doc)|*.txt|Excel檔(*.xls)|*.txt|所有檔案(*.*)|*.*";   //存檔類型
+openFileDialog1.Filter = "文字檔|*.*|C#文件|*.cs|所有檔|*.*";   //限定檔案格式
+openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
+openFileDialog1.RestoreDirectory = true;
+//openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
+openFileDialog1.InitialDirectory = @"D:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
+openFileDialog1.Multiselect = false;    //單選
+if (openFileDialog1.ShowDialog() == DialogResult.OK)
+{
+    richTextBox1.Text += "已選取檔案: " + openFileDialog1.FileName + "\n";
+}
+else
+{
+    richTextBox1.Text += "未選取檔案\n";
+}
+
 另外
             OpenFileDialog P_OpenFileDialog = new OpenFileDialog();
             if (P_OpenFileDialog.ShowDialog() == DialogResult.OK)
@@ -848,111 +852,111 @@ saveFileDialog1.Filter = "點陣圖 (*.bmp)|*.bmp|JPEG (*.JPG)|*.JPG|" + "GIF(*.
 
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-            //openFileDialog1
-            //建立處理資料流的物件note
-            Stream note = null;
-            //設定OpenFileDialog的屬性-InitialDirectory設預設路徑
-            //openFileDialog1.InitialDirectory = "../../data/";
-            openFileDialog1.InitialDirectory = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\Visual C# 2019-程式設計16堂課\vcs_tmp_all1\vcs_tmp_all1\data";
-            //篩選檔案，只顯示文字檔
-            openFileDialog1.Filter = "文字檔(*.txt)|*.txt|所有檔案(*.*)|*.*";
-            //檔案類型會顯示-所有檔案
-            openFileDialog1.FilterIndex = 2;
-            //對話方塊關閉前還原目前取得的路徑
-            openFileDialog1.RestoreDirectory = true;
-            //以一般的訊息方塊來確認使用者按OK鈕 
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-            }
+//openFileDialog1
+//建立處理資料流的物件note
+Stream note = null;
+//設定OpenFileDialog的屬性-InitialDirectory設預設路徑
+//openFileDialog1.InitialDirectory = "../../data/";
+openFileDialog1.InitialDirectory = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\Visual C# 2019-程式設計16堂課\vcs_tmp_all1\vcs_tmp_all1\data";
+//篩選檔案，只顯示文字檔
+openFileDialog1.Filter = "文字檔(*.txt)|*.txt|所有檔案(*.*)|*.*";
+//檔案類型會顯示-所有檔案
+openFileDialog1.FilterIndex = 2;
+//對話方塊關閉前還原目前取得的路徑
+openFileDialog1.RestoreDirectory = true;
+//以一般的訊息方塊來確認使用者按OK鈕 
+if (openFileDialog1.ShowDialog() == DialogResult.OK)
+{
+}
 
-            richTextBox1.Text += "------------------------------\n";  // 30個
+richTextBox1.Text += "------------------------------\n";  // 30個
 
-            //openFileDialog1
+//openFileDialog1
 
-            openFileDialog1.InitialDirectory = Application.StartupPath; //從目前目錄開始尋找檔案
-            openFileDialog1.FileName = null;
+openFileDialog1.InitialDirectory = Application.StartupPath; //從目前目錄開始尋找檔案
+openFileDialog1.FileName = null;
 
-            //開啟RTF格式檔案
-            openFileDialog1.DefaultExt = "rtf";
-            openFileDialog1.Filter = "RTF格式(*.rtf)|*.rtf|所有檔案(*.*)|*.*";
+//開啟RTF格式檔案
+openFileDialog1.DefaultExt = "rtf";
+openFileDialog1.Filter = "RTF格式(*.rtf)|*.rtf|所有檔案(*.*)|*.*";
 
-            //顯示開啟檔案對話方塊
-            DialogResult result = openFileDialog1.ShowDialog();
-            if (result == DialogResult.OK)
-            {
-            }
+//顯示開啟檔案對話方塊
+DialogResult result = openFileDialog1.ShowDialog();
+if (result == DialogResult.OK)
+{
+}
 
-                //確認沒有開啟的檔案，依預設的資料夾來開啟
-                openFileDialog1.InitialDirectory = folderName;
-                openFileDialog1.FileName = null;
+//確認沒有開啟的檔案，依預設的資料夾來開啟
+openFileDialog1.InitialDirectory = folderName;
+openFileDialog1.FileName = null;
 
-            //savefiledialog
-            //設定預設目錄, 預設欲儲存的檔案類型
-            saveFileDialog1.InitialDirectory = Application.StartupPath; //從目前目錄開始尋找檔案
-            saveFileDialog1.Filter = "文字檔(*.txt)|*.txt|RTF格式|*.rtf";
-            //設定對話方塊的標題
-            saveFileDialog1.Title = "儲存檔案";
-            //設定是否在關閉之前要還原至目前的目錄
-            saveFileDialog1.RestoreDirectory = true;
-            saveFileDialog1.CreatePrompt = true;
-            saveFileDialog1.OverwritePrompt = true;
-            //假如按下儲存按鈕時
-            DialogResult result = saveFileDialog1.ShowDialog();
-            if (result == DialogResult.OK)
-            {
-            }
+//savefiledialog
+//設定預設目錄, 預設欲儲存的檔案類型
+saveFileDialog1.InitialDirectory = Application.StartupPath; //從目前目錄開始尋找檔案
+saveFileDialog1.Filter = "文字檔(*.txt)|*.txt|RTF格式|*.rtf";
+//設定對話方塊的標題
+saveFileDialog1.Title = "儲存檔案";
+//設定是否在關閉之前要還原至目前的目錄
+saveFileDialog1.RestoreDirectory = true;
+saveFileDialog1.CreatePrompt = true;
+saveFileDialog1.OverwritePrompt = true;
+//假如按下儲存按鈕時
+DialogResult result = saveFileDialog1.ShowDialog();
+if (result == DialogResult.OK)
+{
+}
 
 //saveFileDialog1.InitialDirectory = Application.StartupPath; //從目前目錄開始尋找檔案
 
 //------------------------------------------------------------  # 60個
 
-            //設定字型, 使用Apply
-            fontDialog1.AllowScriptChange = false;
-            fontDialog1.AllowVectorFonts = false;
-            fontDialog1.AllowVerticalFonts = false;
-            fontDialog1.ShowApply = false;
-            fontDialog1.ShowColor = false;
-            fontDialog1.ShowEffects = false;
-            fontDialog1.ShowHelp = false;
-            fontDialog1.FixedPitchOnly = false;
+//設定字型, 使用Apply
+fontDialog1.AllowScriptChange = false;
+fontDialog1.AllowVectorFonts = false;
+fontDialog1.AllowVerticalFonts = false;
+fontDialog1.ShowApply = false;
+fontDialog1.ShowColor = false;
+fontDialog1.ShowEffects = false;
+fontDialog1.ShowHelp = false;
+fontDialog1.FixedPitchOnly = false;
 
-            fontDialog1.MaxSize = 40;
-            fontDialog1.MinSize = 10;
+fontDialog1.MaxSize = 40;
+fontDialog1.MinSize = 10;
 
-            if (fontDialog1.ShowDialog() != DialogResult.Cancel)
-            {
-            }
+if (fontDialog1.ShowDialog() != DialogResult.Cancel)
+{
+}
 
 
-            //設定字型
-            //fontDialog1
-            fontDialog1.ShowColor = true; //顯示色彩選擇
-            fontDialog1.Font = richTextBox1.Font; //取得Windows系統字型
-            fontDialog1.Color = richTextBox1.ForeColor;//取得前景色彩
-            if (fontDialog1.ShowDialog() != DialogResult.Cancel)
-            {
-            }
+//設定字型
+//fontDialog1
+fontDialog1.ShowColor = true; //顯示色彩選擇
+fontDialog1.Font = richTextBox1.Font; //取得Windows系統字型
+fontDialog1.Color = richTextBox1.ForeColor;//取得前景色彩
+if (fontDialog1.ShowDialog() != DialogResult.Cancel)
+{
+}
 
 //------------------------------------------------------------  # 60個
 
-            //設定字型
-            fontDialog1.AllowVerticalFonts = true;//指示對話框既顯示垂直字體又顯示水平字體
-            fontDialog1.FixedPitchOnly = true; 			//只允許選擇固定間距字體
-            fontDialog1.ShowApply = true;      		//包含應用按鈕
-            fontDialog1.ShowEffects = true;    //允許指定刪除線、下畫線和文本顏色選項的控件
-            fontDialog1.ShowColor = true;
-            fontDialog1.ShowHelp = true;
+//設定字型
+fontDialog1.AllowVerticalFonts = true;//指示對話框既顯示垂直字體又顯示水平字體
+fontDialog1.FixedPitchOnly = true; 			//只允許選擇固定間距字體
+fontDialog1.ShowApply = true;      		//包含應用按鈕
+fontDialog1.ShowEffects = true;    //允許指定刪除線、下畫線和文本顏色選項的控件
+fontDialog1.ShowColor = true;
+fontDialog1.ShowHelp = true;
 
-            fontDialog1.Font = label1.Font;           //字型對話框的預設字型
-            fontDialog1.Color = label1.ForeColor;     //字型對話框的預設顏色
+fontDialog1.Font = label1.Font;           //字型對話框的預設字型
+fontDialog1.Color = label1.ForeColor;     //字型對話框的預設顏色
 
-            if (fontDialog1.ShowDialog() == DialogResult.OK)    //開啟字型對話方塊
-            {
-                label1.Font = fontDialog1.Font;       //以在字型對話方塊內所指定的字型來指定給label1
-                label1.ForeColor = fontDialog1.Color; //以在字型對話方塊內所指定的顏色來指定給label1
-                richTextBox1.Font = fontDialog1.Font;       //以在字型對話方塊內所指定的字型來指定給richTextBox1
-                richTextBox1.ForeColor = fontDialog1.Color; //以在字型對話方塊內所指定的顏色來指定給richTextBox1
-            }
+if (fontDialog1.ShowDialog() == DialogResult.OK)    //開啟字型對話方塊
+{
+    label1.Font = fontDialog1.Font;       //以在字型對話方塊內所指定的字型來指定給label1
+    label1.ForeColor = fontDialog1.Color; //以在字型對話方塊內所指定的顏色來指定給label1
+    richTextBox1.Font = fontDialog1.Font;       //以在字型對話方塊內所指定的字型來指定給richTextBox1
+    richTextBox1.ForeColor = fontDialog1.Color; //以在字型對話方塊內所指定的顏色來指定給richTextBox1
+}
 
 */
 

@@ -79,7 +79,44 @@ namespace vcs_test_all_08_MediaInfo
 
         //------------------------------------------------------------  # 60個
 
-        void get_MediaInfo(string filename)
+        void get_MediaInfo0(string filename)
+        {
+            MediaFile f = new MediaFile(filename);
+            richTextBox1.Text += "  影片長度: " + f.General.DurationString + "\n";
+            richTextBox1.Text += "  FileSize: " + f.FileSize.ToString() + "\n";
+            richTextBox1.Text += "  Extension: " + f.Extension + "\n";
+
+            FileInfo fi = new FileInfo(filename);
+
+            richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+            richTextBox1.Text += fi.Directory + "\n";
+            richTextBox1.Text += fi.DirectoryName + "\n";
+
+            if ((f.InfoAvailable == true) && (f.Video.Count > 0))
+            {
+                int w = f.Video[0].Width;
+                int h = f.Video[0].Height;
+                richTextBox1.Text += "  輸入大小: " + w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\n";
+                richTextBox1.Text += "  FPS: " + f.Video[0].FrameRate.ToString() + "\n";
+                richTextBox1.Text += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
+                    fi.FullName, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
+
+                string items = string.Empty;
+                string item = w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
+                if (h >= 1080)
+                    items = "大";
+                else if (h <= 480)
+                    items = "小";
+                else
+                    items = "中";
+            }
+            else
+            {
+                richTextBox1.Text += "非影片\n";
+            }
+        }
+
+        void get_MediaInfo1(string filename)
         {
             MediaFile f = new MediaFile(filename);
 
@@ -216,366 +253,33 @@ namespace vcs_test_all_08_MediaInfo
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //MediaFile
-
+            //MediaInfo 0
             string filename = @"D:\_git\vcs\_1.data\______test_files1\_video\鹿港.mp4";
-
-            MediaFile f = new MediaFile(filename);
-            richTextBox1.Text += "  影片長度: " + f.General.DurationString + "\n";
-            richTextBox1.Text += "  FileSize: " + f.FileSize.ToString() + "\n";
-            richTextBox1.Text += "  Extension: " + f.Extension + "\n";
-
-            FileInfo fi = new FileInfo(filename);
-
-            richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
-            richTextBox1.Text += fi.Directory + "\n";
-            richTextBox1.Text += fi.DirectoryName + "\n";
-
-            if ((f.InfoAvailable == true) && (f.Video.Count > 0))
-            {
-                int w = f.Video[0].Width;
-                int h = f.Video[0].Height;
-                richTextBox1.Text += "  輸入大小: " + w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\n";
-                richTextBox1.Text += "  FPS: " + f.Video[0].FrameRate.ToString() + "\n";
-                richTextBox1.Text += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
-                    fi.FullName, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
-
-                string items = string.Empty;
-                string item = w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
-                if (h >= 1080)
-                    items = "大";
-                else if (h <= 480)
-                    items = "小";
-                else
-                    items = "中";
-            }
-            else
-            {
-                richTextBox1.Text += "非影片\n";
-            }
+            get_MediaInfo0(filename);
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //MediaInfo 1
             string filename = @"D:\_git\vcs\_1.data\______test_files1\_mp3\02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3";
             richTextBox1.Text += "檔案名稱: " + filename + "\n";
-            get_MediaInfo(filename);
+            get_MediaInfo1(filename);
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button2_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Title = "多選檔案";
-            //openFileDialog1.ShowHelp = true;
-            openFileDialog1.FileName = "";              //預設開啟的檔名
-            openFileDialog1.DefaultExt = "*.mp3";
-            //openFileDialog1.Filter = "文字檔(*.txt)|*.txt|Word檔(*.doc)|*.txt|Excel檔(*.xls)|*.txt|所有檔案(*.*)|*.*";   //存檔類型
-            openFileDialog1.Filter = "音樂檔(*.mp3)|*.mp3|Wave檔(*.wav)|*.wav|所有檔案(*.*)|*.*";   //檔案類型
-            openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
-            openFileDialog1.RestoreDirectory = true;
-            //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            //openFileDialog1.InitialDirectory = @"D:\_git\vcs\_1.data\______test_files1\_mp3";  //預設開啟的路徑
-            openFileDialog1.Multiselect = true;    //允許多選檔案
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                richTextBox1.Text += "已選取檔案個數: " + openFileDialog1.FileNames.Length.ToString() + "\n\n";
-                foreach (var filename in openFileDialog1.FileNames)
-                {
-                    richTextBox1.Text += "檔名:\t" + filename + "\n";
-                    get_MediaInfo(filename);
-                }
-            }
-            else
-            {
-                richTextBox1.Text += "未選取檔案\n";
-            }
+
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //MediaFile new
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\_video\鹿港.mp4";
-
-            MediaFile f = new MediaFile(filename);
-            FileInfo fi = new FileInfo(filename);
-
-            if ((f.InfoAvailable == true) && (f.Video.Count > 0))
-            {
-                int w = f.Video[0].Width;
-                int h = f.Video[0].Height;
-
-                richTextBox1.Text += "影片檔案\t" + w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\t";
-                richTextBox1.Text += f.Video[0].FrameRate.ToString() + "\t";
-                richTextBox1.Text += f.General.DurationString + "\n";
-
-                richTextBox1.Text += "  輸入大小: " + w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\n";
-                richTextBox1.Text += "  FPS: " + f.Video[0].FrameRate.ToString() + "\n";
-                richTextBox1.Text += "影片\t";
-                richTextBox1.Text += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
-                    fi.FullName, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
-
-                //fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
-            }
-            else
-            {
-                richTextBox1.Text += "非 影片檔案\n";
-                richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
-                //fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
-            }
-
-            //MediaFile f = new MediaFile(filename);
-            richTextBox1.Text += "  影片長度: " + f.General.DurationString + "\n";
-            richTextBox1.Text += "  FileSize: " + f.FileSize.ToString() + "\n";
-            richTextBox1.Text += "  Extension: " + f.Extension + "\n";
         }
-
-        //------------------------------------------------------------  # 60個
-        //------------------------------------------------------------  # 60個
-
-
-
-        //以下的沒用到
-
-        void show_file_info()  //轉出一層
-        {
-            richTextBox1.Text += "show_file_info show_file_info show_file_info\n";
-            //排序 由小到大
-            //fileinfos.Sort((x, y) => { return x.filesize.CompareTo(y.filesize); });
-
-            //排序 由大到小  在return的地方多個負號
-            //fileinfos.Sort((x, y) => { return -x.filesize.CompareTo(y.filesize); });
-
-            int i;
-            for (i = 0; i < 10; i++)
-            {
-                //richTextBox1.Text += fileinfos[i].filename + "\n";
-                //richTextBox1.Text += "i = " + i.ToString() + ", filename : " + fileinfos[i].filepath + "\\" + fileinfos[i].filename + "\n";
-
-                string filename = @"D:\_git\vcs\_1.data\______test_files1\_video\鹿港.mp4";
-                MediaFile f = new MediaFile(filename);
-
-                //richTextBox1.Text += "  影片長度: " + f.General.DurationString + "\n";
-                //richTextBox1.Text += "  FileSize: " + f.FileSize.ToString() + "\n";
-                //richTextBox1.Text += "  Extension: " + f.Extension + "\n";
-                if ((f.InfoAvailable == true) && (f.Video.Count > 0))
-                {
-                    int w = f.Video[0].Width;
-                    int h = f.Video[0].Height;
-                    //richTextBox1.Text += "  輸入大小: " + w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\n";
-                    //richTextBox1.Text += "  FPS: " + f.Video[0].FrameRate.ToString() + "\n";
-                    //richTextBox1.Text += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
-                    //fi.FullName, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
-                    /*
-                    if (((cb_video_l.Checked == true) && (h >= 1080)) || ((cb_video_m.Checked == true) && (h < 1080) && (h > 480)) || ((cb_video_s.Checked == true) && (h <= 480)))
-                    {
-                        item = w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
-                        if (h >= 1080)
-                            items = "大";
-                        else if (h <= 480)
-                            items = "小";
-                        else
-                            items = "中";
-                        itema = fileinfos[i].filename;
-                        itemb = fileinfos[i].filepath;
-                        itemc = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
-
-                        //i1 = new ListViewItem(fileinfos[i].filename);
-                        i1 = new ListViewItem(item);
-                        i1.UseItemStyleForSubItems = false;
-
-                        //sub_i10.Text = w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
-
-                        sub_i1s.Text = items;
-                        i1.SubItems.Add(sub_i1s);
-
-                        sub_i1a.Text = itema;
-                        i1.SubItems.Add(sub_i1a);
-                        //sub_i1a.Text = fileinfos[i].filepath;
-                        //sub_i1a.Text = w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
-                        sub_i1b.Text = itemb;
-                        i1.SubItems.Add(sub_i1b);
-
-                        //sub_i1a.Text = fi.Length.ToString();
-                        //sub_i1b.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
-                        sub_i1c.Text = itemc;
-                        i1.SubItems.Add(sub_i1c);
-
-                        sub_i1a.ForeColor = System.Drawing.Color.Blue;
-                        sub_i1b.ForeColor = System.Drawing.Color.Blue;
-                        sub_i1c.ForeColor = System.Drawing.Color.Blue;
-
-                        sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
-                        sub_i1b.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
-                        sub_i1c.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
-                    }
-                    else
-                        continue;
-                    */
-                }
-                else
-                {
-                    /*
-                    if (cb_video_only.Checked == true)
-                        continue;
-
-                    if (cb_generate_text.Checked == false)
-                        continue;
-
-                    i1 = new ListViewItem(fileinfos[i].filename);
-                    i1.UseItemStyleForSubItems = false;
-
-                    richTextBox1.Text += "XXXXXXXXXXXXXXXXXXXXXXXXX1\n";
-                    //richTextBox1.Text += "xxxxx" + fileinfos[i].filename + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize)) + "\n";
-                    sub_i1a.Text = fileinfos[i].filepath;
-                    i1.SubItems.Add(sub_i1a);
-                    //sub_i1a.Text = fi.Length.ToString();
-                    sub_i1b.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
-                    i1.SubItems.Add(sub_i1b);
-
-                    sub_i1a.ForeColor = System.Drawing.Color.Blue;
-                    sub_i1b.ForeColor = System.Drawing.Color.Blue;
-
-                    sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
-                    sub_i1b.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
-                    */
-                }
-            }
-        }
-
-        void show_file_info1()  //轉出一層
-        {
-            /*
-            if (checkBox2.Checked == true)
-            {
-                //排序 由小到大
-                //fileinfos.Sort((x, y) => { return x.filesize.CompareTo(y.filesize); });
-
-                //排序 由大到小  在return的地方多個負號
-                fileinfos.Sort((x, y) => { return -x.filesize.CompareTo(y.filesize); });
-            }
-            */
-
-            for (int i = 0; i < 5; i++)
-            {
-                //ListViewItem i1 = new ListViewItem(fileinfos[i].filename);
-
-                ListViewItem.ListViewSubItem sub_i1s = new ListViewItem.ListViewSubItem();
-                ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
-                ListViewItem.ListViewSubItem sub_i1b = new ListViewItem.ListViewSubItem();
-                ListViewItem.ListViewSubItem sub_i1c = new ListViewItem.ListViewSubItem();
-
-                string item = string.Empty;
-                string items = string.Empty;
-                string itema = string.Empty;
-                string itemb = string.Empty;
-                string itemc = string.Empty;
-
-                ListViewItem i1;
-
-                //debug mesg
-                //richTextBox1.Text += "i = " + i.ToString() + ", filename : " + fileinfos[i].filepath + "\\" + fileinfos[i].filename + "\n";
-
-                string filename = @"D:\_git\vcs\_1.data\______test_files1\_video\鹿港.mp4";
-                MediaFile f = new MediaFile(filename);
-
-                //richTextBox1.Text += "  影片長度: " + f.General.DurationString + "\n";
-                //richTextBox1.Text += "  FileSize: " + f.FileSize.ToString() + "\n";
-                //richTextBox1.Text += "  Extension: " + f.Extension + "\n";
-                if ((f.InfoAvailable == true) && (f.Video.Count > 0))
-                {
-                    int w = f.Video[0].Width;
-                    int h = f.Video[0].Height;
-                    //richTextBox1.Text += "  輸入大小: " + w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\n";
-                    //richTextBox1.Text += "  FPS: " + f.Video[0].FrameRate.ToString() + "\n";
-                    //richTextBox1.Text += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
-                    //fi.FullName, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
-
-                    //if (((cb_video_l.Checked == true) && (h >= 1080)))
-                    {
-                        item = w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
-                        if (h >= 1080)
-                            items = "大";
-                        else if (h <= 480)
-                            items = "小";
-                        else
-                            items = "中";
-
-                        //itemc = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
-
-                        //i1 = new ListViewItem(fileinfos[i].filename);
-                        i1 = new ListViewItem(item);
-                        i1.UseItemStyleForSubItems = false;
-
-                        //sub_i10.Text = w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
-
-                        sub_i1s.Text = items;
-                        i1.SubItems.Add(sub_i1s);
-
-                        sub_i1a.Text = itema;
-                        i1.SubItems.Add(sub_i1a);
-                        //sub_i1a.Text = fileinfos[i].filepath;
-                        //sub_i1a.Text = w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
-                        sub_i1b.Text = itemb;
-                        i1.SubItems.Add(sub_i1b);
-
-                        //sub_i1a.Text = fi.Length.ToString();
-                        //sub_i1b.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
-                        sub_i1c.Text = itemc;
-                        i1.SubItems.Add(sub_i1c);
-
-                        sub_i1a.ForeColor = System.Drawing.Color.Blue;
-                        sub_i1b.ForeColor = System.Drawing.Color.Blue;
-                        sub_i1c.ForeColor = System.Drawing.Color.Blue;
-
-                        sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
-                        sub_i1b.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
-                        sub_i1c.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
-
-                    }
-                }
-                else
-                {
-
-                    //richTextBox1.Text += ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize)) + "\n";
-                    //sub_i1b.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
-
-                }
-                /*
-                else
-                {
-                    i1 = new ListViewItem(fileinfos[i].filename);
-                    i1.UseItemStyleForSubItems = false;
-
-                    richTextBox1.Text += "XXXXXXXXXXXXXXXXXXXXXXXXX2\n";
-                    sub_i1a.Text = fileinfos[i].filepath;
-                    i1.SubItems.Add(sub_i1a);
-                    //sub_i1a.Text = fi.Length.ToString();
-                    sub_i1b.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
-                    i1.SubItems.Add(sub_i1b);
-
-                    sub_i1a.ForeColor = System.Drawing.Color.Blue;
-                    sub_i1b.ForeColor = System.Drawing.Color.Blue;
-
-                    sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
-                    sub_i1b.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
-                }
-                */
-            }
-        }
-
-        /*
-        richTextBox1.Text += "\n資料夾 " + foldername + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
-        richTextBox1.Text += "\n資料夾 " + foldername + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
-        */
-
-        //------------------------------------------------------------  # 60個
-        //------------------------------------------------------------  # 60個
     }
 }
 

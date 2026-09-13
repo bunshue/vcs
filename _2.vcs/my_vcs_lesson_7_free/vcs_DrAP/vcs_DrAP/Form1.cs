@@ -2434,3 +2434,50 @@ res = fi.FullName.ToLower().Replace(" ", "").Contains(tb_search_text_pattern.Tex
 //tb_file_l
 //tb_file_s
 //tb_file_s
+
+/*
+listView1.View = View.Details;  //定義列表顯示的方式
+listView1.FullRowSelect = true; //整行一起選取
+listView1.Clear();
+
+//設置列名稱
+listView1.Columns.Add("影片1", 200, HorizontalAlignment.Left);
+listView1.Columns.Add("大小", 50, HorizontalAlignment.Left);
+listView1.Columns.Add("檔名1", 400, HorizontalAlignment.Left);
+listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
+listView1.Columns.Add("大小", 150, HorizontalAlignment.Left);
+listView1.Columns.Add("副檔名", 100, HorizontalAlignment.Left);
+listView1.Columns.Add("修改日期", 100, HorizontalAlignment.Left);
+listView1.Visible = true;
+
+//------------------------------------------------------------  # 60個
+
+fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
+
+檔名
+fileinfos[i].filename;
+檔案大小
+ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
+
+檔案日期
+fileinfos[i].filecreationtime;
+
+fileinfos[i].filepath;
+
+//fileinfos
+//排序 由小到大
+//fileinfos.Sort((x, y) => { return x.filesize.CompareTo(y.filesize); });
+
+//排序 由大到小  在return的地方多個負號
+//fileinfos.Sort((x, y) => { return -x.filesize.CompareTo(y.filesize); });
+
+bool res;
+res = fi.FullName.ToLower().Replace(" ", "").Contains(tb_search_text_pattern.Text.ToLower().Replace("-", ""));
+
+*/
+
+//------------------------------------------------------------  # 60個
+
+
+
+

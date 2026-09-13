@@ -1,22 +1,10 @@
 ﻿
 //------------------------------------------------------------  # 60個
 
-            listView1.View = View.Details;  //定義列表顯示的方式
-            listView1.FullRowSelect = true; //整行一起選取
-            listView1.Clear();
 
-            //設置列名稱
-            //if (cb_video_only.Checked == true)
-            {
-                listView1.Columns.Add("影片1", 200, HorizontalAlignment.Left);
-            }
-            listView1.Columns.Add("大小", 50, HorizontalAlignment.Left);
-            listView1.Columns.Add("檔名1", 400, HorizontalAlignment.Left);
-            listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
-            listView1.Columns.Add("大小", 150, HorizontalAlignment.Left);
-            listView1.Columns.Add("副檔名", 100, HorizontalAlignment.Left);
-            listView1.Columns.Add("修改日期", 100, HorizontalAlignment.Left);
-            listView1.Visible = true;
+
+//------------------------------------------------------------  # 60個
+
 
 
 //------------------------------------------------------------  # 60個
@@ -24,6 +12,9 @@
 
 //------------------------------------------------------------  # 60個
 
+
+
+//------------------------------------------------------------  # 60個
 //若是圖片, 秀出來
 string ext = fi.Extension.ToLower();
 if ((ext == ".bmp") || (ext == ".jpg") || (ext == ".png"))
@@ -96,14 +87,6 @@ byte b = slateBlue.B;
 byte r = slateBlue.R;
 byte a = slateBlue.A;
 string text = String.Format("寫字範例\nSlate Blue has these ARGB values:\n A:{0}, " + "R:{1}, G: {2}, B {3}", new object[] { a, r, g, b });
-
-//------------------------------------------------------------  # 60個
-
-
-
-//------------------------------------------------------------  # 60個
-
-
 
 //------------------------------------------------------------  # 60個
 
