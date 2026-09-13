@@ -51,9 +51,6 @@ namespace vcs_SendTo_All
 
         Int64 total_size = 0;
         Int64 total_files = 0;
-        Int64 total_folders = 0;
-        Int64 folder_size = 0;
-        Int64 folder_files = 0;
 
         const Int64 TB = (Int64)GB * 1024;//定義TB的計算常量
         const int GB = 1024 * 1024 * 1024;//定義GB的計算常量
@@ -279,38 +276,18 @@ namespace vcs_SendTo_All
                 else if (flag_operation_mode == MODE6)
                 {
                     //轉出檔案目錄資料 目錄下檔名轉出純文字 全部
-                    export_filename(filename);//轉出檔案目錄資料 目錄下檔名轉出純文字
 
-                    richTextBox1.Text += "右鍵匯出資料夾內的檔案資料1\n";
-                    richTextBox1.Text += filename + "\n";
+                    //TBD
                 }
             }
 
             if (flag_operation_mode == MODE6)
             {
-                //顯示檔案目錄資料
-                show_filename_data();
             }
 
             if (flag_debug_mode == true)
             {
-                //以下為 MODE6 的 debug
-                if (flag_operation_mode == MODE6)
-                {
-                    richTextBox1.Text += "右鍵匯出資料夾內的檔案資料2 debug\n";
-                    fileinfos.Clear();
-                    total_size = 0;
-                    total_files = 0;
-
-                    //string foldername = @"D:\vcs\astro\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案\小赠品";
-                    string foldername = @"D:\內視鏡影片\錄影效果比較";
-                    export_filename(foldername);//轉出檔案目錄資料 目錄下檔名轉出純文字
-
-                    //顯示檔案目錄資料
-                    show_filename_data();
-
-                    show_listView();
-                }
+                //TBD
             }
         }
 
@@ -341,88 +318,6 @@ namespace vcs_SendTo_All
         }
 
         //------------------------------------------------------------  # 60個
-
-        void show_listView()
-        {
-            this.Size = new Size(640 * 2, 480 * 2);
-
-            //richTextBox1.Dock = DockStyle.Right;
-
-            richTextBox1.Text += "W = " + this.ClientSize.Width.ToString() + "\n";
-            richTextBox1.Text += "H = " + this.ClientSize.Height.ToString() + "\n";
-
-            richTextBox1.Text += "W = " + richTextBox1.Size.Width.ToString() + "\n";
-            richTextBox1.Text += "H = " + richTextBox1.Size.Height.ToString() + "\n";
-
-            //richTextBox1.Visible = false;
-            richTextBox1.Dock = DockStyle.None;
-            richTextBox1.Size = new Size(1000, 400);
-            richTextBox1.Location = new Point(0, 400);
-
-            listView1.View = View.Details;  //定義列表顯示的方式
-            listView1.FullRowSelect = true; //整行一起選取
-            listView1.Clear();
-
-            listView1.View = View.Details;  //定義列表顯示的方式
-            listView1.FullRowSelect = true; //整行一起選取
-            listView1.Clear();
-
-            this.listView1.GridLines = true;
-            this.listView1.Size = new Size(640 * 2, 480 * 2);
-
-            listView1.Columns.Add("影片1", 200, HorizontalAlignment.Left);
-            listView1.Columns.Add("大小", 50, HorizontalAlignment.Left);
-            listView1.Columns.Add("檔名1", 400, HorizontalAlignment.Left);
-            listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
-            listView1.Columns.Add("大小", 150, HorizontalAlignment.Left);
-            listView1.Columns.Add("副檔名", 100, HorizontalAlignment.Left);
-            listView1.Columns.Add("修改日期", 100, HorizontalAlignment.Left);
-            listView1.Visible = true;
-            listView1.MouseClick += new MouseEventHandler(listView1_MouseClick);
-
-            this.Controls.Add(listView1);
-
-            //加入
-        }
-
-        private void listView1_MouseClick(object sender, MouseEventArgs e)
-        {
-            /*
-            int selNdx;
-            string fullname;
-
-            selNdx = listView1.SelectedIndices[0];
-
-            richTextBox1.Text += "aaa:\t" + listView1.Items[selNdx].Text + "\n";
-            richTextBox1.Text += "bbb:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
-            richTextBox1.Text += "ccc:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
-            richTextBox1.Text += "ddd:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
-            */
-        }
-
-        void show_filename_data()
-        {
-            int i;
-            if (fileinfos.Count == 0)
-            {
-                richTextBox1.Text += "show_filename_data 找不到資料\n";
-            }
-            else
-            {
-                richTextBox1.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料a\n";
-            }
-
-            for (i = 0; i < fileinfos.Count; i++)
-            {
-                string filename = fileinfos[i].filename;
-                //richTextBox1.Text += filename + "\n";
-
-                FileInfo fi = new FileInfo(fileinfos[i].filepath + "\\" + filename);
-                richTextBox1.Text += fi.FullName + "\t";
-                //richTextBox1.Text += fi.Length.ToString() + "\t";
-                richTextBox1.Text += ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
-            }
-        }
 
         private void bt_copy_Click(object sender, EventArgs e)
         {
@@ -479,58 +374,6 @@ namespace vcs_SendTo_All
         }
 
         //------------------------------------------------------------  # 60個
-
-        //轉出檔案目錄資料 目錄下檔名轉出純文字
-        void export_filename(string target_dir)
-        {
-            if (Directory.Exists(target_dir) == false)     //確認資料夾是否存在
-            {
-                return;
-            }
-
-            //撈出多層
-            //richTextBox1.Text += "資料夾: " + target_dir + "\n";
-            ShowDirectory(target_dir);
-        }
-
-        public bool ShowDirectory(string target_dir)
-        {
-            bool result = false;
-            string[] files = Directory.GetFiles(target_dir);
-            string[] dirs = Directory.GetDirectories(target_dir);
-            //richTextBox1.Text += "資料夾: " + target_dir + "\t檔案個數 = " + files.Length.ToString() + "\n";
-
-            foreach (string file in files)
-            {
-                FileInfo fi = new FileInfo(file);
-                long filesize = fi.Length;
-
-                /*
-                richTextBox1.Text += "資料夾：" + fi.Directory + "\n";
-                richTextBox1.Text += "檔名：" + fi.Name + "\n";
-                richTextBox1.Text += "檔案大小：" + fi.Length.ToString() + "\n";
-                richTextBox1.Text += "建立時間1：" + fi.CreationTime.ToString() + "\n";
-                richTextBox1.Text += "建立時間2：" + fi.CreationTimeUtc.ToString() + "\n";
-                richTextBox1.Text += "最近寫入時間：" + fi.LastWriteTime.ToString() + "\n";
-                */
-
-                if ((flag_show_big_files_only == false) || (filesize > file_size_limit))
-                {
-                    richTextBox1.Text += "檔案: " + file + "\t";
-                    richTextBox1.Text += "Size: " + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
-
-                    string FolederName = fi.Directory.ToString();
-                    fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
-                }
-            }
-            richTextBox1.Text += "\n";
-            foreach (string dir in dirs)
-            {
-                //richTextBox1.Text += "資料夾: " + dir + "\n";
-                ShowDirectory(dir);
-            }
-            return result;
-        }
 
         private void bt_save_Click(object sender, EventArgs e)
         {

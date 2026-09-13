@@ -22,22 +22,15 @@ namespace vcs_axWindowsMediaPlayer2_new
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
-
         }
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 12;
-            y_st = 12;
-            dx = 150;
-            dy = 70;
-
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -48,7 +41,6 @@ namespace vcs_axWindowsMediaPlayer2_new
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-
             button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
@@ -60,17 +52,26 @@ namespace vcs_axWindowsMediaPlayer2_new
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
+            richTextBox1.Size = new Size(600, 690 - 90);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-        }
 
+            axWindowsMediaPlayer1.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+
+            this.Size = new Size(1060, 750);
+            this.Text = "vcs_axWindowsMediaPlayer2_new";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
-
+            richTextBox1.Clear();
         }
 
-
-
+        //6060
 
         const Int64 TB = (Int64)GB * 1024;//定義TB的計算常量
         const int GB = 1024 * 1024 * 1024;//定義GB的計算常量
@@ -226,7 +227,6 @@ namespace vcs_axWindowsMediaPlayer2_new
 
             richTextBox1.Text += "\n\n\n";
 
-
             richTextBox1.Text += "fileinfos len = " + fileinfos.Count.ToString() + "\n";
 
             richTextBox1.Text += "total_size = " + total_size.ToString() + "\n";
@@ -237,13 +237,11 @@ namespace vcs_axWindowsMediaPlayer2_new
             int i;
             int len = fileinfos.Count;
 
-
             richTextBox1.Text += "照檔名排序:\n";
             for (i = 0; i < 20; i++)
             {
                 richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\t" + fileinfos[i].filepath + "\t" + fileinfos[i].fileextension + "\t" + fileinfos[i].filecreationtime.ToString() + "\n";
                 //richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\n";
-
             }
 
             /*
@@ -471,7 +469,7 @@ namespace vcs_axWindowsMediaPlayer2_new
         {
             //無效
             axWindowsMediaPlayer1.windowlessVideo = false;   //設爲false後雙擊屏幕可以全屏
-            
+
 
         }
 
@@ -521,3 +519,11 @@ namespace vcs_axWindowsMediaPlayer2_new
 
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+

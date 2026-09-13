@@ -1,18 +1,86 @@
 ﻿
+------------------------------------------------------------
+請先設定欲轉出檔名的目錄
+以及欲轉出檔案的類型，
+
+若要連子目錄下所有目錄檔案全部轉出，
+請按下右鍵中"轉出全部"項
+或按下工具列之"轉出鍵"；
+
+若只需轉出該目錄下之檔案及目錄名稱、
+不包含子目錄，請按下右鍵中"轉出一層"項
+或按下工具列之"轉出一層鍵"；
+
+即可將設定目錄下之目錄名稱及檔名
+變為純文字轉出至此編輯區。
+------------------------------------------------------------
+
+
 //------------------------------------------------------------  # 60個
 
+            System.Diagnostics.Process.Start(listView1.Items[selNdx].Text);
+
+
+                //指定應用程式路徑
+                //string target = @"C:\Program Files\DAUM\PotPlayer\PotPlayerMini.exe";
+                string target = player_path;
+
+                //方法一
+                //Process.Start(target, "參數");
+                //Process.Start(target, all_filename);
+
+                //方法二
+                ProcessStartInfo pInfo = new ProcessStartInfo(target);
+                pInfo.Arguments = all_filename;
+
+                richTextBox1.Text += "target : " + target + "\n";
+                richTextBox1.Text += "all_filename : " + all_filename + "\n";
+
+                using (Process process = new Process())
+                {
+                    process.StartInfo = pInfo;
+                    process.Start();
+                }
 
 
 //------------------------------------------------------------  # 60個
 
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 限制textbox只能輸入數字
+            if (e.KeyChar.CompareTo('0') < 0 || e.KeyChar.CompareTo('9') > 0) //比較輸入值的範圍是否超出數字
+            {
+                e.Handled = true;// Handled 為是否鎖住輸入
+            }
+        }
+
 
 
 //------------------------------------------------------------  # 60個
 
+            folderBrowserDialog1.SelectedPath = @"D:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                path = folderBrowserDialog1.SelectedPath;
+                richTextBox1.Text += "選取資料夾: " + folderBrowserDialog1.SelectedPath + "\n";
+            }
+            else
+            {
+                richTextBox1.Text = "未選取資料夾\n";
+            }
 
 //------------------------------------------------------------  # 60個
 
+            // 複製資料到剪貼簿
+            Clipboard.Clear();
 
+            for (int i = 0; i < listView1.Items.Count; i++)
+            {
+                richTextBox2.Text += listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\n";
+
+                // 複製資料到剪貼簿 累計
+                Clipboard.SetDataObject(Clipboard.GetText() + listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\n");      //建議用此
+            }
 
 //------------------------------------------------------------  # 60個
 //若是圖片, 秀出來

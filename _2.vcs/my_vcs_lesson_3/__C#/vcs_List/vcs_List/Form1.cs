@@ -84,6 +84,7 @@ namespace vcs_List
         private void button0_Click(object sender, EventArgs e)
         {
             //類別List
+
             List<Person> persons1 = new List<Person>();
             persons1.Add(new Person("张三", "男", 20, 1500));
             persons1.Add(new Person("王成", "男", 32, 3200));
@@ -104,8 +105,7 @@ namespace vcs_List
         {
             //類別List
 
-            List<Member> member_list = new List<Member>();   // 泛型           
-
+            List<Member> member_list = new List<Member>();   // 泛型
             member_list.Add(new Member() { Name = "David", Select = true, Score = 70 });
             member_list.Add(new Member() { Name = "Mary", Select = false, Score = 65 });
             member_list.Add(new Member() { Name = "Tom", Select = true, Score = 85 });
@@ -285,7 +285,7 @@ namespace vcs_List
             // 宣告stringList3 為List
             // 以下List 裡為string 型態
 
-            //建立 一維字串串列
+            // 建立 一維字串串列
             List<string> stringList3 = new List<string>();
 
             // 在List 裡新增string 字串
@@ -1275,9 +1275,9 @@ namespace vcs_List
 //------------------------------  # 30個
 
 /*
-            byte[] number = { 21, 31, 41 };
-            //宣告陣列並初始化
-            int[] number = { 11, 21, 78, 125 };
+byte[] number = { 21, 31, 41 };
+//宣告陣列並初始化
+int[] number = { 11, 21, 78, 125 };
 
 C#中如何獲取一個二維陣列的兩維長度，即行數和列數？
 
@@ -1292,23 +1292,15 @@ int num = array.Length;//獲取整個二維陣列的長度，即所有元 的個
 List<int> myLists = new List<int>();
 另外List如同一張資料表,你可以對它編輯,如加入某一列或刪除某一列.
 
-	List<Point> points = new List<Point>(); // 紀錄滑鼠軌跡的陣列。	
-	List<MyFileInfo> fileinfos = new List<MyFileInfo>();             
-
-1維list宣告
-	List<string> myLists = new List<string>();
-	
-	myLists.Add("A001");
-	myLists.Add("A002");
-	myLists.Add("A003"); 
+List<Point> points = new List<Point>(); // 紀錄滑鼠軌跡的陣列。	
 
 2維list宣告
-	List<List<string>> myLists = new List<List<string>>();
+List<List<string>> myLists = new List<List<string>>();
 
-	myLists.Add(new List<string>() { "A001", "David" });
-	myLists.Add(new List<string>() { "A002", "John" });
-	myLists.Add(new List<string>() { "A003", "Tom" });             
-             
+myLists.Add(new List<string>() { "A001", "David" });
+myLists.Add(new List<string>() { "A002", "John" });
+myLists.Add(new List<string>() { "A003", "Tom" });
+
 //------------------------------------------------------------  # 60個
 
 List<String> DuplicateList = new List();

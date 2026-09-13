@@ -411,6 +411,7 @@
             this.bt_files09.Name = "bt_files09";
             this.bt_files09.Size = new System.Drawing.Size(200, 60);
             this.bt_files09.TabIndex = 5;
+            this.bt_files09.Text = "ff3";
             this.bt_files09.UseVisualStyleBackColor = true;
             this.bt_files09.Click += new System.EventHandler(this.bt_files09_Click);
             // 
@@ -421,6 +422,7 @@
             this.bt_files10.Name = "bt_files10";
             this.bt_files10.Size = new System.Drawing.Size(200, 60);
             this.bt_files10.TabIndex = 38;
+            this.bt_files10.Text = "我的轉出1";
             this.bt_files10.UseVisualStyleBackColor = true;
             this.bt_files10.Click += new System.EventHandler(this.bt_files10_Click);
             // 
@@ -602,7 +604,7 @@
             this.bt_files20.Name = "bt_files20";
             this.bt_files20.Size = new System.Drawing.Size(200, 60);
             this.bt_files20.TabIndex = 75;
-            this.bt_files20.Text = "我的轉出";
+            this.bt_files20.Text = "我的轉出0";
             this.bt_files20.UseVisualStyleBackColor = true;
             this.bt_files20.Click += new System.EventHandler(this.bt_files20_Click);
             // 
