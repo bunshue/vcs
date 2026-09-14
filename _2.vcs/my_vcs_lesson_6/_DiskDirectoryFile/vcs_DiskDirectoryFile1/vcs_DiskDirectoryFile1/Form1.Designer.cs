@@ -507,7 +507,6 @@
             this.bt_files13.Name = "bt_files13";
             this.bt_files13.Size = new System.Drawing.Size(200, 60);
             this.bt_files13.TabIndex = 66;
-            this.bt_files13.Text = "取得資料夾下所有圖片檔資訊";
             this.bt_files13.UseVisualStyleBackColor = true;
             this.bt_files13.Click += new System.EventHandler(this.bt_files13_Click);
             // 
