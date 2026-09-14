@@ -87,7 +87,6 @@ namespace vcs_test_all_08_MediaInfo
             richTextBox1.Text += "  Extension: " + f.Extension + "\n";
 
             FileInfo fi = new FileInfo(filename);
-
             richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
             richTextBox1.Text += fi.Directory + "\n";
             richTextBox1.Text += fi.DirectoryName + "\n";
@@ -100,15 +99,6 @@ namespace vcs_test_all_08_MediaInfo
                 richTextBox1.Text += "  FPS: " + f.Video[0].FrameRate.ToString() + "\n";
                 richTextBox1.Text += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
                     fi.FullName, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
-
-                string items = string.Empty;
-                string item = w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
-                if (h >= 1080)
-                    items = "大";
-                else if (h <= 480)
-                    items = "小";
-                else
-                    items = "中";
             }
             else
             {

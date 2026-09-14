@@ -2478,6 +2478,43 @@ res = fi.FullName.ToLower().Replace(" ", "").Contains(tb_search_text_pattern.Tex
 
 //------------------------------------------------------------  # 60個
 
+/*
+            //播放 listview 多選的檔案
+            int selNdx;
+            string all_filename = string.Empty;
+            string player_path = @"C:\Program Files (x86)\DAUM\PotPlayer\PotPlayerMini.exe";
+            if (this.listView1.SelectedIndices.Count <= 0)  //總共選擇的個數
+                return;
 
+            //richTextBox1.Text += "總共選了 : " + listView1.SelectedItems.Count.ToString() + " 個檔案，分別是 : \n";
+            for (int i = 0; i < listView1.SelectedItems.Count; i++)
+            {
+                selNdx = listView1.SelectedIndices[i];
+                listView1.Items[selNdx].Selected = true;    //選到的項目
+                //richTextBox1.Text += listView1.Items[selNdx].Text + "\n";
+                all_filename += " \"" + listView1.Items[selNdx].Text + "\"";
+            }
 
+            //指定應用程式路徑
+            //string target = @"C:\Program Files\DAUM\PotPlayer\PotPlayerMini.exe";
+            string target = player_path;
+
+            //方法一
+            //Process.Start(target, "參數");
+            //Process.Start(target, all_filename);
+
+            //方法二
+            ProcessStartInfo pInfo = new ProcessStartInfo(target);
+            pInfo.Arguments = all_filename;
+
+            richTextBox1.Text += "target : " + target + "\n";
+            richTextBox1.Text += "all_filename : " + all_filename + "\n";
+
+            using (Process process = new Process())
+            {
+                process.StartInfo = pInfo;
+                process.Start();    //啟動程式
+            }
+
+*/
 

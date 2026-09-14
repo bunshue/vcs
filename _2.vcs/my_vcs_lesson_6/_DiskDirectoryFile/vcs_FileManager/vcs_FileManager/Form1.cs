@@ -129,23 +129,23 @@ namespace vcs_FileManager
 
             update_default_setting();
 
-            this.listView1.GridLines = true;
+            listView1.GridLines = true;
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.FullRowSelect = true; //整行一起選取
             listView1.Clear();
 
-            this.listBox1.Items.Clear();
+            listBox1.Items.Clear();
             foreach (string sss in old_search_path)
             {
                 richTextBox1.Text += "add " + sss + "\n";
-                this.listBox1.Items.Add(sss);
+                listBox1.Items.Add(sss);
             }
 
             check_filesize = int.Parse(tb_filesize.Text);
             skip_count = int.Parse(tb_count.Text);
 
             string foldername = @"D:\_git\vcs\_1.data\______test_files3";
-            this.listBox1.Items.Add(foldername);
+            listBox1.Items.Add(foldername);
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -193,29 +193,11 @@ namespace vcs_FileManager
 
         void show_item_location()
         {
-            //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
-            //this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            //this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
-
-            //設定執行後的表單大小
-            this.Size = new Size(1920, 1040);
-
-            //設定執行後的表單起始位置, 指定位置
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = new System.Drawing.Point(0, 0);
-
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 12;
-            y_st = 12;
-            dx = 100 + 10;
-            dy = 50 + 10;
-
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 50 + 10;
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -227,95 +209,51 @@ namespace vcs_FileManager
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
             button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            tb_shortname.Location = new Point(x_st + dx * 0, y_st + dy * 11 - 5);
+            tb_shortname.Location = new Point(x_st + dx * 1, y_st + dy * 10);
 
-            x_st = 420;
-            y_st = 12;
-            int W = 1920;
-            this.listView1.Location = new Point(x_st, y_st);
-            this.listView1.Size = new Size(W - x_st - 12, 700);
-            this.listBox1.BorderStyle = BorderStyle.Fixed3D;
+            listBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            groupBox3.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            tb_find.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            groupBox_file.Location = new Point(x_st + dx * 1, y_st + dy * 7);
 
-            this.richTextBox1.Location = new Point(x_st, y_st + 700);
-            this.richTextBox1.Size = new Size(W - x_st - 12, 325);
+            richTextBox2.Size = new Size(400 + 200, 250);
+            richTextBox2.Location = new Point(x_st + dx * 0, y_st + dy * 11);
 
-            x_st = 12;
-            this.richTextBox2.Location = new Point(x_st, y_st + 700);
-            this.richTextBox2.Size = new Size(400, 325);
+            bt_add_dir.Location = new Point(x_st + dx * 2 + 10, y_st + dy * 0);
+            bt_remove_dir.Location = new Point(x_st + dx * 2 + 10, y_st + dy * 0 + 30);
+            bt_clear_dir.Location = new Point(x_st + dx * 2 + 10, y_st + dy * 0 + 60);
+
+            bt_start_files.Location = new Point(x_st + dx * 2 + 50, y_st + dy * 0);
+            bt_start_files2.Location = new Point(x_st + dx * 2 + 50, y_st + dy * 1);
+            bt_setup.Location = new Point(x_st + dx * 2 + 50, y_st + dy * 2);
+
+            listView1.Size = new Size(900, 650);
+            listView1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+
+            richTextBox1.Size = new Size(900, 250);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 11);
 
             bt_clear1.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - bt_clear1.Width, richTextBox1.Location.Y);
             bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Width - bt_clear2.Width, richTextBox2.Location.Y);
             bt_clear3.Location = new Point(listView1.Location.X + listView1.Size.Width - bt_clear3.Size.Width, listView1.Location.Y + listView1.Size.Height - bt_clear3.Size.Height);
             lb_find.Location = new Point(bt_clear3.Location.X - 200, bt_clear3.Location.Y);
 
-            bt_minimize_setup();
-            bt_exit_setup();
-
+            lb_files.Location = new Point(x_st + dx * 1 + 130, y_st + dy * 2);
+            lb_filesize.Location = new Point(x_st + dx * 1 + 130, y_st + dy * 2 + 40);
+            lb_find.Location = new Point(x_st + dx * 1 + 130, y_st + dy * 2 + 80);
             lb_files.Text = "";
             lb_filesize.Text = "";
             lb_find.Text = "";
+
+            this.Size = new Size(1570, 980);
+            this.Text = "vcs_FileManager";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
-        private void bt_minimize_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;   //設定表單最小化
-        }
-
-        private void bt_exit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        void bt_minimize_setup()
-        {
-            int width = 5;
-            int w = 50; //設定按鈕大小 W
-            int h = 50; //設定按鈕大小 H
-
-            Button bt_minimize = new Button();  // 實例化按鈕
-            bt_minimize.Size = new Size(w, h);
-            bt_minimize.Text = "";
-            Bitmap bmp = new Bitmap(w, h);
-            Graphics g = Graphics.FromImage(bmp);
-            Pen p = new Pen(Color.Red, width);
-            g.Clear(Color.Pink);
-            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
-            //g.DrawLine(p, 0, 0, w - 1, h - 1);
-            //g.DrawLine(p, w - 1, 0, 0, h - 1);
-            g.DrawLine(p, w / 4, h / 2 - 1, w * 3 / 4, h / 2 - 1);
-            bt_minimize.Image = bmp;
-
-            bt_minimize.Location = new Point(this.ClientSize.Width - bt_minimize.Width * 2 - 2, 0);
-            bt_minimize.Click += bt_minimize_Click;     // 加入按鈕事件
-
-            this.Controls.Add(bt_minimize); // 將按鈕加入表單
-            bt_minimize.BringToFront();     //移到最上層
-        }
-
-        void bt_exit_setup()
-        {
-            int width = 5;
-            int w = 50; //設定按鈕大小 W
-            int h = 50; //設定按鈕大小 H
-
-            Button bt_exit = new Button();  // 實例化按鈕
-            bt_exit.Size = new Size(w, h);
-            bt_exit.Text = "";
-            Bitmap bmp = new Bitmap(w, h);
-            Graphics g = Graphics.FromImage(bmp);
-            Pen p = new Pen(Color.Red, width);
-            g.Clear(Color.Pink);
-            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
-            g.DrawLine(p, 0, 0, w - 1, h - 1);
-            g.DrawLine(p, w - 1, 0, 0, h - 1);
-            bt_exit.Image = bmp;
-
-            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
-            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
-
-            this.Controls.Add(bt_exit); // 將按鈕加入表單
-            bt_exit.BringToFront();     //移到最上層
-        }
+        //------------------------------------------------------------  # 60個
 
         void update_default_setting()
         {

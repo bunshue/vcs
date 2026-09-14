@@ -18,29 +18,53 @@
 
 //------------------------------------------------------------  # 60個
 
-            System.Diagnostics.Process.Start(listView1.Items[selNdx].Text);
+            //一層
+            //只撈一層的所有檔案
+            foreach (string filename in System.IO.Directory.GetFileSystemEntries(folder_name))
+            {
+                richTextBox1.Text += filename + "\n";
 
-
-                //指定應用程式路徑
-                //string target = @"C:\Program Files\DAUM\PotPlayer\PotPlayerMini.exe";
-                string target = player_path;
-
-                //方法一
-                //Process.Start(target, "參數");
-                //Process.Start(target, all_filename);
-
-                //方法二
-                ProcessStartInfo pInfo = new ProcessStartInfo(target);
-                pInfo.Arguments = all_filename;
-
-                richTextBox1.Text += "target : " + target + "\n";
-                richTextBox1.Text += "all_filename : " + all_filename + "\n";
-
-                using (Process process = new Process())
+                FileInfo fi = new FileInfo(filename);
+                if (fi.Exists == true)      //確認檔案是否存在
                 {
-                    process.StartInfo = pInfo;
-                    process.Start();
+                    richTextBox1.Text += "資料夾：" + fi.Directory + "\n";
+                    richTextBox1.Text += "檔名：" + fi.Name + "\n";
+                    richTextBox1.Text += "副檔名：" + fi.Extension + "\n";
+                    richTextBox1.Text += "檔案大小：" + fi.Length.ToString() + "\n";
+                    richTextBox1.Text += "建立時間1：" + fi.CreationTime.ToString() + "\n";
+                    richTextBox1.Text += "建立時間2：" + fi.CreationTimeUtc.ToString() + "\n";
+                    richTextBox1.Text += "最近寫入時間：" + fi.LastWriteTime.ToString() + "\n";
                 }
+                else
+                {
+                    richTextBox1.Text += "檔案: " + filename + " 不存在\n";
+                }
+            }
+
+3030
+
+            //全部
+            //C# 取得資料夾下的所有檔案(包括子目錄)
+            string[] files = System.IO.Directory.GetFiles(folder_name, "*.*", System.IO.SearchOption.AllDirectories);
+            foreach (string filename in files)
+            {
+                richTextBox1.Text += filename + "\n";
+                FileInfo fi = new FileInfo(filename);
+                if (fi.Exists == true)      //確認檔案是否存在
+                {
+                    richTextBox1.Text += "資料夾：" + fi.Directory + "\n";
+                    richTextBox1.Text += "檔名：" + fi.Name + "\n";
+                    richTextBox1.Text += "副檔名：" + fi.Extension + "\n";
+                    richTextBox1.Text += "檔案大小：" + fi.Length.ToString() + "\n";
+                    richTextBox1.Text += "建立時間1：" + fi.CreationTime.ToString() + "\n";
+                    richTextBox1.Text += "建立時間2：" + fi.CreationTimeUtc.ToString() + "\n";
+                    richTextBox1.Text += "最近寫入時間：" + fi.LastWriteTime.ToString() + "\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "檔案: " + filename + " 不存在\n";
+                }
+            }
 
 
 //------------------------------------------------------------  # 60個
@@ -53,8 +77,6 @@
                 e.Handled = true;// Handled 為是否鎖住輸入
             }
         }
-
-
 
 //------------------------------------------------------------  # 60個
 
