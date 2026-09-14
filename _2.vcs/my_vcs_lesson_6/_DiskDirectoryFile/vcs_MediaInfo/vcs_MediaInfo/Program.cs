@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_test_all_08_MediaInfo
+namespace vcs_MediaInfo
 {
     static class Program
     {

@@ -489,7 +489,7 @@ namespace vcs_RichTextBox3
 
         private void button25_Click(object sender, EventArgs e)
         {
-            string text="RichTextBox顯示訊息自動捲動，顯示最後一行";
+            string text = "RichTextBox顯示訊息自動捲動，顯示最後一行";
             DisplayValue(text);
         }
 

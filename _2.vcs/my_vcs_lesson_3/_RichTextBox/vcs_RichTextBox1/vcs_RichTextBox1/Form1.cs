@@ -209,36 +209,79 @@ namespace vcs_RichTextBox1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string txt = "\n\nWelcome to the United States and have a nice day.";
+            string txt = "赤壁賦。壬戌之秋，七月既望，蘇子與客泛舟遊於赤壁之下。";
             richTextBox1.Text = txt;
 
-            richTextBox1.Select(txt.IndexOf("Welcome"), "Welcome".Length);
+            richTextBox1.Font = new Font("標楷體", 24);
+
+            richTextBox1.Select(txt.IndexOf("赤壁賦"), "赤壁賦".Length);
             richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, FontStyle.Italic);
-
-            richTextBox1.Select(txt.IndexOf("the"), "the".Length);
-            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, FontStyle.Bold);
-            richTextBox1.SelectionColor = Color.Brown;
-
-            richTextBox1.Select(txt.IndexOf("United States"), "United States".Length);
-            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, FontStyle.Bold);
             richTextBox1.SelectionColor = Color.Red;
 
-            richTextBox1.Select(txt.IndexOf("have"), "have".Length);
-            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, FontStyle.Underline);
-
-            richTextBox1.Select(txt.IndexOf("nice"), "nice".Length);
+            richTextBox1.Select(txt.IndexOf("壬戌之秋"), "壬戌之秋".Length);
             richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, FontStyle.Bold);
+            richTextBox1.SelectionColor = Color.Green;
 
-            richTextBox1.Select(txt.IndexOf("day"), "day".Length);
+            richTextBox1.Select(txt.IndexOf("七月既望"), "七月既望".Length);
             richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, FontStyle.Bold);
             richTextBox1.SelectionColor = Color.Blue;
 
+            richTextBox1.Select(txt.IndexOf("蘇子與客"), "蘇子與客".Length);
+            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, FontStyle.Underline);
+            richTextBox1.SelectionColor = Color.Cyan;
+
+            richTextBox1.Select(txt.IndexOf("泛舟"), "泛舟".Length);
+            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, FontStyle.Bold);
+            richTextBox1.SelectionColor = Color.Magenta;
+
+            richTextBox1.Select(txt.IndexOf("赤壁之下"), "赤壁之下".Length);
+            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, FontStyle.Bold);
+            richTextBox1.SelectionColor = Color.Yellow;
+
             richTextBox1.Select(0, 0);//離開選取
+
+            //------------------------------------------------------------  # 60個
+
+            //richTextBox 內文變色
+
+            richTextBox1.SelectionColor = Color.Red;
+            richTextBox1.AppendText("內文變色\n");
+            richTextBox1.AppendText("恢復原色\n");
+
+            richTextBox1.SelectionColor = Color.Orange;
+            richTextBox1.AppendText("多行內文變色\n多行內文變色\n多行內文變色\n多行內文變色\n多行內文變色\n多行內文變色\n");
+            richTextBox1.AppendText("恢復原色\n");
+
+            richTextBox1.SelectionColor = Color.Yellow;
+            richTextBox1.AppendText("內文變色\n");
+            richTextBox1.AppendText("恢復原色\n");
+
+            richTextBox1.SelectionColor = Color.Green;
+            richTextBox1.AppendText("內文變色\n");
+            richTextBox1.AppendText("恢復原色\n");
+
+            richTextBox1.SelectionColor = Color.Blue;
+            richTextBox1.AppendText("內文變色\n");
+            richTextBox1.AppendText("恢復原色\n");
+
+            richTextBox1.SelectionColor = Color.Purple;
+            richTextBox1.AppendText("內文變色\n");
+            richTextBox1.AppendText("恢復原色\n");
+            richTextBox1.AppendText("恢復原色\n");
+            richTextBox1.AppendText("恢復原色\n");
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //RTB部分著色
+            richTextBox1.SelectionStart = 30;
+            richTextBox1.SelectionLength = 60;
+            richTextBox1.SelectionBackColor = Color.Red;
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -317,36 +360,13 @@ namespace vcs_RichTextBox1
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button5_Click(object sender, EventArgs e)
         {
-            //richTextBox 內文變色
-
-            richTextBox1.SelectionColor = Color.Red;
-            richTextBox1.AppendText("內文變色\n");
-            richTextBox1.AppendText("恢復原色\n");
-
-            richTextBox1.SelectionColor = Color.Orange;
-            richTextBox1.AppendText("多行內文變色\n多行內文變色\n多行內文變色\n多行內文變色\n多行內文變色\n多行內文變色\n");
-            richTextBox1.AppendText("恢復原色\n");
-
-            richTextBox1.SelectionColor = Color.Yellow;
-            richTextBox1.AppendText("內文變色\n");
-            richTextBox1.AppendText("恢復原色\n");
-
-            richTextBox1.SelectionColor = Color.Green;
-            richTextBox1.AppendText("內文變色\n");
-            richTextBox1.AppendText("恢復原色\n");
-
-            richTextBox1.SelectionColor = Color.Blue;
-            richTextBox1.AppendText("內文變色\n");
-            richTextBox1.AppendText("恢復原色\n");
-
-            richTextBox1.SelectionColor = Color.Purple;
-            richTextBox1.AppendText("內文變色\n");
-            richTextBox1.AppendText("恢復原色\n");
-            richTextBox1.AppendText("恢復原色\n");
-            richTextBox1.AppendText("恢復原色\n");
         }
+
+        //------------------------------------------------------------  # 60個
 
         int flag_select_all = 0;
         private void button6_Click(object sender, EventArgs e)
@@ -442,13 +462,14 @@ namespace vcs_RichTextBox1
             richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button11_Click(object sender, EventArgs e)
         {
-            //RTB部分著色
-            richTextBox1.SelectionStart = 30;
-            richTextBox1.SelectionLength = 60;
-            richTextBox1.SelectionBackColor = Color.Red;
+
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button12_Click(object sender, EventArgs e)
         {

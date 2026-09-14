@@ -12,7 +12,7 @@ using MediaInfoNET;
 
 using System.Globalization; //for CultureInfo
 
-namespace vcs_test_all_08_MediaInfo
+namespace vcs_MediaInfo
 {
     public partial class Form1 : Form
     {
@@ -65,7 +65,7 @@ namespace vcs_test_all_08_MediaInfo
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1050, 750);
-            this.Text = "vcs_test_all_08_MediaInfo";
+            this.Text = "vcs_MediaInfo";
 
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;
@@ -79,40 +79,32 @@ namespace vcs_test_all_08_MediaInfo
 
         //------------------------------------------------------------  # 60個
 
-        void get_MediaInfo0(string filename)
-        {
-            MediaFile f = new MediaFile(filename);
-            richTextBox1.Text += "  影片長度: " + f.General.DurationString + "\n";
-            richTextBox1.Text += "  FileSize: " + f.FileSize.ToString() + "\n";
-            richTextBox1.Text += "  Extension: " + f.Extension + "\n";
-
-            FileInfo fi = new FileInfo(filename);
-            richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
-            richTextBox1.Text += fi.Directory + "\n";
-            richTextBox1.Text += fi.DirectoryName + "\n";
-
-            if ((f.InfoAvailable == true) && (f.Video.Count > 0))
-            {
-                int w = f.Video[0].Width;
-                int h = f.Video[0].Height;
-                richTextBox1.Text += "  輸入大小: " + w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\n";
-                richTextBox1.Text += "  FPS: " + f.Video[0].FrameRate.ToString() + "\n";
-                richTextBox1.Text += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
-                    fi.FullName, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
-            }
-            else
-            {
-                richTextBox1.Text += "非影片\n";
-            }
-        }
-
-        void get_MediaInfo1(string filename)
+        void get_MediaInfo(string filename)
         {
             MediaFile f = new MediaFile(filename);
 
             if (f.InfoAvailable == true)
             {
                 richTextBox1.Text += "有MediaInfo資料, 全部資料:\n" + f.Info_Text + "\n\n";
+
+                richTextBox1.Text += "  影片長度: " + f.General.DurationString + "\n";
+                richTextBox1.Text += "  FileSize: " + f.FileSize.ToString() + "\n";
+                richTextBox1.Text += "  Extension: " + f.Extension + "\n";
+
+                // f.Video.Count
+
+                int w = 0;
+                int h = 0;
+
+                if (f.Video.Count > 0)
+                {
+                    w = f.Video[0].Width;
+                    h = f.Video[0].Height;
+                    richTextBox1.Text += "  輸入大小: " + w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\n";
+                    richTextBox1.Text += "  FPS: " + f.Video[0].FrameRate.ToString() + "\n";
+                    richTextBox1.Text += string.Format("{0,5} X {1,5}{2,5}{3,10}",
+                        w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
+                }
 
                 richTextBox1.Text += "有MediaInfo資料, 分項資料:\n";
                 richTextBox1.Text += "File : " + f.File + "\n";
@@ -191,8 +183,8 @@ namespace vcs_test_all_08_MediaInfo
                     richTextBox1.Text += "Frame size : " + f.Video[0].FrameSize.ToString() + "\n";
 
                     richTextBox1.Text += "\n";
-                    int w = f.Video[0].Width;
-                    int h = f.Video[0].Height;
+                    w = f.Video[0].Width;
+                    h = f.Video[0].Height;
 
                     richTextBox1.Text += "[視訊資訊]\n";
                     richTextBox1.Text += "  視訊編碼: " + f.Video[0].Format + "\n";
@@ -225,7 +217,7 @@ namespace vcs_test_all_08_MediaInfo
             }
             else
             {
-                richTextBox1.Text += "無MediaInfo資料\n";
+                richTextBox1.Text += "非影片, 無MediaInfo資料\n";
             }
 
             //Info
@@ -243,19 +235,20 @@ namespace vcs_test_all_08_MediaInfo
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //MediaInfo 0
+            //MediaInfo
             string filename = @"D:\_git\vcs\_1.data\______test_files1\_video\鹿港.mp4";
-            get_MediaInfo0(filename);
+            get_MediaInfo(filename);
+
+            //MediaInfo
+            filename = @"D:\_git\vcs\_1.data\______test_files1\_mp3\02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3";
+            get_MediaInfo(filename);
+
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //MediaInfo 1
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\_mp3\02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3";
-            richTextBox1.Text += "檔案名稱: " + filename + "\n";
-            get_MediaInfo1(filename);
         }
 
         //------------------------------------------------------------  # 60個

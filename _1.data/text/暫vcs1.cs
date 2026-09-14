@@ -15,9 +15,36 @@
 變為純文字轉出至此編輯區。
 ------------------------------------------------------------
 
+            FileInfo fi = new FileInfo(filename);
+            richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+            richTextBox1.Text += fi.Directory + "\n";
+            richTextBox1.Text += fi.DirectoryName + "\n";
+            // fi.FullName, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)), 
+
+------------------------------------------------------------
+
+                    FileAttributes attr = (new FileInfo(filePath)).Attributes;
+                    Console.Write("UnAuthorizedAccessException: Unable to access file. ");
+                    if ((attr & FileAttributes.ReadOnly) > 0)
+                        Console.Write("The file is read-only.");
+
 
 //------------------------------------------------------------  # 60個
 
+            listView1.View = View.Details;  //定義列表顯示的方式
+            listView1.FullRowSelect = true; //整行一起選取
+            listView1.Clear();
+
+            //設置列名稱
+            listView1.Columns.Add("檔名", 700, HorizontalAlignment.Center);
+            listView1.Columns.Add("容量", 150, HorizontalAlignment.Center);
+            listView1.Visible = true;
+
+            //排序 由小到大
+            //fileinfos.Sort((x, y) => { return x.size.CompareTo(y.size); });
+
+            //排序 由大到小  在return的地方多個負號
+            //fileinfos.Sort((x, y) => { return -x.size.CompareTo(y.size); });
 
 //------------------------------------------------------------  # 60個
 

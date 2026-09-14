@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_test_all_08_MediaInfo", "vcs_test_all_08_MediaInfo\vcs_test_all_08_MediaInfo.csproj", "{65EE5021-50E2-4B45-A253-6E64C55EFD8F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_MediaInfo", "vcs_MediaInfo\vcs_MediaInfo.csproj", "{65EE5021-50E2-4B45-A253-6E64C55EFD8F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -8,8 +8,8 @@
     <ProjectGuid>{65EE5021-50E2-4B45-A253-6E64C55EFD8F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_test_all_08_MediaInfo</RootNamespace>
-    <AssemblyName>vcs_test_all_08_MediaInfo</AssemblyName>
+    <RootNamespace>vcs_MediaInfo</RootNamespace>
+    <AssemblyName>vcs_MediaInfo</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -69,6 +69,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

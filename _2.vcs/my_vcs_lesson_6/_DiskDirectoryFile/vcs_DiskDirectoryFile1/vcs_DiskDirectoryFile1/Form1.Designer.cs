@@ -227,7 +227,6 @@
             this.bt_dir08.Name = "bt_dir08";
             this.bt_dir08.Size = new System.Drawing.Size(200, 60);
             this.bt_dir08.TabIndex = 40;
-            this.bt_dir08.Text = "ff1";
             this.bt_dir08.UseVisualStyleBackColor = true;
             this.bt_dir08.Click += new System.EventHandler(this.bt_dir08_Click);
             // 
@@ -625,7 +624,6 @@
             this.bt_files22.Name = "bt_files22";
             this.bt_files22.Size = new System.Drawing.Size(200, 60);
             this.bt_files22.TabIndex = 77;
-            this.bt_files22.Text = "轉出全部 標準版";
             this.bt_files22.UseVisualStyleBackColor = true;
             this.bt_files22.Click += new System.EventHandler(this.bt_files22_Click);
             // 
@@ -658,7 +656,6 @@
             this.bt_files29.Name = "bt_files29";
             this.bt_files29.Size = new System.Drawing.Size(200, 60);
             this.bt_files29.TabIndex = 84;
-            this.bt_files29.Text = "test";
             this.bt_files29.UseVisualStyleBackColor = true;
             this.bt_files29.Click += new System.EventHandler(this.bt_files29_Click);
             // 
@@ -669,7 +666,6 @@
             this.bt_files28.Name = "bt_files28";
             this.bt_files28.Size = new System.Drawing.Size(200, 60);
             this.bt_files28.TabIndex = 83;
-            this.bt_files28.Text = "test";
             this.bt_files28.UseVisualStyleBackColor = true;
             this.bt_files28.Click += new System.EventHandler(this.bt_files28_Click);
             // 
