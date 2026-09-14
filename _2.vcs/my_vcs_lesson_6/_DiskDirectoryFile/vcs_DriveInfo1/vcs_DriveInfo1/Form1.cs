@@ -139,21 +139,23 @@ namespace vcs_DriveInfo1
         const int GB = 1024 * 1024 * 1024;//定義GB的計算常量
         const int MB = 1024 * 1024;//定義MB的計算常量
         const int KB = 1024;//定義KB的計算常量
-
-        public string ByteConversionGBMBKB(Int64 KSize)
+        public string ByteConversionTBGBMBKB(Int64 size)
         {
-            if (KSize / TB >= 1)//如果目前Byte的值大於等於1TB
-                return (Math.Round(KSize / (float)TB, 2)).ToString() + " TB";//將其轉換成TB
-            else if (KSize / GB >= 1)//如果目前Byte的值大於等於1GB
-                return (Math.Round(KSize / (float)GB, 2)).ToString() + " GB";//將其轉換成GB
-            else if (KSize / MB >= 1)//如果目前Byte的值大於等於1MB
-                return (Math.Round(KSize / (float)MB, 2)).ToString() + " MB";//將其轉換成MB
-            else if (KSize / KB >= 1)//如果目前Byte的值大於等於1KB
-                return (Math.Round(KSize / (float)KB, 2)).ToString() + " KB";//將其轉換成KB
+            if (size < 0)
+                return "不合法的數值";
+            else if (size / TB >= 1024)//如果目前Byte的值大於等於1024TB
+                return "無法表示";
+            else if (size / TB >= 1)//如果目前Byte的值大於等於1TB
+                return (Math.Round(size / (float)TB, 2)).ToString() + " TB";//將其轉換成TB
+            else if (size / GB >= 1)//如果目前Byte的值大於等於1GB
+                return (Math.Round(size / (float)GB, 2)).ToString() + " GB";//將其轉換成GB
+            else if (size / MB >= 1)//如果目前Byte的值大於等於1MB
+                return (Math.Round(size / (float)MB, 2)).ToString() + " MB";//將其轉換成MB
+            else if (size / KB >= 1)//如果目前Byte的值大於等於1KB
+                return (Math.Round(size / (float)KB, 2)).ToString() + " KB";//將其轉換成KB
             else
-                return KSize.ToString() + " Byte";//顯示Byte值
+                return size.ToString() + " Byte";//顯示Byte值
         }
-
 
         private const int WIDTH = 100;
         void drawDiskSpace(long free, long total)
@@ -289,24 +291,6 @@ namespace vcs_DriveInfo1
         //取得硬碟資訊 ST
         // TBD [DllImport("kernel32.dll", EntryPoint = "GetDiskFreeSpaceEx")]
         // TBD public static extern int GetDiskFreeSpaceEx(string lpDirectoryName, out long lpFreeBytesAvailable, out long lpTotalNumberOfBytes, out long lpTotalNumberOfFreeBytes);
-
-        public string ByteConversionTBGBMBKB(Int64 size)
-        {
-            if (size < 0)
-                return "不合法的數值";
-            else if (size / TB >= 1024)//如果目前Byte的值大於等於1024TB
-                return "無法表示";
-            else if (size / TB >= 1)//如果目前Byte的值大於等於1TB
-                return (Math.Round(size / (float)TB, 2)).ToString() + " TB";//將其轉換成TB
-            else if (size / GB >= 1)//如果目前Byte的值大於等於1GB
-                return (Math.Round(size / (float)GB, 2)).ToString() + " GB";//將其轉換成GB
-            else if (size / MB >= 1)//如果目前Byte的值大於等於1MB
-                return (Math.Round(size / (float)MB, 2)).ToString() + " MB";//將其轉換成MB
-            else if (size / KB >= 1)//如果目前Byte的值大於等於1KB
-                return (Math.Round(size / (float)KB, 2)).ToString() + " KB";//將其轉換成KB
-            else
-                return size.ToString() + " Byte";//顯示Byte值
-        }
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -460,11 +444,11 @@ namespace vcs_DriveInfo1
                     richTextBox1.Text += "RootDirectory : " + drive.RootDirectory + "\n";
                     richTextBox1.Text += "磁碟標籤 : " + drive.VolumeLabel + "\n";
                     richTextBox1.Text += "磁碟格式 : " + drive.DriveFormat + "\n";
-                    richTextBox1.Text += "已使用空間 : " + (drive.TotalSize - drive.AvailableFreeSpace).ToString() + " 個位元組\t" + ByteConversionGBMBKB(Convert.ToInt64(drive.TotalSize - drive.AvailableFreeSpace)) + "\n";
+                    richTextBox1.Text += "已使用空間 : " + (drive.TotalSize - drive.AvailableFreeSpace).ToString() + " 個位元組\t" + ByteConversionTBGBMBKB(Convert.ToInt64(drive.TotalSize - drive.AvailableFreeSpace)) + "\n";
                     richTextBox1.Text += "可用空間 : " + drive.AvailableFreeSpace.ToString() + " 個位元組\t"
-                        + ByteConversionGBMBKB(Convert.ToInt64(drive.AvailableFreeSpace)) + "\t( "
+                        + ByteConversionTBGBMBKB(Convert.ToInt64(drive.AvailableFreeSpace)) + "\t( "
                         + ((float)drive.AvailableFreeSpace / (float)drive.TotalSize).ToString("P", CultureInfo.InvariantCulture) + " )\n";
-                    richTextBox1.Text += "磁碟容量 : " + drive.TotalSize.ToString() + " 個位元組\t" + ByteConversionGBMBKB(Convert.ToInt64(drive.TotalSize)) + "\n";
+                    richTextBox1.Text += "磁碟容量 : " + drive.TotalSize.ToString() + " 個位元組\t" + ByteConversionTBGBMBKB(Convert.ToInt64(drive.TotalSize)) + "\n";
                     richTextBox1.Text += "磁碟容量 : " + drive.TotalSize.ToString() + " 個位元組\n";
                     richTextBox1.Text += "可用空間總量 : " + drive.TotalFreeSpace.ToString() + " 個位元組\n";
                 }
@@ -544,11 +528,11 @@ namespace vcs_DriveInfo1
                     richTextBox1.Text += "標籤 : " + drive.VolumeLabel + "\n";
                     richTextBox1.Text += "磁碟分割號 : " + drive.Name + "\n";
                     richTextBox1.Text += "空間 : " + Convert.ToString(drive.TotalSize / 1024 / 1024 / 1024) + "GB\n";
-                    richTextBox1.Text += "已使用空間 :\t" + (drive.TotalSize - drive.AvailableFreeSpace).ToString() + " 個位元組\t" + ByteConversionGBMBKB(Convert.ToInt64(drive.TotalSize - drive.AvailableFreeSpace)) + "\n";
+                    richTextBox1.Text += "已使用空間 :\t" + (drive.TotalSize - drive.AvailableFreeSpace).ToString() + " 個位元組\t" + ByteConversionTBGBMBKB(Convert.ToInt64(drive.TotalSize - drive.AvailableFreeSpace)) + "\n";
                     richTextBox1.Text += "可用空間 :\t\t" + drive.AvailableFreeSpace.ToString() + " 個位元組\t"
-                        + ByteConversionGBMBKB(Convert.ToInt64(drive.AvailableFreeSpace)) + "\t( "
+                        + ByteConversionTBGBMBKB(Convert.ToInt64(drive.AvailableFreeSpace)) + "\t( "
                         + ((float)drive.AvailableFreeSpace / (float)drive.TotalSize).ToString("P", CultureInfo.InvariantCulture) + " )\n";
-                    richTextBox1.Text += "磁碟容量 :\t\t" + drive.TotalSize.ToString() + " 個位元組\t" + ByteConversionGBMBKB(Convert.ToInt64(drive.TotalSize)) + "\n";
+                    richTextBox1.Text += "磁碟容量 :\t\t" + drive.TotalSize.ToString() + " 個位元組\t" + ByteConversionTBGBMBKB(Convert.ToInt64(drive.TotalSize)) + "\n";
                     /*
                     richTextBox1.Text += "格式 : " + drive.DriveFormat + "\n";
                     richTextBox1.Text += "型態 : " + drive.DriveType + "\n";
@@ -591,11 +575,11 @@ namespace vcs_DriveInfo1
                 richTextBox1.Text += "標籤 : " + drive.VolumeLabel + "\n";
                 richTextBox1.Text += "類型 : " + drive.DriveType + "\n";
                 richTextBox1.Text += "格式 : " + drive.DriveFormat + "\n";
-                richTextBox1.Text += "已使用空間 :\t" + (drive.TotalSize - drive.AvailableFreeSpace).ToString() + " 個位元組\t" + ByteConversionGBMBKB(Convert.ToInt64(drive.TotalSize - drive.AvailableFreeSpace)) + "\n";
+                richTextBox1.Text += "已使用空間 :\t" + (drive.TotalSize - drive.AvailableFreeSpace).ToString() + " 個位元組\t" + ByteConversionTBGBMBKB(Convert.ToInt64(drive.TotalSize - drive.AvailableFreeSpace)) + "\n";
                 richTextBox1.Text += "可用空間 :\t\t" + drive.AvailableFreeSpace.ToString() + " 個位元組\t"
-                    + ByteConversionGBMBKB(Convert.ToInt64(drive.AvailableFreeSpace)) + "\t( "
+                    + ByteConversionTBGBMBKB(Convert.ToInt64(drive.AvailableFreeSpace)) + "\t( "
                     + ((float)drive.AvailableFreeSpace / (float)drive.TotalSize).ToString("P", CultureInfo.InvariantCulture) + " )\n";
-                richTextBox1.Text += "磁碟容量 :\t\t" + drive.TotalSize.ToString() + " 個位元組\t" + ByteConversionGBMBKB(Convert.ToInt64(drive.TotalSize)) + "\n";
+                richTextBox1.Text += "磁碟容量 :\t\t" + drive.TotalSize.ToString() + " 個位元組\t" + ByteConversionTBGBMBKB(Convert.ToInt64(drive.TotalSize)) + "\n";
                 richTextBox1.Text += "根目錄 : " + drive.RootDirectory + "\n";
 
                 drawDiskSpace(drive.AvailableFreeSpace, drive.TotalSize);

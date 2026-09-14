@@ -42,12 +42,8 @@ namespace vcs_NetFlux
             total_receive += NStruct.Receive;
             total_send += NStruct.Send;
 
-            //label3.Text = "網路[接收:" + ByteConversionGBMBKB(Convert.ToInt64(NStruct.Receive)) + " 發送:" + ByteConversionGBMBKB(Convert.ToInt64(NStruct.Send)) + "]";
-            label3.Text = "網路[接收:" + ByteConversionGBMBKB(Convert.ToInt64(total_receive)) + " 發送:" + ByteConversionGBMBKB(Convert.ToInt64(total_send)) + "]";
-
-
-
-            //ByteConversionGBMBKB(Convert.ToInt64(NStruct.Receive)) + "\n";
+            //label3.Text = "網路[接收:" + ByteConversionTBGBMBKB(Convert.ToInt64(NStruct.Receive)) + " 發送:" + ByteConversionTBGBMBKB(Convert.ToInt64(NStruct.Send)) + "]";
+            label3.Text = "網路[接收:" + ByteConversionTBGBMBKB(Convert.ToInt64(total_receive)) + " 發送:" + ByteConversionTBGBMBKB(Convert.ToInt64(total_send)) + "]";
         }
 
         private void panel1_MouseDown(object sender, MouseEventArgs e)
@@ -71,7 +67,7 @@ namespace vcs_NetFlux
             Application.Exit();
         }
 
-        #region  判断星期几
+        //#region  判断星期几
         /// <summary>
         /// 判断星期几
         /// </summary>
@@ -106,7 +102,7 @@ namespace vcs_NetFlux
             }
             return strWeek;
         }
-        #endregion
+        //#endregion
 
 
 
@@ -114,7 +110,7 @@ namespace vcs_NetFlux
         const int GB = 1024 * 1024 * 1024;//定義GB的計算常量
         const int MB = 1024 * 1024;//定義MB的計算常量
         const int KB = 1024;//定義KB的計算常量
-        public string ByteConversionGBMBKB(Int64 size)
+        public string ByteConversionTBGBMBKB(Int64 size)
         {
             if (size < 0)
                 return "不合法的數值";

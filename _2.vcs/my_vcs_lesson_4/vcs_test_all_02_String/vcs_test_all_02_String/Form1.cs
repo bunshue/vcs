@@ -1288,8 +1288,6 @@ namespace vcs_test_all_02_String
             //已使用空間 :	197,593,485,312 個位元組	184.02 GB
             richTextBox1.Text += string.Format("{0,-15}{1,20}{2,-10}{3,-10}",
                 "已使用空間 :", used.ToString("N0", CultureInfo.InvariantCulture), " 個位元組", used2.ToString() + " GB") + "\n";
-
-            //richTextBox1.Text += "已使用空間 :\t" + (drive.TotalSize - drive.AvailableFreeSpace).ToString("N0", CultureInfo.InvariantCulture) + " 個位元組\t" + ByteConversionGBMBKB(Convert.ToInt64(drive.TotalSize - drive.AvailableFreeSpace)) + "\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -1347,33 +1345,34 @@ Replace('原字串', '新字串')	將原字串取代為新字串			    x.Replace
 Substring(索引, 長度)		從指定索引位置取得指定長度的字串	x.Substring(3,10)
 Contains('關鍵字')		    判斷是否包含該關鍵字			    x.Contains("Build")
 
-            string x = "My name is Tom";
+string x = "My name is Tom";
 
-            int j = x.Length;
-            Console.WriteLine(j);//14
+int j = x.Length;
+Console.WriteLine(j);//14
 
-            int p = x.IndexOf("me");
-            Console.WriteLine(p);//5
+int p = x.IndexOf("me");
+Console.WriteLine(p);//5
 
-            string k = x.Insert(0, "Hello! ");
-            Console.WriteLine(k);//Hello! My name is Tom
+string k = x.Insert(0, "Hello! ");
+Console.WriteLine(k);//Hello! My name is Tom
 
-            string l = x.Remove(10);
-            Console.WriteLine(l);//My name is
+string l = x.Remove(10);
+Console.WriteLine(l);//My name is
 
-            string m = x.Replace("Tom", "John");
-            Console.WriteLine(m);//My name is John
+string m = x.Replace("Tom", "John");
+Console.WriteLine(m);//My name is John
 
-            string i = x.Substring(3, 7);
-            Console.WriteLine(i);//name is
+string i = x.Substring(3, 7);
+Console.WriteLine(i);//name is
 
-            if (x.Contains("Tom"))
-            {
-                Console.WriteLine("Yes! You are Tom");
-            }else
-            {
-                Console.WriteLine("Who are you?");
-            }//Yes! You are Tom
+if (x.Contains("Tom"))
+{
+    Console.WriteLine("Yes! You are Tom");
+}
+else
+{
+    Console.WriteLine("Who are you?");
+}//Yes! You are Tom
             
 
 另外，string跟array一樣，索引的起始值也是0
@@ -1389,6 +1388,5 @@ Console.WriteLine(x[4]); //o
 
 //------------------------------------------------------------  # 60個
 
-
-
 */
+

@@ -187,7 +187,7 @@ namespace vcs_DriveInfo2
         const int GB = 1024 * 1024 * 1024;//定義GB的計算常量
         const int MB = 1024 * 1024;//定義MB的計算常量
         const int KB = 1024;//定義KB的計算常量
-        public string ByteConversionGBMBKB(Int64 KSize)
+        public string ByteConversionTBGBMBKB(Int64 KSize)
         {
             if (KSize / TB >= 1)//如果目前Byte的值大於等於1TB
                 return (Math.Round(KSize / (float)TB, 2)).ToString() + " TB";//將其轉換成TB
@@ -248,9 +248,9 @@ namespace vcs_DriveInfo2
             //g.DrawString(name[0].ToString(), new Font("標楷體", 14), new SolidBrush(Color.Green), new Point(x_st + cx, y_st + cy + r + dy * 0));
             g.DrawString(name[0].ToString(), new Font("標楷體", 18), new SolidBrush(Color.Blue), new Point(cx + r / 2 - 10, cy + r / 2 - 10));
 
-            string str1 = ByteConversionGBMBKB(Convert.ToInt64(total));
-            string str2 = ByteConversionGBMBKB(Convert.ToInt64(total - free));
-            string str3 = ByteConversionGBMBKB(Convert.ToInt64(free));
+            string str1 = ByteConversionTBGBMBKB(Convert.ToInt64(total));
+            string str2 = ByteConversionTBGBMBKB(Convert.ToInt64(total - free));
+            string str3 = ByteConversionTBGBMBKB(Convert.ToInt64(free));
             string str4 = ((float)free / (float)total).ToString("P", CultureInfo.InvariantCulture);
 
             Font f = new Font("Times New Roman", 14);
@@ -304,11 +304,11 @@ namespace vcs_DriveInfo2
                     richTextBox1.Text += "磁碟標籤:  " + drive.VolumeLabel + "\n";
                     richTextBox1.Text += "磁碟類型:  " + drive.DriveType.ToString() + "\n";
                     richTextBox1.Text += "磁碟格式:  " + drive.DriveFormat + "\n";
-                    richTextBox1.Text += "已使用空間 :\t" + (drive.TotalSize - drive.AvailableFreeSpace).ToString() + " 個位元組\t" + ByteConversionGBMBKB(Convert.ToInt64(drive.TotalSize - drive.AvailableFreeSpace)) + "\n";
+                    richTextBox1.Text += "已使用空間 :\t" + (drive.TotalSize - drive.AvailableFreeSpace).ToString() + " 個位元組\t" + ByteConversionTBGBMBKB(Convert.ToInt64(drive.TotalSize - drive.AvailableFreeSpace)) + "\n";
                     richTextBox1.Text += "可用空間 :\t\t" + drive.AvailableFreeSpace.ToString() + " 個位元組\t"
-                        + ByteConversionGBMBKB(Convert.ToInt64(drive.AvailableFreeSpace)) + "\t( "
+                        + ByteConversionTBGBMBKB(Convert.ToInt64(drive.AvailableFreeSpace)) + "\t( "
                         + ((float)drive.AvailableFreeSpace / (float)drive.TotalSize).ToString("P", CultureInfo.InvariantCulture) + " )\n";
-                    richTextBox1.Text += "磁碟容量 :\t\t" + drive.TotalSize.ToString() + " 個位元組\t" + ByteConversionGBMBKB(Convert.ToInt64(drive.TotalSize)) + "\n";
+                    richTextBox1.Text += "磁碟容量 :\t\t" + drive.TotalSize.ToString() + " 個位元組\t" + ByteConversionTBGBMBKB(Convert.ToInt64(drive.TotalSize)) + "\n";
                 }
                 else
                 {

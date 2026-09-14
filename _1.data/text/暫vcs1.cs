@@ -18,54 +18,6 @@
 
 //------------------------------------------------------------  # 60個
 
-            //一層
-            //只撈一層的所有檔案
-            foreach (string filename in System.IO.Directory.GetFileSystemEntries(folder_name))
-            {
-                richTextBox1.Text += filename + "\n";
-
-                FileInfo fi = new FileInfo(filename);
-                if (fi.Exists == true)      //確認檔案是否存在
-                {
-                    richTextBox1.Text += "資料夾：" + fi.Directory + "\n";
-                    richTextBox1.Text += "檔名：" + fi.Name + "\n";
-                    richTextBox1.Text += "副檔名：" + fi.Extension + "\n";
-                    richTextBox1.Text += "檔案大小：" + fi.Length.ToString() + "\n";
-                    richTextBox1.Text += "建立時間1：" + fi.CreationTime.ToString() + "\n";
-                    richTextBox1.Text += "建立時間2：" + fi.CreationTimeUtc.ToString() + "\n";
-                    richTextBox1.Text += "最近寫入時間：" + fi.LastWriteTime.ToString() + "\n";
-                }
-                else
-                {
-                    richTextBox1.Text += "檔案: " + filename + " 不存在\n";
-                }
-            }
-
-3030
-
-            //全部
-            //C# 取得資料夾下的所有檔案(包括子目錄)
-            string[] files = System.IO.Directory.GetFiles(folder_name, "*.*", System.IO.SearchOption.AllDirectories);
-            foreach (string filename in files)
-            {
-                richTextBox1.Text += filename + "\n";
-                FileInfo fi = new FileInfo(filename);
-                if (fi.Exists == true)      //確認檔案是否存在
-                {
-                    richTextBox1.Text += "資料夾：" + fi.Directory + "\n";
-                    richTextBox1.Text += "檔名：" + fi.Name + "\n";
-                    richTextBox1.Text += "副檔名：" + fi.Extension + "\n";
-                    richTextBox1.Text += "檔案大小：" + fi.Length.ToString() + "\n";
-                    richTextBox1.Text += "建立時間1：" + fi.CreationTime.ToString() + "\n";
-                    richTextBox1.Text += "建立時間2：" + fi.CreationTimeUtc.ToString() + "\n";
-                    richTextBox1.Text += "最近寫入時間：" + fi.LastWriteTime.ToString() + "\n";
-                }
-                else
-                {
-                    richTextBox1.Text += "檔案: " + filename + " 不存在\n";
-                }
-            }
-
 
 //------------------------------------------------------------  # 60個
 
