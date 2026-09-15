@@ -238,11 +238,12 @@ namespace vcs_DiskDirectoryFile1
         {
             double Size = 0;
 
-            DirectoryInfo[] dinfos = dinfo.GetDirectories();  // 傳回目前目錄的子目錄, 一層
+            DirectoryInfo[] dis = dinfo.GetDirectories();  // 傳回目前目錄的子目錄, 一層
 
             //richTextBox1.Text += "子目錄 :\n";
-            foreach (DirectoryInfo di in dinfos)
+            foreach (DirectoryInfo di in dis)
             {
+                // [System Volume Information] 資料夾是一個隱藏的系統資料夾，是「系統還原」工具用來儲存其資訊與還原點的地方。
                 if (di.Name != "System Volume Information" && di.Name.Substring(0, 1) != "$")//避開此類folder權限問題
                 {
                     Size += DirSize(di);   //利用遞迴把子資料夾也計算進來
@@ -260,11 +261,12 @@ namespace vcs_DiskDirectoryFile1
 
         public void GetAllFileNames(DirectoryInfo dinfo)
         {
-            DirectoryInfo[] dinfos = dinfo.GetDirectories();  // 傳回目前目錄的子目錄, 一層
+            DirectoryInfo[] dis = dinfo.GetDirectories();  // 傳回目前目錄的子目錄, 一層
 
             richTextBox1.Text += "子目錄 :\n";
-            foreach (DirectoryInfo di in dinfos)
+            foreach (DirectoryInfo di in dis)
             {
+                // [System Volume Information] 資料夾是一個隱藏的系統資料夾，是「系統還原」工具用來儲存其資訊與還原點的地方。
                 if (di.Name != "System Volume Information" && di.Name.Substring(0, 1) != "$")//避開此類folder權限問題
                 {
                     GetAllFileNames(di);   //利用遞迴把子資料夾也加進來
@@ -490,18 +492,13 @@ namespace vcs_DiskDirectoryFile1
 
             //建立臨時檔案
             //File.Create("tmp_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".txt");//創建文件
-        }
 
-        //------------------------------------------------------------  # 60個
-
-        private void bt_file04_Click(object sender, EventArgs e)
-        {
             //刪除檔案 (不使用資源回收筒)
             string filename = @"D:\_git\vcs\_1.data\______test_files1\vcs_test.txt";
-            FileInfo finfo = new FileInfo(filename);
-            if (finfo.Exists == true)  // 確認檔案是否存在
+            FileInfo fi = new FileInfo(filename);
+            if (fi.Exists == true)  // 確認檔案是否存在
             {
-                finfo.Delete();  // 刪除檔案
+                fi.Delete();  // 刪除檔案
                 richTextBox1.Text += "檔案刪除成功\n";
             }
             else
@@ -511,7 +508,7 @@ namespace vcs_DiskDirectoryFile1
 
             //------------------------------------------------------------  # 60個
 
-            //刪除檔案(使用資源回收筒)
+            //刪除檔案 (使用資源回收筒)
 
             //先將Microsoft.VisualBasic.Dll加入參考。
             //參考/加入參考/.NET/Microsoft.VisualBasic
@@ -539,8 +536,10 @@ namespace vcs_DiskDirectoryFile1
             richTextBox1.Text += "檔案屬性 : " + File.GetAttributes(filename).ToString() + "\n";
         }
 
-        private void bt_file05_Click(object sender, EventArgs e)
+        private void bt_file04_Click(object sender, EventArgs e)
         {
+            //File的 Get / Set 方法
+
             // File.Get
 
             string filename = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
@@ -584,6 +583,14 @@ namespace vcs_DiskDirectoryFile1
             filename = @"D:\_git\vcs\_1.data\______test_files1\mega.txt";
             show_file_info(filename);
         }
+
+        //------------------------------------------------------------  # 60個
+
+        private void bt_file05_Click(object sender, EventArgs e)
+        {
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void bt_file06_Click(object sender, EventArgs e)
         {
@@ -685,22 +692,22 @@ namespace vcs_DiskDirectoryFile1
 
             //新增檔案, 指定路徑建立檔案
             string filename = @"_tmp_aaaa.txt";
-            FileInfo finfo = new FileInfo(filename);
+            FileInfo fi = new FileInfo(filename);
 
-            FileStream fs = finfo.Create();  // 用Create方法新增一個檔案
+            FileStream fs = fi.Create();  // 用Create方法新增一個檔案
             fs.Close();//關閉檔案
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             filename = @"_tmp_bbbb.txt";
-            finfo = new FileInfo(filename);
+            fi = new FileInfo(filename);
 
             string text;
             StreamReader sr;
             StreamWriter sw;
 
             //1.寫入
-            sw = finfo.CreateText();  //開啟新檔
+            sw = fi.CreateText();  //開啟新檔
             text = "寫入AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
             //將輸入的資料覆蓋原檔並重新寫入
             sw.WriteLine(text);
@@ -708,7 +715,7 @@ namespace vcs_DiskDirectoryFile1
             sw.Close();
 
             //2.附加 
-            sw = finfo.AppendText();   //開啟舊檔
+            sw = fi.AppendText();   //開啟舊檔
             text = "附加AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
             //將輸入的資料附加到資料檔的最後
             sw.WriteLine(text);
@@ -716,7 +723,7 @@ namespace vcs_DiskDirectoryFile1
             sw.Close();
 
             //以唯讀模式開檔
-            sr = finfo.OpenText();  //以唯讀模式開檔
+            sr = fi.OpenText();  //以唯讀模式開檔
             Console.WriteLine("資料檔內容如下：");
             Console.WriteLine(sr.ReadToEnd());//讀出資料
             sr.Close();
@@ -727,15 +734,15 @@ namespace vcs_DiskDirectoryFile1
             filename = @"_tmp_cccc.txt";
             //目的檔案「Text.txttmp」
             String tagPath = filename + "tmp";
-            finfo = new FileInfo(filename);
+            fi = new FileInfo(filename);
 
             //以CopyTo方法複製檔案
-            //finfo.CopyTo(tagPath);  NG
+            //fi.CopyTo(tagPath);  NG
             richTextBox1.Text += filename + " 已複製\n";
 
             filename = @"_tmp_dddd.txt";
-            finfo = new FileInfo(filename);
-            //finfo.Rename("test2.txt");
+            fi = new FileInfo(filename);
+            //fi.Rename("test2.txt");
         }
 
         //------------------------------------------------------------  # 60個
@@ -946,10 +953,10 @@ namespace vcs_DiskDirectoryFile1
 
             DirectoryInfo dinfo1 = new DirectoryInfo(foldername);
             richTextBox1.Text += "資料夾\n";
-            DirectoryInfo[] dinfos = dinfo1.GetDirectories();  // 傳回目前目錄的子目錄, 一層
+            DirectoryInfo[] dis = dinfo1.GetDirectories();  // 傳回目前目錄的子目錄, 一層
 
             richTextBox1.Text += "子目錄 :\n";
-            foreach (DirectoryInfo di in dinfos)
+            foreach (DirectoryInfo di in dis)
             {
                 get_DirectoryInfo(di);
             }
@@ -1014,10 +1021,10 @@ namespace vcs_DiskDirectoryFile1
             DirectoryInfo dinfo4 = new DirectoryInfo(foldername);
             richTextBox1.Text += dinfo4.FullName + ", 資料夾下的子資料夾如下 :\n";
             //DirectoryInfo[]
-            dinfos = dinfo4.GetDirectories();  // 傳回目前目錄的子目錄, 一層
+            dis = dinfo4.GetDirectories();  // 傳回目前目錄的子目錄, 一層
 
             richTextBox1.Text += "子目錄 :\n";
-            foreach (DirectoryInfo di in dinfos)
+            foreach (DirectoryInfo di in dis)
             {
                 get_DirectoryInfo(di);
             }
@@ -1025,59 +1032,12 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_dir02_Click(object sender, EventArgs e)
         {
-            string foldername = @"D:\_git\vcs\_1.data\______test_files1\compare";
-
-            DirectoryInfo dinfo10 = new DirectoryInfo(foldername);
-
-            richTextBox1.Text += "\n檔名\t檔案長度\t修改日期\n";
-            // 讀取資料夾中有關於 --檔名(Name)、長度(Length) 和 修改日期(LastWriteTime)
-
-            //從指定路徑傳回指定的檔案類型
-            FileInfo[] fis = dinfo10.GetFiles("*.txt");
-            foreach (FileInfo fi in fis)
-            {
-                //get_FileInfo(finfo);
-                richTextBox1.Text += fi.Name + "\t" + fi.Length.ToString() + "\t" + fi.LastWriteTime.ToShortDateString() + "\n";
-            }
-
-            //------------------------------------------------------------  # 60個
-
             //DirectoryInfo的方法2
 
-            //儲存要回傳的檔案路徑和檔案類型
-            foldername = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook";
-            richTextBox1.Text += "檔案清單---<*.jpg>\n\n";
-
-            DirectoryInfo dinfo = new DirectoryInfo(foldername);
-
-            //從指定路徑傳回指定的檔案類型
-            //FileInfo[]
-            fis = dinfo.GetFiles("*.jpg");
-            //設定檔案的標題
-            string sign = new string('-', 37);
-            string fnName = "檔名", fnLength = "檔案長度";
-            string fnDate = "修改日期";
-            richTextBox1.Text += "\t" + fnName + "\t" + fnLength + "\t" + fnDate + "\n";
-            richTextBox1.Text += sign + "\n";
-
-            foreach (FileInfo finfo in fis)
-            {
-                get_FileInfo(finfo);
-            }
-
-            //------------------------------------------------------------  # 60個
-
-            //Path.Combine()
-
-            string filename = Path.Combine(Application.StartupPath, @"..\..\Form1.cs");
-
-            richTextBox1.Text += "filename old = " + filename + "\n";
-
-            foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU";
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU";
             DirectoryInfo dinfo12 = new DirectoryInfo(foldername);
 
-            //FileInfo[]
-            fis = dinfo12.GetFiles();  // 由DI取得FI陣列, 單層檔案資訊
+            FileInfo[] fis = dinfo12.GetFiles();  // 由DI取得FI陣列, 單層檔案資訊
             show_filenames(fis);
 
             //------------------------------------------------------------  # 60個
@@ -1091,18 +1051,9 @@ namespace vcs_DiskDirectoryFile1
             DirectoryInfo dinfo9 = drive_info.RootDirectory;
             richTextBox1.Text += "根目錄 : " + dinfo9.Attributes.ToString() + "\n";
 
-            // Get the files in the directory and print out some information about them.
-            //FileInfo[]
-            fis = dinfo9.GetFiles("*.*");
+            DirectoryInfo[] dis = dinfo9.GetDirectories("*.*");  // 由DI取得DI陣列, 單層資料夾資訊
 
-            foreach (FileInfo finfo in fis)
-            {
-                get_FileInfo(finfo);
-            }
-
-            DirectoryInfo[] dinfos = dinfo9.GetDirectories("*.*");  // 由DI取得DI陣列, 單層資料夾資訊
-
-            foreach (DirectoryInfo di in dinfos)
+            foreach (DirectoryInfo di in dis)
             {
                 get_DirectoryInfo(di);
             }
@@ -1119,8 +1070,7 @@ namespace vcs_DiskDirectoryFile1
 
             foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_book_magazine";
 
-            //DirectoryInfo
-            dinfo = new DirectoryInfo(foldername);
+            DirectoryInfo dinfo = new DirectoryInfo(foldername);
 
             FileSystemInfo[] fsinfos = dinfo.GetFileSystemInfos();  // 獲取所有的文件
             foreach (FileSystemInfo fsinfo in fsinfos)  // 遍歷獲取到的文件
@@ -1322,8 +1272,8 @@ namespace vcs_DiskDirectoryFile1
 
             richTextBox1.Text += "遍歷文件夾\n";
 
-            DirectoryInfo[] dinfos = dinfo.GetDirectories();
-            foreach (DirectoryInfo di in dinfos)
+            DirectoryInfo[] dis = dinfo.GetDirectories();
+            foreach (DirectoryInfo di in dis)
             {
                 if (di.CreationTime < Convert.ToDateTime(dt.AddDays(-(dt.Day) + 1)))
                 {
@@ -1355,29 +1305,6 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_dir07_Click(object sender, EventArgs e)
         {
-            //搜尋一個資料夾內所有特定格式的檔案
-
-            ///根據路徑實例化一個對象
-            DirectoryInfo di = new DirectoryInfo(foldername);
-
-            //選出所有符合一定後綴的文件列表
-
-            System.IO.SearchOption search_option = System.IO.SearchOption.AllDirectories;
-
-            FileInfo[] fis = di.GetFiles("*.*", search_option);
-
-            foreach (FileInfo fi in fis)
-            {
-                get_FileInfo(fi);
-            }
-        }
-
-        private bool IsRight(FileInfo info)
-        {
-            //選擇的文件後綴名
-            //List<string> patterns = new List<string>() { ".png", ".jpg", ".bmp", ".tif" };
-            List<string> patterns = new List<string>() { ".png" };
-            return patterns.Contains(info.Extension);
         }
 
         //------------------------------------------------------------  # 60個
@@ -1517,15 +1444,6 @@ namespace vcs_DiskDirectoryFile1
             foreach (string dir in dirs)
             {
                 richTextBox1.Text += "取得子目錄 : " + dir + "\n";
-
-                // 取得指定目錄中檔案的名稱, 用 DirectoryInfo
-                DirectoryInfo dinfo = new DirectoryInfo(dir);
-                FileInfo[] fis = dinfo.GetFiles("*.jpg");
-                foreach (FileInfo finfo in fis)
-                {
-                    get_FileInfo(finfo);
-                }
-                richTextBox1.Text += "------------------------------\n";  // 30個
             }
         }
 
@@ -1629,43 +1547,12 @@ namespace vcs_DiskDirectoryFile1
             {
                 richTextBox1.Text += filename + "\n";
             }
-
-            //------------------------------------------------------------  # 60個
         }
 
         //------------------------------------------------------------  # 60個
 
         private void bt_files09_Click(object sender, EventArgs e)
         {
-            //ff3
-            total_size = 0;
-            total_files = 0;
-
-            string path = string.Empty;
-
-            if (path == String.Empty)
-            {
-                //path = @"D:\_git\vcs\_1.data\______test_files1";
-                path = @"D:\vcs\astro\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案";
-            }
-
-            richTextBox1.Text += path + "\n\n";
-            if (File.Exists(path) == true)
-            {
-                // 檔案
-                ProcessFile(path);
-                richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t容量 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
-            }
-            else if (Directory.Exists(path))
-            {
-                // 資料夾
-                ProcessDirectoryA(path);
-                richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t容量 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
-            }
-            else
-            {
-                richTextBox1.Text += "非合法路徑或檔案\n";
-            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -1735,49 +1622,6 @@ namespace vcs_DiskDirectoryFile1
             }
         }
 
-        void show_listView()
-        {
-            this.Size = new Size(640 * 2, 480 * 2);
-
-            //richTextBox1.Dock = DockStyle.Right;
-
-            richTextBox1.Text += "W = " + this.ClientSize.Width.ToString() + "\n";
-            richTextBox1.Text += "H = " + this.ClientSize.Height.ToString() + "\n";
-
-            richTextBox1.Text += "W = " + richTextBox1.Size.Width.ToString() + "\n";
-            richTextBox1.Text += "H = " + richTextBox1.Size.Height.ToString() + "\n";
-
-            //richTextBox1.Visible = false;
-            richTextBox1.Dock = DockStyle.None;
-            richTextBox1.Size = new Size(1000, 400);
-            richTextBox1.Location = new Point(0, 400);
-
-            listView1.View = View.Details;  //定義列表顯示的方式
-            listView1.FullRowSelect = true; //整行一起選取
-            listView1.Clear();
-
-            listView1.View = View.Details;  //定義列表顯示的方式
-            listView1.FullRowSelect = true; //整行一起選取
-            listView1.Clear();
-
-            this.listView1.GridLines = true;
-            this.listView1.Size = new Size(640 * 2, 480 * 2);
-
-            listView1.Columns.Add("影片1", 200, HorizontalAlignment.Left);
-            listView1.Columns.Add("大小", 50, HorizontalAlignment.Left);
-            listView1.Columns.Add("檔名1", 400, HorizontalAlignment.Left);
-            listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
-            listView1.Columns.Add("大小", 150, HorizontalAlignment.Left);
-            listView1.Columns.Add("副檔名", 100, HorizontalAlignment.Left);
-            listView1.Columns.Add("修改日期", 100, HorizontalAlignment.Left);
-            listView1.Visible = true;
-            listView1.MouseClick += new MouseEventHandler(listView1_MouseClick);
-
-            this.Controls.Add(listView1);
-
-            //加入
-        }
-
         private void listView1_MouseClick(object sender, MouseEventArgs e)
         {
             /*
@@ -1793,22 +1637,10 @@ namespace vcs_DiskDirectoryFile1
             */
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void bt_files10_Click(object sender, EventArgs e)
         {
-            //我的轉出1
-
-            string foldername = @"D:\_git\vcs\_1.data\______test_files3\";
-
-            fileinfos.Clear();
-            total_size = 0;
-            total_files = 0;
-
-            export_filenames2(foldername);//轉出檔案目錄資料 目錄下檔名轉出純文字
-
-            //顯示檔案目錄資料
-            show_filename_data();
-
-            show_listView();
         }
 
         //------------------------------------------------------------  # 60個
@@ -1817,15 +1649,15 @@ namespace vcs_DiskDirectoryFile1
         {
             //顯示檔案大小
 
-            //lblFileSize.Text = finfo.Length.ToFileSizeApi();
+            //lblFileSize.Text = fi.Length.ToFileSizeApi();
             //int size = 12345678;
             //richTextBox1.Text += "size = " + size.tofil
 
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
-            FileInfo finfo = new FileInfo(filename);
-            richTextBox1.Text += finfo.Length.ToString() + "\n";
-            richTextBox1.Text += finfo.Length.ToFileSizeApi() + "\n";
+            FileInfo fi = new FileInfo(filename);
+            richTextBox1.Text += fi.Length.ToString() + "\n";
+            richTextBox1.Text += fi.Length.ToFileSizeApi() + "\n";
 
             int ccc = 12345678;   // double 才可以用 ToFileSize
             richTextBox1.Text += "ccc = " + ccc.ToString() + "\n";
@@ -1921,40 +1753,43 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_files14_Click(object sender, EventArgs e)
         {
-            //取得上一層資料夾的名稱
-
-            richTextBox1.Text += "原目錄 : " + Application.StartupPath + "\n";
-
-            string str = Application.StartupPath;
-            string[] split_str = new string[20];
-            split_str = str.Split('\\'); //以\當分隔符號
-            //richTextBox1.Text += "\n";
-            //richTextBox1.Text += "共有 : " + split_str.Length.ToString() + " 個項目\n";
-
-            richTextBox1.Text += "上一層資料夾的名稱 : " + split_str[split_str.Length - 1] + "\n";
-
-            /*
-            int i = 0;
-            foreach (string tmp in split_str)
-            {
-                i++;
-                richTextBox1.Text += i.ToString() + "\t" + tmp + "\n";
-            }
-            */
         }
 
         //------------------------------------------------------------  # 60個
 
         private void bt_files15_Click(object sender, EventArgs e)
         {
-            //搜尋檔案
-
+            // 搜尋檔案-檔名
             richTextBox1.Text += "搜尋檔案, 只找一層 IMG_20180228_215525.jpg\n";
-            foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_icon";
-            DirectoryInfo dinfo = new DirectoryInfo(foldername);
-            foreach (FileInfo info in dinfo.GetFiles("IMG_20180228_215525.jpg"))
+
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_icon";
+            DirectoryInfo di = new DirectoryInfo(foldername);
+
+            // 搜尋完整檔名
+            foreach (FileInfo fi in di.GetFiles("IMG_20180228_215525.jpg"))
             {
-                richTextBox1.Text += "有找到\n";
+                richTextBox1.Text += "1找到 : " + fi.Name + "\n";
+            }
+
+            // 搜尋部分檔名
+            foreach (FileInfo fi in di.GetFiles("IMG_20180228*"))
+            {
+                richTextBox1.Text += "2找到 : " + fi.Name + "\n";
+            }
+
+            // 搜尋一個資料夾內所有特定格式的檔案
+            // 搜尋副檔名 *.jpg *.txt *.*
+            foreach (FileInfo fi in di.GetFiles("*.gif"))
+            {
+                richTextBox1.Text += "3找到 : " + fi.Name + "\n";
+            }
+
+            //選出所有符合一定後綴的文件列表
+            System.IO.SearchOption search_option = System.IO.SearchOption.AllDirectories;
+            FileInfo[] fis = di.GetFiles("*.*", search_option);
+            foreach (FileInfo fi in fis)
+            {
+                //richTextBox1.Text += "4找到 : " + fi.Name + "\n";
             }
         }
 
@@ -1969,8 +1804,8 @@ namespace vcs_DiskDirectoryFile1
 
             filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
-            FileInfo finfo = new FileInfo(filename);
-            FileAttributes attr = finfo.Attributes;
+            FileInfo fi = new FileInfo(filename);
+            FileAttributes attr = fi.Attributes;
 
             if ((attr & FileAttributes.ReadOnly) > 0)
             {
@@ -1986,11 +1821,11 @@ namespace vcs_DiskDirectoryFile1
             //設定檔案屬性
             filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_貓咪\cat1.png";
 
-            finfo = new FileInfo(filename);
-            finfo.Attributes = FileAttributes.ReadOnly;  // 唯讀
-            finfo.Attributes = FileAttributes.System;  // 系統
-            finfo.Attributes = FileAttributes.Archive;  // 存檔
-            finfo.Attributes = FileAttributes.Hidden;  // 隱藏
+            fi = new FileInfo(filename);
+            fi.Attributes = FileAttributes.ReadOnly;  // 唯讀
+            fi.Attributes = FileAttributes.System;  // 系統
+            fi.Attributes = FileAttributes.Archive;  // 存檔
+            fi.Attributes = FileAttributes.Hidden;  // 隱藏
 
             //------------------------------------------------------------  # 60個
 
@@ -2035,12 +1870,20 @@ namespace vcs_DiskDirectoryFile1
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
+            FindAllFiles4(foldername);
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            FindAllFiles5(foldername);
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
             DirectoryInfo dinfo = new DirectoryInfo(foldername);
 
             richTextBox1.Text += "遍歷文件夾\n";
 
-            DirectoryInfo[] dinfos = dinfo.GetDirectories();
-            foreach (DirectoryInfo di in dinfos)
+            DirectoryInfo[] dis = dinfo.GetDirectories();
+            foreach (DirectoryInfo di in dis)
             {
                 get_DirectoryInfo(di);
             }
@@ -2059,10 +1902,10 @@ namespace vcs_DiskDirectoryFile1
             dinfo = new DirectoryInfo(foldername);
 
             //DirectoryInfo[]
-            dinfos = dinfo.GetDirectories();  // 傳回目前目錄的子目錄, 一層
+            dis = dinfo.GetDirectories();  // 傳回目前目錄的子目錄, 一層
 
             richTextBox1.Text += "子目錄 :\n";
-            foreach (DirectoryInfo di in dinfos)
+            foreach (DirectoryInfo di in dis)
             {
                 richTextBox1.Text += "------------------------------\n";  // 30個
                 richTextBox1.Text += "取得資料夾 : " + di.FullName + "\n";
@@ -2121,7 +1964,7 @@ namespace vcs_DiskDirectoryFile1
 
         //------------------------------------------------------------  # 60個
 
-        void FindAllFiles1(string foldername)
+        private void FindAllFiles1(string foldername)
         {
             fileinfos.Clear();
 
@@ -2194,7 +2037,7 @@ namespace vcs_DiskDirectoryFile1
             richTextBox1.Text += fi.Name + "\t" + fi.Length.ToString() + "\n";
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void FindAllFiles2(string foldername)
         {
@@ -2210,8 +2053,8 @@ namespace vcs_DiskDirectoryFile1
                 }
                 else
                 {
-                    FileInfo finfo = new FileInfo(fsinfo.FullName);
-                    richTextBox1.Text += finfo.FullName + "\n";
+                    FileInfo fi = new FileInfo(fsinfo.FullName);
+                    richTextBox1.Text += fi.FullName + "\n";
                 }
             }
         }
@@ -2247,22 +2090,42 @@ namespace vcs_DiskDirectoryFile1
             }
         }
 
-        //------------------------------------------------------------  # 60個
-
-        private void bt_files18_Click(object sender, EventArgs e)
+        private void FindAllFiles4(string foldername)
         {
-            //FindAllFiles2
+            total_size = 0;
+            total_files = 0;
+
+            if (File.Exists(foldername) == true)
+            {
+                // 檔案
+                ProcessFile(foldername);
+                richTextBox1.Text += "\n資料夾 " + foldername + "\t檔案個數 : " + total_files.ToString() + "\t容量 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
+            }
+            else if (Directory.Exists(foldername))
+            {
+                // 資料夾
+                ProcessDirectoryA(foldername);
+                richTextBox1.Text += "\n資料夾 " + foldername + "\t檔案個數 : " + total_files.ToString() + "\t容量 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "非合法路徑或檔案\n";
+            }
+        }
+
+
+        private void FindAllFiles5(string foldername)
+        {
             //搜尋子目錄內的所有檔案   一層
-            string foldername = @"D:\_git\vcs\_1.data\______test_files3";
 
             DirectoryInfo dinfo = new DirectoryInfo(foldername);
 
             richTextBox1.Text += "搜尋子目錄內的所有檔案\n";
 
-            DirectoryInfo[] dinfos = dinfo.GetDirectories();
+            DirectoryInfo[] dis = dinfo.GetDirectories();
 
             richTextBox1.Text += "子目錄 :\n";
-            foreach (DirectoryInfo di in dinfos)
+            foreach (DirectoryInfo di in dis)
             {
                 get_DirectoryInfo(di);
             }
@@ -2273,6 +2136,12 @@ namespace vcs_DiskDirectoryFile1
             {
                 get_FileInfo(fi);
             }
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void bt_files18_Click(object sender, EventArgs e)
+        {
         }
 
         //------------------------------------------------------------  # 60個
@@ -2419,6 +2288,22 @@ namespace vcs_DiskDirectoryFile1
                 //richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\t" + fileinfos[i].filepath + "\t" + fileinfos[i].fileextension + "\t" + fileinfos[i].filecreationtime.ToString() + "\n";
                 richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\n";
             }
+
+            //------------------------------------------------------------  # 60個
+            //------------------------------------------------------------  # 60個
+
+            //我的轉出1
+
+            //string foldername = @"D:\_git\vcs\_1.data\______test_files3\";
+
+            fileinfos.Clear();
+            total_size = 0;
+            total_files = 0;
+
+            export_filenames2(foldername);//轉出檔案目錄資料 目錄下檔名轉出純文字
+
+            //顯示檔案目錄資料
+            show_filename_data();
         }
 
         //------------------------------------------------------------  # 60個
@@ -2731,6 +2616,7 @@ namespace vcs_DiskDirectoryFile1
             //搜尋顯示至listview
 
             listView1.SelectedIndexChanged += new EventHandler(listView1_SelectedIndexChanged);
+
             //設定欄位
             ColumnHeader ch1 = new ColumnHeader();
             ch1.Text = "文件名稱";
@@ -2944,9 +2830,9 @@ fs.Close();
 
 //------------------------------------------------------------  # 60個
 
-public static void Rename(this FileInfo finfo, string newName)
+public static void Rename(this FileInfo fi, string newName)
 {
-    finfo.MoveTo(finfo.Directory.FullName + "\\" + newName);
+    fi.MoveTo(fi.Directory.FullName + "\\" + newName);
 }
 
 //------------------------------------------------------------  # 60個
@@ -3064,11 +2950,9 @@ richTextBox1.Text += "改名後的長檔名 : " + Path.Combine(foldername, filen
 
 //------------------------------------------------------------  # 60個
 
-FileInfo[] fis = dinfo.GetFiles();  // 由DI取得FI陣列, 單層檔案資訊
-FileInfo[] fis = dinfo.GetFiles("IMG_20180228_215525.jpg"))
-FileInfo[] fis = dinfo.GetFiles("*.jpg");
-FileInfo[] fis = dinfo.GetFiles("*.txt");
-FileInfo[] fis = dinfo.GetFiles("*.*");
-
+            //Path.Combine()
+            string filename = Path.Combine(Application.StartupPath, @"..\..\Form1.cs");
+            richTextBox1.Text += "filename old = " + filename + "\n";
 */
+
 

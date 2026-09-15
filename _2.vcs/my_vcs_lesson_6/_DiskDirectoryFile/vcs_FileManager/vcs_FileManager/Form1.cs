@@ -707,16 +707,6 @@ namespace vcs_FileManager
                 richTextBox1.Text += "\n";
                 */
 
-                /*
-                                    bool res;
-                                    res = i1.Name.ToLower().Replace(" ", "").Contains(tb_search_text_pattern.Text.ToLower().Replace("-", ""));
-                                    if (res == false)
-                                        continue;
-                                    else
-                                    {
-                                        richTextBox1.Text += "aaaa get file : " + i1.Name + "\n";
-                                    }
-                */
             }
 
             show_MyFileInfo(fileinfos);

@@ -31,6 +31,33 @@
 
 //------------------------------------------------------------  # 60個
 
+        void show_listView()
+        {
+            listView1.View = View.Details;  //定義列表顯示的方式
+            listView1.FullRowSelect = true; //整行一起選取
+            listView1.Clear();
+
+            listView1.GridLines = true;
+            listView1.Size = new Size(640 * 2, 480 * 2);
+
+            listView1.Columns.Add("影片1", 200, HorizontalAlignment.Left);
+            listView1.Columns.Add("大小", 50, HorizontalAlignment.Left);
+            listView1.Columns.Add("檔名1", 400, HorizontalAlignment.Left);
+            listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
+            listView1.Columns.Add("大小", 150, HorizontalAlignment.Left);
+            listView1.Columns.Add("副檔名", 100, HorizontalAlignment.Left);
+            listView1.Columns.Add("修改日期", 100, HorizontalAlignment.Left);
+            listView1.Visible = true;
+            listView1.MouseClick += new MouseEventHandler(listView1_MouseClick);
+
+            this.Controls.Add(listView1);
+
+            //加入
+        }
+
+
+//------------------------------------------------------------  # 60個
+
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.FullRowSelect = true; //整行一起選取
             listView1.Clear();

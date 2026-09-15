@@ -198,6 +198,8 @@ namespace vcs_axWindowsMediaPlayer2_new
             fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button0_Click(object sender, EventArgs e)
         {
             fileinfos.Clear();
@@ -286,16 +288,17 @@ namespace vcs_axWindowsMediaPlayer2_new
                 //axWindowsMediaPlayer1.currentPlaylist.appendItem(axWindowsMediaPlayer1.newMedia(fn));
                 //richTextBox1.Text += "加入播放清單: " + fn + "\n";
             }
-
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
             axWindowsMediaPlayer1.settings.setMode("loop", true);   //循環播放
             axWindowsMediaPlayer1.Ctlcontrols.play();
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -333,11 +336,11 @@ namespace vcs_axWindowsMediaPlayer2_new
             //移除檔案
             //axWindowsMediaPlayer1.currentPlaylist.removeItem(fileinfos[4].filepath + "\\" + fileinfos[4].filename);
 
-
             //state if (axWindowsMediaPlayer1.playState == WMPPlayState.wmppsMediaEnded)
             richTextBox1.Text += "state = " + axWindowsMediaPlayer1.playState.ToString() + "\n";
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         IWMPPlaylist playlist;
         IWMPMedia media;
@@ -367,6 +370,8 @@ namespace vcs_axWindowsMediaPlayer2_new
             axWindowsMediaPlayer1.Ctlcontrols.play();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button4_Click(object sender, EventArgs e)
         {
             if (playlist == null)
@@ -377,6 +382,8 @@ namespace vcs_axWindowsMediaPlayer2_new
             playlist = null;
 
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button5_Click(object sender, EventArgs e)
         {
@@ -392,9 +399,9 @@ namespace vcs_axWindowsMediaPlayer2_new
 
             richTextBox1.Text += "改變檔案位置\n";
             playlist.moveItem(3, 5);
-
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button6_Click(object sender, EventArgs e)
         {
@@ -410,10 +417,14 @@ namespace vcs_axWindowsMediaPlayer2_new
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button7_Click(object sender, EventArgs e)
         {
             axWindowsMediaPlayer1.Ctlcontrols.stop();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button8_Click(object sender, EventArgs e)
         {
@@ -421,8 +432,9 @@ namespace vcs_axWindowsMediaPlayer2_new
             axWindowsMediaPlayer1.settings.setMode("shuffle", true);	//隨機播放
             axWindowsMediaPlayer1.settings.setMode("shuffle", false);	//順序播放
             axWindowsMediaPlayer1.settings.setMode("loop", true);	//循環播放
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button9_Click(object sender, EventArgs e)
         {
@@ -442,8 +454,9 @@ namespace vcs_axWindowsMediaPlayer2_new
             richTextBox1.Text += "目前播放位置是 : " + trackBarValue.ToString() + " 秒\n";
 
             richTextBox1.Text += "目前播放位置是 : " + this.axWindowsMediaPlayer1.Ctlcontrols.currentPositionString + "\n";
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button10_Click(object sender, EventArgs e)
         {
@@ -452,6 +465,8 @@ namespace vcs_axWindowsMediaPlayer2_new
             axWindowsMediaPlayer1.URL = filename;
             axWindowsMediaPlayer1.Ctlcontrols.play();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button11_Click(object sender, EventArgs e)
         {
@@ -465,32 +480,37 @@ namespace vcs_axWindowsMediaPlayer2_new
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button12_Click(object sender, EventArgs e)
         {
             //無效
             axWindowsMediaPlayer1.windowlessVideo = false;   //設爲false後雙擊屏幕可以全屏
-
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button13_Click(object sender, EventArgs e)
         {
             //無效
             axWindowsMediaPlayer1.windowlessVideo = true;   //設爲false後雙擊屏幕可以全屏
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button14_Click(object sender, EventArgs e)
         {
             axWindowsMediaPlayer1.fullScreen = false; //設播放器全屏播放
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button15_Click(object sender, EventArgs e)
         {
             axWindowsMediaPlayer1.fullScreen = true; //設播放器全屏播放
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button16_Click(object sender, EventArgs e)
         {
@@ -498,25 +518,28 @@ namespace vcs_axWindowsMediaPlayer2_new
             axWindowsMediaPlayer1.settings.autoStart = true;     //自動播放
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button17_Click(object sender, EventArgs e)
         {
             //axWindowsMediaPlayer1設定URL後, 不會自動播放
             axWindowsMediaPlayer1.settings.autoStart = false;     //自動播放
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button18_Click(object sender, EventArgs e)
         {
             string filename = @"D:\vcs\astro\_DATA2\_mp3\陳盈潔_台語精選集6CD\disc3\01.南都夜曲.mp3";
             axWindowsMediaPlayer1.URL = filename;
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button19_Click(object sender, EventArgs e)
         {
 
         }
-
     }
 }
 
