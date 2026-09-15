@@ -1,5 +1,56 @@
 ﻿
+
+
 ------------------------------------------------------------
+
+
+
+------------------------------------------------------------
+
+
+
+
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+
+            // 排序
+
+            int len = fileinfos.Count;
+
+            richTextBox1.Text += "照檔名排序:\n";
+            for (int i = 0; i < len; i++)
+            {
+                //richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\t" + fileinfos[i].filepath + "\t" + fileinfos[i].fileextension + "\t" + fileinfos[i].filecreationtime.ToString() + "\n";
+                //richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\n";
+                richTextBox1.Text += fileinfos[i].filename + "\n";
+            }
+
+            richTextBox1.Text += "照大小排序(由大到小):\n";
+
+            //排序 由大到小  在return的地方多個負號
+            fileinfos.Sort((x, y) => { return -x.filesize.CompareTo(y.filesize); });
+
+            for (int i = 0; i < len; i++)
+            {
+                //richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\t" + fileinfos[i].filepath + "\t" + fileinfos[i].fileextension + "\t" + fileinfos[i].filecreationtime.ToString() + "\n";
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\n";
+            }
+
+            richTextBox1.Text += "照大小排序(由小到大):\n";
+
+            //排序 由小到大
+            fileinfos.Sort((x, y) => { return x.filesize.CompareTo(y.filesize); });
+
+            for (int i = 0; i < len; i++)
+            {
+                //richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\t" + fileinfos[i].filepath + "\t" + fileinfos[i].fileextension + "\t" + fileinfos[i].filecreationtime.ToString() + "\n";
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\n";
+            }
+
+------------------------------------------------------------
+
 請先設定欲轉出檔名的目錄
 以及欲轉出檔案的類型，
 
