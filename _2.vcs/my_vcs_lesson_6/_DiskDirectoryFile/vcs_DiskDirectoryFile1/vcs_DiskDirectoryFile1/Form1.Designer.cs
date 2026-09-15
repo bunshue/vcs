@@ -446,7 +446,6 @@
             this.bt_files07.Name = "bt_files07";
             this.bt_files07.Size = new System.Drawing.Size(200, 60);
             this.bt_files07.TabIndex = 49;
-            this.bt_files07.Text = "撈出資料夾內的jpg檔(一層)";
             this.bt_files07.UseVisualStyleBackColor = true;
             this.bt_files07.Click += new System.EventHandler(this.bt_files07_Click);
             // 
