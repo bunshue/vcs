@@ -60,14 +60,8 @@
             this.bt_clear3 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.tb_find = new System.Windows.Forms.TextBox();
-            this.button7 = new System.Windows.Forms.Button();
             this.bt_start_files2 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.bt_setup = new System.Windows.Forms.Button();
             this.button0 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
-            this.tb_shortname = new System.Windows.Forms.TextBox();
             this.lb_files = new System.Windows.Forms.Label();
             this.lb_filesize = new System.Windows.Forms.Label();
             this.lb_find = new System.Windows.Forms.Label();
@@ -411,16 +405,6 @@
             this.tb_find.Text = "maron";
             this.tb_find.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_find_KeyPress);
             // 
-            // button7
-            // 
-            this.button7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button7.Location = new System.Drawing.Point(12, 365);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(200, 50);
-            this.button7.TabIndex = 61;
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
             // bt_start_files2
             // 
             this.bt_start_files2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -432,39 +416,6 @@
             this.bt_start_files2.UseVisualStyleBackColor = true;
             this.bt_start_files2.Click += new System.EventHandler(this.bt_start_files2_Click);
             // 
-            // button8
-            // 
-            this.button8.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button8.Location = new System.Drawing.Point(12, 415);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(200, 50);
-            this.button8.TabIndex = 63;
-            this.button8.Text = "get_shortname";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
-            // 
-            // button9
-            // 
-            this.button9.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button9.Location = new System.Drawing.Point(12, 466);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(200, 50);
-            this.button9.TabIndex = 64;
-            this.button9.Text = "test";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
-            // 
-            // bt_setup
-            // 
-            this.bt_setup.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_setup.BackgroundImage")));
-            this.bt_setup.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_setup.Location = new System.Drawing.Point(463, 110);
-            this.bt_setup.Name = "bt_setup";
-            this.bt_setup.Size = new System.Drawing.Size(50, 50);
-            this.bt_setup.TabIndex = 65;
-            this.bt_setup.UseVisualStyleBackColor = true;
-            this.bt_setup.Click += new System.EventHandler(this.bt_setup_Click);
-            // 
             // button0
             // 
             this.button0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -474,26 +425,6 @@
             this.button0.TabIndex = 66;
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
-            // 
-            // button10
-            // 
-            this.button10.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button10.Location = new System.Drawing.Point(12, 522);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(200, 50);
-            this.button10.TabIndex = 67;
-            this.button10.Text = "測試shortname";
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
-            // 
-            // tb_shortname
-            // 
-            this.tb_shortname.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_shortname.Location = new System.Drawing.Point(221, 522);
-            this.tb_shortname.Name = "tb_shortname";
-            this.tb_shortname.Size = new System.Drawing.Size(306, 36);
-            this.tb_shortname.TabIndex = 68;
-            this.tb_shortname.Text = "jul-123-2.julia.mp4";
             // 
             // lb_files
             // 
@@ -531,13 +462,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(890, 591);
             this.Controls.Add(this.lb_find);
-            this.Controls.Add(this.button10);
             this.Controls.Add(this.button0);
-            this.Controls.Add(this.bt_setup);
-            this.Controls.Add(this.button9);
-            this.Controls.Add(this.button8);
             this.Controls.Add(this.bt_start_files2);
-            this.Controls.Add(this.button7);
             this.Controls.Add(this.tb_find);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.bt_clear3);
@@ -558,7 +484,6 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.tb_shortname);
             this.Controls.Add(this.lb_filesize);
             this.Controls.Add(this.lb_files);
             this.Name = "Form1";
@@ -606,15 +531,9 @@
         private System.Windows.Forms.Button bt_clear3;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.TextBox tb_find;
-        private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button bt_start_files2;
-        private System.Windows.Forms.Button button8;
         private System.Windows.Forms.CheckBox cb_compare4;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button bt_setup;
         private System.Windows.Forms.Button button0;
-        private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.TextBox tb_shortname;
         private System.Windows.Forms.Label lb_files;
         private System.Windows.Forms.Label lb_filesize;
         private System.Windows.Forms.Label lb_find;

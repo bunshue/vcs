@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_FileBrowser.Properties
+namespace vcs_TreeView2_ListView2.Properties
 {
 
 

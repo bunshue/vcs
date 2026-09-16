@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F2300F6C-8221-4452-A96E-25670F7E20F0}</ProjectGuid>
+    <ProjectGuid>{C84E58C3-153D-4F12-8BEF-2E6AB9A088FE}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_FileBrowser</RootNamespace>
-    <AssemblyName>vcs_FileBrowser</AssemblyName>
+    <RootNamespace>vcs_TreeView2_ListView2</RootNamespace>
+    <AssemblyName>vcs_TreeView2_ListView2</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

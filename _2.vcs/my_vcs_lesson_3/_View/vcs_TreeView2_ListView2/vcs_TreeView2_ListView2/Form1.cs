@@ -12,7 +12,7 @@ using System.IO;
 //文件瀏覽器
 //使用TreeView 和 ListView
 
-namespace vcs_FileBrowser
+namespace vcs_TreeView2_ListView2
 {
     public partial class Form1 : Form
     {
@@ -144,6 +144,7 @@ namespace vcs_FileBrowser
         }
     }
 }
+
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
