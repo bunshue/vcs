@@ -1387,6 +1387,105 @@ Console.WriteLine(x[4]); //o
 //                e.Graphics.DrawString(fahrenheit.ToString("0"), font, Brushes.Black, x1, y, sf);
 
 //------------------------------------------------------------  # 60個
+打印百分比
+private float ImageScale = 1.0f; //縮放比例
+            ImageScale += e.Delta * scale_per_delta;
+
+            this.Text = "縮放比例 : " + ImageScale.ToString("p0");
+
+Text = "Mandelbrot (" +
+m_Xmin.ToString("0.000000") + ", " +
+m_Ymin.ToString("0.000000") + ")-(" +
+m_Xmax.ToString("0.000000") + ", " +
+m_Ymax.ToString("0.000000") + ")";
+
+//------------------------------------------------------------  # 60個
+
+            Tension = trkTension.Value / 10f;
+            txtTension.Text = Tension.ToString("0.0");
+
+//------------------------------------------------------------  # 60個
+
+richTextBox1.Text += "year =    " +    year.ToString("00") + "\n";
+richTextBox1.Text += "month =   " +   month.ToString("00") + "\n";
+richTextBox1.Text += "mday =    " +    mday.ToString("0000") + "\n";
+richTextBox1.Text += "wday =    " +    wday.ToString() + "\n";
+richTextBox1.Text += "hour =    " +    hour.ToString("00") + "\n";
+richTextBox1.Text += "minutes = " + minutes.ToString("00") + "\n";
+richTextBox1.Text += "seconds = " + seconds.ToString("00") + "\n";
+
+richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
+
+richTextBox1.Text += receive_buffer_tmp[i].ToString("X2") + " ";
+
+richTextBox1.Text += byte_data[i].ToString("D03");
+
+//------------------------------------------------------------  # 60個
+
+                    else if (Comport_Mode == 2)  //hex mode
+                    {
+                        input = "";
+                        for (int i = 0; i < BytesToRead; i++)
+                        {
+                            input += ((int)receive_buffer[i]).ToString("X2") + " ";
+                        }
+                        richTextBox1.AppendText(input);     //打印一般文字訊息
+                        richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
+                    }
+
+48 65 78 20 6D 6F 64 65 986F 793A 5167 5BB9 0A 
+
+//------------------------------------------------------------  # 60個
+
+Color slateBlue = Color.FromName("SlateBlue");
+byte g = slateBlue.G;
+byte b = slateBlue.B;
+byte r = slateBlue.R;
+byte a = slateBlue.A;
+string text = String.Format("寫字範例\nSlate Blue has these ARGB values:\n A:{0}, " + "R:{1}, G: {2}, B {3}", new object[] { a, r, g, b });
+
+//------------------------------------------------------------  # 60個
+
+            richTextBox1.Text += "檢查IP合法性\n";
+            string[] lines = new string[4];
+            string s = ".";
+            string ip = "192.168.0.123";
+
+            lines = ip.Split(s.ToCharArray(), 4);
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (Convert.ToInt32(lines[i]) >= 255)
+                {
+                    richTextBox1.Text += "不合法\n";
+                    return;
+                }
+            }
+            richTextBox1.Text += "合法\n";
+
+//------------------------------------------------------------  # 60個
+                string[] strArray = line.Split('\t');
+                for (int i = 0; i < strArray.Length; i++)
+                {
+                    richTextBox1.Text += strArray[i] + "\n";
+                }
+//------------------------------------------------------------  # 60個
+string my_string = "   歡迎來到Myson Century!   ";
+
+string str2 = "ON-C";
+bool res = my_string.ToLower().Replace(" ", "").Contains(str2.ToLower().Replace("-", ""));
+richTextBox1.Text += "result = " + res.ToString() + "\n";
+
+
+string thumb = fpath + fn.Replace(CodecExtension, ".jpg");
 
 */
+
+
+
+
+
+
+
+
 

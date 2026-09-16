@@ -709,6 +709,7 @@ namespace vcs_DrAP
 
         private void listView1_MouseClick(object sender, MouseEventArgs e)
         {
+            int selectCount = listView1.SelectedIndices.Count;
             /*
             int selNdx;
             string fullname;
@@ -726,7 +727,7 @@ namespace vcs_DrAP
 
             selNdx = listView1.SelectedIndices[0];
             listView1.Items[selNdx].Selected = true;    //選到的項目
-            result_str += "count = " + this.listView1.SelectedIndices.Count.ToString() + "\t";
+            result_str += "count = " + selectCount.ToString() + "\t";
             result_str += "你選擇了檔名:\t" + listView1.Items[selNdx].Text + "\n";
             result_str += "資料夾:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
 
@@ -789,12 +790,13 @@ namespace vcs_DrAP
         {
             int selNdx;
             string fullname;
+            int selectCount = listView1.SelectedIndices.Count;
 
             if (flag_function == FUNCTION_FIND_SMALL_FOLDERS)
             {
                 selNdx = listView1.SelectedIndices[0];
                 listView1.Items[selNdx].Selected = true;    //選到的項目
-                //result_str += "count = " + this.listView1.SelectedIndices.Count.ToString() + "\t";
+                //result_str += "count = " + selectCount.ToString() + "\t";
                 result_str += "你選擇了資料夾:\t" + listView1.Items[selNdx].Text + "\n";
 
                 fullname = listView1.Items[selNdx].Text;
@@ -821,7 +823,7 @@ namespace vcs_DrAP
 
             selNdx = listView1.SelectedIndices[0];
             listView1.Items[selNdx].Selected = true;    //選到的項目
-            //result_str += "count = " + this.listView1.SelectedIndices.Count.ToString() + "\t";
+            //result_str += "count = " + selectCount.ToString() + "\t";
             //result_str += "你選擇了檔名:\t" + listView1.Items[selNdx].Text + "\n";
             //result_str += "資料夾:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
 
@@ -903,9 +905,10 @@ namespace vcs_DrAP
 
         private void bt_start_files_Click(object sender, EventArgs e)
         {
+            int selectCount = listView1.SelectedIndices.Count;
             /*
-            result_str += "你選擇了 : " + listView1.SelectedIndices.Count.ToString() + " 個檔案, 分別是\n";
-            for (int i = 0; i < listView1.SelectedIndices.Count; i++)
+            result_str += "你選擇了 : " + selectCount.ToString() + " 個檔案, 分別是\n";
+            for (int i = 0; i < selectCount; i++)
             {
                 result_str += listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
             }
@@ -915,14 +918,14 @@ namespace vcs_DrAP
             int selNdx;
             string all_filename = string.Empty;
 
-            if (this.listView1.SelectedIndices.Count <= 0)  //總共選擇的個數
+            if (selectCount <= 0)  //總共選擇的個數
             {
                 result_str += "無檔案\n";
                 return;
             }
 
             //result_str += "總共選了 : " + listView1.SelectedItems.Count.ToString() + " 個檔案，分別是 : \n";
-            //for (int i = 0; i < listView1.SelectedIndices.Count; i++)
+            //for (int i = 0; i < selectCount; i++)
             for (int i = 0; i < listView1.SelectedItems.Count; i++)
             {
                 selNdx = listView1.SelectedIndices[i];
@@ -959,6 +962,15 @@ namespace vcs_DrAP
 
             if (flag_search_vcs_pattern == 0)
             {
+                ProcessStartInfo pInfo = new ProcessStartInfo(target);
+                pInfo.Arguments = all_filename;
+
+                /*
+                // debug mesg
+                result_str += "target : " + target + "\n";
+                result_str += "all_filename : " + all_filename + "\n";
+                */
+
                 if (video_player_path == String.Empty)
                 {
                     all_filename = all_filename.Trim().Replace("\"", "");
@@ -968,6 +980,14 @@ namespace vcs_DrAP
                 {
                     Process.Start(video_player_path, all_filename);    //指名播放程式開啟
                 }
+
+                /*
+                using (Process process = new Process())
+                {
+                    process.StartInfo = pInfo;
+                    process.Start();
+                }
+                */
             }
             else
             {
@@ -980,9 +1000,10 @@ namespace vcs_DrAP
 
         private void bt_edit_python_files_Click(object sender, EventArgs e)
         {
+            int selectCount = listView1.SelectedIndices.Count;
             /*
-            result_str += "你選擇了 : " + listView1.SelectedIndices.Count.ToString() + " 個檔案, 分別是\n";
-            for (int i = 0; i < listView1.SelectedIndices.Count; i++)
+            result_str += "你選擇了 : " + selectCount.ToString() + " 個檔案, 分別是\n";
+            for (int i = 0; i < selectCount; i++)
             {
                 result_str += listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
             }
@@ -992,14 +1013,14 @@ namespace vcs_DrAP
             int selNdx;
             string all_filename = string.Empty;
 
-            if (this.listView1.SelectedIndices.Count <= 0)  //總共選擇的個數
+            if (selectCount <= 0)  //總共選擇的個數
             {
                 result_str += "無檔案\n";
                 return;
             }
 
             //result_str += "總共選了 : " + listView1.SelectedItems.Count.ToString() + " 個檔案，分別是 : \n";
-            //for (int i = 0; i < listView1.SelectedIndices.Count; i++)
+            //for (int i = 0; i < selectCount; i++)
             for (int i = 0; i < listView1.SelectedItems.Count; i++)
             {
                 selNdx = listView1.SelectedIndices[i];
@@ -1070,6 +1091,8 @@ namespace vcs_DrAP
 
         private void listView1_KeyDown(object sender, KeyEventArgs e)
         {
+            int selectCount = listView1.SelectedIndices.Count;
+
             //result_str += "KeyDown, 按鍵是：" + e.KeyCode + "\n";
 
             if (e.KeyCode == Keys.A)
@@ -1097,12 +1120,12 @@ namespace vcs_DrAP
             {
                 result_str += "你按了F2\n";
 
-                if (this.listView1.SelectedIndices.Count <= 0)  //總共選擇的個數
+                if (selectCount <= 0)  //總共選擇的個數
                     return;
 
                 int selNdx = listView1.SelectedIndices[0];
                 listView1.Items[selNdx].Selected = true;    //選到的項目
-                //richTextBox1.Text += "count = " + this.listView1.SelectedIndices.Count.ToString() + "\t";
+                //richTextBox1.Text += "count = " + selectCount.ToString() + "\t";
                 result_str += "你選擇了" + listView1.Items[selNdx].Text + "\t內容為：\n";
 
                 //ListViewItem t = listView1.Items[selNdx]; //相同寫法
@@ -1159,16 +1182,18 @@ namespace vcs_DrAP
 
         private void bt_delete_file_Click(object sender, EventArgs e)
         {
-            result_str += "你選擇了 : " + listView1.SelectedIndices.Count.ToString() + " 個檔案, 分別是\n";
+            int selectCount = listView1.SelectedIndices.Count;
 
-            for (int i = 0; i < listView1.SelectedIndices.Count; i++)
+            result_str += "你選擇了 : " + selectCount.ToString() + " 個檔案, 分別是\n";
+
+            for (int i = 0; i < selectCount; i++)
             {
                 result_str += listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
             }
 
             result_str += "刪除\n";
 
-            for (int i = listView1.SelectedIndices.Count - 1; i >= 0; i--)
+            for (int i = selectCount - 1; i >= 0; i--)
             {
                 result_str += "刪除檔案: " + listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
 
@@ -1993,14 +2018,16 @@ namespace vcs_DrAP
 
         private void bt_compare_Click(object sender, EventArgs e)
         {
-            if (listView1.SelectedIndices.Count != 2)
+            int selectCount = listView1.SelectedIndices.Count;
+
+            if (selectCount != 2)
             {
                 richTextBox1.Text += "必須要選取2個檔案才能比較\n";
                 return;
             }
 
-            result_str += "你選擇了 : " + listView1.SelectedIndices.Count.ToString() + " 個檔案, 分別是\n";
-            for (int i = 0; i < listView1.SelectedIndices.Count; i++)
+            result_str += "你選擇了 : " + selectCount.ToString() + " 個檔案, 分別是\n";
+            for (int i = 0; i < selectCount; i++)
             {
                 result_str += listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
             }
@@ -2009,7 +2036,7 @@ namespace vcs_DrAP
             string all_filename = string.Empty;
 
             //result_str += "總共選了 : " + listView1.SelectedItems.Count.ToString() + " 個檔案，分別是 : \n";
-            //for (int i = 0; i < listView1.SelectedIndices.Count; i++)
+            //for (int i = 0; i < selectCount; i++)
             for (int i = 0; i < listView1.SelectedItems.Count; i++)
             {
                 selNdx = listView1.SelectedIndices[i];
@@ -2361,10 +2388,11 @@ listView1.Visible = true;
 //------------------------------------------------------------  # 60個
 
             //播放 listview 多選的檔案
+int selectCount = listView1.SelectedIndices.Count;
             int selNdx;
             string all_filename = string.Empty;
             string player_path = @"C:\Program Files (x86)\DAUM\PotPlayer\PotPlayerMini.exe";
-            if (this.listView1.SelectedIndices.Count <= 0)  //總共選擇的個數
+            if (selectCount <= 0)  //總共選擇的個數
                 return;
 
             //richTextBox1.Text += "總共選了 : " + listView1.SelectedItems.Count.ToString() + " 個檔案，分別是 : \n";

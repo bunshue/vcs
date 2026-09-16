@@ -1,34 +1,16 @@
 ﻿
-
-
 ------------------------------------------------------------
 
-            //播放單一檔案
-            //axWindowsMediaPlayer1.URL = fileinfos[0].filepath + "\\" + fileinfos[0].filename;   //開啟檔案
+//播放單一檔案
+//axWindowsMediaPlayer1.URL = fileinfos[0].filepath + "\\" + fileinfos[0].filename;   //開啟檔案
 
-            //一次加入到播放清單
-            axWindowsMediaPlayer1.currentPlaylist = axWindowsMediaPlayer1.newPlaylist("播放列表", "");
-
-
+//一次加入到播放清單
+axWindowsMediaPlayer1.currentPlaylist = axWindowsMediaPlayer1.newPlaylist("播放列表", "");
 
 /*
 參考/加入參考/選 MediaInfoNET.dll
 加入/現有項目/選 MediaInfo.dll, 改屬性為 永遠複製
 */
-
-
-
-            listView1.View = View.Details;//圖示
-            listView1.GridLines = true;//網格線
-
-
-        //不用宣告長度的陣列(Array)
-        // 宣告fileinfos 為List
-        // 以下List 裡為MyFileInfo 型態
-        List<MyFileInfo> fileinfos = new List<MyFileInfo>();
-
-
-
 
 ------------------------------------------------------------
 
@@ -55,58 +37,6 @@
 即可將設定目錄下之目錄名稱及檔名
 變為純文字轉出至此編輯區。
 ------------------------------------------------------------
-
-            FileInfo fi = new FileInfo(filename);
-            richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
-            richTextBox1.Text += fi.Directory + "\n";
-            richTextBox1.Text += fi.DirectoryName + "\n";
-            // fi.FullName, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)), 
-
-------------------------------------------------------------
-
-                    FileAttributes attr = (new FileInfo(filePath)).Attributes;
-                    Console.Write("UnAuthorizedAccessException: Unable to access file. ");
-                    if ((attr & FileAttributes.ReadOnly) > 0)
-                        Console.Write("The file is read-only.");
-
-
-//------------------------------------------------------------  # 60個
-
-        void show_listView()
-        {
-            listView1.View = View.Details;  //定義列表顯示的方式
-            listView1.FullRowSelect = true; //整行一起選取
-            listView1.Clear();
-
-            listView1.GridLines = true;
-            listView1.Size = new Size(640 * 2, 480 * 2);
-
-            listView1.Columns.Add("影片1", 200, HorizontalAlignment.Left);
-            listView1.Columns.Add("大小", 50, HorizontalAlignment.Left);
-            listView1.Columns.Add("檔名1", 400, HorizontalAlignment.Left);
-            listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
-            listView1.Columns.Add("大小", 150, HorizontalAlignment.Left);
-            listView1.Columns.Add("副檔名", 100, HorizontalAlignment.Left);
-            listView1.Columns.Add("修改日期", 100, HorizontalAlignment.Left);
-            listView1.Visible = true;
-            listView1.MouseClick += new MouseEventHandler(listView1_MouseClick);
-
-            this.Controls.Add(listView1);
-
-            //加入
-        }
-
-
-//------------------------------------------------------------  # 60個
-
-            listView1.View = View.Details;  //定義列表顯示的方式
-            listView1.FullRowSelect = true; //整行一起選取
-            listView1.Clear();
-
-            //設置列名稱
-            listView1.Columns.Add("檔名", 700, HorizontalAlignment.Center);
-            listView1.Columns.Add("容量", 150, HorizontalAlignment.Center);
-            listView1.Visible = true;
 
 
 //------------------------------------------------------------  # 60個
@@ -147,6 +77,7 @@
             }
 
 //------------------------------------------------------------  # 60個
+
 //若是圖片, 秀出來
 string ext = fi.Extension.ToLower();
 if ((ext == ".bmp") || (ext == ".jpg") || (ext == ".png"))
@@ -157,68 +88,6 @@ else
 {
 	pictureBox1.Image = null;
 }
-
-
-//------------------------------------------------------------  # 60個
-
-pppp
-打印百分比
-private float ImageScale = 1.0f; //縮放比例
-            ImageScale += e.Delta * scale_per_delta;
-
-            this.Text = "縮放比例 : " + ImageScale.ToString("p0");
-
-Text = "Mandelbrot (" +
-m_Xmin.ToString("0.000000") + ", " +
-m_Ymin.ToString("0.000000") + ")-(" +
-m_Xmax.ToString("0.000000") + ", " +
-m_Ymax.ToString("0.000000") + ")";
-
-//------------------------------------------------------------  # 60個
-
-pppp
-            Tension = trkTension.Value / 10f;
-            txtTension.Text = Tension.ToString("0.0");
-
-//------------------------------------------------------------  # 60個
-
-richTextBox1.Text += "year =    " +    year.ToString("00") + "\n";
-richTextBox1.Text += "month =   " +   month.ToString("00") + "\n";
-richTextBox1.Text += "mday =    " +    mday.ToString("0000") + "\n";
-richTextBox1.Text += "wday =    " +    wday.ToString() + "\n";
-richTextBox1.Text += "hour =    " +    hour.ToString("00") + "\n";
-richTextBox1.Text += "minutes = " + minutes.ToString("00") + "\n";
-richTextBox1.Text += "seconds = " + seconds.ToString("00") + "\n";
-
-richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
-
-richTextBox1.Text += receive_buffer_tmp[i].ToString("X2") + " ";
-
-richTextBox1.Text += byte_data[i].ToString("D03");
-
-//------------------------------------------------------------  # 60個
-
-                    else if (Comport_Mode == 2)  //hex mode
-                    {
-                        input = "";
-                        for (int i = 0; i < BytesToRead; i++)
-                        {
-                            input += ((int)receive_buffer[i]).ToString("X2") + " ";
-                        }
-                        richTextBox1.AppendText(input);     //打印一般文字訊息
-                        richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
-                    }
-
-48 65 78 20 6D 6F 64 65 986F 793A 5167 5BB9 0A 
-
-//------------------------------------------------------------  # 60個
-
-Color slateBlue = Color.FromName("SlateBlue");
-byte g = slateBlue.G;
-byte b = slateBlue.B;
-byte r = slateBlue.R;
-byte a = slateBlue.A;
-string text = String.Format("寫字範例\nSlate Blue has these ARGB values:\n A:{0}, " + "R:{1}, G: {2}, B {3}", new object[] { a, r, g, b });
 
 //------------------------------------------------------------  # 60個
 
@@ -313,11 +182,6 @@ private Thread thread_ex = null;
 
 //------------------------------------------------------------  # 60個
 
-            Console.WriteLine("例外處理類型   :{0}", ex.GetType().ToString());
-            Console.WriteLine("錯誤訊息       :{0}", ex.Message);
-            Console.WriteLine("程式或物件名稱 :{0}", ex.Source);
-            Console.WriteLine("產生錯誤程序   :{0}", ex.TargetSite.Name);
-            Console.WriteLine("錯誤之處       :{0}", ex.StackTrace);
 
 //------------------------------------------------------------  # 60個
 
@@ -3631,46 +3495,6 @@ Display_Cam1
         }		
 
 //------------------------------------------------------------  # 60個
-ssss
-        private void button1_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "檢查IP合法性\n";
-            string[] lines = new string[4];
-            string s = ".";
-            string ip = "192.168.0.123";
-
-            lines = ip.Split(s.ToCharArray(), 4);
-
-            for (int i = 0; i < 4; i++)
-            {
-                if (Convert.ToInt32(lines[i]) >= 255)
-                {
-                    richTextBox1.Text += "不合法\n";
-                    return;
-                }
-            }
-            richTextBox1.Text += "合法\n";
-        }
-
-ssss
-                string[] strArray = line.Split('\t');
-                for (int i = 0; i < strArray.Length; i++)
-                {
-                    richTextBox1.Text += strArray[i] + "\n";
-                }
-
-ssss
-
-string my_string = "   歡迎來到Myson Century!   ";
-
-string str2 = "ON-C";
-bool res = my_string.ToLower().Replace(" ", "").Contains(str2.ToLower().Replace("-", ""));
-richTextBox1.Text += "result = " + res.ToString() + "\n";
-
-ssss
-string thumb = fpath + fn.Replace(CodecExtension, ".jpg");
-
-//------------------------------------------------------------  # 60個
 
 如何清除播放清單
 顯示播放清單的內容
@@ -3750,8 +3574,6 @@ union cdrom_addr
 	int			lba;
 };
 
-
-
 typedef struct {
     int data;
     int audio;
@@ -3759,10 +3581,6 @@ typedef struct {
     int xa;
     long error;
 } tracktype;
-
-
-
-
 
 ---------util.h---------
 // Define Data type
@@ -3829,7 +3647,6 @@ void displayImage(GLuint texture)
 
 void runAutoTest(int argc, char** argv, const char* filename, int kernel_param)
 {
-
 
 
 //這邊擷取出來讀取bmp的部分
@@ -4109,6 +3926,7 @@ vcs的textBox、richTextBox顯示文字都是用Unicode顯示，這樣才可以�
 
 //------------------------------------------------------------  # 60個
 
+gps
 經緯度距離計算
 http://m4.hhlink.com/%E7%BB%8F%E7%BA%AC%E5%BA%A6
 

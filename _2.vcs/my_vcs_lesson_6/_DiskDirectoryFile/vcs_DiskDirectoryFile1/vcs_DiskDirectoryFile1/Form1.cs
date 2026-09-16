@@ -568,6 +568,16 @@ namespace vcs_DiskDirectoryFile1
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
+            /*
+            FileAttributes attr = (new FileInfo(filePath)).Attributes;
+            Console.Write("UnAuthorizedAccessException: Unable to access file. ");
+            if ((attr & FileAttributes.ReadOnly) > 0)
+                Console.Write("The file is read-only.");
+            */
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+
             //設定檔案屬性
             filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_貓咪\cat1.png";
 
@@ -679,6 +689,10 @@ namespace vcs_DiskDirectoryFile1
 
             //------------------------------------------------------------  # 60個
             */
+
+            //Path.Combine()
+            string filename3 = Path.Combine(Application.StartupPath, @"..\..\Form1.cs");
+            richTextBox1.Text += "filename : " + filename3 + "\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -1674,8 +1688,8 @@ namespace vcs_DiskDirectoryFile1
             ch1.Width = 330;
             listView1.Columns.Add(ch1);
 
-            listView1.GridLines = true;
-            listView1.View = View.Details;
+            listView1.GridLines = true;  // 網格線
+            listView1.View = View.Details;  //定義列表顯示的方式
 
             listView1.Items.Clear();
 
@@ -1851,7 +1865,6 @@ namespace vcs_DiskDirectoryFile1
                 richTextBox1.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料\n";
             }
 
-
             //fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
 
             //richTextBox1.Text += "Name\tFolderName\tExt\tLength\tTime\n";
@@ -1861,20 +1874,14 @@ namespace vcs_DiskDirectoryFile1
                 //fileinfos[i].filename, ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize)), 
                 //fileinfos[i].filepath, fileinfos[i].fileextension, fileinfos[i].filecreationtime) + "\n";
 
-
                 //richTextBox1.Text += fileinfos[i].filename + "\t" + fileinfos[i].filepath + "\t" + fileinfos[i].fileextension + "\t" + fileinfos[i].filesize + "\t" + fileinfos[i].filecreationtime + "\n";
-
 
                 //richTextBox1.Text += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
                 //fi.FullName, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
 
-
                 //richTextBox1.Text += string.Format("{0,-60}{1,-60}{2,-60}{3,-60}{4,-60}", fileinfos[i].filename, fileinfos[i].filename, fileinfos[i].filename, fileinfos[i].filename, fileinfos[i].filename);
                 //fi.FullName, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
                 richTextBox1.Text += string.Format("{0,-70}{1,-10}{2,-15}{3,-60}{4,-20}", fileinfos[i].filename, fileinfos[i].fileextension, ByteConversionTBGBMBKB(fileinfos[i].filesize), fileinfos[i].filepath, fileinfos[i].filecreationtime) + "\n";
-
-
-
 
                 //ListViewItem i1 = new ListViewItem(fileinfos[i].filename);
             }
@@ -2252,6 +2259,9 @@ namespace vcs_DiskDirectoryFile1
             }
         }
 
+        //不用宣告長度的陣列(Array)
+        // 宣告fileinfos 為List
+        // 以下List 裡為MyFileInfo 型態
         List<MyFileInfo> fileinfos = new List<MyFileInfo>();
 
         private void bt_files10_Click(object sender, EventArgs e)
@@ -2269,11 +2279,12 @@ namespace vcs_DiskDirectoryFile1
 
             // 各種方法匯出多層 同一資料夾
 
-            // 資料夾
+            richTextBox1.Text += "方法1\n";
             ProcessDirectory(foldername);
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
+            richTextBox1.Text += "方法2\n";
             ProcessDirectoryInfo(foldername);
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
@@ -2552,11 +2563,12 @@ namespace vcs_DiskDirectoryFile1
         private void bt_files18_Click(object sender, EventArgs e)
         {
             //獲得指定目錄下的所有文檔
-            //獲得指定目錄下的所有文檔
+
             total_size1 = 0;
             no_files = 0;
             no_folders = 0;
 
+            //設置列名稱
             listView1.Columns.Add("名稱", 200, HorizontalAlignment.Center);
             listView1.Columns.Add("大小", 200, HorizontalAlignment.Center);
             listView1.Columns.Add("修改日期", 200, HorizontalAlignment.Center);
@@ -3078,12 +3090,6 @@ richTextBox1.Text += "改名後的長檔名 : " + Path.Combine(foldername, filen
 
 //------------------------------------------------------------  # 60個
 
-//Path.Combine()
-string filename = Path.Combine(Application.StartupPath, @"..\..\Form1.cs");
-richTextBox1.Text += "filename old = " + filename + "\n";
-
-//------------------------------------------------------------  # 60個
-
             int len = fileinfos.Count;
 
             richTextBox1.Text += "照檔名排序:\n";
@@ -3102,15 +3108,43 @@ richTextBox1.Text += "filename old = " + filename + "\n";
 
 //------------------------------------------------------------  # 60個
 
-//            fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
-
-//------------------------------------------------------------  # 60個
-
 fileinfos[i].filecreationtime;
 fileinfos[i].filepath;
 
 bool res;
 res = fi.FullName.ToLower().Replace(" ", "").Contains(tb_search_text_pattern.Text.ToLower().Replace("-", ""));
+
+//------------------------------------------------------------  # 60個
+
+        void show_listView()
+        {
+            listView1.View = View.Details;  // 定義列表顯示的方式
+            listView1.FullRowSelect = true;  // 整行一起選取
+            listView1.Clear();
+
+            listView1.GridLines = true;  // 網格線
+            listView1.Size = new Size(640 * 2, 480 * 2);
+
+            //設置列名稱
+            listView1.Columns.Add("影片1", 200, HorizontalAlignment.Left);
+            listView1.Columns.Add("大小", 50, HorizontalAlignment.Left);
+            listView1.Columns.Add("檔名1", 400, HorizontalAlignment.Left);
+            listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
+            listView1.Columns.Add("大小", 150, HorizontalAlignment.Left);
+            listView1.Columns.Add("副檔名", 100, HorizontalAlignment.Left);
+            listView1.Columns.Add("修改日期", 100, HorizontalAlignment.Left);
+            listView1.MouseClick += new MouseEventHandler(listView1_MouseClick);
+
+            this.Controls.Add(listView1);
+
+            //加入
+        }
+
+//------------------------------------------------------------  # 60個
+
+
+//------------------------------------------------------------  # 60個
+
 
 */
 

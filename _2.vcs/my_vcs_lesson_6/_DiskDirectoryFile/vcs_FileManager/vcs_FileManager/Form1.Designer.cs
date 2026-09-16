@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -40,12 +39,9 @@
             this.cb_compare0 = new System.Windows.Forms.CheckBox();
             this.cb_compare2 = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.cb_compare4 = new System.Windows.Forms.CheckBox();
             this.cb_compare1 = new System.Windows.Forms.CheckBox();
-            this.cb_compare3 = new System.Windows.Forms.CheckBox();
             this.listView1 = new System.Windows.Forms.ListView();
             this.button5 = new System.Windows.Forms.Button();
-            this.bt_start_files = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.bt_clear_dir = new System.Windows.Forms.Button();
             this.bt_remove_dir = new System.Windows.Forms.Button();
@@ -60,7 +56,6 @@
             this.bt_clear3 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.tb_find = new System.Windows.Forms.TextBox();
-            this.bt_start_files2 = new System.Windows.Forms.Button();
             this.button0 = new System.Windows.Forms.Button();
             this.lb_files = new System.Windows.Forms.Label();
             this.lb_filesize = new System.Windows.Forms.Label();
@@ -105,7 +100,7 @@
             // bt_clear1
             // 
             this.bt_clear1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear1.Location = new System.Drawing.Point(659, 170);
+            this.bt_clear1.Location = new System.Drawing.Point(501, 164);
             this.bt_clear1.Name = "bt_clear1";
             this.bt_clear1.Size = new System.Drawing.Size(72, 36);
             this.bt_clear1.TabIndex = 13;
@@ -116,7 +111,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(643, 134);
+            this.richTextBox1.Location = new System.Drawing.Point(485, 128);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 12;
@@ -125,7 +120,7 @@
             // bt_clear2
             // 
             this.bt_clear2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear2.Location = new System.Drawing.Point(441, 403);
+            this.bt_clear2.Location = new System.Drawing.Point(501, 256);
             this.bt_clear2.Name = "bt_clear2";
             this.bt_clear2.Size = new System.Drawing.Size(72, 36);
             this.bt_clear2.TabIndex = 15;
@@ -136,7 +131,7 @@
             // richTextBox2
             // 
             this.richTextBox2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox2.Location = new System.Drawing.Point(433, 390);
+            this.richTextBox2.Location = new System.Drawing.Point(485, 234);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.Size = new System.Drawing.Size(100, 100);
             this.richTextBox2.TabIndex = 14;
@@ -175,9 +170,7 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.cb_compare4);
             this.groupBox3.Controls.Add(this.cb_compare1);
-            this.groupBox3.Controls.Add(this.cb_compare3);
             this.groupBox3.Controls.Add(this.cb_compare2);
             this.groupBox3.Controls.Add(this.cb_compare0);
             this.groupBox3.Location = new System.Drawing.Point(223, 118);
@@ -186,18 +179,6 @@
             this.groupBox3.TabIndex = 13;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "比較";
-            // 
-            // cb_compare4
-            // 
-            this.cb_compare4.AutoSize = true;
-            this.cb_compare4.Checked = true;
-            this.cb_compare4.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_compare4.Location = new System.Drawing.Point(20, 100);
-            this.cb_compare4.Name = "cb_compare4";
-            this.cb_compare4.Size = new System.Drawing.Size(84, 16);
-            this.cb_compare4.TabIndex = 4;
-            this.cb_compare4.Text = "僅影音檔案";
-            this.cb_compare4.UseVisualStyleBackColor = true;
             // 
             // cb_compare1
             // 
@@ -212,21 +193,10 @@
             this.cb_compare1.UseVisualStyleBackColor = true;
             this.cb_compare1.CheckedChanged += new System.EventHandler(this.check_cb_compare);
             // 
-            // cb_compare3
-            // 
-            this.cb_compare3.AutoSize = true;
-            this.cb_compare3.Enabled = false;
-            this.cb_compare3.Location = new System.Drawing.Point(20, 80);
-            this.cb_compare3.Name = "cb_compare3";
-            this.cb_compare3.Size = new System.Drawing.Size(72, 16);
-            this.cb_compare3.TabIndex = 2;
-            this.cb_compare3.Text = "檔案內容";
-            this.cb_compare3.UseVisualStyleBackColor = true;
-            // 
             // listView1
             // 
             this.listView1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.listView1.Location = new System.Drawing.Point(643, 18);
+            this.listView1.Location = new System.Drawing.Point(485, 12);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(100, 100);
             this.listView1.TabIndex = 17;
@@ -246,18 +216,6 @@
             this.button5.Text = "搜尋特定檔名";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // bt_start_files
-            // 
-            this.bt_start_files.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_start_files.BackgroundImage")));
-            this.bt_start_files.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_start_files.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_start_files.Location = new System.Drawing.Point(463, 10);
-            this.bt_start_files.Name = "bt_start_files";
-            this.bt_start_files.Size = new System.Drawing.Size(50, 50);
-            this.bt_start_files.TabIndex = 19;
-            this.bt_start_files.UseVisualStyleBackColor = true;
-            this.bt_start_files.Click += new System.EventHandler(this.bt_start_files_Click);
             // 
             // listBox1
             // 
@@ -376,7 +334,7 @@
             // bt_clear3
             // 
             this.bt_clear3.Font = new System.Drawing.Font("細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear3.Location = new System.Drawing.Point(659, 52);
+            this.bt_clear3.Location = new System.Drawing.Point(501, 46);
             this.bt_clear3.Name = "bt_clear3";
             this.bt_clear3.Size = new System.Drawing.Size(72, 36);
             this.bt_clear3.TabIndex = 58;
@@ -404,17 +362,6 @@
             this.tb_find.TabIndex = 60;
             this.tb_find.Text = "maron";
             this.tb_find.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_find_KeyPress);
-            // 
-            // bt_start_files2
-            // 
-            this.bt_start_files2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_start_files2.Location = new System.Drawing.Point(463, 60);
-            this.bt_start_files2.Name = "bt_start_files2";
-            this.bt_start_files2.Size = new System.Drawing.Size(50, 50);
-            this.bt_start_files2.TabIndex = 62;
-            this.bt_start_files2.Text = "全選 播放";
-            this.bt_start_files2.UseVisualStyleBackColor = true;
-            this.bt_start_files2.Click += new System.EventHandler(this.bt_start_files2_Click);
             // 
             // button0
             // 
@@ -460,10 +407,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(890, 591);
+            this.ClientSize = new System.Drawing.Size(637, 591);
             this.Controls.Add(this.lb_find);
             this.Controls.Add(this.button0);
-            this.Controls.Add(this.bt_start_files2);
             this.Controls.Add(this.tb_find);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.bt_clear3);
@@ -472,7 +418,6 @@
             this.Controls.Add(this.bt_remove_dir);
             this.Controls.Add(this.bt_add_dir);
             this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.bt_start_files);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.button4);
@@ -512,11 +457,9 @@
         private System.Windows.Forms.CheckBox cb_compare0;
         private System.Windows.Forms.CheckBox cb_compare2;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.CheckBox cb_compare3;
         private System.Windows.Forms.CheckBox cb_compare1;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button bt_start_files;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button bt_clear_dir;
         private System.Windows.Forms.Button bt_remove_dir;
@@ -531,8 +474,6 @@
         private System.Windows.Forms.Button bt_clear3;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.TextBox tb_find;
-        private System.Windows.Forms.Button bt_start_files2;
-        private System.Windows.Forms.CheckBox cb_compare4;
         private System.Windows.Forms.Button button0;
         private System.Windows.Forms.Label lb_files;
         private System.Windows.Forms.Label lb_filesize;
