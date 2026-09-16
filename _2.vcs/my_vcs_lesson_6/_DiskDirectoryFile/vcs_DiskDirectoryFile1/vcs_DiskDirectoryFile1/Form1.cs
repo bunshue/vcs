@@ -675,7 +675,6 @@ namespace vcs_DiskDirectoryFile1
             string ccc = Path.GetDirectoryName(filename);
             richTextBox1.Text += "ccc : " + ccc + "\n";
             string filename2 = "picture1111.jpg";
-
             string new_filename = Path.Combine(Path.GetDirectoryName(filename), filename2);
             richTextBox1.Text += "new_filename : " + new_filename + "\n";
 
@@ -797,14 +796,14 @@ namespace vcs_DiskDirectoryFile1
 
             //------------------------------------------------------------  # 60個
 
-            string Path = @"D:/_git/vcs/_1.data/______test_files1/aaaa/bbbb";
-            if (Directory.Exists(Path) == false)  // 確認資料夾是否存在
+            string foldername = @"D:/_git/vcs/_1.data/______test_files1/aaaa/bbbb";
+            if (Directory.Exists(foldername) == false)  // 確認資料夾是否存在
             {
-                richTextBox1.Text += "資料夾: " + Path + " 不存在\n";
+                richTextBox1.Text += "資料夾: " + foldername + " 不存在\n";
             }
             else
             {
-                richTextBox1.Text += "資料夾: " + Path + " 存在\n";
+                richTextBox1.Text += "資料夾: " + foldername + " 存在\n";
             }
 
             //------------------------------------------------------------  # 60個
@@ -824,7 +823,7 @@ namespace vcs_DiskDirectoryFile1
             //------------------------------------------------------------  # 60個
 
             //一般文件名按顺序排
-            string foldername = @"D:\_git\vcs\_1.data\______test_files1\";
+            foldername = @"D:\_git\vcs\_1.data\______test_files1\";
 
             string[] filenames = Directory.GetFileSystemEntries(foldername, "*.png");
             show_filenames(filenames);
@@ -832,32 +831,32 @@ namespace vcs_DiskDirectoryFile1
             //------------------------------------------------------------  # 60個
 
             //刪除資料夾
-            Path = @"D:/_git/vcs/_1.data/______test_files_file_name2";
+            foldername = @"D:/_git/vcs/_1.data/______test_files_file_name2";
             /*
-            if (Directory.Exists(Path) == false)  // 確認資料夾是否存在
-                richTextBox1.Text += "資料夾: " + Path + " 不存在，不能刪除\n";
+            if (Directory.Exists(foldername) == false)  // 確認資料夾是否存在
+                richTextBox1.Text += "資料夾: " + foldername + " 不存在，不能刪除\n";
             else
             {
-                Directory.Exists(Path);  // 確認資料夾是否存在
-                richTextBox1.Text += "已刪除資料夾: " + Path + "\n";
+                Directory.Exists(foldername);  // 確認資料夾是否存在
+                richTextBox1.Text += "已刪除資料夾: " + foldername + "\n";
             }
             */
-            if (Directory.Exists(Path) == true)  // 確認資料夾是否存在
+            if (Directory.Exists(foldername) == true)  // 確認資料夾是否存在
             {
                 try
                 {
-                    Directory.Delete(Path, true);   //recurrsive
-                    //Directory.Delete(Path, false);   //not recurrsive
-                    richTextBox1.Text += "已刪除資料夾" + Path + "\n";
+                    Directory.Delete(foldername, true);   //recurrsive
+                    //Directory.Delete(foldername, false);   //not recurrsive
+                    richTextBox1.Text += "已刪除資料夾" + foldername + "\n";
                 }
                 catch
                 {
-                    richTextBox1.Text += "無法刪除資料夾" + Path + "\n";
+                    richTextBox1.Text += "無法刪除資料夾" + foldername + "\n";
                 }
             }
             else
             {
-                richTextBox1.Text += "資料夾: " + Path + " 不存在，不能刪除\n";
+                richTextBox1.Text += "資料夾: " + foldername + " 不存在，不能刪除\n";
             }
 
             //------------------------------------------------------------  # 60個
@@ -924,16 +923,16 @@ namespace vcs_DiskDirectoryFile1
             //------------------------------------------------------------  # 60個
 
             //刪除資料夾
-            foldername = @"D:/_git/vcs/_1.data/______test_files_file_name2";
+            string delete_foldername = @"D:/_git/vcs/_1.data/______test_files_file_name2";
 
-            if (Directory.Exists(foldername) == true)  // 確認資料夾是否存在
+            if (Directory.Exists(delete_foldername) == true)  // 確認資料夾是否存在
             {
-                richTextBox1.Text += "刪除資料夾: " + foldername + "\n";
+                richTextBox1.Text += "刪除資料夾: " + delete_foldername + "\n";
                 try
                 {
-                    DeleteDirectory(foldername);
-                    //Directory.Delete(foldername, true);   //recurrsive
-                    //Directory.Delete(foldername, false);   //not recurrsive
+                    DeleteDirectory(delete_foldername);
+                    //Directory.Delete(delete_foldername, true);   //recurrsive
+                    //Directory.Delete(delete_foldername, false);   //not recurrsive
                     richTextBox1.Text += "OK\n";
                 }
                 catch
@@ -943,7 +942,7 @@ namespace vcs_DiskDirectoryFile1
             }
             else
             {
-                richTextBox1.Text += "資料夾: " + foldername + " 不存在，不能刪除\n";
+                richTextBox1.Text += "資料夾: " + delete_foldername + " 不存在，不能刪除\n";
             }
         }
 
@@ -1302,10 +1301,8 @@ namespace vcs_DiskDirectoryFile1
 
             DirectoryInfo dinfo = new DirectoryInfo(foldername);
 
-            richTextBox1.Text += "遍歷文件夾\n";
-
             // 找資料夾, 一層
-            DirectoryInfo[] dis = dinfo.GetDirectories();
+            DirectoryInfo[] dis = dinfo.GetDirectories();  // 傳回目前目錄的子目錄, 一層
             foreach (DirectoryInfo di in dis)
             {
                 if (di.CreationTime < Convert.ToDateTime(dt.AddDays(-(dt.Day) + 1)))
@@ -1395,9 +1392,9 @@ namespace vcs_DiskDirectoryFile1
             richTextBox1.Text += fi.Length.ToString() + "\n";
             richTextBox1.Text += fi.Length.ToFileSizeApi() + "\n";
 
-            int ccc = 12345678;   // double 才可以用 ToFileSize
-            richTextBox1.Text += "ccc = " + ccc.ToString() + "\n";
-            richTextBox1.Text += "ccc = " + ((double)ccc).ToFileSize() + "\n";
+            int file_size = 12345678;   // double 才可以用 ToFileSize
+            richTextBox1.Text += "file_size = " + file_size.ToString() + "\n";
+            richTextBox1.Text += "file_size = " + ((double)file_size).ToFileSize() + "\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -2289,24 +2286,6 @@ namespace vcs_DiskDirectoryFile1
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-            //GetDirectories(), GetFiles()
-
-            DirectoryInfo dinfo = new DirectoryInfo(foldername);
-
-            // 找資料夾, 一層
-            DirectoryInfo[] dis = dinfo.GetDirectories();  // 傳回目前目錄的子目錄, 一層
-            foreach (DirectoryInfo di in dis)
-            {
-                // 找檔案, 一層
-                FileInfo[] fis = di.GetFiles();  // 由DI取得FI陣列, 單層檔案資訊
-                foreach (FileInfo fi in fis)
-                {
-                    get_FileInfo(fi);
-                }
-            }
-
-            //------------------------------------------------------------  # 60個
-
             //撈出資料夾內的檔案(一層), 所有檔案 / 限定 *.txt
 
             foldername = @"D:\_git\vcs\_1.data\______test_files3";
@@ -2470,12 +2449,10 @@ namespace vcs_DiskDirectoryFile1
             FileInfo fi = new FileInfo(filename);
             if (fi.Exists == true)      //確認檔案是否存在
             {
-                richTextBox1.Text += "檔案大小：" + fi.Length.ToString() + Environment.NewLine;
+                richTextBox1.Text += "檔案大小：" + fi.Length.ToString() + "\n";
                 filesize = fi.Length;
 
                 Stopwatch stopwatch = new Stopwatch();
-
-                // Begin timing
                 stopwatch.Start();
 
                 FileStream sourceFile = new FileStream(filename, FileMode.Open, FileAccess.Read);
@@ -2505,7 +2482,6 @@ namespace vcs_DiskDirectoryFile1
                 sourceFile.Close();
                 targetFile.Close();
 
-                // Stop timing
                 stopwatch.Stop();
                 richTextBox1.Text += "檔案大小: " + (filesize / 1024 / 1024).ToString() + " MB\n";
                 richTextBox1.Text += "複製完畢！ 耗時: " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
@@ -2681,23 +2657,22 @@ namespace vcs_DiskDirectoryFile1
 
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
-            var GetFileName = Path.GetFileName(filename);
-            var GetFileNameWithoutExtension = Path.GetFileNameWithoutExtension(filename);
-            var GetExtension = Path.GetExtension(filename);
-            var GetDirectoryName = Path.GetDirectoryName(filename);
-            var GetFullPath = Path.GetFullPath(filename);
+            string GetFileName = Path.GetFileName(filename);
+            string GetFileNameWithoutExtension = Path.GetFileNameWithoutExtension(filename);
+            string GetExtension = Path.GetExtension(filename);
+            string GetDirectoryName = Path.GetDirectoryName(filename);
+            string GetFullPath = Path.GetFullPath(filename);
+            string GetPathRoot = Path.GetPathRoot(filename);
+            string GetRandomFileName = Path.GetRandomFileName();
 
-            var GetPathRoot = Path.GetPathRoot(filename);
-            var GetRandomFileName = Path.GetRandomFileName();
-
-            richTextBox1.Text += "filename\t" + filename + "\n";
-            richTextBox1.Text += "GetFullPath\t" + GetFullPath + "\n";
-            richTextBox1.Text += "GetDirectoryName\t" + GetDirectoryName + "\n";
-            richTextBox1.Text += "GetFileName\t" + GetFileName + "\n";
-            richTextBox1.Text += "GetFileNameWithoutExtension\t" + GetFileNameWithoutExtension + "\n";
-            richTextBox1.Text += "GetExtension\t" + GetExtension + "\n";
-            richTextBox1.Text += "GetPathRoot\t" + GetPathRoot + "\n";
-            richTextBox1.Text += "GetRandomFileName\t" + GetRandomFileName + "\n";
+            richTextBox1.Text += "filename : " + filename + "\n";
+            richTextBox1.Text += "GetFullPath : " + GetFullPath + "\n";
+            richTextBox1.Text += "GetDirectoryName : " + GetDirectoryName + "\n";
+            richTextBox1.Text += "GetFileName : " + GetFileName + "\n";
+            richTextBox1.Text += "GetFileNameWithoutExtension : " + GetFileNameWithoutExtension + "\n";
+            richTextBox1.Text += "GetExtension : " + GetExtension + "\n";
+            richTextBox1.Text += "GetPathRoot : " + GetPathRoot + "\n";
+            richTextBox1.Text += "GetRandomFileName : " + GetRandomFileName + "\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -2827,47 +2802,27 @@ namespace vcs_DiskDirectoryFile1
             else
             {
                 //由短檔案名取的短資料夾名
-                richTextBox1.Text += "資料夾：" + fi.Directory + "\n";
-                richTextBox1.Text += "資料夾：" + fi.Directory.Parent + "\n";
-                richTextBox1.Text += "資料夾：" + fi.DirectoryName + "\n";
+
                 richTextBox1.Text += "檔名：" + fi.Name + "\n";
                 richTextBox1.Text += "全檔名：" + fi.FullName + "\n";
                 richTextBox1.Text += "副檔名：" + fi.Extension + "\n";
                 richTextBox1.Text += "檔案大小：" + fi.Length.ToString() + "\n";
                 richTextBox1.Text += "檔案大小：" + Convert.ToDouble(fi.Length / 1024).ToString() + " KB\n";
+                richTextBox1.Text += "檔案大小：" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+                richTextBox1.Text += "資料夾1：" + fi.Directory + "\n";
+                richTextBox1.Text += "資料夾2：" + fi.Directory.Parent + "\n";
+                richTextBox1.Text += "資料夾3：" + fi.DirectoryName + "\n";
                 richTextBox1.Text += "建立時間1：" + fi.CreationTime.ToString() + "\n";
                 richTextBox1.Text += "建立時間2：" + fi.CreationTimeUtc.ToString() + "\n";
+                richTextBox1.Text += "CreationTime : " + fi.CreationTime + "\n";
+                richTextBox1.Text += "CreationTimeUtc : " + fi.CreationTimeUtc + "\n";
                 richTextBox1.Text += "最近修改時間：" + fi.LastWriteTime.ToString() + "\n";
                 richTextBox1.Text += "最近修改時間：" + fi.LastWriteTime.ToShortDateString() + "\n";
                 richTextBox1.Text += "最近修改時間：" + fi.LastWriteTimeUtc.ToString() + "\n";
-
-                richTextBox1.Text += "  存取日期：" + fi.LastAccessTime + "\n";
-                richTextBox1.Text += "  日期：" + fi.LastAccessTimeUtc + "\n";
-                richTextBox1.Text += "檔案大小：" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
-                richTextBox1.Text += "  屬性：" + fi.Attributes + "\n";
-                richTextBox1.Text += "  唯讀：" + fi.IsReadOnly + "\n";
-
-                richTextBox1.Text += "檔名：" + fi.Name + "\n";
-                richTextBox1.Text += "檔案大小：" + fi.Length.ToString() + "\n";
-                richTextBox1.Text += "建立時間1：" + fi.CreationTime.ToString() + "\n";
-                richTextBox1.Text += "建立時間2：" + fi.CreationTimeUtc.ToString() + "\n";
-                richTextBox1.Text += "最近寫入時間：" + fi.LastWriteTime.ToString() + "\n";
-                richTextBox1.Text += "FullName :" + fi.FullName + "\n";
-                richTextBox1.Text += "Directory :" + fi.Directory + "\n";
-                richTextBox1.Text += "DirectoryName :" + fi.DirectoryName + "\n";
-                richTextBox1.Text += "Extension :" + fi.Extension + "\n";  // 取得副檔名
-                richTextBox1.Text += "Length :" + fi.Length.ToString() + "\n";
-                //C# 取得檔案建立日期,及最後修改日期 
-                richTextBox1.Text += "檔案建立日期" + fi.CreationTime.ToString() + "\n";
-                richTextBox1.Text += "檔案最後修改日期" + fi.LastWriteTime.ToString() + "\n";
-                //C# 取得檔案路徑、副檔名、檔案大小
-                richTextBox1.Text += "IsReadOnly : " + fi.IsReadOnly + "\n";
-                richTextBox1.Text += "CreationTime : " + fi.CreationTime + "\n";
-                richTextBox1.Text += "CreationTimeUtc : " + fi.CreationTimeUtc + "\n";
-                richTextBox1.Text += "LastAccessTime : " + fi.LastAccessTime + "\n";
-                richTextBox1.Text += "LastAccessTimeUtc : " + fi.LastAccessTimeUtc + "\n";
-                richTextBox1.Text += "LastWriteTime : " + fi.LastWriteTime + "\n";
-                richTextBox1.Text += "LastWriteTimeUtc : " + fi.LastWriteTimeUtc + "\n";
+                richTextBox1.Text += "存取日期：" + fi.LastAccessTime + "\n";
+                richTextBox1.Text += "存取日期：" + fi.LastAccessTimeUtc + "\n";
+                richTextBox1.Text += "屬性：" + fi.Attributes + "\n";
+                richTextBox1.Text += "唯讀：" + fi.IsReadOnly + "\n";
 
                 string fileSize = (fi.Length / 1024).ToString() + " KB";
                 richTextBox1.Text += "fileSize = " + fileSize + "\n";
@@ -2884,14 +2839,15 @@ namespace vcs_DiskDirectoryFile1
             DirectoryInfo dinfo = new DirectoryInfo(foldername);
 
             // 找資料夾, 一層
-            DirectoryInfo[] dis = dinfo.GetDirectories();
+            DirectoryInfo[] dis = dinfo.GetDirectories();  // 傳回目前目錄的子目錄, 一層
             foreach (DirectoryInfo di in dis)
             {
                 get_DirectoryInfo(di);
             }
 
             // 找檔案, 一層
-            foreach (FileInfo fi in dinfo.GetFiles())
+            FileInfo[] fis = dinfo.GetFiles();  // 由DI取得FI陣列, 單層檔案資訊
+            foreach (FileInfo fi in fis)
             {
                 get_FileInfo(fi);
             }
@@ -3142,9 +3098,7 @@ res = fi.FullName.ToLower().Replace(" ", "").Contains(tb_search_text_pattern.Tex
 
 //------------------------------------------------------------  # 60個
 
-
-//------------------------------------------------------------  # 60個
-
+//GetDirectories(), GetFiles()
 
 */
 
