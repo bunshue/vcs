@@ -3,51 +3,41 @@
 
 ------------------------------------------------------------
 
+            //播放單一檔案
+            //axWindowsMediaPlayer1.URL = fileinfos[0].filepath + "\\" + fileinfos[0].filename;   //開啟檔案
+
+            //一次加入到播放清單
+            axWindowsMediaPlayer1.currentPlaylist = axWindowsMediaPlayer1.newPlaylist("播放列表", "");
+
+
+
+/*
+參考/加入參考/選 MediaInfoNET.dll
+加入/現有項目/選 MediaInfo.dll, 改屬性為 永遠複製
+*/
+
+
+
+            listView1.View = View.Details;//圖示
+            listView1.GridLines = true;//網格線
+
+
+        //不用宣告長度的陣列(Array)
+        // 宣告fileinfos 為List
+        // 以下List 裡為MyFileInfo 型態
+        List<MyFileInfo> fileinfos = new List<MyFileInfo>();
+
+
 
 
 ------------------------------------------------------------
 
 
-
-
 ------------------------------------------------------------
 
 
 ------------------------------------------------------------
 
-            // 排序
-
-            int len = fileinfos.Count;
-
-            richTextBox1.Text += "照檔名排序:\n";
-            for (int i = 0; i < len; i++)
-            {
-                //richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\t" + fileinfos[i].filepath + "\t" + fileinfos[i].fileextension + "\t" + fileinfos[i].filecreationtime.ToString() + "\n";
-                //richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\n";
-                richTextBox1.Text += fileinfos[i].filename + "\n";
-            }
-
-            richTextBox1.Text += "照大小排序(由大到小):\n";
-
-            //排序 由大到小  在return的地方多個負號
-            fileinfos.Sort((x, y) => { return -x.filesize.CompareTo(y.filesize); });
-
-            for (int i = 0; i < len; i++)
-            {
-                //richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\t" + fileinfos[i].filepath + "\t" + fileinfos[i].fileextension + "\t" + fileinfos[i].filecreationtime.ToString() + "\n";
-                richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\n";
-            }
-
-            richTextBox1.Text += "照大小排序(由小到大):\n";
-
-            //排序 由小到大
-            fileinfos.Sort((x, y) => { return x.filesize.CompareTo(y.filesize); });
-
-            for (int i = 0; i < len; i++)
-            {
-                //richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\t" + fileinfos[i].filepath + "\t" + fileinfos[i].fileextension + "\t" + fileinfos[i].filecreationtime.ToString() + "\n";
-                richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\n";
-            }
 
 ------------------------------------------------------------
 
@@ -118,11 +108,6 @@
             listView1.Columns.Add("容量", 150, HorizontalAlignment.Center);
             listView1.Visible = true;
 
-            //排序 由小到大
-            //fileinfos.Sort((x, y) => { return x.size.CompareTo(y.size); });
-
-            //排序 由大到小  在return的地方多個負號
-            //fileinfos.Sort((x, y) => { return -x.size.CompareTo(y.size); });
 
 //------------------------------------------------------------  # 60個
 
@@ -5027,11 +5012,9 @@ check_video
 2. 結構info
 fullname simplename size path ext
 
-
 讀寫自定義config文件
 1. 使用默認的在app.confg或者web.config進行讀寫 
 2. 使用一般的XML文件，我主要寫的是一般的Xml文件
-
 
 合併純文字檔  依檔名排序
 

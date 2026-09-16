@@ -89,16 +89,6 @@ namespace vcs_DiskDirectoryFile1
             bt_files17.Location = new Point(x_st + dx * 3, y_st + dy * 7);
             bt_files18.Location = new Point(x_st + dx * 3, y_st + dy * 8);
             bt_files19.Location = new Point(x_st + dx * 3, y_st + dy * 9);
-            bt_files20.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            bt_files21.Location = new Point(x_st + dx * 4, y_st + dy * 1);
-            bt_files22.Location = new Point(x_st + dx * 4, y_st + dy * 2);
-            bt_files23.Location = new Point(x_st + dx * 4, y_st + dy * 3);
-            bt_files24.Location = new Point(x_st + dx * 4, y_st + dy * 4);
-            bt_files25.Location = new Point(x_st + dx * 4, y_st + dy * 5);
-            bt_files26.Location = new Point(x_st + dx * 4, y_st + dy * 6);
-            bt_files27.Location = new Point(x_st + dx * 4, y_st + dy * 7);
-            bt_files28.Location = new Point(x_st + dx * 4, y_st + dy * 8);
-            bt_files29.Location = new Point(x_st + dx * 4, y_st + dy * 9);
 
             listView1.Size = new Size(400, 340);
             listView1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
@@ -468,14 +458,17 @@ namespace vcs_DiskDirectoryFile1
             //參考/加入參考/.NET/Microsoft.VisualBasic
             //加上 using Microsoft.VisualBasic.FileIO;    //引用Microsoft.VisualBasic.FileIO命名空間。
 
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+
+            string delete_filename = @"C:\Users\070601\Desktop\zzzzzzz.jpg";
+
+            if (File.Exists(delete_filename) == true)
             {
-                FileSystem.DeleteFile(openFileDialog1.FileName, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
-                richTextBox1.Text += "已將檔案 : " + openFileDialog1.FileName + " 移至資源回收筒\n";
+                FileSystem.DeleteFile(delete_filename, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+                richTextBox1.Text += "已將檔案 : " + delete_filename + " 移至資源回收筒\n";
             }
             else
             {
-                richTextBox1.Text += "未選取檔案\n";
+                richTextBox1.Text += "檔案 : " + delete_filename + " 不存在\n";
             }
         }
 
@@ -542,6 +535,58 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_file05_Click(object sender, EventArgs e)
         {
+            //File 屬性相關
+
+            // 屬性相關 GetAttributes SetAttributes
+
+            // 刪除檔案前，先設定檔案屬性為[正常的]
+            // File.SetAttributes(filename, FileAttributes.Normal);
+
+            filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+
+            FileInfo fi = new FileInfo(filename);
+            FileAttributes attr = fi.Attributes;
+
+            if ((attr & FileAttributes.ReadOnly) > 0)
+            {
+                richTextBox1.Text += "唯讀檔案\n";
+            }
+            else
+            {
+                richTextBox1.Text += "一般檔案\n";
+            }
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //設定檔案屬性
+            filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_貓咪\cat1.png";
+
+            fi = new FileInfo(filename);
+            fi.Attributes = FileAttributes.ReadOnly;  // 唯讀
+            fi.Attributes = FileAttributes.System;  // 系統
+            fi.Attributes = FileAttributes.Archive;  // 存檔
+            fi.Attributes = FileAttributes.Hidden;  // 隱藏
+
+            //------------------------------------------------------------  # 60個
+
+            richTextBox1.Text += "檔案屬性 : " + File.GetAttributes(filename).ToString() + "\n";
+
+            richTextBox1.Text += File.GetAttributes(filename) + "\n";
+            File.SetAttributes(filename, FileAttributes.ReadOnly);
+            //File.SetAttributes(filename, FileAttributes.Hidden);//隱藏
+            richTextBox1.Text += File.GetAttributes(filename) + "\n";
+
+            if ((File.GetAttributes(filename) & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
+            {
+                richTextBox1.Text += "檔案唯讀，不能修改檔案時間\n";
+            }
+            else
+            {
+                richTextBox1.Text += "修改檔案時間\n";
+                File.SetAttributes(filename, FileAttributes.Archive);
+                File.SetAttributes(filename, FileAttributes.Archive | FileAttributes.Hidden);
+                File.SetAttributes(filename, FileAttributes.Archive | FileAttributes.Hidden | FileAttributes.ReadOnly);
+            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -1314,6 +1359,21 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_files01_Click(object sender, EventArgs e)
         {
+            //顯示檔案大小
+
+            //lblFileSize.Text = fi.Length.ToFileSizeApi();
+            //int size = 12345678;
+            //richTextBox1.Text += "size = " + size.tofil
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+
+            FileInfo fi = new FileInfo(filename);
+            richTextBox1.Text += fi.Length.ToString() + "\n";
+            richTextBox1.Text += fi.Length.ToFileSizeApi() + "\n";
+
+            int ccc = 12345678;   // double 才可以用 ToFileSize
+            richTextBox1.Text += "ccc = " + ccc.ToString() + "\n";
+            richTextBox1.Text += "ccc = " + ((double)ccc).ToFileSize() + "\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -1410,158 +1470,6 @@ namespace vcs_DiskDirectoryFile1
             richTextBox1.Text += "Total filesize: " + size.ToString() + " Bytes.\n";
         }
 
-        private void bt_files03_Click(object sender, EventArgs e)
-        {
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void bt_files04_Click(object sender, EventArgs e)
-        {
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void bt_files05_Click(object sender, EventArgs e)
-        {
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void bt_files06_Click(object sender, EventArgs e)
-        {
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void bt_files07_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        // 搜尋符合格式的文件
-        // recurrsive =  false : 單層
-        // recurrsive =  true  : 多層
-        private void FindFiles(string foldername, string patterns, bool recurrsive)
-        {
-            // Get the patterns.
-            string[] pattern_array = patterns.Split(';');
-
-            // Search.
-            System.IO.SearchOption search_option = System.IO.SearchOption.TopDirectoryOnly;
-            if (recurrsive)
-            {
-                search_option = System.IO.SearchOption.AllDirectories;
-            }
-            foreach (string pattern in pattern_array)
-            {
-                // 找檔案, 一層
-                string[] filenames = Directory.GetFiles(foldername, pattern, search_option);
-                //richTextBox1.Text += "共有 " + filenames.Length.ToString() + "個檔案\n";
-                foreach (string filename in filenames)
-                {
-                    richTextBox1.Text += filename + "\n";
-                }
-            }
-        }
-
-        private void bt_files08_Click(object sender, EventArgs e)
-        {
-            //撈出資料夾內特定類型的檔案
-
-            string foldername = @"D:\_git\vcs\_1.data\______test_files1";
-            string searchPattern = "*.cs;*.csv;*.ico";
-
-            richTextBox1.Text += "撈出資料夾內特定類型的檔案\t單層\tPattern : " + searchPattern + "\n";
-            FindFiles(foldername, searchPattern, false);  // false : 單層
-            //show_filenames(filenames);
-
-            richTextBox1.Text += "撈出資料夾內特定類型的檔案\t多層\tPattern : " + searchPattern + "\n";
-            FindFiles(foldername, searchPattern, true);  // true : 多層
-            //show_filenames(filenames);
-
-            //------------------------------------------------------------  # 60個
-
-            //FindFiles()
-            //撈出所有圖片檔
-
-            foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony1";
-
-            FindFiles(foldername, "*.bmp;*.png;*.jpg;*.tif;*.gif", false);
-            //show_filenames(filenames);
-
-            //------------------------------------------------------------  # 60個
-
-            //FindFiles()3
-
-            //撈出資料夾內特定類型的檔案
-            foldername = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt";
-            //string
-            searchPattern = "*.txt";
-
-            bool recurrsive = false;
-            richTextBox1.Text += "撈出資料夾內特定類型的檔案\t單層\tPattern : " + searchPattern + "\n";
-            FindFiles(foldername, searchPattern, recurrsive);
-            //show_filenames(filenames);
-
-            recurrsive = true;
-            richTextBox1.Text += "撈出資料夾內特定類型的檔案\t多層\tPattern : " + searchPattern + "\n";
-            FindFiles(foldername, searchPattern, recurrsive);
-            //show_filenames(filenames);
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void bt_files09_Click(object sender, EventArgs e)
-        {
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void listView1_MouseClick(object sender, MouseEventArgs e)
-        {
-            /*
-            int selNdx;
-            string fullname;
-
-            selNdx = listView1.SelectedIndices[0];
-
-            richTextBox1.Text += "aaa:\t" + listView1.Items[selNdx].Text + "\n";
-            richTextBox1.Text += "bbb:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
-            richTextBox1.Text += "ccc:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
-            richTextBox1.Text += "ddd:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
-            */
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void bt_files10_Click(object sender, EventArgs e)
-        {
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void bt_files11_Click(object sender, EventArgs e)
-        {
-            //顯示檔案大小
-
-            //lblFileSize.Text = fi.Length.ToFileSizeApi();
-            //int size = 12345678;
-            //richTextBox1.Text += "size = " + size.tofil
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-
-            FileInfo fi = new FileInfo(filename);
-            richTextBox1.Text += fi.Length.ToString() + "\n";
-            richTextBox1.Text += fi.Length.ToFileSizeApi() + "\n";
-
-            int ccc = 12345678;   // double 才可以用 ToFileSize
-            richTextBox1.Text += "ccc = " + ccc.ToString() + "\n";
-            richTextBox1.Text += "ccc = " + ((double)ccc).ToFileSize() + "\n";
-        }
-
         //------------------------------------------------------------  # 60個
 
         void check_filetype(string filename)
@@ -1608,7 +1516,7 @@ namespace vcs_DiskDirectoryFile1
             }
         }
 
-        private void bt_files12_Click(object sender, EventArgs e)
+        private void bt_files03_Click(object sender, EventArgs e)
         {
             //偵測原始檔案類型
 
@@ -1633,19 +1541,7 @@ namespace vcs_DiskDirectoryFile1
 
         //------------------------------------------------------------  # 60個
 
-        private void bt_files13_Click(object sender, EventArgs e)
-        {
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void bt_files14_Click(object sender, EventArgs e)
-        {
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void bt_files15_Click(object sender, EventArgs e)
+        private void bt_files04_Click(object sender, EventArgs e)
         {
             // 搜尋檔案-檔名
             richTextBox1.Text += "搜尋檔案, 只找一層 IMG_20180228_215525.jpg\n";
@@ -1683,352 +1579,8 @@ namespace vcs_DiskDirectoryFile1
 
         //------------------------------------------------------------  # 60個
 
-        private void bt_files16_Click(object sender, EventArgs e)
-        {
-            // 屬性相關 GetAttributes SetAttributes
-
-            // 刪除檔案前，先設定檔案屬性為[正常的]
-            // File.SetAttributes(filename, FileAttributes.Normal);
-
-            filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-
-            FileInfo fi = new FileInfo(filename);
-            FileAttributes attr = fi.Attributes;
-
-            if ((attr & FileAttributes.ReadOnly) > 0)
-            {
-                richTextBox1.Text += "唯讀檔案\n";
-            }
-            else
-            {
-                richTextBox1.Text += "一般檔案\n";
-            }
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //設定檔案屬性
-            filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_貓咪\cat1.png";
-
-            fi = new FileInfo(filename);
-            fi.Attributes = FileAttributes.ReadOnly;  // 唯讀
-            fi.Attributes = FileAttributes.System;  // 系統
-            fi.Attributes = FileAttributes.Archive;  // 存檔
-            fi.Attributes = FileAttributes.Hidden;  // 隱藏
-
-            //------------------------------------------------------------  # 60個
-
-            richTextBox1.Text += "檔案屬性 : " + File.GetAttributes(filename).ToString() + "\n";
-
-            richTextBox1.Text += File.GetAttributes(filename) + "\n";
-            File.SetAttributes(filename, FileAttributes.ReadOnly);
-            //File.SetAttributes(filename, FileAttributes.Hidden);//隱藏
-            richTextBox1.Text += File.GetAttributes(filename) + "\n";
-
-            if ((File.GetAttributes(filename) & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
-            {
-                richTextBox1.Text += "檔案唯讀，不能修改檔案時間\n";
-            }
-            else
-            {
-                richTextBox1.Text += "修改檔案時間\n";
-                File.SetAttributes(filename, FileAttributes.Archive);
-                File.SetAttributes(filename, FileAttributes.Archive | FileAttributes.Hidden);
-                File.SetAttributes(filename, FileAttributes.Archive | FileAttributes.Hidden | FileAttributes.ReadOnly);
-            }
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void bt_files17_Click(object sender, EventArgs e)
-        {
-            // 各種方法匯出多層 同一資料夾
-
-            foldername = @"D:\_git\vcs\_1.data\______test_files3";
-
-            ProcessDirectory(foldername);
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            ProcessDirectoryInfo(foldername);
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            //GetDirectories(), GetFiles()
-
-            DirectoryInfo dinfo = new DirectoryInfo(foldername);
-
-            // 找資料夾, 一層
-            DirectoryInfo[] dis = dinfo.GetDirectories();  // 傳回目前目錄的子目錄, 一層
-            foreach (DirectoryInfo di in dis)
-            {
-                // 找檔案, 一層
-                FileInfo[] fis = di.GetFiles();  // 由DI取得FI陣列, 單層檔案資訊
-                foreach (FileInfo fi in fis)
-                {
-                    get_FileInfo(fi);
-                }
-            }
-
-            //------------------------------------------------------------  # 60個
-
-            //撈出資料夾內的檔案(一層), 所有檔案 / 限定 *.txt
-
-            foldername = @"D:\_git\vcs\_1.data\______test_files3";
-
-            //所有檔案
-            //foreach (string filename in Directory.GetFileSystemEntries(foldername))
-
-            //限定檔案 *.txt
-            foreach (string filename in Directory.GetFileSystemEntries(foldername, "*.txt"))
-            {
-                richTextBox1.Text += filename + "\n";
-                get_FileInfo(filename);
-            }
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void ProcessDirectoryInfo(string foldername)
-        {
-            //搜尋子目錄內的所有檔案   一層
-            //使用 DirectoryInfo 和 FileInfo
-
-            DirectoryInfo dinfo = new DirectoryInfo(foldername);
-
-            // 找資料夾, 一層
-            DirectoryInfo[] dis = dinfo.GetDirectories();
-            foreach (DirectoryInfo di in dis)
-            {
-                get_DirectoryInfo(di);
-            }
-
-            // 找檔案, 一層
-            foreach (FileInfo fi in dinfo.GetFiles())
-            {
-                get_FileInfo(fi);
-            }
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void bt_files18_Click(object sender, EventArgs e)
-        {
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void bt_files19_Click(object sender, EventArgs e)
-        {
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        const Int64 TB = (Int64)GB * 1024;//定義TB的計算常量
-        const int GB = 1024 * 1024 * 1024;//定義GB的計算常量
-        const int MB = 1024 * 1024;//定義MB的計算常量
-        const int KB = 1024;//定義KB的計算常量
-        public string ByteConversionTBGBMBKB(Int64 size)
-        {
-            if (size < 0)
-                return "不合法的數值";
-            else if (size / TB >= 1024)//如果目前Byte的值大於等於1024TB
-                return "無法表示";
-            else if (size / TB >= 1)//如果目前Byte的值大於等於1TB
-                return (Math.Round(size / (float)TB, 2)).ToString() + " TB";//將其轉換成TB
-            else if (size / GB >= 1)//如果目前Byte的值大於等於1GB
-                return (Math.Round(size / (float)GB, 2)).ToString() + " GB";//將其轉換成GB
-            else if (size / MB >= 1)//如果目前Byte的值大於等於1MB
-                return (Math.Round(size / (float)MB, 2)).ToString() + " MB";//將其轉換成MB
-            else if (size / KB >= 1)//如果目前Byte的值大於等於1KB
-                return (Math.Round(size / (float)KB, 2)).ToString() + " KB";//將其轉換成KB
-            else
-                return size.ToString() + " Byte";//顯示Byte值
-        }
-
-        public class MyFileInfo
-        {
-            public string filename;
-            public string filepath;
-            public string fileextension;
-            public long filesize;
-            public DateTime filecreationtime;
-
-            public MyFileInfo(string n, string p, string e, long s, DateTime c)
-            {
-                this.filename = n;
-                this.filepath = p;
-                this.fileextension = e;
-                this.filesize = s;
-                this.filecreationtime = c;
-            }
-        }
-
-        List<MyFileInfo> fileinfos = new List<MyFileInfo>();
-
-        private void bt_files20_Click(object sender, EventArgs e)
-        {
-            //我的轉出
-
-            richTextBox1.Text += "aaaaaa\n";
-
-            string foldername = @"D:\_git\vcs\_1.data\______test_files3";
-            foldername = @"D:\vcs\astro\_DATA2\_________整理_mp3\_mp3_台語\_陳一郎\";
-            //string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic";
-            //string foldername = @"C:\dddddddddd\_music_from_yt";
-            //string foldername = @"D:\_git\vcs\_1.data\______test_files3\";
-
-            // 資料夾
-            ProcessDirectory(foldername);
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void bt_files21_Click(object sender, EventArgs e)
-        {
-            //拷貝檔案, 限定拷貝大小, 每次拷貝1024拜
-
-            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            string filename2 = Application.StartupPath + "\\jpg_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
-
-            CopyFile(filename1, filename2, 1024);
-        }
-
-        FileStream FormerOpen;
-        FileStream ToFileOpen;
-        /// <param FormerFile="string">源文件路徑</param>
-        /// <param toFile="string">目的文件路徑</param> 
-        /// <param SectSize="int">傳輸大小</param> 
-        public void CopyFile(string FormerFile, string toFile, int SectSize)
-        {
-            FileStream fileToCreate = new FileStream(toFile, FileMode.Create);		//建立目的文件，如果已存在將被覆蓋
-            fileToCreate.Close();										//關閉所有資源
-            fileToCreate.Dispose();										//釋放所有資源
-            FormerOpen = new FileStream(FormerFile, FileMode.Open, FileAccess.Read);//以只讀方式打開源文件
-            ToFileOpen = new FileStream(toFile, FileMode.Append, FileAccess.Write);	//以寫方式打開目的文件
-            //根據一次傳輸的大小，計算傳輸的個數
-            int FileSize;												//要拷貝的文件的大小
-            //如果分段拷貝，即每次拷貝內容小於文件總長度
-            if (SectSize < FormerOpen.Length)
-            {
-                byte[] buffer = new byte[SectSize];							//根據傳輸的大小，定義一個字節數組
-                int copied = 0;										//記錄傳輸的大小
-                while (copied <= ((int)FormerOpen.Length - SectSize))			//拷貝主體部分
-                {
-                    FileSize = FormerOpen.Read(buffer, 0, SectSize);			//從0開始讀，每次最大讀SectSize
-                    FormerOpen.Flush();								//清空快取
-                    ToFileOpen.Write(buffer, 0, SectSize);					//向目的文件寫入字節
-                    ToFileOpen.Flush();									//清空快取
-                    ToFileOpen.Position = FormerOpen.Position;				//使源文件和目的文件流的位置相同
-                    copied += FileSize;									//記錄已拷貝的大小
-                }
-                int left = (int)FormerOpen.Length - copied;						//取得剩餘大小
-                FileSize = FormerOpen.Read(buffer, 0, left);					//讀取剩餘的字節
-                FormerOpen.Flush();									//清空快取
-                ToFileOpen.Write(buffer, 0, left);							//寫入剩餘的部分
-                ToFileOpen.Flush();									//清空快取
-            }
-            //如果整體拷貝，即每次拷貝內容大於文件總長度
-            else
-            {
-                byte[] buffer = new byte[FormerOpen.Length];				//取得文件的大小
-                FormerOpen.Read(buffer, 0, (int)FormerOpen.Length);			//讀取源文件的字節
-                FormerOpen.Flush();									//清空快取
-                ToFileOpen.Write(buffer, 0, (int)FormerOpen.Length);			//寫放字節
-                ToFileOpen.Flush();									//清空快取
-            }
-            FormerOpen.Close();										//釋放所有資源
-            ToFileOpen.Close();										//釋放所有資源
-            richTextBox1.Text += "文件複製完成\n";
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void bt_files22_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private const int MODE1 = 0x01;
-        private const int MODE2 = 0x02;
-
-        void copy_file(int mode)
-        {
-            richTextBox1.Text += "時間 : " + DateTime.Now.ToString() + "\n";
-            //取得檔案資訊
-            string filename = "G:\\191128-1008.mp4";
-            long filesize = 0;
-
-            FileInfo fi = new FileInfo(filename);
-            if (fi.Exists == true)      //確認檔案是否存在
-            {
-                richTextBox1.Text += "檔案大小：" + fi.Length.ToString() + Environment.NewLine;
-                filesize = fi.Length;
-
-                Stopwatch stopwatch = new Stopwatch();
-
-                // Begin timing
-                stopwatch.Start();
-
-                FileStream sourceFile = new FileStream(filename, FileMode.Open, FileAccess.Read);
-                //sourceFile 來源檔要先在該路徑中準備好
-
-                FileStream targetFile = new FileStream(@"G:\tmp.mp4", FileMode.Create, FileAccess.Write);
-
-                if (mode == MODE1)
-                {
-                    int bb = -1;
-                    while ((bb = sourceFile.ReadByte()) != -1)  // 讀一拜
-                    {
-                        //一次1 byte的讀
-                        targetFile.WriteByte((byte)bb);
-                    }
-                }
-                else
-                {
-                    int count = -1;
-                    byte[] bb = new byte[10240];
-                    while ((count = sourceFile.Read(bb, 0, bb.Length)) > 0)
-                    {
-                        //一次讀10240個byte，相當於10k，效率較佳
-                        targetFile.Write(bb, 0, bb.Length);
-                    }
-                }
-                sourceFile.Close();
-                targetFile.Close();
-
-                // Stop timing
-                stopwatch.Stop();
-                richTextBox1.Text += "檔案大小: " + (filesize / 1024 / 1024).ToString() + " MB\n";
-                richTextBox1.Text += "複製完畢！ 耗時: " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
-                richTextBox1.Text += "速率: " + (filesize / 1024 / 1024 / stopwatch.Elapsed.TotalSeconds).ToString() + " MB/sec\n";
-            }
-            else
-            {
-                richTextBox1.Text += "檔案: " + filename + " 不存在\n";
-            }
-            richTextBox1.Text += "時間 : " + DateTime.Now.ToString() + "\n";
-        }
-
-        private void bt_files23_Click(object sender, EventArgs e)
-        {
-            //拷貝檔案1
-            copy_file(MODE1);
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void bt_files24_Click(object sender, EventArgs e)
-        {
-            //拷貝檔案2
-            copy_file(MODE2);
-        }
-
-        //------------------------------------------------------------  # 60個
-
         //根據文件頭判斷上傳的文件類型 ST
-        private void bt_files25_Click(object sender, EventArgs e)
+        private void bt_files05_Click(object sender, EventArgs e)
         {
             //根據文件頭判斷上傳的文件類型
             string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_哆啦A夢\doraemon1.jpg";
@@ -2095,6 +1647,51 @@ namespace vcs_DiskDirectoryFile1
             }
         }
         //根據文件頭判斷上傳的文件類型 SP
+
+        //------------------------------------------------------------  # 60個
+
+        private void bt_files06_Click(object sender, EventArgs e)
+        {
+            //GetFileInfo
+
+            //搜尋顯示至listview
+
+            listView1.SelectedIndexChanged += new EventHandler(listView1_SelectedIndexChanged);
+
+            //設定欄位
+            ColumnHeader ch1 = new ColumnHeader();
+            ch1.Text = "文件名稱";
+            ch1.Width = 330;
+            listView1.Columns.Add(ch1);
+
+            listView1.GridLines = true;
+            listView1.View = View.Details;
+
+            listView1.Items.Clear();
+
+            // 找檔案, 一層
+            string[] filenames = Directory.GetFiles(foldername);  // 取得指定目錄中檔案的名稱
+            foreach (string filename in filenames)
+            {
+                FileInfo fi = new FileInfo(filename);
+                richTextBox1.Text += "加入 : " + fi.FullName + "\n";
+                listView1.Items.Add(fi.FullName);
+            }
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            richTextBox1.Text += listView1.SelectedItems.Count.ToString() + "\n";
+
+            if (listView1.SelectedItems.Count != 0)
+            {
+                richTextBox1.Text += listView1.SelectedItems[0].Text + "\n";
+
+                string filename = listView1.SelectedItems[0].Text;
+
+                get_FileInfo(filename);
+            }
+        }
 
         //------------------------------------------------------------  # 60個
 
@@ -2171,7 +1768,7 @@ namespace vcs_DiskDirectoryFile1
             return fileInfo.szTypeName;
         }
 
-        private void bt_files26_Click(object sender, EventArgs e)
+        private void bt_files07_Click(object sender, EventArgs e)
         {
             //取得檔案類型
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
@@ -2184,61 +1781,593 @@ namespace vcs_DiskDirectoryFile1
 
         //------------------------------------------------------------  # 60個
 
-        private void bt_files27_Click(object sender, EventArgs e)
+        private void bt_files08_Click(object sender, EventArgs e)
         {
-            //GetFileInfo
+        }
 
-            //搜尋顯示至listview
+        //------------------------------------------------------------  # 60個
 
-            listView1.SelectedIndexChanged += new EventHandler(listView1_SelectedIndexChanged);
+        private void bt_files09_Click(object sender, EventArgs e)
+        {
+            // 排序
+            //排序 由小到大
+            //fileinfos.Sort((x, y) => { return x.size.CompareTo(y.size); });
 
-            //設定欄位
-            ColumnHeader ch1 = new ColumnHeader();
-            ch1.Text = "文件名稱";
-            ch1.Width = 330;
-            listView1.Columns.Add(ch1);
+            //排序 由大到小  在return的地方多個負號
+            //fileinfos.Sort((x, y) => { return -x.size.CompareTo(y.size); });
 
-            listView1.GridLines = true;
-            listView1.View = View.Details;
+            int len = fileinfos.Count;
 
-            listView1.Items.Clear();
-
-            // 找檔案, 一層
-            string[] filenames = Directory.GetFiles(foldername);  // 取得指定目錄中檔案的名稱
-            foreach (string filename in filenames)
+            richTextBox1.Text += "照檔名排序:\n";
+            for (int i = 0; i < len; i++)
             {
-                FileInfo fi = new FileInfo(filename);
-                richTextBox1.Text += "加入 : " + fi.FullName + "\n";
-                listView1.Items.Add(fi.FullName);
+                //richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\t" + fileinfos[i].filepath + "\t" + fileinfos[i].fileextension + "\t" + fileinfos[i].filecreationtime.ToString() + "\n";
+                //richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\n";
+                richTextBox1.Text += fileinfos[i].filename + "\n";
+            }
+
+            richTextBox1.Text += "照大小排序(由大到小):\n";
+
+            //排序 由大到小  在return的地方多個負號
+            fileinfos.Sort((x, y) => { return -x.filesize.CompareTo(y.filesize); });
+
+            for (int i = 0; i < len; i++)
+            {
+                //richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\t" + fileinfos[i].filepath + "\t" + fileinfos[i].fileextension + "\t" + fileinfos[i].filecreationtime.ToString() + "\n";
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\n";
+            }
+
+            richTextBox1.Text += "照大小排序(由小到大):\n";
+
+            //排序 由小到大
+            fileinfos.Sort((x, y) => { return x.filesize.CompareTo(y.filesize); });
+
+            for (int i = 0; i < len; i++)
+            {
+                //richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\t" + fileinfos[i].filepath + "\t" + fileinfos[i].fileextension + "\t" + fileinfos[i].filecreationtime.ToString() + "\n";
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\n";
+            }
+
+            //6060
+
+            //資訊
+
+            if (fileinfos.Count == 0)
+            {
+                richTextBox1.Text += "找不到資料a\n";
+            }
+            else
+            {
+                richTextBox1.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料\n";
+            }
+
+
+            //fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
+
+            //richTextBox1.Text += "Name\tFolderName\tExt\tLength\tTime\n";
+            for (int i = 0; i < fileinfos.Count; i++)
+            {
+                //richTextBox1.Text += string.Format("{0,-60}{1,-20}{2,20} X {3,20}{4,20}{5,20}",
+                //fileinfos[i].filename, ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize)), 
+                //fileinfos[i].filepath, fileinfos[i].fileextension, fileinfos[i].filecreationtime) + "\n";
+
+
+                //richTextBox1.Text += fileinfos[i].filename + "\t" + fileinfos[i].filepath + "\t" + fileinfos[i].fileextension + "\t" + fileinfos[i].filesize + "\t" + fileinfos[i].filecreationtime + "\n";
+
+
+                //richTextBox1.Text += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
+                //fi.FullName, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
+
+
+                //richTextBox1.Text += string.Format("{0,-60}{1,-60}{2,-60}{3,-60}{4,-60}", fileinfos[i].filename, fileinfos[i].filename, fileinfos[i].filename, fileinfos[i].filename, fileinfos[i].filename);
+                //fi.FullName, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
+                richTextBox1.Text += string.Format("{0,-70}{1,-10}{2,-15}{3,-60}{4,-20}", fileinfos[i].filename, fileinfos[i].fileextension, ByteConversionTBGBMBKB(fileinfos[i].filesize), fileinfos[i].filepath, fileinfos[i].filecreationtime) + "\n";
+
+
+
+
+                //ListViewItem i1 = new ListViewItem(fileinfos[i].filename);
+            }
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void listView1_MouseClick(object sender, MouseEventArgs e)
+        {
+            /*
+            int selNdx;
+            string fullname;
+
+            selNdx = listView1.SelectedIndices[0];
+
+            richTextBox1.Text += "aaa:\t" + listView1.Items[selNdx].Text + "\n";
+            richTextBox1.Text += "bbb:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
+            richTextBox1.Text += "ccc:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
+            richTextBox1.Text += "ddd:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
+            */
+        }
+
+        //------------------------------------------------------------  # 60個
+        //------------------------------------------------------------  # 60個
+
+        const Int64 TB = (Int64)GB * 1024;//定義TB的計算常量
+        const int GB = 1024 * 1024 * 1024;//定義GB的計算常量
+        const int MB = 1024 * 1024;//定義MB的計算常量
+        const int KB = 1024;//定義KB的計算常量
+        public string ByteConversionTBGBMBKB(Int64 size)
+        {
+            if (size < 0)
+                return "不合法的數值";
+            else if (size / TB >= 1024)//如果目前Byte的值大於等於1024TB
+                return "無法表示";
+            else if (size / TB >= 1)//如果目前Byte的值大於等於1TB
+                return (Math.Round(size / (float)TB, 2)).ToString() + " TB";//將其轉換成TB
+            else if (size / GB >= 1)//如果目前Byte的值大於等於1GB
+                return (Math.Round(size / (float)GB, 2)).ToString() + " GB";//將其轉換成GB
+            else if (size / MB >= 1)//如果目前Byte的值大於等於1MB
+                return (Math.Round(size / (float)MB, 2)).ToString() + " MB";//將其轉換成MB
+            else if (size / KB >= 1)//如果目前Byte的值大於等於1KB
+                return (Math.Round(size / (float)KB, 2)).ToString() + " KB";//將其轉換成KB
+            else
+                return size.ToString() + " Byte";//顯示Byte值
+        }
+
+        public class MyFileInfo
+        {
+            public string filename;
+            public string filepath;
+            public string fileextension;
+            public long filesize;
+            public DateTime filecreationtime;
+
+            public MyFileInfo(string n, string p, string e, long s, DateTime c)
+            {
+                this.filename = n;
+                this.filepath = p;
+                this.fileextension = e;
+                this.filesize = s;
+                this.filecreationtime = c;
             }
         }
 
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        List<MyFileInfo> fileinfos = new List<MyFileInfo>();
+
+        private void bt_files10_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += listView1.SelectedItems.Count.ToString() + "\n";
+            //我的轉出
 
-            if (listView1.SelectedItems.Count != 0)
+            richTextBox1.Text += "aaaaaa\n";
+
+            string foldername = @"D:\_git\vcs\_1.data\______test_files3";
+            foldername = @"D:\vcs\astro\_DATA2\_________整理_mp3\_mp3_台語\_陳一郎\";
+            //string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic";
+            //string foldername = @"C:\dddddddddd\_music_from_yt";
+            //string foldername = @"D:\_git\vcs\_1.data\______test_files3\";
+            foldername = @"D:\_git\vcs\_1.data\______test_files3";
+
+            // 各種方法匯出多層 同一資料夾
+
+            // 資料夾
+            ProcessDirectory(foldername);
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            ProcessDirectoryInfo(foldername);
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //GetDirectories(), GetFiles()
+
+            DirectoryInfo dinfo = new DirectoryInfo(foldername);
+
+            // 找資料夾, 一層
+            DirectoryInfo[] dis = dinfo.GetDirectories();  // 傳回目前目錄的子目錄, 一層
+            foreach (DirectoryInfo di in dis)
             {
-                richTextBox1.Text += listView1.SelectedItems[0].Text + "\n";
+                // 找檔案, 一層
+                FileInfo[] fis = di.GetFiles();  // 由DI取得FI陣列, 單層檔案資訊
+                foreach (FileInfo fi in fis)
+                {
+                    get_FileInfo(fi);
+                }
+            }
 
-                string filename = listView1.SelectedItems[0].Text;
+            //------------------------------------------------------------  # 60個
 
+            //撈出資料夾內的檔案(一層), 所有檔案 / 限定 *.txt
+
+            foldername = @"D:\_git\vcs\_1.data\______test_files3";
+
+            //所有檔案
+            //foreach (string filename in Directory.GetFileSystemEntries(foldername))
+
+            //限定檔案 *.txt
+            foreach (string filename in Directory.GetFileSystemEntries(foldername, "*.txt"))
+            {
+                richTextBox1.Text += filename + "\n";
                 get_FileInfo(filename);
             }
         }
 
         //------------------------------------------------------------  # 60個
 
-        private void bt_files28_Click(object sender, EventArgs e)
+        // 搜尋符合格式的文件
+        // recurrsive =  false : 單層
+        // recurrsive =  true  : 多層
+        private void FindFiles(string foldername, string patterns, bool recurrsive)
+        {
+            // Get the patterns.
+            string[] pattern_array = patterns.Split(';');
+
+            // Search.
+            System.IO.SearchOption search_option = System.IO.SearchOption.TopDirectoryOnly;
+            if (recurrsive)
+            {
+                search_option = System.IO.SearchOption.AllDirectories;
+            }
+            foreach (string pattern in pattern_array)
+            {
+                // 找檔案, 一層
+                string[] filenames = Directory.GetFiles(foldername, pattern, search_option);
+                //richTextBox1.Text += "共有 " + filenames.Length.ToString() + "個檔案\n";
+                foreach (string filename in filenames)
+                {
+                    richTextBox1.Text += filename + "\n";
+                }
+            }
+        }
+
+        private void bt_files11_Click(object sender, EventArgs e)
+        {
+            //撈出資料夾內特定類型的檔案
+
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1";
+            string searchPattern = "*.cs;*.csv;*.ico";
+
+            richTextBox1.Text += "撈出資料夾內特定類型的檔案\t單層\tPattern : " + searchPattern + "\n";
+            FindFiles(foldername, searchPattern, false);  // false : 單層
+            //show_filenames(filenames);
+
+            richTextBox1.Text += "撈出資料夾內特定類型的檔案\t多層\tPattern : " + searchPattern + "\n";
+            FindFiles(foldername, searchPattern, true);  // true : 多層
+            //show_filenames(filenames);
+
+            //------------------------------------------------------------  # 60個
+
+            //FindFiles()
+            //撈出所有圖片檔
+
+            foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony1";
+
+            FindFiles(foldername, "*.bmp;*.png;*.jpg;*.tif;*.gif", false);
+            //show_filenames(filenames);
+
+            //------------------------------------------------------------  # 60個
+
+            //FindFiles()3
+
+            //撈出資料夾內特定類型的檔案
+            foldername = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt";
+            //string
+            searchPattern = "*.txt";
+
+            bool recurrsive = false;
+            richTextBox1.Text += "撈出資料夾內特定類型的檔案\t單層\tPattern : " + searchPattern + "\n";
+            FindFiles(foldername, searchPattern, recurrsive);
+            //show_filenames(filenames);
+
+            recurrsive = true;
+            richTextBox1.Text += "撈出資料夾內特定類型的檔案\t多層\tPattern : " + searchPattern + "\n";
+            FindFiles(foldername, searchPattern, recurrsive);
+            //show_filenames(filenames);
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        FileStream FormerOpen;
+        FileStream ToFileOpen;
+        /// <param FormerFile="string">源文件路徑</param>
+        /// <param toFile="string">目的文件路徑</param> 
+        /// <param SectSize="int">傳輸大小</param> 
+        public void CopyFile(string FormerFile, string toFile, int SectSize)
+        {
+            FileStream fileToCreate = new FileStream(toFile, FileMode.Create);		//建立目的文件，如果已存在將被覆蓋
+            fileToCreate.Close();										//關閉所有資源
+            fileToCreate.Dispose();										//釋放所有資源
+            FormerOpen = new FileStream(FormerFile, FileMode.Open, FileAccess.Read);//以只讀方式打開源文件
+            ToFileOpen = new FileStream(toFile, FileMode.Append, FileAccess.Write);	//以寫方式打開目的文件
+            //根據一次傳輸的大小，計算傳輸的個數
+            int FileSize;												//要拷貝的文件的大小
+            //如果分段拷貝，即每次拷貝內容小於文件總長度
+            if (SectSize < FormerOpen.Length)
+            {
+                byte[] buffer = new byte[SectSize];							//根據傳輸的大小，定義一個字節數組
+                int copied = 0;										//記錄傳輸的大小
+                while (copied <= ((int)FormerOpen.Length - SectSize))			//拷貝主體部分
+                {
+                    FileSize = FormerOpen.Read(buffer, 0, SectSize);			//從0開始讀，每次最大讀SectSize
+                    FormerOpen.Flush();								//清空快取
+                    ToFileOpen.Write(buffer, 0, SectSize);					//向目的文件寫入字節
+                    ToFileOpen.Flush();									//清空快取
+                    ToFileOpen.Position = FormerOpen.Position;				//使源文件和目的文件流的位置相同
+                    copied += FileSize;									//記錄已拷貝的大小
+                }
+                int left = (int)FormerOpen.Length - copied;						//取得剩餘大小
+                FileSize = FormerOpen.Read(buffer, 0, left);					//讀取剩餘的字節
+                FormerOpen.Flush();									//清空快取
+                ToFileOpen.Write(buffer, 0, left);							//寫入剩餘的部分
+                ToFileOpen.Flush();									//清空快取
+            }
+            //如果整體拷貝，即每次拷貝內容大於文件總長度
+            else
+            {
+                byte[] buffer = new byte[FormerOpen.Length];				//取得文件的大小
+                FormerOpen.Read(buffer, 0, (int)FormerOpen.Length);			//讀取源文件的字節
+                FormerOpen.Flush();									//清空快取
+                ToFileOpen.Write(buffer, 0, (int)FormerOpen.Length);			//寫放字節
+                ToFileOpen.Flush();									//清空快取
+            }
+            FormerOpen.Close();										//釋放所有資源
+            ToFileOpen.Close();										//釋放所有資源
+            richTextBox1.Text += "文件複製完成\n";
+        }
+
+        private void bt_files12_Click(object sender, EventArgs e)
+        {
+            //拷貝檔案, 限定拷貝大小, 每次拷貝1024拜
+
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename2 = Application.StartupPath + "\\jpg_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+
+            CopyFile(filename1, filename2, 1024);
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private const int MODE1 = 0x01;
+        private const int MODE2 = 0x02;
+
+        void copy_file(int mode)
+        {
+            richTextBox1.Text += "時間 : " + DateTime.Now.ToString() + "\n";
+            //取得檔案資訊
+            string filename = "G:\\191128-1008.mp4";
+            long filesize = 0;
+
+            FileInfo fi = new FileInfo(filename);
+            if (fi.Exists == true)      //確認檔案是否存在
+            {
+                richTextBox1.Text += "檔案大小：" + fi.Length.ToString() + Environment.NewLine;
+                filesize = fi.Length;
+
+                Stopwatch stopwatch = new Stopwatch();
+
+                // Begin timing
+                stopwatch.Start();
+
+                FileStream sourceFile = new FileStream(filename, FileMode.Open, FileAccess.Read);
+                //sourceFile 來源檔要先在該路徑中準備好
+
+                FileStream targetFile = new FileStream(@"G:\tmp.mp4", FileMode.Create, FileAccess.Write);
+
+                if (mode == MODE1)
+                {
+                    int bb = -1;
+                    while ((bb = sourceFile.ReadByte()) != -1)  // 讀一拜
+                    {
+                        //一次1 byte的讀
+                        targetFile.WriteByte((byte)bb);
+                    }
+                }
+                else
+                {
+                    int count = -1;
+                    byte[] bb = new byte[10240];
+                    while ((count = sourceFile.Read(bb, 0, bb.Length)) > 0)
+                    {
+                        //一次讀10240個byte，相當於10k，效率較佳
+                        targetFile.Write(bb, 0, bb.Length);
+                    }
+                }
+                sourceFile.Close();
+                targetFile.Close();
+
+                // Stop timing
+                stopwatch.Stop();
+                richTextBox1.Text += "檔案大小: " + (filesize / 1024 / 1024).ToString() + " MB\n";
+                richTextBox1.Text += "複製完畢！ 耗時: " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
+                richTextBox1.Text += "速率: " + (filesize / 1024 / 1024 / stopwatch.Elapsed.TotalSeconds).ToString() + " MB/sec\n";
+            }
+            else
+            {
+                richTextBox1.Text += "檔案: " + filename + " 不存在\n";
+            }
+            richTextBox1.Text += "時間 : " + DateTime.Now.ToString() + "\n";
+        }
+
+        private void bt_files13_Click(object sender, EventArgs e)
+        {
+            //拷貝檔案1
+            copy_file(MODE1);
+
+            //拷貝檔案2
+            copy_file(MODE2);
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void bt_files14_Click(object sender, EventArgs e)
         {
         }
 
         //------------------------------------------------------------  # 60個
 
-        private void bt_files29_Click(object sender, EventArgs e)
+        private void bt_files15_Click(object sender, EventArgs e)
         {
         }
 
+        //------------------------------------------------------------  # 60個
+
+
+        private void bt_files16_Click(object sender, EventArgs e)
+        {
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void bt_files17_Click(object sender, EventArgs e)
+        {
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        //獲得指定目錄下的所有文檔 ST
+
+        double total_size1 = 0;
+        int no_files = 0;
+        int no_folders = 0;
+
+        private void bt_files18_Click(object sender, EventArgs e)
+        {
+            //獲得指定目錄下的所有文檔
+            //獲得指定目錄下的所有文檔
+            total_size1 = 0;
+            no_files = 0;
+            no_folders = 0;
+
+            listView1.Columns.Add("名稱", 200, HorizontalAlignment.Center);
+            listView1.Columns.Add("大小", 200, HorizontalAlignment.Center);
+            listView1.Columns.Add("修改日期", 200, HorizontalAlignment.Center);
+            //string filePath = @"D:/_git/vcs/_1.data/______test_files1/";
+            string filePath = @"D:\_git\vcs\_1.data\______test_files1\__pic\_book_magazine";
+
+            /*
+            richTextBox1.Text += "轉出一層,獲得指定目錄下的所有文檔：\n";
+            List<FileInfo> list1 = GetFilesByDir(filePath);
+            foreach (FileInfo fi in list1)
+            {
+                //richTextBox1.Text += "完整路徑：" + fi.FullName.ToString() + " 文檔名：" + fi.Name + "\n";
+                //richTextBox1.Text += "資料夾：" + fi.Directory + "\n";
+                richTextBox1.Text += "檔名：" + fi.Name + "\t";
+                richTextBox1.Text += "檔案大小：" + fi.Length.ToString() + "\t";
+                richTextBox1.Text += "修改日期：" + fi.LastWriteTime.ToString() + "\n";
+
+                total_size1 += fi.Length;
+                no_files++;
+
+                ListViewItem i1 = new ListViewItem(fi.Name);
+                ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
+                sub_i1a.Text = fi.Length.ToString();
+                i1.SubItems.Add(sub_i1a);
+                ListViewItem.ListViewSubItem sub_i1b = new ListViewItem.ListViewSubItem();
+                sub_i1b.Text = fi.LastWriteTime.ToString();
+                i1.SubItems.Add(sub_i1b);
+
+                listView1.Items.Add(i1);
+                //設置ListView最後一行可見
+                listView1.Items[listView1.Items.Count - 1].EnsureVisible();
+            }
+            */
+
+            richTextBox1.Text += "轉出全部,列出指定目錄下及所有子目錄及子目錄裏更深層目錄裏的文檔：\n";
+            GetAllFiles(filePath);
+
+            label1.Text = "路徑：" + filePath + "\n大小：" + total_size1.ToString() + " 位元組\n內含：" + no_files.ToString() + " 個檔案，" + (no_folders - 1).ToString() + " 個資料夾";
+
+            //大小：	xxxxx 位元組
+            //內含：   143個檔案，18個資料夾
+        }
+
+        /// <summary>
+        /// 獲得指定目錄下的所有文檔
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public List<FileInfo> GetFilesByDir(string path)
+        {
+            DirectoryInfo di = new DirectoryInfo(path);
+
+            //找到該目錄下的文檔
+            FileInfo[] fi = di.GetFiles();
+
+            //把FileInfo[]數組轉換為List
+            List<FileInfo> list = fi.ToList<FileInfo>();
+            return list;
+        }
+
+        /// <summary>
+        /// 列出指定目錄下及所其有子目錄及子目錄裏更深層目錄裏的文檔（需要遞歸）
+        /// </summary>
+        /// <param name="path"></param>
+        public void GetAllFiles(string path)
+        {
+            DirectoryInfo dir = new DirectoryInfo(path);
+
+            //找到該目錄下的文檔
+            FileInfo[] fi = dir.GetFiles();
+            foreach (FileInfo f in fi)
+            {
+                //richTextBox1.Text += "完整路徑：" + f.FullName.ToString() + " 文檔名：" + f.Name + "\n";
+                //richTextBox1.Text += "資料夾：" + f.Directory + "\n";
+                richTextBox1.Text += "檔名：" + f.Name + "\t";
+                richTextBox1.Text += "大小：" + f.Length.ToString() + "\t";
+                richTextBox1.Text += "日期：" + f.LastWriteTime.ToString() + "\n";
+
+                total_size1 += f.Length;
+                no_files++;
+
+                ListViewItem i1 = new ListViewItem(f.Name);
+                ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
+                sub_i1a.Text = f.Length.ToString();
+                i1.SubItems.Add(sub_i1a);
+                ListViewItem.ListViewSubItem sub_i1b = new ListViewItem.ListViewSubItem();
+                sub_i1b.Text = f.LastWriteTime.ToString();
+                i1.SubItems.Add(sub_i1b);
+
+                listView1.Items.Add(i1);
+                //設置ListView最後一行可見
+                listView1.Items[listView1.Items.Count - 1].EnsureVisible();
+            }
+
+            //找到該目錄下的所有目錄再遞歸
+            DirectoryInfo[] subDir = dir.GetDirectories();
+            no_folders++;
+            foreach (DirectoryInfo d in subDir)
+            {
+                GetAllFiles(d.FullName);
+            }
+        }
+        //獲得指定目錄下的所有文檔 SP
+
+        //------------------------------------------------------------  # 60個
+
+        private void bt_files19_Click(object sender, EventArgs e)
+        {
+            //檔案資訊
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+
+            var GetFileName = Path.GetFileName(filename);
+            var GetFileNameWithoutExtension = Path.GetFileNameWithoutExtension(filename);
+            var GetExtension = Path.GetExtension(filename);
+            var GetDirectoryName = Path.GetDirectoryName(filename);
+            var GetFullPath = Path.GetFullPath(filename);
+
+            var GetPathRoot = Path.GetPathRoot(filename);
+            var GetRandomFileName = Path.GetRandomFileName();
+
+            richTextBox1.Text += "filename\t" + filename + "\n";
+            richTextBox1.Text += "GetFullPath\t" + GetFullPath + "\n";
+            richTextBox1.Text += "GetDirectoryName\t" + GetDirectoryName + "\n";
+            richTextBox1.Text += "GetFileName\t" + GetFileName + "\n";
+            richTextBox1.Text += "GetFileNameWithoutExtension\t" + GetFileNameWithoutExtension + "\n";
+            richTextBox1.Text += "GetExtension\t" + GetExtension + "\n";
+            richTextBox1.Text += "GetPathRoot\t" + GetPathRoot + "\n";
+            richTextBox1.Text += "GetRandomFileName\t" + GetRandomFileName + "\n";
+        }
+
+        //------------------------------------------------------------  # 60個
         //------------------------------------------------------------  # 60個
 
         void get_DirectoryInfo(string foldername)
@@ -2339,6 +2468,29 @@ namespace vcs_DiskDirectoryFile1
 
                 string fileSize = (fi.Length / 1024).ToString() + " KB";
                 richTextBox1.Text += "fileSize = " + fileSize + "\n";
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void ProcessDirectoryInfo(string foldername)
+        {
+            //搜尋子目錄內的所有檔案   一層
+            //使用 DirectoryInfo 和 FileInfo
+
+            DirectoryInfo dinfo = new DirectoryInfo(foldername);
+
+            // 找資料夾, 一層
+            DirectoryInfo[] dis = dinfo.GetDirectories();
+            foreach (DirectoryInfo di in dis)
+            {
+                get_DirectoryInfo(di);
+            }
+
+            // 找檔案, 一層
+            foreach (FileInfo fi in dinfo.GetFiles())
+            {
+                get_FileInfo(fi);
             }
         }
 
@@ -2469,22 +2621,9 @@ richTextBox1.Text += "改名後的長檔名 : " + Path.Combine(foldername, filen
 
         string path = String.Empty;
 
-        public class MyFileInfo
-        {
-            public string filename;
-            public long size;
-            public MyFileInfo(string n, long s)
-            {
-                this.filename = n;
-                this.size = s;
-            }
-        }
-
         //不用宣告長度的陣列(Array)
         // 宣告fileinfos 為List
         // 以下List 裡為MyFileInfo 型態
-
-        List<MyFileInfo> fileinfos = new List<MyFileInfo>();
 
         private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -2551,5 +2690,78 @@ richTextBox1.Text += "改名後的長檔名 : " + Path.Combine(foldername, filen
 //Path.Combine()
 string filename = Path.Combine(Application.StartupPath, @"..\..\Form1.cs");
 richTextBox1.Text += "filename old = " + filename + "\n";
+
+//------------------------------------------------------------  # 60個
+
+            int len = fileinfos.Count;
+
+            richTextBox1.Text += "照檔名排序:\n";
+            for (i = 0; i < 20; i++)
+            {
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\t" + fileinfos[i].filepath + "\t" + fileinfos[i].fileextension + "\t" + fileinfos[i].filecreationtime.ToString() + "\n";
+                //richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\n";
+            }
+
+            //fileinfos[i].filename + "\t" + fileinfos[i].filepath + "\t" + fileinfos[i].fileextension + "\t" + fileinfos[i].filecreationtime.ToString() + "\n";
+
+            for (i = 0; i < 20; i++)
+            {
+                richTextBox1.Text += "加入播放清單: " + fileinfos[i].filepath + "\\" + fileinfos[i].filename + "\n";
+            }
+
+6060
+
+//            fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
+
+6060
+
+fileinfos[i].filecreationtime;
+fileinfos[i].filepath;
+
+bool res;
+res = fi.FullName.ToLower().Replace(" ", "").Contains(tb_search_text_pattern.Text.ToLower().Replace("-", ""));
+
+*/
+
+
+/*
+
+public class MyFileInfo
+{
+    public string filename;
+    public string filepath;
+    public string fileextension;
+    public long filesize;
+    public DateTime filecreationtime;
+
+    public int video_width;
+    public int video_height;
+    public int video_fps;
+    public string video_duration;
+
+    public MyFileInfo(string n, string p, string e, long s, DateTime c)
+    {
+        this.filename = n;
+        this.filepath = p;
+        this.fileextension = e;
+        this.filesize = s;
+        this.filecreationtime = c;
+    }
+
+    public MyFileInfo(string n, string p, string e, long s, DateTime c, int w, int h, int f, string d)
+    {
+        this.filename = n;
+        this.filepath = p;
+        this.fileextension = e;
+        this.filesize = s;
+        this.filecreationtime = c;
+
+        this.video_width = w;
+        this.video_height = h;
+        this.video_fps = f;
+        this.video_duration = d;
+    }
+}
+
 */
 

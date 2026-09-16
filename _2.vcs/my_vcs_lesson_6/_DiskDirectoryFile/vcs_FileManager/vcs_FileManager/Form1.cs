@@ -316,61 +316,41 @@ namespace vcs_FileManager
 
         //------------------------------------------------------------  # 60個
 
-        public void ProcessDirectory(string targetDirectory)
+        public void ProcessDirectory(string foldername)
         {
-            //richTextBox1.Text += "處理Directory " + targetDirectory + "\n";
-            try
+            string[] fileEntries = Directory.GetFiles(foldername);
+            Array.Sort(fileEntries);
+            folder_size = 0;
+            folder_files = 0;
+            foreach (string fileName in fileEntries)
             {
-                //richTextBox1.Text += targetDirectory + "\n\n";
-                //DirectoryInfo di = new DirectoryInfo(targetDirectory);
-                //richTextBox1.Text += di.Name + "\n\n";
-
-                // Process the list of files found in the directory.
-                try
-                {
-                    string[] fileEntries = Directory.GetFiles(targetDirectory);
-                    Array.Sort(fileEntries);
-                    folder_size = 0;
-                    folder_files = 0;
-                    foreach (string fileName in fileEntries)
-                    {
-                        ProcessFile(fileName);
-                    }
-                    //richTextBox1.Text += "folder_name = " + targetDirectory + "\n";
-                    //richTextBox1.Text += "folder_files = " + folder_files.ToString() + "\n";
-                    //richTextBox1.Text += "folder_size = " + folder_size.ToString() + "\n";
-                    if (folder_files == 0)
-                    {
-                        //richTextBox1.Text += "空資料夾 folder_name = " + targetDirectory + "\n";
-                    }
-
-                    // Recurse into subdirectories of this directory.
-                    string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
-                    Array.Sort(subdirectoryEntries);
-                    foreach (string subdirectory in subdirectoryEntries)
-                    {
-                        DirectoryInfo di = new DirectoryInfo(subdirectory);
-                        //richTextBox1.Text += "搜尋子目錄\t" + di.Name + "\n";
-                        FolederName = subdirectory;
-                        ProcessDirectory(subdirectory);
-                    }
-                }
-                catch (UnauthorizedAccessException ex)
-                {
-                    richTextBox1.Text += ex.Message + "\n";
-                }
+                ProcessFile(fileName);
             }
-            catch (IOException e)
+            //richTextBox1.Text += "folder_name = " + foldername + "\n";
+            //richTextBox1.Text += "folder_files = " + folder_files.ToString() + "\n";
+            //richTextBox1.Text += "folder_size = " + folder_size.ToString() + "\n";
+            if (folder_files == 0)
             {
-                richTextBox1.Text += "IOException, " + e.GetType().Name + "\n";
+                //richTextBox1.Text += "空資料夾 folder_name = " + foldername + "\n";
+            }
+
+            // Recurse into subdirectories of this directory.
+            string[] subdirectoryEntries = Directory.GetDirectories(foldername);
+            Array.Sort(subdirectoryEntries);
+            foreach (string subdirectory in subdirectoryEntries)
+            {
+                DirectoryInfo di = new DirectoryInfo(subdirectory);
+                //richTextBox1.Text += "搜尋子目錄\t" + di.Name + "\n";
+                FolederName = subdirectory;
+                ProcessDirectory(subdirectory);
             }
         }
 
-        public void ProcessFile(string path)
+        public void ProcessFile(string filename)
         {
-            //richTextBox1.Text += "處理File " + path + "\n";
+            //richTextBox1.Text += "處理File " + filename + "\n";
 
-            FileInfo fi = new FileInfo(path);
+            FileInfo fi = new FileInfo(filename);
 
             //richTextBox2.Text += "folder = " + FolederName + ",  name = " + fi.Name + "\n";
 

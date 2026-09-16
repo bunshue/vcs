@@ -397,62 +397,45 @@ namespace vcs_DrAP
 
         //------------------------------------------------------------  # 60個
 
-        public void ProcessDirectory4(string targetDirectory)
+        public void ProcessDirectory4(string foldername)
         {
-            try
+            richTextBox1.Text += "\n開始處理資料夾4 : " + foldername + "\n";
+
+            string[] fileEntries = Directory.GetFiles(foldername);
+            Array.Sort(fileEntries);
+            folder_size = 0;
+            folder_files = 0;
+            foreach (string fileName in fileEntries)
             {
-                //DirectoryInfo di = new DirectoryInfo(targetDirectory);
-                //richTextBox1.Text += di.Name + "\n\n";
-
-                try
-                {
-                    richTextBox1.Text += "\n開始處理資料夾4 : " + targetDirectory + "\n";
-
-                    string[] fileEntries = Directory.GetFiles(targetDirectory);
-                    Array.Sort(fileEntries);
-                    folder_size = 0;
-                    folder_files = 0;
-                    foreach (string fileName in fileEntries)
-                    {
-                        FileInfo fi = new FileInfo(fileName);
-                        fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
-                    }
-                    //richTextBox1.Text += "folder_name = " + targetDirectory + "\n";
-                    //richTextBox1.Text += "folder_files = " + folder_files.ToString() + "\n";
-                    //richTextBox1.Text += "folder_size = " + folder_size.ToString() + "\n";
-                    if (folder_files == 0)
-                    {
-                        //richTextBox1.Text += "空資料夾 folder_name = " + targetDirectory + "\n";
-                    }
-
-                    // Recurse into subdirectories of this directory.
-                    string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
-                    Array.Sort(subdirectoryEntries);
-                    foreach (string subdirectory in subdirectoryEntries)
-                    {
-                        DirectoryInfo di = new DirectoryInfo(subdirectory);
-                        if (cb_file_l.Checked == false)
-                        {
-                            richTextBox1.Text += "\n";
-                            //for (int i = 0; i < step * 2; i++)
-                            //richTextBox1.Text += " ";
-                            richTextBox1.Text += di.Name + "\n";
-                        }
-                        step++;
-                        FolederName = subdirectory;
-                        ProcessDirectory4(subdirectory);
-                    }
-                    step = 0;
-                }
-                catch (UnauthorizedAccessException ex)
-                {
-                    richTextBox1.Text += ex.Message + "\n";
-                }
+                FileInfo fi = new FileInfo(fileName);
+                fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
             }
-            catch (IOException e)
+            //richTextBox1.Text += "folder_name = " + foldername + "\n";
+            //richTextBox1.Text += "folder_files = " + folder_files.ToString() + "\n";
+            //richTextBox1.Text += "folder_size = " + folder_size.ToString() + "\n";
+            if (folder_files == 0)
             {
-                richTextBox1.Text += "IOException, " + e.GetType().Name + "\n";
+                //richTextBox1.Text += "空資料夾 folder_name = " + foldername + "\n";
             }
+
+            // Recurse into subdirectories of this directory.
+            string[] subdirectoryEntries = Directory.GetDirectories(foldername);
+            Array.Sort(subdirectoryEntries);
+            foreach (string subdirectory in subdirectoryEntries)
+            {
+                DirectoryInfo di = new DirectoryInfo(subdirectory);
+                if (cb_file_l.Checked == false)
+                {
+                    richTextBox1.Text += "\n";
+                    //for (int i = 0; i < step * 2; i++)
+                    //richTextBox1.Text += " ";
+                    richTextBox1.Text += di.Name + "\n";
+                }
+                step++;
+                FolederName = subdirectory;
+                ProcessDirectory4(subdirectory);
+            }
+            step = 0;
         }
 
         //------------------------------------------------------------  # 60個
@@ -1200,71 +1183,62 @@ namespace vcs_DrAP
 
         //------------------------------------------------------------  # 60個
 
-        public void ProcessDirectoryS(string targetDirectory)
+        public void ProcessDirectoryS(string foldername)
         {
-            try
+            string[] fileEntries = Directory.GetFiles(foldername);
+            Array.Sort(fileEntries);
+            foreach (string fileName in fileEntries)
             {
-                //richTextBox1.Text += "\n開始處理資料夾S : " + targetDirectory + "\n";
+                ProcessFileS(fileName);
+            }
 
-                string[] fileEntries = Directory.GetFiles(targetDirectory);
-                Array.Sort(fileEntries);
-                foreach (string fileName in fileEntries)
+            // Recurse into subdirectories of this directory.
+            string[] subdirectoryEntries = Directory.GetDirectories(foldername);
+            Array.Sort(subdirectoryEntries);
+            foreach (string subdirectory in subdirectoryEntries)
+            {
+                DirectoryInfo di = new DirectoryInfo(subdirectory);
+                //result_str += subdirectory + "\n";
+
+                if (search_mode == SEARCH_MODE_PYTHON)
                 {
-                    ProcessFileS(fileName);
-                }
+                    string search_folder1 = @"D:\_git\vcs\_4.python\__code";    //書附光碟
 
-                // Recurse into subdirectories of this directory.
-                string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
-                Array.Sort(subdirectoryEntries);
-                foreach (string subdirectory in subdirectoryEntries)
-                {
-                    DirectoryInfo di = new DirectoryInfo(subdirectory);
-                    //result_str += subdirectory + "\n";
-
-                    if (search_mode == SEARCH_MODE_PYTHON)
+                    if (rb_python_search0.Checked == true)
                     {
-                        string search_folder1 = @"D:\_git\vcs\_4.python\__code";    //書附光碟
-
-                        if (rb_python_search0.Checked == true)
+                        //python only 不包含 書附光碟
+                        if (subdirectory.Contains(search_folder1))
                         {
-                            //python only 不包含 書附光碟
-                            if (subdirectory.Contains(search_folder1))
-                            {
-                                //跳過 書附光碟
-                                result_str += "跳過 " + subdirectory + "\n";
-                                continue;
-                            }
-                            else
-                            {
-                                ProcessDirectoryS(subdirectory);
-                            }
-                        }
-                        else if (rb_python_search1.Checked == true)
-                        {
-                            //全部
-                            ProcessDirectoryS(subdirectory);
+                            //跳過 書附光碟
+                            result_str += "跳過 " + subdirectory + "\n";
+                            continue;
                         }
                         else
                         {
-                            //impossible
-                            result_str += "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n";
-                            //python only 不包含新進檔案 與 書附光碟
+                            ProcessDirectoryS(subdirectory);
                         }
                     }
-                    else if (search_mode == SEARCH_MODE_VCS)
+                    else if (rb_python_search1.Checked == true)
                     {
+                        //全部
                         ProcessDirectoryS(subdirectory);
                     }
                     else
                     {
-                        //除了python 與 vcs, 全部搜尋
-                        ProcessDirectoryS(subdirectory);
+                        //impossible
+                        result_str += "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n";
+                        //python only 不包含新進檔案 與 書附光碟
                     }
                 }
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                result_str += ex.Message + "\n";
+                else if (search_mode == SEARCH_MODE_VCS)
+                {
+                    ProcessDirectoryS(subdirectory);
+                }
+                else
+                {
+                    //除了python 與 vcs, 全部搜尋
+                    ProcessDirectoryS(subdirectory);
+                }
             }
         }
 
@@ -1287,21 +1261,7 @@ namespace vcs_DrAP
 
             //richTextBox1.Text += "處理File " + path + "\n";
 
-            FileInfo fi;
-
-            try
-            {   //可能會產生錯誤的程式區段
-                fi = new FileInfo(path);
-            }
-            catch (Exception ex)
-            {   //定義產生錯誤時的例外處理程式碼
-                richTextBox1.Text += "錯誤訊息1 : " + ex.Message + "\n";
-                return;
-            }
-            finally
-            {
-                //一定會被執行的程式區段
-            }
+            FileInfo fi = new FileInfo(path);
 
             //在這裡做處理檔案的事情
             get_fileinfo(fi, 1);
@@ -1455,85 +1415,68 @@ namespace vcs_DrAP
 
         //------------------------------------------------------------  # 60個
 
-        public void ProcessDirectory2(string targetDirectory)
+        public void ProcessDirectory2(string foldername)
         {
-            try
+            total_folders++;
+            richTextBox1.Text += "\n開始處理資料夾2 : " + foldername + "\n";
+
+            string[] fileEntries = Directory.GetFiles(foldername);
+            Array.Sort(fileEntries);
+            folder_size = 0;
+            folder_files = 0;
+            foreach (string fileName in fileEntries)
             {
-                //DirectoryInfo di = new DirectoryInfo(targetDirectory);
-                //richTextBox1.Text += di.Name + "\n\n";
+                ProcessFile2(fileName, step);
+            }
 
-                try
+
+            // Recurse into subdirectories of this directory.
+            string[] subdirectoryEntries = Directory.GetDirectories(foldername);
+            Array.Sort(subdirectoryEntries);
+
+            //richTextBox1.Text += "共有 " + subdirectoryEntries.Length.ToString() + " 個子目錄\n";
+            foreach (string subdirectory in subdirectoryEntries)
+            {
+                richTextBox1.Text += "dir = " + subdirectory + "\n";
+            }
+
+            richTextBox1.Text += "資料夾 : " + foldername + " ";
+            richTextBox1.Text += "子目錄數 : " + subdirectoryEntries.Length.ToString() + "\t";
+            richTextBox1.Text += "檔案數 : " + folder_files.ToString() + "\t";
+            richTextBox1.Text += "檔案大小總計 : " + folder_size.ToString() + "\n";
+            if (folder_files == 0)
+            {
+                richTextBox1.Text += "空資料夾 folder_name = " + foldername + "\n";
+            }
+
+            if (subdirectoryEntries.Length == 0)
+            {
+                richTextBox1.Text += "資料夾 : " + foldername + " 是最底層的資料夾\n";
+                if (folder_size < min_size_mb * 1024 * 1024)
                 {
-                    total_folders++;
-                    richTextBox1.Text += "\n開始處理資料夾2 : " + targetDirectory + "\n";
-
-                    string[] fileEntries = Directory.GetFiles(targetDirectory);
-                    Array.Sort(fileEntries);
-                    folder_size = 0;
-                    folder_files = 0;
-                    foreach (string fileName in fileEntries)
-                    {
-                        ProcessFile2(fileName, step);
-                    }
-
-
-                    // Recurse into subdirectories of this directory.
-                    string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
-                    Array.Sort(subdirectoryEntries);
-
-                    //richTextBox1.Text += "共有 " + subdirectoryEntries.Length.ToString() + " 個子目錄\n";
-                    foreach (string subdirectory in subdirectoryEntries)
-                    {
-                        richTextBox1.Text += "dir = " + subdirectory + "\n";
-                    }
-
-                    richTextBox1.Text += "資料夾 : " + targetDirectory + " ";
-                    richTextBox1.Text += "子目錄數 : " + subdirectoryEntries.Length.ToString() + "\t";
-                    richTextBox1.Text += "檔案數 : " + folder_files.ToString() + "\t";
-                    richTextBox1.Text += "檔案大小總計 : " + folder_size.ToString() + "\n";
-                    if (folder_files == 0)
-                    {
-                        richTextBox1.Text += "空資料夾 folder_name = " + targetDirectory + "\n";
-                    }
-
-                    if (subdirectoryEntries.Length == 0)
-                    {
-                        richTextBox1.Text += "資料夾 : " + targetDirectory + " 是最底層的資料夾\n";
-                        if (folder_size < min_size_mb * 1024 * 1024)
-                        {
-                            DirectoryInfo di = new DirectoryInfo(targetDirectory);
-                            //richTextBox1.Text += "建立日期:\t" + di.CreationTime.ToString() + "\n\n";
-                            folderinfos.Add(new MyFolderInfo(targetDirectory, targetDirectory, folder_size, di.CreationTime));
-                        }
-                    }
-
-                    foreach (string subdirectory in subdirectoryEntries)
-                    {
-                        DirectoryInfo di = new DirectoryInfo(subdirectory);
-                        if (cb_file_l.Checked == false)
-                        {
-                            richTextBox1.Text += "xxxxxxxxxxx\n";
-                            richTextBox1.Text += "\n";
-                            //for (int i = 0; i < step * 2; i++)
-                            //richTextBox1.Text += " ";
-                            richTextBox1.Text += di.Name + "\n";
-                        }
-                        step++;
-                        FolederName = subdirectory;
-                        ProcessDirectory2(subdirectory);
-                    }
-                    step = 0;
-                }
-                catch (UnauthorizedAccessException ex)
-                {
-                    richTextBox1.Text += ex.Message + "\n";
+                    DirectoryInfo di = new DirectoryInfo(foldername);
+                    //richTextBox1.Text += "建立日期:\t" + di.CreationTime.ToString() + "\n\n";
+                    folderinfos.Add(new MyFolderInfo(foldername, foldername, folder_size, di.CreationTime));
                 }
             }
-            catch (IOException e)
+
+            foreach (string subdirectory in subdirectoryEntries)
             {
-                richTextBox1.Text += "IOException, " + e.GetType().Name + "\n";
+                DirectoryInfo di = new DirectoryInfo(subdirectory);
+                if (cb_file_l.Checked == false)
+                {
+                    richTextBox1.Text += "xxxxxxxxxxx\n";
+                    richTextBox1.Text += "\n";
+                    //for (int i = 0; i < step * 2; i++)
+                    //richTextBox1.Text += " ";
+                    richTextBox1.Text += di.Name + "\n";
+                }
+                step++;
+                FolederName = subdirectory;
+                ProcessDirectory2(subdirectory);
             }
-            richTextBox1.Text += "處理資料夾 : " + targetDirectory + " 結束\n";
+            step = 0;
+            richTextBox1.Text += "處理資料夾 : " + foldername + " 結束\n";
             //此目錄狀況
         }
 
@@ -1543,21 +1486,7 @@ namespace vcs_DrAP
         {
             //richTextBox1.Text += "處理File " + path + "\n";
 
-            FileInfo fi;
-
-            try
-            {   //可能會產生錯誤的程式區段
-                fi = new FileInfo(path);
-            }
-            catch (Exception ex)
-            {   //定義產生錯誤時的例外處理程式碼
-                richTextBox1.Text += "錯誤訊息1 : " + ex.Message + "\n";
-                return;
-            }
-            finally
-            {
-                //一定會被執行的程式區段
-            }
+            FileInfo fi = new FileInfo(path);
 
             //在這裡做處理檔案的事情
             get_fileinfo(fi, 2);
@@ -2154,60 +2083,45 @@ namespace vcs_DrAP
 
         //------------------------------------------------------------  # 60個
 
-        public void ProcessDirectory3(string targetDirectory)
+        public void ProcessDirectory3(string foldername)
         {
-            try
+            int file_cnt = 0;
+            int dir_cnt = 0;
+            richTextBox1.Text += "\n開始處理資料夾3 : " + foldername + "\n";
+
+            string[] fileEntries = Directory.GetFiles(foldername);
+            file_cnt = fileEntries.Length;
+            Array.Sort(fileEntries);
+            foreach (string fileName in fileEntries)
             {
-                int file_cnt = 0;
-                int dir_cnt = 0;
-
-                try
-                {
-                    richTextBox1.Text += "\n開始處理資料夾3 : " + targetDirectory + "\n";
-
-                    string[] fileEntries = Directory.GetFiles(targetDirectory);
-                    file_cnt = fileEntries.Length;
-                    Array.Sort(fileEntries);
-                    foreach (string fileName in fileEntries)
-                    {
-                    }
-
-                    // Recurse into subdirectories of this directory.
-                    string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
-                    dir_cnt = subdirectoryEntries.Length;
-                    Array.Sort(subdirectoryEntries);
-                    foreach (string subdirectory in subdirectoryEntries)
-                    {
-                        //richTextBox1.Text += "subdirectory = " + subdirectory + "\n";
-                        DirectoryInfo di = new DirectoryInfo(subdirectory);
-                        ProcessDirectory3(subdirectory);
-                    }
-                }
-                catch (UnauthorizedAccessException ex)
-                {
-                    richTextBox1.Text += ex.Message + "\n";
-                }
-                if ((file_cnt == 0) && (dir_cnt == 0))
-                {
-                    /*
-                    if (checkBox9.Checked == true)
-                    {
-                        richTextBox1.Text += targetDirectory + "是一個空資料夾\n";
-                        total_show_empty_folder_cnt++;
-                    }
-                    if (checkBox10.Checked == true)
-                    {
-                        //richTextBox1.Text += "刪除 : " + targetDirectory + "是一個空資料夾\n";
-                        Directory.Delete(targetDirectory, false);   //not recurrsive
-                        richTextBox1.Text += "已刪除資料夾 : " + targetDirectory + "\n";
-                        total_delete_empty_folder_cnt++;
-                    }
-                    */
-                }
             }
-            catch (IOException e)
+
+            // Recurse into subdirectories of this directory.
+            string[] subdirectoryEntries = Directory.GetDirectories(foldername);
+            dir_cnt = subdirectoryEntries.Length;
+            Array.Sort(subdirectoryEntries);
+            foreach (string subdirectory in subdirectoryEntries)
             {
-                richTextBox1.Text += "IOException, " + e.GetType().Name + "\n";
+                //richTextBox1.Text += "subdirectory = " + subdirectory + "\n";
+                DirectoryInfo di = new DirectoryInfo(subdirectory);
+                ProcessDirectory3(subdirectory);
+            }
+            if ((file_cnt == 0) && (dir_cnt == 0))
+            {
+                /*
+                if (checkBox9.Checked == true)
+                {
+                    richTextBox1.Text += foldername + "是一個空資料夾\n";
+                    total_show_empty_folder_cnt++;
+                }
+                if (checkBox10.Checked == true)
+                {
+                    //richTextBox1.Text += "刪除 : " + foldername + "是一個空資料夾\n";
+                    Directory.Delete(foldername, false);   //not recurrsive
+                    richTextBox1.Text += "已刪除資料夾 : " + foldername + "\n";
+                    total_delete_empty_folder_cnt++;
+                }
+                */
             }
         }
 
@@ -2425,12 +2339,6 @@ namespace vcs_DrAP
 
 // if (((cb_file_l.Checked == true) && (fi.Length > min_size_mb * 1024 * 1024)) || (cb_file_l.Checked == false))
 
-/*
-bool res;
-res = fi.FullName.ToLower().Replace(" ", "").Contains(tb_search_text_pattern.Text.ToLower().Replace("-", ""));
-res = fi.FullName.ToLower().Replace(" ", "").Contains(tb_search_text_pattern.Text.ToLower().Replace("-", ""));
-*/
-
 //tb_file_l
 //tb_file_s
 //tb_file_s
@@ -2452,33 +2360,6 @@ listView1.Visible = true;
 
 //------------------------------------------------------------  # 60個
 
-fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
-
-檔名
-fileinfos[i].filename;
-檔案大小
-ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
-
-檔案日期
-fileinfos[i].filecreationtime;
-
-fileinfos[i].filepath;
-
-//fileinfos
-//排序 由小到大
-//fileinfos.Sort((x, y) => { return x.filesize.CompareTo(y.filesize); });
-
-//排序 由大到小  在return的地方多個負號
-//fileinfos.Sort((x, y) => { return -x.filesize.CompareTo(y.filesize); });
-
-bool res;
-res = fi.FullName.ToLower().Replace(" ", "").Contains(tb_search_text_pattern.Text.ToLower().Replace("-", ""));
-
-*/
-
-//------------------------------------------------------------  # 60個
-
-/*
             //播放 listview 多選的檔案
             int selNdx;
             string all_filename = string.Empty;

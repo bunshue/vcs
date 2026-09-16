@@ -165,124 +165,108 @@ namespace vcs_Remove_Bin_Obj
             richTextBox1.Text += result_str;
         }
 
-        // Process all files in the directory passed in, recurse on any directories 
-        // that are found, and process the files they contain.
-        public void ProcessDirectory(string targetDirectory)
+        public void ProcessDirectory(string foldername)
         {
-            try
+            int file_cnt = 0;
+            int dir_cnt = 0;
+
+            string[] fileEntries = Directory.GetFiles(foldername);
+            file_cnt = fileEntries.Length;
+            Array.Sort(fileEntries);
+            foreach (string fileName in fileEntries)
             {
-                int file_cnt = 0;
-                int dir_cnt = 0;
-
-                // Process the list of files found in the directory.
-                try
+                if ((fileName.EndsWith(".suo")) || (fileName.EndsWith(".csproj.user")))
                 {
-                    string[] fileEntries = Directory.GetFiles(targetDirectory);
-                    file_cnt = fileEntries.Length;
-                    Array.Sort(fileEntries);
-                    foreach (string fileName in fileEntries)
+                    if (checkBox4.Checked == true)
                     {
-                        if ((fileName.EndsWith(".suo")) || (fileName.EndsWith(".csproj.user")))
-                        {
-                            if (checkBox4.Checked == true)
-                            {
-                                result_str += fileName + "\n";   //僅顯示
-                            }
-                            if (checkBox2.Checked == true)
-                            {
-                                folder_name.Add(fileName);              //加入刪除準備
-                            }
-                        }
-                        if ((fileName.EndsWith("UpgradeLog.XML")) || (fileName.EndsWith("UpgradeLog.XML")))
-                        {
-                            if (checkBox7.Checked == true)
-                            {
-                                result_str += fileName + "\n";   //僅顯示
-                            }
-                            if (checkBox8.Checked == true)
-                            {
-                                folder_name.Add(fileName);              //加入刪除準備
-                            }
-                        }
+                        result_str += fileName + "\n";   //僅顯示
                     }
-
-                    // Recurse into subdirectories of this directory.
-                    string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
-                    dir_cnt = subdirectoryEntries.Length;
-                    Array.Sort(subdirectoryEntries);
-                    foreach (string subdirectory in subdirectoryEntries)
+                    if (checkBox2.Checked == true)
                     {
-                        //result_str += "subdirectory = " + subdirectory + "\n";
-
-                        if (subdirectory.EndsWith("\\bin"))
-                        {
-                            if (checkBox3.Checked == true)
-                                result_str += subdirectory + "\n";
-                            if (checkBox1.Checked == true)
-                                folder_name.Add(subdirectory);
-                        }
-                        else if (subdirectory.EndsWith("\\obj"))
-                        {
-                            if (checkBox3.Checked == true)
-                                result_str += subdirectory + "\n";
-                            if (checkBox1.Checked == true)
-                                folder_name.Add(subdirectory);
-                        }
-                        else if (subdirectory.EndsWith("\\.vs"))
-                        {
-                            if (checkBox3.Checked == true)
-                                result_str += subdirectory + "\n";
-                            if (checkBox1.Checked == true)
-                                folder_name.Add(subdirectory);
-                        }
-                        else if (subdirectory.EndsWith("\\x64"))
-                        {
-                            if (checkBox3.Checked == true)
-                                result_str += subdirectory + "\n";
-                            if (checkBox1.Checked == true)
-                                folder_name.Add(subdirectory);
-                        }
-                        else if ((subdirectory.EndsWith("\\_UpgradeReport_Files")) || (subdirectory.EndsWith("Backup")))
-                        {
-                            if (checkBox7.Checked == true)
-                                result_str += subdirectory + "\n";   //僅顯示
-                            if (checkBox8.Checked == true)
-                                folder_name.Add(subdirectory);              //加入刪除準備
-                        }
-                        else if (subdirectory.EndsWith("\\Debug"))
-                        {
-                            if (checkBox3.Checked == true)
-                                result_str += subdirectory + "\n";
-                            if (checkBox1.Checked == true)
-                                folder_name.Add(subdirectory);
-                        }
-                        DirectoryInfo di = new DirectoryInfo(subdirectory);
-                        ProcessDirectory(subdirectory);
+                        folder_name.Add(fileName);              //加入刪除準備
                     }
                 }
-                catch (UnauthorizedAccessException ex)
+                if ((fileName.EndsWith("UpgradeLog.XML")) || (fileName.EndsWith("UpgradeLog.XML")))
                 {
-                    result_str += ex.Message + "\n";
-                }
-                if ((file_cnt == 0) && (dir_cnt == 0))
-                {
-                    if (checkBox9.Checked == true)
+                    if (checkBox7.Checked == true)
                     {
-                        result_str += targetDirectory + "是一個空資料夾\n";
-                        total_show_empty_folder_cnt++;
+                        result_str += fileName + "\n";   //僅顯示
                     }
-                    if (checkBox10.Checked == true)
+                    if (checkBox8.Checked == true)
                     {
-                        //result_str += "刪除 : " + targetDirectory + "是一個空資料夾\n";
-                        Directory.Delete(targetDirectory, false);   //not recurrsive
-                        result_str += "已刪除資料夾 : " + targetDirectory + "\n";
-                        total_delete_empty_folder_cnt++;
+                        folder_name.Add(fileName);              //加入刪除準備
                     }
                 }
             }
-            catch (IOException e)
+
+            // Recurse into subdirectories of this directory.
+            string[] subdirectoryEntries = Directory.GetDirectories(foldername);
+            dir_cnt = subdirectoryEntries.Length;
+            Array.Sort(subdirectoryEntries);
+            foreach (string subdirectory in subdirectoryEntries)
             {
-                result_str += "IOException, " + e.GetType().Name + "\n";
+                //result_str += "subdirectory = " + subdirectory + "\n";
+
+                if (subdirectory.EndsWith("\\bin"))
+                {
+                    if (checkBox3.Checked == true)
+                        result_str += subdirectory + "\n";
+                    if (checkBox1.Checked == true)
+                        folder_name.Add(subdirectory);
+                }
+                else if (subdirectory.EndsWith("\\obj"))
+                {
+                    if (checkBox3.Checked == true)
+                        result_str += subdirectory + "\n";
+                    if (checkBox1.Checked == true)
+                        folder_name.Add(subdirectory);
+                }
+                else if (subdirectory.EndsWith("\\.vs"))
+                {
+                    if (checkBox3.Checked == true)
+                        result_str += subdirectory + "\n";
+                    if (checkBox1.Checked == true)
+                        folder_name.Add(subdirectory);
+                }
+                else if (subdirectory.EndsWith("\\x64"))
+                {
+                    if (checkBox3.Checked == true)
+                        result_str += subdirectory + "\n";
+                    if (checkBox1.Checked == true)
+                        folder_name.Add(subdirectory);
+                }
+                else if ((subdirectory.EndsWith("\\_UpgradeReport_Files")) || (subdirectory.EndsWith("Backup")))
+                {
+                    if (checkBox7.Checked == true)
+                        result_str += subdirectory + "\n";   //僅顯示
+                    if (checkBox8.Checked == true)
+                        folder_name.Add(subdirectory);              //加入刪除準備
+                }
+                else if (subdirectory.EndsWith("\\Debug"))
+                {
+                    if (checkBox3.Checked == true)
+                        result_str += subdirectory + "\n";
+                    if (checkBox1.Checked == true)
+                        folder_name.Add(subdirectory);
+                }
+                DirectoryInfo di = new DirectoryInfo(subdirectory);
+                ProcessDirectory(subdirectory);
+            }
+
+            if ((file_cnt == 0) && (dir_cnt == 0))
+            {
+                if (checkBox9.Checked == true)
+                {
+                    result_str += foldername + "是一個空資料夾\n";
+                    total_show_empty_folder_cnt++;
+                }
+                if (checkBox10.Checked == true)
+                {
+                    //result_str += "刪除 : " + foldername + "是一個空資料夾\n";
+                    Directory.Delete(foldername, false);   //not recurrsive
+                    result_str += "已刪除資料夾 : " + foldername + "\n";
+                    total_delete_empty_folder_cnt++;
+                }
             }
         }
 
