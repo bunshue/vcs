@@ -1464,28 +1464,15 @@ string text = String.Format("寫字範例\nSlate Blue has these ARGB values:\n A
             richTextBox1.Text += "合法\n";
 
 //------------------------------------------------------------  # 60個
-                string[] strArray = line.Split('\t');
-                for (int i = 0; i < strArray.Length; i++)
-                {
-                    richTextBox1.Text += strArray[i] + "\n";
-                }
-//------------------------------------------------------------  # 60個
 string my_string = "   歡迎來到Myson Century!   ";
 
 string str2 = "ON-C";
 bool res = my_string.ToLower().Replace(" ", "").Contains(str2.ToLower().Replace("-", ""));
 richTextBox1.Text += "result = " + res.ToString() + "\n";
 
-
 string thumb = fpath + fn.Replace(CodecExtension, ".jpg");
 
 */
-
-
-
-
-
-
 
 
 

@@ -55,7 +55,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.bt_clear3 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.tb_find = new System.Windows.Forms.TextBox();
             this.button0 = new System.Windows.Forms.Button();
             this.lb_files = new System.Windows.Forms.Label();
             this.lb_filesize = new System.Windows.Forms.Label();
@@ -93,7 +92,6 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(200, 50);
             this.button1.TabIndex = 8;
-            this.button1.Text = "從一個資料夾中撈出所有檔案 標準版 多層";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -175,7 +173,7 @@
             this.groupBox3.Controls.Add(this.cb_compare0);
             this.groupBox3.Location = new System.Drawing.Point(223, 118);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(107, 130);
+            this.groupBox3.Size = new System.Drawing.Size(107, 102);
             this.groupBox3.TabIndex = 13;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "比較";
@@ -353,16 +351,6 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
-            // tb_find
-            // 
-            this.tb_find.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_find.Location = new System.Drawing.Point(221, 320);
-            this.tb_find.Name = "tb_find";
-            this.tb_find.Size = new System.Drawing.Size(141, 36);
-            this.tb_find.TabIndex = 60;
-            this.tb_find.Text = "maron";
-            this.tb_find.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_find_KeyPress);
-            // 
             // button0
             // 
             this.button0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -410,7 +398,6 @@
             this.ClientSize = new System.Drawing.Size(637, 591);
             this.Controls.Add(this.lb_find);
             this.Controls.Add(this.button0);
-            this.Controls.Add(this.tb_find);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.bt_clear3);
             this.Controls.Add(this.groupBox_file);
@@ -473,7 +460,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button bt_clear3;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.TextBox tb_find;
         private System.Windows.Forms.Button button0;
         private System.Windows.Forms.Label lb_files;
         private System.Windows.Forms.Label lb_filesize;
