@@ -367,7 +367,7 @@ namespace vcs_Clipboard
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             pictureBox1.Image = bitmap1;
-            Clipboard.SetImage(bitmap1);//將影像資料放置到剪貼簿中
+            Clipboard.SetImage(bitmap1);  // 將影像資料放置到剪貼簿中
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -441,6 +441,10 @@ namespace vcs_Clipboard
             //Clipboard.GetData(DataFormats.Text) 目前剪貼簿內的文字資料
             //Clipboard.GetText() 目前剪貼簿內的文字資料
             Clipboard.SetDataObject(Clipboard.GetText() + "累計複製資料到剪貼簿 " + DateTime.Now.ToString() + "\n");      //建議用此  //將poem字串填到Clipboard裏。
+
+            // 複製資料到剪貼簿 累計
+            Clipboard.SetDataObject(Clipboard.GetText() + "AAAAAAAAAAAA\n");      //建議用此
+            Clipboard.SetDataObject(Clipboard.GetText() + "AAAAAAAAAAAA\n");      //建議用此
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -711,68 +715,12 @@ namespace vcs_Clipboard
 /*
 //clipboardData.setData('text',clipboardData.getData('text').)" />
 
-將Bitmap的資料放到剪貼簿裏
-            richTextBox1.Text += "將Bitmap的資料放到剪貼簿裏\n";
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-            pictureBox1.Image = bitmap1;
-
-            //從pictureBox取得Bitmap
-            //Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
-
-            //複製到剪貼簿
-            Clipboard.SetImage(bitmap1);
-
-//------------------------------------------------------------  # 60個
-
-將Bitmap的資料放到剪貼簿裏
-            richTextBox1.Text += "將Bitmap的資料放到剪貼簿裏\n";
-
-            Rectangle select_rectangle = new Rectangle(new Point(100, 100), new Size(150, 150));    //用來保存截圖的矩形
-
-            CopyToClipboard(select_rectangle);
-
-
-        private void CopyToClipboard(Rectangle src_rect)
-        {
-            // Make a bitmap for the selected area's image.
-            Bitmap bm = new Bitmap(src_rect.Width, src_rect.Height);
-
-            // Copy the selected area into the bitmap.
-            using (Graphics g = Graphics.FromImage(bm))
-            {
-                Rectangle dst_rect = new Rectangle(0, 0, src_rect.Width, src_rect.Height);
-                g.DrawImage(bitmap1, dst_rect, src_rect, GraphicsUnit.Pixel);
-            }
-
-            Clipboard.SetImage(bm);
-        }
-
-//------------------------------------------------------------  # 60個
-
-            richTextBox1.Text += "將圖片資料放置到Clipboard中\n";
-            Clipboard.SetImage(bitmap2);
-
 //------------------------------------------------------------  # 60個
 
             //C# – 複製資料到剪貼簿
             //Clipboard.SetData(DataFormats.Text, richTextBox1.Text + "\n");
             Clipboard.SetDataObject(richTextBox1.Text + "\n");      //建議用此
             richTextBox1.Text += "已複製資料到系統剪貼簿\n";
-//------------------------------------------------------------  # 60個
-
-            // 複製資料到剪貼簿
-            Clipboard.Clear();
-
-            for (int i = 0; i < listView1.Items.Count; i++)
-            {
-                richTextBox2.Text += listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\n";
-
-                // 複製資料到剪貼簿 累計
-                Clipboard.SetDataObject(Clipboard.GetText() + listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\n");      //建議用此
-            }
-
 //------------------------------------------------------------  # 60個
 
 */

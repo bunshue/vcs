@@ -1,4 +1,4 @@
-﻿namespace vcs_search_history
+﻿namespace vcs_SearchHistory
 {
     partial class Form1
     {
@@ -40,10 +40,10 @@
             // bt_clear_pattern
             // 
             this.bt_clear_pattern.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_clear_pattern.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear_pattern.Location = new System.Drawing.Point(222, 82);
+            this.bt_clear_pattern.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear_pattern.Location = new System.Drawing.Point(234, 104);
             this.bt_clear_pattern.Name = "bt_clear_pattern";
-            this.bt_clear_pattern.Size = new System.Drawing.Size(20, 20);
+            this.bt_clear_pattern.Size = new System.Drawing.Size(40, 40);
             this.bt_clear_pattern.TabIndex = 38;
             this.bt_clear_pattern.Text = "C";
             this.bt_clear_pattern.UseVisualStyleBackColor = true;
@@ -52,10 +52,10 @@
             // bt_remove_pattern
             // 
             this.bt_remove_pattern.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_remove_pattern.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_remove_pattern.Location = new System.Drawing.Point(222, 52);
+            this.bt_remove_pattern.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_remove_pattern.Location = new System.Drawing.Point(234, 58);
             this.bt_remove_pattern.Name = "bt_remove_pattern";
-            this.bt_remove_pattern.Size = new System.Drawing.Size(20, 20);
+            this.bt_remove_pattern.Size = new System.Drawing.Size(40, 40);
             this.bt_remove_pattern.TabIndex = 37;
             this.bt_remove_pattern.Text = "-";
             this.bt_remove_pattern.UseVisualStyleBackColor = true;
@@ -64,10 +64,10 @@
             // bt_add_pattern
             // 
             this.bt_add_pattern.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_add_pattern.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_add_pattern.Location = new System.Drawing.Point(222, 22);
+            this.bt_add_pattern.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_add_pattern.Location = new System.Drawing.Point(234, 12);
             this.bt_add_pattern.Name = "bt_add_pattern";
-            this.bt_add_pattern.Size = new System.Drawing.Size(20, 20);
+            this.bt_add_pattern.Size = new System.Drawing.Size(40, 40);
             this.bt_add_pattern.TabIndex = 36;
             this.bt_add_pattern.Text = "+";
             this.bt_add_pattern.UseVisualStyleBackColor = true;
@@ -75,17 +75,18 @@
             // 
             // listBox1
             // 
+            this.listBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 12;
+            this.listBox1.ItemHeight = 19;
             this.listBox1.Location = new System.Drawing.Point(12, 12);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(194, 268);
+            this.listBox1.Size = new System.Drawing.Size(205, 251);
             this.listBox1.TabIndex = 35;
             // 
             // tb_search
             // 
             this.tb_search.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_search.Location = new System.Drawing.Point(280, 38);
+            this.tb_search.Location = new System.Drawing.Point(289, 12);
             this.tb_search.Name = "tb_search";
             this.tb_search.Size = new System.Drawing.Size(225, 30);
             this.tb_search.TabIndex = 39;

@@ -7,7 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace vcs_search_history
+// 搜尋歷史記錄
+
+namespace vcs_SearchHistory
 {
     public partial class Form1 : Form
     {
@@ -34,45 +36,12 @@ namespace vcs_search_history
             }
         }
 
-        void show_item_location()
-        {
-            //button
-            int x_st = 10;
-            int y_st = 10;
-            int dx = 200 + 10;
-            int dy = 50 + 10;
-
-            listBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            bt_add_pattern.Location = new Point(x_st + dx * 1 + 10, y_st + dy * 0);
-            bt_remove_pattern.Location = new Point(x_st + dx * 1 + 10, y_st + dy * 0 + 30);
-            bt_clear_pattern.Location = new Point(x_st + dx * 1 + 10, y_st + dy * 0 + 60);
-
-            //tb_search
-
-            richTextBox1.Size = new Size(600, 400);
-            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-
-            this.Size = new Size(700, 800);
-            this.Text = "vcs_search_history";
-
-            //設定執行後的表單起始位置, 正中央
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
-
-        }
-
-        private void bt_clear_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-        }
-
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             int len = listBox1.Items.Count;
             richTextBox1.Text += "len : " + len.ToString() + "\n";
 
-            //儲存搜尋歷史資料
+            // 儲存搜尋歷史記錄
             string search_history = string.Empty;
             for (int i = 0; i < len; i++)
             {
@@ -87,6 +56,38 @@ namespace vcs_search_history
             Properties.Settings.Default.Save();
         }
 
+        void show_item_location()
+        {
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 50 + 10;
+
+            listBox1.Size = new Size(200, 300);
+            listBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_add_pattern.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            bt_remove_pattern.Location = new Point(x_st + dx * 1, y_st + dy * 0 + 50);
+            bt_clear_pattern.Location = new Point(x_st + dx * 1, y_st + dy * 0 + 100);
+            tb_search.Location = new Point(x_st + dx * 1 + 50, y_st + dy * 0);
+
+            richTextBox1.Size = new Size(660, 440);
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(700, 800);
+            this.Text = "vcs_SearchHistory";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
         //------------------------------------------------------------  # 60個
 
         private void tb_search_KeyPress(object sender, KeyPressEventArgs e)
@@ -99,9 +100,7 @@ namespace vcs_search_history
                 string new_search_pattern = tb_search.Text;
                 listBox1.Items.Add(new_search_pattern);
                 tb_search.Clear();
-
             }
-
         }
 
         private void bt_add_pattern_Click(object sender, EventArgs e)
@@ -119,9 +118,6 @@ namespace vcs_search_history
         {
             listBox1.Items.Clear();
         }
-
-        //------------------------------------------------------------  # 60個
-
     }
 }
 

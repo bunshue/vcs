@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_search_history
+namespace vcs_SearchHistory
 {
     static class Program
     {

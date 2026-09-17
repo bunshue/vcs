@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_search_history", "vcs_search_history\vcs_search_history.csproj", "{04DF4DC2-AFDE-4B58-9E5B-B2EF7B1FDCFC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_SearchHistory", "vcs_SearchHistory\vcs_SearchHistory.csproj", "{04DF4DC2-AFDE-4B58-9E5B-B2EF7B1FDCFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

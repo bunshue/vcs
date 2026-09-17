@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_search_history.Properties {
+namespace vcs_SearchHistory.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
