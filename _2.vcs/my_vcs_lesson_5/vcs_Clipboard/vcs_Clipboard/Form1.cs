@@ -760,6 +760,18 @@ namespace vcs_Clipboard
             //Clipboard.SetData(DataFormats.Text, richTextBox1.Text + "\n");
             Clipboard.SetDataObject(richTextBox1.Text + "\n");      //建議用此
             richTextBox1.Text += "已複製資料到系統剪貼簿\n";
+//------------------------------------------------------------  # 60個
+
+            // 複製資料到剪貼簿
+            Clipboard.Clear();
+
+            for (int i = 0; i < listView1.Items.Count; i++)
+            {
+                richTextBox2.Text += listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\n";
+
+                // 複製資料到剪貼簿 累計
+                Clipboard.SetDataObject(Clipboard.GetText() + listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\n");      //建議用此
+            }
 
 //------------------------------------------------------------  # 60個
 

@@ -43,9 +43,9 @@ namespace vcs_search_history
             int dy = 50 + 10;
 
             listBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            bt_add_dir.Location = new Point(x_st + dx * 1 + 10, y_st + dy * 0);
-            bt_remove_dir.Location = new Point(x_st + dx * 1 + 10, y_st + dy * 0 + 30);
-            bt_clear_dir.Location = new Point(x_st + dx * 1 + 10, y_st + dy * 0 + 60);
+            bt_add_pattern.Location = new Point(x_st + dx * 1 + 10, y_st + dy * 0);
+            bt_remove_pattern.Location = new Point(x_st + dx * 1 + 10, y_st + dy * 0 + 30);
+            bt_clear_pattern.Location = new Point(x_st + dx * 1 + 10, y_st + dy * 0 + 60);
 
             //tb_search
 
@@ -87,6 +87,8 @@ namespace vcs_search_history
             Properties.Settings.Default.Save();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void tb_search_KeyPress(object sender, KeyPressEventArgs e)
         {
             //e.Handled = check_textbox_hexadecimal(e);
@@ -102,7 +104,32 @@ namespace vcs_search_history
 
         }
 
-        //6060
+        private void bt_add_pattern_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Add("AAAAAA");
+        }
+
+        private void bt_remove_pattern_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "移除了 " + listBox1.SelectedItem + "\n";
+            listBox1.Items.Remove(listBox1.SelectedItem);
+        }
+
+        private void bt_clear_pattern_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
 
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+

@@ -96,8 +96,8 @@ namespace vcs_DiskDirectoryFile1
             bt_files24.Location = new Point(x_st + dx * 4, y_st + dy * 4);
             bt_files25.Location = new Point(x_st + dx * 4, y_st + dy * 5);
             lb_files.Location = new Point(x_st + dx * 4, y_st + dy * 6);
-            lb_filesize.Location = new Point(x_st + dx * 4, y_st + dy * 6+25);
-            lb_find.Location = new Point(x_st + dx * 4, y_st + dy * 6+50);
+            lb_filesize.Location = new Point(x_st + dx * 4, y_st + dy * 6 + 25);
+            lb_find.Location = new Point(x_st + dx * 4, y_st + dy * 6 + 50);
             groupBox3.Location = new Point(x_st + dx * 4, y_st + dy * 6 + 75);
             groupBox_file.Location = new Point(x_st + dx * 4, y_st + dy * 6 + 175);
 
@@ -3052,7 +3052,8 @@ namespace vcs_DiskDirectoryFile1
 
         void get_FileInfo(FileInfo fi)
         {
-            richTextBox1.Text += "檔名：" + fi.Name + "\n";
+            richTextBox1.Text += fi.Name + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+
             return;
 
             if (fi.Exists == false)  // 確認檔案是否存在
@@ -3096,13 +3097,15 @@ namespace vcs_DiskDirectoryFile1
             //搜尋子目錄內的所有檔案   一層
             //使用 DirectoryInfo 和 FileInfo
 
+            // 不能排序
+
             DirectoryInfo dinfo = new DirectoryInfo(foldername);
 
             // 找資料夾, 一層
             DirectoryInfo[] dis = dinfo.GetDirectories();  // 傳回目前目錄的子目錄, 一層
             foreach (DirectoryInfo di in dis)
             {
-                get_DirectoryInfo(di);
+                ProcessDirectoryInfo(di.FullName);
             }
 
             // 找檔案, 一層
@@ -3130,6 +3133,7 @@ namespace vcs_DiskDirectoryFile1
                 ProcessDirectory(dir);
             }
 
+            richTextBox1.Text += "資料夾 : " + foldername + "\n";
             // 找檔案, 一層
             //string[] filenames = Directory.GetFiles(foldername, "*.jpg");  // 取得指定目錄中檔案的名稱, 指定副檔名
             string[] filenames = Directory.GetFiles(foldername);  // 取得指定目錄中檔案的名稱
@@ -3244,68 +3248,6 @@ richTextBox1.Text += "改名後的長檔名 : " + Path.Combine(foldername, filen
         // 宣告fileinfos 為List
         // 以下List 裡為MyFileInfo 型態
 
-        private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            int selNdx = listView1.SelectedIndices[0];
-            listView1.Items[selNdx].Selected = true;    //選到的項目
-            //richTextBox1.Text += "count = " + this.listView1.SelectedIndices.Count.ToString() + "\t";
-            richTextBox1.Text += "你選擇了\t" + listView1.Items[selNdx].Text + "\n";
-        }
-
-        private void listView1_KeyDown(object sender, KeyEventArgs e)
-        {
-            //richTextBox1.Text += "KeyDown, 按鍵是：" + e.KeyCode + "\n";
-
-            if (e.KeyCode == Keys.A)
-            {
-                if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
-                {
-                    //richTextBox1.Text += "Ctrl + A\n";
-                    //richTextBox1.Text += "共有項目" + listView1.Items.Count.ToString() + " 個\n";
-
-                    for (int i = 0; i < listView1.Items.Count; i++)
-                    {
-                        //richTextBox1.Text += listView1.Items[i] + "\n";
-                        listView1.Items[i].Selected = true;
-                    }
-                }
-            }
-
-            if (e.KeyCode == Keys.Enter)
-            {
-                //等同於 button9_Click , 以後要改成只是呼叫函數
-
-                richTextBox1.Text += "你選擇了 : " + listView1.SelectedIndices.Count.ToString() + " 個檔案, 分別是\n";
-                for (int i = 0; i < listView1.SelectedIndices.Count; i++)
-                {
-                    richTextBox1.Text += listView1.SelectedItems[i] + "\n";
-                }
-
-                richTextBox1.Text += "播放\n";
-
-                int selNdx;
-                string all_filename = string.Empty;
-                string player_path = @"C:\Program Files (x86)\DAUM\PotPlayer\PotPlayerMini.exe";
-                if (this.listView1.SelectedIndices.Count <= 0)  //總共選擇的個數
-                {
-                    richTextBox1.Text += "無檔可播\n";
-                    return;
-                }
-
-                //richTextBox1.Text += "總共選了 : " + listView1.SelectedItems.Count.ToString() + " 個檔案，分別是 : \n";
-                //for (int i = 0; i < listView1.SelectedIndices.Count; i++)
-                for (int i = 0; i < listView1.SelectedItems.Count; i++)
-                {
-                    selNdx = listView1.SelectedIndices[i];
-                    listView1.Items[selNdx].Selected = true;    //選到的項目
-                    //richTextBox1.Text += listView1.Items[selNdx].Text + "\n";
-                    all_filename += " \"" + listView1.Items[selNdx].Text + "\"";
-                }
-            }
-        }
-
-//------------------------------------------------------------  # 60個
-
             int len = fileinfos.Count;
 
             richTextBox1.Text += "照檔名排序:\n";
@@ -3332,69 +3274,113 @@ res = fi.FullName.ToLower().Replace(" ", "").Contains(tb_search_text_pattern.Tex
 
 //------------------------------------------------------------  # 60個
 
-        void show_listView()
-        {
-            listView1.View = View.Details;  // 定義列表顯示的方式
-            listView1.FullRowSelect = true;  // 整行一起選取
-            listView1.Clear();
-
-            listView1.GridLines = true;  // 網格線
-            listView1.Size = new Size(640 * 2, 480 * 2);
-
-            //設置列名稱
-            listView1.Columns.Add("影片1", 200, HorizontalAlignment.Left);
-            listView1.Columns.Add("大小", 50, HorizontalAlignment.Left);
-            listView1.Columns.Add("檔名1", 400, HorizontalAlignment.Left);
-            listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
-            listView1.Columns.Add("大小", 150, HorizontalAlignment.Left);
-            listView1.Columns.Add("副檔名", 100, HorizontalAlignment.Left);
-            listView1.Columns.Add("修改日期", 100, HorizontalAlignment.Left);
-            listView1.MouseClick += new MouseEventHandler(listView1_MouseClick);
-
-            this.Controls.Add(listView1);
-
-            //加入
-        }
-
-//------------------------------------------------------------  # 60個
-
 //GetDirectories(), GetFiles()
 
-*/
-
-
-
+//------------------------------------------------------------  # 60個
 
 
 //if ((fileinfos[j].filename.Contains(".zip") == true) || (fileinfos[j].filename.Contains(".rar") == true))
 //if ((fileinfos[i].filename.Contains(".zip") == true) || (fileinfos[i].filename.Contains(".rar") == true))
 
-/*
-void show_MyFileInfo(List<MyFileInfo> fis)
-{
-    listView1.Columns.Add("檔名", 300, HorizontalAlignment.Left);
-    listView1.Columns.Add("大小", 90, HorizontalAlignment.Left);
-    listView1.Columns.Add("資料夾", 500, HorizontalAlignment.Left);
-    listView1.Columns.Add("副檔名", 80, HorizontalAlignment.Left);
-    listView1.Columns.Add("修改日期", 150, HorizontalAlignment.Left);
-    listView1.Columns.Add("簡名", 180, HorizontalAlignment.Left);
-    listView1.Columns.Add("格式", 180, HorizontalAlignment.Left);
+List<String> old_search_path = new List<String>();
+            foreach (string sss in old_search_path)
+            {
+                richTextBox1.Text += "add " + sss + "\n";
+                listBox1.Items.Add(sss);
+            }
 
-    for (int i = 0; i < fis.Count; i++)
-    {
-        //itemf = get_shortname(fis[i].filename);  //過濾掉檔名的一些字 用以做比較用
+        string video_player_path = String.Empty;
+        string audio_player_path = String.Empty;
+        string picture_viewer_path = String.Empty;
+        //string text_editor_path = String.Empty;
+        string search_path = String.Empty;
+       
 
-        //sub_i10.Text = w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
+        Int64 total_size = 0;
+        Int64 total_files = 0;
+        //Int64 total_folders = 0;
+        Int64 folder_size = 0;
+        Int64 folder_files = 0;
 
-        //sub_i1a.Text = fis[i].filepath;
-        //sub_i1a.Text = w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
+        string FolederName = string.Empty;
+        List<MyFileInfo> fileinfos = new List<MyFileInfo>();
+        List<MyFileInfo> fileinfos_match = new List<MyFileInfo>();
 
-        //sub_i1b.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fis[i].filesize));
-    }
-}
+        //bool flag_check_filesize = false;
+        int check_filesize = 100;   //100 MB
+
+        //bool flag_check_count = false;
+        int skip_count = 100;
+
+        bool flag_need_shortname = false;
+
+        public class MyFileInfo
+        {
+            public string filename;
+            public string fullfilename;
+            public string shortfilename;
+            public string filepath;
+            public string fileextension;
+            public long filesize;
+            public DateTime filecreationtime;
+
+            public int video_width;
+            public int video_height;
+            public int video_fps;
+            public string video_duration;
+
+            public MyFileInfo(string n, string p, string e, long s, DateTime c)
+            {
+                this.filename = n;
+                this.filepath = p;
+                this.fileextension = e;
+                this.filesize = s;
+                this.filecreationtime = c;
+            }
+
+            public MyFileInfo(string n, string fn, string sn, string p, string e, long s, DateTime c)
+            {
+                this.filename = n;
+                this.fullfilename = fn;
+                this.shortfilename = sn;
+                this.filepath = p;
+                this.fileextension = e;
+                this.filesize = s;
+                this.filecreationtime = c;
+            }
+
+            public MyFileInfo(string n, string p, string e, long s, DateTime c, int w, int h, int f, string d)
+            {
+                this.filename = n;
+                this.filepath = p;
+                this.fileextension = e;
+                this.filesize = s;
+                this.filecreationtime = c;
+
+                this.video_width = w;
+                this.video_height = h;
+                this.video_fps = f;
+                this.video_duration = d;
+            }
+
+//------------------------------------------------------------  # 60個
+
+檢查檔案容量            
+            if (cb_filesize.Checked == true)
+            {
+                check_filesize = int.Parse(tb_filesize.Text);
+                if (fi.Length < (long)check_filesize * 1024 * 1024)
+                {
+                    return;
+                }
+            }
+
+
+            //把資料放進 List<MyFileInfo> fileinfos 中
+            fileinfos.Add(new MyFileInfo(fi.Name, fi.FullName, shortname, fi.DirectoryName, fi.Extension, fi.Length, fi.CreationTime));
+
+        //------------------------------------------------------------  # 60個
 
 
 */
-
-
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_FileManager
+namespace vcs_ListView7_new
 {
     static class Program
     {

@@ -1,4 +1,6 @@
 ﻿
+
+
 ------------------------------------------------------------
 
 //播放單一檔案
@@ -13,6 +15,28 @@ axWindowsMediaPlayer1.currentPlaylist = axWindowsMediaPlayer1.newPlaylist("播�
 */
 
 ------------------------------------------------------------
+            int value = 0;
+            bool conversionSuccessful = int.TryParse(tb_filesize.Text, out value);    //out為必須
+            if (conversionSuccessful == true)
+            {
+                //Properties.Settings.Default.min_file_size = value;
+            }
+            else
+            {
+                richTextBox1.Text += "int.TryParse 失敗\n";
+                richTextBox1.Text += "取得容量限制數字失敗\n";
+            }
+
+            conversionSuccessful = int.TryParse(tb_count.Text, out value);    //out為必須
+            if (conversionSuccessful == true)
+            {
+                //Properties.Settings.Default.search_count = value;
+            }
+            else
+            {
+                richTextBox1.Text += "int.TryParse 失敗\n";
+                richTextBox1.Text += "取得檔案個數數字失敗\n";
+            }
 
 
 ------------------------------------------------------------
@@ -65,24 +89,11 @@ axWindowsMediaPlayer1.currentPlaylist = axWindowsMediaPlayer1.newPlaylist("播�
 
 //------------------------------------------------------------  # 60個
 
-            // 複製資料到剪貼簿
-            Clipboard.Clear();
-
-            for (int i = 0; i < listView1.Items.Count; i++)
-            {
-                richTextBox2.Text += listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\n";
-
-                // 複製資料到剪貼簿 累計
-                Clipboard.SetDataObject(Clipboard.GetText() + listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\n");      //建議用此
-            }
-
-//------------------------------------------------------------  # 60個
-
 //若是圖片, 秀出來
 string ext = fi.Extension.ToLower();
 if ((ext == ".bmp") || (ext == ".jpg") || (ext == ".png"))
 {
-	pictureBox1.Image = Image.FromFile(listView1.SelectedItems[0].Text);
+	pictureBox1.Image = Image.FromFile(filename);
 }
 else
 {
@@ -6314,12 +6325,6 @@ vcs_SatelliteImages
 3    真實色影像
 
 可放大縮小，用滾輪控制，用+、-控制
-
-
-
-DrAP列出小容量之資料夾
-搜尋相似檔名並羅列出來在Listview
-
 
 在picturebox中抓到上下左右鍵?
 

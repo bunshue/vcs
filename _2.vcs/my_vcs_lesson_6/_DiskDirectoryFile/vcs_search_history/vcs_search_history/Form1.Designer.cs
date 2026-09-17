@@ -28,47 +28,50 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.bt_clear_dir = new System.Windows.Forms.Button();
-            this.bt_remove_dir = new System.Windows.Forms.Button();
-            this.bt_add_dir = new System.Windows.Forms.Button();
+            this.bt_clear_pattern = new System.Windows.Forms.Button();
+            this.bt_remove_pattern = new System.Windows.Forms.Button();
+            this.bt_add_pattern = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.tb_search = new System.Windows.Forms.TextBox();
             this.bt_clear = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
-            // bt_clear_dir
+            // bt_clear_pattern
             // 
-            this.bt_clear_dir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_clear_dir.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear_dir.Location = new System.Drawing.Point(222, 82);
-            this.bt_clear_dir.Name = "bt_clear_dir";
-            this.bt_clear_dir.Size = new System.Drawing.Size(20, 20);
-            this.bt_clear_dir.TabIndex = 38;
-            this.bt_clear_dir.Text = "C";
-            this.bt_clear_dir.UseVisualStyleBackColor = true;
+            this.bt_clear_pattern.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_clear_pattern.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear_pattern.Location = new System.Drawing.Point(222, 82);
+            this.bt_clear_pattern.Name = "bt_clear_pattern";
+            this.bt_clear_pattern.Size = new System.Drawing.Size(20, 20);
+            this.bt_clear_pattern.TabIndex = 38;
+            this.bt_clear_pattern.Text = "C";
+            this.bt_clear_pattern.UseVisualStyleBackColor = true;
+            this.bt_clear_pattern.Click += new System.EventHandler(this.bt_clear_pattern_Click);
             // 
-            // bt_remove_dir
+            // bt_remove_pattern
             // 
-            this.bt_remove_dir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_remove_dir.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_remove_dir.Location = new System.Drawing.Point(222, 52);
-            this.bt_remove_dir.Name = "bt_remove_dir";
-            this.bt_remove_dir.Size = new System.Drawing.Size(20, 20);
-            this.bt_remove_dir.TabIndex = 37;
-            this.bt_remove_dir.Text = "-";
-            this.bt_remove_dir.UseVisualStyleBackColor = true;
+            this.bt_remove_pattern.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_remove_pattern.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_remove_pattern.Location = new System.Drawing.Point(222, 52);
+            this.bt_remove_pattern.Name = "bt_remove_pattern";
+            this.bt_remove_pattern.Size = new System.Drawing.Size(20, 20);
+            this.bt_remove_pattern.TabIndex = 37;
+            this.bt_remove_pattern.Text = "-";
+            this.bt_remove_pattern.UseVisualStyleBackColor = true;
+            this.bt_remove_pattern.Click += new System.EventHandler(this.bt_remove_pattern_Click);
             // 
-            // bt_add_dir
+            // bt_add_pattern
             // 
-            this.bt_add_dir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_add_dir.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_add_dir.Location = new System.Drawing.Point(222, 22);
-            this.bt_add_dir.Name = "bt_add_dir";
-            this.bt_add_dir.Size = new System.Drawing.Size(20, 20);
-            this.bt_add_dir.TabIndex = 36;
-            this.bt_add_dir.Text = "+";
-            this.bt_add_dir.UseVisualStyleBackColor = true;
+            this.bt_add_pattern.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_add_pattern.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_add_pattern.Location = new System.Drawing.Point(222, 22);
+            this.bt_add_pattern.Name = "bt_add_pattern";
+            this.bt_add_pattern.Size = new System.Drawing.Size(20, 20);
+            this.bt_add_pattern.TabIndex = 36;
+            this.bt_add_pattern.Text = "+";
+            this.bt_add_pattern.UseVisualStyleBackColor = true;
+            this.bt_add_pattern.Click += new System.EventHandler(this.bt_add_pattern_Click);
             // 
             // listBox1
             // 
@@ -116,9 +119,9 @@
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.tb_search);
-            this.Controls.Add(this.bt_clear_dir);
-            this.Controls.Add(this.bt_remove_dir);
-            this.Controls.Add(this.bt_add_dir);
+            this.Controls.Add(this.bt_clear_pattern);
+            this.Controls.Add(this.bt_remove_pattern);
+            this.Controls.Add(this.bt_add_pattern);
             this.Controls.Add(this.listBox1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -131,9 +134,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Button bt_clear_dir;
-        private System.Windows.Forms.Button bt_remove_dir;
-        private System.Windows.Forms.Button bt_add_dir;
+        private System.Windows.Forms.Button bt_clear_pattern;
+        private System.Windows.Forms.Button bt_remove_pattern;
+        private System.Windows.Forms.Button bt_add_pattern;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.TextBox tb_search;
         private System.Windows.Forms.Button bt_clear;

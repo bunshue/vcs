@@ -699,7 +699,7 @@
             this.groupBox3.Controls.Add(this.cb_compare0);
             this.groupBox3.Location = new System.Drawing.Point(935, 403);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(100, 100);
+            this.groupBox3.Size = new System.Drawing.Size(100, 90);
             this.groupBox3.TabIndex = 88;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "比較";
@@ -745,7 +745,7 @@
             this.groupBox_file.Controls.Add(this.label3);
             this.groupBox_file.Location = new System.Drawing.Point(839, 539);
             this.groupBox_file.Name = "groupBox_file";
-            this.groupBox_file.Size = new System.Drawing.Size(198, 98);
+            this.groupBox_file.Size = new System.Drawing.Size(200, 90);
             this.groupBox_file.TabIndex = 89;
             this.groupBox_file.TabStop = false;
             this.groupBox_file.Text = "選項";
@@ -809,7 +809,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1326, 648);
+            this.ClientSize = new System.Drawing.Size(1174, 648);
             this.Controls.Add(this.groupBox_file);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.lb_find);

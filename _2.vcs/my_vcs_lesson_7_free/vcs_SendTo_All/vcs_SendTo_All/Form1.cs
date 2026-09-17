@@ -496,6 +496,7 @@ namespace vcs_SendTo_All
         void do_operation_mode4()
         {
             string doc_foldername = Properties.Settings.Default.doc_foldername;
+            /*
             flag_search_mode = Properties.Settings.Default.flag_search_mode;
             if (flag_search_mode == 1)
             {
@@ -509,8 +510,13 @@ namespace vcs_SendTo_All
             {
                 richTextBox1.Text += "多層\n";
             }
+            */
+
+            richTextBox1.Text += "doc_foldername : " + doc_foldername + "\n";
 
             string foldername = Application.StartupPath;
+
+            richTextBox1.Text += "foldername : " + foldername + "\n";
 
             if (Directory.Exists(doc_foldername) == true)     //確認資料夾是否存在
             {
@@ -528,44 +534,63 @@ namespace vcs_SendTo_All
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-            if (flag_search_mode != 2)
-            {
-                string[] dirs = Directory.GetDirectories(foldername);
-                //richTextBox1.Text += "資料夾: " + target_dir + "\t檔案個數 = " + files.Length.ToString() + "\n";
 
-                foreach (string dir in dirs)
-                {
-                    //richTextBox1.Text += "資料夾: " + dir + "\n";
-                    DirectoryInfo d = new DirectoryInfo(dir);
-                    richTextBox1.Text += d.Name + "\n";
-                    //richTextBox1.Text += "Name : " + d.Name + "\n";
-                    //richTextBox1.Text += "FullName : " + d.FullName + "\n";
-                    //richTextBox1.Text += "Parent : " + d.Parent + "\n";
-                    //richTextBox1.Text += "Root : " + d.Root + "\n";
-                    //richTextBox1.Text += "------------------------------\n";  // 30個
-                }
-                if (dirs.Length > 0)
-                {
-                    richTextBox1.Text += "------------------------------\n";  // 30個
-                    richTextBox1.Text += "資料夾個數 : " + dirs.Length.ToString() + "\n";
-                    richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-                }
+            ProcessDirectory(foldername);
+
+            if (total_files > 0)
+            {
+                richTextBox1.Text += "------------------------------\n";  // 30個
+                richTextBox1.Text += "檔案個數 : " + total_files.ToString();
+                richTextBox1.Text += ", 大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
+                richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
             }
 
-            string[] files = Directory.GetFiles(foldername);
+
+
+        }
+
+        private void ProcessDirectory(string foldername)
+        {
+            //搜尋子目錄內的所有檔案   一層
+            //使用 Directory.GetDirectories() 和 Directory.GetFiles()
+
+            // 找資料夾, 一層
+            string[] dirs = Directory.GetDirectories(foldername);  // 取得指定目錄中子目錄的名稱, 一層
+            //Array.Sort(dirs);
+            foreach (string dir in dirs)
+            {
+                //richTextBox1.Text += "資料夾 : " + dir + "\n";
+                DirectoryInfo d = new DirectoryInfo(dir);
+                richTextBox1.Text += "資料夾 : " + d.Name + "\n";
+                //richTextBox1.Text += "Name : " + d.Name + "\n";
+                //richTextBox1.Text += "FullName : " + d.FullName + "\n";
+                //richTextBox1.Text += "Parent : " + d.Parent + "\n";
+                //richTextBox1.Text += "Root : " + d.Root + "\n";
+                //richTextBox1.Text += "------------------------------\n";  // 30個
+
+                // 資料夾
+                ProcessDirectory(dir);
+            }
 
             total_size = 0;
             total_files = 0;
 
-            foreach (string file in files)
+            // richTextBox1.Text += "資料夾 : " + foldername + "\n";
+            // 找檔案, 一層
+            string[] filenames = Directory.GetFiles(foldername);  // 取得指定目錄中檔案的名稱
+            Array.Sort(filenames);
+            foreach (string filename in filenames)
             {
-                FileInfo fi = new FileInfo(file);
+                // 檔案
+                //ProcessFile(filename);
+
+                FileInfo fi = new FileInfo(filename);
 
                 if ((fi.Extension.ToLower() == ".rar") || (fi.Extension.ToLower() == ".zip"))
                 {
                     //richTextBox1.Text += "資料夾：" + fi.Directory + "\n";
 
-                    richTextBox1.Text += string.Format("{0,-30}{1,10}", fi.Name, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length))) + "\n";
+                    richTextBox1.Text += "\t" + string.Format("{0,-30}{1,10}", fi.Name, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length))) + "\n";
 
                     //richTextBox1.Text += fi.Name + "\n";
                     //richTextBox1.Text += "副檔名：" + fi.Extension + "\n";
@@ -573,18 +598,11 @@ namespace vcs_SendTo_All
                     //richTextBox1.Text += "建立時間1：" + fi.CreationTime.ToString() + "\n";
                     //richTextBox1.Text += "建立時間2：" + fi.CreationTimeUtc.ToString() + "\n";
                     //richTextBox1.Text += "最近寫入時間：" + fi.LastWriteTime.ToString() + "\n";
-                    //richTextBox1.Text += "檔案: " + file + "\n";
+                    //richTextBox1.Text += "檔案: " + filename + "\n";
                     //richTextBox1.Text += "------------------------------\n";  // 30個
                     total_files++;
                     total_size += fi.Length;
                 }
-            }
-            if (total_files > 0)
-            {
-                richTextBox1.Text += "------------------------------\n";  // 30個
-                richTextBox1.Text += "檔案個數 : " + total_files.ToString();
-                richTextBox1.Text += ", 大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
-                richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
             }
         }
 
