@@ -20,11 +20,6 @@ namespace vcs_DiskDirectoryFile1
         string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
         string foldername = @"D:\_git\vcs\_1.data\______test_files1\";
 
-        //string video_foldername = @"D:\_git\vcs\_1.data\______test_files1\_mp4";
-        string video_foldername = @"D:\vcs\astro\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案";
-
-        string FolederName;
-
         public Form1()
         {
             InitializeComponent();
@@ -89,20 +84,18 @@ namespace vcs_DiskDirectoryFile1
             bt_files17.Location = new Point(x_st + dx * 3, y_st + dy * 7);
             bt_files18.Location = new Point(x_st + dx * 3, y_st + dy * 8);
             bt_files19.Location = new Point(x_st + dx * 3, y_st + dy * 9);
-            groupBox3.Location = new Point(x_st + dx * 4, y_st + dy * 6 + 75);
-            groupBox_file.Location = new Point(x_st + dx * 4, y_st + dy * 6 + 175);
 
             listView1.Size = new Size(400, 340);
-            listView1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            listView1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
 
             listBox1.Size = new Size(400, 340);
-            listBox1.Location = new Point(x_st + dx * 5, y_st + dy * 5);
+            listBox1.Location = new Point(x_st + dx * 4, y_st + dy * 5);
 
-            richTextBox1.Size = new Size(300, 690);
-            richTextBox1.Location = new Point(x_st + dx * 7, y_st + 0);
+            richTextBox1.Size = new Size(400, 690);
+            richTextBox1.Location = new Point(x_st + dx * 6, y_st + 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1810, 750 + 20);
+            this.Size = new Size(1700, 750 + 20);
             this.Text = "vcs_DiskDirectoryFile1";
 
             //設定執行後的表單起始位置, 正中央
@@ -561,7 +554,7 @@ namespace vcs_DiskDirectoryFile1
             richTextBox1.Text += "------------------------------\n";  // 30個
 
             /*
-            FileAttributes attr = (new FileInfo(filePath)).Attributes;
+            FileAttributes attr = (new FileInfo(filename)).Attributes;
             Console.Write("UnAuthorizedAccessException: Unable to access file. ");
             if ((attr & FileAttributes.ReadOnly) > 0)
                 Console.Write("The file is read-only.");
@@ -1601,14 +1594,12 @@ namespace vcs_DiskDirectoryFile1
             richTextBox1.Text += "File Type : " + result + "\n";
         }
 
-        /// 根據文件頭判斷上傳的文件類型
-        /// <param name="filePath">filePath是文件的完整路徑 </param>
-        /// <returns>返回true或false</returns>
-        public string getFileType(string filePath)
+        // 根據文件頭判斷上傳的文件類型
+        public string getFileType(string filename)
         {
             try
             {
-                FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+                FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
                 BinaryReader br = new BinaryReader(fs);
                 string fileClass;
                 byte buffer;
@@ -1650,7 +1641,6 @@ namespace vcs_DiskDirectoryFile1
                 else
                 {
                     return fileClass + "\tunknown";
-
                 }
                 // 7790是exe,8297是rar 
             }
@@ -1801,8 +1791,6 @@ namespace vcs_DiskDirectoryFile1
         //------------------------------------------------------------  # 60個
 
         List<MyFileInfo> fileinfos_match = new List<MyFileInfo>();
-        bool flag_need_shortname = false;
-        int skip_count = 100;
         int match_count = 0;
 
         private void bt_files09_Click(object sender, EventArgs e)
@@ -1894,8 +1882,6 @@ namespace vcs_DiskDirectoryFile1
             {
                 richTextBox1.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料\n";
             }
-
-            //fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
 
             //richTextBox1.Text += "Name\tFolderName\tExt\tLength\tTime\n";
             for (int i = 0; i < fileinfos.Count; i++)
@@ -1989,21 +1975,11 @@ namespace vcs_DiskDirectoryFile1
                     fileinfos_match.Add(fileinfos[i]);
                     match_count++;
                 }
-                if (cb_checkcount.Checked == true)
-                {
-                    skip_count = int.Parse(tb_count.Text);
-                    if (match_count > skip_count)
-                    {
-                        richTextBox1.Text += "滿 " + skip_count.ToString() + " 項, 提前結束\n";
-                        break;
-                    }
-                }
             }
 
             //------------------------------------------------------------  # 60個
 
             //比較
-            flag_need_shortname = true;
 
             if (fileinfos.Count == 0)
                 richTextBox1.Text += "無資料c\n";
@@ -2021,73 +1997,42 @@ namespace vcs_DiskDirectoryFile1
             {
                 for (int j = i + 1; j < (len - 1); j++)
                 {
-                    if (cb_compare0.Checked == true)    //比較真檔名
+                    // case 1 : 比較真檔名
+                    if (fileinfos[i].filename == fileinfos[j].filename)
                     {
-                        if (fileinfos[i].filename == fileinfos[j].filename)
-                        {
-                            /*
-                            richTextBox1.Text += "找到真檔名\n";
-                            richTextBox1.Text += fileinfos[i].fullfilename + "\n";
-                            richTextBox1.Text += fileinfos[j].fullfilename + "\n";
-                            fileinfos_match.Add(fileinfos[i]);
-                            fileinfos_match.Add(fileinfos[j]);
-                            */
-                            match_count++;
-                        }
-                    }
-                    /*
-                    if (cb_compare1.Checked == true)    //比較模糊檔名
-                    {
-                        if (fileinfos[i].shortfilename == fileinfos[j].shortfilename)
-                        {
-                            richTextBox1.Text += "找到模糊檔名\n";
-                            richTextBox1.Text += fileinfos[i].fullfilename + "\n";
-                            richTextBox1.Text += fileinfos[j].fullfilename + "\n";
-                            fileinfos_match.Add(fileinfos[i]);
-                            fileinfos_match.Add(fileinfos[j]);
-                            match_count++;
-                        }
+                        richTextBox1.Text += "找到真檔名\n";
+                        //richTextBox1.Text += fileinfos[i].fullfilename + "\n";
+                        //richTextBox1.Text += fileinfos[j].fullfilename + "\n";
+                        fileinfos_match.Add(fileinfos[i]);
+                        fileinfos_match.Add(fileinfos[j]);
+                        match_count++;
                     }
 
-                    if (cb_compare2.Checked == true)    //比較檔案大小
+                    /*
+                    // case 2 : 比較模糊檔名
+                    if (fileinfos[i].shortfilename == fileinfos[j].shortfilename)
                     {
-                        if (fileinfos[i].filesize == fileinfos[j].filesize)
-                        {
-                            richTextBox1.Text += "找到相同檔案大小\n";
-                            richTextBox1.Text += fileinfos[i].fullfilename + "\n";
-                            richTextBox1.Text += fileinfos[j].fullfilename + "\n";
-                            fileinfos_match.Add(fileinfos[i]);
-                            fileinfos_match.Add(fileinfos[j]);
-                            match_count++;
-                        }
+                        richTextBox1.Text += "找到模糊檔名\n";
+                        //richTextBox1.Text += fileinfos[i].fullfilename + "\n";
+                        //richTextBox1.Text += fileinfos[j].fullfilename + "\n";
+                        fileinfos_match.Add(fileinfos[i]);
+                        fileinfos_match.Add(fileinfos[j]);
+                        match_count++;
                     }
                     */
-                    if (cb_checkcount.Checked == true)
-                    {
-                        skip_count = int.Parse(tb_count.Text);
-                        if (match_count > skip_count)
-                        {
-                            richTextBox1.Text += "滿 " + skip_count.ToString() + " 項, 提前結束\n";
-                            break;
-                        }
-                    }
-                }
 
-                if (cb_checkcount.Checked == true)
-                {
-                    skip_count = int.Parse(tb_count.Text);
-                    if (match_count > skip_count)
+                    // case 3 : 比較檔案大小
+                    if (fileinfos[i].filesize == fileinfos[j].filesize)
                     {
-                        richTextBox1.Text += "滿 " + skip_count.ToString() + " 項, 提前結束\n";
-                        break;
+                        richTextBox1.Text += "找到相同檔案大小\n";
+                        //richTextBox1.Text += fileinfos[i].fullfilename + "\n";
+                        //richTextBox1.Text += fileinfos[j].fullfilename + "\n";
+                        fileinfos_match.Add(fileinfos[i]);
+                        fileinfos_match.Add(fileinfos[j]);
+                        match_count++;
                     }
                 }
             }
-            flag_need_shortname = false;
-
-            //6060
-
-
         }
 
         string get_shortname(string longname)
@@ -2734,54 +2679,37 @@ namespace vcs_DiskDirectoryFile1
                         break;
                     }
                 }
-                if (cb_checkcount.Checked == true)
-                {
-                    skip_count = int.Parse(tb_count.Text);
-                    if (match_count > skip_count)
-                    {
-                        richTextBox1.Text += "滿 " + skip_count.ToString() + " 項, 提前結束\n";
-                        break;
-                    }
-                }
             }
         }
 
         //------------------------------------------------------------  # 60個
 
-        //獲得指定目錄下的所有文檔 ST
-
-        double total_size1 = 0;
-        int no_files = 0;
-        int no_folders = 0;
-
         private void bt_files18_Click(object sender, EventArgs e)
         {
             //獲得指定目錄下的所有文檔
 
-            total_size1 = 0;
-            no_files = 0;
-            no_folders = 0;
+            string foldername = @"D:\_git\vcs\_1.data\______test_files3";
+            ProcessDirectoryN(foldername);
+        }
 
-            //設置列名稱
-            listView1.Columns.Add("名稱", 200, HorizontalAlignment.Center);
-            listView1.Columns.Add("大小", 200, HorizontalAlignment.Center);
-            listView1.Columns.Add("修改日期", 200, HorizontalAlignment.Center);
-            //string filePath = @"D:/_git/vcs/_1.data/______test_files1/";
-            string filePath = @"D:\_git\vcs\_1.data\______test_files1\__pic\_book_magazine";
+        public void ProcessDirectoryN(string path)
+        {
+            DirectoryInfo dir = new DirectoryInfo(path);
 
-            /*
-            richTextBox1.Text += "轉出一層,獲得指定目錄下的所有文檔：\n";
-            List<FileInfo> list1 = GetFilesByDir(filePath);
-            foreach (FileInfo fi in list1)
+            DirectoryInfo[] dis = dir.GetDirectories();
+            foreach (DirectoryInfo di in dis)
+            {
+                ProcessDirectoryN(di.FullName);
+            }
+
+            FileInfo[] fis = dir.GetFiles();
+            foreach (FileInfo fi in fis)
             {
                 //richTextBox1.Text += "完整路徑：" + fi.FullName.ToString() + " 文檔名：" + fi.Name + "\n";
                 //richTextBox1.Text += "資料夾：" + fi.Directory + "\n";
                 richTextBox1.Text += "檔名：" + fi.Name + "\t";
-                richTextBox1.Text += "檔案大小：" + fi.Length.ToString() + "\t";
-                richTextBox1.Text += "修改日期：" + fi.LastWriteTime.ToString() + "\n";
-
-                total_size1 += fi.Length;
-                no_files++;
+                richTextBox1.Text += "大小：" + fi.Length.ToString() + "\t";
+                richTextBox1.Text += "日期：" + fi.LastWriteTime.ToString() + "\n";
 
                 ListViewItem i1 = new ListViewItem(fi.Name);
                 ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
@@ -2795,77 +2723,7 @@ namespace vcs_DiskDirectoryFile1
                 //設置ListView最後一行可見
                 listView1.Items[listView1.Items.Count - 1].EnsureVisible();
             }
-            */
-
-            richTextBox1.Text += "轉出全部,列出指定目錄下及所有子目錄及子目錄裏更深層目錄裏的文檔：\n";
-            GetAllFiles(filePath);
-
-            label1.Text = "路徑：" + filePath + "\n大小：" + total_size1.ToString() + " 位元組\n內含：" + no_files.ToString() + " 個檔案，" + (no_folders - 1).ToString() + " 個資料夾";
-
-            //大小：	xxxxx 位元組
-            //內含：   143個檔案，18個資料夾
         }
-
-        /// <summary>
-        /// 獲得指定目錄下的所有文檔
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        public List<FileInfo> GetFilesByDir(string path)
-        {
-            DirectoryInfo di = new DirectoryInfo(path);
-
-            //找到該目錄下的文檔
-            FileInfo[] fi = di.GetFiles();
-
-            //把FileInfo[]數組轉換為List
-            List<FileInfo> list = fi.ToList<FileInfo>();
-            return list;
-        }
-
-        /// <summary>
-        /// 列出指定目錄下及所其有子目錄及子目錄裏更深層目錄裏的文檔（需要遞歸）
-        /// </summary>
-        /// <param name="path"></param>
-        public void GetAllFiles(string path)
-        {
-            DirectoryInfo dir = new DirectoryInfo(path);
-
-            //找到該目錄下的文檔
-            FileInfo[] fi = dir.GetFiles();
-            foreach (FileInfo f in fi)
-            {
-                //richTextBox1.Text += "完整路徑：" + f.FullName.ToString() + " 文檔名：" + f.Name + "\n";
-                //richTextBox1.Text += "資料夾：" + f.Directory + "\n";
-                richTextBox1.Text += "檔名：" + f.Name + "\t";
-                richTextBox1.Text += "大小：" + f.Length.ToString() + "\t";
-                richTextBox1.Text += "日期：" + f.LastWriteTime.ToString() + "\n";
-
-                total_size1 += f.Length;
-                no_files++;
-
-                ListViewItem i1 = new ListViewItem(f.Name);
-                ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
-                sub_i1a.Text = f.Length.ToString();
-                i1.SubItems.Add(sub_i1a);
-                ListViewItem.ListViewSubItem sub_i1b = new ListViewItem.ListViewSubItem();
-                sub_i1b.Text = f.LastWriteTime.ToString();
-                i1.SubItems.Add(sub_i1b);
-
-                listView1.Items.Add(i1);
-                //設置ListView最後一行可見
-                listView1.Items[listView1.Items.Count - 1].EnsureVisible();
-            }
-
-            //找到該目錄下的所有目錄再遞歸
-            DirectoryInfo[] subDir = dir.GetDirectories();
-            no_folders++;
-            foreach (DirectoryInfo d in subDir)
-            {
-                GetAllFiles(d.FullName);
-            }
-        }
-        //獲得指定目錄下的所有文檔 SP
 
         //------------------------------------------------------------  # 60個
 
@@ -3167,7 +3025,6 @@ res = fi.FullName.ToLower().Replace(" ", "").Contains(tb_search_text_pattern.Tex
 
 //------------------------------------------------------------  # 60個
 
-
 //if ((fileinfos[j].filename.Contains(".zip") == true) || (fileinfos[j].filename.Contains(".rar") == true))
 //if ((fileinfos[i].filename.Contains(".zip") == true) || (fileinfos[i].filename.Contains(".rar") == true))
 
@@ -3239,7 +3096,6 @@ List<String> old_search_path = new List<String>();
                 }
             }
 
-
             //把資料放進 List<MyFileInfo> fileinfos 中
             fileinfos.Add(new MyFileInfo(fi.Name, fi.FullName, shortname, fi.DirectoryName, fi.Extension, fi.Length, fi.CreationTime));
 
@@ -3257,7 +3113,6 @@ lb_filesize.Text = "總容量   : " + ByteConversionTBGBMBKB(Convert.ToInt64(tot
         Int64 folder_size = 0;
         Int64 folder_files = 0;
 
-        string FolederName = string.Empty;
         List<MyFileInfo> fileinfos = new List<MyFileInfo>();
         List<MyFileInfo> fileinfos_match = new List<MyFileInfo>();
 
@@ -3271,7 +3126,30 @@ lb_filesize.Text = "總容量   : " + ByteConversionTBGBMBKB(Convert.ToInt64(tot
 
 // if (((cb_file_l.Checked == true) && (fi.Length > min_size_mb * 1024 * 1024)) || (cb_file_l.Checked == false))
 
-//tb_file_l
-//tb_file_s
-//tb_file_s
+//fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
+
+/*
+            //設置列名稱
+            listView1.Columns.Add("名稱", 200, HorizontalAlignment.Center);
+            listView1.Columns.Add("大小", 200, HorizontalAlignment.Center);
+            listView1.Columns.Add("日期", 200, HorizontalAlignment.Center);
+
+                ListViewItem i1 = new ListViewItem(fi.Name);
+                ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
+                sub_i1a.Text = fi.Length.ToString();
+                i1.SubItems.Add(sub_i1a);
+                ListViewItem.ListViewSubItem sub_i1b = new ListViewItem.ListViewSubItem();
+                sub_i1b.Text = fi.LastWriteTime.ToString();
+                i1.SubItems.Add(sub_i1b);
+
+                listView1.Items.Add(i1);
+                //設置ListView最後一行可見
+                listView1.Items[listView1.Items.Count - 1].EnsureVisible();
+
+//------------------------------------------------------------  # 60個
+
+
+
+*/
+
 

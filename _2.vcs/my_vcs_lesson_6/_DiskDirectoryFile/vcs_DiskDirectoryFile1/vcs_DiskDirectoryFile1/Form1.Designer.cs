@@ -75,24 +75,12 @@
             this.bt_files19 = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.cb_compare1 = new System.Windows.Forms.CheckBox();
-            this.cb_compare2 = new System.Windows.Forms.CheckBox();
-            this.cb_compare0 = new System.Windows.Forms.CheckBox();
-            this.groupBox_file = new System.Windows.Forms.GroupBox();
-            this.cb_checkcount = new System.Windows.Forms.CheckBox();
-            this.tb_count = new System.Windows.Forms.TextBox();
-            this.cb_filesize = new System.Windows.Forms.CheckBox();
-            this.tb_filesize = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.groupBox3.SuspendLayout();
-            this.groupBox_file.SuspendLayout();
             this.SuspendLayout();
             // 
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(1043, 30);
+            this.richTextBox1.Location = new System.Drawing.Point(849, 20);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 1;
@@ -457,7 +445,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(1057, 64);
+            this.bt_clear.Location = new System.Drawing.Point(863, 54);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 62;
@@ -572,7 +560,7 @@
             // listView1
             // 
             this.listView1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.listView1.Location = new System.Drawing.Point(1043, 136);
+            this.listView1.Location = new System.Drawing.Point(849, 126);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(100, 100);
             this.listView1.TabIndex = 73;
@@ -584,131 +572,16 @@
             this.listBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 19;
-            this.listBox1.Location = new System.Drawing.Point(1043, 242);
+            this.listBox1.Location = new System.Drawing.Point(849, 232);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(100, 99);
             this.listBox1.TabIndex = 74;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.cb_compare1);
-            this.groupBox3.Controls.Add(this.cb_compare2);
-            this.groupBox3.Controls.Add(this.cb_compare0);
-            this.groupBox3.Location = new System.Drawing.Point(935, 403);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(100, 90);
-            this.groupBox3.TabIndex = 88;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "比較";
-            // 
-            // cb_compare1
-            // 
-            this.cb_compare1.AutoSize = true;
-            this.cb_compare1.Checked = true;
-            this.cb_compare1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_compare1.Location = new System.Drawing.Point(20, 40);
-            this.cb_compare1.Name = "cb_compare1";
-            this.cb_compare1.Size = new System.Drawing.Size(72, 16);
-            this.cb_compare1.TabIndex = 3;
-            this.cb_compare1.Text = "模糊檔名";
-            this.cb_compare1.UseVisualStyleBackColor = true;
-            // 
-            // cb_compare2
-            // 
-            this.cb_compare2.AutoSize = true;
-            this.cb_compare2.Location = new System.Drawing.Point(20, 60);
-            this.cb_compare2.Name = "cb_compare2";
-            this.cb_compare2.Size = new System.Drawing.Size(72, 16);
-            this.cb_compare2.TabIndex = 1;
-            this.cb_compare2.Text = "檔案大小";
-            this.cb_compare2.UseVisualStyleBackColor = true;
-            // 
-            // cb_compare0
-            // 
-            this.cb_compare0.AutoSize = true;
-            this.cb_compare0.Location = new System.Drawing.Point(20, 20);
-            this.cb_compare0.Name = "cb_compare0";
-            this.cb_compare0.Size = new System.Drawing.Size(60, 16);
-            this.cb_compare0.TabIndex = 0;
-            this.cb_compare0.Text = "真檔名";
-            this.cb_compare0.UseVisualStyleBackColor = true;
-            // 
-            // groupBox_file
-            // 
-            this.groupBox_file.Controls.Add(this.cb_checkcount);
-            this.groupBox_file.Controls.Add(this.tb_count);
-            this.groupBox_file.Controls.Add(this.cb_filesize);
-            this.groupBox_file.Controls.Add(this.tb_filesize);
-            this.groupBox_file.Controls.Add(this.label3);
-            this.groupBox_file.Location = new System.Drawing.Point(839, 539);
-            this.groupBox_file.Name = "groupBox_file";
-            this.groupBox_file.Size = new System.Drawing.Size(200, 90);
-            this.groupBox_file.TabIndex = 89;
-            this.groupBox_file.TabStop = false;
-            this.groupBox_file.Text = "選項";
-            // 
-            // cb_checkcount
-            // 
-            this.cb_checkcount.AutoSize = true;
-            this.cb_checkcount.Checked = true;
-            this.cb_checkcount.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_checkcount.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_checkcount.Location = new System.Drawing.Point(11, 54);
-            this.cb_checkcount.Name = "cb_checkcount";
-            this.cb_checkcount.Size = new System.Drawing.Size(91, 20);
-            this.cb_checkcount.TabIndex = 48;
-            this.cb_checkcount.Text = "結束個數";
-            this.cb_checkcount.UseVisualStyleBackColor = true;
-            // 
-            // tb_count
-            // 
-            this.tb_count.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_count.Location = new System.Drawing.Point(108, 50);
-            this.tb_count.Name = "tb_count";
-            this.tb_count.Size = new System.Drawing.Size(52, 30);
-            this.tb_count.TabIndex = 46;
-            this.tb_count.Text = "30";
-            this.tb_count.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // cb_filesize
-            // 
-            this.cb_filesize.AutoSize = true;
-            this.cb_filesize.Checked = true;
-            this.cb_filesize.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_filesize.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_filesize.Location = new System.Drawing.Point(11, 21);
-            this.cb_filesize.Name = "cb_filesize";
-            this.cb_filesize.Size = new System.Drawing.Size(91, 20);
-            this.cb_filesize.TabIndex = 45;
-            this.cb_filesize.Text = "檔案大小";
-            this.cb_filesize.UseVisualStyleBackColor = true;
-            // 
-            // tb_filesize
-            // 
-            this.tb_filesize.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_filesize.Location = new System.Drawing.Point(108, 17);
-            this.tb_filesize.Name = "tb_filesize";
-            this.tb_filesize.Size = new System.Drawing.Size(52, 30);
-            this.tb_filesize.TabIndex = 17;
-            this.tb_filesize.Text = "300";
-            this.tb_filesize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(166, 25);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(23, 12);
-            this.label3.TabIndex = 18;
-            this.label3.Text = "MB";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1174, 648);
-            this.Controls.Add(this.groupBox_file);
-            this.Controls.Add(this.groupBox3);
+            this.ClientSize = new System.Drawing.Size(976, 648);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.bt_files19);
@@ -759,10 +632,6 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            this.groupBox_file.ResumeLayout(false);
-            this.groupBox_file.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -817,16 +686,6 @@
         private System.Windows.Forms.Button bt_files19;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.CheckBox cb_compare1;
-        private System.Windows.Forms.CheckBox cb_compare2;
-        private System.Windows.Forms.CheckBox cb_compare0;
-        private System.Windows.Forms.GroupBox groupBox_file;
-        private System.Windows.Forms.CheckBox cb_checkcount;
-        private System.Windows.Forms.TextBox tb_count;
-        private System.Windows.Forms.CheckBox cb_filesize;
-        private System.Windows.Forms.TextBox tb_filesize;
-        private System.Windows.Forms.Label label3;
     }
 }
 

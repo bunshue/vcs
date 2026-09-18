@@ -25,7 +25,6 @@ namespace vcs_ListView7_new
             //------------------------------------------------------------  # 60個
 
             // listView1的共同設定, 設定ListView與設定欄位
-
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.FullRowSelect = true; //整行一起選取
             listView1.GridLines = true;  // 顯示格線
@@ -36,11 +35,32 @@ namespace vcs_ListView7_new
             //listView1.CheckBoxes = true;//使用CheckBox(核取方塊)
             //listView1.HeaderStyle = ColumnHeaderStyle.Nonclickable; ??
 
+            //設定欄位, 欄名, 欄寬, 對齊方式
+            listView1.Columns.Add("中文名", 100, HorizontalAlignment.Left);
+            listView1.Columns.Add("英文名", 100, HorizontalAlignment.Left);
+            listView1.Columns.Add("體重", 60, HorizontalAlignment.Left);
+
+            //加入項目(列資料)
+            ListViewItem item1 = listView1.Items.Add("mouse");
+            item1.SubItems.Add("米老鼠");
+            item1.SubItems.Add("3");
+
+            ListViewItem item2 = listView1.Items.Add("ox");
+            item2.SubItems.Add("班尼牛");
+            item2.SubItems.Add("48");
+
+            ListViewItem item3 = listView1.Items.Add("tiger");
+            item3.SubItems.Add("跳跳虎");
+            item3.SubItems.Add("33");
+
+            ListViewItem item4 = listView1.Items.Add("rabbit");
+            item4.SubItems.Add("彼得兔");
+            item4.SubItems.Add("8");
+
             /*
             // listView1.ContextMenuStrip = contextMenuStrip1;
             listView1.KeyDown += new KeyEventHandler(listView1_KeyDown);
             listView1.MouseMove += new MouseEventHandler(listView1_MouseMove);
-            listView1.MouseClick += new MouseEventHandler(listView1_MouseClick);
 
             listView1.AfterLabelEdit += new LabelEditEventHandler(listView1_AfterLabelEdit);
             */
@@ -58,6 +78,12 @@ namespace vcs_ListView7_new
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            int dd = 40;
+            label1.Location = new Point(x_st + dx * 0, y_st + dy * 5+dd*0);
+            label2.Location = new Point(x_st + dx * 0, y_st + dy * 5 + dd * 1);
+            label3.Location = new Point(x_st + dx * 0, y_st + dy * 5 + dd * 2);
+            label4.Location = new Point(x_st + dx * 0, y_st + dy * 5 + dd * 3);
+            label5.Location = new Point(x_st + dx * 0, y_st + dy * 5 + dd * 4);
 
             listView1.Size = new Size(830, 690);
             listView1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
@@ -80,109 +106,8 @@ namespace vcs_ListView7_new
 
         //------------------------------------------------------------  # 60個
 
-        void apply_data()
-        {
-            //加入項目(列資料)
-            ListViewItem item1 = listView1.Items.Add("mouse");
-            item1.SubItems.Add("米老鼠");
-            item1.SubItems.Add("3");
-
-            ListViewItem item2 = listView1.Items.Add("ox");
-            item2.SubItems.Add("班尼牛");
-            item2.SubItems.Add("48");
-
-            ListViewItem item3 = listView1.Items.Add("tiger");
-            item3.SubItems.Add("跳跳虎");
-            item3.SubItems.Add("33");
-
-            ListViewItem item4 = listView1.Items.Add("rabbit");
-            item4.SubItems.Add("彼得兔");
-
-            /*
-            ListViewItem item1 = new ListViewItem("mouse");
-            item1.SubItems.Add("米老鼠");
-            item1.SubItems.Add("3");
-            listView1.Items.Add(item1);
-
-            ListViewItem item2 = new ListViewItem("ox");
-            item2.SubItems.Add("班尼牛");
-            item2.SubItems.Add("48");
-            listView1.Items.Add(item2);
-
-            ListViewItem item3 = new ListViewItem("tiger");
-            item3.SubItems.Add("跳跳虎");
-            item3.SubItems.Add("33");
-            listView1.Items.Add(item3);
-            */
-
-            ListViewItem li = new ListViewItem();
-            li.SubItems.Clear();
-            li.SubItems[0].Text = "dragon";
-            li.SubItems.Add("逗逗龍");
-            li.SubItems.Add("38");
-            listView1.Items.Add(li);
-
-
-            /*
-            //實例化一個listview對象的子項
-            ListViewItem item1 = new ListViewItem();
-            item1.Text = "mouse";//第一欄數據
-            item1.SubItems.Add("米老鼠");//第二欄
-            item1.SubItems.Add("3");//第三欄
-            listView1.Items.Add(item1);//添加列
-
-            ListViewItem item2 = new ListViewItem();
-            item2.Text = "ox";//第一欄數據
-            item2.SubItems.Add("班尼牛");//第二欄
-            item2.SubItems.Add("48");//第三欄
-            listView1.Items.Add(item2);//添加列
-
-            ListViewItem item3 = new ListViewItem();
-            item3.Text = "tiger";//第一欄數據
-            item3.SubItems.Add("跳跳虎");//第二欄
-            item3.SubItems.Add("33");//第三欄
-            listView1.Items.Add(item3);//添加列
-            */
-
-
-            /*
-            //加入項目(列資料)
-            ListViewItem item1 = new ListViewItem();
-            item1.Text = "mouse";
-            item1.ImageIndex = 0;
-            item1.Tag = "米老鼠的說明";
-            ListViewItem.ListViewSubItem item1_sub = new ListViewItem.ListViewSubItem();
-            item1_sub.Text = "米老鼠";
-            item1.SubItems.Add(item1_sub);
-            item1_sub = new ListViewItem.ListViewSubItem();
-            item1_sub.Text = "3";
-            item1.SubItems.Add(item1_sub);
-            listView1.Items.Add(item1);
-
-            ListViewItem item2 = new ListViewItem();
-            item2.Text = "ox";
-            item2.ImageIndex = 1;
-            item2.Tag = "班尼牛的說明";
-            ListViewItem.ListViewSubItem item2_sub = new ListViewItem.ListViewSubItem();
-            item2_sub.Text = "班尼牛";
-            item2.SubItems.Add(item2_sub);
-            listView1.Items.Add(item2);
-            */
-        }
-
         private void button0_Click(object sender, EventArgs e)
         {
-            //建立listView 0 標準簡易
-            richTextBox1.Text += "建立listView 0 標準簡易\n";
-            //listView1.Clear();
-
-            //設定欄位, 欄名, 欄寬, 對齊方式
-            listView1.Columns.Add("中文名", 100, HorizontalAlignment.Left);
-            listView1.Columns.Add("英文名", 100, HorizontalAlignment.Left);
-            listView1.Columns.Add("體重", 60, HorizontalAlignment.Left);
-
-            //加入項目(列資料)
-            apply_data();
         }
 
         //------------------------------------------------------------  # 60個
@@ -193,9 +118,6 @@ namespace vcs_ListView7_new
             listView1.FullRowSelect = true;  // 整行一起選取
             listView1.Clear();
 
-            listView1.GridLines = true;  // 網格線
-            //listView1.Size = new Size(640 * 2, 480 * 2);
-
             //設置列名稱
             listView1.Columns.Add("檔名", 200, HorizontalAlignment.Left);
             listView1.Columns.Add("大小", 90, HorizontalAlignment.Left);
@@ -204,8 +126,6 @@ namespace vcs_ListView7_new
             listView1.Columns.Add("修改日期", 150, HorizontalAlignment.Left);
             listView1.Columns.Add("簡名", 180, HorizontalAlignment.Left);
             listView1.Columns.Add("格式", 180, HorizontalAlignment.Left);
-
-            //listView1.MouseClick += new MouseEventHandler(listView1_MouseClick);
 
             for (int i = 0; i < 10; i++)
             {
@@ -243,7 +163,21 @@ namespace vcs_ListView7_new
 
         private void listView1_MouseClick(object sender, MouseEventArgs e)
         {
+            richTextBox1.Text += "listView1_MouseClick\n";
+            int selNdx;
+            string fullname;
+            selNdx = listView1.SelectedIndices[0];
+            richTextBox1.Text += "aaa:\t" + listView1.Items[selNdx].Text + "\n";
+            richTextBox1.Text += "bbb:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
+            richTextBox1.Text += "ccc:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
+            richTextBox1.Text += "ddd:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
 
+            listView1.Items[selNdx].Selected = true;    //選到的項目
+
+            int selectCount = listView1.SelectedIndices.Count;
+            richTextBox1.Text += "你選擇了 : " + selectCount.ToString() + " 個檔案\t";
+            richTextBox1.Text += "你選擇了檔名:\t" + listView1.Items[selNdx].Text + "\n";
+            richTextBox1.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
         }
 
         private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -252,6 +186,26 @@ namespace vcs_ListView7_new
             listView1.Items[selNdx].Selected = true;    //選到的項目
             //richTextBox1.Text += "count = " + this.listView1.SelectedIndices.Count.ToString() + "\t";
             richTextBox1.Text += "你選擇了\t" + listView1.Items[selNdx].Text + "\n";
+
+            string fullname;
+            selNdx = listView1.SelectedIndices[0];
+            richTextBox1.Text += "aaa:\t" + listView1.Items[selNdx].Text + "\n";
+            richTextBox1.Text += "bbb:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
+            richTextBox1.Text += "ccc:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
+            richTextBox1.Text += "ddd:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
+
+            selNdx = listView1.SelectedIndices[0];
+            listView1.Items[selNdx].Selected = true;    //選到的項目
+
+            int selectCount = listView1.SelectedIndices.Count;
+            richTextBox1.Text += "你選擇了 : " + selectCount.ToString() + " 個檔案\t";
+            richTextBox1.Text += "你選擇了資料夾:\t" + listView1.Items[selNdx].Text + "\n";
+
+            fullname = listView1.Items[selNdx].SubItems[2].Text + "\\" + listView1.Items[selNdx].Text;
+
+            richTextBox1.Text += "開啟路徑: " + fullname + "\n";
+
+            // 準備開啟所選擇的項目
         }
 
         private void listView1_KeyDown(object sender, KeyEventArgs e)
@@ -304,82 +258,9 @@ namespace vcs_ListView7_new
                     all_filename += " \"" + listView1.Items[selNdx].Text + "\"";
                 }
             }
-        }
-    }
-}
 
-//6060
-//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-//------------------------------------------------------------  # 60個
-//3030
-//richTextBox1.Text += "------------------------------\n";  // 30個
-//------------------------------  # 30個
 
-//listView1.SelectedItems[0].Text
-
-/*
-        private void listView1_MouseClick(object sender, MouseEventArgs e)
-        {
-            int selNdx;
-            string fullname;
-            selNdx = listView1.SelectedIndices[0];
-            richTextBox2.Text += "aaa:\t" + listView1.Items[selNdx].Text + "\n";
-            richTextBox2.Text += "bbb:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
-            richTextBox2.Text += "ccc:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
-            richTextBox2.Text += "ddd:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
-
-            int selNdx;
-            //string fullname;
-
-            selNdx = listView1.SelectedIndices[0];
-            listView1.Items[selNdx].Selected = true;    //選到的項目
-
-            int selectCount = listView1.SelectedIndices.Count;
-            richTextBox2.Text += "你選擇了 : " + selectCount.ToString() + " 個檔案\t";
-            richTextBox2.Text += "你選擇了檔名:\t" + listView1.Items[selNdx].Text + "\n";
-            richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
-        }
-
-        private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            int selNdx;
-            string fullname;
-            selNdx = listView1.SelectedIndices[0];
-            richTextBox2.Text += "aaa:\t" + listView1.Items[selNdx].Text + "\n";
-            richTextBox2.Text += "bbb:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
-            richTextBox2.Text += "ccc:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
-            richTextBox2.Text += "ddd:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
-
-            selNdx = listView1.SelectedIndices[0];
-            listView1.Items[selNdx].Selected = true;    //選到的項目
-
-            int selectCount = listView1.SelectedIndices.Count;
-            richTextBox2.Text += "你選擇了 : " + selectCount.ToString() + " 個檔案\t";
-            richTextBox2.Text += "你選擇了資料夾:\t" + listView1.Items[selNdx].Text + "\n";
-
-            fullname = listView1.Items[selNdx].SubItems[2].Text + "\\" + listView1.Items[selNdx].Text;
-
-            richTextBox1.Text += "開啟路徑: " + fullname + "\n";
-
-            //richTextBox2.Text += "video_player_path = " + video_player_path + "\n";
-            richTextBox2.Text += "fullname = " + fullname + "\n";
-
-            if (video_player_path == String.Empty)
-            {
-                Process.Start(fullname); //使用預設程式開啟
-            }
-            else
-            {
-                if (System.IO.File.Exists(video_player_path) == true)
-                {
-                    Process.Start(video_player_path, fullname);    //指名播放程式開啟
-                }
-            }
-        }
-
-        private void listView1_KeyDown(object sender, KeyEventArgs e)
-        {
-            //richTextBox2.Text += "KeyDown, 按鍵是：" + e.KeyCode + "\n";
+            //richTextBox1.Text += "KeyDown, 按鍵是：" + e.KeyCode + "\n";
 
             if (e.KeyCode == Keys.Enter)
             {
@@ -395,11 +276,11 @@ namespace vcs_ListView7_new
                     return;
                 }
 
-                richTextBox2.Text += "你選擇了 : " + selectCount.ToString() + " 個檔案, 分別是\n";
+                richTextBox1.Text += "你選擇了 : " + selectCount.ToString() + " 個檔案, 分別是\n";
                 for (int i = 0; i < selectCount; i++)
                 {
                     string filename = listView1.SelectedItems[i].SubItems[2].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text;
-                    richTextBox2.Text += "刪除 : " + filename + "\n";
+                    richTextBox1.Text += "刪除 : " + filename + "\n";
                     System.IO.File.Delete(filename);
 
                     int selectIndex = listView1.SelectedItems[i].Index;
@@ -408,31 +289,53 @@ namespace vcs_ListView7_new
             }
         }
 
+        private void listView1_MouseMove(object sender, MouseEventArgs e)
+        {
+            ListViewHitTestInfo hti = listView1.HitTest(e.Location);
+            if (hti.Item == null)
+            {
+                return;
+            }
+            ListViewItem item = hti.Item;
+
+            label1.Text = "列 : " + item.Index.ToString();
+            label2.Text = "欄 : " + item.SubItems.IndexOf(hti.SubItem).ToString();
+
+            ListViewItem.ListViewSubItem subitem = hti.SubItem;
+            label3.Text = "內容 : " + subitem.Text.ToString();
+
+            //此列長度
+            label4.Text = "列長度 : " + item.SubItems.Count.ToString();
+
+            string mesg = string.Empty;
+
+            for (int i = 0; i < item.SubItems.Count; i++)
+            {
+                //richTextBox1.Text += item.SubItems[i].Text + " ";
+                mesg += item.SubItems[i].Text + " ";
+                if (item.SubItems[i] == subitem)
+                {
+                    //label4.Text = i.ToString();
+                    //richTextBox1.Text += i.ToString() + " ";
+                }
+            }
+            //richTextBox1.Text += "\n";
+
+            label5.Text = mesg;
+        }
+    }
+}
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
 
-            listView1.GridLines = true;
-            listView1.View = View.Details;  //定義列表顯示的方式
-            listView1.FullRowSelect = true; //整行一起選取
-            listView1.Clear();
+//listView1.SelectedItems[0].Text
 
-//------------------------------------------------------------  # 60個
-
-listView1.View = View.Details;  //定義列表顯示的方式
-listView1.FullRowSelect = true; //整行一起選取
-listView1.Clear();
-
-//設置列名稱
-listView1.Columns.Add("影片1", 200, HorizontalAlignment.Left);
-listView1.Columns.Add("大小", 50, HorizontalAlignment.Left);
-listView1.Columns.Add("檔名1", 400, HorizontalAlignment.Left);
-listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
-listView1.Columns.Add("大小", 150, HorizontalAlignment.Left);
-listView1.Columns.Add("副檔名", 100, HorizontalAlignment.Left);
-listView1.Columns.Add("修改日期", 100, HorizontalAlignment.Left);
-listView1.Visible = true;
-
-//------------------------------------------------------------  # 60個
-
+/*
             //播放 listview 多選的檔案
 int selectCount = listView1.SelectedIndices.Count;
             int selNdx;
@@ -472,5 +375,12 @@ int selectCount = listView1.SelectedIndices.Count;
             }
 */
 
+
+/*
+            for (int i = 0; i < listView1.Items.Count; i++)
+            {
+                richTextBox2.Text += listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\n";
+            }
+*/
 
 

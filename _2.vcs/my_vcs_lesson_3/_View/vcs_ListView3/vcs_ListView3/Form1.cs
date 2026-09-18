@@ -110,6 +110,13 @@ namespace vcs_ListView3
             this.Controls.Add(listView1);
         }
 
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
+
         private void listView1_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             textBox1.Clear();
@@ -202,3 +209,4 @@ namespace vcs_ListView3
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
+

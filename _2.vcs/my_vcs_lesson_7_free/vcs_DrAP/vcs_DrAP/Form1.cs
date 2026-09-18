@@ -1075,7 +1075,6 @@ namespace vcs_DrAP
         private void bt_clear1_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
-            removeDrawDiskSpace();
         }
 
         private void bt_clear2_Click(object sender, EventArgs e)
@@ -1169,69 +1168,6 @@ namespace vcs_DrAP
             save_log_to_local_drive();
         }
 
-        private const int WIDTH = 100;
-        void drawDiskSpace(long free, long total)
-        {
-            removeDrawDiskSpace();
-
-            //產出panel, 畫硬碟使用空間占比圖
-            Panel pnl = new Panel();
-            pnl.Left = 1070;
-            pnl.Top = 5;
-            pnl.Width = WIDTH;
-            pnl.Height = WIDTH;
-            pnl.Tag = "dynamic";
-            pnl.BackColor = Color.White;
-            this.Controls.Add(pnl);
-
-            Graphics g;
-            g = pnl.CreateGraphics();
-            /*  debug
-            Pen p = new Pen(Color.Black, 1);
-            p.DashStyle = Drawing2D.DashStyle.Dash;
-            g.DrawRectangle(p, WIDTH / 10, WIDTH / 10, WIDTH * 80 / 100, WIDTH * 80 / 100);
-            */
-
-            Brush b;
-            long used = total - free;
-
-            int used_angle = (int)(used * 360 / total);
-            //richTextBox1.Text += "used_angle = " + used_angle.ToString() + "\n";
-
-            b = new SolidBrush(Color.LightGreen);
-            g.FillEllipse(b, WIDTH / 10, WIDTH / 10, WIDTH * 80 / 100, WIDTH * 80 / 100);
-
-            b = new SolidBrush(Color.Red);
-            g.FillPie(b, WIDTH / 10, WIDTH / 10, WIDTH * 80 / 100, WIDTH * 80 / 100, -180, used_angle);
-
-            b = new SolidBrush(Color.White);
-            g.FillEllipse(b, WIDTH / 4, WIDTH / 4, WIDTH / 2, WIDTH / 2);
-        }
-
-        //移除按鈕部分,  一趟並不會將所有panel上的button回傳, 所以加入while迴圈, 真是神奇驚訝 
-        void removeDrawDiskSpace()
-        {
-            bool flag_do_remove = true;
-            while (flag_do_remove == true)
-            {
-                bool flag_do_remove_this = false;
-                foreach (Control con in this.Controls)
-                {
-                    //System.String strControlTag = con.Tag.ToString();//获得控件的標籤, 不能用此, 因為不一定有Tag可以ToString
-                    if (con.Tag != null)
-                    {
-                        if (con.Tag.ToString() == "dynamic")
-                        {
-                            this.Controls.Remove(con);
-                            flag_do_remove_this = true;
-                        }
-                    }
-                }
-                if (flag_do_remove_this == false)
-                    flag_do_remove = false;
-            }
-        }
-
         private void cb_video_only_CheckedChanged(object sender, EventArgs e)
         {
             if (cb_video_only.Checked == true)
@@ -1284,7 +1220,6 @@ namespace vcs_DrAP
             richTextBox1.Clear();
             richTextBox2.Clear();
             listView1.Clear();
-            removeDrawDiskSpace();
             flag_function = FUNCTION_SEARCH_TEXT;
             Application.DoEvents();
 

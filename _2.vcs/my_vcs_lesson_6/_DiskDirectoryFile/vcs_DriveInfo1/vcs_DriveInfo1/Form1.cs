@@ -436,7 +436,6 @@ namespace vcs_DriveInfo1
                 richTextBox1.Text += "磁碟分割號 : " + drive.Name + "\n";
                 richTextBox1.Text += "Drive : " + drive.Name + "\tFile type : " + drive.DriveType + "\n";
 
-
                 if (drive.IsReady == true)  //使用IsReady屬性判斷裝置是否就緒
                 {
                     richTextBox1.Text += "磁碟 : " + drive.ToString() + " 已就緒" + "\n";

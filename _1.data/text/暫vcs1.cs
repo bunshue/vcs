@@ -1,10 +1,16 @@
 ﻿
-            for (int i = 0; i < listView1.Items.Count; i++)
-            {
-                richTextBox2.Text += listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\n";
-                                     listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\n"
+            DirectoryInfo d = new DirectoryInfo(path);//輸入檔案夾
+            richTextBox1.Text += "Name : " + d.Name + "\n";
+            richTextBox1.Text += "FullName : " + d.FullName + "\n";
+            richTextBox1.Text += "Parent : " + d.Parent + "\n";
+            richTextBox1.Text += "Root : " + d.Root + "\n";
 
-            }
+
+
+
+
+
+vcs_SendTo_All	要準備一大堆 icon 檔
 
 
 ------------------------------------------------------------
