@@ -417,6 +417,60 @@ namespace vcs_ListView7_new
 
 //------------------------------------------------------------  # 60個
 
+listView1.View = View.Details;  //定義列表顯示的方式
+listView1.FullRowSelect = true; //整行一起選取
+listView1.Clear();
+
+//設置列名稱
+listView1.Columns.Add("影片1", 200, HorizontalAlignment.Left);
+listView1.Columns.Add("大小", 50, HorizontalAlignment.Left);
+listView1.Columns.Add("檔名1", 400, HorizontalAlignment.Left);
+listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
+listView1.Columns.Add("大小", 150, HorizontalAlignment.Left);
+listView1.Columns.Add("副檔名", 100, HorizontalAlignment.Left);
+listView1.Columns.Add("修改日期", 100, HorizontalAlignment.Left);
+listView1.Visible = true;
+
+//------------------------------------------------------------  # 60個
+
+            //播放 listview 多選的檔案
+int selectCount = listView1.SelectedIndices.Count;
+            int selNdx;
+            string all_filename = string.Empty;
+            string player_path = @"C:\Program Files (x86)\DAUM\PotPlayer\PotPlayerMini.exe";
+            if (selectCount <= 0)  //總共選擇的個數
+                return;
+
+            //richTextBox1.Text += "總共選了 : " + listView1.SelectedItems.Count.ToString() + " 個檔案，分別是 : \n";
+            for (int i = 0; i < listView1.SelectedItems.Count; i++)
+            {
+                selNdx = listView1.SelectedIndices[i];
+                listView1.Items[selNdx].Selected = true;    //選到的項目
+                //richTextBox1.Text += listView1.Items[selNdx].Text + "\n";
+                all_filename += " \"" + listView1.Items[selNdx].Text + "\"";
+            }
+
+            //指定應用程式路徑
+            //string target = @"C:\Program Files\DAUM\PotPlayer\PotPlayerMini.exe";
+            string target = player_path;
+
+            //方法一
+            //Process.Start(target, "參數");
+            //Process.Start(target, all_filename);
+
+            //方法二
+            ProcessStartInfo pInfo = new ProcessStartInfo(target);
+            pInfo.Arguments = all_filename;
+
+            richTextBox1.Text += "target : " + target + "\n";
+            richTextBox1.Text += "all_filename : " + all_filename + "\n";
+
+            using (Process process = new Process())
+            {
+                process.StartInfo = pInfo;
+                process.Start();    //啟動程式
+            }
 */
+
 
 

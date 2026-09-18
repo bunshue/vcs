@@ -39,13 +39,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.tb_search_text_pattern = new System.Windows.Forms.TextBox();
-            this.bt_find_big_files = new System.Windows.Forms.Button();
             this.tb_search = new System.Windows.Forms.TextBox();
             this.bt_add_dir = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.bt_remove_dir = new System.Windows.Forms.Button();
             this.bt_clear_dir = new System.Windows.Forms.Button();
-            this.bt_find_small_folders = new System.Windows.Forms.Button();
             this.bt_clear1 = new System.Windows.Forms.Button();
             this.bt_clear2 = new System.Windows.Forms.Button();
             this.cb_video_only = new System.Windows.Forms.CheckBox();
@@ -60,7 +58,6 @@
             this.cb_file_s = new System.Windows.Forms.CheckBox();
             this.cb_file_size = new System.Windows.Forms.CheckBox();
             this.cb_option1 = new System.Windows.Forms.CheckBox();
-            this.bt_find_empty_folders = new System.Windows.Forms.Button();
             this.bt_clear3 = new System.Windows.Forms.Button();
             this.groupbox_python = new System.Windows.Forms.GroupBox();
             this.rb_python_search1 = new System.Windows.Forms.RadioButton();
@@ -174,17 +171,6 @@
             this.tb_search_text_pattern.Text = "雍正";
             this.tb_search_text_pattern.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // bt_find_big_files
-            // 
-            this.bt_find_big_files.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_find_big_files.Location = new System.Drawing.Point(360, 6);
-            this.bt_find_big_files.Name = "bt_find_big_files";
-            this.bt_find_big_files.Size = new System.Drawing.Size(50, 50);
-            this.bt_find_big_files.TabIndex = 21;
-            this.bt_find_big_files.Text = "搜尋大檔";
-            this.bt_find_big_files.UseVisualStyleBackColor = true;
-            this.bt_find_big_files.Click += new System.EventHandler(this.bt_find_big_files_Click);
-            // 
             // tb_search
             // 
             this.tb_search.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -242,17 +228,6 @@
             this.bt_clear_dir.Text = "C";
             this.bt_clear_dir.UseVisualStyleBackColor = true;
             this.bt_clear_dir.Click += new System.EventHandler(this.bt_clear_dir_Click);
-            // 
-            // bt_find_small_folders
-            // 
-            this.bt_find_small_folders.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_find_small_folders.Location = new System.Drawing.Point(462, 210);
-            this.bt_find_small_folders.Name = "bt_find_small_folders";
-            this.bt_find_small_folders.Size = new System.Drawing.Size(115, 26);
-            this.bt_find_small_folders.TabIndex = 32;
-            this.bt_find_small_folders.Text = "找小資料夾";
-            this.bt_find_small_folders.UseVisualStyleBackColor = true;
-            this.bt_find_small_folders.Click += new System.EventHandler(this.bt_find_small_folders_Click);
             // 
             // bt_clear1
             // 
@@ -434,17 +409,6 @@
             this.cb_option1.TabIndex = 51;
             this.cb_option1.Text = "滿30結束";
             this.cb_option1.UseVisualStyleBackColor = true;
-            // 
-            // bt_find_empty_folders
-            // 
-            this.bt_find_empty_folders.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_find_empty_folders.Location = new System.Drawing.Point(462, 177);
-            this.bt_find_empty_folders.Name = "bt_find_empty_folders";
-            this.bt_find_empty_folders.Size = new System.Drawing.Size(115, 26);
-            this.bt_find_empty_folders.TabIndex = 54;
-            this.bt_find_empty_folders.Text = "找空資料夾";
-            this.bt_find_empty_folders.UseVisualStyleBackColor = true;
-            this.bt_find_empty_folders.Click += new System.EventHandler(this.bt_find_empty_folders_Click);
             // 
             // bt_clear3
             // 
@@ -696,7 +660,6 @@
             this.Controls.Add(this.groupbox_python);
             this.Controls.Add(this.bt_open_dir2);
             this.Controls.Add(this.bt_clear3);
-            this.Controls.Add(this.bt_find_empty_folders);
             this.Controls.Add(this.bt_copy_rtb_data);
             this.Controls.Add(this.bt_setup);
             this.Controls.Add(this.cb_option1);
@@ -706,14 +669,12 @@
             this.Controls.Add(this.bt_save_rtb_data);
             this.Controls.Add(this.bt_clear2);
             this.Controls.Add(this.bt_clear1);
-            this.Controls.Add(this.bt_find_small_folders);
             this.Controls.Add(this.bt_clear_dir);
             this.Controls.Add(this.bt_remove_dir);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.bt_add_dir);
             this.Controls.Add(this.bt_search_pattern_vcs);
             this.Controls.Add(this.tb_search);
-            this.Controls.Add(this.bt_find_big_files);
             this.Controls.Add(this.tb_search_text_pattern);
             this.Controls.Add(this.richTextBox2);
             this.Controls.Add(this.bt_start_files);
@@ -755,7 +716,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.TextBox tb_search_text_pattern;
-        private System.Windows.Forms.Button bt_find_big_files;
         private System.Windows.Forms.Button bt_delete_file;
         private System.Windows.Forms.TextBox tb_search;
         private System.Windows.Forms.Button bt_search_pattern_vcs;
@@ -763,7 +723,6 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button bt_remove_dir;
         private System.Windows.Forms.Button bt_clear_dir;
-        private System.Windows.Forms.Button bt_find_small_folders;
         private System.Windows.Forms.Button bt_clear1;
         private System.Windows.Forms.Button bt_clear2;
         private System.Windows.Forms.Button bt_search_pattern_python;
@@ -782,7 +741,6 @@
         private System.Windows.Forms.CheckBox cb_option1;
         private System.Windows.Forms.Button bt_setup;
         private System.Windows.Forms.Button bt_copy_rtb_data;
-        private System.Windows.Forms.Button bt_find_empty_folders;
         private System.Windows.Forms.Button bt_clear3;
         private System.Windows.Forms.Button bt_open_dir2;
         private System.Windows.Forms.Button bt_edit_python_files;

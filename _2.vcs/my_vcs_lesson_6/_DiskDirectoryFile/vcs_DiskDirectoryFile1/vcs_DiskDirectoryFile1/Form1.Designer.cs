@@ -75,15 +75,6 @@
             this.bt_files19 = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.bt_files25 = new System.Windows.Forms.Button();
-            this.bt_files24 = new System.Windows.Forms.Button();
-            this.bt_files23 = new System.Windows.Forms.Button();
-            this.bt_files22 = new System.Windows.Forms.Button();
-            this.bt_files21 = new System.Windows.Forms.Button();
-            this.bt_files20 = new System.Windows.Forms.Button();
-            this.lb_find = new System.Windows.Forms.Label();
-            this.lb_filesize = new System.Windows.Forms.Label();
-            this.lb_files = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.cb_compare1 = new System.Windows.Forms.CheckBox();
             this.cb_compare2 = new System.Windows.Forms.CheckBox();
@@ -552,6 +543,7 @@
             this.bt_files17.Name = "bt_files17";
             this.bt_files17.Size = new System.Drawing.Size(200, 60);
             this.bt_files17.TabIndex = 70;
+            this.bt_files17.Text = "優優檔";
             this.bt_files17.UseVisualStyleBackColor = true;
             this.bt_files17.Click += new System.EventHandler(this.bt_files17_Click);
             // 
@@ -596,101 +588,6 @@
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(100, 99);
             this.listBox1.TabIndex = 74;
-            // 
-            // bt_files25
-            // 
-            this.bt_files25.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_files25.Location = new System.Drawing.Point(837, 337);
-            this.bt_files25.Name = "bt_files25";
-            this.bt_files25.Size = new System.Drawing.Size(200, 60);
-            this.bt_files25.TabIndex = 80;
-            this.bt_files25.UseVisualStyleBackColor = true;
-            this.bt_files25.Click += new System.EventHandler(this.bt_files25_Click);
-            // 
-            // bt_files24
-            // 
-            this.bt_files24.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_files24.Location = new System.Drawing.Point(837, 275);
-            this.bt_files24.Name = "bt_files24";
-            this.bt_files24.Size = new System.Drawing.Size(200, 60);
-            this.bt_files24.TabIndex = 79;
-            this.bt_files24.Text = "優優檔";
-            this.bt_files24.UseVisualStyleBackColor = true;
-            this.bt_files24.Click += new System.EventHandler(this.bt_files24_Click);
-            // 
-            // bt_files23
-            // 
-            this.bt_files23.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_files23.Location = new System.Drawing.Point(837, 213);
-            this.bt_files23.Name = "bt_files23";
-            this.bt_files23.Size = new System.Drawing.Size(200, 60);
-            this.bt_files23.TabIndex = 78;
-            this.bt_files23.Text = "搜尋特定檔名";
-            this.bt_files23.UseVisualStyleBackColor = true;
-            this.bt_files23.Click += new System.EventHandler(this.bt_files23_Click);
-            // 
-            // bt_files22
-            // 
-            this.bt_files22.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_files22.Location = new System.Drawing.Point(837, 153);
-            this.bt_files22.Name = "bt_files22";
-            this.bt_files22.Size = new System.Drawing.Size(200, 60);
-            this.bt_files22.TabIndex = 77;
-            this.bt_files22.Text = "比較";
-            this.bt_files22.UseVisualStyleBackColor = true;
-            this.bt_files22.Click += new System.EventHandler(this.bt_files22_Click);
-            // 
-            // bt_files21
-            // 
-            this.bt_files21.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_files21.Location = new System.Drawing.Point(837, 90);
-            this.bt_files21.Name = "bt_files21";
-            this.bt_files21.Size = new System.Drawing.Size(200, 60);
-            this.bt_files21.TabIndex = 76;
-            this.bt_files21.Text = "顯示全部";
-            this.bt_files21.UseVisualStyleBackColor = true;
-            this.bt_files21.Click += new System.EventHandler(this.bt_files21_Click);
-            // 
-            // bt_files20
-            // 
-            this.bt_files20.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_files20.Location = new System.Drawing.Point(837, 30);
-            this.bt_files20.Name = "bt_files20";
-            this.bt_files20.Size = new System.Drawing.Size(200, 60);
-            this.bt_files20.TabIndex = 75;
-            this.bt_files20.Text = "從一個資料夾中撈出所有檔案 標準版 多層";
-            this.bt_files20.UseVisualStyleBackColor = true;
-            this.bt_files20.Click += new System.EventHandler(this.bt_files20_Click);
-            // 
-            // lb_find
-            // 
-            this.lb_find.AutoSize = true;
-            this.lb_find.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_find.Location = new System.Drawing.Point(837, 454);
-            this.lb_find.Name = "lb_find";
-            this.lb_find.Size = new System.Drawing.Size(67, 21);
-            this.lb_find.TabIndex = 87;
-            this.lb_find.Text = "lb_find";
-            // 
-            // lb_filesize
-            // 
-            this.lb_filesize.AutoSize = true;
-            this.lb_filesize.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_filesize.Location = new System.Drawing.Point(837, 430);
-            this.lb_filesize.Name = "lb_filesize";
-            this.lb_filesize.Size = new System.Drawing.Size(92, 21);
-            this.lb_filesize.TabIndex = 86;
-            this.lb_filesize.Text = "lb_filesize";
-            // 
-            // lb_files
-            // 
-            this.lb_files.AutoSize = true;
-            this.lb_files.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_files.Location = new System.Drawing.Point(837, 407);
-            this.lb_files.Name = "lb_files";
-            this.lb_files.Size = new System.Drawing.Size(69, 21);
-            this.lb_files.TabIndex = 85;
-            this.lb_files.Text = "lb_files";
             // 
             // groupBox3
             // 
@@ -812,15 +709,6 @@
             this.ClientSize = new System.Drawing.Size(1174, 648);
             this.Controls.Add(this.groupBox_file);
             this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.lb_find);
-            this.Controls.Add(this.lb_filesize);
-            this.Controls.Add(this.lb_files);
-            this.Controls.Add(this.bt_files25);
-            this.Controls.Add(this.bt_files24);
-            this.Controls.Add(this.bt_files23);
-            this.Controls.Add(this.bt_files22);
-            this.Controls.Add(this.bt_files21);
-            this.Controls.Add(this.bt_files20);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.bt_files19);
@@ -929,15 +817,6 @@
         private System.Windows.Forms.Button bt_files19;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Button bt_files25;
-        private System.Windows.Forms.Button bt_files24;
-        private System.Windows.Forms.Button bt_files23;
-        private System.Windows.Forms.Button bt_files22;
-        private System.Windows.Forms.Button bt_files21;
-        private System.Windows.Forms.Button bt_files20;
-        private System.Windows.Forms.Label lb_find;
-        private System.Windows.Forms.Label lb_filesize;
-        private System.Windows.Forms.Label lb_files;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.CheckBox cb_compare1;
         private System.Windows.Forms.CheckBox cb_compare2;

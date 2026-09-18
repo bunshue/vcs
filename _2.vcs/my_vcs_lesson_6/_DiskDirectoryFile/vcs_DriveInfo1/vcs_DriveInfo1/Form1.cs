@@ -1006,3 +1006,49 @@ namespace vcs_DriveInfo1
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
+
+
+/*
+
+            // 資料夾
+            DirectoryInfo d = new DirectoryInfo(path);//輸入檔案夾
+            richTextBox1.Text += "Name : " + d.Name + "\n";
+            richTextBox1.Text += "FullName : " + d.FullName + "\n";
+            richTextBox1.Text += "Parent : " + d.Parent + "\n";
+            richTextBox1.Text += "Root : " + d.Root + "\n";
+
+            DriveInfo drive = new DriveInfo(d.Root.ToString());
+
+            if (drive.IsReady == true)
+            {
+                richTextBox1.Text += "\nAP." + drive.VolumeLabel + DateTime.Now.ToString(".yyyy.MMdd.HHmm") + "\n\n";
+
+                richTextBox1.Text += string.Format("{0,-10}{1,-15}", "磁碟 :", drive.ToString()) + "\n";
+                richTextBox1.Text += string.Format("{0,-10}{1,-15}", "標籤 :", drive.VolumeLabel) + "\n";
+                //richTextBox1.Text += string.Format("{0,-12}{1,-25}", "名稱 :", drive.Name) + "\n";
+                richTextBox1.Text += string.Format("{0,-12}{1,17}{2,-7}{3,10}",
+                    "使用空間 :", (drive.TotalSize - drive.AvailableFreeSpace).ToString("N0", CultureInfo.InvariantCulture), " 個位元組", ByteConversionTBGBMBKB(Convert.ToInt64(drive.TotalSize - drive.AvailableFreeSpace))) + "\n";
+                double percentage = (double)drive.AvailableFreeSpace / (double)drive.TotalSize;
+                richTextBox1.Text += string.Format("{0,-12}{1,17}{2,-7}{3,10}{4,-10}",
+                    "可用空間 :", drive.AvailableFreeSpace.ToString("N0", CultureInfo.InvariantCulture), " 個位元組",
+                    ByteConversionTBGBMBKB(Convert.ToInt64(drive.AvailableFreeSpace)),
+                    " ( " + percentage.ToString("P", CultureInfo.InvariantCulture) + " )")
+                    + "\n";
+                richTextBox1.Text += string.Format("{0,-12}{1,17}{2,-7}{3,10}",
+                    "磁碟容量 :", drive.TotalSize.ToString("N0", CultureInfo.InvariantCulture), " 個位元組", ByteConversionTBGBMBKB(Convert.ToInt64(drive.TotalSize))) + "\n";
+
+                richTextBox1.Text += "格式 : " + drive.DriveFormat + "\n";
+                richTextBox1.Text += "型態 : " + drive.DriveType + "\n";
+                richTextBox1.Text += "根目錄 : " + drive.RootDirectory + "\n";
+                drawDiskSpace(drive.AvailableFreeSpace, drive.TotalSize);
+            }
+            else
+            {
+                richTextBox1.Text += "磁碟 " + drive.ToString() + "未就緒\n";
+            }
+
+            richTextBox1.Text += "\n";
+
+
+*/
+
