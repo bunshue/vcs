@@ -285,7 +285,7 @@
             this.bt_dir05.Name = "bt_dir05";
             this.bt_dir05.Size = new System.Drawing.Size(200, 60);
             this.bt_dir05.TabIndex = 15;
-            this.bt_dir05.Text = "刪除資料夾";
+            this.bt_dir05.Text = "Directory.Delete 刪除資料夾";
             this.bt_dir05.UseVisualStyleBackColor = true;
             this.bt_dir05.Click += new System.EventHandler(this.bt_dir05_Click);
             // 
@@ -351,7 +351,6 @@
             this.bt_files02.Name = "bt_files02";
             this.bt_files02.Size = new System.Drawing.Size(200, 60);
             this.bt_files02.TabIndex = 54;
-            this.bt_files02.Text = "顯示資料夾資訊";
             this.bt_files02.UseVisualStyleBackColor = true;
             this.bt_files02.Click += new System.EventHandler(this.bt_files02_Click);
             // 
@@ -542,7 +541,6 @@
             this.bt_files18.Name = "bt_files18";
             this.bt_files18.Size = new System.Drawing.Size(200, 60);
             this.bt_files18.TabIndex = 71;
-            this.bt_files18.Text = "獲得指定目錄下的所有文檔";
             this.bt_files18.UseVisualStyleBackColor = true;
             this.bt_files18.Click += new System.EventHandler(this.bt_files18_Click);
             // 
@@ -553,7 +551,6 @@
             this.bt_files19.Name = "bt_files19";
             this.bt_files19.Size = new System.Drawing.Size(200, 60);
             this.bt_files19.TabIndex = 72;
-            this.bt_files19.Text = "檔案資訊";
             this.bt_files19.UseVisualStyleBackColor = true;
             this.bt_files19.Click += new System.EventHandler(this.bt_files19_Click);
             // 

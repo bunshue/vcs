@@ -29,16 +29,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.tb_file_l = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
-            this.tb_search_text_pattern = new System.Windows.Forms.TextBox();
             this.tb_search = new System.Windows.Forms.TextBox();
             this.bt_add_dir = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
@@ -46,23 +41,10 @@
             this.bt_clear_dir = new System.Windows.Forms.Button();
             this.bt_clear1 = new System.Windows.Forms.Button();
             this.bt_clear2 = new System.Windows.Forms.Button();
-            this.cb_video_only = new System.Windows.Forms.CheckBox();
-            this.cb_video_s = new System.Windows.Forms.CheckBox();
-            this.groupBox_video = new System.Windows.Forms.GroupBox();
-            this.cb_video_l = new System.Windows.Forms.CheckBox();
-            this.cb_video_m = new System.Windows.Forms.CheckBox();
-            this.groupBox_file = new System.Windows.Forms.GroupBox();
-            this.cb_file_l = new System.Windows.Forms.CheckBox();
-            this.tb_file_s = new System.Windows.Forms.TextBox();
-            this.cb_file_m = new System.Windows.Forms.CheckBox();
-            this.cb_file_s = new System.Windows.Forms.CheckBox();
-            this.cb_file_size = new System.Windows.Forms.CheckBox();
             this.cb_option1 = new System.Windows.Forms.CheckBox();
             this.bt_clear3 = new System.Windows.Forms.Button();
             this.groupbox_python = new System.Windows.Forms.GroupBox();
-            this.rb_python_search1 = new System.Windows.Forms.RadioButton();
             this.bt_edit_python_files = new System.Windows.Forms.Button();
-            this.rb_python_search0 = new System.Windows.Forms.RadioButton();
             this.bt_search_pattern_python = new System.Windows.Forms.Button();
             this.groupbox_result = new System.Windows.Forms.GroupBox();
             this.lb_search_result2 = new System.Windows.Forms.Label();
@@ -78,35 +60,9 @@
             this.bt_start_files = new System.Windows.Forms.Button();
             this.bt_open_dir = new System.Windows.Forms.Button();
             this.bt_open_with_vcs = new System.Windows.Forms.Button();
-            this.groupBox_video.SuspendLayout();
-            this.groupBox_file.SuspendLayout();
             this.groupbox_python.SuspendLayout();
             this.groupbox_result.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(695, 31);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "類型";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "影片",
-            "全部檔案",
-            "音樂"});
-            this.comboBox1.Location = new System.Drawing.Point(736, 28);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(88, 21);
-            this.comboBox1.TabIndex = 1;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // richTextBox1
             // 
@@ -131,26 +87,6 @@
             this.listView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseClick);
             this.listView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseDoubleClick);
             // 
-            // tb_file_l
-            // 
-            this.tb_file_l.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_file_l.Location = new System.Drawing.Point(153, 14);
-            this.tb_file_l.Name = "tb_file_l";
-            this.tb_file_l.Size = new System.Drawing.Size(52, 30);
-            this.tb_file_l.TabIndex = 17;
-            this.tb_file_l.Text = "100";
-            this.tb_file_l.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.tb_file_l.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(263, 23);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(23, 12);
-            this.label2.TabIndex = 18;
-            this.label2.Text = "MB";
-            // 
             // richTextBox2
             // 
             this.richTextBox2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -160,16 +96,6 @@
             this.richTextBox2.TabIndex = 19;
             this.richTextBox2.Text = "";
             this.richTextBox2.TextChanged += new System.EventHandler(this.richTextBox2_TextChanged);
-            // 
-            // tb_search_text_pattern
-            // 
-            this.tb_search_text_pattern.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_search_text_pattern.Location = new System.Drawing.Point(252, 14);
-            this.tb_search_text_pattern.Name = "tb_search_text_pattern";
-            this.tb_search_text_pattern.Size = new System.Drawing.Size(99, 30);
-            this.tb_search_text_pattern.TabIndex = 20;
-            this.tb_search_text_pattern.Text = "雍正";
-            this.tb_search_text_pattern.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tb_search
             // 
@@ -251,153 +177,6 @@
             this.bt_clear2.UseVisualStyleBackColor = true;
             this.bt_clear2.Click += new System.EventHandler(this.bt_clear2_Click);
             // 
-            // cb_video_only
-            // 
-            this.cb_video_only.AutoSize = true;
-            this.cb_video_only.Checked = true;
-            this.cb_video_only.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_video_only.Location = new System.Drawing.Point(471, 12);
-            this.cb_video_only.Name = "cb_video_only";
-            this.cb_video_only.Size = new System.Drawing.Size(60, 16);
-            this.cb_video_only.TabIndex = 42;
-            this.cb_video_only.Text = "看影片";
-            this.cb_video_only.UseVisualStyleBackColor = true;
-            this.cb_video_only.CheckedChanged += new System.EventHandler(this.cb_video_only_CheckedChanged);
-            // 
-            // cb_video_s
-            // 
-            this.cb_video_s.AutoSize = true;
-            this.cb_video_s.Checked = true;
-            this.cb_video_s.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_video_s.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_video_s.Location = new System.Drawing.Point(109, 21);
-            this.cb_video_s.Name = "cb_video_s";
-            this.cb_video_s.Size = new System.Drawing.Size(43, 20);
-            this.cb_video_s.TabIndex = 43;
-            this.cb_video_s.Text = "小";
-            this.cb_video_s.UseVisualStyleBackColor = true;
-            this.cb_video_s.CheckedChanged += new System.EventHandler(this.cb_video_s_CheckedChanged);
-            // 
-            // groupBox_video
-            // 
-            this.groupBox_video.Controls.Add(this.cb_video_l);
-            this.groupBox_video.Controls.Add(this.cb_video_m);
-            this.groupBox_video.Controls.Add(this.cb_video_s);
-            this.groupBox_video.Location = new System.Drawing.Point(531, 6);
-            this.groupBox_video.Name = "groupBox_video";
-            this.groupBox_video.Size = new System.Drawing.Size(160, 50);
-            this.groupBox_video.TabIndex = 46;
-            this.groupBox_video.TabStop = false;
-            this.groupBox_video.Text = "影片大小";
-            // 
-            // cb_video_l
-            // 
-            this.cb_video_l.AutoSize = true;
-            this.cb_video_l.Checked = true;
-            this.cb_video_l.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_video_l.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_video_l.Location = new System.Drawing.Point(11, 21);
-            this.cb_video_l.Name = "cb_video_l";
-            this.cb_video_l.Size = new System.Drawing.Size(43, 20);
-            this.cb_video_l.TabIndex = 45;
-            this.cb_video_l.Text = "大";
-            this.cb_video_l.UseVisualStyleBackColor = true;
-            this.cb_video_l.CheckedChanged += new System.EventHandler(this.cb_video_l_CheckedChanged);
-            // 
-            // cb_video_m
-            // 
-            this.cb_video_m.AutoSize = true;
-            this.cb_video_m.Checked = true;
-            this.cb_video_m.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_video_m.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_video_m.Location = new System.Drawing.Point(60, 21);
-            this.cb_video_m.Name = "cb_video_m";
-            this.cb_video_m.Size = new System.Drawing.Size(43, 20);
-            this.cb_video_m.TabIndex = 44;
-            this.cb_video_m.Text = "中";
-            this.cb_video_m.UseVisualStyleBackColor = true;
-            this.cb_video_m.CheckedChanged += new System.EventHandler(this.cb_video_m_CheckedChanged);
-            // 
-            // groupBox_file
-            // 
-            this.groupBox_file.Controls.Add(this.cb_file_l);
-            this.groupBox_file.Controls.Add(this.tb_file_s);
-            this.groupBox_file.Controls.Add(this.cb_file_m);
-            this.groupBox_file.Controls.Add(this.cb_file_s);
-            this.groupBox_file.Controls.Add(this.tb_file_l);
-            this.groupBox_file.Controls.Add(this.label2);
-            this.groupBox_file.Location = new System.Drawing.Point(532, 57);
-            this.groupBox_file.Name = "groupBox_file";
-            this.groupBox_file.Size = new System.Drawing.Size(292, 50);
-            this.groupBox_file.TabIndex = 47;
-            this.groupBox_file.TabStop = false;
-            this.groupBox_file.Text = "檔案大小";
-            // 
-            // cb_file_l
-            // 
-            this.cb_file_l.AutoSize = true;
-            this.cb_file_l.Checked = true;
-            this.cb_file_l.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_file_l.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_file_l.Location = new System.Drawing.Point(11, 21);
-            this.cb_file_l.Name = "cb_file_l";
-            this.cb_file_l.Size = new System.Drawing.Size(43, 20);
-            this.cb_file_l.TabIndex = 45;
-            this.cb_file_l.Text = "大";
-            this.cb_file_l.UseVisualStyleBackColor = true;
-            this.cb_file_l.CheckedChanged += new System.EventHandler(this.cb_file_l_CheckedChanged);
-            // 
-            // tb_file_s
-            // 
-            this.tb_file_s.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_file_s.Location = new System.Drawing.Point(210, 14);
-            this.tb_file_s.Name = "tb_file_s";
-            this.tb_file_s.Size = new System.Drawing.Size(52, 30);
-            this.tb_file_s.TabIndex = 48;
-            this.tb_file_s.Text = "10";
-            this.tb_file_s.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // cb_file_m
-            // 
-            this.cb_file_m.AutoSize = true;
-            this.cb_file_m.Checked = true;
-            this.cb_file_m.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_file_m.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_file_m.Location = new System.Drawing.Point(60, 21);
-            this.cb_file_m.Name = "cb_file_m";
-            this.cb_file_m.Size = new System.Drawing.Size(43, 20);
-            this.cb_file_m.TabIndex = 44;
-            this.cb_file_m.Text = "中";
-            this.cb_file_m.UseVisualStyleBackColor = true;
-            this.cb_file_m.CheckedChanged += new System.EventHandler(this.cb_file_m_CheckedChanged);
-            // 
-            // cb_file_s
-            // 
-            this.cb_file_s.AutoSize = true;
-            this.cb_file_s.Checked = true;
-            this.cb_file_s.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_file_s.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_file_s.Location = new System.Drawing.Point(109, 21);
-            this.cb_file_s.Name = "cb_file_s";
-            this.cb_file_s.Size = new System.Drawing.Size(43, 20);
-            this.cb_file_s.TabIndex = 43;
-            this.cb_file_s.Text = "小";
-            this.cb_file_s.UseVisualStyleBackColor = true;
-            this.cb_file_s.CheckedChanged += new System.EventHandler(this.cb_file_s_CheckedChanged);
-            // 
-            // cb_file_size
-            // 
-            this.cb_file_size.AutoSize = true;
-            this.cb_file_size.Checked = true;
-            this.cb_file_size.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_file_size.Location = new System.Drawing.Point(462, 63);
-            this.cb_file_size.Name = "cb_file_size";
-            this.cb_file_size.Size = new System.Drawing.Size(72, 16);
-            this.cb_file_size.TabIndex = 49;
-            this.cb_file_size.Text = "檔案大小";
-            this.cb_file_size.UseVisualStyleBackColor = true;
-            this.cb_file_size.CheckedChanged += new System.EventHandler(this.cb_file_size_CheckedChanged);
-            // 
             // cb_option1
             // 
             this.cb_option1.AutoSize = true;
@@ -423,9 +202,7 @@
             // 
             // groupbox_python
             // 
-            this.groupbox_python.Controls.Add(this.rb_python_search1);
             this.groupbox_python.Controls.Add(this.bt_edit_python_files);
-            this.groupbox_python.Controls.Add(this.rb_python_search0);
             this.groupbox_python.Controls.Add(this.bt_search_pattern_python);
             this.groupbox_python.Location = new System.Drawing.Point(118, 120);
             this.groupbox_python.Name = "groupbox_python";
@@ -433,16 +210,6 @@
             this.groupbox_python.TabIndex = 64;
             this.groupbox_python.TabStop = false;
             this.groupbox_python.Text = "Python";
-            // 
-            // rb_python_search1
-            // 
-            this.rb_python_search1.AutoSize = true;
-            this.rb_python_search1.Location = new System.Drawing.Point(13, 48);
-            this.rb_python_search1.Name = "rb_python_search1";
-            this.rb_python_search1.Size = new System.Drawing.Size(70, 16);
-            this.rb_python_search1.TabIndex = 3;
-            this.rb_python_search1.Text = "python all";
-            this.rb_python_search1.UseVisualStyleBackColor = true;
             // 
             // bt_edit_python_files
             // 
@@ -455,18 +222,6 @@
             this.bt_edit_python_files.TabIndex = 62;
             this.bt_edit_python_files.UseVisualStyleBackColor = true;
             this.bt_edit_python_files.Click += new System.EventHandler(this.bt_edit_python_files_Click);
-            // 
-            // rb_python_search0
-            // 
-            this.rb_python_search0.AutoSize = true;
-            this.rb_python_search0.Checked = true;
-            this.rb_python_search0.Location = new System.Drawing.Point(13, 21);
-            this.rb_python_search0.Name = "rb_python_search0";
-            this.rb_python_search0.Size = new System.Drawing.Size(80, 16);
-            this.rb_python_search0.TabIndex = 1;
-            this.rb_python_search0.TabStop = true;
-            this.rb_python_search0.Text = "python only";
-            this.rb_python_search0.UseVisualStyleBackColor = true;
             // 
             // bt_search_pattern_python
             // 
@@ -663,9 +418,6 @@
             this.Controls.Add(this.bt_copy_rtb_data);
             this.Controls.Add(this.bt_setup);
             this.Controls.Add(this.cb_option1);
-            this.Controls.Add(this.groupBox_file);
-            this.Controls.Add(this.groupBox_video);
-            this.Controls.Add(this.cb_video_only);
             this.Controls.Add(this.bt_save_rtb_data);
             this.Controls.Add(this.bt_clear2);
             this.Controls.Add(this.bt_clear1);
@@ -675,26 +427,17 @@
             this.Controls.Add(this.bt_add_dir);
             this.Controls.Add(this.bt_search_pattern_vcs);
             this.Controls.Add(this.tb_search);
-            this.Controls.Add(this.tb_search_text_pattern);
             this.Controls.Add(this.richTextBox2);
             this.Controls.Add(this.bt_start_files);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.bt_open_dir);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.cb_file_size);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "DrAP";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.groupBox_video.ResumeLayout(false);
-            this.groupBox_video.PerformLayout();
-            this.groupBox_file.ResumeLayout(false);
-            this.groupBox_file.PerformLayout();
             this.groupbox_python.ResumeLayout(false);
-            this.groupbox_python.PerformLayout();
             this.groupbox_result.ResumeLayout(false);
             this.groupbox_result.PerformLayout();
             this.ResumeLayout(false);
@@ -704,18 +447,13 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button bt_open_dir;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Button bt_start_files;
-        private System.Windows.Forms.TextBox tb_file_l;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RichTextBox richTextBox2;
-        private System.Windows.Forms.TextBox tb_search_text_pattern;
         private System.Windows.Forms.Button bt_delete_file;
         private System.Windows.Forms.TextBox tb_search;
         private System.Windows.Forms.Button bt_search_pattern_vcs;
@@ -727,17 +465,6 @@
         private System.Windows.Forms.Button bt_clear2;
         private System.Windows.Forms.Button bt_search_pattern_python;
         private System.Windows.Forms.Button bt_save_rtb_data;
-        private System.Windows.Forms.CheckBox cb_video_only;
-        private System.Windows.Forms.CheckBox cb_video_s;
-        private System.Windows.Forms.GroupBox groupBox_video;
-        private System.Windows.Forms.CheckBox cb_video_l;
-        private System.Windows.Forms.CheckBox cb_video_m;
-        private System.Windows.Forms.GroupBox groupBox_file;
-        private System.Windows.Forms.CheckBox cb_file_l;
-        private System.Windows.Forms.CheckBox cb_file_m;
-        private System.Windows.Forms.CheckBox cb_file_s;
-        private System.Windows.Forms.TextBox tb_file_s;
-        private System.Windows.Forms.CheckBox cb_file_size;
         private System.Windows.Forms.CheckBox cb_option1;
         private System.Windows.Forms.Button bt_setup;
         private System.Windows.Forms.Button bt_copy_rtb_data;
@@ -745,8 +472,6 @@
         private System.Windows.Forms.Button bt_open_dir2;
         private System.Windows.Forms.Button bt_edit_python_files;
         private System.Windows.Forms.GroupBox groupbox_python;
-        private System.Windows.Forms.RadioButton rb_python_search1;
-        private System.Windows.Forms.RadioButton rb_python_search0;
         private System.Windows.Forms.GroupBox groupbox_result;
         private System.Windows.Forms.Label lb_search_result2;
         private System.Windows.Forms.Label lb_search_result1;

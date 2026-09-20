@@ -64,6 +64,7 @@ namespace vcs_ListView7_new
 
             listView1.AfterLabelEdit += new LabelEditEventHandler(listView1_AfterLabelEdit);
             */
+            listView1.SelectedIndexChanged += new EventHandler(listView1_SelectedIndexChanged);
         }
 
         void show_item_location()
@@ -79,7 +80,7 @@ namespace vcs_ListView7_new
             button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             int dd = 40;
-            label1.Location = new Point(x_st + dx * 0, y_st + dy * 5+dd*0);
+            label1.Location = new Point(x_st + dx * 0, y_st + dy * 5 + dd * 0);
             label2.Location = new Point(x_st + dx * 0, y_st + dy * 5 + dd * 1);
             label3.Location = new Point(x_st + dx * 0, y_st + dy * 5 + dd * 2);
             label4.Location = new Point(x_st + dx * 0, y_st + dy * 5 + dd * 3);
@@ -170,7 +171,7 @@ namespace vcs_ListView7_new
             richTextBox1.Text += "aaa:\t" + listView1.Items[selNdx].Text + "\n";
             richTextBox1.Text += "bbb:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
             richTextBox1.Text += "ccc:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
-            richTextBox1.Text += "ddd:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
+            //richTextBox1.Text += "ddd:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
 
             listView1.Items[selNdx].Selected = true;    //選到的項目
 
@@ -192,7 +193,7 @@ namespace vcs_ListView7_new
             richTextBox1.Text += "aaa:\t" + listView1.Items[selNdx].Text + "\n";
             richTextBox1.Text += "bbb:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
             richTextBox1.Text += "ccc:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
-            richTextBox1.Text += "ddd:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
+            //richTextBox1.Text += "ddd:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
 
             selNdx = listView1.SelectedIndices[0];
             listView1.Items[selNdx].Selected = true;    //選到的項目
@@ -248,9 +249,10 @@ namespace vcs_ListView7_new
                     return;
                 }
 
-                //richTextBox1.Text += "總共選了 : " + listView1.SelectedItems.Count.ToString() + " 個檔案，分別是 : \n";
+                int SelectedItemsCount = listView1.SelectedItems.Count;
+                //richTextBox1.Text += "總共選了 : " + SelectedItemsCount.ToString() + " 個檔案，分別是 : \n";
                 //for (int i = 0; i < listView1.SelectedIndices.Count; i++)
-                for (int i = 0; i < listView1.SelectedItems.Count; i++)
+                for (int i = 0; i < SelectedItemsCount; i++)
                 {
                     selNdx = listView1.SelectedIndices[i];
                     listView1.Items[selNdx].Selected = true;    //選到的項目
@@ -323,6 +325,23 @@ namespace vcs_ListView7_new
 
             label5.Text = mesg;
         }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int SelectedItemsCount = listView1.SelectedItems.Count;
+
+            richTextBox1.Text += "SelectedIndexChanged, 選擇個數 : " + SelectedItemsCount.ToString() + "\n";
+
+            if (SelectedItemsCount > 0)
+            {
+                richTextBox1.Text += "總共選了 : " + SelectedItemsCount.ToString() + " 項，分別是 : \n";
+                for (int i = 0; i < SelectedItemsCount; i++)
+                {
+                    richTextBox1.Text += listView1.SelectedItems[i].Text + "\n";
+                    //idx = listView1.SelectedIndices[i];
+                }
+            }
+        }
     }
 }
 
@@ -344,8 +363,9 @@ int selectCount = listView1.SelectedIndices.Count;
             if (selectCount <= 0)  //總共選擇的個數
                 return;
 
-            //richTextBox1.Text += "總共選了 : " + listView1.SelectedItems.Count.ToString() + " 個檔案，分別是 : \n";
-            for (int i = 0; i < listView1.SelectedItems.Count; i++)
+            int SelectedItemsCount = listView1.SelectedItems.Count;
+            //richTextBox1.Text += "總共選了 : " + SelectedItemsCount.ToString() + " 個檔案，分別是 : \n";
+            for (int i = 0; i < SelectedItemsCount; i++)
             {
                 selNdx = listView1.SelectedIndices[i];
                 listView1.Items[selNdx].Selected = true;    //選到的項目
@@ -381,6 +401,21 @@ int selectCount = listView1.SelectedIndices.Count;
             {
                 richTextBox2.Text += listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\n";
             }
+*/
+
+/*
+            //設定欄位
+            ColumnHeader ch1 = new ColumnHeader();
+            ch1.Text = "文件名稱";
+            ch1.Width = 330;
+            listView1.Columns.Add(ch1);
+
+            listView1.GridLines = true;  // 網格線
+            listView1.View = View.Details;  //定義列表顯示的方式
+
+            listView1.Items.Clear();
+
+            listView1.Items.Add(fi.FullName);
 */
 
 

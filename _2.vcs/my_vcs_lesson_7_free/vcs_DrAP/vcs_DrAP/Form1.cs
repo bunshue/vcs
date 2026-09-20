@@ -25,21 +25,20 @@ namespace vcs_DrAP
         private const int FUNCTION_SEARCH_TEXT = 0x08;  //搜尋關鍵字, vcs, python, ...
         private const int FUNCTION_TEST = 0xFF;         //測試
 
+        /*
         private const int FILETYPE_VIDEO = 0x00;        //影片
         private const int FILETYPE_AUDIO = 0x01;        //音樂
         private const int FILETYPE_ALL = 0x02;          //全部
         private const int FILETYPE_OTHERS = 0xFF;       //其他
+        */
 
         int flag_function = FUNCTION_NONE;
 
         string path = String.Empty;
-        int filetype = 0;
-        string filetype2 = String.Empty;
         Int64 total_size = 0;
         Int64 total_files = 0;
         Int64 folder_files = 0;
         int flag_search_vcs_pattern = 0;
-        string FolederName;
 
         string video_player_path = String.Empty;
         string audio_player_path = String.Empty;
@@ -106,7 +105,6 @@ namespace vcs_DrAP
         public Form1()
         {
             InitializeComponent();
-            comboBox1.SelectedIndex = 0;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -167,9 +165,8 @@ namespace vcs_DrAP
             bt_clear_dir.Location = new Point(x_st, y_st + dy * 2);
 
             x_st += bt_add_dir.Size.Width + dx;
-            tb_search_text_pattern.Location = new Point(x_st, y_st + dy * 0);
 
-            x_st += tb_search_text_pattern.Size.Width + dx;
+            x_st += 100 + dx;
             x_st += 50 + dx;
             bt_start_files.Location = new Point(x_st, y_st + dy * 0);
 
@@ -236,9 +233,6 @@ namespace vcs_DrAP
             y_st = 15;
             dx = 100;
             dy = 22;
-            rb_python_search0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            rb_python_search1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-
             bt_search_pattern_python.Size = new Size(45, 45);
             bt_search_pattern_python.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             bt_edit_python_files.Size = new Size(45, 45);
@@ -251,15 +245,6 @@ namespace vcs_DrAP
             result_str += "lsstview1 y_st = " + this.listView1.Location.Y.ToString() + "\n";
             //this.richTextBox2.Location = new Point(1600, 600);
             */
-
-            if (cb_video_only.Checked == true)
-                groupBox_video.Enabled = true;
-            else
-                groupBox_video.Enabled = false;
-            if (cb_file_size.Checked == true)
-                groupBox_file.Enabled = true;
-            else
-                groupBox_file.Enabled = false;
 
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
@@ -422,29 +407,6 @@ namespace vcs_DrAP
                 //設置ListView最後一行可見
                 //listView1.Items[listView1.Items.Count - 1].EnsureVisible();
             }
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            filetype = comboBox1.SelectedIndex;
-            switch (filetype)
-            {
-                case FILETYPE_VIDEO:
-                    filetype2 = "*.*";
-                    break;
-                case FILETYPE_AUDIO:
-                    filetype2 = "*.mp3";
-                    break;
-                case FILETYPE_ALL:
-                    filetype2 = "*.*";
-                    break;
-                default:
-                    filetype2 = "*.*";
-                    break;
-            }
-            //result_str += "change file type to " + filetype2 + "\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -919,33 +881,7 @@ namespace vcs_DrAP
 
                 if (search_mode == SEARCH_MODE_PYTHON)
                 {
-                    string search_folder1 = @"D:\_git\vcs\_4.python\__code";    //書附光碟
-
-                    if (rb_python_search0.Checked == true)
-                    {
-                        //python only 不包含 書附光碟
-                        if (dir.Contains(search_folder1))
-                        {
-                            //跳過 書附光碟
-                            result_str += "跳過 " + dir + "\n";
-                            continue;
-                        }
-                        else
-                        {
-                            ProcessDirectoryS(dir);
-                        }
-                    }
-                    else if (rb_python_search1.Checked == true)
-                    {
-                        //全部
-                        ProcessDirectoryS(dir);
-                    }
-                    else
-                    {
-                        //impossible
-                        result_str += "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n";
-                        //python only 不包含新進檔案 與 書附光碟
-                    }
+                    ProcessDirectoryS(dir);
                 }
                 else if (search_mode == SEARCH_MODE_VCS)
                 {
@@ -1168,46 +1104,6 @@ namespace vcs_DrAP
             save_log_to_local_drive();
         }
 
-        private void cb_video_only_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cb_video_only.Checked == true)
-                groupBox_video.Enabled = true;
-            else
-                groupBox_video.Enabled = false;
-        }
-
-        private void cb_file_size_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cb_file_size.Checked == true)
-                groupBox_file.Enabled = true;
-            else
-                groupBox_file.Enabled = false;
-        }
-
-        private void cb_video_l_CheckedChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void cb_video_m_CheckedChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void cb_video_s_CheckedChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void cb_file_l_CheckedChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void cb_file_m_CheckedChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void cb_file_s_CheckedChanged(object sender, EventArgs e)
-        {
-        }
-
         void do_search_mode(int mode)
         {
             //開始計時
@@ -1277,13 +1173,8 @@ namespace vcs_DrAP
                 path = search_path;
 
             richTextBox1.Text += "搜尋資料夾: " + path + "\n\n";
-            if (System.IO.File.Exists(path) == true)
-            {
-                // path 是個 檔案
-                richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
-                ProcessFileS(path);
-            }
-            else if (Directory.Exists(path) == true)
+
+            if (Directory.Exists(path) == true)
             {
                 // path 是個 資料夾
                 ProcessDirectoryS(path);
@@ -1307,7 +1198,6 @@ namespace vcs_DrAP
                 bt_search_pattern_vcs.BackColor = SystemColors.ControlLight;
                 bt_search_pattern_vcs.BackgroundImage = vcs_DrAP.Properties.Resources.vcs;
             }
-
             stopwatch.Stop();
             result_str += "停止計時\t";
             result_str += "總時間: " + stopwatch.ElapsedMilliseconds.ToString() + " msec\n";
@@ -1657,16 +1547,12 @@ namespace vcs_DrAP
             }
             else if (type == 2)
             {
-                //result_str += "folder = " + FolederName + ",  name = " + fi.Name + "\n";
-
                 total_size += fi.Length;
                 total_files++;
                 folder_files++;
 
                 //richTextBox1.Text += fi.Name + "\t" + fi.Length.ToString() + "\n";
                 //richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
-
-                //fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length));
             }
         }
         //------------------------------------------------------------  # 60個
@@ -1733,8 +1619,6 @@ min_size_mb = 10;  // 最小值 10 MB
             FileInfo fi = new FileInfo(path);
             fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
             richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
-
-
 
                 result_str += "a你選擇了檔名:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
                 result_str += "資料夾:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
@@ -1818,28 +1702,17 @@ min_size_mb = 10;  // 最小值 10 MB
 //richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
                 FileInfo fi = new FileInfo(filename);
                 fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
-
+//fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length));
 //------------------------------------------------------------  # 60個
 
         void show_file_info1()  //轉出一層
         {
-            richTextBox1.Text += "show_file_info1 ST 轉出一層\n";
-
-            if (cb_video_only.Checked == false)
-            {
-                richTextBox1.Text += "xxxx\n";
-                return;
-            }
-
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.FullRowSelect = true; //整行一起選取
             listView1.Clear();
 
             //設置列名稱
-            if (cb_video_only.Checked == true)
-            {
                 listView1.Columns.Add("影片1", 200, HorizontalAlignment.Left);
-            }
             listView1.Columns.Add("大小", 50, HorizontalAlignment.Left);
             listView1.Columns.Add("檔名1", 400, HorizontalAlignment.Left);
             listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
@@ -1854,16 +1727,8 @@ min_size_mb = 10;  // 最小值 10 MB
             //排序 由大到小  在return的地方多個負號
             fileinfos.Sort((x, y) => { return -x.filesize.CompareTo(y.filesize); });
 
-            if (fileinfos.Count == 0)
-            {
-                result_str += "找不到資料a\n";
-                lb_search_result1.Text = "0";
-            }
-            else
-            {
                 result_str += "找到 " + fileinfos.Count.ToString() + " 筆資料a\n";
                 lb_search_result1.Text = fileinfos.Count.ToString();
-            }
 
             for (int i = 0; i < fileinfos.Count; i++)
             {
@@ -1882,14 +1747,10 @@ min_size_mb = 10;  // 最小值 10 MB
                 string itemc = string.Empty;
 
                 richTextBox1.Text += "aaaa1\n";
-                if (cb_video_only.Checked == true)
-                {
+
                     richTextBox1.Text += "aaaa2\n";
                     //debug mesg
                     //result_str += "i = " + i.ToString() + ", filename : " + fileinfos[i].filepath + "\\" + fileinfos[i].filename + "\n";
-
-                    if (cb_video_only.Checked == true)
-                        continue;
 
                     i1 = new ListViewItem(fileinfos[i].filename);
                     i1.UseItemStyleForSubItems = false;
@@ -1907,12 +1768,8 @@ min_size_mb = 10;  // 最小值 10 MB
 
                     sub_i1a.Font = new Font("Times New Roman", 10, FontStyle.Bold);
                     sub_i1b.Font = new Font("Times New Roman", 10, FontStyle.Bold);
-                }
-                else
-                {
-                    if (cb_video_only.Checked == true)
-                        continue;
 
+-----
                     i1 = new ListViewItem(fileinfos[i].filename);
                     i1.UseItemStyleForSubItems = false;
 
@@ -1939,3 +1796,10 @@ min_size_mb = 10;  // 最小值 10 MB
         }
 
 */
+
+
+
+
+
+
+

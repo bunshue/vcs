@@ -1,19 +1,26 @@
 ﻿
-            DirectoryInfo d = new DirectoryInfo(path);//輸入檔案夾
-            richTextBox1.Text += "Name : " + d.Name + "\n";
-            richTextBox1.Text += "FullName : " + d.FullName + "\n";
-            richTextBox1.Text += "Parent : " + d.Parent + "\n";
-            richTextBox1.Text += "Root : " + d.Root + "\n";
-
-
-
-
-
-
 vcs_SendTo_All	要準備一大堆 icon 檔
 
-
 ------------------------------------------------------------
+
+//設置列名稱
+listView1.Columns.Add("名稱", 200, HorizontalAlignment.Center);
+listView1.Columns.Add("大小", 200, HorizontalAlignment.Center);
+listView1.Columns.Add("日期", 200, HorizontalAlignment.Center);
+
+ListViewItem i1 = new ListViewItem(fi.Name);
+ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
+sub_i1a.Text = fi.Length.ToString();
+i1.SubItems.Add(sub_i1a);
+ListViewItem.ListViewSubItem sub_i1b = new ListViewItem.ListViewSubItem();
+sub_i1b.Text = "bbbb";
+i1.SubItems.Add(sub_i1b);
+
+listView1.Items.Add(i1);
+//設置ListView最後一行可見
+listView1.Items[listView1.Items.Count - 1].EnsureVisible();
+
+//------------------------------------------------------------  # 60個
 
 //播放單一檔案
 //axWindowsMediaPlayer1.URL = fileinfos[0].filepath + "\\" + fileinfos[0].filename;   //開啟檔案
@@ -27,6 +34,7 @@ axWindowsMediaPlayer1.currentPlaylist = axWindowsMediaPlayer1.newPlaylist("播�
 */
 
 ------------------------------------------------------------
+
             int value = 0;
             bool conversionSuccessful = int.TryParse(tb_filesize.Text, out value);    //out為必須
             if (conversionSuccessful == true)
@@ -49,13 +57,6 @@ axWindowsMediaPlayer1.currentPlaylist = axWindowsMediaPlayer1.newPlaylist("播�
                 richTextBox1.Text += "int.TryParse 失敗\n";
                 richTextBox1.Text += "取得檔案個數數字失敗\n";
             }
-
-
-------------------------------------------------------------
-
-
-------------------------------------------------------------
-
 
 ------------------------------------------------------------
 
@@ -113,7 +114,7 @@ else
 }
 
 //------------------------------------------------------------  # 60個
-
+draw
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             RectangleF smiley_rect = new RectangleF(-1, -1, 2, 2);
@@ -439,8 +440,8 @@ btnNone_Click(null, null);
 
 //------------------------------------------------------------  # 60個
 
-約翰·卡爾·弗里德利希·高斯 1777年4月30日—1855年2月23日
-威廉·愛德華·韋伯	1804年10月24日—1891年6月23日
+約翰·卡爾·弗里德利希·高斯 1777年 4月30日—1855年2月23日
+威廉·愛德華·韋伯	  1804年10月24日—1891年6月23日
 
 //------------------------------------------------------------  # 60個
 
@@ -554,7 +555,7 @@ public void BringToFront();
 public void SendToBack();
 
 //------------------------------------------------------------  # 60個
-
+draw
 Pen p;
 p = new Pen(foreColor);
 p.Width = 8;
@@ -566,7 +567,7 @@ p.Color = foreColor;
 p.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
 
 //------------------------------------------------------------  # 60個
-
+draw
 //pbox 的 剪下
 //剪下 = 複製到剪貼簿 + 把選取區域塗成背景色
 SolidBrush br = new SolidBrush(pictureBox1.BackColor)
