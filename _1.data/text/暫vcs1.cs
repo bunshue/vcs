@@ -1,4 +1,4 @@
-﻿
+﻿dialog
 vcs_SendTo_All	要準備一大堆 icon 檔
 
 ------------------------------------------------------------
@@ -114,7 +114,8 @@ else
 }
 
 //------------------------------------------------------------  # 60個
-draw
+draw translate-transform
+
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             RectangleF smiley_rect = new RectangleF(-1, -1, 2, 2);
@@ -345,28 +346,12 @@ mnuScaleFull_Click(null, null);
 // Deselect all colors.
 // Deselect all colors.
 // Deselect all colors.
-btnNone_Click(null, null);
 
 btnNone_Click(null, null);
-
+btnNone_Click(null, null);
+btnNone_Click(null, null);
 btnNone_Click(null, null);
 
-btnNone_Click(null, null);
-
-        // Deselect all colors.
-        private void btnNone_Click(object sender, EventArgs e)
-        {
-            foreach (Control ctl in this.Controls)
-            {
-                if (ctl is PictureBox)
-                {
-                    PictureBox pic = ctl as PictureBox;
-                    pic.BorderStyle = BorderStyle.None;
-                }
-            }
-        }
-
-        // Select all colors.
         private void btnAll_Click(object sender, EventArgs e)
         {
             foreach (Control ctl in this.Controls)
@@ -378,26 +363,6 @@ btnNone_Click(null, null);
                 }
             }
         }
-
-
-        private void SelectColor(Color clr)
-        {
-            foreach (Control ctl in this.Controls)
-            {
-                if (ctl is PictureBox)
-                {
-                    if (ctl.BackColor.Equals(clr))
-                    {
-                        PictureBox pic = ctl as PictureBox;
-                        pic.BorderStyle = BorderStyle.Fixed3D;
-                        return;
-                    }
-                }
-            }
-        }
-
-
-
 
         // Select the PictureBox with this name.
         private void SelectPictureBox(string pic_name)
@@ -553,24 +518,6 @@ Lab主螢幕墊高 多一個螢幕
 public void BringToFront();
 //     將控制項傳送到疊置順序的後面。
 public void SendToBack();
-
-//------------------------------------------------------------  # 60個
-draw
-Pen p;
-p = new Pen(foreColor);
-p.Width = 8;
-p.StartCap = System.Drawing.Drawing2D.LineCap.Round;
-p.EndCap = System.Drawing.Drawing2D.LineCap.Round;
-p.Color = foreColor;
-
-//p.LineJoin = System.Drawing.Drawing2D.LineJoin.Bevel;
-p.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
-
-//------------------------------------------------------------  # 60個
-draw
-//pbox 的 剪下
-//剪下 = 複製到剪貼簿 + 把選取區域塗成背景色
-SolidBrush br = new SolidBrush(pictureBox1.BackColor)
 
 //------------------------------------------------------------  # 60個
 
@@ -756,6 +703,7 @@ colorDialog1.AllowFullOpen = true;  //可以使用該對話框定義自定義顏
 colorDialog1.AnyColor = true;      			//顯示基本顏色集中可用的所有顏色
 colorDialog1.FullOpen = true;      //創建自定義顏色的控件在對話框打開時是可見的
 colorDialog1.SolidColorOnly = false;			//不限制只選擇純色
+
 if (colorDialog1.ShowDialog() == DialogResult.OK)   //彈出對話框
 {
 	pictureBox1.BackColor = colorDialog1.Color;
@@ -1506,9 +1454,6 @@ C# 7.0 引入 具名 Tuple 語法
 //圖像縮放操作
 //調整 pbox的大小，來改變圖片大小
 //pbox的SizeMode要用Zoom
-
-            pictureBox1.Height = Convert.ToInt32(myImage.Height * Convert.ToSingle(textBox1.Text.Trim()));
-            pictureBox1.Width  = Convert.ToInt32(myImage.Width  * Convert.ToSingle(textBox1.Text.Trim()) * 4 / 3);
 
 //------------------------------------------------------------  # 60個
 
@@ -2437,6 +2382,7 @@ cccc
             }
 
 //------------------------------------------------------------  # 60個
+
 注意：Image用后请手动释放pictureBox.Image.Dispose();否则图片大些的话，转转下内存就猛升了（一点经验，敬请笑纳）。
 
 //------------------------------------------------------------  # 60個
@@ -4514,24 +4460,6 @@ vcs不可畫點，用畫橢圓取代
 
 //------------------------------------------------------------  # 60個
 
-// bmp 的大小和pictureBox1 相同
-Bitmap bmp = new Bitmap(this.PictureBox1.Width, this.PictureBox1.Height);
-// 以記憶體圖像 bmp 建立 g 記憶體畫布
-Graphics g = Graphics.FromImage(bmp);
-g.Clear(this.pictureBox1.BackColor); //畫布背景色
-g.DrawLine(new pen(Color.Red, 2), x, y, e.X, e.Y); //可
-
-//------------------------------------------------------------  # 60個
-
-// bmp 的大小和pictureBox1 相同
-Bitmap bmp = new Bitmap(this.PictureBox1.Width, this.PictureBox1.Height);
-// 以記憶體圖像 bmp 建立 g 記憶體畫布
-Graphics g = Graphics.FromImage(bmp);
-g.Clear(this.pictureBox1.BackColor); //畫布背景色
-g.DrawLine(new pen(Color.Red, 2), x, y, e.X, e.Y); //可以繪圖了
-
-//------------------------------------------------------------  # 60個
-
 XML 註解	<!-- --> 的內容。
 
 @"C:\______test_files\cat\cat2.png"
@@ -5364,22 +5292,14 @@ video.WriteFrame<Bgr, byte>(image); //將每張圖片製作成影片
 大紅（Terence，大哥鳥）
 思黛拉（Stella，泡泡鳥，粉思思）
 
-
 progressBar1 無法改變顏色
 需要自己畫
 
-
 Windows不允許為檔名的字元：	雙引號(")
-
 
 懐かしのムード歌謡 人気曲 メドレー ♪♪ 昭和の懐メロ名曲 ♪♪ ムード歌謡曲 昭和 メドレー ♪♪ あなたの気分に最も影響を与え曲
 
-
-//針對某控件的邊緣 設定表單大小
-this.ClientSize = new Size(pictureBox1.Size.Width + 100, pictureBox1.Size.Height + 100);
-
 bmp_
-
 
 MediaPlay 9
 
@@ -5523,28 +5443,6 @@ this.AutoSizeMode = AutoSizeMode.GrowAndShrink;     //讓表單大小可以自�
 textBox內換行要\r\n   ?!?!
 
 每種控件的縮寫
-
-Label	lb		Label lb_main_mesg_cmx_lenc = new Label();
-TextBox tb
-Button btn1 = new Button();
-HScrollBar hsbar = new HScrollBar();
-CheckBox cb_average = new CheckBox();
-TrackBar tbar0 = new TrackBar();
-
-TextBox tb1 = new TextBox();
-PictureBox pictureBox9;
-TabPage tp_Layer;
-GroupBox groupBox8;
-
-Timer timer_stage4;
-Panel panel1;
-Label lb_a;
-
-NumericUpDown numericUpDown_G;
-NumericUpDown numericUpDown_R;
-NumericUpDown numericUpDown_gain;
-
-richTextBox1
 
 僅限全白背景的才可以做到透明功能
 或者指名顏色為透明?
@@ -5750,28 +5648,6 @@ label1.Text = "(" + Control.MousePosition.X.ToString() + ", " + Control.MousePos
 //------------------------------------------------------------  # 60個
 
 vcs_PicPick	還要能夠用鼠標移動表單		目前有些問題
-
-//------------------------------------------------------------  # 60個
-
-            DialogResult result;
-
-            result = MessageBox.Show("確定結束程式嗎?", "詢問", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
-            {
-                Close();
-            }
-
-            int depth = int.Parse(txtDepth.Text);
-            if (depth > 8)
-            {
-                if (MessageBox.Show("A large depth may take a long time to draw (and will be mostly black anyway). Do you want to continue?",
-                    "Continue?", MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question) == DialogResult.No)
-                {
-                    return;
-                }
-            }
 
 //------------------------------------------------------------  # 60個
 
@@ -6071,23 +5947,14 @@ Form的設定
  
 //------------------------------------------------------------  # 60個
 
-        /*  多個pbx共用click事件，區分是哪個pbx
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "pictureBox1 ";
-
-            PictureBox pic = sender as PictureBox;
-            richTextBox1.Text += pic.Name + " ";
-        }
-
-        /*  多個pbx共用click事件，區分是哪個pbx
-        // Display the name of the clicked PictureBox.
-        private void PictureBox_Click(object sender, EventArgs e)
-        {
-            PictureBox pic = sender as PictureBox;
-            MessageBox.Show(pic.Name);
-        }
-        */
+/*  多個pbx共用click事件，區分是哪個pbx
+private void PictureBox_Click(object sender, EventArgs e)
+{
+	richTextBox1.Text += "PictureBox_Click";
+	
+	PictureBox pic = sender as PictureBox;
+	richTextBox1.Text += pic.Name + " ";
+}
 
 //------------------------------------------------------------  # 60個
 
@@ -6138,21 +6005,6 @@ Form的設定
 
             return (float)Math.Sqrt(dist2);
         }
-
-//------------------------------------------------------------  # 60個
-
-畫直角座標系的刻度
-                // Draw axes.
-                using (Pen axis_pen = new Pen(Color.LightGray, 0))
-                {
-                    g.DrawLine(axis_pen, -8, 0, 8, 0);
-                    g.DrawLine(axis_pen, 0, -8, 0, 8);
-                    for (int i = -8; i <= 8; i++)
-                    {
-                        g.DrawLine(axis_pen, i, -0.1f, i, 0.1f);
-                        g.DrawLine(axis_pen, -0.1f, i, 0.1f, i);
-                    }
-                }
 
 //------------------------------------------------------------  # 60個
 
@@ -6837,7 +6689,6 @@ string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yy
 
 //最小化按鈕的寫法
             bt_minimize_setup();
-        }
 
         void bt_minimize_setup()
         {
@@ -7562,43 +7413,6 @@ string filename = @"D:\_git\vcs\_1.data\______test_files1\__text\war_and_peace.t
 
 //------------------------------------------------------------  # 60個
 
-            Graphics g;
-
-            int i;
-            double gamma;
-
-            int[] data_in = new int[256];
-            int[] data_out = new int[256];
-            Point[] curvePoints = new Point[256];    //一維陣列內有 N 個Point
-
-            Pen gammaPen = new Pen(Color.Red, 2);
-            /*
-		gamma = 2.2;
-		//畫出真正的Gamma 2.2曲線
-		for (i = 0; i < 256; i++)
-		{
-		    data_in[i] = i;
-		    data_out[i] = (int)(Math.Pow(((double)data_in[i]) / 255, 1 / gamma) * 255);
-		
-		    curvePoints[i].X = data_in[i] * 3;
-		    curvePoints[i].Y = 256 * 2 - 1 - data_out[i] * 2;
-		}
-		g.DrawLines(gammaPen, curvePoints);   //畫直線
-            */
-
-//------------------------------------------------------------  # 60個
-
-        private void bt_save_Click(object sender, EventArgs e)
-        {
-            // Make a copy of the result image.
-            using (Bitmap bmp = (Bitmap)pictureBox0.Image.Clone())
-            {
-                //存圖
-            }
-        }
-
-//------------------------------------------------------------  # 60個
-
 //------------------------------------------------------------  # 60個
 // 欲刪除關鍵字 d10d dddddddddd
 //------------------------------------------------------------  # 60個
@@ -7924,6 +7738,5 @@ this.Bounds = Screen.PrimaryScreen.Bounds;
 
 //------------------------------------------------------------  # 60個
 
-//            g.DrawRectangle(Pens.Black, bounds.X, bounds.Y, bounds.Width, bounds.Height);
 
 

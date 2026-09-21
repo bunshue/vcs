@@ -35,6 +35,8 @@ namespace vcs_Mix03_draw_image
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            timer1.Enabled = false;
+
             show_item_location();
 
             //------------------------------------------------------------  # 60個
@@ -64,7 +66,7 @@ namespace vcs_Mix03_draw_image
                 int y = r.Next(H);
                 Points1.Add(new Point(x, y));
             }
-            timer1.Enabled = true;
+            //timer1.Enabled = true;
         }
 
         void show_item_location()
@@ -344,7 +346,6 @@ namespace vcs_Mix03_draw_image
             this.pictureBox1.Region = region;
             */
 
-
             //建立一個不規則的表單
             // Make points to define a polygon for the form.
             PointF[] pts = new PointF[10];
@@ -370,9 +371,6 @@ namespace vcs_Mix03_draw_image
             Region region = new Region(gp);
 
             this.pictureBox1.Region = region;
-
-
-
         }
 
         //------------------------------------------------------------  # 60個
@@ -552,6 +550,24 @@ namespace vcs_Mix03_draw_image
 
         private void button10_Click(object sender, EventArgs e)
         {
+            Graphics g = pictureBox1.CreateGraphics();
+            g.Clear(pictureBox1.BackColor);
+
+            g.DrawRectangle(Pens.Red, 100, 100, 100, 100);
+
+            Pen             p = new Pen(Color.Red);
+            p.Width = 8;
+            p.StartCap = System.Drawing.Drawing2D.LineCap.Round;
+            p.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+            p.Color = Color.Green;
+
+            //p.LineJoin = System.Drawing.Drawing2D.LineJoin.Bevel;
+            p.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
+
+            g.DrawLine(p, 100, 100, 250, 250);
+
+
+
         }
 
         //------------------------------------------------------------  # 60個
@@ -879,4 +895,84 @@ namespace vcs_Mix03_draw_image
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
+
+
+/*
+//pbox 的 剪下
+//剪下 = 複製到剪貼簿 + 把選取區域塗成背景色
+SolidBrush br = new SolidBrush(pictureBox1.BackColor)
+
+//------------------------------------------------------------  # 60個
+
+// bmp 的大小和pictureBox1 相同
+Bitmap bmp = new Bitmap(this.PictureBox1.Width, this.PictureBox1.Height);
+// 以記憶體圖像 bmp 建立 g 記憶體畫布
+Graphics g = Graphics.FromImage(bmp);
+g.Clear(this.pictureBox1.BackColor); //畫布背景色
+g.DrawLine(new pen(Color.Red, 2), x, y, e.X, e.Y); //可
+
+//------------------------------------------------------------  # 60個
+
+// bmp 的大小和pictureBox1 相同
+Bitmap bmp = new Bitmap(this.PictureBox1.Width, this.PictureBox1.Height);
+// 以記憶體圖像 bmp 建立 g 記憶體畫布
+Graphics g = Graphics.FromImage(bmp);
+g.Clear(this.pictureBox1.BackColor); //畫布背景色
+g.DrawLine(new pen(Color.Red, 2), x, y, e.X, e.Y); //可以繪圖了
+
+//------------------------------------------------------------  # 60個
+
+//畫直角座標系的刻度
+                // Draw axes.
+                using (Pen axis_pen = new Pen(Color.LightGray, 0))
+                {
+                    g.DrawLine(axis_pen, -8, 0, 8, 0);
+                    g.DrawLine(axis_pen, 0, -8, 0, 8);
+                    for (int i = -8; i <= 8; i++)
+                    {
+                        g.DrawLine(axis_pen, i, -0.1f, i, 0.1f);
+                        g.DrawLine(axis_pen, -0.1f, i, 0.1f, i);
+                    }
+                }
+
+//------------------------------------------------------------  # 60個
+
+            Graphics g;
+
+            int i;
+            double gamma;
+
+            int[] data_in = new int[256];
+            int[] data_out = new int[256];
+            Point[] curvePoints = new Point[256];    //一維陣列內有 N 個Point
+
+            Pen gammaPen = new Pen(Color.Red, 2);
+		gamma = 2.2;
+		//畫出真正的Gamma 2.2曲線
+		for (i = 0; i < 256; i++)
+		{
+		    data_in[i] = i;
+		    data_out[i] = (int)(Math.Pow(((double)data_in[i]) / 255, 1 / gamma) * 255);
+		
+		    curvePoints[i].X = data_in[i] * 3;
+		    curvePoints[i].Y = 256 * 2 - 1 - data_out[i] * 2;
+		}
+		g.DrawLines(gammaPen, curvePoints);   //畫直線
+
+//------------------------------------------------------------  # 60個
+
+        private void bt_save_Click(object sender, EventArgs e)
+        {
+            // Make a copy of the result image.
+            using (Bitmap bmp = (Bitmap)pictureBox0.Image.Clone())
+            {
+                //存圖
+            }
+        }
+
+//------------------------------------------------------------  # 60個
+//            g.DrawRectangle(Pens.Black, bounds.X, bounds.Y, bounds.Width, bounds.Height);
+
+*/
+
 
