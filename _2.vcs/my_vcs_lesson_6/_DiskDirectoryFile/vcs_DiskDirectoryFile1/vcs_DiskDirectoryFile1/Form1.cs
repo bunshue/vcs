@@ -32,11 +32,15 @@ namespace vcs_DiskDirectoryFile1
 
             //------------------------------------------------------------  # 60個
 
+            listView1.View = View.Details;  // 定義列表顯示的方式
+            listView1.FullRowSelect = true;  // 整行一起選取
+            listView1.Clear();
+
             //設置列名稱
-            listView1.Columns.Add("檔名", 200, HorizontalAlignment.Left);
-            listView1.Columns.Add("大小", 90, HorizontalAlignment.Left);
-            listView1.Columns.Add("資料夾", 100, HorizontalAlignment.Left);
-            listView1.Columns.Add("副檔名", 80, HorizontalAlignment.Left);
+            listView1.Columns.Add("檔名", 300, HorizontalAlignment.Left);
+            listView1.Columns.Add("大小", 100, HorizontalAlignment.Left);
+            listView1.Columns.Add("資料夾", 220, HorizontalAlignment.Left);
+            listView1.Columns.Add("副檔名", 100, HorizontalAlignment.Left);
             listView1.Columns.Add("修改日期", 150, HorizontalAlignment.Left);
             listView1.Columns.Add("簡名", 180, HorizontalAlignment.Left);
             listView1.Columns.Add("格式", 180, HorizontalAlignment.Left);
@@ -685,6 +689,38 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_file06_Click(object sender, EventArgs e)
         {
+            // 搜尋檔案-檔名
+            richTextBox1.Text += "搜尋檔案, 只找一層 IMG_20180228_215525.jpg\n";
+
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_icon";
+            DirectoryInfo di = new DirectoryInfo(foldername);
+
+            // 搜尋完整檔名
+            foreach (FileInfo fi in di.GetFiles("IMG_20180228_215525.jpg"))
+            {
+                richTextBox1.Text += "1找到 : " + fi.Name + "\n";
+            }
+
+            // 搜尋部分檔名
+            foreach (FileInfo fi in di.GetFiles("IMG_20180228*"))
+            {
+                richTextBox1.Text += "2找到 : " + fi.Name + "\n";
+            }
+
+            // 搜尋一個資料夾內所有特定格式的檔案
+            // 搜尋副檔名 *.jpg *.txt *.*
+            foreach (FileInfo fi in di.GetFiles("*.gif"))
+            {
+                richTextBox1.Text += "3找到 : " + fi.Name + "\n";
+            }
+
+            //選出所有符合一定後綴的文件列表
+            System.IO.SearchOption search_option = System.IO.SearchOption.AllDirectories;  // 在搜尋作業中包含目前目錄和所有子目錄
+            FileInfo[] fis = di.GetFiles("*.*", search_option);
+            foreach (FileInfo fi in fis)
+            {
+                //richTextBox1.Text += "4找到 : " + fi.Name + "\n";
+            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -1092,6 +1128,20 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_dir03_Click(object sender, EventArgs e)
         {
+            //資料夾最後修改時間
+
+            string foldername = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\";
+
+            //取得資料夾最後一次被存取的時間
+            DateTime dt = Directory.GetLastWriteTime(foldername);  // 資料夾最後修改時間
+            richTextBox1.Text += "資料夾建立的時間 : " + dt + "\n";
+
+            richTextBox1.Text += "更新資料夾最後修改時間\n";
+
+            //更新時間, touch
+            Directory.SetLastWriteTime(foldername, DateTime.Now);  // touch
+            dt = Directory.GetLastWriteTime(foldername);  // 資料夾最後修改時間
+            richTextBox1.Text += "最後存取時間 : " + dt + "\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -1110,18 +1160,6 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_dir06_Click(object sender, EventArgs e)
         {
-            //資料夾最後修改時間
-
-            string foldername = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\";
-
-            //取得資料夾最後一次被存取的時間
-            DateTime dt = Directory.GetLastWriteTime(foldername);  // 資料夾最後修改時間
-            richTextBox1.Text += "資料夾建立的時間 : " + dt + "\n";
-
-            //更新時間
-            Directory.SetLastWriteTime(foldername, DateTime.Now);  // touch
-            dt = Directory.GetLastWriteTime(foldername);  // 資料夾最後修改時間
-            richTextBox1.Text += "最後存取時間 : " + dt + "\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -1233,6 +1271,8 @@ namespace vcs_DiskDirectoryFile1
             ProcessFile_mode = 1;  // 1:只看大檔
             ProcessFile_mode = 2;  // 2:顯示至 ListView
             ProcessDirectory(foldername);
+
+            return;
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -1366,123 +1406,28 @@ namespace vcs_DiskDirectoryFile1
 
         //------------------------------------------------------------  # 60個
 
-        void check_filetype(string filename)
-        {
-            int len = 10;
-            int[] data = new int[len];
-            string builtHex = string.Empty;
-            using (Stream S = File.OpenRead(filename))
-            {
-                for (int i = 0; i < 10; i++)
-                {
-                    data[i] = S.ReadByte();  // 讀一拜
-                    builtHex += data[i].ToString("X2") + " ";
-                }
-                richTextBox1.Text += "data : " + builtHex + "\n";
-                if ((data[0] == 0x89) && (data[1] == 'P') && (data[2] == 'N') && (data[3] == 'G'))
-                {
-                    richTextBox1.Text += "PNG 檔案\n";
-                }
-                else if ((data[6] == 'J') && (data[7] == 'F') && (data[8] == 'I') && (data[9] == 'F'))
-                {
-                    richTextBox1.Text += "JPG 檔案\n";
-                }
-                else if ((data[0] == 'G') && (data[1] == 'I') && (data[2] == 'F') && (data[9] == '8') && (data[9] == '9'))
-                {
-                    richTextBox1.Text += "GIF 檔案\n";
-                }
-                else if ((data[0] == 'B') && (data[1] == 'M'))
-                {
-                    richTextBox1.Text += "BMP 檔案\n";
-                }
-                else if ((data[0] == 0xFF) && (data[1] == 0xFE))
-                {
-                    richTextBox1.Text += " 純文字Unicode 檔案\n";
-                }
-                else if ((data[0] == 'I') && (data[1] == 'D') && (data[2] == '3'))
-                {
-                    richTextBox1.Text += "MP3 檔案\n";
-                }
-                else
-                {
-                    richTextBox1.Text += "其他 檔案\n";
-                }
-            }
-        }
-
         private void bt_files03_Click(object sender, EventArgs e)
         {
-            //偵測原始檔案類型
-
-            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_csv\covid19_data2021_06_27.part.csv";
-            string filename3 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\person.xml";
-            string filename4 = @"C:\_git\vcs\_1.data\______test_files1\_anime\cat\cat1.png";
-            string filename5 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_word\word_for_vcs_ReadWrite_WORD.doc";
-            string filename6 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_mdb\db_09.mdb";
-            string filename7 = @"C:\_git\vcs\_1.data\______test_files1\_case1\_case1a\_case1aa\eula.3081a.txt";
-            string filename8 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_ini\ConnectString.ini";
-
-            check_filetype(filename1);
-            //check_filetype(filename2);
-            //check_filetype(filename3);
-            //check_filetype(filename4);
-            //check_filetype(filename5);
-            //check_filetype(filename6);
-            //check_filetype(filename7);
-            //check_filetype(filename8);
         }
 
         //------------------------------------------------------------  # 60個
 
         private void bt_files04_Click(object sender, EventArgs e)
         {
-            // 搜尋檔案-檔名
-            richTextBox1.Text += "搜尋檔案, 只找一層 IMG_20180228_215525.jpg\n";
-
-            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_icon";
-            DirectoryInfo di = new DirectoryInfo(foldername);
-
-            // 搜尋完整檔名
-            foreach (FileInfo fi in di.GetFiles("IMG_20180228_215525.jpg"))
-            {
-                richTextBox1.Text += "1找到 : " + fi.Name + "\n";
-            }
-
-            // 搜尋部分檔名
-            foreach (FileInfo fi in di.GetFiles("IMG_20180228*"))
-            {
-                richTextBox1.Text += "2找到 : " + fi.Name + "\n";
-            }
-
-            // 搜尋一個資料夾內所有特定格式的檔案
-            // 搜尋副檔名 *.jpg *.txt *.*
-            foreach (FileInfo fi in di.GetFiles("*.gif"))
-            {
-                richTextBox1.Text += "3找到 : " + fi.Name + "\n";
-            }
-
-            //選出所有符合一定後綴的文件列表
-            System.IO.SearchOption search_option = System.IO.SearchOption.AllDirectories;  // 在搜尋作業中包含目前目錄和所有子目錄
-            FileInfo[] fis = di.GetFiles("*.*", search_option);
-            foreach (FileInfo fi in fis)
-            {
-                //richTextBox1.Text += "4找到 : " + fi.Name + "\n";
-            }
         }
 
         //------------------------------------------------------------  # 60個
 
-        //根據文件頭判斷上傳的文件類型 ST
+        //根據文件頭判斷文件類型 ST
         private void bt_files05_Click(object sender, EventArgs e)
         {
-            //根據文件頭判斷上傳的文件類型
+            //根據文件頭判斷文件類型
             string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_哆啦A夢\doraemon1.jpg";
             string result = getFileType(filename);
             richTextBox1.Text += "File Type : " + result + "\n";
         }
 
-        // 根據文件頭判斷上傳的文件類型
+        // 根據文件頭判斷文件類型
         private string getFileType(string filename)
         {
             try
@@ -1537,12 +1482,75 @@ namespace vcs_DiskDirectoryFile1
                 return "unknown";
             }
         }
-        //根據文件頭判斷上傳的文件類型 SP
+        //根據文件頭判斷文件類型 SP
 
         //------------------------------------------------------------  # 60個
 
+        void check_filetype(string filename)
+        {
+            int len = 10;
+            int[] data = new int[len];
+            string builtHex = string.Empty;
+            using (Stream S = File.OpenRead(filename))
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    data[i] = S.ReadByte();  // 讀一拜
+                    builtHex += data[i].ToString("X2") + " ";
+                }
+                richTextBox1.Text += "data : " + builtHex + "\n";
+                if ((data[0] == 0x89) && (data[1] == 'P') && (data[2] == 'N') && (data[3] == 'G'))
+                {
+                    richTextBox1.Text += "PNG 檔案\n";
+                }
+                else if ((data[6] == 'J') && (data[7] == 'F') && (data[8] == 'I') && (data[9] == 'F'))
+                {
+                    richTextBox1.Text += "JPG 檔案\n";
+                }
+                else if ((data[0] == 'G') && (data[1] == 'I') && (data[2] == 'F') && (data[9] == '8') && (data[9] == '9'))
+                {
+                    richTextBox1.Text += "GIF 檔案\n";
+                }
+                else if ((data[0] == 'B') && (data[1] == 'M'))
+                {
+                    richTextBox1.Text += "BMP 檔案\n";
+                }
+                else if ((data[0] == 0xFF) && (data[1] == 0xFE))
+                {
+                    richTextBox1.Text += " 純文字Unicode 檔案\n";
+                }
+                else if ((data[0] == 'I') && (data[1] == 'D') && (data[2] == '3'))
+                {
+                    richTextBox1.Text += "MP3 檔案\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "其他 檔案\n";
+                }
+            }
+        }
+
         private void bt_files06_Click(object sender, EventArgs e)
         {
+            //偵測原始檔案類型
+
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_csv\covid19_data2021_06_27.part.csv";
+            string filename3 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\person.xml";
+            string filename4 = @"C:\_git\vcs\_1.data\______test_files1\_anime\cat\cat1.png";
+            string filename5 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_word\word_for_vcs_ReadWrite_WORD.doc";
+            string filename6 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_mdb\db_09.mdb";
+            string filename7 = @"C:\_git\vcs\_1.data\______test_files1\_case1\_case1a\_case1aa\eula.3081a.txt";
+            string filename8 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_ini\ConnectString.ini";
+
+            check_filetype(filename1);
+            //check_filetype(filename2);
+            //check_filetype(filename3);
+            //check_filetype(filename4);
+            //check_filetype(filename5);
+            //check_filetype(filename6);
+            //check_filetype(filename7);
+            //check_filetype(filename8);
         }
 
         //------------------------------------------------------------  # 60個
@@ -2560,32 +2568,28 @@ namespace vcs_DiskDirectoryFile1
             {
                 richTextBox1.Text += fi.Name + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
 
-                /*
                 //為ListView控件添加文件信息
                 listView1.Items.Add(fi.Name);
-                listView1.Items[listView1.Items.Count - 1].SubItems.Add(fi.FullName);
+                //listView1.Items[listView1.Items.Count - 1].SubItems.Add(fi.FullName);
                 listView1.Items[listView1.Items.Count - 1].SubItems.Add(fi.Length.ToString());
                 listView1.Items[listView1.Items.Count - 1].SubItems.Add(fi.CreationTime.ToShortDateString());
                 //richTextBox1.Text += fi.Name + "\t" + fi.FullName + "\t" + fi.Length.ToString() + "\t" + fi.CreationTime.ToShortDateString() + "\n";
-                */
 
+                /*
                 ListViewItem i1 = new ListViewItem(fi.Name);
                 i1.UseItemStyleForSubItems = false;
-
                 ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
                 ListViewItem.ListViewSubItem sub_i1b = new ListViewItem.ListViewSubItem();
-
                 sub_i1a.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length));
                 i1.SubItems.Add(sub_i1a);
                 sub_i1a.ForeColor = Color.Blue;
                 sub_i1a.Font = new Font("Times New Roman", 10, FontStyle.Bold);
-
                 sub_i1b.Text = fi.CreationTime.ToString();
                 i1.SubItems.Add(sub_i1b);
-
                 listView1.Items.Add(i1);
                 //設置ListView最後一行可見
-                //listView1.Items[listView1.Items.Count - 1].EnsureVisible();
+                listView1.Items[listView1.Items.Count - 1].EnsureVisible();
+                */
             }
         }
     }
@@ -2599,56 +2603,6 @@ namespace vcs_DiskDirectoryFile1
 //------------------------------  # 30個
 
 /*
-private void button3_Click(object sender, EventArgs e)
-{
-    string filename = @"_tmp_bbbb.txt";
-    string str;
-    FileStream fs = new FileStream(filename, FileMode.OpenOrCreate, FileAccess.Write);
-    StreamWriter sw = new StreamWriter(fs, Encoding.Unicode);
-
-    //想儲存的文字
-    str = "aaaaaaaaa";
-    sw.WriteLine(str);  //將資料寫入檔案
-    sw.Close();   //關閉sw資料流
-
-    //檔案內所輸入的文字為
-    FileStream fs = new FileStream(filename, FileMode.OpenOrCreate, FileAccess.Read);
-    StreamReader sr = new StreamReader(fs, Encoding.Unicode);
-    sr.BaseStream.Seek(0, SeekOrigin.Begin);
-    while (sr.Peek() > -1)
-    {
-        richTextBox1.Text += sr.ReadLine() + "\n";//讀出檔案
-    }
-    sr.Close();  //關閉資料流
-}
-
-//------------------------------------------------------------  # 60個
-
-在 C# 中使用 StreamReader.ReadToEnd() 方法將檔案讀取為字串
-StreamReader sr = new StreamReader(@"D:\File\file.txt");
-string text = sr.ReadToEnd();
-Console.WriteLine(text);			
-
-//------------------------------------------------------------  # 60個
-
-string filename = @"D:\______test_files\_case1\pic1.jpg";
-
-圖片檔讀取：非鎖定檔方法 [Image.FromFile 釋放]
-
-content from http://jashliao.pixnet.net/blog/post/223534989
-
-FileStream fs = File.OpenRead(StrDestFilePath); //OpenRead[二進位讀檔]
-int filelength = 0;
-filelength = (int)fs.Length; //獲得檔長度
-Byte[] image = new Byte[filelength]; //建立一個位元組陣列
-fs.Read(image, 0, filelength); //按位元組流讀取
-System.Drawing.Image result = System.Drawing.Image.FromStream(fs);
-fs.Close();
-
-//pictureBox1.Image = (Image)image;
-
-//------------------------------------------------------------  # 60個
-
 public static void Rename(this FileInfo fi, string newName)
 {
     fi.MoveTo(fi.Directory.FullName + "\\" + newName);
@@ -2661,12 +2615,6 @@ public static void Rename(this FileInfo fi, string newName)
 
 //------------------------------------------------------------  # 60個
 
-使用 File.ReadAllText() 方法將檔案讀取為字串
-string all_text = File.ReadAllText(filename);
-File.WriteAllText(@"setting.txt", folderPath);
-
-//------------------------------------------------------------  # 60個
-
 bool res;
 res = fi.FullName.ToLower().Replace(" ", "").Contains(tb_search_text_pattern.Text.ToLower().Replace("-", ""));
 
@@ -2674,32 +2622,11 @@ res = fi.FullName.ToLower().Replace(" ", "").Contains(tb_search_text_pattern.Tex
 
 //------------------------------------------------------------  # 60個
 
-        void show_listView()
-        {
-            listView1.View = View.Details;  // 定義列表顯示的方式
-            listView1.FullRowSelect = true;  // 整行一起選取
-            listView1.Clear();
-
-            //設置列名稱
-            listView1.Columns.Add("檔名", 200, HorizontalAlignment.Left);
-            listView1.Columns.Add("大小", 90, HorizontalAlignment.Left);
-            listView1.Columns.Add("資料夾", 100, HorizontalAlignment.Left);
-            listView1.Columns.Add("副檔名", 80, HorizontalAlignment.Left);
-            listView1.Columns.Add("修改日期", 150, HorizontalAlignment.Left);
-            listView1.Columns.Add("簡名", 180, HorizontalAlignment.Left);
-            listView1.Columns.Add("格式", 180, HorizontalAlignment.Left);
-
             for (int i = 0; i < 10; i++)
             {
-                //w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
-                //fis[i].filepath;
-                //ByteConversionTBGBMBKB(Convert.ToInt64(fis[i].filesize));
+//w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
+//                                       fis[i].filepath;
+//ByteConversionTBGBMBKB(Convert.ToInt64(fis[i].filesize));
             }
-
-            //this.Controls.Add(listView1);
-
-            //加入
-        }
-
 */
 

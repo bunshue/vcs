@@ -114,6 +114,7 @@
             this.bt_file06.Name = "bt_file06";
             this.bt_file06.Size = new System.Drawing.Size(200, 60);
             this.bt_file06.TabIndex = 6;
+            this.bt_file06.Text = "搜尋檔案-檔名";
             this.bt_file06.UseVisualStyleBackColor = true;
             this.bt_file06.Click += new System.EventHandler(this.bt_file06_Click);
             // 
@@ -274,7 +275,6 @@
             this.bt_dir06.Name = "bt_dir06";
             this.bt_dir06.Size = new System.Drawing.Size(200, 60);
             this.bt_dir06.TabIndex = 14;
-            this.bt_dir06.Text = "資料夾最後修改時間";
             this.bt_dir06.UseVisualStyleBackColor = true;
             this.bt_dir06.Click += new System.EventHandler(this.bt_dir06_Click);
             // 
@@ -295,6 +295,7 @@
             this.bt_dir03.Name = "bt_dir03";
             this.bt_dir03.Size = new System.Drawing.Size(200, 60);
             this.bt_dir03.TabIndex = 47;
+            this.bt_dir03.Text = "資料夾最後修改時間";
             this.bt_dir03.UseVisualStyleBackColor = true;
             this.bt_dir03.Click += new System.EventHandler(this.bt_dir03_Click);
             // 
@@ -358,7 +359,6 @@
             this.bt_files03.Name = "bt_files03";
             this.bt_files03.Size = new System.Drawing.Size(200, 60);
             this.bt_files03.TabIndex = 55;
-            this.bt_files03.Text = "偵測原始檔案類型";
             this.bt_files03.UseVisualStyleBackColor = true;
             this.bt_files03.Click += new System.EventHandler(this.bt_files03_Click);
             // 
@@ -369,7 +369,7 @@
             this.bt_files05.Name = "bt_files05";
             this.bt_files05.Size = new System.Drawing.Size(200, 60);
             this.bt_files05.TabIndex = 52;
-            this.bt_files05.Text = "根據文件頭判斷上傳的文件類型";
+            this.bt_files05.Text = "根據文件頭判斷檔案類型";
             this.bt_files05.UseVisualStyleBackColor = true;
             this.bt_files05.Click += new System.EventHandler(this.bt_files05_Click);
             // 
@@ -380,7 +380,6 @@
             this.bt_files04.Name = "bt_files04";
             this.bt_files04.Size = new System.Drawing.Size(200, 60);
             this.bt_files04.TabIndex = 51;
-            this.bt_files04.Text = "搜尋檔案-檔名";
             this.bt_files04.UseVisualStyleBackColor = true;
             this.bt_files04.Click += new System.EventHandler(this.bt_files04_Click);
             // 
@@ -423,6 +422,7 @@
             this.bt_files06.Name = "bt_files06";
             this.bt_files06.Size = new System.Drawing.Size(200, 60);
             this.bt_files06.TabIndex = 39;
+            this.bt_files06.Text = "偵測原始檔案類型";
             this.bt_files06.UseVisualStyleBackColor = true;
             this.bt_files06.Click += new System.EventHandler(this.bt_files06_Click);
             // 

@@ -94,7 +94,9 @@ namespace vcs_ReadWrite_TXT
             richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             bt_clear1.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear1.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear1.Size.Height);
 
-            this.Size = new Size(1320, 750);
+            //針對某控件的邊緣 設定表單大小
+            this.ClientSize = new Size(richTextBox1.Right + 10, richTextBox1.Bottom + 10);
+
             this.Text = "vcs_ReadWrite_TXT";
 
             //設定執行後的表單起始位置, 正中央
@@ -242,6 +244,58 @@ namespace vcs_ReadWrite_TXT
             }
             sw.Close();
             richTextBox1.Text += "已存檔 : " + filename + "\n";
+
+            //6060
+
+            filename = @"_tmp_bbbb.txt";
+            string str;
+            //FileStream
+            fs = new FileStream(filename, FileMode.OpenOrCreate, FileAccess.Write);
+            //StreamWriter
+            sw = new StreamWriter(fs, Encoding.Unicode);
+
+            //想儲存的文字
+            str = "aaaaaaaaa";
+            sw.WriteLine(str);  //將資料寫入檔案
+            sw.Close();   //關閉sw資料流
+
+            //檔案內所輸入的文字為
+            //FileStream
+            fs = new FileStream(filename, FileMode.OpenOrCreate, FileAccess.Read);
+            StreamReader sr = new StreamReader(fs, Encoding.Unicode);
+            sr.BaseStream.Seek(0, SeekOrigin.Begin);
+            while (sr.Peek() > -1)
+            {
+                richTextBox1.Text += sr.ReadLine() + "\n";//讀出檔案
+            }
+            sr.Close();  //關閉資料流
+
+            //6060
+
+            //在 C# 中使用 StreamReader.ReadToEnd() 方法將檔案讀取為字串
+            //StreamReader
+            sr = new StreamReader(@"D:\File\file.txt");
+            string text = sr.ReadToEnd();
+            Console.WriteLine(text);
+
+            //6060
+
+            filename = @"D:\______test_files\_case1\pic1.jpg";
+
+            //圖片檔讀取：非鎖定檔方法 [Image.FromFile 釋放]
+            //content from http://jashliao.pixnet.net/blog/post/223534989
+
+            //FileStream
+            fs = File.OpenRead("fffff.bin"); //OpenRead[二進位讀檔]
+            int filelength = 0;
+            filelength = (int)fs.Length; //獲得檔長度
+            Byte[] image = new Byte[filelength]; //建立一個位元組陣列
+            fs.Read(image, 0, filelength); //按位元組流讀取
+            System.Drawing.Image result = System.Drawing.Image.FromStream(fs);
+            fs.Close();
+
+            //pictureBox1.Image = (Image)image;
+
         }
 
         //------------------------------------------------------------  # 60個
@@ -1827,6 +1881,10 @@ sr.Close();
                 
 //------------------------------------------------------------  # 60個
 
+
+使用 File.ReadAllText() 方法將檔案讀取為字串
+string all_text = File.ReadAllText(filename);
+File.WriteAllText(@"setting.txt", folderPath);
 
 */
 
