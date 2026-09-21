@@ -98,7 +98,9 @@ namespace vcs_test_all_02_String
             tb_number5.Location = new Point(x_st + dx * 0, y_st + dy * 5 + dd);
             tb_number6.Location = new Point(x_st + dx * 0, y_st + dy * 6 + dd);
 
-            this.Size = new Size(1520, 750);
+            //針對某控件的邊緣 設定表單大小
+            this.ClientSize = new Size(richTextBox1.Right + 10, richTextBox1.Bottom + 10);
+
             this.Text = "vcs_test_all_02_String";
 
             //設定執行後的表單起始位置, 正中央
@@ -1180,9 +1182,8 @@ namespace vcs_test_all_02_String
             richTextBox1.Text += "str = " + m + "-" + n + "\n";     //用“+”連接符
 
             //                                 第0項靠左30位, 第1項靠右10位
-            //richTextBox1.Text += string.Format("{0,-30}{1,10}", fi.Name, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length))) + "\n";
-            //richTextBox1.Text += string.Format("{0,-30}{1,10}", fi.Name, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length))) + "\n";
-
+            //richTextBox1.Text += string.Format("{0,-30}{1,10}", fi.Name, fi.Length) + "\n";
+            //richTextBox1.Text += string.Format("{0,-30}{1,10}", fi.Name, fi.Length) + "\n";
 
             int x1 = 3;
             int x2 = 8;

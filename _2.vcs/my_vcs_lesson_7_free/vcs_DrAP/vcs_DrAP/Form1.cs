@@ -58,8 +58,6 @@ namespace vcs_DrAP
         int search_mode = SEARCH_MODE_VCS;
         bool flag_show_30_message = false;
 
-        List<String> old_search_path = new List<String>();
-
         //不用宣告長度的陣列(Array)
         // 宣告fileinfos 為List
         // 以下List 裡為MyFileInfo 型態
@@ -115,119 +113,54 @@ namespace vcs_DrAP
 
             update_default_setting();
 
-            //search_path = @"D:\vcs\astro\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案";
-            //this.listBox1.Items.Add(search_path);
-            // 可用foreach 取出List 裡的值
-            //result_str += "\n可用foreach 取出List 裡的值\n";
-            this.listBox1.Items.Clear();
-            foreach (string sss in old_search_path)
-            {
-                richTextBox1.Text += "add " + sss + "\n";
-                this.listBox1.Items.Add(sss);
-            }
-
             this.listView1.GridLines = true;
-
-            //C# 提示視窗 ToolTip 
-            //ToolTip：當游標停滯在某個控制項時，就會跳出一個小視窗
-            ToolTip toolTip1 = new ToolTip();
-            //SetToolTip：定義控制項會跳出提示的文字
-            toolTip1.SetToolTip(bt_add_dir, "Add Directory");
-            toolTip1.SetToolTip(bt_remove_dir, "Remove Directory");
-            toolTip1.SetToolTip(bt_clear_dir, "Remove All Directory");
-
-            //以下為提示視窗的設定(通常會設定的部分)
-            //ToolTipIcon：設定顯示在提示視窗的圖示類型。
-            toolTip1.ToolTipIcon = ToolTipIcon.Info;
-            //ForeColor：前景顏色
-            toolTip1.ForeColor = Color.Blue;
-            //BackColor：背景顏色
-            toolTip1.BackColor = Color.Gray;
-            //AutoPopDelay：當游標停滯在控制項，顯示提示視窗的時間。(以毫秒為單位)
-            toolTip1.AutoPopDelay = 5000;
-            //ToolTipTitle：設定提示視窗的標題。
-            toolTip1.ToolTipTitle = "提示訊息";
         }
 
         void show_item_location()
         {
-            int x_st = 12;
-            int y_st = 12;
+            int x_st = 10;
+            int y_st = 10;
+            int w = 50;
+            int h = 50;
+            int dx = w + 5;
+            int dy = h + 5;
 
-            listBox1.Location = new Point(x_st, y_st);
+            bt_start_files.Location = new Point(x_st + dx * 0, y_st + dy * 0);
 
-            int dx = 10;
-            int dy = 25;
+            bt_delete_file.Location = new Point(x_st + dx * 2, y_st + dy * 0);
 
-            x_st += listBox1.Size.Width + dx;
-            bt_add_dir.Location = new Point(x_st, y_st + dy * 0);
-            bt_remove_dir.Location = new Point(x_st, y_st + dy * 1);
-            bt_clear_dir.Location = new Point(x_st, y_st + dy * 2);
+            cb_option1.Location = new Point(x_st + dx * 4, y_st + dy * 0);  // 滿30結束
+            tb_search.Location = new Point(x_st + dx * 4, y_st + dy * 1);
 
-            x_st += bt_add_dir.Size.Width + dx;
+            bt_search_pattern_vcs.Location = new Point(x_st + dx * 7, y_st + dy * 0);
+            bt_open_with_vcs.Location = new Point(x_st + dx * 7, y_st + dy * 1);
+            bt_open_dir2.Location = new Point(x_st + dx * 8, y_st + dy * 0);
+            bt_compare.Location = new Point(x_st + dx * 9, y_st + dy * 0);
+            bt_replace.Location = new Point(x_st + dx * 9, y_st + dy * 1);
 
-            x_st += 100 + dx;
-            x_st += 50 + dx;
-            bt_start_files.Location = new Point(x_st, y_st + dy * 0);
-
-            x_st += bt_start_files.Size.Width * 2 + dx;
-
-            x_st += 75 + dx;
-            x_st += 75 + dx;
-            x_st += 75 + dx;
-            x_st += 75 + dx;
-            x_st += 75 + dx;
-            bt_delete_file.Location = new Point(x_st - 120, y_st + dy * 1 + 20);
-
-            x_st = 960;
-            y_st = 15;
-
-            cb_option1.Location = new Point(x_st - 55, y_st + 60);  // 滿30結束
-
-            x_st = 1050;
-            y_st = 10;
-            tb_search.Location = new Point(x_st, y_st);
-
-            x_st = 1220;
-            y_st = 6;
-            dx = 55;
-            dy = 55;
-            bt_search_pattern_vcs.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            bt_open_with_vcs.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-
-            bt_open_dir2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-
-            bt_compare.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            bt_replace.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-
-            listView1.Size = new Size(1900, 500);
-            listView1.Location = new Point(12, 113);
-            bt_clear3.Location = new Point(listView1.Location.X + listView1.Size.Width - bt_clear3.Size.Width, listView1.Location.Y + listView1.Size.Height - bt_clear3.Size.Height);
-
-            richTextBox1.Size = new Size(1300, 388);
-            richTextBox1.Location = new Point(12, 620);
-            bt_clear1.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - bt_clear1.Width, richTextBox1.Location.Y);
-            bt_save_rtb_data.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - bt_clear1.Width, richTextBox1.Location.Y + bt_clear1.Height);
-
-            richTextBox2.Size = new Size(594, 388);
-            richTextBox2.Location = new Point(1318, 620);
-
-            bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Width - bt_clear2.Width, richTextBox2.Location.Y);
-            bt_copy_rtb_data.Location = new Point(richTextBox2.Location.X + richTextBox2.Width - bt_clear2.Width, richTextBox2.Location.Y + bt_clear2.Height);
-
-            x_st = 1420;
-            y_st = 4;
-            groupbox_python.Location = new Point(x_st, y_st);
             groupbox_python.Size = new Size(112, 106);
-            groupbox_result.Location = new Point(x_st + 120, y_st);
+            groupbox_python.Location = new Point(x_st + dx * 11, y_st + dy * 0);
             groupbox_result.Size = new Size(110, 106);
+            groupbox_result.Location = new Point(x_st + dx * 11 + 120, y_st + dy * 0);
+            bt_setup.Location = new Point(x_st + dx * 11 + 120 + 120, y_st + dy * 1);
             lb_search_result1.Location = new Point(10, 25);
             lb_search_result2.Location = new Point(10, 60);
             lb_search_result1.Text = "";
             lb_search_result2.Text = "";
 
-            //bt_setup.Location = new Point(this.ClientSize.Width - bt_setup.Width, 55);
-            bt_setup.Location = new Point(groupbox_result.Location.X + groupbox_result.Width + 10, groupbox_result.Location.Y + groupbox_result.Height / 2);
+            listView1.Size = new Size(1490, 490);
+            listView1.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            bt_clear3.Location = new Point(listView1.Location.X + listView1.Size.Width - bt_clear3.Size.Width, listView1.Location.Y + listView1.Size.Height - bt_clear3.Size.Height);
+
+            richTextBox1.Size = new Size(930, 360);
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+            bt_clear1.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - bt_clear1.Width, richTextBox1.Location.Y);
+
+            richTextBox2.Size = new Size(556, 360);
+            richTextBox2.Location = new Point(x_st + dx * 17, y_st + dy * 11);
+
+            bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Width - bt_clear2.Width, richTextBox2.Location.Y);
+            bt_copy_rtb_data.Location = new Point(richTextBox2.Location.X + richTextBox2.Width - bt_clear2.Width, richTextBox2.Location.Y + bt_clear2.Height);
 
             x_st = 10;
             y_st = 15;
@@ -238,25 +171,12 @@ namespace vcs_DrAP
             bt_edit_python_files.Size = new Size(45, 45);
             bt_edit_python_files.Location = new Point(x_st + dx * 0 + 50, y_st + dy * 2);
 
-            /*
-            result_str += "Form1 W1 " + this.Width.ToString() + "\n";
-            result_str += "Form1 W2 " + this.ClientSize.Width.ToString() + "\n";
-            result_str += "lsstview1 x_st = " + this.listView1.Location.X.ToString() + "\n";
-            result_str += "lsstview1 y_st = " + this.listView1.Location.Y.ToString() + "\n";
-            //this.richTextBox2.Location = new Point(1600, 600);
-            */
+            //針對某控件的邊緣 設定表單大小
+            this.ClientSize = new Size(richTextBox2.Right + 10, richTextBox2.Bottom + 10);
 
-            //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
-            //this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            //this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
-
-            //設定執行後的表單大小
-            this.Size = new Size(1920, 1040);
-
-            //設定執行後的表單起始位置, 指定位置
+            //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;
-            this.Location = new Point(0, 0);
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
 
             bt_minimize_setup();
             bt_exit_setup();
@@ -325,32 +245,7 @@ namespace vcs_DrAP
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //儲存搜尋路徑
-            string save_path = string.Empty;
-            for (int i = 0; i < listBox1.Items.Count; i++)
-            {
-                save_path += listBox1.Items[i];
-                if (i < (listBox1.Items.Count - 1))
-                    save_path += ";";
-            }
-            Properties.Settings.Default.search_path = save_path;
             Properties.Settings.Default.Save();
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void bt_open_dir_Click(object sender, EventArgs e)
-        {
-            folderBrowserDialog1.SelectedPath = search_path;  //預設開啟的路徑
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-            {
-                path = folderBrowserDialog1.SelectedPath;
-                richTextBox1.Text += "選取資料夾: " + folderBrowserDialog1.SelectedPath + "\n";
-            }
-            else
-            {
-                richTextBox1.Text = "未選取資料夾\n";
-            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -971,34 +866,6 @@ namespace vcs_DrAP
             richTextBox1.ScrollToCaret();
         }
 
-        private void bt_add_dir_Click(object sender, EventArgs e)
-        {
-            //folderBrowserDialog1.SelectedPath = search_path;  //預設開啟的路徑
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-            {
-                result_str += "選取資料夾: " + folderBrowserDialog1.SelectedPath + "\n";
-                listBox1.Items.Add(folderBrowserDialog1.SelectedPath);
-                old_search_path.Add(folderBrowserDialog1.SelectedPath);
-            }
-            else
-            {
-                richTextBox2.Text = "未選取資料夾\n";
-            }
-        }
-
-        private void bt_remove_dir_Click(object sender, EventArgs e)
-        {
-            result_str += "移除了 " + listBox1.SelectedItem + "\n";
-            old_search_path.Remove(folderBrowserDialog1.SelectedPath);
-            listBox1.Items.Remove(listBox1.SelectedItem);
-        }
-
-        private void bt_clear_dir_Click(object sender, EventArgs e)
-        {
-            listBox1.Items.Clear();
-            old_search_path.Clear();
-        }
-
         private void tb_search_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -1035,74 +902,6 @@ namespace vcs_DrAP
         }
 
         //------------------------------------------------------------  # 60個
-
-        void save_log_to_local_drive()
-        {
-            string filename = string.Empty;
-
-            //磁碟資訊
-            string hddname = string.Empty;
-
-            result_str += "listbox 共有 " + listBox1.Items.Count.ToString() + " 個項目\n";
-            for (int i = 0; i < listBox1.Items.Count; i++)
-            {
-                path = listBox1.Items[i].ToString();
-
-                //找資料夾所在的硬碟的標籤
-
-                //richTextBox1.Text += "\n資料夾路徑" + path + "\n";
-
-                if (System.IO.File.Exists(path) == true)
-                {
-                    // path 是個 檔案
-                    richTextBox1.Text += "是個檔案\n";
-                }
-                else if (Directory.Exists(path) == true)
-                {
-                    // path 是個 資料夾
-                    DirectoryInfo d = new DirectoryInfo(path);//輸入檔案夾
-                    /*
-                    richTextBox1.Text += "Name : " + d.Name + "\n";
-                    richTextBox1.Text += "FullName : " + d.FullName + "\n";
-                    richTextBox1.Text += "Parent : " + d.Parent + "\n";
-                    richTextBox1.Text += "Root : " + d.Root + "\n";
-                    */
-
-                    DriveInfo drive = new DriveInfo(d.Root.ToString());
-
-                    if (drive.IsReady == true)
-                    {
-                        hddname = drive.VolumeLabel;
-                    }
-                    else
-                    {
-                        richTextBox1.Text += "磁碟 " + drive.ToString() + "未就緒" + "\n";
-                        hddname = "NotReady";
-                    }
-                }
-                else
-                {
-                    richTextBox1.Text += "非合法路徑或檔案f\n";
-                }
-            }
-            filename = "AP." + hddname + DateTime.Now.ToString(".yyyy.MMdd.HHmm") + ".txt";
-            //不儲存磁碟資訊
-            //filename = "AP." + DateTime.Now.ToString("yyyy.MMdd.HHmm") + ".txt";
-
-            //建立一個檔案
-            //StreamWriter sw = System.IO.File.CreateText(filename);
-            FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
-            StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("UTF-8"));   //指名編碼格式
-            sw.Write(richTextBox1.Text);
-            sw.Close();
-            richTextBox1.Text += "存檔檔名: " + filename + "\n";
-            richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
-        }
-
-        private void bt_save_rtb_data_Click(object sender, EventArgs e)
-        {
-            save_log_to_local_drive();
-        }
 
         void do_search_mode(int mode)
         {
@@ -1224,11 +1023,6 @@ namespace vcs_DrAP
             python_editor_path = Properties.Settings.Default.python_editor_path;
             winmerge_path = Properties.Settings.Default.winmerge_path;
 
-            if (Properties.Settings.Default.search_path != "")
-            {
-                search_path = Properties.Settings.Default.search_path;
-            }
-
             if (System.IO.File.Exists(Properties.Settings.Default.video_player_path) == false)
             {
                 result_str += "播放影片程式不存在 : " + Properties.Settings.Default.video_player_path + "\n使用Windows預設播放影片程式\n";
@@ -1263,31 +1057,6 @@ namespace vcs_DrAP
             {
                 result_str += "winmerge程式不存在 : " + Properties.Settings.Default.winmerge_path + "\n使用Windows預設文字編輯程式\n";
                 winmerge_path = String.Empty;
-            }
-
-            //預設搜尋路徑
-            string PATH = Properties.Settings.Default.search_path;
-            //result_str += "PATH = " + PATH + "\n";
-
-            string[] path = PATH.Split(';');
-
-            foreach (string p in path)
-            {
-                if (p.Length > 0)
-                {
-                    //check existency
-                    if (Directory.Exists(p) == true)
-                    {
-                        // path 是個 資料夾
-                        //result_str += "len = " + p.Length.ToString() + "\t" + p + "\n";
-                        result_str += "加入路徑 : " + p + "\n";
-                        old_search_path.Add(p);       //目前只能 儲存/加入 一個路徑
-                    }
-                    else
-                    {
-                        result_str += "搜尋預設路徑不存在 : " + p + "\tskip\n";
-                    }
-                }
             }
         }
 
@@ -1575,7 +1344,6 @@ DirectoryInfo di = new DirectoryInfo(foldername);
 richTextBox1.Text += "建立日期:\t" + di.CreationTime.ToString() + "\n\n";
 
 
-
         Int64 folder_size = 0;
 
             richTextBox1.Text += "資料夾 : " + foldername + " ";
@@ -1674,7 +1442,7 @@ min_size_mb = 10;  // 最小值 10 MB
             }
         }
 
-
+//------------------------------------------------------------  # 60個
 
                 selNdx = listView1.SelectedIndices[0];
                 listView1.Items[selNdx].Selected = true;    //選到的項目
@@ -1795,11 +1563,141 @@ min_size_mb = 10;  // 最小值 10 MB
             richTextBox1.Text += result_str + "\n";
         }
 
+//------------------------------------------------------------  # 60個
+
+            //播放 listview 多選的檔案
+int selectCount = listView1.SelectedIndices.Count;
+            int selNdx;
+            string all_filename = string.Empty;
+            string player_path = @"C:\Program Files (x86)\DAUM\PotPlayer\PotPlayerMini.exe";
+            if (selectCount <= 0)  //總共選擇的個數
+                return;
+
+            int SelectedItemsCount = listView1.SelectedItems.Count;
+            //richTextBox1.Text += "總共選了 : " + SelectedItemsCount.ToString() + " 個檔案，分別是 : \n";
+            for (int i = 0; i < SelectedItemsCount; i++)
+            {
+                selNdx = listView1.SelectedIndices[i];
+                listView1.Items[selNdx].Selected = true;    //選到的項目
+                //richTextBox1.Text += listView1.Items[selNdx].Text + "\n";
+                all_filename += " \"" + listView1.Items[selNdx].Text + "\"";
+            }
+
+//------------------------------------------------------------  # 60個
+
+        List<String> old_search_path = new List<String>();
+
+            // 可用foreach 取出List 裡的值
+            //result_str += "\n可用foreach 取出List 裡的值\n";
+            this.listBox1.Items.Clear();
+            foreach (string sss in old_search_path)
+            {
+                richTextBox1.Text += "add " + sss + "\n";
+                this.listBox1.Items.Add(sss);
+            }
+
+            //預設搜尋路徑
+            string PATH = Properties.Settings.Default.search_path;
+            //result_str += "PATH = " + PATH + "\n";
+
+            string[] path = PATH.Split(';');
+
+            foreach (string p in path)
+            {
+                if (p.Length > 0)
+                {
+                    //check existency
+                    if (Directory.Exists(p) == true)
+                    {
+                        // path 是個 資料夾
+                        //result_str += "len = " + p.Length.ToString() + "\t" + p + "\n";
+                        result_str += "加入路徑 : " + p + "\n";
+                        old_search_path.Add(p);       //目前只能 儲存/加入 一個路徑
+                    }
+                    else
+                    {
+                        result_str += "搜尋預設路徑不存在 : " + p + "\tskip\n";
+                    }
+                }
+            }
+
+//------------------------------------------------------------  # 60個
+
+//search_path = @"D:\vcs\astro\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案";
+//this.listBox1.Items.Add(search_path);
+
+            //儲存搜尋路徑
+            string save_path = string.Empty;
+            for (int i = 0; i < listBox1.Items.Count; i++)
+            {
+                save_path += listBox1.Items[i];
+                if (i < (listBox1.Items.Count - 1))
+                    save_path += ";";
+            }
+            Properties.Settings.Default.search_path = save_path;
+
+//------------------------------------------------------------  # 60個
+
+        void save_log_to_local_drive()
+        {
+            string filename = string.Empty;
+
+            //磁碟資訊
+            string hddname = string.Empty;
+
+            result_str += "listbox 共有 " + listBox1.Items.Count.ToString() + " 個項目\n";
+            for (int i = 0; i < listBox1.Items.Count; i++)
+            {
+                path = listBox1.Items[i].ToString();
+
+                //找資料夾所在的硬碟的標籤
+
+                //richTextBox1.Text += "\n資料夾路徑" + path + "\n";
+
+                if (System.IO.File.Exists(path) == true)
+                {
+                    // path 是個 檔案
+                    richTextBox1.Text += "是個檔案\n";
+                }
+                else if (Directory.Exists(path) == true)
+                {
+                    // path 是個 資料夾
+                    DirectoryInfo d = new DirectoryInfo(path);//輸入檔案夾
+                    richTextBox1.Text += "Name : " + d.Name + "\n";
+                    richTextBox1.Text += "FullName : " + d.FullName + "\n";
+                    richTextBox1.Text += "Parent : " + d.Parent + "\n";
+                    richTextBox1.Text += "Root : " + d.Root + "\n";
+
+                    DriveInfo drive = new DriveInfo(d.Root.ToString());
+
+                    if (drive.IsReady == true)
+                    {
+                        hddname = drive.VolumeLabel;
+                    }
+                    else
+                    {
+                        richTextBox1.Text += "磁碟 " + drive.ToString() + "未就緒" + "\n";
+                        hddname = "NotReady";
+                    }
+                }
+                else
+                {
+                    richTextBox1.Text += "非合法路徑或檔案f\n";
+                }
+            }
+            filename = "AP." + hddname + DateTime.Now.ToString(".yyyy.MMdd.HHmm") + ".txt";
+            //不儲存磁碟資訊
+            //filename = "AP." + DateTime.Now.ToString("yyyy.MMdd.HHmm") + ".txt";
+
+            //建立一個檔案
+            //StreamWriter sw = System.IO.File.CreateText(filename);
+            FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
+            StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("UTF-8"));   //指名編碼格式
+            sw.Write(richTextBox1.Text);
+            sw.Close();
+            richTextBox1.Text += "存檔檔名: " + filename + "\n";
+            richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
+        }
+
 */
-
-
-
-
-
-
 

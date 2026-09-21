@@ -1,26 +1,13 @@
-﻿dialog
+﻿
+//針對某控件的邊緣 設定表單大小
+this.ClientSize = new Size(richTextBox1.Right + 50, richTextBox1.Bottom + 50);
+
+
+
+dialog
 vcs_SendTo_All	要準備一大堆 icon 檔
 
 ------------------------------------------------------------
-
-//設置列名稱
-listView1.Columns.Add("名稱", 200, HorizontalAlignment.Center);
-listView1.Columns.Add("大小", 200, HorizontalAlignment.Center);
-listView1.Columns.Add("日期", 200, HorizontalAlignment.Center);
-
-ListViewItem i1 = new ListViewItem(fi.Name);
-ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
-sub_i1a.Text = fi.Length.ToString();
-i1.SubItems.Add(sub_i1a);
-ListViewItem.ListViewSubItem sub_i1b = new ListViewItem.ListViewSubItem();
-sub_i1b.Text = "bbbb";
-i1.SubItems.Add(sub_i1b);
-
-listView1.Items.Add(i1);
-//設置ListView最後一行可見
-listView1.Items[listView1.Items.Count - 1].EnsureVisible();
-
-//------------------------------------------------------------  # 60個
 
 //播放單一檔案
 //axWindowsMediaPlayer1.URL = fileinfos[0].filepath + "\\" + fileinfos[0].filename;   //開啟檔案
@@ -207,6 +194,25 @@ private Thread thread_ex = null;
 
 //------------------------------------------------------------  # 60個
 
+            //C# 提示視窗 ToolTip 
+            //ToolTip：當游標停滯在某個控制項時，就會跳出一個小視窗
+            ToolTip toolTip1 = new ToolTip();
+            //SetToolTip：定義控制項會跳出提示的文字
+            toolTip1.SetToolTip(bt_add_dir, "Add Directory");
+            toolTip1.SetToolTip(bt_remove_dir, "Remove Directory");
+            toolTip1.SetToolTip(bt_clear_dir, "Remove All Directory");
+
+            //以下為提示視窗的設定(通常會設定的部分)
+            //ToolTipIcon：設定顯示在提示視窗的圖示類型。
+            toolTip1.ToolTipIcon = ToolTipIcon.Info;
+            //ForeColor：前景顏色
+            toolTip1.ForeColor = Color.Blue;
+            //BackColor：背景顏色
+            toolTip1.BackColor = Color.Gray;
+            //AutoPopDelay：當游標停滯在控制項，顯示提示視窗的時間。(以毫秒為單位)
+            toolTip1.AutoPopDelay = 5000;
+            //ToolTipTitle：設定提示視窗的標題。
+            toolTip1.ToolTipTitle = "提示訊息";
 
 //------------------------------------------------------------  # 60個
 

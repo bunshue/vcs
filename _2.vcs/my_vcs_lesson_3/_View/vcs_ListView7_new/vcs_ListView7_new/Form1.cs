@@ -92,7 +92,9 @@ namespace vcs_ListView7_new
             richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1500, 750);
+            //針對某控件的邊緣 設定表單大小
+            this.ClientSize = new Size(richTextBox1.Right + 10, richTextBox1.Bottom + 10);
+
             this.Text = "vcs_ListView7_new";
 
             //設定執行後的表單起始位置, 正中央
@@ -113,36 +115,8 @@ namespace vcs_ListView7_new
 
         //------------------------------------------------------------  # 60個
 
-        void show_listView()
-        {
-            listView1.View = View.Details;  // 定義列表顯示的方式
-            listView1.FullRowSelect = true;  // 整行一起選取
-            listView1.Clear();
-
-            //設置列名稱
-            listView1.Columns.Add("檔名", 200, HorizontalAlignment.Left);
-            listView1.Columns.Add("大小", 90, HorizontalAlignment.Left);
-            listView1.Columns.Add("資料夾", 100, HorizontalAlignment.Left);
-            listView1.Columns.Add("副檔名", 80, HorizontalAlignment.Left);
-            listView1.Columns.Add("修改日期", 150, HorizontalAlignment.Left);
-            listView1.Columns.Add("簡名", 180, HorizontalAlignment.Left);
-            listView1.Columns.Add("格式", 180, HorizontalAlignment.Left);
-
-            for (int i = 0; i < 10; i++)
-            {
-                //w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
-                //fis[i].filepath;
-                //ByteConversionTBGBMBKB(Convert.ToInt64(fis[i].filesize));
-            }
-
-            //this.Controls.Add(listView1);
-
-            //加入
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
-            show_listView();
         }
 
         //------------------------------------------------------------  # 60個
@@ -165,20 +139,16 @@ namespace vcs_ListView7_new
         private void listView1_MouseClick(object sender, MouseEventArgs e)
         {
             richTextBox1.Text += "listView1_MouseClick\n";
-            int selNdx;
-            string fullname;
-            selNdx = listView1.SelectedIndices[0];
-            richTextBox1.Text += "aaa:\t" + listView1.Items[selNdx].Text + "\n";
+
+            int selNdx = listView1.SelectedIndices[0];
+            richTextBox1.Text += "你選擇了檔名:\t" + listView1.Items[selNdx].Text + "\n";
             richTextBox1.Text += "bbb:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
-            richTextBox1.Text += "ccc:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
+            richTextBox1.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
             //richTextBox1.Text += "ddd:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
 
             listView1.Items[selNdx].Selected = true;    //選到的項目
-
             int selectCount = listView1.SelectedIndices.Count;
             richTextBox1.Text += "你選擇了 : " + selectCount.ToString() + " 個檔案\t";
-            richTextBox1.Text += "你選擇了檔名:\t" + listView1.Items[selNdx].Text + "\n";
-            richTextBox1.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
         }
 
         private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -188,7 +158,6 @@ namespace vcs_ListView7_new
             //richTextBox1.Text += "count = " + this.listView1.SelectedIndices.Count.ToString() + "\t";
             richTextBox1.Text += "你選擇了\t" + listView1.Items[selNdx].Text + "\n";
 
-            string fullname;
             selNdx = listView1.SelectedIndices[0];
             richTextBox1.Text += "aaa:\t" + listView1.Items[selNdx].Text + "\n";
             richTextBox1.Text += "bbb:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
@@ -202,8 +171,7 @@ namespace vcs_ListView7_new
             richTextBox1.Text += "你選擇了 : " + selectCount.ToString() + " 個檔案\t";
             richTextBox1.Text += "你選擇了資料夾:\t" + listView1.Items[selNdx].Text + "\n";
 
-            fullname = listView1.Items[selNdx].SubItems[2].Text + "\\" + listView1.Items[selNdx].Text;
-
+            string fullname = listView1.Items[selNdx].SubItems[2].Text + "\\" + listView1.Items[selNdx].Text;
             richTextBox1.Text += "開啟路徑: " + fullname + "\n";
 
             // 準備開啟所選擇的項目
@@ -218,11 +186,11 @@ namespace vcs_ListView7_new
                 if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
                 {
                     //richTextBox1.Text += "Ctrl + A\n";
-                    //richTextBox1.Text += "共有項目" + listView1.Items.Count.ToString() + " 個\n";
 
-                    for (int i = 0; i < listView1.Items.Count; i++)
+                    int len = listView1.Items.Count;
+                    //richTextBox1.Text += "共有項目" + len.ToString() + " 個\n";
+                    for (int i = 0; i < len; i++)
                     {
-                        //richTextBox1.Text += listView1.Items[i] + "\n";
                         listView1.Items[i].Selected = true;
                     }
                 }
@@ -256,11 +224,9 @@ namespace vcs_ListView7_new
                 {
                     selNdx = listView1.SelectedIndices[i];
                     listView1.Items[selNdx].Selected = true;    //選到的項目
-                    //richTextBox1.Text += listView1.Items[selNdx].Text + "\n";
                     all_filename += " \"" + listView1.Items[selNdx].Text + "\"";
                 }
             }
-
 
             //richTextBox1.Text += "KeyDown, 按鍵是：" + e.KeyCode + "\n";
 
@@ -353,69 +319,5 @@ namespace vcs_ListView7_new
 //------------------------------  # 30個
 
 //listView1.SelectedItems[0].Text
-
-/*
-            //播放 listview 多選的檔案
-int selectCount = listView1.SelectedIndices.Count;
-            int selNdx;
-            string all_filename = string.Empty;
-            string player_path = @"C:\Program Files (x86)\DAUM\PotPlayer\PotPlayerMini.exe";
-            if (selectCount <= 0)  //總共選擇的個數
-                return;
-
-            int SelectedItemsCount = listView1.SelectedItems.Count;
-            //richTextBox1.Text += "總共選了 : " + SelectedItemsCount.ToString() + " 個檔案，分別是 : \n";
-            for (int i = 0; i < SelectedItemsCount; i++)
-            {
-                selNdx = listView1.SelectedIndices[i];
-                listView1.Items[selNdx].Selected = true;    //選到的項目
-                //richTextBox1.Text += listView1.Items[selNdx].Text + "\n";
-                all_filename += " \"" + listView1.Items[selNdx].Text + "\"";
-            }
-
-            //指定應用程式路徑
-            //string target = @"C:\Program Files\DAUM\PotPlayer\PotPlayerMini.exe";
-            string target = player_path;
-
-            //方法一
-            //Process.Start(target, "參數");
-            //Process.Start(target, all_filename);
-
-            //方法二
-            ProcessStartInfo pInfo = new ProcessStartInfo(target);
-            pInfo.Arguments = all_filename;
-
-            richTextBox1.Text += "target : " + target + "\n";
-            richTextBox1.Text += "all_filename : " + all_filename + "\n";
-
-            using (Process process = new Process())
-            {
-                process.StartInfo = pInfo;
-                process.Start();    //啟動程式
-            }
-*/
-
-
-/*
-            for (int i = 0; i < listView1.Items.Count; i++)
-            {
-                richTextBox2.Text += listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\n";
-            }
-*/
-
-/*
-            //設定欄位
-            ColumnHeader ch1 = new ColumnHeader();
-            ch1.Text = "文件名稱";
-            ch1.Width = 330;
-            listView1.Columns.Add(ch1);
-
-            listView1.GridLines = true;  // 網格線
-            listView1.View = View.Details;  //定義列表顯示的方式
-
-            listView1.Items.Clear();
-
-            listView1.Items.Add(fi.FullName);
-*/
 
 

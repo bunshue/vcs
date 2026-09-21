@@ -7,16 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;  //for Path, Directory
+using System.IO;  // for Path, Directory
 
 //ListView 搭配 contextMenuStrip 右鍵選單
-
 //使ListView控制元件中的選擇項目以高亮度方式顯示
-
 //各種 listView 之 加入資料
-
 //簡單的加入資料  不含各種方法
-
 //ListView加入欄標題
 //屬性 / 編輯資料行 / ColumnHeader集合編輯器 / 加入ColumnHeader
 
@@ -105,7 +101,9 @@ namespace vcs_ListView1
             richTextBox1.Location = new Point(x_st + dx * 7, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1800, 750);
+            //針對某控件的邊緣 設定表單大小
+            this.ClientSize = new Size(richTextBox1.Right + 10, richTextBox1.Bottom + 10);
+
             this.Text = "vcs_ListView1";
 
             //設定執行後的表單起始位置, 正中央
@@ -438,7 +436,6 @@ namespace vcs_ListView1
             li.SubItems.Add("38");
             listView1.Items.Add(li);
 
-
             /*
             //實例化一個listview對象的子項
             ListViewItem item1 = new ListViewItem();
@@ -459,7 +456,6 @@ namespace vcs_ListView1
             item3.SubItems.Add("33");//第三欄
             listView1.Items.Add(item3);//添加列
             */
-
 
             /*
             //加入項目(列資料)
@@ -1002,12 +998,52 @@ namespace vcs_ListView1
         private void button18_Click(object sender, EventArgs e)
         {
 
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button19_Click(object sender, EventArgs e)
         {
+            //test  add
+
+            //設置列名稱
+            //設定欄位, 欄名, 欄寬, 對齊方式
+            listView1.Columns.Add("中文名", 150, HorizontalAlignment.Left);
+            listView1.Columns.Add("英文名", 150, HorizontalAlignment.Left);
+            listView1.Columns.Add("體重", 150, HorizontalAlignment.Left);
+
+            //添加項
+
+            //增加資料到listView中
+            ListViewItem lv = new ListViewItem("aaaa");
+            lv.SubItems.Add("bbbb");
+            lv.SubItems.Add("cccc");
+            listView1.Items.Add(lv);
+
+            ListViewItem aa;
+            for (int i = 0; i < 5; i++)
+            {
+                aa = new ListViewItem();
+                aa.Text = "5555";
+                aa.Tag = "zzz" + i.ToString();
+                listView1.Items.Add(aa);
+            }
+
+            ListViewItem i1 = new ListViewItem("aaaa");
+            ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
+            sub_i1a.Text = "bbbb";
+            i1.SubItems.Add(sub_i1a);
+            ListViewItem.ListViewSubItem sub_i1b = new ListViewItem.ListViewSubItem();
+            sub_i1b.Text = "cccc";
+            i1.SubItems.Add(sub_i1b);
+
+            listView1.Items.Add(i1);
+
+            //設置ListView最後一行可見
+            listView1.Items[listView1.Items.Count - 1].EnsureVisible();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button20_Click(object sender, EventArgs e)
         {
@@ -1283,10 +1319,9 @@ namespace vcs_ListView1
 
             listView1.Sorting = SortOrder.Ascending;
             richTextBox1.Text += "目前排列方向 : " + listView1.Sorting.ToString() + "\n";
-
-            listView1.Sorting = SortOrder.Ascending;
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button28_Click(object sender, EventArgs e)
         {
@@ -1470,60 +1505,9 @@ namespace vcs_ListView1
 /*
 listview auto resize columns
 lvwValues.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-
-//listView 捲到最下一行
-            // Scroll to the last entry.
-            listView1.Items[R - 1].EnsureVisible();
-
-listView1.Items[listView1.Items.Count - 1].EnsureVisible();
 listView1.Font = new Font("Microsoft Sans Serif", 12.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
 
 //------------------------------------------------------------  # 60個
-
-//增加資料到listView中
-ListViewItem lv = new ListViewItem(dr[0].ToString());
-lv.SubItems.Add(dr[1].ToString());
-lv.SubItems.Add(dr[2].ToString());
-listView1.Items.Add(lv);
-
-//------------------------------------------------------------  # 60個
-
-ListView添加內容範例
-        private void listLanHost()
-        {
-            listView1.View = View.List;
-
-            ListViewItem aa;
-            for (int i = 0; i < 255; i++)
-            {
-                if (LanHost[i, 0] != "")
-                {
-                    aa = new ListViewItem();
-                    aa.Text = LanHost[i, 1];
-                    aa.Tag = LanHost[i, 0];
-                    listView1.Items.Add(aa);
-                }
-            }
-        }
-
-//------------------------------------------------------------  # 60個
-
-從第5項填資料到ListView
-            //測試中
-            ListViewItem i1 = new ListViewItem("File_add.txt");
-            ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
-            sub_i1a.Text = "3333";
-            i1.SubItems.Add(sub_i1a);
-            ListViewItem.ListViewSubItem sub_i1b = new ListViewItem.ListViewSubItem();
-            sub_i1b.Text = "2016/5/25 02:10上午";
-            i1.SubItems.Add(sub_i1b);
-
-            listView1.Items.Add(i1);
-
-            //設置ListView最後一行可見
-            listView1.Items[listView1.Items.Count - 1].EnsureVisible();
-
- //------------------------------------------------------------  # 60個
 
         void load_listview_data()
         {
@@ -1551,17 +1535,6 @@ ListView添加內容範例
 
 //------------------------------------------------------------  # 60個
 
-            ListViewItem i1 = new ListViewItem("aaaaaaa");
-            ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
-            sub_i1a.Text = "bbbbb";
-            i1.SubItems.Add(sub_i1a);
-            listView1.Items.Add(i1);
-
-            //設置ListView最後一行可見
-            listView1.Items[listView1.Items.Count - 1].EnsureVisible();
-
-//------------------------------------------------------------  # 60個
-
 ListView ListGridView DataGridView可否做到
 按Tab跳欄 按F2修改內容
 
@@ -1570,9 +1543,6 @@ ListView 無法做到按F2修改每個項目的內容 也無法做到用Tab跳�
 listView有沒有辦法做到點選某個子項 可以讓這個子項反白並修改內容
 
 //------------------------------------------------------------  # 60個
-
-                //添加項
-                listView1.Items.Add(zhuxiang);
 
             if (listView1.SelectedItems.Count > 0)
             {
@@ -1619,6 +1589,18 @@ vcs_ListView3_ContextMenuStrip
 使ListView控制元件中的選擇項目以高亮度方式顯示
 
 //------------------------------------------------------------  # 60個
-*/
 
+//設定欄位
+            ColumnHeader ch1 = new ColumnHeader();
+            ch1.Text = "文件名稱";
+            ch1.Width = 330;
+            listView1.Columns.Add(ch1);
+
+            listView1.GridLines = true;  // 網格線
+            listView1.View = View.Details;  //定義列表顯示的方式
+
+            listView1.Items.Clear();
+
+            listView1.Items.Add(fi.FullName);
+*/
 

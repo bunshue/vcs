@@ -74,7 +74,6 @@
             this.bt_files18 = new System.Windows.Forms.Button();
             this.bt_files19 = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -115,7 +114,6 @@
             this.bt_file06.Name = "bt_file06";
             this.bt_file06.Size = new System.Drawing.Size(200, 60);
             this.bt_file06.TabIndex = 6;
-            this.bt_file06.Text = "Path的方法";
             this.bt_file06.UseVisualStyleBackColor = true;
             this.bt_file06.Click += new System.EventHandler(this.bt_file06_Click);
             // 
@@ -126,7 +124,6 @@
             this.bt_file07.Name = "bt_file07";
             this.bt_file07.Size = new System.Drawing.Size(200, 60);
             this.bt_file07.TabIndex = 57;
-            this.bt_file07.Text = "建立刪除檔案資料夾";
             this.bt_file07.UseVisualStyleBackColor = true;
             this.bt_file07.Click += new System.EventHandler(this.bt_file07_Click);
             // 
@@ -148,6 +145,7 @@
             this.bt_file02.Name = "bt_file02";
             this.bt_file02.Size = new System.Drawing.Size(200, 60);
             this.bt_file02.TabIndex = 10;
+            this.bt_file02.Text = "File 屬性相關";
             this.bt_file02.UseVisualStyleBackColor = true;
             this.bt_file02.Click += new System.EventHandler(this.bt_file02_Click);
             // 
@@ -180,6 +178,7 @@
             this.bt_file08.Name = "bt_file08";
             this.bt_file08.Size = new System.Drawing.Size(200, 60);
             this.bt_file08.TabIndex = 20;
+            this.bt_file08.Text = "比較兩個檔案";
             this.bt_file08.UseVisualStyleBackColor = true;
             this.bt_file08.Click += new System.EventHandler(this.bt_file08_Click);
             // 
@@ -190,7 +189,7 @@
             this.bt_file05.Name = "bt_file05";
             this.bt_file05.Size = new System.Drawing.Size(200, 60);
             this.bt_file05.TabIndex = 45;
-            this.bt_file05.Text = "File 屬性相關";
+            this.bt_file05.Text = "建立刪除檔案資料夾";
             this.bt_file05.UseVisualStyleBackColor = true;
             this.bt_file05.Click += new System.EventHandler(this.bt_file05_Click);
             // 
@@ -201,6 +200,7 @@
             this.bt_dir09.Name = "bt_dir09";
             this.bt_dir09.Size = new System.Drawing.Size(200, 60);
             this.bt_dir09.TabIndex = 41;
+            this.bt_dir09.Text = "轉出";
             this.bt_dir09.UseVisualStyleBackColor = true;
             this.bt_dir09.Click += new System.EventHandler(this.bt_dir09_Click);
             // 
@@ -326,7 +326,7 @@
             this.bt_files00.Name = "bt_files00";
             this.bt_files00.Size = new System.Drawing.Size(200, 60);
             this.bt_files00.TabIndex = 17;
-            this.bt_files00.Text = "比較兩個檔案a";
+            this.bt_files00.Text = "Path的方法";
             this.bt_files00.UseVisualStyleBackColor = true;
             this.bt_files00.Click += new System.EventHandler(this.bt_files00_Click);
             // 
@@ -402,7 +402,6 @@
             this.bt_files10.Name = "bt_files10";
             this.bt_files10.Size = new System.Drawing.Size(200, 60);
             this.bt_files10.TabIndex = 38;
-            this.bt_files10.Text = "轉出";
             this.bt_files10.UseVisualStyleBackColor = true;
             this.bt_files10.Click += new System.EventHandler(this.bt_files10_Click);
             // 
@@ -413,6 +412,7 @@
             this.bt_files08.Name = "bt_files08";
             this.bt_files08.Size = new System.Drawing.Size(200, 60);
             this.bt_files08.TabIndex = 50;
+            this.bt_files08.Text = "ListView 操作";
             this.bt_files08.UseVisualStyleBackColor = true;
             this.bt_files08.Click += new System.EventHandler(this.bt_files08_Click);
             // 
@@ -560,22 +560,11 @@
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             // 
-            // listBox1
-            // 
-            this.listBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 19;
-            this.listBox1.Location = new System.Drawing.Point(849, 232);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(100, 99);
-            this.listBox1.TabIndex = 74;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(976, 648);
-            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.bt_files19);
             this.Controls.Add(this.bt_files18);
@@ -678,7 +667,6 @@
         private System.Windows.Forms.Button bt_files18;
         private System.Windows.Forms.Button bt_files19;
         private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ListBox listBox1;
     }
 }
 
