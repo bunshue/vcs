@@ -390,7 +390,7 @@
             this.bt_files09.Name = "bt_files09";
             this.bt_files09.Size = new System.Drawing.Size(200, 60);
             this.bt_files09.TabIndex = 5;
-            this.bt_files09.Text = "排序 fileinfos操作";
+            this.bt_files09.Text = "排序 與 fileinfos操作";
             this.bt_files09.UseVisualStyleBackColor = true;
             this.bt_files09.Click += new System.EventHandler(this.bt_files09_Click);
             // 

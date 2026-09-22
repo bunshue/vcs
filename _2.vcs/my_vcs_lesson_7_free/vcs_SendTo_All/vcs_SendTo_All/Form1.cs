@@ -76,64 +76,6 @@ namespace vcs_SendTo_All
 
         //------------------------------------------------------------  # 60個
 
-        //不用宣告長度的陣列(Array)
-        // 宣告fileinfos 為List
-        // 以下List 裡為MyFileInfo 型態
-        List<MyFileInfo> fileinfos = new List<MyFileInfo>();
-        List<MyFolderInfo> folderinfos = new List<MyFolderInfo>();
-
-        public class MyFileInfo
-        {
-            public string filename;
-            public string filepath;
-            public string fileextension;
-            public long filesize;
-            public DateTime filecreationtime;
-
-            public int video_width;
-            public int video_height;
-            public int video_fps;
-            public string video_duration;
-
-            public MyFileInfo(string n, string p, string e, long s, DateTime c)
-            {
-                this.filename = n;
-                this.filepath = p;
-                this.fileextension = e;
-                this.filesize = s;
-                this.filecreationtime = c;
-            }
-
-            public MyFileInfo(string n, string p, string e, long s, DateTime c, int w, int h, int f, string d)
-            {
-                this.filename = n;
-                this.filepath = p;
-                this.fileextension = e;
-                this.filesize = s;
-                this.filecreationtime = c;
-
-                this.video_width = w;
-                this.video_height = h;
-                this.video_fps = f;
-                this.video_duration = d;
-            }
-        }
-
-        public class MyFolderInfo
-        {
-            public string foldername;
-            public string folderpath;
-            public long foldersize;
-            public DateTime foldercreationtime;
-            public MyFolderInfo(string n, string p, long s, DateTime c)
-            {
-                this.foldername = n;
-                this.folderpath = p;
-                this.foldersize = s;
-                this.foldercreationtime = c;
-            }
-        }
-
         public Form1()
         {
             InitializeComponent();
@@ -213,7 +155,6 @@ namespace vcs_SendTo_All
 
             filenames.Sort();  // 排序
 
-            fileinfos.Clear();
             total_size = 0;
             total_files = 0;
 
@@ -377,82 +318,6 @@ namespace vcs_SendTo_All
 
         private void bt_save_Click(object sender, EventArgs e)
         {
-            int i;
-            if (fileinfos.Count == 0)
-            {
-                richTextBox1.Text += "show_filename_data 找不到資料\n";
-                richTextBox1.Text += "無資料, 不存檔\n";
-            }
-            else
-            {
-                richTextBox1.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料a\n";
-            }
-
-            string save_filename = "filename_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
-
-            FileStream filestream = System.IO.File.Open(save_filename, FileMode.Create);
-            StreamWriter str_writer = new StreamWriter(filestream);
-
-            // RTB 直接存檔
-            //str_writer.WriteLine(richTextBox1.Text);
-
-            // 只存檔案名稱資料
-            for (i = 0; i < fileinfos.Count; i++)
-            {
-                string filename = fileinfos[i].filename;
-                string mesg = string.Empty;
-                //richTextBox1.Text += filename + "\n";
-
-                FileInfo fi = new FileInfo(fileinfos[i].filepath + "\\" + filename);
-                richTextBox1.Text += fi.FullName + "\t";
-                richTextBox1.Text += ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
-                //mesg += fi.FullName + "\t";
-                mesg += String.Format("{0,-50}", filename);
-                //mesg += filename + "\t";
-                //mesg += ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\t";
-                mesg += String.Format("{0,-30}", ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)));
-                richTextBox1.Text += "len = " + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)).Length.ToString() + "\n";
-
-                richTextBox1.Text += mesg + "\n";
-                str_writer.WriteLine(mesg);
-            }
-
-            // Dispose StreamWriter
-            str_writer.Dispose();
-            // Close FileStream
-            filestream.Close();
-
-            richTextBox1.Text += "儲存資料完畢，檔案：" + save_filename + "\n";
-
-            /* 使用對話框選取檔案再存檔
-            saveFileDialog1.Title = "儲存資料";
-            saveFileDialog1.FileName = filename;
-            saveFileDialog1.Filter = "文字檔|*.txt|所有檔|*.*";   //限定檔案格式
-            saveFileDialog1.FilterIndex = 1;
-            saveFileDialog1.RestoreDirectory = true;
-            saveFileDialog1.InitialDirectory = Application.StartupPath; //從目前目錄開始尋找檔案
-
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                //StreamReader sr = new StreamReader(saveFileDialog1.FileName);
-                //StreamReader sr = new StreamReader(fileName, Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
-
-                FileStream filestream = System.IO.File.Open(saveFileDialog1.FileName, FileMode.Create);
-                StreamWriter str_writer = new StreamWriter(filestream);
-
-                str_writer.WriteLine(richTextBox1.Text);
-                // Dispose StreamWriter
-                str_writer.Dispose();
-                // Close FileStream
-                filestream.Close();
-
-                richTextBox1.Text += "儲存資料完畢，檔案：" + saveFileDialog1.FileName + "\n";
-            }
-            else
-            {
-                richTextBox1.Text += "未選取檔案\n";
-            }
-            */
         }
 
         private void bt_setup_Click(object sender, EventArgs e)
