@@ -74,6 +74,9 @@
             this.bt_files18 = new System.Windows.Forms.Button();
             this.bt_files19 = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
+            this.bt_delete_file = new System.Windows.Forms.Button();
+            this.bt_start_files = new System.Windows.Forms.Button();
+            this.tb_foldername = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -561,11 +564,46 @@
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             // 
+            // bt_delete_file
+            // 
+            this.bt_delete_file.BackgroundImage = global::vcs_DiskDirectoryFile1.Properties.Resources.delete;
+            this.bt_delete_file.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_delete_file.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_delete_file.Location = new System.Drawing.Point(899, 232);
+            this.bt_delete_file.Name = "bt_delete_file";
+            this.bt_delete_file.Size = new System.Drawing.Size(50, 50);
+            this.bt_delete_file.TabIndex = 75;
+            this.bt_delete_file.UseVisualStyleBackColor = true;
+            this.bt_delete_file.Click += new System.EventHandler(this.bt_delete_file_Click);
+            // 
+            // bt_start_files
+            // 
+            this.bt_start_files.BackgroundImage = global::vcs_DiskDirectoryFile1.Properties.Resources.potplayer;
+            this.bt_start_files.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_start_files.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_start_files.Location = new System.Drawing.Point(849, 232);
+            this.bt_start_files.Name = "bt_start_files";
+            this.bt_start_files.Size = new System.Drawing.Size(50, 50);
+            this.bt_start_files.TabIndex = 74;
+            this.bt_start_files.UseVisualStyleBackColor = true;
+            this.bt_start_files.Click += new System.EventHandler(this.bt_start_files_Click);
+            // 
+            // tb_foldername
+            // 
+            this.tb_foldername.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_foldername.Location = new System.Drawing.Point(849, 296);
+            this.tb_foldername.Name = "tb_foldername";
+            this.tb_foldername.Size = new System.Drawing.Size(100, 36);
+            this.tb_foldername.TabIndex = 252;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(976, 648);
+            this.Controls.Add(this.tb_foldername);
+            this.Controls.Add(this.bt_delete_file);
+            this.Controls.Add(this.bt_start_files);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.bt_files19);
             this.Controls.Add(this.bt_files18);
@@ -668,6 +706,9 @@
         private System.Windows.Forms.Button bt_files18;
         private System.Windows.Forms.Button bt_files19;
         private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.Button bt_delete_file;
+        private System.Windows.Forms.Button bt_start_files;
+        private System.Windows.Forms.TextBox tb_foldername;
     }
 }
 

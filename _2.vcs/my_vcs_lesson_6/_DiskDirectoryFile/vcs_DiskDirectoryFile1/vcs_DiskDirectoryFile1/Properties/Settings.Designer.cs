@@ -22,5 +22,41 @@ namespace vcs_DiskDirectoryFile1.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string doc_foldername {
+            get {
+                return ((string)(this["doc_foldername"]));
+            }
+            set {
+                this["doc_foldername"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string video_player_path {
+            get {
+                return ((string)(this["video_player_path"]));
+            }
+            set {
+                this["video_player_path"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string search_path {
+            get {
+                return ((string)(this["search_path"]));
+            }
+            set {
+                this["search_path"] = value;
+            }
+        }
     }
 }

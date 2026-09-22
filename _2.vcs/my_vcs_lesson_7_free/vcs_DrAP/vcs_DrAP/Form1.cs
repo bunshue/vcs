@@ -122,16 +122,13 @@ namespace vcs_DrAP
             int dx = w + 5;
             int dy = h + 5;
 
-            bt_start_files.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-
-            bt_delete_file.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-
             cb_option1.Location = new Point(x_st + dx * 4, y_st + dy * 0);  // 滿30結束
             tb_search.Location = new Point(x_st + dx * 4, y_st + dy * 1);
 
             bt_search_pattern_vcs.Location = new Point(x_st + dx * 7, y_st + dy * 0);
             bt_open_with_vcs.Location = new Point(x_st + dx * 7, y_st + dy * 1);
             bt_open_dir2.Location = new Point(x_st + dx * 8, y_st + dy * 0);
+            bt_open_with_ue.Location = new Point(x_st + dx * 8, y_st + dy * 1);
             bt_compare.Location = new Point(x_st + dx * 9, y_st + dy * 0);
             bt_replace.Location = new Point(x_st + dx * 9, y_st + dy * 1);
 
@@ -174,70 +171,6 @@ namespace vcs_DrAP
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
-
-            bt_minimize_setup();
-            bt_exit_setup();
-        }
-
-        private void bt_minimize_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;   //設定表單最小化
-        }
-
-        private void bt_exit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        void bt_minimize_setup()
-        {
-            int width = 5;
-            int w = 50; //設定按鈕大小 W
-            int h = 50; //設定按鈕大小 H
-
-            Button bt_minimize = new Button();  // 實例化按鈕
-            bt_minimize.Size = new Size(w, h);
-            bt_minimize.Text = "";
-            Bitmap bmp = new Bitmap(w, h);
-            Graphics g = Graphics.FromImage(bmp);
-            Pen p = new Pen(Color.Red, width);
-            g.Clear(Color.Pink);
-            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
-            //g.DrawLine(p, 0, 0, w - 1, h - 1);
-            //g.DrawLine(p, w - 1, 0, 0, h - 1);
-            g.DrawLine(p, w / 4, h / 2 - 1, w * 3 / 4, h / 2 - 1);
-            bt_minimize.Image = bmp;
-
-            bt_minimize.Location = new Point(this.ClientSize.Width - bt_minimize.Width * 2 - 2, 0);
-            bt_minimize.Click += bt_minimize_Click;     // 加入按鈕事件
-
-            this.Controls.Add(bt_minimize); // 將按鈕加入表單
-            bt_minimize.BringToFront();     //移到最上層
-        }
-
-        void bt_exit_setup()
-        {
-            int width = 5;
-            int w = 50; //設定按鈕大小 W
-            int h = 50; //設定按鈕大小 H
-
-            Button bt_exit = new Button();  // 實例化按鈕
-            bt_exit.Size = new Size(w, h);
-            bt_exit.Text = "";
-            Bitmap bmp = new Bitmap(w, h);
-            Graphics g = Graphics.FromImage(bmp);
-            Pen p = new Pen(Color.Red, width);
-            g.Clear(Color.Pink);
-            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
-            g.DrawLine(p, 0, 0, w - 1, h - 1);
-            g.DrawLine(p, w - 1, 0, 0, h - 1);
-            bt_exit.Image = bmp;
-
-            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
-            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
-
-            this.Controls.Add(bt_exit); // 將按鈕加入表單
-            bt_exit.BringToFront();     //移到最上層
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -474,101 +407,6 @@ namespace vcs_DrAP
             }
         }
 
-        private void bt_start_files_Click(object sender, EventArgs e)
-        {
-            int selectCount = listView1.SelectedIndices.Count;
-            /*
-            result_str += "你選擇了 : " + selectCount.ToString() + " 個檔案, 分別是\n";
-            for (int i = 0; i < selectCount; i++)
-            {
-                result_str += listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
-            }
-            result_str += "開啟\n";
-            */
-
-            int selNdx;
-            string all_filename = string.Empty;
-
-            if (selectCount <= 0)  //總共選擇的個數
-            {
-                result_str += "無檔案\n";
-                return;
-            }
-
-            //result_str += "總共選了 : " + listView1.SelectedItems.Count.ToString() + " 個檔案，分別是 : \n";
-            //for (int i = 0; i < selectCount; i++)
-            for (int i = 0; i < listView1.SelectedItems.Count; i++)
-            {
-                selNdx = listView1.SelectedIndices[i];
-                listView1.Items[selNdx].Selected = true;    //選到的項目
-                //result_str += listView1.Items[selNdx].Text + "\n";
-
-                if (flag_function == FUNCTION_SEARCH_TEXT)
-                {
-                    all_filename += " \"" + listView1.Items[selNdx].SubItems[1].Text + "\\" + listView1.Items[selNdx].Text + "\"";
-                }
-                else
-                {
-                    all_filename += " \"" + listView1.Items[selNdx].SubItems[3].Text + "\\" + listView1.Items[selNdx].SubItems[2].Text + "\"";
-                }
-            }
-
-            //指定應用程式路徑
-            string target = String.Empty;
-
-            //方法一
-            //Process.Start(target, "參數");
-            //Process.Start(target, all_filename);
-
-            //方法二
-
-            if (flag_search_vcs_pattern == 0)
-            {
-                target = video_player_path;
-            }
-            else
-            {
-                target = text_editor_path;
-            }
-
-            if (flag_search_vcs_pattern == 0)
-            {
-                ProcessStartInfo pInfo = new ProcessStartInfo(target);
-                pInfo.Arguments = all_filename;
-
-                /*
-                // debug mesg
-                result_str += "target : " + target + "\n";
-                result_str += "all_filename : " + all_filename + "\n";
-                */
-
-                if (video_player_path == String.Empty)
-                {
-                    all_filename = all_filename.Trim().Replace("\"", "");
-                    Process.Start(all_filename); //使用預設程式開啟, 無法一次播放多個檔案
-                }
-                else
-                {
-                    Process.Start(video_player_path, all_filename);    //指名播放程式開啟
-                }
-
-                /*
-                using (Process process = new Process())
-                {
-                    process.StartInfo = pInfo;
-                    process.Start();
-                }
-                */
-            }
-            else
-            {
-                if (System.IO.File.Exists(text_editor_path) == true)
-                {
-                    Process.Start(text_editor_path, all_filename);
-                }
-            }
-        }
-
         private void bt_edit_python_files_Click(object sender, EventArgs e)
         {
             int selectCount = listView1.SelectedIndices.Count;
@@ -684,7 +522,7 @@ namespace vcs_DrAP
             if (e.KeyCode == Keys.Enter)
             {
                 //按Enter 等同於 bt_start_files_Click
-                bt_start_files_Click(sender, e);
+                //bt_start_files_Click(sender, e); 播放
             }
 
             if (e.KeyCode == Keys.F2)
@@ -731,34 +569,6 @@ namespace vcs_DrAP
             if(e.KeyChar.CompareTo('0')<0 || e.KeyChar.CompareTo('9')>0) //比較輸入值的範圍是否超出數字
                 e.Handled = true;// Handled 為是否鎖住輸入
             */
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void bt_delete_file_Click(object sender, EventArgs e)
-        {
-            int selectCount = listView1.SelectedIndices.Count;
-
-            result_str += "你選擇了 : " + selectCount.ToString() + " 個檔案, 分別是\n";
-
-            for (int i = 0; i < selectCount; i++)
-            {
-                result_str += listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
-            }
-
-            result_str += "刪除\n";
-
-            for (int i = selectCount - 1; i >= 0; i--)
-            {
-                result_str += "刪除檔案: " + listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
-
-                richTextBox1.Text += "目前不支援直接刪除檔案\n";
-                /*  直接刪除檔案
-                File.SetAttributes(listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text, FileAttributes.Normal);
-                File.Delete(listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text);
-                */
-                listView1.SelectedItems[i].Remove();
-            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -931,7 +741,6 @@ namespace vcs_DrAP
             richTextBox1.Text += tb_search.Text + "\n";
             result_str += tb_search.Text + "\n";
 
-            bt_start_files.BackgroundImage = vcs_DrAP.Properties.Resources.ultraedit;
             Application.DoEvents();
 
             flag_show_30_message = false;
@@ -1195,6 +1004,66 @@ namespace vcs_DrAP
                     richTextBox1.Text += "找到 : " + filename + "\n";
                     Process.Start(filename);
                 }
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void bt_open_with_ue_Click(object sender, EventArgs e)
+        {
+            flag_function = FUNCTION_SEARCH_TEXT;
+
+            int selectCount = listView1.SelectedIndices.Count;
+            /*
+            result_str += "你選擇了 : " + selectCount.ToString() + " 個檔案, 分別是\n";
+            for (int i = 0; i < selectCount; i++)
+            {
+                result_str += listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
+            }
+            result_str += "開啟\n";
+            */
+
+            int selNdx;
+            string all_filename = string.Empty;
+
+            if (selectCount <= 0)  //總共選擇的個數
+            {
+                result_str += "無檔案\n";
+                return;
+            }
+
+            //result_str += "總共選了 : " + listView1.SelectedItems.Count.ToString() + " 個檔案，分別是 : \n";
+            //for (int i = 0; i < selectCount; i++)
+            for (int i = 0; i < listView1.SelectedItems.Count; i++)
+            {
+                selNdx = listView1.SelectedIndices[i];
+                listView1.Items[selNdx].Selected = true;    //選到的項目
+                //result_str += listView1.Items[selNdx].Text + "\n";
+
+                if (flag_function == FUNCTION_SEARCH_TEXT)
+                {
+                    all_filename += " \"" + listView1.Items[selNdx].SubItems[1].Text + "\\" + listView1.Items[selNdx].Text + "\"";
+                }
+                else
+                {
+                    all_filename += " \"" + listView1.Items[selNdx].SubItems[3].Text + "\\" + listView1.Items[selNdx].SubItems[2].Text + "\"";
+                }
+            }
+
+            //指定應用程式路徑
+            string target = String.Empty;
+
+            //方法一
+            //Process.Start(target, "參數");
+            //Process.Start(target, all_filename);
+
+            //方法二
+
+            target = text_editor_path;
+
+            if (System.IO.File.Exists(text_editor_path) == true)
+            {
+                Process.Start(text_editor_path, all_filename);
             }
         }
 

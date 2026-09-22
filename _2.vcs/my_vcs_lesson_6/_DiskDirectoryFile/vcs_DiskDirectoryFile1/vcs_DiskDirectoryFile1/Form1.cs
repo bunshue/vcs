@@ -114,8 +114,13 @@ namespace vcs_DiskDirectoryFile1
             bt_files18.Location = new Point(x_st + dx * 3, y_st + dy * 8);
             bt_files19.Location = new Point(x_st + dx * 3, y_st + dy * 9);
 
-            listView1.Size = new Size(800, 270);
-            listView1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            tb_foldername.Size = new Size(690, 100);
+            tb_foldername.Location = new Point(x_st + dx * 4, y_st + dy * 0 - 24);
+            bt_delete_file.Location = new Point(x_st + dx * 4 + 800 - 100, y_st + dy * 0 - 20 - 10);
+            bt_start_files.Location = new Point(x_st + dx * 4 + 800 - 50, y_st + dy * 0 - 20 - 10);
+
+            listView1.Size = new Size(800, 270 - 20);
+            listView1.Location = new Point(x_st + dx * 4, y_st + dy * 0 + 20);
 
             richTextBox1.Size = new Size(800, 410);
             richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 4);
@@ -2414,6 +2419,107 @@ namespace vcs_DiskDirectoryFile1
             {
             }
 
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void bt_start_files_Click(object sender, EventArgs e)
+        {
+            int selectCount = listView1.SelectedIndices.Count;
+            /*
+            richTextBox1.Text += "你選擇了 : " + selectCount.ToString() + " 個檔案, 分別是\n";
+            for (int i = 0; i < selectCount; i++)
+            {
+                richTextBox1.Text += listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
+            }
+            richTextBox1.Text += "開啟\n";
+            */
+
+            int selNdx;
+            string all_filename = string.Empty;
+
+            if (selectCount <= 0)  //總共選擇的個數
+            {
+                richTextBox1.Text += "無檔案\n";
+                return;
+            }
+
+            //richTextBox1.Text += "總共選了 : " + listView1.SelectedItems.Count.ToString() + " 個檔案，分別是 : \n";
+            //for (int i = 0; i < selectCount; i++)
+            for (int i = 0; i < listView1.SelectedItems.Count; i++)
+            {
+                selNdx = listView1.SelectedIndices[i];
+                listView1.Items[selNdx].Selected = true;    //選到的項目
+                //richTextBox1.Text += listView1.Items[selNdx].Text + "\n";
+
+                all_filename += " \"" + listView1.Items[selNdx].SubItems[3].Text + "\\" + listView1.Items[selNdx].SubItems[2].Text + "\"";
+            }
+
+            //指定應用程式路徑
+            string target = String.Empty;
+
+            //方法一
+            //Process.Start(target, "參數");
+            //Process.Start(target, all_filename);
+
+            //方法二
+
+            string video_player_path = String.Empty;
+            video_player_path = @"";
+            target = video_player_path;
+
+            ProcessStartInfo pInfo = new ProcessStartInfo(target);
+            pInfo.Arguments = all_filename;
+
+            /*
+            // debug mesg
+            richTextBox1.Text += "target : " + target + "\n";
+            richTextBox1.Text += "all_filename : " + all_filename + "\n";
+            */
+
+            if (video_player_path == String.Empty)
+            {
+                all_filename = all_filename.Trim().Replace("\"", "");
+                Process.Start(all_filename); //使用預設程式開啟, 無法一次播放多個檔案
+            }
+            else
+            {
+                Process.Start(video_player_path, all_filename);    //指名播放程式開啟
+            }
+
+            /*
+            using (Process process = new Process())
+            {
+                process.StartInfo = pInfo;
+                process.Start();
+            }
+            */
+        }
+
+        private void bt_delete_file_Click(object sender, EventArgs e)
+        {
+            int selectCount = listView1.SelectedIndices.Count;
+
+            richTextBox1.Text += "你選擇了 : " + selectCount.ToString() + " 個檔案, 分別是\n";
+
+            for (int i = 0; i < selectCount; i++)
+            {
+                richTextBox1.Text += listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
+            }
+
+            richTextBox1.Text += "刪除\n";
+
+            for (int i = selectCount - 1; i >= 0; i--)
+            {
+                richTextBox1.Text += "刪除檔案: " + listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
+
+                richTextBox1.Text += "目前不支援直接刪除檔案\n";
+                /*  直接刪除檔案
+                File.SetAttributes(listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text, FileAttributes.Normal);
+                File.Delete(listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text);
+                */
+                listView1.SelectedItems[i].Remove();
+            }
         }
 
         //------------------------------------------------------------  # 60個

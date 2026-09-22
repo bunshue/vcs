@@ -49,9 +49,8 @@
             this.bt_copy_rtb_data = new System.Windows.Forms.Button();
             this.bt_setup = new System.Windows.Forms.Button();
             this.bt_search_pattern_vcs = new System.Windows.Forms.Button();
-            this.bt_delete_file = new System.Windows.Forms.Button();
-            this.bt_start_files = new System.Windows.Forms.Button();
             this.bt_open_with_vcs = new System.Windows.Forms.Button();
+            this.bt_open_with_ue = new System.Windows.Forms.Button();
             this.groupbox_python.SuspendLayout();
             this.groupbox_result.SuspendLayout();
             this.SuspendLayout();
@@ -290,30 +289,6 @@
             this.bt_search_pattern_vcs.UseVisualStyleBackColor = true;
             this.bt_search_pattern_vcs.Click += new System.EventHandler(this.bt_search_pattern_vcs_Click);
             // 
-            // bt_delete_file
-            // 
-            this.bt_delete_file.BackgroundImage = global::vcs_DrAP.Properties.Resources.delete;
-            this.bt_delete_file.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_delete_file.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_delete_file.Location = new System.Drawing.Point(68, 12);
-            this.bt_delete_file.Name = "bt_delete_file";
-            this.bt_delete_file.Size = new System.Drawing.Size(50, 50);
-            this.bt_delete_file.TabIndex = 22;
-            this.bt_delete_file.UseVisualStyleBackColor = true;
-            this.bt_delete_file.Click += new System.EventHandler(this.bt_delete_file_Click);
-            // 
-            // bt_start_files
-            // 
-            this.bt_start_files.BackgroundImage = global::vcs_DrAP.Properties.Resources.potplayer;
-            this.bt_start_files.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_start_files.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_start_files.Location = new System.Drawing.Point(12, 12);
-            this.bt_start_files.Name = "bt_start_files";
-            this.bt_start_files.Size = new System.Drawing.Size(50, 50);
-            this.bt_start_files.TabIndex = 15;
-            this.bt_start_files.UseVisualStyleBackColor = true;
-            this.bt_start_files.Click += new System.EventHandler(this.bt_start_files_Click);
-            // 
             // bt_open_with_vcs
             // 
             this.bt_open_with_vcs.BackgroundImage = global::vcs_DrAP.Properties.Resources.vcs2;
@@ -326,12 +301,24 @@
             this.bt_open_with_vcs.UseVisualStyleBackColor = true;
             this.bt_open_with_vcs.Click += new System.EventHandler(this.bt_open_with_vcs_Click);
             // 
+            // bt_open_with_ue
+            // 
+            this.bt_open_with_ue.BackgroundImage = global::vcs_DrAP.Properties.Resources.ultraedit;
+            this.bt_open_with_ue.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_open_with_ue.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_open_with_ue.Location = new System.Drawing.Point(356, 64);
+            this.bt_open_with_ue.Name = "bt_open_with_ue";
+            this.bt_open_with_ue.Size = new System.Drawing.Size(50, 50);
+            this.bt_open_with_ue.TabIndex = 71;
+            this.bt_open_with_ue.UseVisualStyleBackColor = true;
+            this.bt_open_with_ue.Click += new System.EventHandler(this.bt_open_with_ue_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(635, 466);
-            this.Controls.Add(this.bt_delete_file);
+            this.Controls.Add(this.bt_open_with_ue);
             this.Controls.Add(this.bt_open_with_vcs);
             this.Controls.Add(this.bt_replace);
             this.Controls.Add(this.bt_compare);
@@ -347,7 +334,6 @@
             this.Controls.Add(this.bt_search_pattern_vcs);
             this.Controls.Add(this.tb_search);
             this.Controls.Add(this.richTextBox2);
-            this.Controls.Add(this.bt_start_files);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.richTextBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -367,9 +353,7 @@
 
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.Button bt_start_files;
         private System.Windows.Forms.RichTextBox richTextBox2;
-        private System.Windows.Forms.Button bt_delete_file;
         private System.Windows.Forms.TextBox tb_search;
         private System.Windows.Forms.Button bt_search_pattern_vcs;
         private System.Windows.Forms.Button bt_clear1;
@@ -388,6 +372,7 @@
         private System.Windows.Forms.Button bt_compare;
         private System.Windows.Forms.Button bt_replace;
         private System.Windows.Forms.Button bt_open_with_vcs;
+        private System.Windows.Forms.Button bt_open_with_ue;
     }
 }
 
