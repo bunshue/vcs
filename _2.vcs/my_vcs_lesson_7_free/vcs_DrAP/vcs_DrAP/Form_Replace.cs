@@ -81,7 +81,7 @@ namespace vcs_DrAP
 
         List<String> filenames = new List<String>();
         //多層 且指明副檔名
-        public void GetAllFiles(string foldername, string extension)
+        private void GetAllFiles(string foldername, string extension)
         {
             DirectoryInfo di = new DirectoryInfo(foldername);
             //richTextBox1.Text += "資料夾 : " + di.FullName + "\n";
@@ -283,3 +283,4 @@ namespace vcs_DrAP
         }
     }
 }
+

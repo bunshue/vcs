@@ -149,14 +149,18 @@ namespace vcs_Remove_Bin_Obj
             richTextBox1.Text += result_str;
         }
 
-        public void ProcessDirectory(string foldername)
+        private void ProcessDirectory(string foldername)
         {
             int file_cnt = 0;
             int dir_cnt = 0;
 
-            string[] dirs = Directory.GetDirectories(foldername);
+            //搜尋子目錄內的所有檔案   一層
+            //使用 Directory.GetDirectories() 和 Directory.GetFiles()
+
+            // 找資料夾, 一層
+            string[] dirs = Directory.GetDirectories(foldername);  // 取得指定目錄中子目錄的名稱, 一層
             dir_cnt = dirs.Length;
-            Array.Sort(dirs);
+            Array.Sort(dirs);  // 排序
             foreach (string dir in dirs)
             {
                 if (dir.EndsWith("\\bin"))
@@ -201,13 +205,13 @@ namespace vcs_Remove_Bin_Obj
                     if (checkBox1.Checked == true)
                         folder_name.Add(dir);
                 }
-                DirectoryInfo di = new DirectoryInfo(dir);
+                // 資料夾
                 ProcessDirectory(dir);
             }
 
-            string[] filenames = Directory.GetFiles(foldername);
+            string[] filenames = Directory.GetFiles(foldername);  // 取得指定目錄中檔案的名稱
             file_cnt = filenames.Length;
-            Array.Sort(filenames);
+            Array.Sort(filenames);  // 排序
             foreach (string filename in filenames)
             {
                 if ((filename.EndsWith(".suo")) || (filename.EndsWith(".csproj.user")))
@@ -251,7 +255,7 @@ namespace vcs_Remove_Bin_Obj
             }
         }
 
-        public void ProcessDirectoryBinObj(List<string> folder_name)
+        private void ProcessDirectoryBinObj(List<string> folder_name)
         {
             bool flag_rename_fail = false;
             int i;
@@ -397,7 +401,7 @@ namespace vcs_Remove_Bin_Obj
             {
                 result_str += "資料夾 : " + foldername + " 存在\n";
 
-                filenames = Directory.GetFiles(foldername); //獲得文件夾目錄下所有文件全路徑
+                filenames = Directory.GetFiles(foldername);  // 取得指定目錄中檔案的名稱
                 foreach (string filename in filenames)
                 {
                     if ((filename.Contains("freeglut.dll") == false) && (filename.Contains("glew64.dll") == false))
@@ -425,7 +429,7 @@ namespace vcs_Remove_Bin_Obj
             {
                 result_str += "資料夾 : " + foldername + " 存在\n";
 
-                filenames = Directory.GetFiles(foldername); //獲得文件夾目錄下所有文件全路徑
+                filenames = Directory.GetFiles(foldername);  // 取得指定目錄中檔案的名稱
                 foreach (string filename in filenames)
                 {
                     if ((filename.Contains("freeglut.dll") == false) && (filename.Contains("glew64.dll") == false))
@@ -453,7 +457,7 @@ namespace vcs_Remove_Bin_Obj
             {
                 result_str += "資料夾 : " + foldername + " 存在\n";
 
-                filenames = Directory.GetFiles(foldername); //獲得文件夾目錄下所有文件全路徑
+                filenames = Directory.GetFiles(foldername);  // 取得指定目錄中檔案的名稱
                 foreach (string filename in filenames)
                 {
                     if ((filename.Contains("freeglut.dll") == false) && (filename.Contains("glew64.dll") == false))
@@ -480,8 +484,8 @@ namespace vcs_Remove_Bin_Obj
             {
                 result_str += "資料夾 : " + foldername + " 存在\n";
 
-                //filenames = Directory.GetFiles(foldername); //獲得文件夾目錄下所有文件全路徑
-                filenames = Directory.GetFiles(foldername, "*.exe"); //獲得文件夾目錄下指定後綴名文件全路徑
+                //filenames = Directory.GetFiles(foldername);  // 取得指定目錄中檔案的名稱
+                filenames = Directory.GetFiles(foldername, "*.exe");  // 取得指定目錄中檔案的名稱, 指定後綴名文件全路徑
                 foreach (string filename in filenames)
                 {
                     result_str += "remove : " + filename + "\n";
@@ -507,7 +511,7 @@ namespace vcs_Remove_Bin_Obj
                     }
                 }
 
-                filenames = Directory.GetFiles(foldername, "*.pdb"); //獲得文件夾目錄下指定後綴名文件全路徑
+                filenames = Directory.GetFiles(foldername, "*.pdb");  // 取得指定目錄中檔案的名稱, 指定後綴名文件全路徑
                 foreach (string filename in filenames)
                 {
                     result_str += "remove : " + filename + "\n";
@@ -533,7 +537,7 @@ namespace vcs_Remove_Bin_Obj
                     }
                 }
 
-                filenames = Directory.GetFiles(foldername, "*.manifest"); //獲得文件夾目錄下指定後綴名文件全路徑
+                filenames = Directory.GetFiles(foldername, "*.manifest");  // 取得指定目錄中檔案的名稱, 指定後綴名文件全路徑
                 foreach (string filename in filenames)
                 {
                     result_str += "remove : " + filename + "\n";
@@ -559,7 +563,7 @@ namespace vcs_Remove_Bin_Obj
                     }
                 }
 
-                filenames = Directory.GetFiles(foldername, "*.txt"); //獲得文件夾目錄下指定後綴名文件全路徑
+                filenames = Directory.GetFiles(foldername, "*.txt");  // 取得指定目錄中檔案的名稱, 指定後綴名文件全路徑
                 foreach (string filename in filenames)
                 {
                     result_str += "remove : " + filename + "\n";
@@ -585,7 +589,7 @@ namespace vcs_Remove_Bin_Obj
                     }
                 }
 
-                filenames = Directory.GetFiles(foldername, "*.config"); //獲得文件夾目錄下指定後綴名文件全路徑
+                filenames = Directory.GetFiles(foldername, "*.config");  // 取得指定目錄中檔案的名稱, 指定後綴名文件全路徑
                 foreach (string filename in filenames)
                 {
                     result_str += "remove : " + filename + "\n";
@@ -611,7 +615,7 @@ namespace vcs_Remove_Bin_Obj
                     }
                 }
 
-                filenames = Directory.GetFiles(foldername, "*.jpg"); //獲得文件夾目錄下指定後綴名文件全路徑
+                filenames = Directory.GetFiles(foldername, "*.jpg");  // 取得指定目錄中檔案的名稱, 指定後綴名文件全路徑
                 foreach (string filename in filenames)
                 {
                     result_str += "remove : " + filename + "\n";
@@ -644,8 +648,8 @@ namespace vcs_Remove_Bin_Obj
             {
                 result_str += "資料夾: " + foldername + " 存在\n";
 
-                //filenames = Directory.GetFiles(foldername); //獲得文件夾目錄下所有文件全路徑
-                filenames = Directory.GetFiles(foldername, "*.exe"); //獲得文件夾目錄下指定後綴名文件全路徑
+                //filenames = Directory.GetFiles(foldername);  // 取得指定目錄中檔案的名稱
+                filenames = Directory.GetFiles(foldername, "*.exe");  // 取得指定目錄中檔案的名稱, 指定後綴名文件全路徑
                 foreach (string filename in filenames)
                 {
                     result_str += "remove : " + filename + "\n";
@@ -671,7 +675,7 @@ namespace vcs_Remove_Bin_Obj
                     }
                 }
 
-                filenames = Directory.GetFiles(foldername, "*.pdb"); //獲得文件夾目錄下指定後綴名文件全路徑
+                filenames = Directory.GetFiles(foldername, "*.pdb");  // 取得指定目錄中檔案的名稱, 指定後綴名文件全路徑
                 foreach (string filename in filenames)
                 {
                     result_str += "remove : " + filename + "\n";
@@ -697,7 +701,7 @@ namespace vcs_Remove_Bin_Obj
                     }
                 }
 
-                filenames = Directory.GetFiles(foldername, "*.manifest"); //獲得文件夾目錄下指定後綴名文件全路徑
+                filenames = Directory.GetFiles(foldername, "*.manifest");  // 取得指定目錄中檔案的名稱, 指定後綴名文件全路徑
                 foreach (string filename in filenames)
                 {
                     result_str += "remove : " + filename + "\n";
@@ -723,7 +727,7 @@ namespace vcs_Remove_Bin_Obj
                     }
                 }
 
-                filenames = Directory.GetFiles(foldername, "*.txt"); //獲得文件夾目錄下指定後綴名文件全路徑
+                filenames = Directory.GetFiles(foldername, "*.txt");  // 取得指定目錄中檔案的名稱, 指定後綴名文件全路徑
                 foreach (string filename in filenames)
                 {
                     result_str += "remove : " + filename + "\n";
@@ -750,7 +754,7 @@ namespace vcs_Remove_Bin_Obj
                 }
 
 
-                filenames = Directory.GetFiles(foldername, "*.config"); //獲得文件夾目錄下指定後綴名文件全路徑
+                filenames = Directory.GetFiles(foldername, "*.config");  // 取得指定目錄中檔案的名稱, 指定後綴名文件全路徑
                 foreach (string filename in filenames)
                 {
                     result_str += "remove : " + filename + "\n";
@@ -776,7 +780,7 @@ namespace vcs_Remove_Bin_Obj
                     }
                 }
 
-                filenames = Directory.GetFiles(foldername, "*.jpg"); //獲得文件夾目錄下指定後綴名文件全路徑
+                filenames = Directory.GetFiles(foldername, "*.jpg");  // 取得指定目錄中檔案的名稱, 指定後綴名文件全路徑
                 foreach (string filename in filenames)
                 {
                     result_str += "remove : " + filename + "\n";
@@ -863,6 +867,7 @@ namespace vcs_Remove_Bin_Obj
                 return;
             }
 
+            //TBD for git
             string exe_filename = "cmd";
             //string parameters = @" /C C:\Xilinx\SDK\2019.1\bin\bootgen -image C:\_git\ims1\iMS_Video\iMS_Video.sdk\output.bif -arch zynq -o C:\_git\ims1\iMS_Video\iMS_Video.sdk\BOOT.bin";
             //string parameters = @" /C C:\Xilinx\SDK\2019.1\bin\bootgen -image C:\_git\ims1\iMS_Video\iMS_Video.sdk\output.bif -arch zynq -o " + filename;

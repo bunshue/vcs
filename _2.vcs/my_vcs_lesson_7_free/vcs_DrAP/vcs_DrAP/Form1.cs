@@ -766,40 +766,33 @@ namespace vcs_DrAP
 
         //------------------------------------------------------------  # 60個
 
-        public void ProcessDirectoryS(string foldername)
+        private void ProcessDirectoryS(string foldername)
         {
-            string[] dirs = Directory.GetDirectories(foldername);
-            Array.Sort(dirs);
+            //搜尋子目錄內的所有檔案   一層
+            //使用 Directory.GetDirectories() 和 Directory.GetFiles()
+
+            // 找資料夾, 一層
+            string[] dirs = Directory.GetDirectories(foldername);  // 取得指定目錄中子目錄的名稱, 一層
+            Array.Sort(dirs);  // 排序
             foreach (string dir in dirs)
             {
-                DirectoryInfo di = new DirectoryInfo(dir);
-
-                if (search_mode == SEARCH_MODE_PYTHON)
-                {
-                    ProcessDirectoryS(dir);
-                }
-                else if (search_mode == SEARCH_MODE_VCS)
-                {
-                    ProcessDirectoryS(dir);
-                }
-                else
-                {
-                    //除了python 與 vcs, 全部搜尋
-                    ProcessDirectoryS(dir);
-                }
+                // 資料夾
+                ProcessDirectoryS(dir);
             }
 
-            string[] filenames = Directory.GetFiles(foldername);
-            Array.Sort(filenames);
+            // 找檔案, 一層
+            string[] filenames = Directory.GetFiles(foldername);  // 取得指定目錄中檔案的名稱
+            Array.Sort(filenames);  // 排序
             foreach (string filename in filenames)
             {
+                // 檔案
                 ProcessFileS(filename);
             }
         }
 
         //------------------------------------------------------------  # 60個
 
-        public void ProcessFileS(string filename)
+        private void ProcessFileS(string filename)
         {
             if (cb_option1.Checked == true)
             {
@@ -887,7 +880,7 @@ namespace vcs_DrAP
 
         //------------------------------------------------------------  # 60個
 
-        public void ProcessFile2(string filename)
+        private void ProcessFile2(string filename)
         {
             FileInfo fi = new FileInfo(filename);
 

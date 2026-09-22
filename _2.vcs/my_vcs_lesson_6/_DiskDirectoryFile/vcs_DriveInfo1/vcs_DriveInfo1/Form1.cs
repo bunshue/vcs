@@ -8,8 +8,10 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;  // for DriveInfo
+using System.Diagnostics;
 using System.Globalization;  // for CultureInfo
 using System.Runtime.InteropServices;  // for DllImport, StructLayout
+using System.Text.RegularExpressions;
 
 /*
 磁碟類型DriveType
@@ -436,7 +438,7 @@ namespace vcs_DriveInfo1
                 richTextBox1.Text += "磁碟分割號 : " + drive.Name + "\n";
                 richTextBox1.Text += "Drive : " + drive.Name + "\tFile type : " + drive.DriveType + "\n";
 
-                if (drive.IsReady == true)  //使用IsReady屬性判斷裝置是否就緒
+                if (drive.IsReady == true)  // 使用IsReady屬性判斷裝置是否就緒
                 {
                     richTextBox1.Text += "磁碟 : " + drive.ToString() + " 已就緒" + "\n";
 
@@ -476,7 +478,7 @@ namespace vcs_DriveInfo1
             UInt32 file_system_flags = new UInt32();
             StringBuilder sb_file_system_name = new StringBuilder(256);
 
-            if (GetVolumeInformation(drive_letter, sb_volume_name, (UInt32)sb_volume_name.Capacity, ref serial_number, ref max_component_length, ref file_system_flags, sb_file_system_name, (UInt32)sb_file_system_name.Capacity) == 0)
+            if (GetVolumeInformation1(drive_letter, sb_volume_name, (UInt32)sb_volume_name.Capacity, ref serial_number, ref max_component_length, ref file_system_flags, sb_file_system_name, (UInt32)sb_file_system_name.Capacity) == 0)
             {
                 richTextBox1.Text += "無法取得磁碟資訊\n";
             }
@@ -521,7 +523,7 @@ namespace vcs_DriveInfo1
 
                 DriveInfo drive = new DriveInfo(di.Root.ToString());
 
-                if (drive.IsReady == true)
+                if (drive.IsReady == true)  // 使用IsReady屬性判斷裝置是否就緒
                 {
                     richTextBox1.Text += "磁碟 : " + drive.ToString() + "\n";
                     richTextBox1.Text += "標籤 : " + drive.VolumeLabel + "\n";
@@ -562,7 +564,7 @@ namespace vcs_DriveInfo1
 
             //DriveInfo drive = new DriveInfo(comboBox_drive.Text); //same
             DriveInfo drive = new DriveInfo(comboBox_drive.SelectedItem.ToString());
-            if (drive.IsReady == true)
+            if (drive.IsReady == true)  // 使用IsReady屬性判斷裝置是否就緒
             {
                 richTextBox1.Text += "  檔案系統名稱 : " + drive.DriveFormat + "\n";
                 richTextBox1.Text += "  目前可用空間量: \t{0, 15} bytes" + drive.AvailableFreeSpace + "\n";
@@ -637,7 +639,7 @@ namespace vcs_DriveInfo1
         //------------------------------------------------------------  # 60個
 
         [DllImport("kernel32.dll")]
-        private static extern long GetVolumeInformation(
+        private static extern long GetVolumeInformation1(
             string PathName,
             StringBuilder VolumeNameBuffer,
             UInt32 VolumeNameSize,
@@ -649,7 +651,7 @@ namespace vcs_DriveInfo1
         );
 
         [DllImport("kernel32.dll")]
-        private static extern int GetVolumeInformation(
+        private static extern int GetVolumeInformation1(
             string lpRootPathName,
             string lpVolumeNameBuffer,
             int nVolumeNameSize,
@@ -669,7 +671,7 @@ namespace vcs_DriveInfo1
             string str1 = null;
             string str2 = null;
 
-            int i = GetVolumeInformation(
+            int i = GetVolumeInformation1(
             drvID + @":\",
             str1,
             MAX_FILENAME_LEN,
@@ -683,8 +685,172 @@ namespace vcs_DriveInfo1
             return retVal.ToString("x");
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button10_Click(object sender, EventArgs e)
         {
+            //getDiskID
+            //通过GetVolumeInformation2获取
+            var diskID = getDiskID();
+
+            richTextBox1.Text += "取得 : " + diskID + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //获取进程所在盘符序列号
+
+            CmdResult result;
+            result = CmdExecute(new string[] { "vol" });
+            richTextBox1.Text += "取得 : " + result.OutputData + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //获取c盘序列号
+            result = CmdExecute(new string[] { "c:", "vol" });
+            richTextBox1.Text += "取得 : " + result.OutputData + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //获取d盘序列号
+            result = CmdExecute(new string[] { "d:", "vol" });
+            richTextBox1.Text += "取得 : " + result.OutputData + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+        }
+
+        /// <summary>
+        /// GetVolumeInformation2
+        /// </summary>
+        /// <param name="lpRootPathName">欲获取信息的那个卷的根路径</param>
+        /// <param name="lpVolumeNameBuffer">用于装载卷名（卷标）的一个字串 </param>
+        /// <param name="nVolumeNameSize">lpVolumeNameBuffer字串的长度</param>
+        /// <param name="lpVolumeSerialNumber">用于装载磁盘卷序列号的变量</param>
+        /// <param name="lpMaximumComponentLength">指定一个变量，用于装载文件名每一部分的长度。例如，在“c:\component1\component2.ext”的情况下，它就代表component1或component2名称的长度 .</param>
+        /// <param name="lpFileSystemFlags">用于装载一个或多个二进制位标志的变量。对这些标志位的解释如下：
+        /// FS_CASE_IS_PRESERVED 文件名的大小写记录于文件系统
+        /// FS_CASE_SENSITIVE 文件名要区分大小写
+        /// FS_UNICODE_STORED_ON_DISK 文件名保存为Unicode格式
+        /// FS_PERSISTANT_ACLS 文件系统支持文件的访问控制列表（ACL）安全机制
+        /// FS_FILE_COMPRESSION 文件系统支持逐文件的进行文件压缩
+        /// FS_VOL_IS_COMPRESSED 整个磁盘卷都是压缩的
+        ///</param>
+        /// <param name="lpFileSystemNameBuffer">指定一个缓冲区,用于装载文件系统的名称（如FAT，NTFS以及其他）       </param>
+        /// <param name="nFileSystemNameSize">lpFileSystemNameBuffer字串的长度</param>
+        /// <returns></returns>
+        [DllImport("Kernel32.dll", CharSet = CharSet.Auto)]
+        public static extern bool GetVolumeInformation2(string lpRootPathName, string lpVolumeNameBuffer, int nVolumeNameSize, ref int lpVolumeSerialNumber, int lpMaximumComponentLength, int lpFileSystemFlags, string lpFileSystemNameBuffer, int nFileSystemNameSize);
+        /// <summary>
+        /// 获取硬盘ID
+        /// </summary>
+        /// <returns></returns>
+        public string getDiskID()
+        {
+
+            const int MAX_FILENAME_LEN = 256;
+            int retVal = 0;
+            int a = 0;
+            int b = 0;
+            string str1 = null;
+            string str2 = null;
+
+
+            GetVolumeInformation2(
+                @"D:\",
+                str1,
+                MAX_FILENAME_LEN,
+                ref retVal,
+                a,
+                b,
+                str2,
+                MAX_FILENAME_LEN);
+
+            return Convert.ToString(retVal, 16).ToUpper();
+
+        }
+        /// <summary>
+        /// 执行DOS命令
+        /// </summary>
+        /// <param name="commands">顺序执行命令列表</param>
+        /// <param name="timeoutSecond">等待命令执行的时间（单位：秒），如果设定为0，则无限等待</param>
+        /// <returns></returns>
+        static CmdResult CmdExecute(string[] commands, int timeoutSecond = 0)
+        {
+            var output = new StringBuilder();
+            var error = new StringBuilder();
+            if (commands != null)
+            {
+                try
+                {
+                    using (var process = new Process())
+                    {
+                        var startInfo = new ProcessStartInfo();
+                        startInfo.FileName = "cmd.exe";
+                        //设定需要执行的命令
+                        startInfo.UseShellExecute = false;
+                        //不使用系统外壳程序启动
+                        startInfo.RedirectStandardInput = true;
+                        //重定向输入
+                        startInfo.RedirectStandardOutput = true;
+                        var filter = new Regex(@"^(Microsoft Windows|版权所有|(\(c\) \d{4} Microsoft Corporation)|([a-zA-Z]:(\\[^\\]*)+)\>)", RegexOptions.IgnoreCase | RegexOptions.ExplicitCapture);
+                        process.OutputDataReceived += (object s, DataReceivedEventArgs e) =>
+                        {
+                            if (e.Data == null || filter.IsMatch(e.Data)) return;
+                            output.Append(e.Data);
+                        };
+                        startInfo.RedirectStandardError = true;
+                        process.ErrorDataReceived += (object s, DataReceivedEventArgs e) =>
+                        {
+                            if (e.Data == null) return;
+                            error.Append(e.Data);
+                        };
+                        //重定向输出
+                        startInfo.CreateNoWindow = true;
+                        //不创建窗口
+                        process.StartInfo = startInfo;
+                        if (process.Start())
+                        {
+                            process.BeginOutputReadLine();
+                            process.BeginErrorReadLine();
+                            foreach (var command in commands)
+                            {
+                                process.StandardInput.WriteLine(command);
+                            }
+                            process.StandardInput.WriteLine("exit");
+                            if (timeoutSecond == 0)
+                            {
+                                process.WaitForExit();
+                            }
+                            else
+                            {
+                                process.WaitForExit(timeoutSecond);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    error.Append(ex.ToString());
+                }
+            }
+            return new CmdResult()
+            {
+                OutputData = output.ToString(),
+                ErrorData = error.ToString()
+            };
+        }
+        /// <summary>
+        /// cmd执行结果
+        /// </summary>
+        class CmdResult
+        {
+            /// <summary>
+            /// 程序正常输出
+            /// </summary>
+            public string OutputData { get; set; }
+            /// <summary>
+            /// 异常输出
+            /// </summary>
+            public string ErrorData { get; set; }
         }
 
         //------------------------------------------------------------  # 60個
@@ -749,7 +915,7 @@ namespace vcs_DriveInfo1
             g.Clear(Color.White);
 
             DriveInfo drive = new DriveInfo(drive_name);  // 实例化DriveInfo
-            if (drive.IsReady == true)
+            if (drive.IsReady == true)  // 使用IsReady屬性判斷裝置是否就緒
             {
                 float tsize = drive.TotalSize;  // 获得磁盘的总容量
                 float fsize = drive.TotalFreeSpace;  // 获取剩余容量

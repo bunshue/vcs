@@ -211,7 +211,7 @@ namespace vcs_SendTo_All
                 filenames.Add(System.Environment.GetCommandLineArgs()[i]);
             }
 
-            filenames.Sort();
+            filenames.Sort();  // 排序
 
             fileinfos.Clear();
             total_size = 0;
@@ -539,7 +539,7 @@ namespace vcs_SendTo_All
 
             // 找資料夾, 一層
             string[] dirs = Directory.GetDirectories(foldername);  // 取得指定目錄中子目錄的名稱, 一層
-            //Array.Sort(dirs);
+            //Array.Sort(dirs);  // 排序
             foreach (string dir in dirs)
             {
                 //richTextBox1.Text += "資料夾 : " + dir + "\n";
@@ -557,7 +557,7 @@ namespace vcs_SendTo_All
 
             // 找檔案, 一層
             string[] filenames = Directory.GetFiles(foldername);  // 取得指定目錄中檔案的名稱
-            Array.Sort(filenames);
+            Array.Sort(filenames);  // 排序
 
             int files_in_folders = 0;
             string message = string.Empty;

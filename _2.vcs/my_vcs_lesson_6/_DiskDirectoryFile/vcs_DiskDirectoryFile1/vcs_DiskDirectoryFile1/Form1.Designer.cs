@@ -401,6 +401,7 @@
             this.bt_files10.Name = "bt_files10";
             this.bt_files10.Size = new System.Drawing.Size(200, 60);
             this.bt_files10.TabIndex = 38;
+            this.bt_files10.Text = "MediaInfo";
             this.bt_files10.UseVisualStyleBackColor = true;
             this.bt_files10.Click += new System.EventHandler(this.bt_files10_Click);
             // 

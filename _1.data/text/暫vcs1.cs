@@ -7744,5 +7744,15 @@ this.Bounds = Screen.PrimaryScreen.Bounds;
 
 //------------------------------------------------------------  # 60個
 
+命名空間衝突
 
+使用 using 別名
+在程式檔案最上方加上別名宣告：
+using IOFile = System.IO.File;
+using MediaFile = MediaInfoNET.File;
+使用 :
+IOFile.ReadAllText("test.txt");   // 預設用 System.IO.File
+MediaFile mf = new MediaFile("movie.mkv"); // 需要時才用 MediaInfoNET.File
+
+//------------------------------------------------------------  # 60個
 
