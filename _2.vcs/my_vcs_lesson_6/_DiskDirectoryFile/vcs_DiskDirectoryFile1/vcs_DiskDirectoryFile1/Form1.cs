@@ -37,6 +37,104 @@ namespace vcs_DiskDirectoryFile1
         string foldername = @"D:\_git\vcs\_1.data\______test_files1\";
         int ProcessFile_mode = 0;  // 0:預設只匯出檔名
 
+        const Int64 TB = (Int64)GB * 1024;//定義TB的計算常量
+        const int GB = 1024 * 1024 * 1024;//定義GB的計算常量
+        const int MB = 1024 * 1024;//定義MB的計算常量
+        const int KB = 1024;//定義KB的計算常量
+        public string ByteConversionTBGBMBKB(Int64 size)
+        {
+            if (size < 0)
+                return "不合法的數值";
+            else if (size / TB >= 1024)//如果目前Byte的值大於等於1024TB
+                return "無法表示";
+            else if (size / TB >= 1)//如果目前Byte的值大於等於1TB
+                return (Math.Round(size / (float)TB, 2)).ToString() + " TB";//將其轉換成TB
+            else if (size / GB >= 1)//如果目前Byte的值大於等於1GB
+                return (Math.Round(size / (float)GB, 2)).ToString() + " GB";//將其轉換成GB
+            else if (size / MB >= 1)//如果目前Byte的值大於等於1MB
+                return (Math.Round(size / (float)MB, 2)).ToString() + " MB";//將其轉換成MB
+            else if (size / KB >= 1)//如果目前Byte的值大於等於1KB
+                return (Math.Round(size / (float)KB, 2)).ToString() + " KB";//將其轉換成KB
+            else
+                return size.ToString() + " Byte";//顯示Byte值
+        }
+
+        public class MyFileInfo
+        {
+            public string filename;
+            public string fullfilename;
+            public string shortfilename;
+            public string filepath;
+            public string fileextension;
+            public long filesize;
+            public DateTime filecreationtime;
+
+            public int video_width;
+            public int video_height;
+            public int video_fps;
+            public string video_duration;
+
+            public MyFileInfo(string n, string p, string e, long s, DateTime c)
+            {
+                this.filename = n;
+                this.filepath = p;
+                this.fileextension = e;
+                this.filesize = s;
+                this.filecreationtime = c;
+            }
+
+            public MyFileInfo(string n, string fn, string sn, string p, string e, long s, DateTime c)
+            {
+                this.filename = n;
+                this.fullfilename = fn;
+                this.shortfilename = sn;
+                this.filepath = p;
+                this.fileextension = e;
+                this.filesize = s;
+                this.filecreationtime = c;
+            }
+
+            public MyFileInfo(string n, string p, string e, long s, DateTime c, int w, int h, int f, string d)
+            {
+                this.filename = n;
+                this.filepath = p;
+                this.fileextension = e;
+                this.filesize = s;
+                this.filecreationtime = c;
+
+                this.video_width = w;
+                this.video_height = h;
+                this.video_fps = f;
+                this.video_duration = d;
+            }
+        }
+
+        public class MyFolderInfo
+        {
+            public string foldername;
+            public string folderpath;
+            public long foldersize;
+            public DateTime foldercreationtime;
+            public MyFolderInfo(string n, string p, long s, DateTime c)
+            {
+                this.foldername = n;
+                this.folderpath = p;
+                this.foldersize = s;
+                this.foldercreationtime = c;
+            }
+        }
+
+        //不用宣告長度的陣列(Array)
+        // 宣告fileinfos 為List
+        // 以下List 裡為MyFileInfo 型態
+        List<MyFileInfo> fileinfos = new List<MyFileInfo>();
+        List<MyFolderInfo> folderinfos = new List<MyFolderInfo>();
+
+        Int64 total_size = 0;
+        Int64 total_files = 0;
+        Int64 folder_files = 0;
+        string text = string.Empty;
+
         public Form1()
         {
             InitializeComponent();
@@ -57,6 +155,22 @@ namespace vcs_DiskDirectoryFile1
             listView1.Columns.Add("大小", 80, HorizontalAlignment.Left);
             listView1.Columns.Add("格式", 120, HorizontalAlignment.Left);
             listView1.Columns.Add("資料夾", 400, HorizontalAlignment.Left);
+
+            //------------------------------------------------------------  # 60個
+
+            tb_foldername.Text = Properties.Settings.Default.doc_foldername;
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (tb_foldername.Text != "")
+            {
+                if (Directory.Exists(tb_foldername.Text) == true)
+                {
+                    Properties.Settings.Default.doc_foldername = tb_foldername.Text;
+                    Properties.Settings.Default.Save();
+                }
+            }
         }
 
         void show_item_location()
@@ -114,9 +228,11 @@ namespace vcs_DiskDirectoryFile1
             bt_files18.Location = new Point(x_st + dx * 3, y_st + dy * 8);
             bt_files19.Location = new Point(x_st + dx * 3, y_st + dy * 9);
 
-            tb_foldername.Size = new Size(690, 100);
+            tb_foldername.Size = new Size(600, 100);
             tb_foldername.Location = new Point(x_st + dx * 4, y_st + dy * 0 - 24);
-            bt_delete_file.Location = new Point(x_st + dx * 4 + 800 - 100, y_st + dy * 0 - 20 - 10);
+            bt_open_dir.Location = new Point(x_st + dx * 4 + 800 - 200, y_st + dy * 0 - 20 - 10);
+            bt_setup.Location = new Point(x_st + dx * 4 + 800 - 100, y_st + dy * 0 - 20 - 10);
+            bt_delete_file.Location = new Point(x_st + dx * 4 + 800 - 150, y_st + dy * 0 - 20 - 10);
             bt_start_files.Location = new Point(x_st + dx * 4 + 800 - 50, y_st + dy * 0 - 20 - 10);
 
             listView1.Size = new Size(800, 270 - 20);
@@ -1189,113 +1305,7 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_dir08_Click(object sender, EventArgs e)
         {
-        }
-
-        //------------------------------------------------------------  # 60個
-        //------------------------------------------------------------  # 60個
-
-        const Int64 TB = (Int64)GB * 1024;//定義TB的計算常量
-        const int GB = 1024 * 1024 * 1024;//定義GB的計算常量
-        const int MB = 1024 * 1024;//定義MB的計算常量
-        const int KB = 1024;//定義KB的計算常量
-        public string ByteConversionTBGBMBKB(Int64 size)
-        {
-            if (size < 0)
-                return "不合法的數值";
-            else if (size / TB >= 1024)//如果目前Byte的值大於等於1024TB
-                return "無法表示";
-            else if (size / TB >= 1)//如果目前Byte的值大於等於1TB
-                return (Math.Round(size / (float)TB, 2)).ToString() + " TB";//將其轉換成TB
-            else if (size / GB >= 1)//如果目前Byte的值大於等於1GB
-                return (Math.Round(size / (float)GB, 2)).ToString() + " GB";//將其轉換成GB
-            else if (size / MB >= 1)//如果目前Byte的值大於等於1MB
-                return (Math.Round(size / (float)MB, 2)).ToString() + " MB";//將其轉換成MB
-            else if (size / KB >= 1)//如果目前Byte的值大於等於1KB
-                return (Math.Round(size / (float)KB, 2)).ToString() + " KB";//將其轉換成KB
-            else
-                return size.ToString() + " Byte";//顯示Byte值
-        }
-
-        public class MyFileInfo
-        {
-            public string filename;
-            public string fullfilename;
-            public string shortfilename;
-            public string filepath;
-            public string fileextension;
-            public long filesize;
-            public DateTime filecreationtime;
-
-            public int video_width;
-            public int video_height;
-            public int video_fps;
-            public string video_duration;
-
-            public MyFileInfo(string n, string p, string e, long s, DateTime c)
-            {
-                this.filename = n;
-                this.filepath = p;
-                this.fileextension = e;
-                this.filesize = s;
-                this.filecreationtime = c;
-            }
-
-            public MyFileInfo(string n, string fn, string sn, string p, string e, long s, DateTime c)
-            {
-                this.filename = n;
-                this.fullfilename = fn;
-                this.shortfilename = sn;
-                this.filepath = p;
-                this.fileextension = e;
-                this.filesize = s;
-                this.filecreationtime = c;
-            }
-
-            public MyFileInfo(string n, string p, string e, long s, DateTime c, int w, int h, int f, string d)
-            {
-                this.filename = n;
-                this.filepath = p;
-                this.fileextension = e;
-                this.filesize = s;
-                this.filecreationtime = c;
-
-                this.video_width = w;
-                this.video_height = h;
-                this.video_fps = f;
-                this.video_duration = d;
-            }
-        }
-
-        public class MyFolderInfo
-        {
-            public string foldername;
-            public string folderpath;
-            public long foldersize;
-            public DateTime foldercreationtime;
-            public MyFolderInfo(string n, string p, long s, DateTime c)
-            {
-                this.foldername = n;
-                this.folderpath = p;
-                this.foldersize = s;
-                this.foldercreationtime = c;
-            }
-        }
-
-        //不用宣告長度的陣列(Array)
-        // 宣告fileinfos 為List
-        // 以下List 裡為MyFileInfo 型態
-        List<MyFileInfo> fileinfos = new List<MyFileInfo>();
-        List<MyFolderInfo> folderinfos = new List<MyFolderInfo>();
-
-        Int64 total_size = 0;
-        Int64 total_files = 0;
-        Int64 folder_files = 0;
-        string text = string.Empty;
-
-        private void bt_dir09_Click(object sender, EventArgs e)
-        {
-            //轉出
-
+            //我的轉出
             string foldername = @"D:\_git\vcs\_1.data\______test_files3";
             foldername = @"D:\vcs\astro\_DATA2\_________整理_mp3\_mp3_台語\_陳一郎\";
             //string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic";
@@ -1305,7 +1315,6 @@ namespace vcs_DiskDirectoryFile1
 
             // 匯出多層
 
-            richTextBox1.Text += "方法1, 以此為準\n";
             ProcessFile_mode = 0;  // 0:預設只匯出檔名
             ProcessFile_mode = 1;  // 1:只看大檔
             ProcessFile_mode = 2;  // 2:顯示至 ListView
@@ -1314,9 +1323,25 @@ namespace vcs_DiskDirectoryFile1
             ProcessFile_mode = 5;  // 5:找特定檔案
             ProcessFile_mode = 6;  // 6:指定附檔名檔案
             ProcessFile_mode = 7;  // 7:只找資料夾 for 圖片整理
-            ProcessFile_mode = 8;  // 8:搜尋小影片檔<720, 特大影片檔>1080
+            ProcessFile_mode = 8;  // 8:搜尋影片檔, 搜尋小影片檔<720, 特大影片檔>1080
+            ProcessFile_mode = 9;  // 9:匯出Katfile壓縮檔檔案資料
 
-            ProcessFile_mode = 2;
+            ProcessFile_mode = 9;
+
+            if (ProcessFile_mode == 9)
+            {
+                string doc_foldername = Properties.Settings.Default.doc_foldername;
+                doc_foldername = @"D:\__download";
+                doc_foldername = @"D:\_git\vcs\_1.data\______test_files3";
+
+                foldername = Application.StartupPath;
+                if (Directory.Exists(doc_foldername) == true)     //確認資料夾是否存在
+                {
+                    foldername = doc_foldername;
+                }
+                this.Text = "匯出一層 資料夾 + 檔案名 : " + foldername;
+            }
+
             total_size = 0;
             total_files = 0;
             text = string.Empty;
@@ -1325,6 +1350,14 @@ namespace vcs_DiskDirectoryFile1
             ProcessDirectory(foldername);
 
             richTextBox1.Text += text + "\n";
+
+            if (total_files > 0)
+            {
+                richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+                richTextBox1.Text += "檔案個數 : " + total_files.ToString();
+                richTextBox1.Text += ", 大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
+                richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+            }
 
             richTextBox1.Text += "檔案 : " + total_files.ToString() + " 個\n";
             richTextBox1.Text += "大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "(" + total_size.ToString() + "位元組)\n";
@@ -1336,14 +1369,32 @@ namespace vcs_DiskDirectoryFile1
             else
                 richTextBox1.Text += "找到 " + len.ToString() + " 筆資料\n";
 
-            show_file_info6();
+            //show_file_info6();
 
             return;
+
+        }
+
+        //------------------------------------------------------------  # 60個
+        //------------------------------------------------------------  # 60個
+
+        private void bt_dir09_Click(object sender, EventArgs e)
+        {
+            //轉出
+            string foldername = @"D:\_git\vcs\_1.data\______test_files3";
+
+            richTextBox1.Text += "方法1, 以此為準\n";
+            text = string.Empty;
+            ProcessFile_mode = 0;
+            ProcessDirectory(foldername);
+            richTextBox1.Text += text + "\n";
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             richTextBox1.Text += "方法2\n";
             ProcessDirectoryInfo(foldername);
+
+            return;
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -1409,8 +1460,12 @@ namespace vcs_DiskDirectoryFile1
 
                 listView1.Items.Add(i1);
             }
-            //設置ListView最後一行可見
-            listView1.Items[listView1.Items.Count - 1].EnsureVisible();
+
+            if (listView1.Items.Count > 0)
+            {
+                //設置ListView最後一行可見
+                listView1.Items[listView1.Items.Count - 1].EnsureVisible();
+            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -2522,6 +2577,26 @@ namespace vcs_DiskDirectoryFile1
             }
         }
 
+        private void bt_setup_Click(object sender, EventArgs e)
+        {
+            Form_Setup frm = new Form_Setup();    //實體化 Form_Setup 視窗物件
+            frm.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
+            frm.ShowDialog();   //顯示 frm 視窗
+        }
+
+        private void bt_open_dir_Click(object sender, EventArgs e)
+        {
+            //folderBrowserDialog1.SelectedPath = Application.StartupPath;    //預設開啟的路徑
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                tb_foldername.Text = folderBrowserDialog1.SelectedPath;
+            }
+            else
+            {
+                richTextBox1.Text = "未選取資料夾\n";
+            }
+        }
+
         //------------------------------------------------------------  # 60個
         //------------------------------------------------------------  # 60個
         //------------------------------------------------------------  # 60個
@@ -2640,23 +2715,13 @@ namespace vcs_DiskDirectoryFile1
 
         //------------------------------------------------------------  # 60個
 
+        int files_in_folders = 0;
+        string message = string.Empty;
         //以這個為標準, 使用 Directory.GetDirectories() 和 Directory.GetFiles()
         private void ProcessDirectory(string foldername)
         {
             //搜尋子目錄內的所有檔案   一層
             //使用 Directory.GetDirectories() 和 Directory.GetFiles()
-
-            DirectoryInfo dinfo = new DirectoryInfo(foldername);
-
-            text += "\n" + dinfo.Name + "\n";
-            // 找檔案, 一層
-            string[] filenames = Directory.GetFiles(foldername);  // 取得指定目錄中檔案的名稱
-            Array.Sort(filenames);  // 排序
-            foreach (string filename in filenames)
-            {
-                // 檔案
-                ProcessFile(filename);
-            }
 
             // 找資料夾, 一層
             string[] dirs = Directory.GetDirectories(foldername);  // 取得指定目錄中子目錄的名稱, 一層
@@ -2665,6 +2730,27 @@ namespace vcs_DiskDirectoryFile1
             {
                 // 資料夾
                 ProcessDirectory(dir);
+            }
+
+            DirectoryInfo dinfo = new DirectoryInfo(foldername);
+            text += "\n" + dinfo.Name + "\n";
+            // 找檔案, 一層
+            string[] filenames = Directory.GetFiles(foldername);  // 取得指定目錄中檔案的名稱
+            Array.Sort(filenames);  // 排序
+            message = string.Empty;
+            files_in_folders = 0;
+            foreach (string filename in filenames)
+            {
+                // 檔案
+                ProcessFile(filename);
+            }
+            if (files_in_folders > 0)
+            {
+                richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+                DirectoryInfo d = new DirectoryInfo(foldername);
+                richTextBox1.Text += "資料夾 : " + d.Name + "\n";
+                richTextBox1.Text += "------------------------------\n";  // 30個
+                richTextBox1.Text += message;
             }
         }
 
@@ -2705,6 +2791,27 @@ namespace vcs_DiskDirectoryFile1
                 string d = "123";
 
                 fileinfos.Add(new MyFileInfo(n, p, e, s, c, w, h, f, d));
+            }
+            else if (ProcessFile_mode == 9)  // 9:匯出Katfile壓縮檔檔案資料
+            {
+                if ((fi.Extension.ToLower() == ".rar") || (fi.Extension.ToLower() == ".zip"))
+                {
+                    //message += "資料夾：" + fi.Directory + "\n";
+
+                    message += "\t" + string.Format("{0,-30}{1,10}", fi.Name, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length))) + "\n";
+
+                    //message += fi.Name + "\n";
+                    //message += "副檔名：" + fi.Extension + "\n";
+                    //message += "檔案大小：" + fi.Length.ToString() + "\n";
+                    //message += "建立時間1：" + fi.CreationTime.ToString() + "\n";
+                    //message += "建立時間2：" + fi.CreationTimeUtc.ToString() + "\n";
+                    //message += "最近寫入時間：" + fi.LastWriteTime.ToString() + "\n";
+                    //message += "檔案: " + filename + "\n";
+                    //message += "------------------------------\n";  // 30個
+                    total_files++;
+                    total_size += fi.Length;
+                    files_in_folders++;
+                }
             }
         }
 

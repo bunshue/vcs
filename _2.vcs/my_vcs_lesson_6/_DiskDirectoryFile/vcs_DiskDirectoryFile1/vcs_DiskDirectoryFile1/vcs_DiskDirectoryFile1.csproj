@@ -96,6 +96,8 @@
   <ItemGroup>
     <None Include="img\delete.bmp" />
     <None Include="img\potplayer.png" />
+    <None Include="img\setup.png" />
+    <None Include="img\open_folder.png" />
     <Content Include="MediaInfo.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

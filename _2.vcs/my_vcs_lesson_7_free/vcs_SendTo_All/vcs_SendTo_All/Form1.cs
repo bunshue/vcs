@@ -36,7 +36,7 @@ namespace vcs_SendTo_All
         private const int MODE1 = 0x01;   //檢視檔案內容
         private const int MODE2 = 0x02;   //簡中轉正中
         private const int MODE3 = 0x03;   //計算檔案之MD5值
-        private const int MODE4 = 0x04;   //匯出一層  vcs_匯出一層.exe, 目前資料夾下
+        private const int MODE4 = 0x04;   // reserved
         private const int MODE5 = 0x05;   //grep 多層
         private const int MODE6 = 0x06;   //轉出檔案目錄資料 目錄下檔名轉出純文字 右鍵匯出資料夾內的檔案資料
 
@@ -113,7 +113,7 @@ namespace vcs_SendTo_All
             }
             else if (flag_operation_mode == MODE4)
             {
-                do_operation_mode4();
+
             }
             else if (flag_operation_mode == MODE6)
             {
@@ -335,14 +335,7 @@ namespace vcs_SendTo_All
 
         private void bt_refresh_Click(object sender, EventArgs e)
         {
-            if (flag_operation_mode == MODE4)
-            {
-                do_operation_mode4();
-            }
-            else
-            {
-                richTextBox1.Text += "你按了 refresh\n";
-            }
+            richTextBox1.Text += "你按了 refresh\n";
         }
 
         private void Form1_SizeChanged(object sender, EventArgs e)
@@ -358,109 +351,6 @@ namespace vcs_SendTo_All
 
         //------------------------------------------------------------  # 60個
 
-        void do_operation_mode4()
-        {
-            string doc_foldername = Properties.Settings.Default.doc_foldername;
-            /*
-            flag_search_mode = Properties.Settings.Default.flag_search_mode;
-            if (flag_search_mode == 1)
-            {
-                richTextBox1.Text += "一層\n";
-            }
-            else if (flag_search_mode == 2)
-            {
-                richTextBox1.Text += "僅檔案\n";
-            }
-            else
-            {
-                richTextBox1.Text += "多層\n";
-            }
-            */
-
-            string foldername = Application.StartupPath;
-            if (Directory.Exists(doc_foldername) == true)     //確認資料夾是否存在
-            {
-                foldername = doc_foldername;
-            }
-            this.Text = "匯出一層 資料夾 + 檔案名 : " + foldername;
-
-            total_size = 0;
-            total_files = 0;
-            ProcessDirectory(foldername);
-
-            if (total_files > 0)
-            {
-                richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-                richTextBox1.Text += "檔案個數 : " + total_files.ToString();
-                richTextBox1.Text += ", 大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
-                richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-            }
-        }
-
-        private void ProcessDirectory(string foldername)
-        {
-            //搜尋子目錄內的所有檔案   一層
-            //使用 Directory.GetDirectories() 和 Directory.GetFiles()
-
-            // 找資料夾, 一層
-            string[] dirs = Directory.GetDirectories(foldername);  // 取得指定目錄中子目錄的名稱, 一層
-            //Array.Sort(dirs);  // 排序
-            foreach (string dir in dirs)
-            {
-                //richTextBox1.Text += "資料夾 : " + dir + "\n";
-                //DirectoryInfo d = new DirectoryInfo(dir);
-                //richTextBox1.Text += "資料夾 : " + d.Name + "\n";
-                //richTextBox1.Text += "Name : " + d.Name + "\n";
-                //richTextBox1.Text += "FullName : " + d.FullName + "\n";
-                //richTextBox1.Text += "Parent : " + d.Parent + "\n";
-                //richTextBox1.Text += "Root : " + d.Root + "\n";
-                //richTextBox1.Text += "------------------------------\n";  // 30個
-
-                // 資料夾
-                ProcessDirectory(dir);
-            }
-
-            // 找檔案, 一層
-            string[] filenames = Directory.GetFiles(foldername);  // 取得指定目錄中檔案的名稱
-            Array.Sort(filenames);  // 排序
-
-            int files_in_folders = 0;
-            string message = string.Empty;
-            foreach (string filename in filenames)
-            {
-                // 檔案
-                //ProcessFile(filename);
-
-                FileInfo fi = new FileInfo(filename);
-                if ((fi.Extension.ToLower() == ".rar") || (fi.Extension.ToLower() == ".zip"))
-                {
-                    //message += "資料夾：" + fi.Directory + "\n";
-
-                    message += "\t" + string.Format("{0,-30}{1,10}", fi.Name, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length))) + "\n";
-
-                    //message += fi.Name + "\n";
-                    //message += "副檔名：" + fi.Extension + "\n";
-                    //message += "檔案大小：" + fi.Length.ToString() + "\n";
-                    //message += "建立時間1：" + fi.CreationTime.ToString() + "\n";
-                    //message += "建立時間2：" + fi.CreationTimeUtc.ToString() + "\n";
-                    //message += "最近寫入時間：" + fi.LastWriteTime.ToString() + "\n";
-                    //message += "檔案: " + filename + "\n";
-                    //message += "------------------------------\n";  // 30個
-                    total_files++;
-                    total_size += fi.Length;
-                    files_in_folders++;
-                }
-            }
-            if (files_in_folders > 0)
-            {
-                richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-                DirectoryInfo d = new DirectoryInfo(foldername);
-                richTextBox1.Text += "資料夾 : " + d.Name + "\n";
-                richTextBox1.Text += "------------------------------\n";  // 30個
-                richTextBox1.Text += message;
-            }
-        }
-        //------------------------------------------------------------  # 60個
     }
 }
 
