@@ -33,9 +33,10 @@ namespace vcs_DiskDirectoryFile1
 {
     public partial class Form1 : Form
     {
+        bool flag_my_file_manager = false;
+
         string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
         string foldername = @"D:\_git\vcs\_1.data\______test_files1\";
-
         string doc_foldername = string.Empty;
         string video_foldername = string.Empty;
         string video_player_path = String.Empty;
@@ -153,7 +154,14 @@ namespace vcs_DiskDirectoryFile1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            show_item_location();
+            if (flag_my_file_manager == true)
+            {
+                show_item_location_my_file_manager();
+            }
+            else
+            {
+                show_item_location();
+            }
 
             //------------------------------------------------------------  # 60個
 
@@ -249,24 +257,109 @@ namespace vcs_DiskDirectoryFile1
             bt_files08.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             bt_files09.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
+            groupBox1.Size = new Size(808, 100);
+            groupBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0 - 36);
+            int xx = 4;
+            int yy = 40;
             bt_open_dir1.Size = new Size(45, 45);
             bt_open_dir2.Size = new Size(45, 45);
-            bt_open_dir1.Location = new Point(x_st + dx * 3, y_st + dy * 0 - 20 - 10);
-            bt_open_dir2.Location = new Point(x_st + dx * 3, y_st + dy * 0 - 20 - 10 + 45);
+            bt_open_dir1.Location = new Point(xx, yy - 20 - 10);
+            bt_open_dir2.Location = new Point(xx, yy - 20 - 10 + 45);
             tb_foldername1.Size = new Size(600, 100);
-            tb_foldername1.Location = new Point(x_st + dx * 3+45, y_st + dy * 0 - 24);
+            tb_foldername1.Location = new Point(xx + 45, yy - 24);
             tb_foldername2.Size = new Size(600, 100);
-            tb_foldername2.Location = new Point(x_st + dx * 3 + 45, y_st + dy * 0 - 24 + 45);
-
-            bt_setup.Location = new Point(x_st + dx * 3 + 800 - 100, y_st + dy * 0 - 20 - 10);
-            bt_delete_file.Location = new Point(x_st + dx * 3 + 800 - 150, y_st + dy * 0 - 20 - 10);
-            bt_start_files.Location = new Point(x_st + dx * 3 + 800 - 50, y_st + dy * 0 - 20 - 10);
+            tb_foldername2.Location = new Point(xx + 45, yy - 24 + 45);
+            bt_setup.Location = new Point(xx + 800 - 100, yy - 20 - 10);
+            bt_delete_file.Location = new Point(xx + 800 - 150, yy - 20 - 10);
+            bt_start_files.Location = new Point(xx + 800 - 50, yy - 20 - 10);
+            cb_search.Location = new Point(xx + 800 - 150, yy - 24 + 45);
+            tb_search.Size = new Size(150 - 16, 100);
+            tb_search.Location = new Point(xx + 800 - 150 + 16, yy - 24 + 45);
 
             listView1.Size = new Size(1100, 270 - 65);
             listView1.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 65);
 
             richTextBox1.Size = new Size(1100, 410);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            //針對某控件的邊緣 設定表單大小
+            this.ClientSize = new Size(richTextBox1.Right + 10, richTextBox1.Bottom + 10);
+
+            this.Text = "vcs_DiskDirectoryFile1";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        void show_item_location_my_file_manager()
+        {
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+
+            bt_dir08.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+
+            label0.Visible = false;
+            label1.Visible = false;
+            label2.Visible = false;
+            bt_file00.Visible = false;
+            bt_file01.Visible = false;
+            bt_file02.Visible = false;
+            bt_file03.Visible = false;
+            bt_file04.Visible = false;
+            bt_file05.Visible = false;
+            bt_file06.Visible = false;
+            bt_file07.Visible = false;
+            bt_file08.Visible = false;
+            bt_file09.Visible = false;
+            bt_dir00.Visible = false;
+            bt_dir01.Visible = false;
+            bt_dir02.Visible = false;
+            bt_dir03.Visible = false;
+            bt_dir04.Visible = false;
+            bt_dir05.Visible = false;
+            bt_dir06.Visible = false;
+            bt_dir07.Visible = false;
+            bt_dir09.Visible = false;
+            bt_files00.Visible = false;
+            bt_files01.Visible = false;
+            bt_files02.Visible = false;
+            bt_files03.Visible = false;
+            bt_files04.Visible = false;
+            bt_files05.Visible = false;
+            bt_files06.Visible = false;
+            bt_files07.Visible = false;
+            bt_files08.Visible = false;
+            bt_files09.Visible = false;
+
+            groupBox1.Size = new Size(808, 100);
+            groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0 - 16);
+            int xx = 4;
+            int yy = 40;
+            bt_open_dir1.Size = new Size(45, 45);
+            bt_open_dir2.Size = new Size(45, 45);
+            bt_open_dir1.Location = new Point(xx, yy - 20 - 10);
+            bt_open_dir2.Location = new Point(xx, yy - 20 - 10 + 45);
+            tb_foldername1.Size = new Size(600, 100);
+            tb_foldername1.Location = new Point(xx + 45, yy - 24);
+            tb_foldername2.Size = new Size(600, 100);
+            tb_foldername2.Location = new Point(xx + 45, yy - 24 + 45);
+            bt_setup.Location = new Point(xx + 800 - 100, yy - 20 - 10);
+            bt_delete_file.Location = new Point(xx + 800 - 150, yy - 20 - 10);
+            bt_start_files.Location = new Point(xx + 800 - 50, yy - 20 - 10);
+            cb_search.Location = new Point(xx + 800 - 150, yy - 24 + 45);
+            tb_search.Size = new Size(150 - 16, 100);
+            tb_search.Location = new Point(xx + 800 - 150 + 16, yy - 24 + 45);
+
+            listView1.Size = new Size(1300, 270 - 65 + 10);
+            listView1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 95);
+
+            richTextBox1.Size = new Size(1300, 410);
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 4 + 40);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //針對某控件的邊緣 設定表單大小
@@ -1402,7 +1495,6 @@ namespace vcs_DiskDirectoryFile1
             richTextBox1.Text += "大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "(" + total_size.ToString() + "位元組)\n";
             //richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
 
-
             if (ProcessFile_mode == PROCESS_FILE_MODE8)  // 8:搜尋影片檔, 搜尋小影片檔<720, 特大影片檔>1080
             {
                 int len = fileinfos.Count;
@@ -2399,7 +2491,7 @@ namespace vcs_DiskDirectoryFile1
 
         private void listView1_MouseClick(object sender, MouseEventArgs e)
         {
-            return;
+            /*
             int idx = listView1.SelectedIndices[0];
             richTextBox1.Text += "檔名:\t" + listView1.Items[idx].Text + "\n";
             richTextBox1.Text += "大小:\t" + listView1.Items[idx].SubItems[1].Text + "\n";
@@ -2407,6 +2499,8 @@ namespace vcs_DiskDirectoryFile1
             richTextBox1.Text += "資料夾:\t" + listView1.Items[idx].SubItems[3].Text + "\n";
             string fullname = listView1.Items[idx].SubItems[3].Text + "\\" + listView1.Items[idx].Text;
             richTextBox1.Text += "完整路徑:\t" + fullname + "\n";
+            */
+            return;
         }
 
         private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -2421,7 +2515,11 @@ namespace vcs_DiskDirectoryFile1
 
             if (File.Exists(fullname) == true)
             {
-                //播放之
+                play_video_files(fullname);
+            }
+            else
+            {
+                richTextBox1.Text += "檔案 : " + fullname + " , 不存在\n";
             }
         }
 
@@ -2461,48 +2559,7 @@ namespace vcs_DiskDirectoryFile1
                 listView1.Items[idx].Selected = true;    //選到的項目
                 all_filename += " \"" + listView1.Items[idx].SubItems[3].Text + "\\" + listView1.Items[idx].Text + "\"";
             }
-
-            richTextBox1.Text += "全部 : " + all_filename + "\n";
-
-            //指定應用程式路徑
-            string target = String.Empty;
-
-            //方法一
-            //Process.Start(target, "參數");
-            //Process.Start(target, all_filename);
-
-            //方法二
-
-            video_player_path = @"";
-            target = video_player_path;
-
-            ProcessStartInfo pInfo = new ProcessStartInfo(target);
-            pInfo.Arguments = all_filename;
-
-            /*
-            // debug mesg
-            richTextBox1.Text += "target : " + target + "\n";
-            richTextBox1.Text += "all_filename : " + all_filename + "\n";
-            */
-
-            if (video_player_path == String.Empty)
-            {
-                all_filename = all_filename.Trim().Replace("\"", "");
-                Process.Start(all_filename); //使用預設程式開啟, 無法一次播放多個檔案
-            }
-            else
-            {
-                Process.Start(video_player_path, all_filename);    //指名播放程式開啟
-            }
-
-            /*
-            using (Process process = new Process())
-            {
-                process.StartInfo = pInfo;
-                process.Start();
-            }
-            */
-
+            play_video_files(all_filename);
         }
 
         private void bt_delete_file_Click(object sender, EventArgs e)
@@ -2699,6 +2756,14 @@ namespace vcs_DiskDirectoryFile1
         {
             FileInfo fi = new FileInfo(filename);
 
+            if (cb_search.Checked == true)
+            {
+                if (fi.Name.Contains(tb_search.Text) == false)
+                {
+                    return;
+                }
+            }
+
             if (ProcessFile_mode == PROCESS_FILE_MODE0)  // 0:預設只匯出檔名
             {
                 //text += fi.Name + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
@@ -2733,19 +2798,19 @@ namespace vcs_DiskDirectoryFile1
                 {
                     if (f.Video.Count > 0)
                     {
-                        //短檔名    大小  格式       資料夾
-                        //xxxx.mp4  4.8GB 1920X1080  AAAA/BBB/CCC
-                        richTextBox1.Text += "影片名稱: " + fi.Name + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
-                        richTextBox1.Text += "影片長度: " + f.General.DurationString + "\n";
-                        richTextBox1.Text += "影片長度: " + f.General.DurationMillis + " 毫秒\n";
-                        richTextBox1.Text += "FrameCount: " + f.FrameCount.ToString() + "\n";
-                        int fps = (int)f.Video[0].FrameRate;
-                        richTextBox1.Text += "FPS: " + fps.ToString() + "\n";
-                        richTextBox1.Text += "time : " + ((int)(f.FrameCount / f.Video[0].FrameRate)).ToString() + " 秒\n";
-
                         int w = f.Video[0].Width;
                         int h = f.Video[0].Height;
-                        richTextBox1.Text += "輸入大小: " + w.ToString() + " × " + h.ToString() + "\n";
+                        int fps = (int)f.Video[0].FrameRate;
+
+                        //短檔名    大小  格式       資料夾
+                        //xxxx.mp4  4.8GB 1920X1080  AAAA/BBB/CCC
+                        //richTextBox1.Text += "影片名稱: " + fi.Name + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+                        //richTextBox1.Text += "影片長度: " + f.General.DurationString + "\n";
+                        //richTextBox1.Text += "影片長度: " + f.General.DurationMillis + " 毫秒\n";
+                        //richTextBox1.Text += "FrameCount: " + f.FrameCount.ToString() + "\n";
+                        //richTextBox1.Text += "FPS: " + fps.ToString() + "\n";
+                        //richTextBox1.Text += "time : " + ((int)(f.FrameCount / f.Video[0].FrameRate)).ToString() + " 秒\n";
+                        //richTextBox1.Text += "輸入大小: " + w.ToString() + " × " + h.ToString() + "\n";
 
                         string n = fi.Name;
                         string p = fi.Directory.ToString();
@@ -2756,11 +2821,6 @@ namespace vcs_DiskDirectoryFile1
                         fileinfos.Add(new MyFileInfo(n, p, e, s, w, h, fps, d));
                     }
                 }
-
-                richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-                richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-
             }
             else if (ProcessFile_mode == PROCESS_FILE_MODE9)  // 9:匯出Katfile壓縮檔檔案資料
             {
@@ -2943,6 +3003,49 @@ namespace vcs_DiskDirectoryFile1
             }
         }
 
+        void play_video_files(string all_filename)
+        {
+            //richTextBox1.Text += "播放檔案 : " + all_filename + "\n";
+
+            //指定應用程式路徑
+            string target = String.Empty;
+
+            //方法一
+            //Process.Start(target, "參數");
+            //Process.Start(target, all_filename);
+
+            //方法二
+
+            target = video_player_path;
+
+            ProcessStartInfo pInfo = new ProcessStartInfo(target);
+            pInfo.Arguments = all_filename;
+
+            /*
+            // debug mesg
+            richTextBox1.Text += "target : " + target + "\n";
+            richTextBox1.Text += "all_filename : " + all_filename + "\n";
+            */
+
+            if (video_player_path == String.Empty)
+            {
+                all_filename = all_filename.Trim().Replace("\"", "");
+                Process.Start(all_filename); //使用預設程式開啟, 無法一次播放多個檔案
+            }
+            else
+            {
+                Process.Start(video_player_path, all_filename);    //指名播放程式開啟
+            }
+
+            /*
+            using (Process process = new Process())
+            {
+                process.StartInfo = pInfo;
+                process.Start();
+            }
+            */
+        }
+
         private void bt_open_dir1_Click(object sender, EventArgs e)
         {
             //folderBrowserDialog1.SelectedPath = Application.StartupPath;    //預設開啟的路徑
@@ -2968,7 +3071,6 @@ namespace vcs_DiskDirectoryFile1
                 richTextBox1.Text = "未選取資料夾\n";
             }
         }
-
     }
 }
 

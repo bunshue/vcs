@@ -72,6 +72,10 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.tb_foldername2 = new System.Windows.Forms.TextBox();
             this.bt_open_dir2 = new System.Windows.Forms.Button();
+            this.tb_search = new System.Windows.Forms.TextBox();
+            this.cb_search = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -462,7 +466,7 @@
             // tb_foldername1
             // 
             this.tb_foldername1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_foldername1.Location = new System.Drawing.Point(642, 333);
+            this.tb_foldername1.Location = new System.Drawing.Point(22, 130);
             this.tb_foldername1.Name = "tb_foldername1";
             this.tb_foldername1.Size = new System.Drawing.Size(100, 36);
             this.tb_foldername1.TabIndex = 252;
@@ -472,7 +476,7 @@
             this.bt_open_dir1.BackgroundImage = global::vcs_DiskDirectoryFile1.Properties.Resources.open_folder;
             this.bt_open_dir1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_open_dir1.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_open_dir1.Location = new System.Drawing.Point(642, 277);
+            this.bt_open_dir1.Location = new System.Drawing.Point(22, 74);
             this.bt_open_dir1.Name = "bt_open_dir1";
             this.bt_open_dir1.Size = new System.Drawing.Size(50, 50);
             this.bt_open_dir1.TabIndex = 254;
@@ -484,7 +488,7 @@
             this.bt_setup.BackgroundImage = global::vcs_DiskDirectoryFile1.Properties.Resources.setup;
             this.bt_setup.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_setup.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_setup.Location = new System.Drawing.Point(698, 437);
+            this.bt_setup.Location = new System.Drawing.Point(128, 21);
             this.bt_setup.Name = "bt_setup";
             this.bt_setup.Size = new System.Drawing.Size(50, 50);
             this.bt_setup.TabIndex = 253;
@@ -496,7 +500,7 @@
             this.bt_delete_file.BackgroundImage = global::vcs_DiskDirectoryFile1.Properties.Resources.delete;
             this.bt_delete_file.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_delete_file.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_delete_file.Location = new System.Drawing.Point(692, 224);
+            this.bt_delete_file.Location = new System.Drawing.Point(72, 21);
             this.bt_delete_file.Name = "bt_delete_file";
             this.bt_delete_file.Size = new System.Drawing.Size(50, 50);
             this.bt_delete_file.TabIndex = 75;
@@ -508,7 +512,7 @@
             this.bt_start_files.BackgroundImage = global::vcs_DiskDirectoryFile1.Properties.Resources.potplayer;
             this.bt_start_files.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_start_files.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_start_files.Location = new System.Drawing.Point(642, 224);
+            this.bt_start_files.Location = new System.Drawing.Point(22, 21);
             this.bt_start_files.Name = "bt_start_files";
             this.bt_start_files.Size = new System.Drawing.Size(50, 50);
             this.bt_start_files.TabIndex = 74;
@@ -518,7 +522,7 @@
             // tb_foldername2
             // 
             this.tb_foldername2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_foldername2.Location = new System.Drawing.Point(642, 375);
+            this.tb_foldername2.Location = new System.Drawing.Point(22, 172);
             this.tb_foldername2.Name = "tb_foldername2";
             this.tb_foldername2.Size = new System.Drawing.Size(100, 36);
             this.tb_foldername2.TabIndex = 255;
@@ -528,25 +532,56 @@
             this.bt_open_dir2.BackgroundImage = global::vcs_DiskDirectoryFile1.Properties.Resources.open_folder;
             this.bt_open_dir2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_open_dir2.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_open_dir2.Location = new System.Drawing.Point(692, 277);
+            this.bt_open_dir2.Location = new System.Drawing.Point(72, 74);
             this.bt_open_dir2.Name = "bt_open_dir2";
             this.bt_open_dir2.Size = new System.Drawing.Size(50, 50);
             this.bt_open_dir2.TabIndex = 256;
             this.bt_open_dir2.UseVisualStyleBackColor = true;
             this.bt_open_dir2.Click += new System.EventHandler(this.bt_open_dir2_Click);
             // 
+            // tb_search
+            // 
+            this.tb_search.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_search.Location = new System.Drawing.Point(22, 216);
+            this.tb_search.Name = "tb_search";
+            this.tb_search.Size = new System.Drawing.Size(100, 36);
+            this.tb_search.TabIndex = 257;
+            this.tb_search.Text = "hsck";
+            this.tb_search.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // cb_search
+            // 
+            this.cb_search.AutoSize = true;
+            this.cb_search.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_search.Location = new System.Drawing.Point(128, 74);
+            this.cb_search.Name = "cb_search";
+            this.cb_search.Size = new System.Drawing.Size(15, 14);
+            this.cb_search.TabIndex = 258;
+            this.cb_search.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.tb_search);
+            this.groupBox1.Controls.Add(this.bt_setup);
+            this.groupBox1.Controls.Add(this.cb_search);
+            this.groupBox1.Controls.Add(this.bt_start_files);
+            this.groupBox1.Controls.Add(this.bt_delete_file);
+            this.groupBox1.Controls.Add(this.bt_open_dir2);
+            this.groupBox1.Controls.Add(this.tb_foldername1);
+            this.groupBox1.Controls.Add(this.tb_foldername2);
+            this.groupBox1.Controls.Add(this.bt_open_dir1);
+            this.groupBox1.Location = new System.Drawing.Point(642, 224);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(205, 269);
+            this.groupBox1.TabIndex = 259;
+            this.groupBox1.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(850, 648);
-            this.Controls.Add(this.bt_open_dir2);
-            this.Controls.Add(this.tb_foldername2);
-            this.Controls.Add(this.bt_open_dir1);
-            this.Controls.Add(this.bt_setup);
-            this.Controls.Add(this.tb_foldername1);
-            this.Controls.Add(this.bt_delete_file);
-            this.Controls.Add(this.bt_start_files);
+            this.ClientSize = new System.Drawing.Size(1352, 648);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.bt_file00);
             this.Controls.Add(this.label0);
@@ -587,6 +622,8 @@
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -638,6 +675,9 @@
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.TextBox tb_foldername2;
         private System.Windows.Forms.Button bt_open_dir2;
+        private System.Windows.Forms.TextBox tb_search;
+        private System.Windows.Forms.CheckBox cb_search;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
 
