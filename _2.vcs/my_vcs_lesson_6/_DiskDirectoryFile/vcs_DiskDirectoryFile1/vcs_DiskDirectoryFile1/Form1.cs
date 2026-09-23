@@ -2844,9 +2844,11 @@ namespace vcs_DiskDirectoryFile1
                     return;
                 }
             }
-
-            total_files++;
-            total_size += fi.Length;
+            if (ProcessFile_mode != PROCESS_FILE_MODE9)
+            {
+                total_files++;
+                total_size += fi.Length;
+            }
         }
 
         //------------------------------------------------------------  # 60個
