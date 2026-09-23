@@ -383,7 +383,6 @@
             this.bt_files08.Name = "bt_files08";
             this.bt_files08.Size = new System.Drawing.Size(200, 60);
             this.bt_files08.TabIndex = 50;
-            this.bt_files08.Text = "ListView 操作";
             this.bt_files08.UseVisualStyleBackColor = true;
             this.bt_files08.Click += new System.EventHandler(this.bt_files08_Click);
             // 
