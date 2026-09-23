@@ -1,4 +1,25 @@
 ﻿
+            //拆解 pattern 範例
+
+            string searchPattern = "*.cs;*.csv;*.ico";
+            searchPattern = "*.bmp;*.png;*.jpg;*.tif;*.gif";
+
+            string[] pattern_array = searchPattern.Split(';');
+
+            foreach (string pattern in pattern_array)
+            {
+                richTextBox1.Text += "pattern : " + pattern + "\n";
+
+            }
+
+            string[] patterns = { "*.png", "*.bmp", "*.jpg", "*.jpeg", "*.gif" };     //指名搜尋pattern
+            foreach (string pattern in patterns)  // 多個搜尋pattern
+            {
+            }
+
+
+6060
+
 //針對某控件的邊緣 設定表單大小
 this.ClientSize = new Size(richTextBox1.Right + 50, richTextBox1.Bottom + 50);
 
