@@ -79,6 +79,30 @@ namespace vcs_DiskDirectoryFile1
                 return size.ToString() + " Byte";//顯示Byte值
         }
 
+        public string TimeConversion(Int64 seconds)
+        {
+            if (seconds < 0)
+            {
+                return "不合法的數值";
+            }
+            else if (seconds < 60)
+            {
+                return seconds.ToString("D2") + " 秒";
+            }
+            else if (seconds < 60 * 60)
+            {
+                return (seconds / 60).ToString("D2") + " 分 " + (seconds % 60).ToString("D2") + " 秒";
+            }
+            else if (seconds < 60 * 60 * 24)
+            {
+                return (seconds / 60 / 60).ToString("D2") + " 時 " + ((seconds % 3600) / 60).ToString("D2") + " 分 " + (seconds % 60).ToString("D2") + " 秒";
+            }
+            else
+            {
+                return (seconds / 60 / 60 / 24).ToString() + " 天 " + ((seconds % (60 * 60 * 24)) / 60 / 60).ToString("D2") + " 時 " + ((seconds % 3600) / 60).ToString("D2") + " 分 " + (seconds % 60).ToString("D2") + " 秒";
+            }
+        }
+
         public class MyFileInfo
         {
             public string filename;
@@ -250,11 +274,11 @@ namespace vcs_DiskDirectoryFile1
             label2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
 
             int W = 1240;
-            groupBox1.Size = new Size(W, 106);
+            groupBox1.Size = new Size(W, 106 + 50);
             groupBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0 - 14);
 
-            listView1.Size = new Size(W, 270);
-            listView1.Location = new Point(x_st + dx * 3, y_st + dy * 1 + 24);
+            listView1.Size = new Size(W, 270 - 50);
+            listView1.Location = new Point(x_st + dx * 3, y_st + dy * 1 + 24 + 50);
             bt_clear2.Location = new Point(listView1.Location.X + listView1.Size.Width - bt_clear2.Size.Width, listView1.Location.Y + listView1.Size.Height - bt_clear2.Size.Height);
 
             richTextBox1.Size = new Size(W, 340);
@@ -341,11 +365,11 @@ namespace vcs_DiskDirectoryFile1
             bt_files09.Visible = false;
 
             int W = 1500;
-            groupBox1.Size = new Size(W, 106);
+            groupBox1.Size = new Size(W, 106 + 50);
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0 - 16);
 
-            listView1.Size = new Size(W, 270);
-            listView1.Location = new Point(x_st + dx * 0, y_st + dy * 1 + 24);
+            listView1.Size = new Size(W, 270 - 50);
+            listView1.Location = new Point(x_st + dx * 0, y_st + dy * 1 + 24 + 50);
             bt_clear2.Location = new Point(listView1.Location.X + listView1.Size.Width - bt_clear2.Size.Width, listView1.Location.Y + listView1.Size.Height - bt_clear2.Size.Height);
 
             richTextBox1.Size = new Size(W, 410);
@@ -375,6 +399,10 @@ namespace vcs_DiskDirectoryFile1
             bt_start_files.Location = new Point(x_st + dx * 15, y_st + dy * 0);
             bt_start_all_files.Location = new Point(x_st + dx * 16, y_st + dy * 0);
             bt_compare.Location = new Point(x_st + dx * 17, y_st + dy * 0);
+            bt_test1.Location = new Point(x_st + dx * 13, y_st + dy * 2);
+            bt_test2.Location = new Point(x_st + dx * 14, y_st + dy * 2);
+            bt_test3.Location = new Point(x_st + dx * 15, y_st + dy * 2);
+            bt_test4.Location = new Point(x_st + dx * 16, y_st + dy * 2);
 
             int yy = 7;
             cb_search.Location = new Point(x_st + dx * 13, y_st + dy * 1 + yy);
@@ -1602,8 +1630,6 @@ namespace vcs_DiskDirectoryFile1
             }
 
             int len = fileinfos.Count;
-            lb_search_result1.Text = len.ToString();
-
             for (int i = 0; i < len; i++)
             {
                 string filename = fileinfos[i].filename;
@@ -1882,59 +1908,6 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_files04_Click(object sender, EventArgs e)
         {
-            //優優檔
-
-            int len = fileinfos.Count;
-            if (len == 0)
-            {
-                richTextBox1.Text += "無資料c\n";
-            }
-            else
-            {
-                richTextBox1.Text += "找到 " + len.ToString() + " 筆資料\n";
-            }
-
-            if (len < 2)
-            {
-                richTextBox1.Text += "至少需要2筆資料\n";
-                return;
-            }
-
-            fileinfos_match.Clear();
-
-            string[] good_pattern = new string[] {
-                  "asami", "yuna", "kaede", "hayashi", "julia", "jjjj", "chitose"    //A class
-                , "nozomi", "anri", "jessica", "airi", "ths", "saeko", ""
-                , "松島", "桐原", "冬月", "小川", "椎名", "宮瀬", "QQQQ"
-                , "smr", "yama", "maria", "akari", "maron", "ryo", "QQQQ"
-                , "mai", "karen", "rinne", "miu", "kano", "QQQQ", "QQQQ"
-                , "suzu", "yuri", "sakura", "nanami", "minami", "iori", "QQQQ"
-                , "1111", "3333", "7777", "9999", "mino", "megumi", "QQQQ"
-                , "kurara", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "立花", "愛世", "美月", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "kana", "tia", "momo", "yui", "sho", "nene", "園田"    //B class
-                , "ayaka", "jgj", "sora", "bt", "maki", "ayumi", "mion"
-                , "本田岬", "lily", "lauren", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "gggg", "debut", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"    //new tmp
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-            };
-
-            for (int i = 0; i < len; i++)
-            {
-                foreach (string ptn in good_pattern)
-                {
-                    if (fileinfos[i].filename.ToLower().Contains(ptn) == true)
-                    {
-                        fileinfos_match.Add(fileinfos[i]);
-                        break;
-                    }
-                }
-            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -2171,6 +2144,888 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_files09_Click(object sender, EventArgs e)
         {
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void listView1_MouseClick(object sender, MouseEventArgs e)
+        {
+            int idx = listView1.SelectedIndices[0];
+            /*
+            richTextBox1.Text += "檔名:\t" + listView1.Items[idx].Text + "\n";
+            richTextBox1.Text += "大小:\t" + listView1.Items[idx].SubItems[1].Text + "\n";
+            richTextBox1.Text += "格式:\t" + listView1.Items[idx].SubItems[2].Text + "\n";
+            richTextBox1.Text += "資料夾:\t" + listView1.Items[idx].SubItems[3].Text + "\n";
+            string fullname = listView1.Items[idx].SubItems[3].Text + "\\" + listView1.Items[idx].Text;
+            richTextBox1.Text += "完整路徑:\t" + fullname + "\n";
+            */
+
+            string foldername = listView1.Items[idx].SubItems[3].Text;
+            DirectoryInfo dinfo = new DirectoryInfo(foldername);
+            tb_foldername.Text = dinfo.Name;  //資料夾簡名
+            tb_filename.Text = listView1.Items[idx].Text;  // 檔案名稱 或許不要副檔名
+            tb_foldername_text_old = dinfo.Name;  //資料夾簡名
+            tb_filename_text_old = listView1.Items[idx].Text;  // 檔案名稱 或許不要副檔名
+            return;
+        }
+
+        private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            int idx = listView1.SelectedIndices[0];
+            richTextBox1.Text += "檔名:\t" + listView1.Items[idx].Text + "\n";
+            richTextBox1.Text += "大小:\t" + listView1.Items[idx].SubItems[1].Text + "\n";
+            richTextBox1.Text += "格式:\t" + listView1.Items[idx].SubItems[2].Text + "\n";
+            richTextBox1.Text += "資料夾:\t" + listView1.Items[idx].SubItems[3].Text + "\n";
+            string fullname = listView1.Items[idx].SubItems[3].Text + "\\" + listView1.Items[idx].Text;
+            richTextBox1.Text += "完整路徑:\t" + fullname + "\n";
+
+            if (File.Exists(fullname) == true)
+            {
+                play_video_files(fullname);
+            }
+            else
+            {
+                richTextBox1.Text += "檔案 : " + fullname + " , 不存在\n";
+            }
+        }
+
+        bool flag_sort_type0 = false;  // false : ASCENDING, true : DESCENDING
+        bool flag_sort_type1 = false;  // false : ASCENDING, true : DESCENDING
+        bool flag_sort_type2 = false;  // false : ASCENDING, true : DESCENDING
+        bool flag_sort_type3 = false;  // false : ASCENDING, true : DESCENDING
+        private void listView1_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            //richTextBox1.Text += "你按了第 " + e.Column.ToString() + " 欄\n";
+            //richTextBox1.Text += "aaa : " + listView1.Columns[e.Column] + "\n";
+            //richTextBox1.Text += "bbb : " + e.Column.ToString() + "\n";
+
+            if (e.Column == 0)
+            {
+                flag_sort_type0 = !flag_sort_type0;
+                show_file_info6(0, flag_sort_type0);
+            }
+            else if (e.Column == 1)
+            {
+                flag_sort_type1 = !flag_sort_type1;
+                show_file_info6(1, flag_sort_type1);
+            }
+            else if (e.Column == 2)
+            {
+                flag_sort_type2 = !flag_sort_type2;
+                show_file_info6(2, flag_sort_type2);
+            }
+            else if (e.Column == 3)
+            {
+                flag_sort_type3 = !flag_sort_type3;
+                show_file_info6(3, flag_sort_type3);
+            }
+            else
+            {
+                richTextBox1.Text += "XXXXXXX\n";
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
+        //------------------------------------------------------------  # 60個
+
+        private void bt_start_files_Click(object sender, EventArgs e)
+        {
+            int selectCount = listView1.SelectedIndices.Count;  // 總共選擇的個數
+            if (selectCount == 0)
+            {
+                richTextBox1.Text += "未選取檔案\n";
+                return;
+            }
+
+            string all_filename = string.Empty;
+            for (int i = 0; i < selectCount; i++)
+            {
+                int idx = listView1.SelectedIndices[i];
+                listView1.Items[idx].Selected = true;  // 選到的項目
+                all_filename += " \"" + listView1.Items[idx].SubItems[3].Text + "\\" + listView1.Items[idx].Text + "\"";
+            }
+            play_video_files(all_filename);  // 播放
+        }
+
+        private void bt_start_all_files_Click(object sender, EventArgs e)
+        {
+            //播放全部
+
+            // ListView 全部資料
+            int len = listView1.Items.Count;
+            richTextBox1.Text += "共有項目" + len.ToString() + " 個\n";
+            string all_filename = string.Empty;
+            for (int i = 0; i < len; i++)
+            {
+                //richTextBox1.Text += listView1.Items[i].Text + "\n";
+                //richTextBox1.Text += listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\t" + listView1.Items[i].SubItems[2].Text + "\n";
+                all_filename += " \"" + listView1.Items[i].SubItems[3].Text + "\\" + listView1.Items[i].Text + "\"";
+            }
+            play_video_files(all_filename);  // 播放
+        }
+
+        private void bt_delete_file_Click(object sender, EventArgs e)
+        {
+            int selectCount = listView1.SelectedIndices.Count;
+
+            richTextBox1.Text += "你選擇了 : " + selectCount.ToString() + " 個檔案, 分別是\n";
+
+            for (int i = 0; i < selectCount; i++)
+            {
+                richTextBox1.Text += listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
+            }
+
+            richTextBox1.Text += "刪除\n";
+
+            for (int i = selectCount - 1; i >= 0; i--)
+            {
+                richTextBox1.Text += "刪除檔案: " + listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
+
+                richTextBox1.Text += "目前不支援直接刪除檔案\n";
+                /*  直接刪除檔案
+                File.SetAttributes(listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text, FileAttributes.Normal);
+                File.Delete(listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text);
+                */
+                listView1.SelectedItems[i].Remove();
+            }
+        }
+
+        private void bt_setup_Click(object sender, EventArgs e)
+        {
+            Form_Setup frm = new Form_Setup();    //實體化 Form_Setup 視窗物件
+            frm.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
+            frm.ShowDialog();   //顯示 frm 視窗
+        }
+
+        private void bt_open_dir1_Click(object sender, EventArgs e)
+        {
+            //folderBrowserDialog1.SelectedPath = Application.StartupPath;    //預設開啟的路徑
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                tb_foldername1.Text = folderBrowserDialog1.SelectedPath;
+            }
+            else
+            {
+                richTextBox1.Text = "未選取資料夾\n";
+            }
+        }
+
+        private void bt_open_dir2_Click(object sender, EventArgs e)
+        {
+            //folderBrowserDialog1.SelectedPath = Application.StartupPath;    //預設開啟的路徑
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                tb_foldername2.Text = folderBrowserDialog1.SelectedPath;
+            }
+            else
+            {
+                richTextBox1.Text = "未選取資料夾\n";
+            }
+        }
+
+        private void bt_export_doc_Click(object sender, EventArgs e)
+        {
+            ProcessFile_mode = PROCESS_FILE_MODE0;  // 0:預設只匯出檔名
+            ProcessFile_mode = PROCESS_FILE_MODE1;  // 1:只看大檔
+            ProcessFile_mode = PROCESS_FILE_MODE2;  // 2:顯示至 ListView
+            ProcessFile_mode = PROCESS_FILE_MODE3;  // 3:找空資料夾
+            ProcessFile_mode = PROCESS_FILE_MODE4;  // 4:找小資料夾
+            ProcessFile_mode = PROCESS_FILE_MODE5;  // 5:找特定檔案
+            ProcessFile_mode = PROCESS_FILE_MODE6;  // 6:指定附檔名檔案
+            ProcessFile_mode = PROCESS_FILE_MODE7;  // 7:只找資料夾 for 圖片整理
+            ProcessFile_mode = PROCESS_FILE_MODE8;  // 8:搜尋影片檔, 搜尋小影片檔<720, 特大影片檔>1080
+            ProcessFile_mode = PROCESS_FILE_MODE9;  // 9:匯出Katfile壓縮檔檔案資料
+
+            ProcessFile_mode = PROCESS_FILE_MODE9;  // 9:匯出Katfile壓縮檔檔案資料
+
+            foldername = Application.StartupPath;
+            doc_foldername = tb_foldername1.Text;
+            if (Directory.Exists(doc_foldername) == true)     //確認資料夾是否存在
+            {
+                foldername = doc_foldername;
+            }
+
+            do_my_export(foldername, bt_export_doc);
+
+        }
+
+        private void bt_export_video_Click(object sender, EventArgs e)
+        {
+            ProcessFile_mode = PROCESS_FILE_MODE0;  // 0:預設只匯出檔名
+            ProcessFile_mode = PROCESS_FILE_MODE1;  // 1:只看大檔
+            ProcessFile_mode = PROCESS_FILE_MODE2;  // 2:顯示至 ListView
+            ProcessFile_mode = PROCESS_FILE_MODE3;  // 3:找空資料夾
+            ProcessFile_mode = PROCESS_FILE_MODE4;  // 4:找小資料夾
+            ProcessFile_mode = PROCESS_FILE_MODE5;  // 5:找特定檔案
+            ProcessFile_mode = PROCESS_FILE_MODE6;  // 6:指定附檔名檔案
+            ProcessFile_mode = PROCESS_FILE_MODE7;  // 7:只找資料夾 for 圖片整理
+            ProcessFile_mode = PROCESS_FILE_MODE8;  // 8:搜尋影片檔, 搜尋小影片檔<720, 特大影片檔>1080
+            ProcessFile_mode = PROCESS_FILE_MODE9;  // 9:匯出Katfile壓縮檔檔案資料
+
+            ProcessFile_mode = PROCESS_FILE_MODE8;  // 8:搜尋影片檔, 搜尋小影片檔<720, 特大影片檔>1080
+
+            foldername = Application.StartupPath;
+            video_foldername = tb_foldername2.Text;
+            if (Directory.Exists(video_foldername) == true)     //確認資料夾是否存在
+            {
+                foldername = video_foldername;
+            }
+
+            do_my_export(foldername, bt_export_video);
+
+            listView1.Items.Clear();
+
+            int len = fileinfos.Count;
+            if (len == 0)
+            {
+                richTextBox1.Text += "無資料a\n";
+            }
+            else
+            {
+                richTextBox1.Text += "找到 " + len.ToString() + " 筆資料\n";
+                show_file_info6(-1, false);
+            }
+        }
+
+        void do_my_export(string foldername, Button btn)
+        {
+            //開始計時
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            btn.BackColor = Color.Red;
+            lb_search_result1.Text = "";
+            lb_search_result2.Text = "";
+            Application.DoEvents();
+
+            total_size = 0;
+            total_files = 0;
+            text = string.Empty;
+            fileinfos.Clear();
+
+            ProcessDirectory(foldername);
+
+            richTextBox1.Text += text + "\n";
+
+            if (total_files > 0)
+            {
+                richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+                richTextBox1.Text += "檔案個數 : " + total_files.ToString();
+                richTextBox1.Text += ", 大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
+                richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+            }
+
+            lb_search_result1.Text = total_files.ToString() + " / " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size));
+            richTextBox1.Text += "檔案 : " + total_files.ToString() + " 個\n";
+            richTextBox1.Text += "大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "(" + total_size.ToString() + "位元組)\n";
+            //richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
+
+            stopwatch.Stop();
+            richTextBox1.Text += "總時間: " + stopwatch.ElapsedMilliseconds.ToString() + " 毫秒\n";
+            //lb_search_result2.Text = ((float)stopwatch.ElapsedMilliseconds / 1000).ToString("F2") + " 秒";
+            lb_search_result2.Text = TimeConversion((Int64)(stopwatch.ElapsedMilliseconds / 1000));
+            btn.BackColor = SystemColors.ControlLight;
+        }
+
+        private void bt_compare_Click(object sender, EventArgs e)
+        {
+            //fileinfos操作
+            //比較
+
+            int len = fileinfos.Count;
+            if (len < 2)
+            {
+                richTextBox1.Text += "至少需要2筆資料\n";
+                return;
+            }
+
+            fileinfos_match.Clear();
+
+            for (int i = 0; i < len; i++)
+            {
+                for (int j = i + 1; j < (len - 1); j++)
+                {
+                    // case 1 : 比較真檔名
+                    if (fileinfos[i].filename == fileinfos[j].filename)
+                    {
+                        richTextBox1.Text += "找到真檔名\n";
+                        //richTextBox1.Text += fileinfos[i].fullfilename + "\n";
+                        //richTextBox1.Text += fileinfos[j].fullfilename + "\n";
+                        fileinfos_match.Add(fileinfos[i]);
+                        fileinfos_match.Add(fileinfos[j]);
+                    }
+
+                    /*
+                    // case 2 : 比較模糊檔名
+                    if (fileinfos[i].shortfilename == fileinfos[j].shortfilename)
+                    {
+                        richTextBox1.Text += "找到模糊檔名\n";
+                        //richTextBox1.Text += fileinfos[i].fullfilename + "\n";
+                        //richTextBox1.Text += fileinfos[j].fullfilename + "\n";
+                        fileinfos_match.Add(fileinfos[i]);
+                        fileinfos_match.Add(fileinfos[j]);
+                    }
+                    */
+
+                    // case 3 : 比較檔案大小
+                    if (fileinfos[i].filesize == fileinfos[j].filesize)
+                    {
+                        richTextBox1.Text += "找到相同檔案大小\n";
+                        //richTextBox1.Text += fileinfos[i].fullfilename + "\n";
+                        //richTextBox1.Text += fileinfos[j].fullfilename + "\n";
+                        fileinfos_match.Add(fileinfos[i]);
+                        fileinfos_match.Add(fileinfos[j]);
+                    }
+                }
+            }
+
+            //------------------------------------------------------------  # 60個
+
+            richTextBox1.Text += "打印搜尋結果\n";
+            len = fileinfos_match.Count;
+            for (int i = 0; i < len; i++)
+            {
+                richTextBox1.Text += fileinfos_match[i].filepath + "\t" + fileinfos_match[i].filename + "\t" + fileinfos_match[i].filesize + "\n";
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
+        //------------------------------------------------------------  # 60個
+        //------------------------------------------------------------  # 60個
+
+        void get_DirectoryInfo(string foldername)
+        {
+            DirectoryInfo dinfo = new DirectoryInfo(foldername);
+            get_DirectoryInfo(dinfo);
+        }
+
+        void get_DirectoryInfo(DirectoryInfo di)
+        {
+            //資料夾資訊
+            richTextBox1.Text += "完整路徑：" + di.FullName + "\n";
+            richTextBox1.Text += "屬性：" + di.Attributes + "\n";
+            richTextBox1.Text += "存在與否：" + di.Exists + "\n";
+            richTextBox1.Text += "資料夾名稱：" + di.Extension + "\n";
+            richTextBox1.Text += "資料夾簡名：" + di.Name + "\n";
+            richTextBox1.Text += "資料夾名稱：" + di.Parent + "\n";
+            richTextBox1.Text += "上上層目錄 : " + di.Parent.Parent + "\n";
+            richTextBox1.Text += "上上層目錄的全目錄 : " + di.Parent.Parent.FullName + "\n";
+            richTextBox1.Text += "根資料夾：" + di.Root + "\n";
+            richTextBox1.Text += "資料夾內資料夾數目：" + di.GetDirectories().Length + "\n";
+            richTextBox1.Text += "資料夾內檔案數目：" + di.GetFiles().Length + "\n";
+            richTextBox1.Text += "建立時間 : " + di.CreationTime + "\n";
+            richTextBox1.Text += "建立時間 : " + di.LastAccessTime.ToString() + "\n";
+
+            if (di.GetDirectories().Length > 0)
+            {
+                richTextBox1.Text += "下一層資料夾：";
+                foreach (DirectoryInfo ddi in di.GetDirectories())
+                {
+                    get_DirectoryInfo(ddi);
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "\n";
+            }
+        }
+
+        void get_FileInfo(string filename)
+        {
+            FileInfo fi = new FileInfo(filename);
+            get_FileInfo(fi);
+        }
+
+        void get_FileInfo(FileInfo fi)
+        {
+            richTextBox1.Text += fi.Name + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+
+            return;
+
+            if (fi.Exists == false)  // 確認檔案是否存在
+            {
+                richTextBox1.Text += "檔案不存在\n";
+            }
+            else
+            {
+                //由短檔案名取的短資料夾名
+
+                richTextBox1.Text += "檔名：" + fi.Name + "\n";
+                richTextBox1.Text += "全檔名：" + fi.FullName + "\n";
+                richTextBox1.Text += "副檔名：" + fi.Extension + "\n";
+                richTextBox1.Text += "檔案大小：" + fi.Length.ToString() + "\n";
+                richTextBox1.Text += "檔案大小：" + Convert.ToDouble(fi.Length / 1024).ToString() + " KB\n";
+                richTextBox1.Text += "檔案大小：" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+                richTextBox1.Text += "資料夾1：" + fi.Directory + "\n";
+                richTextBox1.Text += "資料夾2：" + fi.Directory.Parent + "\n";
+                richTextBox1.Text += "資料夾3：" + fi.DirectoryName + "\n";
+                richTextBox1.Text += "建立時間1：" + fi.CreationTime.ToString() + "\n";
+                richTextBox1.Text += "建立時間2：" + fi.CreationTimeUtc.ToString() + "\n";
+                richTextBox1.Text += "CreationTime : " + fi.CreationTime + "\n";
+                richTextBox1.Text += "CreationTimeUtc : " + fi.CreationTimeUtc + "\n";
+                richTextBox1.Text += "最近修改時間：" + fi.LastWriteTime.ToString() + "\n";
+                richTextBox1.Text += "最近修改時間：" + fi.LastWriteTime.ToShortDateString() + "\n";
+                richTextBox1.Text += "最近修改時間：" + fi.LastWriteTimeUtc.ToString() + "\n";
+                richTextBox1.Text += "存取日期：" + fi.LastAccessTime + "\n";
+                richTextBox1.Text += "存取日期：" + fi.LastAccessTimeUtc + "\n";
+                richTextBox1.Text += "屬性：" + fi.Attributes + "\n";
+                richTextBox1.Text += "唯讀：" + fi.IsReadOnly + "\n";
+
+                string fileSize = (fi.Length / 1024).ToString() + " KB";
+                richTextBox1.Text += "fileSize = " + fileSize + "\n";
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void ProcessDirectoryInfo(string foldername)
+        {
+            //使用 DirectoryInfo 和 FileInfo
+
+            // 不能排序
+
+            DirectoryInfo dinfo = new DirectoryInfo(foldername);
+
+            // 找資料夾, 一層
+            DirectoryInfo[] dis = dinfo.GetDirectories();  // 傳回目前目錄的子目錄, 一層
+            foreach (DirectoryInfo di in dis)
+            {
+                // [System Volume Information] 資料夾是一個隱藏的系統資料夾，是「系統還原」工具用來儲存其資訊與還原點的地方。
+                if (di.Name != "System Volume Information" && di.Name.Substring(0, 1) != "$")//避開此類folder權限問題
+                {
+                    ProcessDirectoryInfo(di.FullName);  // 利用遞迴把子資料夾也加進來
+                }
+            }
+
+            // 找檔案, 一層
+            FileInfo[] fis = dinfo.GetFiles();  // 由DI取得FI陣列, 一層檔案資訊
+            foreach (FileInfo fi in fis)
+            {
+                get_FileInfo(fi);
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        int files_in_folders = 0;
+        string message = string.Empty;
+        //以這個為標準, 使用 Directory.GetDirectories() 和 Directory.GetFiles()
+        private void ProcessDirectory(string foldername)
+        {
+            //搜尋子目錄內的所有檔案   一層
+            //使用 Directory.GetDirectories() 和 Directory.GetFiles()
+
+            try
+            {
+                // 找資料夾, 一層
+                string[] dirs = Directory.GetDirectories(foldername);  // 取得指定目錄中子目錄的名稱, 一層
+                Array.Sort(dirs);  // 排序
+                foreach (string dir in dirs)
+                {
+                    try
+                    {
+
+                        // 資料夾
+                        ProcessDirectory(dir);
+                    }
+                    catch (UnauthorizedAccessException)
+                    {
+                        Console.WriteLine("無法存取: " + dir);
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("錯誤: " + ex.Message);
+            }
+
+
+            DirectoryInfo dinfo = new DirectoryInfo(foldername);
+            //text += "\n" + dinfo.Name + "\n";
+            // 找檔案, 一層
+            string[] filenames = Directory.GetFiles(foldername);  // 取得指定目錄中檔案的名稱
+            Array.Sort(filenames);  // 排序
+            message = string.Empty;
+            files_in_folders = 0;
+            foreach (string filename in filenames)
+            {
+                // 檔案
+                ProcessFile(filename);
+            }
+            if (files_in_folders > 0)
+            {
+                richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+                DirectoryInfo d = new DirectoryInfo(foldername);
+                richTextBox1.Text += "資料夾 : " + d.Name + "\n";
+                richTextBox1.Text += "------------------------------\n";  // 30個
+                richTextBox1.Text += message;
+            }
+        }
+
+        private void ProcessFile(string filename)
+        {
+            FileInfo fi = new FileInfo(filename);
+
+            if (cb_search.Checked == true)
+            {
+                if (fi.Name.Contains(tb_search.Text) == false)
+                {
+                    return;
+                }
+            }
+
+            if (ProcessFile_mode == PROCESS_FILE_MODE0)  // 0:預設只匯出檔名
+            {
+                //text += fi.Name + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+                text += "\t" + fi.Name + "\n";
+            }
+            else if (ProcessFile_mode == PROCESS_FILE_MODE1)  // 1:只看大檔
+            {
+                // 檢查檔案容量
+                int min_size_mb = 1;  // MB
+                if (fi.Length > (long)min_size_mb * 1024 * 1024)
+                {
+                    text += fi.Name + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+                    return;
+                }
+            }
+            else if (ProcessFile_mode == PROCESS_FILE_MODE2)  // 2:顯示至 ListView
+            {
+            }
+            else if (ProcessFile_mode == PROCESS_FILE_MODE8)  // 8:搜尋影片檔, 搜尋小影片檔<720, 特大影片檔>1080
+            {
+                // 檢查檔案容量
+                if (cb_size.Checked == true)
+                {
+                    int min_size_mb = int.Parse(tb_size.Text);
+                    if (fi.Length < (long)min_size_mb * 1024 * 1024)
+                    {
+                        return;
+                    }
+                }
+                text += fi.Name + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+
+                //取得影片檔案資訊
+                MediaInfoNET.MediaFile f = new MediaInfoNET.MediaFile(filename);
+                if (f.InfoAvailable == true)
+                {
+                    if (f.Video.Count > 0)
+                    {
+                        int w = f.Video[0].Width;
+                        int h = f.Video[0].Height;
+                        int fps = (int)f.Video[0].FrameRate;
+
+                        if (cb_search_big_files.Checked == true)
+                        {
+                            if (h <= 1080)
+                            {
+                                return;
+                            }
+                        }
+                        if (cb_search_small_files.Checked == true)
+                        {
+                            if (h >= 1080)
+                            {
+                                return;
+                            }
+                        }
+
+                        //短檔名    大小  格式       資料夾
+                        //xxxx.mp4  4.8GB 1920X1080  AAAA/BBB/CCC
+                        //richTextBox1.Text += "影片名稱: " + fi.Name + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+                        //richTextBox1.Text += "影片長度: " + f.General.DurationString + "\n";
+                        //richTextBox1.Text += "影片長度: " + f.General.DurationMillis + " 毫秒\n";
+                        //richTextBox1.Text += "FrameCount: " + f.FrameCount.ToString() + "\n";
+                        //richTextBox1.Text += "FPS: " + fps.ToString() + "\n";
+                        //richTextBox1.Text += "time : " + ((int)(f.FrameCount / f.Video[0].FrameRate)).ToString() + " 秒\n";
+                        //richTextBox1.Text += "輸入大小: " + w.ToString() + " × " + h.ToString() + "\n";
+
+                        string n = fi.Name;
+                        string p = fi.Directory.ToString();
+                        string e = "AAAA";
+                        long s = fi.Length;
+                        int d = (int)(f.General.DurationMillis / 1000);
+
+                        fileinfos.Add(new MyFileInfo(n, p, e, s, w, h, fps, d));
+                        total_files++;
+                        total_size += fi.Length;
+                    }
+                }
+            }
+            else if (ProcessFile_mode == PROCESS_FILE_MODE9)  // 9:匯出Katfile壓縮檔檔案資料
+            {
+                if ((fi.Extension.ToLower() == ".rar") || (fi.Extension.ToLower() == ".zip"))
+                {
+                    //message += "資料夾：" + fi.Directory + "\n";
+
+                    message += "\t" + string.Format("{0,-30}{1,10}", fi.Name, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length))) + "\n";
+
+                    //message += fi.Name + "\n";
+                    //message += "副檔名：" + fi.Extension + "\n";
+                    //message += "檔案大小：" + fi.Length.ToString() + "\n";
+                    //message += "建立時間1：" + fi.CreationTime.ToString() + "\n";
+                    //message += "建立時間2：" + fi.CreationTimeUtc.ToString() + "\n";
+                    //message += "最近寫入時間：" + fi.LastWriteTime.ToString() + "\n";
+                    //message += "檔案: " + filename + "\n";
+                    //message += "------------------------------\n";  // 30個
+                    total_files++;
+                    total_size += fi.Length;
+                    files_in_folders++;
+                    return;
+                }
+            }
+            if ((ProcessFile_mode != PROCESS_FILE_MODE8) && (ProcessFile_mode != PROCESS_FILE_MODE9))
+            {
+                total_files++;
+                total_size += fi.Length;
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        void get_MediaInfo(string filename)
+        {
+            MediaInfoNET.MediaFile f = new MediaInfoNET.MediaFile(filename);
+
+            if (f.InfoAvailable == true)
+            {
+                richTextBox1.Text += "有MediaInfo資料, 全部資料:\n" + f.Info_Text + "\n\n";
+
+                richTextBox1.Text += "  影片長度: " + f.General.DurationString + "\n";
+                richTextBox1.Text += "  FileSize: " + f.FileSize.ToString() + "\n";
+                richTextBox1.Text += "  Extension: " + f.Extension + "\n";
+
+                // f.Video.Count
+
+                int w = 0;
+                int h = 0;
+
+                if (f.Video.Count > 0)
+                {
+                    w = f.Video[0].Width;
+                    h = f.Video[0].Height;
+                    richTextBox1.Text += "  輸入大小: " + w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\n";
+                    richTextBox1.Text += "  FPS: " + f.Video[0].FrameRate.ToString() + "\n";
+                    richTextBox1.Text += string.Format("{0,5} X {1,5}{2,5}{3,10}",
+                        w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
+                }
+
+                richTextBox1.Text += "有MediaInfo資料, 分項資料:\n";
+                richTextBox1.Text += "File : " + f.File + "\n";
+                richTextBox1.Text += "Name : " + f.Name + "\n";
+                richTextBox1.Text += "Title : " + f.Title + "\n";
+                richTextBox1.Text += "FileSize : " + f.FileSize.ToString() + " Bytes\n";
+                richTextBox1.Text += "FrameCount : " + f.FrameCount.ToString() + "\n";
+                richTextBox1.Text += "StreamCount : " + f.StreamCount.ToString() + "\n";
+                richTextBox1.Text += "ParentFolder : " + f.ParentFolder + "\n";
+                richTextBox1.Text += "Extension : " + f.Extension + "\n";
+                richTextBox1.Text += "Description : \n" + f.Description + "\n";
+                richTextBox1.Text += "Capacity : " + f.Text.Capacity.ToString() + "\n";
+
+                //General
+                richTextBox1.Text += "Format : " + f.General.Format + "\n";
+                richTextBox1.Text += "Bitrate : " + f.General.Bitrate.ToString() + "\n";
+                richTextBox1.Text += "CodecID : " + f.General.CodecID + "\n";
+                richTextBox1.Text += "Description : " + f.General.Description + "\n";
+                richTextBox1.Text += "DurationMillis : " + f.General.DurationMillis.ToString() + "\n";
+                richTextBox1.Text += "DurationString : " + f.General.DurationString + "\n";
+                richTextBox1.Text += "DurationStringAccurate : " + f.General.DurationStringAccurate + "\n";
+                richTextBox1.Text += "Extension : " + f.General.Extension + "\n";
+                richTextBox1.Text += "Format : " + f.General.Format + "\n";
+                richTextBox1.Text += "FormatID : " + f.General.FormatID + "\n";
+                richTextBox1.Text += "ID : " + f.General.ID.ToString() + "\n";
+                richTextBox1.Text += "StreamSize : " + f.General.StreamSize.ToString() + "\n";
+                richTextBox1.Text += "StreamType : " + f.General.StreamType + "\n";
+
+                richTextBox1.Text += "\n";
+                richTextBox1.Text += "Audio Count: " + f.Audio.Count.ToString() + "\n";
+                richTextBox1.Text += "Video Count: " + f.Video.Count.ToString() + "\n";
+                richTextBox1.Text += "\n";
+
+                if (f.Audio.Count > 0)
+                {
+                    richTextBox1.Text += "\n";
+                    richTextBox1.Text += "Audio ---------------------------------" + "\n";
+                    richTextBox1.Text += "\n";
+                    richTextBox1.Text += "Format : " + f.Audio[0].Format + "\n";
+                    richTextBox1.Text += "Bitrate : " + f.Audio[0].Bitrate.ToString() + "\n";
+                    richTextBox1.Text += "Channels : " + f.Audio[0].Channels.ToString() + "\n";
+                    richTextBox1.Text += "Sampling : " + f.Audio[0].SamplingRate.ToString() + "\n";
+
+                    richTextBox1.Text += "\n";
+                    richTextBox1.Text += "[音訊資訊]\n";
+                    richTextBox1.Text += "  音訊編碼: " + f.Audio[0].Format + "\n";
+                    richTextBox1.Text += "  取樣率: " + f.Audio[0].SamplingRate.ToString() + "\n";
+                    richTextBox1.Text += "  聲道數: " + f.Audio[0].Channels.ToString() + "\n";
+                    richTextBox1.Text += "  Bitrate: " + f.Audio[0].Bitrate.ToString() + " kbps\n";
+
+                    /*
+                    richTextBox1.Text += "CodecID : " + f.Audio[0].CodecID + "\n";
+                    richTextBox1.Text += "Description : " + f.Audio[0].Description + "\n";
+                    richTextBox1.Text += "DurationString : " + f.Audio[0].DurationString + "\n";
+                    richTextBox1.Text += "Format : " + f.Audio[0].Format + "\n";
+                    richTextBox1.Text += "FormatID : " + f.Audio[0].FormatID + "\n";
+                    richTextBox1.Text += "ID : " + f.Audio[0].ID + "\n";
+                    richTextBox1.Text += "MPlayerID : " + f.Audio[0].MPlayerID + "\n";
+                    richTextBox1.Text += "StreamSize : " + f.Audio[0].StreamSize + "\n";
+                    richTextBox1.Text += "StreamType : " + f.Audio[0].StreamType + "\n";
+                    */
+                }
+                else
+                {
+                    richTextBox1.Text += "\n無MediaInfo Audio資料\n";
+                }
+
+                if (f.Video.Count > 0)
+                {
+                    richTextBox1.Text += "\n";
+                    richTextBox1.Text += "Video ---------------------------------" + "\n";
+                    richTextBox1.Text += "\n";
+                    richTextBox1.Text += "Format : " + f.Video[0].Format + "\n";
+                    richTextBox1.Text += "Bit rate : " + f.Video[0].Bitrate.ToString() + "\n";
+                    richTextBox1.Text += "Frame rate : " + f.Video[0].FrameRate.ToString() + "\n";
+                    richTextBox1.Text += "Frame size : " + f.Video[0].FrameSize.ToString() + "\n";
+
+                    richTextBox1.Text += "\n";
+                    w = f.Video[0].Width;
+                    h = f.Video[0].Height;
+
+                    richTextBox1.Text += "[視訊資訊]\n";
+                    richTextBox1.Text += "  視訊編碼: " + f.Video[0].Format + "\n";
+                    richTextBox1.Text += "  輸入格式: " + f.Video[0].Format + "\n";
+                    richTextBox1.Text += "  輸入大小: " + w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\n";
+                    richTextBox1.Text += "  FPS: " + f.Video[0].FrameRate.ToString() + "\n";
+                    richTextBox1.Text += "  Bitrate: " + f.Video[0].Bitrate.ToString() + " kbps\n";
+
+                    /*
+                    richTextBox1.Text += "Format : " + f.General.Format.ToString() + "\n";
+                    richTextBox1.Text += "W : " + f.Video[0].Width.ToString() + "\n";
+                    richTextBox1.Text += "H : " + f.Video[0].Height.ToString() + "\n";
+                    richTextBox1.Text += "時間 : " + f.Video[0].DurationString + "\n";
+
+                    richTextBox1.Text += "Description : " + f.Video[0].Description + "\n";
+                    richTextBox1.Text += "Format : " + f.Video[0].Format + "\n";
+                    richTextBox1.Text += "FrameRate : " + f.Video[0].FrameRate.ToString() + "\n";
+                    richTextBox1.Text += "FrameSize : " + f.Video[0].FrameSize.ToString() + "\n";
+                    richTextBox1.Text += "MPlayerID : " + f.Video[0].MPlayerID.ToString() + "\n";
+                    richTextBox1.Text += "PixelFormat : " + f.Video[0].PixelFormat + "\n";
+                    richTextBox1.Text += "Resolution : " + f.Video[0].Resolution.ToString() + "\n";
+                    richTextBox1.Text += "StreamSize : " + f.Video[0].StreamSize.ToString() + "\n";
+                    richTextBox1.Text += "StreamType : " + f.Video[0].StreamType + "\n";
+                    */
+                }
+                else
+                {
+                    richTextBox1.Text += "\n無MediaInfo Video資料\n";
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "非影片, 無MediaInfo資料\n";
+            }
+
+            //Info
+            if (f.MediaInfo_Available == true)
+            {
+                richTextBox1.Text += "有MediaInfo資料, 全部資料:\n" + f.MediaInfo_Text + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "無MediaInfo資料\n";
+            }
+        }
+
+        void play_video_files(string all_filename)
+        {
+            //richTextBox1.Text += "播放檔案 : " + all_filename + "\n";
+
+            //指定應用程式路徑
+            string target = String.Empty;
+
+            //方法一
+            //Process.Start(target, "參數");
+            //Process.Start(target, all_filename);
+
+            //方法二
+
+            target = video_player_path;
+
+            ProcessStartInfo pInfo = new ProcessStartInfo(target);
+            pInfo.Arguments = all_filename;
+
+            /*
+            // debug mesg
+            richTextBox1.Text += "target : " + target + "\n";
+            richTextBox1.Text += "all_filename : " + all_filename + "\n";
+            */
+
+            if (video_player_path == String.Empty)
+            {
+                all_filename = all_filename.Trim().Replace("\"", "");
+                Process.Start(all_filename); //使用預設程式開啟, 無法一次播放多個檔案
+            }
+            else
+            {
+                Process.Start(video_player_path, all_filename);    //指名播放程式開啟
+            }
+
+            /*
+            using (Process process = new Process())
+            {
+                process.StartInfo = pInfo;
+                process.Start();
+            }
+            */
+        }
+
+        private void tb_foldername_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
+            {
+                //Enter
+
+
+                e.Handled = true;
+            }
+            else if (e.KeyChar == (Char)27)  //撈取ESC
+            {
+                //ESC
+                tb_foldername.Text = tb_foldername_text_old;  // 恢復
+
+                e.Handled = true;
+            }
+            else
+            {
+                e.Handled = false;
+            }
+
+
+        }
+
+        private void tb_filename_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
+            {
+                //Enter
+
+
+                e.Handled = true;
+            }
+            else if (e.KeyChar == (Char)27)  //撈取ESC
+            {
+                //ESC
+                tb_filename.Text = tb_filename_text_old;  // 恢復
+
+                e.Handled = true;
+            }
+            else
+            {
+                e.Handled = false;
+            }
+        }
+
+        private void bt_test1_Click(object sender, EventArgs e)
+        {
             //fileinfos操作
 
             //------------------------------------------------------------  # 60個
@@ -2206,6 +3061,7 @@ namespace vcs_DiskDirectoryFile1
             }
 
             //------------------------------------------------------------  # 60個
+
         }
 
         string get_shortname(string longname)
@@ -2472,286 +3328,20 @@ namespace vcs_DiskDirectoryFile1
 
         //------------------------------------------------------------  # 60個
 
-        private void listView1_MouseClick(object sender, MouseEventArgs e)
+        private void bt_test2_Click(object sender, EventArgs e)
         {
-            int idx = listView1.SelectedIndices[0];
-            /*
-            richTextBox1.Text += "檔名:\t" + listView1.Items[idx].Text + "\n";
-            richTextBox1.Text += "大小:\t" + listView1.Items[idx].SubItems[1].Text + "\n";
-            richTextBox1.Text += "格式:\t" + listView1.Items[idx].SubItems[2].Text + "\n";
-            richTextBox1.Text += "資料夾:\t" + listView1.Items[idx].SubItems[3].Text + "\n";
-            string fullname = listView1.Items[idx].SubItems[3].Text + "\\" + listView1.Items[idx].Text;
-            richTextBox1.Text += "完整路徑:\t" + fullname + "\n";
-            */
-
-            string foldername = listView1.Items[idx].SubItems[3].Text;
-            DirectoryInfo dinfo = new DirectoryInfo(foldername);
-            tb_foldername.Text = dinfo.Name;  //資料夾簡名
-            tb_filename.Text = listView1.Items[idx].Text;  // 檔案名稱 或許不要副檔名
-            tb_foldername_text_old = dinfo.Name;  //資料夾簡名
-            tb_filename_text_old = listView1.Items[idx].Text;  // 檔案名稱 或許不要副檔名
-            return;
-        }
-
-        private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            int idx = listView1.SelectedIndices[0];
-            richTextBox1.Text += "檔名:\t" + listView1.Items[idx].Text + "\n";
-            richTextBox1.Text += "大小:\t" + listView1.Items[idx].SubItems[1].Text + "\n";
-            richTextBox1.Text += "格式:\t" + listView1.Items[idx].SubItems[2].Text + "\n";
-            richTextBox1.Text += "資料夾:\t" + listView1.Items[idx].SubItems[3].Text + "\n";
-            string fullname = listView1.Items[idx].SubItems[3].Text + "\\" + listView1.Items[idx].Text;
-            richTextBox1.Text += "完整路徑:\t" + fullname + "\n";
-
-            if (File.Exists(fullname) == true)
-            {
-                play_video_files(fullname);
-            }
-            else
-            {
-                richTextBox1.Text += "檔案 : " + fullname + " , 不存在\n";
-            }
-        }
-
-        bool flag_sort_type0 = false;  // false : ASCENDING, true : DESCENDING
-        bool flag_sort_type1 = false;  // false : ASCENDING, true : DESCENDING
-        bool flag_sort_type2 = false;  // false : ASCENDING, true : DESCENDING
-        bool flag_sort_type3 = false;  // false : ASCENDING, true : DESCENDING
-        private void listView1_ColumnClick(object sender, ColumnClickEventArgs e)
-        {
-            //richTextBox1.Text += "你按了第 " + e.Column.ToString() + " 欄\n";
-            //richTextBox1.Text += "aaa : " + listView1.Columns[e.Column] + "\n";
-            //richTextBox1.Text += "bbb : " + e.Column.ToString() + "\n";
-
-            if (e.Column == 0)
-            {
-                flag_sort_type0 = !flag_sort_type0;
-                show_file_info6(0, flag_sort_type0);
-            }
-            else if (e.Column == 1)
-            {
-                flag_sort_type1 = !flag_sort_type1;
-                show_file_info6(1, flag_sort_type1);
-            }
-            else if (e.Column == 2)
-            {
-                flag_sort_type2 = !flag_sort_type2;
-                show_file_info6(2, flag_sort_type2);
-            }
-            else if (e.Column == 3)
-            {
-                flag_sort_type3 = !flag_sort_type3;
-                show_file_info6(3, flag_sort_type3);
-            }
-            else
-            {
-                richTextBox1.Text += "XXXXXXX\n";
-            }
-        }
-
-        //------------------------------------------------------------  # 60個
-        //------------------------------------------------------------  # 60個
-
-        private void bt_start_files_Click(object sender, EventArgs e)
-        {
-            int selectCount = listView1.SelectedIndices.Count;  // 總共選擇的個數
-            if (selectCount == 0)
-            {
-                richTextBox1.Text += "未選取檔案\n";
-                return;
-            }
-
-            string all_filename = string.Empty;
-            for (int i = 0; i < selectCount; i++)
-            {
-                int idx = listView1.SelectedIndices[i];
-                listView1.Items[idx].Selected = true;  // 選到的項目
-                all_filename += " \"" + listView1.Items[idx].SubItems[3].Text + "\\" + listView1.Items[idx].Text + "\"";
-            }
-            play_video_files(all_filename);  // 播放
-        }
-
-        private void bt_start_all_files_Click(object sender, EventArgs e)
-        {
-            //播放全部
-
-            // ListView 全部資料
-            int len = listView1.Items.Count;
-            richTextBox1.Text += "共有項目" + len.ToString() + " 個\n";
-            string all_filename = string.Empty;
-            for (int i = 0; i < len; i++)
-            {
-                //richTextBox1.Text += listView1.Items[i].Text + "\n";
-                //richTextBox1.Text += listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\t" + listView1.Items[i].SubItems[2].Text + "\n";
-                all_filename += " \"" + listView1.Items[i].SubItems[3].Text + "\\" + listView1.Items[i].Text + "\"";
-            }
-            play_video_files(all_filename);  // 播放
-        }
-
-        private void bt_delete_file_Click(object sender, EventArgs e)
-        {
-            int selectCount = listView1.SelectedIndices.Count;
-
-            richTextBox1.Text += "你選擇了 : " + selectCount.ToString() + " 個檔案, 分別是\n";
-
-            for (int i = 0; i < selectCount; i++)
-            {
-                richTextBox1.Text += listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
-            }
-
-            richTextBox1.Text += "刪除\n";
-
-            for (int i = selectCount - 1; i >= 0; i--)
-            {
-                richTextBox1.Text += "刪除檔案: " + listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
-
-                richTextBox1.Text += "目前不支援直接刪除檔案\n";
-                /*  直接刪除檔案
-                File.SetAttributes(listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text, FileAttributes.Normal);
-                File.Delete(listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text);
-                */
-                listView1.SelectedItems[i].Remove();
-            }
-        }
-
-        private void bt_setup_Click(object sender, EventArgs e)
-        {
-            Form_Setup frm = new Form_Setup();    //實體化 Form_Setup 視窗物件
-            frm.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
-            frm.ShowDialog();   //顯示 frm 視窗
-        }
-
-        private void bt_open_dir1_Click(object sender, EventArgs e)
-        {
-            //folderBrowserDialog1.SelectedPath = Application.StartupPath;    //預設開啟的路徑
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-            {
-                tb_foldername1.Text = folderBrowserDialog1.SelectedPath;
-            }
-            else
-            {
-                richTextBox1.Text = "未選取資料夾\n";
-            }
-        }
-
-        private void bt_open_dir2_Click(object sender, EventArgs e)
-        {
-            //folderBrowserDialog1.SelectedPath = Application.StartupPath;    //預設開啟的路徑
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-            {
-                tb_foldername2.Text = folderBrowserDialog1.SelectedPath;
-            }
-            else
-            {
-                richTextBox1.Text = "未選取資料夾\n";
-            }
-        }
-
-        private void bt_export_doc_Click(object sender, EventArgs e)
-        {
-            ProcessFile_mode = PROCESS_FILE_MODE0;  // 0:預設只匯出檔名
-            ProcessFile_mode = PROCESS_FILE_MODE1;  // 1:只看大檔
-            ProcessFile_mode = PROCESS_FILE_MODE2;  // 2:顯示至 ListView
-            ProcessFile_mode = PROCESS_FILE_MODE3;  // 3:找空資料夾
-            ProcessFile_mode = PROCESS_FILE_MODE4;  // 4:找小資料夾
-            ProcessFile_mode = PROCESS_FILE_MODE5;  // 5:找特定檔案
-            ProcessFile_mode = PROCESS_FILE_MODE6;  // 6:指定附檔名檔案
-            ProcessFile_mode = PROCESS_FILE_MODE7;  // 7:只找資料夾 for 圖片整理
-            ProcessFile_mode = PROCESS_FILE_MODE8;  // 8:搜尋影片檔, 搜尋小影片檔<720, 特大影片檔>1080
-            ProcessFile_mode = PROCESS_FILE_MODE9;  // 9:匯出Katfile壓縮檔檔案資料
-
-            ProcessFile_mode = PROCESS_FILE_MODE9;  // 9:匯出Katfile壓縮檔檔案資料
-
-            foldername = Application.StartupPath;
-            doc_foldername = tb_foldername1.Text;
-            if (Directory.Exists(doc_foldername) == true)     //確認資料夾是否存在
-            {
-                foldername = doc_foldername;
-            }
-
-            do_my_export(foldername, bt_export_doc);
-
-        }
-
-        private void bt_export_video_Click(object sender, EventArgs e)
-        {
-            ProcessFile_mode = PROCESS_FILE_MODE0;  // 0:預設只匯出檔名
-            ProcessFile_mode = PROCESS_FILE_MODE1;  // 1:只看大檔
-            ProcessFile_mode = PROCESS_FILE_MODE2;  // 2:顯示至 ListView
-            ProcessFile_mode = PROCESS_FILE_MODE3;  // 3:找空資料夾
-            ProcessFile_mode = PROCESS_FILE_MODE4;  // 4:找小資料夾
-            ProcessFile_mode = PROCESS_FILE_MODE5;  // 5:找特定檔案
-            ProcessFile_mode = PROCESS_FILE_MODE6;  // 6:指定附檔名檔案
-            ProcessFile_mode = PROCESS_FILE_MODE7;  // 7:只找資料夾 for 圖片整理
-            ProcessFile_mode = PROCESS_FILE_MODE8;  // 8:搜尋影片檔, 搜尋小影片檔<720, 特大影片檔>1080
-            ProcessFile_mode = PROCESS_FILE_MODE9;  // 9:匯出Katfile壓縮檔檔案資料
-
-            ProcessFile_mode = PROCESS_FILE_MODE8;  // 8:搜尋影片檔, 搜尋小影片檔<720, 特大影片檔>1080
-
-            foldername = Application.StartupPath;
-            video_foldername = tb_foldername2.Text;
-            if (Directory.Exists(video_foldername) == true)     //確認資料夾是否存在
-            {
-                foldername = video_foldername;
-            }
-
-            do_my_export(foldername, bt_export_video);
-
-            listView1.Items.Clear();
+            //優優檔
 
             int len = fileinfos.Count;
             if (len == 0)
             {
-                richTextBox1.Text += "無資料a\n";
+                richTextBox1.Text += "無資料c\n";
             }
             else
             {
                 richTextBox1.Text += "找到 " + len.ToString() + " 筆資料\n";
-                show_file_info6(-1, false);
-            }
-        }
-
-        void do_my_export(string foldername, Button btn)
-        {
-            //開始計時
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-            btn.BackColor = Color.Red;
-            Application.DoEvents();
-
-            total_size = 0;
-            total_files = 0;
-            text = string.Empty;
-            fileinfos.Clear();
-
-            ProcessDirectory(foldername);
-
-            richTextBox1.Text += text + "\n";
-
-            if (total_files > 0)
-            {
-                richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-                richTextBox1.Text += "檔案個數 : " + total_files.ToString();
-                richTextBox1.Text += ", 大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
-                richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
             }
 
-            richTextBox1.Text += "檔案 : " + total_files.ToString() + " 個\n";
-            richTextBox1.Text += "大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "(" + total_size.ToString() + "位元組)\n";
-            //richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
-
-            stopwatch.Stop();
-            richTextBox1.Text += "總時間: " + stopwatch.ElapsedMilliseconds.ToString() + " 毫秒\n";
-            lb_search_result2.Text = ((float)stopwatch.ElapsedMilliseconds / 1000).ToString("F2") + " 秒";
-            btn.BackColor = SystemColors.ControlLight;
-        }
-
-        private void bt_compare_Click(object sender, EventArgs e)
-        {
-            //fileinfos操作
-            //比較
-
-            int len = fileinfos.Count;
             if (len < 2)
             {
                 richTextBox1.Text += "至少需要2筆資料\n";
@@ -2760,574 +3350,67 @@ namespace vcs_DiskDirectoryFile1
 
             fileinfos_match.Clear();
 
+            string[] good_pattern = new string[] {
+                  "asami", "yuna", "kaede", "hayashi", "julia", "jjjj", "chitose"    //A class
+                , "nozomi", "anri", "jessica", "airi", "ths", "saeko", ""
+                , "松島", "桐原", "冬月", "小川", "椎名", "宮瀬", "QQQQ"
+                , "smr", "yama", "maria", "akari", "maron", "ryo", "QQQQ"
+                , "mai", "karen", "rinne", "miu", "kano", "QQQQ", "QQQQ"
+                , "suzu", "yuri", "sakura", "nanami", "minami", "iori", "QQQQ"
+                , "1111", "3333", "7777", "9999", "mino", "megumi", "QQQQ"
+                , "kurara", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "立花", "愛世", "美月", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "kana", "tia", "momo", "yui", "sho", "nene", "園田"    //B class
+                , "ayaka", "jgj", "sora", "bt", "maki", "ayumi", "mion"
+                , "本田岬", "lily", "lauren", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "gggg", "debut", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"    //new tmp
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+            };
+
             for (int i = 0; i < len; i++)
             {
-                for (int j = i + 1; j < (len - 1); j++)
+                foreach (string ptn in good_pattern)
                 {
-                    // case 1 : 比較真檔名
-                    if (fileinfos[i].filename == fileinfos[j].filename)
+                    if (fileinfos[i].filename.ToLower().Contains(ptn) == true)
                     {
-                        richTextBox1.Text += "找到真檔名\n";
-                        //richTextBox1.Text += fileinfos[i].fullfilename + "\n";
-                        //richTextBox1.Text += fileinfos[j].fullfilename + "\n";
                         fileinfos_match.Add(fileinfos[i]);
-                        fileinfos_match.Add(fileinfos[j]);
-                    }
-
-                    /*
-                    // case 2 : 比較模糊檔名
-                    if (fileinfos[i].shortfilename == fileinfos[j].shortfilename)
-                    {
-                        richTextBox1.Text += "找到模糊檔名\n";
-                        //richTextBox1.Text += fileinfos[i].fullfilename + "\n";
-                        //richTextBox1.Text += fileinfos[j].fullfilename + "\n";
-                        fileinfos_match.Add(fileinfos[i]);
-                        fileinfos_match.Add(fileinfos[j]);
-                    }
-                    */
-
-                    // case 3 : 比較檔案大小
-                    if (fileinfos[i].filesize == fileinfos[j].filesize)
-                    {
-                        richTextBox1.Text += "找到相同檔案大小\n";
-                        //richTextBox1.Text += fileinfos[i].fullfilename + "\n";
-                        //richTextBox1.Text += fileinfos[j].fullfilename + "\n";
-                        fileinfos_match.Add(fileinfos[i]);
-                        fileinfos_match.Add(fileinfos[j]);
+                        break;
                     }
                 }
             }
-
-            //------------------------------------------------------------  # 60個
-
-            richTextBox1.Text += "打印搜尋結果\n";
-            len = fileinfos_match.Count;
-            for (int i = 0; i < len; i++)
-            {
-                richTextBox1.Text += fileinfos_match[i].filepath + "\t" + fileinfos_match[i].filename + "\t" + fileinfos_match[i].filesize + "\n";
-
-            }
-
-
-
-
         }
 
-        //------------------------------------------------------------  # 60個
-        //------------------------------------------------------------  # 60個
-        //------------------------------------------------------------  # 60個
-
-        void get_DirectoryInfo(string foldername)
+        private void bt_test3_Click(object sender, EventArgs e)
         {
-            DirectoryInfo dinfo = new DirectoryInfo(foldername);
-            get_DirectoryInfo(dinfo);
+            //測試顯示時間
+
+            //public string ByteConversionTBGBMBKB(Int64 size)
+
+            Int64 elpased_time = 1234567;
+            richTextBox1.Text += ByteConversionTBGBMBKB(Convert.ToInt64(elpased_time)) + "\n";
+
+            elpased_time = 86400 - 1;
+            richTextBox1.Text += TimeConversion(elpased_time) + "\n";
+
+            elpased_time = 86400 + 1;
+            richTextBox1.Text += TimeConversion(elpased_time) + "\n";
+
+            elpased_time = 3600 + 1;
+            richTextBox1.Text += TimeConversion(elpased_time) + "\n";
+            elpased_time = 3600 - 1;
+            richTextBox1.Text += TimeConversion(elpased_time) + "\n";
+
+            //lb_search_result2.Text = ((float)elpased_time / 1000).ToString("F2") + " 秒";
         }
 
-        void get_DirectoryInfo(DirectoryInfo di)
+        private void bt_test4_Click(object sender, EventArgs e)
         {
-            //資料夾資訊
-            richTextBox1.Text += "完整路徑：" + di.FullName + "\n";
-            richTextBox1.Text += "屬性：" + di.Attributes + "\n";
-            richTextBox1.Text += "存在與否：" + di.Exists + "\n";
-            richTextBox1.Text += "資料夾名稱：" + di.Extension + "\n";
-            richTextBox1.Text += "資料夾簡名：" + di.Name + "\n";
-            richTextBox1.Text += "資料夾名稱：" + di.Parent + "\n";
-            richTextBox1.Text += "上上層目錄 : " + di.Parent.Parent + "\n";
-            richTextBox1.Text += "上上層目錄的全目錄 : " + di.Parent.Parent.FullName + "\n";
-            richTextBox1.Text += "根資料夾：" + di.Root + "\n";
-            richTextBox1.Text += "資料夾內資料夾數目：" + di.GetDirectories().Length + "\n";
-            richTextBox1.Text += "資料夾內檔案數目：" + di.GetFiles().Length + "\n";
-            richTextBox1.Text += "建立時間 : " + di.CreationTime + "\n";
-            richTextBox1.Text += "建立時間 : " + di.LastAccessTime.ToString() + "\n";
 
-            if (di.GetDirectories().Length > 0)
-            {
-                richTextBox1.Text += "下一層資料夾：";
-                foreach (DirectoryInfo ddi in di.GetDirectories())
-                {
-                    get_DirectoryInfo(ddi);
-                }
-            }
-            else
-            {
-                richTextBox1.Text += "\n";
-            }
-        }
-
-        void get_FileInfo(string filename)
-        {
-            FileInfo fi = new FileInfo(filename);
-            get_FileInfo(fi);
-        }
-
-        void get_FileInfo(FileInfo fi)
-        {
-            richTextBox1.Text += fi.Name + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
-
-            return;
-
-            if (fi.Exists == false)  // 確認檔案是否存在
-            {
-                richTextBox1.Text += "檔案不存在\n";
-            }
-            else
-            {
-                //由短檔案名取的短資料夾名
-
-                richTextBox1.Text += "檔名：" + fi.Name + "\n";
-                richTextBox1.Text += "全檔名：" + fi.FullName + "\n";
-                richTextBox1.Text += "副檔名：" + fi.Extension + "\n";
-                richTextBox1.Text += "檔案大小：" + fi.Length.ToString() + "\n";
-                richTextBox1.Text += "檔案大小：" + Convert.ToDouble(fi.Length / 1024).ToString() + " KB\n";
-                richTextBox1.Text += "檔案大小：" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
-                richTextBox1.Text += "資料夾1：" + fi.Directory + "\n";
-                richTextBox1.Text += "資料夾2：" + fi.Directory.Parent + "\n";
-                richTextBox1.Text += "資料夾3：" + fi.DirectoryName + "\n";
-                richTextBox1.Text += "建立時間1：" + fi.CreationTime.ToString() + "\n";
-                richTextBox1.Text += "建立時間2：" + fi.CreationTimeUtc.ToString() + "\n";
-                richTextBox1.Text += "CreationTime : " + fi.CreationTime + "\n";
-                richTextBox1.Text += "CreationTimeUtc : " + fi.CreationTimeUtc + "\n";
-                richTextBox1.Text += "最近修改時間：" + fi.LastWriteTime.ToString() + "\n";
-                richTextBox1.Text += "最近修改時間：" + fi.LastWriteTime.ToShortDateString() + "\n";
-                richTextBox1.Text += "最近修改時間：" + fi.LastWriteTimeUtc.ToString() + "\n";
-                richTextBox1.Text += "存取日期：" + fi.LastAccessTime + "\n";
-                richTextBox1.Text += "存取日期：" + fi.LastAccessTimeUtc + "\n";
-                richTextBox1.Text += "屬性：" + fi.Attributes + "\n";
-                richTextBox1.Text += "唯讀：" + fi.IsReadOnly + "\n";
-
-                string fileSize = (fi.Length / 1024).ToString() + " KB";
-                richTextBox1.Text += "fileSize = " + fileSize + "\n";
-            }
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void ProcessDirectoryInfo(string foldername)
-        {
-            //使用 DirectoryInfo 和 FileInfo
-
-            // 不能排序
-
-            DirectoryInfo dinfo = new DirectoryInfo(foldername);
-
-            // 找資料夾, 一層
-            DirectoryInfo[] dis = dinfo.GetDirectories();  // 傳回目前目錄的子目錄, 一層
-            foreach (DirectoryInfo di in dis)
-            {
-                // [System Volume Information] 資料夾是一個隱藏的系統資料夾，是「系統還原」工具用來儲存其資訊與還原點的地方。
-                if (di.Name != "System Volume Information" && di.Name.Substring(0, 1) != "$")//避開此類folder權限問題
-                {
-                    ProcessDirectoryInfo(di.FullName);  // 利用遞迴把子資料夾也加進來
-                }
-            }
-
-            // 找檔案, 一層
-            FileInfo[] fis = dinfo.GetFiles();  // 由DI取得FI陣列, 一層檔案資訊
-            foreach (FileInfo fi in fis)
-            {
-                get_FileInfo(fi);
-            }
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        int files_in_folders = 0;
-        string message = string.Empty;
-        //以這個為標準, 使用 Directory.GetDirectories() 和 Directory.GetFiles()
-        private void ProcessDirectory(string foldername)
-        {
-            //搜尋子目錄內的所有檔案   一層
-            //使用 Directory.GetDirectories() 和 Directory.GetFiles()
-
-            // 找資料夾, 一層
-            string[] dirs = Directory.GetDirectories(foldername);  // 取得指定目錄中子目錄的名稱, 一層
-            Array.Sort(dirs);  // 排序
-            foreach (string dir in dirs)
-            {
-                // 資料夾
-                ProcessDirectory(dir);
-            }
-
-            DirectoryInfo dinfo = new DirectoryInfo(foldername);
-            //text += "\n" + dinfo.Name + "\n";
-            // 找檔案, 一層
-            string[] filenames = Directory.GetFiles(foldername);  // 取得指定目錄中檔案的名稱
-            Array.Sort(filenames);  // 排序
-            message = string.Empty;
-            files_in_folders = 0;
-            foreach (string filename in filenames)
-            {
-                // 檔案
-                ProcessFile(filename);
-            }
-            if (files_in_folders > 0)
-            {
-                richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-                DirectoryInfo d = new DirectoryInfo(foldername);
-                richTextBox1.Text += "資料夾 : " + d.Name + "\n";
-                richTextBox1.Text += "------------------------------\n";  // 30個
-                richTextBox1.Text += message;
-            }
-        }
-
-        private void ProcessFile(string filename)
-        {
-            FileInfo fi = new FileInfo(filename);
-
-            if (cb_search.Checked == true)
-            {
-                if (fi.Name.Contains(tb_search.Text) == false)
-                {
-                    return;
-                }
-            }
-
-            if (ProcessFile_mode == PROCESS_FILE_MODE0)  // 0:預設只匯出檔名
-            {
-                //text += fi.Name + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
-                text += "\t" + fi.Name + "\n";
-            }
-            else if (ProcessFile_mode == PROCESS_FILE_MODE1)  // 1:只看大檔
-            {
-                // 檢查檔案容量
-                int min_size_mb = 1;  // MB
-                if (fi.Length > (long)min_size_mb * 1024 * 1024)
-                {
-                    text += fi.Name + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
-                    return;
-                }
-            }
-            else if (ProcessFile_mode == PROCESS_FILE_MODE2)  // 2:顯示至 ListView
-            {
-            }
-            else if (ProcessFile_mode == PROCESS_FILE_MODE8)  // 8:搜尋影片檔, 搜尋小影片檔<720, 特大影片檔>1080
-            {
-                // 檢查檔案容量
-                if (cb_size.Checked == true)
-                {
-                    int min_size_mb = int.Parse(tb_size.Text);
-                    if (fi.Length < (long)min_size_mb * 1024 * 1024)
-                    {
-                        return;
-                    }
-                }
-                text += fi.Name + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
-
-                //取得影片檔案資訊
-                MediaInfoNET.MediaFile f = new MediaInfoNET.MediaFile(filename);
-                if (f.InfoAvailable == true)
-                {
-                    if (f.Video.Count > 0)
-                    {
-                        int w = f.Video[0].Width;
-                        int h = f.Video[0].Height;
-                        int fps = (int)f.Video[0].FrameRate;
-
-                        if (cb_search_big_files.Checked == true)
-                        {
-                            if (h <= 1080)
-                            {
-                                return;
-                            }
-                        }
-                        if (cb_search_small_files.Checked == true)
-                        {
-                            if (h >= 1080)
-                            {
-                                return;
-                            }
-                        }
-
-                        //短檔名    大小  格式       資料夾
-                        //xxxx.mp4  4.8GB 1920X1080  AAAA/BBB/CCC
-                        //richTextBox1.Text += "影片名稱: " + fi.Name + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
-                        //richTextBox1.Text += "影片長度: " + f.General.DurationString + "\n";
-                        //richTextBox1.Text += "影片長度: " + f.General.DurationMillis + " 毫秒\n";
-                        //richTextBox1.Text += "FrameCount: " + f.FrameCount.ToString() + "\n";
-                        //richTextBox1.Text += "FPS: " + fps.ToString() + "\n";
-                        //richTextBox1.Text += "time : " + ((int)(f.FrameCount / f.Video[0].FrameRate)).ToString() + " 秒\n";
-                        //richTextBox1.Text += "輸入大小: " + w.ToString() + " × " + h.ToString() + "\n";
-
-                        string n = fi.Name;
-                        string p = fi.Directory.ToString();
-                        string e = "AAAA";
-                        long s = fi.Length;
-                        int d = (int)(f.General.DurationMillis / 1000);
-
-                        fileinfos.Add(new MyFileInfo(n, p, e, s, w, h, fps, d));
-                    }
-                }
-            }
-            else if (ProcessFile_mode == PROCESS_FILE_MODE9)  // 9:匯出Katfile壓縮檔檔案資料
-            {
-                if ((fi.Extension.ToLower() == ".rar") || (fi.Extension.ToLower() == ".zip"))
-                {
-                    //message += "資料夾：" + fi.Directory + "\n";
-
-                    message += "\t" + string.Format("{0,-30}{1,10}", fi.Name, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length))) + "\n";
-
-                    //message += fi.Name + "\n";
-                    //message += "副檔名：" + fi.Extension + "\n";
-                    //message += "檔案大小：" + fi.Length.ToString() + "\n";
-                    //message += "建立時間1：" + fi.CreationTime.ToString() + "\n";
-                    //message += "建立時間2：" + fi.CreationTimeUtc.ToString() + "\n";
-                    //message += "最近寫入時間：" + fi.LastWriteTime.ToString() + "\n";
-                    //message += "檔案: " + filename + "\n";
-                    //message += "------------------------------\n";  // 30個
-                    total_files++;
-                    total_size += fi.Length;
-                    files_in_folders++;
-                    return;
-                }
-            }
-            if (ProcessFile_mode != PROCESS_FILE_MODE9)
-            {
-                total_files++;
-                total_size += fi.Length;
-            }
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        void get_MediaInfo(string filename)
-        {
-            MediaInfoNET.MediaFile f = new MediaInfoNET.MediaFile(filename);
-
-            if (f.InfoAvailable == true)
-            {
-                richTextBox1.Text += "有MediaInfo資料, 全部資料:\n" + f.Info_Text + "\n\n";
-
-                richTextBox1.Text += "  影片長度: " + f.General.DurationString + "\n";
-                richTextBox1.Text += "  FileSize: " + f.FileSize.ToString() + "\n";
-                richTextBox1.Text += "  Extension: " + f.Extension + "\n";
-
-                // f.Video.Count
-
-                int w = 0;
-                int h = 0;
-
-                if (f.Video.Count > 0)
-                {
-                    w = f.Video[0].Width;
-                    h = f.Video[0].Height;
-                    richTextBox1.Text += "  輸入大小: " + w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\n";
-                    richTextBox1.Text += "  FPS: " + f.Video[0].FrameRate.ToString() + "\n";
-                    richTextBox1.Text += string.Format("{0,5} X {1,5}{2,5}{3,10}",
-                        w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
-                }
-
-                richTextBox1.Text += "有MediaInfo資料, 分項資料:\n";
-                richTextBox1.Text += "File : " + f.File + "\n";
-                richTextBox1.Text += "Name : " + f.Name + "\n";
-                richTextBox1.Text += "Title : " + f.Title + "\n";
-                richTextBox1.Text += "FileSize : " + f.FileSize.ToString() + " Bytes\n";
-                richTextBox1.Text += "FrameCount : " + f.FrameCount.ToString() + "\n";
-                richTextBox1.Text += "StreamCount : " + f.StreamCount.ToString() + "\n";
-                richTextBox1.Text += "ParentFolder : " + f.ParentFolder + "\n";
-                richTextBox1.Text += "Extension : " + f.Extension + "\n";
-                richTextBox1.Text += "Description : \n" + f.Description + "\n";
-                richTextBox1.Text += "Capacity : " + f.Text.Capacity.ToString() + "\n";
-
-                //General
-                richTextBox1.Text += "Format : " + f.General.Format + "\n";
-                richTextBox1.Text += "Bitrate : " + f.General.Bitrate.ToString() + "\n";
-                richTextBox1.Text += "CodecID : " + f.General.CodecID + "\n";
-                richTextBox1.Text += "Description : " + f.General.Description + "\n";
-                richTextBox1.Text += "DurationMillis : " + f.General.DurationMillis.ToString() + "\n";
-                richTextBox1.Text += "DurationString : " + f.General.DurationString + "\n";
-                richTextBox1.Text += "DurationStringAccurate : " + f.General.DurationStringAccurate + "\n";
-                richTextBox1.Text += "Extension : " + f.General.Extension + "\n";
-                richTextBox1.Text += "Format : " + f.General.Format + "\n";
-                richTextBox1.Text += "FormatID : " + f.General.FormatID + "\n";
-                richTextBox1.Text += "ID : " + f.General.ID.ToString() + "\n";
-                richTextBox1.Text += "StreamSize : " + f.General.StreamSize.ToString() + "\n";
-                richTextBox1.Text += "StreamType : " + f.General.StreamType + "\n";
-
-                richTextBox1.Text += "\n";
-                richTextBox1.Text += "Audio Count: " + f.Audio.Count.ToString() + "\n";
-                richTextBox1.Text += "Video Count: " + f.Video.Count.ToString() + "\n";
-                richTextBox1.Text += "\n";
-
-                if (f.Audio.Count > 0)
-                {
-                    richTextBox1.Text += "\n";
-                    richTextBox1.Text += "Audio ---------------------------------" + "\n";
-                    richTextBox1.Text += "\n";
-                    richTextBox1.Text += "Format : " + f.Audio[0].Format + "\n";
-                    richTextBox1.Text += "Bitrate : " + f.Audio[0].Bitrate.ToString() + "\n";
-                    richTextBox1.Text += "Channels : " + f.Audio[0].Channels.ToString() + "\n";
-                    richTextBox1.Text += "Sampling : " + f.Audio[0].SamplingRate.ToString() + "\n";
-
-                    richTextBox1.Text += "\n";
-                    richTextBox1.Text += "[音訊資訊]\n";
-                    richTextBox1.Text += "  音訊編碼: " + f.Audio[0].Format + "\n";
-                    richTextBox1.Text += "  取樣率: " + f.Audio[0].SamplingRate.ToString() + "\n";
-                    richTextBox1.Text += "  聲道數: " + f.Audio[0].Channels.ToString() + "\n";
-                    richTextBox1.Text += "  Bitrate: " + f.Audio[0].Bitrate.ToString() + " kbps\n";
-
-                    /*
-                    richTextBox1.Text += "CodecID : " + f.Audio[0].CodecID + "\n";
-                    richTextBox1.Text += "Description : " + f.Audio[0].Description + "\n";
-                    richTextBox1.Text += "DurationString : " + f.Audio[0].DurationString + "\n";
-                    richTextBox1.Text += "Format : " + f.Audio[0].Format + "\n";
-                    richTextBox1.Text += "FormatID : " + f.Audio[0].FormatID + "\n";
-                    richTextBox1.Text += "ID : " + f.Audio[0].ID + "\n";
-                    richTextBox1.Text += "MPlayerID : " + f.Audio[0].MPlayerID + "\n";
-                    richTextBox1.Text += "StreamSize : " + f.Audio[0].StreamSize + "\n";
-                    richTextBox1.Text += "StreamType : " + f.Audio[0].StreamType + "\n";
-                    */
-                }
-                else
-                {
-                    richTextBox1.Text += "\n無MediaInfo Audio資料\n";
-                }
-
-                if (f.Video.Count > 0)
-                {
-                    richTextBox1.Text += "\n";
-                    richTextBox1.Text += "Video ---------------------------------" + "\n";
-                    richTextBox1.Text += "\n";
-                    richTextBox1.Text += "Format : " + f.Video[0].Format + "\n";
-                    richTextBox1.Text += "Bit rate : " + f.Video[0].Bitrate.ToString() + "\n";
-                    richTextBox1.Text += "Frame rate : " + f.Video[0].FrameRate.ToString() + "\n";
-                    richTextBox1.Text += "Frame size : " + f.Video[0].FrameSize.ToString() + "\n";
-
-                    richTextBox1.Text += "\n";
-                    w = f.Video[0].Width;
-                    h = f.Video[0].Height;
-
-                    richTextBox1.Text += "[視訊資訊]\n";
-                    richTextBox1.Text += "  視訊編碼: " + f.Video[0].Format + "\n";
-                    richTextBox1.Text += "  輸入格式: " + f.Video[0].Format + "\n";
-                    richTextBox1.Text += "  輸入大小: " + w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\n";
-                    richTextBox1.Text += "  FPS: " + f.Video[0].FrameRate.ToString() + "\n";
-                    richTextBox1.Text += "  Bitrate: " + f.Video[0].Bitrate.ToString() + " kbps\n";
-
-                    /*
-                    richTextBox1.Text += "Format : " + f.General.Format.ToString() + "\n";
-                    richTextBox1.Text += "W : " + f.Video[0].Width.ToString() + "\n";
-                    richTextBox1.Text += "H : " + f.Video[0].Height.ToString() + "\n";
-                    richTextBox1.Text += "時間 : " + f.Video[0].DurationString + "\n";
-
-                    richTextBox1.Text += "Description : " + f.Video[0].Description + "\n";
-                    richTextBox1.Text += "Format : " + f.Video[0].Format + "\n";
-                    richTextBox1.Text += "FrameRate : " + f.Video[0].FrameRate.ToString() + "\n";
-                    richTextBox1.Text += "FrameSize : " + f.Video[0].FrameSize.ToString() + "\n";
-                    richTextBox1.Text += "MPlayerID : " + f.Video[0].MPlayerID.ToString() + "\n";
-                    richTextBox1.Text += "PixelFormat : " + f.Video[0].PixelFormat + "\n";
-                    richTextBox1.Text += "Resolution : " + f.Video[0].Resolution.ToString() + "\n";
-                    richTextBox1.Text += "StreamSize : " + f.Video[0].StreamSize.ToString() + "\n";
-                    richTextBox1.Text += "StreamType : " + f.Video[0].StreamType + "\n";
-                    */
-                }
-                else
-                {
-                    richTextBox1.Text += "\n無MediaInfo Video資料\n";
-                }
-            }
-            else
-            {
-                richTextBox1.Text += "非影片, 無MediaInfo資料\n";
-            }
-
-            //Info
-            if (f.MediaInfo_Available == true)
-            {
-                richTextBox1.Text += "有MediaInfo資料, 全部資料:\n" + f.MediaInfo_Text + "\n";
-            }
-            else
-            {
-                richTextBox1.Text += "無MediaInfo資料\n";
-            }
-        }
-
-        void play_video_files(string all_filename)
-        {
-            //richTextBox1.Text += "播放檔案 : " + all_filename + "\n";
-
-            //指定應用程式路徑
-            string target = String.Empty;
-
-            //方法一
-            //Process.Start(target, "參數");
-            //Process.Start(target, all_filename);
-
-            //方法二
-
-            target = video_player_path;
-
-            ProcessStartInfo pInfo = new ProcessStartInfo(target);
-            pInfo.Arguments = all_filename;
-
-            /*
-            // debug mesg
-            richTextBox1.Text += "target : " + target + "\n";
-            richTextBox1.Text += "all_filename : " + all_filename + "\n";
-            */
-
-            if (video_player_path == String.Empty)
-            {
-                all_filename = all_filename.Trim().Replace("\"", "");
-                Process.Start(all_filename); //使用預設程式開啟, 無法一次播放多個檔案
-            }
-            else
-            {
-                Process.Start(video_player_path, all_filename);    //指名播放程式開啟
-            }
-
-            /*
-            using (Process process = new Process())
-            {
-                process.StartInfo = pInfo;
-                process.Start();
-            }
-            */
-        }
-
-        private void tb_foldername_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
-            {
-                //Enter
-
-
-                e.Handled = true;
-            }
-            else if (e.KeyChar == (Char)27)  //撈取ESC
-            {
-                //ESC
-                tb_foldername.Text = tb_foldername_text_old;  // 恢復
-
-                e.Handled = true;
-            }
-            else
-            {
-                e.Handled = false;
-            }
-
-
-        }
-
-        private void tb_filename_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
-            {
-                //Enter
-
-
-                e.Handled = true;
-            }
-            else if (e.KeyChar == (Char)27)  //撈取ESC
-            {
-                //ESC
-                tb_filename.Text = tb_filename_text_old;  // 恢復
-
-                e.Handled = true;
-            }
-            else
-            {
-                e.Handled = false;
-            }
         }
     }
 }
