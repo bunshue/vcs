@@ -106,5 +106,29 @@ namespace vcs_DiskDirectoryFile1.Properties {
                 this["filesize_min"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool flag_find_big_files {
+            get {
+                return ((bool)(this["flag_find_big_files"]));
+            }
+            set {
+                this["flag_find_big_files"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool flag_find_small_files {
+            get {
+                return ((bool)(this["flag_find_small_files"]));
+            }
+            set {
+                this["flag_find_small_files"] = value;
+            }
+        }
     }
 }
