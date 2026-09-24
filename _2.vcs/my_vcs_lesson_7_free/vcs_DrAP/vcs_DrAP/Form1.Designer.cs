@@ -58,7 +58,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(12, 223);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 227);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 10;
@@ -68,7 +68,7 @@
             // listView1
             // 
             this.listView1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.listView1.Location = new System.Drawing.Point(12, 120);
+            this.listView1.Location = new System.Drawing.Point(12, 124);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(100, 100);
             this.listView1.TabIndex = 14;
@@ -81,7 +81,7 @@
             // richTextBox2
             // 
             this.richTextBox2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox2.Location = new System.Drawing.Point(12, 329);
+            this.richTextBox2.Location = new System.Drawing.Point(12, 333);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.Size = new System.Drawing.Size(100, 100);
             this.richTextBox2.TabIndex = 19;
@@ -91,7 +91,7 @@
             // tb_search
             // 
             this.tb_search.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_search.Location = new System.Drawing.Point(131, 12);
+            this.tb_search.Location = new System.Drawing.Point(6, 12);
             this.tb_search.Name = "tb_search";
             this.tb_search.Size = new System.Drawing.Size(150, 30);
             this.tb_search.TabIndex = 24;
@@ -104,7 +104,7 @@
             // bt_clear1
             // 
             this.bt_clear1.Font = new System.Drawing.Font("細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear1.Location = new System.Drawing.Point(32, 237);
+            this.bt_clear1.Location = new System.Drawing.Point(32, 241);
             this.bt_clear1.Name = "bt_clear1";
             this.bt_clear1.Size = new System.Drawing.Size(72, 36);
             this.bt_clear1.TabIndex = 36;
@@ -115,7 +115,7 @@
             // bt_clear2
             // 
             this.bt_clear2.Font = new System.Drawing.Font("細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear2.Location = new System.Drawing.Point(32, 350);
+            this.bt_clear2.Location = new System.Drawing.Point(32, 354);
             this.bt_clear2.Name = "bt_clear2";
             this.bt_clear2.Size = new System.Drawing.Size(72, 36);
             this.bt_clear2.TabIndex = 37;
@@ -129,7 +129,7 @@
             this.cb_option1.Checked = true;
             this.cb_option1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_option1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_option1.Location = new System.Drawing.Point(146, 61);
+            this.cb_option1.Location = new System.Drawing.Point(21, 61);
             this.cb_option1.Name = "cb_option1";
             this.cb_option1.Size = new System.Drawing.Size(103, 23);
             this.cb_option1.TabIndex = 51;
@@ -139,7 +139,7 @@
             // bt_clear3
             // 
             this.bt_clear3.Font = new System.Drawing.Font("細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear3.Location = new System.Drawing.Point(32, 145);
+            this.bt_clear3.Location = new System.Drawing.Point(32, 149);
             this.bt_clear3.Name = "bt_clear3";
             this.bt_clear3.Size = new System.Drawing.Size(72, 36);
             this.bt_clear3.TabIndex = 57;
@@ -151,7 +151,7 @@
             // 
             this.groupbox_python.Controls.Add(this.bt_edit_python_files);
             this.groupbox_python.Controls.Add(this.bt_search_pattern_python);
-            this.groupbox_python.Location = new System.Drawing.Point(118, 120);
+            this.groupbox_python.Location = new System.Drawing.Point(118, 124);
             this.groupbox_python.Name = "groupbox_python";
             this.groupbox_python.Size = new System.Drawing.Size(131, 132);
             this.groupbox_python.TabIndex = 64;
@@ -186,7 +186,7 @@
             // 
             this.groupbox_result.Controls.Add(this.lb_search_result2);
             this.groupbox_result.Controls.Add(this.lb_search_result1);
-            this.groupbox_result.Location = new System.Drawing.Point(263, 120);
+            this.groupbox_result.Location = new System.Drawing.Point(263, 124);
             this.groupbox_result.Name = "groupbox_result";
             this.groupbox_result.Size = new System.Drawing.Size(173, 132);
             this.groupbox_result.TabIndex = 65;
@@ -220,7 +220,7 @@
             this.bt_replace.BackColor = System.Drawing.Color.White;
             this.bt_replace.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_replace.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_replace.Location = new System.Drawing.Point(412, 64);
+            this.bt_replace.Location = new System.Drawing.Point(287, 64);
             this.bt_replace.Name = "bt_replace";
             this.bt_replace.Size = new System.Drawing.Size(50, 50);
             this.bt_replace.TabIndex = 69;
@@ -234,7 +234,7 @@
             this.bt_compare.BackgroundImage = global::vcs_DrAP.Properties.Resources.winmerge;
             this.bt_compare.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_compare.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_compare.Location = new System.Drawing.Point(412, 7);
+            this.bt_compare.Location = new System.Drawing.Point(287, 7);
             this.bt_compare.Name = "bt_compare";
             this.bt_compare.Size = new System.Drawing.Size(50, 50);
             this.bt_compare.TabIndex = 66;
@@ -246,7 +246,7 @@
             this.bt_open_dir2.BackgroundImage = global::vcs_DrAP.Properties.Resources.open_folder;
             this.bt_open_dir2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_open_dir2.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_open_dir2.Location = new System.Drawing.Point(356, 7);
+            this.bt_open_dir2.Location = new System.Drawing.Point(231, 7);
             this.bt_open_dir2.Name = "bt_open_dir2";
             this.bt_open_dir2.Size = new System.Drawing.Size(50, 50);
             this.bt_open_dir2.TabIndex = 59;
@@ -258,7 +258,7 @@
             this.bt_copy_rtb_data.BackgroundImage = global::vcs_DrAP.Properties.Resources.clipboard;
             this.bt_copy_rtb_data.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_copy_rtb_data.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_copy_rtb_data.Location = new System.Drawing.Point(32, 379);
+            this.bt_copy_rtb_data.Location = new System.Drawing.Point(32, 383);
             this.bt_copy_rtb_data.Name = "bt_copy_rtb_data";
             this.bt_copy_rtb_data.Size = new System.Drawing.Size(45, 45);
             this.bt_copy_rtb_data.TabIndex = 53;
@@ -270,7 +270,7 @@
             this.bt_setup.BackgroundImage = global::vcs_DrAP.Properties.Resources.setup;
             this.bt_setup.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_setup.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_setup.Location = new System.Drawing.Point(452, 202);
+            this.bt_setup.Location = new System.Drawing.Point(343, 7);
             this.bt_setup.Name = "bt_setup";
             this.bt_setup.Size = new System.Drawing.Size(50, 50);
             this.bt_setup.TabIndex = 52;
@@ -282,7 +282,7 @@
             this.bt_search_pattern_vcs.BackgroundImage = global::vcs_DrAP.Properties.Resources.vcs;
             this.bt_search_pattern_vcs.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_search_pattern_vcs.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_search_pattern_vcs.Location = new System.Drawing.Point(300, 7);
+            this.bt_search_pattern_vcs.Location = new System.Drawing.Point(175, 7);
             this.bt_search_pattern_vcs.Name = "bt_search_pattern_vcs";
             this.bt_search_pattern_vcs.Size = new System.Drawing.Size(50, 50);
             this.bt_search_pattern_vcs.TabIndex = 26;
@@ -294,7 +294,7 @@
             this.bt_open_with_vcs.BackgroundImage = global::vcs_DrAP.Properties.Resources.vcs2;
             this.bt_open_with_vcs.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_open_with_vcs.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_open_with_vcs.Location = new System.Drawing.Point(300, 64);
+            this.bt_open_with_vcs.Location = new System.Drawing.Point(175, 64);
             this.bt_open_with_vcs.Name = "bt_open_with_vcs";
             this.bt_open_with_vcs.Size = new System.Drawing.Size(50, 50);
             this.bt_open_with_vcs.TabIndex = 70;
@@ -306,7 +306,7 @@
             this.bt_open_with_ue.BackgroundImage = global::vcs_DrAP.Properties.Resources.ultraedit;
             this.bt_open_with_ue.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_open_with_ue.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_open_with_ue.Location = new System.Drawing.Point(356, 64);
+            this.bt_open_with_ue.Location = new System.Drawing.Point(231, 64);
             this.bt_open_with_ue.Name = "bt_open_with_ue";
             this.bt_open_with_ue.Size = new System.Drawing.Size(50, 50);
             this.bt_open_with_ue.TabIndex = 71;

@@ -70,5 +70,41 @@ namespace vcs_DiskDirectoryFile1.Properties {
                 this["video_foldername"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool flag_check_filesize {
+            get {
+                return ((bool)(this["flag_check_filesize"]));
+            }
+            set {
+                this["flag_check_filesize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int filesize_max {
+            get {
+                return ((int)(this["filesize_max"]));
+            }
+            set {
+                this["filesize_max"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int filesize_min {
+            get {
+                return ((int)(this["filesize_min"]));
+            }
+            set {
+                this["filesize_min"] = value;
+            }
+        }
     }
 }

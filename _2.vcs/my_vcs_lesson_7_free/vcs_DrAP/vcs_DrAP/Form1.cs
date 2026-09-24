@@ -122,21 +122,22 @@ namespace vcs_DrAP
             int dx = w + 5;
             int dy = h + 5;
 
-            cb_option1.Location = new Point(x_st + dx * 4, y_st + dy * 0);  // 滿30結束
-            tb_search.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            cb_option1.Location = new Point(x_st + dx * 0, y_st + dy * 0);  // 滿30結束
+            tb_search.Size = new Size(160, 60);
+            tb_search.Location = new Point(x_st + dx * 0, y_st + dy * 1);
 
-            bt_search_pattern_vcs.Location = new Point(x_st + dx * 7, y_st + dy * 0);
-            bt_open_with_vcs.Location = new Point(x_st + dx * 7, y_st + dy * 1);
-            bt_open_dir2.Location = new Point(x_st + dx * 8, y_st + dy * 0);
-            bt_open_with_ue.Location = new Point(x_st + dx * 8, y_st + dy * 1);
-            bt_compare.Location = new Point(x_st + dx * 9, y_st + dy * 0);
-            bt_replace.Location = new Point(x_st + dx * 9, y_st + dy * 1);
+            bt_search_pattern_vcs.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            bt_open_with_vcs.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            bt_open_dir2.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            bt_open_with_ue.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            bt_compare.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            bt_replace.Location = new Point(x_st + dx * 5, y_st + dy * 1);
+            bt_setup.Location = new Point(x_st + dx * 6, y_st + dy * 0);
 
             groupbox_python.Size = new Size(112, 106);
-            groupbox_python.Location = new Point(x_st + dx * 11, y_st + dy * 0);
+            groupbox_python.Location = new Point(x_st + dx * 7, y_st + dy * 0);
             groupbox_result.Size = new Size(110, 106);
-            groupbox_result.Location = new Point(x_st + dx * 11 + 120, y_st + dy * 0);
-            bt_setup.Location = new Point(x_st + dx * 11 + 120 + 120, y_st + dy * 1);
+            groupbox_result.Location = new Point(x_st + dx * 7 + 120, y_st + dy * 0);
             lb_search_result1.Location = new Point(10, 25);
             lb_search_result2.Location = new Point(10, 60);
             lb_search_result1.Text = "";
