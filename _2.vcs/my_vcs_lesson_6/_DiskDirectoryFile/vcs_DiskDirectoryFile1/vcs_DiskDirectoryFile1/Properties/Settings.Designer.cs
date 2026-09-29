@@ -130,5 +130,17 @@ namespace vcs_DiskDirectoryFile1.Properties {
                 this["flag_find_small_files"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int flag_file_mode {
+            get {
+                return ((int)(this["flag_file_mode"]));
+            }
+            set {
+                this["flag_file_mode"] = value;
+            }
+        }
     }
 }

@@ -15,8 +15,8 @@ rem dir /s /b /on >dir2.txt
 
 rem 以下固定不變
 
-C:
-cd C:\_git\vcs\_7.cmpp\_batch
+D:
+cd D:\_git\vcs\_7.cmpp\_batch
 
 goto end
 

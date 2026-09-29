@@ -113,42 +113,6 @@ namespace vcs_ReadWrite_TXT
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //File.ReadAllLines, 將純文字檔拆成一行一行的字串陣列
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\article.txt";
-            filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\poem.txt";
-
-            //File.ReadAllLines 將純文字檔拆成一行一行的字串陣列
-            string[] all_lines = File.ReadAllLines(filename, Encoding.Default);
-
-            foreach (string line in all_lines)
-            {
-                richTextBox1.Text += line + "\n";
-            }
-
-            for (int i = 0; i < all_lines.Length; i++)
-            {
-                richTextBox1.Text += all_lines[i] + "\n";
-            }
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            //開檔ReadAllLines存檔
-            filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\琵琶行.txt";
-
-            //File.ReadAllLines 將純文字檔拆成一行一行的字串陣列
-            all_lines = File.ReadAllLines(filename, Encoding.Default);
-
-            List<string> all_lines2 = new List<string>();
-            foreach (string line in all_lines)
-            {
-                richTextBox1.Text += line + "\n";
-                all_lines2.Add("取得資料\t" + line);
-            }
-
-            string filename2 = "tmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
-            File.WriteAllLines(filename2, all_lines2.ToArray());
-            richTextBox1.Text += "已存檔 : " + filename2 + "\n";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -157,42 +121,6 @@ namespace vcs_ReadWrite_TXT
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //File.ReadAllText / File.WriteAllText 大全
-
-            //ReadAllText 讀取文件
-            //使用ReadAllText可以直接讀取文件中的內容, 格式為:
-            //File.ReadAllText(filename)
-
-            //WriteAllText 寫入/建立檔案
-            //透過WriteAllText可以將文字寫入檔案(如果檔案不存在, 會自動建立), 格式為:
-            //File.WriteAllText(filename, 字串);
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\琵琶行.txt";
-            string txt = File.ReadAllText(filename, Encoding.Default);
-            richTextBox1.Text += "檔案內容 : " + txt + "\n";
-            richTextBox1.Text += "長度 : " + txt.Length.ToString() + "\n";
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            //AppendAllText 將字串插入文件內容尾端
-            richTextBox1.Text += "寫一筆資料到檔案尾端\n";
-            filename = "myfilename.txt";
-            File.AppendAllText(filename, " 寫一筆資料到檔案尾端");
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            filename = "tmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".default.txt";
-            //File.WriteAllText(filename, some_text);
-            File.WriteAllText(filename, some_text, Encoding.Default);
-            richTextBox1.Text += "已存檔 : " + filename + "\n";
-
-            //讀取檔案
-            txt = File.ReadAllText(filename);
-            richTextBox1.Text += "檔案內容 : " + txt + "\n";
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -438,147 +366,10 @@ namespace vcs_ReadWrite_TXT
 
         private void button13_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "File.ReadAllBytes()\n";
-
-            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\test_ReadAllBytes.bmp";
-            string filename2 = "tmp_test_WriteAllBytes.bmp";
-
-            //讀取資料
-            byte[] b = File.ReadAllBytes(filename1);
-            richTextBox1.Text += "讀取檔案 : " + filename1 + ", 長度 : " + b.Length.ToString() + "\n";
-
-            //打印資料
-            string bytes = string.Empty;
-            foreach (byte by in b)
-            {
-                bytes += by.ToString("X2");
-            }
-            richTextBox1.Text += bytes;
-
-            //修改資料
-            for (int i = 54; i < b.Length; i++)
-            {
-                if (b[i] == 0xCC)
-                    b[i] = 0xFF;
-            }
-
-            //寫資料
-            File.WriteAllBytes(filename2, b);
-            richTextBox1.Text += "寫成檔案" + filename2 + "\n";
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            /*
-            byte[] data_write = new byte[data_read.Length / 2];
-
-            for (int i = 0; i < data_read.Length / 2; i++)
-            {
-                data_write[i] = data_read[i];
-            }
-
-            //寫資料
-            //File.WriteAllBytes(filename2, data_write);
-            string zzz = Convert.ToString(data_write);
-            File.WriteAllText(filename2, zzz);
-            richTextBox1.Text += "寫成檔案" + filename2 + "\n";
-            */
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            string filename;
-            string text;
-
-            richTextBox1.Text += "用預設編碼開啟\n";
-            filename = @"D:\_git\vcs\_1.data\______test_files1\__text\Compressor.c";
-            b = File.ReadAllBytes(filename);
-            text = Encoding.Default.GetString(b);
-            richTextBox1.Text += text + "\n";
-
-            richTextBox1.Text += "用Big5編碼開啟\n";
-            filename = @"D:\_git\vcs\_1.data\______test_files1\__text\Compressor.c";
-            b = File.ReadAllBytes(filename);
-            text = Encoding.GetEncoding("big5").GetString(b);
-            richTextBox1.Text += text + "\n";
-
-            richTextBox1.Text += "用gb2312編碼開啟\n";
-            filename = @"D:\_git\vcs\_1.data\______test_files1\__text\sc\001川の流れのように.txt";
-            b = File.ReadAllBytes(filename);
-            text = Encoding.GetEncoding("gb2312").GetString(b);
-            richTextBox1.Text += text + "\n";
-
-            richTextBox1.Text += "用shift_jis編碼開啟\n";
-            filename = @"D:\_git\vcs\_1.data\______test_files1\__text\jap\饩Ⓚ丗钡冦冦葢轿瘅.txt";
-            b = File.ReadAllBytes(filename);
-            text = Encoding.GetEncoding("shift_jis").GetString(b);
-            richTextBox1.Text += text + "\n";
-
-            richTextBox1.Text += "用utf-8編碼開啟\n";
-            filename = @"D:\_git\vcs\_1.data\______test_files1\__text\Form1.cs.txt";
-            b = File.ReadAllBytes(filename);
-            text = Encoding.UTF8.GetString(b);
-            richTextBox1.Text += text + "\n";
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "File.WriteAllBytes()\n";
-
-            int i;
-            byte[] data = new byte[16];     //for TC, SC, JP
-            byte[] data2 = new byte[18];    //for unicode
-
-            string filename1 = "tmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".big5.txt";
-            string filename2 = "tmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".gb2312.txt";
-            string filename3 = "tmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".shift_jis.txt";
-            string filename4 = "tmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".unicode.txt";
-
-            //都はるみ全曲集２ 	繁体中文(Big5) 	950 	big5 	B3 A3 3F 3F 3F A5 FE A6 B1 B6 B0 A2 B1
-            //は C756 る C777 み C766
-            byte[] data_1 = { 0xB3, 0xA3, 0xC7, 0x56, 0xC7, 0x77, 0xC7, 0x66, 0xA5, 0xFE, 0xA6, 0xB1, 0xB6, 0xB0, 0xA2, 0xB1 };
-            //都はるみ全曲集２ 	简体中文(GB2312) 	936 	gb2312 	B6 BC A4 CF A4 EB A4 DF C8 AB C7 FA BC AF A3 B2
-            byte[] data_2 = { 0xB6, 0xBC, 0xA4, 0xCF, 0xA4, 0xEB, 0xA4, 0xDF, 0xC8, 0xAB, 0xC7, 0xFA, 0xBC, 0xAF, 0xA3, 0xB2 };
-            //都はるみ全曲集２ 	日语(Shift-JIS) 	932 	shift_jis 	93 73 82 CD 82 E9 82 DD 91 53 8B C8 8F 57 82 51
-            byte[] data_3 = { 0x93, 0x73, 0x82, 0xCD, 0x82, 0xE9, 0x82, 0xDD, 0x91, 0x53, 0x8B, 0xC8, 0x8F, 0x57, 0x82, 0x51 };
-            //都はるみ全曲集２ 	Unicode 		        1200 	utf-16 		FD 90 6F 30 8B 30 7F 30 68 51 F2 66 C6 96 12 FF     use this
-            //都はるみ全曲集２ 	Unicode (Big-Endian) 	1201 	utf-16BE 	90 FD 30 6F 30 8B 30 7F 51 68 66 F2 96 C6 FF 12
-            byte[] data_4 = { 0xFD, 0x90, 0x6F, 0x30, 0x8B, 0x30, 0x7F, 0x30, 0x68, 0x51, 0xF2, 0x66, 0xC6, 0x96, 0x12, 0xFF };
-
-            for (i = 0; i < 16; i++)
-                data[i] = data_1[i];
-
-            //寫資料
-            File.WriteAllBytes(filename1, data);
-
-            for (i = 0; i < 16; i++)
-            {
-                data[i] = data_2[i];
-            }
-
-            //寫資料
-            File.WriteAllBytes(filename2, data);
-
-            for (i = 0; i < 16; i++)
-            {
-                data[i] = data_3[i];
-            }
-
-            //寫資料
-            File.WriteAllBytes(filename3, data);
-
-            data2[0] = 0xFF;
-            data2[1] = 0xFE;
-            for (i = 0; i < 16; i++)
-            {
-                data2[i + 2] = data_4[i];
-            }
-
-            //寫資料
-            File.WriteAllBytes(filename4, data2);
-
-            richTextBox1.Text += "\n存檔完成, 檔名 : " + filename1 + "\n";
-            richTextBox1.Text += "\n存檔完成, 檔名 : " + filename2 + "\n";
-            richTextBox1.Text += "\n存檔完成, 檔名 : " + filename3 + "\n";
-            richTextBox1.Text += "\n存檔完成, 檔名 : " + filename4 + "\n";
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -1866,25 +1657,6 @@ sr = new StreamReader(filename, Encoding.GetEncoding("shift_jis"));
 Encoding.GetEncoding("big5")
 Encoding.GetEncoding(950)
 
-//------------------------------------------------------------  # 60個
-
-StreamWriter sw = File.AppendText(filename1);
-sw.Close();
-
-string line;
-StreamReader sr = File.OpenText(filename2);
-while ((line = sr.ReadLine()) != null)
-{
-    richTextBox1.Text += line + "\n";
-}
-sr.Close();
-                
-//------------------------------------------------------------  # 60個
-
-
-使用 File.ReadAllText() 方法將檔案讀取為字串
-string all_text = File.ReadAllText(filename);
-File.WriteAllText(@"setting.txt", folderPath);
 
 */
 

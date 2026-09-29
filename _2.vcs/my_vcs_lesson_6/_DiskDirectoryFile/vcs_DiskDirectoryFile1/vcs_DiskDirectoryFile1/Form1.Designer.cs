@@ -75,6 +75,10 @@
             this.tb_search = new System.Windows.Forms.TextBox();
             this.cb_search = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bt_test4 = new System.Windows.Forms.Button();
+            this.bt_test3 = new System.Windows.Forms.Button();
+            this.bt_test2 = new System.Windows.Forms.Button();
+            this.bt_test1 = new System.Windows.Forms.Button();
             this.cb_search_small_files = new System.Windows.Forms.CheckBox();
             this.cb_search_big_files = new System.Windows.Forms.CheckBox();
             this.bt_compare = new System.Windows.Forms.Button();
@@ -88,11 +92,19 @@
             this.tb_foldername = new System.Windows.Forms.TextBox();
             this.bt_start_all_files = new System.Windows.Forms.Button();
             this.bt_clear2 = new System.Windows.Forms.Button();
-            this.bt_test1 = new System.Windows.Forms.Button();
-            this.bt_test2 = new System.Windows.Forms.Button();
-            this.bt_test3 = new System.Windows.Forms.Button();
-            this.bt_test4 = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.rb_mode0 = new System.Windows.Forms.RadioButton();
+            this.rb_mode1 = new System.Windows.Forms.RadioButton();
+            this.rb_mode2 = new System.Windows.Forms.RadioButton();
+            this.rb_mode3 = new System.Windows.Forms.RadioButton();
+            this.rb_mode4 = new System.Windows.Forms.RadioButton();
+            this.rb_mode7 = new System.Windows.Forms.RadioButton();
+            this.rb_mode6 = new System.Windows.Forms.RadioButton();
+            this.rb_mode5 = new System.Windows.Forms.RadioButton();
+            this.rb_mode8 = new System.Windows.Forms.RadioButton();
+            this.rb_mode9 = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -144,6 +156,7 @@
             this.bt_file07.Name = "bt_file07";
             this.bt_file07.Size = new System.Drawing.Size(200, 60);
             this.bt_file07.TabIndex = 57;
+            this.bt_file07.Text = "File的讀寫方法";
             this.bt_file07.UseVisualStyleBackColor = true;
             this.bt_file07.Click += new System.EventHandler(this.bt_file07_Click);
             // 
@@ -576,6 +589,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.bt_test4);
             this.groupBox1.Controls.Add(this.bt_test3);
             this.groupBox1.Controls.Add(this.bt_test2);
@@ -606,6 +620,54 @@
             this.groupBox1.Size = new System.Drawing.Size(606, 277);
             this.groupBox1.TabIndex = 259;
             this.groupBox1.TabStop = false;
+            // 
+            // bt_test4
+            // 
+            this.bt_test4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_test4.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_test4.Location = new System.Drawing.Point(423, 208);
+            this.bt_test4.Name = "bt_test4";
+            this.bt_test4.Size = new System.Drawing.Size(45, 45);
+            this.bt_test4.TabIndex = 272;
+            this.bt_test4.Text = "測試4";
+            this.bt_test4.UseVisualStyleBackColor = true;
+            this.bt_test4.Click += new System.EventHandler(this.bt_test4_Click);
+            // 
+            // bt_test3
+            // 
+            this.bt_test3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_test3.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_test3.Location = new System.Drawing.Point(372, 208);
+            this.bt_test3.Name = "bt_test3";
+            this.bt_test3.Size = new System.Drawing.Size(45, 45);
+            this.bt_test3.TabIndex = 271;
+            this.bt_test3.Text = "測試3";
+            this.bt_test3.UseVisualStyleBackColor = true;
+            this.bt_test3.Click += new System.EventHandler(this.bt_test3_Click);
+            // 
+            // bt_test2
+            // 
+            this.bt_test2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_test2.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_test2.Location = new System.Drawing.Point(321, 208);
+            this.bt_test2.Name = "bt_test2";
+            this.bt_test2.Size = new System.Drawing.Size(45, 45);
+            this.bt_test2.TabIndex = 270;
+            this.bt_test2.Text = "測試2";
+            this.bt_test2.UseVisualStyleBackColor = true;
+            this.bt_test2.Click += new System.EventHandler(this.bt_test2_Click);
+            // 
+            // bt_test1
+            // 
+            this.bt_test1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_test1.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_test1.Location = new System.Drawing.Point(270, 208);
+            this.bt_test1.Name = "bt_test1";
+            this.bt_test1.Size = new System.Drawing.Size(45, 45);
+            this.bt_test1.TabIndex = 269;
+            this.bt_test1.Text = "測試1";
+            this.bt_test1.UseVisualStyleBackColor = true;
+            this.bt_test1.Click += new System.EventHandler(this.bt_test1_Click);
             // 
             // cb_search_small_files
             // 
@@ -755,53 +817,125 @@
             this.bt_clear2.UseVisualStyleBackColor = true;
             this.bt_clear2.Click += new System.EventHandler(this.bt_clear2_Click);
             // 
-            // bt_test1
+            // groupBox2
             // 
-            this.bt_test1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_test1.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_test1.Location = new System.Drawing.Point(270, 208);
-            this.bt_test1.Name = "bt_test1";
-            this.bt_test1.Size = new System.Drawing.Size(45, 45);
-            this.bt_test1.TabIndex = 269;
-            this.bt_test1.Text = "測試1";
-            this.bt_test1.UseVisualStyleBackColor = true;
-            this.bt_test1.Click += new System.EventHandler(this.bt_test1_Click);
+            this.groupBox2.Controls.Add(this.rb_mode9);
+            this.groupBox2.Controls.Add(this.rb_mode8);
+            this.groupBox2.Controls.Add(this.rb_mode7);
+            this.groupBox2.Controls.Add(this.rb_mode6);
+            this.groupBox2.Controls.Add(this.rb_mode5);
+            this.groupBox2.Controls.Add(this.rb_mode4);
+            this.groupBox2.Controls.Add(this.rb_mode3);
+            this.groupBox2.Controls.Add(this.rb_mode2);
+            this.groupBox2.Controls.Add(this.rb_mode1);
+            this.groupBox2.Controls.Add(this.rb_mode0);
+            this.groupBox2.Location = new System.Drawing.Point(377, 29);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(214, 140);
+            this.groupBox2.TabIndex = 262;
+            this.groupBox2.TabStop = false;
             // 
-            // bt_test2
+            // rb_mode0
             // 
-            this.bt_test2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_test2.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_test2.Location = new System.Drawing.Point(321, 208);
-            this.bt_test2.Name = "bt_test2";
-            this.bt_test2.Size = new System.Drawing.Size(45, 45);
-            this.bt_test2.TabIndex = 270;
-            this.bt_test2.Text = "測試2";
-            this.bt_test2.UseVisualStyleBackColor = true;
-            this.bt_test2.Click += new System.EventHandler(this.bt_test2_Click);
+            this.rb_mode0.AutoSize = true;
+            this.rb_mode0.Checked = true;
+            this.rb_mode0.Location = new System.Drawing.Point(11, 21);
+            this.rb_mode0.Name = "rb_mode0";
+            this.rb_mode0.Size = new System.Drawing.Size(85, 16);
+            this.rb_mode0.TabIndex = 0;
+            this.rb_mode0.TabStop = true;
+            this.rb_mode0.Text = "radioButton1";
+            this.rb_mode0.UseVisualStyleBackColor = true;
             // 
-            // bt_test3
+            // rb_mode1
             // 
-            this.bt_test3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_test3.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_test3.Location = new System.Drawing.Point(372, 208);
-            this.bt_test3.Name = "bt_test3";
-            this.bt_test3.Size = new System.Drawing.Size(45, 45);
-            this.bt_test3.TabIndex = 271;
-            this.bt_test3.Text = "測試3";
-            this.bt_test3.UseVisualStyleBackColor = true;
-            this.bt_test3.Click += new System.EventHandler(this.bt_test3_Click);
+            this.rb_mode1.AutoSize = true;
+            this.rb_mode1.Location = new System.Drawing.Point(11, 44);
+            this.rb_mode1.Name = "rb_mode1";
+            this.rb_mode1.Size = new System.Drawing.Size(85, 16);
+            this.rb_mode1.TabIndex = 1;
+            this.rb_mode1.Text = "radioButton2";
+            this.rb_mode1.UseVisualStyleBackColor = true;
             // 
-            // bt_test4
+            // rb_mode2
             // 
-            this.bt_test4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_test4.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_test4.Location = new System.Drawing.Point(423, 208);
-            this.bt_test4.Name = "bt_test4";
-            this.bt_test4.Size = new System.Drawing.Size(45, 45);
-            this.bt_test4.TabIndex = 272;
-            this.bt_test4.Text = "測試4";
-            this.bt_test4.UseVisualStyleBackColor = true;
-            this.bt_test4.Click += new System.EventHandler(this.bt_test4_Click);
+            this.rb_mode2.AutoSize = true;
+            this.rb_mode2.Location = new System.Drawing.Point(11, 66);
+            this.rb_mode2.Name = "rb_mode2";
+            this.rb_mode2.Size = new System.Drawing.Size(85, 16);
+            this.rb_mode2.TabIndex = 2;
+            this.rb_mode2.Text = "radioButton3";
+            this.rb_mode2.UseVisualStyleBackColor = true;
+            // 
+            // rb_mode3
+            // 
+            this.rb_mode3.AutoSize = true;
+            this.rb_mode3.Location = new System.Drawing.Point(11, 88);
+            this.rb_mode3.Name = "rb_mode3";
+            this.rb_mode3.Size = new System.Drawing.Size(85, 16);
+            this.rb_mode3.TabIndex = 3;
+            this.rb_mode3.Text = "radioButton4";
+            this.rb_mode3.UseVisualStyleBackColor = true;
+            // 
+            // rb_mode4
+            // 
+            this.rb_mode4.AutoSize = true;
+            this.rb_mode4.Location = new System.Drawing.Point(11, 110);
+            this.rb_mode4.Name = "rb_mode4";
+            this.rb_mode4.Size = new System.Drawing.Size(85, 16);
+            this.rb_mode4.TabIndex = 4;
+            this.rb_mode4.Text = "radioButton5";
+            this.rb_mode4.UseVisualStyleBackColor = true;
+            // 
+            // rb_mode7
+            // 
+            this.rb_mode7.AutoSize = true;
+            this.rb_mode7.Location = new System.Drawing.Point(102, 66);
+            this.rb_mode7.Name = "rb_mode7";
+            this.rb_mode7.Size = new System.Drawing.Size(85, 16);
+            this.rb_mode7.TabIndex = 7;
+            this.rb_mode7.Text = "radioButton8";
+            this.rb_mode7.UseVisualStyleBackColor = true;
+            // 
+            // rb_mode6
+            // 
+            this.rb_mode6.AutoSize = true;
+            this.rb_mode6.Location = new System.Drawing.Point(102, 44);
+            this.rb_mode6.Name = "rb_mode6";
+            this.rb_mode6.Size = new System.Drawing.Size(85, 16);
+            this.rb_mode6.TabIndex = 6;
+            this.rb_mode6.Text = "radioButton9";
+            this.rb_mode6.UseVisualStyleBackColor = true;
+            // 
+            // rb_mode5
+            // 
+            this.rb_mode5.AutoSize = true;
+            this.rb_mode5.Location = new System.Drawing.Point(102, 21);
+            this.rb_mode5.Name = "rb_mode5";
+            this.rb_mode5.Size = new System.Drawing.Size(91, 16);
+            this.rb_mode5.TabIndex = 5;
+            this.rb_mode5.Text = "radioButton10";
+            this.rb_mode5.UseVisualStyleBackColor = true;
+            // 
+            // rb_mode8
+            // 
+            this.rb_mode8.AutoSize = true;
+            this.rb_mode8.Location = new System.Drawing.Point(102, 88);
+            this.rb_mode8.Name = "rb_mode8";
+            this.rb_mode8.Size = new System.Drawing.Size(85, 16);
+            this.rb_mode8.TabIndex = 8;
+            this.rb_mode8.Text = "radioButton8";
+            this.rb_mode8.UseVisualStyleBackColor = true;
+            // 
+            // rb_mode9
+            // 
+            this.rb_mode9.AutoSize = true;
+            this.rb_mode9.Location = new System.Drawing.Point(102, 110);
+            this.rb_mode9.Name = "rb_mode9";
+            this.rb_mode9.Size = new System.Drawing.Size(85, 16);
+            this.rb_mode9.TabIndex = 9;
+            this.rb_mode9.Text = "radioButton8";
+            this.rb_mode9.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -852,6 +986,8 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -923,6 +1059,17 @@
         private System.Windows.Forms.Button bt_test3;
         private System.Windows.Forms.Button bt_test2;
         private System.Windows.Forms.Button bt_test1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.RadioButton rb_mode7;
+        private System.Windows.Forms.RadioButton rb_mode6;
+        private System.Windows.Forms.RadioButton rb_mode5;
+        private System.Windows.Forms.RadioButton rb_mode4;
+        private System.Windows.Forms.RadioButton rb_mode3;
+        private System.Windows.Forms.RadioButton rb_mode2;
+        private System.Windows.Forms.RadioButton rb_mode1;
+        private System.Windows.Forms.RadioButton rb_mode0;
+        private System.Windows.Forms.RadioButton rb_mode9;
+        private System.Windows.Forms.RadioButton rb_mode8;
     }
 }
 

@@ -1,4 +1,92 @@
 
+
+//------------------------------------------------------------  # 60個
+
+
+
+//------------------------------------------------------------  # 60個
+
+
+//------------------------------------------------------------  # 60個
+
+import sys
+import requests
+import re
+from bs4 import BeautifulSoup
+
+def get_html_data1(url):
+    print('取得網頁資料: ', url)
+    resp = requests.get(url)
+    # 檢查 HTTP 回應碼是否為 requests.codes.ok(200)
+    if resp.status_code != requests.codes.ok:
+        print('讀取網頁資料錯誤, url: ', resp.url)
+        return None
+    else:
+        return resp
+
+print('BeautifulSoup 測試 1')
+
+url = 'https://pornav.co/'
+html_data = get_html_data1(url)
+if html_data:
+        soup = BeautifulSoup(html_data.text, 'html.parser')
+        #print(soup.prettify())  #prettify()這個函數可以將DOM tree以比較美觀的方式印出。
+
+        print("取得網頁標題", soup.title)
+
+        print('搜尋網頁中的 jpg圖片連結')
+        regex = re.compile('.*\.jpg')
+        imglist = soup.find_all("img", {"src":regex})
+        for img in imglist:
+            print(img["src"])
+        
+else:
+        print('無法取得網頁資料')
+
+
+
+print('BeautifulSoup 測試 作業完成')
+
+//------------------------------------------------------------  # 60個
+
+import sys
+import requests
+import re
+from bs4 import BeautifulSoup
+
+def get_html_data1(url):
+    print('取得網頁資料: ', url)
+    resp = requests.get(url)
+    # 檢查 HTTP 回應碼是否為 requests.codes.ok(200)
+    if resp.status_code != requests.codes.ok:
+        print('讀取網頁資料錯誤, url: ', resp.url)
+        return None
+    else:
+        return resp
+
+print('BeautifulSoup 測試 1')
+
+url = 'https://pornav.co/'
+html_data = get_html_data1(url)
+if html_data:
+        soup = BeautifulSoup(html_data.text, 'html.parser')
+        #print(soup.prettify())  #prettify()這個函數可以將DOM tree以比較美觀的方式印出。
+
+        print("取得網頁標題", soup.title)
+
+        print('搜尋網頁中的 jpg圖片連結')
+        regex = re.compile('.*\.jpg')
+        imglist = soup.find_all("img", {"src":regex})
+        for img in imglist:
+            print(img["src"])
+        
+else:
+        print('無法取得網頁資料')
+
+
+
+print('BeautifulSoup 測試 作業完成')
+
 //------------------------------------------------------------  # 60個
 
 你遇到的錯誤是因為 google.colab 這個模組只存在於 Google Colab 的雲端環境，
@@ -33,9 +121,7 @@ rainbow	彩色
 
 //------------------------------------------------------------  # 60個
 
-
 plt.savefig('tmp_event.png', dpi=300) 	# 將圓餅圖出成圖片，檔名為event.png 
-
 
 //------------------------------------------------------------  # 60個
 
@@ -136,7 +222,6 @@ jamesbank.save_money(500)               # 存錢
 jamesbank.get_balance()                 # 列出存款金額
 hungbank = Shilin_Banks('Hung')         # 定義Shilin_Banks類別物件
 print("Hung's banks  = ", hungbank.bank_title())   # 列印銀行名稱
-
 
 # ch13_12.ipynb
 import banks                            # 導入banks模組     
@@ -299,12 +384,7 @@ pack place gird
 可以 place+pack 或  place+grid
 
 
-
-
-
 # ------------------------------------------------------------  # 60個
-
-
 
 
 # ------------------------------------------------------------  # 60個
