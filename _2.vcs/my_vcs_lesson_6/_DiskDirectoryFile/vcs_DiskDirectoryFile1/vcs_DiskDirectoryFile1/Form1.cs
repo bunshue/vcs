@@ -43,6 +43,7 @@ namespace vcs_DiskDirectoryFile1
         string video_player_path = String.Empty;
         string tb_foldername_text_old = string.Empty;
         string tb_filename_text_old = string.Empty;
+        int flag_file_mode = 0;
         int filesize_min = 0;
 
         private const int PROCESS_FILE_MODE0 = 0x00;  // 0:預設只匯出檔名
@@ -233,6 +234,29 @@ namespace vcs_DiskDirectoryFile1
                 richTextBox1.Text += "播放影片程式不存在 : " + Properties.Settings.Default.video_player_path + "\n使用Windows預設播放影片程式\n";
                 video_player_path = String.Empty;
             }
+            flag_file_mode = Properties.Settings.Default.flag_file_mode;
+            if (flag_file_mode == 0)
+                rb_mode0.Checked = true;
+            else if (flag_file_mode == 1)
+                rb_mode1.Checked = true;
+            else if (flag_file_mode == 2)
+                rb_mode2.Checked = true;
+            else if (flag_file_mode == 3)
+                rb_mode3.Checked = true;
+            else if (flag_file_mode == 4)
+                rb_mode4.Checked = true;
+            else if (flag_file_mode == 5)
+                rb_mode5.Checked = true;
+            else if (flag_file_mode == 6)
+                rb_mode6.Checked = true;
+            else if (flag_file_mode == 7)
+                rb_mode7.Checked = true;
+            else if (flag_file_mode == 8)
+                rb_mode8.Checked = true;
+            else if (flag_file_mode == 9)
+                rb_mode9.Checked = true;
+            else
+                rb_mode0.Checked = true;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -263,6 +287,29 @@ namespace vcs_DiskDirectoryFile1
             Properties.Settings.Default.flag_check_filesize = cb_size.Checked;
             Properties.Settings.Default.flag_find_big_files = cb_search_big_files.Checked;
             Properties.Settings.Default.flag_find_small_files = cb_search_small_files.Checked;
+            if (rb_mode0.Checked == true)
+                flag_file_mode = 0;
+            else if (rb_mode1.Checked == true)
+                flag_file_mode = 1;
+            else if (rb_mode2.Checked == true)
+                flag_file_mode = 2;
+            else if (rb_mode3.Checked == true)
+                flag_file_mode = 3;
+            else if (rb_mode4.Checked == true)
+                flag_file_mode = 4;
+            else if (rb_mode5.Checked == true)
+                flag_file_mode = 5;
+            else if (rb_mode6.Checked == true)
+                flag_file_mode = 6;
+            else if (rb_mode7.Checked == true)
+                flag_file_mode = 7;
+            else if (rb_mode8.Checked == true)
+                flag_file_mode = 8;
+            else if (rb_mode9.Checked == true)
+                flag_file_mode = 9;
+            else
+                flag_file_mode = 0;
+            Properties.Settings.Default.flag_file_mode = flag_file_mode;
 
             Properties.Settings.Default.Save();
         }
@@ -2626,17 +2673,6 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_export_doc_Click(object sender, EventArgs e)
         {
-            ProcessFile_mode = PROCESS_FILE_MODE0;  // 0:預設只匯出檔名
-            ProcessFile_mode = PROCESS_FILE_MODE1;  // 1:只看大檔
-            ProcessFile_mode = PROCESS_FILE_MODE2;  // 2:顯示至 ListView
-            ProcessFile_mode = PROCESS_FILE_MODE3A;  // 3A:找最底層 空資料夾
-            ProcessFile_mode = PROCESS_FILE_MODE3B;  // 3B:找最底層 小資料夾
-            ProcessFile_mode = PROCESS_FILE_MODE5;  // 5:找特定檔案
-            ProcessFile_mode = PROCESS_FILE_MODE6;  // 6:指定附檔名檔案
-            ProcessFile_mode = PROCESS_FILE_MODE7;  // 7:只找資料夾 for 圖片整理
-            ProcessFile_mode = PROCESS_FILE_MODE8;  // 8:搜尋影片檔, 搜尋小影片檔<720, 特大影片檔>1080
-            ProcessFile_mode = PROCESS_FILE_MODE9;  // 9:匯出Katfile壓縮檔檔案資料
-
             ProcessFile_mode = PROCESS_FILE_MODE9;  // 9:匯出Katfile壓縮檔檔案資料
 
             foldername = Application.StartupPath;
@@ -2651,20 +2687,6 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_export_video_Click(object sender, EventArgs e)
         {
-            ProcessFile_mode = PROCESS_FILE_MODE0;  // 0:預設只匯出檔名
-            ProcessFile_mode = PROCESS_FILE_MODE1;  // 1:只看大檔
-            ProcessFile_mode = PROCESS_FILE_MODE2;  // 2:顯示至 ListView
-            ProcessFile_mode = PROCESS_FILE_MODE3A;  // 3A:找最底層 空資料夾
-            ProcessFile_mode = PROCESS_FILE_MODE3B;  // 3B:找最底層 小資料夾
-            ProcessFile_mode = PROCESS_FILE_MODE5;  // 5:找特定檔案
-            ProcessFile_mode = PROCESS_FILE_MODE6;  // 6:指定附檔名檔案
-            ProcessFile_mode = PROCESS_FILE_MODE7;  // 7:只找資料夾 for 圖片整理
-            ProcessFile_mode = PROCESS_FILE_MODE8;  // 8:搜尋影片檔, 搜尋小影片檔<720, 特大影片檔>1080
-            ProcessFile_mode = PROCESS_FILE_MODE9;  // 9:匯出Katfile壓縮檔檔案資料
-
-            ProcessFile_mode = PROCESS_FILE_MODE8;  // 8:搜尋影片檔, 搜尋小影片檔<720, 特大影片檔>1080
-            ProcessFile_mode = PROCESS_FILE_MODE0;  // 0:預設只匯出檔名
-            ProcessFile_mode = PROCESS_FILE_MODE3A;  // 3A:找最底層 空資料夾
             ProcessFile_mode = PROCESS_FILE_MODE3B;  // 3B:找最底層 小資料夾
 
             foldername = Application.StartupPath;
