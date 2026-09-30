@@ -71,6 +71,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Setup.resx">
       <DependentUpon>Form_Setup.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -98,6 +99,7 @@
     <None Include="img\potplayer.png" />
     <None Include="img\setup.png" />
     <None Include="img\open_folder.png" />
+    <Content Include="img\katfile.jpg" />
     <Content Include="MediaInfo.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

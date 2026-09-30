@@ -18,7 +18,7 @@
             }
 
 
-6060
+------------------------------------------------------------
 
 //針對某控件的邊緣 設定表單大小
 this.ClientSize = new Size(richTextBox1.Right + 50, richTextBox1.Bottom + 50);
@@ -154,6 +154,7 @@ draw translate-transform
             }
 
 
+//測不出來
         //----選到textbox時，選取全部文字
         private void TextBox_Enter(object sender, EventArgs e)
         {
@@ -6128,14 +6129,6 @@ APIC	附圖	image/jpeg??JFIF?髟CC_PROFILE懸pplmntrRGB XYZ ?
         {
             textBox1.TextChanged += TextBoxTextChenge;
             textBox2.TextChanged += TextBoxTextChenge;
-            textBox1.MouseClick += TextBox_MouseClick;
-            textBox2.MouseClick += TextBox_MouseClick;
-        }
-
-        private void TextBox_MouseClick(object sender, MouseEventArgs e)
-        {
-            TextBox tb = sender as TextBox;
-            tb.SelectAll();
         }
 
         private void TextBoxTextChenge(object sender, EventArgs e)

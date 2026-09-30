@@ -29,16 +29,16 @@ namespace vcs_DiskDirectoryFile1
             lb_setup2.Text = "播放圖片程式";
             lb_setup3.Text = "文字編輯程式";
             lb_setup4.Text = "預設搜尋路徑";
-            lb_setup5.Text = "Python編輯路徑";
-            lb_setup6.Text = "WinMerge程式路徑";
+            lb_setup5.Text = "Katfile路徑";
+            lb_setup6.Text = "Git路徑";
 
             tb_setup0.Text = Properties.Settings.Default.video_player_path;
             //tb_setup1.Text = Properties.Settings.Default.audio_player_path;
             //tb_setup2.Text = Properties.Settings.Default.picture_viewer_path;
             //tb_setup3.Text = Properties.Settings.Default.text_editor_path;
             tb_setup4.Text = Properties.Settings.Default.search_path;
-            //tb_setup5.Text = Properties.Settings.Default.python_editor_path;
-            //tb_setup6.Text = Properties.Settings.Default.winmerge_path;
+            tb_setup5.Text = Properties.Settings.Default.doc_foldername;
+            tb_setup6.Text = Properties.Settings.Default.git_foldername;
 
             show_item_location();
         }
@@ -46,7 +46,7 @@ namespace vcs_DiskDirectoryFile1
         void show_item_location()
         {
             //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
+            //this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             //this.FormBorderStyle = FormBorderStyle.FixedSingle;
             //this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
 
@@ -87,39 +87,17 @@ namespace vcs_DiskDirectoryFile1
             bt_setup6.Location = new Point(x_st + dx * 4 + dxx, y_st + dy * 6);
             bt_setup_save.Location = new Point(x_st + dx * 4 + dxx, y_st + dy * 7);
 
-            bt_exit_setup();
+            //針對某控件的邊緣 設定表單大小
+            this.ClientSize = new Size(bt_setup_save.Right + 20, bt_setup_save.Bottom + 20);
+
+            this.Text = "vcs_DiskDirectoryFile1";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
-        private void bt_exit_Click(object sender, EventArgs e)
-        {
-            //Application.Exit();
-            this.Close();
-        }
-
-        void bt_exit_setup()
-        {
-            int width = 5;
-            int w = 50; //設定按鈕大小 W
-            int h = 50; //設定按鈕大小 H
-
-            Button bt_exit = new Button();  // 實例化按鈕
-            bt_exit.Size = new Size(w, h);
-            bt_exit.Text = "";
-            Bitmap bmp = new Bitmap(w, h);
-            Graphics g = Graphics.FromImage(bmp);
-            Pen p = new Pen(Color.Red, width);
-            g.Clear(Color.Pink);
-            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
-            g.DrawLine(p, 0, 0, w - 1, h - 1);
-            g.DrawLine(p, w - 1, 0, 0, h - 1);
-            bt_exit.Image = bmp;
-
-            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
-            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
-
-            this.Controls.Add(bt_exit); // 將按鈕加入表單
-            bt_exit.BringToFront();     //移到最上層
-        }
+        //------------------------------------------------------------  # 60個
 
         private void bt_setup0_Click(object sender, EventArgs e)
         {
@@ -182,6 +160,7 @@ namespace vcs_DiskDirectoryFile1
             folderBrowserDialog1.SelectedPath = "C:\\"; //預設開啟的路徑
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
+                //預設搜尋路徑
                 tb_setup4.Text = folderBrowserDialog1.SelectedPath;
             }
             else
@@ -192,20 +171,27 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_setup5_Click(object sender, EventArgs e)
         {
-
+            folderBrowserDialog1.SelectedPath = "C:\\"; //預設開啟的路徑
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                tb_setup5.Text = folderBrowserDialog1.SelectedPath;
+            }
+            else
+            {
+                //richTextBox2.Text = "未選取資料夾\n";
+            }
         }
 
         private void bt_setup6_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Title = "選取WinMerge程式";
-            openFileDialog1.FileName = "";
-            openFileDialog1.Filter = "程式|*.exe|所有檔|*.*";   //限定檔案格式
-            openFileDialog1.FilterIndex = 1;
-            openFileDialog1.RestoreDirectory = true;
-            openFileDialog1.InitialDirectory = "C:\\";         //從目前目錄開始尋找檔案
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            folderBrowserDialog1.SelectedPath = "C:\\"; //預設開啟的路徑
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
-                tb_setup6.Text = openFileDialog1.FileName;
+                tb_setup6.Text = folderBrowserDialog1.SelectedPath;
+            }
+            else
+            {
+                //richTextBox2.Text = "未選取資料夾\n";
             }
         }
 
@@ -217,8 +203,8 @@ namespace vcs_DiskDirectoryFile1
             //Properties.Settings.Default.picture_viewer_path = tb_setup2.Text;
             //Properties.Settings.Default.text_editor_path = tb_setup3.Text;
             Properties.Settings.Default.search_path = tb_setup4.Text;
-            //Properties.Settings.Default.python_editor_path = tb_setup5.Text;
-            //Properties.Settings.Default.winmerge_path = tb_setup6.Text;
+            Properties.Settings.Default.doc_foldername = tb_setup5.Text;
+            Properties.Settings.Default.git_foldername = tb_setup6.Text;
 
             Properties.Settings.Default.Save();
             show_main_message("儲存設定完成", S_OK, 30);

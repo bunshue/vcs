@@ -61,18 +61,6 @@ namespace vcs_DiskDirectoryFile1.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string video_foldername {
-            get {
-                return ((string)(this["video_foldername"]));
-            }
-            set {
-                this["video_foldername"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool flag_check_filesize {
             get {
@@ -140,6 +128,18 @@ namespace vcs_DiskDirectoryFile1.Properties {
             }
             set {
                 this["flag_file_mode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string git_foldername {
+            get {
+                return ((string)(this["git_foldername"]));
+            }
+            set {
+                this["git_foldername"] = value;
             }
         }
     }

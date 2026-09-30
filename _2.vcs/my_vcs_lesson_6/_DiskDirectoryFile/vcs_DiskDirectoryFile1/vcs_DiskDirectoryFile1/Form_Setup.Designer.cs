@@ -78,7 +78,7 @@
             // bt_setup1
             // 
             this.bt_setup1.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_setup1.Location = new System.Drawing.Point(689, 55);
+            this.bt_setup1.Location = new System.Drawing.Point(722, 53);
             this.bt_setup1.Name = "bt_setup1";
             this.bt_setup1.Size = new System.Drawing.Size(94, 32);
             this.bt_setup1.TabIndex = 2;
@@ -90,7 +90,7 @@
             // 
             this.lb_setup2.AutoSize = true;
             this.lb_setup2.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_setup2.Location = new System.Drawing.Point(25, 133);
+            this.lb_setup2.Location = new System.Drawing.Point(25, 111);
             this.lb_setup2.Name = "lb_setup2";
             this.lb_setup2.Size = new System.Drawing.Size(99, 19);
             this.lb_setup2.TabIndex = 3;
@@ -100,7 +100,7 @@
             // 
             this.lb_setup3.AutoSize = true;
             this.lb_setup3.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_setup3.Location = new System.Drawing.Point(25, 190);
+            this.lb_setup3.Location = new System.Drawing.Point(25, 168);
             this.lb_setup3.Name = "lb_setup3";
             this.lb_setup3.Size = new System.Drawing.Size(99, 19);
             this.lb_setup3.TabIndex = 4;
@@ -110,7 +110,7 @@
             // 
             this.lb_setup4.AutoSize = true;
             this.lb_setup4.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_setup4.Location = new System.Drawing.Point(25, 244);
+            this.lb_setup4.Location = new System.Drawing.Point(25, 222);
             this.lb_setup4.Name = "lb_setup4";
             this.lb_setup4.Size = new System.Drawing.Size(99, 19);
             this.lb_setup4.TabIndex = 5;
@@ -120,7 +120,7 @@
             // 
             this.lb_setup5.AutoSize = true;
             this.lb_setup5.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_setup5.Location = new System.Drawing.Point(25, 295);
+            this.lb_setup5.Location = new System.Drawing.Point(25, 273);
             this.lb_setup5.Name = "lb_setup5";
             this.lb_setup5.Size = new System.Drawing.Size(99, 19);
             this.lb_setup5.TabIndex = 6;
@@ -139,7 +139,7 @@
             // tb_setup2
             // 
             this.tb_setup2.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_setup2.Location = new System.Drawing.Point(127, 128);
+            this.tb_setup2.Location = new System.Drawing.Point(127, 106);
             this.tb_setup2.Name = "tb_setup2";
             this.tb_setup2.Size = new System.Drawing.Size(574, 30);
             this.tb_setup2.TabIndex = 3;
@@ -147,7 +147,7 @@
             // tb_setup3
             // 
             this.tb_setup3.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_setup3.Location = new System.Drawing.Point(127, 185);
+            this.tb_setup3.Location = new System.Drawing.Point(127, 163);
             this.tb_setup3.Name = "tb_setup3";
             this.tb_setup3.Size = new System.Drawing.Size(574, 30);
             this.tb_setup3.TabIndex = 4;
@@ -155,7 +155,7 @@
             // tb_setup4
             // 
             this.tb_setup4.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_setup4.Location = new System.Drawing.Point(127, 239);
+            this.tb_setup4.Location = new System.Drawing.Point(127, 217);
             this.tb_setup4.Name = "tb_setup4";
             this.tb_setup4.Size = new System.Drawing.Size(574, 30);
             this.tb_setup4.TabIndex = 5;
@@ -163,7 +163,7 @@
             // tb_setup5
             // 
             this.tb_setup5.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_setup5.Location = new System.Drawing.Point(127, 290);
+            this.tb_setup5.Location = new System.Drawing.Point(127, 268);
             this.tb_setup5.Name = "tb_setup5";
             this.tb_setup5.Size = new System.Drawing.Size(574, 30);
             this.tb_setup5.TabIndex = 6;
@@ -179,7 +179,7 @@
             // bt_setup2
             // 
             this.bt_setup2.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_setup2.Location = new System.Drawing.Point(689, 104);
+            this.bt_setup2.Location = new System.Drawing.Point(722, 102);
             this.bt_setup2.Name = "bt_setup2";
             this.bt_setup2.Size = new System.Drawing.Size(94, 32);
             this.bt_setup2.TabIndex = 13;
@@ -190,7 +190,7 @@
             // bt_setup3
             // 
             this.bt_setup3.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_setup3.Location = new System.Drawing.Point(689, 161);
+            this.bt_setup3.Location = new System.Drawing.Point(722, 159);
             this.bt_setup3.Name = "bt_setup3";
             this.bt_setup3.Size = new System.Drawing.Size(94, 32);
             this.bt_setup3.TabIndex = 14;
@@ -201,7 +201,7 @@
             // bt_setup4
             // 
             this.bt_setup4.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_setup4.Location = new System.Drawing.Point(689, 215);
+            this.bt_setup4.Location = new System.Drawing.Point(722, 213);
             this.bt_setup4.Name = "bt_setup4";
             this.bt_setup4.Size = new System.Drawing.Size(94, 32);
             this.bt_setup4.TabIndex = 15;
@@ -212,7 +212,7 @@
             // bt_setup5
             // 
             this.bt_setup5.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_setup5.Location = new System.Drawing.Point(689, 266);
+            this.bt_setup5.Location = new System.Drawing.Point(722, 264);
             this.bt_setup5.Name = "bt_setup5";
             this.bt_setup5.Size = new System.Drawing.Size(94, 32);
             this.bt_setup5.TabIndex = 16;
@@ -223,7 +223,7 @@
             // bt_setup0
             // 
             this.bt_setup0.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_setup0.Location = new System.Drawing.Point(689, 21);
+            this.bt_setup0.Location = new System.Drawing.Point(722, 19);
             this.bt_setup0.Name = "bt_setup0";
             this.bt_setup0.Size = new System.Drawing.Size(94, 32);
             this.bt_setup0.TabIndex = 17;
@@ -234,7 +234,7 @@
             // bt_setup_save
             // 
             this.bt_setup_save.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_setup_save.Location = new System.Drawing.Point(689, 385);
+            this.bt_setup_save.Location = new System.Drawing.Point(722, 383);
             this.bt_setup_save.Name = "bt_setup_save";
             this.bt_setup_save.Size = new System.Drawing.Size(94, 32);
             this.bt_setup_save.TabIndex = 18;
@@ -264,7 +264,7 @@
             // bt_setup6
             // 
             this.bt_setup6.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_setup6.Location = new System.Drawing.Point(689, 312);
+            this.bt_setup6.Location = new System.Drawing.Point(722, 310);
             this.bt_setup6.Name = "bt_setup6";
             this.bt_setup6.Size = new System.Drawing.Size(94, 32);
             this.bt_setup6.TabIndex = 22;
@@ -275,7 +275,7 @@
             // tb_setup6
             // 
             this.tb_setup6.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_setup6.Location = new System.Drawing.Point(127, 336);
+            this.tb_setup6.Location = new System.Drawing.Point(127, 314);
             this.tb_setup6.Name = "tb_setup6";
             this.tb_setup6.Size = new System.Drawing.Size(574, 30);
             this.tb_setup6.TabIndex = 21;
@@ -284,7 +284,7 @@
             // 
             this.lb_setup6.AutoSize = true;
             this.lb_setup6.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_setup6.Location = new System.Drawing.Point(25, 341);
+            this.lb_setup6.Location = new System.Drawing.Point(25, 319);
             this.lb_setup6.Name = "lb_setup6";
             this.lb_setup6.Size = new System.Drawing.Size(99, 19);
             this.lb_setup6.TabIndex = 20;
