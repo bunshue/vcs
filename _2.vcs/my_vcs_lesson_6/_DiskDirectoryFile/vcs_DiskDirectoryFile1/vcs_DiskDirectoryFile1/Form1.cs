@@ -3963,15 +3963,7 @@ sr.Close();
 
 檔案容量特大 或者 容量最大的幾個檔案
 
-cb_search_big_files.Text = "搜尋大檔";
+cb_search_big_files.Text   = "搜尋大檔";
 cb_search_small_files.Text = "搜尋小檔";
-
 */
 
-
-
-// tb_limit_max
-
-// cb_limit_min
-
-// cb_limit_min

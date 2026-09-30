@@ -64,7 +64,38 @@ namespace vcs_PictureCrop
             nud_h.ValueChanged += new EventHandler(select_crop_area);
 
             reset_picture();
+
+            //------------------------------------------------------------  # 60個
+
+            int x_st = Properties.Settings.Default.x_st;
+            int y_st = Properties.Settings.Default.y_st;
+            int width = Properties.Settings.Default.width;
+            int height = Properties.Settings.Default.height;
+            nud_x_st.Value = x_st;
+            nud_y_st.Value = y_st;
+            nud_w.Value = width;
+            nud_h.Value = height;
+
+            select_crop_area(sender, e);
+            Application.DoEvents();
+            select_crop_area(sender, e);
         }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            int x_st = (int)nud_x_st.Value;
+            int y_st = (int)nud_y_st.Value;
+            int width = (int)nud_w.Value;
+            int height = (int)nud_h.Value;
+            Properties.Settings.Default.x_st = x_st;
+            Properties.Settings.Default.y_st = y_st;
+            Properties.Settings.Default.width = width;
+            Properties.Settings.Default.height = height;
+            Properties.Settings.Default.Save();
+        }
+
+        //------------------------------------------------------------  # 60個
+
 
         private void select_crop_area(object sender, EventArgs e)
         {
@@ -394,6 +425,8 @@ namespace vcs_PictureCrop
         {
             //Info
             richTextBox1.Text += "SelectionRectangle = " + SelectionRectangle.ToString() + "\n";
+
+            select_crop_area(sender, e);
         }
 
         private void button6_Click(object sender, EventArgs e)
