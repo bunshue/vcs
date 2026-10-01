@@ -35,6 +35,8 @@ namespace vcs_DiskDirectoryFile1
     {
         bool flag_my_file_manager = false;
         bool flag_search_Katfile = false;
+        bool flag_search_empty_folders = false;  // 找最底層 空資料夾
+        bool flag_search_small_folders = false;  // 找最底層 小資料夾
 
         string some_text = "白日依山盡，黃河入海流。 欲窮千里目，更上一層樓。";
         string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
@@ -51,9 +53,9 @@ namespace vcs_DiskDirectoryFile1
         private const int PROCESS_FILE_MODE0 = 0x00;  // 0:預設只匯出檔名
         private const int PROCESS_FILE_MODE1 = 0x01;  // 1:搜尋影片檔, 搜尋小影片檔<720, 特大影片檔>1080
         private const int PROCESS_FILE_MODE2 = 0x02;  // 2:只找資料夾 for 圖片整理
-        private const int PROCESS_FILE_MODE3 = 0x03;  // 3:找最底層 空資料夾
-        private const int PROCESS_FILE_MODE4 = 0x04;  // 4:找最底層 小資料夾
-        private const int PROCESS_FILE_MODE5 = 0x05;  // 5:比較檔案
+        private const int PROCESS_FILE_MODE3 = 0x03;  // 3:TBD
+        private const int PROCESS_FILE_MODE4 = 0x04;  // 4:TBD
+        private const int PROCESS_FILE_MODE5 = 0x05;  // 5:TBD
         private const int PROCESS_FILE_MODE6 = 0x06;  // 6:指定附檔名檔案
         private const int PROCESS_FILE_MODE7 = 0x07;  // 7:Git清理
         private const int PROCESS_FILE_MODE8 = 0x08;  // 8:TBD
@@ -174,9 +176,9 @@ namespace vcs_DiskDirectoryFile1
         //不用宣告長度的陣列(Array)
         // 宣告fileinfos 為List
         // 以下List 裡為MyFileInfo 型態
-        List<MyFileInfo> fileinfos = new List<MyFileInfo>();
+        List<MyFileInfo> fileinfos = new List<MyFileInfo>();  // 檔案, 一般檔案/影片檔案
         List<MyFileInfo> fileinfos_match = new List<MyFileInfo>();
-        List<MyFolderInfo> folderinfos = new List<MyFolderInfo>();
+        List<MyFolderInfo> folderinfos = new List<MyFolderInfo>();  // 資料夾
 
         //全部
         //Int64 total_folders = 0;  //所有的資料夾個數 TBD
@@ -214,11 +216,6 @@ namespace vcs_DiskDirectoryFile1
             listView1.GridLines = true;
             listView1.Clear();
 
-            //設置列名稱
-            listView1.Columns.Add("檔名", 180, HorizontalAlignment.Left);
-            listView1.Columns.Add("大小", 80, HorizontalAlignment.Left);
-            listView1.Columns.Add("格式", 150, HorizontalAlignment.Left);
-            listView1.Columns.Add("資料夾", 700, HorizontalAlignment.Left);
             listView1.MouseClick += new MouseEventHandler(listView1_MouseClick);
             listView1.MouseDoubleClick += new MouseEventHandler(listView1_MouseDoubleClick);
             listView1.ColumnClick += new ColumnClickEventHandler(listView1_ColumnClick);
@@ -268,14 +265,6 @@ namespace vcs_DiskDirectoryFile1
                 rb_mode8.Checked = true;
             else if (flag_file_mode == 9)
                 rb_mode9.Checked = true;
-            else if (flag_file_mode == 10)
-                rb_mode10.Checked = true;
-            else if (flag_file_mode == 11)
-                rb_mode11.Checked = true;
-            else if (flag_file_mode == 12)
-                rb_mode12.Checked = true;
-            else if (flag_file_mode == 13)
-                rb_mode13.Checked = true;
             else
                 rb_mode0.Checked = true;
         }
@@ -330,14 +319,6 @@ namespace vcs_DiskDirectoryFile1
                 flag_file_mode = 8;
             else if (rb_mode9.Checked == true)
                 flag_file_mode = 9;
-            else if (rb_mode10.Checked == true)
-                flag_file_mode = 10;
-            else if (rb_mode11.Checked == true)
-                flag_file_mode = 11;
-            else if (rb_mode12.Checked == true)
-                flag_file_mode = 12;
-            else if (rb_mode13.Checked == true)
-                flag_file_mode = 13;
             else
                 flag_file_mode = 0;
             Properties.Settings.Default.flag_file_mode = flag_file_mode;
@@ -502,30 +483,32 @@ namespace vcs_DiskDirectoryFile1
 
             x_st = 10;
             y_st = 20;
-            dx = 72;
+            dx = 100;
             dy = 30;
 
             bt_export.Size = new Size(50, 50);
             bt_export.Location = new Point(x_st + dx * 0, y_st + dy * 0 - 5);
-            cb_search_pattern.Location = new Point(x_st + dx * 0 + 60, y_st + dy * 0 - 5);
-            tb_search.Size = new Size(130, 100);
-            tb_search.Location = new Point(x_st + dx * 0 + 60, y_st + dy * 0 + 15);
+            cb_search_pattern.Location = new Point(x_st + dx * 1 - 36, y_st + dy * 0 - 5);
+            tb_search.Size = new Size(120, 100);
+            tb_search.Location = new Point(x_st + dx * 1 - 36, y_st + dy * 0 + 15);
 
-            cb_limit_min.Location = new Point(x_st + dx * 3 - 10, y_st + dy * 0);
+            cb_limit_min.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             tb_limit_min.Size = new Size(50, 100);
-            tb_limit_min.Location = new Point(x_st + dx * 4 + 30, y_st + dy * 0 - 8);
-            cb_limit_max.Location = new Point(x_st + dx * 3 - 10, y_st + dy * 1);
-            tb_limit_max.Size = new Size(50, 100);
-            tb_limit_max.Location = new Point(x_st + dx * 4 + 30, y_st + dy * 0 + 24);
+            tb_limit_min.Location = new Point(x_st + dx * 2 + 115, y_st + dy * 0 - 8);
 
-            cb_search_big_files.Location = new Point(x_st + dx * 5 + 30, y_st + dy * 0);
-            cb_search_small_files.Location = new Point(x_st + dx * 5 + 30, y_st + dy * 1);
-            lb_search_result1.Location = new Point(x_st + dx * 7, y_st + dy * 0);
-            lb_search_result2.Location = new Point(x_st + dx * 7, y_st + dy * 1);
+            cb_limit_max.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            tb_limit_max.Size = new Size(50, 100);
+            tb_limit_max.Location = new Point(x_st + dx * 2 + 115, y_st + dy * 0 + 24);
+
+            cb_search_big_files.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            cb_search_small_files.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            cb_search_empty_folders.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            cb_search_small_folders.Location = new Point(x_st + dx * 5, y_st + dy * 1);
+
+            lb_search_result1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            lb_search_result2.Location = new Point(x_st + dx * 5, y_st + dy * 1);
             lb_search_result1.Text = "";
             lb_search_result2.Text = "";
-
-            dx = 100;
 
             rb_mode0.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             rb_mode1.Location = new Point(x_st + dx * 1, y_st + dy * 2);
@@ -537,28 +520,16 @@ namespace vcs_DiskDirectoryFile1
             rb_mode7.Location = new Point(x_st + dx * 2, y_st + dy * 3);
             rb_mode8.Location = new Point(x_st + dx * 3, y_st + dy * 3);
             rb_mode9.Location = new Point(x_st + dx * 4, y_st + dy * 3);
-            //rb_mode10.Location = new Point(x_st + dx * 3, y_st + dy * 3);
-            //rb_mode11.Location = new Point(x_st + dx * 4, y_st + dy * 3);
-            //rb_mode12.Location = new Point(x_st + dx * 5, y_st + dy * 3);
-            //rb_mode13.Location = new Point(x_st + dx * 6, y_st + dy * 3);
             rb_mode0.Text = "匯出檔名";
             rb_mode1.Text = "找影片檔";
             rb_mode2.Text = "找資料夾";
-            rb_mode3.Text = "空資料夾";
-            rb_mode4.Text = "小資料夾";
-            rb_mode5.Text = "比較檔案";
+            rb_mode3.Text = "----";
+            rb_mode4.Text = "----";
+            rb_mode5.Text = "----";
             rb_mode6.Text = "找附檔名";
             rb_mode7.Text = "Git清理";
             rb_mode8.Text = "----";
             rb_mode9.Text = "----";
-            rb_mode10.Text = "----";
-            rb_mode11.Text = "----";
-            rb_mode12.Text = "----";
-            rb_mode13.Text = "----";
-            rb_mode10.Visible = false;
-            rb_mode11.Visible = false;
-            rb_mode12.Visible = false;
-            rb_mode13.Visible = false;
 
             //針對某控件的邊緣 設定表單大小
             this.ClientSize = new Size(richTextBox1.Right + 10, richTextBox1.Bottom + 10);
@@ -570,6 +541,20 @@ namespace vcs_DiskDirectoryFile1
             this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
+        void show_item_location_radio_button(bool enable)
+        {
+            rb_mode0.Visible = enable;
+            rb_mode1.Visible = enable;
+            rb_mode2.Visible = enable;
+            rb_mode3.Visible = enable;
+            rb_mode4.Visible = enable;
+            rb_mode5.Visible = enable;
+            rb_mode6.Visible = enable;
+            rb_mode7.Visible = enable;
+            rb_mode8.Visible = enable;
+            rb_mode9.Visible = enable;
+        }
+
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
@@ -579,6 +564,7 @@ namespace vcs_DiskDirectoryFile1
         {
             listView1.Clear();
             fileinfos.Clear();
+            folderinfos.Clear();
             lb_search_result1.Text = "";
         }
 
@@ -1977,18 +1963,28 @@ namespace vcs_DiskDirectoryFile1
                 return;
             }
 
-            // 3:找最底層 空資料夾, 4:找最底層 小資料夾
-            if ((ProcessFile_mode == PROCESS_FILE_MODE3) || (ProcessFile_mode == PROCESS_FILE_MODE4))
+            listView1.Clear();
+
+            // 找最底層 空資料夾, 找最底層 小資料夾
+            if ((flag_search_empty_folders == true) || (flag_search_small_folders == true))
             {
-                listView1.Clear();
+                //設置列名稱
                 listView1.Columns.Add("資料夾", 1000, HorizontalAlignment.Left);
+            }
+            else
+            {
+                //設置列名稱
+                listView1.Columns.Add("檔名", 180, HorizontalAlignment.Left);
+                listView1.Columns.Add("大小", 80, HorizontalAlignment.Left);
+                listView1.Columns.Add("格式", 150, HorizontalAlignment.Left);
+                listView1.Columns.Add("資料夾", 700, HorizontalAlignment.Left);
             }
 
             int len = fileinfos.Count;
             for (int i = 0; i < len; i++)
             {
-                // 3:找最底層 空資料夾, 4:找最底層 小資料夾
-                if ((ProcessFile_mode == PROCESS_FILE_MODE3) || (ProcessFile_mode == PROCESS_FILE_MODE4))
+                // 找最底層 空資料夾, 找最底層 小資料夾
+                if ((flag_search_empty_folders == true) || (flag_search_small_folders == true))
                 {
                     string foldername = fileinfos[i].filepath;
 
@@ -2513,8 +2509,8 @@ namespace vcs_DiskDirectoryFile1
 
         private void listView1_MouseClick(object sender, MouseEventArgs e)
         {
-            // 3:找最底層 空資料夾, 4:找最底層 小資料夾
-            if ((ProcessFile_mode == PROCESS_FILE_MODE3) || (ProcessFile_mode == PROCESS_FILE_MODE4))
+            // 找最底層 空資料夾, 找最底層 小資料夾
+            if ((flag_search_empty_folders == true) || (flag_search_small_folders == true))
             {
                 return;
             }
@@ -2540,8 +2536,8 @@ namespace vcs_DiskDirectoryFile1
 
         private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            // 3:找最底層 空資料夾, 4:找最底層 小資料夾
-            if ((ProcessFile_mode == PROCESS_FILE_MODE3) || (ProcessFile_mode == PROCESS_FILE_MODE4))
+            // 找最底層 空資料夾, 找最底層 小資料夾
+            if ((flag_search_empty_folders == true) || (flag_search_small_folders == true))
             {
                 return;
             }
@@ -2647,8 +2643,8 @@ namespace vcs_DiskDirectoryFile1
 
             for (int i = 0; i < selectCount; i++)
             {
-                // 3:找最底層 空資料夾, 4:找最底層 小資料夾
-                if ((ProcessFile_mode == PROCESS_FILE_MODE3) || (ProcessFile_mode == PROCESS_FILE_MODE4))
+                // 找最底層 空資料夾, 找最底層 小資料夾
+                if ((flag_search_empty_folders == true) || (flag_search_small_folders == true))
                 {
                     richTextBox1.Text += listView1.SelectedItems[i].SubItems[0].Text + "\n";
                 }
@@ -2662,8 +2658,8 @@ namespace vcs_DiskDirectoryFile1
 
             for (int i = selectCount - 1; i >= 0; i--)
             {
-                // 3:找最底層 空資料夾, 4:找最底層 小資料夾
-                if ((ProcessFile_mode == PROCESS_FILE_MODE3) || (ProcessFile_mode == PROCESS_FILE_MODE4))
+                // 找最底層 空資料夾, 找最底層 小資料夾
+                if ((flag_search_empty_folders == true) || (flag_search_small_folders == true))
                 {
                     string delete_foldername = listView1.SelectedItems[i].SubItems[0].Text;
                     //Directory.Delete(delete_foldername);  // 僅能刪除空資料夾
@@ -2733,7 +2729,14 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_export_Click(object sender, EventArgs e)
         {
+            int ProcessFile_mode_old = ProcessFile_mode;
+
             get_search_mode();
+
+            if ((cb_search_empty_folders.Checked == true) || (cb_search_small_folders.Checked == true))
+            {
+                ProcessFile_mode = 123;
+            }
 
             if (Directory.Exists(search_foldername) == false)     //確認資料夾是否存在
             {
@@ -2757,6 +2760,11 @@ namespace vcs_DiskDirectoryFile1
                 richTextBox1.Text += "找到 " + len.ToString() + " 筆資料\n";
                 show_file_info6(-1, false);
             }
+
+            if ((cb_search_empty_folders.Checked == true) || (cb_search_small_folders.Checked == true))
+            {
+                ProcessFile_mode = ProcessFile_mode_old;
+            }
         }
 
         void do_my_export(string foldername, Button btn)
@@ -2773,7 +2781,9 @@ namespace vcs_DiskDirectoryFile1
             total_files = 0;
             total_empty_folders = 0;
             text = string.Empty;
+
             fileinfos.Clear();
+            folderinfos.Clear();
 
             ProcessDirectory(foldername);
 
@@ -2805,7 +2815,7 @@ namespace vcs_DiskDirectoryFile1
             lb_search_result2.Text = TimeConversion((Int64)(stopwatch.ElapsedMilliseconds / 1000));
             btn.BackColor = SystemColors.ControlLight;
 
-            if (ProcessFile_mode == PROCESS_FILE_MODE3)  // 3:找最底層 空資料夾
+            if (flag_search_empty_folders == true)  // 找最底層 空資料夾
             {
                 richTextBox1.Text += "共找到空資料夾 : " + total_empty_folders.ToString() + " 個\n";
             }
@@ -3036,8 +3046,8 @@ namespace vcs_DiskDirectoryFile1
                 ProcessFile(filename);
             }
 
-            // 3:找最底層 空資料夾, 4:找最底層 小資料夾
-            if ((ProcessFile_mode == PROCESS_FILE_MODE3) || (ProcessFile_mode == PROCESS_FILE_MODE4))
+            // 找最底層 空資料夾, 找最底層 小資料夾
+            if ((flag_search_empty_folders == true) || (flag_search_small_folders == true))
             {
                 DirectoryInfo d = new DirectoryInfo(foldername);
                 folder_folders = Directory.GetDirectories(d.FullName).Length;  // 取得指定目錄中子目錄的名稱, 一層
@@ -3047,7 +3057,7 @@ namespace vcs_DiskDirectoryFile1
                 {
                     if (folder_files == 0)
                     {
-                        if (ProcessFile_mode == PROCESS_FILE_MODE3)  // 3:找最底層 空資料夾
+                        if (flag_search_empty_folders == true)  // 找最底層 空資料夾
                         {
                             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
                             richTextBox1.Text += "找到最底層 空 資料夾 : " + d.FullName + ", 內 無 檔案\n";
@@ -3066,7 +3076,7 @@ namespace vcs_DiskDirectoryFile1
                     }
                     else
                     {
-                        if (ProcessFile_mode == PROCESS_FILE_MODE4)  // 4:找最底層 小資料夾
+                        if (flag_search_small_folders == true)  // 找最底層 小資料夾
                         {
                             int min_size_mb = 1;  // 最小值 10 MB
                             if (folder_size < min_size_mb * 1 * 1024)
@@ -3884,6 +3894,53 @@ namespace vcs_DiskDirectoryFile1
             }
         }
 
+        private void cb_search_empty_folders_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_search_empty_folders.Checked == true)
+            {
+                if (cb_search_small_folders.Checked == true)
+                {
+                    cb_search_small_folders.Checked = false;
+                }
+            }
+
+            if ((cb_search_empty_folders.Checked == true) || (cb_search_small_folders.Checked == true))
+            {
+                show_item_location_radio_button(false);
+            }
+            else
+            {
+                show_item_location_radio_button(true);
+            }
+
+            flag_search_empty_folders = cb_search_empty_folders.Checked;
+            flag_search_small_folders = cb_search_small_folders.Checked;
+        }
+
+        private void cb_search_small_folders_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_search_small_folders.Checked == true)
+            {
+                if (cb_search_empty_folders.Checked == true)
+                {
+                    cb_search_empty_folders.Checked = false;
+                }
+                show_item_location_radio_button(false);
+            }
+
+            if ((cb_search_empty_folders.Checked == true) || (cb_search_small_folders.Checked == true))
+            {
+                show_item_location_radio_button(false);
+            }
+            else
+            {
+                show_item_location_radio_button(true);
+            }
+
+            flag_search_empty_folders = cb_search_empty_folders.Checked;
+            flag_search_small_folders = cb_search_small_folders.Checked;
+        }
+
         //------------------------------------------------------------  # 60個
 
         void get_search_mode()
@@ -3927,13 +3984,13 @@ namespace vcs_DiskDirectoryFile1
                     richTextBox1.Text += "2:只找資料夾 for 圖片整理\n";
                     break;
                 case PROCESS_FILE_MODE3:
-                    richTextBox1.Text += "3:找最底層 空資料夾\n";
+                    richTextBox1.Text += "3:TBD\n";
                     break;
                 case PROCESS_FILE_MODE4:
-                    richTextBox1.Text += "4:找最底層 小資料夾\n";
+                    richTextBox1.Text += "4:TBD\n";
                     break;
                 case PROCESS_FILE_MODE5:
-                    richTextBox1.Text += "5:比較檔案\n";
+                    richTextBox1.Text += "5:TBD\n";
                     break;
                 case PROCESS_FILE_MODE6:
                     richTextBox1.Text += "6:指定附檔名檔案\n";
@@ -4010,7 +4067,6 @@ namespace vcs_DiskDirectoryFile1
             //多重比對
 
         }
-
         //------------------------------------------------------------  # 60個
     }
 }
@@ -4145,3 +4201,4 @@ sr.Close();
 檔案容量特大 或者 容量最大的幾個檔案
 
 */
+
