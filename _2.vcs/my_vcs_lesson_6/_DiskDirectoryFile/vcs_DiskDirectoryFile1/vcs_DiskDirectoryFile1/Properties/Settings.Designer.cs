@@ -61,19 +61,19 @@ namespace vcs_DiskDirectoryFile1.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool flag_check_filesize {
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool flag_check_filesize_min {
             get {
-                return ((bool)(this["flag_check_filesize"]));
+                return ((bool)(this["flag_check_filesize_min"]));
             }
             set {
-                this["flag_check_filesize"] = value;
+                this["flag_check_filesize_min"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1234")]
         public int filesize_max {
             get {
                 return ((int)(this["filesize_max"]));
@@ -85,7 +85,7 @@ namespace vcs_DiskDirectoryFile1.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("4500")]
         public int filesize_min {
             get {
                 return ((int)(this["filesize_min"]));
@@ -140,6 +140,18 @@ namespace vcs_DiskDirectoryFile1.Properties {
             }
             set {
                 this["git_foldername"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool flag_check_filesize_max {
+            get {
+                return ((bool)(this["flag_check_filesize_max"]));
+            }
+            set {
+                this["flag_check_filesize_max"] = value;
             }
         }
     }

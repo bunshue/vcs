@@ -69,9 +69,9 @@ namespace vcs_Remove_Bin_Obj
             button1.Location = new Point(x_st, y_st + dy * 8);
             button5.Location = new Point(x_st, y_st + dy * 9 + 10);
 
-            button3.Location = new Point(x_st, y_st + dy * 12 + 30);
-            bt_setup.Location = new Point(x_st + 120, y_st + dy * 12 + 30);
-            bt_open_dir2.Location = new Point(x_st + 115 + 50, y_st + dy * 11 - 60);
+            bt_open_dir2.Location = new Point(x_st + 150, y_st + dy * 9);
+            bt_setup.Location = new Point(x_st + 150 + 60, y_st + dy * 9);
+
             groupBox_remove.Location = new Point(x_st + 170, y_st + dy * 0);
 
             lb_main_mesg.Location = new Point(x_st + dx * 1 + 50, y_st + dy * 0);
@@ -382,12 +382,6 @@ namespace vcs_Remove_Bin_Obj
             {
                 lb_main_mesg.Text += "\t有錯誤";
             }
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            result_str = "";
-            result_str += "檔名簡中轉正中\nTBD";
         }
 
         void RemoveNeedlessFiles()

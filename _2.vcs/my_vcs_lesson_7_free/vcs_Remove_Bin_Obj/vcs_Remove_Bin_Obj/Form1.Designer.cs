@@ -35,7 +35,6 @@
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.button3 = new System.Windows.Forms.Button();
             this.lb_main_mesg = new System.Windows.Forms.Label();
             this.bt_clear = new System.Windows.Forms.Button();
             this.checkBox7 = new System.Windows.Forms.CheckBox();
@@ -124,17 +123,6 @@
             this.checkBox4.TabIndex = 6;
             this.checkBox4.Text = "顯示 .suo .user";
             this.checkBox4.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button3.Location = new System.Drawing.Point(12, 613);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(104, 52);
-            this.button3.TabIndex = 8;
-            this.button3.Text = "檔名簡中轉正中";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // lb_main_mesg
             // 
@@ -270,7 +258,7 @@
             this.bt_setup.BackgroundImage = global::vcs_Remove_Bin_Obj.Properties.Resources.setup;
             this.bt_setup.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_setup.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_setup.Location = new System.Drawing.Point(258, 267);
+            this.bt_setup.Location = new System.Drawing.Point(314, 279);
             this.bt_setup.Name = "bt_setup";
             this.bt_setup.Size = new System.Drawing.Size(50, 50);
             this.bt_setup.TabIndex = 148;
@@ -282,7 +270,7 @@
             this.bt_open_dir2.BackgroundImage = global::vcs_Remove_Bin_Obj.Properties.Resources.open_folder;
             this.bt_open_dir2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_open_dir2.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_open_dir2.Location = new System.Drawing.Point(179, 472);
+            this.bt_open_dir2.Location = new System.Drawing.Point(258, 279);
             this.bt_open_dir2.Name = "bt_open_dir2";
             this.bt_open_dir2.Size = new System.Drawing.Size(50, 50);
             this.bt_open_dir2.TabIndex = 147;
@@ -304,7 +292,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(759, 678);
+            this.ClientSize = new System.Drawing.Size(759, 541);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.bt_setup);
             this.Controls.Add(this.bt_open_dir2);
@@ -316,7 +304,6 @@
             this.Controls.Add(this.checkBox7);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.lb_main_mesg);
-            this.Controls.Add(this.button3);
             this.Controls.Add(this.checkBox4);
             this.Controls.Add(this.checkBox3);
             this.Controls.Add(this.checkBox2);
@@ -342,7 +329,6 @@
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label lb_main_mesg;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.CheckBox checkBox7;
