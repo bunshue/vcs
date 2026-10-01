@@ -121,18 +121,6 @@ namespace vcs_DiskDirectoryFile1.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int flag_file_mode {
-            get {
-                return ((int)(this["flag_file_mode"]));
-            }
-            set {
-                this["flag_file_mode"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string git_foldername {
             get {
