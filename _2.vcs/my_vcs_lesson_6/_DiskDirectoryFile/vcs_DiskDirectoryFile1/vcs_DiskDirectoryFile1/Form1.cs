@@ -217,7 +217,6 @@ namespace vcs_DiskDirectoryFile1
             filesize_max = Properties.Settings.Default.filesize_max;  // 搜尋 資料夾/檔案 的上限
             video_player_path = Properties.Settings.Default.video_player_path;
             doc_foldername = Properties.Settings.Default.doc_foldername;
-            richTextBox1.Text += "doc_foldername : " + doc_foldername + "\n";
             search_foldername = Properties.Settings.Default.search_path;
             cb_limit_min.Checked = Properties.Settings.Default.flag_check_filesize_min;
             cb_limit_max.Checked = Properties.Settings.Default.flag_check_filesize_max;
@@ -416,10 +415,10 @@ namespace vcs_DiskDirectoryFile1
             bt_compare2.Location = new Point(x_st + dx * 9, y_st + dy * 1);
             bt_compare3.Location = new Point(x_st + dx * 10, y_st + dy * 1);
 
-            tb_foldername.Size = new Size(360, 100);
+            tb_foldername.Size = new Size(280, 100);
             tb_foldername.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            tb_filename.Size = new Size(194 - 6, 100);
-            tb_filename.Location = new Point(x_st + dx * 8, y_st + dy * 2);
+            tb_filename.Size = new Size(280, 100);
+            tb_filename.Location = new Point(x_st + dx * 0+280+10, y_st + dy * 2);
 
             x_st = 10;
             y_st = 20;
@@ -1889,9 +1888,9 @@ namespace vcs_DiskDirectoryFile1
             else
             {
                 //設置列名稱
-                listView1.Columns.Add("檔名", 180, HorizontalAlignment.Left);
+                listView1.Columns.Add("檔名", 320, HorizontalAlignment.Left);
                 listView1.Columns.Add("大小", 80, HorizontalAlignment.Left);
-                listView1.Columns.Add("格式", 150, HorizontalAlignment.Left);
+                listView1.Columns.Add("格式", 120, HorizontalAlignment.Left);
                 listView1.Columns.Add("資料夾", 700, HorizontalAlignment.Left);
             }
 
@@ -2619,17 +2618,25 @@ namespace vcs_DiskDirectoryFile1
             int number = 0;
             bool conversionSuccessful = int.TryParse(tb_limit_min.Text, out number);    //out為必須
             if (conversionSuccessful == true)
-                richTextBox1.Text += "得到int數字： " + number + "\n";
+            {
+                //richTextBox1.Text += "得到int數字： " + number + "\n";
+            }
             else
+            {
                 richTextBox1.Text += "int.TryParse 失敗\n";
+            }
             size_limit_min = number;  // 搜尋 資料夾/檔案 的下限
 
             number = 0;
             conversionSuccessful = int.TryParse(tb_limit_max.Text, out number);    //out為必須
             if (conversionSuccessful == true)
-                richTextBox1.Text += "得到int數字： " + number + "\n";
+            {
+                //richTextBox1.Text += "得到int數字： " + number + "\n";
+            }
             else
+            {
                 richTextBox1.Text += "int.TryParse 失敗\n";
+            }
             size_limit_max = number;  // 搜尋 資料夾/檔案 的上限
         }
 
@@ -2749,7 +2756,7 @@ namespace vcs_DiskDirectoryFile1
             int len = fileinfos.Count;
             if (len == 0)
             {
-                richTextBox1.Text += "無資料a\n";
+                //richTextBox1.Text += "無資料a\n";
             }
             else
             {
@@ -3963,6 +3970,7 @@ namespace vcs_DiskDirectoryFile1
             flag_export_foldername = false;  // 找資料夾, 全/空/小
             flag_export_filename = true;  // 匯出檔名
             flag_export_video = false;  // 找影片檔
+            search_foldername = tb_foldername1.Text;
 
             do_my_export(search_foldername, bt_export_filename);
         }
@@ -3972,6 +3980,7 @@ namespace vcs_DiskDirectoryFile1
             flag_export_foldername = false;  // 找資料夾, 全/空/小
             flag_export_filename = false;  // 匯出檔名
             flag_export_video = true;  // 找影片檔
+            search_foldername = tb_foldername1.Text;
 
             do_my_export(search_foldername, bt_export_video);
         }
@@ -3981,6 +3990,7 @@ namespace vcs_DiskDirectoryFile1
             flag_export_foldername = true;  // 找資料夾, 全/空/小
             flag_export_filename = false;  // 匯出檔名
             flag_export_video = false;  // 找影片檔
+            search_foldername = tb_foldername1.Text;
 
             do_my_export(search_foldername, bt_export_foldername);
         }
