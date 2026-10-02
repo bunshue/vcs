@@ -88,7 +88,6 @@
             this.cb_limit_max = new System.Windows.Forms.CheckBox();
             this.cb_limit_min = new System.Windows.Forms.CheckBox();
             this.tb_limit_max = new System.Windows.Forms.TextBox();
-            this.bt_export = new System.Windows.Forms.Button();
             this.lb_search_result2 = new System.Windows.Forms.Label();
             this.lb_search_result1 = new System.Windows.Forms.Label();
             this.cb_search_small_files = new System.Windows.Forms.CheckBox();
@@ -588,7 +587,6 @@
             this.groupBox1.Controls.Add(this.bt_test2);
             this.groupBox1.Controls.Add(this.bt_test1);
             this.groupBox1.Controls.Add(this.bt_compare1);
-            this.groupBox1.Controls.Add(this.bt_export_doc);
             this.groupBox1.Controls.Add(this.tb_filename);
             this.groupBox1.Controls.Add(this.tb_foldername);
             this.groupBox1.Controls.Add(this.bt_start_all_files);
@@ -639,9 +637,9 @@
             this.groupBox2.Controls.Add(this.cb_search_empty_folders);
             this.groupBox2.Controls.Add(this.cb_search_pattern);
             this.groupBox2.Controls.Add(this.cb_limit_max);
+            this.groupBox2.Controls.Add(this.bt_export_doc);
             this.groupBox2.Controls.Add(this.cb_limit_min);
             this.groupBox2.Controls.Add(this.tb_limit_max);
-            this.groupBox2.Controls.Add(this.bt_export);
             this.groupBox2.Controls.Add(this.lb_search_result2);
             this.groupBox2.Controls.Add(this.lb_search_result1);
             this.groupBox2.Controls.Add(this.cb_search_small_files);
@@ -772,18 +770,6 @@
             this.tb_limit_max.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tb_limit_max.Click += new System.EventHandler(this.tb_text_Click);
             // 
-            // bt_export
-            // 
-            this.bt_export.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_export.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_export.Location = new System.Drawing.Point(12, 71);
-            this.bt_export.Name = "bt_export";
-            this.bt_export.Size = new System.Drawing.Size(45, 45);
-            this.bt_export.TabIndex = 273;
-            this.bt_export.Text = "轉出";
-            this.bt_export.UseVisualStyleBackColor = true;
-            this.bt_export.Click += new System.EventHandler(this.bt_export_Click);
-            // 
             // lb_search_result2
             // 
             this.lb_search_result2.AutoSize = true;
@@ -906,7 +892,7 @@
             this.bt_export_doc.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_export_doc.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_export_doc.Image = global::vcs_DiskDirectoryFile1.Properties.Resources.katfile;
-            this.bt_export_doc.Location = new System.Drawing.Point(215, 170);
+            this.bt_export_doc.Location = new System.Drawing.Point(214, 16);
             this.bt_export_doc.Name = "bt_export_doc";
             this.bt_export_doc.Size = new System.Drawing.Size(45, 45);
             this.bt_export_doc.TabIndex = 264;
@@ -997,6 +983,7 @@
             this.Controls.Add(this.bt_files06);
             this.Controls.Add(this.bt_files09);
             this.Controls.Add(this.bt_files08);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -1075,7 +1062,6 @@
         private System.Windows.Forms.Button bt_test2;
         private System.Windows.Forms.Button bt_test1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button bt_export;
         private System.Windows.Forms.TextBox tb_limit_max;
         private System.Windows.Forms.CheckBox cb_limit_max;
         private System.Windows.Forms.CheckBox cb_search_pattern;

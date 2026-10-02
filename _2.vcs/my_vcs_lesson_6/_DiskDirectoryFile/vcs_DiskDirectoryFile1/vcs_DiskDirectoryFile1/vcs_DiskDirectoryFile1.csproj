@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>file_manager.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="MediaInfoNET">
       <HintPath>dll\MediaInfoNET.dll</HintPath>
@@ -101,6 +104,8 @@
     <None Include="img\potplayer.png" />
     <None Include="img\setup.png" />
     <None Include="img\open_folder.png" />
+    <Content Include="file_manager.ico" />
+    <Content Include="img\file_manager.ico" />
     <Content Include="img\katfile.jpg" />
     <Content Include="MediaInfo.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
