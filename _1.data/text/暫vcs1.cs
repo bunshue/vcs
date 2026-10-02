@@ -43,31 +43,6 @@ axWindowsMediaPlayer1.currentPlaylist = axWindowsMediaPlayer1.newPlaylist("播�
 
 ------------------------------------------------------------
 
-            int value = 0;
-            bool conversionSuccessful = int.TryParse(tb_filesize.Text, out value);    //out為必須
-            if (conversionSuccessful == true)
-            {
-                //Properties.Settings.Default.min_file_size = value;
-            }
-            else
-            {
-                richTextBox1.Text += "int.TryParse 失敗\n";
-                richTextBox1.Text += "取得容量限制數字失敗\n";
-            }
-
-            conversionSuccessful = int.TryParse(tb_count.Text, out value);    //out為必須
-            if (conversionSuccessful == true)
-            {
-                //Properties.Settings.Default.search_count = value;
-            }
-            else
-            {
-                richTextBox1.Text += "int.TryParse 失敗\n";
-                richTextBox1.Text += "取得檔案個數數字失敗\n";
-            }
-
-------------------------------------------------------------
-
 請先設定欲轉出檔名的目錄
 以及欲轉出檔案的類型，
 
@@ -81,8 +56,6 @@ axWindowsMediaPlayer1.currentPlaylist = axWindowsMediaPlayer1.newPlaylist("播�
 
 即可將設定目錄下之目錄名稱及檔名
 變為純文字轉出至此編輯區。
-------------------------------------------------------------
-
 
 //------------------------------------------------------------  # 60個
 
