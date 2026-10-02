@@ -105,8 +105,11 @@
     <None Include="img\setup.png" />
     <None Include="img\open_folder.png" />
     <Content Include="file_manager.ico" />
+    <Content Include="img\clipboard.png" />
     <Content Include="img\file_manager.ico" />
     <Content Include="img\katfile.jpg" />
+    <Content Include="img\vcs.bmp" />
+    <Content Include="img\vcs2.png" />
     <Content Include="MediaInfo.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

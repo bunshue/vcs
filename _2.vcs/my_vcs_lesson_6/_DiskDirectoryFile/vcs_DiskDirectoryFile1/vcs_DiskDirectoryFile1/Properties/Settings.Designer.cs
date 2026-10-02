@@ -142,5 +142,41 @@ namespace vcs_DiskDirectoryFile1.Properties {
                 this["flag_check_filesize_max"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool flag_search_folders_all {
+            get {
+                return ((bool)(this["flag_search_folders_all"]));
+            }
+            set {
+                this["flag_search_folders_all"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool flag_search_folders_empty {
+            get {
+                return ((bool)(this["flag_search_folders_empty"]));
+            }
+            set {
+                this["flag_search_folders_empty"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool flag_search_folders_small {
+            get {
+                return ((bool)(this["flag_search_folders_small"]));
+            }
+            set {
+                this["flag_search_folders_small"] = value;
+            }
+        }
     }
 }

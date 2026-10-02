@@ -35,12 +35,14 @@ namespace vcs_DiskDirectoryFile1
     {
         bool flag_my_file_manager = false;
         bool flag_search_Katfile = false;
-        bool flag_search_empty_folders = false;  // 找最底層 空資料夾
-        bool flag_search_small_folders = false;  // 找最底層 小資料夾
+
+        bool flag_export_foldername = false;  // 找資料夾, 全/空/小
+        bool flag_search_folders_all = false;  // 找資料夾 for 圖片整理
+        bool flag_search_folders_empty = false;  // 找最底層 空資料夾
+        bool flag_search_folders_small = false;  // 找最底層 小資料夾
+
         bool flag_export_filename = false;  // 匯出檔名
         bool flag_export_video = false;  // 找影片檔
-        bool flag_export_foldername = false;  // 找資料夾
-        bool flag_export_filename_ext = false;  //找副檔名
 
         string some_text = "白日依山盡，黃河入海流。 欲窮千里目，更上一層樓。";
         string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
@@ -218,6 +220,10 @@ namespace vcs_DiskDirectoryFile1
             cb_limit_max.Checked = Properties.Settings.Default.flag_check_filesize_max;
             cb_search_big_files.Checked = Properties.Settings.Default.flag_find_big_files;
             cb_search_small_files.Checked = Properties.Settings.Default.flag_find_small_files;
+            cb_search_folders_all.Checked = Properties.Settings.Default.flag_search_folders_all;  // 全
+            cb_search_folders_empty.Checked = Properties.Settings.Default.flag_search_folders_empty;  // 空
+            cb_search_folders_small.Checked = Properties.Settings.Default.flag_search_folders_small;  // 小
+
             tb_limit_min.Text = filesize_min.ToString();  // 搜尋大檔的下限
             tb_limit_max.Text = filesize_max.ToString();  // 搜尋小檔的上限            
 
@@ -262,6 +268,10 @@ namespace vcs_DiskDirectoryFile1
             Properties.Settings.Default.flag_check_filesize_max = cb_limit_max.Checked;
             Properties.Settings.Default.flag_find_big_files = cb_search_big_files.Checked;
             Properties.Settings.Default.flag_find_small_files = cb_search_small_files.Checked;
+            Properties.Settings.Default.flag_search_folders_all = cb_search_folders_all.Checked;  // 全
+            Properties.Settings.Default.flag_search_folders_empty = cb_search_folders_empty.Checked;  // 空
+            Properties.Settings.Default.flag_search_folders_small = cb_search_folders_small.Checked;  // 小
+
             Properties.Settings.Default.Save();
         }
 
@@ -288,6 +298,7 @@ namespace vcs_DiskDirectoryFile1
             richTextBox1.Size = new Size(W, 340);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 5 + 24);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+            bt_copy_rtb_data.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - bt_copy_rtb_data.Width, richTextBox1.Location.Y + richTextBox1.Height - bt_clear.Height - bt_copy_rtb_data.Height);
 
             //button
             y_st += 24;
@@ -438,18 +449,20 @@ namespace vcs_DiskDirectoryFile1
 
             cb_search_big_files.Location = new Point(x_st + dx * 4 + 40, y_st + dy * 0);
             cb_search_small_files.Location = new Point(x_st + dx * 4 + 40, y_st + dy * 1);
-            cb_search_empty_folders.Location = new Point(x_st + dx * 5 + 70, y_st + dy * 0);
-            cb_search_small_folders.Location = new Point(x_st + dx * 5 + 70, y_st + dy * 1);
 
+            cb_search_folders_all.Location = new Point(x_st + dx * 5 + 70, y_st + dy * 0 - 5);
+            cb_search_folders_empty.Location = new Point(x_st + dx * 5 + 70, y_st + dy * 1 - 15);
+            cb_search_folders_small.Location = new Point(x_st + dx * 5 + 70, y_st + dy * 1 + 5);
+            bt_export_foldername.Location = new Point(x_st + dx * 7 + 10, y_st + dy * 0);
 
             bt_export_filename.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             bt_export_video.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            bt_export_foldername.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            bt_export_filename_ext.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            bt_export_doc.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+            bt_export_doc.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            bt_search_pattern_vcs.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            bt_open_folder.Location = new Point(x_st + dx * 4, y_st + dy * 2);
 
-            lb_search_result1.Location = new Point(x_st + dx * 5, y_st + dy * 2);
-            lb_search_result2.Location = new Point(x_st + dx * 5, y_st + dy * 3);
+            lb_search_result1.Location = new Point(x_st + dx * 6, y_st + dy * 2);
+            lb_search_result2.Location = new Point(x_st + dx * 6, y_st + dy * 3);
             lb_search_result1.Text = "";
             lb_search_result2.Text = "";
 
@@ -1875,8 +1888,7 @@ namespace vcs_DiskDirectoryFile1
 
             listView1.Clear();
 
-            // 找最底層 空資料夾, 找最底層 小資料夾
-            if ((flag_search_empty_folders == true) || (flag_search_small_folders == true))
+            if (flag_export_foldername == true)  // 找資料夾, 全/空/小
             {
                 //設置列名稱
                 listView1.Columns.Add("資料夾", 1000, HorizontalAlignment.Left);
@@ -1893,8 +1905,7 @@ namespace vcs_DiskDirectoryFile1
             int len = fileinfos.Count;
             for (int i = 0; i < len; i++)
             {
-                // 找最底層 空資料夾, 找最底層 小資料夾
-                if ((flag_search_empty_folders == true) || (flag_search_small_folders == true))
+                if (flag_export_foldername == true)  // 找資料夾, 全/空/小
                 {
                     string foldername = fileinfos[i].filepath;
 
@@ -2418,8 +2429,7 @@ namespace vcs_DiskDirectoryFile1
 
         private void listView1_MouseClick(object sender, MouseEventArgs e)
         {
-            // 找最底層 空資料夾, 找最底層 小資料夾
-            if ((flag_search_empty_folders == true) || (flag_search_small_folders == true))
+            if (flag_export_foldername == true)  // 找資料夾, 全/空/小
             {
                 return;
             }
@@ -2445,8 +2455,7 @@ namespace vcs_DiskDirectoryFile1
 
         private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            // 找最底層 空資料夾, 找最底層 小資料夾
-            if ((flag_search_empty_folders == true) || (flag_search_small_folders == true))
+            if (flag_export_foldername == true)  // 找資料夾, 全/空/小
             {
                 return;
             }
@@ -2552,8 +2561,7 @@ namespace vcs_DiskDirectoryFile1
 
             for (int i = 0; i < selectCount; i++)
             {
-                // 找最底層 空資料夾, 找最底層 小資料夾
-                if ((flag_search_empty_folders == true) || (flag_search_small_folders == true))
+                if (flag_export_foldername == true)  // 找資料夾, 全/空/小
                 {
                     richTextBox1.Text += listView1.SelectedItems[i].SubItems[0].Text + "\n";
                 }
@@ -2567,8 +2575,7 @@ namespace vcs_DiskDirectoryFile1
 
             for (int i = selectCount - 1; i >= 0; i--)
             {
-                // 找最底層 空資料夾, 找最底層 小資料夾
-                if ((flag_search_empty_folders == true) || (flag_search_small_folders == true))
+                if (flag_export_foldername == true)  // 找資料夾, 全/空/小
                 {
                     string delete_foldername = listView1.SelectedItems[i].SubItems[0].Text;
                     //Directory.Delete(delete_foldername);  // 僅能刪除空資料夾
@@ -2671,9 +2678,17 @@ namespace vcs_DiskDirectoryFile1
 
             btn.BackColor = SystemColors.ControlLight;
 
-            if (flag_search_empty_folders == true)  // 找最底層 空資料夾
+            if (flag_search_folders_all == true)  // 找最底層 資料夾
+            {
+                // TBD richTextBox1.Text += "共找到空資料夾 : " + total_empty_folders.ToString() + " 個\n";
+            }
+            if (flag_search_folders_empty == true)  // 找最底層 空資料夾
             {
                 richTextBox1.Text += "共找到空資料夾 : " + total_empty_folders.ToString() + " 個\n";
+            }
+            if (flag_search_folders_small == true)  // 找最底層 小資料夾
+            {
+                //TBD richTextBox1.Text += "共找到空資料夾 : " + total_empty_folders.ToString() + " 個\n";
             }
 
             listView1.Items.Clear();
@@ -2917,8 +2932,7 @@ namespace vcs_DiskDirectoryFile1
                 ProcessFile(filename);
             }
 
-            // 找最底層 空資料夾, 找最底層 小資料夾
-            if ((flag_search_empty_folders == true) || (flag_search_small_folders == true))
+            if (flag_export_foldername == true)  // 找資料夾, 全/空/小
             {
                 DirectoryInfo d = new DirectoryInfo(foldername);
                 folder_folders = Directory.GetDirectories(d.FullName).Length;  // 取得指定目錄中子目錄的名稱, 一層
@@ -2928,7 +2942,7 @@ namespace vcs_DiskDirectoryFile1
                 {
                     if (folder_files == 0)
                     {
-                        if (flag_search_empty_folders == true)  // 找最底層 空資料夾
+                        if (flag_search_folders_empty == true)  // 找最底層 空資料夾
                         {
                             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
                             richTextBox1.Text += "找到最底層 空 資料夾 : " + d.FullName + ", 內 無 檔案\n";
@@ -2947,7 +2961,7 @@ namespace vcs_DiskDirectoryFile1
                     }
                     else
                     {
-                        if (flag_search_small_folders == true)  // 找最底層 小資料夾
+                        if (flag_search_folders_small == true)  // 找最底層 小資料夾
                         {
                             int min_size_mb = 1;  // 最小值 10 MB
                             if (folder_size < min_size_mb * 1 * 1024)
@@ -2965,8 +2979,24 @@ namespace vcs_DiskDirectoryFile1
                                 long s = 123;
                                 int dd = 456;
                                 fileinfos.Add(new MyFileInfo(n, p, e, s, w, h, fps, dd));
-
                             }
+                        }
+                        else
+                        {
+                            // 找最底層 全資料夾
+                            richTextBox1.Text += "找到最底層 全 資料夾 : " + d.FullName + ", 內有 " + folder_files.ToString() + " 個檔案\n";
+                            richTextBox1.Text += "資料夾大小:\t" + ByteConversionTBGBMBKB(Convert.ToInt64(folder_size)) + " (" + folder_size.ToString() + " 拜)\n";
+                            richTextBox1.Text += message;  // 印出結果
+
+                            int w = 1920;
+                            int h = 1080;
+                            int fps = 30;
+                            string n = "aaaa";
+                            string p = d.FullName;
+                            string e = "AAAA";
+                            long s = 123;
+                            int dd = 456;
+                            fileinfos.Add(new MyFileInfo(n, p, e, s, w, h, fps, dd));
                         }
                     }
                 }
@@ -3041,8 +3071,9 @@ namespace vcs_DiskDirectoryFile1
                     }
                 }
             }
-            else if (flag_export_foldername == true)  // 只找資料夾 for 圖片整理
+            else if (flag_search_folders_all == true)  // 只找資料夾 for 圖片整理
             {
+
             }
             else if (flag_search_Katfile == true)  //匯出Katfile壓縮檔檔案資料
             {
@@ -3761,32 +3792,58 @@ namespace vcs_DiskDirectoryFile1
             }
         }
 
-        private void cb_search_empty_folders_CheckedChanged(object sender, EventArgs e)
+        private void cb_search_folders_all_CheckedChanged(object sender, EventArgs e)
         {
-            if (cb_search_empty_folders.Checked == true)
+            if (cb_search_folders_all.Checked == true)  // 全
             {
-                if (cb_search_small_folders.Checked == true)
+                if (cb_search_folders_empty.Checked == true)  // 空
                 {
-                    cb_search_small_folders.Checked = false;
+                    cb_search_folders_empty.Checked = false;
+                }
+                if (cb_search_folders_small.Checked == true)  // 小
+                {
+                    cb_search_folders_small.Checked = false;
                 }
             }
-
-            flag_search_empty_folders = cb_search_empty_folders.Checked;
-            flag_search_small_folders = cb_search_small_folders.Checked;
+            flag_search_folders_all = cb_search_folders_all.Checked;  // 全
+            flag_search_folders_empty = cb_search_folders_empty.Checked;  // 空
+            flag_search_folders_small = cb_search_folders_small.Checked;  // 小
         }
 
-        private void cb_search_small_folders_CheckedChanged(object sender, EventArgs e)
+        private void cb_search_folders_empty_CheckedChanged(object sender, EventArgs e)
         {
-            if (cb_search_small_folders.Checked == true)
+            if (cb_search_folders_empty.Checked == true)  // 空
             {
-                if (cb_search_empty_folders.Checked == true)
+                if (cb_search_folders_all.Checked == true)  // 全
                 {
-                    cb_search_empty_folders.Checked = false;
+                    cb_search_folders_all.Checked = false;
+                }
+                if (cb_search_folders_small.Checked == true)  // 小
+                {
+                    cb_search_folders_small.Checked = false;
                 }
             }
+            flag_search_folders_all = cb_search_folders_all.Checked;  // 全
+            flag_search_folders_empty = cb_search_folders_empty.Checked;  // 空
+            flag_search_folders_small = cb_search_folders_small.Checked;  // 小
+        }
 
-            flag_search_empty_folders = cb_search_empty_folders.Checked;
-            flag_search_small_folders = cb_search_small_folders.Checked;
+        private void cb_search_folders_small_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_search_folders_small.Checked == true)  // 小
+            {
+                if (cb_search_folders_all.Checked == true)  // 全
+                {
+                    cb_search_folders_all.Checked = false;
+                }
+                if (cb_search_folders_empty.Checked == true)  // 空
+                {
+                    cb_search_folders_empty.Checked = false;
+                }
+            }
+            flag_search_folders_all = cb_search_folders_all.Checked;  // 全
+            flag_search_folders_empty = cb_search_folders_empty.Checked;  // 空
+            flag_search_folders_small = cb_search_folders_small.Checked;  // 小
         }
 
         //------------------------------------------------------------  # 60個
@@ -3842,6 +3899,7 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_export_filename_Click(object sender, EventArgs e)
         {
+            flag_export_foldername = false;  // 找資料夾, 全/空/小
             flag_export_filename = true;  // 匯出檔名
 
             do_my_export(search_foldername, bt_export_filename);
@@ -3851,6 +3909,7 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_export_video_Click(object sender, EventArgs e)
         {
+            flag_export_foldername = false;  // 找資料夾, 全/空/小
             flag_export_video = true;  // 找影片檔
 
             do_my_export(search_foldername, bt_export_video);
@@ -3860,18 +3919,11 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_export_foldername_Click(object sender, EventArgs e)
         {
-            flag_export_foldername = true;  // 找資料夾
+            flag_export_foldername = true;  // 找資料夾, 全/空/小
 
+            do_my_export(search_foldername, bt_export_foldername);
 
-            flag_export_foldername = false;  // 找資料夾
-        }
-
-        private void bt_export_filename_ext_Click(object sender, EventArgs e)
-        {
-            flag_export_filename_ext = true;  //找副檔名
-
-
-            flag_export_filename_ext = false;  //找副檔名
+            //flag_export_foldername = false;  // 找資料夾, 全/空/小
         }
 
         private void bt_export_doc_Click(object sender, EventArgs e)
@@ -3881,6 +3933,40 @@ namespace vcs_DiskDirectoryFile1
             do_my_export(doc_foldername, bt_export_doc);
 
             flag_search_Katfile = false;  // 匯出Katfile壓縮檔檔案資料 專用
+        }
+
+        private void bt_search_pattern_vcs_Click(object sender, EventArgs e)
+        {
+            //搜尋 VCS 關鍵字
+        }
+
+        private void bt_open_folder_Click(object sender, EventArgs e)
+        {
+            //開啟資料夾
+            int cnt = listView1.SelectedItems.Count;
+            if (cnt > 0)
+            {
+                int selNdx = listView1.SelectedIndices[0];
+
+                string foldername = listView1.Items[selNdx].SubItems[0].Text;
+                richTextBox1.Text += "資料夾:\t" + foldername + "\n";
+
+                /*
+                //C# 呼叫檔案總管開啟某個資料夾，並讓某個檔案或資料夾呈現反白的樣子
+                string file = @"C:\Windows\explorer.exe";
+                string argument = @"/select, " + foldername;
+                Process.Start(file, argument);
+                */
+                Process.Start(foldername);
+            }
+        }
+
+        private void bt_copy_rtb_data_Click(object sender, EventArgs e)
+        {
+            //C# – 複製資料到剪貼簿
+            //Clipboard.SetData(DataFormats.Text, richTextBox1.Text + "\n");
+            Clipboard.SetDataObject(richTextBox1.Text + "\n");      //建議用此
+            richTextBox1.Text += "已複製資料到系統剪貼簿\n";
         }
 
         //------------------------------------------------------------  # 60個
