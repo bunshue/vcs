@@ -178,5 +178,65 @@ namespace vcs_DiskDirectoryFile1.Properties {
                 this["flag_search_folders_small"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool flag_find_good_files {
+            get {
+                return ((bool)(this["flag_find_good_files"]));
+            }
+            set {
+                this["flag_find_good_files"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool flag_find_same_files0 {
+            get {
+                return ((bool)(this["flag_find_same_files0"]));
+            }
+            set {
+                this["flag_find_same_files0"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool flag_find_same_files1 {
+            get {
+                return ((bool)(this["flag_find_same_files1"]));
+            }
+            set {
+                this["flag_find_same_files1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool flag_find_same_files2 {
+            get {
+                return ((bool)(this["flag_find_same_files2"]));
+            }
+            set {
+                this["flag_find_same_files2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool flag_find_same_files3 {
+            get {
+                return ((bool)(this["flag_find_same_files3"]));
+            }
+            set {
+                this["flag_find_same_files3"] = value;
+            }
+        }
     }
 }

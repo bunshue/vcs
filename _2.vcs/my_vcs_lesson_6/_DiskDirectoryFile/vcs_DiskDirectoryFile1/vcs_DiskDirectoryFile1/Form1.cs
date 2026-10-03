@@ -41,6 +41,14 @@ namespace vcs_DiskDirectoryFile1
         bool flag_search_folders_all = false;  // 找資料夾 for 圖片整理
         bool flag_search_folders_empty = false;  // 找最底層 空資料夾
         bool flag_search_folders_small = false;  // 找最底層 小資料夾
+        bool flag_search_files_big = false;  // 找大檔案
+        bool flag_search_files_small = false;  // 找小檔案
+        bool flag_search_files_good = false;  // 找優檔案
+        bool flag_search_files_same0 = false;  // 找相同檔案, 完整檔名
+        bool flag_search_files_same1 = false;  // 找相同檔案, 模糊檔名
+        bool flag_search_files_same2 = false;  // 找相同檔案, 完整容量
+        bool flag_search_files_same3 = false;  // 找相同檔案, 模糊容量
+
         bool flag_export_filename = false;  // 匯出檔名
         bool flag_export_video = false;  // 找影片檔
 
@@ -134,9 +142,10 @@ namespace vcs_DiskDirectoryFile1
             }
             */
             //影片用
-            public MyFileInfo(string n, string p, string e, long s, int w, int h, int f, int d)
+            public MyFileInfo(string n, string sn, string p, string e, long s, int w, int h, int f, int d)
             {
                 this.filename = n;
+                this.shortfilename = sn;
                 this.filepath = p;
                 this.fileextension = e;
                 this.filesize = s;
@@ -165,7 +174,7 @@ namespace vcs_DiskDirectoryFile1
         // 宣告fileinfos 為List
         // 以下List 裡為MyFileInfo 型態
         List<MyFileInfo> fileinfos = new List<MyFileInfo>();  // 檔案, 一般檔案/影片檔案
-        List<MyFileInfo> fileinfos_match = new List<MyFileInfo>();
+        List<MyFileInfo> fileinfos_match = new List<MyFileInfo>();  // 尋找相同檔案
         List<MyFolderInfo> folderinfos = new List<MyFolderInfo>();  // 資料夾
 
         //全部
@@ -220,8 +229,13 @@ namespace vcs_DiskDirectoryFile1
             search_foldername = Properties.Settings.Default.search_path;
             cb_limit_min.Checked = Properties.Settings.Default.flag_check_filesize_min;
             cb_limit_max.Checked = Properties.Settings.Default.flag_check_filesize_max;
-            cb_search_big_files.Checked = Properties.Settings.Default.flag_find_big_files;
-            cb_search_small_files.Checked = Properties.Settings.Default.flag_find_small_files;
+            cb_search_big_files.Checked = Properties.Settings.Default.flag_find_big_files;  // 大
+            cb_search_small_files.Checked = Properties.Settings.Default.flag_find_small_files;  // 小
+            cb_search_good_files.Checked = Properties.Settings.Default.flag_find_good_files;  // 優
+            cb_search_same_files0.Checked = Properties.Settings.Default.flag_find_same_files0;  // 同
+            cb_search_same_files1.Checked = Properties.Settings.Default.flag_find_same_files1;  // 同
+            cb_search_same_files2.Checked = Properties.Settings.Default.flag_find_same_files2;  // 同
+            cb_search_same_files3.Checked = Properties.Settings.Default.flag_find_same_files3;  // 同
             cb_search_folders_all.Checked = Properties.Settings.Default.flag_search_folders_all;  // 全
             cb_search_folders_empty.Checked = Properties.Settings.Default.flag_search_folders_empty;  // 空
             cb_search_folders_small.Checked = Properties.Settings.Default.flag_search_folders_small;  // 小
@@ -256,8 +270,13 @@ namespace vcs_DiskDirectoryFile1
             Properties.Settings.Default.filesize_max = size_limit_max;  // 搜尋 資料夾/檔案 的上限
             Properties.Settings.Default.flag_check_filesize_min = cb_limit_min.Checked;
             Properties.Settings.Default.flag_check_filesize_max = cb_limit_max.Checked;
-            Properties.Settings.Default.flag_find_big_files = cb_search_big_files.Checked;
-            Properties.Settings.Default.flag_find_small_files = cb_search_small_files.Checked;
+            Properties.Settings.Default.flag_find_big_files = cb_search_big_files.Checked;  // 大
+            Properties.Settings.Default.flag_find_small_files = cb_search_small_files.Checked;  // 小
+            Properties.Settings.Default.flag_find_good_files = cb_search_good_files.Checked;  // 優
+            Properties.Settings.Default.flag_find_same_files0 = cb_search_same_files0.Checked;  // 同
+            Properties.Settings.Default.flag_find_same_files1 = cb_search_same_files1.Checked;  // 同
+            Properties.Settings.Default.flag_find_same_files2 = cb_search_same_files2.Checked;  // 同
+            Properties.Settings.Default.flag_find_same_files3 = cb_search_same_files3.Checked;  // 同
             Properties.Settings.Default.flag_search_folders_all = cb_search_folders_all.Checked;  // 全
             Properties.Settings.Default.flag_search_folders_empty = cb_search_folders_empty.Checked;  // 空
             Properties.Settings.Default.flag_search_folders_small = cb_search_folders_small.Checked;  // 小
@@ -411,14 +430,11 @@ namespace vcs_DiskDirectoryFile1
             bt_setup.Location = new Point(x_st + dx * 5, y_st + dy * 1);
             bt_start_files.Location = new Point(x_st + dx * 6, y_st + dy * 1);
             bt_start_all_files.Location = new Point(x_st + dx * 7, y_st + dy * 1);
-            bt_compare1.Location = new Point(x_st + dx * 8, y_st + dy * 1);
-            bt_compare2.Location = new Point(x_st + dx * 9, y_st + dy * 1);
-            bt_compare3.Location = new Point(x_st + dx * 10, y_st + dy * 1);
 
             tb_foldername.Size = new Size(280, 100);
             tb_foldername.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             tb_filename.Size = new Size(280, 100);
-            tb_filename.Location = new Point(x_st + dx * 0+280+10, y_st + dy * 2);
+            tb_filename.Location = new Point(x_st + dx * 0 + 280 + 10, y_st + dy * 2);
 
             x_st = 10;
             y_st = 20;
@@ -437,26 +453,41 @@ namespace vcs_DiskDirectoryFile1
             tb_limit_max.Size = new Size(50, 100);
             tb_limit_max.Location = new Point(x_st + dx * 2 + 115, y_st + dy * 0 + 24);
 
-            cb_search_big_files.Location = new Point(x_st + dx * 4 + 40, y_st + dy * 0);
-            cb_search_small_files.Location = new Point(x_st + dx * 4 + 40, y_st + dy * 1);
+            cb_search_big_files.Location = new Point(x_st + dx * 4 + 40, y_st + dy * 0 - 5);  // 大
+            cb_search_small_files.Location = new Point(x_st + dx * 4 + 40, y_st + dy * 1 - 15);  // 小
+            cb_search_good_files.Location = new Point(x_st + dx * 4 + 40, y_st + dy * 1 + 5);  // 優
+            groupBox3.Size = new Size(170, 60);
+            groupBox3.Location = new Point(x_st + dx * 4 + 40, y_st + dy * 1 + 25);  // 比較
 
-            cb_search_folders_all.Location = new Point(x_st + dx * 5 + 70, y_st + dy * 0 - 5);
-            cb_search_folders_empty.Location = new Point(x_st + dx * 5 + 70, y_st + dy * 1 - 15);
-            cb_search_folders_small.Location = new Point(x_st + dx * 5 + 70, y_st + dy * 1 + 5);
+            cb_search_folders_all.Location = new Point(x_st + dx * 6, y_st + dy * 0 - 5);
+            cb_search_folders_empty.Location = new Point(x_st + dx * 6, y_st + dy * 1 - 15);
+            cb_search_folders_small.Location = new Point(x_st + dx * 6, y_st + dy * 1 + 5);
+            lb_search_result1.Location = new Point(x_st + dx * 7 + 10, y_st + dy * 1 + 30);
+            lb_search_result2.Location = new Point(x_st + dx * 7 + 10, y_st + dy * 1 + 60);
+            lb_search_result1.Text = "";
+            lb_search_result2.Text = "";
+
             bt_export_foldername.Location = new Point(x_st + dx * 7 + 10, y_st + dy * 0);
             bt_info.Location = new Point(x_st + dx * 8, y_st + dy * 0);
 
-            dx = 60;
+            dx = 53;
             bt_export_filename.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             bt_export_video.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             bt_export_doc.Location = new Point(x_st + dx * 2, y_st + dy * 2);
             bt_search_pattern_vcs.Location = new Point(x_st + dx * 3, y_st + dy * 2);
             bt_break.Location = new Point(x_st + dx * 4, y_st + dy * 2);
             bt_open_folder.Location = new Point(x_st + dx * 5, y_st + dy * 2);
-            lb_search_result1.Location = new Point(x_st + dx * 7, y_st + dy * 2);
-            lb_search_result2.Location = new Point(x_st + dx * 7, y_st + dy * 3);
-            lb_search_result1.Text = "";
-            lb_search_result2.Text = "";
+
+            dx = 80;
+            dy = 20;
+            cb_search_same_files0.Location = new Point(x_st + dx * 0, y_st + dy * 0);  // 同
+            cb_search_same_files1.Location = new Point(x_st + dx * 0, y_st + dy * 1);  // 同
+            cb_search_same_files2.Location = new Point(x_st + dx * 1, y_st + dy * 0);  // 同
+            cb_search_same_files3.Location = new Point(x_st + dx * 1, y_st + dy * 1);  // 同
+            cb_search_same_files0.Text = "完整檔名";
+            cb_search_same_files1.Text = "模糊檔名";
+            cb_search_same_files2.Text = "完整容量";
+            cb_search_same_files3.Text = "模糊容量";
 
             //針對某控件的邊緣 設定表單大小
             this.ClientSize = new Size(richTextBox1.Right + 10, richTextBox1.Bottom + 10);
@@ -479,6 +510,7 @@ namespace vcs_DiskDirectoryFile1
             fileinfos.Clear();
             folderinfos.Clear();
             lb_search_result1.Text = "";
+            lb_search_result2.Text = "";
         }
 
         //------------------------------------------------------------  # 60個
@@ -1805,7 +1837,7 @@ namespace vcs_DiskDirectoryFile1
             show_filenames(filenames2);
         }
 
-        void show_file_info6(int sort_item, bool sort_type)
+        void show_file_info6(List<MyFileInfo> fileinfos, int sort_item, bool sort_type)
         {
             //sort_type  // false : ASCENDING, true : DESCENDING
 
@@ -1840,6 +1872,23 @@ namespace vcs_DiskDirectoryFile1
             }
             else if (sort_item == 1)
             {
+                richTextBox1.Text += "依簡名排序, ";
+
+                if (sort_type == false)
+                {
+                    richTextBox1.Text += "升冪\n";
+                    //排序 由小到大, 升冪
+                    fileinfos.Sort((x, y) => { return x.shortfilename.CompareTo(y.shortfilename); });
+                }
+                else
+                {
+                    richTextBox1.Text += "降冪\n";
+                    //排序 由大到小, 降冪, 在return的地方多個負號
+                    fileinfos.Sort((x, y) => { return -x.shortfilename.CompareTo(y.shortfilename); });
+                }
+            }
+            else if (sort_item == 2)
+            {
                 richTextBox1.Text += "依檔案大小排序, ";
 
                 if (sort_type == false)
@@ -1855,7 +1904,7 @@ namespace vcs_DiskDirectoryFile1
                     fileinfos.Sort((x, y) => { return -x.filesize.CompareTo(y.filesize); });
                 }
             }
-            else if (sort_item == 2)
+            else if (sort_item == 3)
             {
                 richTextBox1.Text += "依格式排序, ";
 
@@ -1885,13 +1934,27 @@ namespace vcs_DiskDirectoryFile1
                 //設置列名稱
                 listView1.Columns.Add("資料夾", 1000, HorizontalAlignment.Left);
             }
-            else
+            else if (flag_export_filename == true)  // 匯出檔名
             {
                 //設置列名稱
-                listView1.Columns.Add("檔名", 320, HorizontalAlignment.Left);
-                listView1.Columns.Add("大小", 80, HorizontalAlignment.Left);
-                listView1.Columns.Add("格式", 120, HorizontalAlignment.Left);
+                listView1.Columns.Add("檔名", 400, HorizontalAlignment.Left);
+                listView1.Columns.Add("大小", 110, HorizontalAlignment.Left);
+                listView1.Columns.Add("副檔名", 110, HorizontalAlignment.Left);
                 listView1.Columns.Add("資料夾", 700, HorizontalAlignment.Left);
+            }
+            else if (flag_export_video == true)  // 找影片檔
+            {
+                //設置列名稱
+                listView1.Columns.Add("檔名", 400, HorizontalAlignment.Left);
+                listView1.Columns.Add("簡名", 150, HorizontalAlignment.Left);
+                listView1.Columns.Add("大小", 110, HorizontalAlignment.Left);
+                listView1.Columns.Add("格式", 110, HorizontalAlignment.Left);
+                listView1.Columns.Add("資料夾", 700, HorizontalAlignment.Left);
+            }
+            else
+            {
+                richTextBox1.Text += "不支持listView顯示\n";
+                return;
             }
 
             int len = fileinfos.Count;
@@ -1906,11 +1969,11 @@ namespace vcs_DiskDirectoryFile1
 
                     listView1.Items.Add(i1);
                 }
-                else
+                else if (flag_export_filename == true)  // 匯出檔名
                 {
                     string filename = fileinfos[i].filename;
                     string foldername = fileinfos[i].filepath;
-                    //string ext = "AAAA";
+                    string ext = fileinfos[i].fileextension.Trim().Replace(".", "");
                     long file_size = fileinfos[i].filesize;
                     int w = fileinfos[i].video_width;
                     int h = fileinfos[i].video_height;
@@ -1929,14 +1992,62 @@ namespace vcs_DiskDirectoryFile1
                     sub_i1a.ForeColor = Color.Blue;
                     sub_i1a.Font = new Font("Times New Roman", 10, FontStyle.Bold);
 
-                    string text = w.ToString() + "×" + h.ToString();
-                    sub_i1b.Text = text;
+                    sub_i1b.Text = ext;
                     i1.SubItems.Add(sub_i1b);
 
                     sub_i1c.Text = fileinfos[i].filepath;
                     i1.SubItems.Add(sub_i1c);
 
                     listView1.Items.Add(i1);
+                }
+                else if (flag_export_video == true)  // 找影片檔
+                {
+                    string filename = fileinfos[i].filename;
+                    string foldername = fileinfos[i].filepath;
+                    //string ext = "AAAA";
+                    long file_size = fileinfos[i].filesize;
+                    int w = fileinfos[i].video_width;
+                    int h = fileinfos[i].video_height;
+                    int f = fileinfos[i].video_fps;
+                    int d = fileinfos[i].video_duration;
+
+                    ListViewItem i1 = new ListViewItem(fileinfos[i].filename);
+                    i1.UseItemStyleForSubItems = false;
+                    ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
+                    ListViewItem.ListViewSubItem sub_i1b = new ListViewItem.ListViewSubItem();
+                    ListViewItem.ListViewSubItem sub_i1c = new ListViewItem.ListViewSubItem();
+                    ListViewItem.ListViewSubItem sub_i1d = new ListViewItem.ListViewSubItem();
+
+                    /*
+                    //搜尋優優檔
+                    bool flag_good = check_video_good(fileinfos[i].filename);
+                    if (flag_good == true)
+                    {
+                        i1.ForeColor = Color.Red;
+                    }
+                    */
+
+                    sub_i1a.Text = fileinfos[i].shortfilename;
+                    i1.SubItems.Add(sub_i1a);
+
+                    sub_i1b.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
+                    i1.SubItems.Add(sub_i1b);
+
+                    sub_i1b.ForeColor = Color.Blue;
+                    sub_i1b.Font = new Font("Times New Roman", 10, FontStyle.Bold);
+
+                    string text = w.ToString() + "×" + h.ToString();
+                    sub_i1c.Text = text;
+                    i1.SubItems.Add(sub_i1c);
+
+                    sub_i1d.Text = fileinfos[i].filepath;
+                    i1.SubItems.Add(sub_i1d);
+
+                    listView1.Items.Add(i1);
+                }
+                else
+                {
+                    richTextBox1.Text += "XXXXX\n";
                 }
             }
 
@@ -2415,6 +2526,27 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_files09_Click(object sender, EventArgs e)
         {
+            string filename = "hhd800.com@KAM-278.sayuri.mp4";
+            if (check_video_good(filename) == false)
+            {
+                richTextBox1.Text += "不是 優優檔\n";
+            }
+            else
+            {
+                richTextBox1.Text += "是 優優檔\n";
+            }
+
+            filename = "hhd800.com@DLDSS-518.naho.mp4";
+            string sn = get_shortname(filename);  //取得 shortname
+            richTextBox1.Text += "n  : " + filename + "\n";
+            richTextBox1.Text += "sn : " + sn + "\n";
+
+            filename = "hhd800.com@START-585.suzu.mp4";
+            sn = get_shortname(filename);  //取得 shortname
+            richTextBox1.Text += "n  : " + filename + "\n";
+            richTextBox1.Text += "sn : " + sn + "\n";
+
+
         }
 
         //------------------------------------------------------------  # 60個
@@ -2427,21 +2559,42 @@ namespace vcs_DiskDirectoryFile1
             }
 
             int idx = listView1.SelectedIndices[0];
-            /*
-            richTextBox1.Text += "檔名:\t" + listView1.Items[idx].Text + "\n";
-            richTextBox1.Text += "大小:\t" + listView1.Items[idx].SubItems[1].Text + "\n";
-            richTextBox1.Text += "格式:\t" + listView1.Items[idx].SubItems[2].Text + "\n";
-            richTextBox1.Text += "資料夾:\t" + listView1.Items[idx].SubItems[3].Text + "\n";
-            string fullname = listView1.Items[idx].SubItems[3].Text + "\\" + listView1.Items[idx].Text;
-            richTextBox1.Text += "完整路徑:\t" + fullname + "\n";
-            */
 
-            string foldername = listView1.Items[idx].SubItems[3].Text;
-            DirectoryInfo dinfo = new DirectoryInfo(foldername);
-            tb_foldername.Text = dinfo.Name;  //資料夾簡名
-            tb_filename.Text = listView1.Items[idx].Text;  // 檔案名稱 或許不要副檔名
-            tb_foldername_text_old = dinfo.Name;  //資料夾簡名
-            tb_filename_text_old = listView1.Items[idx].Text;  // 檔案名稱 或許不要副檔名
+            if (flag_export_filename == true)  // 檔案的
+            {
+                /*
+                richTextBox1.Text += "檔名:\t" + listView1.Items[idx].Text + "\n";
+                richTextBox1.Text += "大小:\t" + listView1.Items[idx].SubItems[1].Text + "\n";
+                richTextBox1.Text += "格式:\t" + listView1.Items[idx].SubItems[2].Text + "\n";
+                richTextBox1.Text += "資料夾:\t" + listView1.Items[idx].SubItems[3].Text + "\n";
+                string fullname = listView1.Items[idx].SubItems[3].Text + "\\" + listView1.Items[idx].Text;
+                richTextBox1.Text += "完整路徑:\t" + fullname + "\n";
+                */
+                string foldername = listView1.Items[idx].SubItems[3].Text;
+                DirectoryInfo dinfo = new DirectoryInfo(foldername);
+                tb_foldername.Text = dinfo.Name;  //資料夾簡名
+                tb_filename.Text = listView1.Items[idx].Text;  // 檔案名稱 或許不要副檔名
+                tb_foldername_text_old = dinfo.Name;  //資料夾簡名
+                tb_filename_text_old = listView1.Items[idx].Text;  // 檔案名稱 或許不要副檔名
+            }
+            else if (flag_export_video == true)  // 影片的
+            {
+                /*
+                richTextBox1.Text += "檔名:\t" + listView1.Items[idx].Text + "\n";
+                richTextBox1.Text += "簡名:\t" + listView1.Items[idx].SubItems[1].Text + "\n";
+                richTextBox1.Text += "大小:\t" + listView1.Items[idx].SubItems[2].Text + "\n";
+                richTextBox1.Text += "格式:\t" + listView1.Items[idx].SubItems[3].Text + "\n";
+                richTextBox1.Text += "資料夾:\t" + listView1.Items[idx].SubItems[4].Text + "\n";
+                string fullname = listView1.Items[idx].SubItems[4].Text + "\\" + listView1.Items[idx].Text;
+                richTextBox1.Text += "完整路徑:\t" + fullname + "\n";
+                */
+                string foldername = listView1.Items[idx].SubItems[4].Text;
+                DirectoryInfo dinfo = new DirectoryInfo(foldername);
+                tb_foldername.Text = dinfo.Name;  //資料夾簡名
+                tb_filename.Text = listView1.Items[idx].Text;  // 檔案名稱 或許不要副檔名
+                tb_foldername_text_old = dinfo.Name;  //資料夾簡名
+                tb_filename_text_old = listView1.Items[idx].Text;  // 檔案名稱 或許不要副檔名
+            }
             return;
         }
 
@@ -2454,10 +2607,11 @@ namespace vcs_DiskDirectoryFile1
 
             int idx = listView1.SelectedIndices[0];
             richTextBox1.Text += "檔名:\t" + listView1.Items[idx].Text + "\n";
-            richTextBox1.Text += "大小:\t" + listView1.Items[idx].SubItems[1].Text + "\n";
-            richTextBox1.Text += "格式:\t" + listView1.Items[idx].SubItems[2].Text + "\n";
-            richTextBox1.Text += "資料夾:\t" + listView1.Items[idx].SubItems[3].Text + "\n";
-            string fullname = listView1.Items[idx].SubItems[3].Text + "\\" + listView1.Items[idx].Text;
+            richTextBox1.Text += "簡名:\t" + listView1.Items[idx].SubItems[1].Text + "\n";
+            richTextBox1.Text += "大小:\t" + listView1.Items[idx].SubItems[2].Text + "\n";
+            richTextBox1.Text += "格式:\t" + listView1.Items[idx].SubItems[3].Text + "\n";
+            richTextBox1.Text += "資料夾:\t" + listView1.Items[idx].SubItems[4].Text + "\n";
+            string fullname = listView1.Items[idx].SubItems[4].Text + "\\" + listView1.Items[idx].Text;
             richTextBox1.Text += "完整路徑:\t" + fullname + "\n";
 
             if (File.Exists(fullname) == true)
@@ -2474,34 +2628,64 @@ namespace vcs_DiskDirectoryFile1
         bool flag_sort_type1 = false;  // false : ASCENDING, true : DESCENDING
         bool flag_sort_type2 = false;  // false : ASCENDING, true : DESCENDING
         bool flag_sort_type3 = false;  // false : ASCENDING, true : DESCENDING
+        bool flag_sort_type4 = false;  // false : ASCENDING, true : DESCENDING
         private void listView1_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             //richTextBox1.Text += "你按了第 " + e.Column.ToString() + " 欄\n";
             //richTextBox1.Text += "aaa : " + listView1.Columns[e.Column] + "\n";
             //richTextBox1.Text += "bbb : " + e.Column.ToString() + "\n";
 
-            if (e.Column == 0)
+            if (e.Column == 0)  // 檔名
             {
                 flag_sort_type0 = !flag_sort_type0;
-                show_file_info6(0, flag_sort_type0);
+                show_file_info6(fileinfos, 0, flag_sort_type0);
             }
-            else if (e.Column == 1)
+            else if (e.Column == 1)  // 
             {
                 flag_sort_type1 = !flag_sort_type1;
-                show_file_info6(1, flag_sort_type1);
+                if (flag_export_filename == true)  // 匯出檔名
+                {
+                    show_file_info6(fileinfos, 2, flag_sort_type1);  // 找檔名, 大小
+                }
+                else if (flag_export_video == true)  // 找影片檔
+                {
+                    show_file_info6(fileinfos, 1, flag_sort_type1);  // 找影片檔, 簡名
+                }
             }
             else if (e.Column == 2)
             {
                 flag_sort_type2 = !flag_sort_type2;
-                show_file_info6(2, flag_sort_type2);
+                if (flag_export_filename == true)  // 匯出檔名
+                {
+                    show_file_info6(fileinfos, 3, flag_sort_type1);  // 找檔名, 副檔名
+                }
+                else if (flag_export_video == true)  // 找影片檔
+                {
+                    show_file_info6(fileinfos, 2, flag_sort_type2);  // 找影片檔, 大小
+                }
             }
             else if (e.Column == 3)
             {
                 flag_sort_type3 = !flag_sort_type3;
-                show_file_info6(3, flag_sort_type3);
+                if (flag_export_filename == true)  // 匯出檔名
+                {
+                    return;
+                    show_file_info6(fileinfos, 4, flag_sort_type3);  // 找檔名, 資料夾
+                }
+                else if (flag_export_video == true)  // 找影片檔
+                {
+                    show_file_info6(fileinfos, 3, flag_sort_type3);  // 找影片檔, 格式
+                }
+            }
+            else if (e.Column == 4)
+            {
+                return;
+                flag_sort_type4 = !flag_sort_type4;
+                show_file_info6(fileinfos, 4, flag_sort_type4);  // 找影片檔, 資料夾
             }
             else
             {
+                return;
                 richTextBox1.Text += "XXXXXXX\n";
             }
         }
@@ -2523,7 +2707,7 @@ namespace vcs_DiskDirectoryFile1
             {
                 int idx = listView1.SelectedIndices[i];
                 listView1.Items[idx].Selected = true;  // 選到的項目
-                all_filename += " \"" + listView1.Items[idx].SubItems[3].Text + "\\" + listView1.Items[idx].Text + "\"";
+                all_filename += " \"" + listView1.Items[idx].SubItems[4].Text + "\\" + listView1.Items[idx].Text + "\"";
             }
             play_video_files(all_filename);  // 播放
         }
@@ -2540,7 +2724,7 @@ namespace vcs_DiskDirectoryFile1
             {
                 //richTextBox1.Text += listView1.Items[i].Text + "\n";
                 //richTextBox1.Text += listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\t" + listView1.Items[i].SubItems[2].Text + "\n";
-                all_filename += " \"" + listView1.Items[i].SubItems[3].Text + "\\" + listView1.Items[i].Text + "\"";
+                all_filename += " \"" + listView1.Items[i].SubItems[4].Text + "\\" + listView1.Items[i].Text + "\"";
             }
             play_video_files(all_filename);  // 播放
         }
@@ -2642,41 +2826,43 @@ namespace vcs_DiskDirectoryFile1
 
         void get_export_setting(string foldername)
         {
-            richTextBox1.Text += "打印匯出條件\n";
-            richTextBox1.Text += "資料夾 : " + foldername + "\n";
+            string mesg = string.Empty;
+            //mesg += "打印匯出條件\t";
+            mesg += "資料夾 : " + foldername + "\t";
 
             if (flag_export_filename == true)
             {
-                richTextBox1.Text += "匯出檔名\n";
+                mesg += "匯出檔名\t";
             }
 
             if (flag_export_video == true)
             {
-                richTextBox1.Text += "找影片檔\n";
+                mesg += "找影片檔\t";
             }
 
             if (flag_search_Katfile == true)
             {
-                richTextBox1.Text += "匯出 Katfile\n";
+                mesg += "匯出 Katfile\t";
             }
 
             if (flag_export_foldername == true)  // 找資料夾, 全/空/小
             {
-                richTextBox1.Text += "找資料夾, 全/空/小\\t\t";
+                mesg += "找資料夾, 全/空/小\\t\t";
 
                 if (flag_search_folders_all == true)  // 找最底層 資料夾
                 {
-                    richTextBox1.Text += "找最底層 資料夾\n";
+                    mesg += "找最底層 資料夾\t";
                 }
                 if (flag_search_folders_empty == true)  // 找最底層 空資料夾
                 {
-                    richTextBox1.Text += "找最底層 空資料夾\n";
+                    mesg += "找最底層 空資料夾\t";
                 }
                 if (flag_search_folders_small == true)  // 找最底層 小資料夾
                 {
-                    richTextBox1.Text += "找最底層 小資料夾\n";
+                    mesg += "找最底層 小資料夾\t";
                 }
             }
+            this.Text = mesg;
 
             get_filesize_limit();
         }
@@ -2751,9 +2937,75 @@ namespace vcs_DiskDirectoryFile1
                 //TBD richTextBox1.Text += "共找到空資料夾 : " + total_empty_folders.ToString() + " 個\n";
             }
 
-            listView1.Items.Clear();
+            //------------------------------------------------------------  # 60個
 
+            listView1.Items.Clear();
             int len = fileinfos.Count;
+
+            if (flag_search_files_same0 == true)  // 找相同檔案, 完整檔名
+            {
+                if (len < 2)
+                {
+                    richTextBox1.Text += "至少需要2筆資料\n";
+                }
+
+                //比較
+
+                fileinfos_match.Clear();
+
+                for (int i = 0; i < len; i++)
+                {
+                    for (int j = i + 1; j < (len - 1); j++)
+                    {
+                        // case 1 : 比較真檔名
+                        if (fileinfos[i].filename == fileinfos[j].filename)
+                        {
+                            richTextBox1.Text += "找到真檔名\n";
+                            //richTextBox1.Text += fileinfos[i].fullfilename + "\n";
+                            //richTextBox1.Text += fileinfos[j].fullfilename + "\n";
+                            fileinfos_match.Add(fileinfos[i]);
+                            fileinfos_match.Add(fileinfos[j]);
+                        }
+
+                        /*
+                        // case 2 : 比較模糊檔名
+                        if (fileinfos[i].shortfilename == fileinfos[j].shortfilename)
+                        {
+                            richTextBox1.Text += "找到模糊檔名\n";
+                            //richTextBox1.Text += fileinfos[i].fullfilename + "\n";
+                            //richTextBox1.Text += fileinfos[j].fullfilename + "\n";
+                            fileinfos_match.Add(fileinfos[i]);
+                            fileinfos_match.Add(fileinfos[j]);
+                        }
+                        */
+                        /*
+                        // case 3 : 比較檔案大小
+                        if (fileinfos[i].filesize == fileinfos[j].filesize)
+                        {
+                            richTextBox1.Text += "找到相同檔案大小\n";
+                            //richTextBox1.Text += fileinfos[i].fullfilename + "\n";
+                            //richTextBox1.Text += fileinfos[j].fullfilename + "\n";
+                            fileinfos_match.Add(fileinfos[i]);
+                            fileinfos_match.Add(fileinfos[j]);
+                        }
+                        */
+                    }
+                }
+
+                len = fileinfos_match.Count;
+                if (len == 0)
+                {
+                    richTextBox1.Text += "無資料b\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "找到 " + len.ToString() + " 筆資料\n";
+                    show_file_info6(fileinfos_match, -1, false);
+                }
+
+                return;
+            }
+
             if (len == 0)
             {
                 //richTextBox1.Text += "無資料a\n";
@@ -2761,69 +3013,7 @@ namespace vcs_DiskDirectoryFile1
             else
             {
                 richTextBox1.Text += "找到 " + len.ToString() + " 筆資料\n";
-                show_file_info6(-1, false);
-            }
-        }
-
-        private void bt_compare1_Click(object sender, EventArgs e)
-        {
-            //fileinfos操作
-            //比較
-
-            int len = fileinfos.Count;
-            if (len < 2)
-            {
-                richTextBox1.Text += "至少需要2筆資料\n";
-                return;
-            }
-
-            fileinfos_match.Clear();
-
-            for (int i = 0; i < len; i++)
-            {
-                for (int j = i + 1; j < (len - 1); j++)
-                {
-                    // case 1 : 比較真檔名
-                    if (fileinfos[i].filename == fileinfos[j].filename)
-                    {
-                        richTextBox1.Text += "找到真檔名\n";
-                        //richTextBox1.Text += fileinfos[i].fullfilename + "\n";
-                        //richTextBox1.Text += fileinfos[j].fullfilename + "\n";
-                        fileinfos_match.Add(fileinfos[i]);
-                        fileinfos_match.Add(fileinfos[j]);
-                    }
-
-                    /*
-                    // case 2 : 比較模糊檔名
-                    if (fileinfos[i].shortfilename == fileinfos[j].shortfilename)
-                    {
-                        richTextBox1.Text += "找到模糊檔名\n";
-                        //richTextBox1.Text += fileinfos[i].fullfilename + "\n";
-                        //richTextBox1.Text += fileinfos[j].fullfilename + "\n";
-                        fileinfos_match.Add(fileinfos[i]);
-                        fileinfos_match.Add(fileinfos[j]);
-                    }
-                    */
-
-                    // case 3 : 比較檔案大小
-                    if (fileinfos[i].filesize == fileinfos[j].filesize)
-                    {
-                        richTextBox1.Text += "找到相同檔案大小\n";
-                        //richTextBox1.Text += fileinfos[i].fullfilename + "\n";
-                        //richTextBox1.Text += fileinfos[j].fullfilename + "\n";
-                        fileinfos_match.Add(fileinfos[i]);
-                        fileinfos_match.Add(fileinfos[j]);
-                    }
-                }
-            }
-
-            //------------------------------------------------------------  # 60個
-
-            richTextBox1.Text += "打印搜尋結果\n";
-            len = fileinfos_match.Count;
-            for (int i = 0; i < len; i++)
-            {
-                richTextBox1.Text += fileinfos_match[i].filepath + "\t" + fileinfos_match[i].filename + "\t" + fileinfos_match[i].filesize + "\n";
+                show_file_info6(fileinfos, -1, false);
             }
         }
 
@@ -3017,11 +3207,12 @@ namespace vcs_DiskDirectoryFile1
                             int h = 1080;
                             int fps = 30;
                             string n = "aaaa";
+                            string sn = "bbbb";  //取得 shortname
                             string p = d.FullName;
                             string e = "AAAA";
                             long s = 123;
                             int dd = 456;
-                            fileinfos.Add(new MyFileInfo(n, p, e, s, w, h, fps, dd));
+                            fileinfos.Add(new MyFileInfo(n, sn, p, e, s, w, h, fps, dd));
                         }
                     }
                     else
@@ -3039,11 +3230,12 @@ namespace vcs_DiskDirectoryFile1
                                 int h = 1080;
                                 int fps = 30;
                                 string n = "aaaa";
+                                string sn = "bbbb";  //取得 shortname
                                 string p = d.FullName;
                                 string e = "AAAA";
                                 long s = 123;
                                 int dd = 456;
-                                fileinfos.Add(new MyFileInfo(n, p, e, s, w, h, fps, dd));
+                                fileinfos.Add(new MyFileInfo(n, sn, p, e, s, w, h, fps, dd));
                             }
                         }
                         else
@@ -3059,11 +3251,12 @@ namespace vcs_DiskDirectoryFile1
                                 int h = 1080;
                                 int fps = 30;
                                 string n = "aaaa";
+                                string sn = "bbbb";  //取得 shortname
                                 string p = d.FullName;
                                 string e = "AAAA";
                                 long s = 123;
                                 int dd = 456;
-                                fileinfos.Add(new MyFileInfo(n, p, e, s, w, h, fps, dd));
+                                fileinfos.Add(new MyFileInfo(n, sn, p, e, s, w, h, fps, dd));
                             }
                         }
                     }
@@ -3084,9 +3277,30 @@ namespace vcs_DiskDirectoryFile1
             {
                 message += "\t" + fi.Name + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
                 //message += "\t" + fi.Name + "\n";
+
+                int w = 1920;
+                int h = 1080;
+                int fps = 30;
+                string n = fi.Name;
+                string sn = "bbbb";  //取得 shortname
+                string p = fi.Directory.ToString();
+                string e = fi.Extension;
+                long s = fi.Length;
+                int dd = 456;
+                fileinfos.Add(new MyFileInfo(n, sn, p, e, s, w, h, fps, dd));
+                total_files++;
+                total_size += fi.Length;
+                folder_files++;
+                folder_size += fi.Length;
             }
             else if (flag_export_video == true)  // 搜尋影片檔, 搜尋小影片檔<720, 特大影片檔>1080
             {
+                //若是影片檔, 一定要大於 10 MB, 搜尋 資料夾/檔案 的下限
+                if (fi.Length < 10 * 1024 * 1024)
+                {
+                    return;
+                }
+
                 //取得影片檔案資訊
                 MediaInfoNET.MediaFile f = new MediaInfoNET.MediaFile(filename);
                 if (f.InfoAvailable == true)
@@ -3115,6 +3329,15 @@ namespace vcs_DiskDirectoryFile1
                             }
                         }
 
+                        //搜尋優優檔
+                        if (cb_search_good_files.Checked == true)
+                        {
+                            if (check_video_good(fi.Name) == false)
+                            {
+                                return;
+                            }
+                        }
+
                         //短檔名    大小  格式       資料夾
                         //xxxx.mp4  4.8GB 1920X1080  AAAA/BBB/CCC
                         //richTextBox1.Text += "影片名稱: " + fi.Name + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
@@ -3126,16 +3349,20 @@ namespace vcs_DiskDirectoryFile1
                         //richTextBox1.Text += "輸入大小: " + w.ToString() + " × " + h.ToString() + "\n";
 
                         string n = fi.Name;
+                        string sn = get_shortname(n);  //取得 shortname
                         string p = fi.Directory.ToString();
-                        string e = "AAAA";
+                        string e = fi.Extension;
                         long s = fi.Length;
                         int d = (int)(f.General.DurationMillis / 1000);
 
-                        fileinfos.Add(new MyFileInfo(n, p, e, s, w, h, fps, d));
+                        fileinfos.Add(new MyFileInfo(n, sn, p, e, s, w, h, fps, d));
+
                         total_files++;
                         total_size += fi.Length;
+                        folder_files++;
+                        folder_size += fi.Length;
 
-                        message += fi.Name + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+                        //message += fi.Name + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
                     }
                 }
             }
@@ -3157,20 +3384,13 @@ namespace vcs_DiskDirectoryFile1
                     total_files++;
                     total_size += fi.Length;
                     folder_files++;
+                    folder_size += fi.Length;
                     return;
                 }
             }
             else if (flag_search_folders_all == true)  // 只找資料夾 for 圖片整理
             {
 
-            }
-
-            if ((flag_export_video != true) && (flag_search_Katfile != true))
-            {
-                folder_files++;
-                total_files++;
-                folder_size += fi.Length;
-                total_size += fi.Length;
             }
         }
 
@@ -3421,17 +3641,6 @@ namespace vcs_DiskDirectoryFile1
         {
             //fileinfos操作
 
-            //------------------------------------------------------------  # 60個
-
-            //string longname = @"D:\內視鏡影片\Capsule Endoscopy Animation - ANKON NaviCam [720p].mp4";
-            string longname = "jul-123-2.julia.mp4";
-
-            string shortname = get_shortname(longname);
-            richTextBox1.Text += "long name :  " + longname + "\n";
-            richTextBox1.Text += "short name : " + shortname + "\n";
-
-            //------------------------------------------------------------  # 60個
-
             //搜尋特定檔名
 
             string search_pattern = "maron";
@@ -3464,18 +3673,16 @@ namespace vcs_DiskDirectoryFile1
             //一律轉小寫
             shortname = shortname.ToLower();
 
-            //richTextBox1.Text += "old  = " + shortname + "\n";
-
             //先過濾掉一些字
             string[] remove_word = new string[] { "taxv.xyz_", "[javdb.com]", "[javdb.com]", "027_3xplanet_", "[Thz.la]"
-                , "9288.pro@", "027_3xplanet_", "hhd800.com@", "big2048.com@", "[bbs.yzkof.com]"
-                , "jav20s8.com@", "[javdb.com]", "松島楓", "桐原エリカ", "(Kirihara Erika)"
+                , "9288.pro@", "027_3xplanet_", "hhd800.com@", "489155.com@", "javkok.com@", "489155.com@", "big2048.com@", "[bbs.yzkof.com]"
+                , "jav20s8.com@", "[javdb.com]", "松島楓", "toyouiv.com_", "桐原エリカ", "(Kirihara Erika)"
                 , "[javdb.com]", "Abigaile Johnson ", "Heydoug", "heyzo_hd", "DLLAF"
                 , "bbs2048.org@", "Abigaile Johnson ", "Heydoug", "avmans.com", "FHD"
-                , "QQQQ", "僕とかえでの甘～い性活", "松島かえで", "[garea chinan]", "MIG"
+                , "4k688.com@", "僕とかえでの甘～い性活", "松島かえで", "[garea chinan]", "MIG"
                 , "初剃り", "[44x.me]", "bbsxv.xyz", "@蜂鳥@fengniao151.vip", "18x78.com_"
                 , "taxv.xyz", "jav20s8.com@", "shimohira", "hikari", "deeper.21"
-                , "QQQQ", "QQQQ", "Caribbeancom", "[HD]", "104DANDAN"
+                , "【雪光梦想】", "QQQQ", "Caribbeancom", "[HD]", "104DANDAN"
                 , "QQQQ", "jav4you.", "private", "52JAV.COM", "crv2000.com"
                 , "javidol.com", "Prestige", "[thzu.cc]", "wowg.", "18x78.com_"
                 , "(hibino)", "kpkp3.com", "bbyxv.xyz", "aaxv.xyz", "QQQQ"
@@ -3486,7 +3693,7 @@ namespace vcs_DiskDirectoryFile1
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , ".mp4", ".wmv", ".avi", "QQQQ", "QQQQ"  // 清除副檔名
                 , "-", "%", "$", "(", ")"};  //最後再刪除標點符號
 
             //重複刪除乾淨
@@ -3495,7 +3702,7 @@ namespace vcs_DiskDirectoryFile1
                 shortname = shortname.Replace(r.ToLower(), "").Trim();
             }
 
-            //richTextBox1.Text += "new 1 = " + shortname + "\n";
+            //richTextBox1.Text += "new1 =  " + shortname + "\n";
 
             //後面是7碼的
             string[] series7 = new string[] {
@@ -3548,8 +3755,8 @@ namespace vcs_DiskDirectoryFile1
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 //5
                 , "dldss", "hmdnv", "kmhrs", "dvdms", "stars", "fcdss", "fsdss"
-                , "ftdss", "ptnoz", "dvdes", "svdvd", "QQQQ", "QQQQ", "QQQQ"
-                , "favkh", "mxsps", "dandy", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "ftdss", "ptnoz", "dvdes", "svdvd", "nhdta", "START", "QQQQ"
+                , "favkh", "mxsps", "dandy", "start", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
@@ -3565,7 +3772,7 @@ namespace vcs_DiskDirectoryFile1
                 , "mist", "mxgs", "pppd", "kawd", "ndra", "mudr", "mmkz"
                 , "lulu", "ebod", "dvaj", "ipit", "mrhp", "ktra", "sdab"
                 , "miad", "midd", "xvsr", "pppe", "ekdv", "dasd", "cemd"
-                , "kmhr", "sdde", "shkd", "soav", "cjod", "ktkl", "star"
+                , "kmhr", "sdde", "shkd", "soav", "cjod", "ktkl", "QQQQ"
                 , "mmks", "sqte", "mird", "sdmm", "nacr", "tppn", "pkpd"
                 , "hgot", "atid", "cesd", "ktkc", "apns", "fset", "nkkd"
                 , "ambi", "kdmi", "aukg", "pcde", "msfh", "fffs", "genm"
@@ -3585,8 +3792,8 @@ namespace vcs_DiskDirectoryFile1
                 , "okad", "oned", "sdmt", "annd", "ipsd", "lhjf", "masd"
                 , "mama", "magd", "nass", "mild", "sdms", "onem", "sdmt"
                 , "edrg", "myba", "supd", "nsfs", "baam", "tyod", "aldn"
-                , "dass", "mlsm", "good", "jrze", "hthd", "iene", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "dass", "mlsm", "good", "jrze", "hthd", "iene", "mibd"
+                , "sdth", "avop", "mibb", "ofes", "QQQQ", "madv", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
@@ -3604,13 +3811,13 @@ namespace vcs_DiskDirectoryFile1
                 , "dss", "dic", "kyk", "pla", "umd", "abs", "fir"
                 , "ddk", "scd", "cmd", "kir", "omt", "xrw", "ktb"
                 , "wkd", "sga", "ytr", "dtt", "jbs", "zex", "izm"
-                , "bkd", "juy", "juc", "kbi", "jbd", "scg", "QQQQ"
-                , "mdb", "tem", "cwp", "aka", "QQQQ", "QQQQ", "QQQQ"
+                , "bkd", "juy", "juc", "kbi", "jbd", "scg", "oae"
+                , "mdb", "tem", "cwp", "aka", "emp", "sky", "smd"
                 , "elo", "mek", "evo", "ban", "cwm", "egt", "ezd"
                 , "jag", "kaz", "ksd", "mdb", "nsr", "sgv", "fax"
                 , "ars", "rct", "bid", "blo", "nwf", "ufd", "vdd"
-                , "vis", "wfs", "wif", "yzf", "veq", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "vis", "wfs", "wif", "yzf", "veq", "abf", "fns"
+                , "jur", "kam", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
@@ -3624,6 +3831,8 @@ namespace vcs_DiskDirectoryFile1
                 , "xv", "sw", "bf", "sy", "gs", "QQQQ", "QQQQ"
             };
 
+            //richTextBox1.Text += "new2 =  " + shortname + "\n";
+
             int len = 0;
             int position = -1;
 
@@ -3632,7 +3841,8 @@ namespace vcs_DiskDirectoryFile1
                 foreach (string r in series7)   //後面是7碼的
                 {
                     position = shortname.IndexOf(r, 0);
-                    if (position > -1)
+                    //if (position > -1)
+                    if (position == 0)  // 關鍵字一定要在最前面
                     {
                         len = r.Length;
                         shortname = shortname.Substring(position, len + 7);
@@ -3646,7 +3856,8 @@ namespace vcs_DiskDirectoryFile1
                 foreach (string r in series6)   //後面是6碼的
                 {
                     position = shortname.IndexOf(r, 0);
-                    if (position > -1)
+                    //if (position > -1)
+                    if (position == 0)  // 關鍵字一定要在最前面
                     {
                         len = r.Length;
                         shortname = shortname.Substring(position, len + 6);
@@ -3660,7 +3871,8 @@ namespace vcs_DiskDirectoryFile1
                 foreach (string r in series5)   //後面是5碼的
                 {
                     position = shortname.IndexOf(r, 0);
-                    if (position > -1)
+                    //if (position > -1)
+                    if (position == 0)  // 關鍵字一定要在最前面
                     {
                         len = r.Length;
                         shortname = shortname.Substring(position, len + 5);
@@ -3669,13 +3881,14 @@ namespace vcs_DiskDirectoryFile1
                 }
             }
 
-            //richTextBox1.Text += "new 2 = " + shortname + "\n";
+            //richTextBox1.Text += "new3 =  " + shortname + "\n";
             if (position < 0)
             {
                 foreach (string r in series4)   //後面是4碼的
                 {
                     position = shortname.IndexOf(r, 0);
-                    if (position > -1)
+                    //if (position > -1)
+                    if (position == 0)  // 關鍵字一定要在最前面
                     {
                         len = r.Length;
                         shortname = shortname.Substring(position, len + 4);
@@ -3684,14 +3897,16 @@ namespace vcs_DiskDirectoryFile1
                 }
             }
 
-            //richTextBox1.Text += "new 3 = " + shortname + "\n";
+            //找系列名，若有找到，取出此系列名+後3碼，之後的捨棄
             if (position < 0)
             {
                 foreach (string r in series3)   //後面是3碼的
                 {
                     position = shortname.IndexOf(r, 0);
-                    if (position > -1)
+                    //if (position > -1)
+                    if (position == 0)  // 關鍵字一定要在最前面
                     {
+                        //有找到系列名
                         len = r.Length;
                         shortname = shortname.Substring(position, len + 3);
                         break;
@@ -3699,23 +3914,22 @@ namespace vcs_DiskDirectoryFile1
                 }
             }
 
-            //richTextBox1.Text += "new 4 = " + shortname + "\n";
-            /*
-            //dv接4碼, 有點問題, 會誤判......
+            //richTextBox1.Text += "new5 =  " + shortname + "\n\n";
+
             if (position < 0)
             {
                 string pattern = "dv";
                 position = shortname.IndexOf(pattern, 0);
-                if (position > -1)
+                //if (position > -1)
+                if (position == 0)  // 關鍵字一定要在最前面
                 {
                     len = pattern.Length;
                     shortname = shortname.Substring(position, len + 4);
-                    break;             
+                    //break;
                 }
             }
-            */
-            //richTextBox1.Text += "new =  " + shortname + "\n";
 
+            //richTextBox1.Text += "new6 =  " + shortname + "\n\n";
             return shortname;
         }
 
@@ -3723,60 +3937,9 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_test2_Click(object sender, EventArgs e)
         {
-            //優優檔
-
-            int len = fileinfos.Count;
-            if (len == 0)
-            {
-                richTextBox1.Text += "無資料c\n";
-            }
-            else
-            {
-                richTextBox1.Text += "找到 " + len.ToString() + " 筆資料\n";
-            }
-
-            if (len < 2)
-            {
-                richTextBox1.Text += "至少需要2筆資料\n";
-                return;
-            }
-
-            fileinfos_match.Clear();
-
-            string[] good_pattern = new string[] {
-                  "asami", "yuna", "kaede", "hayashi", "julia", "jjjj", "chitose"    //A class
-                , "nozomi", "anri", "jessica", "airi", "ths", "saeko", ""
-                , "松島", "桐原", "冬月", "小川", "椎名", "宮瀬", "QQQQ"
-                , "smr", "yama", "maria", "akari", "maron", "ryo", "QQQQ"
-                , "mai", "karen", "rinne", "miu", "kano", "QQQQ", "QQQQ"
-                , "suzu", "yuri", "sakura", "nanami", "minami", "iori", "QQQQ"
-                , "1111", "3333", "7777", "9999", "mino", "megumi", "QQQQ"
-                , "kurara", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "立花", "愛世", "美月", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "kana", "tia", "momo", "yui", "sho", "nene", "園田"    //B class
-                , "ayaka", "jgj", "sora", "bt", "maki", "ayumi", "mion"
-                , "本田岬", "lily", "lauren", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "gggg", "debut", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"    //new tmp
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-            };
-
-            for (int i = 0; i < len; i++)
-            {
-                foreach (string ptn in good_pattern)
-                {
-                    if (fileinfos[i].filename.ToLower().Contains(ptn) == true)
-                    {
-                        fileinfos_match.Add(fileinfos[i]);
-                        break;
-                    }
-                }
-            }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void bt_test3_Click(object sender, EventArgs e)
         {
@@ -3816,27 +3979,118 @@ namespace vcs_DiskDirectoryFile1
             tb.SelectAll();
         }
 
+        //------------------------------------------------------------  # 60個
+
+        //搜尋大影片檔
         private void cb_search_big_files_CheckedChanged(object sender, EventArgs e)
         {
-            if (cb_search_big_files.Checked == true)
+            if (cb_search_big_files.Checked == true)  // 大
             {
-                if (cb_search_small_files.Checked == true)
+                if (cb_search_small_files.Checked == true)  // 小
+                {
+                    cb_search_small_files.Checked = false;
+                }
+                if (cb_search_good_files.Checked == true)  // 優
+                {
+                    cb_search_good_files.Checked = false;
+                }
+            }
+            flag_search_files_big = cb_search_big_files.Checked;  // 找大檔案
+            flag_search_files_small = cb_search_small_files.Checked;  // 找小檔案
+            flag_search_files_good = cb_search_good_files.Checked;  // 找優檔案
+        }
+
+        //搜尋小影片檔
+        private void cb_search_small_files_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_search_small_files.Checked == true)  // 小
+            {
+                if (cb_search_big_files.Checked == true)  // 大
+                {
+                    cb_search_big_files.Checked = false;
+                }
+                if (cb_search_good_files.Checked == true)  // 優
+                {
+                    cb_search_good_files.Checked = false;
+                }
+            }
+            flag_search_files_big = cb_search_big_files.Checked;  // 找大檔案
+            flag_search_files_small = cb_search_small_files.Checked;  // 找小檔案
+            flag_search_files_good = cb_search_good_files.Checked;  // 找優檔案
+        }
+
+        //搜尋優影片檔
+        private void cb_search_good_files_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_search_good_files.Checked == true)  // 優 
+            {
+                if (cb_search_big_files.Checked == true)  // 大
+                {
+                    cb_search_big_files.Checked = false;
+                }
+                if (cb_search_small_files.Checked == true)  // 小
                 {
                     cb_search_small_files.Checked = false;
                 }
             }
+            flag_search_files_big = cb_search_big_files.Checked;  // 找大檔案
+            flag_search_files_small = cb_search_small_files.Checked;  // 找小檔案
+            flag_search_files_good = cb_search_good_files.Checked;  // 找優檔案
         }
 
-        private void cb_search_small_files_CheckedChanged(object sender, EventArgs e)
+        // 找相同檔案, 完整檔名
+        private void cb_search_same_files0_CheckedChanged(object sender, EventArgs e)
         {
-            if (cb_search_small_files.Checked == true)
+            if (cb_search_same_files0.Checked == true)
             {
-                if (cb_search_big_files.Checked == true)
+                if (cb_search_same_files1.Checked == true)
                 {
-                    cb_search_big_files.Checked = false;
+                    cb_search_same_files1.Checked = false;
                 }
             }
+            flag_search_files_same0 = cb_search_same_files0.Checked;  // 找相同檔案
         }
+
+        // 找相同檔案, 模糊檔名
+        private void cb_search_same_files1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_search_same_files1.Checked == true)
+            {
+                if (cb_search_same_files0.Checked == true)
+                {
+                    cb_search_same_files0.Checked = false;
+                }
+            }
+            flag_search_files_same1 = cb_search_same_files1.Checked;  // 找相同檔案
+        }
+
+        // 找相同檔案, 完整容量
+        private void cb_search_same_files2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_search_same_files2.Checked == true)
+            {
+                if (cb_search_same_files3.Checked == true)
+                {
+                    cb_search_same_files3.Checked = false;
+                }
+            }
+            flag_search_files_same2 = cb_search_same_files2.Checked;  // 找相同檔案
+        }
+
+        // 找相同檔案, 模糊容量
+        private void cb_search_same_files3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_search_same_files3.Checked == true)
+            {
+                if (cb_search_same_files2.Checked == true)
+                {
+                    cb_search_same_files2.Checked = false;
+                }
+            }
+            flag_search_files_same3 = cb_search_same_files3.Checked;  // 找相同檔案
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void cb_limit_min_CheckedChanged(object sender, EventArgs e)
         {
@@ -3860,6 +4114,9 @@ namespace vcs_DiskDirectoryFile1
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
+        //搜尋全資料夾
         private void cb_search_folders_all_CheckedChanged(object sender, EventArgs e)
         {
             if (cb_search_folders_all.Checked == true)  // 全
@@ -3878,6 +4135,7 @@ namespace vcs_DiskDirectoryFile1
             flag_search_folders_small = cb_search_folders_small.Checked;  // 小
         }
 
+        //搜尋空資料夾
         private void cb_search_folders_empty_CheckedChanged(object sender, EventArgs e)
         {
             if (cb_search_folders_empty.Checked == true)  // 空
@@ -3896,6 +4154,7 @@ namespace vcs_DiskDirectoryFile1
             flag_search_folders_small = cb_search_folders_small.Checked;  // 小
         }
 
+        //搜尋小資料夾
         private void cb_search_folders_small_CheckedChanged(object sender, EventArgs e)
         {
             if (cb_search_folders_small.Checked == true)  // 小
@@ -3912,6 +4171,50 @@ namespace vcs_DiskDirectoryFile1
             flag_search_folders_all = cb_search_folders_all.Checked;  // 全
             flag_search_folders_empty = cb_search_folders_empty.Checked;  // 空
             flag_search_folders_small = cb_search_folders_small.Checked;  // 小
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        //優優檔
+        bool check_video_good(string filename)
+        {
+            bool flag_match = false;
+            string[] good_pattern = new string[] {
+                  "asami", "yuna", "kaede", "hayashi", "julia", "jjjj", "chitose"    //A class
+                , "nozomi", "anri", "jessica", "airi", "ths", "saeko", "QQQQ"
+                , "松島", "桐原", "冬月", "小川", "椎名", "宮瀬", "南波"
+                , "smr", "yama", "maria", "akari", "maron", "ryo", "QQQQ"
+                , "mai", "karen", "rinne", "miu", "kano", "QQQQ", "QQQQ"
+                , "suzu", "yuri", "sakura", "nanami", "minami", "iori", "QQQQ"
+                , "1111", "3333", "4444", "5555", "7777", "8888", "9999", "1010"
+                , "QQQQ", "QQQQ","mino", "megumi", "QQQQ"
+                , "kurara", "kanna", "uta", "alice", "mina", "miho", "naho"
+                , "立花", "愛世", "美月", "sma", "kma", "fumino", "sayuri"
+                , "hsyr", "taki", "remu", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "kana", "tia", "momo", "yui", "sho", "nene", "園田"    //B class
+                , "ayaka", "jgj", "sora", "bt", "maki", "ayumi", "mion"
+                , "本田岬", "lily", "lauren", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "gggg", "debut", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"    //new tmp
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+            };
+
+            foreach (string ptn in good_pattern)
+            {
+                if (filename.ToLower().Contains(ptn) == true)
+                {
+                    if (filename.ToLower().Contains("mium") == true)
+                    {
+                        continue;
+                    }
+                    flag_match = true;
+                    break;
+                }
+            }
+            return flag_match;
         }
 
         //------------------------------------------------------------  # 60個
@@ -3954,16 +4257,7 @@ namespace vcs_DiskDirectoryFile1
             return true;
         }
 
-        private void bt_compare2_Click(object sender, EventArgs e)
-        {
-            //模糊比對
-        }
-
-        private void bt_compare3_Click(object sender, EventArgs e)
-        {
-            //多重比對
-
-        }
+        //6060
 
         private void bt_export_filename_Click(object sender, EventArgs e)
         {
@@ -4080,6 +4374,7 @@ public static void Rename(this FileInfo fi, string newName)
 
 //------------------------------------------------------------  # 60個
 
+// .Contains(
 bool res;
 res = fi.FullName.ToLower().Replace(" ", "").Contains(tb_search_text_pattern.Text.ToLower().Replace("-", ""));
 
@@ -4193,11 +4488,9 @@ sr.Close();
 特長影片  時間長
 
 檔案容量特大 或者 容量最大的幾個檔案
-
 */
 
 /*
-
 一般檔案匯出  檢查檔案大小限制  資料為 上層資料夾+檔名+容量
 
 影片檔案匯出  檢查檔案大小限制  資料為 上層資料夾+檔名+容量
@@ -4205,6 +4498,14 @@ sr.Close();
 資料夾匯出 
 
 Katfile匯出
+*/
 
+
+/*
+比對
+1. 檔名
+2. 模糊檔名 簡名相同
+3. 容量
+4. 模糊容量
 */
 
