@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;
+
 namespace vcs_DiskDirectoryFile1
 {
     public partial class Form_Setup : Form
@@ -36,10 +38,34 @@ namespace vcs_DiskDirectoryFile1
             //tb_setup1.Text = Properties.Settings.Default.audio_player_path;
             //tb_setup2.Text = Properties.Settings.Default.picture_viewer_path;
             //tb_setup3.Text = Properties.Settings.Default.text_editor_path;
-            tb_setup4.Text = Properties.Settings.Default.search_path;
-            tb_setup5.Text = Properties.Settings.Default.doc_foldername;
-            tb_setup6.Text = Properties.Settings.Default.git_foldername;
 
+            string search_path = Properties.Settings.Default.search_path;
+            string doc_foldername = Properties.Settings.Default.doc_foldername;
+            string git_foldername = Properties.Settings.Default.git_foldername;
+            if (Directory.Exists(search_path) == false)
+            {
+                tb_setup4.Text = search_path;
+            }
+            else
+            {
+                tb_setup4.Text = "";
+            }
+            if (Directory.Exists(doc_foldername) == false)
+            {
+                tb_setup5.Text = doc_foldername;
+            }
+            else
+            {
+                tb_setup5.Text = "";
+            }
+            if (Directory.Exists(git_foldername) == false)
+            {
+                tb_setup6.Text = git_foldername;
+            }
+            else
+            {
+                tb_setup6.Text = "";
+            }
             show_item_location();
         }
 

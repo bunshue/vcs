@@ -242,7 +242,21 @@ namespace vcs_DiskDirectoryFile1
 
             tb_limit_min.Text = filesize_min.ToString();  // 搜尋 資料夾/檔案 的下限
             tb_limit_max.Text = filesize_max.ToString();  // 搜尋 資料夾/檔案 的上限
-            tb_foldername1.Text = search_foldername;
+
+            if (Directory.Exists(doc_foldername) == false)
+            {
+                doc_foldername = "";
+            }
+
+            if (Directory.Exists(search_foldername) == true)
+            {
+                tb_foldername1.Text = search_foldername;
+            }
+            else
+            {
+                tb_foldername1.Text = "";
+            }
+
             tb_foldername2.Text = "";
             tb_foldername2.Visible = false;
 
@@ -300,12 +314,12 @@ namespace vcs_DiskDirectoryFile1
             groupBox1.Size = new Size(W, 106 + 50);
             groupBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0 - 14);
 
-            listView1.Size = new Size(W, 270 - 50);
+            listView1.Size = new Size(W, 270 - 50 + 200);
             listView1.Location = new Point(x_st + dx * 3, y_st + dy * 1 + 24 + 50);
             bt_clear2.Location = new Point(listView1.Location.X + listView1.Size.Width - bt_clear2.Size.Width, listView1.Location.Y + listView1.Size.Height - bt_clear2.Size.Height);
 
-            richTextBox1.Size = new Size(W, 340);
-            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 5 + 24);
+            richTextBox1.Size = new Size(W, 340 - 200);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 5 + 24 + 200);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
             bt_copy_rtb_data.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - bt_copy_rtb_data.Width, richTextBox1.Location.Y + richTextBox1.Height - bt_clear.Height - bt_copy_rtb_data.Height);
 
@@ -2541,11 +2555,14 @@ namespace vcs_DiskDirectoryFile1
             richTextBox1.Text += "n  : " + filename + "\n";
             richTextBox1.Text += "sn : " + sn + "\n";
 
-            filename = "hhd800.com@START-585.suzu.mp4";
+            filename = "abp 633.Uncen H265 by 教宗.mp4";
             sn = get_shortname(filename);  //取得 shortname
             richTextBox1.Text += "n  : " + filename + "\n";
             richTextBox1.Text += "sn : " + sn + "\n";
 
+
+            // 做一個最簡單的ProcessDirectory-File 只要統計檔案個數就好
+            // 這樣看看搜尋速度最快是多少
 
         }
 
@@ -3301,6 +3318,12 @@ namespace vcs_DiskDirectoryFile1
                     return;
                 }
 
+                //若是圖片，直接離開
+                if (fi.Name.ToLower().Contains(".jpg") == true)
+                {
+                    return;
+                }
+
                 //取得影片檔案資訊
                 MediaInfoNET.MediaFile f = new MediaInfoNET.MediaFile(filename);
                 if (f.InfoAvailable == true)
@@ -3674,27 +3697,27 @@ namespace vcs_DiskDirectoryFile1
             shortname = shortname.ToLower();
 
             //先過濾掉一些字
-            string[] remove_word = new string[] { "taxv.xyz_", "[javdb.com]", "[javdb.com]", "027_3xplanet_", "[Thz.la]"
+            string[] remove_word = new string[] { "taxv.xyz_", "[javdb.com]", "[MILFY]", "027_3xplanet_", "[Thz.la]"
                 , "9288.pro@", "027_3xplanet_", "hhd800.com@", "489155.com@", "javkok.com@", "489155.com@", "big2048.com@", "[bbs.yzkof.com]"
-                , "jav20s8.com@", "[javdb.com]", "松島楓", "toyouiv.com_", "桐原エリカ", "(Kirihara Erika)"
+                , "jav20s8.com@", "@江南@", "松島楓", "toyouiv.com_", "桐原エリカ", "(Kirihara Erika)"
                 , "[javdb.com]", "Abigaile Johnson ", "Heydoug", "heyzo_hd", "DLLAF"
                 , "bbs2048.org@", "Abigaile Johnson ", "Heydoug", "avmans.com", "FHD"
                 , "4k688.com@", "僕とかえでの甘～い性活", "松島かえで", "[garea chinan]", "MIG"
                 , "初剃り", "[44x.me]", "bbsxv.xyz", "@蜂鳥@fengniao151.vip", "18x78.com_"
                 , "taxv.xyz", "jav20s8.com@", "shimohira", "hikari", "deeper.21"
-                , "【雪光梦想】", "QQQQ", "Caribbeancom", "[HD]", "104DANDAN"
-                , "QQQQ", "jav4you.", "private", "52JAV.COM", "crv2000.com"
+                , "【雪光梦想】", "4k2.com@", "Caribbeancom", "[HD]", "104DANDAN"
+                , "[88q.me]", "jav4you.", "private", "52JAV.COM", "crv2000.com"
                 , "javidol.com", "Prestige", "[thzu.cc]", "wowg.", "18x78.com_"
-                , "(hibino)", "kpkp3.com", "bbyxv.xyz", "aaxv.xyz", "QQQQ"
+                , "(hibino)", "kpkp3.com", "bbyxv.xyz", "aaxv.xyz", "4k2.me@"
+                , "masex.tv@", "[55h.me]", "[NoDRM]-", "jpfou.com-", "madoubt.com 583985.xyz "
+                , "-javgg.net", "[456k.me]", "(uncensored)", "rh2048.com@", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , ".mp4", ".wmv", ".avi", "QQQQ", "QQQQ"  // 清除副檔名
-                , "-", "%", "$", "(", ")"};  //最後再刪除標點符號
+                , ".mp4", ".wmv", ".avi", ".mkv", ".mov"  // 清除副檔名
+                , " ", "-", "%", "$", "(", ")"};  //最後再刪除標點符號
 
             //重複刪除乾淨
             foreach (string r in remove_word)
@@ -3755,8 +3778,8 @@ namespace vcs_DiskDirectoryFile1
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 //5
                 , "dldss", "hmdnv", "kmhrs", "dvdms", "stars", "fcdss", "fsdss"
-                , "ftdss", "ptnoz", "dvdes", "svdvd", "nhdta", "START", "QQQQ"
-                , "favkh", "mxsps", "dandy", "start", "QQQQ", "QQQQ", "QQQQ"
+                , "ftdss", "ptnoz", "dvdes", "svdvd", "nhdta", "START", "MDVHJ"
+                , "favkh", "mxsps", "dandy", "start", "NHDTC", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
@@ -3772,7 +3795,7 @@ namespace vcs_DiskDirectoryFile1
                 , "mist", "mxgs", "pppd", "kawd", "ndra", "mudr", "mmkz"
                 , "lulu", "ebod", "dvaj", "ipit", "mrhp", "ktra", "sdab"
                 , "miad", "midd", "xvsr", "pppe", "ekdv", "dasd", "cemd"
-                , "kmhr", "sdde", "shkd", "soav", "cjod", "ktkl", "QQQQ"
+                , "kmhr", "sdde", "shkd", "soav", "cjod", "ktkl", "aege"
                 , "mmks", "sqte", "mird", "sdmm", "nacr", "tppn", "pkpd"
                 , "hgot", "atid", "cesd", "ktkc", "apns", "fset", "nkkd"
                 , "ambi", "kdmi", "aukg", "pcde", "msfh", "fffs", "genm"
@@ -3793,9 +3816,9 @@ namespace vcs_DiskDirectoryFile1
                 , "mama", "magd", "nass", "mild", "sdms", "onem", "sdmt"
                 , "edrg", "myba", "supd", "nsfs", "baam", "tyod", "aldn"
                 , "dass", "mlsm", "good", "jrze", "hthd", "iene", "mibd"
-                , "sdth", "avop", "mibb", "ofes", "QQQQ", "madv", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "sdth", "avop", "mibb", "ofes", "achj", "madv", "snos"
+                , "mikr", "mngs", "dsod", "same", "sone", "ATYA", "atya"
+                , "shyn", "acme", "mxnb", "ATKD", "mida", "ATAD", "PRTD"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
@@ -3817,7 +3840,7 @@ namespace vcs_DiskDirectoryFile1
                 , "jag", "kaz", "ksd", "mdb", "nsr", "sgv", "fax"
                 , "ars", "rct", "bid", "blo", "nwf", "ufd", "vdd"
                 , "vis", "wfs", "wif", "yzf", "veq", "abf", "fns"
-                , "jur", "kam", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "jur", "kam", "juq", "beb", "har", "ama", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
@@ -4181,23 +4204,23 @@ namespace vcs_DiskDirectoryFile1
             bool flag_match = false;
             string[] good_pattern = new string[] {
                   "asami", "yuna", "kaede", "hayashi", "julia", "jjjj", "chitose"    //A class
-                , "nozomi", "anri", "jessica", "airi", "ths", "saeko", "QQQQ"
+                , "nozomi", "anri", "jessica", "airi", "ths", "saeko", "mihi"
                 , "松島", "桐原", "冬月", "小川", "椎名", "宮瀬", "南波"
-                , "smr", "yama", "maria", "akari", "maron", "ryo", "QQQQ"
-                , "mai", "karen", "rinne", "miu", "kano", "QQQQ", "QQQQ"
-                , "suzu", "yuri", "sakura", "nanami", "minami", "iori", "QQQQ"
+                , "smr", "yama", "maria", "akari", "maron", "ryo", "ran"
+                , "mai", "karen", "rinne", "miu", "kano", "kiho", "rio"
+                , "suzu", "yuri", "sakura", "nanami", "minami", "iori", "mito"
                 , "1111", "3333", "4444", "5555", "7777", "8888", "9999", "1010"
-                , "QQQQ", "QQQQ","mino", "megumi", "QQQQ"
+                , "新川空", "riho","mino", "megumi", "miyu"
                 , "kurara", "kanna", "uta", "alice", "mina", "miho", "naho"
                 , "立花", "愛世", "美月", "sma", "kma", "fumino", "sayuri"
-                , "hsyr", "taki", "remu", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "hsyr", "taki", "remu", "iaoi", "taoi", "yuko", "mos"
+                , "riria", "ririko", "mai", "mth", "arina", "mori", "fuua"
                 , "kana", "tia", "momo", "yui", "sho", "nene", "園田"    //B class
                 , "ayaka", "jgj", "sora", "bt", "maki", "ayumi", "mion"
-                , "本田岬", "lily", "lauren", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "gggg", "debut", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"    //new tmp
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "本田岬", "lily", "lauren", "3ne", "倉木華", "nmm", "azm"
+                , "aki", "雨宮", "non", "滝川", "水卜", "宝生", "宮崎"
+                , "gggg", "debut", "南まゆ", "星野", "須籐沙希", "美香", "宮藤"    //new tmp
+                , "夕子", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
             };
