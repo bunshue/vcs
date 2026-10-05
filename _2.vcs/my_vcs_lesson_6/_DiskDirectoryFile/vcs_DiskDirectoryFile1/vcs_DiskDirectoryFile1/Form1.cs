@@ -2707,10 +2707,17 @@ namespace vcs_DiskDirectoryFile1
                     richTextBox1.Text += listView1.SelectedItems[i].SubItems[0].Text + "\n";
 
                     string delete_foldername = listView1.SelectedItems[i].SubItems[0].Text;
-                    //Directory.Delete(delete_foldername);  // 僅能刪除空資料夾
-                    Directory.Delete(delete_foldername, true);  // 遞迴
-                    richTextBox1.Text += "已刪除空資料夾: " + delete_foldername + "\n";
 
+                    //刪除資料夾 (使用資源回收筒)
+                    if (Directory.Exists(delete_foldername) == true)
+                    {
+                        FileSystem.DeleteDirectory(delete_foldername, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+                        richTextBox1.Text += "已將資料夾 : " + delete_foldername + " 移至資源回收筒\n";
+                    }
+                    else
+                    {
+                        richTextBox1.Text += "資料夾 : " + delete_foldername + " 不存在\n";
+                    }
                 }
                 else if (flag_export_filename == true)  // 匯出檔名
                 {
@@ -3205,8 +3212,8 @@ namespace vcs_DiskDirectoryFile1
             // 找檔案, 一層
             string[] filenames = Directory.GetFiles(foldername);  // 取得指定目錄中檔案的名稱
             Array.Sort(filenames);  // 排序
-            folder_size = 0;
             folder_files = 0;
+            folder_size = 0;
             foreach (string filename in filenames)
             {
                 // 檔案
@@ -3431,6 +3438,11 @@ namespace vcs_DiskDirectoryFile1
             else if (flag_search_folders_all == true)  // 只找資料夾 for 圖片整理
             {
 
+            }
+            else if (flag_export_foldername == true)  // 匯出檔名
+            {
+                folder_files++;
+                folder_size += fi.Length;
             }
         }
 
