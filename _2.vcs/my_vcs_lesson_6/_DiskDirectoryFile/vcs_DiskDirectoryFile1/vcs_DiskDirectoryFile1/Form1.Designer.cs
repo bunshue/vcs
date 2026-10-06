@@ -106,6 +106,9 @@
             this.bt_dir10 = new System.Windows.Forms.Button();
             this.bt_file12 = new System.Windows.Forms.Button();
             this.bt_dir12 = new System.Windows.Forms.Button();
+            this.listView_dir = new System.Windows.Forms.ListView();
+            this.listView_file = new System.Windows.Forms.ListView();
+            this.listView_video = new System.Windows.Forms.ListView();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -920,7 +923,7 @@
             // bt_clear2
             // 
             this.bt_clear2.Font = new System.Drawing.Font("細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear2.Location = new System.Drawing.Point(657, 575);
+            this.bt_clear2.Location = new System.Drawing.Point(774, 434);
             this.bt_clear2.Name = "bt_clear2";
             this.bt_clear2.Size = new System.Drawing.Size(72, 36);
             this.bt_clear2.TabIndex = 261;
@@ -1003,11 +1006,44 @@
             this.bt_dir12.UseVisualStyleBackColor = true;
             this.bt_dir12.Click += new System.EventHandler(this.bt_dir12_Click);
             // 
+            // listView_dir
+            // 
+            this.listView_dir.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.listView_dir.Location = new System.Drawing.Point(774, 476);
+            this.listView_dir.Name = "listView_dir";
+            this.listView_dir.Size = new System.Drawing.Size(100, 100);
+            this.listView_dir.TabIndex = 295;
+            this.listView_dir.UseCompatibleStateImageBehavior = false;
+            this.listView_dir.View = System.Windows.Forms.View.Details;
+            // 
+            // listView_file
+            // 
+            this.listView_file.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.listView_file.Location = new System.Drawing.Point(900, 476);
+            this.listView_file.Name = "listView_file";
+            this.listView_file.Size = new System.Drawing.Size(100, 100);
+            this.listView_file.TabIndex = 297;
+            this.listView_file.UseCompatibleStateImageBehavior = false;
+            this.listView_file.View = System.Windows.Forms.View.Details;
+            // 
+            // listView_video
+            // 
+            this.listView_video.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.listView_video.Location = new System.Drawing.Point(1027, 476);
+            this.listView_video.Name = "listView_video";
+            this.listView_video.Size = new System.Drawing.Size(100, 100);
+            this.listView_video.TabIndex = 299;
+            this.listView_video.UseCompatibleStateImageBehavior = false;
+            this.listView_video.View = System.Windows.Forms.View.Details;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1206, 661);
+            this.Controls.Add(this.listView_video);
+            this.Controls.Add(this.listView_file);
+            this.Controls.Add(this.listView_dir);
             this.Controls.Add(this.bt_dir12);
             this.Controls.Add(this.bt_file12);
             this.Controls.Add(this.bt_dir11);
@@ -1137,6 +1173,9 @@
         private System.Windows.Forms.Button bt_dir10;
         private System.Windows.Forms.Button bt_file12;
         private System.Windows.Forms.Button bt_dir12;
+        private System.Windows.Forms.ListView listView_dir;
+        private System.Windows.Forms.ListView listView_file;
+        private System.Windows.Forms.ListView listView_video;
     }
 }
 
