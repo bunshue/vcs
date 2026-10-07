@@ -55,13 +55,13 @@
             this.label0 = new System.Windows.Forms.Label();
             this.tb_foldername1 = new System.Windows.Forms.TextBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.tb_foldername2 = new System.Windows.Forms.TextBox();
             this.tb_search = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tb_filename = new System.Windows.Forms.TextBox();
             this.tb_foldername = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.bt_compare = new System.Windows.Forms.Button();
             this.cb_search_same_files3 = new System.Windows.Forms.CheckBox();
             this.cb_search_same_files2 = new System.Windows.Forms.CheckBox();
             this.cb_search_same_files1 = new System.Windows.Forms.CheckBox();
@@ -69,12 +69,19 @@
             this.tb_limit_max = new System.Windows.Forms.TextBox();
             this.tb_limit_min = new System.Windows.Forms.TextBox();
             this.cb_search_good_files = new System.Windows.Forms.CheckBox();
-            this.bt_info = new System.Windows.Forms.Button();
+            this.bt_test4 = new System.Windows.Forms.Button();
             this.bt_open_folder = new System.Windows.Forms.Button();
+            this.bt_test3 = new System.Windows.Forms.Button();
             this.bt_search_pattern_vcs = new System.Windows.Forms.Button();
+            this.bt_test2 = new System.Windows.Forms.Button();
             this.cb_search_folders_all = new System.Windows.Forms.CheckBox();
+            this.bt_test1 = new System.Windows.Forms.Button();
             this.bt_export_foldername = new System.Windows.Forms.Button();
+            this.bt_delete_file = new System.Windows.Forms.Button();
+            this.bt_start_all_files = new System.Windows.Forms.Button();
             this.bt_export_video = new System.Windows.Forms.Button();
+            this.bt_start_files = new System.Windows.Forms.Button();
+            this.bt_setup = new System.Windows.Forms.Button();
             this.bt_export_filename = new System.Windows.Forms.Button();
             this.cb_search_folders_small = new System.Windows.Forms.CheckBox();
             this.cb_search_folders_empty = new System.Windows.Forms.CheckBox();
@@ -86,15 +93,6 @@
             this.lb_search_result1 = new System.Windows.Forms.Label();
             this.cb_search_small_files = new System.Windows.Forms.CheckBox();
             this.cb_search_big_files = new System.Windows.Forms.CheckBox();
-            this.bt_test4 = new System.Windows.Forms.Button();
-            this.bt_test3 = new System.Windows.Forms.Button();
-            this.bt_test2 = new System.Windows.Forms.Button();
-            this.bt_test1 = new System.Windows.Forms.Button();
-            this.bt_start_all_files = new System.Windows.Forms.Button();
-            this.bt_setup = new System.Windows.Forms.Button();
-            this.bt_start_files = new System.Windows.Forms.Button();
-            this.bt_delete_file = new System.Windows.Forms.Button();
-            this.bt_open_dir2 = new System.Windows.Forms.Button();
             this.bt_open_dir1 = new System.Windows.Forms.Button();
             this.bt_clear2 = new System.Windows.Forms.Button();
             this.bt_copy_rtb_data = new System.Windows.Forms.Button();
@@ -115,7 +113,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(643, 420);
+            this.richTextBox1.Location = new System.Drawing.Point(828, 435);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 1;
@@ -344,7 +342,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(652, 469);
+            this.bt_clear.Location = new System.Drawing.Point(837, 484);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 62;
@@ -382,20 +380,10 @@
             this.tb_foldername1.Click += new System.EventHandler(this.tb_text_Click);
             this.tb_foldername1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_foldername1_KeyPress);
             // 
-            // tb_foldername2
-            // 
-            this.tb_foldername2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_foldername2.Location = new System.Drawing.Point(60, 70);
-            this.tb_foldername2.Name = "tb_foldername2";
-            this.tb_foldername2.Size = new System.Drawing.Size(100, 30);
-            this.tb_foldername2.TabIndex = 255;
-            this.tb_foldername2.Click += new System.EventHandler(this.tb_text_Click);
-            this.tb_foldername2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_foldername2_KeyPress);
-            // 
             // tb_search
             // 
             this.tb_search.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_search.Location = new System.Drawing.Point(179, 67);
+            this.tb_search.Location = new System.Drawing.Point(118, 21);
             this.tb_search.Name = "tb_search";
             this.tb_search.Size = new System.Drawing.Size(60, 30);
             this.tb_search.TabIndex = 257;
@@ -409,28 +397,18 @@
             this.groupBox1.Controls.Add(this.tb_filename);
             this.groupBox1.Controls.Add(this.tb_foldername);
             this.groupBox1.Controls.Add(this.tb_foldername1);
-            this.groupBox1.Controls.Add(this.tb_foldername2);
             this.groupBox1.Controls.Add(this.groupBox2);
-            this.groupBox1.Controls.Add(this.bt_test4);
-            this.groupBox1.Controls.Add(this.bt_test3);
-            this.groupBox1.Controls.Add(this.bt_test2);
-            this.groupBox1.Controls.Add(this.bt_test1);
-            this.groupBox1.Controls.Add(this.bt_start_all_files);
-            this.groupBox1.Controls.Add(this.bt_setup);
-            this.groupBox1.Controls.Add(this.bt_start_files);
-            this.groupBox1.Controls.Add(this.bt_delete_file);
-            this.groupBox1.Controls.Add(this.bt_open_dir2);
             this.groupBox1.Controls.Add(this.bt_open_dir1);
             this.groupBox1.Location = new System.Drawing.Point(642, 10);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(546, 403);
+            this.groupBox1.Size = new System.Drawing.Size(602, 407);
             this.groupBox1.TabIndex = 259;
             this.groupBox1.TabStop = false;
             // 
             // tb_filename
             // 
             this.tb_filename.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_filename.Location = new System.Drawing.Point(166, 70);
+            this.tb_filename.Location = new System.Drawing.Point(276, 19);
             this.tb_filename.Name = "tb_filename";
             this.tb_filename.Size = new System.Drawing.Size(100, 30);
             this.tb_filename.TabIndex = 261;
@@ -454,12 +432,19 @@
             this.groupBox2.Controls.Add(this.tb_limit_max);
             this.groupBox2.Controls.Add(this.tb_limit_min);
             this.groupBox2.Controls.Add(this.cb_search_good_files);
-            this.groupBox2.Controls.Add(this.bt_info);
+            this.groupBox2.Controls.Add(this.bt_test4);
             this.groupBox2.Controls.Add(this.bt_open_folder);
+            this.groupBox2.Controls.Add(this.bt_test3);
             this.groupBox2.Controls.Add(this.bt_search_pattern_vcs);
+            this.groupBox2.Controls.Add(this.bt_test2);
             this.groupBox2.Controls.Add(this.cb_search_folders_all);
+            this.groupBox2.Controls.Add(this.bt_test1);
             this.groupBox2.Controls.Add(this.bt_export_foldername);
+            this.groupBox2.Controls.Add(this.bt_delete_file);
+            this.groupBox2.Controls.Add(this.bt_start_all_files);
             this.groupBox2.Controls.Add(this.bt_export_video);
+            this.groupBox2.Controls.Add(this.bt_start_files);
+            this.groupBox2.Controls.Add(this.bt_setup);
             this.groupBox2.Controls.Add(this.bt_export_filename);
             this.groupBox2.Controls.Add(this.cb_search_folders_small);
             this.groupBox2.Controls.Add(this.cb_search_folders_empty);
@@ -471,24 +456,37 @@
             this.groupBox2.Controls.Add(this.lb_search_result1);
             this.groupBox2.Controls.Add(this.cb_search_small_files);
             this.groupBox2.Controls.Add(this.cb_search_big_files);
-            this.groupBox2.Location = new System.Drawing.Point(272, 13);
+            this.groupBox2.Location = new System.Drawing.Point(9, 71);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(263, 372);
+            this.groupBox2.Size = new System.Drawing.Size(572, 312);
             this.groupBox2.TabIndex = 262;
             this.groupBox2.TabStop = false;
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.bt_compare);
             this.groupBox3.Controls.Add(this.cb_search_same_files3);
             this.groupBox3.Controls.Add(this.cb_search_same_files2);
             this.groupBox3.Controls.Add(this.cb_search_same_files1);
             this.groupBox3.Controls.Add(this.cb_search_same_files0);
-            this.groupBox3.Location = new System.Drawing.Point(11, 267);
+            this.groupBox3.Location = new System.Drawing.Point(11, 195);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(109, 100);
+            this.groupBox3.Size = new System.Drawing.Size(152, 100);
             this.groupBox3.TabIndex = 291;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "比較";
+            // 
+            // bt_compare
+            // 
+            this.bt_compare.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_compare.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_compare.Location = new System.Drawing.Point(94, 27);
+            this.bt_compare.Name = "bt_compare";
+            this.bt_compare.Size = new System.Drawing.Size(45, 45);
+            this.bt_compare.TabIndex = 292;
+            this.bt_compare.Text = "比較";
+            this.bt_compare.UseVisualStyleBackColor = true;
+            this.bt_compare.Click += new System.EventHandler(this.bt_compare_Click);
             // 
             // cb_search_same_files3
             // 
@@ -541,7 +539,7 @@
             // tb_limit_max
             // 
             this.tb_limit_max.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_limit_max.Location = new System.Drawing.Point(179, 137);
+            this.tb_limit_max.Location = new System.Drawing.Point(118, 91);
             this.tb_limit_max.Name = "tb_limit_max";
             this.tb_limit_max.Size = new System.Drawing.Size(60, 30);
             this.tb_limit_max.TabIndex = 276;
@@ -553,7 +551,7 @@
             // tb_limit_min
             // 
             this.tb_limit_min.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_limit_min.Location = new System.Drawing.Point(179, 101);
+            this.tb_limit_min.Location = new System.Drawing.Point(118, 55);
             this.tb_limit_min.Name = "tb_limit_min";
             this.tb_limit_min.Size = new System.Drawing.Size(60, 30);
             this.tb_limit_min.TabIndex = 262;
@@ -566,7 +564,7 @@
             // 
             this.cb_search_good_files.AutoSize = true;
             this.cb_search_good_files.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_search_good_files.Location = new System.Drawing.Point(72, 192);
+            this.cb_search_good_files.Location = new System.Drawing.Point(11, 146);
             this.cb_search_good_files.Name = "cb_search_good_files";
             this.cb_search_good_files.Size = new System.Drawing.Size(91, 17);
             this.cb_search_good_files.TabIndex = 289;
@@ -574,47 +572,71 @@
             this.cb_search_good_files.UseVisualStyleBackColor = true;
             this.cb_search_good_files.CheckedChanged += new System.EventHandler(this.cb_search_good_files_CheckedChanged);
             // 
-            // bt_info
+            // bt_test4
             // 
-            this.bt_info.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_info.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_info.Location = new System.Drawing.Point(191, 16);
-            this.bt_info.Name = "bt_info";
-            this.bt_info.Size = new System.Drawing.Size(45, 45);
-            this.bt_info.TabIndex = 288;
-            this.bt_info.Text = "Info";
-            this.bt_info.UseVisualStyleBackColor = true;
-            this.bt_info.Click += new System.EventHandler(this.bt_info_Click);
+            this.bt_test4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_test4.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_test4.Location = new System.Drawing.Point(458, 21);
+            this.bt_test4.Name = "bt_test4";
+            this.bt_test4.Size = new System.Drawing.Size(45, 45);
+            this.bt_test4.TabIndex = 272;
+            this.bt_test4.Text = "測試4";
+            this.bt_test4.UseVisualStyleBackColor = true;
+            this.bt_test4.Click += new System.EventHandler(this.bt_test4_Click);
             // 
             // bt_open_folder
             // 
             this.bt_open_folder.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_open_folder.BackgroundImage")));
             this.bt_open_folder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_open_folder.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_open_folder.Location = new System.Drawing.Point(62, 216);
+            this.bt_open_folder.Location = new System.Drawing.Point(201, 128);
             this.bt_open_folder.Name = "bt_open_folder";
             this.bt_open_folder.Size = new System.Drawing.Size(45, 45);
             this.bt_open_folder.TabIndex = 275;
             this.bt_open_folder.UseVisualStyleBackColor = true;
             this.bt_open_folder.Click += new System.EventHandler(this.bt_open_folder_Click);
             // 
+            // bt_test3
+            // 
+            this.bt_test3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_test3.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_test3.Location = new System.Drawing.Point(407, 21);
+            this.bt_test3.Name = "bt_test3";
+            this.bt_test3.Size = new System.Drawing.Size(45, 45);
+            this.bt_test3.TabIndex = 271;
+            this.bt_test3.Text = "測試3";
+            this.bt_test3.UseVisualStyleBackColor = true;
+            this.bt_test3.Click += new System.EventHandler(this.bt_test3_Click);
+            // 
             // bt_search_pattern_vcs
             // 
             this.bt_search_pattern_vcs.BackgroundImage = global::vcs_DiskDirectoryFile1.Properties.Resources.vcs;
             this.bt_search_pattern_vcs.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_search_pattern_vcs.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_search_pattern_vcs.Location = new System.Drawing.Point(11, 216);
+            this.bt_search_pattern_vcs.Location = new System.Drawing.Point(356, 77);
             this.bt_search_pattern_vcs.Name = "bt_search_pattern_vcs";
             this.bt_search_pattern_vcs.Size = new System.Drawing.Size(45, 45);
             this.bt_search_pattern_vcs.TabIndex = 287;
             this.bt_search_pattern_vcs.UseVisualStyleBackColor = true;
             this.bt_search_pattern_vcs.Click += new System.EventHandler(this.bt_search_pattern_vcs_Click);
             // 
+            // bt_test2
+            // 
+            this.bt_test2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_test2.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_test2.Location = new System.Drawing.Point(356, 21);
+            this.bt_test2.Name = "bt_test2";
+            this.bt_test2.Size = new System.Drawing.Size(45, 45);
+            this.bt_test2.TabIndex = 270;
+            this.bt_test2.Text = "測試2優";
+            this.bt_test2.UseVisualStyleBackColor = true;
+            this.bt_test2.Click += new System.EventHandler(this.bt_test2_Click);
+            // 
             // cb_search_folders_all
             // 
             this.cb_search_folders_all.AutoSize = true;
             this.cb_search_folders_all.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_search_folders_all.Location = new System.Drawing.Point(168, 176);
+            this.cb_search_folders_all.Location = new System.Drawing.Point(107, 130);
             this.cb_search_folders_all.Name = "cb_search_folders_all";
             this.cb_search_folders_all.Size = new System.Drawing.Size(65, 17);
             this.cb_search_folders_all.TabIndex = 286;
@@ -622,11 +644,23 @@
             this.cb_search_folders_all.UseVisualStyleBackColor = true;
             this.cb_search_folders_all.CheckedChanged += new System.EventHandler(this.cb_search_folders_all_CheckedChanged);
             // 
+            // bt_test1
+            // 
+            this.bt_test1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_test1.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_test1.Location = new System.Drawing.Point(303, 21);
+            this.bt_test1.Name = "bt_test1";
+            this.bt_test1.Size = new System.Drawing.Size(45, 45);
+            this.bt_test1.TabIndex = 269;
+            this.bt_test1.Text = "測試1";
+            this.bt_test1.UseVisualStyleBackColor = true;
+            this.bt_test1.Click += new System.EventHandler(this.bt_test1_Click);
+            // 
             // bt_export_foldername
             // 
             this.bt_export_foldername.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_export_foldername.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_export_foldername.Location = new System.Drawing.Point(116, 216);
+            this.bt_export_foldername.Location = new System.Drawing.Point(201, 21);
             this.bt_export_foldername.Name = "bt_export_foldername";
             this.bt_export_foldername.Size = new System.Drawing.Size(45, 45);
             this.bt_export_foldername.TabIndex = 284;
@@ -634,11 +668,35 @@
             this.bt_export_foldername.UseVisualStyleBackColor = true;
             this.bt_export_foldername.Click += new System.EventHandler(this.bt_export_foldername_Click);
             // 
+            // bt_delete_file
+            // 
+            this.bt_delete_file.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_delete_file.BackgroundImage")));
+            this.bt_delete_file.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_delete_file.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_delete_file.Location = new System.Drawing.Point(509, 75);
+            this.bt_delete_file.Name = "bt_delete_file";
+            this.bt_delete_file.Size = new System.Drawing.Size(45, 45);
+            this.bt_delete_file.TabIndex = 75;
+            this.bt_delete_file.UseVisualStyleBackColor = true;
+            this.bt_delete_file.Click += new System.EventHandler(this.bt_delete_file_Click);
+            // 
+            // bt_start_all_files
+            // 
+            this.bt_start_all_files.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_start_all_files.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_start_all_files.Location = new System.Drawing.Point(458, 75);
+            this.bt_start_all_files.Name = "bt_start_all_files";
+            this.bt_start_all_files.Size = new System.Drawing.Size(45, 45);
+            this.bt_start_all_files.TabIndex = 259;
+            this.bt_start_all_files.Text = "全部播放";
+            this.bt_start_all_files.UseVisualStyleBackColor = true;
+            this.bt_start_all_files.Click += new System.EventHandler(this.bt_start_all_files_Click);
+            // 
             // bt_export_video
             // 
             this.bt_export_video.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_export_video.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_export_video.Location = new System.Drawing.Point(62, 16);
+            this.bt_export_video.Location = new System.Drawing.Point(252, 77);
             this.bt_export_video.Name = "bt_export_video";
             this.bt_export_video.Size = new System.Drawing.Size(45, 45);
             this.bt_export_video.TabIndex = 283;
@@ -646,11 +704,35 @@
             this.bt_export_video.UseVisualStyleBackColor = true;
             this.bt_export_video.Click += new System.EventHandler(this.bt_export_video_Click);
             // 
+            // bt_start_files
+            // 
+            this.bt_start_files.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_start_files.BackgroundImage")));
+            this.bt_start_files.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_start_files.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_start_files.Location = new System.Drawing.Point(407, 75);
+            this.bt_start_files.Name = "bt_start_files";
+            this.bt_start_files.Size = new System.Drawing.Size(45, 45);
+            this.bt_start_files.TabIndex = 74;
+            this.bt_start_files.UseVisualStyleBackColor = true;
+            this.bt_start_files.Click += new System.EventHandler(this.bt_start_files_Click);
+            // 
+            // bt_setup
+            // 
+            this.bt_setup.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_setup.BackgroundImage")));
+            this.bt_setup.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_setup.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_setup.Location = new System.Drawing.Point(252, 21);
+            this.bt_setup.Name = "bt_setup";
+            this.bt_setup.Size = new System.Drawing.Size(45, 45);
+            this.bt_setup.TabIndex = 253;
+            this.bt_setup.UseVisualStyleBackColor = true;
+            this.bt_setup.Click += new System.EventHandler(this.bt_setup_Click);
+            // 
             // bt_export_filename
             // 
             this.bt_export_filename.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_export_filename.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_export_filename.Location = new System.Drawing.Point(11, 16);
+            this.bt_export_filename.Location = new System.Drawing.Point(201, 77);
             this.bt_export_filename.Name = "bt_export_filename";
             this.bt_export_filename.Size = new System.Drawing.Size(45, 45);
             this.bt_export_filename.TabIndex = 275;
@@ -662,7 +744,7 @@
             // 
             this.cb_search_folders_small.AutoSize = true;
             this.cb_search_folders_small.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_search_folders_small.Location = new System.Drawing.Point(168, 220);
+            this.cb_search_folders_small.Location = new System.Drawing.Point(107, 174);
             this.cb_search_folders_small.Name = "cb_search_folders_small";
             this.cb_search_folders_small.Size = new System.Drawing.Size(78, 17);
             this.cb_search_folders_small.TabIndex = 282;
@@ -674,7 +756,7 @@
             // 
             this.cb_search_folders_empty.AutoSize = true;
             this.cb_search_folders_empty.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_search_folders_empty.Location = new System.Drawing.Point(168, 198);
+            this.cb_search_folders_empty.Location = new System.Drawing.Point(107, 152);
             this.cb_search_folders_empty.Name = "cb_search_folders_empty";
             this.cb_search_folders_empty.Size = new System.Drawing.Size(78, 17);
             this.cb_search_folders_empty.TabIndex = 281;
@@ -686,7 +768,7 @@
             // 
             this.cb_search_pattern.AutoSize = true;
             this.cb_search_pattern.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_search_pattern.Location = new System.Drawing.Point(72, 67);
+            this.cb_search_pattern.Location = new System.Drawing.Point(11, 21);
             this.cb_search_pattern.Name = "cb_search_pattern";
             this.cb_search_pattern.Size = new System.Drawing.Size(78, 17);
             this.cb_search_pattern.TabIndex = 280;
@@ -697,7 +779,7 @@
             // 
             this.cb_limit_max.AutoSize = true;
             this.cb_limit_max.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_limit_max.Location = new System.Drawing.Point(72, 123);
+            this.cb_limit_max.Location = new System.Drawing.Point(11, 77);
             this.cb_limit_max.Name = "cb_limit_max";
             this.cb_limit_max.Size = new System.Drawing.Size(110, 17);
             this.cb_limit_max.TabIndex = 277;
@@ -710,7 +792,7 @@
             this.bt_export_doc.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_export_doc.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_export_doc.Image = global::vcs_DiskDirectoryFile1.Properties.Resources.katfile;
-            this.bt_export_doc.Location = new System.Drawing.Point(113, 16);
+            this.bt_export_doc.Location = new System.Drawing.Point(303, 77);
             this.bt_export_doc.Name = "bt_export_doc";
             this.bt_export_doc.Size = new System.Drawing.Size(45, 45);
             this.bt_export_doc.TabIndex = 264;
@@ -721,7 +803,7 @@
             // 
             this.cb_limit_min.AutoSize = true;
             this.cb_limit_min.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_limit_min.Location = new System.Drawing.Point(72, 94);
+            this.cb_limit_min.Location = new System.Drawing.Point(11, 48);
             this.cb_limit_min.Name = "cb_limit_min";
             this.cb_limit_min.Size = new System.Drawing.Size(110, 17);
             this.cb_limit_min.TabIndex = 263;
@@ -734,7 +816,7 @@
             this.lb_search_result2.AutoSize = true;
             this.lb_search_result2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lb_search_result2.ForeColor = System.Drawing.Color.Red;
-            this.lb_search_result2.Location = new System.Drawing.Point(7, 144);
+            this.lb_search_result2.Location = new System.Drawing.Point(252, 151);
             this.lb_search_result2.Name = "lb_search_result2";
             this.lb_search_result2.Size = new System.Drawing.Size(65, 19);
             this.lb_search_result2.TabIndex = 262;
@@ -745,7 +827,7 @@
             this.lb_search_result1.AutoSize = true;
             this.lb_search_result1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lb_search_result1.ForeColor = System.Drawing.Color.Red;
-            this.lb_search_result1.Location = new System.Drawing.Point(7, 121);
+            this.lb_search_result1.Location = new System.Drawing.Point(252, 128);
             this.lb_search_result1.Name = "lb_search_result1";
             this.lb_search_result1.Size = new System.Drawing.Size(65, 19);
             this.lb_search_result1.TabIndex = 260;
@@ -755,7 +837,7 @@
             // 
             this.cb_search_small_files.AutoSize = true;
             this.cb_search_small_files.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_search_small_files.Location = new System.Drawing.Point(72, 169);
+            this.cb_search_small_files.Location = new System.Drawing.Point(11, 123);
             this.cb_search_small_files.Name = "cb_search_small_files";
             this.cb_search_small_files.Size = new System.Drawing.Size(89, 17);
             this.cb_search_small_files.TabIndex = 268;
@@ -767,121 +849,13 @@
             // 
             this.cb_search_big_files.AutoSize = true;
             this.cb_search_big_files.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_search_big_files.Location = new System.Drawing.Point(72, 148);
+            this.cb_search_big_files.Location = new System.Drawing.Point(11, 102);
             this.cb_search_big_files.Name = "cb_search_big_files";
             this.cb_search_big_files.Size = new System.Drawing.Size(95, 17);
             this.cb_search_big_files.TabIndex = 267;
             this.cb_search_big_files.Text = "搜尋 > 1080p";
             this.cb_search_big_files.UseVisualStyleBackColor = true;
             this.cb_search_big_files.CheckedChanged += new System.EventHandler(this.cb_search_big_files_CheckedChanged);
-            // 
-            // bt_test4
-            // 
-            this.bt_test4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_test4.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_test4.Location = new System.Drawing.Point(162, 170);
-            this.bt_test4.Name = "bt_test4";
-            this.bt_test4.Size = new System.Drawing.Size(45, 45);
-            this.bt_test4.TabIndex = 272;
-            this.bt_test4.Text = "測試4";
-            this.bt_test4.UseVisualStyleBackColor = true;
-            this.bt_test4.Click += new System.EventHandler(this.bt_test4_Click);
-            // 
-            // bt_test3
-            // 
-            this.bt_test3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_test3.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_test3.Location = new System.Drawing.Point(111, 170);
-            this.bt_test3.Name = "bt_test3";
-            this.bt_test3.Size = new System.Drawing.Size(45, 45);
-            this.bt_test3.TabIndex = 271;
-            this.bt_test3.Text = "測試3";
-            this.bt_test3.UseVisualStyleBackColor = true;
-            this.bt_test3.Click += new System.EventHandler(this.bt_test3_Click);
-            // 
-            // bt_test2
-            // 
-            this.bt_test2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_test2.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_test2.Location = new System.Drawing.Point(60, 170);
-            this.bt_test2.Name = "bt_test2";
-            this.bt_test2.Size = new System.Drawing.Size(45, 45);
-            this.bt_test2.TabIndex = 270;
-            this.bt_test2.Text = "測試2優";
-            this.bt_test2.UseVisualStyleBackColor = true;
-            this.bt_test2.Click += new System.EventHandler(this.bt_test2_Click);
-            // 
-            // bt_test1
-            // 
-            this.bt_test1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_test1.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_test1.Location = new System.Drawing.Point(9, 170);
-            this.bt_test1.Name = "bt_test1";
-            this.bt_test1.Size = new System.Drawing.Size(45, 45);
-            this.bt_test1.TabIndex = 269;
-            this.bt_test1.Text = "測試1";
-            this.bt_test1.UseVisualStyleBackColor = true;
-            this.bt_test1.Click += new System.EventHandler(this.bt_test1_Click);
-            // 
-            // bt_start_all_files
-            // 
-            this.bt_start_all_files.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_start_all_files.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_start_all_files.Location = new System.Drawing.Point(164, 119);
-            this.bt_start_all_files.Name = "bt_start_all_files";
-            this.bt_start_all_files.Size = new System.Drawing.Size(45, 45);
-            this.bt_start_all_files.TabIndex = 259;
-            this.bt_start_all_files.Text = "全部播放";
-            this.bt_start_all_files.UseVisualStyleBackColor = true;
-            this.bt_start_all_files.Click += new System.EventHandler(this.bt_start_all_files_Click);
-            // 
-            // bt_setup
-            // 
-            this.bt_setup.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_setup.BackgroundImage")));
-            this.bt_setup.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_setup.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_setup.Location = new System.Drawing.Point(110, 119);
-            this.bt_setup.Name = "bt_setup";
-            this.bt_setup.Size = new System.Drawing.Size(45, 45);
-            this.bt_setup.TabIndex = 253;
-            this.bt_setup.UseVisualStyleBackColor = true;
-            this.bt_setup.Click += new System.EventHandler(this.bt_setup_Click);
-            // 
-            // bt_start_files
-            // 
-            this.bt_start_files.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_start_files.BackgroundImage")));
-            this.bt_start_files.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_start_files.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_start_files.Location = new System.Drawing.Point(9, 119);
-            this.bt_start_files.Name = "bt_start_files";
-            this.bt_start_files.Size = new System.Drawing.Size(45, 45);
-            this.bt_start_files.TabIndex = 74;
-            this.bt_start_files.UseVisualStyleBackColor = true;
-            this.bt_start_files.Click += new System.EventHandler(this.bt_start_files_Click);
-            // 
-            // bt_delete_file
-            // 
-            this.bt_delete_file.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_delete_file.BackgroundImage")));
-            this.bt_delete_file.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_delete_file.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_delete_file.Location = new System.Drawing.Point(59, 119);
-            this.bt_delete_file.Name = "bt_delete_file";
-            this.bt_delete_file.Size = new System.Drawing.Size(45, 45);
-            this.bt_delete_file.TabIndex = 75;
-            this.bt_delete_file.UseVisualStyleBackColor = true;
-            this.bt_delete_file.Click += new System.EventHandler(this.bt_delete_file_Click);
-            // 
-            // bt_open_dir2
-            // 
-            this.bt_open_dir2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_open_dir2.BackgroundImage")));
-            this.bt_open_dir2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_open_dir2.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_open_dir2.Location = new System.Drawing.Point(9, 70);
-            this.bt_open_dir2.Name = "bt_open_dir2";
-            this.bt_open_dir2.Size = new System.Drawing.Size(45, 45);
-            this.bt_open_dir2.TabIndex = 256;
-            this.bt_open_dir2.UseVisualStyleBackColor = true;
-            this.bt_open_dir2.Click += new System.EventHandler(this.bt_open_dir2_Click);
             // 
             // bt_open_dir1
             // 
@@ -898,7 +872,7 @@
             // bt_clear2
             // 
             this.bt_clear2.Font = new System.Drawing.Font("細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear2.Location = new System.Drawing.Point(730, 577);
+            this.bt_clear2.Location = new System.Drawing.Point(730, 489);
             this.bt_clear2.Name = "bt_clear2";
             this.bt_clear2.Size = new System.Drawing.Size(72, 36);
             this.bt_clear2.TabIndex = 261;
@@ -911,7 +885,7 @@
             this.bt_copy_rtb_data.BackgroundImage = global::vcs_DiskDirectoryFile1.Properties.Resources.clipboard;
             this.bt_copy_rtb_data.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_copy_rtb_data.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_copy_rtb_data.Location = new System.Drawing.Point(671, 438);
+            this.bt_copy_rtb_data.Location = new System.Drawing.Point(856, 453);
             this.bt_copy_rtb_data.Name = "bt_copy_rtb_data";
             this.bt_copy_rtb_data.Size = new System.Drawing.Size(45, 45);
             this.bt_copy_rtb_data.TabIndex = 288;
@@ -947,7 +921,6 @@
             this.bt_dir11.Name = "bt_dir11";
             this.bt_dir11.Size = new System.Drawing.Size(200, 60);
             this.bt_dir11.TabIndex = 292;
-            this.bt_dir11.Text = "get series name";
             this.bt_dir11.UseVisualStyleBackColor = true;
             this.bt_dir11.Click += new System.EventHandler(this.bt_dir11_Click);
             // 
@@ -985,7 +958,7 @@
             // listView_dir
             // 
             this.listView_dir.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.listView_dir.Location = new System.Drawing.Point(643, 526);
+            this.listView_dir.Location = new System.Drawing.Point(643, 438);
             this.listView_dir.Name = "listView_dir";
             this.listView_dir.Size = new System.Drawing.Size(100, 100);
             this.listView_dir.TabIndex = 295;
@@ -995,7 +968,7 @@
             // listView_file
             // 
             this.listView_file.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.listView_file.Location = new System.Drawing.Point(685, 526);
+            this.listView_file.Location = new System.Drawing.Point(685, 438);
             this.listView_file.Name = "listView_file";
             this.listView_file.Size = new System.Drawing.Size(100, 100);
             this.listView_file.TabIndex = 297;
@@ -1005,7 +978,7 @@
             // listView_video
             // 
             this.listView_video.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.listView_video.Location = new System.Drawing.Point(718, 526);
+            this.listView_video.Location = new System.Drawing.Point(718, 438);
             this.listView_video.Name = "listView_video";
             this.listView_video.Size = new System.Drawing.Size(100, 100);
             this.listView_video.TabIndex = 299;
@@ -1016,7 +989,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1206, 661);
+            this.ClientSize = new System.Drawing.Size(1261, 661);
             this.Controls.Add(this.bt_clear2);
             this.Controls.Add(this.listView_video);
             this.Controls.Add(this.listView_file);
@@ -1101,8 +1074,6 @@
         private System.Windows.Forms.Button bt_setup;
         private System.Windows.Forms.Button bt_open_dir1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
-        private System.Windows.Forms.TextBox tb_foldername2;
-        private System.Windows.Forms.Button bt_open_dir2;
         private System.Windows.Forms.TextBox tb_search;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button bt_start_all_files;
@@ -1133,7 +1104,6 @@
         private System.Windows.Forms.Button bt_search_pattern_vcs;
         private System.Windows.Forms.Button bt_open_folder;
         private System.Windows.Forms.Button bt_copy_rtb_data;
-        private System.Windows.Forms.Button bt_info;
         private System.Windows.Forms.CheckBox cb_search_good_files;
         private System.Windows.Forms.CheckBox cb_search_same_files0;
         private System.Windows.Forms.GroupBox groupBox3;
@@ -1149,6 +1119,7 @@
         private System.Windows.Forms.ListView listView_dir;
         private System.Windows.Forms.ListView listView_file;
         private System.Windows.Forms.ListView listView_video;
+        private System.Windows.Forms.Button bt_compare;
     }
 }
 

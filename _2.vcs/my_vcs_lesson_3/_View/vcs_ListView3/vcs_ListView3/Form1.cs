@@ -25,7 +25,7 @@ namespace vcs_ListView3
 
             // 建立ListView 控制項，並指定其位置與大小
             listView1 = new ListView();
-            listView1.Bounds = new Rectangle(new Point(10, 10), new Size(300, 180));
+            listView1.Bounds = new Rectangle(new Point(10, 10), new Size(600, 250));
 
             // 設定檢視模式為「詳細資訊」
             listView1.View = View.Details;
@@ -90,20 +90,26 @@ namespace vcs_ListView3
             item3.SubItems.Add("8");
             item3.SubItems.Add("台中廠");
 
+            // 設置列名稱
             // 建立選項及其附屬選項所屬的欄位
+            /* 自動欄寬
             listView1.Columns.Add("選項欄", -2, HorizontalAlignment.Left);
             listView1.Columns.Add("單價", -2, HorizontalAlignment.Left);
             listView1.Columns.Add("庫存", -2, HorizontalAlignment.Left);
             listView1.Columns.Add("倉庫", -2, HorizontalAlignment.Center);
+            */
+            //固定欄寬
+            listView1.Columns.Add("選項欄", 160, HorizontalAlignment.Left);
+            listView1.Columns.Add("單價", 80, HorizontalAlignment.Left);
+            listView1.Columns.Add("庫存", 80, HorizontalAlignment.Left);
+            listView1.Columns.Add("倉庫", 160, HorizontalAlignment.Center);
 
             // 將各選項加入ListView.
             listView1.Items.AddRange(new ListViewItem[] { item1, item2, item3 });
 
             // 設定事件處理程序的delegate
             this.listView1.SelectedIndexChanged += new System.EventHandler(listView1_SelectedIndexChanged);
-
             this.listView1.ItemChecked += new ItemCheckedEventHandler(listView1_ItemChecked);
-
             this.listView1.ItemCheck += new ItemCheckEventHandler(listView1_ItemCheck);
 
             // Add the ListView to the control collection.
@@ -119,26 +125,34 @@ namespace vcs_ListView3
 
         private void listView1_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            textBox1.Clear();
+            richTextBox1.Text += "你按了 listView1_SelectedIndexChanged\n";
             ListView.SelectedListViewItemCollection selectedItem = listView1.SelectedItems;
 
             foreach (ListViewItem item in selectedItem)
             {
-                textBox1.AppendText(item.Text);
+                richTextBox1.Text += "你選擇了 : " + item.Text + "\n";
             }
         }
 
         private void listView1_ItemChecked(Object sender, ItemCheckedEventArgs e)
         {
+            richTextBox1.Text += "你按了 listView1_ItemChecked\n";
+
             textBox2.Clear();
+
             System.Text.StringBuilder messageBoxCS = new System.Text.StringBuilder();
             messageBoxCS.AppendFormat("{0} = {1}", "Item", e.Item);
             messageBoxCS.AppendLine();
+
             textBox2.AppendText(messageBoxCS.ToString());
+
+            richTextBox1.Text += "2222 : " + messageBoxCS.ToString() + "\n";
         }
 
         private void listView1_ItemCheck(object sender, System.Windows.Forms.ItemCheckEventArgs e)
         {
+            richTextBox1.Text += "你按了 listView1_ItemCheck\n";
+
             double price = 0;
             if (e.CurrentValue == CheckState.Unchecked)
             {
@@ -152,35 +166,13 @@ namespace vcs_ListView3
             if (price > 0)
             {
                 textBox3.Text = "選取項目的價格->" + price.ToString();
+                richTextBox1.Text += "3333 : " + "選取項目的價格->" + price.ToString() + "\n";
             }
             else
             {
                 textBox3.Text = "取消項目的價格->" + Math.Abs(price).ToString();
+                richTextBox1.Text += "3333 : " + "取消項目的價格->" + Math.Abs(price).ToString() + "\n";
             }
-        }
-
-        // 以「大圖示」顯示
-        private void button2_Click(object sender, EventArgs e)
-        {
-            listView1.View = View.LargeIcon;
-        }
-
-        // 以「小圖示」顯示
-        private void button3_Click(object sender, EventArgs e)
-        {
-            listView1.View = View.SmallIcon;
-        }
-
-        // 以「清單」顯示
-        private void button4_Click(object sender, EventArgs e)
-        {
-            listView1.View = View.List;
-        }
-
-        // 以「詳細資訊」顯示
-        private void button5_Click(object sender, EventArgs e)
-        {
-            listView1.View = View.Details;
         }
 
         // 「總價」按鈕，計算所有選取項目的總價
@@ -198,7 +190,7 @@ namespace vcs_ListView3
                 x = (ListViewItem)obj;
                 price += Double.Parse(x.SubItems[1].Text);
             }
-            textBox4.Text = "已勾選項目，其總價->" + price.ToString();
+            richTextBox1.Text += "已勾選項目，其總價->" + price.ToString() + "\n";
         }
     }
 }
