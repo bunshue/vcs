@@ -26,7 +26,7 @@ namespace vcs_ListBox1
         #endregion
 
         #region 属性
-        
+
         private bool TGradualC = false;
         [Browsable(true), Category("控件的重绘设置"), Description("判断是否进行渐变色的设置")] //在“属性”窗口中显示DataStyle属性
         public bool GradualC

@@ -1,4 +1,19 @@
-﻿            if (listView1.Items.Count > 0)
+﻿
+Visual C# TextBox Size要自訂 不要自動大小 字串要置中排列
+
+DDF 在 kilo 排版會亂掉  其他的也會嗎?
+
+//------------------------------------------------------------  # 60個
+
+            listView1.View = View.LargeIcon;  // 以「大圖示」顯示
+            listView1.View = View.SmallIcon;  // 以「小圖示」顯示
+            listView1.View = View.List;  // 以「清單」顯示
+            listView1.View = View.Details;// 以「詳細資訊」顯示
+
+
+listView的內容可否加入 icon 例如 delete 或 開啟檔案
+
+            if (listView1.Items.Count > 0)
             {
                 //設置ListView最後一行可見
                 //listView1.Items[listView1.Items.Count - 1].EnsureVisible();
@@ -31,10 +46,6 @@
 
 //------------------------------------------------------------  # 60個
 
-
-DDF 在 kilo 排版會亂掉  其他的也會嗎?
-
-//------------------------------------------------------------  # 60個
 
             //拆解 pattern 範例
 

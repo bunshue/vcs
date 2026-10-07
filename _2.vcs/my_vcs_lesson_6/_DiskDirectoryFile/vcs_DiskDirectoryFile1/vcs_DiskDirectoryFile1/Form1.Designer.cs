@@ -105,6 +105,10 @@
             this.listView_dir = new System.Windows.Forms.ListView();
             this.listView_file = new System.Windows.Forms.ListView();
             this.listView_video = new System.Windows.Forms.ListView();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.bt_add = new System.Windows.Forms.Button();
+            this.bt_remove = new System.Windows.Forms.Button();
+            this.bt_remove_all = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -113,7 +117,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(828, 435);
+            this.richTextBox1.Location = new System.Drawing.Point(824, 438);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 1;
@@ -985,11 +989,62 @@
             this.listView_video.UseCompatibleStateImageBehavior = false;
             this.listView_video.View = System.Windows.Forms.View.Details;
             // 
+            // listBox1
+            // 
+            this.listBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 19;
+            this.listBox1.Location = new System.Drawing.Point(930, 438);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.listBox1.Size = new System.Drawing.Size(100, 99);
+            this.listBox1.TabIndex = 300;
+            // 
+            // bt_add
+            // 
+            this.bt_add.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_add.Font = new System.Drawing.Font("細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_add.Location = new System.Drawing.Point(1049, 438);
+            this.bt_add.Name = "bt_add";
+            this.bt_add.Size = new System.Drawing.Size(24, 24);
+            this.bt_add.TabIndex = 292;
+            this.bt_add.Text = "+";
+            this.bt_add.UseVisualStyleBackColor = true;
+            this.bt_add.Click += new System.EventHandler(this.bt_add_Click);
+            // 
+            // bt_remove
+            // 
+            this.bt_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_remove.Font = new System.Drawing.Font("細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_remove.Location = new System.Drawing.Point(1049, 473);
+            this.bt_remove.Name = "bt_remove";
+            this.bt_remove.Size = new System.Drawing.Size(24, 24);
+            this.bt_remove.TabIndex = 301;
+            this.bt_remove.Text = "-";
+            this.bt_remove.UseVisualStyleBackColor = true;
+            this.bt_remove.Click += new System.EventHandler(this.bt_remove_Click);
+            // 
+            // bt_remove_all
+            // 
+            this.bt_remove_all.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_remove_all.Font = new System.Drawing.Font("細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_remove_all.Location = new System.Drawing.Point(1049, 513);
+            this.bt_remove_all.Name = "bt_remove_all";
+            this.bt_remove_all.Size = new System.Drawing.Size(24, 24);
+            this.bt_remove_all.TabIndex = 302;
+            this.bt_remove_all.Text = "C";
+            this.bt_remove_all.UseVisualStyleBackColor = true;
+            this.bt_remove_all.Click += new System.EventHandler(this.bt_remove_all_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1261, 661);
+            this.Controls.Add(this.bt_remove_all);
+            this.Controls.Add(this.bt_remove);
+            this.Controls.Add(this.bt_add);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.bt_clear2);
             this.Controls.Add(this.listView_video);
             this.Controls.Add(this.listView_file);
@@ -1120,6 +1175,10 @@
         private System.Windows.Forms.ListView listView_file;
         private System.Windows.Forms.ListView listView_video;
         private System.Windows.Forms.Button bt_compare;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button bt_add;
+        private System.Windows.Forms.Button bt_remove;
+        private System.Windows.Forms.Button bt_remove_all;
     }
 }
 

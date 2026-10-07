@@ -288,6 +288,23 @@ namespace vcs_DiskDirectoryFile1
                 richTextBox1.Text += "播放影片程式不存在 : " + Properties.Settings.Default.video_player_path + "\n使用Windows預設播放影片程式\n";
                 video_player_path = String.Empty;
             }
+
+            string search_foldernames = Properties.Settings.Default.search_foldernames;
+
+            //split
+            //6060
+
+            //listBox屬性
+            listBox1.SelectionMode = SelectionMode.MultiExtended;
+            listBox1.HorizontalScrollbar = true;
+
+
+            string[] itemStr = { "ListBox項目1", "ListBox項目2", "ListBox項目3", "ListBox項目4", "ListBox項目5", "ListBox項目6", "ListBox項目7", "ListBox項目8", "ListBox項目9" };
+            foreach (string str in itemStr)
+            {
+                listBox1.Items.Add(str);
+            }
+
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -345,8 +362,15 @@ namespace vcs_DiskDirectoryFile1
             bt_clear2.Location = new Point(listView_dir.Location.X + listView_dir.Size.Width - bt_clear2.Size.Width, listView_dir.Location.Y + listView_dir.Size.Height - bt_clear2.Size.Height);
             bt_clear2.BringToFront();
 
-            richTextBox1.Size = new Size(W, 340 - 200 + 140 + 70);
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 5 + 24 + 200);
+            listBox1.Size = new Size(190, 300);
+            listBox1.Location = new Point(x_st + dx * 2, y_st + dy * 5 + 24 + 200);
+            richTextBox1.Size = new Size(W-200, 340 - 200 + 140 + 70);
+            richTextBox1.Location = new Point(x_st + dx * 2+200, y_st + dy * 5 + 24 + 200);
+
+            bt_add.Location = new Point(x_st + dx * 2, y_st + dy * 5 + 24 + 200+300);
+            bt_remove.Location = new Point(x_st + dx * 2+40, y_st + dy * 5 + 24 + 200 + 300);
+            bt_remove_all.Location = new Point(x_st + dx * 2+80, y_st + dy * 5 + 24 + 200 + 300);
+
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
             bt_copy_rtb_data.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - bt_copy_rtb_data.Width, richTextBox1.Location.Y + richTextBox1.Height - bt_clear.Height - bt_copy_rtb_data.Height);
 
@@ -436,6 +460,7 @@ namespace vcs_DiskDirectoryFile1
             richTextBox1.Size = new Size(W, 410);
             richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 5 + 24);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+            bt_copy_rtb_data.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - bt_copy_rtb_data.Width, richTextBox1.Location.Y + richTextBox1.Height - bt_clear.Height - bt_copy_rtb_data.Height);
 
             show_item_location_common();
         }
@@ -4546,6 +4571,12 @@ namespace vcs_DiskDirectoryFile1
 
 
             //測試 檔名簡中轉正中
+
+            int len = listBox1.Items.Count;
+            for (int i = 0; i < len; i++)
+            {
+                richTextBox1.Text += "取得 : " + listBox1.Items[i] + "\n";
+            }
         }
 
         private void tb_text_Click(object sender, EventArgs e)
@@ -4999,6 +5030,31 @@ namespace vcs_DiskDirectoryFile1
         private void bt_compare_Click(object sender, EventArgs e)
         {
             do_compare();
+        }
+
+        int index = 1;
+        private void bt_add_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Add("AAAA " + index.ToString());
+            index++;
+        }
+
+        private void bt_remove_Click(object sender, EventArgs e)
+        {
+            // 移除多選的項目
+            // listBox1.Items.Remove(listBox1.SelectedItem);  // 移除項目
+
+            //if (listBox1.SelectedItems.Count > 0)
+
+            while (listBox1.SelectedIndices.Count > 0)
+            {
+                listBox1.Items.RemoveAt(listBox1.SelectedIndices[0]);
+            }
+        }
+
+        private void bt_remove_all_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
         }
 
         //------------------------------------------------------------  # 60個

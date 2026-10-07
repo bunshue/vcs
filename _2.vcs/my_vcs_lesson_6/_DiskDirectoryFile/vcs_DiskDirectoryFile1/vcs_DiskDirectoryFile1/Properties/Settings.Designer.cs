@@ -238,5 +238,17 @@ namespace vcs_DiskDirectoryFile1.Properties {
                 this["flag_find_same_files3"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string search_foldernames {
+            get {
+                return ((string)(this["search_foldernames"]));
+            }
+            set {
+                this["search_foldernames"] = value;
+            }
+        }
     }
 }

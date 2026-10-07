@@ -108,7 +108,7 @@ namespace vcs_ListView3
             listView1.Items.AddRange(new ListViewItem[] { item1, item2, item3 });
 
             // 設定事件處理程序的delegate
-            this.listView1.SelectedIndexChanged += new System.EventHandler(listView1_SelectedIndexChanged);
+            this.listView1.SelectedIndexChanged += new EventHandler(listView1_SelectedIndexChanged);
             this.listView1.ItemChecked += new ItemCheckedEventHandler(listView1_ItemChecked);
             this.listView1.ItemCheck += new ItemCheckEventHandler(listView1_ItemCheck);
 
@@ -123,7 +123,7 @@ namespace vcs_ListView3
 
         //------------------------------------------------------------  # 60個
 
-        private void listView1_SelectedIndexChanged(object sender, System.EventArgs e)
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
             richTextBox1.Text += "你按了 listView1_SelectedIndexChanged\n";
             ListView.SelectedListViewItemCollection selectedItem = listView1.SelectedItems;
@@ -138,59 +138,39 @@ namespace vcs_ListView3
         {
             richTextBox1.Text += "你按了 listView1_ItemChecked\n";
 
-            textBox2.Clear();
-
-            System.Text.StringBuilder messageBoxCS = new System.Text.StringBuilder();
+            StringBuilder messageBoxCS = new StringBuilder();
             messageBoxCS.AppendFormat("{0} = {1}", "Item", e.Item);
             messageBoxCS.AppendLine();
-
-            textBox2.AppendText(messageBoxCS.ToString());
 
             richTextBox1.Text += "2222 : " + messageBoxCS.ToString() + "\n";
         }
 
-        private void listView1_ItemCheck(object sender, System.Windows.Forms.ItemCheckEventArgs e)
+        private void listView1_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             richTextBox1.Text += "你按了 listView1_ItemCheck\n";
 
-            double price = 0;
             if (e.CurrentValue == CheckState.Unchecked)
             {
-                price += Double.Parse(this.listView1.Items[e.Index].SubItems[1].Text);
+                richTextBox1.Text += "無選取 " + listView1.Items[e.Index].SubItems[1].Text + "\n";
             }
             else if ((e.CurrentValue == CheckState.Checked))
             {
-                price -= Double.Parse(this.listView1.Items[e.Index].SubItems[1].Text);
-            }
-
-            if (price > 0)
-            {
-                textBox3.Text = "選取項目的價格->" + price.ToString();
-                richTextBox1.Text += "3333 : " + "選取項目的價格->" + price.ToString() + "\n";
-            }
-            else
-            {
-                textBox3.Text = "取消項目的價格->" + Math.Abs(price).ToString();
-                richTextBox1.Text += "3333 : " + "取消項目的價格->" + Math.Abs(price).ToString() + "\n";
+                richTextBox1.Text += "選取 " + listView1.Items[e.Index].SubItems[1].Text + "\n";
             }
         }
 
-        // 「總價」按鈕，計算所有選取項目的總價
         private void button6_Click(object sender, EventArgs e)
         {
             // ListView控制項的CheckedItems 屬性會傳回集合，
-            // 這個集合包含控制項中所有已選取的項目。  
+            // 這個集合包含控制項中所有已選取的項目。
+
             ListView.CheckedListViewItemCollection checkedItems = listView1.CheckedItems;
-            double price = 0;
-            ListViewItem x = new ListViewItem();
             System.Collections.IEnumerator myEnumerator = checkedItems.GetEnumerator();
             while (myEnumerator.MoveNext())
             {
-                object obj = myEnumerator.Current;
-                x = (ListViewItem)obj;
-                price += Double.Parse(x.SubItems[1].Text);
+                ListViewItem x = (ListViewItem)myEnumerator.Current;
+                richTextBox1.Text += "取得資料 : " + x.SubItems[1].Text + "\n";
             }
-            richTextBox1.Text += "已勾選項目，其總價->" + price.ToString() + "\n";
         }
     }
 }

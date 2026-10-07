@@ -28,36 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.button6 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
-            // textBox3
-            // 
-            this.textBox3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox3.Location = new System.Drawing.Point(643, 45);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(265, 30);
-            this.textBox3.TabIndex = 19;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox2.Location = new System.Drawing.Point(643, 12);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(265, 30);
-            this.textBox2.TabIndex = 18;
-            // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(643, 81);
+            this.button6.Location = new System.Drawing.Point(629, 12);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(72, 36);
             this.button6.TabIndex = 17;
-            this.button6.Text = "總價";
+            this.button6.Text = "取得資料";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -88,21 +70,16 @@
             this.ClientSize = new System.Drawing.Size(920, 639);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.button6);
             this.Name = "Form1";
             this.Text = "ListView範例";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.RichTextBox richTextBox1;

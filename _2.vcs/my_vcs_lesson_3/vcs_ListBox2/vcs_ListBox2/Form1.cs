@@ -33,8 +33,6 @@ namespace vcs_ListBox2
             {
                 listBox_left.Items.Add(animal);
             }
-
-
             SetButtonsEditable();
         }
 
@@ -241,7 +239,6 @@ namespace vcs_ListBox2
         }
 
         //------------------------------------------------------------  # 60個
-
     }
 }
 
@@ -253,20 +250,6 @@ namespace vcs_ListBox2
 //------------------------------  # 30個
 
 /*
-            if (listBox1.SelectedItems.Count > 0)
-
-移除多選的項目
-            while (listBox1.SelectedIndices.Count > 0)
-            {
-                listBox1.Items.RemoveAt(listBox1.SelectedIndices[0]);
-            }
-
-listBox屬性
-            listBox1.SelectionMode = SelectionMode.MultiExtended;
-            listBox1.HorizontalScrollbar = true;
-
-//------------------------------------------------------------  # 60個
-
 		//建立線上名單
         private string OnlineList()
         {
@@ -282,6 +265,5 @@ listBox屬性
             }
             return L;
         }
-
 */
 
