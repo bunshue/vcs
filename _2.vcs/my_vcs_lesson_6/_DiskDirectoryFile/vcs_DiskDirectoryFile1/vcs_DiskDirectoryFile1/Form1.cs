@@ -580,7 +580,7 @@ namespace vcs_DiskDirectoryFile1
             dy = 30;
 
             groupBox_search.Size = new Size(380, 76);
-            groupBox_search.Location = new Point(x_st + dx * 9, y_st + dy * 0-10);
+            groupBox_search.Location = new Point(x_st + dx * 9, y_st + dy * 0 - 10);
 
             int dd = 48;
             bt_export_foldername.Location = new Point(x_st + dx * 14 + 35 + dd * 0, y_st + dy * 0);
@@ -614,7 +614,7 @@ namespace vcs_DiskDirectoryFile1
 
             //比較
             groupBox_compare.Size = new Size(220, 60);
-            groupBox_compare.Location = new Point(x_st + dx * 9, y_st + dy * 2 +10);  // 比較
+            groupBox_compare.Location = new Point(x_st + dx * 9, y_st + dy * 2 + 10);  // 比較
 
 
             ddy = 20;
@@ -3069,6 +3069,7 @@ namespace vcs_DiskDirectoryFile1
         {
             if (flag_export_video == false)
             {
+                richTextBox1.Text += "只支持播放影片檔\n";
                 return;
             }
 
@@ -3093,6 +3094,7 @@ namespace vcs_DiskDirectoryFile1
         {
             if (flag_export_video == false)
             {
+                richTextBox1.Text += "只支持播放影片檔\n";
                 return;
             }
 
@@ -3114,7 +3116,44 @@ namespace vcs_DiskDirectoryFile1
         //播放優檔
         private void bt_start_files_good_Click(object sender, EventArgs e)
         {
+            if (flag_export_video == false)
+            {
+                richTextBox1.Text += "只支持播放影片檔\n";
+                return;
+            }
 
+            string all_filename = string.Empty;
+
+            int len = fileinfos.Count;
+            for (int i = 0; i < len; i++)
+            {
+                string filename = fileinfos[i].filename;
+                string foldername = fileinfos[i].filepath;
+                //string ext = "AAAA";
+                long file_size = fileinfos[i].filesize;
+                int w = fileinfos[i].video_width;
+                int h = fileinfos[i].video_height;
+                int f = fileinfos[i].video_fps;
+                int d = fileinfos[i].video_duration;
+
+                //搜尋優優檔
+                bool flag_good = check_video_good(fileinfos[i].filename);
+                if (flag_good == true)
+                {
+                    string fullname = fileinfos[i].filepath + "\\" + fileinfos[i].filename;
+                    richTextBox1.Text += fullname + "\n";
+                    all_filename += " \"" + fullname + "\"";
+                }
+            }
+
+            if (all_filename != string.Empty)
+            {
+                play_video_files(all_filename);  // 播放
+            }
+            else
+            {
+                richTextBox1.Text += "無優優檔可播放\n";
+            }
         }
 
         private void bt_delete_file_Click(object sender, EventArgs e)
@@ -3326,9 +3365,19 @@ namespace vcs_DiskDirectoryFile1
             fileinfos.Clear();
             folderinfos.Clear();
 
-            message = string.Empty;
-            ProcessDirectory(foldername);
-            richTextBox1.Text += message;  // 印出結果
+            if (cb_search_this_folder.Checked == true)
+            {
+                do_my_export0(foldername);
+            }
+            else
+            {
+                int len = listBox1.Items.Count;
+                for (int i = 0; i < len; i++)
+                {
+                    richTextBox1.Text += "取得 : " + listBox1.Items[i] + "\n";
+                    do_my_export0(listBox1.Items[i].ToString());
+                }
+            }
 
             string export_filename = "tmp_export_filename.txt";
             File.AppendAllText(export_filename, DateTime.Now + "\n");  // 把字串附加到檔案尾端
@@ -3337,7 +3386,19 @@ namespace vcs_DiskDirectoryFile1
             if (total_files > 0)
             {
                 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-                richTextBox1.Text += "位置:\t" + foldername + "\n";
+
+                if (cb_search_this_folder.Checked == true)
+                {
+                    richTextBox1.Text += "位置:\t" + foldername + "\n";
+                }
+                else
+                {
+                    int len = listBox1.Items.Count;
+                    for (int i = 0; i < len; i++)
+                    {
+                        richTextBox1.Text += "位置:\t" + listBox1.Items[i] + "\n";
+                    }
+                }
                 richTextBox1.Text += "包含:\t" + total_files.ToString() + " 個檔案\n";
                 richTextBox1.Text += "大小:\t" + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + " (" + total_size.ToString() + " 拜)\n";
                 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
@@ -3375,6 +3436,13 @@ namespace vcs_DiskDirectoryFile1
             //------------------------------------------------------------  # 60個
 
             do_compare();
+        }
+
+        void do_my_export0(string foldername)
+        {
+            message = string.Empty;
+            ProcessDirectory(foldername);
+            richTextBox1.Text += message;  // 印出結果
         }
 
         void do_compare()
@@ -4206,13 +4274,21 @@ namespace vcs_DiskDirectoryFile1
             if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
             {
                 //Enter
+                if (Directory.Exists(tb_foldername1.Text) == true)
+                {
+                    listBox1.Items.Add(tb_foldername1.Text);
+                }
+                else
+                {
+                    richTextBox1.Text += "非資料夾\n";
+                    tb_foldername1.Clear();
+                }
                 e.Handled = true;
             }
             else if (e.KeyChar == (Char)27)  //撈取ESC
             {
                 //ESC
                 tb_foldername1.Text = tb_foldername1_text_old;  // 恢復
-
                 e.Handled = true;
             }
             else
@@ -4584,25 +4660,41 @@ namespace vcs_DiskDirectoryFile1
         Dictionary<string, string> name_dict = new Dictionary<string, string>()
         {
         { "1111", "一一一一" }, { "3333", "三上悠亞" }, { "4444", "四四四四" }, { "9999", "九条みちる" },
-        { "5555", "九条みちる" }, { "7777", "一一一一" }, { "sssss1", "三上悠亞" }, { "1010", "四四四四" },
-        { "maria", "愛音まりあ" }, { "julia", "XXXX" }, { "mion", "園田美櫻" }, { "sma", "鈴" },
-        { "mai", "神菜美まい" }, { "fuua", "楓ふうあ" }, { "yama", "山岸あや花" }, { "kiho", "金松季歩" },
+        { "5555", "五日市芽依" }, { "7777", "一一一一" }, { "sssss1", "三上悠亞" }, { "1010", "四四四四" },
+        { "maria", "愛音まりあ" }, { "julia", "Julia" }, { "mion", "園田美櫻" }, { "sma", "鈴村あいり" },
+        { "fuua", "楓ふうあ" }, { "yama", "山岸あや花" }, { "kiho", "金松季歩" },
         { "hsyr", "広瀬ゆり" }, { "yui", "波多野結衣" }, { "8888", "八掛うみ" }, { "akari", "明里つむぎ" },
-        { "jessica", "希崎ジェシカ" }, { "mori", "森日向子" }, { "mino", "美乃すずめ" }, { "aki", "佐佐木" },
-        { "3ne", "三澄寧々" }, { "rin", "東凛" }, { "remu", "涼森れむ" }, { "ran", "藤井蘭蘭" },
+        { "jessica", "希崎ジェシカ" }, { "mori", "森日向子" }, { "mino", "美乃すずめ" },
+        { "3ne", "三澄寧々" }, { "remu", "涼森れむ" }, { "ran", "藤井蘭蘭" },
         { "asami", "小川あさ美" }, { "miu", "白峰ミウ" }, { "karen", "楓カレン" }, { "iori", "古川いおり" },
-        { "saeko", "松下紗榮子" }, { "yuna", "椎名" }, { "azm", "相澤" }, { "maron", "XXXXXX" },
-        { "misaki", "岬ななみ" }, { "ttttt", "ssssss" }, { "kana", "森澤" }, { "mito", "水戶" },
-        { "mth", "水端" }, { "kma", "小松杏" }, { "ririko", "木下凜凜子" },
-        { "tayaka", "友田彩也香" }, { "mayaka", "武藤彩也香" },
-        { "naho", "????" }, { "kano", "香椎花乃" },
-        //TBD { "anna", "杏奈" },  { "kanna", "DDDDDDDDDD" }, 
-        //{ "nami", "XXDDDDSS" }, { "ayaka", "XXXX" },
+        { "saeko", "松下紗榮子" }, { "yuna", "椎名ゆな" }, { "maron", "夏希まろん" },
+        { "kana", "森沢かな" },
+        { "mth", "水端" }, { "kma", "小松杏" },
+
+        //常字包含短字, 長字在前//若有包含字串的，多字的放前面即可
+        { "misaki", "岬ななみ" }, { "maki", "北条麻妃" }, { "aki", "佐佐木" },
+        { "sayaka", "友田彩也香" }, { "ayaka", "武藤あやか" },
+        { "fsmai", "藤咲まい" }, { "mai", "神菜美まい" },
+        { "kanna", "今井栞菜" }, { "anna", "杏奈" },
+        //相同字
+        { "春明潤", "春明潤" }, { "東希美", "東希美" }, { "有賀みなほ", "有賀みなほ" }, { "上原瑞穗", "上原瑞穗" },
+        { "kano", "香椎花乃" }, { "nene", "吉高寧々" },
+        { "honoka", "米倉穂香" },
+        { "azm", "相沢みなみ" }, { "kjm", "小島みなみ" }, { "hkm", "初川みなみ" },
+        { "ririko", "木下凛々子" }, { "mito", "水戸かな" },
+        { "mos", "松岡すず" }, { "momo", "桜空もも" },
+        { "airi", "希島あいり" }, { "ryo", "愛弓りょう" },
+        { "jgj", "神宮寺ナオ" },
+        { "naho", "????" },
+        //{ "nami", "XXDDDDSS" }, { "ayami", "????" },
+        { "arina", "新ありな" }, { "rin", "東凛" }, 
+        { "riho", "藤森里穂" }, { "yume", "西宮ゆめ" }, 
         //{ "AAAA", "BBBB" }, { "CCCC", "DDDD" },
         //{ "AAAA", "BBBB" }, { "CCCC", "DDDD" },
         //{ "AAAA", "BBBB" }, { "CCCC", "DDDD" },
         //{ "AAAA", "BBBB" }, { "CCCC", "DDDD" },
-        //{ "AAAA", "BBBB" }, { "CCCC", "DDDD" },       
+        //{ "AAAA", "BBBB" }, { "CCCC", "DDDD" },
+        //{ "AAAA", "BBBB" }, { "CCCC", "DDDD" },
         };
 
         string get_seriesname(string longname)
@@ -4929,7 +5021,12 @@ namespace vcs_DiskDirectoryFile1
                 , "gggg", "debut", "南まゆ", "星野", "須籐沙希", "美香", "宮藤"    //new tmp
                 , "夕子", "kjm", "maron", "春明潤", "kma", "古川いおり", "ryo"
                 , "kano", "愛音", "上原", "松下", "yuna", "jgj", "rin"
-                , "椎名", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "椎名", "moe", "東希美", "honoka", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ"
             };
 
             foreach (string ptn in good_pattern)
@@ -5023,11 +5120,8 @@ namespace vcs_DiskDirectoryFile1
             tb_limit_max_text_old = tb_limit_max.Text;
             show_item_location_listview();
 
-            if (cb_search_this_folder.Checked == true)
-            {
-                search_foldername = tb_foldername1.Text;
-                tb_foldername1_text_old = search_foldername;
-            }
+            search_foldername = tb_foldername1.Text;
+            tb_foldername1_text_old = search_foldername;
             do_my_export(search_foldername, bt_export_filename);
         }
 
@@ -5041,11 +5135,8 @@ namespace vcs_DiskDirectoryFile1
             tb_limit_max_text_old = tb_limit_max.Text;
             show_item_location_listview();
 
-            if (cb_search_this_folder.Checked == true)
-            {
-                search_foldername = tb_foldername1.Text;
-                tb_foldername1_text_old = search_foldername;
-            }
+            search_foldername = tb_foldername1.Text;
+            tb_foldername1_text_old = search_foldername;
             do_my_export(search_foldername, bt_export_video);
         }
 
@@ -5059,11 +5150,8 @@ namespace vcs_DiskDirectoryFile1
             tb_limit_max_text_old = tb_limit_max.Text;
             show_item_location_listview();
 
-            if (cb_search_this_folder.Checked == true)
-            {
-                search_foldername = tb_foldername1.Text;
-                tb_foldername1_text_old = search_foldername;
-            }
+            search_foldername = tb_foldername1.Text;
+            tb_foldername1_text_old = search_foldername;
             do_my_export(search_foldername, bt_export_foldername);
         }
 
@@ -5295,10 +5383,6 @@ for (int i = 0; i < fileinfos.Count; i++)
     //fi.FullName, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
     richTextBox1.Text += string.Format("{0,-70}{1,-10}{2,-15}{3,-60}", fileinfos[i].filename, fileinfos[i].fileextension, ByteConversionTBGBMBKB(fileinfos[i].filesize), fileinfos[i].filepath) + "\n";
 }
-
-//------------------------------------------------------------  # 60個
-
-// 合併 "filename : " + fileinfos[i].filepath + "\\" + fileinfos[i].filename + "\n";
 
 //------------------------------------------------------------  # 60個
 
