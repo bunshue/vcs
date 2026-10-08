@@ -3326,9 +3326,19 @@ namespace vcs_DiskDirectoryFile1
             fileinfos.Clear();
             folderinfos.Clear();
 
-            message = string.Empty;
-            ProcessDirectory(foldername);
-            richTextBox1.Text += message;  // 印出結果
+            if (cb_search_this_folder.Checked == true)
+            {
+                do_my_export0(foldername);
+            }
+            else
+            {
+                int len = listBox1.Items.Count;
+                for (int i = 0; i < len; i++)
+                {
+                    richTextBox1.Text += "取得 : " + listBox1.Items[i] + "\n";
+                    do_my_export0(listBox1.Items[i].ToString());
+                }                
+            }
 
             string export_filename = "tmp_export_filename.txt";
             File.AppendAllText(export_filename, DateTime.Now + "\n");  // 把字串附加到檔案尾端
@@ -3376,6 +3386,13 @@ namespace vcs_DiskDirectoryFile1
 
             do_compare();
         }
+
+        void do_my_export0(string foldername)
+        {
+            message = string.Empty;
+            ProcessDirectory(foldername);
+            richTextBox1.Text += message;  // 印出結果
+       }
 
         void do_compare()
         {
@@ -5023,11 +5040,8 @@ namespace vcs_DiskDirectoryFile1
             tb_limit_max_text_old = tb_limit_max.Text;
             show_item_location_listview();
 
-            if (cb_search_this_folder.Checked == true)
-            {
                 search_foldername = tb_foldername1.Text;
                 tb_foldername1_text_old = search_foldername;
-            }
             do_my_export(search_foldername, bt_export_filename);
         }
 
@@ -5041,11 +5055,8 @@ namespace vcs_DiskDirectoryFile1
             tb_limit_max_text_old = tb_limit_max.Text;
             show_item_location_listview();
 
-            if (cb_search_this_folder.Checked == true)
-            {
                 search_foldername = tb_foldername1.Text;
                 tb_foldername1_text_old = search_foldername;
-            }
             do_my_export(search_foldername, bt_export_video);
         }
 
@@ -5059,11 +5070,8 @@ namespace vcs_DiskDirectoryFile1
             tb_limit_max_text_old = tb_limit_max.Text;
             show_item_location_listview();
 
-            if (cb_search_this_folder.Checked == true)
-            {
                 search_foldername = tb_foldername1.Text;
                 tb_foldername1_text_old = search_foldername;
-            }
             do_my_export(search_foldername, bt_export_foldername);
         }
 
