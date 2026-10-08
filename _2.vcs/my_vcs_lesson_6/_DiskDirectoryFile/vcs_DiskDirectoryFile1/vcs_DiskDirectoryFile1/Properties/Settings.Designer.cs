@@ -250,5 +250,137 @@ namespace vcs_DiskDirectoryFile1.Properties {
                 this["search_foldernames"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("400")]
+        public int lv_file_cw0 {
+            get {
+                return ((int)(this["lv_file_cw0"]));
+            }
+            set {
+                this["lv_file_cw0"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("110")]
+        public int lv_file_cw1 {
+            get {
+                return ((int)(this["lv_file_cw1"]));
+            }
+            set {
+                this["lv_file_cw1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("110")]
+        public int lv_file_cw2 {
+            get {
+                return ((int)(this["lv_file_cw2"]));
+            }
+            set {
+                this["lv_file_cw2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("700")]
+        public int lv_file_cw3 {
+            get {
+                return ((int)(this["lv_file_cw3"]));
+            }
+            set {
+                this["lv_file_cw3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("400")]
+        public int lv_video_cw0 {
+            get {
+                return ((int)(this["lv_video_cw0"]));
+            }
+            set {
+                this["lv_video_cw0"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("120")]
+        public int lv_video_cw1 {
+            get {
+                return ((int)(this["lv_video_cw1"]));
+            }
+            set {
+                this["lv_video_cw1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("120")]
+        public int lv_video_cw2 {
+            get {
+                return ((int)(this["lv_video_cw2"]));
+            }
+            set {
+                this["lv_video_cw2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("110")]
+        public int lv_video_cw3 {
+            get {
+                return ((int)(this["lv_video_cw3"]));
+            }
+            set {
+                this["lv_video_cw3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("110")]
+        public int lv_video_cw4 {
+            get {
+                return ((int)(this["lv_video_cw4"]));
+            }
+            set {
+                this["lv_video_cw4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("700")]
+        public int lv_video_cw5 {
+            get {
+                return ((int)(this["lv_video_cw5"]));
+            }
+            set {
+                this["lv_video_cw5"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
+        public int lv_dir_cw0 {
+            get {
+                return ((int)(this["lv_dir_cw0"]));
+            }
+            set {
+                this["lv_dir_cw0"] = value;
+            }
+        }
     }
 }

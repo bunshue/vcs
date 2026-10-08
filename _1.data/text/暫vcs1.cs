@@ -5,48 +5,6 @@ DDF 在 kilo 排版會亂掉  其他的也會嗎?
 
 //------------------------------------------------------------  # 60個
 
-            listView1.View = View.LargeIcon;  // 以「大圖示」顯示
-            listView1.View = View.SmallIcon;  // 以「小圖示」顯示
-            listView1.View = View.List;  // 以「清單」顯示
-            listView1.View = View.Details;// 以「詳細資訊」顯示
-
-
-listView的內容可否加入 icon 例如 delete 或 開啟檔案
-
-            if (listView1.Items.Count > 0)
-            {
-                //設置ListView最後一行可見
-                //listView1.Items[listView1.Items.Count - 1].EnsureVisible();
-            }
-
-
-
-            //還沒加入listView之標題
-
-            listView1.Items.Clear();
-
-
-
-
-                    //為ListView控件添加文件夾信息
-                    listView1.Items.Add(dirinfo.Name);
-                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(dirinfo.FullName);
-                    listView1.Items[listView1.Items.Count - 1].SubItems.Add("");
-                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(dirinfo.CreationTime.ToShortDateString());
-
-
-
-                    //為ListView控件添加文件信息
-                    listView1.Items.Add(finfo.Name);
-                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(finfo.FullName);
-                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(finfo.Length.ToString());
-                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(finfo.CreationTime.ToShortDateString());
-
-
-
-//------------------------------------------------------------  # 60個
-
-
             //拆解 pattern 範例
 
             string searchPattern = "*.cs;*.csv;*.ico";
@@ -57,14 +15,12 @@ listView的內容可否加入 icon 例如 delete 或 開啟檔案
             foreach (string pattern in pattern_array)
             {
                 richTextBox1.Text += "pattern : " + pattern + "\n";
-
             }
 
             string[] patterns = { "*.png", "*.bmp", "*.jpg", "*.jpeg", "*.gif" };     //指名搜尋pattern
             foreach (string pattern in patterns)  // 多個搜尋pattern
             {
             }
-
 
 //------------------------------------------------------------  # 60個
 
@@ -729,22 +685,6 @@ HScrollBar / VScrollBar
 
 	vsbHeight.LargeChange = 1;  // 設定vsbHeight的快動值 = 1
 	hsbWidth.LargeChange  = 1;  // 設定hsbWidth 的快動值 = 1
-
-//------------------------------------------------------------  # 60個
-cccc
-
-listbox
-	//ListBox預設選項
-	// 建立Job字串陣列用來存放職業
-	String[] Job = new String[] { "士", "農", "工", "商", "兵", "其它" };
-	lstJob.Items.AddRange(Job); // lstJob清單放入Job陣列內容
-	lstJob.SelectedIndex = 0;   // lstJob清單預設第1個選項被選取
-
-listbox的方法
-從 listbox 的內容取得index
-
-int JobIndex = lstJob.FindString("aaaa");
-lstJob.SelectedIndex = JobIndex;
 
 //------------------------------------------------------------  # 60個
 
@@ -2420,15 +2360,6 @@ this.toggleOption(0, 2, false);
                 //richTextBox1.Text += "無影像裝置\n";
             }
         }
-
-//------------------------------------------------------------  # 60個
-cccc
-            //checkedListBox1
-            // 將chkListLot核取清單方塊所有項目設為不勾選
-            for (int i = 0; i < checkedListBox1.Items.Count; i++)
-            {
-                checkedListBox1.SetItemChecked(i, false);
-            }
 
 //------------------------------------------------------------  # 60個
 

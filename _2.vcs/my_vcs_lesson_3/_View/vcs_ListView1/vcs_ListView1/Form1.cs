@@ -1602,5 +1602,53 @@ vcs_ListView3_ContextMenuStrip
             listView1.Items.Clear();
 
             listView1.Items.Add(fi.FullName);
+
+//------------------------------------------------------------  # 60個
+
+            listView1.View = View.LargeIcon;  // 以「大圖示」顯示
+            listView1.View = View.SmallIcon;  // 以「小圖示」顯示
+            listView1.View = View.List;  // 以「清單」顯示
+            listView1.View = View.Details;// 以「詳細資訊」顯示
+
+
+listView的內容可否加入 icon 例如 delete 或 開啟檔案
+
+            if (listView1.Items.Count > 0)
+            {
+                //設置ListView最後一行可見
+                //listView1.Items[listView1.Items.Count - 1].EnsureVisible();
+            }
+
+
+
+            //還沒加入listView之標題
+
+            listView1.Items.Clear();
+
+
+
+
+                    //為ListView控件添加文件夾信息
+                    listView1.Items.Add(dirinfo.Name);
+                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(dirinfo.FullName);
+                    listView1.Items[listView1.Items.Count - 1].SubItems.Add("");
+                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(dirinfo.CreationTime.ToShortDateString());
+
+
+
+                    //為ListView控件添加文件信息
+                    listView1.Items.Add(finfo.Name);
+                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(finfo.FullName);
+                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(finfo.Length.ToString());
+                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(finfo.CreationTime.ToShortDateString());
+
+
+
+//------------------------------------------------------------  # 60個
+
 */
+
+
+
+
 

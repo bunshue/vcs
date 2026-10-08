@@ -448,3 +448,31 @@ namespace vcs_ListBox1
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
+
+/*
+	//ListBox預設選項
+	// 建立Job字串陣列用來存放職業
+	String[] Job = new String[] { "士", "農", "工", "商", "兵", "其它" };
+	lstJob.Items.AddRange(Job); // lstJob清單放入Job陣列內容
+	lstJob.SelectedIndex = 0;   // lstJob清單預設第1個選項被選取
+
+listbox的方法
+從 listbox 的內容取得index
+
+int JobIndex = lstJob.FindString("aaaa");
+lstJob.SelectedIndex = JobIndex;
+
+//------------------------------------------------------------  # 60個
+
+            //checkedListBox1
+            // 將chkListLot核取清單方塊所有項目設為不勾選
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+            {
+                checkedListBox1.SetItemChecked(i, false);
+            }
+
+//------------------------------------------------------------  # 60個
+
+*/
+
+
