@@ -2807,8 +2807,8 @@ namespace vcs_DiskDirectoryFile1
 
                 //debug
                 //搜尋優優檔
-                bool flag_good = check_video_good(fileinfos[i].filename);
-                if (flag_good == true)
+                string seriesname = get_seriesname(fileinfos[i].filename);
+                if (seriesname != "")
                 {
                     i1.ForeColor = Color.Red;
                 }
@@ -2920,7 +2920,7 @@ namespace vcs_DiskDirectoryFile1
 
             if (File.Exists(fullname) == true)
             {
-                play_video_files(fullname);
+                play_video_files(fullname);  // 播放
             }
             else
             {
@@ -2943,7 +2943,7 @@ namespace vcs_DiskDirectoryFile1
 
             if (File.Exists(fullname) == true)
             {
-                play_video_files(fullname);
+                play_video_files(fullname);  // 播放
             }
             else
             {
@@ -3137,8 +3137,8 @@ namespace vcs_DiskDirectoryFile1
                 int d = fileinfos[i].video_duration;
 
                 //搜尋優優檔
-                bool flag_good = check_video_good(fileinfos[i].filename);
-                if (flag_good == true)
+                string seriesname = get_seriesname(fileinfos[i].filename);
+                if (seriesname != "")
                 {
                     string fullname = fileinfos[i].filepath + "\\" + fileinfos[i].filename;
                     richTextBox1.Text += fullname + "\n";
@@ -3947,7 +3947,8 @@ namespace vcs_DiskDirectoryFile1
                         //搜尋優優檔
                         if (cb_search_good_files.Checked == true)
                         {
-                            if (check_video_good(fi.Name) == false)
+                            string seriesname = get_seriesname(fi.Name);
+                            if (seriesname == "")
                             {
                                 return;
                             }
@@ -4400,7 +4401,7 @@ namespace vcs_DiskDirectoryFile1
                 , "9288.pro@", "027_3xplanet_", "hhd800.com@", "489155.com@", "javkok.com@", "489155.com@", "big2048.com@", "[bbs.yzkof.com]"
                 , "jav20s8.com@", "@江南@", "松島楓", "toyouiv.com_", "桐原エリカ", "(Kirihara Erika)"
                 , "[javdb.com]", "Abigaile Johnson ", "Heydoug", "heyzo_hd", "DLLAF"
-                , "bbs2048.org@", "Abigaile Johnson ", "Heydoug", "avmans.com", "FHD"
+                , "bbs2048.org@", "Abigaile Johnson ", "Heydoug", "avmans.com", "_FHD", "FHD"
                 , "4k688.com@", "僕とかえでの甘～い性活", "松島かえで", "[garea chinan]", "MIG"
                 , "初剃り", "[44x.me]", "bbsxv.xyz", "@蜂鳥@fengniao151.vip", "18x78.com_"
                 , "taxv.xyz", "jav20s8.com@", "shimohira", "hikari", "deeper.21"
@@ -4410,9 +4411,12 @@ namespace vcs_DiskDirectoryFile1
                 , "(hibino)", "kpkp3.com", "bbyxv.xyz", "aaxv.xyz", "4k2.me@"
                 , "masex.tv@", "[55h.me]", "[NoDRM]-", "jpfou.com-", "madoubt.com 583985.xyz "
                 , "-javgg.net", "[456k.me]", "(uncensored)", "rh2048.com@", "uncensored"
-                , "[BT-btt.com]", ".h264", ".xvid", "jnty4588.com", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "[BT-btt.com]", ".h264", ".xvid", "jnty4588.com", "77vr.com@"
+                , "2048.info@", "madoubt.com 952388.xyz ", "~nyap2p.com", "kcf9.com@", "gg5.co@"
+                , "gg5.co@", "H265", "-nyap2p.comnf.", "_dvd", "[crazecat下载加速器—www.crazecat.com]"
+                , "_gg5", "hd_", "_hd_", "_uncen", "jn998.vip-"
+                , "-1080p", "(麻豆傳媒)", "_hd.mp4", "_hd.mkv", "_hd.wmv"
+                , "_1.mp4", "-nyap2p.com", "(Red Hot Jam)", "(KIRARI)", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , ".mp4", ".wmv", ".avi", ".mkv", ".mov"  // 清除副檔名
@@ -4659,42 +4663,60 @@ namespace vcs_DiskDirectoryFile1
 
         Dictionary<string, string> name_dict = new Dictionary<string, string>()
         {
-        { "1111", "一一一一" }, { "3333", "三上悠亞" }, { "4444", "四四四四" }, { "9999", "九条みちる" },
-        { "5555", "五日市芽依" }, { "7777", "一一一一" }, { "sssss1", "三上悠亞" }, { "1010", "四四四四" },
-        { "maria", "愛音まりあ" }, { "julia", "Julia" }, { "mion", "園田美櫻" }, { "sma", "鈴村あいり" },
+        { "1111", "星宮一花" }, { "3333", "三上悠亜" }, { "4444", "四四四四" }, { "9999", "九条みちる" },
+        { "5555", "五日市芽依" }, { "7777", "七ツ森りり" }, { "sssss1", "三上悠亞" }, { "1010", "四四四四" },
+        { "8888", "八掛うみ" }, 
+        { "maria", "愛音まりあ" }, { "julia", "Julia" }, { "mion", "園田美櫻" },
         { "fuua", "楓ふうあ" }, { "yama", "山岸あや花" }, { "kiho", "金松季歩" },
-        { "hsyr", "広瀬ゆり" }, { "yui", "波多野結衣" }, { "8888", "八掛うみ" }, { "akari", "明里つむぎ" },
+        { "hsyr", "広瀬ゆり" }, { "yui", "波多野結衣" }, { "akari", "明里つむぎ" },
         { "jessica", "希崎ジェシカ" }, { "mori", "森日向子" }, { "mino", "美乃すずめ" },
-        { "3ne", "三澄寧々" }, { "remu", "涼森れむ" }, { "ran", "藤井蘭蘭" },
+        { "3ne", "三澄寧々" }, { "remu", "涼森れむ" },
         { "asami", "小川あさ美" }, { "miu", "白峰ミウ" }, { "karen", "楓カレン" }, { "iori", "古川いおり" },
         { "saeko", "松下紗榮子" }, { "yuna", "椎名ゆな" }, { "maron", "夏希まろん" },
         { "kana", "森沢かな" },
         { "mth", "水端" }, { "kma", "小松杏" },
+        { "ran", "XXXX" },//松野蘭 （まつのらん / Matsuno Ran）+松野蘭/藤井蘭々/藤かんな/...
 
         //常字包含短字, 長字在前//若有包含字串的，多字的放前面即可
-        { "misaki", "岬ななみ" }, { "maki", "北条麻妃" }, { "aki", "佐佐木" },
+        { "misaki", "岬ななみ" }, { "maki", "北条麻妃" }, { "taki", "瀧本雫葉" }, { "aki", "佐佐木" },
         { "sayaka", "友田彩也香" }, { "ayaka", "武藤あやか" },
-        { "fsmai", "藤咲まい" }, { "mai", "神菜美まい" },
+        { "fsmai", "藤咲まい" }, { "mai", "神菜美まい" }, { "sma", "鈴村あいり" },
         { "kanna", "今井栞菜" }, { "anna", "杏奈" },
         //相同字
         { "春明潤", "春明潤" }, { "東希美", "東希美" }, { "有賀みなほ", "有賀みなほ" }, { "上原瑞穗", "上原瑞穗" },
-        { "kano", "香椎花乃" }, { "nene", "吉高寧々" },
+        { "遠野夏生", "遠野夏生" }, { "南波明花", "南波明花" }, { "京香栞", "京香栞" },
+
+        { "kano", "香椎花乃" }, { "nene", "吉高寧々" }, { "nmm", "仲村みう" },
         { "honoka", "米倉穂香" },
         { "azm", "相沢みなみ" }, { "kjm", "小島みなみ" }, { "hkm", "初川みなみ" },
         { "ririko", "木下凛々子" }, { "mito", "水戸かな" },
         { "mos", "松岡すず" }, { "momo", "桜空もも" },
         { "airi", "希島あいり" }, { "ryo", "愛弓りょう" },
-        { "jgj", "神宮寺ナオ" },
-        { "naho", "????" },
-        //{ "nami", "XXDDDDSS" }, { "ayami", "????" },
+        { "ria", "愛才りあ" }, { "nma", "新村あかり" },
+        { "jgj", "神宮寺ナオ" }, { "kotone", "雨宮琴音" },
+        { "nami", "沖宮那美" }, { "ayami", "池田あやみ" },
         { "arina", "新ありな" }, { "rin", "東凛" }, 
         { "riho", "藤森里穂" }, { "yume", "西宮ゆめ" }, 
-        //{ "AAAA", "BBBB" }, { "CCCC", "DDDD" },
-        //{ "AAAA", "BBBB" }, { "CCCC", "DDDD" },
-        //{ "AAAA", "BBBB" }, { "CCCC", "DDDD" },
-        //{ "AAAA", "BBBB" }, { "CCCC", "DDDD" },
-        //{ "AAAA", "BBBB" }, { "CCCC", "DDDD" },
-        //{ "AAAA", "BBBB" }, { "CCCC", "DDDD" },
+        { "mha", "水端あさみ" }, { "rei", "神木麗" },
+        { "sayuri", "葉山さゆり" }, { "yuri", "紗々原ゆり" },
+        { "mary", "橘メアリー" }, { "non", "野々浦暖" },
+        { "iaoi", "一乃あおい" }, { "taoi", "葵つかさ" },
+        { "suzu", "本庄鈴" }, { "miho", "通野未帆" },
+        { "rio", "朝日りお" },
+        { "old", "古風" }, { "mmmm", "合集" }, { "japcc", "日文字幕" },
+        { "smr", "水川スミレ" }, { "mihi", "三比菜々美" },
+        { "hayashi", "林ゆな" },
+        { "naho", "XXXX" }, { "CCCC", "DDDD" },
+        { "yuko1", "小野夕子" }, { "yuko2", "白木優子" },
+        { "alice", "XXXX" }, { "saki", "奥田咲" },
+        { "moe", "天使もえ" }, { "gggg", "優優檔" },
+        //{ "AAAA", "XXXX" }, { "CCCC", "DDDD" },
+        //{ "AAAA", "XXXX" }, { "CCCC", "DDDD" },
+        //{ "AAAA", "XXXX" }, { "CCCC", "DDDD" },
+        //{ "AAAA", "XXXX" }, { "CCCC", "DDDD" },
+        //{ "AAAA", "XXXX" }, { "CCCC", "DDDD" },
+
+
         };
 
         string get_seriesname(string longname)
@@ -4705,6 +4727,10 @@ namespace vcs_DiskDirectoryFile1
                 if (seriesname.ToLower().Contains(n) == true)
                 {
                     if (seriesname.ToLower().Contains("mium") == true)
+                    {
+                        continue;
+                    }
+                    if (seriesname.ToLower().Contains("emth") == true)
                     {
                         continue;
                     }
@@ -4721,15 +4747,7 @@ namespace vcs_DiskDirectoryFile1
         {
             //優優檔
             string filename = "hhd800.com@300MIUM-1201.mp4";
-            if (check_video_good(filename) == false)
-            {
-                richTextBox1.Text += "不是 優優檔\n";
-            }
-            else
-            {
-                richTextBox1.Text += "是 優優檔\n";
-            }
-
+            filename = "hhd800.com@EMTH-159.mp4";
             string sn = get_shortname(filename);  //取得 shortname
             richTextBox1.Text += "n  : " + filename + "\n";
             richTextBox1.Text += "sn : " + sn + "\n";
@@ -4997,55 +5015,6 @@ namespace vcs_DiskDirectoryFile1
 
         //------------------------------------------------------------  # 60個
 
-        //優優檔
-        bool check_video_good(string filename)
-        {
-            bool flag_match = false;
-            string[] good_pattern = new string[] {
-                  "asami", "yuna", "kaede", "hayashi", "julia", "jjjj", "chitose"    //A class
-                , "nozomi", "anri", "jessica", "airi", "ths", "saeko", "mihi"
-                , "松島", "桐原", "冬月", "小川", "椎名", "宮瀬", "南波"
-                , "smr", "yama", "maria", "akari", "maron", "ryo", "ran"
-                , "mai", "karen", "rinne", "miu", "kano", "kiho", "rio"
-                , "suzu", "yuri", "sakura", "nanami", "minami", "iori", "mito"
-                , "1111", "3333", "4444", "5555", "7777", "8888", "9999", "1010"
-                , "新川空", "riho","mino", "megumi", "miyu"
-                , "kurara", "kanna", "uta", "alice", "mina", "miho", "naho"
-                , "立花", "愛世", "美月", "sma", "kma", "fumino", "sayuri"
-                , "hsyr", "taki", "remu", "iaoi", "taoi", "yuko", "mos"
-                , "riria", "ririko", "mai", "mth", "arina", "mori", "fuua"
-                , "kana", "tia", "momo", "yui", "sho", "nene", "園田"    //B class
-                , "ayaka", "jgj", "sora", "bt", "maki", "ayumi", "mion"
-                , "本田岬", "lily", "lauren", "3ne", "倉木華", "nmm", "azm"
-                , "aki", "雨宮", "non", "滝川", "水卜", "宝生", "宮崎"
-                , "gggg", "debut", "南まゆ", "星野", "須籐沙希", "美香", "宮藤"    //new tmp
-                , "夕子", "kjm", "maron", "春明潤", "kma", "古川いおり", "ryo"
-                , "kano", "愛音", "上原", "松下", "yuna", "jgj", "rin"
-                , "椎名", "moe", "東希美", "honoka", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-            };
-
-            foreach (string ptn in good_pattern)
-            {
-                if (filename.ToLower().Contains(ptn) == true)
-                {
-                    if (filename.ToLower().Contains("mium") == true)
-                    {
-                        continue;
-                    }
-                    flag_match = true;
-                    break;
-                }
-            }
-            return flag_match;
-        }
-
-        //------------------------------------------------------------  # 60個
-
         bool check_file_condition(FileInfo fi)
         {
             if (flag_search_Katfile == true)
@@ -5226,7 +5195,7 @@ namespace vcs_DiskDirectoryFile1
                 {
                     int selNdx = listView_video.SelectedIndices[0];
 
-                    string foldername = listView_video.Items[selNdx].SubItems[0].Text;
+                    string foldername = listView_video.Items[selNdx].SubItems[5].Text;
                     richTextBox1.Text += "資料夾:\t" + foldername + "\n";
 
                     /*
@@ -5284,6 +5253,33 @@ namespace vcs_DiskDirectoryFile1
             listBox1.Items.Clear();
         }
 
+        private void listView_video_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
+            {
+                //Enter
+
+                int idx = listView_video.SelectedIndices[0];
+                richTextBox1.Text += "檔名:\t" + listView_video.Items[idx].Text + "\n";
+                richTextBox1.Text += "簡名:\t" + listView_video.Items[idx].SubItems[1].Text + "\n";
+                richTextBox1.Text += "系列:\t" + listView_video.Items[idx].SubItems[2].Text + "\n";
+                richTextBox1.Text += "大小:\t" + listView_video.Items[idx].SubItems[3].Text + "\n";
+                richTextBox1.Text += "格式:\t" + listView_video.Items[idx].SubItems[4].Text + "\n";
+                richTextBox1.Text += "資料夾:\t" + listView_video.Items[idx].SubItems[5].Text + "\n";
+                string fullname = listView_video.Items[idx].SubItems[5].Text + "\\" + listView_video.Items[idx].Text;
+                richTextBox1.Text += "完整路徑:\t" + fullname + "\n";
+
+                if (File.Exists(fullname) == true)
+                {
+                    play_video_files(fullname);  // 播放
+                }
+                else
+                {
+                    richTextBox1.Text += "檔案 : " + fullname + " , 不存在\n";
+                }
+                e.Handled = true;
+            }
+        }
         //------------------------------------------------------------  # 60個
     }
 }
@@ -5511,4 +5507,3 @@ _video      影片模式
             richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
         }
 */
-
