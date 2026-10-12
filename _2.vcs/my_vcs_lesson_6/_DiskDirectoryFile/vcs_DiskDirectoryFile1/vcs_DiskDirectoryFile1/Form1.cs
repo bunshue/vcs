@@ -48,6 +48,13 @@ namespace vcs_DiskDirectoryFile1
         bool flag_search_files_same1 = false;  // 找相同檔案, 模糊檔名
         bool flag_search_files_same2 = false;  // 找相同檔案, 完整容量
         bool flag_search_files_same3 = false;  // 找相同檔案, 模糊容量
+        bool flag_search_text_mode = false;
+
+        private const int SEARCH_MODE_VCS = 0x00;	    //search vcs code, 搜尋vcs內的關鍵字
+        private const int SEARCH_MODE_PYTHON = 0x01;	//search python code, 搜尋python內的關鍵字
+
+        string result_str = string.Empty;
+        int search_mode = SEARCH_MODE_VCS;
 
         bool flag_export_filename = false;  // 匯出檔名
         bool flag_export_video = false;  // 找影片檔
@@ -679,7 +686,7 @@ namespace vcs_DiskDirectoryFile1
                 listView_file.Visible = false;
                 listView_video.Visible = false;
             }
-            else if ((flag_export_filename == true) || (flag_search_Katfile == true))  // 匯出檔名 或 Katfile
+            else if ((flag_export_filename == true) || (flag_search_Katfile == true) || (flag_search_text_mode == true))  // 匯出檔名 或 Katfile 或 搜尋文字模式
             {
                 listView_dir.Visible = false;
                 listView_file.Visible = true;
@@ -697,6 +704,12 @@ namespace vcs_DiskDirectoryFile1
                 listView_file.Visible = false;
                 listView_video.Visible = false;
                 richTextBox1.Text += "XXXXXXXXX\n";
+
+                listView_dir.Visible = false;
+                listView_file.Visible = true;
+                listView_video.Visible = false;
+
+                tb_search.Text = "bt_setup4";
             }
         }
 
@@ -3612,7 +3625,7 @@ namespace vcs_DiskDirectoryFile1
                     {
                         show_file_info_dir(fileinfos, -1, false, listView_dir);
                     }
-                    else if ((flag_export_filename == true) || (flag_search_Katfile == true))  // 匯出檔名 或 Katfile
+                    else if ((flag_export_filename == true) || (flag_search_Katfile == true) || (flag_search_text_mode == true))  // 匯出檔名 或 Katfile 或 搜尋文字模式
                     {
                         show_file_info_file(fileinfos, -1, false, listView_file);
                     }
@@ -4030,6 +4043,107 @@ namespace vcs_DiskDirectoryFile1
             {
                 folder_files++;
                 folder_size += fi.Length;
+            }
+            else if (flag_search_text_mode == true)
+            {
+                //richTextBox1.Text += fi.Name + "\t" + fi.Length.ToString() + "\n";
+                //richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+                //result_str += fi.Name + "\t" + fi.Length.ToString() + "\n";
+
+                bool res;
+                string pattern = string.Empty;// = "Form1.cs";
+
+                if (search_mode == SEARCH_MODE_VCS)
+                    pattern = ".cs";
+                else if (search_mode == SEARCH_MODE_PYTHON)
+                    pattern = "py";
+                else
+                    pattern = ".cs";
+
+                res = fi.FullName.ToLower().Replace(" ", "").EndsWith(pattern.ToLower());
+
+                if (res == false)   //vcs加搜尋txt檔案
+                {
+                    if (search_mode == SEARCH_MODE_VCS) //vcs 加搜尋 .txt
+                    {
+                        res = fi.FullName.ToLower().Replace(" ", "").Contains("____txt");
+                    }
+                }
+
+                if (res == true)
+                {
+                    //result_str += "aaaa : " + fi.FullName + "\n";
+
+                    if (search_mode == SEARCH_MODE_VCS) //有一些vcs檔案 要跳開 (先改成小寫名)
+                    {
+                        if (fi.FullName.ToLower().Replace(" ", "").Contains("program.cs"))
+                        {
+                            res = false;
+                            return;
+                        }
+                        /*
+                        else if (fi.FullName.ToLower().Replace(" ", "").Contains("assemblyinfo.cs"))
+                        {
+                            res = false;
+                            return;
+                        }
+                        */
+                        else if (fi.FullName.ToLower().Replace(" ", "").Contains("csproj"))
+                        {
+                            res = false;
+                            return;
+                        }
+                        /*
+                        else if (fi.FullName.ToLower().Replace(" ", "").Contains("designer"))
+                        {
+                            res = false;
+                            return;
+                        }
+                        */
+                    }
+
+                    //result_str += fi.FullName + "\n";
+                    StreamReader sr = new StreamReader(fi.FullName, Encoding.UTF8);
+
+                    int flag_pattern_match = 0;
+                    int i = 0;
+                    String line;
+
+                    //寫法一
+                    while (!sr.EndOfStream)
+                    {               // 每次讀取一行，直到檔尾
+                        i++;
+                        line = sr.ReadLine();            // 讀取文字到 line 變數
+                        res = line.ToLower().Replace(" ", "").Contains(tb_search.Text.ToLower().Replace(" ", ""));
+                        if (res == true)
+                        {
+                            //result_str += "第" + i.ToString() + "行： " + line + "\n";
+                            result_str += line + "\n";
+                            flag_pattern_match = 1;
+                        }
+                    }
+                    if (flag_pattern_match == 1)
+                    {
+                        result_str += "上面搜尋到的資料在檔案\t" + fi.FullName + "\n\n";
+
+                        int w = 1920;
+                        int h = 1080;
+                        int fps = 30;
+                        string n = fi.Name;
+                        string sn = "bbbb";  //取得 shortname
+                        string ss = "cccc";  //取得 seriesname
+                        string p = fi.Directory.ToString();
+                        string e = fi.Extension;
+                        long s = fi.Length;
+                        int dd = 456;
+                        fileinfos.Add(new MyFileInfo(n, sn, ss, p, e, s, w, h, fps, dd));
+                    }
+                    sr.Close();
+                }
+                else
+                {
+                    return;
+                }
             }
         }
 
@@ -4791,7 +4905,7 @@ namespace vcs_DiskDirectoryFile1
 
 
             //測試 檔名簡中轉正中
-
+            /*
             richTextBox1.Text += "listBox1\n";
 
             int len = listBox1.Items.Count;
@@ -4811,6 +4925,31 @@ namespace vcs_DiskDirectoryFile1
             {
                 richTextBox1.Text += "取得 : " + old_search_path[i] + "\n";
             }
+            */
+
+            // 搜尋文字
+
+            flag_export_foldername = false;  // 找資料夾, 全/空/小
+            flag_export_filename = false;  // 匯出檔名
+            flag_export_video = false;  // 找影片檔
+            flag_search_text_mode = true;  // 搜尋文字模式
+
+            tb_search_text_old = tb_search.Text;
+            tb_limit_min_text_old = tb_limit_min.Text;
+            tb_limit_max_text_old = tb_limit_max.Text;
+            show_item_location_listview();
+
+            tb_search.Text = "bt_setup4";
+
+            result_str = string.Empty;
+
+            search_mode = SEARCH_MODE_VCS;
+
+            search_foldername = tb_foldername1.Text;
+            tb_foldername1_text_old = search_foldername;
+            do_my_export(search_foldername, bt_export_filename);
+
+            richTextBox1.Text += "結果 : " + result_str + "\n";
         }
 
         private void tb_text_Click(object sender, EventArgs e)
@@ -5280,6 +5419,7 @@ namespace vcs_DiskDirectoryFile1
                 e.Handled = true;
             }
         }
+
         //------------------------------------------------------------  # 60個
     }
 }
