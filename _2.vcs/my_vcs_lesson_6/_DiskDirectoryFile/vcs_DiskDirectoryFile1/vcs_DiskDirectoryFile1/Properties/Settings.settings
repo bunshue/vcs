@@ -92,5 +92,11 @@
     <Setting Name="lv_dir_cw0" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1000</Value>
     </Setting>
+    <Setting Name="vcs_foldername" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="python_foldername" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -382,5 +382,29 @@ namespace vcs_DiskDirectoryFile1.Properties {
                 this["lv_dir_cw0"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string vcs_foldername {
+            get {
+                return ((string)(this["vcs_foldername"]));
+            }
+            set {
+                this["vcs_foldername"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string python_foldername {
+            get {
+                return ((string)(this["python_foldername"]));
+            }
+            set {
+                this["python_foldername"] = value;
+            }
+        }
     }
 }

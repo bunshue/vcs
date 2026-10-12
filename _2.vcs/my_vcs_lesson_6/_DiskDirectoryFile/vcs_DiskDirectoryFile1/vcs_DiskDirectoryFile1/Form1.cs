@@ -63,6 +63,8 @@ namespace vcs_DiskDirectoryFile1
         string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
         string foldername = @"D:\_git\vcs\_1.data\______test_files1\";
         string search_foldername = string.Empty;
+        string vcs_foldername = string.Empty;
+        string python_foldername = string.Empty;
         string doc_foldername = string.Empty;
         string video_player_path = String.Empty;
         string tb_foldername_text_old = string.Empty;
@@ -269,6 +271,8 @@ namespace vcs_DiskDirectoryFile1
             filesize_min = Properties.Settings.Default.filesize_min;  // 搜尋 資料夾/檔案 的下限
             filesize_max = Properties.Settings.Default.filesize_max;  // 搜尋 資料夾/檔案 的上限
             video_player_path = Properties.Settings.Default.video_player_path;
+            vcs_foldername = Properties.Settings.Default.vcs_foldername;
+            python_foldername = Properties.Settings.Default.python_foldername;
             doc_foldername = Properties.Settings.Default.doc_foldername;
             search_foldername = Properties.Settings.Default.search_path;
             cb_limit_min.Checked = Properties.Settings.Default.flag_check_filesize_min;
@@ -297,6 +301,16 @@ namespace vcs_DiskDirectoryFile1
 
             tb_limit_min.Text = filesize_min.ToString();  // 搜尋 資料夾/檔案 的下限
             tb_limit_max.Text = filesize_max.ToString();  // 搜尋 資料夾/檔案 的上限
+
+            if (Directory.Exists(vcs_foldername) == false)
+            {
+                vcs_foldername = "";
+            }
+
+            if (Directory.Exists(python_foldername) == false)
+            {
+                python_foldername = "";
+            }
 
             if (Directory.Exists(doc_foldername) == false)
             {
@@ -629,13 +643,14 @@ namespace vcs_DiskDirectoryFile1
             bt_export_video.Location = new Point(x_st + dx * 12 + 20 + dd * 1, y_st + dy * 2 + ddy);
             bt_export_doc.Location = new Point(x_st + dx * 12 + 20 + dd * 2, y_st + dy * 2 + ddy);
             bt_search_pattern_vcs.Location = new Point(x_st + dx * 12 + 20 + dd * 3, y_st + dy * 2 + ddy);
-            bt_start_files.Location = new Point(x_st + dx * 12 + 20 + dd * 4, y_st + dy * 2 + ddy);
-            bt_start_all_files.Location = new Point(x_st + dx * 12 + 20 + dd * 5, y_st + dy * 2 + ddy);
-            bt_start_files_good.Location = new Point(x_st + dx * 12 + 20 + dd * 6, y_st + dy * 2 + ddy);
-            bt_delete_file.Location = new Point(x_st + dx * 12 + 20 + dd * 7, y_st + dy * 2 + ddy);
-            bt_open_folder.Location = new Point(x_st + dx * 12 + 20 + dd * 8, y_st + dy * 2 + ddy);
-            lb_search_result1.Location = new Point(x_st + dx * 12 + 20 + dd * 9, y_st + dy * 1 + 25 + ddy);
-            lb_search_result2.Location = new Point(x_st + dx * 12 + 20 + dd * 9, y_st + dy * 1 + 55 + ddy);
+            bt_search_pattern_python.Location = new Point(x_st + dx * 12 + 20 + dd * 4, y_st + dy * 2 + ddy);
+            bt_start_files.Location = new Point(x_st + dx * 12 + 20 + dd * 5, y_st + dy * 2 + ddy);
+            bt_start_all_files.Location = new Point(x_st + dx * 12 + 20 + dd * 6, y_st + dy * 2 + ddy);
+            bt_start_files_good.Location = new Point(x_st + dx * 12 + 20 + dd * 7, y_st + dy * 2 + ddy);
+            bt_delete_file.Location = new Point(x_st + dx * 12 + 20 + dd * 8, y_st + dy * 2 + ddy);
+            bt_open_folder.Location = new Point(x_st + dx * 12 + 20 + dd * 9, y_st + dy * 2 + ddy);
+            lb_search_result1.Location = new Point(x_st + dx * 12 + 20 + dd * 10, y_st + dy * 1 + 25 + ddy);
+            lb_search_result2.Location = new Point(x_st + dx * 12 + 20 + dd * 10, y_st + dy * 1 + 55 + ddy);
             lb_search_result1.Text = "";
             lb_search_result2.Text = "";
 
@@ -703,13 +718,6 @@ namespace vcs_DiskDirectoryFile1
                 listView_dir.Visible = false;
                 listView_file.Visible = false;
                 listView_video.Visible = false;
-                richTextBox1.Text += "XXXXXXXXX\n";
-
-                listView_dir.Visible = false;
-                listView_file.Visible = true;
-                listView_video.Visible = false;
-
-                tb_search.Text = "bt_setup4";
             }
         }
 
@@ -4927,29 +4935,6 @@ namespace vcs_DiskDirectoryFile1
             }
             */
 
-            // 搜尋文字
-
-            flag_export_foldername = false;  // 找資料夾, 全/空/小
-            flag_export_filename = false;  // 匯出檔名
-            flag_export_video = false;  // 找影片檔
-            flag_search_text_mode = true;  // 搜尋文字模式
-
-            tb_search_text_old = tb_search.Text;
-            tb_limit_min_text_old = tb_limit_min.Text;
-            tb_limit_max_text_old = tb_limit_max.Text;
-            show_item_location_listview();
-
-            tb_search.Text = "bt_setup4";
-
-            result_str = string.Empty;
-
-            search_mode = SEARCH_MODE_VCS;
-
-            search_foldername = tb_foldername1.Text;
-            tb_foldername1_text_old = search_foldername;
-            do_my_export(search_foldername, bt_export_filename);
-
-            richTextBox1.Text += "結果 : " + result_str + "\n";
         }
 
         private void tb_text_Click(object sender, EventArgs e)
@@ -5276,9 +5261,52 @@ namespace vcs_DiskDirectoryFile1
             flag_search_Katfile = false;  // 匯出Katfile壓縮檔檔案資料 專用
         }
 
+        void do_search_pattern()
+        {
+            //搜尋文字
+            flag_export_foldername = false;  // 找資料夾, 全/空/小
+            flag_export_filename = false;  // 匯出檔名
+            flag_export_video = false;  // 找影片檔
+            flag_search_text_mode = true;  // 搜尋文字模式
+
+            tb_search_text_old = tb_search.Text;
+            tb_limit_min_text_old = tb_limit_min.Text;
+            tb_limit_max_text_old = tb_limit_max.Text;
+            show_item_location_listview();
+
+            tb_search.Text = "google";
+
+            result_str = string.Empty;
+
+            search_foldername = tb_foldername1.Text;
+            tb_foldername1_text_old = search_foldername;
+
+            if (search_mode == SEARCH_MODE_VCS)
+            {
+                do_my_export(vcs_foldername, bt_search_pattern_vcs);
+            }
+            else
+            {
+                do_my_export(python_foldername, bt_search_pattern_python);
+            }
+
+            richTextBox1.Text += "結果 : " + result_str + "\n";
+        }
+
         private void bt_search_pattern_vcs_Click(object sender, EventArgs e)
         {
-            //搜尋 VCS 關鍵字
+            // 搜尋 VCS 關鍵字, 搜尋文字
+
+            search_mode = SEARCH_MODE_VCS;
+            do_search_pattern();
+        }
+
+        private void bt_search_pattern_python_Click(object sender, EventArgs e)
+        {
+            // 搜尋 python 關鍵字, 搜尋文字
+
+            search_mode = SEARCH_MODE_PYTHON;
+            do_search_pattern();
         }
 
         private void bt_open_folder_Click(object sender, EventArgs e)

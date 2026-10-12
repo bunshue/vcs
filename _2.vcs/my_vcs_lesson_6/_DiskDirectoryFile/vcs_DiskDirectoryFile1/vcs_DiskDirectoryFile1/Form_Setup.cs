@@ -28,29 +28,49 @@ namespace vcs_DiskDirectoryFile1
             lb_main_mesg.Text = "";
             lb_setup0.Text = "播放影片程式";
             lb_setup1.Text = "播放音樂程式";
-            lb_setup2.Text = "播放圖片程式";
-            lb_setup3.Text = "文字編輯程式";
-            lb_setup4.Text = "預設搜尋路徑";
+            lb_setup2.Text = "預設搜尋路徑";
+            lb_setup3.Text = "vcs搜尋路徑";
+            lb_setup4.Text = "python搜尋路徑";
             lb_setup5.Text = "Katfile路徑";
             lb_setup6.Text = "Git路徑";
 
             tb_setup0.Text = Properties.Settings.Default.video_player_path;
             //tb_setup1.Text = Properties.Settings.Default.audio_player_path;
-            //tb_setup2.Text = Properties.Settings.Default.picture_viewer_path;
-            //tb_setup3.Text = Properties.Settings.Default.text_editor_path;
 
             string search_path = Properties.Settings.Default.search_path;
+            string vcs_foldername = Properties.Settings.Default.vcs_foldername;
+            string python_foldername = Properties.Settings.Default.python_foldername;
             string doc_foldername = Properties.Settings.Default.doc_foldername;
             string git_foldername = Properties.Settings.Default.git_foldername;
-            if (Directory.Exists(search_path) == false)
+
+            if (Directory.Exists(search_path) == true)
             {
-                tb_setup4.Text = search_path;
+                tb_setup2.Text = search_path;
+            }
+            else
+            {
+                tb_setup2.Text = "";
+            }
+
+            if (Directory.Exists(vcs_foldername) == true)
+            {
+                tb_setup3.Text = vcs_foldername;
+            }
+            else
+            {
+                tb_setup3.Text = "";
+            }
+
+            if (Directory.Exists(python_foldername) == true)
+            {
+                tb_setup4.Text = python_foldername;
             }
             else
             {
                 tb_setup4.Text = "";
             }
-            if (Directory.Exists(doc_foldername) == false)
+
+            if (Directory.Exists(doc_foldername) == true)
             {
                 tb_setup5.Text = doc_foldername;
             }
@@ -58,7 +78,8 @@ namespace vcs_DiskDirectoryFile1
             {
                 tb_setup5.Text = "";
             }
-            if (Directory.Exists(git_foldername) == false)
+
+            if (Directory.Exists(git_foldername) == true)
             {
                 tb_setup6.Text = git_foldername;
             }
@@ -66,6 +87,7 @@ namespace vcs_DiskDirectoryFile1
             {
                 tb_setup6.Text = "";
             }
+
             show_item_location();
         }
 
@@ -155,29 +177,29 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_setup2_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Title = "選取播放圖片程式";
-            openFileDialog1.FileName = "";
-            openFileDialog1.Filter = "程式|*.exe|所有檔|*.*";   //限定檔案格式
-            openFileDialog1.FilterIndex = 1;
-            openFileDialog1.RestoreDirectory = true;
-            openFileDialog1.InitialDirectory = "C:\\";         //從目前目錄開始尋找檔案
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            folderBrowserDialog1.SelectedPath = "C:\\"; //預設開啟的路徑
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
-                tb_setup2.Text = openFileDialog1.FileName;
+                // 預設搜尋路徑  vcs搜尋路徑  python搜尋路徑
+                tb_setup2.Text = folderBrowserDialog1.SelectedPath;
+            }
+            else
+            {
+                //richTextBox2.Text = "未選取資料夾\n";
             }
         }
 
         private void bt_setup3_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Title = "選取文字編輯程式";
-            openFileDialog1.FileName = "";
-            openFileDialog1.Filter = "程式|*.exe|所有檔|*.*";   //限定檔案格式
-            openFileDialog1.FilterIndex = 1;
-            openFileDialog1.RestoreDirectory = true;
-            openFileDialog1.InitialDirectory = "C:\\";         //從目前目錄開始尋找檔案
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            folderBrowserDialog1.SelectedPath = "C:\\"; //預設開啟的路徑
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
-                tb_setup3.Text = openFileDialog1.FileName;
+                // vcs搜尋路徑
+                tb_setup3.Text = folderBrowserDialog1.SelectedPath;
+            }
+            else
+            {
+                //richTextBox2.Text = "未選取資料夾\n";
             }
         }
 
@@ -186,7 +208,7 @@ namespace vcs_DiskDirectoryFile1
             folderBrowserDialog1.SelectedPath = "C:\\"; //預設開啟的路徑
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
-                //預設搜尋路徑
+                // python搜尋路徑
                 tb_setup4.Text = folderBrowserDialog1.SelectedPath;
             }
             else
@@ -226,9 +248,9 @@ namespace vcs_DiskDirectoryFile1
             //儲存
             Properties.Settings.Default.video_player_path = tb_setup0.Text;
             //Properties.Settings.Default.audio_player_path = tb_setup1.Text;
-            //Properties.Settings.Default.picture_viewer_path = tb_setup2.Text;
-            //Properties.Settings.Default.text_editor_path = tb_setup3.Text;
-            Properties.Settings.Default.search_path = tb_setup4.Text;
+            Properties.Settings.Default.search_path = tb_setup2.Text;
+            Properties.Settings.Default.vcs_foldername = tb_setup3.Text;
+            Properties.Settings.Default.python_foldername = tb_setup4.Text;
             Properties.Settings.Default.doc_foldername = tb_setup5.Text;
             Properties.Settings.Default.git_foldername = tb_setup6.Text;
 
