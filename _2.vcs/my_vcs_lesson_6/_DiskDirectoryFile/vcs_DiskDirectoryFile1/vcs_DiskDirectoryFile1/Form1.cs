@@ -585,13 +585,20 @@ namespace vcs_DiskDirectoryFile1
             int ddy = 34;
             tb_search.Size = new Size(w + 100 + 15 - 50, 100);
             tb_search.Location = new Point(x_st + dx * 1 + 100, y_st + dy * 0 + 5 + ddy * 1);
+            listBox_search.Size = new Size(w + 100 + 15, 100);
+            listBox_search.Location = new Point(x_st + dx * 1 + 100, y_st + dy * 0 + 5 + ddy * 2);
+            listBox_search.BringToFront();
+            listBox_search.Visible = false;
             tb_foldername.Size = new Size(w + 100 + 15, 100);
-            tb_foldername.Location = new Point(x_st + dx * 1 + 100, y_st + dy * 0 + 5 + +ddy * 2);
+            tb_foldername.Location = new Point(x_st + dx * 1 + 100, y_st + dy * 0 + 5 + ddy * 2);
             tb_filename.Size = new Size(w + 100 + 15, 100);
-            tb_filename.Location = new Point(x_st + dx * 1 + 100, y_st + dy * 0 + 5 + +ddy * 3);
+            tb_filename.Location = new Point(x_st + dx * 1 + 100, y_st + dy * 0 + 5 + ddy * 3);
 
-            cb_search_pattern.Location = new Point(x_st + dx * 3 - 52, y_st + dy * 0 + ddy * 1 + 12);
+            cb_search_pattern.Location = new Point(x_st + dx * 3 - 52, y_st + dy * 0 + ddy * 1 + 12 - 8);
             cb_search_pattern.Text = "搜尋";
+            cb_search_option1.Location = new Point(x_st + dx * 3 - 52, y_st + dy * 0 + ddy * 1 + 12 + 8);
+            cb_search_option1.Text = "滿30";
+
             cb_search_this_folder.Location = new Point(x_st + dx * 3 - 16, y_st + dy * 0 + 12);
             cb_search_this_folder.Text = "";
 
@@ -600,16 +607,8 @@ namespace vcs_DiskDirectoryFile1
             dx = 70;
             dy = 30;
 
-            groupBox_search.Size = new Size(380, 76);
+            groupBox_search.Size = new Size(370, 76);
             groupBox_search.Location = new Point(x_st + dx * 9, y_st + dy * 0 - 10);
-
-            int dd = 48;
-            bt_export_foldername.Location = new Point(x_st + dx * 14 + 35 + dd * 0, y_st + dy * 0);
-            bt_setup.Location = new Point(x_st + dx * 14 + 35 + dd * 1, y_st + dy * 0);
-            bt_test1.Location = new Point(x_st + dx * 14 + 35 + dd * 2, y_st + dy * 0);
-            bt_test2.Location = new Point(x_st + dx * 14 + 35 + dd * 3, y_st + dy * 0);
-            bt_test3.Location = new Point(x_st + dx * 14 + 35 + dd * 4, y_st + dy * 0);
-            bt_test4.Location = new Point(x_st + dx * 14 + 35 + dd * 5, y_st + dy * 0);
 
             //搜尋條件
             x_st = 10;
@@ -637,23 +636,6 @@ namespace vcs_DiskDirectoryFile1
             groupBox_compare.Size = new Size(220, 60);
             groupBox_compare.Location = new Point(x_st + dx * 9, y_st + dy * 2 + 10);  // 比較
 
-
-            ddy = 20;
-            bt_export_filename.Location = new Point(x_st + dx * 12 + 20 + dd * 0, y_st + dy * 2 + ddy);
-            bt_export_video.Location = new Point(x_st + dx * 12 + 20 + dd * 1, y_st + dy * 2 + ddy);
-            bt_export_doc.Location = new Point(x_st + dx * 12 + 20 + dd * 2, y_st + dy * 2 + ddy);
-            bt_search_pattern_vcs.Location = new Point(x_st + dx * 12 + 20 + dd * 3, y_st + dy * 2 + ddy);
-            bt_search_pattern_python.Location = new Point(x_st + dx * 12 + 20 + dd * 4, y_st + dy * 2 + ddy);
-            bt_start_files.Location = new Point(x_st + dx * 12 + 20 + dd * 5, y_st + dy * 2 + ddy);
-            bt_start_all_files.Location = new Point(x_st + dx * 12 + 20 + dd * 6, y_st + dy * 2 + ddy);
-            bt_start_files_good.Location = new Point(x_st + dx * 12 + 20 + dd * 7, y_st + dy * 2 + ddy);
-            bt_delete_file.Location = new Point(x_st + dx * 12 + 20 + dd * 8, y_st + dy * 2 + ddy);
-            bt_open_folder.Location = new Point(x_st + dx * 12 + 20 + dd * 9, y_st + dy * 2 + ddy);
-            lb_search_result1.Location = new Point(x_st + dx * 12 + 20 + dd * 10, y_st + dy * 1 + 25 + ddy);
-            lb_search_result2.Location = new Point(x_st + dx * 12 + 20 + dd * 10, y_st + dy * 1 + 55 + ddy);
-            lb_search_result1.Text = "";
-            lb_search_result2.Text = "";
-
             dx = 80;
             dy = 20;
             cb_search_same_files0.Location = new Point(x_st + dx * 0, y_st + dy * 0);  // 同
@@ -665,6 +647,36 @@ namespace vcs_DiskDirectoryFile1
             cb_search_same_files2.Text = "完整容量";
             cb_search_same_files3.Text = "模糊容量";
             bt_compare.Location = new Point(x_st + dx * 2, y_st + dy * 0 - 9);
+
+            //那些小icon
+            x_st = 1020;
+            y_st = 10;
+            dx = 48;
+            dy = 48;
+            //那些小icon 第0排
+            bt_export_foldername.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_export_filename.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            bt_export_video.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            bt_export_doc.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            bt_start_files.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            bt_start_all_files.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            bt_start_files_good.Location = new Point(x_st + dx * 6, y_st + dy * 0);
+            //那些小icon 第1排
+            bt_search_pattern_vcs.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_search_pattern_python.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            bt_delete_file.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            bt_open_folder.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            //那些小icon 第2排
+            bt_setup.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            bt_test1.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            bt_test2.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            bt_test3.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            bt_test4.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+            //那些小icon 第2排 左
+            lb_search_result1.Location = new Point(x_st + dx * -3, y_st + dy * 2);
+            lb_search_result2.Location = new Point(x_st + dx * -3, y_st + dy * 2 + 24);
+            lb_search_result1.Text = "";
+            lb_search_result2.Text = "";
 
             //針對某控件的邊緣 設定表單大小
             this.ClientSize = new Size(richTextBox1.Right + 10, richTextBox1.Bottom + 10);
@@ -4426,6 +4438,10 @@ namespace vcs_DiskDirectoryFile1
             {
                 //Enter
                 e.Handled = true;
+
+                listBox_search.Items.Add(tb_search.Text);
+
+                listBox_search.Visible = false;
             }
             else if (e.KeyChar == (Char)27)  //撈取ESC
             {
@@ -4433,6 +4449,8 @@ namespace vcs_DiskDirectoryFile1
                 tb_search.Text = tb_search_text_old;  // 恢復
 
                 e.Handled = true;
+
+                listBox_search.Visible = false;
             }
             else
             {
@@ -4941,6 +4959,11 @@ namespace vcs_DiskDirectoryFile1
         {
             TextBox tb = sender as TextBox;
             tb.SelectAll();
+
+            if (tb.Name == "tb_search")
+            {
+                listBox_search.Visible = true;
+            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -5446,6 +5469,12 @@ namespace vcs_DiskDirectoryFile1
                 }
                 e.Handled = true;
             }
+        }
+
+        private void listBox_search_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            tb_search.Text = listBox_search.SelectedItem.ToString();
+            listBox_search.Visible = false;
         }
 
         //------------------------------------------------------------  # 60個
