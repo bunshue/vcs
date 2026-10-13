@@ -55,6 +55,7 @@ namespace vcs_DiskDirectoryFile1
 
         string result_str = string.Empty;
         int search_mode = SEARCH_MODE_VCS;
+        bool flag_show_30_message = false;
 
         bool flag_export_filename = false;  // 匯出檔名
         bool flag_export_video = false;  // 找影片檔
@@ -67,6 +68,9 @@ namespace vcs_DiskDirectoryFile1
         string python_foldername = string.Empty;
         string doc_foldername = string.Empty;
         string video_player_path = String.Empty;
+        string text_editor_path = String.Empty;
+        string python_editor_path = String.Empty;
+        string winmerge_path = String.Empty;
         string tb_foldername_text_old = string.Empty;
         string tb_filename_text_old = string.Empty;
         string tb_foldername1_text_old = string.Empty;
@@ -271,6 +275,9 @@ namespace vcs_DiskDirectoryFile1
             filesize_min = Properties.Settings.Default.filesize_min;  // 搜尋 資料夾/檔案 的下限
             filesize_max = Properties.Settings.Default.filesize_max;  // 搜尋 資料夾/檔案 的上限
             video_player_path = Properties.Settings.Default.video_player_path;
+            text_editor_path = Properties.Settings.Default.text_editor_path;
+            python_editor_path = Properties.Settings.Default.python_editor_path;
+            winmerge_path = Properties.Settings.Default.winmerge_path;
             vcs_foldername = Properties.Settings.Default.vcs_foldername;
             python_foldername = Properties.Settings.Default.python_foldername;
             doc_foldername = Properties.Settings.Default.doc_foldername;
@@ -332,6 +339,12 @@ namespace vcs_DiskDirectoryFile1
             {
                 richTextBox1.Text += "播放影片程式不存在 : " + Properties.Settings.Default.video_player_path + "\n使用Windows預設播放影片程式\n";
                 video_player_path = String.Empty;
+            }
+
+            if (System.IO.File.Exists(Properties.Settings.Default.winmerge_path) == false)
+            {
+                result_str += "winmerge程式不存在 : " + Properties.Settings.Default.winmerge_path + "\n使用Windows預設文字編輯程式\n";
+                winmerge_path = String.Empty;
             }
 
             string search_foldernames = Properties.Settings.Default.search_foldernames;
@@ -664,8 +677,10 @@ namespace vcs_DiskDirectoryFile1
             //那些小icon 第1排
             bt_search_pattern_vcs.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             bt_search_pattern_python.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            bt_delete_file.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            bt_open_folder.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            bt_open_with_vcs_python.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            bt_winmerge.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            bt_delete_file.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            bt_open_folder.Location = new Point(x_st + dx * 5, y_st + dy * 1);
             //那些小icon 第2排
             bt_setup.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             bt_test1.Location = new Point(x_st + dx * 1, y_st + dy * 2);
@@ -3919,6 +3934,19 @@ namespace vcs_DiskDirectoryFile1
 
         private void ProcessFile(string filename)
         {
+            if (cb_search_option1.Checked == true)
+            {
+                if (fileinfos.Count >= 30)
+                {
+                    if (flag_show_30_message == false)
+                    {
+                        flag_show_30_message = true;
+                        richTextBox1.Text += "滿30結束\n";
+                    }
+                    return;
+                }
+            }
+
             FileInfo fi = new FileInfo(filename);
 
             if (check_file_condition(fi) == false)
@@ -4162,6 +4190,19 @@ namespace vcs_DiskDirectoryFile1
                 }
                 else
                 {
+                    return;
+                }
+            }
+
+            if (cb_search_option1.Checked == true)
+            {
+                if (fileinfos.Count >= 30)
+                {
+                    if (flag_show_30_message == false)
+                    {
+                        flag_show_30_message = true;
+                        richTextBox1.Text += "滿30結束\n";
+                    }
                     return;
                 }
             }
@@ -4476,6 +4517,12 @@ namespace vcs_DiskDirectoryFile1
             {
                 e.Handled = false;
             }
+
+            // 限制textbox只能輸入數字
+            if (e.KeyChar.CompareTo('0') < 0 || e.KeyChar.CompareTo('9') > 0) //比較輸入值的範圍是否超出數字
+            {
+                e.Handled = true;// Handled 為是否鎖住輸入
+            }
         }
 
         private void tb_limit_max_KeyPress(object sender, KeyPressEventArgs e)
@@ -4495,6 +4542,12 @@ namespace vcs_DiskDirectoryFile1
             else
             {
                 e.Handled = false;
+            }
+
+            // 限制textbox只能輸入數字
+            if (e.KeyChar.CompareTo('0') < 0 || e.KeyChar.CompareTo('9') > 0) //比較輸入值的範圍是否超出數字
+            {
+                e.Handled = true;// Handled 為是否鎖住輸入
             }
         }
 
@@ -5297,7 +5350,7 @@ namespace vcs_DiskDirectoryFile1
             tb_limit_max_text_old = tb_limit_max.Text;
             show_item_location_listview();
 
-            tb_search.Text = "google";
+            tb_search.Text = "TBGBMBKB";
 
             result_str = string.Empty;
 
@@ -5319,17 +5372,229 @@ namespace vcs_DiskDirectoryFile1
         private void bt_search_pattern_vcs_Click(object sender, EventArgs e)
         {
             // 搜尋 VCS 關鍵字, 搜尋文字
+            bt_search_pattern_vcs.BackgroundImage = null;
+            bt_search_pattern_vcs.BackColor = Color.Red;
 
             search_mode = SEARCH_MODE_VCS;
+            bt_open_with_vcs_python.BackgroundImage = vcs_DiskDirectoryFile1.Properties.Resources.vcs2;
+            flag_show_30_message = false;
             do_search_pattern();
+
+            bt_search_pattern_vcs.BackgroundImage = vcs_DiskDirectoryFile1.Properties.Resources.vcs;
+            bt_search_pattern_vcs.BackColor = SystemColors.ControlLight;
         }
 
         private void bt_search_pattern_python_Click(object sender, EventArgs e)
         {
             // 搜尋 python 關鍵字, 搜尋文字
+            bt_search_pattern_python.BackgroundImage = null;
+            bt_search_pattern_python.BackColor = Color.Red;
 
             search_mode = SEARCH_MODE_PYTHON;
+            bt_open_with_vcs_python.BackgroundImage = vcs_DiskDirectoryFile1.Properties.Resources.python2;
+            flag_show_30_message = false;
             do_search_pattern();
+
+            bt_search_pattern_python.BackgroundImage = vcs_DiskDirectoryFile1.Properties.Resources.python;
+            bt_search_pattern_python.BackColor = SystemColors.ControlLight;
+        }
+
+        private void bt_open_with_vcs_python_Click(object sender, EventArgs e)
+        {
+            if (search_mode == SEARCH_MODE_VCS)
+            {
+                //執行vcs
+                richTextBox1.Text += "用vcs開啟\n";
+
+                result_str = "";
+                int cnt = listView_file.SelectedItems.Count;
+                if (cnt > 0)
+                {
+                    int selNdx = listView_file.SelectedIndices[0];
+
+                    result_str += "aaaa b3你選擇了檔名3:\t" + listView_file.Items[selNdx].SubItems[0].Text + "\n";
+
+                    string foldername = listView_file.Items[selNdx].SubItems[3].Text;
+                    result_str += "資料夾:\t" + foldername + "\n";
+
+                    string fullname = listView_file.Items[selNdx].SubItems[3].Text + "\\" + listView_file.Items[selNdx].SubItems[0].Text;
+                    result_str += "全檔名:\t" + fullname + "\n";
+
+                    richTextBox1.Text += result_str + "\n";
+
+                    //撈出資料夾內特定類型的檔案
+                    string searchDirectory = foldername;
+                    string searchPattern = "*.csproj";
+
+                    richTextBox1.Text += "撈出資料夾內特定類型的檔案\t單層\tPattern : " + searchPattern + "\n";
+
+                    List<string> filenames = new List<string>();
+                    string[] pattern_array = searchPattern.Split(';');
+
+                    // Search.
+                    System.IO.SearchOption search_option = System.IO.SearchOption.TopDirectoryOnly;
+                    foreach (string pattern in pattern_array)
+                    {
+                        foreach (string filename in Directory.GetFiles(searchDirectory, pattern, search_option))
+                        {
+                            if (!filenames.Contains(filename))
+                            {
+                                filenames.Add(filename);
+                            }
+                        }
+                    }
+
+                    foreach (string filename in filenames)
+                    {
+                        richTextBox1.Text += "找到 : " + filename + "\n";
+                        Process.Start(filename);
+                    }
+                }
+            }
+            else if (search_mode == SEARCH_MODE_PYTHON)
+            {
+                //執行python
+                int selectCount = listView_file.SelectedIndices.Count;
+                /*
+                result_str += "你選擇了 : " + selectCount.ToString() + " 個檔案, 分別是\n";
+                for (int i = 0; i < selectCount; i++)
+                {
+                    result_str += listView_file.SelectedItems[i].SubItems[3].Text + "\\" + listView_file.SelectedItems[i].SubItems[0].Text + "\n";
+                }
+                result_str += "開啟\n";
+                */
+
+                int selNdx;
+                string all_filename = string.Empty;
+
+                if (selectCount <= 0)  //總共選擇的個數
+                {
+                    result_str += "無檔案\n";
+                    return;
+                }
+                /*
+                //result_str += "總共選了 : " + listView_file.SelectedItems.Count.ToString() + " 個檔案，分別是 : \n";
+                //for (int i = 0; i < selectCount; i++)
+                for (int i = 0; i < listView_file.SelectedItems.Count; i++)
+                {
+                    selNdx = listView_file.SelectedIndices[i];
+                    listView_file.Items[selNdx].Selected = true;    //選到的項目
+                    //result_str += listView_file.Items[selNdx].Text + "\n";
+
+                    if (flag_function == FUNCTION_SEARCH_TEXT)
+                    {
+                        all_filename += " \"" + listView_file.Items[selNdx].SubItems[3].Text + "\\" + listView_file.Items[selNdx].Text + "\"";
+                    }
+                    else
+                    {
+                        all_filename += " \"" + listView_file.Items[selNdx].SubItems[3].Text + "\\" + listView_file.Items[selNdx].SubItems[2].Text + "\"";
+                    }
+                }
+
+                result_str += "all_filename : " + all_filename + "\n";
+
+                string prog = @"C:\Users\070601\AppData\Local\Programs\Python\Python311\Lib\idlelib\idle.pyw";
+
+                if (python_editor_path == string.Empty)
+                {
+                    python_editor_path = prog;
+                }
+
+                Process.Start(python_editor_path, all_filename);
+
+                return;
+
+                //指定應用程式路徑
+                string target = String.Empty;
+
+                //方法一
+                //Process.Start(target, "參數");
+                //Process.Start(target, all_filename);
+
+                //方法二
+
+                if (flag_search_vcs_pattern == 0)
+                {
+                    target = video_player_path;
+                }
+                else
+                {
+                    target = text_editor_path;
+                }
+
+                if (flag_search_vcs_pattern == 0)
+                {
+                    if (video_player_path == String.Empty)
+                    {
+                        all_filename = all_filename.Trim().Replace("\"", "");
+                        Process.Start(all_filename); //使用預設程式開啟, 無法一次播放多個檔案
+                    }
+                    else
+                    {
+                        Process.Start(video_player_path, all_filename);    //指名播放程式開啟
+                    }
+                }
+                else
+                {
+                    if (System.IO.File.Exists(text_editor_path) == true)
+                    {
+                        Process.Start(text_editor_path, all_filename);
+                    }
+                }
+                */
+            }
+        }
+
+        private void bt_winmerge_Click(object sender, EventArgs e)
+        {
+            int selectCount = listView_file.SelectedIndices.Count;
+
+            if (selectCount != 2)
+            {
+                richTextBox1.Text += "必須要選取2個檔案才能比較\n";
+                return;
+            }
+
+            result_str += "你選擇了 : " + selectCount.ToString() + " 個檔案, 分別是\n";
+            for (int i = 0; i < selectCount; i++)
+            {
+                result_str += listView_file.SelectedItems[i].SubItems[1].Text + "\\" + listView_file.SelectedItems[i].SubItems[0].Text + "\n";
+            }
+
+            int selNdx;
+            string all_filename = string.Empty;
+            /*
+            //result_str += "總共選了 : " + listView_file.SelectedItems.Count.ToString() + " 個檔案，分別是 : \n";
+            //for (int i = 0; i < selectCount; i++)
+            for (int i = 0; i < listView_file.SelectedItems.Count; i++)
+            {
+                selNdx = listView_file.SelectedIndices[i];
+                listView_file.Items[selNdx].Selected = true;    //選到的項目
+                //result_str += listView_file.Items[selNdx].Text + "\n";
+
+                if (flag_function == FUNCTION_SEARCH_TEXT)
+                {
+                    all_filename += " \"" + listView_file.Items[selNdx].SubItems[1].Text + "\\" + listView_file.Items[selNdx].Text + "\"";
+                }
+                else
+                {
+                    all_filename += " \"" + listView_file.Items[selNdx].SubItems[3].Text + "\\" + listView_file.Items[selNdx].SubItems[2].Text + "\"";
+                }
+            }
+
+            result_str += "all_filename : " + all_filename + "\n";
+
+            string prog = @"C:/Program Files (x86)/WinMerge/WinMergeU.exe";
+
+            if (winmerge_path == string.Empty)
+            {
+                winmerge_path = prog;
+            }
+
+            Process.Start(winmerge_path, all_filename);
+            */
+            return;
+
         }
 
         private void bt_open_folder_Click(object sender, EventArgs e)
@@ -5357,7 +5622,7 @@ namespace vcs_DiskDirectoryFile1
                     Process.Start(foldername);
                 }
             }
-            else if (flag_export_filename == true)  // 匯出檔名
+            else if ((flag_export_filename == true) || (flag_search_Katfile == true) || (flag_search_text_mode == true))  // 匯出檔名 或 Katfile 或 搜尋文字模式
             {
                 cnt = listView_file.SelectedItems.Count;
 
@@ -5365,7 +5630,7 @@ namespace vcs_DiskDirectoryFile1
                 {
                     int selNdx = listView_file.SelectedIndices[0];
 
-                    string foldername = listView_file.Items[selNdx].SubItems[0].Text;
+                    string foldername = listView_file.Items[selNdx].SubItems[3].Text;
                     richTextBox1.Text += "資料夾:\t" + foldername + "\n";
 
                     /*
@@ -5476,7 +5741,6 @@ namespace vcs_DiskDirectoryFile1
             tb_search.Text = listBox_search.SelectedItem.ToString();
             listBox_search.Visible = false;
         }
-
         //------------------------------------------------------------  # 60個
     }
 }

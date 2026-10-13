@@ -1,36 +1,31 @@
 ﻿
-Visual C# TextBox Size要自訂 不要自動大小 字串要置中排列
+Visual C# TextBox Size要自訂 不要自動大小 字串要置中排列 看起來有問題 都不好用
 
 DDF 在 kilo 排版會亂掉  其他的也會嗎?
 
 //------------------------------------------------------------  # 60個
 
-            //拆解 pattern 範例
+//拆解 pattern 範例
 
-            string searchPattern = "*.cs;*.csv;*.ico";
-            searchPattern = "*.bmp;*.png;*.jpg;*.tif;*.gif";
+string searchPattern = "*.cs;*.csv;*.ico";
+searchPattern = "*.bmp;*.png;*.jpg;*.tif;*.gif";
 
-            string[] pattern_array = searchPattern.Split(';');
+string[] pattern_array = searchPattern.Split(';');
 
-            foreach (string pattern in pattern_array)
-            {
-                richTextBox1.Text += "pattern : " + pattern + "\n";
-            }
+foreach (string pattern in pattern_array)
+{
+	richTextBox1.Text += "pattern : " + pattern + "\n";
+}
 
-            string[] patterns = { "*.png", "*.bmp", "*.jpg", "*.jpeg", "*.gif" };     //指名搜尋pattern
-            foreach (string pattern in patterns)  // 多個搜尋pattern
-            {
-            }
+string[] patterns = { "*.png", "*.bmp", "*.jpg", "*.jpeg", "*.gif" };     //指名搜尋pattern
+foreach (string pattern in patterns)  // 多個搜尋pattern
+{
+}
 
 //------------------------------------------------------------  # 60個
 
 //針對某控件的邊緣 設定表單大小
 this.ClientSize = new Size(richTextBox1.Right + 50, richTextBox1.Bottom + 50);
-
-
-
-dialog
-vcs_SendTo_All	要準備一大堆 icon 檔
 
 //------------------------------------------------------------  # 60個
 
@@ -63,30 +58,6 @@ axWindowsMediaPlayer1.currentPlaylist = axWindowsMediaPlayer1.newPlaylist("播�
 
 //------------------------------------------------------------  # 60個
 
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            // 限制textbox只能輸入數字
-            if (e.KeyChar.CompareTo('0') < 0 || e.KeyChar.CompareTo('9') > 0) //比較輸入值的範圍是否超出數字
-            {
-                e.Handled = true;// Handled 為是否鎖住輸入
-            }
-        }
-
-//------------------------------------------------------------  # 60個
-
-            folderBrowserDialog1.SelectedPath = @"D:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-            {
-                path = folderBrowserDialog1.SelectedPath;
-                richTextBox1.Text += "選取資料夾: " + folderBrowserDialog1.SelectedPath + "\n";
-            }
-            else
-            {
-                richTextBox1.Text = "未選取資料夾\n";
-            }
-
-//------------------------------------------------------------  # 60個
-
 //若是圖片, 秀出來
 string ext = fi.Extension.ToLower();
 if ((ext == ".bmp") || (ext == ".jpg") || (ext == ".png"))
@@ -99,6 +70,7 @@ else
 }
 
 //------------------------------------------------------------  # 60個
+
 draw translate-transform
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -1158,11 +1130,6 @@ plt.text(
 plt.suptitle(
     "7:00 pm May 10-12 McComb Auditorium", x=0.52, y=0.095, fontsize=15, color="brown"
 )
-
-//------------------------------------------------------------  # 60個
-
-//待測試
-    folderBrowserDialog1.ShowNewFolderButton = checkBox1.Checked;
 
 //------------------------------------------------------------  # 60個
 
@@ -4073,7 +4040,6 @@ http://davidhsu666.com/archives/context_menu/
         bool bIsEnterKeyPressed = false;
         private void pictureBox1_KeyDown(object sender, KeyEventArgs e)
         {
-
             if (e.KeyCode == Keys.Enter)
             {
                 bIsEnterKeyPressed = true;
@@ -4082,7 +4048,6 @@ http://davidhsu666.com/archives/context_menu/
             {
                 int x = pictureBox1.Location.X;
                 int y = pictureBox1.Location.Y;
-
                 {
                     if (e.KeyCode == Keys.Right) x += 50;
                     else if (e.KeyCode == Keys.Left) x -= 50;
@@ -6372,6 +6337,9 @@ openFileDialog1.Filter = "*.jpg,*.jpeg,*.bmp,*.gif,*.ico,*.png,*.wmf|*.jpg;*.jpe
 
 //------------------------------------------------------------  # 60個
 
+//待測試
+folderBrowserDialog1.ShowNewFolderButton = checkBox1.Checked;
+
 vcs_test_all_04_Dialog
 
             // 設定FolderBrowserDialog的初值
@@ -6391,20 +6359,17 @@ filter all
 開啟檔案對話的filter的寫法
 
 圖片
-            openFileDialog1.Filter =
-                "Images (*.BMP;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF|" +
-                "All files (*.*)|*.*";
-
+openFileDialog1.Filter = "Images (*.BMP;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF | All files (*.*)|*.*";
 
 openFileDialog1.Filter = "圖片(*.bmp,*.jpg,*.png)|*.bmp;*.jpg;*.png";
-出現下拉式選單1項:	圖片(*.bmp,*.jpg,*.png)|*.bmp;*.jpg;*.png	//顯示|前的 "圖片(*.bmp,*.jpg,*.png)"
+出現下拉式選單1項:	  圖片(*.bmp,*.jpg,*.png)|*.bmp;*.jpg;*.png	//顯示|前的 "圖片(*.bmp,*.jpg,*.png)"
 
 openFileDialog1.Filter = "BMP|*.bmp|JPG|*.jpg|PNG|*.png|GIF|*.gif";
 出現下拉式選單4項:
-		BMP|*.bmp   |
-		JPG|*.jpg   |
-		PNG|*.png   |
-		GIF|*.gif
+			BMP|*.bmp   |
+			JPG|*.jpg   |
+			PNG|*.png   |
+			GIF|*.gif
 
 openFileDialog1.Filter = "*.jpg,*.jpeg,*.bmp,*.gif,*.ico,*.png,*.tif,*.wmf|*.jpg;*.jpeg;*.bmp;*.gif;*.ico;*.png;*.tif;*.wmf";
 openFileDialog1.Filter = "jpg (*.jpg)|*.jpg|bmp (*.bmp)|*.bmp|png (*.png)|*.png";
@@ -6418,7 +6383,6 @@ openFileDialog1.Filter = "Bitmaps|*.bmp|PNG files|*.png|JPEG files|*.jpg|Picture
                 "png;*.tif|CS files|*.cs|Project files|*.csproj|Program files|*.cs;*.csproj;*.sln" +
                 ";*.suo;*.resx";
 						
-// Use many filters.
 openFileDialog1.Filter =
                 "Image files|*.bmp;*.jpg;*.gif;*.png;*.tif|" +
                 "Bitmaps|*.bmp|PNG files|*.png|" +
@@ -6426,12 +6390,10 @@ openFileDialog1.Filter =
                 "All files|*.*";
 openFileDialog1.FilterIndex = 0;
 
-// Use only the Image files and All files filters.
 openFileDialog1.Filter =
                 "Image files|*.bmp;*.jpg;*.gif;*.png;*.tif|" +
                 "All files|*.*";
 openFileDialog1.FilterIndex = 0;
-
 
 openFileDialog的多重選擇寫法:
             // Set the file dialog to filter for graphics files.

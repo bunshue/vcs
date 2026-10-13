@@ -406,5 +406,41 @@ namespace vcs_DiskDirectoryFile1.Properties {
                 this["python_foldername"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string winmerge_path {
+            get {
+                return ((string)(this["winmerge_path"]));
+            }
+            set {
+                this["winmerge_path"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string text_editor_path {
+            get {
+                return ((string)(this["text_editor_path"]));
+            }
+            set {
+                this["text_editor_path"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string python_editor_path {
+            get {
+                return ((string)(this["python_editor_path"]));
+            }
+            set {
+                this["python_editor_path"] = value;
+            }
+        }
     }
 }

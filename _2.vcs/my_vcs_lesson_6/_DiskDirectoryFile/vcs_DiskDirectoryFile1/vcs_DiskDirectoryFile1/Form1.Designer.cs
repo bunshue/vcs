@@ -57,6 +57,8 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.tb_search = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cb_search_option1 = new System.Windows.Forms.CheckBox();
+            this.listBox_search = new System.Windows.Forms.ListBox();
             this.bt_search_pattern_python = new System.Windows.Forms.Button();
             this.groupBox_compare = new System.Windows.Forms.GroupBox();
             this.bt_compare = new System.Windows.Forms.Button();
@@ -113,8 +115,8 @@
             this.listView_dir = new System.Windows.Forms.ListView();
             this.listView_file = new System.Windows.Forms.ListView();
             this.listView_video = new System.Windows.Forms.ListView();
-            this.listBox_search = new System.Windows.Forms.ListBox();
-            this.cb_search_option1 = new System.Windows.Forms.CheckBox();
+            this.bt_open_with_vcs_python = new System.Windows.Forms.Button();
+            this.bt_winmerge = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox_compare.SuspendLayout();
             this.groupBox_search.SuspendLayout();
@@ -405,6 +407,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.bt_winmerge);
+            this.groupBox1.Controls.Add(this.bt_open_with_vcs_python);
             this.groupBox1.Controls.Add(this.cb_search_option1);
             this.groupBox1.Controls.Add(this.listBox_search);
             this.groupBox1.Controls.Add(this.bt_search_pattern_python);
@@ -441,15 +445,38 @@
             this.groupBox1.TabIndex = 259;
             this.groupBox1.TabStop = false;
             // 
+            // cb_search_option1
+            // 
+            this.cb_search_option1.AutoSize = true;
+            this.cb_search_option1.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_search_option1.Location = new System.Drawing.Point(306, 73);
+            this.cb_search_option1.Name = "cb_search_option1";
+            this.cb_search_option1.Size = new System.Drawing.Size(77, 17);
+            this.cb_search_option1.TabIndex = 306;
+            this.cb_search_option1.Text = "滿30結束";
+            this.cb_search_option1.UseVisualStyleBackColor = true;
+            // 
+            // listBox_search
+            // 
+            this.listBox_search.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.listBox_search.FormattingEnabled = true;
+            this.listBox_search.ItemHeight = 19;
+            this.listBox_search.Location = new System.Drawing.Point(426, 15);
+            this.listBox_search.Name = "listBox_search";
+            this.listBox_search.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.listBox_search.Size = new System.Drawing.Size(100, 99);
+            this.listBox_search.TabIndex = 303;
+            this.listBox_search.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox_search_MouseDoubleClick);
+            // 
             // bt_search_pattern_python
             // 
+            this.bt_search_pattern_python.BackgroundImage = global::vcs_DiskDirectoryFile1.Properties.Resources.python;
             this.bt_search_pattern_python.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_search_pattern_python.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_search_pattern_python.Location = new System.Drawing.Point(268, 206);
+            this.bt_search_pattern_python.Location = new System.Drawing.Point(268, 205);
             this.bt_search_pattern_python.Name = "bt_search_pattern_python";
             this.bt_search_pattern_python.Size = new System.Drawing.Size(45, 45);
             this.bt_search_pattern_python.TabIndex = 305;
-            this.bt_search_pattern_python.Text = "py";
             this.bt_search_pattern_python.UseVisualStyleBackColor = true;
             this.bt_search_pattern_python.Click += new System.EventHandler(this.bt_search_pattern_python_Click);
             // 
@@ -788,7 +815,7 @@
             this.bt_open_folder.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_open_folder.BackgroundImage")));
             this.bt_open_folder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_open_folder.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_open_folder.Location = new System.Drawing.Point(372, 205);
+            this.bt_open_folder.Location = new System.Drawing.Point(471, 204);
             this.bt_open_folder.Name = "bt_open_folder";
             this.bt_open_folder.Size = new System.Drawing.Size(45, 45);
             this.bt_open_folder.TabIndex = 275;
@@ -835,7 +862,7 @@
             this.lb_search_result1.AutoSize = true;
             this.lb_search_result1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lb_search_result1.ForeColor = System.Drawing.Color.Red;
-            this.lb_search_result1.Location = new System.Drawing.Point(498, 206);
+            this.lb_search_result1.Location = new System.Drawing.Point(502, 252);
             this.lb_search_result1.Name = "lb_search_result1";
             this.lb_search_result1.Size = new System.Drawing.Size(65, 19);
             this.lb_search_result1.TabIndex = 260;
@@ -846,7 +873,7 @@
             this.lb_search_result2.AutoSize = true;
             this.lb_search_result2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lb_search_result2.ForeColor = System.Drawing.Color.Red;
-            this.lb_search_result2.Location = new System.Drawing.Point(498, 229);
+            this.lb_search_result2.Location = new System.Drawing.Point(502, 275);
             this.lb_search_result2.Name = "lb_search_result2";
             this.lb_search_result2.Size = new System.Drawing.Size(65, 19);
             this.lb_search_result2.TabIndex = 262;
@@ -977,7 +1004,7 @@
             this.bt_delete_file.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_delete_file.BackgroundImage")));
             this.bt_delete_file.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_delete_file.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_delete_file.Location = new System.Drawing.Point(321, 205);
+            this.bt_delete_file.Location = new System.Drawing.Point(421, 204);
             this.bt_delete_file.Name = "bt_delete_file";
             this.bt_delete_file.Size = new System.Drawing.Size(45, 45);
             this.bt_delete_file.TabIndex = 75;
@@ -1101,28 +1128,30 @@
             this.listView_video.View = System.Windows.Forms.View.Details;
             this.listView_video.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.listView_video_KeyPress);
             // 
-            // listBox_search
+            // bt_open_with_vcs_python
             // 
-            this.listBox_search.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.listBox_search.FormattingEnabled = true;
-            this.listBox_search.ItemHeight = 19;
-            this.listBox_search.Location = new System.Drawing.Point(426, 15);
-            this.listBox_search.Name = "listBox_search";
-            this.listBox_search.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.listBox_search.Size = new System.Drawing.Size(100, 99);
-            this.listBox_search.TabIndex = 303;
-            this.listBox_search.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox_search_MouseDoubleClick);
+            this.bt_open_with_vcs_python.BackgroundImage = global::vcs_DiskDirectoryFile1.Properties.Resources.vcs2;
+            this.bt_open_with_vcs_python.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_open_with_vcs_python.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_open_with_vcs_python.Location = new System.Drawing.Point(320, 204);
+            this.bt_open_with_vcs_python.Name = "bt_open_with_vcs_python";
+            this.bt_open_with_vcs_python.Size = new System.Drawing.Size(45, 45);
+            this.bt_open_with_vcs_python.TabIndex = 307;
+            this.bt_open_with_vcs_python.UseVisualStyleBackColor = true;
+            this.bt_open_with_vcs_python.Click += new System.EventHandler(this.bt_open_with_vcs_python_Click);
             // 
-            // cb_search_option1
+            // bt_winmerge
             // 
-            this.cb_search_option1.AutoSize = true;
-            this.cb_search_option1.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_search_option1.Location = new System.Drawing.Point(306, 73);
-            this.cb_search_option1.Name = "cb_search_option1";
-            this.cb_search_option1.Size = new System.Drawing.Size(77, 17);
-            this.cb_search_option1.TabIndex = 306;
-            this.cb_search_option1.Text = "滿30結束";
-            this.cb_search_option1.UseVisualStyleBackColor = true;
+            this.bt_winmerge.BackColor = System.Drawing.Color.White;
+            this.bt_winmerge.BackgroundImage = global::vcs_DiskDirectoryFile1.Properties.Resources.winmerge;
+            this.bt_winmerge.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_winmerge.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_winmerge.Location = new System.Drawing.Point(373, 205);
+            this.bt_winmerge.Name = "bt_winmerge";
+            this.bt_winmerge.Size = new System.Drawing.Size(45, 45);
+            this.bt_winmerge.TabIndex = 308;
+            this.bt_winmerge.UseVisualStyleBackColor = false;
+            this.bt_winmerge.Click += new System.EventHandler(this.bt_winmerge_Click);
             // 
             // Form1
             // 
@@ -1270,6 +1299,8 @@
         private System.Windows.Forms.Button bt_search_pattern_python;
         private System.Windows.Forms.ListBox listBox_search;
         private System.Windows.Forms.CheckBox cb_search_option1;
+        private System.Windows.Forms.Button bt_open_with_vcs_python;
+        private System.Windows.Forms.Button bt_winmerge;
     }
 }
 

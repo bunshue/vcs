@@ -27,7 +27,7 @@ namespace vcs_DiskDirectoryFile1
         {
             lb_main_mesg.Text = "";
             lb_setup0.Text = "播放影片程式";
-            lb_setup1.Text = "播放音樂程式";
+            lb_setup1.Text = "WinMerge程式路徑";
             lb_setup2.Text = "預設搜尋路徑";
             lb_setup3.Text = "vcs搜尋路徑";
             lb_setup4.Text = "python搜尋路徑";
@@ -35,7 +35,7 @@ namespace vcs_DiskDirectoryFile1
             lb_setup6.Text = "Git路徑";
 
             tb_setup0.Text = Properties.Settings.Default.video_player_path;
-            //tb_setup1.Text = Properties.Settings.Default.audio_player_path;
+            tb_setup1.Text = Properties.Settings.Default.winmerge_path;  // WinMerge程式路徑
 
             string search_path = Properties.Settings.Default.search_path;
             string vcs_foldername = Properties.Settings.Default.vcs_foldername;
@@ -163,7 +163,7 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_setup1_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Title = "選取播放音樂程式";
+            openFileDialog1.Title = "選取WinMerge程式";
             openFileDialog1.FileName = "";
             openFileDialog1.Filter = "程式|*.exe|所有檔|*.*";   //限定檔案格式
             openFileDialog1.FilterIndex = 1;
@@ -247,7 +247,7 @@ namespace vcs_DiskDirectoryFile1
         {
             //儲存
             Properties.Settings.Default.video_player_path = tb_setup0.Text;
-            //Properties.Settings.Default.audio_player_path = tb_setup1.Text;
+            Properties.Settings.Default.winmerge_path = tb_setup1.Text;
             Properties.Settings.Default.search_path = tb_setup2.Text;
             Properties.Settings.Default.vcs_foldername = tb_setup3.Text;
             Properties.Settings.Default.python_foldername = tb_setup4.Text;

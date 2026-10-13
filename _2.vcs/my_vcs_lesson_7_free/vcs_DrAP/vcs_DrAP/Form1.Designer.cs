@@ -35,7 +35,6 @@
             this.tb_search = new System.Windows.Forms.TextBox();
             this.bt_clear1 = new System.Windows.Forms.Button();
             this.bt_clear2 = new System.Windows.Forms.Button();
-            this.cb_option1 = new System.Windows.Forms.CheckBox();
             this.bt_clear3 = new System.Windows.Forms.Button();
             this.groupbox_python = new System.Windows.Forms.GroupBox();
             this.bt_edit_python_files = new System.Windows.Forms.Button();
@@ -44,7 +43,6 @@
             this.lb_search_result2 = new System.Windows.Forms.Label();
             this.lb_search_result1 = new System.Windows.Forms.Label();
             this.bt_replace = new System.Windows.Forms.Button();
-            this.bt_compare = new System.Windows.Forms.Button();
             this.bt_open_dir2 = new System.Windows.Forms.Button();
             this.bt_copy_rtb_data = new System.Windows.Forms.Button();
             this.bt_setup = new System.Windows.Forms.Button();
@@ -122,19 +120,6 @@
             this.bt_clear2.Text = "清除";
             this.bt_clear2.UseVisualStyleBackColor = true;
             this.bt_clear2.Click += new System.EventHandler(this.bt_clear2_Click);
-            // 
-            // cb_option1
-            // 
-            this.cb_option1.AutoSize = true;
-            this.cb_option1.Checked = true;
-            this.cb_option1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_option1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_option1.Location = new System.Drawing.Point(21, 61);
-            this.cb_option1.Name = "cb_option1";
-            this.cb_option1.Size = new System.Drawing.Size(103, 23);
-            this.cb_option1.TabIndex = 51;
-            this.cb_option1.Text = "滿30結束";
-            this.cb_option1.UseVisualStyleBackColor = true;
             // 
             // bt_clear3
             // 
@@ -228,19 +213,6 @@
             this.bt_replace.UseVisualStyleBackColor = false;
             this.bt_replace.Click += new System.EventHandler(this.bt_replace_Click);
             // 
-            // bt_compare
-            // 
-            this.bt_compare.BackColor = System.Drawing.Color.White;
-            this.bt_compare.BackgroundImage = global::vcs_DrAP.Properties.Resources.winmerge;
-            this.bt_compare.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_compare.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_compare.Location = new System.Drawing.Point(287, 7);
-            this.bt_compare.Name = "bt_compare";
-            this.bt_compare.Size = new System.Drawing.Size(50, 50);
-            this.bt_compare.TabIndex = 66;
-            this.bt_compare.UseVisualStyleBackColor = false;
-            this.bt_compare.Click += new System.EventHandler(this.bt_compare_Click);
-            // 
             // bt_open_dir2
             // 
             this.bt_open_dir2.BackgroundImage = global::vcs_DrAP.Properties.Resources.open_folder;
@@ -321,14 +293,12 @@
             this.Controls.Add(this.bt_open_with_ue);
             this.Controls.Add(this.bt_open_with_vcs);
             this.Controls.Add(this.bt_replace);
-            this.Controls.Add(this.bt_compare);
             this.Controls.Add(this.groupbox_result);
             this.Controls.Add(this.groupbox_python);
             this.Controls.Add(this.bt_open_dir2);
             this.Controls.Add(this.bt_clear3);
             this.Controls.Add(this.bt_copy_rtb_data);
             this.Controls.Add(this.bt_setup);
-            this.Controls.Add(this.cb_option1);
             this.Controls.Add(this.bt_clear2);
             this.Controls.Add(this.bt_clear1);
             this.Controls.Add(this.bt_search_pattern_vcs);
@@ -359,7 +329,6 @@
         private System.Windows.Forms.Button bt_clear1;
         private System.Windows.Forms.Button bt_clear2;
         private System.Windows.Forms.Button bt_search_pattern_python;
-        private System.Windows.Forms.CheckBox cb_option1;
         private System.Windows.Forms.Button bt_setup;
         private System.Windows.Forms.Button bt_copy_rtb_data;
         private System.Windows.Forms.Button bt_clear3;
@@ -369,7 +338,6 @@
         private System.Windows.Forms.GroupBox groupbox_result;
         private System.Windows.Forms.Label lb_search_result2;
         private System.Windows.Forms.Label lb_search_result1;
-        private System.Windows.Forms.Button bt_compare;
         private System.Windows.Forms.Button bt_replace;
         private System.Windows.Forms.Button bt_open_with_vcs;
         private System.Windows.Forms.Button bt_open_with_ue;

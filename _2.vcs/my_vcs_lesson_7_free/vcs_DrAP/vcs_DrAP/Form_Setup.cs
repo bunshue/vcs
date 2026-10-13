@@ -30,7 +30,6 @@ namespace vcs_DrAP
             lb_setup3.Text = "文字編輯程式";
             lb_setup4.Text = "預設搜尋路徑";
             lb_setup5.Text = "Python編輯路徑";
-            lb_setup6.Text = "WinMerge程式路徑";
 
             tb_setup0.Text = Properties.Settings.Default.video_player_path;
             tb_setup1.Text = Properties.Settings.Default.audio_player_path;
@@ -38,7 +37,6 @@ namespace vcs_DrAP
             tb_setup3.Text = Properties.Settings.Default.text_editor_path;
             tb_setup4.Text = Properties.Settings.Default.search_path;
             tb_setup5.Text = Properties.Settings.Default.python_editor_path;
-            tb_setup6.Text = Properties.Settings.Default.winmerge_path;
 
             show_item_location();
         }
@@ -197,16 +195,6 @@ namespace vcs_DrAP
 
         private void bt_setup6_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Title = "選取WinMerge程式";
-            openFileDialog1.FileName = "";
-            openFileDialog1.Filter = "程式|*.exe|所有檔|*.*";   //限定檔案格式
-            openFileDialog1.FilterIndex = 1;
-            openFileDialog1.RestoreDirectory = true;
-            openFileDialog1.InitialDirectory = "C:\\";         //從目前目錄開始尋找檔案
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                tb_setup6.Text = openFileDialog1.FileName;
-            }
         }
 
         private void bt_setup_save_Click(object sender, EventArgs e)
@@ -218,7 +206,6 @@ namespace vcs_DrAP
             Properties.Settings.Default.text_editor_path = tb_setup3.Text;
             Properties.Settings.Default.search_path = tb_setup4.Text;
             Properties.Settings.Default.python_editor_path = tb_setup5.Text;
-            Properties.Settings.Default.winmerge_path = tb_setup6.Text;
 
             Properties.Settings.Default.Save();
             show_main_message("儲存設定完成", S_OK, 30);

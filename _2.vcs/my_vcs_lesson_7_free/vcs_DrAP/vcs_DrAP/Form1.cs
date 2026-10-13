@@ -42,7 +42,6 @@ namespace vcs_DrAP
         string picture_viewer_path = String.Empty;
         string text_editor_path = String.Empty;
         string python_editor_path = String.Empty;
-        string winmerge_path = String.Empty;
         string search_path = @"D:\_git\vcs\_2.vcs";
         string default_vcs_path = @"D:\_git\vcs\_2.vcs";
         string default_python_path = @"D:\_git\vcs\_4.python";
@@ -53,7 +52,6 @@ namespace vcs_DrAP
         string result_str = string.Empty;
 
         int search_mode = SEARCH_MODE_VCS;
-        bool flag_show_30_message = false;
 
         //不用宣告長度的陣列(Array)
         // 宣告fileinfos 為List
@@ -122,7 +120,6 @@ namespace vcs_DrAP
             int dx = w + 5;
             int dy = h + 5;
 
-            cb_option1.Location = new Point(x_st + dx * 0, y_st + dy * 0);  // 滿30結束
             tb_search.Size = new Size(160, 60);
             tb_search.Location = new Point(x_st + dx * 0, y_st + dy * 1);
 
@@ -130,7 +127,6 @@ namespace vcs_DrAP
             bt_open_with_vcs.Location = new Point(x_st + dx * 3, y_st + dy * 1);
             bt_open_dir2.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             bt_open_with_ue.Location = new Point(x_st + dx * 4, y_st + dy * 1);
-            bt_compare.Location = new Point(x_st + dx * 5, y_st + dy * 0);
             bt_replace.Location = new Point(x_st + dx * 5, y_st + dy * 1);
             bt_setup.Location = new Point(x_st + dx * 6, y_st + dy * 0);
 
@@ -410,93 +406,6 @@ namespace vcs_DrAP
 
         private void bt_edit_python_files_Click(object sender, EventArgs e)
         {
-            int selectCount = listView1.SelectedIndices.Count;
-            /*
-            result_str += "你選擇了 : " + selectCount.ToString() + " 個檔案, 分別是\n";
-            for (int i = 0; i < selectCount; i++)
-            {
-                result_str += listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
-            }
-            result_str += "開啟\n";
-            */
-
-            int selNdx;
-            string all_filename = string.Empty;
-
-            if (selectCount <= 0)  //總共選擇的個數
-            {
-                result_str += "無檔案\n";
-                return;
-            }
-
-            //result_str += "總共選了 : " + listView1.SelectedItems.Count.ToString() + " 個檔案，分別是 : \n";
-            //for (int i = 0; i < selectCount; i++)
-            for (int i = 0; i < listView1.SelectedItems.Count; i++)
-            {
-                selNdx = listView1.SelectedIndices[i];
-                listView1.Items[selNdx].Selected = true;    //選到的項目
-                //result_str += listView1.Items[selNdx].Text + "\n";
-
-                if (flag_function == FUNCTION_SEARCH_TEXT)
-                {
-                    all_filename += " \"" + listView1.Items[selNdx].SubItems[1].Text + "\\" + listView1.Items[selNdx].Text + "\"";
-                }
-                else
-                {
-                    all_filename += " \"" + listView1.Items[selNdx].SubItems[3].Text + "\\" + listView1.Items[selNdx].SubItems[2].Text + "\"";
-                }
-            }
-
-            result_str += "all_filename : " + all_filename + "\n";
-
-            string prog = @"C:\Users\070601\AppData\Local\Programs\Python\Python311\Lib\idlelib\idle.pyw";
-
-            if (python_editor_path == string.Empty)
-            {
-                python_editor_path = prog;
-            }
-
-            Process.Start(python_editor_path, all_filename);
-
-            return;
-
-            //指定應用程式路徑
-            string target = String.Empty;
-
-            //方法一
-            //Process.Start(target, "參數");
-            //Process.Start(target, all_filename);
-
-            //方法二
-
-            if (flag_search_vcs_pattern == 0)
-            {
-                target = video_player_path;
-            }
-            else
-            {
-                target = text_editor_path;
-            }
-
-            if (flag_search_vcs_pattern == 0)
-            {
-                if (video_player_path == String.Empty)
-                {
-                    all_filename = all_filename.Trim().Replace("\"", "");
-                    Process.Start(all_filename); //使用預設程式開啟, 無法一次播放多個檔案
-                }
-                else
-                {
-                    Process.Start(video_player_path, all_filename);    //指名播放程式開啟
-                }
-            }
-            else
-            {
-                if (System.IO.File.Exists(text_editor_path) == true)
-                {
-                    Process.Start(text_editor_path, all_filename);
-                }
-            }
         }
 
         private void listView1_KeyDown(object sender, KeyEventArgs e)
@@ -602,38 +511,10 @@ namespace vcs_DrAP
 
         private void ProcessFileS(string filename)
         {
-            if (cb_option1.Checked == true)
-            {
-                if (fileinfos.Count >= 30)
-                {
-                    if (flag_show_30_message == false)
-                    {
-                        flag_show_30_message = true;
-                        richTextBox1.Text += "滿30結束\n";
-                    }
-                    return;
-                }
-            }
-
             FileInfo fi = new FileInfo(filename);
 
             //在這裡做處理檔案的事情
             get_fileinfo(fi);
-
-            //------------------------------------------------------------  # 60個
-
-            if (cb_option1.Checked == true)
-            {
-                if (fileinfos.Count >= 30)
-                {
-                    if (flag_show_30_message == false)
-                    {
-                        flag_show_30_message = true;
-                        richTextBox1.Text += "滿30結束\n";
-                    }
-                    return;
-                }
-            }
         }
 
         private void bt_search_pattern_vcs_Click(object sender, EventArgs e)
@@ -744,8 +625,6 @@ namespace vcs_DrAP
 
             Application.DoEvents();
 
-            flag_show_30_message = false;
-
             if (tb_search.Text == "")
             {
                 result_str += "未輸入搜尋內容\n";
@@ -813,7 +692,6 @@ namespace vcs_DrAP
             picture_viewer_path = Properties.Settings.Default.picture_viewer_path;
             text_editor_path = Properties.Settings.Default.text_editor_path;
             python_editor_path = Properties.Settings.Default.python_editor_path;
-            winmerge_path = Properties.Settings.Default.winmerge_path;
 
             if (System.IO.File.Exists(Properties.Settings.Default.video_player_path) == false)
             {
@@ -845,11 +723,6 @@ namespace vcs_DrAP
                 python_editor_path = String.Empty;
             }
 
-            if (System.IO.File.Exists(Properties.Settings.Default.winmerge_path) == false)
-            {
-                result_str += "winmerge程式不存在 : " + Properties.Settings.Default.winmerge_path + "\n使用Windows預設文字編輯程式\n";
-                winmerge_path = String.Empty;
-            }
         }
 
         private void bt_copy_rtb_data_Click(object sender, EventArgs e)
@@ -858,56 +731,6 @@ namespace vcs_DrAP
             //Clipboard.SetData(DataFormats.Text, richTextBox1.Text + "\n");
             Clipboard.SetDataObject(richTextBox2.Text + "\n");      //建議用此
             richTextBox2.Text += "已複製資料到系統剪貼簿\n";
-        }
-
-        private void bt_compare_Click(object sender, EventArgs e)
-        {
-            int selectCount = listView1.SelectedIndices.Count;
-
-            if (selectCount != 2)
-            {
-                richTextBox1.Text += "必須要選取2個檔案才能比較\n";
-                return;
-            }
-
-            result_str += "你選擇了 : " + selectCount.ToString() + " 個檔案, 分別是\n";
-            for (int i = 0; i < selectCount; i++)
-            {
-                result_str += listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
-            }
-
-            int selNdx;
-            string all_filename = string.Empty;
-
-            //result_str += "總共選了 : " + listView1.SelectedItems.Count.ToString() + " 個檔案，分別是 : \n";
-            //for (int i = 0; i < selectCount; i++)
-            for (int i = 0; i < listView1.SelectedItems.Count; i++)
-            {
-                selNdx = listView1.SelectedIndices[i];
-                listView1.Items[selNdx].Selected = true;    //選到的項目
-                //result_str += listView1.Items[selNdx].Text + "\n";
-
-                if (flag_function == FUNCTION_SEARCH_TEXT)
-                {
-                    all_filename += " \"" + listView1.Items[selNdx].SubItems[1].Text + "\\" + listView1.Items[selNdx].Text + "\"";
-                }
-                else
-                {
-                    all_filename += " \"" + listView1.Items[selNdx].SubItems[3].Text + "\\" + listView1.Items[selNdx].SubItems[2].Text + "\"";
-                }
-            }
-
-            result_str += "all_filename : " + all_filename + "\n";
-
-            string prog = @"C:/Program Files (x86)/WinMerge/WinMergeU.exe";
-
-            if (winmerge_path == string.Empty)
-            {
-                winmerge_path = prog;
-            }
-
-            Process.Start(winmerge_path, all_filename);
-            return;
         }
 
         //------------------------------------------------------------  # 60個
@@ -959,53 +782,6 @@ namespace vcs_DrAP
 
         private void bt_open_with_vcs_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "用vcs開啟\n";
-
-            result_str = "";
-
-            int cnt = listView1.SelectedItems.Count;
-            if (cnt > 0)
-            {
-                int selNdx = listView1.SelectedIndices[0];
-
-                result_str += "aaaa b3你選擇了檔名3:\t" + listView1.Items[selNdx].SubItems[0].Text + "\n";
-
-                string foldername = listView1.Items[selNdx].SubItems[1].Text;
-                result_str += "資料夾:\t" + foldername + "\n";
-
-                string fullname = listView1.Items[selNdx].SubItems[1].Text + "\\" + listView1.Items[selNdx].SubItems[0].Text;
-                result_str += "全檔名:\t" + fullname + "\n";
-
-                richTextBox1.Text += result_str + "\n";
-
-                //撈出資料夾內特定類型的檔案
-                string searchDirectory = foldername;
-                string searchPattern = "*.csproj";
-
-                richTextBox1.Text += "撈出資料夾內特定類型的檔案\t單層\tPattern : " + searchPattern + "\n";
-
-                List<string> filenames = new List<string>();
-                string[] pattern_array = searchPattern.Split(';');
-
-                // Search.
-                System.IO.SearchOption search_option = System.IO.SearchOption.TopDirectoryOnly;
-                foreach (string pattern in pattern_array)
-                {
-                    foreach (string filename in Directory.GetFiles(searchDirectory, pattern, search_option))
-                    {
-                        if (!filenames.Contains(filename))
-                        {
-                            filenames.Add(filename);
-                        }
-                    }
-                }
-
-                foreach (string filename in filenames)
-                {
-                    richTextBox1.Text += "找到 : " + filename + "\n";
-                    Process.Start(filename);
-                }
-            }
         }
 
         //------------------------------------------------------------  # 60個
