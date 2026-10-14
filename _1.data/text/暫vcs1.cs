@@ -1,4 +1,48 @@
-﻿
+﻿        private void richTextBox2_TextChanged(object sender, EventArgs e)
+        {
+            //RichTextBox顯示訊息自動捲動 顯示最後一行
+            richTextBox2.SelectionStart = richTextBox2.TextLength;
+            richTextBox2.ScrollToCaret();
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            //RichTextBox顯示訊息自動捲動 顯示最後一行
+            richTextBox1.SelectionStart = richTextBox1.TextLength;
+            richTextBox1.ScrollToCaret();
+        }
+
+
+
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)8))
+            {
+                e.Handled = false;
+            }
+            else if (e.KeyChar == (Char)13)
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+
+            /*
+            // 限制textbox只能輸入數字
+            if(e.KeyChar.CompareTo('0')<0 || e.KeyChar.CompareTo('9')>0) //比較輸入值的範圍是否超出數字
+                e.Handled = true;// Handled 為是否鎖住輸入
+            */
+        }
+
+6060
+
 Visual C# TextBox Size要自訂 不要自動大小 字串要置中排列 看起來有問題 都不好用
 
 DDF 在 kilo 排版會亂掉  其他的也會嗎?

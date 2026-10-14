@@ -53,9 +53,9 @@ namespace vcs_DiskDirectoryFile1
 
         private const int SEARCH_MODE_VCS = 0x00;	    //search vcs code, 搜尋vcs內的關鍵字
         private const int SEARCH_MODE_PYTHON = 0x01;	//search python code, 搜尋python內的關鍵字
+        int search_mode = SEARCH_MODE_VCS;
 
         string result_str = string.Empty;
-        int search_mode = SEARCH_MODE_VCS;
         bool flag_show_30_message = false;
 
         bool flag_export_filename = false;  // 匯出檔名
@@ -72,6 +72,9 @@ namespace vcs_DiskDirectoryFile1
         string text_editor_path = String.Empty;
         string python_editor_path = String.Empty;
         string winmerge_path = String.Empty;
+        string search_path = @"D:\_git\vcs\_2.vcs";
+        string default_vcs_path = @"D:\_git\vcs\_2.vcs";
+        string default_python_path = @"D:\_git\vcs\_4.python";
         string tb_foldername_text_old = string.Empty;
         string tb_filename_text_old = string.Empty;
         string tb_foldername1_text_old = string.Empty;
@@ -348,6 +351,13 @@ namespace vcs_DiskDirectoryFile1
                 richTextBox1.Text += "文字編輯程式不存在 : " + Properties.Settings.Default.text_editor_path + "\n使用Windows預設文字編輯程式\n";
                 text_editor_path = String.Empty;
             }
+
+            if (System.IO.File.Exists(Properties.Settings.Default.python_editor_path) == false)
+            {
+                result_str += "python編輯程式不存在 : " + Properties.Settings.Default.python_editor_path + "\n使用Windows預設文字編輯程式\n";
+                python_editor_path = String.Empty;
+            }
+
 
             if (System.IO.File.Exists(Properties.Settings.Default.winmerge_path) == false)
             {
@@ -1796,7 +1806,6 @@ namespace vcs_DiskDirectoryFile1
             //MediaInfo
             filename = @"D:\_git\vcs\_1.data\______test_files1\_mp3\02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3";
             get_MediaInfo(filename);
-
         }
 
         private void bt_file12_Click(object sender, EventArgs e)
@@ -2985,6 +2994,63 @@ namespace vcs_DiskDirectoryFile1
             tb_filename_text_old = listView_file.Items[idx].Text;  // 檔案名稱 或許不要副檔名
 
             return;
+
+            int selectCount = listView_file.SelectedIndices.Count;
+            /*
+            int selNdx;
+            string fullname;
+
+            selNdx = listView_file.SelectedIndices[0];
+
+            result_str += "aaa:\t" + listView_file.Items[selNdx].Text + "\n";
+            result_str += "bbb:\t" + listView_file.Items[selNdx].SubItems[1].Text + "\n";
+            result_str += "ccc:\t" + listView_file.Items[selNdx].SubItems[2].Text + "\n";
+            result_str += "ddd:\t" + listView_file.Items[selNdx].SubItems[3].Text + "\n";
+            */
+
+            int selNdx;
+            string fullname;
+
+            selNdx = listView_file.SelectedIndices[0];
+            listView_file.Items[selNdx].Selected = true;    //選到的項目
+            result_str += "count = " + selectCount.ToString() + "\t";
+            result_str += "你選擇了檔名:\t" + listView_file.Items[selNdx].Text + "\n";
+            result_str += "資料夾:\t" + listView_file.Items[selNdx].SubItems[1].Text + "\n";
+
+            //搜尋字串模式
+            result_str += "aaaa b1你選擇了檔名1:\t" + listView_file.Items[selNdx].SubItems[0].Text + "\n";
+            result_str += "資料夾:\t" + listView_file.Items[selNdx].SubItems[1].Text + "\n";
+            fullname = listView_file.Items[selNdx].SubItems[1].Text + "\\" + listView_file.Items[selNdx].SubItems[0].Text;
+
+            //if (flag_search_vcs_pattern == 0)
+            {
+                FileInfo fi = new FileInfo(fullname);
+
+                //result_str += "fullname = " + fullname + ",  ext = " + fi.Extension + "\n";
+
+                if (fi.Extension == ".txt")
+                {
+                    //Process.Start(text_editor_path, fullname);
+                }
+                else
+                {
+                    result_str += "video_player_path = " + video_player_path + "\n";
+                    result_str += "fullname = " + fullname + "\n";
+
+                    if (video_player_path == String.Empty)
+                    {
+                        //Process.Start(fullname); //使用預設程式開啟
+                    }
+                    else
+                    {
+                        //Process.Start(video_player_path, fullname);    //指名播放程式開啟
+                    }
+                }
+            }
+            //else
+            {
+                //Process.Start(text_editor_path, fullname);
+            }
         }
 
         private void listView_video_MouseClick(object sender, MouseEventArgs e)
@@ -3045,6 +3111,74 @@ namespace vcs_DiskDirectoryFile1
             else
             {
                 richTextBox1.Text += "檔案 : " + fullname + " , 不存在\n";
+            }
+            */
+
+            int selNdx;
+            string fullname;
+            int selectCount = listView_file.SelectedIndices.Count;
+
+            selNdx = listView_file.SelectedIndices[0];
+            listView_file.Items[selNdx].Selected = true;    //選到的項目
+            //result_str += "count = " + selectCount.ToString() + "\t";
+            //result_str += "你選擇了檔名:\t" + listView_file.Items[selNdx].Text + "\n";
+            //result_str += "資料夾:\t" + listView_file.Items[selNdx].SubItems[1].Text + "\n";
+
+            //搜尋字串模式
+            result_str += "aaaa b2你選擇了檔名2:\t" + listView_file.Items[selNdx].SubItems[0].Text + "\n";
+            result_str += "資料夾:\t" + listView_file.Items[selNdx].SubItems[1].Text + "\n";
+            fullname = listView_file.Items[selNdx].SubItems[1].Text + "\\" + listView_file.Items[selNdx].SubItems[0].Text;
+
+            /*
+            if (flag_search_vcs_pattern == 0)
+            {
+                FileInfo fi = new FileInfo(fullname);
+
+                //result_str += "fullname = " + fullname + ",  ext = " + fi.Extension + "\n";
+
+                if (fi.Extension == ".txt")
+                {
+                    if (System.IO.File.Exists(text_editor_path) == true)
+                    {
+                        Process.Start(text_editor_path, fullname);
+                    }
+                }
+                else if (fi.Extension == ".py")
+                {
+                    if (System.IO.File.Exists(python_editor_path) == true)
+                    {
+                        Process.Start(python_editor_path, fullname);
+                    }
+                }
+                else
+                {
+                    result_str += "video_player_path = " + video_player_path + "\n";
+                    result_str += "fullname = " + fullname + "\n";
+
+                    if (video_player_path == String.Empty)
+                    {
+                        Process.Start(fullname); //使用預設程式開啟
+                    }
+                    else
+                    {
+                        if (System.IO.File.Exists(video_player_path) == true)
+                        {
+                            Process.Start(video_player_path, fullname);    //指名播放程式開啟
+                        }
+                    }
+                }
+            }
+            else
+            {
+                //result_str += "text_editor_path = " + text_editor_path + "\t" + "fullname = " + fullname + "\n";
+                if (System.IO.File.Exists(text_editor_path) == true)
+                {
+                    Process.Start(text_editor_path, fullname);
+                }
+                else
+                {
+                    result_str += "開啟程式不存在\n";
+                }
             }
             */
         }
@@ -5409,6 +5543,12 @@ namespace vcs_DiskDirectoryFile1
 
         void do_search_pattern()
         {
+            if (tb_search_pattern.Text == "")
+            {
+                result_str += "未輸入搜尋內容\n";
+                return;
+            }
+
             //搜尋文字
             flag_export_foldername = false;  // 找資料夾, 全/空/小
             flag_export_filename = false;  // 匯出檔名
@@ -5419,8 +5559,6 @@ namespace vcs_DiskDirectoryFile1
             tb_limit_min_text_old = tb_limit_min.Text;
             tb_limit_max_text_old = tb_limit_max.Text;
             show_item_location_listview();
-
-            tb_search.Text = "TBGBMBKB";
 
             result_str = string.Empty;
 
@@ -5635,7 +5773,7 @@ namespace vcs_DiskDirectoryFile1
                 richTextBox1.Text += listView_file.SelectedItems[i].SubItems[1].Text + "\\" + listView_file.SelectedItems[i].SubItems[0].Text + "\n";
             }
 
-            int selNdx;
+            //int selNdx;
             string all_filename = string.Empty;
             /*
             //richTextBox1.Text += "總共選了 : " + listView_file.SelectedItems.Count.ToString() + " 個檔案，分別是 : \n";
@@ -6175,9 +6313,60 @@ int selectCount = listView1.SelectedIndices.Count;
 
 //------------------------------------------------------------  # 60個
 
+            if (e.KeyCode == Keys.F2)
+            {
+                result_str += "你按了F2\n";
+
+                if (selectCount <= 0)  //總共選擇的個數
+                    return;
+
+                int selNdx = listView1.SelectedIndices[0];
+                listView1.Items[selNdx].Selected = true;    //選到的項目
+                //richTextBox1.Text += "count = " + selectCount.ToString() + "\t";
+                result_str += "你選擇了" + listView1.Items[selNdx].Text + "\t內容為：\n";
+
+                //ListViewItem t = listView1.Items[selNdx]; //相同寫法
+                //richTextBox1.Text += t.Text + "\t" + t.SubItems[1].Text + "\t" + t.SubItems[2].Text + "\n";
+                result_str += listView1.Items[selNdx].Text + "\t" + listView1.Items[selNdx].SubItems[1].Text + "\t" + listView1.Items[selNdx].SubItems[2].Text + "\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
+            }
 
 */
 
 
 
+
+
+/*
+
+        private void listView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            int selectCount = listView1.SelectedIndices.Count;
+
+            //result_str += "KeyDown, 按鍵是：" + e.KeyCode + "\n";
+
+            if (e.KeyCode == Keys.A)
+            {
+                if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
+                {
+                    //result_str += "Ctrl + A\n";
+                    //result_str += "共有項目" + listView1.Items.Count.ToString() + " 個\n";
+
+                    for (int i = 0; i < listView1.Items.Count; i++)
+                    {
+                        //result_str += listView1.Items[i] + "\n";
+                        listView1.Items[i].Selected = true;
+                    }
+                }
+            }
+        }
+
+*/
+
+
+
+
+
+                //listView1.Items.Add(i1);
+                //設置ListView最後一行可見
+                //listView1.Items[listView1.Items.Count - 1].EnsureVisible();
 
