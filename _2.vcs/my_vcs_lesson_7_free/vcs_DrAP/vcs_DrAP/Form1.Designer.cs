@@ -36,21 +36,11 @@
             this.bt_clear1 = new System.Windows.Forms.Button();
             this.bt_clear2 = new System.Windows.Forms.Button();
             this.bt_clear3 = new System.Windows.Forms.Button();
-            this.groupbox_python = new System.Windows.Forms.GroupBox();
-            this.bt_edit_python_files = new System.Windows.Forms.Button();
-            this.bt_search_pattern_python = new System.Windows.Forms.Button();
-            this.groupbox_result = new System.Windows.Forms.GroupBox();
             this.lb_search_result2 = new System.Windows.Forms.Label();
             this.lb_search_result1 = new System.Windows.Forms.Label();
-            this.bt_replace = new System.Windows.Forms.Button();
-            this.bt_open_dir2 = new System.Windows.Forms.Button();
             this.bt_copy_rtb_data = new System.Windows.Forms.Button();
             this.bt_setup = new System.Windows.Forms.Button();
             this.bt_search_pattern_vcs = new System.Windows.Forms.Button();
-            this.bt_open_with_vcs = new System.Windows.Forms.Button();
-            this.bt_open_with_ue = new System.Windows.Forms.Button();
-            this.groupbox_python.SuspendLayout();
-            this.groupbox_result.SuspendLayout();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -132,58 +122,12 @@
             this.bt_clear3.UseVisualStyleBackColor = true;
             this.bt_clear3.Click += new System.EventHandler(this.bt_clear3_Click);
             // 
-            // groupbox_python
-            // 
-            this.groupbox_python.Controls.Add(this.bt_edit_python_files);
-            this.groupbox_python.Controls.Add(this.bt_search_pattern_python);
-            this.groupbox_python.Location = new System.Drawing.Point(118, 124);
-            this.groupbox_python.Name = "groupbox_python";
-            this.groupbox_python.Size = new System.Drawing.Size(131, 132);
-            this.groupbox_python.TabIndex = 64;
-            this.groupbox_python.TabStop = false;
-            this.groupbox_python.Text = "Python";
-            // 
-            // bt_edit_python_files
-            // 
-            this.bt_edit_python_files.BackgroundImage = global::vcs_DrAP.Properties.Resources.python2;
-            this.bt_edit_python_files.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_edit_python_files.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_edit_python_files.Location = new System.Drawing.Point(71, 70);
-            this.bt_edit_python_files.Name = "bt_edit_python_files";
-            this.bt_edit_python_files.Size = new System.Drawing.Size(50, 50);
-            this.bt_edit_python_files.TabIndex = 62;
-            this.bt_edit_python_files.UseVisualStyleBackColor = true;
-            this.bt_edit_python_files.Click += new System.EventHandler(this.bt_edit_python_files_Click);
-            // 
-            // bt_search_pattern_python
-            // 
-            this.bt_search_pattern_python.BackgroundImage = global::vcs_DrAP.Properties.Resources.python;
-            this.bt_search_pattern_python.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_search_pattern_python.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_search_pattern_python.Location = new System.Drawing.Point(13, 70);
-            this.bt_search_pattern_python.Name = "bt_search_pattern_python";
-            this.bt_search_pattern_python.Size = new System.Drawing.Size(50, 50);
-            this.bt_search_pattern_python.TabIndex = 39;
-            this.bt_search_pattern_python.UseVisualStyleBackColor = true;
-            this.bt_search_pattern_python.Click += new System.EventHandler(this.bt_search_pattern_python_Click);
-            // 
-            // groupbox_result
-            // 
-            this.groupbox_result.Controls.Add(this.lb_search_result2);
-            this.groupbox_result.Controls.Add(this.lb_search_result1);
-            this.groupbox_result.Location = new System.Drawing.Point(263, 124);
-            this.groupbox_result.Name = "groupbox_result";
-            this.groupbox_result.Size = new System.Drawing.Size(173, 132);
-            this.groupbox_result.TabIndex = 65;
-            this.groupbox_result.TabStop = false;
-            this.groupbox_result.Text = "搜尋結果";
-            // 
             // lb_search_result2
             // 
             this.lb_search_result2.AutoSize = true;
             this.lb_search_result2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lb_search_result2.ForeColor = System.Drawing.Color.Red;
-            this.lb_search_result2.Location = new System.Drawing.Point(18, 65);
+            this.lb_search_result2.Location = new System.Drawing.Point(171, 115);
             this.lb_search_result2.Name = "lb_search_result2";
             this.lb_search_result2.Size = new System.Drawing.Size(78, 24);
             this.lb_search_result2.TabIndex = 67;
@@ -194,36 +138,11 @@
             this.lb_search_result1.AutoSize = true;
             this.lb_search_result1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lb_search_result1.ForeColor = System.Drawing.Color.Red;
-            this.lb_search_result1.Location = new System.Drawing.Point(18, 29);
+            this.lb_search_result1.Location = new System.Drawing.Point(171, 79);
             this.lb_search_result1.Name = "lb_search_result1";
             this.lb_search_result1.Size = new System.Drawing.Size(78, 24);
             this.lb_search_result1.TabIndex = 66;
             this.lb_search_result1.Text = "result1";
-            // 
-            // bt_replace
-            // 
-            this.bt_replace.BackColor = System.Drawing.Color.White;
-            this.bt_replace.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_replace.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_replace.Location = new System.Drawing.Point(287, 64);
-            this.bt_replace.Name = "bt_replace";
-            this.bt_replace.Size = new System.Drawing.Size(50, 50);
-            this.bt_replace.TabIndex = 69;
-            this.bt_replace.Text = "置換";
-            this.bt_replace.UseVisualStyleBackColor = false;
-            this.bt_replace.Click += new System.EventHandler(this.bt_replace_Click);
-            // 
-            // bt_open_dir2
-            // 
-            this.bt_open_dir2.BackgroundImage = global::vcs_DrAP.Properties.Resources.open_folder;
-            this.bt_open_dir2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_open_dir2.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_open_dir2.Location = new System.Drawing.Point(231, 7);
-            this.bt_open_dir2.Name = "bt_open_dir2";
-            this.bt_open_dir2.Size = new System.Drawing.Size(50, 50);
-            this.bt_open_dir2.TabIndex = 59;
-            this.bt_open_dir2.UseVisualStyleBackColor = true;
-            this.bt_open_dir2.Click += new System.EventHandler(this.bt_open_dir2_Click);
             // 
             // bt_copy_rtb_data
             // 
@@ -242,7 +161,7 @@
             this.bt_setup.BackgroundImage = global::vcs_DrAP.Properties.Resources.setup;
             this.bt_setup.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_setup.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_setup.Location = new System.Drawing.Point(343, 7);
+            this.bt_setup.Location = new System.Drawing.Point(257, 7);
             this.bt_setup.Name = "bt_setup";
             this.bt_setup.Size = new System.Drawing.Size(50, 50);
             this.bt_setup.TabIndex = 52;
@@ -261,41 +180,13 @@
             this.bt_search_pattern_vcs.UseVisualStyleBackColor = true;
             this.bt_search_pattern_vcs.Click += new System.EventHandler(this.bt_search_pattern_vcs_Click);
             // 
-            // bt_open_with_vcs
-            // 
-            this.bt_open_with_vcs.BackgroundImage = global::vcs_DrAP.Properties.Resources.vcs2;
-            this.bt_open_with_vcs.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_open_with_vcs.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_open_with_vcs.Location = new System.Drawing.Point(175, 64);
-            this.bt_open_with_vcs.Name = "bt_open_with_vcs";
-            this.bt_open_with_vcs.Size = new System.Drawing.Size(50, 50);
-            this.bt_open_with_vcs.TabIndex = 70;
-            this.bt_open_with_vcs.UseVisualStyleBackColor = true;
-            this.bt_open_with_vcs.Click += new System.EventHandler(this.bt_open_with_vcs_Click);
-            // 
-            // bt_open_with_ue
-            // 
-            this.bt_open_with_ue.BackgroundImage = global::vcs_DrAP.Properties.Resources.ultraedit;
-            this.bt_open_with_ue.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_open_with_ue.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_open_with_ue.Location = new System.Drawing.Point(231, 64);
-            this.bt_open_with_ue.Name = "bt_open_with_ue";
-            this.bt_open_with_ue.Size = new System.Drawing.Size(50, 50);
-            this.bt_open_with_ue.TabIndex = 71;
-            this.bt_open_with_ue.UseVisualStyleBackColor = true;
-            this.bt_open_with_ue.Click += new System.EventHandler(this.bt_open_with_ue_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(635, 466);
-            this.Controls.Add(this.bt_open_with_ue);
-            this.Controls.Add(this.bt_open_with_vcs);
-            this.Controls.Add(this.bt_replace);
-            this.Controls.Add(this.groupbox_result);
-            this.Controls.Add(this.groupbox_python);
-            this.Controls.Add(this.bt_open_dir2);
+            this.Controls.Add(this.lb_search_result2);
+            this.Controls.Add(this.lb_search_result1);
             this.Controls.Add(this.bt_clear3);
             this.Controls.Add(this.bt_copy_rtb_data);
             this.Controls.Add(this.bt_setup);
@@ -311,9 +202,6 @@
             this.Text = "DrAP";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.groupbox_python.ResumeLayout(false);
-            this.groupbox_result.ResumeLayout(false);
-            this.groupbox_result.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -328,19 +216,11 @@
         private System.Windows.Forms.Button bt_search_pattern_vcs;
         private System.Windows.Forms.Button bt_clear1;
         private System.Windows.Forms.Button bt_clear2;
-        private System.Windows.Forms.Button bt_search_pattern_python;
         private System.Windows.Forms.Button bt_setup;
         private System.Windows.Forms.Button bt_copy_rtb_data;
         private System.Windows.Forms.Button bt_clear3;
-        private System.Windows.Forms.Button bt_open_dir2;
-        private System.Windows.Forms.Button bt_edit_python_files;
-        private System.Windows.Forms.GroupBox groupbox_python;
-        private System.Windows.Forms.GroupBox groupbox_result;
         private System.Windows.Forms.Label lb_search_result2;
         private System.Windows.Forms.Label lb_search_result1;
-        private System.Windows.Forms.Button bt_replace;
-        private System.Windows.Forms.Button bt_open_with_vcs;
-        private System.Windows.Forms.Button bt_open_with_ue;
     }
 }
 

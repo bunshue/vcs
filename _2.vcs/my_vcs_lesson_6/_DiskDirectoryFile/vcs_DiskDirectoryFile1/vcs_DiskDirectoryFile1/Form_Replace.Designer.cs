@@ -1,4 +1,4 @@
-﻿namespace vcs_DrAP
+﻿namespace vcs_DiskDirectoryFile1
 {
     partial class Form_Replace
     {
@@ -77,7 +77,7 @@
             // 
             // bt_open_dir
             // 
-            this.bt_open_dir.BackgroundImage = global::vcs_DrAP.Properties.Resources.open_folder;
+            this.bt_open_dir.BackgroundImage = global::vcs_DiskDirectoryFile1.Properties.Resources.open_folder;
             this.bt_open_dir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_open_dir.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_open_dir.Location = new System.Drawing.Point(116, 87);

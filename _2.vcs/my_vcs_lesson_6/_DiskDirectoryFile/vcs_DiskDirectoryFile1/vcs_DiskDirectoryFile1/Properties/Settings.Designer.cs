@@ -442,5 +442,17 @@ namespace vcs_DiskDirectoryFile1.Properties {
                 this["python_editor_path"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string search_patterns {
+            get {
+                return ((string)(this["search_patterns"]));
+            }
+            set {
+                this["search_patterns"] = value;
+            }
+        }
     }
 }

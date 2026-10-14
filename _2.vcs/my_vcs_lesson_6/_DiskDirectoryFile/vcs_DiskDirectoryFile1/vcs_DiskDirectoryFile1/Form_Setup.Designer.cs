@@ -55,6 +55,9 @@
             this.bt_setup6 = new System.Windows.Forms.Button();
             this.tb_setup6 = new System.Windows.Forms.TextBox();
             this.lb_setup6 = new System.Windows.Forms.Label();
+            this.bt_setup7 = new System.Windows.Forms.Button();
+            this.tb_setup7 = new System.Windows.Forms.TextBox();
+            this.lb_setup7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lb_setup1
@@ -234,7 +237,7 @@
             // bt_setup_save
             // 
             this.bt_setup_save.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_setup_save.Location = new System.Drawing.Point(722, 383);
+            this.bt_setup_save.Location = new System.Drawing.Point(722, 388);
             this.bt_setup_save.Name = "bt_setup_save";
             this.bt_setup_save.Size = new System.Drawing.Size(94, 32);
             this.bt_setup_save.TabIndex = 18;
@@ -290,11 +293,43 @@
             this.lb_setup6.TabIndex = 20;
             this.lb_setup6.Text = "lb_setup6";
             // 
+            // bt_setup7
+            // 
+            this.bt_setup7.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_setup7.Location = new System.Drawing.Point(722, 346);
+            this.bt_setup7.Name = "bt_setup7";
+            this.bt_setup7.Size = new System.Drawing.Size(94, 32);
+            this.bt_setup7.TabIndex = 25;
+            this.bt_setup7.Text = "修改";
+            this.bt_setup7.UseVisualStyleBackColor = true;
+            this.bt_setup7.Click += new System.EventHandler(this.bt_setup7_Click);
+            // 
+            // tb_setup7
+            // 
+            this.tb_setup7.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_setup7.Location = new System.Drawing.Point(127, 350);
+            this.tb_setup7.Name = "tb_setup7";
+            this.tb_setup7.Size = new System.Drawing.Size(574, 30);
+            this.tb_setup7.TabIndex = 24;
+            // 
+            // lb_setup7
+            // 
+            this.lb_setup7.AutoSize = true;
+            this.lb_setup7.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_setup7.Location = new System.Drawing.Point(25, 355);
+            this.lb_setup7.Name = "lb_setup7";
+            this.lb_setup7.Size = new System.Drawing.Size(99, 19);
+            this.lb_setup7.TabIndex = 23;
+            this.lb_setup7.Text = "lb_setup7";
+            // 
             // Form_Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(903, 515);
+            this.Controls.Add(this.bt_setup7);
+            this.Controls.Add(this.tb_setup7);
+            this.Controls.Add(this.lb_setup7);
             this.Controls.Add(this.bt_setup6);
             this.Controls.Add(this.tb_setup6);
             this.Controls.Add(this.lb_setup6);
@@ -354,5 +389,8 @@
         private System.Windows.Forms.Button bt_setup6;
         private System.Windows.Forms.TextBox tb_setup6;
         private System.Windows.Forms.Label lb_setup6;
+        private System.Windows.Forms.Button bt_setup7;
+        private System.Windows.Forms.TextBox tb_setup7;
+        private System.Windows.Forms.Label lb_setup7;
     }
 }

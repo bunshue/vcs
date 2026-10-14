@@ -163,16 +163,6 @@ namespace vcs_DrAP
 
         private void bt_setup3_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Title = "選取文字編輯程式";
-            openFileDialog1.FileName = "";
-            openFileDialog1.Filter = "程式|*.exe|所有檔|*.*";   //限定檔案格式
-            openFileDialog1.FilterIndex = 1;
-            openFileDialog1.RestoreDirectory = true;
-            openFileDialog1.InitialDirectory = "C:\\";         //從目前目錄開始尋找檔案
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                tb_setup3.Text = openFileDialog1.FileName;
-            }
         }
 
         private void bt_setup4_Click(object sender, EventArgs e)

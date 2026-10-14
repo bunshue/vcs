@@ -33,9 +33,11 @@ namespace vcs_DiskDirectoryFile1
             lb_setup4.Text = "python搜尋路徑";
             lb_setup5.Text = "Katfile路徑";
             lb_setup6.Text = "Git路徑";
+            lb_setup7.Text = "文字編輯程式路徑";
 
             tb_setup0.Text = Properties.Settings.Default.video_player_path;
             tb_setup1.Text = Properties.Settings.Default.winmerge_path;  // WinMerge程式路徑
+            tb_setup7.Text = Properties.Settings.Default.text_editor_path;  // 文字編輯程式路徑
 
             string search_path = Properties.Settings.Default.search_path;
             string vcs_foldername = Properties.Settings.Default.vcs_foldername;
@@ -115,6 +117,7 @@ namespace vcs_DiskDirectoryFile1
             lb_setup4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             lb_setup5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             lb_setup6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            lb_setup7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             lb_main_mesg.Location = new Point(x_st + dx * 0, y_st + dy * 7);
 
             tb_setup0.Location = new Point(x_st + dx * 1, y_st + dy * 0);
@@ -124,6 +127,7 @@ namespace vcs_DiskDirectoryFile1
             tb_setup4.Location = new Point(x_st + dx * 1, y_st + dy * 4);
             tb_setup5.Location = new Point(x_st + dx * 1, y_st + dy * 5);
             tb_setup6.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            tb_setup7.Location = new Point(x_st + dx * 1, y_st + dy * 7);
 
             int dxx = 80;
             bt_setup0.Location = new Point(x_st + dx * 4 + dxx, y_st + dy * 0);
@@ -133,7 +137,8 @@ namespace vcs_DiskDirectoryFile1
             bt_setup4.Location = new Point(x_st + dx * 4 + dxx, y_st + dy * 4);
             bt_setup5.Location = new Point(x_st + dx * 4 + dxx, y_st + dy * 5);
             bt_setup6.Location = new Point(x_st + dx * 4 + dxx, y_st + dy * 6);
-            bt_setup_save.Location = new Point(x_st + dx * 4 + dxx, y_st + dy * 7);
+            bt_setup7.Location = new Point(x_st + dx * 4 + dxx, y_st + dy * 7);
+            bt_setup_save.Location = new Point(x_st + dx * 4 + dxx, y_st + dy * 8);
 
             //針對某控件的邊緣 設定表單大小
             this.ClientSize = new Size(bt_setup_save.Right + 20, bt_setup_save.Bottom + 20);
@@ -243,6 +248,20 @@ namespace vcs_DiskDirectoryFile1
             }
         }
 
+        private void bt_setup7_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Title = "選取文字編輯程式";
+            openFileDialog1.FileName = "";
+            openFileDialog1.Filter = "程式|*.exe|所有檔|*.*";   //限定檔案格式
+            openFileDialog1.FilterIndex = 1;
+            openFileDialog1.RestoreDirectory = true;
+            openFileDialog1.InitialDirectory = "C:\\";         //從目前目錄開始尋找檔案
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                tb_setup7.Text = openFileDialog1.FileName;
+            }
+        }
+
         private void bt_setup_save_Click(object sender, EventArgs e)
         {
             //儲存
@@ -253,6 +272,7 @@ namespace vcs_DiskDirectoryFile1
             Properties.Settings.Default.python_foldername = tb_setup4.Text;
             Properties.Settings.Default.doc_foldername = tb_setup5.Text;
             Properties.Settings.Default.git_foldername = tb_setup6.Text;
+            Properties.Settings.Default.text_editor_path = tb_setup7.Text;
 
             Properties.Settings.Default.Save();
             show_main_message("儲存設定完成", S_OK, 30);

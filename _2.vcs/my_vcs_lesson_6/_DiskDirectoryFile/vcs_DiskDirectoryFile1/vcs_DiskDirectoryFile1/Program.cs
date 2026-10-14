@@ -16,7 +16,7 @@ namespace vcs_DiskDirectoryFile1
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
-            //Application.Run(new Form_Setup());
+            // Application.Run(new Form_Setup());
         }
     }
 }

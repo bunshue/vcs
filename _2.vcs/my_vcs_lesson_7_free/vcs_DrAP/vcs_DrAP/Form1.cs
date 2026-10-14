@@ -121,21 +121,13 @@ namespace vcs_DrAP
             int dy = h + 5;
 
             tb_search.Size = new Size(160, 60);
-            tb_search.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            tb_search.Location = new Point(x_st + dx * 0, y_st + dy * 0);
 
-            bt_search_pattern_vcs.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            bt_open_with_vcs.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            bt_open_dir2.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            bt_open_with_ue.Location = new Point(x_st + dx * 4, y_st + dy * 1);
-            bt_replace.Location = new Point(x_st + dx * 5, y_st + dy * 1);
-            bt_setup.Location = new Point(x_st + dx * 6, y_st + dy * 0);
+            bt_search_pattern_vcs.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_setup.Location = new Point(x_st + dx * 2, y_st + dy * 1);
 
-            groupbox_python.Size = new Size(112, 106);
-            groupbox_python.Location = new Point(x_st + dx * 7, y_st + dy * 0);
-            groupbox_result.Size = new Size(110, 106);
-            groupbox_result.Location = new Point(x_st + dx * 7 + 120, y_st + dy * 0);
-            lb_search_result1.Location = new Point(10, 25);
-            lb_search_result2.Location = new Point(10, 60);
+            lb_search_result1.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 10);
+            lb_search_result2.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 10 + 45);
             lb_search_result1.Text = "";
             lb_search_result2.Text = "";
 
@@ -152,15 +144,6 @@ namespace vcs_DrAP
 
             bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Width - bt_clear2.Width, richTextBox2.Location.Y);
             bt_copy_rtb_data.Location = new Point(richTextBox2.Location.X + richTextBox2.Width - bt_clear2.Width, richTextBox2.Location.Y + bt_clear2.Height);
-
-            x_st = 10;
-            y_st = 15;
-            dx = 100;
-            dy = 22;
-            bt_search_pattern_python.Size = new Size(45, 45);
-            bt_search_pattern_python.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            bt_edit_python_files.Size = new Size(45, 45);
-            bt_edit_python_files.Location = new Point(x_st + dx * 0 + 50, y_st + dy * 2);
 
             //針對某控件的邊緣 設定表單大小
             this.ClientSize = new Size(richTextBox2.Right + 10, richTextBox2.Bottom + 10);
@@ -404,10 +387,6 @@ namespace vcs_DrAP
             }
         }
 
-        private void bt_edit_python_files_Click(object sender, EventArgs e)
-        {
-        }
-
         private void listView1_KeyDown(object sender, KeyEventArgs e)
         {
             int selectCount = listView1.SelectedIndices.Count;
@@ -521,6 +500,9 @@ namespace vcs_DrAP
         {
             do_search_mode(SEARCH_MODE_VCS);
             return;
+
+            do_search_mode(SEARCH_MODE_PYTHON);
+            return;
         }
 
         private void tb_search_KeyPress(object sender, KeyPressEventArgs e)
@@ -569,14 +551,6 @@ namespace vcs_DrAP
 
         //------------------------------------------------------------  # 60個
 
-        private void bt_search_pattern_python_Click(object sender, EventArgs e)
-        {
-            do_search_mode(SEARCH_MODE_PYTHON);
-            return;
-        }
-
-        //------------------------------------------------------------  # 60個
-
         void do_search_mode(int mode)
         {
             //開始計時
@@ -602,8 +576,6 @@ namespace vcs_DrAP
                 richTextBox1.Text += "vcs\t";
                 result_str += "vcs\t";
 
-                bt_search_pattern_vcs.BackgroundImage = null;
-                bt_search_pattern_vcs.BackColor = Color.Red;
                 path = default_vcs_path;
             }
             else if (mode == SEARCH_MODE_PYTHON)
@@ -612,8 +584,6 @@ namespace vcs_DrAP
                 richTextBox1.Text += "python\t";
                 result_str += "python\t";
 
-                bt_search_pattern_python.BackgroundImage = null;
-                bt_search_pattern_python.BackColor = Color.Red;
                 path = default_python_path;
             }
             else
@@ -653,21 +623,7 @@ namespace vcs_DrAP
             show_file_info3();
 
             flag_search_vcs_pattern = 1;
-            if (mode == SEARCH_MODE_VCS)
-            {
-                bt_search_pattern_vcs.BackColor = SystemColors.ControlLight;
-                bt_search_pattern_vcs.BackgroundImage = vcs_DrAP.Properties.Resources.vcs;
-            }
-            else if (mode == SEARCH_MODE_PYTHON)
-            {
-                bt_search_pattern_python.BackColor = SystemColors.ControlLight;
-                bt_search_pattern_python.BackgroundImage = vcs_DrAP.Properties.Resources.python;
-            }
-            else
-            {
-                bt_search_pattern_vcs.BackColor = SystemColors.ControlLight;
-                bt_search_pattern_vcs.BackgroundImage = vcs_DrAP.Properties.Resources.vcs;
-            }
+
             stopwatch.Stop();
             result_str += "停止計時\t";
             result_str += "總時間: " + stopwatch.ElapsedMilliseconds.ToString() + " msec\n";
@@ -737,111 +693,11 @@ namespace vcs_DrAP
 
         //檢查空資料夾 ST
 
-        private void bt_replace_Click(object sender, EventArgs e)
-        {
-            Form_Replace frm = new Form_Replace();    //實體化 Form_Replace 視窗物件
-            frm.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
-            frm.ShowDialog();   //顯示 frm 視窗
-        }
-
         //------------------------------------------------------------  # 60個
 
         private void tb_search_Click(object sender, EventArgs e)
         {
             tb_search.SelectAll();
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void bt_open_dir2_Click(object sender, EventArgs e)
-        {
-            int cnt = listView1.SelectedItems.Count;
-            if (cnt > 0)
-            {
-                int selNdx = listView1.SelectedIndices[0];
-
-                result_str += "aaaa b3你選擇了檔名3:\t" + listView1.Items[selNdx].SubItems[0].Text + "\n";
-
-                string foldername = listView1.Items[selNdx].SubItems[1].Text;
-                result_str += "資料夾:\t" + foldername + "\n";
-
-                string fullname = listView1.Items[selNdx].SubItems[1].Text + "\\" + listView1.Items[selNdx].SubItems[0].Text;
-                result_str += "全檔名:\t" + fullname + "\n";
-
-                /*
-                //C# 呼叫檔案總管開啟某個資料夾，並讓某個檔案或資料夾呈現反白的樣子
-                string file = @"C:\Windows\explorer.exe";
-                string argument = @"/select, " + foldername;
-                Process.Start(file, argument);
-                */
-                Process.Start(foldername);
-            }
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void bt_open_with_vcs_Click(object sender, EventArgs e)
-        {
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void bt_open_with_ue_Click(object sender, EventArgs e)
-        {
-            flag_function = FUNCTION_SEARCH_TEXT;
-
-            int selectCount = listView1.SelectedIndices.Count;
-            /*
-            result_str += "你選擇了 : " + selectCount.ToString() + " 個檔案, 分別是\n";
-            for (int i = 0; i < selectCount; i++)
-            {
-                result_str += listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
-            }
-            result_str += "開啟\n";
-            */
-
-            int selNdx;
-            string all_filename = string.Empty;
-
-            if (selectCount <= 0)  //總共選擇的個數
-            {
-                result_str += "無檔案\n";
-                return;
-            }
-
-            //result_str += "總共選了 : " + listView1.SelectedItems.Count.ToString() + " 個檔案，分別是 : \n";
-            //for (int i = 0; i < selectCount; i++)
-            for (int i = 0; i < listView1.SelectedItems.Count; i++)
-            {
-                selNdx = listView1.SelectedIndices[i];
-                listView1.Items[selNdx].Selected = true;    //選到的項目
-                //result_str += listView1.Items[selNdx].Text + "\n";
-
-                if (flag_function == FUNCTION_SEARCH_TEXT)
-                {
-                    all_filename += " \"" + listView1.Items[selNdx].SubItems[1].Text + "\\" + listView1.Items[selNdx].Text + "\"";
-                }
-                else
-                {
-                    all_filename += " \"" + listView1.Items[selNdx].SubItems[3].Text + "\\" + listView1.Items[selNdx].SubItems[2].Text + "\"";
-                }
-            }
-
-            //指定應用程式路徑
-            string target = String.Empty;
-
-            //方法一
-            //Process.Start(target, "參數");
-            //Process.Start(target, all_filename);
-
-            //方法二
-
-            target = text_editor_path;
-
-            if (System.IO.File.Exists(text_editor_path) == true)
-            {
-                Process.Start(text_editor_path, all_filename);
-            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -953,61 +809,3 @@ namespace vcs_DrAP
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-/*
-
-result_str += "a你選擇了檔名:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
-result_str += "資料夾:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
-fullname = listView1.Items[selNdx].SubItems[3].Text + "\\" + listView1.Items[selNdx].SubItems[2].Text;
-
-//result_str += "a你選擇了檔名:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
-//result_str += "資料夾:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
-fullname = listView1.Items[selNdx].SubItems[3].Text + "\\" + listView1.Items[selNdx].SubItems[2].Text;
-
-//------------------------------------------------------------  # 60個
-                selNdx = listView1.SelectedIndices[0];
-                listView1.Items[selNdx].Selected = true;    //選到的項目
-                //result_str += "count = " + selectCount.ToString() + "\t";
-                result_str += "你選擇了資料夾:\t" + listView1.Items[selNdx].Text + "\n";
-
-                fullname = listView1.Items[selNdx].Text;
-
-                richTextBox1.Text += "開啟路徑: " + fullname + "\n";
-
-                // old
-                //開啟檔案總管
-                if (Directory.GetParent(fullname) == null)
-                    Process.Start(fullname);             //若是根目錄 不要擷取其父目錄的路徑
-                else
-                    Process.Start(Directory.GetParent(fullname).ToString()); //GetParent 擷取其父目錄的路徑
-
-                //C# 呼叫檔案總管開啟某個資料夾，並讓某個檔案或資料夾呈現反白的樣子
-                string file = @"C:\Windows\explorer.exe";
-                string argument = @"/select, " + fullname;
-                Process.Start(file, argument);
-
-//------------------------------------------------------------  # 60個
-
-            //播放 listview 多選的檔案
-int selectCount = listView1.SelectedIndices.Count;
-            int selNdx;
-            string all_filename = string.Empty;
-            string player_path = @"C:\Program Files (x86)\DAUM\PotPlayer\PotPlayerMini.exe";
-            if (selectCount <= 0)  //總共選擇的個數
-                return;
-
-            int SelectedItemsCount = listView1.SelectedItems.Count;
-            //richTextBox1.Text += "總共選了 : " + SelectedItemsCount.ToString() + " 個檔案，分別是 : \n";
-            for (int i = 0; i < SelectedItemsCount; i++)
-            {
-                selNdx = listView1.SelectedIndices[i];
-                listView1.Items[selNdx].Selected = true;    //選到的項目
-                //richTextBox1.Text += listView1.Items[selNdx].Text + "\n";
-                all_filename += " \"" + listView1.Items[selNdx].Text + "\"";
-            }
-
-//------------------------------------------------------------  # 60個
-
-
-*/
-

@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;    //for Directory
+using System.IO;  // for Directory
 
-namespace vcs_DrAP
+namespace vcs_DiskDirectoryFile1
 {
     public partial class Form_Replace : Form
     {
