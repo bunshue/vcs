@@ -354,10 +354,9 @@ namespace vcs_DiskDirectoryFile1
 
             if (System.IO.File.Exists(Properties.Settings.Default.python_editor_path) == false)
             {
-                result_str += "python編輯程式不存在 : " + Properties.Settings.Default.python_editor_path + "\n使用Windows預設文字編輯程式\n";
+                richTextBox1.Text += "python編輯程式不存在 : " + Properties.Settings.Default.python_editor_path + "\n使用Windows預設文字編輯程式\n";
                 python_editor_path = String.Empty;
             }
-
 
             if (System.IO.File.Exists(Properties.Settings.Default.winmerge_path) == false)
             {
@@ -3013,10 +3012,10 @@ namespace vcs_DiskDirectoryFile1
 
             selNdx = listView_file.SelectedIndices[0];  // 取出選中的第0個
 
-            result_str += "aaa:\t" + listView_file.Items[selNdx].Text + "\n";
-            result_str += "bbb:\t" + listView_file.Items[selNdx].SubItems[1].Text + "\n";
-            result_str += "ccc:\t" + listView_file.Items[selNdx].SubItems[2].Text + "\n";
-            result_str += "ddd:\t" + listView_file.Items[selNdx].SubItems[3].Text + "\n";
+            richTextBox1.Text += "aaa:\t" + listView_file.Items[selNdx].Text + "\n";
+            richTextBox1.Text += "bbb:\t" + listView_file.Items[selNdx].SubItems[1].Text + "\n";
+            richTextBox1.Text += "ccc:\t" + listView_file.Items[selNdx].SubItems[2].Text + "\n";
+            richTextBox1.Text += "ddd:\t" + listView_file.Items[selNdx].SubItems[3].Text + "\n";
             */
 
             int selNdx;
@@ -3024,20 +3023,20 @@ namespace vcs_DiskDirectoryFile1
 
             selNdx = listView_file.SelectedIndices[0];  // 取出選中的第0個
             listView_file.Items[selNdx].Selected = true;    //選到的項目
-            result_str += "count = " + selectCount.ToString() + "\t";
-            result_str += "你選擇了檔名:\t" + listView_file.Items[selNdx].Text + "\n";
-            result_str += "資料夾:\t" + listView_file.Items[selNdx].SubItems[1].Text + "\n";
+            richTextBox1.Text += "count = " + selectCount.ToString() + "\t";
+            richTextBox1.Text += "你選擇了檔名:\t" + listView_file.Items[selNdx].Text + "\n";
+            richTextBox1.Text += "資料夾:\t" + listView_file.Items[selNdx].SubItems[1].Text + "\n";
 
             //搜尋字串模式
-            result_str += "aaaa b1你選擇了檔名1:\t" + listView_file.Items[selNdx].SubItems[0].Text + "\n";
-            result_str += "資料夾:\t" + listView_file.Items[selNdx].SubItems[1].Text + "\n";
+            richTextBox1.Text += "aaaa b1你選擇了檔名1:\t" + listView_file.Items[selNdx].SubItems[0].Text + "\n";
+            richTextBox1.Text += "資料夾:\t" + listView_file.Items[selNdx].SubItems[1].Text + "\n";
             fullname = listView_file.Items[selNdx].SubItems[1].Text + "\\" + listView_file.Items[selNdx].SubItems[0].Text;
 
             //if (flag_search_vcs_pattern == 0)
             {
                 FileInfo fi = new FileInfo(fullname);
 
-                //result_str += "fullname = " + fullname + ",  ext = " + fi.Extension + "\n";
+                //richTextBox1.Text += "fullname = " + fullname + ",  ext = " + fi.Extension + "\n";
 
                 if (fi.Extension == ".txt")
                 {
@@ -3045,8 +3044,8 @@ namespace vcs_DiskDirectoryFile1
                 }
                 else
                 {
-                    result_str += "video_player_path = " + video_player_path + "\n";
-                    result_str += "fullname = " + fullname + "\n";
+                    richTextBox1.Text += "video_player_path = " + video_player_path + "\n";
+                    richTextBox1.Text += "fullname = " + fullname + "\n";
 
                     if (video_player_path == String.Empty)
                     {
@@ -3101,9 +3100,10 @@ namespace vcs_DiskDirectoryFile1
 
         private void listView_file_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            //richTextBox1.Text += "檔案模式不支援 MouseDoubleClick\n";
+            //richTextBox1.Text += "檔案模式MouseDoubleClick\n";
             bt_open_with_vcs_python_Click(sender, e);
             return;
+
             /* TBD
             int idx = listView_file.SelectedIndices[0];  // 取出選中的第0個
             richTextBox1.Text += "檔名:\t" + listView_file.Items[idx].Text + "\n";
@@ -3131,13 +3131,13 @@ namespace vcs_DiskDirectoryFile1
 
             selNdx = listView_file.SelectedIndices[0];  // 取出選中的第0個
             listView_file.Items[selNdx].Selected = true;    //選到的項目
-            //result_str += "count = " + selectCount.ToString() + "\t";
-            //result_str += "你選擇了檔名:\t" + listView_file.Items[selNdx].Text + "\n";
-            //result_str += "資料夾:\t" + listView_file.Items[selNdx].SubItems[1].Text + "\n";
+            //richTextBox1.Text += "count = " + selectCount.ToString() + "\t";
+            //richTextBox1.Text += "你選擇了檔名:\t" + listView_file.Items[selNdx].Text + "\n";
+            //richTextBox1.Text += "資料夾:\t" + listView_file.Items[selNdx].SubItems[1].Text + "\n";
 
             //搜尋字串模式
-            result_str += "aaaa b2你選擇了檔名2:\t" + listView_file.Items[selNdx].SubItems[0].Text + "\n";
-            result_str += "資料夾:\t" + listView_file.Items[selNdx].SubItems[1].Text + "\n";
+            richTextBox1.Text += "aaaa b2你選擇了檔名2:\t" + listView_file.Items[selNdx].SubItems[0].Text + "\n";
+            richTextBox1.Text += "資料夾:\t" + listView_file.Items[selNdx].SubItems[1].Text + "\n";
             fullname = listView_file.Items[selNdx].SubItems[1].Text + "\\" + listView_file.Items[selNdx].SubItems[0].Text;
 
             /*
@@ -3145,7 +3145,7 @@ namespace vcs_DiskDirectoryFile1
             {
                 FileInfo fi = new FileInfo(fullname);
 
-                //result_str += "fullname = " + fullname + ",  ext = " + fi.Extension + "\n";
+                //richTextBox1.Text += "fullname = " + fullname + ",  ext = " + fi.Extension + "\n";
 
                 if (fi.Extension == ".txt")
                 {
@@ -3163,8 +3163,8 @@ namespace vcs_DiskDirectoryFile1
                 }
                 else
                 {
-                    result_str += "video_player_path = " + video_player_path + "\n";
-                    result_str += "fullname = " + fullname + "\n";
+                    richTextBox1.Text += "video_player_path = " + video_player_path + "\n";
+                    richTextBox1.Text += "fullname = " + fullname + "\n";
 
                     if (video_player_path == String.Empty)
                     {
@@ -3181,14 +3181,14 @@ namespace vcs_DiskDirectoryFile1
             }
             else
             {
-                //result_str += "text_editor_path = " + text_editor_path + "\t" + "fullname = " + fullname + "\n";
+                //richTextBox1.Text += "text_editor_path = " + text_editor_path + "\t" + "fullname = " + fullname + "\n";
                 if (System.IO.File.Exists(text_editor_path) == true)
                 {
                     Process.Start(text_editor_path, fullname);
                 }
                 else
                 {
-                    result_str += "開啟程式不存在\n";
+                    richTextBox1.Text += "開啟程式不存在\n";
                 }
             }
             */
@@ -3203,6 +3203,7 @@ namespace vcs_DiskDirectoryFile1
             richTextBox1.Text += "大小:\t" + listView_video.Items[idx].SubItems[3].Text + "\n";
             richTextBox1.Text += "格式:\t" + listView_video.Items[idx].SubItems[4].Text + "\n";
             richTextBox1.Text += "資料夾:\t" + listView_video.Items[idx].SubItems[5].Text + "\n";
+
             string fullname = listView_video.Items[idx].SubItems[5].Text + "\\" + listView_video.Items[idx].Text;
             richTextBox1.Text += "完整路徑:\t" + fullname + "\n";
 
@@ -4194,6 +4195,9 @@ namespace vcs_DiskDirectoryFile1
             }
             else if (flag_export_video == true)  // 搜尋影片檔, 搜尋小影片檔<720, 特大影片檔>1080
             {
+                //sugar使用有問題
+                //filename = @"D:\_git\vcs\_1.data\______test_files1\_video\鹿港.mp4";
+
                 //取得影片檔案資訊
                 MediaInfoNET.MediaFile f = new MediaInfoNET.MediaFile(filename);
                 if (f.InfoAvailable == true)
@@ -5495,6 +5499,7 @@ namespace vcs_DiskDirectoryFile1
 
             search_foldername = tb_foldername1.Text;
             tb_foldername1_text_old = search_foldername;
+
             do_my_export(search_foldername, bt_export_filename);
         }
 
@@ -5510,6 +5515,7 @@ namespace vcs_DiskDirectoryFile1
 
             search_foldername = tb_foldername1.Text;
             tb_foldername1_text_old = search_foldername;
+
             do_my_export(search_foldername, bt_export_video);
         }
 
@@ -5525,6 +5531,7 @@ namespace vcs_DiskDirectoryFile1
 
             search_foldername = tb_foldername1.Text;
             tb_foldername1_text_old = search_foldername;
+
             do_my_export(search_foldername, bt_export_foldername);
         }
 
@@ -5545,7 +5552,7 @@ namespace vcs_DiskDirectoryFile1
         {
             if (tb_search_pattern.Text == "")
             {
-                result_str += "未輸入搜尋內容\n";
+                richTextBox1.Text += "未輸入搜尋內容\n";
                 return;
             }
 
@@ -6219,5 +6226,4 @@ _video      影片模式
 
 
 */
-
 
