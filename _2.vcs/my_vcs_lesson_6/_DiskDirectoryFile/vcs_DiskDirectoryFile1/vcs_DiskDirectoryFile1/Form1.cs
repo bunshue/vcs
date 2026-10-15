@@ -212,7 +212,7 @@ namespace vcs_DiskDirectoryFile1
         // 以下List 裡為MyFileInfo 型態
         List<MyFileInfo> fileinfos = new List<MyFileInfo>();  // 檔案, 一般檔案/影片檔案
         List<MyFileInfo> fileinfos_match = new List<MyFileInfo>();  // 尋找相同檔案
-        List<MyFolderInfo> folderinfos = new List<MyFolderInfo>();  // 資料夾
+        List<MyFolderInfo> folderinfos = new List<MyFolderInfo>();  // 資料夾 TBD
 
         //全部
         //Int64 total_folders = 0;  //所有的資料夾個數 TBD
@@ -791,7 +791,7 @@ namespace vcs_DiskDirectoryFile1
             listView_video.Clear();
 
             fileinfos.Clear();
-            folderinfos.Clear();
+            folderinfos.Clear();  // TBD
             lb_search_result1.Text = "";
             lb_search_result2.Text = "";
         }
@@ -1846,6 +1846,17 @@ namespace vcs_DiskDirectoryFile1
 
             richTextBox1.Text += "資料夾 : " + foldername + "\n";
             richTextBox1.Text += "上層資料夾 : " + Directory.GetParent(foldername) + "\n";
+
+            //開啟檔案總管
+            if (Directory.GetParent(foldername) == null)
+            {
+                richTextBox1.Text += "是根目錄 不要擷取其父目錄的路徑\n";
+            }
+            else
+            {
+                richTextBox1.Text += "不是根目錄\n";
+                richTextBox1.Text += Directory.GetParent(foldername).ToString() + "\n";  // GetParent 擷取其父目錄的路徑
+            }
 
             //------------------------------------------------------------  # 60個
 
@@ -2976,7 +2987,7 @@ namespace vcs_DiskDirectoryFile1
         private void listView_file_MouseClick(object sender, MouseEventArgs e)
         {
             // 檔案的
-            int idx = listView_file.SelectedIndices[0];
+            int idx = listView_file.SelectedIndices[0];  // 取出選中的第0個
 
             /*
             richTextBox1.Text += "檔名:\t" + listView_file.Items[idx].Text + "\n";
@@ -2995,12 +3006,12 @@ namespace vcs_DiskDirectoryFile1
 
             return;
 
-            int selectCount = listView_file.SelectedIndices.Count;
+            int selectCount = listView_file.SelectedIndices.Count;  // 總共選擇的個數
             /*
             int selNdx;
             string fullname;
 
-            selNdx = listView_file.SelectedIndices[0];
+            selNdx = listView_file.SelectedIndices[0];  // 取出選中的第0個
 
             result_str += "aaa:\t" + listView_file.Items[selNdx].Text + "\n";
             result_str += "bbb:\t" + listView_file.Items[selNdx].SubItems[1].Text + "\n";
@@ -3011,7 +3022,7 @@ namespace vcs_DiskDirectoryFile1
             int selNdx;
             string fullname;
 
-            selNdx = listView_file.SelectedIndices[0];
+            selNdx = listView_file.SelectedIndices[0];  // 取出選中的第0個
             listView_file.Items[selNdx].Selected = true;    //選到的項目
             result_str += "count = " + selectCount.ToString() + "\t";
             result_str += "你選擇了檔名:\t" + listView_file.Items[selNdx].Text + "\n";
@@ -3057,7 +3068,7 @@ namespace vcs_DiskDirectoryFile1
         {
             // 影片的
 
-            int idx = listView_video.SelectedIndices[0];
+            int idx = listView_video.SelectedIndices[0];  // 取出選中的第0個
 
             /*
             richTextBox1.Text += "檔名:\t" + listView_video.Items[idx].Text + "\n";
@@ -3094,7 +3105,7 @@ namespace vcs_DiskDirectoryFile1
             bt_open_with_vcs_python_Click(sender, e);
             return;
             /* TBD
-            int idx = listView_file.SelectedIndices[0];
+            int idx = listView_file.SelectedIndices[0];  // 取出選中的第0個
             richTextBox1.Text += "檔名:\t" + listView_file.Items[idx].Text + "\n";
             richTextBox1.Text += "簡名:\t" + listView_file.Items[idx].SubItems[1].Text + "\n";
             richTextBox1.Text += "系列:\t" + listView_file.Items[idx].SubItems[2].Text + "\n";
@@ -3116,9 +3127,9 @@ namespace vcs_DiskDirectoryFile1
 
             int selNdx;
             string fullname;
-            int selectCount = listView_file.SelectedIndices.Count;
+            int selectCount = listView_file.SelectedIndices.Count;  // 總共選擇的個數
 
-            selNdx = listView_file.SelectedIndices[0];
+            selNdx = listView_file.SelectedIndices[0];  // 取出選中的第0個
             listView_file.Items[selNdx].Selected = true;    //選到的項目
             //result_str += "count = " + selectCount.ToString() + "\t";
             //result_str += "你選擇了檔名:\t" + listView_file.Items[selNdx].Text + "\n";
@@ -3185,7 +3196,7 @@ namespace vcs_DiskDirectoryFile1
 
         private void listView_video_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            int idx = listView_video.SelectedIndices[0];
+            int idx = listView_video.SelectedIndices[0];  // 取出選中的第0個
             richTextBox1.Text += "檔名:\t" + listView_video.Items[idx].Text + "\n";
             richTextBox1.Text += "簡名:\t" + listView_video.Items[idx].SubItems[1].Text + "\n";
             richTextBox1.Text += "系列:\t" + listView_video.Items[idx].SubItems[2].Text + "\n";
@@ -3337,7 +3348,7 @@ namespace vcs_DiskDirectoryFile1
             string all_filename = string.Empty;
             for (int i = 0; i < selectCount; i++)
             {
-                int idx = listView_video.SelectedIndices[i];
+                int idx = listView_video.SelectedIndices[i];  // 取出選中的第i個
                 listView_video.Items[idx].Selected = true;  // 選到的項目
                 all_filename += " \"" + listView_video.Items[idx].SubItems[5].Text + "\\" + listView_video.Items[idx].Text + "\"";
             }
@@ -3413,19 +3424,19 @@ namespace vcs_DiskDirectoryFile1
         private void bt_delete_file_Click(object sender, EventArgs e)
         {
             string delete_filename = string.Empty;
-            int selectCount = listView_dir.SelectedIndices.Count;
+            int selectCount = listView_dir.SelectedIndices.Count;  // 總共選擇的個數
 
             if (flag_export_foldername == true)  // 找資料夾, 全/空/小
             {
-                selectCount = listView_dir.SelectedIndices.Count;
+                selectCount = listView_dir.SelectedIndices.Count;  // 總共選擇的個數
             }
             else if (flag_export_filename == true)  // 匯出檔名
             {
-                selectCount = listView_file.SelectedIndices.Count;
+                selectCount = listView_file.SelectedIndices.Count;  // 總共選擇的個數
             }
             else if (flag_export_video == true)  // 找影片檔
             {
-                selectCount = listView_video.SelectedIndices.Count;
+                selectCount = listView_video.SelectedIndices.Count;  // 總共選擇的個數
             }
 
             for (int i = selectCount - 1; i >= 0; i--)
@@ -3617,7 +3628,7 @@ namespace vcs_DiskDirectoryFile1
             folder_small = 0;  // 最底層 小 資料夾 個數
 
             fileinfos.Clear();
-            folderinfos.Clear();
+            folderinfos.Clear();  // TBD
 
             if (cb_search_this_folder.Checked == true)
             {
@@ -4318,7 +4329,7 @@ namespace vcs_DiskDirectoryFile1
 
                 if (res == false)   //vcs加搜尋txt檔案
                 {
-                    if (search_mode == SEARCH_MODE_VCS) //vcs 加搜尋 .txt
+                    if (search_mode == SEARCH_MODE_VCS)  // vcs 加搜尋 .txt
                     {
                         res = fi.FullName.ToLower().Replace(" ", "").Contains("____txt");
                     }
@@ -4340,25 +4351,16 @@ namespace vcs_DiskDirectoryFile1
                             res = false;
                             return;
                         }
-                        /*
                         else if (fi.FullName.ToLower().Replace(" ", "").Contains("assemblyinfo.cs"))
                         {
                             res = false;
                             return;
                         }
-                        */
                         else if (fi.FullName.ToLower().Replace(" ", "").Contains("csproj"))
                         {
                             res = false;
                             return;
                         }
-                        /*
-                        else if (fi.FullName.ToLower().Replace(" ", "").Contains("designer"))
-                        {
-                            res = false;
-                            return;
-                        }
-                        */
                     }
 
                     //result_str += fi.FullName + "\n";
@@ -4585,9 +4587,7 @@ namespace vcs_DiskDirectoryFile1
             //Process.Start(target, all_filename);
 
             //方法二
-
             target = video_player_path;
-
             ProcessStartInfo pInfo = new ProcessStartInfo(target);
             pInfo.Arguments = all_filename;
 
@@ -5617,10 +5617,10 @@ namespace vcs_DiskDirectoryFile1
                 richTextBox1.Text += "用vcs開啟\n";
 
                 result_str = "";
-                int cnt = listView_file.SelectedItems.Count;
-                if (cnt > 0)
+                int selectCount = listView_file.SelectedItems.Count;  // 總共選擇的個數
+                if (selectCount > 0)
                 {
-                    int selNdx = listView_file.SelectedIndices[0];
+                    int selNdx = listView_file.SelectedIndices[0];  // 取出選中的第0個
 
                     richTextBox1.Text += "aaaa b3你選擇了檔名3:\t" + listView_file.Items[selNdx].SubItems[0].Text + "\n";
 
@@ -5664,7 +5664,7 @@ namespace vcs_DiskDirectoryFile1
             else if (search_mode == SEARCH_MODE_PYTHON)
             {
                 //執行python
-                int selectCount = listView_file.SelectedIndices.Count;
+                int selectCount = listView_file.SelectedIndices.Count;  // 總共選擇的個數
                 /*
                 richTextBox1.Text += "你選擇了 : " + selectCount.ToString() + " 個檔案, 分別是\n";
                 for (int i = 0; i < selectCount; i++)
@@ -5686,7 +5686,7 @@ namespace vcs_DiskDirectoryFile1
                 //for (int i = 0; i < selectCount; i++)
                 for (int i = 0; i < listView_file.SelectedItems.Count; i++)
                 {
-                    selNdx = listView_file.SelectedIndices[i];
+                    selNdx = listView_file.SelectedIndices[i];  // 取出選中的第i個
                     listView_file.Items[selNdx].Selected = true;    //選到的項目
                     //richTextBox1.Text += listView_file.Items[selNdx].Text + "\n";
 
@@ -5710,7 +5710,7 @@ namespace vcs_DiskDirectoryFile1
         {
             //flag_function = FUNCTION_SEARCH_TEXT;
 
-            int selectCount = listView_file.SelectedIndices.Count;
+            int selectCount = listView_file.SelectedIndices.Count;  // 總共選擇的個數
             richTextBox1.Text += "你選擇了 : " + selectCount.ToString() + " 個檔案, 分別是\n";
             for (int i = 0; i < selectCount; i++)
             {
@@ -5731,7 +5731,7 @@ namespace vcs_DiskDirectoryFile1
             //for (int i = 0; i < selectCount; i++)
             for (int i = 0; i < listView_file.SelectedItems.Count; i++)
             {
-                selNdx = listView_file.SelectedIndices[i];
+                selNdx = listView_file.SelectedIndices[i];  // 取出選中的第i個
                 listView_file.Items[selNdx].Selected = true;    //選到的項目
                 //richTextBox1.Text += listView_file.Items[selNdx].Text + "\n";
 
@@ -5748,9 +5748,7 @@ namespace vcs_DiskDirectoryFile1
             //Process.Start(target, all_filename);
 
             //方法二
-
             target = text_editor_path;
-
             if (System.IO.File.Exists(text_editor_path) == true)
             {
                 Process.Start(text_editor_path, all_filename);
@@ -5759,7 +5757,7 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_winmerge_Click(object sender, EventArgs e)
         {
-            int selectCount = listView_file.SelectedIndices.Count;
+            int selectCount = listView_file.SelectedIndices.Count;  // 總共選擇的個數
 
             if (selectCount != 2)
             {
@@ -5780,7 +5778,7 @@ namespace vcs_DiskDirectoryFile1
             //for (int i = 0; i < selectCount; i++)
             for (int i = 0; i < listView_file.SelectedItems.Count; i++)
             {
-                selNdx = listView_file.SelectedIndices[i];
+                selNdx = listView_file.SelectedIndices[i];  // 取出選中的第i個
                 listView_file.Items[selNdx].Selected = true;    //選到的項目
                 //richTextBox1.Text += listView_file.Items[selNdx].Text + "\n";
 
@@ -5811,15 +5809,15 @@ namespace vcs_DiskDirectoryFile1
         private void bt_open_folder_Click(object sender, EventArgs e)
         {
             //開啟資料夾
-            int cnt = listView_dir.SelectedItems.Count;
+            int selectCount = listView_dir.SelectedItems.Count;  // 總共選擇的個數
 
             if (flag_export_foldername == true)  // 找資料夾, 全/空/小
             {
-                cnt = listView_dir.SelectedItems.Count;
+                selectCount = listView_dir.SelectedItems.Count;  // 總共選擇的個數
 
-                if (cnt > 0)
+                if (selectCount > 0)
                 {
-                    int selNdx = listView_dir.SelectedIndices[0];
+                    int selNdx = listView_dir.SelectedIndices[0];  // 取出選中的第0個
 
                     string foldername = listView_dir.Items[selNdx].SubItems[0].Text;
                     richTextBox1.Text += "資料夾:\t" + foldername + "\n";
@@ -5835,11 +5833,11 @@ namespace vcs_DiskDirectoryFile1
             }
             else if ((flag_export_filename == true) || (flag_search_Katfile == true) || (flag_search_text_mode == true))  // 匯出檔名 或 Katfile 或 搜尋文字模式
             {
-                cnt = listView_file.SelectedItems.Count;
+                selectCount = listView_file.SelectedItems.Count;  // 總共選擇的個數
 
-                if (cnt > 0)
+                if (selectCount > 0)
                 {
-                    int selNdx = listView_file.SelectedIndices[0];
+                    int selNdx = listView_file.SelectedIndices[0];  // 取出選中的第0個
 
                     string foldername = listView_file.Items[selNdx].SubItems[3].Text;
                     richTextBox1.Text += "資料夾:\t" + foldername + "\n";
@@ -5855,11 +5853,11 @@ namespace vcs_DiskDirectoryFile1
             }
             else if (flag_export_video == true)  // 找影片檔
             {
-                cnt = listView_video.SelectedItems.Count;
+                selectCount = listView_video.SelectedItems.Count;  // 總共選擇的個數
 
-                if (cnt > 0)
+                if (selectCount > 0)
                 {
-                    int selNdx = listView_video.SelectedIndices[0];
+                    int selNdx = listView_video.SelectedIndices[0];  // 取出選中的第0個
 
                     string foldername = listView_video.Items[selNdx].SubItems[5].Text;
                     richTextBox1.Text += "資料夾:\t" + foldername + "\n";
@@ -5910,7 +5908,7 @@ namespace vcs_DiskDirectoryFile1
 
             while (listBox1.SelectedIndices.Count > 0)
             {
-                listBox1.Items.RemoveAt(listBox1.SelectedIndices[0]);
+                listBox1.Items.RemoveAt(listBox1.SelectedIndices[0]);  // 取出選中的第0個
             }
         }
 
@@ -5923,7 +5921,7 @@ namespace vcs_DiskDirectoryFile1
         {
             while (listBox_search.SelectedIndices.Count > 0)
             {
-                listBox_search.Items.RemoveAt(listBox_search.SelectedIndices[0]);
+                listBox_search.Items.RemoveAt(listBox_search.SelectedIndices[0]);  // 取出選中的第0個
             }
         }
 
@@ -5938,7 +5936,7 @@ namespace vcs_DiskDirectoryFile1
             {
                 //Enter
 
-                int idx = listView_video.SelectedIndices[0];
+                int idx = listView_video.SelectedIndices[0];  // 取出選中的第0個
                 richTextBox1.Text += "檔名:\t" + listView_video.Items[idx].Text + "\n";
                 richTextBox1.Text += "簡名:\t" + listView_video.Items[idx].SubItems[1].Text + "\n";
                 richTextBox1.Text += "系列:\t" + listView_video.Items[idx].SubItems[2].Text + "\n";
@@ -6015,8 +6013,6 @@ public static void Rename(this FileInfo fi, string newName)
 bool res;
 res = fi.FullName.ToLower().Replace(" ", "").Contains(tb_search_text_pattern.Text.ToLower().Replace("-", ""));
 
-//if (filename.Contains(".zip") == true)
-
 //------------------------------------------------------------  # 60個
 
             string save_filename = "filename_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
@@ -6068,8 +6064,8 @@ richTextBox1.Text += "儲存資料完畢，檔案：" + saveFileDialog1.FileName
 
 //------------------------------------------------------------  # 60個
 
-fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length));
-fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
+// 或許以後三種型態的資料結構要分開 dir / file / video
+// TBD
 folderinfos.Add(new MyFolderInfo(foldername, foldername, folder_size, datetime.now));
                
 //------------------------------------------------------------  # 60個
@@ -6094,9 +6090,9 @@ for (int i = 0; i < fileinfos.Count; i++)
 
 //------------------------------------------------------------  # 60個
 
-兩個相同
+兩個相同, 總共選擇的個數
 int selectCount1 = listView1.SelectedIndices.Count;  // 總共選擇的個數
-int selectCount2 = listView1.SelectedItems.Count;
+int selectCount2 = listView1.SelectedItems.Count;  // 總共選擇的個數
 
 //------------------------------------------------------------  # 60個
 
@@ -6111,21 +6107,21 @@ while ((line = sr.ReadLine()) != null)
 }
 sr.Close();
 */
-
+//------------------------------------------------------------  # 60個
 /*
 特大影片  >1080p
 特小影片
 特長影片  時間長
 檔案容量特大 或者 容量最大的幾個檔案
 */
-
+//------------------------------------------------------------  # 60個
 /*
 一般檔案匯出  檢查檔案大小限制  資料為 上層資料夾+檔名+容量
 資料夾匯出 
 影片檔案匯出  檢查檔案大小限制  資料為 上層資料夾+檔名+容量
 Katfile匯出
 */
-
+//------------------------------------------------------------  # 60個
 /*
 //看是一層還是多層
 foreach (string filename in Directory.EnumerateFiles(foldername))
@@ -6148,14 +6144,14 @@ foreach (string dir in Directory.EnumerateDirectories(foldername))
 }
 
 */
-
+//------------------------------------------------------------  # 60個
 
 /*
 _dir        資料夾模式
 _file       檔案模式
 _video      影片模式
 */
-
+//------------------------------------------------------------  # 60個
 /*
         void save_log_to_local_drive()
         {
@@ -6221,152 +6217,7 @@ _video      影片模式
 
 //------------------------------------------------------------  # 60個
 
-                //指定應用程式路徑
-                string target = String.Empty;
-
-                //方法一
-                //Process.Start(target, "參數");
-                //Process.Start(target, all_filename);
-
-                //方法二
-
-                if (flag_search_vcs_pattern == 0)
-                {
-                    target = video_player_path;
-                }
-                else
-                {
-                    target = text_editor_path;
-                }
-
-                if (flag_search_vcs_pattern == 0)
-                {
-                    if (video_player_path == String.Empty)
-                    {
-                        all_filename = all_filename.Trim().Replace("\"", "");
-                        Process.Start(all_filename); //使用預設程式開啟, 無法一次播放多個檔案
-                    }
-                    else
-                    {
-                        Process.Start(video_player_path, all_filename);    //指名播放程式開啟
-                    }
-                }
-                else
-                {
-                    if (System.IO.File.Exists(text_editor_path) == true)
-                    {
-                        Process.Start(text_editor_path, all_filename);
-                    }
-                }
-
-//------------------------------------------------------------  # 60個
-
-result_str += "a你選擇了檔名:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
-result_str += "資料夾:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
-fullname = listView1.Items[selNdx].SubItems[3].Text + "\\" + listView1.Items[selNdx].SubItems[2].Text;
-
-//result_str += "a你選擇了檔名:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
-//result_str += "資料夾:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
-fullname = listView1.Items[selNdx].SubItems[3].Text + "\\" + listView1.Items[selNdx].SubItems[2].Text;
-
-//------------------------------------------------------------  # 60個
-                selNdx = listView1.SelectedIndices[0];
-                listView1.Items[selNdx].Selected = true;    //選到的項目
-                //result_str += "count = " + selectCount.ToString() + "\t";
-                result_str += "你選擇了資料夾:\t" + listView1.Items[selNdx].Text + "\n";
-
-                fullname = listView1.Items[selNdx].Text;
-
-                richTextBox1.Text += "開啟路徑: " + fullname + "\n";
-
-                // old
-                //開啟檔案總管
-                if (Directory.GetParent(fullname) == null)
-                    Process.Start(fullname);             //若是根目錄 不要擷取其父目錄的路徑
-                else
-                    Process.Start(Directory.GetParent(fullname).ToString()); //GetParent 擷取其父目錄的路徑
-
-                //C# 呼叫檔案總管開啟某個資料夾，並讓某個檔案或資料夾呈現反白的樣子
-                string file = @"C:\Windows\explorer.exe";
-                string argument = @"/select, " + fullname;
-                Process.Start(file, argument);
-
-//------------------------------------------------------------  # 60個
-
-            //播放 listview 多選的檔案
-int selectCount = listView1.SelectedIndices.Count;
-            int selNdx;
-            string all_filename = string.Empty;
-            string player_path = @"C:\Program Files (x86)\DAUM\PotPlayer\PotPlayerMini.exe";
-            if (selectCount <= 0)  //總共選擇的個數
-                return;
-
-            int SelectedItemsCount = listView1.SelectedItems.Count;
-            //richTextBox1.Text += "總共選了 : " + SelectedItemsCount.ToString() + " 個檔案，分別是 : \n";
-            for (int i = 0; i < SelectedItemsCount; i++)
-            {
-                selNdx = listView1.SelectedIndices[i];
-                listView1.Items[selNdx].Selected = true;    //選到的項目
-                //richTextBox1.Text += listView1.Items[selNdx].Text + "\n";
-                all_filename += " \"" + listView1.Items[selNdx].Text + "\"";
-            }
-
-//------------------------------------------------------------  # 60個
-
-            if (e.KeyCode == Keys.F2)
-            {
-                result_str += "你按了F2\n";
-
-                if (selectCount <= 0)  //總共選擇的個數
-                    return;
-
-                int selNdx = listView1.SelectedIndices[0];
-                listView1.Items[selNdx].Selected = true;    //選到的項目
-                //richTextBox1.Text += "count = " + selectCount.ToString() + "\t";
-                result_str += "你選擇了" + listView1.Items[selNdx].Text + "\t內容為：\n";
-
-                //ListViewItem t = listView1.Items[selNdx]; //相同寫法
-                //richTextBox1.Text += t.Text + "\t" + t.SubItems[1].Text + "\t" + t.SubItems[2].Text + "\n";
-                result_str += listView1.Items[selNdx].Text + "\t" + listView1.Items[selNdx].SubItems[1].Text + "\t" + listView1.Items[selNdx].SubItems[2].Text + "\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
-            }
 
 */
 
-
-
-
-
-/*
-
-        private void listView1_KeyDown(object sender, KeyEventArgs e)
-        {
-            int selectCount = listView1.SelectedIndices.Count;
-
-            //result_str += "KeyDown, 按鍵是：" + e.KeyCode + "\n";
-
-            if (e.KeyCode == Keys.A)
-            {
-                if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
-                {
-                    //result_str += "Ctrl + A\n";
-                    //result_str += "共有項目" + listView1.Items.Count.ToString() + " 個\n";
-
-                    for (int i = 0; i < listView1.Items.Count; i++)
-                    {
-                        //result_str += listView1.Items[i] + "\n";
-                        listView1.Items[i].Selected = true;
-                    }
-                }
-            }
-        }
-
-*/
-
-
-
-
-
-                //listView1.Items.Add(i1);
-                //設置ListView最後一行可見
-                //listView1.Items[listView1.Items.Count - 1].EnsureVisible();
 

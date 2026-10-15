@@ -68,6 +68,7 @@ foreach (string pattern in patterns)  // 多個搜尋pattern
 
 //------------------------------------------------------------  # 60個
 
+cccc
 //針對某控件的邊緣 設定表單大小
 this.ClientSize = new Size(richTextBox1.Right + 50, richTextBox1.Bottom + 50);
 

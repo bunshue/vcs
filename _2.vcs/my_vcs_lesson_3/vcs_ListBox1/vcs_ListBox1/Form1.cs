@@ -114,7 +114,8 @@ namespace vcs_ListBox1
             label10.Text = "(10)多顏色背景表示\n     自建ListBox";
             label11.Text = "(11)多顏色背景表示\n     建ListBox";
 
-            this.Size = new Size(1640, 750 + 40);
+            //針對某控件的邊緣 設定表單大小
+            this.ClientSize = new Size(richTextBox1.Right + 10, richTextBox1.Bottom + 10);
             this.Text = "vcs_ListBox1";
 
             //設定執行後的表單起始位置, 正中央
@@ -453,14 +454,14 @@ namespace vcs_ListBox1
 	//ListBox預設選項
 	// 建立Job字串陣列用來存放職業
 	String[] Job = new String[] { "士", "農", "工", "商", "兵", "其它" };
-	lstJob.Items.AddRange(Job); // lstJob清單放入Job陣列內容
-	lstJob.SelectedIndex = 0;   // lstJob清單預設第1個選項被選取
+	listBox1.Items.AddRange(Job); // listBox1清單放入Job陣列內容
+	listBox1.SelectedIndex = 0;   // listBox1清單預設第1個選項被選取
 
 listbox的方法
 從 listbox 的內容取得index
 
-int JobIndex = lstJob.FindString("aaaa");
-lstJob.SelectedIndex = JobIndex;
+int JobIndex = listBox1.FindString("aaaa");
+listBox1.SelectedIndex = JobIndex;
 
 //------------------------------------------------------------  # 60個
 

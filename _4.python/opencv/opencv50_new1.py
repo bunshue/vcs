@@ -8,6 +8,50 @@ from opencv_common import *
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# 測試 cv2.fitLine()
+
+# cv2.fitLine() 函式可以用來對一組 2D 或 3D 點進行直線擬合（最小二乘法或 M-estimator 演算法）
+
+# 1. 準備一組 2D 點（範例：略微帶有雜訊的直線上的點）
+points = np.array([
+    [10, 15],
+    [20, 28],
+    [30, 42],
+    [40, 50],
+    [50, 65]
+], dtype=np.float32)
+
+# 2. 進行直線擬合
+# 將 points 轉成 OpenCV 要求的 shape: (N, 1, 2) 或 (N, 2)
+rows, cols = 300, 300
+output = cv2.fitLine(points, cv2.DIST_L2, 0, 0.01, 0.01)
+
+vx, vy, x0, y0 = output[0][0], output[1][0], output[2][0], output[3][0]
+
+# 3. 根據單位向量與點，計算畫出直線的兩個端點
+# 假設從 x = 0 到 x = 300
+t1 = (0 - x0) / vx
+t2 = (cols - x0) / vx
+pt1 = (int(x0 + t1 * vx), int(y0 + t1 * vy))
+pt2 = (int(x0 + t2 * vx), int(y0 + t2 * vy))
+
+# 4. 在空白畫布上繪製結果
+img = np.zeros((rows, cols, 3), dtype=np.uint8)
+
+# 畫出原始點
+for p in points:
+    cv2.circle(img, (int(p[0]), int(p[1])), 4, (0, 0, 255), -1)
+
+# 畫出擬合的直線
+cv2.line(img, pt1, pt2, (0, 255, 0), 2)
+
+cv2.imshow('FitLine Example', img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 print("opencv 01")
 print("練習組合成一張大圖 picasa效果")
 

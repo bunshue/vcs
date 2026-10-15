@@ -128,12 +128,45 @@ namespace vcs_ListView1
 
         private void listView1_KeyDown(object sender, KeyEventArgs e)
         {
+            //richTextBox1.Text += "KeyDown, 按鍵是：" + e.KeyCode + "\n";
+
             //listView接受鍵盤的Delete鍵
             if (e.KeyCode == Keys.Delete)
             {
                 if (listView1.SelectedItems.Count > 0)
                 {
                     listView1.SelectedItems[0].Remove();
+                }
+            }
+            else if (e.KeyCode == Keys.F2)
+            {
+                richTextBox1.Text += "你按了F2\n";
+
+                int selectCount = listView1.SelectedIndices.Count;  // 總共選擇的個數
+
+                if (selectCount <= 0)  //總共選擇的個數
+                    return;
+
+                int selNdx = listView1.SelectedIndices[0];
+                listView1.Items[selNdx].Selected = true;    //選到的項目
+                richTextBox1.Text += "你選擇了" + listView1.Items[selNdx].Text + "\t內容為：\n";
+
+                ListViewItem t = listView1.Items[selNdx]; //相同寫法
+                richTextBox1.Text += t.Text + "\t" + t.SubItems[1].Text + "\t" + t.SubItems[2].Text + "\n";
+                richTextBox1.Text += listView1.Items[selNdx].Text + "\t" + listView1.Items[selNdx].SubItems[1].Text + "\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
+            }
+            else if (e.KeyCode == Keys.A)
+            {
+                if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
+                {
+                    //richTextBox1.Text += "Ctrl + A\n";
+                    //richTextBox1.Text += "共有項目" + listView1.Items.Count.ToString() + " 個\n";
+
+                    for (int i = 0; i < listView1.Items.Count; i++)
+                    {
+                        //richTextBox1.Text += listView1.Items[i] + "\n";
+                        listView1.Items[i].Selected = true;
+                    }
                 }
             }
         }
@@ -1650,5 +1683,12 @@ listView的內容可否加入 icon 例如 delete 或 開啟檔案
 
 
 
+
+
+
+
+//listView1.Items.Add(i1);
+//設置ListView最後一行可見
+//listView1.Items[listView1.Items.Count - 1].EnsureVisible();
 
 
