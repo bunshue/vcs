@@ -451,7 +451,7 @@
             this.groupBox1.Controls.Add(this.bt_delete_file);
             this.groupBox1.Location = new System.Drawing.Point(642, 10);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(588, 461);
+            this.groupBox1.Size = new System.Drawing.Size(620, 461);
             this.groupBox1.TabIndex = 259;
             this.groupBox1.TabStop = false;
             // 
@@ -459,7 +459,7 @@
             // 
             this.bt_replace.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_replace.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_replace.Location = new System.Drawing.Point(373, 381);
+            this.bt_replace.Location = new System.Drawing.Point(569, 155);
             this.bt_replace.Name = "bt_replace";
             this.bt_replace.Size = new System.Drawing.Size(45, 45);
             this.bt_replace.TabIndex = 311;
@@ -806,7 +806,7 @@
             // 
             this.bt_start_files_good.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_start_files_good.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_start_files_good.Location = new System.Drawing.Point(522, 153);
+            this.bt_start_files_good.Location = new System.Drawing.Point(521, 156);
             this.bt_start_files_good.Name = "bt_start_files_good";
             this.bt_start_files_good.Size = new System.Drawing.Size(45, 45);
             this.bt_start_files_good.TabIndex = 292;
@@ -1147,7 +1147,6 @@
             this.bt_dir11.Name = "bt_dir11";
             this.bt_dir11.Size = new System.Drawing.Size(200, 60);
             this.bt_dir11.TabIndex = 292;
-            this.bt_dir11.Text = "置換";
             this.bt_dir11.UseVisualStyleBackColor = true;
             this.bt_dir11.Click += new System.EventHandler(this.bt_dir11_Click);
             // 
@@ -1229,7 +1228,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1250, 660);
+            this.ClientSize = new System.Drawing.Size(1297, 660);
             this.Controls.Add(this.bt_clear2);
             this.Controls.Add(this.listView_video);
             this.Controls.Add(this.listView_file);

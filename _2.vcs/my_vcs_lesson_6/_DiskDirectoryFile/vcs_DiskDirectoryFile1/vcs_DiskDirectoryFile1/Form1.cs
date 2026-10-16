@@ -37,8 +37,6 @@ namespace vcs_DiskDirectoryFile1
 
         List<String> old_search_path = new List<String>();  //預設搜尋路徑
         List<String> old_search_pattern = new List<String>();  //預設搜尋關鍵字
-        bool flag_search_Katfile = false;
-        bool flag_export_foldername = false;  // 找資料夾, 全/空/小
         bool flag_search_folders_all = false;  // 找最底層 全資料夾 for 圖片整理
         bool flag_search_folders_empty = false;  // 找最底層 空資料夾
         bool flag_search_folders_small = false;  // 找最底層 小資料夾
@@ -49,7 +47,6 @@ namespace vcs_DiskDirectoryFile1
         bool flag_search_files_same1 = false;  // 找相同檔案, 模糊檔名
         bool flag_search_files_same2 = false;  // 找相同檔案, 完整容量
         bool flag_search_files_same3 = false;  // 找相同檔案, 模糊容量
-        bool flag_search_text_mode = false;
 
         private const int SEARCH_MODE_VCS = 0x00;	    //search vcs code, 搜尋vcs內的關鍵字
         private const int SEARCH_MODE_PYTHON = 0x01;	//search python code, 搜尋python內的關鍵字
@@ -58,8 +55,11 @@ namespace vcs_DiskDirectoryFile1
         string result_str = string.Empty;
         bool flag_show_30_message = false;
 
-        bool flag_export_filename = false;  // 匯出檔名
+        bool flag_export_dir = false;  // 找資料夾, 全/空/小
+        bool flag_export_file = false;  // 匯出檔名
         bool flag_export_video = false;  // 找影片檔
+        bool flag_export_katfile = false;  // 匯出Katfile
+        bool flag_search_text_mode = false;  // 搜尋文字模式
 
         string some_text = "白日依山盡，黃河入海流。 欲窮千里目，更上一層樓。";
         string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
@@ -645,32 +645,30 @@ namespace vcs_DiskDirectoryFile1
             int dx = w + 10;
             int dy = w + 10;
 
-            groupBox_folder.Size = new Size(w + 100, 140);
+            groupBox_folder.Size = new Size(w + 50, 140);
             groupBox_folder.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            listBox1.Size = new Size(w + 100 - 50, 120);
+            listBox1.Size = new Size(w + 0, 120);
             listBox1.Location = new Point(10, 16);
-            bt_add.Location = new Point(10 + 260, 16);
-            bt_remove.Location = new Point(10 + 260, 16 + 40);
-            bt_remove_all.Location = new Point(10 + 260, 16 + 80);
+            bt_add.Location = new Point(10 + 210, 16);
+            bt_remove.Location = new Point(10 + 210, 16 + 40);
+            bt_remove_all.Location = new Point(10 + 210, 16 + 80);
 
-            bt_open_dir1.Location = new Point(x_st + dx * 1 + 100, y_st + dy * 0);
+            bt_open_dir1.Location = new Point(x_st + dx * 1 + 50, y_st + dy * 0);
             tb_foldername1.Size = new Size(w + 100 - 50, 100);
-            tb_foldername1.Location = new Point(x_st + dx * 1 + 100 + 50, y_st + dy * 0 + 5);
+            tb_foldername1.Location = new Point(x_st + dx * 1 + 100, y_st + dy * 0 + 5);
 
             int ddy = 34;
-            tb_search.Size = new Size(w + 100 + 15 - 50, 100);
+            tb_search.Size = new Size(w + 15, 100);
             tb_search.Location = new Point(x_st + dx * 1 + 100, y_st + dy * 0 + 5 + ddy * 1);
             tb_foldername.Size = new Size(w + 100 + 15, 100);
-            tb_foldername.Location = new Point(x_st + dx * 1 + 100, y_st + dy * 0 + 5 + ddy * 2);
+            tb_foldername.Location = new Point(x_st + dx * 1 + 50, y_st + dy * 0 + 5 + ddy * 2);
             tb_filename.Size = new Size(w + 100 + 15, 100);
-            tb_filename.Location = new Point(x_st + dx * 1 + 100, y_st + dy * 0 + 5 + ddy * 3);
+            tb_filename.Location = new Point(x_st + dx * 1 + 50, y_st + dy * 0 + 5 + ddy * 3);
 
-            cb_search_pattern.Location = new Point(x_st + dx * 3 - 52, y_st + dy * 0 + ddy * 1 + 12);
+            cb_search_pattern.Location = new Point(x_st + dx * 3 - 102, y_st + dy * 0 + ddy * 1 + 12);
             cb_search_pattern.Text = "搜尋";
-            //cb_search_option1.Location = new Point(x_st + dx * 3 - 52, y_st + dy * 0 + ddy * 1 + 12 + 8);
-            //cb_search_option1.Text = "滿30";
 
-            cb_search_this_folder.Location = new Point(x_st + dx * 3 - 16, y_st + dy * 0 + 12);
+            cb_search_this_folder.Location = new Point(x_st + dx * 3 - 66, y_st + dy * 0 + 12);
             cb_search_this_folder.Text = "";
 
             x_st = 10;
@@ -680,7 +678,7 @@ namespace vcs_DiskDirectoryFile1
 
             //搜尋條件
             groupBox_search.Size = new Size(182, 140);
-            groupBox_search.Location = new Point(x_st + dx * 9, y_st + dy * 0 - 10);
+            groupBox_search.Location = new Point(x_st + dx * 9 - 50, y_st + dy * 0 - 10);
 
             x_st = 8;
             y_st = 20;
@@ -705,7 +703,7 @@ namespace vcs_DiskDirectoryFile1
 
             //比較
             groupBox_compare.Size = new Size(90, 140);
-            groupBox_compare.Location = new Point(x_st + dx * 11 + 46, y_st + dy * 0 - 10);  // 比較
+            groupBox_compare.Location = new Point(x_st + dx * 11 - 4, y_st + dy * 0 - 10);  // 比較
 
             dx = 80;
             dy = 20;
@@ -721,7 +719,7 @@ namespace vcs_DiskDirectoryFile1
             bt_compare.Location = new Point(x_st + dx * 0, y_st + dy * 4);
 
             //搜尋關鍵字
-            x_st = 920;
+            x_st = 870;
             y_st = 10;
             dx = 48;
             dy = 48;
@@ -738,7 +736,7 @@ namespace vcs_DiskDirectoryFile1
             bt_remove_all2.Location = new Point(x_st + dx * 0 + 100, y_st + dy * 0 + 118);
 
             //那些小icon
-            x_st = 1074;
+            x_st = 1024;
             y_st = 10;
             dx = 48;
             dy = 48;
@@ -750,6 +748,7 @@ namespace vcs_DiskDirectoryFile1
             bt_start_files.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             bt_start_all_files.Location = new Point(x_st + dx * 5, y_st + dy * 0);
             bt_start_files_good.Location = new Point(x_st + dx * 6, y_st + dy * 0);
+            bt_replace.Location = new Point(x_st + dx * 7, y_st + dy * 0);
             //那些小icon 第1排
             bt_search_pattern_vcs.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             bt_search_pattern_python.Location = new Point(x_st + dx * 1, y_st + dy * 1);
@@ -798,13 +797,13 @@ namespace vcs_DiskDirectoryFile1
 
         void show_item_location_listview()
         {
-            if (flag_export_foldername == true)  // 找資料夾, 全/空/小
+            if (flag_export_dir == true)  // 找資料夾, 全/空/小
             {
                 listView_dir.Visible = true;
                 listView_file.Visible = false;
                 listView_video.Visible = false;
             }
-            else if ((flag_export_filename == true) || (flag_search_Katfile == true) || (flag_search_text_mode == true))  // 匯出檔名 或 Katfile 或 搜尋文字模式
+            else if ((flag_export_file == true) || (flag_export_katfile == true) || (flag_search_text_mode == true))  // 匯出檔名 或 Katfile 或 搜尋文字模式
             {
                 listView_dir.Visible = false;
                 listView_file.Visible = true;
@@ -2536,18 +2535,12 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_dir10_Click(object sender, EventArgs e)
         {
-
         }
 
         //------------------------------------------------------------  # 60個
 
         private void bt_dir11_Click(object sender, EventArgs e)
         {
-            //置換
-
-            Form_Replace frm = new Form_Replace();    //實體化 Form_Replace 視窗物件
-            frm.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
-            frm.ShowDialog();   //顯示 frm 視窗
         }
 
         //------------------------------------------------------------  # 60個
@@ -2559,14 +2552,14 @@ namespace vcs_DiskDirectoryFile1
 
             richTextBox1.Text += "方法1, 以此為準\n";
 
-            flag_export_filename = true;  // 匯出檔名
+            flag_export_file = true;  // 匯出檔名
             show_item_location_listview();
 
             message = string.Empty;
             ProcessDirectory(foldername);
             richTextBox1.Text += message;  // 印出結果
 
-            flag_export_filename = false;  // 匯出檔名
+            flag_export_file = false;  // 匯出檔名
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             richTextBox1.Text += "方法2\n";
@@ -3444,11 +3437,11 @@ namespace vcs_DiskDirectoryFile1
             string delete_filename = string.Empty;
             int selectCount = listView_dir.SelectedIndices.Count;  // 總共選擇的個數
 
-            if (flag_export_foldername == true)  // 找資料夾, 全/空/小
+            if (flag_export_dir == true)  // 找資料夾, 全/空/小
             {
                 selectCount = listView_dir.SelectedIndices.Count;  // 總共選擇的個數
             }
-            else if (flag_export_filename == true)  // 匯出檔名
+            else if (flag_export_file == true)  // 匯出檔名
             {
                 selectCount = listView_file.SelectedIndices.Count;  // 總共選擇的個數
             }
@@ -3459,7 +3452,7 @@ namespace vcs_DiskDirectoryFile1
 
             for (int i = selectCount - 1; i >= 0; i--)
             {
-                if (flag_export_foldername == true)  // 找資料夾, 全/空/小
+                if (flag_export_dir == true)  // 找資料夾, 全/空/小
                 {
                     richTextBox1.Text += listView_dir.SelectedItems[i].SubItems[0].Text + "\n";
 
@@ -3476,7 +3469,7 @@ namespace vcs_DiskDirectoryFile1
                         richTextBox1.Text += "資料夾 : " + delete_foldername + " 不存在\n";
                     }
                 }
-                else if (flag_export_filename == true)  // 匯出檔名
+                else if (flag_export_file == true)  // 匯出檔名
                 {
                     delete_filename = listView_file.SelectedItems[i].SubItems[3].Text + "\\" + listView_file.SelectedItems[i].SubItems[0].Text;
                     richTextBox1.Text += delete_filename + "\n";
@@ -3512,11 +3505,11 @@ namespace vcs_DiskDirectoryFile1
                     return;
                 }
 
-                if (flag_export_foldername == true)  // 找資料夾, 全/空/小
+                if (flag_export_dir == true)  // 找資料夾, 全/空/小
                 {
                     listView_dir.SelectedItems[i].Remove();
                 }
-                else if (flag_export_filename == true)  // 匯出檔名
+                else if (flag_export_file == true)  // 匯出檔名
                 {
                     listView_file.SelectedItems[i].Remove();
                 }
@@ -3582,7 +3575,7 @@ namespace vcs_DiskDirectoryFile1
             //mesg += "打印匯出條件\t";
             mesg += "資料夾 : " + foldername + "\t";
 
-            if (flag_export_filename == true)
+            if (flag_export_file == true)
             {
                 mesg += "匯出檔名\t";
             }
@@ -3592,12 +3585,12 @@ namespace vcs_DiskDirectoryFile1
                 mesg += "找影片檔\t";
             }
 
-            if (flag_search_Katfile == true)
+            if (flag_export_katfile == true)
             {
                 mesg += "匯出 Katfile\t";
             }
 
-            if (flag_export_foldername == true)  // 找資料夾, 全/空/小
+            if (flag_export_dir == true)  // 找資料夾, 全/空/小
             {
                 mesg += "找資料夾, 全/空/小\\t\t";
 
@@ -3863,11 +3856,11 @@ namespace vcs_DiskDirectoryFile1
                 {
                     richTextBox1.Text += "找到 " + len.ToString() + " 筆資料\n";
 
-                    if (flag_export_foldername == true)  // 找資料夾, 全/空/小
+                    if (flag_export_dir == true)  // 找資料夾, 全/空/小
                     {
                         show_file_info_dir(fileinfos_match, -1, false, listView_dir);
                     }
-                    else if (flag_export_filename == true)  // 匯出檔名
+                    else if (flag_export_file == true)  // 匯出檔名
                     {
                         show_file_info_file(fileinfos_match, -1, false, listView_file);
                     }
@@ -3891,11 +3884,11 @@ namespace vcs_DiskDirectoryFile1
                 {
                     richTextBox1.Text += "找到 " + len.ToString() + " 筆資料\n";
 
-                    if (flag_export_foldername == true)  // 找資料夾, 全/空/小
+                    if (flag_export_dir == true)  // 找資料夾, 全/空/小
                     {
                         show_file_info_dir(fileinfos, -1, false, listView_dir);
                     }
-                    else if ((flag_export_filename == true) || (flag_search_Katfile == true) || (flag_search_text_mode == true))  // 匯出檔名 或 Katfile 或 搜尋文字模式
+                    else if ((flag_export_file == true) || (flag_export_katfile == true) || (flag_search_text_mode == true))  // 匯出檔名 或 Katfile 或 搜尋文字模式
                     {
                         show_file_info_file(fileinfos, -1, false, listView_file);
                     }
@@ -4078,7 +4071,7 @@ namespace vcs_DiskDirectoryFile1
                 ProcessFile(filename);
             }
 
-            if (flag_export_foldername == true)  // 找資料夾, 全/空/小
+            if (flag_export_dir == true)  // 找資料夾, 全/空/小
             {
                 DirectoryInfo d = new DirectoryInfo(foldername);
                 folder_folders = Directory.GetDirectories(d.FullName).Length;  // 取得指定目錄中子目錄的名稱, 一層
@@ -4189,7 +4182,7 @@ namespace vcs_DiskDirectoryFile1
                 return;
             }
 
-            if (flag_export_filename == true)  // 匯出檔名
+            if (flag_export_file == true)  // 匯出檔名
             {
                 message += "\t" + fi.Name + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
                 //message += "\t" + fi.Name + "\n";
@@ -4282,7 +4275,7 @@ namespace vcs_DiskDirectoryFile1
                     }
                 }
             }
-            else if (flag_search_Katfile == true)  //匯出Katfile壓縮檔檔案資料
+            else if (flag_export_katfile == true)  //匯出Katfile壓縮檔檔案資料
             {
                 if ((fi.Extension.ToLower() == ".rar") || (fi.Extension.ToLower() == ".zip"))
                 {
@@ -4325,7 +4318,7 @@ namespace vcs_DiskDirectoryFile1
                     return;
                 }
             }
-            else if (flag_export_foldername == true)  // 找資料夾, 全/空/小, 需要知道資料夾內的檔案狀況
+            else if (flag_export_dir == true)  // 找資料夾, 全/空/小, 需要知道資料夾內的檔案狀況
             {
                 folder_files++;
                 folder_size += fi.Length;
@@ -4653,14 +4646,14 @@ namespace vcs_DiskDirectoryFile1
                 string foldername_old = string.Empty;
                 string foldername_new = string.Empty;
                 richTextBox1.Text += current_index_listView.ToString() + "\n";
-                if (flag_export_foldername == true)  // 找資料夾, 全/空/小
+                if (flag_export_dir == true)  // 找資料夾, 全/空/小
                 {
                     foldername_old = listView_dir.Items[current_index_listView].Text;///???
                     foldername_new = Directory.GetParent(foldername_old) + "\\" + tb_foldername.Text;
                     richTextBox1.Text += "11foldername_old:\t" + foldername_old + "\n";
                     richTextBox1.Text += "11foldername_new:\t" + foldername_new + "\n";
                 }
-                else if (flag_export_filename == true)  // 匯出檔名
+                else if (flag_export_file == true)  // 匯出檔名
                 {
                     foldername_old = listView_file.Items[current_index_listView].SubItems[3].Text;
                     foldername_new = Directory.GetParent(foldername_old) + "\\" + tb_foldername.Text;
@@ -4730,12 +4723,12 @@ namespace vcs_DiskDirectoryFile1
                 string filename_old = string.Empty;
                 string filename_new = string.Empty;
                 richTextBox1.Text += current_index_listView.ToString() + "\n";
-                if (flag_export_foldername == true)  // 找資料夾, 全/空/小
+                if (flag_export_dir == true)  // 找資料夾, 全/空/小
                 {
                     richTextBox1.Text += "資料夾模式, 不支持修改檔名\n";
                     return;
                 }
-                else if (flag_export_filename == true)  // 匯出檔名
+                else if (flag_export_file == true)  // 匯出檔名
                 {
                     filename_old = listView_file.Items[current_index_listView].SubItems[3].Text + "\\" + listView_file.Items[current_index_listView].Text;
                     filename_new = listView_file.Items[current_index_listView].SubItems[3].Text + "\\" + tb_filename.Text;
@@ -5575,7 +5568,7 @@ namespace vcs_DiskDirectoryFile1
 
         bool check_file_condition(FileInfo fi)
         {
-            if (flag_search_Katfile == true)
+            if (flag_export_katfile == true)
             {
                 return true;
             }
@@ -5639,8 +5632,8 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_export_filename_Click(object sender, EventArgs e)
         {
-            flag_export_foldername = false;  // 找資料夾, 全/空/小
-            flag_export_filename = true;  // 匯出檔名
+            flag_export_dir = false;  // 找資料夾, 全/空/小
+            flag_export_file = true;  // 匯出檔名
             flag_export_video = false;  // 找影片檔
             tb_search_text_old = tb_search.Text;
             tb_limit_min_text_old = tb_limit_min.Text;
@@ -5655,8 +5648,8 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_export_video_Click(object sender, EventArgs e)
         {
-            flag_export_foldername = false;  // 找資料夾, 全/空/小
-            flag_export_filename = false;  // 匯出檔名
+            flag_export_dir = false;  // 找資料夾, 全/空/小
+            flag_export_file = false;  // 匯出檔名
             flag_export_video = true;  // 找影片檔
             tb_search_text_old = tb_search.Text;
             tb_limit_min_text_old = tb_limit_min.Text;
@@ -5671,8 +5664,8 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_export_foldername_Click(object sender, EventArgs e)
         {
-            flag_export_foldername = true;  // 找資料夾, 全/空/小
-            flag_export_filename = false;  // 匯出檔名
+            flag_export_dir = true;  // 找資料夾, 全/空/小
+            flag_export_file = false;  // 匯出檔名
             flag_export_video = false;  // 找影片檔
             tb_search_text_old = tb_search.Text;
             tb_limit_min_text_old = tb_limit_min.Text;
@@ -5687,15 +5680,15 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_export_doc_Click(object sender, EventArgs e)
         {
-            flag_export_foldername = false;  // 找資料夾, 全/空/小
-            flag_export_filename = false;  // 匯出檔名
+            flag_export_dir = false;  // 找資料夾, 全/空/小
+            flag_export_file = false;  // 匯出檔名
             flag_export_video = false;  // 找影片檔
-            flag_search_Katfile = true;  // 匯出Katfile壓縮檔檔案資料 專用
+            flag_export_katfile = true;  // 匯出Katfile壓縮檔檔案資料 專用
             show_item_location_listview();
 
             do_my_export(doc_foldername, bt_export_doc);
 
-            flag_search_Katfile = false;  // 匯出Katfile壓縮檔檔案資料 專用
+            flag_export_katfile = false;  // 匯出Katfile壓縮檔檔案資料 專用
         }
 
         void do_search_pattern()
@@ -5707,8 +5700,8 @@ namespace vcs_DiskDirectoryFile1
             }
 
             //搜尋文字
-            flag_export_foldername = false;  // 找資料夾, 全/空/小
-            flag_export_filename = false;  // 匯出檔名
+            flag_export_dir = false;  // 找資料夾, 全/空/小
+            flag_export_file = false;  // 匯出檔名
             flag_export_video = false;  // 找影片檔
             flag_search_text_mode = true;  // 搜尋文字模式
 
@@ -5968,7 +5961,7 @@ namespace vcs_DiskDirectoryFile1
             //開啟資料夾
             int selectCount = listView_dir.SelectedItems.Count;  // 總共選擇的個數
 
-            if (flag_export_foldername == true)  // 找資料夾, 全/空/小
+            if (flag_export_dir == true)  // 找資料夾, 全/空/小
             {
                 selectCount = listView_dir.SelectedItems.Count;  // 總共選擇的個數
 
@@ -5988,7 +5981,7 @@ namespace vcs_DiskDirectoryFile1
                     Process.Start(foldername);
                 }
             }
-            else if ((flag_export_filename == true) || (flag_search_Katfile == true) || (flag_search_text_mode == true))  // 匯出檔名 或 Katfile 或 搜尋文字模式
+            else if ((flag_export_file == true) || (flag_export_katfile == true) || (flag_search_text_mode == true))  // 匯出檔名 或 Katfile 或 搜尋文字模式
             {
                 selectCount = listView_file.SelectedItems.Count;  // 總共選擇的個數
 
@@ -6144,7 +6137,11 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_replace_Click(object sender, EventArgs e)
         {
+            //置換
 
+            Form_Replace frm = new Form_Replace();    //實體化 Form_Replace 視窗物件
+            frm.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
+            frm.ShowDialog();   //顯示 frm 視窗
         }
 
         //------------------------------------------------------------  # 60個
