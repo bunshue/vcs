@@ -83,6 +83,7 @@ namespace vcs_DiskDirectoryFile1
         string tb_limit_min_text_old = string.Empty;
         string tb_limit_max_text_old = string.Empty;
         string foldername_old = string.Empty;
+        int current_index_listView = 0;
 
         int filesize_min = 0;  // 搜尋 資料夾/檔案 的下限
         int filesize_max = 0;  // 搜尋 資料夾/檔案 的上限
@@ -1641,12 +1642,6 @@ namespace vcs_DiskDirectoryFile1
             richTextBox1.Text += "\n存檔完成, 檔名 : " + filename2 + "\n";
             richTextBox1.Text += "\n存檔完成, 檔名 : " + filename3 + "\n";
             richTextBox1.Text += "\n存檔完成, 檔名 : " + filename4 + "\n";
-
-
-
-
-
-
         }
 
         //------------------------------------------------------------  # 60個
@@ -2980,13 +2975,26 @@ namespace vcs_DiskDirectoryFile1
         private void listView_dir_MouseClick(object sender, MouseEventArgs e)
         {
             // 找資料夾, 全/空/小
-            return;
+            int idx = listView_dir.SelectedIndices[0];  // 取出選中的第0個
+            current_index_listView = idx;
+
+            string foldername = listView_dir.Items[idx].Text;
+            richTextBox1.Text += "資料夾:\t" + foldername + "\n";
+
+            DirectoryInfo dinfo = new DirectoryInfo(foldername);
+            tb_foldername.Text = dinfo.Name;  //資料夾簡名
+            tb_foldername.BackColor = Color.White;
+            tb_foldername.Enabled = true;
+            tb_filename.Enabled = true;
+            tb_foldername_text_old = dinfo.Name;  //資料夾簡名
         }
 
         private void listView_file_MouseClick(object sender, MouseEventArgs e)
         {
             // 檔案的
+
             int idx = listView_file.SelectedIndices[0];  // 取出選中的第0個
+            current_index_listView = idx;
 
             /*
             richTextBox1.Text += "檔名:\t" + listView_file.Items[idx].Text + "\n";
@@ -3000,6 +3008,10 @@ namespace vcs_DiskDirectoryFile1
             DirectoryInfo dinfo = new DirectoryInfo(foldername);
             tb_foldername.Text = dinfo.Name;  //資料夾簡名
             tb_filename.Text = listView_file.Items[idx].Text;  // 檔案名稱 或許不要副檔名
+            tb_foldername.BackColor = Color.White;
+            tb_filename.BackColor = Color.White;
+            tb_foldername.Enabled = true;
+            tb_filename.Enabled = true;
             tb_foldername_text_old = dinfo.Name;  //資料夾簡名
             tb_filename_text_old = listView_file.Items[idx].Text;  // 檔案名稱 或許不要副檔名
 
@@ -3068,6 +3080,7 @@ namespace vcs_DiskDirectoryFile1
             // 影片的
 
             int idx = listView_video.SelectedIndices[0];  // 取出選中的第0個
+            current_index_listView = idx;
 
             /*
             richTextBox1.Text += "檔名:\t" + listView_video.Items[idx].Text + "\n";
@@ -3083,6 +3096,10 @@ namespace vcs_DiskDirectoryFile1
             DirectoryInfo dinfo = new DirectoryInfo(foldername);
             tb_foldername.Text = dinfo.Name;  //資料夾簡名
             tb_filename.Text = listView_video.Items[idx].Text;  // 檔案名稱 或許不要副檔名
+            tb_foldername.BackColor = Color.White;
+            tb_filename.BackColor = Color.White;
+            tb_foldername.Enabled = true;
+            tb_filename.Enabled = true;
             tb_foldername_text_old = dinfo.Name;  //資料夾簡名
             tb_filename_text_old = listView_video.Items[idx].Text;  // 檔案名稱 或許不要副檔名
             return;
@@ -4626,13 +4643,70 @@ namespace vcs_DiskDirectoryFile1
             {
                 //Enter
                 e.Handled = true;
+
+                if (tb_foldername.Text == tb_foldername_text_old)
+                {
+                    richTextBox1.Text += "資料夾名相同, 未修改\n";
+                    return;
+                }
+
+                string foldername_old = string.Empty;
+                string foldername_new = string.Empty;
+                richTextBox1.Text += current_index_listView.ToString() + "\n";
+                if (flag_export_foldername == true)  // 找資料夾, 全/空/小
+                {
+                    foldername_old = listView_dir.Items[current_index_listView].Text;///???
+                    foldername_new = Directory.GetParent(foldername_old) + "\\" + tb_foldername.Text;
+                    richTextBox1.Text += "11foldername_old:\t" + foldername_old + "\n";
+                    richTextBox1.Text += "11foldername_new:\t" + foldername_new + "\n";
+                }
+                else if (flag_export_filename == true)  // 匯出檔名
+                {
+                    foldername_old = listView_file.Items[current_index_listView].SubItems[3].Text;
+                    foldername_new = Directory.GetParent(foldername_old) + "\\" + tb_foldername.Text;
+                    richTextBox1.Text += "22foldername_old:\t" + foldername_old + "\n";
+                    richTextBox1.Text += "22foldername_new:\t" + foldername_new + "\n";
+                }
+                else if (flag_export_video == true)  // 找影片檔
+                {
+                    foldername_old = listView_video.Items[current_index_listView].SubItems[5].Text;
+                    foldername_new = Directory.GetParent(foldername_old) + "\\" + tb_foldername.Text;
+                    richTextBox1.Text += "33foldername_old:\t" + foldername_old + "\n";
+                    richTextBox1.Text += "33foldername_new:\t" + foldername_new + "\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "其他不支持資料夾改名模式\n";
+                    return;
+                }
+
+                if (Directory.Exists(foldername_old) == true)  // 確認 foldername_old 是否存在
+                {
+                    //移動資料夾，從 foldername_old 移動到 foldername_new
+                    if (Directory.Exists(foldername_new) == false)  // 確認 foldername_new 是否存在
+                    {
+                        Directory.Move(foldername_old, foldername_new);  // 資料夾改名
+                        richTextBox1.Text += "已移動資料夾: " + foldername_old + " 到 " + foldername_new + "\n";
+                        tb_foldername.Enabled = false;
+                        tb_filename.Enabled = false;
+                    }
+                    else
+                    {
+                        richTextBox1.Text += "資料夾: " + foldername_new + " 已存在，無法移動\n";
+                    }
+                }
+                else
+                {
+                    richTextBox1.Text += "資料夾: " + foldername_old + " 不存在，無法移動，可能已被改過資料夾名\n";
+                }
             }
             else if (e.KeyChar == (Char)27)  //撈取ESC
             {
                 //ESC
-                tb_foldername.Text = tb_foldername_text_old;  // 恢復
-
                 e.Handled = true;
+
+                tb_foldername.Text = tb_foldername_text_old;  // 恢復
+                tb_foldername.BackColor = Color.White;
             }
             else
             {
@@ -4646,17 +4720,96 @@ namespace vcs_DiskDirectoryFile1
             {
                 //Enter
                 e.Handled = true;
+
+                if (tb_filename.Text == tb_filename_text_old)
+                {
+                    richTextBox1.Text += "檔名相同, 未修改\n";
+                    return;
+                }
+
+                string filename_old = string.Empty;
+                string filename_new = string.Empty;
+                richTextBox1.Text += current_index_listView.ToString() + "\n";
+                if (flag_export_foldername == true)  // 找資料夾, 全/空/小
+                {
+                    richTextBox1.Text += "資料夾模式, 不支持修改檔名\n";
+                    return;
+                }
+                else if (flag_export_filename == true)  // 匯出檔名
+                {
+                    filename_old = listView_file.Items[current_index_listView].SubItems[3].Text + "\\" + listView_file.Items[current_index_listView].Text;
+                    filename_new = listView_file.Items[current_index_listView].SubItems[3].Text + "\\" + tb_filename.Text;
+                    richTextBox1.Text += "22filename_old:\t" + filename_old + "\n";
+                    richTextBox1.Text += "22filename_new:\t" + filename_new + "\n";
+                }
+                else if (flag_export_video == true)  // 找影片檔
+                {
+                    filename_old = listView_video.Items[current_index_listView].SubItems[5].Text + "\\" + listView_video.Items[current_index_listView].Text;
+                    filename_new = listView_video.Items[current_index_listView].SubItems[5].Text + "\\" + tb_filename.Text;
+                    richTextBox1.Text += "33filename_old:\t" + filename_old + "\n";
+                    richTextBox1.Text += "33filename_new:\t" + filename_new + "\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "其他不支持檔案改名模式\n";
+                    return;
+                }
+
+                if (File.Exists(filename_old) == true)  // 確認 filename_old 是否存在
+                {
+                    //移動檔案，從 filename_old 移動到 filename_new
+                    if (File.Exists(filename_new) == false)  // 確認 filename_new 是否存在
+                    {
+                        File.Move(filename_old, filename_new);  // 檔案重新命名
+                        richTextBox1.Text += "已移動檔案: " + filename_old + " 到 " + filename_new + "\n";
+                        tb_foldername.Enabled = false;
+                        tb_filename.Enabled = false;
+                    }
+                    else
+                    {
+                        richTextBox1.Text += "檔案: " + filename_new + " 已存在，無法移動\n";
+                    }
+                }
+                else
+                {
+                    richTextBox1.Text += "檔案: " + filename_old + " 不存在，無法移動，可能已被改過檔名\n";
+                }
             }
             else if (e.KeyChar == (Char)27)  //撈取ESC
             {
                 //ESC
-                tb_filename.Text = tb_filename_text_old;  // 恢復
-
                 e.Handled = true;
+
+                tb_filename.Text = tb_filename_text_old;  // 恢復
+                tb_filename.BackColor = Color.White;
             }
             else
             {
                 e.Handled = false;
+            }
+        }
+
+        private void tb_foldername_TextChanged(object sender, EventArgs e)
+        {
+            if (tb_foldername.Text != tb_foldername_text_old)
+            {
+                tb_foldername.BackColor = Color.Pink;
+            }
+            else
+            {
+                tb_foldername.BackColor = Color.White;
+            }
+        }
+
+        private void tb_filename_TextChanged(object sender, EventArgs e)
+        {
+            if (tb_filename.Text != tb_filename_text_old)
+            {
+                tb_filename.BackColor = Color.Pink;
+            }
+            else
+            {
+                tb_filename.BackColor = Color.White;
             }
         }
 
@@ -4665,6 +4818,8 @@ namespace vcs_DiskDirectoryFile1
             if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
             {
                 //Enter
+                e.Handled = true;
+
                 if (Directory.Exists(tb_foldername1.Text) == true)
                 {
                     listBox1.Items.Add(tb_foldername1.Text);
@@ -4674,13 +4829,13 @@ namespace vcs_DiskDirectoryFile1
                     richTextBox1.Text += "非資料夾\n";
                     tb_foldername1.Clear();
                 }
-                e.Handled = true;
             }
             else if (e.KeyChar == (Char)27)  //撈取ESC
             {
                 //ESC
-                tb_foldername1.Text = tb_foldername1_text_old;  // 恢復
                 e.Handled = true;
+
+                tb_foldername1.Text = tb_foldername1_text_old;  // 恢復
             }
             else
             {
@@ -4698,9 +4853,9 @@ namespace vcs_DiskDirectoryFile1
             else if (e.KeyChar == (Char)27)  //撈取ESC
             {
                 //ESC
-                tb_search.Text = tb_search_text_old;  // 恢復
-
                 e.Handled = true;
+
+                tb_search.Text = tb_search_text_old;  // 恢復
             }
             else
             {
@@ -4718,9 +4873,9 @@ namespace vcs_DiskDirectoryFile1
             else if (e.KeyChar == (Char)27)  //撈取ESC
             {
                 //ESC
-                tb_limit_min.Text = tb_limit_min_text_old;  // 恢復
-
                 e.Handled = true;
+
+                tb_limit_min.Text = tb_limit_min_text_old;  // 恢復
             }
             else
             {
@@ -4744,9 +4899,9 @@ namespace vcs_DiskDirectoryFile1
             else if (e.KeyChar == (Char)27)  //撈取ESC
             {
                 //ESC
-                tb_limit_max.Text = tb_limit_max_text_old;  // 恢復
-
                 e.Handled = true;
+
+                tb_limit_max.Text = tb_limit_max_text_old;  // 恢復
             }
             else
             {
@@ -5191,7 +5346,6 @@ namespace vcs_DiskDirectoryFile1
         {
             //測試 搜尋檔案內的字串
 
-
             //測試 檔名簡中轉正中
 
             richTextBox1.Text += "listBox_search\n";
@@ -5201,8 +5355,6 @@ namespace vcs_DiskDirectoryFile1
             {
                 richTextBox1.Text += "取得 : " + listBox_search.Items[i] + "\n";
             }
-            //listbox1
-
 
             return;
 
@@ -5217,8 +5369,6 @@ namespace vcs_DiskDirectoryFile1
             {
                 richTextBox1.Text += "取得 : " + old_search_path[i] + "\n";
             }
-
-
         }
 
         private void tb_text_Click(object sender, EventArgs e)
@@ -5942,6 +6092,7 @@ namespace vcs_DiskDirectoryFile1
             if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
             {
                 //Enter
+                e.Handled = true;
 
                 int idx = listView_video.SelectedIndices[0];  // 取出選中的第0個
                 richTextBox1.Text += "檔名:\t" + listView_video.Items[idx].Text + "\n";
@@ -5961,7 +6112,6 @@ namespace vcs_DiskDirectoryFile1
                 {
                     richTextBox1.Text += "檔案 : " + fullname + " , 不存在\n";
                 }
-                e.Handled = true;
             }
         }
 
@@ -5982,9 +6132,9 @@ namespace vcs_DiskDirectoryFile1
             else if (e.KeyChar == (Char)27)  //撈取ESC
             {
                 //ESC
-                tb_search_pattern.Text = tb_search_pattern_text_old;  // 恢復
-
                 e.Handled = true;
+
+                tb_search_pattern.Text = tb_search_pattern_text_old;  // 恢復
             }
             else
             {
