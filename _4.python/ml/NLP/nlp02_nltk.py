@@ -63,6 +63,13 @@ stemmer = nltk.SnowballStemmer("english")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+
+# nltk.download('wordnet')  # 有 打印訊息
+nltk.download('wordnet', quiet=True)  # 無 打印訊息
+
+sys.exit()
+
+
 print("sumy：對網頁或文章進行摘要")
 
 # pip install sumy

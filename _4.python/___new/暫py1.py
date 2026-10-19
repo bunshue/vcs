@@ -1,5 +1,14 @@
 
 
+python
+
+舊 : ix		新 loc iloc
+
+ix is deprecated in v0.20.0 and replaced by loc, iloc.
+
+
+
+
 //------------------------------------------------------------  # 60個
 
 
