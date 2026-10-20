@@ -522,31 +522,11 @@ namespace vcs_DiskDirectoryFile1
             int dx = 200 + 10;
             int dy = 60 + 10;
 
-            label0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            label1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-
-            int W = 1240 + 210;
-            groupBox1.Size = new Size(W, 106 + 50);
-            groupBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0 - 14);
-
-            listView_dir.Size = new Size(W, 270 - 50 + 200);
-            listView_dir.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 24 + 50);
-            listView_file.Size = new Size(W, 270 - 50 + 200);
-            listView_file.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 24 + 50);
-            listView_video.Size = new Size(W, 270 - 50 + 200);
-            listView_video.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 24 + 50);
-            bt_clear2.Location = new Point(listView_dir.Location.X + listView_dir.Size.Width - bt_clear2.Size.Width, listView_dir.Location.Y + listView_dir.Size.Height - bt_clear2.Size.Height);
-            bt_clear2.BringToFront();
-
-            richTextBox1.Size = new Size(W, 340 - 200 + 140 + 70);
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 5 + 24 + 200);
-
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-            bt_copy_rtb_data.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - bt_copy_rtb_data.Width, richTextBox1.Location.Y + richTextBox1.Height - bt_clear.Height - bt_copy_rtb_data.Height);
-
-            //button
-            y_st += 24;
-
+            groupBox_file.Size = new Size(220, 70 * 13 + 20);
+            groupBox_file.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            groupBox_directory.Size = new Size(220, 70 * 13 + 20);
+            groupBox_directory.Location = new Point(x_st + dx * 1 + 20, y_st + dy * 0);
+            y_st += 10;
             bt_file00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_file01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             bt_file02.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -560,61 +540,54 @@ namespace vcs_DiskDirectoryFile1
             bt_file10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
             bt_file11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
             bt_file12.Location = new Point(x_st + dx * 0, y_st + dy * 12);
-            bt_dir00.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            bt_dir01.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            bt_dir02.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            bt_dir03.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            bt_dir04.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            bt_dir05.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            bt_dir06.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            bt_dir07.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            bt_dir08.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            bt_dir09.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            bt_dir10.Location = new Point(x_st + dx * 1, y_st + dy * 10);
-            bt_dir11.Location = new Point(x_st + dx * 1, y_st + dy * 11);
-            bt_dir12.Location = new Point(x_st + dx * 1, y_st + dy * 12);
+            bt_dir00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_dir01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_dir02.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            bt_dir03.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            bt_dir04.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            bt_dir05.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            bt_dir06.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            bt_dir07.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            bt_dir08.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            bt_dir09.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            bt_dir10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            bt_dir11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+            bt_dir12.Location = new Point(x_st + dx * 0, y_st + dy * 12);
 
-            bt_dir11.Text = "自動修正檔名";
+            x_st += 40;
+            y_st = 10;
+            int W = 1240 + 180 + 8;
+            groupBox1.Size = new Size(W, 106 + 50);
+            groupBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0 - 14);
+
+            listView_dir.Size = new Size(W, 270 - 50 + 200);
+            listView_dir.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 24 + 50);
+            listView_file.Size = new Size(W, 270 - 50 + 200);
+            listView_file.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 24 + 50);
+            listView_video.Size = new Size(W, 270 - 50 + 200);
+            listView_video.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 24 + 50);
+            bt_clear2.Location = new Point(listView_dir.Location.X + listView_dir.Size.Width - bt_clear2.Size.Width, listView_dir.Location.Y + listView_dir.Size.Height - bt_clear2.Size.Height);
+            bt_clear2.BringToFront();
+
+            richTextBox1.Size = new Size(W, 340 + 20);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 5 + 24 + 200);
+
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+            bt_copy_rtb_data.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - bt_copy_rtb_data.Width, richTextBox1.Location.Y + richTextBox1.Height - bt_clear.Height - bt_copy_rtb_data.Height);
 
             show_item_location_common();
         }
 
         void show_item_location_my_file_manager()
         {
+            groupBox_file.Visible = false;
+            groupBox_directory.Visible = false;
+
             //button
             int x_st = 10;
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-
-            label0.Visible = false;
-            label1.Visible = false;
-            bt_file00.Visible = false;
-            bt_file01.Visible = false;
-            bt_file02.Visible = false;
-            bt_file03.Visible = false;
-            bt_file04.Visible = false;
-            bt_file05.Visible = false;
-            bt_file06.Visible = false;
-            bt_file07.Visible = false;
-            bt_file08.Visible = false;
-            bt_file09.Visible = false;
-            bt_file10.Visible = false;
-            bt_file11.Visible = false;
-            bt_file12.Visible = false;
-            bt_dir00.Visible = false;
-            bt_dir01.Visible = false;
-            bt_dir02.Visible = false;
-            bt_dir03.Visible = false;
-            bt_dir04.Visible = false;
-            bt_dir05.Visible = false;
-            bt_dir06.Visible = false;
-            bt_dir07.Visible = false;
-            bt_dir08.Visible = false;
-            bt_dir09.Visible = false;
-            bt_dir10.Visible = false;
-            bt_dir11.Visible = false;
-            bt_dir12.Visible = false;
 
             int W = 1500;
             groupBox1.Size = new Size(W, 106 + 50);
@@ -654,21 +627,21 @@ namespace vcs_DiskDirectoryFile1
             bt_remove_all.Location = new Point(10 + 210, 16 + 80);
 
             bt_open_dir1.Location = new Point(x_st + dx * 1 + 50, y_st + dy * 0);
-            tb_foldername1.Size = new Size(w + 100 - 50, 100);
+            tb_foldername1.Size = new Size(w + 30, 100);
             tb_foldername1.Location = new Point(x_st + dx * 1 + 100, y_st + dy * 0 + 5);
 
             int ddy = 34;
-            tb_search.Size = new Size(w + 15, 100);
+            tb_search.Size = new Size(w - 5, 100);
             tb_search.Location = new Point(x_st + dx * 1 + 100, y_st + dy * 0 + 5 + ddy * 1);
-            tb_foldername.Size = new Size(w + 100 + 15, 100);
+            tb_foldername.Size = new Size(w + 80 + 15, 100);
             tb_foldername.Location = new Point(x_st + dx * 1 + 50, y_st + dy * 0 + 5 + ddy * 2);
-            tb_filename.Size = new Size(w + 100 + 15, 100);
+            tb_filename.Size = new Size(w + 80 + 15, 100);
             tb_filename.Location = new Point(x_st + dx * 1 + 50, y_st + dy * 0 + 5 + ddy * 3);
 
-            cb_search_pattern.Location = new Point(x_st + dx * 3 - 102, y_st + dy * 0 + ddy * 1 + 12);
+            cb_search_pattern.Location = new Point(x_st + dx * 3 - 122, y_st + dy * 0 + ddy * 1 + 12);
             cb_search_pattern.Text = "搜尋";
 
-            cb_search_this_folder.Location = new Point(x_st + dx * 3 - 66, y_st + dy * 0 + 12);
+            cb_search_this_folder.Location = new Point(x_st + dx * 3 - 86, y_st + dy * 0 + 12);
             cb_search_this_folder.Text = "";
 
             x_st = 10;
@@ -678,7 +651,7 @@ namespace vcs_DiskDirectoryFile1
 
             //搜尋條件
             groupBox_search.Size = new Size(182, 140);
-            groupBox_search.Location = new Point(x_st + dx * 9 - 50, y_st + dy * 0 - 10);
+            groupBox_search.Location = new Point(x_st + dx * 9 - 70, y_st + dy * 0 - 10);
 
             x_st = 8;
             y_st = 20;
@@ -703,7 +676,7 @@ namespace vcs_DiskDirectoryFile1
 
             //比較
             groupBox_compare.Size = new Size(90, 140);
-            groupBox_compare.Location = new Point(x_st + dx * 11 - 4, y_st + dy * 0 - 10);  // 比較
+            groupBox_compare.Location = new Point(x_st + dx * 11 - 24, y_st + dy * 0 - 10);  // 比較
 
             dx = 80;
             dy = 20;
@@ -719,7 +692,7 @@ namespace vcs_DiskDirectoryFile1
             bt_compare.Location = new Point(x_st + dx * 0, y_st + dy * 4);
 
             //搜尋關鍵字
-            x_st = 870;
+            x_st = 850;
             y_st = 10;
             dx = 48;
             dy = 48;
@@ -736,7 +709,7 @@ namespace vcs_DiskDirectoryFile1
             bt_remove_all2.Location = new Point(x_st + dx * 0 + 100, y_st + dy * 0 + 118);
 
             //那些小icon
-            x_st = 1024;
+            x_st = 1004;
             y_st = 10;
             dx = 48;
             dy = 48;
@@ -748,7 +721,9 @@ namespace vcs_DiskDirectoryFile1
             bt_start_files.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             bt_start_all_files.Location = new Point(x_st + dx * 5, y_st + dy * 0);
             bt_start_files_good.Location = new Point(x_st + dx * 6, y_st + dy * 0);
-            bt_replace.Location = new Point(x_st + dx * 7, y_st + dy * 0);
+            bt_auto_rename.Location = new Point(x_st + dx * 7, y_st + dy * 0);
+            cb_auto_rename.Location = new Point(x_st + dx * 8, y_st + dy * 0);
+            cb_auto_rename.Text = "改";
             //那些小icon 第1排
             bt_search_pattern_vcs.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             bt_search_pattern_python.Location = new Point(x_st + dx * 1, y_st + dy * 1);
@@ -757,6 +732,7 @@ namespace vcs_DiskDirectoryFile1
             bt_winmerge.Location = new Point(x_st + dx * 4, y_st + dy * 1);
             bt_delete_file.Location = new Point(x_st + dx * 5, y_st + dy * 1);
             bt_open_folder.Location = new Point(x_st + dx * 6, y_st + dy * 1);
+            bt_replace.Location = new Point(x_st + dx * 7, y_st + dy * 1);
             //那些小icon 第2排
             bt_setup.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             bt_test1.Location = new Point(x_st + dx * 1, y_st + dy * 2);
@@ -2542,18 +2518,6 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_dir11_Click(object sender, EventArgs e)
         {
-            //自動修正檔名, 把特殊字刪除
-            flag_auto_rename_mode = true;  // 自動修正檔名模式
-
-            flag_export_dir = false;  // 找資料夾, 全/空/小
-            flag_export_file = false;  // 匯出檔名
-            flag_export_video = false;  // 找影片檔
-            show_item_location_listview();
-
-            search_foldername = tb_foldername1.Text;
-            tb_foldername1_text_old = search_foldername;
-
-            do_my_export(search_foldername, bt_export_video);
         }
 
         //------------------------------------------------------------  # 60個
@@ -4510,7 +4474,10 @@ namespace vcs_DiskDirectoryFile1
                 //移動檔案，從 filename_old 移動到 filename_new
                 if (File.Exists(filename_new) == false)  // 確認 filename_new 是否存在
                 {
-                    // File.Move(filename_old, filename_new);  // 檔案重新命名
+                    if (cb_auto_rename.Checked == true)
+                    {
+                        File.Move(filename_old, filename_new);  // 檔案重新命名
+                    }
                     richTextBox1.Text += "已移動檔案: " + filename_old + " 到 " + filename_new + "\n";
                 }
                 else
@@ -6287,6 +6254,24 @@ namespace vcs_DiskDirectoryFile1
             Form_Replace frm = new Form_Replace();    //實體化 Form_Replace 視窗物件
             frm.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
             frm.ShowDialog();   //顯示 frm 視窗
+        }
+
+        private void bt_auto_rename_Click(object sender, EventArgs e)
+        {
+            //自動修正檔名, 把特殊字刪除
+            flag_auto_rename_mode = true;  // 自動修正檔名模式
+
+            flag_export_dir = false;  // 找資料夾, 全/空/小
+            flag_export_file = false;  // 匯出檔名
+            flag_export_video = false;  // 找影片檔
+            show_item_location_listview();
+
+            search_foldername = tb_foldername1.Text;
+            tb_foldername1_text_old = search_foldername;
+
+            do_my_export(search_foldername, bt_export_video);
+
+            cb_auto_rename.Checked = false;
         }
 
         //------------------------------------------------------------  # 60個
