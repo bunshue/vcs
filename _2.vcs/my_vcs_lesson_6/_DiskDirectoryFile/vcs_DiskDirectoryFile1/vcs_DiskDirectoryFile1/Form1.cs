@@ -4981,18 +4981,20 @@ namespace vcs_DiskDirectoryFile1
 
         string get_new_filename(string longname)
         {
+            //自動改檔名用
+
             string shortname = longname;
 
             //先過濾掉一些字
             string[] remove_word = new string[] { "taxv.xyz_", "[javdb.com]", "[MILFY]", "027_3xplanet_", "[Thz.la]"
                 , "9288.pro@", "027_3xplanet_", "hhd800.com@", "489155.com@", "javkok.com@", "489155.com@", "big2048.com@", "[bbs.yzkof.com]"
                 , "jav20s8.com@", "@江南@", "松島楓", "toyouiv.com_", "桐原エリカ", "(Kirihara Erika)"
-                , "[javdb.com]", "Abigaile Johnson ", "Heydoug", "heyzo_hd", "DLLAF"
+                , "[javdb.com]", "Abigaile Johnson ", "Heydoug", "dccdom.com@", "DLLAF"
                 , "bbs2048.org@", "Abigaile Johnson ", "Heydoug", "avmans.com"
-                , "4k688.com@", "僕とかえでの甘～い性活", "松島かえで", "[garea chinan]"
+                , "4k688.com@", "僕とかえでの甘～い性活", "QQQQ", "[garea chinan]"
                 , "初剃り", "[44x.me]", "bbsxv.xyz", "@蜂鳥@fengniao151.vip", "18x78.com_"
                 , "taxv.xyz", "jav20s8.com@", "shimohira", "hikari", "deeper.21"
-                , "【雪光梦想】", "4k2.com@", "Caribbeancom", "[HD]", "104DANDAN"
+                , "【雪光梦想】", "4k2.com@", "QQQQ", "[HD]", "104DANDAN"
                 , "[88q.me]", "jav4you.", "private", "52JAV.COM", "crv2000.com"
                 , "javidol.com", "Prestige", "[thzu.cc]", "wowg.", "18x78.com_"
                 , "(hibino)", "kpkp3.com", "bbyxv.xyz", "aaxv.xyz", "4k2.me@"
@@ -5001,8 +5003,8 @@ namespace vcs_DiskDirectoryFile1
                 , "[BT-btt.com]", ".h264", ".xvid", "jnty4588.com", "77vr.com@"
                 , "2048.info@", "madoubt.com 952388.xyz ", "~nyap2p.com", "kcf9.com@", "gg5.co@"
                 , "gg5.co@", "H265", "-nyap2p.comnf.", "_dvd", "[crazecat下载加速器—www.crazecat.com]"
-                , "_gg5", "hd_", "_hd_", "_uncen", "jn998.vip-"
-                , "-1080p", "(麻豆傳媒)", "QQQQ", "QQQQ", "QQQQ"
+                , "_gg5", "QQQQ", "QQQQ", "QQQQ", "jn998.vip-"
+                , "QQQQ", "(麻豆傳媒)", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "-nyap2p.com", "(Red Hot Jam)", "(KIRARI)", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
@@ -5020,6 +5022,8 @@ namespace vcs_DiskDirectoryFile1
 
         string get_shortname(string longname)
         {
+            //取得簡名, 比較檔名用
+
             string shortname = longname;
 
             //一律轉小寫
@@ -5045,7 +5049,7 @@ namespace vcs_DiskDirectoryFile1
                 , "gg5.co@", "H265", "-nyap2p.comnf.", "_dvd", "[crazecat下载加速器—www.crazecat.com]"
                 , "_gg5", "hd_", "_hd_", "_uncen", "jn998.vip-"
                 , "-1080p", "(麻豆傳媒)", "_hd.mp4", "_hd.mkv", "_hd.wmv"
-                , "_1.mp4", "-nyap2p.com", "(Red Hot Jam)", "(KIRARI)", "QQQQ"
+                , "_1.mp4", "-nyap2p.com", "(Red Hot Jam)", "(KIRARI)", "dccdom.com@"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , ".mp4", ".wmv", ".avi", ".mkv", ".mov"  // 清除副檔名
