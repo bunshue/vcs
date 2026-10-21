@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;  // for Directory, StreamReader, SearchOption
+using System.Xml.Serialization;
 using System.Collections;  // for ArrayList
 using System.Diagnostics;  // for Stopwatch
 using System.Runtime.InteropServices;   //for DllImport, Marshal, StructLayout
@@ -85,6 +86,7 @@ namespace vcs_DiskDirectoryFile1
         string tb_limit_max_text_old = string.Empty;
         string foldername_old = string.Empty;
         int current_index_listView = 0;
+        int tab_control_index = 0;
 
         int filesize_min = 0;  // 搜尋 資料夾/檔案 的下限
         int filesize_max = 0;  // 搜尋 資料夾/檔案 的上限
@@ -160,6 +162,11 @@ namespace vcs_DiskDirectoryFile1
             public int video_height;
             public int video_fps;
             public int video_duration;
+
+            public MyFileInfo()  // 增加一個無參數建構函式, 為了類別物件存檔讀檔用
+            {
+
+            }
             /*
             public MyFileInfo(string n, string p, string e, long s)
             {
@@ -312,6 +319,8 @@ namespace vcs_DiskDirectoryFile1
             lv_video_cw3 = Properties.Settings.Default.lv_video_cw3;
             lv_video_cw4 = Properties.Settings.Default.lv_video_cw4;
             lv_video_cw5 = Properties.Settings.Default.lv_video_cw5;
+            tab_control_index = Properties.Settings.Default.tab_control_index;
+            tabControl1.SelectedIndex = tab_control_index;
 
             tb_limit_min.Text = filesize_min.ToString();  // 搜尋 資料夾/檔案 的下限
             tb_limit_max.Text = filesize_max.ToString();  // 搜尋 資料夾/檔案 的上限
@@ -468,6 +477,7 @@ namespace vcs_DiskDirectoryFile1
             Properties.Settings.Default.flag_search_folders_all = cb_search_folders_all.Checked;  // 全
             Properties.Settings.Default.flag_search_folders_empty = cb_search_folders_empty.Checked;  // 空
             Properties.Settings.Default.flag_search_folders_small = cb_search_folders_small.Checked;  // 小
+            Properties.Settings.Default.tab_control_index = tab_control_index;
             if (listView_dir.Columns.Count > 0)
             {
                 Properties.Settings.Default.lv_dir_cw0 = listView_dir.Columns[0].Width;
@@ -618,6 +628,7 @@ namespace vcs_DiskDirectoryFile1
             int dx = w + 10;
             int dy = w + 10;
 
+            //搜尋資料夾
             groupBox_folder.Size = new Size(w + 50, 140);
             groupBox_folder.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             listBox1.Size = new Size(w + 0, 120);
@@ -644,105 +655,115 @@ namespace vcs_DiskDirectoryFile1
             cb_search_this_folder.Location = new Point(x_st + dx * 3 - 86, y_st + dy * 0 + 12);
             cb_search_this_folder.Text = "";
 
+            //------------------------------------------------------------  # 60個
+
+            // 分頁部分
+            x_st = 570;
+            y_st = 10;
+            tabControl1.Size = new Size(360, 140);
+            tabControl1.Location = new Point(x_st, y_st);
+
+            //其他放外面的
+            x_st = 700;
+            y_st = 10;
+            dx = 45 + 5;
+            dy = 45 + 5;
+            bt_delete_file.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            bt_open_folder.Location = new Point(x_st + dx * 6, y_st + dy * 0);
+            bt_replace.Location = new Point(x_st + dx * 7, y_st + dy * 0);
+            bt_setup.Location = new Point(x_st + dx * 8, y_st + dy * 0);
+            lb_search_result1.Location = new Point(x_st + dx * 5, y_st + dy * 1);
+            lb_search_result2.Location = new Point(x_st + dx * 5, y_st + dy * 1 + 24);
+            lb_search_result1.Text = "";
+            lb_search_result2.Text = "";
+
+            //------------------------------------------------------------  # 60個
+
+            //分頁內的設定
             x_st = 10;
-            y_st = 20;
-            dx = 70;
-            dy = 30;
+            y_st = 10;
+            dx = 45 + 5;
+            dy = 45 + 5;
+            //那些小icon 第0頁 資料夾
+            bt_export_foldername.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            //那些小icon 第1頁 檔案
+            bt_export_filename.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_export_doc.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            //那些小icon 第2頁 影片
+            bt_export_video.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_start_files.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            bt_start_all_files.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            bt_start_files_good.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_auto_rename.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            cb_auto_rename.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            cb_auto_rename.Text = "改";
+            //那些小icon 第3頁 搜尋
+            bt_search_pattern_vcs.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_search_pattern_python.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            bt_open_with_vcs_python.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            bt_open_with_ue.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_winmerge.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            //那些小icon 第4頁 其他
+            bt_test0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_test1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            bt_test2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            bt_test3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            bt_test4.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_test5.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            bt_test6.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            bt_test7.Location = new Point(x_st + dx * 3, y_st + dy * 1);
 
-            //搜尋條件
-            groupBox_search.Size = new Size(182, 140);
-            groupBox_search.Location = new Point(x_st + dx * 9 - 70, y_st + dy * 0 - 10);
+            //第0頁 資料夾 全空小
+            cb_search_folders_all.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            cb_search_folders_empty.Location = new Point(x_st + dx * 1, y_st + dy * 0 + 30);
+            cb_search_folders_small.Location = new Point(x_st + dx * 1, y_st + dy * 0 + 60);
 
+            //第1頁 檔案 搜尋條件
             x_st = 8;
-            y_st = 20;
-            dx = 70;
-            dy = 24;
+            y_st = 10;
+            int yy = 20;
             //搜尋大檔, 下限
-            cb_limit_min.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            cb_limit_min.Location = new Point(x_st + dx * 1, y_st + yy * 0);
             tb_limit_min.Size = new Size(50, 100);
-            tb_limit_min.Location = new Point(x_st + dx * 0 + 115, y_st + dy * 0 - 10);
+            tb_limit_min.Location = new Point(x_st + dx * 1 + 115, y_st + dy * 0 - 10 + 2);
             //搜尋小檔, 上限
-            cb_limit_max.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            cb_limit_max.Location = new Point(x_st + dx * 1, y_st + yy * 1);
             tb_limit_max.Size = new Size(50, 100);
-            tb_limit_max.Location = new Point(x_st + dx * 0 + 115, y_st + dy * 0 + 18);
+            tb_limit_max.Location = new Point(x_st + dx * 1 + 115, y_st + dy * 0 + 18 + 2);
+
             //影片 大小優
-            cb_search_big_files.Location = new Point(x_st + dx * 0, y_st + dy * 2);  // 大
-            cb_search_small_files.Location = new Point(x_st + dx * 0, y_st + dy * 3);  // 小
-            cb_search_good_files.Location = new Point(x_st + dx * 0, y_st + dy * 4);  // 優
-            //資料夾 全空小
-            cb_search_folders_all.Location = new Point(x_st + dx * 1 + 25, y_st + dy * 2);
-            cb_search_folders_empty.Location = new Point(x_st + dx * 1 + 25, y_st + dy * 3);
-            cb_search_folders_small.Location = new Point(x_st + dx * 1 + 25, y_st + dy * 4);
+            cb_search_big_files.Location = new Point(x_st + dx * 1, y_st + yy * 2);  // 大
+            cb_search_small_files.Location = new Point(x_st + dx * 1, y_st + yy * 3);  // 小
+            cb_search_good_files.Location = new Point(x_st + dx * 1, y_st + yy * 4);  // 優
 
-            //比較
-            groupBox_compare.Size = new Size(90, 140);
-            groupBox_compare.Location = new Point(x_st + dx * 11 - 24, y_st + dy * 0 - 10);  // 比較
+            //第2頁 影片 比較
+            groupBox_compare.Size = new Size(90, 114);
+            groupBox_compare.Location = new Point(x_st + dx * 3, y_st + dy * 0 - 10);  // 比較
 
-            dx = 80;
-            dy = 20;
-            cb_search_same_files0.Location = new Point(x_st + dx * 0, y_st + dy * 0);  // 同
-            cb_search_same_files1.Location = new Point(x_st + dx * 0, y_st + dy * 1);  // 同
-            cb_search_same_files2.Location = new Point(x_st + dx * 0, y_st + dy * 2);  // 同
-            cb_search_same_files3.Location = new Point(x_st + dx * 0, y_st + dy * 3);  // 同
+            yy = 17;
+            cb_search_same_files0.Location = new Point(x_st + dx * 0, y_st + yy * 0);  // 同
+            cb_search_same_files1.Location = new Point(x_st + dx * 0, y_st + yy * 1);  // 同
+            cb_search_same_files2.Location = new Point(x_st + dx * 0, y_st + yy * 2);  // 同
+            cb_search_same_files3.Location = new Point(x_st + dx * 0, y_st + yy * 3);  // 同
             cb_search_same_files0.Text = "完整檔名";
             cb_search_same_files1.Text = "模糊檔名";
             cb_search_same_files2.Text = "完整容量";
             cb_search_same_files3.Text = "模糊容量";
-            bt_compare.Size = new Size(72, 36);
-            bt_compare.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            bt_compare.Size = new Size(60, 30);
+            bt_compare.Location = new Point(x_st + dx * 0, y_st + yy * 4);
 
-            //搜尋關鍵字
-            x_st = 850;
+            //第3頁 尋關鍵字
+            x_st = 8;
             y_st = 10;
-            dx = 48;
-            dy = 48;
 
             tb_search_pattern.Size = new Size(150, 30);
-            tb_search_pattern.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-
-            listBox_search.Size = new Size(150, 86);
-            listBox_search.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 36);
-
+            tb_search_pattern.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            listBox_search.Size = new Size(150, 79);
+            listBox_search.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 36);
             cb_search_option1.Text = "30";
-            cb_search_option1.Location = new Point(x_st + dx * 0 + 10, y_st + dy * 0 + 118 + 4);
-            bt_remove2.Location = new Point(x_st + dx * 0 + 60, y_st + dy * 0 + 118);
-            bt_remove_all2.Location = new Point(x_st + dx * 0 + 100, y_st + dy * 0 + 118);
-
-            //那些小icon
-            x_st = 1004;
-            y_st = 10;
-            dx = 48;
-            dy = 48;
-            //那些小icon 第0排
-            bt_export_foldername.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            bt_export_filename.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            bt_export_video.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            bt_export_doc.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            bt_start_files.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            bt_start_all_files.Location = new Point(x_st + dx * 5, y_st + dy * 0);
-            bt_start_files_good.Location = new Point(x_st + dx * 6, y_st + dy * 0);
-            bt_auto_rename.Location = new Point(x_st + dx * 7, y_st + dy * 0);
-            cb_auto_rename.Location = new Point(x_st + dx * 8, y_st + dy * 0);
-            cb_auto_rename.Text = "改";
-            //那些小icon 第1排
-            bt_search_pattern_vcs.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            bt_search_pattern_python.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            bt_open_with_vcs_python.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            bt_open_with_ue.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            bt_winmerge.Location = new Point(x_st + dx * 4, y_st + dy * 1);
-            bt_delete_file.Location = new Point(x_st + dx * 5, y_st + dy * 1);
-            bt_open_folder.Location = new Point(x_st + dx * 6, y_st + dy * 1);
-            bt_replace.Location = new Point(x_st + dx * 7, y_st + dy * 1);
-            //那些小icon 第2排
-            bt_setup.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            bt_test1.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            bt_test2.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            bt_test3.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            bt_test4.Location = new Point(x_st + dx * 4, y_st + dy * 2);
-            lb_search_result1.Location = new Point(x_st + dx * 5, y_st + dy * 2);
-            lb_search_result2.Location = new Point(x_st + dx * 5, y_st + dy * 2 + 24);
-            lb_search_result1.Text = "";
-            lb_search_result2.Text = "";
+            cb_search_option1.Location = new Point(x_st + dx * 6 + 4, y_st + dy * 0);
+            bt_remove2.Location = new Point(x_st + dx * 6 + 4, y_st + dy * 0 + 45);
+            bt_remove_all2.Location = new Point(x_st + dx * 6 + 4, y_st + dy * 0 + 70);
 
             //針對某控件的邊緣 設定表單大小
             this.ClientSize = new Size(richTextBox1.Right + 10, richTextBox1.Bottom + 10);
@@ -1780,6 +1801,15 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_file12_Click(object sender, EventArgs e)
         {
+            int len = fileinfos.Count;
+            richTextBox1.Text += "共有 : " + len.ToString() + " 筆資料\n";
+            for (int i = 0; i < len; i++)
+            {
+                richTextBox1.Text += fileinfos[i].filename + "\n";
+
+            }
+
+
 
         }
 
@@ -2512,12 +2542,24 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_dir10_Click(object sender, EventArgs e)
         {
+            XmlSerializer xs = new XmlSerializer(typeof(List<MyFileInfo>));
+
+            using (StreamWriter sw = new StreamWriter(@"tmp_fileinfos.xml"))
+            {
+                xs.Serialize(sw, fileinfos);
+            }
         }
 
         //------------------------------------------------------------  # 60個
 
         private void bt_dir11_Click(object sender, EventArgs e)
         {
+            XmlSerializer xs = new XmlSerializer(typeof(List<MyFileInfo>));
+
+            using (StreamReader sr = new StreamReader(@"tmp_fileinfos.xml"))
+            {
+                fileinfos = (List<MyFileInfo>)xs.Deserialize(sr);
+            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -4950,6 +4992,11 @@ namespace vcs_DiskDirectoryFile1
 
         //------------------------------------------------------------  # 60個
 
+        private void bt_test0_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void bt_test1_Click(object sender, EventArgs e)
         {
             //fileinfos操作
@@ -5445,6 +5492,22 @@ namespace vcs_DiskDirectoryFile1
             {
                 richTextBox1.Text += "取得 : " + old_search_path[i] + "\n";
             }
+        }
+
+
+        private void bt_test5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_test6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_test7_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void tb_text_Click(object sender, EventArgs e)
@@ -6276,6 +6339,35 @@ namespace vcs_DiskDirectoryFile1
             do_my_export(search_foldername, bt_export_video);
 
             cb_auto_rename.Checked = false;
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            tab_control_index = tabControl1.SelectedIndex;
+            if (tabControl1.SelectedTab == tabPage0)
+            {
+                //richTextBox1.Text += "進入 資料夾 頁\n";
+            }
+            else if (tabControl1.SelectedTab == tabPage1)
+            {
+                //richTextBox1.Text += "進入 檔案 頁\n";
+            }
+            else if (tabControl1.SelectedTab == tabPage2)
+            {
+                //richTextBox1.Text += "進入 影片 頁\n";
+            }
+            else if (tabControl1.SelectedTab == tabPage3)
+            {
+                ///richTextBox1.Text += "進入 搜尋 頁\n";
+            }
+            else if (tabControl1.SelectedTab == tabPage4)
+            {
+                //richTextBox1.Text += "進入 其他 頁\n";
+            }
+            else
+            {
+                richTextBox1.Text += "進入 XXXX 頁\n";
+            }
         }
 
         //------------------------------------------------------------  # 60個

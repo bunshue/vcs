@@ -454,5 +454,17 @@ namespace vcs_DiskDirectoryFile1.Properties {
                 this["search_patterns"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int tab_control_index {
+            get {
+                return ((int)(this["tab_control_index"]));
+            }
+            set {
+                this["tab_control_index"] = value;
+            }
+        }
     }
 }
