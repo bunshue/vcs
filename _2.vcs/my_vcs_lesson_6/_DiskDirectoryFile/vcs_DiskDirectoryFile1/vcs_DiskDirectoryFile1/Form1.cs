@@ -660,11 +660,11 @@ namespace vcs_DiskDirectoryFile1
             // 分頁部分
             x_st = 570;
             y_st = 10;
-            tabControl1.Size = new Size(360, 140);
+            tabControl1.Size = new Size(480, 140);
             tabControl1.Location = new Point(x_st, y_st);
 
             //其他放外面的
-            x_st = 700;
+            x_st = 820;
             y_st = 10;
             dx = 45 + 5;
             dy = 45 + 5;
@@ -732,25 +732,25 @@ namespace vcs_DiskDirectoryFile1
             tb_limit_max.Location = new Point(x_st + dx * 1 + 115, y_st + dy * 0 + 18 + 2);
 
             //影片 大小優
-            cb_search_big_files.Location = new Point(x_st + dx * 1, y_st + yy * 2);  // 大
-            cb_search_small_files.Location = new Point(x_st + dx * 1, y_st + yy * 3);  // 小
-            cb_search_good_files.Location = new Point(x_st + dx * 1, y_st + yy * 4);  // 優
+            cb_search_big_files.Location = new Point(x_st + dx * 3, y_st + 50);  // 大
+            cb_search_small_files.Location = new Point(x_st + dx * 3, y_st + 50 + 18);  // 小
+            cb_search_good_files.Location = new Point(x_st + dx * 3, y_st + 50 + 36);  // 優
 
             //第2頁 影片 比較
-            groupBox_compare.Size = new Size(90, 114);
-            groupBox_compare.Location = new Point(x_st + dx * 3, y_st + dy * 0 - 10);  // 比較
+            groupBox_compare.Size = new Size(210, 56);
+            groupBox_compare.Location = new Point(x_st + dx * 5, y_st + dy * 1);  // 比較
 
             yy = 17;
-            cb_search_same_files0.Location = new Point(x_st + dx * 0, y_st + yy * 0);  // 同
-            cb_search_same_files1.Location = new Point(x_st + dx * 0, y_st + yy * 1);  // 同
-            cb_search_same_files2.Location = new Point(x_st + dx * 0, y_st + yy * 2);  // 同
-            cb_search_same_files3.Location = new Point(x_st + dx * 0, y_st + yy * 3);  // 同
+            cb_search_same_files0.Location = new Point(x_st + dx * 0, y_st + 6);  // 同
+            cb_search_same_files1.Location = new Point(x_st + dx * 0, y_st + 26);  // 同
+            cb_search_same_files2.Location = new Point(x_st + dx * 1 + 24, y_st + 6);  // 同
+            cb_search_same_files3.Location = new Point(x_st + dx * 1 + 24, y_st + 26);  // 同
             cb_search_same_files0.Text = "完整檔名";
             cb_search_same_files1.Text = "模糊檔名";
             cb_search_same_files2.Text = "完整容量";
             cb_search_same_files3.Text = "模糊容量";
-            bt_compare.Size = new Size(60, 30);
-            bt_compare.Location = new Point(x_st + dx * 0, y_st + yy * 4);
+            bt_compare.Size = new Size(45, 40);
+            bt_compare.Location = new Point(x_st + dx * 3, y_st + 2);
 
             //第3頁 尋關鍵字
             x_st = 8;
@@ -764,6 +764,10 @@ namespace vcs_DiskDirectoryFile1
             cb_search_option1.Location = new Point(x_st + dx * 6 + 4, y_st + dy * 0);
             bt_remove2.Location = new Point(x_st + dx * 6 + 4, y_st + dy * 0 + 45);
             bt_remove_all2.Location = new Point(x_st + dx * 6 + 4, y_st + dy * 0 + 70);
+
+            bt_export_foldername.BackColor = Color.Pink;
+            bt_export_filename.BackColor = Color.Pink;
+            bt_export_video.BackColor = Color.Pink;
 
             //針對某控件的邊緣 設定表單大小
             this.ClientSize = new Size(richTextBox1.Right + 10, richTextBox1.Bottom + 10);
