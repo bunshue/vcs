@@ -669,8 +669,8 @@ namespace vcs_DiskDirectoryFile1
             dy = 45 + 5;
             lb_search_result1.Location = new Point(x_st + dx * 5, y_st + dy * 0 + 10);
             lb_search_result2.Location = new Point(x_st + dx * 5, y_st + dy * 0 + 34);
-            //lb_search_result1.Text = "";
-            //lb_search_result2.Text = "";
+            lb_search_result1.Text = "";
+            lb_search_result2.Text = "";
 
             //------------------------------------------------------------  # 60個
 
@@ -4539,7 +4539,7 @@ namespace vcs_DiskDirectoryFile1
                 folder_files++;
                 folder_size += fi.Length;
 
-                richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+                //------------------------------------------------------------  # 60個
 
                 if (cb_auto_rename.Checked == true)  // 自動改名
                 {
