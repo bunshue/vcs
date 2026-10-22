@@ -629,40 +629,38 @@ namespace vcs_DiskDirectoryFile1
             int dx = w + 10;
             int dy = w + 10;
 
+            // 分頁部分
+            tabControl1.Size = new Size(480, 140);
+            tabControl1.Location = new Point(x_st, y_st);
+
+            //搜尋資料夾
+            groupBox_search.Size = new Size(w + 110, 140);
+            groupBox_search.Location = new Point(x_st + 490, y_st);
+            bt_open_dir1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            tb_foldername1.Size = new Size(w + 30, 100);
+            tb_foldername1.Location = new Point(x_st + dx * 0 + 50, y_st + dy * 0);
+            int ddy = 32;
+            tb_search.Size = new Size(w - 5, 100);
+            tb_search.Location = new Point(x_st + dx * 0 + 50, y_st + dy * 0 + ddy * 1);
+            tb_foldername.Size = new Size(w + 80 + 15, 100);
+            tb_foldername.Location = new Point(x_st + dx * 0, y_st + dy * 0 + ddy * 2);
+            tb_filename.Size = new Size(w + 80 + 15, 100);
+            tb_filename.Location = new Point(x_st + dx * 0, y_st + dy * 0 + ddy * 3);
+            cb_search_pattern.Location = new Point(x_st + dx * 2 - 122 - 50, y_st + dy * 0 + ddy * 1 + 12);
+            cb_search_pattern.Text = "搜尋";
+            cb_search_this_folder.Location = new Point(x_st + dx * 2 - 86 - 50, y_st + dy * 0 + 12);
+            cb_search_this_folder.Text = "";
+
             //搜尋資料夾
             groupBox_folder.Size = new Size(w + 50, 140);
-            groupBox_folder.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            groupBox_folder.Location = new Point(x_st + 810, y_st);
             listBox1.Size = new Size(w + 0, 120);
             listBox1.Location = new Point(10, 16);
             bt_add.Location = new Point(10 + 210, 16);
             bt_remove.Location = new Point(10 + 210, 16 + 40);
             bt_remove_all.Location = new Point(10 + 210, 16 + 80);
 
-            bt_open_dir1.Location = new Point(x_st + dx * 1 + 50, y_st + dy * 0);
-            tb_foldername1.Size = new Size(w + 30, 100);
-            tb_foldername1.Location = new Point(x_st + dx * 1 + 100, y_st + dy * 0 + 5);
-
-            int ddy = 34;
-            tb_search.Size = new Size(w - 5, 100);
-            tb_search.Location = new Point(x_st + dx * 1 + 100, y_st + dy * 0 + 5 + ddy * 1);
-            tb_foldername.Size = new Size(w + 80 + 15, 100);
-            tb_foldername.Location = new Point(x_st + dx * 1 + 50, y_st + dy * 0 + 5 + ddy * 2);
-            tb_filename.Size = new Size(w + 80 + 15, 100);
-            tb_filename.Location = new Point(x_st + dx * 1 + 50, y_st + dy * 0 + 5 + ddy * 3);
-
-            cb_search_pattern.Location = new Point(x_st + dx * 3 - 122, y_st + dy * 0 + ddy * 1 + 12);
-            cb_search_pattern.Text = "搜尋";
-
-            cb_search_this_folder.Location = new Point(x_st + dx * 3 - 86, y_st + dy * 0 + 12);
-            cb_search_this_folder.Text = "";
-
             //------------------------------------------------------------  # 60個
-
-            // 分頁部分
-            x_st = 570;
-            y_st = 10;
-            tabControl1.Size = new Size(480, 140);
-            tabControl1.Location = new Point(x_st, y_st);
 
             //其他放外面的
             x_st = 820;
@@ -671,8 +669,8 @@ namespace vcs_DiskDirectoryFile1
             dy = 45 + 5;
             lb_search_result1.Location = new Point(x_st + dx * 5, y_st + dy * 0 + 10);
             lb_search_result2.Location = new Point(x_st + dx * 5, y_st + dy * 0 + 34);
-            lb_search_result1.Text = "";
-            lb_search_result2.Text = "";
+            //lb_search_result1.Text = "";
+            //lb_search_result2.Text = "";
 
             //------------------------------------------------------------  # 60個
 
@@ -1824,15 +1822,6 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_file12_Click(object sender, EventArgs e)
         {
-            /*
-            int len = fileinfos.Count;
-            richTextBox1.Text += "共有 : " + len.ToString() + " 筆資料\n";
-            for (int i = 0; i < len; i++)
-            {
-                richTextBox1.Text += fileinfos[i].filename + "\n";
-            }
-            */
-
             // 測試 Device Key
             richTextBox1.Text += "測試 Device Key\n";
 
@@ -2608,24 +2597,12 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_dir10_Click(object sender, EventArgs e)
         {
-            XmlSerializer xs = new XmlSerializer(typeof(List<MyFileInfo>));
-
-            using (StreamWriter sw = new StreamWriter(@"tmp_fileinfos.xml"))
-            {
-                xs.Serialize(sw, fileinfos);
-            }
         }
 
         //------------------------------------------------------------  # 60個
 
         private void bt_dir11_Click(object sender, EventArgs e)
         {
-            XmlSerializer xs = new XmlSerializer(typeof(List<MyFileInfo>));
-
-            using (StreamReader sr = new StreamReader(@"tmp_fileinfos.xml"))
-            {
-                fileinfos = (List<MyFileInfo>)xs.Deserialize(sr);
-            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -5583,7 +5560,31 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_test7_Click(object sender, EventArgs e)
         {
+            //讀寫 fileinfos
 
+            int len = fileinfos.Count;
+            richTextBox1.Text += "共有 : " + len.ToString() + " 筆資料\n";
+            for (int i = 0; i < len; i++)
+            {
+                richTextBox1.Text += fileinfos[i].filename + "\n";
+            }
+
+            //寫
+            XmlSerializer xs = new XmlSerializer(typeof(List<MyFileInfo>));
+
+            using (StreamWriter sw = new StreamWriter(@"tmp_fileinfos.xml"))
+            {
+                xs.Serialize(sw, fileinfos);
+            }
+
+            //讀
+            //XmlSerializer
+            xs = new XmlSerializer(typeof(List<MyFileInfo>));
+
+            using (StreamReader sr = new StreamReader(@"tmp_fileinfos.xml"))
+            {
+                fileinfos = (List<MyFileInfo>)xs.Deserialize(sr);
+            }
         }
 
         private void tb_text_Click(object sender, EventArgs e)
@@ -6429,6 +6430,8 @@ namespace vcs_DiskDirectoryFile1
             int dx = 45 + 5;
             int dy = 45 + 5;
             int yy = 20;
+            groupBox_folder.Visible = true;
+            groupBox_search.Visible = true;
 
             tab_control_index = tabControl1.SelectedIndex;
             if (tabControl1.SelectedTab == tabPage0)
@@ -6500,10 +6503,15 @@ namespace vcs_DiskDirectoryFile1
 
                 bt_delete_file.Location = new Point(x_st + dx * 7, y_st + dy * 0);
                 bt_open_folder.Location = new Point(x_st + dx * 8, y_st + dy * 0);
+
+                groupBox_folder.Visible = false;
+                groupBox_search.Visible = false;
             }
             else if (tabControl1.SelectedTab == tabPage4)
             {
                 //richTextBox1.Text += "進入 其他 頁\n";
+                groupBox_folder.Visible = false;
+                groupBox_search.Visible = false;
             }
             else
             {
