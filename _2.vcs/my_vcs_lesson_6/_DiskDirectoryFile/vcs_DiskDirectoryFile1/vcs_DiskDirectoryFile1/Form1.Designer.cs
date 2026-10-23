@@ -77,6 +77,8 @@
             this.bt_delete_file = new System.Windows.Forms.Button();
             this.bt_open_folder = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.cb_show_all = new System.Windows.Forms.CheckBox();
+            this.cb_rename_folder = new System.Windows.Forms.CheckBox();
             this.cb_save_info = new System.Windows.Forms.CheckBox();
             this.cb_search_big_files = new System.Windows.Forms.CheckBox();
             this.cb_search_good_files = new System.Windows.Forms.CheckBox();
@@ -135,6 +137,8 @@
             this.bt_copy_rtb_data = new System.Windows.Forms.Button();
             this.groupBox_file = new System.Windows.Forms.GroupBox();
             this.groupBox_directory = new System.Windows.Forms.GroupBox();
+            this.listView_rename_dir = new System.Windows.Forms.ListView();
+            this.listView_rename_file = new System.Windows.Forms.ListView();
             this.groupBox1.SuspendLayout();
             this.groupBox_search.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -686,6 +690,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.cb_show_all);
+            this.tabPage2.Controls.Add(this.cb_rename_folder);
             this.tabPage2.Controls.Add(this.cb_save_info);
             this.tabPage2.Controls.Add(this.cb_search_big_files);
             this.tabPage2.Controls.Add(this.cb_search_good_files);
@@ -704,6 +710,28 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "影片";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // cb_show_all
+            // 
+            this.cb_show_all.AutoSize = true;
+            this.cb_show_all.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_show_all.Location = new System.Drawing.Point(244, 10);
+            this.cb_show_all.Name = "cb_show_all";
+            this.cb_show_all.Size = new System.Drawing.Size(78, 17);
+            this.cb_show_all.TabIndex = 319;
+            this.cb_show_all.Text = "顯示全部";
+            this.cb_show_all.UseVisualStyleBackColor = true;
+            // 
+            // cb_rename_folder
+            // 
+            this.cb_rename_folder.AutoSize = true;
+            this.cb_rename_folder.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_rename_folder.Location = new System.Drawing.Point(171, 33);
+            this.cb_rename_folder.Name = "cb_rename_folder";
+            this.cb_rename_folder.Size = new System.Drawing.Size(65, 17);
+            this.cb_rename_folder.TabIndex = 318;
+            this.cb_rename_folder.Text = "資料夾";
+            this.cb_rename_folder.UseVisualStyleBackColor = true;
             // 
             // cb_save_info
             // 
@@ -1417,11 +1445,33 @@
             this.groupBox_directory.TabStop = false;
             this.groupBox_directory.Text = "資料夾操作";
             // 
+            // listView_rename_dir
+            // 
+            this.listView_rename_dir.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.listView_rename_dir.Location = new System.Drawing.Point(493, 457);
+            this.listView_rename_dir.Name = "listView_rename_dir";
+            this.listView_rename_dir.Size = new System.Drawing.Size(100, 100);
+            this.listView_rename_dir.TabIndex = 302;
+            this.listView_rename_dir.UseCompatibleStateImageBehavior = false;
+            this.listView_rename_dir.View = System.Windows.Forms.View.Details;
+            // 
+            // listView_rename_file
+            // 
+            this.listView_rename_file.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.listView_rename_file.Location = new System.Drawing.Point(529, 457);
+            this.listView_rename_file.Name = "listView_rename_file";
+            this.listView_rename_file.Size = new System.Drawing.Size(100, 100);
+            this.listView_rename_file.TabIndex = 303;
+            this.listView_rename_file.UseCompatibleStateImageBehavior = false;
+            this.listView_rename_file.View = System.Windows.Forms.View.Details;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1058, 731);
+            this.Controls.Add(this.listView_rename_file);
+            this.Controls.Add(this.listView_rename_dir);
             this.Controls.Add(this.groupBox_directory);
             this.Controls.Add(this.groupBox_file);
             this.Controls.Add(this.bt_clear2);
@@ -1568,6 +1618,10 @@
         private System.Windows.Forms.CheckBox cb_search_small_files;
         private System.Windows.Forms.CheckBox cb_save_info;
         private System.Windows.Forms.GroupBox groupBox_search;
+        private System.Windows.Forms.CheckBox cb_rename_folder;
+        private System.Windows.Forms.CheckBox cb_show_all;
+        private System.Windows.Forms.ListView listView_rename_dir;
+        private System.Windows.Forms.ListView listView_rename_file;
     }
 }
 

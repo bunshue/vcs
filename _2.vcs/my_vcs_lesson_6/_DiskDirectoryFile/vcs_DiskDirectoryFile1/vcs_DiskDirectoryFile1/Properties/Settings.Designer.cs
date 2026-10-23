@@ -466,5 +466,101 @@ namespace vcs_DiskDirectoryFile1.Properties {
                 this["tab_control_index"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("120")]
+        public int lv_rename_file_cw0 {
+            get {
+                return ((int)(this["lv_rename_file_cw0"]));
+            }
+            set {
+                this["lv_rename_file_cw0"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("120")]
+        public int lv_rename_file_cw1 {
+            get {
+                return ((int)(this["lv_rename_file_cw1"]));
+            }
+            set {
+                this["lv_rename_file_cw1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("120")]
+        public int lv_rename_file_cw2 {
+            get {
+                return ((int)(this["lv_rename_file_cw2"]));
+            }
+            set {
+                this["lv_rename_file_cw2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("120")]
+        public int lv_rename_file_cw3 {
+            get {
+                return ((int)(this["lv_rename_file_cw3"]));
+            }
+            set {
+                this["lv_rename_file_cw3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("120")]
+        public int lv_rename_dir_cw0 {
+            get {
+                return ((int)(this["lv_rename_dir_cw0"]));
+            }
+            set {
+                this["lv_rename_dir_cw0"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("120")]
+        public int lv_rename_dir_cw1 {
+            get {
+                return ((int)(this["lv_rename_dir_cw1"]));
+            }
+            set {
+                this["lv_rename_dir_cw1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("120")]
+        public int lv_rename_dir_cw2 {
+            get {
+                return ((int)(this["lv_rename_dir_cw2"]));
+            }
+            set {
+                this["lv_rename_dir_cw2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("120")]
+        public int lv_rename_dir_cw3 {
+            get {
+                return ((int)(this["lv_rename_dir_cw3"]));
+            }
+            set {
+                this["lv_rename_dir_cw3"] = value;
+            }
+        }
     }
 }

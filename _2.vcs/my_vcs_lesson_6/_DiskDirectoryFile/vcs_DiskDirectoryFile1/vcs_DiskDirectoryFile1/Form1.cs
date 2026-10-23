@@ -62,7 +62,8 @@ namespace vcs_DiskDirectoryFile1
         bool flag_export_video = false;  // 找影片檔
         bool flag_export_katfile = false;  // 匯出Katfile
         bool flag_search_text_mode = false;  // 搜尋文字模式
-        bool flag_auto_rename_mode = false;  // 自動修正檔名模式
+        bool flag_auto_rename_dir_mode = false;  // 自動修正資料夾名模式
+        bool flag_auto_rename_file_mode = false;  // 自動修正檔名模式
 
         string some_text = "白日依山盡，黃河入海流。 欲窮千里目，更上一層樓。";
         string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
@@ -102,6 +103,10 @@ namespace vcs_DiskDirectoryFile1
         int lv_video_cw3 = 0;
         int lv_video_cw4 = 0;
         int lv_video_cw5 = 0;
+        int lv_rename_dir_cw0 = 0;
+        int lv_rename_dir_cw1 = 0;
+        int lv_rename_file_cw0 = 0;
+        int lv_rename_file_cw1 = 0;
 
         const Int64 TB = (Int64)GB * 1024;//定義TB的計算常量
         const int GB = 1024 * 1024 * 1024;//定義GB的計算常量
@@ -164,10 +169,21 @@ namespace vcs_DiskDirectoryFile1
             public int video_fps;
             public int video_duration;
 
+            //自動修改檔名 資料夾名
+            public string name_old;
+            public string name_new;
+
             public MyFileInfo()  // 增加一個無參數建構函式, 為了類別物件存檔讀檔用
             {
 
             }
+
+            public MyFileInfo(string name_old, string name_new)
+            {
+                this.name_old = name_old;
+                this.name_new = name_new;
+            }
+
             /*
             public MyFileInfo(string n, string p, string e, long s)
             {
@@ -285,6 +301,22 @@ namespace vcs_DiskDirectoryFile1
             listView_video.MouseDoubleClick += new MouseEventHandler(listView_video_MouseDoubleClick);
             listView_video.ColumnClick += new ColumnClickEventHandler(listView_video_ColumnClick);
 
+            listView_rename_dir.View = View.Details;  // 定義列表顯示的方式
+            listView_rename_dir.FullRowSelect = true;  // 整行一起選取
+            listView_rename_dir.GridLines = true;
+            listView_rename_dir.Clear();
+            listView_rename_dir.MouseClick += new MouseEventHandler(listView_rename_dir_MouseClick);
+            listView_rename_dir.MouseDoubleClick += new MouseEventHandler(listView_rename_dir_MouseDoubleClick);
+            listView_rename_dir.ColumnClick += new ColumnClickEventHandler(listView_rename_dir_ColumnClick);
+
+            listView_rename_file.View = View.Details;  // 定義列表顯示的方式
+            listView_rename_file.FullRowSelect = true;  // 整行一起選取
+            listView_rename_file.GridLines = true;
+            listView_rename_file.Clear();
+            listView_rename_file.MouseClick += new MouseEventHandler(listView_rename_file_MouseClick);
+            listView_rename_file.MouseDoubleClick += new MouseEventHandler(listView_rename_file_MouseDoubleClick);
+            listView_rename_file.ColumnClick += new ColumnClickEventHandler(listView_rename_file_ColumnClick);
+
             //------------------------------------------------------------  # 60個
 
             filesize_min = Properties.Settings.Default.filesize_min;  // 搜尋 資料夾/檔案 的下限
@@ -320,6 +352,11 @@ namespace vcs_DiskDirectoryFile1
             lv_video_cw3 = Properties.Settings.Default.lv_video_cw3;
             lv_video_cw4 = Properties.Settings.Default.lv_video_cw4;
             lv_video_cw5 = Properties.Settings.Default.lv_video_cw5;
+            lv_rename_dir_cw0 = Properties.Settings.Default.lv_rename_dir_cw0;
+            lv_rename_dir_cw1 = Properties.Settings.Default.lv_rename_dir_cw1;
+            lv_rename_file_cw0 = Properties.Settings.Default.lv_rename_file_cw0;
+            lv_rename_file_cw1 = Properties.Settings.Default.lv_rename_file_cw1;
+
             tab_control_index = Properties.Settings.Default.tab_control_index;
             tabControl1.SelectedIndex = tab_control_index;
 
@@ -499,6 +536,16 @@ namespace vcs_DiskDirectoryFile1
                 Properties.Settings.Default.lv_video_cw4 = listView_video.Columns[4].Width;
                 Properties.Settings.Default.lv_video_cw5 = listView_video.Columns[5].Width;
             }
+            if (listView_rename_dir.Columns.Count > 0)
+            {
+                Properties.Settings.Default.lv_rename_dir_cw0 = listView_rename_dir.Columns[0].Width;
+                Properties.Settings.Default.lv_rename_dir_cw1 = listView_rename_dir.Columns[1].Width;
+            }
+            if (listView_rename_file.Columns.Count > 0)
+            {
+                Properties.Settings.Default.lv_rename_file_cw0 = listView_rename_file.Columns[0].Width;
+                Properties.Settings.Default.lv_rename_file_cw1 = listView_rename_file.Columns[1].Width;
+            }
 
             //儲存搜尋路徑
             int len = listBox1.Items.Count;
@@ -518,7 +565,9 @@ namespace vcs_DiskDirectoryFile1
             {
                 save_path += listBox_search.Items[i];
                 if (i < (len - 1))
+                {
                     save_path += ";";
+                }
             }
             Properties.Settings.Default.search_patterns = save_path;
 
@@ -577,6 +626,11 @@ namespace vcs_DiskDirectoryFile1
             listView_file.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 24 + 50);
             listView_video.Size = new Size(W, 270 - 50 + 200);
             listView_video.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 24 + 50);
+            listView_rename_dir.Size = new Size(W, 270 - 50 + 200);
+            listView_rename_dir.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 24 + 50);
+            listView_rename_file.Size = new Size(W, 270 - 50 + 200);
+            listView_rename_file.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 24 + 50);
+
             bt_clear2.Location = new Point(listView_dir.Location.X + listView_dir.Size.Width - bt_clear2.Size.Width, listView_dir.Location.Y + listView_dir.Size.Height - bt_clear2.Size.Height);
             bt_clear2.BringToFront();
 
@@ -610,6 +664,11 @@ namespace vcs_DiskDirectoryFile1
             listView_file.Location = new Point(x_st + dx * 0, y_st + dy * 1 + 24 + 50);
             listView_video.Size = new Size(W, 270 - 50);
             listView_video.Location = new Point(x_st + dx * 0, y_st + dy * 1 + 24 + 50);
+            listView_rename_dir.Size = new Size(W, 270 - 50);
+            listView_rename_dir.Location = new Point(x_st + dx * 0, y_st + dy * 1 + 24 + 50);
+            listView_rename_file.Size = new Size(W, 270 - 50);
+            listView_rename_file.Location = new Point(x_st + dx * 0, y_st + dy * 1 + 24 + 50);
+
             bt_clear2.Location = new Point(listView_dir.Location.X + listView_dir.Size.Width - bt_clear2.Size.Width, listView_dir.Location.Y + listView_dir.Size.Height - bt_clear2.Size.Height);
             bt_clear2.BringToFront();
 
@@ -690,9 +749,14 @@ namespace vcs_DiskDirectoryFile1
             bt_start_all_files.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             bt_start_files_good.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             bt_auto_rename.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            cb_auto_rename.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+
+            cb_auto_rename.Location = new Point(x_st + dx * 2, y_st + dy * 1 - 6);
             cb_auto_rename.Text = "改";
-            cb_save_info.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 25);
+            cb_rename_folder.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 15 - 6);
+            cb_rename_folder.Text = "資";
+            cb_show_all.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 30 - 6);
+            cb_show_all.Text = "全";
+            cb_save_info.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 46 - 6);
             cb_save_info.Text = "存";
             //那些小icon 第3頁 搜尋
             bt_search_pattern_vcs.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -791,6 +855,8 @@ namespace vcs_DiskDirectoryFile1
             listView_dir.Clear();
             listView_file.Clear();
             listView_video.Clear();
+            listView_rename_dir.Clear();
+            listView_rename_file.Clear();
 
             fileinfos.Clear();
             folderinfos.Clear();  // TBD
@@ -805,30 +871,48 @@ namespace vcs_DiskDirectoryFile1
                 listView_dir.Visible = true;
                 listView_file.Visible = false;
                 listView_video.Visible = false;
+                listView_rename_dir.Visible = false;
+                listView_rename_file.Visible = false;
             }
             else if ((flag_export_file == true) || (flag_export_katfile == true) || (flag_search_text_mode == true))  // 匯出檔名 或 Katfile 或 搜尋文字模式
             {
                 listView_dir.Visible = false;
                 listView_file.Visible = true;
                 listView_video.Visible = false;
+                listView_rename_dir.Visible = false;
+                listView_rename_file.Visible = false;
             }
-            else if (flag_auto_rename_mode == true)
+            else if (flag_auto_rename_file_mode == true)  // 自動修正檔名模式
             {
                 listView_dir.Visible = false;
-                listView_file.Visible = true;
+                listView_file.Visible = false;
                 listView_video.Visible = false;
+                listView_rename_dir.Visible = false;
+                listView_rename_file.Visible = true;
+            }
+            else if (flag_auto_rename_dir_mode == true)  // 自動修正資料夾名模式
+            {
+                listView_dir.Visible = false;
+                listView_file.Visible = false;
+                listView_video.Visible = false;
+                listView_rename_dir.Visible = true;
+                listView_rename_file.Visible = false;
             }
             else if (flag_export_video == true)  // 找影片檔
             {
                 listView_dir.Visible = false;
                 listView_file.Visible = false;
                 listView_video.Visible = true;
+                listView_rename_dir.Visible = false;
+                listView_rename_file.Visible = false;
             }
             else
             {
                 listView_dir.Visible = false;
                 listView_file.Visible = false;
                 listView_video.Visible = false;
+                listView_rename_dir.Visible = false;
+                listView_rename_file.Visible = false;
             }
         }
 
@@ -3024,6 +3108,170 @@ namespace vcs_DiskDirectoryFile1
             }
         }
 
+        // 匯出自動修改資料夾名
+        void show_file_info_rename_dir(List<MyFileInfo> fileinfos, int sort_item, bool sort_type, ListView lv)
+        {
+            //sort_type  // false : ASCENDING, true : DESCENDING
+
+            //排序 由小到大
+            //fileinfos.Sort((x, y) => { return x.filesize.CompareTo(y.filesize); });
+
+            //排序 由大到小  在return的地方多個負號
+            //fileinfos.Sort((x, y) => { return -x.filesize.CompareTo(y.filesize); });
+
+            lv.Items.Clear();
+
+            richTextBox1.Text += "aaaa item = " + sort_item.ToString() + "\n";
+
+            if (sort_item == -1)
+            {
+                richTextBox1.Text += "無排序\n";
+            }
+            else if (sort_item == 0)
+            {
+                richTextBox1.Text += "依舊資料夾名排序, ";
+
+                if (sort_type == false)
+                {
+                    richTextBox1.Text += "升冪\n";
+                    //排序 由小到大, 升冪
+                    fileinfos.Sort((x, y) => { return x.filename.CompareTo(y.filename); });
+                }
+                else
+                {
+                    richTextBox1.Text += "降冪\n";
+                    //排序 由大到小, 降冪, 在return的地方多個負號
+                    fileinfos.Sort((x, y) => { return -x.filename.CompareTo(y.filename); });
+                }
+            }
+            else if (sort_item == 1)
+            {
+                richTextBox1.Text += "依新資料夾名排序, ";
+
+                if (sort_type == false)
+                {
+                    richTextBox1.Text += "升冪\n";
+                    //排序 由小到大, 升冪
+                    fileinfos.Sort((x, y) => { return x.filesize.CompareTo(y.filesize); });
+                }
+                else
+                {
+                    richTextBox1.Text += "降冪\n";
+                    //排序 由大到小, 降冪, 在return的地方多個負號
+                    fileinfos.Sort((x, y) => { return -x.filesize.CompareTo(y.filesize); });
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "其他排序XXXX222\n";
+                return;
+            }
+
+            lv.Clear();
+
+            //設置列名稱, for 自動修改資料夾名
+            lv.Columns.Add("舊資料夾名", lv_rename_dir_cw0, HorizontalAlignment.Left);
+            lv.Columns.Add("新資料夾名", lv_rename_dir_cw1, HorizontalAlignment.Left);
+
+            int len = fileinfos.Count;
+            for (int i = 0; i < len; i++)
+            {
+                string name_old = fileinfos[i].name_old;
+                string name_new = fileinfos[i].name_new;
+
+                ListViewItem i1 = new ListViewItem(name_old);
+                i1.UseItemStyleForSubItems = false;
+                ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
+
+                sub_i1a.Text = name_new;
+                i1.SubItems.Add(sub_i1a);
+
+                lv.Items.Add(i1);
+            }
+        }
+
+        // 匯出自動修改檔名
+        void show_file_info_rename_file(List<MyFileInfo> fileinfos, int sort_item, bool sort_type, ListView lv)
+        {
+            //sort_type  // false : ASCENDING, true : DESCENDING
+
+            //排序 由小到大
+            //fileinfos.Sort((x, y) => { return x.filesize.CompareTo(y.filesize); });
+
+            //排序 由大到小  在return的地方多個負號
+            //fileinfos.Sort((x, y) => { return -x.filesize.CompareTo(y.filesize); });
+
+            lv.Items.Clear();
+
+            richTextBox1.Text += "aaaa item = " + sort_item.ToString() + "\n";
+
+            if (sort_item == -1)
+            {
+                richTextBox1.Text += "無排序\n";
+            }
+            else if (sort_item == 0)
+            {
+                richTextBox1.Text += "依舊檔名排序, ";
+
+                if (sort_type == false)
+                {
+                    richTextBox1.Text += "升冪\n";
+                    //排序 由小到大, 升冪
+                    fileinfos.Sort((x, y) => { return x.filename.CompareTo(y.filename); });
+                }
+                else
+                {
+                    richTextBox1.Text += "降冪\n";
+                    //排序 由大到小, 降冪, 在return的地方多個負號
+                    fileinfos.Sort((x, y) => { return -x.filename.CompareTo(y.filename); });
+                }
+            }
+            else if (sort_item == 1)
+            {
+                richTextBox1.Text += "依新檔名排序, ";
+
+                if (sort_type == false)
+                {
+                    richTextBox1.Text += "升冪\n";
+                    //排序 由小到大, 升冪
+                    fileinfos.Sort((x, y) => { return x.filesize.CompareTo(y.filesize); });
+                }
+                else
+                {
+                    richTextBox1.Text += "降冪\n";
+                    //排序 由大到小, 降冪, 在return的地方多個負號
+                    fileinfos.Sort((x, y) => { return -x.filesize.CompareTo(y.filesize); });
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "其他排序XXXX222\n";
+                return;
+            }
+
+            lv.Clear();
+
+            //設置列名稱, for 自動修改檔案名
+            lv.Columns.Add("舊檔名", lv_rename_file_cw0, HorizontalAlignment.Left);
+            lv.Columns.Add("新檔名", lv_rename_file_cw1, HorizontalAlignment.Left);
+
+            int len = fileinfos.Count;
+            for (int i = 0; i < len; i++)
+            {
+                string name_old = fileinfos[i].name_old;
+                string name_new = fileinfos[i].name_new;
+
+                ListViewItem i1 = new ListViewItem(name_old);
+                i1.UseItemStyleForSubItems = false;
+                ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
+
+                sub_i1a.Text = name_new;
+                i1.SubItems.Add(sub_i1a);
+
+                lv.Items.Add(i1);
+            }
+        }
+
         //------------------------------------------------------------  # 60個
         //------------------------------------------------------------  # 60個
 
@@ -3160,6 +3408,14 @@ namespace vcs_DiskDirectoryFile1
             return;
         }
 
+        private void listView_rename_dir_MouseClick(object sender, MouseEventArgs e)
+        {
+        }
+
+        private void listView_rename_file_MouseClick(object sender, MouseEventArgs e)
+        {
+        }
+
         //------------------------------------------------------------  # 60個
 
         private void listView_dir_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -3289,6 +3545,14 @@ namespace vcs_DiskDirectoryFile1
             }
         }
 
+        private void listView_rename_dir_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+        }
+
+        private void listView_rename_file_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+        }
+
         //------------------------------------------------------------  # 60個
 
         bool flag_sort_type0 = false;  // false : ASCENDING, true : DESCENDING
@@ -3400,6 +3664,20 @@ namespace vcs_DiskDirectoryFile1
             }
         }
 
+        private void listView_rename_dir_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            //richTextBox1.Text += "你按了第 " + e.Column.ToString() + " 欄\n";
+            //richTextBox1.Text += "aaa : " + listView_video.Columns[e.Column] + "\n";
+            //richTextBox1.Text += "bbb : " + e.Column.ToString() + "\n";
+        }
+
+        private void listView_rename_file_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            //richTextBox1.Text += "你按了第 " + e.Column.ToString() + " 欄\n";
+            //richTextBox1.Text += "aaa : " + listView_video.Columns[e.Column] + "\n";
+            //richTextBox1.Text += "bbb : " + e.Column.ToString() + "\n";
+        }
+
         //------------------------------------------------------------  # 60個
         //------------------------------------------------------------  # 60個
 
@@ -3496,6 +3774,18 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_delete_file_Click(object sender, EventArgs e)
         {
+
+            if (flag_auto_rename_file_mode == true)  // 自動修正檔名模式
+            {
+                richTextBox1.Text += "自動修正檔名模式, 不支持\n";
+                return;
+            }
+            else if (flag_auto_rename_dir_mode == true)  // 自動修正資料夾名模式
+            {
+                richTextBox1.Text += "自動修正資料夾名模式, 不支持\n";
+                return;
+            }
+
             string delete_filename = string.Empty;
             int selectCount = listView_dir.SelectedIndices.Count;  // 總共選擇的個數
 
@@ -3780,10 +4070,6 @@ namespace vcs_DiskDirectoryFile1
             if (cb_save_info.Checked == true)  // 儲存檔案
             {
                 cb_save_info.Checked = false;
-
-
-
-
             }
         }
 
@@ -3799,6 +4085,8 @@ namespace vcs_DiskDirectoryFile1
             listView_dir.Items.Clear();
             listView_file.Items.Clear();
             listView_video.Items.Clear();
+            listView_rename_dir.Items.Clear();
+            listView_rename_file.Items.Clear();
 
             fileinfos_match.Clear();
 
@@ -3965,9 +4253,13 @@ namespace vcs_DiskDirectoryFile1
                     {
                         show_file_info_file(fileinfos, -1, false, listView_file);
                     }
-                    else if (flag_auto_rename_mode == true)
+                    else if (flag_auto_rename_file_mode == true)  // 自動修正檔名模式
                     {
-                        show_file_info_file(fileinfos, -1, false, listView_file);
+                        show_file_info_rename_file(fileinfos, -1, false, listView_rename_file);
+                    }
+                    else if (flag_auto_rename_dir_mode == true)  // 自動修正資料夾名模式
+                    {
+                        show_file_info_rename_dir(fileinfos, -1, false, listView_rename_dir);
                     }
                     else if (flag_export_video == true)  // 找影片檔
                     {
@@ -4146,6 +4438,53 @@ namespace vcs_DiskDirectoryFile1
             {
                 // 檔案
                 ProcessFile(filename);
+            }
+
+            if (flag_auto_rename_dir_mode == true)  // 自動修正資料夾名模式
+            {
+                DirectoryInfo d = new DirectoryInfo(foldername);
+                folder_folders = Directory.GetDirectories(d.FullName).Length;  // 取得指定目錄中子目錄的名稱, 一層
+                //richTextBox1.Text += "有 " + folder_folders.ToString() + " 個資料夾\n";
+
+                if (folder_folders == 0)  // 最底層資料夾 //全/空/小
+                {
+                    DirectoryInfo di = new DirectoryInfo(foldername);
+                    // di.Name;  //資料夾簡名
+
+                    string filename_old = di.Name;
+                    string filename_new = string.Empty;
+
+                    filename_new = get_new_filename(filename_old);  //取得 shortname
+                    if (filename_new == filename_old)
+                    {
+                        if (cb_show_all.Checked == false)
+                        {
+                            //richTextBox1.Text += "無修改\n";
+                            return;
+                        }
+                    }
+
+                    string name_old = di.Name;
+                    string name_new = filename_new;
+                    fileinfos.Add(new MyFileInfo(name_old, name_new));
+                    total_files++;
+                    folder_files++;
+
+                    //------------------------------------------------------------  # 60個
+
+                    if (cb_auto_rename.Checked == true)  // 自動改名
+                    {
+                        richTextBox1.Text += "舊資料夾名 : " + filename_old + "\n";
+                        richTextBox1.Text += "新資料夾名 : " + filename_new + "\n";
+
+                        string foldername_old2 = Directory.GetParent(foldername_old) + "\\" + filename_old;
+                        string foldername_new2 = Directory.GetParent(foldername_old) + "\\" + filename_new;
+                        richTextBox1.Text += "foldername_old:\t" + foldername_old2 + "\n";
+                        richTextBox1.Text += "foldername_new:\t" + foldername_new2 + "\n";
+
+                        do_rename_dir(foldername_old2, foldername_new2);  // 資料夾改名
+                    }
+                }
             }
 
             if (flag_export_dir == true)  // 找資料夾, 全/空/小
@@ -4497,7 +4836,7 @@ namespace vcs_DiskDirectoryFile1
                     return;
                 }
             }
-            else if (flag_auto_rename_mode == true)
+            else if (flag_auto_rename_file_mode == true)  // 自動修正檔名模式
             {
                 //只要改名影片檔 .mp4 .avi .mkv .wmv
                 bool res1 = fi.Name.ToLower().Replace(" ", "").Contains(".mp4");
@@ -4518,22 +4857,16 @@ namespace vcs_DiskDirectoryFile1
                 filename_new = get_new_filename(filename_old);  //取得 shortname
                 if (filename_new == filename_old)
                 {
-                    ///richTextBox1.Text += "無修改\n";
-                    return;
+                    if (cb_show_all.Checked == false)
+                    {
+                        //richTextBox1.Text += "無修改\n";
+                        return;
+                    }
                 }
 
-                int w = 1920;
-                int h = 1080;
-                int fps = 30;
-                string n = fi.Name;
-                string sn = "bbbb";  //取得 shortname
-                string ss = "cccc";  //取得 seriesname
-                //string p = fi.Directory.ToString();
-                string p = filename_new;
-                string e = fi.Extension;
-                long s = fi.Length;
-                int dd = 456;
-                fileinfos.Add(new MyFileInfo(n, sn, ss, p, e, s, w, h, fps, dd));
+                string name_old = fi.Name;
+                string name_new = filename_new;
+                fileinfos.Add(new MyFileInfo(name_old, name_new));
                 total_files++;
                 total_size += fi.Length;
                 folder_files++;
@@ -4547,7 +4880,7 @@ namespace vcs_DiskDirectoryFile1
                     filename_new = fi.Directory + "\\" + filename_new;
                     richTextBox1.Text += "filename_old:\t" + filename_old + "\n";
                     richTextBox1.Text += "filename_new:\t" + filename_new + "\n";
-                    do_rename(filename_old, filename_new);  // 檔案改名
+                    do_rename_file(filename_old, filename_new);  // 檔案改名
                 }
             }
 
@@ -4565,7 +4898,30 @@ namespace vcs_DiskDirectoryFile1
             }
         }
 
-        void do_rename(string filename_old, string filename_new)
+        // 資料夾改名
+        void do_rename_dir(string foldername_old, string foldername_new)
+        {
+            if (Directory.Exists(foldername_old) == true)  // 確認 foldername_old 是否存在
+            {
+                //移動資料夾，從 foldername_old 移動到 foldername_new
+                if (Directory.Exists(foldername_new) == false)  // 確認 foldername_new 是否存在
+                {
+                    Directory.Move(foldername_old, foldername_new);  // 資料夾重新命名
+                    richTextBox1.Text += "已移動資料夾: " + foldername_old + " 到 " + foldername_new + "\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "資料夾: " + foldername_new + " 已存在，無法移動\n";
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "資料夾: " + foldername_old + " 不存在，無法移動，可能已被改過資料夾名\n";
+            }
+        }
+
+        // 檔案改名
+        void do_rename_file(string filename_old, string filename_new)
         {
             if (File.Exists(filename_old) == true)  // 確認 filename_old 是否存在
             {
@@ -4824,25 +5180,9 @@ namespace vcs_DiskDirectoryFile1
                     return;
                 }
 
-                if (Directory.Exists(foldername_old) == true)  // 確認 foldername_old 是否存在
-                {
-                    //移動資料夾，從 foldername_old 移動到 foldername_new
-                    if (Directory.Exists(foldername_new) == false)  // 確認 foldername_new 是否存在
-                    {
-                        Directory.Move(foldername_old, foldername_new);  // 資料夾改名
-                        richTextBox1.Text += "已移動資料夾: " + foldername_old + " 到 " + foldername_new + "\n";
-                        tb_foldername.Enabled = false;
-                        tb_filename.Enabled = false;
-                    }
-                    else
-                    {
-                        richTextBox1.Text += "資料夾: " + foldername_new + " 已存在，無法移動\n";
-                    }
-                }
-                else
-                {
-                    richTextBox1.Text += "資料夾: " + foldername_old + " 不存在，無法移動，可能已被改過資料夾名\n";
-                }
+                do_rename_dir(foldername_old, foldername_new);
+                tb_foldername.Enabled = false;
+                tb_filename.Enabled = false;
             }
             else if (e.KeyChar == (Char)27)  //撈取ESC
             {
@@ -4899,7 +5239,7 @@ namespace vcs_DiskDirectoryFile1
                     return;
                 }
 
-                do_rename(filename_old, filename_new);  // 檔案改名
+                do_rename_file(filename_old, filename_new);  // 檔案改名
                 tb_foldername.Enabled = false;
                 tb_filename.Enabled = false;
             }
@@ -5088,24 +5428,28 @@ namespace vcs_DiskDirectoryFile1
             //先過濾掉一些字
             string[] remove_word = new string[] { "taxv.xyz_", "[javdb.com]", "[MILFY]", "027_3xplanet_", "[Thz.la]"
                 , "9288.pro@", "027_3xplanet_", "hhd800.com@", "489155.com@", "javkok.com@", "489155.com@", "big2048.com@", "[bbs.yzkof.com]"
-                , "jav20s8.com@", "@江南@", "QQQQ", "toyouiv.com_", "桐原エリカ", "(Kirihara Erika)"
+                , "jav20s8.com@", "@江南@", "jnty60.app-", "toyouiv.com_", "QQQQ", "(Kirihara Erika)"
                 , "[javdb.com]", "Abigaile Johnson ", "Heydoug", "dccdom.com@", "DLLAF"
                 , "bbs2048.org@", "Abigaile Johnson ", "Heydoug", "avmans.com"
-                , "4k688.com@", "僕とかえでの甘～い性活", "QQQQ", "[garea chinan]"
-                , "初剃り", "[44x.me]", "bbsxv.xyz", "@蜂鳥@fengniao151.vip", "18x78.com_"
-                , "taxv.xyz", "jav20s8.com@", "shimohira", "hikari", "deeper.21"
-                , "【雪光梦想】", "4k2.com@", "QQQQ", "[HD]", "104DANDAN"
+                , "4k688.com@", "QQQQ", "第一會所新片@SIS001@", "[garea chinan]"
+                , "QQQQ", "[44x.me]", "bbsxv.xyz", "@蜂鳥@fengniao151.vip", "18x78.com_"
+                , "taxv.xyz", "jav20s8.com@", "QQQQ", "QQQQ", "deeper.21"
+                , "【雪光梦想】", "4k2.com@", "QQQQ", "104DANDAN"
                 , "[88q.me]", "jav4you.", "private", "52JAV.COM", "crv2000.com"
                 , "javidol.com", "Prestige", "[thzu.cc]", "wowg.", "18x78.com_"
                 , "(hibino)", "kpkp3.com", "bbyxv.xyz", "aaxv.xyz", "4k2.me@"
                 , "masex.tv@", "[55h.me]", "[NoDRM]-", "jpfou.com-", "madoubt.com 583985.xyz "
-                , "-javgg.net", "[456k.me]", "(uncensored)", "rh2048.com@", "uncensored"
-                , "[BT-btt.com]", ".h264", ".xvid", "jnty4588.com", "77vr.com@"
+                , "-javgg.net", "[456k.me]", "(uncensored)", "rh2048.com@", "-uncensored", "uncensored"
+                , "[BT-btt.com]", ".h264", ".xvid", "jnty4588.com-", "jnty4588.com", "77vr.com@"
                 , "2048.info@", "madoubt.com 952388.xyz ", "~nyap2p.com", "kcf9.com@", "gg5.co@"
-                , "gg5.co@", "QQQQ", "-nyap2p.comnf.", "_dvd", "[crazecat下载加速器—www.crazecat.com]"
+                , "gg5.co@", "_X1080X", "-nyap2p.comnf.", "_dvd", "[crazecat下载加速器—www.crazecat.com]"
                 , "_gg5", "QQQQ", "QQQQ", "QQQQ", "jn998.vip-"
-                , "QQQQ", "(麻豆傳媒)", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "(麻豆傳媒)", "(杏吧傳媒)", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "-nyap2p.com", "(Red Hot Jam)", "(KIRARI)", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                //, "-FHD", ".FHD", "-fhd", ".fhd", "QQQQ", "QQQQ", "QQQQ", "QQQQ"  // 臨時的修正
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 //, ".mp4", ".wmv", ".avi", ".mkv", ".mov"  // 清除副檔名
@@ -5143,12 +5487,12 @@ namespace vcs_DiskDirectoryFile1
                 , "javidol.com", "Prestige", "[thzu.cc]", "wowg.", "18x78.com_"
                 , "(hibino)", "kpkp3.com", "bbyxv.xyz", "aaxv.xyz", "4k2.me@"
                 , "masex.tv@", "[55h.me]", "[NoDRM]-", "jpfou.com-", "madoubt.com 583985.xyz "
-                , "-javgg.net", "[456k.me]", "(uncensored)", "rh2048.com@", "uncensored"
+                , "-javgg.net", "[456k.me]", "(uncensored)", "rh2048.com@", "-uncensored", "uncensored"
                 , "[BT-btt.com]", ".h264", ".xvid", "jnty4588.com", "77vr.com@"
                 , "2048.info@", "madoubt.com 952388.xyz ", "~nyap2p.com", "kcf9.com@", "gg5.co@"
                 , "gg5.co@", "H265", "-nyap2p.comnf.", "_dvd", "[crazecat下载加速器—www.crazecat.com]"
                 , "_gg5", "hd_", "_hd_", "_uncen", "jn998.vip-"
-                , "-1080p", "(麻豆傳媒)", "_hd.mp4", "_hd.mkv", "_hd.wmv"
+                , "-1080p", "(麻豆傳媒)", "(杏吧傳媒)", "_hd.mp4", "_hd.mkv", "_hd.wmv"
                 , "_1.mp4", "-nyap2p.com", "(Red Hot Jam)", "(KIRARI)", "dccdom.com@"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
@@ -5863,7 +6207,9 @@ namespace vcs_DiskDirectoryFile1
             flag_export_dir = false;  // 找資料夾, 全/空/小
             flag_export_file = true;  // 匯出檔名
             flag_export_video = false;  // 找影片檔
-            flag_auto_rename_mode = false;  // 自動修正檔名模式
+            flag_auto_rename_dir_mode = false;  // 自動修正資料夾名模式
+            flag_auto_rename_file_mode = false;  // 自動修正檔名模式
+
             tb_search_text_old = tb_search.Text;
             tb_limit_min_text_old = tb_limit_min.Text;
             tb_limit_max_text_old = tb_limit_max.Text;
@@ -5880,7 +6226,9 @@ namespace vcs_DiskDirectoryFile1
             flag_export_dir = false;  // 找資料夾, 全/空/小
             flag_export_file = false;  // 匯出檔名
             flag_export_video = true;  // 找影片檔
-            flag_auto_rename_mode = false;  // 自動修正檔名模式
+            flag_auto_rename_dir_mode = false;  // 自動修正資料夾名模式
+            flag_auto_rename_file_mode = false;  // 自動修正檔名模式
+
             tb_search_text_old = tb_search.Text;
             tb_limit_min_text_old = tb_limit_min.Text;
             tb_limit_max_text_old = tb_limit_max.Text;
@@ -5897,7 +6245,9 @@ namespace vcs_DiskDirectoryFile1
             flag_export_dir = true;  // 找資料夾, 全/空/小
             flag_export_file = false;  // 匯出檔名
             flag_export_video = false;  // 找影片檔
-            flag_auto_rename_mode = false;  // 自動修正檔名模式
+            flag_auto_rename_dir_mode = false;  // 自動修正資料夾名模式
+            flag_auto_rename_file_mode = false;  // 自動修正檔名模式
+
             tb_search_text_old = tb_search.Text;
             tb_limit_min_text_old = tb_limit_min.Text;
             tb_limit_max_text_old = tb_limit_max.Text;
@@ -5914,7 +6264,9 @@ namespace vcs_DiskDirectoryFile1
             flag_export_dir = false;  // 找資料夾, 全/空/小
             flag_export_file = false;  // 匯出檔名
             flag_export_video = false;  // 找影片檔
-            flag_auto_rename_mode = false;  // 自動修正檔名模式
+            flag_auto_rename_dir_mode = false;  // 自動修正資料夾名模式
+            flag_auto_rename_file_mode = false;  // 自動修正檔名模式
+
             flag_export_katfile = true;  // 匯出Katfile壓縮檔檔案資料 專用
             show_item_location_listview();
 
@@ -5925,19 +6277,21 @@ namespace vcs_DiskDirectoryFile1
 
         void do_search_pattern()
         {
+            //搜尋文字
+
             if (tb_search_pattern.Text == "")
             {
                 richTextBox1.Text += "未輸入搜尋內容\n";
                 return;
             }
 
-            //搜尋文字
             flag_export_dir = false;  // 找資料夾, 全/空/小
             flag_export_file = false;  // 匯出檔名
             flag_export_video = false;  // 找影片檔
-            flag_search_text_mode = true;  // 搜尋文字模式
-            flag_auto_rename_mode = false;  // 自動修正檔名模式
+            flag_auto_rename_dir_mode = false;  // 自動修正資料夾名模式
+            flag_auto_rename_file_mode = false;  // 自動修正檔名模式
 
+            flag_search_text_mode = true;  // 搜尋文字模式
             tb_search_text_old = tb_search.Text;
             tb_limit_min_text_old = tb_limit_min.Text;
             tb_limit_max_text_old = tb_limit_max.Text;
@@ -6242,25 +6596,15 @@ namespace vcs_DiskDirectoryFile1
                     Process.Start(foldername);
                 }
             }
-            else if (flag_auto_rename_mode == true)
+            else if (flag_auto_rename_file_mode == true)  // 自動修正檔名模式
             {
-                selectCount = listView_file.SelectedItems.Count;  // 總共選擇的個數
-
-                if (selectCount > 0)
-                {
-                    int selNdx = listView_file.SelectedIndices[0];  // 取出選中的第0個
-
-                    string foldername = listView_file.Items[selNdx].SubItems[3].Text;
-                    richTextBox1.Text += "資料夾:\t" + foldername + "\n";
-
-                    /*
-                    //C# 呼叫檔案總管開啟某個資料夾，並讓某個檔案或資料夾呈現反白的樣子
-                    string file = @"C:\Windows\explorer.exe";
-                    string argument = @"/select, " + foldername;
-                    Process.Start(file, argument);
-                    */
-                    Process.Start(foldername);
-                }
+                richTextBox1.Text += "自動修正檔名模式, 不支持\n";
+                return;
+            }
+            else if (flag_auto_rename_dir_mode == true)  // 自動修正資料夾名模式
+            {
+                richTextBox1.Text += "自動修正資料夾名模式, 不支持\n";
+                return;
             }
             else if (flag_export_video == true)  // 找影片檔
             {
@@ -6408,11 +6752,22 @@ namespace vcs_DiskDirectoryFile1
         private void bt_auto_rename_Click(object sender, EventArgs e)
         {
             //自動修正檔名, 把特殊字刪除
-            flag_auto_rename_mode = true;  // 自動修正檔名模式
 
             flag_export_dir = false;  // 找資料夾, 全/空/小
             flag_export_file = false;  // 匯出檔名
             flag_export_video = false;  // 找影片檔
+
+            if (cb_rename_folder.Checked == true)
+            {
+                flag_auto_rename_dir_mode = true;  // 自動修正資料夾名模式
+                flag_auto_rename_file_mode = false;  // 自動修正檔名模式
+            }
+            else
+            {
+                flag_auto_rename_dir_mode = false;  // 自動修正資料夾名模式
+                flag_auto_rename_file_mode = true;  // 自動修正檔名模式
+            }
+
             show_item_location_listview();
 
             search_foldername = tb_foldername1.Text;
