@@ -1,4 +1,6 @@
-﻿        private void richTextBox2_TextChanged(object sender, EventArgs e)
+﻿
+
+        private void richTextBox2_TextChanged(object sender, EventArgs e)
         {
             //RichTextBox顯示訊息自動捲動 顯示最後一行
             richTextBox2.SelectionStart = richTextBox2.TextLength;
