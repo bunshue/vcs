@@ -6285,6 +6285,8 @@ namespace vcs_DiskDirectoryFile1
                 return;
             }
 
+            richTextBox1.Text += "搜尋 : " + tb_search_pattern.Text + "\n";
+
             flag_export_dir = false;  // 找資料夾, 全/空/小
             flag_export_file = false;  // 匯出檔名
             flag_export_video = false;  // 找影片檔

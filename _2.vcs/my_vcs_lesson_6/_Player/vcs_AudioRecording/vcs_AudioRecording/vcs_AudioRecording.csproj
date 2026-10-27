@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DirectShowLib-2005">
+      <HintPath>dll\DirectShowLib-2005.dll</HintPath>
+    </Reference>
     <Reference Include="NAudio">
       <HintPath>dll\NAudio.dll</HintPath>
     </Reference>

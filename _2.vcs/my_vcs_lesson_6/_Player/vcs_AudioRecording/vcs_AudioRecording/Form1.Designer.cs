@@ -131,6 +131,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(200, 60);
             this.button1.TabIndex = 127;
+            this.button1.Text = "麥克風資訊";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -190,7 +191,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(200, 60);
             this.button10.TabIndex = 135;
-            this.button10.Text = "st";
+            this.button10.Text = "錄音開始";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -201,7 +202,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(200, 60);
             this.button11.TabIndex = 136;
-            this.button11.Text = "sp";
+            this.button11.Text = "錄音結束";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 

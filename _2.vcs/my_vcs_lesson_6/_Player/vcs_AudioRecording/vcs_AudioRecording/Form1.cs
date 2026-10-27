@@ -13,6 +13,9 @@ using System.Runtime.InteropServices;
 //參考/加入參考/NAudio.dll
 
 using NAudio.Wave;
+using NAudio.CoreAudioApi;
+
+using DirectShowLib;
 
 namespace vcs_AudioRecording
 {
@@ -96,24 +99,74 @@ namespace vcs_AudioRecording
         {
             //查找音效裝置
 
+            richTextBox1.Text += "查找音效裝置------------------------------------------------------------\n";  // 60個
+
             ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_SoundDevice");
 
             foreach (ManagementObject obj in searcher.Get())
             {
-                Console.WriteLine(obj["Name"]);
                 richTextBox1.Text += "找到 : " + obj["Name"] + "\n";
             }
 
-            //6060
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            // 使用 WinMM (舊 API)
 
             uint count = WinMM.waveInGetNumDevs();
-            Console.WriteLine("錄音裝置數量：" + count);
+            richTextBox1.Text += "錄音裝置數量：" + count.ToString() + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //使用 NAudio
+
+            MMDeviceEnumerator enumerator = new MMDeviceEnumerator();
+
+            MMDeviceCollection devices =
+                enumerator.EnumerateAudioEndPoints(
+                    DataFlow.Capture,
+                    DeviceState.Active);
+
+            richTextBox1.Text += "麥克風數量：" + devices.Count + "\n";
+
+            foreach (MMDevice device in devices)
+            {
+                richTextBox1.Text += device.FriendlyName + "\n";
+            }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //使用 DirectShowLib;
+
+            DsDevice[] devices2 =
+                DsDevice.GetDevicesOfCat(FilterCategory.AudioInputDevice);
+
+            Console.WriteLine(devices2.Length);
+            richTextBox1.Text += "麥克風數量：" + devices2.Length + "\n";
+
+            foreach (DsDevice d in devices2)
+            {
+                Console.WriteLine(d.Name);
+                richTextBox1.Text += d.Name + "\n";
+            }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
 
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            waveSource = new WaveIn();
+            for (int i = 0; i < WaveIn.DeviceCount; i++)
+            {
+                WaveInCapabilities cap = WaveIn.GetCapabilities(i);
+
+                Console.WriteLine(i + " : " + cap.ProductName);
+            }
+
+            //錄音前指定裝置：
+            waveSource.DeviceNumber = 1;  // 即可使用第 2 支麥克風。
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -149,7 +202,7 @@ namespace vcs_AudioRecording
         {
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private WaveIn waveSource;
         private WaveFileWriter waveFile;
@@ -160,7 +213,6 @@ namespace vcs_AudioRecording
             if (waveFile != null)
             {
                 waveFile.WriteData(e.Buffer, 0, e.BytesRecorded);
-                //waveFile.Write(e.Buffer, 0, e.BytesRecorded);
                 waveFile.Flush();
             }
         }
@@ -186,20 +238,22 @@ namespace vcs_AudioRecording
         private void button10_Click(object sender, EventArgs e)
         {
             //st
+            if (waveSource != null)
+            {
+                MessageBox.Show("已經在錄音中");
+                return;
+            }
+
             string filename = @"tmp_Record.wav";
 
             waveSource = new WaveIn();
 
-            waveSource.WaveFormat =
-                new WaveFormat(44100, 1);
+            waveSource.WaveFormat = new WaveFormat(44100, 1);
 
             waveSource.DataAvailable += waveSource_DataAvailable;
-            //waveSource.RecordingStopped += waveSource_RecordingStopped;
             waveSource.RecordingStopped += new EventHandler(waveSource_RecordingStopped);
 
-            waveFile =
-                new WaveFileWriter(filename,
-                                   waveSource.WaveFormat);
+            waveFile = new WaveFileWriter(filename, waveSource.WaveFormat);
 
             waveSource.StartRecording();
 
@@ -213,8 +267,9 @@ namespace vcs_AudioRecording
             {
                 waveSource.StopRecording();
             }
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button12_Click(object sender, EventArgs e)
         {
