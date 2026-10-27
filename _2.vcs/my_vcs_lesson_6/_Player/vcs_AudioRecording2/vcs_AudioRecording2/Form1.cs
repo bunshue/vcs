@@ -25,11 +25,21 @@ namespace vcs_AudioRecording2
         private void Form1_Load(object sender, EventArgs e)
         {
             //啟動時列出所有麥克風
+            LoadMicList();
+
+            //LoadRecordList();
+
+            timer1.Interval = 1000;
+        }
+
+        private void LoadMicList()
+        {
             comboBox1.Items.Clear();
 
             for (int i = 0; i < WaveIn.DeviceCount; i++)
             {
                 WaveInCapabilities cap = WaveIn.GetCapabilities(i);
+
                 comboBox1.Items.Add(cap.ProductName);
             }
 
@@ -37,8 +47,6 @@ namespace vcs_AudioRecording2
             {
                 comboBox1.SelectedIndex = 0;
             }
-
-            timer1.Interval = 1000;
         }
 
         //------------------------------------------------------------  # 60個
@@ -53,16 +61,29 @@ namespace vcs_AudioRecording2
                 writer.Flush();
             }
 
-            int max = 0;
+            int max = 0;  // 目前錄到的最大振幅
 
             for (int i = 0; i < e.BytesRecorded; i += 2)
             {
                 short sample = BitConverter.ToInt16(e.Buffer, i);
 
-                if (Math.Abs(sample) > max)
+                int value = Math.Abs(sample);
+
+                if (value > max)
                 {
-                    max = Math.Abs(sample);
+                    max = value;
                 }
+            }
+
+            double db;
+
+            if (max == 0)
+            {
+                db = -90;
+            }
+            else
+            {
+                db = 20 * Math.Log10((double)max / 32767);
             }
 
             int level = max * 100 / 32767;
@@ -75,6 +96,7 @@ namespace vcs_AudioRecording2
                 }
 
                 progressBar1.Value = level;
+                label2.Text = db.ToString("0.0") + " dB";
             }));
         }
 
@@ -127,7 +149,6 @@ namespace vcs_AudioRecording2
             timer1.Start();
 
             waveIn.StartRecording();
-
         }
 
         //停止錄音
@@ -155,6 +176,20 @@ namespace vcs_AudioRecording2
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
+
+
+
+
+/*
+using (WaveFileReader reader =
+       new WaveFileReader(file))
+{
+    TimeSpan ts = reader.TotalTime;
+}
+
+
+*/
+
 
 
 
