@@ -1,5 +1,66 @@
 
+怎麼那麼奇怪, 我改用台灣的股市
 
+import yfinance as yf
+
+start_date = "2026-10-12"
+end_date = "2026-10-20"
+interval = "1d"
+
+ticker = "2330.TW"
+stock_data = yf.download(ticker, start=start_date, end=end_date, interval=interval)
+
+print(stock_data)
+
+一樣也是錯誤訊息耶
+
+1 Failed download:
+['2330.TW']: Exception('%ticker%: No price data found, symbol may be delisted (1d 2026-10-12 -> 2026-10-20)')
+
+
+
+方案一：抓台股首選 —— 使用 FinMind（台灣團隊開發，免申請 Key）
+這是台灣金融資料開源團隊做的，直接對接台灣證交所，抓台股快又穩定，絕對不會有退市或時區錯誤。
+
+
+import yfinance as yf
+
+# 方式 A：把時間範圍拉長（例如從 9 月開始抓）
+start_date = "2026-09-01"
+end_date = "2026-10-20"
+interval = "1d"
+
+ticker = "2330.TW"
+stock_data = yf.download(ticker, start=start_date, end=end_date, interval=interval)
+
+print("--- 方式 A 結果 ---")
+print(stock_data.tail())
+
+
+# 方式 B：用 period 參數直接抓最近一個月（最不容易出錯，強烈推薦）
+print("\n--- 方式 B 結果 ---")
+tsmc = yf.Ticker("2330.TW")
+stock_data_b = tsmc.history(period="1mo")
+print(stock_data_b.tail())
+
+
+
+
+
+
+
+# pip install yfinance
+
+import yfinance as yf
+
+['^GSPC']: Exception('%ticker%: No price data found, symbol may be delisted (15m 2026-10-12 -> 2026-10-15)')
+
+
+
+pandas-datareader 已停止維護，透過它直接從 Yahoo Finance 抓取歷史股價通常會直接報錯。
+建議改用目前主流且穩定維護的 yfinance 套件。
+
+6060
 
 yolo 停車場車牌辨識
 https://ithelp.ithome.com.tw/articles/10343595

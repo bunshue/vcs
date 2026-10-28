@@ -1,6 +1,10 @@
-# Python 測試 yfinance
+# Python 測試 yfinance / FinMind
+
+# 方案一：抓台股首選 —— 使用 FinMind（台灣團隊開發，免申請 Key）
+# 這是台灣金融資料開源團隊做的，直接對接台灣證交所，抓台股快又穩定，絕對不會有退市或時區錯誤。
 
 # pip install yfinance
+# pip install finmind
 
 import yfinance as yf
 
@@ -47,7 +51,7 @@ plt.legend(loc="best")
 plt.suptitle("Alphabet Inc.字母控股 股價")
 
 plt.show()
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -65,10 +69,83 @@ intervals 參數
 Valid intervals: 1m,2m,5m,15m,30m,60m,90m,1h,1d,5d,1wk,1mo,3mo Intraday data cannot extend last 60 days
 """
 
+
+from FinMind.data import DataLoader
+
+# 初始化資料載入器
+dl = DataLoader()
+
+# 抓取台積電 (2330) 2026年9月到10月的日線資料
+stock_data = dl.taiwan_stock_daily(
+    stock_id="2330",
+    start_date="2026-09-01",
+    end_date="2026-10-20"
+)
+
+print(stock_data.head())
+
+
+sys.exit()
+import sys
+import yfinance as yf
+import pandas as pd
+
+# 下載 0050.TW 的歷史股價資料
+df = yf.download('2330.TW', start='2026-01-01', end='2026-10-01')
+
+# 顯示前 5 筆資料
+print(df.head())
+
+
+
+import yfinance as yf
+
+# 方式 A：把時間範圍拉長（例如從 9 月開始抓）
+start_date = "2026-09-01"
+end_date = "2026-10-20"
+interval = "1d"
+
+ticker = "2330.TW"
+stock_data = yf.download(ticker, start=start_date, end=end_date, interval=interval)
+
+print("--- 方式 A 結果 ---")
+print(stock_data.tail())
+
+
+# 方式 B：用 period 參數直接抓最近一個月（最不容易出錯，強烈推薦）
+print("\n--- 方式 B 結果 ---")
+tsmc = yf.Ticker("2330.TW")
+stock_data_b = tsmc.history(period="1mo")
+print(stock_data_b.tail())
+
+
+
+
+
+sys.exit()
+
+import yfinance as yf
+
+start_date = "2026-08-12"
+end_date = "2026-09-20"
+interval = "1d"
+
+ticker = "2330.TW"
+stock_data = yf.download(ticker, start=start_date, end=end_date, interval=interval)
+
+print(stock_data)
+
+
+# df = yf.download("2330.TW", start="2021-01-01", end="2022-12-31")
+
+
+sys.exit()
+
 # 設定參數
-start_date = "2025-02-12"  # 設定開始日期
-end_date = "2025-02-13"  # 設定結束日期
+start_date = "2026-10-12"  # 設定開始日期
+end_date = "2026-10-15"  # 設定結束日期
 interval = "15m"  # 設定時間週期為 15 分鐘
+interval = "1d"  # 設定時間週期為 15 分鐘
 
 # 抓取 S&P 500 數據 # 標準普爾500指數，簡稱S&P 500 、標普500或史坦普500
 ticker = "^GSPC"  # Yahoo Finance 中 S&P 500 的代號
@@ -76,6 +153,10 @@ sp500_data = yf.download(ticker, start=start_date, end=end_date, interval=interv
 
 # 顯示數據
 print(sp500_data.head())
+
+print('ddddddddddddddd')
+sys.exit()
+
 
 print("------------------------------")  # 30個
 
@@ -477,7 +558,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
 
 # Yahoo Finance API抓取資料，FinRL特徵工程
 

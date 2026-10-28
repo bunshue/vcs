@@ -574,6 +574,23 @@ namespace vcs_Mix03_draw_image
 
         private void button11_Click(object sender, EventArgs e)
         {
+            //測試 FillPath
+            // Graphics.FillPath(Brush, GraphicsPath) 方法
+
+            Graphics g = pictureBox1.CreateGraphics();
+            g.Clear(pictureBox1.BackColor);
+
+            g.DrawRectangle(Pens.Red, 100, 100, 100, 100);
+
+            // Create solid brush.
+            SolidBrush redBrush = new SolidBrush(Color.Red);
+
+            // Create graphics path object and add ellipse.
+            GraphicsPath graphPath = new GraphicsPath();
+            graphPath.AddEllipse(0, 0, 200, 100);
+
+            // Fill graphics path to screen.
+            g.FillPath(redBrush, graphPath);
         }
 
         //------------------------------------------------------------  # 60個

@@ -87,23 +87,37 @@ namespace vcs_Whisper
             string wavFilePath = @"C:\App\whisper.cpp-bin\input_16khz.wav";
             wavFilePath = @"D:\_git\vcs\_4.python\audio_video\老北京22222.wav";
 
-            // 3. 組合指令參數
-            string arguments = string.Format("-m \"{0}\" -f \"{1}\" -l zh", modelPath, wavFilePath);
+            // 3. 組合指令參數 (-m 指定模型, -f 指定音訊檔, -l 指定語言)
+            // 中文請帶入 -l zh，如果是自動偵測可以不加 -l，但指定常能提高準確度
+            //string arguments = string.Format("-m \"{0}\" -f \"{1}\" -l zh", modelPath, wavFilePath);
+            // 3. 組合指令參數（新增 --prompt 參數強制引導輸出繁體）
+            //string arguments = string.Format("-m \"{0}\" -f \"{1}\" -l zh --prompt \"以下是普通話的句子。\"", modelPath, wavFilePath);
+            // --prompt 參數的作用是給 Whisper 一個「前情提要」。
+            // 當它看到提示句是用繁體的「話」與「句」時，它在接下來的生成過程中，就會全面傾向使用繁體字集的編碼來輸出文字。
+            // 加上 -nt 參數，告訴 whisper-cli 不要輸出時間戳記
+            // string arguments = string.Format("-m \"{0}\" -f \"{1}\" -l zh -nt --prompt \"以下是普通話的句子。\"", modelPath, wavFilePath);
 
-            ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.FileName = whisperCliPath;
-            startInfo.Arguments = arguments;
-            startInfo.UseShellExecute = false;
-            startInfo.RedirectStandardOutput = true;
-            startInfo.RedirectStandardError = true;
-            startInfo.CreateNoWindow = true;
-            startInfo.StandardOutputEncoding = Encoding.UTF8;
-            startInfo.StandardErrorEncoding = Encoding.UTF8;
+            // 建立一個長度足夠、帶有完整繁體標點符號的提示句
+            string longPrompt = "以下是普通話的對話錄音。請將語音精確地轉錄為正體中文，並適當地加上逗號、句號與驚嘆號，使其成為一篇通順的文章。";
+            // 組合指令參數
+            string arguments = string.Format("-m \"{0}\" -f \"{1}\" -l zh -nt --prompt \"{2}\"", modelPath, wavFilePath, longPrompt);
+
+            ProcessStartInfo startInfo = new ProcessStartInfo
+            {
+                FileName = whisperCliPath,
+                Arguments = arguments,
+                UseShellExecute = false,        // 必須為 false 才能重導向輸出
+                RedirectStandardOutput = true,  // 抓取標準輸出文字
+                RedirectStandardError = true,   // whisper 的進度與資訊常在標準錯誤中
+                CreateNoWindow = true,          // 隱藏黑視窗
+                StandardOutputEncoding = Encoding.UTF8, // 確保中文不亂碼
+                StandardErrorEncoding = Encoding.UTF8
+            };
 
             Process process = new Process();
             process.StartInfo = startInfo;
 
-            // 處理標準文字輸出 (辨識出的歌詞/對話)
+            // 處理標準文字輸出 (辨識出的歌詞/對話) (C# 4.0 支援匿名方法與事件綁定)
             process.OutputDataReceived += delegate(object snd, DataReceivedEventArgs args)
             {
                 if (args.Data != null && !string.IsNullOrEmpty(args.Data))
@@ -111,14 +125,18 @@ namespace vcs_Whisper
                     // 關鍵：使用 MethodInvoker 跨執行緒安全更新 UI
                     this.BeginInvoke((MethodInvoker)delegate
                     {
+                        // 這裡會即時印出帶有時間戳記的文字
                         richTextBox1.AppendText(args.Data + "\r\n");
                     });
                 }
             };
 
+            // 用來接收底層的核心日誌（如初始化、硬體加速資訊、辨識進度）
             // 處理系統日誌輸出 (可選，如果要看進度可以加)
+            //這裡改用 C# 2.0/4.0 穩定的 delegate(object sender, DataReceivedEventArgs e) 匿名方法來接收事件。
             process.ErrorDataReceived += delegate(object snd, DataReceivedEventArgs args)
             {
+                // 如果不想看細節日誌，可以把下面這行註解掉
                 if (args.Data != null && !string.IsNullOrEmpty(args.Data))
                 {
                     this.BeginInvoke((MethodInvoker)delegate
@@ -140,10 +158,16 @@ namespace vcs_Whisper
                 });
             };
 
-            // 啟動程序與異步讀取
+            // 啟動程序
             process.Start();
+
+            // 開始異步讀取
             process.BeginOutputReadLine();
             process.BeginErrorReadLine();
+
+            // 等待程式執行完畢, 一次做完
+            // 一次做完 process.WaitForExit();
+            //process.WaitForExit() 鎖死主執行緒
         }
 
         //------------------------------------------------------------  # 60個
@@ -235,3 +259,49 @@ namespace vcs_Whisper
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
+
+
+/*
+請前往 GitHub whisper.cpp Releases 頁面。
+
+https://docs.profuzdigital.com/books/subtitlenext-how-tos/page/whispercpp-installation-guide
+
+在最新的發布版本 (Latest release) 的 Assets 區塊中，尋找適用於 Windows 64 位元的壓縮檔
+（通常檔名類似 whisper-bin-x64.zip 或 whisper-blas-bin-x64.zip）
+
+• 下載完成後，將 ZIP 壓縮檔解壓至你指定的資料夾（例如 C:\App\whisper.cpp-bin 或 C:\Program Files\whisper.cpp\）。
+4. 下載語音模型：
+• whisper.cpp 需要搭配 GGML 格式的語音模型檔案（可至 Hugging Face 的 ggerganov/whisper.cpp 頁面下載）。
+
+Hugging Face
+
+步驟 4：準備符合規格的 WAV 檔與語音模型
+whisper.cpp 對輸入的音訊格式要求非常嚴格：
+1. WAV 檔案格式：必須是 16-bit 轉量化、16000Hz (16kHz) 採樣率、單聲道 (Mono)。如果是從手機錄音或一般音樂檔（通常是 44.1kHz 或 48kHz），請先找工具轉檔，否則 whisper 會報錯。
+2. 語音模型：請到 Hugging Face ggerganov/whisper.cpp 下載 ggml-base.bin 或 ggml-small.bin 檔案，放至你的資料夾中。
+
+
+要取得正確的 ggml-base.bin 模型檔，請按照以下簡單步驟操作：
+
+步驟：單獨下載模型檔
+
+1. 打開瀏覽器，前往官方推薦存放模型的 Hugging Face whisper.cpp 頁面。
+https://huggingface.co/ggerganov/whisper.cpp/tree/main
+
+https://github.com/ggml-org/whisper.cpp/releases
+
+2. 在檔案清單中，尋找名稱為 ggml-base.bin 的檔案（注意：不要選到帶有 .en 的，那是英文專用模型）。
+
+• ggml-base.dll (你看到的)：這是程式運算晶片與記憶體底層架構的核心程式碼（Dynamic Link Library），是給 Windows 系統執行的。
+• ggml-base.bin (你需要去下載的)：這是 OpenAI 訓練出來的「語音資料大腦」（Model Weights），是給 whisper-cli.exe 讀取並對照音訊使用的。
+
+
+ggml-base.bin	140MB
+ggml-small.bin（約 460MB）
+ggml-medium.bin（約 1.5GB）
+
+*/
+
+
+
+        

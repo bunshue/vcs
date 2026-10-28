@@ -25,8 +25,7 @@ namespace vcs_BeginInvoke
 
         private void button1_Click(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
-            richTextBox1.AppendText("主執行緒：已點擊按鈕，準備啟動背景執行緒...\r\n\r\n");
+            richTextBox1.Text += "主執行緒：已點擊按鈕，啟動背景執行緒\n";
 
             // 1. 建立一個全新的背景執行緒 (模擬 Whisper 在背景辨識)
             Thread backgroundThread = new Thread(new ThreadStart(MockBackgroundWork));
@@ -48,8 +47,10 @@ namespace vcs_BeginInvoke
                 string resultText = string.Format("【背景回傳】成功辨識出第 {0} 句文字", i);
 
                 // 關鍵具體作法：利用 BeginInvoke 傳送便條紙回主執行緒
+                //這段格式在 .NET 4.0 是固定的。(MethodInvoker) 是微軟內建的一種委派類型，專門用來執行不需要傳入參數的 UI 更新動作。
                 this.BeginInvoke((MethodInvoker)delegate
                 {
+                    // 這裡放所有要動到 UI 控制項（TextBox、Label、Button）的程式碼
                     // 這裡面的程式碼會被轉交給「主執行緒」安全執行
                     richTextBox1.AppendText(resultText + "\r\n");
                 });
