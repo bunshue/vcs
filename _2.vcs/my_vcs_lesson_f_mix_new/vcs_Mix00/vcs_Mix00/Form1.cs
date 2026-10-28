@@ -162,9 +162,34 @@ namespace vcs_Mix00
 
         //------------------------------------------------------------  # 60個
 
+        // Windows API 宣告
+        [DllImport("kernel32.dll", EntryPoint = "LCMapStringA")]
+        public static extern int LCMapStringA(int Locale, int dwMapFlags, byte[] lpSrcStr, int cchSrc, byte[] lpDestStr, int cchDest);
+
+        const int LCMAP_TRADITIONAL_CHINESE = 0x04000000;
+
+        // 簡體轉繁體的自訂方法
+        public string ToTraditional(string source)
+        {
+            byte[] srcBytes = Encoding.Default.GetBytes(source);
+            byte[] destBytes = new byte[srcBytes.Length];
+            LCMapStringA(0x0804, LCMAP_TRADITIONAL_CHINESE, srcBytes, srcBytes.Length, destBytes, srcBytes.Length);
+            return Encoding.Default.GetString(destBytes);
+        }
+
         private void button0_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            // 簡繁轉換函數
+            // 微軟 Windows 內建的 API 轉換法
+
+            string text_sc = "都说做人要讲格局 做一座城市也要讲格局";
+
+            // 簡中轉正中
+            string text_tc = ToTraditional(text_sc);
+            richTextBox1.Text += "簡中 : " + text_sc + "\n";
+            richTextBox1.Text += "正中 : " + text_tc + "\n";
         }
 
         //------------------------------------------------------------  # 60個
