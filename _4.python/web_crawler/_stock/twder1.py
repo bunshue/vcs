@@ -1,6 +1,6 @@
 """
 金融匯率股票相關
-twder
+twder  已經不能用了 因為銀行的網頁改了, 但是套件的抓資料的方法沒改。
 """
 import twder  # 匯率套件
 
@@ -10,6 +10,8 @@ import pandas as pd
 print("------------------------------------------------------------")  # 60個
 
 print("twder：新台幣匯率擷取")
+
+print(twder.__version__)
 print(twder.currencies())
 print(twder.currency_name_dict())
 

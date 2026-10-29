@@ -98,6 +98,7 @@ namespace vcs_Speech_DotNetSpeech
 
             //------------------------------  # 30個
 
+            //生成聲音文件
             /*
             //錄音
             DotNetSpeech.SpeechVoiceSpeakFlags SSF = DotNetSpeech.SpeechVoiceSpeakFlags.SVSFlagsAsync;
@@ -113,6 +114,19 @@ namespace vcs_Speech_DotNetSpeech
 
             richTextBox1.Text += "done\n";
             */
+
+            /// 生成声音文件
+
+            SpVoice sv = new SpVoice();
+            SpeechVoiceSpeakFlags SVSF = SpeechVoiceSpeakFlags.SVSFlagsAsync;
+            SpeechStreamFileMode SSFM = SpeechStreamFileMode.SSFMCreateForWrite;
+            string filename = "tmp_spvoice3.wav";
+            SpFileStream SFS = new SpFileStream();
+            SFS.Open(filename, SSFM, false);
+            sv.AudioOutputStream = SFS;
+            sv.Speak(speech_text, SVSF);
+            sv.WaitUntilDone(System.Threading.Timeout.Infinite);
+            SFS.Close();
         }
 
         //------------------------------------------------------------  # 60個
@@ -215,6 +229,7 @@ namespace vcs_Speech_DotNetSpeech
 
         private void button2_Click(object sender, EventArgs e)
         {
+
         }
 
         //------------------------------------------------------------  # 60個
@@ -401,4 +416,19 @@ namespace vcs_Speech_DotNetSpeech
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
+
+
+/*
+/// 朗读
+/// 要朗读的文本
+private void Read(string text)
+{
+    SpVoice sv = new SpVoice();
+    sv.Rate = 0;//设置朗读速度
+    SpeechVoiceSpeakFlags SSF = SpeechVoiceSpeakFlags.SVSFlagsAsync;
+    sv.Speak(text, SSF);
+}
+
+*/
+
 

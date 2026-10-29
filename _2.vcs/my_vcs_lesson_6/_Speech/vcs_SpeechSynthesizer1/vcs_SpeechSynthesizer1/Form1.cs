@@ -218,7 +218,31 @@ namespace vcs_SpeechSynthesizer1
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            //使用System.Speech
+            SpeechSynthesizer ss = new SpeechSynthesizer();
+            /*
+            //播放
+            if (ss != null)
+            {
+                ss.Dispose();
+                ss.SpeakAsync("朗读的文本");
+            }
+            //暂停
+            if (ss.State == SynthesizerState.Speaking)
+            {
+                ss.Pause();
+            }
+            //继续
+            if (ss.State == SynthesizerState.Paused)
+            {
+                ss.Resume();
+            }
+            //停止
+            if (ss != null)
+            {
+                ss.Dispose();
+            }
+            */
         }
 
         //------------------------------------------------------------  # 60個

@@ -42,9 +42,7 @@ dl = DataLoader()  # 初始化資料載入器
 
 # 抓取台積電 (2330) 2026年9月到10月的日線資料
 df = dl.taiwan_stock_daily(
-    stock_id="2330",
-    start_date="2026-08-01",  # 稍微拉長時間，畫均線才不會斷掉
-    end_date="2026-10-28"
+    stock_id="2330", start_date="2026-08-01", end_date="2026-10-28"  # 稍微拉長時間，畫均線才不會斷掉
 )
 
 print(df.head())
@@ -56,35 +54,35 @@ print(df.head())
 # 1. 自動偵測並轉換欄位名稱 (相容 FinMind 不同版本的欄位名)
 
 rename_dict = {
-    'date': 'Date',
-    'open': 'Open',
-    'max': 'High',
-    'min': 'Low',
-    'close': 'Close'
+    "date": "Date",
+    "open": "Open",
+    "max": "High",
+    "min": "Low",
+    "close": "Close",
 }
 
 # 判斷成交量欄位到底是叫 Trading_Volume 還是 volume
-if 'Trading_Volume' in df.columns:
-    rename_dict['Trading_Volume'] = 'Volume'
-elif 'volume' in df.columns:
-    rename_dict['volume'] = 'Volume'
+if "Trading_Volume" in df.columns:
+    rename_dict["Trading_Volume"] = "Volume"
+elif "volume" in df.columns:
+    rename_dict["volume"] = "Volume"
 
 df = df.rename(columns=rename_dict)
 
 # [偵錯小幫手] 印出目前的欄位名稱，確保有成功換成 Open, High, Low, Close, Volume
-print("目前資料表的欄位有：", df.columns.tolist()) 
+print("目前資料表的欄位有：", df.columns.tolist())
 
 # 2. 將 Date 轉為時間格式，並設定為索引 (Index)
-df['Date'] = pd.to_datetime(df['Date'])
-df.set_index('Date', inplace=True)
+df["Date"] = pd.to_datetime(df["Date"])
+df.set_index("Date", inplace=True)
 
 # 3. 計算均線與漲跌幅
-df['MA5'] = df['Close'].rolling(window=5).mean()  # 移動平均線 (MA)
-df['MA20'] = df['Close'].rolling(window=20).mean()  # 移動平均線 (MA)
-df['Daily_Return'] = df['Close'].pct_change()  # 每日漲跌幅
+df["MA5"] = df["Close"].rolling(window=5).mean()  # 移動平均線 (MA)
+df["MA20"] = df["Close"].rolling(window=20).mean()  # 移動平均線 (MA)
+df["Daily_Return"] = df["Close"].pct_change()  # 每日漲跌幅
 
 print("--- 最新 5 筆數據分析結果 (含均線與漲跌幅) ---")
-print(df[['Open', 'High', 'Low', 'Close', 'MA5', 'MA20', 'Daily_Return']].tail())
+print(df[["Open", "High", "Low", "Close", "MA5", "MA20", "Daily_Return"]].tail())
 
 import mplfinance as mpf
 
@@ -96,11 +94,11 @@ import mplfinance as mpf
 
 # 1. 先設定台灣習慣的紅漲綠跌
 my_color = mpf.make_marketcolors(
-    up='red',          # 上漲為紅
-    down='green',      # 下跌為綠
-    edge='inherit',
-    wick='inherit',
-    volume='inherit'
+    up="red",  # 上漲為紅
+    down="green",  # 下跌為綠
+    edge="inherit",
+    wick="inherit",
+    volume="inherit",
 )
 
 # 2. 【核心修正】在 make_mpf_style 中直接指定內建中文字型！
@@ -111,22 +109,22 @@ my_color = mpf.make_marketcolors(
 
 # marketcolors + font
 my_style = mpf.make_mpf_style(
-    marketcolors=my_color, 
-    gridstyle='--',
-    rc={'font.family': ['Microsoft JhengHei', 'Arial Unicode MS', 'sans-serif']} 
+    marketcolors=my_color,
+    gridstyle="--",
+    rc={"font.family": ["Microsoft JhengHei", "Arial Unicode MS", "sans-serif"]},
 )
 
 # 繪製 K 線圖 (包含 5日/20日均線 與 下方的成交量) + 中文
 
 mpf.plot(
-    df, 
-    type='candle',         # 類型為 K 線圖 (Candlestick)
-    mav=(5, 20),           # 自動加上 5日、20日 移動平均線
-    volume=True,           # 顯示成交量
-    style=my_style,        # 套用台灣紅綠燈顏色 # 套用包含字型設定的樣式
+    df,
+    type="candle",  # 類型為 K 線圖 (Candlestick)
+    mav=(5, 20),  # 自動加上 5日、20日 移動平均線
+    volume=True,  # 顯示成交量
+    style=my_style,  # 套用台灣紅綠燈顏色 # 套用包含字型設定的樣式
     title="台積電 (2330) 歷史走勢圖",
     ylabel="股價 (元)",
-    ylabel_lower="成交量"
+    ylabel_lower="成交量",
 )
 
 sys.exit()
@@ -135,11 +133,10 @@ sys.exit()
 # 6060
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-'''
+"""
 # 127筆資料 7 欄位
 df = pd.read_csv("data/alphabet_stock_data.csv")
 print(df.shape)
@@ -159,7 +156,7 @@ plt.legend(loc="best")
 plt.suptitle("Alphabet Inc.字母控股 股價")
 
 plt.show()
-'''
+"""
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -180,7 +177,7 @@ Valid intervals: 1m,2m,5m,15m,30m,60m,90m,1h,1d,5d,1wk,1mo,3mo Intraday data can
 import yfinance as yf
 
 # 下載 0050.TW 的歷史股價資料
-df = yf.download('2330.TW', start='2026-01-01', end='2026-10-01')
+df = yf.download("2330.TW", start="2026-01-01", end="2026-10-01")
 
 # 顯示前 5 筆資料
 print(df.head())
@@ -1079,12 +1076,8 @@ ax2.grid(True)
 plt.show()
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1098,4 +1091,3 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------")  # 30個
-

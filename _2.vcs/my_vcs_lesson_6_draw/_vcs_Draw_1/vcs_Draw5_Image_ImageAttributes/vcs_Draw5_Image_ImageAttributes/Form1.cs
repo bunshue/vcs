@@ -292,7 +292,8 @@ namespace vcs_Draw5_Image_ImageAttributes
             lb_cm43.Text = "x";
             lb_cm44.Text = "x";
 
-            this.Size = new Size(1700, 960);
+            //針對某控件的邊緣 設定表單大小
+            this.ClientSize = new Size(richTextBox1.Right + 10, richTextBox1.Bottom + 10);
             this.Text = "vcs_Draw5_Image_ImageAttributes";
 
             //設定執行後的表單起始位置, 正中央
@@ -335,17 +336,165 @@ namespace vcs_Draw5_Image_ImageAttributes
             pictureBox1.Image = bitmap1;
         }
 
+        //------------------------------------------------------------  # 60個
+
+        public static Bitmap ApplySepiaEffect(Bitmap originalImage)
+        {
+            // 建立一個新的空白圖片，與原圖大小相同
+            Bitmap sepiaImage = new Bitmap(originalImage.Width, originalImage.Height);
+
+            // 設定 Sepia 的顏色矩陣 (ColorMatrix)
+            ColorMatrix colorMatrix = new ColorMatrix(new float[][]
+        {
+            new float[] {.393f, .349f, .272f, 0, 0},
+            new float[] {.769f, .686f, .534f, 0, 0},
+            new float[] {.189f, .168f, .131f, 0, 0},
+            new float[] {0, 0, 0, 1, 0},
+            new float[] {0, 0, 0, 0, 1}
+        });
+
+            // 建立 ImageAttributes 並套用顏色矩陣
+            using (ImageAttributes attributes = new ImageAttributes())
+            {
+                attributes.SetColorMatrix(colorMatrix);
+
+                // 使用 Graphics 將原圖繪製到新圖片上，同時套用濾鏡
+                using (Graphics g = Graphics.FromImage(sepiaImage))
+                {
+                    g.DrawImage(originalImage,
+                        new Rectangle(0, 0, originalImage.Width, originalImage.Height),
+                        0, 0, originalImage.Width, originalImage.Height,
+                        GraphicsUnit.Pixel, attributes);
+                }
+            }
+
+            return sepiaImage;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
+            //用 ColorMatrix 做 Sepia
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
+            Bitmap bitmap1 = new Bitmap(filename);
+            Bitmap bitmap2 = ApplySepiaEffect(bitmap1);
+
+            pictureBox1.Image = bitmap2;
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button2_Click(object sender, EventArgs e)
         {
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
+            Bitmap bitmap1 = new Bitmap(filename);
+
+            Graphics g = Graphics.FromImage(bitmap1);
+            //pictureBox1.Image = bitmap1;
+
+            Bitmap image = new Bitmap(filename);
+            ImageAttributes imageAttributes = new ImageAttributes();
+            int width = image.Width;
+            int height = image.Height;
+            float degrees = 60f;
+            //degrees = 0f;
+            double r = degrees * System.Math.PI / 180; // degrees to radians
+
+            float[][] matrix =
+            {
+                new float[] {(float)System.Math.Cos(r),  (float)System.Math.Sin(r),  0,  0, 0},
+                new float[] {(float)-System.Math.Sin(r),  (float)System.Math.Cos(r),  0,  0, 0},
+                new float[] {0,  0,  1,  0, 0},
+                new float[] {0,  0,  0,  1, 0},
+                new float[] {0,  0,  0,  0, 1}
+            };
+
+            richTextBox1.Text += "c1 = " + (float)System.Math.Cos(r) + "\n";
+            richTextBox1.Text += "c2 = " + (float)System.Math.Sin(r) + "\n";
+            richTextBox1.Text += "c3 = " + (float)-System.Math.Sin(r) + "\n";
+            richTextBox1.Text += "c4 = " + (float)-System.Math.Cos(r) + "\n";
+
+
+            /*
+            // 色彩調整矩陣 標準
+            float[][] matrix =
+            {
+                new float[] {1, 0, 0, 0, 0},
+                new float[] {0, 1, 0, 0, 0},
+                new float[] {0, 0, 1, 0, 0},
+                new float[] {0, 0, 0, 1, 0},
+                new float[] {0, 0, 0, 0, 1}
+            };
+            */
+
+            ColorMatrix colorMatrix = new ColorMatrix(matrix);
+
+            imageAttributes.SetColorMatrix(
+               colorMatrix,
+               ColorMatrixFlag.Default,
+               ColorAdjustType.Bitmap);
+
+            g.DrawImage(image, 10, 10, width, height);
+
+            g.DrawImage(
+               image,
+               new Rectangle(150, 10, width, height),  // destination rectangle
+                0, 0,        // upper-left corner of source rectangle
+                width,       // width of source rectangle
+                height,      // height of source rectangle
+                GraphicsUnit.Pixel,
+               imageAttributes);
+
+            pictureBox1.Image = bitmap1;
         }
+
+        //6060
 
         private void button3_Click(object sender, EventArgs e)
         {
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
+            Bitmap bitmap1 = new Bitmap(filename);
+
+            Graphics g = Graphics.FromImage(bitmap1);
+            //pictureBox1.Image = bitmap1;
+
+            Image image = new Bitmap(bitmap1);
+            ImageAttributes imageAttributes = new ImageAttributes();
+            int width = image.Width;
+            int height = image.Height;
+
+            float[][] colorMatrixElements = { 
+   new float[] {2,  0,  0,  0, 0},        // red scaling factor of 2
+   new float[] {0,  1,  0,  0, 0},        // green scaling factor of 1
+   new float[] {0,  0,  1,  0, 0},        // blue scaling factor of 1
+   new float[] {0,  0,  0,  1, 0},        // alpha scaling factor of 1
+   new float[] {.2f, .2f, .2f, 0, 1}};    // three translations of 0.2
+
+            //將紅色元件加倍
+            //將0.2新增至紅色、綠色和藍色元件
+
+            ColorMatrix colorMatrix = new ColorMatrix(colorMatrixElements);
+
+            imageAttributes.SetColorMatrix(
+               colorMatrix,
+               ColorMatrixFlag.Default,
+               ColorAdjustType.Bitmap);
+
+            g.DrawImage(image, 10, 10);
+
+            g.DrawImage(
+               image,
+               new Rectangle(120, 10, width, height),  // destination rectangle 
+               0, 0,        // upper-left corner of source rectangle 
+               width,       // width of source rectangle
+               height,      // height of source rectangle
+               GraphicsUnit.Pixel,
+               imageAttributes);
+
+            pictureBox1.Image = bitmap1;
         }
+
+        //6060
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -1592,7 +1741,6 @@ namespace vcs_Draw5_Image_ImageAttributes
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
