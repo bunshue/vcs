@@ -2726,6 +2726,27 @@ namespace vcs_DiskDirectoryFile1
             richTextBox1.Text += "限定檔案 *.txt\n";
             string[] filenames2 = Directory.GetFileSystemEntries(foldername, "*.txt");
             show_filenames(filenames2);
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "只撈一層所有檔案\n";
+            //只撈一層的所有檔案
+            foreach (string fname in System.IO.Directory.GetFileSystemEntries(foldername))
+            {
+                richTextBox1.Text += fname + "\n";
+                if (File.Exists(fname))
+                {
+                    richTextBox1.Text += "檔案 : " + fname + "\n";
+                }
+                else if (Directory.Exists(fname))
+                {
+                    richTextBox1.Text += "資料夾 : " + fname + "\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "非合法路徑或檔案\n";
+                }
+            }
         }
 
         //------------------------------------------------------------  # 60個

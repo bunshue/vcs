@@ -31,6 +31,114 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
+
+from FinMind.data import DataLoader
+import mplfinance as mpf
+
+# ==========================================
+# 步驟 1：抓取資料
+# ==========================================
+dl = DataLoader()  # 初始化資料載入器
+
+# 抓取台積電 (2330) 2026年9月到10月的日線資料
+df = dl.taiwan_stock_daily(
+    stock_id="2330",
+    start_date="2026-08-01",  # 稍微拉長時間，畫均線才不會斷掉
+    end_date="2026-10-28"
+)
+
+print(df.head())
+
+# ==========================================
+# 步驟 2：數據分析 (資料處理與計算)
+# ==========================================
+# 1. 轉換欄位名稱以符合 mplfinance 的標準格式 (大小寫需相符)
+# 1. 自動偵測並轉換欄位名稱 (相容 FinMind 不同版本的欄位名)
+
+rename_dict = {
+    'date': 'Date',
+    'open': 'Open',
+    'max': 'High',
+    'min': 'Low',
+    'close': 'Close'
+}
+
+# 判斷成交量欄位到底是叫 Trading_Volume 還是 volume
+if 'Trading_Volume' in df.columns:
+    rename_dict['Trading_Volume'] = 'Volume'
+elif 'volume' in df.columns:
+    rename_dict['volume'] = 'Volume'
+
+df = df.rename(columns=rename_dict)
+
+# [偵錯小幫手] 印出目前的欄位名稱，確保有成功換成 Open, High, Low, Close, Volume
+print("目前資料表的欄位有：", df.columns.tolist()) 
+
+# 2. 將 Date 轉為時間格式，並設定為索引 (Index)
+df['Date'] = pd.to_datetime(df['Date'])
+df.set_index('Date', inplace=True)
+
+# 3. 計算均線與漲跌幅
+df['MA5'] = df['Close'].rolling(window=5).mean()  # 移動平均線 (MA)
+df['MA20'] = df['Close'].rolling(window=20).mean()  # 移動平均線 (MA)
+df['Daily_Return'] = df['Close'].pct_change()  # 每日漲跌幅
+
+print("--- 最新 5 筆數據分析結果 (含均線與漲跌幅) ---")
+print(df[['Open', 'High', 'Low', 'Close', 'MA5', 'MA20', 'Daily_Return']].tail())
+
+import mplfinance as mpf
+
+# ==========================================
+# 步驟 3：繪製 K 線圖
+# ==========================================
+# 設定 K 線圖的顏色風格 (binance 風格：綠漲紅跌，符合台灣習慣需特別設定)
+# 台灣習慣：紅漲綠跌
+
+# 1. 先設定台灣習慣的紅漲綠跌
+my_color = mpf.make_marketcolors(
+    up='red',          # 上漲為紅
+    down='green',      # 下跌為綠
+    edge='inherit',
+    wick='inherit',
+    volume='inherit'
+)
+
+# 2. 【核心修正】在 make_mpf_style 中直接指定內建中文字型！
+# 這裡我們傳入一個字型清單，讓系統去抓微軟正黑體（Windows）或蘋方體（Mac）
+
+# 僅有 marketcolors
+# my_style = mpf.make_mpf_style(marketcolors=my_color, gridstyle='--')
+
+# marketcolors + font
+my_style = mpf.make_mpf_style(
+    marketcolors=my_color, 
+    gridstyle='--',
+    rc={'font.family': ['Microsoft JhengHei', 'Arial Unicode MS', 'sans-serif']} 
+)
+
+# 繪製 K 線圖 (包含 5日/20日均線 與 下方的成交量) + 中文
+
+mpf.plot(
+    df, 
+    type='candle',         # 類型為 K 線圖 (Candlestick)
+    mav=(5, 20),           # 自動加上 5日、20日 移動平均線
+    volume=True,           # 顯示成交量
+    style=my_style,        # 套用台灣紅綠燈顏色 # 套用包含字型設定的樣式
+    title="台積電 (2330) 歷史走勢圖",
+    ylabel="股價 (元)",
+    ylabel_lower="成交量"
+)
+
+sys.exit()
+
+
+# 6060
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 '''
 # 127筆資料 7 欄位
 df = pd.read_csv("data/alphabet_stock_data.csv")
@@ -69,33 +177,13 @@ intervals 參數
 Valid intervals: 1m,2m,5m,15m,30m,60m,90m,1h,1d,5d,1wk,1mo,3mo Intraday data cannot extend last 60 days
 """
 
-
-from FinMind.data import DataLoader
-
-# 初始化資料載入器
-dl = DataLoader()
-
-# 抓取台積電 (2330) 2026年9月到10月的日線資料
-stock_data = dl.taiwan_stock_daily(
-    stock_id="2330",
-    start_date="2026-09-01",
-    end_date="2026-10-20"
-)
-
-print(stock_data.head())
-
-
-sys.exit()
-import sys
 import yfinance as yf
-import pandas as pd
 
 # 下載 0050.TW 的歷史股價資料
 df = yf.download('2330.TW', start='2026-01-01', end='2026-10-01')
 
 # 顯示前 5 筆資料
 print(df.head())
-
 
 
 import yfinance as yf
@@ -111,18 +199,13 @@ stock_data = yf.download(ticker, start=start_date, end=end_date, interval=interv
 print("--- 方式 A 結果 ---")
 print(stock_data.tail())
 
-
 # 方式 B：用 period 參數直接抓最近一個月（最不容易出錯，強烈推薦）
 print("\n--- 方式 B 結果 ---")
 tsmc = yf.Ticker("2330.TW")
 stock_data_b = tsmc.history(period="1mo")
 print(stock_data_b.tail())
 
-
-
-
-
-sys.exit()
+print("------------------------------------------------------------")  # 60個
 
 import yfinance as yf
 
@@ -135,11 +218,9 @@ stock_data = yf.download(ticker, start=start_date, end=end_date, interval=interv
 
 print(stock_data)
 
-
 # df = yf.download("2330.TW", start="2021-01-01", end="2022-12-31")
 
-
-sys.exit()
+print("------------------------------------------------------------")  # 60個
 
 # 設定參數
 start_date = "2026-10-12"  # 設定開始日期
@@ -153,10 +234,6 @@ sp500_data = yf.download(ticker, start=start_date, end=end_date, interval=interv
 
 # 顯示數據
 print(sp500_data.head())
-
-print('ddddddddddddddd')
-sys.exit()
-
 
 print("------------------------------")  # 30個
 
@@ -665,10 +742,349 @@ print(sp500_data_with_indicators.head())
 # 經過特徵工程處理後，我們的數據集將包含原始的 OHLCV 資料以及計算出的技術指標。
 """
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# mplfinance 的使用
+
+
+"""
+python用mplfinance中的candlestick_ohlc畫分時圖
+
+matplotlib.finance獨立出來成爲mplfinance，而mplfinance中的candlestick_ochl和candlestick_ohlc一般用來畫股票的K線圖。
+我需要分析分時圖，也就是一分鐘的行情，這個時候就不能直接用candlestick_ochl函數，因爲candlestick_ochl中x軸最小的單位是日期，不是分鐘。
+
+經過對mplfinance的源代碼進行分析，問題在於matplotlib的date2num將日期轉換爲浮點數，
+浮點數的整數部分表示日期，小數部分代表小時和分鐘。比如下面4個時間段是連續的分鐘。
+時間 	date2num之後 	乘以1440
+2018/09/17-21:34 	736954.8986 	1061215054
+2018/09/17-21:35 	736954.8993 	1061215055
+2018/09/17-21:36 	736954.9000 	1061215056
+2018/09/17-21:37 	736954.9007 	1061215057
+
+可以看出date2num函數計算之後，4個時間的整數部分都是736954，導致在X軸上這4個時間段都重疊在一起，無法區分了。
+要達到的效果是每一個分鐘也能成爲一個整數，這樣就可以顯示出來了。
+那麼一天是24小時，每小時60分鐘，那麼一天就是1440分鐘，將date2num計算的浮點數乘以1440就可以將每一分鐘轉爲整數，那麼就可以在x軸上。
+
+最後還需要對x軸格式化，因爲自己對x軸進行了處理（乘以1440），採用默認的格式化是亂碼。需要自定義x軸的格式化函數。
+
+pip install mplfinance
+pip install --upgrade mplfinance
+
+"""
+
+from pandas import DataFrame
+import matplotlib.dates as dates
+import mplfinance as mpf
+from matplotlib.ticker import Formatter
+from mplfinance.original_flavor import candlestick_ohlc
+
+dfcvs = DataFrame(
+    [
+        #    時間            開盤, 最高 ,最低, 收盤
+        ["2018/09/17-21:34", 3646, 3650, 3644, 3650],
+        ["2018/09/17-21:35", 3650, 3650, 3648, 3648],
+        ["2018/09/17-21:36", 3650, 3650, 3648, 3650],
+        ["2018/09/17-21:37", 3652, 3654, 3648, 3652],
+    ]
+)
+
+dfcvs.columns = ["時間", "開盤", "最高", "最低", "收盤"]
+dfcvs["時間"] = pd.to_datetime(dfcvs["時間"], format="%Y/%m/%d-%H:%M")
+
+# matplotlib的date2num將日期轉換爲浮點數，整數部分區分日期，小數區分小時和分鐘
+# 因爲小數太小了，需要將小時和分鐘變成整數，需要乘以24（小時）×60（分鐘）= 1440，這樣小時和分鐘也能成爲整數
+# 這樣就可以一分鐘就佔一個位置
+
+dfcvs["時間"] = dfcvs["時間"].apply(lambda x: dates.date2num(x) * 1440)
+data_mat = dfcvs.values
+
+fig, ax = plt.subplots(figsize=(10, 6))
+
+fig.subplots_adjust(bottom=0.1)
+candlestick_ohlc(
+    ax, data_mat, colordown="#53c156", colorup="#ff1717", width=0.2, alpha=1
+)
+
+
+# 將x軸的浮點數格式化成日期小時分鐘
+# 默認的x軸格式化是日期被dates.date2num之後的浮點數，因爲在上面乘以了1440，所以默認是錯誤的
+# 只能自己將浮點數格式化爲日期時間分鐘
+# 參考https://matplotlib.org/examples/pylab_examples/date_index_formatter.html
+class MyFormatter(Formatter):
+    def __init__(self, dates, fmt="%Y%m%d %H:%M"):
+        self.dates = dates
+        self.fmt = fmt
+
+    def __call__(self, x, pos=0):
+        "Return the label for time x at position pos"
+        ind = int(np.round(x))
+        # ind就是x軸的刻度數值，不是日期的下標
+
+        return dates.num2date(ind / 1440).strftime(self.fmt)
+
+
+formatter = MyFormatter(data_mat[:, 0])
+ax.xaxis.set_major_formatter(formatter)
+
+for label in ax.get_xticklabels():
+    label.set_rotation(90)
+    label.set_horizontalalignment("right")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+# 加載取數與繪圖所需的函數包
+import datetime
+from hs_udata import set_token, stock_quote_daily
+import matplotlib as mpl
+import matplotlib.dates as mdates
+
+# from mplfinance import candlestick_ohlc
+from mplfinance.original_flavor import candlestick_ohlc
+
+data_price = [1, 2, 3, 4, 5]
+
+# 繪製圖片
+fig = plt.figure(
+    num="matplotlib 02",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+grid = plt.GridSpec(12, 10, wspace=0.5, hspace=0.5)
+
+ax1 = fig.add_subplot(grid[0:8, 0:12])  # 設置K線圖的尺寸
+
+# candlestick_ohlc(ax1, ohlc.values.tolist(), width = 0.7, colorup = 'red', colordown = 'green')
+
+# （2）繪制均線
+# ax1.plot(range(len(data_price)), data_price, color = 'red', lw = 2, label = 'MA (5)')
+
+# 設置標注
+plt.title("test", fontsize=14)  # 設置圖片標題
+plt.ylabel("價 格（元）", fontsize=14)  # 設置縱軸標題
+# plt.legend(loc = 'best')                    # 繪制圖例
+ax1.set_xticks([])  # 日期標注在成交量中，故清空此處x軸刻度
+ax1.set_xticklabels([])  # 日期標注在成交量中，故清空此處x軸
+
+# （3）繪制成交量
+# 成交量數據
+
+data_volume = [3, 2, 1, 4, 6]
+# 繪制成交量
+ax2 = fig.add_subplot(grid[8:10, 0:12])  # 設置成交量圖形尺寸
+# ax2.bar(data_volume, color = 'r')                    # 繪制紅色柱狀圖
+# ax2.bar(data_volume, color = 'g')                    # 繪制綠色柱狀圖
+plt.xticks(rotation=30)
+plt.xlabel("日 期", fontsize=14)  # 設置橫軸標題
+# 修改橫軸日期標注
+date_list = [1, 2, 3, 4, 5]  # ohlc.index.tolist()           # 獲取日期列表
+xticks_len = round(len(date_list) / (len(ax2.get_xticks()) - 1))  # 獲取默認橫軸標注的間隔
+xticks_num = range(0, len(date_list), xticks_len)  # 生成橫軸標注位置列表
+xticks_str = list(map(lambda x: date_list[int(x)], xticks_num))  # 生成正在標注日期列表
+ax2.set_xticks(xticks_num)  # 設置橫軸標注位置
+ax2.set_xticklabels(xticks_str)  # 設置橫軸標注日期
+
+show()
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+from io import StringIO
+
+
+def get_setting():  # ←將「讀取設定檔」寫成函式, 可讓程式易讀易用
+    result = []  # ←準備一個空串列來存放讀取及解析的結果
+    try:  # 使用 try 來預防開檔或讀檔錯誤
+        with open("data/stock.txt") as f:  # 用 with 以讀取模式開啟檔案
+            slist = f.readlines()  # 以行為單位讀取所有資料
+            print("讀入：", slist)  # 輸出讀到的資料以供確認
+            a, b, c = slist[0].split(",")  # ←將股票字串以逗號切割為串列
+            result = [a, b, c]
+    except:
+        print("data/stock.txt 讀取錯誤")
+    return result  # ←傳回解析的結果, 但如果開檔或讀檔錯誤則會傳回 []
+
+
+def get_data():
+    data = get_setting()
+    print(data)
+    dates = []
+    # print(data[1])
+    start_date = datetime.datetime.strptime(data[1], "%Y%m%d")
+    end_date = datetime.datetime.strptime(data[2], "%Y%m%d")
+    for daynumber in range((end_date - start_date).days + 1):
+        date = start_date + datetime.timedelta(days=daynumber)
+        if date.weekday() < 6:
+            dates.append(date.strftime("%Y%m%d"))
+    return data[0], dates
+
+
+def crawl_data(date, symbol):
+    print("下載股價")
+    url = (
+        "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=csv&date="
+        + date
+        + "&type=ALL"
+    )
+    print(url)
+    response = requests.get(url)
+
+    r_text = [
+        i for i in response.text.split("\n") if len(i.split('",')) == 17 and i[0] != "="
+    ]
+    df = pd.read_csv(StringIO("\n".join(r_text)), header=0)
+
+    df = df.drop(columns=["Unnamed: 16"])
+    filter_df = df[df["證券代號"] == symbol]
+    filter_df.insert(0, "日期", date)
+    df_columns = filter_df.columns
+    return list(filter_df.iloc[0]), filter_df.columns
+
+
+print("------------------------------------------------------------")  # 60個
+
+all_list = []
+stock_symbol, dates = get_data()
+
+for date in dates:
+    time.sleep(5)
+    try:
+        crawler_data = crawl_data(date, stock_symbol)
+        all_list.append(crawler_data[0])
+        df_columns = crawler_data[1]
+        print("  OK!  date = " + date + " ,stock symbol = " + stock_symbol)
+    except:
+        print("error! date = " + date + " ,stock symbol = " + stock_symbol)
+
+all_df = pd.DataFrame(all_list, columns=df_columns)
+print(all_df)
+
+# step 1 prepare data
+day = all_df["日期"].astype(str)
+close = all_df["收盤價"].astype(float)
+
+# step 2 create plot
+plt.figure(figsize=(12, 8), dpi=100)
+
+# step 3 plot
+plt.plot(day, close, "s-", color="r", label="Close Price")
+plt.title("TSMC Line chart")
+plt.xticks(fontsize=10, rotation=45)
+plt.yticks(fontsize=10)
+plt.legend(loc="best", fontsize=20)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+all_list = []
+stock_symbol, dates = get_data()
+
+for date in dates:
+    time.sleep(5)
+    try:
+        crawler_data = crawl_data(date, stock_symbol)
+        all_list.append(crawler_data[0])
+        df_columns = crawler_data[1]
+        print("  OK!  date = " + date + " ,stock symbol = " + stock_symbol)
+    except:
+        print("error! date = " + date + " ,stock symbol = " + stock_symbol)
+
+all_df = pd.DataFrame(all_list, columns=df_columns)
+
+# step 1 prepare data
+day = all_df["日期"].astype(str)
+openprice = all_df["開盤價"].astype(float)
+close = all_df["收盤價"].astype(float)
+
+# step 2 create plot
+fig, (ax, ax2) = plt.subplots(2, 1, sharex=True, figsize=(12, 8), dpi=100)
+plt.rcParams["font.sans-serif"] = ["Microsoft JhengHei"]
+ax.set_title(stock_symbol + "  開盤價、收盤價 ( " + dates[0] + " ~ " + dates[-1] + " )")
+
+# step 3 plot 子圖(ax)
+ax.plot(day, openprice, "s-", color="r", label="Open Price")
+ax.legend(loc="best", fontsize=10)
+
+# step 3 plot 子圖(ax2)
+ax2.plot(day, close, "o-", color="b", label="Close Price")
+ax2.legend(loc="best", fontsize=10)
+ax2.set_xticks(range(0, len(day), 5))
+ax2.set_xticklabels(day[::5])
+
+# step 4 show plot
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+import mplfinance as mpf
+
+all_list = []
+stock_symbol, dates = get_data()
+
+for date in dates:
+    time.sleep(5)
+    try:
+        crawler_data = crawl_data(date, stock_symbol)
+        all_list.append(crawler_data[0])
+        df_columns = crawler_data[1]
+        print("  OK!  date = " + date + " ,stock symbol = " + stock_symbol)
+    except:
+        print("error! date = " + date + " ,stock symbol = " + stock_symbol)
+
+all_df = pd.DataFrame(all_list, columns=df_columns)
+
+print(all_df)
+
+# step 1 prepare data
+day = all_df["日期"].astype(str)
+openprice = all_df["開盤價"].astype(float)
+close = all_df["收盤價"].astype(float)
+high = all_df["最高價"].astype(float)
+low = all_df["最低價"].astype(float)
+volume = all_df["成交股數"].str.replace(",", "").astype(float)
+
+# step 2 create plot
+fig, (ax, ax2) = plt.subplots(2, 1, sharex=True, figsize=(24, 15), dpi=100)
+plt.rcParams["font.sans-serif"] = ["Microsoft JhengHei"]
+ax.set_title(stock_symbol + "  K 線圖 ( " + dates[0] + " ~ " + dates[1] + " )")
+
+# step 3 plot 子圖(ax)
+mpf.candlestick2_ochl(
+    ax, openprice, close, high, low, width=0.5, colorup="r", colordown="g", alpha=0.6
+)
+
+ax.plot(talib.SMA(close, 10), label="10日均線")
+ax.plot(talib.SMA(close, 30), label="30日均線")
+ax.legend(loc="best", fontsize=20)
+ax.grid(True)
+
+# step 3 plot 子圖(ax2)
+mpf.volume_overlay(
+    ax2, openprice, close, volume, colorup="r", colordown="g", width=0.5, alpha=0.8
+)
+ax2.set_xticks(range(0, len(day), 5))
+ax2.set_xticklabels(day[::5])
+ax2.grid(True)
+
+# step 4 show plot
+plt.show()
+
 
 
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
 
 
 print("------------------------------------------------------------")  # 60個

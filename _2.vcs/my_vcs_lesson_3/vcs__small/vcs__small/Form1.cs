@@ -205,6 +205,7 @@ namespace vcs__small
             groupBox_dtp2.Location = new Point(x_st + dx * 8 - 80, y_st + dy * 3);
             groupBox_dtp3.Location = new Point(x_st + dx * 10 - 20, y_st + dy * 3);
             groupBox_checkedlistbox.Location = new Point(x_st + dx * 4, y_st + dy * 6);
+            groupBox_panel.Location = new Point(x_st + dx * 8, y_st + dy * 6);
             groupBox_domainupdown.Location = new Point(x_st + dx * 8, y_st + dy * 0);
             groupBox_progress.Location = new Point(x_st + dx * 8, y_st + dy * 1 + 20);
 
@@ -254,7 +255,12 @@ namespace vcs__small
             panel_g.Location = new Point(x_st + dx * 14, y_st + dy * 4 + dd + 3);
             panel_b.Location = new Point(x_st + dx * 14, y_st + dy * 6 + dd + 6);
 
-            this.ClientSize = new Size(1600, 900);
+            //在 Panel 上顯示 ScrollBar
+            panel1.AutoScroll = true;
+            panel1.AutoScrollMinSize = new Size(500, 500);  // 給一個比目前panel大的值
+
+            //針對某控件的邊緣 設定表單大小
+            this.ClientSize = new Size(richTextBox1.Right + 20, richTextBox1.Bottom + 20);
             this.Text = "vcs__small";
 
             //設定執行後的表單起始位置, 正中央

@@ -30,10 +30,6 @@ namespace vcs_DriveInfo2
 
         int hdd_space_threshold1 = THRESHOLD1; //一級警戒 低於20%
         int hdd_space_threshold2 = THRESHOLD2; //二級警戒 低於10%, 二級較嚴重
-        string upload_source_directory = string.Empty;
-        string upload_destination_directory = string.Empty;
-        int upload_interval = 10;
-        bool flag_upload_enabled = false;
 
         public Form1()
         {
@@ -56,15 +52,10 @@ namespace vcs_DriveInfo2
         {
             int threshold1 = Properties.Settings.Default.hdd_space_threshold1;
             int threshold2 = Properties.Settings.Default.hdd_space_threshold2;
-            string source_directory = Properties.Settings.Default.upload_source_directory;
-            string destination_directory = Properties.Settings.Default.upload_destination_directory;
-            int interval = Properties.Settings.Default.upload_interval;
-            bool flag_enabled = Properties.Settings.Default.upload_enabled;
 
             //檢查這些數字是否合法
 
-            string mesg = threshold1.ToString() + " " + threshold2.ToString() + " " +
-                source_directory + " " + destination_directory + " " + interval.ToString() + " " + flag_enabled.ToString();
+            string mesg = threshold1.ToString() + " " + threshold2.ToString();
 
             richTextBox1.Text += mesg + "\n";
 
@@ -90,68 +81,6 @@ namespace vcs_DriveInfo2
                 flag_parameter_reasonable = false;
             }
 
-            if (interval < 0)
-            {
-                mesg = "上傳間隔時間應大於0分鐘";
-                richTextBox1.Text += mesg + "\n";
-                flag_parameter_reasonable = false;
-            }
-
-            if (source_directory != "")
-            {
-                if (Directory.Exists(source_directory) == false)
-                {
-                    mesg = "上拋來源資料夾 設定錯誤";
-                    richTextBox1.Text += mesg + "\n";
-                    flag_parameter_reasonable = false;
-                }
-            }
-
-            if (destination_directory != "")
-            {
-                if (Directory.Exists(destination_directory) == false)
-                {
-                    mesg = "上拋目的資料夾 設定錯誤";
-                    richTextBox1.Text += mesg + "\n";
-                    flag_parameter_reasonable = false;
-                }
-            }
-
-            if (flag_enabled == true)    //若有開啟上拋功能, 要多考慮 上拋來源/目的資料夾
-            {
-                if (source_directory == "")
-                {
-                    mesg = "未設定上拋來源資料夾";
-                    richTextBox1.Text += mesg + "\n";
-                    flag_parameter_reasonable = false;
-                }
-                else
-                {
-                    if (Directory.Exists(source_directory) == false)
-                    {
-                        mesg = "上拋來源資料夾 設定錯誤";
-                        richTextBox1.Text += mesg + "\n";
-                        flag_parameter_reasonable = false;
-                    }
-                }
-
-                if (destination_directory == "")
-                {
-                    mesg = "未設定上拋目的資料夾";
-                    richTextBox1.Text += mesg + "\n";
-                    flag_parameter_reasonable = false;
-                }
-                else
-                {
-                    if (Directory.Exists(destination_directory) == false)
-                    {
-                        mesg = "上拋來源資料夾 設定錯誤";
-                        richTextBox1.Text += mesg + "\n";
-                        flag_parameter_reasonable = false;
-                    }
-                }
-            }
-
             if (flag_parameter_reasonable == false)
             {
                 richTextBox1.Text += "參數錯誤, 全不套用\n";
@@ -161,18 +90,10 @@ namespace vcs_DriveInfo2
             {
                 richTextBox1.Text += "取得 一級警戒 : " + threshold1.ToString() + "\n";
                 richTextBox1.Text += "取得 二級警戒 : " + threshold2.ToString() + "\n";
-                richTextBox1.Text += "取得 上拋起始資料夾 : " + source_directory + "\n";
-                richTextBox1.Text += "取得 上拋目的資料夾 : " + destination_directory + "\n";
-                richTextBox1.Text += "取得 上拋間隔 : " + interval.ToString() + "\n";
-                richTextBox1.Text += "取得 上拋功能 : " + flag_enabled.ToString() + "\n";
                 richTextBox1.Text += "參數正確, 套用參數\n";
 
                 hdd_space_threshold1 = 100 - threshold1; //一級警戒
                 hdd_space_threshold2 = 100 - threshold2; //二級警戒, 二級較嚴重
-                upload_source_directory = source_directory;
-                upload_destination_directory = destination_directory;
-                upload_interval = interval;
-                flag_upload_enabled = flag_enabled;
             }
         }
 
@@ -463,13 +384,6 @@ namespace vcs_DriveInfo2
             {
                 get_disk_info();
             }
-            if (flag_upload_enabled == true)
-            {
-                if ((cnt % (upload_interval * 60)) == 0)
-                {
-                    do_upload_work();
-                }
-            }
         }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
@@ -517,110 +431,6 @@ namespace vcs_DriveInfo2
             }
 
             Form1_MouseDown(sender, e);
-        }
-
-        void do_upload_work()
-        {
-            if (flag_upload_enabled == false)
-                return;
-
-            richTextBox1.Text += "做上拋工作, 時間 : " + DateTime.Now.ToString() + "\n";
-
-            if (Directory.Exists(upload_source_directory) == false)
-            {
-                richTextBox1.Text += "上拋來源資料夾 : " + upload_source_directory + ", 不存在, 離開\n";
-            }
-            if (Directory.Exists(upload_destination_directory) == false)
-            {
-                richTextBox1.Text += "上拋目的資料夾 : " + upload_destination_directory + ", 不存在, 離開\n";
-            }
-            string backup_source_directory = upload_source_directory + "_backup";
-
-            //建立備份資料夾
-            if (Directory.Exists(backup_source_directory) == false)     //確認資料夾是否存在
-            {
-                Directory.CreateDirectory(backup_source_directory);
-                richTextBox1.Text += "已建立一個新資料夾: " + backup_source_directory + "\n";
-            }
-            else
-            {
-                richTextBox1.Text += "資料夾: " + backup_source_directory + " 已存在，不用再建立\n";
-            }
-
-            //開始上拋檔案/資料夾
-
-            //只撈一層的所有檔案
-            foreach (string fname in System.IO.Directory.GetFileSystemEntries(upload_source_directory))
-            {
-                richTextBox1.Text += fname + "\n";
-                if (File.Exists(fname))
-                {
-                    //richTextBox1.Text += "檔案\n";
-                    FileInfo fi = new FileInfo(fname);
-                    if (fi.Exists == true)      //確認檔案是否存在
-                    {
-                        //richTextBox1.Text += "檔名：" + fi.Name + "\n";
-
-                        string filename_backup = Path.Combine(backup_source_directory, fi.Name);
-                        //richTextBox1.Text += "備份檔名：" + filename_backup + "\n";
-                        if (File.Exists(filename_backup) == false)    //確認目標檔案是否存在
-                        {
-                            File.Copy(fname, filename_backup);
-                        }
-                        else
-                        {
-                            richTextBox1.Text += "檔案: " + filename_backup + " 已存在, 無法再拷貝\n";
-                        }
-
-                        string filename_upload = Path.Combine(upload_destination_directory, fi.Name);
-                        //richTextBox1.Text += "上拋檔名：" + filename_upload + "\n";
-                        if (File.Exists(filename_upload) == false)    //確認目標檔案是否存在
-                        {
-                            File.Move(fname, filename_upload);
-                        }
-                        else
-                        {
-                            richTextBox1.Text += "檔案: " + filename_upload + " 已存在, 無法移動\n";
-                        }
-                    }
-                    else
-                    {
-                        richTextBox1.Text += "檔案: " + fname + " 不存在\n";
-                    }
-                }
-                else if (Directory.Exists(fname))
-                {
-                    //richTextBox1.Text += "資料夾\n";
-                    DirectoryInfo di = new DirectoryInfo(fname);
-                    if (di.Exists == true)        //確認資料夾是否存在
-                    {
-                        //richTextBox1.Text += "資料夾：" + di.Name + "\n";
-
-                        string foldername_backup = Path.Combine(backup_source_directory, di.Name);
-                        //richTextBox1.Text += "備份資料夾名：" + foldername_backup + "\n";
-                        //Directory..Copy(fname, foldername_backup);  目前無法備份
-
-                        string foldername_upload = Path.Combine(upload_destination_directory, di.Name);
-                        //richTextBox1.Text += "上拋資料夾名：" + foldername_upload + "\n";
-                        if (Directory.Exists(foldername_upload) == false)    //確認目標資料夾是否存在
-                        {
-                            Directory.Move(fname, foldername_upload);
-                        }
-                        else
-                        {
-                            richTextBox1.Text += "資料夾: " + foldername_upload + " 已存在, 無法移動\n";
-                        }
-                    }
-                    else
-                    {
-                        richTextBox1.Text += "資料夾: " + fname + " 不存在\n";
-                    }
-                }
-                else
-                {
-                    richTextBox1.Text += "非合法路徑或檔案\n";
-                }
-            }
         }
     }
 }

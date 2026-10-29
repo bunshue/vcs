@@ -35,17 +35,9 @@ namespace vcs_DriveInfo2
             lb_main_mesg.Text = "";
             lb_setup0.Text = "一級低容量警戒(%)";
             lb_setup1.Text = "二級低容量警戒(%)\n二級較嚴重";
-            lb_setup2.Text = "上拋檔案來源地";
-            lb_setup3.Text = "上拋檔案目的地";
-            lb_setup4.Text = "上拋時間間隔(分鐘)";
-            cb_setup5.Text = "開啟上拋功能";
 
             tb_setup0.Text = Properties.Settings.Default.hdd_space_threshold1.ToString();
             tb_setup1.Text = Properties.Settings.Default.hdd_space_threshold2.ToString();
-            tb_setup2.Text = Properties.Settings.Default.upload_source_directory;
-            tb_setup3.Text = Properties.Settings.Default.upload_destination_directory;
-            tb_setup4.Text = Properties.Settings.Default.upload_interval.ToString();
-            cb_setup5.Checked = Properties.Settings.Default.upload_enabled;
 
             show_item_location();
             update_default_setting();
@@ -70,30 +62,13 @@ namespace vcs_DriveInfo2
 
             lb_setup0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             lb_setup1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            lb_setup2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            lb_setup3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            lb_setup4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            cb_setup5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             lb_main_mesg.Location = new Point(x_st + dx * 0, y_st + dy * 6 - 25);
 
             tb_setup0.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             tb_setup1.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            tb_setup2.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            tb_setup3.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            tb_setup4.Location = new Point(x_st + dx * 1, y_st + dy * 4);
 
-            //bt_setup0.Location = new Point(x_st + dx * 4-80, y_st + dy * 0);
-            //bt_setup1.Location = new Point(x_st + dx * 4 - 80, y_st + dy * 1);
-            bt_setup2.Location = new Point(x_st + dx * 4 - 240, y_st + dy * 2 - 10);
-            bt_setup3.Location = new Point(x_st + dx * 4 - 240, y_st + dy * 3 - 10);
-            //bt_setup4.Location = new Point(x_st + dx * 4 - 80, y_st + dy * 4);
             bt_setup5.Location = new Point(x_st + dx * 4 - 280, y_st + dy * 6);
             bt_setup6.Location = new Point(x_st + dx * 4 - 280 - 120, y_st + dy * 6);
-
-            bt_setup2.BackgroundImageLayout = ImageLayout.Zoom;
-            bt_setup2.BackgroundImage = Properties.Resources.open_folder;
-            bt_setup3.BackgroundImageLayout = ImageLayout.Zoom;
-            bt_setup3.BackgroundImage = Properties.Resources.open_folder;
 
             bt_exit_setup();
         }
@@ -132,47 +107,11 @@ namespace vcs_DriveInfo2
         {
             hdd_space_threshold1 = Properties.Settings.Default.hdd_space_threshold1;
             hdd_space_threshold2 = Properties.Settings.Default.hdd_space_threshold2;
-            upload_interval = Properties.Settings.Default.upload_interval;
-            flag_upload_enabled = Properties.Settings.Default.upload_enabled;
-            upload_source_directory = Properties.Settings.Default.upload_source_directory;
-            upload_destination_directory = Properties.Settings.Default.upload_destination_directory;
 
             /*
             richTextBox1.Text += "取得 一級警戒 : " + hdd_space_threshold1.ToString() + "\n";
             richTextBox1.Text += "取得 二級警戒 : " + hdd_space_threshold2.ToString() + "\n";
-            richTextBox1.Text += "取得 上拋間隔 : " + upload_interval.ToString() + "\n";
-            richTextBox1.Text += "取得 上拋功能 : " + flag_upload_enabled.ToString() + "\n";
-            richTextBox1.Text += "取得 上拋來源資料夾 : " + upload_source_directory + "\n";
-            richTextBox1.Text += "取得 上拋目的資料夾 : " + upload_destination_directory + "\n";
             */
-
-        }
-
-        private void bt_setup2_Click(object sender, EventArgs e)
-        {
-            folderBrowserDialog1.SelectedPath = "C:\\"; //預設開啟的路徑
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-            {
-                tb_setup2.Text = folderBrowserDialog1.SelectedPath;
-            }
-            else
-            {
-                //richTextBox2.Text = "未選取資料夾\n";
-            }
-        }
-
-        private void bt_setup3_Click(object sender, EventArgs e)
-        {
-            folderBrowserDialog1.SelectedPath = "C:\\"; //預設開啟的路徑
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-            {
-                tb_setup3.Text = folderBrowserDialog1.SelectedPath;
-            }
-            else
-            {
-                //richTextBox2.Text = "未選取資料夾\n";
-            }
-
         }
 
         private void bt_setup5_Click(object sender, EventArgs e)
@@ -186,10 +125,6 @@ namespace vcs_DriveInfo2
 
             int hdd_space_threshold1 = int.Parse(tb_setup0.Text); //一級警戒
             int hdd_space_threshold2 = int.Parse(tb_setup1.Text); //二級警戒, 二級較嚴重
-            string upload_source_directory = tb_setup2.Text;
-            string upload_destination_directory = tb_setup3.Text;
-            int upload_interval = int.Parse(tb_setup4.Text);
-            bool flag_upload_enabled = cb_setup5.Checked;
 
             string mesg = hdd_space_threshold1.ToString() + " " + hdd_space_threshold2.ToString() + " " +
                 upload_source_directory + " " + upload_destination_directory + " " + upload_interval.ToString() + " " + flag_upload_enabled.ToString();
@@ -319,11 +254,6 @@ namespace vcs_DriveInfo2
                 //儲存
                 Properties.Settings.Default.hdd_space_threshold1 = hdd_space_threshold1;
                 Properties.Settings.Default.hdd_space_threshold2 = hdd_space_threshold2;
-                Properties.Settings.Default.upload_source_directory = upload_source_directory;
-                Properties.Settings.Default.upload_destination_directory = upload_destination_directory;
-                Properties.Settings.Default.upload_interval = upload_interval;
-                Properties.Settings.Default.upload_enabled = flag_upload_enabled;
-
                 Properties.Settings.Default.Save();
                 show_main_message("儲存設定完成", S_OK, 30);
             }

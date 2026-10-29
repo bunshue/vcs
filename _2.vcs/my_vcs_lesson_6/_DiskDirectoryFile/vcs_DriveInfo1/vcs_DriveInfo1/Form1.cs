@@ -371,7 +371,7 @@ namespace vcs_DriveInfo1
         /// <summary>
         /// 獲取磁盤總空間
         /// </summary>
-        /// <param name="i">獲取磁盤需要的下標 0 c盤 1 d盤</param>
+        /// <param name="i">獲取磁盤需要的下標 0 C盤, 1 D盤</param>
         /// <returns>磁盤總空間 long類型</returns>
         public static long GetHardDiskTotalSize(int i)
         {
@@ -507,14 +507,14 @@ namespace vcs_DriveInfo1
 
             if (File.Exists(path))
             {
-                // This path is a file
                 richTextBox1.Text += "是個檔案\n";
             }
             else if (Directory.Exists(path))
             {
+                //richTextBox1.Text += "是個資料夾\n";
+
                 DirectoryInfo di = new DirectoryInfo(path);//輸入檔案夾
                 /*
-                // This path is a directory
                 richTextBox1.Text += "Name : " + di.Name + "\n";
                 richTextBox1.Text += "FullName : " + di.FullName + "\n";
                 richTextBox1.Text += "Parent : " + di.Parent + "\n";
@@ -525,6 +525,22 @@ namespace vcs_DriveInfo1
 
                 if (drive.IsReady == true)  // 使用IsReady屬性判斷裝置是否就緒
                 {
+                    richTextBox1.Text += "\nAP." + drive.VolumeLabel + DateTime.Now.ToString(".yyyy.MMdd.HHmm") + "\n\n";
+
+                    richTextBox1.Text += string.Format("{0,-10}{1,-15}", "磁碟 :", drive.ToString()) + "\n";
+                    richTextBox1.Text += string.Format("{0,-10}{1,-15}", "標籤 :", drive.VolumeLabel) + "\n";
+                    //richTextBox1.Text += string.Format("{0,-12}{1,-25}", "名稱 :", drive.Name) + "\n";
+                    richTextBox1.Text += string.Format("{0,-12}{1,17}{2,-7}{3,10}",
+                        "使用空間 :", (drive.TotalSize - drive.AvailableFreeSpace).ToString("N0", CultureInfo.InvariantCulture), " 個位元組", ByteConversionTBGBMBKB(Convert.ToInt64(drive.TotalSize - drive.AvailableFreeSpace))) + "\n";
+                    double percentage = (double)drive.AvailableFreeSpace / (double)drive.TotalSize;
+                    richTextBox1.Text += string.Format("{0,-12}{1,17}{2,-7}{3,10}{4,-10}",
+                        "可用空間 :", drive.AvailableFreeSpace.ToString("N0", CultureInfo.InvariantCulture), " 個位元組",
+                        ByteConversionTBGBMBKB(Convert.ToInt64(drive.AvailableFreeSpace)),
+                        " ( " + percentage.ToString("P", CultureInfo.InvariantCulture) + " )")
+                        + "\n";
+                    richTextBox1.Text += string.Format("{0,-12}{1,17}{2,-7}{3,10}",
+                        "磁碟容量 :", drive.TotalSize.ToString("N0", CultureInfo.InvariantCulture), " 個位元組", ByteConversionTBGBMBKB(Convert.ToInt64(drive.TotalSize))) + "\n";
+
                     richTextBox1.Text += "磁碟 : " + drive.ToString() + "\n";
                     richTextBox1.Text += "標籤 : " + drive.VolumeLabel + "\n";
                     richTextBox1.Text += "磁碟分割號 : " + drive.Name + "\n";
@@ -705,13 +721,13 @@ namespace vcs_DriveInfo1
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-            //获取c盘序列号
+            //获取C盘序列号
             result = CmdExecute(new string[] { "c:", "vol" });
             richTextBox1.Text += "取得 : " + result.OutputData + "\n";
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-            //获取d盘序列号
+            //获取D盘序列号
             result = CmdExecute(new string[] { "d:", "vol" });
             richTextBox1.Text += "取得 : " + result.OutputData + "\n";
 
@@ -1170,50 +1186,4 @@ namespace vcs_DriveInfo1
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-
-
-/*
-
-            // 資料夾
-            DirectoryInfo d = new DirectoryInfo(path);//輸入檔案夾
-            richTextBox1.Text += "Name : " + d.Name + "\n";
-            richTextBox1.Text += "FullName : " + d.FullName + "\n";
-            richTextBox1.Text += "Parent : " + d.Parent + "\n";
-            richTextBox1.Text += "Root : " + d.Root + "\n";
-
-            DriveInfo drive = new DriveInfo(d.Root.ToString());
-
-            if (drive.IsReady == true)
-            {
-                richTextBox1.Text += "\nAP." + drive.VolumeLabel + DateTime.Now.ToString(".yyyy.MMdd.HHmm") + "\n\n";
-
-                richTextBox1.Text += string.Format("{0,-10}{1,-15}", "磁碟 :", drive.ToString()) + "\n";
-                richTextBox1.Text += string.Format("{0,-10}{1,-15}", "標籤 :", drive.VolumeLabel) + "\n";
-                //richTextBox1.Text += string.Format("{0,-12}{1,-25}", "名稱 :", drive.Name) + "\n";
-                richTextBox1.Text += string.Format("{0,-12}{1,17}{2,-7}{3,10}",
-                    "使用空間 :", (drive.TotalSize - drive.AvailableFreeSpace).ToString("N0", CultureInfo.InvariantCulture), " 個位元組", ByteConversionTBGBMBKB(Convert.ToInt64(drive.TotalSize - drive.AvailableFreeSpace))) + "\n";
-                double percentage = (double)drive.AvailableFreeSpace / (double)drive.TotalSize;
-                richTextBox1.Text += string.Format("{0,-12}{1,17}{2,-7}{3,10}{4,-10}",
-                    "可用空間 :", drive.AvailableFreeSpace.ToString("N0", CultureInfo.InvariantCulture), " 個位元組",
-                    ByteConversionTBGBMBKB(Convert.ToInt64(drive.AvailableFreeSpace)),
-                    " ( " + percentage.ToString("P", CultureInfo.InvariantCulture) + " )")
-                    + "\n";
-                richTextBox1.Text += string.Format("{0,-12}{1,17}{2,-7}{3,10}",
-                    "磁碟容量 :", drive.TotalSize.ToString("N0", CultureInfo.InvariantCulture), " 個位元組", ByteConversionTBGBMBKB(Convert.ToInt64(drive.TotalSize))) + "\n";
-
-                richTextBox1.Text += "格式 : " + drive.DriveFormat + "\n";
-                richTextBox1.Text += "型態 : " + drive.DriveType + "\n";
-                richTextBox1.Text += "根目錄 : " + drive.RootDirectory + "\n";
-                drawDiskSpace(drive.AvailableFreeSpace, drive.TotalSize);
-            }
-            else
-            {
-                richTextBox1.Text += "磁碟 " + drive.ToString() + "未就緒\n";
-            }
-
-            richTextBox1.Text += "\n";
-
-
-*/
 

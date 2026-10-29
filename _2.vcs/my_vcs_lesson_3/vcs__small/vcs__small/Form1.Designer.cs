@@ -107,6 +107,8 @@
             this.bt_stop = new System.Windows.Forms.Button();
             this.bt_start = new System.Windows.Forms.Button();
             this.groupBox_pbx = new System.Windows.Forms.GroupBox();
+            this.groupBox_panel = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox_radiobutton3.SuspendLayout();
             this.groupBox_radiobutton2.SuspendLayout();
             this.groupBox_radiobutton1.SuspendLayout();
@@ -125,6 +127,7 @@
             this.groupBox_checkedlistbox.SuspendLayout();
             this.groupBox_progress.SuspendLayout();
             this.groupBox_pbx.SuspendLayout();
+            this.groupBox_panel.SuspendLayout();
             this.SuspendLayout();
             // 
             // bt_clear
@@ -828,7 +831,7 @@
             this.groupBox_checkedlistbox.Controls.Add(this.bt_clb0);
             this.groupBox_checkedlistbox.Location = new System.Drawing.Point(349, 553);
             this.groupBox_checkedlistbox.Name = "groupBox_checkedlistbox";
-            this.groupBox_checkedlistbox.Size = new System.Drawing.Size(450, 161);
+            this.groupBox_checkedlistbox.Size = new System.Drawing.Size(350, 161);
             this.groupBox_checkedlistbox.TabIndex = 99;
             this.groupBox_checkedlistbox.TabStop = false;
             this.groupBox_checkedlistbox.Text = "CheckedListBox";
@@ -849,7 +852,7 @@
             this.checkedListBox1.FormattingEnabled = true;
             this.checkedListBox1.Location = new System.Drawing.Point(16, 21);
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(383, 79);
+            this.checkedListBox1.Size = new System.Drawing.Size(319, 79);
             this.checkedListBox1.TabIndex = 1;
             // 
             // bt_clb1
@@ -938,11 +941,30 @@
             this.groupBox_pbx.TabIndex = 101;
             this.groupBox_pbx.TabStop = false;
             // 
+            // groupBox_panel
+            // 
+            this.groupBox_panel.Controls.Add(this.panel1);
+            this.groupBox_panel.Location = new System.Drawing.Point(707, 415);
+            this.groupBox_panel.Name = "groupBox_panel";
+            this.groupBox_panel.Size = new System.Drawing.Size(370, 261);
+            this.groupBox_panel.TabIndex = 102;
+            this.groupBox_panel.TabStop = false;
+            this.groupBox_panel.Text = "Panel";
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Location = new System.Drawing.Point(23, 34);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(325, 208);
+            this.panel1.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1164, 742);
+            this.Controls.Add(this.groupBox_panel);
             this.Controls.Add(this.groupBox_pbx);
             this.Controls.Add(this.groupBox_progress);
             this.Controls.Add(this.groupBox_checkedlistbox);
@@ -988,6 +1010,7 @@
             this.groupBox_progress.PerformLayout();
             this.groupBox_pbx.ResumeLayout(false);
             this.groupBox_pbx.PerformLayout();
+            this.groupBox_panel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1072,6 +1095,8 @@
         private System.Windows.Forms.Panel panel_b;
         private System.Windows.Forms.Panel panel_g;
         private System.Windows.Forms.Panel panel_r;
+        private System.Windows.Forms.GroupBox groupBox_panel;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 
