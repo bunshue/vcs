@@ -33,7 +33,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
@@ -42,7 +41,6 @@
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.bt_reset = new System.Windows.Forms.Button();
             this.tb_cm00 = new System.Windows.Forms.TextBox();
             this.tb_cm01 = new System.Windows.Forms.TextBox();
@@ -72,6 +70,7 @@
             this.bt_cm_apply = new System.Windows.Forms.Button();
             this.bt_cm_reset = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bt_open_file = new System.Windows.Forms.Button();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton0 = new System.Windows.Forms.RadioButton();
@@ -104,10 +103,6 @@
             this.bt_brightness = new System.Windows.Forms.Button();
             this.bt_alpha = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
-            this.button16 = new System.Windows.Forms.Button();
-            this.button17 = new System.Windows.Forms.Button();
-            this.button18 = new System.Windows.Forms.Button();
-            this.button19 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
@@ -122,10 +117,37 @@
             this.radioButton_m2 = new System.Windows.Forms.RadioButton();
             this.radioButton_m0 = new System.Windows.Forms.RadioButton();
             this.radioButton_m1 = new System.Windows.Forms.RadioButton();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.groupBox_rotation = new System.Windows.Forms.GroupBox();
+            this.rb_rotate_g = new System.Windows.Forms.RadioButton();
+            this.rb_rotate_b = new System.Windows.Forms.RadioButton();
+            this.rb_rotate_r = new System.Windows.Forms.RadioButton();
+            this.groupBox_angle = new System.Windows.Forms.GroupBox();
+            this.rb_rotate_angle60 = new System.Windows.Forms.RadioButton();
+            this.rb_rotate_angle0 = new System.Windows.Forms.RadioButton();
+            this.rb_rotate_angle30 = new System.Windows.Forms.RadioButton();
+            this.rb_rotate_angle90 = new System.Windows.Forms.RadioButton();
+            this.rb_rotate_angle45 = new System.Windows.Forms.RadioButton();
+            this.rb_rotate_angle135 = new System.Windows.Forms.RadioButton();
+            this.rb_rotate_angle180 = new System.Windows.Forms.RadioButton();
+            this.rb_rotate_angle150 = new System.Windows.Forms.RadioButton();
+            this.rb_rotate_angle120 = new System.Windows.Forms.RadioButton();
+            this.rb_rotate_angle225 = new System.Windows.Forms.RadioButton();
+            this.rb_rotate_angle270 = new System.Windows.Forms.RadioButton();
+            this.rb_rotate_angle240 = new System.Windows.Forms.RadioButton();
+            this.rb_rotate_angle210 = new System.Windows.Forms.RadioButton();
+            this.rb_rotate_angle315 = new System.Windows.Forms.RadioButton();
+            this.rb_rotate_angle330 = new System.Windows.Forms.RadioButton();
+            this.rb_rotate_angle300 = new System.Windows.Forms.RadioButton();
+            this.rb_rotate_none = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox_rotation.SuspendLayout();
+            this.groupBox_angle.SuspendLayout();
             this.SuspendLayout();
             // 
             // button0
@@ -157,7 +179,6 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 32;
-            this.button2.Text = "ColorMatrix 旋轉";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -168,18 +189,9 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(200, 60);
             this.button3.TabIndex = 33;
+            this.button3.Text = "CM";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(767, 236);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox1.TabIndex = 34;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             // 
             // button4
             // 
@@ -210,13 +222,14 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(200, 60);
             this.button6.TabIndex = 37;
+            this.button6.Text = "threshold";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(790, 373);
+            this.bt_clear.Location = new System.Drawing.Point(1000, 271);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 109;
@@ -227,7 +240,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(769, 338);
+            this.richTextBox1.Location = new System.Drawing.Point(979, 236);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 108;
@@ -261,18 +274,8 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(200, 60);
             this.button9.TabIndex = 112;
-            this.button9.Text = "淡入 / 淡出 效果";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox2.Location = new System.Drawing.Point(873, 236);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox2.TabIndex = 123;
-            this.pictureBox2.TabStop = false;
             // 
             // bt_reset
             // 
@@ -559,16 +562,29 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.bt_open_file);
             this.groupBox1.Controls.Add(this.radioButton3);
             this.groupBox1.Controls.Add(this.radioButton2);
             this.groupBox1.Controls.Add(this.radioButton0);
             this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Location = new System.Drawing.Point(435, 389);
+            this.groupBox1.Location = new System.Drawing.Point(734, 408);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(122, 145);
             this.groupBox1.TabIndex = 256;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "圖片";
+            // 
+            // bt_open_file
+            // 
+            this.bt_open_file.BackgroundImage = global::vcs_Draw5_Image_ImageAttributes.Properties.Resources.open_folder;
+            this.bt_open_file.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_open_file.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_open_file.Location = new System.Drawing.Point(71, 94);
+            this.bt_open_file.Name = "bt_open_file";
+            this.bt_open_file.Size = new System.Drawing.Size(45, 45);
+            this.bt_open_file.TabIndex = 296;
+            this.bt_open_file.UseVisualStyleBackColor = true;
+            this.bt_open_file.Click += new System.EventHandler(this.bt_open_file_Click);
             // 
             // radioButton3
             // 
@@ -899,50 +915,9 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(200, 60);
             this.button15.TabIndex = 286;
+            this.button15.Text = "淡出效果";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
-            // 
-            // button16
-            // 
-            this.button16.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button16.Location = new System.Drawing.Point(218, 408);
-            this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(200, 60);
-            this.button16.TabIndex = 287;
-            this.button16.UseVisualStyleBackColor = true;
-            this.button16.Click += new System.EventHandler(this.button16_Click);
-            // 
-            // button17
-            // 
-            this.button17.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button17.Location = new System.Drawing.Point(218, 474);
-            this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(200, 60);
-            this.button17.TabIndex = 288;
-            this.button17.UseVisualStyleBackColor = true;
-            this.button17.Click += new System.EventHandler(this.button17_Click);
-            // 
-            // button18
-            // 
-            this.button18.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button18.Location = new System.Drawing.Point(218, 540);
-            this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(200, 60);
-            this.button18.TabIndex = 289;
-            this.button18.Text = "淡入效果";
-            this.button18.UseVisualStyleBackColor = true;
-            this.button18.Click += new System.EventHandler(this.button18_Click);
-            // 
-            // button19
-            // 
-            this.button19.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button19.Location = new System.Drawing.Point(218, 606);
-            this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(200, 60);
-            this.button19.TabIndex = 290;
-            this.button19.Text = "淡出效果";
-            this.button19.UseVisualStyleBackColor = true;
-            this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
             // button10
             // 
@@ -984,7 +959,7 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(200, 60);
             this.button13.TabIndex = 294;
-            this.button13.Text = "threshold";
+            this.button13.Text = "淡入 / 淡出 效果";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -995,6 +970,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(200, 60);
             this.button14.TabIndex = 295;
+            this.button14.Text = "淡入效果";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -1011,7 +987,7 @@
             this.groupBox2.Controls.Add(this.radioButton_m2);
             this.groupBox2.Controls.Add(this.radioButton_m0);
             this.groupBox2.Controls.Add(this.radioButton_m1);
-            this.groupBox2.Location = new System.Drawing.Point(563, 389);
+            this.groupBox2.Location = new System.Drawing.Point(862, 408);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(182, 195);
             this.groupBox2.TabIndex = 257;
@@ -1104,21 +1080,303 @@
             this.radioButton_m1.UseVisualStyleBackColor = true;
             this.radioButton_m1.CheckedChanged += new System.EventHandler(this.radioButton_cm_CheckedChanged);
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox2.Location = new System.Drawing.Point(873, 236);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox2.TabIndex = 123;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Location = new System.Drawing.Point(767, 236);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox1.TabIndex = 34;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
+            // 
+            // groupBox_rotation
+            // 
+            this.groupBox_rotation.Controls.Add(this.rb_rotate_none);
+            this.groupBox_rotation.Controls.Add(this.groupBox_angle);
+            this.groupBox_rotation.Controls.Add(this.rb_rotate_g);
+            this.groupBox_rotation.Controls.Add(this.rb_rotate_b);
+            this.groupBox_rotation.Controls.Add(this.rb_rotate_r);
+            this.groupBox_rotation.Location = new System.Drawing.Point(227, 411);
+            this.groupBox_rotation.Name = "groupBox_rotation";
+            this.groupBox_rotation.Size = new System.Drawing.Size(331, 185);
+            this.groupBox_rotation.TabIndex = 297;
+            this.groupBox_rotation.TabStop = false;
+            this.groupBox_rotation.Text = "旋轉";
+            // 
+            // rb_rotate_g
+            // 
+            this.rb_rotate_g.AutoSize = true;
+            this.rb_rotate_g.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_g.Location = new System.Drawing.Point(195, 23);
+            this.rb_rotate_g.Name = "rb_rotate_g";
+            this.rb_rotate_g.Size = new System.Drawing.Size(85, 20);
+            this.rb_rotate_g.TabIndex = 2;
+            this.rb_rotate_g.Text = "對G旋轉";
+            this.rb_rotate_g.UseVisualStyleBackColor = true;
+            // 
+            // rb_rotate_b
+            // 
+            this.rb_rotate_b.AutoSize = true;
+            this.rb_rotate_b.Checked = true;
+            this.rb_rotate_b.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_b.Location = new System.Drawing.Point(15, 22);
+            this.rb_rotate_b.Name = "rb_rotate_b";
+            this.rb_rotate_b.Size = new System.Drawing.Size(84, 20);
+            this.rb_rotate_b.TabIndex = 1;
+            this.rb_rotate_b.Text = "對B旋轉";
+            this.rb_rotate_b.UseVisualStyleBackColor = true;
+            // 
+            // rb_rotate_r
+            // 
+            this.rb_rotate_r.AutoSize = true;
+            this.rb_rotate_r.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_r.Location = new System.Drawing.Point(105, 21);
+            this.rb_rotate_r.Name = "rb_rotate_r";
+            this.rb_rotate_r.Size = new System.Drawing.Size(84, 20);
+            this.rb_rotate_r.TabIndex = 0;
+            this.rb_rotate_r.Text = "對R旋轉";
+            this.rb_rotate_r.UseVisualStyleBackColor = true;
+            // 
+            // groupBox_angle
+            // 
+            this.groupBox_angle.Controls.Add(this.rb_rotate_angle315);
+            this.groupBox_angle.Controls.Add(this.rb_rotate_angle330);
+            this.groupBox_angle.Controls.Add(this.rb_rotate_angle300);
+            this.groupBox_angle.Controls.Add(this.rb_rotate_angle225);
+            this.groupBox_angle.Controls.Add(this.rb_rotate_angle270);
+            this.groupBox_angle.Controls.Add(this.rb_rotate_angle240);
+            this.groupBox_angle.Controls.Add(this.rb_rotate_angle210);
+            this.groupBox_angle.Controls.Add(this.rb_rotate_angle135);
+            this.groupBox_angle.Controls.Add(this.rb_rotate_angle180);
+            this.groupBox_angle.Controls.Add(this.rb_rotate_angle150);
+            this.groupBox_angle.Controls.Add(this.rb_rotate_angle120);
+            this.groupBox_angle.Controls.Add(this.rb_rotate_angle45);
+            this.groupBox_angle.Controls.Add(this.rb_rotate_angle90);
+            this.groupBox_angle.Controls.Add(this.rb_rotate_angle60);
+            this.groupBox_angle.Controls.Add(this.rb_rotate_angle0);
+            this.groupBox_angle.Controls.Add(this.rb_rotate_angle30);
+            this.groupBox_angle.Location = new System.Drawing.Point(13, 49);
+            this.groupBox_angle.Name = "groupBox_angle";
+            this.groupBox_angle.Size = new System.Drawing.Size(215, 124);
+            this.groupBox_angle.TabIndex = 298;
+            this.groupBox_angle.TabStop = false;
+            this.groupBox_angle.Text = "旋轉角度";
+            // 
+            // rb_rotate_angle60
+            // 
+            this.rb_rotate_angle60.AutoSize = true;
+            this.rb_rotate_angle60.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_angle60.Location = new System.Drawing.Point(151, 21);
+            this.rb_rotate_angle60.Name = "rb_rotate_angle60";
+            this.rb_rotate_angle60.Size = new System.Drawing.Size(42, 20);
+            this.rb_rotate_angle60.TabIndex = 2;
+            this.rb_rotate_angle60.Text = "60";
+            this.rb_rotate_angle60.UseVisualStyleBackColor = true;
+            // 
+            // rb_rotate_angle0
+            // 
+            this.rb_rotate_angle0.AutoSize = true;
+            this.rb_rotate_angle0.Checked = true;
+            this.rb_rotate_angle0.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_angle0.Location = new System.Drawing.Point(15, 22);
+            this.rb_rotate_angle0.Name = "rb_rotate_angle0";
+            this.rb_rotate_angle0.Size = new System.Drawing.Size(34, 20);
+            this.rb_rotate_angle0.TabIndex = 1;
+            this.rb_rotate_angle0.TabStop = true;
+            this.rb_rotate_angle0.Text = "0";
+            this.rb_rotate_angle0.UseVisualStyleBackColor = true;
+            // 
+            // rb_rotate_angle30
+            // 
+            this.rb_rotate_angle30.AutoSize = true;
+            this.rb_rotate_angle30.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_angle30.Location = new System.Drawing.Point(55, 22);
+            this.rb_rotate_angle30.Name = "rb_rotate_angle30";
+            this.rb_rotate_angle30.Size = new System.Drawing.Size(42, 20);
+            this.rb_rotate_angle30.TabIndex = 0;
+            this.rb_rotate_angle30.Text = "30";
+            this.rb_rotate_angle30.UseVisualStyleBackColor = true;
+            // 
+            // rb_rotate_angle90
+            // 
+            this.rb_rotate_angle90.AutoSize = true;
+            this.rb_rotate_angle90.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_angle90.Location = new System.Drawing.Point(15, 48);
+            this.rb_rotate_angle90.Name = "rb_rotate_angle90";
+            this.rb_rotate_angle90.Size = new System.Drawing.Size(42, 20);
+            this.rb_rotate_angle90.TabIndex = 3;
+            this.rb_rotate_angle90.Text = "90";
+            this.rb_rotate_angle90.UseVisualStyleBackColor = true;
+            // 
+            // rb_rotate_angle45
+            // 
+            this.rb_rotate_angle45.AutoSize = true;
+            this.rb_rotate_angle45.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_angle45.Location = new System.Drawing.Point(103, 22);
+            this.rb_rotate_angle45.Name = "rb_rotate_angle45";
+            this.rb_rotate_angle45.Size = new System.Drawing.Size(42, 20);
+            this.rb_rotate_angle45.TabIndex = 4;
+            this.rb_rotate_angle45.Text = "45";
+            this.rb_rotate_angle45.UseVisualStyleBackColor = true;
+            // 
+            // rb_rotate_angle135
+            // 
+            this.rb_rotate_angle135.AutoSize = true;
+            this.rb_rotate_angle135.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_angle135.Location = new System.Drawing.Point(103, 47);
+            this.rb_rotate_angle135.Name = "rb_rotate_angle135";
+            this.rb_rotate_angle135.Size = new System.Drawing.Size(50, 20);
+            this.rb_rotate_angle135.TabIndex = 8;
+            this.rb_rotate_angle135.Text = "135";
+            this.rb_rotate_angle135.UseVisualStyleBackColor = true;
+            // 
+            // rb_rotate_angle180
+            // 
+            this.rb_rotate_angle180.AutoSize = true;
+            this.rb_rotate_angle180.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_angle180.Location = new System.Drawing.Point(15, 73);
+            this.rb_rotate_angle180.Name = "rb_rotate_angle180";
+            this.rb_rotate_angle180.Size = new System.Drawing.Size(50, 20);
+            this.rb_rotate_angle180.TabIndex = 7;
+            this.rb_rotate_angle180.Text = "180";
+            this.rb_rotate_angle180.UseVisualStyleBackColor = true;
+            // 
+            // rb_rotate_angle150
+            // 
+            this.rb_rotate_angle150.AutoSize = true;
+            this.rb_rotate_angle150.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_angle150.Location = new System.Drawing.Point(151, 48);
+            this.rb_rotate_angle150.Name = "rb_rotate_angle150";
+            this.rb_rotate_angle150.Size = new System.Drawing.Size(50, 20);
+            this.rb_rotate_angle150.TabIndex = 6;
+            this.rb_rotate_angle150.Text = "150";
+            this.rb_rotate_angle150.UseVisualStyleBackColor = true;
+            // 
+            // rb_rotate_angle120
+            // 
+            this.rb_rotate_angle120.AutoSize = true;
+            this.rb_rotate_angle120.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_angle120.Location = new System.Drawing.Point(55, 48);
+            this.rb_rotate_angle120.Name = "rb_rotate_angle120";
+            this.rb_rotate_angle120.Size = new System.Drawing.Size(50, 20);
+            this.rb_rotate_angle120.TabIndex = 5;
+            this.rb_rotate_angle120.Text = "120";
+            this.rb_rotate_angle120.UseVisualStyleBackColor = true;
+            // 
+            // rb_rotate_angle225
+            // 
+            this.rb_rotate_angle225.AutoSize = true;
+            this.rb_rotate_angle225.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_angle225.Location = new System.Drawing.Point(103, 73);
+            this.rb_rotate_angle225.Name = "rb_rotate_angle225";
+            this.rb_rotate_angle225.Size = new System.Drawing.Size(50, 20);
+            this.rb_rotate_angle225.TabIndex = 12;
+            this.rb_rotate_angle225.Text = "225";
+            this.rb_rotate_angle225.UseVisualStyleBackColor = true;
+            // 
+            // rb_rotate_angle270
+            // 
+            this.rb_rotate_angle270.AutoSize = true;
+            this.rb_rotate_angle270.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_angle270.Location = new System.Drawing.Point(15, 90);
+            this.rb_rotate_angle270.Name = "rb_rotate_angle270";
+            this.rb_rotate_angle270.Size = new System.Drawing.Size(50, 20);
+            this.rb_rotate_angle270.TabIndex = 11;
+            this.rb_rotate_angle270.Text = "270";
+            this.rb_rotate_angle270.UseVisualStyleBackColor = true;
+            // 
+            // rb_rotate_angle240
+            // 
+            this.rb_rotate_angle240.AutoSize = true;
+            this.rb_rotate_angle240.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_angle240.Location = new System.Drawing.Point(151, 73);
+            this.rb_rotate_angle240.Name = "rb_rotate_angle240";
+            this.rb_rotate_angle240.Size = new System.Drawing.Size(50, 20);
+            this.rb_rotate_angle240.TabIndex = 10;
+            this.rb_rotate_angle240.Text = "240";
+            this.rb_rotate_angle240.UseVisualStyleBackColor = true;
+            // 
+            // rb_rotate_angle210
+            // 
+            this.rb_rotate_angle210.AutoSize = true;
+            this.rb_rotate_angle210.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_angle210.Location = new System.Drawing.Point(55, 73);
+            this.rb_rotate_angle210.Name = "rb_rotate_angle210";
+            this.rb_rotate_angle210.Size = new System.Drawing.Size(50, 20);
+            this.rb_rotate_angle210.TabIndex = 9;
+            this.rb_rotate_angle210.Text = "210";
+            this.rb_rotate_angle210.UseVisualStyleBackColor = true;
+            // 
+            // rb_rotate_angle315
+            // 
+            this.rb_rotate_angle315.AutoSize = true;
+            this.rb_rotate_angle315.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_angle315.Location = new System.Drawing.Point(103, 90);
+            this.rb_rotate_angle315.Name = "rb_rotate_angle315";
+            this.rb_rotate_angle315.Size = new System.Drawing.Size(50, 20);
+            this.rb_rotate_angle315.TabIndex = 16;
+            this.rb_rotate_angle315.Text = "315";
+            this.rb_rotate_angle315.UseVisualStyleBackColor = true;
+            // 
+            // rb_rotate_angle330
+            // 
+            this.rb_rotate_angle330.AutoSize = true;
+            this.rb_rotate_angle330.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_angle330.Location = new System.Drawing.Point(151, 90);
+            this.rb_rotate_angle330.Name = "rb_rotate_angle330";
+            this.rb_rotate_angle330.Size = new System.Drawing.Size(50, 20);
+            this.rb_rotate_angle330.TabIndex = 14;
+            this.rb_rotate_angle330.Text = "330";
+            this.rb_rotate_angle330.UseVisualStyleBackColor = true;
+            // 
+            // rb_rotate_angle300
+            // 
+            this.rb_rotate_angle300.AutoSize = true;
+            this.rb_rotate_angle300.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_angle300.Location = new System.Drawing.Point(55, 90);
+            this.rb_rotate_angle300.Name = "rb_rotate_angle300";
+            this.rb_rotate_angle300.Size = new System.Drawing.Size(50, 20);
+            this.rb_rotate_angle300.TabIndex = 13;
+            this.rb_rotate_angle300.Text = "300";
+            this.rb_rotate_angle300.UseVisualStyleBackColor = true;
+            // 
+            // rb_rotate_none
+            // 
+            this.rb_rotate_none.AutoSize = true;
+            this.rb_rotate_none.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_none.Location = new System.Drawing.Point(286, 23);
+            this.rb_rotate_none.Name = "rb_rotate_none";
+            this.rb_rotate_none.Size = new System.Drawing.Size(42, 20);
+            this.rb_rotate_none.TabIndex = 299;
+            this.rb_rotate_none.Text = "無";
+            this.rb_rotate_none.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1059, 671);
+            this.ClientSize = new System.Drawing.Size(1161, 671);
+            this.Controls.Add(this.groupBox_rotation);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button14);
             this.Controls.Add(this.button13);
             this.Controls.Add(this.button12);
             this.Controls.Add(this.button11);
             this.Controls.Add(this.button10);
-            this.Controls.Add(this.button19);
-            this.Controls.Add(this.button18);
-            this.Controls.Add(this.button17);
-            this.Controls.Add(this.button16);
             this.Controls.Add(this.button15);
             this.Controls.Add(this.bt_alpha);
             this.Controls.Add(this.bt_brightness);
@@ -1193,12 +1451,17 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupBox_rotation.ResumeLayout(false);
+            this.groupBox_rotation.PerformLayout();
+            this.groupBox_angle.ResumeLayout(false);
+            this.groupBox_angle.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1281,10 +1544,6 @@
         private System.Windows.Forms.Button bt_brightness;
         private System.Windows.Forms.Button bt_alpha;
         private System.Windows.Forms.Button button15;
-        private System.Windows.Forms.Button button16;
-        private System.Windows.Forms.Button button17;
-        private System.Windows.Forms.Button button18;
-        private System.Windows.Forms.Button button19;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button12;
@@ -1299,6 +1558,30 @@
         private System.Windows.Forms.RadioButton radioButton_m5;
         private System.Windows.Forms.RadioButton radioButton_m4;
         private System.Windows.Forms.RadioButton radioButton_m6;
+        private System.Windows.Forms.Button bt_open_file;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.GroupBox groupBox_rotation;
+        private System.Windows.Forms.RadioButton rb_rotate_g;
+        private System.Windows.Forms.RadioButton rb_rotate_b;
+        private System.Windows.Forms.RadioButton rb_rotate_r;
+        private System.Windows.Forms.GroupBox groupBox_angle;
+        private System.Windows.Forms.RadioButton rb_rotate_angle315;
+        private System.Windows.Forms.RadioButton rb_rotate_angle330;
+        private System.Windows.Forms.RadioButton rb_rotate_angle300;
+        private System.Windows.Forms.RadioButton rb_rotate_angle225;
+        private System.Windows.Forms.RadioButton rb_rotate_angle270;
+        private System.Windows.Forms.RadioButton rb_rotate_angle240;
+        private System.Windows.Forms.RadioButton rb_rotate_angle210;
+        private System.Windows.Forms.RadioButton rb_rotate_angle135;
+        private System.Windows.Forms.RadioButton rb_rotate_angle180;
+        private System.Windows.Forms.RadioButton rb_rotate_angle150;
+        private System.Windows.Forms.RadioButton rb_rotate_angle120;
+        private System.Windows.Forms.RadioButton rb_rotate_angle45;
+        private System.Windows.Forms.RadioButton rb_rotate_angle90;
+        private System.Windows.Forms.RadioButton rb_rotate_angle60;
+        private System.Windows.Forms.RadioButton rb_rotate_angle0;
+        private System.Windows.Forms.RadioButton rb_rotate_angle30;
+        private System.Windows.Forms.RadioButton rb_rotate_none;
     }
 }
 

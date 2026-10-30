@@ -562,5 +562,17 @@ namespace vcs_DiskDirectoryFile1.Properties {
                 this["lv_rename_dir_cw3"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool flag_operation_mode {
+            get {
+                return ((bool)(this["flag_operation_mode"]));
+            }
+            set {
+                this["flag_operation_mode"] = value;
+            }
+        }
     }
 }

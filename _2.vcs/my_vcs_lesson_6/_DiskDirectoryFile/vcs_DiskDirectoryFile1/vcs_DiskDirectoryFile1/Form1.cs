@@ -35,8 +35,6 @@ namespace vcs_DiskDirectoryFile1
 {
     public partial class Form1 : Form
     {
-        bool flag_my_file_manager = false;
-
         List<String> old_search_path = new List<String>();  //預設搜尋路徑
         List<String> old_search_pattern = new List<String>();  //預設搜尋關鍵字
         bool flag_search_folders_all = false;  // 找最底層 全資料夾 for 圖片整理
@@ -266,7 +264,9 @@ namespace vcs_DiskDirectoryFile1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (flag_my_file_manager == true)
+            bool operation_mode = Properties.Settings.Default.flag_operation_mode;
+
+            if (operation_mode == true)
             {
                 show_item_location_my_file_manager();
             }
@@ -501,6 +501,7 @@ namespace vcs_DiskDirectoryFile1
 
             get_filesize_limit();
 
+            Properties.Settings.Default.flag_operation_mode = cb_operation_mode.Checked;  // 操作模式
             Properties.Settings.Default.filesize_min = size_limit_min;  // 搜尋 資料夾/檔案 的下限
             Properties.Settings.Default.filesize_max = size_limit_max;  // 搜尋 資料夾/檔案 的上限
             Properties.Settings.Default.flag_check_filesize_min = cb_limit_min.Checked;
@@ -775,6 +776,8 @@ namespace vcs_DiskDirectoryFile1
             bt_test6.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             bt_test7.Location = new Point(x_st + dx * 3, y_st + dy * 1);
             bt_setup.Location = new Point(x_st + dx * 8, y_st + dy * 0);
+            cb_operation_mode.Location = new Point(x_st + dx * 8, y_st + dy * 1 + 30);
+            cb_operation_mode.Text = "簡易";
 
             //第0頁 資料夾 全空小
             cb_search_folders_all.Location = new Point(x_st + dx * 1, y_st + dy * 0);

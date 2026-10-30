@@ -15,15 +15,13 @@ namespace vcs_Draw5_Image_ImageAttributes
 {
     public partial class Form1 : Form
     {
-        Bitmap bitmap1;
+        private Bitmap bitmap1;
+
         Graphics g;
         bool flag_color_matrix_valid = true;
         int W = 920;
         int H = 600;
-        string filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp";
-
-        private Bitmap SourceBitmap;
-        private Bitmap MyBitmap;
+        string pic_filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp";
 
         // 色彩調整矩陣 標準
         float[][] matrix =
@@ -110,15 +108,6 @@ namespace vcs_Draw5_Image_ImageAttributes
 
             //------------------------------------------------------------  # 60個
 
-            //指定畫布大小
-            bitmap1 = new Bitmap(W, H);
-            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
-            g.SmoothingMode = SmoothingMode.HighQuality;
-            g.Clear(Color.Pink);
-            pictureBox1.Image = bitmap1;
-
-            pictureBox2.Image = Image.FromFile(filename);
-
             // 淡入 / 淡出 效果 ST
             bitmap[0] = new Bitmap(filename0);
             bitmap[1] = new Bitmap(filename1);
@@ -134,14 +123,14 @@ namespace vcs_Draw5_Image_ImageAttributes
             imageObject.Init(pos, 10000);  // 10 秒
             // 淡入 / 淡出 效果 SP
 
-            //string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            apply_image();
+        }
 
-            //得到原始大小的圖像
-            SourceBitmap = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
-            //得到縮放后的圖像
-            MyBitmap = new Bitmap(SourceBitmap, this.pictureBox1.Width, this.pictureBox1.Height);
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            Bitmap image = new Bitmap(vcs_Draw5_Image_ImageAttributes.Properties.Resources.rotation_about_three_axes);
 
-            pictureBox1.Image = MyBitmap;
+            e.Graphics.DrawImage(image, 10, 710, image.Width * 2 / 3 + 50, image.Height * 2 / 3 + 50);
         }
 
         void show_item_location()
@@ -159,18 +148,21 @@ namespace vcs_Draw5_Image_ImageAttributes
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
-            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button8.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button9.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+
+            //旋轉
+            groupBox_rotation.Size = new Size(410, 140);
+            groupBox_rotation.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            //旋轉角度
+            groupBox_angle.Size = new Size(390, 90);
+            groupBox_angle.Location = new Point(10, 40);
 
             pictureBox1.Size = new Size(W, H);
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 300);
@@ -252,11 +244,12 @@ namespace vcs_Draw5_Image_ImageAttributes
             groupBox2.Location = new Point(xx + dx * 7 + 140, yy + dy * 0);
 
             y_st = 20;
-            dy = 30;
+            dy = 32;
             radioButton0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             radioButton1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             radioButton2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             radioButton3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            bt_open_file.Location = new Point(x_st + dx * 0 + 60, y_st + dy * 0 - 10);
 
             radioButton_m0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             radioButton_m1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -292,6 +285,54 @@ namespace vcs_Draw5_Image_ImageAttributes
             lb_cm43.Text = "x";
             lb_cm44.Text = "x";
 
+            x_st = 10;
+            y_st = 14;
+            dx = 110;
+            dy = 18;
+            rb_rotate_b.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            rb_rotate_r.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            rb_rotate_g.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            rb_rotate_none.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+
+            dx = 100;
+            rb_rotate_angle0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            rb_rotate_angle30.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            rb_rotate_angle45.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            rb_rotate_angle60.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            rb_rotate_angle90.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            rb_rotate_angle120.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            rb_rotate_angle135.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            rb_rotate_angle150.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            rb_rotate_angle180.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            rb_rotate_angle210.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            rb_rotate_angle225.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            rb_rotate_angle240.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            rb_rotate_angle270.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            rb_rotate_angle300.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            rb_rotate_angle315.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            rb_rotate_angle330.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+
+            rb_rotate_b.CheckedChanged += new EventHandler(rb_rotate_CheckedChanged);
+            rb_rotate_r.CheckedChanged += new EventHandler(rb_rotate_CheckedChanged);
+            rb_rotate_g.CheckedChanged += new EventHandler(rb_rotate_CheckedChanged);
+            rb_rotate_none.CheckedChanged += new EventHandler(rb_rotate_CheckedChanged);
+            rb_rotate_angle0.CheckedChanged += new EventHandler(rb_rotate_angle_CheckedChanged);
+            rb_rotate_angle30.CheckedChanged += new EventHandler(rb_rotate_angle_CheckedChanged);
+            rb_rotate_angle45.CheckedChanged += new EventHandler(rb_rotate_angle_CheckedChanged);
+            rb_rotate_angle60.CheckedChanged += new EventHandler(rb_rotate_angle_CheckedChanged);
+            rb_rotate_angle90.CheckedChanged += new EventHandler(rb_rotate_angle_CheckedChanged);
+            rb_rotate_angle120.CheckedChanged += new EventHandler(rb_rotate_angle_CheckedChanged);
+            rb_rotate_angle135.CheckedChanged += new EventHandler(rb_rotate_angle_CheckedChanged);
+            rb_rotate_angle150.CheckedChanged += new EventHandler(rb_rotate_angle_CheckedChanged);
+            rb_rotate_angle180.CheckedChanged += new EventHandler(rb_rotate_angle_CheckedChanged);
+            rb_rotate_angle210.CheckedChanged += new EventHandler(rb_rotate_angle_CheckedChanged);
+            rb_rotate_angle225.CheckedChanged += new EventHandler(rb_rotate_angle_CheckedChanged);
+            rb_rotate_angle240.CheckedChanged += new EventHandler(rb_rotate_angle_CheckedChanged);
+            rb_rotate_angle270.CheckedChanged += new EventHandler(rb_rotate_angle_CheckedChanged);
+            rb_rotate_angle300.CheckedChanged += new EventHandler(rb_rotate_angle_CheckedChanged);
+            rb_rotate_angle315.CheckedChanged += new EventHandler(rb_rotate_angle_CheckedChanged);
+            rb_rotate_angle330.CheckedChanged += new EventHandler(rb_rotate_angle_CheckedChanged);
+
             //針對某控件的邊緣 設定表單大小
             this.ClientSize = new Size(richTextBox1.Right + 10, richTextBox1.Bottom + 10);
             this.Text = "vcs_Draw5_Image_ImageAttributes";
@@ -304,6 +345,16 @@ namespace vcs_Draw5_Image_ImageAttributes
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        void apply_image()
+        {
+            bitmap1 = (Bitmap)Bitmap.FromFile(pic_filename);	//Bitmap.FromFile出來的是Image格式
+            pictureBox1.Image = bitmap1;
+            pictureBox2.Image = Image.FromFile(pic_filename);
+
+            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+            g.SmoothingMode = SmoothingMode.HighQuality;
         }
 
         //------------------------------------------------------------  # 60個
@@ -386,69 +437,9 @@ namespace vcs_Draw5_Image_ImageAttributes
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
-            Bitmap bitmap1 = new Bitmap(filename);
-
-            Graphics g = Graphics.FromImage(bitmap1);
-            //pictureBox1.Image = bitmap1;
-
-            Bitmap image = new Bitmap(filename);
-            ImageAttributes imageAttributes = new ImageAttributes();
-            int width = image.Width;
-            int height = image.Height;
-            float degrees = 60f;
-            //degrees = 0f;
-            double r = degrees * System.Math.PI / 180; // degrees to radians
-
-            float[][] matrix =
-            {
-                new float[] {(float)System.Math.Cos(r),  (float)System.Math.Sin(r),  0,  0, 0},
-                new float[] {(float)-System.Math.Sin(r),  (float)System.Math.Cos(r),  0,  0, 0},
-                new float[] {0,  0,  1,  0, 0},
-                new float[] {0,  0,  0,  1, 0},
-                new float[] {0,  0,  0,  0, 1}
-            };
-
-            richTextBox1.Text += "c1 = " + (float)System.Math.Cos(r) + "\n";
-            richTextBox1.Text += "c2 = " + (float)System.Math.Sin(r) + "\n";
-            richTextBox1.Text += "c3 = " + (float)-System.Math.Sin(r) + "\n";
-            richTextBox1.Text += "c4 = " + (float)-System.Math.Cos(r) + "\n";
-
-
-            /*
-            // 色彩調整矩陣 標準
-            float[][] matrix =
-            {
-                new float[] {1, 0, 0, 0, 0},
-                new float[] {0, 1, 0, 0, 0},
-                new float[] {0, 0, 1, 0, 0},
-                new float[] {0, 0, 0, 1, 0},
-                new float[] {0, 0, 0, 0, 1}
-            };
-            */
-
-            ColorMatrix colorMatrix = new ColorMatrix(matrix);
-
-            imageAttributes.SetColorMatrix(
-               colorMatrix,
-               ColorMatrixFlag.Default,
-               ColorAdjustType.Bitmap);
-
-            g.DrawImage(image, 10, 10, width, height);
-
-            g.DrawImage(
-               image,
-               new Rectangle(150, 10, width, height),  // destination rectangle
-                0, 0,        // upper-left corner of source rectangle
-                width,       // width of source rectangle
-                height,      // height of source rectangle
-                GraphicsUnit.Pixel,
-               imageAttributes);
-
-            pictureBox1.Image = bitmap1;
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -494,7 +485,7 @@ namespace vcs_Draw5_Image_ImageAttributes
             pictureBox1.Image = bitmap1;
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -568,7 +559,7 @@ namespace vcs_Draw5_Image_ImageAttributes
             float g = (128 + 127) / 255f * scale;
             float b = (128 + 127) / 255f * scale;
 
-            Bitmap bmp = new Bitmap(filename);
+            Bitmap bmp = new Bitmap(pic_filename);
 
             // Make the ColorMatrix.
             ColorMatrix cm = new ColorMatrix(new float[][]
@@ -598,9 +589,41 @@ namespace vcs_Draw5_Image_ImageAttributes
             pictureBox1.Image = bitmap1;
         }
 
+        //------------------------------------------------------------  # 60個
+
+        float threshold = 0.3f;  // 0 ~ 1.0
         private void button6_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "threshold = " + threshold.ToString() + "\n";
+
+            threshold += 0.06f;
+            if (threshold > 1.0f)
+            {
+                threshold = 0.01f;
+            }
+
+            Bitmap bmp = new Bitmap(pic_filename);
+
+            ImageAttributes ia = new ImageAttributes();
+            ia.SetThreshold(threshold);
+
+            // Draw the image onto the new bitmap while applying the new ColorMatrix.
+            Point[] points =
+            {
+                new Point(0, 0),
+                new Point(bmp.Width, 0),
+                new Point(0, bmp.Height),
+            };
+            Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
+
+            g.Clear(Color.Pink);
+
+            g.DrawImage(bmp, points, rect, GraphicsUnit.Pixel, ia);
+
+            pictureBox1.Image = bitmap1;
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button7_Click(object sender, EventArgs e)
         {
@@ -621,22 +644,11 @@ namespace vcs_Draw5_Image_ImageAttributes
 
         }
 
-        bool flag_do_fadein_fadeout = false;
         private void button9_Click(object sender, EventArgs e)
         {
-            // 淡入 / 淡出 效果
-            // 淡入淡出我的畫冊
-            if (flag_do_fadein_fadeout == false)
-            {
-                flag_do_fadein_fadeout = true;
-                timer_FadeInFadeOut.Enabled = true;
-            }
-            else
-            {
-                flag_do_fadein_fadeout = false;
-                timer_FadeInFadeOut.Enabled = false;
-            }
         }
+
+        //------------------------------------------------------------  # 60個
 
         public struct RGB
         {
@@ -861,7 +873,7 @@ namespace vcs_Draw5_Image_ImageAttributes
             float gamma = 2.2f;
             richTextBox1.Text += "Gamma = " + gamma.ToString() + "\n";
 
-            Bitmap bmp = new Bitmap(filename);
+            Bitmap bmp = new Bitmap(pic_filename);
 
             ImageAttributes ia = new ImageAttributes();
             ia.SetGamma(gamma, ColorAdjustType.Bitmap);
@@ -908,57 +920,29 @@ namespace vcs_Draw5_Image_ImageAttributes
             }
         }
 
-        float threshold = 0.3f;  // 0 ~ 1.0
+        //------------------------------------------------------------  # 60個
+
+        bool flag_do_fadein_fadeout = false;
         private void button13_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "threshold = " + threshold.ToString() + "\n";
-
-            threshold += 0.06f;
-            if (threshold > 1.0f)
+            //淡入 / 淡出 效果
+            // 淡入 / 淡出 效果
+            // 淡入淡出我的畫冊
+            if (flag_do_fadein_fadeout == false)
             {
-                threshold = 0.01f;
+                flag_do_fadein_fadeout = true;
+                timer_FadeInFadeOut.Enabled = true;
             }
-
-            Bitmap bmp = new Bitmap(filename);
-
-            ImageAttributes ia = new ImageAttributes();
-            ia.SetThreshold(threshold);
-
-            // Draw the image onto the new bitmap while applying the new ColorMatrix.
-            Point[] points =
+            else
             {
-                new Point(0, 0),
-                new Point(bmp.Width, 0),
-                new Point(0, bmp.Height),
-            };
-            Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
-
-            g.Clear(Color.Pink);
-
-            g.DrawImage(bmp, points, rect, GraphicsUnit.Pixel, ia);
-
-            pictureBox1.Image = bitmap1;
+                flag_do_fadein_fadeout = false;
+                timer_FadeInFadeOut.Enabled = false;
+            }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button14_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button15_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button16_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button17_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button18_Click(object sender, EventArgs e)
         {
             //淡入效果
 
@@ -968,6 +952,10 @@ namespace vcs_Draw5_Image_ImageAttributes
 
             Graphics g = this.pictureBox1.CreateGraphics();
             g.Clear(Color.Gray);
+
+            //得到縮放后的圖像
+            Bitmap MyBitmap = new Bitmap(bitmap1, this.pictureBox1.Width, this.pictureBox1.Height);
+
             int width = MyBitmap.Width;
             int height = MyBitmap.Height;
             ImageAttributes ia = new ImageAttributes();
@@ -1019,12 +1007,16 @@ namespace vcs_Draw5_Image_ImageAttributes
             this.Text = count.ToString() + " 完成";
         }
 
-        private void button19_Click(object sender, EventArgs e)
+        private void button15_Click(object sender, EventArgs e)
         {
             //淡出效果
 
             Graphics g = this.pictureBox1.CreateGraphics();
             g.Clear(Color.Gray);
+
+            //得到縮放后的圖像
+            Bitmap MyBitmap = new Bitmap(bitmap1, this.pictureBox1.Width, this.pictureBox1.Height);
+
             int width = MyBitmap.Width;
             int height = MyBitmap.Height;
             ImageAttributes ia = new ImageAttributes();
@@ -1075,6 +1067,8 @@ namespace vcs_Draw5_Image_ImageAttributes
             }
             this.Text = count.ToString() + " 完成";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
@@ -1141,7 +1135,7 @@ namespace vcs_Draw5_Image_ImageAttributes
             g.Clear(Color.White);
             pictureBox1.Image = bitmap1;
 
-            pictureBox2.Image = Image.FromFile(filename);
+            pictureBox2.Image = Image.FromFile(pic_filename);
         }
 
         bool get_color_matrix()
@@ -1484,12 +1478,12 @@ namespace vcs_Draw5_Image_ImageAttributes
 
             g.Clear(Color.Pink);
             // 貼上使用CM轉換過的影像
-            Bitmap bmp = new Bitmap(filename);
+            Bitmap bmp = new Bitmap(pic_filename);
             int W = bmp.Width;
             int H = bmp.Height;
             g.DrawImage(bmp, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
             pictureBox1.Image = bitmap1;
-            pictureBox2.Image = Image.FromFile(filename);
+            pictureBox2.Image = Image.FromFile(pic_filename);
         }
 
         void apply_color_matrix()
@@ -1577,23 +1571,25 @@ namespace vcs_Draw5_Image_ImageAttributes
         {
             if (radioButton0.Checked == true)
             {
-                filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp";
+                pic_filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp";
             }
             else if (radioButton1.Checked == true)
             {
-                filename = @"D:\_git\vcs\_1.data\______test_files1\colorbar2.bmp";
+                pic_filename = @"D:\_git\vcs\_1.data\______test_files1\colorbar2.bmp";
             }
             else if (radioButton2.Checked == true)
             {
-                filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+                pic_filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
             }
             else if (radioButton3.Checked == true)
             {
-                filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+                pic_filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             }
             else
             {
             }
+
+            apply_image();
         }
 
         private void timer_FadeInFadeOut_Tick(object sender, EventArgs e)
@@ -1728,12 +1724,237 @@ namespace vcs_Draw5_Image_ImageAttributes
 
             g.Clear(Color.Pink);
             // 貼上使用CM轉換過的影像
-            Bitmap bmp = new Bitmap(filename);
+            Bitmap bmp = new Bitmap(pic_filename);
             int W = bmp.Width;
             int H = bmp.Height;
             g.DrawImage(bmp, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
             pictureBox1.Image = bitmap1;
-            pictureBox2.Image = Image.FromFile(filename);
+            pictureBox2.Image = Image.FromFile(pic_filename);
+        }
+
+        private void bt_open_file_Click(object sender, EventArgs e)
+        {
+            pic_filename = @"D:\_git\vcs\_1.data\______test_files1\colorbar.bmp";
+
+            openFileDialog1.Title = "開啟圖片";
+            openFileDialog1.FileName = "";
+            openFileDialog1.Filter = "jpg (*.jpg)|*.jpg|bmp (*.bmp)|*.bmp|png (*.png)|*.png|所有檔|*.*";	//限定檔案格式
+            //openFileDialog1.Filter = "文字檔|*.txt|所有檔|*.*";   //限定檔案格式
+            openFileDialog1.FilterIndex = 4;
+            //openFileDialog1.RestoreDirectory = false;
+            //openFileDialog1.InitialDirectory = Application.StartupPath;         //從目前目錄開始尋找檔案
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox1.Text += "取得檔案名稱 : " + openFileDialog1.FileName + "\n";
+                pic_filename = openFileDialog1.FileName;
+            }
+            else
+            {
+                richTextBox1.Text += "未選取檔案\n";
+            }
+            apply_image();
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        int rotate_type = 1;
+        void rb_rotate_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rb_rotate_b.Checked == true)
+            {
+                rotate_type = 1;
+            }
+            else if (rb_rotate_r.Checked == true)
+            {
+                rotate_type = 2;
+            }
+            else if (rb_rotate_g.Checked == true)
+            {
+                rotate_type = 3;
+            }
+            else
+            {
+                rotate_type = 0;
+            }
+            do_image_rotation(rotate_type, rotate_angle);
+        }
+
+        int rotate_angle = 0;
+        void rb_rotate_angle_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rb_rotate_angle0.Checked == true)
+            {
+                rotate_angle = 0;
+            }
+            else if (rb_rotate_angle30.Checked == true)
+            {
+                rotate_angle = 30;
+            }
+            else if (rb_rotate_angle45.Checked == true)
+            {
+                rotate_angle = 45;
+            }
+            else if (rb_rotate_angle60.Checked == true)
+            {
+                rotate_angle = 60;
+            }
+            else if (rb_rotate_angle90.Checked == true)
+            {
+                rotate_angle = 90;
+            }
+            else if (rb_rotate_angle120.Checked == true)
+            {
+                rotate_angle = 120;
+            }
+            else if (rb_rotate_angle135.Checked == true)
+            {
+                rotate_angle = 135;
+            }
+            else if (rb_rotate_angle150.Checked == true)
+            {
+                rotate_angle = 150;
+            }
+            else if (rb_rotate_angle180.Checked == true)
+            {
+                rotate_angle = 180;
+            }
+            else if (rb_rotate_angle210.Checked == true)
+            {
+                rotate_angle = 210;
+            }
+            else if (rb_rotate_angle225.Checked == true)
+            {
+                rotate_angle = 225;
+            }
+            else if (rb_rotate_angle240.Checked == true)
+            {
+                rotate_angle = 240;
+            }
+            else if (rb_rotate_angle270.Checked == true)
+            {
+                rotate_angle = 270;
+            }
+            else if (rb_rotate_angle300.Checked == true)
+            {
+                rotate_angle = 300;
+            }
+            else if (rb_rotate_angle315.Checked == true)
+            {
+                rotate_angle = 315;
+            }
+            else if (rb_rotate_angle330.Checked == true)
+            {
+                rotate_angle = 330;
+            }
+            else
+            {
+                rotate_angle = 0;
+            }
+            do_image_rotation(rotate_type, rotate_angle);
+        }
+
+        float[][] get_color_matrix(int rotate_type)
+        {
+            float degrees = (float)rotate_angle;
+            double r = degrees * System.Math.PI / 180; // degrees to radians
+
+            if (rotate_type == 1)
+            {
+                // 色彩調整矩陣 對B旋轉
+                float[][] matrix =
+                {
+                    new float[] {(float)System.Math.Cos(r),  (float)System.Math.Sin(r),  0,  0, 0},
+                    new float[] {(float)-System.Math.Sin(r),  (float)System.Math.Cos(r),  0,  0, 0},
+                    new float[] {0,  0,  1,  0, 0},
+                    new float[] {0,  0,  0,  1, 0},
+                    new float[] {0,  0,  0,  0, 1}
+                };
+                richTextBox1.Text += "c1 = " + (float)System.Math.Cos(r) + "\n";
+                richTextBox1.Text += "c2 = " + (float)System.Math.Sin(r) + "\n";
+                richTextBox1.Text += "c3 = " + (float)-System.Math.Sin(r) + "\n";
+                richTextBox1.Text += "c4 = " + (float)-System.Math.Cos(r) + "\n";
+                return matrix;
+            }
+            else if (rotate_type == 2)
+            {
+                // 色彩調整矩陣 對R旋轉
+                float[][] matrix =
+                {
+                    new float[] {1,  0,  0,  0, 0},
+                    new float[] {0,  (float)System.Math.Cos(r),  (float)System.Math.Sin(r),  0,  0},
+                    new float[] {0,  (float)-System.Math.Sin(r),  (float)System.Math.Cos(r),  0,  0},
+                    new float[] {0,  0,  0,  1, 0},
+                    new float[] {0,  0,  0,  0, 1}
+                };
+                richTextBox1.Text += "c1 = " + (float)System.Math.Cos(r) + "\n";
+                richTextBox1.Text += "c2 = " + (float)System.Math.Sin(r) + "\n";
+                richTextBox1.Text += "c3 = " + (float)-System.Math.Sin(r) + "\n";
+                richTextBox1.Text += "c4 = " + (float)-System.Math.Cos(r) + "\n";
+                return matrix;
+            }
+            else if (rotate_type == 3)
+            {
+                // 色彩調整矩陣 對G旋轉
+                float[][] matrix =
+                {
+                    new float[] {(float)System.Math.Cos(r),  0, (float)-System.Math.Sin(r),  0,  0},
+                    new float[] {0,  1,  0,  0, 0},
+                    new float[] {(float)System.Math.Sin(r),  0, (float)System.Math.Cos(r),  0,  0},
+                    new float[] {0,  0,  0,  1, 0},
+                    new float[] {0,  0,  0,  0, 1}
+                };
+                richTextBox1.Text += "c1 = " + (float)System.Math.Cos(r) + "\n";
+                richTextBox1.Text += "c2 = " + (float)System.Math.Sin(r) + "\n";
+                richTextBox1.Text += "c3 = " + (float)-System.Math.Sin(r) + "\n";
+                richTextBox1.Text += "c4 = " + (float)-System.Math.Cos(r) + "\n";
+                return matrix;
+            }
+            else
+            {
+                // 色彩調整矩陣 標準
+                float[][] matrix =
+                {
+                    new float[] {1, 0, 0, 0, 0},
+                    new float[] {0, 1, 0, 0, 0},
+                    new float[] {0, 0, 1, 0, 0},
+                    new float[] {0, 0, 0, 1, 0},
+                    new float[] {0, 0, 0, 0, 1}
+                };
+                return matrix;
+            }
+        }
+
+        void do_image_rotation(int rotate_type, int rotate_angle)
+        {
+            Bitmap bitmap1 = new Bitmap(pic_filename);
+
+            Graphics g = Graphics.FromImage(bitmap1);
+            //pictureBox1.Image = bitmap1;
+
+            Bitmap image = new Bitmap(pic_filename);
+            ImageAttributes imageAttributes = new ImageAttributes();
+            int width = image.Width;
+            int height = image.Height;
+
+            ColorMatrix colorMatrix = new ColorMatrix(get_color_matrix(rotate_type));
+
+            imageAttributes.SetColorMatrix(
+               colorMatrix,
+               ColorMatrixFlag.Default,
+               ColorAdjustType.Bitmap);
+
+            g.DrawImage(image, 0, 0, width, height);
+
+            g.DrawImage(
+               image,
+               new Rectangle(20, 240, width, height),  // destination rectangle
+                0, 0,        // upper-left corner of source rectangle
+                width,       // width of source rectangle
+                height,      // height of source rectangle
+                GraphicsUnit.Pixel,
+               imageAttributes);
+
+            pictureBox1.Image = bitmap1;
         }
     }
 }

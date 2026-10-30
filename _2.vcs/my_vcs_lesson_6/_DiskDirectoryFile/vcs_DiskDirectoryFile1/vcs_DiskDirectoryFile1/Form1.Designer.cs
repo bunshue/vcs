@@ -55,6 +55,7 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.tb_search = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cb_operation_mode = new System.Windows.Forms.CheckBox();
             this.groupBox_search = new System.Windows.Forms.GroupBox();
             this.bt_open_dir1 = new System.Windows.Forms.Button();
             this.cb_search_this_folder = new System.Windows.Forms.CheckBox();
@@ -427,6 +428,17 @@
             this.groupBox1.Size = new System.Drawing.Size(556, 337);
             this.groupBox1.TabIndex = 259;
             this.groupBox1.TabStop = false;
+            // 
+            // cb_operation_mode
+            // 
+            this.cb_operation_mode.AutoSize = true;
+            this.cb_operation_mode.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_operation_mode.Location = new System.Drawing.Point(296, 70);
+            this.cb_operation_mode.Name = "cb_operation_mode";
+            this.cb_operation_mode.Size = new System.Drawing.Size(78, 17);
+            this.cb_operation_mode.TabIndex = 320;
+            this.cb_operation_mode.Text = "簡易模式";
+            this.cb_operation_mode.UseVisualStyleBackColor = true;
             // 
             // groupBox_search
             // 
@@ -1077,6 +1089,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.cb_operation_mode);
             this.tabPage4.Controls.Add(this.bt_test7);
             this.tabPage4.Controls.Add(this.bt_setup);
             this.tabPage4.Controls.Add(this.bt_test6);
@@ -1503,6 +1516,7 @@
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             this.groupBox_folder.ResumeLayout(false);
             this.groupBox_file.ResumeLayout(false);
             this.groupBox_directory.ResumeLayout(false);
@@ -1622,6 +1636,7 @@
         private System.Windows.Forms.CheckBox cb_show_all;
         private System.Windows.Forms.ListView listView_rename_dir;
         private System.Windows.Forms.ListView listView_rename_file;
+        private System.Windows.Forms.CheckBox cb_operation_mode;
     }
 }
 

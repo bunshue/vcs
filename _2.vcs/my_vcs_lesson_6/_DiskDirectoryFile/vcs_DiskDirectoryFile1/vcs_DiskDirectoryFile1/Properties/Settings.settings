@@ -137,5 +137,8 @@
     <Setting Name="lv_rename_dir_cw3" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">120</Value>
     </Setting>
+    <Setting Name="flag_operation_mode" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
