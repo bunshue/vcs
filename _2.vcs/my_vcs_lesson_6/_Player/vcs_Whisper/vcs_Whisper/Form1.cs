@@ -75,8 +75,7 @@ namespace vcs_Whisper
         {
             //語音辨識0
 
-            richTextBox1.Clear();
-            richTextBox1.AppendText("開始進行語音辨識，請稍候...\r\n");
+            richTextBox1.Text += "開始進行語音辨識，請稍候...\n";
 
             // 1. 設定你解壓縮後的 whisper-cli.exe 路徑
             //string whisperCliPath = @"C:\App\whisper.cpp-bin\whisper-cli.exe";
@@ -85,7 +84,7 @@ namespace vcs_Whisper
             // 2. 設定你的模型檔 (.bin) 與要辨識的 WAV 檔路徑
             string modelPath = @"D:\_git\vcs\_big_files\ggml-base.bin";
             string wavFilePath = @"C:\App\whisper.cpp-bin\input_16khz.wav";
-            wavFilePath = @"D:\_git\vcs\_4.python\audio_video\老北京22222.wav";
+            wavFilePath = @"D:\_git\vcs\_4.python\audio_video\record1.wav";
 
             // 3. 組合指令參數 (-m 指定模型, -f 指定音訊檔, -l 指定語言)
             // 中文請帶入 -l zh，如果是自動偵測可以不加 -l，但指定常能提高準確度
@@ -280,6 +279,7 @@ whisper.cpp 對輸入的音訊格式要求非常嚴格：
 1. WAV 檔案格式：必須是 16-bit 轉量化、16000Hz (16kHz) 採樣率、單聲道 (Mono)。如果是從手機錄音或一般音樂檔（通常是 44.1kHz 或 48kHz），請先找工具轉檔，否則 whisper 會報錯。
 2. 語音模型：請到 Hugging Face ggerganov/whisper.cpp 下載 ggml-base.bin 或 ggml-small.bin 檔案，放至你的資料夾中。
 
+6060
 
 要取得正確的 ggml-base.bin 模型檔，請按照以下簡單步驟操作：
 
@@ -287,8 +287,6 @@ whisper.cpp 對輸入的音訊格式要求非常嚴格：
 
 1. 打開瀏覽器，前往官方推薦存放模型的 Hugging Face whisper.cpp 頁面。
 https://huggingface.co/ggerganov/whisper.cpp/tree/main
-
-https://github.com/ggml-org/whisper.cpp/releases
 
 2. 在檔案清單中，尋找名稱為 ggml-base.bin 的檔案（注意：不要選到帶有 .en 的，那是英文專用模型）。
 
@@ -300,8 +298,10 @@ ggml-base.bin	140MB
 ggml-small.bin（約 460MB）
 ggml-medium.bin（約 1.5GB）
 
+ * https://github.com/ggml-org/whisper.cpp/releases
+
 */
 
 
 
-        
+

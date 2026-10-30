@@ -264,8 +264,9 @@ namespace vcs_DiskDirectoryFile1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // 操作模式
             bool operation_mode = Properties.Settings.Default.flag_operation_mode;
-
+            cb_operation_mode.Checked = operation_mode;
             if (operation_mode == true)
             {
                 show_item_location_my_file_manager();

@@ -1,20 +1,22 @@
 
 
 
+pypi
+pypi網站可以看到目前套件的最新版本
+https://pypi.org/project/requests/
+https://pypi.org/project/twder/
+https://pypi.org/project/hellohowareyou/0.0.1/
+
+
 # ------------------------------------------------------------  # 60個
 
 PyPI Package Author
-View at:
-https://pypi.org/project/hellohowareyou/0.0.1/
-https://pypi.org/project/hellohowareyou/0.0.1/
 
 
-https://pypi.org/project/twder/
+
 
 
 # ------------------------------------------------------------  # 60個
-
-
 
 Python 取得 套件位置
 
@@ -32,8 +34,7 @@ site-packages\twder\api.py
 
 因為 Python 套件幾乎都是開放原始碼的，你安裝下來後就等於拿到了作者全部的程式。這也是為什麼 Python 特別適合研究別人是怎麼做出某個功能的。
 
-
-6060
+# ------------------------------------------------------------  # 60個
 
 怎麼那麼奇怪, 我改用台灣的股市
 
@@ -79,24 +80,16 @@ tsmc = yf.Ticker("2330.TW")
 stock_data_b = tsmc.history(period="1mo")
 print(stock_data_b.tail())
 
-
-
-
-
-
-
 # pip install yfinance
 
 import yfinance as yf
 
 ['^GSPC']: Exception('%ticker%: No price data found, symbol may be delisted (15m 2026-10-12 -> 2026-10-15)')
 
-
-
 pandas-datareader 已停止維護，透過它直接從 Yahoo Finance 抓取歷史股價通常會直接報錯。
 建議改用目前主流且穩定維護的 yfinance 套件。
 
-6060
+# ------------------------------------------------------------  # 60個
 
 yolo 停車場車牌辨識
 https://ithelp.ithome.com.tw/articles/10343595
@@ -3310,11 +3303,7 @@ Multiline	多行文字
 FileBrowse	選取檔案按鈕
 FolderBrowse	選取資料夾按鈕
 
-pypi網站可以看到目前套件的最新版本
-https://pypi.org/project/requests/
-
-pypi
-https://pypi.org/project/requests/
+# ------------------------------------------------------------  # 60個
 
 Python資料型態
 數值(Number)	-- 整數(Integers, int) 和 浮點數(Floats, float)
@@ -6317,19 +6306,15 @@ scipy>=1.7.3
 matplotlib>=3.4.3
 mock==4.0.3
 
-
 6060
 # ------------------------------------------------------------  # 60個
-
 3030
 # ------------------------------  # 30個
 
 6060
 print("------------------------------------------------------------")  # 60個
-
 3030
 print("------------------------------")  # 30個
-
 
 用兩連線分隔主題
 print("------------------------------------------------------------")  # 60個
@@ -6337,5 +6322,4 @@ print("------------------------------------------------------------")  # 60個
 
 用半連線分隔主題內之分支
 print("------------------------------")  # 30個
-
 
