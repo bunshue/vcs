@@ -117,20 +117,19 @@ ix is deprecated in v0.20.0 and replaced by loc, iloc.
 
 # ------------------------------------------------------------  # 60個
 
+目標：
+import mypythoncommon
+mypythoncommon.say()
+
 
 # ------------------------------------------------------------  # 60個
 
-
-套件名稱：hellohowareyou
-
-目標：
-import hellohowareyou
-hellohowareyou.say()
+套件名稱：mypythoncommon, 資料夾放在 D:\_git\vcs\_4.python\import_module\_PyPI_Package_Author 之下
 
 建立資料夾：
-hellohowareyou/
+_PyPI_Package_Author/
 │
-├─ hellohowareyou/
+├─ mypythoncommon/
 │  └─ __init__.py
 │
 ├─ README.md
@@ -138,7 +137,7 @@ hellohowareyou/
 └─ LICENSE
 
 第二步：寫套件程式
-hellohowareyou/__init__.py
+mypythoncommon/__init__.py
 def say():
     print("Hello, how are you")
 
@@ -153,7 +152,7 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "hellohowareyou"
+name = "mypythoncommon"
 version = "0.0.1"
 authors = [
   { name="David" }
@@ -167,7 +166,7 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 
-cd hellohowareyou
+cd mypythoncommon
 安裝：
 pip install .
 
@@ -185,8 +184,8 @@ python -m build
 產生：
 dist/
 │
-├─ hellohowareyou-0.0.1.tar.gz
-└─ hellohowareyou-0.0.1-py3-none-any.whl
+├─ mypythoncommon-0.0.1.tar.gz
+└─ mypythoncommon-0.0.1-py3-none-any.whl
 
 這兩個就是要上傳的套件。
 
@@ -203,17 +202,21 @@ pypi-xxxxxxxxxxxxxxxxxxxx
 第十步：第一次發布
 執行：
 twine upload dist/*
+或者 
+python -m twine upload dist/*
 
 打開：
-https://pypi.org/project/hellohowareyou/
+https://pypi.org/project/mypythoncommon/
+https://pypi.org/project/mypythoncommon/0.0.1/
+
 就能看到了。
 
 第十二步：全世界的人都能安裝
-pip install hellohowareyou
+pip install mypythoncommon
 
-import hellohowareyou
+import mypythoncommon
  
-hellohowareyou.say()
+mypythoncommon.say()
 
 我的建議
 你第一次不要直接發正式 PyPI。
@@ -245,20 +248,20 @@ print("Hello, how are you")
 
 
 
-hellohowareyou\
+_PyPI_Package_Author\
 │
 ├─ pyproject.toml
 ├─ README.md
 │
-└─ hellohowareyou\
+└─ mypythoncommon\
     └─ __init__.py
 
 
-Processing d:\_git\vcs\_4.python\hellohowareyou
+Processing d:\_git\vcs\_4.python\_PyPI_Package_Author
  
-Building wheel for hellohowareyou
+Building wheel for mypythoncommon
  
-Successfully installed hellohowareyou-0.0.1
+Successfully installed mypythoncommon-0.0.1
 
 
 一個資料夾
@@ -269,7 +272,7 @@ Successfully installed hellohowareyou-0.0.1
 居然就能變成：
 
 
-pip install hellohowareyou
+pip install mypythoncommon
 這種可以讓全世界安裝的東西。
 
 你目前其實已經完成了：
@@ -277,7 +280,7 @@ pip install hellohowareyou
 ✅ 建立 __init__.py
 ✅ 建立 pyproject.toml
 ✅ 本機安裝
-✅ import hellohowareyou
+✅ import mypythoncommon
 
 python -m build
 產生：
@@ -288,14 +291,30 @@ python -m build
 twine upload
 上傳到 PyPI。
 
-hellohowareyou
+mypythoncommon
 那麼全世界任何人都能在命令列上輸入：
 
-pip install hellohowareyou
+pip install mypythoncommon
 
 PyPI Package Author
 
 不是開玩笑，真的就是。
+
+3030
+
+我在pypi上建了一個新套件，要如何把舊套件移除呢?
+
+
+刪除整個套件（Project）
+登入 PyPI
+點選 Your Projects
+找到要刪除的套件
+點 Manage
+點 Settings
+捲到最下面
+找到 Delete Project
+輸入套件名稱確認
+按下刪除
 
 # ------------------------------------------------------------  # 60個
 
