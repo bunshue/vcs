@@ -1,4 +1,40 @@
 
+
+
+# ------------------------------------------------------------  # 60個
+
+PyPI Package Author
+View at:
+https://pypi.org/project/hellohowareyou/0.0.1/
+https://pypi.org/project/hellohowareyou/0.0.1/
+
+
+https://pypi.org/project/twder/
+
+
+# ------------------------------------------------------------  # 60個
+
+
+
+Python 取得 套件位置
+
+print(twder.__file__)
+C:\Users\070601\AppData\Local\Programs\Python\Python311\Lib\site-packages\twder\__init__.py
+
+Python 套件位置
+"C:\Users\070601\AppData\Local\Programs\Python\Python311\Lib\site-packages\twder\api.py"
+
+Python 套件其實就是程式碼。
+修改後只要存檔就好，執行時自然會用到新程式碼
+
+site-packages\twder\api.py
+看原始碼怎麼寫，甚至直接修改它。
+
+因為 Python 套件幾乎都是開放原始碼的，你安裝下來後就等於拿到了作者全部的程式。這也是為什麼 Python 特別適合研究別人是怎麼做出某個功能的。
+
+
+6060
+
 怎麼那麼奇怪, 我改用台灣的股市
 
 import yfinance as yf
@@ -91,6 +127,182 @@ ix is deprecated in v0.20.0 and replaced by loc, iloc.
 
 # ------------------------------------------------------------  # 60個
 
+
+套件名稱：hellohowareyou
+
+目標：
+import hellohowareyou
+hellohowareyou.say()
+
+建立資料夾：
+hellohowareyou/
+│
+├─ hellohowareyou/
+│  └─ __init__.py
+│
+├─ README.md
+├─ pyproject.toml
+└─ LICENSE
+
+第二步：寫套件程式
+hellohowareyou/__init__.py
+def say():
+    print("Hello, how are you")
+
+第三步：寫 README
+README.md
+
+建立 pyproject.toml
+這是現在 Python 套件的標準設定檔。
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hellohowareyou"
+version = "0.0.1"
+authors = [
+  { name="David" }
+]
+description = "My first Python package"
+readme = "README.md"
+requires-python = ">=3.8"
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+
+cd hellohowareyou
+安裝：
+pip install .
+
+
+第七步：安裝發布工具
+pip install build twine
+
+其中：
+build	負責打包。
+twine	負責上傳。
+
+第八步：產生發佈檔案
+在專案目錄：
+python -m build
+產生：
+dist/
+│
+├─ hellohowareyou-0.0.1.tar.gz
+└─ hellohowareyou-0.0.1-py3-none-any.whl
+
+這兩個就是要上傳的套件。
+
+第九步：建立 API Token
+登入 PyPI。
+找到：
+Account Settings
+API Tokens
+Add API Token
+產生：
+pypi-xxxxxxxxxxxxxxxxxxxx
+
+
+第十步：第一次發布
+執行：
+twine upload dist/*
+
+打開：
+https://pypi.org/project/hellohowareyou/
+就能看到了。
+
+第十二步：全世界的人都能安裝
+pip install hellohowareyou
+
+import hellohowareyou
+ 
+hellohowareyou.say()
+
+我的建議
+你第一次不要直接發正式 PyPI。
+
+先發到：
+https://test.pypi.org
+這是 PyPI 官方測試站。
+流程幾乎一樣。
+
+但不會污染正式的 PyPI。
+
+等你成功完成：
+
+建立套件
+↓
+打包
+↓
+發布
+↓
+pip install
+↓
+import 使用
+整個流程跑通一次後，再發到正式 PyPI。
+
+這是大部分 Python 開發者第一次發布套件時採用的方式。這樣即使套件只有一句：
+
+print("Hello, how are you")
+你也已經完成了「成為 PyPI 套件作者」這件事。😄
+
+
+
+hellohowareyou\
+│
+├─ pyproject.toml
+├─ README.md
+│
+└─ hellohowareyou\
+    └─ __init__.py
+
+
+Processing d:\_git\vcs\_4.python\hellohowareyou
+ 
+Building wheel for hellohowareyou
+ 
+Successfully installed hellohowareyou-0.0.1
+
+
+一個資料夾
++
+一個 __init__.py
++
+一個 pyproject.toml
+居然就能變成：
+
+
+pip install hellohowareyou
+這種可以讓全世界安裝的東西。
+
+你目前其實已經完成了：
+✅ 建立套件目錄
+✅ 建立 __init__.py
+✅ 建立 pyproject.toml
+✅ 本機安裝
+✅ import hellohowareyou
+
+python -m build
+產生：
+.whl
+.tar.gz
+以及：
+
+twine upload
+上傳到 PyPI。
+
+hellohowareyou
+那麼全世界任何人都能在命令列上輸入：
+
+pip install hellohowareyou
+
+PyPI Package Author
+
+不是開玩笑，真的就是。
 
 # ------------------------------------------------------------  # 60個
 
