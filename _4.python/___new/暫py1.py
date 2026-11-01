@@ -1,16 +1,14 @@
 
-
-
 pypi
 pypi網站可以看到目前套件的最新版本
 https://pypi.org/project/requests/
 https://pypi.org/project/twder/
 https://pypi.org/project/hellohowareyou/0.0.1/
-
+https://pypi.org/project/mypythoncommon/
+https://pypi.org/project/mypythoncommon/0.0.1/
 
 # ------------------------------------------------------------  # 60個
 
-PyPI Package Author
 
 
 
@@ -117,12 +115,16 @@ ix is deprecated in v0.20.0 and replaced by loc, iloc.
 
 # ------------------------------------------------------------  # 60個
 
-目標：
-import mypythoncommon
-mypythoncommon.say()
 
 
 # ------------------------------------------------------------  # 60個
+# ------------------------------------------------------------  # 60個
+
+PyPI Package Author
+
+------------------------------
+[1. 準備檔案]
+------------------------------
 
 套件名稱：mypythoncommon, 資料夾放在 D:\_git\vcs\_4.python\import_module\_PyPI_Package_Author 之下
 
@@ -136,16 +138,10 @@ _PyPI_Package_Author/
 ├─ pyproject.toml
 └─ LICENSE
 
-第二步：寫套件程式
+檔案內容：
 mypythoncommon/__init__.py
-def say():
-    print("Hello, how are you")
-
-第三步：寫 README
 README.md
-
-建立 pyproject.toml
-這是現在 Python 套件的標準設定檔。
+pyproject.toml  // 這是現在 Python 套件的標準設定檔，若有改版，修改此檔即可，後續編譯上傳動作相同
 
 [build-system]
 requires = ["setuptools>=61"]
@@ -166,30 +162,27 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 
-cd mypythoncommon
-安裝：
-pip install .
+------------------------------
+[2. 編譯與上傳]
+------------------------------
 
+在 D:\_git\vcs\_4.python\import_module\_PyPI_Package_Author 之下
 
-第七步：安裝發布工具
-pip install build twine
+指令1 : pip install .  // 安裝目前資料夾的套件
+指令2 : pip install build twine  // 安裝發布工具, build 負責打包, twine 負責上傳。
+指令3 : python -m build  // 產生發布檔案
 
-其中：
-build	負責打包。
-twine	負責上傳。
-
-第八步：產生發佈檔案
-在專案目錄：
-python -m build
-產生：
+在專案目錄產生：
 dist/
 │
-├─ mypythoncommon-0.0.1.tar.gz
-└─ mypythoncommon-0.0.1-py3-none-any.whl
+├─ mypythoncommon-0.0.1-py3-none-any.whl
+└─ mypythoncommon-0.0.1.tar.gz
 
 這兩個就是要上傳的套件。
 
-第九步：建立 API Token
+------------------------------
+[3. 在PYPI上建立API Token]
+------------------------------
 登入 PyPI。
 找到：
 Account Settings
@@ -198,25 +191,39 @@ Add API Token
 產生：
 pypi-xxxxxxxxxxxxxxxxxxxx
 
+------------------------------
+[4. 發布]
+------------------------------
+指令4 : twine upload dist/*
+或者
+指令4 : python -m twine upload dist/*
+或者
+指令4 : python -m twine upload dist/* --verbose
 
-第十步：第一次發布
-執行：
-twine upload dist/*
-或者 
-python -m twine upload dist/*
+輸入 API token
 
 打開：
 https://pypi.org/project/mypythoncommon/
 https://pypi.org/project/mypythoncommon/0.0.1/
-
+https://pypi.org/project/mypythoncommon/0.0.2/
+https://pypi.org/project/mypythoncommon/0.0.3/
 就能看到了。
 
-第十二步：全世界的人都能安裝
-pip install mypythoncommon
+------------------------------
+[5. 使用方法]
+------------------------------
 
+pip install mypythoncommon
 import mypythoncommon
- 
 mypythoncommon.say()
+
+安裝後, 套件位置 :
+Tango
+C:\Users\bunsh\AppData\Roaming\Python\Python312\site-packages\mypythoncommon
+
+------------------------------
+[6. 其他]
+------------------------------
 
 我的建議
 你第一次不要直接發正式 PyPI。
@@ -225,7 +232,6 @@ mypythoncommon.say()
 https://test.pypi.org
 這是 PyPI 官方測試站。
 流程幾乎一樣。
-
 但不會污染正式的 PyPI。
 
 等你成功完成：
@@ -246,8 +252,6 @@ import 使用
 print("Hello, how are you")
 你也已經完成了「成為 PyPI 套件作者」這件事。😄
 
-
-
 _PyPI_Package_Author\
 │
 ├─ pyproject.toml
@@ -256,54 +260,17 @@ _PyPI_Package_Author\
 └─ mypythoncommon\
     └─ __init__.py
 
-
 Processing d:\_git\vcs\_4.python\_PyPI_Package_Author
- 
 Building wheel for mypythoncommon
- 
 Successfully installed mypythoncommon-0.0.1
 
+# ------------------------------  # 30個
 
-一個資料夾
-+
-一個 __init__.py
-+
-一個 pyproject.toml
-居然就能變成：
-
-
-pip install mypythoncommon
-這種可以讓全世界安裝的東西。
-
-你目前其實已經完成了：
-✅ 建立套件目錄
-✅ 建立 __init__.py
-✅ 建立 pyproject.toml
-✅ 本機安裝
-✅ import mypythoncommon
-
-python -m build
-產生：
-.whl
-.tar.gz
-以及：
-
-twine upload
-上傳到 PyPI。
-
-mypythoncommon
-那麼全世界任何人都能在命令列上輸入：
-
-pip install mypythoncommon
-
-PyPI Package Author
-
-不是開玩笑，真的就是。
-
-3030
+------------------------------
+[6. 刪除 pypi 套件]
+------------------------------
 
 我在pypi上建了一個新套件，要如何把舊套件移除呢?
-
 
 刪除整個套件（Project）
 登入 PyPI
@@ -316,6 +283,9 @@ PyPI Package Author
 輸入套件名稱確認
 按下刪除
 
+Note : 之後重新建立同名套件時，也不能重複使用之前發過的檔名與版本號
+
+# ------------------------------------------------------------  # 60個
 # ------------------------------------------------------------  # 60個
 
 import sys
@@ -6341,4 +6311,14 @@ print("------------------------------------------------------------")  # 60個
 
 用半連線分隔主題內之分支
 print("------------------------------")  # 30個
+
+6060
+------------------------------------------------------------
+3030
+------------------------------
+
+
+
+
+
 
