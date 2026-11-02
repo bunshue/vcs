@@ -60,10 +60,6 @@ print("------------------------------------------------------------")  # 60個
 • spread（漲跌價差）：當天收盤價與前一個交易日收盤價的差額（有正負號或由其他欄位標示漲跌）。
 • Trading_turnover（成交筆數）：當天這檔股票總共撮合成功了多少筆交易。
 
-欄位依序代表：
-“日期”    、“股票代碼”、“成交股數”、“成交金額”、
-“開盤價”  、“最高價”  、“最低價”  、“收盤價”  、
-“漲跌價差”、“成交筆數”
 """
 
 print("取得資料 日線資料")
@@ -78,21 +74,25 @@ df = dl.taiwan_stock_daily(
 # 取得資料, 自己分析
 print("列印取得的日線資料, 前5筆")
 print(df.head())
-print("df的欄位 : ", df.columns.tolist())
 print("df的形狀 : ", df.shape)
+print("df的欄位 : ", df.columns.tolist())
+
+# df的10個欄位
+# ['date', 'stock_id', 'Trading_Volume', 'Trading_money', 'open',
+#  'max', 'min', 'close', 'spread', 'Trading_turnover']
+#“日期”  、“股票代碼”、“成交股數”、“成交金額”、“開盤價”、
+#“最高價”、“最低價”  、“收盤價”  、 "漲跌價差”、“成交筆數”
 
 day = df["date"].astype(str)  # 日期
-_open = df["open"].astype(float)  # 開盤價 Open
-close = df["close"].astype(float)  # 收盤價 Close
-_max = df["max"].astype(float)  # 最高價 High
-_min = df["min"].astype(float)  # 最低價 Low
-
-
-spread = df["spread"].astype(float)  # 買賣價差（Spread）
+stock_id = df["stock_id"].astype(str)  # 股票代碼
 volume = df["Trading_Volume"].astype(float)  # 成交量（Trading_Volume）
 money = df["Trading_money"].astype(float)  # 成交金額（Trading_money）
+_open = df["open"].astype(float)  # 開盤價 Open
+_max = df["max"].astype(float)  # 最高價 High
+_min = df["min"].astype(float)  # 最低價 Low
+close = df["close"].astype(float)  # 收盤價 Close
+spread = df["spread"].astype(float)  # 買賣價差（Spread）
 turnover = df["Trading_turnover"].astype(float)  # 交易筆數（Trading_turnover）
-
 
 plt.plot(day, _open, "s-", color="r", label="開盤價  Open Price")
 plt.plot(day, close, "s-", color="g", label="收盤價 Close Price")
