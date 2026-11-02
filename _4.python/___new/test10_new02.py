@@ -81,14 +81,14 @@ win.mainloop()
 """
 
 
-
 import tkinter as tk
+
 win = tk.Tk()
-win.geometry('200x100')
+win.geometry("200x100")
 radioValue = tk.IntVar()
-rdioOne = tk.Radiobutton(win, text='January',variable=radioValue, value=0)
-rdioTwo = tk.Radiobutton(win, text='Febuary',variable=radioValue, value=1)
-rdioThree = tk.Radiobutton(win, text='March',variable=radioValue, value=2)
+rdioOne = tk.Radiobutton(win, text="January", variable=radioValue, value=0)
+rdioTwo = tk.Radiobutton(win, text="Febuary", variable=radioValue, value=1)
+rdioThree = tk.Radiobutton(win, text="March", variable=radioValue, value=2)
 rdioOne.grid(column=0, row=0, sticky="W")
 rdioTwo.grid(column=0, row=1, sticky="W")
 rdioThree.grid(column=0, row=2, sticky="W")
@@ -293,30 +293,30 @@ with tempfile.NamedTemporaryFile() as ntf:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-aa= 120 * 1.78 +210 * 2.55 +170 * 3.80 +200 * 5.14 +300 * 6.44
-aa = aa+75
+aa = 120 * 1.78 + 210 * 2.55 + 170 * 3.80 + 200 * 5.14 + 300 * 6.44
+aa = aa + 75
 print("一次1000度 : ", aa)
-print(aa/1000)
+print(aa / 1000)
 
-aa= 100 * 1.78
-aa = aa+75
+aa = 100 * 1.78
+aa = aa + 75
 print("一次100度 : ", aa)
-print(aa/100)
+print(aa / 100)
 
 
 sys.exit()
 
 
-#假設每戶用電300度
-aa= 120 * 1.78 +180 * 2.55 +75
+# 假設每戶用電300度
+aa = 120 * 1.78 + 180 * 2.55 + 75
 print(aa)
-print(aa*2)
-print(aa*2/600)
+print(aa * 2)
+print(aa * 2 / 600)
 
-#假設一戶用電600度
-aa= 120 * 1.78 +210 * 2.55 +170 * 3.80 +100 * 5.14 +75
+# 假設一戶用電600度
+aa = 120 * 1.78 + 210 * 2.55 + 170 * 3.80 + 100 * 5.14 + 75
 print(aa)
-print(aa/600)
+print(aa / 600)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -326,9 +326,11 @@ import time
 import ctypes
 import requests
 
+
 def show_message(title, text):
     # Windows 彈出訊息框
     ctypes.windll.user32.MessageBoxW(0, text, title, 1)
+
 
 def check_internet():
     try:
@@ -337,6 +339,7 @@ def check_internet():
         return True
     except requests.RequestException:
         return False
+
 
 def main():
     last_status = None
@@ -354,6 +357,7 @@ def main():
         last_status = status
         time.sleep(5)  # 每 5 秒檢查一次
 
+
 if __name__ == "__main__":
     main()
 
@@ -366,5 +370,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-

@@ -32,26 +32,70 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+import FinMind
+
+print(FinMind.__file__)
+print(FinMind.__version__)
+print(dir(FinMind))
+print(dir(FinMind.data))
+
 from FinMind.data import DataLoader
 import mplfinance as mpf
 
-# ==========================================
-# 步驟 1：抓取資料
-# ==========================================
+"""
+個股日收盤行情（Daily Stock Trading Quotes）標準資料格式
+['date', 'stock_id', 'Trading_Volume', 'Trading_money', 'open', 'max', 'min', 'close', 'spread', 'Trading_turnover']
+• date（日期）：交易當天的日期（在台股資料中，通常呈現為民國紀年如 112/10/24 或西元紀年 20231024）。
+• stock_id（證券代號）：股票的四碼或六碼代號（例如 2330 代表台積電）。
+• Trading_Volume（成交股數）：當天這檔股票總共成交了多少股（注意：台股 1 張 = 1,000 股）。
+• Trading_money（成交金額）：當天總成交的累計新台幣金額。
+• open（開盤價）：當天早上 9:00 開盤的第一筆成交價格。
+• max（最高價）：當天盤中成交的最高價格。
+• min（最低價）：當天盤中成交的最低價格。
+• close（收盤價）：當天下午 1:30 收盤時的最後一筆成交價格。
+• spread（漲跌價差）：當天收盤價與前一個交易日收盤價的差額（有正負號或由其他欄位標示漲跌）。
+• Trading_turnover（成交筆數）：當天這檔股票總共撮合成功了多少筆交易。
+
+開盤價(Open)
+最高價(High)
+最低價(Low)
+收盤價(Close)
+買賣價差（Spread）
+成交量（Trading_Volume）
+成交金額（Trading_money）
+交易筆數（Trading_turnover）
+
+欄位依序代表：
+“日期”    、“股票代碼”、“成交股數”、“成交金額”、
+“開盤價”  、“最高價”  、“最低價”  、“收盤價”  、
+“漲跌價差”、“成交筆數”
+"""
+
+print("取得資料 日線資料")
+print("抓取台積電 (2330) 2026年9月到10月的日線資料")
+
 dl = DataLoader()  # 初始化資料載入器
 
-# 抓取台積電 (2330) 2026年9月到10月的日線資料
 df = dl.taiwan_stock_daily(
-    stock_id="2330", start_date="2026-08-01", end_date="2026-10-28"  # 稍微拉長時間，畫均線才不會斷掉
+    stock_id="2330", start_date="2026-08-01", end_date="2026-11-01"  # 稍微拉長時間，畫均線才不會斷掉
 )
 
+print("列印取得的日線資料, 前5筆")
 print(df.head())
+
+print("df的欄位 : ", df.columns.tolist())
+print("df的形狀 : ", df.shape)
 
 # ==========================================
 # 步驟 2：數據分析 (資料處理與計算)
 # ==========================================
 # 1. 轉換欄位名稱以符合 mplfinance 的標準格式 (大小寫需相符)
 # 1. 自動偵測並轉換欄位名稱 (相容 FinMind 不同版本的欄位名)
+
+# 修改欄位名稱
+# "date"=>"Date", "open"=>"Open", "max"=>"High", "min"=>"Low", "close"=>"Close"
+
+print("df的欄位 : ", df.columns.tolist())
 
 rename_dict = {
     "date": "Date",
@@ -63,14 +107,15 @@ rename_dict = {
 
 # 判斷成交量欄位到底是叫 Trading_Volume 還是 volume
 if "Trading_Volume" in df.columns:
+    print("xxxxx111")
     rename_dict["Trading_Volume"] = "Volume"
 elif "volume" in df.columns:
+    print("xxxxx222")
     rename_dict["volume"] = "Volume"
 
-df = df.rename(columns=rename_dict)
+df = df.rename(columns=rename_dict)  # 修改欄位名稱
 
-# [偵錯小幫手] 印出目前的欄位名稱，確保有成功換成 Open, High, Low, Close, Volume
-print("目前資料表的欄位有：", df.columns.tolist())
+print("df的欄位 : ", df.columns.tolist())
 
 # 2. 將 Date 轉為時間格式，並設定為索引 (Index)
 df["Date"] = pd.to_datetime(df["Date"])
@@ -127,19 +172,205 @@ mpf.plot(
     ylabel_lower="成交量",
 )
 
+print("------------------------------------------------------------")  # 60個
+
+# 自動標記買賣訊號程式碼
+
+import mplfinance as mpf
+
+print("取得資料 日線資料")
+print("抓取台積電 (2330) 2026年9月到10月的日線資料")
+
+dl = DataLoader()  # 初始化資料載入器
+
+df = dl.taiwan_stock_daily(
+    stock_id="2330", start_date="2026-08-01", end_date="2026-10-28"  # 稍微拉長時間，畫均線才不會斷掉
+)
+
+print("列印取得的日線資料, 前5筆")
+print(df.head())
+
+
+# ==========================================
+# 步驟 2：數據分析 (資料處理與計算買賣訊號)
+# ==========================================
+# 1. 自動偵測並轉換欄位名稱 (延用先前的安全寫法)
+rename_dict = {
+    "date": "Date",
+    "open": "Open",
+    "max": "High",
+    "min": "Low",
+    "close": "Close",
+}
+if "Trading_Volume" in df.columns:
+    rename_dict["Trading_Volume"] = "Volume"
+elif "volume" in df.columns:
+    rename_dict["volume"] = "Volume"
+df = df.rename(columns=rename_dict)
+
+df["Date"] = pd.to_datetime(df["Date"])
+df.set_index("Date", inplace=True)
+
+# 2. 計算 5日 與 20日 均線
+df["MA5"] = df["Close"].rolling(window=5).mean()
+df["MA20"] = df["Close"].rolling(window=20).mean()
+
+# 3. 判斷交叉訊號
+# 建立一個訊號欄位：1 代表黃金交叉(買)，-1 代表死亡交叉(賣)
+df["Signal"] = 0
+
+# 找出 5MA 大於 20MA 的日子
+# 這行會幫我們標示狀態。如果今天短均線在長均線上方就給 1，反之給 -1
+df["Signal"] = np.where(df["MA5"] > df["MA20"], 1, -1)
+
+# 透過與前一天的訊號做對比 (diff)，找出剛好「發生交叉」的那一天
+# diff() 結果為 2 代表從 -1 變成 1 (黃金交叉)；-2 代表從 1 變成 -1 (死亡交叉)
+# 這是找出「變盤日」的神奇函數。如果昨天是 -1（空頭），今天是 1（多頭），相減得到的差值就是 2。這代表趨勢反轉，今天就是黃金交叉買點。
+
+df["Position_Change"] = df["Signal"].diff()
+
+# 4. 建立繪圖專用的買賣點價格陣列 (如果沒訊號，就填上 NaN 否則會畫在 0 的位置)
+# 我們故意把標記箭頭畫在 K 線的外面一點點（下方 2% 或上方 2%），這樣箭頭就不會跟 K 線重疊在一起，視覺上更清晰。
+df["Buy_Price"] = np.where(
+    df["Position_Change"] == 2, df["Low"] * 0.98, np.nan
+)  # 畫在最低價下方 2% 處
+df["Sell_Price"] = np.where(
+    df["Position_Change"] == -2, df["High"] * 1.02, np.nan
+)  # 畫在最高價上方 2% 處
+
+print("--- 有觸發買賣訊號的日子 ---")
+print(
+    df[df["Position_Change"].isin([2, -2])][["Close", "MA5", "MA20", "Position_Change"]]
+)
+
+# ==========================================
+# 步驟 3：繪製 K 線圖 (包含買賣訊號箭頭)
+# ==========================================
+# 1. 樣式與顏色設定
+my_color = mpf.make_marketcolors(
+    up="red", down="green", edge="inherit", wick="inherit", volume="inherit"
+)
+my_style = mpf.make_mpf_style(
+    marketcolors=my_color,
+    gridstyle="--",
+    rc={"font.family": ["Microsoft JhengHei", "Arial Unicode MS", "sans-serif"]},
+)
+
+# 2. 【核心】建立額外的買賣點圖層 (addplot)
+plots = [
+    # 買點：紅色朝上箭頭 (scatter)
+    mpf.make_addplot(
+        df["Buy_Price"], type="scatter", markersize=100, marker="^", color="red"
+    ),
+    # 賣點：綠色朝下箭頭 (scatter)
+    mpf.make_addplot(
+        df["Sell_Price"], type="scatter", markersize=100, marker="v", color="green"
+    ),
+]
+
+# 3. 繪製中文 K 線圖，並把 plots 傳進去
+mpf.plot(
+    df,
+    type="candle",
+    mav=(5, 20),
+    volume=True,
+    style=my_style,
+    addplot=plots,  # 加入自訂的買賣箭頭圖層
+    title="台積電 (2330) 均線策略買賣訊號圖",
+    ylabel="股價 (元)",
+    ylabel_lower="成交量",
+)
+
+print("------------------------------------------------------------")  # 60個
+
+# ==========================================
+# 步驟 4：量化策略回測 (計算總報酬率)
+# ==========================================
+
+# 初始化帳戶參數
+initial_capital = 1000000.0  # 初始資金 100 萬
+cash = initial_capital  # 目前手頭現金
+stock_shares = 0.0  # 目前持有股數
+history_total_value = []  # 紀錄每天的帳戶總價值 (淨值走勢)
+trade_log = []  # 紀錄交易明細
+
+print("========== 交易明細紀錄 ==========")
+
+# 逐日模擬交易
+for date, row in df.iterrows():
+    current_close = row["Close"]
+    signal = row["Position_Change"]
+
+    # 狀況一：觸發買進訊號 (黃金交叉) 且目前手上沒股票
+    if signal == 2 and stock_shares == 0:
+        stock_shares = cash / current_close
+        cash = 0
+        trade_log.append(
+            f"【買進】{date.strftime('%Y-%m-%d')} | 價格: {current_close:.1f} 元 | 全額買入 {stock_shares:.1f} 股"
+        )
+        print(trade_log[-1])
+
+    # 狀況二：觸發賣出訊號 (死亡交叉) 且目前手上有股票
+    elif signal == -2 and stock_shares > 0:
+        cash = stock_shares * current_close
+        trade_log.append(
+            f"【賣出】{date.strftime('%Y-%m-%d')} | 價格: {current_close:.1f} 元 | 賣出拿回現金: ${cash:,.0f} 元"
+        )
+        stock_shares = 0
+        print(trade_log[-1])
+
+    # 每日結算：計算當天帳戶總價值 (現金 + 股票市值)
+    current_value = cash + (stock_shares * current_close)
+    history_total_value.append(current_value)
+
+print("==================================\n")
+
+# 將資產歷史數據塞回 DataFrame 中，方便繪圖
+df["Total_Value"] = history_total_value
+
+# ==========================================
+# 步驟 5：計算最終績效指標
+# ==========================================
+final_value = df["Total_Value"].iloc[-1]
+total_return_rate = ((final_value - initial_capital) / initial_capital) * 100
+
+# 計算同時期「買進持有的對照組報酬率」 (Buy and Hold)
+buy_and_hold_return = (
+    (df["Close"].iloc[-1] - df["Close"].iloc[0]) / df["Close"].iloc[0]
+) * 100
+
+print("========== 策略績效結算 ==========")
+print(f"💰 初始資金： ${initial_capital:,.0f} 元")
+print(f"💰 期末資產： ${final_value:,.0f} 元")
+print(f"📈 策略總報酬率： {total_return_rate:.2f} %")
+print(f"📊 同期純持有的報酬率 (大盤對照組)： {buy_and_hold_return:.2f} %")
+print("==================================")
+
+# ==========================================
+# 步驟 6：繪製資產淨值走勢圖 (產出成果圖)
+# ==========================================
+# 呼叫我們先前設定好的中文字型設定，確保圖片能顯示中文
+plt.figure(figsize=(10, 5))
+plt.plot(df.index, df["Total_Value"], label="均線策略資產淨值", color="blue", linewidth=2)
+plt.axhline(y=initial_capital, color="red", linestyle="--", label="初始資金 (100萬)")
+
+plt.title("均線交叉策略 - 帳戶資產淨值走勢圖 (Equity Curve)", fontsize=14)
+plt.xlabel("日期", fontsize=12)
+plt.ylabel("帳戶總價值 (元)", fontsize=12)
+plt.grid(True, linestyle="--", alpha=0.6)
+plt.legend(loc="upper left")
+
+# 呼叫這行將資產圖彈出來
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 sys.exit()
 
-
-# 6060
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-"""
 # 127筆資料 7 欄位
 df = pd.read_csv("data/alphabet_stock_data.csv")
-print(df.shape)
+print("df的形狀 : ", df.shape)
 
 start_date = pd.to_datetime("2020-4-1")
 end_date = pd.to_datetime("2020-9-30")
@@ -147,7 +378,7 @@ end_date = pd.to_datetime("2020-9-30")
 df["Date"] = pd.to_datetime(df["Date"])
 print(df["Date"].shape)
 new_df = (df["Date"] >= start_date) & (df["Date"] <= end_date)
-print(new_df.shape)
+print("new_df的形狀 : ", new_df.shape)
 
 df1 = df.loc[new_df]
 stock_data = df1.set_index("Date")
@@ -156,7 +387,8 @@ plt.legend(loc="best")
 plt.suptitle("Alphabet Inc.字母控股 股價")
 
 plt.show()
-"""
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -179,9 +411,8 @@ import yfinance as yf
 # 下載 0050.TW 的歷史股價資料
 df = yf.download("2330.TW", start="2026-01-01", end="2026-10-01")
 
-# 顯示前 5 筆資料
+print("列印取得的日線資料, 前5筆")
 print(df.head())
-
 
 import yfinance as yf
 
@@ -259,12 +490,17 @@ print("------------------------------")  # 30個
 
 """
 使用 FinRL 進行特徵工程
-股市中有很多常見的指標，這些技術指標像是移動平均收斂散度（MACD）、相對強弱指數（RSI）等等。因為很多人使用這些指標，導致股票的波動很多時候會對這些指標有反應，因此在訓練時，可以考慮將這些指標做為特徵丟給網路當作輸入；這邊使用FinRL的API可以很輕鬆地取得這些指標數值來做特徵工程。
+股市中有很多常見的指標，這些技術指標像是移動平均收斂散度（MACD）、相對強弱指數（RSI）等等。
+因為很多人使用這些指標，導致股票的波動很多時候會對這些指標有反應，
+因此在訓練時，可以考慮將這些指標做為特徵丟給網路當作輸入；
+這邊使用FinRL的API可以很輕鬆地取得這些指標數值來做特徵工程。
 
 步驟 1: 做特徵工程前對，數據格式做預處理
-在應用特徵工程之前，我們需要對數據進行一些預處理步驟，包括添加必要的欄位並將欄位名稱轉換為小寫，以符合 FeatureEngineer 的預期格式。
+在應用特徵工程之前，我們需要對數據進行一些預處理步驟，
+包括添加必要的欄位並將欄位名稱轉換為小寫，以符合 FeatureEngineer 的預期格式。
 
-在進行特徵工程之前，我們需要確保數據框包含 date 和 tic 欄位。date 欄位用來表示時間戳，而 tic 欄位用來表示股票的代號。
+在進行特徵工程之前，我們需要確保數據框包含 date 和 tic 欄位。
+date 欄位用來表示時間戳，而 tic 欄位用來表示股票的代號。
 """
 # 添加必要的欄位
 sp500_data = sp500_data.reset_index()  # 重設索引，將日期移到普通欄位
@@ -281,6 +517,7 @@ sp500_data.columns = [col.lower() for col in sp500_data.columns]
 print(sp500_data.head())
 
 print("------------------------------")  # 30個
+
 
 """
 步驟 2: 使用 FeatureEngineer 進行特徵工程
@@ -433,6 +670,7 @@ yf.pdr_override()
 # 恆生銀行 0011.HK
 
 df = web.get_data_yahoo("AAPL", start="2018-01-01", end="2018-12-02")  # 下載股價
+print("列印取得的日線資料, 前5筆")
 print(df.head())
 
 print("------------------------------------------------------------")  # 60個
@@ -441,13 +679,13 @@ print("------------------------------------------------------------")  # 60個
 df = yf.download("2330.TW", start="2021-01-01", end="2022-12-31")
 
 print("最高最低點、開盤收盤價、調整收盤價以及成交量的資訊")
+
+print("列印資料, 前5筆")
 print(df.head())
 
 print("只取調整收盤價")
-
 P = df["Adj Close"]
 print(P.head())
-
 
 P.plot()
 
@@ -491,7 +729,9 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 df = yf.download("2330.TW")
-print(df.shape)
+print("df的形狀 : ", df.shape)
+
+print("列印取得的日線資料, 前5筆")
 print(df.head())
 
 print("------------------------------------------------------------")  # 60個
@@ -502,7 +742,9 @@ start = datetime.datetime.now() - datetime.timedelta(days=60)
 # 結束時間 為 現在
 end = datetime.date.today()
 df = yf.download("2330.TW", start, end)
-print(df.shape)
+print("df的形狀 : ", df.shape)
+
+print("列印取得的日線資料, 前5筆")
 print(df.head())
 
 print("------------------------------------------------------------")  # 60個
@@ -638,7 +880,8 @@ print("------------------------------------------------------------")  # 60個
 """
 使用 yfinance 抓取 S&P 500 的 15 分鐘資料
 下面是一個具體範例，從 Yahoo Finance 下載 S&P 500 指數在指定兩天內的每 15 分鐘的歷史資料。
-這些數據將包括開盤價（Open）、最高價（High）、最低價（Low）、收盤價（Close）、調整後的收盤價（Adj Close）以及成交量（Volume）。
+這些數據將包括開盤價（Open）、最高價（High）、最低價（Low）、收盤價（Close）、
+調整後的收盤價（Adj Close）以及成交量（Volume）。
 
 start_date 和 end_date: 我們選擇了 2 天的日期範圍，這適合使用 15m 這樣的高頻資料。
 interval: 15m 代表每 15 分鐘抓取一次資料，適合短期交易分析。
@@ -692,12 +935,17 @@ for ticker in tickers:
 print("------------------------------")  # 30個
 """
 使用 FinRL 進行特徵工程
-股市中有很多常見的指標，這些技術指標像是移動平均收斂散度（MACD）、相對強弱指數（RSI）等等。因為很多人使用這些指標，導致股票的波動很多時候會對這些指標有反應，因此在訓練時，可以考慮將這些指標做為特徵丟給網路當作輸入；這邊使用FinRL的API可以很輕鬆地取得這些指標數值來做特徵工程。
+股市中有很多常見的指標，這些技術指標像是移動平均收斂散度（MACD）、相對強弱指數（RSI）等等。
+因為很多人使用這些指標，導致股票的波動很多時候會對這些指標有反應，
+因此在訓練時，可以考慮將這些指標做為特徵丟給網路當作輸入；
+這邊使用FinRL的API可以很輕鬆地取得這些指標數值來做特徵工程。
 
 步驟 1: 做特徵工程前對，數據格式做預處理
-在應用特徵工程之前，我們需要對數據進行一些預處理步驟，包括添加必要的欄位並將欄位名稱轉換為小寫，以符合 FeatureEngineer 的預期格式。
+在應用特徵工程之前，我們需要對數據進行一些預處理步驟，
+包括添加必要的欄位並將欄位名稱轉換為小寫，以符合 FeatureEngineer 的預期格式。
 
-在進行特徵工程之前，我們需要確保數據框包含 date 和 tic 欄位。date 欄位用來表示時間戳，而 tic 欄位用來表示股票的代號。
+在進行特徵工程之前，我們需要確保數據框包含 date 和 tic 欄位。
+date 欄位用來表示時間戳，而 tic 欄位用來表示股票的代號。
 """
 
 # 錯在此
