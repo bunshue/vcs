@@ -1,4 +1,6 @@
 
+
+
 pypi
 pypi網站可以看到目前套件的最新版本
 https://pypi.org/project/requests/
@@ -9,10 +11,17 @@ https://pypi.org/project/mypythoncommon/0.0.1/
 
 # ------------------------------------------------------------  # 60個
 
+取得圖表的資料的範圍
 
+# 1. 取得當前的 axes 物件
+ax = plt.gca()  # gca 代表 Get Current Axes
 
+# 2. 獲取目前圖表的真實資料座標邊界
+x_min, x_max = ax.get_xlim()
+y_min, y_max = ax.get_ylim()
 
-
+print(f"目前圖表的 X 軸資料範圍是: {x_min} 到 {x_max}")
+print(f"目前圖表的 Y 軸資料範圍是: {y_min} 到 {y_max}")
 
 # ------------------------------------------------------------  # 60個
 

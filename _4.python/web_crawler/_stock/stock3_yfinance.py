@@ -31,6 +31,8 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
+print("使用 FinMind ST")
+print("------------------------------------------------------------")  # 60個
 
 import FinMind
 
@@ -41,6 +43,8 @@ print(dir(FinMind.data))
 
 from FinMind.data import DataLoader
 import mplfinance as mpf
+
+print("------------------------------------------------------------")  # 60個
 
 """
 個股日收盤行情（Daily Stock Trading Quotes）標準資料格式
@@ -55,15 +59,6 @@ import mplfinance as mpf
 • close（收盤價）：當天下午 1:30 收盤時的最後一筆成交價格。
 • spread（漲跌價差）：當天收盤價與前一個交易日收盤價的差額（有正負號或由其他欄位標示漲跌）。
 • Trading_turnover（成交筆數）：當天這檔股票總共撮合成功了多少筆交易。
-
-開盤價(Open)
-最高價(High)
-最低價(Low)
-收盤價(Close)
-買賣價差（Spread）
-成交量（Trading_Volume）
-成交金額（Trading_money）
-交易筆數（Trading_turnover）
 
 欄位依序代表：
 “日期”    、“股票代碼”、“成交股數”、“成交金額”、
@@ -80,20 +75,53 @@ df = dl.taiwan_stock_daily(
     stock_id="2330", start_date="2026-08-01", end_date="2026-11-01"  # 稍微拉長時間，畫均線才不會斷掉
 )
 
+# 取得資料, 自己分析
 print("列印取得的日線資料, 前5筆")
 print(df.head())
-
 print("df的欄位 : ", df.columns.tolist())
 print("df的形狀 : ", df.shape)
+
+day = df["date"].astype(str)  # 日期
+_open = df["open"].astype(float)  # 開盤價 Open
+close = df["close"].astype(float)  # 收盤價 Close
+_max = df["max"].astype(float)  # 最高價 High
+_min = df["min"].astype(float)  # 最低價 Low
+
+
+spread = df["spread"].astype(float)  # 買賣價差（Spread）
+volume = df["Trading_Volume"].astype(float)  # 成交量（Trading_Volume）
+money = df["Trading_money"].astype(float)  # 成交金額（Trading_money）
+turnover = df["Trading_turnover"].astype(float)  # 交易筆數（Trading_turnover）
+
+
+plt.plot(day, _open, "s-", color="r", label="開盤價  Open Price")
+plt.plot(day, close, "s-", color="g", label="收盤價 Close Price")
+plt.plot(day, _max, "s", color="r", label="最高價 Max")
+plt.plot(day, _min, "s", color="g", label="最低價 Min")
+
+print("df之大小")
+M, N = df.shape
+print(df.shape)
+print("df之大小", M, "X", N)
+for idx in range(M):
+    y_max = df["max"].iloc[idx]
+    y_min = df["min"].iloc[idx]
+    plt.plot([idx, idx], [y_max, y_min], color="red", linewidth=1.5, zorder=5)
+    # print(idx, y_max, y_min)
+    plt.scatter(idx, y_max, color="r", marker="s", s=40, zorder=5)
+    plt.scatter(idx, y_min, color="g", marker="s", s=40, zorder=5)
+
+plt.legend(loc="best", fontsize=16)
+
+plt.show()
 
 # ==========================================
 # 步驟 2：數據分析 (資料處理與計算)
 # ==========================================
-# 1. 轉換欄位名稱以符合 mplfinance 的標準格式 (大小寫需相符)
-# 1. 自動偵測並轉換欄位名稱 (相容 FinMind 不同版本的欄位名)
 
-# 修改欄位名稱
-# "date"=>"Date", "open"=>"Open", "max"=>"High", "min"=>"Low", "close"=>"Close"
+# 轉換欄位名稱以符合 mplfinance 的標準格式 (大小寫需相符)
+# 自動偵測並轉換欄位名稱 (相容 FinMind 不同版本的欄位名)
+# "date"改"Date", "open"改"Open", "max"改"High", "min"改"Low", "close"改"Close"
 
 print("df的欄位 : ", df.columns.tolist())
 
@@ -108,10 +136,10 @@ rename_dict = {
 # 判斷成交量欄位到底是叫 Trading_Volume 還是 volume
 if "Trading_Volume" in df.columns:
     print("xxxxx111")
-    rename_dict["Trading_Volume"] = "Volume"
+    rename_dict["Trading_Volume"] = "Volume"  # "Trading_Volume"改"Volume"
 elif "volume" in df.columns:
     print("xxxxx222")
-    rename_dict["volume"] = "Volume"
+    rename_dict["volume"] = "Volume"  # "volume"改"Volume"
 
 df = df.rename(columns=rename_dict)  # 修改欄位名稱
 
@@ -190,11 +218,16 @@ df = dl.taiwan_stock_daily(
 print("列印取得的日線資料, 前5筆")
 print(df.head())
 
-
 # ==========================================
 # 步驟 2：數據分析 (資料處理與計算買賣訊號)
 # ==========================================
-# 1. 自動偵測並轉換欄位名稱 (延用先前的安全寫法)
+
+# 轉換欄位名稱以符合 mplfinance 的標準格式 (大小寫需相符)
+# 自動偵測並轉換欄位名稱 (相容 FinMind 不同版本的欄位名)
+# "date"改"Date", "open"改"Open", "max"改"High", "min"改"Low", "close"改"Close"
+
+print("df的欄位 : ", df.columns.tolist())
+
 rename_dict = {
     "date": "Date",
     "open": "Open",
@@ -202,6 +235,7 @@ rename_dict = {
     "min": "Low",
     "close": "Close",
 }
+
 if "Trading_Volume" in df.columns:
     rename_dict["Trading_Volume"] = "Volume"
 elif "volume" in df.columns:
@@ -360,10 +394,10 @@ plt.ylabel("帳戶總價值 (元)", fontsize=12)
 plt.grid(True, linestyle="--", alpha=0.6)
 plt.legend(loc="upper left")
 
-# 呼叫這行將資產圖彈出來
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
+print("使用 FinMind SP")
 print("------------------------------------------------------------")  # 60個
 
 sys.exit()
@@ -691,11 +725,11 @@ P.plot()
 
 plt.show()
 
-
 # 我們看一下大家最關心的報酬率，報酬率公式：(Pt−Pt−1)/Pt−1
 
 r = P.diff() / P
 r.plot()
+
 plt.show()
 
 print("最後一百筆資料")
@@ -704,19 +738,19 @@ r[-100:].plot()
 
 plt.show()
 
-
 # 原本股價圖波動的很厲害，現在我們想讓它變得平滑一點，改看每 20 天的平均
 
 print(P.rolling(window=20).mean())
 
 P.rolling(window=20).mean().plot()
-plt.show()
 
+plt.show()
 
 # 和原本的股價圖比較
 
 P.plot()
 P.rolling(window=20).mean().plot()
+
 plt.show()
 
 # 當然也可以算更多天的平均，會變得更平滑
@@ -724,6 +758,7 @@ plt.show()
 P.plot()
 P.rolling(window=20).mean().plot()
 P.rolling(window=60).mean().plot()
+
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -828,6 +863,7 @@ plt.xlabel("日期")
 plt.ylabel("價格")
 plt.legend()
 plt.grid(True)
+
 plt.show()
 
 # 移動平均生成交易信號
@@ -1137,7 +1173,6 @@ ax2.set_xticklabels(xticks_str)  # 設置橫軸標注日期
 
 show()
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1265,7 +1300,6 @@ ax2.legend(loc="best", fontsize=10)
 ax2.set_xticks(range(0, len(day), 5))
 ax2.set_xticklabels(day[::5])
 
-# step 4 show plot
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -1320,9 +1354,7 @@ ax2.set_xticks(range(0, len(day), 5))
 ax2.set_xticklabels(day[::5])
 ax2.grid(True)
 
-# step 4 show plot
 plt.show()
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
