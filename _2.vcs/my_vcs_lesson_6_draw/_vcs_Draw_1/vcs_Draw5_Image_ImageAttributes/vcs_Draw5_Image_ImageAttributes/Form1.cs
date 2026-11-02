@@ -351,7 +351,7 @@ namespace vcs_Draw5_Image_ImageAttributes
         {
             bitmap1 = (Bitmap)Bitmap.FromFile(pic_filename);	//Bitmap.FromFile出來的是Image格式
             pictureBox1.Image = bitmap1;
-            pictureBox2.Image = Image.FromFile(pic_filename);
+            pictureBox2.Image = Image.FromFile(pic_filename);  // 原圖
 
             g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
             g.SmoothingMode = SmoothingMode.HighQuality;
@@ -361,12 +361,9 @@ namespace vcs_Draw5_Image_ImageAttributes
 
         private void button0_Click(object sender, EventArgs e)
         {
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
-            Bitmap bitmap1 = new Bitmap(filename);
+            Bitmap bitmap1 = new Bitmap(pic_filename);
 
-            pictureBox2.Image = Image.FromFile(filename);
-
-            Bitmap bmp = new Bitmap(filename);
+            Bitmap bitmap2 = new Bitmap(pic_filename);
 
             Graphics g = Graphics.FromImage(bitmap1);
 
@@ -381,56 +378,46 @@ namespace vcs_Draw5_Image_ImageAttributes
             ia.SetColorMatrix(cm);
 
             // 貼上使用CM轉換過的影像
-            int W = bmp.Width;
-            int H = bmp.Height;
-            g.DrawImage(bmp, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
+            int W = bitmap2.Width;
+            int H = bitmap2.Height;
+            g.DrawImage(bitmap2, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
+
             pictureBox1.Image = bitmap1;
+            pictureBox2.Image = Image.FromFile(pic_filename);  // 原圖
         }
 
         //------------------------------------------------------------  # 60個
-
-        public static Bitmap ApplySepiaEffect(Bitmap originalImage)
-        {
-            // 建立一個新的空白圖片，與原圖大小相同
-            Bitmap sepiaImage = new Bitmap(originalImage.Width, originalImage.Height);
-
-            // 設定 Sepia 的顏色矩陣 (ColorMatrix)
-            ColorMatrix colorMatrix = new ColorMatrix(new float[][]
-        {
-            new float[] {.393f, .349f, .272f, 0, 0},
-            new float[] {.769f, .686f, .534f, 0, 0},
-            new float[] {.189f, .168f, .131f, 0, 0},
-            new float[] {0, 0, 0, 1, 0},
-            new float[] {0, 0, 0, 0, 1}
-        });
-
-            // 建立 ImageAttributes 並套用顏色矩陣
-            using (ImageAttributes attributes = new ImageAttributes())
-            {
-                attributes.SetColorMatrix(colorMatrix);
-
-                // 使用 Graphics 將原圖繪製到新圖片上，同時套用濾鏡
-                using (Graphics g = Graphics.FromImage(sepiaImage))
-                {
-                    g.DrawImage(originalImage,
-                        new Rectangle(0, 0, originalImage.Width, originalImage.Height),
-                        0, 0, originalImage.Width, originalImage.Height,
-                        GraphicsUnit.Pixel, attributes);
-                }
-            }
-
-            return sepiaImage;
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {
             //用 ColorMatrix 做 Sepia
 
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
-            Bitmap bitmap1 = new Bitmap(filename);
-            Bitmap bitmap2 = ApplySepiaEffect(bitmap1);
+            Bitmap bitmap1 = new Bitmap(pic_filename);
+
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            Bitmap bitmap2 = new Bitmap(W, H);  // 建立一個新的空白圖片，與原圖大小相同
+
+            // 設定 Sepia 的顏色矩陣 (ColorMatrix)
+            ColorMatrix colorMatrix = new ColorMatrix(new float[][]
+            {
+                new float[] {0.393f, 0.349f, 0.272f, 0, 0},
+                new float[] {0.769f, 0.686f, 0.534f, 0, 0},
+                new float[] {0.189f, 0.168f, 0.131f, 0, 0},
+                new float[] {0, 0, 0, 1, 0},
+                new float[] {0, 0, 0, 0, 1}
+            });
+
+            // 建立 ImageAttributes 並套用顏色矩陣
+            ImageAttributes ia = new ImageAttributes();
+            ia.SetColorMatrix(colorMatrix);
+
+            // 使用 Graphics 將原圖繪製到新圖片上，同時套用濾鏡
+            Graphics g = Graphics.FromImage(bitmap2);
+            g.DrawImage(bitmap1, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
 
             pictureBox1.Image = bitmap2;
+            pictureBox2.Image = bitmap1;  // 原圖
         }
 
         //------------------------------------------------------------  # 60個
@@ -450,7 +437,7 @@ namespace vcs_Draw5_Image_ImageAttributes
             //pictureBox1.Image = bitmap1;
 
             Image image = new Bitmap(bitmap1);
-            ImageAttributes imageAttributes = new ImageAttributes();
+            ImageAttributes ia = new ImageAttributes();
             int width = image.Width;
             int height = image.Height;
 
@@ -466,7 +453,7 @@ namespace vcs_Draw5_Image_ImageAttributes
 
             ColorMatrix colorMatrix = new ColorMatrix(colorMatrixElements);
 
-            imageAttributes.SetColorMatrix(
+            ia.SetColorMatrix(
                colorMatrix,
                ColorMatrixFlag.Default,
                ColorAdjustType.Bitmap);
@@ -480,7 +467,7 @@ namespace vcs_Draw5_Image_ImageAttributes
                width,       // width of source rectangle
                height,      // height of source rectangle
                GraphicsUnit.Pixel,
-               imageAttributes);
+               ia);
 
             pictureBox1.Image = bitmap1;
         }
@@ -1135,7 +1122,7 @@ namespace vcs_Draw5_Image_ImageAttributes
             g.Clear(Color.White);
             pictureBox1.Image = bitmap1;
 
-            pictureBox2.Image = Image.FromFile(pic_filename);
+            pictureBox2.Image = Image.FromFile(pic_filename);  // 原圖
         }
 
         bool get_color_matrix()
@@ -1482,8 +1469,9 @@ namespace vcs_Draw5_Image_ImageAttributes
             int W = bmp.Width;
             int H = bmp.Height;
             g.DrawImage(bmp, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
+
             pictureBox1.Image = bitmap1;
-            pictureBox2.Image = Image.FromFile(pic_filename);
+            pictureBox2.Image = Image.FromFile(pic_filename);  // 原圖
         }
 
         void apply_color_matrix()
@@ -1662,6 +1650,8 @@ namespace vcs_Draw5_Image_ImageAttributes
 
         private void radioButton_cm_CheckedChanged(object sender, EventArgs e)
         {
+            richTextBox1.Text += "Color Matrix : " + ((RadioButton)sender).Text + "\n";
+
             //用Class包裝ColorMatrix
 
             //使用 color matrix
@@ -1728,8 +1718,9 @@ namespace vcs_Draw5_Image_ImageAttributes
             int W = bmp.Width;
             int H = bmp.Height;
             g.DrawImage(bmp, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
+
             pictureBox1.Image = bitmap1;
-            pictureBox2.Image = Image.FromFile(pic_filename);
+            pictureBox2.Image = Image.FromFile(pic_filename);  // 原圖
         }
 
         private void bt_open_file_Click(object sender, EventArgs e)
@@ -1932,13 +1923,13 @@ namespace vcs_Draw5_Image_ImageAttributes
             //pictureBox1.Image = bitmap1;
 
             Bitmap image = new Bitmap(pic_filename);
-            ImageAttributes imageAttributes = new ImageAttributes();
+            ImageAttributes ia = new ImageAttributes();
             int width = image.Width;
             int height = image.Height;
 
             ColorMatrix colorMatrix = new ColorMatrix(get_color_matrix(rotate_type));
 
-            imageAttributes.SetColorMatrix(
+            ia.SetColorMatrix(
                colorMatrix,
                ColorMatrixFlag.Default,
                ColorAdjustType.Bitmap);
@@ -1952,7 +1943,7 @@ namespace vcs_Draw5_Image_ImageAttributes
                 width,       // width of source rectangle
                 height,      // height of source rectangle
                 GraphicsUnit.Pixel,
-               imageAttributes);
+               ia);
 
             pictureBox1.Image = bitmap1;
         }

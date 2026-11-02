@@ -6,13 +6,24 @@ build-backend = "setuptools.build_meta"
 name = "mypythoncommon"
 version = "0.0.3"
 authors = [
-  { name="David Wang" }
+  { name="David Wang", email="bunshue@gmail.com/name" },
 ]
+
+license = {file = 'LICENSE'}
+license = {text = "MIT"}
 description = "Common Code"
 readme = "README.md"
 requires-python = ">=3.8"
-
 classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
+]
+[project.urls]
+homepage = 'https://github.com/bunshue/vcs/tree/master/_4.python/import_module/_PyPI_Package_Author'
+documentation = 'https://github.com/bunshue/vcs/tree/master/_4.python/import_module/_PyPI_Package_Author'
+repository = 'https://github.com/bunshue/vcs/tree/master/_4.python/import_module/_PyPI_Package_Author'
+keywords = [
+    "python",
+    "common",
+    "utilities"
 ]

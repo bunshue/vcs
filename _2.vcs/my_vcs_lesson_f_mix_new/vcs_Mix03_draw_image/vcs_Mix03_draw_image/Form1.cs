@@ -555,7 +555,7 @@ namespace vcs_Mix03_draw_image
 
             g.DrawRectangle(Pens.Red, 100, 100, 100, 100);
 
-            Pen             p = new Pen(Color.Red);
+            Pen p = new Pen(Color.Red);
             p.Width = 8;
             p.StartCap = System.Drawing.Drawing2D.LineCap.Round;
             p.EndCap = System.Drawing.Drawing2D.LineCap.Round;
@@ -565,9 +565,6 @@ namespace vcs_Mix03_draw_image
             p.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
 
             g.DrawLine(p, 100, 100, 250, 250);
-
-
-
         }
 
         //------------------------------------------------------------  # 60個
@@ -597,12 +594,69 @@ namespace vcs_Mix03_draw_image
 
         private void button12_Click(object sender, EventArgs e)
         {
+            //繪製文字 - 平滑化
+            /*
+            根據 How to: Use Antialiasing with Text 的練習筆記，反鋸齒 (平滑化) 是透過指定 TextRenderingHint 屬性，來提高文字外觀品質和可讀性
+            TextRenderingHint 有六種列舉，想要達到文字平滑化，基本上要指定 AntiAlias、AntiAliasGridFit、ClearTypeGridFit 這三種其中一種，ClearTypeGridFit 文字品質最佳，但效能最差，從 Understand font aliasing issues in C# 文章中可以理解到，不同字型可能會有不同測試結果，且小字型比較能看出差異
+            以下是使用微軟正黑體來觀察字型大小 6 和 16 文字平滑化差異
+            */
+
+            bitmap1 = new Bitmap(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height);
+            g = Graphics.FromImage(bitmap1);
+
+
+            FontFamily fontFamily = new FontFamily("微軟正黑體");
+            SolidBrush solidBrush = new SolidBrush(Color.FromArgb(255, 0, 0, 255));
+
+            // 字型大小 6
+            Font smallFont = new Font(fontFamily, 12, FontStyle.Regular, GraphicsUnit.Pixel);
+            g.TextRenderingHint = TextRenderingHint.SingleBitPerPixel;
+            g.DrawString("SingleBitPerPixel", smallFont, solidBrush, new PointF(10, 10));
+
+            g.TextRenderingHint = TextRenderingHint.AntiAlias;
+            g.DrawString("AntiAlias", smallFont, solidBrush, new PointF(10, 60));
+
+            g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+            g.DrawString("ClearTypeGridFit", smallFont, solidBrush, new PointF(10, 110));
+
+            // 字型大小 16
+            Font bigFont = new Font(fontFamily, 36, FontStyle.Regular, GraphicsUnit.Pixel);
+            g.TextRenderingHint = TextRenderingHint.SingleBitPerPixel;
+            g.DrawString("SingleBitPerPixel", bigFont, solidBrush, new PointF(100, 10));
+
+            g.TextRenderingHint = TextRenderingHint.AntiAlias;
+            g.DrawString("AntiAlias", bigFont, solidBrush, new PointF(100, 60));
+
+            g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+            g.DrawString("ClearTypeGridFit", bigFont, solidBrush, new PointF(100, 110));
+
+            pictureBox1.Image = bitmap1;
         }
 
         //------------------------------------------------------------  # 60個
 
+        private void DrawSomething(Graphics g)
+        {
+            //原本是畫在 (-1, -1)-(1, 1)
+            g.DrawEllipse(new Pen(Color.Red, 0), -1, -1, 2, 2);
+            g.DrawRectangle(new Pen(Color.Red, 0), -1, -1, 2, 2);
+        }
+
         private void button13_Click(object sender, EventArgs e)
         {
+            //translate-transform
+
+            bitmap1 = new Bitmap(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height);
+            g = Graphics.FromImage(bitmap1);
+
+            RectangleF smiley_rect = new RectangleF(-1, -1, 2, 2);
+            g.ResetTransform();
+            g.TranslateTransform(0, 0);
+            g.ScaleTransform(100, 100, MatrixOrder.Append);
+            g.TranslateTransform(200, 200, MatrixOrder.Append);
+            DrawSomething(g);
+
+            pictureBox1.Image = bitmap1;
         }
 
         //------------------------------------------------------------  # 60個

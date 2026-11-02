@@ -118,27 +118,6 @@ else
 
 //------------------------------------------------------------  # 60個
 
-draw translate-transform
-
-        private void Form1_Paint(object sender, PaintEventArgs e)
-        {
-            RectangleF smiley_rect = new RectangleF(-1, -1, 2, 2);
-            e.Graphics.ResetTransform();
-            e.Graphics.TranslateTransform(0, 0);
-            e.Graphics.ScaleTransform(100, 100, MatrixOrder.Append);
-            e.Graphics.TranslateTransform(200, 200, MatrixOrder.Append);
-            DrawSomething(e.Graphics);
-        }
-
-        private void DrawSomething(Graphics g)
-        {
-            //原本是畫在 (-1, -1)-(1, 1)
-            g.DrawEllipse(new Pen(Color.Red, 0), -1, -1, 2, 2);
-            g.DrawRectangle(new Pen(Color.Red, 0), -1, -1, 2, 2);
-        }
-
-//------------------------------------------------------------  # 60個
-
             //----textbox事件----
             foreach (Control ctrl in Controls)
             {
@@ -5657,8 +5636,6 @@ http://jerryyang-wxy.blogspot.com/2014/08/blog-post.html
 
 //------------------------------------------------------------  # 60個
 
-拉一個command line的捷徑至  C:\_git\ims2\_doc\_pic\PNG 給 file2c.exe 用
-
 using (Pen thick_pen = new Pen(Color.Red, 3))
 
 把List當一維陣列畫出來
@@ -5676,7 +5653,6 @@ g.DrawLines(thick_pen, points.ToArray());
 
             //int[] gray = new int[220];
             //g.DrawLines(Pens.Red, gray.ToArray());
-
 
 private List<PointF> Points = new List<PointF>();
 
@@ -6665,42 +6641,6 @@ string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yy
 
 //把Form大小設定跟圖片大小一樣
 //ClientSize = new Size(pictureBox1.Right + pictureBox1.Left, pictureBox1.Bottom + pictureBox1.Left);
-
-//------------------------------------------------------------  # 60個
-
-//最小化按鈕的寫法
-            bt_minimize_setup();
-
-        void bt_minimize_setup()
-        {
-            int width = 5;
-            int w = 50; //設定按鈕大小 W
-            int h = 50; //設定按鈕大小 H
-
-            Button bt_minimize = new Button();  // 實例化按鈕
-            bt_minimize.Size = new Size(w, h);
-            bt_minimize.Text = "";
-            Bitmap bmp = new Bitmap(w, h);
-            Graphics g = Graphics.FromImage(bmp);
-            Pen p = new Pen(Color.Red, width);
-            g.Clear(Color.Pink);
-            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
-            //g.DrawLine(p, 0, 0, w - 1, h - 1);
-            //g.DrawLine(p, w - 1, 0, 0, h - 1);
-            g.DrawLine(p, w / 4, h / 2 - 1, w * 3 / 4, h / 2 - 1);
-            bt_minimize.Image = bmp;
-
-            bt_minimize.Location = new Point(this.ClientSize.Width - bt_minimize.Width * 2-2, 0);
-            bt_minimize.Click += bt_minimize_Click;     // 加入按鈕事件
-
-            this.Controls.Add(bt_minimize); // 將按鈕加入表單
-            bt_minimize.BringToFront();     //移到最上層
-        }
-
-        private void bt_minimize_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;   //設定表單最小化
-        }
 
 //------------------------------------------------------------  # 60個
 							
