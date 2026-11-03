@@ -200,6 +200,8 @@ print("索引index")
 cc = df.index
 print(cc)
 
+print("df的欄位 : ", df.columns.tolist())
+
 print("欄名columns")
 cc = df.columns
 print(cc)
@@ -230,6 +232,8 @@ print(df.shape)
 # 列出各列的列索引標籤、表格內容
 print(df.shape[0])
 print(df.index.values)
+
+print("df的欄位 : ", df.columns.tolist())
 
 # 列出所有欄索引(欄位名稱)
 for col in range(df.shape[1]):
@@ -1713,6 +1717,8 @@ print("rename pd 之 df")
 filename = "data/ufo.csv"
 ufo = pd.read_csv(filename)
 
+print("df的欄位 : ", ufo.columns.tolist())
+
 print("檢查欄名")
 cc = ufo.columns
 print(cc)
@@ -1723,7 +1729,8 @@ print(cc)
 ufo.rename(
     columns={"Colors Reported": "Colors_Reported", "Shape Reported": "Shape_Reported"},
     inplace=True,
-)
+)  # 修改欄位名稱
+
 cc = ufo.columns
 print(cc)
 
@@ -1890,6 +1897,8 @@ print("------------------------------------------------------------")  # 60個
 # ufo = pd.read_csv("http://bit.ly/uforeports")
 filename = "data/ufo.csv"
 ufo = pd.read_csv(filename)
+
+print("df的欄位 : ", ufo.columns.tolist())
 
 cc = ufo.columns
 print(cc)
@@ -2303,6 +2312,8 @@ print(cc)
 
 # 'country' is now the index
 drinks.index
+
+print("df的欄位 : ", drinks.columns.tolist())
 
 # 'country' is no longer a column
 drinks.columns
@@ -2750,6 +2761,8 @@ print(cc)
 
 # Merging Movies and Ratings
 
+print("df的欄位 : ", movies.columns.tolist())
+
 cc = movies.columns
 print(cc)
 
@@ -2959,7 +2972,7 @@ print(cc)
 # 承上 df
 print(df)
 
-df = df.rename({"col one": "col_one", "col two": "col_two"}, axis="columns")
+df = df.rename({"col one": "col_one", "col two": "col_two"}, axis="columns")  # 修改欄位名稱
 print(df)
 
 cc = df.columns = ["col_one", "col_two"]  # 重新命名欄位
@@ -3759,7 +3772,7 @@ print(cc)
 cc = drinks[reversed(drinks.columns)].head()
 print(cc)
 
-stocks = stocks.rename({"Symbol": "XYZ", "Volume": "XYZ"}, axis="columns")
+stocks = stocks.rename({"Symbol": "XYZ", "Volume": "XYZ"}, axis="columns")  # 修改欄位名稱
 print(stocks)
 
 cc = stocks[reversed(stocks.columns)]
@@ -4304,6 +4317,7 @@ print("------------------------------------------------------------")  # 60個
 url = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
 url = "iris.data"
 df = pd.read_csv(url, header=None)
+
 df.columns = ["sepal length", "sepal width", "petal length", "petal width", "class"]  # 重新命名欄位
 print(df)
 """
@@ -4661,6 +4675,8 @@ print("------------------------------------------------------------")  # 60個
 # 索引
 df = pd.DataFrame({"a": [1, 3], "b": [2, 4]}, index=["line1", "line2"])
 print(df.index)  # 顯示行索引
+
+print("df的欄位 : ", df.columns.tolist())
 print(df.columns)  # 顯示列索引
 
 print("------------------------------------------------------------")  # 60個
@@ -5375,7 +5391,7 @@ air_quality_renamed = air_quality.rename(
         "station_paris": "FR04014",
         "station_london": "London Westminster",
         }
-    )
+    )  # 修改欄位名稱
 
 # 將 columns 名稱全部更改微小寫
 air_quality_renamed = air_quality_renamed.rename(columns=str.lower)
@@ -5668,6 +5684,7 @@ df = pd.DataFrame(
 )
 df
 
+print("df的欄位 : ", df.columns.tolist())
 
 # DataFrame的 columns 索引，也是一個 Index物件
 df.columns
@@ -6891,22 +6908,26 @@ data = pd.DataFrame(
     index=pd.Index(["Ohio", "Colorado", "New York"], name="state"),
     columns=pd.Index(["one", "two", "three", "four"], name="quarter"),
 )
+
 data
 
 # Index 也有一個 map()方法，可以傳回一個新的 Index物件
 data.index = data.index.map(str.upper)
+
 data
 
 # rename()方法會傳回一個數據集的轉換版本，而不是修改原來的數據
 # 使用 index, columns 指定的函式 來修改軸標籤
-data.rename(index=str.title, columns=str.upper)
+data.rename(index=str.title, columns=str.upper)  # 修改欄位名稱
 
 # rename 可以結合字典型物件，實現對部分軸標籤的更新
-data.rename(index={"OHIO": "INDIANA"}, columns={"three": "peekaboo"})
+data.rename(index={"OHIO": "INDIANA"}, columns={"three": "peekaboo"})  # 修改欄位名稱
+
 data
 
 # 如果希望就地修改原有的數據集，使需要在 rename()方法中設定參數 inplace = True
-data.rename(index={"OHIO": "INDIANA"}, columns={"three": "peekaboo"}, inplace=True)
+data.rename(index={"OHIO": "INDIANA"}, columns={"three": "peekaboo"}, inplace=True)  # 修改欄位名稱
+
 data
 
 print("------------------------------------------------------------")  # 60個

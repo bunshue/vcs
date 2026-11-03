@@ -22,6 +22,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+import mplfinance as mpf
+
 font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
@@ -42,7 +44,6 @@ print(dir(FinMind))
 print(dir(FinMind.data))
 
 from FinMind.data import DataLoader
-import mplfinance as mpf
 
 print("------------------------------------------------------------")  # 60個
 
@@ -129,6 +130,9 @@ for idx in range(M):
     plt.scatter(idx, y_min, color="g", marker="v", s=40, zorder=5)
 
 plt.legend(loc="best", fontsize=16)
+plt.xlabel("日期", fontsize=12)
+plt.ylabel("股價 (元)", fontsize=12)
+plt.title("台積電 (2330) 歷史走勢圖", fontsize=12)
 plt.xticks(rotation=30)
 
 plt.show()
@@ -143,7 +147,7 @@ print("------------------------------------------------------------")  # 60個
 # 自動偵測並轉換欄位名稱 (相容 FinMind 不同版本的欄位名)
 # "date"改"Date", "open"改"Open", "max"改"High", "min"改"Low", "close"改"Close"
 
-print("df的欄位 : ", df.columns.tolist())
+print("修改前 df的欄位 : ", df.columns.tolist())
 
 rename_dict = {
     "date": "Date",
@@ -163,25 +167,41 @@ elif "volume" in df.columns:
 
 df = df.rename(columns=rename_dict)  # 修改欄位名稱
 
-print("df的欄位 : ", df.columns.tolist())
+print("修改後 df的欄位 : ", df.columns.tolist())
+
+print('aaaa')
+print(df.head())
 
 # 2. 將 Date 轉為時間格式，並設定為索引 (Index)
 df["Date"] = pd.to_datetime(df["Date"])
 df.set_index("Date", inplace=True)
 
+print('bbbb')
+print(df.head())
 
 print("--- 最新 5 筆數據 ---")
 print(df[["Open", "High", "Low", "Close"]].tail())
 
 # 3. 計算均線與漲跌幅
-df["MA5"] = df["Close"].rolling(window=5).mean()  # 移動平均線 (MA)
-df["MA20"] = df["Close"].rolling(window=20).mean()  # 移動平均線 (MA)
+
+"""
+# MA5（5日均線）與 MA20（20日均線，俗稱月線）是股市技術分析中最常用的移動平均線（Moving Average）組合，
+# 分別代表短期與中短期的市場平均成本 與強弱趨勢
+
+• MA5（5日均線 / 週線）：
+	• 定義：過去 5 個交易日收盤價的平均值，代表市場「近一週」的短線平均成本。
+	• 特點：對價格變化最敏感、貼近盤面，適合觀察短線動能與攻擊力道，但雜訊較多。
+• MA20（20日均線 / 月線）：
+	• 定義：過去 20 個交易日收盤價的平均值，代表市場「近一個月」的中短期平均成本。
+	• 特點：相對平滑，能過濾掉短期的上下震盪，常用來判斷中短期趨勢是否維持健康。
+"""
+df["MA5"] = df["Close"].rolling(window=5).mean()  # 移動平均線 (MA) 連同過去N點平均
+df["MA20"] = df["Close"].rolling(window=20).mean()  # 移動平均線 (MA20) 連同過去N點平均
 df["Daily_Return"] = df["Close"].pct_change()  # 每日漲跌幅
 
 print("--- 最新 5 筆數據分析結果 (含均線與漲跌幅) ---")
-print(df[["Open", "High", "Low", "Close", "MA5", "MA20", "Daily_Return"]].tail())
-
-import mplfinance as mpf
+# print(df[["Open", "High", "Low", "Close", "MA5", "MA20", "Daily_Return"]].tail())
+print(df[["Open", "High", "Low", "Close", "MA5", "MA20", "Daily_Return"]])
 
 # ==========================================
 # 步驟 3：繪製 K 線圖
@@ -226,8 +246,6 @@ mpf.plot(
 print("------------------------------------------------------------")  # 60個
 
 # 自動標記買賣訊號程式碼
-
-import mplfinance as mpf
 
 # df = get_stock_data()
 
@@ -1085,7 +1103,6 @@ pip install --upgrade mplfinance
 
 from pandas import DataFrame
 import matplotlib.dates as dates
-import mplfinance as mpf
 from matplotlib.ticker import Formatter
 from mplfinance.original_flavor import candlestick_ohlc
 
@@ -1334,8 +1351,6 @@ ax2.set_xticklabels(day[::5])
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-import mplfinance as mpf
 
 all_list = []
 stock_symbol, dates = get_data()
