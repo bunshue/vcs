@@ -1272,7 +1272,7 @@ print(np.unique(titles).shape[0], np.unique(titles))
 print("---修正類別錯誤顯示Titel人數---")
 titanic["Title"] = titanic["Title"].replace("Mlle", "Miss")
 titanic["Title"] = titanic["Title"].replace("Ms", "Miss")
-titanic.to_csv("tmp_titanic_pre.csv", encoding="utf8")
+
 print("Title人數:")
 print(titanic["Title"].groupby(titanic["Title"]).size())
 print("---顯示平均生存率---")
@@ -1323,8 +1323,6 @@ df = df.drop("Died", axis=1)
 
 print("刪除欄位 Title, axis=1")
 df = df.drop("Title", axis=1)
-
-df.to_csv("tmp_titanic_train.csv", encoding="utf8")
 
 show()
 
@@ -2652,6 +2650,7 @@ ufo.Year.value_counts().sort_index().plot()
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # How do I create a pandas DataFrame from another object? (video)
 
@@ -2922,6 +2921,7 @@ titanic = pd.read_csv(filename)
 filename = "data/ufo.csv"
 ufo = pd.read_csv(filename, parse_dates=["Time"])
 
+print("------------------------------")  # 30個
 # 2. Create an example DataFrame
 print("建立df")
 df = pd.DataFrame({"col one": [100, 200], "col two": [300, 400]})
@@ -3076,6 +3076,7 @@ cc = pd.concat(
 )  # axis=0 : 垂直連接, axis=1 : 水平連接
 print(cc)
 
+print("------------------------------")  # 30個
 # 10. Build a DataFrame from multiple files (column-wise)
 
 print("檢視前幾行")
@@ -3105,6 +3106,7 @@ print("型態:", df.dtypes)
 print(df.index)
 #Index(['Alice', 'Bob', 'Charlie'], dtype='object')
 """
+print("------------------------------")  # 30個
 # 12. Split a DataFrame into two random subsets
 
 cc = len(movies)
@@ -3132,7 +3134,7 @@ cc = movies_2.index.sort_values()
 
 # Keep in mind that this approach will not work if your index values are not unique.
 
-
+print("------------------------------")  # 30個
 # 13. Filter a DataFrame by multiple categories
 
 # the movies DataFrame:
@@ -3161,6 +3163,7 @@ print("檢視前幾行")
 cc = movies[~movies.genre.isin(["Action", "Drama", "Western"])].head()
 print(cc)
 
+print("------------------------------")  # 30個
 # 14. Filter a DataFrame by largest categories
 
 counts = movies.genre.value_counts()
@@ -3179,6 +3182,7 @@ print("檢視前幾行")
 cc = movies[movies.genre.isin(counts.nlargest(3).index)].head()
 print(cc)
 
+print("------------------------------")  # 30個
 # 15. Handle missing values
 
 # Let's look at a dataset of UFO sightings:
@@ -3203,6 +3207,7 @@ print(cc)
 
 # len(ufo) returns the total number of rows, and then we multiply that by 0.9 to tell pandas to only keep columns in which at least 90% of the values are not missing.
 
+print("------------------------------")  # 30個
 # 16. Split a string into multiple columns
 print("建立df")
 df = pd.DataFrame(
@@ -3225,6 +3230,7 @@ print(cc)
 df["city"] = df.location.str.split(", ", expand=True)[0]
 print(df)
 
+print("------------------------------")  # 30個
 # 17. Expand a Series of lists into a DataFrame
 
 # Let's create another example DataFrame:
@@ -3240,6 +3246,7 @@ print(df_new)
 cc = pd.concat([df, df_new], axis="columns")  # axis=0 : 垂直連接, axis=1 : 水平連接
 print(cc)
 
+print("------------------------------")  # 30個
 # 18. Aggregate by multiple functions
 
 # Let's look at a DataFrame of orders from the Chipotle restaurant chain:
@@ -3259,6 +3266,7 @@ print("檢視前幾行")
 cc = orders.groupby("order_id").item_price.agg(["sum", "count"]).head()
 print(cc)
 
+print("------------------------------")  # 30個
 # 19. Combine the output of an aggregation with a DataFrame
 
 print("檢視前10行")
@@ -3291,6 +3299,7 @@ print("檢視前10行")
 cc = orders.head(10)
 print(cc)
 
+print("------------------------------")  # 30個
 # 20. Select a slice of rows and columns
 
 # Let's take a look at another dataset:
@@ -3313,6 +3322,7 @@ print(cc)
 cc = titanic.describe().loc["min":"max", "Pclass":"Parch"]
 print(cc)
 
+print("------------------------------")  # 30個
 # 21. Reshape a MultiIndexed Series
 
 cc = titanic.Survived.mean()
@@ -3329,6 +3339,7 @@ print(cc)
 cc = titanic.groupby(["Sex", "Pclass"]).Survived.mean().unstack()
 print(cc)
 
+print("------------------------------")  # 30個
 # 22. Create a pivot table
 
 print("建立樞紐分析表 pivot_table")
@@ -3349,6 +3360,7 @@ cc = titanic.pivot_table(
 )
 print(cc)
 
+print("------------------------------")  # 30個
 # 23. Convert continuous data into categorical data
 
 print("檢視前10行")
@@ -3361,6 +3373,7 @@ pd.cut(
 ).head(10)
 print(cc)
 
+print("------------------------------")  # 30個
 # 24. Change display options
 
 print("修改顯示模式")
@@ -3378,6 +3391,7 @@ print(cc)
 print("恢復預設顯示模式")
 pd.reset_option("display.float_format")
 
+print("------------------------------")  # 30個
 # 25. Style a DataFrame
 
 # 讀取[部分股市資料]資料集至df
@@ -3430,6 +3444,7 @@ titanic = pd.read_csv(filename)
 filename = "data/ufo.csv"
 ufo = pd.read_csv(filename, parse_dates=["Time"])
 
+print("------------------------------")  # 30個
 # 1. Check for equality
 
 df = pd.DataFrame({"a": [1, 2, np.nan], "b": [1, 2, np.nan]})
@@ -3450,6 +3465,7 @@ df_new = df.copy()
 cc = df_new.equals(df)
 print(cc)
 
+print("------------------------------")  # 30個
 # 2. Check for equality (alternative)
 
 df = pd.DataFrame({"c": [1, 2, 3], "d": [1.0, 2.0, 3.0], "e": [1.0, 2.0, 3.000005]})
@@ -3571,6 +3587,7 @@ print(df)
 df["date"] = pd.to_datetime(df[["month", "day", "year"]])
 print(df)
 
+print("------------------------------")  # 30個
 # 10. Resample a datetime column
 
 print(stocks)
@@ -3588,6 +3605,7 @@ print(cc)
 cc = ufo.resample("ME").State.count().tail()
 print(cc)
 
+print("------------------------------")  # 30個
 # 11. Read and write from compressed files
 
 # df存檔
@@ -3608,6 +3626,7 @@ print("比較df是否相同")
 cc = ufo_new.equals(ufo)
 print(cc)
 
+print("------------------------------")  # 30個
 # 12. Fill missing values using interpolation
 
 df = pd.DataFrame({"a": [100, 120, 130, np.nan, 140], "b": [9, 9, np.nan, 7.5, 6.5]})
@@ -3617,6 +3636,7 @@ print(df)
 cc = df.interpolate()
 print(cc)
 
+print("------------------------------")  # 30個
 # 13. Check for duplicate merge keys
 print("合併df")
 df1 = pd.DataFrame({"color": ["green", "yellow", "red"], "num": [1, 2, 3]})
@@ -3633,6 +3653,7 @@ print(pd)
 # NG
 # pd.merge(df1, df2, how='inner', validate='many_to_one')
 
+print("------------------------------")  # 30個
 # 15. Create an example DataFrame (alternative)
 
 cc = pd.DataFrame({"col one": [100, 200], "col two": [300, 400]})
@@ -3645,6 +3666,7 @@ print(cc)
 
 # makeTimeDataFrame() is similar, except it creates a DatetimeIndex:
 
+print("------------------------------")  # 30個
 # 17. Use query to avoid intermediate variables
 
 print(stocks)
@@ -3667,6 +3689,7 @@ print(cc)
 cc = stocks.groupby("Symbol").mean().query("Close < 100")
 print(cc)
 
+print("------------------------------")  # 30個
 # 18. Reshape a DataFrame from wide format to long format
 
 distances = pd.DataFrame(
@@ -3689,7 +3712,7 @@ print(distances_long)
 cc = pd.merge(users, distances_long)
 print(cc)
 
-
+print("------------------------------")  # 30個
 # 19. Reverse row order (alternative)
 
 print(drinks.head())
@@ -3706,6 +3729,7 @@ print(stocks)
 # Since the index above is not unique, this will result in an error:
 # stocks.reindex(reversed(stocks.index))
 
+print("------------------------------")  # 30個
 # 20. Reverse column order (alternative)
 
 cc = drinks.loc[:, ::-1].head()
@@ -3720,7 +3744,8 @@ print(stocks)
 cc = stocks[reversed(stocks.columns)]
 print(cc)
 
-# 21. Split a string into multiple columns (alternative)
+print("------------------------------")  # 30個
+# 1. Split a string into multiple columns (alternative)
 
 df = pd.DataFrame(
     {
@@ -3921,12 +3946,12 @@ print("df寫讀檔案")
 df = make_data_frame_from_dict()  # 字典 轉 df
 print(df)
 
+# df存檔
 df.to_csv("tmp_df_aaaa.csv", encoding="utf-8-sig")
-
-# 11. Read and write from compressed files
 
 # df存檔
 df.to_csv("tmp_df.csv")
+
 # df存檔 並壓縮
 df.to_csv("tmp_df.csv.zip")
 df.to_csv("tmp_df.csv.gz")
@@ -4317,9 +4342,6 @@ print("刪除 df 的 欄位 或 索引 – drop() + 缺失資料處理")
 """
 df = pd.read_csv("data/data_with_NaN.csv")
 
-# df 轉 html
-# df.to_html("test_csv2html.html")
-
 print("df 原始資料")
 print(df)
 
@@ -4563,7 +4585,7 @@ print(df.describe())
 print("相關係數, df要純數值才可以計算相關係數")
 print(df.corr())
 
-print("df轉csv")
+# df存檔
 df.to_csv("tmp_df_data1.csv")
 
 print("data_frame 畫點圖")
@@ -5322,17 +5344,6 @@ titanic.groupby("Pclass")["Pclass"].count()
 titanic.groupby("Sex")["Age"].transform("mean")
 
 """
-
-"""
-#資料匯入與匯出
-
-# 匯入csv檔?(DataFrame)
-titanic = pd.read_csv("data/titanic.csv")
-
-# 將資料匯出為excel?
-titanic.to_excel("titanic.xlsx", sheet_name="passengers", index=False)
-"""
-
 print("------------------------------------------------------------")  # 60個
 """
 #資料 columns 更名
@@ -7961,19 +7972,7 @@ df3 = df.apply(lambda x: x.max() - x.min())
 print(df3)
 
 print("------------------------------------------------------------")  # 60個
-
-# df轉csv
-print("讀寫CSV文件")
-
-df = pd.DataFrame({"Name": ["Smith", "Lucy"], "Age": ["25", "20"], "Sex": ["男", "女"]})
-
-df.to_csv("tmp.csv", index=False, header=True, columns=["Name", "Sex", "Age"])
-
-df1 = pd.read_csv("tmp.csv")
-print(df1)
-
 print("------------------------------------------------------------")  # 60個
-
 """
 print('資料結構訊息', df.info())
 print('資料shape :', df.shape)
@@ -8360,7 +8359,10 @@ sys.exit()
 
 
 print("------------------------------------------------------------")  # 60個
-
+# 6060
+print("------------------------------------------------------------")  # 60個
+# 3030
+print("------------------------------")  # 30個
 
 print("------------------------------------------------------------")  # 60個
 
