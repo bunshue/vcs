@@ -34,6 +34,7 @@ _整理資料/*
 _4.python/___new/test_venv/*
 *_tmp.txt
 tmp_*.csv
+tmp_*.pkl
 tmp_*.jpg
 IMG_*.jpg
 spiderman*.mp4

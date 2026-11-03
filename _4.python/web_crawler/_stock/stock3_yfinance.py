@@ -46,13 +46,17 @@ import mplfinance as mpf
 
 print("------------------------------------------------------------")  # 60個
 
+
 def get_stock_data():
     # 取得網站資料
     print("取得資料 日線資料")
     print("抓取台積電 (2330) 2026年8月到10月的日線資料")
     dl = DataLoader()  # 初始化資料載入器
-    df = dl.taiwan_stock_daily(stock_id="2330", start_date="2026-08-01", end_date="2026-11-01")  # 稍微拉長時間，畫均線才不會斷掉
+    df = dl.taiwan_stock_daily(
+        stock_id="2330", start_date="2026-08-01", end_date="2026-11-01"
+    )  # 稍微拉長時間，畫均線才不會斷掉
     return df
+
 
 """ 即時讀取網路資料
 df = get_stock_data()
@@ -68,11 +72,12 @@ df.to_pickle("tmp_df_data1.pkl")
 
 # 讀取pickle檔案資料
 df1 = pd.read_pickle("tmp_df_data1.pkl")
-df = df1.tail(10)
+df = df1.tail(30)
 
 # 取得資料內容
 print("列印取得的日線資料, 前5筆")
-print(df.head())
+print(df)
+# print(df.head())
 print("df的形狀 : ", df.shape)
 print("df的欄位 : ", df.columns.tolist())
 
@@ -108,8 +113,8 @@ turnover = df["Trading_turnover"].astype(float)  # 交易筆數（Trading_turnov
 plt.figure(figsize=(10, 8))
 plt.plot(day, _open, "s-", color="r", label="開盤價  Open Price")
 plt.plot(day, close, "s-", color="g", label="收盤價 Close Price")
-plt.plot(day, _max, "s", color="r", label="最高價 Max")
-plt.plot(day, _min, "s", color="g", label="最低價 Min")
+# plt.plot(day, _max, "s", color="r", label="最高價 Max")
+# plt.plot(day, _min, "s", color="g", label="最低價 Min")
 
 print("df之大小")
 M, N = df.shape
@@ -118,10 +123,10 @@ print("df之大小", M, "X", N)
 for idx in range(M):
     y_max = df["max"].iloc[idx]
     y_min = df["min"].iloc[idx]
-    plt.plot([idx, idx], [y_max, y_min], color="red", linewidth=1.5, zorder=5)
+    plt.plot([idx, idx], [y_max, y_min], color="cyan", linewidth=1.5, zorder=5)
     # print(idx, y_max, y_min)
-    plt.scatter(idx, y_max, color="r", marker="s", s=40, zorder=5)
-    plt.scatter(idx, y_min, color="g", marker="s", s=40, zorder=5)
+    plt.scatter(idx, y_max, color="r", marker="^", s=40, zorder=5)
+    plt.scatter(idx, y_min, color="g", marker="v", s=40, zorder=5)
 
 plt.legend(loc="best", fontsize=16)
 plt.xticks(rotation=30)
@@ -163,6 +168,10 @@ print("df的欄位 : ", df.columns.tolist())
 # 2. 將 Date 轉為時間格式，並設定為索引 (Index)
 df["Date"] = pd.to_datetime(df["Date"])
 df.set_index("Date", inplace=True)
+
+
+print("--- 最新 5 筆數據 ---")
+print(df[["Open", "High", "Low", "Close"]].tail())
 
 # 3. 計算均線與漲跌幅
 df["MA5"] = df["Close"].rolling(window=5).mean()  # 移動平均線 (MA)
@@ -224,7 +233,7 @@ import mplfinance as mpf
 
 # 讀取pickle檔案資料
 df = pd.read_pickle("tmp_df_data1.pkl")
-df = df.tail(10)
+df = df.tail(30)
 
 # ==========================================
 # 步驟 2：數據分析 (資料處理與計算買賣訊號)
