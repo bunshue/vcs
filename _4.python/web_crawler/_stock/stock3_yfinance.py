@@ -46,33 +46,31 @@ import mplfinance as mpf
 
 print("------------------------------------------------------------")  # 60個
 
+def get_stock_data():
+    # 取得網站資料
+    print("取得資料 日線資料")
+    print("抓取台積電 (2330) 2026年8月到10月的日線資料")
+    dl = DataLoader()  # 初始化資料載入器
+    df = dl.taiwan_stock_daily(stock_id="2330", start_date="2026-08-01", end_date="2026-11-01")  # 稍微拉長時間，畫均線才不會斷掉
+    return df
+
+""" 即時讀取網路資料
+df = get_stock_data()
+
+# 存檔
+print("存檔, df轉pickle")
+df.to_pickle("tmp_df_data1.pkl")
+
+# print("比較df df1是否相同")
+# cc = df.equals(df1)
+# print(cc)
 """
-個股日收盤行情（Daily Stock Trading Quotes）標準資料格式
-['date', 'stock_id', 'Trading_Volume', 'Trading_money', 'open', 'max', 'min', 'close', 'spread', 'Trading_turnover']
-• date（日期）：交易當天的日期（在台股資料中，通常呈現為民國紀年如 112/10/24 或西元紀年 20231024）。
-• stock_id（證券代號）：股票的四碼或六碼代號（例如 2330 代表台積電）。
-• Trading_Volume（成交股數）：當天這檔股票總共成交了多少股（注意：台股 1 張 = 1,000 股）。
-• Trading_money（成交金額）：當天總成交的累計新台幣金額。
-• open（開盤價）：當天早上 9:00 開盤的第一筆成交價格。
-• max（最高價）：當天盤中成交的最高價格。
-• min（最低價）：當天盤中成交的最低價格。
-• close（收盤價）：當天下午 1:30 收盤時的最後一筆成交價格。
-• spread（漲跌價差）：當天收盤價與前一個交易日收盤價的差額（有正負號或由其他欄位標示漲跌）。
-• Trading_turnover（成交筆數）：當天這檔股票總共撮合成功了多少筆交易。
-"""
 
-"""
-# 取得網站資料
-print("取得資料 日線資料")
-print("抓取台積電 (2330) 2026年9月到10月的日線資料")
+# 讀取pickle檔案資料
+df1 = pd.read_pickle("tmp_df_data1.pkl")
+df = df1.tail(10)
 
-dl = DataLoader()  # 初始化資料載入器
-
-df = dl.taiwan_stock_daily(
-    stock_id="2330", start_date="2026-08-01", end_date="2026-11-01"  # 稍微拉長時間，畫均線才不會斷掉
-)
-
-# 取得資料, 自己分析
+# 取得資料內容
 print("列印取得的日線資料, 前5筆")
 print(df.head())
 print("df的形狀 : ", df.shape)
@@ -80,39 +78,22 @@ print("df的欄位 : ", df.columns.tolist())
 
 print("------------------------------")  # 30個
 
-# 存檔
-print("df轉csv")
-df.to_csv("tmp_df_data1.csv", index=False, header=True)
-df.to_csv("tmp_df_data2.csv", index=False, header=True, encoding="utf8")
-"""
-
-# 讀取檔案資料
-df1 = pd.read_csv("tmp_df_data1.csv")
-
-# 取得資料, 自己分析
-print("bbbbbbbb------------------------------")  # 30個
-print("列印取得的日線資料, 前5筆")
-print(df1.head())
-print("df的形狀 : ", df1.shape)
-print("df的欄位 : ", df1.columns.tolist())
-
-
-df2 = pd.read_csv("tmp_df_data2.csv")
-
-# 取得資料, 自己分析
-print("bbbbbbbb------------------------------")  # 30個
-print("列印取得的日線資料, 前5筆")
-print(df2.head())
-print("df的形狀 : ", df2.shape)
-print("df的欄位 : ", df2.columns.tolist())
-
-df = df1
-
-print("------------------------------")  # 30個
-
 # df的10個欄位
 # “日期”  、“股票代碼”、“成交股數”、“成交金額”、“開盤價”、
 # “最高價”、“最低價”  、“收盤價”  、 "漲跌價差”、“成交筆數”
+"""
+個股日收盤行情（Daily Stock Trading Quotes）標準資料格式
+date            （日期）    ：交易當天的日期（在台股資料中，通常呈現為民國紀年如 112/10/24 或西元紀年 20231024）。
+stock_id        （證券代號）：股票的四碼或六碼代號（例如 2330 代表台積電）。
+Trading_Volume  （成交股數）：當天這檔股票總共成交了多少股（注意：台股 1 張 = 1,000 股）。
+Trading_money   （成交金額）：當天總成交的累計新台幣金額。
+open            （開盤價）  ：當天早上 9:00 開盤的第一筆成交價格。
+max             （最高價）  ：當天盤中成交的最高價格。
+min             （最低價）  ：當天盤中成交的最低價格。
+close           （收盤價）  ：當天下午 1:30 收盤時的最後一筆成交價格。
+spread          （漲跌價差）：當天收盤價與前一個交易日收盤價的差額（有正負號或由其他欄位標示漲跌）。
+Trading_turnover（成交筆數）：當天這檔股票總共撮合成功了多少筆交易。
+"""
 day = df["date"].astype(str)  # 日期
 stock_id = df["stock_id"].astype(str)  # 股票代碼
 volume = df["Trading_Volume"].astype(float)  # 成交量（Trading_Volume）
@@ -124,6 +105,7 @@ close = df["close"].astype(float)  # 收盤價 Close
 spread = df["spread"].astype(float)  # 買賣價差（Spread）
 turnover = df["Trading_turnover"].astype(float)  # 交易筆數（Trading_turnover）
 
+plt.figure(figsize=(10, 8))
 plt.plot(day, _open, "s-", color="r", label="開盤價  Open Price")
 plt.plot(day, close, "s-", color="g", label="收盤價 Close Price")
 plt.plot(day, _max, "s", color="r", label="最高價 Max")
@@ -142,8 +124,11 @@ for idx in range(M):
     plt.scatter(idx, y_min, color="g", marker="s", s=40, zorder=5)
 
 plt.legend(loc="best", fontsize=16)
+plt.xticks(rotation=30)
 
 plt.show()
+
+print("------------------------------------------------------------")  # 60個
 
 # ==========================================
 # 步驟 2：數據分析 (資料處理與計算)
@@ -218,7 +203,6 @@ my_style = mpf.make_mpf_style(
 )
 
 # 繪製 K 線圖 (包含 5日/20日均線 與 下方的成交量) + 中文
-
 mpf.plot(
     df,
     type="candle",  # 類型為 K 線圖 (Candlestick)
@@ -236,17 +220,11 @@ print("------------------------------------------------------------")  # 60個
 
 import mplfinance as mpf
 
-print("取得資料 日線資料")
-print("抓取台積電 (2330) 2026年9月到10月的日線資料")
+# df = get_stock_data()
 
-dl = DataLoader()  # 初始化資料載入器
-
-df = dl.taiwan_stock_daily(
-    stock_id="2330", start_date="2026-08-01", end_date="2026-10-28"  # 稍微拉長時間，畫均線才不會斷掉
-)
-
-print("列印取得的日線資料, 前5筆")
-print(df.head())
+# 讀取pickle檔案資料
+df = pd.read_pickle("tmp_df_data1.pkl")
+df = df.tail(10)
 
 # ==========================================
 # 步驟 2：數據分析 (資料處理與計算買賣訊號)
@@ -266,11 +244,15 @@ rename_dict = {
     "close": "Close",
 }
 
+# 判斷成交量欄位到底是叫 Trading_Volume 還是 volume
 if "Trading_Volume" in df.columns:
-    rename_dict["Trading_Volume"] = "Volume"
+    print("xxxxx111")
+    rename_dict["Trading_Volume"] = "Volume"  # "Trading_Volume"改"Volume"
 elif "volume" in df.columns:
-    rename_dict["volume"] = "Volume"
-df = df.rename(columns=rename_dict)
+    print("xxxxx222")
+    rename_dict["volume"] = "Volume"  # "volume"改"Volume"
+
+df = df.rename(columns=rename_dict)  # 修改欄位名稱
 
 df["Date"] = pd.to_datetime(df["Date"])
 df.set_index("Date", inplace=True)
@@ -414,7 +396,8 @@ print("==================================")
 # 步驟 6：繪製資產淨值走勢圖 (產出成果圖)
 # ==========================================
 # 呼叫我們先前設定好的中文字型設定，確保圖片能顯示中文
-plt.figure(figsize=(10, 5))
+
+plt.figure(figsize=(10, 8))
 plt.plot(df.index, df["Total_Value"], label="均線策略資產淨值", color="blue", linewidth=2)
 plt.axhline(y=initial_capital, color="red", linestyle="--", label="初始資金 (100萬)")
 
@@ -445,8 +428,11 @@ new_df = (df["Date"] >= start_date) & (df["Date"] <= end_date)
 print("new_df的形狀 : ", new_df.shape)
 
 df1 = df.loc[new_df]
+
+plt.figure(figsize=(10, 8))
+
 stock_data = df1.set_index("Date")
-stock_data.plot(subplots=True, figsize=(8, 8))
+stock_data.plot(subplots=True, figsize=(10, 8))
 plt.legend(loc="best")
 plt.suptitle("Alphabet Inc.字母控股 股價")
 
@@ -692,6 +678,8 @@ df = yf.Ticker("0005.HK").history(period="10y")
 df = df.filter(["Close"])
 df = df.rename(columns={"Close": "GT"})
 
+plt.figure(figsize=(10, 8))
+
 # plt.style.use("seaborn-darkgrid")
 plt.xlabel("Date")
 plt.ylabel("Price")
@@ -860,7 +848,8 @@ data["MA5"] = data["Close"].rolling(window=5).mean()
 data["MA20"] = data["Close"].rolling(window=20).mean()
 
 # 繪製股價和移動平均線
-plt.figure(figsize=(10, 6))
+# plt.figure(figsize=(10, 6))
+plt.figure(figsize=(10, 8))
 plt.plot(data["Close"], label="AAPL Close", color="blue")
 plt.plot(data["MA5"], label="5-Day MA", color="green")
 plt.plot(data["MA20"], label="20-Day MA", color="red")
@@ -884,7 +873,8 @@ data["SMA5"] = data["Close"].rolling(window=5).mean()
 data["SMA20"] = data["Close"].rolling(window=20).mean()
 
 # 繪製收盤價和移動平均線
-plt.figure(figsize=(10, 6))
+# plt.figure(figsize=(10, 6))
+plt.figure(figsize=(10, 8))
 plt.plot(data["Close"], label="Close Price", alpha=0.5)
 plt.plot(data["SMA5"], label="5-Day SMA", alpha=0.8)
 plt.plot(data["SMA20"], label="20-Day SMA", alpha=0.8)
@@ -924,7 +914,8 @@ data["MA20"] = data["Close"].rolling(window=20).mean()
 data["MA60"] = data["Close"].rolling(window=60).mean()
 
 # 繪製股價和移動平均線
-plt.figure(figsize=(10, 6))
+# plt.figure(figsize=(10, 6))
+plt.figure(figsize=(10, 8))
 plt.plot(data["Close"], label="TSMC Close", color="blue")
 plt.plot(data["MA5"], label="5-Day MA", color="green")
 plt.plot(data["MA20"], label="20-Day MA", color="red")
@@ -1156,6 +1147,7 @@ from mplfinance.original_flavor import candlestick_ohlc
 data_price = [1, 2, 3, 4, 5]
 
 # 繪製圖片
+# plt.figure(figsize=(10, 8))
 fig = plt.figure(
     num="matplotlib 02",
     figsize=(12, 8),
@@ -1282,6 +1274,7 @@ close = all_df["收盤價"].astype(float)
 
 # step 2 create plot
 plt.figure(figsize=(12, 8), dpi=100)
+# plt.figure(figsize=(10, 8))
 
 # step 3 plot
 plt.plot(day, close, "s-", color="r", label="Close Price")
@@ -1393,7 +1386,6 @@ print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
-
 
 print("------------------------------------------------------------")  # 60個
 

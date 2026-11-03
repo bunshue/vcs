@@ -63,6 +63,10 @@ namespace vcs_Draw5_Image_ImageAttributes
                 new float[] {0,      0,      0,      0, 1}
             });
 
+            // Sepia 公式
+            //int R = (int)(0.393 * p.R + 0.769 * p.G + 0.189 * p.B);
+            //int G = (int)(0.349 * p.R + 0.686 * p.G + 0.168 * p.B);
+            //int B = (int)(0.272 * p.R + 0.534 * p.G + 0.131 * p.B);
             public static readonly ColorMatrix Sepia = new ColorMatrix(new float[][]
             {
                 //           紅對紅00 紅對綠01 紅對藍02
@@ -130,6 +134,7 @@ namespace vcs_Draw5_Image_ImageAttributes
         {
             Bitmap image = new Bitmap(vcs_Draw5_Image_ImageAttributes.Properties.Resources.rotation_about_three_axes);
 
+            //                        目標矩形, 來源矩形
             e.Graphics.DrawImage(image, 10, 710, image.Width * 2 / 3 + 50, image.Height * 2 / 3 + 50);
         }
 
@@ -367,7 +372,7 @@ namespace vcs_Draw5_Image_ImageAttributes
             g.Clear(Color.Pink);
 
             float alpha = 0.5f;  // 透明度
-            //使用 color matrix, 設定 Alpha = 0.5
+            //使用 顏色矩陣 (Color Matrix), 設定 Alpha = 0.5
             ColorMatrix cm = new ColorMatrix();
             cm.Matrix33 = alpha; // 透明度
 
@@ -378,6 +383,7 @@ namespace vcs_Draw5_Image_ImageAttributes
             // 貼上使用CM轉換過的影像
             int W = bitmap2.Width;
             int H = bitmap2.Height;
+            //                         目標矩形,              來源矩形
             g.DrawImage(bitmap2, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
 
             pictureBox1.Image = bitmap1;
@@ -395,7 +401,20 @@ namespace vcs_Draw5_Image_ImageAttributes
             int H = bitmap1.Height;
             Bitmap bitmap2 = new Bitmap(W, H);  // 建立一個新的空白圖片，與原圖大小相同
 
-            // 設定 Sepia 的顏色矩陣 (Color Matrix)
+            // 設定 Sepia 的 顏色矩陣 (Color Matrix)
+            // 色彩調整矩陣 Sepia
+            float[][] matrix =
+            {
+                //           紅對紅00 紅對綠01 紅對藍02
+                new float[] {0.393f,  0.349f,  0.272f,  0, 0},  // 紅
+                //           綠對紅10 綠對綠11 綠對藍12
+                new float[] {0.769f,  0.686f,  0.534f,  0, 0},  // 綠
+                //           藍對紅20 藍對綠21 藍對藍22
+                new float[] {0.189f,  0.168f,  0.131f,  0, 0},  // 藍
+                new float[] {0,       0,       0,       1, 0},
+                new float[] {0,       0,       0,       0, 1}
+            };
+
             ColorMatrix cm = new ColorMatrix(new float[][]
             {
                 new float[] {0.393f, 0.349f, 0.272f, 0, 0},
@@ -411,6 +430,7 @@ namespace vcs_Draw5_Image_ImageAttributes
 
             // 使用 Graphics 將原圖繪製到新圖片上，同時套用濾鏡
             Graphics g = Graphics.FromImage(bitmap2);
+            //                         目標矩形,             來源矩形
             g.DrawImage(bitmap1, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
 
             pictureBox1.Image = bitmap2;
@@ -440,7 +460,7 @@ namespace vcs_Draw5_Image_ImageAttributes
             int width = image.Width;
             int height = image.Height;
 
-            float[][] colorMatrixElements =
+            float[][] matrix =
             {
                 new float[] {2,  0,  0,  0, 0},      // red scaling factor of 2
                 new float[] {0,  1,  0,  0, 0},      // green scaling factor of 1
@@ -451,23 +471,11 @@ namespace vcs_Draw5_Image_ImageAttributes
             //將紅色元件加倍
             //將0.2新增至紅色、綠色和藍色元件
 
-            ColorMatrix cm = new ColorMatrix(colorMatrixElements);
+            ColorMatrix cm = new ColorMatrix(matrix);
+            ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
-            ia.SetColorMatrix(
-               cm,
-               ColorMatrixFlag.Default,
-               ColorAdjustType.Bitmap);
-
-            g.DrawImage(image, 0, 0);
-
-            g.DrawImage(
-               image,
-               new Rectangle(100, 100, width, height),  // destination rectangle 
-               0, 0,        // upper-left corner of source rectangle 
-               width,       // width of source rectangle
-               height,      // height of source rectangle
-               GraphicsUnit.Pixel,
-               ia);
+            //                                  目標矩形,              來源矩形
+            g.DrawImage(image, new Rectangle(0, 0, width, height), 0, 0, width, height, GraphicsUnit.Pixel, ia);
 
             pictureBox1.Image = bitmap2;
             pictureBox2.Image = Image.FromFile(pic_filename);  // 原圖
@@ -509,7 +517,7 @@ namespace vcs_Draw5_Image_ImageAttributes
                     new float[] {0, 0, 0, 1, 0},
                     new float[] {0, 0, 0, 0, 1},
                 };
-                //使用 color matrix
+                //使用 顏色矩陣 (Color Matrix)
                 ColorMatrix cm = new ColorMatrix(matrix);
                 ImageAttributes ia = new ImageAttributes();
                 ia.SetColorMatrix(cm);
@@ -524,9 +532,11 @@ namespace vcs_Draw5_Image_ImageAttributes
                 };
                 Rectangle rect = new Rectangle(x, 0, W - x, H);
                 // 貼上使用CM轉換過的影像
+                //                  目標矩形, 來源矩形
                 gr.DrawImage(bitmap1, points, rect, GraphicsUnit.Pixel, ia);
 
                 //改用, 免用points rect
+                //                  目標矩形,  來源矩形
                 //g.DrawImage(bmp, new Rectangle(0, 0, bmp.Width, bmp.Height), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, ia);
             }
             pictureBox1.Image = bitmap2;
@@ -549,7 +559,6 @@ namespace vcs_Draw5_Image_ImageAttributes
 
             Bitmap bmp = new Bitmap(pic_filename);
 
-            // Make the ColorMatrix.
             ColorMatrix cm = new ColorMatrix(new float[][]
             {
                 new float[] {r, 0, 0, 0, 0},
@@ -572,6 +581,7 @@ namespace vcs_Draw5_Image_ImageAttributes
 
             Graphics gr = Graphics.FromImage(bitmap1);
             gr.Clear(Color.Pink);
+            //              目標矩形, 來源矩形
             gr.DrawImage(bmp, points, rect, GraphicsUnit.Pixel, ia);
 
             pictureBox1.Image = bitmap1;
@@ -606,6 +616,7 @@ namespace vcs_Draw5_Image_ImageAttributes
 
             g.Clear(Color.Pink);
 
+            //            目標矩形, 來源矩形
             g.DrawImage(bmp, points, rect, GraphicsUnit.Pixel, ia);
 
             pictureBox1.Image = bitmap1;
@@ -803,9 +814,11 @@ namespace vcs_Draw5_Image_ImageAttributes
             //原圖
             x_st = 0;
             y_st = 0;
+            //                 目標矩形, 來源矩形
             g.DrawImage(bmp, x_st, y_st, bmp.Width, bmp.Height);
             Bitmap b1 = measure_gray_scale(bmp);
             x_st = 512 + BORDER;
+            //                  目標矩形, 來源矩形
             g.DrawImage(b1, x_st, y_st, b1.Width, b1.Height);
             g.DrawString("Gamma = 1", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(20, 20));
 
@@ -820,6 +833,7 @@ namespace vcs_Draw5_Image_ImageAttributes
 
             x_st = 0;
             y_st = 256 + BORDER;
+            //                  目標矩形, 來源矩形
             g.DrawImage(bmp, new Rectangle(x_st, y_st, bmp.Width, bmp.Height), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, ia);
             g.DrawString("Gamma = " + gamma.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(x_st + 20, y_st + 20));
 
@@ -827,6 +841,7 @@ namespace vcs_Draw5_Image_ImageAttributes
             Rectangle rect = new Rectangle(x_st, y_st, bmp.Width, bmp.Height);
             Bitmap b2 = measure_gray_scale(bitmap1.Clone(rect, PixelFormat.Format32bppArgb));
             x_st = 512 + BORDER;
+            //                  目標矩形, 來源矩形
             g.DrawImage(b2, x_st, y_st, b2.Width, b2.Height);
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
@@ -840,6 +855,7 @@ namespace vcs_Draw5_Image_ImageAttributes
 
             x_st = 0;
             y_st = 256 + BORDER + 256 + BORDER;
+            //                  目標矩形, 來源矩形
             g.DrawImage(bmp, new Rectangle(x_st, y_st, bmp.Width, bmp.Height), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, ia);
             g.DrawString("Gamma = " + gamma.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(x_st + 20, y_st + 20));
 
@@ -847,6 +863,7 @@ namespace vcs_Draw5_Image_ImageAttributes
             rect = new Rectangle(x_st, y_st, bmp.Width, bmp.Height);
             Bitmap b3 = measure_gray_scale(bitmap1.Clone(rect, PixelFormat.Format32bppArgb));
             x_st = 512 + BORDER;
+            //                  目標矩形, 來源矩形
             g.DrawImage(b3, x_st, y_st, b3.Width, b3.Height);
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
@@ -866,6 +883,7 @@ namespace vcs_Draw5_Image_ImageAttributes
             ImageAttributes ia = new ImageAttributes();
             ia.SetGamma(gamma, ColorAdjustType.Bitmap);
 
+            //                  目標矩形, 來源矩形
             g.DrawImage(bmp, new Rectangle(0, 0, bmp.Width, bmp.Height), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, ia);
 
             pictureBox1.Image = bitmap1;
@@ -897,6 +915,7 @@ namespace vcs_Draw5_Image_ImageAttributes
             g.Clear(Color.Pink);
 
             Rectangle dst_rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
+            //                  目標矩形, 來源矩形
             g.DrawImage(bmp, dst_rect, 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, ia);
 
             pictureBox1.Image = bitmap1;
@@ -934,8 +953,7 @@ namespace vcs_Draw5_Image_ImageAttributes
         {
             //淡入效果
 
-            //五. 以淡入淡出效果顯示圖像
-            //原理: 使用 ImageAttrributes 類的 SetColorMatrix() 方法設置顏色,
+            //五. 以淡入淡出效果顯示圖像, 使用 ColorMatrix
             //調整矩陣實現淡出的效果. 此類還可以對顏色進行校正, 調暗, 調亮和移除等
 
             Graphics g = this.pictureBox1.CreateGraphics();
@@ -987,8 +1005,8 @@ namespace vcs_Draw5_Image_ImageAttributes
                 cm.Matrix22 = (float)count;
                 cm.Matrix33 = (float)count;
                 ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
-                g.DrawImage(MyBitmap, new Rectangle(0, 0, W, H),
-                0, 0, W, H, GraphicsUnit.Pixel, ia);
+                //                         目標矩形,                來源矩形
+                g.DrawImage(MyBitmap, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
                 Thread.Sleep(20);
                 count = (float)(count + 0.02);
             }
@@ -1048,8 +1066,9 @@ namespace vcs_Draw5_Image_ImageAttributes
                 cm.Matrix22 = (float)count;
                 cm.Matrix33 = (float)count;
                 ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
-                g.DrawImage(MyBitmap, new Rectangle(0, 0, W, H),
-                0, 0, W, H, GraphicsUnit.Pixel, ia);
+
+                //                         目標矩形,                來源矩形
+                g.DrawImage(MyBitmap, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
                 Thread.Sleep(20);
                 count = (float)(count - 0.01);
             }
@@ -1083,16 +1102,18 @@ namespace vcs_Draw5_Image_ImageAttributes
                 new float[] {0,  0,  0,  1,  0},
                 new float[] {0,  0,  0,  0,  1}
             };
-            //使用 color matrix
+            //使用 顏色矩陣 (Color Matrix)
             ColorMatrix cm = new ColorMatrix(matrix);
             ImageAttributes ia = new ImageAttributes();
             ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
             richTextBox1.Text += "pt = " + image.GetPixel(50, 50).ToString() + "\n";
 
+            //                            目標矩形, 來源矩形
             e.Graphics.DrawImage(image, 10, 10, W, H);
 
             // 貼上使用CM轉換過的影像
+            //                  目標矩形, 來源矩形
             e.Graphics.DrawImage(
                image,
                new Rectangle(10, 300, W, H),  // destination rectangle 
@@ -1434,7 +1455,7 @@ namespace vcs_Draw5_Image_ImageAttributes
         {
             if (flag_color_matrix_valid == false)
             {
-                richTextBox1.Text += "無 color matrix, 離開\n";
+                richTextBox1.Text += "無 顏色矩陣 (Color Matrix), 離開\n";
                 return;
             }
             else
@@ -1457,11 +1478,11 @@ namespace vcs_Draw5_Image_ImageAttributes
         {
             print_color_matrix(matrix);
 
-            //使用 color matrix
+            //使用 顏色矩陣 (Color Matrix)
             ColorMatrix cm = new ColorMatrix(matrix);
             ImageAttributes ia = new ImageAttributes();
-            //ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);same
-            //ia.SetColorMatrices(cm, null);//same
+            //ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);  // same
+            //ia.SetColorMatrices(cm, null);  // same
             ia.SetColorMatrix(cm);
 
             g.Clear(Color.Pink);
@@ -1469,6 +1490,7 @@ namespace vcs_Draw5_Image_ImageAttributes
             Bitmap bmp = new Bitmap(pic_filename);
             int W = bmp.Width;
             int H = bmp.Height;
+            //                      目標矩形,            來源矩形
             g.DrawImage(bmp, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
 
             pictureBox1.Image = bitmap1;
@@ -1622,6 +1644,8 @@ namespace vcs_Draw5_Image_ImageAttributes
             ColorMatrix cm = new ColorMatrix(matrix);
             ImageAttributes ia = new ImageAttributes();
             ia.SetColorMatrix(cm);
+
+            //                             目標矩形,         來源矩形
             g.DrawImage(bitmap1, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
             ia.Dispose();
             g.Dispose();
@@ -1645,6 +1669,7 @@ namespace vcs_Draw5_Image_ImageAttributes
             ColorMatrix cm = new ColorMatrix(matrix);
             ImageAttributes ia = new ImageAttributes();
             ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+            //                            目標矩形,          來源矩形
             g.DrawImage(bitmap1, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
             ia.Dispose();
             g.Dispose();
@@ -1653,11 +1678,11 @@ namespace vcs_Draw5_Image_ImageAttributes
 
         private void radioButton_cm_CheckedChanged(object sender, EventArgs e)
         {
-            richTextBox1.Text += "Color Matrix : " + ((RadioButton)sender).Text + "\n";
+            richTextBox1.Text += "顏色矩陣 (Color Matrix) : " + ((RadioButton)sender).Text + "\n";
 
             //用Class包裝ColorMatrix
 
-            //使用 color matrix
+            //使用 顏色矩陣 (Color Matrix)
             ColorMatrix cm = ColorMatrixs.Negative;
 
             if (radioButton_m4.Checked == true)
@@ -1720,6 +1745,7 @@ namespace vcs_Draw5_Image_ImageAttributes
             Bitmap bmp = new Bitmap(pic_filename);
             int W = bmp.Width;
             int H = bmp.Height;
+            //                        目標矩形,          來源矩形
             g.DrawImage(bmp, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
 
             pictureBox1.Image = bitmap1;
@@ -1847,7 +1873,7 @@ namespace vcs_Draw5_Image_ImageAttributes
             do_image_rotation(rotate_type, rotate_angle);
         }
 
-        float[][] get_color_matrix(int rotate_type)
+        float[][] get_color_matrix_totation(int rotate_type)
         {
             float degrees = (float)rotate_angle;
             double r = degrees * System.Math.PI / 180; // degrees to radians
@@ -1931,20 +1957,15 @@ namespace vcs_Draw5_Image_ImageAttributes
 
             ImageAttributes ia = new ImageAttributes();
 
-            ColorMatrix cm = new ColorMatrix(get_color_matrix(rotate_type));
+            ColorMatrix cm = new ColorMatrix(get_color_matrix_totation(rotate_type));
 
             ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
+            //                  目標矩形, 來源矩形
             g.DrawImage(image, 0, 0, W, H);
 
-            g.DrawImage(
-               image,
-               new Rectangle(20, 240, W, H),  // destination rectangle
-                0, 0,        // upper-left corner of source rectangle
-                W,       // width of source rectangle
-                H,      // height of source rectangle
-                GraphicsUnit.Pixel,
-               ia);
+            //                  目標矩形, 來源矩形
+            g.DrawImage(image, new Rectangle(20, 240, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
 
             pictureBox1.Image = bitmap1;
         }
@@ -1958,41 +1979,12 @@ namespace vcs_Draw5_Image_ImageAttributes
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-/*
-            Image tmp = Image.FromFile(filename);
-            this.pictureBox1.Image = Image.FromFile(filename);
-            Graphics g = Graphics.FromImage(tmp);
-            Rectangle destRect = new Rectangle(0, 0, tmp.Width, tmp.Height);
-            g.DrawImage(tmp, destRect, 0, 0, tmp.Width, tmp.Height, GraphicsUnit.Pixel, attr);
-            this.pictureBox1.Image = (Image)tmp.Clone();
-*/
-/*
-            // Sepia 公式
-            //int R = (int)(0.393 * p.R + 0.769 * p.G + 0.189 * p.B);
-            //int G = (int)(0.349 * p.R + 0.686 * p.G + 0.168 * p.B);
-            //int B = (int)(0.272 * p.R + 0.534 * p.G + 0.131 * p.B);
-
-            // 色彩調整矩陣 Sepia 效果
-            float[][] matrix =
-            {
-                //           紅對紅00 紅對綠01 紅對藍02
-                new float[] {0.393f,  0.349f,  0.272f,  0, 0},  // 紅
-                //           綠對紅10 綠對綠11 綠對藍12
-                new float[] {0.769f,  0.686f,  0.534f,  0, 0},  // 綠
-                //           藍對紅20 藍對綠21 藍對藍22
-                new float[] {0.189f,  0.168f,  0.131f,  0, 0},  // 藍
-                new float[] {0,       0,       0,       1, 0},
-                new float[] {0,       0,       0,       0, 1}
-            };
-*/
-
-
 /* 解釋
-            ImageAttributes ia = new ImageAttributes();  // ImageAttributes 類別的多個方法會使用色彩矩陣來調整影像色彩
-            ia.SetColorMatrix(cm);  // 設定預設分類的色彩調整矩陣
+ImageAttributes ia = new ImageAttributes();  // ImageAttributes 類別的多個方法會使用色彩矩陣來調整影像色彩
+ia.SetColorMatrix(cm);  // 設定預設分類的色彩調整矩陣
 */
 
-// color matrix
+// 顏色矩陣 (Color Matrix)
 // 定義含有 RGBA 空間座標的 5 x 5 矩陣
 // (R, G, B, A, 1) 乘上 此矩陣
 
@@ -2011,13 +2003,11 @@ namespace vcs_Draw5_Image_ImageAttributes
             // w
             cm.Matrix44 = 1.00f;
             print_ColorMatrix(cm);
-*/
+//------------------------------------------------------------  # 60個
 
-
-/*
 ImageAttributes的使用
 是在畫影像 g.DrawImage(bmp, ....)時，
-把影像套用了ImageAttributes的設定，像是gamma, color matrix
+把影像套用了ImageAttributes的設定，像是gamma, 顏色矩陣 (Color Matrix)
 
 所以，並不是bmp被套用設定，是bmp經過設定被畫入畫布
 
@@ -2026,4 +2016,10 @@ ImageAttributes的使用
 ImageAttributes ia = new ImageAttributes();
 ia.SetGamma
 ia.SetGamma(0.6f);
+
+//------------------------------------------------------------  # 60個 
+ 
+ 
+ 
+ 
 */

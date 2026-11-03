@@ -33,6 +33,9 @@ _vcs_new_test1/*
 _整理資料/*
 _4.python/___new/test_venv/*
 *_tmp.txt
+tmp_*.csv
+tmp_*.jpg
+IMG_*.jpg
 spiderman*.mp4
 老北京*.*
 

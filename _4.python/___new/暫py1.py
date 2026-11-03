@@ -61,7 +61,7 @@ print(stock_data)
 1 Failed download:
 ['2330.TW']: Exception('%ticker%: No price data found, symbol may be delisted (1d 2026-10-12 -> 2026-10-20)')
 
-
+6060
 
 方案一：抓台股首選 —— 使用 FinMind（台灣團隊開發，免申請 Key）
 這是台灣金融資料開源團隊做的，直接對接台灣證交所，抓台股快又穩定，絕對不會有退市或時區錯誤。
@@ -79,7 +79,6 @@ stock_data = yf.download(ticker, start=start_date, end=end_date, interval=interv
 
 print("--- 方式 A 結果 ---")
 print(stock_data.tail())
-
 
 # 方式 B：用 period 參數直接抓最近一個月（最不容易出錯，強烈推薦）
 print("\n--- 方式 B 結果 ---")
@@ -101,12 +100,9 @@ pandas-datareader 已停止維護，透過它直接從 Yahoo Finance 抓取歷�
 yolo 停車場車牌辨識
 https://ithelp.ithome.com.tw/articles/10343595
 
-
 词频（term frequency，TF）
 
-
 Http 狀態碼
-
 
 1xx : 資訊
 2xx : 成功
@@ -114,13 +110,11 @@ Http 狀態碼
 4xx : 前端請求錯誤
 5xx : 後端處理有問題
 
-
 python
 
 舊 : ix		新 loc iloc
 
 ix is deprecated in v0.20.0 and replaced by loc, iloc.
-
 
 # ------------------------------------------------------------  # 60個
 
@@ -177,9 +171,9 @@ classifiers = [
 
 在 D:\_git\vcs\_4.python\import_module\_PyPI_Package_Author 之下
 
-指令1 : pip install .  // 安裝目前資料夾的套件
-指令2 : pip install build twine  // 安裝發布工具, build 負責打包, twine 負責上傳。
-指令3 : python -m build  // 產生發布檔案
+指令1：pip install .  // 安裝目前資料夾的套件
+指令2：pip install build twine  // 安裝發布工具, build 負責打包, twine 負責上傳。
+指令3：python -m build  // 產生發布檔案
 
 在專案目錄產生：
 dist/
@@ -203,11 +197,11 @@ pypi-xxxxxxxxxxxxxxxxxxxx
 ------------------------------
 [4. 發布]
 ------------------------------
-指令4 : twine upload dist/*
+指令4：twine upload dist/*
 或者
-指令4 : python -m twine upload dist/*
+指令4：python -m twine upload dist/*
 或者
-指令4 : python -m twine upload dist/* --verbose
+指令4：python -m twine upload dist/* --verbose
 
 輸入 API token
 
@@ -951,13 +945,12 @@ plt.title(str(locs1) + "\n" + str(locs2))
 2. GPIO控制LED亮暗 : RED / 亮度1~5 / CEN / AVG / AUTO
 3. 恆亮LED : Start / Smart / Brighten / Darken / Metering
 
-
+6060
 
 18+
 https://garageplay.tw/plus/news/2?cp=setn7d&tk=st-cpc-gpm-lk-2407191-vod
 
-
-
+6060
 
 """
 from pydub import AudioSegment  # 載入 pydub 的 AudioSegment 模組
@@ -2055,6 +2048,7 @@ save_name = "{}.abc".format(filename)
     return os.system(cmd) 
 
 # ------------------------------------------------------------  # 60個
+
 log : true/false
 
 plt.xlabel('Episodes (log scale)' if log else 'Episodes')
@@ -2088,13 +2082,10 @@ cv2.destroyAllWindows()
 cv2.addWeighted(overlay, 0.1, draw, 1 - 0.1, 0, draw)
 """
 
-
 # ------------------------------------------------------------  # 60個
 
 
 # ------------------------------------------------------------  # 60個
-
-
 
 num=1234
 bin(num)	轉二進位
@@ -3161,9 +3152,11 @@ https://github.com/MorvanZhou
 turtle 指令
 turtle.Screen().reset()
 
+# ------------------------------------------------------------  # 60個
+
 做一個完整版 TextEditor 大整理
 
-
+# ------------------------------------------------------------  # 60個
 
 CVzone
 
@@ -3403,6 +3396,7 @@ D: keys() values() items()
 
 orientation : 直方圖方向 'vertical'(垂直, 預設), 'horizontal'(水平)
 
+6060
 
 字典長度
     print(len(c))
@@ -3411,7 +3405,7 @@ orientation : 直方圖方向 'vertical'(垂直, 預設), 'horizontal'(水平)
 字典值
     print(list(c.values()))
 
-
+6060
 
 # 圖片大小畫素算法
 # figsize=(W, H), dpi=100
@@ -3650,11 +3644,12 @@ Scrolllbar	捲軸
 Text		多行文字標籤
 Toplevel	建立子視窗容器
 
-
+6060
 
 套件(package) : 多個模組組合在一起
 套件就是一個模組庫 函式庫
 
+6060
 
 Numpy 知識
 1-0 建議閱讀書籍
@@ -3864,7 +3859,6 @@ def submit():
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-    #告訴Python直譯器檔案編碼為UTF-8
 
-
 for p in photos:
         image = p['images'][0]
         filename = image['source'].split('/')[-1].split('?')[0]
@@ -3873,7 +3867,6 @@ for p in photos:
         pic = requests.get(image['source'], stream=True)
         shutil.copyfileobj(pic.raw, fp)
         fp.close()
-	
 
 print("有無錢號的差異")
 print("無錢號 : " + "cos(x^2)")
@@ -6073,10 +6066,9 @@ pip install Pillow
 
 C:\Users\david\AppData\Local\Programs\Python\Python38-32>python.exe -m pip install opencv-python
 
-
 pip : the package installer for Python
 
-
+6060
 
 安裝 python-3.7.7.exe
 
@@ -6268,14 +6260,4 @@ print("------------------------------------------------------------")  # 60個
 
 用半連線分隔主題內之分支
 print("------------------------------")  # 30個
-
-6060
-------------------------------------------------------------
-3030
-------------------------------
-
-
-
-
-
 

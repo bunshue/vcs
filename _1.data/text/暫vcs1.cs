@@ -1,4 +1,19 @@
 ﻿
+//------------------------------------------------------------  # 60個
+
+
+//------------------------------------------------------------  # 60個
+
+
+            Image tmp = Image.FromFile(filename);
+            this.pictureBox1.Image = Image.FromFile(filename);
+            Graphics g = Graphics.FromImage(tmp);
+            Rectangle destRect = new Rectangle(0, 0, tmp.Width, tmp.Height);
+            //                  目標矩形, 來源矩形
+            g.DrawImage(tmp, destRect, 0, 0, tmp.Width, tmp.Height, GraphicsUnit.Pixel, attr);
+            this.pictureBox1.Image = (Image)tmp.Clone();
+
+//------------------------------------------------------------  # 60個
 
         private void richTextBox2_TextChanged(object sender, EventArgs e)
         {
@@ -14,8 +29,7 @@
             richTextBox1.ScrollToCaret();
         }
 
-
-
+//------------------------------------------------------------  # 60個
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
