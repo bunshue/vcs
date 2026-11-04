@@ -121,27 +121,27 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox_rotation = new System.Windows.Forms.GroupBox();
-            this.rb_rotate_g = new System.Windows.Forms.RadioButton();
-            this.rb_rotate_b = new System.Windows.Forms.RadioButton();
-            this.rb_rotate_r = new System.Windows.Forms.RadioButton();
+            this.rb_rotate_none = new System.Windows.Forms.RadioButton();
             this.groupBox_angle = new System.Windows.Forms.GroupBox();
-            this.rb_rotate_angle60 = new System.Windows.Forms.RadioButton();
-            this.rb_rotate_angle0 = new System.Windows.Forms.RadioButton();
-            this.rb_rotate_angle30 = new System.Windows.Forms.RadioButton();
-            this.rb_rotate_angle90 = new System.Windows.Forms.RadioButton();
-            this.rb_rotate_angle45 = new System.Windows.Forms.RadioButton();
-            this.rb_rotate_angle135 = new System.Windows.Forms.RadioButton();
-            this.rb_rotate_angle180 = new System.Windows.Forms.RadioButton();
-            this.rb_rotate_angle150 = new System.Windows.Forms.RadioButton();
-            this.rb_rotate_angle120 = new System.Windows.Forms.RadioButton();
+            this.rb_rotate_angle315 = new System.Windows.Forms.RadioButton();
+            this.rb_rotate_angle330 = new System.Windows.Forms.RadioButton();
+            this.rb_rotate_angle300 = new System.Windows.Forms.RadioButton();
             this.rb_rotate_angle225 = new System.Windows.Forms.RadioButton();
             this.rb_rotate_angle270 = new System.Windows.Forms.RadioButton();
             this.rb_rotate_angle240 = new System.Windows.Forms.RadioButton();
             this.rb_rotate_angle210 = new System.Windows.Forms.RadioButton();
-            this.rb_rotate_angle315 = new System.Windows.Forms.RadioButton();
-            this.rb_rotate_angle330 = new System.Windows.Forms.RadioButton();
-            this.rb_rotate_angle300 = new System.Windows.Forms.RadioButton();
-            this.rb_rotate_none = new System.Windows.Forms.RadioButton();
+            this.rb_rotate_angle135 = new System.Windows.Forms.RadioButton();
+            this.rb_rotate_angle180 = new System.Windows.Forms.RadioButton();
+            this.rb_rotate_angle150 = new System.Windows.Forms.RadioButton();
+            this.rb_rotate_angle120 = new System.Windows.Forms.RadioButton();
+            this.rb_rotate_angle45 = new System.Windows.Forms.RadioButton();
+            this.rb_rotate_angle90 = new System.Windows.Forms.RadioButton();
+            this.rb_rotate_angle60 = new System.Windows.Forms.RadioButton();
+            this.rb_rotate_angle0 = new System.Windows.Forms.RadioButton();
+            this.rb_rotate_angle30 = new System.Windows.Forms.RadioButton();
+            this.rb_rotate_g = new System.Windows.Forms.RadioButton();
+            this.rb_rotate_b = new System.Windows.Forms.RadioButton();
+            this.rb_rotate_r = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -179,6 +179,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 32;
+            this.button2.Text = "test alpha";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -1117,39 +1118,16 @@
             this.groupBox_rotation.TabStop = false;
             this.groupBox_rotation.Text = "旋轉";
             // 
-            // rb_rotate_g
+            // rb_rotate_none
             // 
-            this.rb_rotate_g.AutoSize = true;
-            this.rb_rotate_g.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_rotate_g.Location = new System.Drawing.Point(195, 23);
-            this.rb_rotate_g.Name = "rb_rotate_g";
-            this.rb_rotate_g.Size = new System.Drawing.Size(85, 20);
-            this.rb_rotate_g.TabIndex = 2;
-            this.rb_rotate_g.Text = "對G旋轉";
-            this.rb_rotate_g.UseVisualStyleBackColor = true;
-            // 
-            // rb_rotate_b
-            // 
-            this.rb_rotate_b.AutoSize = true;
-            this.rb_rotate_b.Checked = true;
-            this.rb_rotate_b.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_rotate_b.Location = new System.Drawing.Point(15, 22);
-            this.rb_rotate_b.Name = "rb_rotate_b";
-            this.rb_rotate_b.Size = new System.Drawing.Size(84, 20);
-            this.rb_rotate_b.TabIndex = 1;
-            this.rb_rotate_b.Text = "對B旋轉";
-            this.rb_rotate_b.UseVisualStyleBackColor = true;
-            // 
-            // rb_rotate_r
-            // 
-            this.rb_rotate_r.AutoSize = true;
-            this.rb_rotate_r.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_rotate_r.Location = new System.Drawing.Point(105, 21);
-            this.rb_rotate_r.Name = "rb_rotate_r";
-            this.rb_rotate_r.Size = new System.Drawing.Size(84, 20);
-            this.rb_rotate_r.TabIndex = 0;
-            this.rb_rotate_r.Text = "對R旋轉";
-            this.rb_rotate_r.UseVisualStyleBackColor = true;
+            this.rb_rotate_none.AutoSize = true;
+            this.rb_rotate_none.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_none.Location = new System.Drawing.Point(286, 23);
+            this.rb_rotate_none.Name = "rb_rotate_none";
+            this.rb_rotate_none.Size = new System.Drawing.Size(42, 20);
+            this.rb_rotate_none.TabIndex = 299;
+            this.rb_rotate_none.Text = "無";
+            this.rb_rotate_none.UseVisualStyleBackColor = true;
             // 
             // groupBox_angle
             // 
@@ -1176,106 +1154,38 @@
             this.groupBox_angle.TabStop = false;
             this.groupBox_angle.Text = "旋轉角度";
             // 
-            // rb_rotate_angle60
+            // rb_rotate_angle315
             // 
-            this.rb_rotate_angle60.AutoSize = true;
-            this.rb_rotate_angle60.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_rotate_angle60.Location = new System.Drawing.Point(151, 21);
-            this.rb_rotate_angle60.Name = "rb_rotate_angle60";
-            this.rb_rotate_angle60.Size = new System.Drawing.Size(42, 20);
-            this.rb_rotate_angle60.TabIndex = 2;
-            this.rb_rotate_angle60.Text = "60";
-            this.rb_rotate_angle60.UseVisualStyleBackColor = true;
+            this.rb_rotate_angle315.AutoSize = true;
+            this.rb_rotate_angle315.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_angle315.Location = new System.Drawing.Point(103, 90);
+            this.rb_rotate_angle315.Name = "rb_rotate_angle315";
+            this.rb_rotate_angle315.Size = new System.Drawing.Size(50, 20);
+            this.rb_rotate_angle315.TabIndex = 16;
+            this.rb_rotate_angle315.Text = "315";
+            this.rb_rotate_angle315.UseVisualStyleBackColor = true;
             // 
-            // rb_rotate_angle0
+            // rb_rotate_angle330
             // 
-            this.rb_rotate_angle0.AutoSize = true;
-            this.rb_rotate_angle0.Checked = true;
-            this.rb_rotate_angle0.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_rotate_angle0.Location = new System.Drawing.Point(15, 22);
-            this.rb_rotate_angle0.Name = "rb_rotate_angle0";
-            this.rb_rotate_angle0.Size = new System.Drawing.Size(34, 20);
-            this.rb_rotate_angle0.TabIndex = 1;
-            this.rb_rotate_angle0.TabStop = true;
-            this.rb_rotate_angle0.Text = "0";
-            this.rb_rotate_angle0.UseVisualStyleBackColor = true;
+            this.rb_rotate_angle330.AutoSize = true;
+            this.rb_rotate_angle330.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_angle330.Location = new System.Drawing.Point(151, 90);
+            this.rb_rotate_angle330.Name = "rb_rotate_angle330";
+            this.rb_rotate_angle330.Size = new System.Drawing.Size(50, 20);
+            this.rb_rotate_angle330.TabIndex = 14;
+            this.rb_rotate_angle330.Text = "330";
+            this.rb_rotate_angle330.UseVisualStyleBackColor = true;
             // 
-            // rb_rotate_angle30
+            // rb_rotate_angle300
             // 
-            this.rb_rotate_angle30.AutoSize = true;
-            this.rb_rotate_angle30.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_rotate_angle30.Location = new System.Drawing.Point(55, 22);
-            this.rb_rotate_angle30.Name = "rb_rotate_angle30";
-            this.rb_rotate_angle30.Size = new System.Drawing.Size(42, 20);
-            this.rb_rotate_angle30.TabIndex = 0;
-            this.rb_rotate_angle30.Text = "30";
-            this.rb_rotate_angle30.UseVisualStyleBackColor = true;
-            // 
-            // rb_rotate_angle90
-            // 
-            this.rb_rotate_angle90.AutoSize = true;
-            this.rb_rotate_angle90.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_rotate_angle90.Location = new System.Drawing.Point(15, 48);
-            this.rb_rotate_angle90.Name = "rb_rotate_angle90";
-            this.rb_rotate_angle90.Size = new System.Drawing.Size(42, 20);
-            this.rb_rotate_angle90.TabIndex = 3;
-            this.rb_rotate_angle90.Text = "90";
-            this.rb_rotate_angle90.UseVisualStyleBackColor = true;
-            // 
-            // rb_rotate_angle45
-            // 
-            this.rb_rotate_angle45.AutoSize = true;
-            this.rb_rotate_angle45.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_rotate_angle45.Location = new System.Drawing.Point(103, 22);
-            this.rb_rotate_angle45.Name = "rb_rotate_angle45";
-            this.rb_rotate_angle45.Size = new System.Drawing.Size(42, 20);
-            this.rb_rotate_angle45.TabIndex = 4;
-            this.rb_rotate_angle45.Text = "45";
-            this.rb_rotate_angle45.UseVisualStyleBackColor = true;
-            // 
-            // rb_rotate_angle135
-            // 
-            this.rb_rotate_angle135.AutoSize = true;
-            this.rb_rotate_angle135.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_rotate_angle135.Location = new System.Drawing.Point(103, 47);
-            this.rb_rotate_angle135.Name = "rb_rotate_angle135";
-            this.rb_rotate_angle135.Size = new System.Drawing.Size(50, 20);
-            this.rb_rotate_angle135.TabIndex = 8;
-            this.rb_rotate_angle135.Text = "135";
-            this.rb_rotate_angle135.UseVisualStyleBackColor = true;
-            // 
-            // rb_rotate_angle180
-            // 
-            this.rb_rotate_angle180.AutoSize = true;
-            this.rb_rotate_angle180.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_rotate_angle180.Location = new System.Drawing.Point(15, 73);
-            this.rb_rotate_angle180.Name = "rb_rotate_angle180";
-            this.rb_rotate_angle180.Size = new System.Drawing.Size(50, 20);
-            this.rb_rotate_angle180.TabIndex = 7;
-            this.rb_rotate_angle180.Text = "180";
-            this.rb_rotate_angle180.UseVisualStyleBackColor = true;
-            // 
-            // rb_rotate_angle150
-            // 
-            this.rb_rotate_angle150.AutoSize = true;
-            this.rb_rotate_angle150.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_rotate_angle150.Location = new System.Drawing.Point(151, 48);
-            this.rb_rotate_angle150.Name = "rb_rotate_angle150";
-            this.rb_rotate_angle150.Size = new System.Drawing.Size(50, 20);
-            this.rb_rotate_angle150.TabIndex = 6;
-            this.rb_rotate_angle150.Text = "150";
-            this.rb_rotate_angle150.UseVisualStyleBackColor = true;
-            // 
-            // rb_rotate_angle120
-            // 
-            this.rb_rotate_angle120.AutoSize = true;
-            this.rb_rotate_angle120.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_rotate_angle120.Location = new System.Drawing.Point(55, 48);
-            this.rb_rotate_angle120.Name = "rb_rotate_angle120";
-            this.rb_rotate_angle120.Size = new System.Drawing.Size(50, 20);
-            this.rb_rotate_angle120.TabIndex = 5;
-            this.rb_rotate_angle120.Text = "120";
-            this.rb_rotate_angle120.UseVisualStyleBackColor = true;
+            this.rb_rotate_angle300.AutoSize = true;
+            this.rb_rotate_angle300.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_angle300.Location = new System.Drawing.Point(55, 90);
+            this.rb_rotate_angle300.Name = "rb_rotate_angle300";
+            this.rb_rotate_angle300.Size = new System.Drawing.Size(50, 20);
+            this.rb_rotate_angle300.TabIndex = 13;
+            this.rb_rotate_angle300.Text = "300";
+            this.rb_rotate_angle300.UseVisualStyleBackColor = true;
             // 
             // rb_rotate_angle225
             // 
@@ -1321,49 +1231,141 @@
             this.rb_rotate_angle210.Text = "210";
             this.rb_rotate_angle210.UseVisualStyleBackColor = true;
             // 
-            // rb_rotate_angle315
+            // rb_rotate_angle135
             // 
-            this.rb_rotate_angle315.AutoSize = true;
-            this.rb_rotate_angle315.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_rotate_angle315.Location = new System.Drawing.Point(103, 90);
-            this.rb_rotate_angle315.Name = "rb_rotate_angle315";
-            this.rb_rotate_angle315.Size = new System.Drawing.Size(50, 20);
-            this.rb_rotate_angle315.TabIndex = 16;
-            this.rb_rotate_angle315.Text = "315";
-            this.rb_rotate_angle315.UseVisualStyleBackColor = true;
+            this.rb_rotate_angle135.AutoSize = true;
+            this.rb_rotate_angle135.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_angle135.Location = new System.Drawing.Point(103, 47);
+            this.rb_rotate_angle135.Name = "rb_rotate_angle135";
+            this.rb_rotate_angle135.Size = new System.Drawing.Size(50, 20);
+            this.rb_rotate_angle135.TabIndex = 8;
+            this.rb_rotate_angle135.Text = "135";
+            this.rb_rotate_angle135.UseVisualStyleBackColor = true;
             // 
-            // rb_rotate_angle330
+            // rb_rotate_angle180
             // 
-            this.rb_rotate_angle330.AutoSize = true;
-            this.rb_rotate_angle330.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_rotate_angle330.Location = new System.Drawing.Point(151, 90);
-            this.rb_rotate_angle330.Name = "rb_rotate_angle330";
-            this.rb_rotate_angle330.Size = new System.Drawing.Size(50, 20);
-            this.rb_rotate_angle330.TabIndex = 14;
-            this.rb_rotate_angle330.Text = "330";
-            this.rb_rotate_angle330.UseVisualStyleBackColor = true;
+            this.rb_rotate_angle180.AutoSize = true;
+            this.rb_rotate_angle180.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_angle180.Location = new System.Drawing.Point(15, 73);
+            this.rb_rotate_angle180.Name = "rb_rotate_angle180";
+            this.rb_rotate_angle180.Size = new System.Drawing.Size(50, 20);
+            this.rb_rotate_angle180.TabIndex = 7;
+            this.rb_rotate_angle180.Text = "180";
+            this.rb_rotate_angle180.UseVisualStyleBackColor = true;
             // 
-            // rb_rotate_angle300
+            // rb_rotate_angle150
             // 
-            this.rb_rotate_angle300.AutoSize = true;
-            this.rb_rotate_angle300.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_rotate_angle300.Location = new System.Drawing.Point(55, 90);
-            this.rb_rotate_angle300.Name = "rb_rotate_angle300";
-            this.rb_rotate_angle300.Size = new System.Drawing.Size(50, 20);
-            this.rb_rotate_angle300.TabIndex = 13;
-            this.rb_rotate_angle300.Text = "300";
-            this.rb_rotate_angle300.UseVisualStyleBackColor = true;
+            this.rb_rotate_angle150.AutoSize = true;
+            this.rb_rotate_angle150.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_angle150.Location = new System.Drawing.Point(151, 48);
+            this.rb_rotate_angle150.Name = "rb_rotate_angle150";
+            this.rb_rotate_angle150.Size = new System.Drawing.Size(50, 20);
+            this.rb_rotate_angle150.TabIndex = 6;
+            this.rb_rotate_angle150.Text = "150";
+            this.rb_rotate_angle150.UseVisualStyleBackColor = true;
             // 
-            // rb_rotate_none
+            // rb_rotate_angle120
             // 
-            this.rb_rotate_none.AutoSize = true;
-            this.rb_rotate_none.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_rotate_none.Location = new System.Drawing.Point(286, 23);
-            this.rb_rotate_none.Name = "rb_rotate_none";
-            this.rb_rotate_none.Size = new System.Drawing.Size(42, 20);
-            this.rb_rotate_none.TabIndex = 299;
-            this.rb_rotate_none.Text = "無";
-            this.rb_rotate_none.UseVisualStyleBackColor = true;
+            this.rb_rotate_angle120.AutoSize = true;
+            this.rb_rotate_angle120.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_angle120.Location = new System.Drawing.Point(55, 48);
+            this.rb_rotate_angle120.Name = "rb_rotate_angle120";
+            this.rb_rotate_angle120.Size = new System.Drawing.Size(50, 20);
+            this.rb_rotate_angle120.TabIndex = 5;
+            this.rb_rotate_angle120.Text = "120";
+            this.rb_rotate_angle120.UseVisualStyleBackColor = true;
+            // 
+            // rb_rotate_angle45
+            // 
+            this.rb_rotate_angle45.AutoSize = true;
+            this.rb_rotate_angle45.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_angle45.Location = new System.Drawing.Point(103, 22);
+            this.rb_rotate_angle45.Name = "rb_rotate_angle45";
+            this.rb_rotate_angle45.Size = new System.Drawing.Size(42, 20);
+            this.rb_rotate_angle45.TabIndex = 4;
+            this.rb_rotate_angle45.Text = "45";
+            this.rb_rotate_angle45.UseVisualStyleBackColor = true;
+            // 
+            // rb_rotate_angle90
+            // 
+            this.rb_rotate_angle90.AutoSize = true;
+            this.rb_rotate_angle90.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_angle90.Location = new System.Drawing.Point(15, 48);
+            this.rb_rotate_angle90.Name = "rb_rotate_angle90";
+            this.rb_rotate_angle90.Size = new System.Drawing.Size(42, 20);
+            this.rb_rotate_angle90.TabIndex = 3;
+            this.rb_rotate_angle90.Text = "90";
+            this.rb_rotate_angle90.UseVisualStyleBackColor = true;
+            // 
+            // rb_rotate_angle60
+            // 
+            this.rb_rotate_angle60.AutoSize = true;
+            this.rb_rotate_angle60.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_angle60.Location = new System.Drawing.Point(151, 21);
+            this.rb_rotate_angle60.Name = "rb_rotate_angle60";
+            this.rb_rotate_angle60.Size = new System.Drawing.Size(42, 20);
+            this.rb_rotate_angle60.TabIndex = 2;
+            this.rb_rotate_angle60.Text = "60";
+            this.rb_rotate_angle60.UseVisualStyleBackColor = true;
+            // 
+            // rb_rotate_angle0
+            // 
+            this.rb_rotate_angle0.AutoSize = true;
+            this.rb_rotate_angle0.Checked = true;
+            this.rb_rotate_angle0.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_angle0.Location = new System.Drawing.Point(15, 22);
+            this.rb_rotate_angle0.Name = "rb_rotate_angle0";
+            this.rb_rotate_angle0.Size = new System.Drawing.Size(34, 20);
+            this.rb_rotate_angle0.TabIndex = 1;
+            this.rb_rotate_angle0.TabStop = true;
+            this.rb_rotate_angle0.Text = "0";
+            this.rb_rotate_angle0.UseVisualStyleBackColor = true;
+            // 
+            // rb_rotate_angle30
+            // 
+            this.rb_rotate_angle30.AutoSize = true;
+            this.rb_rotate_angle30.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_angle30.Location = new System.Drawing.Point(55, 22);
+            this.rb_rotate_angle30.Name = "rb_rotate_angle30";
+            this.rb_rotate_angle30.Size = new System.Drawing.Size(42, 20);
+            this.rb_rotate_angle30.TabIndex = 0;
+            this.rb_rotate_angle30.Text = "30";
+            this.rb_rotate_angle30.UseVisualStyleBackColor = true;
+            // 
+            // rb_rotate_g
+            // 
+            this.rb_rotate_g.AutoSize = true;
+            this.rb_rotate_g.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_g.Location = new System.Drawing.Point(195, 23);
+            this.rb_rotate_g.Name = "rb_rotate_g";
+            this.rb_rotate_g.Size = new System.Drawing.Size(85, 20);
+            this.rb_rotate_g.TabIndex = 2;
+            this.rb_rotate_g.Text = "對G旋轉";
+            this.rb_rotate_g.UseVisualStyleBackColor = true;
+            // 
+            // rb_rotate_b
+            // 
+            this.rb_rotate_b.AutoSize = true;
+            this.rb_rotate_b.Checked = true;
+            this.rb_rotate_b.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_b.Location = new System.Drawing.Point(15, 22);
+            this.rb_rotate_b.Name = "rb_rotate_b";
+            this.rb_rotate_b.Size = new System.Drawing.Size(84, 20);
+            this.rb_rotate_b.TabIndex = 1;
+            this.rb_rotate_b.TabStop = true;
+            this.rb_rotate_b.Text = "對B旋轉";
+            this.rb_rotate_b.UseVisualStyleBackColor = true;
+            // 
+            // rb_rotate_r
+            // 
+            this.rb_rotate_r.AutoSize = true;
+            this.rb_rotate_r.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_rotate_r.Location = new System.Drawing.Point(105, 21);
+            this.rb_rotate_r.Name = "rb_rotate_r";
+            this.rb_rotate_r.Size = new System.Drawing.Size(84, 20);
+            this.rb_rotate_r.TabIndex = 0;
+            this.rb_rotate_r.Text = "對R旋轉";
+            this.rb_rotate_r.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 

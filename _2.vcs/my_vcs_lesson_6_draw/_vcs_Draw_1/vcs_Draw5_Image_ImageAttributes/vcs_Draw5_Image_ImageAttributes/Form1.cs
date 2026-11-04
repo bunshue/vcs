@@ -441,6 +441,35 @@ namespace vcs_Draw5_Image_ImageAttributes
 
         private void button2_Click(object sender, EventArgs e)
         {
+            Bitmap bitmap1 = new Bitmap(pic_filename);  // bitmap1 放原圖
+            Bitmap bitmap2 = new Bitmap(pic_filename);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.Pink);
+
+            float alpha = 0.1f;  // 透明度
+
+            while (alpha <= 1.0)
+            {
+                this.Text = alpha.ToString();
+
+                //使用 顏色矩陣 (Color Matrix), 設定 Alpha
+                ColorMatrix cm = new ColorMatrix();
+                cm.Matrix33 = alpha; // 透明度
+
+                ImageAttributes ia = new ImageAttributes();
+                ia.SetColorMatrix(cm);
+
+                // 貼上使用CM轉換過的影像
+                int W = bitmap2.Width;
+                int H = bitmap2.Height;
+                //                         目標矩形,              來源矩形
+                g.DrawImage(bitmap2, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
+                pictureBox1.Image = bitmap1;
+                Application.DoEvents();
+
+                Thread.Sleep(20);
+                alpha += 0.01f;
+            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -457,16 +486,16 @@ namespace vcs_Draw5_Image_ImageAttributes
 
             Image image = new Bitmap(bitmap1);
             ImageAttributes ia = new ImageAttributes();
-            int width = image.Width;
-            int height = image.Height;
+            int w = image.Width;
+            int h = image.Height;
 
             float[][] matrix =
             {
-                new float[] {2,  0,  0,  0, 0},      // red scaling factor of 2
-                new float[] {0,  1,  0,  0, 0},      // green scaling factor of 1
-                new float[] {0,  0,  1,  0, 0},      // blue scaling factor of 1
-                new float[] {0,  0,  0,  1, 0},      // alpha scaling factor of 1
-                new float[] {.2f, .2f, .2f, 0, 1}    // three translations of 0.2
+                new float[] {2,  0,  0,  0, 0},      // 紅色調2倍
+                new float[] {0,  1,  0,  0, 0},      // 綠色不變
+                new float[] {0,  0,  1,  0, 0},      // 藍色不變
+                new float[] {0,  0,  0,  1, 0},      // alpha不變
+                new float[] {0.2f, 0.2f, 0.2f, 0, 1}    // RGB 增加0.2 three translations of 0.2
             };
             //將紅色元件加倍
             //將0.2新增至紅色、綠色和藍色元件
@@ -474,8 +503,8 @@ namespace vcs_Draw5_Image_ImageAttributes
             ColorMatrix cm = new ColorMatrix(matrix);
             ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
-            //                                  目標矩形,              來源矩形
-            g.DrawImage(image, new Rectangle(0, 0, width, height), 0, 0, width, height, GraphicsUnit.Pixel, ia);
+            //                               目標矩形,     來源矩形
+            g.DrawImage(image, new Rectangle(0, 0, w, h), 0, 0, w, h, GraphicsUnit.Pixel, ia);
 
             pictureBox1.Image = bitmap2;
             pictureBox2.Image = Image.FromFile(pic_filename);  // 原圖
@@ -493,16 +522,13 @@ namespace vcs_Draw5_Image_ImageAttributes
             Bitmap bitmap2 = new Bitmap(W, H);
 
             Graphics gr = Graphics.FromImage(bitmap2);
-            // Define target colors.
+
             Color[] color =
             {
-                //Color.Red, Color.Orange, Color.Yellow,
-                //Color.Green, Color.Blue, Color.Indigo,
-                //Color.Violet,
-                
                 Color.Red, Color.OrangeRed, Color.Yellow,
-                Color.Green, Color.Blue, Color.Indigo,
-                Color.Fuchsia,
+                Color.Green, Color.Blue, Color.Indigo,  // 靛青
+                Color.Fuchsia,  // 紫紅色 / 洋紅
+                //Color.Violet,
             };
             const float scale = 2.0f;
 
@@ -517,6 +543,7 @@ namespace vcs_Draw5_Image_ImageAttributes
                     new float[] {0, 0, 0, 1, 0},
                     new float[] {0, 0, 0, 0, 1},
                 };
+
                 //使用 顏色矩陣 (Color Matrix)
                 ColorMatrix cm = new ColorMatrix(matrix);
                 ImageAttributes ia = new ImageAttributes();
@@ -1113,15 +1140,8 @@ namespace vcs_Draw5_Image_ImageAttributes
             e.Graphics.DrawImage(image, 10, 10, W, H);
 
             // 貼上使用CM轉換過的影像
-            //                  目標矩形, 來源矩形
-            e.Graphics.DrawImage(
-               image,
-               new Rectangle(10, 300, W, H),  // destination rectangle 
-                0, 0,        // upper-left corner of source rectangle 
-                W,       // width of source rectangle
-                H,      // height of source rectangle
-                GraphicsUnit.Pixel,
-               ia);
+            //                  目標矩形,   來源矩形
+            e.Graphics.DrawImage(               image,               new Rectangle(10, 300, W, H),                0, 0,                W,                H,                GraphicsUnit.Pixel,               ia);
         }
 
         private void bt_reset_Click(object sender, EventArgs e)

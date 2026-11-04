@@ -6200,7 +6200,7 @@ price = pd.DataFrame({tic: data['Adj Close'] for tic, data in all_data.items()})
 volume = pd.DataFrame({tic: data['Volume'] for tic, data in all_data.items()})
 
 # 百分比變化
-returns = price.pct_change()
+returns = price.pct_change()  # pct_change() : 與前項差的百分比
 returns.tail()
 
 # corr() 用來計算相關係數
@@ -7330,6 +7330,7 @@ close_px = pd.read_csv("data/stock_px.csv", parse_dates=True, index_col=0)
 close_px[:6]
 
 # 計算 日收益率 與 SPX之間的年度相關係數組成的DataFrame
+# pct_change() : 與前項差的百分比
 rets = close_px.pct_change().dropna()  # dropna()刪除含有NaN的列
 rets[:6]
 
