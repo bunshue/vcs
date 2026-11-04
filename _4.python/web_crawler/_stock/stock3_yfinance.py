@@ -29,6 +29,12 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
+
+def show():
+    plt.show()
+    pass
+
+
 print("------------------------------------------------------------")  # 60個
 print("使用 FinMind ST")
 print("------------------------------------------------------------")  # 60個
@@ -118,7 +124,8 @@ div_df = api.taiwan_stock_dividend_result(
 print('除權息')
 print(div_df)
 print(div_df.columns)
-print(div_df.head())
+
+print("檢視前幾行\n", div_df.head())
 """
 
 import FinMind
@@ -158,7 +165,8 @@ df = df1.tail(30)
 # 取得資料內容
 print("列印取得的日線資料, 前5筆")
 print(df)
-# print(df.head())
+
+# print("檢視前幾行\n", df.head())
 print("df的形狀 : ", df.shape)
 print("df的欄位 : ", df.columns.tolist())
 
@@ -270,14 +278,14 @@ print("修改後 df的欄位 : ", df.columns.tolist())
 print("------------------------------")  # 30個
 
 print('aaaa')
-print(df.head())
+print("檢視前幾行\n", df.head())
 
 # 2. 將 Date 轉為時間格式，並設定為索引 (Index)
 df["Date"] = pd.to_datetime(df["Date"])
 df.set_index("Date", inplace=True)
 
 print('bbbb')
-print(df.head())
+print("檢視前幾行\n", df.head())
 
 print("--- 最新 5 筆數據 ---")
 print(df[["Open", "High", "Low", "Close"]].tail())
@@ -295,8 +303,9 @@ print(df[["Open", "High", "Low", "Close"]].tail())
 	• 定義：過去 20 個交易日收盤價的平均值，代表市場「近一個月」的中短期平均成本。
 	• 特點：相對平滑，能過濾掉短期的上下震盪，常用來判斷中短期趨勢是否維持健康。
 """
-df["MA5"] = df["Close"].rolling(window=5).mean()  # 移動平均線 (MA) 連同過去N點平均
+df["MA5"] = df["Close"].rolling(window=5).mean()  # 移動平均線 (MA5) 連同過去N點平均
 df["MA20"] = df["Close"].rolling(window=20).mean()  # 移動平均線 (MA20) 連同過去N點平均
+
 df["Daily_Return"] = df["Close"].pct_change()  # 每日漲跌幅, pct_change() : 與前項差的百分比
 
 print("------------------------------")  # 30個
@@ -319,8 +328,9 @@ print("------------------------------")  # 30個
 
 # 畫週線MA5, 月線MA20
 
-df["ma5"] = df["Close"].rolling(window=5).mean()  # 移動平均線 (MA) 連同過去N點平均
+df["ma5"] = df["Close"].rolling(window=5).mean()  # 移動平均線 (MA5) 連同過去N點平均
 df["ma20"] = df["Close"].rolling(window=20).mean()  # 移動平均線 (MA20) 連同過去N點平均
+
 df["daily_return"] = df["Close"].pct_change()  # 每日漲跌幅, pct_change() : 與前項差的百分比
 
 _ma5 = df["ma5"].astype(float)  # 開盤價 Open
@@ -453,8 +463,8 @@ df["Date"] = pd.to_datetime(df["Date"])
 df.set_index("Date", inplace=True)
 
 # 2. 計算 5日 與 20日 均線
-df["MA5"] = df["Close"].rolling(window=5).mean()
-df["MA20"] = df["Close"].rolling(window=20).mean()
+df["MA5"] = df["Close"].rolling(window=5).mean()  # 移動平均線 (MA5) 連同過去N點平均
+df["MA20"] = df["Close"].rolling(window=20).mean()  # 移動平均線 (MA20) 連同過去N點平均
 
 # 3. 判斷交叉訊號
 # 建立一個訊號欄位：1 代表黃金交叉(買)，-1 代表死亡交叉(賣)
@@ -607,7 +617,6 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("使用 FinMind SP")
 print("------------------------------------------------------------")  # 60個
-'''
 
 # 讀取pickle檔案資料
 df = pd.read_pickle("tmp_df_data1.pkl")
@@ -617,8 +626,8 @@ print("df的形狀 : ", df.shape)
 print(df)
 
 # 計算5天和20天的移動平均線
-df["MA5"] = df["close"].rolling(window=5).mean()
-df["MA20"] = df["close"].rolling(window=20).mean()
+df["MA5"] = df["close"].rolling(window=5).mean()  # 移動平均線 (MA5) 連同過去N點平均
+df["MA20"] = df["close"].rolling(window=20).mean()  # 移動平均線 (MA20) 連同過去N點平均
 
 # 繪製收盤價和移動平均線
 # plt.figure(figsize=(10, 6))
@@ -640,7 +649,7 @@ plt.show()
 # 賣出信號: 5日均線從上方跌破20日均線
 df["Signal"] = 0.0
 df.iloc[5:, df.columns.get_loc("Signal")] = np.where(
-    df["SMA5"].iloc[5:] > df["SMA20"].iloc[5:], 1.0, 0.0
+    df["MA5"].iloc[5:] > df["MA20"].iloc[5:], 1.0, 0.0
 )
 df["Signal_change"] = df["Signal"].diff()
 
@@ -657,9 +666,9 @@ print("------------------------------------------------------------")  # 60個
 df = pd.read_pickle("tmp_df_data1.pkl")
 
 # 計算5天, 20天和60天移動平均線
-df["MA5"] = df["close"].rolling(window=5).mean()
-df["MA20"] = df["close"].rolling(window=20).mean()
-df["MA60"] = df["close"].rolling(window=60).mean()
+df["MA5"] = df["close"].rolling(window=5).mean()  # 移動平均線 (MA5) 連同過去N點平均
+df["MA20"] = df["close"].rolling(window=20).mean()  # 移動平均線 (MA20) 連同過去N點平均
+df["MA60"] = df["close"].rolling(window=60).mean()  # 移動平均線 (MA60) 連同過去N點平均
 
 # 繪製股價和移動平均線
 # plt.figure(figsize=(10, 6))
@@ -708,26 +717,29 @@ r[-100:].plot()
 
 plt.show()
 
+
 # 原本股價圖波動的很厲害，現在我們想讓它變得平滑一點，改看每 20 天的平均
 
-print(P.rolling(window=20).mean())
+P = df["TT"]  # 取出一欄資料
 
-P.rolling(window=20).mean().plot()
+print(P.rolling(window=20).mean())  # 移動平均線 (MA20) 連同過去N點平均
+
+P.rolling(window=20).mean().plot()  # 移動平均線 (MA20) 連同過去N點平均
 
 plt.show()
 
 # 和原本的股價圖比較
 
 P.plot()
-P.rolling(window=20).mean().plot()
+P.rolling(window=20).mean().plot()  # 移動平均線 (MA20) 連同過去N點平均
 
 plt.show()
 
 # 當然也可以算更多天的平均，會變得更平滑
 
 P.plot()
-P.rolling(window=20).mean().plot()
-P.rolling(window=60).mean().plot()
+P.rolling(window=20).mean().plot()  # 移動平均線 (MA20) 連同過去N點平均
+P.rolling(window=60).mean().plot()  # 移動平均線 (MA60) 連同過去N點平均
 
 plt.show()
 
@@ -835,7 +847,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 
 # 加載取數與繪圖所需的函數包
-from hs_udata import set_token, stock_quote_daily
 import matplotlib as mpl
 import matplotlib.dates as mdates
 
@@ -894,117 +905,38 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
-from io import StringIO
-
-
-def get_setting():  # ←將「讀取設定檔」寫成函式, 可讓程式易讀易用
-    result = []  # ←準備一個空串列來存放讀取及解析的結果
-    try:  # 使用 try 來預防開檔或讀檔錯誤
-        with open("data/stock.txt") as f:  # 用 with 以讀取模式開啟檔案
-            slist = f.readlines()  # 以行為單位讀取所有資料
-            print("讀入：", slist)  # 輸出讀到的資料以供確認
-            a, b, c = slist[0].split(",")  # ←將股票字串以逗號切割為串列
-            result = [a, b, c]
-    except:
-        print("data/stock.txt 讀取錯誤")
-    return result  # ←傳回解析的結果, 但如果開檔或讀檔錯誤則會傳回 []
-
-
-def get_data():
-    data = get_setting()
-    print(data)
-    dates = []
-    # print(data[1])
-    start_date = datetime.datetime.strptime(data[1], "%Y%m%d")
-    end_date = datetime.datetime.strptime(data[2], "%Y%m%d")
-    for daynumber in range((end_date - start_date).days + 1):
-        date = start_date + datetime.timedelta(days=daynumber)
-        if date.weekday() < 6:
-            dates.append(date.strftime("%Y%m%d"))
-    return data[0], dates
-
-
-def crawl_data(date, symbol):
-    print("下載股價")
-    url = (
-        "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=csv&date="
-        + date
-        + "&type=ALL"
-    )
-    print(url)
-    response = requests.get(url)
-
-    r_text = [
-        i for i in response.text.split("\n") if len(i.split('",')) == 17 and i[0] != "="
-    ]
-    df = pd.read_csv(StringIO("\n".join(r_text)), header=0)
-
-    df = df.drop(columns=["Unnamed: 16"])
-    filter_df = df[df["證券代號"] == symbol]
-    filter_df.insert(0, "日期", date)
-    df_columns = filter_df.columns
-    return list(filter_df.iloc[0]), filter_df.columns
-
-
-print("------------------------------------------------------------")  # 60個
-
-all_list = []
-stock_symbol, dates = get_data()
-
-for date in dates:
-    time.sleep(5)
-    try:
-        crawler_data = crawl_data(date, stock_symbol)
-        all_list.append(crawler_data[0])
-        df_columns = crawler_data[1]
-        print("  OK!  date = " + date + " ,stock symbol = " + stock_symbol)
-    except:
-        print("error! date = " + date + " ,stock symbol = " + stock_symbol)
-
-all_df = pd.DataFrame(all_list, columns=df_columns)
+'''
+# 讀取pickle檔案資料
+all_df = pd.read_pickle("tmp_df_data1.pkl")
 print(all_df)
 
-# step 1 prepare data
-day = all_df["日期"].astype(str)
-close = all_df["收盤價"].astype(float)
+day = all_df["date"].astype(str)
+close = all_df["close"].astype(float)
 
 plt.figure(figsize=(12, 8), dpi=100)
 # plt.figure(figsize=(10, 8))
-plt.plot(day, close, "s-", color="r", label="Close Price")
-plt.title("TSMC Line chart")
+plt.plot(day, close, "s-", color="r", label="收盤價")
 plt.xticks(fontsize=10, rotation=45)
 plt.yticks(fontsize=10)
 plt.legend(loc="best", fontsize=20)
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+# 3030
 
-all_list = []
-stock_symbol, dates = get_data()
-
-for date in dates:
-    time.sleep(5)
-    try:
-        crawler_data = crawl_data(date, stock_symbol)
-        all_list.append(crawler_data[0])
-        df_columns = crawler_data[1]
-        print("  OK!  date = " + date + " ,stock symbol = " + stock_symbol)
-    except:
-        print("error! date = " + date + " ,stock symbol = " + stock_symbol)
-
-all_df = pd.DataFrame(all_list, columns=df_columns)
+# 讀取pickle檔案資料
+all_df = pd.read_pickle("tmp_df_data1.pkl")
+print(all_df)
 
 # step 1 prepare data
-day = all_df["日期"].astype(str)
-openprice = all_df["開盤價"].astype(float)
-close = all_df["收盤價"].astype(float)
+day = all_df["date"].astype(str)
+openprice = all_df["open"].astype(float)
+close = all_df["close"].astype(float)
 
 # step 2 create plot
 fig, (ax, ax2) = plt.subplots(2, 1, sharex=True, figsize=(12, 8), dpi=100)
 plt.rcParams["font.sans-serif"] = ["Microsoft JhengHei"]
-ax.set_title(stock_symbol + "  開盤價、收盤價 ( " + dates[0] + " ~ " + dates[-1] + " )")
+#ax.set_title("開盤價、收盤價 ( " + all_df["date"][0] + " ~ " + all_df["date"][-1] + " )")
+ax.set_title("開盤價、收盤價")
 
 # step 3 plot 子圖(ax)
 ax.plot(day, openprice, "s-", color="r", label="Open Price")
@@ -1018,52 +950,33 @@ ax2.set_xticklabels(day[::5])
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+# 3030
 
-all_list = []
-stock_symbol, dates = get_data()
-
-for date in dates:
-    time.sleep(5)
-    try:
-        crawler_data = crawl_data(date, stock_symbol)
-        all_list.append(crawler_data[0])
-        df_columns = crawler_data[1]
-        print("  OK!  date = " + date + " ,stock symbol = " + stock_symbol)
-    except:
-        print("error! date = " + date + " ,stock symbol = " + stock_symbol)
-
-all_df = pd.DataFrame(all_list, columns=df_columns)
-
+# 讀取pickle檔案資料
+all_df = pd.read_pickle("tmp_df_data1.pkl")
 print(all_df)
 
 # step 1 prepare data
-day = all_df["日期"].astype(str)
-openprice = all_df["開盤價"].astype(float)
-close = all_df["收盤價"].astype(float)
-high = all_df["最高價"].astype(float)
-low = all_df["最低價"].astype(float)
-volume = all_df["成交股數"].str.replace(",", "").astype(float)
+day = all_df["date"].astype(str)
+openprice = all_df["open"].astype(float)
+close = all_df["close"].astype(float)
+high = all_df["max"].astype(float)
+low = all_df["min"].astype(float)
+volume = all_df["Trading_Volume"].astype(float)  # 成交股數
 
 # step 2 create plot
 fig, (ax, ax2) = plt.subplots(2, 1, sharex=True, figsize=(24, 15), dpi=100)
 plt.rcParams["font.sans-serif"] = ["Microsoft JhengHei"]
-ax.set_title(stock_symbol + "  K 線圖 ( " + dates[0] + " ~ " + dates[1] + " )")
+ax.set_title("K 線圖")
 
 # step 3 plot 子圖(ax)
-mpf.candlestick2_ochl(
-    ax, openprice, close, high, low, width=0.5, colorup="r", colordown="g", alpha=0.6
-)
+# NG
 
-ax.plot(talib.SMA(close, 10), label="10日均線")
-ax.plot(talib.SMA(close, 30), label="30日均線")
-ax.legend(loc="best", fontsize=20)
 ax.grid(True)
 
 # step 3 plot 子圖(ax2)
-mpf.volume_overlay(
-    ax2, openprice, close, volume, colorup="r", colordown="g", width=0.5, alpha=0.8
-)
+# NG
+
 ax2.set_xticks(range(0, len(day), 5))
 ax2.set_xticklabels(day[::5])
 ax2.grid(True)
@@ -1360,8 +1273,8 @@ print(df_quote_new)
 
 print("讀取月營收資料")
 df_monthly_sales = pd.read_csv("./data/stock_monthly_sales.csv")
-cc = df_monthly_sales.head()
-print(cc)
+
+print("檢視前幾行\n", df_monthly_sales.head())
 
 print("轉換日期格式")
 df_quote_new = df_quote.reset_index()
@@ -1418,6 +1331,28 @@ sp500_data = sp500_data.drop(columns=["Datetime"])
 sp500_data.columns = [col.lower() for col in sp500_data.columns]
 
 # 顯示處理後的數據
-print(sp500_data.head())
+print("檢視前幾行\n", sp500_data.head())
 
 print("------------------------------------------------------------")  # 60個
+
+
+# 從台灣證券交易所 下載股價資料
+
+def crawl_data(date, symbol):
+    print("下載股價, 從台灣證券交易所")
+    url = (
+        "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=csv&date="
+        + date
+        + "&type=ALL"
+    )
+    print(url)
+    response = requests.get(url)
+
+    df = df.drop(columns=["Unnamed: 16"])
+    filter_df = df[df["證券代號"] == symbol]
+    filter_df.insert(0, "日期", date)
+    df_columns = filter_df.columns
+    return list(filter_df.iloc[0]), filter_df.columns
+
+
+

@@ -227,13 +227,9 @@ M, N = df.shape
 print(df.shape)
 print("df之大小", M, "X",N)
 
-print(df.shape)
-
 # 列出各列的列索引標籤、表格內容
 print(df.shape[0])
 print(df.index.values)
-
-print("df的欄位 : ", df.columns.tolist())
 
 # 列出所有欄索引(欄位名稱)
 for col in range(df.shape[1]):
@@ -377,7 +373,6 @@ print("刪除欄位 1~3, axis=1")
 df5 = df.drop(df.columns[1:4], axis=1)
 print(df5)
 
-
 """
 #增加、刪除資料欄位
 # 創建?一個新欄位，資料為 col1 欄位的數值*2 
@@ -415,24 +410,24 @@ print("------------------------------------------------------------")  # 60個
 filename = "data/ufo.csv"
 ufo = pd.read_csv(filename)
 
-# print("檢視前幾行\n", ufo.head())
+print("檢視前幾行\n", ufo.head())
 
 # remove a single column (axis=1 refers to columns)
 print("刪除欄位 Colors Reported, axis=1")
 ufo.drop("Colors Reported", axis=1, inplace=True)
 
-# print("檢視前幾行\n", ufo.head())
+print("檢視前幾行\n", ufo.head())
 
 # remove multiple columns at once
 print("刪除欄位 City 和 State, axis=1")
 ufo.drop(["City", "State"], axis=1, inplace=True)
 
-# print("檢視前幾行\n", ufo.head())
+print("檢視前幾行\n", ufo.head())
 
 # remove multiple rows at once (axis=0 refers to rows)
 ufo.drop([0, 1], axis=0, inplace=True)
 
-# print("檢視前幾行\n", ufo.head())
+print("檢視前幾行\n", ufo.head())
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1228,8 +1223,7 @@ titanic = pd.read_csv("data2/titanic_data.csv")
 # 顯示資料集的形狀
 print(titanic.shape)
 
-# 顯示前5筆
-print(titanic.head())
+print("檢視前幾行\n", titanic.head())
 
 # 顯示統計摘要資訊
 print(titanic.describe())
@@ -1244,16 +1238,19 @@ print(np.unique(titanic["PassengerId"].values).size)
 
 print("---指定DataFrame物件的索引欄位---")
 titanic.set_index(["PassengerId"], inplace=True)
-print(titanic.head())
+
+print("檢視前幾行\n", titanic.head())
 
 print("---新增SexCode欄位---")
 titanic["SexCode"] = np.where(titanic["Sex"] == "female", 1, 0)
-print(titanic.head())
+
+print("檢視前幾行\n", titanic.head())
 
 print("---PCass欄位轉換成數值資料---")
 class_mapping = {"1st": 1, "2nd": 2, "3rd": 3}
 titanic["PClass"] = titanic["PClass"].map(class_mapping)
-print(titanic.head())
+
+print("檢視前幾行\n", titanic.head())
 
 print("---檢查Age欄位的遺漏值有多少---")
 print(titanic.isnull().sum())
@@ -1308,7 +1305,8 @@ print("------------------------------------------------------------")  # 60個
 
 titanic = pd.read_csv("data2/titanic_pre.csv")
 titanic["Died"] = np.where(titanic["Survived"] == 0, 1, 0)
-print(titanic.head())
+
+print("檢視前幾行\n", titanic.head())
 
 print("------------------------------")  # 30個
 
@@ -1447,17 +1445,20 @@ print("將age的空值填入0")
 df_sample = df.copy()
 VALUE = 0
 df_sample["age"] = df_sample["age"].fillna(value=VALUE)  # 將指定欄位內空資料填入指定數值
-print(df_sample.head())
+
+print("檢視前幾行\n", df_sample.head())
 
 print("將age的空值填入平均值")
 df_sample = df.copy()
 VALUE = df_sample["age"].mean()
 df_sample["age"] = df_sample["age"].fillna(value=VALUE)  # 將指定欄位內空資料填入指定數值
-print(df_sample.head())
+
+print("檢視前幾行\n", df_sample.head())
 
 df_sample["gender"] = df_sample["gender"].ffill()  # ffill()拿前一個值往下填, 承上
 df_sample["area"] = df_sample["area"].ffill()  # ffill()拿前一個值往下填, 承上
-print(df_sample.head())
+
+print("檢視前幾行\n", df_sample.head())
 
 print("刪除不完整的資料")
 df3 = df.dropna()  # dropna()刪除含有NaN的列
@@ -1474,16 +1475,19 @@ df_sample["area"] = df_sample["area"].ffill()  # ffill()拿前一個值往下填
 
 print(".drop_duplicates 去除重複資料")
 df_sample.drop_duplicates(subset="id", keep="first", inplace=True)
-print(df_sample.head())
+
+print("檢視前幾行\n", df_sample.head())
 
 print("去除欄位中的空白")
 df_sample["job"] = df_sample["job"].str.strip()
 df_sample["job"] = df_sample["job"].str.replace(" ", "")
-print(df_sample.head())
+
+print("檢視前幾行\n", df_sample.head())
 
 print("轉換值的格式")
 df_sample["age"] = df_sample["age"].astype("int32")
-print(df_sample.head())
+
+print("檢視前幾行\n", df_sample.head())
 
 print("------------------------------")  # 30個
 
@@ -8486,3 +8490,14 @@ print("交集合併")
 order_df = pd.merge(order_df, customer_df, left_on="數學", right_on="國文", how="inner")
 
 order_df = pd.merge(order_df, customer_df, left_on="數學", right_index=True, how="inner")
+
+
+"""
+1. 建立df
+2. df 之 info 與 取出資料
+3. df 處理 df 欄位處理
+4. df 欄運算
+
+"""
+
+
