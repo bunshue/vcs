@@ -154,6 +154,10 @@
             this.bt_disk11 = new System.Windows.Forms.Button();
             this.bt_disk09 = new System.Windows.Forms.Button();
             this.bt_disk10 = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.bt_show_disk_info = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBox_drive = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox_search.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -167,6 +171,7 @@
             this.groupBox_file.SuspendLayout();
             this.groupBox_directory.SuspendLayout();
             this.groupBox_disk.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -1652,11 +1657,55 @@
             this.bt_disk10.UseVisualStyleBackColor = true;
             this.bt_disk10.Click += new System.EventHandler(this.bt_disk10_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Location = new System.Drawing.Point(833, 422);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox1.TabIndex = 307;
+            this.pictureBox1.TabStop = false;
+            // 
+            // bt_show_disk_info
+            // 
+            this.bt_show_disk_info.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_show_disk_info.Location = new System.Drawing.Point(964, 390);
+            this.bt_show_disk_info.Name = "bt_show_disk_info";
+            this.bt_show_disk_info.Size = new System.Drawing.Size(69, 38);
+            this.bt_show_disk_info.TabIndex = 306;
+            this.bt_show_disk_info.Text = "檢測";
+            this.bt_show_disk_info.UseVisualStyleBackColor = true;
+            this.bt_show_disk_info.Click += new System.EventHandler(this.bt_show_disk_info_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label1.Location = new System.Drawing.Point(829, 400);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(66, 19);
+            this.label1.TabIndex = 305;
+            this.label1.Text = "磁碟：";
+            // 
+            // comboBox_drive
+            // 
+            this.comboBox_drive.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.comboBox_drive.FormattingEnabled = true;
+            this.comboBox_drive.Location = new System.Drawing.Point(833, 356);
+            this.comboBox_drive.Name = "comboBox_drive";
+            this.comboBox_drive.Size = new System.Drawing.Size(200, 29);
+            this.comboBox_drive.TabIndex = 304;
+            this.comboBox_drive.SelectedIndexChanged += new System.EventHandler(this.comboBox_drive_SelectedIndexChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1096, 731);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.bt_show_disk_info);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.comboBox_drive);
             this.Controls.Add(this.listView_rename_file);
             this.Controls.Add(this.listView_rename_dir);
             this.Controls.Add(this.groupBox_file);
@@ -1696,7 +1745,9 @@
             this.groupBox_file.ResumeLayout(false);
             this.groupBox_directory.ResumeLayout(false);
             this.groupBox_disk.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1827,6 +1878,10 @@
         private System.Windows.Forms.Button bt_disk11;
         private System.Windows.Forms.Button bt_disk09;
         private System.Windows.Forms.Button bt_disk10;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button bt_show_disk_info;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBox_drive;
     }
 }
 

@@ -38,7 +38,12 @@ def show():
     pass
 
 
-'''
+stock_id1 = "2330"  # 2330台積電
+stock_id2 = "2317"  # 2317鴻海
+stock_id3 = "6869"  # 6869雲豹能源
+
+import twstock
+
 print("------------------------------------------------------------")  # 60個
 print("使用 FinMind ST")
 print("------------------------------------------------------------")  # 60個
@@ -308,6 +313,7 @@ print(df[["Open", "High", "Low", "Close"]].tail())
 """
 df["MA5"] = df["Close"].rolling(window=5).mean()  # 移動平均線 (MA5) 連同過去N點平均
 df["MA20"] = df["Close"].rolling(window=20).mean()  # 移動平均線 (MA20) 連同過去N點平均
+df["MA60"] = df["close"].rolling(window=60).mean()  # 移動平均線 (MA60) 連同過去N點平均
 
 df["Daily_Return"] = df["Close"].pct_change()  # 每日漲跌幅, pct_change() : 與前項差的百分比
 
@@ -333,6 +339,7 @@ print("------------------------------")  # 30個
 
 df["ma5"] = df["Close"].rolling(window=5).mean()  # 移動平均線 (MA5) 連同過去N點平均
 df["ma20"] = df["Close"].rolling(window=20).mean()  # 移動平均線 (MA20) 連同過去N點平均
+df["ma60"] = df["close"].rolling(window=60).mean()  # 移動平均線 (MA60) 連同過去N點平均
 
 df["daily_return"] = df["Close"].pct_change()  # 每日漲跌幅, pct_change() : 與前項差的百分比
 
@@ -468,6 +475,7 @@ df.set_index("Date", inplace=True)
 # 2. 計算 5日 與 20日 均線
 df["MA5"] = df["Close"].rolling(window=5).mean()  # 移動平均線 (MA5) 連同過去N點平均
 df["MA20"] = df["Close"].rolling(window=20).mean()  # 移動平均線 (MA20) 連同過去N點平均
+df["MA60"] = df["close"].rolling(window=60).mean()  # 移動平均線 (MA60) 連同過去N點平均
 
 # 3. 判斷交叉訊號
 # 建立一個訊號欄位：1 代表黃金交叉(買)，-1 代表死亡交叉(賣)
@@ -695,7 +703,7 @@ print(r)
 
 print("最後一百筆資料")
 
-r[-100:].plot()
+r[-100:].plot()  # df直接畫出
 
 show()
 
@@ -725,21 +733,8 @@ P.rolling(window=60).mean().plot()  # 移動平均線 (MA60) 連同過去N點平
 
 show()
 
-
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 開始時間 為 60天前
-start = datetime.datetime.now() - datetime.timedelta(days=60)
-
-# 結束時間 為 現在
-end = datetime.date.today()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -887,7 +882,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 """
 Python 測試 twstock
 
@@ -898,43 +893,42 @@ twstock 台灣股市股票價格擷取
 https://pypi.org/project/twstock/
 """
 
-import twstock
-
 stock_id = "2330"  # 2330台積電
 stock_id = "2317"  # 2317鴻海
 
 stock = twstock.Stock(stock_id)  # 以股票代號建立 Stock 物件
 
+print("股票代號:", stock.sid)
 print("個股資訊\n", twstock.codes[stock_id])
 
-print("最新資料\n", stock.price)
-
-print("日期：", stock.date[-1])
-print("開盤價：", stock.open[-1])
-print("最高價：", stock.high[-1])
-print("最低價：", stock.low[-1])
-print("收盤價：", stock.price[-1])
-
-print("股票代號:", stock.sid)
-print("各日收盤價:", stock.price)  # ???
+print("各日資料(近31日)")
+print("各日收盤價:", stock.price)  # 近31個收盤價
 print("各日最高價:", stock.high)
 print("各日最低價:", stock.low)
 print("各日成交股數:", stock.capacity)
 print("各日的日期:", stock.date)
-
-print("近31個收盤價：")
-print(stock.price)  # 近31個收盤價
 
 print("近6個收盤價：")
 print(stock.price[-6:])  # 近6日之收盤價
 
 print("------------------------------")  # 30個
 
-stock = twstock.Stock(stock_id)  # 以股票代號建立 Stock 物件
+print("最新資料")
+print("日期：", stock.date[-1])
+print("開盤價：", stock.open[-1])
+print("最高價：", stock.high[-1])
+print("最低價：", stock.low[-1])
+print("收盤價：", stock.price[-1])
 
-# 取得 2019 年 12 月的資料
-stocklist = stock.fetch(2019, 12)
+print("------------------------------")  # 30個
+
+# 使用語法：（查詢某年某月的股票資料）
+# stock.fetch(year, month)  # 取得 year年month月 的資料
+
+stocklist = stock.fetch(2019, 12)  # 取得 2019年12月 的資料
+print(stocklist)
 for s in stocklist:
+    print(s)
     print(s.date.strftime("%Y-%m-%d"), end="\t")
     print(s.open, end="\t")
     print(s.high, end="\t")
@@ -944,44 +938,73 @@ for s in stocklist:
 print("------------------------------")  # 30個
 
 # 股票即時交易資訊
+
+print("即時資料, 1檔 / 3檔")
+
 realdata = twstock.realtime.get(stock_id)  # 即時資料
+# realdata = twstock.realtime.get([stock_id1, stock_id2, stock_id3])  # 即時資料
+print(realdata)
+
+print("是否讀取成功：", realdata["success"])
+
 if realdata["success"]:  # 如果讀取成功
+    print("timestamp", realdata["timestamp"])
     print("即時股票資料：", realdata["info"]["name"])
+    print("即時股票資料：", realdata["info"]["code"])
+    print("即時股票資料：", realdata["info"]["channel"])
+    print("即時股票資料：", realdata["info"]["name"])
+    print("即時股票資料：", realdata["info"]["fullname"])
+    print("即時股票資料：", realdata["info"]["time"])
+    print("即時股票資料：", realdata["realtime"]["open"])
+    print("即時股票資料：", realdata["realtime"]["high"])
+    print("即時股票資料：", realdata["realtime"]["low"])
     print("開盤價：", realdata["realtime"]["open"])
     print("最高價：", realdata["realtime"]["high"])
     print("最低價：", realdata["realtime"]["low"])
+    print("即時股票資料：", realdata["realtime"]["latest_trade_price"])
+    print("即時股票資料：", realdata["realtime"]["trade_volume"])
+    print("即時股票資料：", realdata["realtime"]["accumulate_trade_volume"])
+    print("即時股票資料：", realdata["realtime"]["best_bid_price"])
+    print("即時股票資料：", realdata["realtime"]["best_bid_volume"])
+    print("即時股票資料：", realdata["realtime"]["best_ask_price"])
+    print("即時股票資料：", realdata["realtime"]["best_ask_volume"])
     print("目前股價：", realdata["realtime"]["latest_trade_price"])
 else:
     print("錯誤：" + realdata["rtmessage"])
+"""
+    "股票代碼",
+    "地區",
+    "股票名稱",
+    "公司全名",
+    "現在時間",
+    "最新成交價",
+    "成交量",
+    "累計成交量",
+    "最佳5檔賣出價",
+    "最佳5檔賣出量",
+    "最佳5檔買進價",
+    "最佳5檔買進量",
+    "開盤價",
+    "最高價",
+    "最低價",
+"""
 
 print("------------------------------")  # 30個
 
-realdata = twstock.realtime.get(stock_id)  # 即時資料
-print("即時資料")
-print(realdata)
-
-print("----------------------------")
-
-stock_id1 = "2330"  # 2330台積電
-stock_id2 = "2317"  # 2317鴻海
-stock_id3 = "6869"  # 6869雲豹能源
-realdata = twstock.realtime.get([stock_id1, stock_id2, stock_id3])  # 即時資料
-print("即時資料, 3檔")
-print(realdata)
-
-print("----------------------------")
+stock_id = "2317"  # 2317鴻海
 
 stock = twstock.Stock(stock_id)  # 以股票代號建立 Stock 物件
 
-# 取得 2019 年 12 月的資料
-stocklist = stock.fetch(2019, 12)
+stocklist = stock.fetch(2019, 12)  # 取得 2019年12月 的資料
+
 listx = []
 listy = []
 for s in stocklist:
     listx.append(s.date.strftime("%Y-%m-%d"))
     listy.append(s.close)
 
-plt.figure(figsize=[10, 5])  # 圖像大小[英吋]
+plt.figure(figsize=[10, 8])
+
 plt.title("2019年12月股價", fontsize=18)
 plt.xlabel("日期", fontsize=14)
 plt.ylabel("股價", fontsize=14)
@@ -994,19 +1017,13 @@ plt.yticks([88, 89, 90, 91, 92, 93])
 
 show()
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-stock_id1 = "2330"  # 2330台積電
-stock_id2 = "2317"  # 2317鴻海
-stock_id3 = "6869"  # 6869雲豹能源
+print("------------------------------")  # 30個
 
 stock_ids = [stock_id1, stock_id2, stock_id3]
-plt.figure(figsize=[10, 5])  # 圖像大小[英吋]
+plt.figure(figsize=[10, 8])
 for stock_id in stock_ids:
     stock = twstock.Stock(stock_id)  # 以股票代號建立 Stock 物件
-    # 取得 2019 年 12 月的資料
-    stocklist = stock.fetch(2019, 12)
+    stocklist = stock.fetch(2019, 12)  # 取得 2019年12月 的資料
     listx = []
     listy = []
     for s in stocklist:
@@ -1021,54 +1038,9 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-stock_id = "2317"  # 2317鴻海
-
-# plt.figure(figsize=[12,30])	#圖像大小[英吋]
-stock = twstock.Stock(stock_id)  # 以股票代號建立 Stock 物件
-slist = []
-for i in range(1, 13):
-    stocklist = stock.fetch(2019, i)
-    [slist.append(s) for s in stocklist]
-    #    listx = [s.date.strftime('%d') for s in stocklist]
-    #    listy = [s.close for s in stocklist]
-    #    plt.subplot('62{}'.format(i))
-    #    plt.xticks(rotation=45)
-    #    plt.title(label="{}月".format(i))
-
-    #    plt.plot(listx, listy)
-    print(len(slist))
-    time.sleep(5)
-    if i == 6:
-        time.sleep(20)
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# lista = []
-# list1 = [1,2,3,4,5]
-# list2 = [7,8,9,10,11]
-# list1.append(list2)
-# list1
-
-# 將資料寫出到csv檔
-# 比較看看
-# filename = 'D:/_git/vcs/_1.data/______test_files1/__RW/_csv/stock_data_2019_2330.csv'
-
-with open("2019_2330.csv", "w", newline="") as f:
-    writer = csv.writer(f)
-    writer.writerows(slist)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 stock_id = "2330"  # 2330台積電
 
 realdata = twstock.realtime.get(stock_id)  # 即時資料
-
-# 檢查是不是即時資料 是:顯示True 不是:顯示False
-print(realdata["success"])
 
 result = pd.DataFrame(realdata).T.iloc[1:3]
 result.columns = [
@@ -1093,17 +1065,12 @@ print(result)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# twstock 抓取股票資訊做分析
-
 stock_id = "2330"  # 2330台積電
 
 stock = twstock.Stock(stock_id)  # 以股票代號建立 Stock 物件
 
-# 使用語法：（查詢某年某月的股票資料）
-# stock.fetch(year, month)
-
-stocklist1 = stock.fetch(2023, 1)  # 查詢 2023年1月的資料
-stocklist2 = stock.fetch(2023, 2)  # 查詢 2023年2月的資料
+stocklist1 = stock.fetch(2023, 1)  # 取得 2023年1月 的資料
+stocklist2 = stock.fetch(2023, 2)  # 取得 2023年2月 的資料
 
 stocklist = stocklist1 + stocklist2
 
@@ -1117,15 +1084,15 @@ for value in stocklist:
     listx.append(value.date.strftime("%Y-%m-%d"))
     listy.append(value.close)
 
-plt.figure(num="股票分析", figsize=(10, 10))  # 設定圖表區寬高
+plt.figure(num="股票分析", figsize=(10, 10))
 
-plt.xlabel("日期", fontsize="16")  # 設定 x 軸標題內容及大小
-plt.ylabel("股價", fontsize="16")  # 設定 y 軸標題標題內容及大小
-plt.title("股票分析", fontsize="18")  # 設定圖表標題內容及大小
+plt.xlabel("日期", fontsize="16")
+plt.ylabel("股價", fontsize="16")
+plt.title("股票分析", fontsize="18")
 
-plt.plot(listx, listy, color="red", markersize="16", marker=".")  # 紅色，實線，標記大小 16，標記為「點」
+plt.plot(listx, listy, color="red", markersize="16", marker=".")
 
-plt.xticks(rotation=45)  # 讓 x 坐標軸標題旋轉 45 度, 使得文字不會重疊
+plt.xticks(rotation=45)
 
 show()
 
@@ -1144,54 +1111,13 @@ if realdata["success"]:
     print(realdata)  # 即時資料
     print("目前股價：")
     print(realdata["realtime"]["latest_trade_price"])  # 即時價格
-else:
-    print("錯誤：" + realdata["rtmessage"])
-
-realprice = realdata["realtime"]["latest_trade_price"]  # 目前股價
-if realprice == "-":
-    print("找不到資料")
-else:
-    print("目前股價：" + realprice)
-
-print("-----------------------------------")
-
-time.sleep(30)  # 等一下
-
-print("每一分鐘抓一次資料")
-
-stock_id = "2317"  # 2317鴻海
-
-while True:
-    realdata = twstock.realtime.get(stock_id)  # 即時資料
-    print(realdata)
-    if realdata["success"]:
-        realprice = realdata["realtime"]["latest_trade_price"]  # 目前股價
-        if realprice == "-":
-            print("找不到資料")
-        else:
-            print("目前股價：" + realprice)
-        time.sleep(60)  # 每1分鐘讀一次
+    realprice = realdata["realtime"]["latest_trade_price"]  # 目前股價
+    if realprice == "-":
+        print("找不到資料")
     else:
-        print("twstock 讀取錯誤，錯誤原因：" + realdata["rtmessage"])
-        time.sleep(60)  # 每1分鐘讀一次
-
-print("------------------------------")  # 30個
-
-stock_id = "2317"  # 2317鴻海
-
-stock = twstock.Stock(stock_id)  # 以股票代號建立 Stock 物件
-
-realdata = twstock.realtime.get(stock_id)  # 即時資料
-print(realdata)
-
-if realdata["success"]:
-    print("即時股票資料：")
-    print(realdata)  # 即時資料
-    print("目前股價：")
-    print(realdata["realtime"]["latest_trade_price"])  # 即時價格
+        print("目前股價：" + realprice)
 else:
     print("錯誤：" + realdata["rtmessage"])
-
 
 msg = "這是 LINE Notify 發送的訊息。"
 token = "你的 LINE ifNoty 權杖"  # 權杖
@@ -1257,7 +1183,7 @@ while True:
             print("程式結束！")
             break
     else:
-        print("twstock 讀取錯誤，錯誤原因：" + realdata["rtmessage"])
+        print("錯誤：" + realdata["rtmessage"])
         counterError = counterError + 1
         if counterError >= 3:  # 最多錯誤3次
             print("程式結束！")
@@ -1290,7 +1216,7 @@ while True:
                 print("程式結束！")
                 break
     else:
-        print("twstock 讀取錯誤，錯誤原因：" + realdata["rtmessage"])
+        print("錯誤：" + realdata["rtmessage"])
         counterError = counterError + 1
         if counterError >= 3:  # 最多錯誤3次
             print("程式結束！")
@@ -1301,47 +1227,32 @@ while True:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("twstock：台灣股票")
+
+stock_id = "2317"  # 2317鴻海
+
+stock = twstock.Stock(stock_id)  # 以股票代號建立 Stock 物件
+stock.fetch(2020, 1)  # 取得 2020年1月 的資料
+stock.fetch_31()
+stock.fetch_from(2021, 9)
+
+print("------------------------------")  # 30個
+
 stock_id = "2330"  # 2330台積電
 
 stock = twstock.Stock(stock_id)  # 以股票代號建立 Stock 物件
 
-print(stock.moving_average(stock.price, 5))
-print(stock.moving_average(stock.capacity, 5))
+data = stock.fetch(2020, 7)  # 取得 2020年7月 的資料
+# data = stock.fetch_from(2020, 7) # ????
 
-realdata = twstock.realtime.get(stock_id)  # 即時資料
+df = pd.DataFrame(data)
+df["date"] = pd.to_datetime(df["date"])
+df = df.set_index("date")
 
-data = stock.moving_average(stock.price, 5)
-
-plt.plot(list(range(len(data))), data)
-
+df[["close", "open", "high", "low"]].plot()  # df直接畫出
 show()
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-stock_id = "2330"  # 2330台積電
-stock = twstock.Stock(stock_id)  # 以股票代號建立 Stock 物件
-data = stock.fetch(2020, 7)
-
-df = pd.DataFrame(data)
-df["date"] = pd.to_datetime(df["date"])
-df = df.set_index("date")
-df[["close", "open", "high", "low"]].plot()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-stock_id = "2330"  # 2330台積電
-stock = twstock.Stock(stock_id)  # 以股票代號建立 Stock 物件
-data = stock.fetch_from(2020, 7)
-
-df = pd.DataFrame(data)
-df["date"] = pd.to_datetime(df["date"])
-df = df.set_index("date")
-df[["close", "open", "high", "low"]].plot()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 stock_id = "2330"  # 2330台積電
 
@@ -1353,11 +1264,13 @@ df = pd.DataFrame(data)
 df["date"] = pd.to_datetime(df["date"])
 df = df.set_index("date")
 
-df["5_Day_Mean"] = df["close"].rolling(window=5).mean()
-df["20_Day_Mean"] = df["close"].rolling(window=20).mean()
-df["60_Day_Mean"] = df["close"].rolling(window=60).mean()
+# 計算5天, 20天和60天移動平均線
+df["MA5"] = df["close"].rolling(window=5).mean()  # 移動平均線 (MA5) 連同過去N點平均
+df["MA20"] = df["close"].rolling(window=20).mean()  # 移動平均線 (MA20) 連同過去N點平均
+df["MA60"] = df["close"].rolling(window=60).mean()  # 移動平均線 (MA60) 連同過去N點平均
 
-df[["5_Day_Mean", "20_Day_Mean", "60_Day_Mean"]].plot(figsize=(10, 5))
+df[["MA5", "MA20", "MA60"]].plot(figsize=(10, 5))  # df直接畫出 + 圖片大小
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1378,6 +1291,23 @@ ma_brp = stock.ma_bias_ratio_pivot(stock.price, 5, True)
 print("正乖離率轉折位置:", ma_brp)
 ma_brp2 = stock.ma_bias_ratio_pivot(stock.price, 5, False)
 print("負乖離率轉折位置:", ma_brp2)
+
+print("------------------------------")  # 30個
+
+stock_id = "2330"  # 2330台積電
+
+stock = twstock.Stock(stock_id)  # 以股票代號建立 Stock 物件
+
+print(stock.moving_average(stock.price, 5))
+print(stock.moving_average(stock.capacity, 5))
+
+realdata = twstock.realtime.get(stock_id)  # 即時資料
+
+data = stock.moving_average(stock.price, 5)
+
+plt.plot(list(range(len(data))), data)
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1402,55 +1332,26 @@ print("------------------------------------------------------------")  # 60個
 
 stock_id = "2317"  # 2317鴻海
 
-stock = twstock.Stock(stock_id)  # 以股票代號建立 Stock 物件
-
-# 取得 2019 年 12 月的資料
-stocklist = stock.fetch(2019, 12)
-listx = []
-listy = []
-for s in stocklist:
-    listx.append(s.date.strftime("%Y-%m-%d"))
-    listy.append(s.close)
-
-plt.figure(figsize=[10, 5])
-plt.title("2019年12月股價", fontsize=18)
-plt.xlabel("日期", fontsize=14)
-plt.ylabel("股價", fontsize=14)
-plt.plot(listx, listy, "r:s")
-plt.xticks(rotation=45)
-plt.grid("k:", alpha=0.5)
-plt.ylim(88, 93)
-plt.yticks([88, 89, 90, 91, 92, 93])
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-stock_id = "2317"  # 2317鴻海
-
 # plt.figure(figsize=[12,30])
 stock = twstock.Stock(stock_id)  # 以股票代號建立 Stock 物件
 
 slist = []
+
 for i in range(1, 13):
-    stocklist = stock.fetch(2019, i)
+    stocklist = stock.fetch(2019, i)  # 取得 2019年i月 的資料
     [slist.append(s) for s in stocklist]
     #    listx = [s.date.strftime('%d') for s in stocklist]
     #    listy = [s.close for s in stocklist]
     #    plt.subplot('62{}'.format(i))
     #    plt.xticks(rotation=45)
     #    plt.title(label="{}月".format(i))
-    #    plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-    #    plt.rcParams["axes.unicode_minus"] = False
     #    plt.plot(listx, listy)
     print(len(slist))
     time.sleep(5)
     if i == 6:
         time.sleep(20)
 
-
-# show()
+show()
 
 # lista = []
 # list1 = [1,2,3,4,5]
@@ -1458,12 +1359,13 @@ for i in range(1, 13):
 # list1.append(list2)
 # list1
 
+# 將資料寫出到csv檔
+# 比較看看
 filename = "D:/_git/vcs/_1.data/______test_files1/__RW/_csv/stock_data_2019_2330.csv"
 
 with open(filename, "w", newline="") as f:
     writer = csv.writer(f)
     writer.writerows(slist)
-# %%
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1605,19 +1507,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("twstock：台灣股票")
-
-stock_id = "2317"  # 2317鴻海
-
-stock = twstock.Stock(stock_id)  # 以股票代號建立 Stock 物件
-stock.fetch(2020, 1)
-stock.fetch_31()
-
-stock.fetch_from(2021, 9)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("讀取資料存入資料庫")
 
 import sqlite3
@@ -1714,16 +1603,18 @@ url
 """
 目標:
 
-    使用 Pandas，抓取上述 url 網頁中的股價資料
-    將股票代號與名稱區隔為不同的欄位
-    將資料儲存為 Excel 檔案
-    須注意個欄位的格式，數字欄位的儲存格式應該為數字
-    重排欄位順序為:'市場別', '股票代號', '股票名稱', '日期', '時間', '成交', '買進', '賣出', '漲跌', '張數', '昨收', '開盤', '最高', '最低'
-    Extra:
-        匯集 Yahoo 股市 page 1~ 5 的資料 (pd.concat)
-        依據股票代號的前兩碼，做 GroupBy 操作
-            merge ../data/個股_類別.xls(先解壓縮 個股_類別.rar) 中的資料之後，做 GroupBy 操作
+使用 Pandas，抓取上述 url 網頁中的股價資料
+將股票代號與名稱區隔為不同的欄位
+將資料儲存為 Excel 檔案
+須注意個欄位的格式，數字欄位的儲存格式應該為數字
+重排欄位順序為:
+'市場別', '股票代號', '股票名稱', '日期', '時間', 
+'成交', '買進', '賣出', '漲跌', '張數',
+'昨收', '開盤', '最高', '最低'
 
+匯集 Yahoo 股市 page 1~ 5 的資料 (pd.concat)
+依據股票代號的前兩碼，做 GroupBy 操作
+merge ../data/個股_類別.xls(先解壓縮 個股_類別.rar) 中的資料之後，做 GroupBy 操作
 """
 # 股票資料彙整_Yahoo股市
 
@@ -1771,7 +1662,6 @@ df = getDataOnePageTSE(1)
 
 cc = df.tail()
 print(cc)
-
 
 df.to_excel("tmp_stock.xlsx")
 
@@ -1834,7 +1724,8 @@ def fixTable(marketType, table, theDate=datetime.date.today()):
 
 df1 = fixTable("TSE", df)
 
-df1.tail(5)
+cc = df1.tail()
+print(cc)
 
 # 彙整 Yahoo 股市 page 1~ 5 的資料
 
@@ -1849,18 +1740,24 @@ len(df)
 
 df.index = pd.Index(range(len(df)))  # 重新編排 row index 編號
 df = df[df["股票代號"].str.len() <= 4]  # 濾除 權證 資料
-df.tail()
+
+cc = df.tail()
+print(cc)
 
 # 抓取 類股 資料
 
 df_類股 = pd.read_excel("..\\data\個股_類別.xls")  # 需先解壓縮 個股_類別.rar
-df_類股.tail()
+
+cc = df_類股.tail()
+print(cc)
 
 # Merge
 
 mdf = df.merge(df_類股, left_on="股票代號", right_on="個股_代號", how="left")  # merge
 mdf = mdf.drop(["市場別_ID", "個股_代號", "個股_名稱"], axis=1)  # drop 多於的欄位
-mdf.tail()
+
+cc = mdf.tail()
+print(cc)
 
 # GroupBy
 
@@ -2050,3 +1947,15 @@ ax2.set_xticklabels(xticks_str)  # 設置橫軸標注日期
 show()
 
 # 做不等大的子圖 SP
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 開始時間 為 60天前
+start = datetime.datetime.now() - datetime.timedelta(days=60)
+
+# 結束時間 為 現在
+end = datetime.date.today()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個

@@ -32,6 +32,15 @@ MediaInfoNET.dll
 加入命名空間  using MediaInfoNET;
 */
 
+/*
+磁碟類型DriveType
+DriveType.Removable = 2,  // 抽取式存放裝置，例如軟碟機或 USB 快閃磁碟機。
+DriveType.Fixed = 3,  // 固定式磁碟。
+DriveType.Network = 4,  // 網路磁碟機。
+DriveType.CDRom = 5,  // 光碟機，例如 CD 或 DVD-ROM。
+DriveType.Ram = 6, //  RAM 磁碟。
+*/
+
 namespace vcs_DiskDirectoryFile1
 {
     public partial class Form1 : Form
@@ -491,6 +500,10 @@ namespace vcs_DiskDirectoryFile1
                 listBox_search.Items.Add(sss);
             }
 
+            //6060
+
+            //搜尋本機磁碟
+            HDD_Scan();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -638,7 +651,7 @@ namespace vcs_DiskDirectoryFile1
             x_st += 40;
             y_st = 10;
             int W = 1240 + 180 + 8 - 160;
-            groupBox1.Size = new Size(W, 106 + 50);
+            groupBox1.Size = new Size(W - 120, 106 + 50);
             groupBox1.Location = new Point(x_st + dx * 3 - 100, y_st + dy * 0 - 14);
 
             int dd = 110;
@@ -677,7 +690,7 @@ namespace vcs_DiskDirectoryFile1
             int dy = 60 + 10;
 
             int W = 1500;
-            groupBox1.Size = new Size(W, 106 + 50);
+            groupBox1.Size = new Size(W - 120, 106 + 50);
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0 - 16);
 
             listView_dir.Size = new Size(W, 270 - 50);
@@ -744,12 +757,19 @@ namespace vcs_DiskDirectoryFile1
             //------------------------------------------------------------  # 60個
 
             //其他放外面的
-            x_st = 820;
+            x_st = 1080;
             y_st = 10;
             dx = 45 + 5;
             dy = 45 + 5;
-            lb_search_result1.Location = new Point(x_st + dx * 5, y_st + dy * 0 + 10);
-            lb_search_result2.Location = new Point(x_st + dx * 5, y_st + dy * 0 + 34);
+
+            comboBox_drive.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 10);
+            label1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 50);
+            bt_show_disk_info.Location = new Point(x_st + dx * 0 + 130, y_st + dy * 0 + 50);
+            pictureBox1.Size = new Size(300, 300);
+            pictureBox1.Location = new Point(x_st + dx * 0 + 210, y_st + dy * 0 + 10);
+
+            lb_search_result1.Location = new Point(x_st + dx * 1 - 110, y_st + dy * 0 + 10);
+            lb_search_result2.Location = new Point(x_st + dx * 1 - 110, y_st + dy * 0 + 34);
             lb_search_result1.Text = "";
             lb_search_result2.Text = "";
 
@@ -6924,6 +6944,43 @@ namespace vcs_DiskDirectoryFile1
         //------------------------------------------------------------  # 60個
         //------------------------------------------------------------  # 60個
 
+        private void HDD_Scan()
+        {
+            comboBox_drive.Items.Clear();
+
+            //使用 DriveInfo 類別來顯示目前系統上所有磁片磁碟機的相關資訊
+            DriveInfo[] drives = DriveInfo.GetDrives();  // 找磁碟分割區
+            foreach (DriveInfo drive in drives)
+            {
+                comboBox_drive.Items.Add(drive.Name);
+            }
+
+            /*   same
+            if (comboBox_drive.Items.Count > 0)
+                comboBox_drive.Text = comboBox_drive.Items[0].ToString();
+            */
+            if (drives.Length > 0)
+            {
+                comboBox_drive.Text = drives[0].ToString();
+            }
+
+            //if (comboBox_drive.Items.Count > 0)
+            //comboBox_drive.Text = comboBox_drive.Items[0].ToString();
+
+            if (drives.Length > 0)
+            {
+                comboBox_drive.Text = drives[0].ToString();
+            }
+
+            //same
+            if (comboBox_drive.Items.Count > 0)
+            {
+                comboBox_drive.Text = comboBox_drive.Items[0].ToString();
+            }
+        }
+
+        //6060
+        //6060
         private void bt_disk00_Click(object sender, EventArgs e)
         {
             //讀取磁碟剩餘空間
@@ -7512,6 +7569,187 @@ namespace vcs_DiskDirectoryFile1
         private void bt_disk12_Click(object sender, EventArgs e)
         {
 
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void comboBox_drive_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "選中 : " + comboBox_drive.Text + "\n";
+
+            //DriveInfo drive = new DriveInfo(comboBox_drive.Text); //same
+            DriveInfo drive = new DriveInfo(comboBox_drive.SelectedItem.ToString());
+            if (drive.IsReady == true)  // 使用IsReady屬性判斷裝置是否就緒
+            {
+                richTextBox1.Text += "  檔案系統名稱 : " + drive.DriveFormat + "\n";
+                richTextBox1.Text += "  目前可用空間量: \t{0, 15} bytes" + drive.AvailableFreeSpace + "\n";
+                richTextBox1.Text += "  可用空間總量: \t{0, 15} bytes" + drive.TotalFreeSpace + "\n";
+                richTextBox1.Text += "  可儲存空間總量: \t{0, 15} bytes " + drive.TotalSize + "\n";
+
+                richTextBox1.Text += "磁碟 : " + drive.ToString() + "\n";
+                richTextBox1.Text += "名稱 : " + drive.Name + "\n";
+                richTextBox1.Text += "標籤 : " + drive.VolumeLabel + "\n";
+                richTextBox1.Text += "類型 : " + drive.DriveType + "\n";
+                richTextBox1.Text += "格式 : " + drive.DriveFormat + "\n";
+                richTextBox1.Text += "已使用空間 :\t" + (drive.TotalSize - drive.AvailableFreeSpace).ToString() + " 個位元組\t" + ByteConversionTBGBMBKB(Convert.ToInt64(drive.TotalSize - drive.AvailableFreeSpace)) + "\n";
+                richTextBox1.Text += "可用空間 :\t\t" + drive.AvailableFreeSpace.ToString() + " 個位元組\t"
+                    + ByteConversionTBGBMBKB(Convert.ToInt64(drive.AvailableFreeSpace)) + "\t( "
+                    + ((float)drive.AvailableFreeSpace / (float)drive.TotalSize).ToString("P", CultureInfo.InvariantCulture) + " )\n";
+                richTextBox1.Text += "磁碟容量 :\t\t" + drive.TotalSize.ToString() + " 個位元組\t" + ByteConversionTBGBMBKB(Convert.ToInt64(drive.TotalSize)) + "\n";
+                richTextBox1.Text += "根目錄 : " + drive.RootDirectory + "\n";
+
+                drawDiskSpace(drive.AvailableFreeSpace, drive.TotalSize);
+            }
+            else
+            {
+                richTextBox1.Text += "磁碟 " + drive.ToString() + "未就緒\n";
+            }
+
+            //another
+            // Display information about the selected drive.
+            string drive_letter = comboBox_drive.Text.Substring(0, 1);
+            richTextBox1.Text += "drive_letter\t" + drive_letter + "\n";
+
+            //DriveInfo
+            drive = new DriveInfo(drive_letter);
+
+            richTextBox1.Text += "IsReady\t" + drive.IsReady + "\n";
+            richTextBox1.Text += "DriveType\t" + drive.DriveType + "\n";
+            richTextBox1.Text += "Name\t" + drive.Name + "\n";
+            richTextBox1.Text += "RootDirectory\t" + drive.RootDirectory.Name + "\n";
+
+            if (drive.IsReady)
+            {
+                richTextBox1.Text += "DriveFormat\t" + drive.DriveFormat + "\n";
+                richTextBox1.Text += "AvailableFreeSpace\t" + drive.AvailableFreeSpace.ToString() + "\n";
+                richTextBox1.Text += "TotalFreeSize\t" + drive.TotalFreeSpace.ToString() + "\n";
+                richTextBox1.Text += "TotalSize\t" + drive.TotalSize.ToString() + "\n";
+                richTextBox1.Text += "VolumeLabel\t" + drive.VolumeLabel + "\n";
+                richTextBox1.Text += "磁碟 : " + drive.ToString() + "\n";
+                richTextBox1.Text += "標籤 : " + drive.VolumeLabel + "\n";
+                richTextBox1.Text += "名稱 : " + drive.Name + "\n";
+                richTextBox1.Text += "可用空間 : " + drive.AvailableFreeSpace + "\n";
+                richTextBox1.Text += "可用大小 : " + drive.TotalSize + "\n";
+                richTextBox1.Text += "可用總空間 : " + drive.TotalFreeSpace + "\n";
+                richTextBox1.Text += "格式 : " + drive.DriveFormat + "\n";
+                richTextBox1.Text += "型態 : " + drive.DriveType + "\n";
+                richTextBox1.Text += "根目錄 : " + drive.RootDirectory + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "磁碟未Ready\n";
+                richTextBox1.Text += "磁碟 " + drive.ToString() + "未就緒" + "\n";
+            }
+        }
+
+
+        private const int WIDTH = 100;
+        void drawDiskSpace(long free, long total)
+        {
+            removeDrawDiskSpace();
+
+            int x_st = 1920 - 175;
+            int y_st = 10;
+
+            //產出panel, 畫硬碟使用空間占比圖
+            Panel pnl = new Panel();
+            pnl.Left = x_st;
+            pnl.Top = y_st;
+            pnl.Width = WIDTH;
+            pnl.Height = WIDTH;
+            pnl.Tag = "show_disk_space";
+            pnl.BackColor = Color.Pink;
+            this.Controls.Add(pnl);
+
+            Graphics g;
+            g = pnl.CreateGraphics();
+
+            // debug
+            //Pen p = new Pen(Color.Black, 1);
+            //p.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            //g.DrawRectangle(p, WIDTH / 10, WIDTH / 10, WIDTH * 80 / 100, WIDTH * 80 / 100);
+
+            Brush b;
+            long used = total - free;
+
+            int used_angle = (int)(used * 360 / total);
+            //richTextBox1.Text += "used_angle = " + used_angle.ToString() + "\n";
+
+            b = new SolidBrush(Color.LightGreen);
+            g.FillEllipse(b, WIDTH / 10, WIDTH / 10, WIDTH * 80 / 100, WIDTH * 80 / 100);
+
+            b = new SolidBrush(Color.Red);
+            g.FillPie(b, WIDTH / 10, WIDTH / 10, WIDTH * 80 / 100, WIDTH * 80 / 100, -180, used_angle);
+
+            b = new SolidBrush(Color.White);
+            g.FillEllipse(b, WIDTH / 4, WIDTH / 4, WIDTH / 2, WIDTH / 2);
+        }
+
+        //移除按鈕部分,  一趟並不會將所有panel上的button回傳, 所以加入while迴圈, 真是神奇驚訝 
+        void removeDrawDiskSpace()
+        {
+            bool flag_do_remove = true;
+            while (flag_do_remove == true)
+            {
+                bool flag_do_remove_this = false;
+                foreach (Control con in this.Controls)
+                {
+                    //System.String strControlTag = con.Tag.ToString();//获得控件的標籤, 不能用此, 因為不一定有Tag可以ToString
+                    if (con.Tag != null)
+                    {
+                        if (con.Tag.ToString() == "show_disk_space")
+                        {
+                            this.Controls.Remove(con);
+                            flag_do_remove_this = true;
+                        }
+                    }
+                }
+                if (flag_do_remove_this == false)
+                {
+                    flag_do_remove = false;
+                }
+            }
+        }
+
+        private void bt_show_disk_info_Click(object sender, EventArgs e)
+        {
+            draw_drive_info(comboBox_drive.Text);
+        }
+
+        void draw_drive_info(string drive_name)
+        {
+            richTextBox1.Text += drive_name + "\n";
+            Graphics g = this.pictureBox1.CreateGraphics();  // 创建Graphics绘图对象
+            g.Clear(Color.White);
+
+            DriveInfo drive = new DriveInfo(drive_name);  // 实例化DriveInfo
+            if (drive.IsReady == true)  // 使用IsReady屬性判斷裝置是否就緒
+            {
+                float tsize = drive.TotalSize;  // 获得磁盘的总容量
+                float fsize = drive.TotalFreeSpace;  // 获取剩余容量
+                Pen pen1 = new Pen(Color.Red);  // 创建画笔对象
+                Brush brush1 = new SolidBrush(Color.WhiteSmoke);  // 创建笔刷
+                Brush brush2 = new SolidBrush(Color.LimeGreen);  // 创建笔刷
+                Brush brush3 = new SolidBrush(Color.RoyalBlue);  // 创建笔刷
+                Font font1 = new Font("Courier New", 16, FontStyle.Bold);  // 设置字体
+                Font font2 = new Font("標楷體", 9);  // 设置字体
+                g.DrawString("磁碟容量分析", font1, brush2, new Point(60, 50));  // 绘制文本
+                float angle1 = Convert.ToSingle((360 * (Convert.ToSingle(fsize / 100000000000) / Convert.ToSingle(tsize / 100000000000))));  // 计算绿色饼形图的范围
+                float angle2 = Convert.ToSingle((360 * (Convert.ToSingle((tsize - fsize) / 100000000000) / Convert.ToSingle(tsize / 100000000000))));  // 计算蓝色饼形图的范围
+                // 调用Graphics对象的FillPie方法绘制饼形图
+                g.FillPie(brush2, 60, 80, 150, 150, 0, angle1);
+                g.FillPie(brush3, 60, 80, 150, 150, angle1, angle2);
+                g.DrawRectangle(pen1, 30, 235, 200, 50);
+                g.FillRectangle(brush2, 35, 245, 20, 10);
+                g.DrawString("磁碟剩餘容量:" + drive.TotalFreeSpace / 1000 + "KB", font2, brush2, 55, 245);
+                g.FillRectangle(brush3, 35, 265, 20, 10);
+                g.DrawString("磁碟已用容量:" + (drive.TotalSize - drive.TotalFreeSpace) / 1000 + "KB", font2, brush3, 55, 265);
+            }
+            else
+            {
+                richTextBox1.Text += "硬碟 : " + drive_name + " 未Ready\n";
+                g.DrawString("硬碟 : " + drive_name + " 未Ready", new Font("標楷體", 24), new SolidBrush(Color.Blue), new PointF(10, 60));
+            }
         }
 
         //------------------------------------------------------------  # 60個

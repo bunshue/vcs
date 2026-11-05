@@ -8166,7 +8166,7 @@ df['prev'] = df['val'].shift() # 取前一條數據的val值作爲當前記錄�
 print(df.head(3))
 
 # 計算滑動窗口
-df['sw'] = df['val'].rolling(window=3).mean() # 計算窗口中數據的均值
+df['sw'] = df['val'].rolling(window=3).mean() # 計算窗口中數據的均值  # 移動平均 連同過去3點平均
 print(df.head(3))
 
 df['emw_3'] = df['val'].ewm(span=3).mean()
