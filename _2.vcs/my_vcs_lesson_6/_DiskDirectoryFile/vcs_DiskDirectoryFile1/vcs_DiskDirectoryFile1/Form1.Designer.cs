@@ -1522,6 +1522,7 @@
             this.bt_disk00.Name = "bt_disk00";
             this.bt_disk00.Size = new System.Drawing.Size(160, 60);
             this.bt_disk00.TabIndex = 0;
+            this.bt_disk00.Text = "讀取磁碟剩餘空間";
             this.bt_disk00.UseVisualStyleBackColor = true;
             this.bt_disk00.Click += new System.EventHandler(this.bt_disk00_Click);
             // 
@@ -1532,6 +1533,7 @@
             this.bt_disk03.Name = "bt_disk03";
             this.bt_disk03.Size = new System.Drawing.Size(160, 60);
             this.bt_disk03.TabIndex = 47;
+            this.bt_disk03.Text = "取得磁碟資訊";
             this.bt_disk03.UseVisualStyleBackColor = true;
             this.bt_disk03.Click += new System.EventHandler(this.bt_disk03_Click);
             // 
@@ -1542,6 +1544,7 @@
             this.bt_disk05.Name = "bt_disk05";
             this.bt_disk05.Size = new System.Drawing.Size(160, 60);
             this.bt_disk05.TabIndex = 15;
+            this.bt_disk05.Text = "讀硬盤序列號";
             this.bt_disk05.UseVisualStyleBackColor = true;
             this.bt_disk05.Click += new System.EventHandler(this.bt_disk05_Click);
             // 
@@ -1552,6 +1555,7 @@
             this.bt_disk06.Name = "bt_disk06";
             this.bt_disk06.Size = new System.Drawing.Size(160, 60);
             this.bt_disk06.TabIndex = 14;
+            this.bt_disk06.Text = "getDiskID TBD";
             this.bt_disk06.UseVisualStyleBackColor = true;
             this.bt_disk06.Click += new System.EventHandler(this.bt_disk06_Click);
             // 
@@ -1572,6 +1576,7 @@
             this.bt_disk04.Name = "bt_disk04";
             this.bt_disk04.Size = new System.Drawing.Size(160, 60);
             this.bt_disk04.TabIndex = 3;
+            this.bt_disk04.Text = "找資料夾所在的硬碟的標籤";
             this.bt_disk04.UseVisualStyleBackColor = true;
             this.bt_disk04.Click += new System.EventHandler(this.bt_disk04_Click);
             // 
@@ -1582,6 +1587,7 @@
             this.bt_disk02.Name = "bt_disk02";
             this.bt_disk02.Size = new System.Drawing.Size(160, 60);
             this.bt_disk02.TabIndex = 3;
+            this.bt_disk02.Text = "GetLogicalDrives 1";
             this.bt_disk02.UseVisualStyleBackColor = true;
             this.bt_disk02.Click += new System.EventHandler(this.bt_disk02_Click);
             // 
@@ -1602,6 +1608,7 @@
             this.bt_disk01.Name = "bt_disk01";
             this.bt_disk01.Size = new System.Drawing.Size(160, 60);
             this.bt_disk01.TabIndex = 2;
+            this.bt_disk01.Text = "取得硬碟資訊";
             this.bt_disk01.UseVisualStyleBackColor = true;
             this.bt_disk01.Click += new System.EventHandler(this.bt_disk01_Click);
             // 

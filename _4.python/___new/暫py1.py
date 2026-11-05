@@ -1,9 +1,5 @@
-方案一：抓台股首選 —— 使用 FinMind（台灣團隊開發，免申請 Key）
-這是台灣金融資料開源團隊做的，直接對接台灣證交所，抓台股快又穩定，絕對不會有退市或時區錯誤。
 
 # ------------------------------------------------------------  # 60個
-
-
 
 廢棄使用的套件
 
@@ -5998,9 +5994,9 @@ pip show sklearn命令查看sklearn包的路径
 
 C:\Users\070601>pip install SimpleGUICS2Pygame
 pip install SimpleGUICS2Pygame
-pip install SimpleGUICS2Pygame --upgrade
+pip install SimpleGUICS2Pygame --upgrade  # 更新套件
 
-python -m pip install SimpleGUICS2Pygame --user --upgrade
+python -m pip install SimpleGUICS2Pygame --user --upgrade  # 更新套件
 
 # ------------------------------------------------------------  # 60個
 
