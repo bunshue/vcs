@@ -366,28 +366,38 @@ namespace vcs_Draw5_Image_ImageAttributes
 
         private void button0_Click(object sender, EventArgs e)
         {
+            //使用 顏色矩陣 (Color Matrix), 設定 Alpha
+
             Bitmap bitmap1 = new Bitmap(pic_filename);  // bitmap1 放原圖
-            Bitmap bitmap2 = new Bitmap(pic_filename);
-            Graphics g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.Pink);
+
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+            Bitmap bmp = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bmp);
+            g.Clear(Color.Black);
 
             float alpha = 0.5f;  // 透明度
-            //使用 顏色矩陣 (Color Matrix), 設定 Alpha = 0.5
-            ColorMatrix cm = new ColorMatrix();
-            cm.Matrix33 = alpha; // 透明度
 
-            ImageAttributes ia = new ImageAttributes();
+            int dd = 0;
+            for (alpha = 0f; alpha <= 1.05f; alpha += 0.1f)
+            {
+                ColorMatrix cm = new ColorMatrix();
+                cm.Matrix33 = alpha; // 透明度
 
-            ia.SetColorMatrix(cm);
+                ImageAttributes ia = new ImageAttributes();
+                ia.SetColorMatrix(cm);
 
-            // 貼上使用CM轉換過的影像
-            int W = bitmap2.Width;
-            int H = bitmap2.Height;
-            //                         目標矩形,              來源矩形
-            g.DrawImage(bitmap2, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
-
-            pictureBox1.Image = bitmap1;
-            pictureBox2.Image = Image.FromFile(pic_filename);  // 原圖
+                // 貼上使用CM轉換過的影像
+                g.FillRectangle(Brushes.Black, 0 + dd, 0 + dd, W, H);  // 預先填黑色
+                //                         目標矩形,              來源矩形
+                g.DrawImage(bitmap1, new Rectangle(0 + dd, 0 + dd, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
+                g.DrawRectangle(Pens.Red, 0 + dd, 0 + dd, W, H);
+                g.DrawString(alpha.ToString(), new Font("標楷體", 18), new SolidBrush(Color.Red), new PointF(0 + dd, 0 + dd));
+                pictureBox1.Image = bmp;
+                Application.DoEvents();
+                Thread.Sleep(200);
+                //dd += 30;
+            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -441,35 +451,6 @@ namespace vcs_Draw5_Image_ImageAttributes
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Bitmap bitmap1 = new Bitmap(pic_filename);  // bitmap1 放原圖
-            Bitmap bitmap2 = new Bitmap(pic_filename);
-            Graphics g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.Pink);
-
-            float alpha = 0.1f;  // 透明度
-
-            while (alpha <= 1.0)
-            {
-                this.Text = alpha.ToString();
-
-                //使用 顏色矩陣 (Color Matrix), 設定 Alpha
-                ColorMatrix cm = new ColorMatrix();
-                cm.Matrix33 = alpha; // 透明度
-
-                ImageAttributes ia = new ImageAttributes();
-                ia.SetColorMatrix(cm);
-
-                // 貼上使用CM轉換過的影像
-                int W = bitmap2.Width;
-                int H = bitmap2.Height;
-                //                         目標矩形,              來源矩形
-                g.DrawImage(bitmap2, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
-                pictureBox1.Image = bitmap1;
-                Application.DoEvents();
-
-                Thread.Sleep(20);
-                alpha += 0.01f;
-            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -514,14 +495,14 @@ namespace vcs_Draw5_Image_ImageAttributes
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //彩虹化圖片28
+            //彩虹化圖片
             string filename = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
             Bitmap bitmap1 = new Bitmap(filename);
             int W = bitmap1.Width;
             int H = bitmap1.Height;
             Bitmap bitmap2 = new Bitmap(W, H);
 
-            Graphics gr = Graphics.FromImage(bitmap2);
+            Graphics g = Graphics.FromImage(bitmap2);
 
             Color[] color =
             {
@@ -560,7 +541,7 @@ namespace vcs_Draw5_Image_ImageAttributes
                 Rectangle rect = new Rectangle(x, 0, W - x, H);
                 // 貼上使用CM轉換過的影像
                 //                  目標矩形, 來源矩形
-                gr.DrawImage(bitmap1, points, rect, GraphicsUnit.Pixel, ia);
+                g.DrawImage(bitmap1, points, rect, GraphicsUnit.Pixel, ia);
 
                 //改用, 免用points rect
                 //                  目標矩形,  來源矩形
@@ -606,10 +587,10 @@ namespace vcs_Draw5_Image_ImageAttributes
             };
             Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
 
-            Graphics gr = Graphics.FromImage(bitmap1);
-            gr.Clear(Color.Pink);
+            Graphics gg = Graphics.FromImage(bitmap1);
+            gg.Clear(Color.Pink);
             //              目標矩形, 來源矩形
-            gr.DrawImage(bmp, points, rect, GraphicsUnit.Pixel, ia);
+            gg.DrawImage(bmp, points, rect, GraphicsUnit.Pixel, ia);
 
             pictureBox1.Image = bitmap1;
         }
@@ -1141,7 +1122,7 @@ namespace vcs_Draw5_Image_ImageAttributes
 
             // 貼上使用CM轉換過的影像
             //                  目標矩形,   來源矩形
-            e.Graphics.DrawImage(               image,               new Rectangle(10, 300, W, H),                0, 0,                W,                H,                GraphicsUnit.Pixel,               ia);
+            e.Graphics.DrawImage(image, new Rectangle(10, 300, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
         }
 
         private void bt_reset_Click(object sender, EventArgs e)
@@ -2038,7 +2019,6 @@ ia.SetGamma
 ia.SetGamma(0.6f);
 
 //------------------------------------------------------------  # 60個 
- 
  
  
  

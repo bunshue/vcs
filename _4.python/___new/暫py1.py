@@ -1,82 +1,20 @@
+方案一：抓台股首選 —— 使用 FinMind（台灣團隊開發，免申請 Key）
+這是台灣金融資料開源團隊做的，直接對接台灣證交所，抓台股快又穩定，絕對不會有退市或時區錯誤。
 
-import sys
-import pandas as pd
+# ------------------------------------------------------------  # 60個
 
-print("------------------------------------------------------------")  # 60個
 
-currencies = {
-    "美金": "USD",
-    "美元": "USD",
-    "港幣": "HKD",
-    "英鎊": "GBP",
-    "澳幣": "AUD",
-    "加拿大幣": "CAD",
-    "加幣": "CAD",
-    "新加坡幣": "SGD",
-    "新幣": "SGD",
-    "瑞士法郎": "CHF",
-    "瑞郎": "CHF",
-    "日圓": "JPY",
-    "日幣": "JPY",
-    "南非幣": "ZAR",
-    "瑞典幣": "SEK",
-    "紐元": "NZD",
-    "紐幣": "NZD",
-    "泰幣": "THB",
-    "泰銖": "THB",
-    "菲國比索": "PHP",
-    "菲律賓幣": "PHP",
-    "印尼幣": "IDR",
-    "歐元": "EUR",
-    "韓元": "KRW",
-    "韓幣": "KRW",
-    "越南盾": "VND",
-    "越南幣": "VND",
-    "馬來幣": "MYR",
-    "人民幣": "CNY",
-}
-keys = currencies.keys()
-tlist = ["現金買入", "現金賣出", "即期買入", "即期賣出"]
-currency = "美元"
-show = currency + "匯率：\n"
-print(show)
 
-print("------------------------------------------------------------")  # 60個
+廢棄使用的套件
+
+twder
+yfinance
+
+但是可以去看他的程式
+
 print("------------------------------------------------------------")  # 60個
 
 # 應用：新台幣國際匯率查詢
-
-currencies = {
-    "美元": "USD",
-    "港幣": "HKD",
-    "英鎊": "GBP",
-    "澳幣": "AUD",
-    "加拿大幣": "CAD",
-    "加幣": "CAD",
-    "新加坡幣": "SGD",
-    "瑞士法郎": "CHF",
-    "日幣": "JPY",
-    "南非幣": "ZAR",
-    "瑞典幣": "SEK",
-    "紐幣": "NZD",
-    "泰銖": "THB",
-    "菲律賓幣": "PHP",
-    "印尼幣": "IDR",
-    "歐元": "EUR",
-    "韓元": "KRW",
-    "越南盾": "VND",
-    "越南幣": "VND",
-    "馬來幣": "MYR",
-    "人民幣": "CNY",
-}
-keys = currencies.keys()
-tlist = ["現金買入", "現金賣出", "即期買入", "即期賣出"]
-currency = "\u52A0\u62FF\u5927\u5E63"  # @param ['美元', '港幣', '英鎊', '澳幣', '加拿大幣', '加幣', '新加坡幣', '瑞士法郎', '日幣', '南非幣', '瑞典幣' , '紐幣' ,'泰銖' ,'菲律賓幣' ,'印尼幣' ,'歐元' ,'韓元' , '越南盾' ,'越南幣' ,'馬來幣' ,'人民幣']
-show = currency + "匯率：\n"
-print(show)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
 currencies = {
     "美金": "USD",
@@ -110,15 +48,23 @@ currencies = {
     "人民幣": "CNY",
 }  # 幣別字典
 keys = currencies.keys()
+tlist = ["現金買入", "現金賣出", "即期買入", "即期賣出"]
+currency = "美元"
+show = currency + "匯率：\n"
+print(show)
+
+keys = currencies.keys()
+tlist = ["現金買入", "現金賣出", "即期買入", "即期賣出"]
+currency = "\u52A0\u62FF\u5927\u5E63"  # @param ['美元', '港幣', '英鎊', '澳幣', '加拿大幣', '加幣', '新加坡幣', '瑞士法郎', '日幣', '南非幣', '瑞典幣' , '紐幣' ,'泰銖' ,'菲律賓幣' ,'印尼幣' ,'歐元' ,'韓元' , '越南盾' ,'越南幣' ,'馬來幣' ,'人民幣']
+show = currency + "匯率：\n"
+print(show)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 pypi
 pypi網站可以看到目前套件的最新版本
 https://pypi.org/project/requests/
-https://pypi.org/project/twder/
 https://pypi.org/project/hellohowareyou/0.0.1/
 https://pypi.org/project/mypythoncommon/
 https://pypi.org/project/mypythoncommon/0.0.1/
@@ -154,60 +100,6 @@ site-packages\twder\api.py
 看原始碼怎麼寫，甚至直接修改它。
 
 因為 Python 套件幾乎都是開放原始碼的，你安裝下來後就等於拿到了作者全部的程式。這也是為什麼 Python 特別適合研究別人是怎麼做出某個功能的。
-
-# ------------------------------------------------------------  # 60個
-
-怎麼那麼奇怪, 我改用台灣的股市
-
-import yfinance as yf
-
-start_date = "2026-10-12"
-end_date = "2026-10-20"
-interval = "1d"
-
-ticker = "2330.TW"
-stock_data = yf.download(ticker, start=start_date, end=end_date, interval=interval)
-
-print(stock_data)
-
-一樣也是錯誤訊息耶
-
-1 Failed download:
-['2330.TW']: Exception('%ticker%: No price data found, symbol may be delisted (1d 2026-10-12 -> 2026-10-20)')
-
-6060
-
-方案一：抓台股首選 —— 使用 FinMind（台灣團隊開發，免申請 Key）
-這是台灣金融資料開源團隊做的，直接對接台灣證交所，抓台股快又穩定，絕對不會有退市或時區錯誤。
-
-
-import yfinance as yf
-
-# 方式 A：把時間範圍拉長（例如從 9 月開始抓）
-start_date = "2026-09-01"
-end_date = "2026-10-20"
-interval = "1d"
-
-ticker = "2330.TW"
-stock_data = yf.download(ticker, start=start_date, end=end_date, interval=interval)
-
-print("--- 方式 A 結果 ---")
-print(stock_data.tail())
-
-# 方式 B：用 period 參數直接抓最近一個月（最不容易出錯，強烈推薦）
-print("\n--- 方式 B 結果 ---")
-tsmc = yf.Ticker("2330.TW")
-stock_data_b = tsmc.history(period="1mo")
-print(stock_data_b.tail())
-
-# pip install yfinance
-
-import yfinance as yf
-
-['^GSPC']: Exception('%ticker%: No price data found, symbol may be delisted (15m 2026-10-12 -> 2026-10-15)')
-
-pandas-datareader 已停止維護，透過它直接從 Yahoo Finance 抓取歷史股價通常會直接報錯。
-建議改用目前主流且穩定維護的 yfinance 套件。
 
 # ------------------------------------------------------------  # 60個
 

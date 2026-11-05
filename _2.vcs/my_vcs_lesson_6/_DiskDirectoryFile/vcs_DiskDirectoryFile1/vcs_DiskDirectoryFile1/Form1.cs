@@ -584,10 +584,12 @@ namespace vcs_DiskDirectoryFile1
             int dx = 200 + 10;
             int dy = 60 + 10;
 
-            groupBox_file.Size = new Size(220, 70 * 13 + 20);
+            groupBox_file.Size = new Size(220 - 40, 70 * 13 + 20);
             groupBox_file.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            groupBox_directory.Size = new Size(220, 70 * 13 + 20);
-            groupBox_directory.Location = new Point(x_st + dx * 1 + 20, y_st + dy * 0);
+            groupBox_directory.Size = new Size(220 - 40, 70 * 13 + 20);
+            groupBox_directory.Location = new Point(x_st + dx * 1 - 20, y_st + dy * 0);
+            groupBox_disk.Size = new Size(220 - 40, 70 * 13 + 20);
+            groupBox_disk.Location = new Point(x_st + dx * 2 - 40, y_st + dy * 0);
             y_st += 10;
             bt_file00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_file01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -615,29 +617,43 @@ namespace vcs_DiskDirectoryFile1
             bt_dir10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
             bt_dir11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
             bt_dir12.Location = new Point(x_st + dx * 0, y_st + dy * 12);
+            bt_disk00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_disk01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_disk02.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            bt_disk03.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            bt_disk04.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            bt_disk05.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            bt_disk06.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            bt_disk07.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            bt_disk08.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            bt_disk09.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            bt_disk10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            bt_disk11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+            bt_disk12.Location = new Point(x_st + dx * 0, y_st + dy * 12);
 
             x_st += 40;
             y_st = 10;
-            int W = 1240 + 180 + 8;
+            int W = 1240 + 180 + 8 - 160;
             groupBox1.Size = new Size(W, 106 + 50);
-            groupBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0 - 14);
+            groupBox1.Location = new Point(x_st + dx * 3 - 100, y_st + dy * 0 - 14);
 
+            int dd = 110;
             listView_dir.Size = new Size(W, 270 - 50 + 200);
-            listView_dir.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 24 + 50);
+            listView_dir.Location = new Point(x_st + dx * 2 + dd, y_st + dy * 1 + 24 + 50);
             listView_file.Size = new Size(W, 270 - 50 + 200);
-            listView_file.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 24 + 50);
+            listView_file.Location = new Point(x_st + dx * 2 + dd, y_st + dy * 1 + 24 + 50);
             listView_video.Size = new Size(W, 270 - 50 + 200);
-            listView_video.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 24 + 50);
+            listView_video.Location = new Point(x_st + dx * 2 + dd, y_st + dy * 1 + 24 + 50);
             listView_rename_dir.Size = new Size(W, 270 - 50 + 200);
-            listView_rename_dir.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 24 + 50);
+            listView_rename_dir.Location = new Point(x_st + dx * 2 + dd, y_st + dy * 1 + 24 + 50);
             listView_rename_file.Size = new Size(W, 270 - 50 + 200);
-            listView_rename_file.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 24 + 50);
+            listView_rename_file.Location = new Point(x_st + dx * 2 + dd, y_st + dy * 1 + 24 + 50);
 
             bt_clear2.Location = new Point(listView_dir.Location.X + listView_dir.Size.Width - bt_clear2.Size.Width, listView_dir.Location.Y + listView_dir.Size.Height - bt_clear2.Size.Height);
             bt_clear2.BringToFront();
 
             richTextBox1.Size = new Size(W, 340 + 20);
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 5 + 24 + 200);
+            richTextBox1.Location = new Point(x_st + dx * 2 + dd, y_st + dy * 5 + 24 + 200);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
             bt_copy_rtb_data.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - bt_copy_rtb_data.Width, richTextBox1.Location.Y + richTextBox1.Height - bt_clear.Height - bt_copy_rtb_data.Height);
@@ -6899,6 +6915,74 @@ namespace vcs_DiskDirectoryFile1
             {
                 richTextBox1.Text += "進入 XXXX 頁\n";
             }
+        }
+
+        //------------------------------------------------------------  # 60個
+        //------------------------------------------------------------  # 60個
+
+        private void bt_disk00_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_disk01_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_disk02_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_disk03_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_disk04_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_disk05_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_disk06_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_disk07_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_disk08_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_disk09_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_disk10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_disk11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_disk12_Click(object sender, EventArgs e)
+        {
+
         }
 
         //------------------------------------------------------------  # 60個

@@ -179,7 +179,6 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 32;
-            this.button2.Text = "test alpha";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -201,7 +200,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(200, 60);
             this.button4.TabIndex = 35;
-            this.button4.Text = "彩虹化圖片28";
+            this.button4.Text = "彩虹化圖片";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
