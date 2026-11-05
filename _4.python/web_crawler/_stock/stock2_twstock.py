@@ -43,7 +43,7 @@ stock_id2 = "2317"  # 2317鴻海
 stock_id3 = "6869"  # 6869雲豹能源
 
 import twstock
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("使用 FinMind ST")
 print("------------------------------------------------------------")  # 60個
@@ -639,7 +639,7 @@ print(df)
 # 計算5天, 20天和60天移動平均線
 df["MA5"] = df["close"].rolling(window=5).mean()  # 移動平均線 (MA5) 連同過去N點平均
 df["MA20"] = df["close"].rolling(window=20).mean()  # 移動平均線 (MA20) 連同過去N點平均
-df["MA60"] = df["close"].rolling(window=60).mean()  # 移動平均線 (MA60) 連同過去N點平均
+df["MA60"] = df["close"].rolling(window=40).mean()  # 移動平均線 (MA60) 連同過去N點平均
 
 # 繪製收盤價和移動平均線
 plt.figure(figsize=(10, 8))
@@ -648,7 +648,7 @@ plt.plot(df["MA5"], label="週線", color="g")
 plt.plot(df["MA20"], label="月線", color="b")
 plt.plot(df["MA60"], label="半年線", color="c")
 
-plt.title("TSMC股價 5 日, 20 日和 60日移動平均線")
+plt.title("股價 5 日, 20 日和 60日移動平均線")
 plt.xlabel("日期")
 plt.ylabel("價格")
 plt.legend()
@@ -693,7 +693,6 @@ df = df.rename(columns={"close": "TT"})  # df修改欄位名稱
 print()
 print(df)
 
-
 # 報酬率公式：(Pt−Pt−1)/Pt−1
 
 r = df["TT"].diff() / df["TT"]
@@ -704,9 +703,9 @@ print(r)
 print("最後一百筆資料")
 
 r[-100:].plot()  # df直接畫出
+plt.title("報酬率 最後一百筆資料")
 
 show()
-
 
 # 原本股價圖波動的很厲害，現在我們想讓它變得平滑一點，改看每 20 天的平均
 
@@ -714,27 +713,13 @@ P = df["TT"]  # 取出一欄資料
 
 print(P.rolling(window=20).mean())  # 移動平均線 (MA20) 連同過去N點平均
 
-P.rolling(window=20).mean().plot()  # 移動平均線 (MA20) 連同過去N點平均
-
-show()
-
-# 和原本的股價圖比較
-
 P.plot()
 P.rolling(window=20).mean().plot()  # 移動平均線 (MA20) 連同過去N點平均
+P.rolling(window=40).mean().plot()  # 移動平均線 (MA60) 連同過去N點平均
+
+plt.title("all / MA20 / MA60")
 
 show()
-
-# 當然也可以算更多天的平均，會變得更平滑
-
-P.plot()
-P.rolling(window=20).mean().plot()  # 移動平均線 (MA20) 連同過去N點平均
-P.rolling(window=60).mean().plot()  # 移動平均線 (MA60) 連同過去N點平均
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -742,10 +727,13 @@ print("------------------------------------------------------------")  # 60個
 # mplfinance 的使用
 
 """
-python用mplfinance中的candlestick_ohlc畫分時圖
+python 用 mplfinance 中的 candlestick_ohlc 畫分時圖
 
-matplotlib.finance獨立出來成爲mplfinance，而mplfinance中的candlestick_ochl和candlestick_ohlc一般用來畫股票的K線圖。
-我需要分析分時圖，也就是一分鐘的行情，這個時候就不能直接用candlestick_ochl函數，因爲candlestick_ochl中x軸最小的單位是日期，不是分鐘。
+matplotlib.finance獨立出來成爲mplfinance，
+而mplfinance中的candlestick_ochl和candlestick_ohlc一般用來畫股票的K線圖。
+
+我需要分析分時圖，也就是一分鐘的行情，
+這個時候就不能直接用candlestick_ochl函數，因爲candlestick_ochl中x軸最小的單位是日期，不是分鐘。
 
 經過對mplfinance的源代碼進行分析，問題在於matplotlib的date2num將日期轉換爲浮點數，
 浮點數的整數部分表示日期，小數部分代表小時和分鐘。比如下面4個時間段是連續的分鐘。
@@ -755,11 +743,14 @@ matplotlib.finance獨立出來成爲mplfinance，而mplfinance中的candlestick_
 2018/09/17-21:36 	736954.9000 	1061215056
 2018/09/17-21:37 	736954.9007 	1061215057
 
-可以看出date2num函數計算之後，4個時間的整數部分都是736954，導致在X軸上這4個時間段都重疊在一起，無法區分了。
+可以看出date2num函數計算之後，4個時間的整數部分都是736954，
+導致在X軸上這4個時間段都重疊在一起，無法區分了。
 要達到的效果是每一個分鐘也能成爲一個整數，這樣就可以顯示出來了。
-那麼一天是24小時，每小時60分鐘，那麼一天就是1440分鐘，將date2num計算的浮點數乘以1440就可以將每一分鐘轉爲整數，那麼就可以在x軸上。
+那麼一天是24小時，每小時60分鐘，那麼一天就是1440分鐘，
+將date2num計算的浮點數乘以1440就可以將每一分鐘轉爲整數，那麼就可以在x軸上。
 
-最後還需要對x軸格式化，因爲自己對x軸進行了處理（乘以1440），採用默認的格式化是亂碼。需要自定義x軸的格式化函數。
+最後還需要對x軸格式化，因爲自己對x軸進行了處理（乘以1440），
+採用默認的格式化是亂碼。需要自定義x軸的格式化函數。
 
 pip install mplfinance
 pip install --upgrade mplfinance
@@ -771,7 +762,7 @@ import matplotlib.dates as dates
 from matplotlib.ticker import Formatter
 from mplfinance.original_flavor import candlestick_ohlc
 
-dfcvs = DataFrame(
+df = DataFrame(
     [
         #    時間            開盤, 最高 ,最低, 收盤
         ["2018/09/17-21:34", 3646, 3650, 3644, 3650],
@@ -781,17 +772,22 @@ dfcvs = DataFrame(
     ]
 )
 
-dfcvs.columns = ["時間", "開盤", "最高", "最低", "收盤"]
-dfcvs["時間"] = pd.to_datetime(dfcvs["時間"], format="%Y/%m/%d-%H:%M")
+print(df)
+
+df.columns = ["時間", "開盤", "最高", "最低", "收盤"]
+df["時間"] = pd.to_datetime(df["時間"], format="%Y/%m/%d-%H:%M")
+
+print()
+print(df)
 
 # matplotlib的date2num將日期轉換爲浮點數，整數部分區分日期，小數區分小時和分鐘
 # 因爲小數太小了，需要將小時和分鐘變成整數，需要乘以24（小時）×60（分鐘）= 1440，這樣小時和分鐘也能成爲整數
 # 這樣就可以一分鐘就佔一個位置
 
-dfcvs["時間"] = dfcvs["時間"].apply(lambda x: dates.date2num(x) * 1440)
-data_mat = dfcvs.values
+df["時間"] = df["時間"].apply(lambda x: dates.date2num(x) * 1440)
+data_mat = df.values
 
-fig, ax = plt.subplots(figsize=(10, 6))
+fig, ax = plt.subplots(figsize=(8, 5))
 
 fig.subplots_adjust(bottom=0.1)
 candlestick_ohlc(
@@ -820,8 +816,9 @@ formatter = MyFormatter(data_mat[:, 0])
 ax.xaxis.set_major_formatter(formatter)
 
 for label in ax.get_xticklabels():
-    label.set_rotation(90)
+    label.set_rotation(20)
     label.set_horizontalalignment("right")
+plt.title('畫分時圖')
 
 show()
 
@@ -833,50 +830,25 @@ df = pd.read_pickle("tmp_df_data1.pkl")
 print(df)
 
 day = df["date"].astype(str)
-close = df["close"].astype(float)
-
-plt.figure(figsize=(10, 8), dpi=100)
-
-plt.plot(day, close, "s-", color="r", label="收盤價")
-
-plt.xticks(fontsize=10, rotation=45)
-plt.yticks(fontsize=10)
-plt.legend(loc="best", fontsize=20)
-
-show()
-
-print("------------------------------")  # 30個
-
-# 讀取pickle檔案資料
-df = pd.read_pickle("tmp_df_data1.pkl")
-print(df)
-
-# step 1 prepare data
-day = df["date"].astype(str)
-openprice = df["open"].astype(float)
-close = df["close"].astype(float)
+# print(day[::5])  # syntax
+openprice = df["open"].astype(float)  # 開盤價
+close = df["close"].astype(float)  # 收盤價
 high = df["max"].astype(float)
 low = df["min"].astype(float)
 volume = df["Trading_Volume"].astype(float)  # 成交股數
 
-# step 2 create plot
-fig, (ax1, ax2) = plt.subplots(2, 1, sharex=True, figsize=(12, 8), dpi=100)
-plt.rcParams["font.sans-serif"] = ["Microsoft JhengHei"]
-# ax1.set_title("開盤價、收盤價 ( " + df["date"][0] + " ~ " + df["date"][-1] + " )")
-ax1.set_title("開盤價、收盤價")
-# ax1.set_title("K 線圖")
 
-# step 3 plot 子圖(ax1)
-ax1.plot(day, openprice, "s-", color="r", label="Open Price")
-ax1.legend(loc="best", fontsize=10)
-ax1.grid(True)
+plt.figure(figsize=[12, 6])
 
-# step 3 plot 子圖(ax2)
-ax2.plot(day, close, "o-", color="b", label="Close Price")
-ax2.legend(loc="best", fontsize=10)
-ax2.set_xticks(range(0, len(day), 5))
-ax2.set_xticklabels(day[::5])
-ax2.grid(True)
+plt.plot(day, openprice, "s-", color="r", label="開盤價")
+plt.plot(day, close, "o-", color="g", label="收盤價")
+
+plt.xticks(range(0, len(day), 5), fontsize=10, rotation=45)
+plt.yticks(fontsize=10)
+plt.grid(True)
+plt.legend(loc="best", fontsize=10)
+
+plt.title("開盤價、收盤價")
 
 show()
 
@@ -894,7 +866,7 @@ https://pypi.org/project/twstock/
 """
 
 stock_id = "2330"  # 2330台積電
-stock_id = "2317"  # 2317鴻海
+# stock_id = "2317"  # 2317鴻海
 
 stock = twstock.Stock(stock_id)  # 以股票代號建立 Stock 物件
 
@@ -921,7 +893,7 @@ print("最低價：", stock.low[-1])
 print("收盤價：", stock.price[-1])
 
 print("------------------------------")  # 30個
-
+"""
 # 使用語法：（查詢某年某月的股票資料）
 # stock.fetch(year, month)  # 取得 year年month月 的資料
 
@@ -936,7 +908,7 @@ for s in stocklist:
     print(s.close)
 
 print("------------------------------")  # 30個
-
+"""
 # 股票即時交易資訊
 
 print("即時資料, 1檔 / 3檔")
@@ -949,29 +921,34 @@ print("是否讀取成功：", realdata["success"])
 
 if realdata["success"]:  # 如果讀取成功
     print("timestamp", realdata["timestamp"])
-    print("即時股票資料：", realdata["info"]["name"])
-    print("即時股票資料：", realdata["info"]["code"])
-    print("即時股票資料：", realdata["info"]["channel"])
-    print("即時股票資料：", realdata["info"]["name"])
-    print("即時股票資料：", realdata["info"]["fullname"])
-    print("即時股票資料：", realdata["info"]["time"])
-    print("即時股票資料：", realdata["realtime"]["open"])
-    print("即時股票資料：", realdata["realtime"]["high"])
-    print("即時股票資料：", realdata["realtime"]["low"])
+    print("股票名稱：", realdata["info"]["name"])
+    print("股票代碼：", realdata["info"]["code"])
+    print("地區：", realdata["info"]["channel"])
+    print("股票名稱：", realdata["info"]["name"])
+    print("公司全名：", realdata["info"]["fullname"])
+    print("現在時間：", realdata["info"]["time"])
     print("開盤價：", realdata["realtime"]["open"])
     print("最高價：", realdata["realtime"]["high"])
     print("最低價：", realdata["realtime"]["low"])
-    print("即時股票資料：", realdata["realtime"]["latest_trade_price"])
-    print("即時股票資料：", realdata["realtime"]["trade_volume"])
-    print("即時股票資料：", realdata["realtime"]["accumulate_trade_volume"])
-    print("即時股票資料：", realdata["realtime"]["best_bid_price"])
-    print("即時股票資料：", realdata["realtime"]["best_bid_volume"])
-    print("即時股票資料：", realdata["realtime"]["best_ask_price"])
-    print("即時股票資料：", realdata["realtime"]["best_ask_volume"])
-    print("目前股價：", realdata["realtime"]["latest_trade_price"])
+    print("最新成交價：", realdata["realtime"]["latest_trade_price"])
+    print("成交量：", realdata["realtime"]["trade_volume"])
+    print("累計成交量：", realdata["realtime"]["accumulate_trade_volume"])
+    print("最佳5檔賣出價：", realdata["realtime"]["best_bid_price"])
+    print("最佳5檔賣出量：", realdata["realtime"]["best_bid_volume"])
+    print("最佳5檔買進價：", realdata["realtime"]["best_ask_price"])
+    print("最佳5檔買進量：", realdata["realtime"]["best_ask_volume"])
 else:
     print("錯誤：" + realdata["rtmessage"])
-"""
+
+stock_id = "2330"  # 2330台積電
+
+realdata = twstock.realtime.get(stock_id)  # 即時資料
+
+print("realdata")
+print(realdata)
+
+result = pd.DataFrame(realdata).T.iloc[1:3]
+result.columns = [
     "股票代碼",
     "地區",
     "股票名稱",
@@ -987,7 +964,9 @@ else:
     "開盤價",
     "最高價",
     "最低價",
-"""
+]
+print("result")
+print(result.T)
 
 print("------------------------------")  # 30個
 
@@ -1037,46 +1016,24 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-stock_id = "2330"  # 2330台積電
-
-realdata = twstock.realtime.get(stock_id)  # 即時資料
-
-result = pd.DataFrame(realdata).T.iloc[1:3]
-result.columns = [
-    "股票代碼",
-    "地區",
-    "股票名稱",
-    "公司全名",
-    "現在時間",
-    "最新成交價",
-    "成交量",
-    "累計成交量",
-    "最佳5檔賣出價",
-    "最佳5檔賣出量",
-    "最佳5檔買進價",
-    "最佳5檔買進量",
-    "開盤價",
-    "最高價",
-    "最低價",
-]
-print(result)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
+'''
 stock_id = "2330"  # 2330台積電
 
 stock = twstock.Stock(stock_id)  # 以股票代號建立 Stock 物件
+# 取得最近31筆資料
+
+# 建立 x, y 軸串列，x 軸為日期時間(date)，y 軸為收盤價(close)
+# 印出 stock.data[0]，可以觀察到「close」就是收盤價的價位資料
+
+print(len(stock.data))
+print(stock.data)  # 取得最近31筆資料
+print()
+print(stock.data[0])  # 第0筆資料
 
 stocklist1 = stock.fetch(2023, 1)  # 取得 2023年1月 的資料
 stocklist2 = stock.fetch(2023, 2)  # 取得 2023年2月 的資料
 
 stocklist = stocklist1 + stocklist2
-
-# 建立 x, y 軸串列，x 軸為日期時間(date)，y 軸為收盤價(close)
-# 印出 stock.data[0]，可以觀察到「close」就是收盤價的價位資料
-print(stock.data[0])
 
 listx = []
 listy = []
@@ -1110,7 +1067,7 @@ if realdata["success"]:
     print("即時股票資料：")
     print(realdata)  # 即時資料
     print("目前股價：")
-    print(realdata["realtime"]["latest_trade_price"])  # 即時價格
+    print(realdata["realtime"]["latest_trade_price"])  # 即時價格 最新成交價
     realprice = realdata["realtime"]["latest_trade_price"]  # 目前股價
     if realprice == "-":
         print("找不到資料")
@@ -1227,14 +1184,22 @@ while True:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("twstock：台灣股票")
+# twstock 各個 API 比較
 
 stock_id = "2317"  # 2317鴻海
 
 stock = twstock.Stock(stock_id)  # 以股票代號建立 Stock 物件
-stock.fetch(2020, 1)  # 取得 2020年1月 的資料
-stock.fetch_31()
-stock.fetch_from(2021, 9)
+
+data = stock.fetch(2026, 10)  # 取得 2020年1月 的資料
+print("資料長度 :", len(data))
+
+data = stock.fetch_31()
+print("資料長度 :", len(data))
+
+data = stock.fetch_from(2021, 9)
+print("資料長度 :", len(data))
+
+sys.exit()
 
 print("------------------------------")  # 30個
 
@@ -1369,35 +1334,38 @@ with open(filename, "w", newline="") as f:
 
 print("------------------------------------------------------------")  # 60個
 
+print("讀取csv檔, 並畫出")
+
 filename = "D:/_git/vcs/_1.data/______test_files1/__RW/_csv/stock_data_2019_2330.csv"
 
 with open(filename, "r", newline="") as f:
     datas = csv.reader(f)
     listx = []
     listy = []
+    # debug
+    # for data in datas:
+    #    print(data)
     for data in datas:
         listx.append(data[0])
         listy.append(data[5])
 
-    #    print(len(datas))
-    #    print(len(listx), len(listy))
-    plt.figure(figsize=(20, 5))
+    # print(len(datas))
+    # print(len(listx), len(listy))
+    plt.figure(figsize=(20, 5))  # 圖像大小[英吋]
     plt.plot(listx, listy)
     plt.yticks(range(10, 200, 10))
     show()
 
-#    print([x[6] for x in datas])
-#    print(type(datas))
+# print([x[6] for x in datas])
+# print(type(datas))
 
 plt.figure(figsize=(20, 5))
 plt.plot([x.close for x in slist])
 show()
 
-# %%
 for data in datas:
     print(data)
 
-# %%
 lsit1 = [1, 2, 3, 4]
 list1[0]
 
@@ -1515,7 +1483,7 @@ stock_id = "2330"  # 2330台積電
 
 stock = twstock.Stock(stock_id)  # 以股票代號建立 Stock 物件
 
-df = pd.DataFrame(stock.fetch_from(2020, 1))
+df = pd.DataFrame(stock.fetch_from(2026, 10))
 df["date"] = pd.to_datetime(df["date"])
 df.set_index("date", inplace=True)
 print(df.head())
@@ -1528,9 +1496,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -1959,3 +1924,29 @@ end = datetime.date.today()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+
+fig, (ax1, ax2) = plt.subplots(2, 1, sharex=True, figsize=(12, 8), dpi=100)
+plt.rcParams["font.sans-serif"] = ["Microsoft JhengHei"]
+# ax1.set_title("開盤價、收盤價 ( " + df["date"][0] + " ~ " + df["date"][-1] + " )")
+ax1.set_title("開盤價、收盤價")
+# ax1.set_title("K 線圖")
+
+# 畫子圖(ax1)
+ax1.plot(day, openprice, "s-", color="r", label="開盤價")
+ax1.legend(loc="best", fontsize=10)
+ax1.grid(True)
+
+# 畫子圖(ax2)
+ax2.plot(day, close, "o-", color="g", label="收盤價")
+ax2.legend(loc="best", fontsize=10)
+ax2.set_xticks(range(0, len(day), 5))
+ax2.set_xticklabels(day[::5])
+ax2.grid(True)
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
