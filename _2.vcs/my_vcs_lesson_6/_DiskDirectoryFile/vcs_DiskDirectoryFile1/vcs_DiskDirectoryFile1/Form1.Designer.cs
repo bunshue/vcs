@@ -108,16 +108,21 @@
             this.bt_winmerge = new System.Windows.Forms.Button();
             this.listBox_search = new System.Windows.Forms.ListBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.comboBox_drive = new System.Windows.Forms.ComboBox();
+            this.bt_show_disk_info = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
             this.cb_operation_mode = new System.Windows.Forms.CheckBox();
-            this.bt_test7 = new System.Windows.Forms.Button();
-            this.bt_setup = new System.Windows.Forms.Button();
-            this.bt_test6 = new System.Windows.Forms.Button();
-            this.bt_test5 = new System.Windows.Forms.Button();
             this.bt_test0 = new System.Windows.Forms.Button();
-            this.bt_test4 = new System.Windows.Forms.Button();
-            this.bt_test1 = new System.Windows.Forms.Button();
-            this.bt_test2 = new System.Windows.Forms.Button();
+            this.bt_test7 = new System.Windows.Forms.Button();
             this.bt_test3 = new System.Windows.Forms.Button();
+            this.bt_setup = new System.Windows.Forms.Button();
+            this.bt_test2 = new System.Windows.Forms.Button();
+            this.bt_test6 = new System.Windows.Forms.Button();
+            this.bt_test1 = new System.Windows.Forms.Button();
+            this.bt_test5 = new System.Windows.Forms.Button();
+            this.bt_test4 = new System.Windows.Forms.Button();
             this.groupBox_folder = new System.Windows.Forms.GroupBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.bt_remove_all = new System.Windows.Forms.Button();
@@ -154,10 +159,6 @@
             this.bt_disk11 = new System.Windows.Forms.Button();
             this.bt_disk09 = new System.Windows.Forms.Button();
             this.bt_disk10 = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.bt_show_disk_info = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.comboBox_drive = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox_search.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -167,11 +168,12 @@
             this.groupBox_compare.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tabPage5.SuspendLayout();
             this.groupBox_folder.SuspendLayout();
             this.groupBox_file.SuspendLayout();
             this.groupBox_directory.SuspendLayout();
             this.groupBox_disk.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -527,6 +529,7 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Location = new System.Drawing.Point(10, 19);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -1098,141 +1101,184 @@
             // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.cb_operation_mode);
-            this.tabPage4.Controls.Add(this.bt_test7);
-            this.tabPage4.Controls.Add(this.bt_setup);
-            this.tabPage4.Controls.Add(this.bt_test6);
-            this.tabPage4.Controls.Add(this.bt_test5);
-            this.tabPage4.Controls.Add(this.bt_test0);
-            this.tabPage4.Controls.Add(this.bt_test4);
-            this.tabPage4.Controls.Add(this.bt_test1);
-            this.tabPage4.Controls.Add(this.bt_test2);
-            this.tabPage4.Controls.Add(this.bt_test3);
+            this.tabPage4.Controls.Add(this.comboBox_drive);
+            this.tabPage4.Controls.Add(this.bt_show_disk_info);
+            this.tabPage4.Controls.Add(this.label1);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Size = new System.Drawing.Size(528, 136);
             this.tabPage4.TabIndex = 4;
-            this.tabPage4.Text = "其他";
+            this.tabPage4.Text = "磁碟";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Location = new System.Drawing.Point(676, 457);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox1.TabIndex = 307;
+            this.pictureBox1.TabStop = false;
+            // 
+            // comboBox_drive
+            // 
+            this.comboBox_drive.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.comboBox_drive.FormattingEnabled = true;
+            this.comboBox_drive.Location = new System.Drawing.Point(13, 12);
+            this.comboBox_drive.Name = "comboBox_drive";
+            this.comboBox_drive.Size = new System.Drawing.Size(200, 29);
+            this.comboBox_drive.TabIndex = 304;
+            this.comboBox_drive.SelectedIndexChanged += new System.EventHandler(this.comboBox_drive_SelectedIndexChanged);
+            // 
+            // bt_show_disk_info
+            // 
+            this.bt_show_disk_info.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_show_disk_info.Location = new System.Drawing.Point(13, 61);
+            this.bt_show_disk_info.Name = "bt_show_disk_info";
+            this.bt_show_disk_info.Size = new System.Drawing.Size(69, 38);
+            this.bt_show_disk_info.TabIndex = 306;
+            this.bt_show_disk_info.Text = "檢測";
+            this.bt_show_disk_info.UseVisualStyleBackColor = true;
+            this.bt_show_disk_info.Click += new System.EventHandler(this.bt_show_disk_info_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label1.Location = new System.Drawing.Point(147, 67);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(66, 19);
+            this.label1.TabIndex = 305;
+            this.label1.Text = "磁碟：";
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.cb_operation_mode);
+            this.tabPage5.Controls.Add(this.bt_test0);
+            this.tabPage5.Controls.Add(this.bt_test7);
+            this.tabPage5.Controls.Add(this.bt_test3);
+            this.tabPage5.Controls.Add(this.bt_setup);
+            this.tabPage5.Controls.Add(this.bt_test2);
+            this.tabPage5.Controls.Add(this.bt_test6);
+            this.tabPage5.Controls.Add(this.bt_test1);
+            this.tabPage5.Controls.Add(this.bt_test5);
+            this.tabPage5.Controls.Add(this.bt_test4);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Size = new System.Drawing.Size(528, 136);
+            this.tabPage5.TabIndex = 5;
+            this.tabPage5.Text = "其他";
+            this.tabPage5.UseVisualStyleBackColor = true;
             // 
             // cb_operation_mode
             // 
             this.cb_operation_mode.AutoSize = true;
             this.cb_operation_mode.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_operation_mode.Location = new System.Drawing.Point(296, 70);
+            this.cb_operation_mode.Location = new System.Drawing.Point(299, 75);
             this.cb_operation_mode.Name = "cb_operation_mode";
             this.cb_operation_mode.Size = new System.Drawing.Size(78, 17);
-            this.cb_operation_mode.TabIndex = 320;
+            this.cb_operation_mode.TabIndex = 340;
             this.cb_operation_mode.Text = "簡易模式";
             this.cb_operation_mode.UseVisualStyleBackColor = true;
+            // 
+            // bt_test0
+            // 
+            this.bt_test0.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_test0.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_test0.Location = new System.Drawing.Point(13, 15);
+            this.bt_test0.Name = "bt_test0";
+            this.bt_test0.Size = new System.Drawing.Size(45, 45);
+            this.bt_test0.TabIndex = 336;
+            this.bt_test0.Text = "測試0";
+            this.bt_test0.UseVisualStyleBackColor = true;
             // 
             // bt_test7
             // 
             this.bt_test7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_test7.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_test7.Location = new System.Drawing.Point(171, 66);
+            this.bt_test7.Location = new System.Drawing.Point(174, 71);
             this.bt_test7.Name = "bt_test7";
             this.bt_test7.Size = new System.Drawing.Size(45, 45);
-            this.bt_test7.TabIndex = 276;
+            this.bt_test7.TabIndex = 339;
             this.bt_test7.Text = "讀寫";
             this.bt_test7.UseVisualStyleBackColor = true;
-            this.bt_test7.Click += new System.EventHandler(this.bt_test7_Click);
+            // 
+            // bt_test3
+            // 
+            this.bt_test3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_test3.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_test3.Location = new System.Drawing.Point(174, 15);
+            this.bt_test3.Name = "bt_test3";
+            this.bt_test3.Size = new System.Drawing.Size(45, 45);
+            this.bt_test3.TabIndex = 334;
+            this.bt_test3.Text = "測試3";
+            this.bt_test3.UseVisualStyleBackColor = true;
             // 
             // bt_setup
             // 
             this.bt_setup.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_setup.BackgroundImage")));
             this.bt_setup.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_setup.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_setup.Location = new System.Drawing.Point(296, 10);
+            this.bt_setup.Location = new System.Drawing.Point(299, 15);
             this.bt_setup.Name = "bt_setup";
             this.bt_setup.Size = new System.Drawing.Size(45, 45);
-            this.bt_setup.TabIndex = 253;
+            this.bt_setup.TabIndex = 331;
             this.bt_setup.UseVisualStyleBackColor = true;
-            this.bt_setup.Click += new System.EventHandler(this.bt_setup_Click);
-            // 
-            // bt_test6
-            // 
-            this.bt_test6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_test6.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_test6.Location = new System.Drawing.Point(120, 66);
-            this.bt_test6.Name = "bt_test6";
-            this.bt_test6.Size = new System.Drawing.Size(45, 45);
-            this.bt_test6.TabIndex = 275;
-            this.bt_test6.Text = "測試6";
-            this.bt_test6.UseVisualStyleBackColor = true;
-            this.bt_test6.Click += new System.EventHandler(this.bt_test6_Click);
-            // 
-            // bt_test5
-            // 
-            this.bt_test5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_test5.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_test5.Location = new System.Drawing.Point(65, 66);
-            this.bt_test5.Name = "bt_test5";
-            this.bt_test5.Size = new System.Drawing.Size(45, 45);
-            this.bt_test5.TabIndex = 274;
-            this.bt_test5.Text = "測試5";
-            this.bt_test5.UseVisualStyleBackColor = true;
-            this.bt_test5.Click += new System.EventHandler(this.bt_test5_Click);
-            // 
-            // bt_test0
-            // 
-            this.bt_test0.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_test0.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_test0.Location = new System.Drawing.Point(10, 10);
-            this.bt_test0.Name = "bt_test0";
-            this.bt_test0.Size = new System.Drawing.Size(45, 45);
-            this.bt_test0.TabIndex = 273;
-            this.bt_test0.Text = "測試0";
-            this.bt_test0.UseVisualStyleBackColor = true;
-            this.bt_test0.Click += new System.EventHandler(this.bt_test0_Click);
-            // 
-            // bt_test4
-            // 
-            this.bt_test4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_test4.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_test4.Location = new System.Drawing.Point(10, 66);
-            this.bt_test4.Name = "bt_test4";
-            this.bt_test4.Size = new System.Drawing.Size(45, 45);
-            this.bt_test4.TabIndex = 272;
-            this.bt_test4.Text = "測試4";
-            this.bt_test4.UseVisualStyleBackColor = true;
-            this.bt_test4.Click += new System.EventHandler(this.bt_test4_Click);
-            // 
-            // bt_test1
-            // 
-            this.bt_test1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_test1.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_test1.Location = new System.Drawing.Point(65, 10);
-            this.bt_test1.Name = "bt_test1";
-            this.bt_test1.Size = new System.Drawing.Size(45, 45);
-            this.bt_test1.TabIndex = 269;
-            this.bt_test1.Text = "測試1";
-            this.bt_test1.UseVisualStyleBackColor = true;
-            this.bt_test1.Click += new System.EventHandler(this.bt_test1_Click);
             // 
             // bt_test2
             // 
             this.bt_test2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_test2.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_test2.Location = new System.Drawing.Point(120, 10);
+            this.bt_test2.Location = new System.Drawing.Point(123, 15);
             this.bt_test2.Name = "bt_test2";
             this.bt_test2.Size = new System.Drawing.Size(45, 45);
-            this.bt_test2.TabIndex = 270;
+            this.bt_test2.TabIndex = 333;
             this.bt_test2.Text = "測試2優";
             this.bt_test2.UseVisualStyleBackColor = true;
-            this.bt_test2.Click += new System.EventHandler(this.bt_test2_Click);
             // 
-            // bt_test3
+            // bt_test6
             // 
-            this.bt_test3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_test3.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_test3.Location = new System.Drawing.Point(171, 10);
-            this.bt_test3.Name = "bt_test3";
-            this.bt_test3.Size = new System.Drawing.Size(45, 45);
-            this.bt_test3.TabIndex = 271;
-            this.bt_test3.Text = "測試3";
-            this.bt_test3.UseVisualStyleBackColor = true;
-            this.bt_test3.Click += new System.EventHandler(this.bt_test3_Click);
+            this.bt_test6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_test6.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_test6.Location = new System.Drawing.Point(123, 71);
+            this.bt_test6.Name = "bt_test6";
+            this.bt_test6.Size = new System.Drawing.Size(45, 45);
+            this.bt_test6.TabIndex = 338;
+            this.bt_test6.Text = "測試6";
+            this.bt_test6.UseVisualStyleBackColor = true;
+            // 
+            // bt_test1
+            // 
+            this.bt_test1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_test1.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_test1.Location = new System.Drawing.Point(68, 15);
+            this.bt_test1.Name = "bt_test1";
+            this.bt_test1.Size = new System.Drawing.Size(45, 45);
+            this.bt_test1.TabIndex = 332;
+            this.bt_test1.Text = "測試1";
+            this.bt_test1.UseVisualStyleBackColor = true;
+            // 
+            // bt_test5
+            // 
+            this.bt_test5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_test5.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_test5.Location = new System.Drawing.Point(68, 71);
+            this.bt_test5.Name = "bt_test5";
+            this.bt_test5.Size = new System.Drawing.Size(45, 45);
+            this.bt_test5.TabIndex = 337;
+            this.bt_test5.Text = "測試5";
+            this.bt_test5.UseVisualStyleBackColor = true;
+            // 
+            // bt_test4
+            // 
+            this.bt_test4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_test4.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_test4.Location = new System.Drawing.Point(13, 71);
+            this.bt_test4.Name = "bt_test4";
+            this.bt_test4.Size = new System.Drawing.Size(45, 45);
+            this.bt_test4.TabIndex = 335;
+            this.bt_test4.Text = "測試4";
+            this.bt_test4.UseVisualStyleBackColor = true;
             // 
             // groupBox_folder
             // 
@@ -1657,55 +1703,12 @@
             this.bt_disk10.UseVisualStyleBackColor = true;
             this.bt_disk10.Click += new System.EventHandler(this.bt_disk10_Click);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(833, 422);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox1.TabIndex = 307;
-            this.pictureBox1.TabStop = false;
-            // 
-            // bt_show_disk_info
-            // 
-            this.bt_show_disk_info.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_show_disk_info.Location = new System.Drawing.Point(964, 390);
-            this.bt_show_disk_info.Name = "bt_show_disk_info";
-            this.bt_show_disk_info.Size = new System.Drawing.Size(69, 38);
-            this.bt_show_disk_info.TabIndex = 306;
-            this.bt_show_disk_info.Text = "檢測";
-            this.bt_show_disk_info.UseVisualStyleBackColor = true;
-            this.bt_show_disk_info.Click += new System.EventHandler(this.bt_show_disk_info_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(829, 400);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 19);
-            this.label1.TabIndex = 305;
-            this.label1.Text = "磁碟：";
-            // 
-            // comboBox_drive
-            // 
-            this.comboBox_drive.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.comboBox_drive.FormattingEnabled = true;
-            this.comboBox_drive.Location = new System.Drawing.Point(833, 356);
-            this.comboBox_drive.Name = "comboBox_drive";
-            this.comboBox_drive.Size = new System.Drawing.Size(200, 29);
-            this.comboBox_drive.TabIndex = 304;
-            this.comboBox_drive.SelectedIndexChanged += new System.EventHandler(this.comboBox_drive_SelectedIndexChanged);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1096, 731);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.bt_show_disk_info);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox_drive);
             this.Controls.Add(this.listView_rename_file);
             this.Controls.Add(this.listView_rename_dir);
             this.Controls.Add(this.groupBox_file);
@@ -1741,13 +1744,14 @@
             this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
             this.groupBox_folder.ResumeLayout(false);
             this.groupBox_file.ResumeLayout(false);
             this.groupBox_directory.ResumeLayout(false);
             this.groupBox_disk.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -1778,7 +1782,6 @@
         private System.Windows.Forms.Button bt_delete_file;
         private System.Windows.Forms.Button bt_start_files;
         private System.Windows.Forms.TextBox tb_foldername1;
-        private System.Windows.Forms.Button bt_setup;
         private System.Windows.Forms.Button bt_open_dir1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.TextBox tb_search;
@@ -1792,10 +1795,6 @@
         private System.Windows.Forms.Button bt_clear2;
         private System.Windows.Forms.Button bt_export_doc;
         private System.Windows.Forms.Label lb_search_result2;
-        private System.Windows.Forms.Button bt_test4;
-        private System.Windows.Forms.Button bt_test3;
-        private System.Windows.Forms.Button bt_test2;
-        private System.Windows.Forms.Button bt_test1;
         private System.Windows.Forms.TextBox tb_limit_max;
         private System.Windows.Forms.CheckBox cb_limit_max;
         private System.Windows.Forms.CheckBox cb_search_pattern;
@@ -1850,10 +1849,6 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.Button bt_test0;
-        private System.Windows.Forms.Button bt_test7;
-        private System.Windows.Forms.Button bt_test6;
-        private System.Windows.Forms.Button bt_test5;
         private System.Windows.Forms.CheckBox cb_search_big_files;
         private System.Windows.Forms.CheckBox cb_search_good_files;
         private System.Windows.Forms.CheckBox cb_search_small_files;
@@ -1863,7 +1858,6 @@
         private System.Windows.Forms.CheckBox cb_show_all;
         private System.Windows.Forms.ListView listView_rename_dir;
         private System.Windows.Forms.ListView listView_rename_file;
-        private System.Windows.Forms.CheckBox cb_operation_mode;
         private System.Windows.Forms.GroupBox groupBox_disk;
         private System.Windows.Forms.Button bt_disk00;
         private System.Windows.Forms.Button bt_disk03;
@@ -1882,6 +1876,17 @@
         private System.Windows.Forms.Button bt_show_disk_info;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox_drive;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.CheckBox cb_operation_mode;
+        private System.Windows.Forms.Button bt_test0;
+        private System.Windows.Forms.Button bt_test7;
+        private System.Windows.Forms.Button bt_test3;
+        private System.Windows.Forms.Button bt_setup;
+        private System.Windows.Forms.Button bt_test2;
+        private System.Windows.Forms.Button bt_test6;
+        private System.Windows.Forms.Button bt_test1;
+        private System.Windows.Forms.Button bt_test5;
+        private System.Windows.Forms.Button bt_test4;
     }
 }
 

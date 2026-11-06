@@ -500,10 +500,9 @@ namespace vcs_DiskDirectoryFile1
                 listBox_search.Items.Add(sss);
             }
 
-            //6060
+            //------------------------------------------------------------  # 60個
 
-            //搜尋本機磁碟
-            HDD_Scan();
+            HDD_Scan();  // 搜尋本機磁碟
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -665,6 +664,7 @@ namespace vcs_DiskDirectoryFile1
             listView_rename_dir.Location = new Point(x_st + dx * 2 + dd, y_st + dy * 1 + 24 + 50);
             listView_rename_file.Size = new Size(W, 270 - 50 + 200);
             listView_rename_file.Location = new Point(x_st + dx * 2 + dd, y_st + dy * 1 + 24 + 50);
+            pictureBox1.Location = new Point(x_st + dx * 2 + dd + W - 260, y_st + dy * 1 + 24 + 50);
 
             bt_clear2.Location = new Point(listView_dir.Location.X + listView_dir.Size.Width - bt_clear2.Size.Width, listView_dir.Location.Y + listView_dir.Size.Height - bt_clear2.Size.Height);
             bt_clear2.BringToFront();
@@ -682,6 +682,7 @@ namespace vcs_DiskDirectoryFile1
         {
             groupBox_file.Visible = false;
             groupBox_directory.Visible = false;
+            groupBox_disk.Visible = false;
 
             //button
             int x_st = 10;
@@ -703,6 +704,7 @@ namespace vcs_DiskDirectoryFile1
             listView_rename_dir.Location = new Point(x_st + dx * 0, y_st + dy * 1 + 24 + 50);
             listView_rename_file.Size = new Size(W, 270 - 50);
             listView_rename_file.Location = new Point(x_st + dx * 0, y_st + dy * 1 + 24 + 50);
+            pictureBox1.Location = new Point(x_st + dx * 0 + W - 260, y_st + dy * 1 + 24 + 50);
 
             bt_clear2.Location = new Point(listView_dir.Location.X + listView_dir.Size.Width - bt_clear2.Size.Width, listView_dir.Location.Y + listView_dir.Size.Height - bt_clear2.Size.Height);
             bt_clear2.BringToFront();
@@ -762,12 +764,6 @@ namespace vcs_DiskDirectoryFile1
             dx = 45 + 5;
             dy = 45 + 5;
 
-            comboBox_drive.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 10);
-            label1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 50);
-            bt_show_disk_info.Location = new Point(x_st + dx * 0 + 130, y_st + dy * 0 + 50);
-            pictureBox1.Size = new Size(300, 300);
-            pictureBox1.Location = new Point(x_st + dx * 0 + 210, y_st + dy * 0 + 10);
-
             lb_search_result1.Location = new Point(x_st + dx * 1 - 110, y_st + dy * 0 + 10);
             lb_search_result2.Location = new Point(x_st + dx * 1 - 110, y_st + dy * 0 + 34);
             lb_search_result1.Text = "";
@@ -807,7 +803,13 @@ namespace vcs_DiskDirectoryFile1
             bt_open_with_ue.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             bt_winmerge.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             bt_replace.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            //那些小icon 第4頁 其他
+            //那些小icon 第4頁 磁碟
+            label1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 10);
+            comboBox_drive.Location = new Point(x_st + dx * 0 + 65, y_st + dy * 0 + 4);
+            bt_show_disk_info.Location = new Point(x_st + dx * 0 + 65, y_st + dy * 0 + 50);
+            pictureBox1.Size = new Size(260, 320);
+            pictureBox1.Visible = false;
+            //那些小icon 第5頁 其他
             bt_test0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_test1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             bt_test2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
@@ -6852,6 +6854,7 @@ namespace vcs_DiskDirectoryFile1
             int dx = 45 + 5;
             int dy = 45 + 5;
             int yy = 20;
+            pictureBox1.Visible = false;
             groupBox_folder.Visible = true;
             groupBox_search.Visible = true;
 
@@ -6865,6 +6868,7 @@ namespace vcs_DiskDirectoryFile1
 
                 bt_delete_file.Location = new Point(x_st + dx * 7, y_st + dy * 0);
                 bt_open_folder.Location = new Point(x_st + dx * 8, y_st + dy * 0);
+                pictureBox1.Visible = false;
             }
             else if (tabControl1.SelectedTab == tabPage1)
             {
@@ -6890,6 +6894,7 @@ namespace vcs_DiskDirectoryFile1
 
                 bt_delete_file.Location = new Point(x_st + dx * 7, y_st + dy * 0);
                 bt_open_folder.Location = new Point(x_st + dx * 8, y_st + dy * 0);
+                pictureBox1.Visible = false;
             }
             else if (tabControl1.SelectedTab == tabPage2)
             {
@@ -6915,6 +6920,7 @@ namespace vcs_DiskDirectoryFile1
 
                 bt_delete_file.Location = new Point(x_st + dx * 7, y_st + dy * 0);
                 bt_open_folder.Location = new Point(x_st + dx * 8, y_st + dy * 0);
+                pictureBox1.Visible = false;
             }
             else if (tabControl1.SelectedTab == tabPage3)
             {
@@ -6928,12 +6934,22 @@ namespace vcs_DiskDirectoryFile1
 
                 groupBox_folder.Visible = false;
                 groupBox_search.Visible = false;
+                pictureBox1.Visible = false;
             }
             else if (tabControl1.SelectedTab == tabPage4)
             {
-                //richTextBox1.Text += "進入 其他 頁\n";
+                //richTextBox1.Text += "進入 磁碟 頁\n";
                 groupBox_folder.Visible = false;
                 groupBox_search.Visible = false;
+                pictureBox1.Visible = true;
+            }
+            else if (tabControl1.SelectedTab == tabPage5)
+            {
+                //richTextBox1.Text += "進入 其他 頁\n";
+                pictureBox1.Visible = false;
+                groupBox_folder.Visible = false;
+                groupBox_search.Visible = false;
+                pictureBox1.Visible = false;
             }
             else
             {
@@ -6952,7 +6968,10 @@ namespace vcs_DiskDirectoryFile1
             DriveInfo[] drives = DriveInfo.GetDrives();  // 找磁碟分割區
             foreach (DriveInfo drive in drives)
             {
-                comboBox_drive.Items.Add(drive.Name);
+                if (drive.IsReady == true)  // 使用IsReady屬性判斷裝置是否就緒
+                {
+                    comboBox_drive.Items.Add(drive.Name);
+                }
             }
 
             /*   same
@@ -6979,8 +6998,9 @@ namespace vcs_DiskDirectoryFile1
             }
         }
 
-        //6060
-        //6060
+        //------------------------------------------------------------  # 60個
+        //------------------------------------------------------------  # 60個
+
         private void bt_disk00_Click(object sender, EventArgs e)
         {
             //讀取磁碟剩餘空間
@@ -7039,7 +7059,7 @@ namespace vcs_DiskDirectoryFile1
             }
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         //取得硬碟資訊 ST
         // TBD [DllImport("kernel32.dll", EntryPoint = "GetDiskFreeSpaceEx")]
@@ -7144,7 +7164,7 @@ namespace vcs_DiskDirectoryFile1
             }
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void bt_disk03_Click(object sender, EventArgs e)
         {
@@ -7282,9 +7302,7 @@ namespace vcs_DiskDirectoryFile1
             return retVal.ToString("x");
         }
 
-
-
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void bt_disk04_Click(object sender, EventArgs e)
         {
@@ -7359,7 +7377,7 @@ namespace vcs_DiskDirectoryFile1
             }
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void bt_disk05_Click(object sender, EventArgs e)
         {
@@ -7369,7 +7387,7 @@ namespace vcs_DiskDirectoryFile1
             IDE ide = new IDE();
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void bt_disk06_Click(object sender, EventArgs e)
         {
@@ -7539,7 +7557,7 @@ namespace vcs_DiskDirectoryFile1
             public string ErrorData { get; set; }
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void bt_disk07_Click(object sender, EventArgs e)
         {

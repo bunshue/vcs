@@ -1,10 +1,29 @@
-# Python 測試 FinMind
+"""
+Python 測試 FinMind
 
-# 方案一：抓台股首選 —— 使用 FinMind（台灣團隊開發，免申請 Key）
-# 這是台灣金融資料開源團隊做的，直接對接台灣證交所，抓台股快又穩定，絕對不會有退市或時區錯誤。
+抓台股首選 —— 使用 FinMind（台灣團隊開發，免申請 Key）
+這是台灣金融資料開源團隊做的，直接對接台灣證交所，抓台股快又穩定，絕對不會有退市或時區錯誤。
 
-# pip install finmind
+pip install finmind
 
+print("------------------------------------------------------------")  # 60個
+
+Python 測試 twstock
+
+pip install twstock
+pip install twstock --upgrade  # 更新套件
+
+twstock 台灣股市股票價格擷取
+https://pypi.org/project/twstock/
+
+print("------------------------------------------------------------")  # 60個
+
+Python 測試 twse
+
+公開資訊觀測站
+https://mops.twse.com.tw/mops/
+https://mops.twse.com.tw/mops/#/web/home
+"""
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -22,6 +41,10 @@ import matplotlib.pyplot as plt
 import csv
 import json
 import requests
+
+from io import StringIO
+from bs4 import BeautifulSoup
+
 import mplfinance as mpf
 
 font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
@@ -43,7 +66,7 @@ stock_id2 = "2317"  # 2317鴻海
 stock_id3 = "6869"  # 6869雲豹能源
 
 import twstock
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("使用 FinMind ST")
 print("------------------------------------------------------------")  # 60個
@@ -54,7 +77,6 @@ api = DataLoader()
 
 cc = help(api.taiwan_stock_dividend_result)
 # print(cc)
-
 
 """
 台股總覽 TaiwanStockInfo
@@ -163,10 +185,10 @@ stock_id = "2330"
 df = get_stock_data(stock_id, start_date, end_date)
 # 存檔
 print("存檔, df轉pickle")
-df.to_pickle("tmp_df_data1.pkl")
+df.to_pickle("tmp_finmind_data1.pkl")
 """
 # 讀取pickle檔案資料
-df1 = pd.read_pickle("tmp_df_data1.pkl")
+df1 = pd.read_pickle("tmp_finmind_data1.pkl")
 # print("比較df df1是否相同", df.equals(df1))
 df = df1.tail(30)
 
@@ -437,7 +459,7 @@ stock_id = "2330"
 df = get_stock_data(stock_id, start_date, end_date)
 """
 # 讀取pickle檔案資料
-df1 = pd.read_pickle("tmp_df_data1.pkl")
+df1 = pd.read_pickle("tmp_finmind_data1.pkl")
 # print("比較df df1是否相同", df.equals(df1))
 df = df1.tail(30)
 
@@ -626,11 +648,40 @@ plt.legend(loc="upper left")
 show()
 
 print("------------------------------------------------------------")  # 60個
-print("使用 FinMind SP")
 print("------------------------------------------------------------")  # 60個
 
 # 讀取pickle檔案資料
-df = pd.read_pickle("tmp_df_data1.pkl")
+df = pd.read_pickle("tmp_finmind_data1.pkl")
+print(df)
+
+day = df["date"].astype(str)
+# print(day[::5])  # syntax
+openprice = df["open"].astype(float)  # 開盤價
+close = df["close"].astype(float)  # 收盤價
+high = df["max"].astype(float)
+low = df["min"].astype(float)
+volume = df["Trading_Volume"].astype(float)  # 成交股數
+
+
+plt.figure(figsize=[12, 6])
+
+plt.plot(day, openprice, "s-", color="r", label="開盤價")
+plt.plot(day, close, "o-", color="g", label="收盤價")
+
+plt.xticks(range(0, len(day), 5), fontsize=10, rotation=45)
+plt.yticks(fontsize=10)
+plt.grid(True)
+plt.legend(loc="best", fontsize=10)
+
+plt.title("開盤價、收盤價")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+# 6060
+
+# 讀取pickle檔案資料
+df = pd.read_pickle("tmp_finmind_data1.pkl")
 # df = df.tail(5)
 
 print("df的形狀 : ", df.shape)
@@ -722,8 +773,14 @@ plt.title("all / MA20 / MA60")
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("使用 FinMind SP")
 print("------------------------------------------------------------")  # 60個
 
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 分時圖 不知道是什麼意義
 # mplfinance 的使用
 
 """
@@ -737,6 +794,7 @@ matplotlib.finance獨立出來成爲mplfinance，
 
 經過對mplfinance的源代碼進行分析，問題在於matplotlib的date2num將日期轉換爲浮點數，
 浮點數的整數部分表示日期，小數部分代表小時和分鐘。比如下面4個時間段是連續的分鐘。
+
 時間 	date2num之後 	乘以1440
 2018/09/17-21:34 	736954.8986 	1061215054
 2018/09/17-21:35 	736954.8993 	1061215055
@@ -754,15 +812,13 @@ matplotlib.finance獨立出來成爲mplfinance，
 
 pip install mplfinance
 pip install --upgrade mplfinance
-
 """
 
-from pandas import DataFrame
 import matplotlib.dates as dates
 from matplotlib.ticker import Formatter
 from mplfinance.original_flavor import candlestick_ohlc
 
-df = DataFrame(
+df = pd.DataFrame(
     [
         #    時間            開盤, 最高 ,最低, 收盤
         ["2018/09/17-21:34", 3646, 3650, 3644, 3650],
@@ -772,9 +828,17 @@ df = DataFrame(
     ]
 )
 
+# df.plot()
+# plt.show()
+
 print(df)
 
 df.columns = ["時間", "開盤", "最高", "最低", "收盤"]
+
+print("原時間")
+print(df["時間"])
+
+# 修改時間格式
 df["時間"] = pd.to_datetime(df["時間"], format="%Y/%m/%d-%H:%M")
 
 print()
@@ -784,14 +848,30 @@ print(df)
 # 因爲小數太小了，需要將小時和分鐘變成整數，需要乘以24（小時）×60（分鐘）= 1440，這樣小時和分鐘也能成爲整數
 # 這樣就可以一分鐘就佔一個位置
 
+print("原時間")
+print(df["時間"])
+
+# 時間改成 1970/1/1至今的"分數"
 df["時間"] = df["時間"].apply(lambda x: dates.date2num(x) * 1440)
+
+print("新時間")
+print(df["時間"])
+
 data_mat = df.values
+print("df.values")
+print(df.values)
 
 fig, ax = plt.subplots(figsize=(8, 5))
 
 fig.subplots_adjust(bottom=0.1)
 candlestick_ohlc(
-    ax, data_mat, colordown="#53c156", colorup="#ff1717", width=0.2, alpha=1
+    # ax, data_mat, colordown="#53c156", colorup="#ff1717", width=0.2, alpha=1
+    ax,
+    data_mat,
+    colordown="green",
+    colorup="red",
+    width=0.2,
+    alpha=1,
 )
 
 
@@ -812,58 +892,23 @@ class MyFormatter(Formatter):
         return dates.num2date(ind / 1440).strftime(self.fmt)
 
 
+print()
+print(data_mat[:, 0])
+print()
+
 formatter = MyFormatter(data_mat[:, 0])
 ax.xaxis.set_major_formatter(formatter)
 
 for label in ax.get_xticklabels():
     label.set_rotation(20)
     label.set_horizontalalignment("right")
-plt.title('畫分時圖')
+plt.title("畫分時圖")
 
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("使用 twstock ST")
 print("------------------------------------------------------------")  # 60個
-
-# 讀取pickle檔案資料
-df = pd.read_pickle("tmp_df_data1.pkl")
-print(df)
-
-day = df["date"].astype(str)
-# print(day[::5])  # syntax
-openprice = df["open"].astype(float)  # 開盤價
-close = df["close"].astype(float)  # 收盤價
-high = df["max"].astype(float)
-low = df["min"].astype(float)
-volume = df["Trading_Volume"].astype(float)  # 成交股數
-
-
-plt.figure(figsize=[12, 6])
-
-plt.plot(day, openprice, "s-", color="r", label="開盤價")
-plt.plot(day, close, "o-", color="g", label="收盤價")
-
-plt.xticks(range(0, len(day), 5), fontsize=10, rotation=45)
-plt.yticks(fontsize=10)
-plt.grid(True)
-plt.legend(loc="best", fontsize=10)
-
-plt.title("開盤價、收盤價")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-"""
-Python 測試 twstock
-
-pip install twstock
-pip install twstock --upgrade  # 更新套件
-
-twstock 台灣股市股票價格擷取
-https://pypi.org/project/twstock/
-"""
 
 stock_id = "2330"  # 2330台積電
 # stock_id = "2317"  # 2317鴻海
@@ -1016,7 +1061,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 stock_id = "2330"  # 2330台積電
 
 stock = twstock.Stock(stock_id)  # 以股票代號建立 Stock 物件
@@ -1277,6 +1322,8 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("判斷 四大買點、四大賣點")
+
 from twstock import BestFourPoint
 
 stock_id = "2330"  # 2330台積電
@@ -1492,6 +1539,1392 @@ df.to_sql(stock_id, conn, if_exists="replace")
 print("已經將股票資料存入SQLite資料庫...")
 
 print("------------------------------------------------------------")  # 60個
+print("使用 twstock SP")
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("使用 twse ST")
+print("------------------------------------------------------------")  # 60個
+
+print("讀取上市公司基本資料")
+
+# r = requests.get("http://dts.twse.com.tw/opendata/t187ap03_L.csv")
+# r.encoding = "big5"
+filename = "data/t187ap03_L.csv"
+
+# df = pd.read_csv(filename, index_col=False, skiprows=1)
+df = pd.read_csv(filename, index_col=False)
+
+# df.drop(df.index[len(df.index) - 1], inplace=True)
+
+print(df)
+print("---------------")  # 15個
+print(df["公司代號"])
+print("---------------")  # 15個
+print(df[df["公司代號"] == 2330])
+
+print("------------------------------")  # 30個
+
+print("讀取上櫃公司基本資料")
+
+# r = requests.get("http://dts.twse.com.tw/opendata/t187ap03_O.csv")
+# r.encoding = "big5"
+filename = "data/t187ap03_O.csv"
+
+# df = pd.read_csv(StringIO(r.text), index_col=False, skiprows=1)
+df = pd.read_csv(filename, index_col=False)
+
+# df.drop(df.index[len(df.index)-1], inplace=True)
+
+print(df)
+
+print("------------------------------")  # 30個
+
+print("讀取興櫃公司基本資料")
+
+# r = requests.get("http://dts.twse.com.tw/opendata/t187ap03_R.csv")
+# r.encoding = "big5"
+
+# df = pd.read_csv(StringIO(r.text), index_col=False, skiprows=1)
+
+filename = "data/t187ap03_R.csv"
+
+df = pd.read_csv(filename, index_col=False, skiprows=1)
+
+df.drop(df.index[len(df.index) - 1], inplace=True)
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("下載月營收")
+
+
+def monthly_report(year, month):
+    # 假如是西元，轉成民國
+    if year > 1911:
+        year -= 1911
+
+    url = (
+        "https://mops.twse.com.tw/nas/t21/sii/t21sc03_"
+        + str(year)
+        + "_"
+        + str(month)
+        + "_0.html"
+    )
+    if year <= 98:
+        url = (
+            "https://mops.twse.com.tw/nas/t21/sii/t21sc03_"
+            + str(year)
+            + "_"
+            + str(month)
+            + ".html"
+        )
+
+    # 偽瀏覽器
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36"
+    }
+
+    print(url)
+
+    # 下載該年月的網站，並用pandas轉換成 dataframe
+    r = requests.get(url, headers)
+    r.encoding = "big5"
+    html_df = pd.read_html(StringIO(r.text))
+
+    print(html_df)
+
+    # 處理一下資料
+    if html_df[0].shape[0] > 500:
+        df = html_df[0].copy()
+    else:
+        df = pd.concat([df for df in html_df if df.shape[1] <= 11])
+
+    print(df)
+
+    # df = df[list(range(0,10))]
+    # column_index = df.index[(df[0] == '公司代號')][0]
+    # df.columns = df.iloc[column_index]
+    # df['當月營收'] = pd.to_numeric(df['當月營收'], 'coerce')
+    # df = df[~df['當月營收'].isnull()]
+    # df = df[df['公司代號'] != '合計']
+
+    return df
+
+
+df = monthly_report(2017, 1)
+
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("下載財報")
+
+
+def financial_statement(year, season, exchange="sii", type="綜合損益表"):
+    if year > 1911:
+        year -= 1911
+
+    if type == "綜合損益表":
+        url = "http://mops.twse.com.tw/mops/web/ajax_t163sb04"
+    elif type == "資產負債表":
+        url = "http://mops.twse.com.tw/mops/web/ajax_t163sb05"
+    elif type == "營益分析查詢彙總表":
+        url = "http://mops.twse.com.tw/mops/web/ajax_t163sb06"
+    else:
+        print("type does not match")
+
+    print(url)
+
+    # 一些參數：
+    # TYPEK => 市場別
+    # sii>上市
+    # otc>上櫃
+    # rotc>興櫃
+    # pub>公開發行
+
+    # year => 年度
+    # season => 季別
+    r = requests.post(
+        url,
+        {
+            "encodeURIComponent": 1,
+            "step": 1,
+            "firstin": 1,
+            "off": 1,
+            "TYPEK": exchange,
+            "year": year,
+            "season": season,
+        },
+    )
+
+    r.encoding = "utf8"
+    dfs = pd.read_html(r.text)
+
+    print(dfs)
+
+    for i, df in enumerate(dfs):
+        df.columns = df.iloc[0]
+        dfs[i] = df.iloc[1:]
+
+    df = pd.concat(dfs).applymap(lambda x: x if x != "--" else np.nan)
+    df = df[df["公司代號"] != "公司代號"]
+    df = df[~df["公司代號"].isnull()]
+    if any(df.columns.str.contains("合計：")):
+        df = df.loc[:, ~df.columns.str.contains("合計：")]
+    return df
+
+
+""" fail
+df = financial_statement(2017, 2, type='營益分析查詢彙總表')
+print(df[df['公司名稱']=='台泥'])
+"""
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("國內主要金融指標")
+
+# 政府開放資料平台 - 國內主要金融指標
+# https://data.gov.tw/dataset/30815
+
+url_by_month = "https://apiservice.mol.gov.tw/OdService/download/A17030000J-000037-51i"
+print(url_by_month)
+
+r = requests.get(url_by_month)
+df = pd.read_csv(StringIO(r.text))
+
+print(df.set_index("月別"))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+""" NG 無檔案
+print('證券商分公司基本資料')
+
+# 讀取證券商分公司基本資料
+
+r = requests.get("http://www.twse.com.tw/brokerService/branchList.csv")
+r.encoding = "big5"
+df = pd.read_csv(StringIO(r.text), index_col=False, skiprows=1)
+print(df)
+"""
+print("------------------------------------------------------------")  # 60個
+
+""" NG 無檔案
+print('讀取證券商總公司基本資料')
+
+r = requests.get("http://www.twse.com.tw/brokerService/brokerList.csv?lang=zh")
+r.encoding = "big5"
+df = pd.read_csv(StringIO(r.text), index_col=False, skiprows=1)
+print(df)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+""" NG 資料抓不下來
+print('讀取 Nasdaq 的股價歷史資料')
+
+symbol = 'GOOG'.lower()
+
+url_template = "https://www.nasdaq.com/symbol/{symbol}/historical"
+url = url_template.format(symbol=symbol)
+print(url)
+
+rs = requests.session()
+r = rs.get(url)
+soup = BeautifulSoup(r.text, 'lxml')
+params = soup.select('#getFile input')
+# 時間長短：5d, 1m, 3m, 6m, 1y, 18m, 2y, 3y, 4y, 5y, 6y, 7y, 8y, 9y, 10y
+timeframe = '{timestr}|true|{symbol}'.format(timestr='3m', symbol=symbol.upper())
+payload = {}
+
+for tag in params:
+    if tag['name'] != 'ctl00$quotes_content_left$submitString':
+        payload[tag['name']] = tag['value']
+    else:
+        payload[tag['name']] = timeframe
+
+#r = rs.post(url, data=payload)
+r = rs.post(url, data=payload, verify=False)
+print(r.text)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+""" NG 資料抓不下來
+print('讀取 NASDAQ, NYSE, AMEX 公司資料')
+
+url_template = "https://www.nasdaq.com/screening/companies-by-industry.aspx?exchange={}&render=download"
+
+url = url_template.format('NASDAQ')
+
+df = pd.read_csv(url)
+df = df.loc[:, ~df.columns.str.contains("Unnamed")]
+print(df)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+print("讀取景氣對策信號")
+
+"""
+網址：政府開放資料 - 國發會 景氣指標及燈號
+https://www.ndc.gov.tw/News_Content.aspx?n=9D32B61B1E56E558&sms=9D3CAFD318C60877&s=C367F13BF38C5711
+應用：
+可以利用景氣對策信號判斷 ETF 的進入點。
+"""
+
+""" NG 無檔案
+from io import BytesIO
+
+# 讀取 .xlsx 檔
+
+r = requests.get('https://ws.ndc.gov.tw/Download.ashx?u=LzAwMS9hZG1pbmlzdHJhdG9yLzEwL3JlbGZpbGUvNTc4MS82MzkyL2VmMWQ4ZjliLTMxOGMtNDFmZC1hNzgzLWVjNGY5MTMwMjRmOC54bHN4&n=5paw6IGe56i%2f6ZmE5Lu25pW45YiXLnhsc3g%3d&icon=..xlsx')
+df = pd.read_excel(BytesIO(r.content))
+
+df = df.set_index('DATE')
+
+df['2010-01-01':]['景氣對策信號綜合分數'].plot()
+
+plt.show()
+"""
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 直接取得csv檔資料
+
+datestr = "20240716"
+
+url = (
+    "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=csv&date="
+    + datestr
+    + "&type=ALLBUT0999"
+)
+print(url)
+
+# 下載股價
+response = requests.get(url)
+# print(response.text)  # HTML網頁內容, 即csv檔的內容
+
+r_text = response.text.split("\n")
+
+r_text = [i for i in r_text if len(i.split('",')) == 17 and i[0] != "="]
+
+data = "\n".join(r_text)
+
+df = pd.read_csv(StringIO(data), header=0)
+
+df = df.drop(columns=["Unnamed: 16"])
+
+stock_symbol = "2330"  # 台積電
+filter_df = df[df["證券代號"] == stock_symbol]
+print(filter_df)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("下載台股單日股價行情")
+
+datestr = "20180131"
+
+r = requests.get(
+    "http://www.twse.com.tw/exchangeReport/MI_INDEX?response=csv&date="
+    + datestr
+    + "&type=ALL"
+)
+
+# pandas 會自動把字串裡的單一引號 (") 去除
+
+df = pd.read_csv(
+    StringIO(
+        "\n".join(
+            [
+                i.translate({" ": None})
+                for i in r.text.split("\n")
+                if len(i.split('",')) == 17 and i[0] != "="
+            ]
+        )
+    ),
+    header=0,
+    thousands=",",
+)
+
+df = df.loc[:, ~df.columns.str.contains("Unnamed")]
+
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("台股股價歷史資料")
+
+print("讀取台股股價資料")
+
+url = "http://www.twse.com.tw/exchangeReport/STOCK_DAY"
+params = {}
+params["stockNo"] = "2330"
+params["date"] = "20160101"
+params["response"] = "csv"
+
+r = requests.get(url, params=params)
+
+import datetime
+
+df = pd.read_csv(
+    StringIO(r.text), engine="python", skiprows=1, skipfooter=4, thousands=","
+)
+
+
+def DateConvert(twdate):
+    x = twdate.split("/")
+    return datetime.date(int(x[0]) + 1911, int(x[1]), int(x[2]))
+
+
+df["日期"] = df["日期"].map(DateConvert)
+df = df.loc[:, ~df.columns.str.contains("Unnamed")]
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 台灣證券交易所，個股日成交資訊
+search_date = "20220101"
+search_stock = "2330"
+url = (
+    "https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date="
+    + search_date
+    + "&stockNo="
+    + search_stock
+)
+
+# 取得股票資料json字串
+html_data = requests.get(url)
+# print(html_data.text)
+
+# 從json字串轉為python的字典格式
+json_data = json.loads(html_data.text)
+datas = json_data["data"]
+fields = json_data["fields"]
+print(datas)  # 由List組成的二維陣列
+print(fields)
+
+# 存成Pandas的Dataframe
+df = pd.DataFrame(datas, columns=fields)
+print(df)
+
+# Pandas匯出
+# 轉成csv檔
+df.to_csv("./month_stock.csv", encoding="big5")
+# 轉成xlsx檔
+df.to_excel("./month_stock.xlsx", encoding="big5")
+# 轉成html檔
+df.to_html("./month_stock.html")
+
+# 抓一整年的資料 2022年
+year_df = pd.DataFrame()
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36"
+}
+search_year = "2022"
+search_stock = "2330"
+# url = 'https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date='+search_date+'&stockNo='+search_stock
+
+# 從1到12月
+for m in range(1, 13):
+    print(m)
+    url = (
+        "https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date="
+        + search_year
+        + "{0:02d}01&stockNo="
+        + search_stock
+    ).format(m)
+    print(url)
+
+    # 取得股票資料json字串
+    html_data = requests.get(url, headers=headers)
+    # print(html_data.text)
+
+    # 從json字串轉為python的字典格式
+    json_data = json.loads(html_data.text)
+    datas = json_data["data"]
+    fields = json_data["fields"]
+
+    # 存成Pandas的Dataframe
+    month_df = pd.DataFrame(datas, columns=fields)
+    # print(month_df)
+
+    # 合併於整年的Dataframe
+    year_df = year_df.append(month_df, ignore_index=True)
+
+# print(year_df)
+# 轉成csv檔
+year_df.to_csv("./year_stock.csv", encoding="big5")
+
+print("------------------------------------------------------------")  # 60個
+
+# 讀取csv
+df = pd.read_csv("./month_stock.csv", encoding="big5")
+# print(df)
+
+"""
+# 讀取excel
+df2 = pd.read_excel("./month_stock.xlsx")
+print(df2)
+
+# 讀取html
+df3 = pd.read_html("./month_stock.html", encoding="utf8")
+print(df3)
+"""
+
+# 使用 Matplotlib 畫圖
+
+# 篩選我們要的資料
+date = df["日期"]
+high_price = df["最高價"]
+low_price = df["最低價"]
+end_price = df["收盤價"]
+
+# 繪圖
+# plt.plot(date, high_price)
+# plt.plot(date, low_price)
+# plt.plot(date, end_price)
+
+plt.plot(date, high_price, color="#ff2121")
+plt.plot(date, low_price, color="#00bd42", linewidth=5)
+plt.plot(date, end_price, color="#005de0", linestyle="dashed")
+
+"""
+plt.xlabel("日期")    # x軸標籤
+plt.ylabel("價格")    # y軸標籤
+plt.legend(["最高價", "最低價", "收盤價"], loc="lower right")    # 圖示，共有左下、左上、右下、右上四個方位
+plt.title("110年8月股市趨勢圖")    # 主標題
+"""
+plt.grid(True)  # 是否有網格?
+
+# 存成圖片, 要放在show()之前
+# plt.savefig("matplotlib_chart.png")
+
+# 顯示圖片
+plt.show()
+
+# 使用 Pandas 畫圖
+
+# 篩選我們要的資料
+chart_df = df[["日期", "最高價", "最低價", "收盤價"]]
+# 將日期設為x軸
+chart_df.set_index("日期", inplace=True)
+print(chart_df)
+
+# 繪圖
+chart = chart_df.plot(xlabel="日期", ylabel="價格", title="110年8月股市趨勢圖", legend=True)
+# chart = chart_df.plot(xlabel="日期", ylabel="價格", title="109年股市趨勢圖", legend=True)
+plt.grid()
+
+
+# 存成圖片, 要放在show()之前
+# plt.savefig("pandas_chart.png")
+# 顯示圖片
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 4.5 台灣證券交易所API
+# 這個API長得大概像這樣:
+# http://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=20160501&stockNo=2330
+# 比較重要的地方是date這個參數, 基本上你給的值一定要是yyyyMMdd的形式, 但是真正作用的只有yyyy與MM, 因為他會把這段request解讀成你想要看stockNo股票在yyyy年MM月的紀錄, 所以dd基本上沒有太大意義, 但卻是不可少的部分.
+
+TWSE_URL = "http://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json"
+
+
+def get_web_content(search_stock, current_date):
+    resp = requests.get(TWSE_URL + "&date=" + current_date + "&stockNo=" + search_stock)
+    if resp.status_code != 200:
+        return None
+    else:
+        return resp.json()
+
+
+def get_data(search_stock, current_date):
+    info = list()
+    resp = get_web_content(search_stock, current_date)
+    if resp is None:
+        return None
+    else:
+        if resp["data"]:
+            for data in resp["data"]:
+                record = {
+                    "日期": data[0],
+                    "開盤價": data[3],
+                    "收盤價": data[6],
+                    "成交筆數": data[8],
+                }
+                info.append(record)
+        return info
+
+
+def get_stock_data_twse(search_stock):
+    current_date = time.strftime("%Y%m%d")
+    current_year = time.strftime("%Y")
+    current_month = time.strftime("%m")
+    print("Processing data for %s %s..." % (current_year, current_month))
+    get_data(search_stock, current_date)
+    collected_info = get_data(search_stock, current_date)
+    for info in collected_info:
+        print(info)
+
+
+search_stock = "2330"
+get_stock_data_twse(search_stock)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 臺灣證券交易所-基本市況報導網站 MIS
+# https://mis.twse.com.tw/stock/
+
+# 元大寶來台灣卓越50證券投資信託基金
+# TPE: 0050
+
+url = "https://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch=tse_0050.tw"
+response = requests.get(url)
+json_data = json.loads(response.text)
+
+print(type(json_data))
+print(json_data)
+
+print("全名 :", json_data["msgArray"][0]["nf"])
+print("簡稱 :", json_data["msgArray"][0]["n"])
+print("最高 :", json_data["msgArray"][0]["h"])
+print("最低 :", json_data["msgArray"][0]["l"])
+print("昨收 :", json_data["msgArray"][0]["y"])
+print("開盤 :", json_data["msgArray"][0]["o"])
+print("成交 :", json_data["msgArray"][0]["z"])
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("台股即時股價資料")
+
+# 取得需要的 URL
+SESSION_URL = "http://mis.twse.com.tw/stock/index.jsp"
+STOCKINFO_URL = (
+    "http://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch={stock_id}&_={time}"
+)
+
+
+def get_realtime_quote(stockNo, ex="tse"):
+    req = requests.Session()
+    req.get(SESSION_URL)
+
+    stock_id = "{}_{}.tw".format(ex, stockNo)
+
+    r = req.get(STOCKINFO_URL.format(stock_id=stock_id, time=int(time.time()) * 1000))
+
+    try:
+        return r.json()
+    except json.decoder.JSONDecodeError:
+        return {"rtmessage": "json decode error", "rtcode": "5000"}
+
+
+print(get_realtime_quote("2330"))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+# yearurl.py
+def twodigit(n):  # 將數值轉為二位數字串
+    if n < 10:
+        retstr = "0" + str(n)
+    else:
+        retstr = str(n)
+    return retstr
+
+
+urlbase = (
+    "http://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=2019"  # 網址前半
+)
+urltail = "01&stockNo=2317&_=1521363562193"  # 網址後半
+for i in range(1, 13):  # 取1到12數字
+    url_twse = urlbase + twodigit(i) + urltail  # 組合網址
+    print(url_twse)
+
+
+# stockmonth.py
+def convertDate(date):  # 轉捔民國日期為西元:108/01/01->20190101
+    str1 = str(date)
+    yearstr = str1[:3]  # 取出民國年
+    realyear = str(int(yearstr) + 1911)  # 轉為西元年
+    realdate = realyear + str1[4:6] + str1[7:9]  # 組合日期
+    return realdate
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+pd.options.mode.chained_assignment = None  # 取消顯示pandas資料重設警告
+
+filepath = "stockmonth01.csv"
+
+if not os.path.isfile(filepath):  # 如果檔案不存在就建立檔案
+    url_twse = "http://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=20190101&stockNo=2317&_=1521363562193"
+    res = requests.get(url_twse)  # 回傳為json資料
+    jdata = json.loads(res.text)  # json解析
+
+    outputfile = open(filepath, "w", newline="", encoding="utf-8")  # 開啟儲存檔案
+    outputwriter = csv.writer(outputfile)  # 以csv格式寫入檔案
+    outputwriter.writerow(jdata["fields"])
+    for dataline in jdata["data"]:  # 寫入資料
+        outputwriter.writerow(dataline)
+    outputfile.close()  # 關閉檔案
+
+pdstock = pd.read_csv(filepath, encoding="utf-8")  # 以pandas讀取檔案
+for i in range(len(pdstock["日期"])):  # 轉換日期式為西元年格
+    pdstock["日期"][i] = convertDate(pdstock["日期"][i])
+pdstock["日期"] = pd.to_datetime(pdstock["日期"])  # 轉換日期欄位為日期格式
+pdstock.plot(kind="line", figsize=(12, 6), x="日期", y=["收盤價", "最低價", "最高價"])  # 繪製統計圖
+
+
+# stockyear.py
+def twodigit(n):  # 將數值轉為二位數字串
+    if n < 10:
+        retstr = "0" + str(n)
+    else:
+        retstr = str(n)
+    return retstr
+
+
+def convertDate(date):  # 轉捔民國日期為西元:108/01/01->20190101
+    str1 = str(date)
+    yearstr = str1[:3]  # 取出民國年
+    realyear = str(int(yearstr) + 1911)  # 轉為西元年
+    realdate = realyear + str1[4:6] + str1[7:9]  # 組合日期
+    return realdate
+
+
+pd.options.mode.chained_assignment = None  # 取消顯示pandas資料重設警告
+
+urlbase = (
+    "http://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=2019"  # 網址前半
+)
+urltail = "01&stockNo=2317&_=1521363562193"  # 網址後半
+filepath = "stockyear2019.csv"
+
+if not os.path.isfile(filepath):  # 如果檔案不存在就建立檔案
+    for i in range(1, 13):  # 取1到12數字
+        url_twse = urlbase + twodigit(i) + urltail  # 組合網址
+        res = requests.get(url_twse)  # 回傳為json資料
+        jdata = json.loads(res.text)  # json解析
+
+        outputfile = open(filepath, "a", newline="", encoding="utf-8")  # 開啟儲存檔案
+        outputwriter = csv.writer(outputfile)  # 以csv格式寫入檔案
+        if i == 1:  # 若是1月就寫入欄位名稱
+            outputwriter.writerow(jdata["fields"])
+        for dataline in jdata["data"]:  # 逐月寫入資料
+            outputwriter.writerow(dataline)
+        time.sleep(0.5)  # 延遲0.5秒,否則有時會有錯誤
+    outputfile.close()  # 關閉檔案
+
+pdstock = pd.read_csv(filepath, encoding="utf-8")  # 以pandas讀取檔案
+for i in range(len(pdstock["日期"])):  # 轉換日期式為西元年格式
+    pdstock["日期"][i] = convertDate(pdstock["日期"][i])
+pdstock["日期"] = pd.to_datetime(pdstock["日期"])  # 轉換日期欄位為日期格式
+pdstock.plot(kind="line", figsize=(12, 6), x="日期", y=["收盤價", "最低價", "最高價"])  # 繪製統計圖
+
+
+# stockyear_plotly.py
+def twodigit(n):  # 將數值轉為二位數字串
+    if n < 10:
+        retstr = "0" + str(n)
+    else:
+        retstr = str(n)
+    return retstr
+
+
+def convertDate(date):  # 轉捔民國日期為西元:106/03/02->20170302
+    str1 = str(date)
+    yearstr = str1[:3]  # 取出民國年
+    realyear = str(int(yearstr) + 1911)  # 轉為西元年
+    realdate = realyear + str1[4:6] + str1[7:9]  # 組合日期
+    return realdate
+
+
+from plotly.graph_objs import Scatter, Layout
+from plotly.offline import plot
+
+pd.options.mode.chained_assignment = None  # 取消顯示pandas資料重設警告
+
+urlbase = (
+    "http://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=2019"  # 網址前半
+)
+urltail = "01&stockNo=2317&_=1521363562193"  # 網址後半
+filepath = "stockyear2019.csv"
+
+if not os.path.isfile(filepath):  # 如果檔案不存在就建立檔案
+    for i in range(1, 13):  # 取1到12數字
+        url_twse = urlbase + twodigit(i) + urltail  # 組合網址
+        res = requests.get(url_twse)  # 回傳為json資料
+        jdata = json.loads(res.text)  # json解析
+
+        outputfile = open(filepath, "a", newline="", encoding="utf-8")  # 開啟儲存檔案
+        outputwriter = csv.writer(outputfile)  # 以csv格式寫入檔案
+        if i == 1:  # 若是1月就寫入欄位名稱
+            outputwriter.writerow(jdata["fields"])
+        for dataline in jdata["data"]:  # 逐月寫入資料
+            outputwriter.writerow(dataline)
+        time.sleep(0.5)  # 延遲0.5秒,否則有時會有錯誤
+    outputfile.close()  # 關閉檔案
+
+pdstock = pd.read_csv(filepath, encoding="utf-8")  # 以pandas讀取檔案
+for i in range(len(pdstock["日期"])):  # 轉換日期式為西元年格式
+    pdstock["日期"][i] = convertDate(pdstock["日期"][i])
+pdstock["日期"] = pd.to_datetime(pdstock["日期"])  # 轉換日期欄位為日期格式
+data = [
+    Scatter(x=pdstock["日期"], y=pdstock["收盤價"], name="收盤價"),
+    Scatter(x=pdstock["日期"], y=pdstock["最低價"], name="最低價"),
+    Scatter(x=pdstock["日期"], y=pdstock["最高價"], name="最高價"),
+]
+plot({"data": data, "layout": Layout(title="2019年個股統計圖")}, auto_open=True)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+def twodigit(n):  # 將數值轉為二位數字串
+    if n < 10:
+        retstr = "0" + str(n)
+    else:
+        retstr = str(n)
+    return retstr
+
+
+def convertDate(date):  # 轉換民國日期為西元:106/03/02->20170302
+    str1 = str(date)
+    yearstr = str1[:3]  # 取出民國年
+    realyear = str(int(yearstr) + 1911)  # 轉為西元年
+    realdate = realyear + str1[4:6] + str1[7:9]  # 組合日期
+    return realdate
+
+
+pd.options.mode.chained_assignment = None  # 取消顯示pandas資料重設警告
+
+urlbase = (
+    "http://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=2017"  # 網址前半
+)
+urltail = "01&stockNo=2317&_=1521363562193"  # 網址後半
+filepath = "tmp_stockyear2017a.csv"
+
+if not os.path.isfile(filepath):  # 如果檔案不存在就建立檔案
+    for i in range(1, 13):  # 取1到12數字
+        url_twse = urlbase + twodigit(i) + urltail  # 組合網址
+        res = requests.get(url_twse)  # 回傳為json資料
+        jdata = json.loads(res.text)  # json解析
+
+        outputfile = open(filepath, "a", newline="", encoding="utf-8")  # 開啟儲存檔案
+        outputwriter = csv.writer(outputfile)  # 以csv格式寫入檔案
+        if i == 1:  # 若是1月就寫入欄位名稱
+            outputwriter.writerow(jdata["fields"])
+        for dataline in jdata["data"]:  # 逐月寫入資料
+            outputwriter.writerow(dataline)
+        time.sleep(0.5)  # 延遲0.5秒,否則有時會有錯誤
+    outputfile.close()  # 關閉檔案
+
+pdstock = pd.read_csv(filepath, encoding="utf-8")  # 以pandas讀取檔案
+for i in range(len(pdstock["日期"])):  # 轉換日期式為西元年格式
+    pdstock["日期"][i] = convertDate(pdstock["日期"][i])
+pdstock["日期"] = pd.to_datetime(pdstock["日期"])  # 轉換日期欄位為日期格式
+pdstock.plot(kind="line", figsize=(12, 6), x="日期", y=["收盤價", "最低價", "最高價"])  # 繪製統計圖
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+def twodigit(n):  # 將數值轉為二位數字串
+    if n < 10:
+        retstr = "0" + str(n)
+    else:
+        retstr = str(n)
+    return retstr
+
+
+def convertDate(date):  # 轉換民國日期為西元:106/03/02->20170302
+    str1 = str(date)
+    yearstr = str1[:3]  # 取出民國年
+    realyear = str(int(yearstr) + 1911)  # 轉為西元年
+    realdate = realyear + str1[4:6] + str1[7:9]  # 組合日期
+    return realdate
+
+
+pd.options.mode.chained_assignment = None  # 取消顯示pandas資料重設警告
+
+url_twse = "http://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=20170101&stockNo=2317&_=1521363562193"
+filepath = "tmp_stockmonth01.csv"
+
+if not os.path.isfile(filepath):  # 如果檔案不存在就建立檔案
+    res = requests.get(url_twse)  # 回傳為json資料
+    jdata = json.loads(res.text)  # json解析
+
+    outputfile = open(filepath, "w", newline="", encoding="utf-8")  # 開啟儲存檔案
+    outputwriter = csv.writer(outputfile)  # 以csv格式寫入檔案
+    outputwriter.writerow(jdata["fields"])
+    for dataline in jdata["data"]:  # 寫入資料
+        outputwriter.writerow(dataline)
+    outputfile.close()  # 關閉檔案
+
+pdstock = pd.read_csv(filepath, encoding="utf-8")  # 以pandas讀取檔案
+for i in range(len(pdstock["日期"])):  # 轉換日期式為西元年格式
+    pdstock["日期"][i] = convertDate(pdstock["日期"][i])
+pdstock["日期"] = pd.to_datetime(pdstock["日期"])  # 轉換日期欄位為日期格式
+pdstock.plot(kind="line", figsize=(12, 6), x="日期", y=["收盤價", "最低價", "最高價"])  # 繪製統計圖
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+base_url = "https://www.twse.com.tw"
+url = base_url + "/zh/brokerService/brokerServiceAudit"
+# https://www.twse.com.tw/brokerService/brokerServiceAudit?showType=list&stkNo=1020&focus=6
+
+csvfile = "tmp_BrokerBranchs.csv"
+
+items = []
+print("爬取總公司: ", url)
+r = requests.get(url)
+r.encoding = "utf8"
+soup = BeautifulSoup(r.text, "lxml")
+tag_table = soup.select_one(".grid")  # 找到<table>
+rows = tag_table.find_all("tr")  # 找出所有<tr>
+for row in rows:
+    item = []
+    for cell in row.find_all(["td"]):
+        txt = cell.text.replace("\n", "").replace("\r", "").strip()
+        if txt == "明細":
+            new_url = base_url + cell.find("a").get("href")
+            print("爬取分公司: ", new_url)
+            r2 = requests.get(new_url)
+            r2.encoding = "utf8"
+            soup2 = BeautifulSoup(r2.text, "lxml")
+            tag_table2 = soup2.select_one(".grid.links")  # 找到<table>
+            rows2 = tag_table2.find_all("tr")  # 找出所有<tr>
+            for row2 in rows2:
+                item_branch = []
+                for cell2 in row2.find_all("td"):
+                    txt = cell2.text.replace("\n", "").replace("\r", "").strip()
+                    item_branch.append(txt)
+                if item_branch and len(item_branch) == 5:
+                    items.append(item_branch)  # 新增分公司
+        else:
+            item.append(txt)
+    if item and len(item) == 5:
+        items.append(item)  # 新增總公司
+    time.sleep(1)
+
+print("券商總數(總公司+分公司):", len(items))
+# 開啟CSV檔案寫入截取的資料
+with open(csvfile, "w+", newline="", encoding="utf8") as fp:
+    writer = csv.writer(fp)
+    writer.writerow(["證券商代號", "證券商名稱", "開業日", "地址", "電話"])
+    for item in items:
+        writer.writerow(item)
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+import datetime
+import pandas_datareader as pdr
+
+start = datetime.datetime.now() - datetime.timedelta(days=60)
+end = datetime.date.today()
+""" NG
+df = pdr.DataReader("2330.TW", "yahoo", start, end)
+print(df.shape)
+print(df.head())
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+date = "20200820"
+url = "https://www.twse.com.tw/fund/T86?response=json&date={}&selectType=ALL"
+r = requests.get(url.format(date))
+content = r.content
+csv_file = open("tmp_three_major1.json", "wb")
+csv_file.write(content)
+csv_file.close()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+date = "20200820"
+url = "https://www.twse.com.tw/fund/T86?response=csv&date={}&selectType=ALL"
+r = requests.get(url.format(date))
+content = r.content
+csv_file = open("tmp_three_major2.csv", "wb")
+csv_file.write(content)
+csv_file.close()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+date = "20200820"
+url = "https://www.twse.com.tw/fund/T86?response=json&date={}&selectType=ALL"
+r = requests.get(url.format(date))
+if r.status_code == requests.codes.ok:
+    print("成功爬取資料...")
+    """# NG
+    data = r.json() 
+    df = pd.read_json(json.dumps(data["data"]))
+    df.columns = data["fields"]
+    print(df.head())
+    df.to_csv("tmp_three_major3.csv", index=False)
+    """
+else:
+    print("HTTP請求錯誤...")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+dates = [20250601, 20250701, 20250801]
+stockNo = 2330
+
+url = (
+    "https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=html&date={}&stockNo={}"
+)
+
+for date in dates:
+    print(date, stockNo)
+    # data = pd.read_html(r.text)[0]  # old
+    data = pd.read_html(url.format(date, stockNo))[0]
+
+    data.columns = data.columns.droplevel(0)
+
+    csvfile = "tmp_stock_{}_{}.csv".format(stockNo, date)
+    data.to_csv(csvfile, index=False)
+    time.sleep(5)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("使用 twse SP")
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("使用 其他 金融匯率股票相關 ST")
+print("------------------------------------------------------------")  # 60個
+
+print("google-currency：不同幣值換算")
+
+from google_currency import convert
+
+print(convert("USD", "JPY", 230))
+
+from google_currency import convert
+
+samount = 100  # @param {type:'integer'}
+damount = convert("USD", "JPY", samount)
+retdict = json.loads(damount)
+print("{} 元美金 = 日幣 {} 元".format(samount, retdict["amount"]))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+msg = "這是 LINE Notify 發送的訊息。"
+token = "你的 LINE Notify 權杖"  # 權杖
+headers = {
+    "Authorization": "Bearer " + token,
+    "Content-Type": "application/x-www-form-urlencoded",
+}
+payload = {"message": msg}
+notify = requests.post(
+    "https://notify-api.line.me/api/notify", headers=headers, params=payload
+)
+
+if notify.status_code == 200:
+    print("發送 LINE Notify 成功！")
+else:
+    print("發送 LINE Notify 失敗！")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("TWCB：中央銀行資料庫")
+
+import TWCB
+
+print(TWCB.get_info())
+
+df1 = TWCB.get("BP01D01.px")
+print(df1)
+
+df1.to_csv("匯率日報表.csv")
+
+data_list = TWCB.get_by_search("美元之匯率")
+
+TWCB.get_all()
+
+with open("download_TWCB.json", "r", encoding="utf-8") as f:
+    test_data = json.load(f)
+
+if not os.path.isdir("twcb"):
+    os.mkdir("twcb")
+
+for key in test_data.keys():
+    data = pd.read_json(test_data[key])
+    data.to_csv("twcb/" + key + ".csv")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+API_KEY = "fca_live_QiRD4yaE7K1aJQIAfVLojfu8J2KPxSXPYkDxxTzc"
+BASE_URL = f"https://api.freecurrencyapi.com/v1/latest?apikey={API_KEY}"
+
+CURRENCIES = ["USD", "CAD", "EUR", "AUD", "CNY"]
+
+
+def convert_currency(base):
+    currencies = ",".join(CURRENCIES)
+    url = f"{BASE_URL}&base_currency={base}&currencies={currencies}"
+    print(url)
+    try:
+        response = requests.get(url)
+        data = response.json()
+        return data["data"]
+    except:
+        print("Invalid currency.")
+        return None
+
+
+print("轉換匯率")
+
+base = "USD"
+
+data = convert_currency(base)
+
+del data[base]
+
+for ticker, value in data.items():
+    print(f"{ticker}: {value}")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+"""
+查詢歷史資料 範例
+https://rate.bot.com.tw/xrt/all/2023-03-20
+
+https://rate.bot.com.tw/
+
+(台銀牌告匯率)
+https://rate.bot.com.tw/xrt?Lang=zh-TW
+"""
+
+
+def get_html_data1(url):
+    print("取得網頁資料: ", url)
+    resp = requests.get(url)
+    # 檢查 HTTP 回應碼是否為 requests.codes.ok(200)
+    if resp.status_code != requests.codes.ok:
+        print("讀取網頁資料錯誤, url: ", resp.url)
+        return None
+    else:
+        return resp
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("查詢中央銀行匯率")
+
+url = "https://rate.bot.com.tw/xrt/all/day"
+# https://rate.bot.com.tw/xrt?Lang=zh-TW  另一個網址
+html_data = get_html_data1(url)
+
+soup = BeautifulSoup(html_data.text, "html.parser")
+print(soup.prettify())  # prettify()這個函數可以將DOM tree以比較美觀的方式印出。
+
+# print('多重條件選擇')
+cells = soup.select("table tr td")  # 尋找talbe標籤裡面的tr標籤裡面的td標籤 三者都要符合的抓出來
+print(type(cells))
+print("符合條件的資料", len(cells), "筆")
+print(cells)
+
+print("------------------------------")  # 30個
+
+i = 0
+for cell in cells:
+    print(i)
+    print(cell.text.strip())
+    i = i + 1
+
+print("------------------------------")  # 30個
+
+print("顯示 幣別")
+print("多重條件選擇")
+dnames = soup.select("table tr td[data-table=幣別] div.visible-phone")
+# print(type(dnames))
+print("符合條件的資料", len(dnames), "筆")
+# print(dnames)
+names = list()
+for dname in dnames:
+    names.append(dname.text.strip())
+print(names)
+
+print("------------------------------")  # 30個
+
+print("顯示 本行即期買入")
+print("多重條件選擇")
+buyingrate = soup.select("table tr td[data-table=本行即期買入]")
+print(type(buyingrate))
+print("符合條件的資料", len(buyingrate), "筆")
+print(buyingrate)
+i = 0
+for price in buyingrate:
+    print(i)
+    print(price.text.strip())
+    i = i + 1
+
+print("------------------------------")  # 30個
+
+prices = list()
+for price in buyingrate:
+    prices.append(price.text.strip())
+print(prices)
+
+print("------------------------------")  # 30個
+
+print(names)
+print(prices)
+rates = zip(names, prices)
+for rate in rates:
+    print(rate)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from lxml import html
+
+url = "https://rate.bot.com.tw/xrt?Lang=zh-TW"
+response = requests.get(url)
+tree = html.fromstring(response.text)
+
+print(
+    "美金："
+    + str(
+        tree.xpath("//html/body/div[1]/main/div[3]/table/tbody/tr[1]/td[3]/text()")[0]
+    )
+)
+print(
+    "日圓："
+    + str(
+        tree.xpath("//html/body/div[1]/main/div[3]/table/tbody/tr[8]/td[3]/text()")[0]
+    )
+)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("台灣銀行 匯率查詢")
+
+url = "https://rate.bot.com.tw/xrt/flcsv/0/day"  # 牌告匯率 CSV 網址
+
+response = requests.get(url)  # 爬取網址內容
+response.encoding = "utf-8"  # 網頁編碼模式  # 調整回應訊息編碼為 utf-8，避免編碼不同造成亂碼
+rt = response.text  # 以文字模式讀取內容
+rts = rt.split("\n")  # 使用「換行」將內容拆分成串列
+for i in rts:  # 讀取串列的每個項目
+    try:  # 使用 try 避開最後一行的空白行
+        a = i.split(",")  # 每個項目用逗號拆分成子串列
+        print(a[0] + ": " + a[12])  # 取出第一個 ( 0 ) 和第十三個項目 ( 12 )
+    except:
+        break
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+url = "https://rate.bot.com.tw/xrt?Lang=zh-TW"
+csvfile = "tmp_xrt.csv"
+r = requests.get(url)
+r.encoding = "utf8"
+soup = BeautifulSoup(r.text, "lxml")
+tag_table = soup.select_one("#ie11andabove > div > table")
+rows = tag_table.find_all("tr")
+with open(csvfile, "w+", newline="", encoding="big5") as fp:
+    writer = csv.writer(fp)
+    for row in rows:
+        lst = []
+        for cell in row.find_all(["td", "th"]):
+            lst.append(cell.text.replace("\n", "").replace("\r", ""))
+        writer.writerow(lst)
+
+print("------------------------------")  # 30個
+
+
+def split_name(name):
+    pos = name.find(")")
+    return pd.Series({'"幣別"': name[0:pos].strip() + ")"})
+
+
+df = pd.read_csv("tmp_xrt.csv", encoding="big5")
+df = df.drop(df.index[[0, 1]])
+df = df.iloc[:, 0:5]
+df.columns = ["幣別", "現金(買)", "現金(賣)", "即期(買)", "即期(賣)"]
+df["幣別"] = df["幣別"].apply(split_name)
+df.to_csv("tmp_xrt2.csv", index=False, encoding="big5")
+print(df.head())
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+base_url = "https://www.cbc.gov.tw/tw/"
+url = base_url + "lp-645-1.html"
+csvfile = "tmp_USxrt.csv"
+items = []
+next_page = True
+
+while next_page:
+    print(url)
+    r = requests.get(url)
+    r.encoding = "utf8"
+    soup = BeautifulSoup(r.text, "lxml")
+    tag_table = soup.find("table", class_="rwd-table")  # 找到<table>
+    rows = tag_table.find_all("tr")  # 找出所有<tr>
+    for row in rows:
+        lst = []
+        for cell in row.find_all(["td", "th"]):
+            lst.append(cell.text.replace("\n", "").replace("\r", ""))
+        items.append(lst)
+    # 找尋下一頁按鈕的<a>標籤
+    tag_li = soup.find("li", class_="next")
+    if tag_li:
+        next_page = True
+        url = base_url + tag_li.find("a").get("href")
+        time.sleep(2)
+    else:
+        next_page = False
+
+with open(csvfile, "w+", newline="", encoding="utf-8") as fp:
+    writer = csv.writer(fp)
+    for item in items:
+        writer.writerow(item)
+
+print("------------------------------")  # 30個
+
+csvfile = "tmp_USxrt.csv"
+df = pd.read_csv(csvfile)
+df.drop_duplicates(keep=False, inplace=True)
+df.to_csv("tmp_USxrt2.csv", index=False, encoding="utf8")
+print(df.head(5))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("查詢台銀牌告匯率")
+
+from time import localtime
+from time import strftime
+from os.path import exists  # 台銀匯率網站
+
+html = requests.get("https://rate.bot.com.tw/xrt?Lang=zh-TW")  # 回傳HTML檔案，轉存html物件
+bsObj = BeautifulSoup(html.content, "lxml")  # 解析網頁，建立bs物件
+for single_tr in (
+    bsObj.find("table", {"title": "牌告匯率"}).find("tbody").findAll("tr")
+):  # 針對匯率表格分析
+    cell = single_tr.findAll("td")  # 找到每一個表格
+    currency_name = (
+        cell[0].find("div", {"class": "visible-phone"}).contents[0]
+    )  # 找到表格中幣別
+    currency_name = currency_name.replace("\r", "")  # 取代不需要的字元
+    currency_name = currency_name.replace("\n", "")
+    currency_name = currency_name.replace(" ", "")
+    currency_rate = cell[2].contents[0]  # 找到幣別匯率
+    print(currency_name, currency_rate)
+    now_time = strftime("%Y-%m-%d %H:%M:%S", localtime())  # 記錄目前時間
+    data = [["時間", "匯率"], [now_time, currency_rate]]  # 準備寫入檔案資料
+    print("寫入資料 :", data)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+url = "https://rate.bot.com.tw/xrt?Lang=zh-TW"
+csvfile = "tmp_xrt.csv"
+r = requests.get(url)
+r.encoding = "utf8"
+soup = BeautifulSoup(r.text, "lxml")
+tag_table = soup.select_one("#ie11andabove > div > table")
+rows = tag_table.find_all("tr")
+with open(csvfile, "w+", newline="", encoding="big5") as fp:
+    writer = csv.writer(fp)
+    for row in rows:
+        lst = []
+        for cell in row.find_all(["td", "th"]):
+            lst.append(cell.text.replace("\n", "").replace("\r", "").strip())
+        writer.writerow(lst)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("使用 其他 金融匯率股票相關 SP")
 print("------------------------------------------------------------")  # 60個
 
 
@@ -1519,7 +2952,6 @@ print("------------------------------")  # 30個
 
 #股票資料彙整_YahooFinance
 
-from pandas import Series, DataFrame
 import timeit
 from pandas_datareader import data, wb
 
@@ -1582,8 +3014,6 @@ url
 merge ../data/個股_類別.xls(先解壓縮 個股_類別.rar) 中的資料之後，做 GroupBy 操作
 """
 # 股票資料彙整_Yahoo股市
-
-from pandas import Series, DataFrame
 
 # 目標資料來源:
 # https://tw.stock.yahoo.com/s/list.php?c=tse&pid=1
@@ -1663,7 +3093,7 @@ def fixTable(marketType, table, theDate=datetime.date.today()):
     #     fixedTable.sort_values(by = '股票代號', inplace = True)
 
     # indexing
-    fixedTable.index = Series(range(len(fixedTable)))
+    fixedTable.index = pd.Series(range(len(fixedTable)))
     fixedTable.index.name = "項次"
     fixedTable = fixedTable.reindex(
         columns=[
@@ -1876,6 +3306,10 @@ def crawl_data(date, symbol):
 
 print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
+print("df語法 與 畫圖 ST")
+print("------------------------------------------------------------")  # 60個
+
 # 做不等大的子圖 ST
 
 fig = plt.figure(num="matplotlib 02", figsize=(8, 8))
@@ -1925,7 +3359,6 @@ end = datetime.date.today()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 fig, (ax1, ax2) = plt.subplots(2, 1, sharex=True, figsize=(12, 8), dpi=100)
 plt.rcParams["font.sans-serif"] = ["Microsoft JhengHei"]
 # ax1.set_title("開盤價、收盤價 ( " + df["date"][0] + " ~ " + df["date"][-1] + " )")
@@ -1944,9 +3377,13 @@ ax2.set_xticks(range(0, len(day), 5))
 ax2.set_xticklabels(day[::5])
 ax2.grid(True)
 
+print("------------------------------------------------------------")  # 60個
+print("df語法 與 畫圖 SP")
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
+plt.rcParams["font.sans-serif"] = "mingliu"  # 設定中文字型

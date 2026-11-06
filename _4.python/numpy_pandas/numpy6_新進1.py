@@ -44,10 +44,8 @@ print("x3 shape:", x3.shape)
 print("x3 size: ", x3.size)
 
 print("dtype:", x3.dtype)
-
 print("itemsize:", x3.itemsize, "bytes")
 print("nbytes:", x3.nbytes, "bytes")
-
 
 grid = np.arange(1, 10).reshape((3, 3))
 print(grid)
@@ -65,11 +63,9 @@ grid = np.array([[1, 2, 3], [4, 5, 6]])
 cc = np.concatenate([grid, grid])
 print(cc)
 
-
 # concatenate along the second axis (zero-indexed)
 cc = np.concatenate([grid, grid], axis=1)
 print(cc)
-
 
 x = np.array([1, 2, 3])
 grid = np.array([[9, 8, 7], [6, 5, 4]])
@@ -82,7 +78,6 @@ print(cc)
 y = np.array([[99], [99]])
 cc = np.hstack([grid, y])
 print(cc)
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -360,7 +355,6 @@ print(cc)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 row1 = [1, 2, 3]
 arr1 = np.array(row1, ndmin=2)

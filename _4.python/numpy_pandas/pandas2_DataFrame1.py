@@ -52,11 +52,13 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 共同
+import re
 import os
 import sys
 import time
 import math
 import random
+import datetime
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -586,7 +588,6 @@ df["社會"] = [88, 89, 98, 77]
 df["自然"] = [95, 74, 89, 85]
 # df.index = ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"] 不能設定文字
 print(df)
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1268,8 +1269,7 @@ print(titanic.groupby("Sex")["Age"].mean())
 
 print("---處理姓名欄位---")
 
-import re
-
+# 使用 Regular Expression
 patt = re.compile(r"\,\s(\S+\s)")
 titles = []
 for index, row in titanic.iterrows():
@@ -1347,6 +1347,109 @@ print("刪除欄位 Title, axis=1")
 df = df.drop("Title", axis=1)
 
 show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# convert a single string to datetime format (outputs a timestamp object)
+ts = pd.to_datetime("3/11/2006")
+print(type(ts))
+print(ts)
+ts = pd.to_datetime("2006/3/11")
+print(type(ts))
+print(ts)
+ts = pd.to_datetime("2006/3/11 12:34:56")
+print(type(ts))
+print(ts)
+
+arr = ["2024-11-01", "2024-11-02", "2024-11-03"]
+df = pd.DataFrame()
+df["date"] = pd.to_datetime(arr)
+print(df)
+
+df = pd.DataFrame(
+    [[12, 25, 2026, "christmas"], [11, 28, 2026, "thanksgiving"]],
+    columns=["month", "day", "year", "holiday"],
+)
+print(df)
+
+df["日期"] = pd.to_datetime(df[["month", "day", "year"]])
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+
+print("Create a datetime column from a DataFrame")
+
+# create an example DataFrame
+df = pd.DataFrame([[2017, 12, 25], [2018, 1, 15]], columns=["year", "month", "day"])
+print(df)
+
+# new: create a datetime column from the entire DataFrame
+cc = pd.to_datetime(df)
+print(cc)
+
+# new: create a datetime column from a subset of columns
+cc = pd.to_datetime(df[["month", "day", "year"]])
+print(cc)
+
+# convert a single string to datetime format (outputs a timestamp object)
+ts = pd.to_datetime("1/1/1999")
+print(ts)
+
+print("------------------------------------------------------------")  # 60個
+
+# Pandas日期時間處理
+# 時間點TimeStamp
+
+t = pd.to_datetime("2019-03-01 00:00:00")  # 從字符串轉換
+print(type(t), t)
+t = pd.to_datetime(datetime.datetime.now())  # 從datetime格式轉換
+print(type(t), t)
+
+# 時間間隔
+t1 = pd.to_datetime("2019-03-01 00:00:00")
+t2 = pd.to_datetime(datetime.datetime.now())
+delta = t2 - t1  # 通過TimeStamp相減獲取
+print(type(delta), delta, delta.days, delta.seconds)
+
+delta = pd.Timedelta(days=27)  # 構造時間間隔爲27天
+print(t2 + delta)
+
+# 時間段Period
+t = pd.to_datetime(datetime.datetime.now())
+p = pd.Period(t, freq="H")
+print(p, p.start_time, p.end_time)  # 顯示時間段起止時間
+
+# 批量轉換
+arr = ["2019-03-01", "2019-03-02", "2019-03-03"]
+df = pd.DataFrame({"d": arr})
+df["d"] = pd.to_datetime(df["d"])
+print(df)
+
+# 時間序列操作
+# 時間日期類型索引
+df.index = pd.to_datetime(df["d"])  # 本例中使用了上例中構造的df[‘d’]
+print(df.index)
+
+df = pd.DataFrame()
+df["date"] = pd.date_range(start="2017-12-30", end="2019-01-05", freq="d")  # 創建時間數據
+df["val"] = df["date"].apply(lambda x: x.weekday())  # 計算該日是星期幾
+df.set_index("date", inplace=True)  # 設置時間索引
+print(df.head(3))  # 顯示前三條
+
+# 時間段類型索引
+df_period = df.to_period(freq="M")  # 按月創建時間段
+print(type(df_period.index))  # 查看類型
+print(len(df_period))  # 查看記錄個數，與原記錄個數一致
+print(df_period.head(3))
+
+print(df_period.index[0].start_time, df_period.index[0].end_time)
+print(df_period.index[1].start_time, df_period.index[1].end_time)
+print(df.index.is_unique, df_period.index.is_unique)
+
+df_dt = df_period.to_timestamp()
+print(df_dt.head(3))
+print(type(df_dt.index))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -4693,8 +4796,6 @@ import pytz
 print("時區個數 :", len(pytz.common_timezones))
 print("前3個 :", pytz.common_timezones[:3])
 
-import datetime
-
 t = datetime.datetime.now()
 print(t)
 
@@ -4765,6 +4866,7 @@ dic = {
 }
 data = pd.DataFrame(dic)
 print(data.dtypes)
+
 """ NG
 data['dtime'] = pd.to_datetime(data['dtime'], infer_datetime_format=True)
 data['mix']=pd.to_numeric(data['mix'],errors='coerce')
@@ -6450,8 +6552,6 @@ ETL : extract, transform and load
 extract, transform and load,
 """
 
-import re
-
 # 合併數據集
 # 數據庫風格的DataFrame合併
 
@@ -6930,7 +7030,9 @@ data.rename(index={"OHIO": "INDIANA"}, columns={"three": "peekaboo"})  # 修改�
 data
 
 # 如果希望就地修改原有的數據集，使需要在 rename()方法中設定參數 inplace = True
-data.rename(index={"OHIO": "INDIANA"}, columns={"three": "peekaboo"}, inplace=True)  # 修改欄位名稱
+data.rename(
+    index={"OHIO": "INDIANA"}, columns={"three": "peekaboo"}, inplace=True
+)  # 修改欄位名稱
 
 data
 
@@ -6995,13 +7097,10 @@ matchs
 data.str[:5]
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
-#  GroupBy
-# Group By: split-apply-combine
-
+# GroupBy
+# GroupBy: split-apply-combine
 # GroupBy技術
 
 # 分組運算是一種 Split-Apply-Combine的過程，類似於MapReduce的模式
@@ -8053,88 +8152,6 @@ print(df)
 print(df["國文"])
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("Create a datetime column from a DataFrame")
-
-# create an example DataFrame
-df = pd.DataFrame([[2017, 12, 25], [2018, 1, 15]], columns=["year", "month", "day"])
-print(df)
-
-# new: create a datetime column from the entire DataFrame
-cc = pd.to_datetime(df)
-print(cc)
-
-# new: create a datetime column from a subset of columns
-cc = pd.to_datetime(df[["month", "day", "year"]])
-print(cc)
-
-
-# convert a single string to datetime format (outputs a timestamp object)
-ts = pd.to_datetime("1/1/1999")
-print(ts)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-from datetime import datetime
-
-# Pandas日期時間處理
-# 時間點TimeStamp
-
-t = pd.to_datetime("2019-03-01 00:00:00")  # 從字符串轉換
-print(type(t), t)
-t = pd.to_datetime(datetime.now())  # 從datetime格式轉換
-print(type(t), t)
-
-# 時間間隔
-t1 = pd.to_datetime("2019-03-01 00:00:00")
-t2 = pd.to_datetime(datetime.now())
-delta = t2 - t1  # 通過TimeStamp相減獲取
-print(type(delta), delta, delta.days, delta.seconds)
-
-delta = pd.Timedelta(days=27)  # 構造時間間隔爲27天
-print(t2 + delta)
-
-# 時間段Period
-t = pd.to_datetime(datetime.now())
-p = pd.Period(t, freq="H")
-print(p, p.start_time, p.end_time)  # 顯示時間段起止時間
-
-# 批量轉換
-arr = ["2019-03-01", "2019-03-02", "2019-03-03"]
-df = pd.DataFrame({"d": arr})
-df["d"] = pd.to_datetime(df["d"])
-print(df)
-
-print("------------------------------------------------------------")  # 60個
-
-# 時間序列操作
-# 時間日期類型索引
-df.index = pd.to_datetime(df["d"])  # 本例中使用了上例中構造的df[‘d’]
-print(df.index)
-
-df = pd.DataFrame()
-df["date"] = pd.date_range(start="2017-12-30", end="2019-01-05", freq="d")  # 創建時間數據
-df["val"] = df["date"].apply(lambda x: x.weekday())  # 計算該日是星期幾
-df.set_index("date", inplace=True)  # 設置時間索引
-print(df.head(3))  # 顯示前三條
-
-# 時間段類型索引
-df_period = df.to_period(freq="M")  # 按月創建時間段
-print(type(df_period.index))  # 查看類型
-print(len(df_period))  # 查看記錄個數，與原記錄個數一致
-print(df_period.head(3))
-
-print(df_period.index[0].start_time, df_period.index[0].end_time)
-print(df_period.index[1].start_time, df_period.index[1].end_time)
-print(df.index.is_unique, df_period.index.is_unique)
-
-df_dt = df_period.to_timestamp()
-print(df_dt.head(3))
-print(type(df_dt.index))
-
-print("------------------------------------------------------------")  # 60個
 """ no df
 # 篩選和切分
 print(df['2019'])  # 篩選2019全年數據
@@ -8499,5 +8516,3 @@ order_df = pd.merge(order_df, customer_df, left_on="數學", right_index=True, h
 4. df 欄運算
 
 """
-
-
