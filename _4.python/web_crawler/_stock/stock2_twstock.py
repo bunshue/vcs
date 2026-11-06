@@ -79,7 +79,7 @@ cc = help(api.taiwan_stock_dividend_result)
 # print(cc)
 
 """
-台股總覽 TaiwanStockInfo
+★ 台股總覽 TaiwanStockInfo
 這張資料表主要是列出台灣所有，上市、上櫃、興櫃，的股票名稱，代碼和產業類別！
 資料更新時間 每天 1:30，實際更新時間以 API 資料為主
 """
@@ -93,7 +93,7 @@ print(df)
 """
 
 """
-台股總覽(含權證) TaiwanStockInfoWithWarrant
+★ 台股總覽(含權證) TaiwanStockInfoWithWarrant
 這張資料表主要是列出台灣所有，上市、上櫃、興櫃，的股票、權證名稱，代碼和產業類別！
 資料量超過 5 萬筆
 資料更新時間 每天 1:30，實際更新時間以 API 資料為主
@@ -108,7 +108,7 @@ print(df)
 """
 
 """
-台股交易日 TaiwanStockTradingDate
+★ 台股交易日 TaiwanStockTradingDate
 提供台股交易日。
 資料更新時間-星期一至五 18:00，實際更新時間以 API 資料為主。
 """
@@ -129,7 +129,7 @@ print(data)
 print("------------------------------")  # 30個
 
 """
-股價日成交資訊 TaiwanStockPrice
+★ 股價日成交資訊 TaiwanStockPrice
 提供台股，上市、上櫃、興櫃，的股票日成交資訊！
 """
 """
@@ -145,7 +145,7 @@ print(df)
 
 print("------------------------------")  # 30個
 
-# 除權息, 一次只能查一天
+★ 除權息, 一次只能查一天
 div_df = api.taiwan_stock_dividend_result(
     stock_id="2330",
     start_date="2026-09-01"
@@ -235,7 +235,7 @@ Trading_turnover（成交筆數）：當天這檔股票總共撮合成功了多�
 """
 day = df["date"].astype(str)  # 日期
 stock_id = df["stock_id"].astype(str)  # 股票代碼
-volume = df["Trading_Volume"].astype(float)  # 成交量（Trading_Volume）
+volume = df["Trading_Volume"].astype(float)  # 成交量（Trading_Volume）, 成交股數
 money = df["Trading_money"].astype(float)  # 成交金額（Trading_money）
 _open = df["open"].astype(float)  # 開盤價 Open
 _max = df["max"].astype(float)  # 最高價 High
@@ -243,6 +243,37 @@ _min = df["min"].astype(float)  # 最低價 Low
 close = df["close"].astype(float)  # 收盤價 Close
 spread = df["spread"].astype(float)  # 買賣價差（Spread）
 turnover = df["Trading_turnover"].astype(float)  # 交易筆數（Trading_turnover）
+
+df["ma5"] = df["close"].rolling(window=5).mean()  # 移動平均線 (MA5) 連同過去N點平均
+df["ma20"] = df["close"].rolling(window=20).mean()  # 移動平均線 (MA20) 連同過去N點平均
+df["ma60"] = df["close"].rolling(window=60).mean()  # 移動平均線 (MA60) 連同過去N點平均
+
+_ma5 = df["ma5"].astype(float)  # 開盤價 Open
+_ma20 = df["ma20"].astype(float)  # 開盤價 Open
+
+M, N = df.shape
+
+plt.figure(figsize=(12, 14))
+
+plt.subplot(311)
+plt.plot(day, _open, "s-", color="r", label="開盤價  Open Price")
+plt.plot(day, close, "s-", color="g", label="收盤價 Close Price")
+plt.plot(day, _max, "s", color="r", label="最高價 Max")
+plt.plot(day, _min, "s", color="g", label="最低價 Min")
+plt.xticks(range(M), df["date"], rotation=30)
+
+plt.subplot(312)
+plt.plot(day, _ma5, "s-", color="r", label="週線MA5")
+plt.plot(day, _ma20, "s-", color="g", label="月線MA20")
+plt.xticks(range(M), df["date"], rotation=30)
+
+plt.subplot(313)  # 畫成交量
+plt.bar(range(M), df["Trading_Volume"] / 1000, facecolor="#99ccff")
+
+plt.ylabel("成交量(張)")
+plt.xticks(range(M), df["date"], rotation=30)
+
+show()
 
 plt.figure(figsize=(10, 8))
 plt.plot(day, _open, "s-", color="r", label="開盤價  Open Price")
@@ -335,7 +366,7 @@ print(df[["Open", "High", "Low", "Close"]].tail())
 """
 df["MA5"] = df["Close"].rolling(window=5).mean()  # 移動平均線 (MA5) 連同過去N點平均
 df["MA20"] = df["Close"].rolling(window=20).mean()  # 移動平均線 (MA20) 連同過去N點平均
-df["MA60"] = df["close"].rolling(window=60).mean()  # 移動平均線 (MA60) 連同過去N點平均
+df["MA60"] = df["Close"].rolling(window=60).mean()  # 移動平均線 (MA60) 連同過去N點平均
 
 df["Daily_Return"] = df["Close"].pct_change()  # 每日漲跌幅, pct_change() : 與前項差的百分比
 
@@ -361,40 +392,11 @@ print("------------------------------")  # 30個
 
 df["ma5"] = df["Close"].rolling(window=5).mean()  # 移動平均線 (MA5) 連同過去N點平均
 df["ma20"] = df["Close"].rolling(window=20).mean()  # 移動平均線 (MA20) 連同過去N點平均
-df["ma60"] = df["close"].rolling(window=60).mean()  # 移動平均線 (MA60) 連同過去N點平均
+df["ma60"] = df["Close"].rolling(window=60).mean()  # 移動平均線 (MA60) 連同過去N點平均
 
 df["daily_return"] = df["Close"].pct_change()  # 每日漲跌幅, pct_change() : 與前項差的百分比
 
-_ma5 = df["ma5"].astype(float)  # 開盤價 Open
-_ma20 = df["ma20"].astype(float)  # 開盤價 Open
-_daily_return = df["daily_return"].astype(float)  # 開盤價 Open
-
-print(_ma5)
-
-M, N = df.shape
-
-day = df["date"].astype(str)  # 日期
-
-plt.figure(figsize=(12, 14))
-
-plt.subplot(311)
-plt.plot(day, _open, "s-", color="r", label="開盤價  Open Price")
-plt.plot(day, close, "s-", color="g", label="收盤價 Close Price")
-plt.plot(day, _max, "s", color="r", label="最高價 Max")
-plt.plot(day, _min, "s", color="g", label="最低價 Min")
-plt.xticks(range(M), df["date"], rotation=30)
-
-plt.subplot(312)
-plt.plot(day, _ma5, "s-", color="r", label="週線MA5")
-plt.plot(day, _ma20, "s-", color="g", label="月線MA20")
-plt.xticks(range(M), df["date"], rotation=30)
-
-plt.subplot(313)  # 畫成交量
-plt.bar(range(M), df["Volume"] / 1000, facecolor="#99ccff")
-plt.ylabel("成交量(張)")
-plt.xticks(range(M), df["date"], rotation=30)
-
-show()
+_daily_return = df["daily_return"].astype(float)  # 每日漲跌幅, 後來沒用到, 或許是 PCT
 
 print("------------------------------")  # 30個
 
@@ -422,7 +424,7 @@ my_color = mpf.make_marketcolors(
 )
 
 # 2. 【核心修正】在 make_mpf_style 中直接指定內建中文字型！
-# 這裡我們傳入一個字型清單，讓系統去抓微軟正黑體（Windows）或蘋方體（Mac）
+# 這裡我們傳入一個字型清單，讓系統去抓微軟正黑體
 
 # 僅有 marketcolors
 # my_style = mpf.make_mpf_style(marketcolors=my_color, gridstyle='--')
@@ -497,7 +499,7 @@ df.set_index("Date", inplace=True)
 # 2. 計算 5日 與 20日 均線
 df["MA5"] = df["Close"].rolling(window=5).mean()  # 移動平均線 (MA5) 連同過去N點平均
 df["MA20"] = df["Close"].rolling(window=20).mean()  # 移動平均線 (MA20) 連同過去N點平均
-df["MA60"] = df["close"].rolling(window=60).mean()  # 移動平均線 (MA60) 連同過去N點平均
+df["MA60"] = df["Close"].rolling(window=60).mean()  # 移動平均線 (MA60) 連同過去N點平均
 
 # 3. 判斷交叉訊號
 # 建立一個訊號欄位：1 代表黃金交叉(買)，-1 代表死亡交叉(賣)
@@ -654,13 +656,13 @@ print("------------------------------------------------------------")  # 60個
 df = pd.read_pickle("tmp_finmind_data1.pkl")
 print(df)
 
-day = df["date"].astype(str)
+day = df["date"].astype(str)  # 日期
 # print(day[::5])  # syntax
-openprice = df["open"].astype(float)  # 開盤價
-close = df["close"].astype(float)  # 收盤價
-high = df["max"].astype(float)
-low = df["min"].astype(float)
-volume = df["Trading_Volume"].astype(float)  # 成交股數
+openprice = df["open"].astype(float)  # 開盤價 Open
+close = df["close"].astype(float)  # 收盤價 Close
+high = df["max"].astype(float)  # 最高價 High
+low = df["min"].astype(float)  # 最低價 Low
+volume = df["Trading_Volume"].astype(float)  # 成交量（Trading_Volume）, 成交股數
 
 
 plt.figure(figsize=[12, 6])
@@ -829,7 +831,7 @@ df = pd.DataFrame(
 )
 
 # df.plot()
-# plt.show()
+# show()
 
 print(df)
 
@@ -1830,7 +1832,7 @@ df = df.set_index('DATE')
 
 df['2010-01-01':]['景氣對策信號綜合分數'].plot()
 
-plt.show()
+show()
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -2039,18 +2041,17 @@ plt.plot(date, low_price, color="#00bd42", linewidth=5)
 plt.plot(date, end_price, color="#005de0", linestyle="dashed")
 
 """
-plt.xlabel("日期")    # x軸標籤
-plt.ylabel("價格")    # y軸標籤
+plt.xlabel("日期")
+plt.ylabel("價格")
 plt.legend(["最高價", "最低價", "收盤價"], loc="lower right")    # 圖示，共有左下、左上、右下、右上四個方位
-plt.title("110年8月股市趨勢圖")    # 主標題
+plt.title("110年8月股市趨勢圖")
 """
-plt.grid(True)  # 是否有網格?
+plt.grid(True)
 
 # 存成圖片, 要放在show()之前
 # plt.savefig("matplotlib_chart.png")
 
-# 顯示圖片
-plt.show()
+show()
 
 # 使用 Pandas 畫圖
 
@@ -2070,7 +2071,7 @@ plt.grid()
 # plt.savefig("pandas_chart.png")
 # 顯示圖片
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2386,7 +2387,7 @@ for i in range(len(pdstock["日期"])):  # 轉換日期式為西元年格式
 pdstock["日期"] = pd.to_datetime(pdstock["日期"])  # 轉換日期欄位為日期格式
 pdstock.plot(kind="line", figsize=(12, 6), x="日期", y=["收盤價", "最低價", "最高價"])  # 繪製統計圖
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -3360,7 +3361,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 fig, (ax1, ax2) = plt.subplots(2, 1, sharex=True, figsize=(12, 8), dpi=100)
-plt.rcParams["font.sans-serif"] = ["Microsoft JhengHei"]
+
 # ax1.set_title("開盤價、收盤價 ( " + df["date"][0] + " ~ " + df["date"][-1] + " )")
 ax1.set_title("開盤價、收盤價")
 # ax1.set_title("K 線圖")
@@ -3377,6 +3378,8 @@ ax2.set_xticks(range(0, len(day), 5))
 ax2.set_xticklabels(day[::5])
 ax2.grid(True)
 
+show()
+
 print("------------------------------------------------------------")  # 60個
 print("df語法 與 畫圖 SP")
 print("------------------------------------------------------------")  # 60個
@@ -3385,5 +3388,5 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 plt.rcParams["font.sans-serif"] = "mingliu"  # 設定中文字型
+
