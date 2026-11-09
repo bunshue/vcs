@@ -36,6 +36,22 @@ namespace xCh6_1_1_11
             Button6 = new System.Windows.Forms.Button();
             Button7 = new System.Windows.Forms.Button();
             Button8 = new System.Windows.Forms.Button();
+            Button1.Name = "Button11";
+            Button2.Name = "Button22";
+            Button3.Name = "Button33";
+            Button4.Name = "Button44";
+            Button5.Name = "Button55";
+            Button6.Name = "Button66";
+            Button7.Name = "Button77";
+            Button8.Name = "Button88";
+            Button1.Text = "1.張三峰";
+            Button2.Text = "2.張無忌";
+            Button3.Text = "3.趙敏";
+            Button4.Text = "4.黃蓉";
+            Button5.Text = "5.郭靖";
+            Button6.Text = "6.小龍女";
+            Button7.Text = "7.楊過";
+            Button8.Text = "8.虛竹";
 
             flowLayoutPanel1.Controls.Add(Button1);
             flowLayoutPanel1.Controls.Add(Button2);
@@ -51,34 +67,19 @@ namespace xCh6_1_1_11
             flowLayoutPanel1.FlowDirection = FlowDirection.RightToLeft;
             flowLayoutPanel1.WrapContents = false;
             flowLayoutPanel1.AutoScroll = false;
-
-            Button1.Name = "Button11";
-            Button2.Name = "Button22";
-            Button3.Name = "Button33";
-            Button4.Name = "Button44";
-            Button5.Name = "Button55";
-            Button6.Name = "Button66";
-            Button7.Name = "Button77";
-            Button8.Name = "Button88";
-
-            Button1.Text = "1.張三峰";
-            Button2.Text = "2.張無忌";
-            Button3.Text = "3.趙敏";
-            Button4.Text = "4.黃蓉";
-            Button5.Text = "5.郭靖";
-            Button6.Text = "6.小龍女";
-            Button7.Text = "7.楊過";
-            Button8.Text = "8.虛竹";
+            flowLayoutPanel1.BackColor = Color.Pink;
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox1.Checked)
             {
+                richTextBox1.Text += "FlowDirection = LeftToRight 左到右\n";
                 flowLayoutPanel1.FlowDirection = FlowDirection.LeftToRight;
             }
             else
             {
+                richTextBox1.Text += "FlowDirection = RightToLeft 右到左\n";
                 flowLayoutPanel1.FlowDirection = FlowDirection.RightToLeft;
             }
         }
@@ -87,10 +88,12 @@ namespace xCh6_1_1_11
         {
             if (checkBox2.Checked)
             {
+                richTextBox1.Text += "WrapContents = true\n";
                 flowLayoutPanel1.WrapContents = true;
             }
             else
             {
+                richTextBox1.Text += "WrapContents = false\n";
                 flowLayoutPanel1.WrapContents = false;
             }
         }
@@ -99,24 +102,36 @@ namespace xCh6_1_1_11
         {
             if (checkBox3.Checked)
             {
+                richTextBox1.Text += "AutoScroll = true\n";
                 flowLayoutPanel1.AutoScroll = true;
             }
             else
             {
+                richTextBox1.Text += "AutoScroll = false\n";
                 flowLayoutPanel1.AutoScroll = false;
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "11111111\n";
             flowLayoutPanel1.AutoSize = true;
             flowLayoutPanel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "2222222222\n";
             flowLayoutPanel1.AutoSize = true;
             flowLayoutPanel1.AutoSizeMode = AutoSizeMode.GrowOnly;
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "FlowDirection : " + flowLayoutPanel1.FlowDirection + "\n";
+            richTextBox1.Text += "WrapContents : " + flowLayoutPanel1.WrapContents + "\n";
+            richTextBox1.Text += "AutoScroll : " + flowLayoutPanel1.AutoScroll + "\n";
+        }
     }
 }
+

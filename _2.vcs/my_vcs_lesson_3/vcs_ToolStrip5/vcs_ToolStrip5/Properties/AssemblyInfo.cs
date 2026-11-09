@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 組件的一般資訊是由下列的屬性集控制。
 // 變更這些屬性的值即可修改組件的相關
 // 資訊。
-[assembly: AssemblyTitle("xCh19-2-4-11")]
+[assembly: AssemblyTitle("vcs_ToolStrip5")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("SYNNEX")]
-[assembly: AssemblyProduct("xCh19-2-4-11")]
-[assembly: AssemblyCopyright("Copyright © SYNNEX 2013")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("vcs_ToolStrip5")]
+[assembly: AssemblyCopyright("Copyright ©  2026")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 下列 GUID 為專案公開 (Expose) 至 COM 時所要使用的 typelib ID
-[assembly: Guid("dda5fa34-16aa-4b32-9f76-ce87e3328ed0")]
+[assembly: Guid("6b1fcae7-f540-44e2-b190-5dd07406eba1")]
 
 // 組件的版本資訊是由下列四項值構成:
 //
