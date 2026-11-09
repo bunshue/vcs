@@ -86,9 +86,9 @@ cc = help(api.taiwan_stock_dividend_result)
 
 """
 api = DataLoader()
-# api.login_by_token(api_token='token')
+# api.login_by_token(api_token="token")
 df = api.taiwan_stock_info()
-print('台股總覽 TaiwanStockInfo')
+print("台股總覽 TaiwanStockInfo")
 print(df)
 """
 
@@ -100,10 +100,10 @@ print(df)
 """
 """
 api = DataLoader()
-# api.login_by_token(api_token='token')
+# api.login_by_token(api_token="token")
 df = api.taiwan_stock_info_with_warrant()
 
-print('台股總覽(含權證) TaiwanStockInfoWithWarrant')
+print("台股總覽(含權證) TaiwanStockInfoWithWarrant")
 print(df)
 """
 
@@ -134,13 +134,13 @@ print("------------------------------")  # 30個
 """
 """
 api = DataLoader()
-# api.login_by_token(api_token='token')
+# api.login_by_token(api_token="token")
 df = api.taiwan_stock_daily(
     stock_id="2330",
     start_date="2026-09-01",
     end_date="2026-10-01"
 )
-print('股價')
+print("股價")
 print(df)
 
 print("------------------------------")  # 30個
@@ -150,7 +150,7 @@ div_df = api.taiwan_stock_dividend_result(
     stock_id="2330",
     start_date="2026-09-01"
 )
-print('除權息')
+print("除權息")
 print(div_df)
 print(div_df.columns)
 
@@ -293,10 +293,10 @@ for idx in range(M):
     plt.scatter(idx, y_max, color="r", marker="^", s=40, zorder=5)
     plt.scatter(idx, y_min, color="g", marker="v", s=40, zorder=5)
 
-plt.legend(loc="best", fontsize=16)
-plt.xlabel("日期", fontsize=12)
-plt.ylabel("股價 (元)", fontsize=12)
-plt.title("歷史走勢圖", fontsize=12)
+plt.legend(loc="best")
+plt.xlabel("日期")
+plt.ylabel("股價 (元)")
+plt.title("歷史走勢圖")
 plt.xticks(rotation=30)
 
 show()
@@ -427,7 +427,7 @@ my_color = mpf.make_marketcolors(
 # 這裡我們傳入一個字型清單，讓系統去抓微軟正黑體
 
 # 僅有 marketcolors
-# my_style = mpf.make_mpf_style(marketcolors=my_color, gridstyle='--')
+# my_style = mpf.make_mpf_style(marketcolors=my_color, gridstyle="--")
 
 # marketcolors + font
 my_style = mpf.make_mpf_style(
@@ -641,9 +641,9 @@ plt.figure(figsize=(10, 8))
 plt.plot(df.index, df["Total_Value"], label="均線策略資產淨值", color="blue", linewidth=2)
 plt.axhline(y=initial_capital, color="red", linestyle="--", label="初始資金 (100萬)")
 
-plt.title("均線交叉策略 - 帳戶資產淨值走勢圖 (Equity Curve)", fontsize=14)
-plt.xlabel("日期", fontsize=12)
-plt.ylabel("帳戶總價值 (元)", fontsize=12)
+plt.title("均線交叉策略 - 帳戶資產淨值走勢圖 (Equity Curve)")
+plt.xlabel("日期")
+plt.ylabel("帳戶總價值 (元)")
 plt.grid(True, linestyle="--", alpha=0.6)
 plt.legend(loc="upper left")
 
@@ -670,17 +670,17 @@ plt.figure(figsize=[12, 6])
 plt.plot(day, openprice, "s-", color="r", label="開盤價")
 plt.plot(day, close, "o-", color="g", label="收盤價")
 
-plt.xticks(range(0, len(day), 5), fontsize=10, rotation=45)
+plt.xticks(range(0, len(day), 5), rotation=45)
 plt.yticks(fontsize=10)
 plt.grid(True)
-plt.legend(loc="best", fontsize=10)
+plt.legend(loc="best")
 
 plt.title("開盤價、收盤價")
 
 show()
 
 print("------------------------------------------------------------")  # 60個
-# 6060
+print("------------------------------------------------------------")  # 60個
 
 # 讀取pickle檔案資料
 df = pd.read_pickle("tmp_finmind_data1.pkl")
@@ -1031,9 +1031,9 @@ for s in stocklist:
 
 plt.figure(figsize=[10, 8])
 
-plt.title("2019年12月股價", fontsize=18)
-plt.xlabel("日期", fontsize=14)
-plt.ylabel("股價", fontsize=14)
+plt.title("2019年12月股價")
+plt.xlabel("日期")
+plt.ylabel("股價")
 plt.plot(listx, listy, "r:s")
 
 plt.xticks(rotation=45)
@@ -1090,9 +1090,9 @@ for value in stocklist:
 
 plt.figure(num="股票分析", figsize=(10, 10))
 
-plt.xlabel("日期", fontsize="16")
-plt.ylabel("股價", fontsize="16")
-plt.title("股票分析", fontsize="18")
+plt.xlabel("日期")
+plt.ylabel("股價")
+plt.title("股票分析")
 
 plt.plot(listx, listy, color="red", markersize="16", marker=".")
 
@@ -1234,28 +1234,18 @@ print("------------------------------------------------------------")  # 60個
 # twstock 各個 API 比較
 
 stock_id = "2317"  # 2317鴻海
-
-stock = twstock.Stock(stock_id)  # 以股票代號建立 Stock 物件
-
-data = stock.fetch(2026, 10)  # 取得 2020年1月 的資料
-print("資料長度 :", len(data))
-
-data = stock.fetch_31()
-print("資料長度 :", len(data))
-
-data = stock.fetch_from(2021, 9)
-print("資料長度 :", len(data))
-
-sys.exit()
-
-print("------------------------------")  # 30個
-
 stock_id = "2330"  # 2330台積電
 
 stock = twstock.Stock(stock_id)  # 以股票代號建立 Stock 物件
 
-data = stock.fetch(2020, 7)  # 取得 2020年7月 的資料
-# data = stock.fetch_from(2020, 7) # ????
+data = stock.fetch_31()
+print("資料長度 :", len(data))
+
+data = stock.fetch(2026, 10)  # 取得 2026年10月 的資料
+print("資料長度 :", len(data))
+
+data = stock.fetch_from(2026, 10)  # 取得 2026年10月 的資料
+print("資料長度 :", len(data))
 
 df = pd.DataFrame(data)
 df["date"] = pd.to_datetime(df["date"])
@@ -1263,18 +1253,6 @@ df = df.set_index("date")
 
 df[["close", "open", "high", "low"]].plot()  # df直接畫出
 show()
-
-print("------------------------------")  # 30個
-
-stock_id = "2330"  # 2330台積電
-
-stock = twstock.Stock(stock_id)  # 以股票代號建立 Stock 物件
-
-data = stock.fetch_from(2019, 1)
-
-df = pd.DataFrame(data)
-df["date"] = pd.to_datetime(df["date"])
-df = df.set_index("date")
 
 # 計算5天, 20天和60天移動平均線
 df["MA5"] = df["close"].rolling(window=5).mean()  # 移動平均線 (MA5) 連同過去N點平均
@@ -1346,46 +1324,55 @@ print("------------------------------------------------------------")  # 60個
 
 stock_id = "2317"  # 2317鴻海
 
-# plt.figure(figsize=[12,30])
 stock = twstock.Stock(stock_id)  # 以股票代號建立 Stock 物件
 
 slist = []
 
+plt.figure(figsize=[12, 30])
 for i in range(1, 13):
+    print("2019 年", i, "月")
     stocklist = stock.fetch(2019, i)  # 取得 2019年i月 的資料
     [slist.append(s) for s in stocklist]
-    #    listx = [s.date.strftime('%d') for s in stocklist]
-    #    listy = [s.close for s in stocklist]
-    #    plt.subplot('62{}'.format(i))
-    #    plt.xticks(rotation=45)
-    #    plt.title(label="{}月".format(i))
-    #    plt.plot(listx, listy)
-    print(len(slist))
+    listx = [s.date.strftime("%d") for s in stocklist]
+    listy = [s.close for s in stocklist]
+    print("共有 :", len(slist), "筆資料")
+
+    plt.subplot(4, 3, i)
+    plt.xticks(rotation=45)
+    plt.title(label="{}月".format(i))
+    plt.plot(listx, listy)
     time.sleep(5)
     if i == 6:
         time.sleep(20)
-
 show()
 
-# lista = []
-# list1 = [1,2,3,4,5]
-# list2 = [7,8,9,10,11]
-# list1.append(list2)
-# list1
+print("取得資料數")
+print(slist)
 
 # 將資料寫出到csv檔
 # 比較看看
-filename = "D:/_git/vcs/_1.data/______test_files1/__RW/_csv/stock_data_2019_2330.csv"
+filename = (
+    "D:/_git/vcs/_1.data/______test_files1/__RW/_csv/stock_data_2019_2330bbbbccc.csv"
+)
 
 with open(filename, "w", newline="") as f:
     writer = csv.writer(f)
     writer.writerows(slist)
+
+plt.figure(figsize=(20, 5))
+plt.plot([x.close for x in slist])
+plt.title("2019年資料")
+plt.title()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
 print("讀取csv檔, 並畫出")
 
 filename = "D:/_git/vcs/_1.data/______test_files1/__RW/_csv/stock_data_2019_2330.csv"
+filename = (
+    "D:/_git/vcs/_1.data/______test_files1/__RW/_csv/stock_data_2019_2330bbbb.csv"
+)
 
 with open(filename, "r", newline="") as f:
     datas = csv.reader(f)
@@ -1399,24 +1386,14 @@ with open(filename, "r", newline="") as f:
         listy.append(data[5])
 
     # print(len(datas))
-    # print(len(listx), len(listy))
-    plt.figure(figsize=(20, 5))  # 圖像大小[英吋]
+    print(len(listx), len(listy))
+    plt.figure(figsize=(16, 6))  # 圖像大小[英吋]
     plt.plot(listx, listy)
     plt.yticks(range(10, 200, 10))
+    plt.title("2019年資料")
     show()
-
-# print([x[6] for x in datas])
-# print(type(datas))
-
-plt.figure(figsize=(20, 5))
-plt.plot([x.close for x in slist])
-show()
-
-for data in datas:
-    print(data)
-
-lsit1 = [1, 2, 3, 4]
-list1[0]
+    print([x[6] for x in datas])
+    print(type(datas))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1469,8 +1446,6 @@ pdstock["日期"] = pd.to_datetime(pdstock["日期"])  # 轉換日期欄位為�
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from datetime import datetime
-
 
 def convert_tw_date_to_ad(tw_date):
     # 分割日期為年、月、日
@@ -1481,7 +1456,7 @@ def convert_tw_date_to_ad(tw_date):
     return f"{year}-{month:02d}-{day:02d}"
 
 
-filename = "data/ST43_3479_202310.csv"
+filename = "data/ST43_3479_202310.csv"  # 安勤3479 2023年10月資料
 
 with open(filename) as csvfile:  # 開啟csv檔案
     csv_reader = csv.reader(csvfile)
@@ -1495,12 +1470,16 @@ with open(filename) as csvfile:  # 開啟csv檔案
     for line in data_without_last_row:
         try:
             # 將日期轉換為西元年格式
+            # 第0欄 日期
             converted_date = convert_tw_date_to_ad(line[0])
             # 使用 strptime 解析轉換後的日期字串
-            parseDate = datetime.strptime(converted_date, "%Y-%m-%d")
+            parseDate = datetime.datetime.strptime(converted_date, "%Y-%m-%d")
             currentDate = parseDate.strftime("%Y-%m-%d")  # 轉換後日期
+            # 第4欄 最高
             highPrice = eval(line[4])  # 設定最高價
+            # 第5欄 最低
             lowPrice = eval(line[5])  # 設定最低價
+            # 第6欄 收盤
             closePrice = eval(line[6])  # 設定收盤價
         except Exception:
             print(f"有缺值 {line}")
@@ -1516,8 +1495,8 @@ plt.plot(mydates, lowPrices, "-o", label="最低價")  # 繪製最低價
 plt.plot(mydates, closePrices, "-^", label="收盤價")  # 繪製收盤價
 plt.legend()
 fig.autofmt_xdate()  # 日期旋轉
-plt.title("2023年10月安勤公司日線圖", fontsize=24)
-plt.ylabel("價格", fontsize=14)
+plt.title("2023年10月安勤公司日線圖")
+plt.ylabel("價格")
 
 show()
 
@@ -1532,10 +1511,11 @@ stock_id = "2330"  # 2330台積電
 
 stock = twstock.Stock(stock_id)  # 以股票代號建立 Stock 物件
 
-df = pd.DataFrame(stock.fetch_from(2026, 10))
+df = pd.DataFrame(stock.fetch_from(2026, 10))  # 取得 2026年10月 的資料
 df["date"] = pd.to_datetime(df["date"])
 df.set_index("date", inplace=True)
-print(df.head())
+print("檢視前幾行\n", df.head())
+
 conn = sqlite3.connect("tmp_" + stock_id + ".db")
 df.to_sql(stock_id, conn, if_exists="replace")
 print("已經將股票資料存入SQLite資料庫...")
@@ -1551,7 +1531,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("讀取上市公司基本資料")
 
-# r = requests.get("http://dts.twse.com.tw/opendata/t187ap03_L.csv")
+# r = requests.get("http://dts.twse.com.tw/opendata/t187ap03_L.csv")  # 網址上是個 csv 檔, 同下
 # r.encoding = "big5"
 filename = "data/t187ap03_L.csv"
 
@@ -1570,7 +1550,7 @@ print("------------------------------")  # 30個
 
 print("讀取上櫃公司基本資料")
 
-# r = requests.get("http://dts.twse.com.tw/opendata/t187ap03_O.csv")
+# r = requests.get("http://dts.twse.com.tw/opendata/t187ap03_O.csv")  # 網址上是個 csv 檔, 同下
 # r.encoding = "big5"
 filename = "data/t187ap03_O.csv"
 
@@ -1585,7 +1565,7 @@ print("------------------------------")  # 30個
 
 print("讀取興櫃公司基本資料")
 
-# r = requests.get("http://dts.twse.com.tw/opendata/t187ap03_R.csv")
+# r = requests.get("http://dts.twse.com.tw/opendata/t187ap03_R.csv")  # 網址上是個 csv 檔, 同下
 # r.encoding = "big5"
 
 # df = pd.read_csv(StringIO(r.text), index_col=False, skiprows=1)
@@ -1647,11 +1627,11 @@ def monthly_report(year, month):
     print(df)
 
     # df = df[list(range(0,10))]
-    # column_index = df.index[(df[0] == '公司代號')][0]
+    # column_index = df.index[(df[0] == "公司代號")][0]
     # df.columns = df.iloc[column_index]
-    # df['當月營收'] = pd.to_numeric(df['當月營收'], 'coerce')
-    # df = df[~df['當月營收'].isnull()]
-    # df = df[df['公司代號'] != '合計']
+    # df["當月營收"] = pd.to_numeric(df["當月營收"], "coerce")
+    # df = df[~df["當月營收"].isnull()]
+    # df = df[df["公司代號"] != "合計"]
 
     return df
 
@@ -1720,9 +1700,9 @@ def financial_statement(year, season, exchange="sii", type="綜合損益表"):
     return df
 
 
-""" fail
-df = financial_statement(2017, 2, type='營益分析查詢彙總表')
-print(df[df['公司名稱']=='台泥'])
+""" NG
+df = financial_statement(2017, 2, type="營益分析查詢彙總表")
+print(df[df["公司名稱"]=="台泥"])
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -1745,11 +1725,11 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """ NG 無檔案
-print('證券商分公司基本資料')
+print("證券商分公司基本資料")
 
 # 讀取證券商分公司基本資料
 
-r = requests.get("http://www.twse.com.tw/brokerService/branchList.csv")
+r = requests.get("http://www.twse.com.tw/brokerService/branchList.csv")  # 網址上是個 csv 檔, 同下
 r.encoding = "big5"
 df = pd.read_csv(StringIO(r.text), index_col=False, skiprows=1)
 print(df)
@@ -1757,7 +1737,7 @@ print(df)
 print("------------------------------------------------------------")  # 60個
 
 """ NG 無檔案
-print('讀取證券商總公司基本資料')
+print("讀取證券商總公司基本資料")
 
 r = requests.get("http://www.twse.com.tw/brokerService/brokerList.csv?lang=zh")
 r.encoding = "big5"
@@ -1768,9 +1748,9 @@ print(df)
 print("------------------------------------------------------------")  # 60個
 
 """ NG 資料抓不下來
-print('讀取 Nasdaq 的股價歷史資料')
+print("讀取 Nasdaq 的股價歷史資料")
 
-symbol = 'GOOG'.lower()
+symbol = "GOOG".lower()
 
 url_template = "https://www.nasdaq.com/symbol/{symbol}/historical"
 url = url_template.format(symbol=symbol)
@@ -1778,17 +1758,17 @@ print(url)
 
 rs = requests.session()
 r = rs.get(url)
-soup = BeautifulSoup(r.text, 'lxml')
-params = soup.select('#getFile input')
+soup = BeautifulSoup(r.text, "lxml")
+params = soup.select("#getFile input")
 # 時間長短：5d, 1m, 3m, 6m, 1y, 18m, 2y, 3y, 4y, 5y, 6y, 7y, 8y, 9y, 10y
-timeframe = '{timestr}|true|{symbol}'.format(timestr='3m', symbol=symbol.upper())
+timeframe = "{timestr}|true|{symbol}".format(timestr="3m", symbol=symbol.upper())
 payload = {}
 
 for tag in params:
-    if tag['name'] != 'ctl00$quotes_content_left$submitString':
-        payload[tag['name']] = tag['value']
+    if tag["name"] != "ctl00$quotes_content_left$submitString":
+        payload[tag["name"]] = tag["value"]
     else:
-        payload[tag['name']] = timeframe
+        payload[tag["name"]] = timeframe
 
 #r = rs.post(url, data=payload)
 r = rs.post(url, data=payload, verify=False)
@@ -1798,11 +1778,11 @@ print(r.text)
 print("------------------------------------------------------------")  # 60個
 
 """ NG 資料抓不下來
-print('讀取 NASDAQ, NYSE, AMEX 公司資料')
+print("讀取 NASDAQ, NYSE, AMEX 公司資料")
 
 url_template = "https://www.nasdaq.com/screening/companies-by-industry.aspx?exchange={}&render=download"
 
-url = url_template.format('NASDAQ')
+url = url_template.format("NASDAQ")
 
 df = pd.read_csv(url)
 df = df.loc[:, ~df.columns.str.contains("Unnamed")]
@@ -1825,12 +1805,12 @@ from io import BytesIO
 
 # 讀取 .xlsx 檔
 
-r = requests.get('https://ws.ndc.gov.tw/Download.ashx?u=LzAwMS9hZG1pbmlzdHJhdG9yLzEwL3JlbGZpbGUvNTc4MS82MzkyL2VmMWQ4ZjliLTMxOGMtNDFmZC1hNzgzLWVjNGY5MTMwMjRmOC54bHN4&n=5paw6IGe56i%2f6ZmE5Lu25pW45YiXLnhsc3g%3d&icon=..xlsx')
+r = requests.get("https://ws.ndc.gov.tw/Download.ashx?u=LzAwMS9hZG1pbmlzdHJhdG9yLzEwL3JlbGZpbGUvNTc4MS82MzkyL2VmMWQ4ZjliLTMxOGMtNDFmZC1hNzgzLWVjNGY5MTMwMjRmOC54bHN4&n=5paw6IGe56i%2f6ZmE5Lu25pW45YiXLnhsc3g%3d&icon=..xlsx")
 df = pd.read_excel(BytesIO(r.content))
 
-df = df.set_index('DATE')
+df = df.set_index("DATE")
 
-df['2010-01-01':]['景氣對策信號綜合分數'].plot()
+df["2010-01-01":]["景氣對策信號綜合分數"].plot()
 
 show()
 """
@@ -1915,8 +1895,6 @@ params["response"] = "csv"
 
 r = requests.get(url, params=params)
 
-import datetime
-
 df = pd.read_csv(
     StringIO(r.text), engine="python", skiprows=1, skipfooter=4, thousands=","
 )
@@ -1974,7 +1952,7 @@ headers = {
 }
 search_year = "2022"
 search_stock = "2330"
-# url = 'https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date='+search_date+'&stockNo='+search_stock
+# url = "https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date="+search_date+"&stockNo="+search_stock
 
 # 從1到12月
 for m in range(1, 13):
@@ -2489,7 +2467,6 @@ with open(csvfile, "w+", newline="", encoding="utf8") as fp:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-import datetime
 import pandas_datareader as pdr
 
 start = datetime.datetime.now() - datetime.timedelta(days=60)
@@ -2497,7 +2474,7 @@ end = datetime.date.today()
 """ NG
 df = pdr.DataReader("2330.TW", "yahoo", start, end)
 print(df.shape)
-print(df.head())
+print("檢視前幾行\n", df.head())
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2533,7 +2510,7 @@ if r.status_code == requests.codes.ok:
     data = r.json() 
     df = pd.read_json(json.dumps(data["data"]))
     df.columns = data["fields"]
-    print(df.head())
+    print("檢視前幾行\n", df.head())
     df.to_csv("tmp_three_major3.csv", index=False)
     """
 else:
@@ -2580,7 +2557,7 @@ print(convert("USD", "JPY", 230))
 
 from google_currency import convert
 
-samount = 100  # @param {type:'integer'}
+samount = 100  # @param {type:"integer"}
 damount = convert("USD", "JPY", samount)
 retdict = json.loads(damount)
 print("{} 元美金 = 日幣 {} 元".format(samount, retdict["amount"]))
@@ -2702,7 +2679,7 @@ html_data = get_html_data1(url)
 soup = BeautifulSoup(html_data.text, "html.parser")
 print(soup.prettify())  # prettify()這個函數可以將DOM tree以比較美觀的方式印出。
 
-# print('多重條件選擇')
+# print("多重條件選擇")
 cells = soup.select("table tr td")  # 尋找talbe標籤裡面的tr標籤裡面的td標籤 三者都要符合的抓出來
 print(type(cells))
 print("符合條件的資料", len(cells), "筆")
@@ -2830,7 +2807,7 @@ df = df.iloc[:, 0:5]
 df.columns = ["幣別", "現金(買)", "現金(賣)", "即期(買)", "即期(賣)"]
 df["幣別"] = df["幣別"].apply(split_name)
 df.to_csv("tmp_xrt2.csv", index=False, encoding="big5")
-print(df.head())
+print("檢視前幾行\n", df.head())
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2960,7 +2937,7 @@ from pandas_datareader import data, wb
 def getWebData(name, 
                start = datetime.date(1970, 1, 1), 
                end = datetime.date.today(), 
-               data_source = 'yahoo', 
+               data_source = "yahoo", 
                retry_count=3, 
                pause=0.001):
     
@@ -2973,7 +2950,7 @@ def getWebData(name,
                         ) 
 
     df = df.to_frame()
-    df.index.names = ['Date', 'Name'] 
+    df.index.names = ["Date", "Name"] 
     
     return df
 
@@ -2984,9 +2961,9 @@ def fetchAndStoreStockData(stocks):
     df = getWebData(stocks)     
 
     # Write to files __________________________    
-    df.to_excel('Yahoo Finance{0}.xlsx'.format(''))
+    df.to_excel("Yahoo Finance{0}.xlsx".format(""))
 
-fetchAndStoreStockData(stocks = ['2356.TW', '1566.TWO'])
+fetchAndStoreStockData(stocks = ["2356.TW", "1566.TWO"])
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -3006,9 +2983,9 @@ url
 將資料儲存為 Excel 檔案
 須注意個欄位的格式，數字欄位的儲存格式應該為數字
 重排欄位順序為:
-'市場別', '股票代號', '股票名稱', '日期', '時間', 
-'成交', '買進', '賣出', '漲跌', '張數',
-'昨收', '開盤', '最高', '最低'
+"市場別", "股票代號", "股票名稱", "日期", "時間", 
+"成交",   "買進",     "賣出",     "漲跌", "張數",
+"昨收",   "開盤",     "最高",     "最低"
 
 匯集 Yahoo 股市 page 1~ 5 的資料 (pd.concat)
 依據股票代號的前兩碼，做 GroupBy 操作
@@ -3091,7 +3068,7 @@ def fixTable(marketType, table, theDate=datetime.date.today()):
     fixedTable["漲跌"] = fixedTable["漲跌"].map(lambda x: round(x, 2))
 
     # sort
-    #     fixedTable.sort_values(by = '股票代號', inplace = True)
+    #     fixedTable.sort_values(by = "股票代號", inplace = True)
 
     # indexing
     fixedTable.index = pd.Series(range(len(fixedTable)))
@@ -3165,30 +3142,110 @@ mdf.groupby(["類股_名稱"]).size().sort_index()
 mdf.groupby(["類股_名稱"])["成交"].mean().sort_index()
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 從台灣證券交易所 下載股價資料
+
+
+def crawl_data(date, symbol):
+    print("下載股價, 從台灣證券交易所")
+    url = (
+        "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=csv&date="
+        + date
+        + "&type=ALL"
+    )
+    print(url)
+    response = requests.get(url)
+
+    df = df.drop(columns=["Unnamed: 16"])
+    filter_df = df[df["證券代號"] == symbol]
+    filter_df.insert(0, "日期", date)
+    df_columns = filter_df.columns
+    return list(filter_df.iloc[0]), filter_df.columns
 
 
 print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
+print("df語法 與 畫圖 ST")
+print("------------------------------------------------------------")  # 60個
+
+# 做不等大的子圖 ST
+
+fig = plt.figure(num="matplotlib 02", figsize=(8, 8))
+
+grid = plt.GridSpec(12, 10, wspace=0.5, hspace=0.5)
+
+ax1 = fig.add_subplot(grid[0:8, 0:12])  # 設置K線圖的尺寸
+
+data = [1, 2, 3, 4, 5]
+ax1.plot(range(len(data)), data, color="red", lw=2, label="資料1")
+
+plt.title("做不等大的子圖")
+plt.ylabel("y縱軸標題")
+plt.legend(loc="best")
+ax1.set_xticks([])  # 日期標注在下圖中，故清空此處x軸刻度
+ax1.set_xticklabels([])  # 日期標注在下圖中，故清空此處x軸
+
+data_volume = [3, 2, 1, 4, 6]
+# 繪制成交量
+ax2 = fig.add_subplot(grid[8:10, 0:12])  # 設置成交量圖形尺寸
+# ax2.bar(data_volume, color = "r")                    # 繪制紅色柱狀圖
+# ax2.bar(data_volume, color = "g")                    # 繪制綠色柱狀圖
+plt.xticks(rotation=30)
+plt.xlabel("日期")
+
+# 修改橫軸日期標注
+date_list = [1, 2, 3, 4, 5]  # ohlc.index.tolist()           # 獲取日期列表
+xticks_len = round(len(date_list) / (len(ax2.get_xticks()) - 1))  # 獲取默認橫軸標注的間隔
+xticks_num = range(0, len(date_list), xticks_len)  # 生成橫軸標注位置列表
+xticks_str = list(map(lambda x: date_list[int(x)], xticks_num))  # 生成正在標注日期列表
+ax2.set_xticks(xticks_num)  # 設置橫軸標注位置
+ax2.set_xticklabels(xticks_str)  # 設置橫軸標注日期
+
+show()
+
+# 做不等大的子圖 SP
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 開始時間 為 60天前
+start = datetime.datetime.now() - datetime.timedelta(days=60)
+
+# 結束時間 為 現在
+end = datetime.date.today()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+fig, (ax1, ax2) = plt.subplots(2, 1, sharex=True, figsize=(12, 8), dpi=100)
+
+# ax1.set_title("開盤價、收盤價 ( " + df["date"][0] + " ~ " + df["date"][-1] + " )")
+ax1.set_title("開盤價、收盤價")
+# ax1.set_title("K 線圖")
+
+# 畫子圖(ax1)
+ax1.plot(day, openprice, "s-", color="r", label="開盤價")
+ax1.legend(loc="best")
+ax1.grid(True)
+
+# 畫子圖(ax2)
+ax2.plot(day, close, "o-", color="g", label="收盤價")
+ax2.legend(loc="best")
+ax2.set_xticks(range(0, len(day), 5))
+ax2.set_xticklabels(day[::5])
+ax2.grid(True)
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
+# 僅df語法
 
 # syntax sort_values
 price_df = price_df.sort_values("date")
@@ -3199,13 +3256,26 @@ price_df["adj_factor"] = 1.0
 # syntax
 # 添加必要的欄位
 sp500_data = sp500_data.reset_index()  # 重設索引，將日期移到普通欄位
-sp500_data["date"] = sp500_data["Date"]  # 添加 'date' 欄位
+sp500_data["date"] = sp500_data["Date"]  # 添加 "date" 欄位
 
-# 移除原本的 'Datetime' 欄位
+# 移除原本的 "Datetime" 欄位
 sp500_data = sp500_data.drop(columns=["Date"])
 
 # 將所有欄位名稱轉為小寫，以符合 FeatureEngineer 的預期格式
 sp500_data.columns = [col.lower() for col in sp500_data.columns]
+
+# 添加必要的欄位
+sp500_data = sp500_data.reset_index()  # 重設索引，將日期移到普通欄位
+sp500_data["date"] = sp500_data["Datetime"]  # 添加 "date" 欄位
+sp500_data["tic"] = "^GSPC"  # 添加 "tic" 欄位，這裡 "^GSPC" 是 S&P 500 的代號
+
+# 移除原本的 "Datetime" 欄位
+sp500_data = sp500_data.drop(columns=["Datetime"])
+
+# 將所有欄位名稱轉為小寫，以符合 FeatureEngineer 的預期格式
+sp500_data.columns = [col.lower() for col in sp500_data.columns]
+
+print("檢視前幾行\n", sp500_data.head())
 
 print("------------------------------")  # 30個
 
@@ -3218,7 +3288,6 @@ print("------------------------------")  # 30個
 print("轉換為月頻率")
 df_quote_new = df_quote.resample("ME").mean()
 print(df_quote_new)
-
 
 print("讀取月營收資料")
 df_monthly_sales = pd.read_csv("./data/stock_monthly_sales.csv")
@@ -3268,116 +3337,6 @@ df.rename({"單月營收": "sales"}, axis=1, inplace=True)  # df修改欄位名�
 
 print("------------------------------------------------------------")  # 60個
 
-# 添加必要的欄位
-sp500_data = sp500_data.reset_index()  # 重設索引，將日期移到普通欄位
-sp500_data["date"] = sp500_data["Datetime"]  # 添加 'date' 欄位
-sp500_data["tic"] = "^GSPC"  # 添加 'tic' 欄位，這裡 '^GSPC' 是 S&P 500 的代號
-
-# 移除原本的 'Datetime' 欄位
-sp500_data = sp500_data.drop(columns=["Datetime"])
-
-# 將所有欄位名稱轉為小寫，以符合 FeatureEngineer 的預期格式
-sp500_data.columns = [col.lower() for col in sp500_data.columns]
-
-# 顯示處理後的數據
-print("檢視前幾行\n", sp500_data.head())
-
-print("------------------------------------------------------------")  # 60個
-
-# 從台灣證券交易所 下載股價資料
-
-
-def crawl_data(date, symbol):
-    print("下載股價, 從台灣證券交易所")
-    url = (
-        "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=csv&date="
-        + date
-        + "&type=ALL"
-    )
-    print(url)
-    response = requests.get(url)
-
-    df = df.drop(columns=["Unnamed: 16"])
-    filter_df = df[df["證券代號"] == symbol]
-    filter_df.insert(0, "日期", date)
-    df_columns = filter_df.columns
-    return list(filter_df.iloc[0]), filter_df.columns
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-print("df語法 與 畫圖 ST")
-print("------------------------------------------------------------")  # 60個
-
-# 做不等大的子圖 ST
-
-fig = plt.figure(num="matplotlib 02", figsize=(8, 8))
-
-grid = plt.GridSpec(12, 10, wspace=0.5, hspace=0.5)
-
-ax1 = fig.add_subplot(grid[0:8, 0:12])  # 設置K線圖的尺寸
-
-data = [1, 2, 3, 4, 5]
-ax1.plot(range(len(data)), data, color="red", lw=2, label="資料1")
-
-plt.title("做不等大的子圖", fontsize=14)
-plt.ylabel("y縱軸標題", fontsize=14)
-plt.legend(loc="best")
-ax1.set_xticks([])  # 日期標注在下圖中，故清空此處x軸刻度
-ax1.set_xticklabels([])  # 日期標注在下圖中，故清空此處x軸
-
-data_volume = [3, 2, 1, 4, 6]
-# 繪制成交量
-ax2 = fig.add_subplot(grid[8:10, 0:12])  # 設置成交量圖形尺寸
-# ax2.bar(data_volume, color = 'r')                    # 繪制紅色柱狀圖
-# ax2.bar(data_volume, color = 'g')                    # 繪制綠色柱狀圖
-plt.xticks(rotation=30)
-plt.xlabel("日 期", fontsize=14)
-
-# 修改橫軸日期標注
-date_list = [1, 2, 3, 4, 5]  # ohlc.index.tolist()           # 獲取日期列表
-xticks_len = round(len(date_list) / (len(ax2.get_xticks()) - 1))  # 獲取默認橫軸標注的間隔
-xticks_num = range(0, len(date_list), xticks_len)  # 生成橫軸標注位置列表
-xticks_str = list(map(lambda x: date_list[int(x)], xticks_num))  # 生成正在標注日期列表
-ax2.set_xticks(xticks_num)  # 設置橫軸標注位置
-ax2.set_xticklabels(xticks_str)  # 設置橫軸標注日期
-
-show()
-
-# 做不等大的子圖 SP
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 開始時間 為 60天前
-start = datetime.datetime.now() - datetime.timedelta(days=60)
-
-# 結束時間 為 現在
-end = datetime.date.today()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-fig, (ax1, ax2) = plt.subplots(2, 1, sharex=True, figsize=(12, 8), dpi=100)
-
-# ax1.set_title("開盤價、收盤價 ( " + df["date"][0] + " ~ " + df["date"][-1] + " )")
-ax1.set_title("開盤價、收盤價")
-# ax1.set_title("K 線圖")
-
-# 畫子圖(ax1)
-ax1.plot(day, openprice, "s-", color="r", label="開盤價")
-ax1.legend(loc="best", fontsize=10)
-ax1.grid(True)
-
-# 畫子圖(ax2)
-ax2.plot(day, close, "o-", color="g", label="收盤價")
-ax2.legend(loc="best", fontsize=10)
-ax2.set_xticks(range(0, len(day), 5))
-ax2.set_xticklabels(day[::5])
-ax2.grid(True)
-
-show()
 
 print("------------------------------------------------------------")  # 60個
 print("df語法 與 畫圖 SP")
@@ -3386,5 +3345,3 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-plt.rcParams["font.sans-serif"] = "mingliu"  # 設定中文字型
