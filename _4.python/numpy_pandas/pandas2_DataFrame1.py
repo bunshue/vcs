@@ -3383,9 +3383,7 @@ print("------------------------------------------------------------")  # 60個
 
 # Let's create another example DataFrame:
 print("建立df")
-df = pd.DataFrame(
-    {"第1欄": ["a", "b", "c"], "第2欄": [[10, 40], [20, 50], [30, 60]]}
-)
+df = pd.DataFrame({"第1欄": ["a", "b", "c"], "第2欄": [[10, 40], [20, 50], [30, 60]]})
 print(df)
 
 df_new = df.第2欄.apply(pd.Series)

@@ -650,7 +650,7 @@ namespace vcs_DiskDirectoryFile1
             x_st += 40;
             y_st = 10;
             int W = 1240 + 180 + 8 - 160;
-            groupBox1.Size = new Size(W - 120, 106 + 50);
+            groupBox1.Size = new Size(W, 106 + 50);
             groupBox1.Location = new Point(x_st + dx * 3 - 100, y_st + dy * 0 - 14);
 
             int dd = 110;
@@ -664,7 +664,7 @@ namespace vcs_DiskDirectoryFile1
             listView_rename_dir.Location = new Point(x_st + dx * 2 + dd, y_st + dy * 1 + 24 + 50);
             listView_rename_file.Size = new Size(W, 270 - 50 + 200);
             listView_rename_file.Location = new Point(x_st + dx * 2 + dd, y_st + dy * 1 + 24 + 50);
-            pictureBox1.Location = new Point(x_st + dx * 2 + dd + W - 260, y_st + dy * 1 + 24 + 50);
+            pictureBox1.Location = new Point(x_st + dx * 2 + dd + W - 220, y_st + dy * 1 + 24 + 50);
 
             bt_clear2.Location = new Point(listView_dir.Location.X + listView_dir.Size.Width - bt_clear2.Size.Width, listView_dir.Location.Y + listView_dir.Size.Height - bt_clear2.Size.Height);
             bt_clear2.BringToFront();
@@ -704,7 +704,7 @@ namespace vcs_DiskDirectoryFile1
             listView_rename_dir.Location = new Point(x_st + dx * 0, y_st + dy * 1 + 24 + 50);
             listView_rename_file.Size = new Size(W, 270 - 50);
             listView_rename_file.Location = new Point(x_st + dx * 0, y_st + dy * 1 + 24 + 50);
-            pictureBox1.Location = new Point(x_st + dx * 0 + W - 260, y_st + dy * 1 + 24 + 50);
+            pictureBox1.Location = new Point(x_st + dx * 0 + W - 220, y_st + dy * 1 + 24 + 50);
 
             bt_clear2.Location = new Point(listView_dir.Location.X + listView_dir.Size.Width - bt_clear2.Size.Width, listView_dir.Location.Y + listView_dir.Size.Height - bt_clear2.Size.Height);
             bt_clear2.BringToFront();
@@ -807,7 +807,7 @@ namespace vcs_DiskDirectoryFile1
             label1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 10);
             comboBox_drive.Location = new Point(x_st + dx * 0 + 65, y_st + dy * 0 + 4);
             bt_show_disk_info.Location = new Point(x_st + dx * 0 + 65, y_st + dy * 0 + 50);
-            pictureBox1.Size = new Size(260, 320);
+            pictureBox1.Size = new Size(220, 270);
             pictureBox1.Visible = false;
             //那些小icon 第5頁 其他
             bt_test0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -7661,31 +7661,18 @@ namespace vcs_DiskDirectoryFile1
         }
 
 
-        private const int WIDTH = 100;
+        //private const int WIDTH = 100;
         void drawDiskSpace(long free, long total)
         {
+            int WIDTH = 100;
+            int x_st = 280;
+            int y_st = 8;
+
             removeDrawDiskSpace();
 
-            int x_st = 1920 - 175;
-            int y_st = 10;
+            Graphics g = tabPage4.CreateGraphics();
 
-            //產出panel, 畫硬碟使用空間占比圖
-            Panel pnl = new Panel();
-            pnl.Left = x_st;
-            pnl.Top = y_st;
-            pnl.Width = WIDTH;
-            pnl.Height = WIDTH;
-            pnl.Tag = "show_disk_space";
-            pnl.BackColor = Color.Pink;
-            this.Controls.Add(pnl);
-
-            Graphics g;
-            g = pnl.CreateGraphics();
-
-            // debug
-            //Pen p = new Pen(Color.Black, 1);
-            //p.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-            //g.DrawRectangle(p, WIDTH / 10, WIDTH / 10, WIDTH * 80 / 100, WIDTH * 80 / 100);
+            //g.DrawRectangle(Pens.Red, x_st, y_st, WIDTH, WIDTH);
 
             Brush b;
             long used = total - free;
@@ -7694,13 +7681,13 @@ namespace vcs_DiskDirectoryFile1
             //richTextBox1.Text += "used_angle = " + used_angle.ToString() + "\n";
 
             b = new SolidBrush(Color.LightGreen);
-            g.FillEllipse(b, WIDTH / 10, WIDTH / 10, WIDTH * 80 / 100, WIDTH * 80 / 100);
+            g.FillEllipse(b, x_st + WIDTH / 10, y_st + WIDTH / 10, WIDTH * 80 / 100, WIDTH * 80 / 100);
 
             b = new SolidBrush(Color.Red);
-            g.FillPie(b, WIDTH / 10, WIDTH / 10, WIDTH * 80 / 100, WIDTH * 80 / 100, -180, used_angle);
+            g.FillPie(b, x_st + WIDTH / 10, y_st + WIDTH / 10, WIDTH * 80 / 100, WIDTH * 80 / 100, -180, used_angle);
 
             b = new SolidBrush(Color.White);
-            g.FillEllipse(b, WIDTH / 4, WIDTH / 4, WIDTH / 2, WIDTH / 2);
+            g.FillEllipse(b, x_st + WIDTH / 4, y_st + WIDTH / 4, WIDTH / 2, WIDTH / 2);
         }
 
         //移除按鈕部分,  一趟並不會將所有panel上的button回傳, 所以加入while迴圈, 真是神奇驚訝 
@@ -7751,17 +7738,18 @@ namespace vcs_DiskDirectoryFile1
                 Brush brush3 = new SolidBrush(Color.RoyalBlue);  // 创建笔刷
                 Font font1 = new Font("Courier New", 16, FontStyle.Bold);  // 设置字体
                 Font font2 = new Font("標楷體", 9);  // 设置字体
-                g.DrawString("磁碟容量分析", font1, brush2, new Point(60, 50));  // 绘制文本
+                g.DrawString("磁碟容量分析", font1, brush2, new Point(60 - 30, 20));  // 绘制文本
                 float angle1 = Convert.ToSingle((360 * (Convert.ToSingle(fsize / 100000000000) / Convert.ToSingle(tsize / 100000000000))));  // 计算绿色饼形图的范围
                 float angle2 = Convert.ToSingle((360 * (Convert.ToSingle((tsize - fsize) / 100000000000) / Convert.ToSingle(tsize / 100000000000))));  // 计算蓝色饼形图的范围
                 // 调用Graphics对象的FillPie方法绘制饼形图
-                g.FillPie(brush2, 60, 80, 150, 150, 0, angle1);
-                g.FillPie(brush3, 60, 80, 150, 150, angle1, angle2);
-                g.DrawRectangle(pen1, 30, 235, 200, 50);
-                g.FillRectangle(brush2, 35, 245, 20, 10);
-                g.DrawString("磁碟剩餘容量:" + drive.TotalFreeSpace / 1000 + "KB", font2, brush2, 55, 245);
-                g.FillRectangle(brush3, 35, 265, 20, 10);
-                g.DrawString("磁碟已用容量:" + (drive.TotalSize - drive.TotalFreeSpace) / 1000 + "KB", font2, brush3, 55, 265);
+                g.FillPie(brush2, 30, 50, 150, 150, 0, angle1);
+                g.FillPie(brush3, 30, 50, 150, 150, angle1, angle2);
+
+                g.DrawRectangle(pen1, 10, 235 - 30, 200, 50);
+                g.FillRectangle(brush2, 15, 215, 20, 10);
+                g.DrawString("磁碟剩餘容量:" + drive.TotalFreeSpace / 1000 + "KB", font2, brush2, 40, 245 - 30);
+                g.FillRectangle(brush3, 15, 235, 20, 10);
+                g.DrawString("磁碟已用容量:" + (drive.TotalSize - drive.TotalFreeSpace) / 1000 + "KB", font2, brush3, 40, 265 - 30);
             }
             else
             {

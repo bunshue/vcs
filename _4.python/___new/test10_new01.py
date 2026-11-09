@@ -46,9 +46,9 @@ def show():
     plt.show()
 
 
-'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
 
 def printlocal():
     lang = "Java"
@@ -1670,7 +1670,7 @@ print(my_dict)  # 輸出: {"apple": 1, "banana": 2, "orange": 3}
 print("------------------------------------------------------------")  # 60個
 
 # 串列的 count 與 index
-print('用串列的count統計串列元素出現的次數')
+print("用串列的count統計串列元素出現的次數")
 
 word = [
     "holiday",
@@ -1691,7 +1691,7 @@ word = [
 ]
 print("holiday 出現的次數", word.count("holiday"))
 
-print('用串列的index找出串列元素出現的位置')
+print("用串列的index找出串列元素出現的位置")
 search_str = "yellow"
 print("單字 %s 第一次出現的索引值%d" % (search_str, word.index(search_str)))
 
@@ -1713,7 +1713,7 @@ print(zoo)
 
 print("------------------------------------------------------------")  # 60個
 
-print("集合")# 集合改成高中分組課程
+print("集合")  # 集合改成高中分組課程
 
 friendA = {"Andy", "Axel", "Michael", "May"}
 friendB = {"Peter", "Axel", "Andy", "Julia"}
@@ -4955,6 +4955,7 @@ print("列出內建函數abs的type類型: ", type(abs))
 
 print("------------------------------------------------------------")  # 60個
 
+
 def myRange(start=0, stop=100, step=1):
     n = start
     while n < stop:
@@ -4967,7 +4968,6 @@ for x in myRange(0, 5):
     print(x)
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 def myRange(start=0, stop=100, step=1):
@@ -5064,7 +5064,6 @@ for data in list_square:
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 
 def greeting(name):
@@ -6962,7 +6961,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -7483,7 +7481,7 @@ file1.write("\tprint('被import使用中')")
 file1.close()  # 關閉檔案
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 from os import path
 import re
 
@@ -8628,54 +8626,6 @@ del h
 print(Motorcycles.counts)
 
 print("------------------------------------------------------------")  # 60個
-
-import json
-
-url = "https://od.cdc.gov.tw/eic/Day_Confirmation_Age_County_Gender_19CoV.json"
-res = requests.get(url, verify=False)
-
-print(res)
-# 有兩種方法，下面兩行任選一種都可以
-# data = json.loads(res.text) #方法1
-data = res.json()  # 方法2
-print(data)
-
-# 因為有欄位名稱
-# 只要 df = pd.DataFrame(data) 即可
-df = pd.DataFrame(data)
-# 轉換'確定病例數'欄位內容為整數(以利後面加總)
-df["確定病例數"] = df["確定病例數"].astype(int)
-
-startdate = "2021/07/20"
-# startdate=input("請輸日期(yyyy/mm/dd)")
-# 只保留個案研判日、是否為境外移入、確定病例數 三個欄位
-df.drop(["確定病名", "縣市", "鄉鎮", "性別", "年齡層"], inplace=True, axis=1)
-# 設定過濾條件(累積)
-indexNames = df[df["個案研判日"] > startdate].index
-# 刪除所有大於指定日期的個案
-df.drop(indexNames, inplace=True)
-# 計算累積確診人數
-total = df.sum()["確定病例數"]
-print("累積確診人數:", total)
-# 設定過濾條件(今日)
-indexNames = df[df["個案研判日"] != startdate].index
-# 刪除所有不是指定日期的個案
-df.drop(indexNames, inplace=True)
-# 計算境外移入人數
-imported = df[df["是否為境外移入"] == "是"].sum()["確定病例數"]
-print("今日境外移入人數:", imported)
-# 計算本土人數
-domestic = df[df["是否為境外移入"] == "否"].sum()["確定病例數"]
-print("今日本土人數:", domestic)
-total = imported + domestic
-print("今日總人數:", total)
-# 若要查看有哪些欄位
-print((df.keys()))
-# 也可以透過df.info()查看
-df.info()
-# 也可以直接看前幾列
-df.head(3)
-
 print("------------------------------------------------------------")  # 60個
 
 url = "https://www.dcard.tw/f/stock/p/237123381"
@@ -8829,93 +8779,6 @@ for j in range(4):
     if j < 3:
         data = data + "\n*******熱門留言" + str(j + 1) + ":\n"
 print(data)
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-import csv
-
-# from io import StringIO
-
-county = "屏東縣"
-url = "https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1000&api_key=keykeykey&sort=ImportDate%20desc&format=csv"
-# 方法1:下載檔案後儲存，再開啟檔案讀出
-# res = requests.get(url)
-# open('data.csv','wb').write(res.content)
-# df=pd.read_csv('data.csv')
-# 方法2:直接讀取網站的檔案
-df = pd.read_csv(url)
-# 查看有那些欄位
-df.info()
-# 只保留SiteName、County、AQI、Status四個欄位
-df.drop(
-    [
-        "SiteId",
-        "Longitude",
-        "Latitude",
-        "PublishTime",
-        "SO2_AVG",
-        "Pollutant",
-        "SO2",
-        "CO",
-        "NO",
-        "CO_8hr",
-        "O3",
-        "O3_8hr",
-        "PM10",
-        "PM10_AVG",
-        "PM2.5",
-        "PM2.5_AVG",
-        "NO2",
-        "NOx",
-        "WindSpeed",
-        "WindDirec",
-    ],
-    inplace=True,
-    axis=1,
-)
-# 設定過濾條件
-indexNames = df[df["County"] != county].index
-# 刪除所有不是臺北市的偵測站
-df.drop(indexNames, inplace=True)
-# 重設索引值
-df = df.reset_index(drop=True)
-# 列出該縣市所有偵測站狀態
-print(county, "空氣品質狀態")
-for i in range(len(df)):
-    print(df.loc[i, "SiteName"], "(", df.loc[i, "Status"], ")")
-indexNames = df[df["Status"] == "良好"].index
-df.drop(indexNames, inplace=True)
-# 重設索引值
-df = df.reset_index(drop=True)
-# 列出該縣市所有為達良好之偵測站
-print()
-print(county, "空氣品質未達良好之偵測站")
-for i in range(len(df)):
-    print(df.loc[i, "SiteName"], "(", df.loc[i, "Status"], ")")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-import csv
-
-# from io import StringIO
-
-url = "https://od.cdc.gov.tw/eic/covid19/covid19_tw_stats.csv"
-# 方法1:下載檔案後儲存，再開啟檔案讀出
-# res = requests.get(url)
-# open('data.csv','wb').write(res.content)
-# df=pd.read_csv('data.csv')
-# 方法2:直接讀取網站的檔案
-df = pd.read_csv(url)
-# 查看有那些欄位
-df.info()
-# 只保留確診、死亡、送驗、排除四個欄位
-df.drop(["昨日確診", "昨日排除", "昨日送驗"], inplace=True, axis=1)
-print(df)
-totaldeath = df.loc[0, "死亡"]
-print("累積死亡人數", totaldeath)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -9850,45 +9713,6 @@ print(
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from io import BytesIO
-from lxml import etree
-import base64
-
-
-df = pd.DataFrame(
-    {
-        "id": ["1", "2", "3", "4", "5"],  # 構造數據
-        "math": [90, 89, 99, 78, 63],
-        "english": [89, 94, 80, 81, 94],
-    }
-)
-
-
-x = np.linspace(0, 8, 100)
-y = np.sin(x)
-plt.plot(x, y)
-
-# df資料存成html
-buffer = BytesIO()
-plt.savefig(buffer)
-plot_data = buffer.getvalue()
-
-imb = base64.b64encode(plot_data)  # 生成網頁內容
-ims = imb.decode()
-imd = "data:image/png;base64," + ims
-data_im = """<h1>Figure</h1>  """ + """<img src="%s">""" % imd
-data_des = """<h1>Describe</h1>""" + df.describe().T.to_html()
-root = "<title>Dataset</title>"
-root = root + data_des + data_im
-
-html = etree.HTML(root)
-tree = etree.ElementTree(html)
-tree.write("tmp_導出圖表.html")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
 print("建立20組資料")
 USERS = [(i, f"account_{i}", f"nickname_{i}") for i in range(20)]
 
@@ -10413,7 +10237,6 @@ print('從12點鐘方向開始繪製的派圖, 設定 startangle, 設定順時�
 plt.pie(df["weight"], labels=df["name"],
         autopct="%1.1f%%", startangle=90, counterclock=False) 
 show()
-
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -10655,64 +10478,6 @@ def pwd_input():
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-scores = {
-    "國文": {"王小明": 65, "李小美": 90, "陳大同": 81, "林小玉": 79},
-    "英文": {"王小明": 92, "李小美": 72, "陳大同": 85, "林小玉": 53},
-    "數學": {"王小明": 78, "李小美": 76, "陳大同": 91, "林小玉": 47},
-    "自然": {"王小明": 83, "李小美": 93, "陳大同": 89, "林小玉": 94},
-    "社會": {"王小明": 70, "李小美": 56, "陳大同": 94, "林小玉": 80},
-}
-df = pd.DataFrame(scores)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch15\create_data.py
-
-
-def c_item(x):
-    if x < 2:
-        return "筆電"
-    elif x < 7:
-        return "冰箱"
-    else:
-        return "電視"
-
-
-def s_item(x):
-    if x < 5:
-        return "張三安"
-    elif x < 7:
-        return "李四友"
-    else:
-        return "王五信"
-
-
-df = pd.DataFrame(
-    {
-        "業務員": np.random.randint(0, 10, size=100),
-        "商品": np.random.randint(0, 10, size=100),
-        "數量": np.random.randint(30, 300, size=100),
-        "價格": np.random.randint(100, 200, size=100),
-    }
-)
-df["商品"] = df["商品"].map(c_item)
-df["業務員"] = df["業務員"].map(s_item)
-df["價格"] = df["價格"].map(lambda x: x * 100)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch15\create_score.py
-
-tem = []
-for i in range(3):
-    tem.append(i + 1)
-df = pd.DataFrame(np.random.randint(40, 101, size=(3, 3)), columns=["英文", "社會", "公民"])
-# df = pd.DataFrame(np.random.randint(40,101,size=(3,4)), columns=['國文','數學','自然','社會'])
-df.insert(0, "座號", tem)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -10915,23 +10680,6 @@ y = random.randrange(-200, 200)
 length = random.randrange(75)
 
 print("------------------------------------------------------------")  # 60個
-
-print("原本28欄")
-df = pd.read_csv("donations.csv")
-cc = df.head()
-print(cc)
-print(df.shape)
-
-print("原本28欄, 開啟時 直接刪除2欄 直欄")
-df = pd.read_csv("donations.csv").drop(["ID", "TARGET_D"], axis=1)
-cc = df.head()
-print(cc)
-print(df.shape)
-
-cc = df.head()
-print(cc)
-print(df.shape)
-
 print("------------------------------------------------------------")  # 60個
 
 # 邏輯迴歸參數
@@ -11001,7 +10749,6 @@ print("取出2欄存成df, 修改欄名")
 df = df[["Date", "Close"]]
 df.columns = ["ds", "y"]
 print(df)
-
 
 plt.arrow(0, 0, U[0][0], U[1][0], color="r", linestyle="-")
 plt.arrow(0, 0, U[0][1], U[1][1], color="r", linestyle="--")
@@ -11401,7 +11148,7 @@ from woe import WoE # 从本地导入
 
 # 创建一个列表，用来保存所有的建模数据清洗的相关信息
 DATA_CLEAN = []
-model_data = pd.read_csv("donations2.csv").drop(["ID","TARGET_D"],axis=1)
+model_data = pd.read_csv("data/donations2.csv").drop(["ID","TARGET_D"],axis=1)
 model_data.head()
 model_data.dtypes
 
@@ -11412,7 +11159,7 @@ from woe import WoE # 从本地导入
 
 # 创建一个列表，用来保存所有的建模数据清洗的相关信息
 DATA_CLEAN = []
-model_data = pd.read_csv("donations2.csv").drop(["ID","TARGET_D"],axis=1)
+model_data = pd.read_csv("data/donations2.csv").drop(["ID","TARGET_D"],axis=1)
 model_data.head()
 model_data.dtypes
 
@@ -11422,7 +11169,6 @@ split
 
 ⑥stratify
 如果不是 “None”，数据将以分层方式分割，并以此作为类别标签
-
 
 df之ix廢棄, 改成loc或iloc
 before :
@@ -13885,7 +13631,7 @@ infile.close()  # Close the file
 
 print()
 
-# 6060
+print("------------------------------------------------------------")  # 60個
 N = 30  # 數據數量
 
 trains = np.random.randint(0, 100, size=(N, 2))
@@ -14116,7 +13862,6 @@ print(time.mktime(time.localtime()))  # 输出： 1638358856.0
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 week = [" 一", " 二", " 三", " 四", " 五", " 六", " 日"]
 dst = [" 無日光節約時間", " 有日光節約時間"]
 time1 = time.localtime()
@@ -14130,7 +13875,7 @@ print(mesg)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# ch05\spenttime.py
+# 量測經歷時間
 
 start = time.time()  # 開始執行時間
 print("開始時間：{}".format(start))
@@ -14220,17 +13965,14 @@ else:
     print("%s 檔案路徑不存在" % fName)
 
 """
-
 isdir  isfile
 
 if os.path.exists(pName):        # 檢查資料夾路徑是否存在
 if os.path.exists(fName):        # 檢查檔案路徑是否存在
 
-
 """
 
-
-6060
+print("------------------------------------------------------------")  # 60個
 
 fName = "score.txt"
 if os.path.isfile(fName):
@@ -14441,7 +14183,258 @@ new_folder = "AAAAA"
 full_path = os.path.join(cwd, new_folder)
 print("full_path :", full_path)
 
-
 # 刪除資料夾
 # import shutil
 # shutil.rmtree(png_path)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("字典轉df")
+scores = {
+    "國文": {"王小明": 65, "李小美": 90, "陳大同": 81, "林小玉": 79},
+    "英文": {"王小明": 92, "李小美": 72, "陳大同": 85, "林小玉": 53},
+    "數學": {"王小明": 78, "李小美": 76, "陳大同": 91, "林小玉": 47},
+    "自然": {"王小明": 83, "李小美": 93, "陳大同": 89, "林小玉": 94},
+    "社會": {"王小明": 70, "李小美": 56, "陳大同": 94, "林小玉": 80},
+}
+print(type(scores))
+df = pd.DataFrame(scores)
+print(type(df))
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+
+
+def c_item(x):
+    if x < 2:
+        return "筆電"
+    elif x < 7:
+        return "冰箱"
+    else:
+        return "電視"
+
+
+def s_item(x):
+    if x < 5:
+        return "張三安"
+    elif x < 7:
+        return "李四友"
+    else:
+        return "王五信"
+
+
+df = pd.DataFrame(
+    {
+        "業務員": np.random.randint(0, 10, size=100),
+        "商品": np.random.randint(0, 10, size=100),
+        "數量": np.random.randint(30, 300, size=100),
+        "價格": np.random.randint(100, 200, size=100),
+    }
+)
+df["商品"] = df["商品"].map(c_item)
+df["業務員"] = df["業務員"].map(s_item)
+df["價格"] = df["價格"].map(lambda x: x * 100)
+
+print("------------------------------------------------------------")  # 60個
+
+tem = []
+for i in range(3):
+    tem.append(i + 1)
+df = pd.DataFrame(np.random.randint(40, 101, size=(3, 3)), columns=["英文", "社會", "公民"])
+# df = pd.DataFrame(np.random.randint(40,101,size=(3,4)), columns=['國文','數學','自然','社會'])
+df.insert(0, "座號", tem)
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from io import BytesIO
+from lxml import etree
+import base64
+
+
+df = pd.DataFrame(
+    {
+        "id": ["1", "2", "3", "4", "5"],  # 構造數據
+        "math": [90, 89, 99, 78, 63],
+        "english": [89, 94, 80, 81, 94],
+    }
+)
+
+print(df)
+
+x = np.linspace(0, 8, 100)
+y = np.sin(x)
+plt.plot(x, y)
+
+# df資料存成html
+buffer = BytesIO()
+plt.savefig(buffer)
+plot_data = buffer.getvalue()
+
+imb = base64.b64encode(plot_data)  # 生成網頁內容
+ims = imb.decode()
+imd = "data:image/png;base64," + ims
+data_im = """<h1>Figure</h1>  """ + """<img src="%s">""" % imd
+data_des = """<h1>Describe</h1>""" + df.describe().T.to_html()
+root = "<title>Dataset</title>"
+root = root + data_des + data_im
+
+html = etree.HTML(root)
+tree = etree.ElementTree(html)
+tree.write("tmp_導出圖表.html")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+print("原本28欄")
+df = pd.read_csv("data/donations.csv")
+cc = df.head()
+print(cc)
+print(df.shape)
+
+print("原本28欄, 開啟時 直接刪除2欄 直欄")
+df = pd.read_csv("data/donations.csv").drop(["ID", "TARGET_D"], axis=1)
+cc = df.head()
+print(cc)
+print(df.shape)
+
+cc = df.head()
+print(cc)
+print(df.shape)
+
+print("------------------------------------------------------------")  # 60個
+
+import json
+
+# 轉換'確定病例數'欄位內容為整數(以利後面加總)
+df["確定病例數"] = df["確定病例數"].astype(int)
+
+startdate = "2021/07/20"
+
+# 只保留個案研判日、是否為境外移入、確定病例數 三個欄位
+df.drop(["確定病名", "縣市", "鄉鎮", "性別", "年齡層"], inplace=True, axis=1)
+# 設定過濾條件(累積)
+indexNames = df[df["個案研判日"] > startdate].index
+
+# 刪除所有大於指定日期的個案
+df.drop(indexNames, inplace=True)
+# 計算累積確診人數
+total = df.sum()["確定病例數"]
+print("累積確診人數:", total)
+# 設定過濾條件(今日)
+indexNames = df[df["個案研判日"] != startdate].index
+
+# 刪除所有不是指定日期的個案
+df.drop(indexNames, inplace=True)
+# 計算境外移入人數
+imported = df[df["是否為境外移入"] == "是"].sum()["確定病例數"]
+print("今日境外移入人數:", imported)
+# 計算本土人數
+domestic = df[df["是否為境外移入"] == "否"].sum()["確定病例數"]
+print("今日本土人數:", domestic)
+total = imported + domestic
+print("今日總人數:", total)
+
+# 若要查看有哪些欄位
+print((df.keys()))
+
+# 也可以透過df.info()查看
+print(df.info())
+
+# 也可以直接看前幾列
+print(df.head())
+
+print("------------------------------------------------------------")  # 60個
+
+import csv
+
+# from io import StringIO
+
+county = "屏東縣"
+url = "https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1000&api_key=keykeykey&sort=ImportDate%20desc&format=csv"
+# 方法1:下載檔案後儲存，再開啟檔案讀出
+# res = requests.get(url)
+# open('data.csv','wb').write(res.content)
+# df=pd.read_csv('data.csv')
+# 方法2:直接讀取網站的檔案
+df = pd.read_csv(url)
+# 查看有那些欄位
+df.info()
+# 只保留SiteName、County、AQI、Status四個欄位
+df.drop(
+    [
+        "SiteId",
+        "Longitude",
+        "Latitude",
+        "PublishTime",
+        "SO2_AVG",
+        "Pollutant",
+        "SO2",
+        "CO",
+        "NO",
+        "CO_8hr",
+        "O3",
+        "O3_8hr",
+        "PM10",
+        "PM10_AVG",
+        "PM2.5",
+        "PM2.5_AVG",
+        "NO2",
+        "NOx",
+        "WindSpeed",
+        "WindDirec",
+    ],
+    inplace=True,
+    axis=1,
+)
+
+# 設定過濾條件
+indexNames = df[df["County"] != county].index
+# 刪除所有不是臺北市的偵測站
+df.drop(indexNames, inplace=True)
+# 重設索引值
+df = df.reset_index(drop=True)
+# 列出該縣市所有偵測站狀態
+print(county, "空氣品質狀態")
+for i in range(len(df)):
+    print(df.loc[i, "SiteName"], "(", df.loc[i, "Status"], ")")
+indexNames = df[df["Status"] == "良好"].index
+df.drop(indexNames, inplace=True)
+# 重設索引值
+df = df.reset_index(drop=True)
+
+# 列出該縣市所有為達良好之偵測站
+print(county, "空氣品質未達良好之偵測站")
+for i in range(len(df)):
+    print(df.loc[i, "SiteName"], "(", df.loc[i, "Status"], ")")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+import csv
+
+# from io import StringIO
+
+url = "https://od.cdc.gov.tw/eic/covid19/covid19_tw_stats.csv"
+# 方法1:下載檔案後儲存，再開啟檔案讀出
+# res = requests.get(url)
+# open('data.csv','wb').write(res.content)
+# df=pd.read_csv('data.csv')
+# 方法2:直接讀取網站的檔案
+df = pd.read_csv(url)
+
+# 查看有那些欄位
+df.info()
+
+# 只保留確診、死亡、送驗、排除四個欄位
+df.drop(["昨日確診", "昨日排除", "昨日送驗"], inplace=True, axis=1)
+print(df)
+
+totaldeath = df.loc[0, "死亡"]
+print("累積死亡人數", totaldeath)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
