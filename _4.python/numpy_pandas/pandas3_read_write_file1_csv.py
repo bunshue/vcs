@@ -1,53 +1,36 @@
 """
+使用pandas讀寫檔案
+
+df寫讀csv檔
+df寫讀json檔
+df寫讀excel檔
+df寫讀pickle檔
+df寫讀html與其他檔
+
 pandas 的 資料匯入與匯出
 
 # df轉檔案, 匯出DataFrame
+# 寫入, 匯出DataFrame, df轉檔案
+
 df.to_csv(filename)
 df.to_json(filename)
 df.to_html(filename)
 df.to_excel(filename)
-df.to_sql(table, con = engine)
-df.to_sql(filename)
+df.to_sql(table, con = engine) df.to_sql(filename)
+df.to_pickle(filename)
 
 # 檔案轉df, 匯入DataFrame
-pd.read_csv(filename)
-pd.read_json(filename)
-pd.read_html(filename)
-pd.read_excel(filename)
-pdread_sql(query, engine)
-pd.read_sql(filename)
-
-# 指定分隔符號
-# df.to_csv("xxxx.csv", sep="\t")
-
-"""
-
-
-"""
-使用pandas讀寫檔案
-1111. csv檔
-2222. json
-3333. excel
-4444. html與其他
-
 # 讀取, 匯入DataFrame, 檔案轉df
 pd.read_csv(filename)
 pd.read_json(filename)
 pd.read_html(filename)
 pd.read_excel(filename)
-pd.read_sql(query, engine)
+pd.read_sql(query, engine)  pd.read_sql(filename)
 pd.read_pickle(filename)
 
-# 寫入, 匯出DataFrame, df轉檔案
-df.to_csv(filename)
-df.to_json(filename)
-df.to_html(filename)  #df轉html
-df.to_excel(filename)
-df.to_sql(table, con = engine)
-df.to_pickle(filename)
+# 指定分隔符號
+# df.to_csv("xxxx.csv", sep="\t")
 """
-
-
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -82,33 +65,32 @@ print("------------------------------------------------------------")  # 60個
 # df = pd.read_csv(filename, encoding="big5")  # 以pandas讀取檔案
 
 print("------------------------------------------------------------")  # 60個
-print("簡易讀取csv檔")
+print("df寫讀csv檔")
 print("------------------------------------------------------------")  # 60個
-
-# 資料匯入與匯出
-
-# df轉csv
-print("讀寫CSV文件")
 
 df = pd.DataFrame({"Name": ["Smith", "Lucy"], "Age": ["25", "20"], "Sex": ["男", "女"]})
 print(df)
 
-# df存檔
+# df匯出為csv
 df.to_csv("tmp_df1.csv", index=False, header=True, columns=["Name", "Sex", "Age"])
 df.to_csv("tmp_df2.csv", columns=["Name", "Sex", "Age"])
 df.to_csv("tmp_df3.csv", encoding="utf8")
 df.to_csv("tmp_df4.csv")
 
+"""
+df.to_csv("tmp_scores3.csv", encoding="utf-8-sig")
+df.to_csv("tmp_score2_6.csv", index=False)
+df.to_csv("tmp_sale.csv", index=False)
+"""
+
 df1 = pd.read_csv("tmp_df1.csv")
 print(df1)
 
-# 匯入csv檔?(DataFrame)
-# titanic = pd.read_csv("data/titanic.csv")
-
-# 將資料匯出為excel
+# df匯出為excel
 df.to_excel("tmp_excel1.xls")
 df.to_excel("tmp_excel2.xlsx", sheet_name="passengers", index=False)
 
+# df匯出為html
 df.to_html("tmp_html1.html")
 
 print("------------------------------------------------------------")  # 60個
@@ -196,8 +178,6 @@ print("pd讀取csv檔案 :", filename)
 df = pd.read_csv(filename)
 
 print(df.路線信息)
-print()
-
 print(df.路線信息.str.extract("(\d+)天\d+晚"))
 
 df["天數"] = df.路線信息.str.extract("(\d+)天\d+晚")
@@ -265,7 +245,7 @@ print("------------------------------------------------------------")  # 60個
 
 """ 看起來以下4種皆不好
 print("pd讀取csv檔案00 :", filename)
-print('跳過標題與索引')
+print("跳過標題與索引")
 df = pd.read_csv(filename, header=0, index_col=0)
 print(df)
 
@@ -285,7 +265,6 @@ print(df)
 filename = "tmp_ExpensesRecord.csv"
 df.to_csv(filename)
 print("df寫入csv檔案 :", filename)
-
 
 filename = "tmp_score2.csv"
 df.to_csv(filename, encoding="utf-8-sig")
@@ -308,7 +287,6 @@ print("df寫入csv檔案 :", filename)
 
 print("------------------------------------------------------------")  # 60個
 
-# 匯入CSV格式的檔案
 df = pd.read_csv("tmp_dists2.csv", encoding="utf8")
 print(df)
 
@@ -382,7 +360,7 @@ zero_zips = requests["Incident Zip"] == "00000"
 requests.loc[zero_zips, "Incident Zip"] = np.nan
 
 # fail
-# unique_zips = requests['Incident Zip'].unique()
+# unique_zips = requests["Incident Zip"].unique()
 # unique_zips.sort()
 # cc = unique_zips
 # print(cc)
@@ -462,8 +440,6 @@ print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
-# use_pivot_sum
-
 filename = "data\ordersList.csv"
 print("pd讀取csv檔案 :", filename)
 print("跳過標題")
@@ -486,8 +462,6 @@ print(
 
 print("------------------------------------------------------------")  # 60個
 
-print("df 轉 檔案")
-
 data = {
     "中文名": ["鼠", "牛", "虎", "兔"],
     "英文名": ["mouse", "ox", "tiger", "rabbit"],
@@ -498,7 +472,6 @@ df = pd.DataFrame(data, index=["1", "2", "3", "4"])
 
 df.to_csv("tmp_write_read_csv06.csv", index=False, encoding="big5")
 
-print("檔案 轉 df")
 df = pd.read_csv("tmp_write_read_csv06.csv", encoding="big5")
 print(df)
 
@@ -526,7 +499,7 @@ plt.scatter(
     linewidth=0,
     alpha=0.5,
 )
-# plt.axis(aspect='equal') NG
+# plt.axis(aspect="equal") NG
 plt.xlabel("Longitude")
 plt.ylabel("Longitude")
 plt.colorbar(label="log$_{10}$(population)")
@@ -541,7 +514,7 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 df = pd.DataFrame(np.random.randn(100, 4), columns=list("ABCD"))
-print("df轉csv")
+
 df.to_csv("tmp_df_data2.csv")
 
 df = pd.read_csv("tmp_df_data2.csv", index_col=0)
@@ -549,9 +522,7 @@ print(df.shape)
 print(df.head(5))
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
-# df 操作
 df = pd.read_csv("data/titanic123.csv")
 
 df.to_csv("tmp_titanic_all1.csv", index=True)
@@ -564,13 +535,6 @@ df2 = df[["row.names", "home.dest", "room", "ticket", "boat", "sex"]]
 df2.to_csv("tmp_titanic_part2.csv", index=False)
 
 print("------------------------------------------------------------")  # 60個
-
-
-"""
-df.to_csv("tmp_scores3.csv", encoding="utf-8-sig")
-df.to_csv("tmp_score2_6.csv", index=False)
-df.to_csv("tmp_sale.csv", index=False)
-"""
 
 
 print("------------------------------------------------------------")  # 60個
@@ -631,15 +595,9 @@ print("csv檔案轉df")
 df = pd.read_csv("data/student.csv")
 print(df)
 
-
 print("------------------------------------------------------------")  # 60個
+print("df寫讀json檔")
 print("------------------------------------------------------------")  # 60個
-
-print("---- 1111 csv --------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-print("---- 2222 json --------------------------------------------------------")  # 60個
 
 datas = [
     [65, 92, 78, 83, 70],
@@ -656,8 +614,6 @@ filename = "tmp_score444.json"
 df.to_json(filename, force_ascii=False)
 print("df寫入json檔案 :", filename)
 
-print("------------------------------")  # 30個
-
 print("pd讀取json檔案 :", filename)
 data = pd.read_json(filename, typ="series")
 print(data)
@@ -672,10 +628,81 @@ print(df2)
 
 print("------------------------------------------------------------")  # 60個
 
+df = pd.DataFrame({"Math": [90, 91, 92, 93, 94], "English": np.arange(80, 85, 1)})
+print(df[["Math", "English"]])
 
-print("---- 3333 excel --------------------------------------------------------")  # 60個
 
-print("讀寫Excel文件")
+"""
+df.to_json("tmp_datas11.json")
+
+df2 = pd.read_json("tmp_datas11.json")
+print(df2)
+
+for index, row in df.iterrows() :
+    print(index, row["蘋果"], row["香蕉"],
+          row["橘子"])
+"""
+print("------------------------------------------------------------")  # 60個
+
+
+
+data = {
+    "中文名": ["鼠", "牛", "虎", "兔"],
+    "英文名": ["mouse", "ox", "tiger", "rabbit"],
+    "體重": [3, 48, 33, 8],
+    "全名": ["米老鼠", "班尼牛", "跳跳虎", "彼得兔"],
+}
+df = pd.DataFrame(data, index=["1", "2", "3", "4"])
+
+df.to_json("tmp_write_read_csv06a.json")
+df.to_json("tmp_write_read_csv06b.json", force_ascii=False)
+
+print("檔案 轉 df")
+
+df = pd.read_json("tmp_write_read_json06a.json")
+print(df)
+
+df = pd.read_json("tmp_write_read_json06b.json")
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+讀取遠端 json檔
+df = pd.read_json("https://www.mohfw.gov.in/data/datanew.json")
+print(df)
+"""
+print("------------------------------------------------------------")  # 60個
+
+data = {
+    "種類": ["Bike", "Bus", "Car", "Truck"],
+    "數量": [3, 4, 6, 2],
+    "輪數": ["2", "4", "4", "6"],
+}
+df = pd.DataFrame(data, index=["A", "B", "C", "D"])
+
+filename = "tmp_vehicles1.json"
+df.to_json(filename)
+print("df寫入json檔案 :", filename)
+
+filename = "tmp_vehicles2.json"
+df.to_json(filename, force_ascii=False)
+print("df寫入json檔案 :", filename)
+
+filename = "tmp_vehicles1.json"
+print("pd讀取json檔案 :", filename)
+df2 = pd.read_json(filename)
+print(df2)
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("df寫讀excel檔")
+print("------------------------------------------------------------")  # 60個
 
 print("df轉excel")
 df = pd.DataFrame({"Name": ["Smith", "Lucy"], "Age": ["25", "20"], "Sex": ["男", "女"]})
@@ -749,13 +776,13 @@ print("------------------------------------------------------------")  # 60個
 # pip install xlsxwriter
 
 # print("pd讀取csv檔案 :", filename)
-# data = pd.read_csv('data/ExpensesRecord.csv')
+# data = pd.read_csv("data/ExpensesRecord.csv")
 
 filename = "data/ExpensesRecord.xls"
 print("pd讀取excel檔案 :", filename)
 df = pd.read_excel(filename, "sheet")
 
-# url = 'http://www.fdic.gov/bank/individual/failed/banklist.html'
+# url = "http://www.fdic.gov/bank/individual/failed/banklist.html"
 # print("pd讀取html檔案 :", url)
 # data = pd.read_html(url)
 
@@ -771,128 +798,31 @@ writer.save()
 print("df寫入excel檔案 :", filename)
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
-# pip install xlsxwriter
+writer = pd.ExcelWriter("tmp_test_xlsx.xlsx")
+print(type(writer))
 
-filename = "D:/_git/vcs/_4.python/numpy_pandas/data/ExpensesRecord.xls"
+# 建立數據一
+df1 = pd.DataFrame({"name": ["david", "tom", "chiou"], "id": [123, 456, 789]})
+df1.to_excel(writer, sheet_name="sheet1", index=False)
 
-df = pd.read_excel(filename, "sheet")
-# data = pd.read_html('http://www.fdic.gov/bank/individual/failed/banklist.html')
-print(df.head(5))
+# 建立數據二
+df2 = pd.DataFrame({"電話": ["0912-112233", "0987-556677"], "地址": ["台北市", "埔里鎮"]})
+df2.to_excel(writer, sheet_name="工作表二")
 
-from pandas import ExcelWriter
+# 儲存至 Excel文件中
+writer._save()
 
-filename = "tmp_write_read_csv14.xlsx"
-
-writer = ExcelWriter(filename, engine="xlsxwriter")
-df.to_excel(writer, sheet_name="sheet2")
-writer.save()
-
-"""
-writer=pd.ExcelWriter('tmp_AAPL1.xlsx')  #檔案名稱
-df.to_excel(writer,'AAPL')  #寫入資料
-writer.save()   #儲存
-
-from pandas import ExcelWriter
-
-writer = ExcelWriter('tmp_aapl2.xlsx', engine='xlsxwriter')
-df.to_excel(writer, sheet_name='sheet2')
-
-df.to_csv("tmp_aapl3.csv")
-"""
-print("------------------------------------------------------------")  # 60個
-
-print(
-    "---- 4444 html與其他 --------------------------------------------------------"
-)  # 60個
-
-""" NG
-print("使用pandas讀取網頁表單");
-    
-url = 'https://www.tiobe.com/tiobe-index/'
-print("pd讀取html檔案 :", url)
-
-print('跳過標題')
-tables = pd.read_html(url, header=0, keep_default_na=False)
-
-print("結果");
-print(tables[0])
-"""
-print("------------------------------------------------------------")  # 60個
-
-# 原物料商品行情
-url = "http://www.stockq.org/market/commodity.php"
-print("pd讀取html檔案 :", url)
-tables = pd.read_html(url)
-
-n = 1
-for table in tables:
-    print("第 " + str(n) + " 個表格：")
-    print(table.head())
-    print()
-    n += 1
-
-print("------------------------------------------------------------")  # 60個
-
-# 原物料商品行情
-url = "http://www.stockq.org/market/commodity.php"
-print("pd讀取html檔案 :", url)
-tables = pd.read_html(url)
-
-print(tables)
-
-"""
-table = tables[7]
-table = table.drop(table.index[[0,1]])
-table.columns = ["商品", "買價", "漲跌", "比例", "台北"]
-table.index = range(len(table.index))
-
-print(table)
-"""
-print("------------------------------------------------------------")  # 60個
-
-""" NG
-#由網址讀取資料檔
-
-url='https://www.taiwanlottery.com.tw/Lotto/Lotto649/history.aspx'
-print("pd讀取html檔案 :", url)
-df = pd.read_html(url)
-print(df)
-"""
-print("------------------------------------------------------------")  # 60個
-
-data = {
-    "種類": ["Bike", "Bus", "Car", "Truck"],
-    "數量": [3, 4, 6, 2],
-    "輪數": ["2", "4", "4", "6"],
-}
-df = pd.DataFrame(data, index=["A", "B", "C", "D"])
-
-filename = "tmp_vehicles1.json"
-df.to_json(filename)
-print("df寫入json檔案 :", filename)
-
-filename = "tmp_vehicles2.json"
-df.to_json(filename, force_ascii=False)
-print("df寫入json檔案 :", filename)
-
-filename = "tmp_vehicles1.json"
-print("pd讀取json檔案 :", filename)
-df2 = pd.read_json(filename)
-print(df2)
-
-print("------------------------------------------------------------")  # 60個
-"""
-url = 'http://www.fdic.gov/bank/individual/failed/banklist.html'
-
-df = pd.read_html(url)
-print(df[0].head(5) )
-
-url ='http://news.baidu.com/tech'
-
-#df = pd.read_html(url)
-#print(df[0].head(5) )
+""" tmp
+# 開始批次擷取
+with pd.ExcelWriter("tmp_711.xlsx") as writer:
+        print(county,"下載中…")
+        county = "AAAAAA"
+        df.to_excel(writer, sheet_name=county,index=False)
+        
+# 儲存至 Excel文件中
+writer._save()        
+print("下載完畢")
 """
 print("------------------------------------------------------------")  # 60個
 
@@ -924,7 +854,7 @@ print(df.index)
 print(df.info())
 print(df.describe())
 
-# 3 filter'
+# 3 filter
 print("--------------------")
 print(df["Date"] == "2018-01-05")
 print(df[df["Date"] == "2018-01-05"])
@@ -951,7 +881,7 @@ print(df.index)
 print(df.info())
 print(df.describe())
 
-# 3 filter'
+# 3 filter
 print("--------------------")
 print(df[df["Date"] == "2018-01-05"])
 print(df[(df["Date"] >= "2018-07-05") & (df["Date"] <= "2018-07-10")])
@@ -985,7 +915,7 @@ print(df.index)
 print(df.info())
 print(df.describe())
 
-# 3 filter'
+# 3 filter
 print("--------------------")
 print(df[df["Date"] == "2018-01-05"])
 print(df[(df["Date"] >= "2018-07-05") & (df["Date"] <= "2018-07-10")])
@@ -1031,7 +961,120 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-print("df 轉 pickle")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# pip install xlsxwriter
+
+filename = "D:/_git/vcs/_4.python/numpy_pandas/data/ExpensesRecord.xls"
+
+df = pd.read_excel(filename, "sheet")
+# data = pd.read_html("http://www.fdic.gov/bank/individual/failed/banklist.html")
+print(df.head(5))
+
+from pandas import ExcelWriter
+
+filename = "tmp_write_read_csv14.xlsx"
+
+writer = ExcelWriter(filename, engine="xlsxwriter")
+df.to_excel(writer, sheet_name="sheet2")
+writer.save()
+
+"""
+writer=pd.ExcelWriter("tmp_AAPL1.xlsx")  #檔案名稱
+df.to_excel(writer, "AAPL")  #寫入資料
+writer.save()   #儲存
+
+from pandas import ExcelWriter
+
+writer = ExcelWriter("tmp_aapl2.xlsx", engine="xlsxwriter")
+df.to_excel(writer, sheet_name="sheet2")
+
+df.to_csv("tmp_aapl3.csv")
+"""
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("df寫讀html與其他檔")
+print("------------------------------------------------------------")  # 60個
+
+""" NG
+print("使用pandas讀取網頁表單");
+    
+url = "https://www.tiobe.com/tiobe-index/"
+print("pd讀取html檔案 :", url)
+
+print("跳過標題")
+tables = pd.read_html(url, header=0, keep_default_na=False)
+
+print("結果");
+print(tables[0])
+"""
+print("------------------------------------------------------------")  # 60個
+
+# 原物料商品行情
+url = "http://www.stockq.org/market/commodity.php"
+print("pd讀取html檔案 :", url)
+tables = pd.read_html(url)
+
+n = 1
+for table in tables:
+    print("第 " + str(n) + " 個表格：")
+    print(table.head())
+    print()
+    n += 1
+
+print("------------------------------------------------------------")  # 60個
+
+# 原物料商品行情
+url = "http://www.stockq.org/market/commodity.php"
+print("pd讀取html檔案 :", url)
+tables = pd.read_html(url)
+
+print(tables)
+
+"""
+table = tables[7]
+table = table.drop(table.index[[0,1]])
+table.columns = ["商品", "買價", "漲跌", "比例", "台北"]
+table.index = range(len(table.index))
+
+print(table)
+"""
+print("------------------------------------------------------------")  # 60個
+
+""" NG
+#由網址讀取資料檔
+
+url="https://www.taiwanlottery.com.tw/Lotto/Lotto649/history.aspx"
+print("pd讀取html檔案 :", url)
+df = pd.read_html(url)
+print(df)
+"""
+print("------------------------------------------------------------")  # 60個
+
+
+"""
+url = "http://www.fdic.gov/bank/individual/failed/banklist.html"
+
+df = pd.read_html(url)
+print(df[0].head(5) )
+
+url ="http://news.baidu.com/tech"
+
+#df = pd.read_html(url)
+#print(df[0].head(5) )
+"""
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("df寫讀pickle檔")
+print("------------------------------------------------------------")  # 60個
 
 df = pd.DataFrame({"Name": ["Smith", "Lucy"], "Age": ["25", "20"], "Sex": ["男", "女"]})
 print(df.info())
@@ -1061,57 +1104,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-print("df 轉 檔案")
-
-data = {
-    "中文名": ["鼠", "牛", "虎", "兔"],
-    "英文名": ["mouse", "ox", "tiger", "rabbit"],
-    "體重": [3, 48, 33, 8],
-    "全名": ["米老鼠", "班尼牛", "跳跳虎", "彼得兔"],
-}
-df = pd.DataFrame(data, index=["1", "2", "3", "4"])
-
-df.to_json("tmp_write_read_csv06a.json")
-df.to_json("tmp_write_read_csv06b.json", force_ascii=False)
-
-print("檔案 轉 df")
-df = pd.read_json("tmp_write_read_json06a.json")
-print(df)
-df = pd.read_json("tmp_write_read_json06b.json")
-print(df)
-
-print("------------------------------------------------------------")  # 60個
-
-print("pd寫入excel")
-
-writer = pd.ExcelWriter("tmp_test1111.xlsx")
-print(type(writer))
-
-# 建立數據一
-df1 = pd.DataFrame({"name": ["david", "tom", "chiou"], "id": [123, 456, 789]})
-df1.to_excel(writer, sheet_name="sheet1", index=False)
-
-# 建立數據二
-df2 = pd.DataFrame({"電話": ["0912-112233", "0987-556677"], "地址": ["台北市", "埔里鎮"]})
-df2.to_excel(writer, sheet_name="工作表二")
-
-# 儲存至 Excel文件中
-writer._save()
-
-""" tmp
-# 開始批次擷取
-with pd.ExcelWriter('tmp_711.xlsx') as writer:
-        print(county,"下載中…")
-        county = "AAAAAA"
-        df.to_excel(writer, sheet_name=county,index=False)
-        
-# 儲存至 Excel文件中
-writer._save()        
-print("下載完畢")
-"""
-
-print("------------------------------------------------------------")  # 60個
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -1123,29 +1115,9 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-df = pd.DataFrame({"Math": [90, 91, 92, 93, 94], "English": np.arange(80, 85, 1)})
-print(df[["Math", "English"]])
-
-
-"""
-df.to_json("tmp_datas11.json")
-
-df2 = pd.read_json("tmp_datas11.json")
-print(df2)
-
-for index, row in df.iterrows() :
-    print(index, row["蘋果"], row["香蕉"],
-          row["橘子"])
-"""
-print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-"""
-讀取遠端 json檔
-df = pd.read_json('https://www.mohfw.gov.in/data/datanew.json')
-print(df)
-"""
+
+

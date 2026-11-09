@@ -14,18 +14,18 @@ arr1 = np.array([1, 2, 3, 4, 5])
 
 describe(統計資料)
 
-count：数量统计，此列共有多少有效值, 非空值的数量
-unipue：不同的值有多少个
-std：标准差
+count：數量統計，此列共有多少有效值, 非空值的數量
+unipue：不同的值有多少個
+std：標準差
 min：最小值
-25%：四分之一分位数, 第一四分位数（Q1）
-50%：二分之一分位数, 第二四分位数（中位数，Q2）
-75%：四分之三分位数, 第三四分位数（Q3）
+25%：四分之一分位數, 第一四分位數（Q1）
+50%：二分之一分位數, 第二四分位數（中位數，Q2）
+75%：四分之三分位數, 第三四分位數（Q3）
 max：最大值
 mean：平均值
 
 df的計算要純數值才可以計算 : mean() corr()
-字串(中英文)可使用 : max() min() sum()')
+字串(中英文)可使用 : max() min() sum()
 
 """
 
@@ -208,8 +208,11 @@ print("欄名columns")
 cc = df.columns
 print(cc)
 
-print("顯示資料的狀態與資訊")
-print(df.info())
+cc = df.info()  # 顯示資料集資訊
+print(cc)
+
+cc = df.info(memory_usage="deep")  # df使用記憶體大小
+print(cc)
 
 # 檢查屬性
 print(df.dtypes)
@@ -219,10 +222,6 @@ print(df.values)
 print(df.values[2])
 print(df.values[1][2])
 print(len(df))
-
-print("df使用記憶體大小")
-cc = df.info(memory_usage="deep")
-print(cc)
 
 print("df之大小")
 M, N = df.shape
@@ -408,7 +407,7 @@ print("------------------------------------------------------------")  # 60個
 # 刪除 df 欄位
 
 # 讀取[UFO報告]資料集至df
-# ufo = pd.read_csv("http://bit.ly/uforeports")
+# ufo = pd.read_csv("http://bit.ly/uforeports")  # 網址上是個 csv 檔, 同下
 filename = "data/ufo.csv"
 ufo = pd.read_csv(filename)
 
@@ -1017,7 +1016,7 @@ print("------------------------------")  # 30個
 print("merge合併時，處理相同欄位的衝突，以suffixes區分")
 
 datas1 = {"name": ["小黑", "小白", "小藍", "小綠"], "number": [23, 32, 31, 8]}
-datas2 = {"name": ["小黑", "小白", "小藍", "小綠"], "number": ["台灣", "日本", "荷蘭", "菲律賓"]}
+datas2 = {"name": ["小黑", "小白", "小藍", "小綠"], "number": ["臺灣", "日本", "荷蘭", "菲律賓"]}
 
 df1 = pd.DataFrame(datas1)
 df2 = pd.DataFrame(datas2)
@@ -1231,8 +1230,7 @@ print(titanic.describe())
 print(titanic.describe(include="all"))
 print(titanic.describe(include=["object"]))  # limit to one (or more) types
 
-# 顯示資料集資訊
-print(titanic.info())
+print(titanic.info())  # 顯示資料集資訊
 
 print("---檢查PassengerId欄位是否是唯一值---")
 print(np.unique(titanic["PassengerId"].values).size)
@@ -1435,20 +1433,20 @@ df = pd.DataFrame()
 df["date"] = pd.date_range(start="2017-12-30", end="2019-01-05", freq="d")  # 創建時間數據
 df["val"] = df["date"].apply(lambda x: x.weekday())  # 計算該日是星期幾
 df.set_index("date", inplace=True)  # 設置時間索引
-print(df.head(3))  # 顯示前三條
+print(df.head())
 
 # 時間段類型索引
 df_period = df.to_period(freq="M")  # 按月創建時間段
 print(type(df_period.index))  # 查看類型
 print(len(df_period))  # 查看記錄個數，與原記錄個數一致
-print(df_period.head(3))
+print(df_period.head())
 
 print(df_period.index[0].start_time, df_period.index[0].end_time)
 print(df_period.index[1].start_time, df_period.index[1].end_time)
 print(df.index.is_unique, df_period.index.is_unique)
 
 df_dt = df_period.to_timestamp()
-print(df_dt.head(3))
+print(df_dt.head())
 print(type(df_dt.index))
 
 print("------------------------------------------------------------")  # 60個
@@ -1774,13 +1772,13 @@ print("檢視前幾行\n", users.head())
 print("------------------------------------------------------------")  # 60個
 
 # 讀取[UFO報告]資料集至df
-# ufo = pd.read_table("http://bit.ly/uforeports", sep=",")
+# ufo = pd.read_table("http://bit.ly/uforeports", sep=",")  # 網址上是個 csv 檔, 同下
 filename = "data/ufo.csv"
 ufo = pd.read_csv(filename, sep=",")
 
 # read_csv is equivalent to read_table, except it assumes a comma separator
 # 讀取[UFO報告]資料集至df
-ufo = pd.read_csv("http://bit.ly/uforeports")
+ufo = pd.read_csv("http://bit.ly/uforeports")  # 網址上是個 csv 檔, 同下
 filename = "data/ufo.csv"
 ufo = pd.read_csv(filename)
 
@@ -1801,7 +1799,7 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 
 # 讀取[電影IMDb]資料集至df
-# movies = pd.read_csv("http://bit.ly/imdbratings")
+# movies = pd.read_csv("http://bit.ly/imdbratings")  # 網址上是個 csv 檔, 同下
 filename = "data/imdb_1000.csv"
 movies = pd.read_csv(filename)
 
@@ -1820,7 +1818,7 @@ print("------------------------------------------------------------")  # 60個
 print("rename pd 之 df")
 
 # 讀取[UFO報告]資料集至df
-# ufo = pd.read_csv("http://bit.ly/uforeports")
+# ufo = pd.read_csv("http://bit.ly/uforeports")  # 網址上是個 csv 檔, 同下
 filename = "data/ufo.csv"
 ufo = pd.read_csv(filename)
 
@@ -1853,7 +1851,7 @@ print(ufo.columns)
 
 # replace the column names during the file reading process by using the "names" parameter
 # 讀取[UFO報告]資料集至df
-# ufo = pd.read_csv("http://bit.ly/uforeports", header=0, names=ufo_cols)
+# ufo = pd.read_csv("http://bit.ly/uforeports", header=0, names=ufo_cols)  # 網址上是個 csv 檔, 同下
 filename = "data/ufo.csv"
 ufo = pd.read_csv(filename, header=0, names=ufo_cols)
 
@@ -1874,7 +1872,7 @@ print("------------------------------------------------------------")  # 60個
 # 排序 df
 
 # 讀取[電影IMDb]資料集至df
-# movies = pd.read_csv("http://bit.ly/imdbratings")
+# movies = pd.read_csv("http://bit.ly/imdbratings")  # 網址上是個 csv 檔, 同下
 filename = "data/imdb_1000.csv"
 movies = pd.read_csv(filename)
 
@@ -1912,7 +1910,7 @@ print("------------------------------------------------------------")  # 60個
 # 過濾資料
 
 # 讀取[電影IMDb]資料集至df
-# movies = pd.read_csv("http://bit.ly/imdbratings")
+# movies = pd.read_csv("http://bit.ly/imdbratings")  # 網址上是個 csv 檔, 同下
 filename = "data/imdb_1000.csv"
 movies = pd.read_csv(filename)
 
@@ -1968,7 +1966,7 @@ print("------------------------------------------------------------")  # 60個
 # 9. How do I apply multiple filter criteria to a pandas DataFrame? (video)
 
 # 讀取[電影IMDb]資料集至df
-# movies = pd.read_csv("http://bit.ly/imdbratings")
+# movies = pd.read_csv("http://bit.ly/imdbratings")  # 網址上是個 csv 檔, 同下
 filename = "data/imdb_1000.csv"
 movies = pd.read_csv(filename)
 
@@ -1991,17 +1989,17 @@ print(cc)
 # use the "|" operator to specify that a row can match any of the three criteria
 cc = movies[
     (movies.genre == "Crime") | (movies.genre == "Drama") | (movies.genre == "Action")
-].head(10)
+].head()
 print(cc)
 
 # or equivalently, use the "isin" method
-cc = movies[movies.genre.isin(["Crime", "Drama", "Action"])].head(10)
+cc = movies[movies.genre.isin(["Crime", "Drama", "Action"])].head()
 print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
 # 讀取[UFO報告]資料集至df
-# ufo = pd.read_csv("http://bit.ly/uforeports")
+# ufo = pd.read_csv("http://bit.ly/uforeports")  # 網址上是個 csv 檔, 同下
 filename = "data/ufo.csv"
 ufo = pd.read_csv(filename)
 
@@ -2012,7 +2010,7 @@ print(cc)
 
 # specify which columns to include by name
 # 讀取[UFO報告]資料集至df
-# ufo = pd.read_csv("http://bit.ly/uforeports", usecols=["City", "State"])
+# ufo = pd.read_csv("http://bit.ly/uforeports", usecols=["City", "State"])  # 網址上是個 csv 檔, 同下
 filename = "data/ufo.csv"
 ufo = pd.read_csv(filename, usecols=["City", "State"])
 
@@ -2020,7 +2018,7 @@ print(ufo)
 
 # or equivalently, specify columns by position
 # 讀取[UFO報告]資料集至df
-# ufo = pd.read_csv("http://bit.ly/uforeports", usecols=[0, 4])
+# ufo = pd.read_csv("http://bit.ly/uforeports", usecols=[0, 4])  # 網址上是個 csv 檔, 同下
 filename = "data/ufo.csv"
 ufo = pd.read_csv(filename, usecols=[0, 4])
 
@@ -2030,7 +2028,7 @@ print(cc)
 # 只讀一部份
 # specify how many rows to read
 # 讀取[UFO報告]資料集至df
-# ufo = pd.read_csv("http://bit.ly/uforeports", nrows=3)
+# ufo = pd.read_csv("http://bit.ly/uforeports", nrows=3)  # 網址上是個 csv 檔, 同下
 filename = "data/ufo.csv"
 ufo = pd.read_csv(filename, nrows=3)
 
@@ -2046,66 +2044,7 @@ for index, row in ufo.iterrows():
 
 # Question: How do I drop all non-numeric columns from a DataFrame?
 
-# 讀取[各國酒類消費量]資料集至df
-# drinks = pd.read_csv("http://bit.ly/drinksbycountry")
-filename = "data/drinks.csv"
-drinks = pd.read_csv(filename)
-
-cc = drinks.dtypes
-print(cc)
-
-# only include numeric columns in the DataFrame
-cc = drinks.select_dtypes(include=[np.number]).dtypes
-print(cc)
-
-# describe all of the numeric columns
-cc = drinks.describe()
-print(cc)
-
-# pass the string "all" to describe all columns
-cc = drinks.describe(include="all")
-print(cc)
-
-# pass a list of data types to only describe certain types
-cc = drinks.describe(include=["object", "float64"])
-print(cc)
-
-# pass a list even if you only want to describe a single data type
-cc = drinks.describe(include=["object"])
-print(cc)
-
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("使用 axis")
-
-# 讀取[各國酒類消費量]資料集至df
-# drinks = pd.read_csv("http://bit.ly/drinksbycountry")
-filename = "data/drinks.csv"
-drinks = pd.read_csv(filename)
-
-"""
-# calculate the mean of each numeric column
-#cc = drinks.mean()  NG
-#print(cc)
-
-# or equivalently, specify the axis explicitly
-drinks.mean(axis=0)
-
-# calculate the mean of each row
-print("檢視前幾行")
-cc = drinks.mean(axis=1).head()
-print(cc)
-
-# "index" is an alias for axis 0
-drinks.mean(axis="index")
-
-# "columns" is an alias for axis 1
-print("檢視前幾行")
-cc = drinks.mean(axis="columns").head()
-print(cc)
-"""
-
 print("------------------------------------------------------------")  # 60個
 
 # How do I use string methods in pandas? (video)
@@ -2143,28 +2082,7 @@ cc = orders.choice_description.str.replace("[\[\]]", "").head()
 print(cc)
 
 print("------------------------------------------------------------")  # 60個
-
-# 讀取[各國酒類消費量]資料集至df
-# drinks = pd.read_csv('http://bit.ly/drinksbycountry')
-filename = "data/drinks.csv"
-drinks = pd.read_csv(filename)
-
-# print("檢視前幾行\n", drinks.head())
-
-# examine the data type of each Series
-print("檢視資料型態")
-cc = drinks.dtypes
-print(cc)
-
-# change the data type of an existing Series
-drinks["beer_servings"] = drinks.beer_servings.astype(float)
-cc = drinks.dtypes
-print(cc)
-
-# alternatively, change the data type of a Series while reading in a file
-drinks = pd.read_csv("http://bit.ly/drinksbycountry", dtype={"beer_servings": float})
-cc = drinks.dtypes
-print(cc)
+print("------------------------------------------------------------")  # 60個
 
 # 讀取[Chipotle快餐數據]資料集至df
 orders = pd.read_table("http://bit.ly/chiporders")
@@ -2192,46 +2110,10 @@ cc = orders.item_name.str.contains("Chicken").astype(int).head()
 print(cc)
 
 print("------------------------------------------------------------")  # 60個
-
-# When should I use a "groupby" in pandas? (video)
-
-# 讀取[各國酒類消費量]資料集至df
-# drinks = pd.read_csv('http://bit.ly/drinksbycountry')
-filename = "data/drinks.csv"
-drinks = pd.read_csv(filename)
-
-print("檢視前幾行")
-cc = drinks.head()
-print(cc)
-
-"""
-# calculate the mean beer servings across the entire dataset
-drinks.beer_servings.mean()
-
-# calculate the mean beer servings just for countries in Africa
-drinks[drinks.continent=='Africa'].beer_servings.mean()
-
-# calculate the mean beer servings for each continent
-drinks.groupby('continent').beer_servings.mean()
-
-# other aggregation functions (such as 'max') can also be used with groupby
-drinks.groupby('continent').beer_servings.max()
-
-# multiple aggregation functions can be applied simultaneously
-drinks.groupby('continent').beer_servings.agg(['count', 'mean', 'min', 'max'])
-
-# specifying a column to which the aggregation function should be applied is not required
-drinks.groupby('continent').mean()
-
-# side-by-side bar plot of the DataFrame directly above
-drinks.groupby('continent').mean().plot(kind='bar')
-show()
-"""
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 讀取[電影IMDb]資料集至df
-# movies = pd.read_csv('http://bit.ly/imdbratings')
+# movies = pd.read_csv('http://bit.ly/imdbratings')  # 網址上是個 csv 檔, 同下
 filename = "data/imdb_1000.csv"
 movies = pd.read_csv(filename)
 
@@ -2531,6 +2413,130 @@ print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
+
+# 讀取[各國酒類消費量]資料集至df
+# drinks = pd.read_csv("http://bit.ly/drinksbycountry")
+filename = "data/drinks.csv"
+drinks = pd.read_csv(filename)
+
+cc = drinks.dtypes
+print(cc)
+
+# only include numeric columns in the DataFrame
+cc = drinks.select_dtypes(include=[np.number]).dtypes
+print(cc)
+
+# describe all of the numeric columns
+cc = drinks.describe()
+print(cc)
+
+# pass the string "all" to describe all columns
+cc = drinks.describe(include="all")
+print(cc)
+
+# pass a list of data types to only describe certain types
+cc = drinks.describe(include=["object", "float64"])
+print(cc)
+
+# pass a list even if you only want to describe a single data type
+cc = drinks.describe(include=["object"])
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+
+print("使用 axis")
+
+# 讀取[各國酒類消費量]資料集至df
+# drinks = pd.read_csv("http://bit.ly/drinksbycountry")
+filename = "data/drinks.csv"
+drinks = pd.read_csv(filename)
+
+"""
+# calculate the mean of each numeric column
+#cc = drinks.mean()  NG
+#print(cc)
+
+# or equivalently, specify the axis explicitly
+drinks.mean(axis=0)
+
+# calculate the mean of each row
+print("檢視前幾行")
+cc = drinks.mean(axis=1).head()
+print(cc)
+
+# "index" is an alias for axis 0
+drinks.mean(axis="index")
+
+# "columns" is an alias for axis 1
+print("檢視前幾行")
+cc = drinks.mean(axis="columns").head()
+print(cc)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+# When should I use a "groupby" in pandas? (video)
+
+# 讀取[各國酒類消費量]資料集至df
+# drinks = pd.read_csv('http://bit.ly/drinksbycountry')
+filename = "data/drinks.csv"
+drinks = pd.read_csv(filename)
+
+print("檢視前幾行")
+cc = drinks.head()
+print(cc)
+
+"""
+# calculate the mean beer servings across the entire dataset
+drinks.beer_servings.mean()
+
+# calculate the mean beer servings just for countries in Africa
+drinks[drinks.continent=='Africa'].beer_servings.mean()
+
+# calculate the mean beer servings for each continent
+drinks.groupby('continent').beer_servings.mean()
+
+# other aggregation functions (such as 'max') can also be used with groupby
+drinks.groupby('continent').beer_servings.max()
+
+# multiple aggregation functions can be applied simultaneously
+drinks.groupby('continent').beer_servings.agg(['count', 'mean', 'min', 'max'])
+
+# specifying a column to which the aggregation function should be applied is not required
+drinks.groupby('continent').mean()
+
+# side-by-side bar plot of the DataFrame directly above
+drinks.groupby('continent').mean().plot(kind='bar')
+show()
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 讀取[各國酒類消費量]資料集至df
+# drinks = pd.read_csv("http://bit.ly/drinksbycountry")
+filename = "data/drinks.csv"
+drinks = pd.read_csv(filename)
+
+# print("檢視前幾行\n", drinks.head())
+
+# examine the data type of each Series
+print("檢視資料型態")
+cc = drinks.dtypes
+print(cc)
+
+# change the data type of an existing Series
+drinks["beer_servings"] = drinks.beer_servings.astype(float)
+cc = drinks.dtypes
+print(cc)
+
+# alternatively, change the data type of a Series while reading in a file
+drinks = pd.read_csv("http://bit.ly/drinksbycountry", dtype={"beer_servings": float})
+cc = drinks.dtypes
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 # 選取df欄資料 列資料
 
 # 讀取[UFO報告]資料集至df
@@ -2538,9 +2544,7 @@ print("------------------------------------------------------------")  # 60個
 filename = "data/ufo.csv"
 ufo = pd.read_csv(filename)
 
-print("檢視前3行")
-cc = ufo.head(3)
-print(cc)
+print(ufo.head())
 
 # row 0, all columns
 ufo.loc[0, :]
@@ -2656,12 +2660,11 @@ print("檢視前幾行")
 cc = drinks.head()
 print(cc)
 
-# exact memory usage is unknown because object columns are references elsewhere
-cc = drinks.info()
+cc = drinks.info()  # 顯示資料集資訊
 print(cc)
 
 # force pandas to calculate the true memory usage
-cc = drinks.info(memory_usage="deep")
+cc = drinks.info(memory_usage="deep")  # df使用記憶體大小
 print(cc)
 
 # calculate the memory usage for each Series (in bytes)
@@ -3039,6 +3042,7 @@ print(cc)
 """
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # Load example datasets
 
@@ -3047,10 +3051,7 @@ movies = pd.read_csv("http://bit.ly/imdbratings")
 orders = pd.read_csv("http://bit.ly/chiporders", sep="\t")
 orders["item_price"] = orders.item_price.str.replace("$", "").astype("float")
 
-# 讀取[部分股市資料]資料集至df
-# stocks = pd.read_csv('http://bit.ly/smallstocks', parse_dates=['Date'])
-filename = "data/stocks.csv"
-stocks = pd.read_csv(filename, parse_dates=["Date"])
+print("------------------------------------------------------------")  # 60個
 
 # 讀取[Kaggle's Titanic competition]資料集至df
 # titanic = pd.read_csv('http://bit.ly/kaggletrain')
@@ -3063,10 +3064,8 @@ filename = "data/ufo.csv"
 ufo = pd.read_csv(filename, parse_dates=["Time"])
 
 print("------------------------------")  # 30個
-# 2. Create an example DataFrame
+
 print("建立df")
-df = pd.DataFrame({"col one": [100, 200], "col two": [300, 400]})
-print(df)
 
 cc = pd.DataFrame(np.random.rand(4, 8))
 print(cc)
@@ -3074,33 +3073,35 @@ print(cc)
 cc = pd.DataFrame(np.random.rand(4, 8), columns=list("abcdefgh"))
 print(cc)
 
-# 3. Rename columns
+# df修改欄位名稱
 
-# 承上 df
+df = pd.DataFrame({"第一欄": [100, 200], "第二欄": [300, 400]})
 print(df)
+print("------------------------------")  # 30個
 
-df = df.rename({"col one": "col_one", "col two": "col_two"}, axis="columns")  # 修改欄位名稱
+# 修改欄位名稱, 方法1
+df = df.rename({"第一欄": "第1欄", "第二欄": "第2欄"}, axis="columns")  # 修改欄位名稱
 print(df)
-
-cc = df.columns = ["col_one", "col_two"]  # 重新命名欄位
+print("------------------------------")  # 30個
+# 修改欄位名稱, 方法2
+cc = df.columns = ["CCC1", "CCC2"]  # 重新命名欄位
 print(cc)
-
-# replace
-
-cc = df.columns = df.columns.str.replace(" ", "_")
-print(cc)
-
 print(df)
-
+print("------------------------------")  # 30個
+# 修改欄位名稱, 方法3
+cc = df.columns = df.columns.str.replace("CCC", "DDD")
+print(cc)
+print(df)
+print("------------------------------")  # 30個
+# 修改欄位名稱, 方法4 加前後綴
 cc = df.add_prefix("X_")
 print(cc)
-
+print("------------------------------")  # 30個
 cc = df.add_suffix("_Y")
 print(cc)
+print("------------------------------")  # 30個
 
 # 4. Reverse row order
-
-# the drinks DataFrame:
 
 print("檢視前幾行")
 cc = drinks.head()
@@ -3147,21 +3148,21 @@ print(cc)
 print("建立df")
 df = pd.DataFrame(
     {
-        "col_one": ["1.1", "2.2", "3.3"],
-        "col_two": ["4.4", "5.5", "6.6"],
-        "col_three": ["7.7", "8.8", "-"],
+        "第1欄": ["1.1", "2.2", "3.3"],
+        "第2欄": ["4.4", "5.5", "6.6"],
+        "第3欄": ["7.7", "8.8", "-"],
     }
 )
 print(df)
 
-cc = df.astype({"col_one": "float", "col_two": "float"}).dtypes
+cc = df.astype({"第1欄": "float", "第2欄": "float"}).dtypes
 print(cc)
 
-cc = pd.to_numeric(df.col_three, errors="coerce")
+cc = pd.to_numeric(df.第3欄, errors="coerce")
 print(cc)
 
 VALUE = 0
-cc = pd.to_numeric(df.col_three, errors="coerce").fillna(value=VALUE)  # 將指定欄位內空資料填入指定數值
+cc = pd.to_numeric(df.第3欄, errors="coerce").fillna(value=VALUE)  # 將指定欄位內空資料填入指定數值
 print(cc)
 
 VALUE = 0
@@ -3170,31 +3171,35 @@ print(df)
 
 # 8. Reduce DataFrame size
 
-cc = drinks.info(memory_usage="deep")
+cc = drinks.info(memory_usage="deep")  # df使用記憶體大小
 print(cc)
 
 cols = ["beer_servings", "continent"]
 small_drinks = pd.read_csv("http://bit.ly/drinksbycountry", usecols=cols)
-small_drinks.info(memory_usage="deep")
+small_drinks.info(memory_usage="deep")  # df使用記憶體大小
 
 dtypes = {"continent": "category"}
 smaller_drinks = pd.read_csv(
     "http://bit.ly/drinksbycountry", usecols=cols, dtype=dtypes
 )
-smaller_drinks.info(memory_usage="deep")
+smaller_drinks.info(memory_usage="deep")  # df使用記憶體大小
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 9. Build a DataFrame from multiple files (row-wise)
 
+# 由多csv檔建立df
+
+# 檔案1
 cc = pd.read_csv("data/stocks1.csv")
 print(cc)
 
-# Here's the second day:
-
+# 檔案2
 cc = pd.read_csv("data/stocks2.csv")
 print(cc)
 
-# And here's the third day:
-
+# 檔案3
 cc = pd.read_csv("data/stocks3.csv")
 print(cc)
 
@@ -3217,7 +3222,7 @@ cc = pd.concat(
 )  # axis=0 : 垂直連接, axis=1 : 水平連接
 print(cc)
 
-print("------------------------------")  # 30個
+print("------------------------------------------------------------")  # 60個
 # 10. Build a DataFrame from multiple files (column-wise)
 
 print("檢視前幾行")
@@ -3247,7 +3252,8 @@ print("型態:", df.dtypes)
 print(df.index)
 #Index(['Alice', 'Bob', 'Charlie'], dtype='object')
 """
-print("------------------------------")  # 30個
+
+print("------------------------------------------------------------")  # 60個
 # 12. Split a DataFrame into two random subsets
 
 cc = len(movies)
@@ -3323,7 +3329,8 @@ print("檢視前幾行")
 cc = movies[movies.genre.isin(counts.nlargest(3).index)].head()
 print(cc)
 
-print("------------------------------")  # 30個
+print("------------------------------------------------------------")  # 60個
+
 # 15. Handle missing values
 
 # Let's look at a dataset of UFO sightings:
@@ -3371,17 +3378,17 @@ print(cc)
 df["city"] = df.location.str.split(", ", expand=True)[0]
 print(df)
 
-print("------------------------------")  # 30個
+print("------------------------------------------------------------")  # 60個
 # 17. Expand a Series of lists into a DataFrame
 
 # Let's create another example DataFrame:
 print("建立df")
 df = pd.DataFrame(
-    {"col_one": ["a", "b", "c"], "col_two": [[10, 40], [20, 50], [30, 60]]}
+    {"第1欄": ["a", "b", "c"], "第2欄": [[10, 40], [20, 50], [30, 60]]}
 )
 print(df)
 
-df_new = df.col_two.apply(pd.Series)
+df_new = df.第2欄.apply(pd.Series)
 print(df_new)
 
 cc = pd.concat([df, df_new], axis="columns")  # axis=0 : 垂直連接, axis=1 : 水平連接
@@ -3392,8 +3399,7 @@ print("------------------------------")  # 30個
 
 # Let's look at a DataFrame of orders from the Chipotle restaurant chain:
 
-print("檢視前10行")
-cc = orders.head(10)
+cc = orders.head()
 print(cc)
 
 cc = orders[orders.order_id == 1].item_price.sum()
@@ -3410,11 +3416,9 @@ print(cc)
 print("------------------------------")  # 30個
 # 19. Combine the output of an aggregation with a DataFrame
 
-print("檢視前10行")
-cc = orders.head(10)
+cc = orders.head()
 print(cc)
 
-print("檢視前幾行")
 cc = orders.groupby("order_id").item_price.sum().head()
 print(cc)
 
@@ -3431,13 +3435,13 @@ cc = len(total_price)
 print(cc)
 
 orders["total_price"] = total_price
-print("檢視前10行")
-cc = orders.head(10)
+
+cc = orders.head()
 print(cc)
 
 orders["percent_of_total"] = orders.item_price / orders.total_price
-print("檢視前10行")
-cc = orders.head(10)
+
+cc = orders.head()
 print(cc)
 
 print("------------------------------")  # 30個
@@ -3504,14 +3508,12 @@ print(cc)
 print("------------------------------")  # 30個
 # 23. Convert continuous data into categorical data
 
-print("檢視前10行")
-cc = titanic.Age.head(10)
+cc = titanic.Age.head()
 print(cc)
 
-print("檢視前10行")
 pd.cut(
     titanic.Age, bins=[0, 18, 25, 99], labels=["child", "young adult", "adult"]
-).head(10)
+).head()
 print(cc)
 
 print("------------------------------")  # 30個
@@ -3532,14 +3534,13 @@ print(cc)
 print("恢復預設顯示模式")
 pd.reset_option("display.float_format")
 
-print("------------------------------")  # 30個
-# 25. Style a DataFrame
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 讀取[部分股市資料]資料集至df
 # stocks = pd.read_csv('http://bit.ly/smallstocks', parse_dates=['Date'])
 filename = "data/stocks.csv"
 stocks = pd.read_csv(filename, parse_dates=["Date"])
-
 print(stocks)
 
 format_dict = {"Date": "{:%m/%d/%y}", "Close": "${:.2f}", "Volume": "{:,}"}
@@ -3565,15 +3566,10 @@ print(cc)
  .set_caption('Stock Prices from October 2016')
 )
 """
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 drinks = pd.read_csv("http://bit.ly/drinksbycountry")
-
-# 讀取[部分股市資料]資料集至df
-# stocks = pd.read_csv('http://bit.ly/smallstocks', parse_dates=['Date'])
-filename = "data/stocks.csv"
-stocks = pd.read_csv(filename, parse_dates=["Date"])
 
 # 讀取[Kaggle's Titanic competition]資料集至df
 # titanic = pd.read_csv('http://bit.ly/kaggletrain')
@@ -3593,7 +3589,6 @@ print(df)
 
 cc = df.a == df.b
 print(cc)
-
 
 cc = np.nan == np.nan
 print(cc)
@@ -3623,6 +3618,7 @@ pd.testing.assert_series_equal(df.d, df.e, check_names=False, check_exact=False)
 df_new = df.copy()
 pd.testing.assert_frame_equal(df, df_new)
 
+print("------------------------------")  # 30個
 # 3. Use NumPy without importing NumPy
 
 cc = pd.DataFrame(np.random.rand(2, 4))
@@ -3631,6 +3627,7 @@ print(cc)
 df.loc[0, "e"] = np.nan
 print(df)
 
+print("------------------------------")  # 30個
 # 4. Calculate memory usage
 
 # Here's a DataFrame of UFO sightings:
@@ -3638,19 +3635,15 @@ print(df)
 cc = ufo.head()
 print(cc)
 
-# You can calculate the memory used by the entire DataFrame:
-print("df使用記憶體大小")
-cc = ufo.info(memory_usage="deep")
+cc = ufo.info(memory_usage="deep")  # df使用記憶體大小
 print(cc)
 
-print()
 # You can also calculate memory used by each column (in bytes):
 
 cc = ufo.memory_usage(deep=True)
 print(cc)
 
-print()
-
+print("------------------------------")  # 30個
 # 5. Count the number of words in a column
 
 cc = ufo["Colors Reported"].value_counts()
@@ -3659,6 +3652,7 @@ print(cc)
 cc = (ufo["Colors Reported"].str.count(" ") + 1).value_counts()
 print(cc)
 
+print("------------------------------")  # 30個
 # 6. Convert one set of values to another
 
 cc = titanic.Sex.head()
@@ -3668,38 +3662,38 @@ titanic["Sex_num"] = titanic.Sex.map({"male": 0, "female": 1})
 cc = titanic.Sex_num.head()
 print(cc)
 
-cc = titanic.Embarked.head(10)
+cc = titanic.Embarked.head()
 print(cc)
 
 titanic["Embarked_num"] = titanic.Embarked.factorize()[0]
-cc = titanic.Embarked_num.head(10)
+cc = titanic.Embarked_num.head()
 print(cc)
 
 cc = titanic.Embarked.factorize()[1]
 print(cc)
 
-
-cc = titanic.SibSp.head(10)
+cc = titanic.SibSp.head()
 print(cc)
 
 titanic["SibSp_binary"] = (titanic.SibSp > 0).astype("int")
-cc = titanic.SibSp_binary.head(10)
+cc = titanic.SibSp_binary.head()
 print(cc)
 
-
+print("------------------------------")  # 30個
 # 7. Convert continuous data into categorical data (alternative)
 
 cc = pd.cut(
     titanic.Age, bins=[0, 18, 25, 99], labels=["child", "young adult", "adult"]
-).head(10)
+).head()
 print(cc)
 
-cca = pd.qcut(titanic.Age, q=3).head(10)
+cca = pd.qcut(titanic.Age, q=3).head()
 print(cc)
 
 cc = pd.qcut(titanic.Age, q=3).value_counts()
 print(cc)
 
+print("------------------------------")  # 30個
 # 8. Create a cross-tabulation
 
 cc = titanic.Sex.value_counts()
@@ -3717,6 +3711,7 @@ cc = titanic.pivot_table(
 )
 print(cc)
 
+print("------------------------------")  # 30個
 # 9. Create a datetime column from multiple columns
 
 df = pd.DataFrame(
@@ -3797,7 +3792,7 @@ print(pd)
 print("------------------------------")  # 30個
 # 15. Create an example DataFrame (alternative)
 
-cc = pd.DataFrame({"col one": [100, 200], "col two": [300, 400]})
+cc = pd.DataFrame({"第一欄": [100, 200], "第二欄": [300, 400]})
 print(cc)
 
 cc = pd.DataFrame(np.random.rand(4, 8), columns=list("abcdefgh"))
@@ -3866,7 +3861,6 @@ print(cc)
 stocks = stocks.set_index("Date")
 print(stocks)
 
-
 # Since the index above is not unique, this will result in an error:
 # stocks.reindex(reversed(stocks.index))
 
@@ -3911,6 +3905,7 @@ print(cc)
 df["first"], df["middle"], df["last"] = zip(*df.name.str.split(" "))
 print(df)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 stocks = pd.read_csv("data/stocks.csv")
@@ -4031,7 +4026,6 @@ print(fruits)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 df = make_data_frame_from_dict()  # 字典 轉 df
 print(df)
 
@@ -4040,7 +4034,6 @@ print("資料排序")
 # 把幾個欄位的資料抓出來
 df1 = df[["國文", "英文", "數學"]]
 print(df1)
-
 
 print("資料篩選")
 mask = df["姓名"].str.startswith("孫")
@@ -4741,7 +4734,6 @@ df.loc[列的範圍, 行的範圍]
 
 df.loc[2:3, "B":"C"]
 
-
 列或行只要一個
 df.loc[2, "B"]
 
@@ -5089,7 +5081,6 @@ data.tail()
 data.tail(8)
 data.shape
 data.describe()
-data.info()
 data.dtypes
 data.max()
 
@@ -5594,13 +5585,13 @@ data.dropna(axis=1)
 # 刪除含有缺失值大於一定數量的觀測值（列）
 data.dropna(thresh=2)  # 因為第二筆資料的 np.nan 數量大於 thresh=2，則會被刪除
 
-# 删除包含缺失值的整欄
+# 刪除包含缺失值的整欄
 data.dropna(axis=1, inplace=True)
 
 """
 ※ 直「行」，也稱「欄」、「column」，axis = 1
 ※ 橫「列」，也稱「row」，axis = 0
-※ 大陸與台灣的「行」跟「列」的講法相反，總之直的是「column」，橫的是「row」
+※ 大陸與臺灣的「行」跟「列」的講法相反，總之直的是「column」，橫的是「row」
 """
 
 # 基礎填充缺失值
@@ -7538,7 +7529,8 @@ print(df.國文.mean())
 print("標準差")
 print(df.國文.std())
 
-# print('相關係數 :', df.corr())
+print("相關係數, df要純數值才可以計算相關係數")
+# print("相關係數 :", df.corr())
 
 # 只算兩科間的相關係數當然也可以。
 print("計算兩科的相關係數")
@@ -7598,8 +7590,8 @@ print(df)
 print("------------------------------------------------------------")  # 60個
 
 print("用 Groupby 看美國哪裡最容易看到 UFO")
-filename = "http://bit.ly/uforeports"
-print("pd讀取http csv檔案 :", filename)
+# filename = "http://bit.ly/uforeports"  # 網址上是個 csv 檔, 同下
+filename = "data/ufo.csv"
 df = pd.read_csv(filename)
 print(df)
 
@@ -7630,19 +7622,15 @@ print("清除NA\n", df1)
 
 df2 = df.dropna(how="any")
 print(df2)
-print()
 
 df3 = df.dropna(subset=["B", "C"])
 print(df3)
-print()
 
 df4 = df.fillna(value=1)
 print(df4)
-print()
 
 df["B"] = df["B"].fillna(df["B"].mean())
 print(df)
-print()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -7653,22 +7641,18 @@ print(df)
 print(df.duplicated())  # 檢查df內是否有重複資料, 整列都重複的
 
 print(df.duplicated("B"))
-print()
 
 print(".drop_duplicates 去除重複資料")
 df1 = df.drop_duplicates()
 print(df1)
-print()
 
 print(".drop_duplicates 去除重複資料")
 df2 = df.drop_duplicates("B")
 print(df2)
-print()
 
 print(".drop_duplicates 去除重複資料")
 df3 = df.drop_duplicates("B", keep=False)
 print(df3)
-print()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -7705,18 +7689,18 @@ dists = {
         302070,
     ],
     "city": [
-        "台北市",
+        "臺北市",
         "新北市",
         "桃園市",
-        "台中市",
-        "台南市",
+        "臺中市",
+        "臺南市",
         "高雄市",
-        "台北市",
+        "臺北市",
         "新北市",
         "桃園市",
         "高雄市",
         "高雄市",
-        "台北市",
+        "臺北市",
         "新北市",
     ],
 }
@@ -7862,8 +7846,8 @@ print(cc)
 
 print("------------------------------")  # 30個
 
-print(df[df["city"].isin(["台北市", "高雄市"])])
-cc = df[df["city"].isin(["台北市", "高雄市"])]
+print(df[df["city"].isin(["臺北市", "高雄市"])])
+cc = df[df["city"].isin(["臺北市", "高雄市"])]
 print(cc)
 
 print("------------------------------")  # 30個
@@ -7874,8 +7858,8 @@ print(cc)
 
 print("------------------------------")  # 30個
 
-print(df[df["city"].str.startswith("台")])
-cc = df[df["city"].str.startswith("台")]
+print(df[df["city"].str.startswith("臺")])
+cc = df[df["city"].str.startswith("臺")]
 print(cc)
 
 print("------------------------------")  # 30個
@@ -7919,7 +7903,8 @@ print("------------------------------")  # 30個
 
 s = ["新莊區", 416640, "新北市"]
 df.loc[ordinals[1]] = s
-print(df.head(3))
+
+print(df.head())
 
 print("------------------------------")  # 30個
 
@@ -7936,7 +7921,8 @@ print(df.loc[ordinals[0], "population"])
 df.loc[ordinals[0], "population"] = None
 print(df.iloc[1, 1])
 df.iloc[1, 1] = None
-print(df.head(3))
+
+print(df.head())
 
 print("------------------------------")  # 30個
 
@@ -7962,7 +7948,7 @@ print(data)
 print("------------------------------")  # 30個
 
 # 新增記錄
-df.loc["third-1"] = ["士林區", 288340, "台北市"]
+df.loc["third-1"] = ["士林區", 288340, "臺北市"]
 print(df.tail(3))
 
 print("------------------------------")  # 30個
@@ -8120,7 +8106,7 @@ print(df3)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """
-print('資料結構訊息', df.info())
+print('資料結構訊息', df.info())  # 顯示資料集資訊
 print('資料shape :', df.shape)
 print('資料內容\n', df)
 print('資料head\n', df.head())
@@ -8161,30 +8147,30 @@ print(df['2018-12-31':].head()) # 篩選2018-12-31及之後的數據
 
 # 重採樣
 tmp = df.resample('w').sum() # 使用疊加方式按周重採樣
-print(tmp.head(3))
+print(tmp.head())
 
 tmp = df.resample('M').ohlc() # 使用用ohlc方式按月降採樣
-print(tmp.head(3))
+print(tmp.head())
 
 tmp = df.resample('M').sum().to_period('M') # 按月降採樣，同時將時間變爲時間段
-print(tmp.head(3))
+print(tmp.head())
 
 df1 = pd.DataFrame({'val':[8,7,6]})
 df1.index = pd.to_datetime(['2019-03-01','2019-03-15','2019-03-31']) # 僅含三條數據
 df2 = df1.resample('D').interpolate() # 用插值方式升採樣
 print(len(df2))
-print(df2.head(3))
+print(df2.head())
 
 df3 = df1.asfreq('D')
-print(df3.head(3))
+print(df3.head())
 
 # 偏移
 df['prev'] = df['val'].shift() # 取前一條數據的val值作爲當前記錄中prev字段的值
-print(df.head(3))
+print(df.head())
 
 # 計算滑動窗口
 df['sw'] = df['val'].rolling(window=3).mean() # 計算窗口中數據的均值  # 移動平均 連同過去3點平均
-print(df.head(3))
+print(df.head())
 
 df['emw_3'] = df['val'].ewm(span=3).mean()
 df['emw_7'] = df['val'].ewm(span=7).mean()
@@ -8242,7 +8228,7 @@ df1 = df1.reset_index(["sitename"])  # 恢復原本設置
 # 處理NaN資料
 df.dropna()  # 刪除NaN的資料
 df = df.dropna()  # 將刪除後的資料存到變數
-df.dropna(axis=1)  # 删除所有包含空值的列
+df.dropna(axis=1)  # 刪除所有包含空值的列
 df = df.fillna(0)  # 把NaN資料替換成0
 df["A"].fillna(value=df["A"].mean())  # 把NaN值改成該屬性的所有平均值
 
@@ -8302,11 +8288,11 @@ df2 = pd.read_csv("data/pivot_table_titanic2.csv")
 df2.head()
 
 dft = pd.merge(df1, df2, on="row.names")
-dft.info()
+dft.info()  # 顯示資料集資訊
 
 dft["age"].fillna(value=dft["age"].mean(), inplace=True)
 dft["embarked"].fillna(method="ffill", inplace=True)
-dft.info()
+dft.info()  # 顯示資料集資訊
 
 df3 = pd.pivot_table(dft, index=["sex"], values=["survived"], margins=True)
 df3
@@ -8402,18 +8388,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -8429,13 +8403,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------")  # 30個
 
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 """
 cc = pd.merge(df1, df2, how="left", indicator=True).query("_merge == 'left_only'")
@@ -8478,7 +8445,6 @@ data.drop(["Colorado", "Ohio"])
 
 # axis = 1，可以刪除columns
 data.drop(["two", "four"], axis=1)
-
 
 # 刪除資料
 df.drop(labels=["SO2", "CO"], axis="columns")  # 刪除SO2和CO這兩個欄位
