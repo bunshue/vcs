@@ -66,7 +66,7 @@ stock_id2 = "2317"  # 2317鴻海
 stock_id3 = "6869"  # 6869雲豹能源
 
 import twstock
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("使用 FinMind ST")
 print("------------------------------------------------------------")  # 60個
@@ -704,7 +704,7 @@ plt.plot(df["MA60"], label="半年線", color="c")
 plt.title("股價 5 日, 20 日和 60日移動平均線")
 plt.xlabel("日期")
 plt.ylabel("價格")
-plt.legend()
+plt.legend(loc="best")
 plt.grid(True)
 
 show()
@@ -1349,6 +1349,8 @@ show()
 print("取得資料數")
 print(slist)
 
+# 3030
+
 # 將資料寫出到csv檔
 # 比較看看
 filename = (
@@ -1365,14 +1367,11 @@ plt.title("2019年資料")
 plt.title()
 show()
 
-print("------------------------------------------------------------")  # 60個
+# 3030
 
 print("讀取csv檔, 並畫出")
 
 filename = "D:/_git/vcs/_1.data/______test_files1/__RW/_csv/stock_data_2019_2330.csv"
-filename = (
-    "D:/_git/vcs/_1.data/______test_files1/__RW/_csv/stock_data_2019_2330bbbb.csv"
-)
 
 with open(filename, "r", newline="") as f:
     datas = csv.reader(f)
@@ -1387,7 +1386,7 @@ with open(filename, "r", newline="") as f:
 
     # print(len(datas))
     print(len(listx), len(listy))
-    plt.figure(figsize=(16, 6))  # 圖像大小[英吋]
+    plt.figure(figsize=(16, 6))
     plt.plot(listx, listy)
     plt.yticks(range(10, 200, 10))
     plt.title("2019年資料")
@@ -1447,6 +1446,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+# 轉換 123/04/05 => 2034-04-05
 def convert_tw_date_to_ad(tw_date):
     # 分割日期為年、月、日
     year, month, day = map(int, tw_date.split("/"))
@@ -1472,6 +1472,7 @@ with open(filename) as csvfile:  # 開啟csv檔案
             # 將日期轉換為西元年格式
             # 第0欄 日期
             converted_date = convert_tw_date_to_ad(line[0])
+            print(line[0], converted_date)
             # 使用 strptime 解析轉換後的日期字串
             parseDate = datetime.datetime.strptime(converted_date, "%Y-%m-%d")
             currentDate = parseDate.strftime("%Y-%m-%d")  # 轉換後日期
@@ -1489,14 +1490,14 @@ with open(filename) as csvfile:  # 開啟csv檔案
             closePrices.append(closePrice)  # 儲存收盤價
             mydates.append(currentDate)  # 儲存日期
 
-fig = plt.figure(figsize=(12, 8))  # 設定繪圖區大小
-plt.plot(mydates, highPrices, "-*", label="最高價")  # 繪製最高價
-plt.plot(mydates, lowPrices, "-o", label="最低價")  # 繪製最低價
-plt.plot(mydates, closePrices, "-^", label="收盤價")  # 繪製收盤價
-plt.legend()
+fig = plt.figure(figsize=(12, 8))
+plt.plot(mydates, highPrices, "-*", label="最高價")
+plt.plot(mydates, lowPrices, "-o", label="最低價")
+plt.plot(mydates, closePrices, "-^", label="收盤價")
 fig.autofmt_xdate()  # 日期旋轉
-plt.title("2023年10月安勤公司日線圖")
 plt.ylabel("價格")
+plt.legend(loc="best")
+plt.title("2023年10月安勤公司日線圖")
 
 show()
 
@@ -1528,7 +1529,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("使用 twse ST")
 print("------------------------------------------------------------")  # 60個
-
+'''
 print("讀取上市公司基本資料")
 
 # r = requests.get("http://dts.twse.com.tw/opendata/t187ap03_L.csv")  # 網址上是個 csv 檔, 同下
@@ -1540,10 +1541,16 @@ df = pd.read_csv(filename, index_col=False)
 
 # df.drop(df.index[len(df.index) - 1], inplace=True)
 
+print('df的形狀')
+print(df.shape)
+
+print('全部df')
 print(df)
 print("---------------")  # 15個
+print('df的公司代號')
 print(df["公司代號"])
 print("---------------")  # 15個
+print('df的公司代號==2330')
 print(df[df["公司代號"] == 2330])
 
 print("------------------------------")  # 30個

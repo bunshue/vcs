@@ -5495,12 +5495,12 @@ namespace vcs_DiskDirectoryFile1
             //先過濾掉一些字
             string[] remove_word = new string[] { "taxv.xyz_", "[javdb.com]", "[MILFY]", "027_3xplanet_", "[Thz.la]"
                 , "9288.pro@", "027_3xplanet_", "hhd800.com@", "489155.com@", "javkok.com@", "489155.com@", "big2048.com@", "[bbs.yzkof.com]"
-                , "jav20s8.com@", "@江南@", "jnty60.app-", "toyouiv.com_", "QQQQ", "(Kirihara Erika)"
+                , "jav20s8.com@", "@江南@", "jnty60.app-", "toyouiv.com_", "21bt.net-", "(Kirihara Erika)"
                 , "[javdb.com]", "Abigaile Johnson ", "Heydoug", "dccdom.com@", "DLLAF"
                 , "bbs2048.org@", "Abigaile Johnson ", "Heydoug", "avmans.com"
-                , "4k688.com@", "QQQQ", "第一會所新片@SIS001@", "[garea chinan]"
-                , "QQQQ", "[44x.me]", "bbsxv.xyz", "@蜂鳥@fengniao151.vip", "18x78.com_"
-                , "taxv.xyz", "jav20s8.com@", "QQQQ", "QQQQ", "deeper.21"
+                , "4k688.com@", "335599.xyz", "第一會所新片@SIS001@", "[garea chinan]"
+                , "gc2048.com@", "[44x.me]", "bbsxv.xyz", "@蜂鳥@fengniao151.vip", "18x78.com_"
+                , "taxv.xyz", "jav20s8.com@", "kfa55.com@", "QQQQ", "deeper.21"
                 , "【雪光梦想】", "4k2.com@", "QQQQ", "104DANDAN"
                 , "[88q.me]", "jav4you.", "private", "52JAV.COM", "crv2000.com"
                 , "javidol.com", "Prestige", "[thzu.cc]", "wowg.", "18x78.com_"
@@ -5807,12 +5807,12 @@ namespace vcs_DiskDirectoryFile1
 
         Dictionary<string, string> name_dict = new Dictionary<string, string>()
         {
-        { "1111", "星宮一花" }, { "3333", "三上悠亜" }, { "4444", "四四四四" }, { "9999", "九条みちる" },
-        { "5555", "五日市芽依" }, { "7777", "七ツ森りり" }, { "sssss1", "三上悠亞" }, { "1010", "四四四四" },
+        { "1111a", "神波多一花" }, { "1111b", "星宮一花" }, { "1111", "XXXXX" }, { "3333", "三上悠亜" }, { "4444", "四四四四" }, { "9999", "九条みちる" },
+        { "5555", "五日市芽依" }, { "7777", "七ツ森りり" }, { "sssss1", "三上悠亞" }, { "1010", "十束" },
         { "8888", "八掛うみ" }, 
         { "maria", "愛音まりあ" }, { "julia", "Julia" }, { "mion", "園田美櫻" },
         { "fuua", "楓ふうあ" }, { "yama", "山岸あや花" }, { "kiho", "金松季歩" },
-        { "hsyr", "広瀬ゆり" }, { "yui", "波多野結衣" }, { "akari", "明里つむぎ" },
+        { "hsyr", "XXXXX" }, { "yui", "波多野結衣" }, { "akari", "明里つむぎ" },
         { "jessica", "希崎ジェシカ" }, { "mori", "森日向子" }, { "mino", "美乃すずめ" },
         { "3ne", "三澄寧々" }, { "remu", "涼森れむ" },
         { "asami", "小川あさ美" }, { "miu", "白峰ミウ" }, { "karen", "楓カレン" }, { "iori", "古川いおり" },
@@ -5822,10 +5822,12 @@ namespace vcs_DiskDirectoryFile1
         { "ran", "XXXX" },//松野蘭 （まつのらん / Matsuno Ran）+松野蘭/藤井蘭々/藤かんな/...
 
         //常字包含短字, 長字在前//若有包含字串的，多字的放前面即可
-        { "misaki", "岬ななみ" }, { "maki", "北条麻妃" }, { "taki", "瀧本雫葉" }, { "aki", "佐佐木" },
+        //前長後短
+
+        { "misaki", "岬ななみ" }, { "maki", "北条麻妃" }, { "taki", "瀧本雫葉" },  { "akiho", "吉沢明歩" }, { "aki", "佐佐木" },
         { "sayaka", "友田彩也香" }, { "ayaka", "武藤あやか" },
         { "fsmai", "藤咲まい" }, { "mai", "神菜美まい" }, { "sma", "鈴村あいり" },
-        { "kanna", "今井栞菜" }, { "anna", "杏奈" },
+        { "kanna1", "今井栞菜" }, { "kanna2", "美咲かんな" }, { "kanna3", "藤かんな" }, { "kanna", "XXXXX" }, { "anna", "杏奈" },
         //相同字
         { "春明潤", "春明潤" }, { "東希美", "東希美" }, { "有賀みなほ", "有賀みなほ" }, { "上原瑞穗", "上原瑞穗" },
         { "遠野夏生", "遠野夏生" }, { "南波明花", "南波明花" }, { "京香栞", "京香栞" },
@@ -5839,11 +5841,11 @@ namespace vcs_DiskDirectoryFile1
         { "ria", "愛才りあ" }, { "nma", "新村あかり" },
         { "jgj", "神宮寺ナオ" }, { "kotone", "雨宮琴音" },
         { "nami", "沖宮那美" }, { "ayami", "池田あやみ" },
-        { "arina", "新ありな" }, { "rin", "東凛" }, 
+        { "arina", "新ありな" }, { "rin", "東凛" }, { "rinne", "XXXXX" }, 
         { "riho", "藤森里穂" }, { "yume", "西宮ゆめ" }, 
         { "mha", "水端あさみ" }, { "rei", "神木麗" },
-        { "sayuri", "葉山さゆり" }, { "yuri", "紗々原ゆり" },
-        { "mary", "橘メアリー" }, { "non", "野々浦暖" },
+        { "sayuri", "葉山さゆり" }, { "yuri1", "紗々原ゆり" }, { "yuri2", "広瀬ゆり" }, { "yuri", "XXXXX" }, 
+        { "mary", "橘メアリー" }, { "nonnoka", "XXXXX" }, { "non", "野々浦暖" },
         { "iaoi", "一乃あおい" }, { "taoi", "葵つかさ" },
         { "suzu", "本庄鈴" }, { "miho", "通野未帆" },
         { "rio", "朝日りお" },
@@ -5851,7 +5853,7 @@ namespace vcs_DiskDirectoryFile1
         { "smr", "水川スミレ" }, { "mihi", "三比菜々美" },
         { "hayashi", "林ゆな" },
         { "naho", "XXXX" }, { "CCCC", "DDDD" },
-        { "yuko1", "小野夕子" }, { "yuko2", "白木優子" },
+        { "yuko1", "小野夕子" }, { "yuko2", "白木優子" }, { "yuko", "XXXXX" }, { "yuuko", "XXXXX" },
         { "alice", "XXXX" }, { "saki", "奥田咲" },
         { "moe", "天使もえ" }, { "gggg", "優優檔" },
         //{ "AAAA", "XXXX" }, { "CCCC", "DDDD" },
