@@ -65,8 +65,45 @@ stock_id1 = "2330"  # 2330台積電
 stock_id2 = "2317"  # 2317鴻海
 stock_id3 = "6869"  # 6869雲豹能源
 
+
+def get_csv_file_from_website(url):
+    print("將網頁上的檔案存成本地檔案 csv / jpg / png / htm")
+    headers = {"User-Agent": "Mozilla/5.0"}
+    response = requests.get(url, headers=headers)
+    response = requests.get(url)  # 使用 GET 對檔案連結發出請求
+    # response.encoding = "big5"
+    response.raise_for_status()
+    print(response.status_code)
+    print(response.headers.get("Content-Type"))
+    content_type = response.headers.get("Content-Type", "")
+    if "html" in content_type.lower():
+        print("警告：下載到的是 HTML 網頁，不是資料檔")
+        print(response.text[:500])
+    elif "json" in content_type.lower():
+        print("取出路徑中的檔案名稱 :", os.path.basename(url))
+        if ".json" in os.path.basename(url):
+            filename = "tmp_" + os.path.basename(url)
+        else:
+            filename = "tmp_json_file.json"
+        with open(filename, "wb") as f:
+            f.write(response.content)  # 將response.content二進位內容寫入檔案
+        print("存檔檔案 :", filename)
+    elif "csv" in content_type.lower():
+        print("取出路徑中的檔案名稱 :", os.path.basename(url))
+        if ".csv" in os.path.basename(url):
+            filename = "tmp_" + os.path.basename(url)
+        else:
+            filename = "tmp_csv_file.csv"
+        with open(filename, "wb") as f:
+            f.write(response.content)  # 將response.content二進位內容寫入檔案
+        print("存檔檔案 :", filename)
+
+
+url = "https://dts.twse.com.tw/opendata/t187ap03_L.csv"
+# get_csv_file_from_website(url)
+
 import twstock
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("使用 FinMind ST")
 print("------------------------------------------------------------")  # 60個
@@ -121,7 +158,7 @@ parameter = {
     "dataset": "TaiwanStockTradingDate",
 }
 resp = requests.get(url, headers=headers, params=parameter)
-data = resp.json()
+data = resp.json()  # 把JSON字串解析成Python物件 ~~ data = json.loads(resp.text)
 data = pd.DataFrame(data["data"])
 print(data)
 """
@@ -1529,10 +1566,10 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("使用 twse ST")
 print("------------------------------------------------------------")  # 60個
-'''
+
 print("讀取上市公司基本資料")
 
-# r = requests.get("http://dts.twse.com.tw/opendata/t187ap03_L.csv")  # 網址上是個 csv 檔, 同下
+# r = requests.get("https://dts.twse.com.tw/opendata/t187ap03_L.csv")  # 網址上是個 csv 檔, 同下
 # r.encoding = "big5"
 filename = "data/t187ap03_L.csv"
 
@@ -1541,23 +1578,23 @@ df = pd.read_csv(filename, index_col=False)
 
 # df.drop(df.index[len(df.index) - 1], inplace=True)
 
-print('df的形狀')
+print("df的形狀")
 print(df.shape)
 
-print('全部df')
+print("全部df")
 print(df)
 print("---------------")  # 15個
-print('df的公司代號')
+print("df的公司代號")
 print(df["公司代號"])
 print("---------------")  # 15個
-print('df的公司代號==2330')
+print("df的公司代號==2330")
 print(df[df["公司代號"] == 2330])
 
 print("------------------------------")  # 30個
 
 print("讀取上櫃公司基本資料")
 
-# r = requests.get("http://dts.twse.com.tw/opendata/t187ap03_O.csv")  # 網址上是個 csv 檔, 同下
+# r = requests.get("https://dts.twse.com.tw/opendata/t187ap03_O.csv")  # 網址上是個 csv 檔, 同下
 # r.encoding = "big5"
 filename = "data/t187ap03_O.csv"
 
@@ -1572,7 +1609,7 @@ print("------------------------------")  # 30個
 
 print("讀取興櫃公司基本資料")
 
-# r = requests.get("http://dts.twse.com.tw/opendata/t187ap03_R.csv")  # 網址上是個 csv 檔, 同下
+# r = requests.get("https://dts.twse.com.tw/opendata/t187ap03_R.csv")  # 網址上是個 csv 檔, 同下
 # r.encoding = "big5"
 
 # df = pd.read_csv(StringIO(r.text), index_col=False, skiprows=1)
@@ -1729,29 +1766,6 @@ df = pd.read_csv(StringIO(r.text))
 print(df.set_index("月別"))
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-""" NG 無檔案
-print("證券商分公司基本資料")
-
-# 讀取證券商分公司基本資料
-
-r = requests.get("http://www.twse.com.tw/brokerService/branchList.csv")  # 網址上是個 csv 檔, 同下
-r.encoding = "big5"
-df = pd.read_csv(StringIO(r.text), index_col=False, skiprows=1)
-print(df)
-"""
-print("------------------------------------------------------------")  # 60個
-
-""" NG 無檔案
-print("讀取證券商總公司基本資料")
-
-r = requests.get("http://www.twse.com.tw/brokerService/brokerList.csv?lang=zh")
-r.encoding = "big5"
-df = pd.read_csv(StringIO(r.text), index_col=False, skiprows=1)
-print(df)
-"""
-
 print("------------------------------------------------------------")  # 60個
 
 """ NG 資料抓不下來
@@ -2074,7 +2088,7 @@ def get_web_content(search_stock, current_date):
     if resp.status_code != 200:
         return None
     else:
-        return resp.json()
+        return resp.json()  # 把JSON字串解析成Python物件 ~~ data = json.loads(resp.text)
 
 
 def get_data(search_stock, current_date):
@@ -2154,7 +2168,7 @@ def get_realtime_quote(stockNo, ex="tse"):
     r = req.get(STOCKINFO_URL.format(stock_id=stock_id, time=int(time.time()) * 1000))
 
     try:
-        return r.json()
+        return r.json()  # 把JSON字串解析成Python物件 ~~ data = json.loads(r.text)
     except json.decoder.JSONDecodeError:
         return {"rtmessage": "json decode error", "rtcode": "5000"}
 
@@ -2488,11 +2502,8 @@ print("------------------------------------------------------------")  # 60個
 
 date = "20200820"
 url = "https://www.twse.com.tw/fund/T86?response=json&date={}&selectType=ALL"
-r = requests.get(url.format(date))
-content = r.content
-csv_file = open("tmp_three_major1.json", "wb")
-csv_file.write(content)
-csv_file.close()
+uu = url.format(date)
+get_csv_file_from_website(uu)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2500,49 +2511,61 @@ print("------------------------------------------------------------")  # 60個
 date = "20200820"
 url = "https://www.twse.com.tw/fund/T86?response=csv&date={}&selectType=ALL"
 r = requests.get(url.format(date))
-content = r.content
-csv_file = open("tmp_three_major2.csv", "wb")
-csv_file.write(content)
-csv_file.close()
+uu = url.format(date)
+get_csv_file_from_website(uu)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-date = "20200820"
+date = "20261103"
 url = "https://www.twse.com.tw/fund/T86?response=json&date={}&selectType=ALL"
-r = requests.get(url.format(date))
+uu = url.format(date)
+print(uu)
+
+r = requests.get(uu)  # 使用 GET 對檔案連結發出請求
+# r.encoding = "big5"
+r.raise_for_status()
+
+print(r.status_code)
+print(r.headers.get("Content-Type"))
+
 if r.status_code == requests.codes.ok:
-    print("成功爬取資料...")
-    """# NG
-    data = r.json() 
-    df = pd.read_json(json.dumps(data["data"]))
+    content_type = r.headers.get("Content-Type", "")
+    print(content_type)
+    print(r.text[:300])
+    data = r.json()  # 把JSON字串解析成Python物件 ~~ data = json.loads(r.text)
+    df = pd.DataFrame(data["data"])
+    """ same 多了翻轉, 現在不需要
+    json_str = json.dumps(data["data"])
+    df = pd.read_json(StringIO(json_str))  # pd讀取JSON字串的寫法
+    """
     df.columns = data["fields"]
     print("檢視前幾行\n", df.head())
     df.to_csv("tmp_three_major3.csv", index=False)
-    """
+
 else:
     print("HTTP請求錯誤...")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-dates = [20250601, 20250701, 20250801]
-stockNo = 2330
-
 url = (
     "https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=html&date={}&stockNo={}"
 )
+date = 20250601
+stock_no = 2330  # 2330台積電
 
-for date in dates:
-    print(date, stockNo)
-    # data = pd.read_html(r.text)[0]  # old
-    data = pd.read_html(url.format(date, stockNo))[0]
+print(date, stock_no)
+print(url.format(date, stock_no))
 
-    data.columns = data.columns.droplevel(0)
+# data = pd.read_html(r.text)[0]  # old
+data = pd.read_html(url.format(date, stock_no))[0]
+data.columns = data.columns.droplevel(0)
 
-    csvfile = "tmp_stock_{}_{}.csv".format(stockNo, date)
-    data.to_csv(csvfile, index=False)
-    time.sleep(5)
+csvfile = "bbbtmp_stock_{}_{}.csv".format(stock_no, date)
+
+# to_csv若未指明編碼, 則是 encoding="utf-8", excel開啟會有亂碼
+data.to_csv(csvfile, index=False, encoding="utf-8-sig")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2552,72 +2575,12 @@ print("------------------------------------------------------------")  # 60個
 print("使用 twse SP")
 print("------------------------------------------------------------")  # 60個
 
+
 print("------------------------------------------------------------")  # 60個
 print("使用 其他 金融匯率股票相關 ST")
 print("------------------------------------------------------------")  # 60個
 
-print("google-currency：不同幣值換算")
-
-from google_currency import convert
-
-print(convert("USD", "JPY", 230))
-
-from google_currency import convert
-
-samount = 100  # @param {type:"integer"}
-damount = convert("USD", "JPY", samount)
-retdict = json.loads(damount)
-print("{} 元美金 = 日幣 {} 元".format(samount, retdict["amount"]))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-msg = "這是 LINE Notify 發送的訊息。"
-token = "你的 LINE Notify 權杖"  # 權杖
-headers = {
-    "Authorization": "Bearer " + token,
-    "Content-Type": "application/x-www-form-urlencoded",
-}
-payload = {"message": msg}
-notify = requests.post(
-    "https://notify-api.line.me/api/notify", headers=headers, params=payload
-)
-
-if notify.status_code == 200:
-    print("發送 LINE Notify 成功！")
-else:
-    print("發送 LINE Notify 失敗！")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("TWCB：中央銀行資料庫")
-
-import TWCB
-
-print(TWCB.get_info())
-
-df1 = TWCB.get("BP01D01.px")
-print(df1)
-
-df1.to_csv("匯率日報表.csv")
-
-data_list = TWCB.get_by_search("美元之匯率")
-
-TWCB.get_all()
-
-with open("download_TWCB.json", "r", encoding="utf-8") as f:
-    test_data = json.load(f)
-
-if not os.path.isdir("twcb"):
-    os.mkdir("twcb")
-
-for key in test_data.keys():
-    data = pd.read_json(test_data[key])
-    data.to_csv("twcb/" + key + ".csv")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+# 可用，但無台幣匯率
 
 API_KEY = "fca_live_QiRD4yaE7K1aJQIAfVLojfu8J2KPxSXPYkDxxTzc"
 BASE_URL = f"https://api.freecurrencyapi.com/v1/latest?apikey={API_KEY}"
@@ -2631,7 +2594,7 @@ def convert_currency(base):
     print(url)
     try:
         response = requests.get(url)
-        data = response.json()
+        data = response.json()  # 把JSON字串解析成Python物件 ~~ data = json.loads(response.text)
         return data["data"]
     except:
         print("Invalid currency.")
@@ -2651,7 +2614,6 @@ for ticker, value in data.items():
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 """
 查詢歷史資料 範例
 https://rate.bot.com.tw/xrt/all/2023-03-20
@@ -2662,7 +2624,7 @@ https://rate.bot.com.tw/
 https://rate.bot.com.tw/xrt?Lang=zh-TW
 """
 
-
+"""
 def get_html_data1(url):
     print("取得網頁資料: ", url)
     resp = requests.get(url)
@@ -2672,18 +2634,74 @@ def get_html_data1(url):
         return None
     else:
         return resp
+"""
+
+import requests
+from bs4 import BeautifulSoup
 
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/131.0 Safari/537.36"
+}
+
+url = "https://rate.bot.com.tw/xrt/all/day"
+
+resp = requests.get(url, headers=headers)
+
+print(resp.url)
+print(resp.status_code)
+print(resp.text[:1000])
+
+soup = BeautifulSoup(resp.text, "html.parser")
+print(soup.title)  # 用來檢查是否有抓到正確的資料
+
+rows = soup.select("table tbody tr")
+print("筆數:", len(rows))
+for row in rows:
+    tds = row.find_all("td")
+    if len(tds) > 4:
+        currency = tds[0].get_text(strip=True)
+        cash_buy = tds[1].get_text(strip=True)
+        cash_sell = tds[2].get_text(strip=True)
+        spot_buy = tds[3].get_text(strip=True)
+        spot_sell = tds[4].get_text(strip=True)
+        print(currency, cash_buy, cash_sell, spot_buy, spot_sell)
+
+# 3030
+
+
+def get_html_data1(url):
+    print("取得網頁資料: ", url)
+    headers = {"User-Agent": "Mozilla/5.0"}
+
+    resp = requests.get(url, headers=headers)
+    # 檢查 HTTP 回應碼是否為 requests.codes.ok(200)
+    if resp.status_code != 200:
+        print("失敗")
+        return None
+
+    return resp
+
 
 print("查詢中央銀行匯率")
 
 url = "https://rate.bot.com.tw/xrt/all/day"
-# https://rate.bot.com.tw/xrt?Lang=zh-TW  另一個網址
+# url = "https://rate.bot.com.tw/xrt?Lang=zh-TW"  # 另一個網址
 html_data = get_html_data1(url)
+print("------------------------------------------------------------")  # 60個
+print(html_data.status_code)
+print("------------------------------------------------------------")  # 60個
+print(html_data.url)
+print("------------------------------------------------------------")  # 60個
+print(html_data.text[:1000])
+print("------------------------------------------------------------")  # 60個
 
 soup = BeautifulSoup(html_data.text, "html.parser")
+
+tables = soup.find_all("table")
+
+print("table數量=", len(tables))
+
 print(soup.prettify())  # prettify()這個函數可以將DOM tree以比較美觀的方式印出。
 
 # print("多重條件選擇")
@@ -3349,6 +3367,44 @@ print("------------------------------------------------------------")  # 60個
 print("df語法 與 畫圖 SP")
 print("------------------------------------------------------------")  # 60個
 
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+json.loads()  # 字串 -> Python物件
+json.dumps()  # Python物件 -> 字串
+
+
+# 2. 建立一個偽裝成一般瀏覽器的請求（防止被部分防毒軟體或公司網路當成惡意爬蟲阻擋）
+req = urllib.request.Request(
+    url, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
+)
+
+import sys
+import subprocess
+
+# 強制讓目前執行這個程式的 Python 環境去安裝套件
+subprocess.check_call([sys.executable, "-m", "pip", "install", "currency_converter"])
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+msg = "這是 LINE Notify 發送的訊息。"
+token = "你的 LINE Notify 權杖"  # 權杖
+headers = {
+    "Authorization": "Bearer " + token,
+    "Content-Type": "application/x-www-form-urlencoded",
+}
+payload = {"message": msg}
+notify = requests.post(
+    "https://notify-api.line.me/api/notify", headers=headers, params=payload
+)
+
+if notify.status_code == 200:
+    print("發送 LINE Notify 成功！")
+else:
+    print("發送 LINE Notify 失敗！")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

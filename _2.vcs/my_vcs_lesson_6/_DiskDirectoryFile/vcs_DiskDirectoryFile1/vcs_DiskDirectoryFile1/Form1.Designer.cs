@@ -108,7 +108,6 @@
             this.bt_winmerge = new System.Windows.Forms.Button();
             this.listBox_search = new System.Windows.Forms.ListBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.comboBox_drive = new System.Windows.Forms.ComboBox();
             this.bt_show_disk_info = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -130,6 +129,7 @@
             this.bt_remove = new System.Windows.Forms.Button();
             this.lb_search_result1 = new System.Windows.Forms.Label();
             this.lb_search_result2 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.bt_clear2 = new System.Windows.Forms.Button();
             this.bt_file10 = new System.Windows.Forms.Button();
             this.bt_file11 = new System.Windows.Forms.Button();
@@ -168,9 +168,9 @@
             this.groupBox_compare.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage5.SuspendLayout();
             this.groupBox_folder.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox_file.SuspendLayout();
             this.groupBox_directory.SuspendLayout();
             this.groupBox_disk.SuspendLayout();
@@ -1111,15 +1111,6 @@
             this.tabPage4.Text = "磁碟";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(676, 457);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox1.TabIndex = 307;
-            this.pictureBox1.TabStop = false;
-            // 
             // comboBox_drive
             // 
             this.comboBox_drive.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -1361,6 +1352,15 @@
             this.lb_search_result2.Size = new System.Drawing.Size(65, 19);
             this.lb_search_result2.TabIndex = 262;
             this.lb_search_result2.Text = "result2";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Location = new System.Drawing.Point(676, 457);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox1.TabIndex = 307;
+            this.pictureBox1.TabStop = false;
             // 
             // bt_clear2
             // 
@@ -1744,10 +1744,10 @@
             this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
             this.groupBox_folder.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox_file.ResumeLayout(false);
             this.groupBox_directory.ResumeLayout(false);
             this.groupBox_disk.ResumeLayout(false);
