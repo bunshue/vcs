@@ -154,13 +154,13 @@ namespace vcs_test_all_03_Syntax1
             int[] arrayA = new int[5] { 10, 1, 2, 3, 4 };
             foreach (int a in arrayA)
             {
-                MessageBox.Show("取得數字：" + a.ToString());
+                richTextBox1.Text += "取得數字：" + a.ToString() + "\n";
             }
 
             string[] studentName = new string[4] { "Alice", "Bob", "Ives", "John" };
             foreach (string name in studentName)
             {
-                MessageBox.Show("取得字串：" + name);
+                richTextBox1.Text += "取得字串：" + name + "\n";
             }
 
             //------------------------------------------------------------  # 60個
@@ -244,7 +244,6 @@ namespace vcs_test_all_03_Syntax1
                         value = (byte)(input[i] - 'a' + 10);
                     }
                     output = output * 16 + value;
-                    //MessageBox.Show("data : " + input[i] + " value : " + value);
                 }
                 richTextBox1.Text += "結果：" + output.ToString() + "\n";
             }
@@ -1149,7 +1148,6 @@ namespace vcs_test_all_03_Syntax1
 //------------------------------  # 30個
 
 /*
-
 vcs 使用 macro
 
 #define Use_IndexOf
@@ -1167,7 +1165,6 @@ vcs 使用 macro
 
 #endif
 
-
 //------------------------------------------------------------  # 60個
 
             Console.WriteLine("例外處理類型   :{0}", ex.GetType().ToString());
@@ -1175,10 +1172,4 @@ vcs 使用 macro
             Console.WriteLine("程式或物件名稱 :{0}", ex.Source);
             Console.WriteLine("產生錯誤程序   :{0}", ex.TargetSite.Name);
             Console.WriteLine("錯誤之處       :{0}", ex.StackTrace);
-
-
 */
-
-
-
-

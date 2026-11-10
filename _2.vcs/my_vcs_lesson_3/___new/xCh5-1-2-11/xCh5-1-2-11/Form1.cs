@@ -38,7 +38,7 @@ namespace xCh5_1_2_11
         // 新增按鈕
         private void button1_Click(object sender, EventArgs e)
         {
-            listBox1.Items.Add(textBox1.Text);
+            listBox1.Items.Add("加入一項a");
             textBox1.Clear();
         }
 
@@ -48,12 +48,12 @@ namespace xCh5_1_2_11
             // 如果有指定位置，就插到指定位置
             if (textBox3.Text == "")
             {
-                listBox1.Items.Insert(listBox1.Items.Count, textBox1.Text);
+                listBox1.Items.Insert(listBox1.Items.Count, "加入一項b");
             }
             else
             {
                 int ndx = Convert.ToInt32(textBox3.Text);
-                listBox1.Items.Insert(ndx, textBox1.Text);
+                listBox1.Items.Insert(ndx, "加入一項c");
             }
             textBox1.Clear();
         }

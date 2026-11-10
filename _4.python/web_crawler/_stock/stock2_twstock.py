@@ -31,7 +31,6 @@ import os
 import sys
 import time
 import math
-import time
 import random
 import datetime
 import numpy as np
@@ -1386,7 +1385,7 @@ show()
 print("取得資料數")
 print(slist)
 
-# 3030
+print("------------------------------")  # 30個
 
 # 將資料寫出到csv檔
 # 比較看看
@@ -1404,7 +1403,7 @@ plt.title("2019年資料")
 plt.title()
 show()
 
-# 3030
+print("------------------------------")  # 30個
 
 print("讀取csv檔, 並畫出")
 
@@ -2614,6 +2613,28 @@ for ticker, value in data.items():
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+from selenium import webdriver
+from bs4 import BeautifulSoup
+
+driver = webdriver.Chrome()
+
+driver.get("https://rate.bot.com.tw/xrt/all/day")
+
+time.sleep(5)
+
+html = driver.page_source
+
+soup = BeautifulSoup(html, "html.parser")
+
+rows = soup.select("table tbody tr")
+
+print(len(rows))
+
+driver.quit()
+
+print("------------------------------")  # 30個
+
 """
 查詢歷史資料 範例
 https://rate.bot.com.tw/xrt/all/2023-03-20
@@ -2651,12 +2672,30 @@ resp = requests.get(url, headers=headers)
 print(resp.url)
 print(resp.status_code)
 print(resp.text[:1000])
+print(resp.headers.get("Content-Type"))
+
+with open("page.html", "w", encoding="utf-8") as f:
+    f.write(resp.text)
 
 soup = BeautifulSoup(resp.text, "html.parser")
 print(soup.title)  # 用來檢查是否有抓到正確的資料
 
+tables = soup.find_all("table")
+print("table數量=", len(tables))
+
+# 如果有 table
+for t in tables:
+    print(t.get("class"))  # 看看是哪個table
+
 rows = soup.select("table tbody tr")
 print("筆數:", len(rows))
+
+print("------------------------------")  # 30個
+
+# 每列
+for row in rows[:3]:
+    print(row.get_text(" ", strip=True))
+
 for row in rows:
     tds = row.find_all("td")
     if len(tds) > 4:
@@ -2667,7 +2706,7 @@ for row in rows:
         spot_sell = tds[4].get_text(strip=True)
         print(currency, cash_buy, cash_sell, spot_buy, spot_sell)
 
-# 3030
+print("------------------------------")  # 30個
 
 
 def get_html_data1(url):

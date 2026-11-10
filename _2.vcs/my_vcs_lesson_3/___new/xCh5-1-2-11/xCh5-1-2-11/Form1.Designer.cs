@@ -43,14 +43,14 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(234, 79);
+            this.textBox3.Location = new System.Drawing.Point(259, 79);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(106, 22);
             this.textBox3.TabIndex = 21;
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(154, 164);
+            this.button6.Location = new System.Drawing.Point(179, 164);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 23);
             this.button6.TabIndex = 20;
@@ -60,23 +60,23 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(16, 189);
+            this.textBox2.Location = new System.Drawing.Point(16, 286);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox2.Size = new System.Drawing.Size(120, 69);
+            this.textBox2.Size = new System.Drawing.Size(145, 130);
             this.textBox2.TabIndex = 18;
             // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(16, 18);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(120, 22);
+            this.textBox1.Size = new System.Drawing.Size(145, 22);
             this.textBox1.TabIndex = 17;
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(154, 136);
+            this.button5.Location = new System.Drawing.Point(179, 136);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 16;
@@ -86,7 +86,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(154, 107);
+            this.button4.Location = new System.Drawing.Point(179, 107);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 15;
@@ -96,7 +96,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(154, 78);
+            this.button3.Location = new System.Drawing.Point(179, 78);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 14;
@@ -106,7 +106,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(154, 49);
+            this.button2.Location = new System.Drawing.Point(179, 49);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 13;
@@ -116,7 +116,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(154, 19);
+            this.button1.Location = new System.Drawing.Point(179, 19);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 12;
@@ -130,15 +130,15 @@
             this.listBox1.ItemHeight = 12;
             this.listBox1.Location = new System.Drawing.Point(16, 47);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(120, 112);
+            this.listBox1.Size = new System.Drawing.Size(145, 232);
             this.listBox1.TabIndex = 11;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(346, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(370, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(340, 485);
+            this.richTextBox1.Size = new System.Drawing.Size(316, 485);
             this.richTextBox1.TabIndex = 22;
             this.richTextBox1.Text = "";
             // 

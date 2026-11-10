@@ -241,7 +241,6 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(200, 60);
             this.button14.TabIndex = 15;
-            this.button14.Text = "將數字前面補0";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -328,7 +327,6 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(200, 60);
             this.button20.TabIndex = 48;
-            this.button20.Text = "測試 String.Format";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
@@ -372,7 +370,6 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(200, 60);
             this.button24.TabIndex = 52;
-            this.button24.Text = "tt";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 

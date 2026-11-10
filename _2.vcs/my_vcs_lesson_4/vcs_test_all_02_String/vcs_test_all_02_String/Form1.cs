@@ -635,6 +635,91 @@ namespace vcs_test_all_02_String
             int aaa = 15;
             string s2 = string.Format("{0:00000}", Convert.ToInt16(aaa));
             richTextBox1.Text += s2 + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            // 將數字前面補0，補足長度為6 
+            String snum = "5";
+            String pnum = snum.PadLeft(5, '0');
+            String fnum = String.Format("{0:00000}", Convert.ToInt16(snum));
+            richTextBox1.Text += "原始字串 : " + snum + "\n透過 PadLeft : " + pnum + "\n透過 String.Format : " + fnum + "\n";
+
+            int n = 123;
+            string zz1 = n.ToString().PadLeft(10, '0');
+            richTextBox1.Text += "\nzz1 = " + zz1 + "\n";
+
+            //string zz2 = Convert.ToInt32(n);
+            string zz2 = String.Format("{0:0000000000}", Convert.ToInt16(n));
+            richTextBox1.Text += "zz2 = " + zz2 + "\n";
+
+            string zz3 = n.ToString("D10");
+            richTextBox1.Text += "zz3 = " + zz3 + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //測試 String.Format
+
+            //自訂格式化輸出
+
+            richTextBox1.Text += "自訂格式化輸出\n";
+            richTextBox1.Text += String.Format("{0:##,##0.00}", 8567.1) + "\n";
+            richTextBox1.Text += String.Format("{0:###0.00}", 566.7) + "\n";
+            richTextBox1.Text += String.Format("{0:0.00%}", 8) + "\n";
+
+            int s32_Section45 = 123;
+            int ms32_Quadrant = 456;
+            string ddd = String.Format("Section: {0}  Quadrant: {1}", s32_Section45, ms32_Quadrant);
+
+            string Name = "李";
+            int Age = 2;
+            string Address = "吉林";
+            richTextBox1.Text += "Name : " + Name + "\tAge : " + Age.ToString() + "\tAddress : " + Address + "\n";
+
+            string Begin = "550";
+            string end = "570";
+            string sqlstr = string.Format(@"WHERE 总分>{0} AND 总分<{1})", Begin, end);
+            richTextBox1.Text += sqlstr + "\n";
+
+            sqlstr = string.Format(@"WHERE 学生姓名 LIKE '{0}%' and 年龄 LIKE '{1}%' and 家庭住址 LIKE '{2}%'", Name, Age, Address);
+            richTextBox1.Text += sqlstr + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            string[] name = { "mouse", "ox", "tiger", "rabbit", "dragon" };
+
+            richTextBox1.Text += string.Format("簡易用法1項\t{0} 是動物", name[0]) + "\n";
+            richTextBox1.Text += string.Format("簡易用法3項\t{0} 和 {1} 和 {2} 是動物", name[0], name[1], name[2]) + "\n";
+
+            //連接符 與 佔位符
+            string str1 = "lion";
+            string str2 = "mouse";
+            string mm = String.Format("{0}", str1);   //字符串格式輸出
+            string nn = String.Format("{0}", str2);
+
+            richTextBox1.Text += "str = " + mm + "-" + nn + "\n";     //用“+”連接符
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //                                 第0項靠左30位, 第1項靠右10位
+            //richTextBox1.Text += string.Format("{0,-30}{1,10}", fi.Name, fi.Length) + "\n";
+            //richTextBox1.Text += string.Format("{0,-30}{1,10}", fi.Name, fi.Length) + "\n";
+
+            int x1 = 3;
+            int x2 = 8;
+            int x3 = 3;
+            int x4 = 4;
+            int x5 = 2;
+            string xx = String.Format("{0}-{1}-{2}-{3}-{4}", x1, x2, x3, x4, x5);
+            richTextBox1.Text += "xx = " + xx + "\n";
+
+            richTextBox1.Text += "String.Format是將指定的 String類型的數據中的每個格式項替換為相應對象的值的文本等效項。\n";
+            //String.Format("{0，–10}",text)
+            //要将字符串向左对齐使用负数，正对齐使用正数，里面的值为当前所占字符的格子。例如:
+
+            String aaaa = String.Format("{0,-30} | {1,-20} | {2,5}", "a", "b", 3);
+            String bbb = String.Format("{0,-30} | {1,-20} | {2,5}", "aaaaaaaaaaaaaaaaaaaaaaaa", "b", 3);
+            String ccc = String.Format("{0,-30} | {1,-20} | {2,5}", "aaaa", "b", 3);
+
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -703,26 +788,6 @@ namespace vcs_test_all_02_String
 
         private void button14_Click(object sender, EventArgs e)
         {
-            //將數字前面補0
-
-            // 將數字前面補0，補足長度為6 
-            String snum = "5";
-            String pnum = snum.PadLeft(5, '0');
-            String fnum = String.Format("{0:00000}", Convert.ToInt16(snum));
-            //MessageBox.Show("原始字串 : " + snum + "\n 透過 PadLeft : " + pnum + "\n 透過 String.Format : " + fnum);
-
-            int n = 123;
-            string zz1 = n.ToString().PadLeft(10, '0');
-            richTextBox1.Text += "\nzz1 = " + zz1 + "\n";
-
-            //string zz2 = Convert.ToInt32(n);
-            string zz2 = String.Format("{0:0000000000}", Convert.ToInt16(n));
-            richTextBox1.Text += "zz2 = " + zz2 + "\n";
-
-            string zz3 = n.ToString("D10");
-            richTextBox1.Text += "zz3 = " + zz3 + "\n";
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
         }
 
         //------------------------------------------------------------  # 60個
@@ -1089,31 +1154,6 @@ namespace vcs_test_all_02_String
 
         private void button20_Click(object sender, EventArgs e)
         {
-            //測試 String.Format
-
-            //自訂格式化輸出
-
-            richTextBox1.Text += "自訂格式化輸出\n";
-            richTextBox1.Text += String.Format("{0:##,##0.00}", 8567.1) + "\n";
-            richTextBox1.Text += String.Format("{0:###0.00}", 566.7) + "\n";
-            richTextBox1.Text += String.Format("{0:0.00%}", 8) + "\n";
-
-            int s32_Section45 = 123;
-            int ms32_Quadrant = 456;
-            string ddd = String.Format("Section: {0}  Quadrant: {1}", s32_Section45, ms32_Quadrant);
-
-            string Name = "李";
-            int Age = 2;
-            string Address = "吉林";
-            richTextBox1.Text += "Name : " + Name + "\tAge : " + Age.ToString() + "\tAddress : " + Address + "\n";
-
-            string Begin = "550";
-            string end = "570";
-            string sqlstr = string.Format(@"WHERE 总分>{0} AND 总分<{1})", Begin, end);
-            richTextBox1.Text += sqlstr + "\n";
-
-            sqlstr = string.Format(@"WHERE 学生姓名 LIKE '{0}%' and 年龄 LIKE '{1}%' and 家庭住址 LIKE '{2}%'", Name, Age, Address);
-            richTextBox1.Text += sqlstr + "\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -1167,39 +1207,6 @@ namespace vcs_test_all_02_String
 
         private void button24_Click(object sender, EventArgs e)
         {
-            string[] name = { "mouse", "ox", "tiger", "rabbit", "dragon" };
-
-            richTextBox1.Text += string.Format("簡易用法1項\t{0} 是動物", name[0]) + "\n";
-            richTextBox1.Text += string.Format("簡易用法3項\t{0} 和 {1} 和 {2} 是動物", name[0], name[1], name[2]) + "\n";
-
-
-            //連接符 與 佔位符
-            string str1 = "lion";
-            string str2 = "mouse";
-            string m = String.Format("{0}", str1);   //字符串格式輸出
-            string n = String.Format("{0}", str2);
-
-            richTextBox1.Text += "str = " + m + "-" + n + "\n";     //用“+”連接符
-
-            //                                 第0項靠左30位, 第1項靠右10位
-            //richTextBox1.Text += string.Format("{0,-30}{1,10}", fi.Name, fi.Length) + "\n";
-            //richTextBox1.Text += string.Format("{0,-30}{1,10}", fi.Name, fi.Length) + "\n";
-
-            int x1 = 3;
-            int x2 = 8;
-            int x3 = 3;
-            int x4 = 4;
-            int x5 = 2;
-            string xx = String.Format("{0}-{1}-{2}-{3}-{4}", x1, x2, x3, x4, x5);
-            richTextBox1.Text += "xx = " + xx + "\n";
-
-            richTextBox1.Text += "String.Format是將指定的 String類型的數據中的每個格式項替換為相應對象的值的文本等效項。\n";
-            //String.Format("{0，–10}",text)
-            //要将字符串向左对齐使用负数，正对齐使用正数，里面的值为当前所占字符的格子。例如:
-
-            String aaa = String.Format("{0,-30} | {1,-20} | {2,5}", "a", "b", 3);
-            String bbb = String.Format("{0,-30} | {1,-20} | {2,5}", "aaaaaaaaaaaaaaaaaaaaaaaa", "b", 3);
-            String ccc = String.Format("{0,-30} | {1,-20} | {2,5}", "aaaa", "b", 3);
         }
 
         //------------------------------------------------------------  # 60個
