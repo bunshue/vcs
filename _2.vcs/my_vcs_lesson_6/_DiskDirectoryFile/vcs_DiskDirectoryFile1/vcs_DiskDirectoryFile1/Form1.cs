@@ -503,6 +503,179 @@ namespace vcs_DiskDirectoryFile1
             //------------------------------------------------------------  # 60個
 
             HDD_Scan();  // 搜尋本機磁碟
+
+            //------------------------------------------------------------  # 60個
+
+
+
+            person = new string[,]
+            {
+                //AAAA
+                { "asami", "小川あさ美", "おがわあさみ", "Ogawa Asami"},
+                { "kaede1", "松島かえで", "まつしまかえで", "Matsushima Kaede"},
+                { "kaede2", "冬月かえで", "ふゆつきかえで", "Fuyutsuki Kaede"},
+                { "3ne", "三澄寧々", "みすみねね", "Misumi Nene"},
+                { "kotone", "雨宮琴音", "あまみやことね", "Amamiya Kotone"},
+                { "uto", "鈴乃ウト", "すずのうと", "Suzuno Uto"},
+                { "XXXX", "uta 三佳詩", "みよしうた", "Miyoshi Uta"},
+                { "XXXX", "ito 伊藤聖夏", "いとうせな", "Ito Sena"},
+                { "南波明花", "南波明花", "なんばはるか", "Namba Haruka"},
+                { "kurara", "愛世くらら", "まなせくらら", "Manase Kurara"},
+                { "yuna", "椎名ゆな", "しいなゆな", "Shiina Yuna"},
+                { "ayami", "森あやみ", "もりあやみ", "Mori Ayami"},
+                { "遠野夏生", "遠野夏生", "とおのなつき", "Toono Natsuki"},
+                { "mino", "美乃すずめ", "みのすずめ", "Mino Suzume"},
+                { "saeko", "松下紗栄子", "まつしたさえこ", "Matsushita Saeko"},
+                { "maria", "愛音まりあ", "あいねまりあ", "Aine Maria"},
+                { "7777", "七ツ森りり", "ななつもりりり", "Nanatsumori Riri"},
+                { "3333", "三上悠亜", "みかみゆあ", "Mikami Yua"},
+                { "iaoi", "一乃あおい", "いちのあおい", "Ichino Aoi"},
+                { "taoi", "葵つかさ", "あおいつかさ", "Aoi Tsukasa"},
+                { "kanna1", "今井栞菜", "いまいかんな", "Imai Kanna"},
+                { "kanna2", "美咲かんな", "みさきかんな", "Misaki kanna"},
+                { "kanna3", "藤かんな", "ふじかんな", "Fuji Kanna"},
+                { "yama", "山岸あや花", "やまぎしあやか", "Yamagishi Ayaka"},
+                { "kiho", "金松季歩", "かねまつきほ", "Kanematsu Kiho"},
+                { "taki", "瀧本雫葉", "たきもとしずは", "Takimoto Shizuha"},
+                { "aiba", "相葉美沙子", "あいばみさこ", "Aiba Misako"},
+                { "mth", "明日葉みつは", "あしたばみつは", "Ashitaba Mitsuha"},
+                { "fsmai", "藤咲まい", "ふじさきまい", "Huzisaki Mai"},
+                { "ria", "愛才りあ", "あいせりあ", "Aise Ria"},
+                { "朝霧メイサ", "朝霧メイサ", "あさぎりめいさ", "Asagiri Meisa"},
+                { "fumino", "沙月ふみの", "さつきふみの", "Satsuki Fumino"},
+                { "mos", "松岡すず", "まつおかすず", "Matsuoka Suzu"},
+                { "mion", "園田みおん", "そのだみおん", "Sonoda Mion"},
+                { "三比菜々美", "三比菜々美", "みひななみ", "Mihi Nanami"},
+                { "芦名ユリア", "芦名ユリア", "あしなゆりあ", "Ashina Yuria"},
+                { "ririko", "木下凛々子", "きのしたりりこ", "Kinoshita Ririko"},
+                { "riko", "宮瀬リコ", "みやせりこ", "miyase riko"},
+                { "sawa", "恵さわ", "めぐみさわ", "Megumi Sawa"},
+                { "nozomi", "麻生希", "あそうのぞみ", "Aso Nozomi"},
+                //BBBB
+                { "julia", "JULIA", "じゅりあ", "Julia"},
+                { "suzu", "本庄鈴", "ほんじょうすず", "Honjo Suzu"},
+                { "mha", "水端あさみ", "みずはたあさみ", "Mizuhata Asami"},
+                { "riho", "藤森里穂", "ふじもりりほ", "Fujimori Riho"},
+                { "夏目響", "夏目響", "なつめひびき", "Natsume Hibiki"},
+                { "ryo", "愛弓りょう", "あゆみりょう", "Ayumi Ryo"},
+                { "rei", "神木麗", "かみきれい", "Kamiki Rei"},
+                { "sayuri", "葉山さゆり", "はやまさゆり", "Hayama Sayuri"},
+                { "aki", "佐々木あき", "ささきあき", "Sasaki Aki"},
+                { "mori", "森日向子", "もりひなこ", "Mori Hinako"},
+                { "kana", "森沢かな", "もりさわかな", "Morisawa kana"},
+                { "misaki", "岬ななみ", "みさきななみ", "misaki nanami"},
+                { "airi", "希島あいり", "きじまあいり", "Kijima Airi"},
+                { "jessica", "希崎ジェシカ", "きざきじぇしか", "Kizaki Jessica"},
+                { "azm", "相沢みなみ", "あいざわみなみ", "Aizawa Minami"},
+                { "akari", "明里つむぎ", "あかりつむぎ", "Akari Tsumugi"},
+                { "XXXX", "白咲りの", "しろさきりの", "Shirosaki Rino"},
+                { "XXXX", "立花瑠莉", "たちばなるり", "Tachibana Ruri"},  //同上
+                { "karen1", "楓カレン", "かえでかれん", "Kaede Karen"},
+                { "karen2", "楪カレン", "ゆずりはかれん", "Yuzuriha Karen"},
+                { "karen3", "小暮カレン", "こぐれかれん", "kogure karen"},
+                { "fuua", "楓ふうあ", "かえでふうあ", "Kaede Fuua"},
+                { "5555", "五日市芽依", "いつかいちめい", "Itsukaichi Mei"},
+                { "honami", "葉月保奈美", "はづきほなみ", "Hazuki Honami"},
+                { "sma", "鈴村あいり", "すずむらあいり", "Suzumura Airi"},
+                { "XXXX", "静河真理子", "しずかわまりこ", "Shizukawa Mariko"},
+                { "XXXX", "鈴木麻奈美", "すずきまなみ", "Suzuki Manami"},
+                { "XXXX", "美雪ありす", "みゆきありす", "Miyuki Arisu"},
+                { "XXXX", "愛咲れいら", "あいさきれいら", "Aisaki Reira"},  // = 原千尋
+                { "XXXX", "鈴木杏里", "すずきあんり", "Suzuki Anri"},
+                //CCCC
+                { "北野未奈", "北野未奈", "きたのみな", "Kitano Mina"},
+                { "葵百合香", "葵百合香", "あおいゆりか", "Aoi Yurika"},
+                { "ruisa", "都月るいさ", "とつきるいさ", "Totuki Ruisa"},
+                { "maki", "北条麻妃", "ほうじょうまき", "Houzyou Maki"},
+                { "nma", "新村あかり", "にいむらあかり", "Niimura Akari"},
+                { "倉木華", "倉木華", "くらきはな", "Kuraki Hana"},
+                { "mary", "橘メアリー", "たちばなめありー", "Tachibana Mary"},
+                { "non1", "野々浦暖", "ののうらのん", "Nonoura Non"},
+                { "ran1", "松野蘭", "まつのらん", "Matsuno Ran"},
+                { "ran2", "藤井蘭々", "ふじいらんらん", "Fujii Ranran"},  // = 蜜美杏", "みつみあん", "Mitsumi An"},mma
+                { "初川みなみ", "初川みなみ", "はつかわみなみ", "Hatsukawa Minami"},
+                { "二階堂美雨", "二階堂美雨", "にかいどうみう", "Nikaidou Miu"},
+                { "akane", "あかね麗", "あかねうらら", "Akane Urara"},  // =  二階堂麗", "にかいどううらら", "Nikaidou Urara"},
+                //2222=二階堂麗=あかね麗=akane
+                { "塩見彩", "塩見彩", "しおみあや", "Shiomi Aya"},
+                { "渋谷華", "渋谷華", "しぶやはな", "Shibuya Hana"},
+                { "yui", "波多野結衣", "はたのゆい", "Hatano Yui"},
+                { "8888", "八掛うみ", "やつがけうみ", "Yatugake Umi"},
+                { "remu", "涼森れむ", "すずもりれむ", "Suzumori Remu"},
+                { "akiho", "吉沢明歩", "よしざわあきほ", "Yoshizawa Akiho"},
+                { "yuri1", "紗々原ゆり", "ささはらゆり", "Sasahara Yuri"},
+                { "yuri2", "広瀬ゆり", "ひろせゆり", "Hirose Yuri"},
+                { "sayaka", "友田彩也香", "ともださやか", "Tomoda Sayaka"},
+                { "ayaka", "武藤あやか", "むとうあやか", "Mutou Ayaka"},
+                { "jgj", "神宮寺ナオ", "じんぐうじなお", "Zinguuzi Nao"},
+                { "nene", "吉高寧々", "よしたかねね", "Yoshitaka Nene"},
+                { "佐伯由美香", "佐伯由美香", "さえきゆみか", "Saeki Yumika"},
+                { "maron", "夏花まろん", "なつきまろん", "Natsuki Maron"}, // = 夏希まろん", "なつきまろん", "Natsuki Maron"},
+                { "rin", "東凛", "あずまりん", "Azuma Rin"},
+                { "1111a", "神波多一花", "かみはたいちか", "Kamuhata Ichika"},
+                { "1111b", "星宮一花", "ほしみやいちか", "Hoshimiya Ichika"},
+                { "kjm", "小島みなみ", "こじまみなみ", "Kojima Minami"},
+                { "めぐり", "めぐり", "めぐり", "Meguri"},
+                { "黒川すみれ", "黒川すみれ", "くろかわすみれ", "Kurokawa Sumire"},
+                { "大槻ひびき", "大槻ひびき", "おおつきひびき", "Ootsuki Hibiki"},
+                { "smr", "水川スミレ", "みずかわすみれ", "Mizukawa Sumire"}, // = 水稀みり", "みずきみり", "Mizuki Miri"}, = 百多えみり(Caribbeancom)", "ももたえみり", "Momota Emiri"},
+                { "水川潤", "水川潤", "みずかわじゅん", "Mizukawa Jun"},
+                { "non", "小花のん", "おはなのん", "Ohana Non"},
+                { "橘京花", "橘京花", "たちばなきょうか", "Tachibana Kyoka"},
+                { "miho", "通野未帆", "とおのみほ", "Tohno Miho"},
+                { "nao", "若菜奈央", "わかななお", "Wakana Nao"},
+                { "mio", "君島みお", "きみじまみお", "Kimizima Mio"},
+                { "yuma", "佐野ゆま", "さのゆま", "Sano Yuma"},
+                { "yuka/yuuka", "大島優香", "おおしまゆうか", "Ooshima Yuuka"},
+                { "nonoka", "野々花さわ", "ののかさわ", "Nonoka Sawa"},  // =冨永ののか", "とみながののか", "Tominaga Nonoka"},
+                { "mizuno", "水野優香", "みずのゆうか", "Mizuno Yuuka"},
+                { "ksk", "妃ひかり", "きさきひかり", "Kisaki Hikari"},
+                { "reika", "橋本れいか", "はしもとれいか", "Hasimoto Reika"},
+                { "amiri", "斎藤あみり", "さいとうあみり", "Saito Amiri"},
+                { "mitani", "美谷朱音", "みたにあかね", "Mitani Akane"},
+                { "XXXX", "目黒めぐみ", "めぐろめぐみ", "Meguro Megumi"},
+                { "kma", "小松杏", "こまつあん", "Komatsu An"},
+                { "hayashi", "林ゆな", "はやしゆな", "Hayashi Yuna"},
+                { "XXXX", "岬さくら", "みさきさくら", "Misaki Sakura"},
+                { "XXXX", "君島みお", "きみじまみお", "Kimizima Mio"},
+                { "saki", "奥田咲", "おくださき", "Okuda Saki"},
+                { "nmm", "仲村みう", "なかむらみう", "Nakamura Miu"},
+                { "moe", "天使もえ", "あまつかもえ", "Amatsuka Moe"},
+                { "XXXX", "長谷川栞", "はせがわしおり", "Hasegawa Shiori"},
+                { "tina", "七海ティナ", "ななみてぃな", "Nanami Tina"},
+                { "rio", "朝妃りお", "あさひりお", "Asahi Rio"},  // = 朝日りお
+                { "XXXX", "多田有花", "ただゆうか", "Tada Yuuka"},
+                { "yuko1", "小野夕子", "おのゆうこ", "Ono Yuko"},  // = 葵(S1)", "あおい", "Aoi"},
+                { "yuko2", "白木優子", "しらきゆうこ", "Shiraki Yuko"},
+                { "amt", "天海つばさ", "あまみつばさ", "Amami Tubasa"},
+                { "aks", "天川そら", "あまかわそら", "Amakawa Sora"},
+                { "XXXX", "佐伯由美香", "さえきゆみか", "Saeki Yumika"},
+                { "iori", "古川いおり", "こがわいおり", "Kogawa Iori"},
+                { "XXXX", "加藤ツバキ", "かとうつばき", "Katou Tsubaki"},
+                { "mai", "神菜美まい", "かなみまい", "Kanami Mai"},
+                { "mizuho", "上原瑞穂", "うえはらみずほ", "Uehara Mizuho"},
+                { "XXXX", "滝川菜々美", "たきがわななみ", "Takigawa Nanami"},
+                { "XXXX", "大槻ひびき", "おおつきひびき", "Ootsuki Hibiki"},
+                { "XXXX", "九重かんな", "ここのえかんな", ""},
+                { "XXXX", "黒川すみれ", "くろかわすみれ", "Kurokawa Sumire"},
+                { "XXXX", "弥生みづき", "やよいみづき", "Yayoi Mizuki"},
+                { "XXXX", "日野さやか", "ひのさやか", "Hino Sayaka"},
+                { "XXXX", "葉月保奈美", "はづきほなみ", "Hazuki Honami"},
+                { "XXXX", "山手梨愛", "やまてりあ", "Yamate Ria"},
+                { "XXXX", "八蜜凛", "はちみつりん", "Hachimitsu Rin"},
+                { "XXXX", "香椎花乃", "かしいかの", "Kashii Kano"},
+                { "XXXX", "京香栞", "きょうかしおり", "Kyoka Shiori"},
+                { "XXXX", "柚月ひまわり", "ゆづきひまわり", "Yuzuki Himawari"},
+                { "XXXX", "白咲りの", "しろさきりの", "Shirosaki Rino"},
+                { "XXXX", "立花瑠莉", "たちばなるり", "Tachibana Ruri"},
+                { "XXXX", "ティア", "てぃあ", "Tia"},
+                { "ksrei", "黒島玲衣", "くろしまれい", "Kuroshima Rei"},
+                { "XXXX", "小沢菜穂", "おざわ なほ", "Ozawa Naho"},
+                { "XXXX", "乃木絢愛", "のぎあやめ", "Nogi Ayame"},
+            };
+
+            //------------------------------------------------------------  # 60個
+
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -5865,6 +6038,12 @@ namespace vcs_DiskDirectoryFile1
 
         };
 
+
+
+        string[,] person = null;
+
+
+
         string get_seriesname(string longname)
         {
             string seriesname = longname;
@@ -7589,6 +7768,32 @@ namespace vcs_DiskDirectoryFile1
         private void bt_disk12_Click(object sender, EventArgs e)
         {
 
+            int row = person.Rank;//獲取行數
+            int col1 = person.GetLength(1);//獲取指定維中的元 個數，這裡也就是列數了。（1表示的是第二維，0是第一維）
+            int col2 = person.GetUpperBound(0) + 1;//獲取指定維度的上限，在 上一個1就是列數
+            int num1 = person.Length;//獲取整個二維陣列的長度，即所有元 的個數
+
+            richTextBox1.Text += "row = " + row.ToString() + "\n";
+            richTextBox1.Text += "col1 = " + col1.ToString() + "\n";
+            richTextBox1.Text += "col2 = " + col2.ToString() + "\n";
+            richTextBox1.Text += "num1 = " + num1.ToString() + "\n";
+
+            int i;
+            int total_persons = person.GetUpperBound(0) + 1;
+            richTextBox1.Text += "total_persons = " + total_persons.ToString() + "\n";
+
+            for (i = 0; i < total_persons; i++)
+            {
+                //int num;
+                //num = int.Parse(person[i, 0]);
+                /*
+                richTextBox1.Text += "第 " + num.ToString() + " 任 " + person[i, 1] + "\n";
+                DateTime lifeStart = DateTime.Parse(person[i, 2]);
+                DateTime lifeEnd = DateTime.Parse(person[i, 3]);
+                DateTime workStart = DateTime.Parse(person[i, 4]);
+                DateTime workEnd = DateTime.Parse(person[i, 5]);
+                */
+            }
         }
 
         //------------------------------------------------------------  # 60個

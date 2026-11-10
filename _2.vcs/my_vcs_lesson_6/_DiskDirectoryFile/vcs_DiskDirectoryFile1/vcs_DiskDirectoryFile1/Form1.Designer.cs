@@ -1649,6 +1649,7 @@
             this.bt_disk12.Name = "bt_disk12";
             this.bt_disk12.Size = new System.Drawing.Size(160, 60);
             this.bt_disk12.TabIndex = 294;
+            this.bt_disk12.Text = "info";
             this.bt_disk12.UseVisualStyleBackColor = true;
             this.bt_disk12.Click += new System.EventHandler(this.bt_disk12_Click);
             // 
