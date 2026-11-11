@@ -7,7 +7,7 @@ from selenium.webdriver.common.keys import Keys
 
 # 建立瀏覽器物件
 driver = webdriver.Chrome()  # 使用Chrome
-# driver = webdriver.Firefox()   #使用Firefox
+# driver = webdriver.Firefox()   # 使用Firefox
 driver.set_window_position(0, 0)  # 設定視窗位置
 driver.set_window_size(800, 600)  # 設定視窗大小
 # driver.maximize_window()    #全螢幕顯示
@@ -114,7 +114,7 @@ driver.save_screenshot("screenshot_yahoo.png")  # 存圖
 time.sleep(1)
 
 print("------------------------------------------------------------")  # 60個
-print("在 維基百科 輸入搜尋字串")
+print("在 維基百科 輸入搜尋字串 NG")
 
 url = "https://zh.wikipedia.org/wiki/Wikipedia:%E9%A6%96%E9%A1%B5"
 driver.get(url)  # 開啟網址

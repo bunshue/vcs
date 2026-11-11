@@ -1,4 +1,4 @@
-print("抓 中央氣象局/環保署 資料")
+print("抓 中央氣象局/環境部 資料")
 print("------------------------------------------------------------")  # 60個
 print("準備工作")
 
@@ -17,7 +17,7 @@ driver.maximize_window()  # 全螢幕顯示
 
 print("------------------------------------------------------------")  # 60個
 print("抓中央氣象局資料")
-"""
+
 url = 'https://www.cwa.gov.tw/V8/C/W/OBS_County.html?ID=menu'
 
 driver.get(url)
@@ -56,23 +56,23 @@ if target != "":
     soup = BeautifulSoup(html, 'html.parser')
     
 
-#print(counties)
+print(counties)
 #('新竹市', '10018')
 
 driver.quit()   #關閉瀏覽器並且退出驅動程序
 
-sys.exit()
-"""
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("抓環保署資料")
+print("抓環境部資料")
 
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-url = "https://data.epa.gov.tw/"
+url = "https://data.moenv.gov.tw/"
 
 # driver = webdriver.Chrome()    #使用Chrome
 driver = webdriver.Firefox()  # 使用Firefox
@@ -86,6 +86,7 @@ txt.send_keys("aqi" + Keys.RETURN)  # 輸入 aqi 後按 Enter
 
 time.sleep(1)  # 必須加入等待，否則會有誤動作
 
+# NG  here
 btn = driver.find_element_by_link_text("空氣品質指標(AQI)")
 btn.click()  # 點選 空氣品質指標(AQI) 鈕
 time.sleep(3)  # 必須加入等待，否則會有誤動作
@@ -112,11 +113,8 @@ aria-label="請輸入關鍵字搜尋，例如:環境或&quot;縣市(臺北市)�
 value="" class="bpa-input" data-v-5e8e3ca1="">
 """
 
-
 print("------------------------------------------------------------")  # 60個
 print("完成")
-
-
 sys.exit()
 
 

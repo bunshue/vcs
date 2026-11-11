@@ -2441,8 +2441,6 @@ base_url = "https://www.twse.com.tw"
 url = base_url + "/zh/brokerService/brokerServiceAudit"
 # https://www.twse.com.tw/brokerService/brokerServiceAudit?showType=list&stkNo=1020&focus=6
 
-csvfile = "tmp_BrokerBranchs.csv"
-
 items = []
 print("爬取總公司: ", url)
 r = requests.get(url)
@@ -2476,7 +2474,10 @@ for row in rows:
     time.sleep(1)
 
 print("券商總數(總公司+分公司):", len(items))
+
 # 開啟CSV檔案寫入截取的資料
+
+csvfile = "tmp_BrokerBranchs.csv"
 with open(csvfile, "w+", newline="", encoding="utf8") as fp:
     writer = csv.writer(fp)
     writer.writerow(["證券商代號", "證券商名稱", "開業日", "地址", "電話"])
@@ -2562,7 +2563,6 @@ data = pd.read_html(url.format(date, stock_no))[0]
 data.columns = data.columns.droplevel(0)
 
 csvfile = "bbbtmp_stock_{}_{}.csv".format(stock_no, date)
-
 # to_csv若未指明編碼, 則是 encoding="utf-8", excel開啟會有亂碼
 data.to_csv(csvfile, index=False, encoding="utf-8-sig")
 
@@ -2613,28 +2613,6 @@ for ticker, value in data.items():
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from selenium import webdriver
-from bs4 import BeautifulSoup
-
-driver = webdriver.Chrome()
-
-driver.get("https://rate.bot.com.tw/xrt/all/day")
-
-time.sleep(5)
-
-html = driver.page_source
-
-soup = BeautifulSoup(html, "html.parser")
-
-rows = soup.select("table tbody tr")
-
-print(len(rows))
-
-driver.quit()
-
-print("------------------------------")  # 30個
-
 """
 查詢歷史資料 範例
 https://rate.bot.com.tw/xrt/all/2023-03-20
@@ -2645,197 +2623,37 @@ https://rate.bot.com.tw/
 https://rate.bot.com.tw/xrt?Lang=zh-TW
 """
 
-"""
-def get_html_data1(url):
-    print("取得網頁資料: ", url)
-    resp = requests.get(url)
-    # 檢查 HTTP 回應碼是否為 requests.codes.ok(200)
-    if resp.status_code != requests.codes.ok:
-        print("讀取網頁資料錯誤, url: ", resp.url)
-        return None
-    else:
-        return resp
-"""
+from selenium import webdriver
 
 url = "https://rate.bot.com.tw/xrt/all/day"
 # url = "https://rate.bot.com.tw/xrt?Lang=zh-TW"  # 另一個網址
 
-import requests
-from bs4 import BeautifulSoup
+driver = webdriver.Chrome()
 
-""" 目前網站有擋，改成讀取本地檔案
+driver.get(url)
 
-headers = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/131.0 Safari/537.36"
-}
+time.sleep(5)
 
-url = "https://rate.bot.com.tw/xrt/all/day"
+html = driver.page_source
+driver.quit()
 
-resp = requests.get(url, headers=headers)
+soup = BeautifulSoup(html, "html.parser")
+# print(soup.prettify())  # prettify()這個函數可以將DOM tree以比較美觀的方式印出。
 
-print(resp.url)
-print(resp.status_code)
-print(resp.text[:1000])
-print(resp.headers.get("Content-Type"))
-
-with open("page.html", "w", encoding="utf-8") as f:
-    f.write(resp.text)
-"""
-
-# 讀取本地檔案
-with open("data/currency_20261110.html", "r", encoding="utf8") as fp:
-    soup = BeautifulSoup(fp, "lxml")
-    # print("整個網頁資料 :", soup)
-
-# soup = BeautifulSoup(resp.text, "html.parser")
 print(soup.title)  # 用來檢查是否有抓到正確的資料
 
-tables = soup.find_all("table")
-print("table數量=", len(tables))
-
-# 如果有 table
-for t in tables:
-    print(t.get("class"))  # 看看是哪個table
-
-rows = soup.select("table tbody tr")
-print("筆數:", len(rows))
-
 print("------------------------------")  # 30個
 
-# 每列
-for row in rows[:3]:
-    print(row.get_text(" ", strip=True))
-
-for row in rows:
-    tds = row.find_all("td")
-    if len(tds) > 4:
-        currency = tds[0].get_text(strip=True)
-        cash_buy = tds[1].get_text(strip=True)
-        cash_sell = tds[2].get_text(strip=True)
-        spot_buy = tds[3].get_text(strip=True)
-        spot_sell = tds[4].get_text(strip=True)
-        print(currency, cash_buy, cash_sell, spot_buy, spot_sell)
-
-print("------------------------------")  # 30個
-
-tables = soup.find_all("table")
-
-print("table數量=", len(tables))
-
-print(soup.prettify())  # prettify()這個函數可以將DOM tree以比較美觀的方式印出。
-
-# print("多重條件選擇")
-cells = soup.select("table tr td")  # 尋找talbe標籤裡面的tr標籤裡面的td標籤 三者都要符合的抓出來
-print(type(cells))
-print("符合條件的資料", len(cells), "筆")
-print(cells)
-
-print("------------------------------")  # 30個
-
-i = 0
-for cell in cells:
-    print(i)
-    print(cell.text.strip())
-    i = i + 1
-
-print("------------------------------")  # 30個
-
-print("顯示 幣別")
-print("多重條件選擇")
-dnames = soup.select("table tr td[data-table=幣別] div.visible-phone")
-# print(type(dnames))
-print("符合條件的資料", len(dnames), "筆")
-# print(dnames)
-names = list()
-for dname in dnames:
-    names.append(dname.text.strip())
-print(names)
-
-print("------------------------------")  # 30個
-
-print("顯示 本行即期買入")
-print("多重條件選擇")
-buyingrate = soup.select("table tr td[data-table=本行即期買入]")
-print(type(buyingrate))
-print("符合條件的資料", len(buyingrate), "筆")
-print(buyingrate)
-i = 0
-for price in buyingrate:
-    print(i)
-    print(price.text.strip())
-    i = i + 1
-
-print("------------------------------")  # 30個
-
-prices = list()
-for price in buyingrate:
-    prices.append(price.text.strip())
-print(prices)
-
-print("------------------------------")  # 30個
-
-print(names)
-print(prices)
-rates = zip(names, prices)
-for rate in rates:
-    print(rate)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-from lxml import html
-
-url = "https://rate.bot.com.tw/xrt?Lang=zh-TW"
-response = requests.get(url)
-tree = html.fromstring(response.text)
-
-print(
-    "美金："
-    + str(
-        tree.xpath("//html/body/div[1]/main/div[3]/table/tbody/tr[1]/td[3]/text()")[0]
-    )
-)
-print(
-    "日圓："
-    + str(
-        tree.xpath("//html/body/div[1]/main/div[3]/table/tbody/tr[8]/td[3]/text()")[0]
-    )
-)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("台灣銀行 匯率查詢")
-
-url = "https://rate.bot.com.tw/xrt/flcsv/0/day"  # 牌告匯率 CSV 網址
-
-response = requests.get(url)  # 爬取網址內容
-response.encoding = "utf-8"  # 網頁編碼模式  # 調整回應訊息編碼為 utf-8，避免編碼不同造成亂碼
-rt = response.text  # 以文字模式讀取內容
-rts = rt.split("\n")  # 使用「換行」將內容拆分成串列
-for i in rts:  # 讀取串列的每個項目
-    try:  # 使用 try 避開最後一行的空白行
-        a = i.split(",")  # 每個項目用逗號拆分成子串列
-        print(a[0] + ": " + a[12])  # 取出第一個 ( 0 ) 和第十三個項目 ( 12 )
-    except:
-        break
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-url = "https://rate.bot.com.tw/xrt?Lang=zh-TW"
-csvfile = "tmp_xrt.csv"
-r = requests.get(url)
-r.encoding = "utf8"
-soup = BeautifulSoup(r.text, "lxml")
 tag_table = soup.select_one("#ie11andabove > div > table")
 rows = tag_table.find_all("tr")
+
+csvfile = "tmp_xrt.csv"
 with open(csvfile, "w+", newline="", encoding="big5") as fp:
     writer = csv.writer(fp)
     for row in rows:
         lst = []
         for cell in row.find_all(["td", "th"]):
-            lst.append(cell.text.replace("\n", "").replace("\r", ""))
+            lst.append(cell.text.replace("\n", "").replace("\r", "").strip())
         writer.writerow(lst)
 
 print("------------------------------")  # 30個
@@ -2854,17 +2672,120 @@ df["幣別"] = df["幣別"].apply(split_name)
 df.to_csv("tmp_xrt2.csv", index=False, encoding="big5")
 print("檢視前幾行\n", df.head())
 
+print("------------------------------")  # 30個
+
+tables = soup.find_all("table")
+print("table數量 :", len(tables))
+for table in tables:
+    print(table.get("class"))  # 看看是哪個table
+
+rows = soup.select("table tbody tr")
+print("筆數 :", len(rows))
+
+print("------------------------------")  # 30個
+
+#  印出前三行資料
+for row in rows[:3]:
+    print(row.get_text(" ", strip=True))
+
+print("------------------------------")  # 30個
+
+#  印出全部資料
+
+for row in rows:
+    tds = row.find_all("td")
+    if len(tds) > 4:
+        currency = tds[0].get_text(strip=True)
+        cash_buy = tds[1].get_text(strip=True)
+        cash_sell = tds[2].get_text(strip=True)
+        spot_buy = tds[3].get_text(strip=True)
+        spot_sell = tds[4].get_text(strip=True)
+        print(" 幣別    本行買入  本行賣出   本行買入  本行賣出")
+        print(currency, cash_buy, cash_sell, spot_buy, spot_sell)
+
+print("------------------------------")  # 30個
+
+print("多重條件選擇")
+cells = soup.select("table tr td")  # 尋找talbe標籤裡面的tr標籤裡面的td標籤 三者都要符合的抓出來
+print(type(cells))
+print("符合條件的資料", len(cells), "筆")
+print(cells)
+
+i = 0
+for cell in cells:
+    print(i, cell.text.strip())
+    i = i + 1
+
+print("------------------------------")  # 30個
+
+print("顯示 幣別, 多重條件選擇")
+dnames = soup.select("table tr td[data-table=幣別] div.visible-phone")
+# print(type(dnames))
+print("符合條件的資料", len(dnames), "筆")
+# print(dnames)
+names = list()
+for dname in dnames:
+    names.append(dname.text.strip())
+print(names)
+
+print("------------------------------")  # 30個
+
+print("顯示 本行即期買入, 多重條件選擇")
+buyingrate = soup.select("table tr td[data-table=本行即期買入]")
+print(type(buyingrate))
+print("符合條件的資料", len(buyingrate), "筆")
+print(buyingrate)
+i = 0
+for price in buyingrate:
+    print(i, price.text.strip())
+    i = i + 1
+
+print("---------------")  # 15個
+
+prices = list()
+for price in buyingrate:
+    prices.append(price.text.strip())
+print(prices)
+
+print("------------------------------")  # 30個
+
+print('用 zip 組合起來')
+# print(names)
+# print(prices)
+rates = zip(names, prices)
+for rate in rates:
+    print(rate)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("台灣銀行 匯率查詢")
+
+url = "https://rate.bot.com.tw/xrt/flcsv/0/day"  # 牌告匯率 CSV 網址
+
+response = requests.get(url)  # 爬取網址內容
+response.encoding = "utf-8"  # 網頁編碼模式  # 調整回應訊息編碼為 utf-8，避免編碼不同造成亂碼
+rt = response.text  # 以文字模式讀取內容
+rts = rt.split("\n")  # 使用「換行」將內容拆分成串列
+for i in rts:  # 讀取串列的每個項目
+    print(i)
+    try:  # 使用 try 避開最後一行的空白行
+        a = i.split(",")  # 每個項目用逗號拆分成子串列
+        print(a[0] + ": " + a[12])  # 取出第一個 ( 0 ) 和第十三個項目 ( 12 )
+    except:
+        break
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 base_url = "https://www.cbc.gov.tw/tw/"
 url = base_url + "lp-645-1.html"
-csvfile = "tmp_USxrt.csv"
 items = []
+
 next_page = True
 
 while next_page:
-    print(url)
+    print("網址 :", url)
     r = requests.get(url)
     r.encoding = "utf8"
     soup = BeautifulSoup(r.text, "lxml")
@@ -2875,6 +2796,7 @@ while next_page:
         for cell in row.find_all(["td", "th"]):
             lst.append(cell.text.replace("\n", "").replace("\r", ""))
         items.append(lst)
+
     # 找尋下一頁按鈕的<a>標籤
     tag_li = soup.find("li", class_="next")
     if tag_li:
@@ -2884,63 +2806,26 @@ while next_page:
     else:
         next_page = False
 
+csvfile = "tmp_USxrt.csv"
 with open(csvfile, "w+", newline="", encoding="utf-8") as fp:
     writer = csv.writer(fp)
     for item in items:
         writer.writerow(item)
 
-print("------------------------------")  # 30個
+print("---------------")  # 15個
 
 csvfile = "tmp_USxrt.csv"
 df = pd.read_csv(csvfile)
+
 df.drop_duplicates(keep=False, inplace=True)
 df.to_csv("tmp_USxrt2.csv", index=False, encoding="utf8")
-print(df.head(5))
+print(df.head())
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("查詢台銀牌告匯率")
 
-from time import localtime
-from time import strftime
-from os.path import exists  # 台銀匯率網站
-
-html = requests.get("https://rate.bot.com.tw/xrt?Lang=zh-TW")  # 回傳HTML檔案，轉存html物件
-bsObj = BeautifulSoup(html.content, "lxml")  # 解析網頁，建立bs物件
-for single_tr in (
-    bsObj.find("table", {"title": "牌告匯率"}).find("tbody").findAll("tr")
-):  # 針對匯率表格分析
-    cell = single_tr.findAll("td")  # 找到每一個表格
-    currency_name = (
-        cell[0].find("div", {"class": "visible-phone"}).contents[0]
-    )  # 找到表格中幣別
-    currency_name = currency_name.replace("\r", "")  # 取代不需要的字元
-    currency_name = currency_name.replace("\n", "")
-    currency_name = currency_name.replace(" ", "")
-    currency_rate = cell[2].contents[0]  # 找到幣別匯率
-    print(currency_name, currency_rate)
-    now_time = strftime("%Y-%m-%d %H:%M:%S", localtime())  # 記錄目前時間
-    data = [["時間", "匯率"], [now_time, currency_rate]]  # 準備寫入檔案資料
-    print("寫入資料 :", data)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-url = "https://rate.bot.com.tw/xrt?Lang=zh-TW"
-csvfile = "tmp_xrt.csv"
-r = requests.get(url)
-r.encoding = "utf8"
-soup = BeautifulSoup(r.text, "lxml")
-tag_table = soup.select_one("#ie11andabove > div > table")
-rows = tag_table.find_all("tr")
-with open(csvfile, "w+", newline="", encoding="big5") as fp:
-    writer = csv.writer(fp)
-    for row in rows:
-        lst = []
-        for cell in row.find_all(["td", "th"]):
-            lst.append(cell.text.replace("\n", "").replace("\r", "").strip())
-        writer.writerow(lst)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2966,6 +2851,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 # 3030
 print("------------------------------")  # 30個
+# 1515
+print("---------------")  # 15個
 
 """
 股票資料彙整_YahooFinance
@@ -3185,10 +3072,6 @@ mdf.groupby(["類股_名稱"]).size().sort_index()
 
 # 各類股 平均股價
 mdf.groupby(["類股_名稱"])["成交"].mean().sort_index()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -3428,3 +3311,27 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+
+""" 目前網站有擋，改成讀取本地檔案
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/131.0 Safari/537.36"
+}
+resp = requests.get(url, headers=headers)
+print(resp.url)
+print(resp.status_code)
+print(resp.text[:1000])
+print(resp.headers.get("Content-Type"))
+with open("page.html", "w", encoding="utf-8") as f:
+    f.write(resp.text)
+"""
+
+
+
+
+from time import localtime
+from time import strftime
+now_time = strftime("%Y-%m-%d %H:%M:%S", localtime())  # 記錄目前時間
+data = [["時間", "匯率"], [now_time, currency_rate]]  # 準備寫入檔案資料
+print("寫入資料 :", data)
+
