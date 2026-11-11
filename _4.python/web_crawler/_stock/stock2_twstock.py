@@ -2657,9 +2657,13 @@ def get_html_data1(url):
         return resp
 """
 
+url = "https://rate.bot.com.tw/xrt/all/day"
+# url = "https://rate.bot.com.tw/xrt?Lang=zh-TW"  # 另一個網址
+
 import requests
 from bs4 import BeautifulSoup
 
+""" 目前網站有擋，改成讀取本地檔案
 
 headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/131.0 Safari/537.36"
@@ -2676,8 +2680,14 @@ print(resp.headers.get("Content-Type"))
 
 with open("page.html", "w", encoding="utf-8") as f:
     f.write(resp.text)
+"""
 
-soup = BeautifulSoup(resp.text, "html.parser")
+# 讀取本地檔案
+with open("data/currency_20261110.html", "r", encoding="utf8") as fp:
+    soup = BeautifulSoup(fp, "lxml")
+    # print("整個網頁資料 :", soup)
+
+# soup = BeautifulSoup(resp.text, "html.parser")
 print(soup.title)  # 用來檢查是否有抓到正確的資料
 
 tables = soup.find_all("table")
@@ -2707,35 +2717,6 @@ for row in rows:
         print(currency, cash_buy, cash_sell, spot_buy, spot_sell)
 
 print("------------------------------")  # 30個
-
-
-def get_html_data1(url):
-    print("取得網頁資料: ", url)
-    headers = {"User-Agent": "Mozilla/5.0"}
-
-    resp = requests.get(url, headers=headers)
-    # 檢查 HTTP 回應碼是否為 requests.codes.ok(200)
-    if resp.status_code != 200:
-        print("失敗")
-        return None
-
-    return resp
-
-
-print("查詢中央銀行匯率")
-
-url = "https://rate.bot.com.tw/xrt/all/day"
-# url = "https://rate.bot.com.tw/xrt?Lang=zh-TW"  # 另一個網址
-html_data = get_html_data1(url)
-print("------------------------------------------------------------")  # 60個
-print(html_data.status_code)
-print("------------------------------------------------------------")  # 60個
-print(html_data.url)
-print("------------------------------------------------------------")  # 60個
-print(html_data.text[:1000])
-print("------------------------------------------------------------")  # 60個
-
-soup = BeautifulSoup(html_data.text, "html.parser")
 
 tables = soup.find_all("table")
 

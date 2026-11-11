@@ -68,6 +68,42 @@ print(show)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+直接在網址列輸入：
+chrome://version/
+
+直接用網站查
+網址列輸入：
+https://whatismybrowser.com/detect/what-is-my-user-agent
+
+或
+https://httpbin.org/user-agent
+
+
+在 Chrome 要去哪裡找User-Agent？
+
+右鍵/檢查/Network
+(Filter要清空)
+按F5
+選Name下的第一項 看 Headers（標頭） 找 Request Headers（要求標頭）
+找：
+User-Agent: 
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36
+
+
+3030
+
+在 FireFox 要去哪裡找User-Agent？
+
+右鍵/檢測/網路
+(Filter要清空)
+按F5
+選第一項 看 檔頭 找 請求標頭
+找：
+User-Agent: 
+Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0
+
+6060
+
 pypi
 pypi網站可以看到目前套件的最新版本
 https://pypi.org/project/requests/

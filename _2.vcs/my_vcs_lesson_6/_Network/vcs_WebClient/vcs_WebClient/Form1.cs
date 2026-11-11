@@ -1217,7 +1217,9 @@ namespace vcs_WebClient
 
 Stream stream = client.OpenRead(URLAddress);
 
-client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705; Combat;)");
+WebClient wc = new WebClient();  // 建立 WebClient
+wc.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705; Combat;)");
+wc.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705; Combat;)");
 
         private void button1_Click(object sender, EventArgs e)
         {
