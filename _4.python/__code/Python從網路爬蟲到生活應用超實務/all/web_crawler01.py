@@ -171,20 +171,6 @@ print(span.get("aria-label"))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from selenium import webdriver
-
-url = "https://www.cwb.gov.tw/V8/C/W/County/County.html?CID=65"
-driver = webdriver.Chrome("./chromedriver")
-driver.implicitly_wait(10)
-driver.get(url)
-soup = BeautifulSoup(driver.page_source, "lxml")
-span = soup.select_one("span.tem-C.is-active")
-print(span.text)
-driver.quit()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 url = "https://movies.yahoo.com.tw/movieinfo_main/復仇者聯盟-終局之戰-avengers-endgame-9728"
 response = requests.get(url)
 soup = BeautifulSoup(response.text, "lxml")
@@ -232,72 +218,6 @@ for item in items:
     price = item.find("strong")
     print("便當價格:", price.text)
     print("-------------------------------")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-from selenium import webdriver
-
-url = "https://rent.housefun.com.tw/region/�x�_��/?cid=0000"
-driver = webdriver.Chrome("./chromedriver")
-driver.implicitly_wait(10)
-driver.get(url)
-
-soup = BeautifulSoup(driver.page_source, "lxml")
-div = soup.find("div", id="SearchContent")
-items = div.find_all("article")
-print(len(items))
-for item in items:
-    title = item.find("h3", class_="title").find("a")
-    if title:
-        print(title.text)
-    address = item.find("address", class_="addr")
-    if address:
-        print(address.text.strip())
-    price = item.find("span", class_="infos num")
-    if price:
-        print(price.text)
-    print("-------------------")
-driver.quit()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-from selenium import webdriver
-import json
-
-url = "https://www.momoshop.com.tw/search/searchShop.jsp?keyword=nike NBA&searchType=1&curPage=1&_isFuzzy=0&showType=chessboardType"
-driver = webdriver.Chrome("./chromedriver")
-driver.implicitly_wait(10)
-driver.get(url)
-
-items = []
-count = 1
-page = 1
-while True:
-    print("抓取: 第" + str(page) + "頁 網路資料中...")
-    page = page + 1
-    soup = BeautifulSoup(driver.page_source, "lxml")
-    tag_ul = soup.select_one("div.listArea > ul")
-    tag_lis = tag_ul.find_all("li")
-    for tag_li in tag_lis:
-        title = tag_li.find("h3", class_="prdName")
-        price = tag_li.find("span", class_="price").find("b")
-        items.append({"id": count, "title": title.text, "price": price.text})
-        print("已經擷取:", count, "筆")
-        count = count + 1
-
-    btn_css = "div.pageArea.topPage > dl > dd > a"
-    button = driver.find_elements_by_css_selector(btn_css)
-    if button[len(button) - 1].text == "下一頁":
-        button[len(button) - 1].click()
-    else:
-        break
-    time.sleep(10)
-driver.quit()
-
-with open("momo_items.json", "w", encoding="utf-8") as fp:
-    json.dump(items, fp, indent=2, sort_keys=True, ensure_ascii=False)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -492,132 +412,6 @@ df.to_csv("trends.csv", index=False)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from selenium import webdriver
-
-url = "https://www.youtube.com/results?search_query=pytube3"
-
-driver = webdriver.Chrome("./chromedriver")
-driver.implicitly_wait(10)
-driver.get(url)
-print(driver.title)
-tags = driver.find_elements_by_xpath('//*[@id="video-title"]')
-links = []
-for tag in tags:
-    href = tag.get_attribute("href")
-    if href:
-        links.append(href)
-        print(href)
-print(len(links))
-driver.quit()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-from selenium import webdriver
-
-url = "https://www.youtube.com/results?search_query=pytube3"
-
-driver = webdriver.Chrome("./chromedriver")
-driver.implicitly_wait(10)
-driver.get(url)
-print(driver.title)
-soup = BeautifulSoup(driver.page_source, "lxml")
-tags = soup.select("#video-title")
-links = []
-for tag in tags:
-    href = tag["href"]
-    if href:
-        links.append(href)
-        print(href)
-print(len(links))
-driver.quit()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-
-url = "https://www.youtube.com/results?search_query=pytube3"
-
-driver = webdriver.Chrome("./chromedriver")
-driver.implicitly_wait(10)
-driver.get(url)
-print(driver.title)
-tags = driver.find_elements_by_xpath('//*[@id="video-title"]')
-links = []
-for tag in tags:
-    href = tag.get_attribute("href")
-    links.append(href)
-print(len(links))
-
-wait = WebDriverWait(driver, 10)
-for link in links:
-    driver.get(link)
-    num = link.strip("https://www.youtube.com/watch?v=")
-    title = wait.until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, "div#container > h1"))
-    ).text
-    description = wait.until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, "div#description"))
-    ).text
-    print("編號:", num)
-    print("名稱:", title.strip())
-    print("描述:", description.strip())
-    print("---------------------------")
-driver.quit()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-
-url = "https://www.youtube.com/results?search_query=pytube3"
-
-driver = webdriver.Chrome("./chromedriver")
-driver.implicitly_wait(10)
-driver.get(url)
-print(driver.title)
-
-for x in range(5):
-    html = driver.find_element_by_tag_name("html")
-    html.send_keys(Keys.END)
-    time.sleep(5)
-
-tags = driver.find_elements_by_xpath('//*[@id="video-title"]')
-links = []
-for tag in tags:
-    href = tag.get_attribute("href")
-    if href:
-        links.append(href)
-print(len(links))
-
-df = pd.DataFrame(columns=["id", "title", "description"])
-wait = WebDriverWait(driver, 10)
-for link in links:
-    driver.get(link)
-    num = link.strip("https://www.youtube.com/watch?v=")
-    title = wait.until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, "div#container > h1"))
-    ).text
-    description = wait.until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, "div#description"))
-    ).text
-    df.loc[len(df)] = [num, title, description]
-
-print(df.head())
-df.to_csv("YouTube.csv", index=False, encoding="utf-8")
-driver.quit()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 url = "https://fchart.github.io/img/Butterfly.png"
 path = "Butterfly.png"
 
@@ -679,43 +473,6 @@ for img in images:
         fp.write(chunk)
     fp.close()
 print("結束 Imgur 網頁圖檔下載...")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-from selenium import webdriver
-
-keyword = "dog"
-pathdir = "imgur2"
-url = "http://imgur.com/search?q=" + keyword
-os.makedirs(pathdir, exist_ok=True)
-driver = webdriver.Chrome("./chromedriver")
-driver.implicitly_wait(10)
-driver.get(url)
-for x in range(3):
-    js = "window.scrollTo(0, document.body.scrollHeight)"
-    driver.execute_script(js)
-    time.sleep(3)
-
-soup = BeautifulSoup(driver.page_source, "lxml")
-images = soup.find_all("a", class_="image-list-link")
-print("圖檔數:", len(images))
-for img in images:
-    try:
-        imgUrl = "http:" + img.find("img").get("src")
-        print("下載:", imgUrl)
-        res = requests.get(imgUrl)
-    except requests.exceptions.MissingSchema:
-        print("圖檔下載錯誤...")
-        continue
-
-    imgFile = os.path.join(pathdir, os.path.basename(imgUrl))
-    fp = open(imgFile, "wb")
-    for chunk in res.iter_content(100000):
-        fp.write(chunk)
-    fp.close()
-print("結束 Imgur 網頁圖檔下載...")
-driver.quit()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -883,34 +640,6 @@ with open("ptt_beauty.csv", "w+", newline="", encoding="big5") as fp:
     writer.writerow(["title", "href", "push_count", "author", "photo-src"])
     for article in all_articles:
         writer.writerow(article)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-from selenium import webdriver
-
-keyword = "dog"
-url = "http://imgur.com/search?q=" + keyword
-driver = webdriver.Chrome("./chromedriver")
-driver.implicitly_wait(10)
-driver.get(url)
-for x in range(3):
-    js = "window.scrollTo(0, document.body.scrollHeight)"
-    driver.execute_script(js)
-    time.sleep(3)
-
-soup = BeautifulSoup(driver.page_source, "lxml")
-images = soup.find_all("a", class_="image-list-link")
-print("圖檔數:", len(images))
-with open("imgur_dog.csv", "w+", newline="", encoding="big5") as fp:
-    writer = csv.writer(fp)
-    writer.writerow(["image-href"])
-    for img in images:
-        imgUrl = "http:" + img.find("img").get("src")
-        writer.writerow([imgUrl])
-
-print("成功建立 imgur_dog.csv 檔...")
-driver.quit()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1478,44 +1207,6 @@ def get_monthly_report(s_type, year, month, delay=5):
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from selenium import webdriver
-
-url = "https://www.bloomberg.com/quote/SPX:IND"
-driver = webdriver.Chrome("./chromedriver")
-driver.implicitly_wait(10)
-driver.get(url)
-soup = BeautifulSoup(driver.page_source, "lxml")
-regex = re.compile("^companyName.*")
-name_box = soup.find("h1", class_=regex)
-name = name_box.text
-print(name)
-price_box = soup.find("span", attrs={"class": re.compile("^priceText.*")})
-price = price_box.text
-print(price)
-driver.quit()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-from selenium import webdriver
-
-url = "https://www.bloomberg.com/quote/CCMP:IND"
-driver = webdriver.Chrome("./chromedriver")
-driver.implicitly_wait(10)
-driver.get(url)
-soup = BeautifulSoup(driver.page_source, "lxml")
-regex = re.compile("^companyName.*")
-name_box = soup.find("h1", class_=regex)
-name = name_box.text
-print(name)
-price_box = soup.find("span", attrs={"class": re.compile("^priceText.*")})
-price = price_box.text
-print(price)
-driver.quit()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 from flask import Flask
 
 app = Flask(__name__)
@@ -1887,4 +1578,6 @@ sys.exit()
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
+
+
 
