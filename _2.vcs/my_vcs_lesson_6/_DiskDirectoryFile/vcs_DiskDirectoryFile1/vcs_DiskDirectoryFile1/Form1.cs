@@ -518,21 +518,24 @@ namespace vcs_DiskDirectoryFile1
                 { "karen1", "楓カレン", "かえでかれん", "Kaede Karen"},
                 { "karen2", "楪カレン", "ゆずりはかれん", "Yuzuriha Karen"},
                 { "karen3", "小暮カレン", "こぐれかれん", "kogure karen"},
+                { "sayuri", "葉山さゆり", "はやまさゆり", "Hayama Sayuri"},
                 { "yuri1", "紗々原ゆり", "ささはらゆり", "Sasahara Yuri"},
                 { "yuri2", "広瀬ゆり", "ひろせゆり", "Hirose Yuri"},
                 { "kanna1", "今井栞菜", "いまいかんな", "Imai Kanna"},
                 { "kanna2", "美咲かんな", "みさきかんな", "Misaki kanna"},
                 { "kanna3", "藤かんな", "ふじかんな", "Fuji Kanna"},
-                //{ "anna", "杏奈" },
+                { "anna", "杏奈", "あんな", "Anna"},
                 { "yuko1", "小野夕子", "おのゆうこ", "Ono Yuko"},  // = 葵(S1)", "あおい", "Aoi"},
                 { "yuko2", "白木優子", "しらきゆうこ", "Shiraki Yuko"},
                 { "ran1", "松野蘭", "まつのらん", "Matsuno Ran"},
                 { "ran2", "藤井蘭々", "ふじいらんらん", "Fujii Ranran"},  // = 蜜美杏", "みつみあん", "Mitsumi An"},mma
+                { "mma", "藤井蘭々", "ふじいらんらん", "Fujii Ranran"},  // = 蜜美杏", "みつみあん", "Mitsumi An"},mma
                 { "iaoi", "一乃あおい", "いちのあおい", "Ichino Aoi"},
                 { "taoi", "葵つかさ", "あおいつかさ", "Aoi Tsukasa"},
+                { "yaoi", "葵百合香", "あおいゆりか", "Aoi Yurika"},
                 { "sayaka", "友田彩也香", "ともださやか", "Tomoda Sayaka"},
                 { "ayaka", "武藤あやか", "むとうあやか", "Mutou Ayaka"},
-                { "arina", "arina", "arina", "arina"},  // { "arina", "新ありな" },
+                { "arina", "新ありな", "あらたありな", "Arata Arina"},
                 { "rinne", "rinne", "rinne", "rinne"},  // dddddd
                 { "rin", "東凛", "あずまりん", "Azuma Rin"},
                 { "fsmai", "藤咲まい", "ふじさきまい", "Huzisaki Mai"},
@@ -548,6 +551,7 @@ namespace vcs_DiskDirectoryFile1
                 { "nonoka", "野々花さわ", "ののかさわ", "Nonoka Sawa"},  // =冨永ののか", "とみながののか", "Tominaga Nonoka"},
                 { "non", "野々浦暖", "ののうらのん", "Nonoura Non"},  // 共用
                 { "non", "小花のん", "おはなのん", "Ohana Non"},  // 共用
+                { "mito", "水戸かな", "みとかな", "Mito Kana"},
 
                 //舊的當疑問的。
                 { "kanna", "舊的當疑問的1", "舊的當疑問的", "舊的當疑問的"},
@@ -559,23 +563,23 @@ namespace vcs_DiskDirectoryFile1
                 { "aoi", "舊的當疑問的7", "舊的當疑問的", "舊的當疑問的"},
                 { "yuko", "舊的當疑問的8", "舊的當疑問的", "舊的當疑問的"},
                 { "yuuko", "舊的當疑問的9", "舊的當疑問的", "舊的當疑問的"},
-                { "2222", "舊的當疑問的10", "舊的當疑問的", "舊的當疑問的"},
-                { "5050", "舊的當疑問的11", "舊的當疑問的", "舊的當疑問的"},
                 { "kaede", "舊的當疑問的12", "舊的當疑問的", "舊的當疑問的"},
                
                //數字的
                 { "3333", "三上悠亜", "みかみゆあ", "Mikami Yua"},
-                //{ "4444", "四四四四" },四葉
+                { "4444", "小湊よつ葉", "こみなとよつは", "Kominato Yotsuha"},
                 { "5555", "五日市芽依", "いつかいちめい", "Itsukaichi Mei"},
+                { "5050", "五十嵐清華", "いがらしきよか", "Igarashi Kiyoka"},
                 { "7777", "七ツ森りり", "ななつもりりり", "Nanatsumori Riri"},
-                { "8888", "八掛うみ", "やつがけうみ", "Yatugake Umi"},  //八蜜凛 + 八卦海
+                { "8888", "八掛うみ", "やつがけうみ", "Yatugake Umi"},
+                { "8rin", "八蜜凛", "はちみつりん", "Hachimitsu Rin"},
                 { "9999", "九重かんな", "ここのえかんな", ""},
-                //{ "9999", "九条みちる" },
-                //{ "1010", "十束" },
+                { "9999", "九条みちる", "くじょうみちる", "Kujo Michiru"},
+                { "1010", "十束るう", "るう", "RUU"},
 
                 //優優的
                 { "asami", "小川あさ美", "おがわあさみ", "Ogawa Asami"},
-                //{ "miu", "白峰ミウ" },
+                { "miu", "白峰ミウ", "しろみねみう", "Shiromine Miu"},
                 { "3ne", "三澄寧々", "みすみねね", "Misumi Nene"},
                 { "kotone", "雨宮琴音", "あまみやことね", "Amamiya Kotone"},
                 { "uto", "鈴乃ウト", "すずのうと", "Suzuno Uto"},
@@ -584,8 +588,8 @@ namespace vcs_DiskDirectoryFile1
                 { "南波明花", "南波明花", "なんばはるか", "Namba Haruka"},
                 { "kurara", "愛世くらら", "まなせくらら", "Manase Kurara"},
                 { "yuna", "椎名ゆな", "しいなゆな", "Shiina Yuna"},
-                { "ayami", "森あやみ", "もりあやみ", "Mori Ayami"},
-                //{ "ayami", "池田あやみ" },
+                { "ayami", "森あやみ", "もりあやみ", "Mori Ayami"},  // 共用
+                { "ayami", "池田あやみ", "いけだあやみ", "Ikeda Ayami"},  // 共用
                 { "遠野夏生", "遠野夏生", "とおのなつき", "Toono Natsuki"},
                 { "mino", "美乃すずめ", "みのすずめ", "Mino Suzume"},
                 { "saeko", "松下紗栄子", "まつしたさえこ", "Matsushita Saeko"},
@@ -634,7 +638,6 @@ namespace vcs_DiskDirectoryFile1
                 { "suzu", "本庄鈴", "ほんじょうすず", "Honjo Suzu"},
                 { "riho", "藤森里穂", "ふじもりりほ", "Fujimori Riho"},
                 { "夏目響", "夏目響", "なつめひびき", "Natsume Hibiki"},
-                { "sayuri", "葉山さゆり", "はやまさゆり", "Hayama Sayuri"},
                 { "mori", "森日向子", "もりひなこ", "Mori Hinako"},
                 { "kana", "森沢かな", "もりさわかな", "Morisawa kana"},
                 { "airi", "希島あいり", "きじまあいり", "Kijima Airi"},
@@ -649,15 +652,19 @@ namespace vcs_DiskDirectoryFile1
                 { "alice", "美雪ありす", "みゆきありす", "Miyuki Arisu"},
                 { "reira", "愛咲れいら", "あいさきれいら", "Aisaki Reira"},  //=原千尋
                 { "anri", "鈴木杏里", "すずきあんり", "Suzuki Anri"},
+                { "mina", "北野未奈", "きたのみな", "Kitano Mina"},
+                { "北川遥", "北川遥", "きたがわはるか", "Kitagawa Haruka"},
+                { "蒼乃美月", "蒼乃美月", "あおのみづき", "Aono Mizuki"},
+                { "黒木奈美", "黒木奈美", "くろきなみ", "Kuroki Nami"},
+                { "静河", "静河真理子", "しずかわまりこ", "Shizukawa Mariko"},
                 //CCCC
-                { "北野未奈", "北野未奈", "きたのみな", "Kitano Mina"},
-                { "葵百合香", "葵百合香", "あおいゆりか", "Aoi Yurika"},
+                { "mina", "北野未奈", "きたのみな", "Kitano Mina"},
                 { "ruisa", "都月るいさ", "とつきるいさ", "Totuki Ruisa"},
                 { "倉木華", "倉木華", "くらきはな", "Kuraki Hana"},
                 { "mary", "橘メアリー", "たちばなめありー", "Tachibana Mary"},
                 { "二階堂美雨", "二階堂美雨", "にかいどうみう", "Nikaidou Miu"},
                 { "akane", "あかね麗", "あかねうらら", "Akane Urara"},  //=二階堂麗", "にかいどううらら", "Nikaidou Urara"},
-                //2222=二階堂麗=あかね麗=akane
+                { "2222", "あかね麗", "あかねうらら", "Akane Urara"},  //=二階堂麗", "にかいどううらら", "Nikaidou Urara"}, //2222=二階堂麗(舊)=あかね麗(新)
                 { "塩見彩", "塩見彩", "しおみあや", "Shiomi Aya"},
                 { "渋谷華", "渋谷華", "しぶやはな", "Shibuya Hana"},
                 { "remu", "涼森れむ", "すずもりれむ", "Suzumori Remu"},
@@ -695,6 +702,21 @@ namespace vcs_DiskDirectoryFile1
                 { "ksrei", "黒島玲衣", "くろしまれい", "Kuroshima Rei"},
                 { "naho", "小沢菜穂", "おざわ なほ", "Ozawa Naho"},
                 { "nogi", "乃木絢愛", "のぎあやめ", "Nogi Ayame"},
+                { "春明潤", "春明潤", "はるみじゅん", "Harumi Jun"},
+                { "ths", "高橋しょう子", "たかはししょうこ", "Takahashi Shouko"},
+                { "日下部加奈", "日下部加奈", "くさかべかな", "Kusakabe Kana"},
+                { "東希美", "東希美", "あずまのぞみ", "Azuma Nozomi"},
+                { "七瀬いおり", "七瀬いおり", "ななせいおり", "Nanase Iori"},
+                { "加藤ツバキ", "加藤ツバキ", "かとうつばき", "Katou Tsubaki"},
+                { "岬ひかり", "岬ひかり", "みさきひかり", "Misaki Hikari"},
+                { "有賀みなほ", "有賀みなほ", "ありがみなほ", "Ariga Minaho"},        
+                { "honoka", "米倉穂香", "よねくらほのか", "Yonekura Honoka"},
+                { "momo", "桜空もも", "さくらもも", "Sakura Momo"},
+                { "nami", "沖宮那美", "おきみやなみ", "Okimiya Nami"},
+                { "yume", "西宮ゆめ", "にしみやゆめ", "Nishimiya Yume"},
+                { "木村穂乃香", "木村穂乃香", "きむらほのか", "Kimura Honoka"},
+                { "沖田杏梨", "沖田杏梨", "おきたあんり", "Okita Anri"},
+                { "めぐり", "めぐり", "めぐり", "Meguri"},
 
                 //系列
                 { "gggg", "優優檔", "系列", "系列"},
@@ -5732,7 +5754,7 @@ namespace vcs_DiskDirectoryFile1
                 "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ",
 
                 // 臨時的修正
-                // "-FHD", ".FHD", "-fhd", ".fhd", "QQQQ", "QQQQ", "QQQQ", "QQQQ",
+                // "-FHD", ".FHD", "-fhd", ".fhd", "_GG5", "QQQQ", "QQQQ", "QQQQ",
                 // " ", "-", "%", "$", "(", ")"};  //最後再刪除標點符號
                 " - 複製", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"  //最後再刪除標點符號
             };
@@ -5755,30 +5777,33 @@ namespace vcs_DiskDirectoryFile1
             shortname = shortname.ToLower();
 
             //先過濾掉一些字
-            string[] remove_word = new string[] { "-C.mp4", "taxv.xyz_", "[javdb.com]", "[MILFY]", "027_3xplanet_", "[Thz.la]"
-                , "9288.pro@", "027_3xplanet_", "hhd800.com@", "489155.com@", "javkok.com@", "489155.com@", "big2048.com@", "[bbs.yzkof.com]"
-                , "jav20s8.com@", "@江南@", "松島楓", "toyouiv.com_", "桐原エリカ", "(Kirihara Erika)"
-                , "[javdb.com]", "Abigaile Johnson ", "Heydoug", "heyzo_hd", "DLLAF"
-                , "bbs2048.org@", "Abigaile Johnson ", "Heydoug", "avmans.com", "_FHD", "FHD"
-                , "4k688.com@", "僕とかえでの甘～い性活", "松島かえで", "[garea chinan]", "MIG"
-                , "初剃り", "[44x.me]", "bbsxv.xyz", "@蜂鳥@fengniao151.vip", "18x78.com_"
-                , "taxv.xyz", "jav20s8.com@", "shimohira", "hikari", "deeper.21"
-                , "【雪光梦想】", "4k2.com@", "Caribbeancom", "[HD]", "104DANDAN"
-                , "[88q.me]", "jav4you.", "private", "52JAV.COM", "crv2000.com"
-                , "javidol.com", "Prestige", "[thzu.cc]", "wowg.", "18x78.com_"
-                , "(hibino)", "kpkp3.com", "bbyxv.xyz", "aaxv.xyz", "4k2.me@"
-                , "masex.tv@", "[55h.me]", "[NoDRM]-", "jpfou.com-", "madoubt.com 583985.xyz "
-                , "-javgg.net", "[456k.me]", "(uncensored)", "rh2048.com@", "-uncensored", "uncensored"
-                , "[BT-btt.com]", ".h264", ".xvid", "jnty4588.com", "77vr.com@"
-                , "2048.info@", "madoubt.com 952388.xyz ", "~nyap2p.com", "kcf9.com@", "gg5.co@"
-                , "gg5.co@", "H265", "-nyap2p.comnf.", "_dvd", "[crazecat下载加速器—www.crazecat.com]"
-                , "_gg5", "hd_", "_hd_", "_uncen", "jn998.vip-"
-                , "-1080p", "(麻豆傳媒)", "(杏吧傳媒)", "_hd.mp4", "_hd.mkv", "_hd.wmv"
-                , "_1.mp4", "-nyap2p.com", "(Red Hot Jam)", "(KIRARI)", "dccdom.com@"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , ".mp4", ".wmv", ".avi", ".mkv", ".mov"  // 清除副檔名
-                , " ", "-", "%", "$", "(", ")"};  //最後再刪除標點符號
+            string[] remove_word = new string[]
+            {
+                "taxv.xyz_", "[javdb.com]", "[MILFY]", "027_3xplanet_", "[Thz.la]",
+                "9288.pro@", "027_3xplanet_", "hhd800.com@", "489155.com@", "javkok.com@", "489155.com@", "big2048.com@", "[bbs.yzkof.com]",
+                "jav20s8.com@", "@江南@", "松島楓", "toyouiv.com_", "桐原エリカ", "(Kirihara Erika)",
+                "[javdb.com]", "Abigaile Johnson ", "Heydoug", "heyzo_hd", "DLLAF",
+                "bbs2048.org@", "Abigaile Johnson ", "Heydoug", "avmans.com", "_FHD", "FHD",
+                "4k688.com@", "僕とかえでの甘～い性活", "松島かえで", "[garea chinan]", "MIG",
+                "初剃り", "[44x.me]", "bbsxv.xyz", "@蜂鳥@fengniao151.vip", "18x78.com_",
+                "taxv.xyz", "jav20s8.com@", "shimohira", "hikari", "deeper.21",
+                "【雪光梦想】", "4k2.com@", "Caribbeancom", "[HD]", "104DANDAN",
+                "[88q.me]", "jav4you.", "private", "52JAV.COM", "crv2000.com",
+                "javidol.com", "Prestige", "[thzu.cc]", "wowg.", "18x78.com_",
+                "(hibino)", "kpkp3.com", "bbyxv.xyz", "aaxv.xyz", "4k2.me@",
+                "masex.tv@", "[55h.me]", "[NoDRM]-", "jpfou.com-", "madoubt.com 583985.xyz ",
+                "-javgg.net", "[456k.me]", "(uncensored)", "rh2048.com@", "-uncensored", "uncensored",
+                "[BT-btt.com]", ".h264", ".xvid", "jnty4588.com", "77vr.com@",
+                "2048.info@", "madoubt.com 952388.xyz ", "~nyap2p.com", "kcf9.com@", "gg5.co@",
+                "gg5.co@", "H265", "-nyap2p.comnf.", "_dvd", "[crazecat下载加速器—www.crazecat.com]",
+                "_gg5", "hd_", "_hd_", "_uncen", "jn998.vip-",
+                "-1080p", "(麻豆傳媒)", "(杏吧傳媒)", "_hd.mp4", "_hd.mkv", "_hd.wmv",
+                "-nyap2p.com", "(Red Hot Jam)", "(KIRARI)", "dccdom.com@",
+                "_GG5", "QQQQ", "QQQQ", "QQQQ", "QQQQ",
+                "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ",
+                "-C.mp4", "_1.mp4", ".mp4", ".wmv", ".avi", ".mkv", ".mov",  // 清除副檔名
+                " ", "-", "%", "$", "(", ")"
+            };  //最後再刪除標點符號
 
             //重複刪除乾淨
             foreach (string r in remove_word)
@@ -5786,7 +5811,7 @@ namespace vcs_DiskDirectoryFile1
                 shortname = shortname.Replace(r.ToLower(), "").Trim();
             }
 
-            //richTextBox1.Text += "new1 =  " + shortname + "\n";
+            richTextBox1.Text += "new1 =  " + shortname + "\n";
 
             //後面是7碼的
             string[] series7 = new string[] {
@@ -5815,7 +5840,7 @@ namespace vcs_DiskDirectoryFile1
             //後面是4碼的
             string[] series4 = new string[] {
                   "259luxu", "ofje", "nhdtb", "siro", "422ion", "kwbd", "heyzo"
-                , "ppt", "583erkr", "525dht", "229scute", "200gana", "QQQQ", "QQQQ"
+                , "ppt", "583erkr", "525dht", "229scute", "200gana", "300mium", "QQQQ"
                 , "hunb", "sprd", "luxu", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
@@ -5826,7 +5851,7 @@ namespace vcs_DiskDirectoryFile1
 
             //後面是3碼的
             string[] series3 = new string[] {
-                  "390jac", "534ind", "590mcht", "300mium", "joymii.", "474musume", "594prgo"
+                  "390jac", "534ind", "590mcht", "QQQQ", "joymii.", "474musume", "594prgo"
                 , "300ntk", "358with", "384shss", "393otim", "476mla", "491tkwa", "498ddh"
                 , "hunta", "318lady", "300ntk", "326hgp", "428suke", "451hhh", "285endx"
                 , "dgcemd", "dgcemd", "261ara", "529stcv", "230orec", "300maan", "345simm"
@@ -5966,6 +5991,7 @@ namespace vcs_DiskDirectoryFile1
             }
 
             //richTextBox1.Text += "new3 =  " + shortname + "\n";
+
             if (position < 0)
             {
                 foreach (string r in series4)   //後面是4碼的
@@ -5981,6 +6007,8 @@ namespace vcs_DiskDirectoryFile1
                 }
             }
 
+            //richTextBox1.Text += "new4 =  " + shortname + "\n";
+
             //找系列名，若有找到，取出此系列名+後3碼，之後的捨棄
             if (position < 0)
             {
@@ -5990,6 +6018,7 @@ namespace vcs_DiskDirectoryFile1
                     //if (position > -1)
                     if (position == 0)  // 關鍵字一定要在最前面
                     {
+                        //richTextBox1.Text += "get : " + r + "\n";
                         //有找到系列名
                         len = r.Length;
                         shortname = shortname.Substring(position, len + 3);
@@ -6033,11 +6062,23 @@ namespace vcs_DiskDirectoryFile1
                     {
                         continue;
                     }
+                    if (seriesname.ToLower().Contains("juta") == true)
+                    {
+                        continue;
+                    }
                     if (seriesname.ToLower().Contains("emth") == true)
                     {
                         continue;
                     }
                     if (seriesname.ToLower().Contains("mgold") == true)
+                    {
+                        continue;
+                    }
+                    if (seriesname.ToLower().Contains("moer") == true)
+                    {
+                        continue;
+                    }
+                    if (seriesname.ToLower().Contains("FC2-PPV") == true)
                     {
                         continue;
                     }
@@ -8380,30 +8421,8 @@ _video      影片模式
 
 */
 
-/*
-        Dictionary<string, string> name_dict = new Dictionary<string, string>()
-        {
-                
- * asami
         //常字包含短字, 長字在前//若有包含字串的，多字的放前面即可
         //前長後短
-
-ths 高橋しょう子
-
-日下部加奈
-        //相同字
-        { "春明潤", "春明潤" },
-        { "東希美", "東希美" },
-        { "有賀みなほ", "有賀みなほ" },
-        { "honoka", "米倉穂香" },
-        { "mito", "水戸かな" },
-        { "momo", "桜空もも" },
-        { "nami", "沖宮那美" },
-        { "yume", "西宮ゆめ" }, 
-*/
-
-
-
 
 /*
 待刪除臨時檔名關鍵字
@@ -8425,3 +8444,6 @@ IPZ-568-UC.mp4
 [.]                  AIAV-003-C_GG5.mp4   
 
 */
+
+//  
+

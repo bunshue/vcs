@@ -1182,6 +1182,7 @@
             this.bt_test0.TabIndex = 336;
             this.bt_test0.Text = "測試0";
             this.bt_test0.UseVisualStyleBackColor = true;
+            this.bt_test0.Click += new System.EventHandler(this.bt_test0_Click);
             // 
             // bt_test7
             // 
@@ -1193,6 +1194,7 @@
             this.bt_test7.TabIndex = 339;
             this.bt_test7.Text = "讀寫";
             this.bt_test7.UseVisualStyleBackColor = true;
+            this.bt_test7.Click += new System.EventHandler(this.bt_test7_Click);
             // 
             // bt_test3
             // 
@@ -1204,6 +1206,7 @@
             this.bt_test3.TabIndex = 334;
             this.bt_test3.Text = "測試3";
             this.bt_test3.UseVisualStyleBackColor = true;
+            this.bt_test3.Click += new System.EventHandler(this.bt_test3_Click);
             // 
             // bt_setup
             // 
@@ -1226,6 +1229,7 @@
             this.bt_test2.TabIndex = 333;
             this.bt_test2.Text = "測試2優";
             this.bt_test2.UseVisualStyleBackColor = true;
+            this.bt_test2.Click += new System.EventHandler(this.bt_test2_Click);
             // 
             // bt_test6
             // 
@@ -1237,6 +1241,7 @@
             this.bt_test6.TabIndex = 338;
             this.bt_test6.Text = "測試6";
             this.bt_test6.UseVisualStyleBackColor = true;
+            this.bt_test6.Click += new System.EventHandler(this.bt_test6_Click);
             // 
             // bt_test1
             // 
@@ -1248,6 +1253,7 @@
             this.bt_test1.TabIndex = 332;
             this.bt_test1.Text = "測試1";
             this.bt_test1.UseVisualStyleBackColor = true;
+            this.bt_test1.Click += new System.EventHandler(this.bt_test1_Click);
             // 
             // bt_test5
             // 
@@ -1259,6 +1265,7 @@
             this.bt_test5.TabIndex = 337;
             this.bt_test5.Text = "測試5";
             this.bt_test5.UseVisualStyleBackColor = true;
+            this.bt_test5.Click += new System.EventHandler(this.bt_test5_Click);
             // 
             // bt_test4
             // 
@@ -1270,6 +1277,7 @@
             this.bt_test4.TabIndex = 335;
             this.bt_test4.Text = "測試4";
             this.bt_test4.UseVisualStyleBackColor = true;
+            this.bt_test4.Click += new System.EventHandler(this.bt_test4_Click);
             // 
             // groupBox_folder
             // 
