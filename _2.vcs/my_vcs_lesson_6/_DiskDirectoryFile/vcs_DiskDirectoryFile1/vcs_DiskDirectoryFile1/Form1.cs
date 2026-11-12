@@ -515,15 +515,15 @@ namespace vcs_DiskDirectoryFile1
                 { "1111b", "星宮一花", "ほしみやいちか", "Hoshimiya Ichika"},
                 { "kaede1", "松島かえで", "まつしまかえで", "Matsushima Kaede"},
                 { "kaede2", "冬月かえで", "ふゆつきかえで", "Fuyutsuki Kaede"},
-                { "kanna1", "今井栞菜", "いまいかんな", "Imai Kanna"},
-                { "kanna2", "美咲かんな", "みさきかんな", "Misaki kanna"},
-                { "kanna3", "藤かんな", "ふじかんな", "Fuji Kanna"},
-                        //{ "anna", "杏奈" },
                 { "karen1", "楓カレン", "かえでかれん", "Kaede Karen"},
                 { "karen2", "楪カレン", "ゆずりはかれん", "Yuzuriha Karen"},
                 { "karen3", "小暮カレン", "こぐれかれん", "kogure karen"},
                 { "yuri1", "紗々原ゆり", "ささはらゆり", "Sasahara Yuri"},
                 { "yuri2", "広瀬ゆり", "ひろせゆり", "Hirose Yuri"},
+                { "kanna1", "今井栞菜", "いまいかんな", "Imai Kanna"},
+                { "kanna2", "美咲かんな", "みさきかんな", "Misaki kanna"},
+                { "kanna3", "藤かんな", "ふじかんな", "Fuji Kanna"},
+                //{ "anna", "杏奈" },
                 { "yuko1", "小野夕子", "おのゆうこ", "Ono Yuko"},  // = 葵(S1)", "あおい", "Aoi"},
                 { "yuko2", "白木優子", "しらきゆうこ", "Shiraki Yuko"},
                 { "ran1", "松野蘭", "まつのらん", "Matsuno Ran"},
@@ -532,24 +532,23 @@ namespace vcs_DiskDirectoryFile1
                 { "taoi", "葵つかさ", "あおいつかさ", "Aoi Tsukasa"},
                 { "sayaka", "友田彩也香", "ともださやか", "Tomoda Sayaka"},
                 { "ayaka", "武藤あやか", "むとうあやか", "Mutou Ayaka"},
-                { "arina", "arina", "arina", "arina"},
-                { "rinne", "rinne", "rinne", "rinne"},
+                { "arina", "arina", "arina", "arina"},  // { "arina", "新ありな" },
+                { "rinne", "rinne", "rinne", "rinne"},  // dddddd
                 { "rin", "東凛", "あずまりん", "Azuma Rin"},
-                
                 { "fsmai", "藤咲まい", "ふじさきまい", "Huzisaki Mai"},
                 { "mai", "神菜美まい", "かなみまい", "Kanami Mai"},
-                { "sma", "鈴村あいり", "すずむらあいり", "Suzumura Airi"},                
-
+                { "sma", "鈴村あいり", "すずむらあいり", "Suzumura Airi"},
                 { "kksmr", "黒川すみれ", "くろかわすみれ", "Kurokawa Sumire"},
                 { "misaki", "岬ななみ", "みさきななみ", "misaki nanami"},
+                { "saki", "奥田咲", "おくださき", "Okuda Saki"},
                 { "maki", "北条麻妃", "ほうじょうまき", "Houzyou Maki"},
                 { "taki", "瀧本雫葉", "たきもとしずは", "Takimoto Shizuha"},
                 { "akiho", "吉沢明歩", "よしざわあきほ", "Yoshizawa Akiho"},
-                //{ "aki", "佐佐木" },
-
+                { "aki", "佐々木あき", "ささきあき", "Sasaki Aki"},
                 { "nonoka", "野々花さわ", "ののかさわ", "Nonoka Sawa"},  // =冨永ののか", "とみながののか", "Tominaga Nonoka"},
-                //non
-                
+                { "non", "野々浦暖", "ののうらのん", "Nonoura Non"},  // 共用
+                { "non", "小花のん", "おはなのん", "Ohana Non"},  // 共用
+
                 //舊的當疑問的。
                 { "kanna", "舊的當疑問的1", "舊的當疑問的", "舊的當疑問的"},
                 { "karen", "舊的當疑問的2", "舊的當疑問的", "舊的當疑問的"},
@@ -558,19 +557,25 @@ namespace vcs_DiskDirectoryFile1
                 { "1111", "舊的當疑問的5", "舊的當疑問的", "舊的當疑問的"},
                 { "yuri", "舊的當疑問的6", "舊的當疑問的", "舊的當疑問的"},
                 { "aoi", "舊的當疑問的7", "舊的當疑問的", "舊的當疑問的"},
-                
-                //數字的
+                { "yuko", "舊的當疑問的8", "舊的當疑問的", "舊的當疑問的"},
+                { "yuuko", "舊的當疑問的9", "舊的當疑問的", "舊的當疑問的"},
+                { "2222", "舊的當疑問的10", "舊的當疑問的", "舊的當疑問的"},
+                { "5050", "舊的當疑問的11", "舊的當疑問的", "舊的當疑問的"},
+                { "kaede", "舊的當疑問的12", "舊的當疑問的", "舊的當疑問的"},
+               
+               //數字的
                 { "3333", "三上悠亜", "みかみゆあ", "Mikami Yua"},
-                //4444
+                //{ "4444", "四四四四" },四葉
                 { "5555", "五日市芽依", "いつかいちめい", "Itsukaichi Mei"},
                 { "7777", "七ツ森りり", "ななつもりりり", "Nanatsumori Riri"},
-                { "8888", "八掛うみ", "やつがけうみ", "Yatugake Umi"},
+                { "8888", "八掛うみ", "やつがけうみ", "Yatugake Umi"},  //八蜜凛 + 八卦海
                 { "9999", "九重かんな", "ここのえかんな", ""},
                 //{ "9999", "九条みちる" },
                 //{ "1010", "十束" },
 
                 //優優的
                 { "asami", "小川あさ美", "おがわあさみ", "Ogawa Asami"},
+                //{ "miu", "白峰ミウ" },
                 { "3ne", "三澄寧々", "みすみねね", "Misumi Nene"},
                 { "kotone", "雨宮琴音", "あまみやことね", "Amamiya Kotone"},
                 { "uto", "鈴乃ウト", "すずのうと", "Suzuno Uto"},
@@ -588,11 +593,8 @@ namespace vcs_DiskDirectoryFile1
                 { "yama", "山岸あや花", "やまぎしあやか", "Yamagishi Ayaka"},
                 { "kiho", "金松季歩", "かねまつきほ", "Kanematsu Kiho"},
                 { "aiba", "相葉美沙子", "あいばみさこ", "Aiba Misako"},
-                { "mth", "明日葉みつは", "あしたばみつは", "Ashitaba Mitsuha"},
-                { "ria", "愛才りあ", "あいせりあ", "Aise Ria"},
                 { "朝霧メイサ", "朝霧メイサ", "あさぎりめいさ", "Asagiri Meisa"},
                 { "fumino", "沙月ふみの", "さつきふみの", "Satsuki Fumino"},
-                { "mos", "松岡すず", "まつおかすず", "Matsuoka Suzu"},
                 { "mion", "園田みおん", "そのだみおん", "Sonoda Mion"},
                 { "mihi", "三比菜々美", "みひななみ", "Mihi Nanami"},
                 { "芦名ユリア", "芦名ユリア", "あしなゆりあ", "Ashina Yuria"},
@@ -600,21 +602,43 @@ namespace vcs_DiskDirectoryFile1
                 { "riko", "宮瀬リコ", "みやせりこ", "miyase riko"},
                 { "sawa", "恵さわ", "めぐみさわ", "Megumi Sawa"},
                 { "nozomi", "麻生希", "あそうのぞみ", "Aso Nozomi"},
+                //三字簡寫
+                { "mth", "明日葉みつは", "あしたばみつは", "Ashitaba Mitsuha"},
+                { "mha", "水端あさみ", "みずはたあさみ", "Mizuhata Asami"},
+                { "nma", "新村あかり", "にいむらあかり", "Niimura Akari"},
+                { "azm", "相沢みなみ", "あいざわみなみ", "Aizawa Minami"},
+                { "kjm", "小島みなみ", "こじまみなみ", "Kojima Minami"},
+                { "jgj", "神宮寺ナオ", "じんぐうじなお", "Zinguuzi Nao"},
+                { "mos", "松岡すず", "まつおかすず", "Matsuoka Suzu"},
+                { "hkm", "初川みなみ", "はつかわみなみ", "Hatsukawa Minami"},
+                { "kma", "小松杏", "こまつあん", "Komatsu An"},
+                { "nmm", "仲村みう", "なかむらみう", "Nakamura Miu"},
+                { "amt", "天海つばさ", "あまみつばさ", "Amami Tubasa"},
+                { "aks", "天川そら", "あまかわそら", "Amakawa Sora"},
+
+                //三字
+                { "yui", "波多野結衣", "はたのゆい", "Hatano Yui"},
+                { "ryo", "愛弓りょう", "あゆみりょう", "Ayumi Ryo"},
+                { "rei", "神木麗", "かみきれい", "Kamiki Rei"},
+                { "smr", "水川スミレ", "みずかわすみれ", "Mizukawa Sumire"}, //=水稀みり(みずきみり)=百多えみり
+                { "ksk", "妃ひかり", "きさきひかり", "Kisaki Hikari"},  // queen
+                { "nao", "若菜奈央", "わかななお", "Wakana Nao"},
+                { "mio", "君島みお", "きみじまみお", "Kimizima Mio"},
+                { "moe", "天使もえ", "あまつかもえ", "Amatsuka Moe"},
+                { "rio", "朝妃りお", "あさひりお", "Asahi Rio"},  //=朝日りお
+                { "ria", "愛才りあ", "あいせりあ", "Aise Ria"},
+                { "tia", "ティア", "てぃあ", "Tia"},
+                
                 //BBBB
                 { "julia", "JULIA", "じゅりあ", "Julia"},
                 { "suzu", "本庄鈴", "ほんじょうすず", "Honjo Suzu"},
-                { "mha", "水端あさみ", "みずはたあさみ", "Mizuhata Asami"},
                 { "riho", "藤森里穂", "ふじもりりほ", "Fujimori Riho"},
                 { "夏目響", "夏目響", "なつめひびき", "Natsume Hibiki"},
-                { "ryo", "愛弓りょう", "あゆみりょう", "Ayumi Ryo"},
-                { "rei", "神木麗", "かみきれい", "Kamiki Rei"},
                 { "sayuri", "葉山さゆり", "はやまさゆり", "Hayama Sayuri"},
-                { "aki", "佐々木あき", "ささきあき", "Sasaki Aki"},
                 { "mori", "森日向子", "もりひなこ", "Mori Hinako"},
                 { "kana", "森沢かな", "もりさわかな", "Morisawa kana"},
                 { "airi", "希島あいり", "きじまあいり", "Kijima Airi"},
                 { "jessica", "希崎ジェシカ", "きざきじぇしか", "Kizaki Jessica"},
-                { "azm", "相沢みなみ", "あいざわみなみ", "Aizawa Minami"},
                 { "akari", "明里つむぎ", "あかりつむぎ", "Akari Tsumugi"},
                 { "白咲りの", "白咲りの", "しろさきりの", "Shirosaki Rino"},
                 { "立花瑠莉", "立花瑠莉", "たちばなるり", "Tachibana Ruri"},  //同上
@@ -623,57 +647,39 @@ namespace vcs_DiskDirectoryFile1
                 { "静河真理子", "静河真理子", "しずかわまりこ", "Shizukawa Mariko"},
                 { "鈴木麻奈美", "鈴木麻奈美", "すずきまなみ", "Suzuki Manami"},
                 { "alice", "美雪ありす", "みゆきありす", "Miyuki Arisu"},
-                { "reira", "愛咲れいら", "あいさきれいら", "Aisaki Reira"},  // = 原千尋
+                { "reira", "愛咲れいら", "あいさきれいら", "Aisaki Reira"},  //=原千尋
                 { "anri", "鈴木杏里", "すずきあんり", "Suzuki Anri"},
                 //CCCC
                 { "北野未奈", "北野未奈", "きたのみな", "Kitano Mina"},
                 { "葵百合香", "葵百合香", "あおいゆりか", "Aoi Yurika"},
                 { "ruisa", "都月るいさ", "とつきるいさ", "Totuki Ruisa"},
-                { "nma", "新村あかり", "にいむらあかり", "Niimura Akari"},
                 { "倉木華", "倉木華", "くらきはな", "Kuraki Hana"},
                 { "mary", "橘メアリー", "たちばなめありー", "Tachibana Mary"},
-                { "non", "野々浦暖", "ののうらのん", "Nonoura Non"},  // 共用
-                { "non", "小花のん", "おはなのん", "Ohana Non"},  // 共用
-                { "hkm", "初川みなみ", "はつかわみなみ", "Hatsukawa Minami"},
                 { "二階堂美雨", "二階堂美雨", "にかいどうみう", "Nikaidou Miu"},
-                { "akane", "あかね麗", "あかねうらら", "Akane Urara"},  // =  二階堂麗", "にかいどううらら", "Nikaidou Urara"},
+                { "akane", "あかね麗", "あかねうらら", "Akane Urara"},  //=二階堂麗", "にかいどううらら", "Nikaidou Urara"},
                 //2222=二階堂麗=あかね麗=akane
                 { "塩見彩", "塩見彩", "しおみあや", "Shiomi Aya"},
                 { "渋谷華", "渋谷華", "しぶやはな", "Shibuya Hana"},
-                { "yui", "波多野結衣", "はたのゆい", "Hatano Yui"},
                 { "remu", "涼森れむ", "すずもりれむ", "Suzumori Remu"},
-                { "jgj", "神宮寺ナオ", "じんぐうじなお", "Zinguuzi Nao"},
                 { "nene", "吉高寧々", "よしたかねね", "Yoshitaka Nene"},
-                { "maron", "夏花まろん", "なつきまろん", "Natsuki Maron"}, // = 夏希まろん", "なつきまろん", "Natsuki Maron"},
-                { "kjm", "小島みなみ", "こじまみなみ", "Kojima Minami"},
+                { "maron", "夏花まろん", "なつきまろん", "Natsuki Maron"}, //=夏希まろん", "なつきまろん", "Natsuki Maron"},
                 { "めぐり", "めぐり", "めぐり", "Meguri"},
                 { "大槻ひびき", "大槻ひびき", "おおつきひびき", "Ootsuki Hibiki"},
-                { "smr", "水川スミレ", "みずかわすみれ", "Mizukawa Sumire"}, // = 水稀みり", "みずきみり", "Mizuki Miri"}, = 百多えみり(Caribbeancom)", "ももたえみり", "Momota Emiri"},
                 { "水川潤", "水川潤", "みずかわじゅん", "Mizukawa Jun"},
                 { "橘京花", "橘京花", "たちばなきょうか", "Tachibana Kyoka"},
                 { "miho", "通野未帆", "とおのみほ", "Tohno Miho"},
-                { "nao", "若菜奈央", "わかななお", "Wakana Nao"},
-                { "mio", "君島みお", "きみじまみお", "Kimizima Mio"},
                 { "yuma", "佐野ゆま", "さのゆま", "Sano Yuma"},
-                { "yuka/yuuka", "大島優香", "おおしまゆうか", "Ooshima Yuuka"},
+                //{ "yuka/yuuka", "大島優香", "おおしまゆうか", "Ooshima Yuuka"},
                 { "mizuno", "水野優香", "みずのゆうか", "Mizuno Yuuka"},
-                { "ksk", "妃ひかり", "きさきひかり", "Kisaki Hikari"},
+                { "多田有花", "多田有花", "ただゆうか", "Tada Yuuka"},
                 { "reika", "橋本れいか", "はしもとれいか", "Hasimoto Reika"},
                 { "amiri", "斎藤あみり", "さいとうあみり", "Saito Amiri"},
                 { "mitani", "美谷朱音", "みたにあかね", "Mitani Akane"},
                 { "megumi", "目黒めぐみ", "めぐろめぐみ", "Meguro Megumi"},
-                { "kma", "小松杏", "こまつあん", "Komatsu An"},
                 { "hayashi", "林ゆな", "はやしゆな", "Hayashi Yuna"},
                 { "岬さくら", "岬さくら", "みさきさくら", "Misaki Sakura"},
-                { "saki", "奥田咲", "おくださき", "Okuda Saki"},
-                { "nmm", "仲村みう", "なかむらみう", "Nakamura Miu"},
-                { "moe", "天使もえ", "あまつかもえ", "Amatsuka Moe"},
                 { "長谷川栞", "長谷川栞", "はせがわしおり", "Hasegawa Shiori"},
                 { "tina", "七海ティナ", "ななみてぃな", "Nanami Tina"},
-                { "rio", "朝妃りお", "あさひりお", "Asahi Rio"},  // = 朝日りお
-                { "多田有花", "多田有花", "ただゆうか", "Tada Yuuka"},
-                { "amt", "天海つばさ", "あまみつばさ", "Amami Tubasa"},
-                { "aks", "天川そら", "あまかわそら", "Amakawa Sora"},
                 { "佐伯由美香", "佐伯由美香", "さえきゆみか", "Saeki Yumika"},
                 { "iori", "古川いおり", "こがわいおり", "Kogawa Iori"},
                 { "加藤ツバキ", "加藤ツバキ", "かとうつばき", "Katou Tsubaki"},
@@ -685,11 +691,28 @@ namespace vcs_DiskDirectoryFile1
                 { "八蜜凛", "八蜜凛", "はちみつりん", "Hachimitsu Rin"},
                 { "kano", "香椎花乃", "かしいかの", "Kashii Kano"},
                 { "京香栞", "京香栞", "きょうかしおり", "Kyoka Shiori"},
-                { "柚月ひまわり", "柚月ひまわり", "ゆづきひまわり", "Yuzuki Himawari"},
-                { "ティア", "ティア", "てぃあ", "Tia"},
+                { "yuzuki", "柚月ひまわり", "ゆづきひまわり", "Yuzuki Himawari"},
                 { "ksrei", "黒島玲衣", "くろしまれい", "Kuroshima Rei"},
-                { "小沢菜穂", "小沢菜穂", "おざわ なほ", "Ozawa Naho"},
-                { "乃木絢愛", "乃木絢愛", "のぎあやめ", "Nogi Ayame"},
+                { "naho", "小沢菜穂", "おざわ なほ", "Ozawa Naho"},
+                { "nogi", "乃木絢愛", "のぎあやめ", "Nogi Ayame"},
+
+                //系列
+                { "gggg", "優優檔", "系列", "系列"},
+                { "japcc", "日文字幕", "系列", "系列"},
+                { "mmmm", "合集", "系列", "系列"},
+                { "old", "古風", "系列", "系列"},
+                { "dddd", "較差的待刪除", "系列", "系列"},
+                { "rrrr", "有問題，待重抓", "系列", "系列"},
+                { "ffff", "有問題，待重抓", "系列", "系列"},
+                { "ssss", "可能有相同的", "系列", "系列"},
+                { "wwww", "西洋的", "系列", "系列"},
+                { "debut", "初登場", "系列", "系列"},
+                { "nnnn", "無碼的", "系列", "系列"},
+                { "kkkk", "韓國的", "系列", "系列"},
+                { "cccc", "中國的", "系列", "系列"},
+                { "xxxx", "?????", "系列", "系列"},
+                { "rrrr", "待重抓", "系列", "系列"},
+                { "rrrr", "待重抓", "系列", "系列"},
             };
 
             //------------------------------------------------------------  # 60個
@@ -844,23 +867,23 @@ namespace vcs_DiskDirectoryFile1
             groupBox1.Location = new Point(x_st + dx * 3 - 100, y_st + dy * 0 - 14);
 
             int dd = 110;
-            listView_dir.Size = new Size(W, 270 - 50 + 200);
+            listView_dir.Size = new Size(W, 500);
             listView_dir.Location = new Point(x_st + dx * 2 + dd, y_st + dy * 1 + 24 + 50);
-            listView_file.Size = new Size(W, 270 - 50 + 200);
+            listView_file.Size = new Size(W, 500);
             listView_file.Location = new Point(x_st + dx * 2 + dd, y_st + dy * 1 + 24 + 50);
-            listView_video.Size = new Size(W, 270 - 50 + 200);
+            listView_video.Size = new Size(W, 500);
             listView_video.Location = new Point(x_st + dx * 2 + dd, y_st + dy * 1 + 24 + 50);
-            listView_rename_dir.Size = new Size(W, 270 - 50 + 200);
+            listView_rename_dir.Size = new Size(W, 500);
             listView_rename_dir.Location = new Point(x_st + dx * 2 + dd, y_st + dy * 1 + 24 + 50);
-            listView_rename_file.Size = new Size(W, 270 - 50 + 200);
+            listView_rename_file.Size = new Size(W, 500);
             listView_rename_file.Location = new Point(x_st + dx * 2 + dd, y_st + dy * 1 + 24 + 50);
             pictureBox1.Location = new Point(x_st + dx * 2 + dd + W - 195, y_st + dy * 1 + 24 + 50);
 
             bt_clear2.Location = new Point(listView_dir.Location.X + listView_dir.Size.Width - bt_clear2.Size.Width, listView_dir.Location.Y + listView_dir.Size.Height - bt_clear2.Size.Height);
             bt_clear2.BringToFront();
 
-            richTextBox1.Size = new Size(W, 340 + 20);
-            richTextBox1.Location = new Point(x_st + dx * 2 + dd, y_st + dy * 5 + 24 + 200);
+            richTextBox1.Size = new Size(W, 280);
+            richTextBox1.Location = new Point(x_st + dx * 2 + dd, y_st + dy * 5 + 24 + 200 + 74);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
             bt_copy_rtb_data.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - bt_copy_rtb_data.Width, richTextBox1.Location.Y + richTextBox1.Height - bt_clear.Height - bt_copy_rtb_data.Height);
@@ -884,23 +907,23 @@ namespace vcs_DiskDirectoryFile1
             groupBox1.Size = new Size(W - 120, 106 + 50);
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0 - 16);
 
-            listView_dir.Size = new Size(W, 270 - 50);
+            listView_dir.Size = new Size(W, 360);
             listView_dir.Location = new Point(x_st + dx * 0, y_st + dy * 1 + 24 + 50);
-            listView_file.Size = new Size(W, 270 - 50);
+            listView_file.Size = new Size(W, 360);
             listView_file.Location = new Point(x_st + dx * 0, y_st + dy * 1 + 24 + 50);
-            listView_video.Size = new Size(W, 270 - 50);
+            listView_video.Size = new Size(W, 360);
             listView_video.Location = new Point(x_st + dx * 0, y_st + dy * 1 + 24 + 50);
-            listView_rename_dir.Size = new Size(W, 270 - 50);
+            listView_rename_dir.Size = new Size(W, 360);
             listView_rename_dir.Location = new Point(x_st + dx * 0, y_st + dy * 1 + 24 + 50);
-            listView_rename_file.Size = new Size(W, 270 - 50);
+            listView_rename_file.Size = new Size(W, 360);
             listView_rename_file.Location = new Point(x_st + dx * 0, y_st + dy * 1 + 24 + 50);
             pictureBox1.Location = new Point(x_st + dx * 0 + W - 195, y_st + dy * 1 + 24 + 50);
 
             bt_clear2.Location = new Point(listView_dir.Location.X + listView_dir.Size.Width - bt_clear2.Size.Width, listView_dir.Location.Y + listView_dir.Size.Height - bt_clear2.Size.Height);
             bt_clear2.BringToFront();
 
-            richTextBox1.Size = new Size(W, 410);
-            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 5 + 24);
+            richTextBox1.Size = new Size(W, 360);
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 5 + 24 + 134);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
             bt_copy_rtb_data.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - bt_copy_rtb_data.Width, richTextBox1.Location.Y + richTextBox1.Height - bt_clear.Height - bt_copy_rtb_data.Height);
 
@@ -5678,7 +5701,7 @@ namespace vcs_DiskDirectoryFile1
 
         string get_new_filename(string longname)
         {
-            //自動改檔名用
+            //自動改檔名用, 要嚴謹, 以免誤改檔名
 
             string shortname = longname;
 
@@ -5686,15 +5709,14 @@ namespace vcs_DiskDirectoryFile1
             string[] remove_word = new string[]
             {
                 "taxv.xyz_", "[javdb.com]", "[MILFY]", "027_3xplanet_", "[Thz.la]",
-                "9288.pro@", "027_3xplanet_", "hhd800.com@", "489155.com@", "javkok.com@", "489155.com@", "big2048.com@", "[bbs.yzkof.com]",
-                "jav20s8.com@", "@江南@", "jnty60.app-", "toyouiv.com_", "21bt.net-", "(Kirihara Erika)",
-                "[javdb.com]", "Abigaile Johnson ", "Heydoug", "dccdom.com@", "DLLAF",
-                "bbs2048.org@", "Abigaile Johnson ", "Heydoug", "avmans.com",
+                "9288.pro@", "027_3xplanet_", "hhd800.com@", "489155.com@", "javkok.com@", "489155.com@",
+                "jav20s8.com@", "@江南@", "jnty60.app-", "toyouiv.com_", "21bt.net-",
+                "[javdb.com]", "dccdom.com@", "bbs2048.org@", "avmans.com",
                 "4k688.com@", "335599.xyz", "第一會所新片@SIS001@", "[garea chinan]",
                 "gc2048.com@", "[44x.me]", "bbsxv.xyz", "@蜂鳥@fengniao151.vip", "18x78.com_",
-                "taxv.xyz", "jav20s8.com@", "kfa55.com@", "QQQQ", "deeper.21",
-                "【雪光梦想】", "4k2.com@", "QQQQ", "104DANDAN",
-                "[88q.me]", "jav4you.", "private", "52JAV.COM", "crv2000.com",
+                "taxv.xyz", "jav20s8.com@", "kfa55.com@", "deeper.21",
+                "【雪光梦想】", "4k2.com@", "104DANDAN", "big2048.com@", "[bbs.yzkof.com]",
+                "[88q.me]", "jav4you.", "52JAV.COM", "crv2000.com",
                 "javidol.com", "Prestige", "[thzu.cc]", "wowg.", "18x78.com_",
                 "(hibino)", "kpkp3.com", "bbyxv.xyz", "aaxv.xyz", "4k2.me@",
                 "masex.tv@", "[55h.me]", "[NoDRM]-", "jpfou.com-", "madoubt.com 583985.xyz ",
@@ -5708,10 +5730,9 @@ namespace vcs_DiskDirectoryFile1
                 "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ",
                 "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ",
                 "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ",
-                // "-FHD", ".FHD", "-fhd", ".fhd", "QQQQ", "QQQQ", "QQQQ", "QQQQ",  // 臨時的修正
-                "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ",
-                "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ",
-                // ".mp4", ".wmv", ".avi", ".mkv", ".mov",  // 清除副檔名
+
+                // 臨時的修正
+                // "-FHD", ".FHD", "-fhd", ".fhd", "QQQQ", "QQQQ", "QQQQ", "QQQQ",
                 // " ", "-", "%", "$", "(", ")"};  //最後再刪除標點符號
                 " - 複製", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"  //最後再刪除標點符號
             };
@@ -5726,7 +5747,7 @@ namespace vcs_DiskDirectoryFile1
 
         string get_shortname(string longname)
         {
-            //取得簡名, 比較檔名用
+            //取得簡名, 比較檔名用, 僅為比較, 可以清掉更多字
 
             string shortname = longname;
 
@@ -6013,6 +6034,10 @@ namespace vcs_DiskDirectoryFile1
                         continue;
                     }
                     if (seriesname.ToLower().Contains("emth") == true)
+                    {
+                        continue;
+                    }
+                    if (seriesname.ToLower().Contains("mgold") == true)
                     {
                         continue;
                     }
@@ -8358,13 +8383,14 @@ _video      影片模式
 /*
         Dictionary<string, string> name_dict = new Dictionary<string, string>()
         {
-        { "4444", "四四四四" },
-        { "miu", "白峰ミウ" },
-        { "ran", "XXXX" },//松野蘭 （まつのらん / Matsuno Ran）+松野蘭/藤井蘭々/藤かんな/...
-
+                
+ * asami
         //常字包含短字, 長字在前//若有包含字串的，多字的放前面即可
         //前長後短
 
+ths 高橋しょう子
+
+日下部加奈
         //相同字
         { "春明潤", "春明潤" },
         { "東希美", "東希美" },
@@ -8373,16 +8399,29 @@ _video      影片模式
         { "mito", "水戸かな" },
         { "momo", "桜空もも" },
         { "nami", "沖宮那美" },
-        { "arina", "新ありな" },
         { "yume", "西宮ゆめ" }, 
-        { "old", "古風" },
-        { "mmmm", "合集" },
-        { "japcc", "日文字幕" },
-        { "naho", "XXXX" },
-        { "yuko", "XXXXX" },
-        { "yuuko", "XXXXX" },
-        { "alice", "XXXX" },
-        { "gggg", "優優檔" },
-        };
 */
 
+
+
+
+/*
+待刪除臨時檔名關鍵字
+-4k
+ FHD
+-FHD
+-HD
+
+[.]                   Mywife-00668.HD.mp4   
+
+WANZ-683.1080.mp4   
+1pon-030224_001-1080p.mp4 xxxx保留 -1080p保留 .1080p刪除
+
+IPX-879-C.mp4
+IPZ-451-U.mp4
+IPZ-568-UC.mp4
+
+[.]                   AIAV-002_000^WM.mp4   
+[.]                  AIAV-003-C_GG5.mp4   
+
+*/
