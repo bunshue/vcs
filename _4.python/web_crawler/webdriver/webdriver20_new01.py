@@ -1,4 +1,4 @@
-# url = 'https://example.oxxostudio.tw/python/selenium/demo.html'
+# url = "https://example.oxxostudio.tw/python/selenium/demo.html"
 url = "D:/_git/vcs/_1.data/______test_files1/webdriver_data.html"
 
 
@@ -21,19 +21,15 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
 # 建立瀏覽器物件
-driver = webdriver.Chrome()  # 使用Chrome
-# driver = webdriver.Firefox()  # 使用Firefox
+# driver = webdriver.Chrome()  # 使用Chrome
+driver = webdriver.Firefox()  # 使用Firefox
 # driver = webdriver.Edge("./msedgedriver") # 還不能用  # 使用Edge
 driver.set_window_position(0, 0)  # 設定視窗位置
 driver.set_window_size(800, 600)  # 設定視窗大小
 driver.maximize_window()  # 最大化視窗後開啟網站
 
-print("------------------------------------------------------------")  # 60個
-
 url = "http://aaa.24ht.com.tw"
 
-driver = webdriver.Firefox()  # 使用Firefox
-driver = webdriver.Chrome()  # 使用Chrome
 print(type(driver))
 
 driver.get(url)  # 網頁下載至瀏覽器
@@ -45,19 +41,33 @@ print("網頁連線id :", driver.session_id)  # 網頁連線id
 print("視窗       :", driver.get_window_rect())  # 輸出視窗的位置及寬高
 print("瀏覽器功能 :\n", driver.capabilities)  # 瀏覽器功能設定訊息
 
-print('列印網頁原始碼')
+print("列印網頁原始碼")
 print(driver.page_source)  # 列印網頁原始碼
 print("內容：" + driver.page_source[0:50])  # 輸出網頁原始碼的前 50 個字
 
+driver.get(url)
+driver.maximize_window()
+print("目前網址：", driver.current_url)
+print("瀏覽器尺寸：", driver.get_window_size())
+print("網頁原始碼：\n", driver.page_source)
+
+time.sleep(1)  # 等1秒
+
+driver.close()  # 關閉瀏覽器視窗
+
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+
+
+# 以上為簡單使用 driver 的基本功能
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-driver = webdriver.Firefox()  # 使用Firefox
-driver.get(url)  # 網頁下載至瀏覽器
-
-tag = driver.find_element_by_id("main")
-print(tag.tag_name)
-
-print("------------------------------------------------------------")  # 60個
+# NG
+url = "D:/_git/vcs/_1.data/______test_files1/webdriver_data_old.html"
+# webdriver_data
 
 driver = webdriver.Firefox()  # 使用Firefox
 driver.get(url)  # 網頁下載至瀏覽器
@@ -105,9 +115,9 @@ driver = webdriver.Firefox()  # 使用Firefox
 
 for url in urls:
     driver.get(url)  # 網頁下載至瀏覽器
-    time.sleep(5)
+    time.sleep(1)  # 等1秒
 
-driver.quit()
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -222,7 +232,9 @@ driver.get(url)  # 網頁下載至瀏覽器
 
 eleLink = driver.find_element_by_link_text("深智數位緣起")
 print(type(eleLink))  # 列印eleLink資料類別
-time.sleep(5)  # 暫停5秒
+
+time.sleep(1)  # 等1秒
+
 eleLink.click()
 
 print("------------------------------------------------------------")  # 60個
@@ -235,7 +247,9 @@ driver.get(url)  # 網頁下載至瀏覽器
 
 txtBox = driver.find_element_by_id("hdSchKey")
 txtBox.send_keys("王永慶")  # 輸入表單資料
-time.sleep(5)  # 暫停5秒
+
+time.sleep(1)  # 等1秒
+
 txtBox.submit()  # 送出表單
 
 print("------------------------------")  # 30個
@@ -247,7 +261,9 @@ driver.get(url)  # 網頁下載至瀏覽器
 
 txtBox = driver.find_element_by_name("SchKey")
 txtBox.send_keys("王永慶")  # 輸入表單資料
-time.sleep(5)  # 暫停5秒
+
+time.sleep(1)  # 等1秒
+
 txtBox.submit()  # 送出表單
 
 print("------------------------------")  # 30個
@@ -295,7 +311,8 @@ driver.get(url)  # 網頁下載至瀏覽器
 time.sleep(1)  # 等1秒
 driver.refresh()  # 更新網頁
 time.sleep(1)  # 等1秒
-driver.quit()  # 關閉網頁
+
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 
@@ -401,30 +418,32 @@ time.sleep(1)  # 等1秒
 driver.find_element_by_link_text("CSV").click()  # 按CSV鈕
 time.sleep(1)  # 等1秒
 
-# 3030
+print("------------------------------")  # 30個
 
-from selenium.webdriver.common.keys import Keys
-
-url = 'https://data.epa.gov.tw/'
+url = "https://data.epa.gov.tw/"
 
 driver = webdriver.Chrome()
 driver.maximize_window()
 driver.get(url)
 
-driver.find_element_by_id('field-main-search').send_keys("aqi" + Keys.RETURN) # 輸入 aqi 後按 Enter
+driver.find_element_by_id("field-main-search").send_keys(
+    "aqi" + Keys.RETURN
+)  # 輸入 aqi 後按 Enter
 time.sleep(1)  # 等1秒
 driver.find_element_by_link_text("空氣品質指標(AQI)").click()  # 點選 空氣品質指標(AQI) 鈕
 time.sleep(1)  # 等1秒
-driver.find_element_by_xpath('//*[@id="dataset-resources"]/div/table/tbody/tr/td[1]/a').click()  # 點選 空氣品質指標(AQI) 鈕
+driver.find_element_by_xpath(
+    '//*[@id="dataset-resources"]/div/table/tbody/tr/td[1]/a'
+).click()  # 點選 空氣品質指標(AQI) 鈕
 time.sleep(1)  # 等1秒
-driver.find_element_by_link_text("JSON").click() # 下載 JSON
+driver.find_element_by_link_text("JSON").click()  # 下載 JSON
 time.sleep(1)  # 等1秒
-driver.find_element_by_link_text("XML").click() # 下載 XML
+driver.find_element_by_link_text("XML").click()  # 下載 XML
 time.sleep(1)  # 等1秒
-driver.find_element_by_link_text("CSV").click() # 下載 CSV
+driver.find_element_by_link_text("CSV").click()  # 下載 CSV
 time.sleep(1)  # 等1秒
 
-driver.quit()
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -438,7 +457,7 @@ print("標題 :", driver.title)
 html = driver.page_source  # 網頁原始碼
 print(html)
 
-driver.quit()
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 
@@ -450,7 +469,7 @@ driver.add_cookie(cookie)
 
 print("標題 :", driver.title)
 
-driver.quit()
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 
@@ -467,7 +486,7 @@ print("標題 :", driver.title)
 html = driver.page_source  # 網頁原始碼
 print(html)
 
-driver.quit()
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -486,7 +505,7 @@ for x in range(5):
     time.sleep(1)  # 等1秒
     print(x + 1, len(driver.page_source))
 
-driver.quit()
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -504,7 +523,7 @@ print("標題 :", driver.title)
 html = driver.page_source  # 網頁原始碼
 print(html)
 
-driver.quit()
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -512,7 +531,9 @@ print("------------------------------------------------------------")  # 60個
 from selenium.webdriver.edge.service import Service
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
-driver = webdriver.Edge(service=Service(EdgeChromiumDriverManager().install()))  # 使用Edge
+driver = webdriver.Edge(
+    service=Service(EdgeChromiumDriverManager().install())
+)  # 使用Edge
 driver.implicitly_wait(10)
 driver.get("https://fchart.github.io/test.html")
 
@@ -521,7 +542,7 @@ print("標題 :", driver.title)
 html = driver.page_source  # 網頁原始碼
 print(html)
 
-driver.quit()
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -538,7 +559,7 @@ driver.add_cookie(cookies)
 
 print("標題 :", driver.title)
 
-driver.quit()
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -546,7 +567,9 @@ print("------------------------------------------------------------")  # 60個
 from selenium.webdriver.edge.service import Service
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
-driver = webdriver.Edge(service=Service(EdgeChromiumDriverManager().install()))  # 使用Edge
+driver = webdriver.Edge(
+    service=Service(EdgeChromiumDriverManager().install())
+)  # 使用Edge
 driver.implicitly_wait(10)
 cookies = {"name": "over18", "value": "1"}
 driver.get("https://www.ptt.cc/bbs/Gossiping/index.html")
@@ -554,7 +577,7 @@ driver.add_cookie(cookies)
 
 print("標題 :", driver.title)
 
-driver.quit()
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -578,7 +601,7 @@ print("標題 :", driver.title)
 html = driver.page_source  # 網頁原始碼
 print(html)
 
-driver.quit()
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -599,7 +622,8 @@ tag_ol = soup.find("ol", {"id": "list"})
 tags_li = tag_ol.find_all("li", class_="line")
 for tag in tags_li:
     print(tag.text)
-driver.quit()
+
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -607,7 +631,9 @@ print("------------------------------------------------------------")  # 60個
 from selenium.webdriver.edge.service import Service
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
-driver = webdriver.Edge(service=Service(EdgeChromiumDriverManager().install()))  # 使用Edge
+driver = webdriver.Edge(
+    service=Service(EdgeChromiumDriverManager().install())
+)  # 使用Edge
 driver.implicitly_wait(10)
 driver.get("https://fchart.github.io/ML/Example.html")
 
@@ -619,7 +645,8 @@ tag_ol = soup.find("ol", {"id": "list"})
 tags_li = tag_ol.find_all("li", class_="line")
 for tag in tags_li:
     print(tag.text)
-driver.quit()
+
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -632,7 +659,8 @@ print(tag_ol.tag_name)
 tags_li = tag_ol.find_elements_by_xpath("//li")
 for tag in tags_li:
     print(tag.text, tag.get_attribute("class"))
-driver.quit()
+
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -640,7 +668,9 @@ print("------------------------------------------------------------")  # 60個
 from selenium.webdriver.edge.service import Service
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
-driver = webdriver.Edge(service=Service(EdgeChromiumDriverManager().install()))  # 使用Edge
+driver = webdriver.Edge(
+    service=Service(EdgeChromiumDriverManager().install())
+)  # 使用Edge
 driver.implicitly_wait(10)
 driver.get("https://fchart.github.io/ML/Example.html")
 
@@ -649,7 +679,8 @@ print(tag_ol.tag_name)
 tags_li = tag_ol.find_elements(By.XPATH, "//li")
 for tag in tags_li:
     print(tag.text, tag.get_attribute("class"))
-driver.quit()
+
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -667,7 +698,8 @@ print(tag_ol.tag_name)
 tags_li = tag_ol.find_elements(By.XPATH, "//li")
 for tag in tags_li:
     print(tag.text, tag.get_attribute("class"))
-driver.quit()
+
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -681,7 +713,8 @@ print(tag_ol.tag_name)
 tags_li = tag_ol.find_elements_by_xpath("//li")
 for tag in tags_li:
     print(tag.text, tag.get_attribute("class"))
-driver.quit()
+
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -703,7 +736,8 @@ print("找全部的xx<li> + 條件")
 tags_li = soup.find_all("li", class_="line")
 for tag in tags_li:
     print(tag.text)
-driver.quit()
+
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -711,7 +745,9 @@ print("------------------------------------------------------------")  # 60個
 from selenium.webdriver.edge.service import Service
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
-driver = webdriver.Edge(service=Service(EdgeChromiumDriverManager().install()))  # 使用Edge
+driver = webdriver.Edge(
+    service=Service(EdgeChromiumDriverManager().install())
+)  # 使用Edge
 driver.implicitly_wait(10)
 driver.get("https://fchart.github.io/ML/Example.html")
 tag_ol = driver.find_element(By.XPATH, '//*[@id="list"]')
@@ -723,7 +759,8 @@ print("找全部的xx<li> + 條件")
 tags_li = soup.find_all("li", class_="line")
 for tag in tags_li:
     print(tag.text)
-driver.quit()
+
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -746,7 +783,8 @@ fp = open("tmp_NBA.html", "w", encoding="utf8")
 fp.write(html)
 print("寫入檔案tmp_NBA.html...")
 fp.close()
-driver.quit()
+
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -776,7 +814,9 @@ for item in items:
     price = tag.text.strip() if tag else "N/A"
     print(title)
     products.append({"title": title, "image": url + img, "price": price})
-driver.quit()
+
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+
 with open("tmp_products.json", "w", encoding="utf-8") as fp:  # 寫入JSON檔案
     json.dump(products, fp, indent=2, sort_keys=True, ensure_ascii=False)
 
@@ -811,13 +851,14 @@ while pages_remaining:
         next_link = driver.find_element(By.CLASS_NAME, "nextbtn")
         if next_link:
             next_link.click()
-            time.sleep(5)
+            time.sleep(1)  # 等1秒
             page_num = page_num + 1
         else:
             pages_remaining = False
     except Exception:
         pages_remaining = False
-driver.close()
+
+driver.close()  # 關閉瀏覽器視窗
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -833,7 +874,8 @@ tag_ol = soup.find("ol", {"id": "list"})
 tags_li = tag_ol.find_all("li", class_="line")
 for tag in tags_li:
     print(tag.text)
-driver.quit()
+
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -847,7 +889,8 @@ print(tag_ol.tag_name)
 tags_li = tag_ol.find_elements_by_xpath("//li")
 for tag in tags_li:
     print(tag.text, tag.get_attribute("class"))
-driver.quit()
+
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -861,7 +904,8 @@ print(tag_ol.tag_name)
 tags_li = tag_ol.find_elements_by_xpath("//li")
 for tag in tags_li:
     print(tag.text, tag.get_attribute("class"))
-driver.quit()
+
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -878,7 +922,8 @@ soup = BeautifulSoup(tag_ol.get_attribute("innerHTML"), "lxml")
 tags_li = soup.find_all("li", class_="line")
 for tag in tags_li:
     print(tag.text)
-driver.quit()
+
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -892,7 +937,8 @@ driver.get(url)
 soup = BeautifulSoup(driver.page_source, "lxml")
 span = soup.select_one("span.tem-C.is-active")
 print(span.text)
-driver.quit()
+
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -918,14 +964,14 @@ for item in items:
     if price:
         print(price.text)
     print("-------------------")
-driver.quit()
+
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("在 google / youtube / yahoo / 維基百科 輸入搜尋字串, 並存圖")
 
-# 建立瀏覽器物件
 driver = webdriver.Chrome()  # 使用Chrome
 # driver = webdriver.Firefox()  # 使用Firefox
 
@@ -936,7 +982,8 @@ print("在 google 輸入搜尋字串")
 
 url = "https://www.google.com/"
 driver.get(url)  # 開啟網址
-time.sleep(3)
+
+time.sleep(1)  # 等1秒
 
 """
 Copy element 或 Copy outerHTML
@@ -948,31 +995,37 @@ data-ved="0ahUKEwjBkLT1_7L_AhWhrVYBHSArAb0Q39UDCAY" style=""></textarea>
 """
 
 # 使用 class, ok
-# txt = driver.find_element(By.CLASS_NAME, 'gLFyf') # 取得 class 為 xxxx 的網頁元素 ( TextArea )
+# txt = driver.find_element(By.CLASS_NAME, "gLFyf") # 取得 class 為 xxxx 的網頁元素 ( TextArea )
 # 使用 id, ok
-# txt = driver.find_element(By.ID, 'APjFqb')        # 取得 id 為 xxxx 的網頁元素 ( TextArea )
+# txt = driver.find_element(By.ID, "APjFqb")        # 取得 id 為 xxxx 的網頁元素 ( TextArea )
 # 使用 name, ok
 txt = driver.find_element(By.NAME, "q")  # 取得屬性 name 為 xxxx 的網頁元素 ( TextArea )
 
 txt.send_keys(search_word)
-time.sleep(2)
+
+time.sleep(1)  # 等1秒
 
 txt.clear()
 search_word = "老虎"
 txt.send_keys(search_word)
-time.sleep(2)
+
+time.sleep(1)  # 等1秒
 
 txt.send_keys(Keys.RETURN)
-time.sleep(4)
+
+time.sleep(1)  # 等1秒
+
 driver.save_screenshot("screenshot_google.png")  # 存圖
-time.sleep(1)
+
+time.sleep(1)  # 等1秒
 
 print("------------------------------------------------------------")  # 60個
 print("在 youtube 輸入搜尋字串")
 
 url = "https://www.youtube.com/"
 driver.get(url)  # 開啟網址
-time.sleep(3)
+
+time.sleep(1)  # 等1秒
 
 """
 Copy element 或 Copy outerHTML
@@ -983,27 +1036,33 @@ dir="ltr" class="ytd-searchbox" style="outline: none;">
 """
 
 # 使用 class, fail
-# txt = driver.find_element(By.CLASS_NAME, 'ytd-searchbox') # 取得 class 為 xxxx 的網頁元素 ( TextArea )
+# txt = driver.find_element(By.CLASS_NAME, "ytd-searchbox") # 取得 class 為 xxxx 的網頁元素 ( TextArea )
 # 使用 id, fail
-# txt = driver.find_element(By.ID, 'search')        # 取得 id 為 xxxx 的網頁元素 ( TextArea )
+# txt = driver.find_element(By.ID, "search")        # 取得 id 為 xxxx 的網頁元素 ( TextArea )
 # 使用 name, ok
 txt = driver.find_element(
     By.NAME, "search_query"
 )  # 取得屬性 name 為 xxxx 的網頁元素 ( TextArea )
 
 txt.send_keys(search_word)
-time.sleep(2)
+
+time.sleep(1)  # 等1秒
+
 txt.send_keys(Keys.RETURN)
-time.sleep(4)
+
+time.sleep(1)  # 等1秒
+
 driver.save_screenshot("screenshot_youtube.png")  # 存圖
-time.sleep(1)
+
+time.sleep(1)  # 等1秒
 
 print("------------------------------------------------------------")  # 60個
 print("在 yahoo 輸入搜尋字串")
 
 url = "https://tw.yahoo.com/?p=us"
 driver.get(url)  # 開啟網址
-time.sleep(3)
+
+time.sleep(1)  # 等1秒
 
 """
 Copy element 或 Copy outerHTML
@@ -1015,27 +1074,33 @@ name="p" role="combobox" data-rapid_p="2" data-v9y="1">
 """
 
 # 使用 class, fail
-# txt = driver.find_element(By.CLASS_NAME, 'ytd-searchbox') # 取得 class 為 xxxx 的網頁元素 ( TextArea )
+# txt = driver.find_element(By.CLASS_NAME, "ytd-searchbox") # 取得 class 為 xxxx 的網頁元素 ( TextArea )
 # 使用 id, ok
 txt = driver.find_element(
     By.ID, "header-search-input"
 )  # 取得 id 為 xxxx 的網頁元素 ( TextArea )
 # 使用 name, ok
-# txt = driver.find_element(By.NAME, 'p')             # 取得屬性 name 為 xxxx 的網頁元素 ( TextArea )
+# txt = driver.find_element(By.NAME, "p")             # 取得屬性 name 為 xxxx 的網頁元素 ( TextArea )
 
 txt.send_keys(search_word)
-time.sleep(2)
+
+time.sleep(1)  # 等1秒
+
 txt.send_keys(Keys.RETURN)
-time.sleep(4)
+
+time.sleep(1)  # 等1秒
+
 driver.save_screenshot("screenshot_yahoo.png")  # 存圖
-time.sleep(1)
+
+time.sleep(1)  # 等1秒
 
 print("------------------------------------------------------------")  # 60個
 print("在 維基百科 輸入搜尋字串 NG")
 
 url = "https://zh.wikipedia.org/wiki/Wikipedia:%E9%A6%96%E9%A1%B5"
 driver.get(url)  # 開啟網址
-time.sleep(3)
+
+time.sleep(1)  # 等1秒
 
 """
 Copy element 或 Copy outerHTML
@@ -1049,32 +1114,28 @@ txt = driver.find_element(
     By.CLASS_NAME, "vector-search-box-input"
 )  # 取得 class 為 xxxx 的網頁元素 ( TextArea )
 # 使用 id, ok
-# txt = driver.find_element(By.ID, 'searchInput')        # 取得 id 為 xxxx 的網頁元素 ( TextArea )
+# txt = driver.find_element(By.ID, "searchInput")        # 取得 id 為 xxxx 的網頁元素 ( TextArea )
 # 使用 name, ok
-# txt = driver.find_element(By.NAME, 'search')             # 取得屬性 name 為 xxxx 的網頁元素 ( TextArea )
+# txt = driver.find_element(By.NAME, "search")             # 取得屬性 name 為 xxxx 的網頁元素 ( TextArea )
 
 txt.send_keys(search_word)
-time.sleep(2)
+
+time.sleep(1)  # 等1秒
+
 txt.send_keys(Keys.RETURN)
-time.sleep(4)
+
+time.sleep(1)  # 等1秒
+
 driver.save_screenshot("screenshot_wiki.png")  # 存圖
-time.sleep(1)
 
-print("------------------------------")  # 30個
+time.sleep(1)  # 等1秒
 
 """
-print('準備關閉瀏覽器')
-for i in range(0, 10):
-    print(i, '秒')	# 0~9
-    time.sleep(1)
-
-#print('關閉瀏覽器')
-#driver.close()  #關閉瀏覽器
-
-print('關閉瀏覽器並且退出驅動程序')
-driver.quit()   #關閉瀏覽器並且退出驅動程序
+print("準備關閉瀏覽器")
+time.sleep(3)  # 等3秒
+driver.close()  # 關閉瀏覽器視窗
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 """
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1108,8 +1169,9 @@ while True:
         button[len(button) - 1].click()
     else:
         break
-    time.sleep(10)
-driver.quit()
+    time.sleep(1)  # 等1秒
+
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 with open("momo_items.json", "w", encoding="utf-8") as fp:
     json.dump(items, fp, indent=2, sort_keys=True, ensure_ascii=False)
@@ -1133,7 +1195,8 @@ for tag in tags:
         links.append(href)
         print(href)
 print(len(links))
-driver.quit()
+
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1155,7 +1218,8 @@ for tag in tags:
         links.append(href)
         print(href)
 print(len(links))
-driver.quit()
+
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1192,7 +1256,8 @@ for link in links:
     print("名稱:", title.strip())
     print("描述:", description.strip())
     print("---------------------------")
-driver.quit()
+
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1211,7 +1276,7 @@ print("標題 :", driver.title)
 for x in range(5):
     html = driver.find_element_by_tag_name("html")
     html.send_keys(Keys.END)
-    time.sleep(5)
+    time.sleep(1)  # 等1秒
 
 tags = driver.find_elements_by_xpath('//*[@id="video-title"]')
 links = []
@@ -1236,7 +1301,8 @@ for link in links:
 
 print(df.head())
 df.to_csv("YouTube.csv", index=False, encoding="utf-8")
-driver.quit()
+
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1253,7 +1319,7 @@ driver.get(url)
 for x in range(3):
     js = "window.scrollTo(0, document.body.scrollHeight)"
     driver.execute_script(js)
-    time.sleep(3)
+    time.sleep(1)  # 等1秒
 
 soup = BeautifulSoup(driver.page_source, "lxml")
 images = soup.find_all("a", class_="image-list-link")
@@ -1273,7 +1339,8 @@ for img in images:
         fp.write(chunk)
     fp.close()
 print("結束 Imgur 網頁圖檔下載...")
-driver.quit()
+
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1288,7 +1355,7 @@ driver.get(url)
 for x in range(3):
     js = "window.scrollTo(0, document.body.scrollHeight)"
     driver.execute_script(js)
-    time.sleep(3)
+    time.sleep(1)  # 等1秒
 
 soup = BeautifulSoup(driver.page_source, "lxml")
 images = soup.find_all("a", class_="image-list-link")
@@ -1301,7 +1368,8 @@ with open("imgur_dog.csv", "w+", newline="", encoding="big5") as fp:
         writer.writerow([imgUrl])
 
 print("成功建立 imgur_dog.csv 檔...")
-driver.quit()
+
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1320,7 +1388,8 @@ print(name)
 price_box = soup.find("span", attrs={"class": re.compile("^priceText.*")})
 price = price_box.text
 print(price)
-driver.quit()
+
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1339,7 +1408,8 @@ print(name)
 price_box = soup.find("span", attrs={"class": re.compile("^priceText.*")})
 price = price_box.text
 print(price)
-driver.quit()
+
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1431,30 +1501,30 @@ driver.find_element_by_id("SearchButton").click()  # 按登入鈕
 # driver.find_element_by_id("DepartueSearchTime").click()
 # driver.find_element_by_id("SearchButton").click()
 
-# url = 'http://www.thsrc.com.tw/tw/TimeTable/Search'
+# url = "http://www.thsrc.com.tw/tw/TimeTable/Search"
 #
-# headers = {'User-Agent':'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)                         Chrome/73.0.3683.86 Safari/537.36'
+# headers = {"User-Agent":"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36"
 # }
 #
 # form_data = {
-#    'StartStationName':'南港站',
-#    'EndStationName':'台南站',
-#    'SearchType':'S',
-#    'StartStation':'2f940836-cedc-41ef-8e28-c2336ac8fe68',
-#    'EndStation':'9c5ac6ca-ec89-48f8-aab0-41b738cb1814',
-#    'DepartueSearchDate':'2019/04/02',
-#    'DepartueSearchTime':'09:00',
-#    'DepartueTrainCode':'',
-#    'DestinationSearchDate':'',
-#    'DestinationSearchTime':'',
-#    'DiscountType':''
+#    "StartStationName":"南港站",
+#    "EndStationName":"台南站",
+#    "SearchType":"S",
+#    "StartStation":"2f940836-cedc-41ef-8e28-c2336ac8fe68",
+#    "EndStation":"9c5ac6ca-ec89-48f8-aab0-41b738cb1814",
+#    "DepartueSearchDate":"2019/04/02",
+#    "DepartueSearchTime":"09:00",
+#    "DepartueTrainCode":"",
+#    "DestinationSearchDate":"",
+#    "DestinationSearchTime":"",
+#    "DiscountType":""
 # }
 #
 # response = requests.post(url, headers=headers, data=form_data)
 #
 # jsdata = response.json()
 #
-##print(jsdata['data'])
+##print(jsdata["data"])
 # jsdata
 
 print("------------------------------------------------------------")  # 60個
@@ -1519,9 +1589,12 @@ driver = webdriver.Firefox()  # 使用Firefox
 driver.get(url)  # 打開瀏覽器，開啟網頁
 
 time.sleep(1)  # 等1秒
+
 driver.refresh()  # 更新網頁
+
 time.sleep(1)  # 等1秒
-driver.quit()  # 關閉網頁
+
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1532,8 +1605,10 @@ driver = webdriver.Chrome()  # 使用Chrome
 driver.implicitly_wait(60)
 driver.get(url)  # 打開瀏覽器，開啟網頁
 driver.set_window_position(0, 0)
+
 time.sleep(1)  # 等1秒
-driver.quit()
+
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1824,21 +1899,28 @@ for i in buttons:
 print("------------------------------------------------------------")  # 60個
 
 time.sleep(1)  # 等1秒
+
 textbox = driver.find_element(By.CSS_SELECTOR, 'div[role="textbox"]')
 textbox.send_keys("Hello World!I am Robot~ ^_^")  # 在輸入框輸入文字
 print("輸入文字")
+
 time.sleep(1)  # 等1秒
+
 imgInput = driver.find_element(By.CSS_SELECTOR, 'input[data-testid="fileInput"]')
 imgInput.send_keys("/Users/oxxo/Desktop/oxxo.png")  # 提供圖片絕對路徑，上傳圖片
 print("上傳圖片")
+
 time.sleep(1)  # 等1秒
+
 buttons = driver.find_elements(By.CSS_SELECTOR, 'div[role="button"]')
 for i in buttons:
     if i.text == "推文" or i.text == "Tweet":
         i.click()  # 點擊推文按鈕
         print("推文完成")
         break
+
 time.sleep(1)  # 等1秒
+
 driver.close()  # 關閉瀏覽器視窗
 
 print("------------------------------------------------------------")  # 60個
@@ -1864,10 +1946,13 @@ url = "https://twitter.com"
 driver.get(url)  # 打開瀏覽器，開啟網頁
 
 time.sleep(1)  # 等1秒
+
 driver.execute_script(f"window.scrollTo(0, 200)")
 login = driver.find_element(By.CSS_SELECTOR, 'a[href="/login"]')
 login.click()
+
 time.sleep(1)  # 等1秒
+
 username = driver.find_element(By.CSS_SELECTOR, 'input[autocomplete="username"]')
 username.send_keys("你的 email")
 print("輸入 email 完成")
@@ -1877,6 +1962,7 @@ for i in buttons:
         i.click()
         print("點擊下一步")
         break
+
 time.sleep(1)  # 等1秒
 
 try:
@@ -1905,22 +1991,29 @@ for i in buttons:
         break
 
 time.sleep(1)  # 等1秒
+
 textbox = driver.find_element(By.CSS_SELECTOR, 'div[role="textbox"]')
 textbox.send_keys("Hello World!I am Robot~ ^_^")
 print("輸入文字")
+
 time.sleep(1)  # 等1秒
+
 imgInput = driver.find_element(By.CSS_SELECTOR, 'input[data-testid="fileInput"]')
 imgInput.send_keys("/Users/oxxo/Desktop/oxxo.png")
 print("上傳圖片")
+
 time.sleep(1)  # 等1秒
+
 buttons = driver.find_elements(By.CSS_SELECTOR, 'div[role="button"]')
 for i in buttons:
     if i.text == "推文" or i.text == "Tweet":
         i.click()
         print("推文完成")
         break
+
 time.sleep(1)  # 等1秒
-driver.close()
+
+driver.close()  # 關閉瀏覽器視窗
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1930,7 +2023,8 @@ driver = webdriver.Chrome()  # 使用Chrome
 driver.get(url)  # 打開瀏覽器，開啟網頁
 
 time.sleep(1)  # 等1秒
-driver.close()  # 關閉網頁(目前分頁)A
+
+driver.close()  # 關閉瀏覽器視窗  # 關閉網頁(目前分頁)A
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1940,12 +2034,18 @@ driver = webdriver.Chrome()  # 使用Chrome
 driver.get(url)  # 打開瀏覽器，開啟網頁
 
 driver.save_screenshot("d:/scrcap.png")  # 截取網頁畫面
+
 time.sleep(1)  # 等1秒
+
 driver.set_window_rect(200, 100, 500, 250)  # 改變視窗位置及大小
+
 time.sleep(1)  # 等1秒
+
 driver.fullscreen_window()  # 將視窗設為全螢幕
+
 time.sleep(1)  # 等1秒
-driver.quit()  # 關閉視窗結束驅動
+
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1958,7 +2058,8 @@ e1 = driver.find_element_by_tag_name("head")  # 尋找 head 標籤
 print(e1.tag_name)  # 輸出 head 確認已找到 (tag_name 屬性為標籤名稱, 詳見下表)
 e2 = e1.find_element_by_tag_name("title")  # 在 head 元素中尋找 title 標籤
 print(e2.tag_name)  # 輸出 tite 確認已找到
-driver.quit()  # 關閉視窗結束驅動
+
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1991,10 +2092,14 @@ driver.get(url)  # 打開瀏覽器，開啟網頁
 driver.maximize_window()  # ←將視窗最大化以避免最右邊的登入鈕沒顯示出來
 
 driver.find_element_by_id("gb_70").click()  # ←按登入鈕
+
 time.sleep(1)  # 等1秒
+
 driver.find_element_by_id("identifierId").send_keys("您的帳號")  # }←輸入帳號
 driver.find_element_by_id("identifierNext").click()  # ←按繼續鈕
+
 time.sleep(1)  # 等1秒
+
 driver.find_element_by_name("password").send_keys("您的密碼")  # ←輸入帳密
 driver.find_element_by_id("passwordNext").click()  # ←按繼續鈕
 
@@ -2007,7 +2112,9 @@ driver.get(url)  # 打開瀏覽器，開啟網頁
 
 txtBox = driver.find_element_by_id("searchInput")
 txtBox.send_keys("Artificial Intelligence")  # 輸入表單資料
+
 time.sleep(1)  # 等1秒
+
 txtBox.submit()  # 送出表單
 
 print("------------------------------------------------------------")  # 60個
@@ -2032,7 +2139,8 @@ for i in range(1, 7):
     response = requests.get(img.get_attribute("src"))
     with open("demo/test" + str(i) + ".jpg", "wb") as f:
         f.write(response.content)  # 將response.content二進位內容寫入檔案
-driver.close()
+
+driver.close()  # 關閉瀏覽器視窗
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2091,7 +2199,7 @@ try:
 except:
     print("找不到便當名稱")
 
-driver.close()
+driver.close()  # 關閉瀏覽器視窗
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2225,16 +2333,23 @@ checkOutNode = driver.find_elements_by_xpath(
 # 輸入搜尋關鍵資料
 searchNode[0].clear()  # 清除城市欄位
 searchNode[0].send_keys(city)  # 輸入搜尋城市
+
 time.sleep(1)  # 等1秒
+
 searchNode[0].send_keys(Keys.TAB)  # 按Tab跳到check in欄位
 checkInNode[0].clear()  # 清除check in欄位
 checkInNode[0].send_keys(checkin_time)  # 輸入check in時間
+
 time.sleep(1)  # 等1秒
+
 searchNode[0].send_keys(Keys.TAB)  # 按Tab跳至check out欄位
 checkOutNode[0].clear()  # 清除check out欄位
 checkOutNode[0].send_keys(checkout_time)  # 輸入check out時間
+
 time.sleep(1)  # 等1秒
+
 checkOutNode[0].send_keys(Keys.ENTER)  # 表單按Enter表示輸入完成
+
 time.sleep(1)  # 等1秒
 
 # 旅館名稱
@@ -2298,16 +2413,23 @@ checkOutNode = driver.find_elements_by_xpath(
 # 輸入搜尋關鍵資料
 searchNode[0].clear()  # 清除城市欄位
 searchNode[0].send_keys(city)  # 輸入搜尋城市
+
 time.sleep(1)  # 等1秒
+
 searchNode[0].send_keys(Keys.TAB)  # 按Tab跳到check in欄位
 checkInNode[0].clear()  # 清除check in欄位
 checkInNode[0].send_keys(checkin_time)  # 輸入check in時間
+
 time.sleep(1)  # 等1秒
+
 searchNode[0].send_keys(Keys.TAB)  # 按Tab跳至check out欄位
 checkOutNode[0].clear()  # 清除check out欄位
 checkOutNode[0].send_keys(checkout_time)  # 輸入check out時間
+
 time.sleep(1)  # 等1秒
+
 checkOutNode[0].send_keys(Keys.ENTER)  # 表單按Enter表示輸入完成
+
 time.sleep(1)  # 等1秒
 
 # 旅館名稱
@@ -2337,7 +2459,7 @@ for name, address, star, lprice in zip(names, addresses, stars, lprices):
     print("旅館星級 : ", star.text)
     print("旅館定價 : ", lprice.text)
     print("-" * 70)
-    time.sleep(1)
+    time.sleep(1)  # 等1秒
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2349,7 +2471,6 @@ url = "https://www.facebook.com/"
 email = "您的 Email 帳號"
 password = "您的密碼"
 
-# 建立瀏覽器物件
 driver = webdriver.Chrome()  # 使用Chrome
 # driver = webdriver.Firefox()  # 使用Firefox
 
@@ -2366,21 +2487,20 @@ driver.get(url)
 driver.find_element_by_id("email").clear()
 driver.find_element_by_id("email").send_keys(email)
 
-time.sleep(3)  # 必須加入等待，否則會有誤動作
+time.sleep(1)  # 等1秒 # 必須加入等待，否則會有誤動作
 
 driver.find_element_by_id("pass").clear()
 driver.find_element_by_id("pass").send_keys(password)
 
 driver.find_element_by_id("loginbutton").click()  # 按 登入 鈕
 
-# driver.quit()   #關閉瀏覽器並且退出驅動程序
+# driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 
 # 設定facebook登入資訊
 url = "https://www.facebook.com/"
 email = "你的faceook電子郵件"
 password = "你的faceook密碼"
 
-# 建立瀏覽器物件
 driver = webdriver.Chrome()  # 使用Chrome
 # driver = webdriver.Firefox()  # 使用Firefox
 
@@ -2390,28 +2510,19 @@ driver.get(url)
 driver.find_element_by_id("email").clear()
 driver.find_element_by_id("email").send_keys(email)  # 輸入郵件
 
-time.sleep(3)  # 必須加入等待，否則會有誤動作
+time.sleep(1)  # 等1秒 # 必須加入等待，否則會有誤動作
 
 driver.find_element_by_id("pass").clear()
 driver.find_element_by_id("pass").send_keys(password)  # 輸入密碼
 
 driver.find_element_by_id("loginbutton").click()  # 按登入鈕
 
-print("------------------------------")  # 30個
-
 """
-print('準備關閉瀏覽器')
-for i in range(0, 10):
-    print(i, '秒')	# 0~9
-    time.sleep(1)
-
-#print('關閉瀏覽器')
-#driver.close()  #關閉瀏覽器
-
-print('關閉瀏覽器並且退出驅動程序')
-driver.quit()   #關閉瀏覽器並且退出驅動程序
+print("準備關閉瀏覽器")
+time.sleep(3)  # 等3秒
+driver.close()  # 關閉瀏覽器視窗
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 """
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -2421,7 +2532,6 @@ url = "D:/_git/vcs/_1.data/______test_files1/webdriver_data_old.html"
 
 from selenium.webdriver.support.select import Select  # 使用 Select 對應下拉選單
 
-# 建立瀏覽器物件
 driver = webdriver.Chrome()  # 使用Chrome
 # driver = webdriver.Firefox()  # 使用Firefox
 driver.get(url)  # 開啟網址
@@ -2442,60 +2552,60 @@ select = Select(
 print("輸入文字")
 txt.send_keys("在TextArea輸入一些文字")
 print(txt.text)  # 印出 txt 元素的內容
-time.sleep(5)
+
+time.sleep(1)  # 等1秒
 
 print("點擊 AAA")
 a.click()  # 點擊 a
 print(a.text)  # 印出 a 元素的內容
-time.sleep(3)
+
+time.sleep(1)  # 等1秒
 
 print("點擊 BBB")
 b.click()  # 點擊 b
 print(b.text)  # 印出 b 元素的內容
-time.sleep(3)
+
+time.sleep(1)  # 等1秒
 
 print("點擊 CCC")
 c.click()  # 點擊 c
 print(c.text)  # 印出 c 元素的內容
-time.sleep(3)
+
+time.sleep(1)  # 等1秒
 
 print("點擊 DDD")
 d.click()  # 點擊 d
 print(d.text)  # 印出 d 元素的內容
-time.sleep(3)
+
+time.sleep(1)  # 等1秒
 
 print("下拉式選單")
 select.select_by_index(2)  # 下拉選單選擇第三項 ( 第一項為 0 )
-time.sleep(3)
+
+time.sleep(1)  # 等1秒
 
 print("點擊 h1")
 h1.click()  # 點擊 h1
-time.sleep(3)
+
+time.sleep(1)  # 等1秒
 
 print("點擊 link1")
 link1.click()  # 點擊 link1
-time.sleep(3)
+
+time.sleep(1)  # 等1秒
 
 print("點擊 link2")
 link2.click()  # 點擊 link2
 print(link2.get_attribute("href"))  # 印出 link2 元素的 href 屬性
-time.sleep(3)
 
-print("------------------------------")  # 30個
+time.sleep(1)  # 等1秒
 
 """
-print('準備關閉瀏覽器')
-for i in range(0, 10):
-    print(i, '秒')	# 0~9
-    time.sleep(1)
-
-#print('關閉瀏覽器')
-#driver.close()  #關閉瀏覽器
-
-print('關閉瀏覽器並且退出驅動程序')
-driver.quit()   #關閉瀏覽器並且退出驅動程序
+print("準備關閉瀏覽器")
+time.sleep(3)  # 等3秒
+driver.close()  # 關閉瀏覽器視窗
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 """
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -2517,7 +2627,6 @@ time.sleep(1)  # 等1秒
 print(txt.tag_name)
 print(txt.get_attribute("type"))
 print(txt.get_attribute("id"))
-
 
 txt.submit()    #就是按了enter
 """
@@ -2578,19 +2687,11 @@ time.sleep(1)  # 等1秒
 auto.click()
 time.sleep(1)  # 等1秒
 
-print("------------------------------")  # 30個
-
 """
-print('準備關閉瀏覽器')
-for i in range(0, 10):
-    print(i, '秒')	# 0~9
-    time.sleep(1)  # 等1秒
-
-#print('關閉瀏覽器')
-#driver.close()  #關閉瀏覽器
-
-print('關閉瀏覽器並且退出驅動程序')
-driver.quit()   #關閉瀏覽器並且退出驅動程序
+print("準備關閉瀏覽器")
+time.sleep(3)  # 等3秒
+driver.close()  # 關閉瀏覽器視窗
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2602,14 +2703,14 @@ print("------------------------------------------------------------")  # 60個
 import pyautogui as auto
 import pandas as pd
 
-# 建立瀏覽器物件
 driver = webdriver.Chrome()  # 使用Chrome
 # driver = webdriver.Firefox()  # 使用Firefox
 
 # 台灣證券交易所
 url = "https://www.twse.com.tw/zh/page/trading/exchange/STOCK_DAY.html"
 driver.get(url)
-time.sleep(3)
+
+time.sleep(1)  # 等1秒
 
 auto.PAUSE = 3
 auto.moveTo(1263, 438, 2)
@@ -2617,13 +2718,14 @@ auto.click()
 auto.typewrite("2330")
 auto.moveTo(1461, 438, 2)
 auto.click()
-time.sleep(5)
+
+time.sleep(1)  # 等1秒
 
 html = driver.page_source  # 網頁原始碼
-
+""" 找不到資料
 data = pd.read_html(html)
 print(data)
-
+"""
 print("------------------------------")  # 30個
 
 import pyautogui as auto
@@ -2635,12 +2737,11 @@ stocks = [
     {"name": "華碩", "id": "2357"},
 ]
 
-# 建立瀏覽器物件
 driver = webdriver.Chrome()  # 使用Chrome
 # driver = webdriver.Firefox()  # 使用Firefox
 
 # 台灣證券交易所
-url = "https://www.twse.com.tw/zh/page/trading/exchange/STOCK_DAY.html"
+url = "https://www.twse.com.tw/zh/page/trading/2303/STOCK_DAY.html"
 driver.get(url)
 
 auto.PAUSE = 3
@@ -2650,63 +2751,39 @@ for stock in stocks:
     auto.typewrite(stock["id"])
     auto.moveTo(1461, 438, 2)
     auto.click()
-    time.sleep(5)
+    time.sleep(1)  # 等1秒
     html = driver.page_source  # 網頁原始碼
+    """ 找不到資料
     data = pd.read_html(html)
     print(stock["name"])
     print(data[0])
-
-print("------------------------------")  # 30個
+    """
 
 """
-print('準備關閉瀏覽器')
-for i in range(0, 10):
-    print(i, '秒')	# 0~9
-    time.sleep(1)
-
-#print('關閉瀏覽器')
-#driver.close()  #關閉瀏覽器
-
-print('關閉瀏覽器並且退出驅動程序')
-driver.quit()   #關閉瀏覽器並且退出驅動程序
+print("準備關閉瀏覽器")
+time.sleep(3)  # 等3秒
+driver.close()  # 關閉瀏覽器視窗
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
 """
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 建立瀏覽器物件
-#driver = webdriver.Chrome()    #使用Chrome
-driver = webdriver.Firefox()   #使用Firefox
+url = "https://www.books.com.tw/web/books"
+# url = 'https://www.google.com/
 
-url = 'http://www.e-happy.com.tw'
-url = 'https://www.google.com/'
-
-driver.get(url)
-driver.maximize_window()
-print('目前網址：', driver.current_url)
-print('瀏覽器尺寸：', driver.get_window_size())
-print('網頁原始碼：\n', driver.page_source)
-
-time.sleep(2)
-driver.quit()
-
-print("------------------------------------------------------------")  # 60個
-
-from time import sleep
-
-url = 'https://www.books.com.tw/web/books'
-#url = 'https://www.google.com/
-
-# 建立瀏覽器物件
-#driver = webdriver.Chrome()    #使用Chrome
-driver = webdriver.Firefox()   #使用Firefox
+# driver = webdriver.Chrome()    #使用Chrome
+driver = webdriver.Firefox()  # 使用Firefox
 
 driver.maximize_window()
 driver.get(url)
-sleep(2)  #加入等待
-driver.find_element_by_id('key').send_keys('文淵閣工作室') #輸入搜尋文字
-sleep(2)
-driver.find_element_by_xpath('//*[@id="search"]/button').click()  #按 搜尋 鈕
+
+time.sleep(1)  # 等1秒
+
+driver.find_element_by_id("key").send_keys("文淵閣工作室")  # 輸入搜尋文字
+
+time.sleep(1)  # 等1秒
+
+driver.find_element_by_xpath('//*[@id="search"]/button').click()  # 按 搜尋 鈕
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2717,16 +2794,18 @@ from PIL import ImageGrab
 x1, x2 = 260, 300
 y1_bird, y2_bird = 305, 378
 y1_cactus, y2_cactus = 379, 465
-def isCollision_day(data):  #白天
-    #檢查高飛翼手龍出現
+
+
+def isCollision_day(data):  # 白天
+    # 檢查高飛翼手龍出現
     for i in range(x1, x2):
         for j in range(y1_bird, y2_bird):
             if data[i, j] < 150:
                 pyautogui.keyDown("down")
-                time.sleep(0.3)
+                time.sleep(0.5)  # 等0.5秒
                 pyautogui.keyUp("down")
                 return
-    #檢查仙人掌出現
+    # 檢查仙人掌出現
     for i in range(x1, x2):
         for j in range(y1_cactus, y2_cactus):
             if data[i, j] < 150:
@@ -2734,12 +2813,13 @@ def isCollision_day(data):  #白天
                 return
     return
 
-def isCollision_night(data):  #晚上
+
+def isCollision_night(data):  # 晚上
     for i in range(x1, x2):
         for j in range(y1_bird, y2_bird):
             if data[i, j] > 150:
                 pyautogui.keyDown("down")
-                time.sleep(0.3)
+                time.sleep(0.5)  # 等0.5秒
                 pyautogui.keyUp("down")
                 return
     for i in range(x1, x2):
@@ -2749,11 +2829,13 @@ def isCollision_night(data):  #晚上
                 return
     return
 
-time.sleep(10)
+
+time.sleep(1)  # 等1秒
+
 pyautogui.keyDown("up")
 
 while True:
-    image = ImageGrab.grab().convert('L')  
+    image = ImageGrab.grab().convert("L")
     data = image.load()
     if data[260, 300] > 150:
         isCollision_day(data)
@@ -2776,9 +2858,6 @@ def download_pic(url, path):
 
 
 def get_photolist(photo_name, download_num):
-    from selenium import webdriver
-    from selenium.webdriver.common.keys import Keys
-
     page = 1  # 初始頁數為1
     photo_list = []  # 建立空的圖片 list
 
@@ -2891,8 +2970,6 @@ def get_photobythread(folder_name, photo_name, photo_list):
 print("------------------------------")  # 30個
 
 import threading
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 
 
 def download_pic(url, path):
@@ -3100,8 +3177,6 @@ print("\n下載完畢")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個
