@@ -270,6 +270,8 @@ namespace vcs_DiskDirectoryFile1
 
         string message = string.Empty;
 
+        string[,] person = null;
+
         public Form1()
         {
             InitializeComponent();
@@ -506,46 +508,93 @@ namespace vcs_DiskDirectoryFile1
 
             //------------------------------------------------------------  # 60個
 
-
-
             person = new string[,]
             {
-                //AAAA
-                { "asami", "小川あさ美", "おがわあさみ", "Ogawa Asami"},
+                //雷同的 //前長後短
+                { "1111a", "神波多一花", "かみはたいちか", "Kamuhata Ichika"},
+                { "1111b", "星宮一花", "ほしみやいちか", "Hoshimiya Ichika"},
                 { "kaede1", "松島かえで", "まつしまかえで", "Matsushima Kaede"},
                 { "kaede2", "冬月かえで", "ふゆつきかえで", "Fuyutsuki Kaede"},
+                { "kanna1", "今井栞菜", "いまいかんな", "Imai Kanna"},
+                { "kanna2", "美咲かんな", "みさきかんな", "Misaki kanna"},
+                { "kanna3", "藤かんな", "ふじかんな", "Fuji Kanna"},
+                        //{ "anna", "杏奈" },
+                { "karen1", "楓カレン", "かえでかれん", "Kaede Karen"},
+                { "karen2", "楪カレン", "ゆずりはかれん", "Yuzuriha Karen"},
+                { "karen3", "小暮カレン", "こぐれかれん", "kogure karen"},
+                { "yuri1", "紗々原ゆり", "ささはらゆり", "Sasahara Yuri"},
+                { "yuri2", "広瀬ゆり", "ひろせゆり", "Hirose Yuri"},
+                { "yuko1", "小野夕子", "おのゆうこ", "Ono Yuko"},  // = 葵(S1)", "あおい", "Aoi"},
+                { "yuko2", "白木優子", "しらきゆうこ", "Shiraki Yuko"},
+                { "ran1", "松野蘭", "まつのらん", "Matsuno Ran"},
+                { "ran2", "藤井蘭々", "ふじいらんらん", "Fujii Ranran"},  // = 蜜美杏", "みつみあん", "Mitsumi An"},mma
+                { "iaoi", "一乃あおい", "いちのあおい", "Ichino Aoi"},
+                { "taoi", "葵つかさ", "あおいつかさ", "Aoi Tsukasa"},
+                { "sayaka", "友田彩也香", "ともださやか", "Tomoda Sayaka"},
+                { "ayaka", "武藤あやか", "むとうあやか", "Mutou Ayaka"},
+                { "arina", "arina", "arina", "arina"},
+                { "rinne", "rinne", "rinne", "rinne"},
+                { "rin", "東凛", "あずまりん", "Azuma Rin"},
+                
+                { "fsmai", "藤咲まい", "ふじさきまい", "Huzisaki Mai"},
+                { "mai", "神菜美まい", "かなみまい", "Kanami Mai"},
+                { "sma", "鈴村あいり", "すずむらあいり", "Suzumura Airi"},                
+
+                { "kksmr", "黒川すみれ", "くろかわすみれ", "Kurokawa Sumire"},
+                { "misaki", "岬ななみ", "みさきななみ", "misaki nanami"},
+                { "maki", "北条麻妃", "ほうじょうまき", "Houzyou Maki"},
+                { "taki", "瀧本雫葉", "たきもとしずは", "Takimoto Shizuha"},
+                { "akiho", "吉沢明歩", "よしざわあきほ", "Yoshizawa Akiho"},
+                //{ "aki", "佐佐木" },
+
+                { "nonoka", "野々花さわ", "ののかさわ", "Nonoka Sawa"},  // =冨永ののか", "とみながののか", "Tominaga Nonoka"},
+                //non
+                
+                //舊的當疑問的。
+                { "kanna", "舊的當疑問的1", "舊的當疑問的", "舊的當疑問的"},
+                { "karen", "舊的當疑問的2", "舊的當疑問的", "舊的當疑問的"},
+                { "hsyr", "舊的當疑問的3", "舊的當疑問的", "舊的當疑問的"},
+                { "ran", "舊的當疑問的4", "舊的當疑問的", "舊的當疑問的"},
+                { "1111", "舊的當疑問的5", "舊的當疑問的", "舊的當疑問的"},
+                { "yuri", "舊的當疑問的6", "舊的當疑問的", "舊的當疑問的"},
+                { "aoi", "舊的當疑問的7", "舊的當疑問的", "舊的當疑問的"},
+                
+                //數字的
+                { "3333", "三上悠亜", "みかみゆあ", "Mikami Yua"},
+                //4444
+                { "5555", "五日市芽依", "いつかいちめい", "Itsukaichi Mei"},
+                { "7777", "七ツ森りり", "ななつもりりり", "Nanatsumori Riri"},
+                { "8888", "八掛うみ", "やつがけうみ", "Yatugake Umi"},
+                { "9999", "九重かんな", "ここのえかんな", ""},
+                //{ "9999", "九条みちる" },
+                //{ "1010", "十束" },
+
+                //優優的
+                { "asami", "小川あさ美", "おがわあさみ", "Ogawa Asami"},
                 { "3ne", "三澄寧々", "みすみねね", "Misumi Nene"},
                 { "kotone", "雨宮琴音", "あまみやことね", "Amamiya Kotone"},
                 { "uto", "鈴乃ウト", "すずのうと", "Suzuno Uto"},
-                { "XXXX", "uta 三佳詩", "みよしうた", "Miyoshi Uta"},
-                { "XXXX", "ito 伊藤聖夏", "いとうせな", "Ito Sena"},
+                { "uta", "三佳詩", "みよしうた", "Miyoshi Uta"},
+                { "ito", "伊藤聖夏", "いとうせな", "Ito Sena"},
                 { "南波明花", "南波明花", "なんばはるか", "Namba Haruka"},
                 { "kurara", "愛世くらら", "まなせくらら", "Manase Kurara"},
                 { "yuna", "椎名ゆな", "しいなゆな", "Shiina Yuna"},
                 { "ayami", "森あやみ", "もりあやみ", "Mori Ayami"},
+                //{ "ayami", "池田あやみ" },
                 { "遠野夏生", "遠野夏生", "とおのなつき", "Toono Natsuki"},
                 { "mino", "美乃すずめ", "みのすずめ", "Mino Suzume"},
                 { "saeko", "松下紗栄子", "まつしたさえこ", "Matsushita Saeko"},
                 { "maria", "愛音まりあ", "あいねまりあ", "Aine Maria"},
-                { "7777", "七ツ森りり", "ななつもりりり", "Nanatsumori Riri"},
-                { "3333", "三上悠亜", "みかみゆあ", "Mikami Yua"},
-                { "iaoi", "一乃あおい", "いちのあおい", "Ichino Aoi"},
-                { "taoi", "葵つかさ", "あおいつかさ", "Aoi Tsukasa"},
-                { "kanna1", "今井栞菜", "いまいかんな", "Imai Kanna"},
-                { "kanna2", "美咲かんな", "みさきかんな", "Misaki kanna"},
-                { "kanna3", "藤かんな", "ふじかんな", "Fuji Kanna"},
                 { "yama", "山岸あや花", "やまぎしあやか", "Yamagishi Ayaka"},
                 { "kiho", "金松季歩", "かねまつきほ", "Kanematsu Kiho"},
-                { "taki", "瀧本雫葉", "たきもとしずは", "Takimoto Shizuha"},
                 { "aiba", "相葉美沙子", "あいばみさこ", "Aiba Misako"},
                 { "mth", "明日葉みつは", "あしたばみつは", "Ashitaba Mitsuha"},
-                { "fsmai", "藤咲まい", "ふじさきまい", "Huzisaki Mai"},
                 { "ria", "愛才りあ", "あいせりあ", "Aise Ria"},
                 { "朝霧メイサ", "朝霧メイサ", "あさぎりめいさ", "Asagiri Meisa"},
                 { "fumino", "沙月ふみの", "さつきふみの", "Satsuki Fumino"},
                 { "mos", "松岡すず", "まつおかすず", "Matsuoka Suzu"},
                 { "mion", "園田みおん", "そのだみおん", "Sonoda Mion"},
-                { "三比菜々美", "三比菜々美", "みひななみ", "Mihi Nanami"},
+                { "mihi", "三比菜々美", "みひななみ", "Mihi Nanami"},
                 { "芦名ユリア", "芦名ユリア", "あしなゆりあ", "Ashina Yuria"},
                 { "ririko", "木下凛々子", "きのしたりりこ", "Kinoshita Ririko"},
                 { "riko", "宮瀬リコ", "みやせりこ", "miyase riko"},
@@ -563,119 +612,87 @@ namespace vcs_DiskDirectoryFile1
                 { "aki", "佐々木あき", "ささきあき", "Sasaki Aki"},
                 { "mori", "森日向子", "もりひなこ", "Mori Hinako"},
                 { "kana", "森沢かな", "もりさわかな", "Morisawa kana"},
-                { "misaki", "岬ななみ", "みさきななみ", "misaki nanami"},
                 { "airi", "希島あいり", "きじまあいり", "Kijima Airi"},
                 { "jessica", "希崎ジェシカ", "きざきじぇしか", "Kizaki Jessica"},
                 { "azm", "相沢みなみ", "あいざわみなみ", "Aizawa Minami"},
                 { "akari", "明里つむぎ", "あかりつむぎ", "Akari Tsumugi"},
-                { "XXXX", "白咲りの", "しろさきりの", "Shirosaki Rino"},
-                { "XXXX", "立花瑠莉", "たちばなるり", "Tachibana Ruri"},  //同上
-                { "karen1", "楓カレン", "かえでかれん", "Kaede Karen"},
-                { "karen2", "楪カレン", "ゆずりはかれん", "Yuzuriha Karen"},
-                { "karen3", "小暮カレン", "こぐれかれん", "kogure karen"},
+                { "白咲りの", "白咲りの", "しろさきりの", "Shirosaki Rino"},
+                { "立花瑠莉", "立花瑠莉", "たちばなるり", "Tachibana Ruri"},  //同上
                 { "fuua", "楓ふうあ", "かえでふうあ", "Kaede Fuua"},
-                { "5555", "五日市芽依", "いつかいちめい", "Itsukaichi Mei"},
                 { "honami", "葉月保奈美", "はづきほなみ", "Hazuki Honami"},
-                { "sma", "鈴村あいり", "すずむらあいり", "Suzumura Airi"},
-                { "XXXX", "静河真理子", "しずかわまりこ", "Shizukawa Mariko"},
-                { "XXXX", "鈴木麻奈美", "すずきまなみ", "Suzuki Manami"},
-                { "XXXX", "美雪ありす", "みゆきありす", "Miyuki Arisu"},
-                { "XXXX", "愛咲れいら", "あいさきれいら", "Aisaki Reira"},  // = 原千尋
-                { "XXXX", "鈴木杏里", "すずきあんり", "Suzuki Anri"},
+                { "静河真理子", "静河真理子", "しずかわまりこ", "Shizukawa Mariko"},
+                { "鈴木麻奈美", "鈴木麻奈美", "すずきまなみ", "Suzuki Manami"},
+                { "alice", "美雪ありす", "みゆきありす", "Miyuki Arisu"},
+                { "reira", "愛咲れいら", "あいさきれいら", "Aisaki Reira"},  // = 原千尋
+                { "anri", "鈴木杏里", "すずきあんり", "Suzuki Anri"},
                 //CCCC
                 { "北野未奈", "北野未奈", "きたのみな", "Kitano Mina"},
                 { "葵百合香", "葵百合香", "あおいゆりか", "Aoi Yurika"},
                 { "ruisa", "都月るいさ", "とつきるいさ", "Totuki Ruisa"},
-                { "maki", "北条麻妃", "ほうじょうまき", "Houzyou Maki"},
                 { "nma", "新村あかり", "にいむらあかり", "Niimura Akari"},
                 { "倉木華", "倉木華", "くらきはな", "Kuraki Hana"},
                 { "mary", "橘メアリー", "たちばなめありー", "Tachibana Mary"},
-                { "non1", "野々浦暖", "ののうらのん", "Nonoura Non"},
-                { "ran1", "松野蘭", "まつのらん", "Matsuno Ran"},
-                { "ran2", "藤井蘭々", "ふじいらんらん", "Fujii Ranran"},  // = 蜜美杏", "みつみあん", "Mitsumi An"},mma
-                { "初川みなみ", "初川みなみ", "はつかわみなみ", "Hatsukawa Minami"},
+                { "non", "野々浦暖", "ののうらのん", "Nonoura Non"},  // 共用
+                { "non", "小花のん", "おはなのん", "Ohana Non"},  // 共用
+                { "hkm", "初川みなみ", "はつかわみなみ", "Hatsukawa Minami"},
                 { "二階堂美雨", "二階堂美雨", "にかいどうみう", "Nikaidou Miu"},
                 { "akane", "あかね麗", "あかねうらら", "Akane Urara"},  // =  二階堂麗", "にかいどううらら", "Nikaidou Urara"},
                 //2222=二階堂麗=あかね麗=akane
                 { "塩見彩", "塩見彩", "しおみあや", "Shiomi Aya"},
                 { "渋谷華", "渋谷華", "しぶやはな", "Shibuya Hana"},
                 { "yui", "波多野結衣", "はたのゆい", "Hatano Yui"},
-                { "8888", "八掛うみ", "やつがけうみ", "Yatugake Umi"},
                 { "remu", "涼森れむ", "すずもりれむ", "Suzumori Remu"},
-                { "akiho", "吉沢明歩", "よしざわあきほ", "Yoshizawa Akiho"},
-                { "yuri1", "紗々原ゆり", "ささはらゆり", "Sasahara Yuri"},
-                { "yuri2", "広瀬ゆり", "ひろせゆり", "Hirose Yuri"},
-                { "sayaka", "友田彩也香", "ともださやか", "Tomoda Sayaka"},
-                { "ayaka", "武藤あやか", "むとうあやか", "Mutou Ayaka"},
                 { "jgj", "神宮寺ナオ", "じんぐうじなお", "Zinguuzi Nao"},
                 { "nene", "吉高寧々", "よしたかねね", "Yoshitaka Nene"},
-                { "佐伯由美香", "佐伯由美香", "さえきゆみか", "Saeki Yumika"},
                 { "maron", "夏花まろん", "なつきまろん", "Natsuki Maron"}, // = 夏希まろん", "なつきまろん", "Natsuki Maron"},
-                { "rin", "東凛", "あずまりん", "Azuma Rin"},
-                { "1111a", "神波多一花", "かみはたいちか", "Kamuhata Ichika"},
-                { "1111b", "星宮一花", "ほしみやいちか", "Hoshimiya Ichika"},
                 { "kjm", "小島みなみ", "こじまみなみ", "Kojima Minami"},
                 { "めぐり", "めぐり", "めぐり", "Meguri"},
-                { "黒川すみれ", "黒川すみれ", "くろかわすみれ", "Kurokawa Sumire"},
                 { "大槻ひびき", "大槻ひびき", "おおつきひびき", "Ootsuki Hibiki"},
                 { "smr", "水川スミレ", "みずかわすみれ", "Mizukawa Sumire"}, // = 水稀みり", "みずきみり", "Mizuki Miri"}, = 百多えみり(Caribbeancom)", "ももたえみり", "Momota Emiri"},
                 { "水川潤", "水川潤", "みずかわじゅん", "Mizukawa Jun"},
-                { "non", "小花のん", "おはなのん", "Ohana Non"},
                 { "橘京花", "橘京花", "たちばなきょうか", "Tachibana Kyoka"},
                 { "miho", "通野未帆", "とおのみほ", "Tohno Miho"},
                 { "nao", "若菜奈央", "わかななお", "Wakana Nao"},
                 { "mio", "君島みお", "きみじまみお", "Kimizima Mio"},
                 { "yuma", "佐野ゆま", "さのゆま", "Sano Yuma"},
                 { "yuka/yuuka", "大島優香", "おおしまゆうか", "Ooshima Yuuka"},
-                { "nonoka", "野々花さわ", "ののかさわ", "Nonoka Sawa"},  // =冨永ののか", "とみながののか", "Tominaga Nonoka"},
                 { "mizuno", "水野優香", "みずのゆうか", "Mizuno Yuuka"},
                 { "ksk", "妃ひかり", "きさきひかり", "Kisaki Hikari"},
                 { "reika", "橋本れいか", "はしもとれいか", "Hasimoto Reika"},
                 { "amiri", "斎藤あみり", "さいとうあみり", "Saito Amiri"},
                 { "mitani", "美谷朱音", "みたにあかね", "Mitani Akane"},
-                { "XXXX", "目黒めぐみ", "めぐろめぐみ", "Meguro Megumi"},
+                { "megumi", "目黒めぐみ", "めぐろめぐみ", "Meguro Megumi"},
                 { "kma", "小松杏", "こまつあん", "Komatsu An"},
                 { "hayashi", "林ゆな", "はやしゆな", "Hayashi Yuna"},
-                { "XXXX", "岬さくら", "みさきさくら", "Misaki Sakura"},
-                { "XXXX", "君島みお", "きみじまみお", "Kimizima Mio"},
+                { "岬さくら", "岬さくら", "みさきさくら", "Misaki Sakura"},
                 { "saki", "奥田咲", "おくださき", "Okuda Saki"},
                 { "nmm", "仲村みう", "なかむらみう", "Nakamura Miu"},
                 { "moe", "天使もえ", "あまつかもえ", "Amatsuka Moe"},
-                { "XXXX", "長谷川栞", "はせがわしおり", "Hasegawa Shiori"},
+                { "長谷川栞", "長谷川栞", "はせがわしおり", "Hasegawa Shiori"},
                 { "tina", "七海ティナ", "ななみてぃな", "Nanami Tina"},
                 { "rio", "朝妃りお", "あさひりお", "Asahi Rio"},  // = 朝日りお
-                { "XXXX", "多田有花", "ただゆうか", "Tada Yuuka"},
-                { "yuko1", "小野夕子", "おのゆうこ", "Ono Yuko"},  // = 葵(S1)", "あおい", "Aoi"},
-                { "yuko2", "白木優子", "しらきゆうこ", "Shiraki Yuko"},
+                { "多田有花", "多田有花", "ただゆうか", "Tada Yuuka"},
                 { "amt", "天海つばさ", "あまみつばさ", "Amami Tubasa"},
                 { "aks", "天川そら", "あまかわそら", "Amakawa Sora"},
-                { "XXXX", "佐伯由美香", "さえきゆみか", "Saeki Yumika"},
+                { "佐伯由美香", "佐伯由美香", "さえきゆみか", "Saeki Yumika"},
                 { "iori", "古川いおり", "こがわいおり", "Kogawa Iori"},
-                { "XXXX", "加藤ツバキ", "かとうつばき", "Katou Tsubaki"},
-                { "mai", "神菜美まい", "かなみまい", "Kanami Mai"},
+                { "加藤ツバキ", "加藤ツバキ", "かとうつばき", "Katou Tsubaki"},
                 { "mizuho", "上原瑞穂", "うえはらみずほ", "Uehara Mizuho"},
-                { "XXXX", "滝川菜々美", "たきがわななみ", "Takigawa Nanami"},
-                { "XXXX", "大槻ひびき", "おおつきひびき", "Ootsuki Hibiki"},
-                { "XXXX", "九重かんな", "ここのえかんな", ""},
-                { "XXXX", "黒川すみれ", "くろかわすみれ", "Kurokawa Sumire"},
-                { "XXXX", "弥生みづき", "やよいみづき", "Yayoi Mizuki"},
-                { "XXXX", "日野さやか", "ひのさやか", "Hino Sayaka"},
-                { "XXXX", "葉月保奈美", "はづきほなみ", "Hazuki Honami"},
-                { "XXXX", "山手梨愛", "やまてりあ", "Yamate Ria"},
-                { "XXXX", "八蜜凛", "はちみつりん", "Hachimitsu Rin"},
-                { "XXXX", "香椎花乃", "かしいかの", "Kashii Kano"},
-                { "XXXX", "京香栞", "きょうかしおり", "Kyoka Shiori"},
-                { "XXXX", "柚月ひまわり", "ゆづきひまわり", "Yuzuki Himawari"},
-                { "XXXX", "白咲りの", "しろさきりの", "Shirosaki Rino"},
-                { "XXXX", "立花瑠莉", "たちばなるり", "Tachibana Ruri"},
-                { "XXXX", "ティア", "てぃあ", "Tia"},
+                { "滝川菜々美", "滝川菜々美", "たきがわななみ", "Takigawa Nanami"},
+                { "弥生みづき", "弥生みづき", "やよいみづき", "Yayoi Mizuki"},
+                { "日野さやか", "日野さやか", "ひのさやか", "Hino Sayaka"},
+                { "山手梨愛", "山手梨愛", "やまてりあ", "Yamate Ria"},
+                { "八蜜凛", "八蜜凛", "はちみつりん", "Hachimitsu Rin"},
+                { "kano", "香椎花乃", "かしいかの", "Kashii Kano"},
+                { "京香栞", "京香栞", "きょうかしおり", "Kyoka Shiori"},
+                { "柚月ひまわり", "柚月ひまわり", "ゆづきひまわり", "Yuzuki Himawari"},
+                { "ティア", "ティア", "てぃあ", "Tia"},
                 { "ksrei", "黒島玲衣", "くろしまれい", "Kuroshima Rei"},
-                { "XXXX", "小沢菜穂", "おざわ なほ", "Ozawa Naho"},
-                { "XXXX", "乃木絢愛", "のぎあやめ", "Nogi Ayame"},
+                { "小沢菜穂", "小沢菜穂", "おざわ なほ", "Ozawa Naho"},
+                { "乃木絢愛", "乃木絢愛", "のぎあやめ", "Nogi Ayame"},
             };
 
             //------------------------------------------------------------  # 60個
-
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -5666,35 +5683,38 @@ namespace vcs_DiskDirectoryFile1
             string shortname = longname;
 
             //先過濾掉一些字
-            string[] remove_word = new string[] { "taxv.xyz_", "[javdb.com]", "[MILFY]", "027_3xplanet_", "[Thz.la]"
-                , "9288.pro@", "027_3xplanet_", "hhd800.com@", "489155.com@", "javkok.com@", "489155.com@", "big2048.com@", "[bbs.yzkof.com]"
-                , "jav20s8.com@", "@江南@", "jnty60.app-", "toyouiv.com_", "21bt.net-", "(Kirihara Erika)"
-                , "[javdb.com]", "Abigaile Johnson ", "Heydoug", "dccdom.com@", "DLLAF"
-                , "bbs2048.org@", "Abigaile Johnson ", "Heydoug", "avmans.com"
-                , "4k688.com@", "335599.xyz", "第一會所新片@SIS001@", "[garea chinan]"
-                , "gc2048.com@", "[44x.me]", "bbsxv.xyz", "@蜂鳥@fengniao151.vip", "18x78.com_"
-                , "taxv.xyz", "jav20s8.com@", "kfa55.com@", "QQQQ", "deeper.21"
-                , "【雪光梦想】", "4k2.com@", "QQQQ", "104DANDAN"
-                , "[88q.me]", "jav4you.", "private", "52JAV.COM", "crv2000.com"
-                , "javidol.com", "Prestige", "[thzu.cc]", "wowg.", "18x78.com_"
-                , "(hibino)", "kpkp3.com", "bbyxv.xyz", "aaxv.xyz", "4k2.me@"
-                , "masex.tv@", "[55h.me]", "[NoDRM]-", "jpfou.com-", "madoubt.com 583985.xyz "
-                , "-javgg.net", "[456k.me]", "(uncensored)", "rh2048.com@", "-uncensored", "uncensored"
-                , "[BT-btt.com]", ".h264", ".xvid", "jnty4588.com-", "jnty4588.com", "77vr.com@"
-                , "2048.info@", "madoubt.com 952388.xyz ", "~nyap2p.com", "kcf9.com@", "gg5.co@"
-                , "gg5.co@", "_X1080X", "-nyap2p.comnf.", "_dvd", "[crazecat下载加速器—www.crazecat.com]"
-                , "_gg5", "QQQQ", "QQQQ", "QQQQ", "jn998.vip-"
-                , "QQQQ", "(麻豆傳媒)", "(杏吧傳媒)", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "-nyap2p.com", "(Red Hot Jam)", "(KIRARI)", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                //, "-FHD", ".FHD", "-fhd", ".fhd", "QQQQ", "QQQQ", "QQQQ", "QQQQ"  // 臨時的修正
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                //, ".mp4", ".wmv", ".avi", ".mkv", ".mov"  // 清除副檔名
-                //, " ", "-", "%", "$", "(", ")"};  //最後再刪除標點符號
-                , " - 複製", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"};  //最後再刪除標點符號
+            string[] remove_word = new string[]
+            {
+                "taxv.xyz_", "[javdb.com]", "[MILFY]", "027_3xplanet_", "[Thz.la]",
+                "9288.pro@", "027_3xplanet_", "hhd800.com@", "489155.com@", "javkok.com@", "489155.com@", "big2048.com@", "[bbs.yzkof.com]",
+                "jav20s8.com@", "@江南@", "jnty60.app-", "toyouiv.com_", "21bt.net-", "(Kirihara Erika)",
+                "[javdb.com]", "Abigaile Johnson ", "Heydoug", "dccdom.com@", "DLLAF",
+                "bbs2048.org@", "Abigaile Johnson ", "Heydoug", "avmans.com",
+                "4k688.com@", "335599.xyz", "第一會所新片@SIS001@", "[garea chinan]",
+                "gc2048.com@", "[44x.me]", "bbsxv.xyz", "@蜂鳥@fengniao151.vip", "18x78.com_",
+                "taxv.xyz", "jav20s8.com@", "kfa55.com@", "QQQQ", "deeper.21",
+                "【雪光梦想】", "4k2.com@", "QQQQ", "104DANDAN",
+                "[88q.me]", "jav4you.", "private", "52JAV.COM", "crv2000.com",
+                "javidol.com", "Prestige", "[thzu.cc]", "wowg.", "18x78.com_",
+                "(hibino)", "kpkp3.com", "bbyxv.xyz", "aaxv.xyz", "4k2.me@",
+                "masex.tv@", "[55h.me]", "[NoDRM]-", "jpfou.com-", "madoubt.com 583985.xyz ",
+                "-javgg.net", "[456k.me]", "(uncensored)", "rh2048.com@", "-uncensored", "uncensored",
+                "[BT-btt.com]", ".h264", ".xvid", "jnty4588.com-", "jnty4588.com", "77vr.com@",
+                "2048.info@", "madoubt.com 952388.xyz ", "~nyap2p.com", "kcf9.com@", "gg5.co@",
+                "gg5.co@", "_X1080X", "-nyap2p.comnf.", "_dvd", "[crazecat下载加速器—www.crazecat.com]",
+                "_gg5", "QQQQ", "QQQQ", "QQQQ", "jn998.vip-",
+                "QQQQ", "(麻豆傳媒)", "(杏吧傳媒)", "QQQQ", "QQQQ", "QQQQ",
+                "QQQQ", "-nyap2p.com", "(Red Hot Jam)", "(KIRARI)", "QQQQ",
+                "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ",
+                "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ",
+                "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ",
+                // "-FHD", ".FHD", "-fhd", ".fhd", "QQQQ", "QQQQ", "QQQQ", "QQQQ",  // 臨時的修正
+                "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ",
+                "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ",
+                // ".mp4", ".wmv", ".avi", ".mkv", ".mov",  // 清除副檔名
+                // " ", "-", "%", "$", "(", ")"};  //最後再刪除標點符號
+                " - 複製", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"  //最後再刪除標點符號
+            };
 
             //重複刪除乾淨
             foreach (string r in remove_word)
@@ -5978,78 +5998,15 @@ namespace vcs_DiskDirectoryFile1
 
         //------------------------------------------------------------  # 60個
 
-        Dictionary<string, string> name_dict = new Dictionary<string, string>()
-        {
-        { "1111a", "神波多一花" }, { "1111b", "星宮一花" }, { "1111", "XXXXX" }, { "3333", "三上悠亜" }, { "4444", "四四四四" }, { "9999", "九条みちる" },
-        { "5555", "五日市芽依" }, { "7777", "七ツ森りり" }, { "sssss1", "三上悠亞" }, { "1010", "十束" },
-        { "8888", "八掛うみ" }, 
-        { "maria", "愛音まりあ" }, { "julia", "Julia" }, { "mion", "園田美櫻" },
-        { "fuua", "楓ふうあ" }, { "yama", "山岸あや花" }, { "kiho", "金松季歩" },
-        { "hsyr", "XXXXX" }, { "yui", "波多野結衣" }, { "akari", "明里つむぎ" },
-        { "jessica", "希崎ジェシカ" }, { "mori", "森日向子" }, { "mino", "美乃すずめ" },
-        { "3ne", "三澄寧々" }, { "remu", "涼森れむ" },
-        { "asami", "小川あさ美" }, { "miu", "白峰ミウ" }, { "karen", "楓カレン" }, { "iori", "古川いおり" },
-        { "saeko", "松下紗榮子" }, { "yuna", "椎名ゆな" }, { "maron", "夏希まろん" },
-        { "kana", "森沢かな" },
-        { "mth", "水端" }, { "kma", "小松杏" },
-        { "ran", "XXXX" },//松野蘭 （まつのらん / Matsuno Ran）+松野蘭/藤井蘭々/藤かんな/...
-
-        //常字包含短字, 長字在前//若有包含字串的，多字的放前面即可
-        //前長後短
-
-        { "misaki", "岬ななみ" }, { "maki", "北条麻妃" }, { "taki", "瀧本雫葉" },  { "akiho", "吉沢明歩" }, { "aki", "佐佐木" },
-        { "sayaka", "友田彩也香" }, { "ayaka", "武藤あやか" },
-        { "fsmai", "藤咲まい" }, { "mai", "神菜美まい" }, { "sma", "鈴村あいり" },
-        { "kanna1", "今井栞菜" }, { "kanna2", "美咲かんな" }, { "kanna3", "藤かんな" }, { "kanna", "XXXXX" }, { "anna", "杏奈" },
-        //相同字
-        { "春明潤", "春明潤" }, { "東希美", "東希美" }, { "有賀みなほ", "有賀みなほ" }, { "上原瑞穗", "上原瑞穗" },
-        { "遠野夏生", "遠野夏生" }, { "南波明花", "南波明花" }, { "京香栞", "京香栞" },
-
-        { "kano", "香椎花乃" }, { "nene", "吉高寧々" }, { "nmm", "仲村みう" },
-        { "honoka", "米倉穂香" },
-        { "azm", "相沢みなみ" }, { "kjm", "小島みなみ" }, { "hkm", "初川みなみ" },
-        { "ririko", "木下凛々子" }, { "mito", "水戸かな" },
-        { "mos", "松岡すず" }, { "momo", "桜空もも" },
-        { "airi", "希島あいり" }, { "ryo", "愛弓りょう" },
-        { "ria", "愛才りあ" }, { "nma", "新村あかり" },
-        { "jgj", "神宮寺ナオ" }, { "kotone", "雨宮琴音" },
-        { "nami", "沖宮那美" }, { "ayami", "池田あやみ" },
-        { "arina", "新ありな" }, { "rin", "東凛" }, { "rinne", "XXXXX" }, 
-        { "riho", "藤森里穂" }, { "yume", "西宮ゆめ" }, 
-        { "mha", "水端あさみ" }, { "rei", "神木麗" },
-        { "sayuri", "葉山さゆり" }, { "yuri1", "紗々原ゆり" }, { "yuri2", "広瀬ゆり" }, { "yuri", "XXXXX" }, 
-        { "mary", "橘メアリー" }, { "nonnoka", "XXXXX" }, { "non", "野々浦暖" },
-        { "iaoi", "一乃あおい" }, { "taoi", "葵つかさ" },
-        { "suzu", "本庄鈴" }, { "miho", "通野未帆" },
-        { "rio", "朝日りお" },
-        { "old", "古風" }, { "mmmm", "合集" }, { "japcc", "日文字幕" },
-        { "smr", "水川スミレ" }, { "mihi", "三比菜々美" },
-        { "hayashi", "林ゆな" },
-        { "naho", "XXXX" }, { "CCCC", "DDDD" },
-        { "yuko1", "小野夕子" }, { "yuko2", "白木優子" }, { "yuko", "XXXXX" }, { "yuuko", "XXXXX" },
-        { "alice", "XXXX" }, { "saki", "奥田咲" },
-        { "moe", "天使もえ" }, { "gggg", "優優檔" },
-        //{ "AAAA", "XXXX" }, { "CCCC", "DDDD" },
-        //{ "AAAA", "XXXX" }, { "CCCC", "DDDD" },
-        //{ "AAAA", "XXXX" }, { "CCCC", "DDDD" },
-        //{ "AAAA", "XXXX" }, { "CCCC", "DDDD" },
-        //{ "AAAA", "XXXX" }, { "CCCC", "DDDD" },
-
-
-        };
-
-
-
-        string[,] person = null;
-
-
-
         string get_seriesname(string longname)
         {
             string seriesname = longname;
-            foreach (string n in name_dict.Keys)  //使用Keys和values屬性迭代集合中的鍵和值, 也可從Values找回Keys
+
+            int total_persons = person.GetUpperBound(0) + 1;
+            //richTextBox1.Text += "total_persons = " + total_persons.ToString() + "\n";
+            for (int i = 0; i < total_persons; i++)
             {
-                if (seriesname.ToLower().Contains(n) == true)
+                if (seriesname.ToLower().Contains(person[i, 0]) == true)
                 {
                     if (seriesname.ToLower().Contains("mium") == true)
                     {
@@ -6059,8 +6016,8 @@ namespace vcs_DiskDirectoryFile1
                     {
                         continue;
                     }
-                    seriesname = seriesname.Trim().Replace(n, name_dict[n]);
-                    return name_dict[n];
+                    seriesname = seriesname.Trim().Replace(person[i, 0], person[i, 1]);
+                    return person[i, 1];
                 }
             }
             return "";
@@ -7767,7 +7724,6 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_disk12_Click(object sender, EventArgs e)
         {
-
             int row = person.Rank;//獲取行數
             int col1 = person.GetLength(1);//獲取指定維中的元 個數，這裡也就是列數了。（1表示的是第二維，0是第一維）
             int col2 = person.GetUpperBound(0) + 1;//獲取指定維度的上限，在 上一個1就是列數
@@ -7778,21 +7734,21 @@ namespace vcs_DiskDirectoryFile1
             richTextBox1.Text += "col2 = " + col2.ToString() + "\n";
             richTextBox1.Text += "num1 = " + num1.ToString() + "\n";
 
-            int i;
             int total_persons = person.GetUpperBound(0) + 1;
             richTextBox1.Text += "total_persons = " + total_persons.ToString() + "\n";
 
-            for (i = 0; i < total_persons; i++)
+            richTextBox1.Text += "檢查有無重複項\n";
+
+            for (int i = 0; i < (total_persons - 1); i++)
             {
-                //int num;
-                //num = int.Parse(person[i, 0]);
-                /*
-                richTextBox1.Text += "第 " + num.ToString() + " 任 " + person[i, 1] + "\n";
-                DateTime lifeStart = DateTime.Parse(person[i, 2]);
-                DateTime lifeEnd = DateTime.Parse(person[i, 3]);
-                DateTime workStart = DateTime.Parse(person[i, 4]);
-                DateTime workEnd = DateTime.Parse(person[i, 5]);
-                */
+                for (int j = (i + 1); j < total_persons; j++)
+                {
+                    if (person[i, 1] == person[j, 1])
+                    {
+                        richTextBox1.Text += "相同項 i = " + i.ToString() + "\t" + person[i, 1] + "\n";
+                        richTextBox1.Text += "相同項 j = " + j.ToString() + "\t" + person[j, 1] + "\n";
+                    }
+                }
             }
         }
 
@@ -8397,5 +8353,36 @@ _video      影片模式
 
 //------------------------------------------------------------  # 60個
 
+*/
+
+/*
+        Dictionary<string, string> name_dict = new Dictionary<string, string>()
+        {
+        { "4444", "四四四四" },
+        { "miu", "白峰ミウ" },
+        { "ran", "XXXX" },//松野蘭 （まつのらん / Matsuno Ran）+松野蘭/藤井蘭々/藤かんな/...
+
+        //常字包含短字, 長字在前//若有包含字串的，多字的放前面即可
+        //前長後短
+
+        //相同字
+        { "春明潤", "春明潤" },
+        { "東希美", "東希美" },
+        { "有賀みなほ", "有賀みなほ" },
+        { "honoka", "米倉穂香" },
+        { "mito", "水戸かな" },
+        { "momo", "桜空もも" },
+        { "nami", "沖宮那美" },
+        { "arina", "新ありな" },
+        { "yume", "西宮ゆめ" }, 
+        { "old", "古風" },
+        { "mmmm", "合集" },
+        { "japcc", "日文字幕" },
+        { "naho", "XXXX" },
+        { "yuko", "XXXXX" },
+        { "yuuko", "XXXXX" },
+        { "alice", "XXXX" },
+        { "gggg", "優優檔" },
+        };
 */
 

@@ -1,5 +1,5 @@
 # url = 'https://example.oxxostudio.tw/python/selenium/demo.html'
-url = "D:/_git/vcs/_1.data/______test_files1/webdriver_data.html" # NG
+url = "D:/_git/vcs/_1.data/______test_files1/webdriver_data.html"  # NG
 url = "D:/_git/vcs/_1.data/______test_files1/webdriver_data_old.html"
 
 import time

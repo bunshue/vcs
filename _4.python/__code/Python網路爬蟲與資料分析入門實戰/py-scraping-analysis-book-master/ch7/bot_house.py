@@ -10,8 +10,7 @@ if __name__ == '__main__':
     try:
         options = webdriver.ChromeOptions()
         # options.add_argument('--headless')
-        # executable_path 輸入 web driver 執行檔的位置
-        driver = webdriver.Chrome(chrome_options=options, executable_path='chromedriver.exe')
+        driver = webdriver.Chrome(chrome_options=options)  # 使用Chrome
         driver.set_page_load_timeout(60)
         driver.get(url)
 

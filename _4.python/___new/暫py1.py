@@ -1,3 +1,17 @@
+
+記錄案例：
+
+現象：
+	driver = webdriver.Chrome()
+發生：
+	The chromedriver version cannot be discovered
+原因：
+	本機 Selenium 版本過舊。
+解法：
+	pip install -U selenium
+
+# ------------------------------------------------------------  # 60個
+
 有時網站沒回應，程式看起來像當掉。
 
 response = requests.get(url, timeout=10)
@@ -11,6 +25,14 @@ input("按 Enter 繼續...")
 
 # ------------------------------------------------------------  # 60個
 
+from time import localtime
+from time import strftime
+now_time = strftime("%Y-%m-%d %H:%M:%S", localtime())  # 記錄目前時間
+data = [["時間", "匯率"], [now_time, currency_rate]]  # 準備寫入檔案資料
+print("寫入資料 :", data)
+
+# ------------------------------------------------------------  # 60個
+
 廢棄使用的套件
 
 twder
@@ -18,7 +40,7 @@ yfinance
 
 但是可以去看他的程式
 
-print("------------------------------------------------------------")  # 60個
+# ------------------------------------------------------------  # 60個
 
 # 應用：新台幣國際匯率查詢
 
@@ -65,8 +87,10 @@ currency = "\u52A0\u62FF\u5927\u5E63"  # @param ['美元', '港幣', '英鎊', '
 show = currency + "匯率：\n"
 print(show)
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+# ------------------------------------------------------------  # 60個
+# ------------------------------------------------------------  # 60個
+
+找 User-Agent
 
 模擬瀏覽器發送請求。
 
@@ -104,7 +128,7 @@ Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)
 User-Agent: 
 Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0
 
-6060
+# ------------------------------------------------------------  # 60個
 
 pypi
 pypi網站可以看到目前套件的最新版本
@@ -995,12 +1019,12 @@ plt.title(str(locs1) + "\n" + str(locs2))
 2. GPIO控制LED亮暗 : RED / 亮度1~5 / CEN / AVG / AUTO
 3. 恆亮LED : Start / Smart / Brighten / Darken / Metering
 
-6060
+# ------------------------------------------------------------  # 60個
 
 18+
 https://garageplay.tw/plus/news/2?cp=setn7d&tk=st-cpc-gpm-lk-2407191-vod
 
-6060
+# ------------------------------------------------------------  # 60個
 
 """
 from pydub import AudioSegment  # 載入 pydub 的 AudioSegment 模組
@@ -1080,10 +1104,6 @@ std_data = dict()
 print(std_data)
 
 # ------------------------------------------------------------  # 60個
-
-from selenium import webdriver
-
-driver = webdriver.Chrome()
 
 tk
 window.minsize(600, 480)	# 可拉大 不可縮小
@@ -3446,7 +3466,7 @@ D: keys() values() items()
 
 orientation : 直方圖方向 'vertical'(垂直, 預設), 'horizontal'(水平)
 
-6060
+# ------------------------------------------------------------  # 60個
 
 字典長度
     print(len(c))
@@ -3455,7 +3475,7 @@ orientation : 直方圖方向 'vertical'(垂直, 預設), 'horizontal'(水平)
 字典值
     print(list(c.values()))
 
-6060
+# ------------------------------------------------------------  # 60個
 
 # 圖片大小畫素算法
 # figsize=(W, H), dpi=100
@@ -3694,12 +3714,12 @@ Scrolllbar	捲軸
 Text		多行文字標籤
 Toplevel	建立子視窗容器
 
-6060
+# ------------------------------------------------------------  # 60個
 
 套件(package) : 多個模組組合在一起
 套件就是一個模組庫 函式庫
 
-6060
+# ------------------------------------------------------------  # 60個
 
 Numpy 知識
 1-0 建議閱讀書籍
@@ -4647,27 +4667,7 @@ https://user.gamer.com.tw/login.php
 
 # ------------------------------------------------------------  # 60個
 
-不知道甚麼時候會用到
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-
-
-# 使用ChromeDriverManager自動下載chromedriver
-driver = webdriver.Chrome(ChromeDriverManager().install())
-
-
-from webdriver_manager.chrome import ChromeDriverManager
-# Chromeの起動
-driver =webdriver.Chrome(ChromeDriverManager().install())
-
-
-
-
-
 http://the.earth.li/~sgtatham/putty/latest/x86/putty.exe
-
-
-
 
                         
 '''
@@ -6031,7 +6031,7 @@ Successfully installed xlrd-1.2.0
 列出所安裝的模組
     可以使用list列出所安裝的模組，如果使用’-o’可列出有新版本的模組。
 pip list		# 列出安裝的模組
-pip list –o    # 列出有新版本的模組  		
+pip list –o    # 列出有新版本的模組
 E-5：安裝更新版模組
 未來如果有更新版，可用下列方式更新至最新版模組。
 pip install -U 模組名稱			# 更新至最新版模組
@@ -6118,7 +6118,7 @@ C:\Users\david\AppData\Local\Programs\Python\Python38-32>python.exe -m pip insta
 
 pip : the package installer for Python
 
-6060
+# ------------------------------------------------------------  # 60個
 
 安裝 python-3.7.7.exe
 
@@ -6180,11 +6180,7 @@ ModuleNotFoundError: No module named matplotlib 问题解决方案
 C:\Users\david\AppData\Local\Programs\Python\Python38-32>
 C:\Users\david\AppData\Local\Programs\Python\Python38-32>python -m pip install matplotlib
 
-
-
-
-
-
+# ------------------------------------------------------------  # 60個
 
 C:\Users\070601>pip show scikit-learn
 C:\Users\070601>pip show pytube
@@ -6198,6 +6194,7 @@ pip show pytube
 
 檢查所有套件有無更新版本
 pip list --outdated
+pip list --outdated  # 可以列出所有過期套件
 
 安裝opencv
 pip install opencv-python

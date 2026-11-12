@@ -2749,7 +2749,7 @@ print(prices)
 
 print("------------------------------")  # 30個
 
-print('用 zip 組合起來')
+print("用 zip 組合起來")
 # print(names)
 # print(prices)
 rates = zip(names, prices)
@@ -2824,7 +2824,6 @@ print(df.head())
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -3325,13 +3324,3 @@ print(resp.headers.get("Content-Type"))
 with open("page.html", "w", encoding="utf-8") as f:
     f.write(resp.text)
 """
-
-
-
-
-from time import localtime
-from time import strftime
-now_time = strftime("%Y-%m-%d %H:%M:%S", localtime())  # 記錄目前時間
-data = [["時間", "匯率"], [now_time, currency_rate]]  # 準備寫入檔案資料
-print("寫入資料 :", data)
-

@@ -1,5 +1,6 @@
 print("在 google / youtube / yahoo / 維基百科 輸入搜尋字串, 並存圖")
 
+import sys
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
