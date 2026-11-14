@@ -524,7 +524,6 @@ namespace vcs_DiskDirectoryFile1
                 { "kanna1", "今井栞菜", "いまいかんな", "Imai Kanna"},
                 { "kanna2", "美咲かんな", "みさきかんな", "Misaki kanna"},
                 { "kanna3", "藤かんな", "ふじかんな", "Fuji Kanna"},
-                { "anna", "杏奈", "あんな", "Anna"},
                 { "yuko1", "小野夕子", "おのゆうこ", "Ono Yuko"},  // = 葵(S1)", "あおい", "Aoi"},
                 { "yuko2", "白木優子", "しらきゆうこ", "Shiraki Yuko"},
                 { "ran1", "松野蘭", "まつのらん", "Matsuno Ran"},
@@ -552,6 +551,8 @@ namespace vcs_DiskDirectoryFile1
                 { "non", "野々浦暖", "ののうらのん", "Nonoura Non"},  // 共用
                 { "non", "小花のん", "おはなのん", "Ohana Non"},  // 共用
                 { "mito", "水戸かな", "みとかな", "Mito Kana"},
+                { "fumino", "沙月ふみの", "さつきふみの", "Satsuki Fumino"},
+                { "mino", "美乃すずめ", "みのすずめ", "Mino Suzume"},
 
                 //舊的當疑問的。
                 { "kanna", "舊的當疑問的1", "舊的當疑問的", "舊的當疑問的"},
@@ -564,7 +565,8 @@ namespace vcs_DiskDirectoryFile1
                 { "yuko", "舊的當疑問的8", "舊的當疑問的", "舊的當疑問的"},
                 { "yuuko", "舊的當疑問的9", "舊的當疑問的", "舊的當疑問的"},
                 { "kaede", "舊的當疑問的12", "舊的當疑問的", "舊的當疑問的"},
-               
+                { "anna", "杏奈", "あんな", "Anna"},
+              
                //數字的
                 { "3333", "三上悠亜", "みかみゆあ", "Mikami Yua"},
                 { "4444", "小湊よつ葉", "こみなとよつは", "Kominato Yotsuha"},
@@ -591,14 +593,12 @@ namespace vcs_DiskDirectoryFile1
                 { "ayami", "森あやみ", "もりあやみ", "Mori Ayami"},  // 共用
                 { "ayami", "池田あやみ", "いけだあやみ", "Ikeda Ayami"},  // 共用
                 { "遠野夏生", "遠野夏生", "とおのなつき", "Toono Natsuki"},
-                { "mino", "美乃すずめ", "みのすずめ", "Mino Suzume"},
                 { "saeko", "松下紗栄子", "まつしたさえこ", "Matsushita Saeko"},
                 { "maria", "愛音まりあ", "あいねまりあ", "Aine Maria"},
                 { "yama", "山岸あや花", "やまぎしあやか", "Yamagishi Ayaka"},
                 { "kiho", "金松季歩", "かねまつきほ", "Kanematsu Kiho"},
                 { "aiba", "相葉美沙子", "あいばみさこ", "Aiba Misako"},
                 { "朝霧メイサ", "朝霧メイサ", "あさぎりめいさ", "Asagiri Meisa"},
-                { "fumino", "沙月ふみの", "さつきふみの", "Satsuki Fumino"},
                 { "mion", "園田みおん", "そのだみおん", "Sonoda Mion"},
                 { "mihi", "三比菜々美", "みひななみ", "Mihi Nanami"},
                 { "芦名ユリア", "芦名ユリア", "あしなゆりあ", "Ashina Yuria"},
@@ -5747,6 +5747,7 @@ namespace vcs_DiskDirectoryFile1
                 "2048.info@", "madoubt.com 952388.xyz ", "~nyap2p.com", "kcf9.com@", "gg5.co@",
                 "gg5.co@", "_X1080X", "-nyap2p.comnf.", "_dvd", "[crazecat下载加速器—www.crazecat.com]",
                 "_gg5", "QQQQ", "QQQQ", "QQQQ", "jn998.vip-",
+                "21bt.net-", "[javx357.com]", "kfa33.com@", "[cctv12306.com]", "@69馆@69av.me-", "@九游娱乐@5jy.cc-", "kfa11.com@",
                 "QQQQ", "(麻豆傳媒)", "(杏吧傳媒)", "QQQQ", "QQQQ", "QQQQ",
                 "QQQQ", "-nyap2p.com", "(Red Hot Jam)", "(KIRARI)", "QQQQ",
                 "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ",
@@ -5799,6 +5800,7 @@ namespace vcs_DiskDirectoryFile1
                 "_gg5", "hd_", "_hd_", "_uncen", "jn998.vip-",
                 "-1080p", "(麻豆傳媒)", "(杏吧傳媒)", "_hd.mp4", "_hd.mkv", "_hd.wmv",
                 "-nyap2p.com", "(Red Hot Jam)", "(KIRARI)", "dccdom.com@",
+                "21bt.net-", "[javx357.com]", "kfa33.com@", "[cctv12306.com]", "@69馆@69av.me-", "@九游娱乐@5jy.cc-", "kfa11.com@",
                 "_GG5", "QQQQ", "QQQQ", "QQQQ", "QQQQ",
                 "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ",
                 "-C.mp4", "_1.mp4", ".mp4", ".wmv", ".avi", ".mkv", ".mov",  // 清除副檔名

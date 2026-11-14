@@ -1218,6 +1218,7 @@
             this.bt_setup.Size = new System.Drawing.Size(45, 45);
             this.bt_setup.TabIndex = 331;
             this.bt_setup.UseVisualStyleBackColor = true;
+            this.bt_setup.Click += new System.EventHandler(this.bt_setup_Click);
             // 
             // bt_test2
             // 
