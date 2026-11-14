@@ -13,6 +13,9 @@ Firefox		geckodriver
 Google Chrome	chromedriver
 """
 
+print("------------------------------------------------------------")  # 60個
+
+# 共同
 import re
 import os
 import sys
@@ -26,6 +29,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
+'''
+print("------------------------------------------------------------")  # 60個
 
 # 建立瀏覽器物件
 # driver = webdriver.Chrome()  # 使用Chrome
@@ -2328,7 +2333,6 @@ options.add_argument("headless")  # 不會開啟瀏覽器
 driver = webdriver.Chrome()  # 使用Chrome
 driver.get(url)  # 打開瀏覽器，開啟網頁
 
-""" NG
 # 輸入使用者 id
 # user = driver.find_element_by_xpath('//*[@id="signInPanel_signInForm"]/table/tbody/tr[1]/td[2]/input') old
 user = driver.find_element(By.XPATH, '//*[@id="signInPanel_signInForm"]/table/tbody/tr[1]/td[2]/input')
@@ -2374,7 +2378,7 @@ except:
     print("找不到便當名稱")
 
 driver.close()  # 關閉瀏覽器視窗
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -2530,241 +2534,6 @@ for name, address, star, lprice in zip(names, addresses, stars, lprices):
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-# PyAutoGUI，自動控制滑鼠與鍵盤
-import pyautogui as auto
-
-url = 'https://www.google.com/'
-
-driver.get(url)  # 打開瀏覽器，開啟網頁
-
-time.sleep(1)  # 等1秒
-
-txt = driver.find_element(By.NAME, 'q')  # 取得屬性 name 為 xxxx 的網頁元素 ( TextArea )
-
-txt.send_keys('this is a lion-mouse')
-time.sleep(1)  # 等1秒
-
-print(txt.tag_name)
-print(txt.get_attribute("type"))
-print(txt.get_attribute("id"))
-
-txt.submit()    #就是按了enter
-
-# url = 'https://tw.yahoo.com/'
-driver.get(url)  # 打開瀏覽器，開啟網頁
-time.sleep(1)  # 等1秒
-
-auto.PAUSE = 1
-
-x_st = 60
-y_st = 140
-print("move to (", x_st, ", ", y_st, ")")
-auto.moveTo(x_st, y_st, 2)
-time.sleep(1)  # 等1秒
-auto.click()
-auto.typewrite("獅子")
-auto.click()
-
-x_st = 60
-y_st = 200
-time.sleep(1)  # 等1秒
-print("move to (", x_st, ", ", y_st, ")")
-auto.moveTo(x_st, y_st, 2)
-time.sleep(1)  # 等1秒
-auto.click()
-time.sleep(1)  # 等1秒
-
-y_st += 22
-time.sleep(1)  # 等1秒
-print("move to (", x_st, ", ", y_st, ")")
-auto.moveTo(x_st, y_st, 2)
-time.sleep(1)  # 等1秒
-auto.click()
-time.sleep(1)  # 等1秒
-
-y_st += 22
-time.sleep(1)  # 等1秒
-print("move to (", x_st, ", ", y_st, ")")
-auto.moveTo(x_st, y_st, 2)
-time.sleep(1)  # 等1秒
-auto.click()
-time.sleep(1)  # 等1秒
-
-y_st += 22
-time.sleep(1)  # 等1秒
-print("move to (", x_st, ", ", y_st, ")")
-auto.moveTo(x_st, y_st, 2)
-time.sleep(1)  # 等1秒
-auto.click()
-time.sleep(1)  # 等1秒
-
-y_st += 22
-time.sleep(1)  # 等1秒
-print("move to (", x_st, ", ", y_st, ")")
-auto.moveTo(x_st, y_st, 2)
-time.sleep(1)  # 等1秒
-auto.click()
-time.sleep(1)  # 等1秒
-
-"""
-print("準備關閉瀏覽器")
-time.sleep(3)  # 等3秒
-driver.close()  # 關閉瀏覽器視窗
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# PyAutoGUI，自動控制滑鼠與鍵盤
-
-# 有問題
-
-import pyautogui as auto
-
-driver = webdriver.Chrome()  # 使用Chrome
-# driver = webdriver.Firefox()  # 使用Firefox
-
-# 台灣證券交易所
-url = "https://www.twse.com.tw/zh/page/trading/exchange/STOCK_DAY.html"
-driver.get(url)
-
-time.sleep(1)  # 等1秒
-
-auto.PAUSE = 3
-auto.moveTo(1263, 438, 2)
-auto.click()
-auto.typewrite("2330")
-auto.moveTo(1461, 438, 2)
-auto.click()
-
-time.sleep(1)  # 等1秒
-
-html = driver.page_source  # 網頁原始碼
-
-""" 找不到資料
-data = pd.read_html(html)
-print(data)
-"""
-print("------------------------------")  # 30個
-
-import pyautogui as auto
-
-stocks = [
-    {"name": "聯電", "id": "2303"},
-    {"name": "台積電", "id": "2330"},
-    {"name": "華碩", "id": "2357"},
-]
-
-driver = webdriver.Chrome()  # 使用Chrome
-# driver = webdriver.Firefox()  # 使用Firefox
-
-# 台灣證券交易所
-url = "https://www.twse.com.tw/zh/page/trading/2303/STOCK_DAY.html"
-driver.get(url)
-
-auto.PAUSE = 3
-for stock in stocks:
-    auto.moveTo(1263, 438, 2)
-    auto.doubleClick()
-    auto.typewrite(stock["id"])
-    auto.moveTo(1461, 438, 2)
-    auto.click()
-    time.sleep(1)  # 等1秒
-    html = driver.page_source  # 網頁原始碼
-    """ 找不到資料
-    data = pd.read_html(html)
-    print(stock["name"])
-    print(data[0])
-    """
-
-"""
-print("準備關閉瀏覽器")
-time.sleep(3)  # 等3秒
-driver.close()  # 關閉瀏覽器視窗
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-url = "https://www.books.com.tw/web/books"
-# url = 'https://www.google.com/
-
-# driver = webdriver.Chrome()    #使用Chrome
-driver = webdriver.Firefox()  # 使用Firefox
-
-driver.get(url)
-
-time.sleep(1)  # 等1秒
-
-# driver.find_element_by_id("key").send_keys("文淵閣工作室")  # 輸入搜尋文字 old
-driver.find_element(By.ID, "key").send_keys("文淵閣工作室")  # 輸入搜尋文字
-
-time.sleep(1)  # 等1秒
-
-# driver.find_element_by_xpath('//*[@id="search"]/button').click()  # 按 搜尋 鈕 old
-driver.find_element(By.XPATH, '//*[@id="search"]/button').click()  # 按 搜尋 鈕
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-import pyautogui
-from PIL import ImageGrab
-
-x1, x2 = 260, 300
-y1_bird, y2_bird = 305, 378
-y1_cactus, y2_cactus = 379, 465
-
-
-def isCollision_day(data):  # 白天
-    # 檢查高飛翼手龍出現
-    for i in range(x1, x2):
-        for j in range(y1_bird, y2_bird):
-            if data[i, j] < 150:
-                pyautogui.keyDown("down")
-                time.sleep(0.5)  # 等0.5秒
-                pyautogui.keyUp("down")
-                return
-    # 檢查仙人掌出現
-    for i in range(x1, x2):
-        for j in range(y1_cactus, y2_cactus):
-            if data[i, j] < 150:
-                pyautogui.keyDown("up")
-                return
-    return
-
-
-def isCollision_night(data):  # 晚上
-    for i in range(x1, x2):
-        for j in range(y1_bird, y2_bird):
-            if data[i, j] > 150:
-                pyautogui.keyDown("down")
-                time.sleep(0.5)  # 等0.5秒
-                pyautogui.keyUp("down")
-                return
-    for i in range(x1, x2):
-        for j in range(y1_cactus, y2_cactus):
-            if data[i, j] > 150:
-                pyautogui.keyDown("up")
-                return
-    return
-
-
-time.sleep(1)  # 等1秒
-
-pyautogui.keyDown("up")
-
-while True:
-    image = ImageGrab.grab().convert("L")
-    data = image.load()
-    if data[260, 300] > 150:
-        isCollision_day(data)
-    else:
-        isCollision_night(data)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 import threading
 
@@ -3477,9 +3246,9 @@ top = element.location["y"]
 right = element.location["x"] + element.size["width"]
 bottom = element.location["y"] + element.size["height"]
 
-img = Image.open("wholepage.png")
+img = Image.open("tmp_wholepage.png")
 img2 = img.crop((left, top, right, bottom))
-img2.save("crop.png")
+img2.save("tmp_crop.png")
 
 driver.close()  #關閉瀏覽器
 
@@ -3497,7 +3266,7 @@ driver = webdriver.Chrome()
 
 driver.get(url)
 
-driver.save_screenshot("tmp_img_screenshot.png")  # 網頁截圖
+driver.save_screenshot("tmp_screenshot2.png")  # 網頁截圖
 
 element = driver.find_element_by_id("BookingS1Form_homeCaptcha_passCode")
 
@@ -3506,7 +3275,7 @@ top = element.location["y"]
 right = element.location["x"] + element.size["width"]
 bottom = element.location["y"] + element.size["height"]
 
-img = Image.open("tmp_img_screenshot.png")
+img = Image.open("tmp_screenshot3.png")
 
 img2 = img.crop((left, top, right, bottom))
 img2.save("tmp_img_source.png")
@@ -3565,7 +3334,7 @@ time.sleep(delay)  # 加入等待
 driver.find_element_by_id("btn-confirm").click()
 time.sleep(delay)
 
-driver.save_screenshot("tem.png")  # 網頁截圖
+driver.save_screenshot("tmp_tem.png")  # 網頁截圖
 
 captchaid = driver.find_element_by_id("BookingS1Form_homeCaptcha_passCode")  # 驗證碼圖形id
 # 取得圖形位置
@@ -3573,7 +3342,7 @@ x1 = captchaid.location["x"]
 y1 = captchaid.location["y"]
 x2 = x1 + captchaid.size["width"]
 y2 = y1 + captchaid.size["height"]
-image1 = Image.open("tem.png")  # 讀取螢幕圖形
+image1 = Image.open("tmp_tem.png")  # 讀取螢幕圖形
 image2 = image1.crop((x1, y1, x2, y2))  # 擷取驗證碼圖形
 image2.save("tmp_captcha.png")  # 圖形存檔
 simshow(image2)  # 顯示圖形
@@ -3678,7 +3447,7 @@ def get_photo():
     driver.get(url)
 
     # 從 screenshot 中取得驗證碼的圖片
-    driver.save_screenshot("tmp_img_screenshot.png")  # 網頁截圖
+    driver.save_screenshot("tmp_screenshot4.png")  # 網頁截圖
     element = driver.find_element_by_id("BookingS1Form_homeCaptcha_passCode")
 
     left = element.location["x"]
@@ -3686,7 +3455,7 @@ def get_photo():
     right = element.location["x"] + element.size["width"]
     bottom = element.location["y"] + element.size["height"]
 
-    img = Image.open("tmp_img_screenshot.png")
+    img = Image.open("tmp_screenshot5.png")
     img2 = img.crop((left, top, right, bottom))
     # img2.show()
     img2.save("img_source.png")
@@ -4706,58 +4475,292 @@ driver.find_element_by_id("loginbutton").click()  # 按 登入 鈕
 print("------------------------------------------------------------")  # 60個
 print("facebook twitter X SP")
 print("------------------------------------------------------------")  # 60個
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("pyautogui ST")
 print("------------------------------------------------------------")  # 60個
 
 """
-
-PyAutoGUI，自動控制滑鼠跟鍵盤
-
+PyAutoGUI，自動控制滑鼠與鍵盤
 
 
 """
-import sys
-import time
+
+def create_driver(url):
+    global driver
+    driver = webdriver.Chrome()  # 使用Chrome
+    driver.maximize_window()  # 全螢幕顯示
+    driver.get(url)  # 打開瀏覽器，開啟網頁
+
+def destroy_driver():
+    time.sleep(1)
+    #print('關閉瀏覽器')
+    #driver.close()  #關閉瀏覽器
+    print('關閉瀏覽器並且退出驅動程序')
+    driver.quit()   #關閉瀏覽器並且退出驅動程序
+
 import math
 import random
-
 import pyautogui
+import pyautogui as auto
+
+url = 'https://www.google.com/'
+create_driver(url)
+
+time.sleep(1)  # 等1秒
+
+txt = driver.find_element(By.NAME, 'q')  # 取得屬性 name 為 xxxx 的網頁元素 ( TextArea )
+
+txt.send_keys('this is a lion-mouse')
+
+time.sleep(1)  # 等1秒
+
+print(txt.tag_name)
+print(txt.get_attribute("type"))
+print(txt.get_attribute("id"))
+
+txt.submit()    #就是按了enter
+
+# url = 'https://tw.yahoo.com/'
+driver.get(url)  # 打開瀏覽器，開啟網頁
+
+time.sleep(1)  # 等1秒
+
+auto.PAUSE = 1
+
+x_st = 60
+y_st = 140
+print("move to (", x_st, ", ", y_st, ")")
+auto.moveTo(x_st, y_st, 2)
+time.sleep(1)  # 等1秒
+auto.click()
+auto.typewrite("獅子")
+auto.click()
+
+x_st = 60
+y_st = 200
+time.sleep(1)  # 等1秒
+print("move to (", x_st, ", ", y_st, ")")
+auto.moveTo(x_st, y_st, 2)
+time.sleep(1)  # 等1秒
+auto.click()
+time.sleep(1)  # 等1秒
+
+y_st += 22
+time.sleep(1)  # 等1秒
+print("move to (", x_st, ", ", y_st, ")")
+auto.moveTo(x_st, y_st, 2)
+time.sleep(1)  # 等1秒
+auto.click()
+time.sleep(1)  # 等1秒
+
+y_st += 22
+time.sleep(1)  # 等1秒
+print("move to (", x_st, ", ", y_st, ")")
+auto.moveTo(x_st, y_st, 2)
+time.sleep(1)  # 等1秒
+auto.click()
+time.sleep(1)  # 等1秒
+
+y_st += 22
+time.sleep(1)  # 等1秒
+print("move to (", x_st, ", ", y_st, ")")
+auto.moveTo(x_st, y_st, 2)
+time.sleep(1)  # 等1秒
+auto.click()
+time.sleep(1)  # 等1秒
+
+y_st += 22
+time.sleep(1)  # 等1秒
+print("move to (", x_st, ", ", y_st, ")")
+auto.moveTo(x_st, y_st, 2)
+time.sleep(1)  # 等1秒
+auto.click()
+time.sleep(1)  # 等1秒
+
+"""
+print("準備關閉瀏覽器")
+time.sleep(3)  # 等3秒
+driver.close()  # 關閉瀏覽器視窗
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+"""
+
+destroy_driver()
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
+# 有問題
+
+import pyautogui as auto
+
+driver = webdriver.Chrome()  # 使用Chrome
+# driver = webdriver.Firefox()  # 使用Firefox
+driver.maximize_window()  # 全螢幕顯示
+
+# 台灣證券交易所
+url = "https://www.twse.com.tw/zh/page/trading/exchange/STOCK_DAY.html"
+driver.get(url)
+
+time.sleep(1)  # 等1秒
+
+auto.PAUSE = 3
+auto.moveTo(1263, 438, 2)
+auto.click()
+auto.typewrite("2330")
+auto.moveTo(1461, 438, 2)
+auto.click()
+
+time.sleep(1)  # 等1秒
+
+html = driver.page_source  # 網頁原始碼
+
+""" 找不到資料
+data = pd.read_html(html)
+print(data)
+"""
+print("------------------------------")  # 30個
+
+import pyautogui as auto
+
+stocks = [
+    {"name": "聯電", "id": "2303"},
+    {"name": "台積電", "id": "2330"},
+    {"name": "華碩", "id": "2357"},
+]
+
+driver = webdriver.Chrome()  # 使用Chrome
+# driver = webdriver.Firefox()  # 使用Firefox
+driver.maximize_window()  # 全螢幕顯示
+
+# 台灣證券交易所
+url = "https://www.twse.com.tw/zh/page/trading/2303/STOCK_DAY.html"
+driver.get(url)
+
+auto.PAUSE = 3
+for stock in stocks:
+    auto.moveTo(1263, 438, 2)
+    auto.doubleClick()
+    auto.typewrite(stock["id"])
+    auto.moveTo(1461, 438, 2)
+    auto.click()
+    time.sleep(1)  # 等1秒
+    html = driver.page_source  # 網頁原始碼
+    """ 找不到資料
+    data = pd.read_html(html)
+    print(stock["name"])
+    print(data[0])
+    """
+
+"""
+print("準備關閉瀏覽器")
+time.sleep(3)  # 等3秒
+driver.close()  # 關閉瀏覽器視窗
+driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+"""
+NG not pyautogui
+
+url = "https://www.books.com.tw/web/books"
+# url = 'https://www.google.com/
+
+# driver = webdriver.Chrome()    #使用Chrome
+driver = webdriver.Firefox()  # 使用Firefox
+driver.maximize_window()  # 全螢幕顯示
+
+driver.get(url)
+
+time.sleep(1)  # 等1秒
+
+# driver.find_element_by_id("key").send_keys("文淵閣工作室")  # 輸入搜尋文字 old
+driver.find_element(By.ID, "key").send_keys("文淵閣工作室")  # 輸入搜尋文字
+
+time.sleep(1)  # 等1秒
+
+# driver.find_element_by_xpath('//*[@id="search"]/button').click()  # 按 搜尋 鈕 old
+driver.find_element(By.XPATH, '//*[@id="search"]/button').click()  # 按 搜尋 鈕
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+import pyautogui
+from PIL import ImageGrab
+
+x1, x2 = 260, 300
+y1_bird, y2_bird = 305, 378
+y1_cactus, y2_cactus = 379, 465
+
+
+def isCollision_day(data):  # 白天
+    # 檢查高飛翼手龍出現
+    for i in range(x1, x2):
+        for j in range(y1_bird, y2_bird):
+            if data[i, j] < 150:
+                pyautogui.keyDown("down")
+                time.sleep(0.5)  # 等0.5秒
+                pyautogui.keyUp("down")
+                return
+    # 檢查仙人掌出現
+    for i in range(x1, x2):
+        for j in range(y1_cactus, y2_cactus):
+            if data[i, j] < 150:
+                pyautogui.keyDown("up")
+                return
+    return
+
+
+def isCollision_night(data):  # 晚上
+    for i in range(x1, x2):
+        for j in range(y1_bird, y2_bird):
+            if data[i, j] > 150:
+                pyautogui.keyDown("down")
+                time.sleep(0.5)  # 等0.5秒
+                pyautogui.keyUp("down")
+                return
+    for i in range(x1, x2):
+        for j in range(y1_cactus, y2_cactus):
+            if data[i, j] > 150:
+                pyautogui.keyDown("up")
+                return
+    return
+
+
+time.sleep(1)  # 等1秒
+
+pyautogui.keyDown("up")
+
+while True:
+    image = ImageGrab.grab().convert("L")
+    data = image.load()
+    if data[260, 300] > 150:
+        isCollision_day(data)
+    else:
+        isCollision_night(data)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+"""
 width, height = pyautogui.size()  # 取得螢幕寬度和高度
 print(width, height)  # 列印螢幕寬度和高度
 
-print("------------------------------------------------------------")  # 60個
-
-width, hwight = pyautogui.size()
-print(width, hwight)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("螢幕截圖 全螢幕 一張")
-
 myScreenshot = pyautogui.screenshot()  # 截圖
 myScreenshot.save("tmp_screenshot_full.png")  # 存圖
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
 print("螢幕截圖 部分 一張")
 
 (x1, y1, x2, y2) = (0, 0, 1920 // 2, 1080 // 2)
-
 myScreenshot = pyautogui.screenshot(region=(x1, y1, x2, y2))
 myScreenshot.save("tmp_screenshot_crop.png")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """
-import requests
-
 url = "https://notify-api.line.me/api/notify"
 token = "你的權杖"
 headers = {"Authorization": "Bearer " + token}  # 設定 LINE Notify 權杖
@@ -4768,8 +4771,6 @@ data = requests.post(url, headers=headers, data=data, files=imageFile)  # 發送
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-import requests
 
 
 # 定義截圖的函式
@@ -4802,6 +4803,8 @@ for i in range(5):
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """
+
+"""
 while True:
     x, y = pyautogui.position()
     # clear_output()
@@ -4819,7 +4822,7 @@ while True:
     elif y > 900:
         print("太下面  離開")
         break
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -4843,13 +4846,7 @@ pyautogui.press("enter")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
+"""
 print("按Ctrl-C 可以中斷本程式")
 try:
     while True:
@@ -4859,6 +4856,7 @@ try:
         time.sleep(1)
 except KeyboardInterrupt:
     print("\nBye")
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4882,6 +4880,7 @@ pyautogui.mouseUp(800, 300, button="right")  # 放開後滑鼠游標在(800, 300
 print("------------------------------------------------------------")  # 60個
 
 print("10秒後開始")
+"""
 time.sleep(10)  # 這10秒需要繪圖視窗取得焦點,選擇畫筆和選擇顏色
 pyautogui.click()  # 按一下設定繪圖起始點
 displacement = 10
@@ -4891,7 +4890,7 @@ while displacement < 300:
     pyautogui.dragRel(-displacement, 0, duration=0.2)
     pyautogui.dragRel(0, -displacement, duration=0.2)
     displacement += 10
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 for i in range(1, 10):
@@ -4902,14 +4901,14 @@ for i in range(1, 10):
 
 print("------------------------------------------------------------")  # 60個
 
-screenImage = pyautogui.screenshot("out28_17_1.jpg")  # 方法1
-screenImage.save("out28_17_2.jpg")  # 方法2
+screenImage = pyautogui.screenshot("tmp_out28_17_1.jpg")  # 方法1
+screenImage.save("tmp_out28_17_2.jpg")  # 方法2
 
 print("------------------------------------------------------------")  # 60個
 
 screenImage = pyautogui.screenshot()
 cropPict = screenImage.crop((960, 210, 1900, 480))
-cropPict.save("out28_18.jpg")
+cropPict.save("tmp_out28_18.jpg")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -5002,6 +5001,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("請在10秒內開啟記事本並設為焦點視窗")
+
 time.sleep(10)
 
 pyautogui.write("Taiwan\t", 0.3)  # Taiwan
@@ -5038,18 +5038,18 @@ pyautogui.click(x=200, y=400)  # 這裡的 x 和 y 值需要您自己設定
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+"""
 xloc = 0
 while xloc < 1000:
     xloc, yloc = pyautogui.position()  # 獲得滑鼠游標位置
     print(xloc, yloc)  # 列印滑鼠游標位置
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 截取屏幕的一部分
 screenshot = pyautogui.screenshot(region=(0, 0, 300, 400))  # x, y, 寬度, 高度
-screenshot.save("screenshot.png")
+screenshot.save("tmp_screenshot6.png")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -5101,7 +5101,7 @@ for i in range(5):
     pyautogui.moveRel(0, -300, duration=0.5)  # 往左上角移動
 
 print("------------------------------------------------------------")  # 60個
-
+"""
 xloc = 0
 print("按Ctrl-C 可以中斷本程式")
 try:
@@ -5122,7 +5122,7 @@ try:
 except KeyboardInterrupt:
     print("\nBye")
 
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -5140,6 +5140,7 @@ while displacement > 10:
 print("------------------------------------------------------------")  # 60個
 
 print("請在10秒內開啟記事本並設為焦點視窗")
+
 time.sleep(10)
 
 pyautogui.typewrite("Ming-Chi Institute of Technology", 0.1)
@@ -5222,15 +5223,16 @@ time.sleep(0.5)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+"""
 while True:
     position = pyautogui.position()
     print(position)
     time.sleep(0.5)
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# NG
 print("5秒後開始")
 print("請開啟小算盤")
 time.sleep(5)
@@ -5245,7 +5247,7 @@ for n in num:
         print("找不到圖片")
 
 screen = pyautogui.screenshot()
-screen.save("screenshot.png")
+screen.save("tmp_screenshot1.png")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -5626,11 +5628,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-print("pyautogui ST")
+print("pyautogui SP")
 print("------------------------------------------------------------")  # 60個
 
 
