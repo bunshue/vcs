@@ -2883,19 +2883,18 @@ print("總銷售業績{},應付獎金：{}".format(e1, e2))
 
 pickle Python 物件序列化
 
-Selenium	瀏覽器自動化操操作
-selenium	瀏覽器自動化操作
+Selenium	瀏覽器自動化操作
 PyAutoGUI	鍵盤滑鼠自動化
 gradio		神奇網頁互動介面
 schedule	定時執行任務
 tqdm		進度條
 cnlunardate	農曆日期
 
-
 開放原碼專案名稱	簡述
-TensorFlow		機器學習框架
+TensorFlow		人工智慧框架 : Google的 機器學習框架
+PyTorch			人工智慧框架 : 臉書的 機器學習框架
+CNTK			人工智慧框架 : 微軟的 機器學習框架
 OpenCV			電腦視覺工具
-PyTorch			機器學習函式庫
 Keras			機器學習函式庫
 Stable Diffusion	文字轉圖像的擴散模型
 DeepFaceLab		比DeepFaake更強大的AI偽造技術

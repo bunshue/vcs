@@ -6827,22 +6827,6 @@ print(f"/半徑{r:<3d}圓面積是{area:<10.2f}/")
 print(f"/半徑{r:^3d}圓面積是{area:^10.2f}/")
 
 print("------------------------------------------------------------")  # 60個
-
-import pyautogui
-
-for i in range(10):
-    # 全屏截圖
-    # myScreenshot = pyautogui.screenshot()
-    # myScreenshot.save(f"./pic_all{i}.png")
-
-    # 部分截圖
-    x_st, y_st, w, h = 1920 // 2, 1080 // 2, 1920 // 2 - 50, 1080 // 2 - 50
-    myScreenshot = pyautogui.screenshot(region=(x_st, y_st, w, h))
-    # 偽存檔
-    # myScreenshot.save(f"./pic_part{i}.png")
-
-    time.sleep(5)
-
 print("------------------------------------------------------------")  # 60個
 
 print("filter 的用法")
