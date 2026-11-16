@@ -31,7 +31,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
 import pyautogui
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 # 建立瀏覽器物件
@@ -314,9 +314,6 @@ for i in rts:  # 讀取串列的每個項目
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
-
 
 url = "https://www.books.com.tw/web/books"
 # url = "https://www.google.com/"
@@ -4508,6 +4505,7 @@ print("------------------------------------------------------------")  # 60個
 print("PyAutoGUI，自動控制滑鼠與鍵盤 ST")
 print("------------------------------------------------------------")  # 60個
 
+import pyautogui
 
 def create_driver(url):
     global driver
@@ -4521,9 +4519,6 @@ def destroy_driver():
     #driver.close()  #關閉瀏覽器
     print('關閉瀏覽器並且退出驅動程序')
     driver.quit()   #關閉瀏覽器並且退出驅動程序
-
-
-import pyautogui
 
 
 """
@@ -4578,7 +4573,7 @@ for i in range(5):
     xylocStr = "x= " + str(x).rjust(4) + " y= " + str(y).rjust(4)
     print(xylocStr, end="\r", flush=True)  # 設定同一行最左邊輸出
     
-    position = pyautogui.position()
+    position = pyautogui.position()  # 獲得滑鼠游標位置
     print(position)
     
     # time.sleep(1)
@@ -4587,8 +4582,7 @@ print("------------------------------")  # 30個
 
 x_st = 850
 y_st = 134
-
-print("move to (", x_st, ", ", y_st, ")")
+print("移動滑鼠位置 至 (", x_st, ", ", y_st, ")")
 pyautogui.moveTo(x_st, y_st, 2)  # 移動滑鼠位置
 
 # 移動滑鼠位置
@@ -4651,8 +4645,8 @@ pyautogui.PAUSE = 1
 
 x_st = 850
 y_st = 546
-print("move to (", x_st, ", ", y_st, ")")
-pyautogui.moveTo(x_st, y_st, 2)
+print("移動滑鼠位置 至 (", x_st, ", ", y_st, ")")
+pyautogui.moveTo(x_st, y_st, 2)  # 移動滑鼠位置
 
 time.sleep(1)  # 等1秒
 
@@ -4686,14 +4680,14 @@ time.sleep(1)  # 等1秒
 
 pyautogui.PAUSE = 3
 
-pyautogui.moveTo(1263, 438-85, 2)
+pyautogui.moveTo(1263, 438-85, 2)  # 移動滑鼠位置
 
 pyautogui.click()  # 滑鼠點擊
 pyautogui.doubleClick()
 
 pyautogui.typewrite("2330")  # 打字
 
-pyautogui.moveTo(1461-70, 438-85, 2)
+pyautogui.moveTo(1461-70, 438-85, 2)  # 移動滑鼠位置
 
 pyautogui.click()  # 滑鼠點擊
 
@@ -4933,14 +4927,16 @@ print("10秒後開始")
 print("請打開 https://canvas.apps.chrome/，並挑選你喜歡的畫筆顏色及粗細")
 time.sleep(10)
 
-pyautogui.moveTo(x=570, y=552)
+pyautogui.moveTo(x=570, y=552)  # 移動滑鼠位置
 
 pyautogui.dragRel(xOffset=582, yOffset=-198, duration=3, button="left")
 pyautogui.dragRel(xOffset=-38, yOffset=441, duration=3, button="left")
 pyautogui.dragRel(xOffset=-544, yOffset=-243, duration=3, button="left")
 
-pyautogui.moveTo(x=1000, y=500)
-pyautogui.click()  # 按一下設定繪圖起始點
+pyautogui.moveTo(x=1000, y=500)  # 移動滑鼠位置
+
+pyautogui.click()  # 滑鼠點擊  # 按一下設定繪圖起始點
+
 displacement = 300
 while displacement > 60:
     pyautogui.dragRel(displacement, 0, duration=0.2)
@@ -4951,8 +4947,8 @@ while displacement > 60:
 
 
 # 移動滑鼠位置
-pyautogui.moveTo(x=1000, y=500)
-pyautogui.click()  # 按一下設定繪圖起始點
+pyautogui.moveTo(x=1000, y=500)  # 移動滑鼠位置
+pyautogui.click()  # 滑鼠點擊  # 按一下設定繪圖起始點
 for i in range(5):
     pyautogui.moveRel(300, 0, duration=0.5)  # 往右上角移動
     pyautogui.moveRel(0, 300, duration=0.5)  # 往右下角移動
@@ -4960,13 +4956,13 @@ for i in range(5):
     pyautogui.moveRel(0, -300, duration=0.5)  # 往左上角移動
 
 
-pyautogui.moveTo(x=400, y=400)
-pyautogui.click()  # 按一下設定繪圖起始點
+pyautogui.moveTo(x=400, y=400)  # 移動滑鼠位置
+pyautogui.click()  # 滑鼠點擊  # 按一下設定繪圖起始點
 pyautogui.moveRel(xOffset=300, yOffset=200, duration=3, tween=pyautogui.linear)
 pyautogui.moveRel(xOffset=-600, yOffset=0, duration=3, tween=pyautogui.easeInQuad)
 pyautogui.moveRel(xOffset=300, yOffset=-200, duration=3, tween=pyautogui.easeOutQuad)
 
-# 3030
+print("------------------------------")  # 30個
 
 # canvas 2
 print("請打開 https://canvas.apps.chrome/，並挑選你喜歡的畫筆顏色及粗細")
@@ -4974,15 +4970,26 @@ print("10秒後開始")
 
 time.sleep(10)
 
-pyautogui.moveTo(x=570, y=552)
-pyautogui.dragTo(x=1152, y=354, duration=3, button="left")
-pyautogui.dragTo(x=1114, y=795, duration=3, button="left")
-pyautogui.dragTo(x=570, y=552, duration=3, button="left")
+pyautogui.moveTo(x=570, y=552)  # 移動滑鼠位置  # 先移動到定點
+
+pyautogui.dragTo(x=1152, y=354, duration=3, button="left")  # 滑鼠左鍵拖曳, 3秒完成
+pyautogui.dragTo(x=1114, y=795, duration=3, button="left")  # 滑鼠左鍵拖曳, 3秒完成
+pyautogui.dragTo(x=570, y=552, duration=3, button="left")  # 滑鼠左鍵拖曳, 3秒完成
+
+"""
+# 將滑鼠移動到 (100, 100)
+pyautogui.moveTo(100, 100)  # 移動滑鼠位置
+
+# 按住左鍵，花費 1 秒的時間將滑鼠拖曳到 (640, 480)
+pyautogui.dragTo(640, 480, duration=1.0)  # 滑鼠左鍵拖曳, 1秒完成
+# pyautogui.dragTo(meX, veY, button="left")
+"""
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-pyautogui.moveTo(x=400, y=100)
+# 移動滑鼠位置
+pyautogui.moveTo(x=400, y=100)  # 移動滑鼠位置
 pyautogui.moveTo(x=700, y=300, duration=3, tween=pyautogui.linear)
 pyautogui.moveTo(x=100, y=300, duration=3, tween=pyautogui.easeInQuad)
 pyautogui.moveTo(x=400, y=100, duration=3, tween=pyautogui.easeOutQuad)
@@ -5002,12 +5009,12 @@ create_driver(url)
 pyautogui.PAUSE = 1
 
 x, y = 630, 20
-pyautogui.moveTo(x, y, 2)
-pyautogui.click()
+pyautogui.moveTo(x, y, 2)  # 移動滑鼠位置
+pyautogui.click()  # 滑鼠點擊
 
 x, y = 264, 62
-pyautogui.moveTo(x, y, 2)
-pyautogui.click()
+pyautogui.moveTo(x, y, 2)  # 移動滑鼠位置
+pyautogui.click()  # 滑鼠點擊
 
 pyautogui.typewrite("https://hophd.wordpress.com")  # 打字
 
@@ -5103,159 +5110,6 @@ pyautogui.doubleClick(x=755, y=48, duration=2, button="left")  # 雙擊滑鼠左
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
-x_st = 400
-y_st = 400
-width = 600
-height = 600
-sizePosition = (714, 84)
-sizeOptions = (166, 211, 254, 297)
-
-canvasOrigin = (x_st, y_st, x_st + width, y_st + height)
-print("canvasOrigin :", canvasOrigin)
-
-moveX = 0
-moveY = 0
-swatchTopLeft = (0, 0)
-swatchBottomRight = (0, 0)
-swatchOffset = (0, 0)
-
-colors = {
-    "black": (1, 3),
-    "blue": (1, 9),
-    "red": (1, 4),
-    "orange": (1, 5),
-    "yellow": (1, 6),
-    "green": (1, 7),
-    "purple": (1, 9),
-}
-
-center = (width / 2 + canvasOrigin[0], height / 2 + canvasOrigin[1])
-print("center :", center)
-
-pyautogui.moveTo(center)
-
-
-def colorCoords(color):
-    index = colors.get(color)
-    x = swatchTopLeft[0] + (index[1] * swatchOffset[0])
-    y = swatchTopLeft[1] + (index[0] * swatchOffset[1])
-    return (x, y)
-
-
-def getDestination():
-    global moveX
-    global moveY
-
-    pos = pyautogui.position()
-    startX = pos[0]
-    startY = pos[1]
-    strokeRand = random.randint(2, 30)
-
-    moveX = random.randint(
-        startX - int((width / strokeRand)), startX + int((width / strokeRand))
-    )
-    moveY = random.randint(
-        startY - int((height / strokeRand)), startY + int((height / strokeRand))
-    )
-    if moveX > canvasOrigin[0] + width:
-        return False
-    elif moveX < canvasOrigin[0]:
-        return False
-    elif moveY > canvasOrigin[1] + height:
-        return False
-    elif moveY < canvasOrigin[1]:
-        return False
-    else:
-        return True
-
-
-def run(repeat):
-    for x in range(repeat):
-        going = False
-        startX = random.randint(0 + canvasOrigin[0], width + canvasOrigin[0])
-        startY = random.randint(0 + canvasOrigin[1], height + canvasOrigin[1])
-        print("startX =", startX, ", startY =", startY)
-        pyautogui.moveTo(startX, startY)
-        while not going:
-            if getDestination():
-                going = True
-
-        print("moveX =", moveX, ", moveY =", moveY)
-        print("from " +str(startX)+"," +str(startY)+" to "+str(moveX)+","+str(moveY))
-        pyautogui.dragTo(moveX, moveY, button="left")
-        going = False
-            
-
-def rebuildCoords():
-    global width
-    global height
-    global canvasOrigin
-    global center
-    global sizePosition
-    global sizeOptions
-    global swatchOffset
-    global swatchBottomRight
-    global swatchTopLeft
-
-    print("Be sure you can see your print output during this process.")
-    width = 640
-    height = 480
-    print("OK, now to get screen coordinates of certain features in Paint.")
-    print("Move your cursor to the top left color swatch in Paint")
-    
-    pos1 = pyautogui.position()
-    print("pos1 :", pos1)
-    
-    print("Captured 1")
-    print("Now move your cursor to the bottom right color swatch in Paint")
-    
-    pos2 = pyautogui.position()
-    swatchTopLeft = pos1
-    swatchBottomRight = pos2
-    print("Captured 2")
-    offsetX = (pos2[0] - pos1[0]) / 10
-    offsetY = (pos2[1] - pos1[1]) / 3
-    swatchOffset = (offsetX, offsetY)
-    print("Next, move your cursor to the Brush Size Button")
-    print("Epstein Didn't Kill Himself")
-
-    brushPos = pyautogui.position()
-    print("Captured 3")
-    sizePosition = brushPos
-    print("Move the cursor to the smallest brush size option")
-    print("keep in mind you have to click for this one")
-    
-    smallPos = pyautogui.position()
-    print("smallPos :", smallPos)
-    
-    print("Move the cursor to the largest brush size option")
-
-    bigPos = pyautogui.position()
-    small = smallPos[1]
-    big = bigPos[1]
-    diff = (big - small) / 4
-    sizeOptions = (small, small + diff, small + (diff * 2), big)
-    print("Lastly, hold your cursor at the top left corner of the image canvas")
-    print("Get it as close as possible")
-
-    origPos = pyautogui.position()
-    canvasOrigin = (origPos[0], origPos[1], origPos[0] + width, origPos[1] + height)
-    center = (width / 2 + canvasOrigin[0], height / 2 + canvasOrigin[1])
-
-
-result = 1
-
-if result == "1":
-    run(20)
-    
-       
-if result == "3":
-    rebuildCoords()
-
-sys.exit()
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -5272,42 +5126,18 @@ driver.implicitly_wait(60)：設定全域的元素查找超時時間為 60 秒�
 Selenium 會在背景持續輪詢重試，直到元素出現或滿 60 秒為止。
 """
 
+"""
+# pyautogui.dragTo() 用來按住滑鼠左鍵並將游標拖曳到指定的螢幕座標位置
+pyautogui.dragTo(x, y, duration=0..5, button="left", tween=pyautogui.easeInOutQuad)
+• x, y：要拖曳到的目標螢幕座標（X, Y 軸像素位置）。
+• duration：拖曳過程所花費的時間（以秒為單位，預設為 0 即瞬間完成）。
+• button：按住哪一個滑鼠按鍵，預設為左鍵 ('left')，也可以設為 'middle'（中鍵）或 'right'（右鍵）。
+• tween：移動時的速度曲線函數（例如慢慢加速、減速等效果）。
 
+與 dragRel() 的差別：
+• dragTo(x, y) 是移動到絕對座標。
+• dragRel(xOffset, yOffset) 則是相對於目前游標所在位置來進行位移。
 
-pyautogui.moveTo(startX, startY)
-current = pyautogui.position()
-pyautogui.dragTo(newX, newY)
+"""         
 
-
-def pickColor():
-    print("pickColor")
-    color = random.choice(list(colors.keys()))
-    colorPosition = colorCoords(color)
-    print(colorPosition)
-    """
-    pyautogui.moveTo(colorPosition)
-    pyautogui.click()
-    """
-
-
-
-def pickSize():
-    print("pickSize")
-    size = random.choice(sizeOptions)
-    print("sizePosition =", sizePosition)
-    print("size =", size)
-
-    """
-    pyautogui.moveTo(sizePosition)
-    pyautogui.click()
-    pyautogui.moveTo(sizePosition[0], size)
-    time.sleep(0.25)
-    pyautogui.click()
-    """
-
-
-def getCoords(repeat):
-    for x in range(repeat):
-        print(pyautogui.position())
-        time.sleep(1)
 
