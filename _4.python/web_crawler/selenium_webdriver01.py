@@ -54,14 +54,38 @@ def create_driver(url):
     driver.get(url)  # 打開瀏覽器，開啟網頁
 
 
+# 關閉瀏覽器並且退出驅動程序
 def destroy_driver():
-    print("關閉瀏覽器")
-    driver.close()  # 關閉瀏覽器
-    print("關閉瀏覽器並且退出驅動程序")
+    # driver.close()  # 關閉瀏覽器目前分頁
     driver.quit()  # 關閉瀏覽器並且退出驅動程序
 
 
 print("------------------------------------------------------------")  # 60個
+
+url = "https://www.google.com"
+
+driver = webdriver.Chrome()  # 使用Chrome
+
+try:
+    driver.get(url)
+    print(driver.title)
+
+finally:
+    driver.quit()
+
+print("------------------------------")  # 30個
+
+# 有多個視窗時
+
+url = "https://www.google.com"
+
+driver = webdriver.Chrome()  # 使用Chrome
+
+driver.get(url)
+
+driver.execute_script("window.open('https://www.microsoft.com')")
+
+print("------------------------------")  # 30個
 
 # 測試瀏覽器建立與關閉
 
@@ -70,9 +94,9 @@ create_driver(url)  # 建立瀏覽器，開啟網頁
 
 sleep(5)  # 等N秒
 
-destroy_driver()
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
-sys.exit()
+print("------------------------------")  # 30個
 
 # 建立瀏覽器物件
 # driver = webdriver.Chrome()  # 使用Chrome
@@ -90,6 +114,7 @@ driver.maximize_window()  # 全螢幕顯示
 driver.maximize_window()  # 最大化視窗後開啟網站
 driver.maximize_window()  # ←將視窗最大化以避免最右邊的登入鈕沒顯示出來
 
+print("------------------------------")  # 30個
 
 url = "http://aaa.24ht.com.tw"
 
@@ -114,9 +139,7 @@ print("瀏覽器尺寸：", driver.get_window_size())
 
 sleep(1)  # 等N秒
 
-driver.close()  # 關閉瀏覽器視窗
-
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 
@@ -135,19 +158,17 @@ sleep(1)  # 等N秒
 
 sleep(1)  # 等N秒
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 """ 待加入
 driver.refresh()  # 更新網頁
 driver.implicitly_wait(10)  # 等待網頁載入
-driver.close()  # 關閉瀏覽器視窗
+driver.close()  # 關閉瀏覽器目前分頁
 driver.set_window_rect(200, 100, 500, 250)  # 改變視窗位置及大小
 driver.refresh()  # 更新網頁
 driver.add_cookie(cookies)
 
 driver.save_screenshot("tmp_screenshot_google.png")  # 網頁截圖
-
-# NG driver.fullscreen_window()  # 將視窗設為全螢幕
 """
 
 # 以上為簡單使用 driver 的基本功能
@@ -156,9 +177,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 url = "https://deepwisdom.com.tw"
-
-driver = webdriver.Firefox()  # 使用Firefox
-driver.get(url)  # 打開瀏覽器，開啟網頁
+create_driver(url)  # 建立瀏覽器，開啟網頁
 
 sleep(1)  # 等N秒
 
@@ -166,7 +185,7 @@ driver.refresh()  # 更新網頁
 
 sleep(1)  # 等N秒
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -177,7 +196,7 @@ create_driver(url)  # 建立瀏覽器，開啟網頁
 
 sleep(1)  # 等N秒
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -196,8 +215,6 @@ https://rate.bot.com.tw/
 https://rate.bot.com.tw/xrt?Lang=zh-TW
 """
 
-from selenium import webdriver
-
 url = "https://rate.bot.com.tw/xrt/all/day"
 # url = "https://rate.bot.com.tw/xrt?Lang=zh-TW"  # 另一個網址
 
@@ -206,7 +223,8 @@ create_driver(url)  # 建立瀏覽器，開啟網頁
 sleep(5)  # 等N秒
 
 html = driver.page_source
-driver.quit()
+
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 soup = BeautifulSoup(html, "html.parser")
 # print(soup.prettify())  # prettify()這個函數可以將DOM tree以比較美觀的方式印出。
@@ -350,8 +368,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 url = "https://www.books.com.tw/web/books"
-# url = "https://www.google.com/"
-
 create_driver(url)  # 建立瀏覽器，開啟網頁
 
 sleep(1)  # 等N秒
@@ -368,9 +384,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 url = "https://www.wikipedia.org/"
-
-driver = webdriver.Firefox()  # 使用Firefox
-driver.get(url)  # 打開瀏覽器，開啟網頁
+create_driver(url)  # 建立瀏覽器，開啟網頁
 
 # txtBox = driver.find_element_by_id("searchInput") old
 txtBox = driver.find_element(By.ID, "searchInput")
@@ -526,7 +540,7 @@ create_driver(url)  # 建立瀏覽器，開啟網頁
 
 sleep(1)  # 等N秒
 
-driver.close()  # 關閉瀏覽器視窗  # 關閉網頁(目前分頁)A
+driver.close()  # 關閉瀏覽器目前分頁  # 關閉網頁(目前分頁)A
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -545,7 +559,7 @@ for url in urls:
     driver.get(url)  # 網頁下載至瀏覽器
     sleep(1)  # 等N秒
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -559,7 +573,7 @@ print("標題 :", driver.title)
 html = driver.page_source  # 網頁原始碼
 # print(html)
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 
@@ -575,7 +589,7 @@ driver.add_cookie(cookie)
 
 print("標題 :", driver.title)
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 
@@ -594,7 +608,7 @@ print("標題 :", driver.title)
 html = driver.page_source  # 網頁原始碼
 # print(html)
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -611,7 +625,7 @@ for x in range(5):
     sleep(1)  # 等N秒
     print(x + 1, len(driver.page_source))
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -627,7 +641,7 @@ tags_li = tag_ol.find_all("li", class_="line")
 for tag in tags_li:
     print(tag.text)
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -664,7 +678,7 @@ for img in images:
     fp.close()
 print("結束 Imgur 網頁圖檔下載...")
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -692,7 +706,7 @@ with open("imgur_dog.csv", "w+", newline="", encoding="big5") as fp:
 
 print("成功建立 imgur_dog.csv 檔...")
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("中央氣象局 環境部 ST")
@@ -709,7 +723,7 @@ soup = BeautifulSoup(driver.page_source, "lxml")
 span = soup.select_one("span.tem-C.is-active")
 print(span.text)
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -717,8 +731,7 @@ print("------------------------------------------------------------")  # 60個
 url = "https://data.epa.gov.tw/"
 url = "https://data.moenv.gov.tw/"
 
-driver = webdriver.Chrome()
-driver.get(url)
+create_driver(url)  # 建立瀏覽器，開啟網頁
 
 # NG
 """
@@ -757,7 +770,7 @@ btn.click()  # 點選 CSV
 
 sleep(1)  # 等N秒
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -765,11 +778,7 @@ print("------------------------------------------------------------")  # 60個
 print("抓環境部資料")
 
 url = "https://data.moenv.gov.tw/"
-
-# driver = webdriver.Chrome()    #使用Chrome
-driver = webdriver.Firefox()  # 使用Firefox
-
-driver.get(url)
+create_driver(url)  # 建立瀏覽器，開啟網頁
 
 txt = driver.find_element(By.ID, "searchbar-input")  # 取得 id 為 xxxx 的網頁元素 ( TextArea )
 txt.send_keys("aqi" + Keys.RETURN)  # 輸入 aqi 後按 Enter
@@ -800,7 +809,6 @@ sleep(1)  # 等N秒
 btn = driver.find_element(By.LINK_TEXT, "CSV")
 btn.click()  # 下載 CSV
 
-driver.close()  # 關閉瀏覽器
 """
 
 """
@@ -810,25 +818,18 @@ aria-label="請輸入關鍵字搜尋，例如:環境或&quot;縣市(臺北市)�
 value="" class="bpa-input" data-v-5e8e3ca1="">
 """
 
-# destroy_driver()  # 關閉瀏覽器並且退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 print("抓 中央氣象局/環境部 資料")
 print("------------------------------------------------------------")  # 60個
-print("準備工作")
-
-# 建立瀏覽器物件
-# driver = webdriver.Chrome()    #使用Chrome
-driver = webdriver.Firefox()  # 使用Firefox
 
 print("------------------------------------------------------------")  # 60個
 print("抓中央氣象局資料")
 
 url = "https://www.cwa.gov.tw/V8/C/W/OBS_County.html?ID=menu"
-
-driver.get(url)
+create_driver(url)  # 建立瀏覽器，開啟網頁
 
 sleep(1)  # 等N秒
 
@@ -859,7 +860,7 @@ if target != "":
 
     html = driver.page_source  # 讀取網頁的原始碼
     # print(html)
-    # driver.quit()   #關閉瀏覽器並且退出驅動程序
+    destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
     soup = BeautifulSoup(html, "html.parser")
 
@@ -867,7 +868,7 @@ if target != "":
 print(counties)
 # ("新竹市", "10018")
 
-driver.quit()  # 關閉瀏覽器並且退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -881,9 +882,7 @@ url = "D:/_git/vcs/_1.data/______test_files1/webdriver_data_old.html"
 # url = "D:/_git/vcs/_1.data/______test_files1/webdriver_data.html"  # NG
 
 url = "http://aaa.24ht.com.tw"
-
-driver = webdriver.Firefox()  # 使用Firefox
-driver.get(url)  # 網頁下載至瀏覽器
+create_driver(url)  # 建立瀏覽器，開啟網頁
 
 print("標題 :", driver.title)
 
@@ -1050,9 +1049,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 url = "http://www.deepmind.com.tw"
-
-driver = webdriver.Firefox()  # 使用Firefox
-driver.get(url)  # 網頁下載至瀏覽器
+create_driver(url)  # 建立瀏覽器，開啟網頁
 
 sleep(1)  # 等N秒
 
@@ -1060,15 +1057,14 @@ driver.refresh()  # 更新網頁
 
 sleep(1)  # 等N秒
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 url = "http://www.mcut.edu.tw"
 
-driver = webdriver.Firefox()  # 使用Firefox
-driver.get(url)  # 網頁下載至瀏覽器
+create_driver(url)  # 建立瀏覽器，開啟網頁
 
 # ele = driver.find_element_by_tag_name("body") old
 ele = driver.find_element(By.TAG_NAME, "body")
@@ -1092,9 +1088,7 @@ ele.send_keys(Keys.HOME)  # 網頁捲動到最上端
 print("------------------------------")  # 30個
 
 url = "http://www.mcut.edu.tw"
-
-driver = webdriver.Firefox()  # 使用Firefox
-driver.get(url)  # 打開瀏覽器，開啟網頁
+create_driver(url)  # 建立瀏覽器，開啟網頁
 
 # ele = driver.find_element_by_tag_name("body") old
 ele = driver.find_element(By.TAG_NAME, "body")
@@ -1131,7 +1125,7 @@ tags_li = tag_ol.find_elements(By.XPATH, "//li")
 for tag in tags_li:
     print(tag.text, tag.get_attribute("class"))
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1152,7 +1146,7 @@ for tag in tags:
         print(href)
 print(len(links))
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1173,7 +1167,7 @@ for tag in tags:
         print(href)
 print(len(links))
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1211,7 +1205,7 @@ for link in links:
     print("描述:", description.strip())
     print("---------------------------")
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1257,7 +1251,7 @@ for link in links:
 print(df.head())
 df.to_csv("YouTube.csv", index=False, encoding="utf-8")
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1266,24 +1260,24 @@ print("------------------------------------------------------------")  # 60個
 # 他會出現系統偵測到機器人，需要人工驗證，
 
 url = "https://www.google.com"
-
-driver = webdriver.Chrome()
-driver.get(url)
+create_driver(url)  # 建立瀏覽器，開啟網頁
 
 search_box = driver.find_element(By.NAME, "q")
 search_box.send_keys("明志科技大學")  # 輸入表單資料
+
 sleep(1)  # 等N秒
+
 search_box.submit()  # 送出表單
+
+
+# 在此測試 option dddddddddddddddd
+
+
 
 print("------------------------------")  # 30個
 
 url = "http://www.google.com"
-
-# 對此網站 不可用  Chrome
-# driver = webdriver.Chrome()  # 使用Chrome
-driver = webdriver.Firefox()  # 使用Firefox
-
-driver.get(url)  # 打開瀏覽器，開啟網頁
+create_driver(url)  # 建立瀏覽器，開啟網頁
 
 txtBox = driver.find_element(By.NAME, "q")
 txtBox.send_keys("明志科技大學")  # 輸入表單資料
@@ -1303,7 +1297,7 @@ print(e1.tag_name)  # 輸出 head 確認已找到 (tag_name 屬性為標籤名�
 e2 = e1.find_element(By.TAG_NAME, "title")  # 在 head 元素中尋找 title 標籤
 print(e2.tag_name)  # 輸出 tite 確認已找到
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1329,7 +1323,7 @@ for i in range(1, 7):
     with open("tmp_test" + str(i) + ".jpg", "wb") as f:
         f.write(response.content)  # 將response.content二進位內容寫入檔案
 
-driver.close()  # 關閉瀏覽器視窗
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1472,9 +1466,7 @@ print("------------------------------------------------------------")  # 60個
 """ NG
 url = "http://www.deepmind.com.tw"
 url = "https://deepwisdom.com.tw"
-
-driver = webdriver.Firefox()  # 使用Firefox
-driver.get(url)  # 打開瀏覽器，開啟網頁
+create_driver(url)  # 建立瀏覽器，開啟網頁
 
 # eleLink = driver.find_element_by_link_text("深智數位緣起")  # old
 eleLink = driver.find_element(By.LINK_TEXT, "深智數位緣起")  # 取得指定超連結文字的網頁元素
@@ -1492,9 +1484,7 @@ print("------------------------------------------------------------")  # 60個
 
 url = "http://www.mcut.edu.tw/?Lang=en"
 
-driver = webdriver.Firefox()  # 使用Firefox
-driver.get(url)  # 網頁下載至瀏覽器
-
+create_driver(url)  # 建立瀏覽器，開啟網頁
 
 # txtBox = driver.find_element_by_id("hdSchKey")  # old
 txtBox = driver.find_element(By.ID, "hdSchKey")
@@ -1517,9 +1507,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 url = "https://opendata.epa.gov.tw/data/contents/aqi/"
-
-driver = webdriver.Chrome()  # 使用Chrome
-# NGdriver.get(url)  # 網頁下載至瀏覽器
+create_driver(url)  # 建立瀏覽器，開啟網頁
 
 # driver.find_element_by_link_text("JSON").click()  # 按JSON鈕 old
 driver.find_element(By.LINK_TEXT, "JSON").click()  # 按JSON鈕
@@ -1543,56 +1531,35 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-
-# 使用ChromeDriverManager自動下載chromedriver
-
 url = "https://fchart.github.io/test.html"
-
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))  # 使用Chrome
-driver.implicitly_wait(10)  # 等待網頁載入
-driver.get(url)
+create_driver(url)  # 建立瀏覽器，開啟網頁
 
 print("標題 :", driver.title)
 
 html = driver.page_source  # 網頁原始碼
 # print(html)
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from selenium.webdriver.edge.service import Service
-from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
 url = "https://fchart.github.io/test.html"
-
-driver = webdriver.Edge(
-    service=Service(EdgeChromiumDriverManager().install())
-)  # 使用Edge
-driver.implicitly_wait(10)  # 等待網頁載入
-driver.get(url)
+create_driver(url)  # 建立瀏覽器，開啟網頁
 
 print("標題 :", driver.title)
 
 html = driver.page_source  # 網頁原始碼
 # print(html)
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-
-# 使用ChromeDriverManager自動下載chromedriver
 
 url = "https://www.ptt.cc/bbs/Gossiping/index.html"
 
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))  # 使用Chrome
+driver = webdriver.Chrome()  # 使用Chrome
 driver.implicitly_wait(10)  # 等待網頁載入
 cookies = {"name": "over18", "value": "1"}
 driver.get(url)
@@ -1600,45 +1567,35 @@ driver.add_cookie(cookies)
 
 print("標題 :", driver.title)
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from selenium.webdriver.edge.service import Service
-from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
 url = "https://www.ptt.cc/bbs/Gossiping/index.html"
 
-driver = webdriver.Edge(
-    service=Service(EdgeChromiumDriverManager().install())
-)  # 使用Edge
+driver = webdriver.Edge()  # 使用Edge
 driver.implicitly_wait(10)  # 等待網頁載入
+
 cookies = {"name": "over18", "value": "1"}
 driver.get(url)
 driver.add_cookie(cookies)
 
 print("標題 :", driver.title)
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 
 options = Options()
 options.add_argument("--headless")
 
-# 使用ChromeDriverManager自動下載chromedriver
-
 url = "https://fchart.github.io/test.html"
 
-driver = webdriver.Chrome(
-    service=Service(ChromeDriverManager().install()), options=options
-)  # 使用Chrome
+driver = webdriver.Chrome(options=options)  # 使用Chrome
 driver.implicitly_wait(10)  # 等待網頁載入
 driver.get(url)
 
@@ -1647,19 +1604,14 @@ print("標題 :", driver.title)
 html = driver.page_source  # 網頁原始碼
 #  print(html)
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-
-# 使用ChromeDriverManager自動下載chromedriver
 
 url = "https://fchart.github.io/ML/Example.html"
 
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))  # 使用Chrome
+driver = webdriver.Chrome()  # 使用Chrome
 driver.implicitly_wait(10)  # 等待網頁載入
 driver.get(url)
 
@@ -1672,21 +1624,13 @@ tags_li = tag_ol.find_all("li", class_="line")
 for tag in tags_li:
     print(tag.text)
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from selenium.webdriver.edge.service import Service
-from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
 url = "https://fchart.github.io/ML/Example.html"
-
-driver = webdriver.Edge(
-    service=Service(EdgeChromiumDriverManager().install())
-)  # 使用Edge
-driver.implicitly_wait(10)  # 等待網頁載入
-driver.get(url)
+create_driver(url)  # 建立瀏覽器，開啟網頁
 
 print("標題 :", driver.title)
 
@@ -1697,7 +1641,7 @@ tags_li = tag_ol.find_all("li", class_="line")
 for tag in tags_li:
     print(tag.text)
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1716,7 +1660,7 @@ tags_li = tag_ol.find_elements(By.XPATH, "//li")
 for tag in tags_li:
     print(tag.text, tag.get_attribute("class"))
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1735,19 +1679,29 @@ tags_li = soup.find_all("li", class_="line")
 for tag in tags_li:
     print(tag.text)
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from selenium.webdriver.edge.service import Service
-from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
 url = "https://fchart.github.io/ML/Example.html"
 
-driver = webdriver.Edge(
-    service=Service(EdgeChromiumDriverManager().install())
-)  # 使用Edge
+create_driver(url)  # 建立瀏覽器，開啟網頁
+
+tag_ol = driver.find_element(By.XPATH, "/html/body/ol")
+print(tag_ol.tag_name)
+tags_li = tag_ol.find_elements(By.XPATH, "//li")
+for tag in tags_li:
+    print(tag.text, tag.get_attribute("class"))
+
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+url = "https://fchart.github.io/ML/Example.html"
+
+driver = webdriver.Chrome()  # 使用Chrome
 driver.implicitly_wait(10)  # 等待網頁載入
 driver.get(url)
 
@@ -1757,40 +1711,14 @@ tags_li = tag_ol.find_elements(By.XPATH, "//li")
 for tag in tags_li:
     print(tag.text, tag.get_attribute("class"))
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 
 url = "https://fchart.github.io/ML/Example.html"
 
-# 使用ChromeDriverManager自動下載chromedriver
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))  # 使用Chrome
-driver.implicitly_wait(10)  # 等待網頁載入
-driver.get(url)
-
-tag_ol = driver.find_element(By.XPATH, "/html/body/ol")
-print(tag_ol.tag_name)
-tags_li = tag_ol.find_elements(By.XPATH, "//li")
-for tag in tags_li:
-    print(tag.text, tag.get_attribute("class"))
-
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-
-# 使用ChromeDriverManager自動下載chromedriver
-
-url = "https://fchart.github.io/ML/Example.html"
-
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))  # 使用Chrome
+driver = webdriver.Chrome()  # 使用Chrome
 driver.implicitly_wait(10)  # 等待網頁載入
 driver.get(url)
 
@@ -1804,21 +1732,15 @@ tags_li = soup.find_all("li", class_="line")
 for tag in tags_li:
     print(tag.text)
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from selenium.webdriver.edge.service import Service
-from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
 url = "https://fchart.github.io/ML/Example.html"
 
-driver = webdriver.Edge(
-    service=Service(EdgeChromiumDriverManager().install())
-)  # 使用Edge
-driver.implicitly_wait(10)  # 等待網頁載入
-driver.get(url)
+create_driver(url)  # 建立瀏覽器，開啟網頁
+
 tag_ol = driver.find_element(By.XPATH, '//*[@id="list"]')
 print(tag_ol.tag_name)
 print(tag_ol.get_attribute("innerHTML"))
@@ -1829,18 +1751,14 @@ tags_li = soup.find_all("li", class_="line")
 for tag in tags_li:
     print(tag.text)
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 
 url = "https://www.momoshop.com.tw/search/"
 
-# 使用ChromeDriverManager自動下載chromedriver
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))  # 使用Chrome
+driver = webdriver.Chrome()  # 使用Chrome
 driver.implicitly_wait(10)  # 等待網頁載入
 driver.get(url + "searchShop.jsp?keyword=NBA")
 
@@ -1853,18 +1771,14 @@ fp.write(html)
 print("寫入檔案tmp_NBA.html...")
 fp.close()
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 
 url = "https://fchart.github.io/Ashion/"
 
-# 使用ChromeDriverManager自動下載chromedriver
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))  # 使用Chrome
+driver = webdriver.Chrome()  # 使用Chrome
 driver.implicitly_wait(10)  # 等待網頁載入
 driver.get(url)
 
@@ -1884,7 +1798,7 @@ for item in items:
     print(title)
     products.append({"title": title, "image": url + img, "price": price})
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 with open("tmp_products.json", "w", encoding="utf-8") as fp:  # 寫入JSON檔案
     json.dump(products, fp, indent=2, sort_keys=True, ensure_ascii=False)
@@ -1892,15 +1806,12 @@ with open("tmp_products.json", "w", encoding="utf-8") as fp:  # 寫入JSON檔案
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-
 url = "https://fchart.github.io/ML/nba_items.html"
 
-# 使用ChromeDriverManager自動下載chromedriver
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))  # 使用Chrome
+driver = webdriver.Chrome()  # 使用Chrome
 driver.implicitly_wait(10)  # 等待網頁載入
 driver.get(url)
+
 pages_remaining = True
 page_num = 1
 while pages_remaining:
@@ -1927,7 +1838,7 @@ while pages_remaining:
     except Exception:
         pages_remaining = False
 
-driver.close()  # 關閉瀏覽器視窗
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1955,7 +1866,7 @@ for item in items:
         print(price.text)
     print("-------------------")
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2163,7 +2074,7 @@ while True:
     else:
         break
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 with open("momo_items.json", "w", encoding="utf-8") as fp:
     json.dump(items, fp, indent=2, sort_keys=True, ensure_ascii=False)
@@ -2186,7 +2097,7 @@ price_box = soup.find("span", attrs={"class": re.compile("^priceText.*")})
 price = price_box.text
 print(price)
 
-driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2200,11 +2111,7 @@ opt.add_argument("--user-agent=%s" % user_agent)
 driver = webdriver.Chrome(options=opt)  # 使用Chrome
 
 url = "google.com"
-
-#driver = webdriver.Chrome()  # 使用Chrome
-driver = webdriver.Firefox()  # 使用Firefox
-
-driver.get(url)  # 打開瀏覽器，開啟網頁
+create_driver(url)  # 建立瀏覽器，開啟網頁
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2224,10 +2131,9 @@ driver.execute_cdp_cmd(
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """ NG
-url = "https://www.google.com"
 
-driver = webdriver.Chrome()  # 使用Chrome
-driver.get(url)  # 打開瀏覽器，開啟網頁
+url = "https://www.google.com"
+create_driver(url)  # 建立瀏覽器，開啟網頁
 
 # 從載入後的動態網頁裡，找到指定的元素
 imgCount = driver.find_element(By.CSS_SELECTOR, "CSS 選擇器")
@@ -2361,13 +2267,12 @@ try:
 except:
     print("找不到便當名稱")
 
-driver.close()  # 關閉瀏覽器視窗
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 url = "https://www.google.com.tw/imghp?hl=zh-TW&tab=wi&ogbl"
-
 create_driver(url)  # 建立瀏覽器，開啟網頁
 
 # NG
@@ -2857,14 +2762,12 @@ print("------------------------------------------------------------")  # 60個
 
 from urllib.request import urlopen
 
-driver = webdriver.Chrome()
-
 # 第3屆埔里跑 Puli Power 山城派對馬拉松  向善橋(約34K)
 url = "http://tw.running.biji.co/index.php?q=album&act=photo_list&album_id=30668&cid=5791&type=album&subtitle=第3屆埔里跑 Puli Power 山城派對馬拉松-向善橋(約34K)"
 # 第3屆埔里跑 Puli Power 山城派對馬拉松  在终點前80米
 # url = 'http://tw.running.biji.co/index.php?q=album&act=photo_list&album_id=30807&cid=5791&type=album&subtitle=第3屆埔里跑 Puli Power 山城派對馬拉松-在终點前80米'
 
-driver.get(url)  # 開啟瀏覽器
+create_driver(url)  # 建立瀏覽器，開啟網頁
 
 # 隱性等待 1 秒
 driver.implicitly_wait(1)  # 等待網頁載入
@@ -3209,7 +3112,7 @@ img = Image.open("tmp_wholepage.png")
 img2 = img.crop((left, top, right, bottom))
 img2.save("tmp_crop.png")
 
-driver.close()  # 關閉瀏覽器
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -3220,10 +3123,7 @@ from PIL import Image
 # 請調整解析度
 
 url = "https://irs.thsrc.com.tw/IMINT"  # 台灣高鐵訂票系統
-
-driver = webdriver.Chrome()
-
-driver.get(url)
+create_driver(url)  # 建立瀏覽器，開啟網頁
 
 driver.save_screenshot("tmp_screenshot2.png")  # 網頁截圖
 
@@ -3243,10 +3143,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 url = "https://irs.thsrc.com.tw/IMINT"  # 台灣高鐵訂票系統
-
-driver = webdriver.Chrome()
-
-driver.get(url)
+create_driver(url)  # 建立瀏覽器，開啟網頁
 
 sleep(1)  # 等N秒
 
@@ -3285,10 +3182,7 @@ from simshow import simshow  # 以 pip install simple-imshow 安裝模組
 delay = 0.3
 
 url = "https://irs.thsrc.com.tw/IMINT"  # 台灣高鐵訂票系統
-
-driver = webdriver.Chrome()
-
-driver.get(url)
+create_driver(url)  # 建立瀏覽器，開啟網頁
 
 time.sleep(delay)  # 加入等待
 
@@ -3630,10 +3524,7 @@ url = "http://www.google.com"
 mail_address = "XXXXXXX"
 password = "XXXXXXX"
 
-# driver = webdriver.Chrome()    #使用Chrome
-driver = webdriver.Firefox()  # 使用Firefox
-
-driver.get(url)
+create_driver(url)  # 建立瀏覽器，開啟網頁
 
 driver.find_element(By.CLASS_NAME, "gb_Md").click()  # 按右上角的 登入 鈕
 
@@ -3662,11 +3553,8 @@ url = "http://www.google.com"
 mail_address = "XXXXXXX"
 password = "XXXXXXX"
 
-# driver = webdriver.Firefox();
-driver = webdriver.Chrome()
+create_driver(url)  # 建立瀏覽器，開啟網頁
 
-driver.get(url)
-#
 driver.find_element_by_id("gb_70").click()  # 按右上角的 登入 鈕
 
 driver.find_element_by_id("identifierId").send_keys(email_address)  # 輸入 帳號
@@ -3693,10 +3581,8 @@ url = "http://www.google.com"
 mail_address = "XXXXXXX"
 password = "XXXXXXX"
 
-# driver = webdriver.Firefox();
-driver = webdriver.Chrome()
+create_driver(url)  # 建立瀏覽器，開啟網頁
 
-driver.get(url)
 # username = driver.find_element_by_id('identifierId');
 username = driver.find_element("name", "identifierId")
 username.send_keys(mail_address)
@@ -3740,26 +3626,22 @@ print("------------------------------------------------------------")  # 60個
 
 # 登入帳號
 
-url = "https://www.google.com"
-
 email = "bunshue@gmail.com"
 pwd = "aabbccdd12345"
 
-driver = webdriver.Firefox()  # 使用Firefox
-driver.get(url)  # 網頁下載至瀏覽器
+url = "https://www.google.com"
+create_driver(url)  # 建立瀏覽器，開啟網頁
 
 # driver.find_element_by_id("gb_70").click()  # old
 driver.find_element(By.ID, "gb_70").click()
 
 print("------------------------------------------------------------")  # 60個
 
-url = "https://www.google.com"
-
 email = "bunshue@gmail.com"
 pwd = "aabbccdd12345"
 
-driver = webdriver.Firefox()  # 使用Firefox
-driver.get(url)  # 網頁下載至瀏覽器
+url = "https://www.google.com"
+create_driver(url)  # 建立瀏覽器，開啟網頁
 
 # driver.find_element_by_id("gb_70").click()  # 按登入鈕 # old
 driver.find_element(By.ID, "gb_70").click()  # 按登入鈕
@@ -3771,12 +3653,11 @@ sleep(1)  # 等N秒
 
 print("------------------------------------------------------------")  # 60個
 
-url = "https://www.google.com"
 email = "bunshue@gmail.com"
 pwd = "aabbccdd12345"
 
-driver = webdriver.Firefox()  # 使用Firefox
-driver.get(url)  # 網頁下載至瀏覽器
+url = "https://www.google.com"
+create_driver(url)  # 建立瀏覽器，開啟網頁
 
 # driver.find_element_by_id("gb_70").click()  # 按登入鈕  # old
 driver.find_element(By.ID, "gb_70").click()  # 按登入鈕
@@ -3795,12 +3676,11 @@ sleep(1)  # 等N秒
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-url = "https://www.google.com"
 email = "bunshue@gmail.com"
 pwd = "aabbccdd12345"
 
-driver = webdriver.Firefox()  # 使用Firefox
-driver.get(url)  # 網頁下載至瀏覽器
+url = "https://www.google.com"
+create_driver(url)  # 建立瀏覽器，開啟網頁
 
 # driver.find_element_by_id("gb_70").click()  # 按登入鈕  # old
 driver.find_element(By.ID, "gb_70").click()  # 按登入鈕
@@ -3825,12 +3705,11 @@ sleep(1)  # 等N秒
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-url = "https://www.google.com"
 email = "bunshue@gmail.com"
 pwd = "aabbccdd12345"
 
-driver = webdriver.Firefox()  # 使用Firefox
-driver.get(url)  # 網頁下載至瀏覽器
+url = "https://www.google.com"
+create_driver(url)  # 建立瀏覽器，開啟網頁
 
 # driver.find_element_by_id("gb_70").click()  # 按登入鈕 # old
 driver.find_element(By.ID, "gb_70").click()  # 按登入鈕
@@ -3998,7 +3877,7 @@ for i in buttons:
 
 sleep(1)  # 等N秒
 
-driver.close()  # 關閉瀏覽器視窗
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -4092,12 +3971,10 @@ for i in buttons:
 
 sleep(1)  # 等N秒
 
-driver.close()  # 關閉瀏覽器視窗
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from webdriver_manager.chrome import ChromeDriverManager
 
 url = "http://www.facebook.com"
 
@@ -4158,7 +4035,7 @@ driver.find_element(By.ID, "pass").send_keys(password)
 # driver.find_element_by_id("loginbutton").click()  # 按 登入 鈕 old
 driver.find_element(By.ID, "loginbutton").click()  # 按 登入 鈕
 
-# driver.quit()  # 關閉瀏覽器視窗 並退出驅動程序
+# destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 # 設定facebook登入資訊
 url = "https://www.facebook.com/"
@@ -4233,8 +4110,33 @@ url = "https://www.facebook.com/"
 email = "YOUR EMAIL"
 password = "YOUR PASSWORD"
 
-# 使用ChromeDriverManager自動下載chromedriver
-driver = webdriver.Chrome(ChromeDriverManager().install())
+# 進入Facebook登入畫面
+
+create_driver(url)  # 建立瀏覽器，開啟網頁
+
+# 填入帳號密碼，並送出
+driver.find_element_by_id("email").send_keys(email)
+driver.find_element_by_id("pass").send_keys(password)
+driver.find_element_by_name("login").click()
+
+sleep(10)  # 等N秒
+
+# destroy_driver()  # 關閉瀏覽器並且退出驅動程序
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 你的資訊
+url = "https://www.facebook.com/"
+email = "YOUR EMAIL"
+password = "YOUR PASSWORD"
+
+# 防止跳出通知
+chrome_options = webdriver.ChromeOptions()
+prefs = {"profile.default_content_setting_values.notifications": 2}
+chrome_options.add_experimental_option("prefs", prefs)
+
+driver = webdriver.Chrome(chrome_options=chrome_options)
 
 # 進入Facebook登入畫面
 driver.get(url)
@@ -4261,40 +4163,7 @@ chrome_options = webdriver.ChromeOptions()
 prefs = {"profile.default_content_setting_values.notifications": 2}
 chrome_options.add_experimental_option("prefs", prefs)
 
-# 使用ChromeDriverManager自動下載chromedriver
-driver = webdriver.Chrome(
-    ChromeDriverManager().install(), chrome_options=chrome_options
-)
-
-# 進入Facebook登入畫面
-driver.get(url)
-
-# 填入帳號密碼，並送出
-driver.find_element_by_id("email").send_keys(email)
-driver.find_element_by_id("pass").send_keys(password)
-driver.find_element_by_name("login").click()
-
-sleep(10)  # 等N秒
-
-# destroy_driver()  # 關閉瀏覽器並且退出驅動程序
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 你的資訊
-url = "https://www.facebook.com/"
-email = "YOUR EMAIL"
-password = "YOUR PASSWORD"
-
-# 防止跳出通知
-chrome_options = webdriver.ChromeOptions()
-prefs = {"profile.default_content_setting_values.notifications": 2}
-chrome_options.add_experimental_option("prefs", prefs)
-
-# 使用ChromeDriverManager自動下載chromedriver
-driver = webdriver.Chrome(
-    ChromeDriverManager().install(), chrome_options=chrome_options
-)
+driver = webdriver.Chrome(chrome_options=chrome_options)
 
 # 進入Facebook登入畫面
 driver.get(url)
@@ -4384,7 +4253,8 @@ sleep(5)  # 等N秒
 soup = BeautifulSoup(driver.page_source, "lxml")
 tag_title = soup.find("title")
 print(tag_title.text)
-driver.quit()
+
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -4412,6 +4282,7 @@ print("------------------------------------------------------------")  # 60個
 url = "https://www.facebook.com/"
 email = "您的 Email 帳號"
 password = "您的密碼"
+
 driver = webdriver.Chrome()
 
 # 取消 Alert
@@ -5063,3 +4934,25 @@ pyautogui.dragTo(x, y, duration=0..5, button="left", tween=pyautogui.easeInOutQu
 • dragRel(xOffset, yOffset) 則是相對於目前游標所在位置來進行位移。
 
 """
+
+"""
+driver.close()  # 關閉瀏覽器目前分頁
+driver.close() = 關閉目前視窗（Current Window）, 關閉目前分頁
+只會關閉目前正在操作的那個分頁。
+
+driver.quit() = 結束整個瀏覽器工作階段（Session）
+所有分頁全部關閉
+Chrome 關閉
+ChromeDriver 關閉
+Selenium Session 結束
+
+"""
+
+
+"""
+廢棄使用
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+"""
+
