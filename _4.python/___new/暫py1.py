@@ -1,4 +1,292 @@
 
+
+# 第一種方法：偽裝 User-Agent
+
+from selenium import webdriver
+ 
+options = webdriver.ChromeOptions()
+ 
+options.add_argument(
+    "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+)
+ 
+driver = webdriver.Chrome(options=options)
+
+
+
+
+第二種方法：移除 webdriver 特徵
+所以很多人會加：
+
+options = webdriver.ChromeOptions()
+ 
+options.add_experimental_option(
+    "excludeSwitches",
+    ["enable-automation"]
+)
+ 
+options.add_experimental_option(
+    "useAutomationExtension",
+    False
+)
+ 
+driver = webdriver.Chrome(options=options)
+ 
+driver.execute_script("""
+Object.defineProperty(
+    navigator,
+    'webdriver',
+    {
+        get: () => undefined
+    }
+)
+""")
+
+
+第三種方法：模擬真人打字
+
+不要：
+search_box.send_keys("人工智慧")
+
+改成：
+import time
+import random
+ 
+for ch in "人工智慧":
+	search_box.send_keys(ch)
+	time.sleep(random.uniform(0.1, 0.4))
+
+
+第四種方法：使用 Cookie
+你手動登入 Google 一次。
+
+cookies = driver.get_cookies()
+
+
+下次：
+driver.get("https://www.google.com")
+ 
+for cookie in cookies:
+    driver.add_cookie(cookie)
+ 
+driver.refresh()
+
+這樣 Google 看到：
+有歷史 Cookie
+有登入紀錄
+通常比較不容易被認定成機器人。
+
+
+第五種方法：使用自己的 Chrome Profile
+這招最有效。
+
+不要開新的 Chrome。
+直接使用你平常在用的瀏覽器設定。
+
+from selenium import webdriver
+ 
+options = webdriver.ChromeOptions()
+ 
+options.add_argument(
+    r"--user-data-dir=C:\Users\David\AppData\Local\Google\Chrome\User Data"
+)
+ 
+options.add_argument(
+    "--profile-directory=Default"
+)
+ 
+driver = webdriver.Chrome(options=options)
+Google 會看到：
+
+搜尋歷史
+Cookie
+登入帳號
+書籤
+瀏覽紀錄
+比較接近真人。
+
+不過：
+
+執行程式前必須關閉所有 Chrome。
+
+否則會出現：
+
+
+
+session not created
+user data directory is already in use
+第六種方法：undetected-chromedriver
+目前 Selenium 圈子最常用。
+
+
+
+pip install undetected-chromedriver
+
+
+import undetected_chromedriver as uc
+ 
+driver = uc.Chrome()
+ 
+driver.get("https://www.google.com")
+它會自動：
+
+修正 webdriver 特徵
+修正瀏覽器指紋
+隱藏部分 Selenium 痕跡
+效果通常比原生 Selenium 好得多。
+
+第七種方法：不要用 Selenium 搜尋 Google
+如果你的目的只是：
+
+
+
+搜尋 關鍵字
+取得搜尋結果
+其實最好的做法是直接使用搜尋 API，而不是模擬真人操作瀏覽器。
+
+例如：
+
+SerpAPI
+ZenRows
+DataForSEO
+Google Custom Search API
+因為 Google 對 Selenium 搜尋特別敏感。
+
+以你目前這段程式而言，我認為最值得先試的是：
+
+更新到最新版 Selenium（你最近更新 Selenium 解決過問題）
+使用自己的 Chrome Profile
+改成真人打字速度
+如果還是不行，改用 undetected-chromedriver
+這四項通常就能把被檢查機器人的機率大幅降低。
+
+順便提醒一下，你貼的 URL：
+
+
+
+url = "<a href="https://www.google.com" ...>"
+這看起來是從網頁複製過來的 HTML，不是 Python 字串。實際程式應該要寫：
+
+
+
+url = "https://www.google.com"
+否則 driver.get(url) 會失敗。
+
+
+
+
+
+
+
+改用 Google 官方搜尋 API
+
+加入頻率限制與錯誤重試
+
+如何偵測驗證頁面並安全停止
+
+
+
+傳送訊息給 Copilot
+
+
+
+Copilot 是 AI，可能會出錯。
+
+
+
+6060
+
+
+
+if 1 美元 = 30 NTD
+24萬顆 H100  H200   75億美元 =>　一顆  937500 NTD ~ 100萬
+
+13萬6000顆	46億美元     =>　一顆 1014705 NTD ~ 100萬
+
+300萬張 RTX PRO 5500  350億美元 => 一張 35萬 NTD
+
+
+print("按Ctrl-C 可以中斷本程式")
+try:
+    while True:
+    	do_something()
+        time.sleep(1)
+except KeyboardInterrupt:
+    print("\nBye")
+
+
+print("------------------------------------------------------------")  # 60個
+
+import pyautogui
+
+current_x = 300
+move = 10
+width, _ = pyautogui.size()
+
+
+        elif classname == 'right':
+            current_x += move
+            if current_x > width:
+                current_x = width
+        pyautogui.moveTo(current_x,200)
+
+pyautogui.moveTo(current_x,200)
+
+
+
+    # 获取屏幕截图
+    img = pyautogui.screenshot()
+
+# 設定螢幕解析度（根據需要調整）
+W, H = pyautogui.size()
+screen_picture = pyautogui.screenshot() #螢幕截圖
+
+
+
+例如鏡子放在 8 公里外：
+
+t=160003×108t=\frac{16000}{3\times10^8}t=3×10816000​ =53 μs=53\ \mu s=53 μs
+
+在 19 世紀根本不可能直接拿計時器量 53 微秒。
+
+
+因為它最直觀，也最容易和「測量一台汽車的速度」做類比，而且它恰好暴露出一個關鍵問題：
+
+一個 8 公里外的往返路徑，光只花 50 多微秒，那 19 世紀的人到底怎麼有能力知道這件事？
+
+這才是整個光速測量史最精彩的地方。
+
+
+是啊~~~ 我說的這個方法是高中課本寫的，當時沒有深究。
+後來想起來，這個距離8公里的，今天也做不到嗎?今天雷射光可以跑8公里嗎?(在空氣中)
+量測50多微秒，今天要量測都還要特殊設備呢。更何況是100年前。
+有的有講到一個齒輪旋轉的，你看轉速要多少?當時真的能轉出那麼高速的東西嗎?
+
+
+
+
+
+學校換了校長，像是老皇帝駕崩、新皇帝登基，一切沒變。還是原來的學校。
+學校換了名字老師操場，例如XX工學院改成YY幼兒園，
+
+
+★★★☆☆
+
+
+發送光脈衝。
+
+
+
+
+
+
+
+
+# ------------------------------------------------------------  # 60個
+# ------------------------------------------------------------  # 60個
+
+
+
 記錄案例：
 
 現象：
