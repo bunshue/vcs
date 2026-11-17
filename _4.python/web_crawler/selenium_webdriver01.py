@@ -59,7 +59,7 @@ def destroy_driver():
     # driver.close()  # 關閉瀏覽器目前分頁
     driver.quit()  # 關閉瀏覽器並且退出驅動程序
 
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 url = "https://www.google.com"
@@ -114,8 +114,6 @@ driver.maximize_window()  # 全螢幕顯示
 driver.maximize_window()  # 最大化視窗後開啟網站
 driver.maximize_window()  # ←將視窗最大化以避免最右邊的登入鈕沒顯示出來
 
-print("------------------------------")  # 30個
-
 url = "http://aaa.24ht.com.tw"
 
 driver.get(url)  # 網頁下載至瀏覽器
@@ -154,21 +152,15 @@ driver.set_window_rect(200, 100, 500, 250)  # 改變視窗位置及大小
 
 sleep(1)  # 等N秒
 
-# NG driver.fullscreen_window()  # 將視窗設為全螢幕
-
-sleep(1)  # 等N秒
-
 destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 """ 待加入
 driver.refresh()  # 更新網頁
+# NG driver.fullscreen_window()  # 將視窗設為全螢幕
 driver.implicitly_wait(10)  # 等待網頁載入
 driver.close()  # 關閉瀏覽器目前分頁
 driver.set_window_rect(200, 100, 500, 250)  # 改變視窗位置及大小
-driver.refresh()  # 更新網頁
 driver.add_cookie(cookies)
-
-driver.save_screenshot("tmp_screenshot_google.png")  # 網頁截圖
 """
 
 # 以上為簡單使用 driver 的基本功能
@@ -176,27 +168,17 @@ driver.save_screenshot("tmp_screenshot_google.png")  # 網頁截圖
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-url = "https://deepwisdom.com.tw"
-create_driver(url)  # 建立瀏覽器，開啟網頁
-
-sleep(1)  # 等N秒
-
-driver.refresh()  # 更新網頁
-
-sleep(1)  # 等N秒
-
-destroy_driver()  # 關閉瀏覽器並且退出驅動程序
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 url = "https://hophd.wordpress.com"
+url = "https://tw.yahoo.com/"
+url = "https://www.yahoo.com/"
 
 create_driver(url)  # 建立瀏覽器，開啟網頁
 
-sleep(1)  # 等N秒
+
 
 destroy_driver()  # 關閉瀏覽器並且退出驅動程序
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -599,7 +581,7 @@ url = "https://fchart.github.io/test.html"
 
 options = Options()
 options.add_argument("--headless")
-driver = webdriver.Chrome(options=options)  # 使用Chrome
+driver = webdriver.Chrome()  # 使用Chrome
 driver.implicitly_wait(10)  # 等待網頁載入
 driver.get(url)
 
@@ -1047,47 +1029,13 @@ print(n.get_attribute("href"))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+'''
+# destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 url = "http://www.deepmind.com.tw"
-create_driver(url)  # 建立瀏覽器，開啟網頁
+url = "http://www.mcut.edu.tw" # NG
+url = "https://www.yahoo.com/"
 
-sleep(1)  # 等N秒
-
-driver.refresh()  # 更新網頁
-
-sleep(1)  # 等N秒
-
-destroy_driver()  # 關閉瀏覽器並且退出驅動程序
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-url = "http://www.mcut.edu.tw"
-
-create_driver(url)  # 建立瀏覽器，開啟網頁
-
-# ele = driver.find_element_by_tag_name("body") old
-ele = driver.find_element(By.TAG_NAME, "body")
-
-sleep(1)  # 等N秒
-
-ele.send_keys(Keys.PAGE_DOWN)  # 網頁捲動到下一頁
-
-sleep(1)  # 等N秒
-
-ele.send_keys(Keys.END)  # 網頁捲動到最底端
-
-sleep(1)  # 等N秒
-
-ele.send_keys(Keys.PAGE_UP)  # 網頁捲動到上一頁
-
-sleep(1)  # 等N秒
-
-ele.send_keys(Keys.HOME)  # 網頁捲動到最上端
-
-print("------------------------------")  # 30個
-
-url = "http://www.mcut.edu.tw"
 create_driver(url)  # 建立瀏覽器，開啟網頁
 
 # ele = driver.find_element_by_tag_name("body") old
@@ -1262,17 +1210,32 @@ print("------------------------------------------------------------")  # 60個
 url = "https://www.google.com"
 create_driver(url)  # 建立瀏覽器，開啟網頁
 
+""" 測試 header, NG
+# 假的 headers 資訊
+user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15"
+opt = webdriver.ChromeOptions()
+
+# 加入 headers 資訊
+opt.add_argument("--user-agent=%s" % user_agent)
+
+driver = webdriver.Chrome(options=opt)  # 使用Chrome
+# driver = webdriver.Chrome()  # 使用Chrome
+"""
+
+driver.maximize_window()  # 全螢幕顯示
+
+driver.get(url)
+
 search_box = driver.find_element(By.NAME, "q")
-search_box.send_keys("明志科技大學")  # 輸入表單資料
+search_box.send_keys("黃仁勳")  # 輸入表單資料
 
 sleep(1)  # 等N秒
 
 search_box.submit()  # 送出表單
 
-
 # 在此測試 option dddddddddddddddd
 
-
+sys.exit()
 
 print("------------------------------")  # 30個
 
@@ -1280,7 +1243,7 @@ url = "http://www.google.com"
 create_driver(url)  # 建立瀏覽器，開啟網頁
 
 txtBox = driver.find_element(By.NAME, "q")
-txtBox.send_keys("明志科技大學")  # 輸入表單資料
+txtBox.send_keys("黃仁勳")  # 輸入表單資料
 sleep(1)  # 等N秒
 txtBox.submit()  # 送出表單
 
@@ -1482,7 +1445,8 @@ print("------------------------------------------------------------")  # 60個
 
 # NG
 
-url = "http://www.mcut.edu.tw/?Lang=en"
+url = "http://www.mcut.edu.tw/?Lang=en" #NG
+url = "https://www.yahoo.com/"
 
 create_driver(url)  # 建立瀏覽器，開啟網頁
 
@@ -1588,14 +1552,12 @@ destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from selenium.webdriver.chrome.options import Options
-
 options = Options()
 options.add_argument("--headless")
 
 url = "https://fchart.github.io/test.html"
 
-driver = webdriver.Chrome(options=options)  # 使用Chrome
+driver = webdriver.Chrome()  # 使用Chrome
 driver.implicitly_wait(10)  # 等待網頁載入
 driver.get(url)
 
@@ -2103,15 +2065,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """
 """
-# 假的 headers 資訊
-user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15"
-opt = webdriver.ChromeOptions()
-# 加入 headers 資訊
-opt.add_argument("--user-agent=%s" % user_agent)
-driver = webdriver.Chrome(options=opt)  # 使用Chrome
-
-url = "google.com"
-create_driver(url)  # 建立瀏覽器，開啟網頁
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -4666,12 +4619,12 @@ pyautogui.hotkey("ctrl", "c")  # Ctrl + C
 
 """
 # 不能寫中文
-pyautogui.write("Column1\t", 0.3)  # Taiwan
-pyautogui.write("Column2\t", 0.3)  # 姓
-pyautogui.write("Column3\t", 0.3)  # 名
-pyautogui.write("Column4\t", 0.3)  # 出生年
-pyautogui.write("\t", 0.3)  # 選男生
-pyautogui.write("Column6", 0.3)  # 科系
+pyautogui.write("Column1\t", 0.3)
+pyautogui.write("Column2\t", 0.3)
+pyautogui.write("Column3\t", 0.3)
+pyautogui.write("Column4\t", 0.3)
+pyautogui.write("\t", 0.3)
+pyautogui.write("Column6", 0.3)
 
 pyautogui.typewrite(["enter"], 0.1)  # 打字, 換行
 
@@ -4709,7 +4662,7 @@ subprocess.Popen("notepad.exe")
 sleep(2)  # 等N秒
 
 # 輸入文本
-pyautogui.write("ABCDEFG AI實作 - 明志科技大學!", interval=0.1)  # 不能用中文
+pyautogui.write("ABCDEFG AI can not use chinese here", interval=0.1)  # 不能用中文
 
 sys.exit()
 
@@ -4955,4 +4908,3 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 """
-
