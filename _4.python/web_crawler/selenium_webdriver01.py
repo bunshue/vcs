@@ -605,7 +605,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 keyword = "dog"
-pathdir = "imgur2"
+pathdir = "tmp_imgur2"
 url = "http://imgur.com/search?q=" + keyword
 os.makedirs(pathdir, exist_ok=True)
 
@@ -834,9 +834,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("中央氣象局 環境部 SP")
 print("------------------------------------------------------------")  # 60個
-'''
 
-'''
 url = "D:/_git/vcs/_1.data/______test_files1/webdriver_data_old.html"
 url = "D:/_git/vcs/_1.data/______test_files1/webdriver_data_old.html"
 # url = "D:/_git/vcs/_1.data/______test_files1/webdriver_data.html"  # NG
@@ -1154,8 +1152,6 @@ destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
-
 """
 我用 selenium 連上 google 網頁，輸入資料，按搜尋後，
 會出現檢查機器人畫面，這要怎麼避免呢?
@@ -4134,7 +4130,7 @@ for i in range(10):
 """
 print("------------------------------------------------------------")  # 60個
 
-width, height = pyautogui.size()  # 取得螢幕寬度和高度
+width, height = pyautogui.size()  # 取得螢幕寬度和高度, 分辨率
 print("螢幕寬度和高度 :", width, height)  # 列印螢幕寬度和高度
 
 # 全螢幕截圖
@@ -4499,34 +4495,37 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("10秒後開始")
-# canvas 1
 print("請打開 https://canvas.apps.chrome/，並挑選你喜歡的畫筆顏色及粗細")
 
 sleep(10)  # 等N秒
 
-pyautogui.moveTo(x=570, y=552)  # 移動滑鼠位置
+W, H = 1920, 1080
 
-pyautogui.dragRel(xOffset=582, yOffset=-198, duration=3, button="left")
-pyautogui.dragRel(xOffset=-38, yOffset=441, duration=3, button="left")
-pyautogui.dragRel(xOffset=-544, yOffset=-243, duration=3, button="left")
+pyautogui.moveTo(400, 300)  # 移動滑鼠位置
 
-pyautogui.moveTo(x=1000, y=500)  # 移動滑鼠位置
+# 拖曳到相對座標 + 左鍵, duration時間完成
+pyautogui.dragRel(xOffset=-100, yOffset=-100, duration=3, button="left")  # 往左上
+pyautogui.dragRel(xOffset=-100, yOffset=100,  duration=3, button="left")  # 往左下
+pyautogui.dragRel(xOffset=100,  yOffset=100,  duration=3, button="left")  # 往右下
+pyautogui.dragRel(xOffset=100,  yOffset=-100, duration=3, button="left")  # 往右上
 
-pyautogui.click()  # 滑鼠點擊  # 按一下設定繪圖起始點
+pyautogui.moveTo(400, 300+200)  # 移動滑鼠位置
 
-displacement = 300
-while displacement > 60:
-    pyautogui.dragRel(displacement, 0, duration=0.2)
-    pyautogui.dragRel(0, displacement, duration=0.2)
-    pyautogui.dragRel(-displacement, 0, duration=0.2)
-    pyautogui.dragRel(0, -displacement, duration=0.2)
-    displacement -= 60
+# 拖曳到相對座標 + 左鍵, duration時間完成
+pyautogui.dragRel(xOffset=-100, yOffset=-100, duration=0.5)  # 往左上
+pyautogui.dragRel(xOffset=-100, yOffset=100,  duration=0.5)  # 往左下
+pyautogui.dragRel(xOffset=100,  yOffset=100,  duration=0.5)  # 往右下
+pyautogui.dragRel(xOffset=100,  yOffset=-100, duration=0.5)  # 往右上
 
+pyautogui.moveTo(300, y=400)  # 移動滑鼠位置
+for i in range(15):
+    pyautogui.moveTo(300+15*i, 400)  # 移動滑鼠位置
+    pyautogui.click()  # 滑鼠點擊  # 按一下設定繪圖起始點
 
-# 移動滑鼠位置
-pyautogui.moveTo(x=1000, y=500)  # 移動滑鼠位置
-pyautogui.click()  # 滑鼠點擊  # 按一下設定繪圖起始點
+pyautogui.moveTo(600, y=400)  # 移動滑鼠位置
+# 移動滑鼠相對位置
 for i in range(5):
+    pyautogui.click()  # 滑鼠點擊  # 按一下設定繪圖起始點
     pyautogui.moveRel(300, 0, duration=0.5)  # 往右上角移動
     pyautogui.moveRel(0, 300, duration=0.5)  # 往右下角移動
     pyautogui.moveRel(-300, 0, duration=0.5)  # 往左下角移動
@@ -4535,41 +4534,21 @@ for i in range(5):
 
 pyautogui.moveTo(x=400, y=400)  # 移動滑鼠位置
 pyautogui.click()  # 滑鼠點擊  # 按一下設定繪圖起始點
-pyautogui.moveRel(xOffset=300, yOffset=200, duration=3, tween=pyautogui.linear)
-pyautogui.moveRel(xOffset=-600, yOffset=0, duration=3, tween=pyautogui.easeInQuad)
-pyautogui.moveRel(xOffset=300, yOffset=-200, duration=3, tween=pyautogui.easeOutQuad)
+pyautogui.moveRel(xOffset=200, yOffset=100, duration=3, tween=pyautogui.linear)
+pyautogui.moveRel(xOffset=-500, yOffset=0, duration=3, tween=pyautogui.easeInQuad)
+pyautogui.moveRel(xOffset=200, yOffset=-100, duration=3, tween=pyautogui.easeOutQuad)
 
-print("------------------------------")  # 30個
+pyautogui.moveTo(x=400, y=400)  # 移動滑鼠位置  # 先移動到定點
 
-# canvas 2
-print("請打開 https://canvas.apps.chrome/，並挑選你喜歡的畫筆顏色及粗細")
-print("10秒後開始")
-
-sleep(10)  # 等N秒
-
-pyautogui.moveTo(x=570, y=552)  # 移動滑鼠位置  # 先移動到定點
-
-pyautogui.dragTo(x=1152, y=354, duration=3, button="left")  # 滑鼠左鍵拖曳, 3秒完成
-pyautogui.dragTo(x=1114, y=795, duration=3, button="left")  # 滑鼠左鍵拖曳, 3秒完成
-pyautogui.dragTo(x=570, y=552, duration=3, button="left")  # 滑鼠左鍵拖曳, 3秒完成
-
-"""
-# 將滑鼠移動到 (100, 100)
-pyautogui.moveTo(100, 100)  # 移動滑鼠位置
-
-# 按住左鍵，花費 1 秒的時間將滑鼠拖曳到 (640, 480)
-pyautogui.dragTo(640, 480, duration=1.0)  # 滑鼠左鍵拖曳, 1秒完成
-# pyautogui.dragTo(meX, veY, button="left")
-"""
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+pyautogui.dragTo(x=600, y=200, duration=3, button="left")  # 滑鼠左鍵拖曳, 3秒完成
+pyautogui.dragTo(x=600, y=600, duration=3, button="left")  # 滑鼠左鍵拖曳, 3秒完成
+pyautogui.dragTo(x=400, y=400, duration=3, button="left")  # 滑鼠左鍵拖曳, 3秒完成
 
 # 移動滑鼠位置
-pyautogui.moveTo(x=400, y=100)  # 移動滑鼠位置
-pyautogui.moveTo(x=700, y=300, duration=3, tween=pyautogui.linear)
-pyautogui.moveTo(x=100, y=300, duration=3, tween=pyautogui.easeInQuad)
-pyautogui.moveTo(x=400, y=100, duration=3, tween=pyautogui.easeOutQuad)
+pyautogui.moveTo(x=400, y=200)  # 移動滑鼠位置
+pyautogui.moveTo(x=600, y=400, duration=3, tween=pyautogui.linear)
+pyautogui.moveTo(x=200, y=400, duration=3, tween=pyautogui.easeInQuad)
+pyautogui.moveTo(x=400, y=200, duration=3, tween=pyautogui.easeOutQuad)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -4579,27 +4558,7 @@ print("時時顯示滑鼠位置座標, 按 Ctrl+C 離開")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-url = "https://www.google.com/"
-create_driver(url)
-
-pyautogui.PAUSE = 1
-
-x, y = 630, 20
-pyautogui.moveTo(x, y, 2)  # 移動滑鼠位置
-pyautogui.click()  # 滑鼠點擊
-
-x, y = 264, 62
-pyautogui.moveTo(x, y, 2)  # 移動滑鼠位置
-pyautogui.click()  # 滑鼠點擊
-
-pyautogui.typewrite("https://hophd.wordpress.com")  # 打字
-
-pyautogui.press("enter")  # 按Enter
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
+'''
 # NG
 """
 print("請開啟小算盤 5秒後開始")
@@ -4733,6 +4692,65 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 """
+
+
+
+
+
+
+sleep(5)  # 等N秒
+
+pyautogui.PAUSE = 1
+
+
+x, y = 630, 120
+pyautogui.moveTo(x, y, 2)  # 移動滑鼠位置
+pyautogui.click()  # 滑鼠點擊
+
+x, y = 264, 162
+pyautogui.moveTo(x, y, 2)  # 移動滑鼠位置
+pyautogui.click()  # 滑鼠點擊
+pyautogui.typewrite("https://hophd.wordpress.com")  # 打字 看起來只適合在網址列輸入資料
+pyautogui.press("enter")  # 按Enter
+
+
+
+
+sleep(5)  # 等N秒
+
+position = pyautogui.position()  # 獲得滑鼠游標位置
+print(position)
+
+# locateOnScreen() 匹配的基准空间
+
+# L3	图像匹配坐标	pyautogui.locateOnScreen('btn.png') 返回值
+
+# NG cc = pyautogui.locateOnScreen('D:/_git/vcs/_4.python/web_crawler/ggg.png')
+# print(cc)
+
+
+# 取得目前所有視窗程式的ID
+screens = pyautogui.getAllWindows()
+print("screens :", screens)
+
+# 截圖找圖
+matches = list(pyautogui.locateAllOnScreen('ggg.jpg', confidence=0.9, grayscale=True))
+length = len(matches)
+print("len = ", length)
+
+for mm in matches:
+    print(mm)
+    print(mm.index, mm.left, mm.top,mm.width,mm.height)
+
+
+# print(f"找到{len(matches)}个匹配点，置信度均值：{np.mean([m.confidence for m in matches]):.3f}")
+# 若均值0.82但标准差0.15，说明环境噪声大，需降confidence
+
+
+print('aaaa')
+
+sys.exit()
+
 
 
 
