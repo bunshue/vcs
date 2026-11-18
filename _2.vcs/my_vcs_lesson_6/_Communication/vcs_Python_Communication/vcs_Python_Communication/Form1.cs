@@ -6,7 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Runtime.InteropServices;
+
+// 目前只能做到 Python 發送資料、vcs接收資料
 
 namespace vcs_Python_Communication
 {
@@ -61,7 +64,6 @@ namespace vcs_Python_Communication
 
         private void button1_Click(object sender, EventArgs e)
         {
-
         }
     }
 }
