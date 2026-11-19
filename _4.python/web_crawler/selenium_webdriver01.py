@@ -59,7 +59,7 @@ def destroy_driver():
     # driver.close()  # 關閉瀏覽器目前分頁
     driver.quit()  # 關閉瀏覽器並且退出驅動程序
 
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 url = "https://www.google.com"
@@ -1000,7 +1000,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 url = "http://www.deepmind.com.tw"
-url = "http://www.mcut.edu.tw" # NG
+url = "http://www.mcut.edu.tw"  # NG
 url = "https://www.yahoo.com/"
 
 create_driver(url)  # 建立瀏覽器，開啟網頁
@@ -1175,11 +1175,6 @@ sys.exit()
 """
 
 
-
-
-
-
-
 # 是可以連到google網站，但是輸入字串後，按確定
 # 他會出現系統偵測到機器人，需要人工驗證，
 
@@ -1254,7 +1249,9 @@ driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")  # 捲�
 sleep(1)  # 等N秒
 
 for i in range(1, 7):
-    img = driver.find_element(By.XPATH, '//*[@id="content-grid"]/ul/li[' + str(i) + "]/a[1]/div/img")
+    img = driver.find_element(
+        By.XPATH, '//*[@id="content-grid"]/ul/li[' + str(i) + "]/a[1]/div/img"
+    )
     response = requests.get(img.get_attribute("src"))
     with open("tmp_test" + str(i) + ".jpg", "wb") as f:
         f.write(response.content)  # 將response.content二進位內容寫入檔案
@@ -2235,9 +2232,13 @@ sleep(1)  # 等N秒
 
 searchNode = driver.find_elements(By.XPATH, "//input[contains(@id,'q-destination')]")
 
-checkInNode = driver.find_elements(By.XPATH, "//input[contains(@id,'q-localised-check-in')]")
+checkInNode = driver.find_elements(
+    By.XPATH, "//input[contains(@id,'q-localised-check-in')]"
+)
 
-checkOutNode = driver.find_elements(By.XPATH, "//input[contains(@id,'q-localised-check-out')]")
+checkOutNode = driver.find_elements(
+    By.XPATH, "//input[contains(@id,'q-localised-check-out')]"
+)
 
 """ NG
 # 輸入搜尋關鍵資料
@@ -2830,12 +2831,16 @@ driver.find_element(By.ID, "select_location02").send_keys(es)
 # 輸入日期
 driver.find_element(By.ID, "Departdate03").click()
 
-driver.find_element(By.XPATH, "//div[@id='tot-1']/div/div/ul/li/div/div/table/tbody/tr[2]/td[1]").click()
+driver.find_element(
+    By.XPATH, "//div[@id='tot-1']/div/div/ul/li/div/div/table/tbody/tr[2]/td[1]"
+).click()
 
 # 輸入時間
 driver.find_element(By.ID, "outWardTime").click()
 
-driver.find_element(By.XPATH, "//div[@id='tot-1']/div[2]/div/ul/li[2]/div/div/table/tr[3]/td[3]/a/i").click()
+driver.find_element(
+    By.XPATH, "//div[@id='tot-1']/div[2]/div/ul/li[2]/div/div/table/tr[3]/td[3]/a/i"
+).click()
 
 driver.find_element(By.ID, "start-search").click()  # 按查詢鈕
 
@@ -3073,7 +3078,9 @@ driver.find_element(By.ID, "SubmitButton").click()
 
 time.sleep(delay)
 
-driver.find_element(By.XPATH, "(//input[@name='TrainQueryDataViewPanel:TrainGroup'])[3]").click()
+driver.find_element(
+    By.XPATH, "(//input[@name='TrainQueryDataViewPanel:TrainGroup'])[3]"
+).click()
 
 time.sleep(delay)
 
@@ -4505,21 +4512,21 @@ pyautogui.moveTo(400, 300)  # 移動滑鼠位置
 
 # 拖曳到相對座標 + 左鍵, duration時間完成
 pyautogui.dragRel(xOffset=-100, yOffset=-100, duration=3, button="left")  # 往左上
-pyautogui.dragRel(xOffset=-100, yOffset=100,  duration=3, button="left")  # 往左下
-pyautogui.dragRel(xOffset=100,  yOffset=100,  duration=3, button="left")  # 往右下
-pyautogui.dragRel(xOffset=100,  yOffset=-100, duration=3, button="left")  # 往右上
+pyautogui.dragRel(xOffset=-100, yOffset=100, duration=3, button="left")  # 往左下
+pyautogui.dragRel(xOffset=100, yOffset=100, duration=3, button="left")  # 往右下
+pyautogui.dragRel(xOffset=100, yOffset=-100, duration=3, button="left")  # 往右上
 
-pyautogui.moveTo(400, 300+200)  # 移動滑鼠位置
+pyautogui.moveTo(400, 300 + 200)  # 移動滑鼠位置
 
 # 拖曳到相對座標 + 左鍵, duration時間完成
 pyautogui.dragRel(xOffset=-100, yOffset=-100, duration=0.5)  # 往左上
-pyautogui.dragRel(xOffset=-100, yOffset=100,  duration=0.5)  # 往左下
-pyautogui.dragRel(xOffset=100,  yOffset=100,  duration=0.5)  # 往右下
-pyautogui.dragRel(xOffset=100,  yOffset=-100, duration=0.5)  # 往右上
+pyautogui.dragRel(xOffset=-100, yOffset=100, duration=0.5)  # 往左下
+pyautogui.dragRel(xOffset=100, yOffset=100, duration=0.5)  # 往右下
+pyautogui.dragRel(xOffset=100, yOffset=-100, duration=0.5)  # 往右上
 
 pyautogui.moveTo(300, y=400)  # 移動滑鼠位置
 for i in range(15):
-    pyautogui.moveTo(300+15*i, 400)  # 移動滑鼠位置
+    pyautogui.moveTo(300 + 15 * i, 400)  # 移動滑鼠位置
     pyautogui.click()  # 滑鼠點擊  # 按一下設定繪圖起始點
 
 pyautogui.moveTo(600, y=400)  # 移動滑鼠位置
@@ -4558,7 +4565,6 @@ print("時時顯示滑鼠位置座標, 按 Ctrl+C 離開")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
 # NG
 """
 print("請開啟小算盤 5秒後開始")
@@ -4583,66 +4589,69 @@ print("10秒後開始")
 sleep(10)  # 等N秒
 
 pyautogui.PAUSE = 1
-pyautogui.typewrite(message="Welcome to PyAutoGUI!\n")  # 打字
-pyautogui.typewrite(message="Welcome to PyAutoGUI!", interval=0.3)  # 打字
 
-# pyautogui.press() 是按鍵盤的一個鍵
+print("輸入字串")
+pyautogui.typewrite(message="Welcome to the United States 1\n")  # 打字
+pyautogui.typewrite(message="Welcome to the United States 2\n", interval=0.3)  # 打字
+
+
+print("鍵盤按鍵")  # pyautogui.press() 是按鍵盤的一個鍵
 
 pyautogui.press("enter")  # 按Enter
 
 pyautogui.press("down")  # 按方向鍵 下
-pyautogui.press("D")  # 按一個字鍵 D
+pyautogui.press("A")  # 按一個字鍵 D
 pyautogui.press("down")  # 按方向鍵 下
-pyautogui.press("D")  # 按一個字鍵 D
+pyautogui.press("b")  # 按一個字鍵 D
 pyautogui.press("down")  # 按方向鍵 下
-pyautogui.press("D")  # 按一個字鍵 D
+pyautogui.press("C")  # 按一個字鍵 D
 pyautogui.press("down")  # 按方向鍵 下
+pyautogui.press("d")  # 按一個字鍵 D
+
+pyautogui.press("enter")  # 按Enter
 
 pyautogui.press("g")  # 按一個字鍵 G
-pyautogui.press("o", presses=2)  # 按一個字鍵 O, 按2次
+pyautogui.press("o", presses=10)  # 按一個字鍵 O, 按10次
 pyautogui.press("d")  # 按一個字鍵 D
+
+pyautogui.press("enter")  # 按Enter
+
+print("------------------------------")  # 30個
 
 pyautogui.keyDown("shift")  # 按下 SHIFT
 
 pyautogui.press("g")
-pyautogui.press("o", presses=2)  # 按一個字鍵 O, 按2次
+pyautogui.press("o", presses=10)  # 按一個字鍵 O, 按10次
 pyautogui.press("d")
 
 pyautogui.keyUp("shift")  # 放開 SHIFT
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
-print("2秒後開始")
-sleep(2)  # 等N秒
+# pyautogui.click(x=1030, y=419, button="left")
+# pyautogui.doubleClick(x=1030, y=419, button="left")
 
-stime = time.time()
-
-print("Game Start")
-
-while time.time() - stime < 10:
-    pyautogui.click(x=1030, y=419, button="left")
-    # pyautogui.doubleClick(x=1030, y=419, button="left")
-
-print("Game Over")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("3秒後, 以記事本開啟<selenium.txt>檔案，並將視窗放到最大")
-print("視窗大小不合")
-
-sleep(3)  # 等N秒
+# sleep(3)  # 等N秒
 
 # 各種滑鼠按鍵方法
-pyautogui.click(x=200, y=31, button="left")  # 點選檔案功能表
-pyautogui.leftClick(x=400, y=116, duration=2)  # 在空白處點擊滑鼠左鍵
-pyautogui.click(x=600, y=130, duration=2, button="right")  # 按滑鼠右鍵
-pyautogui.doubleClick(x=755, y=48, duration=2, button="left")  # 雙擊滑鼠左鍵
+# pyautogui.click(x=200, y=131, button="left")  # 點選檔案功能表
+# pyautogui.leftClick(x=400, y=116, duration=2)  # 在空白處點擊滑鼠左鍵
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+# 右鍵選單 的操作
 
+pyautogui.click(x=500, y=120, button="left")
+
+# 按右鍵, 出現右鍵選單
+pyautogui.click(x=500, y=130, duration=2, button="right")  # 按滑鼠右鍵
+# 點選右鍵選單的內容
+pyautogui.doubleClick(x=600, y=260, duration=2, button="left")  # 雙擊滑鼠左鍵
+
+pyautogui.click(x=500, y=120, button="left")
+
+# 按右鍵, 出現右鍵選單
+pyautogui.click(x=500, y=130, duration=2, button="right")  # 按滑鼠右鍵
+# 點選右鍵選單的內容
+pyautogui.doubleClick(x=600, y=210, duration=2, button="left")  # 雙擊滑鼠左鍵
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -4694,10 +4703,6 @@ driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 """
 
 
-
-
-
-
 sleep(5)  # 等N秒
 
 pyautogui.PAUSE = 1
@@ -4712,8 +4717,6 @@ pyautogui.moveTo(x, y, 2)  # 移動滑鼠位置
 pyautogui.click()  # 滑鼠點擊
 pyautogui.typewrite("https://hophd.wordpress.com")  # 打字 看起來只適合在網址列輸入資料
 pyautogui.press("enter")  # 按Enter
-
-
 
 
 sleep(5)  # 等N秒
@@ -4734,23 +4737,14 @@ screens = pyautogui.getAllWindows()
 print("screens :", screens)
 
 # 截圖找圖
-matches = list(pyautogui.locateAllOnScreen('ggg.jpg', confidence=0.9, grayscale=True))
+matches = list(pyautogui.locateAllOnScreen("ggg.jpg", confidence=0.9, grayscale=True))
 length = len(matches)
 print("len = ", length)
 
 for mm in matches:
     print(mm)
-    print(mm.index, mm.left, mm.top,mm.width,mm.height)
+    print(mm.index, mm.left, mm.top, mm.width, mm.height)
 
 
 # print(f"找到{len(matches)}个匹配点，置信度均值：{np.mean([m.confidence for m in matches]):.3f}")
 # 若均值0.82但标准差0.15，说明环境噪声大，需降confidence
-
-
-print('aaaa')
-
-sys.exit()
-
-
-
-
