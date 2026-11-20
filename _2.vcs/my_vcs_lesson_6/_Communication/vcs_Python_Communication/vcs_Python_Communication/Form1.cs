@@ -30,21 +30,15 @@ namespace vcs_Python_Communication
         {
             if (m.Msg == WM_COPYDATA)
             {
-                COPYDATASTRUCT cds =
-                    (COPYDATASTRUCT)Marshal.PtrToStructure(
-                        m.LParam,
-                        typeof(COPYDATASTRUCT));
+                COPYDATASTRUCT cds = (COPYDATASTRUCT)Marshal.PtrToStructure(m.LParam, typeof(COPYDATASTRUCT));
 
-                string msg =
-                    Marshal.PtrToStringUni(cds.lpData);
+                string msg = Marshal.PtrToStringUni(cds.lpData);
 
-                richTextBox1.AppendText(
-                    msg + Environment.NewLine);
+                richTextBox1.AppendText(msg + Environment.NewLine);
             }
 
             base.WndProc(ref m);
         }
-
 
         public Form1()
         {
