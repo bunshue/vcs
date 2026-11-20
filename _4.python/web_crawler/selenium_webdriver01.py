@@ -4140,9 +4140,27 @@ print("------------------------------------------------------------")  # 60個
 print("PyAutoGUI，鍵盤滑鼠自動化, 自動控制滑鼠與鍵盤 ST")
 print("------------------------------------------------------------")  # 60個
 
+"""
+# 移動滑鼠鼠標
+x, y = 200, 200
+pyautogui.moveTo(x, y, duration=2)  # 移動滑鼠位置  這個2是什麼意思
+pyautogui.PAUSE = 1  # pyautogui等待
+
+x, y = 500, 500
+pyautogui.moveTo(x, y, duration=0.5)  # 左上角
+pyautogui.PAUSE = 1  # pyautogui等待
+
+x, y = 200, 200
+pyautogui.moveTo(x, y, duration=3)  # 移動滑鼠位置
+pyautogui.PAUSE = 1  # pyautogui等待
+"""
 print("基本 pyautogui 功能")
 
 print("測試 pixelMatchesColor")
+
+# 取得目前所有視窗程式的ID
+screens = pyautogui.getAllWindows()
+# print("screens :", screens)
 
 x, y = 200, 200
 trueFalse = pyautogui.pixelMatchesColor(x, y, (255, 255, 255))
@@ -4234,6 +4252,8 @@ pyautogui.click(x=700, y=120, button="left")
 pyautogui.write("ABCDEFG", interval=0.1)
 pyautogui.write("ABCDEFG")
 pyautogui.write("Column1", 0.3)
+
+pyautogui.typewrite("https://www.google.com")  # 打字, 只能英數, 看起來只適合在網址列輸入資料
 
 pyautogui.typewrite(["enter"], 0.1)  # 打字, 換行
 
@@ -4628,28 +4648,6 @@ from webdriver_manager.chrome import ChromeDriverManager
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 """
 
-
-sleep(5)  # 等N秒
-
-pyautogui.PAUSE = 1
-
-
-x, y = 630, 120
-pyautogui.moveTo(x, y, 2)  # 移動滑鼠位置
-pyautogui.click()  # 滑鼠點擊
-
-x, y = 264, 162
-pyautogui.moveTo(x, y, 2)  # 移動滑鼠位置
-pyautogui.click()  # 滑鼠點擊
-pyautogui.typewrite("https://hophd.wordpress.com")  # 打字, 只能英數, 看起來只適合在網址列輸入資料
-pyautogui.press("enter")  # 按Enter
-
-
-sleep(5)  # 等N秒
-
-position = pyautogui.position()  # 獲得滑鼠游標位置
-print(position)
-
 # locateOnScreen() 匹配的基准空间
 
 # L3	图像匹配坐标	pyautogui.locateOnScreen('btn.png') 返回值
@@ -4657,10 +4655,6 @@ print(position)
 # NG cc = pyautogui.locateOnScreen('D:/_git/vcs/_4.python/web_crawler/ggg.png')
 # print(cc)
 
-
-# 取得目前所有視窗程式的ID
-screens = pyautogui.getAllWindows()
-print("screens :", screens)
 
 # 截圖找圖
 matches = list(pyautogui.locateAllOnScreen("ggg.jpg", confidence=0.9, grayscale=True))
@@ -4671,24 +4665,5 @@ for mm in matches:
     print(mm)
     print(mm.index, mm.left, mm.top, mm.width, mm.height)
 
-
 # print(f"找到{len(matches)}个匹配点，置信度均值：{np.mean([m.confidence for m in matches]):.3f}")
 # 若均值0.82但标准差0.15，说明环境噪声大，需降confidence
-
-
-pyautogui.moveTo(x_st, y_st, 2)  # 移動滑鼠位置  這個2是什麼意思
-pyautogui.moveTo(x, y, duration=0.5)  # 左上角
-
-
-pyautogui.PAUSE = 1
-
-x_st = 850
-y_st = 546
-print("移動滑鼠位置 至 (", x_st, ", ", y_st, ")")
-pyautogui.moveTo(x_st, y_st, 2)  # 移動滑鼠位置
-
-sleep(1)  # 等N秒
-
-pyautogui.click()  # 滑鼠點擊
-pyautogui.typewrite("lion")  # 打字  只能英數, 目前沒辦法在搜索框輸入中文文字
-pyautogui.click()  # 滑鼠點擊
