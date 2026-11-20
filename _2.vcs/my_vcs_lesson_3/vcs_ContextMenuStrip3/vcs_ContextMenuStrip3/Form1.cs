@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+//在RichTextBox做右鍵選單, 可以全選複製貼上
+
 namespace vcs_ContextMenuStrip3
 {
     public partial class Form1 : Form
@@ -88,7 +90,7 @@ namespace vcs_ContextMenuStrip3
 
             menu.Items.Add(miSelectAll);
 
-            richTextBox1.ContextMenuStrip = menu;
+            richTextBox1.ContextMenuStrip = menu;  // 直接指定 ContextMenuStrip
 
             menu.Opening += Menu_Opening;
 
@@ -102,31 +104,34 @@ namespace vcs_ContextMenuStrip3
             miSelectAll.Click += MiSelectAll_Click;
         }
 
+        //Opening 事件
         private void Menu_Opening(object sender, CancelEventArgs e)
         {
             miUndo.Enabled = richTextBox1.CanUndo;
             miRedo.Enabled = richTextBox1.CanRedo;
 
-            bool hasSelection =
-                richTextBox1.SelectionLength > 0;
+            bool hasSelection = richTextBox1.SelectionLength > 0;
 
             miCut.Enabled = hasSelection;
             miCopy.Enabled = hasSelection;
 
-            miPaste.Enabled =
-                Clipboard.ContainsText();
+            miPaste.Enabled = Clipboard.ContainsText();
         }
 
         private void MiUndo_Click(object sender, EventArgs e)
         {
             if (richTextBox1.CanUndo)
+            {
                 richTextBox1.Undo();
+            }
         }
 
         private void MiRedo_Click(object sender, EventArgs e)
         {
             if (richTextBox1.CanRedo)
+            {
                 richTextBox1.Redo();
+            }
         }
 
         private void MiCut_Click(object sender, EventArgs e)
@@ -141,14 +146,19 @@ namespace vcs_ContextMenuStrip3
 
         private void MiPaste_Click(object sender, EventArgs e)
         {
-            richTextBox1.Paste();
+            //richTextBox1.Paste();
+            richTextBox1.SelectedText = Clipboard.GetText();  // 強制只取 Unicode 文字
+
+            if (Clipboard.ContainsText())
+            {
+                //richTextBox1.SelectedText = Clipboard.GetText(TextDataFormat.UnicodeText);  // 強制只取 Unicode 文字
+            }
         }
 
         private void MiSelectAll_Click(object sender, EventArgs e)
         {
             richTextBox1.SelectAll();
         }
-
     }
 }
 

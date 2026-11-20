@@ -81,6 +81,11 @@ namespace vcs_test_pyautogui
 
             //做RichTextBox的右鍵選單
             CreateContextMenu();
+
+            //------------------------------------------------------------  # 60個
+
+            richTextBox1.Text += "百战无残垒\n巍然独此存\n古藤犹铁色\n旧碣尚苔痕\n" +
+                "有相能逃劫\n无为道益尊\n台城落日里\n多少未归人\n";
         }
 
         void show_item_location()
@@ -91,7 +96,7 @@ namespace vcs_test_pyautogui
             int dx = 200 + 10;
             int dy = 60 + 10;
 
-            pictureBox1.Size = new Size(410, 690);
+            pictureBox1.Size = new Size(410, 500);
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y + pictureBox1.Size.Height - bt_reset.Size.Height);
 
@@ -101,7 +106,7 @@ namespace vcs_test_pyautogui
             button3.Location = new Point(x_st + dx * 2, y_st + dy * 3);
             button4.Location = new Point(x_st + dx * 2, y_st + dy * 4);
 
-            richTextBox1.Size = new Size(410, 690);
+            richTextBox1.Size = new Size(410, 500);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -251,6 +256,9 @@ namespace vcs_test_pyautogui
 
             if (e.Button == MouseButtons.Left)
             {
+                g.FillEllipse(new SolidBrush(Color.Red), e.X - 10, e.Y - 10, 20, 20);
+                pictureBox1.Image = bitmap1;
+
                 //如果开始绘制，则开始记录鼠标位置
                 if ((isDrawing = !isDrawing) == true)
                 {

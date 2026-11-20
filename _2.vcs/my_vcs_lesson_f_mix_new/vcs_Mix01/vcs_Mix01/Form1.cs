@@ -751,6 +751,16 @@ namespace vcs_Mix01
         private void button20_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            richTextBox1.Text += "印出剪貼簿有哪些格式\n";
+
+            IDataObject data = Clipboard.GetDataObject();
+
+            foreach (string format in data.GetFormats())
+            {
+                richTextBox1.Text += format + "\n";
+                Console.WriteLine(format);
+            }
         }
 
         private void button21_Click(object sender, EventArgs e)

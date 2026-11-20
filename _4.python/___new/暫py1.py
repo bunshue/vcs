@@ -217,34 +217,7 @@ try:
 except KeyboardInterrupt:
     print("\nBye")
 
-
 print("------------------------------------------------------------")  # 60個
-
-import pyautogui
-
-current_x = 300
-move = 10
-width, _ = pyautogui.size()
-
-
-        elif classname == 'right':
-            current_x += move
-            if current_x > width:
-                current_x = width
-        pyautogui.moveTo(current_x,200)
-
-pyautogui.moveTo(current_x,200)
-
-
-
-    # 获取屏幕截图
-    img = pyautogui.screenshot()
-
-# 設定螢幕解析度（根據需要調整）
-W, H = pyautogui.size()
-screen_picture = pyautogui.screenshot() #螢幕截圖
-
-
 
 例如鏡子放在 8 公里外：
 
