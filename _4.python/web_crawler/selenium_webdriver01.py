@@ -4137,6 +4137,9 @@ for i in range(10):
 """
 print("------------------------------------------------------------")  # 60個
 
+# print("時時顯示滑鼠位置座標, 按 Ctrl+C 離開")
+# pyautogui.displayMousePosition()
+
 width, height = pyautogui.size()  # 取得螢幕寬度和高度, 分辨率
 print("螢幕寬度和高度 :", width, height)  # 列印螢幕寬度和高度
 
@@ -4501,14 +4504,14 @@ pyautogui.write("ABCDEFG AI can not use chinese here", interval=0.1)  # 不能�
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("10秒後開始")
-print("請打開 https://canvas.apps.chrome/，並挑選你喜歡的畫筆顏色及粗細")
+import subprocess
 
-sleep(10)  # 等N秒
+# 打開應用程式
+subprocess.Popen("data/vcs_test_pyautogui.exe")
 
-W, H = 1920, 1080
+sleep(3)  # 等N秒
 
-pyautogui.moveTo(400, 300)  # 移動滑鼠位置
+pyautogui.moveTo(250, 200)  # 移動滑鼠位置
 
 # 拖曳到相對座標 + 左鍵, duration時間完成
 pyautogui.dragRel(xOffset=-100, yOffset=-100, duration=3, button="left")  # 往左上
@@ -4516,7 +4519,7 @@ pyautogui.dragRel(xOffset=-100, yOffset=100, duration=3, button="left")  # 往�
 pyautogui.dragRel(xOffset=100, yOffset=100, duration=3, button="left")  # 往右下
 pyautogui.dragRel(xOffset=100, yOffset=-100, duration=3, button="left")  # 往右上
 
-pyautogui.moveTo(400, 300 + 200)  # 移動滑鼠位置
+pyautogui.moveTo(250, 200 + 200)  # 移動滑鼠位置
 
 # 拖曳到相對座標 + 左鍵, duration時間完成
 pyautogui.dragRel(xOffset=-100, yOffset=-100, duration=0.5)  # 往左上
@@ -4524,12 +4527,13 @@ pyautogui.dragRel(xOffset=-100, yOffset=100, duration=0.5)  # 往左下
 pyautogui.dragRel(xOffset=100, yOffset=100, duration=0.5)  # 往右下
 pyautogui.dragRel(xOffset=100, yOffset=-100, duration=0.5)  # 往右上
 
-pyautogui.moveTo(300, y=400)  # 移動滑鼠位置
+pyautogui.moveTo(100, y=300)  # 移動滑鼠位置
+
 for i in range(15):
     pyautogui.moveTo(300 + 15 * i, 400)  # 移動滑鼠位置
     pyautogui.click()  # 滑鼠點擊  # 按一下設定繪圖起始點
 
-pyautogui.moveTo(600, y=400)  # 移動滑鼠位置
+pyautogui.moveTo(300, y=300)  # 移動滑鼠位置
 # 移動滑鼠相對位置
 for i in range(5):
     pyautogui.click()  # 滑鼠點擊  # 按一下設定繪圖起始點
@@ -4559,34 +4563,6 @@ pyautogui.moveTo(x=400, y=200, duration=3, tween=pyautogui.easeOutQuad)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-print("時時顯示滑鼠位置座標, 按 Ctrl+C 離開")
-# pyautogui.displayMousePosition()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-# NG
-"""
-print("請開啟小算盤 5秒後開始")
-
-sleep(5)  # 等N秒
-
-num = "2021"
-for n in num:
-    box = pyautogui.locateOnScreen(n + ".png", grayscale=True)
-    if box:
-        x, y = pyautogui.center(box)
-        pyautogui.leftClick(x, y)
-    else:
-        print("找不到圖片")
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("以記事本開啟新檔案，並將輸入線移到其中")
-print("10秒後開始")
-
-sleep(10)  # 等N秒
 
 pyautogui.PAUSE = 1
 
@@ -4655,11 +4631,38 @@ pyautogui.doubleClick(x=600, y=210, duration=2, button="left")  # 雙擊滑鼠�
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+# NG
+"""
+print("請開啟小算盤 5秒後開始")
+
+sleep(5)  # 等N秒
+
+num = "2021"
+for n in num:
+    box = pyautogui.locateOnScreen(n + ".png", grayscale=True)
+    if box:
+        x, y = pyautogui.center(box)
+        pyautogui.leftClick(x, y)
+    else:
+        print("找不到圖片")
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 print("PyAutoGUI，自動控制滑鼠與鍵盤 SP")
 print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+
 
 """
 driver.implicitly_wait(60)：設定全域的元素查找超時時間為 60 秒。

@@ -35,7 +35,15 @@ namespace vcs_test_pyautogui
         private drawTools drawTool = drawTools.Line;
         private bool isDrawing = false;     //是否正在繪圖
 
+        //做RichTextBox的右鍵選單
+        private ContextMenuStrip menu;
 
+        private ToolStripMenuItem miUndo;
+        private ToolStripMenuItem miRedo;
+        private ToolStripMenuItem miCut;
+        private ToolStripMenuItem miCopy;
+        private ToolStripMenuItem miPaste;
+        private ToolStripMenuItem miSelectAll;
 
         public Form1()
         {
@@ -68,6 +76,11 @@ namespace vcs_test_pyautogui
             ig.Clear(backColor);
 
             pictureBox1.Image = bitmap1;
+
+            //------------------------------------------------------------  # 60個
+
+            //做RichTextBox的右鍵選單
+            CreateContextMenu();
         }
 
         void show_item_location()
@@ -78,28 +91,28 @@ namespace vcs_test_pyautogui
             int dx = 200 + 10;
             int dy = 60 + 10;
 
-            pictureBox1.Size = new Size(620, 690);
+            pictureBox1.Size = new Size(410, 690);
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y + pictureBox1.Size.Height - bt_reset.Size.Height);
 
-            button0.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            button2.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            button3.Location = new Point(x_st + dx * 3, y_st + dy * 3);
-            button4.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button0.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 2, y_st + dy * 4);
 
-            richTextBox1.Size = new Size(300, 690);
-            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            richTextBox1.Size = new Size(410, 690);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //針對某控件的邊緣 設定表單大小
-            this.ClientSize = new Size(richTextBox1.Right + 10, richTextBox1.Bottom + 20);
+            this.ClientSize = new Size(richTextBox1.Right + 10, richTextBox1.Bottom + 10);
 
             this.Text = "vcs_test_pyautogui";
 
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;
-            this.Location = new Point(10, 100);
+            this.Location = new Point(0, 0);
         }
 
         private void bt_reset_Click(object sender, EventArgs e)
@@ -114,6 +127,95 @@ namespace vcs_test_pyautogui
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
+        //做RichTextBox的右鍵選單 ST
+        private void CreateContextMenu()
+        {
+            menu = new ContextMenuStrip();
+
+            miUndo = new ToolStripMenuItem("復原");
+            miRedo = new ToolStripMenuItem("重做");
+
+            miCut = new ToolStripMenuItem("剪下");
+            miCopy = new ToolStripMenuItem("複製");
+            miPaste = new ToolStripMenuItem("貼上");
+
+            miSelectAll = new ToolStripMenuItem("全選");
+
+            menu.Items.Add(miUndo);
+            menu.Items.Add(miRedo);
+
+            menu.Items.Add(new ToolStripSeparator());
+
+            menu.Items.Add(miCut);
+            menu.Items.Add(miCopy);
+            menu.Items.Add(miPaste);
+
+            menu.Items.Add(new ToolStripSeparator());
+
+            menu.Items.Add(miSelectAll);
+
+            richTextBox1.ContextMenuStrip = menu;
+
+            menu.Opening += Menu_Opening;
+
+            miUndo.Click += MiUndo_Click;
+            miRedo.Click += MiRedo_Click;
+
+            miCut.Click += MiCut_Click;
+            miCopy.Click += MiCopy_Click;
+            miPaste.Click += MiPaste_Click;
+
+            miSelectAll.Click += MiSelectAll_Click;
+        }
+
+        private void Menu_Opening(object sender, CancelEventArgs e)
+        {
+            miUndo.Enabled = richTextBox1.CanUndo;
+            miRedo.Enabled = richTextBox1.CanRedo;
+
+            bool hasSelection = richTextBox1.SelectionLength > 0;
+
+            miCut.Enabled = hasSelection;
+            miCopy.Enabled = hasSelection;
+
+            miPaste.Enabled = Clipboard.ContainsText();
+        }
+
+        private void MiUndo_Click(object sender, EventArgs e)
+        {
+            if (richTextBox1.CanUndo)
+                richTextBox1.Undo();
+        }
+
+        private void MiRedo_Click(object sender, EventArgs e)
+        {
+            if (richTextBox1.CanRedo)
+                richTextBox1.Redo();
+        }
+
+        private void MiCut_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Cut();
+        }
+
+        private void MiCopy_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Copy();
+        }
+
+        private void MiPaste_Click(object sender, EventArgs e)
+        {
+            //richTextBox1.Paste();
+            richTextBox1.SelectedText = Clipboard.GetText();
+        }
+
+        private void MiSelectAll_Click(object sender, EventArgs e)
+        {
+            richTextBox1.SelectAll();
+        }
+        //做RichTextBox的右鍵選單 SP
 
         //------------------------------------------------------------  # 60個
 
@@ -227,13 +329,10 @@ namespace vcs_test_pyautogui
     }
 }
 
-
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-
 
