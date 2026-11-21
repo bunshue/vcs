@@ -624,14 +624,10 @@ else:
     TIMER_PLATFORM_DEFAULT = TIMER_TIME_TIME
 
 
-import systimes
-
-print("a")
-print(systimes.SYSTIMES_IMPLEMENTATION)
+print("------------------------------------------------------------")  # 60個
 
 timer = TIMER_PLATFORM_DEFAULT
 
-print("b")
 print("* using timer: %s" % timer)
 if hasattr(time, "get_clock_info"):
     info = time.get_clock_info(timer[5:])

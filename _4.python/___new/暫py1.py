@@ -1,4 +1,73 @@
 
+# ------------------------------------------------------------  # 60個
+
+
+# ------------------------------------------------------------  # 60個
+
+pd.read_html() 有三種狀況
+
+pd.read_html("test.html")     # 檔案名稱
+pd.read_html("https://...")   # 網址
+pd.read_html("<table>...</table>")  # HTML內容
+
+# ------------------------------------------------------------  # 60個
+
+統一修改
+
+
+FutureWarning。
+
+舊：
+data = pd.read_html(html)
+
+新：
+from io import StringIO
+data = pd.read_html(StringIO(html))
+# 新版要求你明確告訴 pandas：「這是一段字串，不是網址或檔案名稱」
+
+# ------------------------------------------------------------  # 60個
+
+import importlib.util
+
+
+print('Python 是否有安裝模組?')
+print(importlib.util.find_spec("selenium"))
+print(importlib.util.find_spec("systimes"))
+
+
+import sys
+
+for p in sys.path:
+    print(p)
+
+
+import time
+
+print(time.get_clock_info("perf_counter"))
+print(time.get_clock_info("process_time"))
+
+
+# 量測時間
+import time
+
+start = time.perf_counter()
+
+# 程式碼
+
+end = time.perf_counter()
+
+print(end - start)
+
+# ------------------------------------------------------------  # 60個
+
+# 得到 python 模組的安裝檔案
+print(systimes.__file__)
+
+import systimes
+
+print(systimes.__file__)
+print(systimes.__dict__.get("__version__"))
+
 
 # ------------------------------------------------------------  # 60個
 

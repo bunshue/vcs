@@ -74,6 +74,13 @@ namespace vcs_CompareKatfile
         {
             richTextBox1.Text += "¤ñ¸û\n";
 
+            string[] lines1 = richTextBox_katfile1.Lines;
+            string[] lines2 = richTextBox_katfile2.Lines;
+            Array.Sort(lines1);
+            Array.Sort(lines2);
+            richTextBox_katfile1.Lines = lines1;
+            richTextBox_katfile2.Lines = lines2;
+
             dataGridView1.Rows.Clear();
 
             int len1 = richTextBox_katfile1.Lines.Length;
