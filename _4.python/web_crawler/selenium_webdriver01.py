@@ -59,7 +59,7 @@ def destroy_driver():
     # driver.close()  # 關閉瀏覽器目前分頁
     driver.quit()  # 關閉瀏覽器並且退出驅動程序
 
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 url = "https://www.google.com"
@@ -4136,6 +4136,7 @@ print("------------------------------------------------------------")  # 60個
 print("facebook twitter X SP")
 print("------------------------------------------------------------")  # 60個
 
+
 print("------------------------------------------------------------")  # 60個
 print("PyAutoGUI，鍵盤滑鼠自動化, 自動控制滑鼠與鍵盤 ST")
 print("------------------------------------------------------------")  # 60個
@@ -4143,7 +4144,7 @@ print("------------------------------------------------------------")  # 60個
 """
 # 移動滑鼠鼠標
 x, y = 200, 200
-pyautogui.moveTo(x, y, duration=2)  # 移動滑鼠位置  這個2是什麼意思
+pyautogui.moveTo(x, y, duration=2)  # 移動滑鼠位置
 pyautogui.PAUSE = 1  # pyautogui等待
 
 x, y = 500, 500
@@ -4213,25 +4214,18 @@ for i in range(5):
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 import subprocess
 
-subprocess.Popen("data/vcs_test_pyautogui.exe")  # 打開應用程式
-# subprocess.Popen("notepad.exe")  # 打開應用程式, 記事本
+# subprocess.Popen("data/vcs_test_pyautogui.exe")  # 打開應用程式
+subprocess.Popen("notepad.exe")  # 打開應用程式, 記事本
 
 sleep(5)  # 等N秒
-
+'''
 print("------------------------------------------------------------")  # 60個
-
+"""
 # 滑鼠走到 richTextBox1 位置點一下
-pyautogui.click(x=700, y=120, button="left")
-
-# 各種滑鼠按鍵
-pyautogui.click(700, 250)  # 滑鼠點擊某一點
-pyautogui.click(700, 250, button="right")
-
-pyautogui.mouseDown(button="right")  # 在滑鼠游標位置按住滑鼠右邊建
-pyautogui.mouseUp(800, 300, button="right")  # 放開後滑鼠游標在(800, 300)
+pyautogui.click(x=500, y=120, button="left")
 
 for i in range(10):
     # 滑鼠滾輪往下捲動
@@ -4244,9 +4238,9 @@ for i in range(10):
     sleep(1)  # 等N秒
 
 print("------------------------------")  # 30個
-
+"""
 # 滑鼠走到 richTextBox1 位置點一下
-pyautogui.click(x=700, y=120, button="left")
+pyautogui.click(x=500, y=120, button="left")
 
 # 只能寫英數, 不能寫中文
 pyautogui.write("ABCDEFG", interval=0.1)
@@ -4275,32 +4269,60 @@ pyautogui.typewrite(["M", "i", "n", "g", "up", "backspace", "g"], 0.5)  # 打字
 pyautogui.typewrite(["enter"], 0.1)  # 打字, 換行
 
 print("------------------------------")  # 30個
+'''
 
+pyautogui.click(x=200, y=200, button="left")
+
+"""
 # pyautogui.hotkey()
 
 # Ctrl + A 全選
 pyautogui.hotkey("ctrl", "a")  # Ctrl + A
 
+sleep(1)  # 等N秒
+
 # Ctrl + C 複製
 pyautogui.hotkey("ctrl", "c")  # Ctrl + C
 
+sleep(1)  # 等N秒
+
 # 移動到另一個位置或應用
-pyautogui.click(700, 400)  # 移動滑鼠游標並按一下
+pyautogui.click(500, 400)  # 移動滑鼠游標並按一下
+
+sleep(1)  # 等N秒
 
 # Ctrl + V 貼上
 pyautogui.hotkey("ctrl", "v")  # Ctrl + V
+"""
+print("------------------------------")  # 30個
 
-pyautogui.hotkey("shift", "8")  # 輸出 *
-pyautogui.hotkey("alt", "V")  # 開啟檢視功能表
+# 按 Shift + 8 = *
+pyautogui.hotkey("shift", "8")  # 輸出星號 *
 
+pyautogui.hotkey("alt", "V")  # Alt + V : 開啟檢視功能表
+
+# 按 Shift + 7 = &
 pyautogui.keyDown("shift")
-pyautogui.press("8")
+pyautogui.press("7")
 pyautogui.keyUp("shift")
 
-# 以下開啟檢視功能表
+# 以下開啟檢視功能表 # Alt + V : 開啟檢視功能表
 pyautogui.keyDown("alt")
 pyautogui.press("V")
 pyautogui.keyUp("alt")
+
+# pyautogui.keyDown("down")
+# pyautogui.keyUp("down")
+# pyautogui.keyDown("up")
+
+
+pyautogui.keyDown("shift")  # 按下 SHIFT
+
+pyautogui.press("g")
+pyautogui.press("o", presses=10)  # 按一個字鍵 O, 按10次
+pyautogui.press("d")
+
+pyautogui.keyUp("shift")  # 放開 SHIFT
 
 print("------------------------------")  # 30個
 
@@ -4346,7 +4368,7 @@ print("------------------------------")  # 30個
 
 pyautogui.PAUSE = 1
 
-pyautogui.moveTo(700, 100)  # 移動滑鼠位置
+pyautogui.moveTo(500, 100)  # 移動滑鼠位置
 pyautogui.click()  # 滑鼠點擊
 
 print("輸入字串, 只能輸入英數")
@@ -4378,26 +4400,34 @@ pyautogui.press("enter")  # 按Enter
 
 print("------------------------------")  # 30個
 
-pyautogui.keyDown("shift")  # 按下 SHIFT
+# 滑鼠走到 richTextBox1 位置點一下
+pyautogui.click(x=500, y=120, button="left")
 
-pyautogui.press("g")
-pyautogui.press("o", presses=10)  # 按一個字鍵 O, 按10次
-pyautogui.press("d")
+# 各種滑鼠按鍵
+pyautogui.click(500, 250)  # 滑鼠點擊某一點
+pyautogui.click(500, 250, button="right")
 
-pyautogui.keyUp("shift")  # 放開 SHIFT
+sleep(1)  # 等N秒
+
+pyautogui.click(500, 250)  # 滑鼠點擊某一點
+pyautogui.mouseDown(button="right")  # 在滑鼠游標位置按住滑鼠右邊建
+
+sleep(1)  # 等N秒
+
+pyautogui.mouseUp(600, 200, button="right")  # 放開後滑鼠游標在(800, 300)
 
 print("------------------------------")  # 30個
 
 # 各種滑鼠按鍵方法
 print("滑鼠單擊 左鍵")
 # 滑鼠走到 richTextBox1 位置點一下
-pyautogui.click(x=700, y=120, button="left")
+pyautogui.click(x=500, y=120, button="left")
 print("滑鼠雙擊")
-pyautogui.doubleClick(x=700, y=120, button="left")
-pyautogui.doubleClick(x=700, y=120, duration=2, button="left")  # 雙擊滑鼠左鍵
+pyautogui.doubleClick(x=500, y=120, button="left")
+pyautogui.doubleClick(x=500, y=120, duration=2, button="left")  # 雙擊滑鼠左鍵
 
 print("滑鼠單擊 左鍵")
-pyautogui.leftClick(x=700, y=250, duration=2)  # 在空白處點擊滑鼠左鍵
+pyautogui.leftClick(x=500, y=250, duration=2)  # 在空白處點擊滑鼠左鍵
 
 print("------------------------------")  # 30個
 
@@ -4405,15 +4435,15 @@ print("操作滑鼠右鍵選單")
 
 print("選右鍵選單 全選")
 # 滑鼠走到 richTextBox1 位置點一下
-pyautogui.click(x=700, y=120, button="left")
+pyautogui.click(x=500, y=120, button="left")
 
 # 按右鍵, 出現右鍵選單
-pyautogui.click(x=700, y=130, duration=2, button="right")  # 按滑鼠右鍵
+pyautogui.click(x=500, y=130, duration=2, button="right")  # 按滑鼠右鍵
 
-pyautogui.moveTo(x=750, y=260)  # 移動滑鼠位置
+pyautogui.moveTo(x=550, y=260)  # 移動滑鼠位置
 sleep(2)
 # 點選右鍵選單的內容, 全選
-pyautogui.click(x=750, y=260, duration=2, button="left")  # 按滑鼠右鍵
+pyautogui.click(x=550, y=260, duration=2, button="left")  # 按滑鼠右鍵
 
 sleep(2)
 
@@ -4427,7 +4457,7 @@ pyautogui.click()  # 按滑鼠右鍵, 進行複製
 
 sleep(2)
 
-pyautogui.moveTo(x=750, y=300)  # 移動滑鼠位置
+pyautogui.moveTo(x=550, y=300)  # 移動滑鼠位置
 
 print("選右鍵選單 貼上")
 pyautogui.click()
@@ -4439,7 +4469,6 @@ sleep(1)
 # 點選右鍵選單的內容, 貼上
 pyautogui.click()  # 按滑鼠右鍵, 進行貼上
 
-sys.exit()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -4474,109 +4503,8 @@ destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-"""
-# 未知
-from PIL import ImageGrab
 
-x1, x2 = 260, 300
-y1_bird, y2_bird = 305, 378
-y1_cactus, y2_cactus = 379, 465
-
-
-def isCollision_day(data):  # 白天
-    # 檢查高飛翼手龍出現
-    for i in range(x1, x2):
-        for j in range(y1_bird, y2_bird):
-            if data[i, j] < 150:
-                pyautogui.keyDown("down")
-                msleep(0.5)  # 等0.N秒
-                pyautogui.keyUp("down")
-                return
-    # 檢查仙人掌出現
-    for i in range(x1, x2):
-        for j in range(y1_cactus, y2_cactus):
-            if data[i, j] < 150:
-                pyautogui.keyDown("up")
-                return
-    return
-
-
-def isCollision_night(data):  # 晚上
-    for i in range(x1, x2):
-        for j in range(y1_bird, y2_bird):
-            if data[i, j] > 150:
-                pyautogui.keyDown("down")
-                msleep(0.5)  # 等0.N秒
-                pyautogui.keyUp("down")
-                return
-    for i in range(x1, x2):
-        for j in range(y1_cactus, y2_cactus):
-            if data[i, j] > 150:
-                pyautogui.keyDown("up")
-                return
-    return
-
-
-sleep(1)  # 等N秒
-
-pyautogui.keyDown("up")
-
-while True:
-    image = ImageGrab.grab().convert("L")
-    data = image.load()
-    if data[260, 300] > 150:
-        isCollision_day(data)
-    else:
-        isCollision_night(data)
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-"""
-url = "https://notify-api.line.me/api/notify"
-token = "你的權杖"
-headers = {"Authorization": "Bearer " + token}  # 設定 LINE Notify 權杖
-data = {"message": "測試一下！"}  # 設定 LINE Notify message ( 不可少 )
-image = open("./test.png", "rb")  # 以二進位方式開啟圖片
-imageFile = {"imageFile": image}  # 設定圖片資訊
-data = requests.post(url, headers=headers, data=data, files=imageFile)  # 發送 LINE Notify
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-# 定義截圖的函式
-def my_screenshot():
-    screenImage = pyautogui.screenshot()  # 全螢幕截圖
-    screenImage.save("./test.png")
-
-    t = time.time()  # 取得到目前為止的秒數
-    t1 = time.localtime(t)  # 將秒數轉換為 struct_time 格式的時間
-    now = time.strftime("%Y/%m/%d %H:%M:%S", t1)  # 輸出為特定格式的文字
-    sendLineNotify(now)  # 執行發送 LINE Notify 的函式，發送的訊息為時間
-
-
-# 定義發送 LINE Notify 的函式
-def sendLineNotify(msg):
-    url = "https://notify-api.line.me/api/notify"
-    token = "你的權杖"
-    headers = {"Authorization": "Bearer " + token}
-    data = {"message": msg}
-    image = open("./test.png", "rb")
-    imageFile = {"imageFile": image}
-    data = requests.post(url, headers=headers, data=data, files=imageFile)
-
-
-# 使用for 迴圈，每隔五秒截圖發送一次
-for i in range(5):
-    my_screenshot()
-    sleep(5)  # 等N秒
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-"""
-# NG
-"""
-print("請開啟小算盤 5秒後開始")
+print("NG　請開啟小算盤 5秒後開始")
 
 sleep(5)  # 等N秒
 
@@ -4588,7 +4516,7 @@ for n in num:
         pyautogui.leftClick(x, y)
     else:
         print("找不到圖片")
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

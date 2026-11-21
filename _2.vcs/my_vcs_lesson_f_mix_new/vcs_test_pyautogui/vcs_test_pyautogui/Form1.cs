@@ -84,8 +84,10 @@ namespace vcs_test_pyautogui
 
             //------------------------------------------------------------  # 60個
 
-            richTextBox1.Text += "百战无残垒\n巍然独此存\n古藤犹铁色\n旧碣尚苔痕\n" +
-                "有相能逃劫\n无为道益尊\n台城落日里\n多少未归人\n";
+            richTextBox1.Text += "百战无残垒\n巍然独此存\n古藤犹铁色\n旧碣尚苔痕\n有相能逃劫\n无为道益尊\n台城落日里\n多少未归人\n";
+            richTextBox1.Text += "百战无残垒\n巍然独此存\n古藤犹铁色\n旧碣尚苔痕\n有相能逃劫\n无为道益尊\n台城落日里\n多少未归人\n";
+            richTextBox1.Text += "百战无残垒\n巍然独此存\n古藤犹铁色\n旧碣尚苔痕\n有相能逃劫\n无为道益尊\n台城落日里\n多少未归人\n";
+            richTextBox1.Text += "百战无残垒\n巍然独此存\n古藤犹铁色\n旧碣尚苔痕\n有相能逃劫\n无为道益尊\n台城落日里\n多少未归人\n";
         }
 
         void show_item_location()
@@ -96,24 +98,26 @@ namespace vcs_test_pyautogui
             int dx = 200 + 10;
             int dy = 60 + 10;
 
-            pictureBox1.Size = new Size(410, 500);
+            pictureBox1.Size = new Size(410, 480);
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y + pictureBox1.Size.Height - bt_reset.Size.Height);
 
-            button0.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button2.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button3.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button4.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-
-            richTextBox1.Size = new Size(410, 500);
-            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            richTextBox1.Size = new Size(410, 480);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            //針對某控件的邊緣 設定表單大小
-            this.ClientSize = new Size(richTextBox1.Right + 10, richTextBox1.Bottom + 10);
+            button0.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 4, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 4, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 4, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 4, y_st + dy * 6);
 
-            this.Text = "vcs_test_pyautogui";
+            //針對某控件的邊緣 設定表單大小
+            this.ClientSize = new Size(button6.Right + 10, button6.Bottom + 10);
+
+            this.Text = "測試 PyAutoGUI";
 
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;
@@ -248,6 +252,18 @@ namespace vcs_test_pyautogui
         {
 
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
