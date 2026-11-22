@@ -16,7 +16,6 @@ llll 字典 集合 串列 元組 dslt
 
 """
 
-import requests
 
 print("------------------------------------------------------------")  # 60個
 
@@ -41,7 +40,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 
 def show():
-    return
+    # return
     # plt.tight_layout()
     plt.show()
 
@@ -1881,7 +1880,7 @@ N = 50
 data = [0] * N
 
 print(type(data))
-print(len(data))
+print("資料長度 :", len(data))
 
 for i in range(len(data)):
     data[i] = i
@@ -2036,8 +2035,7 @@ for j in range(5):
     z = i + j
     print("小寫：%x\t大寫：%X" % (z, z))
 
-
-sys.exit()
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -5936,7 +5934,7 @@ list1 = [1, 2, 3, 4, 5, 6, 7]
 # 找最小、最大元素
 print(min(list1), max(list1))
 # 串列長度、串列加總
-print(len(list1), sum(list1))
+print("資料長度 :", len(list1), sum(list1))
 
 s0 = slice(0, 2)  # 切片物件：定義切片範圍
 s1 = slice(1, -1, 2)
@@ -6002,7 +6000,7 @@ filename = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 ss = filename.split("/")
 print(filename)
-print(len(ss))
+print("資料長度 :", len(ss))
 for _ in ss:
     print(_)
 
@@ -6722,7 +6720,7 @@ def inn():
 inn()
 """
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
 """
 #按 ctrl + c 離開程式
 
@@ -6736,6 +6734,7 @@ try:
 except KeyboardInterrupt:
     sys.exit()  # When Ctrl-C is pressed, end the program.
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 import shutil
@@ -6783,13 +6782,14 @@ except KeyboardInterrupt:
     sys.exit()  # When Ctrl-C is pressed, end the program.
 """
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("string.printable 的用法 ")
 
 import string
 
 print(string.printable)
-print(len(string.printable))
+print("資料長度 :", len(string.printable))
 abc = string.printable[:-5]  # 取消不可列印字元
 print(abc)
 
@@ -7363,36 +7363,6 @@ print("==Test3==")
 print(string1.zfill(20))
 
 print("------------------------------------------------------------")  # 60個
-
-from bs4 import BeautifulSoup
-
-url = "http://jigsaw.w3.org/HTTP/connection.html"
-response = requests.get(url)
-# 指定html.parser作為解析器
-soup = BeautifulSoup(response.text, "html.parser")
-# 把排版後的html印出來，因為未排版前有很多網頁語法缺乏換行符號，不易閱讀
-# 必須借助於Beautiful Shop套件
-print(soup.prettify())
-# find_all()回傳的格式是串列list
-# 而且contens的內容也是串列list
-a_tags = soup.find_all("title")
-for a_tag in a_tags:
-    for b in a_tag.contents:
-        print(str(b).strip())
-a_tags = soup.find_all("h1")
-for a_tag in a_tags:
-    cc = ""
-    for b in a_tag.contents:
-        b = (
-            str(b)
-            .replace("<i>", "")
-            .replace("</i>", "")
-            .replace("\n", "")
-            .replace("\r", "")
-        )
-        cc = cc + b
-    print(cc.strip())
-
 print("------------------------------------------------------------")  # 60個
 
 student_all = [15463, 22825, 14757, 21441]
@@ -7405,6 +7375,7 @@ print(student_all)
 for i in range(4):
     print(student_university[i] + student_graduate[i])
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 file1 = open("handgame.py", "w", encoding="UTF-8")  # 打開檔案，建立handgame.py
@@ -7466,32 +7437,37 @@ file1.close()  # 關閉檔案
 
 print("------------------------------------------------------------")  # 60個
 
+print('撈出目錄下所有指定副檔名的檔案')
+
 from os import path
 import re
 
-foldername = "D:\_git\vcs\_1.data\______test_files3"
+foldername = r"D:\_git\vcs\_1.data\______test_files3"  # 從Windows檔案總管拷貝來的路徑要加r
 
 # for folder, subfolders, filenames in os.walk("."):
 for folder, subfolders, filenames in os.walk(foldername):
     print(folder, subfolders, filenames)
     for filename in filenames:
         fullpath = path.join(folder, filename)
-        if fullpath.lower().endswith(".ipynb"):
+        if fullpath.lower().endswith(".csv"):
             print(fullpath)
 
 print("------------------------------------------------------------")  # 60個
 
+print('製作json檔案')
+
 from os import path
 import json
 
-kernel_folder = "tttttttt"
-
-python3_path = "C:\\WinPython-64bit-3.4.3.3\\scripts\\python.bat"
-
+# 如果資料夾不存在, 建立之
+kernel_folder = "tmp_kernel_folder"
 if not path.exists(kernel_folder):
     os.mkdir(kernel_folder)
 
-kernel_fn = path.join(kernel_folder, "kernel.json")
+kernel_fn = path.join(kernel_folder, "kernel222.json")
+
+python3_path = r"D:\_git\vcs\_4.python\___new\test10_new01.py"
+# python3_path = "C:\\WinPython-64bit-3.4.3.3\\scripts\\python.bat"
 
 kernel_settings = {
     "argv": [python3_path, "-m", "IPython.kernel", "-f", "{connection_file}"],
@@ -7506,7 +7482,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("網址編碼解碼")
 
-from urllib.request import quote, unquote
+from urllib.request import quote
+from urllib.request import unquote
 
 print("網址編碼 utf-8")
 
@@ -7566,7 +7543,7 @@ print("------------------------------------------------------------")  # 60個
 print("數據處理的方法")
 x1 = np.linspace(-1.5, 1.5, 31)
 y1 = np.cos(x1) ** 2
-print(len(y1))
+print("資料長度 :", len(y1))
 
 # 移除 y1 > 0.9 的點
 x2 = x1[y1 <= 0.9]
@@ -7575,20 +7552,20 @@ y2 = y1[y1 <= 0.9]
 # 遮罩 y1 > 0.7 的點, 遮罩就是不要的
 y3 = np.ma.masked_where(y1 > 0.7, y1)
 print("y1")
-print(len(y1))
+print("資料長度 :", len(y1))
 print(y1)
 print("y3")
-print(len(y3))
+print("資料長度 :", len(y3))
 print(y3)
 
 # 將 y1 > 0.3 的點設為 NaN
 y4 = y1.copy()
 print("y4")
-print(len(y4))
+print("資料長度 :", len(y4))
 print(y4)
 y4[y4 > 0.3] = np.nan
 print("y4")
-print(len(y4))
+print("資料長度 :", len(y4))
 print(y4)
 
 plt.scatter(x1, y1, c="r", s=300, label="原始資料")
@@ -7645,7 +7622,7 @@ for number in range(st, sp):  # Main program loop.
     print("DEC:", number, "   HEX:", hexNumber, "   BIN:", binNumber)
 
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
 
 # Cars基礎類別
 class Cars:
@@ -7822,47 +7799,26 @@ def tax(obj):
     print(obj.manufacture(), ":", obj.totaltax())
 
 
-# 建構第1輛汽油車物件
-print("==Test1==")
-a = GasolineCars("CITROEN", "BX16TGS", "灰", 5, 1580)
+a = GasolineCars("CITROEN", "BX16TGS", "灰", 5, 1580) # 汽油車物件
+a = DieselCars("福特六和", "C346-9W", "白", 5, 1997)  # 柴油車物件
+a = ElectricCars("Tesla", "Model 3", "紅", 5, 346)  # 電動車物件
+
 print(type(a))
 print(a.manufacture())
 a.info()
 print(a.fueltax())
 print(a.licensetax())
 print(a.totaltax())
+tax(a)
+
 # 可以修改屬性
 a.color = "綠"
 a.seat = 2
 print(a.manufacture())
 a.info()
 
-# 建構第2輛柴油車物件
-print("==Test2==")
-b = DieselCars("福特六和", "C346-9W", "白", 5, 1997)
-print(type(b))
-print(b.manufacture())
-b.info()
-print(b.fueltax())
-print(b.licensetax())
-print(b.totaltax())
-
-# 建構第3輛電能車物件
-print("==Test3==")
-c = ElectricCars("Tesla", "Model 3", "紅", 5, 346)
-print(type(c))
-print(c.manufacture())
-c.info()
-print(c.fueltax())
-print(c.licensetax())
-print(c.totaltax())
-print("==Test4==")
-tax(a)
-tax(b)
-tax(c)
-
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
 
 # 輪胎類別
 class Wheels:
@@ -8612,164 +8568,6 @@ print(Motorcycles.counts)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-url = "https://www.dcard.tw/f/stock/p/237123381"
-response = requests.get(url)
-print(response.text)
-
-url = "https://www.dcard.tw/f/stock/p/237123381"
-res = requests.get(url)
-print(res.text)
-
-url = "http://jigsaw.w3.org/HTTP/connection.html"
-response = requests.get(url)
-# print(response.text)
-
-# 在<HEAD></HEAD>區塊中取得包圍網頁標題的指定字串<TITLE></TITLE>所在的位置
-# stripe()去除字串頭尾的'\n'(換行)、'\t'(跳格)、' '(空白)
-datapos1 = response.text.find("<TITLE>")
-datapos2 = response.text.find("</TITLE>")
-data = response.text[datapos1 + 7 : datapos2]
-data = data.strip()
-print("網頁的<TITLE> :", data)
-# 在<BODY></BODY>區塊中取得包圍內容標題的指定字串<H1></H1>所在的位置
-datapos1 = response.text.find("<H1>")
-datapos2 = response.text.find("</H1>")
-data = response.text[datapos1 + 4 : datapos2]
-# 將設定斜體的HTML語法<I></I>移除
-data = data.replace("<I>", "")
-data = data.replace("</I>", "")
-data = data.strip()
-print("<網頁的H1的資料(去掉<I>)> :", data)
-
-datapos1 = response.text.find("<CODE>")
-datapos2 = response.text.find("</CODE>")
-data = response.text[datapos1 + 7 : datapos2]
-data = data.strip()
-print("網頁的<CODE> :", data)
-
-print("------------------------------------------------------------")  # 60個
-
-from bs4 import BeautifulSoup
-
-url = "https://www.dcard.tw/f/stock/p/237123381"
-response = requests.get(url)
-# 指定html.parser作為解析器
-soup = BeautifulSoup(response.text, "html.parser")
-# 把排版後的html印出來，因為未排版前有很多網頁語法缺乏換行符號，不易閱讀
-# 必須借助於Beautiful Shop套件
-print(soup.prettify())
-
-print("------------------------------------------------------------")  # 60個
-
-from bs4 import BeautifulSoup
-
-url = "https://www.dcard.tw/f/stock/p/237123381"
-
-headers = {
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-    "Accept-Encoding": "gzip, deflate, br",
-    "Accept-Language": "zh-TW,zh;q=0.9",
-    "Sec-Fetch-Dest": "document",
-    "Sec-Fetch-Mode": "navigate",
-    "Sec-Fetch-Site": "none",
-    "Upgrade-Insecure-Requests": "1",
-    "User-Agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36",  # 使用者代理
-}
-
-# response = requests.get(url="https://example.com", headers=headers)
-response = requests.get(url, headers=headers)
-# 指定html.parser作為解析器
-soup = BeautifulSoup(response.text, "html.parser")
-# 把排版後的html印出來
-# print(soup.prettify())
-a_tags = soup.find_all("h1")
-
-print("文章標題 :", a_tags[0].contents[0])
-
-print("------------------------------------------------------------")  # 60個
-
-from bs4 import BeautifulSoup
-
-url = "https://www.dcard.tw/f/stock/p/237123381"
-res = requests.get(url)
-# 指定html.parser作為解析器
-soup = BeautifulSoup(res.text, "html.parser")
-# 把排版後的html印出來
-# print(soup.prettify())
-a_tags = soup.find_all("h1")
-
-print("文章標題 :", a_tags[0].contents[0])
-
-a_tags = soup.find_all("div", limit=1)
-a_tag = a_tags[0]
-cc = ""
-for b in a_tag.contents:
-    if str(b).find("gFINpq") >= 0:
-        b = str(b).replace("\n", "").replace("\r", "")
-        cc = cc + b
-print(cc.strip())
-
-print("------------------------------------------------------------")  # 60個
-
-from bs4 import BeautifulSoup
-
-url = "https://www.dcard.tw/f/stock/p/237123381"
-res = requests.get(url)
-# 指定html.parser作為解析器
-soup = BeautifulSoup(res.text, "html.parser")
-# 把排版後的html印出來
-# print(soup.prettify())
-a_tags = soup.find_all("h1")
-
-print("文章標題 :", a_tags[0].contents[0])
-
-a_tags = soup.find_all("div", limit=1)
-a_tag = a_tags[0]
-cc = ""
-for b in a_tag.contents:
-    if str(b).find("gFINpq") >= 0:
-        b = str(b)
-        cc = cc + b
-cc = cc.strip()
-
-data = "原Po文章\n"
-
-# 尋找前四筆，第一個是原Po文章，後三個則為熱門留言
-for j in range(4):
-    # 尋找最附近的<div class>有gFINpq
-    datapos1 = cc.find("gFINpq")
-    # 只保留這個字串以後的文字
-    cc = cc[datapos1:]
-    while True:
-        # 尋找最附近的<span
-        datapos1 = cc.find("<span")
-        # 只保留<span以後的文字
-        cc = cc[datapos1:]
-        # 尋找最附近的>
-        datapos1 = cc.find(">")
-        # 尋找最附近的</span>
-        datapos2 = cc.find("</span>")
-        # 如果<span></span>中間出現了enUbOQ，表示這個步驟該結束了
-        if cc[:datapos2].find("enUbOQ") >= 0:
-            break
-        # 如果<span></span>有資料，就合併在data字串裡
-        if datapos1 + 1 < datapos2:
-            # 但是<span></span>的資料，如果還有span就不行了
-            if cc[datapos1 + 1 : datapos2].find("span") < 0:
-                data = data + cc[datapos1 + 1 : datapos2] + "\n"
-        # 只保留</span>之後的文字
-        cc = cc[datapos2 + 7 :]
-    # 後三個是熱門留言
-    if j < 3:
-        data = data + "\n*******熱門留言" + str(j + 1) + ":\n"
-print(data)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 try:
     # 嘗試打開一個不存在的檔案
     with open("non_existent_file.txt", "r") as f:
@@ -8803,7 +8601,7 @@ for i in range(2, 9 + 1):
 print(type(set99))
 print(set99)
 
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # try-catch-finally
@@ -9701,7 +9499,7 @@ print("建立20組資料")
 USERS = [(i, f"account_{i}", f"nickname_{i}") for i in range(20)]
 
 print(type(USERS))
-print(len(USERS))
+print("資料長度 :", len(USERS))
 print(USERS)
 for _ in USERS:
     print(_)
@@ -10639,7 +10437,7 @@ itchat.auto_login()
 # 查找自己的朋友
 
 friends_list = itchat.get_friends(update=True)
-print(len(friends_list))
+print("資料長度 :", len(friends_list))
 luohao = friends_list[0]
 props = ["NickName", "Signature", "Sex"]
 for prop in props:
@@ -10841,8 +10639,10 @@ print(sum(trials) / float(num_of_trials))
 
 print("------------------------------------------------------------")  # 60個
 
+# ????
+
 print(X)
-print(len(X))
+print("資料長度 :", len(X))
 
 """
 df plot
@@ -12980,8 +12780,10 @@ if __name__ == "__main__":
     print(tostring(r))
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 import shutil
+import requests
 
 image_foldername = "tmp_images"
 filename = "tmp_countryfood2222.html"
@@ -13017,7 +12819,7 @@ filename = "aaaaa.html"
 print("%s 網頁建置完成" % (filename))
 
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
 
 def checkpassword(password):
     # 檢查密碼長度必須是5到10個字元
@@ -13996,6 +13798,7 @@ print(filename)
 
 """
 # 新建資料夾用於放置影像
+# 如果資料夾不存在, 建立之
 if not os.path.isdir('trainer'):
     os.mkdir('trainer')
 os.chdir('trainer')
@@ -14289,136 +14092,4 @@ cc = df.head()
 print(cc)
 print(df.shape)
 
-print("------------------------------------------------------------")  # 60個
-
-import json
-
-# 轉換'確定病例數'欄位內容為整數(以利後面加總)
-df["確定病例數"] = df["確定病例數"].astype(int)
-
-startdate = "2021/07/20"
-
-# 只保留個案研判日、是否為境外移入、確定病例數 三個欄位
-df.drop(["確定病名", "縣市", "鄉鎮", "性別", "年齡層"], inplace=True, axis=1)
-# 設定過濾條件(累積)
-indexNames = df[df["個案研判日"] > startdate].index
-
-# 刪除所有大於指定日期的個案
-df.drop(indexNames, inplace=True)
-# 計算累積確診人數
-total = df.sum()["確定病例數"]
-print("累積確診人數:", total)
-# 設定過濾條件(今日)
-indexNames = df[df["個案研判日"] != startdate].index
-
-# 刪除所有不是指定日期的個案
-df.drop(indexNames, inplace=True)
-# 計算境外移入人數
-imported = df[df["是否為境外移入"] == "是"].sum()["確定病例數"]
-print("今日境外移入人數:", imported)
-# 計算本土人數
-domestic = df[df["是否為境外移入"] == "否"].sum()["確定病例數"]
-print("今日本土人數:", domestic)
-total = imported + domestic
-print("今日總人數:", total)
-
-# 若要查看有哪些欄位
-print((df.keys()))
-
-# 也可以透過df.info()查看
-print(df.info())
-
-# 也可以直接看前幾列
-print(df.head())
-
-print("------------------------------------------------------------")  # 60個
-
-import csv
-
-# from io import StringIO
-
-county = "屏東縣"
-url = "https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1000&api_key=keykeykey&sort=ImportDate%20desc&format=csv"
-# 方法1:下載檔案後儲存，再開啟檔案讀出
-# res = requests.get(url)
-# open('data.csv','wb').write(res.content)
-# df=pd.read_csv('data.csv')
-# 方法2:直接讀取網站的檔案
-df = pd.read_csv(url)
-# 查看有那些欄位
-df.info()
-# 只保留SiteName、County、AQI、Status四個欄位
-df.drop(
-    [
-        "SiteId",
-        "Longitude",
-        "Latitude",
-        "PublishTime",
-        "SO2_AVG",
-        "Pollutant",
-        "SO2",
-        "CO",
-        "NO",
-        "CO_8hr",
-        "O3",
-        "O3_8hr",
-        "PM10",
-        "PM10_AVG",
-        "PM2.5",
-        "PM2.5_AVG",
-        "NO2",
-        "NOx",
-        "WindSpeed",
-        "WindDirec",
-    ],
-    inplace=True,
-    axis=1,
-)
-
-# 設定過濾條件
-indexNames = df[df["County"] != county].index
-# 刪除所有不是臺北市的偵測站
-df.drop(indexNames, inplace=True)
-# 重設索引值
-df = df.reset_index(drop=True)
-# 列出該縣市所有偵測站狀態
-print(county, "空氣品質狀態")
-for i in range(len(df)):
-    print(df.loc[i, "SiteName"], "(", df.loc[i, "Status"], ")")
-indexNames = df[df["Status"] == "良好"].index
-df.drop(indexNames, inplace=True)
-# 重設索引值
-df = df.reset_index(drop=True)
-
-# 列出該縣市所有為達良好之偵測站
-print(county, "空氣品質未達良好之偵測站")
-for i in range(len(df)):
-    print(df.loc[i, "SiteName"], "(", df.loc[i, "Status"], ")")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-import csv
-
-# from io import StringIO
-
-url = "https://od.cdc.gov.tw/eic/covid19/covid19_tw_stats.csv"
-# 方法1:下載檔案後儲存，再開啟檔案讀出
-# res = requests.get(url)
-# open('data.csv','wb').write(res.content)
-# df=pd.read_csv('data.csv')
-# 方法2:直接讀取網站的檔案
-df = pd.read_csv(url)
-
-# 查看有那些欄位
-df.info()
-
-# 只保留確診、死亡、送驗、排除四個欄位
-df.drop(["昨日確診", "昨日排除", "昨日送驗"], inplace=True, axis=1)
-print(df)
-
-totaldeath = df.loc[0, "死亡"]
-print("累積死亡人數", totaldeath)
-
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

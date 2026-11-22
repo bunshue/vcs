@@ -7772,7 +7772,39 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_disk08_Click(object sender, EventArgs e)
         {
+            // 批量修改*.cs檔的文字內容
 
+            string oldString = "david";
+            string newString = "peter";
+
+            string currentFolder = Directory.GetCurrentDirectory();
+
+            foreach (string file in Directory.EnumerateFiles(currentFolder, "*.cs", System.IO.SearchOption.AllDirectories))
+            {
+                //跳過一些檔案
+                if (file.ToLower().Replace(" ", "").Contains("program.cs"))
+                {
+                    continue;
+                }
+                else if (file.ToLower().Replace(" ", "").Contains(".designer.cs"))
+                {
+                    continue;
+                }
+                else if (file.ToLower().Replace(" ", "").Contains("assemblyinfo.cs"))
+                {
+                    continue;
+                }
+                else if (file.ToLower().Replace(" ", "").Contains("csproj"))
+                {
+                    continue;
+                }
+                richTextBox1.Text += file + "\n";
+
+                //string text = File.ReadAllText(file);
+                //text = text.Replace(oldString, newString);
+                //File.WriteAllText(file, text);
+            }
+            richTextBox1.Text += "完成\n";
         }
 
         private void bt_disk09_Click(object sender, EventArgs e)

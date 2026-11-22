@@ -1680,6 +1680,7 @@
             this.bt_disk08.Name = "bt_disk08";
             this.bt_disk08.Size = new System.Drawing.Size(160, 60);
             this.bt_disk08.TabIndex = 40;
+            this.bt_disk08.Text = "批量修改*.cs檔的文字內容";
             this.bt_disk08.UseVisualStyleBackColor = true;
             this.bt_disk08.Click += new System.EventHandler(this.bt_disk08_Click);
             // 
