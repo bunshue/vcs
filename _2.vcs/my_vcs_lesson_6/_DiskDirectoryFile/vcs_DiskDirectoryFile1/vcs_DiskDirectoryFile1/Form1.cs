@@ -7864,26 +7864,19 @@ namespace vcs_DiskDirectoryFile1
                 fs.Read(bom, 0, 4);
 
                 // UTF-8 BOM
-                if (bom[0] == 0xEF &&
-                    bom[1] == 0xBB &&
-                    bom[2] == 0xBF)
+                if (bom[0] == 0xEF && bom[1] == 0xBB && bom[2] == 0xBF)
                     return Encoding.UTF8;
 
                 // UTF-16 LE
-                if (bom[0] == 0xFF &&
-                    bom[1] == 0xFE)
+                if (bom[0] == 0xFF && bom[1] == 0xFE)
                     return Encoding.Unicode;
 
                 // UTF-16 BE
-                if (bom[0] == 0xFE &&
-                    bom[1] == 0xFF)
+                if (bom[0] == 0xFE && bom[1] == 0xFF)
                     return Encoding.BigEndianUnicode;
 
                 // UTF-32
-                if (bom[0] == 0xFF &&
-                    bom[1] == 0xFE &&
-                    bom[2] == 0x00 &&
-                    bom[3] == 0x00)
+                if (bom[0] == 0xFF && bom[1] == 0xFE && bom[2] == 0x00 && bom[3] == 0x00)
                     return Encoding.UTF32;
             }
             return Encoding.Default;
@@ -7897,28 +7890,20 @@ namespace vcs_DiskDirectoryFile1
 
             // BOM
 
-            if (data.Length >= 3 &&
-                data[0] == 0xEF &&
-                data[1] == 0xBB &&
-                data[2] == 0xBF)
+            if (data.Length >= 3 && data[0] == 0xEF && data[1] == 0xBB && data[2] == 0xBF)
                 return new UTF8Encoding(true);
 
-            if (data.Length >= 2 &&
-                data[0] == 0xFF &&
-                data[1] == 0xFE)
+            if (data.Length >= 2 && data[0] == 0xFF && data[1] == 0xFE)
                 return Encoding.Unicode;
 
-            if (data.Length >= 2 &&
-                data[0] == 0xFE &&
-                data[1] == 0xFF)
+            if (data.Length >= 2 && data[0] == 0xFE && data[1] == 0xFF)
                 return Encoding.BigEndianUnicode;
 
             // UTF8 無 BOM
 
             try
             {
-                UTF8Encoding utf8 =
-                    new UTF8Encoding(false, true);
+                UTF8Encoding utf8 = new UTF8Encoding(false, true);
 
                 utf8.GetString(data);
 
@@ -7937,10 +7922,29 @@ namespace vcs_DiskDirectoryFile1
         {
             // 檢查一個檔案的編碼
 
+            string[] filenames = new string[]
+            {
+                "D:/_git/vcs/_1.data/______test_files1/__text/Compressor.c",
+                "D:/_git/vcs/_1.data/______test_files1/__text/Form1.cs.txt",
+                "D:/_git/vcs/_1.data/______test_files1/__text/war_and_peace.txt",
+                "D:/_git/vcs/_1.data/______test_files1/__text/王之渙_涼州詞.txt",
+                "D:/_git/vcs/_1.data/______test_files1/__text/jap/饩Ⓚ丗钡冦冦葢轿瘅.txt",
+                "D:/_git/vcs/_1.data/______test_files1/__text/sc/001川の流れのように.txt",
+            };
 
 
 
+            foreach (string filename in filenames)
+            {
+                richTextBox1.Text += filename + "\n";
+                Encoding enc = DetectEncoding1(filename);
+                richTextBox1.Text += enc + "\n";
+                enc = DetectEncoding2(filename);
+                richTextBox1.Text += enc + "\n";
+            }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void bt_disk10_Click(object sender, EventArgs e)
         {
