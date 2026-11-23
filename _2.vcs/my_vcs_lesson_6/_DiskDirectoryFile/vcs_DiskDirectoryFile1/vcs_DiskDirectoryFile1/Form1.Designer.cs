@@ -1701,6 +1701,7 @@
             this.bt_disk09.Name = "bt_disk09";
             this.bt_disk09.Size = new System.Drawing.Size(160, 60);
             this.bt_disk09.TabIndex = 41;
+            this.bt_disk09.Text = "檢查一個檔案的編碼";
             this.bt_disk09.UseVisualStyleBackColor = true;
             this.bt_disk09.Click += new System.EventHandler(this.bt_disk09_Click);
             // 

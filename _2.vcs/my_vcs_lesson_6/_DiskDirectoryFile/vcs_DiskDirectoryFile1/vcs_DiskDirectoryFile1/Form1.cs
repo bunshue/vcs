@@ -7779,7 +7779,15 @@ namespace vcs_DiskDirectoryFile1
 
             string currentFolder = Directory.GetCurrentDirectory();
 
-            foreach (string file in Directory.EnumerateFiles(currentFolder, "*.cs", System.IO.SearchOption.AllDirectories))
+            System.IO.SearchOption search_option = System.IO.SearchOption.AllDirectories;  // 多層
+            //System.IO.SearchOption search_option = System.IO.SearchOption.TopDirectoryOnly;  // 單層
+
+            //Directory.GetFiles()會先把所有符合的檔案全部找出來，再一次回傳。
+            //Directory.EnumerateFiles()則是一邊找、一邊回傳。
+            //GetFiles() => 一次全部拿回來像 List<string>
+            //EnumerateFiles() => 逐筆產生像 yield return
+            //foreach (string file in Directory.GetFiles(currentFolder, "*.cs", search_option))
+            foreach (string file in Directory.EnumerateFiles(currentFolder, "*.cs", search_option))
             {
                 //跳過一些檔案
                 if (file.ToLower().Replace(" ", "").Contains("program.cs"))
@@ -7800,15 +7808,137 @@ namespace vcs_DiskDirectoryFile1
                 }
                 richTextBox1.Text += file + "\n";
 
+                continue;
+
                 //string text = File.ReadAllText(file);
                 //text = text.Replace(oldString, newString);
                 //File.WriteAllText(file, text);
+
+                /*
+                //指定UTF8編碼
+                string text = File.ReadAllText(file, Encoding.UTF8);
+
+                if (text.Contains(oldString))  // 需要才寫入檔案
+                {
+                    File.Copy(file, file + ".bak", true);  // 備份檔案
+                    text = text.Replace(oldString, newString);
+                    File.WriteAllText(file, text, Encoding.UTF8);
+                }
+                */
+
+                /*
+                //或者, 利用 Replace 的結果來判斷
+                string newText = text.Replace(oldString, newString);
+                if (text != newText)
+                {
+                    File.WriteAllText(file, newText);
+                }
+                */
+
+                //直接利用 StreamReader 偵測編碼
+                using (StreamReader sr = new StreamReader(file, true))
+                {
+                    string text = sr.ReadToEnd();
+
+                    Encoding enc = sr.CurrentEncoding;
+
+                    string newText = text.Replace(oldString, newString);
+
+                    if (text != newText)
+                    {
+                        File.WriteAllText(file, newText, enc);
+                    }
+                }
             }
             richTextBox1.Text += "完成\n";
         }
 
+        //------------------------------------------------------------  # 60個
+
+        //版本一：只判斷 BOM
+        public static Encoding DetectEncoding1(string fileName)
+        {
+            using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+            {
+                byte[] bom = new byte[4];
+                fs.Read(bom, 0, 4);
+
+                // UTF-8 BOM
+                if (bom[0] == 0xEF &&
+                    bom[1] == 0xBB &&
+                    bom[2] == 0xBF)
+                    return Encoding.UTF8;
+
+                // UTF-16 LE
+                if (bom[0] == 0xFF &&
+                    bom[1] == 0xFE)
+                    return Encoding.Unicode;
+
+                // UTF-16 BE
+                if (bom[0] == 0xFE &&
+                    bom[1] == 0xFF)
+                    return Encoding.BigEndianUnicode;
+
+                // UTF-32
+                if (bom[0] == 0xFF &&
+                    bom[1] == 0xFE &&
+                    bom[2] == 0x00 &&
+                    bom[3] == 0x00)
+                    return Encoding.UTF32;
+            }
+            return Encoding.Default;
+        }
+
+
+        //版本二：額外判斷 UTF-8
+        public static Encoding DetectEncoding2(string fileName)
+        {
+            byte[] data = File.ReadAllBytes(fileName);
+
+            // BOM
+
+            if (data.Length >= 3 &&
+                data[0] == 0xEF &&
+                data[1] == 0xBB &&
+                data[2] == 0xBF)
+                return new UTF8Encoding(true);
+
+            if (data.Length >= 2 &&
+                data[0] == 0xFF &&
+                data[1] == 0xFE)
+                return Encoding.Unicode;
+
+            if (data.Length >= 2 &&
+                data[0] == 0xFE &&
+                data[1] == 0xFF)
+                return Encoding.BigEndianUnicode;
+
+            // UTF8 無 BOM
+
+            try
+            {
+                UTF8Encoding utf8 =
+                    new UTF8Encoding(false, true);
+
+                utf8.GetString(data);
+
+                return utf8;
+            }
+            catch
+            {
+            }
+
+            // ANSI/Big5
+
+            return Encoding.Default;
+        }
+
         private void bt_disk09_Click(object sender, EventArgs e)
         {
+            // 檢查一個檔案的編碼
+
+
+
 
         }
 
