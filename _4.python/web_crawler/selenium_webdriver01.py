@@ -178,6 +178,113 @@ print("------------------------------------------------------------")  # 60個
 print("測試 OK ST")
 print("------------------------------------------------------------")  # 60個
 
+url = "https://fchart.github.io/Example.html"
+
+create_driver(url)  # 建立瀏覽器，開啟網頁
+
+print("標題 :", driver.title)
+
+html = driver.page_source  # 網頁原始碼
+
+soup = BeautifulSoup(html, "lxml")
+
+tag_p = soup.find("p")
+print(tag_p.text)
+
+# 現在不能找下一筆
+# tag_p = soup.find("p")
+# print(tag_p.text)
+
+tag_ol = soup.find("ol", {"id": "list"})
+tags_li = tag_ol.find_all("li", class_="line")
+for tag in tags_li:
+    print(tag.text)
+
+print("------------------------------")  # 30個
+
+element_ol = driver.find_element(By.XPATH, '//*[@id="list"]')
+
+print(element_ol.tag_name)
+
+# tags_li = element_ol.find_elements_by_xpath("//li") old
+tags_li = element_ol.find_elements(By.XPATH, "//li")
+
+for tag in tags_li:
+    print(tag.text, tag.get_attribute("class"))
+
+print("------------------------------")  # 30個
+
+element_ol = driver.find_element(By.XPATH, "/html/body/ol")  # 單數
+
+print(element_ol.tag_name)
+
+# tags_li = element_ol.find_elements_by_xpath("//li") old
+tags_li = element_ol.find_elements(By.XPATH, "//li")
+
+for tag in tags_li:
+    print(tag.text, tag.get_attribute("class"))
+
+print("------------------------------")  # 30個
+
+element_ol = driver.find_element(By.XPATH, '//*[@id="list"]')
+print(element_ol.tag_name)
+print(element_ol.get_attribute("innerHTML"))
+
+soup = BeautifulSoup(element_ol.get_attribute("innerHTML"), "lxml")
+tags_li = soup.find_all("li", class_="line")
+for tag in tags_li:
+    print(tag.text)
+
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
+
+print("------------------------------------------------------------")  # 60個
+
+url = "https://fchart.github.io/ML/Example.html"
+
+create_driver(url)  # 建立瀏覽器，開啟網頁
+
+element_ol = driver.find_element(By.XPATH, "/html/body/ol")
+print(element_ol.tag_name)
+tags_li = element_ol.find_elements(By.XPATH, "//li")
+for tag in tags_li:
+    print(tag.text, tag.get_attribute("class"))
+
+print("------------------------------")  # 30個
+
+element_ol = driver.find_element(By.XPATH, "/html/body/ol")
+print(element_ol.tag_name)
+tags_li = element_ol.find_elements(By.XPATH, "//li")
+for tag in tags_li:
+    print(tag.text, tag.get_attribute("class"))
+
+print("------------------------------")  # 30個
+
+element_ol = driver.find_element(By.XPATH, '//*[@id="list"]')
+print(element_ol.tag_name)
+print(element_ol.get_attribute("innerHTML"))
+soup = BeautifulSoup(element_ol.get_attribute("innerHTML"), "lxml")
+
+print("找全部的xx<li> + 條件")
+tags_li = soup.find_all("li", class_="line")
+for tag in tags_li:
+    print(tag.text)
+
+print("------------------------------")  # 30個
+
+element_ol = driver.find_element(By.XPATH, '//*[@id="list"]')
+print(element_ol.tag_name)
+print(element_ol.get_attribute("innerHTML"))
+soup = BeautifulSoup(element_ol.get_attribute("innerHTML"), "lxml")
+
+print("找全部的xx<li> + 條件")
+tags_li = soup.find_all("li", class_="line")
+for tag in tags_li:
+    print(tag.text)
+
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 """
 查詢歷史資料 範例
 https://rate.bot.com.tw/xrt/all/2023-03-20

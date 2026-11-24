@@ -1020,6 +1020,7 @@ print("BeautifulSoup 測試 讀取本地 html 1")
 # html_data.encoding = "utf8"
 # soup = BeautifulSoup(html_data.text, "lxml")
 
+# 讀取本地檔案 same, 改成讀出來
 # 讀取本地檔案
 with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
@@ -1359,138 +1360,54 @@ for tag in tag_list:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# 讀取本地檔案 same, 改成讀出來
+# fp = open("data/Example2.html", "r", encoding="utf8")
+# string_html_data = fp.read()
 
-def create_driver(url):
-    global driver
-    driver = webdriver.Chrome()  # 使用Chrome
-    # driver = webdriver.Firefox()  # 使用Firefox
-    # driver = webdriver.Edge()  # 使用Edge
-    driver.maximize_window()  # 全螢幕顯示
-    driver.implicitly_wait(2)  # 等待網頁載入
-    driver.get(url)  # 打開瀏覽器，開啟網頁
+string_html_data = """
+<html lang="big5">
+ <head>
+  <meta charset="utf-8"/>
+  <title>測試資料擷取的HTML網頁</title>
+ </head>
+ <body>
+  <div class="surveys" id="surveys">
+   <div class="survey" id="q1">
+    <p class="question">
+      <a href="http://example.com/q1">請問你的性別?</a></p>
+    <ul class="answer">
+     <li class="response">男-<span>10</span></li>
+     <li class="response selected">女-<span>20</span></li>
+    </ul>
+   </div>
+   <div class="survey" id="q2">
+    <p class="question">
+      <a href="http://example.com/q2">請問你是否喜歡偵探小說?</a></p>
+    <ul class="answer">
+     <li class="response">喜歡-<span>40</span></li>
+     <li class="response selected">普通-<span>20</span></li>
+     <li class="response">不喜歡-<span>0</span></li>
+    </ul>
+   </div>
+   <div class="survey" id="q3">
+    <p class="question">
+      <a href="http://example.com/q3">請問你是否會程式設計?</a></p>
+    <ul class="answer">
+     <li class="response selected">會-<span>30</span></li>
+     <li class="response">不會-<span>6</span></li>
+    </ul>
+   </div>
+  </div>
+  <div class="emails" id="emails">
+    <div class="question">電子郵件清單資訊: </div>
+    abc@example.com
+    <div class="survey" data-custom="important">def@example.com</div>
+    <span class="survey" id="email">ghi@example.com</div>
+  </div>
+ </body>
+</html>
+"""
 
-
-# 關閉瀏覽器並且退出驅動程序
-def destroy_driver():
-    # driver.close()  # 關閉瀏覽器目前分頁
-    driver.quit()  # 關閉瀏覽器並且退出驅動程序
-
-
-# 使用 selenium 抓資料 分析還是用 bs4
-
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-
-url = "https://fchart.github.io/Example.html"
-
-create_driver(url)  # 建立瀏覽器，開啟網頁
-
-print("標題 :", driver.title)
-
-html = driver.page_source  # 網頁原始碼
-
-soup = BeautifulSoup(html, "lxml")
-
-tag_p = soup.find("p")
-print(tag_p.text)
-
-# 現在不能找下一筆
-# tag_p = soup.find("p")
-# print(tag_p.text)
-
-tag_ol = soup.find("ol", {"id": "list"})
-tags_li = tag_ol.find_all("li", class_="line")
-for tag in tags_li:
-    print(tag.text)
-
-print("------------------------------")  # 30個
-
-element_ol = driver.find_element(By.XPATH, '//*[@id="list"]')
-
-print(element_ol.tag_name)
-
-# tags_li = element_ol.find_elements_by_xpath("//li") old
-tags_li = element_ol.find_elements(By.XPATH, "//li")
-
-for tag in tags_li:
-    print(tag.text, tag.get_attribute("class"))
-
-print("------------------------------")  # 30個
-
-element_ol = driver.find_element(By.XPATH, "/html/body/ol")  # 單數
-
-print(element_ol.tag_name)
-
-# tags_li = element_ol.find_elements_by_xpath("//li") old
-tags_li = element_ol.find_elements(By.XPATH, "//li")
-
-for tag in tags_li:
-    print(tag.text, tag.get_attribute("class"))
-
-print("------------------------------")  # 30個
-
-element_ol = driver.find_element(By.XPATH, '//*[@id="list"]')
-print(element_ol.tag_name)
-print(element_ol.get_attribute("innerHTML"))
-
-soup = BeautifulSoup(element_ol.get_attribute("innerHTML"), "lxml")
-tags_li = soup.find_all("li", class_="line")
-for tag in tags_li:
-    print(tag.text)
-
-destroy_driver()  # 關閉瀏覽器並且退出驅動程序
-
-print("------------------------------------------------------------")  # 60個
-
-url = "https://fchart.github.io/ML/Example.html"
-
-create_driver(url)  # 建立瀏覽器，開啟網頁
-
-element_ol = driver.find_element(By.XPATH, "/html/body/ol")
-print(element_ol.tag_name)
-tags_li = element_ol.find_elements(By.XPATH, "//li")
-for tag in tags_li:
-    print(tag.text, tag.get_attribute("class"))
-
-print("------------------------------")  # 30個
-
-element_ol = driver.find_element(By.XPATH, "/html/body/ol")
-print(element_ol.tag_name)
-tags_li = element_ol.find_elements(By.XPATH, "//li")
-for tag in tags_li:
-    print(tag.text, tag.get_attribute("class"))
-
-print("------------------------------")  # 30個
-
-element_ol = driver.find_element(By.XPATH, '//*[@id="list"]')
-print(element_ol.tag_name)
-print(element_ol.get_attribute("innerHTML"))
-soup = BeautifulSoup(element_ol.get_attribute("innerHTML"), "lxml")
-
-print("找全部的xx<li> + 條件")
-tags_li = soup.find_all("li", class_="line")
-for tag in tags_li:
-    print(tag.text)
-
-print("------------------------------")  # 30個
-
-element_ol = driver.find_element(By.XPATH, '//*[@id="list"]')
-print(element_ol.tag_name)
-print(element_ol.get_attribute("innerHTML"))
-soup = BeautifulSoup(element_ol.get_attribute("innerHTML"), "lxml")
-
-print("找全部的xx<li> + 條件")
-tags_li = soup.find_all("li", class_="line")
-for tag in tags_li:
-    print(tag.text)
-
-destroy_driver()  # 關閉瀏覽器並且退出驅動程序
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-fp = open("data/Example2.html", "r", encoding="utf8")
-string_html_data = fp.read()
 print("檔案內容:")
 print(string_html_data)
 
@@ -1498,6 +1415,7 @@ print("------------------------------")  # 30個
 
 # 搜尋HTML標籤
 soup = BeautifulSoup(string_html_data, "lxml")
+
 tag_a = soup.find("a")
 print(tag_a.string)
 
@@ -1634,10 +1552,10 @@ print("---------------")  # 15個
 print(tag_list[0].string)
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
-with open("data/Example2.html", "r", encoding="utf8") as fp:
-    soup = BeautifulSoup(fp, "lxml")
+# html 承上
+
+soup = BeautifulSoup(string_html_data, "lxml")
 
 # 使用childen屬性取得子標籤
 tag_div = soup.select("#q2")  # 找到第2題
@@ -4991,30 +4909,9 @@ print(house)
 """
 
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
 # 開始畫圖
-
 print("------------------------------------------------------------")  # 60個
-
-# 共同
-import os
-import sys
-import math
-import random
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-
-font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
-# 設定中文字型及負號正確顯示
-# 設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
-# 設定負號
-plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
-plt.rcParams["font.size"] = 12  # 設定字型大小
-
-print("------------------------------------------------------------")  # 60個
-
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="plot 集合 1 函數曲線",
@@ -5025,12 +4922,6 @@ plt.figure(
     linewidth=1,
     frameon=True,
 )
-
-# 設定中文字型及負號正確顯示
-# 設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
-# 設定負號
-plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
 # 第一張圖
 plt.subplot(211)
@@ -5053,11 +4944,7 @@ plt.ylabel("戶數")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
 print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
 
 """
 url = 'https://siluo.household.yunlin.gov.tw/popul05/List.aspx?Parser=99,5,47,,,,,,,,,,,,,,,,,,,,,4'
@@ -5073,20 +4960,15 @@ for link in links:
     for ddd in dddd:
         print(ddd.text.strip())
     print()
-
-
 """
 
 """
-
 #人口統計
 person_data = list()    #人口統計資料
 data1 = soup.find("tbody")
 #print(data1)
 
-
 <li class="list_date">
-
 
 rows = data1.find_all("tr")
 for row in rows:
