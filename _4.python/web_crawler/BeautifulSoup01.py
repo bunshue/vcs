@@ -43,7 +43,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-print("準備工作")
+print("準備工作", time.ctime())
 print("------------------------------------------------------------")  # 60個
 
 import re
@@ -100,7 +100,7 @@ headers = {
 }
 
 cookies = {"over18": "1"}
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("讀取本地html ST")
 print("------------------------------------------------------------")  # 60個
@@ -1358,7 +1358,137 @@ for tag in tag_list:
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
+
+def create_driver(url):
+    global driver
+    driver = webdriver.Chrome()  # 使用Chrome
+    # driver = webdriver.Firefox()  # 使用Firefox
+    # driver = webdriver.Edge()  # 使用Edge
+    driver.maximize_window()  # 全螢幕顯示
+    driver.implicitly_wait(2)  # 等待網頁載入
+    driver.get(url)  # 打開瀏覽器，開啟網頁
+
+
+# 關閉瀏覽器並且退出驅動程序
+def destroy_driver():
+    # driver.close()  # 關閉瀏覽器目前分頁
+    driver.quit()  # 關閉瀏覽器並且退出驅動程序
+
+
+# 使用 selenium 抓資料 分析還是用 bs4
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+
+url = "https://fchart.github.io/Example.html"
+
+create_driver(url)  # 建立瀏覽器，開啟網頁
+
+print("標題 :", driver.title)
+
+html = driver.page_source  # 網頁原始碼
+
+soup = BeautifulSoup(html, "lxml")
+
+tag_p = soup.find("p")
+print(tag_p.text)
+
+# 現在不能找下一筆
+# tag_p = soup.find("p")
+# print(tag_p.text)
+
+tag_ol = soup.find("ol", {"id": "list"})
+tags_li = tag_ol.find_all("li", class_="line")
+for tag in tags_li:
+    print(tag.text)
+
+print("------------------------------")  # 30個
+
+element_ol = driver.find_element(By.XPATH, '//*[@id="list"]')
+
+print(element_ol.tag_name)
+
+# tags_li = element_ol.find_elements_by_xpath("//li") old
+tags_li = element_ol.find_elements(By.XPATH, "//li")
+
+for tag in tags_li:
+    print(tag.text, tag.get_attribute("class"))
+
+print("------------------------------")  # 30個
+
+element_ol = driver.find_element(By.XPATH, "/html/body/ol")  # 單數
+
+print(element_ol.tag_name)
+
+# tags_li = element_ol.find_elements_by_xpath("//li") old
+tags_li = element_ol.find_elements(By.XPATH, "//li")
+
+for tag in tags_li:
+    print(tag.text, tag.get_attribute("class"))
+
+print("------------------------------")  # 30個
+
+element_ol = driver.find_element(By.XPATH, '//*[@id="list"]')
+print(element_ol.tag_name)
+print(element_ol.get_attribute("innerHTML"))
+
+soup = BeautifulSoup(element_ol.get_attribute("innerHTML"), "lxml")
+tags_li = soup.find_all("li", class_="line")
+for tag in tags_li:
+    print(tag.text)
+
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
+
+print("------------------------------------------------------------")  # 60個
+
+url = "https://fchart.github.io/ML/Example.html"
+
+create_driver(url)  # 建立瀏覽器，開啟網頁
+
+element_ol = driver.find_element(By.XPATH, "/html/body/ol")
+print(element_ol.tag_name)
+tags_li = element_ol.find_elements(By.XPATH, "//li")
+for tag in tags_li:
+    print(tag.text, tag.get_attribute("class"))
+
+print("------------------------------")  # 30個
+
+element_ol = driver.find_element(By.XPATH, "/html/body/ol")
+print(element_ol.tag_name)
+tags_li = element_ol.find_elements(By.XPATH, "//li")
+for tag in tags_li:
+    print(tag.text, tag.get_attribute("class"))
+
+print("------------------------------")  # 30個
+
+element_ol = driver.find_element(By.XPATH, '//*[@id="list"]')
+print(element_ol.tag_name)
+print(element_ol.get_attribute("innerHTML"))
+soup = BeautifulSoup(element_ol.get_attribute("innerHTML"), "lxml")
+
+print("找全部的xx<li> + 條件")
+tags_li = soup.find_all("li", class_="line")
+for tag in tags_li:
+    print(tag.text)
+
+print("------------------------------")  # 30個
+
+element_ol = driver.find_element(By.XPATH, '//*[@id="list"]')
+print(element_ol.tag_name)
+print(element_ol.get_attribute("innerHTML"))
+soup = BeautifulSoup(element_ol.get_attribute("innerHTML"), "lxml")
+
+print("找全部的xx<li> + 條件")
+tags_li = soup.find_all("li", class_="line")
+for tag in tags_li:
+    print(tag.text)
+
+destroy_driver()  # 關閉瀏覽器並且退出驅動程序
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 fp = open("data/Example2.html", "r", encoding="utf8")
 string_html_data = fp.read()
 print("檔案內容:")
@@ -5553,22 +5683,13 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
 
-
+# 6060
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
+# 3030
+print("------------------------------")  # 30個
 # 1515
 print("---------------")  # 15個
 
-# 3030
-print("------------------------------")  # 30個
 
 """
 # 基本

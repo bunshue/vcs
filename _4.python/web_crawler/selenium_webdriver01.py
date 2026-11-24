@@ -60,7 +60,7 @@ def destroy_driver():
 
 print(time.ctime())
 print("------------------------------------------------------------")  # 60個
-'''
+
 url = "https://www.google.com"
 
 driver = webdriver.Chrome()  # 使用Chrome
@@ -602,7 +602,6 @@ driver.get(url)
 print("標題 :", driver.title)
 
 # destroy_driver()  # 關閉瀏覽器並且退出驅動程序
-
 """
 print("------------------------------------------------------------")  # 60個
 
@@ -1205,7 +1204,7 @@ print("------------------------------------------------------------")  # 60個
 例如，用加header或cookie的方法?
 
 程式碼:
-    
+"""
 url = "https://www.google.com"
 driver = webdriver.Chrome()
 driver.maximize_window()
@@ -1217,7 +1216,6 @@ time.sleep(1)
 
 search_box.submit()  # 送出表單
 
-"""
 # 是可以連到google網站，但是輸入字串後，按確定
 # 他會出現系統偵測到機器人，需要人工驗證，
 
@@ -1528,7 +1526,7 @@ print("------------------------------------------------------------")  # 60個
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-"""
+
 url = "https://fchart.github.io/test.html"
 create_driver(url)  # 建立瀏覽器，開啟網頁
 
@@ -1596,161 +1594,6 @@ driver.get(url)
 print("標題 :", driver.title)
 
 # print("網頁原始碼：\n", driver.page_source)
-
-destroy_driver()  # 關閉瀏覽器並且退出驅動程序
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-'''
-url = "https://fchart.github.io/ML/Example.html"
-url = "https://fchart.github.io/Example.html"
-
-create_driver(url)  # 建立瀏覽器，開啟網頁
-
-print("標題 :", driver.title)
-
-html = driver.page_source  # 網頁原始碼
-soup = BeautifulSoup(html, "lxml")
-
-
-tag_p = soup.find("p")
-print(tag_p.text)
-
-# 現在不能找下一筆
-# tag_p = soup.find("p")
-# print(tag_p.text)
-
-tag_ol = soup.find("ol", {"id": "list"})
-tags_li = tag_ol.find_all("li", class_="line")
-for tag in tags_li:
-    print(tag.text)
-
-destroy_driver()  # 關閉瀏覽器並且退出驅動程序
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-url = "https://fchart.github.io/Example.html"
-
-create_driver(url)  # 建立瀏覽器，開啟網頁
-
-element_ol = driver.find_element(By.XPATH, '//*[@id="list"]')
-
-print(element_ol.tag_name)
-
-# tags_li = element_ol.find_elements_by_xpath("//li") old
-tags_li = element_ol.find_elements(By.XPATH, "//li")
-
-for tag in tags_li:
-    print(tag.text, tag.get_attribute("class"))
-
-destroy_driver()  # 關閉瀏覽器並且退出驅動程序
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-url = "https://fchart.github.io/Example.html"
-create_driver(url)  # 建立瀏覽器，開啟網頁
-
-element_ol = driver.find_element(By.XPATH, "/html/body/ol")  # 單數
-
-print(element_ol.tag_name)
-
-# tags_li = element_ol.find_elements_by_xpath("//li") old
-tags_li = element_ol.find_elements(By.XPATH, "//li")
-
-for tag in tags_li:
-    print(tag.text, tag.get_attribute("class"))
-
-destroy_driver()  # 關閉瀏覽器並且退出驅動程序
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-url = "https://fchart.github.io/Example.html"
-
-create_driver(url)  # 建立瀏覽器，開啟網頁
-
-element_ol = driver.find_element(By.XPATH, '//*[@id="list"]')
-print(element_ol.tag_name)
-print(element_ol.get_attribute("innerHTML"))
-
-soup = BeautifulSoup(element_ol.get_attribute("innerHTML"), "lxml")
-tags_li = soup.find_all("li", class_="line")
-for tag in tags_li:
-    print(tag.text)
-
-destroy_driver()  # 關閉瀏覽器並且退出驅動程序
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-url = "https://fchart.github.io/ML/Example.html"
-
-create_driver(url)  # 建立瀏覽器，開啟網頁
-
-element_ol = driver.find_element(By.XPATH, "/html/body/ol")
-print(element_ol.tag_name)
-tags_li = element_ol.find_elements(By.XPATH, "//li")
-for tag in tags_li:
-    print(tag.text, tag.get_attribute("class"))
-
-destroy_driver()  # 關閉瀏覽器並且退出驅動程序
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-url = "https://fchart.github.io/ML/Example.html"
-
-driver = webdriver.Chrome()  # 使用Chrome
-driver.implicitly_wait(10)  # 等待網頁載入
-driver.get(url)
-
-element_ol = driver.find_element(By.XPATH, "/html/body/ol")
-print(element_ol.tag_name)
-tags_li = element_ol.find_elements(By.XPATH, "//li")
-for tag in tags_li:
-    print(tag.text, tag.get_attribute("class"))
-
-destroy_driver()  # 關閉瀏覽器並且退出驅動程序
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-url = "https://fchart.github.io/ML/Example.html"
-
-driver = webdriver.Chrome()  # 使用Chrome
-driver.implicitly_wait(10)  # 等待網頁載入
-driver.get(url)
-
-element_ol = driver.find_element(By.XPATH, '//*[@id="list"]')
-print(element_ol.tag_name)
-print(element_ol.get_attribute("innerHTML"))
-soup = BeautifulSoup(element_ol.get_attribute("innerHTML"), "lxml")
-
-print("找全部的xx<li> + 條件")
-tags_li = soup.find_all("li", class_="line")
-for tag in tags_li:
-    print(tag.text)
-
-destroy_driver()  # 關閉瀏覽器並且退出驅動程序
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-url = "https://fchart.github.io/ML/Example.html"
-
-create_driver(url)  # 建立瀏覽器，開啟網頁
-
-element_ol = driver.find_element(By.XPATH, '//*[@id="list"]')
-print(element_ol.tag_name)
-print(element_ol.get_attribute("innerHTML"))
-soup = BeautifulSoup(element_ol.get_attribute("innerHTML"), "lxml")
-
-print("找全部的xx<li> + 條件")
-tags_li = soup.find_all("li", class_="line")
-for tag in tags_li:
-    print(tag.text)
 
 destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
@@ -1846,7 +1689,6 @@ destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """
-"""
 # NG
 url = "https://rent.housefun.com.tw/region/�x�_��/?cid=0000"
 
@@ -1871,7 +1713,7 @@ for item in items:
     print("-------------------")
 
 destroy_driver()  # 關閉瀏覽器並且退出驅動程序
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
