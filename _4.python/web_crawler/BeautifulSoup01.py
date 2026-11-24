@@ -100,7 +100,7 @@ headers = {
 }
 
 cookies = {"over18": "1"}
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("讀取本地html ST")
 print("------------------------------------------------------------")  # 60個
@@ -1358,8 +1358,8 @@ for tag in tag_list:
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-fp = open("data/Example.html", "r", encoding="utf8")
+'''
+fp = open("data/Example2.html", "r", encoding="utf8")
 string_html_data = fp.read()
 print("檔案內容:")
 print(string_html_data)
@@ -1506,7 +1506,7 @@ print(tag_list[0].string)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-with open("data/Example.html", "r", encoding="utf8") as fp:
+with open("data/Example2.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
 
 # 使用childen屬性取得子標籤

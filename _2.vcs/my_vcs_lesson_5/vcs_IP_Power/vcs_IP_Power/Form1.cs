@@ -23,6 +23,9 @@ namespace vcs_IP_Power
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            this.BackColor = Color.LightGray;
+            Command_IP_Power_Info();
         }
 
         void show_item_location()
@@ -46,7 +49,8 @@ namespace vcs_IP_Power
                 richTextBox1.Location = new Point(x_st + dx * 2 + 10, y_st + dy * 0);
                 bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-                this.Size = new Size(800, 590);
+                //針對某控件的邊緣 設定表單大小
+                this.ClientSize = new Size(richTextBox1.Right + 10, richTextBox1.Bottom + 10);
             }
             else
             {
@@ -69,13 +73,15 @@ namespace vcs_IP_Power
                 richTextBox1.Location = new Point(x_st + dx * 2 + 10, y_st + dy * 0);
                 bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-                this.Size = new Size(340, 520);
+                //針對某控件的邊緣 設定表單大小
+                this.ClientSize = new Size(button3.Right + 10, button4.Bottom + 10);
             }
             this.Text = "vcs_IP_Power";
+            this.BackColor = Color.LightGray;
 
-            //設定執行後的表單起始位置, 正中央
+            //設定執行後的表單起始位置, 中間偏右
             this.StartPosition = FormStartPosition.Manual;
-            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+            this.Location = new Point(Screen.PrimaryScreen.Bounds.Width - this.Size.Width, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -184,6 +190,18 @@ namespace vcs_IP_Power
             {
                 html = wc.DownloadString(url);
                 richTextBox1.Text += html + "\n";
+                if (html.Contains("p61=1"))
+                {
+                    this.BackColor = Color.DarkGreen;
+                }
+                else if (html.Contains("p61=0"))
+                {
+                    this.BackColor = Color.Red;
+                }
+                else
+                {
+                    this.BackColor = Color.LightGray;
+                }
             }
             catch (WebException ex)
             {
@@ -271,25 +289,30 @@ namespace vcs_IP_Power
         private void button0_Click(object sender, EventArgs e)
         {
             Command_IP_Power_Reset();
+            this.BackColor = Color.DarkGreen;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            this.BackColor = Color.LightGray;
             Command_IP_Power_Info();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             Command_IP_Power_ON();
+            this.BackColor = Color.DarkGreen;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             Command_IP_Power_OFF();
+            this.BackColor = Color.Red;
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            this.BackColor = Color.Red;
             Application.Exit();
         }
     }

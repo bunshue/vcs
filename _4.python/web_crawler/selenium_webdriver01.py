@@ -60,7 +60,7 @@ def destroy_driver():
 
 print(time.ctime())
 print("------------------------------------------------------------")  # 60個
-
+'''
 url = "https://www.google.com"
 
 driver = webdriver.Chrome()  # 使用Chrome
@@ -347,6 +347,7 @@ html = driver.page_source  # 網頁原始碼
 
 # data = pd.read_html(html) old FutureWarning
 from io import StringIO
+
 data = pd.read_html(StringIO(html))
 # 新版要求你明確告訴 pandas：「這是一段字串，不是網址或檔案名稱」
 
@@ -715,10 +716,20 @@ url = "https://www.cwa.gov.tw/V8/C/W/County/County.html?CID=65"
 create_driver(url)  # 建立瀏覽器，開啟網頁
 
 html = driver.page_source  # 網頁原始碼
+print(html)
+
 soup = BeautifulSoup(html, "lxml")
 
 span = soup.select_one("span.tem-C.is-active")
-print(span.text)
+print("體感溫度C :", span.text)
+
+span = soup.select_one("span.tem-F.is-hidden")
+print("體感溫度F :", span.text)
+
+span = soup.find_all("a", class_="icon_zone")
+print("總數 :", len(span))
+for sss in span:
+    cc = sss.find("class")
 
 destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
@@ -1206,11 +1217,7 @@ time.sleep(1)
 
 search_box.submit()  # 送出表單
 
-
-sys.exit()
 """
-
-
 # 是可以連到google網站，但是輸入字串後，按確定
 # 他會出現系統偵測到機器人，需要人工驗證，
 
@@ -1594,7 +1601,7 @@ destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 url = "https://fchart.github.io/ML/Example.html"
 url = "https://fchart.github.io/Example.html"
 
@@ -1604,6 +1611,14 @@ print("標題 :", driver.title)
 
 html = driver.page_source  # 網頁原始碼
 soup = BeautifulSoup(html, "lxml")
+
+
+tag_p = soup.find("p")
+print(tag_p.text)
+
+# 現在不能找下一筆
+# tag_p = soup.find("p")
+# print(tag_p.text)
 
 tag_ol = soup.find("ol", {"id": "list"})
 tags_li = tag_ol.find_all("li", class_="line")
@@ -1859,7 +1874,6 @@ destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-"""
 
 print("在 google / youtube / yahoo / 維基百科 輸入搜尋字串, 並存圖")
 
@@ -2778,63 +2792,6 @@ print("共下載", n, "張圖片")
 # destroy_driver()  # 關閉瀏覽器並且退出驅動程序
 
 print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-sys.exit()
-
-
-# 6060
-print("------------------------------------------------------------")  # 60個
-# 3030
-print("------------------------------")  # 30個
-# 1515
-print("---------------")  # 15個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("暫存文字 ST")
-print("------------------------------------------------------------")  # 60個
-
-
-"""
-find_element
-
-Selenium 4.3.0 及以上版本已正式移除所有 
-
-find_element_by_*   與 
-find_elements_by_*  系列方法。你需要改用統一的 
-
-find_elements() 方法並搭配 By 模組來定位網頁元素。
-
-# 舊寫法（Selenium 3，已失效）
-# elements = driver.find_elements_by_css_selector("你的CSS選擇器")
-
-# 新寫法（Selenium 4+）
-element = driver.find_element(By.ID, "author")  # 單數
-elements = driver.find_elements(By.CSS_SELECTOR, btn_css)  # 複數
-
-"""
-
-
-"""
-其他常見定位方式對照表
-
-如果程式碼中還有其他舊版的 find_element_by_* 語法，可以參考下表一併替換（若要尋找多個元素，只需將 find_element 改為 find_elements 即可）
-
-舊版語法 (Selenium 3)				新版語法 (Selenium 4+)
-driver.find_element_by_name("...")		driver.find_element(By.NAME, "...")
-driver.find_element_by_id("...")		driver.find_element(By.ID, "...")
-driver.find_element_by_xpath("...")		driver.find_element(By.XPATH, "...")
-driver.find_element_by_class_name("...")	driver.find_element(By.CLASS_NAME, "...")
-driver.find_element_by_css_selector("...")	driver.find_element(By.CSS_SELECTOR, "...")
-driver.find_element_by_tag_name("...")		driver.find_element(By.TAG_NAME, "...")
-"""
-
-print("------------------------------------------------------------")  # 60個
-print("暫存文字 SP")
 print("------------------------------------------------------------")  # 60個
 
 
@@ -4183,6 +4140,61 @@ print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
+
+
+# 6060
+print("------------------------------------------------------------")  # 60個
+# 3030
+print("------------------------------")  # 30個
+# 1515
+print("---------------")  # 15個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("暫存文字 ST")
+print("------------------------------------------------------------")  # 60個
+
+
+"""
+find_element
+
+Selenium 4.3.0 及以上版本已正式移除所有 
+
+find_element_by_*   與 
+find_elements_by_*  系列方法。你需要改用統一的 
+
+find_elements() 方法並搭配 By 模組來定位網頁元素。
+
+# 舊寫法（Selenium 3，已失效）
+# elements = driver.find_elements_by_css_selector("你的CSS選擇器")
+
+# 新寫法（Selenium 4+）
+element = driver.find_element(By.ID, "author")  # 單數
+elements = driver.find_elements(By.CSS_SELECTOR, btn_css)  # 複數
+
+"""
+
+
+"""
+其他常見定位方式對照表
+
+如果程式碼中還有其他舊版的 find_element_by_* 語法，可以參考下表一併替換（若要尋找多個元素，只需將 find_element 改為 find_elements 即可）
+
+舊版語法 (Selenium 3)				新版語法 (Selenium 4+)
+driver.find_element_by_name("...")		driver.find_element(By.NAME, "...")
+driver.find_element_by_id("...")		driver.find_element(By.ID, "...")
+driver.find_element_by_xpath("...")		driver.find_element(By.XPATH, "...")
+driver.find_element_by_class_name("...")	driver.find_element(By.CLASS_NAME, "...")
+driver.find_element_by_css_selector("...")	driver.find_element(By.CSS_SELECTOR, "...")
+driver.find_element_by_tag_name("...")		driver.find_element(By.TAG_NAME, "...")
+"""
+
+print("------------------------------------------------------------")  # 60個
+print("暫存文字 SP")
+print("------------------------------------------------------------")  # 60個
 
 
 """
