@@ -11,36 +11,42 @@ import pathlib
 
 print("------------------------------------------------------------")  # 60個
 
-print("列出子目錄：")
-p = pathlib.Path(".")
-print(p)
+print("HOME :", pathlib.Path.home())
+print("CWD  :", pathlib.Path.cwd())
+print("CWD  :", pathlib.Path(".").resolve())  # 取出絕對路徑檔名
+
+cc = pathlib.Path.cwd() / "tmp_newfolder"
+print("NEW  :", cc)
+
+print("列出目前目錄 :")
+file = pathlib.Path(".")
+print("相對路徑 :", file)
+print("絕對路徑 :", file.resolve())  # 取出絕對路徑檔名
 
 print("在當前目錄樹下列出 Python 原始碼檔案：")
-cc = list(p.glob("**/*.py"))
+cc = list(file.glob("**/*.py"))
 print(cc)
 
 print("瀏覽目錄樹內部：")
 
 foldername = "D:/_git/vcs/_1.data"
-p = pathlib.Path(foldername)
-q = p / "______test_files3" / "_excel"
+file = pathlib.Path(foldername)
+q = file / "______test_files3" / "_excel"
 print(q)
 
-q.resolve()
+print("絕對路徑 :", q.resolve())  # 取出絕對路徑檔名
 
 print("查詢路徑屬性：")
-
 print("q.exists()", q.exists())
-
 print("q.is_dir()", q.is_dir())
 
 
 foldername = "D:/_git/vcs/_4.python/_data/"
-p = pathlib.Path(foldername)
-q = p / "article2.txt"
+file = pathlib.Path(foldername)
+q = file / "article2.txt"
 print(q)
 
-# q.resolve()
+print("絕對路徑 :", q.resolve())  # 取出絕對路徑檔名
 
 # filename = 'D:/_git/vcs/_4.python/_data/article2.txt'
 
@@ -63,69 +69,65 @@ cc = pathlib.PureWindowsPath(foldername).root
 print("所在的root : ", cc)
 
 
-p = pathlib.PureWindowsPath("C:/AA/BB/CC/DD/EE/FF/GG/HH/II/JJ/kk.py")
-print(p.parents[0])
-print(p.parents[1])
-print(p.parents[2])
-print(p.parents[3])
-print(p.parents[4])
-print(p.parents[5])
+file = pathlib.PureWindowsPath("C:/AA/BB/CC/DD/EE/FF/GG/HH/II/JJ/kk.py")
+print(file.parents[0])
+print(file.parents[1])
+print(file.parents[2])
+print(file.parents[3])
+print(file.parents[4])
+print(file.parents[5])
 
-p = pathlib.PurePath("C:/AA/BB/CC/DD/EE/FF/GG/HH/II/JJ/kk.py")
-# 邏輯上的父路徑：
-print(p.parent)
-
-
-print("CWD :", pathlib.Path.cwd())
-print("HOME :", pathlib.Path.home())
-
+file = pathlib.PurePath("C:/AA/BB/CC/DD/EE/FF/GG/HH/II/JJ/kk.py")
+print(file.parent)  # 邏輯上的父路徑
 
 filename = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
-p = pathlib.Path(filename)
+file = pathlib.Path(filename)
 
-print(p.stat().st_mode)
+print(file.stat().st_mode)
 
-print(p.chmod(0o444))
+print(file.chmod(0o444))
 
-print(p.stat().st_mode)
+print(file.stat().st_mode)
 
 """
 Path.is_dir()
 Path.is_file()
 """
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 path = pathlib.Path("test10_new06.py")
-abs_path = path.resolve()
-print(abs_path)
+print("絕對路徑 :", path.resolve())  # 取出絕對路徑檔名
+
 new_path = str(abs_path) + ".old"
 print(new_path)
 
+path = pathlib.Path(os.pardir)
+print(path)
+print("絕對路徑 :", path.resolve())  # 取出絕對路徑檔名
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filepath = "檔案操作_新進1.py"
-p = pathlib.Path(filepath)
-print("檔案路徑　　　 = " + str(p))
-print("檔案名稱　　　　 = " + p.name)
-print("檔案副檔名　　 = " + p.suffix)
-print("檔案副檔名以外 = " + p.stem)
-print("資料夾名稱　　　　 = " + p.parent.name)
-print("檔案大小　　 = " + str(p.stat().st_size) + "位元組")
+file = pathlib.Path(filepath)
+print("檔案路徑　　　 = " + str(file))
+print("檔案名稱　　　　 = " + file.name)
+print("檔案副檔名　　 = " + file.suffix)
+print("檔案副檔名以外 = " + file.stem)
+print("資料夾名稱　　　　 = " + file.parent.name)
+print("檔案大小　　 = " + str(file.stat().st_size) + "位元組")
 
 print("------------------------------------------------------------")  # 60個
 
-p = pathlib.Path(".")
-p = p.joinpath("tmp_newfolder")
-p.mkdir(exist_ok=True)
+file = pathlib.Path(".")
+file = file.joinpath("tmp_newfolder")
+file.mkdir(exist_ok=True)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-test_path = pathlib.Path(os.pardir)
-print(test_path)
-test_path.resolve()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -162,7 +164,9 @@ print("------------------------------------------------------------")  # 60個
 
 filelist = []
 for filename in pathlib.Path(foldername).glob(ext):  # 撈出單層
-    print(filename)
+    print(filename)  # 取出絕對路徑檔名
+    print(filename.absolute())  # 取出絕對路徑檔名
+    print("絕對路徑 :", filename.resolve())  # 取出絕對路徑檔名
     filelist.append(str(filename))  # 新增至列表
 
 for filename in sorted(filelist):  # 排序
@@ -351,25 +355,15 @@ print("------------------------------------------------------------")  # 60個
 """
 all_files = sorted(os.listdir("system"))  # 排序
 
-print(pathlib.Path.cwd())
-
-path1 = pathlib.Path.cwd() / "system"
-print(path1)
-
 for i, _ in enumerate(all_files[:-1]):  # 跳過最後一個
     print(i, _)
 """
 print("------------------------------------------------------------")  # 60個
 
-HERE = pathlib.Path(__file__).resolve().parent
-
+HERE = pathlib.Path(__file__).resolve().parent  # 取出絕對路徑檔名
 print(HERE)
 
 cc = pathlib.Path
-print(cc)
-
-cc = pathlib.Path.home() / ".pydicom"
-
 print(cc)
 
 print("------------------------------------------------------------")  # 60個

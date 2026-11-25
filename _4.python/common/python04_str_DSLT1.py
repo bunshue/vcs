@@ -4480,7 +4480,7 @@ x.count(4)
 
 
 # 串列的 count 與 index
-print('用串列的count統計串列元素出現的次數')
+print("用串列的count統計串列元素出現的次數")
 
 word = [
     "holiday",
@@ -4501,7 +4501,7 @@ word = [
 ]
 print("holiday 出現的次數", word.count("holiday"))
 
-print('用串列的index找出串列元素出現的位置')
+print("用串列的index找出串列元素出現的位置")
 search_str = "yellow"
 print("單字 %s 第一次出現的索引值%d" % (search_str, word.index(search_str)))
 
@@ -4523,7 +4523,7 @@ print(zoo)
 
 print("------------------------------------------------------------")  # 60個
 
-print("集合")# 集合改成高中分組課程
+print("集合")  # 集合改成高中分組課程
 
 friendA = {"Andy", "Axel", "Michael", "May"}
 friendB = {"Peter", "Axel", "Andy", "Julia"}
@@ -4579,15 +4579,11 @@ print(not_duplicatd)
 print("------------------------------------------------------------")  # 60個
 
 
-
 phrase = ["三陽開泰", "事事如意", "五福臨門"]
 for index, x in enumerate(phrase):
     print("{0}--{1}".format(index, x))
 
 print("------------------------------------------------------------")  # 60個
-
-
-
 
 
 # 串列的 count 與 index
@@ -4737,7 +4733,3 @@ fahrenheit = [(x * 9 / 5 + 32) for x in celsius]
 print(fahrenheit)
 
 print("------------------------------------------------------------")  # 60個
-
-
-
-

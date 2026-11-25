@@ -1,5 +1,14 @@
 
+import sys
+
+_ver = sys.version_info
+
 print(hex(old_wndproc))
+
+if os.path.exists("message.txt"):
+
+import os
+os.environ["PATH"] += os.pathsep + 'C:/Program Files (x86)/Graphviz2.38/bin/'
 
 # ------------------------------------------------------------  # 60個
 
@@ -8,8 +17,6 @@ date_string = datetime.date.today().strftime("%Y-%m-%d")
 print(date_string)
 
 # ------------------------------------------------------------  # 60個
-
-if os.path.exists("message.txt"):
 
 with open("message.txt","r",encoding="utf-8") as f:
 	text1.delete("1.0","end")
@@ -49,16 +56,19 @@ print('Python 是否有安裝模組?')
 print(importlib.util.find_spec("selenium"))
 print(importlib.util.find_spec("systimes"))
 
+# ------------------------------------------------------------  # 60個
+
 import sys
 
 for p in sys.path:
     print(p)
 
+# ------------------------------------------------------------  # 60個
+
 import time
 
 print(time.get_clock_info("perf_counter"))
 print(time.get_clock_info("process_time"))
-
 
 # 量測時間
 import time
@@ -2454,12 +2464,10 @@ help()
 
 # ------------------------------------------------------------  # 60個
 
-fn = open(path + 'info.txt', 'r')
+fn = open('info.txt', 'r')
 row = fn.readline()                                 # 讀取info.txt
 while row:
-
     row = fn.readline()
-
 fn.close()
 
 # ------------------------------------------------------------  # 60個
@@ -2499,8 +2507,6 @@ np.allclose(array3,array2,0.1)
 
 # ------------------------------------------------------------  # 60個
 
-import os
-os.environ["PATH"] += os.pathsep + 'C:/Program Files (x86)/Graphviz2.38/bin/'
 
 # ------------------------------------------------------------  # 60個
 
@@ -2896,20 +2902,14 @@ logger = logging.getLogger(__name__)
         "\n\tEven records: %s\n\t Odd records: %s", show(even), show(odd)
     )
 
-
-
-
 """
 HERE = os.path.abspath(os.getcwd())
 print(HERE)
 DEST_DIR = os.path.abspath(os.path.join(HERE, os.pardir, "openssl"))
 print(DEST_DIR)
 """
-
 # ------------------------------------------------------------  # 60個
 # ------------------------------------------------------------  # 60個
-
-
 
 from . import aliases
 from . import context # 引入同層資料夾的 context.py
@@ -2943,13 +2943,9 @@ from os import path
 
 static_folder = path.join(path.dirname(__file__), "static")
 
-
-
 here = os.path.dirname(__file__) or os.curdir
 
-
 pkg_dir = os.path.dirname(__file__)
-
 
 # ------------------------------------------------------------  # 60個
 # ------------------------------------------------------------  # 60個
@@ -3352,7 +3348,7 @@ if os.path.isfile("/content/yolo.h5"):
 else:
   print('無')
 
-
+# ------------------------------------------------------------  # 60個
 
 colab執行Shell命令 !
 !pip install pytube
@@ -4240,7 +4236,6 @@ animals = {'鼠' : 3, '牛' : 48, '虎' : 33, '兔' : 8, '龍' : 38}
 
 cur_path = os.path.dirname(__file__) # 取得目前路徑
 
-
 # ------------------------------------------------------------  # 60個
 
 """
@@ -4529,7 +4524,7 @@ localhost:8000
 
 DOM	Document Object Model
 
-
+# ------------------------------------------------------------  # 60個
 
 def make_backup(filename):
     import os, os.path
@@ -4946,7 +4941,6 @@ print("驗證碼為 " + text)
 '''
 # ------------------------------------------------------------  # 60個
 
-
         def print_three_column(lst):
             lst.sort(key=str.lower)
             # guarantee zip() doesn't drop anything
@@ -4956,14 +4950,12 @@ print("驗證碼為 " + text)
                 print("%-*s   %-*s   %-*s" % (longest, e, longest, f,
                                               longest, g))
 
-
             assert not self.inplace
             basename, tail = os.path.splitext(ext_filename)
             newname = basename + "_failed" + tail
             if os.path.exists(newname):
                 os.remove(newname)
             os.rename(ext_filename, newname)
-
 
         if not os.path.exists(self.build_temp):
             os.makedirs(self.build_temp)

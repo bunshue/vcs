@@ -652,10 +652,12 @@ print("內建函式dir()檢視目前的名稱空間")
 print(dir())
 
 import qrcode
+
 print(dir())
 
 # 看單一模組的函式
 import math
+
 print(dir(math))
 
 print("------------------------------------------------------------")  # 60個

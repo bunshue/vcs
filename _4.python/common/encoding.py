@@ -95,7 +95,6 @@ print(decoded_string)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
 print("chr(x) 取得整數x的ASCII編碼值")
 num = 0x41
@@ -382,19 +381,19 @@ filenames = [
     "D:/_git/vcs/_1.data/______test_files1/__text/war_and_peace.txt",
     "D:/_git/vcs/_1.data/______test_files1/__text/王之渙_涼州詞.txt",
     "D:/_git/vcs/_1.data/______test_files1/__text/jap/饩Ⓚ丗钡冦冦葢轿瘅.txt",
-    "D:/_git/vcs/_1.data/______test_files1/__text/sc/001川の流れのように.txt"
-    ]
+    "D:/_git/vcs/_1.data/______test_files1/__text/sc/001川の流れのように.txt",
+]
 
 # 1. 方法1：依序嘗試各種編碼
 
 encodings = [
     "utf-8",
     "utf-8-sig",
-    "cp950",      # Big5
+    "cp950",  # Big5
     "gb2312",
     "gbk",
     "shift_jis",
-    "utf-16"
+    "utf-16",
 ]
 
 filename = filenames[0]
@@ -414,29 +413,6 @@ for enc in encodings:
 
 print("------------------------------")  # 30個
 
-# 方法2：使用 chardet
-
-import chardet
-
-filename = filenames[0]
-
-with open(filename, "rb") as f:
-    raw = f.read()
-
-result = chardet.detect(raw)
-
-print(result)
-
-
-encoding = result["encoding"]
-
-with open(filename, "r", encoding=encoding) as f:
-    text = f.read()
-
-print(text)
-
-print("------------------------------")  # 30個
-
 # 方法3：使用 charset-normalizer（較新）
 
 from charset_normalizer import from_path
@@ -448,13 +424,111 @@ print(result.encoding)
 print(result)
 
 print("------------------------------------------------------------")  # 60個
-
-
+print("chardet ST")
 print("------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
+filenames = [
+    "D:/_git/vcs/_1.data/______test_files1/__text/Compressor.c",
+    "D:/_git/vcs/_1.data/______test_files1/__text/Form1.cs.txt",
+    "D:/_git/vcs/_1.data/______test_files1/__text/war_and_peace.txt",
+    "D:/_git/vcs/_1.data/______test_files1/__text/王之渙_涼州詞.txt",
+    "D:/_git/vcs/_1.data/______test_files1/__text/jap/饩Ⓚ丗钡冦冦葢轿瘅.txt",
+    "D:/_git/vcs/_1.data/______test_files1/__text/sc/001川の流れのように.txt",
+]
 
+print("chardet：檔案編碼格式")
+
+import chardet  # 檔案編碼格式
+
+filename = filenames[0]
+
+with open(filename, "rb") as f:
+    raw = f.read()
+
+result = chardet.detect(raw)
+
+print(result)
+
+encoding = result["encoding"]
+
+with open(filename, "r", encoding=encoding) as f:
+    text = f.read()
+
+print(text)
+
+filename1 = "D:/_git/vcs/_1.data/______test_files1/poetry2.txt"
+filename2 = (
+    "D:/_git/vcs/_1.data/______test_files1/__RW/_txt/_encoding/2.utf_to_ascii.txt"
+)
+filename3 = (
+    "D:/_git/vcs/_1.data/______test_files1/__RW/_txt/_encoding/3.ascii_to_unicode.txt"
+)
+
+files = [filename1, filename2, filename3]
+for f in files:
+    text = open(f, "rb").read()
+    codetype = chardet.detect(text)
+    print("檔案 :", f)
+    print("編碼格式 :", codetype)
+    print("讀取文件")
+    with open(f, "rb") as fp:
+        content = fp.read()
+        cod = chardet.detect(content)["encoding"]
+        print("編碼格式 :", cod)
+        # cc = content.decode(cod)
+        # print(cc)
+
+print("------------------------------")  # 30個
+
+filename = "D:/_git/vcs/_4.python/ml/text/data/中文文本分类数据集/test/C3-Art/C3-Art0002.txt"
+f = open(filename, encoding="gb2312")
+a = f.read()
+f.close()
+print(a)
+
+text = open(filename, "rb").read()
+codetype = chardet.detect(text)
+print(codetype)
+
+cod = chardet.detect(text)["encoding"]
+print(cod)
+print(text.decode(cod))
+
+print("------------------------------")  # 30個
+
+"""
+整理python檔案
+
+1. 檢查檔案編碼格式
+2. 轉換為utf-8格式
+3. 簡中轉正中
+
+"""
+
+import time
+import glob
+
+
+# 撈出單層txt檔
+filenames = glob.glob("*.txt")
+for filename in filenames:
+    print("檔案 :", filename)
+    text = open(filename, "rb").read()  # 要用 rb
+    codetype = chardet.detect(text)
+    # print(type(codetype))
+    # print(codetype["encoding"])
+    # print("{} 編碼格式：{}".format(filename, codetype))
+
+    # 印出不是utf-8格式的檔案名稱
+    if not codetype["encoding"] == "utf-8":
+        print("非utf-8格式, 編碼格式：{}".format(codetype))
+    else:
+        print("utf-8格式\n")
+
+
+print("------------------------------------------------------------")  # 60個
+print("chardet SP")
 print("------------------------------------------------------------")  # 60個
 
 
@@ -472,5 +546,3 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------")  # 30個
 # 1515
 print("---------------")  # 15個
-
-
