@@ -1119,48 +1119,6 @@ print(tag_li.span.string)
 
 print("------------------------------")  # 30個
 
-# 使用多條件來搜尋HTML標籤
-print("找下一個內容分區元素<div> + 條件")
-tag_div = soup.find("div", class_="question")
-print(tag_div.prettify())  # pretty打印
-
-print("找下一個段落<p> + 條件")
-tag_p = soup.find("p", class_="question")
-print(tag_p.prettify())  # pretty打印
-
-print("------------------------------")  # 30個
-
-
-# 使用函數建立搜尋條件
-def is_secondary_question(tag):
-    return tag.has_attr("href") and tag.get("href") == "http://example.com/q2"
-
-
-tag_a = soup.find(is_secondary_question)
-print(tag_a.prettify())  # pretty打印
-
-print("------------------------------")  # 30個
-
-# 找出所有問卷的題目串列
-print("找全部的段落<p> + 條件")
-tag_list = soup.find_all("p", class_="question")
-print(tag_list[0].prettify())  # pretty打印
-
-for question in tag_list:
-    print(question.a.text)
-
-print("------------------------------")  # 30個
-
-# 找出前2個問卷的題目串列
-print("找全部的段落<p> + 條件")
-tag_list = soup.find_all("p", class_="question", limit=2)
-print(len(tag_list))
-
-for question in tag_list:
-    print(question.a.text)
-
-print("------------------------------")  # 30個
-
 print("找下一個內容分區元素<div> + 條件")
 tag_div = soup.find("div", id="q2")
 
@@ -1262,7 +1220,7 @@ def print_a(tag_a):
 
 tag_a = soup.select("a[href]")
 print_a(tag_a)
-tag_a = soup.select("a[href='http://example.com/q2']")
+tag_a = soup.select("a[href='http://example.com/yahoo']")
 print_a(tag_a)
 tag_a = soup.select("a[href^='http://example.com']")
 print_a(tag_a)
@@ -1346,16 +1304,6 @@ print(tag_list)
 
 print("------------------------------")  # 30個
 
-# 使用正規表達式搜尋URL網址
-url_regexp = re.compile("^http:")
-tag = soup.find(href=url_regexp)
-print(tag["href"], tag.text)
-
-print("---------------")  # 15個
-
-tag_list = soup.find_all(href=url_regexp)
-for tag in tag_list:
-    print(tag["href"], tag.text)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1366,45 +1314,52 @@ print("------------------------------------------------------------")  # 60個
 
 string_html_data = """
 <html lang="big5">
- <head>
-  <meta charset="utf-8"/>
-  <title>測試資料擷取的HTML網頁</title>
- </head>
- <body>
-  <div class="surveys" id="surveys">
-   <div class="survey" id="q1">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>測試資料擷取的HTML網頁</title>
+</head>
+
+<body>
+<div class="surveys" id="surveys">
+
+    <div class="survey" id="q1">
     <p class="question">
-      <a href="http://example.com/q1">請問你的性別?</a></p>
+    <a href="http://example.com/google">第1個問題 google</a></p>
     <ul class="answer">
-     <li class="response">男-<span>10</span></li>
-     <li class="response selected">女-<span>20</span></li>
+    <li class="response">選擇1a<span>AAAA1</span></li>
+    <li class="response selected">選擇1b<span>BBBB1</span></li>
     </ul>
-   </div>
-   <div class="survey" id="q2">
+    </div>
+
+    <div class="survey" id="q2">
     <p class="question">
-      <a href="http://example.com/q2">請問你是否喜歡偵探小說?</a></p>
+    <a href="http://example.com/yahoo">第2個問題 yahoo</a></p>
     <ul class="answer">
-     <li class="response">喜歡-<span>40</span></li>
-     <li class="response selected">普通-<span>20</span></li>
-     <li class="response">不喜歡-<span>0</span></li>
+    <li class="response">選擇2a<span>AAAA2</span></li>
+    <li class="response selected">選擇2b<span>BBBB2</span></li>
     </ul>
-   </div>
-   <div class="survey" id="q3">
+    </div>
+
+    <div class="survey" id="q3">
     <p class="question">
-      <a href="http://example.com/q3">請問你是否會程式設計?</a></p>
+    <a href="http://example.com/wiki">第3個問題 wiki</a></p>
     <ul class="answer">
-     <li class="response selected">會-<span>30</span></li>
-     <li class="response">不會-<span>6</span></li>
+    <li class="response">選擇3a<span>AAAA3</span></li>
+    <li class="response selected">選擇3b<span>BBBB3</span></li>
     </ul>
-   </div>
-  </div>
-  <div class="emails" id="emails">
+    </div>
+
+</div>
+  
+<div class="emails" id="emails">
     <div class="question">電子郵件清單資訊: </div>
     abc@example.com
     <div class="survey" data-custom="important">def@example.com</div>
-    <span class="survey" id="email">ghi@example.com</div>
-  </div>
- </body>
+    <span class="survey" id="email">ghi@example.com</span>
+</div>
+
+</body>
 </html>
 """
 
@@ -1428,33 +1383,65 @@ print('找下一個 <a> 超連結')  # ?? 沒有往下一個跑
 tag_a = soup.find("a")
 print(tag_a.string)
 
-# 搜尋HTML標籤的id屬性
-tag_div = soup.find(id="q2")
-print('找下一個 <a> 超連結')
-tag_a = tag_div.find("a")
-print(tag_a.string)  # 請問你是否喜歡偵探小說?
+print("---------------")  # 15個
 
-# class樣式屬性
+# 搜尋HTML標籤的id屬性
+
+tag_div = soup.find(id="q1")
+print('找下一個 <a> 超連結 q1')
+tag_a = tag_div.find("a")
+print(tag_a.string)  # 第1個問題 google
+
+tag_div = soup.find(id="q2")
+print('找下一個 <a> 超連結 q2')
+tag_a = tag_div.find("a")
+print(tag_a.string)  # 第2個問題 yahoo
+
+tag_div = soup.find(id="q3")
+print('找下一個 <a> 超連結 q3')
+tag_a = tag_div.find("a")
+print(tag_a.string)  # 第3個問題 wiki
+
+print("---------------")  # 15個
+
+print('class樣式屬性')
+tag_li = soup.find(attrs={"class": "response"})
+tag_span = tag_li.find("span")
+print(tag_span.string)
+"""
+# 目前還是只能找到第1個
 tag_li = soup.find(attrs={"class": "response"})
 tag_span = tag_li.find("span")
 print(tag_span.string)
 
+tag_li = soup.find(attrs={"class": "response"})
+tag_span = tag_li.find("span")
+print(tag_span.string)
+"""
+print("------------------------------")  # 30個
+"""找不到第1個
+print("搜尋HTML標籤1")
+tag_div = soup.find(attrs={"id": "emails"})
+print(tag_div.string)  # abc@example.com
+"""
 print("------------------------------")  # 30個
 
-print("搜尋HTML標籤1")
+print("搜尋HTML標籤2")
 tag_div = soup.find(attrs={"data-custom": "important"})
 print(tag_div.string)  # def@example.com
 
 print("------------------------------")  # 30個
 
-print("搜尋HTML標籤2")
+print("搜尋HTML標籤3")
 tag_div = soup.find(attrs={"id": "email"})
 print(tag_div.string)  # ghi@example.com
 
 print("------------------------------")  # 30個
 
-print("3333")
+# 使用多條件來搜尋HTML標籤
+print("找下一個內容分區元素<div> + 條件")
 tag_div = soup.find("div", class_="question")
+print(tag_div.prettify())  # pretty打印
 print(tag_div) # <div class="question">電子郵件清單資訊: </div>
 print(tag_div.string) # 電子郵件清單資訊: 
 
@@ -1462,9 +1449,10 @@ print("------------------------------")  # 30個
 
 print("找下一個段落<p> + 條件")
 tag_p = soup.find("p", class_="question")
+print(tag_p.prettify())  # pretty打印
 
 print('段落<p> 全部')
-print(tag_p)  # <p class="question"><a href="http://example.com/q1">請問你的性別?</a></p>
+print(tag_p)  # <p class="question"><a href="http://example.com/google">第1個問題 google</a></p>
 
 print('找段落<p> 裡面的<a>')
 tag_a = tag_p.find("a")
@@ -1472,34 +1460,43 @@ print(tag_a.string)
 
 print("---------------")  # 15個
 
-# Python函數定義搜尋條件
+# 使用函數建立搜尋條件
 def is_secondary_question(tag):
     cc1 = tag.has_attr("href")
-    cc2 = tag.get("href") == "http://example.com/q2"
+    cc2 = tag.get("href") == "http://example.com/yahoo"
     print(cc1, cc2)
-    return tag.has_attr("href") and tag.get("href") == "http://example.com/q2"
+    return tag.has_attr("href") and tag.get("href") == "http://example.com/yahoo"
 
 print("is_secondary_question")
 tag_a = soup.find(is_secondary_question)
 print("tag_a :", tag_a)
+print(tag_a.prettify())  # pretty打印
 
 print("---------------")  # 15個
 
 print('找出所有問卷的題目字串')
-tag_list = soup.find_all("p", class_="question")
+print("找全部的段落<p> + 條件")
+tag_list = soup.find_all("p", class_="question")  # 找 <p>段落 class為"question"
+print("找到個數 :", len(tag_list))
 print("tag_list :")
-print(tag_list)
-for question in tag_list:
-    print("題目 :", question.a.string)
+print("---------------")  # 15個
+for tag in tag_list:
+    print("全部 :", tag)
+    print("文字 :", tag.a.string)
+    print(tag.a.text)
+    print("---------------")  # 15個
 
 print("------------------------------")  # 30個
 
 print('使用limit參數限制搜尋數量')
-tag_list = soup.find_all("p", class_="question", limit=1)
+print("找全部的段落<p> + 條件")
+tag_list = soup.find_all("p", class_="question", limit=1)  # 找 <p>段落 class為"question", 數量1
 print("tag_list :")
 print(tag_list)
-for question in tag_list:
-    print(question.a.string)
+for tag in tag_list:
+    print("全部 :", tag)
+    print("文字 :", tag.a.string)
+    print(tag.a.text)
 
 print("------------------------------")  # 30個
 
@@ -1582,6 +1579,7 @@ print(tag_list)
 # 使用正規表達式搜尋URL網址
 url_regexp = re.compile("^http:")
 tag_href = soup.find(href=url_regexp)
+
 print('tag_href')
 print(tag_href)
 print("---------------")  # 15個
@@ -1591,6 +1589,15 @@ print(tag_list)
 print("---------------")  # 15個
 print('cccc')
 print(tag_list[0].string)
+
+tag = soup.find(href=url_regexp)
+print(tag["href"], tag.text)
+
+print("---------------")  # 15個
+
+tag_list = soup.find_all(href=url_regexp)
+for tag in tag_list:
+    print(tag["href"], tag.text)
 
 print("------------------------------------------------------------")  # 60個
 sys.exit()
