@@ -374,7 +374,78 @@ encoding = "gb2312"
 read_file(filename, encoding)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
+filenames = [
+    "D:/_git/vcs/_1.data/______test_files1/__text/Compressor.c",
+    "D:/_git/vcs/_1.data/______test_files1/__text/Form1.cs.txt",
+    "D:/_git/vcs/_1.data/______test_files1/__text/war_and_peace.txt",
+    "D:/_git/vcs/_1.data/______test_files1/__text/王之渙_涼州詞.txt",
+    "D:/_git/vcs/_1.data/______test_files1/__text/jap/饩Ⓚ丗钡冦冦葢轿瘅.txt",
+    "D:/_git/vcs/_1.data/______test_files1/__text/sc/001川の流れのように.txt"
+    ]
+
+# 1. 方法1：依序嘗試各種編碼
+
+encodings = [
+    "utf-8",
+    "utf-8-sig",
+    "cp950",      # Big5
+    "gb2312",
+    "gbk",
+    "shift_jis",
+    "utf-16"
+]
+
+filename = filenames[0]
+
+for enc in encodings:
+    try:
+        with open(filename, "r", encoding=enc) as f:
+            text = f.read()
+
+        print("成功編碼:", enc)
+        # print(text[:500])
+
+        break
+
+    except Exception:
+        pass
+
+print("------------------------------")  # 30個
+
+# 方法2：使用 chardet
+
+import chardet
+
+filename = filenames[0]
+
+with open(filename, "rb") as f:
+    raw = f.read()
+
+result = chardet.detect(raw)
+
+print(result)
+
+
+encoding = result["encoding"]
+
+with open(filename, "r", encoding=encoding) as f:
+    text = f.read()
+
+print(text)
+
+print("------------------------------")  # 30個
+
+# 方法3：使用 charset-normalizer（較新）
+
+from charset_normalizer import from_path
+
+filename = filenames[0]
+result = from_path(filename).best()
+
+print(result.encoding)
+print(result)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -383,7 +454,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -394,5 +464,13 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
 
+# 6060
 print("------------------------------------------------------------")  # 60個
+# 3030
+print("------------------------------")  # 30個
+# 1515
+print("---------------")  # 15個
+
+

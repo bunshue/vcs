@@ -45,6 +45,7 @@ def show():
     plt.show()
 
 
+print(time.ctime())
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -861,6 +862,9 @@ for i in range(len(sc)):
     print(sc[i])
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print('串列操作 append, push, pop')
 
 # 陣列: list 與 tuple
 arr = ["one", "two", "three"]
@@ -884,7 +888,6 @@ print(arr)
 
 print("------------------------------------------------------------")  # 60個
 
-dslt
 # 最基本簡單的堆疊
 
 s = []
@@ -901,7 +904,6 @@ print(s.pop())
 
 print("------------------------------------------------------------")  # 60個
 
-dslt
 # 麻煩的優先佇列
 
 q = []
@@ -915,6 +917,287 @@ while q:
     next_item = q.pop()
     print(next_item)
 
+
+print("------------------------------------------------------------")  # 60個
+
+
+lst1 = []
+lst2 = [1, 2, 3, 4, 5]
+lst3 = [1, "Python", 5.5]
+print(lst1)
+print("lst2: ", lst2)
+print(lst3)
+
+print("------------------------------------------------------------")  # 60個
+
+lst7 = [1, ["tom", "mary", "joe"], [3, 4, 5]]
+print("lst7:" + str(lst7))
+
+print("------------------------------------------------------------")  # 60個
+
+lst1 = [1, 2, 3, 4, 5, 6]
+print(lst1[0])
+print(lst1[1])
+print(lst1[-1])
+print(lst1[-2])
+lst1[1] = 10
+lst1[2] = "Python"
+print(lst1)
+
+print("------------------------------------------------------------")  # 60個
+
+lst1 = [1, 2, 3, 4, 5, 6]
+for e in lst1:
+    print(e, end=" ")
+print()
+
+animals = ["cat", "dog", "bat"]
+for index, animal in enumerate(animals):
+    print(index, animal)
+
+print("------------------------------------------------------------")  # 60個
+
+lst2 = [[2, 4], ["cat", "dog", "bat"], [1, 3, 5]]
+print(lst2[1][0])
+
+lst2[2][1] = 7
+for e1 in lst2:
+    for e2 in e1:
+        print(e2, end=" ")
+
+print("------------------------------------------------------------")  # 60個
+
+lst2 = [[2, 4], ["cat", "dog", "bat"], [1, 3, 5]]
+print(lst2[0][1])
+
+print("------------------------------------------------------------")  # 60個
+
+lst1 = [1, 5]
+lst1.append(7)
+print(lst1)
+
+lst1.extend([9, 11, 13])
+print(lst1)
+
+print("------------------------------------------------------------")  # 60個
+
+lst1 = [1, 5, 7, 9, 11, 13]
+lst1.insert(1, 3)
+print(lst1)
+
+print("------------------------------------------------------------")  # 60個
+
+lst1 = [1, 3, 5, 7, 9, 11, 13]
+del lst1[2]
+print(lst1)
+e1 = lst1.pop()
+print(e1, lst1)
+e2 = lst1.pop(1)
+print(e2, lst1)
+lst1.remove(9)
+print(lst1)
+
+print("------------------------------------------------------------")  # 60個
+
+lst1 = [4, 2, 8, 9, 1]
+print("lst1 = ", lst1)
+s = len(lst1)
+print("len(lst1) = ", s)
+s = max(lst1)
+print("max(lst1) = ", s)
+s = min(lst1)
+print("min(lst1) = ", s)
+animals = "Hello World!"
+lst2 = list(animals)
+print("lst2 = ", lst2)
+for i, v in enumerate(lst2, 0):
+    print(i, ":", v, end=" ")
+print()
+s = sum(lst1)
+print("sum(lst1) = ", s)
+lst3 = sorted(lst1)
+print("lst3 = sorted(lst1) = ", lst3)
+
+print("------------------------------------------------------------")  # 60個
+
+# 串列的 count 與 index
+
+lst1 = [4, 2, 8, 9, 1, 8]
+print("lst1 = ", lst1)
+s = lst1.count(8)
+print("lst1.count(8) = ", s)
+s = lst1.index(8)
+print("lst1.index(8) = ", s)
+s = lst1.index(1)
+print("lst1.index(1) = ", s)
+lst1.sort()
+print("lst1.sort() = ", lst1)
+lst1.reverse()
+print("lst1.reverse() = ", lst1)
+
+print("------------------------------------------------------------")  # 60個
+
+
+t1 = ()
+t2 = (1, 2, 3, 4, 5)
+t3 = (1, "Joe", 5.5)
+print(t1)
+print("t2 = ", t2)
+print(t3)
+
+print("------------------------------------------------------------")  # 60個
+
+t4 = tuple()
+t5 = tuple(["tom", "mary", "joe"])
+t6 = tuple("python")
+print("t4 = " + str(t4))
+print("t5 = " + str(t5))
+print("t6 = " + str(t6))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# tuple
+t1 = (4, 2, 8, 9, 1)
+print("t1 = ", t1)
+s = len(t1)
+print("len(t1) = ", s)
+s = max(t1)
+print("max(t1) = ", s)
+s = min(t1)
+print("min(t1) = ", s)
+animals = "Hello World!"
+t2 = tuple(animals)
+print("t2 = ", t2)
+for i, v in enumerate(t2, 0):
+    print(str(i) + ":" + v, end=" ")
+print()
+s = sum(t1)
+print("sum(t1) = ", s)
+t3 = sorted(t1)
+print("t3 = sorted(t1) = ", t3)
+
+print("------------------------------------------------------------")  # 60個
+
+# 元組的 count 與 index
+
+# tuple
+t1 = (4, 2, 8, 9, 1, 8)
+print("t1 = ", t1)
+s = t1.count(8)
+print("t1.count(8) = ", s)
+s = t1.index(8)
+print("t1.index(8) = ", s)
+s = t1.index(1)
+print("t1.index(1) = ", s)
+
+print("------------------------------------------------------------")  # 60個
+
+# 字典
+d1 = {}
+d2 = {1: "apple", 2: "ball"}
+d3 = {"name": "joe", 1: [2, 4, 6]}
+print(d1)
+print("d2 = ", d2)
+print(d3)
+
+print("------------------------------------------------------------")  # 60個
+
+# 字典
+d4 = dict()
+d5 = dict([(1, "tom"), (2, "mary"), (3, "john")])
+print("d4 = " + str(d4))
+print("d5 = " + str(d5))
+
+print("------------------------------------------------------------")  # 60個
+
+# 字典
+d1 = {"chicken": 2, "dog": 4, "cat": 3}
+print(d1["cat"])
+print(d1["dog"])
+print(d1["chicken"])
+
+print("------------------------------------------------------------")  # 60個
+
+# 字典
+d1 = {"chicken": 2, "dog": 4, "cat": 3}
+d1["cat"] = 4
+print(d1)
+
+print("------------------------------------------------------------")  # 60個
+
+# 字典
+d1 = {"chicken": 2, "dog": 4, "cat": 3}
+d1["spider"] = 8
+print(d1)
+
+print("------------------------------------------------------------")  # 60個
+
+# 字典
+d1 = {"chicken": 2, "dog": 4, "cat": 3}
+for animal in d1:
+    legs = d1[animal]
+    print(animal, legs)
+
+print("------------------------------------------------------------")  # 60個
+
+d1 = {1: 1, 2: 4, "name": "joe", "age": 20, 5: 22}
+del d1[2]
+print(d1)
+del d1["age"]
+print(d1)
+
+print("------------------------------------------------------------")  # 60個
+
+d1 = {1: 1, 2: 4, "name": "joe", "age": 20, 5: 22}
+e1 = d1.pop(5)
+print(e1, d1)
+
+print("------------------------------------------------------------")  # 60個
+
+d1 = {1: 1, 2: 4, "name": "joe", "age": 20, 5: 22}
+e2 = d1.popitem()
+print(e2, d1)
+e2 = d1.popitem()
+print(e2, d1)
+
+print("------------------------------------------------------------")  # 60個
+
+d1 = {1: 1, 2: 4, "name": "joe", "age": 20, 5: 22}
+d1.clear()
+print(d1)
+
+print("------------------------------------------------------------")  # 60個
+
+d1 = {1: 1, 3: 9, 5: 24, 7: 47, 9: 83}
+print("d1 = ", d1)
+s = len(d1)
+d2 = dict([(1, "tom"), (2, "mary"), (3, "joe")])
+print("d2 = ", d2)
+d3 = sorted(d1)
+print("d3 = sorted(d1) = ", d3)
+
+print("------------------------------------------------------------")  # 60個
+
+d1 = {"tom": 2, "bob": 3, "mike": 4}
+print("d1 = ", d1)
+i = d1.get("tom")
+print("d1.get('tom') = ", i)
+i = d1.get("jerry", "不存在")
+print("d1.get('jerry', '不存在') = ", i)
+t1 = d1.keys()
+print("d1.keys() = ", t1)
+lst1 = list(t1)
+for i in lst1:
+    print(i, end=" ")
+print()
+t1 = d1.values()
+print("d1.values() = ", t1)
+lst1 = list(t1)
+for i in lst1:
+    print(i, end=" ")
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 用切片清除或複製 list 元素
@@ -1241,122 +1524,6 @@ print(cleaned_str)  # "Python is a programming language."
 
 print("------------------------------------------------------------")  # 60個
 
-lst1 = []
-lst2 = [1, 2, 3, 4, 5]
-lst3 = [1, "Python", 5.5]
-print(lst1)
-print("lst2: ", lst2)
-print(lst3)
-
-print("------------------------------------------------------------")  # 60個
-
-lst7 = [1, ["tom", "mary", "joe"], [3, 4, 5]]
-print("lst7:" + str(lst7))
-
-print("------------------------------------------------------------")  # 60個
-
-lst1 = [1, 2, 3, 4, 5, 6]
-print(lst1[0])
-print(lst1[1])
-print(lst1[-1])
-print(lst1[-2])
-lst1[1] = 10
-lst1[2] = "Python"
-print(lst1)
-
-print("------------------------------------------------------------")  # 60個
-
-lst1 = [1, 2, 3, 4, 5, 6]
-for e in lst1:
-    print(e, end=" ")
-print()
-
-animals = ["cat", "dog", "bat"]
-for index, animal in enumerate(animals):
-    print(index, animal)
-
-print("------------------------------------------------------------")  # 60個
-
-lst2 = [[2, 4], ["cat", "dog", "bat"], [1, 3, 5]]
-print(lst2[1][0])
-
-lst2[2][1] = 7
-for e1 in lst2:
-    for e2 in e1:
-        print(e2, end=" ")
-
-print("------------------------------------------------------------")  # 60個
-
-lst2 = [[2, 4], ["cat", "dog", "bat"], [1, 3, 5]]
-print(lst2[0][1])
-
-print("------------------------------------------------------------")  # 60個
-
-lst1 = [1, 5]
-lst1.append(7)
-print(lst1)
-
-lst1.extend([9, 11, 13])
-print(lst1)
-
-print("------------------------------------------------------------")  # 60個
-
-lst1 = [1, 5, 7, 9, 11, 13]
-lst1.insert(1, 3)
-print(lst1)
-
-print("------------------------------------------------------------")  # 60個
-
-lst1 = [1, 3, 5, 7, 9, 11, 13]
-del lst1[2]
-print(lst1)
-e1 = lst1.pop()
-print(e1, lst1)
-e2 = lst1.pop(1)
-print(e2, lst1)
-lst1.remove(9)
-print(lst1)
-
-print("------------------------------------------------------------")  # 60個
-
-lst1 = [4, 2, 8, 9, 1]
-print("lst1 = ", lst1)
-s = len(lst1)
-print("len(lst1) = ", s)
-s = max(lst1)
-print("max(lst1) = ", s)
-s = min(lst1)
-print("min(lst1) = ", s)
-animals = "Hello World!"
-lst2 = list(animals)
-print("lst2 = ", lst2)
-for i, v in enumerate(lst2, 0):
-    print(i, ":", v, end=" ")
-print()
-s = sum(lst1)
-print("sum(lst1) = ", s)
-lst3 = sorted(lst1)
-print("lst3 = sorted(lst1) = ", lst3)
-
-print("------------------------------------------------------------")  # 60個
-
-# 串列的 count 與 index
-
-lst1 = [4, 2, 8, 9, 1, 8]
-print("lst1 = ", lst1)
-s = lst1.count(8)
-print("lst1.count(8) = ", s)
-s = lst1.index(8)
-print("lst1.index(8) = ", s)
-s = lst1.index(1)
-print("lst1.index(1) = ", s)
-lst1.sort()
-print("lst1.sort() = ", lst1)
-lst1.reverse()
-print("lst1.reverse() = ", lst1)
-
-print("------------------------------------------------------------")  # 60個
-
 
 def find_max_and_index(lst1):
     """
@@ -1430,167 +1597,6 @@ x = 123
 print(f"整數: {x:05d}")
 x = 123.45678
 print(f"浮點數: {x:6.3f}")
-
-print("------------------------------------------------------------")  # 60個
-
-t1 = ()
-t2 = (1, 2, 3, 4, 5)
-t3 = (1, "Joe", 5.5)
-print(t1)
-print("t2 = ", t2)
-print(t3)
-
-print("------------------------------------------------------------")  # 60個
-
-t4 = tuple()
-t5 = tuple(["tom", "mary", "joe"])
-t6 = tuple("python")
-print("t4 = " + str(t4))
-print("t5 = " + str(t5))
-print("t6 = " + str(t6))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# tuple
-t1 = (4, 2, 8, 9, 1)
-print("t1 = ", t1)
-s = len(t1)
-print("len(t1) = ", s)
-s = max(t1)
-print("max(t1) = ", s)
-s = min(t1)
-print("min(t1) = ", s)
-animals = "Hello World!"
-t2 = tuple(animals)
-print("t2 = ", t2)
-for i, v in enumerate(t2, 0):
-    print(str(i) + ":" + v, end=" ")
-print()
-s = sum(t1)
-print("sum(t1) = ", s)
-t3 = sorted(t1)
-print("t3 = sorted(t1) = ", t3)
-
-print("------------------------------------------------------------")  # 60個
-
-# 元組的 count 與 index
-
-# tuple
-t1 = (4, 2, 8, 9, 1, 8)
-print("t1 = ", t1)
-s = t1.count(8)
-print("t1.count(8) = ", s)
-s = t1.index(8)
-print("t1.index(8) = ", s)
-s = t1.index(1)
-print("t1.index(1) = ", s)
-
-print("------------------------------------------------------------")  # 60個
-
-# 字典
-d1 = {}
-d2 = {1: "apple", 2: "ball"}
-d3 = {"name": "joe", 1: [2, 4, 6]}
-print(d1)
-print("d2 = ", d2)
-print(d3)
-
-print("------------------------------------------------------------")  # 60個
-
-# 字典
-d4 = dict()
-d5 = dict([(1, "tom"), (2, "mary"), (3, "john")])
-print("d4 = " + str(d4))
-print("d5 = " + str(d5))
-
-print("------------------------------------------------------------")  # 60個
-
-# 字典
-d1 = {"chicken": 2, "dog": 4, "cat": 3}
-print(d1["cat"])
-print(d1["dog"])
-print(d1["chicken"])
-
-print("------------------------------------------------------------")  # 60個
-
-# 字典
-d1 = {"chicken": 2, "dog": 4, "cat": 3}
-d1["cat"] = 4
-print(d1)
-
-print("------------------------------------------------------------")  # 60個
-
-# 字典
-d1 = {"chicken": 2, "dog": 4, "cat": 3}
-d1["spider"] = 8
-print(d1)
-
-print("------------------------------------------------------------")  # 60個
-
-# 字典
-d1 = {"chicken": 2, "dog": 4, "cat": 3}
-for animal in d1:
-    legs = d1[animal]
-    print(animal, legs)
-
-print("------------------------------------------------------------")  # 60個
-
-d1 = {1: 1, 2: 4, "name": "joe", "age": 20, 5: 22}
-del d1[2]
-print(d1)
-del d1["age"]
-print(d1)
-
-print("------------------------------------------------------------")  # 60個
-
-d1 = {1: 1, 2: 4, "name": "joe", "age": 20, 5: 22}
-e1 = d1.pop(5)
-print(e1, d1)
-
-print("------------------------------------------------------------")  # 60個
-
-d1 = {1: 1, 2: 4, "name": "joe", "age": 20, 5: 22}
-e2 = d1.popitem()
-print(e2, d1)
-e2 = d1.popitem()
-print(e2, d1)
-
-print("------------------------------------------------------------")  # 60個
-
-d1 = {1: 1, 2: 4, "name": "joe", "age": 20, 5: 22}
-d1.clear()
-print(d1)
-
-print("------------------------------------------------------------")  # 60個
-
-d1 = {1: 1, 3: 9, 5: 24, 7: 47, 9: 83}
-print("d1 = ", d1)
-s = len(d1)
-d2 = dict([(1, "tom"), (2, "mary"), (3, "joe")])
-print("d2 = ", d2)
-d3 = sorted(d1)
-print("d3 = sorted(d1) = ", d3)
-
-print("------------------------------------------------------------")  # 60個
-
-d1 = {"tom": 2, "bob": 3, "mike": 4}
-print("d1 = ", d1)
-i = d1.get("tom")
-print("d1.get('tom') = ", i)
-i = d1.get("jerry", "不存在")
-print("d1.get('jerry', '不存在') = ", i)
-t1 = d1.keys()
-print("d1.keys() = ", t1)
-lst1 = list(t1)
-for i in lst1:
-    print(i, end=" ")
-print()
-t1 = d1.values()
-print("d1.values() = ", t1)
-lst1 = list(t1)
-for i in lst1:
-    print(i, end=" ")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -14096,3 +14102,16 @@ print(cc)
 print(df.shape)
 
 print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+# 6060
+print("------------------------------------------------------------")  # 60個
+# 3030
+print("------------------------------")  # 30個
+# 1515
+print("---------------")  # 15個
+

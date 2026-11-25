@@ -7865,48 +7865,61 @@ namespace vcs_DiskDirectoryFile1
 
                 // UTF-8 BOM
                 if (bom[0] == 0xEF && bom[1] == 0xBB && bom[2] == 0xBF)
+                {
                     return Encoding.UTF8;
+                }
 
                 // UTF-16 LE
                 if (bom[0] == 0xFF && bom[1] == 0xFE)
+                {
                     return Encoding.Unicode;
+                }
 
                 // UTF-16 BE
                 if (bom[0] == 0xFE && bom[1] == 0xFF)
+                {
                     return Encoding.BigEndianUnicode;
+                }
 
                 // UTF-32
                 if (bom[0] == 0xFF && bom[1] == 0xFE && bom[2] == 0x00 && bom[3] == 0x00)
+                {
                     return Encoding.UTF32;
+                }
             }
             return Encoding.Default;
         }
-
 
         //版本二：額外判斷 UTF-8
         public static Encoding DetectEncoding2(string fileName)
         {
             byte[] data = File.ReadAllBytes(fileName);
 
-            // BOM
-
+            // 有 BOM
+            // 看 BOM
+            // EF BB BF 	UTF-8 BOM
+            // FF FE 		UTF-16 LE
+            // FE FF 		UTF-16 BE
             if (data.Length >= 3 && data[0] == 0xEF && data[1] == 0xBB && data[2] == 0xBF)
+            {
                 return new UTF8Encoding(true);
+            }
 
             if (data.Length >= 2 && data[0] == 0xFF && data[1] == 0xFE)
+            {
                 return Encoding.Unicode;
+            }
 
             if (data.Length >= 2 && data[0] == 0xFE && data[1] == 0xFF)
+            {
                 return Encoding.BigEndianUnicode;
+            }
 
             // UTF8 無 BOM
-
             try
             {
                 UTF8Encoding utf8 = new UTF8Encoding(false, true);
-
                 utf8.GetString(data);
-
                 return utf8;
             }
             catch
@@ -7914,7 +7927,6 @@ namespace vcs_DiskDirectoryFile1
             }
 
             // ANSI/Big5
-
             return Encoding.Default;
         }
 
@@ -7931,8 +7943,6 @@ namespace vcs_DiskDirectoryFile1
                 "D:/_git/vcs/_1.data/______test_files1/__text/jap/饩Ⓚ丗钡冦冦葢轿瘅.txt",
                 "D:/_git/vcs/_1.data/______test_files1/__text/sc/001川の流れのように.txt",
             };
-
-
 
             foreach (string filename in filenames)
             {

@@ -3118,13 +3118,6 @@ req = urllib.request.Request(
     url, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
 )
 
-import sys
-import subprocess
-
-# 強制讓目前執行這個程式的 Python 環境去安裝套件
-subprocess.check_call([sys.executable, "-m", "pip", "install", "currency_converter"])
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
