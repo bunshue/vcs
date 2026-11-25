@@ -1,15 +1,19 @@
 
-# ------------------------------------------------------------  # 60個
+print(hex(old_wndproc))
 
+# ------------------------------------------------------------  # 60個
 
 import datetime
 date_string = datetime.date.today().strftime("%Y-%m-%d")
 print(date_string)
 
-
-
 # ------------------------------------------------------------  # 60個
 
+if os.path.exists("message.txt"):
+
+with open("message.txt","r",encoding="utf-8") as f:
+	text1.delete("1.0","end")
+	text1.insert("end",f.read())
 
 # 執行程式
 import subprocess

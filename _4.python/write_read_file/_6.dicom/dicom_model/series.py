@@ -31,14 +31,20 @@ class Series(object):
 
     def __eq__(self, other):
         try:
-            return self.dicom_dataset.SeriesInstanceUID == other.dicom_dataset.SeriesInstanceUID
+            return (
+                self.dicom_dataset.SeriesInstanceUID
+                == other.dicom_dataset.SeriesInstanceUID
+            )
         except Exception as e:
             logger.debug("trouble comparing two Series", exc_info=e)
             return False
 
     def __ne__(self, other):
         try:
-            return self.dicom_dataset.SeriesInstanceUID != other.dicom_dataset.SeriesInstanceUID
+            return (
+                self.dicom_dataset.SeriesInstanceUID
+                != other.dicom_dataset.SeriesInstanceUID
+            )
         except Exception as e:
             logger.debug("trouble comparing two Series", exc_info=e)
             return True

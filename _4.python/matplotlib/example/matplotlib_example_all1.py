@@ -26,12 +26,12 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 import xlrd
 
-book = xlrd.open_workbook('data/election_2018.xls')
+book = xlrd.open_workbook("data/election_2018.xls")
 sheet = book.sheet_by_index(0)
 
 for row in range(10):
@@ -42,229 +42,241 @@ table = list()
 for row in range(rows):
     table.append(sheet.row_values(row))
 for row in range(rows):
-    if table[row][0] == '':
-        table[row][0] = table[row-1][0]
+    if table[row][0] == "":
+        table[row][0] = table[row - 1][0]
 
 tainan = dict()
 for row in range(rows):
-    if table[row][0] == '臺南市':
+    if table[row][0] == "臺南市":
         tainan[table[row][1]] = table[row][6]
 
 print(type(tainan))
 print(tainan)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import xlrd
 
-#pd.read_excel kilo可用  sugar不可用, sugar降版成 pandas 1.3.5 可用
-data = pd.read_excel('data/election_2018.xls')
+# pd.read_excel kilo可用  sugar不可用, sugar降版成 pandas 1.3.5 可用
+data = pd.read_excel("data/election_2018.xls")
 
 data.info()
 data.head(10)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#pd.read_excel kilo可用  sugar不可用, sugar降版成 pandas 1.3.5 可用
+# pd.read_excel kilo可用  sugar不可用, sugar降版成 pandas 1.3.5 可用
 
-data = pd.read_excel('data/election_2018.xls')
-target = data.fillna(method='ffill')
-target = target[['地區','姓名','出生年次','推薦政黨','得票數']]
-target['年齡'] = 2018-target['出生年次']
-target = target.drop('出生年次', axis=1)
-target = target.set_index('地區')
+data = pd.read_excel("data/election_2018.xls")
+target = data.fillna(method="ffill")
+target = target[["地區", "姓名", "出生年次", "推薦政黨", "得票數"]]
+target["年齡"] = 2018 - target["出生年次"]
+target = target.drop("出生年次", axis=1)
+target = target.set_index("地區")
 target.describe()
 
 target.hist(bins=3)
 
 target
 
-#pd.read_excel kilo可用  sugar不可用, sugar降版成 pandas 1.3.5 可用
+# pd.read_excel kilo可用  sugar不可用, sugar降版成 pandas 1.3.5 可用
 
-data = pd.read_excel('data/election_2018.xls')
-target = data.fillna(method='ffill')
-target = target[['地區','姓名','出生年次','推薦政黨','得票數']]
-target['年齡'] = 2018-target['出生年次']
-target = target.drop('出生年次', axis=1)
-target = target.set_index(['地區', '推薦政黨'])
+data = pd.read_excel("data/election_2018.xls")
+target = data.fillna(method="ffill")
+target = target[["地區", "姓名", "出生年次", "推薦政黨", "得票數"]]
+target["年齡"] = 2018 - target["出生年次"]
+target = target.drop("出生年次", axis=1)
+target = target.set_index(["地區", "推薦政黨"])
 target
 
-#pd.read_excel kilo可用  sugar不可用, sugar降版成 pandas 1.3.5 可用
+# pd.read_excel kilo可用  sugar不可用, sugar降版成 pandas 1.3.5 可用
 
-data = pd.read_excel('data/election_2018.xls')
-target = data.fillna(method='ffill')
-target = target[['地區','姓名','出生年次','推薦政黨','得票數']]
-target['年齡'] = 2018-target['出生年次']
-target = target.drop('出生年次', axis=1)
-target = target.set_index(['推薦政黨', '地區']).sort_index()
+data = pd.read_excel("data/election_2018.xls")
+target = data.fillna(method="ffill")
+target = target[["地區", "姓名", "出生年次", "推薦政黨", "得票數"]]
+target["年齡"] = 2018 - target["出生年次"]
+target = target.drop("出生年次", axis=1)
+target = target.set_index(["推薦政黨", "地區"]).sort_index()
 target
 
-#pd.read_excel kilo可用  sugar不可用, sugar降版成 pandas 1.3.5 可用
+# pd.read_excel kilo可用  sugar不可用, sugar降版成 pandas 1.3.5 可用
 
-data = pd.read_excel('data/election_2018.xls')
-target = data.fillna(method='ffill')
-target = target[['地區','姓名','出生年次','推薦政黨','得票數']]
-target['年齡'] = 2018-target['出生年次']
-target = target.drop('出生年次', axis=1)
-target = target.set_index(['推薦政黨', '地區']).sort_index()
-print("國民黨：\t{:>10,d}票".format(target.loc['中國國民黨']['得票數'].sum()))
-print("民進黨：\t{:>10,d}票".format(target.loc['民主進步黨']['得票數'].sum()))
-print("其它：\t{:>10,d}票".format(target.loc['無黨籍及未經政黨推薦']['得票數'].sum()))
+data = pd.read_excel("data/election_2018.xls")
+target = data.fillna(method="ffill")
+target = target[["地區", "姓名", "出生年次", "推薦政黨", "得票數"]]
+target["年齡"] = 2018 - target["出生年次"]
+target = target.drop("出生年次", axis=1)
+target = target.set_index(["推薦政黨", "地區"]).sort_index()
+print("國民黨：\t{:>10,d}票".format(target.loc["中國國民黨"]["得票數"].sum()))
+print("民進黨：\t{:>10,d}票".format(target.loc["民主進步黨"]["得票數"].sum()))
+print("其它：\t{:>10,d}票".format(target.loc["無黨籍及未經政黨推薦"]["得票數"].sum()))
 
-#如果明明有的字型, matplotlib 說找不到的話, 有可能需要讓 matplotlib 清掉原本的 cache。
-#matplotlib.font_manager._rebuild()
-#from matplotlib.font_manager import _rebuild
+# 如果明明有的字型, matplotlib 說找不到的話, 有可能需要讓 matplotlib 清掉原本的 cache。
+# matplotlib.font_manager._rebuild()
+# from matplotlib.font_manager import _rebuild
 
-#pd.read_excel kilo可用  sugar不可用, sugar降版成 pandas 1.3.5 可用
+# pd.read_excel kilo可用  sugar不可用, sugar降版成 pandas 1.3.5 可用
 
-data = pd.read_excel('data/election_2018.xls')
-target = data.fillna(method='ffill')
-target = target[['地區','姓名','推薦政黨','得票數']].groupby(by = '推薦政黨')['得票數'].sum()
-target.plot.pie(y='推薦政黨')
+data = pd.read_excel("data/election_2018.xls")
+target = data.fillna(method="ffill")
+target = target[["地區", "姓名", "推薦政黨", "得票數"]].groupby(by="推薦政黨")["得票數"].sum()
+target.plot.pie(y="推薦政黨")
 target
 
 plt.show()
 
-#如果明明有的字型, matplotlib 說找不到的話, 有可能需要讓 matplotlib 清掉原本的 cache。
-#matplotlib.font_manager._rebuild()
-#from matplotlib.font_manager import _rebuild
-#_rebuild()
+# 如果明明有的字型, matplotlib 說找不到的話, 有可能需要讓 matplotlib 清掉原本的 cache。
+# matplotlib.font_manager._rebuild()
+# from matplotlib.font_manager import _rebuild
+# _rebuild()
 
-#pd.read_excel kilo可用  sugar不可用, sugar降版成 pandas 1.3.5 可用
+# pd.read_excel kilo可用  sugar不可用, sugar降版成 pandas 1.3.5 可用
 
-data = pd.read_excel('data/election_2018.xls')
-target = data.fillna(method='ffill')
-target = target[['地區','姓名','出生年次','推薦政黨','得票數']]
-target['年齡'] = 2018-target['出生年次']
-target = target.drop('出生年次', axis=1)
-target = target.set_index(['地區'])
-tainan = target.loc['臺南市'][['姓名','得票數']]
-tainan = tainan.set_index(['姓名'])
-tainan.plot.pie(y='得票數')
+data = pd.read_excel("data/election_2018.xls")
+target = data.fillna(method="ffill")
+target = target[["地區", "姓名", "出生年次", "推薦政黨", "得票數"]]
+target["年齡"] = 2018 - target["出生年次"]
+target = target.drop("出生年次", axis=1)
+target = target.set_index(["地區"])
+tainan = target.loc["臺南市"][["姓名", "得票數"]]
+tainan = tainan.set_index(["姓名"])
+tainan.plot.pie(y="得票數")
 tainan.plot.bar()
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-data = pd.read_csv('data/hualien.csv')
-target = data[['年度','總人口數','平地原住民','山地原住民']]
-target = target.set_index(target['年度'])
-target = target.drop(['年度'], axis=1)
+data = pd.read_csv("data/hualien.csv")
+target = data[["年度", "總人口數", "平地原住民", "山地原住民"]]
+target = target.set_index(target["年度"])
+target = target.drop(["年度"], axis=1)
 print(target)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-data = pd.read_csv('data/hualien.csv')
-target = pd.DataFrame(data[['年度','總人口數','平地原住民','山地原住民']])
-target = target.set_index(target['年度'])
-target = target.drop(['年度'], axis=1)
+data = pd.read_csv("data/hualien.csv")
+target = pd.DataFrame(data[["年度", "總人口數", "平地原住民", "山地原住民"]])
+target = target.set_index(target["年度"])
+target = target.drop(["年度"], axis=1)
 print(target)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-data = pd.read_csv('data/hualien.csv')
-target = pd.DataFrame(data[['年度','總人口數','平地原住民','山地原住民']])
-target = target.set_index(target['年度'])
-fig1 = target.drop(['年度'], axis=1)
-fig2 = target.drop(['年度', '總人口數'], axis=1)
-fig1.plot(ylim=(0,400000))
-fig2.plot.bar(ylim=(0,80000))
+data = pd.read_csv("data/hualien.csv")
+target = pd.DataFrame(data[["年度", "總人口數", "平地原住民", "山地原住民"]])
+target = target.set_index(target["年度"])
+fig1 = target.drop(["年度"], axis=1)
+fig2 = target.drop(["年度", "總人口數"], axis=1)
+fig1.plot(ylim=(0, 400000))
+fig2.plot.bar(ylim=(0, 80000))
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#折線圖
-def lineChart(s,x):
-    plt.xlabel('城市名稱')
-    plt.ylabel('民調原分比')
-    plt.title('各種城市喜好度比較')
-    plt.plot(x, s, marker='.')
 
-#長條圖
-def barChart(s,x):
-    plt.xlabel('城市名稱')
-    plt.ylabel('民調原分比')
-    plt.title('各種城市喜好度比較')
+# 折線圖
+def lineChart(s, x):
+    plt.xlabel("城市名稱")
+    plt.ylabel("民調原分比")
+    plt.title("各種城市喜好度比較")
+    plt.plot(x, s, marker=".")
+
+
+# 長條圖
+def barChart(s, x):
+    plt.xlabel("城市名稱")
+    plt.ylabel("民調原分比")
+    plt.title("各種城市喜好度比較")
     plt.bar(x, s)
 
-#橫條圖
-def barhChart(s,x):
+
+# 橫條圖
+def barhChart(s, x):
     plt.barh(x, s)
 
-#圓餅圖
-def pieChart(s,x):	 
-    plt.pie(s,labels=x, autopct='%.2f%%')
 
-#要繪圖的數據
-x = ['第一季', '第二季', '第三季', '第四季']
+# 圓餅圖
+def pieChart(s, x):
+    plt.pie(s, labels=x, autopct="%.2f%%")
+
+
+# 要繪圖的數據
+x = ["第一季", "第二季", "第三季", "第四季"]
 s = [13.2, 20.1, 11.9, 14.2]
 
-#定義子圖
-plt.figure(1, figsize=(8, 6),clear=True)
+# 定義子圖
+plt.figure(1, figsize=(8, 6), clear=True)
 plt.subplots_adjust(left=0.1, right=0.95)
 
-plt.subplot(2,2,1)
-pieChart(s,x)
+plt.subplot(2, 2, 1)
+pieChart(s, x)
 
-x = ['程式設計概論', '多媒體概論', '計算機概論', '網路概論']
+x = ["程式設計概論", "多媒體概論", "計算機概論", "網路概論"]
 s = [3560, 4000, 4356, 1800]
-plt.subplot(2,2,2)
-barhChart(s,x)
+plt.subplot(2, 2, 2)
+barhChart(s, x)
 
-x = ['新北市', '台北市', '高雄市', '台南市','桃園市','台中市']
-s = [0.2, 0.3, 0.15, 0.23,0.19, 0.27]
+x = ["新北市", "台北市", "高雄市", "台南市", "桃園市", "台中市"]
+s = [0.2, 0.3, 0.15, 0.23, 0.19, 0.27]
 plt.subplot(223)
-lineChart(s,x)
+lineChart(s, x)
 
 plt.subplot(224)
-barChart(s,x)
+barChart(s, x)
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#橫條圖
-def diagram_1(s,x):
-	plt.barh(x, s)
 
-#圓餅圖
-def diagram_2(s,x):	 
-	plt.pie(s,labels=x, autopct='%.2f%%')
-#折線圖+長條圖
+# 橫條圖
+def diagram_1(s, x):
+    plt.barh(x, s)
 
-def diagram_4(s,x):
-    plt.plot(x, s, marker='.')
-    plt.bar(x, s, alpha=0.5)	
 
-#長條圖
-def diagram_3(s,x):
-	plt.bar(x, s)	
+# 圓餅圖
+def diagram_2(s, x):
+    plt.pie(s, labels=x, autopct="%.2f%%")
 
-#要繪圖的數據
-x = ['高雄','台中','宜蘭','花蓮']
-s = [89,58,63,50]
 
-#設定子圖
-plt.figure(1, figsize=(8, 8),clear=True)
+# 折線圖+長條圖
+
+
+def diagram_4(s, x):
+    plt.plot(x, s, marker=".")
+    plt.bar(x, s, alpha=0.5)
+
+
+# 長條圖
+def diagram_3(s, x):
+    plt.bar(x, s)
+
+
+# 要繪圖的數據
+x = ["高雄", "台中", "宜蘭", "花蓮"]
+s = [89, 58, 63, 50]
+
+# 設定子圖
+plt.figure(1, figsize=(8, 8), clear=True)
 plt.subplots_adjust(left=0.1, right=0.95)
 
 plt.subplot(221)
-diagram_1(s,x)
+diagram_1(s, x)
 
 plt.subplot(222)
-diagram_2(s,x)
+diagram_2(s, x)
 
 plt.subplot(223)
-diagram_3(s,x)
+diagram_3(s, x)
 
-plt.subplot(2,2,4)
-diagram_4(s,x)
+plt.subplot(2, 2, 4)
+diagram_4(s, x)
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 # 設定圖書分類及銷售額比例
 listx = ["商業理財", "文學小說", "藝術設計", "人文科普", "語言電腦", "心靈養生", "生活風格", "親子共享"]
@@ -317,11 +329,11 @@ plt.legend()
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 print("helmoltz coils")
 
-#Contour plot
+# Contour plot
 
 from matplotlib.cm import viridis as colormap  # future default colormap
 
@@ -331,11 +343,13 @@ Setup
 r = 1.0
 res = 200  # grid resolution. 100 may be enough, resulting in smaller SVG file)
 
+
 def dist3(a, b, c, d, e, f):
     """Compute the Euclidian distance from (d, e, f) to (a, b, c),
     raised to the 3rd power (and with lower boundary `r`).
     """
-    return np.maximum(r, np.sqrt((a - d)**2 + (b - e)**2 + (c - f)**2))
+    return np.maximum(r, np.sqrt((a - d) ** 2 + (b - e) ** 2 + (c - f) ** 2))
+
 
 x = np.linspace(-150, 150, res)
 y = np.linspace(-150, 150, res)
@@ -352,7 +366,7 @@ for coils in [1.0, -1.0]:
         xc = 100 * np.sin(np.pi * p / 180.0)
         yc = 50 * coils
         zc = 100 * np.cos(np.pi * p / 180.0)
-        MAG = 1.0 / ((r + dist3(X, Y, 0.0, xc, yc, zc))**3)
+        MAG = 1.0 / ((r + dist3(X, Y, 0.0, xc, yc, zc)) ** 3)
         # (We leave out the necessary constants that would be required
         # to get proper units because only scaling behavior will be shown
         # in the plot. This is also why a sum instead of an integral
@@ -362,14 +376,18 @@ for coils in [1.0, -1.0]:
         # one builds an explicit list of all the vectors (X - xc, Y - yc, -zc)
         # instead of relying on broadcasting. One then reshapes the array Z
         # (of the cross-product results) as previously expected.
-        vectors = np.array([[xval - xc, yval - yc, -zc] for (xval, yval)
-                            in zip(X.reshape(-1), Y.reshape(-1))])
+        vectors = np.array(
+            [
+                [xval - xc, yval - yc, -zc]
+                for (xval, yval) in zip(X.reshape(-1), Y.reshape(-1))
+            ]
+        )
         Z = np.cross(vectors, (-zc, 0.0, xc))
         Z = Z.reshape(res, res, 3)
-        F += Z * MAG[:,:,np.newaxis]
+        F += Z * MAG[:, :, np.newaxis]
 
 # Compute the B-field
-B = np.sqrt(F[..., 0]**2 + F[..., 1]**2 + F[..., 2]**2)
+B = np.sqrt(F[..., 0] ** 2 + F[..., 1] ** 2 + F[..., 2] ** 2)
 # Scale field strength by value at center
 B = B / B[res // 2, res // 2]
 
@@ -403,11 +421,18 @@ print("------------------------------------------------------------")  # 60個
 from matplotlib.cm import jet as colormap
 from matplotlib.ticker import NullFormatter, MultipleLocator
 
-t, w, r = zip((0.1, 0.4, 1), (0.9, 0.3, 5), (1.7, 0.5, 7), (2.7, 0.6, 6),
-              (3.5, 0.3, 3), (4.5, 0.4, 4), (5.3, 0.3, 7))
+t, w, r = zip(
+    (0.1, 0.4, 1),
+    (0.9, 0.3, 5),
+    (1.7, 0.5, 7),
+    (2.7, 0.6, 6),
+    (3.5, 0.3, 3),
+    (4.5, 0.4, 4),
+    (5.3, 0.3, 7),
+)
 
-fig, ax = plt.subplots(subplot_kw={'polar': True})
-bars = ax.bar(t, r, width=w, bottom=0.0, lw=2, edgecolor='Black', zorder=2)
+fig, ax = plt.subplots(subplot_kw={"polar": True})
+bars = ax.bar(t, r, width=w, bottom=0.0, lw=2, edgecolor="Black", zorder=2)
 
 for r, bar in zip(r, bars):
     bar.set_facecolor(colormap(r / 9.0))
@@ -425,7 +450,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#Dolphins
+# Dolphins
 
 import matplotlib.cm as cm
 from matplotlib.patches import Circle, PathPatch
@@ -438,17 +463,21 @@ x = r * np.cos(t)
 y = r * np.sin(t)
 
 fig, ax = plt.subplots(figsize=(6, 6))
-circle = Circle((0, 0), 1, facecolor='none',
-                edgecolor=(0, 0.8, 0.8), linewidth=3, alpha=0.5)
+circle = Circle(
+    (0, 0), 1, facecolor="none", edgecolor=(0, 0.8, 0.8), linewidth=3, alpha=0.5
+)
 ax.add_patch(circle)
 
-im = plt.imshow(np.random.random((100, 100)),
-                origin='lower', cmap=cm.winter,
-                interpolation='spline36',
-                extent=([-1, 1, -1, 1]))
+im = plt.imshow(
+    np.random.random((100, 100)),
+    origin="lower",
+    cmap=cm.winter,
+    interpolation="spline36",
+    extent=([-1, 1, -1, 1]),
+)
 im.set_clip_path(circle)
 
-plt.plot(x, y, 'o', color=(0.9, 0.9, 1.0), alpha=0.8)
+plt.plot(x, y, "o", color=(0.9, 0.9, 1.0), alpha=0.8)
 
 # Dolphin from OpenClipart library by Andy Fitzsimon
 #   <cc:License rdf:about="http://web.resource.org/cc/PublicDomain">
@@ -488,30 +517,31 @@ codes = []
 parts = dolphin.split()
 i = 0
 code_map = {
-    'M': Path.MOVETO,
-    'C': Path.CURVE4,
-    'L': Path.LINETO,
+    "M": Path.MOVETO,
+    "C": Path.CURVE4,
+    "L": Path.LINETO,
 }
 
 while i < len(parts):
     path_code = code_map[parts[i]]
     npoints = Path.NUM_VERTICES_FOR_CODE[path_code]
     codes.extend([path_code] * npoints)
-    vertices.extend([[*map(float, y.split(','))]
-                     for y in parts[i + 1:][:npoints]])
+    vertices.extend([[*map(float, y.split(","))] for y in parts[i + 1 :][:npoints]])
     i += npoints + 1
 vertices = np.array(vertices)
 vertices[:, 1] -= 160
 
 dolphin_path = Path(vertices, codes)
-dolphin_patch = PathPatch(dolphin_path, facecolor=(0.6, 0.6, 0.6),
-                          edgecolor=(0.0, 0.0, 0.0))
+dolphin_patch = PathPatch(
+    dolphin_path, facecolor=(0.6, 0.6, 0.6), edgecolor=(0.0, 0.0, 0.0)
+)
 ax.add_patch(dolphin_patch)
 
 vertices = Affine2D().rotate_deg(60).transform(vertices)
 dolphin_path2 = Path(vertices, codes)
-dolphin_patch2 = PathPatch(dolphin_path2, facecolor=(0.5, 0.5, 0.5),
-                           edgecolor=(0.0, 0.0, 0.0))
+dolphin_patch2 = PathPatch(
+    dolphin_path2, facecolor=(0.5, 0.5, 0.5), edgecolor=(0.0, 0.0, 0.0)
+)
 ax.add_patch(dolphin_patch2)
 
 plt.show()
@@ -643,9 +673,7 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -653,7 +681,3 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
-
-
-

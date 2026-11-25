@@ -2,14 +2,14 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import numpy as np
 
-font_filename = 'D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 python學習之matplotlib繪制動圖（FuncAnimation()參數）
@@ -29,34 +29,41 @@ python學習之matplotlib繪制動圖（FuncAnimation()參數）
 　　f.blit選擇更新所有點，還是僅更新產生變化的點。應選擇True，但mac用戶請選擇False，否則無法顯
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+
 
 def init():
-    ax.set_xlim(0, 2 * np.pi)  #設置x軸的範圍pi代表3.14...圓周率，
-    ax.set_ylim(-1, 1)          #設置y軸的範圍
-    return ln,               #返回曲線
+    ax.set_xlim(0, 2 * np.pi)  # 設置x軸的範圍pi代表3.14...圓周率，
+    ax.set_ylim(-1, 1)  # 設置y軸的範圍
+    return (ln,)  # 返回曲線
 
-def animate(n):  #n就是 FuncAnimation 裡面的 frames
+
+def animate(n):  # n就是 FuncAnimation 裡面的 frames
     print(n)
-    xdata.append(n)         #將每次傳過來的n追加到xdata中
+    xdata.append(n)  # 將每次傳過來的n追加到xdata中
     ydata.append(np.sin(n))
-    ln.set_data(xdata, ydata)    #重新設置曲線的值
-    return ln,
+    ln.set_data(xdata, ydata)  # 重新設置曲線的值
+    return (ln,)
 
-fig, ax = plt.subplots()   #生成子圖，相當於fig = plt.figure(),ax = fig.add_subplot(),其中ax的函數參數表示把當前畫布進行分割，例：fig.add_subplot(2,2,2).表示將畫布分割為兩行兩列　　　　　　　　　　　　　　　　#ax在第2個子圖中繪制，其中行優先，
-xdata, ydata = [], []      #初始化兩個數組
-ln, = ax.plot([], [], 'r-', animated = False)
 
-interval = 100   #每隔 interval msec 執行 animate()動畫
-ani = FuncAnimation(fig,
-                    animate,
-                    frames = np.linspace(0, 2 * np.pi, 10),     #這里的frames在調用animate函數是會將frames作為實參傳遞給“n”
-                    init_func = init,
-                    interval = interval,
-                    blit = True)
+(
+    fig,
+    ax,
+) = (
+    plt.subplots()
+)  # 生成子圖，相當於fig = plt.figure(),ax = fig.add_subplot(),其中ax的函數參數表示把當前畫布進行分割，例：fig.add_subplot(2,2,2).表示將畫布分割為兩行兩列　　　　　　　　　　　　　　　　#ax在第2個子圖中繪制，其中行優先，
+xdata, ydata = [], []  # 初始化兩個數組
+(ln,) = ax.plot([], [], "r-", animated=False)
+
+interval = 100  # 每隔 interval msec 執行 animate()動畫
+ani = FuncAnimation(
+    fig,
+    animate,
+    frames=np.linspace(0, 2 * np.pi, 10),  # 這里的frames在調用animate函數是會將frames作為實參傳遞給“n”
+    init_func=init,
+    interval=interval,
+    blit=True,
+)
 plt.show()
 
-print('------------------------------------------------------------')	#60個
-
-
-
+print("------------------------------------------------------------")  # 60個

@@ -38,6 +38,7 @@ def animate(frame_number, bar_container):
 
     return bar_container.patches
 
+
 # %%
 # Using :func:`~matplotlib.pyplot.hist` allows us to get an instance of
 # `.BarContainer`, which is a collection of `.Rectangle` instances.  Since
@@ -47,8 +48,7 @@ def animate(frame_number, bar_container):
 # Output generated via `matplotlib.animation.Animation.to_jshtml`.
 
 fig, ax = plt.subplots()
-_, _, bar_container = ax.hist(data, HIST_BINS, lw=1,
-                              ec="yellow", fc="green", alpha=0.5)
+_, _, bar_container = ax.hist(data, HIST_BINS, lw=1, ec="yellow", fc="green", alpha=0.5)
 ax.set_ylim(top=55)  # set safe limit to ensure that all data is visible.
 
 anim = functools.partial(animate, bar_container=bar_container)

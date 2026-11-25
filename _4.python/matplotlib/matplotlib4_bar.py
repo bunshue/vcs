@@ -964,13 +964,9 @@ plt.xticks(x, names)  # x 軸刻度
 plt.yticks(np.arange(0, 50, 5))  # y 軸刻度
 
 
-
-
-
-
-#plt.bar(listx2, listy2, color="red", label="女性")
-#plt.xlim(0, 20)
-#plt.ylim(0, 100)
+# plt.bar(listx2, listy2, color="red", label="女性")
+# plt.xlim(0, 20)
+# plt.ylim(0, 100)
 
 
 # 預設字體大小

@@ -25,14 +25,18 @@ class Image(object):
 
     def __eq__(self, other):
         try:
-            return self.dicom_dataset.SOPInstanceUID == other.dicom_dataset.SOPInstanceUID
+            return (
+                self.dicom_dataset.SOPInstanceUID == other.dicom_dataset.SOPInstanceUID
+            )
         except Exception as e:
             logger.debug("trouble comparing two Images", exc_info=e)
             return False
 
     def __ne__(self, other):
         try:
-            return self.dicom_dataset.SOPInstanceUID != other.dicom_dataset.SOPInstanceUID
+            return (
+                self.dicom_dataset.SOPInstanceUID != other.dicom_dataset.SOPInstanceUID
+            )
         except Exception as e:
             logger.debug("trouble comparing two Images", exc_info=e)
             return True

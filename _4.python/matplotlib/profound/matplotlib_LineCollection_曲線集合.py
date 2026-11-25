@@ -23,9 +23,11 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
+
 def show():
     plt.tight_layout()
     plt.show()
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -56,7 +58,7 @@ print("曲線顏色數 :", len(line_collection.get_edgecolors()))
 
 print("------------------------------")  # 30個
 
-polys = mc.PolyCollection(lines, color='r', facecolors="none")
+polys = mc.PolyCollection(lines, color="r", facecolors="none")
 ax2.add_collection(polys)
 ax2.set_aspect("equal")
 ax2.autoscale()
@@ -257,34 +259,47 @@ tetrahedron(width)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#橢圓集合(EllipseCollection)
+# 橢圓集合(EllipseCollection)
 
 from matplotlib import collections as mc
 
 # `EllipseColletion`的`unit`參數：`unit='x'`（左圖）、`unit='xy'`（右圖）
-angles = np.linspace(0, 2*np.pi, 12, endpoint=False)
-offsets = np.c_[3*np.cos(angles), 2*np.sin(angles)]
+angles = np.linspace(0, 2 * np.pi, 12, endpoint=False)
+offsets = np.c_[3 * np.cos(angles), 2 * np.sin(angles)]
 angles_deg = np.rad2deg(angles)
 widths = np.full_like(angles, 2)
 heights = np.full_like(angles, 1)
 
 fig, axes = plt.subplots(1, 2, figsize=(12, 4))  # 1X2 子圖
 
-ellipse_collection0 = mc.EllipseCollection(widths, heights, angles_deg, units="x", array=angles,
-                          offsets=offsets, transOffset=axes[0].transData)
-axes[0].add_collection(ellipse_collection0)# add_collection 只能用 ax
+ellipse_collection0 = mc.EllipseCollection(
+    widths,
+    heights,
+    angles_deg,
+    units="x",
+    array=angles,
+    offsets=offsets,
+    transOffset=axes[0].transData,
+)
+axes[0].add_collection(ellipse_collection0)  # add_collection 只能用 ax
 axes[0].axis((-5, 5, -5, 5))
 
-ellipse_collection1 = mc.EllipseCollection(widths, heights, angles_deg, units="xy", array=angles,
-                          offsets=offsets, transOffset=axes[1].transData)
-axes[1].add_collection(ellipse_collection1)# add_collection 只能用 ax
+ellipse_collection1 = mc.EllipseCollection(
+    widths,
+    heights,
+    angles_deg,
+    units="xy",
+    array=angles,
+    offsets=offsets,
+    transOffset=axes[1].transData,
+)
+axes[1].add_collection(ellipse_collection1)  # add_collection 只能用 ax
 axes[1].axis((-5, 5, -5, 5))
-#axes[1].set_aspect("equal")
+# axes[1].set_aspect("equal")
 show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -303,5 +318,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------")  # 30個
-
-

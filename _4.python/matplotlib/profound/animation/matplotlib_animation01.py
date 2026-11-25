@@ -2,16 +2,16 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import numpy as np
 
-font_filename = 'D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-'''
+"""
 # 建立最初化的 line 資料 (x, y)  
 def init():  
     line.set_data([], [])  
@@ -37,48 +37,52 @@ ani = FuncAnimation(fig, animate,
                     interval = interval)
 plt.show()
 
-'''
+"""
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-# 建立最初化點的位置 
+
+# 建立最初化點的位置
 def init():
-    dot.set_data(x[0], y[0])        # 更新紅色點的資料
-    return dot,
+    dot.set_data(x[0], y[0])  # 更新紅色點的資料
+    return (dot,)
+
+
 # 繪製 sin 波形, 這個函數將被重複調用
-def animate(i):    
-    dot.set_data(x[i], y[i])        # 更新紅色點的資料
-    return dot,
+def animate(i):
+    dot.set_data(x[i], y[i])  # 更新紅色點的資料
+    return (dot,)
+
 
 # 建立動畫需要的 Figure 物件
 fig = plt.figure()
 N = 200
 # 建立軸物件與設定大小
-ax = plt.axes(xlim = (0, 2 * np.pi), ylim = (-1.5, 1.5))
+ax = plt.axes(xlim=(0, 2 * np.pi), ylim=(-1.5, 1.5))
 # 建立和繪製 sin 波形
 x = np.linspace(0, 2 * np.pi, N)
 y = np.sin(x)
-line, = ax.plot(x, y, color = 'g', linestyle = '-', linewidth = 3)
+(line,) = ax.plot(x, y, color="g", linestyle="-", linewidth=3)
 # 建立和繪製紅點
-dot, = ax.plot([], [], color = 'red', marker = 'o',
-               markersize = 15, linestyle = '')
+(dot,) = ax.plot([], [], color="red", marker="o", markersize=15, linestyle="")
 
-interval = 20   #每隔 interval msec 執行 animate()動畫
-ani = FuncAnimation(fig = fig,
-                    func = animate,
-                    frames = N,
-                    init_func = init,
-                    interval = interval,
-                    blit = True,
-                    repeat = True)
+interval = 20  # 每隔 interval msec 執行 animate()動畫
+ani = FuncAnimation(
+    fig=fig,
+    func=animate,
+    frames=N,
+    init_func=init,
+    interval=interval,
+    blit=True,
+    repeat=True,
+)
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-#偽存檔
-#ani.save('sin.gif', writer='pillow')        # 儲存 sin.gif 檔案
+# 偽存檔
+# ani.save('sin.gif', writer='pillow')        # 儲存 sin.gif 檔案
 
-#偽存檔
-#ani.save('sinball.gif', writer='pillow')   # 儲存 sinball.gif 檔案
-
+# 偽存檔
+# ani.save('sinball.gif', writer='pillow')   # 儲存 sinball.gif 檔案

@@ -106,7 +106,6 @@ print("圓周率 = ", pi)
 plt.subplot(233)
 
 
-
 def dice_generator(N, sides):
     # 處理隨機數
     for i in range(N):
@@ -132,8 +131,8 @@ NX = len(frequencies)
 x = np.arange(NX)  # 長條圖x軸座標
 width = 0.35  # 長條圖寬度
 
-#plt.bar(x, frequencies, width, color="g")  # 繪製長條圖
-plt.bar(x, frequencies, width, color='orange', hatch='o')  # 繪製長條圖, 多了hatch
+# plt.bar(x, frequencies, width, color="g")  # 繪製長條圖
+plt.bar(x, frequencies, width, color="orange", hatch="o")  # 繪製長條圖, 多了hatch
 
 plt.xlabel("骰子點數")
 plt.ylabel("出現次數")
@@ -351,26 +350,28 @@ plt.figure(
 plt.subplot(231)
 
 x = np.linspace(-3, 3, 50)
-y1 = 2*x + 1
+y1 = 2 * x + 1
 y2 = x**2
 
 
 plt.plot(x, y2)
 # plot the second curve in this figure with certain parameters
-plt.plot(x, y1, color='red', linewidth=1.0, linestyle='--')
+plt.plot(x, y1, color="red", linewidth=1.0, linestyle="--")
 # set x limits
 plt.xlim((-1, 2))
 plt.ylim((-2, 3))
-plt.xlabel('I am x')
-plt.ylabel('I am y')
+plt.xlabel("I am x")
+plt.ylabel("I am y")
 
 # set new sticks
 new_ticks = np.linspace(-1, 2, 5)
 print(new_ticks)
 plt.xticks(new_ticks)
 # set tick labels
-plt.yticks([-2, -1.8, -1, 1.22, 3],
-           [r'$really\ bad$', r'$bad$', r'$normal$', r'$good$', r'$really\ good$'])
+plt.yticks(
+    [-2, -1.8, -1, 1.22, 3],
+    [r"$really\ bad$", r"$bad$", r"$normal$", r"$good$", r"$really\ good$"],
+)
 
 
 # 第二張圖
@@ -379,7 +380,7 @@ plt.subplot(232)
 # legend
 
 x = np.linspace(-3, 3, 50)
-y1 = 2*x + 1
+y1 = 2 * x + 1
 y2 = x**2
 
 # set x limits
@@ -390,14 +391,16 @@ plt.ylim((-2, 3))
 new_sticks = np.linspace(-1, 2, 5)
 plt.xticks(new_sticks)
 # set tick labels
-plt.yticks([-2, -1.8, -1, 1.22, 3],
-           [r'$really\ bad$', r'$bad$', r'$normal$', r'$good$', r'$really\ good$'])
+plt.yticks(
+    [-2, -1.8, -1, 1.22, 3],
+    [r"$really\ bad$", r"$bad$", r"$normal$", r"$good$", r"$really\ good$"],
+)
 
-l1, = plt.plot(x, y2, label='linear line')
-l2, = plt.plot(x, y1, color='red', linewidth=1.0, linestyle='--', label='square line')
+(l1,) = plt.plot(x, y2, label="linear line")
+(l2,) = plt.plot(x, y1, color="red", linewidth=1.0, linestyle="--", label="square line")
 
 # plt.legend(loc='upper right')
-plt.legend(handles=[l1, l2], labels=['up', 'down'],  loc='best')
+plt.legend(handles=[l1, l2], labels=["up", "down"], loc="best")
 # the "," is very important in here l1, = plt... and l2, = plt... for this step
 """legend( handles=(line1, line2, line3),
            labels=('label1', 'label2', 'label3'),
@@ -431,7 +434,6 @@ plt.subplot(235)
 
 # 第六張圖
 plt.subplot(236)
-
 
 
 plt.show()
@@ -539,13 +541,13 @@ plt.figure(figsize=(12, 8))
 # axis setting
 
 x = np.linspace(-3, 3, 50)
-y1 = 2*x + 1
+y1 = 2 * x + 1
 y2 = x**2
 
 
 plt.plot(x, y2)
 # plot the second curve in this figure with certain parameters
-plt.plot(x, y1, color='red', linewidth=1.0, linestyle='--')
+plt.plot(x, y1, color="red", linewidth=1.0, linestyle="--")
 # set x limits
 plt.xlim((-1, 2))
 plt.ylim((-2, 3))
@@ -554,74 +556,112 @@ plt.ylim((-2, 3))
 new_ticks = np.linspace(-1, 2, 5)
 plt.xticks(new_ticks)
 # set tick labels
-plt.yticks([-2, -1.8, -1, 1.22, 3],
-           ['$really\ bad$', '$bad$', '$normal$', '$good$', '$really\ good$'])
+plt.yticks(
+    [-2, -1.8, -1, 1.22, 3],
+    ["$really\ bad$", "$bad$", "$normal$", "$good$", "$really\ good$"],
+)
 # to use '$ $' for math text and nice looking, e.g. '$\pi$'
 
 # gca = 'get current axis'
 ax = plt.gca()
-ax.spines['right'].set_color('none')
-ax.spines['top'].set_color('none')
+ax.spines["right"].set_color("none")
+ax.spines["top"].set_color("none")
 
-ax.xaxis.set_ticks_position('bottom')
+ax.xaxis.set_ticks_position("bottom")
 # ACCEPTS: [ 'top' | 'bottom' | 'both' | 'default' | 'none' ]
 
-ax.spines['bottom'].set_position(('data', 0))
+ax.spines["bottom"].set_position(("data", 0))
 # the 1st is in 'outward' | 'axes' | 'data'
 # axes: percentage of y axis
 # data: depend on y data
 
-ax.yaxis.set_ticks_position('left')
+ax.yaxis.set_ticks_position("left")
 # ACCEPTS: [ 'left' | 'right' | 'both' | 'default' | 'none' ]
 
-ax.spines['left'].set_position(('data',0))
+ax.spines["left"].set_position(("data", 0))
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#8_annotation.py
+# 8_annotation.py
 
 x = np.linspace(-3, 3, 50)
-y = 2*x + 1
+y = 2 * x + 1
 
-plt.figure(num=1, figsize=(8, 5),)
+plt.figure(
+    num=1,
+    figsize=(8, 5),
+)
 
-plt.plot(x, y,)
+plt.plot(
+    x,
+    y,
+)
 
 ax = plt.gca()
-ax.spines['right'].set_color('none')
-ax.spines['top'].set_color('none')
-ax.spines['top'].set_color('none')
-ax.xaxis.set_ticks_position('bottom')
-ax.spines['bottom'].set_position(('data', 0))
-ax.yaxis.set_ticks_position('left')
-ax.spines['left'].set_position(('data', 0))
+ax.spines["right"].set_color("none")
+ax.spines["top"].set_color("none")
+ax.spines["top"].set_color("none")
+ax.xaxis.set_ticks_position("bottom")
+ax.spines["bottom"].set_position(("data", 0))
+ax.yaxis.set_ticks_position("left")
+ax.spines["left"].set_position(("data", 0))
 
 x0 = 1
-y0 = 2*x0 + 1
-plt.plot([x0, x0,], [0, y0,], 'k--', linewidth=2.5)
-plt.scatter([x0, ], [y0, ], s=50, color='b')
+y0 = 2 * x0 + 1
+plt.plot(
+    [
+        x0,
+        x0,
+    ],
+    [
+        0,
+        y0,
+    ],
+    "k--",
+    linewidth=2.5,
+)
+plt.scatter(
+    [
+        x0,
+    ],
+    [
+        y0,
+    ],
+    s=50,
+    color="b",
+)
 
 # method 1:
 #####################
-plt.annotate(r'$2x+1=%s$' % y0, xy=(x0, y0), xycoords='data', xytext=(+30, -30),
-             textcoords='offset points', fontsize=16,
-             arrowprops=dict(arrowstyle='->', connectionstyle="arc3,rad=.2"))
+plt.annotate(
+    r"$2x+1=%s$" % y0,
+    xy=(x0, y0),
+    xycoords="data",
+    xytext=(+30, -30),
+    textcoords="offset points",
+    fontsize=16,
+    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
+)
 
 # method 2:
 ########################
-plt.text(-3.7, 3, r'$This\ is\ the\ some\ text. \mu\ \sigma_i\ \alpha_t$',
-         fontdict={'size': 16, 'color': 'r'})
+plt.text(
+    -3.7,
+    3,
+    r"$This\ is\ the\ some\ text. \mu\ \sigma_i\ \alpha_t$",
+    fontdict={"size": 16, "color": "r"},
+)
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#9_tick_visibility.py
+# 9_tick_visibility.py
 
 x = np.linspace(-3, 3, 50)
-y = 0.1*x
+y = 0.1 * x
 
 plt.figure(figsize=(12, 8))
 
@@ -629,17 +669,17 @@ plt.plot(x, y, linewidth=10)
 plt.ylim(-2, 2)
 
 ax = plt.gca()
-ax.spines['right'].set_color('none')
-ax.spines['top'].set_color('none')
-ax.spines['top'].set_color('none')
-ax.xaxis.set_ticks_position('bottom')
-ax.spines['bottom'].set_position(('data', 0))
-ax.yaxis.set_ticks_position('left')
-ax.spines['left'].set_position(('data', 0))
+ax.spines["right"].set_color("none")
+ax.spines["top"].set_color("none")
+ax.spines["top"].set_color("none")
+ax.xaxis.set_ticks_position("bottom")
+ax.spines["bottom"].set_position(("data", 0))
+ax.yaxis.set_ticks_position("left")
+ax.spines["left"].set_position(("data", 0))
 
 for label in ax.get_xticklabels() + ax.get_yticklabels():
     label.set_fontsize(12)
-    label.set_bbox(dict(facecolor='white', edgecolor='None', alpha=0.7))
+    label.set_bbox(dict(facecolor="white", edgecolor="None", alpha=0.7))
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -928,9 +968,7 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -938,4 +976,3 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-

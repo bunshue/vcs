@@ -1121,7 +1121,6 @@ print("------------------------------------------------------------")  # 60個
 """
 
 
-
 """
 # Geographic Data With Basemap
 # pip install basemap
@@ -1357,14 +1356,14 @@ style.use("ggplot")  # 使用ggplot型態繪圖
 x = np.linspace(0, 10, 1000)
 y = np.sin(x)
 
-plt.plot(x,y)
+plt.plot(x, y)
 
 show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#在圖表中顯示中文
+# 在圖表中顯示中文
 
 from matplotlib.font_manager import fontManager
 
@@ -1384,15 +1383,23 @@ plt.subplots_adjust(0, 0, 1, 1, 0, 0)
 plt.xticks([])
 plt.yticks([])
 x, y = 0.05, 0.05
-fonts = [font.name for font in fontManager.ttflist if 
-             os.path.exists(font.fname) and os.stat(font.fname).st_size>1e6]
+fonts = [
+    font.name
+    for font in fontManager.ttflist
+    if os.path.exists(font.fname) and os.stat(font.fname).st_size > 1e6
+]
 font = set(fonts)
-dy = (1.0 - y) / (len(fonts) // 4 + (len(fonts)%4 != 0))
+dy = (1.0 - y) / (len(fonts) // 4 + (len(fonts) % 4 != 0))
 
 for font in fonts:
-    t = ax.text(x, y + dy / 2, u"中文字型", 
-                {'fontname':font, 'fontsize':14}, transform=ax.transAxes)
-    ax.text(x, y, font, {'fontsize':12}, transform=ax.transAxes)
+    t = ax.text(
+        x,
+        y + dy / 2,
+        "中文字型",
+        {"fontname": font, "fontsize": 14},
+        transform=ax.transAxes,
+    )
+    ax.text(x, y, font, {"fontsize": 12}, transform=ax.transAxes)
     x += 0.25
     if x >= 1.0:
         y += dy
@@ -1419,11 +1426,11 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-#Artist物件
+# Artist物件
 
 fig = plt.figure()
 
-#新增軸, 水平 : 0.15~0.7, 垂直 : 0.1~0.3
+# 新增軸, 水平 : 0.15~0.7, 垂直 : 0.1~0.3
 ax = fig.add_axes([0.15, 0.1, 0.7, 0.3])
 
 line = ax.plot([1, 2, 3], [1, 2, 1])[0]  # 傳回的是只有一個元素的清單
@@ -1432,23 +1439,23 @@ print(line is ax.lines[0])
 ax.set_xlabel("水平軸")
 ax.set_ylabel("垂直軸")
 print("ax.xaxis:", ax.xaxis)
-print('ax.xaxis.label:', ax.xaxis.label)
-print('ax.xaxis.label._text :', ax.xaxis.label._text)
+print("ax.xaxis.label:", ax.xaxis.label)
+print("ax.xaxis.label._text :", ax.xaxis.label._text)
 
 cc = ax.get_xaxis().get_label().get_text()
-print('x軸 :', cc)
+print("x軸 :", cc)
 cc = ax.get_yaxis().get_label().get_text()
-print('y軸 :', cc)
+print("y軸 :", cc)
 
 show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#Artist的屬性
+# Artist的屬性
 
 fig = plt.figure()
-fig.patch.set_color("g") # 設定背景彩色為綠色
+fig.patch.set_color("g")  # 設定背景彩色為綠色
 
 line = plt.plot([1, 2, 3, 2, 1], lw=4)[0]
 line.set_alpha(0.5)
@@ -1482,17 +1489,15 @@ for ax in fig.axes:
 from matplotlib.lines import Line2D
 
 fig = plt.figure()
-line1 = Line2D(
-    [0, 1], [0, 1], transform=fig.transFigure, figure=fig, color="r")
-line2 = Line2D(
-    [0, 1], [1, 0], transform=fig.transFigure, figure=fig, color="g")
+line1 = Line2D([0, 1], [0, 1], transform=fig.transFigure, figure=fig, color="r")
+line2 = Line2D([0, 1], [1, 0], transform=fig.transFigure, figure=fig, color="g")
 fig.lines.extend([line1, line2])
 
 show()
 
 print("------------------------------------------------------------")  # 60個
 
-#Axes容器
+# Axes容器
 
 fig = plt.figure()
 ax = fig.add_subplot(111)
@@ -1515,13 +1520,13 @@ show()
 print("------------------------------------------------------------")  # 60個
 
 fig, ax = plt.subplots()
-rect = plt.Rectangle((1,1), width=5, height=12)
+rect = plt.Rectangle((1, 1), width=5, height=12)
 
 show()
 
-ax.add_patch(rect) # 將rect加入進ax
-#cc = rect.get_axes()
-#print(cc)
+ax.add_patch(rect)  # 將rect加入進ax
+# cc = rect.get_axes()
+# print(cc)
 
 fig, ax = plt.subplots()
 t = ax.scatter(np.random.rand(20), np.random.rand(20))
@@ -1531,7 +1536,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-#Axis容器
+# Axis容器
 
 fig, ax = plt.subplots()
 axis = ax.xaxis
@@ -1541,13 +1546,13 @@ show()
 cc = axis.get_ticklocs()
 print(cc)
 
-print(axis.get_ticklabels()) # 獲得刻度標簽清單
-print([x.get_text() for x in axis.get_ticklabels()]) # 獲得刻度的文字字串
+print(axis.get_ticklabels())  # 獲得刻度標簽清單
+print([x.get_text() for x in axis.get_ticklabels()])  # 獲得刻度的文字字串
 
 cc = axis.get_ticklines()
 print(cc)
 
-cc = axis.get_ticklines(minor=True) # 獲得副刻度線清單
+cc = axis.get_ticklines(minor=True)  # 獲得副刻度線清單
 
 print(cc)
 
@@ -1556,7 +1561,7 @@ for label in axis.get_ticklabels():
     label.set_color("red")
     label.set_rotation(45)
     label.set_fontsize(16)
-     
+
 for line in axis.get_ticklines():
     line.set_color("green")
     line.set_markersize(25)
@@ -1565,8 +1570,8 @@ fig
 
 show()
 
-print(axis.get_minor_locator()) # 計算副刻度位置的物件
-print(axis.get_major_locator()) # 計算主刻度位置的物件
+print(axis.get_minor_locator())  # 計算副刻度位置的物件
+print(axis.get_major_locator())  # 計算主刻度位置的物件
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1575,12 +1580,13 @@ print("------------------------------------------------------------")  # 60個
 from fractions import Fraction
 from matplotlib.ticker import MultipleLocator, FuncFormatter
 
-x = np.arange(0, 4*np.pi, 0.01)
-fig, ax = plt.subplots(figsize=(8,4))
+x = np.arange(0, 4 * np.pi, 0.01)
+fig, ax = plt.subplots(figsize=(8, 4))
 plt.plot(x, np.sin(x), x, np.cos(x))
 
+
 def pi_formatter(x, pos):
-    frac = Fraction(int(np.round(x / (np.pi/4))), 4)
+    frac = Fraction(int(np.round(x / (np.pi / 4))), 4)
     d, n = frac.denominator, frac.numerator
     if frac == 0:
         return "0"
@@ -1592,21 +1598,22 @@ def pi_formatter(x, pos):
         return r"$\frac{\pi}{%d}$" % d
     return r"$\frac{%d \pi}{%d}$" % (n, d)
 
+
 # 設定兩個座標軸的範圍
-plt.ylim(-1.5,1.5)
+plt.ylim(-1.5, 1.5)
 plt.xlim(0, np.max(x))
 
 # 設定圖的底邊距
-plt.subplots_adjust(bottom = 0.15)
+plt.subplots_adjust(bottom=0.15)
 
 # 主刻度為pi/4
-ax.xaxis.set_major_locator( MultipleLocator(np.pi/4) )
+ax.xaxis.set_major_locator(MultipleLocator(np.pi / 4))
 
 # 主刻度文字用pi_formatter函數計算
-ax.xaxis.set_major_formatter( FuncFormatter( pi_formatter ) )
+ax.xaxis.set_major_formatter(FuncFormatter(pi_formatter))
 
 # 副刻度為pi/20
-ax.xaxis.set_minor_locator( MultipleLocator(np.pi/20) )
+ax.xaxis.set_minor_locator(MultipleLocator(np.pi / 20))
 
 # 設定刻度文字的大小
 for tick in ax.xaxis.get_major_ticks():
@@ -1617,95 +1624,115 @@ show()
 print("------------------------------------------------------------")  # 60個
 
 # annotate
-#座標變換和注解
+# 座標變換和注解
 
 # 為圖表加入各種注解元素
 
+
 def func1(x):
-    return 0.6*x + 0.3
+    return 0.6 * x + 0.3
+
 
 def func2(x):
-    return 0.4*x*x + 0.1*x + 0.2
-    
+    return 0.4 * x * x + 0.1 * x + 0.2
+
+
 def find_curve_intersects(x, y1, y2):
     d = y1 - y2
-    idx = np.where(d[:-1]*d[1:]<=0)[0]
-    x1, x2 = x[idx], x[idx+1]
-    d1, d2 = d[idx], d[idx+1]
-    return -d1*(x2-x1)/(d2-d1) + x1
+    idx = np.where(d[:-1] * d[1:] <= 0)[0]
+    x1, x2 = x[idx], x[idx + 1]
+    d1, d2 = d[idx], d[idx + 1]
+    return -d1 * (x2 - x1) / (d2 - d1) + x1
 
-x = np.linspace(-3,3,100)
+
+x = np.linspace(-3, 3, 100)
 f1 = func1(x)
 f2 = func2(x)
-fig, ax = plt.subplots(figsize=(8,4))
+fig, ax = plt.subplots(figsize=(8, 4))
 ax.plot(x, f1)
 ax.plot(x, f2)
 
 x1, x2 = find_curve_intersects(x, f1, f2)
-ax.plot(x1, func1(x1), "o") 
+ax.plot(x1, func1(x1), "o")
 ax.plot(x2, func1(x2), "o")
 
-ax.fill_between(x, f1, f2, where=f1>f2, facecolor="green", alpha=0.5)
+ax.fill_between(x, f1, f2, where=f1 > f2, facecolor="green", alpha=0.5)
 
 from matplotlib import transforms
 
 trans = transforms.blended_transform_factory(ax.transData, ax.transAxes)
 ax.fill_between([x1, x2], 0, 1, transform=trans, alpha=0.1)
 
-a = ax.text(0.05, 0.95, u"直線和二次曲線的交點",
+a = ax.text(
+    0.05,
+    0.95,
+    "直線和二次曲線的交點",
     transform=ax.transAxes,
-    verticalalignment = "top",
-    fontsize = 18,
-    bbox={"facecolor":"red","alpha":0.4,"pad":10}
+    verticalalignment="top",
+    fontsize=18,
+    bbox={"facecolor": "red", "alpha": 0.4, "pad": 10},
 )
 
-arrow = {"arrowstyle":"fancy,tail_width=0.6", 
-         "facecolor":"gray", 
-         "connectionstyle":"arc3,rad=-0.3"}
+arrow = {
+    "arrowstyle": "fancy,tail_width=0.6",
+    "facecolor": "gray",
+    "connectionstyle": "arc3,rad=-0.3",
+}
 
-ax.annotate(u"交點",
-    xy=(x1, func1(x1)), xycoords="data",
-    xytext=(0.05, 0.5), textcoords="axes fraction",
-    arrowprops = arrow)
-                  
-ax.annotate(u"交點",
-    xy=(x2, func1(x2)), xycoords="data",
-    xytext=(0.05, 0.5), textcoords="axes fraction",
-    arrowprops = arrow)
+ax.annotate(
+    "交點",
+    xy=(x1, func1(x1)),
+    xycoords="data",
+    xytext=(0.05, 0.5),
+    textcoords="axes fraction",
+    arrowprops=arrow,
+)
 
-xm = (x1+x2)/2
-ym = (func1(xm) - func2(xm))/2+func2(xm)
-o = ax.annotate(u"直線大於曲線區域",
-    xy =(xm, ym), xycoords="data",
-    xytext = (30, -30), textcoords="offset points",    
-    bbox={"boxstyle":"round", "facecolor":(1.0, 0.7, 0.7), "edgecolor":"none"},
+ax.annotate(
+    "交點",
+    xy=(x2, func1(x2)),
+    xycoords="data",
+    xytext=(0.05, 0.5),
+    textcoords="axes fraction",
+    arrowprops=arrow,
+)
+
+xm = (x1 + x2) / 2
+ym = (func1(xm) - func2(xm)) / 2 + func2(xm)
+o = ax.annotate(
+    "直線大於曲線區域",
+    xy=(xm, ym),
+    xycoords="data",
+    xytext=(30, -30),
+    textcoords="offset points",
+    bbox={"boxstyle": "round", "facecolor": (1.0, 0.7, 0.7), "edgecolor": "none"},
     fontsize=16,
-    arrowprops={"arrowstyle":"->"}
+    arrowprops={"arrowstyle": "->"},
 )
 
 show()
 
 print("------------------------------------------------------------")  # 60個
 
-#四種座標系
+# 四種座標系
 
 print(type(ax.transData))
-ax.transData.transform([(-3,-2), (3,5)])
+ax.transData.transform([(-3, -2), (3, 5)])
 
-ax.transAxes.transform([(0,0), (1,1)])
+ax.transAxes.transform([(0, 0), (1, 1)])
 
-fig.transFigure.transform([(0,0), (1,1)])
+fig.transFigure.transform([(0, 0), (1, 1)])
 
 inv = ax.transData.inverted()
 print(type(inv))
 inv.transform((320, 160))
 
-print(ax.set_xlim(-3, 2)) # 設定X軸的範圍為-3到2
-print(ax.transData.transform((3, 5))) # 資料座標變換物件已經發生了變化
+print(ax.set_xlim(-3, 2))  # 設定X軸的範圍為-3到2
+print(ax.transData.transform((3, 5)))  # 資料座標變換物件已經發生了變化
 
-#使用axvspan()和axhspan()可以快速繪制垂直方向和水平方向上的區間。
+# 使用axvspan()和axhspan()可以快速繪制垂直方向和水平方向上的區間。
 
-#座標變換的管線
+# 座標變換的管線
 
 cc = fig.dpi_scale_trans == fig.transFigure._boxout._transform
 print(cc)
@@ -1722,73 +1749,77 @@ print(cc)
 print(ax.transLimits.transform((-3, -2)))
 print(ax.transLimits.transform((2, 5)))
 
-print(ax.get_xlim()) # 獲得X軸的顯示範圍
-print(ax.get_ylim()) # 獲得Y軸的顯示範圍
+print(ax.get_xlim())  # 獲得X軸的顯示範圍
+print(ax.get_ylim())  # 獲得Y軸的顯示範圍
 
 t = ax.transLimits + ax.transAxes
-print(t.transform((0,0)))
-print(ax.transData.transform((0,0)))
+print(t.transform((0, 0)))
+print(ax.transData.transform((0, 0)))
 
 cc = ax.transScale
 print(cc)
 
-#TransformWrapper(BlendedAffine2D(IdentityTransform(),IdentityTransform()))
+# TransformWrapper(BlendedAffine2D(IdentityTransform(),IdentityTransform()))
 
-#由於本例中的X軸的取值範圍是(-3,3)，因此若果將X軸改為對數座標，並且重新繪圖，會產生很多錯誤訊息。
+# 由於本例中的X軸的取值範圍是(-3,3)，因此若果將X軸改為對數座標，並且重新繪圖，會產生很多錯誤訊息。
 
 # X軸為對數座標時的transScale物件的內定結構
-ax.set_xscale("log") # 將X軸改為對數座標
+ax.set_xscale("log")  # 將X軸改為對數座標
 # dddd %dot GraphvizMPLTransform.graphviz(ax.transScale)
-ax.set_xscale("linear") # 將X軸改為線性座標
+ax.set_xscale("linear")  # 將X軸改為線性座標
 
 print("------------------------------------------------------------")  # 60個
 
-#製作陰影效果
+# 製作陰影效果
 
 from matplotlib import transforms
 
 # 使用座標變換繪制的帶陰影的曲線
 fig, ax = plt.subplots()
-x = np.arange(0., 2., 0.01)
-y = np.sin(2*np.pi*x)
+x = np.arange(0.0, 2.0, 0.01)
+y = np.sin(2 * np.pi * x)
 
-N = 7 # 陰影的條數
+N = 7  # 陰影的條數
 for i in range(N, 0, -1):
     offset = transforms.ScaledTranslation(i, -i, transforms.IdentityTransform())
     shadow_trans = plt.gca().transData + offset
-    ax.plot(x,y,linewidth=4,color="black", 
+    ax.plot(
+        x,
+        y,
+        linewidth=4,
+        color="black",
         transform=shadow_trans,
-        alpha=(N-i)/2.0/N)
-    
-ax.plot(x,y,linewidth=4,color='black')    
+        alpha=(N - i) / 2.0 / N,
+    )
+
+ax.plot(x, y, linewidth=4, color="black")
 ax.set_ylim((-1.5, 1.5))
 
 show()
 
-cc = offset.transform((0,0)) # 將(0,0)變換為(1,-1)
+cc = offset.transform((0, 0))  # 將(0,0)變換為(1,-1)
 print(cc)
 
-print(ax.transData.transform((0,0))) # 對(0,0)進行資料座標變換
-print(shadow_trans.transform((0,0))) # 對(0,0)進行資料座標變換和偏移變換
+print(ax.transData.transform((0, 0)))  # 對(0,0)進行資料座標變換
+print(shadow_trans.transform((0, 0)))  # 對(0,0)進行資料座標變換和偏移變換
 
 print("------------------------------------------------------------")  # 60個
 
-#加入注解
+# 加入注解
 
 # 三個座標系中的文字
-x = np.linspace(-1,1,10)
+x = np.linspace(-1, 1, 10)
 y = x**2
 
-fig, ax = plt.subplots(figsize=(8,4))
-ax.plot(x,y)
+fig, ax = plt.subplots(figsize=(8, 4))
+ax.plot(x, y)
 
 for i, (_x, _y) in enumerate(zip(x, y)):
-    ax.text(_x, _y, str(i), color="red", fontsize=i+10)
+    ax.text(_x, _y, str(i), color="red", fontsize=i + 10)
 
-ax.text(0.5, 0.8, u"子圖座標系中的文字", color="blue", ha="center", 
-    transform=ax.transAxes)
-    
-plt.figtext(0.1, 0.92, u"圖表座標系中的文字", color="green")
+ax.text(0.5, 0.8, "子圖座標系中的文字", color="blue", ha="center", transform=ax.transAxes)
+
+plt.figtext(0.1, 0.92, "圖表座標系中的文字", color="green")
 
 show()
 
@@ -1796,8 +1827,8 @@ print("------------------------------------------------------------")  # 60個
 
 from matplotlib import collections as mc
 
-#塊、路徑和集合
-#Path與Patch
+# 塊、路徑和集合
+# Path與Patch
 
 rect_patch = plt.Rectangle((0, 1), 2, 1)
 rect_path = rect_patch.get_path()
@@ -1839,14 +1870,15 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#多邊形集合(PolyCollection)
+# 多邊形集合(PolyCollection)
 
 # 用PolyCollection繪制大量多邊形
 from numpy.random import randint, rand, uniform
 from matplotlib import collections as mc
 
-def star_polygon(x, y, r, theta, n, s): 
-    angles = np.arange(0, 2*np.pi, 2*np.pi/2/n) + theta
+
+def star_polygon(x, y, r, theta, n, s):
+    angles = np.arange(0, 2 * np.pi, 2 * np.pi / 2 / n) + theta
     xs = r * np.cos(angles)
     ys = r * np.sin(angles)
     xs[1::2] *= s
@@ -1855,16 +1887,22 @@ def star_polygon(x, y, r, theta, n, s):
     ys += y
     return np.vstack([xs, ys]).T
 
+
 stars = []
 for i in range(1000):
-    star = star_polygon(randint(800), randint(500), 
-                        uniform(5, 20), uniform(0, 2*np.pi),
-                        randint(3, 9), uniform(0.1, 0.7))
+    star = star_polygon(
+        randint(800),
+        randint(500),
+        uniform(5, 20),
+        uniform(0, 2 * np.pi),
+        randint(3, 9),
+        uniform(0.1, 0.7),
+    )
     stars.append(star)
 
 fig, ax = plt.subplots(figsize=(10, 5))
 polygons = mc.PolyCollection(stars, alpha=0.5, array=np.random.rand(len(stars)))
-ax.add_collection(polygons)# add_collection 只能用 ax
+ax.add_collection(polygons)  # add_collection 只能用 ax
 ax.autoscale()
 ax.margins(0)
 ax.set_aspect("equal")
@@ -1877,7 +1915,7 @@ print("length of edgecolors:", len(polygons.get_edgecolors()))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#路徑集合(PathCollection)
+# 路徑集合(PathCollection)
 
 N = 30
 np.random.seed(42)
@@ -1892,28 +1930,28 @@ pc = ax.scatter(x, y, s=size, c=value)
 show()
 
 print(pc.get_transforms().shape)
-print(pc.get_transforms()[0]) #索引為0的點對應的縮放矩陣
+print(pc.get_transforms()[0])  # 索引為0的點對應的縮放矩陣
 
-print(pc.get_offsets()[0]) #索引為0的點對應的中心座標
-#計算索引為0的點對應的螢幕座標
+print(pc.get_offsets()[0])  # 索引為0的點對應的中心座標
+# 計算索引為0的點對應的螢幕座標
 print(pc.get_offset_transform().transform(pc.get_offsets())[0])
 print(pc.get_offset_transform() is ax.transData)
 
 print(pc.get_transform())
 
-#cc = pc.get_offset_position()
-#print(cc)
+# cc = pc.get_offset_position()
+# print(cc)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#資料空間中的圓形集合物件
+# 資料空間中的圓形集合物件
 
 from matplotlib.collections import CircleCollection, Collection
 from matplotlib.transforms import Affine2D
 
-class DataCircleCollection(CircleCollection):
 
+class DataCircleCollection(CircleCollection):
     def set_sizes(self, sizes):
         self._sizes = sizes
 
@@ -1931,19 +1969,26 @@ class DataCircleCollection(CircleCollection):
 
         return Collection.draw(self, render)
 
+
 # 使用DataCircleCollection繪制大量的圓形
 
-data = np.loadtxt("data/venus-face.csv", delimiter=",", encoding='UTF-8-sig')
+data = np.loadtxt("data/venus-face.csv", delimiter=",", encoding="UTF-8-sig")
 offsets = data[:, :2]
 sizes = data[:, 2] * 1.05
 colors = data[:, 3:] / 256.0
 
 fig, axe = plt.subplots(figsize=(8, 8))
 axe.set_rasterized(True)
-cc = DataCircleCollection(sizes, facecolors=colors, edgecolors="w", linewidths=0.1,
-                          offsets=offsets, transOffset=axe.transData)
+cc = DataCircleCollection(
+    sizes,
+    facecolors=colors,
+    edgecolors="w",
+    linewidths=0.1,
+    offsets=offsets,
+    transOffset=axe.transData,
+)
 
-axe.add_collection(cc)# add_collection 只能用 ax
+axe.add_collection(cc)  # add_collection 只能用 ax
 axe.axis((0, 512, 512, 0))
 axe.axis("off")
 
@@ -1951,12 +1996,12 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-#繪圖函數簡介
-#對數座標圖
+# 繪圖函數簡介
+# 對數座標圖
 
-# 低通濾波器的頻率響應：算術座標（左上）、X軸對數座標（右上）、Y軸對數座標（左下）、雙對數座標（右上） 
+# 低通濾波器的頻率響應：算術座標（左上）、X軸對數座標（右上）、Y軸對數座標（左下）、雙對數座標（右上）
 w = np.linspace(0.1, 1000, 1000)
-p = np.abs(1/(1+0.1j*w)) # 計算低通濾波器的頻率響應
+p = np.abs(1 / (1 + 0.1j * w))  # 計算低通濾波器的頻率響應
 
 fig, axes = plt.subplots(2, 2)
 
@@ -2474,18 +2519,18 @@ print("------------------------------------------------------------")  # 60個
 
 from mpl_toolkits import mplot3d
 from matplotlib import cm
-import matplotlib	
+import matplotlib
 
 feature_x = np.linspace(-5.0, 5.0, 1000)
 feature_y = np.linspace(-5.0, 5.0, 1000)
-  
+
 # Creating 2-D grid of features
 [X, Y] = np.meshgrid(feature_x, feature_y)
-z=(X+Y*1j)
-  
+z = X + Y * 1j
+
 fig, ax = plt.subplots(1, 1)
-Z = np.sqrt(X ** 2 + Y ** 2)
-ax.set_aspect('equal', adjustable='box')
+Z = np.sqrt(X**2 + Y**2)
+ax.set_aspect("equal", adjustable="box")
 
 # plots filled contour plot
 
@@ -2496,6 +2541,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
 
 def binary_step(x):
     return 0 if x < 0 else 1
@@ -2568,17 +2614,19 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+
 def dice_roll():
     v = random.randint(1, 6)
     return v
 
+
 num_of_trials = range(100, 10000, 10)
 avgs = []
-for num_of_trial in num_of_trials:  
-    trials = []    
+for num_of_trial in num_of_trials:
+    trials = []
     for trial in range(num_of_trial):
         trials.append(dice_roll())
-    avgs.append(sum(trials)/float(num_of_trial))
+    avgs.append(sum(trials) / float(num_of_trial))
 
 plt.plot(num_of_trials, avgs)
 plt.xlabel("試驗次數")
@@ -2592,11 +2640,14 @@ print("------------------------------------------------------------")  # 60個
 def normal_pdf(x, mu, sigma):
     pi = 3.1415926
     e = 2.718281
-    f = (1./np.sqrt(2*pi*sigma**2))*e**(-(x-mu)**2/(2.*sigma**2))
+    f = (1.0 / np.sqrt(2 * pi * sigma**2)) * e ** (
+        -((x - mu) ** 2) / (2.0 * sigma**2)
+    )
     return f
 
+
 ax = np.linspace(-5, 5, 100)
-ay = [normal_pdf(x, 0, 1) for x in ax]  
+ay = [normal_pdf(x, 0, 1) for x in ax]
 plt.plot(ax, ay)
 show()
 
@@ -2643,15 +2694,15 @@ spread = np.random.rand(N) * A  # 放大 A 倍 原本0~1 後來 0~1*A
 print(spread)
 
 print()
-center = np.ones(N//2) * N
+center = np.ones(N // 2) * N
 print(center)
 
-flier_high = np.random.rand(N//5) * A + A
-flier_low = np.random.rand(N//5) * -A
+flier_high = np.random.rand(N // 5) * A + A
+flier_low = np.random.rand(N // 5) * -A
 data = np.concatenate((spread, center, flier_high, flier_low), 0)
 
 plt.boxplot(data)
-#plt.hist(data)
+# plt.hist(data)
 
 show()
 
@@ -2745,37 +2796,29 @@ with open(filename, "r", encoding='UTF-8-sig') as f:
 plt.close("all")
 
 
-
-
-
-
-
 cx, cy = 100, 100
 R = 100
 for i in range(5):
-    angle = -90 + 72 * i;
-    X = int(R * np.cos(angle * np.pi / 180))+cx
-    Y = int(R * np.sin(angle * np.pi / 180))+cy
+    angle = -90 + 72 * i
+    X = int(R * np.cos(angle * np.pi / 180)) + cx
+    Y = int(R * np.sin(angle * np.pi / 180)) + cy
     print(X, Y, end=" ")
 print()
 
 cx, cy = 300, 100
 R = 100
 for i in range(5):
-    angle = -90 + 72 * i;
-    X = int(R * np.cos(angle * np.pi / 180))+cx
-    Y = int(R * np.sin(angle * np.pi / 180))+cy
+    angle = -90 + 72 * i
+    X = int(R * np.cos(angle * np.pi / 180)) + cx
+    Y = int(R * np.sin(angle * np.pi / 180)) + cy
     print(X, Y, end=" ")
 print()
 
 cx, cy = 200, 300
 R = 100
 for i in range(5):
-    angle = -90 + 72 * i;
-    X = int(R * np.cos(angle * np.pi / 180))+cx
-    Y = int(R * np.sin(angle * np.pi / 180))+cy
+    angle = -90 + 72 * i
+    X = int(R * np.cos(angle * np.pi / 180)) + cx
+    Y = int(R * np.sin(angle * np.pi / 180)) + cy
     print(X, Y, end=" ")
 print()
-
-
-

@@ -31,14 +31,20 @@ class Study(object):
 
     def __eq__(self, other):
         try:
-            return self.dicom_dataset.StudyInstanceUID == other.dicom_dataset.StudyInstanceUID
+            return (
+                self.dicom_dataset.StudyInstanceUID
+                == other.dicom_dataset.StudyInstanceUID
+            )
         except Exception as e:
             logger.debug("trouble comparing two Studies", exc_info=e)
             return False
 
     def __ne__(self, other):
         try:
-            return self.dicom_dataset.StudyInstanceUID != other.dicom_dataset.StudyInstanceUID
+            return (
+                self.dicom_dataset.StudyInstanceUID
+                != other.dicom_dataset.StudyInstanceUID
+            )
         except Exception as e:
             logger.debug("trouble comparing two Studies", exc_info=e)
             return True

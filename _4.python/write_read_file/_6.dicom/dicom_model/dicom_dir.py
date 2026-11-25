@@ -10,8 +10,9 @@ from pydicom.misc import is_dicom
 from patient import Patient
 
 
-def find_dicom_files(directory, pattern="*", directory_exclude_pattern='', recursive=True):
-
+def find_dicom_files(
+    directory, pattern="*", directory_exclude_pattern="", recursive=True
+):
     for root, dirs, files in os.walk(directory):
         if not recursive:
             dirs = []
@@ -27,29 +28,31 @@ def find_dicom_files(directory, pattern="*", directory_exclude_pattern='', recur
                 if is_dicom(filename):
                     yield filename
 
-foldername = 'D:/_git/vcs/_1.data/______test_files1/__RW/_dicom'
+
+foldername = "D:/_git/vcs/_1.data/______test_files1/__RW/_dicom"
 patients = list()
-for x in find_dicom_files(directory=foldername, pattern="*.dcm", directory_exclude_pattern=".*"):
-    print('檔案 : ', x)
+for x in find_dicom_files(
+    directory=foldername, pattern="*.dcm", directory_exclude_pattern=".*"
+):
+    print("檔案 : ", x)
     f = pydicom.dcmread(x)
     for p in patients:
-        print('已有資料')
+        print("已有資料")
         try:
             p.add_dataset(f)
         except Exception as e:
-            print('無法添入資料')
+            print("無法添入資料")
             pass
         else:
-            print('其他錯誤')
+            print("其他錯誤")
             break
     else:
         print("新增資料")
-        patients.append(Patient(dicom_dataset = f))
-            
+        patients.append(Patient(dicom_dataset=f))
+
 print("共找到 :", len(patients), " 份病歷資料")
 
 for x in patients:
     print(x)
     print(repr(x))
     print()
-
