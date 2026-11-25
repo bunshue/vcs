@@ -1,11 +1,10 @@
 
 # ------------------------------------------------------------  # 60個
 
-from pathlib import Path
 
-# 撈出現行目錄下所有 .py 檔案
-for file in Path(".").rglob("*.py"):
-    print(file)
+
+
+# ------------------------------------------------------------  # 60個
 
 
 # 執行程式
@@ -24,7 +23,6 @@ pd.read_html("<table>...</table>")  # HTML內容
 
 統一修改
 
-
 FutureWarning。
 
 舊：
@@ -39,17 +37,14 @@ data = pd.read_html(StringIO(html))
 
 import importlib.util
 
-
 print('Python 是否有安裝模組?')
 print(importlib.util.find_spec("selenium"))
 print(importlib.util.find_spec("systimes"))
-
 
 import sys
 
 for p in sys.path:
     print(p)
-
 
 import time
 
@@ -2810,17 +2805,6 @@ print(tables[0])
 
 # ------------------------------------------------------------  # 60個
 
-from pathlib import Path
-
-infolder = "D:/_git/vcs/_1.data/______test_files1/_mp3"
-ext = "*.mp3"
-
-filelist = []
-for p in Path(infolder).rglob(ext):  # 將這個資料夾以及子資料夾的所有檔案
-    filelist.append(str(p))  # 新增至列表
-for filename in sorted(filelist):  # 再替每個檔案排序
-    print("檔案: ",filename)
-
 
 
 # ------------------------------------------------------------  # 60個
@@ -4005,8 +3989,9 @@ Black本身是用python寫的可執行腳本。安裝非常的簡單，用pip就
 pip install black
 
 安裝完成之后，對想要重新排版的文件使用如下命令
-black source.py  # black 單檔
-black .		 # black 當前目錄以下所有檔案多層
+black source.py  	# black 單檔
+black .		 	# black 當前目錄以下所有檔案多層
+black . --color --diff	# 不修改，先看一下哪些地方要改，彩色顯示
 
 uncompromising
     KK[ʌnˋkɑmprə͵maɪzɪŋ] DJ[ˋʌnˋkɔmprəmaiziŋ] 

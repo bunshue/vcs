@@ -408,9 +408,9 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename_big = (
-    "D:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/Angry-Birds01.jpg"
+    "D:/_git/vcs/_1.data/______test_files1/__pic/_anime/_angry_bird/Angry-Birds01.jpg"
 )
-filename_small = "D:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/AB_red.jpg"
+filename_small = "D:/_git/vcs/_1.data/______test_files1/__pic/_anime/_angry_bird/AB_red.jpg"
 
 src = cv2.imread("data/matchTemplate/mutishapes1.jpg", cv2.IMREAD_COLOR)  # 讀取原始影像
 

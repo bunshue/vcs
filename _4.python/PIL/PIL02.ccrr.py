@@ -695,7 +695,7 @@ N = 8
 margin = 5
 
 # 載入圖片
-filename = "D:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/AB_red.jpg"
+filename = "D:/_git/vcs/_1.data/______test_files1/__pic/_anime/_angry_bird/AB_red.jpg"
 # 檔案 => PIL影像
 image = Image.open(filename)
 print(image.size)

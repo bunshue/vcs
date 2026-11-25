@@ -578,7 +578,7 @@ skimage.io.ImageCollection(load_pattern,load_func=None)
 回調函數默認為imread(),即默認這個函數是批量讀取圖片。
 """
 
-# string = 'D:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/*.jpg'
+# string = "D:/_git/vcs/_1.data/______test_files1/__pic/_anime/_angry_bird/*.jpg"
 string = skimage.data_dir + "/*.png"
 coll = skimage.io.ImageCollection(string)
 print(len(coll))
@@ -598,7 +598,7 @@ skimage.io.imshow(coll[10])
 
 # string='d:/pic/*.jpg:d:/pic/*.png'
 string = skimage.data_dir + "/*.png"
-string = "D:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/*.jpg"
+string = "D:/_git/vcs/_1.data/______test_files1/__pic/_anime/_angry_bird/*.jpg"
 coll = skimage.io.ImageCollection(string)
 print(len(coll))
 
@@ -621,7 +621,7 @@ def convert_gray(f):
 
 
 string = skimage.data_dir + "/*.png"
-string = "D:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/*.jpg"
+string = "D:/_git/vcs/_1.data/______test_files1/__pic/_anime/_angry_bird/*.jpg"
 coll = skimage.io.ImageCollection(string, load_func=convert_gray)
 skimage.io.imshow(coll[8])
 plt.show()
@@ -655,7 +655,7 @@ skimage.io.concatenate_images(ic)
 
 """ NG
 coll = skimage.io.ImageCollection(
-    "D:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/*.jpg"
+    "D:/_git/vcs/_1.data/______test_files1/__pic/_anime/_angry_bird/*.jpg"
 )
 # coll = skimage.io.ImageCollection(skimage.data_dir + '/*.png')
 mat = skimage.io.concatenate_images(coll)
@@ -663,7 +663,7 @@ mat = skimage.io.concatenate_images(coll)
 # 使用concatenate_images(ic)函數的前提是讀取的這些圖片尺寸必須一致，否則會出錯。我們看看圖片連接前後的維度變化：
 
 coll = skimage.io.ImageCollection(
-    "D:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/*.jpg"
+    "D:/_git/vcs/_1.data/______test_files1/__pic/_anime/_angry_bird/*.jpg"
 )
 # coll = skimage.io.ImageCollection(skimage.data_dir + '/*.png')
 print(len(coll))  # 連接的圖片數量
@@ -694,7 +694,7 @@ def convert_gray(f):
 
 
 # string = skimage.data_dir+'/*.png'
-string = "D:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/*.jpg"
+string = "D:/_git/vcs/_1.data/______test_files1/__pic/_anime/_angry_bird/*.jpg"
 coll = skimage.io.ImageCollection(string, load_func=convert_gray)
 print(len(coll))
 
