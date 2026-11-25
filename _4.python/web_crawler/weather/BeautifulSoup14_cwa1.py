@@ -1,24 +1,28 @@
 def createDF():
     global df
-    year3 = []  #存三天的年份資料(防止剛好跨年)
-    colspans = []  #存colspan數值
-    dates = []  #存日期
-    days = []  #存星期幾
-    url = 'https://www.cwa.gov.tw/V8/C/W/Town/Town.html?TID=1000403'
+    year3 = []  # 存三天的年份資料(防止剛好跨年)
+    colspans = []  # 存colspan數值
+    dates = []  # 存日期
+    days = []  # 存星期幾
+    url = "https://www.cwa.gov.tw/V8/C/W/Town/Town.html?TID=1000403"
     html_data = requests.get(url)
-    html_data.encoding = 'utf-8'
-    
-    soup = BeautifulSoup(html_data.text, 'html.parser')
-    print(soup.prettify())  #prettify()這個函數可以將DOM tree以比較美觀的方式印出。
-    
-    trs = soup.find_all('tr')  #取得所有「tr」標籤
-    
+    html_data.encoding = "utf-8"
+
+    soup = BeautifulSoup(html_data.text, "html.parser")
+    print(soup.prettify())  # prettify()這個函數可以將DOM tree以比較美觀的方式印出。
+
+    trs = soup.find_all("tr")  # 取得所有「tr」標籤
+
     year3.append("%d" % datetime.datetime.now().year)
-    year3.append("%d" % (datetime.datetime.now() + datetime.timedelta(days=1)).year) #第二天年份
-    year3.append("%d" % (datetime.datetime.now() + datetime.timedelta(days=2)).year) #第三天年份
+    year3.append(
+        "%d" % (datetime.datetime.now() + datetime.timedelta(days=1)).year
+    )  # 第二天年份
+    year3.append(
+        "%d" % (datetime.datetime.now() + datetime.timedelta(days=2)).year
+    )  # 第三天年份
 
     print(trs)
-    '''
+    """
     tdall = trs[0].findAll('td')  #第1列:月、日及星期
     k=0
     for i in range(len(tdall)): 
@@ -78,7 +82,8 @@ def createDF():
             for j in range(0, rep):  #重複取值
                 pops.append(td.text)
     df['降雨機率'] = pops
-    '''
+    """
+
 
 import requests
 from bs4 import BeautifulSoup
@@ -86,10 +91,20 @@ import pandas
 import re
 import datetime
 
-print('抓取中央氣象局網頁資料 用 BeautifulSoup 解讀')
+print("抓取中央氣象局網頁資料 用 BeautifulSoup 解讀")
 
 global df
-columns = ['日期時間','星期','天氣狀況','溫度','體感溫度','蒲福風級','風向','相對溼度','降雨機率','舒適度']  #欄位名稱
-df = pandas.DataFrame(columns = columns)  #建立DataFrame
-createDF()  #擷取天氣資料
-
+columns = [
+    "日期時間",
+    "星期",
+    "天氣狀況",
+    "溫度",
+    "體感溫度",
+    "蒲福風級",
+    "風向",
+    "相對溼度",
+    "降雨機率",
+    "舒適度",
+]  # 欄位名稱
+df = pandas.DataFrame(columns=columns)  # 建立DataFrame
+createDF()  # 擷取天氣資料

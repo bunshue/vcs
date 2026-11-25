@@ -7,7 +7,7 @@ pip install gradio==3.50.2
 
 import sys
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 import gradio as gr
@@ -22,10 +22,10 @@ print('------------------------------------------------------------')	#60個
 
 """
 
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-#手寫數字
+# 手寫數字
 import tensorflow as tf
 from urllib.request import urlretrieve
 import gradio as gr
@@ -37,22 +37,24 @@ import gradio as gr
 mnist_model_filename = "D:/_git/vcs/_big_files/mnist-model.h5"
 model = tf.keras.models.load_model(mnist_model_filename)
 
+
 def mnist(image):
-    image = image.reshape(1, -1)  #(28,28)轉為(1,784)
+    image = image.reshape(1, -1)  # (28,28)轉為(1,784)
     prediction = model.predict(image).tolist()[0]
     return {str(i): prediction[i] for i in range(10)}
 
-out = gr.outputs.Label(num_top_classes=3, label='預測結果')
+
+out = gr.outputs.Label(num_top_classes=3, label="預測結果")
 grobj = gr.Interface(fn=mnist, inputs="sketchpad", outputs=out, title="手寫數字")
-#grobj = gr.Interface(fn=mnist, inputs="sketchpad", outputs=out, title="手寫數字", live=True)
+# grobj = gr.Interface(fn=mnist, inputs="sketchpad", outputs=out, title="手寫數字", live=True)
 grobj.launch()
 
-print('aaaa')
+print("aaaa")
 
 sys.exit()
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 # Inception圖片物件偵測
 
@@ -62,25 +64,27 @@ import requests
 import gradio as gr
 
 model = tf.keras.applications.InceptionV3()
-#讀取標籤
-response = requests.get('https://git.io/JJkYN')
-labels = response.text.split('\n')
-#print(labels)
+# 讀取標籤
+response = requests.get("https://git.io/JJkYN")
+labels = response.text.split("\n")
+# print(labels)
+
 
 def classify(img):
-  img = np.expand_dims(img, 0)
-  img = tf.keras.applications.inception_v3.preprocess_input(img)
-  prediction = model.predict(img).flatten()
-  return {labels[i]: float(prediction[i]) for i in range(len(prediction))}
+    img = np.expand_dims(img, 0)
+    img = tf.keras.applications.inception_v3.preprocess_input(img)
+    prediction = model.predict(img).flatten()
+    return {labels[i]: float(prediction[i]) for i in range(len(prediction))}
+
 
 image = gr.inputs.Image(shape=(299, 299))
-label = gr.outputs.Label(num_top_classes=3, label='預測結果')
-grobj = gr.Interface(fn=classify, inputs=image, outputs=label, title='Inception物件偵測')
-#grobj = gr.Interface(fn=classify, inputs=image, outputs=label, title='Inception物件偵測', examples=[['lion1.jpg'], ['tiger1.jpg']])
+label = gr.outputs.Label(num_top_classes=3, label="預測結果")
+grobj = gr.Interface(fn=classify, inputs=image, outputs=label, title="Inception物件偵測")
+# grobj = gr.Interface(fn=classify, inputs=image, outputs=label, title='Inception物件偵測', examples=[['lion1.jpg'], ['tiger1.jpg']])
 grobj.launch()
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 #英文對話(GPT-2)
@@ -104,16 +108,18 @@ grobj = gr.Interface(generate_text,inputs="textbox", outputs=out, title="GPT-2")
 grobj.launch()
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#自動歌詞產生器
+# 自動歌詞產生器
 
 import gradio as gr
 
-grobj = gr.Interface.load("huggingface/uer/gpt2-chinese-lyric", inputs="text", outputs="text")
+grobj = gr.Interface.load(
+    "huggingface/uer/gpt2-chinese-lyric", inputs="text", outputs="text"
+)
 grobj.launch()
 
-#pip install opencc
+# pip install opencc
 
 import gradio as gr
 from transformers import BertTokenizer, GPT2LMHeadModel, TextGenerationPipeline
@@ -121,21 +127,25 @@ from opencc import OpenCC
 
 tokenizer = BertTokenizer.from_pretrained("uer/gpt2-chinese-lyric")
 model = GPT2LMHeadModel.from_pretrained("uer/gpt2-chinese-lyric")
-cc = OpenCC('s2twp')
+cc = OpenCC("s2twp")
+
 
 def generate_text(inp):
     text_generator = TextGenerationPipeline(model, tokenizer)
     ret = text_generator(inp, max_length=100, do_sample=True)
-    return cc.convert(ret[0]['generated_text'])
+    return cc.convert(ret[0]["generated_text"])
+
 
 output_text = gr.outputs.Textbox()
-grobj = gr.Interface(generate_text,inputs="textbox", outputs=output_text, title="自動產生歌詞")
+grobj = gr.Interface(
+    generate_text, inputs="textbox", outputs=output_text, title="自動產生歌詞"
+)
 grobj.launch()
 
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-#鐵達尼號生存預測
+# 鐵達尼號生存預測
 
 import gradio as gr
 import pandas as pd
@@ -146,12 +156,14 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 
-def encode_ages(df): 
+
+def encode_ages(df):
     df.Age = df.Age.fillna(-0.5)
     bins = (-1, 0, 5, 12, 18, 25, 35, 50, 80)
     categories = pd.cut(df.Age, bins, labels=False)
     df.Age = categories
     return df
+
 
 def encode_fares(df):
     df.Fare = df.Fare.fillna(-0.5)
@@ -160,11 +172,16 @@ def encode_fares(df):
     df.Fare = categories
     return df
 
+
 def encode_sex(df):
     mapping = {"male": 0, "female": 1}
-    return df.replace({'Sex': mapping})
+    return df.replace({"Sex": mapping})
 
-data = pd.read_csv('https://raw.githubusercontent.com/gradio-app/titanic/master/train.csv')
+
+data = pd.read_csv(
+    "https://raw.githubusercontent.com/gradio-app/titanic/master/train.csv"
+)
+
 
 def transform_features(df):
     df = encode_ages(df)
@@ -172,32 +189,41 @@ def transform_features(df):
     df = encode_sex(df)
     return df
 
-data1 = data[['Fare', 'Age', 'Sex', 'Survived']]
+
+data1 = data[["Fare", "Age", "Sex", "Survived"]]
 data1 = transform_features(data1)
-X_all = data1.drop(['Survived'], axis=1)
-y_all = data1['Survived']
+X_all = data1.drop(["Survived"], axis=1)
+y_all = data1["Survived"]
 X_train, X_test, y_train, y_test = train_test_split(X_all, y_all, test_size=0.2)
 clf = RandomForestClassifier()
 clf.fit(X_train, y_train)
 
+
 def predict_survival(sex, age, fare):
-    df = pd.DataFrame.from_dict({'Sex': [sex], 'Age': [age], 'Fare': [fare]})
+    df = pd.DataFrame.from_dict({"Sex": [sex], "Age": [age], "Fare": [fare]})
     df = encode_sex(df)
     df = encode_fares(df)
     df = encode_ages(df)
     pred = clf.predict_proba(df)[0]
-    return {'死亡': pred[0], '生還': pred[1]}
+    return {"死亡": pred[0], "生還": pred[1]}
 
-sex = gr.inputs.Radio(['female', 'male'], label="性別")
+
+sex = gr.inputs.Radio(["female", "male"], label="性別")
 age = gr.inputs.Slider(minimum=0, maximum=80, step=1, default=22, label="年齡")
 fare = gr.inputs.Slider(minimum=0, maximum=550, step=1, default=20, label="船費")
-out = gr.outputs.Label(label='預測結果')
-grobj = gr.Interface(fn=predict_survival, inputs=[sex, age, fare], outputs=out, title='鐵達尼號生存預測', live=True)
+out = gr.outputs.Label(label="預測結果")
+grobj = gr.Interface(
+    fn=predict_survival,
+    inputs=[sex, age, fare],
+    outputs=out,
+    title="鐵達尼號生存預測",
+    live=True,
+)
 grobj.launch()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#使用自行訓練的模型
+# 使用自行訓練的模型
 
 import tensorflow.keras
 import numpy as np
@@ -206,25 +232,29 @@ import gradio as gr
 # left_right.h5 路徑不能含中文
 mnist_model_filename = "D:/_git/vcs/_big_files/left_right.h5"
 model = tensorflow.keras.models.load_model(mnist_model_filename)
-labels = ['normal','left','right']
+labels = ["normal", "left", "right"]
+
 
 def classify(img):
-  img = (img.astype(np.float32) / 127.0) - 1
-  img = np.expand_dims(img, 0)
-  prediction = model.predict(img)
-  return {labels[i]: float(prediction[0][i]) for i in range(len(prediction[0]))}
+    img = (img.astype(np.float32) / 127.0) - 1
+    img = np.expand_dims(img, 0)
+    prediction = model.predict(img)
+    return {labels[i]: float(prediction[0][i]) for i in range(len(prediction[0]))}
 
-image = gr.inputs.Image(shape=(224, 224), label='輸入圖片')
-label = gr.outputs.Label(num_top_classes=3, label='預測結果')
-grobj = gr.Interface(fn=classify, inputs=image, outputs=label, examples=[['left1.jpg'], ['right1.jpg'], ['normal1.jpg']], title='使用自行訓練的模型')
+
+image = gr.inputs.Image(shape=(224, 224), label="輸入圖片")
+label = gr.outputs.Label(num_top_classes=3, label="預測結果")
+grobj = gr.Interface(
+    fn=classify,
+    inputs=image,
+    outputs=label,
+    examples=[["left1.jpg"], ["right1.jpg"], ["normal1.jpg"]],
+    title="使用自行訓練的模型",
+)
 grobj.launch()
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-
-print('------------------------------------------------------------')	#60個
-
-
-
+print("------------------------------------------------------------")  # 60個

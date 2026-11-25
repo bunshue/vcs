@@ -56,6 +56,8 @@ for i in range(n):
     print(f"第 {i+1} 年本金和 : {int(money)}")
 
 print("------------------------------------------------------------")  # 60個
+
+
 # 定義GetRoundArea函式，可傳入radius半徑，並傳回圓面積
 def GetRoundArea(radius):
     # 傳回圓面積，圓面積公式為 半徑 *  半徑 * 3.14
@@ -79,8 +81,8 @@ y = []
 for i in range(-5, 5 + 1):
     print(i)
     x.append(i)
-    #y.append(math.cos(i))   # y = cos(x)
-    y.append(i * i)         # y = x ^ 2
+    # y.append(math.cos(i))   # y = cos(x)
+    y.append(i * i)  # y = x ^ 2
 
 print(x)
 print(y)
@@ -99,18 +101,18 @@ import scipy
 
 print("積分")
 
+
 def my_funciton1(x):
     # y = math.cos(x)
-    y = x ** 2
+    y = x**2
     # y = math.sqrt(25 - x**2)  # 上半圓
     # y = x**2 + 2 * x + 5  # f(x) = x**2 + 2x + 5
     return y
 
-#area, err = scipy.integrate.quad(my_funciton1, -math.pi/2, math.pi/2)
+
+# area, err = scipy.integrate.quad(my_funciton1, -math.pi/2, math.pi/2)
 area, err = scipy.integrate.quad(my_funciton1, -5, 5)
 print("積分結果 :", area)
 print("誤差 :", err)
 
 print("------------------------------------------------------------")  # 60個
-
-

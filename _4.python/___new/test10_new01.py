@@ -7437,7 +7437,7 @@ file1.close()  # 關閉檔案
 
 print("------------------------------------------------------------")  # 60個
 
-print('撈出目錄下所有指定副檔名的檔案')
+print("撈出目錄下所有指定副檔名的檔案")
 
 from os import path
 import re
@@ -7454,7 +7454,7 @@ for folder, subfolders, filenames in os.walk(foldername):
 
 print("------------------------------------------------------------")  # 60個
 
-print('製作json檔案')
+print("製作json檔案")
 
 from os import path
 import json
@@ -7623,6 +7623,7 @@ for number in range(st, sp):  # Main program loop.
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
 
 # Cars基礎類別
 class Cars:
@@ -7799,7 +7800,7 @@ def tax(obj):
     print(obj.manufacture(), ":", obj.totaltax())
 
 
-a = GasolineCars("CITROEN", "BX16TGS", "灰", 5, 1580) # 汽油車物件
+a = GasolineCars("CITROEN", "BX16TGS", "灰", 5, 1580)  # 汽油車物件
 a = DieselCars("福特六和", "C346-9W", "白", 5, 1997)  # 柴油車物件
 a = ElectricCars("Tesla", "Model 3", "紅", 5, 346)  # 電動車物件
 
@@ -7819,6 +7820,7 @@ a.info()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
 
 # 輪胎類別
 class Wheels:
@@ -12820,6 +12822,7 @@ print("%s 網頁建置完成" % (filename))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
 
 def checkpassword(password):
     # 檢查密碼長度必須是5到10個字元

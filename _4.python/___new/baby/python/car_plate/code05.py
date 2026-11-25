@@ -1,8 +1,9 @@
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 print("車牌")
 import pytesseract
-text = pytesseract.image_to_string(Image.open('data/atq9305.jpg'))
+
+text = pytesseract.image_to_string(Image.open("data/atq9305.jpg"))
 print(type(text), "   ", text)
 
 print("------------------------------------------------------------")  # 60個
@@ -14,10 +15,10 @@ carDict = {}
 myPath = "D:\\_git\\vcs\\_4.python\\PIL\\new1\\"
 while True:
     carPlate = input("請掃描或輸入車牌(Q/q代表結束) : ")
-    if carPlate == 'Q' or carPlate == 'q':
+    if carPlate == "Q" or carPlate == "q":
         break
     carPlate = myPath + carPlate
-    keyText = pytesseract.image_to_string(Image.open(carPlate))    
+    keyText = pytesseract.image_to_string(Image.open(carPlate))
     if keyText in carDict:
         exitTime = time.asctime()
         print("車輛出場時間 : ", keyText, ":", exitTime)
@@ -36,17 +37,17 @@ carDict = {}
 myPath = "foldername"
 while True:
     carPlate = input("請掃描或輸入車牌(Q/q代表結束) : ")
-    if carPlate == 'Q' or carPlate == 'q':
+    if carPlate == "Q" or carPlate == "q":
         break
     carPlate = myPath + carPlate
-    keyText = pytesseract.image_to_string(Image.open(carPlate))    
+    keyText = pytesseract.image_to_string(Image.open(carPlate))
     if keyText in carDict:
         exitTime = time.asctime()
         print("車輛出場時間 : ", keyText, ":", exitTime)
         exitSecond = time.time()
         dxSecond = exitSecond - carDict[keyText]
-        hour = dxSecond % 3600          # 由餘數判斷是否進位
-        hours = dxSecond // 3600        # 計算小時數
+        hour = dxSecond % 3600  # 由餘數判斷是否進位
+        hours = dxSecond // 3600  # 計算小時數
         if hour != 0:
             hours += 1
         print("停車費用 : ", hours * 60, " 元 ")
@@ -58,5 +59,3 @@ while True:
         carDict[keyText] = entrySecond
 
 print("------------------------------------------------------------")  # 60個
-
-

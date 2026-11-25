@@ -18,11 +18,11 @@ yt = YouTube(url)
 
 # print('影片標題 :', yt.title)  # NG
 # print('影片長度 :', yt.length, '秒')  # NG
-print('影片作者 :', yt.author)
-print('影片作者頻道網址 :', yt.channel_url)
-print('影片縮圖網址 :', yt.thumbnail_url)
+print("影片作者 :", yt.author)
+print("影片作者頻道網址 :", yt.channel_url)
+print("影片縮圖網址 :", yt.thumbnail_url)
 # print('影片觀看數 :', yt.views)  # NG
-print('取得所有語系 :', yt.captions)
+print("取得所有語系 :", yt.captions)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -87,7 +87,7 @@ from bs4 import BeautifulSoup
 
 url = "https://www.youtube.com/watch?v=R93ce4FZGbc"
 yt = YouTube(url)
-print('取得所有語系 :', yt.captions)
+print("取得所有語系 :", yt.captions)
 caption = yt.captions.get_by_language_code("en")  # 取得英文語系
 xml = caption.xml_captions  # 將語系轉換成 xml
 # print(xml)
@@ -148,7 +148,7 @@ url = "https://www.youtube.com/watch?v=mOPRaLPh-YU&list=PL9ACDjBMkp9wViVmgpYweGk
 
 playlist = Playlist(url)  # 讀取影片清單
 
-#print(playlist.video_urls)  # 印出清單結果
+# print(playlist.video_urls)  # 印出清單結果
 for _ in playlist.video_urls:
     print(_)
 
@@ -350,4 +350,3 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-

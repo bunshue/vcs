@@ -1,5 +1,6 @@
 from pytube import YouTube
 
+
 def download_video(url, save_path):
     try:
         yt = YouTube(url)
@@ -10,11 +11,13 @@ def download_video(url, save_path):
     except Exception as e:
         print(e)
 
+
 video_url = "https://www.youtube.com/watch?v=IrwxueGgRYs"
-save_dir = "D:/_git/vcs/_4.python/__code/techwithtim/Python-Beginner-Automation-Projects-main"
+save_dir = (
+    "D:/_git/vcs/_4.python/__code/techwithtim/Python-Beginner-Automation-Projects-main"
+)
 
 print("Started download...")
 download_video(video_url, save_dir)
 
 print("Started download... OK")
-   

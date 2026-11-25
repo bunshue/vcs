@@ -6,31 +6,34 @@ import sys
 import requests
 import json
 
+
 def get_cwa_key():
-    filename = 'D:/_git/vcs/_1.data/______test_files1/_key/cwa_key.txt'
+    filename = "D:/_git/vcs/_1.data/______test_files1/_key/cwa_key.txt"
 
     import os
+
     filename = os.path.abspath(filename)
-    if not os.path.exists(filename): #檢查檔案是否存在
-        print('CWA_KEY 檔案不存在, 離開, 檔案 : ' + filename)
+    if not os.path.exists(filename):  # 檢查檔案是否存在
+        print("CWA_KEY 檔案不存在, 離開, 檔案 : " + filename)
         return ""
 
     print("讀取檔案 : " + filename)
-    fo = open(filename, 'r')
+    fo = open(filename, "r")
     cwa_key = fo.read()
     fo.close()
 
     length = len(cwa_key)
     if length != 40:
-        print('CWA_KEY 錯誤, 離開')
+        print("CWA_KEY 錯誤, 離開")
         return ""
     return cwa_key
+
 
 def get_data():
     cwa_key = get_cwa_key()
     length = len(cwa_key)
     if length != 40:
-        print('CWA_KEY 錯誤, 離開')
+        print("CWA_KEY 錯誤, 離開")
         return ""
 
     url = "https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-C0032-001"
@@ -40,7 +43,7 @@ def get_data():
     }
 
     response = requests.get(url, params=params)
-    #print(response.status_code)
+    # print(response.status_code)
 
     if response.status_code == 200:
         # print(response.text)
@@ -76,7 +79,20 @@ def get_data():
         print(comfort)
         """
 
-        line_notify(tuple([location, start_time, end_time, weather_state, rain_prob, min_tem, comfort, max_tem]))
+        line_notify(
+            tuple(
+                [
+                    location,
+                    start_time,
+                    end_time,
+                    weather_state,
+                    rain_prob,
+                    min_tem,
+                    comfort,
+                    max_tem,
+                ]
+            )
+        )
 
     else:
         print("Can't get data!")
@@ -84,30 +100,32 @@ def get_data():
 
 
 def get_line_key():
-    filename = 'D:/_git/vcs/_1.data/______test_files1/_key/line_key.txt'
+    filename = "D:/_git/vcs/_1.data/______test_files1/_key/line_key.txt"
 
     import os
+
     filename = os.path.abspath(filename)
-    if not os.path.exists(filename): #檢查檔案是否存在
-        print('LINE_KEY 檔案不存在, 離開, 檔案 : ' + filename)
+    if not os.path.exists(filename):  # 檢查檔案是否存在
+        print("LINE_KEY 檔案不存在, 離開, 檔案 : " + filename)
         return ""
 
     print("讀取檔案 : " + filename)
-    fo = open(filename, 'r')
+    fo = open(filename, "r")
     line_key = fo.read()
     fo.close()
 
     length = len(line_key)
     if length != 43:
-        print('LINE_KEY 錯誤, 離開')
+        print("LINE_KEY 錯誤, 離開")
         return ""
     return line_key
+
 
 def line_notify(data):
     line_key = get_line_key()
     length = len(line_key)
     if length != 43:
-        print('LINE_KEY 錯誤, 離開')
+        print("LINE_KEY 錯誤, 離開")
         return ""
 
     token = line_key
@@ -133,24 +151,23 @@ def line_notify(data):
     # line notify所需資料
     line_url = "https://notify-api.line.me/api/notify"
     line_header = {
-        "Authorization": 'Bearer ' + token,
-        "Content-Type": "application/x-www-form-urlencoded"
+        "Authorization": "Bearer " + token,
+        "Content-Type": "application/x-www-form-urlencoded",
     }
-    line_data = {
-        "message": message
-    }
+    line_data = {"message": message}
 
     x = requests.post(url=line_url, headers=line_header, data=line_data)
-    #print(x.status_code)
+    # print(x.status_code)
+
 
 """
 # line_notify(tuple(["台南市", "2021-08-31", "2021-09-01", "晴", "10", "20", "舒適", "25"]))
 get_data()
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-'''
+"""
 import requests
 try:
     import xml.etree.cElementTree as et
@@ -207,11 +224,9 @@ for filename in ['63_72hr_CH.xml', '63_72hr_EN.xml']:
     except:
         break
 f.close()
-'''
-    
-print('------------------------------------------------------------')	#60個
+"""
+
+print("------------------------------------------------------------")  # 60個
 
 
-
-print('------------------------------------------------------------')	#60個
-
+print("------------------------------------------------------------")  # 60個

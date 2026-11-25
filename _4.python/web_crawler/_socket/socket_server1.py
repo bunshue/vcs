@@ -1,10 +1,10 @@
 import socket
 
-#設定哪個IP與port可接受連線, 空字串代表所有IP
-HOST = 'localhost'
+# 設定哪個IP與port可接受連線, 空字串代表所有IP
+HOST = "localhost"
 PORT = 6688
 
-'''
+"""
 
 print('支援1個Client的Server')
 
@@ -34,20 +34,21 @@ while True:
 
 print('關閉伺服器連線')
 client.close()
-'''
+"""
 
 
-print('支援多個Client的Server')
+print("支援多個Client的Server")
 
 import threading
 
+
 class Client(threading.Thread):
     def __init__(self, conn, addr):
-        threading.Thread.__init__(self, daemon = True)
+        threading.Thread.__init__(self, daemon=True)
         self.__conn = conn
         self.__addr = addr
-        print('客戶端位址：{}'.format(addr))
-        print('客戶端位址：{}，埠號：{}'.format(addr[0], addr[1]))
+        print("客戶端位址：{}".format(addr))
+        print("客戶端位址：{}，埠號：{}".format(addr[0], addr[1]))
 
     def run(self):
         try:
@@ -59,26 +60,26 @@ class Client(threading.Thread):
         self.__conn.close()
 
 
-#設定監聽的IP與port
+# 設定監聽的IP與port
 
 skt = socket.socket()
-skt.bind((HOST, PORT))    
-skt.listen(5) #監聽客戶端的連線請求個數
+skt.bind((HOST, PORT))
+skt.listen(5)  # 監聽客戶端的連線請求個數
 
-print('{} 伺服器在 {} 埠建立！'.format(HOST, PORT))
+print("{} 伺服器在 {} 埠建立！".format(HOST, PORT))
 
 try:
     while True:
-        client, addr = skt.accept() #接受客戶端的連線
-        print('客戶端位址：{}'.format(addr))
-        print('客戶端位址：{}，埠號：{}'.format(addr[0], addr[1]))
+        client, addr = skt.accept()  # 接受客戶端的連線
+        print("客戶端位址：{}".format(addr))
+        print("客戶端位址：{}，埠號：{}".format(addr[0], addr[1]))
 
         Client(client, addr).start()
 except Exception as e:
     print(e)
 
 
-'''
+"""
     msg = client.recv(128).decode('utf8')
     print ('收到 client 訊息：' + msg)
     reply = '已讀不回'
@@ -90,10 +91,7 @@ except Exception as e:
         break
 
     client.send(reply.encode('utf8'))
-'''
+"""
 
-print('關閉伺服器連線')
+print("關閉伺服器連線")
 client.close()
-
-
-
