@@ -107,6 +107,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("BeautifulSoup 測試 讀取本地 html 1")
 
+# data/my_html_01.html
+
 string_html_data = """
 <html>
     <head><meta charset="big-5"><title>網頁標題1</title></head>
@@ -180,25 +182,31 @@ soup = BeautifulSoup(string_html_data, "html.parser")
 # soup = BeautifulSoup(string_html_data, "lxml")
 
 print("------------------------------")  # 30個
+# 用find找
 
-print("第1個超連結：")
-print(soup.find("a", {"href": "https://tw.yahoo.com/"}))
-print("第2個超連結：")
-print(soup.find("a", {"href": "https://www.google.com/"}))
+print("找第1個<a>超連結：")
+print("全部 :", soup.find("a", {"href": "https://tw.yahoo.com/"}))
+print("內容 :", soup.find("a", {"href": "https://tw.yahoo.com/"}).text)
+
+print("找第2個<a>超連結：")
+print("全部 :", soup.find("a", {"href": "https://www.google.com/"}))
+print("內容 :", soup.find("a", {"href": "https://www.google.com/"}).text)
 
 print("------------------------------")  # 30個
-
 # 用find找
 
 print("找下一個粗體<b>")
 cc = soup.find("b")  # 找下一個粗體<b>
-print(cc)  # 全部
-print(cc.text)  # 內容
-print(cc.string)  # 內容
+print("全部 :", cc)  # 全部
+print("內容 :", cc.text)  # 內容
+print("內容 :", cc.string)  # 內容
 
 print("找全部的超連結<a>")
+all_tag_a = soup.find_all("a")
+print("共 :", len(all_tag_a), "個, 分別是 :")
 
 print(soup.find_all("a"))
+
 
 print("找全部的超連結<a> +  條件")
 cc = soup.find_all("a", {"class": "sister"})
@@ -211,6 +219,8 @@ print(cc.text)  # Elsie
 print("找下一個超連結<a> + 條件")
 cc = soup.find("a", {"id": "link2"})
 print(cc.text)  # Lacie
+
+sys.exit()
 
 # 用select選
 cc = soup.select("#link3")
@@ -502,8 +512,11 @@ print("---------------")  # 15個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+sys.exit()
 
 print("BeautifulSoup 測試 讀取本地 html 3")
+
+# data/my_html_02.html
 
 string_html_data = """
 <html>
@@ -714,7 +727,7 @@ print("取得網頁超連結 取得 a href", soup.select("a")[0]["href"])
 
 print("多重條件選擇")
 data = soup.select("div div p")  # 尋找 div 標籤裡面的 div 標籤裡面的 p 標籤 三者都要符合的抓出來
-print("符合條件的資料", len(data), "筆")
+print("共 :", len(data), "個, 分別是 :")
 print(data)
 
 print("------------------------------")  # 30個
@@ -743,7 +756,7 @@ print("取得h2 this :", this.text)  # 只印出text部分
 print("找全部的標題<h2>")
 h2s = soup.find_all("h2")  # 取得 全部 <h2></h2>
 length = len(h2s)
-print("共找到", length, "筆資料")
+print("共 :", length, "個, 分別是 :")
 for nn in range(length):
     print(h2s[nn].text)  # 使用索引值, 只印出text部分
 # print("取得全部 h2 :", h2s)        #印出全部資料, 一個list
@@ -752,7 +765,7 @@ for nn in range(length):
 print("多重取得 + 條件")
 h1_h2s = soup.find_all(["h1", "h2"], limit=3)  # 多重取得, 找全部的 標題1<h1> 和 標題2<h2>
 length = len(h1_h2s)
-print("共找到", length, "筆資料")
+print("共 :", length, "個, 分別是 :")
 for nn in range(length):
     print(h1_h2s[nn].text)  # 使用索引值, 只印出text部分
 # print("取得全部 h1 h2 :", h1_h2s)        #印出全部資料, 一個list
@@ -766,7 +779,7 @@ print("取得<h1>??</h1> :", h1.text)  # 只印出text部分
 
 h2s = soup.select("h2")  # 選全部的h2標籤
 length = len(h2s)
-print("共找到", length, "筆資料")
+print("共 :", length, "個, 分別是 :")
 for nn in range(length):
     print(h2s[nn].text)  # 使用索引值, 只印出text部分
 # print("取得全部 h2 :", h2s)        #印出全部資料, 一個list
@@ -1486,8 +1499,7 @@ print("---------------")  # 15個
 print("找出所有問卷的題目字串")
 print("找全部的段落<p> + 條件")
 tag_list = soup.find_all("p", class_="question")  # 找 <p>段落 class為"question"
-print("找到個數 :", len(tag_list))
-print("tag_list :")
+print("共 :", len(tag_list), "個, 分別是 :")
 print("---------------")  # 15個
 for tag in tag_list:
     print("全部 :", tag)
@@ -1825,7 +1837,7 @@ print("檢視前幾行\n", df.head())
 print("------------------------------------------------------------")  # 60個
 
 tables = soup.find_all("table")
-print("table數量 :", len(tables))
+print("table共 :", len(tables), "個, 分別是 :")
 for table in tables:
     print('table內容 :')
     print("class :", table.get("class"))  # 看看是哪個table
@@ -2487,10 +2499,10 @@ f.write("<table border>\n")
 f.write("<tr><td>書號</td><td>圖</td><td>書名</td></tr>\n")
 
 print("---------------")  # 15個
-print(len(listBookName))
+print("共 :", len(listBookName), "個")
 print(listBookName)
 print("---------------")  # 15個
-print(len(listImageUrlOk))
+print("共 :", len(listImageUrlOk), "個")
 print(listImageUrlOk)
 print("---------------")  # 15個
 
@@ -2519,9 +2531,8 @@ responseObj.encoding = "utf-8"
 soup = BeautifulSoup(responseObj.text, "html.parser")
 
 data = soup.select(".style2")  # 尋找class是style2
-count = len(data)
-print("共 %d 筆新書記錄" % (count))
 
+print("共 :", len(data), "筆新書記錄, 分別是 :")
 for book in data:
     print(book.text)
 
@@ -2793,7 +2804,8 @@ print(pages[-1].text)
 
 print("找全部的內容分區元素<div> + 條件")
 titles = soup.find_all("div", class_="c-listTableTd__title")
-print(len(titles))
+
+print("共 :", len(titles), "個, 分別是 :")
 
 cnt = 0
 for title in titles:
@@ -2943,7 +2955,8 @@ print(soup)
 print("找下一個內容分區元素<div> + 條件")
 constellation = soup.find("div", id="list")
 cons = constellation.find("div", "alb").find_all("div")  # 取得 全部 <div></div>
-print(len(cons))
+
+print("共 :", len(cons), "個, 分別是 :")
 
 pict_url = "http://www.xzw.com"
 photos = []
@@ -2956,7 +2969,7 @@ for con in cons:
     print("圖片位址 :", pict)
     photos.append(pict_url + pict)
 
-print(len(photos))
+print("共 :", len(photos), "個, 分別是 :")
 for photo in photos:
     print(photo)
 
@@ -2964,7 +2977,7 @@ download_image_dir = "tmp_xzw_picture"
 if os.path.exists(download_image_dir) == False:  # 如果沒有此資料夾就建立
     os.mkdir(download_image_dir)
 
-print("搜尋到的圖片數量 = ", len(photos))  # 列出搜尋到的圖片數量
+print("搜尋到的圖片數量 共 :", len(photos), "個, 分別是 :")
 for photo in photos:  # 迴圈下載圖片與儲存
     picture = requests.get(photo)  # 下載圖片
     picture.raise_for_status()  # 如果發生錯誤的話, 會丟出 exception
@@ -3203,7 +3216,8 @@ for item in listItems:
     URl = item.find("a").get("href")  # 文章網址
     print("文章網址: https://www.dcard.tw" + URl)
     print("=" * 70)
-print("取得文章數量 =", len(listItems))
+
+print("取得文章數量 共 :", len(listItems))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -3835,7 +3849,7 @@ h2s = soup.find_all("h2")  # 取得 全部 <h2></h2>
 # print("取得全部 h2 :", h2s)        #印出全部資料, 一個list
 
 length = len(h2s)
-print("共找到", length, "筆資料")
+print("共 :", length, "個, 分別是 :")
 for nn in range(length):
     print(h2s[nn].text)  # 使用索引值, 只印出text部分
 
@@ -3884,9 +3898,8 @@ print("------------------------------")  # 30個
 
 print("找全部的xx<li>")
 books = soup.find_all("li", {"class": "item"})
-print(len(books))
-# print(books)
 
+print("共 :", len(books), "個, 分別是 :")
 for i, book in enumerate(books):
     # print(i, book)
     if i > 22 and i < 30:
@@ -3966,8 +3979,7 @@ print("下載網站圖片")
 
 Img = soup.select("div.item>a>img")  # 擷取有圖片網址的<img>標籤
 
-print("共找到有圖片網址的連結 :", len(Img), "個")
-
+print("共找到有圖片網址的連結 :", len(Img), "個, 分別是 :")
 cnt = 0
 for link in Img:
     print("圖片連結 :", link)
@@ -4006,7 +4018,7 @@ def showpage(url, kind):
     res = soup.find_all("div", {"class": "mod type02_m012 clearfix"})[0]
     items = res.select(".item")  # 所有 item  # 尋找class是item
     n = 0  # 計算該分頁共有多少本書
-    print(len(items))
+    print("共 :", len(items), "個, 分別是 :")
     for item in items:
         print(item)
         msg = item.select(".msg")[0]  # 尋找class是msg
@@ -4364,7 +4376,6 @@ ContactPerson = data.find_all("聯絡人")
 DuringTraining = data.find_all("訓練期間")
 ContactNumber = data.find_all("聯絡電話")
 CourseTitle = data.find_all("課程名稱")
-
 
 csv_str = ""
 for i in range(0, len(HandlingUnit)):
@@ -4731,14 +4742,14 @@ def searchdic(search_word):
         return result
 
     div1 = divs[0].find_all("div", "compTitle lh-25")
-    length = len(div1)
-    # print('a共找到', length, '筆資料')
+    print("共 :", len(div1), "筆資料")
 
     div2 = divs[0].find_all("div", "compTextList ml-50")
-    length = len(div2)
-    # print('b共找到', length, '筆資料')
+    print("共 :", len(div2), "筆資料")
 
     # 依照詞性數量的區塊做迴圈，將一個一個區塊作處理
+    length = len(div2)
+    print("共 :", length, "個, 分別是 :")
     for nn in range(length):
         """debug
         print(nn)
@@ -5040,6 +5051,7 @@ for row in rows:
 
 person_data.reverse()  # 反相
 length = len(person_data)
+print("共 :", length, "個, 分別是 :")
 year1 = []
 person1 = []
 person2 = []
@@ -5068,6 +5080,7 @@ for row in rows:
 
 house_data.reverse()  # 反相
 length = len(house_data)
+print("共 :", length, "個, 分別是 :")
 year2 = []
 house = []
 for i in range(0, length):
@@ -5168,6 +5181,7 @@ for row in rows:
 
 person_data.reverse()   #反相
 length = len(person_data)
+print("共 :", length, "個, 分別是 :")
 year1 = []
 person1 = []
 person2 = []
@@ -5681,6 +5695,7 @@ def main():
             current_articles, prev_url = get_articles(current_page, today)
 
         length = len(articles)
+        print("共 :", length, "個, 分別是 :")
         print("共 %d 篇文章" % length)
 
         for i in range(0, 10):

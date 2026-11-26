@@ -1,4 +1,39 @@
 ﻿
+
+如果要忽略大小寫：
+
+C#
+string[] lines = richTextBox1.Lines;
+ 
+Array.Sort(lines, StringComparer.CurrentCultureIgnoreCase);
+ 
+richTextBox1.Lines = lines;
+
+如果要反向排序：
+
+C#
+string[] lines = richTextBox1.Lines;
+ 
+Array.Sort(lines);
+ 
+Array.Reverse(lines);
+ 
+richTextBox1.Lines = lines;
+
+或者：
+
+C#
+string[] lines = richTextBox1.Lines;
+ 
+var sorted = lines.OrderByDescending(x => x).ToArray();
+ 
+richTextBox1.Lines = sorted;
+
+
+
+
+
+
 //------------------------------------------------------------  # 60個
 
 

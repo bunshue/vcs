@@ -126,6 +126,51 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
+print(time.ctime())
+print("------------------------------------------------------------")  # 60個
+
+# webp 轉 png
+
+from pathlib import Path
+from PIL import Image
+
+foldername = "./data/webp"
+
+for webp_file in Path(foldername).glob("*.webp"):
+    png_file = webp_file.with_suffix(".png")
+
+    with Image.open(webp_file) as img:
+        img.save(png_file, "PNG")
+
+    print(f"{webp_file} -> {png_file}")
+
+print("------------------------------")  # 30個
+
+# webp 轉 jpg
+
+from pathlib import Path
+from PIL import Image
+
+foldername = "./data/webp"
+
+for webp_file in Path(foldername).glob("*.webp"):
+    jpg_file = webp_file.with_suffix(".jpg")
+
+    with Image.open(webp_file) as img:
+
+        # JPG 不支援透明通道
+        if img.mode in ("RGBA", "LA"):
+            bg = Image.new("RGB", img.size, (255, 255, 255))
+            bg.paste(img, mask=img.split()[-1])
+            img = bg
+        else:
+            img = img.convert("RGB")
+
+        img.save(jpg_file, "JPEG", quality=95)
+
+    print(f"{webp_file} -> {jpg_file}")
+    
+print("------------------------------------------------------------")  # 60個
 
 filename1 = "D:/_git/vcs/_1.data/______test_files1/_image_processing/red_300X300.bmp"
 filename2 = "D:/_git/vcs/_1.data/______test_files1/_image_processing/green_300X300.bmp"
@@ -458,18 +503,25 @@ new_image = PIL.ImageEnhance.Brightness(image).enhance(1.2)
 # increasing the contrast 20%
 new_image = PIL.ImageEnhance.Contrast(image).enhance(1.2)
 
-
-sys.exit()
-
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+# 6060
+print("------------------------------------------------------------")  # 60個
+# 3030
+print("------------------------------")  # 30個
+# 1515
+print("---------------")  # 15個
+
 
 
 print("------------------------------------------------------------")  # 60個

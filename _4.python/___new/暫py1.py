@@ -1,4 +1,46 @@
 
+
+# 直接寫 Python 腳本批量修改（大型專案推薦）
+
+from pathlib import Path
+
+for file in Path(".").rglob("*.py"):
+
+    text = file.read_text(
+        encoding="utf-8",
+        errors="ignore"
+    )
+
+    text = text.replace(
+        "pd.read_html(html)",
+        "pd.read_html(StringIO(html))"
+    )
+
+    file.write_text(
+        text,
+        encoding="utf-8"
+    )
+    
+6060
+
+import tkinter as tk
+
+root = tk.Tk()
+root.attributes("-topmost", True)
+
+label = tk.Label(
+    root,
+    text="起床啦~~~~",
+    font=("Microsoft JhengHei", 24)
+)
+label.pack(padx=50, pady=50)
+
+root.mainloop()
+
+
+
+6060
+
 import sys
 
 _ver = sys.version_info
