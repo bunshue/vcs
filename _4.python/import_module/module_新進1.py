@@ -341,12 +341,6 @@ print("相除", num1 / num2)
 
 print("------------------------------------------------------------")  # 60個
 
-import pathlib
-
-print(pathlib.Path.cwd())
-
-print("------------------------------------------------------------")  # 60個
-
 import easygui
 
 # easygui.msgbox(msg="AAAAAAAAAAAAAA", title="標題",ok_button="按這裡，繼續")

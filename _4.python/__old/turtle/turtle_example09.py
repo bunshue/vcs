@@ -9,6 +9,10 @@ from os.path import isfile, split, join
 from copy import deepcopy
 from tkinter import simpledialog
 
+print("------------------------------------------------------------")  # 60個
+print(time.ctime())
+print("------------------------------------------------------------")  # 60個
+
 _tg_classes = [
     "ScrolledCanvas",
     "TurtleScreen",
@@ -4033,3 +4037,4 @@ if __name__ == "__main__":
     # demo1()
     demo2()
     # exitonclick()
+

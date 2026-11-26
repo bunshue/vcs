@@ -72,11 +72,13 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
+print("------------------------------------------------------------")  # 60個
+print(time.ctime())
+print("------------------------------------------------------------")  # 60個
 
 def show():
     plt.show()
     pass
-
 
 print("------------------------------------------------------------")  # 60個
 

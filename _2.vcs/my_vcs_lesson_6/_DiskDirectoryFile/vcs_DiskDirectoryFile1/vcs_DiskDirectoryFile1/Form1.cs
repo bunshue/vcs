@@ -18,6 +18,7 @@ using Microsoft.VisualBasic.FileIO;  // for 刪除檔案(使用資源回收筒)
 
 //using MediaInfoNET; 不要用
 using System.Globalization; //for CultureInfo
+using System.Threading;
 
 /*
 使用MediaInfo獲取視頻或音頻的屬性
@@ -279,6 +280,10 @@ namespace vcs_DiskDirectoryFile1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //C# 跨 Thread 存取 UI
+            //Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效	same
+            Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
+
             // 操作模式
             bool operation_mode = Properties.Settings.Default.flag_operation_mode;
             cb_operation_mode.Checked = operation_mode;
@@ -4076,6 +4081,11 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_delete_file_Click(object sender, EventArgs e)
         {
+            if (flag_search_text_mode == true)  // 搜尋文字模式
+            {
+                _cancelRequested = true;
+                return;
+            }
 
             if (flag_auto_rename_file_mode == true)  // 自動修正檔名模式
             {
@@ -4267,7 +4277,23 @@ namespace vcs_DiskDirectoryFile1
             get_filesize_limit();
         }
 
+        private volatile bool _cancelRequested = false;
+
         void do_my_export(string foldername, Button btn)
+        {
+            _cancelRequested = false;
+
+            //把工作丟到另一條 Thread
+            Thread t = new Thread(() =>
+            {
+                do_my_export0(foldername, btn);
+            });
+
+            t.IsBackground = true;
+            t.Start();
+        }
+
+        void do_my_export0(string foldername, Button btn)
         {
             get_export_setting(foldername);
 
@@ -4699,8 +4725,12 @@ namespace vcs_DiskDirectoryFile1
         bool flag_need_katfile_foldername = false;
 
         //以這個為標準, 使用 Directory.GetDirectories() 和 Directory.GetFiles()
+        //在遞迴過程中不斷檢查是否要取消
         private void ProcessDirectory(string foldername)
         {
+            if (_cancelRequested == true)
+                return;
+
             //搜尋子目錄內的所有檔案   一層
             //使用 Directory.GetDirectories() 和 Directory.GetFiles()
 
@@ -4711,6 +4741,9 @@ namespace vcs_DiskDirectoryFile1
                 Array.Sort(dirs);  // 排序
                 foreach (string dir in dirs)
                 {
+                    if (_cancelRequested == true)
+                        return;
+
                     try
                     {
                         // 資料夾
@@ -4738,6 +4771,9 @@ namespace vcs_DiskDirectoryFile1
             folder_size = 0;
             foreach (string filename in filenames)
             {
+                if (_cancelRequested == true)
+                    return;
+
                 // 檔案
                 ProcessFile(filename);
             }
@@ -4880,6 +4916,9 @@ namespace vcs_DiskDirectoryFile1
 
         private void ProcessFile(string filename)
         {
+            if (_cancelRequested == true)
+                return;
+
             if (cb_search_option1.Checked == true)
             {
                 if (fileinfos.Count >= 30)

@@ -26,6 +26,8 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
+print(time.ctime())
+print("------------------------------------------------------------")  # 60個
 
 import sklearn
 import tensorflow as tf

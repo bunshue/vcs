@@ -20,6 +20,8 @@ def get_html_data_by_urlopen(url):
 
 
 print("------------------------------------------------------------")  # 60個
+print(time.ctime())
+print("------------------------------------------------------------")  # 60個
 
 from urllib.request import unquote
 

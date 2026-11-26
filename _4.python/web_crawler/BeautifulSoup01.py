@@ -43,6 +43,8 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
+print(time.ctime())
+print("------------------------------------------------------------")  # 60個
 
 import re
 import csv
@@ -98,11 +100,6 @@ headers = {
 }
 
 cookies = {"over18": "1"}
-
-print("------------------------------------------------------------")  # 60個
-print(time.ctime())
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 print("讀取本地html ST")
@@ -1789,10 +1786,15 @@ with open("data/currency1126.htm", "r", encoding="utf8") as fp:
 
 print(soup.title)  # 用來檢查是否有抓到正確的資料
 
-print("------------------------------")  # 30個
+print("------------------------------------------------------------")  # 60個
 
+# 整理資料存成 csv檔
 tag_table = soup.select_one("#ie11andabove > div > table")
 rows = tag_table.find_all("tr")
+for row in rows:
+    # print(row) 資料很多, 都是 html
+    for cell in row.find_all(["td", "th"]):
+        print(cell.text.replace("\n", "").replace("\r", "").strip())
 
 csvfile = "tmp_xrt.csv"
 with open(csvfile, "w+", newline="", encoding="big5") as fp:
@@ -1820,113 +1822,95 @@ df["幣別"] = df["幣別"].apply(split_name)
 df.to_csv("tmp_xrt2.csv", index=False, encoding="big5")
 print("檢視前幾行\n", df.head())
 
-print("------------------------------")  # 30個
+print("------------------------------------------------------------")  # 60個
 
 tables = soup.find_all("table")
 print("table數量 :", len(tables))
 for table in tables:
-    print(table.get("class"))  # 看看是哪個table
+    print('table內容 :')
+    print("class :", table.get("class"))  # 看看是哪個table
+    print("summary :", table.get("summary"))
+    print("title :", table.get("title"))
 
-rows = soup.select("table tbody tr")
-print("筆數 :", len(rows))
+rows = soup.select("table tbody tr") # 找尋 table 裡面的 tbody 裡面的 tr
+print("<tr>個數 :", len(rows))
 
 print("------------------------------")  # 30個
 
-#  印出前三行資料
+print("印出前三個 <tr>")
 for row in rows[:3]:
-    print(row.get_text(" ", strip=True))
+    # print(row)  # 全部
+    # print(row.get_text())  # 去除html
+    print(row.get_text(" ", strip=True))  # <tr>裡面 去除html+去除空白, 得到7筆資料
+    print("------------------------------")  # 30個
 
 print("------------------------------")  # 30個
 
 #  印出全部資料
 
-print(" 幣別    本行買入  本行賣出   本行買入  本行賣出")
+print("幣別\t本行買入\t本行賣出\t本行買入\t本行賣出")
 for row in rows:
-    tds = row.find_all("td")
+    # print(row)  # 全部
+    tds = row.find_all("td")  # 找 row 裡面的 <td>
+    # print(tds)
     if len(tds) > 4:
-        currency = tds[0].get_text(strip=True)
-        cash_buy = tds[1].get_text(strip=True)
-        cash_sell = tds[2].get_text(strip=True)
-        spot_buy = tds[3].get_text(strip=True)
-        spot_sell = tds[4].get_text(strip=True)
-        print(currency, cash_buy, cash_sell, spot_buy, spot_sell)
+        currency = tds[0].get_text(strip=True)  # <td>裡面 去除html+去除空白
+        cash_buy = tds[1].get_text(strip=True)  # <td>裡面 去除html+去除空白
+        cash_sell = tds[2].get_text(strip=True)  # <td>裡面 去除html+去除空白
+        spot_buy = tds[3].get_text(strip=True)  # <td>裡面 去除html+去除空白
+        spot_sell = tds[4].get_text(strip=True)  # <td>裡面 去除html+去除空白
+        print(currency, "\t",cash_buy,"\t", cash_sell,"\t", spot_buy, "\t",spot_sell)
+        print("------------------------------")  # 30個
 
 print("------------------------------")  # 30個
 
-print("多重條件選擇")
+print("多重條件選擇, 直接選擇 table + tr + td")
 cells = soup.select("table tr td")  # 尋找talbe標籤裡面的tr標籤裡面的td標籤 三者都要符合的抓出來
-print(type(cells))
 print("符合條件的資料", len(cells), "筆")
-print(cells)
 
-i = 0
+# 剛好有 19種匯率 各有 6筆資料 6*19=114
+
+# print(cells)
 for cell in cells:
-    # many print(i, cell.text.strip())
-    i = i + 1
+    # many print(cell.text.strip())
+    pass    
 
 print("------------------------------")  # 30個
 
-print("顯示 幣別, 多重條件選擇")
+print("取得 幣別, 多重條件選擇, 直接選擇 table + tr + td條件")
 dnames = soup.select("table tr td[data-table=幣別] div.visible-phone")
-# print(type(dnames))
 print("符合條件的資料", len(dnames), "筆")
+
 # print(dnames)
 names = list()
 for dname in dnames:
     names.append(dname.text.strip())
-print(names)
+    print(dname.text.strip())
 
 print("------------------------------")  # 30個
 
-print("顯示 本行即期買入, 多重條件選擇")
-buyingrate = soup.select("table tr td[data-table=本行即期買入]")
-print(type(buyingrate))
-print("符合條件的資料", len(buyingrate), "筆")
-# many print(buyingrate)
-i = 0
-for price in buyingrate:
-    print(i, price.text.strip())
-    i = i + 1
+print("取得 本行即期買入, 多重條件選擇, 直接選擇 table + tr + td條件")
+buyingrates = soup.select("table tr td[data-table=本行即期買入]")
+print("符合條件的資料", len(buyingrates), "筆")
+
+# many print(buyingrates)
+for price in buyingrates:
+    print(price.text.strip())
 
 print("---------------")  # 15個
 
 prices = list()
-for price in buyingrate:
+for price in buyingrates:
     prices.append(price.text.strip())
 print(prices)
 
 print("------------------------------")  # 30個
 
 print("用 zip 組合起來")
-# print(names)
-# print(prices)
 rates = zip(names, prices)
 for rate in rates:
     print(rate)
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-string_html_data = """
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-<title>BeautifulSoup套件進行網頁解析</title>
-<meta charset="utf-8">
-</head>
-
-<body>
-<h1 style="background-color:red; color:white; font-family:Segoe Script; border:3px #000000 solid;">Python is funny</h1>
-Python簡單易學又有趣
-<h1 style="color:rgb(255, 99, 71);">程式設計網站推薦</h1>
-<h1 style="color:rgb(255, 199, 125);">優質大學推薦</h1>
-<h1 style="color:rgb(126, 168, 168);">優質高中推薦</h1>
-<h3 style="background-color:green; color:yellow; font-family:Segoe Script; border:3px #000000 solid;">勵志名句</h1>
-一分努力~~ 一分收獲~~
-金誠所至~~ 金石為開~~
-</body>
-</html>
-"""
 print("------------------------------------------------------------")  # 60個
 print("讀取本地html SP")
 print("------------------------------------------------------------")  # 60個
