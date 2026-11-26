@@ -43,8 +43,6 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-print("準備工作", time.ctime())
-print("------------------------------------------------------------")  # 60個
 
 import re
 import csv
@@ -100,7 +98,12 @@ headers = {
 }
 
 cookies = {"over18": "1"}
-'''
+
+print("------------------------------------------------------------")  # 60個
+print(time.ctime())
+print("------------------------------------------------------------")  # 60個
+
+
 print("------------------------------------------------------------")  # 60個
 print("讀取本地html ST")
 print("------------------------------------------------------------")  # 60個
@@ -1026,74 +1029,82 @@ with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
     # print("整個網頁資料 :", soup)
 
+print(soup.title)  # 用來檢查是否有抓到正確的資料
+
 print("------------------------------")  # 30個
 
-# 搜尋<a>標籤
-print("找下一個超連結<a>")
-tag_a = soup.find("a")
-print(tag_a)
-print(tag_a.text)
+# <p>全部 : <p class="question"><a href="http://example.com/google">第1個問題 google</a></p>
+# <a>全部 :                     <a href="http://example.com/google">第1個問題 google</a>
+# 其實 <p>和<a>的內容都是一樣的, 是 <p>包含了<a>
 
 print("找下一個段落<p>")
-print(soup.find("p"))
+tag_p = soup.find("p")
+print("全部 :", tag_p)
+print("內容 :", tag_p.text)
 
-# 呼叫多次find()方法
+print("找下一個超連結<a>")
+tag_a = soup.find("a")
+print("全部 :", tag_a)
+print("內容 :", tag_a.text)
+
+print("呼叫多次find()方法")
 
 print("段落<p>內有連結<a>")
 tag_p = soup.find("p")
-print(tag_p)
+print("全部 :", tag_p)
 
 print("段落<p>內找連結<a>")
 tag_a = tag_p.find("a")
-print(tag_a)
-print(tag_p.a.text)
-print(tag_a.text)
+print("全部 :", tag_a)
+print("內容 :", tag_p.a.text)
+print("內容 :", tag_a.text)
 
 print("------------------------------")  # 30個
 
-# 走訪下一層HTML標籤
-print(soup.html.body.div.div.p.a.text)
+print("走訪下一層HTML標籤")
+print("內容 :", soup.html.body.div.div.p.a.text)
 
 print("------------------------------")  # 30個
 
-# 走訪上一層HTML標籤
+print("走訪上一層HTML標籤")
 tag_div = soup.select_one("#q1")  # 找到第1題的<div>標籤
 tag_li = tag_div.ul.li  # 走訪到之下的<ul>
-print(tag_li.text)
-# 使用parent屬性取得父標籤
-print(tag_li.parent.parent.p.a.text)
+print("內容 :", tag_li.text)
+
+print("使用parent屬性取得父標籤")
+print("內容 :", tag_li.parent.parent.p.a.text)
 
 print("------------------------------")  # 30個
 
 tag_div = soup.select_one("#q2")  # 找到第2題的<div>標籤
-print(tag_div.find_previous_sibling().p.a.text)
-print(tag_div.find_next_sibling().p.a.text)
+print("內容 :", tag_div.find_previous_sibling().p.a.text)
+print("內容 :", tag_div.find_next_sibling().p.a.text)
 
 print("------------------------------")  # 30個
 
-# 使用id屬性搜尋<div>標籤
+print("使用id屬性搜尋<div>標籤")
 tag_div = soup.find(id="q2")
 
 print("找下一個超連結<a>")
 tag_a = tag_div.find("a")
-print(tag_a.text)
+print("內容 :", tag_a.text)
 
 print("------------------------------")  # 30個
 
 # 使用class屬性搜尋<span>標籤
 tag_span = soup.find(attrs={"class": "score"})
-print(tag_span.text)
+print("內容 :", tag_span.text)
 
 # 搜尋第2題的第1個<span>標籤
 tag_div = soup.find(id="q2")
 tag_span = tag_div.find(class_="score")
-print(tag_span.text)
+print("內容 :", tag_span.text)
 
 print("------------------------------")  # 30個
 
 # 使用HTML5的data-屬性搜尋<div>標籤
 tag_div = soup.find(attrs={"data-custom": "important"})
-print(tag_div.text)
+print("內容 :", tag_div.text)
 
 print("------------------------------")  # 30個
 
@@ -1113,7 +1124,7 @@ print("------------------------------")  # 30個
 tag_str = soup.find(text="女 - ")
 print(tag_str)
 tag_li = soup.find(class_="response")
-print(tag_li.text)
+print("內容 :", tag_li.text)
 print(tag_li.string)
 print(tag_li.span.string)
 
@@ -1148,14 +1159,14 @@ tag_div = soup.find("div", id="q2")
 print("多重取得, 找出所有<p>和<span>標籤")
 tag_list = tag_div.find_all(["p", "span"])  # 多重取得, 找全部的 段落<p> 和 xx<span>
 for tag in tag_list:
-    print(tag.name, tag.text.replace("\n", ""))
+    print("內容 :", tag.name, tag.text.replace("\n", ""))
 
 print("------------------------------")  # 30個
 
 # 找出class屬性值question或selected的所有標籤
 tag_list = tag_div.find_all(class_=["question", "selected"])
 for tag in tag_list:
-    print(tag.name, tag.text.replace("\n", ""))
+    print("內容 :", tag.name, tag.text.replace("\n", ""))
 
 print("------------------------------")  # 30個
 
@@ -1164,7 +1175,7 @@ tag_div = soup.find("div", id="q2")
 # 找出所有<li>子孫標籤
 tag_list = tag_div.find_all("li")
 for tag in tag_list:
-    print(tag.text.replace("\n", ""))
+    print("內容 :", tag.text.replace("\n", ""))
 
 # 沒有使用遞迴來找出所有<li>標籤
 tag_list = tag_div.find_all("li", recursive=False)
@@ -1174,7 +1185,7 @@ print("------------------------------")  # 30個
 
 # 搜尋<title>標籤和第3個<div>標籤
 tag_title = soup.select("title")  # 選全部的標題<title>
-print(tag_title[0].text)
+print("內容 :", tag_title[0].text)
 
 print("找下一個內容分區元素<div> + 條件")
 tag_first_div = soup.find("div")
@@ -1302,12 +1313,9 @@ print("---------------")  # 15個
 tag_list = soup.find_all(text=email_regexp)
 print(tag_list)
 
-print("------------------------------")  # 30個
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 # 讀取本地檔案 same, 改成讀出來
 # fp = open("data/Example2.html", "r", encoding="utf8")
 # string_html_data = fp.read()
@@ -1371,15 +1379,15 @@ print("------------------------------")  # 30個
 # 搜尋HTML標籤
 soup = BeautifulSoup(string_html_data, "lxml")
 
-print('找下一個 <a> 超連結')
+print("找下一個 <a> 超連結")
 tag_a = soup.find("a")
 print(tag_a.string)
 
-print('找下一個 <a> 超連結')  # ?? 沒有往下一個跑
+print("找下一個 <a> 超連結")  # ?? 沒有往下一個跑
 tag_a = soup.find("a")
 print(tag_a.string)
 
-print('找下一個 <a> 超連結')  # ?? 沒有往下一個跑
+print("找下一個 <a> 超連結")  # ?? 沒有往下一個跑
 tag_a = soup.find("a")
 print(tag_a.string)
 
@@ -1388,23 +1396,23 @@ print("---------------")  # 15個
 # 搜尋HTML標籤的id屬性
 
 tag_div = soup.find(id="q1")
-print('找下一個 <a> 超連結 q1')
+print("找下一個 <a> 超連結 q1")
 tag_a = tag_div.find("a")
 print(tag_a.string)  # 第1個問題 google
 
 tag_div = soup.find(id="q2")
-print('找下一個 <a> 超連結 q2')
+print("找下一個 <a> 超連結 q2")
 tag_a = tag_div.find("a")
 print(tag_a.string)  # 第2個問題 yahoo
 
 tag_div = soup.find(id="q3")
-print('找下一個 <a> 超連結 q3')
+print("找下一個 <a> 超連結 q3")
 tag_a = tag_div.find("a")
 print(tag_a.string)  # 第3個問題 wiki
 
 print("---------------")  # 15個
 
-print('class樣式屬性')
+print("class樣式屬性")
 tag_li = soup.find(attrs={"class": "response"})
 tag_span = tag_li.find("span")
 print(tag_span.string)
@@ -1442,8 +1450,8 @@ print("------------------------------")  # 30個
 print("找下一個內容分區元素<div> + 條件")
 tag_div = soup.find("div", class_="question")
 print(tag_div.prettify())  # pretty打印
-print(tag_div) # <div class="question">電子郵件清單資訊: </div>
-print(tag_div.string) # 電子郵件清單資訊: 
+print(tag_div)  # <div class="question">電子郵件清單資訊: </div>
+print(tag_div.string)  # 電子郵件清單資訊:
 
 print("------------------------------")  # 30個
 
@@ -1451,14 +1459,17 @@ print("找下一個段落<p> + 條件")
 tag_p = soup.find("p", class_="question")
 print(tag_p.prettify())  # pretty打印
 
-print('段落<p> 全部')
-print(tag_p)  # <p class="question"><a href="http://example.com/google">第1個問題 google</a></p>
+print("段落<p> 全部")
+print(
+    tag_p
+)  # <p class="question"><a href="http://example.com/google">第1個問題 google</a></p>
 
-print('找段落<p> 裡面的<a>')
+print("找段落<p> 裡面的<a>")
 tag_a = tag_p.find("a")
 print(tag_a.string)
 
 print("---------------")  # 15個
+
 
 # 使用函數建立搜尋條件
 def is_secondary_question(tag):
@@ -1467,6 +1478,7 @@ def is_secondary_question(tag):
     print(cc1, cc2)
     return tag.has_attr("href") and tag.get("href") == "http://example.com/yahoo"
 
+
 print("is_secondary_question")
 tag_a = soup.find(is_secondary_question)
 print("tag_a :", tag_a)
@@ -1474,7 +1486,7 @@ print(tag_a.prettify())  # pretty打印
 
 print("---------------")  # 15個
 
-print('找出所有問卷的題目字串')
+print("找出所有問卷的題目字串")
 print("找全部的段落<p> + 條件")
 tag_list = soup.find_all("p", class_="question")  # 找 <p>段落 class為"question"
 print("找到個數 :", len(tag_list))
@@ -1488,9 +1500,11 @@ for tag in tag_list:
 
 print("------------------------------")  # 30個
 
-print('使用limit參數限制搜尋數量')
+print("使用limit參數限制搜尋數量")
 print("找全部的段落<p> + 條件")
-tag_list = soup.find_all("p", class_="question", limit=1)  # 找 <p>段落 class為"question", 數量1
+tag_list = soup.find_all(
+    "p", class_="question", limit=1
+)  # 找 <p>段落 class為"question", 數量1
 print("tag_list :")
 print(tag_list)
 for tag in tag_list:
@@ -1504,7 +1518,7 @@ print("搜尋所有標籤 q2 a")
 tag_div = soup.find("div", id="q2")
 # 找出所有標籤清單
 tag_all = tag_div.find_all(True)
-print('tag_all')
+print("tag_all")
 print(tag_all)
 
 print("------------------------------")  # 30個
@@ -1514,14 +1528,14 @@ print("搜尋所有標籤 q2 b")
 tag_div = soup.find("div", id="q2")
 # 找出所有文字內容清單
 tag_str_list = tag_div.find_all(text=True)
-print('tag_str_list')
+print("tag_str_list")
 print(tag_str_list)
 
 print("------------------------------")  # 30個
 
 # 找出指定的文字內容清單
 tag_str_list = tag_div.find_all(text=["20", "40"])
-print('tag_str_list')
+print("tag_str_list")
 print(tag_str_list)
 
 print("搜尋所有標籤 q2 c")
@@ -1530,14 +1544,14 @@ print("搜尋所有標籤 q2 c")
 tag_div = soup.find("div", id="q2")
 # 找出所有<p>和<span>標籤
 tag_list = tag_div.find_all(["p", "span"])
-print('tag_list')
+print("tag_list")
 print(tag_list)
 
 print("------------------------------")  # 30個
 
 # 找出class屬性值question或selected的所有標籤
 tag_list = tag_div.find_all(class_=["question", "selected"])
-print('tag_list')
+print("tag_list")
 print(tag_list)
 
 print("搜尋所有標籤 q2 d")
@@ -1545,49 +1559,49 @@ print("搜尋所有標籤 q2 d")
 tag_div = soup.find("div", id="q2")
 # 找出所有<li>子孫標籤
 tag_list = tag_div.find_all("li")
-print('tag_list')
+print("tag_list")
 print(tag_list)
 
 print("------------------------------")  # 30個
 
 # 沒有使用遞迴來找出所有<li>標籤
 tag_list = tag_div.find_all("li", recursive=False)
-print('tag_list')
+print("tag_list")
 print(tag_list)
 
 # 正規表達式搜尋文字內容
 regexp = re.compile("男-")
 tag_str = soup.find(text=regexp)
-print('tag_str')
+print("tag_str")
 print(tag_str)
 
 regexp = re.compile("\w+-")  # 字元+-
 tag_list = soup.find_all(text=regexp)
-print('tag_list')
+print("tag_list")
 print(tag_list)
 
 # 使用正規表達式搜尋電子郵件地址
 email_regexp = re.compile("\w+@\w+\.\w+")
 tag_str = soup.find(text=email_regexp)
-print('tag_str')
+print("tag_str")
 print(tag_str)
 print("---------------")  # 15個
 tag_list = soup.find_all(text=email_regexp)
-print('tag_list')
+print("tag_list")
 print(tag_list)
 
 # 使用正規表達式搜尋URL網址
 url_regexp = re.compile("^http:")
 tag_href = soup.find(href=url_regexp)
 
-print('tag_href')
+print("tag_href")
 print(tag_href)
 print("---------------")  # 15個
 tag_list = soup.find_all(href=url_regexp)
-print('tag_list')
+print("tag_list")
 print(tag_list)
 print("---------------")  # 15個
-print('cccc')
+print("cccc")
 print(tag_list[0].string)
 
 tag = soup.find(href=url_regexp)
@@ -1600,7 +1614,6 @@ for tag in tag_list:
     print(tag["href"], tag.text)
 
 print("------------------------------------------------------------")  # 60個
-sys.exit()
 
 # html 承上
 
@@ -1752,6 +1765,144 @@ tag_div = soup.find(id="q1")
 for element in tag_div.previous_elements:
     if not isinstance(element, NavigableString):
         print(element.name)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+"""
+查詢歷史資料 範例
+https://rate.bot.com.tw/xrt/all/2023-03-20
+https://rate.bot.com.tw/
+
+(台銀牌告匯率)
+https://rate.bot.com.tw/xrt?Lang=zh-TW
+"""
+
+url = "https://rate.bot.com.tw/xrt/all/day"
+# url = "https://rate.bot.com.tw/xrt?Lang=zh-TW"  # 另一個網址
+
+# 讀取本地檔案 same, 改成讀出來
+with open("data/currency1126.htm", "r", encoding="utf8") as fp:
+    soup = BeautifulSoup(fp, "lxml")
+    # soup = BeautifulSoup(html, "html.parser")
+    # print("整個網頁資料 :", soup)
+    # print(soup.prettify())  # prettify()這個函數可以將DOM tree以比較美觀的方式印出。
+
+print(soup.title)  # 用來檢查是否有抓到正確的資料
+
+print("------------------------------")  # 30個
+
+tag_table = soup.select_one("#ie11andabove > div > table")
+rows = tag_table.find_all("tr")
+
+csvfile = "tmp_xrt.csv"
+with open(csvfile, "w+", newline="", encoding="big5") as fp:
+    writer = csv.writer(fp)
+    for row in rows:
+        lst = []
+        for cell in row.find_all(["td", "th"]):
+            lst.append(cell.text.replace("\n", "").replace("\r", "").strip())
+        writer.writerow(lst)
+
+print("------------------------------")  # 30個
+
+
+def split_name(name):
+    pos = name.find(")")
+    return pd.Series({'"幣別"': name[0:pos].strip() + ")"})
+
+
+df = pd.read_csv("tmp_xrt.csv", encoding="big5")
+df = df.drop(df.index[[0, 1]])
+df = df.iloc[:, 0:5]
+df.columns = ["幣別", "現金(買)", "現金(賣)", "即期(買)", "即期(賣)"]
+df["幣別"] = df["幣別"].apply(split_name)
+
+df.to_csv("tmp_xrt2.csv", index=False, encoding="big5")
+print("檢視前幾行\n", df.head())
+
+print("------------------------------")  # 30個
+
+tables = soup.find_all("table")
+print("table數量 :", len(tables))
+for table in tables:
+    print(table.get("class"))  # 看看是哪個table
+
+rows = soup.select("table tbody tr")
+print("筆數 :", len(rows))
+
+print("------------------------------")  # 30個
+
+#  印出前三行資料
+for row in rows[:3]:
+    print(row.get_text(" ", strip=True))
+
+print("------------------------------")  # 30個
+
+#  印出全部資料
+
+print(" 幣別    本行買入  本行賣出   本行買入  本行賣出")
+for row in rows:
+    tds = row.find_all("td")
+    if len(tds) > 4:
+        currency = tds[0].get_text(strip=True)
+        cash_buy = tds[1].get_text(strip=True)
+        cash_sell = tds[2].get_text(strip=True)
+        spot_buy = tds[3].get_text(strip=True)
+        spot_sell = tds[4].get_text(strip=True)
+        print(currency, cash_buy, cash_sell, spot_buy, spot_sell)
+
+print("------------------------------")  # 30個
+
+print("多重條件選擇")
+cells = soup.select("table tr td")  # 尋找talbe標籤裡面的tr標籤裡面的td標籤 三者都要符合的抓出來
+print(type(cells))
+print("符合條件的資料", len(cells), "筆")
+print(cells)
+
+i = 0
+for cell in cells:
+    # many print(i, cell.text.strip())
+    i = i + 1
+
+print("------------------------------")  # 30個
+
+print("顯示 幣別, 多重條件選擇")
+dnames = soup.select("table tr td[data-table=幣別] div.visible-phone")
+# print(type(dnames))
+print("符合條件的資料", len(dnames), "筆")
+# print(dnames)
+names = list()
+for dname in dnames:
+    names.append(dname.text.strip())
+print(names)
+
+print("------------------------------")  # 30個
+
+print("顯示 本行即期買入, 多重條件選擇")
+buyingrate = soup.select("table tr td[data-table=本行即期買入]")
+print(type(buyingrate))
+print("符合條件的資料", len(buyingrate), "筆")
+# many print(buyingrate)
+i = 0
+for price in buyingrate:
+    print(i, price.text.strip())
+    i = i + 1
+
+print("---------------")  # 15個
+
+prices = list()
+for price in buyingrate:
+    prices.append(price.text.strip())
+print(prices)
+
+print("------------------------------")  # 30個
+
+print("用 zip 組合起來")
+# print(names)
+# print(prices)
+rates = zip(names, prices)
+for rate in rates:
+    print(rate)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -3090,7 +3241,7 @@ print(soup("a", limit=2))  # 找全部的超連結<a> + 條件
 
 print("------------------------------")  # 30個
 
-print('找下一個 <a> 超連結')
+print("找下一個 <a> 超連結")
 print(soup.find("a").get_text())  # 輸出第一個 a tag 的內容
 print(soup.find("a")["href"])  # 輸出第一個 a tag 的 href 屬性內容
 
