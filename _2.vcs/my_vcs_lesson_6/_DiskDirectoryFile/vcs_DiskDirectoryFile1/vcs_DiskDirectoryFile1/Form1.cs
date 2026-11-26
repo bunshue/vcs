@@ -4283,17 +4283,20 @@ namespace vcs_DiskDirectoryFile1
         {
             _cancelRequested = false;
 
+            /* 不好用
             //把工作丟到另一條 Thread
             Thread t = new Thread(() =>
             {
-                do_my_export0(foldername, btn);
+                do_my_export_really(foldername, btn);
             });
 
             t.IsBackground = true;
             t.Start();
+            */
+            do_my_export_really(foldername, btn);
         }
 
-        void do_my_export0(string foldername, Button btn)
+        void do_my_export_really(string foldername, Button btn)
         {
             get_export_setting(foldername);
 
@@ -8660,7 +8663,23 @@ IPZ-568-UC.mp4
 [.]                   AIAV-002_000^WM.mp4   
 [.]                  AIAV-003-C_GG5.mp4   
 
+//------------------------------------------------------------  # 60個
+
+建議把：
+string[] dirs = Directory.GetDirectories(foldername);
+string[] filenames = Directory.GetFiles(foldername);
+
+改成：
+
+IEnumerable<string> dirs = Directory.EnumerateDirectories(foldername);
+ 
+IEnumerable<string> files =Directory.EnumerateFiles(foldername);
+
+因為 GetDirectories() 和 GetFiles() 會先把整個結果全部抓出來放進陣列，檔案很多時會等很久才能開始處理。
+
+而 EnumerateDirectories()、EnumerateFiles() 是一邊找到一邊回傳：
+
 */
 
-//  
+
 

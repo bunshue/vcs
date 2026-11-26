@@ -158,6 +158,8 @@ namespace vcs_Mix00
 
             Button btn = ((Button)sender);//sender轉Button類別物件，接著再指定給btn
             richTextBox1.Text += btn.Text + "\n";
+
+            richTextBox1.Text += "AAAAAAAAAAAAAAA\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -348,9 +350,25 @@ namespace vcs_Mix00
 
         //------------------------------------------------------------  # 60個
 
+        private void do_something_very_busy()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                richTextBox1.Text += "A" + i.ToString();
+                Application.DoEvents();
+                Thread.Sleep(1000);
+            }
+            richTextBox1.Text += "完成\n";
+        }
+
         private void button5_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            richTextBox1.Text += "做很久不用thread, 會卡死 UI\n";
+            Application.DoEvents();
+
+            do_something_very_busy();
         }
 
         //------------------------------------------------------------  # 60個
@@ -358,6 +376,18 @@ namespace vcs_Mix00
         private void button6_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            richTextBox1.Text += "做很久使用thread, 不會卡死 UI\n";
+
+            //把工作丟到另一條 Thread
+            Thread t = new Thread(() =>
+            {
+                richTextBox1.AppendText("AAAA");
+                do_something_very_busy();
+            });
+
+            t.IsBackground = true;
+            t.Start();
         }
 
         //------------------------------------------------------------  # 60個
@@ -428,6 +458,7 @@ namespace vcs_Mix00
         private void button9_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
             //測試系統開機時間
 
             //呼叫 Windows API (GetTickCount64)
@@ -462,6 +493,8 @@ namespace vcs_Mix00
 
         private void button10_Click(object sender, EventArgs e)
         {
+            show_button_text(sender);
+
             //測試網路連線狀態
         }
 
@@ -469,18 +502,22 @@ namespace vcs_Mix00
 
         private void button11_Click(object sender, EventArgs e)
         {
+            show_button_text(sender);
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button12_Click(object sender, EventArgs e)
         {
+            show_button_text(sender);
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button13_Click(object sender, EventArgs e)
         {
+            show_button_text(sender);
+
             //往上兩層的檔案
             string filename = Application.StartupPath.ToString();
             filename = filename.Substring(0, filename.LastIndexOf("\\"));
@@ -525,6 +562,8 @@ namespace vcs_Mix00
 
         private void button14_Click(object sender, EventArgs e)
         {
+            show_button_text(sender);
+
             int i;
             //string camera_serial_data = "EC041302870012 @";
             string camera_serial_data = "ABCDEFGABCDEFGAB";
@@ -597,18 +636,22 @@ namespace vcs_Mix00
 
         private void button15_Click(object sender, EventArgs e)
         {
+            show_button_text(sender);
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button16_Click(object sender, EventArgs e)
         {
+            show_button_text(sender);
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button17_Click(object sender, EventArgs e)
         {
+            show_button_text(sender);
+
             char[] bbv = { '蕭', '一', '樓' };
             string abc = "王濬樓船下益州，金陵王氣黯然收。千尋鐵鎖沉江底，一片降幡出石頭。人世幾回傷往事，山形依舊枕寒流。今逢四海為家日，故壘蕭蕭蘆荻秋。";
 
@@ -624,25 +667,28 @@ namespace vcs_Mix00
             richTextBox1.Text += "cc = " + cc.ToString() + "\n";
             richTextBox1.Text += "dd = " + dd.ToString() + "\n";
             richTextBox1.Text += "ee = " + ee.ToString() + "\n";
-
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button18_Click(object sender, EventArgs e)
         {
+            show_button_text(sender);
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button19_Click(object sender, EventArgs e)
         {
+            show_button_text(sender);
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button20_Click(object sender, EventArgs e)
         {
+            show_button_text(sender);
+
             //由檔頭資料找出檔案的真實格式
             richTextBox1.Text += "由檔頭資料找出檔案的真實格式\n";
 
@@ -679,13 +725,15 @@ namespace vcs_Mix00
 
         private void button21_Click(object sender, EventArgs e)
         {
-
+            show_button_text(sender);
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button22_Click(object sender, EventArgs e)
         {
+            show_button_text(sender);
+
             //代碼統計
 
             //CountMethods(filename);
@@ -844,12 +892,15 @@ namespace vcs_Mix00
 
         private void button23_Click(object sender, EventArgs e)
         {
+            show_button_text(sender);
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button24_Click(object sender, EventArgs e)
         {
+            show_button_text(sender);
+
             //測試 ErrorProvider
             errorProvider1.BlinkRate = 100;
             errorProvider1.BlinkStyle = ErrorBlinkStyle.AlwaysBlink;
@@ -860,18 +911,21 @@ namespace vcs_Mix00
 
         private void button25_Click(object sender, EventArgs e)
         {
+            show_button_text(sender);
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button26_Click(object sender, EventArgs e)
         {
+            show_button_text(sender);
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button27_Click(object sender, EventArgs e)
         {
+            show_button_text(sender);
         }
 
         //------------------------------------------------------------  # 60個
@@ -906,6 +960,8 @@ namespace vcs_Mix00
 
         private void button28_Click(object sender, EventArgs e)
         {
+            show_button_text(sender);
+
             int[] card = new int[52];
             int[] stack = new int[52];
             int i, j, k = 0, test;
@@ -978,6 +1034,7 @@ namespace vcs_Mix00
 
         private void button29_Click(object sender, EventArgs e)
         {
+            show_button_text(sender);
         }
 
         //------------------------------------------------------------  # 60個
@@ -992,6 +1049,8 @@ namespace vcs_Mix00
 
         private void button30_Click(object sender, EventArgs e)
         {
+            show_button_text(sender);
+
             Rectangle myrect = new Rectangle();
 
             //取得任務欄尺寸大小
@@ -1015,20 +1074,22 @@ namespace vcs_Mix00
 
         private void button31_Click(object sender, EventArgs e)
         {
-
+            show_button_text(sender);
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button32_Click(object sender, EventArgs e)
         {
-
+            show_button_text(sender);
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button33_Click(object sender, EventArgs e)
         {
+            show_button_text(sender);
+
             //取得機器名稱
             richTextBox1.Text += "Host name : " + Dns.GetHostName() + "\n";
             try
@@ -1066,37 +1127,43 @@ namespace vcs_Mix00
 
         private void button34_Click(object sender, EventArgs e)
         {
+            show_button_text(sender);
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button35_Click(object sender, EventArgs e)
         {
+            show_button_text(sender);
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button36_Click(object sender, EventArgs e)
         {
-
+            show_button_text(sender);
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button37_Click(object sender, EventArgs e)
         {
+            show_button_text(sender);
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button38_Click(object sender, EventArgs e)
         {
+            show_button_text(sender);
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button39_Click(object sender, EventArgs e)
         {
+            show_button_text(sender);
+
             //輸出標頭
             String ch = new String('-', 58);
             richTextBox1.Text += ch + "\n";
