@@ -1,5 +1,112 @@
 ﻿
 
+WinForms 控制項： TextBox / ListBox / RichTextBox
+只能由 UI Thread 操作。
+
+若在背景執行緒使用richTextBox1.AppendText(...);
+會立刻爆掉。Cross-thread operation not valid
+
+
+所以，背景執行緒要呼叫WinForms 控制項，要使用：
+
+this.Invoke(
+    (MethodInvoker)delegate
+    {
+        richTextBox1.AppendText(...);
+    });
+    
+
+
+
+
+
+關於你說的 多核心平行轉換, Parallel.ForEach(...)
+可否給我一個Visual C#範例，讓我見識一下這個東西的厲害?
+
+vcs_test_all_06_Parallel
+
+Parallel.ForEach(colBlock.Keys, (key) =>
+
+foreach (string file in filelist)
+{
+    Convert(file);
+}
+改成
+Parallel.ForEach(filelist, file =>
+{
+    Convert(file);
+});
+
+
+    Parallel.ForEach(files, file =>
+    {
+        string pngFile =Path.ChangeExtension(file,".png");
+    });
+
+
+Parallel.ForEach	用的是背景執行緒。
+
+
+
+使用dwebp.exe
+
+dwebp 本身只能輸出： PNG / BMP / TIFF / PGM/ PPM/PAM
+不能直接輸出 JPG。
+
+
+下載
+Google 官方 WebP 工具：
+https://developers.google.com/speed/webp/download
+
+BAT
+
+dwebp file01.webp -o file01.png
+
+C#
+Process.Start("dwebp.exe", "\"" + file + "\" -o \"" + pngfile + "\"");
+
+
+
+VS2022
+工具/NuGet套件管理員/套件管理器主控台
+輸入
+Install-Package Magick.NET-Q8-AnyCPU -Version 7.23.3
+Install-Package Magick.NET-Q8-AnyCPU
+
+
+string foldername = @"D:\Test";
+foreach (string file in Directory.GetFiles(foldername,"*.webp",SearchOption.TopDirectoryOnly))
+{
+	string pngfile =Path.ChangeExtension(file, ".png");
+	string jpgfile =Path.ChangeExtension(file, ".jpg");
+        string jpgfile =Path.ChangeExtension(file, ".jpg");
+
+foreach (string file in Directory.GetFiles(foldername,"*.webp",SearchOption.AllDirectories))
+
+
+    foreach (string file in Directory.GetFiles(
+        foldername,
+        "*.webp",
+        SearchOption.AllDirectories))
+    {
+            string pngfile =
+                Path.ChangeExtension(file, ".png");
+
+
+
+指令：
+
+BAT
+dwebp file01.webp -o file01.png
+
+那麼 C# 只要：
+
+C#
+Process.Start(...)
+
+
+//------------------------------------------------------------  # 60個
+
 如果要忽略大小寫：
 
 C#

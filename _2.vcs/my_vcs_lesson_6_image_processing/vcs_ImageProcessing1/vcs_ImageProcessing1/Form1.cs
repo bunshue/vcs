@@ -96,7 +96,8 @@ namespace vcs_ImageProcessing1
             richTextBox1.Location = new Point(x_st + dx * 7, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1820, 960);
+            //針對某控件的邊緣 設定表單大小
+            this.ClientSize = new Size(richTextBox1.Right + 10, richTextBox1.Bottom + 10);
             this.Text = "vcs_ImageProcessing1";
 
             //設定執行後的表單起始位置, 正中央
@@ -790,14 +791,118 @@ namespace vcs_ImageProcessing1
             bmp.UnlockBits(bmpData);
         }
 
+        //6060
+
         private void button12_Click(object sender, EventArgs e)
         {
+            // 使用 dwebp.exe WebP解碼器工具
+
+            string foldername = @"D:\_git\vcs\_4.python\PIL\data\webp";
+            string exe_filename = @"D:\_git\vcs\_1.data\______test_files1\_exe\dwebp.exe";
+
+            int count = 0;
+
+            foreach (string webpfile in Directory.GetFiles(
+                foldername,
+                "*.webp",
+                SearchOption.AllDirectories))
+            {
+                try
+                {
+                    string pngfile =
+                        Path.ChangeExtension(
+                            webpfile,
+                            ".png");
+
+                    Process p = new Process();
+
+                    p.StartInfo.FileName = exe_filename;
+
+                    p.StartInfo.Arguments =
+                        "\"" + webpfile +
+                        "\" -o \"" +
+                        pngfile + "\"";
+
+                    p.StartInfo.CreateNoWindow = true;
+                    p.StartInfo.UseShellExecute = false;
+
+                    p.Start();
+
+                    p.WaitForExit();
+
+                    count++;
+
+                    richTextBox1.AppendText(
+                        pngfile +
+                        Environment.NewLine);
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.AppendText(
+                        ex.Message +
+                        Environment.NewLine);
+                }
+
+                Application.DoEvents();
+            }
+
+            MessageBox.Show(
+                "完成，共轉換 " +
+                count +
+                " 個檔案");
+
+
+
 
         }
+
+        //6060
 
         private void button13_Click(object sender, EventArgs e)
         {
+            //PNG 轉 JPG
+
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_哆啦A夢\doraemon1.jpg";
+            string filename1 = @"D:\_git\vcs\_4.python\PIL\data\webp\file01.png";
+            string filename2 = @"aaaa.jpg";
+
+            ConvertPngToJpg(filename1, filename2);
+
         }
+
+
+        private void ConvertPngToJpg(
+            string pngfile,
+            string jpgfile)
+        {
+            using (Bitmap bmp =
+                new Bitmap(pngfile))
+            {
+                Bitmap newbmp =
+                    new Bitmap(
+                        bmp.Width,
+                        bmp.Height);
+
+                using (Graphics g =
+                    Graphics.FromImage(newbmp))
+                {
+                    g.Clear(Color.White);
+
+                    g.DrawImage(
+                        bmp,
+                        0,
+                        0);
+                }
+
+                newbmp.Save(
+                    jpgfile,
+                    ImageFormat.Jpeg);
+
+                newbmp.Dispose();
+            }
+        }
+
+        //6060
 
         private void button14_Click(object sender, EventArgs e)
         {

@@ -129,7 +129,7 @@ print("------------------------------------------------------------")  # 60個
 print(time.ctime())
 print("------------------------------------------------------------")  # 60個
 
-# webp 轉 png
+# 檔案轉換, webp 轉 png
 
 from pathlib import Path
 from PIL import Image
@@ -146,7 +146,7 @@ for webp_file in Path(foldername).glob("*.webp"):
 
 print("------------------------------")  # 30個
 
-# webp 轉 jpg
+# 檔案轉換, webp 轉 jpg
 
 from pathlib import Path
 from PIL import Image
@@ -157,7 +157,6 @@ for webp_file in Path(foldername).glob("*.webp"):
     jpg_file = webp_file.with_suffix(".jpg")
 
     with Image.open(webp_file) as img:
-
         # JPG 不支援透明通道
         if img.mode in ("RGBA", "LA"):
             bg = Image.new("RGB", img.size, (255, 255, 255))
@@ -169,7 +168,8 @@ for webp_file in Path(foldername).glob("*.webp"):
         img.save(jpg_file, "JPEG", quality=95)
 
     print(f"{webp_file} -> {jpg_file}")
-    
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename1 = "D:/_git/vcs/_1.data/______test_files1/_image_processing/red_300X300.bmp"
@@ -343,7 +343,6 @@ def blue_to_red2(image_path):
 filename = 'D:/_git/vcs/_4.python/_data/picture1.jpg'    
 blue_to_red2(filename)
 """
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -352,11 +351,11 @@ filename = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 from PIL import Image, ImageEnhance
 
 """
-二、ImageEnhance模块的Color类
-颜色增强类用于调整图像的颜色均衡，在某种程度上类似控制彩色电视机。该类实现的增强接口如下：
+二、ImageEnhance模塊的Color類
+顏色增強類用于調整圖像的顏色均衡，在某種程度上類似控制彩色電視機。該類實現的增強接口如下：
 ImageEnhance.Color(image) ⇒ Color enhancer instance
-创建一个增强对象，以调整图像的颜色。增强因子为0.0将产生黑白图像；为1.0将给出原始图像。
-从前面的介绍，我们可以得知函数enhance()的参数factor决定着图像的颜色饱和度情况。从0.1到0.5，再到0.8，2.0，图像的颜色饱和度依次增大。
+創建一個增強對象，以調整圖像的顏色。增強因子為0.0將產生黑白圖像；為1.0將給出原始圖像。
+從前面的介紹，我們可以得知函數enhance()的參數factor決定著圖像的顏色飽和度情況。從0.1到0.5，再到0.8，2.0，圖像的顏色飽和度依次增大。
 """
 
 image = Image.open(filename)
@@ -384,14 +383,13 @@ plt.imshow(image_20)
 plt.title("Color 2.0")
 plt.show()
 
-
 """
-三、ImageEnhance模块的Brightness类
-亮度增强类用于调整图像的亮度。
+三、ImageEnhance模塊的Brightness類
+亮度增強類用于調整圖像的亮度。
 ImageEnhance.Brightness(image)⇒ Brightnessenhancer instance
-创建一个调整图像亮度的增强对象。增强因子为0.0将产生黑色图像；为1.0将保持原始图像。
+創建一個調整圖像亮度的增強對象。增強因子為0.0將產生黑色圖像；為1.0將保持原始圖像。
 """
-# ImageEnhance.Brightness类的实例：
+# ImageEnhance.Brightness類的實例：
 
 from PIL import Image, ImageEnhance
 
@@ -420,17 +418,16 @@ plt.imshow(image_20)
 plt.title("Brightness 2.0")
 plt.show()
 
-# 该函数enhance()的参数factor决定着图像的亮度情况。从0.1到0.5，再到0.8，2.0，图像的亮度依次增大。
-
+# 該函數enhance()的參數factor決定著圖像的亮度情況。從0.1到0.5，再到0.8，2.0，圖像的亮度依次增大。
 
 """
-四、ImageEnhance模块的Contrast类
-对比度增强类用于调整图像的对比度。类似于调整彩色电视机的对比度。
+四、ImageEnhance模塊的Contrast類
+對比度增強類用于調整圖像的對比度。類似于調整彩色電視機的對比度。
 ImageEnhance.Contrast(image) ⇒ Contrast enhancer instance
-创建一个调整图像对比度的增强对象。增强因子为0.0将产生纯灰色图像；为1.0将保持原始图像。
+創建一個調整圖像對比度的增強對象。增強因子為0.0將產生純灰色圖像；為1.0將保持原始圖像。
 """
 
-# ImageEnhance.Contrast类的实例：
+# ImageEnhance.Contrast類的實例：
 
 from PIL import Image, ImageEnhance
 
@@ -459,16 +456,15 @@ plt.imshow(image_20)
 plt.title("Contrast 2.0")
 plt.show()
 
-# 该函数enhance()的参数factor决定着图像的对比度情况。从0.1到0.5，再到0.8，2.0，图像的对比度依次增大。
-
+# 該函數enhance()的參數factor決定著圖像的對比度情況。從0.1到0.5，再到0.8，2.0，圖像的對比度依次增大。
 
 """
-五、ImageEnhance模块的Sharpness类
-锐度增强类用于调整图像的锐度。
+五、ImageEnhance模塊的Sharpness類
+銳度增強類用于調整圖像的銳度。
 ImageEnhance.Sharpness(image) ⇒ Sharpness enhancer instance
-创建一个调整图像锐度的增强对象。增强因子为0.0将产生模糊图像；为1.0将保持原始图像，为2.0将产生锐化过的图像。
+創建一個調整圖像銳度的增強對象。增強因子為0.0將產生模糊圖像；為1.0將保持原始圖像，為2.0將產生銳化過的圖像。
 """
-# ImageEnhance.Sharpness类的实例：
+# ImageEnhance.Sharpness類的實例：
 
 from PIL import Image, ImageEnhance
 
@@ -492,8 +488,7 @@ plt.imshow(image_30)
 plt.title("Sharpness 3.0")
 plt.show()
 
-# 该函数enhance()的参数factor决定着图像的锐度情况。从0.0到2.0，再到3.0，图像的锐度依次增大。
-
+# 該函數enhance()的參數factor決定著圖像的銳度情況。從0.0到2.0，再到3.0，圖像的銳度依次增大。
 
 image = PIL.Image.open(filename)
 
@@ -504,10 +499,7 @@ new_image = PIL.ImageEnhance.Brightness(image).enhance(1.2)
 new_image = PIL.ImageEnhance.Contrast(image).enhance(1.2)
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -523,12 +515,8 @@ print("------------------------------")  # 30個
 print("---------------")  # 15個
 
 
-
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
-
 """
 print("PIL_ginput")
 
@@ -543,9 +531,7 @@ x = plt.ginput(3)
 print('你已點擊:', x)
 plt.show()
 """
-
 print("------------------------------------------------------------")  # 60個
-
 """
 filename = 'D:/_git/vcs/_4.python/_data/picture1.jpg'
 
@@ -588,12 +574,8 @@ frame.show()
 frame.paste(chiling, (210, 150))
 frame.paste(chiling2, (522, 150))
 frame.show()
-
 """
-
-
 print("------------------------------------------------------------")  # 60個
-
 
 from PIL import Image
 

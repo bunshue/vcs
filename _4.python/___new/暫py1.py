@@ -1,5 +1,4 @@
 
-
 # 直接寫 Python 腳本批量修改（大型專案推薦）
 
 from pathlib import Path
@@ -21,7 +20,7 @@ for file in Path(".").rglob("*.py"):
         encoding="utf-8"
     )
     
-6060
+# ------------------------------------------------------------  # 60個
 
 import tkinter as tk
 
@@ -37,9 +36,7 @@ label.pack(padx=50, pady=50)
 
 root.mainloop()
 
-
-
-6060
+# ------------------------------------------------------------  # 60個
 
 import sys
 
